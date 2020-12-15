@@ -18,15 +18,18 @@ final class MenuItemsFabric {
         let actions = ElementTypes.specifiedMoreActionTypes(for: status, item: item)
         let sortActions = actions.sorted { !$0.isDestructive && $1.isDestructive }
         
-        let items = sortActions.map { type -> UIMenuElement in
+        var items = [UIMenuElement]()
+        sortActions.forEach { type in
             if type == .share {
-                return getShareMenu(for: item, actionHandler: actionHandler)
+                let shareItems = getShareItems(for: item, actionHandler: actionHandler)
+                items.append(contentsOf: shareItems)
             } else {
-                return UIAction(title: type.actionTitle(),
-                                image: type.menuImage,
-                                attributes: type.menuAttributes) { _  in
+                let item = UIAction(title: type.actionTitle(),
+                                    image: type.menuImage,
+                                    attributes: type.menuAttributes) { _  in
                     actionHandler(.elementType(type))
                 }
+                items.append(item)
             }
         }
         
@@ -35,23 +38,13 @@ final class MenuItemsFabric {
                       children: items)
     }
     
-    static func getShareMenu(for item: BaseDataSourceItem, actionHandler: @escaping ValueHandler<ActionType>) -> UIMenuElement {
+    static func getShareItems(for item: BaseDataSourceItem, actionHandler: @escaping ValueHandler<ActionType>) -> [UIMenuElement] {
         let shareTypes = ShareTypes.allowedTypes(for: [item])
-        if shareTypes.count == 1, let type = shareTypes.first {
-            return UIAction(title: type.actionTitle,
-                            image: type.menuImage) { _ in
+        return shareTypes.map { type in
+            UIAction(title: type.actionTitle,
+                     image: type.menuImage) { _ in
                 actionHandler(.shareType(type))
             }
-        } else {
-            let items = shareTypes.map { type in
-                return UIAction(title: type.actionTitle,
-                                image: type.menuImage) { _ in
-                    actionHandler(.shareType(type))
-                }
-            }
-            return UIMenu(title: ElementTypes.share.actionTitle(),
-                          image: ElementTypes.share.menuImage,
-                          children: items)
         }
     }
 }
@@ -90,12 +83,7 @@ extension ElementTypes {
             return nil
         }
         
-        let image = UIImage(named: name)?.withRenderingMode(.alwaysTemplate)
-        if isDestructive {
-            return image?.mask(with: ColorConstants.choosenSelectedButtonColor)
-        } else {
-            return image?.mask(with: ColorConstants.marineTwo)
-        }
+        return UIImage(named: name)?.withRenderingMode(.alwaysTemplate)
     }
     
     @available(iOS 14.0, *)
@@ -119,7 +107,7 @@ extension ShareTypes {
         case .link:
             imageName = "action_copy"
         case .original:
-            imageName = "action_copy"
+            imageName = "action_send_copy"
         case .private:
             imageName = "action_share"
         }
@@ -128,7 +116,6 @@ extension ShareTypes {
             return nil
         }
         
-        let image = UIImage(named: name)?.withRenderingMode(.alwaysTemplate)
-        return image?.mask(with: ColorConstants.marineTwo)
+        return UIImage(named: name)?.withRenderingMode(.alwaysTemplate)
     }
 }

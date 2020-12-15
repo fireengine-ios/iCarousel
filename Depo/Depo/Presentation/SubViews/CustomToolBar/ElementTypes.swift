@@ -276,33 +276,35 @@ enum ElementTypes {
             return []
         }
         
+        var types = [ElementTypes]()
         if !item.isOwner {
-            var result = [ElementTypes]()
             //shared with me items
+            types.append(.info)
             if let grantedPermissions = item.privateSharePermission?.granted {
                 if grantedPermissions.contains(.read) {
                     if item.fileType.isContained(in: [.image, .video]) {
-                        result.append(.download)
+                        types.append(.download)
                     } else {
-                        result.append(.downloadDocument)
+                        types.append(.downloadDocument)
                     }
                 }
                 
                 if grantedPermissions.contains(.delete) {
                     if !item.isReadOnlyFolder {
-                        result.append(.moveToTrashShared)
+                        types.append(.moveToTrashShared)
                     }
                 }
             }
-            return result
+            types.append(.leaveSharing)
+            return types
         }
         
         if item.fileType == .photoAlbum {
-            return [.shareAlbum, .download, .moveToTrash, .removeAlbum, .albumDetails]
+            types = [.shareAlbum, .download, .moveToTrash, .removeAlbum, .albumDetails]
         } else if item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
-            return [.shareAlbum, .albumDetails, .download]
+            types = [.shareAlbum, .albumDetails, .download]
         } else {
-            var types: [ElementTypes] = [.info, .share, .move]
+            types = [.info, .share, .move]
             
             types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
             if !item.isReadOnlyFolder {
@@ -314,8 +316,13 @@ enum ElementTypes {
             } else if item.fileType == .audio || item.fileType.isDocumentPageItem {
                 types.append(.downloadDocument)
             }
-            return types
         }
+        
+        if item.isShared {
+            types.append(.endSharing)
+        }
+        
+        return types
     }
     
     func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = [], divorseItems: DivorseItems? = nil) -> String? {
