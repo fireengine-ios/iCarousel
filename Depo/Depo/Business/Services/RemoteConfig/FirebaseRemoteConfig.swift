@@ -28,7 +28,7 @@ final class FirebaseRemoteConfig {
         settings.minimumFetchInterval = 0
         #endif
         remoteConfig.configSettings = settings
-        remoteConfig.setDefaults(fromPlist: "FirebaseRemoteconfigDefaults")
+        remoteConfig.setDefaults(fromPlist: "FirebaseRemoteConfigDefaults")
     }
     
     func fetchAttemptsBeforeSupportOnLogin(completion: @escaping ValueHandler<Int>) {
