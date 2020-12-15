@@ -41,7 +41,7 @@ final class PrivateShareSharedFilesBottomBarManager {
     }
     
     func show(onView: UIView) {
-        bottomBarPresenter.show(animated: true, onView: onView)
+        bottomBarPresenter.show(animated: true, onView: nil)
     }
     
     func hide() {
