@@ -102,7 +102,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func removeFromParentViewController() {
         super.removeFromParentViewController()
-        stopModeSelected()
+        
+        if collectionManager.isSelecting {
+            stopModeSelected()
+        }
     }
  
     //MARK: - Private
