@@ -91,8 +91,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
-        } else {
-            updateBars(isSelecting: false)
         }
     }
     
@@ -217,7 +215,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 bottomBarManager.hide()
             } else {
                 navBarManager.threeDotsButton.isEnabled = true
-                bottomBarManager.show()
+                bottomBarManager.show(onView: view)
             }
         }
     }
@@ -253,9 +251,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             if self.shareType.isSelectionAllowed {
                 self.navBarManager.threeDotsButton.isEnabled = !isSelecting
             }
-            
+            self.needToShowTabBar = !isSelecting
+            self.showTabBarIfNeeded()
             if isSelecting {
-                self.bottomBarManager.show()
+                self.bottomBarManager.show(onView: self.view)
             } else {
                 self.bottomBarManager.hide()
             }
@@ -272,7 +271,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
             
-            if editingMode, isSelectionAllowed{
+            if editingMode, isSelectionAllowed {
                 self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
