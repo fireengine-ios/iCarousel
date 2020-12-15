@@ -204,7 +204,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             setSelectionSmallSelectionImageView(isSelected, isHidden: isHidden)
         }
         
-        configureMoreActinButton()
+        configureMoreActionButton()
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
@@ -409,7 +409,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         cellImageManager?.cancelImageLoading()
     }
     
-    private func configureMoreActinButton() {
+    private func configureMoreActionButton() {
         if #available(iOS 14.0, *) {
             moreButton.showsMenuAsPrimaryAction = true
 
