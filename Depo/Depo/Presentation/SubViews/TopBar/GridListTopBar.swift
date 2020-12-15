@@ -26,6 +26,8 @@ class GridListTopBar: ViewController {
     @IBOutlet fileprivate weak var gridListButton: UIButton!
     
     @IBOutlet fileprivate weak var segmentFilter: UISegmentedControl!
+    
+    @IBOutlet private weak var centerYConstraint: NSLayoutConstraint!
 
     var currentConfig: GridListTopBarConfig?
     
@@ -57,7 +59,7 @@ class GridListTopBar: ViewController {
         sortByButton.forceImageToRightSide()
     }
     
-    func setupWithConfig(config: GridListTopBarConfig) {
+    func setupWithConfig(config: GridListTopBarConfig, centeredContent: Bool = false) {
         currentConfig = config
         setupSortingView(withTypes: config.availableSortTypes,
                          defaultType: config.defaultSortType)
@@ -68,6 +70,10 @@ class GridListTopBar: ViewController {
         }
         
         gridListButton.isHidden = !config.showGridListButton
+        
+        if centeredContent {
+            centerYConstraint.constant = 0
+        }
     }
     
     func setSorting(enabled: Bool) {

@@ -13,14 +13,28 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     private var isSliderSetuped = false
     
     private var lastCardContainerHeight: CGFloat = 0
+    private let sortAreaHeight: CGFloat = 36
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         handleShareSliderReload()
     }
     
-    override func setupInitialState() {
-        super.setupInitialState()
+    override func setupUnderNavBarBar(withConfig config: GridListTopBarConfig) {
+        guard let unwrapedTopBar = underNavBarBar, let topBar = unwrapedTopBar.view else {
+            return
+        }
+        
+        unwrapedTopBar.setupWithConfig(config: config, centeredContent: true)
+        
+        topBar.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.addSubview(topBar)
+        topBar.bottomAnchor.constraint(equalTo: collectionView.topAnchor).activate()
+        topBar.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).activate()
+        topBar.widthAnchor.constraint(equalTo: collectionView.widthAnchor).activate()
+        floatingHeaderContainerHeightConstraint = topBar.heightAnchor.constraint(equalToConstant: sortAreaHeight)
+        floatingHeaderContainerHeightConstraint.activate()
+        calculatedUnderNavBarBarHeight = sortAreaHeight
         setupInitialPrivateShareSlider()
     }
     
@@ -35,7 +49,7 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
         sharedFilesManager.changeSliderVisability(isHidden: true)
         
         var constraintsArray = [NSLayoutConstraint]()
-        constraintsArray.append(NSLayoutConstraint(item: containerView, attribute: .bottom, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: containerView, attribute: .bottom, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: -calculatedUnderNavBarBarHeight))
         constraintsArray.append(NSLayoutConstraint(item: containerView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: containerView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
         
@@ -45,7 +59,7 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     }
     
     private func refreshSharedSliderPosition() {
-        let height: CGFloat = lastCardContainerHeight + sharedFilesManager.sharedFilesSlider.frame.size.height
+        let height: CGFloat = lastCardContainerHeight + sharedFilesManager.sharedFilesSlider.frame.size.height + calculatedUnderNavBarBarHeight
         
         collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 25, right: 0)
         let topOffset = CGPoint(x: 0, y: -height)
@@ -72,13 +86,13 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
         lastCardContainerHeight = h
         
         let originalPoint = collectionView.contentOffset
-        var sliderH: CGFloat =   0
+        var sliderH: CGFloat = 0
         
         if !sharedFilesManager.sharedFilesSlider.isHidden {
             sliderH = sharedFilesManager.sharedFilesSlider.frame.size.height
         }
         
-        let calculatedH = h + sliderH
+        let calculatedH = h + sliderH + calculatedUnderNavBarBarHeight
         
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             if let yConstr = self.contentSliderTopY {
