@@ -144,6 +144,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         if retriesCount == NumericConstants.showFAQViewAttempts {
             output?.showFAQView()
         } else {
+            #if LIFEBOX
             FirebaseRemoteConfig.shared.fetchAttemptsBeforeSupportOnSignup() { [weak self] attempts in
                 guard let self = self else {
                     return
@@ -153,6 +154,11 @@ class RegistrationInteractor: RegistrationInteractorInput {
                     self.output?.showSupportView()
                 }
             }
+            #else
+            if retriesCount >= NumericConstants.showSupportViewAttempts {
+                output?.showSupportView()
+            }
+            #endif
         }
     }
 }

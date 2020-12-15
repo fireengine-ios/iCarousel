@@ -74,6 +74,7 @@ class LoginInteractor: LoginInteractorInput {
         if loginRetries == NumericConstants.showFAQViewAttempts {
             output?.showFAQView()
         } else {
+            #if LIFEBOX
             FirebaseRemoteConfig.shared.fetchAttemptsBeforeSupportOnLogin { [weak self] attempts in
                 guard let self = self else {
                     return
@@ -83,6 +84,11 @@ class LoginInteractor: LoginInteractorInput {
                     self.output?.showSupportView()
                 }
             }
+            #else
+            if loginRetries >= NumericConstants.showSupportViewAttempts {
+                output?.showSupportView()
+            }
+            #endif
         }
     }
     
