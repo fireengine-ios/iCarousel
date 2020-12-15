@@ -42,7 +42,7 @@ def core_pods
   pod 'iCarousel', '~> 1'
 
   pod 'ReachabilitySwift'
-  pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'MBProgressHUD', '~> 1'
   pod 'TTGSnackbar', '~> 1'
   pod 'MaterialComponents/Slider'
   #logger

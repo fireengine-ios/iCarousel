@@ -8,7 +8,7 @@
 
 final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     
-    private let sharedFilesManager = SharedFilesCollectionManager()
+    private let sharedFilesManager = PrivateShareSliderFilesCollectionManager()
     
     private var isSliderSetuped = false
     
