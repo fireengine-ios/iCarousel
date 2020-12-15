@@ -91,8 +91,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
-        } else {
-            updateBars(isSelecting: false)
         }
     }
     
@@ -100,6 +98,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewDidDisappear(animated)
         
         setCardsContainer(isActive: false)
+        updateBars(isSelecting: false)
     }
  
     //MARK: - Private
