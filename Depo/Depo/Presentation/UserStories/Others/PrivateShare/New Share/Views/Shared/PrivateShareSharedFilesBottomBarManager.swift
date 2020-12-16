@@ -40,7 +40,7 @@ final class PrivateShareSharedFilesBottomBarManager {
         bottomBarPresenter.setupTabBarWith(items: items, originalConfig: barConfig)
     }
     
-    func show(onView: UIView) {
+    func show() {
         bottomBarPresenter.show(animated: true, onView: nil)
     }
     

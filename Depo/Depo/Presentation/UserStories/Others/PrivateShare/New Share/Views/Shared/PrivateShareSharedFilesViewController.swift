@@ -215,17 +215,13 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
-//        if !collectionView.isQuickSelecting {
-            bottomBarManager.update(for: selectedItems)
-            
-            if selectedItems.isEmpty {
-                navBarManager.threeDotsButton.isEnabled = false
-                bottomBarManager.hide()
-            } else {
-                navBarManager.threeDotsButton.isEnabled = true
-                bottomBarManager.show(onView: view)
-            }
-//        }
+        bottomBarManager.update(for: selectedItems)
+        
+        if selectedItems.isEmpty {
+            bottomBarManager.hide()
+        } else {
+            bottomBarManager.show()
+        }
     }
     
     func didEndReload() {
@@ -262,7 +258,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             self.needToShowTabBar = !isSelecting
             self.showTabBarIfNeeded()
             if isSelecting {
-                self.bottomBarManager.show(onView: self.view)
+                self.bottomBarManager.show()
             } else {
                 self.bottomBarManager.hide()
             }
