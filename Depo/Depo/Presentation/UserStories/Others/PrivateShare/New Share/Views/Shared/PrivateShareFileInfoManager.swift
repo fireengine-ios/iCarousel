@@ -101,7 +101,6 @@ final class PrivateShareFileInfoManager {
     private var privateShareAPIService: PrivateShareApiService!
     private let pageSize = Device.isIpad ? 64 : 32
     private var pageLoaded = 0
-//    private var isPageLoading = false
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -234,26 +233,6 @@ final class PrivateShareFileInfoManager {
     }
     
     //MARK: - Private
-    
-//    private func loadNextPage(completion: @escaping ResponseArrayHandler<SharedFileInfo>) {
-//        switch type {
-//            case .byMe:
-//                privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
-//
-//            case .withMe:
-//                privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
-//
-//            case .innerFolder(_, let folder):
-//                privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
-//                    switch response {
-//                        case .success(let fileSystem):
-//                            completion(.success(fileSystem.fileList))
-//                        case .failed(let error):
-//                            completion(.failed(error))
-//                    }
-//                }
-//        }
-//    }
     
     private func loadPages(till page: Int, alreadyLoadedItems: Int, completion: @escaping ValueHandler<Int>) {
         loadNext { [weak self] itemsCount in
