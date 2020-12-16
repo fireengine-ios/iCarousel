@@ -101,7 +101,13 @@ final class PrivateShareFileInfoManager {
     private var privateShareAPIService: PrivateShareApiService!
     private let pageSize = Device.isIpad ? 64 : 32
     private var pageLoaded = 0
-    private var isPageLoading = false
+    
+    private lazy var operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        
+        return queue
+    }()
     
     private(set) var sorting: SortedRules = .timeUp
     private(set) var type: PrivateShareType = .byMe
@@ -116,50 +122,39 @@ final class PrivateShareFileInfoManager {
     //MARK: - Public
     
     func loadNext(completion: @escaping ValueHandler<Int>) {
-        guard !isPageLoading else {
+        guard operationQueue.operations.filter({ !$0.isCancelled }).count == 0 else {
             return
         }
         
-        queue.async(flags: .barrier) { [weak self] in
-            self?.isPageLoading = true
-            self?.loadNextPage { result in
-                guard let self = self else {
-                    return
-                }
-                
-                switch result {
-                    case .success(let filesInfo):
-                        
-                        let newItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
-                        
-                        guard !newItems.isEmpty else {
-                            self.isPageLoading = false
-                            completion(0)
-                            return
-                        }
-                        
-                        self.pageLoaded += 1
-                        
-                        let sorted = self.sortedItems.getArray() + self.sorted(items: newItems)
-                        self.sortedItems.replace(with: sorted, completion: nil)
-                        
-                        let splitted = self.splitted(sortedArray: sorted)
-                        
-                        self.splittedItems.replace(with: splitted) { [weak self] in
-                            self?.isPageLoading = false
-                            completion(newItems.count)
-                        }
-                        
-                    case .failed(_):
-                        self.isPageLoading = false
-                        completion(0)
-                }
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] loadedItems in
+            
+            guard let self = self else {
+                return
+            }
+            
+            guard !loadedItems.isEmpty else {
+                completion(0)
+                return
+            }
+            
+            self.pageLoaded += 1
+            
+            let sorted = self.sortedItems.getArray() + self.sorted(items: loadedItems)
+            self.sortedItems.replace(with: sorted, completion: nil)
+            
+            let splitted = self.splitted(sortedArray: sorted)
+            
+            self.splittedItems.replace(with: splitted) { [weak self] in
+                completion(loadedItems.count)
             }
         }
+        
+        operationQueue.addOperation(operation)
     }
     
     func reload(completion: @escaping ValueHandler<Int>) {
         queue.sync {
+            operationQueue.cancelAllOperations()
             selectedItems.removeAll()
             sortedItems.removeAll()
             splittedItems.removeAll()
@@ -170,6 +165,10 @@ final class PrivateShareFileInfoManager {
     
     func reloadCurrentPages(completion: @escaping ValueHandler<Int>) {
         queue.sync {
+            guard operationQueue.operations.filter({ !$0.isCancelled }).count == 0 else {
+                return
+            }
+            
             let pagesToLoad = pageLoaded
             
             sortedItems.removeAll()
@@ -235,26 +234,6 @@ final class PrivateShareFileInfoManager {
     
     //MARK: - Private
     
-    private func loadNextPage(completion: @escaping ResponseArrayHandler<SharedFileInfo>) {
-        switch type {
-            case .byMe:
-                privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
-                
-            case .withMe:
-                privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
-                
-            case .innerFolder(_, let folder):
-                privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
-                    switch response {
-                        case .success(let fileSystem):
-                            completion(.success(fileSystem.fileList))
-                        case .failed(let error):
-                            completion(.failed(error))
-                    }
-                }
-        }
-    }
-    
     private func loadPages(till page: Int, alreadyLoadedItems: Int, completion: @escaping ValueHandler<Int>) {
         loadNext { [weak self] itemsCount in
             guard let self = self else {
@@ -294,5 +273,86 @@ final class PrivateShareFileInfoManager {
         let splitted: [[WrapData]] = grouped.sorted(by: { sorting.sortOder == .asc ? ($0.0 < $1.0) : ($0.0 > $1.0) }).compactMap { $0.value }
         
         return splitted
+    }
+}
+
+
+final class GetSharedItemsOperation: Operation {
+    
+    private let semaphore = DispatchSemaphore(value: 0)
+    
+    private let privateShareAPIService: PrivateShareApiService
+    
+    private let type: PrivateShareType
+    private let page: Int
+    private let size: Int
+    private let sortBy: SortType
+    private let sortOrder: SortOrder
+    private let completion: ValueHandler<[WrapData]>
+    
+    private var task: URLSessionTask?
+    private var loadedItems = [WrapData]()
+    
+    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<[WrapData]>) {
+        self.type = type
+        self.privateShareAPIService = service
+        self.completion = completion
+        self.page = page
+        self.size = size
+        self.sortBy = sortBy
+        self.sortOrder = sortOrder
+    }
+    
+    override func cancel() {
+        super.cancel()
+        
+        task?.cancel()
+        
+        semaphore.signal()
+    }
+    
+    override func main() {
+        load()
+        
+        semaphore.wait()
+        
+        completion(loadedItems)
+    }
+    
+    private func load() {
+        loadPage { [weak self] result in
+            guard let self = self, !self.isCancelled else {
+                return
+            }
+            
+            switch result {
+                case .success(let filesInfo):
+                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
+                    self.semaphore.signal()
+                    
+                case .failed(_):
+                    self.semaphore.signal()
+            }
+        }
+    }
+    
+    private func loadPage(completion : @escaping ResponseArrayHandler<SharedFileInfo>) {
+        switch type {
+            case .byMe:
+                task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+                
+            case .withMe:
+                task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+                
+            case .innerFolder(_, let folder):
+                task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                    switch response {
+                        case .success(let fileSystem):
+                            completion(.success(fileSystem.fileList))
+                        case .failed(let error):
+                            completion(.failed(error))
+                    }
+                }
+        }
     }
 }

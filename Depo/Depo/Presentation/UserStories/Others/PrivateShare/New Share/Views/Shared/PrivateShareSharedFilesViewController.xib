@@ -33,7 +33,7 @@
                         </view>
                     </subviews>
                 </stackView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="c4H-7I-uCm" customClass="QuickSelectCollectionView" customModule="Billo" customModuleProvider="target">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="c4H-7I-uCm">
                     <rect key="frame" x="0.0" y="97" width="414" height="765"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KbB-cg-g9h">

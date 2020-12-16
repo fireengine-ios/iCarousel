@@ -30,7 +30,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
     
-    static func with(collection: QuickSelectCollectionView, fileInfoManager: PrivateShareFileInfoManager) -> PrivateShareSharedFilesCollectionManager {
+    static func with(collection: UICollectionView, fileInfoManager: PrivateShareFileInfoManager) -> PrivateShareSharedFilesCollectionManager {
         let collectionManager = PrivateShareSharedFilesCollectionManager()
         collectionManager.collectionView = collection
         collectionManager.fileInfoManager = fileInfoManager
@@ -38,7 +38,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     weak var delegate: PrivateShareSharedFilesCollectionManagerDelegate?
-    private weak var collectionView: QuickSelectCollectionView?
+    private weak var collectionView: UICollectionView?
     
     private let router = RouterVC()
     private var fileInfoManager: PrivateShareFileInfoManager!
@@ -122,14 +122,14 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         collectionView?.alwaysBounceVertical = true
         
-        collectionView?.isQuickSelectAllowed = false
+//        collectionView?.isQuickSelectAllowed = false
         
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
         collectionView?.backgroundView?.isHidden = true
         
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.longPressDelegate = self
+//        collectionView?.longPressDelegate = self
     }
     
     private func setupRefresher() {
@@ -279,16 +279,22 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell, let item = item(at: indexPath) else {
             return
         }
         
         if isSelecting {
-            fileInfoManager.selectItem(at: indexPath)
-            cell.setSelection(isSelectionActive: isSelecting, isSelected: true)
+            if isSelected(item: item) {
+                fileInfoManager.deselectItem(at: indexPath)
+                cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
+            } else {
+                fileInfoManager.selectItem(at: indexPath)
+                cell.setSelection(isSelectionActive: isSelecting, isSelected: true)
+            }
+            
             delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
             
-        } else if let item = item(at: indexPath), checkIfCanShowDetail(for: item) {
+        } else if checkIfCanShowDetail(for: item) {
             if item.fileType == .audio {
                 showAudioPlayer(with: item)
             } else {
@@ -297,17 +303,17 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
-            return
-        }
-        
-        if isSelecting {
-            fileInfoManager.deselectItem(at: indexPath)
-            cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
-            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
+//            return
+//        }
+//
+//        if isSelecting {
+//            fileInfoManager.deselectItem(at: indexPath)
+//            cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
+//            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
+//        }
+//    }
     
     //MARK: Helpers
     private func item(at indexPath: IndexPath) -> WrapData? {
@@ -518,12 +524,27 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 //MARK: - LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate
 extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
     func canLongPress() -> Bool {
-        //QuickSelectCollectionView
-        return false
+        return fileInfoManager.type.rootType == .byMe
     }
     
     func onLongPress(cell: UICollectionViewCell) {
-        //QuickSelectCollectionView
+        guard fileInfoManager.type.isSelectionAllowed else {
+            return
+        }
+        
+        if let indexPath = collectionView?.indexPath(for: cell),
+           let object = item(at: indexPath) {
+            
+            if !isSelecting {
+                if !isSelected(item: object) {
+                    fileInfoManager.selectItem(at: indexPath)
+                }
+                changeSelection(isActive: true)
+                
+            } else if !isSelected(item: object) {
+                fileInfoManager.selectItem(at: indexPath)
+            }
+        }
     }
     
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
@@ -536,25 +557,25 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
 }
 
 //MARK: - QuickSelectCollectionViewDelegate
-extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDelegate {
-    func didLongPress(at indexPath: IndexPath?) {
-        guard fileInfoManager.type.isSelectionAllowed else {
-            return
-        }
-        
-        if !isSelecting {
-            changeSelection(isActive: true)
-            reloadVisibleCells()
-        }
-    }
+//extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDelegate {
+//    func didLongPress(at indexPath: IndexPath?) {
+//        guard fileInfoManager.type.isSelectionAllowed else {
+//            return
+//        }
+//
+//        if !isSelecting {
+//            changeSelection(isActive: true)
+//            reloadVisibleCells()
+//        }
+//    }
     
-    func didEndLongPress(at indexPath: IndexPath?) {
-        guard fileInfoManager.type.isSelectionAllowed else {
-            return
-        }
-        
-        if isSelecting {
-            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
-        }
-    }
-}
+//    func didEndLongPress(at indexPath: IndexPath?) {
+//        guard fileInfoManager.type.isSelectionAllowed else {
+//            return
+//        }
+//
+//        if isSelecting {
+//            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
+//        }
+//    }
+//}

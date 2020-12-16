@@ -25,7 +25,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
 
     
     @IBOutlet weak var collectionViewBarContainer: UIView!
-    @IBOutlet private weak var collectionView: QuickSelectCollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     private let cardsContainer = CardsContainerView()
     private var contentSliderTopY: NSLayoutConstraint?
@@ -215,7 +215,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
-        if !collectionView.isQuickSelecting {
+//        if !collectionView.isQuickSelecting {
             bottomBarManager.update(for: selectedItems)
             
             if selectedItems.isEmpty {
@@ -225,7 +225,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 navBarManager.threeDotsButton.isEnabled = true
                 bottomBarManager.show(onView: view)
             }
-        }
+//        }
     }
     
     func didEndReload() {
