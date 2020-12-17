@@ -258,6 +258,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             self.needToShowTabBar = !isSelecting
             self.showTabBarIfNeeded()
             if isSelecting {
+                let selectedItems = self.collectionManager.selectedItems()
+                self.show(selectedItemsCount: selectedItems.count)
                 self.bottomBarManager.show()
             } else {
                 self.bottomBarManager.hide()
@@ -334,12 +336,12 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch shareType.rootType {
             case .withMe:
-                if type.isContained(in: [.leaveSharing, .moveToTrashShared, .rename, .move, .share]) {
+                if type.isContained(in: [.rename, .move, .share]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
                 
             case .byMe:
-                if type.isContained(in: [.endSharing, .moveToTrash, .rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
+                if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
                 
@@ -369,6 +371,22 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
     
     func syncFinished() {
         collectionManager.reload(type: .onOperationFinished)
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        collectionManager.delete(uuids: items.compactMap { $0.uuid })
+    }
+    
+    func didEndShareItem(uuid: String) {
+        if shareType.rootType == .byMe {
+            collectionManager.delete(uuids: [uuid])
+        }
+    }
+    
+    func didLeaveShareItem(uuid: String) {
+        if shareType.rootType == .withMe {
+            collectionManager.delete(uuids: [uuid])
+        }
     }
 }
 
