@@ -25,7 +25,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
 
     
     @IBOutlet weak var collectionViewBarContainer: UIView!
-    @IBOutlet private weak var collectionView: QuickSelectCollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     private let cardsContainer = CardsContainerView()
     private var contentSliderTopY: NSLayoutConstraint?
@@ -91,8 +91,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
-        } else {
-            updateBars(isSelecting: false)
         }
     }
     
@@ -100,6 +98,14 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewDidDisappear(animated)
         
         setCardsContainer(isActive: false)
+    }
+    
+    override func removeFromParentViewController() {
+        super.removeFromParentViewController()
+        
+        if collectionManager.isSelecting {
+            stopModeSelected()
+        }
     }
  
     //MARK: - Private
@@ -209,16 +215,12 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
-        if !collectionView.isQuickSelecting {
-            bottomBarManager.update(for: selectedItems)
-            
-            if selectedItems.isEmpty {
-                navBarManager.threeDotsButton.isEnabled = false
-                bottomBarManager.hide()
-            } else {
-                navBarManager.threeDotsButton.isEnabled = true
-                bottomBarManager.show()
-            }
+        bottomBarManager.update(for: selectedItems)
+        
+        if selectedItems.isEmpty {
+            bottomBarManager.hide()
+        } else {
+            bottomBarManager.show()
         }
     }
     
@@ -253,8 +255,11 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             if self.shareType.isSelectionAllowed {
                 self.navBarManager.threeDotsButton.isEnabled = !isSelecting
             }
-            
+            self.needToShowTabBar = !isSelecting
+            self.showTabBarIfNeeded()
             if isSelecting {
+                let selectedItems = self.collectionManager.selectedItems()
+                self.show(selectedItemsCount: selectedItems.count)
                 self.bottomBarManager.show()
             } else {
                 self.bottomBarManager.hide()
@@ -272,7 +277,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
             
-            if editingMode, isSelectionAllowed{
+            if editingMode, isSelectionAllowed {
                 self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
@@ -331,12 +336,12 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch shareType.rootType {
             case .withMe:
-                if type.isContained(in: [.leaveSharing, .moveToTrashShared, .rename, .move, .share]) {
+                if type.isContained(in: [.rename, .move, .share]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
                 
             case .byMe:
-                if type.isContained(in: [.endSharing, .moveToTrash, .rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
+                if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
                 
@@ -366,6 +371,22 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
     
     func syncFinished() {
         collectionManager.reload(type: .onOperationFinished)
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        collectionManager.delete(uuids: items.compactMap { $0.uuid })
+    }
+    
+    func didEndShareItem(uuid: String) {
+        if shareType.rootType == .byMe {
+            collectionManager.delete(uuids: [uuid])
+        }
+    }
+    
+    func didLeaveShareItem(uuid: String) {
+        if shareType.rootType == .withMe {
+            collectionManager.delete(uuids: [uuid])
+        }
     }
 }
 
