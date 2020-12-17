@@ -48,7 +48,7 @@ class SegmentedController: BaseViewController, NibInit {
         case adjustToWidth
     }
     
-    static func initWithControllers(_ controllers: [UIViewController], alignment: Alignment) -> SegmentedController {
+    class func initWithControllers(_ controllers: [UIViewController], alignment: Alignment) -> SegmentedController {
         let controller = SegmentedController.initFromNib()
         controller.setup(with: controllers, alignment: alignment)
         return controller
@@ -71,6 +71,8 @@ class SegmentedController: BaseViewController, NibInit {
     var currentController: UIViewController {
         return viewControllers[safe: segmentedControl.selectedSegmentIndex] ?? UIViewController()
     }
+    
+    private(set) var selectedIndex = 0
     
     //    weak var delegate: SegmentedControllerDelegate?
     
@@ -141,16 +143,25 @@ class SegmentedController: BaseViewController, NibInit {
     }
     
     @IBAction private func segmentDidChange(_ sender: UISegmentedControl) {
-        
-        let selectedIndex = sender.selectedSegmentIndex
-        
-        guard selectedIndex < viewControllers.count else {
+        let newIndex = sender.selectedSegmentIndex
+        guard newIndex < viewControllers.count else {
             assertionFailure()
             return
         }
         
+        guard canSwitchSegment(from: selectedIndex, to: newIndex) else {
+            sender.selectedSegmentIndex = selectedIndex
+            return
+        }
+        
+        selectedIndex = sender.selectedSegmentIndex
+        
         childViewControllers.forEach { $0.removeFromParentVC() }
         setupSelectedController(viewControllers[selectedIndex])
+    }
+    
+    func canSwitchSegment(from oldIndex: Int, to newIndex: Int) -> Bool {
+        return true
     }
     
     private func setupSelectedController(_ controller: BaseViewController) {
