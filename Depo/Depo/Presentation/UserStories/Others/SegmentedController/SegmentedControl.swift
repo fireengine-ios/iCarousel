@@ -14,6 +14,7 @@ enum SegmentedImage {
     case favorites
     case music
     case trashBin
+    case sharedByMe
     
     var image: UIImage? {
         switch self {
@@ -25,6 +26,8 @@ enum SegmentedImage {
             return UIImage(named: "segment_music")
         case .trashBin:
             return UIImage(named: "segment_trash")
+        case .sharedByMe:
+            return UIImage(named: "segment_shared")
         }
     }
 }

@@ -599,13 +599,19 @@ class RouterVC: NSObject {
         return controller
     }
     
+    var shareByMeSegment: UIViewController {
+        let controller = PrivateShareSharedFilesViewController.with(shareType: .byMe)
+        controller.segmentImage = .sharedByMe
+        return controller
+    }
+    
     var segmentedFiles: UIViewController? {
         guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()
         }
-        let controllers = [allFiles, documents, musics, favorites, trashBin]
-        return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
+        let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
+        return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
     var sharedFiles: UIViewController {
