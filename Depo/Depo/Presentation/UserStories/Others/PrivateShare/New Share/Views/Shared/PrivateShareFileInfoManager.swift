@@ -100,7 +100,7 @@ final class PrivateShareFileInfoManager {
     private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
     private var privateShareAPIService: PrivateShareApiService!
     private let pageSize = Device.isIpad ? 64 : 32
-    private var pageLoaded = 0
+    private var pagesLoaded = 0
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -115,67 +115,92 @@ final class PrivateShareFileInfoManager {
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     private(set) var splittedItems = SynchronizedArray<[WrapData]>()
     
+    private var tempLoaded = [WrapData]()
+    
     //MARK: - Life cycle
     
     private init() { }
     
     //MARK: - Public
     
-    func loadNext(completion: @escaping ValueHandler<Int>) {
+    func loadNextPage(completion: @escaping ValueHandler<Bool>) {
         guard operationQueue.operations.filter({ !$0.isCancelled }).count == 0 else {
+            completion(false)
             return
         }
         
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] loadedItems in
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
             
-            guard let self = self else {
+            guard let self = self, isFinished, !loadedItems.isEmpty else {
+                completion(false)
                 return
             }
             
-            guard !loadedItems.isEmpty else {
-                completion(0)
-                return
-            }
-            
-            self.pageLoaded += 1
+            self.pagesLoaded += 1
             
             let sorted = self.sortedItems.getArray() + self.sorted(items: loadedItems)
             self.sortedItems.replace(with: sorted, completion: nil)
             
             let splitted = self.splitted(sortedArray: sorted)
             
-            self.splittedItems.replace(with: splitted) { [weak self] in
-                completion(loadedItems.count)
+            self.splittedItems.replace(with: splitted) {
+                completion(true)
             }
         }
         
         operationQueue.addOperation(operation)
     }
     
-    func reload(completion: @escaping ValueHandler<Int>) {
+    func reload(completion: @escaping ValueHandler<Bool>) {
         queue.sync {
             operationQueue.cancelAllOperations()
+            
             selectedItems.removeAll()
-            sortedItems.removeAll()
-            splittedItems.removeAll()
-            pageLoaded = 0
-            loadNext(completion: completion)
+            pagesLoaded = 0
+            
+            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+                
+                guard let self = self, isFinished else {
+                    completion(false)
+                    return
+                }
+                
+                guard !loadedItems.isEmpty else {
+                    self.cleanAll()
+                    completion(true)
+                    return
+                }
+                
+                self.pagesLoaded += 1
+                
+                let sorted = self.sorted(items: loadedItems)
+                self.sortedItems.replace(with: sorted, completion: nil)
+                
+                let splitted = self.splitted(sortedArray: sorted)
+                
+                self.splittedItems.replace(with: splitted) {
+                    completion(true)
+                }
+            }
+            
+            operationQueue.addOperation(operation)
         }
     }
     
-    func reloadCurrentPages(completion: @escaping ValueHandler<Int>) {
+    func reloadCurrentPages(completion: @escaping ValueHandler<Bool>) {
+         guard pagesLoaded > 0 else {
+            reload(completion: completion)
+            return
+        }
+        
         queue.sync {
-            guard operationQueue.operations.filter({ !$0.isCancelled }).count == 0 else {
-                return
-            }
+            operationQueue.cancelAllOperations()
+            let pagesToLoad = pagesLoaded
             
-            let pagesToLoad = pageLoaded
+            tempLoaded.removeAll()
+            pagesLoaded = 0
             
-            sortedItems.removeAll()
-            splittedItems.removeAll()
-            pageLoaded = 0
-            
-            loadPages(till: pagesToLoad, alreadyLoadedItems: 0, completion: completion)
+            loadPages(till: pagesToLoad, completion: completion)
         }
     }
     
@@ -215,6 +240,20 @@ final class PrivateShareFileInfoManager {
         selectedItems.removeAll()
     }
     
+    func delete(uuids: [String], completion: @escaping VoidHandler) {
+        guard !uuids.isEmpty else {
+            return
+        }
+        
+        let changedSorted = sortedItems.filter { !$0.uuid.isContained(in: uuids) }
+        
+        sortedItems.replace(with: changedSorted, completion: nil)
+        
+        let changedSplitted = splitted(sortedArray: changedSorted)
+        
+        splittedItems.replace(with: changedSplitted, completion: completion)
+    }
+    
     func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
         guard let projectId = item.projectId else {
             completion(nil)
@@ -234,18 +273,41 @@ final class PrivateShareFileInfoManager {
     
     //MARK: - Private
     
-    private func loadPages(till page: Int, alreadyLoadedItems: Int, completion: @escaping ValueHandler<Int>) {
-        loadNext { [weak self] itemsCount in
-            guard let self = self else {
+    private func cleanAll() {
+        selectedItems.removeAll()
+        sortedItems.removeAll()
+        splittedItems.removeAll()
+    }
+    
+    private func loadPages(till page: Int, completion: @escaping ValueHandler<Bool>) {
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+            
+            guard let self = self, isFinished else {
+                completion(false)
                 return
             }
-            let loadedItemsCount = alreadyLoadedItems + itemsCount
-            if self.pageLoaded < page, itemsCount != 0 {
-                self.loadPages(till: page, alreadyLoadedItems: loadedItemsCount, completion: completion)
-            } else {
-                completion(loadedItemsCount)
+            
+            self.tempLoaded.append(contentsOf: self.sorted(items: loadedItems))
+            self.pagesLoaded += 1
+            
+            guard self.pagesLoaded < page, !loadedItems.isEmpty else {
+                self.loadPages(till: page, completion: completion)
+                return
             }
+            
+            let sorted = self.sorted(items: self.tempLoaded)
+            self.sortedItems.replace(with: sorted, completion: nil)
+            
+            let splitted = self.splitted(sortedArray: sorted)
+            
+            self.splittedItems.replace(with: splitted) {
+                completion(true)
+            }
+            
+            
         }
+        
+        operationQueue.addOperation(operation)
     }
     
     private func sorted(items: [WrapData]) -> [WrapData] {
@@ -288,12 +350,13 @@ final class GetSharedItemsOperation: Operation {
     private let size: Int
     private let sortBy: SortType
     private let sortOrder: SortOrder
-    private let completion: ValueHandler<[WrapData]>
+    private let completion: ValueHandler<(([WrapData], Bool))>
     
     private var task: URLSessionTask?
     private var loadedItems = [WrapData]()
+    private var isRequestFinished = false
     
-    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<[WrapData]>) {
+    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<([WrapData], Bool)>) {
         self.type = type
         self.privateShareAPIService = service
         self.completion = completion
@@ -316,7 +379,7 @@ final class GetSharedItemsOperation: Operation {
         
         semaphore.wait()
         
-        completion(loadedItems)
+        completion((loadedItems, isRequestFinished))
     }
     
     private func load() {
@@ -324,6 +387,8 @@ final class GetSharedItemsOperation: Operation {
             guard let self = self, !self.isCancelled else {
                 return
             }
+            
+            self.isRequestFinished = true
             
             switch result {
                 case .success(let filesInfo):

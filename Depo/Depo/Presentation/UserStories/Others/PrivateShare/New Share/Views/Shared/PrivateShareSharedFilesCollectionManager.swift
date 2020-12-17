@@ -57,10 +57,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     //MARK: - Public
     
     func setup() {
-        
         setupCollection()
         setupRefresher()
-        fullReload()
+        reload(type: .full)
     }
     
     func change(viewType: MoreActionsConfig.ViewType) {
@@ -105,6 +104,17 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         return fileInfoManager.selectedItems.getArray()
     }
     
+    func delete(uuids: [String]) {
+        guard !uuids.isEmpty else {
+            return
+        }
+        
+        fileInfoManager.delete(uuids: uuids) { [weak self] in
+            self?.reloadCollection()
+            self?.reload(type: .onOperationFinished)
+        }
+    }
+    
     //MARK: - Private
     
     private func reloadCollection() {
@@ -122,14 +132,11 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         collectionView?.alwaysBounceVertical = true
         
-//        collectionView?.isQuickSelectAllowed = false
-        
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
         collectionView?.backgroundView?.isHidden = true
         
         collectionView?.delegate = self
         collectionView?.dataSource = self
-//        collectionView?.longPressDelegate = self
     }
     
     private func setupRefresher() {
@@ -141,25 +148,27 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     @objc
     private func fullReload() {
-        fileInfoManager.reload { [weak self] itmesLoadedCount in
-            self?.changeSelection(isActive: false)
-            self?.reloadCollection()
-            self?.setEmptyScreen(isHidden: itmesLoadedCount != 0)
+        fileInfoManager.reload { [weak self] shouldReload in
+            if shouldReload {
+                self?.changeSelection(isActive: false)
+                self?.reloadCollection()
+            }
         }
         
     }
     
     private func reloadAfterOperation() {
-        return fileInfoManager.reloadCurrentPages { [weak self] itemsLoadedCount in
-            self?.reloadCollection()
-            self?.setEmptyScreen(isHidden: itemsLoadedCount != 0)
+        return fileInfoManager.reloadCurrentPages { [weak self] shouldReload in
+            if shouldReload {
+                self?.reloadCollection()
+            }
         }
     }
     
     private func loadNextPage() {
-        fileInfoManager.loadNext(completion: { [weak self] itemsLoaded in
+        fileInfoManager.loadNextPage(completion: { [weak self] shouldReload in
 //            self?.append(indexes: itemsLoaded)
-            if itemsLoaded != 0 {
+            if shouldReload {
                 self?.reloadCollection()
             }
         })
@@ -227,6 +236,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func setEmptyScreen(isHidden: Bool) {
+        guard collectionView?.backgroundView?.isHidden != isHidden else {
+            return
+        }
+        
         DispatchQueue.main.async {
             self.collectionView?.backgroundView?.isHidden = isHidden
         }
@@ -241,7 +254,9 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fileInfoManager.splittedItems[section]?.count ?? 0
+        let numberOfItems = fileInfoManager.splittedItems[section]?.count ?? 0
+        setEmptyScreen(isHidden: numberOfItems != 0)
+        return numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -555,27 +570,3 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
         delegate?.showActions(for: item, sender: sender)
     }
 }
-
-//MARK: - QuickSelectCollectionViewDelegate
-//extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDelegate {
-//    func didLongPress(at indexPath: IndexPath?) {
-//        guard fileInfoManager.type.isSelectionAllowed else {
-//            return
-//        }
-//
-//        if !isSelecting {
-//            changeSelection(isActive: true)
-//            reloadVisibleCells()
-//        }
-//    }
-    
-//    func didEndLongPress(at indexPath: IndexPath?) {
-//        guard fileInfoManager.type.isSelectionAllowed else {
-//            return
-//        }
-//
-//        if isSelecting {
-//            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
-//        }
-//    }
-//}
