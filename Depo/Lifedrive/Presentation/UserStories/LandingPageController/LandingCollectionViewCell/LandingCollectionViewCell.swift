@@ -17,6 +17,8 @@ final class LandingCollectionViewCell: UICollectionViewCell {
             newValue.textColor = ColorConstants.billoBlue
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 31.5) //UIFont.PoppinsBoldFont(size: Device.isIpad ? 37 : 25)
             newValue.textAlignment = .center
+            newValue.numberOfLines = 2
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
