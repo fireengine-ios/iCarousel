@@ -142,7 +142,7 @@ class SegmentedController: BaseViewController, NibInit {
         }
     }
     
-    @IBAction func segmentDidChange(_ sender: UISegmentedControl) {
+    @IBAction private func segmentDidChange(_ sender: UISegmentedControl) {
         let newIndex = sender.selectedSegmentIndex
         guard newIndex < viewControllers.count else {
             assertionFailure()
