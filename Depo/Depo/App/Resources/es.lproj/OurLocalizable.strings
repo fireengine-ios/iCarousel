@@ -1270,20 +1270,20 @@
 "campaign_detail_info_description" = "Nuestra campaña de teléfono ha terminado. Los resultados del sorteo se publicarán en nuestras cuentas de redes sociales el 20 de febrero. Puedes ver tus derechos totales de participación en el sorteo. ¡Siga nuestras cuentas de redes sociales para obtener los resultados!";
 "AccessibilityGiftButton" = "Gift Box";
 "landing_start_button" = "Iniciar";
-"landing_billo_title_0" = "Vive, Acumula, Recuerda";
-"landing_billo_subtitle_0" = "¡Realice una copia de seguridad de todos sus recuerdos, archivos y contactos en Billo!";
+"landing_billo_title_0" = "Vive, Acumula, Recuerda.";
+"landing_billo_subtitle_0" = "Vive el momento, guarda tus recuerdos.";
 "landing_billo_title_1" = "Copia de Seguridad Automática";
 "landing_billo_subtitle_1" = "¡Tus fotos y los vídeos están instantáneamente en Billo!";
-"landing_billo_title_2" = "Identificación Facial y de Objetos";
-"landing_billo_subtitle_2" = "¡Encuentra tus recuerdos fácilmente con álbumes inteligentes especiales para ti!";
-"landing_billo_title_3" = "Copia de seguridad de los contactos.";
-"landing_billo_subtitle_3" = "Haz una copia de seguridad de tus contactos, acceder o restaurar de manera segura en cualquier momento.";
+"landing_billo_title_2" = "Tus recuerdos favoritos en la palma de tu mano";
+"landing_billo_subtitle_2" = "Busca fácilmente tus fotos por persona, lugar u objeto con el Reconocimiento Facial y de Objetos.";
+"landing_billo_title_3" = "No pierdas Nunca tus contactos";
+"landing_billo_subtitle_3" = "Respalda tus contactos y mantenlos seguros.";
 "landing_billo_title_4" = "Hacer espacio";
 "landing_billo_subtitle_4" = "¡Haz espacio en tu dispositivo para tus recuerdos sólo con un toque!";
 "landing_billo_title_5" = "Historias Automáticas";
 "landing_billo_subtitle_5" = "¡Revivir tus recuerdos con las historias, álbumes y collages que creamos para ti!";
-"landing_billo_title_6" = "Redes Sociales";
-"landing_billo_subtitle_6" = "¡Transfiere fácilmente todo tu archivo en las redes sociales a Billo!";
+"landing_billo_title_6" = "Tu vida Social y tu almacenamiento se juntan";
+"landing_billo_subtitle_6" = "Sincroniza tus redes sociales para una vida de recuerdos, comparte solo lo mejor con PhotoPick.";
 "landing_billo_title_7" = "¡Imprime!";
 "landing_billo_subtitle_7" = "¡Adorna los espacios de vida con sus recuerdos!";
 
@@ -1791,7 +1791,7 @@
 "fun_close_alert_title" = "¿Quiere renunciar a las ediciones?";
 "fun_close_alert_message" = "Se cancelarán las ediciones en la foto.";
 "fun_close_alert_left_button" = "Continua editando";
-"fun_close_alert_right_button" = "";
+"fun_close_alert_right_button" = "Abandona";
 "Upload Music" = "Cargar archivos";
 "private_share_option" = "Comparte con la persona";
 "private_share_start_page_name" = "Comparte";

@@ -1036,6 +1036,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         let successAction = { [weak self] in
             self?.privateShareAnalytics.endShare(item: item)
+            ItemOperationManager.default.didEndShareItem(uuid: item.uuid)
             self?.output?.operationFinished(type: .endSharing)
             self?.successAction(elementType: .endSharing)()
         }
@@ -1069,6 +1070,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         let successAction = { [weak self] in
             self?.privateShareAnalytics.leaveShare(item: item)
+            ItemOperationManager.default.didLeaveShareItem(uuid: item.uuid)
             self?.output?.operationFinished(type: .leaveSharing)
             self?.successAction(elementType: .leaveSharing)()
         }

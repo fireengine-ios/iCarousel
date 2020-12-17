@@ -31,7 +31,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
     
-    static func with(collection: QuickSelectCollectionView, fileInfoManager: PrivateShareFileInfoManager) -> PrivateShareSharedFilesCollectionManager {
+    static func with(collection: UICollectionView, fileInfoManager: PrivateShareFileInfoManager) -> PrivateShareSharedFilesCollectionManager {
         let collectionManager = PrivateShareSharedFilesCollectionManager()
         collectionManager.collectionView = collection
         collectionManager.fileInfoManager = fileInfoManager
@@ -39,7 +39,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     weak var delegate: PrivateShareSharedFilesCollectionManagerDelegate?
-    private weak var collectionView: QuickSelectCollectionView?
+    private weak var collectionView: UICollectionView?
     
     private let router = RouterVC()
     private var fileInfoManager: PrivateShareFileInfoManager!
@@ -58,10 +58,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     //MARK: - Public
     
     func setup() {
-        
         setupCollection()
         setupRefresher()
-        fullReload()
+        reload(type: .full)
     }
     
     func change(viewType: MoreActionsConfig.ViewType) {
@@ -106,6 +105,17 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         return fileInfoManager.selectedItems.getArray()
     }
     
+    func delete(uuids: [String]) {
+        guard !uuids.isEmpty else {
+            return
+        }
+        
+        fileInfoManager.delete(uuids: uuids) { [weak self] in
+            self?.reloadCollection()
+            self?.reload(type: .onOperationFinished)
+        }
+    }
+    
     //MARK: - Private
     
     private func reloadCollection() {
@@ -123,14 +133,11 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         collectionView?.alwaysBounceVertical = true
         
-        collectionView?.isQuickSelectAllowed = false
-        
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
         collectionView?.backgroundView?.isHidden = true
         
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        collectionView?.longPressDelegate = self
     }
     
     private func setupRefresher() {
@@ -142,25 +149,27 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     @objc
     private func fullReload() {
-        fileInfoManager.reload { [weak self] itmesLoadedCount in
-            self?.changeSelection(isActive: false)
-            self?.reloadCollection()
-            self?.setEmptyScreen(isHidden: itmesLoadedCount != 0)
+        fileInfoManager.reload { [weak self] shouldReload in
+            if shouldReload {
+                self?.changeSelection(isActive: false)
+                self?.reloadCollection()
+            }
         }
         
     }
     
     private func reloadAfterOperation() {
-        return fileInfoManager.reloadCurrentPages { [weak self] itemsLoadedCount in
-            self?.reloadCollection()
-            self?.setEmptyScreen(isHidden: itemsLoadedCount != 0)
+        return fileInfoManager.reloadCurrentPages { [weak self] shouldReload in
+            if shouldReload {
+                self?.reloadCollection()
+            }
         }
     }
     
     private func loadNextPage() {
-        fileInfoManager.loadNext(completion: { [weak self] itemsLoaded in
+        fileInfoManager.loadNextPage(completion: { [weak self] shouldReload in
 //            self?.append(indexes: itemsLoaded)
-            if itemsLoaded != 0 {
+            if shouldReload {
                 self?.reloadCollection()
             }
         })
@@ -228,6 +237,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func setEmptyScreen(isHidden: Bool) {
+        guard collectionView?.backgroundView?.isHidden != isHidden else {
+            return
+        }
+        
         DispatchQueue.main.async {
             self.collectionView?.backgroundView?.isHidden = isHidden
         }
@@ -242,7 +255,9 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fileInfoManager.splittedItems[section]?.count ?? 0
+        let numberOfItems = fileInfoManager.splittedItems[section]?.count ?? 0
+        setEmptyScreen(isHidden: numberOfItems != 0)
+        return numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -280,16 +295,22 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell, let item = item(at: indexPath) else {
             return
         }
         
         if isSelecting {
-            fileInfoManager.selectItem(at: indexPath)
-            cell.setSelection(isSelectionActive: isSelecting, isSelected: true)
+            if isSelected(item: item) {
+                fileInfoManager.deselectItem(at: indexPath)
+                cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
+            } else {
+                fileInfoManager.selectItem(at: indexPath)
+                cell.setSelection(isSelectionActive: isSelecting, isSelected: true)
+            }
+            
             delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
             
-        } else if let item = item(at: indexPath), checkIfCanShowDetail(for: item) {
+        } else if checkIfCanShowDetail(for: item) {
             if item.fileType == .audio {
                 showAudioPlayer(with: item)
             } else {
@@ -298,17 +319,17 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
-            return
-        }
-        
-        if isSelecting {
-            fileInfoManager.deselectItem(at: indexPath)
-            cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
-            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
-        }
-    }
+//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
+//            return
+//        }
+//
+//        if isSelecting {
+//            fileInfoManager.deselectItem(at: indexPath)
+//            cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
+//            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
+//        }
+//    }
     
     //MARK: Helpers
     private func item(at indexPath: IndexPath) -> WrapData? {
@@ -519,12 +540,27 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 //MARK: - LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate
 extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
     func canLongPress() -> Bool {
-        //QuickSelectCollectionView
-        return false
+        return fileInfoManager.type.rootType == .byMe
     }
     
     func onLongPress(cell: UICollectionViewCell) {
-        //QuickSelectCollectionView
+        guard fileInfoManager.type.isSelectionAllowed else {
+            return
+        }
+        
+        if let indexPath = collectionView?.indexPath(for: cell),
+           let object = item(at: indexPath) {
+            
+            if !isSelecting {
+                if !isSelected(item: object) {
+                    fileInfoManager.selectItem(at: indexPath)
+                }
+                changeSelection(isActive: true)
+                
+            } else if !isSelected(item: object) {
+                fileInfoManager.selectItem(at: indexPath)
+            }
+        }
     }
     
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
@@ -533,37 +569,5 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
         }
         
         delegate?.showActions(for: item, sender: sender)
-    }
-    
-    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
-        guard let item = itemModel else {
-            return
-        }
-        
-        delegate?.didSelectAction(type: type, on: item, sender: sender)
-    }
-}
-
-//MARK: - QuickSelectCollectionViewDelegate
-extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDelegate {
-    func didLongPress(at indexPath: IndexPath?) {
-        guard fileInfoManager.type.isSelectionAllowed else {
-            return
-        }
-        
-        if !isSelecting {
-            changeSelection(isActive: true)
-            reloadVisibleCells()
-        }
-    }
-    
-    func didEndLongPress(at indexPath: IndexPath?) {
-        guard fileInfoManager.type.isSelectionAllowed else {
-            return
-        }
-        
-        if isSelecting {
-            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
-        }
     }
 }
