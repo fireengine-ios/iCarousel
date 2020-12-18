@@ -541,6 +541,11 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
     
     func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
+        guard let item = itemModel else {
+            return
+        }
+        
+        delegate?.didSelectAction(type: type, on: item, sender: sender)
     }
     
     func canLongPress() -> Bool {
