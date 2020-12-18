@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandingPageViewController" customModule="lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandingPageViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="4ke-zH-ad6" id="tKd-6w-8Al"/>
                 <outlet property="pageControl" destination="ZPv-b7-1cd" id="aaY-5a-PG1"/>
@@ -29,8 +30,8 @@
                     </constraints>
                 </imageView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="4ke-zH-ad6">
-                    <rect key="frame" x="0.0" y="114" width="414" height="592"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <rect key="frame" x="0.0" y="114" width="414" height="618.5"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="evh-o0-N4v">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -38,14 +39,14 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZPv-b7-1cd" customClass="BorderDotsPageControl" customModule="lifedrive" customModuleProvider="target">
-                    <rect key="frame" x="30" y="706" width="354" height="37"/>
+                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZPv-b7-1cd" customClass="BorderDotsPageControl" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="30" y="732.5" width="354" height="27.5"/>
                     <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <action selector="pageControlValueChanged:" destination="-1" eventType="valueChanged" id="0rb-s5-0j7"/>
                     </connections>
                 </pageControl>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhZ-SB-Vxj" customClass="BlueButtonWithMediumWhiteText" customModule="lifedrive" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HhZ-SB-Vxj" customClass="BlueButtonWithMediumWhiteText" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="107" y="768" width="200" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="7vj-K1-11h">
@@ -61,6 +62,7 @@
                     </connections>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="4ke-zH-ad6" secondAttribute="trailing" id="1yY-ay-ZdF"/>
@@ -76,13 +78,17 @@
                     <variation key="heightClass=regular-widthClass=regular" constant="38"/>
                 </constraint>
                 <constraint firstItem="ZPv-b7-1cd" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qVo-7v-Old"/>
-                <constraint firstItem="HhZ-SB-Vxj" firstAttribute="top" secondItem="ZPv-b7-1cd" secondAttribute="bottom" constant="25" id="thP-zM-A5L"/>
+                <constraint firstItem="HhZ-SB-Vxj" firstAttribute="top" secondItem="ZPv-b7-1cd" secondAttribute="bottom" constant="8" id="thP-zM-A5L">
+                    <variation key="heightClass=regular-widthClass=regular" constant="25"/>
+                </constraint>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="144.64285714285714"/>
         </view>
     </objects>
     <resources>
         <image name="landingLogo" width="137" height="55"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
