@@ -377,6 +377,12 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
         collectionManager.delete(uuids: items.compactMap { $0.uuid })
     }
     
+    func didMoveToTrashSharedItems(_ items: [Item]) {
+        if shareType.rootType == .withMe {
+            collectionManager.delete(uuids: items.compactMap { $0.uuid })
+        }
+    }
+    
     func didEndShareItem(uuid: String) {
         if shareType.rootType == .byMe {
             collectionManager.delete(uuids: [uuid])
