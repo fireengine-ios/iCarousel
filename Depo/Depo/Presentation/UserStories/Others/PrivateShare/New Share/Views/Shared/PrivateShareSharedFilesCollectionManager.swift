@@ -539,6 +539,10 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 
 //MARK: - LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate
 extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
+    
+    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
+    }
+    
     func canLongPress() -> Bool {
         return fileInfoManager.type.rootType == .byMe
     }
