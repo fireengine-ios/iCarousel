@@ -32,10 +32,10 @@ enum TabScreenIndex: Int {
 
 enum DocumentsScreenSegmentIndex: Int {
     case allFiles = 0
-    case documents = 1
-    case music = 2
-    case favorites = 3
-    case trashBin = 4
+    case documents = 2
+    case music = 3
+    case favorites = 4
+    case trashBin = 5
 }
 
 final class TabBarViewController: ViewController, UITabBarDelegate {
