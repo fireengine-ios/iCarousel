@@ -28,8 +28,7 @@ final class AllFilesSegmentedController: SegmentedController {
         
         if let segmentedController = sharedFiles as? SegmentedController,
            let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PrivateShareSharedFilesViewController)?.shareType == .byMe }) {
-            segmentedController.loadViewIfNeeded()
-            segmentedController.switchSegment(to: index)
+            segmentedController.startIndex = index
         }
         
         router.pushViewController(viewController: sharedFiles)
