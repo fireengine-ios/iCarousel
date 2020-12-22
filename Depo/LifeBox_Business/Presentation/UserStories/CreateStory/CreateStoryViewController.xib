@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateStoryViewController" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="7aQ-Nm-zL9" id="ocA-Mr-YgV"/>
+                <outlet property="createButton" destination="qY6-PL-KB4" id="L1k-R5-Vg6"/>
+                <outlet property="descriptionLabel" destination="E5I-Px-86y" id="oE2-yC-AaJ"/>
+                <outlet property="musicSelectView" destination="KeF-x1-ey1" id="FsS-9n-jcl"/>
+                <outlet property="storyNameView" destination="IeB-rG-1di" id="msF-uW-SQA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SFF-o9-tmC">
+                    <rect key="frame" x="16" y="30" width="343" height="128"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IeB-rG-1di" customClass="ProfileTextEnterView" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="C87-xC-yFL"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeF-x1-ey1" customClass="CreateStoryMusicEnterView" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="68" width="343" height="60"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="kfr-4b-8RU"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5I-Px-86y">
+                    <rect key="frame" x="15" y="178" width="345" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qY6-PL-KB4" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                    <rect key="frame" x="84.5" y="611" width="206" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="m8s-jt-A2G"/>
+                        <constraint firstAttribute="width" constant="206" id="zw5-7L-oWD"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="onCreateTap:" destination="-1" eventType="touchUpInside" id="LVK-4z-Szb"/>
+                    </connections>
+                </button>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="7aQ-Nm-zL9">
+                    <rect key="frame" x="0.0" y="218.5" width="375" height="384.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gg7-tH-F2s">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qY6-PL-KB4" secondAttribute="bottom" constant="12" id="4FN-DG-rRY"/>
+                <constraint firstItem="qY6-PL-KB4" firstAttribute="top" secondItem="7aQ-Nm-zL9" secondAttribute="bottom" constant="8" id="A8s-72-SMb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SFF-o9-tmC" secondAttribute="trailing" constant="16" id="AIl-OZ-wFg"/>
+                <constraint firstItem="SFF-o9-tmC" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Dcg-ZD-7uh"/>
+                <constraint firstItem="E5I-Px-86y" firstAttribute="top" secondItem="SFF-o9-tmC" secondAttribute="bottom" constant="20" id="E6q-Gg-mzG"/>
+                <constraint firstItem="7aQ-Nm-zL9" firstAttribute="top" secondItem="E5I-Px-86y" secondAttribute="bottom" constant="20" id="Wsn-Uh-DXE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7aQ-Nm-zL9" secondAttribute="trailing" id="XR9-0k-Rrj"/>
+                <constraint firstItem="E5I-Px-86y" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="bHt-kG-kW6"/>
+                <constraint firstItem="E5I-Px-86y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="d1W-c7-Atr"/>
+                <constraint firstItem="qY6-PL-KB4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="eJH-qF-qOA"/>
+                <constraint firstItem="SFF-o9-tmC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ssz-NP-dXi"/>
+                <constraint firstItem="7aQ-Nm-zL9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="weC-vM-PxS"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.40000000000001" y="123.68815592203899"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaReg.ttf">
+            <string>TurkcellSaturaReg</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ManageContactTableViewCell" id="KGk-i7-Jjw" customClass="ManageContactTableViewCell" customModule="Depo_LifeTech" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amy Baarda" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJO-Ld-Bti">
+                        <rect key="frame" x="20" y="0.0" width="231" height="43.5"/>
+                        <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLu-LL-V6R">
+                        <rect key="frame" x="261" y="0.0" width="39" height="43.5"/>
+                        <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="16"/>
+                        <state key="normal" title="Delete">
+                            <color key="titleColor" red="0.98039215686274506" green="0.60784313725490191" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="onDeleteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dVm-6V-5ls"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="qJO-Ld-Bti" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="07n-Xo-Oiy"/>
+                    <constraint firstAttribute="bottom" secondItem="qJO-Ld-Bti" secondAttribute="bottom" id="BBK-Sa-1GK"/>
+                    <constraint firstItem="kLu-LL-V6R" firstAttribute="leading" secondItem="qJO-Ld-Bti" secondAttribute="trailing" constant="10" id="Ep9-JT-Ifz"/>
+                    <constraint firstAttribute="trailing" secondItem="kLu-LL-V6R" secondAttribute="trailing" constant="20" id="He8-RS-Eqg"/>
+                    <constraint firstItem="qJO-Ld-Bti" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="aeZ-7L-XDC"/>
+                    <constraint firstAttribute="bottom" secondItem="kLu-LL-V6R" secondAttribute="bottom" id="kmO-CE-fPu"/>
+                    <constraint firstItem="kLu-LL-V6R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="pxD-Kx-rfw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="deleteButton" destination="kLu-LL-V6R" id="Fq2-HK-ILH"/>
+                <outlet property="nameLabel" destination="qJO-Ld-Bti" id="ODL-4z-U8d"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

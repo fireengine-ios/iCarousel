@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlbumCell" id="Qtq-a1-yZo" customClass="AlbumCell" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="129" height="170"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="129" height="170"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chQ-bu-QOK">
+                        <rect key="frame" x="1" y="1" width="127" height="127"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="871-ba-0El" customClass="LoadingImageView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="127" height="127"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6vk-6n-qQs">
+                                <rect key="frame" x="98" y="4" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="WoT-LF-0BE"/>
+                                    <constraint firstAttribute="width" secondItem="6vk-6n-qQs" secondAttribute="height" multiplier="1:1" id="ysh-Tm-geN"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="871-ba-0El" secondAttribute="bottom" id="3st-6T-YTs"/>
+                            <constraint firstAttribute="trailing" secondItem="6vk-6n-qQs" secondAttribute="trailing" constant="4" id="BGV-I4-4bf"/>
+                            <constraint firstItem="871-ba-0El" firstAttribute="top" secondItem="chQ-bu-QOK" secondAttribute="top" id="Ca3-Ix-R7K"/>
+                            <constraint firstAttribute="width" secondItem="chQ-bu-QOK" secondAttribute="height" multiplier="1:1" id="KIk-Cc-F0r"/>
+                            <constraint firstAttribute="trailing" secondItem="871-ba-0El" secondAttribute="trailing" id="sDC-FM-pdM"/>
+                            <constraint firstItem="871-ba-0El" firstAttribute="leading" secondItem="chQ-bu-QOK" secondAttribute="leading" id="uDB-am-zvb"/>
+                            <constraint firstItem="6vk-6n-qQs" firstAttribute="top" secondItem="chQ-bu-QOK" secondAttribute="top" constant="4" id="x2S-v7-ehi"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLc-JB-eU4">
+                        <rect key="frame" x="0.0" y="129" width="129" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="eTw-vn-dfI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="chQ-bu-QOK" firstAttribute="top" secondItem="Qtq-a1-yZo" secondAttribute="top" constant="1" id="34a-nN-aa4"/>
+                <constraint firstAttribute="trailing" secondItem="QLc-JB-eU4" secondAttribute="trailing" id="90Q-8K-baZ"/>
+                <constraint firstItem="QLc-JB-eU4" firstAttribute="top" secondItem="chQ-bu-QOK" secondAttribute="bottom" constant="1" id="Lgl-mv-kf9"/>
+                <constraint firstItem="chQ-bu-QOK" firstAttribute="leading" secondItem="Qtq-a1-yZo" secondAttribute="leading" constant="1" id="TZb-0o-7e4"/>
+                <constraint firstItem="QLc-JB-eU4" firstAttribute="leading" secondItem="Qtq-a1-yZo" secondAttribute="leading" id="XoK-co-D7c"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QLc-JB-eU4" secondAttribute="bottom" id="m0F-WR-MBK"/>
+                <constraint firstAttribute="trailing" secondItem="chQ-bu-QOK" secondAttribute="trailing" constant="1" id="z8f-YY-T8E"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="IIb-rn-eEh"/>
+            <size key="customSize" width="167" height="244"/>
+            <connections>
+                <outlet property="selectionIcon" destination="6vk-6n-qQs" id="MVP-bA-ItP"/>
+                <outlet property="thumbnail" destination="871-ba-0El" id="wqv-3D-3YR"/>
+                <outlet property="thumbnailsContainer" destination="chQ-bu-QOK" id="Cgm-rj-Hgb"/>
+                <outlet property="titleLabel" destination="QLc-JB-eU4" id="UbC-Vm-hr2"/>
+            </connections>
+            <point key="canvasLocation" x="-88" y="125"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="SuggestionTableSectionHeader" customModule="lifebox" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUGGESTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ueb-1V-9uC">
+                        <rect key="frame" x="40" y="13" width="242" height="17.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.098167456686496735" green="0.1383613646030426" blue="0.20993319153785706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBJ-Fz-V6v">
+                        <rect key="frame" x="290" y="10" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="T87-Af-4B7"/>
+                            <constraint firstAttribute="height" constant="22" id="Vh0-eZ-13d"/>
+                        </constraints>
+                        <state key="normal" image="removeCircle">
+                            <color key="titleColor" red="0.80982488393783569" green="0.82791256904602051" blue="0.86252826452255249" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="onClearButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="d1R-v0-Pcb"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="vBJ-Fz-V6v" firstAttribute="centerY" secondItem="Ueb-1V-9uC" secondAttribute="centerY" id="7ol-pv-ZMn"/>
+                    <constraint firstAttribute="bottom" secondItem="Ueb-1V-9uC" secondAttribute="bottom" constant="13" id="MvF-yQ-ysf"/>
+                    <constraint firstItem="vBJ-Fz-V6v" firstAttribute="leading" secondItem="Ueb-1V-9uC" secondAttribute="trailing" constant="8" id="XjO-RI-6y6"/>
+                    <constraint firstItem="Ueb-1V-9uC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="iFP-Cs-yyX"/>
+                    <constraint firstAttribute="trailing" secondItem="vBJ-Fz-V6v" secondAttribute="trailing" constant="8" id="ulD-V9-6DR"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="clearButton" destination="vBJ-Fz-V6v" id="nfj-gd-Uhe"/>
+                <outlet property="titleLabel" destination="Ueb-1V-9uC" id="Xn7-fp-Aem"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="removeCircle" width="21" height="21"/>
+    </resources>
+</document>

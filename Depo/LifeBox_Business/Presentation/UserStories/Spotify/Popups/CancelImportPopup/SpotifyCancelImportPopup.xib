@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyCancelImportPopup" customModule="lifebox" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="BIB-7R-Ouw" id="6K0-Mz-g8W"/>
+                <outlet property="contentView" destination="DQH-e7-wG1" id="pVh-1G-1SP"/>
+                <outlet property="dismissButton" destination="UF6-13-SCe" id="A1v-lI-EGe"/>
+                <outlet property="subtitleLabel" destination="Psd-bb-7SK" id="eiC-Gr-WbH"/>
+                <outlet property="titleLabel" destination="6M1-k0-dg9" id="bjd-P9-LfM"/>
+                <outlet property="view" destination="MUh-YN-RwH" id="d7O-hH-s4a"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="MUh-YN-RwH">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DQH-e7-wG1">
+                    <rect key="frame" x="40.5" y="201.5" width="294" height="264"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotify_logo" translatesAutoresizingMaskIntoConstraints="NO" id="hna-JG-vy4">
+                            <rect key="frame" x="60" y="26" width="46" height="46"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="Id7-nC-wAh"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotify_dots" translatesAutoresizingMaskIntoConstraints="NO" id="8lc-LV-CpB">
+                            <rect key="frame" x="122" y="47" width="50" height="4"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="4" id="FPm-xg-OIR"/>
+                                <constraint firstAttribute="width" constant="50" id="nyC-o0-t4q"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotify_cross" translatesAutoresizingMaskIntoConstraints="NO" id="mt0-60-rRa">
+                            <rect key="frame" x="139" y="41" width="16" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="mt0-60-rRa" secondAttribute="height" multiplier="1:1" id="83B-yT-lzI"/>
+                                <constraint firstAttribute="width" constant="16" id="zmB-fT-Oc1"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dark_logo" translatesAutoresizingMaskIntoConstraints="NO" id="7Q3-RY-eys">
+                            <rect key="frame" x="188" y="26" width="46" height="46"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="7Q3-RY-eys" secondAttribute="height" multiplier="1:1" id="5xz-cc-zhc"/>
+                                <constraint firstAttribute="height" constant="46" id="9mR-Ry-mRr"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6M1-k0-dg9">
+                            <rect key="frame" x="35" y="85" width="224" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psd-bb-7SK">
+                            <rect key="frame" x="38" y="114" width="218" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UF6-13-SCe" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="26" y="151" width="242" height="44"/>
+                            <state key="normal" title="Continue"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIB-7R-Ouw" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                            <rect key="frame" x="26" y="203" width="242" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="XYc-fV-D6r"/>
+                            </constraints>
+                            <state key="normal" title="Cancel"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="8lc-LV-CpB" firstAttribute="centerX" secondItem="DQH-e7-wG1" secondAttribute="centerX" id="0m8-Ke-01r"/>
+                        <constraint firstItem="Psd-bb-7SK" firstAttribute="top" secondItem="6M1-k0-dg9" secondAttribute="bottom" constant="8" id="1OI-oV-jw1"/>
+                        <constraint firstItem="6M1-k0-dg9" firstAttribute="top" secondItem="hna-JG-vy4" secondAttribute="bottom" constant="13" id="44w-2b-9Iv"/>
+                        <constraint firstItem="UF6-13-SCe" firstAttribute="leading" secondItem="BIB-7R-Ouw" secondAttribute="leading" id="5wI-dJ-e1O"/>
+                        <constraint firstItem="hna-JG-vy4" firstAttribute="width" secondItem="hna-JG-vy4" secondAttribute="height" multiplier="1:1" id="7Kg-Wq-6Pq"/>
+                        <constraint firstAttribute="trailing" secondItem="6M1-k0-dg9" secondAttribute="trailing" constant="35" id="FDg-z4-jdq"/>
+                        <constraint firstItem="7Q3-RY-eys" firstAttribute="leading" secondItem="8lc-LV-CpB" secondAttribute="trailing" constant="16" id="GbO-hI-3qJ"/>
+                        <constraint firstItem="hna-JG-vy4" firstAttribute="top" secondItem="DQH-e7-wG1" secondAttribute="top" constant="26" id="Hpf-mJ-vUD"/>
+                        <constraint firstAttribute="trailing" secondItem="Psd-bb-7SK" secondAttribute="trailing" constant="38" id="SPs-6w-JF2"/>
+                        <constraint firstItem="mt0-60-rRa" firstAttribute="centerX" secondItem="8lc-LV-CpB" secondAttribute="centerX" id="UHG-JG-RyN"/>
+                        <constraint firstItem="8lc-LV-CpB" firstAttribute="leading" secondItem="hna-JG-vy4" secondAttribute="trailing" constant="16" id="Uq6-iD-ezf"/>
+                        <constraint firstAttribute="bottom" secondItem="BIB-7R-Ouw" secondAttribute="bottom" constant="17" id="VVO-29-e0p"/>
+                        <constraint firstItem="UF6-13-SCe" firstAttribute="trailing" secondItem="BIB-7R-Ouw" secondAttribute="trailing" id="XrN-aP-VeT"/>
+                        <constraint firstItem="BIB-7R-Ouw" firstAttribute="top" secondItem="UF6-13-SCe" secondAttribute="bottom" constant="8" id="YkN-V4-rmo"/>
+                        <constraint firstItem="BIB-7R-Ouw" firstAttribute="leading" secondItem="DQH-e7-wG1" secondAttribute="leading" constant="26" id="cUx-tv-D1r"/>
+                        <constraint firstItem="Psd-bb-7SK" firstAttribute="leading" secondItem="DQH-e7-wG1" secondAttribute="leading" constant="38" id="dur-l8-4gf"/>
+                        <constraint firstItem="UF6-13-SCe" firstAttribute="top" secondItem="Psd-bb-7SK" secondAttribute="bottom" constant="16" id="gSD-tJ-7lh"/>
+                        <constraint firstAttribute="trailing" secondItem="BIB-7R-Ouw" secondAttribute="trailing" constant="26" id="hE1-qf-Q4I"/>
+                        <constraint firstItem="mt0-60-rRa" firstAttribute="centerY" secondItem="8lc-LV-CpB" secondAttribute="centerY" id="jSd-mv-XEo"/>
+                        <constraint firstAttribute="width" constant="294" id="rp3-95-RCk"/>
+                        <constraint firstItem="UF6-13-SCe" firstAttribute="height" secondItem="BIB-7R-Ouw" secondAttribute="height" id="vjq-EP-wQd"/>
+                        <constraint firstItem="7Q3-RY-eys" firstAttribute="centerY" secondItem="8lc-LV-CpB" secondAttribute="centerY" id="yE4-nf-3mB"/>
+                        <constraint firstItem="hna-JG-vy4" firstAttribute="centerY" secondItem="8lc-LV-CpB" secondAttribute="centerY" id="zQb-69-AGV"/>
+                        <constraint firstItem="6M1-k0-dg9" firstAttribute="leading" secondItem="DQH-e7-wG1" secondAttribute="leading" constant="35" id="zs3-re-JJV"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="DQH-e7-wG1" firstAttribute="centerY" secondItem="MUh-YN-RwH" secondAttribute="centerY" id="W32-8o-Ax0"/>
+                <constraint firstItem="DQH-e7-wG1" firstAttribute="centerX" secondItem="MUh-YN-RwH" secondAttribute="centerX" id="fSL-uZ-S5g"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="dC2-04-Acm"/>
+            <point key="canvasLocation" x="-31.199999999999999" y="149.77511244377811"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dark_logo" width="66" height="64"/>
+        <image name="spotify_cross" width="16" height="16"/>
+        <image name="spotify_dots" width="50" height="4"/>
+        <image name="spotify_logo" width="1024" height="1024"/>
+    </resources>
+</document>
