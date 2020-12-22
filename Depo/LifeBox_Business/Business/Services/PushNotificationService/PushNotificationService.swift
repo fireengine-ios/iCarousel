@@ -103,14 +103,14 @@ final class PushNotificationService {
         case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
         case .floatingMenu: openFloatingMenu()
         case .packages, .widgetQuota: openPackages()
-        case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: openPhotos()
-        case .videos: openVideos()
+        case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: break
+        case .videos: break
         case .albums: openAlbums()
         case .stories: openStories()
         case .allFiles: openAllFiles()
         case .music: openMusic()
         case .documents: openDocuments()
-        case .contactSync, .widgetNoBackup, .widgetOldBackup: openContactSync()
+        case .contactSync, .widgetNoBackup, .widgetOldBackup: break
         case .periodicContactSync: openPeriodicContactSync()
         case .favorites: openFavorites()
         case .createStory: openCreateStory()
@@ -156,7 +156,7 @@ final class PushNotificationService {
                 openSupport(type: action == .supportFormSignup ? .signup : .login)
             }
         case .trashBin:
-            openTabBarItem(index: .documentsScreenIndex, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
+            openTrashBin()
         case .hiddenBin: openHiddenBin()
         case .sharedWithMe: openSharedWithMe()
         case .sharedByMe: openShareByMe()
@@ -203,40 +203,42 @@ final class PushNotificationService {
         }
     }
     
-    private func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
+    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
-        
+
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .homePageScreenIndex:
+            case .documents:
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue
-            case .contactsSyncScreenIndex, .documentsScreenIndex://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
-                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
-                    assertionFailure("This index is non existent 😵")
-                    return
-                }
-                tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue - 1
-            
+                
                 if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
                     segmentedController.loadViewIfNeeded()
                     segmentedController.switchSegment(to: segmentIndex)
                 }
                 
-            case .photosScreenIndex:
-                tabBarVC.showPhotoScreen()
+//            case .documents://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+//                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+//                    assertionFailure("This index is non existent 😵")
+//                    return
+//                }
+//                tabBarVC.tabBar.selectedItem = newSelectedItem
+                tabBarVC.selectedIndex = index.rawValue - 1
+            
+            default:
+                break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
     }
+
     
     //MARK: - Actions
     
@@ -249,7 +251,7 @@ final class PushNotificationService {
     }
     
     private func openMain() {
-        openTabBarItem(index: .homePageScreenIndex)
+        openTabBarItem(index: .documents)
     }
     
     private func openSyncSettings() {
@@ -268,14 +270,6 @@ final class PushNotificationService {
         pushTo(router.packages)
     }
     
-    private func openPhotos() {
-        openTabBarItem(index: .photosScreenIndex)
-    }
-    
-    private func openVideos() {
-//        openTabBarItem(index: .videosScreenIndex)
-    }
-    
     private func openAlbums() {
         pushTo(router.albumsListController())
     }
@@ -285,27 +279,27 @@ final class PushNotificationService {
     }
     
     private func openAllFiles() {
-        pushTo(router.allFiles(moduleOutput: nil, sortType: .AlphaBetricAZ, viewType: .List))
-    }
-    
-    private func openMusic() {
-        pushTo(router.musics)
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
     }
     
     private func openDocuments() {
-        openTabBarItem(index: .documentsScreenIndex)
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.documents.rawValue)
     }
     
-    private func openContactSync() {
-        openTabBarItem(index: .contactsSyncScreenIndex)
+    private func openMusic() {
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.music.rawValue)
+    }
+    
+    private func openFavorites() {
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
+    }
+
+    private func openTrashBin() {
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
     }
     
     private func openPeriodicContactSync() {
         pushTo(router.periodicContactsSync)
-    }
-    
-    private func openFavorites() {
-        pushTo(router.favorites(moduleOutput: nil, sortType: .AlphaBetricAZ, viewType: .List))
     }
     
     private func openCreateStory() {

@@ -77,22 +77,6 @@ extension SettingsPresenter: SettingsViewOutput {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func goToConnectedAccounts() {
-        router.goToConnectedAccounts()
-    }
-    
-    func goToAutoApload() {
-        router.goToAutoApload()
-    }
-    
-    func goToFaceImage() {
-        router.goToFaceImage()
-    }
-    
-    func goToPeriodicContactSync() {
-        router.goToPeriodicContactSync()
-    }
-    
     func goToHelpAndSupport() {
         router.goToHelpAndSupport()
     }

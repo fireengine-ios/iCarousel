@@ -196,7 +196,7 @@ private extension WarningPopupController {
     }
     
     func openPhotoPage() {
-        router.tabBarController?.showPhotoScreen()
+//        router.tabBarController?.showPhotoScreen()
     }
     
     func openSettings() {

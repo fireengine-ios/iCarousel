@@ -160,8 +160,7 @@ class RouterVC: NSObject {
     
     func pushViewController(viewController: UIViewController, animated: Bool = true) {
         if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         if let navController = topNavigationController {
@@ -179,8 +178,7 @@ class RouterVC: NSObject {
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
         if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
@@ -194,8 +192,7 @@ class RouterVC: NSObject {
     
     func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
         if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         var viewControllersStack = navigationController?.viewControllers ?? []
@@ -917,12 +914,15 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var settingsIpad: UIViewController? {
-        let leftController = settings
+    func settingsIpad(settingsController: UIViewController?) -> UIViewController? {
+        guard let leftController = settingsController as? SettingsViewController else {
+            return nil
+        }
+
         let rightController = syncContacts
         
         splitContr = SplitIpadViewContoller()
-        splitContr?.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
+        splitContr?.configurateWithControllers(leftViewController: leftController, controllers: [rightController])
         
         guard let splitVC = splitContr?.getSplitVC() else {
             return nil
@@ -1236,7 +1236,7 @@ class RouterVC: NSObject {
             segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
         }
         
-        let index = TabScreenIndex.documentsScreenIndex.rawValue
+        let index = TabScreenIndex.documents.rawValue
         if tabBarVC.selectedIndex == index {
             switchToTrashBin()
         } else {
@@ -1265,4 +1265,9 @@ class RouterVC: NSObject {
     func privateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> UIViewController {
         PrivateShateAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
     }
+    
+    var sharedAreaController: UIViewController {
+        SharedAreaViewController.initFromNib()
+    }
+
 }

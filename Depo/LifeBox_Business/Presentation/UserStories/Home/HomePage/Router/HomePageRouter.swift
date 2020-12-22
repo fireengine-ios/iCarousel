@@ -23,7 +23,7 @@ final class HomePageRouter: HomePageRouterInput {
         var controller: UIViewController?
         
         if Device.isIpad {
-            controller = router.settingsIpad
+            controller = router.settingsIpad(settingsController: router.settings)
         } else {
             controller = router.settings
         }
@@ -35,7 +35,7 @@ final class HomePageRouter: HomePageRouterInput {
         var controller: UIViewController?
         
         if Device.isIpad {
-            controller = router.settingsIpad
+            controller = router.settingsIpad(settingsController: router.settings)
         } else {
             controller = router.syncContacts
         }

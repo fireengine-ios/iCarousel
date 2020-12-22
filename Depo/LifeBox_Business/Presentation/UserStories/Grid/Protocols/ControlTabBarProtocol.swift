@@ -18,13 +18,11 @@ protocol ControlTabBarProtocol {
 extension ControlTabBarProtocol {
     
     func showTabBar() {
-        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar)
-        NotificationCenter.default.post(name: notificationName, object: nil)
+        NotificationCenter.default.post(name: .showTabBar, object: nil)
     }
     
     func hideTabBar() {
-        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-        NotificationCenter.default.post(name: notificationName, object: nil)
+        NotificationCenter.default.post(name: .hideTabBar, object: nil)
     }
     
 }

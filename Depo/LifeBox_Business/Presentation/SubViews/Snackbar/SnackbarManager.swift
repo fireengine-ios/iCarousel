@@ -164,15 +164,8 @@ final class SnackbarManager {
 private extension SnackbarManager {
     
     private func setupObserving() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideTabBar),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar),
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showTabBar),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar),
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideTabBar), name: .hideTabBar, object: nil)     
+        NotificationCenter.default.addObserver(self, selector: #selector(showTabBar), name: .showTabBar, object: nil)
     }
 
     @objc private func showTabBar() {

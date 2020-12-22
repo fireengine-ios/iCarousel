@@ -285,12 +285,20 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
+                let isTabBarItem = (self.parent as? SegmentedController)?.isTabBarItem == true
+                
+                let title = isTabBarItem ? "" : self.title ?? ""
                 if !isSelectionAllowed {
-                    self.navBarManager.setDefaultModeWithoutThreeDot(title: self.title ?? "")
+                    self.navBarManager.setDefaultModeWithoutThreeDot(title: title)
                 } else {
-                    self.navBarManager.setDefaultMode(title: self.title ?? "")
+                    self.navBarManager.setDefaultMode(title: title)
                 }
-                self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
+                
+                if isTabBarItem {
+                    self.homePageNavigationBarStyle()
+                } else {
+                    self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
+                }
             }
         }
     }
