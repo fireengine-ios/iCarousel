@@ -18,8 +18,6 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
         }
     }
     
-    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
-    
     private var analyticsService: AnalyticsService = factory.resolve()
     
     private var isTurkcell: Bool
@@ -101,25 +99,6 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
                                     animated: true)
     }
     
-    private func openAutoSyncIfNeeded() {
-        showSpinner()
-        
-        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.hideSpinner()
-            
-            if needToOpenAutoSync {
-                self?.goToSyncSettingsView()
-            }
-        }) { [weak self] error in
-            self?.hideSpinner()
-        }
-    }
-    
-    private func goToSyncSettingsView() {
-        let router = RouterVC()
-        router.setNavigationController(controller: router.synchronyseScreen)
-    }
-    
     private func trackScreen(pageNum: Int) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
         analyticsService.logScreen(screen: .welcomePage(pageNum))
@@ -134,13 +113,10 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
         let storageVars: StorageVars = factory.resolve()
         storageVars.isShownLanding = true
         
-        if isTurkcell {
-            openAutoSyncIfNeeded()
-        } else {
-            let router = RouterVC()
-            let settings = router.onboardingScreen
-            router.setNavigationController(controller: settings)
-        }
+        let router = RouterVC()
+        let settings = router.onboardingScreen
+        router.setNavigationController(controller: settings)
+        
     }
     
 }

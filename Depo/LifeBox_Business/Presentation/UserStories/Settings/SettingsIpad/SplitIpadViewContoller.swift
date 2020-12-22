@@ -46,12 +46,6 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         }
     }
     
-    func goToAutoUpload() {
-        if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().autoUpload])
-        }
-    }
-    
     func goToPeriodicContactSync() {
         if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().periodicContactsSync])

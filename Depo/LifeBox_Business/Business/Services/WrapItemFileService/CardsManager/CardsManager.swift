@@ -20,7 +20,6 @@ enum OperationType: String {
     case autoUploadIsOff            = "autoUploadIsOff"
     case waitingForWiFi             = "waitingForWiFi"
     
-    case freeAppSpace               = "FreeAppSpace"
     case freeAppSpaceLocalWarning   = "freeAppSpaceLocalWarning"
     case freeAppSpaceCloudWarning   = "freeAppSpaceCloudWarning"
     case emptyStorage               = "emptyStorage"
@@ -30,7 +29,6 @@ enum OperationType: String {
     case collage                    = "collage"
     case albumCard                  = "albumCard"
     case latestUploads              = "latestUploads"
-    case stylizedPhoto              = "stylizedPhoto"
     case movieCard                  = "movieCard"
     case animationCard              = "animation"
     
@@ -62,7 +60,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        return [.upload, .sync, .download, .prepareToAutoSync, .sharedWithMeUpload, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+        return [.upload, .sync, .download, .prepareToAutoSync, .sharedWithMeUpload, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpaceLocalWarning]
     }
     
     func clear() {
@@ -264,7 +262,7 @@ class CardsManager: NSObject {
         var typeForInsert: OperationType? = nil
         if let response = homeCardResponse, !response.actionable {
             typeForInsert = type
-        }else if type == .freeAppSpaceLocalWarning || type == .freeAppSpace {
+        }else if type == .freeAppSpaceLocalWarning {
             typeForInsert = type
         }
         
@@ -290,8 +288,6 @@ class CardsManager: NSObject {
         case .upload:
 //            stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWith(type: .waitingForWiFi)
-        case .freeAppSpace:
-            stopOperationWith(type: .emptyStorage)
         case .prepareToAutoSync:
             stopOperationWith(type: .waitingForWiFi)
             stopOperationWith(type: .autoUploadIsOff)
@@ -310,7 +306,7 @@ class CardsManager: NSObject {
     
     func canShowPopUpByDepends(type: OperationType) -> Bool {
         switch type {
-        case .freeAppSpace, .freeAppSpaceLocalWarning:
+        case .freeAppSpaceLocalWarning:
             let operations: [OperationType] = [.sync, .upload]
             for operation in operations {
                 if progresForOperation[operation] != nil {
@@ -332,10 +328,6 @@ class CardsManager: NSObject {
     
     private func serverOperationFor(type: OperationType) -> HomeCardResponse? {
         for serverObject in homeCardsObjects {
-            if type == .freeAppSpaceLocalWarning, serverObject.getOperationType() == .freeAppSpace {
-                return serverObject
-            }
-            
             if serverObject.getOperationType() == type {
                 return serverObject
             }
@@ -349,10 +341,6 @@ class CardsManager: NSObject {
         debugLog("cardViewForOperaion: type is \(type.rawValue)")
         
         switch type {
-        case .freeAppSpace:
-            let view = FreeUpSpacePopUp.initFromNib()
-            view.configurateWithType(viewType: type)
-            cardView = view
         case .freeAppSpaceCloudWarning, .freeAppSpaceLocalWarning, .emptyStorage:
             let popUp = StorageCard.initFromNib()
             popUp.configurateWithType(viewType: type)
@@ -365,10 +353,6 @@ class CardsManager: NSObject {
             cardView = PrepareToAutoSync.initFromNib()
         case .prepareQuickScroll:
             cardView = PrepareQuickScroll.initFromNib()
-//        case .preparePhotosQuickScroll:
-//            cardView = PrepareQuickScroll.initFromNib()
-//        case .prepareVideosQuickScroll:
-//            cardView = PrepareQuickScroll.initFromNib()
         case .autoUploadIsOff:
             cardView = AutoUploadIsOffPopUp.initFromNib()
         case .waitingForWiFi:
@@ -383,8 +367,6 @@ class CardsManager: NSObject {
             cardView = AlbumCard.initFromNib()
         case .latestUploads:
             cardView = LatestUpladsCard.initFromNib()
-        case .stylizedPhoto:
-            cardView = FilterPhotoCard.initFromNib()
         case .movieCard:
             cardView = MovieCard.initFromNib()
         case .animationCard:

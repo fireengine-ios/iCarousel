@@ -24,10 +24,6 @@ class LoginRouter: LoginRouterInput {
         router.pushViewController(viewController: temsAndServices)
     }
     
-    func goToSyncSettingsView() {
-        router.pushViewController(viewController: router.synchronyseScreen)
-    }
-    
     func goToRegistration() {
         if let registrationScreen = router.registrationScreen {
             router.pushViewController(viewController: registrationScreen)

@@ -41,15 +41,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     /// not called for registration. search 'needToOpenAutoSync' in PhoneVerificationPresenter for it
     func eulaApplied() {
-        /// from login
-        if interactor.cameFromLogin {
-            router.goToAutoSync()
-        /// from splash
-        } else if storageVars.isAutoSyncSet {
-            router.goToHomePage()
-        } else {
-            router.goToAutoSync()
-        }
+       router.goToHomePage()
     }
     
     func applyEulaFailed(errorResponse: ErrorResponse) {
@@ -105,23 +97,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     func openGlobalDataPermissionDetails() {
         router.goToGlobalDataPermissionDetails()
     }
-    
-    // MARK: Utility Methods
-    private func openAutoSyncIfNeeded(else handler: VoidHandler? = nil) {
-        view.showSpinner()
-        autoSyncRoutingService.checkNeededOpenAutoSync(
-            success: { [weak self] needToOpenAutoSync in
-                self?.view.hideSpinner()
-                if needToOpenAutoSync {
-                    self?.router.goToAutoSync()
-                }
-            },
-            error: { [weak self] _ in
-                self?.view.hideSpinner()
-            }
-        )
-    }
-    
+
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {

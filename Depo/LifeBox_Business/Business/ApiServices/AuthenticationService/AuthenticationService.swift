@@ -373,13 +373,9 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                            CacheManager.shared.actualizeCache()
                             
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
-                            if #available(iOS 14.0, *) {
-                                WidgetCenter.shared.reloadAllTimelines()
-                            }
                             
                             self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                                 sucess?(headers)
@@ -412,12 +408,6 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                    CacheManager.shared.actualizeCache()
-                    
-                    if #available(iOS 14.0, *) {
-                        WidgetCenter.shared.reloadAllTimelines()
-                    }
-                    
                     self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                         sucess?()
                     })
@@ -461,10 +451,7 @@ class AuthenticationService: BaseRequestService {
             
             ItemOperationManager.default.clear()
             CellImageManager.clear()
-            FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
-            FreeAppSpace.session.handleLogout()
             RecentSearchesService.shared.clearAll()
-            SyncServiceManager.shared.stopSync()
             UploadService.default.cancelOperations()
             AutoSyncDataStorage().clear()
             AuthoritySingleton.shared.clear()
@@ -483,14 +470,10 @@ class AuthenticationService: BaseRequestService {
             
             self.storageVars.currentUserID = nil
             
-            CacheManager.shared.logout {
-                debugLog("logout success")
-                WormholePoster().didLogout()
-                if #available(iOS 14.0, *) {
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
-                success?()
-            }
+            WormholePoster().didLogout()
+            
+            success?()
+            
         }
         if async {
             DispatchQueue.main.async {

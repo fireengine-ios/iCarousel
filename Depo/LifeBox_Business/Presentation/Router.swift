@@ -524,12 +524,6 @@ class RouterVC: NSObject {
     lazy var termsOfUseScreen = TermsOfUseInitializer.viewController
     
     
-    // MARK: SynchronyseSettings
-    
-    var synchronyseScreen: UIViewController {
-        return AutoSyncModuleInitializer.initializeViewController()
-    }
-    
     
     // MARK: Capcha
     
@@ -560,13 +554,6 @@ class RouterVC: NSObject {
         
         let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
         return controller
-    }
-    
-    func segmentedMedia() -> PhotoVideoSegmentedController {
-        let photos = PhotoVideoController.initPhotoFromNib()
-        let videos = PhotoVideoController.initVideoFromNib()
-        
-        return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
     }
     
     // MARK: Music
@@ -906,8 +893,8 @@ class RouterVC: NSObject {
     // MARK: Free App Space
     
     func freeAppSpace() -> UIViewController {
-        let controller = FreeAppSpaceModuleInitializer.initializeFreeAppSpaceViewController(with: "FreeAppSpaceViewCotroller")
-        return controller
+        assertionFailure()
+        return UIViewController()
     }
     
     // MARK: - SETTINGS
@@ -951,11 +938,6 @@ class RouterVC: NSObject {
         return LoginSettingsModuleInitializer.viewController(isTurkcell: isTurkcell)
     }
     
-    // MARK: Auto Upload
-    
-    var autoUpload: UIViewController {
-        return AutoSyncModuleInitializer.initializeViewController(fromSettings: true)
-    }
     
     // MARK: Change Password
     
@@ -1208,7 +1190,6 @@ class RouterVC: NSObject {
         DispatchQueue.main.async {
             if
                 let topController = self.defaultTopController,
-                topController is AutoSyncViewController == false,
                 topController is FullQuotaWarningPopUp == false,
                 topController is LoginViewController == false {
                 topController.present(controller, animated: false)

@@ -10,7 +10,6 @@ import Foundation
 
 protocol PhoneVerificationRouterInput {
 //    func goToTermAndUses()
-    func goAutoSync()
     func presentErrorPopUp(with message: String)
     func showRedirectToSplash()
     

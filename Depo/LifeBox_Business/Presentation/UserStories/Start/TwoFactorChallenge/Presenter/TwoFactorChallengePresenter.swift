@@ -103,7 +103,6 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     
     func onSuccessEULA() {
         completeAsyncOperationEnableScreen()
-        router.goAutoSync()
     }
     
     func onFailEULA() {

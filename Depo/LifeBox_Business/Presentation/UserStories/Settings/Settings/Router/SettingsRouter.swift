@@ -24,10 +24,6 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.permissions)
     }
     
-    func goToAutoApload() {
-        router.pushViewController(viewController: router.autoUpload)
-    }
-    
     func goToPeriodicContactSync() {
         router.pushViewController(viewController: router.periodicContactsSync)
     }

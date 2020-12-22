@@ -16,8 +16,6 @@ protocol SettingsRouterInput {
     
     func goToPermissions()
     
-    func goToAutoApload()
-    
     func goToPeriodicContactSync()
     
     func goToFaceImage()

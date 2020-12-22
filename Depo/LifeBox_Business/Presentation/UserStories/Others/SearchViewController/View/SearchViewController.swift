@@ -573,9 +573,7 @@ extension SearchViewController: MediaPlayerDelegate {
 
 
 extension SearchViewController: GridListTopBarDelegate {
-    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
-        output.filtersTopBar(cahngedTo: [filter])
-    }
+
     
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
         output.sortedPushedTopBar(with: rule)

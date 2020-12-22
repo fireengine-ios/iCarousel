@@ -38,15 +38,8 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                         assets.append(asset)
                     })
                     
-                    guard !CacheManager.shared.isProcessing else {
-                        self?.getAllRelatedItemsPageFromPH(assets: assets)
-                       return
-                    }
-                    self?.getAllRelatedItemsFromDataBase(assets: assets) { [weak self] items in
-                        DispatchQueue.main.async {
-                            self?.output.getContentWithSuccess(array: [items])
-                        }
-                    }
+                    self?.getAllRelatedItemsPageFromPH(assets: assets)
+                       
                 }
             }
         }
@@ -59,14 +52,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         }
         
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            guard CacheManager.shared.isProcessing else {
-                self?.getAllRelatedItemsFromDataBase(assets: assets) { [weak self] dataBaseStoredLocals in
-                    DispatchQueue.main.async {
-                        self?.uploadOutput?.newLocalItemsReceived(newItems: dataBaseStoredLocals)
-                    }
-                }
-                return
-            }
+            
             let nextItemsToSave = Array(assets.prefix(NumericConstants.numberOfLocalItemsOnPage))
             
             var localItems = [WrapData]()
@@ -86,10 +72,6 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
                 }
             })
         }
-    }
-    
-    private func getAllRelatedItemsFromDataBase(assets: [PHAsset], itemsCallback: @escaping WrapObjectsCallBack) {
-        MediaItemOperationsService.shared.localItemsBy(assets: assets, localItemsCallback: itemsCallback)
     }
     
     func addToUploadOnDemandItems(items: [BaseDataSourceItem]) {

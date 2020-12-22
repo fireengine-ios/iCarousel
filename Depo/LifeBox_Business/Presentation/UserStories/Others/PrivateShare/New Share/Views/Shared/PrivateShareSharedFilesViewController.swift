@@ -190,9 +190,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
 
 //MARK: - GridListTopBarDelegate
 extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
-    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
-        //disabled by availableFilter: false
-    }
     
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
         collectionManager.change(sortingRule: rule.sortedRulesConveted)
@@ -333,7 +330,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
         collectionManager.endSelection()
     }
     
-    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+    func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>) {
         selectedItemsCallback(collectionManager.selectedItems())
     }
     

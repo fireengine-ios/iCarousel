@@ -9,22 +9,13 @@
 import UIKit
 
 enum TabBarItem: CaseIterable {
-    case home
-    case gallery
     case plus
-    case contacts
     case allFiles
     
     var title: String {
         switch self {
-        case .home:
-            return TextConstants.tabBarItemHomeLabel
-        case .gallery:
-            return TextConstants.tabBarItemGalleryLabel
         case .plus:
             return ""
-        case .contacts:
-            return TextConstants.tabBarItemContactsLabel
         case .allFiles:
             return TextConstants.tabBarItemAllFilesLabel
         }
@@ -32,14 +23,8 @@ enum TabBarItem: CaseIterable {
     
     var icon: UIImage? {
         switch self {
-        case .home:
-            return UIImage(named: "outlineHome")
-        case .gallery:
-            return UIImage(named: "outlinePhotosVideos")
         case .plus:
             return UIImage(named: "")
-        case .contacts:
-            return UIImage(named: "outlineContacts")
         case .allFiles:
             return UIImage(named: "outlineDocs")
         }
@@ -47,14 +32,8 @@ enum TabBarItem: CaseIterable {
     
     var accessibilityLabel: String {
         switch self {
-        case .home:
-            return TextConstants.accessibilityHome
-        case .gallery:
-            return TextConstants.accessibilityPhotosVideos
         case .plus:
             return ""
-        case .contacts:
-            return TextConstants.periodicContactsSync
         case .allFiles:
             return TextConstants.homeButtonAllFiles
         }
@@ -84,7 +63,7 @@ class CustomTabBar: UITabBar {
             return tabBarItem
         }
         
-        items[2].isEnabled = false
+        items[1].isEnabled = false
         
         setItems(items, animated: false)
     }

@@ -14,10 +14,6 @@ protocol MoreFilesActionsInteractorInput {
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool)
     
-    func edit(item: [BaseDataSourceItem], completion: VoidHandler?)
-    
-    func smash(item: [BaseDataSourceItem], completion: VoidHandler?)
-    
     func moveToTrash(items: [BaseDataSourceItem])
     
     func removeAlbums(items: [BaseDataSourceItem])
@@ -81,8 +77,6 @@ protocol MoreFilesActionsInteractorInput {
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
     
     func delete(items: [BaseDataSourceItem])
-    
-    func deleteDeviceOriginal(items: [BaseDataSourceItem])
     
     func trackEvent(elementType: ElementTypes)
     

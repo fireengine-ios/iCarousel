@@ -126,29 +126,16 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         AuthoritySingleton.shared.checkNewVersionApp()
         
         if turkcellLogin {
-            if storageVars.isAutoSyncSet {
-                if !Device.isIpad, !storageVars.isShownLanding {
-                    storageVars.isShownLanding = true
-                    router.navigateToLandingPages(isTurkCell: turkcellLogin)
-                } else {
-                    router.navigateToApplication()
-                    openLink()
-                }
+            if !Device.isIpad, !storageVars.isShownLanding {
+                storageVars.isShownLanding = true
+                router.navigateToLandingPages(isTurkCell: turkcellLogin)
             } else {
-                if !Device.isIpad, !storageVars.isShownLanding {
-                    storageVars.isShownLanding = true
-                    router.navigateToLandingPages(isTurkCell: turkcellLogin)
-                } else {
-                    openAutoSyncIfNeeded()
-                }
-            }
-        } else {
-            if storageVars.isAutoSyncSet {
                 router.navigateToApplication()
                 openLink()
-            } else {
-                openAutoSyncIfNeeded()
             }
+        } else {
+            router.navigateToApplication()
+            openLink()
         }
     }
     
@@ -168,19 +155,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
         let navVC = NavigationController(rootViewController: vc)
         UIApplication.topController()?.present(navVC, animated: true, completion: nil)
-    }
-    
-    private func openAutoSyncIfNeeded() {
-        view.showSpinner()
-        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpinner()
-            
-            if needToOpenAutoSync {
-                self?.router.goToSyncSettingsView(fromSplash: true)
-            }
-        }) { [weak self] error in
-            self?.view.hideSpinner()
-        }
     }
     
     func onFailEULA(isFirstLogin: Bool) {

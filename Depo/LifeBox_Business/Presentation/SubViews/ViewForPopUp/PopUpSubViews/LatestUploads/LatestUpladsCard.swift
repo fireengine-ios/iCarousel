@@ -113,7 +113,7 @@ class LatestUpladsCard: BaseCardView {
 
     
     @IBAction func onViewAllPhotosButton() {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen), object: nil, userInfo: nil)
+       
     }
     
     override func deleteCard() {

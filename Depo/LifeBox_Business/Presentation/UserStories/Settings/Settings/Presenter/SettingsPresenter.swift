@@ -81,10 +81,6 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToConnectedAccounts()
     }
     
-    func goToAutoApload() {
-        router.goToAutoApload()
-    }
-    
     func goToFaceImage() {
         router.goToFaceImage()
     }

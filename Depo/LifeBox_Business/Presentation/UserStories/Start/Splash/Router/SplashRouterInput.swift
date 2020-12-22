@@ -18,8 +18,6 @@ protocol SplashRouterInput {
     
     func showNetworkError()
     
-    func goToSyncSettingsView(fromSplash: Bool)
-    
     func navigateToLandingPages(isTurkCell: Bool)
     
     func showError(_ error: Error)

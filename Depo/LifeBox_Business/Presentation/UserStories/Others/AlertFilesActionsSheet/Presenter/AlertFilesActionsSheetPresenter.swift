@@ -199,17 +199,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 if remoteItems.first(where: { !$0.isReadOnlyFolder }) == nil {
                     filteredActionTypes.remove(.moveToTrash)
                 }
-                
-                if let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
-                    MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
-                        let localDuplicates = items
-                        if localDuplicates.isEmpty {
-                            filteredActionTypes.remove(at: index)
-                        }
-                        self?.semaphore.signal()
-                    })
-                    self?.semaphore.wait()
-                }
+        
             } else {
                 if let printIndex = filteredActionTypes.index(of: .print) {
                     filteredActionTypes.remove(at: printIndex)
@@ -311,34 +301,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
                         self.handleAction(type: type, items: currentItems, sender: sender)
                     })
-
-                case .deleteDeviceOriginal:
-                    if let itemsArray = items as? [Item] {
-                        let serverObjects = itemsArray.filter({
-                            !$0.isLocalItem
-                        })
-                        
-                        action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
-                            self.didSelectDeleteDeviceOriginal(serverObjects: serverObjects)
-                        })
-                        
-                    } else {
-                        action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
-                            self.handleAction(type: .deleteDeviceOriginal, items: currentItems)
-                        })
-                    }
                 case .sync, .syncInProgress, .undetermend:
                     action = UIAlertAction()
                 }
                 return action
             })
         }
-    }
-    
-    private func didSelectDeleteDeviceOriginal(serverObjects:[Item]) {
-        MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: serverObjects, duplicatesCallBack: { [weak self] items in
-            self?.interactor.deleteDeviceOriginal(items: items)
-        })
     }
     
     func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item], sender: Any?) {
@@ -432,11 +400,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         switch type {
         case .info:
             interactor.info(item: items, isRenameMode: false)
-        case .edit:
-            UIApplication.topController()?.showSpinner()
-            interactor.edit(item: items, completion: {
-                UIApplication.topController()?.hideSpinner()
-            })
         case .download:
             let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
             if items.count <= allowedNumberLimit {
@@ -583,10 +546,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
         case .removeAlbum:
             interactor.removeAlbums(items: items)
-            
-        case .deleteDeviceOriginal:
-            interactor.deleteDeviceOriginal(items: items)
-        
+
         case .changeCoverPhoto:
             basePassingPresenter?.changeCover()
             

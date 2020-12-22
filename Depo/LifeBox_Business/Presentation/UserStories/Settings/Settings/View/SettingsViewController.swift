@@ -11,8 +11,6 @@ import UIKit
 protocol SettingsDelegate: class {
     func goToConnectedAccounts()
     
-    func goToAutoUpload()
-    
     func goToPeriodicContactSync()
     
     func goToFaceImage()
@@ -42,7 +40,6 @@ final class SettingsViewController: BaseViewController {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     enum AllSectionTypes: Int {
-        case autoUpload
         case periodicContactSync
         case faceImage
         case connectAccounts
@@ -56,7 +53,6 @@ final class SettingsViewController: BaseViewController {
         
         var text: String {
             switch self {
-            case .autoUpload: return TextConstants.settingsViewCellAutoUpload
             case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
             case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
             case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
@@ -70,7 +66,7 @@ final class SettingsViewController: BaseViewController {
             }
         }
         
-        static let allSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
+        static let allSectionOneTypes = [periodicContactSync, faceImage]
         static let allSectionTwoTypes = [connectAccounts, permissions]
         static let allSectionThreeTypes = [myActivities, passcode, security]
         static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
@@ -203,12 +199,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch cellType {
-        case .autoUpload:
-            if let delegate = settingsDelegate {
-                delegate.goToAutoUpload()
-            } else {
-                output.goToAutoApload()
-            }
         case .periodicContactSync:
             if let delegate = settingsDelegate {
                 delegate.goToPeriodicContactSync()

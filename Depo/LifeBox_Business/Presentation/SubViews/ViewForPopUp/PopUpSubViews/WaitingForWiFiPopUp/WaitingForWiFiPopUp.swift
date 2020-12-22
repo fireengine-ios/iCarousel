@@ -29,8 +29,7 @@ final class WaitingForWiFiPopUp: BaseCardView {
     }
     
     @IBAction private func onSettingsButton() {
-        let router = RouterVC()
-        router.pushViewController(viewController: router.autoUpload)
+        //TODO: remove in business
     }
     
 }

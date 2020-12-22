@@ -42,8 +42,6 @@ protocol BaseFilesGreedViewOutput {
     
     func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType)
     
-    func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType])
-    
     func moreActionsPressed(sender: Any)
     
     func searchPressed(output: UIViewController?)

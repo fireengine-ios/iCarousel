@@ -15,7 +15,6 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     
     private let dataStorage: PhoneVerificationDataStorage = PhoneVerificationDataStorage()    
     lazy var authenticationService = AuthenticationService()
-    private let cacheManager = CacheManager.shared
     
     weak var output: PhoneVerificationInteractorOutput!
     

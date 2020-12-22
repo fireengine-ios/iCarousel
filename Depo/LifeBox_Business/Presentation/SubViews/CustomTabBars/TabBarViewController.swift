@@ -24,10 +24,7 @@ enum FloatingButtonsType {
 }
 
 enum TabScreenIndex: Int {
-    case homePageScreenIndex = 0
-    case photosScreenIndex = 1
-    case contactsSyncScreenIndex = 3
-    case documentsScreenIndex = 4
+    case documentsScreenIndex = 0
 }
 
 enum DocumentsScreenSegmentIndex: Int {
@@ -63,8 +60,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     static let notificationHideTabBar = "HideMainTabBarNotification"
     static let notificationShowTabBar = "ShowMainTabBarNotification"
     static let notificationMusicDrop = "MusicDrop"
-    static let notificationPhotosScreen = "PhotosScreenOn"
-    static let notificationVideoScreen = "VideoScreenOn"
     static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
@@ -112,8 +107,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
         return nil
     }
-    
-    var lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
     
     
     var selectedIndex: NSInteger = 0 {
@@ -213,33 +206,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                                                selector: #selector(hideMusicBar),
                                                name: dropNotificationName,
                                                object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showPhotoScreen),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showVideosScreen),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
-                                               object: nil)
     }
-    
-    func showAndScrollPhotosScreen(scrollTo item: Item? = nil) {
-        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
-        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
-        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
-        
-        if let item = item {
-            scrollPhotoPage(scrollTo: item)
-        }
-    }
-    
-    @objc func showPhotoScreen() {
-        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
-        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
-        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
-        openPhotoPage()
-    }
-    
     
     @objc func showVideosScreen(_ sender: Any) {
 //        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
@@ -273,33 +240,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             return
         }
         navigationController.popToRootViewController(animated: animated)
-    }
-    
-    private func scrollPhotoPage(scrollTo item: Item) {
-            if let photosController = openPhotoPage()?.currentController as? PhotoVideoController {
-                photosController.scrollToItem(item)
-            }
-    }
-    
-    @discardableResult
-    private func openPhotoPage() -> SegmentedController? {
-        
-        guard let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController else {
-            return nil
-        }
-        
-        segmentedController.loadViewIfNeeded()
-        
-        if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
-            // if photo page is not active
-            guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true } ) else {
-                assertionFailure("Photo page not found")
-                return nil
-            }
-            segmentedController.switchSegment(to: index)
-        }
-        return segmentedController
-        
     }
     
     private func changeVisibleStatus(hidden: Bool) {
@@ -379,16 +319,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     func setupCustomNavControllers() {
         let router = RouterVC()
-        guard let syncContactsVC = router.syncContacts as? ContactSyncViewController else {
-            assertionFailure()
-            return
-        }
-        syncContactsVC.setTabBar(isVisible: true)
-        
-        let list = [router.homePageScreen,
-                    router.segmentedMedia(),
-                    syncContactsVC,
-                    router.segmentedFiles]
+        let list = [router.segmentedFiles]
         customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
     }
     
@@ -649,18 +580,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
             
-            if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
-                lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue
-            {
-                tabbarSelectedIndex = lastPhotoVideoIndex
-                tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
-            } else {
-                tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
-            }
+            tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             
-            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.homePageScreenIndex.rawValue,
-                                                                TabScreenIndex.contactsSyncScreenIndex.rawValue - 1,
-                                                                TabScreenIndex.documentsScreenIndex.rawValue - 1]
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.documentsScreenIndex.rawValue - 1]
             
             if tabbarSelectedIndex > 2 {
                 tabbarSelectedIndex -= 1

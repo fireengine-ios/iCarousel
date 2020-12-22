@@ -37,13 +37,8 @@ final class AutoSyncDataStorage {
         let settingsToStore = autoSyncSettings.asDictionary()
         storageVars.autoSyncSettings = settingsToStore
         
-        if autoSyncSettings.isAutoSyncEnabled {
-            LocationManager.shared.startUpdateLocation()
-        } else {
-            PopUpService.shared.setLoginCountForShowImmediately()
-            PopUpService.shared.checkIsNeedShowUploadOffPopUp()
-            LocationManager.shared.stopUpdateLocation()
-        }
+        PopUpService.shared.setLoginCountForShowImmediately()
+        PopUpService.shared.checkIsNeedShowUploadOffPopUp()
         
         WidgetService.shared.notifyWidgetAbout(autoSyncEnabled: autoSyncSettings.isAutoSyncEnabled)
     }

@@ -19,9 +19,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func operationFailed(type: ElementTypes, message: String) {
         operationFailed(with: type)
-        if type != .deleteDeviceOriginal {
-            UIApplication.showErrorAlert(message: message)
-        }
+        UIApplication.showErrorAlert(message: message)
     }
     
     func successPopupClosed() {

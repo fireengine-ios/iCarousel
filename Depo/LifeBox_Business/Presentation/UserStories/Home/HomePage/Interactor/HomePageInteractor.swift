@@ -35,9 +35,6 @@ final class HomePageInteractor: HomePageInteractorInput {
 
     func viewIsReady() {
         homeCardsService.delegate = self
-        FreeAppSpace.session.showFreeUpSpaceCard()
-        FreeAppSpace.session.checkFreeUpSpace()
-        setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
         getQuotaInfo()
@@ -98,12 +95,6 @@ final class HomePageInteractor: HomePageInteractorInput {
                                             eventLabel: .quotaUsed(quotaUsed))
     }
     
-    //MARK: autosync triggering
-    
-    private func setupAutoSyncTriggering() {
-        SyncServiceManager.shared.setupAutosync()
-        SyncServiceManager.shared.update()
-    }
     
     //MARK: private requests
     private func getCampaignStatus() {

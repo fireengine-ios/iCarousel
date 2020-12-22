@@ -168,10 +168,6 @@ final class WidgetService {
     func notifyWidgetAbout(autoSyncEnabled: Bool) {
         isAutoSyncEnabled = autoSyncEnabled
         
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-        
     }
 
     func notifyAbout(shownSyncStatus: WidgetSyncStatus) {

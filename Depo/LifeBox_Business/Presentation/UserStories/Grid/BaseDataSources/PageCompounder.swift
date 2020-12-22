@@ -20,11 +20,6 @@ final class PageCompounder {
     private var notAllowedLocalIDs = Set<String>()
     
     var pageSize: Int = NumericConstants.numberOfLocalItemsOnPage
-    
-    private let operationsService = MediaItemOperationsService.shared
-    private lazy var coreDataStack: CoreDataStack = factory.resolve()
-    
-    private var lastLocalPageAddedAction: AppendingLocalItemsPageAppended?
 
     
     private func compoundItems(pageItems: [WrapData],
@@ -35,46 +30,7 @@ final class PageCompounder {
         notAllowedMD5s = notAllowedMD5s.union(pageItems.filter{!$0.isLocalItem}.map{$0.md5})
         notAllowedLocalIDs = notAllowedLocalIDs.union(pageItems.map{$0.getTrimmedLocalID()})///there should be no similar UID on BackEnd so this is fine
         
-        let filterPredicate = getFilteringPredicate(md5s: notAllowedMD5s, localIDs: notAllowedLocalIDs)
-        
-        let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filterPredicate, predicate])
-        
-        let requestContext = coreDataStack.newChildBackgroundContext
-        
-        let request = NSFetchRequest<MediaItem>()
-        request.entity = NSEntityDescription.entity(forEntityName: MediaItem.Identifier,
-                                                    in: requestContext)
-
-            request.fetchLimit = pageSize
-
-        
-        request.predicate = compoundedPredicate
-        
-        request.sortDescriptors = [getSortingDescription(sortingRule: sortType)]
-        
-        guard let savedLocalals = try? requestContext.fetch(request) else {
-            compoundedCallback(pageItems, [])
-            return
-        }
-        
-        requestContext.perform { [weak self] in ///for now this will help the reduce possibility for crash - better solution is to return media items in callback which is called inside context
-            guard let `self` = self else {
-                compoundedCallback(pageItems, [])
-                return
-            }
-            var tempoArray = pageItems
-            
-            let wrapedLocals = savedLocalals.map{ return WrapData(mediaItem: $0) }
-            
-            tempoArray.append(contentsOf: wrapedLocals)
-            tempoArray = self.sortByCurrentType(items: tempoArray, sortType: sortType)
-            
-            self.notAllowedLocalIDs = self.notAllowedLocalIDs.union(wrapedLocals.flatMap{$0.getTrimmedLocalID()})
-            
-            let actualArray = tempoArray.prefix(self.pageSize)
-            let leftovers = (tempoArray.count - actualArray.count > 0) ? tempoArray.suffix(from: actualArray.count) : []
-            compoundedCallback(Array(actualArray), Array(leftovers))
-        }
+        compoundedCallback(pageItems, [])
     }
     
     func appendNotAllowedItems(items: [Item]) {
@@ -83,7 +39,6 @@ final class PageCompounder {
     }
     
     func dropData() {
-        lastLocalPageAddedAction = nil
         notAllowedMD5s.removeAll()
         notAllowedLocalIDs.removeAll()
     }
@@ -109,16 +64,8 @@ final class PageCompounder {
                             guard let `self` = self else {
                                 return
                             }
-                            if compundedPage.count < self.pageSize, self.operationsService.inProcessLocalFiles {
-                                self.monitorDBLastAppendedPageFirst(lastItem: lastItem,
-                                                                    pageItems: compundedPage,
-                                                                    sortType: sortType,
-                                                                    predicate: compundedPredicate,
-                                                                    compoundedCallback: compoundedCallback)
-                            } else {
-                                compoundedCallback(compundedPage, leftovers)
-                            }
                             
+                            compoundedCallback(compundedPage, leftovers)
             })
             
         } else {
@@ -166,11 +113,8 @@ final class PageCompounder {
                         guard let `self` = self else {
                             return
                         }
-                        if compoundedPage.count < self.pageSize, self.operationsService.inProcessLocalFiles {
-                            self.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: compoundedPage, sortType: sortType, predicate: compundedPredicate, compoundedCallback: compoundedCallback)
-                        } else {
-                            compoundedCallback(compoundedPage, leftovers)
-                        }
+                        
+                        compoundedCallback(compoundedPage, leftovers)
         })
     }
     
@@ -198,171 +142,13 @@ final class PageCompounder {
                       sortType: sortType,
                       predicate: compundedPredicate,
                       compoundedCallback: { [weak self] compoundedPage, leftovers in
-                        guard let `self` = self else {
+                        guard let self = self else {
                             return
                         }
-                        if compoundedPage.count < self.pageSize, self.operationsService.inProcessLocalFiles {
-                            self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: compoundedPage, sortType: sortType, predicate: compundedPredicate, compoundedCallback: compoundedCallback)
-                            return
-                            
-                        } else {
-                           compoundedCallback(compoundedPage, leftovers)
-                        }
+                        compoundedCallback(compoundedPage, leftovers)
         })
     }
     
-    //MARK: - DB appending
-    private func monitorDBLastAppendedPageLast(firstItem: WrapData,
-                                        pageItems: [WrapData],
-                                           sortType: SortedRules,
-                                           predicate: NSCompoundPredicate,
-                                           compoundedCallback: @escaping CompoundedPageCallback) {
-
-            lastLocalPageAddedAction = { [weak self] freshlyDBAppendedItems in
-            self?.lastLocalPageAddedAction = nil
-                
-            guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
-                lastFreshLocalItem.metaDate <= firstItem.metaDate else {
-                    
-                    debugPrint("!!!? time for a recurcieve callback loop monitorDBLastAppendedPageLast")
-                    
-                    self?.compoundItems(pageItems: pageItems,
-                                        sortType: sortType,
-                                        predicate: predicate,
-                                        compoundedCallback: { [weak self] compoundedPage, leftovers  in
-                                            guard let `self` = self else {
-                                                compoundedCallback(pageItems, [])
-                                                return
-                                            }
-                                            if self.operationsService.inProcessLocalFiles,
-                                                compoundedPage.isEmpty {
-                                                self.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
-                                                return
-                                            } else if !compoundedPage.isEmpty {
-                                               ///latesst change
-                                                self.compoundItems(pageItems: pageItems,
-                                                                    sortType: sortType,
-                                                                    predicate: predicate,
-                                                                    compoundedCallback: compoundedCallback)
-                                            } else {
-                                                debugPrint("!!!? monitorDBLastAppendedPageLast last non empty")
-                                                compoundedCallback(compoundedPage, leftovers)
-                                            }
-                                            
-                    })
-                    
-                    return
-            }
-            debugPrint("!!!? regular callback monitorDBLastAppendedPageLast")
-            self?.compoundItems(pageItems: pageItems,
-                                sortType: sortType,
-                                predicate: predicate,
-                                compoundedCallback: { [weak self] compoundedPage, leftovers  in
-                                    guard !compoundedPage.isEmpty else {
-                                        self?.monitorDBLastAppendedPageLast(firstItem: firstItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
-                                        return
-                                    }
-                                    debugPrint("!!!? last non empty")
-                                    compoundedCallback(compoundedPage, leftovers)
-            })
-        }
-    }
-    
-    private func monitorDBLastAppendedPageFirst(lastItem: WrapData,
-                                           pageItems: [WrapData],
-                                           sortType: SortedRules,
-                                           predicate: NSCompoundPredicate,
-                                           compoundedCallback: @escaping CompoundedPageCallback) {
-        
-            lastLocalPageAddedAction = { [weak self] freshlyDBAppendedItems in
-            self?.lastLocalPageAddedAction = nil
-                
-            guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
-                lastFreshLocalItem.metaDate <= lastItem.metaDate else {
-                    guard let `self` = self else {
-                        return
-                    }
-                    guard self.operationsService.inProcessLocalFiles else {
-                        self.compoundItems(pageItems: pageItems,
-                                           sortType: sortType,
-                                           predicate: predicate,
-                                           compoundedCallback: compoundedCallback)
-                        return
-                    }
-                    self.monitorDBLastAppendedPageFirst(lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
-                    return
-            }
-            debugPrint("!!!? regular callback monitorDBLastAppendedPageFirst")
-            self?.compoundItems(pageItems: pageItems,
-                                sortType: sortType,
-                                predicate: predicate,
-                                compoundedCallback: { [weak self] compoundedPage, leftovers  in
-                                    
-                                    guard !compoundedPage.isEmpty else {
-                                        debugPrint("!!!? regular callback monitorDBLastAppendedPageFirst else")
-                                        /* or shpuld I use compundedPage.count >= self.pageSize ?*/
-                                        self?.monitorDBLastAppendedPageFirst(lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
-                                        return
-                                    }
-                                    debugPrint("!!!? first non empty")
-                                    compoundedCallback(compoundedPage, leftovers)
-            })
-        }
-    }
-    
-    private func monitorDBLastAppendedPageMiddle(firstItem: WrapData,
-                                                 lastItem: WrapData,
-                                           pageItems: [WrapData],
-                                           sortType: SortedRules,
-                                           predicate: NSCompoundPredicate,
-                                           compoundedCallback: @escaping CompoundedPageCallback) {
-        
-            lastLocalPageAddedAction = { [weak self] freshlyDBAppendedItems in
-            self?.lastLocalPageAddedAction = nil
-                
-            guard let lastFreshLocalItem = freshlyDBAppendedItems.last,
-                lastFreshLocalItem.metaDate <= firstItem.metaDate
-                else {
-                    
-                    guard let `self` = self else {
-                        return
-                    }
-                    guard self.operationsService.inProcessLocalFiles else {
-                        self.compoundItems(pageItems: pageItems,
-                                            sortType: sortType,
-                                            predicate: predicate,
-                                            compoundedCallback: compoundedCallback)
-                        return
-                    }
-                    self.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
-                    return
-            }
-            debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle")
-            self?.compoundItems(pageItems: pageItems,
-                                sortType: sortType,
-                                predicate: predicate,
-                                compoundedCallback: { [weak self] compoundedPage, leftovers  in
-                                    guard !compoundedPage.isEmpty else {
-                                       
-                                        debugPrint("!!!? regular callback monitorDBLastAppendedPageMiddle else")
-                                        guard let `self` = self else {
-                                            return
-                                        }
-                                        guard self.operationsService.inProcessLocalFiles else {
-                                            self.compoundItems(pageItems: pageItems,
-                                                               sortType: sortType,
-                                                               predicate: predicate,
-                                                               compoundedCallback: compoundedCallback)
-                                            return
-                                        }
-                                        self.monitorDBLastAppendedPageMiddle(firstItem: firstItem, lastItem: lastItem, pageItems: pageItems, sortType: sortType, predicate: predicate, compoundedCallback: compoundedCallback)
-                                        return
-                                    }
-                                    debugPrint("!!!? middle non empty")
-                                    compoundedCallback(compoundedPage, leftovers)
-            })
-        }
-    }
     
     
     // MARK: - sorting

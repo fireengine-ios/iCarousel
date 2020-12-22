@@ -174,13 +174,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
                     UIApplication.showErrorAlert(message: message)
                 }
-            case .smash:
-                let controller = RouterVC().getViewControllerForPresent()
-                controller?.showSpinner()
-                self.interactor.smash(item: selectedItems) {
-                    controller?.hideSpinner()
-                }
-                self.basePassingPresenter?.stopModeSelected()
             case .moveToTrash:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -222,12 +215,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
-            case .edit:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .edit))
-                RouterVC().getViewControllerForPresent()?.showSpinner()
-                self.interactor.edit(item: selectedItems, completion: {
-                    RouterVC().getViewControllerForPresent()?.hideSpinner()
-                })
             case .info:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .info))
                 if let firstSelected = selectedItems.first as? Item {
@@ -403,13 +390,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                         self.view.unselectAll()
                     })
                     
-                case .edit:
-                    action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                        RouterVC().tabBarVC?.showSpinner()
-                        self.interactor.edit(item: currentItems, completion: {
-                            RouterVC().tabBarVC?.hideSpinner()
-                        })
-                    })
                 case .download:
                     action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
                         self.interactor.download(item: currentItems)

@@ -41,14 +41,4 @@ class SplashRouter: SplashRouterInput {
         UIApplication.showErrorAlert(message: error.description)
     }
     
-    func goToSyncSettingsView(fromSplash: Bool = false) {
-        router.setNavigationController(controller: router.onboardingScreen)
-        
-        if fromSplash {
-            router.pushViewControllerWithoutAnimation(viewController: router.synchronyseScreen)
-        } else {
-            router.pushViewController(viewController: router.synchronyseScreen)
-        }
-    }
-    
 }

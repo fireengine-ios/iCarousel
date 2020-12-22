@@ -99,8 +99,6 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
     func succesLogin() {
         completeAsyncOperationEnableScreen()
         view.dropTimer()
-        
-        openAutoSyncIfNeeded()
     }
     
     func failLogin(message: String) {
@@ -167,21 +165,6 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
                                      buttonAction: deletedAccountHandler)
     }
 
-    
-    // MARK: - Utility methods
-    private func openAutoSyncIfNeeded() {
-        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpinner()
-            
-            /// from registration
-            if needToOpenAutoSync {
-                self?.router.goAutoSync()
-            }
-        }) { [weak self] error in
-            self?.view.hideSpinner()
-        }
-    }
-    
     // MARK: - Basic Presenter override
     override func outputView() -> Waiting? {
         return view

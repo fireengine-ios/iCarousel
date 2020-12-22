@@ -86,37 +86,31 @@ final class PushNotificationService {
             return
         }
         
-        trackIfNeeded(action: action)
-        
         let isLoggedIn = tokenStorage.accessToken != nil
         if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
         }
         
-        if isLoggedIn && action.isContained(in: [.login, .widgetLogout]) {
+        if isLoggedIn && action.isContained(in: [.login]) {
             clear()
             return
         }
                 
         switch action {
         case .main, .home: openMain()
-        case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
         case .floatingMenu: openFloatingMenu()
-        case .packages, .widgetQuota: openPackages()
-        case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: openPhotos()
+        case .packages: openPackages()
         case .videos: openVideos()
         case .albums: openAlbums()
         case .stories: openStories()
         case .allFiles: openAllFiles()
         case .music: openMusic()
         case .documents: openDocuments()
-        case .contactSync, .widgetNoBackup, .widgetOldBackup: openContactSync()
         case .periodicContactSync: openPeriodicContactSync()
         case .favorites: openFavorites()
         case .createStory: openCreateStory()
         case .contactUs: openContactUs()
         case .usageInfo: openUsageInfo()
-        case .autoUpload: openAutoUpload()
         case .recentActivities: openRecentActivities()
         case .email: openEmail()
         case .importDropbox: openImportDropbox()
@@ -124,21 +118,15 @@ final class PushNotificationService {
         case .faq: openFaq()
         case .passcode: openPasscode()
         case .loginSettings: openLoginSettings()
-        case .faceImageRecognition, .widgetFIRDisabled: openFaceImageRecognition()
-        case .people, .widgetFIR: openPeople()
+        case .faceImageRecognition: openFaceImageRecognition()
+        case .people: openPeople()
         case .things: openThings()
         case .places: openPlaces()
         case .http: openURL(notificationParameters)
-        case .login, .widgetLogout:
+        case .login:
             openLogin()
             clear()
         case .search: openSearch()
-        case .freeUpSpace, .widgetFreeUpSpace:
-            if FreeAppSpace.session.state == .finished && CacheManager.shared.isCacheActualized {
-                openFreeUpSpace()
-            } else {
-                openMain()
-            }
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
         case .changePassword: openChangePassword()
@@ -210,14 +198,7 @@ final class PushNotificationService {
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .homePageScreenIndex:
-                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
-                    assertionFailure("This index is non existent 😵")
-                    return
-                }
-                tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue
-            case .contactsSyncScreenIndex, .documentsScreenIndex://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+            case .documentsScreenIndex://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
@@ -229,9 +210,6 @@ final class PushNotificationService {
                     segmentedController.loadViewIfNeeded()
                     segmentedController.switchSegment(to: segmentIndex)
                 }
-                
-            case .photosScreenIndex:
-                tabBarVC.showPhotoScreen()
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
@@ -249,11 +227,7 @@ final class PushNotificationService {
     }
     
     private func openMain() {
-        openTabBarItem(index: .homePageScreenIndex)
-    }
-    
-    private func openSyncSettings() {
-        pushTo(router.autoUpload)
+        openTabBarItem(index: .documentsScreenIndex)
     }
     
     private func openFloatingMenu() {
@@ -266,10 +240,6 @@ final class PushNotificationService {
     
     private func openPackages() {
         pushTo(router.packages)
-    }
-    
-    private func openPhotos() {
-        openTabBarItem(index: .photosScreenIndex)
     }
     
     private func openVideos() {
@@ -295,11 +265,7 @@ final class PushNotificationService {
     private func openDocuments() {
         openTabBarItem(index: .documentsScreenIndex)
     }
-    
-    private func openContactSync() {
-        openTabBarItem(index: .contactsSyncScreenIndex)
-    }
-    
+
     private func openPeriodicContactSync() {
         pushTo(router.periodicContactsSync)
     }
@@ -319,10 +285,6 @@ final class PushNotificationService {
     
     private func openUsageInfo() {
         pushTo(router.usageInfo)
-    }
-    
-    private func openAutoUpload() {
-        pushTo(router.autoUpload)
     }
     
     private func openRecentActivities() {
@@ -470,14 +432,6 @@ final class PushNotificationService {
     private func openHiddenBin() {
         let controller = router.hiddenPhotosViewController()
         pushTo(controller)
-    }
-    
-    private func trackIfNeeded(action: PushNotificationAction) {
-        guard action.fromWidget else {
-            return
-        }
-        
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openWithWidget, eventLabel: .success)
     }
     
     private func openSharedWithMe() {
