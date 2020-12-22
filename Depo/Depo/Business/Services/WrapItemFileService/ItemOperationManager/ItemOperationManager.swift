@@ -80,6 +80,7 @@ protocol ItemOperationManagerViewProtocol: class {
     func didUnhideThings(items: [ThingsItem])
     
     func didMoveToTrashItems(_ items: [Item])
+    func didMoveToTrashSharedItems(_ items: [Item])
     func didMoveToTrashAlbums(_ albums: [AlbumItem])
     func didMoveToTrashPeople(items: [PeopleItem])
     func didMoveToTrashPlaces(items: [PlacesItem])
@@ -178,6 +179,7 @@ extension ItemOperationManagerViewProtocol {
     func didUnhideThings(items: [ThingsItem]) {}
     
     func didMoveToTrashItems(_ items: [Item]) {}
+    func didMoveToTrashSharedItems(_ items: [Item]) {}
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {}
     func didMoveToTrashPeople(items: [PeopleItem]) {}
     func didMoveToTrashPlaces(items: [PlacesItem]) {}
@@ -484,6 +486,12 @@ class ItemOperationManager: NSObject {
     func didMoveToTrashItems(_ items: [Item]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.didMoveToTrashItems(items) }
+        }
+    }
+    
+    func didMoveToTrashSharedItems(_ items: [Item]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashSharedItems(items) }
         }
     }
     
