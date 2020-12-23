@@ -70,10 +70,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func viewIsReady(collectionView: UICollectionView) {
         debugLog("BaseFilesGreedPresenter viewIsReady")
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.updateThreeDots(_:)),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots),
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateThreeDots), name: .updateThreeDots, object: nil)
 
         interactor.viewIsReady()
         if let unwrapedFilters = interactor.originalFilesTypeFilter {
@@ -329,7 +326,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.stopSelection()
     }
     
-    @objc func updateThreeDots(_ sender: Any) {
+    @objc func updateThreeDots() {
         DispatchQueue.main.async {
             self.updateThreeDotsButton()
         }
@@ -525,7 +522,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func dismissBottomBar(animated: Bool) {
         bottomBarPresenter?.dismiss(animated: animated)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
     func updateNoFilesView() {

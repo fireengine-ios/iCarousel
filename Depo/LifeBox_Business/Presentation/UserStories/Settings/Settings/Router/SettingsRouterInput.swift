@@ -12,14 +12,8 @@ protocol SettingsRouterInput {
     
     func goToOnboarding()
     
-    func goToConnectedAccounts()
-    
     func goToPermissions()
-    
-    func goToPeriodicContactSync()
-    
-    func goToFaceImage()
-    
+
     func goToHelpAndSupport()
     
     func goToTermsAndPolicy()

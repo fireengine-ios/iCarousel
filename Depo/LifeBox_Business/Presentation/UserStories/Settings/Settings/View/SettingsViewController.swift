@@ -9,12 +9,6 @@
 import UIKit
 
 protocol SettingsDelegate: class {
-    func goToConnectedAccounts()
-    
-    func goToPeriodicContactSync()
-    
-    func goToFaceImage()
-    
     func goToHelpAndSupport()
     
     func goToTermsAndPolicy() 
@@ -39,40 +33,7 @@ final class SettingsViewController: BaseViewController {
     
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
-    enum AllSectionTypes: Int {
-        case periodicContactSync
-        case faceImage
-        case connectAccounts
-        case permissions
-        case myActivities
-        case passcode
-        case security
-        case helpAndSupport
-        case termsAndPolicy
-        case logout
-        
-        var text: String {
-            switch self {
-            case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
-            case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
-            case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
-            case .permissions: return TextConstants.settingsViewCellPermissions
-            case .myActivities: return TextConstants.settingsViewCellActivityTimline
-            case .passcode: return TextConstants.settingsViewCellPasscode
-            case .security: return TextConstants.settingsViewCellLoginSettings
-            case .helpAndSupport: return TextConstants.settingsViewCellHelp
-            case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
-            case .logout: return TextConstants.settingsViewCellLogout
-            }
-        }
-        
-        static let allSectionOneTypes = [periodicContactSync, faceImage]
-        static let allSectionTwoTypes = [connectAccounts, permissions]
-        static let allSectionThreeTypes = [myActivities, passcode, security]
-        static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
-    }
-    
-    private var cellTypes = [[AllSectionTypes]]() {
+    private var cellTypes = [[SettingsTypes]]() {
         didSet {
             tableView?.reloadData()
         }
@@ -106,7 +67,7 @@ final class SettingsViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationBarWithGradientStyle()
+        setupNavBar()
     }
     
     override func viewDidLayoutSubviews() {
@@ -119,6 +80,20 @@ final class SettingsViewController: BaseViewController {
         super.viewWillDisappear(animated)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
+    
+    func setupNavBar() {
+        if isTabBarItem {
+            homePageNavigationBarStyle()
+        } else {
+            navigationBarWithGradientStyle()
+            if Device.isIpad {
+                splitViewController?.navigationController?.viewControllers.last?.title = TextConstants.settings
+            } else {
+                self.setTitle(withString: TextConstants.settings)
+            }
+        }
+    }
+
     
     private func setupTableView() {
         tableView.register(nibCell: SettingsTableViewCell.self)
@@ -199,24 +174,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch cellType {
-        case .periodicContactSync:
-            if let delegate = settingsDelegate {
-                delegate.goToPeriodicContactSync()
-            } else {
-                output.goToPeriodicContactSync()
-            }
-        case .faceImage:
-            if let delegate = settingsDelegate {
-                delegate.goToFaceImage()
-            } else {
-                output.goToFaceImage()
-            }
-        case .connectAccounts:
-            if let delegate = settingsDelegate {
-                delegate.goToConnectedAccounts()
-            } else {
-                output.goToConnectedAccounts()
-            }
         case .permissions:
             if let delegate = settingsDelegate {
                 delegate.goToPermissions()
@@ -231,8 +188,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case .passcode:
             showPasscodeOrPasscodeSettings()
-        case .security:
-            output.goTurkcellSecurity()
+
         case .helpAndSupport:
             if let delegate = settingsDelegate {
                 delegate.goToHelpAndSupport()
@@ -294,16 +250,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 extension SettingsViewController: SettingsViewInput {
     
     func prepareCellsData(isPermissionShown: Bool) {
-        cellTypes = []
-        var accountCells = [AllSectionTypes.connectAccounts]
-        if isPermissionShown {
-            accountCells.append(AllSectionTypes.permissions)
-        }
-        cellTypes = [
-            AllSectionTypes.allSectionOneTypes,
-            accountCells,
-            AllSectionTypes.allSectionThreeTypes,
-            AllSectionTypes.allSectionFourTypes]
+        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown)
     }
     
     func showProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool) {

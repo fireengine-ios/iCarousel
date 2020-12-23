@@ -8,59 +8,6 @@
 
 import UIKit
 
-enum TabBarItem: CaseIterable {
-    case home
-    case gallery
-    case plus
-    case contacts
-    case allFiles
-    
-    var title: String {
-        switch self {
-        case .home:
-            return TextConstants.tabBarItemHomeLabel
-        case .gallery:
-            return TextConstants.tabBarItemGalleryLabel
-        case .plus:
-            return ""
-        case .contacts:
-            return TextConstants.tabBarItemContactsLabel
-        case .allFiles:
-            return TextConstants.tabBarItemAllFilesLabel
-        }
-    }
-    
-    var icon: UIImage? {
-        switch self {
-        case .home:
-            return UIImage(named: "outlineHome")
-        case .gallery:
-            return UIImage(named: "outlinePhotosVideos")
-        case .plus:
-            return UIImage(named: "")
-        case .contacts:
-            return UIImage(named: "outlineContacts")
-        case .allFiles:
-            return UIImage(named: "outlineDocs")
-        }
-    }
-    
-    var accessibilityLabel: String {
-        switch self {
-        case .home:
-            return TextConstants.accessibilityHome
-        case .gallery:
-            return TextConstants.accessibilityPhotosVideos
-        case .plus:
-            return ""
-        case .contacts:
-            return TextConstants.periodicContactsSync
-        case .allFiles:
-            return TextConstants.homeButtonAllFiles
-        }
-    }
-}
-
 typealias ImageNameToTitleTupple = (imageName: String, title: String, accessibilityTitle: String)
 
 class CustomTabBar: UITabBar {

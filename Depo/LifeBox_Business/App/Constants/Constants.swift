@@ -2193,5 +2193,11 @@ struct TextConstants {
     static let privateShareMaxNumberOfUsersMessageFormat = NSLocalizedString("private_share_start_max_number_of_users", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareMessageLimit = NSLocalizedString("private_share_long_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePhoneOrMailLimit = NSLocalizedString("private_share_long_emailmsisdn", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+}
+
+extension TextConstants {
+    static let tabBarItemMyDisk = NSLocalizedString("tabbar_item_my_disk", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemSharedFiles = NSLocalizedString("tabbar_item_shared_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemSharedArea = NSLocalizedString("tabbar_item_shared_area", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemSettings = NSLocalizedString("tabbar_item_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

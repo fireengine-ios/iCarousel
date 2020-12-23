@@ -16,12 +16,17 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     func configurateWithControllers(leftViewController: SettingsViewController, controllers: [UIViewController]) {
         leftViewController.settingsDelegate = self
         leftController = leftViewController
+        controllers.compactMap { $0 as? BaseViewController }.forEach {
+            $0.needToShowTabBar = leftViewController.needToShowTabBar
+        }
+
         var controllersArray = [UIViewController]()
         controllersArray.append(leftViewController)
         controllersArray.append(contentsOf: controllers)
         
         splitViewController.viewControllers = controllersArray
         splitViewController.preferredDisplayMode = .allVisible
+        leftController?.setupNavBar()
         //splitViewController.delegate = self
     }
     
