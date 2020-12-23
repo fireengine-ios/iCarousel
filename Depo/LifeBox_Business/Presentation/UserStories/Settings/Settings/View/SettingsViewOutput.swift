@@ -28,8 +28,8 @@ protocol SettingsViewOutput {
     //Photo related methods - below
     func onChangeUserPhoto(quotaInfo: QuotaInfoResponse?)
         
-    func onChooseFromPhotoLibriary(onViewController viewController: UIViewController)
-    func onChooseFromPhotoCamera(onViewController viewController: UIViewController)
+    func onChooseFromPhotoLibriary<T: UIViewController>(onViewController viewController: T) where T: UIImagePickerControllerDelegate & UINavigationControllerDelegate
+    func onChooseFromPhotoCamera<T: UIViewController>(onViewController viewController: T) where T: UIImagePickerControllerDelegate & UINavigationControllerDelegate
     
     func photoCaptured(data: Data)
     

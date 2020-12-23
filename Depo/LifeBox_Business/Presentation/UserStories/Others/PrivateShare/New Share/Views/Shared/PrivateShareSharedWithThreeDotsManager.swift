@@ -30,7 +30,6 @@ final class PrivateShareSharedWithThreeDotsManager {
                 return
                 
             case .innerFolder:
-                //TODO:
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
@@ -45,14 +44,12 @@ final class PrivateShareSharedWithThreeDotsManager {
                 return
                 
             case .innerFolder:
-                //TODO:
                 let types = actionTypes(for: selectedItems)
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     
     private func actionTypes(for items: [WrapData]) -> [ElementTypes] {
-        //TODO:
         return []
     }
 }
