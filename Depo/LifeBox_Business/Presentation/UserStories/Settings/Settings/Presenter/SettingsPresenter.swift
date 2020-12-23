@@ -113,14 +113,6 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToActivityTimeline()
     }
     
-    func goToPackagesWith(quotaInfo: QuotaInfoResponse?) {
-        router.goToPackagesWith(quotaInfo: quotaInfo)
-    }
-    
-    func goToPremium() {
-        router.goToPremium()
-    }
-    
     func goToPasscodeSettings(needReplaceOfCurrentController: Bool) {
         router.goToPasscodeSettings(isTurkcell: isTurkCellUser, inNeedOfMail: isMailVereficationRequired, needReplaceOfCurrentController: needReplaceOfCurrentController)
     }

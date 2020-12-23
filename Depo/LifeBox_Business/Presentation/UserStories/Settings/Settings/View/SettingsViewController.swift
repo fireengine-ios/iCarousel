@@ -332,7 +332,7 @@ extension SettingsViewController: SettingsViewInput {
     
     private func getAccoutDetails(quotaInfo: QuotaInfoResponse?) -> UIAlertAction {
         return UIAlertAction(title: TextConstants.actionSheetAccountDetails, style: .default, handler: { _ in
-            self.output.goToPackagesWith(quotaInfo: quotaInfo)
+//            self.output.goToPackagesWith(quotaInfo: quotaInfo)
         })
     }
 }
@@ -344,11 +344,7 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
     }
     
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?) {
-        output.goToPackagesWith(quotaInfo: quotaInfo)
-    }
-    
-    func premiumButtonPressed() {
-        output.goToPremium()
+        
     }
 }
 

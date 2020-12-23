@@ -15,7 +15,6 @@ protocol SearchViewOutput {
     func searchWith(searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder)
     func viewIsReady(collectionView: UICollectionView)
     func isShowedSpinner() -> Bool
-    func getSuggestion(text: String)
     func tapCancel()
     func onClearRecentSearchesTapped()
     
@@ -27,7 +26,4 @@ protocol SearchViewOutput {
     func viewWillDisappear()
     
     func moreActionsPressed(sender: Any)
-    
-    func openFaceImageItems(category: SearchCategory)
-    func openFaceImage(item: SuggestionObject)
 }

@@ -62,15 +62,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     let router = RouterVC()
     
     private var fileService = WrapItemFileService()
-    private let albumService = PhotosAlbumService()
-    private let peopleService = PeopleService()
-    private let thingsService = ThingsService()
-    private let placesService = PlacesService()
     
     private lazy var hiddenService = HiddenService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
-    private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
     private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
     
@@ -315,19 +309,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         trackScreen(.fileOperationConfirmPopup(.trash))
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
         
-        let message: String
-        if isAlbums(items) {
-            if (items.first as? Item)?.status == .hidden {
-                message = TextConstants.moveToTrashHiddenAlbumsConfirmationPopupText
-            } else {
-                message = TextConstants.deleteAlbums
-            }
-        } else {
-            message = TextConstants.deleteFilesText
-        }
-        
         let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                         message: message,
+                                         message: TextConstants.deleteFilesText,
                                          image: .delete,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
@@ -336,81 +319,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         router.presentViewController(controller: popup, animated: false)
         
-    }
-    
-    func hide(items: [BaseDataSourceItem]) {
-        let remoteItems = items.filter { !$0.isLocalItem }
-        guard !remoteItems.isEmpty else {
-            assertionFailure("Locals only must not be passed to hide them")
-            return
-        }
-        
-        if let albumItems = items as? [AlbumItem] {
-            hideAlbums(items: albumItems)
-            
-        } else if let items = remoteItems as? [Item] {
-            hideActionService.startOperation(for: .photos(items),
-                                             output: self.output,
-                                             success: self.successAction(elementType: .hide, itemsType: .items, relatedItems: items),
-                                             fail: self.failAction(elementType: .hide, relatedItems: items))
-            
-        } else {
-            assertionFailure("Unexpected type of items")
-            
-        }
-    }
-    
-    private func hideAlbums(items: [BaseDataSourceItem]) {
-        guard let items = items as? [AlbumItem] else {
-           assertionFailure("Unexpected type of items")
-           return
-        }
-           
-        let remoteItems = items.filter { !$0.isLocalItem }
-        guard !remoteItems.isEmpty else {
-            assertionFailure("Locals only must not be passed to hide them")
-            return
-        }
-
-        hideActionService.startOperation(for: .albums(remoteItems),
-                                         output: self.output,
-                                         success: self.successAction(elementType: .hide, itemsType: .albums, relatedItems: items),
-                                         fail: self.failAction(elementType: .hide, relatedItems: items))
-    }
-    
-    func unhide(items: [BaseDataSourceItem]) {
-        let remoteItems = items.filter { !$0.isLocalItem }
-        guard !remoteItems.isEmpty else {
-            assertionFailure("Locals only must not be passed to hide them")
-            return
-        }
-        
-        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .cancel)
-            vc.close()
-        }
-        
-        let okHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .ok)
-            self?.output?.operationStarted(type: .unhide)
-            vc.close { [weak self] in
-                self?.unhideItems(remoteItems)
-            }
-        }
-        
-        trackScreen(.fileOperationConfirmPopup(.unhide))
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.UnhideConfirmPopUp())
-        
-        let message = isAlbums(items) ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
-        let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
-                                         message: message,
-                                         image: .unhide,
-                                         firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
-                                         firstAction: cancelHandler,
-                                         secondAction: okHandler)
-        
-        router.presentViewController(controller: popup, animated: false)
     }
     
     func restore(items: [BaseDataSourceItem]) {
@@ -438,9 +346,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
 
         let message: String
-        if isAlbums(items) {
-            message = TextConstants.restoreAlbumsConfirmationPopupText
-        } else if items.allSatisfy({ $0.fileType == .folder }) {
+        if items.allSatisfy({ $0.fileType == .folder }) {
             message = TextConstants.restoreFoldersConfirmationPopupText
         } else {
             message = TextConstants.restoreItemsConfirmationPopupText
@@ -455,86 +361,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         router.presentViewController(controller: controller)
         router.hideSpiner()
-    }
-    
-    private func removeAlbumItems(_ items: [BaseDataSourceItem]) {
-        let okHandler: VoidHandler = { [weak self] in
-            guard let album = self?.router.getParentUUID(), let items = items as? [Item] else {
-                return
-            }
-            
-            self?.output?.operationStarted(type: .removeFromAlbum)
-            
-            let parameters = DeletePhotosFromAlbum(albumUUID: album, photos: items)
-            self?.albumService.deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
-                ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
-                DispatchQueue.main.async {
-                    self?.showSnackbar(elementType: .removeFromAlbum, relatedItems: [])
-                    self?.output?.operationFinished(type: .removeFromAlbum)
-                }
-            }, fail: { [weak self] errorRespone in
-                DispatchQueue.main.async {
-                    self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
-                }
-            })
-        }
-        
-        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
-                                              message: TextConstants.removeFromAlbum,
-                                              image: .delete,
-                                              firstButtonTitle: TextConstants.cancel,
-                                              secondButtonTitle: TextConstants.ok,
-                                              secondAction: { vc in
-                                                vc.close(completion: okHandler)
-        })
-        
-        router.presentViewController(controller: controller)
-    }
-    
-    private func deletePhotosFromAlbum(items: [BaseDataSourceItem], item: Item) {
-        let okHandler: VoidHandler = { [weak self] in
-            guard let self = self, let items = items as? [Item], item.fileType.isFaceImageType, let id = item.id else {
-                return
-            }
-            
-            let album = self.router.getParentUUID()
-            
-            self.output?.operationStarted(type: .removeFromFaceImageAlbum)
-            
-            let successHandler: PhotosAlbumOperation = { [weak self] in
-                DispatchQueue.main.async {
-                    ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
-                    self?.showSnackbar(elementType: .removeFromFaceImageAlbum, relatedItems: [])
-                    self?.output?.operationFinished(type: .removeFromFaceImageAlbum)
-                }
-            }
-            
-            let failHandler: FailResponse = { [weak self] error in
-                self?.output?.operationFailed(type: .removeFromFaceImageAlbum, message: error.description)
-            }
-
-            switch item.fileType {
-            case .faceImage(.people):
-                self.peopleService.deletePhotosFromAlbum(id: id, photos: items, success: successHandler, fail: failHandler)
-            case .faceImage(.places):
-                self.placesService.deletePhotosFromAlbum(uuid: album, photos: items, success: successHandler, fail: failHandler)
-            case .faceImage(.things):
-                self.thingsService.deletePhotosFromAlbum(id: id, photos: items, success: successHandler, fail: failHandler)
-            default:
-                break
-            }
-        }
-        
-        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
-                                              message: TextConstants.removeFromAlbum,
-                                              image: .delete,
-                                              firstButtonTitle: TextConstants.cancel,
-                                              secondButtonTitle: TextConstants.ok,
-                                              secondAction: { vc in
-                                                vc.close(completion: okHandler)
-        })
-        
-        router.presentViewController(controller: controller)
     }
     
     func move(item: [BaseDataSourceItem], toPath: String) {
@@ -633,50 +459,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: item.count))
             }
             
-            //FIXME: transform all to BaseDataSourceItem
-            if let item = item.first, item.fileType.isFaceImageAlbum || item.fileType.isFaceImageType {
-                downloadFaceImageAlbum(item: item)
-            } else {
-                let successAction = { [weak self] in
-                    if item.allSatisfy ({ !$0.isOwner }) {
-                        self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
-                    }
-                    self?.successAction(elementType: .download, relatedItems: item)()
+            let successAction = { [weak self] in
+                if item.allSatisfy ({ !$0.isOwner }) {
+                    self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
                 }
-                
-                fileService.download(items: item, toPath: "",
-                                     success: successAction,
-                                     fail: failAction(elementType: .download))
+                self?.successAction(elementType: .download, relatedItems: item)()
             }
-        } else if let albums = item as? [AlbumItem] {
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: .album, count: albums.count))
-            output?.startAsyncOperationDisableScreen()
-            albumService.loadItemsBy(albums: albums, success: { [weak self] itemsByAlbums in
-                let allItems = itemsByAlbums.flatMap { $1.filter { !$0.isLocalItem }}
-                self?.output?.completeAsyncOperationEnableScreen()
-                self?.fileService.download(itemsByAlbums: itemsByAlbums,
-                                           success: self?.successAction(elementType: .download, relatedItems: allItems),
-                                           fail: self?.failAction(elementType: .download))
-            })
+            
+            fileService.download(items: item, toPath: "",
+                                 success: successAction,
+                                 fail: failAction(elementType: .download))
+            
         }
-    }
-    
-    func createStory(items: [BaseDataSourceItem]) {
-        sync(items: items, action: {
-            DispatchQueue.main.async {
-                guard let items = items as? [Item] else {
-                    let error = CustomErrors.text("An error has occured while images converting.")
-                    UIApplication.showErrorAlert(message: error.localizedDescription)
-                    return
-                }
-                
-                let router = RouterVC()
-                let controller = router.createStory(items: items)
-                router.pushViewController(viewController: controller)
-            }
-            }, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.description)
-        })
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {
@@ -699,29 +493,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     // Photo Action
     
-    func addToAlbum(items: [BaseDataSourceItem]) {
-        sync(items: items, action: { [weak self] in
-            if let vc = self?.router.addPhotosToAlbum(photos: items) {
-                DispatchQueue.main.async {
-                    self?.router.pushOnPresentedView(viewController: vc)
-                }
-            }
-            }, fail: { errorResponse in
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
-                UIApplication.showErrorAlert(message: errorResponse.description)
-        })
-    }
-    
     func backUp(items: [BaseDataSourceItem]) {
         
-    }
-    
-    func removeFromAlbum(items: [BaseDataSourceItem]) {
-        removeAlbumItems(items)
-    }
-    
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], item: Item) {
-        deletePhotosFromAlbum(items: items, item: item)
     }
     
     func photos(items: [BaseDataSourceItem]) {
@@ -823,9 +596,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeletePermanentlyConfirmPopUp())
         
         let message: String
-        if isAlbums(items) {
-            message = TextConstants.deleteAlbumsConfirmationPopupText
-        } else if items.allSatisfy({ $0.fileType == .folder }) {
+        if items.allSatisfy({ $0.fileType == .folder }) {
             message = TextConstants.deleteFoldersConfirmationPopupText
         } else {
             message = TextConstants.deleteItemsConfirmationPopupText
@@ -947,25 +718,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: popup, animated: false)
     }
     
-    
-    func removeAlbums(items: [BaseDataSourceItem]) {
-        let okHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.output?.operationStarted(type: .moveToTrash)
-            vc.close { [weak self] in
-                self?.removeAlbums(items)
-            }
-        }
-
-        let popup = PopUpController.with(title: TextConstants.actionSheetRemove,
-                                         message: TextConstants.removeAlbums,
-                                         image: .delete,
-                                         firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
-                                         secondAction: okHandler)
-        
-        router.presentViewController(controller: popup, animated: false)
-    }
-    
     func emptyTrashBin() {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
 //            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
@@ -988,16 +740,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          secondAction: okHandler)
         
         router.presentViewController(controller: popup, animated: false)
-    }
-    
-    private func removeAlbums(_ items: [BaseDataSourceItem]) {
-        guard let albums = items as? [AlbumItem] else {
-            return
-        }
-        
-        albumService.moveToTrash(albums: albums, albumItems: [], success: { [weak self] _ in
-            self?.successAction(elementType: .removeAlbum)()
-        }, fail: failAction(elementType: .removeAlbum))
     }
     
     private func deleteAllFromTrashBin() {
@@ -1045,43 +787,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
     }
     
-    private func downloadFaceImageAlbum(item: Item) {
-        let successHandler: AlbumOperationResponse = { [weak self] album in
-            let albumItem = AlbumItem(remote: album)
-            self?.albumService.loadItemsBy(albums: [albumItem], success: { [weak self] itemsByAlbums in
-                let allItems = itemsByAlbums.flatMap { $1.filter { !$0.isLocalItem }}
-                self?.fileService.download(itemsByAlbums: itemsByAlbums,
-                                           success: self?.successAction(elementType: .download, relatedItems: allItems),
-                                           fail: self?.failAction(elementType: .download))
-            })
-        }
-        
-        let failHandler: FailResponse = { error in
-            UIApplication.showErrorAlert(message: error.description)
-        }
-        
-        guard let id = item.id else {
-            assertionFailure()
-            return
-        }
-        
-        if item.fileType == .faceImage(.people) {
-            peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
-            
-        } else if item.fileType == .faceImageAlbum(.things) {
-            thingsService.getThingsAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
-            
-        } else if item.fileType == .faceImage(.places) {
-            placesService.getPlacesAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
-        }
-    }
-    
     func trackEvent(elementType: ElementTypes) {
         switch elementType {
         case .print:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
-        case .smash:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smash)
         default:
             break
         }
@@ -1109,11 +818,6 @@ extension MoreFilesActionsInteractor {
             DispatchQueue.main.async {
                 self.output?.operationFinished(type: elementType)
                 self.router.hideSpiner()
-                
-                // handle hide popups in HideActionService
-                guard elementType != .hide else {
-                    return
-                }
                 
                 self.output?.successPopupWillAppear()
                 if SnackbarType(operationType: elementType) != nil {
@@ -1176,22 +880,6 @@ extension MoreFilesActionsInteractor {
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)
             }
-        case .hide:
-            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
-            typeToCountDictionary.keys.forEach {
-                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Hide(status: successStatus, type: $0, count: count) else {
-                    return
-                }
-                AnalyticsService.sendNetmeraEvent(event: event)
-            }
-        case .unhide:
-            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
-            typeToCountDictionary.keys.forEach {
-                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Unhide(status: successStatus, type: $0, count: count) else {
-                    return
-                }
-                AnalyticsService.sendNetmeraEvent(event: event)
-            }
         case .delete:
             let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
             typeToCountDictionary.keys.forEach {
@@ -1210,8 +898,6 @@ extension MoreFilesActionsInteractor {
             }
         case .addToFavorites:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToFavorites(status: successStatus))
-        case .removeFromAlbum:
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.RemoveFromAlbum(status: successStatus))
         default:
             break
         }
@@ -1254,38 +940,18 @@ extension MoreFilesActionsInteractor {
         _ success: @escaping FileOperation,
         _ fail: @escaping ((Error) -> Void)
     ) -> ()
-    
-    typealias DivorceAlbumsOperation = (
-        _ albums: [AlbumItem],
-        _ success: @escaping FileOperation,
-        _ fail: @escaping ((Error) -> Void)
-    ) -> ()
 
     private func divorceItems(
         type: ElementTypes,
         items: [BaseDataSourceItem],
-        itemsOperation: @escaping DivorceItemsOperation,
-        albumsOperation: @escaping DivorceAlbumsOperation,
-        firOperation: @escaping DivorceItemsOperation)
+        itemsOperation: @escaping DivorceItemsOperation)
     {
         output?.startAsyncOperationDisableScreen()
-        
-        var peopleItems = [PeopleItem]()
-        var placesItems = [PlacesItem]()
-        var thingsItems = [ThingsItem]()
-        var albumItems = [AlbumItem]()
+
         var photosVideos = [Item]()
 
         items.forEach {
-            if let peopleItem = $0 as? PeopleItem {
-                peopleItems.append(peopleItem)
-            } else if let placeItem = $0 as? PlacesItem {
-                placesItems.append(placeItem)
-            } else if let thingItem = $0 as? ThingsItem {
-                thingsItems.append(thingItem)
-            } else if let albumItem = $0 as? AlbumItem {
-                albumItems.append(albumItem)
-            } else if let item = $0 as? Item {
+            if let item = $0 as? Item {
                 photosVideos.append(item)
             }
         }
@@ -1308,26 +974,6 @@ extension MoreFilesActionsInteractor {
             itemsOperation(photosVideos, success, fail)
         }
         
-        if !albumItems.isEmpty {
-            group.enter()
-            albumsOperation(albumItems, success, fail)
-        }
-        
-        if !placesItems.isEmpty {
-            group.enter()
-            firOperation(placesItems, success, fail)
-        }
-        
-        if !thingsItems.isEmpty {
-            group.enter()
-            firOperation(thingsItems, success, fail)
-        }
-        
-        if !peopleItems.isEmpty {
-            group.enter()
-            firOperation(peopleItems, success, fail)
-        }
-        
         group.notify(queue: DispatchQueue.main) { [weak self] in
             self?.output?.completeAsyncOperationEnableScreen()
             if let error = error {
@@ -1335,10 +981,7 @@ extension MoreFilesActionsInteractor {
                 self?.failAction(elementType: type, relatedItems: items)(errorResponse)
             } else {
                 let itemsType: DivorseItems
-                if self?.isAlbums(items) == true {
-                    itemsType = .albums
-                    
-                } else if photosVideos.allSatisfy({ $0.fileType == .folder }) {
+                if photosVideos.allSatisfy({ $0.fileType == .folder }) {
                     itemsType = .folders
                     
                 } else {
@@ -1347,54 +990,6 @@ extension MoreFilesActionsInteractor {
                 
                 self?.successAction(elementType: type, itemsType: itemsType, relatedItems: items)()
             }
-        }
-    }
-}
-
-//MARK: - UNHIDE
-extension MoreFilesActionsInteractor {
-    private func unhideItems(_ items: [BaseDataSourceItem]) {
-        divorceItems(type: .unhide,
-                     items: items,
-                     itemsOperation:
-            { [weak self] items, success, fail in
-                        self?.unhideSelectedItems(items, success: success, fail: fail)
-            },
-                     
-                     albumsOperation:
-            { [weak self] items, success, fail in
-                        self?.unhideAlbums(items, success: success, fail: fail)
-            },
-                     
-                     firOperation:
-            { [weak self] items, success, fail in
-                        self?.unhideFIRAlbums(items, success: success, fail: fail)
-            })
-    }
-    
-    private func unhideSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackFileOperationGAEvent(operationType: .unhide, items: items)
-        fileService.unhide(items: items, success: success, fail: fail)
-    }
-    
-    private func unhideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackAlbumOperationGAEvent(operationType: .unhide, albums: items)
-        fileService.unhideAlbums(items, success: success, fail: fail)
-    }
-    
-    private func unhideFIRAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        if let items = items as? [PeopleItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .unhide, itemsType: .people, itemsCount: items.count)
-            fileService.unhidePeople(items: items, success: success, fail: fail)
-
-        } else if let items = items as? [ThingsItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .unhide, itemsType: .things, itemsCount: items.count)
-            fileService.unhideThings(items: items, success: success, fail: fail)
-
-        } else if let items = items as? [PlacesItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .unhide, itemsType: .places, itemsCount: items.count)
-            fileService.unhidePlaces(items: items, success: success, fail: fail)
-
         }
     }
 }
@@ -1408,16 +1003,6 @@ extension MoreFilesActionsInteractor {
                  itemsOperation:
         { [weak self] items, success, fail in
                 self?.moveToTrashSelectedItems(items, success: success, fail: fail)
-        },
-                 
-                 albumsOperation:
-        { [weak self] items, success, fail in
-                self?.moveToTrashAlbums(items, success: success, fail: fail)
-        },
-                 
-                 firOperation:
-        { [weak self] items, success, fail in
-                self?.moveToTrashFIRAlbums(items, success: success, fail: fail)
         })
     }
     
@@ -1432,28 +1017,6 @@ extension MoreFilesActionsInteractor {
             self?.removeItemsFromPlayer(items: moveToTrashItems)
             success()
         }, fail: fail)
-    }
-    
-    private func moveToTrashAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackAlbumOperationGAEvent(operationType: .trash, albums: items)
-        albumService.moveToTrash(albums: items, success: { _ in
-            success()
-        }, fail: fail)
-    }
-    
-    private func moveToTrashFIRAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        if let items = items as? [PeopleItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .people, itemsCount: items.count)
-            fileService.moveToTrashPeople(items: items, success: success, fail: fail)
-
-        } else if let items = items as? [ThingsItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .things, itemsCount: items.count)
-            fileService.moveToTrashThings(items: items, success: success, fail: fail)
-
-        } else if let items = items as? [PlacesItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .places, itemsCount: items.count)
-            fileService.deletePlaces(items: items, success: success, fail: fail)
-        }
     }
     
     private func moveToTrashShared(_ items: [Item]) {
@@ -1487,16 +1050,6 @@ extension MoreFilesActionsInteractor {
                      itemsOperation:
             { [weak self] items, success, fail in
                         self?.deleteSelectedItems(items, success: success, fail: fail)
-            },
-                     
-                     albumsOperation:
-            { [weak self] items, success, fail in
-                        self?.deleteAlbums(items, success: success, fail: fail)
-            },
-                     
-                     firOperation:
-            { [weak self] items, success, fail in
-                        self?.deleteFIRAlbums(items, success: success, fail: fail)
             })
     }
     
@@ -1506,31 +1059,6 @@ extension MoreFilesActionsInteractor {
             self?.removeItemsFromPlayer(items: items)
             success()
         }, fail: fail)
-    }
-    
-    private func deleteAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackAlbumOperationGAEvent(operationType: .delete, albums: items)
-        albumService.completelyDelete(albums: items, success: { _ in
-            success()
-        }, fail: { errorResponse in
-            fail(errorResponse)
-        })
-    }
-    
-    private func deleteFIRAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        if let items = items as? [PeopleItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .delete, itemsType: .people, itemsCount: items.count)
-            fileService.deletePeople(items: items, success: success, fail: fail)
-
-        } else if let items = items as? [ThingsItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .delete, itemsType: .things, itemsCount: items.count)
-            fileService.deleteThings(items: items, success: success, fail: fail)
-
-        } else if let items = items as? [PlacesItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .delete, itemsType: .places, itemsCount: items.count)
-            fileService.deletePlaces(items: items, success: success, fail: fail)
-
-        }
     }
 }
 
@@ -1542,16 +1070,6 @@ extension MoreFilesActionsInteractor {
                      itemsOperation:
             { [weak self] items, success, fail in
                         self?.putBackSelectedItems(items, success: success, fail: fail)
-            },
-                     
-                     albumsOperation:
-            { [weak self] items, success, fail in
-                        self?.putBackAlbums(items, success: success, fail: fail)
-            },
-                     
-                     firOperation:
-            { [weak self] items, success, fail in
-                        self?.putBackFIRAlbums(items, success: success, fail: fail)
             })
     }
     
@@ -1561,35 +1079,5 @@ extension MoreFilesActionsInteractor {
             self?.removeItemsFromPlayer(items: items)
             success()
         }, fail: fail)
-    }
-    
-    private func putBackAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackAlbumOperationGAEvent(operationType: .restore, albums: items)
-        fileService.putBackAlbums(items, success: success, fail: fail)
-    }
-    
-    private func putBackFIRAlbums(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        if let items = items as? [PeopleItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .restore, itemsType: .people, itemsCount: items.count)
-            fileService.putBackPeople(items: items, success: success, fail: fail)
-
-        } else if let items = items as? [ThingsItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .restore, itemsType: .things, itemsCount: items.count)
-            fileService.putBackThings(items: items, success: success, fail: fail)
-
-        } else if let items = items as? [PlacesItem] {
-            analyticsService.trackFileOperationGAEvent(operationType: .restore, itemsType: .places, itemsCount: items.count)
-            fileService.putBackPlaces(items: items, success: success, fail: fail)
-
-        }
-    }
-}
-
-extension MoreFilesActionsInteractor {
-    private func isAlbums(_ items: [Any]) -> Bool {
-        return items is [PlacesItem] ||
-            items is [PeopleItem] ||
-            items is [ThingsItem] ||
-            items is [AlbumItem]
     }
 }

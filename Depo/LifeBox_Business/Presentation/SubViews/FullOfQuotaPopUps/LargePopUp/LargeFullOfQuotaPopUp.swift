@@ -145,11 +145,6 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     @IBAction func onExpandButton() {
         close(isFinalStep: false) { [weak self] in
             self?.delegate?.onOpenExpandTap()
-
-            let router = RouterVC()
-            let viewController = router.packages
-            viewController.needToShowTabBar = false
-            router.pushViewController(viewController: viewController)
         }
         analyticsHandler(eventLabel: .overQuota(.expandMyStorage(doNotShowAgain)))
     }

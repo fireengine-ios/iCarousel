@@ -343,22 +343,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func canShowAlbumsFilters(filters: [GeneralFilesFiltrationType]) -> Bool {
-        for filter in filters {
-            switch filter {
-            case   .fileType(.photoAlbum):
-                return true
-            default:
-                break
-            }
-        }
         return false
     }
     
     func canUploadFromLifeBox(filters: [GeneralFilesFiltrationType]) -> Bool {
         for filter in filters {
             switch filter {
-            case .fileType(.photoAlbum):
-                return true
             case .fileType(.folder):
                 return true
             default:
@@ -1881,59 +1871,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func newAlbumCreated(){
-        if let unwrapedFilters = originalFilters,
-            canShowAlbumsFilters(filters: unwrapedFilters) {
-            delegate?.needReloadData()
-        }
-    }
-    
-    func newStoryCreated() {
-        
-    }
-    
     func finishUploadFiles() { }
-    
-    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
-        debugPrint("updatedAlbumCoverPhoto")
-        ///Need further testing, seems like we dont need this any longer.
-//        updateCellsForObjects(objectsForDelete: [], objectsForUpdate: [item as! WrapData])
-    }
-    
-    func albumsDeleted(albums: [AlbumItem]) {
-        
-    }
-    
-    func startUploadFilesToAlbum(files: [WrapData]) {
-        guard let unwrapedFilters = originalFilters,
-            isAlbumDetail(filters: unwrapedFilters) else {
-            return
-        }
-        uploadToAlbumItems.append(contentsOf: files.map {$0.uuid})
-    }
-    
-    func fileAddedToAlbum(item: WrapData, error: Bool) {
-        guard let unwrapedFilters = originalFilters,
-            isAlbumDetail(filters: unwrapedFilters) else {
-                return
-        }
-        if let index = uploadToAlbumItems.index(of: item.uuid) {
-            uploadToAlbumItems.remove(at: index)
-        }
-        if uploadToAlbumItems.isEmpty {
-            delegate?.needReloadData()
-            updateCoverPhoto()
-        }
-    }
-    
-    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
-        if let unwrapedFilters = originalFilters,
-            isAlbumDetail(filters: unwrapedFilters) {
-            delegate?.needReloadData()
-        }
-        updateCoverPhoto()
-    }
-    
+
     func filesUpload(count: Int, toFolder folderUUID: String) {
         if let unwrapedFilters = originalFilters,
             canUploadFromLifeBox(filters: unwrapedFilters) {
@@ -2014,32 +1953,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func didHideItems(_ items: [WrapData]) {
-        deleteItems(items: items)
-    }
-    
-    func didHideAlbums(_ albums: [AlbumItem]) {
-        albumsDeleted(albums: albums)
-    }
-    
-    func didHidePeople(items: [PeopleItem]) {
-        if delegate?.getStatus() == .active {
-            delegate?.needReloadData()
-        }
-    }
-    
-    func didUnhideItems(_ items: [WrapData]) {
-        if delegate?.getStatus() == .hidden {
-            deleteItems(items: items)
-        } else {
-            needInsertItems(items)
-        }
-    }
-    
-    func didUnhideAlbums(_ albums: [AlbumItem]) {
-        
-    }
-    
     func putBackFromTrashItems(_ items: [Item]) {
         if delegate?.getStatus() == .trashed {
             deleteItems(items: items)
@@ -2047,20 +1960,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             needInsertItems(items)
         }
     }
-    
-    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        
-    }
-    
-    func didMoveToTrashItems(_ items: [Item]) {
-        if delegate?.getStatus() == .trashed {
-            needInsertItems(items)
-        } else {
-            deleteItems(items: items)
-        }
-    }
-    
-    func didMoveToTrashAlbums(_ albums: [AlbumItem]) { }
     
     private func needInsertItems(_ items: [Item]) {
         //Maybe need merge in the future

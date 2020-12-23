@@ -10,8 +10,6 @@ import Foundation
 
 typealias ListRemoteItems = ( [WrapData] ) -> Void
 
-typealias ListRemoteAlbums = ( [AlbumItem] ) -> Void
-
 typealias AlbumCoverPhoto = ( Item ) -> Void
 
 typealias FailRemoteItems = VoidHandler
@@ -293,45 +291,6 @@ class FavouritesService: RemoteItemsService {
     }
 }
 
-class StoryService: RemoteItemsService {
-    init(requestSize: Int) {
-        super.init(requestSize: requestSize, fieldValue: .story)
-    }
-    
-    func allStories(sortBy: SortType = .date, sortOrder: SortOrder = .desc, success: ListRemoteItems?, fail: FailRemoteItems?) {
-        currentPage = 0
-        nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
-    }
-    
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
-        debugLog("StoryService nextItems")
-        
-        let searchParam = SearchByFieldParameters(fieldName: .story,
-                                                  fieldValue: .story,
-                                                  sortBy: sortBy,
-                                                  sortOrder: sortOrder,
-                                                  page: currentPage,
-                                                  size: requestSize,
-                                                  hidden: false)
-                
-        remote.searchByField(param: searchParam, success: { [weak self] response in
-            guard let resultResponse = response as? SearchResponse else {
-                debugLog("StoryService remote searchStories fail")
-                fail?()
-                return
-            }
-
-            self?.currentPage += 1
-            let list = resultResponse.list.compactMap { Item(remote: $0) }
-            success?(list)
-
-        }, fail: { errorResponse in
-            errorResponse.showInternetErrorGlobal()
-            fail?()
-        })
-    }
-}
-
 class FolderService: RemoteItemsService {
     
     let rootFolder: String
@@ -391,21 +350,4 @@ class AllFilesService: RemoteItemsService {
         fileService.filesList(sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, status: .active, success: success, fail: fail)
         currentPage += 1
     }
-}
-
-class FaceImageDetailService: AlbumDetailService {
-    let albumUUID: String
-    
-    init(albumUUID: String, requestSize: Int) {
-        self.albumUUID = albumUUID
-        super.init(requestSize: requestSize)
-    }
-    
-    override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue?) {
-        nextItems(albumUUID: albumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { items in
-            success?(items)
-
-        }, fail: fail)
-    }
-
 }

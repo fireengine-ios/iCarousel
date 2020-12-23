@@ -8,59 +8,38 @@
 
 class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxInteractorInput {
     
-    private let albumService = PhotosAlbumService()
     private var getNextPageRetryCounter = 0
     private var numberOfRetries = 3
     var rootFolderUUID: String = ""
     
     func onUploadItems(items: [Item]) {
         let router = RouterVC()
-        if router.isRootViewControllerAlbumDetail() {
-            let parameter = AddPhotosToAlbum(albumUUID: rootFolderUUID, photos: items)
-            albumService.addPhotosToAlbum(parameters: parameter, success: { [weak self] in
-                DispatchQueue.main.async {
-                    if let `self` = self {
-                        self.output.asyncOperationSuccess()
-                        guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
-                            return
-                        }
-                        out.uploadOperationSuccess()
+       
+        let itemsUUIDs = items.map({ $0.uuid })
+        let parametr = CopyFiles(items: itemsUUIDs, path: rootFolderUUID)
+        FileService().copy(copyparam: parametr, success: { [weak self] in
+            DispatchQueue.main.async {
+                if let `self` = self {
+                    self.output.asyncOperationSuccess()
+                    guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
+                        return
                     }
-                    ItemOperationManager.default.filesAddedToAlbum(isAutoSyncOperation: false)
+                    out.uploadOperationSuccess()
+                    ItemOperationManager.default.filesUpload(count: itemsUUIDs.count, toFolder: self.rootFolderUUID)
                 }
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    if let `self` = self {
-                        self.output.asyncOperationFail(errorMessage: TextConstants.failWhileAddingToAlbum)
+            }
+        }, fail: { [weak self] fail in
+            DispatchQueue.main.async {
+                if let `self` = self {
+                    guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
+                        self.output.asyncOperationFail(errorMessage: fail.description)
+                        return
                     }
+                    out.asyncOperationFail(errorResponse: fail)
                 }
-            })
-        } else {
-            let itemsUUIDs = items.map({ $0.uuid })
-            let parametr = CopyFiles(items: itemsUUIDs, path: rootFolderUUID)
-            FileService().copy(copyparam: parametr, success: { [weak self] in
-                DispatchQueue.main.async {
-                    if let `self` = self {
-                        self.output.asyncOperationSuccess()
-                        guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
-                            return
-                        }
-                        out.uploadOperationSuccess()
-                        ItemOperationManager.default.filesUpload(count: itemsUUIDs.count, toFolder: self.rootFolderUUID)
-                    }
-                }
-            }, fail: { [weak self] fail in
-                DispatchQueue.main.async {
-                    if let `self` = self {
-                        guard let out = self.output as? UploadFromLifeBoxInteractorOutput else {
-                            self.output.asyncOperationFail(errorMessage: fail.description)
-                            return
-                        }
-                        out.asyncOperationFail(errorResponse: fail)
-                    }
-                }
-            })
-        }
+            }
+        })
+        
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {

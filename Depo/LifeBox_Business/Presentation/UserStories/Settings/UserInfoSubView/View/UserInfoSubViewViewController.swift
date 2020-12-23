@@ -12,7 +12,6 @@ import SDWebImage
 protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func changePhotoPressed(quotaInfo: QuotaInfoResponse?)
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
-    func premiumButtonPressed()
 }
 
 final class UserInfoSubViewViewController: ViewController, NibInit {

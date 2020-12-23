@@ -37,15 +37,5 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     func onValidateName(newName: String)
     
-    func getPersonsOnPhoto(uuid: String, completion: VoidHandler?)
-    
-    func getPeopleAlbum(with item: PeopleItem, id: Int64)
-
-    func enableFIR(completion: VoidHandler?)
-    
-    func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ())
-    
-    func getAuthority()
-    
     func createNewUrl()
 }

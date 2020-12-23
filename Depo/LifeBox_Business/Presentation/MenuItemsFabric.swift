@@ -55,7 +55,7 @@ extension ElementTypes {
         switch self {
         case .info:
             imageName = "action_info"
-        case .delete, .moveToTrash, .moveToTrashShared, .removeAlbum:
+        case .delete, .moveToTrash, .moveToTrashShared:
             imageName = "action_delete"
         case .copy:
             imageName = "action_copy"
@@ -63,8 +63,6 @@ extension ElementTypes {
             imageName = "action_end_share"
         case .leaveSharing:
             imageName = "action_leave_share"
-        case .removeFromAlbum, .removeFromFaceImageAlbum:
-            imageName = "action_remove"
         case .move:
             imageName = "action_move"
         case .share:
@@ -95,7 +93,7 @@ extension ElementTypes {
     }
     
     var isDestructive: Bool {
-        isContained(in: [.delete, .endSharing, .leaveSharing, .moveToTrash, .moveToTrashShared, .removeAlbum])
+        isContained(in: [.delete, .endSharing, .leaveSharing, .moveToTrash, .moveToTrashShared])
     }
 }
 

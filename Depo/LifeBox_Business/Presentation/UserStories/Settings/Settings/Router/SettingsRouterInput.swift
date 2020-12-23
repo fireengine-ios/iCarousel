@@ -22,10 +22,6 @@ protocol SettingsRouterInput {
     
     func goToActivityTimeline()
     
-    func goToPackagesWith(quotaInfo: QuotaInfoResponse?)
-
-    func goToPremium()
-    
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool)
     
     func closeEnterPasscode()

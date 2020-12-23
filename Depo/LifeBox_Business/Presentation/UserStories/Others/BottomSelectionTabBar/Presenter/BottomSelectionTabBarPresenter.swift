@@ -26,20 +26,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         var itemTupple = [PreDetermendType]()
         for type in config.elementsConfig {
             switch type {
-            case .hide:
-                itemTupple.append(EditinglBar.PreDetermendTypes.hide)
-            case .unhide:
-                itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
-            case .smash:
-                itemTupple.append(EditinglBar.PreDetermendTypes.smash)
             case .delete:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .download:
                 itemTupple.append(EditinglBar.PreDetermendTypes.download)
             case .downloadDocument:
                 itemTupple.append(EditinglBar.PreDetermendTypes.downloadDocument)
-            case .edit:
-                itemTupple.append(EditinglBar.PreDetermendTypes.edit)
             case .info:
                 itemTupple.append(EditinglBar.PreDetermendTypes.info)
             case .move:
@@ -50,18 +42,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.sync)
             case .syncInProgress:
                 itemTupple.append(EditinglBar.PreDetermendTypes.syncInProgress)
-            case .removeFromAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeFromAlbum)
-            case .removeFromFaceImageAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeFromFaceImageAlbum)
-            case .addToAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.addToAlbum)
             case .makeAlbumCover:
                 itemTupple.append(EditinglBar.PreDetermendTypes.makeCover)
             case .print:
                 itemTupple.append(EditinglBar.PreDetermendTypes.print)
-            case .removeAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
             case .moveToTrash:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .restore:
@@ -80,9 +64,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let downloadIndex = originalConfig.elementsConfig.index(of: .download)
         let syncIndex = originalConfig.elementsConfig.index(of: .sync)
         let moveToTrashIndex = originalConfig.elementsConfig.index(of: .moveToTrash)
-        let hideIndex = originalConfig.elementsConfig.index(of: .hide)
-        
-        let validIndexes = [downloadIndex, syncIndex, hideIndex, moveToTrashIndex].compactMap { $0 }
+
+        let validIndexes = [downloadIndex, syncIndex, moveToTrashIndex].compactMap { $0 }
         
         guard !validIndexes.isEmpty else {
             return
@@ -98,7 +81,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let hasRemote = items.contains(where: { $0.isLocalItem != true })
 
         if hasRemote {
-            view.enableItems(at: [moveToTrashIndex, downloadIndex, hideIndex].compactMap { $0 })
+            view.enableItems(at: [moveToTrashIndex, downloadIndex].compactMap { $0 })
         }
         
         if hasLocal {
@@ -155,25 +138,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             let type = types[index]
             
             switch type {
-            case .hide:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
-                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.hide(items: selectedItems)
-                } else {
-                    let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
-                    UIApplication.showErrorAlert(message: text)
-                }
-            case .unhide:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
-                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.unhide(items: selectedItems)
-                } else {
-                    let isAlbums = selectedItems is [PeopleItem] || selectedItems is [ThingsItem] || selectedItems is [PlacesItem] || selectedItems is [AlbumItem]
-                    let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
-                    UIApplication.showErrorAlert(message: message)
-                }
             case .moveToTrash:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -226,35 +190,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 self.interactor.move(item: selectedItems, toPath: "")
             case .share:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
-                /// if albums are selected and in this albums not have filled album show error
-                if let albumItems = selectedItems as? [AlbumItem], albumItems.first(where: { $0.allContentCount != 0 } ) == nil {
-                        self.needShowErrorShareEmptyAlbums()
-                        return
-                }
-                
                 self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
             case .sync:
                 self.basePassingPresenter?.stopModeSelected()
                 self.interactor.sync(item: selectedItems)
-            case .removeFromAlbum:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                self.interactor.removeFromAlbum(items: selectedItems)
-            case .removeFromFaceImageAlbum:
-                self.basePassingPresenter?.stopModeSelected()
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                if let item = self.basePassingPresenter?.getFIRParent() {
-                    self.interactor.deleteFromFaceImageAlbum(items: selectedItems, item: item)
-                }
-            case .addToAlbum:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToAlbum))
-                self.interactor.addToAlbum(items: selectedItems)
             case .print:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .print))
                 self.interactor.trackEvent(elementType: .print)
                 self.router.showPrint(items: selectedItems)
-            case .removeAlbum:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                self.interactor.removeAlbums(items: selectedItems)
             case .moveToTrashShared:
                 self.interactor.moveToTrashShared(items: selectedItems)
             default:
@@ -315,17 +258,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .folder:
                 break
             case .image:
-                actionTypes = [.createStory, .move]
+                actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
                 actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
             case .video:
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
-                
-            case .photoAlbum: // TODO add for Alboum
-                break
                 
             case .musicPlayList: // TODO Add for MUsic
                 break
@@ -402,14 +341,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         self.interactor.delete(items: currentItems)
                     })
-                case .hide:
-                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
-                        self.interactor.hide(items: currentItems)
-                    })
-                case .smash:
-                    //Currently there is no task for smash from action sheet.
-                    assertionFailure("In order to use smash please implement this function")
-                    action = UIAlertAction()
                 case .restore:
                     action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
                         self.interactor.restore(items: currentItems)
@@ -427,14 +358,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetPhotos, style: .default, handler: { _ in
                         self.interactor.photos(items: currentItems)
                     })
-                case .addToAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetAddToAlbum, style: .default, handler: { _ in
-                        self.interactor.addToAlbum(items: currentItems)
-                    })
-                case .albumDetails:
-                    action = UIAlertAction(title: TextConstants.actionSheetAlbumDetails, style: .default, handler: { _ in
-                        self.interactor.albumDetails(items: currentItems)
-                    })
                 case .shareAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
                         self.interactor.shareAlbum(items: currentItems)
@@ -443,10 +366,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetMakeAlbumCover, style: .default, handler: { _ in
                         self.interactor.makeAlbumCover(items: currentItems)
                     })
-                case .removeFromAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
-                        self.interactor.removeFromAlbum(items: currentItems)
-                    })
                 case .backUp:
                     action = UIAlertAction(title: TextConstants.actionSheetBackUp, style: .default, handler: { _ in
                         self.interactor.backUp(items: currentItems)
@@ -454,10 +373,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .copy:
                     action = UIAlertAction(title: TextConstants.actionSheetCopy, style: .default, handler: { _ in
                         self.interactor.copy(item: currentItems, toPath: "")
-                    })
-                case .createStory:
-                    action = UIAlertAction(title: TextConstants.actionSheetCreateStory, style: .default, handler: { _ in
-                        self.interactor.createStory(items: currentItems)
                     })
                 case .iCloudDrive:
                     action = UIAlertAction(title: TextConstants.actionSheetiCloudDrive, style: .default, handler: { _ in

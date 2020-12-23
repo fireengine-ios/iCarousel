@@ -126,7 +126,6 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
         }
         if !output.isSelectionState() {
             output.onReloadData()
-            contentSlider?.reloadAllData()
             handleShareSliderReload()
         } else {
             refresher.endRefreshing()

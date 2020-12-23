@@ -305,8 +305,6 @@ enum AnalyticsAppScreens {
                 return "Document_Info"
             case .audio:
                 return "Music_Info"
-            case .photoAlbum:
-                return "Album_Info"
             case .folder:
                 return "Folder_Info"
             default:

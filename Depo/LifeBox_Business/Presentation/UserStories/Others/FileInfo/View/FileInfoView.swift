@@ -10,9 +10,6 @@ import UIKit
 
 protocol PhotoInfoViewControllerOutput {
     func onRename(newName: String)
-    func onEnableFaceRecognitionDidTap()
-    func onBecomePremiumDidTap()
-    func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse)
     func tapGesture(recognizer: UITapGestureRecognizer)
     func onSelectSharedContact(_ contact: SharedContact)
     func onAddNewShare()
@@ -47,7 +44,6 @@ final class FileInfoView: UIView, FromNib {
     
     private lazy var fileNameView = FileNameView.with(delegate: self)
     private lazy var fileInfoView = FileMetaInfoView.view()
-    private lazy var peopleView = FileInfoPeopleView.with(delegate: self)
     private lazy var sharingInfoView = FileInfoShareView.with(delegate: self)
     
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
@@ -80,15 +76,9 @@ final class FileInfoView: UIView, FromNib {
         self.object = object
         resetUI()
         fileNameView.name = object.name
-        peopleView.fileType = object.fileType
         
         if let obj = object as? WrapData {
-            peopleView.status = obj.status
             setWith(wrapData: obj)
-        }
-        
-        if let album = object as? AlbumItem {
-            setWith(albumItem: album)
         }
 
         if let createdDate = object.creationDate, !object.isLocalItem {
@@ -111,34 +101,12 @@ final class FileInfoView: UIView, FromNib {
         fileNameView.showValidateNameSuccess()
     }
     
-    func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
-        peopleView.reload(with: items)
-    }
-    
-    func setHiddenPeoplePlaceholder(isHidden: Bool) {
-        peopleView.setHiddenPeoplePlaceholder(isHidden: isHidden)
-    }
-    
-    func setHiddenPremiumStackView(isHidden: Bool) {
-        peopleView.setHiddenPremiumStackView(isHidden: isHidden)
-    }
-    
     func setWith(wrapData: WrapData) {
         if wrapData.fileType == .folder {
             fileNameView.title = TextConstants.fileInfoFolderNameTitle
         }
         
         fileInfoView.setup(with: wrapData)
-        
-        if wrapData.fileType == .video {
-            peopleView.isHidden = true
-        }
-    }
-        
-    func setWith(albumItem: AlbumItem) {
-        fileNameView.title = TextConstants.fileInfoAlbumNameTitle
-        fileNameView.isEditable = albumItem.readOnly ?? false
-        fileInfoView.setup(with: albumItem)
     }
     
     func hideKeyboard() {
@@ -160,7 +128,7 @@ final class FileInfoView: UIView, FromNib {
     
     private func setup() {
         layer.masksToBounds = true
-        let views: [UIView] = [fileNameView, fileInfoView, sharingInfoView, peopleView]
+        let views: [UIView] = [fileNameView, fileInfoView, sharingInfoView]
         
         sharingInfoView.isHidden = true
         
@@ -177,7 +145,7 @@ final class FileInfoView: UIView, FromNib {
             canEdit = permissions?.granted?.contains(.setAttribute) == true
         }
         
-        if (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced {
+        if item.isLocalItem && item.syncStatus != .synced {
             canEdit = false
         }
 
@@ -187,7 +155,6 @@ final class FileInfoView: UIView, FromNib {
     private func resetUI() {
         fileNameView.title = TextConstants.fileInfoFileNameTitle
         fileInfoView.reset()
-        peopleView.reset()
         sharingInfoView.isHidden = true
     }
     
@@ -264,23 +231,7 @@ final class FileInfoView: UIView, FromNib {
 
 extension FileInfoView: UIGestureRecognizerDelegate {
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if let gestureView = gestureRecognizer.view {
-            let tapLocation = gestureRecognizer.location(in: gestureView)
-            let subview = hitTest(tapLocation, with: nil)
-            return subview == peopleView.collectionView
-        }
         return true
-    }
-}
-
-extension FileInfoView: FaceImageItemsModuleOutput {
-    
-    func didChangeName(item: WrapData) {}
-    
-    func didReloadData() {}
-    
-    func delete(item: Item) {
-        peopleView.delete(item: item)
     }
 }
 
@@ -290,23 +241,6 @@ extension FileInfoView: FileNameViewDelegate {
     
     func onRename(newName: String) {
         output.onRename(newName: newName)
-    }
-}
-
-//MARK: - FileInfoPeopleViewDelegate
-
-extension FileInfoView: FileInfoPeopleViewDelegate {
-    
-    func onPeopleAlbumDidTap(item: PeopleOnPhotoItemResponse) {
-        output.onPeopleAlbumDidTap(item)
-    }
-    
-    func onEnableFaceRecognitionDidTap() {
-        output.onEnableFaceRecognitionDidTap()
-    }
-    
-    func onBecomePremiumDidTap() {
-        output.onBecomePremiumDidTap()
     }
 }
 

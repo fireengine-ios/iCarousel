@@ -68,25 +68,12 @@ extension FileInfoPresenter: FileInfoViewOutput {
 extension FileInfoPresenter: FileInfoInteractorOutput {
     
     func setObject(object: BaseDataSourceItem) {
-        if object.fileType == .photoAlbum {
-            view.hideViews()
-            view.startActivityIndicator()
-            interactor.getAlbum(for: object)
-        } else {
-            view.setObject(object)
-        }
+        view.setObject(object)
     }
     
     func updated() {
         asyncOperationSuccess()
         view.goBack()
-    }
-    
-    func albumForUuidSuccessed(album: AlbumServiceResponse) {
-        let albumItem = AlbumItem(remote: album)
-        view.showViews()
-        view.setObject(albumItem)
-        view.stopActivityIndicator()
     }
     
     func albumForUuidFailed(error: Error) {

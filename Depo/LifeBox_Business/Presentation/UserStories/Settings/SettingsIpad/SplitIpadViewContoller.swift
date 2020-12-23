@@ -39,29 +39,6 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     // MARK: UISplitViewControllerDelegate
     
     // MARK: SettingsDelegate
-    func goToContactSync() {
-        if let left = leftController {
-        configurateWithControllers(leftViewController: left, controllers: [RouterVC().syncContacts])
-        }
-    }
-    
-    func goToConnectedAccounts() {
-        if let left = leftController, let controller = RouterVC().connectedAccounts {
-            configurateWithControllers(leftViewController: left, controllers: [controller])
-        }
-    }
-    
-    func goToPeriodicContactSync() {
-        if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().periodicContactsSync])
-        }
-    }
-    
-    func goToFaceImage() {
-        if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().faceImage])
-        }
-    }
     
     func goToHelpAndSupport() {
         if let left = leftController {

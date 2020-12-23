@@ -19,11 +19,6 @@ class SearchDataSource: BaseDataSourceForCollectionView {
     override func removeFileFromFavorites(items: [Item]) {
         updateFavoritesCellStatus(items: items, isFavorites: false)
     }
-    
-    override func albumsDeleted(albums: [AlbumItem]) {
-        if let item = moreActionItem {
-            deleteItems(items: [item])
-        }
-    }
+
     
 }

@@ -46,10 +46,6 @@ class StorageCard: BaseCardView {
         if let operationType = operationType {
             let router = RouterVC()
             switch operationType {
-            case .freeAppSpaceCloudWarning:
-                let controller = router.packages
-                router.pushViewController(viewController: controller)
-                break
             case .emptyStorage:
                 let controller = router.uploadPhotos()
                 let navigation = NavigationController(rootViewController: controller)

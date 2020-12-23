@@ -7,7 +7,6 @@
 //
 
 enum SelectNameScreenType: Int {
-    case selectAlbumName = 1
     case selectPlayListName = 2
     case selectFolderName = 3
 }
@@ -16,9 +15,8 @@ class SelectNameInteractor: SelectNameInteractorInput {
 
     weak var output: SelectNameInteractorOutput!
     
-    var moduleType: SelectNameScreenType = .selectAlbumName
+    var moduleType: SelectNameScreenType = .selectFolderName
     
-    private let albumService = PhotosAlbumService()
     private lazy var privateShareService = PrivateShareApiServiceImpl()
     private lazy var analytics = PrivateShareAnalytics()
     
@@ -30,8 +28,6 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     func getTitle() -> String {
         switch moduleType {
-        case .selectAlbumName:
-            return TextConstants.selectNameTitleAlbum
         case .selectPlayListName:
             return TextConstants.selectNameTitlePlayList
         case .selectFolderName:
@@ -41,8 +37,6 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     func getNextButtonText() -> String {
         switch moduleType {
-        case .selectAlbumName:
-            return TextConstants.selectNameNextButtonAlbum
         case .selectPlayListName:
             return TextConstants.selectNameNextButtonPlayList
         case .selectFolderName:
@@ -52,8 +46,6 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     func getPlaceholderText() -> String {
         switch moduleType {
-        case .selectAlbumName:
-            return TextConstants.selectNamePlaceholderAlbum
         case .selectPlayListName:
             return TextConstants.selectNamePlaceholderPlayList
         case .selectFolderName:
@@ -63,8 +55,6 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     func getTextForEmptyTextFieldAllert() -> String {
         switch moduleType {
-        case .selectAlbumName:
-            return TextConstants.selectNameEmptyNameAlbum
         case .selectPlayListName:
             return TextConstants.selectNameEmptyNamePlayList
         case .selectFolderName:
@@ -75,8 +65,6 @@ class SelectNameInteractor: SelectNameInteractorInput {
     func onNextButton(name: String) {
         output.startProgress()
         switch moduleType {
-        case .selectAlbumName:
-            onCreateAlbumWithName(name: name)
         case .selectPlayListName:
             onCreatePlayListWithName(name: name)
         case .selectFolderName:
@@ -86,22 +74,6 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     
     // MARK: requests
-    
-    private func onCreateAlbumWithName(name: String) {
-        let createAlbumParams = CreatesAlbum(albumName: name)
-        albumService.createAlbum(createAlbum: createAlbumParams, success: { [weak self] albumItem in
-            DispatchQueue.main.async {
-                if let self_ = self {
-                    self_.output.createAlbumOperationSuccess(item: albumItem)
-                    ItemOperationManager.default.newAlbumCreated()
-                }
-            }
-        }) { error in
-            DispatchQueue.main.async { [weak self] in
-                self?.output.operationFailedWithError(errorMessage: error.description)
-            }
-        }
-    }
     
     private func onCreatePlayListWithName(name: String) {
         

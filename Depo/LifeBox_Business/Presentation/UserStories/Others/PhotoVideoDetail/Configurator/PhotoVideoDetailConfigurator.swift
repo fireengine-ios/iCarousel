@@ -26,7 +26,7 @@ class PhotoVideoDetailModuleConfigurator {
                       alertSheetExcludeTypes: [.moveToTrash, .downloadDocument],
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions,
                       selecetedItem: selecetedItem,
-                      allItems: allItems, status: status, viewType: .details,
+                      allItems: allItems, status: status,
                       canLoadMoreItems: canLoadMoreItems)
         }
     }
@@ -50,7 +50,7 @@ class PhotoVideoDetailModuleConfigurator {
                       interactor: interactor,
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.moveToTrash],
                       selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem,
-                      status: status, viewType: .insideAlbum,
+                      status: status,
                       canLoadMoreItems: true)
         }
     }
@@ -74,7 +74,7 @@ class PhotoVideoDetailModuleConfigurator {
                       interactor: interactor,
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.moveToTrash],
                       selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem,
-                      status: status, viewType: .insideFIRAlbum,
+                      status: status,
                       canLoadMoreItems: true)
         }
     }
@@ -91,7 +91,6 @@ class PhotoVideoDetailModuleConfigurator {
                            allItems: [Item],
                            albumItem: Item? = nil,
                            status: ItemStatus,
-                           viewType: DetailViewType,
                            canLoadMoreItems: Bool) {
         let router = PhotoVideoDetailRouter()
         router.output = presenter
@@ -112,7 +111,6 @@ class PhotoVideoDetailModuleConfigurator {
         interactor.output = presenter
         interactor.bottomBarConfig = bottomBarConfig
         interactor.status = status
-        interactor.viewType = viewType
         interactor.moreMenuConfig = photoDetailMoreMenu
         
         //BotomBar Module Setup

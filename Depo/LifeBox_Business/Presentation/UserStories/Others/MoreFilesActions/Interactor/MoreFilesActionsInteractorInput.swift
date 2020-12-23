@@ -16,12 +16,6 @@ protocol MoreFilesActionsInteractorInput {
     
     func moveToTrash(items: [BaseDataSourceItem])
     
-    func removeAlbums(items: [BaseDataSourceItem])
-    
-    func hide(items: [BaseDataSourceItem])
-    
-    func unhide(items: [BaseDataSourceItem])
-    
     func move(item: [BaseDataSourceItem], toPath: String)
     
     func sync(item: [BaseDataSourceItem])
@@ -34,21 +28,13 @@ protocol MoreFilesActionsInteractorInput {
     
     // MARK: Actions Sheet
     
-    func createStory(items: [BaseDataSourceItem])
-    
     func copy(item: [BaseDataSourceItem], toPath: String)
     
     func addToFavorites(items: [BaseDataSourceItem])
     
     func removeFromFavorites(items: [BaseDataSourceItem])
     
-    func addToAlbum(items: [BaseDataSourceItem])
-    
     func backUp(items: [BaseDataSourceItem])
-    
-    func removeFromAlbum(items: [BaseDataSourceItem])
-    
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], item: Item)
     
     func photos(items: [BaseDataSourceItem])
     

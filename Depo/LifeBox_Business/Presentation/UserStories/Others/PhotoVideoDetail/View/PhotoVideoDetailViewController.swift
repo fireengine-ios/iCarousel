@@ -237,9 +237,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
-        output.getFIRStatus { [weak self] in
-            self?.updateFileInfo()
-        }
 
         guard let index = selectedIndex else  {
             return
@@ -260,9 +257,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             navigationItem.rightBarButtonItem = threeDotsBarButtonItem
         }
 
-        if status == .hidden {
-            navigationItem.rightBarButtonItem?.customView?.isHidden = true
-        } else if let selectedItem = selectedItem {
+        if let selectedItem = selectedItem {
             //hide 3 dots button for shared or local items
             navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem || !selectedItem.isOwner
         } else {
@@ -277,7 +272,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func updateFileInfo() {
         guard let selectedItem = selectedItem else { return }
         bottomDetailView?.setObject(selectedItem) {
-            self.output.getPersonsForSelectedPhoto(completion: nil)
         }
     }
     
@@ -302,9 +296,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         
-        let stackCountViews = navigationController?.viewControllers.count ?? 0
-        let inAlbumState = stackCountViews > 1 && navigationController?.viewControllers[stackCountViews - 2] is AlbumDetailViewController
-        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState, object: objects[index], selectedIndex: index)
+        output.moreButtonPressed(sender: sender, inAlbumState: false, object: objects[index], selectedIndex: index)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -495,18 +487,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func getNavigationController() -> UINavigationController? {
         return navigationController
-    }
-    
-    func updatePeople(items: [PeopleOnPhotoItemResponse]) {
-        bottomDetailView?.reloadCollection(with: items)
-    }
-    
-    func setHiddenPeoplePlaceholder(isHidden: Bool) {
-        bottomDetailView?.setHiddenPeoplePlaceholder(isHidden: isHidden)
-    }
-    
-    func setHiddenPremiumStackView(isHidden: Bool) {
-        bottomDetailView?.setHiddenPremiumStackView(isHidden: isHidden)
     }
     
     func closeDetailViewIfNeeded() {

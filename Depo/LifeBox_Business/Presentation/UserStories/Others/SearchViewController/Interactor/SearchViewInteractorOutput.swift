@@ -14,6 +14,4 @@ protocol SearchViewInteractorOutput: class {
     func successWithSuggestList(list: [SuggestionObject])
     func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]])
     func failedSearch()
-    func getAlbum(albumItem: AlbumItem, forItem item: Item)
-    func failedGetAlbum()
 }

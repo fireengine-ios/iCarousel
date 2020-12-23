@@ -396,7 +396,7 @@ class FileService: BaseRequestService {
     }
 
     
-    func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
+    func download(items: [WrapData], success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService download")
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             showAccessAlert()
@@ -427,7 +427,7 @@ class FileService: BaseRequestService {
                 return nil
             }
             
-            return BaseDownloadRequestParametrs(urlToFile: downloadUrl, fileName: fileName, contentType: $0.fileType, albumName: album?.name, item: $0)
+            return BaseDownloadRequestParametrs(urlToFile: downloadUrl, fileName: fileName, contentType: $0.fileType, albumName: nil, item: $0)
         }
         
         let operations = downloadRequests.compactMap { baseDownloadRequest in

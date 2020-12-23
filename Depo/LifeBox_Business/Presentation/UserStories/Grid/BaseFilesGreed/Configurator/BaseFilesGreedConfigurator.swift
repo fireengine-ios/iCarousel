@@ -15,7 +15,6 @@ class BaseFilesGreedModuleConfigurator {
                    remoteServices: RemoteItemsService,
                    fileFilters: [GeneralFilesFiltrationType],
                    bottomBarConfig: EditingBarConfig?,
-                   visibleSlider: Bool = false,
                    topBarConfig: GridListTopBarConfig?,
                    alertSheetConfig: AlertFilesActionsSheetInitialConfig?,
                    alertSheetExcludeTypes: [ElementTypes]? = nil) {
@@ -54,15 +53,6 @@ class BaseFilesGreedModuleConfigurator {
             viewController.editingTabBar = botvarBarVC
             presenter?.bottomBarPresenter = bottomBarVCmodule.presenter
             bottomBarVCmodule.presenter?.basePassingPresenter = presenter
-        }
-        if visibleSlider {
-            let sliderModuleConfigurator = LBAlbumLikePreviewSliderModuleInitializer()
-            let sliderPresenter = LBAlbumLikePreviewSliderPresenter()
-            sliderModuleConfigurator.initialise(inputPresenter: sliderPresenter)
-            let sliderVC = sliderModuleConfigurator.lbAlbumLikeSliderVC
-            viewController.contentSlider = sliderVC
-            presenter?.sliderModule = sliderPresenter
-            sliderPresenter.baseGreedPresenterModule = presenter
         }
 
         if let underNavBarBarConfig = topBarConfig {
@@ -147,10 +137,6 @@ class BaseFilesGreedModuleConfigurator {
             viewController.underNavBarBar = gridListTopBar
             gridListTopBar.delegate = viewController
             
-        }
-        
-        if let uploadInteracotor = interactor as? UploadFilesSelectionInteractor {
-            uploadInteracotor.uploadOutput = presenter as? UploadFilesSelectionPresenter
         }
         
         interactor.originalFilters = fileFilters

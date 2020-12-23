@@ -44,9 +44,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         var actionTypes = barConfig.elementsConfig
           
         if !fileTypes.contains(.image) {
-            if let editIndex = actionTypes.index(of: .edit) {
-                actionTypes.remove(at: editIndex)
-            }
             if let printIndex = actionTypes.index(of: .print) {
                 actionTypes.remove(at: printIndex)
             }
@@ -159,8 +156,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         var actions = [ElementTypes]()
         
         switch view.status {
-        case .hidden:
-            actions = ActionSheetPredetermendConfigs.hiddenDetailActions
         case .trashed:
             actions = ActionSheetPredetermendConfigs.trashedDetailActions
         default:
@@ -206,12 +201,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
-        case .delete, .removeFromAlbum, .removeFromFaceImageAlbum:
+        case .delete:
             outputView()?.hideSpinner()
             interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
-        case .hide, .unhide, .moveToTrash, .restore, .moveToTrashShared:
+        case .moveToTrash, .restore, .moveToTrashShared:
             interactor.deleteSelectedItem(type: type)
         default:
             break
@@ -250,16 +245,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func selectAllModeSelected() {
         
     }
-    
-    func changeCover() { 
-    
-    }
-    
-    func getFIRParent() -> Item? {
-        return item
-    }
-    
-    func openInstaPick() { }
     
     func deSelectAll() {
         
@@ -330,50 +315,13 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         interactor.onRename(newName: name)
     }
     
-    func updatePeople(items: [PeopleOnPhotoItemResponse]) {
-        asyncOperationSuccess()
-        view.updatePeople(items: items)
-    }
-    
-    func getFIRStatus(completion: VoidHandler? = nil) {
-        interactor.getFIRStatus(success: { [weak self] settings in
-            self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
-            self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
-            if settings.isFaceImageAllowed == true {
-                    self?.interactor.getAuthority()
-                    completion?()
-            } else {
-                self?.view.setHiddenPremiumStackView(isHidden: true)
-                completion?()
-            }
-        }, fail: { [weak self] error in
-            self?.failedUpdate(error: error)
-        })
-    }
-    
-    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
-        asyncOperationSuccess()
-        let albumItem = AlbumItem(remote: album)
-        router.openFaceImageItemPhotosWith(item, album: albumItem, moduleOutput: view.bottomDetailViewManager?.managedView)
-    }
-    
     func didFailedLoadAlbum(error: Error) {
         asyncOperationSuccess()
         view.showErrorAlert(message: error.description)
     }
     
-    func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool) {
-        view.setHiddenPremiumStackView(isHidden: isPermitted)
-    }
-    
     func configureFileInfo(_ view: FileInfoView) {
         view.output = self
-    }
-    func getPersonsForSelectedPhoto(completion: VoidHandler? = nil) {
-        guard isFaceImageAllowed, let index = interactor.currentItemIndex, let uuid = interactor.allItems[safe: index]?.uuid else {
-            return
-        }
-        interactor.getPersonsOnPhoto(uuid: uuid, completion: completion)
     }
 }
 
@@ -381,42 +329,6 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     func onRename(newName: String) {
         startAsyncOperation()
         interactor.onValidateName(newName: newName)
-    }
-    
-    func onEnableFaceRecognitionDidTap() {
-        router.showConfirmationPopup { [weak self] in
-            self?.interactor.enableFIR() { [weak self] in
-                SnackbarManager.shared.show(
-                    type: .nonCritical,
-                    message: TextConstants.faceImageEnableSnackText,
-                    action: .none
-                )
-                self?.isFaceImageAllowed = true
-                self?.view.setHiddenPeoplePlaceholder(isHidden: true)
-                self?.getPersonsForSelectedPhoto() {
-                    self?.interactor.getAuthority()
-                }
-            }
-        }
-    }
-    
-    func onBecomePremiumDidTap() {
-        router.goToPremium()
-    }
-    
-    func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse) {
-        guard let id = album.personInfoId else {
-            return
-        }
-        
-        startAsyncOperation()
-        
-        let peopleItemResponse = PeopleItemResponse()
-        peopleItemResponse.id = id
-        peopleItemResponse.name = album.name ?? ""
-        peopleItemResponse.thumbnail = album.thumbnailURL
-        let peopleItem = PeopleItem(response: peopleItemResponse)
-        interactor.getPeopleAlbum(with: peopleItem, id: id)
     }
     
     func tapGesture(recognizer: UITapGestureRecognizer) {

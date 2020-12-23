@@ -12,8 +12,6 @@ protocol BottomSelectionTabBarRouterInput {
     
     func onInfo(object: Item)
     
-    func addToAlbum(items: [BaseDataSourceItem])
-    
     func showPrint(items: [BaseDataSourceItem])
     
     func showSelectFolder(selectFolder: SelectFolderViewController)

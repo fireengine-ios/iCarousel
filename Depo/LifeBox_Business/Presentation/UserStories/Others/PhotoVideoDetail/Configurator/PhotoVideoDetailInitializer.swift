@@ -8,18 +8,12 @@
 
 import UIKit
 
-enum DetailViewType {
-    case details
-    case insideAlbum
-    case insideFIRAlbum
-}
-
 typealias PhotoVideoDetailModule = (controller: PhotoVideoDetailViewController, moduleInput: PhotoVideoDetailModuleInput)
 
 class PhotoVideoDetailModuleInitializer: NSObject {
 
     class func initializeViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], status: ItemStatus, canLoadMoreItems: Bool) -> PhotoVideoDetailModule {
-        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .details)
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .blackOpaque, tintColor: nil)
@@ -39,7 +33,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, status: ItemStatus) -> PhotoVideoDetailModule {
-        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideAlbum)
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .blackOpaque, tintColor: nil)
@@ -62,7 +56,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
     }
     
     class func initializeFaceImageAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, status: ItemStatus) -> PhotoVideoDetailModule {
-        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideFIRAlbum)
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .blackOpaque, tintColor: nil)
