@@ -97,11 +97,11 @@ extension SettingsPresenter: SettingsViewOutput {
         view.showProfileAlertSheet(userInfo: userInfo, quotaInfo: quotaInfo, isProfileAlert: true)
     }
     
-    func onChooseFromPhotoLibriary(onViewController viewController: UIViewController) {
+    func onChooseFromPhotoLibriary<T: UIViewController>(onViewController viewController: T) where T: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
         cameraService.showImagesPicker(onViewController: viewController)
     }
     
-    func onChooseFromPhotoCamera(onViewController viewController: UIViewController) {
+    func onChooseFromPhotoCamera<T: UIViewController>(onViewController viewController: T) where T: UIImagePickerControllerDelegate & UINavigationControllerDelegate  {
         cameraService.showCamera(onViewController: viewController)
     }
     

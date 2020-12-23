@@ -40,7 +40,6 @@ class CameraService {
         let status = PHPhotoLibrary.currentAuthorizationStatus()
         
         switch status {
-        //TODO: uncomment for xcode 12
         case .authorized, .limited:
             photoLibraryGranted(true, status)
         case .notDetermined, .restricted:
@@ -55,11 +54,11 @@ class CameraService {
         }
     }
     
-    func showCamera(onViewController sourceViewViewController: UIViewController) {
+    func showCamera<T: UIViewController>(onViewController sourceViewViewController: T) where T: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
         debugLog("CameraService showCamera")
 
         cameraIsAvailible { [weak self] accessGranted in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
 
@@ -73,11 +72,11 @@ class CameraService {
         }
     }
     
-    func showImagesPicker(onViewController sourceViewViewController: UIViewController) {
+    func showImagesPicker<T: UIViewController>(onViewController sourceViewViewController: T) where T: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
         debugLog("CameraService showImagesPicker")
         
         photoLibraryIsAvailable { [weak self] accessGranted, _ in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
@@ -89,21 +88,12 @@ class CameraService {
         }
     }
     
-    private func showPickerController(type: UIImagePickerControllerSourceType,
-                                      onViewController sourceViewViewController: UIViewController) {
+    private func showPickerController<T: UIViewController>(type: UIImagePickerControllerSourceType,  onViewController sourceViewViewController: T) where T: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
         debugLog("CameraService showPickerController")
-
-        guard let cameraSupportedVC = sourceViewViewController as?
-            (UIImagePickerControllerDelegate & UINavigationControllerDelegate),
-            UIImagePickerController.isSourceTypeAvailable(type)
-        else {
-            debugPrint("this VC does not support camera picker delegate")
-            return
-        }
         
         let picker = UIImagePickerController()
         picker.sourceType = type
-        picker.delegate = cameraSupportedVC
+        picker.delegate = sourceViewViewController
         
         ///https://stackoverflow.com/a/40038752/5893286
         picker.allowsEditing = !Device.isIpad
