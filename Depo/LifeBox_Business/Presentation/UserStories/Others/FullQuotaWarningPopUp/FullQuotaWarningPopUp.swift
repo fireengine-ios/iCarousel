@@ -179,18 +179,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     }
     
     @IBAction private func onDeleteFilesTap(_ sender: UIButton) {
-        close {
-            let router = RouterVC()
-            
-            guard let presentingViewController = router.navigationController?.presentingViewController else {
-//                router.tabBarController?.showPhotoScreen()
-                return
-            }
-            
-            presentingViewController.dismiss(animated: true) {
-//                router.tabBarController?.showPhotoScreen()
-            }
-        }
+        close()
         analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: popUpType.eventAction, eventLabel:  .overQuota(.deleteFiles()))
     }
 }

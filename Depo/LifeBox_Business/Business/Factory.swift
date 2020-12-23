@@ -23,25 +23,10 @@ protocol Factory: SharedFactory {
     func resolve() -> SmartAlbumsManager
     func resolve() -> PrivacyPolicyService
     func resolve() -> ResumableUploadInfoService
-    
-    func resolve() -> CoreDataStack
-    
-    func resolve() -> LogoutDBCleaner
 }
 
 final class FactoryMain: FactoryBase, Factory {
     
-    private static let lock = NSLock()
-    private static let coreDataStack: CoreDataStack = {
-        lock.withCriticalSection {
-            return CoreDataStack_ios10.shared
-        }
-    }()
-    
-    func resolve() -> CoreDataStack {
-         return FactoryMain.coreDataStack
-    }
-
     private static let mediaPlayer = MediaPlayer()
     func resolve() -> MediaPlayer {
         return FactoryMain.mediaPlayer
@@ -100,8 +85,4 @@ extension FactoryMain {
         return FactoryMain.resumableUploadInfoService
     }
     
-    private static let logoutDBCleaner = LogoutDBCleanerImpl()
-    func resolve() -> LogoutDBCleaner {
-        return FactoryMain.logoutDBCleaner
-    }
 }

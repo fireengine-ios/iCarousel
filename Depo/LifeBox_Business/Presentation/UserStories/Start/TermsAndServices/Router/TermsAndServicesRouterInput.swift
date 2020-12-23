@@ -9,7 +9,6 @@
 import Foundation
 
 protocol TermsAndServicesRouterInput {
-    func goToAutoSync()
     func goToHomePage()
     func goToPhoneVerification(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
     func closeModule()

@@ -92,11 +92,6 @@ class SplashInteractor: SplashInteractorInput {
                         SingletonStorage.shared.isJustRegistered = false
                         self?.isFirstLogin = true
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .turkcell))
-                        CacheManager.shared.actualizeCache()
-                        if #available(iOS 14.0, *) {
-                            debugLog("SPLASH: tc login widget reload")
-                            WidgetCenter.shared.reloadAllTimelines()
-                        }
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
@@ -135,7 +130,6 @@ class SplashInteractor: SplashInteractorInput {
             refreshAccessToken { [weak self] in
                 /// self can be nil due logout
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    CacheManager.shared.actualizeCache()
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
                     SingletonStorage.shared.getOverQuotaStatus {

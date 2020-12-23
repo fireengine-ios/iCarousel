@@ -164,20 +164,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
     }
     
     @IBAction private func onSecondButtonTapped(_ sender: UIButton) {
-        guard let type = popupType else {
-            close()
-            return
-        }
-        
-        let action = { [weak self] in
-            switch type {
-            case .lifeboxStorageLimit:
-                self?.openPhotoPage()
-            default:
-                break
-            }
-        }
-        handle(action)
+        handle { }
     }
     
     private func handle(_ action: @escaping VoidHandler) {
@@ -193,10 +180,6 @@ private extension WarningPopupController {
     
     func openStorage() {
         router.pushViewController(viewController: router.packages)
-    }
-    
-    func openPhotoPage() {
-//        router.tabBarController?.showPhotoScreen()
     }
     
     func openSettings() {

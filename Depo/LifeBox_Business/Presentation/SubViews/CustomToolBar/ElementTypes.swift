@@ -12,7 +12,6 @@ enum ElementTypes {
     case edit
     case delete
     case emptyTrashBin
-    case deleteDeviceOriginal
     case move
     case sync
     case syncInProgress
@@ -528,8 +527,6 @@ enum ElementTypes {
             return TextConstants.actionSheetRename
         case .removeAlbum:
             return TextConstants.actionSheetRemove
-        case .deleteDeviceOriginal:
-            return TextConstants.actionSheetDeleteDeviceOriginal
         case .changeCoverPhoto:
             return TextConstants.actionSheetChangeCover
         case .instaPick:

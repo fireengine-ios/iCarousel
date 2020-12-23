@@ -41,11 +41,8 @@ final class AppConfigurator {
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
         LocalMediaStorage.default.clearTemporaryFolder()
         
-        startUpdateLocation(with: launchOptions)
         
         AuthoritySingleton.shared.checkNewVersionApp()
-        
-        PremiumService.shared.addObserverForSyncStatusDidChange()
     }
     
     private static func setupIAPObserver() {
@@ -58,9 +55,6 @@ final class AppConfigurator {
             storageVars.isAppFirstLaunch = false
             KeychainCleaner().clear()
             /// call migrate after Keychain clear
-            if #available(iOS 13.0, *) {
-                BackgroundSyncService.shared.cancelAllTasks()
-            }
             AppMigrator.migrateAll()
         }
     }
@@ -122,9 +116,4 @@ final class AppConfigurator {
         static let AppVersionKey = "version_preference"
     }
     
-    private static func startUpdateLocation(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        if let isLocationUpdate = launchOptions?[.location] as? NSNumber, isLocationUpdate.boolValue {
-            LocationManager.shared.startUpdateLocation()
-        }
-    }
 }

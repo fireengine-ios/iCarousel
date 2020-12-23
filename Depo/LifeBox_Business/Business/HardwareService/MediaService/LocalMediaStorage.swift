@@ -93,9 +93,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
-    private lazy var operationsService = MediaItemOperationsService.shared
-    private lazy var coreDataStack: CoreDataStack = factory.resolve()
-    
     private lazy var streamReaderWrite = StreamReaderWriter()
     
     private let queue = OperationQueue()
@@ -120,10 +117,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         queue.maxConcurrentOperationCount = 1
         
         super.init()
-        guard photoLibraryIsAvailible() else {
-            return
-        }
-        self.photoLibrary.register(self)
+//        guard photoLibraryIsAvailible() else {
+//            return
+//        }
+//        self.photoLibrary.register(self)
     }
     
     func photoLibraryIsAvailible() -> Bool {
@@ -192,7 +189,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         switch status {
         //TODO: uncomment for xcode 12
         case .authorized, .limited:
-            photoLibrary.register(self)
+//            photoLibrary.register(self)
             completion(true, status)
             AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(true)
         case .notDetermined, .restricted:
@@ -208,7 +205,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 self.passcodeStorage.systemCallOnScreen = false
                 let isAuthorized = authStatus.isAccessible
                 if isAuthorized {
-                    self.photoLibrary.register(self)
+//                    self.photoLibrary.register(self)
                 }
                 AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(isAuthorized)
                 self.isWaitingForPhotoPermission = false
@@ -286,59 +283,61 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func getAllAlbums(completion: @escaping (_ albums: [AlbumItem]) -> Void) {
-        debugLog("LocalMediaStorage getAllAlbums")
-        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
-            guard accessGranted else {
-                completion([])
-                return
-            }
-            
-            DispatchQueue.global().async {
-                let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
-                let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
-                
-                var albums = [AlbumItem]()
-                
-                let dispatchGroup = DispatchGroup()
-                [album, smartAlbum].forEach { album in
-                    album.enumerateObjects { object, index, stop in
-                        dispatchGroup.enter()
-                        self?.numberOfItems(in: object) { itemsCount, fromCoreData  in
-                            if itemsCount > 0 {
-                                let item = AlbumItem(uuid: object.localIdentifier,
-                                                     name: object.localizedTitle,
-                                                     creationDate: nil,
-                                                     lastModifiDate: nil,
-                                                     fileType: .photoAlbum,
-                                                     syncStatus: .unknown,
-                                                     isLocalItem: true)
-                                if fromCoreData {
-                                    item.imageCount = itemsCount
-                                }
-                                
-                                if let asset = self?.firstValidAsset(for: object) {
-                                    item.preview = WrapData(asset: asset)
-                                    albums.append(item)
-                                }
-                            }
-                            dispatchGroup.leave()
-                        }
-                    }
-                }
-                dispatchGroup.notify(queue: .main) {
-                    /// Sort our albums by name AZ
-                    albums.sort(by: {
-                        if let firstSortName = $0.name, let secondSortName = $1.name {
-                            return firstSortName < secondSortName
-                        } else {
-                            assertionFailure()
-                            return true
-                        }
-                    })
-                    completion(albums)
-                }
-            }
-        }
+        //FIXME: get from Gallery
+        completion([])
+//        debugLog("LocalMediaStorage getAllAlbums")
+//        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
+//            guard accessGranted else {
+//                completion([])
+//                return
+//            }
+//
+//            DispatchQueue.global().async {
+//                let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+//                let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+//
+//                var albums = [AlbumItem]()
+//
+//                let dispatchGroup = DispatchGroup()
+//                [album, smartAlbum].forEach { album in
+//                    album.enumerateObjects { object, index, stop in
+//                        dispatchGroup.enter()
+//                        self?.numberOfItems(in: object) { itemsCount, fromCoreData  in
+//                            if itemsCount > 0 {
+//                                let item = AlbumItem(uuid: object.localIdentifier,
+//                                                     name: object.localizedTitle,
+//                                                     creationDate: nil,
+//                                                     lastModifiDate: nil,
+//                                                     fileType: .photoAlbum,
+//                                                     syncStatus: .unknown,
+//                                                     isLocalItem: true)
+//                                if fromCoreData {
+//                                    item.imageCount = itemsCount
+//                                }
+//
+//                                if let asset = self?.firstValidAsset(for: object) {
+//                                    item.preview = WrapData(asset: asset)
+//                                    albums.append(item)
+//                                }
+//                            }
+//                            dispatchGroup.leave()
+//                        }
+//                    }
+//                }
+//                dispatchGroup.notify(queue: .main) {
+//                    /// Sort our albums by name AZ
+//                    albums.sort(by: {
+//                        if let firstSortName = $0.name, let secondSortName = $1.name {
+//                            return firstSortName < secondSortName
+//                        } else {
+//                            assertionFailure()
+//                            return true
+//                        }
+//                    })
+//                    completion(albums)
+//                }
+//            }
+//        }
     }
     
     private func firstValidAsset(for collection: PHAssetCollection) -> PHAsset? {
@@ -393,18 +392,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
     }
     
-    private func numberOfItems(in album: PHAssetCollection, completion: @escaping (_ value: Int, _ fromCoreData: Bool) -> Void) {
-        guard !CacheManager.shared.isProcessing else {
-            completion(album.photosCount + album.videosCount, false)
-            return
-        }
-        let assets = PHAsset.fetchAssets(in: album, options: PHFetchOptions())
-        let array = assets.objects(at: IndexSet(0..<assets.count))
-        let context = coreDataStack.newChildBackgroundContext
-        operationsService.listAssetIdAlreadySaved(allList: array, context: context) { ids in
-            completion(ids.count, true)
-        }
-    }
     
     // MARK: Image
     
@@ -545,7 +532,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     self?.add(asset: assetPlaceholder.localIdentifier, to: album)
                     success?()
                 } else if let item = item, let assetIdentifier = placeholder?.localIdentifier {
-                    self?.merge(asset: assetIdentifier, with: item, success: success, fail: fail)
+                    success?()
                 }
             case .failed(let error):
                 fail?(.error(error))
@@ -684,76 +671,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }
             localTempoID = localID
         }, completionHandler: { [weak self] status, error in
-            self?.merge(asset: localTempoID, with: originalImage, isFilteredItem: true, success: success, fail: fail)
+            success?()
         })
         
     }
     
-    private func merge(asset assetIdentifier: String, with item: WrapData, isFilteredItem: Bool = false, success: VoidHandler? = nil, fail: FailResponse? = nil) {
-        guard photoLibraryIsAvailible() else {
-            fail?(.failResponse(nil))
-            return
-        }
-        
-        guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject else {
-            assertionFailure()
-            fail?(.failResponse(nil))
-            return
-        }
-            
-        let mediaItemService = MediaItemOperationsService.shared
-        LocalMediaStorage.default.assetsCache.append(list: [asset])
-        
-        // call append to get the completion and to be sure that local item is saved in our db
-        mediaItemService.append(localMediaItems: [asset]) { [weak self] in
-            guard let self = self else {
-                assertionFailure()
-                fail?(.failResponse(nil))
-                return
-            }
-            
-            let context = self.coreDataStack.newChildBackgroundContext
-            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { [weak self] items in
-                guard let self = self, let savedLocalItem = items.first else {
-                    assertionFailure()
-                    fail?(.failResponse(nil))
-                    return
-                }
-                // manually change some  properties
-                savedLocalItem.trimmedLocalFileID = item.getFisrtUUIDPart()
-                savedLocalItem.syncStatusValue = SyncWrapperedStatus.synced.valueForCoreDataMapping()
-                if isFilteredItem {
-                    savedLocalItem.isFiltered = true
-                }
-                
-                var userObjectSyncStatus = Set<MediaItemsObjectSyncStatus>()
-                if let unwrapedSet = savedLocalItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
-                    userObjectSyncStatus = unwrapedSet
-                }
-                SingletonStorage.shared.getUniqueUserID(success: {currentUserID in
-                    context.perform {
-                        savedLocalItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
-                        userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
-                        
-                        MediaItemOperationsService.shared.updateRelationsAfterMerge(with: item.uuid, localItem: savedLocalItem, context: context, completion: {  [weak self] in
-                            
-                            guard let self = self else {
-                                assertionFailure()
-                                fail?(.failResponse(nil))
-                                return
-                            }
-                            
-                            self.coreDataStack.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
-                                success?()
-                            })
-                        })
-                    }
-                }, fail: { error in
-                    fail?(error)
-                })
-            })
-        }
-    }
+   
     
     fileprivate func add(asset assetIdentifier: String, to album: String) {
         askPermissionForPhotoFramework(redirectToSettings: true, completion: { [weak self] accessGranted, _ in

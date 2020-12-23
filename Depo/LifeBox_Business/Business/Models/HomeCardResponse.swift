@@ -37,8 +37,6 @@ final class HomeCardResponse : Equatable {
             return .movieCard
         case .collage:
             return .collage
-        case .stylizedPhoto:
-            return .stylizedPhoto
         case .contactBackup:
             if ContactBackupOld.isContactInfoObjectEmpty(object: details) {
                 return .contactBacupEmpty
@@ -50,8 +48,6 @@ final class HomeCardResponse : Equatable {
             return .waitingForWiFi
         case .autoSyncOff:
             return .autoUploadIsOff
-        case .freeUpSpace:
-            return .freeAppSpace
         case .animation:
             return .animationCard
         case .launchCampaign:
@@ -99,12 +95,10 @@ enum HomeCardTypes: String {
     case latestUploads = "LATEST_UPLOADS"
     case movie = "MOVIE"
     case collage = "COLLAGE"
-    case stylizedPhoto = "STYLIZED_PHOTO"
     case contactBackup = "CONTACT_BACKUP"
     case album = "ALBUM"
     case autoSyncWatingForWifi = "AUTO_SYNC_WAITING_FOR_WIFI"
     case autoSyncOff = "AUTO_SYNC_OFF"
-    case freeUpSpace = "FREE_UP_SPACE"
     //case rating = "RATING"
     case animation = "ANIMATION"
     case launchCampaign = "LAUNCH_CAMPAIGN"

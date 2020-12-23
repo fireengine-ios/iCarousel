@@ -8,7 +8,6 @@
 
 protocol GridListTopBarDelegate: class {
     
-    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType)
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType)
     func representationChanged(viewType: MoreActionsConfig.ViewType)
     
@@ -116,10 +115,8 @@ class GridListTopBar: ViewController {
     @objc func segmentControlValueChanged(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            delegate?.filterChanged(filter: .Photo)
             sender.selectedSegmentIndex = 1//
         default:
-            delegate?.filterChanged(filter: .Video)
             sender.selectedSegmentIndex = 0//
         }
         

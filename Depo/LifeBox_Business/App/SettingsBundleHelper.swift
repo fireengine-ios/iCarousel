@@ -61,15 +61,6 @@ final class SettingsBundleHelper: NSObject {
         }
     }
     
-    private func checkDropDBStatusChange() {
-        let currentDropDBState = UserDefaults.standard.bool(forKey: BundleKeys.dropDB)
-        if currentDropDBState {
-            MediaItemOperationsService.shared.deleteAllEnteties { _ in
-                UserDefaults.standard.set(false, forKey: BundleKeys.dropDB)
-                AppConfigurator.logout()
-            }
-        }
-    }
     
     //MARK: - Observer
     
@@ -84,8 +75,6 @@ final class SettingsBundleHelper: NSObject {
         case BundleKeys.routeEnvironment:
             setCurrentRouteEnvironment()
             exit(EXIT_SUCCESS)
-        case BundleKeys.dropDB:
-            checkDropDBStatusChange()
         default:
             assertionFailure("\(keyPath ?? "nil")")
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)

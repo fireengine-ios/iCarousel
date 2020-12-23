@@ -286,152 +286,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
-    func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
-        debugLog("PHOTOEDIT: start")
-        
-        guard let item = item.first as? Item else {
-            completion?()
-            debugLog("PHOTOEDIT: there's no item")
-            return
-        }
-        
-        if let originalUrl = item.tmpDownloadUrl {
-            downloadEditImage(item: item, url: originalUrl, completion: completion)
-        } else {
-            fileService.createDownloadUrls(for: [item]) { [weak self] in
-                guard
-                    let self = self,
-                    let originalUrl = item.tmpDownloadUrl
-                else {
-                    completion?()
-                    debugLog("PHOTOEDIT: there's no url for private")
-                    return
-                }
-                self.downloadEditImage(item: item, url: originalUrl, completion: completion)
-            }
-        }
-    }
-    
-    private func downloadEditImage(item: WrapData, url: URL, completion: VoidHandler?) {
-        photoEditImageDownloader.download(url: url, attempts: 2) { [weak self] image in
-            guard
-                let self = self,
-                let image = image
-            else {
-                debugLog("PHOTOEDIT: can't get the original image")
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
-                UIApplication.showErrorAlert(message: TextConstants.errorServer)
-                completion?()
-                return
-            }
-            
-           let options = [
-            kCGImageSourceCreateThumbnailWithTransform: false,
-            kCGImageSourceCreateThumbnailFromImageAlways: true,
-            kCGImageSourceThumbnailMaxPixelSize: 1024] as CFDictionary
-            
-            guard
-                let previewData = image.jpeg(.low),
-                let source = CGImageSourceCreateWithData(previewData as CFData, options),
-                let imageReference = CGImageSourceCreateThumbnailAtIndex(source, 0, options)
-            else {
-                debugLog("PHOTOEDIT: can't create the preview image")
-                UIApplication.showErrorAlert(message: TextConstants.commonServiceError)
-                completion?()
-                return
-            }
-            
-            let previewImage = UIImage(cgImage: imageReference, scale: image.scale, orientation: image.imageOrientation)
-
-            debugLog("PHOTOEDIT: is about to create the controller")
-
-            let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
-
-                switch completionType {
-                    case .canceled:
-                        controller.dismiss(animated: true)
-                    
-                    case .savedAs(image: let newImage):
-                        controller.showSpinner()
-                        
-                        PhotoEditSaveService.shared.save(asCopy: true, image: newImage, item: item) { [weak self] result in
-                            switch result {
-                                case .success(let remote):
-                                    DispatchQueue.main.async {
-                                        controller.saveImageComplete(saveAsCopy: true)
-                                        controller.dismiss(animated: false) {
-                                            self?.showPhotoVideoPreview(item: remote) {
-                                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
-                                            }
-                                        }
-                                }
-                                
-                                case .failed(_):
-                                    DispatchQueue.main.async {
-                                        controller.saveImageFailure(saveAsCopy: true)
-                                        controller.hideSpinner()
-                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
-                                    }
-                            }
-                    }
-                    
-                    case .saved(image: let newImage):
-                        controller.showSpinner()
-                        
-                        var newThumbnails = [UIImage]()
-                        var urlsToReplace = [URL]()
-                        
-                        if let smallUrl = item.metaData?.smalURl {
-                            urlsToReplace.append(smallUrl)
-                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 64, height: 64)))
-                        }
-                        if let mediumUrl = item.metaData?.mediumUrl {
-                            urlsToReplace.append(mediumUrl)
-                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 128, height: 128)))
-                        }
-                        if let largeUrl = item.metaData?.largeUrl {
-                            urlsToReplace.append(largeUrl)
-                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 1024, height: 1024)))
-                        }
-                        if case .remoteUrl(let pathUrl) = item.patchToPreview, pathUrl != nil {
-                            urlsToReplace.append(pathUrl)
-                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 1024, height: 1024)))
-                        }
-                        
-                        
-                        PhotoEditSaveService.shared.save(asCopy: false, image: newImage, item: item) { [weak self] result in
-                            switch result {
-                                case .success(let updatedItem):
-                                    
-                                    item.copyFileData(from: updatedItem)
-                                    item.patchToPreview = updatedItem.patchToPreview
-                                    
-                                    let closeScreen = {
-                                        DispatchQueue.main.async {
-                                            controller.saveImageComplete(saveAsCopy: false)
-                                            controller.dismiss(animated: true)
-                                            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
-                                        }
-                                    }
-                                    
-                                    ImageDownloder.removeImageFromCache(url: updatedItem.tmpDownloadUrl, completion: {
-                                        ImageDownloder.replaceImagesInCache(urls: urlsToReplace, images: newThumbnails, completion: closeScreen)
-                                    })
-
-                                case .failed(_):
-                                    DispatchQueue.main.async {
-                                        controller.saveImageFailure(saveAsCopy: false)
-                                        controller.hideSpinner()
-                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
-                                }
-                            }
-                    }
-                }
-            }
-            self.router.presentViewController(controller: vc)
-        }
-    }
-    
     private func showPhotoVideoPreview(item: WrapData, completion: @escaping VoidHandler) {
         let detailModule = router.filesDetailModule(fileObject: item,
                                                     items: [item],
@@ -443,41 +297,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: nController, animated: true, completion: completion)
     }
 
-        
-    func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
-        guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
-            completion?()
-            return
-        }
-        
-        let controller = OverlayStickerViewController()
-        controller.smashActionService = self.smashActionService
-        let navVC = NavigationController(rootViewController: controller)
-        navVC.navigationBar.isHidden = true
-        router.presentViewController(controller: navVC, animated: true) { [weak self] in
-            ImageDownloder().getImage(patch: url) { [weak self] image in
-                guard
-                    let self = self,
-                    let image = image
-                else {
-                    if !ReachabilityService.shared.isReachable {
-                        controller.dismiss(animated: false) {
-                             UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
-                        }
-                    }
-            
-                    completion?()
-                    return
-                }
-                
-                controller.selectedImage = image
-                controller.imageName = item.name
-                completion?()
-                
-                self.trackEvent(elementType: .smash)
-            }
-        }
-    }
     
     func moveToTrash(items: [BaseDataSourceItem]) {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
@@ -1022,14 +841,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: popup, animated: false)
     }
     
-    func deleteDeviceOriginal(items: [BaseDataSourceItem]) {
-        guard let wrapedItems = items as? [WrapData] else {
-            return
-        }
-        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: successAction(elementType: .deleteDeviceOriginal),
-                                     fail: failAction(elementType: .deleteDeviceOriginal))
-    }
-    
     func endSharing(item: BaseDataSourceItem?) {
         guard let item = item as? WrapData else {
             return
@@ -1345,7 +1156,7 @@ extension MoreFilesActionsInteractor {
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
         case .removeFromFavorites:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
-        case .delete, .deleteDeviceOriginal:
+        case .delete:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
         case .print:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
@@ -1692,11 +1503,6 @@ extension MoreFilesActionsInteractor {
     private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         analyticsService.trackFileOperationGAEvent(operationType: .delete, items: items)
         fileService.delete(items: items, success: { [weak self] in
-            if #available(iOS 14.0, *) {
-                if !SyncServiceManager.shared.hasExecutingSync, CacheManager.shared.isCacheActualized {
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
-            }
             self?.removeItemsFromPlayer(items: items)
             success()
         }, fail: fail)

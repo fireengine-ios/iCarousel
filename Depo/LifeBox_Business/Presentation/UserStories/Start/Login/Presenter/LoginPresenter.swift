@@ -51,7 +51,6 @@ class LoginPresenter: BasePresenter {
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         AuthoritySingleton.shared.checkNewVersionApp()
-        openAutoSyncIfNeeded()
     }
     
     private func openEmptyEmail() {
@@ -60,19 +59,6 @@ class LoginPresenter: BasePresenter {
         }
         
         router.openEmptyEmail(successHandler: onSuccess)
-    }
-    
-    private func openAutoSyncIfNeeded() {
-        view.showSpinner()
-        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpinner()
-            
-            if needToOpenAutoSync {
-                self?.router.goToSyncSettingsView()
-            }
-        }) { [weak self] error in
-            self?.view.hideSpinner()
-        }
     }
     
     private func failLogin(message: String) {

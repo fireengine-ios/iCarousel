@@ -35,7 +35,6 @@ enum SpotlightType: Int {
         case .albumCard: return AlbumCard.self
         case .collageCard: return CollageCard.self
         case .animationCard: return AnimationCard.self
-        case .filterCard: return FilterPhotoCard.self
         default: return BaseCardView.self
         }
     }
@@ -49,8 +48,6 @@ enum SpotlightType: Int {
             self = .collageCard
         } else if cardView is AnimationCard {
             self = .animationCard
-        } else if cardView is FilterPhotoCard {
-            self = .filterCard
         } else {
             return nil
         }

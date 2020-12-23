@@ -195,7 +195,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     // MARK: presenter output
     
-    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+    func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>) {
         guard let index = interactor.currentItemIndex else {
             return
         }

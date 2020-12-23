@@ -133,9 +133,6 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     @IBAction func onDeleteFilesButton() {
         close(isFinalStep: false) { [weak self] in
             self?.delegate?.onDeleteFilesTap()
-            
-            let router = RouterVC()
-//            router.tabBarController?.showPhotoScreen()
         }
         analyticsHandler(eventLabel: .overQuota(.deleteFiles(doNotShowAgain)))
     }

@@ -86,37 +86,31 @@ final class PushNotificationService {
             return
         }
         
-        trackIfNeeded(action: action)
-        
         let isLoggedIn = tokenStorage.accessToken != nil
         if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
         }
         
-        if isLoggedIn && action.isContained(in: [.login, .widgetLogout]) {
+        if isLoggedIn && action.isContained(in: [.login]) {
             clear()
             return
         }
                 
         switch action {
         case .main, .home: openMain()
-        case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
         case .floatingMenu: openFloatingMenu()
-        case .packages, .widgetQuota: openPackages()
-        case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: break
-        case .videos: break
+        case .packages: openPackages()
+        case .videos: openVideos()
         case .albums: openAlbums()
         case .stories: openStories()
         case .allFiles: openAllFiles()
         case .music: openMusic()
         case .documents: openDocuments()
-        case .contactSync, .widgetNoBackup, .widgetOldBackup: break
         case .periodicContactSync: openPeriodicContactSync()
         case .favorites: openFavorites()
         case .createStory: openCreateStory()
         case .contactUs: openContactUs()
         case .usageInfo: openUsageInfo()
-        case .autoUpload: openAutoUpload()
         case .recentActivities: openRecentActivities()
         case .email: openEmail()
         case .importDropbox: openImportDropbox()
@@ -124,21 +118,15 @@ final class PushNotificationService {
         case .faq: openFaq()
         case .passcode: openPasscode()
         case .loginSettings: openLoginSettings()
-        case .faceImageRecognition, .widgetFIRDisabled: openFaceImageRecognition()
-        case .people, .widgetFIR: openPeople()
+        case .faceImageRecognition: openFaceImageRecognition()
+        case .people: openPeople()
         case .things: openThings()
         case .places: openPlaces()
         case .http: openURL(notificationParameters)
-        case .login, .widgetLogout:
+        case .login:
             openLogin()
             clear()
         case .search: openSearch()
-        case .freeUpSpace, .widgetFreeUpSpace:
-            if FreeAppSpace.session.state == .finished && CacheManager.shared.isCacheActualized {
-                openFreeUpSpace()
-            } else {
-                openMain()
-            }
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
         case .changePassword: openChangePassword()
@@ -217,7 +205,7 @@ final class PushNotificationService {
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue
-                
+
                 if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
                     segmentedController.loadViewIfNeeded()
                     segmentedController.switchSegment(to: segmentIndex)
@@ -254,10 +242,6 @@ final class PushNotificationService {
         openTabBarItem(index: .documents)
     }
     
-    private func openSyncSettings() {
-        pushTo(router.autoUpload)
-    }
-    
     private func openFloatingMenu() {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
@@ -268,6 +252,10 @@ final class PushNotificationService {
     
     private func openPackages() {
         pushTo(router.packages)
+    }
+    
+    private func openVideos() {
+//        openTabBarItem(index: .videosScreenIndex)
     }
     
     private func openAlbums() {
@@ -297,7 +285,7 @@ final class PushNotificationService {
     private func openTrashBin() {
         openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
     }
-    
+
     private func openPeriodicContactSync() {
         pushTo(router.periodicContactsSync)
     }
@@ -313,10 +301,6 @@ final class PushNotificationService {
     
     private func openUsageInfo() {
         pushTo(router.usageInfo)
-    }
-    
-    private func openAutoUpload() {
-        pushTo(router.autoUpload)
     }
     
     private func openRecentActivities() {
@@ -464,14 +448,6 @@ final class PushNotificationService {
     private func openHiddenBin() {
         let controller = router.hiddenPhotosViewController()
         pushTo(controller)
-    }
-    
-    private func trackIfNeeded(action: PushNotificationAction) {
-        guard action.fromWidget else {
-            return
-        }
-        
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openWithWidget, eventLabel: .success)
     }
     
     private func openSharedWithMe() {

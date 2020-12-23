@@ -166,11 +166,6 @@ private final class APIReachabilityService {
     }
     
     private func notify() {
-        if connection == .reachable {
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-        }
         NotificationCenter.default.post(name: .apiReachabilityDidChange, object: nil)
     }
     

@@ -290,8 +290,7 @@ final class UploadService: BaseRequestService {
         guard
             allOperations != 0,
             allOperations != finishedSyncOperationsCount,
-            autoSyncStorage.settings.isAutoSyncEnabled,
-            SyncServiceManager.shared.hasExecutingSync
+            autoSyncStorage.settings.isAutoSyncEnabled
         else {
             clearSyncCounters()
             return

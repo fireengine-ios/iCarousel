@@ -92,7 +92,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     private lazy var shareManager = TBMatikPhotosBottomBarManager(delegate: self)
     
     private lazy var fileService = FileService.shared
-    private lazy var cacheManager = CacheManager.shared
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var uuids = [String]()
@@ -120,10 +119,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     private var isConfiguredCarousel = false
     
     // MARK: - View lifecycle
-    
-    deinit {
-        cacheManager.delegates.remove(self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -173,12 +168,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         setupCarousel()
         updateTitle()
         
-        if !cacheManager.isCacheActualized {
-            cacheManager.delegates.add(self)
-            timelineButton.visibleState = .photosPreparation
-        } else {
-            timelineButton.visibleState = .disabled
-        }
+        timelineButton.visibleState = .disabled
     }
     
     private func setupCarousel() {
@@ -250,8 +240,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
             assertionFailure()
             return
         }
-        
-//        tabbarController.showAndScrollPhotosScreen(scrollTo: item)        
+               
         dismiss(animated: true)
     }
     
@@ -299,11 +288,7 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
             return
         }
         
-        if cacheManager.isCacheActualized {
-            timelineButton.visibleState = view.hasImage ? .enabled : .disabled
-        } else {
-            timelineButton.visibleState = .photosPreparation
-        }
+        timelineButton.visibleState = view.hasImage ? .enabled : .disabled
         
         shareButton.isEnabled = view.hasImage
         shareButton.alpha = shareButton.isEnabled ? 1 : 0.5
@@ -335,7 +320,7 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
 
 // MARK: - CacheManagerDelegate
 
-extension TBMatikPhotosViewController: CacheManagerDelegate {
+extension TBMatikPhotosViewController {
     
     func didCompleteCacheActualization() {
         guard let itemView = carousel.itemView(at: carousel.currentItemIndex) as? TBMatikPhotoView else {
@@ -360,7 +345,7 @@ extension TBMatikPhotosViewController: BaseItemInputPassingProtocol {
     func changeCover() { }
     func openInstaPick() { }
     
-    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+    func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>) {
         if let item = currentItem {
             selectedItemsCallback([item])
         }

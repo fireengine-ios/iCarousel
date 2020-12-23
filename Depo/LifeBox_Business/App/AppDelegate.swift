@@ -15,7 +15,6 @@ import Adjust
 import Netmera
 import UserNotifications
 import KeychainSwift
-import WidgetKit
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -81,16 +80,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    @available(iOS 13.0, *)
-    private lazy var backgroundSyncService = BackgroundSyncService.shared
     
     var window: UIWindow?
     var watchdog: Watchdog?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let coreDataStack: CoreDataStack = factory.resolve()
-        
         startCoreDataSafeServices(with: application, options: launchOptions)
         
         APILogger.shared.startLogging()
@@ -100,28 +95,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let router = RouterVC()
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = InitializingViewController()
+        self.window?.rootViewController = router.vcForCurrentState()
         self.window?.makeKeyAndVisible()
         
-        if #available(iOS 13.0, *) {
-            debugLog("BG! Registeration")
-            self.backgroundSyncService.registerLaunchHandlers()
-            
-        }
+        AppConfigurator.logoutIfNeed()
         
-        coreDataStack.setup { [weak self] in
-            guard let self = self else {
-                return
-            }
-
-            DispatchQueue.main.async {
-                AppConfigurator.logoutIfNeed()
-                
-                self.window?.rootViewController = router.vcForCurrentState()
-                self.window?.isHidden = false
-                
-            }
-        }
+        self.window?.isHidden = false
         
         return true
     }
@@ -136,14 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
         
-        SharedGroupCoreDataStack.shared.setup {
-            debugLog("SharedGroupCoreDataStack setup is completed")
-        }
-    
         setupPushNotifications(with: options)
         AppConfigurator.applicationStarted(with: options)
-        
-        ContactSyncSDK.doPeriodicSync()
         
         passcodeStorage.systemCallOnScreen = false
         
@@ -199,21 +172,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidEnterBackground")
         
-        
-        if #available(iOS 13.0, *) {
-            debugLog("BG! AppDelegate applicationDidEnterBackground")
-            backgroundSyncService.scheduleProcessingSync()
-            backgroundSyncService.scheduleRefreshSync()
-        }
-        
         BackgroundTaskService.shared.beginBackgroundTask()
 
         firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
-        
-        if tokenStorage.refreshToken != nil {
-            LocationManager.shared.startUpdateLocationInBackground()
-        }
         
         if !passcodeStorage.isEmpty {
             let topVC = UIApplication.topController()
@@ -233,16 +195,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
-        if BackgroundTaskService.shared.appWasSuspended {
-            debugLog("App was suspended")
-            CacheManager.shared.stopRemotesActualizeCache()
-            CacheManager.shared.actualizeCache()
-        } else if tokenStorage.refreshToken != nil {
-            SyncServiceManager.shared.update()
-        }
-        
-        
-        ContactSyncSDK.doPeriodicSync()
     }
     
     func showPasscodeIfNeedInBackground() {
@@ -330,16 +282,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillTerminate")
-        
-        if !tokenStorage.isRememberMe {
-            SyncServiceManager.shared.stopSync()
-            AutoSyncDataStorage().clear()
-        }
-        
-        WidgetService.shared.notifyWidgetAbout(status: .stopped)
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
         
         UserDefaults.standard.synchronize()
         

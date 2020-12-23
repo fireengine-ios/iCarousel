@@ -10,10 +10,6 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
     
     let routerVC = RouterVC()
     
-    func goToAutoSync() {
-        routerVC.pushViewController(viewController: routerVC.synchronyseScreen)
-    }
-    
     func goToHomePage() {
         routerVC.setNavigationController(controller: routerVC.tabBarScreen)
     }

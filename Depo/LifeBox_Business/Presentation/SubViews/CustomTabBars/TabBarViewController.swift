@@ -71,9 +71,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return nil
     }
     
-    var lastPhotoVideoIndex = 1 //TabScreenIndex.photosScreenIndex.rawValue
-    
-    
     var selectedIndex: NSInteger = 0 {
         willSet {
             // will get crash
@@ -180,33 +177,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             return
         }
         navigationController.popToRootViewController(animated: animated)
-    }
-    
-    private func scrollPhotoPage(scrollTo item: Item) {
-            if let photosController = openPhotoPage()?.currentController as? PhotoVideoController {
-                photosController.scrollToItem(item)
-            }
-    }
-    
-    @discardableResult
-    private func openPhotoPage() -> SegmentedController? {
-        
-        guard let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController else {
-            return nil
-        }
-        
-        segmentedController.loadViewIfNeeded()
-        
-        if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
-            // if photo page is not active
-            guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true } ) else {
-                assertionFailure("Photo page not found")
-                return nil
-            }
-            segmentedController.switchSegment(to: index)
-        }
-        return segmentedController
-        
     }
     
     private func changeVisibleStatus(hidden: Bool) {

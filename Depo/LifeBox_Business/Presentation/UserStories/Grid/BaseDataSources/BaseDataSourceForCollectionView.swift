@@ -1738,32 +1738,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         
-        let localIDs = serverObjects.map {
-            $0.getTrimmedLocalID()
-        }
-            
-        let semaphore = DispatchSemaphore(value: 0)
-
-        MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs) { localObjectsForReplace in
-            let foundedLocalID = localObjectsForReplace.map {
-                $0.getTrimmedLocalID()
-            }
-            for object in serverObjects {
-                let trimmedID = object.getTrimmedLocalID()
-                if foundedLocalID.contains(trimmedID) {
-                    if let index = allItemsIDs.index(of: trimmedID){
-                        allItemsIDs.remove(at: index)
-                        if allItemsIDs.contains(trimmedID) {
-                            idsForRemove.append(object.uuid)
-                        }
-                    }
-                } else {
+        for object in serverObjects {
+            let trimmedID = object.getTrimmedLocalID()
+            if let index = allItemsIDs.index(of: trimmedID){
+                allItemsIDs.remove(at: index)
+                if allItemsIDs.contains(trimmedID) {
                     idsForRemove.append(object.uuid)
                 }
             }
-            semaphore.signal()
         }
-        semaphore.wait()
         
         return idsForRemove
     }

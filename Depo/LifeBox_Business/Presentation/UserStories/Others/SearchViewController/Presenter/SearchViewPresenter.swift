@@ -336,25 +336,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                 actionTypes.remove(at: editIndex)
             }
             
-            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                let serverObjects = selectedItems.filter({ !$0.isLocalItem })
-                if serverObjects.isEmpty {
-                    actionTypes.remove(at: deleteOriginalIndex)
-                } else if selectedItems is [Item] {
-                    
-                    MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
-                        let localDuplicates = items
-                        if localDuplicates.count == 0 {
-                            //selectedItems = localDuplicates
-                            actionTypes.remove(at: deleteOriginalIndex)
-                        }
-                        self?.semaphore.signal()
-                    })
-                    semaphore.wait()
-                }
-                
-            }
-            
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
@@ -456,10 +437,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType) {
 //        sortedPushed(with: rule.sortedRulesConveted)
     }
-    
-    func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
-        
-    }
+
     
     // MARK: - MoreActionsViewDelegate
     
@@ -473,7 +451,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     // MARK: - BaseFilesGreedModuleInput
     
-    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+    func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>) {
         selectedItemsCallback(dataSource.getSelectedItems())
     }
     

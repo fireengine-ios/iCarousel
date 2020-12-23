@@ -46,9 +46,7 @@ final class FaceImageViewController: ViewController, NibInit {
     @IBAction private func faceImageSwitchValueChanged(_ sender: UISwitch) {
         isShowFaceImageWaitAlert = true
         changeFaceImageAndFacebookAllowed(isFaceImageAllowed: sender.isOn, isFacebookAllowed: sender.isOn)
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+        
     }
     
     @IBAction private func facebookSwitchValueChanged(_ sender: UISwitch) {

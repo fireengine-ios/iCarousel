@@ -706,24 +706,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             }
             
             DispatchQueue.global().async {[weak self] in
-                if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                    let serverObjects = selectedItems.filter({ !$0.isLocalItem })
-                    if serverObjects.isEmpty {
-                        actionTypes.remove(at: deleteOriginalIndex)
-                    } else if selectedItems is [Item] {
-                        MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: selectedItems as! [Item], duplicatesCallBack: { [weak self] items in
-                            if items.isEmpty {
-                                //selectedItems = localDuplicates
-                                actionTypes.remove(at: deleteOriginalIndex)
-                            }
-                            self?.semaphore.signal()
-                        })
-                        self?.semaphore.wait()
-                    }
-                    
-                }
-                
-                if let `self` = self {
+                if let self = self {
                     self.alertSheetModule?.showAlertSheet(with: actionTypes,
                                                      items: selectedItems,
                                                      presentedBy: sender,
@@ -772,24 +755,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         sortedPushed(with: rule.sortedRulesConveted)
     }
     
-    func filtersTopBar(cahngedTo filters: [MoreActionsConfig.MoreActionsFileType]) {
-        guard let firstFilter = filters.first else {
-            return
-        }
-        switch firstFilter {
-        case .Photo:
-            NotificationCenter.default.post(name: .photosScreen, object: nil, userInfo: nil)
-        case .Video:
-            NotificationCenter.default.post(name: .videoScreen, object: nil, userInfo: nil)
-        default:
-            NotificationCenter.default.post(name: .photosScreen, object: nil, userInfo: nil)
-        }
-    }
-    
     
     // MARK: subModule presenter
     
-    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+    func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>) {
         selectedItemsCallback(dataSource.getSelectedItems())
     }
     

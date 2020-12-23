@@ -32,7 +32,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    override func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+    override func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>) {
         debugLog("AlbumDetailPresenter operationFinished")
         super.getSelectedItems { [weak self] selectedItems in
             guard let self = self else {

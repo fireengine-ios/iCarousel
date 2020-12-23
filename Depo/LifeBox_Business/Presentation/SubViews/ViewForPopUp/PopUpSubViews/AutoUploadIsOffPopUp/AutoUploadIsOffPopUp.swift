@@ -40,8 +40,7 @@ final class AutoUploadIsOffPopUp: BaseCardView {
     }
     
     @IBAction func onSettingsButton() {
-        let router = RouterVC()
-        router.pushViewController(viewController: router.autoUpload)
+        
     }
     
     override func layoutSubviews() {

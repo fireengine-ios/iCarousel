@@ -80,7 +80,7 @@ final class DivorceCard: BaseCardView {
         deleteCard()
     }
     @IBAction private func onBottomButtonTap(_ sender: Any) {
-        NotificationCenter.default.post(name: .photosScreen, object: nil, userInfo: nil)
+        
     }
     @IBAction private func playButtonTap(_ sender: Any) {
         

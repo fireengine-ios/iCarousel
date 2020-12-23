@@ -16,8 +16,6 @@ protocol LoginRouterInput {
     
     func goToTermsAndServices()
     
-    func goToSyncSettingsView()
-    
     func goToRegistration()
 
     func showNeedSignUp(message: String, onClose: @escaping VoidHandler)

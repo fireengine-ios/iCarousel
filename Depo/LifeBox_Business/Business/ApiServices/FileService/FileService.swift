@@ -535,32 +535,19 @@ class FileService: BaseRequestService {
                     }
                     
                     if let downloadItem = downloadParam.item {
-                        MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [downloadItem.getTrimmedLocalID()]) { mediaItems in
-                            if !mediaItems.isEmpty {
-                                removeDestinationFile()
-                                success?()
-                            } else {
-                                LocalMediaStorage.default.appendToAlbum(fileUrl: destination,
-                                                                         type: type,
-                                                                         album: downloadParam.albumName,
-                                                                         item: downloadParam.item,
-                                                                         success: {
-                                                                            removeDestinationFile()
-                                                                            success?()
-                                }, fail: { error in
-                                    removeDestinationFile()
-                                    fail?(error)
-                                })
-                            }
-                        }
-                        
-                        ///For now we do not update local files by remotes
-//                        CoreDataStack.shared.updateSavedItems(savedItems: [mediaItem],
-//                                                               remoteItems: [item],
-//                                                               context: CoreDataStack.shared.newChildBackgroundContext)
-                        
+                        LocalMediaStorage.default.appendToAlbum(fileUrl: destination,
+                                                                type: type,
+                                                                album: downloadParam.albumName,
+                                                                item: downloadItem,
+                                                                success: {
+                                                                    removeDestinationFile()
+                                                                    success?()
+                                                                }, fail: { error in
+                                                                    removeDestinationFile()
+                                                                    fail?(error)
+                                                                })
                     } else {
-                      fail?(.string("Incorrect response "))
+                        fail?(.string("Incorrect response "))
                     }
                 } else {
                     fail?(.string("Incorrect response "))

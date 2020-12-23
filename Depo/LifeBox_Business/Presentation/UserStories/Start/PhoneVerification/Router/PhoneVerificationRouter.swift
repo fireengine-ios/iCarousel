@@ -17,10 +17,6 @@ class PhoneVerificationRouter: PhoneVerificationRouterInput {
         })
     }
     
-    func goAutoSync() {
-        router.pushViewController(viewController: router.synchronyseScreen)
-    }
-    
     func presentErrorPopUp(with message: String) {
         let controller = PopUpController.with(title: TextConstants.checkPhoneAlertTitle, message: message, image: .error, buttonTitle: TextConstants.ok)
         router.presentViewController(controller: controller)

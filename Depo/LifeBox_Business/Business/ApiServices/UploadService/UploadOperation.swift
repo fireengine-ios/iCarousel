@@ -27,8 +27,6 @@ final class UploadOperation: Operation {
     
     typealias UploadParametersResponse = (UploadRequestParametrs) -> Void
     
-    private let mediaItemsService = MediaItemOperationsService.shared
-    private let mediaAlbumsService = MediaItemsAlbumOperationService.shared
     private let remoteAlbumsService = PhotosAlbumService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var privateShareService = PrivateShareApiServiceImpl()
@@ -526,27 +524,18 @@ final class UploadOperation: Operation {
                 //--
                 
                 if self.uploadType == .save, let updatedRemote = self.outputItem {
-                    self.mediaItemsService.replaceItem(uuid: self.inputItem.uuid, with: updatedRemote) { [weak self] in
-                        self?.storageVars.lastUnsavedFileUUID = nil
-                        debugLog("_upload: item is updated \(self?.inputItem.name ?? "") ")
-                        success()
-                    }
+                    self.storageVars.lastUnsavedFileUUID = nil
+                    debugLog("_upload: item is updated \(self.inputItem.name ?? "") ")
+                    success()
                     
                 } else {
                     //case for upload photo from camera
                     if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                         self.outputItem?.metaData?.mediumUrl = preview
                     }
-                    if self.inputItem.fileType.isContained(in: [.image, .video]) {
-                        self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
-                            self?.storageVars.lastUnsavedFileUUID = nil
-                            debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
-                            success()
-                        }
-                    } else {
-                        self.storageVars.lastUnsavedFileUUID = nil
-                        success()
-                    }
+                    
+                    self.storageVars.lastUnsavedFileUUID = nil
+                    success()
                 }
                 
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")

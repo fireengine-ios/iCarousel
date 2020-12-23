@@ -14,13 +14,7 @@ final class PremiumService {
     
     private let router = RouterVC()
 
-    func addObserverForSyncStatusDidChange() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self,
-                                       selector: #selector(onAutoSyncStatusDidChange),
-                                       name: .autoSyncStatusDidChange,
-                                       object: nil)
-    }
+    
     
     func showPopupForNewUserIfNeeded() {
         DispatchQueue.toMain {
@@ -47,12 +41,6 @@ final class PremiumService {
     
     
     // MARK: Utility methods
-    @objc private func onAutoSyncStatusDidChange(notification: NSNotification) {
-        if let vc = notification.object as? ItemSyncService,
-            vc.status == .executing {
-            showPopupForNewUserIfNeeded()
-        }
-    }
     
     private func moveToPremium() {
         let controller = router.premium()
