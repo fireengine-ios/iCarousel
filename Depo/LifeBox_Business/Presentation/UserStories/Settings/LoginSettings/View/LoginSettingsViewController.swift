@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LoginSettingsViewController: ViewController {
+final class LoginSettingsViewController: BaseViewController {
     
     @IBOutlet private weak var tableView: UITableView!  {
         willSet {

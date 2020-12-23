@@ -125,11 +125,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     fileprivate func subscribeToNotifications() {
-        let dropNotificationName = NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideMusicBar),
-                                               name: dropNotificationName,
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideMusicBar), name: .musicDrop, object: nil)
     }
     
     fileprivate func unSubscribeFromNotifications() {

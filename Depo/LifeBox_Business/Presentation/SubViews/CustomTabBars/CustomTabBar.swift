@@ -8,38 +8,6 @@
 
 import UIKit
 
-enum TabBarItem: CaseIterable {
-    case plus
-    case allFiles
-    
-    var title: String {
-        switch self {
-        case .plus:
-            return ""
-        case .allFiles:
-            return TextConstants.tabBarItemAllFilesLabel
-        }
-    }
-    
-    var icon: UIImage? {
-        switch self {
-        case .plus:
-            return UIImage(named: "")
-        case .allFiles:
-            return UIImage(named: "outlineDocs")
-        }
-    }
-    
-    var accessibilityLabel: String {
-        switch self {
-        case .plus:
-            return ""
-        case .allFiles:
-            return TextConstants.homeButtonAllFiles
-        }
-    }
-}
-
 typealias ImageNameToTitleTupple = (imageName: String, title: String, accessibilityTitle: String)
 
 class CustomTabBar: UITabBar {
@@ -63,7 +31,7 @@ class CustomTabBar: UITabBar {
             return tabBarItem
         }
         
-        items[1].isEnabled = false
+        items[2].isEnabled = false
         
         setItems(items, animated: false)
     }

@@ -39,7 +39,7 @@ class LocalAlbumPresenter: BaseFilesGreedPresenter {
         
         dataSource.displayingType = .list
         
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
     override func uploadData(_ searchText: String! = nil) {

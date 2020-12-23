@@ -116,7 +116,7 @@ class MusicBar: UIView {
 
     private func removePlayer() {
         player.stop()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop), object: nil)
+        NotificationCenter.default.post(name: .musicDrop, object: nil)
     }
 
     func configurateFromPLayer() {

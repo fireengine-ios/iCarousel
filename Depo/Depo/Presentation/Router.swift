@@ -160,8 +160,7 @@ class RouterVC: NSObject {
     
     func pushViewController(viewController: UIViewController, animated: Bool = true) {
         if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         if let navController = topNavigationController {
@@ -179,8 +178,7 @@ class RouterVC: NSObject {
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
         if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
@@ -194,8 +192,7 @@ class RouterVC: NSObject {
     
     func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
         if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         var viewControllersStack = navigationController?.viewControllers ?? []
@@ -1236,7 +1233,7 @@ class RouterVC: NSObject {
             segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
         }
         
-        let index = TabScreenIndex.documentsScreenIndex.rawValue
+        let index = TabScreenIndex.documents.rawValue
         if tabBarVC.selectedIndex == index {
             switchToTrashBin()
         } else {
