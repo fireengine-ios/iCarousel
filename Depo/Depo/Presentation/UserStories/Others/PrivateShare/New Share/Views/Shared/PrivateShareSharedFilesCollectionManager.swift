@@ -122,6 +122,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
             self.collectionView?.reloadData()
+            self.setEmptyScreen(isHidden: !self.fileInfoManager.splittedItems.isEmpty)
             self.delegate?.didEndReload()
         }
     }
@@ -255,9 +256,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfItems = fileInfoManager.splittedItems[section]?.count ?? 0
-        setEmptyScreen(isHidden: numberOfItems != 0)
-        return numberOfItems
+        return fileInfoManager.splittedItems[section]?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
