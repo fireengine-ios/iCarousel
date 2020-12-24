@@ -26,7 +26,7 @@ class AlbumDetailModuleInitializer: NSObject {
         viewController.album = album
         viewController.status = status
         viewController.needToShowTabBar = !status.isContained(in: [.hidden, .trashed])
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifebox])
+        viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFromLifebox])
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.cardsContainerView.isEnable = true
         viewController.mainTitle = album.name ?? ""

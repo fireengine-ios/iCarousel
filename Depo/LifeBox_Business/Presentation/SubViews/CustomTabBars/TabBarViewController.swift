@@ -519,12 +519,7 @@ extension TabBarViewController: TabBarActionHandler {
     func handleAction(_ action: TabBarViewController.Action) {
         let router = RouterVC()
         
-        switch action {
-        case .takePhoto:
-            guard !checkReadOnlyPermission() else { return }
-            
-            cameraService.showCamera(onViewController: self)
-            
+        switch action { 
         case .createFolder:
             let isFavorites = router.isOnFavoritesView()
             var folderUUID = getFolderUUID()

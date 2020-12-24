@@ -1141,8 +1141,6 @@ extension NetmeraEvents.Actions {
         convenience init?(action: TabBarViewController.Action) {
             let netmeraPussButtonAction: NetmeraEventValues.PlusButtonAction
             switch action {
-            case .takePhoto:
-                netmeraPussButtonAction = .useCamera
             case .createFolder:
                 netmeraPussButtonAction = .newFolder
             case .createStory:

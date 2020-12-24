@@ -581,8 +581,6 @@ enum GAEventLabel {
                 return "New Folder"
             case .createStory:
                 return "Create Story"
-            case .takePhoto:
-                return "Use Camera"
             case .upload:
                 return "Upload"
             case .uploadFiles:
