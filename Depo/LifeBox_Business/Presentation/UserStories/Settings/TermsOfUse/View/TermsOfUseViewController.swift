@@ -45,6 +45,14 @@ final class TermsOfUseViewController: BaseViewController {
         
         output.viewIsReady()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !Device.isIpad {
+            navigationBarWithGradientStyle()
+        }
+    }
 
 }
 

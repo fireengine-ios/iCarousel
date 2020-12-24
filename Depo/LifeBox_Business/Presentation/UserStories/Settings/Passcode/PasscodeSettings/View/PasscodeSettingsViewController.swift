@@ -82,6 +82,10 @@ final class PasscodeSettingsViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if !Device.isIpad {
+            navigationBarWithGradientStyle()
+        }
+        
         output.isPasscodeEmpty ? setup(state: .set) : setup(state: .ready)
         
         switch output.biometricsStatus {
