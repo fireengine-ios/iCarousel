@@ -237,6 +237,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
+        updateFileInfo()
 
         guard let index = selectedIndex else  {
             return
