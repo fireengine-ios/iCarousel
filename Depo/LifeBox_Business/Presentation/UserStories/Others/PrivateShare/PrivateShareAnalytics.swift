@@ -224,17 +224,6 @@ final class PrivateShareAnalytics {
             return .photo
         case .video:
             return .video
-        case .faceImage(let type):
-            switch type {
-            case .people:
-                return .people
-            case .places:
-                return .places
-            case .things:
-                return .things
-            }
-        case .photoAlbum:
-            return .albums
         case .audio:
             return .music
         case .folder:

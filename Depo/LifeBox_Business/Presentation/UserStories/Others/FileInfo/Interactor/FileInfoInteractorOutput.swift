@@ -11,8 +11,6 @@ import Foundation
 protocol FileInfoInteractorOutput: class {
     func setObject(object: BaseDataSourceItem)
     func updated()
-    func albumForUuidSuccessed(album: AlbumServiceResponse)
-    func albumForUuidFailed(error: Error)
     func failedUpdate(error: Error)
     func cancelSave(use name: String)
     func didValidateNameSuccess()

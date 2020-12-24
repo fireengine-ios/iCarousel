@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoSubViewViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserInfoSubViewViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="accountDetailsButton" destination="p0x-Vm-7vZ" id="8yg-Ui-h4s"/>
                 <outlet property="accountDetailsLabel" destination="yzz-rJ-18M" id="LhY-xY-Tvh"/>
                 <outlet property="avatarImageView" destination="Q7D-fc-XLm" id="9d6-2i-gVN"/>
                 <outlet property="circleProgressView" destination="ENa-fn-7QZ" id="VEv-2d-G7n"/>
-                <outlet property="premiumButton" destination="mGc-ew-Ms8" id="YKu-Z2-dv8"/>
                 <outlet property="statusLabel" destination="OEx-z6-9jO" id="1OL-q9-FGl"/>
                 <outlet property="usedAsPercentageLabel" destination="try-NC-yYD" id="FTf-el-uKS"/>
                 <outlet property="userEmailLabel" destination="EW7-TM-Tvn" id="xmA-r4-efV"/>
@@ -28,7 +27,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="201"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENa-fn-7QZ" customClass="CircleProgressView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENa-fn-7QZ" customClass="CircleProgressView" customModule="lifeBox_Business" customModuleProvider="target">
                     <rect key="frame" x="20" y="20" width="107" height="107"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -43,7 +42,7 @@
                         <constraint firstAttribute="width" constant="80" id="rfW-12-dGT"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQk-2j-n8e">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQk-2j-n8e">
                     <rect key="frame" x="20" y="20" width="107" height="107"/>
                     <connections>
                         <action selector="onUpdateUserPhoto" destination="-1" eventType="touchUpInside" id="xGV-6k-VVt"/>
@@ -80,20 +79,20 @@
                             <rect key="frame" x="0.0" y="213" width="208" height="16"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yzz-rJ-18M">
-                                    <rect key="frame" x="0.0" y="0.0" width="42" height="16"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="41.5" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron_left" translatesAutoresizingMaskIntoConstraints="NO" id="TQD-5m-Jk3">
-                                    <rect key="frame" x="46" y="3" width="6" height="10"/>
+                                    <rect key="frame" x="45.5" y="3" width="6" height="10"/>
                                     <color key="tintColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="6" id="jaG-H3-eOU"/>
                                         <constraint firstAttribute="height" constant="10" id="weg-CT-dMq"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0x-Vm-7vZ">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p0x-Vm-7vZ">
                                     <rect key="frame" x="0.0" y="0.0" width="208" height="16"/>
                                     <connections>
                                         <action selector="onEditUserInformationButton:" destination="-1" eventType="touchUpInside" id="VC7-ZS-ujm"/>
@@ -117,16 +116,6 @@
                         </view>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGc-ew-Ms8" customClass="GradientPremiumButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                    <rect key="frame" x="155" y="150.5" width="46" height="27"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="27" id="7gy-rT-xsh"/>
-                    </constraints>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="onBecomePremiumTap:" destination="-1" eventType="touchUpInside" id="SVq-Ub-iEw"/>
-                    </connections>
-                </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LeT-Di-ih8">
                     <rect key="frame" x="48.5" y="139" width="50" height="50"/>
                     <subviews>
@@ -154,14 +143,12 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="mGc-ew-Ms8" firstAttribute="leading" secondItem="kv9-ey-nzo" secondAttribute="leading" id="0z1-lG-7n5"/>
                 <constraint firstItem="Myi-DL-NSq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LeT-Di-ih8" secondAttribute="bottom" constant="4" id="4Hf-1v-nOa"/>
                 <constraint firstItem="LeT-Di-ih8" firstAttribute="centerX" secondItem="vQk-2j-n8e" secondAttribute="centerX" id="6UX-cY-b06"/>
                 <constraint firstItem="kv9-ey-nzo" firstAttribute="leading" secondItem="ENa-fn-7QZ" secondAttribute="trailing" constant="28" id="7rV-ZW-rUZ"/>
                 <constraint firstItem="vQk-2j-n8e" firstAttribute="centerY" secondItem="ENa-fn-7QZ" secondAttribute="centerY" id="ADA-e3-loo"/>
                 <constraint firstItem="ENa-fn-7QZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="BLh-ts-kem"/>
                 <constraint firstItem="Q7D-fc-XLm" firstAttribute="centerX" secondItem="ENa-fn-7QZ" secondAttribute="centerX" id="CVE-kT-roB"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mGc-ew-Ms8" secondAttribute="trailing" constant="4" id="DG5-Ni-UnS"/>
                 <constraint firstAttribute="bottom" secondItem="Myi-DL-NSq" secondAttribute="bottom" id="DKT-er-5p9"/>
                 <constraint firstItem="Q7D-fc-XLm" firstAttribute="centerY" secondItem="ENa-fn-7QZ" secondAttribute="centerY" id="Hfy-99-vP2"/>
                 <constraint firstItem="vQk-2j-n8e" firstAttribute="centerX" secondItem="ENa-fn-7QZ" secondAttribute="centerX" id="NDU-e2-LFd"/>
@@ -169,7 +156,6 @@
                 <constraint firstItem="Myi-DL-NSq" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="UAZ-Pr-vMH"/>
                 <constraint firstItem="Myi-DL-NSq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ulc-DR-UtA"/>
                 <constraint firstItem="vQk-2j-n8e" firstAttribute="width" secondItem="ENa-fn-7QZ" secondAttribute="width" id="VkT-br-czb"/>
-                <constraint firstItem="mGc-ew-Ms8" firstAttribute="centerY" secondItem="LeT-Di-ih8" secondAttribute="centerY" id="YLE-mo-YEy"/>
                 <constraint firstItem="ENa-fn-7QZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="cC5-2t-KTz"/>
                 <constraint firstItem="LeT-Di-ih8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="4" id="dzP-hT-TZ4"/>
                 <constraint firstItem="vQk-2j-n8e" firstAttribute="height" secondItem="ENa-fn-7QZ" secondAttribute="height" id="eDF-Gh-F7k"/>

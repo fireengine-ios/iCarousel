@@ -16,20 +16,8 @@ class SettingsRouter: SettingsRouterInput {
         router.setNavigationController(controller: router.onboardingScreen)
     }
     
-    func goToConnectedAccounts() {
-        router.pushViewController(viewController: router.connectedAccounts!)
-    }
-    
     func goToPermissions() {
         router.pushViewController(viewController: router.permissions)
-    }
-    
-    func goToPeriodicContactSync() {
-        router.pushViewController(viewController: router.periodicContactsSync)
-    }
-    
-    func goToFaceImage() {
-        router.pushViewController(viewController: router.faceImage)
     }
 
     func goToHelpAndSupport() {
@@ -46,19 +34,6 @@ class SettingsRouter: SettingsRouterInput {
     
     func goToActivityTimeline() {
         router.pushViewController(viewController: router.vcActivityTimeline)
-    }
-    
-    func goToPackagesWith(quotaInfo: QuotaInfoResponse?) {
-        let vc = router.packagesWith(quotoInfo: quotaInfo)
-        router.pushViewController(viewController: vc)
-    }
-    
-    func goToPackages() {
-        router.pushViewController(viewController: router.packages)
-    }
-    
-    func goToPremium() {
-        router.pushViewController(viewController: router.premium())
     }
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool) {

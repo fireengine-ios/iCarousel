@@ -12,7 +12,6 @@ final class FileInfoInteractor {
     
     var item: BaseDataSourceItem?
     private(set) var sharingInfo: SharedFileInfo?
-    private let albumService = PhotosAlbumService()
 
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var shareApiService = PrivateShareApiServiceImpl()
@@ -56,33 +55,6 @@ extension FileInfoInteractor: FileInfoInteractorInput {
                     
                 case .failed(let error):
                     self?.output.failedUpdate(error: error)
-                }
-            }
-        }
-        
-        if let album = item as? AlbumItem {
-            let renameAlbum = RenameAlbum(albumUUID: album.uuid, newName: newName)
-            albumService.renameAlbum(parameters: renameAlbum, success: { [weak self] in
-                DispatchQueue.main.async {
-                    self?.item?.name = newName
-                    self?.output.updated()
-                }
-                }, fail: { [weak self] error in
-                    DispatchQueue.main.async {
-                        self?.output.updated()
-                    }
-            })
-        }
-    }
-    
-    func getAlbum(for item: BaseDataSourceItem) {
-        albumService.getAlbum(for: item.uuid) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let album):
-                    self?.output.albumForUuidSuccessed(album: album)
-                case .failed(let error):
-                    self?.output.albumForUuidFailed(error: error)
                 }
             }
         }

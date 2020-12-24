@@ -14,7 +14,6 @@ import KeychainSwift
 
 final class AppConfigurator {
     
-    static let dropboxManager: DropboxManager = factory.resolve()
     static let analyticsManager: AnalyticsService = factory.resolve()
     static let storageVars: StorageVars = factory.resolve()
     static let tokenStorage: TokenStorage = factory.resolve()
@@ -33,8 +32,6 @@ final class AppConfigurator {
         clearTokensIfNeed()
         prepareSessionManager()
         configureSDWebImage()
-        setupIAPObserver()
-        dropboxManager.start()
         analyticsManager.start()
         
         AppWormholeListener.shared.startListen()
@@ -43,10 +40,6 @@ final class AppConfigurator {
         
         
         AuthoritySingleton.shared.checkNewVersionApp()
-    }
-    
-    private static func setupIAPObserver() {
-        let _ = IAPManager.shared ///setup observer on the didLaunch, as apple suggest
     }
     
     private static func firstStart() {

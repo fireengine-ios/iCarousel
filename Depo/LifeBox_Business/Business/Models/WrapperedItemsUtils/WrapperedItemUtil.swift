@@ -26,9 +26,6 @@ class WrapperedItemUtil: NSObject {
         case .folder:
             imageName = "fileIconFolder"
             
-        case .photoAlbum, .faceImageAlbum(_): // TODO: Add icon
-            imageName = "fileIconPhoto"
-            
         case .musicPlayList: // TODO: Add icon
             imageName = "fileIconUnknown"
             
@@ -81,9 +78,6 @@ class WrapperedItemUtil: NSObject {
             
         case .folder:
             imageName = "fileBigIconFolder"
-            
-        case .photoAlbum: // TODO: Add icon
-            imageName = "fileBigIconUnknown"
             
         case .musicPlayList: // TODO: Add icon
             imageName = "fileBigIconUnknown"
@@ -138,9 +132,6 @@ class WrapperedItemUtil: NSObject {
             
         case .folder:
             imageName = "fileIconSmallFolderNotSelected"
-        
-        case .photoAlbum, .faceImageAlbum(_): // TODO: Add icon
-            imageName = "fileIconSmallPhotoNotSelected"
             
         case .musicPlayList: // TODO: Add icon
             imageName = "fileIconUnknown"

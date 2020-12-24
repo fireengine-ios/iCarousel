@@ -317,20 +317,6 @@ class SearchService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func searchAlbums(param: AlbumParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
-        debugLog("SearchService searchAlbums")
-
-        let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-    }
-    
-    func searchContentAlbum(param: AlbumDetalParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
-        debugLog("SearchService searchContentAlbum")
-
-        let handler = BaseResponseHandler<AlbumDetailResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-    }
-    
     func unifiedSearch(param: UnifiedSearchParameters, success:@escaping SuccessResponse, fail:@escaping FailResponse ) {
         debugLog("SearchService unifiedSearch")
 

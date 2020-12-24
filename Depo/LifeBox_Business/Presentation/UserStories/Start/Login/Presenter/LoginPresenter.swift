@@ -51,6 +51,7 @@ class LoginPresenter: BasePresenter {
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         AuthoritySingleton.shared.checkNewVersionApp()
+        router.goToHomePage()
     }
     
     private func openEmptyEmail() {

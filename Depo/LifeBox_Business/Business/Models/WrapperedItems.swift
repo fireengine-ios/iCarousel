@@ -114,12 +114,9 @@ enum FileType: Hashable, Equatable {
     case video
     case audio
     case folder
-    case photoAlbum
     case musicPlayList
     case allDocs
     case application(ApplicationType)
-    case faceImage(FaceImageType)
-    case faceImageAlbum(FaceImageType)
     case imageAndVideo
 
     
@@ -134,10 +131,6 @@ enum FileType: Hashable, Equatable {
             return .video
         case .audio:
             return .audio
-        
-            
-        case .photoAlbum:
-            return .albums
         case .musicPlayList:
             return .playLists
         case .allDocs:
@@ -192,14 +185,6 @@ enum FileType: Hashable, Equatable {
         return (self == .audio) || self == (.video)
     }
     
-    var isFaceImageType: Bool {
-        return self == .faceImage(.people) || self == .faceImage(.things) || self == .faceImage(.places)
-    }
-    
-    var isFaceImageAlbum: Bool {
-        return self == .faceImageAlbum(.people) || self == .faceImageAlbum(.things) || self == .faceImageAlbum(.places)
-    }
-    
     
     init(type: String?, fileName: String?) {
         if let wrapType = type {
@@ -219,26 +204,6 @@ enum FileType: Hashable, Equatable {
                 
                 if (wrapType.hasSuffix("music")) {
                     self = .musicPlayList
-                    return
-                }
-                
-                if (wrapType.hasSuffix("photo")) {
-                    self = .photoAlbum
-                    return
-                }
-                
-                if (wrapType.hasSuffix("object")) {
-                    self = .faceImageAlbum(.things)
-                    return
-                }
-                
-                if (wrapType.hasSuffix("person")) {
-                    self = .faceImageAlbum(.people)
-                    return
-                }
-                
-                if (wrapType.hasSuffix("location")) {
-                    self = .faceImageAlbum(.places)
                     return
                 }
             }
@@ -361,8 +326,6 @@ enum FileType: Hashable, Equatable {
             self = .audio
         case 4:
             self = .folder
-        case 5:
-            self = .photoAlbum
         case 6:
             self = .musicPlayList
         case 10:
@@ -402,8 +365,6 @@ enum FileType: Hashable, Equatable {
             return 3
         case .folder:
             return 4
-        case .photoAlbum:
-            return 5
         case .musicPlayList:
             return 6
         
@@ -454,34 +415,8 @@ enum FileType: Hashable, Equatable {
             default:()
             }
             return false
-        case (.photoAlbum, .photoAlbum): return true
         case (.musicPlayList, .musicPlayList): return true
-        case (.faceImage, .faceImage):
-            switch (lhs) {
-            case .faceImage(let lhsType):
-                switch (rhs) {
-                case .faceImage(let rhsType):
-                    if lhsType == rhsType {
-                        return true
-                    }
-                default:()
-                }
-            default:()
-            }
-            return false
-        case (.faceImageAlbum, .faceImageAlbum):
-            switch (lhs) {
-            case .faceImageAlbum(let lhsType):
-                switch (rhs) {
-                case .faceImageAlbum(let rhsType):
-                    if lhsType == rhsType {
-                        return true
-                    }
-                default:()
-                }
-            default:()
-            }
-            return false
+            
         default:
             return false
         }
@@ -529,7 +464,6 @@ enum ItemStatus: String {
     case transcodingFailed = "TRANSCODING_FAILED"
     case trashed = "TRASHED"
     case deleted = "DELETED"
-    case hidden = "HIDDEN"
     case unknown = "UNKNOWN"
     
     init(string: String?) {
@@ -548,7 +482,6 @@ enum ItemStatus: String {
         case 3: self = .transcodingFailed
         case 4: self = .trashed
         case 5: self = .deleted
-        case 6: self = .hidden
         default: self = .unknown
         }
     }
@@ -561,13 +494,12 @@ enum ItemStatus: String {
         case .transcodingFailed: return 3
         case .trashed: return 4
         case .deleted: return 5
-        case .hidden: return 6
         case .unknown: return 7
         }
     }
     
     var isTranscoded: Bool {
-        return isContained(in: [.active, .hidden, .trashed])
+        return isContained(in: [.active, .trashed])
     }
 }
 
@@ -751,58 +683,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         lastModifiDate = Date()
     }
     
-    init(peopleItemResponse: PeopleItemResponse) {
-        id = peopleItemResponse.id
-        fileSize = 0
-        favorites = false
-        status = .unknown
-        metaData = BaseMetaData()
-        metaData?.takenDate = Date()
-        
-        tmpDownloadUrl = peopleItemResponse.isDemo == true ? peopleItemResponse.alternateThumbnail : peopleItemResponse.thumbnail
-        patchToPreview = .remoteUrl(tmpDownloadUrl)
-        super.init()
-        name = peopleItemResponse.name
-        isLocalItem = false
-        creationDate = Date()
-        syncStatus = .notSynced
-        fileType = .faceImage(.people)
-    }
-    
-    init(thingsItemResponse: ThingsItemResponse) {
-        id = thingsItemResponse.id
-        fileSize = 0
-        favorites = false
-        status = .unknown
-        metaData = BaseMetaData()
-        metaData?.takenDate = Date()
-        tmpDownloadUrl = thingsItemResponse.isDemo == true ? thingsItemResponse.alternateThumbnail : thingsItemResponse.thumbnail
-        patchToPreview = .remoteUrl(tmpDownloadUrl)
-        super.init()
-        name = thingsItemResponse.name
-        isLocalItem = false
-        creationDate = Date()
-        syncStatus = .notSynced
-        fileType = .faceImage(.things)
-    }
-    
-    init(placesItemResponse: PlacesItemResponse) {
-        id = placesItemResponse.id
-        fileSize = 0
-        favorites = false
-        status = .unknown
-        metaData = BaseMetaData()
-        metaData?.takenDate = Date()
-        tmpDownloadUrl = placesItemResponse.isDemo == true ? placesItemResponse.alternateThumbnail : placesItemResponse.thumbnail
-        patchToPreview = .remoteUrl(tmpDownloadUrl)
-        super.init()
-        name = placesItemResponse.name
-        isLocalItem = false
-        creationDate = Date()
-        syncStatus = .notSynced
-        fileType = .faceImage(.places)
-    }
-    
     init(baseModel: BaseMediaContent) {
 
         fileSize = baseModel.size
@@ -924,14 +804,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
 //            if url == nil, fileType == .image {
 //                url = remote.tempDownloadURL
 //            }
-        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
-            if let mediumUrl = remote.metadata?.mediumUrl {
-                url = mediumUrl
-            } else if let smallUrl = remote.metadata?.smalURl {
-                url = smallUrl
-            } else {
-                url = nil//remote.tempDownloadURL
-            }            
         default:
             break
         }
@@ -995,14 +867,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
             case .little : url = metaData?.smalURl
             case .medium : url = metaData?.mediumUrl
             case .large  : url = metaData?.largeUrl
-            }
-        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
-            if let mediumUrl = metaData?.mediumUrl {
-                url = mediumUrl
-            } else if let smallUrl = metaData?.smalURl {
-                url = smallUrl
-            } else {
-                url = nil
             }
         default:
             break

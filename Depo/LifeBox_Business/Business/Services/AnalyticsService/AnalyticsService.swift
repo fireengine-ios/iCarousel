@@ -84,28 +84,6 @@ final class AnalyticsService: NSObject {
         logFacebookEvent(name: AppEvents.Name.viewedContent.rawValue, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
     }
     
-    func trackPurchase(offer: Any) {
-        let packageService = PackageService()
-        guard
-            let event = packageService.getPurchaseEvent(for: offer),
-            let price = packageService.getOfferPrice(for: offer)
-        else {
-            return
-        }
-        
-        ///only turkcell offer may has missing currency
-        let currency = packageService.getOfferCurrency(for: offer) ?? "TRY"
-        logPurchase(event: event, price: price, currency: currency)
-    }
-
-    private func logPurchase(event: AnalyticsEvent, price: String, currency: String) {
-        logAdjustEvent(name: event.token, price: Double(price), currency: currency)
-        //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
-        if let price = Double(price) {
-            AppEvents.logPurchase(price, currency: currency, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
-        }
-    }
-    
     private func logAdjustEvent(name: String, price: Double? = nil, currency: String? = nil) {
         let event = ADJEvent(eventToken: name)
         if let price = price, let currency = currency
@@ -635,30 +613,6 @@ extension AnalyticsService: AnalyticsGA {
             items = []
         }
         return items
-    }
-    
-    func trackAlbumOperationGAEvent(operationType: GAOperationType, albums: [BaseDataSourceItem]) {
-        guard let album = albums.first else {
-            return
-        }
-        
-        let type: GAEventLabel.FileType
-        switch album.fileType {
-        case .photoAlbum:
-            type = .albums
-        case .faceImageAlbum(.people):
-            type = .people
-        case .faceImageAlbum(.things):
-            type = .things
-        case .faceImageAlbum(.places):
-            type = .places
-        default:
-            return
-        }
-        
-        trackFileOperationGAEvent(operationType: operationType,
-                                  itemsType: type,
-                                  itemsCount: albums.count)
     }
     
     func trackFileOperationGAEvent(operationType: GAOperationType, itemsType: GAEventLabel.FileType, itemsCount: Int) {

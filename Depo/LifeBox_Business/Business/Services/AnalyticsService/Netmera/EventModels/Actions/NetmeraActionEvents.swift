@@ -60,46 +60,6 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class Import: NetmeraEvent {
-        
-        private let kImportKey = "qfv"
-        
-        @objc var channelType = ""
-        @objc var status = ""
-        
-        convenience init(status: NetmeraEventValues.OnOffSettings, socialType: Section.SocialAccount) {
-            let socialChannel: NetmeraEventValues.ImportChannelType
-            switch socialType {
-            case .dropbox:
-                socialChannel = .dropbox
-            case .facebook:
-                socialChannel = .facebook
-            case .instagram:
-                socialChannel = .instagram
-            case .spotify:
-                socialChannel = .spotify
-            }
-            self.init(status: status.text, channelType: socialChannel.text)
-        }
-        
-        convenience init(status: String, channelType: String) {
-            self.init()
-            self.status = status
-            self.channelType = channelType
-        }
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return[
-                "eb" : #keyPath(status),
-                "ea" : #keyPath(channelType),
-            ]
-        }
-        
-        override var eventKey : String {
-            return kImportKey
-        }
-    }
-    
     final class EmailVerification: NetmeraEvent {
         
         private let kEmailVerificationKey = "axi"
@@ -299,7 +259,7 @@ extension NetmeraEvents.Actions {
         convenience init(type: FileType, count: Int) {
             let accaptableType: NetmeraEventValues.DownloadType
             switch type {
-            case .image, .faceImage(_):
+            case .image:
                 accaptableType = .photo
             case .video:
                 accaptableType = .video
@@ -310,8 +270,6 @@ extension NetmeraEvents.Actions {
                 accaptableType = .document
             case .audio:
                 accaptableType = .music
-            case .photoAlbum, .faceImageAlbum(_):
-                accaptableType = .album
             default:
                 accaptableType = .photo
             }
@@ -431,14 +389,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .document
             case .audio:
                 acceptableType = .music
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -491,14 +441,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .document
             case .audio:
                 acceptableType = .music
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -587,7 +529,7 @@ extension NetmeraEvents.Actions {
             
             let appopriateFileType: NetmeraEventValues.UploadFileType
             switch fileTypes {
-            case .image, .faceImage(_):
+            case .image:
                 appopriateFileType = .photo
             case .video:
                 appopriateFileType = .video
@@ -858,14 +800,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .document
             case .audio:
                 acceptableType = .music
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -977,14 +911,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -1023,14 +949,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -1145,8 +1063,6 @@ extension NetmeraEvents.Actions {
                 netmeraPussButtonAction = .useCamera
             case .createFolder:
                 netmeraPussButtonAction = .newFolder
-            case .createStory:
-                netmeraPussButtonAction = .createStory
             case .upload:
                 netmeraPussButtonAction = .upload
             case .uploadFiles:
@@ -1155,12 +1071,8 @@ extension NetmeraEvents.Actions {
                 netmeraPussButtonAction = .uploadFiles
             case .uploadMusic:
                 netmeraPussButtonAction = .uploadMusic
-            case .createAlbum:
-                netmeraPussButtonAction = .createAlbum
             case .uploadFromApp:
                 netmeraPussButtonAction = .uploadFromLifebox
-            case .importFromSpotify:
-                netmeraPussButtonAction = .importFromSpotify
             default:
                 return nil
             }

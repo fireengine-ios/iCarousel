@@ -13,4 +13,3 @@
 #import <Photos/Photos.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import "UpdaterController.h"
-#import <SpotifyiOS/SpotifyiOS.h>

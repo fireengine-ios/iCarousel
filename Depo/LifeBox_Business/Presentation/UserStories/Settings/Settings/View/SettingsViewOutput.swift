@@ -28,11 +28,7 @@ protocol SettingsViewOutput {
     func photoCaptured(data: Data)
     
     func goToActivityTimeline()
-    
-    func goToPackagesWith(quotaInfo: QuotaInfoResponse?)
-    
-    func goToPremium()
-    
+ 
     func goToPasscodeSettings(needReplaceOfCurrentController: Bool)
     
     func openPasscode(handler: @escaping VoidHandler)

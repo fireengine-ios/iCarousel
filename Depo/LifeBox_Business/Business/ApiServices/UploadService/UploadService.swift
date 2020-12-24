@@ -100,8 +100,6 @@ final class UploadService: BaseRequestService {
                 return
             }
             
-            PremiumService.shared.showPopupForNewUserIfNeeded()
-            
             let uploadedTypesToCount = NetmeraService.getItemsTypeToCount(items: items)
             uploadedTypesToCount.forEach {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Upload(uploadType: uploadType, fileTypes: $0.0))

@@ -24,21 +24,10 @@ enum OperationType: String {
     case freeAppSpaceCloudWarning   = "freeAppSpaceCloudWarning"
     case emptyStorage               = "emptyStorage"
     
-    case contactBacupEmpty          = "contactBacupEmpty"
-    case contactBacupOld            = "contactBacupOld"
-    case collage                    = "collage"
-    case albumCard                  = "albumCard"
     case latestUploads              = "latestUploads"
-    case movieCard                  = "movieCard"
-    case animationCard              = "animation"
     
-    case launchCampaign             = "launchCampaign"
-    case premium                    = "premium"
-    case instaPick                  = "instaPick"
     case tbMatik                    = "TBMATIC"
-    case campaignCard               = "CAMPAIGN"
     case divorce                    = "DIVORCE"
-    case documents                  = "THINGS_DOCUMENT"
 }
 
 typealias BlockObject = VoidHandler
@@ -168,22 +157,6 @@ class CardsManager: NSObject {
             }
         }
         
-    }
-
-    func startPremiumCard() {
-        DispatchQueue.main.async {
-            for notificationView in self.foloversArray {
-                notificationView.startOperationWith(type: .premium, allOperations: 0, completedOperations: 0)
-            }
-        }
-    }
-    
-    func configureInstaPick(with analysisStatus: InstapickAnalyzesCount) {
-        DispatchQueue.main.async {
-            for notificationView in self.foloversArray {
-                notificationView.configureInstaPick(with: analysisStatus)
-            }
-        }
     }
     
     func setProgressForOperationWith(type: OperationType, allOperations: Int, completedOperations: Int ) {
@@ -357,36 +330,12 @@ class CardsManager: NSObject {
             cardView = AutoUploadIsOffPopUp.initFromNib()
         case .waitingForWiFi:
             cardView = WaitingForWiFiPopUp.initFromNib()
-        case .contactBacupEmpty:
-            cardView = ContactBackupEmpty.initFromNib()
-        case .contactBacupOld:
-            cardView = ContactBackupOld.initFromNib()
-        case .collage:
-            cardView = CollageCard.initFromNib()
-        case .albumCard:
-            cardView = AlbumCard.initFromNib()
         case .latestUploads:
             cardView = LatestUpladsCard.initFromNib()
-        case .movieCard:
-            cardView = MovieCard.initFromNib()
-        case .animationCard:
-            cardView = AnimationCard.initFromNib()
-        case .launchCampaign:
-            cardView = LaunchCampaignCard.initFromNib()
-        case .premium:
-            let popUp = PremiumInfoCard.initFromNib()
-            popUp.configurateWithType(viewType: .premium)
-            cardView = popUp
-        case .instaPick:
-            cardView = InstaPickCard.initFromNib()
         case .tbMatik:
             cardView = TBMatikCard.initFromNib()
-        case .campaignCard:
-            cardView = CampaignCard.initFromNib()
         case .divorce:
             cardView = DivorceCard.initFromNib()
-        case .documents:
-            cardView = DocumentsAlbumCard.initFromNib()
         }
         
         /// seems like duplicated logic "set(object:".

@@ -292,7 +292,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     @objc func searchTimerIsOver(timer: Timer) {
         if let searchText = timer.userInfo as? String {
-            output.getSuggestion(text: searchText)
             collectionView.isHidden = true
             suggestTableView.isHidden = isEmptyItems()
             noFilesView.isHidden = true
@@ -549,9 +548,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        if item.info?.id != nil, let type = item.type, type.isFaceImageType() {
-            output.openFaceImage(item: item)
-        } else if let searchBar = navigationItem.titleView as? UISearchBar {
+        if let searchBar = navigationItem.titleView as? UISearchBar {
             searchBar.text = item.text?.removingPercentEncoding ?? item.text
             search(text: searchBar.text, forItem: item)
         }
@@ -594,11 +591,11 @@ extension SearchViewController: SuggestionTableSectionHeaderDelegate {
 extension SearchViewController: RecentlySearchedFaceImageCellDelegate {
 
     func select(item: SuggestionObject) {
-        output.openFaceImage(item: item)
+
     }
     
     func tapArrow(category: SearchCategory) {
-        output.openFaceImageItems(category: category)
+
     }
     
 }

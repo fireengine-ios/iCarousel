@@ -11,12 +11,9 @@ import UIKit
 enum FloatingButtonsType {
     case takePhoto
     case upload
-    case createAStory
     case newFolder
-    case createAlbum
     case uploadFromLifebox
     case uploadFromLifeboxFavorites
-    case importFromSpotify
     case uploadFiles
     case uploadDocuments
     case uploadMusic
@@ -33,14 +30,8 @@ enum FloatingButtonsType {
             return TextConstants.uploadMusic
         case .uploadFromLifebox, .uploadFromLifeboxFavorites:
             return TextConstants.uploadFromLifebox
-        case .createAStory:
-            return TextConstants.createStory
         case .newFolder:
             return TextConstants.newFolder
-        case .createAlbum:
-            return TextConstants.createAlbum
-        case .importFromSpotify:
-            return TextConstants.importFromSpotifyBtn
         }
     }
     
@@ -55,12 +46,8 @@ enum FloatingButtonsType {
              .uploadFromLifebox,
              .uploadFromLifeboxFavorites:
             return UIImage(named: "Upload")
-        case .createAStory:
-            return UIImage(named: "CreateAStory")
-        case .newFolder, .createAlbum:
+        case .newFolder:
             return UIImage(named: "NewFolder")
-        case .importFromSpotify:
-            return UIImage(named: "ImportFromSpotify")
         }
     }
     
@@ -80,14 +67,8 @@ enum FloatingButtonsType {
             return .uploadFromApp
         case .uploadFromLifeboxFavorites:
             return .uploadFromAppFavorites
-        case .createAStory:
-            return .createStory
         case .newFolder:
             return .createFolder
-        case .createAlbum:
-            return .createAlbum
-        case .importFromSpotify:
-            return .importFromSpotify
         }
     }
 }

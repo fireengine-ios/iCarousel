@@ -14,10 +14,6 @@ class UserInfoSubViewPresenter: BasePresenter, UserInfoSubViewModuleInput, UserI
     
     var quotaInfo: QuotaInfoResponse?
     
-    var isPremiumUser: Bool {
-        return AuthoritySingleton.shared.accountType.isPremium
-    }
-    
     var isMiddleUser: Bool {
         return AuthoritySingleton.shared.accountType.isMiddle
     }

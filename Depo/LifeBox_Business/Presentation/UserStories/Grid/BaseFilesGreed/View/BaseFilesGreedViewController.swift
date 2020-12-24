@@ -48,7 +48,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     
-    var contentSlider: LBAlbumLikePreviewSliderViewController?
     weak var contentSliderTopY: NSLayoutConstraint?
     weak var contentSliderH: NSLayoutConstraint?
     
@@ -215,9 +214,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func setupInitialState() {
         setupViewForPopUp()
-        if let unwrapedSlider = contentSlider {
-            setupSlider(sliderController: unwrapedSlider)
-        }
     }
     
     
@@ -233,7 +229,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         }
         if !output.isSelectionState() {
             output.onReloadData()
-            contentSlider?.reloadAllData()
         } else {
             refresher.endRefreshing()
         }
@@ -365,47 +360,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     static let sliderH: CGFloat = 139
     
-    private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
-        contentSlider = sliderController
-
-        let height = cardsContainerView.frame.size.height + BaseFilesGreedViewController.sliderH
-        
-        let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.size.width, height: BaseFilesGreedViewController.sliderH))
-        subView.addSubview(sliderController.view)
-        
-        if let yConstr = self.contentSliderTopY {
-            yConstr.constant = -height
-        }
-        collectionView.updateConstraints()
-        
-        collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 25, right: 0)
-        collectionView.addSubview(subView)
-        sliderController.view.frame = subView.bounds
-        
-        subView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let relatedView = cardsContainerView
-        
-        var constraintsArray = [NSLayoutConstraint]()
-        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: BaseFilesGreedViewController.sliderH))
-        
-        constraintsArray.append(NSLayoutConstraint(item: sliderController.view, attribute: .left, relatedBy: .equal, toItem: subView, attribute: .left, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: sliderController.view, attribute: .top, relatedBy: .equal, toItem: subView, attribute: .top, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: sliderController.view, attribute: .right, relatedBy: .equal, toItem: subView, attribute: .right, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: sliderController.view, attribute: .bottom, relatedBy: .equal, toItem: subView, attribute: .bottom, multiplier: 1, constant: 0))
-        
-        NSLayoutConstraint.activate(constraintsArray)
-    
-        refresherY =  -height + 30
-        updateRefresher()
-        
-        noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
-    }
-    
     //setupCardsView
     private func setupViewForPopUp() {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -430,23 +384,17 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func onUpdateViewForPopUpH(h: CGFloat) {
         let originalPoint = collectionView.contentOffset
-        var sliderH: CGFloat = 0
-        if let slider = self.contentSlider {
-            sliderH = sliderH + slider.view.frame.size.height
-        }
-        
-        let calculatedH = h + sliderH
         
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             if let yConstr = self.contentSliderTopY {
-                yConstr.constant = -calculatedH
+                yConstr.constant = -h
             }
             if let hConstr = self.contentSliderH {
                 hConstr.constant = h
             }
             
             self.view.layoutIfNeeded()
-            self.collectionView.contentInset = UIEdgeInsets(top: calculatedH, left: 0, bottom: 25, right: 0)
+            self.collectionView.contentInset = UIEdgeInsets(top: h, left: 0, bottom: 25, right: 0)
         }) { [weak self] (flag) in
             guard let `self` = self else {
                 return
@@ -459,7 +407,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
             }
         }
         
-        refresherY = -calculatedH + 30
+        refresherY = -h + 30
         updateRefresher()
     }
     

@@ -27,7 +27,6 @@ final class UploadOperation: Operation {
     
     typealias UploadParametersResponse = (UploadRequestParametrs) -> Void
     
-    private let remoteAlbumsService = PhotosAlbumService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var privateShareService = PrivateShareApiServiceImpl()
     
@@ -510,7 +509,6 @@ final class UploadOperation: Operation {
                 }
                 
                 self.outputItem = WrapData(remote: response)
-                self.addPhotoToTheAlbum(with: parameters, response: response)
                 self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
                 self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
                 self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
@@ -552,21 +550,6 @@ final class UploadOperation: Operation {
             }
         }
     }
-    
-    private func addPhotoToTheAlbum(with parameters: UploadRequestParametrs, response: SearchItemResponse) {
-        if isPhotoAlbum {
-            let item = Item(remote: response)
-            let parameter = AddPhotosToAlbum(albumUUID: parameters.rootFolder, photos: [item])
-            
-            self.remoteAlbumsService.addPhotosToAlbum(parameters: parameter, success: {
-                ItemOperationManager.default.fileAddedToAlbum(item: item)
-            }, fail: { error in
-                UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
-                ItemOperationManager.default.fileAddedToAlbum(item: item, error: true)
-            })
-        }
-    }
-    
     
     //MARK: - Requests
     

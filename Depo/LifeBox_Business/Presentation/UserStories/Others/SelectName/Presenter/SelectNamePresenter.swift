@@ -69,21 +69,6 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         }
     }
     
-    func createAlbumOperationSuccess(item: AlbumItem?) {
-        asyncOperationSuccess()
-        view.hideView { [weak  self] in
-            guard let  self = self, let item = item else {
-                return
-            }
-            
-            if self.selectNameModuleOutput != nil {
-                self.selectNameModuleOutput?.didCreateAlbum(item: item)
-            } else {
-                self.router.moveToAlbumPage(presenter: self, item: item)
-            }
-        }
-    }
-    
     func operationFailedWithError(errorMessage: String) {
         asyncOperationSuccess()
         UIApplication.showErrorAlert(message: errorMessage)

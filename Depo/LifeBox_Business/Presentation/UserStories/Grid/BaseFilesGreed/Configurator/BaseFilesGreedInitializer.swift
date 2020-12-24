@@ -21,32 +21,33 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
     }
     
-//    class func initializeMusicViewController(with nibName: String) -> UIViewController {
-//        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
-//        viewController.needToShowTabBar = true
-//        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .importFromSpotify])
-//        viewController.scrollablePopUpView.cardProtocolSupportedView.isEnable = true
-//        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
-//        let configurator = BaseFilesGreedModuleConfigurator()
-//        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-//                                               style: .default, tintColor: nil)
-//        let gridListTopBarConfig = GridListTopBarConfig(
-//            defaultGridListViewtype: .Grid,
-//            availableSortTypes: baseSortTypes,
-//            defaultSortType: .TimeNewOld,
-//            availableFilter: false,
-//            showGridListButton: true
-//        )
-//        configurator.configure(viewController: viewController, remoteServices: MusicService(requestSize: 100),
-//                               fileFilters: [.fileType(.audio)],
-//                               bottomBarConfig: bottomBarConfig,
-//                               topBarConfig: gridListTopBarConfig,
-//                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-//                                                                                     selectionModeTypes: []))
-//        viewController.mainTitle = ""
-//        viewController.title = TextConstants.music
-//        return viewController
-//    }
+    class func initializeMusicViewController(with nibName: String) -> UIViewController {
+        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
+        viewController.segmentImage = .music
+        viewController.needToShowTabBar = true
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles])
+        viewController.cardsContainerView.isEnable = true
+        viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.upload, .download])
+        let configurator = BaseFilesGreedModuleConfigurator()
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
+                                               style: .default, tintColor: nil)
+        let gridListTopBarConfig = GridListTopBarConfig(
+            defaultGridListViewtype: .Grid,
+            availableSortTypes: baseSortTypes,
+            defaultSortType: .TimeNewOld,
+            availableFilter: false,
+            showGridListButton: true
+        )
+        configurator.configure(viewController: viewController, remoteServices: MusicService(requestSize: 100),
+                               fileFilters: [.fileType(.audio)],
+                               bottomBarConfig: bottomBarConfig,
+                               topBarConfig: gridListTopBarConfig,
+                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+                                                                                     selectionModeTypes: []))
+        viewController.mainTitle = ""
+        viewController.title = TextConstants.music
+        return viewController
+    }
     
     class func initializeDocumentsViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)

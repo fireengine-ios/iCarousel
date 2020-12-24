@@ -13,16 +13,6 @@ final class TrashBinRouter {
     private lazy var router = RouterVC()
     private lazy var player: MediaPlayer = factory.resolve()
     
-    func openAlbum(item: AlbumItem) {
-        let controller = router.albumDetailController(album: item, type: .List, status: .trashed, moduleOutput: nil)
-        router.pushViewController(viewController: controller)
-    }
-    
-    func openFIRAlbum(album: AlbumItem, item: Item) {
-        let controller = router.imageFacePhotosController(album: album, item: item, status: .trashed, moduleOutput: nil)
-        router.pushViewController(viewController: controller)
-    }
-    
     func openSelected(item: Item, sameTypeItems: [Item], delegate: TrashBinViewController) {
         switch item.fileType {
         case .folder:

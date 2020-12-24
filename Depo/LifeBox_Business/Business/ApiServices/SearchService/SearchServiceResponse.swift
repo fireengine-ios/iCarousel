@@ -352,23 +352,11 @@ final class FoundItemsInfoResponse: ObjectRequestResponse {
 
 final class UnifiedSearchResponse: ObjectRequestResponse {
     var itemsList = [SearchItemResponse]()
-    var peopleList = [PeopleItemResponse]()
-    var thingsList = [ThingsItemResponse]()
-    var placesList = [PlacesItemResponse]()
     var info: FoundItemsInfoResponse?
     
     override func mapping() {
         if let foundItemsList = json?.dictionary?[SearchJsonKey.foundItems]?.array?.flatMap({ SearchItemResponse(withJSON: $0) }) {
             itemsList = foundItemsList
-        }
-        if let objectList = json?.dictionary?[SearchJsonKey.objectList]?.array?.flatMap({ ThingsItemResponse(withJSON: $0.dictionary?[SearchJsonKey.objectInfo]) }) {
-            thingsList = objectList
-        }
-        if let personList = json?.dictionary?[SearchJsonKey.personList]?.array?.flatMap({ PeopleItemResponse(withJSON: $0.dictionary?[SearchJsonKey.personInfo]) }) {
-            peopleList = personList
-        }
-        if let locationList = json?.dictionary?[SearchJsonKey.locationList]?.array?.flatMap({ PlacesItemResponse(withJSON: $0.dictionary?[SearchJsonKey.locationInfo]) }) {
-            placesList = locationList
         }
         info = FoundItemsInfoResponse(withJSON: json?.dictionary?[SearchJsonKey.foundItemsCount])
     }

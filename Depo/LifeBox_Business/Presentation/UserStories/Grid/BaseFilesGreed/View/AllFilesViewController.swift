@@ -15,28 +15,28 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     private var lastCardContainerHeight: CGFloat = 0
     private let sortAreaHeight: CGFloat = 36
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        handleShareSliderReload()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        handleShareSliderReload()
+//    }
     
-    override func setupUnderNavBarBar(withConfig config: GridListTopBarConfig) {
-        guard let unwrapedTopBar = underNavBarBar, let topBar = unwrapedTopBar.view else {
-            return
-        }
-        
-        unwrapedTopBar.setupWithConfig(config: config, centeredContent: true)
-        
-        topBar.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.addSubview(topBar)
-        topBar.bottomAnchor.constraint(equalTo: collectionView.topAnchor).activate()
-        topBar.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).activate()
-        topBar.widthAnchor.constraint(equalTo: collectionView.widthAnchor).activate()
-        floatingHeaderContainerHeightConstraint = topBar.heightAnchor.constraint(equalToConstant: sortAreaHeight)
-        floatingHeaderContainerHeightConstraint.activate()
-        calculatedUnderNavBarBarHeight = sortAreaHeight
-        setupInitialPrivateShareSlider()
-    }
+//    override func setupUnderNavBarBar(withConfig config: GridListTopBarConfig) {
+//        guard let unwrapedTopBar = underNavBarBar, let topBar = unwrapedTopBar.view else {
+//            return
+//        }
+//        
+//        unwrapedTopBar.setupWithConfig(config: config, centeredContent: true)
+//        
+//        topBar.translatesAutoresizingMaskIntoConstraints = false
+//        collectionView.addSubview(topBar)
+//        topBar.bottomAnchor.constraint(equalTo: collectionView.topAnchor).activate()
+//        topBar.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).activate()
+//        topBar.widthAnchor.constraint(equalTo: collectionView.widthAnchor).activate()
+//        floatingHeaderContainerHeightConstraint = topBar.heightAnchor.constraint(equalToConstant: sortAreaHeight)
+//        floatingHeaderContainerHeightConstraint.activate()
+//        calculatedUnderNavBarBarHeight = sortAreaHeight
+//        setupInitialPrivateShareSlider()
+//    }
     
     private func setupInitialPrivateShareSlider() {
         
@@ -126,7 +126,6 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
         }
         if !output.isSelectionState() {
             output.onReloadData()
-            contentSlider?.reloadAllData()
             handleShareSliderReload()
         } else {
             refresher.endRefreshing()

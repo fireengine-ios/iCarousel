@@ -31,29 +31,6 @@ final class PhotoService {
         })
     }
     
-    func loadAlbumPhotos(albumUuid: String, page: Int, size: Int, handler: @escaping (ResponseResult<[SearchItemResponse]>) -> Void) {
-        
-        let requestParams = AlbumDetalParameters(albumUuid: albumUuid,
-                                                 sortBy: .date,
-                                                 sortOrder: .desc,
-                                                 page: page,
-                                                 size: size)
-        
-        searchService.searchContentAlbum(param: requestParams, success: { response  in
-            
-            guard let result = (response as? AlbumDetailResponse)?.list else {
-                assertionFailure()
-                let error = CustomErrors.serverError("failed parsing searchService.searchContentAlbum")
-                handler(.failed(error))
-                return
-            }
-            
-            handler(.success(result))
-        }, fail: { errorResponse in
-            handler(.failed(errorResponse))
-        })
-    }
-    
     func cancelCurrentTask() {
         requestTask?.cancel()
     }

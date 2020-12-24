@@ -33,35 +33,14 @@ final class HomeCardResponse : Equatable {
             return .freeAppSpaceCloudWarning
         case .latestUploads:
             return .latestUploads
-        case .movie:
-            return .movieCard
-        case .collage:
-            return .collage
-        case .contactBackup:
-            if ContactBackupOld.isContactInfoObjectEmpty(object: details) {
-                return .contactBacupEmpty
-            }
-            return .contactBacupOld
-        case .album:
-            return .albumCard
         case .autoSyncWatingForWifi:
             return .waitingForWiFi
         case .autoSyncOff:
             return .autoUploadIsOff
-        case .animation:
-            return .animationCard
-        case .launchCampaign:
-            return .launchCampaign
-        case .instaPick:
-            return .instaPick
         case .tbMatik:
             return .tbMatik
-        case .campaign:
-            return .campaignCard
         case .divorce:
             return .divorce
-        case .thingsDocument:
-            return .documents
         }
     }
 }
@@ -82,10 +61,6 @@ extension HomeCardResponse: Map {
         } else {
             details = json["details"]
         }
-        
-        if type == .thingsDocument {
-            fileList = json["fileList"].array
-        }
     }
 }
 
@@ -93,18 +68,9 @@ enum HomeCardTypes: String {
     case emptyStorage = "EMPTY_STORAGE"
     case storageAlert = "STORAGE_ALERT"
     case latestUploads = "LATEST_UPLOADS"
-    case movie = "MOVIE"
-    case collage = "COLLAGE"
-    case contactBackup = "CONTACT_BACKUP"
-    case album = "ALBUM"
     case autoSyncWatingForWifi = "AUTO_SYNC_WAITING_FOR_WIFI"
     case autoSyncOff = "AUTO_SYNC_OFF"
     //case rating = "RATING"
-    case animation = "ANIMATION"
-    case launchCampaign = "LAUNCH_CAMPAIGN"
-    case instaPick = "INSTAGRAM_LIKE"
     case tbMatik = "TBMATIC"
-    case campaign = "CAMPAIGN"
     case divorce = "DIVORCE"
-    case thingsDocument = "THINGS_DOCUMENT"
 }

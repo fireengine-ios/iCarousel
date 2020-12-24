@@ -203,12 +203,6 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
-        ///TODO: remove 'type == .instaPick' after (because of lines 227-229)
-        if type == .premium || type == .instaPick {
-            /// not let some cards appear anywhere else than in HomePage
-            return
-        }
-        
         if !checkIsThisIsPermittedType(type: type) {
             return
         }

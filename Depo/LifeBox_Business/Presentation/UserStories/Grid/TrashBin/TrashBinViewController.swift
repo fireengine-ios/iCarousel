@@ -93,7 +93,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     private func setupEmptyView() {
         collectionView.backgroundView = emptyView
-        emptyView.topOffset = AlbumsSliderCell.height
         emptyView.isHidden = true
     }
     
@@ -131,11 +130,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         interactor.reloadItems { [weak self] in
             self?.hideSpinner()
         }
-    }
-    
-    private func reloadAlbums() {
-        dataSource.albumSliderReset()
-        interactor.reloadAlbums()
     }
     
     private func checkEmptyView() {
@@ -188,17 +182,9 @@ extension TrashBinViewController: TrashBinDataSourceDelegate {
         interactor.loadNextItemsPage()
     }
     
-    func needLoadNextAlbumPage() {
-        interactor.loadNextAlbumsPage()
-    }
-    
     func didSelect(item: Item) {
         let sameTypeItems = dataSource.getSameTypeItems(for: item.fileType, from: dataSource.allItems.flatMap { $0 })
         router.openSelected(item: item, sameTypeItems: sameTypeItems, delegate: self)
-    }
-    
-    func didSelect(album: BaseDataSourceItem) {
-        showAlbumDetails(item: album)
     }
     
     func onStartSelection() {
@@ -248,21 +234,7 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
         }
     }
     
-    func didLoad(albums: [BaseDataSourceItem]) {
-        dataSource.append(albums: albums)
-        updateMoreButton()
-    }
-    
-    func didFinishLoadAlbums() {
-        photoVideoDetailModule?.appendItems([], isLastPage: true)
-        dataSource.finishLoadAlbums()
-    }
-    
     func failedLoadItemsPage(error: Error) {
-        UIApplication.showErrorAlert(message: error.description)
-    }
-    
-    func failedLoadAlbumPage(error: Error) {
         UIApplication.showErrorAlert(message: error.description)
     }
 }
@@ -344,37 +316,6 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     }
 }
 
-//MARK: - Routing
-
-extension TrashBinViewController {
-    private func showAlbumDetails(item: BaseDataSourceItem) {
-        if let album = item as? AlbumItem {
-            router.openAlbum(item: album)
-        } else if let firItem = item as? Item, firItem.fileType.isFaceImageType {
-            openFIRAlbum(item: firItem)
-        }
-    }
-    
-    private func openFIRAlbum(item: Item) {
-        showSpinner()
-        
-        interactor.getAlbumDetails(item: item) { [weak self] result in
-            guard let self = self else {
-                return
-            }
-            
-            self.hideSpinner()
-            
-            switch result {
-            case .success(let album):
-                self.router.openFIRAlbum(album: album, item: item)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
-            }
-        }
-    }
-}
-
 //MARK: - ItemOperationManagerViewProtocol
 
 extension TrashBinViewController: ItemOperationManagerViewProtocol {
@@ -396,46 +337,10 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
         reloadData(needShowSpinner: false)
     }
     
-    func didMoveToTrashPeople(items: [PeopleItem]) {
-        reloadData(needShowSpinner: false)
-    }
-    
-    func didMoveToTrashPlaces(items: [PlacesItem]) {
-        reloadData(needShowSpinner: false)
-    }
-    
-    func didMoveToTrashThings(items: [ThingsItem]) {
-        reloadData(needShowSpinner: false)
-    }
-    
-    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
-        if !customAlbums.isEmpty {
-            reloadData(needShowSpinner: false)
-        }
-    }
-    
     //MARK: Restore events
     
     func putBackFromTrashItems(_ items: [Item]) {
         remove(items: items)
-    }
-    
-    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
-        remove(albums: customAlbums)
-    }
-    
-    func putBackFromTrashPeople(items: [PeopleItem]) {
-        remove(albums: items)
-    }
-    
-    func putBackFromTrashPlaces(items: [PlacesItem]) {
-        remove(albums: items)
-    }
-    
-    func putBackFromTrashThings(items: [ThingsItem]) {
-        remove(albums: items)
     }
     
     //MARK: Delete events
@@ -448,28 +353,13 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
         remove(items: items)
     }
     
-    func albumsDeleted(albums: [AlbumItem]) {
-        remove(albums: albums)
-    }
-    
     func didEmptyTrashBin() {
         reloadData(needShowSpinner: true)
     }
     
     private func remove(items: [Item]) {
-        reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
             self?.checkEmptyView()
-        }
-    }
-    
-    private func remove(albums: [BaseDataSourceItem]) {
-        if albums.isEmpty {
-            return
-        }
-        
-        dataSource.removeSlider(items: albums) { [weak self] in
-            self?.reloadItems(needShowSpinner: false)
         }
     }
 }

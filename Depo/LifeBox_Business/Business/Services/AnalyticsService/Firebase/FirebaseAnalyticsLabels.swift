@@ -575,12 +575,8 @@ enum GAEventLabel {
             return contantEvent.text
         case .plusAction(let action):
             switch action {
-            case .createAlbum:
-                return "Create Album"
             case .createFolder:
                 return "New Folder"
-            case .createStory:
-                return "Create Story"
             case .takePhoto:
                 return "Use Camera"
             case .upload:
@@ -595,8 +591,6 @@ enum GAEventLabel {
                 return "Upload from \(TextConstants.NotLocalized.appName)"
             case .uploadFromAppFavorites:
                 return "Upload from \(TextConstants.NotLocalized.appName) Favorites"
-            case .importFromSpotify:
-                return "Import From Spotify"
             }
         case .shareViaLink:
             return "Share via Link"

@@ -43,6 +43,14 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !Device.isIpad {
+            navigationBarWithGradientStyle()
+        }
+    }
+    
     // MARK: WKNavigationDelegate
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

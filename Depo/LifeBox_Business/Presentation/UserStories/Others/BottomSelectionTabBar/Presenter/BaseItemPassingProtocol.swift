@@ -21,11 +21,6 @@ protocol BaseItemInputPassingProtocol: class {
     func stopModeSelected()
 
     func printSelected()
-    func changeCover()
-    
-    func getFIRParent() -> Item?
-    
-    func openInstaPick()
     
     func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>)
 }
@@ -46,8 +41,4 @@ extension BaseItemInputPassingProtocol {
     func successPopupClosed() {}
     
     func successPopupWillAppear() {}
-    
-    func getFIRParent() -> Item? {
-        return nil
-    }
 }

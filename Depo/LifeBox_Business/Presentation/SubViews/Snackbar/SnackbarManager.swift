@@ -61,8 +61,6 @@ enum SnackbarType {
             return .ok
         case .action:
             switch operationType {
-            case .hide:
-                return .hiddenBin
             case .moveToTrash:
                 return .trashBin
             default:
@@ -73,26 +71,19 @@ enum SnackbarType {
     
     init?(operationType: ElementTypes) {
         switch operationType {
-        case .addToAlbum,
-             .addToFavorites,
+        case .addToFavorites,
              .delete,
              .download,
-             .edit,
              .emptyTrashBin,
              .move,
-             .removeAlbum,
-             .removeFromAlbum,
-             .removeFromFaceImageAlbum,
              .removeFromFavorites,
              .restore,
-             .unhide,
              .endSharing,
              .leaveSharing,
              .moveToTrashShared:
             self = .nonCritical
             
-        case .hide,
-             .moveToTrash:
+        case .moveToTrash:
             self = .action
             
         default:

@@ -11,7 +11,6 @@ import UIKit
 protocol FileMetaInfoViewProtocol: UIView {
     func reset()
     func setup(with wrapData: WrapData)
-    func setup(with albumItem: AlbumItem)
     func set(createdDate: Date)
 }
 
@@ -137,19 +136,6 @@ final class FileMetaInfoView: UIView, NibInit, FileMetaInfoViewProtocol {
                 takenDateStackView.isHidden = false
             }
         }
-    }
-    
-    func setup(with albumItem: AlbumItem) {
-        uploadDateTitleLabel.text = TextConstants.fileInfoCreationDateTitle
-        
-        fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
-        fileInfoLabel.text = TextConstants.fileInfoAlbumInfoTitle
-        
-        var count = 0
-        count += albumItem.audioCount ?? 0
-        count += albumItem.imageCount ?? 0
-        count += albumItem.videoCount ?? 0
-        fileSizeLabel.text = String(count)
     }
     
     func set(createdDate: Date) {

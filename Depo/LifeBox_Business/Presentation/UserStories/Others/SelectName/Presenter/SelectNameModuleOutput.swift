@@ -10,6 +10,4 @@ import Foundation
 
 protocol SelectNameModuleOutput: class {
     
-    func didCreateAlbum(item: AlbumItem)
-    
 }

@@ -99,29 +99,17 @@ final class PushNotificationService {
         switch action {
         case .main, .home: openMain()
         case .floatingMenu: openFloatingMenu()
-        case .packages: openPackages()
-        case .videos: openVideos()
-        case .albums: openAlbums()
-        case .stories: openStories()
         case .allFiles: openAllFiles()
         case .music: openMusic()
         case .documents: openDocuments()
-        case .periodicContactSync: openPeriodicContactSync()
         case .favorites: openFavorites()
-        case .createStory: openCreateStory()
         case .contactUs: openContactUs()
         case .usageInfo: openUsageInfo()
         case .recentActivities: openRecentActivities()
         case .email: openEmail()
-        case .importDropbox: openImportDropbox()
-        case .socialMedia: openSocialMedia()
         case .faq: openFaq()
         case .passcode: openPasscode()
         case .loginSettings: openLoginSettings()
-        case .faceImageRecognition: openFaceImageRecognition()
-        case .people: openPeople()
-        case .things: openThings()
-        case .places: openPlaces()
         case .http: openURL(notificationParameters)
         case .login:
             openLogin()
@@ -130,13 +118,9 @@ final class PushNotificationService {
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
         case .changePassword: openChangePassword()
-        case .photopickHistory: openPhotoPickHistory()
-        case .myStorage: openMyStorage()
-        case .becomePremium: openBecomePremium()
         case .tbmatic: openTBMaticPhotos(notificationParameters)
         case .securityQuestion: openSecurityQuestion()
         case .permissions: openPermissions()
-        case .photopickCampaignDetail: openCampaignDetails()
         case .supportFormSignup, .supportFormLogin:
             if isLoggedIn {
                 openContactUs()
@@ -145,7 +129,6 @@ final class PushNotificationService {
             }
         case .trashBin:
             openTrashBin()
-        case .hiddenBin: openHiddenBin()
         case .sharedWithMe: openSharedWithMe()
         case .sharedByMe: openShareByMe()
         }
@@ -250,22 +233,6 @@ final class PushNotificationService {
         tabBarVC.showRainbowIfNeed()
     }
     
-    private func openPackages() {
-        pushTo(router.packages)
-    }
-    
-    private func openVideos() {
-//        openTabBarItem(index: .videosScreenIndex)
-    }
-    
-    private func openAlbums() {
-        pushTo(router.albumsListController())
-    }
-    
-    private func openStories() {
-        pushTo(router.storiesListController())
-    }
-    
     private func openAllFiles() {
         openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
     }
@@ -284,15 +251,6 @@ final class PushNotificationService {
 
     private func openTrashBin() {
         openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
-    }
-
-    private func openPeriodicContactSync() {
-        pushTo(router.periodicContactsSync)
-    }
-    
-    private func openCreateStory() {
-        let controller = router.createStory(navTitle: TextConstants.createStory)
-        router.pushViewController(viewController: controller)
     }
     
     private func openContactUs() {
@@ -313,14 +271,6 @@ final class PushNotificationService {
         }
     }
     
-    private func openImportDropbox() {
-        pushTo(router.connectedAccounts)
-    }
-    
-    private func openSocialMedia() {
-        pushTo(router.connectedAccounts)
-    }
-    
     private func openFaq() {
         pushTo(router.helpAndSupport)
     }
@@ -335,23 +285,7 @@ final class PushNotificationService {
         let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
         pushTo(controller)
     }
-    
-    private func openFaceImageRecognition() {
-        pushTo(router.faceImage)
-    }
-    
-    private func openPeople() {
-        pushTo(router.peopleListController())
-    }
-    
-    private func openThings() {
-        pushTo(router.thingsListController())
-    }
-    
-    private func openPlaces() {
-        pushTo(router.placesListController())
-    }
-    
+      
     private func openSearch() {
         let output = router.getViewControllerForPresent()
         let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
@@ -386,19 +320,7 @@ final class PushNotificationService {
     private func openChangePassword() {
         pushTo(router.changePassword)
     }
-    
-    private func openPhotoPickHistory() {
-        pushTo(router.analyzesHistoryController())
-    }
-    
-    private func openMyStorage() {
-        pushTo(router.myStorage(usageStorage: nil))
-    }
-    
-    private func openBecomePremium() {
-        pushTo(router.premium())
-    }
-    
+        
     private func openTBMaticPhotos(_ uuidsByString: String?) {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.notification))
         
@@ -435,18 +357,8 @@ final class PushNotificationService {
         pushTo(controller)
     }
     
-    private func openCampaignDetails() {
-        let controller = router.campaignDetailViewController()
-        pushTo(controller)
-    }
-    
     private func openSupport(type: SupportFormScreenType) {
         let controller = SupportFormController.with(screenType: type)
-        pushTo(controller)
-    }
-    
-    private func openHiddenBin() {
-        let controller = router.hiddenPhotosViewController()
         pushTo(controller)
     }
     

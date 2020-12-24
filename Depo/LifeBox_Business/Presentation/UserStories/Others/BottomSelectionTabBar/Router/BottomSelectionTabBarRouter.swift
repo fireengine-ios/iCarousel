@@ -19,11 +19,6 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
         }
     }
     
-    func addToAlbum(items: [BaseDataSourceItem]) {
-        let controller = router.addPhotosToAlbum(photos: items)
-        router.pushOnPresentedView(viewController: controller)
-    }
-    
     func showPrint(items: [BaseDataSourceItem]) {
         guard let wrapperedArray = items as? [Item] else {
             return
