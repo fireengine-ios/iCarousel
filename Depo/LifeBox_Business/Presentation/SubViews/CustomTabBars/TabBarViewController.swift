@@ -40,6 +40,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
     private lazy var externalFileUploadService = ExternalFileUploadService()
+    private lazy var galleryFileUploadService = GalleryFileUploadService()
     private lazy var cameraService = CameraService()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var router = RouterVC()
@@ -556,10 +557,7 @@ extension TabBarViewController: TabBarActionHandler {
                 return
             }
             
-            let controller = router.uploadPhotos()
-            let navigation = NavigationController(rootViewController: controller)
-            navigation.navigationBar.isHidden = false
-            router.presentViewController(controller: navigation)
+            galleryFileUploadService.upload(delegate: self)
             
         case .uploadFiles:
             guard !checkReadOnlyPermission() else {
