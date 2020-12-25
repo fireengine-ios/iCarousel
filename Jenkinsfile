@@ -323,7 +323,7 @@ pipeline {
             }
             steps {
                 script {
-                   // apps.each deployToIctStore
+                   apps.each deployToIctStore
                 }
             }
 			post {
