@@ -181,10 +181,6 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         return true
     }
     
-    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool {
-        return true
-    }
-    
     func getViewForOperation(operation: OperationType) -> BaseCardView {
         return CardsManager.cardViewForOperaion(type: operation)
     }
@@ -199,10 +195,6 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
         if !checkIsThisIsPermittedType(type: type) {
-            return
-        }
-        
-        if !checkIsNeedShowPopUpFor(operationType: type) {
             return
         }
         
