@@ -273,6 +273,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         let isSelectedCell = isSelected(item: item)
         cell.isSelected = isSelectedCell
         cell.updating()
+        cell.canShowSharedIcon = false
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
           

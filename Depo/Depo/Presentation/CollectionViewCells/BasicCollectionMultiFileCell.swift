@@ -76,6 +76,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     var filesDataSource: FilesDataSource?
     private var cellImageManager: CellImageManager?
     private var uuid: String?
+    
+    var canShowSharedIcon = true
 
     override func setImage(image: UIImage?, animated: Bool) {
         isAlreadyConfigured = true
@@ -192,7 +194,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             sharedIcon.isHidden = true
         } else {
             topFavoritesStar.isHidden = true
-            sharedIcon.isHidden = !wrappered.isShared
+            sharedIcon.isHidden = !wrappered.isShared || !canShowSharedIcon
         }
     
         
