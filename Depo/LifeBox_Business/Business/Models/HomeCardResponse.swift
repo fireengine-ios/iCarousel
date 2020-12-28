@@ -31,16 +31,8 @@ final class HomeCardResponse : Equatable {
             return .emptyStorage
         case .storageAlert:
             return .freeAppSpaceCloudWarning
-        case .latestUploads:
-            return .latestUploads
         case .autoSyncWatingForWifi:
             return .waitingForWiFi
-        case .autoSyncOff:
-            return .autoUploadIsOff
-        case .tbMatik:
-            return .tbMatik
-        case .divorce:
-            return .divorce
         }
     }
 }
@@ -55,22 +47,13 @@ extension HomeCardResponse: Map {
         }
         saved = json["saved"].boolValue
         actionable = json["actionable"].boolValue
-        
-        if type == .tbMatik {
-            details = json["fileList"]
-        } else {
-            details = json["details"]
-        }
+        details = json["details"]
     }
 }
 
 enum HomeCardTypes: String {
     case emptyStorage = "EMPTY_STORAGE"
     case storageAlert = "STORAGE_ALERT"
-    case latestUploads = "LATEST_UPLOADS"
     case autoSyncWatingForWifi = "AUTO_SYNC_WAITING_FOR_WIFI"
-    case autoSyncOff = "AUTO_SYNC_OFF"
     //case rating = "RATING"
-    case tbMatik = "TBMATIC"
-    case divorce = "DIVORCE"
 }

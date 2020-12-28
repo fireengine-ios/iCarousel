@@ -296,10 +296,6 @@ class RouterVC: NSObject {
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
         }
-        // for present actionSheet under modal controller
-        if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
-            return presentedController
-        }
         
         if let navBarController = navigationController?.viewControllers.last?.presentedViewController as? UINavigationController {
             return navBarController.visibleViewController
@@ -836,10 +832,6 @@ class RouterVC: NSObject {
         controller.modalPresentationStyle = .overFullScreen
         
         return controller
-    }
-    
-    func tbmaticPhotosContoller(uuids: [String]) -> UIViewController {
-        return TBMatikPhotosViewController.with(uuids: uuids)
     }
     
     func trashBinController() -> TrashBinViewController {
