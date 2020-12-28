@@ -149,6 +149,11 @@ final class FileInfoView: UIView, FromNib {
         guard object?.isLocalItem == false, let projectId = object?.projectId, let uuid = object?.uuid else {
             return
         }
+        
+        if let item = object as? Item, item.status != .active {
+            return
+        }
+        
         getSharingInfo(projectId: projectId, uuid: uuid)
     }
     
