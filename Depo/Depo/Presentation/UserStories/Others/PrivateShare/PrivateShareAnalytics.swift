@@ -9,7 +9,6 @@
 private enum ContactsPermission {
     case allow
     case doNotAllow
-    case doNotAsk
     
     var trackValue: String {
         switch self {
@@ -17,8 +16,6 @@ private enum ContactsPermission {
             return "Allow"
         case .doNotAllow:
             return "Do not Allow"
-        case .doNotAsk:
-            return "Do not Ask"
         }
     }
     
@@ -26,10 +23,8 @@ private enum ContactsPermission {
         switch status {
         case .authorized:
             self = .allow
-        case .denied:
-            self = .doNotAllow
         default:
-            self = .doNotAsk
+            self = .doNotAllow
         }
     }
 }
