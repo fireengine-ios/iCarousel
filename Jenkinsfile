@@ -30,6 +30,18 @@ apps = [
            // xcodeSchema: 'Billo_Bundle', 
            // xcodeTarget: 'Billo_Bundle'  
        ]
+       ,
+       [
+            name: 'lifebox_business',// name will be the base filename of the app
+            versionInfoPath: 'Depo/LifeBox_Business/Signing/Turkcell/TC_LifeBox_Business-Info.plist',
+            ictsContainerId: '743', // ICT Store
+            prodTeamID: '693N5K66ZJ',
+            xcodeSchema: 'lifeBox_Business_Bundle',
+            xcodeTarget: 'lifeBox_Business_Bundle',
+            // xcodeSchema: 'TC_Depo_LifeTech_Bundle',
+            // xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+            itcTeamId: '121548574',
+        ]
 ]
 derivedDir = 'lifebox'
 
@@ -311,7 +323,7 @@ pipeline {
             }
             steps {
                 script {
-                   // apps.each deployToIctStore
+                   apps.each deployToIctStore
                 }
             }
 			post {
