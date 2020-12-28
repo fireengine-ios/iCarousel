@@ -320,13 +320,6 @@ extension AppDelegate {
         debugLog("AppDelegate didReceiveRemoteNotification")
         
         AppEvents.logPushNotificationOpen(userInfo)
-        
-        // track receiving TBMatik Push notifications
-        if let pushType = Netmera.recentPushObject()?.customDictionary[PushNotificationParameter.pushType.rawValue] as? String,
-            pushType == PushNotificationAction.tbmatic.rawValue {
-            analyticsService.logScreen(screen: .tbmatikPushNotification)
-            analyticsService.trackDimentionsEveryClickGA(screen: .tbmatikPushNotification)
-        }
     }
     
     //MARK: Adjust

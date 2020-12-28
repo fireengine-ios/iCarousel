@@ -27,7 +27,6 @@ enum PushNotificationAction: String {
     case settings = "settings"
     case profileEdit = "profile_edit"
     case changePassword = "change_password"
-    case tbmatic = "TBMatik"
     case securityQuestion = "security_question"
     case permissions = "permissions"
     case supportFormLogin = "support_form_login"
@@ -41,7 +40,6 @@ enum PushNotificationAction: String {
 enum PushNotificationParameter: String {
     case action = "action"
     case pushType = "push_type"
-    case tbmaticUuids = "tbt_file_list"
     case netmeraParameters = "prms"
 }
 
