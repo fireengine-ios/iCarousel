@@ -414,6 +414,19 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             showCurtainView(show: false)
         }
     }
+    
+    func folderUUID() -> String? {
+        if let controller = currentViewController as? BaseFilesGreedViewController {
+            return controller.getFolder()?.uuid
+        }
+        
+        if let controller = currentViewController as? PrivateShareSharedFilesViewController,
+           case let PrivateShareType.innerFolder(_, folder) = controller.shareType {
+            return folder.uuid
+        }
+        
+        return nil
+    }
 
 }
 
@@ -439,64 +452,28 @@ extension TabBarViewController: PlusMenuItemViewDelegate {
 
 //MARK: - UIImagePickerControllerDelegate
 
-extension TabBarViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func getFolderUUID() -> String? {
-        if let controller = currentViewController as? BaseFilesGreedViewController {
-            return controller.getFolder()?.uuid
-        }
-        
-        if let controller = currentViewController as? PrivateShareSharedFilesViewController,
-           case let PrivateShareType.innerFolder(_, folder) = controller.shareType {
-            return folder.uuid
-        }
-        
-        return nil
+extension TabBarViewController: GalleryFileUploadServiceDelegate {
+    func uploaded(items: [WrapData]) {
+        //
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage,
-            let data = UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
-            else { return }
-        
-        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        SDWebImageManager.shared().saveImage(toCache: image, for: url)
-        
-        let wrapData = WrapData(imageData: data, isLocal: true)
-        /// usedUIImageJPEGRepresentation
-        if let wrapDataName = wrapData.name {
-            wrapData.name = wrapDataName + ".JPG"
+    func failed(error: ErrorResponse?) {
+        guard let error = error else {
+            return
         }
         
-        wrapData.patchToPreview = PathForItem.remoteUrl(url)
+        guard !error.isOutOfSpaceError else {
+            //showing special popup for this error
+            return
+        }
         
-        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail()
-        
-        picker.dismiss(animated: true, completion: { [weak self] in
-            self?.statusBarHidden = false
-            
-            UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: self?.getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
-            }, fail: { [weak self] error in
-                guard !error.isOutOfSpaceError else {
-                    //showing special popup for this error
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                                  message: error.description,
-                                                  image: .error,
-                                                  buttonTitle: TextConstants.ok)
-                    self?.present(vc, animated: true, completion: nil)
-                }
-            }, returnedUploadOperation: { _ in })
-        })
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: {
-            self.statusBarHidden = false
-        })
+        DispatchQueue.main.async {
+            let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                          message: error.description,
+                                          image: .error,
+                                          buttonTitle: TextConstants.ok)
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }
 
@@ -522,11 +499,11 @@ extension TabBarViewController: TabBarActionHandler {
         switch action { 
         case .createFolder:
             let isFavorites = router.isOnFavoritesView()
-            var folderUUID = getFolderUUID()
+            var folderUuid = folderUUID()
             
-            /// If the user is on the "Documents" screen, I pass folderUUID to avoid opening the default "AllFiles" screen.
-            if folderUUID == nil, selectedIndex == 3 {
-                folderUUID = ""
+            /// If the user is on the "Documents" screen, I pass folderUuid to avoid opening the default "AllFiles" screen.
+            if folderUuid == nil, selectedIndex == 3 {
+                folderUuid = ""
             }
             
             let controller: UIViewController
@@ -534,7 +511,7 @@ extension TabBarViewController: TabBarActionHandler {
                 let parameters = CreateFolderSharedWithMeParameters(projectId: sharedFolder.projectId, rootFolderUuid: sharedFolder.uuid)
                 controller = router.createNewFolderSharedWithMe(parameters: parameters)
             } else {
-                controller = router.createNewFolder(rootFolderID: folderUUID, isFavorites: isFavorites)
+                controller = router.createNewFolder(rootFolderID: folderUuid, isFavorites: isFavorites)
             }
             
             let nController = NavigationController(rootViewController: controller)
@@ -552,7 +529,7 @@ extension TabBarViewController: TabBarActionHandler {
                 return
             }
             
-            galleryFileUploadService.upload(delegate: self)
+            galleryFileUploadService.upload(rootViewController: self, delegate: self)
             
         case .uploadFiles:
             guard !checkReadOnlyPermission() else {
