@@ -105,7 +105,7 @@ class CameraService {
         }
     }
     
-    private func showAccessAlert() {
+    func showAccessAlert() {
         debugLog("CameraService showAccessAlert")
 
         let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,

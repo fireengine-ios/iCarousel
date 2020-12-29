@@ -9,7 +9,6 @@
 import UIKit
 
 enum FloatingButtonsType {
-    case takePhoto
     case upload
     case newFolder
     case uploadFromLifebox
@@ -20,8 +19,6 @@ enum FloatingButtonsType {
     
     var title: String {
         switch self {
-        case .takePhoto:
-            return TextConstants.takePhoto
         case .upload:
             return TextConstants.upload
         case .uploadFiles, .uploadDocuments:
@@ -37,8 +34,6 @@ enum FloatingButtonsType {
     
     var image: UIImage? {
         switch self {
-        case .takePhoto:
-            return UIImage(named: "TakeFhoto")
         case .upload,
              .uploadFiles,
              .uploadDocuments,
@@ -53,8 +48,6 @@ enum FloatingButtonsType {
     
     var action: TabBarViewController.Action {
         switch self {
-        case .takePhoto:
-            return .takePhoto
         case .upload:
             return .upload
         case .uploadFiles:

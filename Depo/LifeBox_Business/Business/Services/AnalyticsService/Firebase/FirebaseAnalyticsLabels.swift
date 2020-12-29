@@ -577,8 +577,6 @@ enum GAEventLabel {
             switch action {
             case .createFolder:
                 return "New Folder"
-            case .takePhoto:
-                return "Use Camera"
             case .upload:
                 return "Upload"
             case .uploadFiles:
