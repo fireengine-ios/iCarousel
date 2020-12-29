@@ -6,18 +6,18 @@
 
 agentName = 'devops-dss-js-ios-12' // The mac mini assigned to this project
 apps = [ 
-[
-            name: 'lifebox',// name will be the base filename of the app
-            versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
-            ictsContainerId: '743', // ICT Store
-            prodTeamID: '693N5K66ZJ',
-	          xcodeSchema: 'TC_Depo_LifeTech',
-            xcodeTarget: 'TC_Depo_LifeTech',
-            // xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            // xcodeTarget: 'TC_Depo_LifeTech_Bundle',
-            itcTeamId: '121548574',
-        ]
-,
+// [
+//             name: 'lifebox',// name will be the base filename of the app
+//             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
+//             ictsContainerId: '743', // ICT Store
+//             prodTeamID: '693N5K66ZJ',
+// 	          xcodeSchema: 'TC_Depo_LifeTech',
+//             xcodeTarget: 'TC_Depo_LifeTech',
+//             // xcodeSchema: 'TC_Depo_LifeTech_Bundle',
+//             // xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+//             itcTeamId: '121548574',
+//         ]
+// ,
 // [
 //            name: 'Billo',// name will be the base filename of the app
 //            versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
