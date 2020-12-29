@@ -42,35 +42,6 @@ enum NetmeraEventValues {
         }
     }
     
-    enum AutoSyncState {
-        case never
-        case wifi
-        case wifi_LTE
-        
-        var text: String {
-            switch self {
-            case .never:
-                return "Never"
-            case .wifi:
-                return "Wifi"
-            case .wifi_LTE:
-                return "Wifi_LTE"
-            }
-        }
-        
-        static func getState(autosyncSettings: AutoSyncSetting) -> AutoSyncState {
-            switch autosyncSettings.option {
-            case .never:
-                return .never
-            case .wifiOnly:
-                return .wifi
-            case .wifiAndCellular:
-                return .wifi_LTE
-            }
-            
-        }
-    }
-    
     enum EmailVerification {
         case verified
         case notVerified

@@ -38,11 +38,4 @@ struct FileForDownload {
         self.name = name
         self.type = wrapData.fileType
     }
-    
-    init?(forInstaPickAnalyze analyze: InstapickAnalyze?) {
-        guard let url = analyze?.getLargeImageURL(), let name = analyze?.fileInfo?.name else { return nil }
-        self.url = url
-        self.name = name
-        self.type = .image
-    }
 }

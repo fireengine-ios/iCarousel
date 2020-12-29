@@ -22,7 +22,6 @@ final class UploadService: BaseRequestService {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
-    private lazy var autoSyncStorage = AutoSyncDataStorage()
     private lazy var reachabilityService = ReachabilityService.shared
     
     private var allSyncOperationsCount: Int {
@@ -70,8 +69,6 @@ final class UploadService: BaseRequestService {
         uploadQueue.qualityOfService = .userInteractive
         
         super.init()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateSyncSettings), name: .autoSyncStatusDidChange, object: nil)
     }
     
     deinit {
@@ -287,8 +284,8 @@ final class UploadService: BaseRequestService {
         
         guard
             allOperations != 0,
-            allOperations != finishedSyncOperationsCount,
-            autoSyncStorage.settings.isAutoSyncEnabled
+            allOperations != finishedSyncOperationsCount
+//            autoSyncStorage.settings.isAutoSyncEnabled
         else {
             clearSyncCounters()
             return
@@ -986,17 +983,9 @@ extension UploadService {
     }
     
     fileprivate func logSyncSettings(state: String) {
-        let settings = autoSyncStorage.settings
-        let photoSetting = autoSyncStorage.settings.isAutoSyncEnabled ? settings.photoSetting.option.localizedText : AutoSyncOption.never.localizedText
-        let videoSetting = autoSyncStorage.settings.isAutoSyncEnabled ? settings.videoSetting.option.localizedText : AutoSyncOption.never.localizedText
-        var logString = "Auto Sync Settings: PHOTOS: \(photoSetting) + VIDEOS: \(videoSetting)"
-        logString += "; DEVICE NETWORK: \(reachabilityService.status)"
+        var logString = "DEVICE NETWORK: \(reachabilityService.status)"
         logString += " --> \(state)"
         debugLog(logString)
-    }
-    
-    @objc fileprivate func updateSyncSettings() {
-        logSyncSettings(state: "Auto Sync setting changed")
     }
 }
 

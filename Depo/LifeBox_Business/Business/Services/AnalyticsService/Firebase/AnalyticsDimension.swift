@@ -18,17 +18,12 @@ struct AnalyticsDimension {
     let paymentMethod: String? //Should be sent after package purchase. Value is Turkcell or inApp
     let userId: Any
     let operatorSystem: Any//should be String if everything ok
-    let facialRecognition: Any//not bool in case of Null
-    let userPackagesNames: [String] //Pacakage names that the user owns should be sent with every page click. Pacakage names should be seperated with pipe "|"
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?
     let gsmOperatorType: String
     let deviceId: String = Device.deviceId ?? ""
     let loginType: GADementionValues.login?
     let errorType: String?
-    
-    let autoSyncState: String?
-    let autoSyncStatus: String?
     
     let isTwoFactorAuthEnabled: Bool?
     
@@ -49,13 +44,6 @@ struct AnalyticsDimension {
     let shareParameters: [String: Int]?
     
     var productParametrs: [String: Any] {
-        var userOwnedPackages = ""
-        userPackagesNames.forEach {
-            if !userOwnedPackages.isEmpty {
-                userOwnedPackages.append("|") ///either that or just make userOwnedPackages.append("|\($0)")
-            }
-            userOwnedPackages.append("\($0)")
-        }
         var dimesionDictionary: [String: Any] = [
             GADementionsFields.screenName.text : screenName,
             GADementionsFields.pageType.text : pageType,//.name,
@@ -68,8 +56,6 @@ struct AnalyticsDimension {
             GADementionsFields.developmentVersion.text : developmentVersion,
             GADementionsFields.userID.text : userId,
             GADementionsFields.operatorSystem.text : operatorSystem,
-            GADementionsFields.faceImageStatus.text : "\(facialRecognition)",
-            GADementionsFields.userPackage.text : userOwnedPackages,
             GADementionsFields.gsmOperatorType.text : gsmOperatorType,
             GADementionsFields.deviceId.text: deviceId
         ]
@@ -87,12 +73,6 @@ struct AnalyticsDimension {
         }
         if let errorType = errorType {
             dimesionDictionary[GADementionsFields.errorType.text] = errorType
-        }
-        if let autoSyncState = autoSyncState {
-            dimesionDictionary[GADementionsFields.autoSyncState.text] = autoSyncState
-        }
-        if let autoSyncStatus = autoSyncStatus {
-            dimesionDictionary[GADementionsFields.autoSyncStatus.text] = autoSyncStatus
         }
         if let isTwoFactorAuthEnabled = isTwoFactorAuthEnabled {
             dimesionDictionary[GADementionsFields.twoFactorAuth.text] = isTwoFactorAuthEnabled ? "True" : "False"

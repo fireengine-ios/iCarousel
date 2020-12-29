@@ -103,10 +103,8 @@ final class AnalyticsService: NSObject {
 protocol AnalyticsGA {///GA = GoogleAnalytics
     func logScreen(screen: AnalyticsAppScreens)
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int)
-    func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int)
     func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel, eventValue: String?)
     func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel, errorType: GADementionValues.errorType?)
-    func trackPackageClick(package: SubscriptionPlan, packageIndex: Int)
     func trackEventTimely(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel, timeInterval: Double)
     func stopTimelyTracking()
     func trackDimentionsEveryClickGA(screen: AnalyticsAppScreens, downloadsMetrics: Int?, uploadsMetrics: Int?, isPaymentMethodNative: Bool?)
@@ -167,32 +165,10 @@ extension AnalyticsService: AnalyticsGA {
         }
 
         let group = DispatchGroup()
-
-        group.enter()
-        var facialRecognitionStatus: Any = NSNull()
-        SingletonStorage.shared.getFaceImageSettingsStatus(success: { isFIROn in
-            facialRecognitionStatus = isFIROn
-            group.leave()
-        }, fail: { error in
-            group.leave()
-        })
-        
-        group.enter()
-        var activeSubscriptionNames = [String]()
-        SingletonStorage.shared.getActiveSubscriptionsList(success: { response in
-            activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
-                return ($0.subscriptionPlanName ?? "") + "|"
-            }
-            group.leave()
-        }, fail: { errorResponse in
-            group.leave()
-        })
         
 ///        For all of the events (not only newly added autosync events but also all GA events that we send in current client), we will also send below dimensions each time. For the events that we send before login, there is no need to send.
 ///        AutoSync --> True/False
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
-        var autoSyncState: String?
-        var autoSyncStatus: String?
         var isTwoFactorAuthEnabled: Bool?
 
         var usagePercentage: Int?
@@ -208,18 +184,6 @@ extension AnalyticsService: AnalyticsGA {
                    group.leave()
                }
             
-            let autoSyncStorageSettings = AutoSyncDataStorage().settings
-            
-            let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
-            
-            autoSyncState = confirmedAutoSyncSettingsState ? "True" : "False"
-            
-            let photoSetting = confirmedAutoSyncSettingsState ?
-                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : GAEventLabel.photosNever.text
-            let videoSetting = confirmedAutoSyncSettingsState ?
-                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
-            autoSyncStatus = "\(photoSetting) | \(videoSetting)"
-            
             isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
         }
         
@@ -232,15 +196,11 @@ extension AnalyticsService: AnalyticsGA {
                 service: TextConstants.NotLocalized.appNameGA, developmentVersion: version,
                 paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
-                facialRecognition: facialRecognitionStatus,
-                userPackagesNames: activeSubscriptionNames,
                 countOfUploadMetric: uploadsMetrics,
                 countOfDownloadMetric: downloadsMetrics,
                 gsmOperatorType: self.getGAOperatorType(),
                 loginType: loginType,
                 errorType: errorType,
-                autoSyncState: autoSyncState,
-                autoSyncStatus: autoSyncStatus,
                 isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
                 dailyDrawleft: dailyDrawleft,
                 totalDraw: totalDraw,
@@ -262,45 +222,6 @@ extension AnalyticsService: AnalyticsGA {
             return "NON_TURKCELL"
         }
         return accountType
-    }
-    
-    func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int) {
-        let analyticasItemList = "Turkcell Package"
-        var itemID = ""
-        var price = ""
-        
-        ///only turkcell offer may has missing currency
-        let currency = offer.currency ?? "TRY"
-        
-        if let offerIDUnwraped = offer.slcmOfferId, let unwrapedPrice = offer.price {
-            itemID = "\(offerIDUnwraped)"
-            price = "\(unwrapedPrice)"
-        }
-        
-        let product = AnalyticsPackageProductObject(itemName: offer.name ?? "",
-                                                    itemID: itemID,
-                                                    price: price,
-                                                    itemBrand: "Lifebox",
-                                                    itemCategory: "Storage",
-                                                    itemVariant: "",
-                                                    index: "\(packageIndex)",
-                                                    quantity: "1",
-                                                    currency: currency)
-        
-        let ecommerce = AnalyticsEcommerce(items: [product],
-                                           itemList: analyticasItemList,
-                                           transactionID: "",
-                                           tax: "0",
-                                           priceValue: price,
-                                           shipping: "0",
-                                           currency: currency)
-        
-        prepareDimentionsParametrs(screen: nil,
-                                   downloadsMetrics: nil,
-                                   uploadsMetrics: nil,
-                                   isPaymentMethodNative: false) { dimentionParametrs in
-            Analytics.logEvent(GACustomEventsType.purchase.key, parameters: ecommerce.ecommerceParametrs + dimentionParametrs)
-        }
     }
     
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {
@@ -407,85 +328,6 @@ extension AnalyticsService: AnalyticsGA {
             
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
-    }
-    
-    func trackPackageClick(package: SubscriptionPlan, packageIndex: Int) {
-        
-        var analyticasItemList = "İndirimdeki Paketler"
-        var itemID = ""
-        var currency: String
-        
-        let type: PackageContentType
-        
-        let slcmID: String
-        let appleID: String
-
-        if let offer = package.model as? PackageModelResponse, let offerType = offer.type {
-            type = offerType
-            currency = offer.currency ?? ""
-            
-            slcmID = offer.slcmOfferId.map { "\($0)" } ?? ""
-            appleID = offer.inAppPurchaseId ?? ""
-            
-        } else if let offer = package.model as? SubscriptionPlanBaseResponse, let offerType = offer.subscriptionPlanType {
-            type = offerType
-            currency = offer.subscriptionPlanCurrency ?? ""
-            
-            slcmID = offer.subscriptionPlanSlcmOfferId ?? ""
-            appleID = offer.subscriptionPlanInAppPurchaseId ?? ""
-        } else {
-            return
-        }
-        
-        switch type {
-        case .quota(let type):
-            switch type {
-            case .apple:
-                analyticasItemList = "In App Package"
-                itemID = appleID
-            case .SLCM:
-                analyticasItemList = "Turkcell Package"
-                itemID = slcmID
-            case .paycellSLCM, .paycellAllAccess:
-                analyticasItemList = "Credit Card Package"
-                ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
-                ///Can asked leave creditCard Product Click without id
-            default:
-                break
-            }
-        case .feature(let type):
-            switch type {
-            case .appleFeature:
-                analyticasItemList = "In App Package"
-                itemID = appleID
-            case .SLCMFeature:
-                analyticasItemList = "Turkcell Package"
-                itemID = slcmID
-            case .SLCMPaycellFeature, .allAccessPaycellFeature:
-                analyticasItemList = "Credit Card Package"
-                ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
-                ///Can asked leave creditCard Product Click without id
-            default:
-                break
-            }
-        }
-        
-        let product =  AnalyticsPackageProductObject(itemName: package.name,
-                                                     itemID: itemID,
-                                                     price: package.price,
-                                                     itemBrand: TextConstants.NotLocalized.appNameGA,
-                                                     itemCategory: "Storage",
-                                                     itemVariant: "",
-                                                     index: "\(packageIndex)",
-                                                     quantity: "1",
-                                                     currency: currency)
-        
-        let ecommerce: [String : Any] = ["items" : [product.productParametrs],
-                                         AnalyticsParameterItemList : analyticasItemList]
-        
-        prepareDimentionsParametrs(screen: nil, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: nil) { dimentionParametrs in
-            Analytics.logEvent(GACustomEventsType.selectContent.key, parameters: ecommerce + dimentionParametrs)
-        } 
     }
     
     func trackEventTimely(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: GAEventLabel = .empty, timeInterval: Double = 60.0) {

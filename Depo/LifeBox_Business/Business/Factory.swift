@@ -16,7 +16,6 @@ protocol Factory: SharedFactory {
     
     func resolve() -> HomeCardsService
     func resolve() -> AnalyticsService
-    func resolve() -> InstapickService
     func resolve() -> PrivacyPolicyService
     func resolve() -> ResumableUploadInfoService
 }
@@ -31,11 +30,6 @@ final class FactoryMain: FactoryBase, Factory {
     private static let storageVars = UserDefaultsVars()
     func resolve() -> StorageVars {
         return FactoryMain.storageVars
-    }
-    
-    private static let instapickService = InstapickServiceImpl()
-    func resolve() -> InstapickService {
-        return FactoryMain.instapickService
     }
 }
 

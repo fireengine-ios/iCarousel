@@ -19,7 +19,6 @@ class SingletonStorage {
     var featuresInfo: FeaturesResponse?
     var faceImageSettings: SettingsInfoPermissionsResponse?
     var signUpInfo: RegistrationUserInfoModel?
-    var activeUserSubscription: ActiveSubscriptionResponse?
     var referenceToken: String?
     var quotaInfoResponse: QuotaInfoResponse?
     var quotaUsage: Int?
@@ -176,72 +175,5 @@ class SingletonStorage {
         getAccountInfoForUser(success: { info in
             success(info.projectID ?? "")
         }, fail: fail)
-    }
-    
-    private func getFaceImageRecognitionSettingsForUser(completion: @escaping (_ result: SettingsInfoPermissionsResponse) -> Void, fail: @escaping (ErrorResponse) -> Void) {
-        if let unwrapedFIRStatus = faceImageSettings {
-            completion(unwrapedFIRStatus)
-            return
-        }
-        let accountService = AccountService()
-        accountService.getSettingsInfoPermissions(handler: { [weak self] response in
-            switch response {
-            case .success(let result):
-                self?.faceImageSettings = result
-                completion(result)
-            case .failed(let error):
-                fail(ErrorResponse.string(error.description))
-            }
-        })
-    }
-    
-    func getFaceImageSettingsStatus(success: @escaping (_ result: Bool) -> Void,
-                                     fail: @escaping (ErrorResponse) -> Void,
-                                     foreceReload: Bool = false) {
-        guard foreceReload || faceImageSettings == nil,
-        accountInfo != nil else {
-            if let faceImageSettingsUnwraped  = faceImageSettings {
-                success(faceImageSettingsUnwraped.isFaceImageAllowed ?? false)
-            } else {
-                fail(.string(TextConstants.errorUnknown))
-            }
-            return
-        }
-        getFaceImageRecognitionSettingsForUser(completion: { firStatus in
-            guard let status = firStatus.isFaceImageAllowed else {
-                fail(ErrorResponse.string(TextConstants.errorUnknown))
-                return
-            }
-            success(status)
-        }, fail: fail)
-    }
-    
-    //MARK: - subscriptions
-    
-    func getActiveSubscriptionsList(success: @escaping (_ result: ActiveSubscriptionResponse) -> Void,
-                                    fail: @escaping (ErrorResponse) -> Void,
-                                    foreceReload: Bool = false) {
-        
-        guard foreceReload || activeUserSubscription == nil,
-            accountInfo != nil else {
-            if let activeSubsUnwraped  = activeUserSubscription {
-                success(activeSubsUnwraped)
-            } else {
-                fail(.string(TextConstants.errorUnknown))
-            }
-            return
-        }
-        SubscriptionsServiceIml().activeSubscriptions(
-            success: { [weak self] response in
-                guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else { return }
-                self?.activeUserSubscription = subscriptionsResponse
-                success(subscriptionsResponse)
-            }, fail: { errorResponse in
-                fail(errorResponse)
-        })
-    }
-    
-    var activeUserSubscriptionList: [SubscriptionPlanBaseResponse] {
-        return activeUserSubscription?.list ?? []
     }
 }

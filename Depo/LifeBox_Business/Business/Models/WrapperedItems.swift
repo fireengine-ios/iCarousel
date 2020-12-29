@@ -664,25 +664,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     //MARK:-
     
-    init(musicForCreateStory: CreateStoryMusicItem) {
-        id = musicForCreateStory.id
-        tmpDownloadUrl = musicForCreateStory.path
-        favorites = false
-        status = .unknown
-        patchToPreview = .remoteUrl(nil)
-        // unuse parametrs
-        fileSize = 0
-        super.init()
-        md5 = "not use "
-        
-        fileType = .audio
-        name = musicForCreateStory.fileName
-        isLocalItem = false
-        syncStatus = .notSynced
-        creationDate = Date()
-        lastModifiDate = Date()
-    }
-    
     init(baseModel: BaseMediaContent) {
 
         fileSize = baseModel.size
@@ -724,22 +705,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
 //        metaData?.genre = mediaItem.metadata?.genre ?? []
 //        metaData?.height = Int(mediaItem.metadata?.height ?? 0)
         metaData?.title = baseModel.originalName
-    }
-    
-    init(instaPickAnalyzeModel: InstapickAnalyze) {
-        fileSize = 0
-        favorites = false
-        status = .unknown
-        metaData = instaPickAnalyzeModel.fileInfo?.metadata
-        
-        let serverURL = instaPickAnalyzeModel.fileInfo?.tempDownloadURL
-        patchToPreview = .remoteUrl(serverURL)
-        super.init()
-        
-        tmpDownloadUrl = serverURL
-        
-        syncStatus = .synced
-        isFolder = false
     }
     
     override func getCellReUseID() -> String {

@@ -185,10 +185,6 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         return CardsManager.cardViewForOperaion(type: operation)
     }
     
-    func configureInstaPick(with analysisStatus: InstapickAnalyzesCount) {
-        ///DO NOT DELETE. This delegate method used in BaseCollectionViewDataSource
-    }
-    
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
         startOperationWith(type: type, object: nil, allOperations: allOperations, completedOperations: completedOperations)
     }
