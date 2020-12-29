@@ -4,7 +4,7 @@
 
 /***** PROJECT variables  BEGIN ******/
 
-agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
+agentName = 'devops-dss-js-ios-12' // The mac mini assigned to this project
 apps = [ 
 [
             name: 'lifebox',// name will be the base filename of the app
@@ -38,8 +38,8 @@ apps = [
             prodTeamID: '693N5K66ZJ',
             xcodeSchema: 'lifeBox_Business_Bundle',
             xcodeTarget: 'lifeBox_Business_Bundle',
-            // xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            // xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+            // xcodeSchema: 'lifeBox_Business',
+            // xcodeTarget: 'lifeBox_Business',
             itcTeamId: '121548574',
         ]
 ]
@@ -274,11 +274,11 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "source ~/.bash_profile; cd Depo; pod install" // gem update cocoapods;// --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod install; cd .." // gem update cocoapods;// --repo-update occasionally
                         apps.each { app ->
 				// testBuild()
-                            runXcode(app, 'test')
-                            publishToArtifactory(app, 'test')
+                            // runXcode(app, 'test')
+                            // publishToArtifactory(app, 'test')
                         }
                     }
                 }
@@ -323,7 +323,8 @@ pipeline {
             }
             steps {
                 script {
-                   apps.each deployToIctStore
+                    echo "Skipping ICTStore Deploy..."
+                   // apps.each deployToIctStore
                 }
             }
 			post {
