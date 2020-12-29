@@ -393,7 +393,7 @@ extension TrashBinDataSource {
             return (nil, nil)
         }
         
-        let section = allItems.count
+        let section = allItems.count - 1
         let item = allItems[section].count
         let indexPath = IndexPath(item: item, section: section)
         allItems[section].append(newItem)

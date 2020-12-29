@@ -71,8 +71,6 @@ final class PushNotificationService {
         switch notificationAction {
         case .http?:
             notificationParameters = action.rawValue
-        case .tbmatic?:
-            notificationParameters = options?[PushNotificationParameter.tbmaticUuids.rawValue] as? String
         default:
             break
         }
@@ -118,7 +116,6 @@ final class PushNotificationService {
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
         case .changePassword: openChangePassword()
-        case .tbmatic: openTBMaticPhotos(notificationParameters)
         case .securityQuestion: openSecurityQuestion()
         case .permissions: openPermissions()
         case .supportFormSignup, .supportFormLogin:
@@ -319,28 +316,6 @@ final class PushNotificationService {
     
     private func openChangePassword() {
         pushTo(router.changePassword)
-    }
-        
-    private func openTBMaticPhotos(_ uuidsByString: String?) {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.notification))
-        
-        debugLog("PushNotificationService try to open TBMatic screen")
-        // handle list of uuids with two variants for separators "," and ", "
-        guard let uuids = uuidsByString?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
-            assertionFailure()
-            debugLog("PushNotificationService uuids is empty")
-            return
-        }
-        
-        // check for cold start from push - present on home page
-        guard router.tabBarController != nil else {
-            return
-        }
-        
-        let controller = router.tbmaticPhotosContoller(uuids: uuids)
-        DispatchQueue.main.async {
-            self.router.presentViewController(controller: controller)
-        }
     }
     
     private func openSecurityQuestion() {
