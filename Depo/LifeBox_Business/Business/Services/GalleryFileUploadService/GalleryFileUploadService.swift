@@ -35,37 +35,37 @@ final class GalleryFileUploadService: NSObject {
         if #available(iOS 14.0, *) {
             uploadWithAssetPicker(rootViewController: rootViewController)
         } else {
-//            uploadWithImagePicker(rootViewController: rootViewController)
+            uploadWithImagePicker(rootViewController: rootViewController)
         }
     }
     
-//    @available(iOS, deprecated: 14.0, message: "Please use uploadWithAssetPicker instead")
-//    private func uploadWithImagePicker(rootViewController: UIViewController) {
-//        cameraService.photoLibraryIsAvailable { [weak self] isAvailable, _ in
-//            guard let self = self else {
-//                return
-//            }
-//
-//            guard isAvailable else {
-//                self.cameraService.showAccessAlert()
-//                return
-//            }
-//
-//            DispatchQueue.main.async {
-//                let picker = UIImagePickerController()
-//                let sourceType = UIImagePickerController.SourceType.photoLibrary
-//                if let availableTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
-//                    picker.mediaTypes = availableTypes
-//                }
-//                picker.sourceType = sourceType
-//                picker.delegate = self
-//
-//                ///https://stackoverflow.com/a/40038752/5893286
-//                picker.allowsEditing = !Device.isIpad
-//                rootViewController.present(picker, animated: true, completion: nil)
-//            }
-//        }
-//    }
+    @available(iOS, deprecated: 14.0, message: "Please use uploadWithAssetPicker instead")
+    private func uploadWithImagePicker(rootViewController: UIViewController) {
+        cameraService.photoLibraryIsAvailable { [weak self] isAvailable, _ in
+            guard let self = self else {
+                return
+            }
+
+            guard isAvailable else {
+                self.cameraService.showAccessAlert()
+                return
+            }
+
+            DispatchQueue.main.async {
+                let picker = UIImagePickerController()
+                let sourceType = UIImagePickerController.SourceType.photoLibrary
+                if let availableTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
+                    picker.mediaTypes = availableTypes
+                }
+                picker.sourceType = sourceType
+                picker.delegate = self
+
+                ///https://stackoverflow.com/a/40038752/5893286
+                picker.allowsEditing = !Device.isIpad
+                rootViewController.present(picker, animated: true, completion: nil)
+            }
+        }
+    }
     
     @available(iOS 14, *)
     private func uploadWithAssetPicker(rootViewController: UIViewController) {
@@ -95,10 +95,6 @@ final class GalleryFileUploadService: NSObject {
             uploadType = .upload
         }
         
-        if isFromAlbum {
-            ItemOperationManager.default.startUploadFilesToAlbum(files: items)
-        }
-        
         UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rootUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: projectId, success: { [weak self] in
             self?.delegate?.uploaded(items: items)
             
@@ -106,6 +102,24 @@ final class GalleryFileUploadService: NSObject {
             self?.delegate?.failed(error: ErrorResponse.error(error))
             
         }, returnedUploadOperation: { _ in })
+    }
+    
+    private func verify(items: [WrapData]) -> String? {
+        guard !items.isEmpty else {
+            return TextConstants.uploadFromLifeBoxNoSelectedPhotosError
+        }
+        
+        var filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
+        guard !filteredItems.isEmpty else {
+            return TextConstants.syncFourGbVideo
+        }
+        
+        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes()
+        filteredItems = filteredItems.filter { $0.fileSize < freeDiskSpaceInBytes }
+        guard !filteredItems.isEmpty else {
+            return TextConstants.syncNotEnoughMemory
+        }
+        return nil
     }
 }
 
@@ -152,24 +166,6 @@ extension GalleryFileUploadService: PHPickerViewControllerDelegate {
         }
     }
     
-    private func verify(items: [WrapData]) -> String? {
-        guard !items.isEmpty else {
-            return TextConstants.uploadFromLifeBoxNoSelectedPhotosError
-        }
-        
-        var filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
-        guard !filteredItems.isEmpty else {
-            return TextConstants.syncFourGbVideo
-        }
-        
-        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes()
-        filteredItems = filteredItems.filter { $0.fileSize < freeDiskSpaceInBytes }
-        guard !filteredItems.isEmpty else {
-            return TextConstants.syncNotEnoughMemory
-        }
-        return nil
-    }
-    
     private func dismiss(picker: PHPickerViewController, completion: @escaping VoidHandler) {
         DispatchQueue.main.async {
             picker.dismiss(animated: true, completion: completion)
@@ -177,103 +173,84 @@ extension GalleryFileUploadService: PHPickerViewControllerDelegate {
     }
 }
 
-//extension GalleryFileUploadService: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        picker.dismiss(animated: true) { [weak self] in
-//            self?.delegate?.cancelled()
-//        }
-//    }
-//
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//
-//        itemToUpload(from: info) { [weak self] item in
-//            guard let self = self else {
-//                return
-//            }
-//
-//            guard let item = item else {
-//                self.dismiss(picker: picker) { [weak self] in
-//                    self?.delegate?.failed(error: nil)
-//                }
-//                return
-//            }
-//
-//            if let errorMessage = self.verify(items: [item]) {
-//                self.dismiss(picker: picker) { [weak self] in
-//                    self?.delegate?.failed(error: ErrorResponse.string(errorMessage))
-//                }
-//                return
-//            }
-//
-//            self.dismiss(picker: picker) { [weak self] in
-//
-//                self?.upload(items: [item])
-//            }
-//        }
-//    }
-//
-//    private func dismiss(picker: UIImagePickerController, completion: @escaping VoidHandler) {
-//        DispatchQueue.main.async {
-//            picker.dismiss(animated: true, completion: completion)
-//        }
-//    }
-//
-//    private func data(from info: [String: Any]) -> Data? {
-//        if let imageURL = info[UIImagePickerControllerMediaURL] as? URL, let data = try? Data(contentsOf: imageURL) {
-//            return data
-//
-//        } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-//            return UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
-//
-//        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            return UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
-//        }
-//
-//        return nil
-//    }
-//
-//    private func itemToUpload(from info: [String: Any], completion: @escaping ValueHandler<WrapData?>) {
-//        DispatchQueue.toBackground { [weak self] in
-//
-//            var item: WrapData? = nil
-//            if let asset = info[UIImagePickerControllerPHAsset] as? PHAsset {
-//                let assetInfo = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
-//                item = WrapData(info: assetInfo)
-//
-//            } else if let mediaData = self?.data(from: info) {
-//                let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-//
-//                let wrapData = WrapData(imageData: mediaData, isLocal: true)
-//
-//                if let wrapDataName = wrapData.name {
-//                    wrapData.name = wrapDataName + ".JPG"
-//                }
-//
-//                wrapData.patchToPreview = PathForItem.remoteUrl(url)
-//
-//                item = wrapData
-//            }
-//
-//            completion(item)
-//        }
-//    }
-//
-//    private func verify(items: [WrapData]) -> String? {
-//        guard !items.isEmpty else {
-//            return TextConstants.uploadFromLifeBoxNoSelectedPhotosError
-//        }
-//
-//        var filteredItems = items.filter { $0.fileSize < NumericConstants.fourGigabytes }
-//        guard !filteredItems.isEmpty else {
-//            return TextConstants.syncFourGbVideo
-//        }
-//
-//        let freeDiskSpaceInBytes = Device.getFreeDiskSpaceInBytes()
-//        filteredItems = filteredItems.filter { $0.fileSize < freeDiskSpaceInBytes }
-//        guard !filteredItems.isEmpty else {
-//            return TextConstants.syncNotEnoughMemory
-//        }
-//        return nil
-//    }
-//
-//}
+extension GalleryFileUploadService: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true) { [weak self] in
+            self?.delegate?.cancelled()
+        }
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+
+        itemToUpload(from: info) { [weak self] item in
+            guard let self = self else {
+                return
+            }
+
+            guard let item = item else {
+                self.dismiss(picker: picker) { [weak self] in
+                    self?.delegate?.failed(error: nil)
+                }
+                return
+            }
+
+            if let errorMessage = self.verify(items: [item]) {
+                self.dismiss(picker: picker) { [weak self] in
+                    self?.delegate?.failed(error: ErrorResponse.string(errorMessage))
+                }
+                return
+            }
+
+            self.dismiss(picker: picker) { [weak self] in
+
+                self?.upload(items: [item])
+            }
+        }
+    }
+
+    private func dismiss(picker: UIImagePickerController, completion: @escaping VoidHandler) {
+        DispatchQueue.main.async {
+            picker.dismiss(animated: true, completion: completion)
+        }
+    }
+
+    private func data(from info: [String: Any]) -> Data? {
+        if let imageURL = info[UIImagePickerControllerMediaURL] as? URL, let data = try? Data(contentsOf: imageURL) {
+            return data
+
+        } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            return UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
+
+        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            return UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
+        }
+
+        return nil
+    }
+
+    private func itemToUpload(from info: [String: Any], completion: @escaping ValueHandler<WrapData?>) {
+        DispatchQueue.toBackground { [weak self] in
+
+            var item: WrapData? = nil
+            if let asset = info[UIImagePickerControllerPHAsset] as? PHAsset {
+                let assetInfo = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
+                item = WrapData(info: assetInfo)
+
+            } else if let mediaData = self?.data(from: info) {
+                let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+
+                let wrapData = WrapData(imageData: mediaData, isLocal: true)
+
+                if let wrapDataName = wrapData.name {
+                    wrapData.name = wrapDataName + ".JPG"
+                }
+
+                wrapData.patchToPreview = PathForItem.remoteUrl(url)
+
+                item = wrapData
+            }
+
+            completion(item)
+        }
+    }
+}
