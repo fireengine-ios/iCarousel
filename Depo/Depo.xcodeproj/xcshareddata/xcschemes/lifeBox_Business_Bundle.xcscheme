@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CF3D58D2258B899600E83850"
+               BlueprintIdentifier = "CF7D5485259AA879005C22F5"
                BuildableName = "lifeBox_Business_Bundle.app"
                BlueprintName = "lifeBox_Business_Bundle"
                ReferencedContainer = "container:Depo.xcodeproj">
@@ -44,7 +44,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CF3D58D2258B899600E83850"
+            BlueprintIdentifier = "CF7D5485259AA879005C22F5"
             BuildableName = "lifeBox_Business_Bundle.app"
             BlueprintName = "lifeBox_Business_Bundle"
             ReferencedContainer = "container:Depo.xcodeproj">
@@ -61,7 +61,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CF3D58D2258B899600E83850"
+            BlueprintIdentifier = "CF7D5485259AA879005C22F5"
             BuildableName = "lifeBox_Business_Bundle.app"
             BlueprintName = "lifeBox_Business_Bundle"
             ReferencedContainer = "container:Depo.xcodeproj">
