@@ -12,7 +12,6 @@ class LoginPresenter: BasePresenter {
     var router: LoginRouterInput!
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
-    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     var newPhone: String?
     var referenceToken: String?

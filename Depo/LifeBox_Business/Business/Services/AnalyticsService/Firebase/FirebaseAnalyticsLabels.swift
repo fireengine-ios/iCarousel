@@ -681,24 +681,4 @@ enum GAEventLabel {
         }
     }
     
-    static func getAutoSyncSettingEvent(autoSyncSettings: AutoSyncSetting) -> GAEventLabel {
-        switch autoSyncSettings {
-        case AutoSyncSetting(syncItemType: .photo, option: .never):
-            return .photosNever
-        case AutoSyncSetting(syncItemType: .photo, option: .wifiAndCellular):
-            return .photosWifiLTE
-        case AutoSyncSetting(syncItemType: .photo, option: .wifiOnly):
-            return .photosWifi
-        case AutoSyncSetting(syncItemType: .video, option: .never):
-            return .videosNever
-        case AutoSyncSetting(syncItemType: .video, option: .wifiAndCellular):
-            return .videosWifiLTE
-        case AutoSyncSetting(syncItemType: .video, option: .wifiOnly):
-            return .videosWifi
-        default:
-            return .empty
-        }
-        
-    }
-    
 }

@@ -27,9 +27,6 @@ struct AnalyticsDimension {
     let loginType: GADementionValues.login?
     let errorType: String?
     
-    let autoSyncState: String?
-    let autoSyncStatus: String?
-    
     let isTwoFactorAuthEnabled: Bool?
     
     let dailyDrawleft: Int?
@@ -87,12 +84,6 @@ struct AnalyticsDimension {
         }
         if let errorType = errorType {
             dimesionDictionary[GADementionsFields.errorType.text] = errorType
-        }
-        if let autoSyncState = autoSyncState {
-            dimesionDictionary[GADementionsFields.autoSyncState.text] = autoSyncState
-        }
-        if let autoSyncStatus = autoSyncStatus {
-            dimesionDictionary[GADementionsFields.autoSyncStatus.text] = autoSyncStatus
         }
         if let isTwoFactorAuthEnabled = isTwoFactorAuthEnabled {
             dimesionDictionary[GADementionsFields.twoFactorAuth.text] = isTwoFactorAuthEnabled ? "True" : "False"

@@ -191,8 +191,6 @@ extension AnalyticsService: AnalyticsGA {
 ///        For all of the events (not only newly added autosync events but also all GA events that we send in current client), we will also send below dimensions each time. For the events that we send before login, there is no need to send.
 ///        AutoSync --> True/False
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
-        var autoSyncState: String?
-        var autoSyncStatus: String?
         var isTwoFactorAuthEnabled: Bool?
 
         var usagePercentage: Int?
@@ -207,18 +205,6 @@ extension AnalyticsService: AnalyticsGA {
                    usagePercentage = percentage
                    group.leave()
                }
-            
-            let autoSyncStorageSettings = AutoSyncDataStorage().settings
-            
-            let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
-            
-            autoSyncState = confirmedAutoSyncSettingsState ? "True" : "False"
-            
-            let photoSetting = confirmedAutoSyncSettingsState ?
-                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.photoSetting).text : GAEventLabel.photosNever.text
-            let videoSetting = confirmedAutoSyncSettingsState ?
-                GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: autoSyncStorageSettings.videoSetting).text : GAEventLabel.videosNever.text
-            autoSyncStatus = "\(photoSetting) | \(videoSetting)"
             
             isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
         }
@@ -239,8 +225,6 @@ extension AnalyticsService: AnalyticsGA {
                 gsmOperatorType: self.getGAOperatorType(),
                 loginType: loginType,
                 errorType: errorType,
-                autoSyncState: autoSyncState,
-                autoSyncStatus: autoSyncStatus,
                 isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
                 dailyDrawleft: dailyDrawleft,
                 totalDraw: totalDraw,

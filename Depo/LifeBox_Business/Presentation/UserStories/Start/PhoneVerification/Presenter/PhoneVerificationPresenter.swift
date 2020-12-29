@@ -15,7 +15,6 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
     var currentSecurityCode = ""
 
     private lazy var customProgressHUD = CustomProgressHUD()
-    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
         interactor.trackScreen(isTimerExpired: false)

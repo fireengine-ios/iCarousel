@@ -158,13 +158,6 @@ final class AuthoritySingleton {
             setLoginAlready(isLoginAlready: isLoginAlready)
             isNewAppVersion = currentAppVersion == nil ? false : true
             currentAppVersion = getAppVersion()
-            
-            ///after app updated , sending autoSyncStatus
-            if isLoginAlready && isNewAppVersion {
-                AccountService().autoSyncStatus(syncSettings: nil) { _ in
-                }
-            }
-            
         }
     }
     

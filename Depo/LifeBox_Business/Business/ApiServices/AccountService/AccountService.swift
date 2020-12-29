@@ -18,7 +18,6 @@ protocol AccountServicePrl {
     func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
-    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
 }
 
@@ -452,47 +451,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     handler(.failed(error))
                 }
         }
-    }
-    
-    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid) {
-        debugLog("AccountService autoSyncStatus")
-        
-        let settings: AutoSyncSettings = syncSettings ?? AutoSyncDataStorage().settings
-        
-        let photoStatus : String = settings.isAutoSyncEnabled ? settings.photoSetting.option.rawValue : AutoSyncOption.never.rawValue
-        let videoStatus : String = settings.isAutoSyncEnabled ? settings.videoSetting.option.rawValue : AutoSyncOption.never.rawValue
-        
-        let params: Parameters  = [ "photoStatus" : photoStatus , "videoStatus" : videoStatus]
-        
-        sessionManager
-            .request(RouteRequests.Account.Settings.autoSyncStatus,
-                     method: .post,
-                     parameters: params,
-                     encoding: JSONEncoding.prettyPrinted
-        )
-            .customValidate()
-            .response { response in
-                if response.response?.statusCode == 200 {
-                    handler(.success(()))
-                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
-                    let errorText: String
-                    
-                    if statusJSON == "ACCOUNT_NOT_FOUND" {
-                        errorText = TextConstants.noAccountFound
-                    } else if statusJSON == "EMPTY_REQUEST" {
-                        errorText = "EMPTY_REQUEST" ///Should add localized text?
-                    } else {
-                        errorText = TextConstants.errorServer
-                    }
-                    
-                    let error = CustomErrors.text(errorText)
-                    handler(.failed(error))
-                } else {
-                    let error = CustomErrors.text(TextConstants.errorServer)
-                    handler(.failed(error))
-                }
-        }
-        
     }
     
     func getListOfSecretQuestions(handler: @escaping (ResponseResult<[SecretQuestionsResponse]>) -> Void) {
