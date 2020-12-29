@@ -19,7 +19,7 @@ final class PrivateShareSliderFilesCollectionManager {
     let sharedSliderHeight: CGFloat = 224
     
     private let shareApiService = PrivateShareApiServiceImpl()
-    private lazy var datasource = SharedFilesCollectionDataSource()
+    private lazy var datasource = SharedFilesCollectionDataSource(maxItemsForDisplay: numberOfDisplayedSharedItems)
     let sharedFilesSlider = SharedFilesCollectionSliderView.initFromNib()
     
     private let numberOfDisplayedSharedItems: Int = 20
@@ -33,7 +33,7 @@ final class PrivateShareSliderFilesCollectionManager {
     
     func checkSharedWithMe(callBack: @escaping ResponseVoid) {
 
-        shareApiService.getSharedWithMe(size: numberOfDisplayedSharedItems, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc) { [weak self] sharedFilesResult in
+        shareApiService.getSharedWithMe(size: numberOfDisplayedSharedItems + 1, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc) { [weak self] sharedFilesResult in
             guard let self = self else {
                 callBack(.failed(CustomErrors.text("no self instance")))
                 return
@@ -102,6 +102,10 @@ extension PrivateShareSliderFilesCollectionManager: SharedFilesCollectionDataSou
         } else {
             delegate?.open(entity: withModel, allEnteties: datasource.files)
         }
+    }
+    
+    func onPlusTapped() {
+        delegate?.showAll()
     }
 }
 
