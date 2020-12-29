@@ -22,6 +22,14 @@ final class TermsAndPolicyViewController: BaseViewController, NibInit {
         setTitle(withString: TextConstants.settingsViewCellPrivacyAndTerms)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if !Device.isIpad {
+            navigationBarWithGradientStyle()
+        }
+    }
+    
     private func setupTableView() {
         let nib = UINib.init(nibName: CellsIdConstants.settingTableViewCellID,
                              bundle: nil)

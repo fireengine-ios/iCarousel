@@ -10,9 +10,7 @@ import UIKit
 
 protocol TrashBinDataSourceDelegate: class {
     func needLoadNextItemsPage()
-    func needLoadNextAlbumPage()
     func didSelect(item: Item)
-    func didSelect(album: BaseDataSourceItem)
     func onStartSelection()
     func didChangeSelectedItems(count: Int)
     func onMoreButtonTapped(sender: Any, item: Item)
@@ -32,7 +30,6 @@ final class TrashBinDataSource: NSObject {
     
     private let collectionView: UICollectionView
     private weak var delegate: TrashBinDataSourceDelegate?
-    private var albumSlider: AlbumsSliderCell?
     
     private(set) var allItems = [[Item]]()
     private var selectedItems = [Item]()
@@ -54,8 +51,7 @@ final class TrashBinDataSource: NSObject {
     private let filesDataSource = FilesDataSource()
     
     var isEmpty: Bool {
-        let albumsEmpty = albumSlider?.isEmpty ?? true
-        return itemsIsEmpty && albumsEmpty
+        return itemsIsEmpty
     }
     
     var itemsIsEmpty: Bool {
@@ -74,7 +70,7 @@ final class TrashBinDataSource: NSObject {
     }()
     
     var allSelectedItems: [BaseDataSourceItem] {
-        return selectedItems + (albumSlider?.selectedItems ?? [])
+        return selectedItems
     }
     
     //MARK: - Init
@@ -104,8 +100,7 @@ final class TrashBinDataSource: NSObject {
     }
     
     private func registerCells() {
-        let registreList = [AlbumsSliderCell.self,
-                            BasicCollectionMultiFileCell.self]
+        let registreList = [BasicCollectionMultiFileCell.self]
         
         registreList.forEach { collectionView.register(nibCell: $0) }
     }
@@ -114,14 +109,6 @@ final class TrashBinDataSource: NSObject {
 //MARK: - Public methods
 
 extension TrashBinDataSource {
-    
-    func append(albums: [BaseDataSourceItem]) {
-        albumSlider?.appendItems(albums)
-    }
-    
-    func finishLoadAlbums() {
-        albumSlider?.finishLoadAlbums()
-    }
     
     func append(items: [Item], completion: @escaping VoidHandler) {
         if items.isEmpty {
@@ -205,17 +192,12 @@ extension TrashBinDataSource {
             return
         }
         
-        allItems[indexPath.section - 1][indexPath.row] = item
+        allItems[indexPath.section][indexPath.row] = item
         collectionView.reloadItems(at: [indexPath])
-    }
-    
-    func removeSlider(items: [BaseDataSourceItem], completion: VoidHandler? = nil) {
-        albumSlider?.removeItems(items, completion: completion)
     }
     
     func reset() {
         itemsReset()
-        albumSliderReset()
     }
     
     func itemsReset() {
@@ -223,10 +205,6 @@ extension TrashBinDataSource {
         selectedItems.removeAll()
         isPaginationDidEnd = false
         collectionView.reloadData()
-    }
-    
-    func albumSliderReset() {
-        albumSlider?.reset()
     }
     
     func startSelection(indexPath: IndexPath? = nil) {
@@ -240,16 +218,11 @@ extension TrashBinDataSource {
             collectionView.reloadItems(at: [indexPath])
             updateSelectionCount()
         }
-        
-        if albumSlider?.isSelectionActive == false {
-            albumSlider?.startSelection()
-        }
-    }
+     }
     
     func cancelSelection() {
         isSelectionStateActive = false
         selectedItems.removeAll()
-        albumSlider?.stopSelection()
         updateVisibleCells()
     }
     
@@ -278,16 +251,16 @@ extension TrashBinDataSource {
 extension TrashBinDataSource {
     
     private func item(for indexPath: IndexPath) -> Item? {
-        guard allItems.count > indexPath.section - 1, allItems[indexPath.section - 1].count > indexPath.row else {
+        guard allItems.count > indexPath.section, allItems[indexPath.section].count > indexPath.row else {
             return nil
         }
-        return allItems[safe: indexPath.section - 1]?[safe: indexPath.row]
+        return allItems[safe: indexPath.section]?[safe: indexPath.row]
     }
     
     private func indexPath(for uuid: String) -> IndexPath? {
         for (section, items) in allItems.enumerated() {
             if let row = items.firstIndex(where: { $0.uuid == uuid }) {
-                return IndexPath(row: row, section: section + 1)
+                return IndexPath(row: row, section: section)
             }
         }
         return nil
@@ -306,7 +279,7 @@ extension TrashBinDataSource {
     }
     
     private func headerText(indexPath: IndexPath) -> String {
-        guard let itemsInSection = allItems[safe: indexPath.section - 1], let item = itemsInSection.first else {
+        guard let itemsInSection = allItems[safe: indexPath.section], let item = itemsInSection.first else {
             assertionFailure()
             return ""
         }
@@ -361,14 +334,14 @@ extension TrashBinDataSource {
             var newSectionArray = [Item]()
             for (item, object) in array.enumerated() {
                 if idsForRemove.contains(object.uuid) {
-                    deletedIndexPaths.append(IndexPath(item: item, section: section + 1))
+                    deletedIndexPaths.append(IndexPath(item: item, section: section))
                 } else {
                     newSectionArray.append(object)
                 }
             }
             
             if newSectionArray.isEmpty {
-                deletedSections.insert(section + 1)
+                deletedSections.insert(section)
             } else {
                 newArray.append(newSectionArray)
             }
@@ -422,13 +395,13 @@ extension TrashBinDataSource {
         
         let section = allItems.count - 1
         let item = allItems[section].count
-        let indexPath = IndexPath(item: item, section: section + 1)
+        let indexPath = IndexPath(item: item, section: section)
         allItems[section].append(newItem)
         return (indexPath, nil)
     }
     
     private func appendSection(with newItem: Item) -> InsertItemResult {
-        let section = allItems.count + 1
+        let section = allItems.count
         let indexPath = IndexPath(item: 0, section: section)
         allItems.append([newItem])
         return (indexPath, section)
@@ -456,51 +429,22 @@ extension TrashBinDataSource {
 extension TrashBinDataSource: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return allItems.count + 1
+        return allItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        
-        guard section - 1 < allItems.count else {
-            return 0
-        }
-        return allItems[section - 1].count
+        return allItems[section].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            return collectionView.dequeue(cell: AlbumsSliderCell.self, for: indexPath)
-        } else {
-            return collectionView.dequeue(cell: BasicCollectionMultiFileCell.self, for: indexPath)
-        }
+        collectionView.dequeue(cell: BasicCollectionMultiFileCell.self, for: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if indexPath.section == 0 {
-            return UICollectionReusableView()
-        }
         return collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            guard let cell = cell as? AlbumsSliderCell else {
-                return
-            }
-            
-            if albumSlider == nil {
-                albumSlider = cell
-                albumSlider?.reset()
-            }
-            
-            cell.delegate = self
-            cell.setup(title: TextConstants.trashBinAlbumSliderTitle, emptyText: TextConstants.trashBinAlbumSliderEmpty)
-            return
-        }
-        
         guard let cell = cell as? BasicCollectionMultiFileCell,
             let item = item(for: indexPath) else {
             assertionFailure("failed setup cell")
@@ -534,7 +478,7 @@ extension TrashBinDataSource: UICollectionViewDataSource {
         if elementKind == UICollectionElementKindSectionHeader {
             view.layer.zPosition = 0
         }
-        guard indexPath.section > 0, let view = view as? CollectionViewSimpleHeaderWithText else {
+        guard let view = view as? CollectionViewSimpleHeaderWithText else {
             return
         }
 
@@ -546,7 +490,7 @@ extension TrashBinDataSource: UICollectionViewDataSource {
 
 extension TrashBinDataSource: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.section > 0, let item = item(for: indexPath) else {
+        guard let item = item(for: indexPath) else {
             return
         }
         
@@ -584,9 +528,7 @@ extension TrashBinDataSource: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0 {
-            return CGSize(width: collectionView.bounds.width, height: AlbumsSliderCell.height)
-        } else if viewType == .Grid {
+        if viewType == .Grid {
             return cellGridSize
         } else {
             return cellListSize
@@ -605,7 +547,6 @@ extension TrashBinDataSource: LBCellsDelegate, BasicCollectionMultiFileCellActio
     func onLongPress(cell: UICollectionViewCell) {
         if !isSelectionStateActive {
             startSelection(indexPath: collectionView.indexPath(for: cell))
-            albumSlider?.startSelection()
         } else if let indexPath = collectionView.indexPath(for: cell) {
             collectionView(self.collectionView, didSelectItemAt: indexPath)
         }
@@ -622,26 +563,5 @@ extension TrashBinDataSource: LBCellsDelegate, BasicCollectionMultiFileCellActio
             return
         }
         delegate?.didSelectActionInMenu(action: type, item: item)
-    }
-}
-
-//MARK: - AlbumsSliderCellDelegate
-
-extension TrashBinDataSource: AlbumsSliderCellDelegate {
-    
-    func didSelect(item: BaseDataSourceItem) {
-        delegate?.didSelect(album: item)
-    }
-    
-    func didChangeSelectionAlbumsCount(_ count: Int) {
-        updateSelectionCount()
-    }
-    
-    func needLoadNextAlbumPage() {
-        delegate?.needLoadNextAlbumPage()
-    }
-    
-    func onStartSelection() {
-        startSelection()
     }
 }

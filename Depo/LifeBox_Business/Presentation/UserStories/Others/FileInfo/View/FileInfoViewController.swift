@@ -119,7 +119,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
             canEdit = permission?.granted?.contains(.setAttribute) == true
         }
         
-        if item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
+        if item.isLocalItem {
             canEdit = false
         }
         
@@ -149,7 +149,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         }
         if let fileExtension = fileExtension?.nonEmptyString {
             output.onRename(newName: text.makeFileName(with: fileExtension))
-        } else if fileType == .folder || fileType == .photoAlbum {
+        } else if fileType == .folder {
             output.onRename(newName: text)
         }
     }
@@ -215,22 +215,6 @@ extension FileInfoViewController: FileInfoViewInput {
             }
             checkCanEdit(item: object, projectId: object.projectId, permission: nil)
             return
-        }
-        
-        if let album = object as? AlbumItem {
-            uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
-            folderSizeTitle.text = TextConstants.fileInfoAlbumSizeTitle
-            fileNameTitle.text = TextConstants.fileInfoAlbumNameTitle
-            fileInfoTitle.text = TextConstants.fileInfoAlbumInfoTitle
-            var count = 0
-            count += album.audioCount ?? 0
-            count += album.imageCount ?? 0
-            count += album.videoCount ?? 0
-            folderSizeLabel.text = String(count)
-            
-            if album.readOnly == true {
-                fileName.isEnabled = false
-            }
         }
         
         if let createdDate = object.creationDate {

@@ -72,9 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return OrientationManager.shared.orientationLock
     }
     
-    
-    private lazy var dropboxManager: DropboxManager = factory.resolve()
-    private lazy var spotifyService: SpotifyRoutingService = factory.resolve()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var player: MediaPlayer = factory.resolve()
@@ -158,10 +155,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if ApplicationDelegate.shared.application(app, open: url, options: options) {
-            return true
-        } else if dropboxManager.handleRedirect(url: url) {
-            return true
-        } else if spotifyService.handleRedirectUrl(url: url) {
             return true
         }
         return false
@@ -327,13 +320,6 @@ extension AppDelegate {
         debugLog("AppDelegate didReceiveRemoteNotification")
         
         AppEvents.logPushNotificationOpen(userInfo)
-        
-        // track receiving TBMatik Push notifications
-        if let pushType = Netmera.recentPushObject()?.customDictionary[PushNotificationParameter.pushType.rawValue] as? String,
-            pushType == PushNotificationAction.tbmatic.rawValue {
-            analyticsService.logScreen(screen: .tbmatikPushNotification)
-            analyticsService.trackDimentionsEveryClickGA(screen: .tbmatikPushNotification)
-        }
     }
     
     //MARK: Adjust

@@ -13,7 +13,6 @@ protocol UserInfoSubViewViewOutput {
     
     func loadingIndicatorDismissalRequired()
     
-    var isPremiumUser: Bool { get }
     var isMiddleUser: Bool { get }
     var quotaInfo: QuotaInfoResponse? { get }
 }

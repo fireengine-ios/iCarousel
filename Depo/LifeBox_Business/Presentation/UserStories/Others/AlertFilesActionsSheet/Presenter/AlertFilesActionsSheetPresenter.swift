@@ -69,21 +69,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         let types = ElementTypes.specifiedMoreActionTypes(for: status, item: item)
         
-        if item.fileType == .photoAlbum {
-            let album = AlbumItem(uuid: item.uuid,
-                                  name: item.name,
-                                  creationDate: item.creationDate,
-                                  lastModifiDate: item.lastModifiDate,
-                                  fileType: item.fileType,
-                                  syncStatus: item.syncStatus,
-                                  isLocalItem: item.isLocalItem)
-            
-            constractActions(with: types, for: [album]) { [weak self] actions in
-                DispatchQueue.main.async { [weak self] in
-                    self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
-                }
-            }
-        } else if item is Item || status == .trashed {
+        if item is Item || status == .trashed {
             constractActions(with: types, for: [item]) { [weak self] actions in
                 DispatchQueue.main.async { [weak self] in
                     self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
@@ -124,9 +110,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             case .folder:
                 break
             case .image:
-                actionTypes = [.createStory, .move]
+                actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append((item.albums != nil) ? .removeFromAlbum : .addToAlbum)
                 actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
                 if !item.isLocalItem {
                     actionTypes.append(.moveToTrash)
@@ -135,9 +120,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 actionTypes = [.move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                 actionTypes.append((item.isLocalItem) ? .backUp : .addToCmeraRoll)
-                
-            case .photoAlbum: // TODO add for Alboum
-                break
                 
             case .musicPlayList: // TODO Add for MUsic
                 break
@@ -243,24 +225,17 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 var action: UIAlertAction
                 switch type {
                 case .info,
-                     .edit,
                      .download,
                      .downloadDocument,
                      .moveToTrash,
-                     .unhide,
                      .restore,
                      .move,
                      .emptyTrashBin,
                      .photos,
-                     .addToAlbum,
-                     .createAlbum,
-                     .albumDetails,
                      .shareAlbum,
                      .makeAlbumCover,
-                     .removeFromAlbum,
                      .backUp,
                      .copy,
-                     .createStory,
                      .iCloudDrive,
                      .lifeBox,
                      .more,
@@ -276,10 +251,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .print,
                      .rename,
                      .delete,
-                     .removeAlbum,
-                     .changeCoverPhoto,
-                     .removeFromFaceImageAlbum,
-                     .instaPick,
                      .endSharing,
                      .leaveSharing,
                      .moveToTrashShared:
@@ -287,15 +258,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
                         self?.handleAction(type: type, items: currentItems)
                     })
-
-                case .hide:
-                    action = UIAlertAction(title: type.actionTitle(fileType: currentItems.first?.fileType), style: .default, handler: { [weak self] _ in
-                        self?.handleAction(type: type, items: currentItems)
-                    })
-                    
-                case .smash:
-                    assertionFailure("please implement this function first")
-                    action = UIAlertAction()
 
                 case .share:
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
@@ -427,18 +389,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 UIApplication.showErrorAlert(message: text)
             }
             
-        case .hide:
-            let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-            if items.count <= allowedNumberLimit {
-                interactor.hide(items: items)
-            } else {
-                let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
-                UIApplication.showErrorAlert(message: text)
-            }
-            
-        case .unhide:
-            interactor.unhide(items: items)
-            
         case .restore:
             interactor.restore(items: items)
             
@@ -454,40 +404,18 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         //Photos and albumbs
         case .photos:
             interactor.photos(items: items)
-            
-        case .createAlbum:
-            debugPrint("Can not create album for now")
-            
-        case .addToAlbum:
-            interactor.addToAlbum(items: items)
-
-        case .albumDetails:
-            interactor.albumDetails(items: items)
 
         case .shareAlbum:
             interactor.shareAlbum(items: items)
             
         case .makeAlbumCover:
             interactor.makeAlbumCover(items: items)
-
-        case .removeFromAlbum:
-            interactor.removeFromAlbum(items: items)
             
         case .backUp:
             interactor.backUp(items: items)
             
         case .copy:
             interactor.copy(item: items, toPath: "")
-            
-        case .createStory:
-            let images = items.filter({ $0.fileType == .image })
-            if images.count <= NumericConstants.maxNumberPhotosInStory {
-                interactor.createStory(items: images)
-                basePassingPresenter?.stopModeSelected()
-            } else {
-                let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
-                UIApplication.showErrorAlert(message: text)
-            }
             
         case .iCloudDrive:
             interactor.iCloudDrive(items: items)
@@ -543,21 +471,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                 UIApplication.showErrorAlert(message: text)
             }
-            
-        case .removeAlbum:
-            interactor.removeAlbums(items: items)
-
-        case .changeCoverPhoto:
-            basePassingPresenter?.changeCover()
-            
-        case .removeFromFaceImageAlbum:
-            if let item = basePassingPresenter?.getFIRParent() {
-                interactor.deleteFromFaceImageAlbum(items: items, item: item)
-            }
-
-        case .instaPick:
-            basePassingPresenter?.openInstaPick()
-            
+        
         case .endSharing:
             //currently only for one file is supported
             interactor.endSharing(item: items.first)
@@ -589,29 +503,18 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         var button: NetmeraEventValues.ButtonName?
         
         switch type {
-        case .info, .albumDetails:
+        case .info:
             button = .info
-        case .edit:
-            button = .edit
         case .download, .downloadDocument:
             button = .download
         case .moveToTrash,
              .moveToTrashShared,
-             .delete,
-             .removeAlbum,
-             .removeFromAlbum,
-             .removeFromFaceImageAlbum:
+             .delete:
             button = .delete
-        case .hide:
-            button = .hide
-        case .unhide:
-            button = .unhide
         case .restore:
             button = .restore
         case .share, .shareAlbum:
             button = .share
-        case .addToAlbum:
-            button = .addToAlbum
         case .addToFavorites:
             button = .addToFavorites
         case .removeFromFavorites:

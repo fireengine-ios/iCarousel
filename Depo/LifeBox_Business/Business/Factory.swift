@@ -12,15 +12,10 @@ let factory: Factory = FactoryMain()
 
 protocol Factory: SharedFactory {
     func resolve() -> MediaPlayer
-    func resolve() -> DropboxManager
     func resolve() -> StorageVars
     
     func resolve() -> HomeCardsService
     func resolve() -> AnalyticsService
-    func resolve() -> InstapickService
-    func resolve() -> SpotifyService
-    func resolve() -> SpotifyRoutingService
-    func resolve() -> SmartAlbumsManager
     func resolve() -> PrivacyPolicyService
     func resolve() -> ResumableUploadInfoService
 }
@@ -32,19 +27,9 @@ final class FactoryMain: FactoryBase, Factory {
         return FactoryMain.mediaPlayer
     }
     
-    private static let dropboxManager = DropboxManager()
-    func resolve() -> DropboxManager {
-        return FactoryMain.dropboxManager
-    }
-    
     private static let storageVars = UserDefaultsVars()
     func resolve() -> StorageVars {
         return FactoryMain.storageVars
-    }
-    
-    private static let instapickService = InstapickServiceImpl()
-    func resolve() -> InstapickService {
-        return FactoryMain.instapickService
     }
 }
 
@@ -58,21 +43,6 @@ extension FactoryMain {
     private static let analyticsService = AnalyticsService()
     func resolve() -> AnalyticsService {
         return FactoryMain.analyticsService
-    }
-    
-    private static let spotifyService = SpotifyServiceImpl()
-    func resolve() -> SpotifyService {
-        return FactoryMain.spotifyService
-    }
-    
-    private static let spotifyRoutingService = SpotifyRoutingService()
-    func resolve() -> SpotifyRoutingService {
-        return FactoryMain.spotifyRoutingService
-    }
-    
-    private static let smartAlbumsManager = SmartAlbumsManagerImpl()
-    func resolve() -> SmartAlbumsManager {
-        return FactoryMain.smartAlbumsManager
     }
     
     private static let privacyPolicyService = PrivacyPolicyServiceImp()

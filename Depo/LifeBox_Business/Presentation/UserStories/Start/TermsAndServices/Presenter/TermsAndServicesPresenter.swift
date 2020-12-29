@@ -16,7 +16,6 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     weak var delegate: RegistrationViewDelegate?
     private var confirmAgreements = false
     private lazy var storageVars: StorageVars = factory.resolve()
-    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     // MARK: IN
     func viewIsReady() {

@@ -60,46 +60,6 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class Import: NetmeraEvent {
-        
-        private let kImportKey = "qfv"
-        
-        @objc var channelType = ""
-        @objc var status = ""
-        
-        convenience init(status: NetmeraEventValues.OnOffSettings, socialType: Section.SocialAccount) {
-            let socialChannel: NetmeraEventValues.ImportChannelType
-            switch socialType {
-            case .dropbox:
-                socialChannel = .dropbox
-            case .facebook:
-                socialChannel = .facebook
-            case .instagram:
-                socialChannel = .instagram
-            case .spotify:
-                socialChannel = .spotify
-            }
-            self.init(status: status.text, channelType: socialChannel.text)
-        }
-        
-        convenience init(status: String, channelType: String) {
-            self.init()
-            self.status = status
-            self.channelType = channelType
-        }
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return[
-                "eb" : #keyPath(status),
-                "ea" : #keyPath(channelType),
-            ]
-        }
-        
-        override var eventKey : String {
-            return kImportKey
-        }
-    }
-    
     final class EmailVerification: NetmeraEvent {
         
         private let kEmailVerificationKey = "axi"
@@ -232,63 +192,6 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class FirstAutosync: NetmeraEvent {
-        
-        private let kFirstAutosyncKey = "ekh"
-        
-        @objc var syncSetting = ""
-        @objc var photos = ""
-        @objc var videos = ""
-        
-        convenience init(autosyncSettings: AutoSyncSettings) {
-            
-            let state = autosyncSettings.isAutoSyncOptionEnabled ? NetmeraEventValues.OnOffSettings.on : NetmeraEventValues.OnOffSettings.off
-            
-            let photoOption: NetmeraEventValues.AutoSyncState
-            let videoOption: NetmeraEventValues.AutoSyncState
-            
-            switch autosyncSettings.photoSetting.option {
-            case .never:
-                photoOption = NetmeraEventValues.AutoSyncState.never
-            case .wifiAndCellular:
-                photoOption = NetmeraEventValues.AutoSyncState.wifi_LTE
-            case .wifiOnly:
-                photoOption = NetmeraEventValues.AutoSyncState.wifi
-            }
-            
-            switch autosyncSettings.videoSetting.option {
-            case .never:
-                videoOption = NetmeraEventValues.AutoSyncState.never
-            case .wifiAndCellular:
-                videoOption = NetmeraEventValues.AutoSyncState.wifi_LTE
-            case .wifiOnly:
-                videoOption = NetmeraEventValues.AutoSyncState.wifi
-            }
-            
-            self.init(videos: videoOption, autosyncSetting: state, photos: photoOption)
-            
-        }
-        
-        convenience init(videos: NetmeraEventValues.AutoSyncState, autosyncSetting: NetmeraEventValues.OnOffSettings, photos:  NetmeraEventValues.AutoSyncState) {
-            self.init()
-            self.syncSetting = autosyncSetting.text
-            self.photos = photos.text
-            self.videos = videos.text
-        }
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [
-                "ee" : #keyPath(syncSetting),
-                "ea" : #keyPath(photos),
-                "eb" : #keyPath(videos),
-            ]
-        }
-        
-        override var eventKey : String {
-            return kFirstAutosyncKey
-        }
-    }
-    
     final class Download: NetmeraEvent {
         
         private let kDownloadKey = "wgb"
@@ -299,7 +202,7 @@ extension NetmeraEvents.Actions {
         convenience init(type: FileType, count: Int) {
             let accaptableType: NetmeraEventValues.DownloadType
             switch type {
-            case .image, .faceImage(_):
+            case .image:
                 accaptableType = .photo
             case .video:
                 accaptableType = .video
@@ -310,8 +213,6 @@ extension NetmeraEvents.Actions {
                 accaptableType = .document
             case .audio:
                 accaptableType = .music
-            case .photoAlbum, .faceImageAlbum(_):
-                accaptableType = .album
             default:
                 accaptableType = .photo
             }
@@ -431,14 +332,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .document
             case .audio:
                 acceptableType = .music
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -491,14 +384,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .document
             case .audio:
                 acceptableType = .music
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -587,7 +472,7 @@ extension NetmeraEvents.Actions {
             
             let appopriateFileType: NetmeraEventValues.UploadFileType
             switch fileTypes {
-            case .image, .faceImage(_):
+            case .image:
                 appopriateFileType = .photo
             case .video:
                 appopriateFileType = .video
@@ -672,85 +557,6 @@ extension NetmeraEvents.Actions {
         
         override var eventKey : String {
             return kPackagePurchaseKey
-        }
-    }
-    
-    final class Autosync: NetmeraEvent {
-        
-        private let kAutosyncKey = "tkp"
-        
-        @objc var videos = ""
-        @objc var autosyncSetting = ""
-        @objc var photos = ""
-        
-        convenience init(autosyncSettings: AutoSyncSettings) {
-            
-            let state = autosyncSettings.isAutoSyncOptionEnabled ? NetmeraEventValues.OnOffSettings.on : NetmeraEventValues.OnOffSettings.off
-            
-            let photoOption: NetmeraEventValues.AutoSyncState
-            let videoOption: NetmeraEventValues.AutoSyncState
-            
-            switch autosyncSettings.photoSetting.option {
-            case .never:
-                photoOption = NetmeraEventValues.AutoSyncState.never
-            case .wifiAndCellular:
-                photoOption = NetmeraEventValues.AutoSyncState.wifi_LTE
-            case .wifiOnly:
-                photoOption = NetmeraEventValues.AutoSyncState.wifi
-            }
-            
-            switch autosyncSettings.videoSetting.option {
-            case .never:
-                videoOption = NetmeraEventValues.AutoSyncState.never
-            case .wifiAndCellular:
-                videoOption = NetmeraEventValues.AutoSyncState.wifi_LTE
-            case .wifiOnly:
-                videoOption = NetmeraEventValues.AutoSyncState.wifi
-            }
-            
-            self.init(videos: videoOption, autosyncSetting: state, photos: photoOption)
-            
-        }
-        
-        convenience init(videos: NetmeraEventValues.AutoSyncState, autosyncSetting: NetmeraEventValues.OnOffSettings, photos:  NetmeraEventValues.AutoSyncState) {
-            self.init()
-            self.videos = videos.text
-            self.autosyncSetting = autosyncSetting.text
-            self.photos = photos.text
-        }
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [
-                "ee" : #keyPath(videos),
-                "ea" : #keyPath(autosyncSetting),
-                "eb" : #keyPath(photos),
-            ]
-        }
-        
-        override var eventKey : String {
-            return kAutosyncKey
-        }
-    }
-    
-    final class FaceImageGrouping: NetmeraEvent {
-        
-        private let kFaceImageGroupingKey = "jxo"
-        
-        @objc var action = ""
-        
-        convenience init(action: NetmeraEventValues.OnOffSettings) {
-            self.init()
-            self.action = action.text
-        }
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [
-                "ea" : #keyPath(action),
-            ]
-        }
-        
-        override var eventKey : String {
-            return kFaceImageGroupingKey
         }
     }
     
@@ -858,14 +664,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .document
             case .audio:
                 acceptableType = .music
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -977,14 +775,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -1023,14 +813,6 @@ extension NetmeraEvents.Actions {
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
-            case .photoAlbum:
-                acceptableType = .album
-            case .faceImageAlbum(.people), .faceImage(.people):
-                acceptableType = .person
-            case .faceImageAlbum(.things), .faceImage(.things):
-                acceptableType = .thing
-            case .faceImageAlbum(.places), .faceImage(.places):
-                acceptableType = .place
             default:
                 acceptableType = .photo
             }
@@ -1143,8 +925,6 @@ extension NetmeraEvents.Actions {
             switch action {
             case .createFolder:
                 netmeraPussButtonAction = .newFolder
-            case .createStory:
-                netmeraPussButtonAction = .createStory
             case .upload:
                 netmeraPussButtonAction = .upload
             case .uploadFiles:
@@ -1153,12 +933,8 @@ extension NetmeraEvents.Actions {
                 netmeraPussButtonAction = .uploadFiles
             case .uploadMusic:
                 netmeraPussButtonAction = .uploadMusic
-            case .createAlbum:
-                netmeraPussButtonAction = .createAlbum
             case .uploadFromApp:
                 netmeraPussButtonAction = .uploadFromLifebox
-            case .importFromSpotify:
-                netmeraPussButtonAction = .importFromSpotify
             default:
                 return nil
             }

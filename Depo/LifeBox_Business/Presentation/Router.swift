@@ -56,16 +56,6 @@ class RouterVC: NSObject {
         return ""
     }
     
-    func isRootViewControllerAlbumDetail() -> Bool {
-        if let tabBarController = tabBarController,
-            let viewControllers = tabBarController.customNavigationControllers[safe: tabBarController.selectedIndex]?.viewControllers,
-            let viewController = viewControllers.last as? BaseViewController {
-            return viewController is AlbumDetailViewController
-        } else {
-            return navigationController?.viewControllers.last is AlbumDetailViewController
-        }
-    }
-    
     func isTwoFactorAuthViewControllers() -> Bool {
         
         guard let currentViewController = navigationController?.viewControllers.last else {
@@ -285,28 +275,6 @@ class RouterVC: NSObject {
         }
     }
     
-    func popCreateStory() {
-        if let viewControllers = navigationController?.viewControllers {
-            var index: Int? = nil
-            
-            for (i, viewController) in viewControllers.enumerated() {
-                if viewController is CreateStorySelectionController
-                    || viewController is CreateStoryViewController
-                    || viewController is CreateStoryPhotoSelectionController {
-                    index = i
-                    break
-                }
-            }
-
-            if let ind = index {
-                let viewController = viewControllers[ind - 1]
-                navigationController?.popToViewController(viewController, animated: true)
-            } else {
-                navigationController?.popToRootViewController(animated: true)
-            }
-        }
-    }
-    
     func popTwoFactorAuth() {
         guard let viewControllers = navigationController?.viewControllers else {
             assertionFailure("nav bar is missing!")
@@ -327,10 +295,6 @@ class RouterVC: NSObject {
         if let nController = topNavigationController?.presentedViewController as? UINavigationController,
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
-        }
-        // for present actionSheet under modal controller
-        if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
-            return presentedController
         }
         
         if let navBarController = navigationController?.viewControllers.last?.presentedViewController as? UINavigationController {
@@ -463,44 +427,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: SyncContacts
-    
-    var syncContacts: UIViewController {
-        return ContactSyncViewController.initFromNib()
-    }
-    
-    func contactSyncResultController(with view: UIView, navBarTitle: String) -> UIViewController {
-        return ContactSyncOperationResultController.create(with: view, navBarTitle: navBarTitle)
-    }
-    
-    // MARK: PeriodicContacsSync
-    
-    var periodicContactsSync: UIViewController {
-        let viewController = PeriodicContactSyncInitializer.initializeViewController(with: "PeriodicContactSyncViewController")
-        return viewController
-    }
-    
-    func manageContacts(moduleOutput: ManageContactsModuleOutput?) -> UIViewController {
-        let viewController = ManageContactsModuleInitializer.initializeViewController(with: "ManageContactsViewController", moduleOutput: moduleOutput)
-        return viewController
-    }
-    
-    func deleteContactDuplicates(analyzeResponse: [ContactSync.AnalyzedContact]) -> UIViewController {
-        return DeleteDuplicatesViewController.with(contacts: analyzeResponse)
-    }
-    
-    func contactList(backUpInfo: ContactBackupItem, delegate: ContactListViewDelegate?) -> UIViewController {
-        return ContactListViewController.with(backUpInfo: backUpInfo, delegate: delegate)
-    }
-    
-    func contactDetail(with contact: RemoteContact) -> UIViewController {
-        return ContactListDetailViewController.with(contact: contact)
-    }
-    
-    func backupHistory() -> UIViewController {
-        return ContactsBackupHistoryController()
-    }
-    
     // MARK: Terms
     
     func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil, phoneNumber: String?, signUpResponse: SignUpSuccessResponse? = nil, userInfo: RegistrationUserInfoModel? = nil) -> UIViewController {
@@ -536,28 +462,10 @@ class RouterVC: NSObject {
         return controller
     }
     
-    
-    // MARK: Home Page
-    var homePageScreen: UIViewController? {
-        if (!SingletonStorage.shared.isAppraterInited) {
-            AppRater.sharedInstance().daysUntilPrompt = 5
-            AppRater.sharedInstance().launchesUntilPrompt = 10
-            AppRater.sharedInstance().remindMeDaysUntilPrompt = 15
-            AppRater.sharedInstance().remindMeLaunchesUntilPrompt = 10
-            AppRater.sharedInstance().appLaunched()
-            
-            SingletonStorage.shared.isAppraterInited = true
-        }
-        
-        let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
-        return controller
-    }
-    
     // MARK: Music
     
     var musics: UIViewController? {
-        let controller = MusicInitializer.initializeViewController(with: "BaseFilesGreedViewController")
-        return controller
+        return BaseFilesGreedModuleInitializer.initializeMusicViewController(with: "BaseFilesGreedViewController")
     }
     
     var favorites: UIViewController? {
@@ -689,17 +597,9 @@ class RouterVC: NSObject {
         let controller = SelectNameModuleInitializer.initializeViewController(with: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
         return controller
     }
-    
+
     func createNewFolderSharedWithMe(parameters: CreateFolderSharedWithMeParameters) -> UIViewController {
         let controller = SelectNameModuleInitializer.with(parameters: parameters)
-        return controller
-    }
-    
-    
-    // MARK: Create Album
-    
-    func createNewAlbum(moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectAlbumName, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -714,36 +614,11 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: CreateStory audio selection
-    
-    func audioSelection(forStory story: PhotoStory) -> CreateStoryAudioSelectionItemViewController {
-        let viewController = CreateStoryAudioSelectionItemViewController(forStory: story)
-        return viewController
-    }
-    
-    // MARK: CreateStory preview
-    
-    func storyPreview(forStory story: PhotoStory, response: CreateStoryResponse) -> UIViewController {
-        let controller = CreateStoryPreviewModuleInitializer.initializePreviewViewControllerForStory(with: "CreateStoryPreviewViewController",
-                                                                                                   story: story,
-                                                                                                   response: response)
-        return controller
-    }
-    
     // MARK: Upload All files
     
     func uploadPhotos() -> UIViewController {
-        let controller = LocalAlbumModuleInitializer.initializeLocalAlbumsController(with: "BaseFilesGreedViewController")
-        return controller
-    }
-    
-    func uploadPhotos(rootUUID: String,
-                      getItems: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?,
-                      saveItems: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?) -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID,
-                                                                                                    getItems: getItems,
-                                                                                                    saveItems: saveItems)
-        return controller
+        //TODO: add logic with picker
+        return UIViewController()
     }
     
     func uploadFromLifeBox(
@@ -752,16 +627,12 @@ class RouterVC: NSObject {
         sortRule: SortedRules = .timeUp,
         type: MoreActionsConfig.ViewType = .Grid
     ) -> UIViewController {
-        if isRootViewControllerAlbumDetail() {
-            return UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController",
-                                                                                          albumUUID: folderUUID)
-        } else {
-            return UploadFromLifeBoxModuleInitializer
-                .initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
-                                                        destinationFolderUUID: folderUUID,
-                                                        outputFolderUUID: soorceUUID,
-                                                        sortRule: sortRule, type: type)
-        }
+        return UploadFromLifeBoxModuleInitializer
+            .initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
+                                                    destinationFolderUUID: folderUUID,
+                                                    outputFolderUUID: soorceUUID,
+                                                    sortRule: sortRule, type: type)
+        
     }
     
     func uploadFromLifeBoxFavorites(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp, isPhotoVideoOnly: Bool) -> UIViewController {
@@ -814,78 +685,6 @@ class RouterVC: NSObject {
                                                                                         albumItem: albumItem,
                                                                                         status: status)
     }
-
-    // MARK: Albums list
-    
-    func albumsListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
-        let controller = AlbumsModuleInitializer.initializeAlbumsController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
-        return controller
-    }
-    
-    // MARK: Adding photos to album
-    
-    func addPhotosToAlbum(photos: [BaseDataSourceItem]) -> AlbumSelectionViewController {
-        let controller = AlbumsModuleInitializer.initializeSelectAlbumsController(with: "BaseFilesGreedViewController", photos: photos)
-        return controller
-    }
-    
-    // MARK: Album detail
-    
-    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, status: status, moduleOutput: moduleOutput)
-        return controller
-    }
-    
-    // MARK: Stories list
-    
-    func storiesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
-        let controller = StoriesInitializer.initializeStoriesController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
-        return controller
-    }
-    
-    // MARK: People list
-    
-    func peopleListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageItemsInitializer.initializePeopleController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
-        return controller as! BaseFilesGreedChildrenViewController
-    }
-    
-    // MARK: Thing list
-    
-    func thingsListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageItemsInitializer.initializeThingsController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
-        return controller as! BaseFilesGreedChildrenViewController
-    }
-    
-    // MARK: Place list
-    
-    func placesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
-        return controller as! BaseFilesGreedChildrenViewController
-    }
-    
-    // MARK: Analyses History page
-    
-    func analyzesHistoryController() -> AnalyzeHistoryViewController {
-        return AnalyzeHistoryViewController.initFromNib()
-    }
-    
-    // MARK: Face Image Recognition Photos
-    
-    func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
-                                                                         album: album,
-                                                                         item: item,
-                                                                         status: status,
-                                                                         moduleOutput: moduleOutput,
-                                                                         isSearchItem: isSearchItem)
-        return controller as! BaseFilesGreedChildrenViewController
-    }
-    
-    func faceImageChangeCoverController(albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?) -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageChangeCoverInitializer.initializeController(with: "BaseFilesGreedViewController", albumUUID: albumUUID, moduleOutput: moduleOutput)
-        return controller as! BaseFilesGreedChildrenViewController
-    }
     
     // MARK: Free App Space
     
@@ -906,7 +705,7 @@ class RouterVC: NSObject {
             return nil
         }
 
-        let rightController = syncContacts
+        let rightController = vcActivityTimeline
         
         splitContr = SplitIpadViewContoller()
         splitContr?.configurateWithControllers(leftViewController: leftController, controllers: [rightController])
@@ -945,29 +744,10 @@ class RouterVC: NSObject {
         return ChangePasswordController.initFromNib()
     }
     
-    // MARK: - Import photos
-    
-    var connectedAccounts: UIViewController? {
-        return ConnectedAccountsViewController.initFromNib()
-    }
-    
     // MARK: - Permissions
     
     var permissions: UIViewController {
         return PermissionViewController()
-    }
-    
-    // MARK: Face image
-    
-    var faceImage: UIViewController {
-        return FaceImageViewController.initFromNib()
-    }
-    
-    // MARK: Face image add name
-    
-    func faceImageAddName(_ item: WrapData, moduleOutput: FaceImagePhotosModuleOutput?, isSearchItem: Bool) -> UIViewController {
-        let controller = FaceImageAddNameInitializer.initializeViewController(with: "FaceImageAddNameViewController", item: item, moduleOutput: moduleOutput, isSearchItem: isSearchItem)
-        return controller
     }
     
     // MARK: - Import photos
@@ -975,10 +755,6 @@ class RouterVC: NSObject {
     var usageInfo: UIViewController? {
         let controller = UsageInfoInitializer.initializeViewController(with: "UsageInfoViewController")
         return controller
-    }
-    
-    func instagramAuth(fromSettings: Bool) -> UIViewController {
-        return InstagramAuthViewController.controller(fromSettings: fromSettings)
     }
     
     // MARK: OTP
@@ -1025,21 +801,6 @@ class RouterVC: NSObject {
         let controller = freeAppSpace()
         pushViewController(viewController: controller)
     }
-    // MARK: - Packages
-    
-    func packagesWith(quotoInfo: QuotaInfoResponse?) -> PackagesViewController{
-        
-        let nibName = String(describing: PackagesViewController.self)
-        let viewController = PackagesViewController(nibName: nibName, bundle: nil)
-        let configurator = PackagesModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController, quotoInfo: quotoInfo)
-        
-        return viewController
-    }
-    
-    var packages: PackagesViewController {
-        return PackagesModuleInitializer.viewController
-    }
     
     // MARK: - Passcode
     
@@ -1047,54 +808,8 @@ class RouterVC: NSObject {
         return PasscodeSettingsModuleInitializer.setupModule(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
     }
     
-    // MARK: - Premium
-    
-    func premium(source: BecomePremiumViewSourceType = .default, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
-        let controller = PremiumModuleInitializer.initializePremiumController(source: source, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
-        return controller
-    }
-    
-    // MARK: - Leave Premium
-    
-    func leavePremium(type: LeavePremiumType) -> UIViewController {
-        let controller = LeavePremiumModuleInitializer.initializeLeavePremiumController(with: "LeavePremiumViewController",
-                                                                                        type: type)
-        return controller
-    }
-
-    //MARK: - My Storage
-    
-    func myStorage(usageStorage: UsageResponse?) -> MyStorageViewController {
-        let controller = MyStorageModuleInitializer.initializeMyStorageController(usage: usageStorage)
-        return controller
-    }
-    
-    func instaPickDetailViewController(models: [InstapickAnalyze], analyzesCount: InstapickAnalyzesCount, isShowTabBar: Bool) -> InstaPickDetailViewController {
-        let nibName = String(describing: InstaPickDetailViewController.self)
-        let controller = InstaPickDetailViewController(nibName: nibName, bundle: nil)
-        
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        
-        controller.configure(with: models, analyzesCount: analyzesCount, isShowTabBar: isShowTabBar)
-        
-        return controller
-    }
-    
     var supportFormPrefilledController: SupportFormPrefilledController {
         return SupportFormPrefilledController()
-    }
-    
-    func createStory(navTitle: String) -> UIViewController {
-        return CreateStorySelectionController(title: navTitle, isFavouritePictures: isOnFavoritesView())
-    }
-    
-    func createStory(searchItems: [Item]) -> UIViewController {
-        return CreateStoryPhotoSelectionController(photos: searchItems)
-    }
-    
-    func createStory(items: [Item]) -> UIViewController {
-        return CreateStoryViewController(images: items)
     }
     
     func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
@@ -1117,68 +832,6 @@ class RouterVC: NSObject {
         controller.modalPresentationStyle = .overFullScreen
         
         return controller
-    }
-    
-    // MARK: - Spotify
-    
-    func spotifyPlaylistsController(delegate: SpotifyPlaylistsViewControllerDelegate?) -> UIViewController {
-        let controller = SpotifyPlaylistsViewController.initFromNib()
-        controller.delegate = delegate
-        return controller
-    }
-    
-    func spotifyTracksController(playlist: SpotifyPlaylist) -> UIViewController {
-        let controller = SpotifyPlaylistViewController.initFromNib()
-        controller.playlist = playlist
-        return controller
-    }
-    
-    func spotifyImportController(delegate: SpotifyImportControllerDelegate?) -> UIViewController {
-        let controller = SpotifyImportViewController.initFromNib()
-        controller.delegate = delegate
-        return controller
-    }
-    
-    func spotifyOverwritePopup(importAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
-        return SpotifyOverwritePopup.with(action: importAction, dismissAction: dismissAction)
-    }
-    
-    func spotifyDeletePopup(deleteAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
-        return SpotifyDeletePopup.with(action: deleteAction, dismissAction: dismissAction)
-    }
-    
-    func spotifyCancelImportPopup(cancelAction: @escaping VoidHandler, continueAction: VoidHandler? = nil) -> UIViewController {
-        return SpotifyCancelImportPopup.with(action: cancelAction, dismissAction: continueAction)
-    }
-
-    func spotifyAuthWebViewController(url: URL, delegate: SpotifyAuthViewControllerDelegate?) -> UIViewController {
-        let controller = SpotifyAuthViewController()
-        controller.loadWebView(with: url)
-        controller.delegate = delegate
-        return controller
-    }
-    
-    func spotifyImportedPlaylistsController() -> UIViewController {
-        return SpotifyImportedPlaylistsViewController.initFromNib()
-    }
-    
-    func spotifyImportedTracksController(playlist: SpotifyPlaylist, delegate: SpotifyImportedTracksViewControllerDelegate?) -> UIViewController {
-        let controller = SpotifyImportedTracksViewController.initFromNib()
-        controller.playlist = playlist
-        controller.delegate = delegate
-        return controller
-    }
-    
-    func tbmaticPhotosContoller(uuids: [String]) -> UIViewController {
-        return TBMatikPhotosViewController.with(uuids: uuids)
-    }
-    
-    func campaignDetailViewController() -> UIViewController {
-        return CampaignDetailViewController.initFromNib()
-    }
-
-    func hiddenPhotosViewController() -> UIViewController {
-        return HiddenPhotosViewController.initFromNib()
     }
     
     func trashBinController() -> TrashBinViewController {

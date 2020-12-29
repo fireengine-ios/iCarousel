@@ -15,10 +15,6 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
 
      func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
         
-        if (selectedItem.fileType == .photoAlbum) {
-         
-            return
-        }
         if (selectedItem.fileType == .musicPlayList) {
             return
         }

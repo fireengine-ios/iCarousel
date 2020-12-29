@@ -16,11 +16,7 @@ protocol SearchViewInteractorInput {
     func viewIsReady()
     func searchItems(by searchText: String, item: SuggestionObject?, sortBy: SortType, sortOrder: SortOrder)
     func needShowNoFileView() -> Bool
-    func getSuggetion(text: String)
-    func getDefaultSuggetion(text: String)
     func clearRecentSearches()
-    func openFaceImageForSuggest(item: SuggestionObject)
-    func openFaceImageForSearch(item: BaseDataSourceItem?)
     func saveSearch(item: SuggestionObject)
     
     func trackScreen()

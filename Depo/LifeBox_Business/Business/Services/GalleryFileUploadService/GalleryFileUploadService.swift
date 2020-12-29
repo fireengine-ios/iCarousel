@@ -80,7 +80,7 @@ final class GalleryFileUploadService: NSObject {
     private func upload(items: [WrapData]) {
         let router = RouterVC()
         let isFavorites = router.isOnFavoritesView()
-        let isFromAlbum = router.isRootViewControllerAlbumDetail()
+        let isFromAlbum = false
         
         let projectId: String?
         let rootUUID: String

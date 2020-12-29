@@ -29,19 +29,6 @@ class SelectNameRouter: SelectNameRouterInput {
         
         let folderVC = router.filesFromFolder(folder: item, type: .Grid, sortType: .None, status: .active, moduleOutput: presenter)
 
-        if
-            let tabBarVC = router.defaultTopController?.presentingViewController as? TabBarViewController,
-            let navVC = tabBarVC.activeNavigationController,
-            let homePage = navVC.topViewController as? HomePageViewController
-        {
-            homePage.isNeedShowSpotlight = false
-        }
-//        else {
-//            assertionFailure("Сondition not match expectations, homePage's spotlight must be delayed")
-//        }
-        
-        
-        
         if !isSubFolder {
             let allFilesVC = router.allFiles(moduleOutput: presenter,
                                              sortType: presenter.allFilesSortType,
@@ -52,10 +39,5 @@ class SelectNameRouter: SelectNameRouterInput {
             router.pushViewController(viewController: folderVC)
             
         }
-    }
-    
-    func moveToAlbumPage(presenter: SelectNamePresenter, item: AlbumItem) {
-        let albumVC = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: presenter)
-        router.pushViewController(viewController: albumVC)
     }
 }

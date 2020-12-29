@@ -14,11 +14,7 @@ protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
-    func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
-    func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
-    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
-    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
 }
 
@@ -73,57 +69,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     
                     let permissions = PermissionsResponse(json: data, headerResponse: nil)
                     handler(.success(permissions))
-                case .failure(let error):
-                    handler(.failed(error))
-                }
-        }
-    }
-    
-    func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
-        debugLog("AccountService featurePacks")
-        
-        sessionManager
-            .request(RouteRequests.Account.Permissions.featurePacks)
-            .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let offersArray = PackageModelResponse.array(from: data)
-                    handler(.success(offersArray))
-                case .failure(let error):
-                    handler(.failed(error))
-                }
-        }
-    }
-    
-    func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
-        debugLog("AccountService featurePacks v2")
-        
-        sessionManager
-            .request(RouteRequests.Account.Permissions.featurePacksV2)
-            .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let offersArray = PackageModelResponse.array(from: data)
-                    handler(.success(offersArray))
-                case .failure(let error):
-                    handler(.failed(error))
-                }
-        }
-    }
-
-    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
-        debugLog("AccountService featurePacks")
-
-        sessionManager
-            .request(RouteRequests.Account.Permissions.availableOffers)
-            .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let offersArray = PackageModelResponse.array(from: data)
-                    handler(.success(offersArray))
                 case .failure(let error):
                     handler(.failed(error))
                 }
@@ -452,47 +397,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     handler(.failed(error))
                 }
         }
-    }
-    
-    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid) {
-        debugLog("AccountService autoSyncStatus")
-        
-        let settings: AutoSyncSettings = syncSettings ?? AutoSyncDataStorage().settings
-        
-        let photoStatus : String = settings.isAutoSyncEnabled ? settings.photoSetting.option.rawValue : AutoSyncOption.never.rawValue
-        let videoStatus : String = settings.isAutoSyncEnabled ? settings.videoSetting.option.rawValue : AutoSyncOption.never.rawValue
-        
-        let params: Parameters  = [ "photoStatus" : photoStatus , "videoStatus" : videoStatus]
-        
-        sessionManager
-            .request(RouteRequests.Account.Settings.autoSyncStatus,
-                     method: .post,
-                     parameters: params,
-                     encoding: JSONEncoding.prettyPrinted
-        )
-            .customValidate()
-            .response { response in
-                if response.response?.statusCode == 200 {
-                    handler(.success(()))
-                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
-                    let errorText: String
-                    
-                    if statusJSON == "ACCOUNT_NOT_FOUND" {
-                        errorText = TextConstants.noAccountFound
-                    } else if statusJSON == "EMPTY_REQUEST" {
-                        errorText = "EMPTY_REQUEST" ///Should add localized text?
-                    } else {
-                        errorText = TextConstants.errorServer
-                    }
-                    
-                    let error = CustomErrors.text(errorText)
-                    handler(.failed(error))
-                } else {
-                    let error = CustomErrors.text(TextConstants.errorServer)
-                    handler(.failed(error))
-                }
-        }
-        
     }
     
     func getListOfSecretQuestions(handler: @escaping (ResponseResult<[SecretQuestionsResponse]>) -> Void) {

@@ -15,7 +15,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var customProgressHUD = CustomProgressHUD()
     private var turkcellLogin = false
     private lazy var storageVars: StorageVars = factory.resolve()
-    private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
         interactor.trackScreen()

@@ -14,12 +14,10 @@ class EditinglBar: CustomTabBar {
     struct PreDetermendTypes { //use super setup method with these
         static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel, "")
         static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel, "")
-        static let edit = ("EditButtonIcon", TextConstants.tabBarEditeLabel, "")
         static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel, "")
         static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
         static let removeAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveAlbumLabel, "")
         static let move = ("MoveButtonIcon", TextConstants.tabBarMoveLabel, "")
-        static let addToAlbum = ("MoveButtonIcon", TextConstants.tabBarAddToAlbumLabel, "")
         static let makeCover = ("MoveButtonIcon", TextConstants.tabAlbumCoverAlbumLabel, "")
         static let removeFromAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
         static let removeFromFaceImageAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
@@ -27,9 +25,6 @@ class EditinglBar: CustomTabBar {
         static let syncInProgress = ("", TextConstants.tabBarSyncLabel, "")
         static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
         static let downloadDocument = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
-        static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
-        static let unhide = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
-        static let smash = ("SmashButtonIcon", TextConstants.tabBarSmashLabel, "")
         static let restore = ("RestoreButtonIcon", TextConstants.actionSheetRestore, "")
     }
     
@@ -89,8 +84,6 @@ class EditinglBar: CustomTabBar {
               ///red 'delete', 'hide', 'unhide', 'restore' icons
               switch item.imageName {
                   case PreDetermendTypes.delete.0,
-                       PreDetermendTypes.hide.0,
-                       PreDetermendTypes.unhide.0,
                        PreDetermendTypes.restore.0:
                       image = image?.withRenderingMode(.alwaysTemplate)
                   case PreDetermendTypes.syncInProgress.0:

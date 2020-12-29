@@ -15,10 +15,6 @@ protocol PhotoVideoDetailRouterInput {
     func goBack(navigationConroller: UINavigationController?)
     
     func showConfirmationPopup(completion: @escaping () -> ())
-    
-    func goToPremium()
-    
-    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?)
  
     func openPrivateShare(for item: Item)
     

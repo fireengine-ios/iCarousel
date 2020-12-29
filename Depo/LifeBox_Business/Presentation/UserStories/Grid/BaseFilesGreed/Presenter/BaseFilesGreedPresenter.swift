@@ -10,8 +10,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     lazy var player: MediaPlayer = factory.resolve()
     
-    private lazy var instaPickRoutingService = InstaPickRoutingService()
-    
     var dataSource: BaseDataSourceForCollectionView
     
     weak var view: BaseFilesGreedViewInput!
@@ -31,8 +29,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     var bottomBarConfig: EditingBarConfig?
     
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
-    
-    weak var sliderModule: LBAlbumLikePreviewSliderModuleInput?
     
     weak var photoVideoDetailModule: PhotoVideoDetailModuleInput?
     
@@ -84,9 +80,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.needShowCustomScrollIndicator = needShowScrollIndicator
         dataSource.needShowEmptyMetaItems = needShowEmptyMetaItems
         dataSource.parentUUID = interactor.getFolder()?.uuid
-        if let albumInteractor = interactor as? AlbumDetailInteractor {
-            dataSource.parentUUID = albumInteractor.album?.uuid
-        }
         
         if let displayingType = topBarConfig {
             type = displayingType.defaultGridListViewtype
@@ -152,10 +145,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             router.presentViewController(controller: navigation)
             
         } else if service is AllFilesService ||
-            service is PhotoAndVideoService ||
-            service is ThingsItemsService ||
-            service is PlacesItemsService ||
-            service is PeopleItemsService {
+            service is PhotoAndVideoService {
             router.showUpload()
         }
         
@@ -688,21 +678,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
-            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image }) {
-                let index = actionTypes.index(where: { return $0 == .createStory })!
-                actionTypes.remove(at: index)
-            }
-            
             if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
                 actionTypes.remove(at: renameIndex)
             }
 
             if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: printIndex)
-            }
-            
-            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: { $0.fileType == .image }) {
-                actionTypes.remove(at: editIndex)
             }
             
             DispatchQueue.global().async {[weak self] in
@@ -844,18 +825,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return type
     }
     
-    func openInstaPick() {
-        startAsyncOperation()
-        instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
-            self?.asyncOperationSuccess()
-            if vc is InstapickPopUpController {
-                self?.router.openNeededInstaPick(viewController: vc)
-            }
-        }) { [weak self] error in
-            self?.asyncOperationFail(errorMessage: error.description)
-        }
-    }
-    
     // MARK: - BaseFilesGreedModuleOutput
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
@@ -873,12 +842,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         topBarConfig = gridListTopBarConfig
         
         setupTopBar()
-    }
-    
-    func changeCover() { }
-    
-    func getFIRParent() -> Item? {
-        return nil
     }
 
     //PhotoVideoDetailModuleOutput

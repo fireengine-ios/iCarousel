@@ -30,7 +30,6 @@ class LoginInteractor: LoginInteractorInput {
     private lazy var accountService = AccountService()
     private lazy var eulaService = EulaService()
     
-    private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
     private let storageVars: StorageVars
     
     private var accountWarningService: AccountWarningService?
@@ -230,8 +229,6 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     private func processLogin(login: String, headers: [String: Any]) {
-        self.setContactSettingsForUser()
-                
         debugLog("login isRememberMe \(self.rememberMe)")
         self.tokenStorage.isRememberMe = self.rememberMe
         self.analyticsService.track(event: .login)
@@ -251,16 +248,6 @@ class LoginInteractor: LoginInteractorInput {
         DispatchQueue.main.async {
             self.output?.succesLogin()
         }
-    }
-    
-    private func setContactSettingsForUser() {
-        guard let contactSettings = storageVars.usersWhoUsedApp[SingletonStorage.shared.uniqueUserID] as? [String: Bool] else {
-            return
-        }
-        
-        let contactSyncSettings = PeriodicContactsSyncSettings(with: contactSettings)
-        periodicContactSyncDataStorage.save(periodicContactSyncSettings: contactSyncSettings)
-        contactsService.setPeriodicForContactsSync(periodic: contactSyncSettings.syncPeriodic)
     }
     
     private func isBlocked(userName: String) -> Bool {

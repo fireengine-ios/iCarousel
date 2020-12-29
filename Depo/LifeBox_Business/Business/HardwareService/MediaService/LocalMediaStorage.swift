@@ -282,9 +282,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return mediaContent
     }
     
-    func getAllAlbums(completion: @escaping (_ albums: [AlbumItem]) -> Void) {
+//    func getAllAlbums(completion: @escaping (_ albums: [AlbumItem]) -> Void) {
         //FIXME: get from Gallery
-        completion([])
+//        completion([])
 //        debugLog("LocalMediaStorage getAllAlbums")
 //        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
 //            guard accessGranted else {
@@ -338,7 +338,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
 //                }
 //            }
 //        }
-    }
+//    }
     
     private func firstValidAsset(for collection: PHAssetCollection) -> PHAsset? {
         var result: PHAsset? = nil

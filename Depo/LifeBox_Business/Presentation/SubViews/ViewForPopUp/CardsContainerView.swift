@@ -181,21 +181,8 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         return true
     }
     
-    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool {
-        switch operationType {
-        case .prepareToAutoSync:
-            return viewsByType[.sync] == nil
-        default:
-            return true
-        }
-    }
-    
     func getViewForOperation(operation: OperationType) -> BaseCardView {
         return CardsManager.cardViewForOperaion(type: operation)
-    }
-    
-    func configureInstaPick(with analysisStatus: InstapickAnalyzesCount) {
-        ///DO NOT DELETE. This delegate method used in BaseCollectionViewDataSource
     }
     
     func startOperationWith(type: OperationType, allOperations: Int?, completedOperations: Int?) {
@@ -203,17 +190,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     }
     
     func startOperationWith(type: OperationType, object: WrapData?, allOperations: Int?, completedOperations: Int?) {
-        ///TODO: remove 'type == .instaPick' after (because of lines 227-229)
-        if type == .premium || type == .instaPick {
-            /// not let some cards appear anywhere else than in HomePage
-            return
-        }
-        
         if !checkIsThisIsPermittedType(type: type) {
-            return
-        }
-        
-        if !checkIsNeedShowPopUpFor(operationType: type) {
             return
         }
         
@@ -221,7 +198,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
             
             let view = getViewForOperation(operation: type)
             
-            if type.isContained(in: [.sync, .upload, .prepareToAutoSync, .sharedWithMeUpload]) {
+            if type.isContained(in: [.sync, .upload, .sharedWithMeUpload]) {
                 view.shouldScrollToTop = true
             }
             

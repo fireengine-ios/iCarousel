@@ -28,7 +28,6 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         var phoneString = ""
         var quota: Int64 = 0
         var quotaUsed: Int64 = 0
-        var subscriptions: [SubscriptionPlanBaseResponse] = []
         var email = TextConstants.NotLocalized.feedbackEmail
         
         SingletonStorage.shared.getAccountInfoForUser(success: { userInfoResponse in
@@ -49,16 +48,6 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             group.leave()
         })
         
-        SubscriptionsServiceIml().activeSubscriptions(success: { response in
-            let subscriptionsResponse = response as? ActiveSubscriptionResponse
-            if let array = subscriptionsResponse?.list {
-                subscriptions.append(contentsOf: array)
-            }
-            group.leave()
-        }, fail: { error in
-            group.leave()
-        })
-        
         accountService.feedbackEmail { response in
             switch response {
             case .success(let feedbackResponse):
@@ -73,13 +62,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         
         group.notify(queue: .main) { [weak self] in
             let versionString: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
-            var packages = ""
-            if subscriptions.count > 0 {
-                packages = subscriptions
-                .flatMap { $0.subscriptionPlanDisplayName }
-                .joined(separator: ", ")
-            }
-            let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.modelName, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)
+            let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.modelName, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, "")
             
             self?.output.asyncOperationSuccess()
             self?.output.languageRequestSended(email: email, text: userInfoString)

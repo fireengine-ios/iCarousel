@@ -10,9 +10,5 @@ import Foundation
 
 protocol SearchViewRouterInput {
     func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem])
-    func createStoryWithItems(_ items: [BaseDataSourceItem])
     func showNoFilesToCreateStoryAlert()
-    func openFaceImageItems(category: SearchCategory)
-    func openFaceImageItemPhotos(item: Item, album: AlbumItem)
-    func openAlbum(item: AlbumItem)
 }

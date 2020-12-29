@@ -179,7 +179,6 @@ final class WarningPopupController: BasePopUpController, NibInit {
 private extension WarningPopupController {
     
     func openStorage() {
-        router.pushViewController(viewController: router.packages)
     }
     
     func openSettings() {

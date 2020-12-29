@@ -38,7 +38,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     @IBOutlet weak var musicBar: MusicBar!
 
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
     private lazy var externalFileUploadService = ExternalFileUploadService()
     private lazy var galleryFileUploadService = GalleryFileUploadService()
     private lazy var cameraService = CameraService()
@@ -496,7 +495,7 @@ extension TabBarViewController: TabBarActionHandler {
     func handleAction(_ action: TabBarViewController.Action) {
         let router = RouterVC()
         
-        switch action { 
+        switch action {
         case .createFolder:
             let isFavorites = router.isOnFavoritesView()
             var folderUuid = folderUUID()
@@ -516,51 +515,21 @@ extension TabBarViewController: TabBarActionHandler {
             
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
-            
-        case .createStory:
-//            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.click)) //FE-55
-            let controller = router.createStory(navTitle: TextConstants.createStory)
-            router.pushViewController(viewController: controller)
 
         case .upload:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
-            
-            guard !checkReadOnlyPermission() else {
-                return
-            }
-            
             galleryFileUploadService.upload(rootViewController: self, delegate: self)
             
         case .uploadFiles:
-            guard !checkReadOnlyPermission() else {
-                return
-            }
-            
             externalFileUploadService.showViewController(router: router, externalFileType: .any)
             
         case .uploadDocuments:
-            guard !checkReadOnlyPermission() else {
-                return
-            }
-            
             externalFileUploadService.showViewController(router: router, externalFileType: .documents)
             
         case .uploadMusic:
-            guard !checkReadOnlyPermission() else {
-                return
-            }
-            
             externalFileUploadService.showViewController(router: router, externalFileType: .audio)
                 
-        case .createAlbum:
-            let controller = router.createNewAlbum()
-            let nController = NavigationController(rootViewController: controller)
-            router.presentViewController(controller: nController)
-            
         case .uploadFromApp:
-            guard !checkReadOnlyPermission() else {
-                return
-            }
             let parentFolder = router.getParentUUID()
             
             let controller: UIViewController
@@ -578,9 +547,6 @@ extension TabBarViewController: TabBarActionHandler {
             router.presentViewController(controller: navigationController)
             
         case .uploadFromAppFavorites:
-            guard !checkReadOnlyPermission() else {
-                return
-            }
             let parentFolder = router.getParentUUID()
             
             let controller: UIViewController
@@ -593,19 +559,6 @@ extension TabBarViewController: TabBarActionHandler {
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
-        case .importFromSpotify:
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
-            spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }
-    }
-    
-    private func checkReadOnlyPermission() -> Bool {
-        if let currentVC = currentViewController as? AlbumDetailViewController,
-            let readOnly = currentVC.album?.readOnly, readOnly {
-            UIApplication.showErrorAlert(message: TextConstants.uploadVideoToReadOnlyAlbumError)
-            return true
-        }
-        return false
     }
 }

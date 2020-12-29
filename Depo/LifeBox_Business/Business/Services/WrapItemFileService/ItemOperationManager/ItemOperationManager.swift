@@ -23,8 +23,6 @@ protocol ItemOperationManagerViewProtocol: class {
     ///cancelled by user
     func cancelledUpload(file: WrapData)
     
-    func failedAutoSync()
-    
     func setProgressForDownloadingFile(file: WrapData, progress: Float)
     
     func finishedDownloadFile(file: WrapData)
@@ -37,25 +35,9 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func deleteItems(items: [Item])
     
-    func deleteStories(items: [Item])
-    
     func newFolderCreated()
     
-    func newAlbumCreated()
-    
-    func newStoryCreated()
-    
-    func updatedAlbumCoverPhoto(item: BaseDataSourceItem)
-    
-    func albumsDeleted(albums: [AlbumItem])
-    
-    func fileAddedToAlbum(item: WrapData, error: Bool)
-    
-    func filesAddedToAlbum(isAutoSyncOperation: Bool)
-    
     func filesUpload(count: Int, toFolder folderUUID: String)
-    
-    func filesRomovedFromAlbum(items: [Item], albumUUID: String)
     
     func filesMoved(items: [Item], toFolder folderUUID: String)
     
@@ -67,30 +49,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func finishUploadFiles()
     
-    func didHideItems(_ items: [WrapData])
-    func didHideAlbums(_ albums: [AlbumItem])
-    func didHidePeople(items: [PeopleItem])
-    func didHidePlaces(items: [PlacesItem])
-    func didHideThings(items: [ThingsItem])
-    
-    func didUnhideItems(_ items: [WrapData])
-    func didUnhideAlbums(_ albums: [AlbumItem])
-    func didUnhidePeople(items: [PeopleItem])
-    func didUnhidePlaces(items: [PlacesItem])
-    func didUnhideThings(items: [ThingsItem])
-    
     func didMoveToTrashItems(_ items: [Item])
-    func didMoveToTrashAlbums(_ albums: [AlbumItem])
-    func didMoveToTrashPeople(items: [PeopleItem])
-    func didMoveToTrashPlaces(items: [PlacesItem])
-    func didMoveToTrashThings(items: [ThingsItem])
-    
     func putBackFromTrashItems(_ items: [Item])
-    func putBackFromTrashAlbums(_ albums: [AlbumItem])
-    func putBackFromTrashPeople(items: [PeopleItem])
-    func putBackFromTrashPlaces(items: [PlacesItem])
-    func putBackFromTrashThings(items: [ThingsItem])
-    
     func didEmptyTrashBin()
     
     func didShare(items: [BaseDataSourceItem])
@@ -119,8 +79,6 @@ extension ItemOperationManagerViewProtocol {
         UIApplication.setIdleTimerDisabled(true)
     }
     
-    func failedAutoSync() {}
-    
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
     
     func finishedDownloadFile(file: WrapData) {}
@@ -133,25 +91,9 @@ extension ItemOperationManagerViewProtocol {
     
     func deleteItems(items: [Item]) {}
     
-    func deleteStories(items: [Item]) {}
-    
     func newFolderCreated() {}
     
-    func newAlbumCreated() {}
-    
-    func newStoryCreated() {}
-    
-    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {}
-    
-    func albumsDeleted(albums: [AlbumItem]) {}
-    
-    func fileAddedToAlbum(item: WrapData, error: Bool) {}
-    
-    func filesAddedToAlbum(isAutoSyncOperation: Bool) {}
-    
     func filesUpload(count: Int, toFolder folderUUID: String) {}
-    
-    func filesRomovedFromAlbum(items: [Item], albumUUID: String) {}
     
     func filesMoved(items: [Item], toFolder folderUUID: String) {}
     
@@ -165,30 +107,8 @@ extension ItemOperationManagerViewProtocol {
         UIApplication.setIdleTimerDisabled(false)
     }
     
-    func didHideItems(_ items: [WrapData]) {}
-    func didHideAlbums(_ albums: [AlbumItem]) {}
-    func didHidePeople(items: [PeopleItem]) {}
-    func didHidePlaces(items: [PlacesItem]) {}
-    func didHideThings(items: [ThingsItem]) {}
-    
-    func didUnhideItems(_ items: [WrapData]) {}
-    func didUnhideAlbums(_ albums: [AlbumItem]) {}
-    func didUnhidePeople(items: [PeopleItem]) {}
-    func didUnhidePlaces(items: [PlacesItem]) {}
-    func didUnhideThings(items: [ThingsItem]) {}
-    
     func didMoveToTrashItems(_ items: [Item]) {}
-    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {}
-    func didMoveToTrashPeople(items: [PeopleItem]) {}
-    func didMoveToTrashPlaces(items: [PlacesItem]) {}
-    func didMoveToTrashThings(items: [ThingsItem]) {}
-    
     func putBackFromTrashItems(_ items: [Item]) {}
-    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {}
-    func putBackFromTrashPeople(items: [PeopleItem]) {}
-    func putBackFromTrashPlaces(items: [PlacesItem]) {}
-    func putBackFromTrashThings(items: [ThingsItem]) {}
-    
     func didEmptyTrashBin() {}
     
     func didShare(items: [BaseDataSourceItem]) {}
@@ -277,10 +197,6 @@ class ItemOperationManager: NSObject {
         currentUploadingObject = nil
         currentUploadProgress = 0
     }
-    
-    func failedAutoSync() {
-        views.invoke { $0.failedAutoSync() }
-    }
 
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {
         DispatchQueue.main.async {
@@ -322,16 +238,6 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func deleteStories(items: [Item]) {
-        if items.isEmpty {
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.views.invoke { $0.deleteStories(items: items) }
-        }
-    }
-    
     func addedLocalFiles(items: [Item]) {
         if items.count == 0 {
             return
@@ -348,45 +254,9 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func newAlbumCreated() {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.newAlbumCreated() }
-        }
-    }
-    
-    func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.updatedAlbumCoverPhoto(item: item) }
-        }
-    }
-    
-    func albumsDeleted(albums: [AlbumItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.albumsDeleted(albums: albums) }
-        }
-    }
-    
-    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.filesAddedToAlbum(isAutoSyncOperation: isAutoSyncOperation) }
-        }
-    }
-    
-    func fileAddedToAlbum(item: WrapData, error: Bool = false) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.fileAddedToAlbum(item: item, error: error) }
-        }
-    }
-    
     func filesUpload(count: Int, toFolder folderUUID: String) {
         DispatchQueue.main.async {
             self.views.invoke { $0.filesUpload(count: count, toFolder: folderUUID) }
-        }
-    }
-    
-    func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.filesRomovedFromAlbum(items: items, albumUUID: albumUUID) }
         }
     }
     
@@ -408,76 +278,10 @@ class ItemOperationManager: NSObject {
         views.invoke { $0.syncFinished() }
 //        }
     }
-    
-    func newStoryCreated() {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.newStoryCreated() }
-        }
-    }
-    
+
     func finishUploadFiles() {
         DispatchQueue.main.async {
             self.views.invoke { $0.finishUploadFiles() }
-        }
-    }
-
-    func didHideItems(_ items: [WrapData]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didHideItems(items) }
-        }
-    }
-    
-    func didHideAlbums(_ albums: [AlbumItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didHideAlbums(albums) }
-        }
-    }
-    
-    func didHidePeople(items: [PeopleItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didHidePeople(items: items) }
-        }
-    }
-    
-    func didHidePlaces(items: [PlacesItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didHidePlaces(items: items) }
-        }
-    }
-    
-    func didHideThings(items: [ThingsItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didHideThings(items: items) }
-        }
-    }
-       
-    func didUnhideItems(_ items: [WrapData]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didUnhideItems(items) }
-        }
-    }
-    
-    func didUnhideAlbums(_ albums: [AlbumItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didUnhideAlbums(albums) }
-        }
-    }
-    
-    func didUnhidePeople(items: [PeopleItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didUnhidePeople(items: items) }
-        }
-    }
-    
-    func didUnhidePlaces(items: [PlacesItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didUnhidePlaces(items: items) }
-        }
-    }
-    
-    func didUnhideThings(items: [ThingsItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didUnhideThings(items: items) }
         }
     }
        
@@ -486,58 +290,10 @@ class ItemOperationManager: NSObject {
             self.views.invoke { $0.didMoveToTrashItems(items) }
         }
     }
-    
-    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didMoveToTrashAlbums(albums) }
-        }
-    }
-    
-    func didMoveToTrashPeople(items: [PeopleItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didMoveToTrashPeople(items: items) }
-        }
-    }
-    
-    func didMoveToTrashPlaces(items: [PlacesItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didMoveToTrashPlaces(items: items) }
-        }
-    }
-    
-    func didMoveToTrashThings(items: [ThingsItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.didMoveToTrashThings(items: items) }
-        }
-    }
-       
+            
     func putBackFromTrashItems(_ items: [Item]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.putBackFromTrashItems(items) }
-        }
-    }
-    
-    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.putBackFromTrashAlbums(albums) }
-        }
-    }
-    
-    func putBackFromTrashPeople(items: [PeopleItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.putBackFromTrashPeople(items: items) }
-        }
-    }
-    
-    func putBackFromTrashPlaces(items: [PlacesItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.putBackFromTrashPlaces(items: items) }
-        }
-    }
-    
-    func putBackFromTrashThings(items: [ThingsItem]) {
-        DispatchQueue.main.async {
-            self.views.invoke { $0.putBackFromTrashThings(items: items) }
         }
     }
     

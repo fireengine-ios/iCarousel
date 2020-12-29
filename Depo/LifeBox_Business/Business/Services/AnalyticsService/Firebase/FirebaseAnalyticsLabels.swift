@@ -575,12 +575,8 @@ enum GAEventLabel {
             return contantEvent.text
         case .plusAction(let action):
             switch action {
-            case .createAlbum:
-                return "Create Album"
             case .createFolder:
                 return "New Folder"
-            case .createStory:
-                return "Create Story"
             case .upload:
                 return "Upload"
             case .uploadFiles:
@@ -593,8 +589,6 @@ enum GAEventLabel {
                 return "Upload from \(TextConstants.NotLocalized.appName)"
             case .uploadFromAppFavorites:
                 return "Upload from \(TextConstants.NotLocalized.appName) Favorites"
-            case .importFromSpotify:
-                return "Import From Spotify"
             }
         case .shareViaLink:
             return "Share via Link"
@@ -683,26 +677,6 @@ enum GAEventLabel {
         case .privateShare(let event):
             return event.text
         }
-    }
-    
-    static func getAutoSyncSettingEvent(autoSyncSettings: AutoSyncSetting) -> GAEventLabel {
-        switch autoSyncSettings {
-        case AutoSyncSetting(syncItemType: .photo, option: .never):
-            return .photosNever
-        case AutoSyncSetting(syncItemType: .photo, option: .wifiAndCellular):
-            return .photosWifiLTE
-        case AutoSyncSetting(syncItemType: .photo, option: .wifiOnly):
-            return .photosWifi
-        case AutoSyncSetting(syncItemType: .video, option: .never):
-            return .videosNever
-        case AutoSyncSetting(syncItemType: .video, option: .wifiAndCellular):
-            return .videosWifiLTE
-        case AutoSyncSetting(syncItemType: .video, option: .wifiOnly):
-            return .videosWifi
-        default:
-            return .empty
-        }
-        
     }
     
 }

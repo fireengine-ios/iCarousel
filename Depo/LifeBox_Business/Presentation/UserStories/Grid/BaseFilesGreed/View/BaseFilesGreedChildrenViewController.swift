@@ -39,7 +39,7 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         underNavBarBar?.setSorting(enabled: false)
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = cancelSelectionButton
-        if status.isContained(in: [.hidden, .trashed]) {
+        if status.isContained(in: [.trashed]) {
             navigationItem.rightBarButtonItem = nil
         }
         navigationBarWithGradientStyle()

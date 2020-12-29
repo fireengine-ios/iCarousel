@@ -171,10 +171,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     }
     
     @IBAction private func onExpandQuotaTap(_ sender: UIButton) {
-        close {
-            let router = RouterVC()
-            router.pushViewController(viewController: router.packages)
-        }
+        close { }
         analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: popUpType.eventAction, eventLabel:  .overQuota(.expandMyStorage()))
     }
     

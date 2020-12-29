@@ -28,13 +28,5 @@ protocol PhotoVideoDetailInteractorOutput: class {
     
     func didValidateNameSuccess(name: String)
     
-    func updatePeople(items: [PeopleOnPhotoItemResponse])
-    
-    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
-    
-    func didFailedLoadAlbum(error: Error)
-    
-    func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool)
-    
     func updateItem(_ item: WrapData)
 }

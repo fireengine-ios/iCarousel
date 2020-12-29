@@ -43,7 +43,6 @@ final class ExternalFileUploadService: NSObject {
     func showViewController(router: RouterVC, externalFileType: ExternalFileType) {
         
         isFavorites = router.isOnFavoritesView()
-        isFromAlbum = router.isRootViewControllerAlbumDetail()
         
         if let sharedFolderInfo = router.sharedFolderItem {
             folderUUID = sharedFolderInfo.uuid

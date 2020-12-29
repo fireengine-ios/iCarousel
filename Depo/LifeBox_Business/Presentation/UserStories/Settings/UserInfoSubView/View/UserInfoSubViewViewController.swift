@@ -12,7 +12,6 @@ import SDWebImage
 protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func changePhotoPressed(quotaInfo: QuotaInfoResponse?)
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
-    func premiumButtonPressed()
 }
 
 final class UserInfoSubViewViewController: ViewController, NibInit {
@@ -41,21 +40,11 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
         willSet {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 15)
             newValue.textColor = .black
-            if output.isPremiumUser {
-                newValue.text = TextConstants.premiumUser
-            } else if output.isMiddleUser {
+            if output.isMiddleUser {
                 newValue.text = TextConstants.midUser
             } else {
                 newValue.text = TextConstants.standardUser
             }
-        }
-    }
-    
-    @IBOutlet private weak var premiumButton: GradientPremiumButton! {
-        willSet {
-            newValue.setTitle(TextConstants.becomePremium, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 15)
-            newValue.isHidden = output.isPremiumUser
         }
     }
     
@@ -162,10 +151,6 @@ extension UserInfoSubViewViewController {
     
     @IBAction private func onUpdateUserPhoto() {
         actionsDelegate?.changePhotoPressed(quotaInfo: output.quotaInfo)
-    }
-    
-    @IBAction private func onBecomePremiumTap(_ sender: Any) {
-        actionsDelegate?.premiumButtonPressed()
     }
     
 }

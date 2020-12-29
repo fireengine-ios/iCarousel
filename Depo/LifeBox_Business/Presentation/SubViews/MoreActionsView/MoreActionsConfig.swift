@@ -247,9 +247,6 @@ class MoreActionsConfig {
             case .All:
                 return .unknown
                 
-            case .Album:
-                return .photoAlbum
-                
             default:
                 return .unknown
             }

@@ -92,10 +92,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         interactor.searchItems(by: searchText, item: item, sortBy: sortBy, sortOrder: sortOrder)
     }
     
-    func getSuggestion(text: String) {
-        interactor.getSuggetion(text: text)
-    }
-    
     func successWithSuggestList(list: [SuggestionObject]) {
         view.successWithSuggestList(list: list)
     }
@@ -105,15 +101,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func failedSearch() {
-        hideSpinner()
-    }
-    
-    func getAlbum(albumItem: AlbumItem, forItem item: Item) {
-        hideSpinner()
-        router.openFaceImageItemPhotos(item: item, album: albumItem)
-    }
-    
-    func failedGetAlbum() {
         hideSpinner()
     }
     
@@ -191,11 +178,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     }
     
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
-        if item.fileType.isFaceImageType {
-            openFaceImage(item: item)
-        } else if item.fileType.isFaceImageAlbum || item.fileType == .photoAlbum {
-            openAlbum(item: item)
-        } else if item.fileType.isSupportedOpenType {
+        if item.fileType.isSupportedOpenType {
             let sameTypeFiles = getSameTypeItems(item: item, items: data)
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles)
             moduleOutput?.previewSearchResultsHide()
@@ -290,21 +273,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         view.onSetSelection(state: state)
     }
     
-    private func createStory() {
-        let items: [BaseDataSourceItem]
-        if dataSource.isInSelectionMode() {
-            items = dataSource.selectedItemsArray.flatMap { $0 }.filter { $0.fileType == .image }
-        } else {
-            items = dataSource.allItems.flatMap { $0 }.filter { $0.fileType == .image }
-        }
-        
-        if items.isEmpty {
-            router.showNoFilesToCreateStoryAlert()
-        } else {
-            router.createStoryWithItems(items)
-        }
-    }
-    
     func moreActionsPressed(sender: Any) {
 
         let selectionMode = dataSource.isInSelectionMode()
@@ -319,21 +287,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
-            if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image }) {
-                let index = actionTypes.index(where: { return $0 == .createStory })!
-                actionTypes.remove(at: index)
-            }
-            
             if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
                 actionTypes.remove(at: renameIndex)
             }
             
             if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: printIndex)
-            }
-            
-            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: { $0.fileType == .image }) {
-                actionTypes.remove(at: editIndex)
             }
             
             alertSheetModule?.showAlertSheet(with: actionTypes,
@@ -350,31 +309,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                                              presentedBy: sender,
                                              onSourceView: nil)
         }
-    }
-    
-    func openFaceImageItems(category: SearchCategory) {
-        router.openFaceImageItems(category: category)
-    }
-    
-    func openFaceImage(item: SuggestionObject) {
-        showSpinner()
-        interactor.openFaceImageForSuggest(item: item)
-    }
-    
-    func openFaceImage(item: BaseDataSourceItem) {
-        showSpinner()
-        interactor.openFaceImageForSearch(item: item)
-    }
-    
-    func openAlbum(item: BaseDataSourceItem) {
-        let album = AlbumItem(uuid: item.uuid,
-                              name: item.name,
-                              creationDate: item.creationDate,
-                              lastModifiDate: item.lastModifiDate,
-                              fileType: item.fileType,
-                              syncStatus: item.syncStatus,
-                              isLocalItem: item.isLocalItem)
-        router.openAlbum(item: album)
     }
     
     func didSelectAction(type: ActionType, on item: Item?, sender: Any?) {
@@ -496,15 +430,9 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
 extension SearchViewPresenter: TabBarActionHandler {
     
     func canHandleTabBarAction(_ action: TabBarViewController.Action) -> Bool {
-        return action == .createStory
+        return false
     }
     
     func handleAction(_ action: TabBarViewController.Action) {
-        switch action {
-        case .createStory:
-            createStory()
-        default:
-            break
-        }
     }
 }
