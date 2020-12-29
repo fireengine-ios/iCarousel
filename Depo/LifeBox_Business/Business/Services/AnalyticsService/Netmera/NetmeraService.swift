@@ -34,13 +34,6 @@ final class NetmeraService {
             }
             
             group.enter()
-            var activeSubscriptionNames = [String]()
-            prepareActiveSubscriptionNames { subscriptions in
-                activeSubscriptionNames = subscriptions
-                group.leave()
-            }
-            
-            group.enter()
             var autoLogin = ""
             var turkcellPassword = ""
             prepareTurkcellLoginScurityFields { preparedAutoLogin, preparedTurkcellPassword in
@@ -90,7 +83,6 @@ final class NetmeraService {
                                              accountType: accountType,
                                              twoFactorAuthentication: twoFactorNetmeraStatus,
                                              emailVerification: verifiedEmailStatus,
-                                             packages: activeSubscriptionNames,
                                              autoLogin: autoLogin,
                                              turkcellPassword: turkcellPassword,
                                              buildNumber: buildNumber,
@@ -179,7 +171,7 @@ extension NetmeraService {
     //TODO: this method shall be removed, because in the improvment we should call user after we logged in.
     private static func logEmptyUser() {
         let user = NetmeraCustomUser(deviceStorage: 0, lifeboxStorage: 0, accountType: "Null",
-                                     twoFactorAuthentication: "Null", emailVerification: "Null", packages: ["Null"],
+                                     twoFactorAuthentication: "Null", emailVerification: "Null",
                                      autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", regionCode: "Null", isUserName: 0,
                                      isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0, galleryAccessPermission: "Null")
         user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
@@ -204,18 +196,6 @@ extension NetmeraService {
                 preparedAccountInfo(info)
         }, fail: { errorResponse in
             preparedAccountInfo(nil)
-        })
-    }
-    
-    private static func prepareActiveSubscriptionNames(preparedUserField: @escaping ([String])->Void) {
-        var activeSubscriptionNames = [String]()
-        SingletonStorage.shared.getActiveSubscriptionsList(success: { response in
-            activeSubscriptionNames = SingletonStorage.shared.activeUserSubscriptionList.map {
-                return ($0.subscriptionPlanName ?? "") + "|"
-            }
-            preparedUserField(activeSubscriptionNames)
-        }, fail: { errorResponse in
-            preparedUserField(activeSubscriptionNames)
         })
     }
     

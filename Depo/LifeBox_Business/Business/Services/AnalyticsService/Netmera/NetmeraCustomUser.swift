@@ -17,7 +17,6 @@ final class NetmeraCustomUser: NetmeraUser {
     @objc var autosync = ""
     @objc var emailVerification = ""
     @objc var autosyncPhotos = ""
-    @objc var packages = [String]()
     @objc var autoLogin = ""
     @objc var turkcellPassword = ""
     @objc var buildNumber = ""
@@ -33,8 +32,7 @@ final class NetmeraCustomUser: NetmeraUser {
     
     
     convenience init(deviceStorage: Int, lifeboxStorage: Int, accountType: String, twoFactorAuthentication: NetmeraEventValues.OnOffSettings,
-                     emailVerification: NetmeraEventValues.OnOffSettings,
-                     packages: [String], autoLogin: NetmeraEventValues.OnOffSettings,
+                     emailVerification: NetmeraEventValues.OnOffSettings, autoLogin: NetmeraEventValues.OnOffSettings,
                      turkcellPassword: NetmeraEventValues.OnOffSettings, buildNumber: String, countryCode: String, regionCode: String,
                      isUserName: Int, isUserSurname: Int, isEmail: Int, isPhoneNumber: Int, isAddress: Int,
                      isBirthDay: Int, galleryAccessPermission: String) {
@@ -44,7 +42,6 @@ final class NetmeraCustomUser: NetmeraUser {
         self.accountType = accountType
         self.twoFactorAuthentication = twoFactorAuthentication.text
         self.emailVerification = emailVerification.text
-        self.packages = packages
         self.autoLogin = autoLogin.text
         self.turkcellPassword = turkcellPassword.text
         self.buildNumber = buildNumber
@@ -61,8 +58,7 @@ final class NetmeraCustomUser: NetmeraUser {
     
     convenience init(deviceStorage: Int, lifeboxStorage: Int,
                      accountType: String, twoFactorAuthentication: String,
-                     emailVerification: String,
-                     packages: [String], autoLogin: String,
+                     emailVerification: String, autoLogin: String,
                      turkcellPassword: String, buildNumber: String,
                      countryCode: String, regionCode: String,
                      isUserName: Int, isUserSurname: Int,
@@ -75,7 +71,6 @@ final class NetmeraCustomUser: NetmeraUser {
         self.accountType = accountType
         self.twoFactorAuthentication = twoFactorAuthentication
         self.emailVerification = emailVerification
-        self.packages = packages
         self.autoLogin = autoLogin
         self.turkcellPassword = turkcellPassword
         self.buildNumber = buildNumber
@@ -98,7 +93,6 @@ final class NetmeraCustomUser: NetmeraUser {
             "pdb" : #keyPath(twoFactorAuthentication),
             "pcd" : #keyPath(autosync),
             "pde" : #keyPath(emailVerification),
-            "pdd" : #keyPath(packages),
             "pdg" : #keyPath(autoLogin),
             "pdf" : #keyPath(turkcellPassword),
             "pdi" : #keyPath(countryCode),

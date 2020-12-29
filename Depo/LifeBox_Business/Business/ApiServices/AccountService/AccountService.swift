@@ -14,9 +14,6 @@ protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
-    func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
-    func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
-    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
 }
@@ -72,57 +69,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     
                     let permissions = PermissionsResponse(json: data, headerResponse: nil)
                     handler(.success(permissions))
-                case .failure(let error):
-                    handler(.failed(error))
-                }
-        }
-    }
-    
-    func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
-        debugLog("AccountService featurePacks")
-        
-        sessionManager
-            .request(RouteRequests.Account.Permissions.featurePacks)
-            .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let offersArray = PackageModelResponse.array(from: data)
-                    handler(.success(offersArray))
-                case .failure(let error):
-                    handler(.failed(error))
-                }
-        }
-    }
-    
-    func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
-        debugLog("AccountService featurePacks v2")
-        
-        sessionManager
-            .request(RouteRequests.Account.Permissions.featurePacksV2)
-            .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let offersArray = PackageModelResponse.array(from: data)
-                    handler(.success(offersArray))
-                case .failure(let error):
-                    handler(.failed(error))
-                }
-        }
-    }
-
-    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
-        debugLog("AccountService featurePacks")
-
-        sessionManager
-            .request(RouteRequests.Account.Permissions.availableOffers)
-            .customValidate()
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let offersArray = PackageModelResponse.array(from: data)
-                    handler(.success(offersArray))
                 case .failure(let error):
                     handler(.failed(error))
                 }

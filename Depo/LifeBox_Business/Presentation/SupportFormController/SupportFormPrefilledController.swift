@@ -221,7 +221,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         
         if problems.isEmpty {
             
-            getUserInfo { quota, quotaUsed, packages, feedbackEmail in
+            getUserInfo { quota, quotaUsed, feedbackEmail in
                 let versionString = SettingsBundleHelper.appVersion()
                 #if LIFEDRIVE
                     let emailBody = TextConstants.supportFormBilloTopText + "\n\n" + problem + "\n\n" +
@@ -246,7 +246,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
                                UIDevice.current.systemVersion,
                                Device.locale,
                                ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
-                               packages,
+                               "",
                                quota,
                                quotaUsed,
                                name,
@@ -348,11 +348,10 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         scrollView.scrollRectToVisible(rect, animated: true)
     }
     
-    private func getUserInfo(_ handler: @escaping (_ quota: Int64, _ quotaUsed: Int64, _ packages: String, _ feedbackEmail: String) -> Void) {
+    private func getUserInfo(_ handler: @escaping (_ quota: Int64, _ quotaUsed: Int64, _ feedbackEmail: String) -> Void) {
         
         var quota: Int64 = 0
         var quotaUsed: Int64 = 0
-        var packages = ""
         var feedbackEmail = TextConstants.NotLocalized.feedbackEmail
         
         let group = DispatchGroup()
@@ -383,23 +382,8 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             }
         }
         
-        group.enter()
-        SubscriptionsServiceIml().activeSubscriptions(success: { response in
-            if let subscriptionsResponse = response as? ActiveSubscriptionResponse {
-                packages = subscriptionsResponse.list
-                    .compactMap { $0.subscriptionPlanDisplayName }
-                    .joined(separator: ", ")
-            } else {
-                assertionFailure()
-            }
-            
-            group.leave()
-        }, fail: { error in
-            group.leave()
-        })
-        
         group.notify(queue: .main) {
-            handler(quota, quotaUsed, packages, feedbackEmail)
+            handler(quota, quotaUsed, feedbackEmail)
         }
     }
 }

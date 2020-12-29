@@ -114,39 +114,10 @@ struct NumericConstants {
     static let speedForAnimation: Float = 1.7
     static let durationAnimationForPremiumButton: Double = 0.5
 
-    static let timeIntervalForPremiumFeaturesView: TimeInterval = 2
-    static let imageViewSizeForPremiumFeaturesView: CGFloat = 46
-    static let transitionDurationForPremiumFeaturesView: TimeInterval = 1
-
     static let alphaForColorsPremiumButton: CGFloat = 0.85
-
-    static let packageViewCornerRadius: CGFloat = 5
-    static let packageViewShadowOpacity: Float = 1
-    static let packageViewMainShadowRadius: CGFloat = 3
-    static let packageViewBottomViewShadowRadius: CGFloat = 2
-    static let iPadPackageSumInset: CGFloat = 24
-    static let packageSumInset: CGFloat = 15
-    static let heightForPackageCell: CGFloat = 255
     
     static let premiumViewHeight: CGFloat = 508
     static let plusPremiumViewHeightForTurkcell: CGFloat = 30
-    
-    static let instaPickSelectionSegmentedTransparentGradientViewHeight: CGFloat = 130
-    static let instaPickHashtagCellHeight: CGFloat = 35
-    static let instaPickHashtagCellWidthConstant: CGFloat = 45
-    
-    static let instaPickHashtagCellCornerRadius: CGFloat = 12
-    static let instaPickHashtagCellBorderWidth: CGFloat = 0.2
-    static let instaPickHashtagCellShadowRadius: CGFloat = 5
-    
-    static let instaPickHashtagCellShadowColorAlpha: CGFloat = 0.11
-    static let instaPickHashtagCellBorderColorAlpha: CGFloat = 0.15
-    
-    static let instaPickDetailsPopUpCornerRadius: CGFloat = 2
-    
-    static let instaPickImageViewTransitionDuration: TimeInterval = 0.25
-    
-    static let instapickTimeoutForAnalyzePhotos: TimeInterval = 5
     
     static let usageInfoCardCornerRadius: CGFloat = 12
     static let usageInfoCardShadowRadius: CGFloat = 8
@@ -164,19 +135,11 @@ struct NumericConstants {
     static let profileStackViewShowSubtitleSpacing: CGFloat = 2
     static let firstResponderBottomOffset: CGFloat = 50
     
-    static let createStoryImagesCountLimit: Int = 20
-    
     static let numberOfSelectedItemsBeforeLimits = 500
-    
-    static let spotifyStatusUpdateTimeInterval = 1.0
     
     static let langingPageCount = 4
     
     static let passwordRuleSetVersion = 1
-    
-    static let contactSyncSmallCardCornerRadius: CGFloat = 4.0
-    static let contactSyncSmallCardShadowOpacity: Float = 0.5
-    static let contactSyncSmallCardShadowRadius: CGFloat = 3
 }
 
 struct RequestSizeConstant {
