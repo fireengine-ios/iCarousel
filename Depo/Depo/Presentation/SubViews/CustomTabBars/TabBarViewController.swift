@@ -9,33 +9,12 @@
 import UIKit
 import SDWebImage
 
-enum FloatingButtonsType {
-    case takePhoto
-    case upload
-    case createAStory
-    case newFolder
-    case createAlbum
-    case uploadFromLifebox
-    case uploadFromLifeboxFavorites
-    case importFromSpotify
-    case uploadFiles
-    case uploadDocuments
-    case uploadMusic
-}
-
-enum TabScreenIndex: Int {
-    case homePageScreenIndex = 0
-    case photosScreenIndex = 1
-    case contactsSyncScreenIndex = 3
-    case documentsScreenIndex = 4
-}
-
 enum DocumentsScreenSegmentIndex: Int {
     case allFiles = 0
-    case documents = 1
-    case music = 2
-    case favorites = 3
-    case trashBin = 4
+    case documents = 2
+    case music = 3
+    case favorites = 4
+    case trashBin = 5
 }
 
 final class TabBarViewController: ViewController, UITabBarDelegate {
@@ -58,35 +37,14 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var musicBar: MusicBar!
     
-    static let notificationHidePlusTabBar = "HideMainTabBarPlusNotification"
-    static let notificationShowPlusTabBar = "ShowMainTabBarPlusNotification"
-    static let notificationHideTabBar = "HideMainTabBarNotification"
-    static let notificationShowTabBar = "ShowMainTabBarNotification"
-    static let notificationMusicDrop = "MusicDrop"
-    static let notificationPhotosScreen = "PhotosScreenOn"
-    static let notificationVideoScreen = "VideoScreenOn"
-    static let notificationUpdateThreeDots = "UpdateThreeDots"
-    
-    fileprivate var photoBtn: SubPlussButtonView!
-    fileprivate var importFromSpotifyBtn: SubPlussButtonView!
-    fileprivate var uploadBtn: SubPlussButtonView!
-    fileprivate var uploadFilesBtn: SubPlussButtonView!
-    fileprivate var uploadDocumentsBtn: SubPlussButtonView!
-    fileprivate var uploadMusicBtn: SubPlussButtonView!
-    fileprivate var storyBtn: SubPlussButtonView!
-    fileprivate var folderBtn: SubPlussButtonView!
-    fileprivate var albumBtn: SubPlussButtonView!
-    fileprivate var uploadFromLifebox: SubPlussButtonView!
-    fileprivate var uploadFromLifeboxFavorites: SubPlussButtonView!
-    fileprivate var importFromSpotify: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
     private lazy var externalFileUploadService = ExternalFileUploadService()
+    private lazy var cameraService = CameraService()
+    private lazy var player: MediaPlayer = factory.resolve()
+    private lazy var router = RouterVC()
     
-    
-    //    let musicBar = MusicBar.initFromXib()
-    lazy var player: MediaPlayer = factory.resolve()
-    let cameraService: CameraService = CameraService()
+    private var plusMenuItems = [PlusMenuItemView]()
     
     let musicBarH : CGFloat = 70
     
@@ -113,7 +71,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return nil
     }
     
-    var lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+    var lastPhotoVideoIndex = TabScreenIndex.gallery.rawValue
     
     
     var selectedIndex: NSInteger = 0 {
@@ -144,17 +102,24 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return result
     }
     
+    override var childViewControllerForStatusBarStyle: UIViewController? {
+        return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
+    }
+    
+    override var childViewControllerForStatusBarHidden: UIViewController? {
+        return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
+    }
+    
     //MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tabBar.delegate = self
-        
-        setupTabBarItems()
+        tabBar.setupItems()
         
         setupCurtainView()
-        setupSubButtons()
+        mainContentView.bringSubview(toFront: plussButton)
         setupCustomNavControllers()
         
         selectedIndex = 0
@@ -172,14 +137,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         #endif
     }
     
-    override var childViewControllerForStatusBarStyle: UIViewController? {
-        return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
-    }
-    
-    override var childViewControllerForStatusBarHidden: UIViewController? {
-        return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
-    }
-    
     deinit {
         NotificationCenter.default.removeObserver(self)
         player.delegates.remove(self)
@@ -190,43 +147,19 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     private func setupObserving() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.hidePlusTabBar(_:)),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationHidePlusTabBar),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.showPlusTabBar(_:)),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar),
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.hideTabBar(_:)),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.showTabBar(_:)),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar),
-                                               object: nil)
-        
-        let dropNotificationName = NSNotification.Name(rawValue: TabBarViewController.notificationMusicDrop)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideMusicBar),
-                                               name: dropNotificationName,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showPhotoScreen),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showVideosScreen),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hidePlusTabBar), name: .hidePlusTabBar, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showPlusTabBar), name: .showPlusTabBar, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideTabBar), name: .hideTabBar, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showTabBar), name: .showTabBar, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideMusicBar), name: .musicDrop, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showPhotoScreen), name: .photosScreen, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showVideosScreen), name: .videoScreen, object: nil)
     }
     
     func showAndScrollPhotosScreen(scrollTo item: Item? = nil) {
-        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
-        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
-        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.gallery.rawValue]
+        selectedIndex = TabScreenIndex.gallery.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.gallery.rawValue
         
         if let item = item {
             scrollPhotoPage(scrollTo: item)
@@ -234,9 +167,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     @objc func showPhotoScreen() {
-        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
-        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
-        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.gallery.rawValue]
+        selectedIndex = TabScreenIndex.gallery.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.gallery.rawValue
         openPhotoPage()
     }
     
@@ -307,19 +240,19 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         musicBar.isUserInteractionEnabled = !hidden
     }
     
-    @objc private func showPlusTabBar(_ sender: Any) {
+    @objc private func showPlusTabBar() {
         if (bottomTabBarConstraint.constant >= 0) {
             changeTabBarStatus(hidden: false)
         }
     }
     
-    @objc private func hidePlusTabBar(_ sender: Any) {
+    @objc private func hidePlusTabBar() {
         if (bottomTabBarConstraint.constant == 0) {
             changeTabBarStatus(hidden: true)
         }
     }
     
-    @objc private func showTabBar(_ sender: Any) {
+    @objc private func showTabBar() {
         changeTabBarStatus(hidden: false)
         if self.bottomTabBarConstraint.constant < 0 {
             if !musicBar.isHidden {
@@ -338,7 +271,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
     }
     
-    @objc private func hideTabBar(_ sender: Any) {
+    @objc private func hideTabBar() {
         changeTabBarStatus(hidden: true)
         if bottomTabBarConstraint.constant >= 0 {
             let bottomConstraintConstant = -tabBar.frame.height - view.safeAreaInsets.bottom
@@ -369,7 +302,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     @IBAction func plussBtnAction(_ sender: Any) {
-        guard !getFloatingButtonsArray().isEmpty else {
+        if !plussButton.isSelected {
+            createPlusMenuItems()
+        }
+        
+        guard !plusMenuItems.isEmpty else {
             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePlusButtonNoAction)
             return
         }
@@ -378,18 +315,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     func setupCustomNavControllers() {
-        let router = RouterVC()
-        guard let syncContactsVC = router.syncContacts as? ContactSyncViewController else {
-            assertionFailure()
-            return
-        }
-        syncContactsVC.setTabBar(isVisible: true)
-        
-        let list = [router.homePageScreen,
-                    router.segmentedMedia(),
-                    syncContactsVC,
-                    router.segmentedFiles]
-        customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
+        customNavigationControllers = TabBarConfigurator.generateControllers(router: router)
     }
     
     @objc func gearButtonAction(sender: Any) {
@@ -446,7 +372,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
         
         if !show {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
+            NotificationCenter.default.post(name: .updateThreeDots, object: nil)
         }
         
         curtainView.isHidden = !show
@@ -456,135 +382,22 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         changeViewState(state: false)
     }
     
-    func setupSubButtons() {
-        
-        photoBtn = createSubButton(withText: TextConstants.takePhoto, imageName: "TakeFhoto", asLeft: true)
-        photoBtn?.changeVisability(toHidden: true)
-        
-        uploadBtn = createSubButton(withText: TextConstants.upload, imageName: "Upload", asLeft: true)
-        uploadBtn?.changeVisability(toHidden: true)
-        
-        uploadFilesBtn = createSubButton(withText: TextConstants.uploadFiles, imageName: "Upload", asLeft: true)
-        uploadFilesBtn?.changeVisability(toHidden: true)
-        
-        uploadDocumentsBtn = createSubButton(withText: TextConstants.uploadFiles, imageName: "Upload", asLeft: true)
-        uploadDocumentsBtn?.changeVisability(toHidden: true)
-        
-        uploadMusicBtn = createSubButton(withText: TextConstants.uploadMusic, imageName: "Upload", asLeft: true)
-        uploadMusicBtn?.changeVisability(toHidden: true)
-        
-        storyBtn = createSubButton(withText: TextConstants.createStory, imageName: "CreateAStory", asLeft: false)
-        storyBtn?.changeVisability(toHidden: true)
-        
-        folderBtn = createSubButton(withText: TextConstants.newFolder, imageName: "NewFolder", asLeft: false)
-        folderBtn?.changeVisability(toHidden: true)
-        
-        uploadFromLifebox = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "Upload", asLeft: false)
-        uploadFromLifebox?.changeVisability(toHidden: true)
-        
-        uploadFromLifeboxFavorites = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "Upload", asLeft: false)
-        uploadFromLifeboxFavorites?.changeVisability(toHidden: true)
-        
-        albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
-        albumBtn?.changeVisability(toHidden: true)
-        
-        importFromSpotify = createSubButton(withText: TextConstants.importFromSpotifyBtn, imageName: "ImportFromSpotify", asLeft: true)
-        importFromSpotify.changeVisability(toHidden: true)
-        
-        mainContentView.bringSubview(toFront: plussButton)
-    }
-    
-    func createSubButton(withText text: String, imageName: String, asLeft: Bool) -> SubPlussButtonView? {
-        if let subButton = SubPlussButtonView.getFromNib(asLeft: asLeft, withImageName: imageName, labelText: text) {
-            subButton.actionDelegate = self
-            view.addSubview(subButton)
-            
-            subButton.translatesAutoresizingMaskIntoConstraints = false
-            
-            subButton.bottomConstraint = NSLayoutConstraint(item: subButton, attribute: .bottom, relatedBy: .equal, toItem: mainContentView, attribute: .bottom, multiplier: 1, constant: 0)
-            subButton.bottomConstraintOriginalConstant = -(UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
-            
-            subButton.centerXConstraint = NSLayoutConstraint(item: subButton, attribute: .centerX, relatedBy: .equal, toItem: mainContentView, attribute: .centerX, multiplier: 1, constant: 0)
-            subButton.centerXConstraintOriginalConstant = 0
-            
-            var constraintsArray = [NSLayoutConstraint]()
-            constraintsArray.append(subButton.bottomConstraint!)
-            constraintsArray.append(subButton.centerXConstraint!)
-            constraintsArray.append(NSLayoutConstraint(item: subButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80))
-            constraintsArray.append(NSLayoutConstraint(item: subButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 65))
-            NSLayoutConstraint.activate(constraintsArray)
-            
-            view.layoutIfNeeded()
-            
-            return subButton
+    private func createPlusMenuItems() {
+        let types = router.getFloatingButtonsArray()
+        plusMenuItems = types.map {
+            let itemView = PlusMenuItemView.with(type: $0, delegate: self)
+            itemView.add(to: mainContentView)
+            return itemView
         }
-        
-        return nil
-    }
-    
-    private func getFloatingButtonsArray() -> [SubPlussButtonView] {
-        let array = RouterVC().getFloatingButtonsArray()
-        var buttonsArray = [SubPlussButtonView]()
-        for type in array {
-            switch type {
-            case .createAlbum:
-                buttonsArray.append(albumBtn)
-            case .createAStory:
-                buttonsArray.append(storyBtn)
-            case .newFolder:
-                buttonsArray.append(folderBtn)
-            case .takePhoto:
-                buttonsArray.append(photoBtn)
-            case .upload:
-                buttonsArray.append(uploadBtn)
-            case .uploadFromLifebox:
-                buttonsArray.append(uploadFromLifebox)
-            case .uploadFromLifeboxFavorites:
-                buttonsArray.append(uploadFromLifeboxFavorites)
-            case .importFromSpotify:
-                buttonsArray.append(importFromSpotify)
-            case .uploadFiles:
-                buttonsArray.append(uploadFilesBtn)
-            case .uploadDocuments:
-                buttonsArray.append(uploadDocumentsBtn)
-            case .uploadMusic:
-                buttonsArray.append(uploadMusicBtn)
-            }
-        }
-        
-        if (buttonsArray.count == 0) || (buttonsArray.count > 4) {
-            return [SubPlussButtonView]()
-        }
-        
-        return buttonsArray
-    }
-    
-    private func getAllFloatingButtonsArray() -> [SubPlussButtonView] {
-        var buttonsArray = [SubPlussButtonView]()
-        buttonsArray.append(albumBtn)
-        buttonsArray.append(storyBtn)
-        buttonsArray.append(folderBtn)
-        buttonsArray.append(photoBtn)
-        buttonsArray.append(uploadBtn)
-        buttonsArray.append(uploadFilesBtn)
-        buttonsArray.append(uploadDocumentsBtn)
-        buttonsArray.append(uploadMusicBtn)
-        buttonsArray.append(uploadFromLifebox)
-        buttonsArray.append(uploadFromLifeboxFavorites)
-        buttonsArray.append(importFromSpotify)
-        return buttonsArray
+        view.layoutIfNeeded()
     }
     
     private func showButtonRainbow() {
-        
         let bottomOffset = tabBar.frame.size.height + 7 + (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
         let radius: CGFloat = 100
         
-        let buttonsArray = getFloatingButtonsArray()
-        let count = buttonsArray.count
-        
         let angles: [Double]
-        switch count {
+        switch plusMenuItems.count {
         case 1:
             angles = [90]
         case 2:
@@ -597,32 +410,24 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             angles = []
         }
         
-        buttonsArray.enumerated().forEach { index, button in
+        plusMenuItems.enumerated().forEach { index, button in
             let radians = angles[index] * Double.pi / 180
-            button.centerXConstraint?.constant = radius * CGFloat(cos(radians))
-            button.bottomConstraint?.constant = -(radius * CGFloat(sin(radians)) - button.frame.height * 0.5 + bottomOffset)
+            button.updatePosition(x: radius * CGFloat(cos(radians)),
+                                  bottom: -(radius * CGFloat(sin(radians)) - button.frame.height * 0.5 + bottomOffset))
         }
         
-        changeButtonsAppearance(toHidden: false, withAnimation: true, forButtons: buttonsArray)
-        //view.layoutIfNeeded()
+        changeButtonsAppearance(toHidden: false, withAnimation: true)
     }
     
     private func hideButtonRainbow() {
-        let buttonsArray = getAllFloatingButtonsArray()
-        changeButtonsAppearance(toHidden: true, withAnimation: true, forButtons: buttonsArray)
+        changeButtonsAppearance(toHidden: true, withAnimation: true)
     }
     
-    private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons: [SubPlussButtonView]) {
-        if buttons.count == 0 {
-            return
-        }
-        
-        UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews, animations: {
-            for button in buttons {
-                button.changeVisability(toHidden: hidden)
-            }
+    private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews) {
+            self.plusMenuItems.forEach { $0.changeVisability(toHidden: hidden) }
             self.view.layoutIfNeeded()
-        }, completion: nil)
+        }
     }
     
     func frameForTabAtIndex(index: Int) -> CGRect {
@@ -649,18 +454,18 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
             
-            if tabbarSelectedIndex == TabScreenIndex.photosScreenIndex.rawValue,
-                lastPhotoVideoIndex == TabScreenIndex.photosScreenIndex.rawValue
+            if tabbarSelectedIndex == TabScreenIndex.gallery.rawValue,
+                lastPhotoVideoIndex == TabScreenIndex.gallery.rawValue
             {
                 tabbarSelectedIndex = lastPhotoVideoIndex
-                tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+                tabBar.selectedItem = tabBar.items?[TabScreenIndex.gallery.rawValue]
             } else {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
-            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.homePageScreenIndex.rawValue,
-                                                                TabScreenIndex.contactsSyncScreenIndex.rawValue - 1,
-                                                                TabScreenIndex.documentsScreenIndex.rawValue - 1]
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.home.rawValue,
+                                                                TabScreenIndex.contactsSync.rawValue - 1,
+                                                                TabScreenIndex.documents.rawValue - 1]
             
             if tabbarSelectedIndex > 2 {
                 tabbarSelectedIndex -= 1
@@ -681,38 +486,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
 }
 
-extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func buttonGotPressed(button: SubPlussButtonView) {
+//MARK: - PlusMenuItemViewDelegate
+
+extension TabBarViewController: PlusMenuItemViewDelegate {
+    func selectPlusMenuItem(action: Action) {
         changeViewState(state: false)
-        let action: Action
-        
-        switch button {
-        case photoBtn:
-            action = .takePhoto
-        case folderBtn:
-            action = .createFolder
-        case storyBtn:
-            action = .createStory
-        case uploadBtn:
-            action = .upload
-        case albumBtn:
-            action = .createAlbum
-        case uploadFromLifebox:
-            action = .uploadFromApp
-        case uploadFromLifeboxFavorites:
-            action = .uploadFromAppFavorites
-        case importFromSpotify:
-            action = .importFromSpotify
-        case uploadFilesBtn:
-            action = .uploadFiles
-        case uploadDocumentsBtn:
-            action = .uploadDocuments
-        case uploadMusicBtn:
-            action = .uploadMusic
-        default:
-            return
-        }
         
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
         
@@ -726,6 +504,11 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             handleAction(action)
         }
     }
+}
+
+//MARK: - UIImagePickerControllerDelegate
+
+extension TabBarViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func getFolderUUID() -> String? {
         if let controller = currentViewController as? BaseFilesGreedViewController {

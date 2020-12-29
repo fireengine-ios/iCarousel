@@ -3,7 +3,6 @@ PODS:
     - Adjust/Core (= 4.23.0)
   - Adjust/Core (4.23.0)
   - Alamofire (4.8.2)
-  - CircleProgressBar (0.32)
   - FBSDKCoreKit (7.1.1):
     - FBSDKCoreKit/Basics (= 7.1.1)
     - FBSDKCoreKit/Core (= 7.1.1)
@@ -180,7 +179,6 @@ PODS:
   - SDWebImage (4.4.8):
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
-  - SimpleExif (0.0.1)
   - SQLite.swift (0.11.4):
     - SQLite.swift/standard (= 0.11.4)
   - SQLite.swift/standard (0.11.4)
@@ -190,12 +188,10 @@ PODS:
   - SwiftyJSON (3.1.4)
   - TTGSnackbar (1.10.3)
   - Typist (1.4.2)
-  - UIImage-Categories (1.0.0)
   - XCGLogger (7.0.1):
     - XCGLogger/Core (= 7.0.1)
   - XCGLogger/Core (7.0.1):
     - ObjcExceptionBridging
-  - XYPieChart (0.2)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
   - YYImage/Core (1.0.4)
@@ -203,7 +199,6 @@ PODS:
 DEPENDENCIES:
   - Adjust (~> 4)
   - Alamofire (~> 4.8.1)
-  - CircleProgressBar (~> 0.32)
   - FBSDKCoreKit (~> 7)
   - FBSDKLoginKit (~> 7)
   - FBSDKShareKit (~> 7)
@@ -223,23 +218,19 @@ DEPENDENCIES:
   - Netmera (~> 3)
   - ReachabilitySwift
   - SDWebImage (~> 4)
-  - SimpleExif (from `https://github.com/bonyadmitr/SimpleExif.git`)
   - SQLite.swift (= 0.11.4)
   - SwiftyDropbox (~> 5)
   - SwiftyGif (~> 5)
   - SwiftyJSON (~> 3)
   - TTGSnackbar (~> 1)
   - Typist (~> 1)
-  - UIImage-Categories (~> 1)
   - XCGLogger (~> 7)
-  - XYPieChart (~> 0.2)
   - YYImage (~> 1)
 
 SPEC REPOS:
   trunk:
     - Adjust
     - Alamofire
-    - CircleProgressBar
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
@@ -279,30 +270,22 @@ SPEC REPOS:
     - SwiftyJSON
     - TTGSnackbar
     - Typist
-    - UIImage-Categories
     - XCGLogger
-    - XYPieChart
     - YYImage
 
 EXTERNAL SOURCES:
   Mantis:
     :git: https://github.com/fireengine-ios/Mantis.git
     :tag: FE-1.3.2.5
-  SimpleExif:
-    :git: https://github.com/bonyadmitr/SimpleExif.git
 
 CHECKOUT OPTIONS:
   Mantis:
     :git: https://github.com/fireengine-ios/Mantis.git
     :tag: FE-1.3.2.5
-  SimpleExif:
-    :commit: ce65163d7bb61a3fe866b701f3464698f37208cf
-    :git: https://github.com/bonyadmitr/SimpleExif.git
 
 SPEC CHECKSUMS:
   Adjust: 552e4f9bbc77501b2000f483491b20642081749a
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
-  CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   FBSDKCoreKit: b46507dc8b8cefed31d644e74d7cc30e2a715ef8
   FBSDKLoginKit: 1a61d79e2b25e2fc0d03dccab1e34b38bbdf2546
   FBSDKShareKit: 00a055c1999b099596e00212dd1c0600c6697019
@@ -337,18 +320,15 @@ SPEC CHECKSUMS:
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
-  SimpleExif: c7537d53f8a3854af0235ea41759a58ffc8afa11
   SQLite.swift: 3e3bee21da701b5b9f87c4a672cb54f233505692
   SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TTGSnackbar: 97c033600de8a9c8f4a093f25a08543a03946bcc
   Typist: 06465ab9867782aa6c81e38f073dfc01dab73deb
-  UIImage-Categories: a0593f6a7991c99016b9ecadfbd38b3717ff1a73
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
-  XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 8c1faa16770b97e34139eda4c6503157bb441eff
+PODFILE CHECKSUM: 587ae0d6385541097b0371715f7c05f4a9d1444a
 
 COCOAPODS: 1.9.3

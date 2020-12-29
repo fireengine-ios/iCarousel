@@ -23,7 +23,6 @@ def core_pods
   pod 'Netmera', '~> 3'
 
   pod 'SDWebImage', '~> 4'
-  pod 'YYImage', '~> 1'
   pod 'GoogleConversionTracking', '~> 3'
   pod 'GoogleTagManager', '~> 7'
   pod 'Adjust', '~> 4'
@@ -31,20 +30,13 @@ def core_pods
 
   #Keyboard
   pod 'Typist', '~> 1'
-
-  pod 'SwiftyDropbox', '~> 5'
-
-
-  pod 'SimpleExif', :git => 'https://github.com/bonyadmitr/SimpleExif.git'
-  pod 'XYPieChart', '~> 0.2'
-  pod 'CircleProgressBar', '~> 0.32'
-  pod 'UIImage-Categories', '~> 1'
+  
   pod 'iCarousel', '~> 1'
 
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1'
   pod 'TTGSnackbar', '~> 1'
-  pod 'MaterialComponents/Slider'
+  
   #logger
   pod 'XCGLogger', '~> 7'
 
@@ -54,11 +46,16 @@ def core_pods
   #migration
   pod 'SQLite.swift', '0.11.4'
   
+  pod 'SwiftyGif', '~> 5'
+end
+
+def lifebox_pods
+  core_pods
+  pod 'YYImage', '~> 1'
+  pod 'SwiftyDropbox', '~> 5'
+  pod 'MaterialComponents/Slider'
   pod 'Mantis', :git => 'https://github.com/fireengine-ios/Mantis.git', :tag => 'FE-1.3.2.5'
   pod 'MetalPetal/Swift'
-#  pod 'GPUImage'
-
-  pod 'SwiftyGif', '~> 5'
 end
 
 def sharing_pods
@@ -95,7 +92,7 @@ def widget_pods
 end
 
 target 'Depo_LifeTech' do
-  core_pods
+  lifebox_pods
 end
 
 target 'LifeTech-LifeboxShared' do
@@ -119,11 +116,11 @@ target "LifeTech-NotificationService" do
 end
 
 target 'TC_Depo_LifeTech' do
-  core_pods
+  lifebox_pods
 end
 
 target 'TC_Depo_LifeTech_Bundle' do
-  core_pods
+  lifebox_pods
 end
 
 target 'LifeboxShared' do
@@ -151,7 +148,7 @@ target "LifeboxNotificationService" do
 end
 
 target 'LifeboxUnitTests' do
-  core_pods
+  lifebox_pods
 end
 
 target 'lifeBox_Business' do
@@ -179,11 +176,11 @@ target "lifeBox_Business_NotificationService" do
 end
 
 target 'Billo' do
-  core_pods
+  lifebox_pods
 end
 
 target 'Billo_Bundle' do
-  core_pods
+  lifebox_pods
 end
 
 target 'BilloShared' do
@@ -211,7 +208,7 @@ target 'BilloNotificationService' do
 end
 
 target 'LifeTech_Billo' do
-  core_pods
+  lifebox_pods
 end
 
 target 'LifeTech_BilloShared' do
@@ -269,6 +266,7 @@ post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
             config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
         end
     end
 end

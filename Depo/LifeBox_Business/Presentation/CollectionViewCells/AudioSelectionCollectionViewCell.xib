@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AudioSelectionCollectionViewCell" id="gTV-IL-0wX" customClass="AudioSelectionCollectionViewCell" customModule="Depo_LifeTech" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="306" height="46"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="306" height="46"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3Z-Vf-Nbp">
+                        <rect key="frame" x="15" y="45" width="291" height="1"/>
+                        <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="0.20166703345070422" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="64Z-sk-FOx"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cvm-Tn-YeC">
+                        <rect key="frame" x="55" y="12" width="195" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="plY-5j-AhO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yzv-Kk-qKj">
+                        <rect key="frame" x="0.0" y="0.0" width="47" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="47" id="PDV-bq-kRF"/>
+                        </constraints>
+                        <state key="normal" image="creationStoryPlay"/>
+                        <state key="selected" image="creationStoryPause"/>
+                        <connections>
+                            <action selector="onPlayButton" destination="gTV-IL-0wX" eventType="touchUpInside" id="iii-ox-doU"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OkM-Z1-pyA">
+                        <rect key="frame" x="258" y="14" width="18" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="4LU-JK-PqJ"/>
+                            <constraint firstAttribute="width" constant="18" id="dHf-WA-JWu"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="yzv-Kk-qKj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CY7-h3-Id3"/>
+                <constraint firstItem="Z3Z-Vf-Nbp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="DPW-pS-j0N"/>
+                <constraint firstItem="Cvm-Tn-YeC" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Hl4-Xa-OTw"/>
+                <constraint firstAttribute="bottom" secondItem="yzv-Kk-qKj" secondAttribute="bottom" id="N0b-uE-sOQ"/>
+                <constraint firstItem="OkM-Z1-pyA" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="a6g-YN-5os"/>
+                <constraint firstAttribute="trailing" secondItem="Z3Z-Vf-Nbp" secondAttribute="trailing" id="dso-9a-zTl"/>
+                <constraint firstAttribute="trailing" secondItem="OkM-Z1-pyA" secondAttribute="trailing" constant="30" id="fiw-Ih-d6Y"/>
+                <constraint firstItem="Cvm-Tn-YeC" firstAttribute="leading" secondItem="yzv-Kk-qKj" secondAttribute="trailing" constant="8" id="krh-PU-vUe"/>
+                <constraint firstAttribute="bottom" secondItem="Z3Z-Vf-Nbp" secondAttribute="bottom" id="ovV-Rm-kbu"/>
+                <constraint firstItem="OkM-Z1-pyA" firstAttribute="leading" secondItem="Cvm-Tn-YeC" secondAttribute="trailing" constant="8" id="sf1-R2-6My"/>
+                <constraint firstItem="yzv-Kk-qKj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="sxs-Pf-XYz"/>
+            </constraints>
+            <size key="customSize" width="306" height="64"/>
+            <connections>
+                <outlet property="nameLabel" destination="Cvm-Tn-YeC" id="BpN-CB-ANz"/>
+                <outlet property="playingButton" destination="yzv-Kk-qKj" id="GM3-TL-3zD"/>
+                <outlet property="selectionImage" destination="OkM-Z1-pyA" id="UVw-m1-ehE"/>
+            </connections>
+            <point key="canvasLocation" x="7" y="41"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="creationStoryPause" width="11" height="12"/>
+        <image name="creationStoryPlay" width="11" height="16"/>
+    </resources>
+</document>
