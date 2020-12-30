@@ -29,7 +29,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var fileNameLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
     
-    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var moreButton: ExtendedTapAreaButton!
     
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
