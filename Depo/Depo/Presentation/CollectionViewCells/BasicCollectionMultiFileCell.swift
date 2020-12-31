@@ -29,6 +29,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var fileNameLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
     
+    @IBOutlet weak var moreView: UIView!
     @IBOutlet weak var moreButton: ExtendedTapAreaButton!
     
     @IBOutlet weak var activity: UIActivityIndicatorView!
@@ -211,7 +212,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         smallCellSelectionView.isHidden = true
-        moreButton.isHidden = isSelectionActive
+        moreView.isHidden = isSelectionActive
         smallContentImageView.isHidden = false
         
         if let isFavorite = itemModel?.favorites {
