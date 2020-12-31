@@ -19,7 +19,6 @@ enum PushNotificationAction: String {
     case email = "email"
     case faq = "faq"
     case passcode = "passcode"
-    case loginSettings = "login_settings"
     case http = "http"
     case login = "login"
     case search = "search"

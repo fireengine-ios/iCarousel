@@ -107,7 +107,6 @@ final class PushNotificationService {
         case .email: openEmail()
         case .faq: openFaq()
         case .passcode: openPasscode()
-        case .loginSettings: openLoginSettings()
         case .http: openURL(notificationParameters)
         case .login:
             openLogin()
@@ -276,21 +275,11 @@ final class PushNotificationService {
         let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
         pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
     }
-    
-    private func openLoginSettings() {
-        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
-        let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
-        pushTo(controller)
-    }
       
     private func openSearch() {
         let output = router.getViewControllerForPresent()
         let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
         pushTo(controller)
-    }
-    
-    private func openFreeUpSpace() {
-        pushTo(router.freeAppSpace())
     }
     
     private func openURL(_ path: String?) {
