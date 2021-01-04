@@ -135,9 +135,9 @@ final class NetmeraService {
         #if LIFEBOX
         switch RouteRequests.currentServerEnvironment {
         case .production:
-            return "3PJRHrXDiqakWjtB7quX9jhybzZjSWI4tfk7QNeg9wF6ZWP9p5QxPQ"
+            return "3PJRHrXDiqYtcLEQL75khlt-cZcy-Hmi68v5aHvOY13RrL4993gmXFx3xyEY3IEA"
         case .preProduction, .test:
-            return "3PJRHrXDiqa-pwWScAq1P-7ZjPWA5mWdKHyMpdBrYMFMU4XzrPkaoQ"
+            return "3PJRHrXDiqYtcLEQL75khhE-sJMri_nBxpaFKNoTZt76h75AzELaerJ1y92ip8oN"
         }
         #endif
         
