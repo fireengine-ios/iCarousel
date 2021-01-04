@@ -17,7 +17,7 @@ final class MTIConvert {
     
     init?() {
         let options = MTIContextOptions()
-        options.automaticallyReclaimResources = true
+        options.automaticallyReclaimsResources = true
         
         guard let device = MTLCreateSystemDefaultDevice() else {
             return nil

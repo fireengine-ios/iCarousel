@@ -17,10 +17,10 @@ def core_pods
   pod 'Firebase/Crashlytics', '~> 6'
   pod 'Firebase/Analytics', '~> 6'
   pod 'Firebase/RemoteConfig', '~> 6'
-  pod 'FBSDKCoreKit', '~> 7'
-  pod 'FBSDKLoginKit', '~> 7'
-  pod 'FBSDKShareKit', '~> 7'
-  pod 'Netmera', '~> 3'
+  pod 'FBSDKCoreKit', '~> 8'
+  pod 'FBSDKLoginKit', '~> 8'
+  pod 'FBSDKShareKit', '~> 8'
+  pod 'Netmera', '3.8.4'
 
   pod 'SDWebImage', '~> 4'
   pod 'YYImage', '~> 1'
@@ -32,7 +32,7 @@ def core_pods
   #Keyboard
   pod 'Typist', '~> 1'
 
-  pod 'SwiftyDropbox', '~> 5'
+  pod 'SwiftyDropbox', '~> 6'
 
 
   pod 'SimpleExif', :git => 'https://github.com/bonyadmitr/SimpleExif.git'
