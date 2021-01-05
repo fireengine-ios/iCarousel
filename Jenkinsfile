@@ -36,8 +36,8 @@ apps = [
             versionInfoPath: 'Depo/LifeBox_Business/Signing/Turkcell/TC_LifeBox_Business-Info.plist',
             ictsContainerId: '743', // ICT Store
             prodTeamID: '693N5K66ZJ',
-            xcodeSchema: 'lifeBox_Business_Bundle',
-            xcodeTarget: 'lifeBox_Business_Bundle',
+            xcodeSchema: 'lifeBox_Business',
+            xcodeTarget: 'lifeBox_Business',
             // xcodeSchema: 'lifeBox_Business',
             // xcodeTarget: 'lifeBox_Business',
             itcTeamId: '121548574',
