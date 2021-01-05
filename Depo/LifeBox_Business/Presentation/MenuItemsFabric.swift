@@ -70,9 +70,9 @@ extension ElementTypes {
         case .addToFavorites, .removeFromFavorites:
             imageName = "action_favorite"
         case .download, .downloadDocument:
-            imageName = "downloadTB"
+            imageName = "action_download"
         case .restore:
-            imageName = "RestoreButtonIcon"
+            imageName = "action_restore"
         default:
             return nil
         }
