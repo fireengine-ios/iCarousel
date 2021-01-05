@@ -2,9 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>login_support_from_treshold</key>
+	<key>login_support_form_treshold</key>
 	<integer>1000</integer>
-	<key>signup_support_from_treshold</key>
+	<key>signup_support_form_treshold</key>
 	<integer>1000</integer>
 </dict>
 </plist>

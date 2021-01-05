@@ -39,7 +39,7 @@ class RemoteSearchService: RemoteItemsService {
     
     func allItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, success: @escaping ListRemoteItems, fail:@escaping FailRemoteItems) {
         currentPage = 0
-        requestSize = 90000
+        requestSize = 1000
         nextItems(searchText, sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail)
     }
     

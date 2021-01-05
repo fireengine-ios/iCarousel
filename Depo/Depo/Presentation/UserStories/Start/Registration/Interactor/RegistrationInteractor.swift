@@ -151,7 +151,9 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 }
                 
                 if self.retriesCount >= attempts {
-                    self.output?.showSupportView()
+                    DispatchQueue.main.async {
+                        self.output?.showSupportView()
+                    }
                 }
             }
             #else

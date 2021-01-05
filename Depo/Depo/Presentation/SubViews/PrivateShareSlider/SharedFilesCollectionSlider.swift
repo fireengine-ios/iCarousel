@@ -62,6 +62,7 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.register(nibCell: SharedFilesSliderCell.self)
+        collectionView.register(nibCell: SharedFilesSliderPlusCell.self)
     }
     
     func reloadData() {
