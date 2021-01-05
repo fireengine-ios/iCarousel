@@ -22,7 +22,8 @@ final class ServerMessageError {
     private enum ErrorKeys {
         static let accountNotFoundForEmail = "ACCOUNT_NOT_FOUND_FOR_EMAIL"
         static let privateShareMessageLimit = "Invalid sharing message"
-        static let privateShatePhoneOrMailLimit = "Invalid sharing subject"
+        static let privateSharePhoneOrMailLimit = "Invalid sharing subject"
+        static let privateShareNumberOfItemsLimit = "Max sharing item limit exceeded"
     }
 }
 extension ServerMessageError: LocalizedError {
@@ -36,8 +37,10 @@ extension ServerMessageError: LocalizedError {
             return TextConstants.forgotPasswordErrorNotRegisteredText
         case ErrorKeys.privateShareMessageLimit:
             return TextConstants.privateShareMessageLimit
-        case ErrorKeys.privateShatePhoneOrMailLimit:
+        case ErrorKeys.privateSharePhoneOrMailLimit:
             return TextConstants.privateSharePhoneOrMailLimit
+        case ErrorKeys.privateShareNumberOfItemsLimit:
+            return TextConstants.privateShareNumberOfItemsLimit
         default:
             return message
         }
@@ -55,6 +58,8 @@ extension ServerMessageError {
                 return TextConstants.privateSharePhoneOrMailLimit
             case 4116:
                 return TextConstants.temporaryErrorOccurredTryAgainLater
+            case 4118:
+                return TextConstants.privateShareNumberOfItemsLimit
             default:
                 return errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
             }
