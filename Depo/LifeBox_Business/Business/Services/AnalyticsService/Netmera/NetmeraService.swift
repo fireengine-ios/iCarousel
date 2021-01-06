@@ -51,6 +51,7 @@ final class NetmeraService {
             var phoneNumber: Int = 0
             var address: Int = 0
             var birthday: Int = 0
+            var gapID = ""
             prepareAccountInfo(preparedAccountInfo: { info in
                 guard let accountInfo = info else {
                     group.leave()
@@ -65,6 +66,7 @@ final class NetmeraService {
                 phoneNumber = (accountInfo.phoneNumber ?? "").isEmpty ? 0 : 1
                 address = (accountInfo.address ?? "").isEmpty ? 0 : 1
                 birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
+                gapID = accountInfo.gapId ?? ""
                 group.leave()
             })
             
@@ -96,7 +98,7 @@ final class NetmeraService {
                                              isBirthDay: birthday,
                                              galleryAccessPermission: galleryAccessPermission)
                 
-                user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+                user.userId = gapID
                 DispatchQueue.toMain {
                     Netmera.update(user)
                 }
@@ -132,25 +134,13 @@ final class NetmeraService {
     }
     
     private static func getApiKey() -> String {
-        #if LIFEBOX
+        //Sinnce its business only, no need for "def LIFEBOX" flag here
         switch RouteRequests.currentServerEnvironment {
         case .production:
             return "3PJRHrXDiqYtcLEQL75khlt-cZcy-Hmi68v5aHvOY13RrL4993gmXFx3xyEY3IEA"
         case .preProduction, .test:
             return "3PJRHrXDiqYtcLEQL75khhE-sJMri_nBxpaFKNoTZt76h75AzELaerJ1y92ip8oN"
         }
-        #endif
-        
-        #if LIFEDRIVE
-        switch RouteRequests.currentServerEnvironment {
-        case .production:
-            return "LINA4LCdpz6st8QajRsXvZ3eUwV5ENwJTbzrhSufrxjRWv-pvzwmZw"
-        case .preProduction, .test:
-            return "6l30TJ05YenQKefUTBw81SZPwBa404aJoAhPAsmZEdyxLJVO90Q8Rw"
-        }
-        #endif
-        
-        return ""
     }
     
     static func sendEvent(event: NetmeraEvent) {
