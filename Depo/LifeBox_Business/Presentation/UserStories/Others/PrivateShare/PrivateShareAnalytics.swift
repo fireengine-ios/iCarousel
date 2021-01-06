@@ -6,6 +6,29 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
+private enum ContactsPermission {
+    case allow
+    case doNotAllow
+    
+    var trackValue: String {
+        switch self {
+        case .allow:
+            return "Allow"
+        case .doNotAllow:
+            return "Do not Allow"
+        }
+    }
+    
+    init(status: CNAuthorizationStatus) {
+        switch status {
+        case .authorized:
+            self = .allow
+        default:
+            self = .doNotAllow
+        }
+    }
+}
+
 final class PrivateShareAnalytics {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -45,9 +68,7 @@ final class PrivateShareAnalytics {
     //MARK: - Public Actions
     
     func openAllSharedFiles() {
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .click,
-                                            eventLabel: .privateShare(.seeAll))
+        trackSharedFolderEvent(eventAction: .click, eventLabel: .privateShare(.seeAll))
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SeeAllSharedEvent())
     }
@@ -80,9 +101,7 @@ final class PrivateShareAnalytics {
     }
     
     func openPrivateShare() {
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .click,
-                                            eventLabel: .privateShare(.privateShare))
+        trackSharedFolderEvent(eventAction: .click, eventLabel: .privateShare(.privateShare))
     }
     
     func successShare(items: [BaseDataSourceItem], duration: PrivateShareDuration, message: String?) {
@@ -109,11 +128,8 @@ final class PrivateShareAnalytics {
             }
         }
 
-        analyticsService.trackStartShare(label: label, shareParameters: parameters)
-        
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .duration,
-                                            eventLabel: .privateShare(.duration(duration)))
+        trackSharedFolderEvent(eventAction: .share, eventLabel: .custom(label), shareParameters: parameters)
+        trackSharedFolderEvent(eventAction: .duration, eventLabel: .privateShare(.duration(duration)))
         
         let messageLabel: GAEventLabel
         if let message = message, !message.isEmpty {
@@ -122,9 +138,7 @@ final class PrivateShareAnalytics {
             messageLabel = .custom("not filled")
         }
         
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .message,
-                                            eventLabel: messageLabel)
+        trackSharedFolderEvent(eventAction: .message, eventLabel: messageLabel)
         
         let netmeraShareEvent = NetmeraEvents.Actions.Share(method: .private, channelType: "", duration: duration)
         AnalyticsService.sendNetmeraEvent(event: netmeraShareEvent)
@@ -132,39 +146,24 @@ final class PrivateShareAnalytics {
     
     func endShare(item: BaseDataSourceItem) {
         let gaFileType = convertFileTypeToGAType(item.fileType) ?? .photo
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .endShare,
-                                            eventLabel: .fileTypeOperation(gaFileType))
+        trackSharedFolderEvent(eventAction: .endShare, eventLabel: .fileTypeOperation(gaFileType))
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.EndShareEvent())
     }
     
     func leaveShare(item: BaseDataSourceItem) {
         let gaFileType = convertFileTypeToGAType(item.fileType) ?? .photo
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .leaveShare,
-                                            eventLabel: .fileTypeOperation(gaFileType))
+        trackSharedFolderEvent(eventAction: .leaveShare, eventLabel: .fileTypeOperation(gaFileType))
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.LeaveShareEvent())
     }
     
     func addApiSuggestion() {
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .click,
-                                            eventLabel: .privateShare(.apiSuggestion))
+        trackSharedFolderEvent(eventAction: .click, eventLabel: .privateShare(.apiSuggestion))
     }
     
     func addPhonebookSuggestion() {
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .click,
-                                            eventLabel: .privateShare(.phonebookSuggestion))
-    }
-    
-    func sendContactPermission(result: (isAllowed: Bool, askedPermissions: Bool)) {
-        let type = ContactsPermissionType(isAllowed: result.isAllowed, askedPermissions: result.askedPermissions)
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .contactPermission,
-                                            eventLabel: .privateShare(.contactPermission(type)))
+        trackSharedFolderEvent(eventAction: .click, eventLabel: .privateShare(.phonebookSuggestion))
     }
     
     func sharedWithMe(action: SharedWithMeAction, on item: BaseDataSourceItem? = nil) {
@@ -191,29 +190,34 @@ final class PrivateShareAnalytics {
             label = .empty
         }
         
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: gaAction,
-                                            eventLabel: label)
+        trackSharedFolderEvent(eventAction: gaAction, eventLabel: label)
     }
     
     func sharedWithMeUploadedItems(count: Int) {
         let shareParameters = ["sharedUploadCount": count]
-        analyticsService.trackUploadShareWithMeItems(shareParameters: shareParameters)
+        analyticsService.trackSharedFolderEvent(eventAction: .upload,
+                                                eventLabel: .empty,
+                                                shareParameters: shareParameters)
     }
     
     func removeFromShare() {
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .removeUser)
+        trackSharedFolderEvent(eventAction: .removeUser, eventLabel: .empty)
     }
     
     func changeRoleFromViewerToEditor() {
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .changeRoleFromViewerToEditor)
+        trackSharedFolderEvent(eventAction: .changeRoleFromViewerToEditor, eventLabel: .empty)
     }
     
     func changeRoleFromEditorToViewer() {
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
-                                            eventActions: .changeRoleFromEditorToViewer)
+        trackSharedFolderEvent(eventAction: .changeRoleFromEditorToViewer, eventLabel: .empty)
+    }
+    
+    private func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any] = [:]) {
+        let status = CNContactStore.authorizationStatus(for: .contacts)
+        let permissionDict = ["ContactPermission": ContactsPermission(status: status).trackValue]
+        analyticsService.trackSharedFolderEvent(eventAction: eventAction,
+                                                eventLabel: eventLabel,
+                                                shareParameters: permissionDict + shareParameters)
     }
 
     //MARK: - Helpers
@@ -224,6 +228,17 @@ final class PrivateShareAnalytics {
             return .photo
         case .video:
             return .video
+//        case .faceImage(let type):
+//            switch type {
+//            case .people:
+//                return .people
+//            case .places:
+//                return .places
+//            case .things:
+//                return .things
+//            }
+//        case .photoAlbum:
+//            return .albums
         case .audio:
             return .music
         case .folder:

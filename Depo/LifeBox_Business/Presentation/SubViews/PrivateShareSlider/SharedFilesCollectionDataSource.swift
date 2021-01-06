@@ -10,13 +10,19 @@ import UIKit
 
 protocol SharedFilesCollectionDataSourceDelegate: class {
     func cellTouched(withModel: WrapData)
-    
+    func onPlusTapped()
 }
 
 final class SharedFilesCollectionDataSource: NSObject {
     weak var delegate: SharedFilesCollectionDataSourceDelegate?
     
     private(set) var files = [WrapData]()
+    private let maxItemsForDisplay: Int
+    
+    required init(maxItemsForDisplay: Int) {
+        self.maxItemsForDisplay = maxItemsForDisplay
+        super.init()
+    }
     
     func setup(files: [WrapData]) {
         self.files = files
@@ -36,22 +42,28 @@ extension SharedFilesCollectionDataSource: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard
-            let relatedEntity = files[safe: indexPath.row] //this is one section collection
-        else {
-            return
+        if indexPath.row == maxItemsForDisplay {
+            delegate?.onPlusTapped()
+        } else if let relatedEntity = files[safe: indexPath.row] { //this is one section collection
+            delegate?.cellTouched(withModel: relatedEntity)
         }
-        delegate?.cellTouched(withModel: relatedEntity)
     }
 }
 
 extension SharedFilesCollectionDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if files.count > maxItemsForDisplay {
+            return maxItemsForDisplay + 1
+        }
         return files.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        collectionView.dequeue(cell: SharedFilesSliderCell.self, for: indexPath)
+        if indexPath.item == maxItemsForDisplay {
+            return collectionView.dequeue(cell: SharedFilesSliderPlusCell.self, for: indexPath)
+        } else {
+            return collectionView.dequeue(cell: SharedFilesSliderCell.self, for: indexPath)
+        }
     }
 }
 

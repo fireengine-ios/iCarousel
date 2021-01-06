@@ -22,7 +22,6 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     private let contactStore = CNContactStore()
     private let queue = DispatchQueue(label: DispatchQueueLabels.localContactsServiceQueue)
     private let contactsStorage = LocalContactsStorage.shared
-    private lazy var analytics = PrivateShareAnalytics()
     
     init() {
         NotificationCenter.default.addObserver(self,
@@ -37,8 +36,6 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
                 completion?(false)
                 return
             }
-            
-            self.analytics.sendContactPermission(result: result)
             
             guard result.isAllowed else {
                 printLog("Local Contacts. Access denied.")

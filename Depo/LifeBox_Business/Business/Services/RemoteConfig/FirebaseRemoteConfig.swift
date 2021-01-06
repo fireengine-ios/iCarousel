@@ -11,8 +11,8 @@ import FirebaseRemoteConfig
 
 
 private struct RemoteConfigKeys {
-    static let loginSupportAttempts = "login_support_from_treshold"
-    static let signupSupportAttempts = "signup_support_from_treshold"
+    static let loginSupportAttempts = "login_support_form_treshold"
+    static let signupSupportAttempts = "signup_support_form_treshold"
 }
 
 
@@ -25,7 +25,7 @@ final class FirebaseRemoteConfig {
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         #if DEBUG
-        settings.minimumFetchInterval = 0
+        settings.minimumFetchInterval = 10
         #endif
         remoteConfig.configSettings = settings
         remoteConfig.setDefaults(fromPlist: "FirebaseRemoteConfigDefaults")
@@ -35,11 +35,14 @@ final class FirebaseRemoteConfig {
         let fetchKey = RemoteConfigKeys.loginSupportAttempts
         fetch(key: fetchKey) { [weak self] in
             if let attempts = self?.remoteConfig.configValue(forKey: fetchKey).numberValue?.intValue {
+                debugLog("fetched \(attempts) attempts for \(fetchKey)")
                 completion(attempts)
                 return
             }
             
-            completion(NumericConstants.showSupportViewAttempts)
+            let attempts = NumericConstants.showSupportViewAttempts
+            debugLog("return constant = \(attempts) attempts for \(fetchKey)")
+            completion(attempts)
         }
     }
     
@@ -47,11 +50,14 @@ final class FirebaseRemoteConfig {
         let fetchKey = RemoteConfigKeys.signupSupportAttempts
         fetch(key: fetchKey) { [weak self] in
             if let attempts = self?.remoteConfig.configValue(forKey: fetchKey).numberValue?.intValue {
+                debugLog("fetched \(attempts) attempts for \(fetchKey)")
                 completion(attempts)
                 return
             }
             
-            completion(NumericConstants.showSupportViewAttempts)
+            let attempts = NumericConstants.showSupportViewAttempts
+            debugLog("return constant = \(attempts) attempts for \(fetchKey)")
+            completion(attempts)
         }
     }
     

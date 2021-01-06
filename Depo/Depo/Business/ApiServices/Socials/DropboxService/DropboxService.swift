@@ -83,7 +83,7 @@ final class DropboxManager {
         }
         
         DropboxClientsManager.authorizeFromController(UIApplication.shared, controller: vc) { url in
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.openSafely(url)
         }
     }
     

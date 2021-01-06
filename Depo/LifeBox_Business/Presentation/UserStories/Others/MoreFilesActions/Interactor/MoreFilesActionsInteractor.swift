@@ -1028,6 +1028,7 @@ extension MoreFilesActionsInteractor {
         let successAction = { [weak self] in
             self?.output?.operationFinished(type: .moveToTrashShared)
             self?.removeItemsFromPlayer(items: items)
+            ItemOperationManager.default.didMoveToTrashSharedItems(items)
             self?.successAction(elementType: .moveToTrashShared)()
         }
         

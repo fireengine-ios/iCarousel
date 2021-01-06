@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -140,14 +141,26 @@
                                                             <constraint firstAttribute="width" constant="24" id="OZD-aO-OW7"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDg-eD-Ha4">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Uf-Ik-Pxb">
                                                         <rect key="frame" x="24" y="0.0" width="39" height="39"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDg-eD-Ha4" customClass="ExtendedTapAreaButton" customModule="Billo" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="4.5" width="39" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="fdw-um-Y7c"/>
+                                                                </constraints>
+                                                                <state key="normal" image="more-1"/>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="39" id="Q46-D5-XhR"/>
-                                                            <constraint firstAttribute="height" constant="39" id="m8N-oZ-fVC"/>
+                                                            <constraint firstItem="cDg-eD-Ha4" firstAttribute="centerY" secondItem="2Uf-Ik-Pxb" secondAttribute="centerY" id="6lD-cd-9Cn"/>
+                                                            <constraint firstAttribute="height" constant="39" id="ArZ-y8-YNM"/>
+                                                            <constraint firstAttribute="width" constant="39" id="Aws-fE-zy8"/>
+                                                            <constraint firstItem="cDg-eD-Ha4" firstAttribute="leading" secondItem="2Uf-Ik-Pxb" secondAttribute="leading" id="Mri-y9-Qtg"/>
+                                                            <constraint firstAttribute="trailing" secondItem="cDg-eD-Ha4" secondAttribute="trailing" id="Nla-IW-92o"/>
                                                         </constraints>
-                                                        <state key="normal" image="more-1"/>
-                                                    </button>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -230,6 +243,7 @@
                 <outlet property="fileNameLabel" destination="nvT-sm-YJt" id="dcN-5l-OeU"/>
                 <outlet property="leftSpaceForSmallmage" destination="a2J-mD-6o2" id="G9x-Lo-vbY"/>
                 <outlet property="moreButton" destination="cDg-eD-Ha4" id="aRR-oO-iGZ"/>
+                <outlet property="moreView" destination="2Uf-Ik-Pxb" id="xQ7-1s-fDt"/>
                 <outlet property="selectionImageView" destination="U7U-HC-bQs" id="z76-49-VVy"/>
                 <outlet property="separatorView" destination="Ih3-tg-57V" id="82s-th-WEJ"/>
                 <outlet property="sharedIcon" destination="2HG-lz-Pps" id="NxQ-JT-Ipr"/>
@@ -248,5 +262,8 @@
         <image name="more-1" width="6" height="24"/>
         <image name="privateSharePeople" width="16" height="13"/>
         <image name="selectedList" width="36" height="36"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -291,20 +291,19 @@ final class PrivateShareFileInfoManager {
             self.pagesLoaded += 1
             
             guard self.pagesLoaded < page, !loadedItems.isEmpty else {
-                self.loadPages(till: page, completion: completion)
+                let sorted = self.sorted(items: self.tempLoaded)
+                self.sortedItems.replace(with: sorted, completion: nil)
+                
+                let splitted = self.splitted(sortedArray: sorted)
+                
+                self.splittedItems.replace(with: splitted) {
+                    completion(true)
+                }
+                
                 return
             }
             
-            let sorted = self.sorted(items: self.tempLoaded)
-            self.sortedItems.replace(with: sorted, completion: nil)
-            
-            let splitted = self.splitted(sortedArray: sorted)
-            
-            self.splittedItems.replace(with: splitted) {
-                completion(true)
-            }
-            
-            
+            self.loadPages(till: page, completion: completion)
         }
         
         operationQueue.addOperation(operation)

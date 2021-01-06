@@ -73,6 +73,7 @@ class SegmentedController: BaseViewController, NibInit {
     }
     
     private(set) var selectedIndex = 0
+    var startIndex = 0
     
     //    weak var delegate: SegmentedControllerDelegate?
     
@@ -111,7 +112,7 @@ class SegmentedController: BaseViewController, NibInit {
         }
         
         /// selectedSegmentIndex == -1 after removeAllSegments
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = startIndex
         setupSelectedController(viewControllers[segmentedControl.selectedSegmentIndex])
     }
     

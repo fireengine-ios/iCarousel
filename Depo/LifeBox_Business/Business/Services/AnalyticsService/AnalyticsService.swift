@@ -97,7 +97,7 @@ final class AnalyticsService: NSObject {
         if let parameters = parameters {
             AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: parameters)
         }
-    }    
+    }
 }
 
 protocol AnalyticsGA {///GA = GoogleAnalytics
@@ -116,9 +116,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
     func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: String)
     func trackPhotoEditEvent(category: GAEventCategory.PhotoEditCategory, eventAction: GAEventAction, eventLabel: GAEventLabel, filterType: String?)
-//    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
-    func trackStartShare(label: String, shareParameters: [String: Int])
-    func trackUploadShareWithMeItems(shareParameters: [String: Int])
+    func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any])
 }
 
 extension AnalyticsService: AnalyticsGA {
@@ -152,7 +150,7 @@ extension AnalyticsService: AnalyticsGA {
                                             connectionStatus: Bool? = nil,
                                             statusType: String? = nil,
                                             photoEditFilterType: String? = nil,
-                                            shareParameters: [String: Int]? = nil,
+                                            shareParameters: [String: Any]? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -166,9 +164,6 @@ extension AnalyticsService: AnalyticsGA {
 
         let group = DispatchGroup()
         
-///        For all of the events (not only newly added autosync events but also all GA events that we send in current client), we will also send below dimensions each time. For the events that we send before login, there is no need to send.
-///        AutoSync --> True/False
-///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
         var isTwoFactorAuthEnabled: Bool?
 
         var usagePercentage: Int?
@@ -190,7 +185,7 @@ extension AnalyticsService: AnalyticsGA {
         
         let screenName: Any = screen?.name ?? NSNull()
         
-        group.notify(queue: privateQueue) { 
+        group.notify(queue: privateQueue) {
             parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
                 platform: "iOS", isWifi: ReachabilityService.shared.isReachableViaWiFi,
                 service: TextConstants.NotLocalized.appNameGA, developmentVersion: version,
@@ -518,23 +513,12 @@ extension AnalyticsService: AnalyticsGA {
             Analytics.logEvent(GACustomEventsType.event.key, parameters: eventParameters + dimentionParameters)
         }
     }
-    
-    func trackStartShare(label: String, shareParameters: [String: Int]) {
+
+    func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any]) {
         prepareDimentionsParametrs(screen: nil, shareParameters: shareParameters) { dimentionParametrs in
             let parametrs = self.parameters(category: .sharedFolder,
-                                            action: .share,
-                                            label: .custom(label))
-
-            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
-        }
-    }
-    
-    func trackUploadShareWithMeItems(shareParameters: [String: Int]) {
-        prepareDimentionsParametrs(screen: nil, shareParameters: shareParameters) { dimentionParametrs in
-            let parametrs = self.parameters(category: .sharedFolder,
-                                            action: .upload,
-                                            label: .empty)
-
+                                            action: eventAction,
+                                            label: eventLabel)
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
