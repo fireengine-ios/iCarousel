@@ -20,6 +20,7 @@ def core_pods
   pod 'FBSDKCoreKit', '~> 8'
   pod 'FBSDKLoginKit', '~> 8'
   pod 'FBSDKShareKit', '~> 8'
+
   pod 'Netmera', '~> 3.8.4'
 
   pod 'SDWebImage', '~> 4'

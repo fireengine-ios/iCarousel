@@ -1871,3 +1871,4 @@
 "private_share_long_message" = "private_share_long_message";
 "private_share_long_emailmsisdn" = "Your E-mail or GSM number exceeds character limitation.";
 "private_share_start_max_number_of_users" = "You can not share with more than %d people.";
+"private_share_max_number_of_item_limit_exceeded" = "private_share_max_number_of_item_limit_exceeded";
