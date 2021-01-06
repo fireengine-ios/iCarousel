@@ -24,4 +24,16 @@ extension PHAsset {
 
         return assets
     }
+    
+    static func getAllAssets(with localIdentifiers: [String]) -> [PHAsset] {
+        let options = PHFetchOptions()
+        let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: options)
+        
+        var assets = [PHAsset]()
+        fetchResult.enumerateObjects { asset, _, _ in
+            assets.append(asset)
+        }
+        
+        return assets
+    }
 }

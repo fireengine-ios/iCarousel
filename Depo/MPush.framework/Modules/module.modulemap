@@ -1,5 +1,0 @@
-framework module MPush {
-  umbrella header "MPush.h"
-  export *
-  module * { export *}
-}
