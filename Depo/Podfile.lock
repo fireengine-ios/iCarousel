@@ -215,6 +215,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1)
   - MetalPetal/Swift
   - MMWormhole (~> 2.0.0)
+  - Netmera (= 3.8.4)
   - Netmera (~> 3)
   - Netmera (~> 3.8.4)
   - ReachabilitySwift
@@ -332,4 +333,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2301e03b26ea815e6ff7d59a518c99c68b58ed39
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0
