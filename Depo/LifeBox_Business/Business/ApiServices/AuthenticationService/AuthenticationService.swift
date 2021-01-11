@@ -25,15 +25,12 @@ class AuthenticationUser: BaseRequestParametrs {
     override var requestParametrs: Any {
         let dict: [String: Any] = [LbRequestkeys.username   : login,
                                    LbRequestkeys.password   : password,
-                                   LbRequestkeys.deviceInfo : Device.deviceInfo,
-                                   LbRequestkeys.language   : Locale.current.languageCode ?? "",
-                                   LbRequestkeys.appVersion : AuthoritySingleton.shared.getAppVersion(),
-                                   LbRequestkeys.osVersion  : Device.systemVersion]
+                                   LbRequestkeys.deviceInfo : Device.deviceInfo]
         return dict
     }
     
     override var patch: URL {
-        var patch: String = RouteRequests.httpsAuthification
+        var patch: String = RouteRequests.Login.yaaniMail
         let rememberMeValue = rememberMe ? LbRequestkeys.on : LbRequestkeys.off
         patch = String(format: patch, rememberMeValue)
         
@@ -57,19 +54,6 @@ class AuthenticationUser: BaseRequestParametrs {
     }
 }
 
-
-class Authentication3G: BaseRequestParametrs {
-    
-    override var requestParametrs: Any {
-        return Device.deviceInfo
-    }
-    
-    override var patch: URL {
-        let patch = String(format: RouteRequests.unsecuredAuthenticationUrl, LbRequestkeys.on)
-        return URL(string: patch,
-                   relativeTo: super.patch)!
-    }
-}
 
 class SigngOutParametes: BaseRequestParametrs {
     let authToken: String
@@ -120,7 +104,7 @@ class SignUpUser: BaseRequestParametrs {
             LbRequestkeys.email: mail,
             LbRequestkeys.phoneNumber: phone,
             LbRequestkeys.password: password,
-            LbRequestkeys.language: Device.locale,
+//            LbRequestkeys.language: Device.locale,
             LbRequestkeys.sendOtp: sendOtp,
             LbRequestkeys.brandType: brandType,
             LbRequestkeys.passwordRuleSetVersion: NumericConstants.passwordRuleSetVersion
@@ -329,9 +313,9 @@ class AuthenticationService: BaseRequestService {
                             self?.tokenStorage.accessToken = accessToken
                         }
                         
-                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
-                            self?.tokenStorage.refreshToken = refreshToken
-                        }
+//                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+//                            self?.tokenStorage.refreshToken = refreshToken
+//                        }
                         
                         /// must be after accessToken save logic
                         if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
@@ -345,11 +329,11 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        if self?.tokenStorage.refreshToken == nil {
-                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
-                            fail?(ErrorResponse.error(error))
-                            return
-                        }
+//                        if self?.tokenStorage.refreshToken == nil {
+//                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+//                            fail?(ErrorResponse.error(error))
+//                            return
+//                        }
                         
                         if let statusCode = response.response?.statusCode,
                             statusCode >= 300, statusCode != 403,
@@ -387,15 +371,6 @@ class AuthenticationService: BaseRequestService {
                     case .failure(let error):
                         fail?(ErrorResponse.error(error))
                     }
-        }
-    }
-    
-    func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
-        debugLog("AuthenticationService turkcellAutification")
-        
-        SessionManager.customDefault.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
-            .responseString { [weak self] response in
-                self?.loginHandler(response, sucess, fail)
         }
     }
     
@@ -579,27 +554,6 @@ class AuthenticationService: BaseRequestService {
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: forgotPassword, handler: handler)
-    }
-
-    func turkcellAuth(success: SuccessLogin?, fail: FailResponse?) {
-        let user = Authentication3G()
-        debugLog("Authentication3G")
-        self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
-            if self?.tokenStorage.refreshToken == nil {
-                let error = ErrorResponse.error(error)
-                fail?(error)
-            } else {
-                self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken, _  in
-                    if let accessToken = accessToken, isSuccess {
-                        self?.tokenStorage.accessToken = accessToken
-                        success?()
-                    } else {
-                        let error = ErrorResponse.error(error)
-                        fail?(error)
-                    }
-                }
-            }
-        })
     }
     
     

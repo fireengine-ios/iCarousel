@@ -71,7 +71,7 @@ class SplashInteractor: SplashInteractorInput {
     private func loginInBackground() {
         setupReachabilityIfNeed()
         if tokenStorage.accessToken == nil {
-            if reachabilityService.isReachableViaWiFi {
+            if reachabilityService.isReachableViaWiFi || reachabilityService.isReachableViaWWAN {
                 isTryingToLogin = false
                 failLogin()
 //                isTryingToLogin = false
@@ -80,46 +80,6 @@ class SplashInteractor: SplashInteractorInput {
                 ///"self.reachability?.connection == .cellular && apiReachability.connection == .reachable"
             ///There is possability that we fall through to else, only because of no longer reachable internet.
             ///So we check second time.
-            } else if reachabilityService.isReachableViaWWAN {
-                authenticationService.turkcellAuth(success: { [weak self] in
-                    AccountService().updateBrandType()
-                    debugLog("SPLASH: tc login")
-                    AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
-                    self?.tokenStorage.isRememberMe = true
-                    
-                    SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                        debugLog("SPLASH: tc login successfull")
-                        SingletonStorage.shared.isJustRegistered = false
-                        self?.isFirstLogin = true
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .turkcell))
-                        self?.turkcellSuccessLogin()
-                        self?.isTryingToLogin = false
-                    }, fail: { [weak self] error in
-                        debugLog("SPLASH: tc login fail")
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .turkcell))
-                        self?.isTryingToLogin = false
-                        let loginError = LoginResponseError(with: error)
-                        self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
-                        self?.output.asyncOperationSuccess()
-                        if error.isServerUnderMaintenance {
-                            self?.output.onFailGetAccountInfo(error: error)
-                        } else {
-                            self?.failLogin()
-                        }
-                    })
-                }, fail: { [weak self] response in
-                    debugLog("SPLASH: tc login fail")
-                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .turkcell))
-                    let loginError = LoginResponseError(with: response)
-                    self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
-                    self?.output.asyncOperationSuccess()
-                    if response.isServerUnderMaintenance {
-                        self?.output.onFailGetAccountInfo(error: response)
-                    } else {
-                        self?.failLogin()
-                    }
-                    self?.isTryingToLogin = false
-                })
             } else {
                 output.asyncOperationSuccess()
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))

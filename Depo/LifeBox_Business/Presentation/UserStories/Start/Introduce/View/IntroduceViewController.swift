@@ -41,6 +41,7 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
         startUsingLifeBoxButton.setTitleColor(.white, for: .normal)
         startUsingLifeBoxButton.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
         startUsingLifeBoxButton.adjustsFontSizeToFitWidth()
+        startUsingLifeBoxButton.isHidden = true
         
         haveAccountLabel.text = TextConstants.alreadyHaveAccountTitle
         haveAccountLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)

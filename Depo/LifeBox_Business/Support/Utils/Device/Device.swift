@@ -152,22 +152,12 @@ class Device {
     }
     
     static var deviceInfo: [String: Any] {
-        var result: [String: Any] = [:]
-        
-        if let uuid = Device.deviceId {
-            result["uuid"] = uuid
-        }
-
-        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            result["appVersion"] = appVersion
-        }
-        
-        result["name"] = UIDevice.current.name
-        result["deviceType"] = Device.deviceType
-        result["language"] = Locale.current.languageCode ?? ""
-        result["osVersion"] = Device.systemVersion
-
-        return result
+        return [LbRequestkeys.DeviceInfo.uuid: Device.deviceId ?? "",
+                LbRequestkeys.DeviceInfo.appVersion : AuthoritySingleton.shared.getAppVersion(),
+                LbRequestkeys.DeviceInfo.name : UIDevice.current.name,
+                LbRequestkeys.DeviceInfo.type : Device.deviceType,
+                LbRequestkeys.DeviceInfo.language : Locale.current.languageCode ?? "",
+                LbRequestkeys.DeviceInfo.osVersion : Device.systemVersion]
     }
     
     static var locale: String {
