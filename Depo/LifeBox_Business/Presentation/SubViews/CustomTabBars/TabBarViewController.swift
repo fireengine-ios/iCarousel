@@ -281,8 +281,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         showCurtainView(show: state)
         if state {
-            debugLog("CRASH: expected crash bellow")
-            fatalError("CRASH: GA TEST")
             showButtonRainbow()
         } else {
             hideButtonRainbow()
