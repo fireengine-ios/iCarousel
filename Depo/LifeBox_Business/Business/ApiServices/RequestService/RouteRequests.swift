@@ -47,15 +47,7 @@ struct RouteRequests {
     }()
     
     static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
-    
-    static let unsecuredAuthenticationUrl: String = {
-        switch currentServerEnvironment {
-        case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-        case .preProduction: return "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-        case .production: return "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-        }
-    }()
-    
+
     static let baseContactsUrl: URL = baseContactsUrlShort +/ "ttyapi/"
     
     static let baseContactsUrlShort: URL = {
@@ -83,6 +75,10 @@ struct RouteRequests {
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
+    
+    enum Login {
+        static let yaaniMail = baseShortUrlString + "api/v1/business/auth-methods/pwd/tokens"
+    }
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
     static let authificationByRememberMe = "auth/rememberMe"
