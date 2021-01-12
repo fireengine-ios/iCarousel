@@ -45,7 +45,7 @@ struct SharedConstants {
     static let wormholeOffTurkcellPassword = "wormholeOffTurkcellPassword"
     
     static let mainAppSchemeResponsivenessDateKey = "mainAppSchemeResponsivenessDateKey"
-    static let applicationQueriesSchemeShort = "akillidepo"
+    static let applicationQueriesSchemeShort = "lifeboxbusiness"
     static let applicationQueriesScheme = applicationQueriesSchemeShort + "://"
     
     static let sharedGroupDBContainerName = "SharedGroupDBContainer"
