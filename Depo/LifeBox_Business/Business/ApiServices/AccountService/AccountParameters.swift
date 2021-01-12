@@ -11,8 +11,6 @@ import Foundation
 struct AccountPath {
     static let accountBase = "account/"
     
-    static let info = accountBase + "info"
-    static let quota = accountBase + "quotaInfo"
     static let overQuotaStatus = accountBase + "overQuotaStatus?showPopup=%@"
     static let usages = accountBase + "usages"
     static let provision = accountBase + "provision"
@@ -24,16 +22,16 @@ struct AccountPath {
     static let updateUserEmail = accountBase + "email"
     static let updatePhoneNumber = accountBase + "updatePhoneNumber"
     static let verifyPhoneNumber = accountBase + "verifyPhoneNumberToUpdate"
-    static let securitySettings = "auth/settings"
     static let faceImageAllowed = accountBase + "setting/faceImageAllowed"
     
     static let updateLanguage = accountBase + "language"
     static let languageList = updateLanguage + "/list"
 }
 
-class AccontInfo: BaseRequestParametrs {   
+class AccontInfo: BaseRequestParametrs {
     override var patch: URL {
-        return URL(string: AccountPath.info, relativeTo: super.patch)!
+        let urlString = String(format: RouteRequests.BusinessAccount.info, SingletonStorage.shared.accountUuid)
+        return URL(string: urlString)!
     }
 }
 
@@ -128,7 +126,7 @@ class LanguageListChange: BaseRequestParametrs {
 
 class QuotaInfo: BaseRequestParametrs {
     override var patch: URL {
-        return URL(string: AccountPath.quota, relativeTo: super.patch)!
+        return URL(string: RouteRequests.BusinessAccount.quota)!
     }
 }
 
@@ -154,7 +152,7 @@ class UsageParameters: BaseRequestParametrs {
 
 class SecuritySettingsInfoParametres: BaseRequestParametrs {
     override var patch: URL {
-        return URL(string: AccountPath.securitySettings, relativeTo: super.patch)!
+        return URL(string: RouteRequests.BusinessAccount.settings)!
     }
 }
 
@@ -197,6 +195,6 @@ class SecuritySettingsChangeInfoParametres: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: AccountPath.securitySettings, relativeTo: super.patch)!
+        return URL(string: RouteRequests.BusinessAccount.settings)!
     }
 }
