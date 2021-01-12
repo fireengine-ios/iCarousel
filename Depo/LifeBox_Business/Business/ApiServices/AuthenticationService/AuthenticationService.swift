@@ -676,9 +676,9 @@ class AuthenticationService: BaseRequestService {
                             self.tokenStorage.accessToken = accessToken
                         }
                         
-                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
-                            self.tokenStorage.refreshToken = refreshToken
-                        }
+//                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+//                            self.tokenStorage.refreshToken = refreshToken
+//                        }
                         
                         /// must be after accessToken save logic
                         if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
@@ -692,11 +692,11 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        guard self.tokenStorage.refreshToken != nil else {
-                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
-                            handler(.failed(error))
-                            return
-                        }
+//                        guard self.tokenStorage.refreshToken != nil else {
+//                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+//                            handler(.failed(error))
+//                            return
+//                        }
                         
                         if #available(iOS 14.0, *) {
                             WidgetCenter.shared.reloadAllTimelines()
