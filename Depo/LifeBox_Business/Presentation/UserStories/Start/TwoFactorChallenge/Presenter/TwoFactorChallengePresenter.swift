@@ -103,6 +103,13 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     
     func onSuccessEULA() {
         completeAsyncOperationEnableScreen()
+        
+        guard let router = router as? TwoFactorChallengeRouter else {
+            assertionFailure()
+            return
+        }
+        
+        router.goToHomePage()
     }
     
     func onFailEULA() {
