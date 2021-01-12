@@ -42,7 +42,7 @@ enum LoginResponseError: Error {
             self = .needSignUp
         }
         else if errorResponse.description.contains("Authentication failure") ||
-            errorResponse.description.contains("LDAP system failure") {
+                    errorResponse.description.contains("LDAP system failure") || errorResponse.description.contains("LDAP Bad credentials") {
             self = .incorrectUsernamePassword
         }
         else if errorResponse.description.contains("Invalid captcha") ||
@@ -65,8 +65,7 @@ enum LoginResponseError: Error {
         }
         else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 10 {
             self = .block
-        }
-        else {
+        } else {
             self = .serverError
         }
     }

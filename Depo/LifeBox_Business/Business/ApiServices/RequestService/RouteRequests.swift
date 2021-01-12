@@ -80,8 +80,7 @@ struct RouteRequests {
         static let yaaniMail = baseShortUrlString + "api/v1/business/auth-methods/pwd/tokens"
     }
     
-    static let httpsAuthification = "auth/token?rememberMe=%@"
-    static let authificationByRememberMe = "auth/rememberMe"
+    static let authificationByRememberMe = "new_api_is_required"
     static let signUp = "signup"
     static let logout = "auth/logout"
     
@@ -299,6 +298,13 @@ struct RouteRequests {
     
     static let updateLanguage = baseUrl +/ "account/language"
     
+    enum BusinessAccount {
+        private static let baseAccountsURLString = baseShortUrlString + "api/v1/business/accounts/"
+        static let info = baseAccountsURLString + "%@"
+        static let quota = baseAccountsURLString + "new_api_is_required"
+        static let settings = baseAccountsURLString + "new_api_is_required"
+    }
+    
     enum Account {
         static let accountApi = baseUrl +/ "account"
         
@@ -311,6 +317,7 @@ struct RouteRequests {
         static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         static let updateAddress = accountApi +/ "address"
         static let info = accountApi +/ "info"
+        static let quota = accountApi +/ "quotaInfo"
         
         enum Settings {
             /// without "s" at the end

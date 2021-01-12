@@ -14,6 +14,7 @@ class SingletonStorage {
     
     static let shared = SingletonStorage()
     
+    var accountUuid: String = ""
     var isAppraterInited: Bool = false
     var accountInfo: AccountInfoResponse?
     var featuresInfo: FeaturesResponse?

@@ -43,6 +43,7 @@ struct HeaderConstant {
     static let RememberMeToken = "X-Remember-Me-Token"
     static let migration = "X-Migration-User"
     static let accountWarning = "X-Account-Warning"
+    static let accountUuid = "X-Account-Uuid"
     
     static let Authorization = "Authorization"
     

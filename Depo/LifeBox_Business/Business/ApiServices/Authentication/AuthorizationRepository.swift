@@ -144,6 +144,10 @@ extension AuthorizationRepositoryImp: RequestRetrier {
     // MARK: - Refresh Tokens
     
     func refreshTokens(completion: @escaping RefreshCompletion) {
+        //FIXME: remove completion when refresh API if available
+        completion(false, nil, nil)
+        return
+        
         /// guard refresh retry
         if isRefreshing {
             refreshTokensCompletions.append(completion)
