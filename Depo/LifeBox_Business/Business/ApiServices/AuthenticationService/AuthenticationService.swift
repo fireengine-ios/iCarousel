@@ -313,6 +313,9 @@ class AuthenticationService: BaseRequestService {
                             self?.tokenStorage.accessToken = accessToken
                         }
                         
+                        if let accountId = headers[HeaderConstant.accountUuid] as? String {
+                            SingletonStorage.shared.accountUuid = accountId
+                        }
 //                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
 //                            self?.tokenStorage.refreshToken = refreshToken
 //                        }
@@ -377,11 +380,19 @@ class AuthenticationService: BaseRequestService {
     private func loginHandler(_ response: DataResponse<String>, _ sucess: SuccessLogin?, _ fail: FailResponse?) {
         switch response.result {
         case .success(_):
-            if let headers = response.response?.allHeaderFields as? [String: Any],
-                let accessToken = headers[HeaderConstant.AuthToken] as? String,
-                let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
-                self.tokenStorage.accessToken = accessToken
-                self.tokenStorage.refreshToken = refreshToken
+            if let headers = response.response?.allHeaderFields as? [String: Any] {
+                if let accessToken = headers[HeaderConstant.AuthToken] as? String {
+                    self.tokenStorage.accessToken = accessToken
+                }
+                
+                if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+                    self.tokenStorage.refreshToken = refreshToken
+                }
+                
+                if let accountId = headers[HeaderConstant.accountUuid] as? String {
+                    SingletonStorage.shared.accountUuid = accountId
+                }
+                
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                         sucess?()
@@ -674,6 +685,10 @@ class AuthenticationService: BaseRequestService {
                         
                         if let accessToken = headers[HeaderConstant.AuthToken] as? String {
                             self.tokenStorage.accessToken = accessToken
+                        }
+                        
+                        if let accountId = headers[HeaderConstant.accountUuid] as? String {
+                            SingletonStorage.shared.accountUuid = accountId
                         }
                         
 //                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
