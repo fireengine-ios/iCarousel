@@ -17,7 +17,7 @@
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)by.come.life.Lifebox.LifeboxWidget</string>
+		<string>$(AppIdentifierPrefix)by.com.life.LifeboxBusiness</string>
 	</array>
 </dict>
 </plist>

@@ -2,15 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>keychain-access-groups</key>
-	<array>
-		<string>$(AppIdentifierPrefix)by.come.life.Lifebox</string>
-		<string>$(AppIdentifierPrefix)com.turkcell.lifebox.business</string>
-		<string>$(AppIdentifierPrefix)com.turkcell.akillideponew.ent</string>
-	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>
 		<string>group.com.turkcell.lifebox.business.ent</string>
+	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifebox.business</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.akillideponew.ent</string>
+		<string>$(AppIdentifierPrefix)com.turkcell.lifebox.business.files</string>
 	</array>
 </dict>
 </plist>
