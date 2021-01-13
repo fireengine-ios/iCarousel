@@ -122,6 +122,10 @@ struct LocalContactsStorage {
     }
     
     func getContactName(for phone: String, email: String) -> LocalContactNames {
+        guard !phone.isEmpty || !email.isEmpty else {
+            return ("", "")
+        }
+        
         var searchContact: CNContact?
         let lowercasedEmail = email.lowercased()
         let searchPhone = phone.digits.suffix(maxNumberOfCompareDigits)
