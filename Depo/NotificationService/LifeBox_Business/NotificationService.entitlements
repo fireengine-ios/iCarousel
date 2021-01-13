@@ -12,7 +12,7 @@
 	<array>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo</string>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillideponew.ent</string>
-		<string>$(AppIdentifierPrefix)by.com.life.LifeboxBusiness.PushNotifications</string>
+		<string>$(AppIdentifierPrefix)by.com.life.LifeboxBusiness</string>
 	</array>
 </dict>
 </plist>
