@@ -85,6 +85,10 @@ extension AuthorizationRepositoryImp: RequestRetrier {
     public func should(_ manager: SessionManager, retry request: Request, with error: Error, completion: @escaping RequestRetryCompletion) {
         lock.lock() ; defer { lock.unlock() }
         
+        //TODO: remove when token refresh API is ready
+        completion(false, 0.0)
+        return
+        
         guard let response = request.task?.response as? HTTPURLResponse else {
             completion(false, 0.0)
             return
