@@ -78,8 +78,14 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if tableView.tableHeaderView == nil, contact?.subject?.name?.isEmpty == false || contact?.subject?.username?.isEmpty == false {
-            let header = PrivateShareAccessListHeader.with(name: contact?.subject?.name, username: contact?.subject?.username)
+        guard tableView.tableHeaderView == nil, let member = contact?.subject else {
+            return
+        }
+        
+        let username = member.username ?? member.email ?? ""
+        
+        if (member.name ?? "").isEmpty == false || username.isEmpty == false {
+            let header = PrivateShareAccessListHeader.with(name: contact?.subject?.name, username: username)
             let size = header.sizeToFit(width: tableView.bounds.width)
             header.frame.size = size
             
