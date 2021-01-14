@@ -340,7 +340,7 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
             return
         }
         let currentItem = interactor.allItems[index]
-        router.openPrivateShareAccessList(projectId: currentItem.projectId ?? "",
+        router.openPrivateShareAccessList(projectId: currentItem.accountUuid ?? "",
                                           uuid: currentItem.uuid,
                                           contact: contact,
                                           fileType: currentItem.fileType)

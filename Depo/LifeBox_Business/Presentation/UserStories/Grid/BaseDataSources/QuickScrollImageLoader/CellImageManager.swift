@@ -31,12 +31,12 @@ final class WrapDataUpdater {
     }
     
     func updateItem(_ item: Item, handler: @escaping ValueHandler<Item?>) {
-        guard !item.isLocalItem, let projectId = item.projectId else {
+        guard !item.isLocalItem, let accountUuid = item.accountUuid else {
             handler(nil)
             return
         }
         
-        task = privateShareApiService.getSharingInfo(projectId: projectId, uuid: item.uuid) { result in
+        task = privateShareApiService.getSharingInfo(projectId: accountUuid, uuid: item.uuid) { result in
             switch result {
             case .success(let info):
                 let item = WrapData(privateShareFileInfo: info)

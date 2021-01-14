@@ -15,8 +15,8 @@ class SingletonStorage {
     static let shared = SingletonStorage()
     
     private let tokenStorage: TokenStorage = factory.resolve()
-    var accountUuid: String {
-        get { tokenStorage.accountUuid ?? "" }
+    var accountUuid: String? {
+        get { tokenStorage.accountUuid }
         set { tokenStorage.accountUuid = newValue }
     }
     var isAppraterInited: Bool = false
