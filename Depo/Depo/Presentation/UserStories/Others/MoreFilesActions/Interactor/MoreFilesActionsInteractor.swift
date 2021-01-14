@@ -18,6 +18,39 @@ enum ShareTypes {
     case original
     case link
     case `private`
+    
+    var actionTitle: String {
+        switch self {
+        case .original:
+            return TextConstants.actionSheetShareOriginalSize
+        case .link:
+            return TextConstants.actionSheetShareShareViaLink
+        case .private:
+            return TextConstants.actionSheetSharePrivate
+        }
+    }
+    
+    static func allowedTypes(for items: [BaseDataSourceItem]) -> [ShareTypes] {
+        var allowedTypes = [ShareTypes]()
+        
+        if items.contains(where: { $0.fileType == .folder}) {
+            allowedTypes = [.link, .private]
+        } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
+            allowedTypes = [.link]
+        } else {
+            allowedTypes = [.original, .link, .private]
+        }
+        
+        if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
+            allowedTypes.remove(.original)
+        }
+        
+        if items.contains(where: { $0.isLocalItem }) {
+            allowedTypes.remove(.private)
+        }
+        
+        return allowedTypes
+    }
 }
 
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
@@ -58,30 +91,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func selectShareType(sourceRect: CGRect?) {
-        if sharingItems.contains(where: { $0.fileType == .folder}) {
-            showSharingMenu(types: [.link, .private], sourceRect: sourceRect)
-        } else if sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
-            shareViaLink(sourceRect: sourceRect)
-        } else {
-            showSharingMenu(types: [.original, .link, .private], sourceRect: sourceRect)
-        }
+        let sharedTypes = ShareTypes.allowedTypes(for: sharingItems)
+        showSharingMenu(types: sharedTypes, sourceRect: sourceRect)
     }
     
     private func showSharingMenu(types: [ShareTypes], sourceRect: CGRect?) {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darkBlueColor
         
-        var shareTypes = types
-        
-        if sharingItems.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
-            shareTypes.remove(.original)
-        }
-        
-        if sharingItems.contains(where: { $0.isLocalItem }) {
-            shareTypes.remove(.private)
-        }
-        
-        shareTypes.forEach {
+        types.forEach {
             controler.addAction(getAction(shareType: $0, sourceRect: sourceRect))
         }
         
@@ -96,36 +114,38 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func getAction(shareType: ShareTypes, sourceRect: CGRect?) -> UIAlertAction {
-        switch shareType {
+        
+        return UIAlertAction(title: shareType.actionTitle, style: .default) { [weak self] action in
+            guard let self = self else {
+                return
+            }
+            self.handleShare(type: shareType, sourceRect: sourceRect, items: self.sharingItems)
+        }
+    }
+    
+    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem]) {
+        self.sharingItems = items
+        switch type {
         case .link:
-            if self.sharingItems.contains(where: { $0.isLocalItem }) {
-                
-                return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
-                    
-                    self?.sync(items: self?.sharingItems, action: { [weak self] in
-                        self?.shareViaLink(sourceRect: sourceRect)
-                    }, fail: { errorResponse in
-                        debugLog("sync(items: \(errorResponse.description)")
-                        UIApplication.showErrorAlert(message: errorResponse.description)
-                    })
-                }
-            } else {
-                return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
+            let needSync = items.contains(where: { $0.isLocalItem })
+            if needSync {
+                sync(items: sharingItems, action: { [weak self] in
                     self?.shareViaLink(sourceRect: sourceRect)
-                }
+                }, fail: { errorResponse in
+                    debugLog("sync(items: \(errorResponse.description)")
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            } else {
+                shareViaLink(sourceRect: sourceRect)
             }
         case .original:
-            return UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
-                    self?.shareOrignalSize(sourceRect: sourceRect)
-                    }, fail: { errorResponse in
-                        UIApplication.showErrorAlert(message: errorResponse.description)
-                })
-            }
+            sync(items: sharingItems, action: { [weak self] in
+                self?.shareOrignalSize(sourceRect: sourceRect)
+                }, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+            })
         case .private:
-            return UIAlertAction(title: TextConstants.actionSheetSharePrivate, style: .default) { [weak self] _ in
-                self?.privateShare()
-            }
+            privateShare()
         }
     }
     

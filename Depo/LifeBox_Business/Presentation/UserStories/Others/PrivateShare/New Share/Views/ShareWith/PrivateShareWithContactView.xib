@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PrivateShareWithContactView" customModule="lifebox" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50P-EO-K4w">
+                    <rect key="frame" x="16" y="5" width="85" height="25"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qml-Ce-Crb">
+                            <rect key="frame" x="10" y="0.0" width="42" height="25"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UC5-0n-f9u">
+                            <rect key="frame" x="60" y="0.0" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="HTP-DK-j7W"/>
+                            </constraints>
+                            <state key="normal" image="CloseCardIconWhite"/>
+                            <connections>
+                                <action selector="onDeleteTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="UJk-Hi-IjM"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="UC5-0n-f9u" secondAttribute="bottom" id="Coh-Px-AAA"/>
+                        <constraint firstItem="UC5-0n-f9u" firstAttribute="leading" secondItem="qml-Ce-Crb" secondAttribute="trailing" constant="8" id="Dco-Ij-BKN"/>
+                        <constraint firstAttribute="bottom" secondItem="qml-Ce-Crb" secondAttribute="bottom" id="Dqi-oR-uUF"/>
+                        <constraint firstItem="UC5-0n-f9u" firstAttribute="top" secondItem="50P-EO-K4w" secondAttribute="top" id="pmH-Et-PHf"/>
+                        <constraint firstItem="qml-Ce-Crb" firstAttribute="top" secondItem="50P-EO-K4w" secondAttribute="top" id="t8w-5p-2td"/>
+                        <constraint firstItem="qml-Ce-Crb" firstAttribute="leading" secondItem="50P-EO-K4w" secondAttribute="leading" constant="10" id="tNX-Oc-F9Z"/>
+                        <constraint firstAttribute="trailing" secondItem="UC5-0n-f9u" secondAttribute="trailing" id="umr-mb-yEO"/>
+                        <constraint firstAttribute="height" constant="25" id="wFC-Fr-7xH"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYR-xZ-VzF">
+                    <rect key="frame" x="347" y="0.0" width="51" height="35"/>
+                    <state key="normal" title="Button" image="arrow_right"/>
+                    <connections>
+                        <action selector="onUserRoleTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="izN-W1-cKH"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="ZYR-xZ-VzF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DjA-kk-Piw"/>
+                <constraint firstAttribute="bottom" secondItem="50P-EO-K4w" secondAttribute="bottom" constant="5" id="RHV-7g-FIw"/>
+                <constraint firstItem="50P-EO-K4w" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="aZS-iB-YKt"/>
+                <constraint firstAttribute="bottom" secondItem="ZYR-xZ-VzF" secondAttribute="bottom" id="ebb-ha-0IP"/>
+                <constraint firstItem="50P-EO-K4w" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="i7q-J5-xhZ"/>
+                <constraint firstAttribute="trailing" secondItem="ZYR-xZ-VzF" secondAttribute="trailing" constant="16" id="nbs-gO-PuK"/>
+                <constraint firstItem="ZYR-xZ-VzF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="50P-EO-K4w" secondAttribute="trailing" constant="8" id="urk-QM-Hsa"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="borderView" destination="50P-EO-K4w" id="Ciy-eb-ddS"/>
+                <outlet property="deleteButton" destination="UC5-0n-f9u" id="Jft-s9-8gd"/>
+                <outlet property="titleLabel" destination="qml-Ce-Crb" id="LZ7-kN-1SP"/>
+                <outlet property="userRoleButton" destination="ZYR-xZ-VzF" id="Sw8-Ye-woe"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="197.20982142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="CloseCardIconWhite" width="14" height="14"/>
+        <image name="arrow_right" width="5" height="8"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -23,6 +23,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didEndReload()
     
     func showActions(for item: WrapData, sender: Any)
+    func didSelectAction(type: ActionType, on item: Item, sender: Any?)
     
     func needToShowSpinner()
     func needToHideSpinner()
@@ -121,6 +122,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
             self.collectionView?.reloadData()
+            self.setEmptyScreen(isHidden: !self.fileInfoManager.splittedItems.isEmpty)
             self.delegate?.didEndReload()
         }
     }
@@ -254,9 +256,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfItems = fileInfoManager.splittedItems[section]?.count ?? 0
-        setEmptyScreen(isHidden: numberOfItems != 0)
-        return numberOfItems
+        return fileInfoManager.splittedItems[section]?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -273,6 +273,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         let isSelectedCell = isSelected(item: item)
         cell.isSelected = isSelectedCell
         cell.updating()
+        cell.canShowSharedIcon = false
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
           
@@ -538,6 +539,15 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 
 //MARK: - LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate
 extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
+    
+    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
+        guard let item = itemModel else {
+            return
+        }
+        
+        delegate?.didSelectAction(type: type, on: item, sender: sender)
+    }
+    
     func canLongPress() -> Bool {
         return fileInfoManager.type.rootType == .byMe
     }

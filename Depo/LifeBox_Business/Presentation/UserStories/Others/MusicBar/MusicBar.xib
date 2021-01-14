@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
+            <connections>
+                <outlet property="artistLabel" destination="hRl-4f-gjc" id="z9q-Eh-K35"/>
+                <outlet property="contentView" destination="7TD-Km-mkZ" id="CLE-8O-0lS"/>
+                <outlet property="gradientView" destination="CYb-oQ-PdE" id="pfa-Kn-rco"/>
+                <outlet property="musicNameLabel" destination="hjb-dB-NHk" id="BQz-xn-OMs"/>
+                <outlet property="playPauseButton" destination="rGm-wJ-sPn" id="olt-R2-xKG"/>
+                <outlet property="progressConstraint" destination="pla-nx-je0" id="Knn-ce-2em"/>
+                <outlet property="progressViewContainer" destination="AwS-bS-X3J" id="Sb6-Ra-jXP"/>
+                <outlet property="zoomUpButton" destination="7Qv-7Z-1M5" id="gxT-e0-djG"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="7TD-Km-mkZ" userLabel="musicBar">
+            <rect key="frame" x="0.0" y="0.0" width="378" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6c-hM-A1c" userLabel="view">
+                    <rect key="frame" x="0.0" y="0.0" width="378" height="70"/>
+                    <subviews>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYb-oQ-PdE" customClass="GradientView" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="378" height="70"/>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="Artist" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRl-4f-gjc">
+                            <rect key="frame" x="53" y="31.5" width="272" height="13.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Qv-7Z-1M5">
+                            <rect key="frame" x="8" y="15" width="40" height="40"/>
+                            <accessibility key="accessibilityConfiguration" label="Zoom"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Xja-N5-yKT"/>
+                                <constraint firstAttribute="width" constant="40" id="zFW-Zy-SbC"/>
+                            </constraints>
+                            <state key="normal" image="common06"/>
+                            <connections>
+                                <action selector="actionZoomUpButton:" destination="-1" eventType="touchUpInside" id="QId-PO-Whj"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Music" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjb-dB-NHk">
+                            <rect key="frame" x="58" y="12" width="267" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGm-wJ-sPn">
+                            <rect key="frame" x="330" y="15" width="40" height="40"/>
+                            <accessibility key="accessibilityConfiguration">
+                                <accessibilityTraits key="traits" playsSound="YES"/>
+                            </accessibility>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="qrW-uu-Gkk"/>
+                                <constraint firstAttribute="width" constant="40" id="vG0-lW-SHi"/>
+                            </constraints>
+                            <state key="normal" image="bar_pause"/>
+                            <state key="selected" image="bar_play"/>
+                            <connections>
+                                <action selector="actionPlayPauseButton:" destination="-1" eventType="touchUpInside" id="kSA-cb-pUj"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="7Qv-7Z-1M5" firstAttribute="centerY" secondItem="O6c-hM-A1c" secondAttribute="centerY" id="29h-Iy-Cwg"/>
+                        <constraint firstItem="hjb-dB-NHk" firstAttribute="top" secondItem="O6c-hM-A1c" secondAttribute="top" constant="12" id="3lp-oc-kHE"/>
+                        <constraint firstItem="CYb-oQ-PdE" firstAttribute="leading" secondItem="O6c-hM-A1c" secondAttribute="leading" id="7XK-nf-fbO"/>
+                        <constraint firstItem="rGm-wJ-sPn" firstAttribute="centerY" secondItem="O6c-hM-A1c" secondAttribute="centerY" id="FIb-fo-Hnw"/>
+                        <constraint firstAttribute="trailing" secondItem="CYb-oQ-PdE" secondAttribute="trailing" id="IcZ-z2-chU"/>
+                        <constraint firstItem="hRl-4f-gjc" firstAttribute="leading" secondItem="7Qv-7Z-1M5" secondAttribute="trailing" constant="5" id="Jnb-HY-wbh"/>
+                        <constraint firstAttribute="bottom" secondItem="CYb-oQ-PdE" secondAttribute="bottom" id="Uz0-BD-RSU"/>
+                        <constraint firstItem="rGm-wJ-sPn" firstAttribute="leading" secondItem="hjb-dB-NHk" secondAttribute="trailing" constant="5" id="VHG-8h-2kG"/>
+                        <constraint firstItem="7Qv-7Z-1M5" firstAttribute="leading" secondItem="O6c-hM-A1c" secondAttribute="leading" constant="8" id="YMf-fh-YUb"/>
+                        <constraint firstItem="hjb-dB-NHk" firstAttribute="leading" secondItem="7Qv-7Z-1M5" secondAttribute="trailing" constant="10" id="Zak-uG-Qxy"/>
+                        <constraint firstItem="CYb-oQ-PdE" firstAttribute="top" secondItem="O6c-hM-A1c" secondAttribute="top" id="dGM-ap-PwQ"/>
+                        <constraint firstItem="rGm-wJ-sPn" firstAttribute="leading" secondItem="hRl-4f-gjc" secondAttribute="trailing" constant="5" id="fxe-Ha-rZw"/>
+                        <constraint firstAttribute="trailing" secondItem="rGm-wJ-sPn" secondAttribute="trailing" constant="8" id="t2k-F8-iuK"/>
+                        <constraint firstItem="hRl-4f-gjc" firstAttribute="top" secondItem="hjb-dB-NHk" secondAttribute="bottom" id="uyI-F8-t4O"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwS-bS-X3J" customClass="GradientView" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="378" height="6"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="6" id="Nmp-dB-fEO"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X22-16-emb">
+                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="6"/>
+                    <color key="backgroundColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="6" id="Rwk-Dc-hO7"/>
+                        <constraint firstAttribute="width" priority="999" id="pla-nx-je0"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.98039215690000003" green="0.60784313729999995" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="O6c-hM-A1c" firstAttribute="top" secondItem="7TD-Km-mkZ" secondAttribute="top" id="1FV-DR-RCU"/>
+                <constraint firstAttribute="trailing" secondItem="O6c-hM-A1c" secondAttribute="trailing" id="6VZ-r1-J7k"/>
+                <constraint firstItem="O6c-hM-A1c" firstAttribute="leading" secondItem="7TD-Km-mkZ" secondAttribute="leading" id="Jb5-m3-hQQ"/>
+                <constraint firstItem="AwS-bS-X3J" firstAttribute="top" secondItem="7TD-Km-mkZ" secondAttribute="top" id="Qzi-zH-co4"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X22-16-emb" secondAttribute="trailing" id="RLP-fh-C5J"/>
+                <constraint firstItem="AwS-bS-X3J" firstAttribute="leading" secondItem="7TD-Km-mkZ" secondAttribute="leading" id="YlP-A9-fES"/>
+                <constraint firstAttribute="bottom" secondItem="O6c-hM-A1c" secondAttribute="bottom" id="hii-yB-ogt"/>
+                <constraint firstItem="X22-16-emb" firstAttribute="top" secondItem="7TD-Km-mkZ" secondAttribute="top" id="mbI-DX-XpU"/>
+                <constraint firstItem="X22-16-emb" firstAttribute="leading" secondItem="7TD-Km-mkZ" secondAttribute="leading" id="pvg-He-mfN"/>
+                <constraint firstAttribute="trailing" secondItem="AwS-bS-X3J" secondAttribute="trailing" id="wmR-Pf-5Rx"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-455" y="413"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bar_pause" width="16" height="18"/>
+        <image name="bar_play" width="17" height="19"/>
+        <image name="common06" width="18" height="10"/>
+    </resources>
+</document>

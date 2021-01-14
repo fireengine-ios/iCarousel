@@ -23,8 +23,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
         super.viewIsReady(collectionView: collectionView)
         
-        let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar)
-        NotificationCenter.default.post(name: notificationName, object: nil)
+        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
     override func viewWillDisappear() {

@@ -267,6 +267,64 @@ enum ElementTypes {
         return result
     }
     
+    static func specifiedMoreActionTypes(for status: ItemStatus, item: BaseDataSourceItem) -> [ElementTypes] {
+        if status == .trashed {
+            return[.info] + ElementTypes.trashState
+        }
+        
+        guard let item = item as? Item else {
+            return []
+        }
+        
+        var types = [ElementTypes]()
+        if !item.isOwner {
+            //shared with me items
+            types.append(.info)
+            if let grantedPermissions = item.privateSharePermission?.granted {
+                if grantedPermissions.contains(.read) {
+                    if item.fileType.isContained(in: [.image, .video]) {
+                        types.append(.download)
+                    } else {
+                        types.append(.downloadDocument)
+                    }
+                }
+                
+                if grantedPermissions.contains(.delete) {
+                    if !item.isReadOnlyFolder {
+                        types.append(.moveToTrashShared)
+                    }
+                }
+            }
+            types.append(.leaveSharing)
+            return types
+        }
+        
+        if item.fileType == .photoAlbum {
+            types = [.shareAlbum, .download, .moveToTrash, .removeAlbum, .albumDetails]
+        } else if item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
+            types = [.shareAlbum, .albumDetails, .download]
+        } else {
+            types = [.info, .share, .move]
+            
+            types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
+            if !item.isReadOnlyFolder {
+                types.append(.moveToTrash)
+            }
+            
+            if item.fileType == .image || item.fileType == .video {
+                types.append(.download)
+            } else if item.fileType == .audio || item.fileType.isDocumentPageItem {
+                types.append(.downloadDocument)
+            }
+        }
+        
+        if item.isShared {
+            types.append(.endSharing)
+        }
+        
+        return types
+    }
+    
     func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = [], divorseItems: DivorseItems? = nil) -> String? {
         if let divorseItems = divorseItems {
             return divorseSuccessMessage(divorseItems: divorseItems)
@@ -393,5 +451,95 @@ enum ElementTypes {
         }
         
         return text
+    }
+    
+    func actionTitle(fileType: FileType? = nil) -> String {
+        switch self {
+        case .info:
+            return TextConstants.actionSheetInfo
+        case .edit:
+            return TextConstants.actionSheetEdit
+        case .download, .downloadDocument:
+            return TextConstants.actionSheetDownload
+        case .moveToTrash, .moveToTrashShared, .delete:
+            return TextConstants.actionSheetDelete
+        case .hide:
+            var title = TextConstants.actionSheetHide
+            if fileType?.isFaceImageAlbum == true || fileType == .photoAlbum {
+                title = TextConstants.actionSheetHideSingleAlbum
+            }
+            return title
+            
+        case .unhide:
+            return TextConstants.actionSheetUnhide
+        case .restore:
+            return TextConstants.actionSheetRestore
+        case .move:
+            return TextConstants.actionSheetMove
+        case .share, .shareAlbum:
+            return TextConstants.actionSheetShare
+        case .emptyTrashBin:
+            return TextConstants.actionSheetEmptyTrashBin
+        case .photos:
+            return TextConstants.actionSheetPhotos
+        case .createAlbum:
+            return TextConstants.actionSheetAddToAlbum
+        case .addToAlbum:
+            return TextConstants.actionSheetAddToAlbum
+        case .albumDetails:
+            return TextConstants.actionSheetAlbumDetails
+        case .makeAlbumCover:
+            return TextConstants.actionSheetMakeAlbumCover
+        case .removeFromAlbum, .removeFromFaceImageAlbum:
+            return TextConstants.actionSheetRemoveFromAlbum
+        case .backUp:
+            return TextConstants.actionSheetBackUp
+        case .copy:
+            return TextConstants.actionSheetCopy
+        case .createStory:
+            return TextConstants.actionSheetCreateStory
+        case .iCloudDrive:
+            return TextConstants.actionSheetiCloudDrive
+        case .lifeBox:
+            return TextConstants.actionSheetLifeBox
+        case .more:
+            return TextConstants.actionSheetMore
+        case .musicDetails:
+            return TextConstants.actionSheetMusicDetails
+        case .addToPlaylist:
+            return TextConstants.actionSheetAddToPlaylist
+        case .addToCmeraRoll:
+            return TextConstants.actionSheetDownloadToCameraRoll
+        case .addToFavorites:
+            return TextConstants.actionSheetAddToFavorites
+        case .removeFromFavorites:
+            return TextConstants.actionSheetRemoveFavorites
+        case .documentDetails:
+            return TextConstants.actionSheetDocumentDetails
+        case .select:
+            return TextConstants.actionSheetSelect
+        case .selectAll:
+            return TextConstants.actionSheetSelectAll
+        case .deSelectAll:
+            return TextConstants.actionSheetDeSelectAll
+        case .print:
+            return TextConstants.tabBarPrintLabel
+        case .rename:
+            return TextConstants.actionSheetRename
+        case .removeAlbum:
+            return TextConstants.actionSheetRemove
+        case .deleteDeviceOriginal:
+            return TextConstants.actionSheetDeleteDeviceOriginal
+        case .changeCoverPhoto:
+            return TextConstants.actionSheetChangeCover
+        case .instaPick:
+            return TextConstants.newInstaPick
+        case .endSharing:
+            return TextConstants.privateSharedEndSharingActionTitle
+        case .leaveSharing:
+            return TextConstants.privateSharedLeaveSharingActionTitle
+        default:
+            return ""
+        }
     }
 }

@@ -103,6 +103,10 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             return
         }
         
+        if let item = item as? Item, item.status != .active {
+            return
+        }
+        
         let group = DispatchGroup()
         
         group.enter()

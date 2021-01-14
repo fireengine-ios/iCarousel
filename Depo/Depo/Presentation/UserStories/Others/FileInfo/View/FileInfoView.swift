@@ -149,6 +149,11 @@ final class FileInfoView: UIView, FromNib {
         guard object?.isLocalItem == false, let projectId = object?.projectId, let uuid = object?.uuid else {
             return
         }
+        
+        if let item = object as? Item, item.status != .active {
+            return
+        }
+        
         getSharingInfo(projectId: projectId, uuid: uuid)
     }
     
@@ -233,8 +238,12 @@ final class FileInfoView: UIView, FromNib {
         if needShow {
             var info = sharingInfo
             info.members?.enumerated().forEach { index, member in
-                let localContactNames = localContactsService.getContactName(for: member.subject?.username ?? "", email: member.subject?.email ?? "")
-                info.members?[index].subject?.name = displayName(from: localContactNames)
+                if let contact = member.subject {
+                    let msisdnToSearch = contact.isUsernameUnhidden ? contact.username ?? "" : ""
+                    let emailToSearch = contact.isEmailUnhidden ? contact.email ?? "" : ""
+                    let localContactNames = localContactsService.getContactName(for: msisdnToSearch, email: emailToSearch)
+                    info.members?[index].subject?.name = displayName(from: localContactNames)
+                }
             }
             sharingInfoView.setup(with: info)
         }

@@ -70,7 +70,7 @@ final class PrivateShareContactCell: UITableViewCell {
     func setup(with contact: SharedContact, index: Int) {
         self.index = index
         nameLabel.text = contact.subject?.name
-        usernameLabel.text = contact.subject?.username
+        usernameLabel.text = contact.subject?.username ?? contact.subject?.email
         
         func setupInitials() {
             if contact.initials.isEmpty {
