@@ -52,11 +52,11 @@ extension FileInfoPresenter: FileInfoViewOutput {
     }
     
     func openShareAccessList(contact: SharedContact) {
-        guard let item = interactor.item, let projectId = item.projectId else {
+        guard let item = interactor.item, let accountUuid = item.accountUuid else {
             return
         }
         
-        router.openPrivateShareAccessList(projectId: projectId,
+        router.openPrivateShareAccessList(projectId: accountUuid,
                                           uuid: item.uuid,
                                           contact: contact,
                                           fileType: item.fileType)

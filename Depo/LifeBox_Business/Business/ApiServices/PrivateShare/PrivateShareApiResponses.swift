@@ -22,7 +22,7 @@ struct SharedFileInfo: Codable {
     let createdDate: Date?
     let lastModifiedDate: Date?
     let id: Int64
-    let projectId: String?
+    let accountUuid: String?
     let hash: String?
     let name: String?
     let uuid: String
@@ -32,7 +32,7 @@ struct SharedFileInfo: Codable {
     let status: String? // enum
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
-    let content_type: String?
+    let contentType: String?
     let metadata: SharedFileInfoMetaData?
     let album: [FileAlbum]?
     //        "location": {},
@@ -41,7 +41,7 @@ struct SharedFileInfo: Codable {
     
     
     var fileType: FileType {
-        return FileType(type: content_type, fileName: name)
+        return FileType(type: contentType, fileName: name)
     }
 }
 

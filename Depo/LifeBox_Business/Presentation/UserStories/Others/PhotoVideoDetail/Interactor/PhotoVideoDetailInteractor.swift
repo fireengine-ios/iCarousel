@@ -143,11 +143,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-        guard let projectId = item.projectId else {
+        guard let accountUuid = item.accountUuid else {
             return
         }
         
-        shareApiService.renameItem(projectId: projectId, uuid: item.uuid, name: newName) { [weak self] result in
+        shareApiService.renameItem(projectId: accountUuid, uuid: item.uuid, name: newName) { [weak self] result in
             switch result {
             case .success():
                 item.name = newName
@@ -179,11 +179,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func createNewUrl() {
         guard let index = currentItemIndex,
               let item = allItems[safe: index],
-              let projectId = item.projectId else {
+              let accountUuid = item.accountUuid else {
             return
         }
         
-        shareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { [weak self] result in
+        shareApiService.createDownloadUrl(projectId: accountUuid, uuid: item.uuid) { [weak self] result in
             switch result {
             case .success(let object):
                 if let url = object.url {
