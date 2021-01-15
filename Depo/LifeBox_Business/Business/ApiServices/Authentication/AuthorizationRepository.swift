@@ -86,8 +86,15 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         lock.lock() ; defer { lock.unlock() }
         
         //TODO: remove when token refresh API is ready
-        completion(false, 0.0)
+        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
+            refreshTokens { (_, _, _) in
+                completion(false, 0.0)
+            }
+        } else {
+            completion(false, 0.0)
+        }
         return
+        
         
         guard let response = request.task?.response as? HTTPURLResponse else {
             completion(false, 0.0)
@@ -149,7 +156,10 @@ extension AuthorizationRepositoryImp: RequestRetrier {
     
     func refreshTokens(completion: @escaping RefreshCompletion) {
         //FIXME: remove completion when refresh API if available
-        completion(false, nil, nil)
+        DispatchQueue.toMain {
+            self.refreshFailedHandler()
+            completion(false, nil, nil)
+        }
         return
         
         /// guard refresh retry
