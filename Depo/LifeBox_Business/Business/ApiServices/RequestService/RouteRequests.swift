@@ -371,8 +371,8 @@ struct RouteRequests {
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
         
-        enum Version_2 {
-            private static let baseV2Url = baseUrl +/ "v2/files/%@"
+        enum Version_3 {
+            private static let baseV2Url = baseUrl +/ "v3/files/%@"
             static let baseV2UrlString = baseV2Url.absoluteString
             private static let baseV2UrlBulk = baseUrl +/ "v2/files/_bulk"
             

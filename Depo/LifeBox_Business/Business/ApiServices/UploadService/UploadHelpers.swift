@@ -9,9 +9,8 @@
 import Foundation
 
 enum MetaSpesialFolder: String {
-    case MOBILE_UPLOAD = "MOBILE_UPLOAD"
+    case ROOT = ""
     case CROPY = "CROPY"
-    case none = ""
 }
 
 enum UploadType {
