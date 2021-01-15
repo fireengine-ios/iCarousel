@@ -1434,7 +1434,7 @@
 "delete_files" = "Delete Files";
 "LifeboxLargePopUpSubTitleBeetween80And99" = "Let's have a look at upgrade options";
 "LifeboxLargePopUpSubTitle100Premium" = "You have exceeded your lifebox storage. You can buy a new package to continue storing your memories or reduce your content to fit your available storage.";
-"LifeboxLargePopUpSubTitle100Freemium" = "You have exceeded your lifebox storage. Unless you buy a new package or reduce your contents to fit in your available storage, all of your content will be deleted.";
+"LifeboxLargePopUpSubTitle100Freemium" = "You have exceeded your lifebox storage. Please buy a new package or reduce your contents to fit in your available storage, all of your content will be deleted if you don’t take action.";
 "empty_trash_bin" = "Empty Trash Bin";
 "confirm_dialog_header_empty_trashbin" = "Empty Trash Bin";
 "confirm_empty_trashbin" = "All of the items in trash bin will be permanently deleted and you will have no access to them. Are you sure to continue?";
@@ -1871,4 +1871,4 @@
 "private_share_long_message" = "private_share_long_message";
 "private_share_long_emailmsisdn" = "Your E-mail or GSM number exceeds character limitation.";
 "private_share_start_max_number_of_users" = "You can not share with more than %d people.";
-"private_share_max_number_of_item_limit_exceeded" = "private_share_max_number_of_item_limit_exceeded";
+"private_share_max_number_of_item_limit_exceeded" = "Maximum number of files per share exceeded.";
