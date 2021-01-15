@@ -162,19 +162,6 @@ class SplashInteractor: SplashInteractorInput {
         }
     }
     
-    func checkEmptyEmail() {
-        authenticationService.checkEmptyEmail { [weak self] result in
-            DispatchQueue.toMain {
-                switch result {
-                case .success(let show):
-                    self?.output.showEmptyEmail(show: show)
-                case .failed(let error):
-                    print(error.description)
-                }
-            }
-        }
-    }
-    
     func updateUserLanguage() {
         authenticationService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
             DispatchQueue.toMain {
