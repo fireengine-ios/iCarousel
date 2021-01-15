@@ -92,7 +92,7 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
         uploadService.uploadFileList(items: items,
                                      uploadType: uploadType,
                                      uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
+                                     uploadTo: .ROOT,
                                      folder: folderUUID,
                                      isFavorites: isFavorites,
                                      isFromAlbum: isFromAlbum,

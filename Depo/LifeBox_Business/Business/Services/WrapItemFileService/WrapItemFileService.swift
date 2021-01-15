@@ -179,7 +179,7 @@ class WrapItemFileService: WrapItemFileOperations {
         uploadService.uploadFileList(items: localFiles,
                                      uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
+                                     uploadTo: .ROOT,
                                      success: success,
                                      fail: fail, returnedUploadOperation: { _ in})
     }
@@ -190,7 +190,7 @@ class WrapItemFileService: WrapItemFileOperations {
         uploadService.uploadFileList(items: localFiles,
                                      uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
+                                     uploadTo: .ROOT,
                                      success: success,
                                      fail: fail,
                                      returnedUploadOperation: returnedUploadOperations)
@@ -207,7 +207,7 @@ class WrapItemFileService: WrapItemFileOperations {
         uploadService.uploadFileList(items: localFiles,
                                      uploadType: .syncToUse,
                                      uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
+                                     uploadTo: .ROOT,
                                      success: {
                                         debugLog("SyncToUse - Waiting for item details")
                                         WrapItemFileService.waitItemsDetails(for: items,

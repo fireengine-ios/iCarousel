@@ -95,7 +95,7 @@ final class GalleryFileUploadService: NSObject {
             uploadType = .upload
         }
         
-        UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rootUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: projectId, success: { [weak self] in
+        UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .ROOT, folder: rootUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: projectId, success: { [weak self] in
             self?.delegate?.uploaded(items: items)
             
         }, fail: { [weak self] error in
