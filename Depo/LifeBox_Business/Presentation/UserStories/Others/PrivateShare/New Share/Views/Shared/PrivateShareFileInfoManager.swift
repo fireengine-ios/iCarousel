@@ -97,6 +97,8 @@ final class PrivateShareFileInfoManager {
         return service
     }
     
+    private(set) var isNextPageLoading = false
+    
     private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
     private var privateShareAPIService: PrivateShareApiService!
     private let pageSize = Device.isIpad ? 64 : 32
@@ -129,9 +131,16 @@ final class PrivateShareFileInfoManager {
             return
         }
         
+        isNextPageLoading = true
         let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
             
-            guard let self = self, isFinished, !loadedItems.isEmpty else {
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            guard isFinished, !loadedItems.isEmpty else {
+                self.isNextPageLoading = false
                 completion(false)
                 return
             }
@@ -143,8 +152,11 @@ final class PrivateShareFileInfoManager {
             
             let splitted = self.splitted(sortedArray: sorted)
             
-            self.splittedItems.replace(with: splitted) {
-                completion(true)
+            self.splittedItems.replace(with: splitted) { [weak self] in
+                self?.queue.async {
+                    self?.isNextPageLoading = false
+                    completion(true)
+                }
             }
         }
         

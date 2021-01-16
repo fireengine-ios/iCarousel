@@ -59,7 +59,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     func setup() {
         setupCollection()
-        setupRefresher()
+        setupTopRefresher()
         reload(type: .full)
     }
     
@@ -132,6 +132,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self,
                                  kind: UICollectionElementKindSectionHeader)
         
+        collectionView?.register(nibSupplementaryView: CollectionViewSpinnerFooter.self,
+                                 kind: UICollectionElementKindSectionFooter)
+
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
@@ -141,7 +144,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.dataSource = self
     }
     
-    private func setupRefresher() {
+    private func setupTopRefresher() {
         let refresher = UIRefreshControl()
         refresher.tintColor = ColorConstants.blueColor
         refresher.addTarget(self, action: #selector(fullReload), for: .valueChanged)
@@ -168,12 +171,39 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func loadNextPage() {
+        showNextPageSpinner()
         fileInfoManager.loadNextPage(completion: { [weak self] shouldReload in
 //            self?.append(indexes: itemsLoaded)
+            self?.hideNextPageSpinner()
             if shouldReload {
                 self?.reloadCollection()
             }
         })
+    }
+    
+    private func showNextPageSpinner() {
+        let lastSectionIndex = IndexPath(item: 0, section: fileInfoManager.splittedItems.count - 1)
+        DispatchQueue.toMain {
+            guard let footerView =
+                    self.collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: lastSectionIndex) as? CollectionViewSpinnerFooter else {
+                return
+            }
+            
+            footerView.startSpinner()
+        }
+    }
+    
+    private func hideNextPageSpinner() {
+        
+        let lastSectionIndex = IndexPath(item: 0, section: fileInfoManager.splittedItems.count - 1)
+        DispatchQueue.toMain {
+            guard let footerView =
+                    self.collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: lastSectionIndex) as? CollectionViewSpinnerFooter else {
+                return
+            }
+            
+            footerView.stopSpinner()
+        }
     }
     
     //TODO: maybe later
@@ -450,6 +480,12 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
         return UIEdgeInsets(top: 0, left: NumericConstants.iPhoneGreedInset, bottom: 0, right: NumericConstants.iPhoneGreedInset)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        let isLastSection = fileInfoManager.splittedItems.count == section + 1
+        let height: CGFloat = isLastSection ? 44.0 : 0.0
+        return CGSize(width: collectionView.contentSize.width, height: height)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let sortingRule = fileInfoManager.sorting.sortingRules
         guard sortingRule != .size else {
@@ -462,11 +498,29 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let sectionHeader = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
         
-        let title = headerTitle(for: indexPath.section)
-        sectionHeader.setText(text: title)
-        return sectionHeader
+        switch kind {
+            case UICollectionElementKindSectionFooter:
+                let footerSpinner = collectionView.dequeue(supplementaryView: CollectionViewSpinnerFooter.self, kind: kind, for: indexPath)
+                if fileInfoManager.isNextPageLoading {
+                    footerSpinner.startSpinner()
+                } else {
+                    footerSpinner.stopSpinner()
+                }
+                
+                return footerSpinner
+                
+            case UICollectionElementKindSectionHeader:
+                let sectionHeader = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
+                
+                let title = headerTitle(for: indexPath.section)
+                sectionHeader.setText(text: title)
+                return sectionHeader
+                
+            default:
+                assertionFailure()
+                return UICollectionReusableView()
+        }
     }
     
     //MARK: Helpers
