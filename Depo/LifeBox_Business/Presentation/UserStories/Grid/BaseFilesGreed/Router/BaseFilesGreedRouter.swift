@@ -39,11 +39,11 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
                 router.pushViewControllertoTableViewNavBar(viewController: controller)
                 
             } else {
-                guard let projectId = wrapperedItem.projectId, let name = wrapperedItem.name, let permissions = wrapperedItem.privateSharePermission else {
+                guard let accountUuid = wrapperedItem.accountUuid, let name = wrapperedItem.name, let permissions = wrapperedItem.privateSharePermission else {
                     return
                 }
                 
-                let sharedFolder = PrivateSharedFolderItem(projectId: projectId, uuid: selectedItem.uuid, name: name, permissions: permissions)
+                let sharedFolder = PrivateSharedFolderItem(projectId: accountUuid, uuid: selectedItem.uuid, name: name, permissions: permissions)
                 let controller = router.sharedFolder(rootShareType: .withMe, folder: sharedFolder)
                 router.pushViewControllertoTableViewNavBar(viewController: controller)
             }

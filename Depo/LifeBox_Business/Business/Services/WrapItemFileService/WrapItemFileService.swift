@@ -109,12 +109,12 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func endSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let projectId = file.projectId else {
+        guard let accountUuid = file.accountUuid else {
             fail?(ErrorResponse.string("don't have projectId"))
             return
         }
         
-        privateShareApiService.endShare(projectId: projectId, uuid: file.uuid) { response in
+        privateShareApiService.endShare(projectId: accountUuid, uuid: file.uuid) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -126,12 +126,12 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func leaveSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let projectId = file.projectId, let subjectId = SingletonStorage.shared.accountInfo?.projectID else {
+        guard let accountUuid = file.accountUuid, let subjectId = SingletonStorage.shared.accountUuid else {
             fail?(ErrorResponse.string("don't have projectId or subjectId"))
             return
         }
         
-        privateShareApiService.leaveShare(projectId: projectId, uuid: file.uuid, subjectId: subjectId) { response in
+        privateShareApiService.leaveShare(projectId: accountUuid, uuid: file.uuid, subjectId: subjectId) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -143,12 +143,12 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func moveToTrashShared(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let projectId = file.projectId else {
+        guard let accountUuid = file.accountUuid else {
             fail?(ErrorResponse.string("don't have projectId"))
             return
         }
         
-        privateShareApiService.moveToTrash(projectId: projectId, uuid: file.uuid) { response in
+        privateShareApiService.moveToTrash(projectId: accountUuid, uuid: file.uuid) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -179,7 +179,7 @@ class WrapItemFileService: WrapItemFileOperations {
         uploadService.uploadFileList(items: localFiles,
                                      uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
+                                     uploadTo: .ROOT,
                                      success: success,
                                      fail: fail, returnedUploadOperation: { _ in})
     }
@@ -190,7 +190,7 @@ class WrapItemFileService: WrapItemFileOperations {
         uploadService.uploadFileList(items: localFiles,
                                      uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
+                                     uploadTo: .ROOT,
                                      success: success,
                                      fail: fail,
                                      returnedUploadOperation: returnedUploadOperations)
@@ -207,7 +207,7 @@ class WrapItemFileService: WrapItemFileOperations {
         uploadService.uploadFileList(items: localFiles,
                                      uploadType: .syncToUse,
                                      uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
+                                     uploadTo: .ROOT,
                                      success: {
                                         debugLog("SyncToUse - Waiting for item details")
                                         WrapItemFileService.waitItemsDetails(for: items,
@@ -251,12 +251,12 @@ class WrapItemFileService: WrapItemFileOperations {
         items.forEach { item in
             group.enter()
             
-            guard let projectId = item.projectId else {
+            guard let accountUuid = item.accountUuid else {
                 group.leave()
                 return
             }
             
-            privateShareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { response in
+            privateShareApiService.createDownloadUrl(projectId: accountUuid, uuid: item.uuid) { response in
                 if case let ResponseResult.success(urlToDownload) = response {
                     item.tmpDownloadUrl = urlToDownload.url
                 }

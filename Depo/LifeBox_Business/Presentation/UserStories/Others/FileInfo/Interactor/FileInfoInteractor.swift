@@ -42,8 +42,8 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             return
         }
         
-        if let item = item as? Item, let projectId = item.projectId {
-            shareApiService.renameItem(projectId: projectId, uuid: item.uuid, name: newName) { [weak self] result in
+        if let item = item as? Item, let accountUuid = item.accountUuid {
+            shareApiService.renameItem(projectId: accountUuid, uuid: item.uuid, name: newName) { [weak self] result in
                 switch result {
                 case .success():
                     item.name = newName
@@ -71,7 +71,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
     }
     
     func getSharingInfo() {
-        guard item?.isLocalItem == false, let projectId = item?.projectId , let uuid = item?.uuid else {
+        guard item?.isLocalItem == false, let accountUuid = item?.accountUuid , let uuid = item?.uuid else {
             return
         }
         
@@ -92,7 +92,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             group.leave()
         }
             
-        shareApiService.getSharingInfo(projectId: projectId, uuid: uuid) { result in
+        shareApiService.getSharingInfo(projectId: accountUuid, uuid: uuid) { result in
             switch result {
             case .success(let info):
                 sharingInfo = info

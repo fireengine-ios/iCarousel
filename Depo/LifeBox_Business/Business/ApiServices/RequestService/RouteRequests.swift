@@ -259,14 +259,13 @@ struct RouteRequests {
     //MARK: - Private Share
     
     enum PrivateShare {
-        static let suggestions = baseUrl +/ "invitees"
-        static let share = baseUrl +/ "shares"
+        static let suggestions = baseUrl +/ "v1/business/invitees"
+        static let share = baseUrl +/ "v1/business/shares"
         
         enum Shared {
             private static let baseShares = share.absoluteString
             static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
             static let byMe = baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
-            //"https://run.mocky.io/v3/8d9274fb-3149-452b-9d7f-ef8b1ea20195"//
         }
     }
     
@@ -372,8 +371,8 @@ struct RouteRequests {
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
         
-        enum Version_2 {
-            private static let baseV2Url = baseUrl +/ "v2/files/%@"
+        enum Version_3 {
+            private static let baseV2Url = baseUrl +/ "v3/files/%@"
             static let baseV2UrlString = baseV2Url.absoluteString
             private static let baseV2UrlBulk = baseUrl +/ "v2/files/_bulk"
             

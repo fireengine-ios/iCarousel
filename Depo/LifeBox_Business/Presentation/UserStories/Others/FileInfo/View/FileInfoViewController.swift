@@ -213,7 +213,7 @@ extension FileInfoViewController: FileInfoViewInput {
             } else {
                 hideInfoDateLabels()
             }
-            checkCanEdit(item: object, projectId: object.projectId, permission: nil)
+            checkCanEdit(item: object, projectId: object.accountUuid, permission: nil)
             return
         }
         
@@ -225,7 +225,7 @@ extension FileInfoViewController: FileInfoViewInput {
             hideInfoDateLabels()
         }
         
-        checkCanEdit(item: object, projectId: object.projectId, permission: nil)
+        checkCanEdit(item: object, projectId: object.accountUuid, permission: nil)
         
         durationH.constant = 0
         view.layoutIfNeeded()
@@ -273,7 +273,7 @@ extension FileInfoViewController: FileInfoViewInput {
         sharingInfoView.setup(with: sharingInfo)
         
         if let item = interactor.item {
-            checkCanEdit(item: item, projectId: sharingInfo.projectId, permission: sharingInfo.permissions)
+            checkCanEdit(item: item, projectId: sharingInfo.accountUuid, permission: sharingInfo.permissions)
         }
     }
     
