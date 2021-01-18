@@ -32,7 +32,5 @@ protocol LoginInteractorInput {
     
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate)
     
-    func tryToRelogin()
-    
-    func stopUpdatePhone()
+//    func tryToRelogin()
 }

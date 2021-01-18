@@ -37,6 +37,5 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func showFAQView()
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
     
-    func successedVerifyPhone()
     func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler)
 }

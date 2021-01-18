@@ -24,19 +24,6 @@ class LoginRouter: LoginRouterInput {
         router.pushViewController(viewController: temsAndServices)
     }
     
-    func goToRegistration() {
-        if let registrationScreen = router.registrationScreen {
-            router.pushViewController(viewController: registrationScreen)
-        }
-    }
-    
-    func openEmptyEmail(successHandler: @escaping VoidHandler) {
-        let vc = EmailEnterController.initFromNib()
-        vc.successHandler = successHandler
-        let navVC = NavigationController(rootViewController: vc)
-        router.presentViewController(controller: navVC)
-    }
-    
     func showAccountStatePopUp(image: PopUpImage,
                                title: String,
                                titleDesign: DesignText,
@@ -73,19 +60,6 @@ class LoginRouter: LoginRouterInput {
     func openSupport() {
         let controller = SupportFormController.with(screenType: .login)
         router.pushViewController(viewController: controller)
-    }
-    
-    func showPhoneVerifiedPopUp(_ onClose: VoidHandler?) {
-        let popupVC = PopUpController.with(title: nil,
-                                           message: TextConstants.phoneUpdatedNeedsLogin,
-                                           image: .none,
-                                           buttonTitle: TextConstants.ok) { vc in
-                                            vc.close {
-                                                onClose?()
-                                            }
-        }
-        
-        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
     }
     
     func goToFaqSupportPage() {

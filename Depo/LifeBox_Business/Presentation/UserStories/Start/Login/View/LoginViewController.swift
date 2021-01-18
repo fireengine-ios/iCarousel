@@ -68,21 +68,6 @@ final class LoginViewController: ViewController {
         }
     }
     
-    @IBOutlet private weak var forgotPasswordButton: UIButton! {
-        willSet {
-            let attributes: [NSAttributedStringKey : Any] = [
-                .foregroundColor : UIColor.lrTealish,
-                .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
-                .font : UIFont.TurkcellSaturaDemFont(size: 16)
-            ]
-            
-            let attributedTitle = NSAttributedString(string: TextConstants.loginCantLoginButtonTitle,
-                                                     attributes: attributes)
-            newValue.setAttributedTitle(attributedTitle, for: .normal)
-            newValue.isOpaque = true
-        }
-    }
-    
     @IBOutlet private weak var loginEnterView: ProfileTextEnterView! {
         willSet {
             newValue.textField.enablesReturnKeyAutomatically = true
@@ -260,10 +245,6 @@ final class LoginViewController: ViewController {
                                                    captchaID: captchaView.currentCaptchaUUID,
                                                    captchaAnswer: captchaView.captchaAnswerTextField.text ?? "")
         }
-    }
-    
-    @IBAction func onForgotPasswordTap(_ sender: Any) {
-        output.onForgotPasswordTap()
     }
 }
 
