@@ -505,7 +505,7 @@ extension TabBarViewController: TabBarActionHandler {
             
             let controller: UIViewController
             if let sharedFolder = router.sharedFolderItem {
-                let parameters = CreateFolderSharedWithMeParameters(projectId: sharedFolder.projectId, rootFolderUuid: sharedFolder.uuid)
+                let parameters = CreateFolderSharedWithMeParameters(projectId: sharedFolder.accountUuid, rootFolderUuid: sharedFolder.uuid)
                 controller = router.createNewFolderSharedWithMe(parameters: parameters)
             } else {
                 controller = router.createNewFolder(rootFolderID: folderUuid, isFavorites: isFavorites)
