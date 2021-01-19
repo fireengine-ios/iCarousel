@@ -477,6 +477,8 @@ final class UploadService: BaseRequestService {
                             //operation was cancelled - not an actual error
                             self.showCardProgress(type: cardType)
                             checkIfFinished()
+                        } else if error.errorCode == 403 {
+                            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.unauthorizedUploadOperation)
                         } else {
                             self.uploadOperations.removeIfExists(finishedOperation)
                             if let fileName = finishedOperation.inputItem.name {
