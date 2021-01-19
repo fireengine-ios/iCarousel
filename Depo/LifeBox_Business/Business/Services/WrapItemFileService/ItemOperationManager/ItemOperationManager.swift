@@ -63,11 +63,15 @@ protocol ItemOperationManagerViewProtocol: class {
 
 extension ItemOperationManagerViewProtocol {
     func startUploadFile(file: WrapData) {
-        UIApplication.setIdleTimerDisabled(true)
+        DispatchQueue.toMain {
+            UIApplication.setIdleTimerDisabled(true)
+        }
     }
     
     func startUploadFilesToAlbum(files: [WrapData]) {
-        UIApplication.setIdleTimerDisabled(true)
+        DispatchQueue.toMain {
+            UIApplication.setIdleTimerDisabled(true)
+        }
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}

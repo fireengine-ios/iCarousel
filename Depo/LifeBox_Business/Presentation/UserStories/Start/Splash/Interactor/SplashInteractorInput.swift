@@ -12,7 +12,6 @@ protocol SplashInteractorInput {
     func startLoginInBackground()
     func checkEULA()
     var isPasscodeEmpty: Bool { get }
-    func checkEmptyEmail()
     func updateUserLanguage()
     func trackScreen()
 }
