@@ -73,19 +73,9 @@ class SplashInteractor: SplashInteractorInput {
         if tokenStorage.accessToken == nil {
             if reachabilityService.isReachableViaWiFi || reachabilityService.isReachableViaWWAN {
                 isTryingToLogin = false
-                failLogin()
-//                isTryingToLogin = false
-            ///Additional check "if this is LTE",
-            ///because our check for wifife or LTE looks like this:
-                ///"self.reachability?.connection == .cellular && apiReachability.connection == .reachable"
-            ///There is possability that we fall through to else, only because of no longer reachable internet.
-            ///So we check second time.
-            } else {
-                output.asyncOperationSuccess()
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
-                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .networkError)
-                failLogin()
             }
+            failLogin()
+            output.asyncOperationSuccess()
         } else {
             //TODO: uncomment when refresh API is ready
 //            refreshAccessToken { [weak self] in
@@ -118,16 +108,6 @@ class SplashInteractor: SplashInteractorInput {
 //        }
     }
     
-    func turkcellSuccessLogin() {
-
-        analyticsService.trackLoginEvent(loginType: .turkcellGSM)
-//        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
-
-        DispatchQueue.toMain {
-            self.output.onSuccessLoginTurkcell()
-        }
-    }
-    
     func successLogin() {
         analyticsService.trackLoginEvent(loginType: .rememberLogin)
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
@@ -158,19 +138,6 @@ class SplashInteractor: SplashInteractorInput {
                     UIApplication.showErrorAlert(message: errorResponse.description)
                 } else {
                     self?.output.onFailEULA(isFirstLogin: self?.isFirstLogin == true)
-                }
-            }
-        }
-    }
-    
-    func checkEmptyEmail() {
-        authenticationService.checkEmptyEmail { [weak self] result in
-            DispatchQueue.toMain {
-                switch result {
-                case .success(let show):
-                    self?.output.showEmptyEmail(show: show)
-                case .failed(let error):
-                    print(error.description)
                 }
             }
         }

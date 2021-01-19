@@ -100,7 +100,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func updateUserLanguageSuccess() {
-        interactor.checkEmptyEmail()
+        openApp() 
     }
     
     func updateUserLanguageFailed(error: Error) {
@@ -136,24 +136,6 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
             router.navigateToApplication()
             openLink()
         }
-    }
-    
-    func showEmptyEmail(show: Bool) {
-        show ? openEmptyEmail() : openApp()  
-    }
-    
-    private func openEmptyEmail() {
-        /// guard for two controller due to interactor.startLoginInBackground()
-        if UIApplication.topController() is EmailEnterController {
-            return
-        }
-        
-        let vc = EmailEnterController.initFromNib()
-        vc.successHandler = { [weak self] in
-            self?.openApp()
-        }
-        let navVC = NavigationController(rootViewController: vc)
-        UIApplication.topController()?.present(navVC, animated: true, completion: nil)
     }
     
     func onFailEULA(isFirstLogin: Bool) {
