@@ -271,7 +271,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func createFolder(projectId: String, parentFolderUuid: String, requestItem: CreateFolderResquestItem, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.baseV2UrlString, projectId)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.baseV3UrlString, projectId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -290,7 +290,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func getUrlToUpload(projectId: String, parentFolderUuid: String, requestItem: UploadFileRequestItem, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.baseV2UrlString, projectId)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.baseV3UrlString, projectId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }

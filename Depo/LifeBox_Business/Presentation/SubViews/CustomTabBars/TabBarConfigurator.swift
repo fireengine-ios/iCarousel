@@ -14,7 +14,7 @@ enum TabScreenIndex: Int {
 }
 
 enum TabBarItem: CaseIterable {
-    case allFiles
+    case myDisk
     case sharedFiles
     case plus
     case sharedArea
@@ -22,7 +22,7 @@ enum TabBarItem: CaseIterable {
     
     var title: String {
         switch self {
-        case .allFiles:
+        case .myDisk:
             return TextConstants.tabBarItemMyDisk
         case .sharedFiles:
             return TextConstants.tabBarItemSharedFiles
@@ -37,7 +37,7 @@ enum TabBarItem: CaseIterable {
     
     var icon: UIImage? {
         switch self {
-        case .allFiles:
+        case .myDisk:
             return UIImage(named: "outlineDocs")
         case .sharedFiles:
             return UIImage(named: "segment_shared")
@@ -52,7 +52,7 @@ enum TabBarItem: CaseIterable {
     
     var accessibilityLabel: String {
         switch self {
-        case .allFiles:
+        case .myDisk:
             return TextConstants.homeButtonAllFiles
         default:
             return ""
@@ -70,7 +70,7 @@ final class TabBarConfigurator {
             settings = router.settingsIpad(settingsController: settings)
         }
         
-        let list = [router.segmentedFiles,
+        let list = [router.myDisk,
                     router.sharedFiles,
                     router.sharedAreaController,
                     settings]

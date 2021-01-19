@@ -421,7 +421,7 @@ final class GetSharedItemsOperation: Operation {
                 task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
                 
             case .innerFolder(_, let folder):
-                task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                task = privateShareAPIService.getFiles(projectId: folder.accountUuid, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
                     switch response {
                         case .success(let fileSystem):
                             completion(.success(fileSystem.fileList))

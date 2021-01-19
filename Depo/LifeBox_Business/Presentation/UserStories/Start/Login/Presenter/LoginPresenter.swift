@@ -39,26 +39,13 @@ class LoginPresenter: BasePresenter {
     }
     
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
-        if interactor.isShowEmptyEmail {
-            completeAsyncOperationEnableScreen()
-            openEmptyEmail()
-        } else {
             interactor.updateUserLanguage()
-        }
     }
     
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         AuthoritySingleton.shared.checkNewVersionApp()
         router.goToHomePage()
-    }
-    
-    private func openEmptyEmail() {
-        let onSuccess: VoidHandler = { [weak self] in
-            self?.interactor.updateUserLanguage()
-        }
-        
-        router.openEmptyEmail(successHandler: onSuccess)
     }
     
     private func failLogin(message: String) {
@@ -72,10 +59,6 @@ class LoginPresenter: BasePresenter {
     private func failedBlockError() {
         completeAsyncOperationEnableScreen()
         view.failedBlockError()
-    }
-    
-    private func openEmptyPhone() {
-        interactor.updateEmptyPhone(delegate: self)
     }
     
     func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler) {
@@ -145,11 +128,6 @@ extension LoginPresenter: LoginViewOutput {
                                atachedCaptcha: atachedCaptcha)
     }
     
-    func onForgotPasswordTap() {
-        isPresenting = true
-        router.goToForgotPassword()
-    }
-    
     func startedEnteringPhoneNumber(withPlus: Bool) {
         interactor.findCoutryPhoneCode(plus: withPlus)
     }
@@ -198,7 +176,9 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
             
         case .needSignUp:
-            needSignUp(message: TextConstants.loginScreenNeedSignUpError)
+            debugLog("processLoginError:  .needSignUp this error should be impossible")
+            failLogin(message: TextConstants.loginScreenServerError)
+//            needSignUp(message: TextConstants.loginScreenNeedSignUpError)
             
         case .incorrectUsernamePassword:
             failLogin(message: TextConstants.loginScreenCredentialsError)
@@ -219,7 +199,8 @@ extension LoginPresenter: LoginInteractorOutput {
             
         case .emptyPhone:
             completeAsyncOperationEnableScreen()
-            openEmptyPhone()
+            debugLog("processLoginError:  .emptyPhone this error should be impossible")
+//            openEmptyPhone()
             
         case .emptyCaptcha:
             view.captchaFieldError(TextConstants.captchaIsEmpty)
@@ -228,19 +209,12 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.loginScreenServerError)
             
         case .emptyEmail:
+            debugLog("processLoginError:  .emptyEmail this error should be impossible")
+            failLogin(message: TextConstants.loginScreenServerError)
             completeAsyncOperationEnableScreen()
-            openEmptyEmail()
+//            openEmptyEmail()
         }
         
-    }
-    
-    func needSignUp(message: String) {
-        completeAsyncOperationEnableScreen()
-        let onClose = { [weak self] in
-            self?.isPresenting = true
-            self?.router.goToRegistration()
-        }
-        router.showNeedSignUp(message: message, onClose: onClose)
     }
     
     func needShowCaptcha() {
@@ -310,12 +284,6 @@ extension LoginPresenter: LoginInteractorOutput {
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
     }
     
-    func successedVerifyPhone() {        
-        router.showPhoneVerifiedPopUp { [weak self] in
-            self?.interactor.stopUpdatePhone()
-        }
-    }
-    
     func updateUserLanguageSuccess() {
         openApp()
         completeAsyncOperationEnableScreen()
@@ -370,7 +338,8 @@ extension LoginPresenter: AccountWarningServiceDelegate {
     }
     
     func needToRelogin() {
-        interactor.tryToRelogin()
+        debugLog("needToRelogin, no silent login after phone update")
+//        interactor.tryToRelogin()
     }
     
 }

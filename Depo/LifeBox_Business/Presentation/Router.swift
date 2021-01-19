@@ -522,6 +522,15 @@ class RouterVC: NSObject {
         return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, folderItem: folder))
     }
     
+    var myDisk: UIViewController? {
+        if let folder = PrivateSharedFolderItem.rootFolder {
+            return sharedFolder(rootShareType: .innerFolder(type: .byMe, folderItem: folder), folder: folder)
+        } else {
+            assertionFailure()
+            return nil
+        }
+    }
+    
     // MARK: Music Player
     
     func musicPlayer(status: ItemStatus) -> UIViewController {
@@ -903,5 +912,5 @@ class RouterVC: NSObject {
     var sharedAreaController: UIViewController {
         SharedAreaViewController.initFromNib()
     }
-
+    
 }

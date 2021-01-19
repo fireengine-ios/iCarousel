@@ -372,21 +372,22 @@ struct RouteRequests {
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
         
         enum Version_3 {
-            private static let baseV2Url = baseUrl +/ "v3/files/%@"
-            static let baseV2UrlString = baseV2Url.absoluteString
-            private static let baseV2UrlBulk = baseUrl +/ "v2/files/_bulk"
+            private static let baseV3Url = baseUrl +/ "v3/files/%@"
+            static let baseV3UrlString = baseV3Url.absoluteString
+            private static let baseV3UrlBulk = baseUrl +/ "v2/files/_bulk"
             
-            static let filesFromFolder = baseV2UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
-            static let sharingInfo = baseV2UrlString + "/%@"
-            static let shareAcls = baseV2UrlString + "/%@/acls"
+            //"https://run.mocky.io/v3/d8067201-dc7d-4990-8467-b5b4de18e26a"//
+            static let filesFromFolder = baseV3UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
+            static let sharingInfo = baseV3UrlString + "/%@"
+            static let shareAcls = baseV3UrlString + "/%@/acls"
             static let shareAcl = shareAcls + "/%d"
-            static let leaveShare = baseV2UrlString + "/%@/acls?subjectType=USER&subjectId=%@"
+            static let leaveShare = baseV3UrlString + "/%@/acls?subjectType=USER&subjectId=%@"
             static let rename = sharingInfo + "/name"
             
-            static let createDownloadUrl = baseV2UrlBulk +/ "create-download-url"
-            static let move = baseV2UrlBulk +/ "move"
-            static let delete = baseV2UrlBulk +/ "delete"
-            static let trash = baseV2UrlBulk +/ "trash"
+            static let createDownloadUrl = baseV3UrlBulk +/ "create-download-url"
+            static let move = baseV3UrlBulk +/ "move"
+            static let delete = baseV3UrlBulk +/ "delete"
+            static let trash = baseV3UrlBulk +/ "trash"
         }
     }
 

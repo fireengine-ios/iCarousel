@@ -274,41 +274,6 @@ class LoginInteractor: LoginInteractorInput {
         }
     }
     
-    private func silentLogin(token: String) {
-        authenticationService.silentLogin(token: token, success: { [weak self] in
-            DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                
-                self.accountService.updateBrandType()
-                
-                self.tokenStorage.isRememberMe = self.rememberMe
-                self.output?.succesLogin()
-            }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async { [weak self] in
-                    self?.tryToRelogin()
-                }
-        })
-    }
-    
-    func tryToRelogin() {
-        guard let login = login, let password = password else {
-            assertionFailure()
-            return
-        }
-        
-        authificate(login: login, password: password, atachedCaptcha: nil) { _, _ in
-            DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                self.output?.successedVerifyPhone()
-            }
-        }
-    }
-    
     //MARK: LoginInteractorInput
     func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
         authificate(login: login, password: password, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
