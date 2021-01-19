@@ -279,8 +279,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         showCurtainView(show: state)
         if state {
-            debugLog("forced crash")
-            fatalError("forced crash!!!")
             showButtonRainbow()
         } else {
             hideButtonRainbow()
