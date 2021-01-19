@@ -373,7 +373,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     private func showDetailView(for item: WrapData) {
         if item.isFolder == true {
             if let accountUuid = item.accountUuid, let name = item.name, let permissions = item.privateSharePermission  {
-                let sharedFolder = PrivateSharedFolderItem(projectId: accountUuid, uuid: item.uuid, name: name, permissions: permissions)
+                let sharedFolder = PrivateSharedFolderItem(accountUuid: accountUuid, uuid: item.uuid, name: name, permissions: permissions)
                 openFolder(with: sharedFolder)
             }
             

@@ -43,7 +43,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
                     return
                 }
                 
-                let sharedFolder = PrivateSharedFolderItem(projectId: accountUuid, uuid: selectedItem.uuid, name: name, permissions: permissions)
+                let sharedFolder = PrivateSharedFolderItem(accountUuid: accountUuid, uuid: selectedItem.uuid, name: name, permissions: permissions)
                 let controller = router.sharedFolder(rootShareType: .withMe, folder: sharedFolder)
                 router.pushViewControllertoTableViewNavBar(viewController: controller)
             }

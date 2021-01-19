@@ -369,10 +369,20 @@ struct UploadFileRequestItem: Encodable {
 }
 
 struct PrivateSharedFolderItem: Equatable {
-    let projectId: String
+    let accountUuid: String
     let uuid: String
     let name: String
     let permissions: SharedItemPermission
+    
+    static var rootFolder: PrivateSharedFolderItem? {
+        //TODO: get permissions or set default?
+        let permissions = SharedItemPermission(granted: nil, bitmask: nil)
+        guard let accountUuid = SingletonStorage.shared.accountUuid else {
+            return nil
+        }
+        
+        return PrivateSharedFolderItem(accountUuid: accountUuid, uuid: "", name: TextConstants.tabBarItemMyDisk, permissions: permissions)
+    }
 }
 
 struct PrivateShareAccessListObject: Codable {

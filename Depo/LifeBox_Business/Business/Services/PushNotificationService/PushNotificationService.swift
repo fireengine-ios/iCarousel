@@ -97,7 +97,7 @@ final class PushNotificationService {
         switch action {
         case .main, .home: openMain()
         case .floatingMenu: openFloatingMenu()
-        case .allFiles: openAllFiles()
+        case .myDisk: openMyDisk()
         case .music: openMusic()
         case .documents: openDocuments()
         case .favorites: openFavorites()
@@ -218,7 +218,7 @@ final class PushNotificationService {
     }
     
     private func openMain() {
-        openTabBarItem(index: .documents)
+        openMyDisk()
     }
     
     private func openFloatingMenu() {
@@ -229,8 +229,16 @@ final class PushNotificationService {
         tabBarVC.showRainbowIfNeed()
     }
     
-    private func openAllFiles() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
+//    private func openAllFiles() {
+//        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
+//    }
+    
+    private func openMyDisk() {
+        if let folder = PrivateSharedFolderItem.rootFolder {
+            pushTo(router.sharedFolder(rootShareType: .innerFolder(type: .byMe, folderItem: folder), folder: folder))
+        } else {
+            assertionFailure()
+        }
     }
     
     private func openDocuments() {

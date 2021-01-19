@@ -24,7 +24,7 @@ enum AnalyticsAppScreens {
     case documents
     ///HomePage cards And adjusted Screens
     case freeAppSpace
-    case allFiles
+    case myDisk
     case favorites
     case upload
     case search
@@ -176,7 +176,7 @@ enum AnalyticsAppScreens {
         ///HomePage cards And adjusted Screens
         case .freeAppSpace:
             return "Free Up Space"
-        case .allFiles:
+        case .myDisk:
             return "All Files"
         case .favorites:
             return "Favorites"
