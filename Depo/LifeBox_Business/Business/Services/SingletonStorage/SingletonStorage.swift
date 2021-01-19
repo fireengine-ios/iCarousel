@@ -14,11 +14,6 @@ class SingletonStorage {
     
     static let shared = SingletonStorage()
     
-    private let tokenStorage: TokenStorage = factory.resolve()
-    var accountUuid: String? {
-        get { tokenStorage.accountUuid }
-        set { tokenStorage.accountUuid = newValue }
-    }
     var isAppraterInited: Bool = false
     var accountInfo: AccountInfoResponse?
     var featuresInfo: FeaturesResponse?
@@ -66,29 +61,27 @@ class SingletonStorage {
         if let info = accountInfo, !forceReload {
             success(info)
         } else {
-            AccountService().info(success: { [weak self] accountInfoResponse in
-                if let resp = accountInfoResponse as? AccountInfoResponse {
-                    self?.accountInfo = resp
-                    
-                    self?.resumableUploadInfoService.updateInfo { [weak self] featuresInfo in
-                        self?.featuresInfo = featuresInfo
-                        ///remove user photo from cache on start application
-                        ImageDownloder.removeImageFromCache(url: resp.urlForPhoto, completion: {
-                            DispatchQueue.toMain {
-                                success(resp)
-                            }
-                        })
-                    }
-                } else {
-                    DispatchQueue.toMain {
-                        fail(ErrorResponse.string(TextConstants.errorServer))
-                    }
+            AccountService().info { [weak self] response in
+                switch response {
+                    case .success(let accountInfo):
+                        self?.accountInfo = accountInfo
+                        
+                        self?.resumableUploadInfoService.updateInfo { [weak self] featuresInfo in
+                            self?.featuresInfo = featuresInfo
+                            ///remove user photo from cache on start application
+                            ImageDownloder.removeImageFromCache(url: accountInfo.profilePhoto, completion: {
+                                DispatchQueue.toMain {
+                                    success(accountInfo)
+                                }
+                            })
+                        }
+                        
+                    case .failed(let error):
+                        DispatchQueue.toMain {
+                            fail(ErrorResponse.error(error))
+                        }
                 }
-            }, fail: { error in
-                DispatchQueue.toMain {
-                    fail(error)
-                }
-            })
+            }
         }
     }
     
@@ -160,15 +153,15 @@ class SingletonStorage {
     }
     
     var isTurkcellUser: Bool {
-        return accountInfo?.isTurkcellUser ?? false
+        return false
     }
     
     var isUserFromTurkey: Bool {
-        return accountInfo?.isUserFromTurkey ?? false
+        return false
     }
     
     var uniqueUserID: String {
-        return accountInfo?.projectID ?? ""
+        return accountInfo?.uuid ?? ""
     }
     
     func getUniqueUserID(success:@escaping ((_ unigueUserID: String) -> Void), fail: @escaping FailResponse) {
@@ -178,7 +171,7 @@ class SingletonStorage {
         }
         
         getAccountInfoForUser(success: { info in
-            success(info.projectID ?? "")
+            success(info.uuid)
         }, fail: fail)
     }
 }
