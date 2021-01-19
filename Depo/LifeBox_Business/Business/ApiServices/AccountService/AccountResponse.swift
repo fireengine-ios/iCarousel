@@ -31,7 +31,7 @@ struct AccountJSONConstants {
     static let url = "url"
     static let otp = "otp"
     static let referenceToken = "referenceToken"
-    static let gapID = "gapId"
+    static let externalId = "externalId"
     static let isUpdateMobilePaymentPermissionRequired = "isUpdateMobilePaymentPermissionRequired"
     
     static let quotaBytes = "quotaBytes"
@@ -71,7 +71,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var dob: String?
     var urlForPhoto: URL?
     var projectID: String?
-    var gapId: String?
+    var externalId: String?
     var address: String?
     var emailVerificationRemainingDays: Int?
     var isUpdateMobilePaymentPermissionRequired: Bool?
@@ -101,7 +101,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         hasSecurityQuestionInfo = json?[AccountJSONConstants.hasSecurityQuestionInfo].bool
         securityQuestionId = json?[AccountJSONConstants.securityQuestionId].int
         name = json?[AccountJSONConstants.name].string
-        gapId = json?[AccountJSONConstants.gapID].string
+        externalId = json?[AccountJSONConstants.externalId].string
         surname = json?[AccountJSONConstants.surname].string
         username = json?[AccountJSONConstants.username].string
         dob = json?[AccountJSONConstants.birthday].string

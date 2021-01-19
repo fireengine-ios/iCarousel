@@ -51,7 +51,7 @@ final class NetmeraService {
             var phoneNumber: Int = 0
             var address: Int = 0
             var birthday: Int = 0
-            var gapID = ""
+            var externalId = ""
             prepareAccountInfo(preparedAccountInfo: { info in
                 guard let accountInfo = info else {
                     group.leave()
@@ -66,7 +66,7 @@ final class NetmeraService {
                 phoneNumber = (accountInfo.phoneNumber ?? "").isEmpty ? 0 : 1
                 address = (accountInfo.address ?? "").isEmpty ? 0 : 1
                 birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
-                gapID = accountInfo.gapId ?? ""
+                externalId = accountInfo.externalId ?? ""
                 group.leave()
             })
             
@@ -98,7 +98,7 @@ final class NetmeraService {
                                              isBirthDay: birthday,
                                              galleryAccessPermission: galleryAccessPermission)
                 
-                user.userId = gapID
+                user.userId = externalId
                 DispatchQueue.toMain {
                     Netmera.update(user)
                 }
@@ -164,7 +164,7 @@ extension NetmeraService {
                                      twoFactorAuthentication: "Null", emailVerification: "Null",
                                      autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", regionCode: "Null", isUserName: 0,
                                      isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0, galleryAccessPermission: "Null")
-        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+        user.userId = SingletonStorage.shared.accountInfo?.externalId ?? ""
         DispatchQueue.toMain {
             Netmera.update(user)
         }
