@@ -9,11 +9,6 @@
 class LoginRouter: LoginRouterInput {
     let router = RouterVC()
     
-    func goToForgotPassword() {
-        let forgotPassword = router.forgotPasswordScreen
-        router.pushViewController(viewController: forgotPassword!)
-    }
-    
     func goToHomePage() {
         let homePage = router.tabBarScreen
         router.setNavigationController(controller: homePage)
@@ -45,16 +40,6 @@ class LoginRouter: LoginRouterInput {
     func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
         let vc = TwoFactorAuthenticationViewController(response: response)
         router.pushViewController(viewController: vc)
-    }
-    
-    func showNeedSignUp(message: String, onClose: @escaping VoidHandler) {
-        let popUp = PopUpController.with(title: TextConstants.errorAlert,
-                                         message: message,
-                                         image: .error,
-                                         buttonTitle: TextConstants.ok) { controller in
-                                            controller.close(completion: onClose)
-        }
-        router.presentViewController(controller: popUp)
     }
     
     func openSupport() {
