@@ -86,7 +86,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
         lock.lock() ; defer { lock.unlock() }
         
         //TODO: remove when token refresh API is ready
-        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401 {
+        if let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401, !response.url!.absoluteString.contains("temp_url_expires") {
             refreshTokens { (_, _, _) in
                 completion(false, 0.0)
             }

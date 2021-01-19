@@ -562,7 +562,7 @@ class FileService: BaseRequestService {
     
     private func trackDownloaded(lastQueueItems: [Item]) {
         if self.allOperationsCount == self.completedOperationsCount {
-            analyticsService.trackDimentionsEveryClickGA(screen: .allFiles, downloadsMetrics: lastQueueItems.count, uploadsMetrics: nil, isPaymentMethodNative: nil)
+            analyticsService.trackDimentionsEveryClickGA(screen: .myDisk, downloadsMetrics: lastQueueItems.count, uploadsMetrics: nil, isPaymentMethodNative: nil)
         }
     }
     
