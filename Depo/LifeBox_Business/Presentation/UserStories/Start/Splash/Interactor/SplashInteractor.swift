@@ -77,9 +77,10 @@ class SplashInteractor: SplashInteractorInput {
             failLogin()
             output.asyncOperationSuccess()
         } else {
-            refreshAccessToken { [weak self] in
+            //TODO: uncomment when refresh API is ready
+//            refreshAccessToken { [weak self] in
                 /// self can be nil due logout
-                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
                     SingletonStorage.shared.getOverQuotaStatus {
@@ -93,7 +94,7 @@ class SplashInteractor: SplashInteractorInput {
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
                     /// we don't need logout here
                     /// only internet error
-                    //self?.failLogin()
+                    self?.failLogin()
                     DispatchQueue.toMain {
                         if self?.reachabilityService.isReachable == true {
                             self?.output.onFailGetAccountInfo(error: error)
@@ -104,7 +105,7 @@ class SplashInteractor: SplashInteractorInput {
                     }
                 })
             }
-        }
+//        }
     }
     
     func successLogin() {

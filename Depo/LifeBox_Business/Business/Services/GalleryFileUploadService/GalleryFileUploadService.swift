@@ -82,20 +82,20 @@ final class GalleryFileUploadService: NSObject {
         let isFavorites = router.isOnFavoritesView()
         let isFromAlbum = false
         
-        let projectId: String?
+        let accountUuid: String?
         let rootUUID: String
         let uploadType: UploadType
         if let sharedFolderInfo = router.sharedFolderItem {
             rootUUID = sharedFolderInfo.uuid
-            projectId = sharedFolderInfo.projectId
-            uploadType = projectId == SingletonStorage.shared.accountInfo?.projectID ? .upload : .sharedWithMe
+            accountUuid = sharedFolderInfo.accountUuid
+            uploadType = accountUuid == SingletonStorage.shared.accountUuid ? .upload : .sharedWithMe
         } else {
             rootUUID = router.getParentUUID()
-            projectId = nil
+            accountUuid = nil
             uploadType = .upload
         }
         
-        UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rootUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: projectId, success: { [weak self] in
+        UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .ROOT, folder: rootUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: accountUuid, success: { [weak self] in
             self?.delegate?.uploaded(items: items)
             
         }, fail: { [weak self] error in

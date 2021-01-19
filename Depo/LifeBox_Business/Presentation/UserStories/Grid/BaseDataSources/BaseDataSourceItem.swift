@@ -12,10 +12,10 @@ class BaseDataSourceItem: NSObject {
 
     var uuid: String
     
-    var projectId: String?
+    var accountUuid: String?
     
     var isOwner: Bool {
-        return projectId == nil || projectId == SingletonStorage.shared.accountInfo?.projectID
+        return accountUuid == nil || accountUuid == SingletonStorage.shared.accountUuid
     }
     
     var name: String?

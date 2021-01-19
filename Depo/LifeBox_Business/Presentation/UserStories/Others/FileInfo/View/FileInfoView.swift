@@ -87,7 +87,7 @@ final class FileInfoView: UIView, FromNib {
         
         updateShareInfo()
         
-        setupEditableState(for: object, projectId: object.projectId, permissions: nil)
+        setupEditableState(for: object, projectId: object.accountUuid, permissions: nil)
         
         layoutIfNeeded()
         completion?()
@@ -114,7 +114,7 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func updateShareInfo() {
-        guard object?.isLocalItem == false, let projectId = object?.projectId, let uuid = object?.uuid else {
+        guard object?.isLocalItem == false, let accountUuid = object?.accountUuid, let uuid = object?.uuid else {
             return
         }
         
@@ -122,7 +122,7 @@ final class FileInfoView: UIView, FromNib {
             return
         }
         
-        getSharingInfo(projectId: projectId, uuid: uuid)
+        getSharingInfo(projectId: accountUuid, uuid: uuid)
     }
     
     func setHiddenShareInfoView(isHidden: Bool) {
@@ -212,7 +212,7 @@ final class FileInfoView: UIView, FromNib {
         }
         
         if let object = object {
-            setupEditableState(for: object, projectId: sharingInfo.projectId, permissions: sharingInfo.permissions)
+            setupEditableState(for: object, projectId: sharingInfo.accountUuid, permissions: sharingInfo.permissions)
         }
         
         if sharingInfoView.isHidden && needShow {

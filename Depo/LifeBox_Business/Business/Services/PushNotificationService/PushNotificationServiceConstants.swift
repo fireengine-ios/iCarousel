@@ -9,7 +9,7 @@
 enum PushNotificationAction: String {
     case main = "main"
     case floatingMenu = "floating_menu"
-    case allFiles = "all_files"
+    case myDisk = "all_files"
     case music = "music"
     case documents = "documents"
     case favorites = "favourites"

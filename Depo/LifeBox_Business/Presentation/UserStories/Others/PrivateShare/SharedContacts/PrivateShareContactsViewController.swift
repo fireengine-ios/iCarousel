@@ -105,13 +105,13 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
     }
     
     private func endShare() {
-        guard let uuid = shareInfo?.uuid, let projectId = shareInfo?.projectId else {
+        guard let uuid = shareInfo?.uuid, let accountUuid = shareInfo?.accountUuid else {
             return
         }
         
         showSpinner()
         
-        privateShareApiService.endShare(projectId: projectId, uuid: uuid) { [weak self] result in
+        privateShareApiService.endShare(projectId: accountUuid, uuid: uuid) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -161,14 +161,14 @@ extension PrivateShareContactsViewController: PrivateShareContactCellDelegate {
     func onRoleTapped(index: Int) {
         guard let contact = contacts[safe: index],
               contact.role.isContained(in: [.editor, .viewer]),
-              let projectId = shareInfo?.projectId,
+              let accountUuid = shareInfo?.accountUuid,
               let uuid = shareInfo?.uuid,
               let fileType = shareInfo?.fileType
         else {
             return
         }
         
-        let controller = router.privateShareAccessList(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
+        let controller = router.privateShareAccessList(projectId: accountUuid, uuid: uuid, contact: contact, fileType: fileType)
         router.pushViewController(viewController: controller)
     }
 }

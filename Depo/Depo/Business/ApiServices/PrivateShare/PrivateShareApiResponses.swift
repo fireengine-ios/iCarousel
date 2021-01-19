@@ -16,6 +16,13 @@ struct SuggestedApiContact: Codable {
     let email: String?
     var name: String?
     let picture: URL?
+    
+    var isUsernameUnhidden: Bool {
+        return !(username?.contains("*") ?? true)
+    }
+    var isEmailUnhidden: Bool {
+        return !(email?.contains("*") ?? true)
+    }
 }
 
 struct SharedFileInfo: Codable {

@@ -138,9 +138,13 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             return
         }
         
-        let suggestedContacts = remoteSuggestions.map { contact -> SuggestedContact in
+        let suggestedContacts = remoteSuggestions
+            .filter { $0.isEmailUnhidden || $0.isUsernameUnhidden }
+            .map { contact -> SuggestedContact in
             if hasAccess {
-                let names = self.localContactsService.getContactName(for: contact.username ?? "", email: contact.email ?? "")
+                let msisdnToSearch = contact.isUsernameUnhidden ? contact.username ?? "" : ""
+                let emailToSearch = contact.isEmailUnhidden ? contact.email ?? "" : ""
+                let names = self.localContactsService.getContactName(for: msisdnToSearch, email: emailToSearch)
                 return SuggestedContact(with: contact, names: names)
             } else {
                 return SuggestedContact(with: contact)

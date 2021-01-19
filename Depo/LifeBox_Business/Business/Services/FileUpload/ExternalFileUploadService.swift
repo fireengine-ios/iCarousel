@@ -36,7 +36,7 @@ final class ExternalFileUploadService: NSObject {
     private let uploadService = UploadService.default
     private var isFavorites = false
     private var folderUUID = ""
-    private var projectId: String?
+    private var accountUuid: String?
     private var isFromAlbum = false
     
     
@@ -46,10 +46,10 @@ final class ExternalFileUploadService: NSObject {
         
         if let sharedFolderInfo = router.sharedFolderItem {
             folderUUID = sharedFolderInfo.uuid
-            projectId = sharedFolderInfo.projectId
+            accountUuid = sharedFolderInfo.accountUuid
         } else {
             folderUUID = router.getParentUUID()
-            projectId = nil
+            accountUuid = nil
         }
         
         let utTypes = externalFileType.allowedUTITypes
@@ -82,8 +82,8 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
         }
         
         let uploadType: UploadType
-        if projectId != nil {
-            uploadType = projectId == SingletonStorage.shared.accountInfo?.projectID ? .upload : .sharedWithMe
+        if accountUuid != nil {
+            uploadType = accountUuid == SingletonStorage.shared.accountUuid ? .upload : .sharedWithMe
         } else {
             uploadType = .upload
         }
@@ -92,12 +92,12 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
         uploadService.uploadFileList(items: items,
                                      uploadType: uploadType,
                                      uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
+                                     uploadTo: .ROOT,
                                      folder: folderUUID,
                                      isFavorites: isFavorites,
                                      isFromAlbum: isFromAlbum,
                                      isFromCamera: false,
-                                     projectId: projectId,
+                                     projectId: accountUuid,
                                      success: {},
                                      fail: { _ in },
                                      returnedUploadOperation: { _ in})

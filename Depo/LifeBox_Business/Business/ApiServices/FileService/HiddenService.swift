@@ -13,7 +13,7 @@ final class HiddenService {
     // MARK: - All
     
     @discardableResult
-    func trashedList(folderUUID: String = "ROOT_FOLDER",
+    func trashedList(folderUUID: String = "",
                      sortBy: SortType,
                      sortOrder: SortOrder,
                      page: Int,

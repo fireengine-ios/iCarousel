@@ -234,8 +234,8 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 if localStatus == .nonLocal,
                     remoteItems is AllFilesService {
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.AllFilesScreen())
-                    analyticsManager.logScreen(screen: .allFiles)
-                    analyticsManager.trackDimentionsEveryClickGA(screen: .allFiles)
+                    analyticsManager.logScreen(screen: .myDisk)
+                    analyticsManager.trackDimentionsEveryClickGA(screen: .myDisk)
                 }
             default:
                 break

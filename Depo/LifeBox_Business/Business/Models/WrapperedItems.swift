@@ -735,7 +735,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
         
-        projectId = SingletonStorage.shared.accountInfo?.projectID
+        accountUuid = SingletonStorage.shared.accountUuid
         
         albums = remote.albums
         
@@ -802,7 +802,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
         name = searchResponse[SearchJsonKey.name].string
         uuid = fileUUID
-        projectId = SingletonStorage.shared.accountInfo?.projectID
+        accountUuid = SingletonStorage.shared.accountUuid
         
         mimeType = searchResponse[SearchJsonKey.content_type].string
         fileType = FileType(type: mimeType, fileName: name)
@@ -935,7 +935,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
                    isLocalItem: false)
         
         id = privateShareFileInfo.id
-        projectId = privateShareFileInfo.projectId
+        accountUuid = privateShareFileInfo.accountUuid
         isFolder = privateShareFileInfo.folder
         if isFolder == true {
             fileType = .folder
