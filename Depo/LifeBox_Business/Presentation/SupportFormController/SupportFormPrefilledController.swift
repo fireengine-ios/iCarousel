@@ -3,7 +3,7 @@ import UIKit
 struct SupportFormConfiguration {
     let name: String?
     let surname: String?
-    let phone: String?
+//    let phone: String?
     let email: String?
 }
 
@@ -165,7 +165,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         nameView.textField.text = config.name
         surnameView.textField.text = config.surname
         emailView.textField.text = config.email
-        phoneView.textField.text = config.phone
+//        phoneView.textField.text = config.phone
     }
 
     

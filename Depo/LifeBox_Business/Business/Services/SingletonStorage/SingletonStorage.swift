@@ -153,11 +153,11 @@ class SingletonStorage {
     }
     
     var isTurkcellUser: Bool {
-        return false
+        return true
     }
     
     var isUserFromTurkey: Bool {
-        return false
+        return true
     }
     
     var uniqueUserID: String {

@@ -210,13 +210,13 @@ extension AnalyticsService: AnalyticsGA {
     }
     
     private func getGAOperatorType() -> String {
-        guard let accountType = SingletonStorage.shared.accountInfo?.accountType else {
+//        guard let accountType = SingletonStorage.shared.accountInfo?.accountType else {
             return ""
-        }
-        if accountType == "ALL_ACCESS" {
-            return "NON_TURKCELL"
-        }
-        return accountType
+//        }
+//        if accountType == "ALL_ACCESS" {
+//            return "NON_TURKCELL"
+//        }
+//        return accountType
     }
     
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {

@@ -781,7 +781,6 @@ class RouterVC: NSObject {
             controller.title = TextConstants.feedbackViewTitle
             let config = SupportFormConfiguration(name: userInfo.name,
                                                   surname: userInfo.surname,
-                                                  phone: userInfo.fullPhoneNumber,
                                                   email: userInfo.email)
             controller.config = config
             self.pushViewController(viewController: controller)
