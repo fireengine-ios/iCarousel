@@ -229,13 +229,9 @@ final class PushNotificationService {
         tabBarVC.showRainbowIfNeed()
     }
     
-//    private func openAllFiles() {
-//        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
-//    }
-    
     private func openMyDisk() {
         if let folder = PrivateSharedFolderItem.rootFolder {
-            pushTo(router.sharedFolder(rootShareType: .innerFolder(type: .byMe, folderItem: folder), folder: folder))
+            pushTo(router.sharedFolder(rootShareType: .innerFolder(type: .myDisk, folderItem: folder), folder: folder))
         } else {
             assertionFailure()
         }

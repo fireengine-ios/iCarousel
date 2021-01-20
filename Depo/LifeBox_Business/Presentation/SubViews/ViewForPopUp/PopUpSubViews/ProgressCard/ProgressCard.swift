@@ -83,11 +83,6 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         typeOfOperation = viewType
         
         switch viewType {
-        case .sync:
-            operationLabel.text = ""
-            titleLabel.text = String(format: TextConstants.popUpSyncing, networkType)
-            imageView.image = iconImage
-            
         case .upload:
             operationLabel.text = ""
             titleLabel.text = String(format: TextConstants.popUpUploading, networkType)
