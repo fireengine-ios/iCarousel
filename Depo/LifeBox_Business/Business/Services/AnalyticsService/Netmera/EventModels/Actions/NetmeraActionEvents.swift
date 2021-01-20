@@ -489,17 +489,8 @@ extension NetmeraEvents.Actions {
             
             let appopriateUploadType: NetmeraEventValues.UploadType
             
-            switch uploadType {
-            case .autoSync:
-                if ApplicationStateHelper.shared.isBackground {
-                    appopriateUploadType = .background
-                } else {
-                    appopriateUploadType = .autosync
-                }
-                case .upload, .syncToUse, .save, .saveAs, .sharedWithMe:
-                appopriateUploadType = .manual
-            }
-            
+            appopriateUploadType = .manual
+
             self.init(uploadType: appopriateUploadType, fileTypeStr: appopriateFileType.text)
         }
         

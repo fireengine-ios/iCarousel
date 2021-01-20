@@ -98,8 +98,6 @@ final class UploadOperation: Operation {
             qualityOfService = .userInteractive
         case .upload, .sharedWithMe:
             qualityOfService = .userInitiated
-        case .autoSync:
-            qualityOfService = .background
         }
     }
     

@@ -82,7 +82,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = AllFilesViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
-        viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
+        viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.cardsContainerView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
@@ -148,7 +148,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         if status == .active {
             viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
         }
-        viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
+        viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.cardsContainerView.isEnable = true
         viewController.status = status
         
