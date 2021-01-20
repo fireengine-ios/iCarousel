@@ -226,6 +226,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
+        
+        navBarManager.threeDotsButton.isEnabled = shareType.isSelectionAllowed && !collectionManager.isCollectionEmpty
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -257,14 +259,16 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             self.setupNavigationBar(editingMode: isSelecting)
             
             if self.shareType.isSelectionAllowed {
-                self.navBarManager.threeDotsButton.isEnabled = !isSelecting
+                self.navBarManager.threeDotsButton.isEnabled = !(isSelecting || self.collectionManager.isCollectionEmpty)
             }
             self.needToShowTabBar = !isSelecting
             self.showTabBarIfNeeded()
             if isSelecting {
                 let selectedItems = self.collectionManager.selectedItems()
                 self.show(selectedItemsCount: selectedItems.count)
-                self.bottomBarManager.show()
+                if !selectedItems.isEmpty {
+                    self.bottomBarManager.show()
+                }
             } else {
                 self.bottomBarManager.hide()
             }
@@ -288,7 +292,9 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 if !isSelectionAllowed {
                     self.navBarManager.setDefaultModeWithoutThreeDot(title: self.title ?? "")
                 } else {
-                    self.navBarManager.setDefaultMode(title: self.title ?? "")
+                    //to don't change the state of the 3dots button
+                    let isThreeDotsEnabled = self.navBarManager.threeDotsButton.isEnabled
+                    self.navBarManager.setDefaultMode(title: self.title ?? "", isThreeDotsEnabled: isThreeDotsEnabled)
                 }
                 self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
             }

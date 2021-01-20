@@ -48,6 +48,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
+    private(set) var isCollectionEmpty = true
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
     
@@ -122,7 +123,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
             self.collectionView?.reloadData()
-            self.setEmptyScreen(isHidden: !self.fileInfoManager.splittedItems.isEmpty)
+            let isEmpty = self.fileInfoManager.splittedItems.isEmpty
+            self.isCollectionEmpty = isEmpty
+            self.setEmptyScreen(isHidden: !isEmpty)
             self.delegate?.didEndReload()
         }
     }
