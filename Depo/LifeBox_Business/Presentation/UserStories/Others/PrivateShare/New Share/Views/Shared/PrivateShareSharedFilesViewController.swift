@@ -14,6 +14,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         let title: String
         switch shareType {
+            case .myDisk: title = TextConstants.tabBarItemMyDisk
             case .byMe: title = TextConstants.privateShareSharedByMeTab
             case .withMe: title = TextConstants.privateShareSharedWithMeTab
             case .innerFolder(_, let folder): title = folder.name
@@ -149,7 +150,18 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         cardsContainer.delegate = self
         cardsContainer.isEnable = true
         
-        let permittedTypes: [OperationType] = shareType.rootType == .byMe ? [.upload, .download] : [.sharedWithMeUpload, .download]
+        let permittedTypes: [OperationType]
+        switch shareType.rootType {
+            case .byMe:
+                permittedTypes = [.upload, .download]
+            case .withMe:
+                permittedTypes = [.sharedWithMeUpload, .download]
+            case .myDisk:
+                permittedTypes = [.upload, .download]
+            default:
+                permittedTypes = []
+        }
+        
         cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
@@ -350,6 +362,11 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
                 }
                 
             case .byMe:
+                if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
+                    collectionManager.reload(type: .onOperationFinished)
+                }
+                
+            case .myDisk:
                 if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
