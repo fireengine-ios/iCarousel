@@ -220,7 +220,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     @discardableResult
     func createDownloadUrl(projectId: String, uuid: String, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask? {
         
-        let parameters = [["projectId" : projectId, "uuid" : uuid]].asParameters()
+        let parameters = [["accountUuid" : projectId, "uuid" : uuid]].asParameters()
         
         return SessionManager
             .customDefault
@@ -256,7 +256,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     @discardableResult
     func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
         
-        let parameters = [["projectId" : projectId, "uuid" : uuid]].asParameters()
+        let parameters = [["accountUuid" : projectId, "uuid" : uuid]].asParameters()
         
         return SessionManager
             .customDefault
