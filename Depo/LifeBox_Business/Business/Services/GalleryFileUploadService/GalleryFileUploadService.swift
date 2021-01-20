@@ -88,7 +88,7 @@ final class GalleryFileUploadService: NSObject {
         if let sharedFolderInfo = router.sharedFolderItem {
             rootUUID = sharedFolderInfo.uuid
             accountUuid = sharedFolderInfo.accountUuid
-            uploadType = accountUuid == SingletonStorage.shared.accountUuid ? .upload : .sharedWithMe
+            uploadType = accountUuid == SingletonStorage.shared.accountInfo?.uuid ? .upload : .sharedWithMe
         } else {
             rootUUID = router.getParentUUID()
             accountUuid = nil

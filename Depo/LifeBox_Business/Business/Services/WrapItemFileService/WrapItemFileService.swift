@@ -126,7 +126,7 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func leaveSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let accountUuid = file.accountUuid, let subjectId = SingletonStorage.shared.accountUuid else {
+        guard let accountUuid = file.accountUuid, let subjectId = SingletonStorage.shared.accountInfo?.uuid else {
             fail?(ErrorResponse.string("don't have projectId or subjectId"))
             return
         }

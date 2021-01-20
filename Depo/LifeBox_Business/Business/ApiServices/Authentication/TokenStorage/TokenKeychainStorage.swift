@@ -16,7 +16,6 @@ final class TokenKeychainStorage: TokenStorage {
     private let refreshTokenKey = "refreshToken"
     private let isRememberMeKey = "isRememberMeKey"
     private let isClearTokensKey = "isClearTokensKey"
-    private let accountUuidKey = "accountUuid"
     
     private let keychain = KeychainSwift()
     
@@ -64,18 +63,12 @@ final class TokenKeychainStorage: TokenStorage {
         set { keychain.set(newValue, forKey: isClearTokensKey, withAccess: .accessibleAfterFirstUnlock) }
     }
     
-    var accountUuid: String? {
-        get { return keychain.get(accountUuidKey) }
-        set { keychain.set(newValue, forKey: accountUuidKey, withAccess: .accessibleAfterFirstUnlock) }
-    }
-    
     init() {
         savedAccessToken = accessToken
     }
     
     func clearTokens() {
         accessToken = nil
-        accountUuid = nil
         refreshToken = nil
         isRememberMe = false
     }

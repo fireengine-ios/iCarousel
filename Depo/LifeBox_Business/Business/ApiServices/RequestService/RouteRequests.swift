@@ -26,7 +26,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.test
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -299,6 +299,7 @@ struct RouteRequests {
     
     enum BusinessAccount {
         private static let baseAccountsURLString = baseShortUrlString + "api/v1/business/accounts/"
+        static let myInfo = baseAccountsURLString + "me"
         static let info = baseAccountsURLString + "%@"
         static let quota = baseAccountsURLString + "new_api_is_required"
         static let settings = baseAccountsURLString + "new_api_is_required"

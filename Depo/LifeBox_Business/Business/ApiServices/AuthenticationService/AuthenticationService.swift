@@ -312,10 +312,6 @@ class AuthenticationService: BaseRequestService {
                         if let accessToken = headers[HeaderConstant.AuthToken] as? String {
                             self?.tokenStorage.accessToken = accessToken
                         }
-                        
-                        if let accountId = headers[HeaderConstant.accountUuid] as? String {
-                            SingletonStorage.shared.accountUuid = accountId
-                        }
 //                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
 //                            self?.tokenStorage.refreshToken = refreshToken
 //                        }
@@ -387,10 +383,6 @@ class AuthenticationService: BaseRequestService {
                 
                 if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                     self.tokenStorage.refreshToken = refreshToken
-                }
-                
-                if let accountId = headers[HeaderConstant.accountUuid] as? String {
-                    SingletonStorage.shared.accountUuid = accountId
                 }
                 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
@@ -685,10 +677,6 @@ class AuthenticationService: BaseRequestService {
                         
                         if let accessToken = headers[HeaderConstant.AuthToken] as? String {
                             self.tokenStorage.accessToken = accessToken
-                        }
-                        
-                        if let accountId = headers[HeaderConstant.accountUuid] as? String {
-                            SingletonStorage.shared.accountUuid = accountId
                         }
                         
 //                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {

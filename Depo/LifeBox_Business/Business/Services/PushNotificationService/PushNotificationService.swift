@@ -280,7 +280,7 @@ final class PushNotificationService {
     }
     
     private func openPasscode() {
-        let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
+        let isTurkcellAccount = SingletonStorage.shared.isTurkcellUser
         pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
     }
       

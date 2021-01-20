@@ -377,7 +377,7 @@ struct PrivateSharedFolderItem: Equatable {
     static var rootFolder: PrivateSharedFolderItem? {
         //TODO: get permissions or set default?
         let permissions = SharedItemPermission(granted: nil, bitmask: nil)
-        guard let accountUuid = SingletonStorage.shared.accountUuid else {
+        guard let accountUuid = SingletonStorage.shared.accountInfo?.uuid else {
             return nil
         }
         

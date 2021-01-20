@@ -31,9 +31,9 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         var email = TextConstants.NotLocalized.feedbackEmail
         
         SingletonStorage.shared.getAccountInfoForUser(success: { userInfoResponse in
-            if let phone = userInfoResponse.phoneNumber {
-                phoneString = phone
-            }
+//            if let phone = userInfoResponse.phoneNumber {
+//                phoneString = phone
+//            }
             group.leave()
         }, fail: { error in
             group.leave()

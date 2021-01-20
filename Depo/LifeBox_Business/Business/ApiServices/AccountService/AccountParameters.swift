@@ -30,7 +30,7 @@ struct AccountPath {
 
 class AccontInfo: BaseRequestParametrs {
     override var patch: URL {
-        let urlString = String(format: RouteRequests.BusinessAccount.info, SingletonStorage.shared.accountUuid ?? "")
+        let urlString = String(format: RouteRequests.BusinessAccount.info, SingletonStorage.shared.accountInfo?.uuid ?? "")
         return URL(string: urlString)!
     }
 }

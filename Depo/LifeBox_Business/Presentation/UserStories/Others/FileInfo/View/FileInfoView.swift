@@ -146,7 +146,7 @@ final class FileInfoView: UIView, FromNib {
     
     private func setupEditableState(for item: BaseDataSourceItem, projectId: String?, permissions: SharedItemPermission?) {
         var canEdit = true
-        if projectId != SingletonStorage.shared.accountInfo?.projectID {
+        if projectId != SingletonStorage.shared.accountInfo?.uuid {
             canEdit = permissions?.granted?.contains(.setAttribute) == true
         }
         

@@ -15,7 +15,7 @@ class BaseDataSourceItem: NSObject {
     var accountUuid: String?
     
     var isOwner: Bool {
-        return accountUuid == nil || accountUuid == SingletonStorage.shared.accountUuid
+        return accountUuid == nil || accountUuid == SingletonStorage.shared.accountInfo?.uuid
     }
     
     var name: String?

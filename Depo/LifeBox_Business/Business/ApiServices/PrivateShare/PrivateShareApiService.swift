@@ -276,7 +276,10 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             return nil
         }
         
-        let parameters = ["file": requestItem.parameters] + ["parentFolderUuid": parentFolderUuid]
+        var parameters: [String: Any] = ["file": requestItem.parameters]
+        if !parentFolderUuid.isEmpty {
+            parameters = parameters + ["parentFolderUuid": parentFolderUuid]
+        }
         
         return SessionManager
             .customDefault
