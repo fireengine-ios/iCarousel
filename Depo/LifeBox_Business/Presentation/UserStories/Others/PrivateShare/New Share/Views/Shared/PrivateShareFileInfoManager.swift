@@ -10,6 +10,7 @@ import Foundation
 
 
 indirect enum PrivateShareType: Equatable {
+    case myDisk
     case byMe
     case withMe
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
@@ -24,7 +25,7 @@ indirect enum PrivateShareType: Equatable {
                 return .sharedBy
             case .withMe:
                 return .sharedWith
-            case .innerFolder:
+            case .innerFolder, .myDisk:
                 return .sharedInnerFolder
         }
     }
@@ -32,6 +33,9 @@ indirect enum PrivateShareType: Equatable {
     //isSelectionAllowed is predefined by the veryRootType only
     var isSelectionAllowed: Bool {
         switch self {
+            case .myDisk:
+                return true
+                
             case .byMe:
                 return true
                 
@@ -48,6 +52,9 @@ indirect enum PrivateShareType: Equatable {
         let typeAndRoot = (self, veryRootType(for: self))
         
         switch typeAndRoot {
+            case (.myDisk, _):
+                return []
+                
             case (.byMe, _):
                 return []
                 
@@ -61,6 +68,13 @@ indirect enum PrivateShareType: Equatable {
     
     private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType, permissions: [PrivateSharePermission]) -> [FloatingButtonsType] {
         switch innerFolderVeryRootType {
+            case .myDisk:
+                //todo: uncomment when permissions are ready
+//                if permissions.contains(.create) {
+                    return [.newFolder, .upload, .uploadFiles]
+//                }
+//                return []
+                
             case .byMe:
                 return [.newFolder, .upload, .uploadFiles]
                 
@@ -78,7 +92,7 @@ indirect enum PrivateShareType: Equatable {
     
     private func veryRootType(for type: PrivateShareType) -> PrivateShareType {
         switch type {
-            case .byMe, .withMe:
+            case .byMe, .withMe, .myDisk:
                 return type
                 
             case .innerFolder(type: let rootType, _):
@@ -394,6 +408,7 @@ final class GetSharedItemsOperation: Operation {
     }
     
     private func load() {
+        let markAsShared = type.rootType != .myDisk
         loadPage { [weak self] result in
             guard let self = self, !self.isCancelled else {
                 return
@@ -403,7 +418,7 @@ final class GetSharedItemsOperation: Operation {
             
             switch result {
                 case .success(let filesInfo):
-                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
+                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0, isShared: markAsShared) }
                     self.semaphore.signal()
                     
                 case .failed(_):
@@ -414,6 +429,18 @@ final class GetSharedItemsOperation: Operation {
     
     private func loadPage(completion : @escaping ResponseArrayHandler<SharedFileInfo>) {
         switch type {
+            case .myDisk:
+                let accountUuid = SingletonStorage.shared.accountInfo?.uuid ?? ""
+                let rootFolderUuid = ""
+                task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                    switch response {
+                        case .success(let fileSystem):
+                            completion(.success(fileSystem.fileList))
+                        case .failed(let error):
+                            completion(.failed(error))
+                    }
+                }
+                
             case .byMe:
                 task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
                 

@@ -107,7 +107,7 @@ class SimpleUpload: UploadRequestParametrs {
             assertionFailure(errorMessage)
         }
         
-        let appopriateUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
+        let appopriateUploadType = "MANUAL"
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionStatus = ReachabilityService.shared.uploadConnectionTypeName
         
@@ -214,7 +214,7 @@ final class ResumableUpload: UploadRequestParametrs {
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
-        let currentUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
+        let currentUploadType = "MANUAL"
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionType = ReachabilityService.shared.uploadConnectionTypeName
         

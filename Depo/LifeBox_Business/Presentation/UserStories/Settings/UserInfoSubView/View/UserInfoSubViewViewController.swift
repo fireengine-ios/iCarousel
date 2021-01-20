@@ -127,7 +127,7 @@ extension UserInfoSubViewViewController {
     
     func updatePhoto(image: UIImage) {
         avatarImageView.image = image
-        if let url = userInfo?.urlForPhoto {
+        if let url = userInfo?.profilePhoto {
             SDImageCache.shared().removeImage(forKey: url.absoluteString, withCompletion: nil)
         }
     }
@@ -175,18 +175,18 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
             userEmailLabel.textColor = ColorConstants.profileLightGray
         }
         
-        if
-            let phoneNumber = userInfo.phoneNumber,
-            !phoneNumber.isEmpty {
-            userPhoneNumber.text = phoneNumber
-            userPhoneNumber.textColor = ColorConstants.switcherGrayColor
-        } else {
+//        if
+//            let phoneNumber = userInfo.phoneNumber,
+//            !phoneNumber.isEmpty {
+//            userPhoneNumber.text = phoneNumber
+//            userPhoneNumber.textColor = ColorConstants.switcherGrayColor
+//        } else {
             userPhoneNumber.text = TextConstants.settingsUserInfoPhone
             userPhoneNumber.textColor = ColorConstants.profileLightGray
-        }
+//        }
         
         if
-            let url = userInfo.urlForPhoto,
+            let url = userInfo.profilePhoto,
             !isPhotoLoaded {
             avatarImageView.sd_setImage(with: url) { [weak self] _, _, _, _ in
                 self?.isPhotoLoaded = true

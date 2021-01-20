@@ -735,7 +735,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
         
-        accountUuid = SingletonStorage.shared.accountUuid
+        accountUuid = SingletonStorage.shared.accountInfo?.uuid
         
         albums = remote.albums
         
@@ -802,7 +802,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
         name = searchResponse[SearchJsonKey.name].string
         uuid = fileUUID
-        accountUuid = SingletonStorage.shared.accountUuid
+        accountUuid = SingletonStorage.shared.accountInfo?.uuid
         
         mimeType = searchResponse[SearchJsonKey.content_type].string
         fileType = FileType(type: mimeType, fileName: name)
@@ -907,7 +907,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = "\(fileName)\(fileSize)"
     }
     
-    init(privateShareFileInfo: SharedFileInfo) {
+    init(privateShareFileInfo: SharedFileInfo, isShared: Bool = true) {
         //TODO: status to enum in SharedFileInfo
         
         if let metadata = privateShareFileInfo.metadata {
@@ -942,7 +942,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         childCount = privateShareFileInfo.childCount
         privateSharePermission = privateShareFileInfo.permissions
-        isShared = true
+        self.isShared = isShared
     }
     
     func copyFileData(from item: WrapData) {

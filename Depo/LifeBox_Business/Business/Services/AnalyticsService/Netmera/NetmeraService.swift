@@ -43,30 +43,30 @@ final class NetmeraService {
             }
             
             group.enter()
-            var countryCode: String = "Null"
-            var regionCode: String = "Null"
+            let countryCode: String = "Null"
+            let regionCode: String = "Null"
             var userName: Int = 0
             var userSurname: Int = 0
             var email: Int = 0
-            var phoneNumber: Int = 0
-            var address: Int = 0
-            var birthday: Int = 0
-            var gapID = ""
+            let phoneNumber: Int = 0
+            let address: Int = 0
+            let birthday: Int = 0
+            var externalId = ""
             prepareAccountInfo(preparedAccountInfo: { info in
                 guard let accountInfo = info else {
                     group.leave()
                     return
                 }
                 
-                regionCode = accountInfo.msisdnRegion ?? "Null"
-                countryCode = accountInfo.countryCode ?? "Null"
-                userName = (accountInfo.username ?? "").isEmpty ? 0 : 1
+//                regionCode = accountInfo.msisdnRegion ?? "Null"
+//                countryCode = accountInfo.countryCode ?? "Null"
+                userName = (accountInfo.name ?? "").isEmpty ? 0 : 1
                 userSurname = (accountInfo.surname ?? "").isEmpty ? 0 : 1
                 email = (accountInfo.email ?? "").isEmpty ? 0 : 1
-                phoneNumber = (accountInfo.phoneNumber ?? "").isEmpty ? 0 : 1
-                address = (accountInfo.address ?? "").isEmpty ? 0 : 1
-                birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
-                gapID = accountInfo.gapId ?? ""
+//                phoneNumber = (accountInfo.phoneNumber ?? "").isEmpty ? 0 : 1
+//                address = (accountInfo.address ?? "").isEmpty ? 0 : 1
+//                birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
+                externalId = accountInfo.externalId ?? ""
                 group.leave()
             })
             
@@ -98,7 +98,7 @@ final class NetmeraService {
                                              isBirthDay: birthday,
                                              galleryAccessPermission: galleryAccessPermission)
                 
-                user.userId = gapID
+                user.userId = externalId
                 DispatchQueue.toMain {
                     Netmera.update(user)
                 }
@@ -164,7 +164,7 @@ extension NetmeraService {
                                      twoFactorAuthentication: "Null", emailVerification: "Null",
                                      autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", regionCode: "Null", isUserName: 0,
                                      isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0, galleryAccessPermission: "Null")
-        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+        user.userId = SingletonStorage.shared.accountInfo?.externalId ?? ""
         DispatchQueue.toMain {
             Netmera.update(user)
         }
@@ -177,16 +177,14 @@ extension NetmeraService {
     }
     
     private static func prepareAccountInfo(preparedAccountInfo: @escaping NetmeraAccountInfoCallback) {
-        AccountService().info(
-            success: { response in
-                guard let info = response as? AccountInfoResponse else {
+        AccountService().info { response in
+            switch response {
+                case .success(let accountInfo):
+                    preparedAccountInfo(accountInfo)
+                case .failed(_):
                     preparedAccountInfo(nil)
-                    return
-                }
-                preparedAccountInfo(info)
-        }, fail: { errorResponse in
-            preparedAccountInfo(nil)
-        })
+            }
+        }
     }
     
     private static func prepareTurkcellLoginScurityFields(preparedUserField: @escaping (_ autoLogin: String, _ turkcellPassword: String)->Void) {
@@ -222,11 +220,11 @@ extension NetmeraService {
     }
     
     private static func getVerifiedEmailStatus() -> String {
-        if let isMailVerified = SingletonStorage.shared.accountInfo?.emailVerified  {
-            return isMailVerified ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
-        } else {
+//        if let isMailVerified = SingletonStorage.shared.accountInfo?.emailVerified  {
+//            return isMailVerified ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
+//        } else {
             return "Null"
-        }
+//        }
     }
     
     private static func getBuildNumber() -> String {

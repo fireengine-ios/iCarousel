@@ -29,7 +29,7 @@ final class SettingsInteractor: SettingsInteractorInput {
     private(set) var userInfoResponse: AccountInfoResponse?
     
     var isTurkcellUser: Bool {
-        return (userInfoResponse?.accountType == "TURKCELL")
+        return SingletonStorage.shared.isTurkcellUser
     }
     var isEmptyMail: Bool {
         return userInfoResponse?.email?.isEmpty ?? false
@@ -60,7 +60,7 @@ final class SettingsInteractor: SettingsInteractorInput {
     func uploadPhoto(withPhoto photo: Data) {
         accountService.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
             self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .photoEdit)
-            ImageDownloder.removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
+            ImageDownloder.removeImageFromCache(url: self?.userInfoResponse?.profilePhoto, completion: {
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoUpload)
                 DispatchQueue.main.async {
                     self?.output.profilePhotoUploadSuccessed(image: UIImage(data: photo))

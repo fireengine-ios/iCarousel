@@ -12,7 +12,7 @@ import SwiftyJSON
 
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
-    func info(success: SuccessResponse?, fail:@escaping FailResponse)
+    func info(handler: @escaping (ResponseResult<AccountInfoResponse>) -> Void)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
@@ -24,12 +24,13 @@ class AccountService: BaseRequestService, AccountServicePrl {
         static let serverValue = "value"
     }
  
-    func info(success: SuccessResponse?, fail:@escaping FailResponse) {
+    func info(handler: @escaping (ResponseResult<AccountInfoResponse>) -> Void) {
         debugLog("AccountService info")
         
-        let param = AccontInfo()
-        let handler = BaseResponseHandler<AccountInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
+        sessionManager
+            .request(RouteRequests.BusinessAccount.myInfo)
+            .customValidate()
+            .responseObject(handler)
     }
     
     func quotaInfo(success: SuccessResponse?, fail:@escaping FailResponse) {

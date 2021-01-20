@@ -382,32 +382,32 @@ extension UserProfileViewController: UserProfileViewInput {
         nameView.textField.text = userInfo.name
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
-        addressView.textField.text = userInfo.address
-        isTurkcellUser = userInfo.isTurkcellUser
+//        addressView.textField.text = userInfo.address
+//        isTurkcellUser = userInfo.isTurkcellUser
         
-        let securityQuestionButtonTitle = (userInfo.hasSecurityQuestionInfo == true) ? TextConstants.userProfileEditSecretQuestion : TextConstants.userProfileSetSecretQuestionButton
+        let securityQuestionButtonTitle = TextConstants.userProfileSetSecretQuestionButton
         set(title: securityQuestionButtonTitle, for: changeSecurityQuestionButton)
         
-        if let countryCode = userInfo.countryCode, let phoneNumber = userInfo.phoneNumber {
-            phoneView.codeTextField.text = "+\(countryCode)"
-            
-            /// there is no countryCode in phoneNumber for turkcell accounts
-            if phoneNumber.contains(countryCode) {
-                let plusLength = 1 /// "+".count
-                let start = countryCode.count + plusLength
-                let end = phoneNumber.count
-                phoneView.numberTextField.text = phoneNumber[start..<end]
-                isShortPhoneNumber = false
-            } else {
-                phoneView.numberTextField.text = phoneNumber
-                isShortPhoneNumber = true
-            }
-        } else {
-            assertionFailure("probles with userInfo: \(userInfo)")
-        }
+//        if let countryCode = userInfo.countryCode, let phoneNumber = userInfo.phoneNumber {
+//            phoneView.codeTextField.text = "+\(countryCode)"
+//
+//            /// there is no countryCode in phoneNumber for turkcell accounts
+//            if phoneNumber.contains(countryCode) {
+//                let plusLength = 1 /// "+".count
+//                let start = countryCode.count + plusLength
+//                let end = phoneNumber.count
+//                phoneView.numberTextField.text = phoneNumber[start..<end]
+//                isShortPhoneNumber = false
+//            } else {
+//                phoneView.numberTextField.text = phoneNumber
+//                isShortPhoneNumber = true
+//            }
+//        } else {
+//            assertionFailure("probles with userInfo: \(userInfo)")
+//        }
         
-        let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
-        birthdayDetailView.configure(with: birthday, delegate: self)
+//        let birthday = (userInfo.dob ?? "").replacingOccurrences(of: "-", with: " ")
+//        birthdayDetailView.configure(with: birthday, delegate: self)
     }
     
     func getNavigationController() -> UINavigationController? {

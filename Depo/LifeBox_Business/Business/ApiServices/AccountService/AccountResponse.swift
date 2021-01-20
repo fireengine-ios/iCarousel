@@ -31,7 +31,7 @@ struct AccountJSONConstants {
     static let url = "url"
     static let otp = "otp"
     static let referenceToken = "referenceToken"
-    static let gapID = "gapId"
+    static let externalId = "externalId"
     static let isUpdateMobilePaymentPermissionRequired = "isUpdateMobilePaymentPermissionRequired"
     
     static let quotaBytes = "quotaBytes"
@@ -50,75 +50,27 @@ struct AccountJSONConstants {
     static let msisdnRegion = "msisdnRegion"
 }
 
-class AccountInfoResponse: ObjectRequestResponse {
-    
-    var mobileUploadsSpecialFolderUuid: String?
-    var isCropyTagAvailable: Bool?
-    var isFavouriteTagAvailable: Bool?
-    var isUpdateInformationRequired: Bool?
-    var cellografId: String?
-    var hasSecurityQuestionInfo: Bool?
-    var securityQuestionId: Int?
+struct AccountInfoResponse: Codable {
+    let uuid: String
     var name: String?
     var surname: String?
-    var accountType: String?
-    var language: String?
-    var countryCode: String?
-    var phoneNumber: String?
     var email: String?
-    var emailVerified: Bool?
-    var username: String?
-    var dob: String?
-    var urlForPhoto: URL?
-    var projectID: String?
-    var gapId: String?
-    var address: String?
-    var emailVerificationRemainingDays: Int?
-    var isUpdateMobilePaymentPermissionRequired: Bool?
-    var msisdnRegion: String?
+    let externalId: String?
+    let language: String?
+    let profilePhoto: URL?
+    let createdDate: Date
+    let status: String //enum
+    let parentAccountAdmin: Bool
     
-    var fullPhoneNumber: String {
-        if let code = countryCode, let number = phoneNumber {
-            return number.contains("+") ? number : "+\(code)\(number)"
-        }
-        return ""
-    }
-    
-    var isTurkcellUser: Bool {
-        return accountType == "TURKCELL"
-    }
-    
-    var isUserFromTurkey: Bool {
-        return countryCode == "90"
-    }
-    
-    override func mapping() {
-        mobileUploadsSpecialFolderUuid = json?[AccountJSONConstants.mobileUploadsSpecialFolderUuid].string
-        isCropyTagAvailable = json?[AccountJSONConstants.isCropyTagAvailable].bool
-        isFavouriteTagAvailable = json?[AccountJSONConstants.isFavouriteTagAvailable].bool
-        isUpdateInformationRequired = json?[AccountJSONConstants.isUpdateInformationRequired].bool
-        cellografId = json?[AccountJSONConstants.cellografId].string
-        hasSecurityQuestionInfo = json?[AccountJSONConstants.hasSecurityQuestionInfo].bool
-        securityQuestionId = json?[AccountJSONConstants.securityQuestionId].int
-        name = json?[AccountJSONConstants.name].string
-        gapId = json?[AccountJSONConstants.gapID].string
-        surname = json?[AccountJSONConstants.surname].string
-        username = json?[AccountJSONConstants.username].string
-        dob = json?[AccountJSONConstants.birthday].string
-        accountType = json?[AccountJSONConstants.accountType].string
-        language = json?[AccountJSONConstants.language].string
-        countryCode = json?[AccountJSONConstants.countryCode].string
-        phoneNumber = json?[AccountJSONConstants.phoneNumber].string
-        email = json?[AccountJSONConstants.email].string
-        emailVerified = json?[AccountJSONConstants.emailVerified].bool
-        urlForPhoto = json?[AccountJSONConstants.url].url
-        projectID = json?[AccountJSONConstants.projectID].string
-        emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
-        address = json?[AccountJSONConstants.address].string
-        isUpdateMobilePaymentPermissionRequired = json?[AccountJSONConstants.isUpdateMobilePaymentPermissionRequired].bool
-        msisdnRegion = json?[AccountJSONConstants.msisdnRegion].string
-    }
+    let parentAccountInfo: ParentAccountInfo
 }
+
+struct ParentAccountInfo : Codable {
+    let uuid: String
+    let name: String?
+    let status: String //enum
+}
+
 
 class SecuritySettingsInfoResponse: ObjectRequestResponse {
     var turkcellPasswordAuthEnabled: Bool?

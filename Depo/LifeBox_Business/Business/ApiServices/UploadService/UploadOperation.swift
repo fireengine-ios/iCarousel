@@ -98,8 +98,6 @@ final class UploadOperation: Operation {
             qualityOfService = .userInteractive
         case .upload, .sharedWithMe:
             qualityOfService = .userInitiated
-        case .autoSync:
-            qualityOfService = .background
         }
     }
     
@@ -380,10 +378,6 @@ final class UploadOperation: Operation {
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
                 
-                if self.inputItem.fileType.isContained(in: [.image, .video]) {
-                    self.storageVars.lastUnsavedFileUUID = parameters.tmpUUID
-                }
-                
                 self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
                     debugLog("simple_upload: uploaded")
                     
@@ -486,59 +480,26 @@ final class UploadOperation: Operation {
     private func finishUploading(parameters: UploadRequestParametrs, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         
         guard uploadType != .sharedWithMe else {
-            storageVars.lastUnsavedFileUUID = nil
             success()
             return
         }
         
-        let uploadNotifParam = UploadNotify(parentUUID: parameters.rootFolder,
-                                            fileUUID: parameters.tmpUUID )
-        
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
         
-        uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-            self?.dispatchQueue.async { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                guard let response = baseurlResponse as? SearchItemResponse else {
-                    success()
-                    return
-                }
-                
-                self.outputItem = WrapData(remote: response)
-                self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
-                self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
-                self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
-                
-                //TODO: remove this in the future
-                if let size = (parameters as? SimpleUpload)?.fileSize,
-                    let item = self.outputItem, size != item.fileSize {
-                    Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: finishUploading -> uploadNotify sizes arent equal"))
-                    debugLog("UPLOAD: finishUploading -> uploadNotify parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
-                }
-                //--
-                
-                if self.uploadType == .save, let updatedRemote = self.outputItem {
-                    self.storageVars.lastUnsavedFileUUID = nil
-                    debugLog("_upload: item is updated \(self.inputItem.name ?? "") ")
-                    success()
-                    
-                } else {
-                    //case for upload photo from camera
-                    if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                        self.outputItem?.metaData?.mediumUrl = preview
-                    }
-                    
-                    self.storageVars.lastUnsavedFileUUID = nil
-                    success()
-                }
-                
-                debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
-            }
-        }, fail: fail)
+        outputItem = inputItem
+//        self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
+//        self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+//        self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+        
+        //TODO: remove this in the future
+        if let size = (parameters as? SimpleUpload)?.fileSize, let item = self.outputItem, size != item.fileSize {
+            Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: finishUploading -> uploadNotify sizes arent equal"))
+            debugLog("UPLOAD: finishUploading -> parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
+        }
+        //--
+        
+        success()
     }
     
     private func removeTemporaryFile(at localURL: URL?) {
@@ -580,13 +541,6 @@ final class UploadOperation: Operation {
     
     private func resumableUpload(uploadParam: ResumableUpload, handler: @escaping ResumableUploadHandler) -> URLSessionTask? {
         return UploadService.default.resumableUpload(uploadParam: uploadParam, handler: handler)
-    }
-    
-    
-    private func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail: FailResponse?) {
-        UploadService.default.uploadNotify(param: param,
-                                           success: success,
-                                           fail: fail)
     }
 }
 

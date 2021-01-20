@@ -10,7 +10,6 @@ import UIKit
 
 enum OperationType: String {
     case upload                     = "Upload"
-    case sync                       = "Sync"
     case sharedWithMeUpload         = "SharedWithMeUpload"
     case download                   = "Download"
     case prepareQuickScroll         = "prepareQuickScroll"
@@ -42,7 +41,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        return [.upload, .sync, .download, .sharedWithMeUpload, .prepareQuickScroll, .waitingForWiFi, .freeAppSpaceLocalWarning]
+        return [.upload, .download, .sharedWithMeUpload, .prepareQuickScroll, .waitingForWiFi, .freeAppSpaceLocalWarning]
     }
     
     func clear() {
@@ -247,12 +246,8 @@ class CardsManager: NSObject {
     
     func hidePopUpsByDepends(type: OperationType) {
         switch type {
-        case .sync:
-            stopOperationWith(type: .waitingForWiFi)
         case .upload:
             stopOperationWith(type: .waitingForWiFi)
-        case .waitingForWiFi:
-            stopOperationWith(type: .sync)
         default:
             break
         }
@@ -261,7 +256,7 @@ class CardsManager: NSObject {
     func canShowPopUpByDepends(type: OperationType) -> Bool {
         switch type {
         case .freeAppSpaceLocalWarning:
-            let operations: [OperationType] = [.sync, .upload]
+            let operations: [OperationType] = [.upload]
             for operation in operations {
                 if progresForOperation[operation] != nil {
                     return false
@@ -299,7 +294,7 @@ class CardsManager: NSObject {
             let popUp = StorageCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp
-        case .download, .sync, .upload, .sharedWithMeUpload:
+        case .download, .upload, .sharedWithMeUpload:
             let popUp = ProgressCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp

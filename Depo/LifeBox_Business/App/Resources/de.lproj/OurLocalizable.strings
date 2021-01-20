@@ -1826,3 +1826,5 @@
 "tabbar_item_shared_files" = "My Sharings";
 "tabbar_item_shared_area" = "Shared Area";
 "tabbar_item_settings" = "Settings";
+
+"business_app_upload_403" = "You are not authorized to upload here";

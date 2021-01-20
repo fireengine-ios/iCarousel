@@ -115,7 +115,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     
     private func checkCanEdit(item: BaseDataSourceItem, projectId: String?, permission: SharedItemPermission?) {
         var canEdit = true
-        if projectId != SingletonStorage.shared.accountInfo?.projectID {
+        if projectId != SingletonStorage.shared.accountInfo?.uuid {
             canEdit = permission?.granted?.contains(.setAttribute) == true
         }
         

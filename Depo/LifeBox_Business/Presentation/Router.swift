@@ -524,7 +524,7 @@ class RouterVC: NSObject {
     
     var myDisk: UIViewController? {
         if let folder = PrivateSharedFolderItem.rootFolder {
-            return sharedFolder(rootShareType: .innerFolder(type: .byMe, folderItem: folder), folder: folder)
+            return sharedFolder(rootShareType: .innerFolder(type: .myDisk, folderItem: folder), folder: folder)
         } else {
             assertionFailure()
             return nil
@@ -781,7 +781,6 @@ class RouterVC: NSObject {
             controller.title = TextConstants.feedbackViewTitle
             let config = SupportFormConfiguration(name: userInfo.name,
                                                   surname: userInfo.surname,
-                                                  phone: userInfo.fullPhoneNumber,
                                                   email: userInfo.email)
             controller.config = config
             self.pushViewController(viewController: controller)

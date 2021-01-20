@@ -23,6 +23,9 @@ final class PrivateShareSharedWithThreeDotsManager {
     
     func showActions(for privateShareType: PrivateShareType, sender: Any?) {
         switch privateShareType {
+            case .myDisk:
+                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+                
             case .byMe:
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
                 
@@ -36,6 +39,10 @@ final class PrivateShareSharedWithThreeDotsManager {
     
     func showActions(for privateShareType: PrivateShareType, selectedItems: [WrapData], sender: Any?) {
         switch privateShareType {
+            case .myDisk:
+                let types = actionTypes(for: selectedItems)
+                alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
+                
             case .byMe:
                 let types = actionTypes(for: selectedItems)
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)

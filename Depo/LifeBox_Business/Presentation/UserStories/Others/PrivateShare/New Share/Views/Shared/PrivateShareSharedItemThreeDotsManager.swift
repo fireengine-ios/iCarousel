@@ -24,6 +24,10 @@ final class PrivateShareSharedItemThreeDotsManager {
     
     func showActions(for privateShareType: PrivateShareType, item: WrapData, sender: Any?) {
         switch privateShareType {
+            case .myDisk:
+                let types = rootScreenActionTypes(for: privateShareType, item: item)
+                alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
+                
             case .byMe:
                 let types = rootScreenActionTypes(for: privateShareType, item: item)
                 alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
@@ -66,8 +70,8 @@ final class PrivateShareSharedItemThreeDotsManager {
     }
     
     private func innerFolderActionTypes(for rootType: PrivateShareType, item: WrapData) -> [ElementTypes] {
-        switch rootType {
-            case .byMe:
+        switch rootType { 
+            case .byMe, .myDisk:
                 var types: [ElementTypes] = [.info, .share, .move]
                 
                 types.append(item.favorites ? .removeFromFavorites : .addToFavorites)

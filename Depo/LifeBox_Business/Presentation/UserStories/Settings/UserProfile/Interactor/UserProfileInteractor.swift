@@ -45,16 +45,17 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     func updateUserInfo() {
-        accountService.info(success: { response in
-            guard let response = response as? AccountInfoResponse else {
-                assertionFailure()
-                return
+        accountService.info { [weak self] response in
+            switch response {
+                case .success(let accountInfo):
+                    DispatchQueue.toMain {
+                        SingletonStorage.shared.accountInfo = accountInfo
+                    }
+                    
+                case .failed(_):
+                    return
+                // This error is't handling
             }
-            DispatchQueue.toMain {
-                SingletonStorage.shared.accountInfo = response
-            }
-        }) { error in
-            // This error is't handling
         }
     }
 
@@ -80,7 +81,8 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
     
     private func isPhoneChanged(phone: String) -> Bool {
-        return (phone != userInfo?.phoneNumber)
+        return false
+//        return (phone != userInfo?.phoneNumber)
     }
     
     func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String, changes: String) {
@@ -162,35 +164,35 @@ class UserProfileInteractor: UserProfileInteractorInput {
         let newBirthdayIsEmpty = birthday.trimmingCharacters(in: .whitespaces).isEmpty
         
         /// if oldBirthdayIsEmpty && newBirthdayIsEmpty {
-        if newBirthdayIsEmpty || userInfo?.dob == birthday {
-            updateAddressIfNeeded(address)
-        } else {
-            accountService.updateUserBirthday(birthday) { [weak self] response in
-                switch response {
-                case .success(_):
-                    self?.userInfo?.dob = birthday
-                    self?.updateAddressIfNeeded(address)
-                case .failed(let error):
-                    self?.fail(error: error.localizedDescription)
-                }
-            }
-        }
+//        if newBirthdayIsEmpty || userInfo?.dob == birthday {
+//            updateAddressIfNeeded(address)
+//        } else {
+//            accountService.updateUserBirthday(birthday) { [weak self] response in
+//                switch response {
+//                case .success(_):
+//                    self?.userInfo?.dob = birthday
+//                    self?.updateAddressIfNeeded(address)
+//                case .failed(let error):
+//                    self?.fail(error: error.localizedDescription)
+//                }
+//            }
+//        }
     }
     
     private func updateAddressIfNeeded(_ address: String) {
-        if (userInfo?.address == nil && address.isEmpty) || (userInfo?.address == address) {
-            allUpdated()
-        } else {
-            accountService.updateAddress(with: address) { [weak self] response in
-                switch response {
-                case .success(_):
-                    self?.userInfo?.address = address
-                    self?.allUpdated()
-                case .failed(let error):
-                    self?.fail(error: error.localizedDescription)
-                }
-            }
-        }
+//        if (userInfo?.address == nil && address.isEmpty) || (userInfo?.address == address) {
+//            allUpdated()
+//        } else {
+//            accountService.updateAddress(with: address) { [weak self] response in
+//                switch response {
+//                case .success(_):
+//                    self?.userInfo?.address = address
+//                    self?.allUpdated()
+//                case .failed(let error):
+//                    self?.fail(error: error.localizedDescription)
+//                }
+//            }
+//        }
     }
     
     private func needSendOTP(response: SignUpSuccessResponse) {
@@ -230,32 +232,32 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     /// posible needs callback for slow internet
     private func configuresecretQuestionView(userInfo: AccountInfoResponse) {
-        
-        guard userInfo.hasSecurityQuestionInfo != nil else  {
-            assertionFailure()
-            return
-        }
-
-        guard let questionId = userInfo.securityQuestionId else {
-            /// posible assertionFailure(). needs to check
-            return
-        }
-        
-        accountService.getListOfSecretQuestions { [weak self] response in
-            switch response {
-            case .success( let questions):
-                guard let question = questions.first(where: { $0.id == questionId }) else {
-                    assertionFailure("getListOfSecretQuestions must containts questionId. error on server")
-                    return
-                }
-                
-                self?.secretQuestionsResponse = question
-                
-            case .failed(_):
-                /// This error doesn't handle
-                break
-            }
-        }
+        return
+//        guard userInfo.hasSecurityQuestionInfo != nil else  {
+//            assertionFailure()
+//            return
+//        }
+//
+//        guard let questionId = userInfo.securityQuestionId else {
+//            /// posible assertionFailure(). needs to check
+//            return
+//        }
+//
+//        accountService.getListOfSecretQuestions { [weak self] response in
+//            switch response {
+//            case .success( let questions):
+//                guard let question = questions.first(where: { $0.id == questionId }) else {
+//                    assertionFailure("getListOfSecretQuestions must containts questionId. error on server")
+//                    return
+//                }
+//
+//                self?.secretQuestionsResponse = question
+//
+//            case .failed(_):
+//                /// This error doesn't handle
+//                break
+//            }
+//        }
         
     }
     

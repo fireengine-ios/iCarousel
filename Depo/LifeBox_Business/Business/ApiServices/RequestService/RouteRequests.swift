@@ -299,6 +299,7 @@ struct RouteRequests {
     
     enum BusinessAccount {
         private static let baseAccountsURLString = baseShortUrlString + "api/v1/business/accounts/"
+        static let myInfo = baseAccountsURLString + "me"
         static let info = baseAccountsURLString + "%@"
         static let quota = baseAccountsURLString + "new_api_is_required"
         static let settings = baseAccountsURLString + "new_api_is_required"
@@ -374,7 +375,7 @@ struct RouteRequests {
         enum Version_3 {
             private static let baseV3Url = baseUrl +/ "v3/files/%@"
             static let baseV3UrlString = baseV3Url.absoluteString
-            private static let baseV3UrlBulk = baseUrl +/ "v2/files/_bulk"
+            private static let baseV3UrlBulk = baseUrl +/ "v3/files/_bulk"
             
             //"https://run.mocky.io/v3/d8067201-dc7d-4990-8467-b5b4de18e26a"//
             static let filesFromFolder = baseV3UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
