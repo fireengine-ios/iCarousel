@@ -32,38 +32,39 @@ final class GalleryFileUploadService: NSObject {
     func upload(rootViewController: UIViewController, delegate: GalleryFileUploadServiceDelegate) {
         self.delegate = delegate
         
-        if #available(iOS 14.0, *) {
-            uploadWithAssetPicker(rootViewController: rootViewController)
-        } else {
-            uploadWithImagePicker(rootViewController: rootViewController)
+        cameraService.photoLibraryIsAvailable { [weak self] isAvailable, _ in
+            guard let self = self else {
+                return
+            }
+            
+            guard isAvailable else {
+                self.cameraService.showAccessAlert()
+                self.delegate?.failed(error: nil)
+                return
+            }
+            
+            if #available(iOS 14.0, *) {
+                self.uploadWithAssetPicker(rootViewController: rootViewController)
+            } else {
+                self.uploadWithImagePicker(rootViewController: rootViewController)
+            }
         }
     }
     
     @available(iOS, deprecated: 14.0, message: "Please use uploadWithAssetPicker instead")
     private func uploadWithImagePicker(rootViewController: UIViewController) {
-        cameraService.photoLibraryIsAvailable { [weak self] isAvailable, _ in
-            guard let self = self else {
-                return
+        DispatchQueue.main.async {
+            let picker = UIImagePickerController()
+            let sourceType = UIImagePickerController.SourceType.photoLibrary
+            if let availableTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
+                picker.mediaTypes = availableTypes
             }
-
-            guard isAvailable else {
-                self.cameraService.showAccessAlert()
-                return
-            }
-
-            DispatchQueue.main.async {
-                let picker = UIImagePickerController()
-                let sourceType = UIImagePickerController.SourceType.photoLibrary
-                if let availableTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
-                    picker.mediaTypes = availableTypes
-                }
-                picker.sourceType = sourceType
-                picker.delegate = self
-
-                ///https://stackoverflow.com/a/40038752/5893286
-                picker.allowsEditing = !Device.isIpad
-                rootViewController.present(picker, animated: true, completion: nil)
-            }
+            picker.sourceType = sourceType
+            picker.delegate = self
+            
+            ///https://stackoverflow.com/a/40038752/5893286
+            picker.allowsEditing = !Device.isIpad
+            rootViewController.present(picker, animated: true, completion: nil)
         }
     }
     
