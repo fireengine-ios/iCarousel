@@ -34,6 +34,9 @@ final class PrivateShareSharedWithThreeDotsManager {
                 
             case .innerFolder:
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .sharedArea:
+                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     
@@ -51,6 +54,10 @@ final class PrivateShareSharedWithThreeDotsManager {
                 return
                 
             case .innerFolder:
+                let types = actionTypes(for: selectedItems)
+                alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .sharedArea:
                 let types = actionTypes(for: selectedItems)
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
         }

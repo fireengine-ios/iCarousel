@@ -39,6 +39,10 @@ final class PrivateShareSharedItemThreeDotsManager {
             case .innerFolder:
                 let types = innerFolderActionTypes(for: privateShareType.rootType, item: item)
                 alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .sharedArea:
+                let types = innerFolderActionTypes(for: privateShareType.rootType, item: item)
+                alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     
@@ -88,7 +92,7 @@ final class PrivateShareSharedItemThreeDotsManager {
                 
                 return types
                 
-            case .withMe:
+            case .withMe, .sharedArea:
                 var types: [ElementTypes] = [.info]
                 
                 if let grantedPermissions = item.privateSharePermission?.granted {

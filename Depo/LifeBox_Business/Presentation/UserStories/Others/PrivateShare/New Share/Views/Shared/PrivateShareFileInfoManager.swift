@@ -14,6 +14,7 @@ indirect enum PrivateShareType: Equatable {
     case byMe
     case withMe
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
+    case sharedArea
     
     var rootType: PrivateShareType {
         return veryRootType(for: self)
@@ -27,6 +28,8 @@ indirect enum PrivateShareType: Equatable {
                 return .sharedWith
             case .innerFolder, .myDisk:
                 return .sharedInnerFolder
+        case .sharedArea:
+            return .sharedArea
         }
     }
     
@@ -44,6 +47,9 @@ indirect enum PrivateShareType: Equatable {
                 
             case .innerFolder:
                 return veryRootType(for: self).isSelectionAllowed
+                
+            case .sharedArea:
+                return true
         }
     }
     
@@ -63,6 +69,9 @@ indirect enum PrivateShareType: Equatable {
                 
             case (.innerFolder(_, let folder), let veryRootType):
                 return floatingButtonTypes(innerFolderVeryRootType: veryRootType, permissions: folder.permissions.granted ?? [])
+                
+            case (.sharedArea, _):
+                return []
         }
     }
     
@@ -87,12 +96,15 @@ indirect enum PrivateShareType: Equatable {
             case .innerFolder:
                 assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
                 return []
+                
+            case .sharedArea:
+                return []
         }
     }
     
     private func veryRootType(for type: PrivateShareType) -> PrivateShareType {
         switch type {
-            case .byMe, .withMe, .myDisk:
+            case .byMe, .withMe, .myDisk, .sharedArea:
                 return type
                 
             case .innerFolder(type: let rootType, _):
@@ -456,6 +468,20 @@ final class GetSharedItemsOperation: Operation {
                             completion(.failed(error))
                     }
                 }
+        case .sharedArea:
+            debugPrint("HERE WE GO")
+
+            let accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid ?? ""
+            let rootFolderUuid = ""
+            task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                switch response {
+                    case .success(let fileSystem):
+                        completion(.success(fileSystem.fileList))
+                    case .failed(let error):
+                        completion(.failed(error))
+                }
+            }
+        break
         }
     }
 }
