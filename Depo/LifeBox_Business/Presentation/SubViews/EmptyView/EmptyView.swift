@@ -23,6 +23,7 @@ final class EmptyView: UIView, NibInit {
         case sharedBy
         case sharedWith
         case sharedInnerFolder
+        case sharedArea
         
         var title: String {
             switch self {
@@ -36,6 +37,8 @@ final class EmptyView: UIView, NibInit {
                     return TextConstants.privateSharedWithMeEmptyText
                 case .sharedInnerFolder:
                     return TextConstants.privateSharedInnerFolderEmptyText
+                case .sharedArea:
+                    return TextConstants.privateShareSharedAreaEmptyText
             }
         }
         
@@ -50,6 +53,8 @@ final class EmptyView: UIView, NibInit {
                 case .sharedWith:
                     return nil
                 case .sharedInnerFolder:
+                    return nil
+                case .sharedArea:
                     return nil
             }
         }

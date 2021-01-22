@@ -1844,6 +1844,7 @@
 "private_share_who_has_access_role_3" = "Viewer";
 "private_share_who_has_access_end_share" = "Stop Sharing";
 "private_share_inner_folder_empty_page" = "Folder is empty";
+"private_share_shared_area_empty_page" = "private_share_shared_area_empty_page";
 "private_share_info_role_4" = "Other";
 "private_share_non_turkish_msisdn_warning" = "Please Enter GSM Number with (+)Country Code";
 "private_share_leave_sharing_success" = "Left Successfully";

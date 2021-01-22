@@ -8,15 +8,6 @@
 
 import Foundation
 
-class UploadBaseURL: BaseRequestParametrs {
-    override var requestParametrs: Any {
-        return Data()
-    }
-    
-    override var patch: URL {
-        return RouteRequests.uploadContainer
-    }
-}
 
 class SimpleUpload: UploadRequestParametrs {
     
@@ -136,15 +127,7 @@ class SimpleUpload: UploadRequestParametrs {
     }
     
     var patch: URL {
-        switch uploadType {
-            case .sharedWithMe:
-                return destitantionURL
-                
-            default:
-                return URL(string: destitantionURL.absoluteString
-                    .appending("/")
-                    .appending(tmpUUID))!
-        }
+        return destitantionURL
     }
     
     var timeout: TimeInterval {
@@ -285,29 +268,5 @@ final class ResumableUpload: UploadRequestParametrs {
         fileData = chunk.data
         range = chunk.range
         isEmpty = false
-    }
-}
-
-class UploadNotify: BaseRequestParametrs {
-    
-    let parentUUID: String
-    
-    let fileUUID: String
-    
-    init(parentUUID: String, fileUUID: String) {
-        if parentUUID.isEmpty {
-            self.parentUUID = "ROOT_FOLDER"
-        }else{
-            self.parentUUID = parentUUID
-        }
-        //self.parentUUID = parentUUID
-        self.fileUUID = fileUUID
-        super.init()
-    }
-    
-    override var patch: URL {
-        let str = String(format: RouteRequests.uploadNotify,
-                         parentUUID, fileUUID)
-        return URL(string: str, relativeTo: super.patch)!
     }
 }
