@@ -1191,6 +1191,7 @@ struct TextConstants {
     static let privateSharedWithMeEmptyText = NSLocalizedString("private_share_shared_with_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedByMeEmptyText = NSLocalizedString("private_share_shared_by_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedInnerFolderEmptyText = NSLocalizedString("private_share_inner_folder_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareSharedAreaEmptyText = NSLocalizedString("private_share_shared_area_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let privateSharedEndSharingActionSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedEndSharingActionConfirmation = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
