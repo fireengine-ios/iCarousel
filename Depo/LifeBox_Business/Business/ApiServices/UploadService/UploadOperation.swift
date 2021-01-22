@@ -68,7 +68,7 @@ final class UploadOperation: Operation {
         self.uploadTo = uploadTo
         self.uploadStategy = uploadStategy
         self.folder = folder
-        self.accountUuid = accountUuid
+        self.accountUuid = projectId
         self.handler = handler
         self.semaphore = DispatchSemaphore(value: 0)
         self.isFavorites = isFavorites
