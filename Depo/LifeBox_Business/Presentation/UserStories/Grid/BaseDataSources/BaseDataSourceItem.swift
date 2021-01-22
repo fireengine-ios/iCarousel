@@ -12,10 +12,10 @@ class BaseDataSourceItem: NSObject {
 
     var uuid: String
     
-    var accountUuid: String?
+    var accountUuid: String
     
     var isOwner: Bool {
-        return accountUuid == nil || accountUuid == SingletonStorage.shared.accountInfo?.uuid
+        return accountUuid == SingletonStorage.shared.accountInfo?.uuid
     }
     
     var name: String?
@@ -57,6 +57,7 @@ class BaseDataSourceItem: NSObject {
         self.fileType = fileType
         self.syncStatus = syncStatus
         self.isLocalItem = isLocalItem
+        self.accountUuid = SingletonStorage.shared.accountInfo?.uuid ?? ""
         //super.init()
     }
     

@@ -8,6 +8,8 @@
 
 import Alamofire
 
+typealias FileInfoMoveToTrash = (accountUuid: String, uuid: String)
+
 protocol PrivateShareApiService {
     @discardableResult
     func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
@@ -49,7 +51,7 @@ protocol PrivateShareApiService {
     func renameItem(projectId: String, uuid: String, name: String, handler: @escaping ResponseVoid) -> URLSessionTask?
 
     @discardableResult
-    func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
+    func moveToTrash(files: [FileInfoMoveToTrash], handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
     func createFolder(projectId: String, parentFolderUuid: String, requestItem: CreateFolderResquestItem, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
@@ -59,7 +61,6 @@ protocol PrivateShareApiService {
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
-    
     @discardableResult
     func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask? {
         return SessionManager
@@ -254,9 +255,9 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
         
     @discardableResult
-    func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+    func moveToTrash(files: [FileInfoMoveToTrash], handler: @escaping ResponseVoid) -> URLSessionTask? {
         
-        let parameters = [["accountUuid" : projectId, "uuid" : uuid]].asParameters()
+        let parameters = files.compactMap {["accountUuid" : $0.accountUuid, "uuid" : $0.uuid]}.asParameters()
         
         return SessionManager
             .customDefault

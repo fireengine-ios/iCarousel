@@ -1020,11 +1020,6 @@ extension MoreFilesActionsInteractor {
     }
     
     private func moveToTrashShared(_ items: [Item]) {
-        //only one is allowed for now
-        guard let item = items.first else {
-            return
-        }
-        
         let successAction = { [weak self] in
             self?.output?.operationFinished(type: .moveToTrashShared)
             self?.removeItemsFromPlayer(items: items)
@@ -1039,7 +1034,7 @@ extension MoreFilesActionsInteractor {
         
         analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
         
-        fileService.moveToTrashShared(file: item, success: successAction, fail: failAction)
+        fileService.moveToTrashShared(files: items, success: successAction, fail: failAction)
     }
 }
 

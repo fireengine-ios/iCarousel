@@ -82,14 +82,15 @@ class WrapItemFileService: WrapItemFileOperations {
             fail?(value)
         }
         
-        let removeItems = remoteItemsUUID(files: files)
+        let removeItems = files
+            .filter { !$0.isLocalItem}
+        
         if removeItems.isEmpty {
             successOperation()
             return
         }
         
-        let files = MoveToTrashFiles(items: removeItems)
-        remoteFileService.moveToTrash(files: files, success: successOperation, fail: failOperation)
+        moveToTrashShared(files: removeItems, success: successOperation, fail: failOperation)
     }
     
     func deleteLocalFiles(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
@@ -109,12 +110,7 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func endSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let accountUuid = file.accountUuid else {
-            fail?(ErrorResponse.string("don't have projectId"))
-            return
-        }
-        
-        privateShareApiService.endShare(projectId: accountUuid, uuid: file.uuid) { response in
+        privateShareApiService.endShare(projectId: file.accountUuid, uuid: file.uuid) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -126,12 +122,12 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func leaveSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let accountUuid = file.accountUuid, let subjectId = SingletonStorage.shared.accountInfo?.uuid else {
+        guard let subjectId = SingletonStorage.shared.accountInfo?.uuid else {
             fail?(ErrorResponse.string("don't have projectId or subjectId"))
             return
         }
         
-        privateShareApiService.leaveShare(projectId: accountUuid, uuid: file.uuid, subjectId: subjectId) { response in
+        privateShareApiService.leaveShare(projectId: file.accountUuid, uuid: file.uuid, subjectId: subjectId) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -142,13 +138,9 @@ class WrapItemFileService: WrapItemFileOperations {
         }
     }
     
-    func moveToTrashShared(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let accountUuid = file.accountUuid else {
-            fail?(ErrorResponse.string("don't have projectId"))
-            return
-        }
-        
-        privateShareApiService.moveToTrash(projectId: accountUuid, uuid: file.uuid) { response in
+    func moveToTrashShared(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let filesToRemove = files.compactMap { ($0.accountUuid, $0.uuid) }
+        privateShareApiService.moveToTrash(files: filesToRemove) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -251,12 +243,7 @@ class WrapItemFileService: WrapItemFileOperations {
         items.forEach { item in
             group.enter()
             
-            guard let accountUuid = item.accountUuid else {
-                group.leave()
-                return
-            }
-            
-            privateShareApiService.createDownloadUrl(projectId: accountUuid, uuid: item.uuid) { response in
+            privateShareApiService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { response in
                 if case let ResponseResult.success(urlToDownload) = response {
                     item.tmpDownloadUrl = urlToDownload.url
                 }

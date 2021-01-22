@@ -42,8 +42,8 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             return
         }
         
-        if let item = item as? Item, let accountUuid = item.accountUuid {
-            shareApiService.renameItem(projectId: accountUuid, uuid: item.uuid, name: newName) { [weak self] result in
+        if let item = item as? Item {
+            shareApiService.renameItem(projectId: item.accountUuid, uuid: item.uuid, name: newName) { [weak self] result in
                 switch result {
                 case .success():
                     item.name = newName
