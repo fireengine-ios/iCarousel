@@ -469,8 +469,6 @@ final class GetSharedItemsOperation: Operation {
                     }
                 }
         case .sharedArea:
-            debugPrint("HERE WE GO")
-
             let accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid ?? ""
             let rootFolderUuid = ""
             task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
