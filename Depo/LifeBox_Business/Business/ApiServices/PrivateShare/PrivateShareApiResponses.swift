@@ -131,7 +131,7 @@ struct SharedItemPermission: Codable, Equatable {
 }
 
 struct PrivateShareObjectItem: Encodable {
-    let projectId: String
+    let accountUuid: String
     let uuid: String
 }
 

@@ -36,7 +36,7 @@ final class UploadOperation: Operation {
     private let uploadStategy: MetaStrategy
     private let uploadTo: MetaSpesialFolder
     private let folder: String
-    private let projectId: String?
+    private let accountUuid: String?
     private var requestObject: URLSessionTask?
     private let handler: UploadOperationHandler?
     private var isFavorites: Bool = false
@@ -68,7 +68,7 @@ final class UploadOperation: Operation {
         self.uploadTo = uploadTo
         self.uploadStategy = uploadStategy
         self.folder = folder
-        self.projectId = projectId
+        self.accountUuid = accountUuid
         self.handler = handler
         self.semaphore = DispatchSemaphore(value: 0)
         self.isFavorites = isFavorites
@@ -510,10 +510,10 @@ final class UploadOperation: Operation {
     //MARK: - Requests
     
     private func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask? {
-        if let projectId = projectId {
+        if let accountUuid = accountUuid {
             let requestItem = UploadFileRequestItem(uuid: inputItem.uuid, name: inputItem.name ?? "", sizeInBytes: fileSize, mimeType: inputItem.uploadContentType)
             
-            return privateShareService.getUrlToUpload(projectId: projectId, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in
+            return privateShareService.getUrlToUpload(projectId: accountUuid, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in
                 switch response {
                     case .success(let wrappedUrl):
                         success(wrappedUrl.url)
