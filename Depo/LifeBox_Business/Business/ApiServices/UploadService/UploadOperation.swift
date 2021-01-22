@@ -74,15 +74,15 @@ final class UploadOperation: Operation {
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
         
-        if uploadType != .sharedWithMe {
-            if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
-                self.isResumable = true
-            } else {
-                self.isResumable = false
-            }
-        } else {
+//        if uploadType != .sharedWithMe {
+//            if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
+//                self.isResumable = true
+//            } else {
+//                self.isResumable = false
+//            }
+//        } else {
             self.isResumable = false
-        }
+//        }
         
         let trimmedLocalId = self.inputItem.getTrimmedLocalID()
         self.interruptedId = resumableInfoService.getInterruptedId(for: trimmedLocalId)
@@ -479,11 +479,6 @@ final class UploadOperation: Operation {
     
     private func finishUploading(parameters: UploadRequestParametrs, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         
-        guard uploadType != .sharedWithMe else {
-            success()
-            return
-        }
-        
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
         
@@ -514,8 +509,8 @@ final class UploadOperation: Operation {
     
     //MARK: - Requests
     
-    private func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask {
-        if uploadType == .sharedWithMe, let projectId = projectId {
+    private func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask? {
+        if let projectId = projectId {
             let requestItem = UploadFileRequestItem(uuid: inputItem.uuid, name: inputItem.name ?? "", sizeInBytes: fileSize, mimeType: inputItem.uploadContentType)
             
             return privateShareService.getUrlToUpload(projectId: projectId, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in
@@ -526,10 +521,11 @@ final class UploadOperation: Operation {
                     case .failed(let error):
                         fail?(ErrorResponse.error(error))
                 }
-            } ?? URLSessionTask()
+            }
             
         } else {
-            return UploadService.default.baseUrl(success: success, fail: fail)
+            fail?(ErrorResponse.string(TextConstants.commonServiceError))
+            return nil
         }
     }
     

@@ -695,20 +695,6 @@ final class UploadService: BaseRequestService {
         return request
     }
     
-    func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask {
-        let param = UploadBaseURL()
-        let handler = BaseResponseHandler<UploadBaseURLResponse, ObjectRequestResponse>(success: { result in
-            success((result as? UploadBaseURLResponse)?.url)
-        }, fail: fail)
-        
-        return executeGetRequest(param: param, handler: handler)
-    }
-    
-    func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail: FailResponse?) {
-        let handler = BaseResponseHandler<SearchItemResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-    }
-    
     func isInQueue(item uuid: String) -> Bool {
         return uploadOperations.first(where: {
             $0.inputItem.uuid == uuid && !($0.isCancelled || $0.isFinished)

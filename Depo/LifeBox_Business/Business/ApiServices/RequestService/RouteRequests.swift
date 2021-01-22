@@ -291,10 +291,6 @@ struct RouteRequests {
         }
     }
     
-    /// upload
-    static let uploadContainer = baseUrl +/ "container/baseUrl"
-    static let uploadNotify = "notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
-    
     static let updateLanguage = baseUrl +/ "account/language"
     
     enum BusinessAccount {
