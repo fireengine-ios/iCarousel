@@ -65,7 +65,7 @@ final class UploadService: BaseRequestService {
     // MARK: -
     class func convertUploadType(uploadType: UploadType) -> OperationType {
         switch uploadType {
-        case .syncToUse, .upload, .save, .saveAs:
+        case .syncToUse, .upload:
             return .upload
         case .sharedWithMe:
             return .sharedWithMeUpload
@@ -120,8 +120,8 @@ final class UploadService: BaseRequestService {
                         }
                         
                         fail(errorResponse)
-                    }, syncToUseFileListOperationsCallBack: { seyncOperations in
-                        returnedUploadOperation(seyncOperations)
+                    }, syncToUseFileListOperationsCallBack: { syncOperations in
+                        returnedUploadOperation(syncOperations)
                 })
             default:
                  self.analyticsService.trackDimentionsEveryClickGA(screen: .upload, downloadsMetrics: nil, uploadsMetrics: items.count)
@@ -150,8 +150,8 @@ final class UploadService: BaseRequestService {
                         }
                         
                         fail(errorResponse)
-                    }, returnedOprations: { roperations in
-                        returnedUploadOperation(roperations)
+                    }, returnedOprations: { operations in
+                        returnedUploadOperation(operations)
                 })
             }
         }
@@ -173,7 +173,7 @@ final class UploadService: BaseRequestService {
     
     private func hideIfNeededCard(for uploadType: UploadType) {
         switch uploadType {
-            case .upload, .syncToUse, .save, .saveAs:
+            case .upload, .syncToUse:
                 hideUploadCardIfNeeded()
                 
             case .sharedWithMe:
