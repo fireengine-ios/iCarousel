@@ -28,7 +28,7 @@ class SelectNameModuleConfigurator {
                       moduleType: viewType,
                       rootFolderID: parameters.rootFolderUuid,
                       isPrivateSharing: true,
-                      projectId: parameters.projectId,
+                      projectId: parameters.accountUuid,
                       moduleOutput: moduleOutput)
         }
     }
@@ -48,7 +48,7 @@ class SelectNameModuleConfigurator {
         interactor.isFavorite = isFavorites
         interactor.moduleType = moduleType
         interactor.isPrivateShare = isPrivateSharing
-        interactor.projectId = projectId
+        interactor.accountUuid = projectId
         
         presenter.interactor = interactor
         viewController.output = presenter

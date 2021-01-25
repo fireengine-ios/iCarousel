@@ -68,12 +68,7 @@ final class PrivateShareSliderFilesCollectionManager {
     }
     
     private func createNewUrl(for item: Item, completion: @escaping ValueHandler<URL?>) {
-        guard let accountUuid = item.accountUuid else {
-            completion(nil)
-            return
-        }
-        
-        shareApiService.createDownloadUrl(projectId: accountUuid, uuid: item.uuid) { result in
+        shareApiService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { result in
             switch result {
             case .success(let response):
                 completion(response.url)
