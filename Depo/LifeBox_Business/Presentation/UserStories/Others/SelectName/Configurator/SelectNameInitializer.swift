@@ -9,7 +9,7 @@
 import UIKit
 
 struct CreateFolderSharedWithMeParameters {
-    let projectId: String
+    let accountUuid: String
     let rootFolderUuid: String?
 }
 

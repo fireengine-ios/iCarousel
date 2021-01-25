@@ -60,54 +60,35 @@ enum ElementTypes {
     static var activeState: [ElementTypes] = [.moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus) -> [ElementTypes] {
-        var result = [ElementTypes]()
+        var result: [ElementTypes] = [.info]
         
-        if !item.isOwner {
-            //shared with me items
-            if let grantedPermissions = item.privateSharePermission?.granted {
-                if grantedPermissions.contains(.read) {
-                    if item.fileType.isContained(in: [.image, .video]) {
-                        result.append(.download)
-                    } else {
-                        result.append(.downloadDocument)
-                    }
-                }
-                
-                if grantedPermissions.contains(.delete) {
-                    if !item.isReadOnlyFolder {
-                        result.append(.moveToTrashShared)
-                    }
-                }
-            }
+        guard let grantedPermissions = item.privateSharePermission?.granted,
+              (grantedPermissions.contains(.read) ||
+                grantedPermissions.contains(.writeAcl) ||
+                grantedPermissions.contains(.delete))
+        else {
             return result
         }
+        if grantedPermissions.contains(.read) || grantedPermissions.contains(.writeAcl) {
+            result.append(.share)
+        }
         
-        switch status {
-        case .trashed:
-            result = ElementTypes.trashState
-        default:
-            if item.isLocalItem {
-                let inProgress = UploadService.default.isInQueue(item: item.uuid)
-                result = [.share, inProgress ? .syncInProgress : .sync, .info]
+        if grantedPermissions.contains(.read) {
+            if item.fileType.isContained(in: [.image, .video]) {
+                result.append(.download)
             } else {
-                switch item.fileType {
-                case .image, .video:
-                    result = [.share, .download]
-                    
-                    if item.fileType == .image {
-//                        if Device.isTurkishLocale {
-//                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-//                        }
-                    }
-
-                default:
-                    result = [.share, .download, .moveToTrash]
-                }
-                
-                if item.fileType.isContained(in: [.video, .image]) {
-                    result.append(.moveToTrash)
-                }
+                result.append(.downloadDocument)
             }
+        }
+        
+        if grantedPermissions.contains(.delete) {
+            if !item.isReadOnlyFolder {
+                result.append(.moveToTrashShared)
+            }
+        }
+        
+        if status == .trashed {
+            result = ElementTypes.trashState
         }
         
         return result
@@ -160,7 +141,7 @@ enum ElementTypes {
         }
         
         var types = [ElementTypes]()
-        if !item.isOwner {
+        guard item.isOwner else {
             //shared with me items
             types.append(.info)
             if let grantedPermissions = item.privateSharePermission?.granted {

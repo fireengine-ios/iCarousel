@@ -23,7 +23,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
     var rootFolderID: String?
     var isFavorite: Bool?
     var isPrivateShare: Bool = false
-    var projectId: String?
+    var accountUuid: String?
     
     
     func getTitle() -> String {
@@ -88,12 +88,12 @@ class SelectNameInteractor: SelectNameInteractorInput {
     }
     
     private func createFolderOnSharedWithMe(with name: String) {
-        guard let projectId = projectId, let parentFolderUuid = rootFolderID else {
+        guard let accountUuid = accountUuid, let parentFolderUuid = rootFolderID else {
             return
         }
 
         let requestItem = CreateFolderResquestItem(uuid: UUID().uuidString, name: name)
-        privateShareService.createFolder(projectId: projectId, parentFolderUuid: parentFolderUuid, requestItem: requestItem) { [weak self] response in
+        privateShareService.createFolder(projectId: accountUuid, parentFolderUuid: parentFolderUuid, requestItem: requestItem) { [weak self] response in
             switch response {
                 case .success(let createdFolder):
                     DispatchQueue.main.async {

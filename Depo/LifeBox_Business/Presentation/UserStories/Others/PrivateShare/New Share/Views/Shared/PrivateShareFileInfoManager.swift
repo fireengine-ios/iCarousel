@@ -293,12 +293,7 @@ final class PrivateShareFileInfoManager {
     }
     
     func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
-        guard let accountUuid = item.accountUuid else {
-            completion(nil)
-            return
-        }
-        
-        privateShareAPIService.createDownloadUrl(projectId: accountUuid, uuid: item.uuid) { response in
+        privateShareAPIService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { response in
             switch response {
                 case .success(let urlWrapper):
                     completion(urlWrapper.url)

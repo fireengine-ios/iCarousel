@@ -675,26 +675,7 @@ class RouterVC: NSObject {
                                                                           status: status,
                                                                           canLoadMoreItems: canLoadMoreItems)
     }
-    
-    func filesDetailAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
-        return PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                               moduleOutput: moduleOutput,
-                                                                               selectedItem: fileObject,
-                                                                               allItems: items,
-                                                                               albumUUID: albumUUID,
-                                                                               status: status)
-    }
-    
-    func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
-        return PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                        moduleOutput: moduleOutput,
-                                                                                        selectedItem: fileObject,
-                                                                                        allItems: items,
-                                                                                        albumUUID: albumUUID,
-                                                                                        albumItem: albumItem,
-                                                                                        status: status)
-    }
-    
+
     // MARK: Free App Space
     
     func freeAppSpace() -> UIViewController {

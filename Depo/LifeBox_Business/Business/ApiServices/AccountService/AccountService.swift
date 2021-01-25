@@ -35,10 +35,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     func quotaInfo(success: SuccessResponse?, fail:@escaping FailResponse) {
         debugLog("AccountService quotaInfo")
-
-        //TODO: remove fail() if new business app API is ready
-        fail(ErrorResponse.string("New api is required for quotaInfo"))
-        return
         
         let param = QuotaInfo()
         let handler = BaseResponseHandler<QuotaInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
@@ -172,10 +168,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     func securitySettingsInfo(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("AccountService securitySettingsInfo")
-
-        //TODO: remove fail() if new business app API is ready
-        fail?(ErrorResponse.string("New api is required for securitySettingsInfo"))
-        return
         
         let parametres = SecuritySettingsInfoParametres()
         let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)

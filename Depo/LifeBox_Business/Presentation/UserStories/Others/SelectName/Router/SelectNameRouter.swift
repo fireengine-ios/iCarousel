@@ -18,8 +18,8 @@ class SelectNameRouter: SelectNameRouterInput {
         if let tabBarVC = router.defaultTopController as? TabBarViewController,
            let navVC = tabBarVC.activeNavigationController,
            let controller = navVC.topViewController as? PrivateShareSharedFilesViewController {
-            if let accountUuid = item.accountUuid, let name = item.name, let permission = item.privateSharePermission {
-                let newFolder = PrivateSharedFolderItem(accountUuid: accountUuid, uuid: item.uuid, name: name, permissions: permission)
+            if let name = item.name, let permission = item.privateSharePermission {
+                let newFolder = PrivateSharedFolderItem(accountUuid: item.accountUuid, uuid: item.uuid, name: name, permissions: permission)
                 let newController = router.sharedFolder(rootShareType: controller.shareType, folder: newFolder)
                 router.pushViewController(viewController: newController)
             }
