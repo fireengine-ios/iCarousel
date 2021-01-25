@@ -909,7 +909,7 @@ class RouterVC: NSObject {
     }
     
     var sharedAreaController: UIViewController {
-        SharedAreaViewController.initFromNib()
+        PrivateShareSharedFilesViewController.with(shareType: .sharedArea)
     }
     
 }
