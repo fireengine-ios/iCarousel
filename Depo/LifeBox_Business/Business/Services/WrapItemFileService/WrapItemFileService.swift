@@ -169,7 +169,7 @@ class WrapItemFileService: WrapItemFileOperations {
         let localFiles = localWrapedData(files: items)
         
         uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .upload,
+                                     uploadType: .regular,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .ROOT,
                                      success: success,

@@ -96,7 +96,7 @@ final class UploadOperation: Operation {
         switch uploadType {
             case .syncToUse:
             qualityOfService = .userInteractive
-        case .upload, .sharedWithMe:
+        case .regular, .sharedWithMe:
             qualityOfService = .userInitiated
         }
     }

@@ -89,11 +89,11 @@ final class GalleryFileUploadService: NSObject {
         if let sharedFolderInfo = router.sharedFolderItem {
             rootUUID = sharedFolderInfo.uuid
             accountUuid = sharedFolderInfo.accountUuid
-            uploadType = accountUuid == SingletonStorage.shared.accountInfo?.uuid ? .upload : .sharedWithMe
+            uploadType = accountUuid == SingletonStorage.shared.accountInfo?.uuid ? .regular : .sharedWithMe
         } else {
             rootUUID = router.getParentUUID()
             accountUuid = nil
-            uploadType = .upload
+            uploadType = .regular
         }
         
         UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .ROOT, folder: rootUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: accountUuid, success: { [weak self] in
