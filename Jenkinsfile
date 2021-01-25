@@ -80,7 +80,7 @@ branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
 isDev = branchName == 'dev_friendly'
 echo "Branch Name: ${branchName}"
 
-isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName == 'release_lifeBoxBusiness_*'
+isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName.startsWith('release_lifeBoxBusiness_')
 
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${app.versionInfoPath}"

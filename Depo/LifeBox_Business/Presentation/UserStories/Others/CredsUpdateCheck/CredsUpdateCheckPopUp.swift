@@ -113,17 +113,17 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
         messageLabel.numberOfLines = 0
     }
     
-    private func showEmailVerifiedPopUp() {
-        let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "spotify_checkmark")),
-                                            message: TextConstants.credUpdateCheckCompletionMessage,
-                                            buttonTitle: TextConstants.accessibilityClose,
-                                            buttonAction: dismissCompletion)
-        
-        popUp.modalPresentationStyle = .overFullScreen
-        popUp.modalTransitionStyle = .crossDissolve
-        
-        router.presentViewController(controller: popUp)
-    }
+//    private func showEmailVerifiedPopUp() {
+//        let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "spotify_checkmark")),
+//                                            message: TextConstants.credUpdateCheckCompletionMessage,
+//                                            buttonTitle: TextConstants.accessibilityClose,
+//                                            buttonAction: dismissCompletion)
+//
+//        popUp.modalPresentationStyle = .overFullScreen
+//        popUp.modalTransitionStyle = .crossDissolve
+//
+//        router.presentViewController(controller: popUp)
+//    }
     
     private func openUserProfile() {
         if let accountInfo = userInfo {
@@ -147,7 +147,7 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
     //MARK: Actions
     @IBAction private func yesButtonPressed(_ sender: Any) {
         close(isFinalStep: false) { [weak self] in
-            self?.showEmailVerifiedPopUp()
+//            self?.showEmailVerifiedPopUp()
             self?.updateInfoFeedbackRequest(isUpdated: false)
             
             self?.analyticsService.trackCustomGAEvent(eventCategory: .popUp,
