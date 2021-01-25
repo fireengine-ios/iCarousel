@@ -77,8 +77,7 @@ class SplashInteractor: SplashInteractorInput {
             failLogin()
             output.asyncOperationSuccess()
         } else {
-            //TODO: uncomment when refresh API is ready
-//            refreshAccessToken { [weak self] in
+            refreshAccessToken { [weak self] in
                 /// self can be nil due logout
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     self?.isTryingToLogin = false
@@ -105,7 +104,7 @@ class SplashInteractor: SplashInteractorInput {
                     }
                 })
             }
-//        }
+        }
     }
     
     func successLogin() {
