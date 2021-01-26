@@ -230,11 +230,7 @@ final class PushNotificationService {
     }
     
     private func openMyDisk() {
-        if let folder = PrivateSharedFolderItem.rootFolder {
-            pushTo(router.sharedFolder(rootShareType: .innerFolder(type: .myDisk, folderItem: folder), folder: folder))
-        } else {
-            assertionFailure()
-        }
+        pushTo(router.myDisk)
     }
     
     private func openDocuments() {

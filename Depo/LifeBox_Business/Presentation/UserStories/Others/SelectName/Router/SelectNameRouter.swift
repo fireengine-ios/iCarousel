@@ -28,16 +28,9 @@ class SelectNameRouter: SelectNameRouterInput {
         }
         
         let folderVC = router.filesFromFolder(folder: item, type: .Grid, sortType: .None, status: .active, moduleOutput: presenter)
-
-        if !isSubFolder {
-            let allFilesVC = router.allFiles(moduleOutput: presenter,
-                                             sortType: presenter.allFilesSortType,
-                                             viewType: presenter.allFilesViewType)
-            router.pushSeveralControllers([allFilesVC, folderVC])
-            
-        } else {
-            router.pushViewController(viewController: folderVC)
-            
-        }
+        
+        router.pushViewController(viewController: folderVC)
+        
+        
     }
 }

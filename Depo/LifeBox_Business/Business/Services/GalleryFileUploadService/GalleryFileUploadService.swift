@@ -26,10 +26,13 @@ extension GalleryFileUploadServiceDelegate {
 final class GalleryFileUploadService: NSObject {
     
     private weak var delegate: GalleryFileUploadServiceDelegate?
+    private var uploadType: UploadType = .regular
     private lazy var cameraService = CameraService()
     
     
-    func upload(rootViewController: UIViewController, delegate: GalleryFileUploadServiceDelegate) {
+    func upload(type: UploadType, rootViewController: UIViewController, delegate: GalleryFileUploadServiceDelegate) {
+        uploadType = type
+        
         self.delegate = delegate
         
         cameraService.photoLibraryIsAvailable { [weak self] isAvailable, _ in
@@ -80,23 +83,36 @@ final class GalleryFileUploadService: NSObject {
     
     private func upload(items: [WrapData]) {
         let router = RouterVC()
-        let isFavorites = router.isOnFavoritesView()
         let isFromAlbum = false
         
-        let accountUuid: String?
-        let rootUUID: String
-        let uploadType: UploadType
-        if let sharedFolderInfo = router.sharedFolderItem {
-            rootUUID = sharedFolderInfo.uuid
-            accountUuid = sharedFolderInfo.accountUuid
-            uploadType = accountUuid == SingletonStorage.shared.accountInfo?.uuid ? .regular : .sharedWithMe
-        } else {
-            rootUUID = router.getParentUUID()
-            accountUuid = nil
-            uploadType = .regular
+        var accountUuid = SingletonStorage.shared.accountInfo?.uuid
+        var rootUUID: String = ""
+
+        switch uploadType {
+            case .regular:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    rootUUID = sharedFolderInfo.uuid
+                }
+                accountUuid = SingletonStorage.shared.accountInfo?.uuid
+                
+            case .sharedWithMe:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    accountUuid = sharedFolderInfo.accountUuid
+                    rootUUID = sharedFolderInfo.uuid
+                }
+                
+            case .sharedArea:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    rootUUID = sharedFolderInfo.uuid
+                }
+                accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid
+                
+            default:
+                assertionFailure()
+                break
         }
         
-        UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .ROOT, folder: rootUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: accountUuid, success: { [weak self] in
+        UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .ROOT, folder: rootUUID, isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: accountUuid, success: { [weak self] in
             self?.delegate?.uploaded(items: items)
             
         }, fail: { [weak self] error in

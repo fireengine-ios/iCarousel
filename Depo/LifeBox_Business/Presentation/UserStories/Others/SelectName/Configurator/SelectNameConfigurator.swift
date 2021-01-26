@@ -21,7 +21,7 @@ class SelectNameModuleConfigurator {
         }
     }
     
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, viewType: SelectNameScreenType, parameters: CreateFolderSharedWithMeParameters, moduleOutput: SelectNameModuleOutput?) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, viewType: SelectNameScreenType, parameters: CreateFolderParameters, moduleOutput: SelectNameModuleOutput?) {
         
         if let viewController = viewInput as? SelectNameViewController {
             configure(viewController: viewController,

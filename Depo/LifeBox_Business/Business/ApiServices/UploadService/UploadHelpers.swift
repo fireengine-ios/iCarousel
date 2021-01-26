@@ -17,6 +17,7 @@ enum UploadType {
     case regular
     case syncToUse
     case sharedWithMe
+    case sharedArea
 }
 
 enum MetaStrategy: String {

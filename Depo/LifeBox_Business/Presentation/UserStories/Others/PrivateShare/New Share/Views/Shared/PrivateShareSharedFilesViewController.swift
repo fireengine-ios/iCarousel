@@ -159,6 +159,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
                 permittedTypes = [.sharedWithMeUpload, .download]
             case .myDisk:
                 permittedTypes = [.upload, .download]
+            case .sharedArea:
+                permittedTypes = [.upload, .download]
             default:
                 permittedTypes = []
         }
@@ -372,6 +374,11 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
                     collectionManager.reload(type: .onOperationFinished)
                 }
                 
+            case .sharedArea:
+                if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
+                    collectionManager.reload(type: .onOperationFinished)
+                }
+                
             default:
                 assertionFailure()
         }
@@ -405,7 +412,7 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
     }
     
     func didMoveToTrashSharedItems(_ items: [Item]) {
-        if shareType.rootType == .withMe {
+        if shareType.rootType.isContained(in: [.withMe, .sharedArea]) {
             collectionManager.delete(uuids: items.compactMap { $0.uuid })
         }
     }

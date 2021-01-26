@@ -25,7 +25,7 @@ final class UploadService: BaseRequestService {
     private lazy var reachabilityService = ReachabilityService.shared
     
     private var allUploadOperationsCount: Int {
-        return uploadOperations.filter({ $0.uploadType.isContained(in: [.regular]) && !$0.isCancelled }).count + finishedUploadOperationsCount
+        return uploadOperations.filter({ $0.uploadType.isContained(in: [.regular, .sharedArea]) && !$0.isCancelled }).count + finishedUploadOperationsCount
     }
     private var finishedUploadOperationsCount = 0
     
@@ -65,10 +65,10 @@ final class UploadService: BaseRequestService {
     // MARK: -
     class func convertUploadType(uploadType: UploadType) -> OperationType {
         switch uploadType {
-        case .syncToUse, .regular:
-            return .upload
-        case .sharedWithMe:
-            return .sharedWithMeUpload
+            case .syncToUse, .regular, .sharedArea:
+                return .upload
+            case .sharedWithMe:
+                return .sharedWithMeUpload
         }
     }
     
@@ -173,7 +173,7 @@ final class UploadService: BaseRequestService {
     
     private func hideIfNeededCard(for uploadType: UploadType) {
         switch uploadType {
-            case .regular, .syncToUse:
+            case .regular, .syncToUse, .sharedArea:
                 hideUploadCardIfNeeded()
                 
             case .sharedWithMe:
@@ -186,7 +186,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func hideUploadCardIfNeeded() {
-        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.regular, .syncToUse]) ?? false }).count == 0 {
+        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.regular, .syncToUse, .sharedArea]) ?? false }).count == 0 {
             CardsManager.default.stopOperationWith(type: .upload)
         }
     }
@@ -255,7 +255,7 @@ final class UploadService: BaseRequestService {
             // filter all items which md5's are not in the uploadOperations
             let itemsToUpload = items.filter { item -> Bool in
                 (self.uploadOperations.first(where: { operation -> Bool in
-                    if operation.inputItem.md5 == item.md5 && operation.uploadType?.isContained(in: [.regular]) ?? false {
+                    if operation.inputItem.md5 == item.md5 && operation.uploadType?.isContained(in: [.regular, .sharedArea]) ?? false {
                         operation.cancel()
                         self.uploadOperations.removeIfExists(operation)
                         return false
@@ -512,7 +512,7 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelUploadOperations() {
-        var operationsToRemove = uploadOperations.filter({ $0.uploadType.isContained(in: [.regular]) })
+        var operationsToRemove = uploadOperations.filter({ $0.uploadType.isContained(in: [.regular, .sharedArea]) })
         
         cancelAndRemove(operations: operationsToRemove)
         

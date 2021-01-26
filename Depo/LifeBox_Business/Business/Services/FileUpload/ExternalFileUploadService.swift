@@ -36,20 +36,36 @@ final class ExternalFileUploadService: NSObject {
     private let uploadService = UploadService.default
     private var isFavorites = false
     private var folderUUID = ""
-    private var accountUuid: String?
+    private var accountUuid = SingletonStorage.shared.accountInfo?.uuid
     private var isFromAlbum = false
+    private var uploadType: UploadType = .regular
     
     
-    func showViewController(router: RouterVC, externalFileType: ExternalFileType) {
+    func showViewController(type: UploadType, router: RouterVC, externalFileType: ExternalFileType) {
+        uploadType = type
         
-        isFavorites = router.isOnFavoritesView()
-        
-        if let sharedFolderInfo = router.sharedFolderItem {
-            folderUUID = sharedFolderInfo.uuid
-            accountUuid = sharedFolderInfo.accountUuid
-        } else {
-            folderUUID = router.getParentUUID()
-            accountUuid = nil
+        switch type {
+            case .regular:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    folderUUID = sharedFolderInfo.uuid
+                }
+                accountUuid = SingletonStorage.shared.accountInfo?.uuid
+                
+            case .sharedWithMe:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    accountUuid = sharedFolderInfo.accountUuid
+                    folderUUID = sharedFolderInfo.uuid
+                }
+                
+            case .sharedArea:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    folderUUID = sharedFolderInfo.uuid
+                }
+                accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid
+                
+            default:
+                assertionFailure()
+                break
         }
         
         let utTypes = externalFileType.allowedUTITypes
@@ -80,14 +96,6 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
         guard !items.isEmpty else {
             return
         }
-        
-        let uploadType: UploadType
-        if accountUuid != nil {
-            uploadType = accountUuid == SingletonStorage.shared.accountInfo?.uuid ? .regular : .sharedWithMe
-        } else {
-            uploadType = .regular
-        }
-        
         
         uploadService.uploadFileList(items: items,
                                      uploadType: uploadType,
