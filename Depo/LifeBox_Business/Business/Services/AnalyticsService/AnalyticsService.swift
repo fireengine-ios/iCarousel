@@ -169,16 +169,17 @@ extension AnalyticsService: AnalyticsGA {
         var usagePercentage: Int?
         
         if loginStatus {
-            group.enter()
-            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
-                   guard let percentage = percentage else {
-                       group.leave()
-                       return
-                   }
-                   usagePercentage = percentage
-                   group.leave()
-               }
-            
+            //TODO: uncomment when quota API is ready
+//            group.enter()
+//            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
+//                   guard let percentage = percentage else {
+//                       group.leave()
+//                       return
+//                   }
+//                   usagePercentage = percentage
+//                   group.leave()
+//               }
+//
             isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
         }
         

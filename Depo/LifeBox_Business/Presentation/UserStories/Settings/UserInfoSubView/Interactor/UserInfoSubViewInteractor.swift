@@ -32,17 +32,17 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
             group.leave()
         })
 
-        
-        AccountService().quotaInfo(success: { [weak self] response in
-            DispatchQueue.main.async {
-                self?.output.setQuotaInfo(quotoInfo: response as! QuotaInfoResponse)
-            }
-            group.leave()
-        }, fail: { [weak self] error in
-            self?.output.failedWith(error: error)
-            group.leave()
-        })
-        
+        //TODO: uncomment this when qouta API is ready
+//        AccountService().quotaInfo(success: { [weak self] response in
+//            DispatchQueue.main.async {
+//                self?.output.setQuotaInfo(quotoInfo: response as! QuotaInfoResponse)
+//            }
+//            group.leave()
+//        }, fail: { [weak self] error in
+//            self?.output.failedWith(error: error)
+//            group.leave()
+//        })
+//
         group.notify(queue: queue) { [weak self] in
             self?.output.requestsFinished()
         }

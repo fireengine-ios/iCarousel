@@ -27,11 +27,12 @@ final class NetmeraService {
             let group = DispatchGroup()
             
             var lifeboxStorage: Int = 0
-            group.enter()
-            prepareLifeBoxUsage { usage in
-                lifeboxStorage = usage
-                group.leave()
-            }
+            //TODO: uncomment this when quota API is ready
+//            group.enter()
+//            prepareLifeBoxUsage { usage in
+//                lifeboxStorage = usage
+//                group.leave()
+//            }
             
             group.enter()
             var autoLogin = ""
