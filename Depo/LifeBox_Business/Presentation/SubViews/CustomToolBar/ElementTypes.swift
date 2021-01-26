@@ -60,7 +60,7 @@ enum ElementTypes {
     static var activeState: [ElementTypes] = [.moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus) -> [ElementTypes] {
-        var result: [ElementTypes] = [.info]
+        var result = [ElementTypes]()
         
         guard let grantedPermissions = item.privateSharePermission?.granted,
               (grantedPermissions.contains(.read) ||
