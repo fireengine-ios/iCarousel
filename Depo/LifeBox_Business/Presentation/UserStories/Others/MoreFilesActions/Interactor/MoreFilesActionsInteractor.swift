@@ -31,6 +31,15 @@ enum ShareTypes {
     }
     
     static func allowedTypes(for items: [BaseDataSourceItem]) -> [ShareTypes] {
+        guard let items = items as? [Item] else {
+            assertionFailure()
+            return []
+        }
+        
+        let isOriginallDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.read) ?? false) })
+        //TODO: check write_acl for private share when it's available on BE
+//        let isPrivatelDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.writeAcl) ?? false) })
+        
         var allowedTypes = [ShareTypes]()
         
         if items.contains(where: { $0.fileType == .folder}) {
@@ -41,7 +50,7 @@ enum ShareTypes {
             allowedTypes = [.original, .link, .private]
         }
         
-        if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
+        if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits || isOriginallDisabled {
             allowedTypes.remove(.original)
         }
         

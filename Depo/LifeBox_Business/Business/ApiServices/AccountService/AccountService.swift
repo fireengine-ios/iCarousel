@@ -36,6 +36,10 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func quotaInfo(success: SuccessResponse?, fail:@escaping FailResponse) {
         debugLog("AccountService quotaInfo")
         
+        //TODO: remove it when API is ready
+        fail(.error(CustomErrors.text("waiting for new api")))
+        return
+        //
         let param = QuotaInfo()
         let handler = BaseResponseHandler<QuotaInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)

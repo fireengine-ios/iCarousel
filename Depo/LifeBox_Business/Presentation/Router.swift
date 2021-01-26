@@ -622,7 +622,7 @@ class RouterVC: NSObject {
                                                                           status: status,
                                                                           canLoadMoreItems: canLoadMoreItems)
     }
-    
+
     // MARK: Free App Space
     
     func freeAppSpace() -> UIViewController {
