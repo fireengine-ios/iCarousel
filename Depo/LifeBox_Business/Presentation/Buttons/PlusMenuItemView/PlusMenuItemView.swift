@@ -9,23 +9,18 @@
 import UIKit
 
 enum FloatingButtonsType {
-    case upload
-    case newFolder
+    case upload(type: UploadType)
+    case newFolder(type: UploadType)
     case uploadFromLifebox
-    case uploadFromLifeboxFavorites
-    case uploadFiles
-    case uploadDocuments
-    case uploadMusic
+    case uploadFiles(type: UploadType)
     
     var title: String {
         switch self {
         case .upload:
             return TextConstants.upload
-        case .uploadFiles, .uploadDocuments:
+        case .uploadFiles:
             return TextConstants.uploadFiles
-        case .uploadMusic:
-            return TextConstants.uploadMusic
-        case .uploadFromLifebox, .uploadFromLifeboxFavorites:
+        case .uploadFromLifebox:
             return TextConstants.uploadFromLifebox
         case .newFolder:
             return TextConstants.newFolder
@@ -36,10 +31,7 @@ enum FloatingButtonsType {
         switch self {
         case .upload,
              .uploadFiles,
-             .uploadDocuments,
-             .uploadMusic,
-             .uploadFromLifebox,
-             .uploadFromLifeboxFavorites:
+             .uploadFromLifebox:
             return UIImage(named: "Upload")
         case .newFolder:
             return UIImage(named: "NewFolder")
@@ -48,20 +40,14 @@ enum FloatingButtonsType {
     
     var action: TabBarViewController.Action {
         switch self {
-        case .upload:
-            return .upload
-        case .uploadFiles:
-            return .uploadFiles
-        case .uploadDocuments:
-            return .uploadDocuments
-        case .uploadMusic:
-            return .uploadMusic
-        case .uploadFromLifebox:
-            return .uploadFromApp
-        case .uploadFromLifeboxFavorites:
-            return .uploadFromAppFavorites
-        case .newFolder:
-            return .createFolder
+            case .upload(type: let uploadType):
+                return .upload(type: uploadType)
+            case .uploadFiles(type: let uploadType):
+                return .uploadFiles(type: uploadType)
+            case .uploadFromLifebox:
+                return .uploadFromApp
+            case .newFolder(type: let uploadType):
+                return .createFolder(type: uploadType)
         }
     }
 }
@@ -96,7 +82,7 @@ final class PlusMenuItemView: UIView, NibInit {
     private let height: CGFloat = 65
     private let width: CGFloat = 80
     
-    private var type: FloatingButtonsType = .upload
+    private var type: FloatingButtonsType = .upload(type: .regular)
     weak var actionDelegate: PlusMenuItemViewDelegate?
     
     private var bottomConstraint: NSLayoutConstraint?

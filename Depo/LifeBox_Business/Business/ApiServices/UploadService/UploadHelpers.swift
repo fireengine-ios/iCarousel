@@ -14,11 +14,10 @@ enum MetaSpesialFolder: String {
 }
 
 enum UploadType {
-    case upload
+    case regular
     case syncToUse
-    case save
-    case saveAs
     case sharedWithMe
+    case sharedArea
 }
 
 enum MetaStrategy: String {

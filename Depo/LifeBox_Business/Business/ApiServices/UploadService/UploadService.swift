@@ -25,7 +25,7 @@ final class UploadService: BaseRequestService {
     private lazy var reachabilityService = ReachabilityService.shared
     
     private var allUploadOperationsCount: Int {
-        return uploadOperations.filter({ $0.uploadType.isContained(in: [.upload]) && !$0.isCancelled }).count + finishedUploadOperationsCount
+        return uploadOperations.filter({ $0.uploadType.isContained(in: [.regular, .sharedArea]) && !$0.isCancelled }).count + finishedUploadOperationsCount
     }
     private var finishedUploadOperationsCount = 0
     
@@ -65,10 +65,10 @@ final class UploadService: BaseRequestService {
     // MARK: -
     class func convertUploadType(uploadType: UploadType) -> OperationType {
         switch uploadType {
-        case .syncToUse, .upload, .save, .saveAs:
-            return .upload
-        case .sharedWithMe:
-            return .sharedWithMeUpload
+            case .syncToUse, .regular, .sharedArea:
+                return .upload
+            case .sharedWithMe:
+                return .sharedWithMeUpload
         }
     }
     
@@ -120,8 +120,8 @@ final class UploadService: BaseRequestService {
                         }
                         
                         fail(errorResponse)
-                    }, syncToUseFileListOperationsCallBack: { seyncOperations in
-                        returnedUploadOperation(seyncOperations)
+                    }, syncToUseFileListOperationsCallBack: { syncOperations in
+                        returnedUploadOperation(syncOperations)
                 })
             default:
                  self.analyticsService.trackDimentionsEveryClickGA(screen: .upload, downloadsMetrics: nil, uploadsMetrics: items.count)
@@ -150,8 +150,8 @@ final class UploadService: BaseRequestService {
                         }
                         
                         fail(errorResponse)
-                    }, returnedOprations: { roperations in
-                        returnedUploadOperation(roperations)
+                    }, returnedOprations: { operations in
+                        returnedUploadOperation(operations)
                 })
             }
         }
@@ -173,7 +173,7 @@ final class UploadService: BaseRequestService {
     
     private func hideIfNeededCard(for uploadType: UploadType) {
         switch uploadType {
-            case .upload, .syncToUse, .save, .saveAs:
+            case .regular, .syncToUse, .sharedArea:
                 hideUploadCardIfNeeded()
                 
             case .sharedWithMe:
@@ -186,7 +186,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func hideUploadCardIfNeeded() {
-        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.upload, .syncToUse]) ?? false }).count == 0 {
+        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.regular, .syncToUse, .sharedArea]) ?? false }).count == 0 {
             CardsManager.default.stopOperationWith(type: .upload)
         }
     }
@@ -255,7 +255,7 @@ final class UploadService: BaseRequestService {
             // filter all items which md5's are not in the uploadOperations
             let itemsToUpload = items.filter { item -> Bool in
                 (self.uploadOperations.first(where: { operation -> Bool in
-                    if operation.inputItem.md5 == item.md5 && operation.uploadType?.isContained(in: [.upload]) ?? false {
+                    if operation.inputItem.md5 == item.md5 && operation.uploadType?.isContained(in: [.regular, .sharedArea]) ?? false {
                         operation.cancel()
                         self.uploadOperations.removeIfExists(operation)
                         return false
@@ -512,7 +512,7 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelUploadOperations() {
-        var operationsToRemove = uploadOperations.filter({ $0.uploadType.isContained(in: [.upload]) })
+        var operationsToRemove = uploadOperations.filter({ $0.uploadType.isContained(in: [.regular, .sharedArea]) })
         
         cancelAndRemove(operations: operationsToRemove)
         

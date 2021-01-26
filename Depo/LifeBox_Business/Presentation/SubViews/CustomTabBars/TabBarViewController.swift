@@ -494,19 +494,14 @@ extension TabBarViewController: TabBarActionHandler {
         let router = RouterVC()
         
         switch action {
-        case .createFolder:
-            let isFavorites = router.isOnFavoritesView()
-            var folderUuid = folderUUID()
-            
-            /// If the user is on the "Documents" screen, I pass folderUuid to avoid opening the default "AllFiles" screen.
-            if folderUuid == nil, selectedIndex == 3 {
-                folderUuid = ""
-            }
+            case .createFolder(type: _):
+            let isFavorites = false
+            let folderUuid = folderUUID() ?? ""
             
             let controller: UIViewController
             if let sharedFolder = router.sharedFolderItem {
-                let parameters = CreateFolderSharedWithMeParameters(accountUuid: sharedFolder.accountUuid, rootFolderUuid: sharedFolder.uuid)
-                controller = router.createNewFolderSharedWithMe(parameters: parameters)
+                let parameters = CreateFolderParameters(accountUuid: sharedFolder.accountUuid, rootFolderUuid: sharedFolder.uuid)
+                controller = router.createNewFolderShared(parameters: parameters)
             } else {
                 controller = router.createNewFolder(rootFolderID: folderUuid, isFavorites: isFavorites)
             }
@@ -514,18 +509,12 @@ extension TabBarViewController: TabBarActionHandler {
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
 
-        case .upload:
+        case .upload(type: let uploadType):
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
-            galleryFileUploadService.upload(rootViewController: self, delegate: self)
+            galleryFileUploadService.upload(type:uploadType, rootViewController: self, delegate: self)
             
-        case .uploadFiles:
-            externalFileUploadService.showViewController(router: router, externalFileType: .any)
-            
-        case .uploadDocuments:
-            externalFileUploadService.showViewController(router: router, externalFileType: .documents)
-            
-        case .uploadMusic:
-            externalFileUploadService.showViewController(router: router, externalFileType: .audio)
+        case .uploadFiles(type: let uploadType):
+            externalFileUploadService.showViewController(type: uploadType, router: router, externalFileType: .any)
                 
         case .uploadFromApp:
             let parentFolder = router.getParentUUID()
@@ -538,20 +527,6 @@ extension TabBarViewController: TabBarActionHandler {
                                                       type: .List)
             } else {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder)
-            }
-            
-            let navigationController = NavigationController(rootViewController: controller)
-            navigationController.navigationBar.isHidden = false
-            router.presentViewController(controller: navigationController)
-            
-        case .uploadFromAppFavorites:
-            let parentFolder = router.getParentUUID()
-            
-            let controller: UIViewController
-            if let currentVC = currentViewController as? BaseFilesGreedViewController {
-                controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule(), isPhotoVideoOnly: true)
-            } else {
-                controller = router.uploadFromLifeBoxFavorites(folderUUID: parentFolder, isPhotoVideoOnly: true)
             }
             
             let navigationController = NavigationController(rootViewController: controller)

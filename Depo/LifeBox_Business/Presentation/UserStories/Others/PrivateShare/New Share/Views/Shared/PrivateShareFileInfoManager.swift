@@ -59,8 +59,17 @@ indirect enum PrivateShareType: Equatable {
         
         switch typeAndRoot {
             case (.myDisk, _):
-                return []
-                
+                //                if permissions.contains(.create) {
+                return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+            //                }
+            //                return []
+            
+            case (.sharedArea, _):
+                //                if permissions.contains(.create) {
+                return [.newFolder(type: .sharedArea), .upload(type: .sharedArea), .uploadFiles(type: .sharedArea)]
+            //                }
+            //                return []
+            
             case (.byMe, _):
                 return []
                 
@@ -69,27 +78,29 @@ indirect enum PrivateShareType: Equatable {
                 
             case (.innerFolder(_, let folder), let veryRootType):
                 return floatingButtonTypes(innerFolderVeryRootType: veryRootType, permissions: folder.permissions.granted ?? [])
-                
-            case (.sharedArea, _):
-                return []
         }
     }
     
     private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType, permissions: [PrivateSharePermission]) -> [FloatingButtonsType] {
         switch innerFolderVeryRootType {
             case .myDisk:
-                //todo: uncomment when permissions are ready
-//                if permissions.contains(.create) {
-                    return [.newFolder, .upload, .uploadFiles]
-//                }
-//                return []
+                if permissions.contains(.create) {
+                    return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                }
+                return []
                 
             case .byMe:
-                return [.newFolder, .upload, .uploadFiles]
+                return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
                 
             case .withMe:
                 if permissions.contains(.create) {
-                    return [.newFolder, .upload, .uploadFiles]
+                    return [.newFolder(type: .sharedWithMe), .upload(type: .sharedWithMe), .uploadFiles(type: .sharedWithMe)]
+                }
+                return []
+                
+            case .sharedArea:
+                if permissions.contains(.create) {
+                    return [.newFolder(type: .sharedArea), .upload(type: .sharedArea), .uploadFiles(type: .sharedArea)]
                 }
                 return []
                 
@@ -97,8 +108,7 @@ indirect enum PrivateShareType: Equatable {
                 assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
                 return []
                 
-            case .sharedArea:
-                return []
+            
         }
     }
     

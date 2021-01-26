@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct CreateFolderSharedWithMeParameters {
+struct CreateFolderParameters {
     let accountUuid: String
     let rootFolderUuid: String?
 }
@@ -32,7 +32,7 @@ class SelectNameModuleInitializer: NSObject {
         return viewController
     }
 
-    class func with(parameters: CreateFolderSharedWithMeParameters) -> UIViewController {
+    class func with(parameters: CreateFolderParameters) -> UIViewController {
         let viewController = SelectNameViewController.initFromNib()
         viewController.needToShowTabBar = true
         let configurator = SelectNameModuleConfigurator()

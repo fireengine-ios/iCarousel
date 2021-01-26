@@ -406,9 +406,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             return true
         }
         
-        let isSharedWithMe = fileInfoManager.type == .withMe || fileInfoManager.type.rootType == .withMe
         
-        if isSharedWithMe, item.fileType.isContained(in: [.image, .video]), !item.hasPreviewUrl {
+        if item.fileType.isContained(in: [.image, .video]), !item.hasPreviewUrl {
             SnackbarManager.shared.show(type: SnackbarType.action, message: TextConstants.privateSharePreviewNotReady)
             return false
         }

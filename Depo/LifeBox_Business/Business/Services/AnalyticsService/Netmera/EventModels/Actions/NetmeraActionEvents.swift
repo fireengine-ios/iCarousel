@@ -920,10 +920,6 @@ extension NetmeraEvents.Actions {
                 netmeraPussButtonAction = .upload
             case .uploadFiles:
                 netmeraPussButtonAction = .uploadFiles
-            case .uploadDocuments:
-                netmeraPussButtonAction = .uploadFiles
-            case .uploadMusic:
-                netmeraPussButtonAction = .uploadMusic
             case .uploadFromApp:
                 netmeraPussButtonAction = .uploadFromLifebox
             default:
