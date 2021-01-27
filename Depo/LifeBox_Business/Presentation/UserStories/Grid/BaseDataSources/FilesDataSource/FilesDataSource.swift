@@ -90,7 +90,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             localManager.getPreviewImage(asset: local.asset, image: completeImage)
             return nil
         case let .remoteUrl(url):
-            getImageServise.getImageByTrimming(url: url, completeImage: completeImage)
+            getImageServise.getImage(patch: url, completeImage: completeImage)
             return url
         }
     }
@@ -104,10 +104,10 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
                 
             case let .remoteUrl(url):
                 if let largeUrl = item.metaData?.largeUrl {
-                    getImageServise.getImageByTrimming(url: largeUrl, completeImage: completeImage)
+                    getImageServise.getImage(patch: largeUrl, completeImage: completeImage)
                     return largeUrl
                 } else {
-                    getImageServise.getImageByTrimming(url: url, completeImage: completeImage)
+                    getImageServise.getImage(patch: url, completeImage: completeImage)
                     return url
                 }
             }
@@ -126,11 +126,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             
         case let .remoteUrl(url):
             let loadUrl = item.metaData?.largeUrl != nil ? item.metaData!.largeUrl : url
-            if item.isOwner {
-                getImageServise.getImageDataByTrimming(url: loadUrl, completeImage: completeData)
-            } else {
-                getImageServise.getImageData(patch: loadUrl, completeData: completeData)
-            }
+            getImageServise.getImageData(patch: loadUrl, completeData: completeData)
             return loadUrl
             
         }
@@ -138,7 +134,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
     }
     
     func getImageData(for url: URL, completeData: @escaping RemoteData) -> URL? {
-        getImageServise.getImageDataByTrimming(url: url, completeImage: completeData)
+        getImageServise.getImageData(patch: url, completeData: completeData)
         return url
     }
     

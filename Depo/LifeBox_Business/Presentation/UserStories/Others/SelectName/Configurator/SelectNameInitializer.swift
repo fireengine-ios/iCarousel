@@ -11,26 +11,13 @@ import UIKit
 struct CreateFolderParameters {
     let accountUuid: String
     let rootFolderUuid: String?
+    let isShared: Bool
 }
 
 class SelectNameModuleInitializer: NSObject {
 
     //Connect with object on storyboard
     @IBOutlet weak var selectnameViewController: SelectNameViewController!
-
-    class func initializeViewController(with viewType: SelectNameScreenType, rootFolderID: String? = nil, isFavorites: Bool = false, moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
-
-        let viewController = SelectNameViewController.initFromNib()
-        viewController.needToShowTabBar = true
-        let configurator = SelectNameModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController,
-                                                 viewType: viewType,
-                                                 rootFolderID: rootFolderID,
-                                                 isFavorites: isFavorites, 
-                                                 moduleOutput: moduleOutput)
-
-        return viewController
-    }
 
     class func with(parameters: CreateFolderParameters) -> UIViewController {
         let viewController = SelectNameViewController.initFromNib()

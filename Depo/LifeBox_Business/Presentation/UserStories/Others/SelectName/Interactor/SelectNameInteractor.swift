@@ -80,11 +80,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
     }
     
     private func onCreateFolderWithName(name: String) {
-        if isPrivateShare {
-            createFolderOnSharedWithMe(with: name)
-        } else {
-            createFolderOnAllFiles(with: name)
-        }
+        createFolderOnSharedWithMe(with: name)
     }
     
     private func createFolderOnSharedWithMe(with name: String) {
@@ -99,7 +95,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
                     DispatchQueue.main.async {
                         if let self = self {
                             let isSubfolder = self.rootFolderID != nil
-                            let wrapDataItem = WrapData(privateShareFileInfo: createdFolder)
+                            let wrapDataItem = WrapData(privateShareFileInfo: createdFolder, isShared: self.isPrivateShare)
                             self.output.operationSuccess(operation: self.moduleType, item: wrapDataItem, isSubFolder: isSubfolder)
                             ItemOperationManager.default.newFolderCreated()
                             self.analytics.sharedWithMe(action: .createFolder, on: nil)
@@ -113,26 +109,4 @@ class SelectNameInteractor: SelectNameInteractorInput {
             }
         }
     }
-    
-    private func createFolderOnAllFiles(with name: String) {
-        let createfolderParam = CreatesFolder(folderName: name,
-                                              rootFolderName: rootFolderID ?? "",
-                                              isFavourite: isFavorite ?? false)
-        
-        WrapItemFileService().createsFolder(createFolder: createfolderParam,
-            success: { [weak self] (item) in
-                DispatchQueue.main.async {
-                    if let self_ = self {
-                        let isSubfolder = self_.rootFolderID != nil
-                        self_.output.operationSuccess(operation: self_.moduleType, item: item, isSubFolder: isSubfolder)
-                        ItemOperationManager.default.newFolderCreated()
-                    }
-                }
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.output.operationFailedWithError(errorMessage: error.description)
-                }
-        })
-    }
-
 }

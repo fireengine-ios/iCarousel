@@ -359,7 +359,7 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     }
     
     func didUpdateSharingInfo(_ sharingInfo: SharedFileInfo) {
-        let item = WrapData(privateShareFileInfo: sharingInfo)
+        let item = WrapData(privateShareFileInfo: sharingInfo, isShared: true)
         view.updateExpiredItem(item)
         interactor.updateExpiredItem(item)
     }
