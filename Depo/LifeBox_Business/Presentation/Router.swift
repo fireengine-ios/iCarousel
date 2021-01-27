@@ -362,17 +362,20 @@ class RouterVC: NSObject {
         
         switch controller.shareType {
             case .byMe, .withMe:
+                if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
                 return nil
                 
             case .myDisk:
                 if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
-                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil))
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
                 }
                 return nil
                 
             case .sharedArea:
                 if let accUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid {
-                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil))
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
                 }
                 return nil
                 
@@ -549,12 +552,7 @@ class RouterVC: NSObject {
     
     // MARK: Create Folder
     
-    func createNewFolder(rootFolderID: String?, isFavorites: Bool = false) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
-        return controller
-    }
-
-    func createNewFolderShared(parameters: CreateFolderParameters) -> UIViewController {
+    func createNewFolder(parameters: CreateFolderParameters) -> UIViewController {
         let controller = SelectNameModuleInitializer.with(parameters: parameters)
         return controller
     }

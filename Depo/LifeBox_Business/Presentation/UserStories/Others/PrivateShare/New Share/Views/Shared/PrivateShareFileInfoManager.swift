@@ -425,7 +425,7 @@ final class GetSharedItemsOperation: Operation {
     }
     
     private func load() {
-        let markAsShared = type.rootType != .myDisk
+        let markAsShared = type.rootType.isContained(in: [.byMe, .withMe])
         loadPage { [weak self] result in
             guard let self = self, !self.isCancelled else {
                 return

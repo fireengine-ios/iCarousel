@@ -39,7 +39,7 @@ final class WrapDataUpdater {
         task = privateShareApiService.getSharingInfo(projectId: item.accountUuid , uuid: item.uuid) { result in
             switch result {
             case .success(let info):
-                let item = WrapData(privateShareFileInfo: info)
+                let item = WrapData(privateShareFileInfo: info, isShared: item.isShared)
                 handler(item)
             case .failed(_):
                 handler(nil)
