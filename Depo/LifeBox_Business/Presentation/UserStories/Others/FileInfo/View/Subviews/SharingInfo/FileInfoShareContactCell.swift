@@ -82,7 +82,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
             
             if let url = contact?.subject?.picture?.byTrimmingQuery {
                 button.setImage(UIImage(named: "contact_placeholder"), for: .normal)
-                imageDownloder.getImageByTrimming(url: url) { [weak self] image in
+                imageDownloder.getImage(patch: url) { [weak self] image in
                     if image == nil {
                         setupInitials()
                     } else {

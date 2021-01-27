@@ -40,7 +40,7 @@ final class PrivateShareSliderFilesCollectionManager {
             }
             switch sharedFilesResult {
             case .success(let filesInfo):
-                let newItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
+                let newItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0, isShared: true) }
                 guard !newItems.isEmpty else {
                     callBack(.failed(CustomErrors.text("no valid items")))
                     return

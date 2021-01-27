@@ -83,7 +83,7 @@ final class PrivateShareContactCell: UITableViewCell {
         
         if let url = contact.subject?.picture?.byTrimmingQuery {
             avatarImageView.image = UIImage(named: "contact_placeholder")
-            imageDownloder.getImageByTrimming(url: url) { [weak self] image in
+            imageDownloder.getImage(patch: url) { [weak self] image in
                 if image == nil {
                     setupInitials()
                 } else {
