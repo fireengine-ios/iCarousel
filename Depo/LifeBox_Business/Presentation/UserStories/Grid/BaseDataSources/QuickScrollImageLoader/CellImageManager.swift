@@ -168,7 +168,7 @@ final class CellImageManager {
         let downloadImage = { [weak self] in
             guard let self = self else { return }
 
-            guard let url = isOwner ? url?.byTrimmingQuery : url else {
+            guard let url = url else {
                 self.completionBlock?(nil, false, false, self.uniqueId)
                 return
             }
@@ -191,7 +191,7 @@ final class CellImageManager {
         }
         
         ///check if image is already downloaded with thumbnail url
-        guard let thumbnail = isOwner ? thumbnail?.byTrimmingQuery : thumbnail else {
+        guard let thumbnail = thumbnail else {
             downloadImage()
             return
         }
