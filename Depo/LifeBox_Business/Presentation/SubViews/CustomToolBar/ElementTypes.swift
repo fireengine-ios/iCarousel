@@ -143,12 +143,11 @@ enum ElementTypes {
         }
         
         var types: [ElementTypes] = [.info]
-        if item.isOwner {
-            types.append(.share)
-        }
-        
+
         if let grantedPermissions = item.privateSharePermission?.granted {
             if grantedPermissions.contains(.read) {
+                types.append(.share)
+                
                 if item.fileType.isContained(in: [.image, .video]) {
                     types.append(.download)
                 } else {
