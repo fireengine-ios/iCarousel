@@ -121,7 +121,9 @@ struct FileAlbum: Codable {
 }
 
 struct FileSystem: Codable {
+    let parentFolderName: String
     let parentFolderList: [SharedFileInfo]
+    let permissions: SharedItemPermission?
     let fileList: [SharedFileInfo]
 }
 
