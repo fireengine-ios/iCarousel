@@ -602,7 +602,7 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
     }
     
     func canLongPress() -> Bool {
-        return fileInfoManager.type.rootType == .byMe
+        return fileInfoManager.type.rootType != .withMe
     }
     
     func onLongPress(cell: UICollectionViewCell) {
