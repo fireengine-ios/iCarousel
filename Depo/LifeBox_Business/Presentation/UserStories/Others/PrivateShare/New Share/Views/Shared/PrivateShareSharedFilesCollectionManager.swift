@@ -51,6 +51,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
     
+    var rootPermissions: SharedItemPermission? {
+        return fileInfoManager.rootFolder?.permissions
+    }
+    
     //MARK: -
     
     private override init() { }
