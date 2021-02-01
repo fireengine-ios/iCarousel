@@ -124,7 +124,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func setupPlusButton() {
-        floatingButtonsArray = shareType.floatingButtonTypes
+        floatingButtonsArray = shareType.floatingButtonTypes(rootPermissions: collectionManager.rootPermissions)
     }
     
     private func setDefaultTabBarState() {
@@ -238,6 +238,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
+        setupPlusButton()
     }
     
     func showActions(for item: WrapData, sender: Any) {
