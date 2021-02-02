@@ -795,7 +795,7 @@ class RouterVC: NSObject {
             segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
         }
         
-        let index = TabScreenIndex.documents.rawValue
+        let index = TabScreenIndex.myDisk.rawValue
         if tabBarVC.selectedIndex == index {
             switchToTrashBin()
         } else {
@@ -804,7 +804,6 @@ class RouterVC: NSObject {
                 return
             }
             tabBarVC.tabBar.selectedItem = newSelectedItem
-            tabBarVC.selectedIndex = index - 1
             switchToTrashBin()
         }
     }
