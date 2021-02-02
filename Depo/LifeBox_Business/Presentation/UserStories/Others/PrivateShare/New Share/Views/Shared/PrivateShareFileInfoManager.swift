@@ -54,13 +54,22 @@ indirect enum PrivateShareType: Equatable {
     }
     
     //floatingButtonTypes is predefined by the veryRootType + type itself
-    var floatingButtonTypes: [FloatingButtonsType] {
+    func floatingButtonTypes(rootPermissions: SharedItemPermission?) -> [FloatingButtonsType] {
         let typeAndRoot = (self, veryRootType(for: self))
         
         switch typeAndRoot {
             case (.myDisk, _):
+                if rootPermissions?.granted?.contains(.create) == true {
+                    return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                }
                 return []
                 
+            case (.sharedArea, _):
+                if rootPermissions?.granted?.contains(.create) == true {
+                    return [.newFolder(type: .sharedArea), .upload(type: .sharedArea), .uploadFiles(type: .sharedArea)]
+                }
+                return []
+            
             case (.byMe, _):
                 return []
                 
@@ -69,27 +78,29 @@ indirect enum PrivateShareType: Equatable {
                 
             case (.innerFolder(_, let folder), let veryRootType):
                 return floatingButtonTypes(innerFolderVeryRootType: veryRootType, permissions: folder.permissions.granted ?? [])
-                
-            case (.sharedArea, _):
-                return []
         }
     }
     
     private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType, permissions: [PrivateSharePermission]) -> [FloatingButtonsType] {
         switch innerFolderVeryRootType {
             case .myDisk:
-                //todo: uncomment when permissions are ready
-//                if permissions.contains(.create) {
-                    return [.newFolder, .upload, .uploadFiles]
-//                }
-//                return []
+                if permissions.contains(.create) {
+                    return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                }
+                return []
                 
             case .byMe:
-                return [.newFolder, .upload, .uploadFiles]
+                return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
                 
             case .withMe:
                 if permissions.contains(.create) {
-                    return [.newFolder, .upload, .uploadFiles]
+                    return [.newFolder(type: .sharedWithMe), .upload(type: .sharedWithMe), .uploadFiles(type: .sharedWithMe)]
+                }
+                return []
+                
+            case .sharedArea:
+                if permissions.contains(.create) {
+                    return [.newFolder(type: .sharedArea), .upload(type: .sharedArea), .uploadFiles(type: .sharedArea)]
                 }
                 return []
                 
@@ -97,8 +108,7 @@ indirect enum PrivateShareType: Equatable {
                 assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
                 return []
                 
-            case .sharedArea:
-                return []
+            
         }
     }
     
@@ -143,6 +153,8 @@ final class PrivateShareFileInfoManager {
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     private(set) var splittedItems = SynchronizedArray<[WrapData]>()
     
+    private(set) var rootFolder: SharedFileInfo?
+    
     private var tempLoaded = [WrapData]()
     
     //MARK: - Life cycle
@@ -158,7 +170,7 @@ final class PrivateShareFileInfoManager {
         }
         
         isNextPageLoading = true
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (_, loadedItems, isFinished) in
             
             guard let self = self else {
                 completion(false)
@@ -196,7 +208,9 @@ final class PrivateShareFileInfoManager {
             selectedItems.removeAll()
             pagesLoaded = 0
             
-            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, isFinished in
+                
+                self?.rootFolder = rootFolder
                 
                 guard let self = self, isFinished else {
                     completion(false)
@@ -313,7 +327,9 @@ final class PrivateShareFileInfoManager {
     }
     
     private func loadPages(till page: Int, completion: @escaping ValueHandler<Bool>) {
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, isFinished in
+            
+            self?.rootFolder = rootFolder
             
             guard let self = self, isFinished else {
                 completion(false)
@@ -382,13 +398,14 @@ final class GetSharedItemsOperation: Operation {
     private let size: Int
     private let sortBy: SortType
     private let sortOrder: SortOrder
-    private let completion: ValueHandler<(([WrapData], Bool))>
+    private let completion: ValueHandler<((SharedFileInfo?, [WrapData], Bool))>
     
     private var task: URLSessionTask?
     private var loadedItems = [WrapData]()
+    private var rootFolder: SharedFileInfo?
     private var isRequestFinished = false
     
-    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<([WrapData], Bool)>) {
+    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<(SharedFileInfo?, [WrapData], Bool)>) {
         self.type = type
         self.privateShareAPIService = service
         self.completion = completion
@@ -411,11 +428,11 @@ final class GetSharedItemsOperation: Operation {
         
         semaphore.wait()
         
-        completion((loadedItems, isRequestFinished))
+        completion((rootFolder, loadedItems, isRequestFinished))
     }
     
     private func load() {
-        let markAsShared = type.rootType != .myDisk
+        let markAsShared = type.rootType.isContained(in: [.byMe, .withMe])
         loadPage { [weak self] result in
             guard let self = self, !self.isCancelled else {
                 return
@@ -439,9 +456,23 @@ final class GetSharedItemsOperation: Operation {
             case .myDisk:
                 let accountUuid = SingletonStorage.shared.accountInfo?.uuid ?? ""
                 let rootFolderUuid = ""
-                task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { [weak self] response in
                     switch response {
                         case .success(let fileSystem):
+                            self?.rootFolder = fileSystem.parentFolderList.first(where: { $0.id == 0 })
+                            completion(.success(fileSystem.fileList))
+                        case .failed(let error):
+                            completion(.failed(error))
+                    }
+                }
+                
+            case .sharedArea:
+                let accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid ?? ""
+                let rootFolderUuid = ""
+                task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { [weak self] response in
+                    switch response {
+                        case .success(let fileSystem):
+                            self?.rootFolder = fileSystem.parentFolderList.first(where: { $0.id == 0 })
                             completion(.success(fileSystem.fileList))
                         case .failed(let error):
                             completion(.failed(error))
@@ -463,17 +494,6 @@ final class GetSharedItemsOperation: Operation {
                             completion(.failed(error))
                     }
                 }
-        case .sharedArea:
-            let accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid ?? ""
-            let rootFolderUuid = ""
-            task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
-                switch response {
-                    case .success(let fileSystem):
-                        completion(.success(fileSystem.fileList))
-                    case .failed(let error):
-                        completion(.failed(error))
-                }
-            }
         break
         }
     }

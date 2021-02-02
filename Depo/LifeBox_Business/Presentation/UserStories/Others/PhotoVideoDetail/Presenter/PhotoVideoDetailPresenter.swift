@@ -152,24 +152,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
 
     func moreButtonPressed(sender: Any?, inAlbumState: Bool, object: Item, selectedIndex: Int) {
-        //let currentItem = interactor.allItems[interactor.currentItemIndex]
-        var actions = [ElementTypes]()
-        
-        switch view.status {
-        case .trashed:
-            actions = ActionSheetPredetermendConfigs.trashedDetailActions
-        default:
-            switch object.fileType {
-            case .audio:
-                actions = ActionSheetPredetermendConfigs.audioDetailActions
-            case .image, .video:
-                actions = interactor.setupedMoreMenuConfig
-            case .allDocs:
-                actions = ActionSheetPredetermendConfigs.documetsDetailActions
-            default:
-                break
-            }
-        }
+        let actions = ElementTypes.specifiedMoreActionTypes(for: object.status, item: object)
         
         alertSheetModule?.showAlertSheet(with: actions,
                                          items: [object],
@@ -359,7 +342,7 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     }
     
     func didUpdateSharingInfo(_ sharingInfo: SharedFileInfo) {
-        let item = WrapData(privateShareFileInfo: sharingInfo)
+        let item = WrapData(privateShareFileInfo: sharingInfo, isShared: true)
         view.updateExpiredItem(item)
         interactor.updateExpiredItem(item)
     }

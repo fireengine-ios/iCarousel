@@ -907,7 +907,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = "\(fileName)\(fileSize)"
     }
     
-    init(privateShareFileInfo: SharedFileInfo, isShared: Bool = true) {
+    init(privateShareFileInfo: SharedFileInfo, isShared: Bool) {
         //TODO: status to enum in SharedFileInfo
         
         if let metadata = privateShareFileInfo.metadata {

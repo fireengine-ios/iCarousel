@@ -51,6 +51,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
     
+    var rootPermissions: SharedItemPermission? {
+        return fileInfoManager.rootFolder?.permissions
+    }
+    
     //MARK: -
     
     private override init() { }
@@ -373,7 +377,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     private func showDetailView(for item: WrapData) {
         if item.isFolder == true {
             if let name = item.name, let permissions = item.privateSharePermission  {
-                let sharedFolder = PrivateSharedFolderItem(accountUuid: item.accountUuid, uuid: item.uuid, name: name, permissions: permissions)
+                let sharedFolder = PrivateSharedFolderItem(accountUuid: item.accountUuid, uuid: item.uuid, name: name, permissions: permissions, type: fileInfoManager.type)
                 openFolder(with: sharedFolder)
             }
             
@@ -406,9 +410,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             return true
         }
         
-        let isSharedWithMe = fileInfoManager.type == .withMe || fileInfoManager.type.rootType == .withMe
         
-        if isSharedWithMe, item.fileType.isContained(in: [.image, .video]), !item.hasPreviewUrl {
+        if item.fileType.isContained(in: [.image, .video]), !item.hasPreviewUrl {
             SnackbarManager.shared.show(type: SnackbarType.action, message: TextConstants.privateSharePreviewNotReady)
             return false
         }
@@ -603,7 +606,7 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
     }
     
     func canLongPress() -> Bool {
-        return fileInfoManager.type.rootType == .byMe
+        return fileInfoManager.type.rootType != .withMe
     }
     
     func onLongPress(cell: UICollectionViewCell) {

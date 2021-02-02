@@ -187,7 +187,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         galleryPermission = status.toGalleryAuthorizationStatus()
         
         switch status {
-        //TODO: uncomment for xcode 12
         case .authorized, .limited:
 //            photoLibrary.register(self)
             completion(true, status)

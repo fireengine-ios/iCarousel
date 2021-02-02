@@ -121,6 +121,7 @@ struct FileAlbum: Codable {
 }
 
 struct FileSystem: Codable {
+    let parentFolderName: String
     let parentFolderList: [SharedFileInfo]
     let fileList: [SharedFileInfo]
 }
@@ -373,16 +374,7 @@ struct PrivateSharedFolderItem: Equatable {
     let uuid: String
     let name: String
     let permissions: SharedItemPermission
-    
-    static var rootFolder: PrivateSharedFolderItem? {
-        //TODO: get permissions or set default?
-        let permissions = SharedItemPermission(granted: nil, bitmask: nil)
-        guard let accountUuid = SingletonStorage.shared.accountInfo?.uuid else {
-            return nil
-        }
-        
-        return PrivateSharedFolderItem(accountUuid: accountUuid, uuid: "", name: TextConstants.tabBarItemMyDisk, permissions: permissions)
-    }
+    let type: PrivateShareType
 }
 
 struct PrivateShareAccessListObject: Codable {

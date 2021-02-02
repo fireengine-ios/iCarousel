@@ -60,7 +60,7 @@ enum ElementTypes {
     static var activeState: [ElementTypes] = [.moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus) -> [ElementTypes] {
-        var result: [ElementTypes] = [.info]
+        var result = [ElementTypes]()
         
         guard let grantedPermissions = item.privateSharePermission?.granted,
               (grantedPermissions.contains(.read) ||
@@ -132,6 +132,8 @@ enum ElementTypes {
     }
     
     static func specifiedMoreActionTypes(for status: ItemStatus, item: BaseDataSourceItem) -> [ElementTypes] {
+        //TODO: allow move and add/remove favorites if api is ready
+        
         if status == .trashed {
             return[.info] + ElementTypes.trashState
         }
@@ -140,45 +142,32 @@ enum ElementTypes {
             return []
         }
         
-        var types = [ElementTypes]()
-        guard item.isOwner else {
-            //shared with me items
-            types.append(.info)
-            if let grantedPermissions = item.privateSharePermission?.granted {
-                if grantedPermissions.contains(.read) {
-                    if item.fileType.isContained(in: [.image, .video]) {
-                        types.append(.download)
-                    } else {
-                        types.append(.downloadDocument)
-                    }
-                }
+        var types: [ElementTypes] = [.info]
+
+        if let grantedPermissions = item.privateSharePermission?.granted {
+            if grantedPermissions.contains(.read) {
+                types.append(.share)
                 
-                if grantedPermissions.contains(.delete) {
-                    if !item.isReadOnlyFolder {
-                        types.append(.moveToTrashShared)
-                    }
+                if item.fileType.isContained(in: [.image, .video]) {
+                    types.append(.download)
+                } else {
+                    types.append(.downloadDocument)
                 }
             }
-            types.append(.leaveSharing)
-            return types
+            
+            //todo: add write_acl permission check if api is ready
+            if item.isShared {
+                item.isOwner ? types.append(.endSharing) : types.append(.leaveSharing)
+            }
+            
+            if grantedPermissions.contains(.delete) {
+                if !item.isReadOnlyFolder {
+                    types.append(.moveToTrashShared)
+                }
+            }
         }
         
-        types = [.info, .share, .move]
         
-        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        if !item.isReadOnlyFolder {
-            types.append(.moveToTrash)
-        }
-        
-        if item.fileType == .image || item.fileType == .video {
-            types.append(.download)
-        } else if item.fileType == .audio || item.fileType.isDocumentPageItem {
-            types.append(.downloadDocument)
-        }
-        
-        if item.isShared {
-            types.append(.endSharing)
-        }
         
         return types
     }

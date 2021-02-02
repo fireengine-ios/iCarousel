@@ -359,12 +359,29 @@ class RouterVC: NSObject {
         else {
             return nil
         }
-
-        if case let PrivateShareType.innerFolder(type: _, folderItem: folder) = controller.shareType {
-            return folder
-        }
         
-        return nil
+        switch controller.shareType {
+            case .byMe, .withMe:
+                if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
+                return nil
+                
+            case .myDisk:
+                if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
+                return nil
+                
+            case .sharedArea:
+                if let accUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
+                return nil
+                
+            case .innerFolder(type: _, folderItem: let folder):
+                return folder
+        }
     }
     
     // MARK: Splash
@@ -462,29 +479,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: Music
-    
-    var musics: UIViewController? {
-        return BaseFilesGreedModuleInitializer.initializeMusicViewController(with: "BaseFilesGreedViewController")
-    }
-    
-    var favorites: UIViewController? {
-        let storage = ViewSortStorage.shared
-        return favorites(moduleOutput: storage,
-                         sortType: storage.favoritesSortType,
-                         viewType: storage.favoritesViewType)
-    }
-    
-    var allFiles: UIViewController? {
-        let storage = ViewSortStorage.shared
-        let controller = allFiles(moduleOutput: storage,
-                                  sortType: storage.allFilesSortType,
-                                  viewType: storage.allFilesViewType)
-        controller.title = TextConstants.homeButtonAllFiles
-        
-        return controller
-    }
-    
     var trashBin: UIViewController? {
         let controller = trashBinController()
         controller.segmentImage = .trashBin
@@ -495,15 +489,6 @@ class RouterVC: NSObject {
         let controller = PrivateShareSharedFilesViewController.with(shareType: .byMe)
         controller.segmentImage = .sharedByMe
         return controller
-    }
-    
-    var segmentedFiles: UIViewController? {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
-            assertionFailure()
-            return SegmentedController()
-        }
-        let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
-        return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     
     var sharedFiles: UIViewController {
@@ -518,45 +503,18 @@ class RouterVC: NSObject {
         return PrivateShareSharedFilesViewController.with(shareType: .byMe)
     }
     
-    func sharedFolder(rootShareType: PrivateShareType, folder: PrivateSharedFolderItem) -> UIViewController {
-        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, folderItem: folder))
+    var myDisk: UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .myDisk)
     }
     
-    var myDisk: UIViewController? {
-        if let folder = PrivateSharedFolderItem.rootFolder {
-            return sharedFolder(rootShareType: .innerFolder(type: .myDisk, folderItem: folder), folder: folder)
-        } else {
-            assertionFailure()
-            return nil
-        }
+    func sharedFolder(rootShareType: PrivateShareType, folder: PrivateSharedFolderItem) -> UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, folderItem: folder))
     }
     
     // MARK: Music Player
     
     func musicPlayer(status: ItemStatus) -> UIViewController {
         return VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController", status: status)
-    }
-    
-    
-    // MARK: All Files
-    
-    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
-        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController",
-                                                                                          moduleOutput: moduleOutput,
-                                                                                          sortType: sortType,
-                                                                                          viewType: viewType)
-        return controller
-    }
-    
-    
-    // MARK: Favorites
-    
-    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
-        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController",
-                                                                                           moduleOutput: moduleOutput,
-                                                                                           sortType: sortType,
-                                                                                           viewType: viewType)
-        return controller
     }
     
     
@@ -592,22 +550,9 @@ class RouterVC: NSObject {
     }
     
     
-    // MARK: Documents
-    
-    var documents: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializeDocumentsViewController(with: "BaseFilesGreedViewController")
-        return controller
-    }
-    
-    
     // MARK: Create Folder
     
-    func createNewFolder(rootFolderID: String?, isFavorites: Bool = false) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
-        return controller
-    }
-
-    func createNewFolderSharedWithMe(parameters: CreateFolderSharedWithMeParameters) -> UIViewController {
+    func createNewFolder(parameters: CreateFolderParameters) -> UIViewController {
         let controller = SelectNameModuleInitializer.with(parameters: parameters)
         return controller
     }
@@ -850,7 +795,7 @@ class RouterVC: NSObject {
             segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
         }
         
-        let index = TabScreenIndex.documents.rawValue
+        let index = TabScreenIndex.myDisk.rawValue
         if tabBarVC.selectedIndex == index {
             switchToTrashBin()
         } else {
@@ -859,7 +804,6 @@ class RouterVC: NSObject {
                 return
             }
             tabBarVC.tabBar.selectedItem = newSelectedItem
-            tabBarVC.selectedIndex = index - 1
             switchToTrashBin()
         }
     }

@@ -96,11 +96,9 @@ final class PushNotificationService {
                 
         switch action {
         case .main, .home: openMain()
-        case .floatingMenu: openFloatingMenu()
+//        case .floatingMenu: openFloatingMenu()
         case .myDisk: openMyDisk()
-        case .music: openMusic()
-        case .documents: openDocuments()
-        case .favorites: openFavorites()
+//        case .favorites: openFavorites()
         case .contactUs: openContactUs()
         case .usageInfo: openUsageInfo()
         case .recentActivities: openRecentActivities()
@@ -123,10 +121,12 @@ final class PushNotificationService {
             } else { 
                 openSupport(type: action == .supportFormSignup ? .signup : .login)
             }
-        case .trashBin:
-            openTrashBin()
+//        case .trashBin:
+//            openTrashBin()
         case .sharedWithMe: openSharedWithMe()
         case .sharedByMe: openShareByMe()
+            default:
+                assertionFailure()
         }
         
         
@@ -175,35 +175,7 @@ final class PushNotificationService {
             return
         }
 
-        if tabBarVC.selectedIndex != index.rawValue {
-            switch index {
-            case .documents:
-                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
-                    assertionFailure("This index is non existent 😵")
-                    return
-                }
-                tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue
-
-                if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
-                    segmentedController.loadViewIfNeeded()
-                    segmentedController.switchSegment(to: segmentIndex)
-                }
-                
-//            case .documents://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
-//                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
-//                    assertionFailure("This index is non existent 😵")
-//                    return
-//                }
-//                tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue - 1
-            
-            default:
-                break
-            }
-        } else {
-            tabBarVC.popToRootCurrentNavigationController(animated: true)
-        }
+        tabBarVC.popToRootCurrentNavigationController(animated: true)
     }
 
     
@@ -221,37 +193,17 @@ final class PushNotificationService {
         openMyDisk()
     }
     
-    private func openFloatingMenu() {
-        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
-            return
-        }
-        
-        tabBarVC.showRainbowIfNeed()
-    }
-    
     private func openMyDisk() {
-        if let folder = PrivateSharedFolderItem.rootFolder {
-            pushTo(router.sharedFolder(rootShareType: .innerFolder(type: .myDisk, folderItem: folder), folder: folder))
-        } else {
-            assertionFailure()
-        }
+        pushTo(router.myDisk)
     }
     
-    private func openDocuments() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.documents.rawValue)
-    }
-    
-    private func openMusic() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.music.rawValue)
-    }
-    
-    private func openFavorites() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
-    }
-
-    private func openTrashBin() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
-    }
+//    private func openFavorites() {
+//        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
+//    }
+//
+//    private func openTrashBin() {
+//        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
+//    }
     
     private func openContactUs() {
         router.showFeedbackSubView()

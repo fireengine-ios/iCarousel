@@ -43,11 +43,11 @@ enum ShareTypes {
         var allowedTypes = [ShareTypes]()
         
         if items.contains(where: { $0.fileType == .folder}) {
-            allowedTypes = [.link, .private]
+            allowedTypes = [.original, .private]
         } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
-            allowedTypes = [.link]
+            allowedTypes = []
         } else {
-            allowedTypes = [.original, .link, .private]
+            allowedTypes = [.original, .private]
         }
         
         if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits || isOriginallDisabled {

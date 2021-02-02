@@ -294,7 +294,7 @@ class CardsManager: NSObject {
             let popUp = StorageCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp
-        case .download, .upload, .sharedWithMeUpload:
+            case .download, .upload, .sharedWithMeUpload:
             let popUp = ProgressCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp

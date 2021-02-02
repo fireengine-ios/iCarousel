@@ -124,7 +124,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func setupPlusButton() {
-        floatingButtonsArray = shareType.floatingButtonTypes
+        floatingButtonsArray = shareType.floatingButtonTypes(rootPermissions: collectionManager.rootPermissions)
     }
     
     private func setDefaultTabBarState() {
@@ -158,6 +158,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             case .withMe:
                 permittedTypes = [.sharedWithMeUpload, .download]
             case .myDisk:
+                permittedTypes = [.upload, .download]
+            case .sharedArea:
                 permittedTypes = [.upload, .download]
             default:
                 permittedTypes = []
@@ -236,6 +238,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
+        setupPlusButton()
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -372,6 +375,11 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
                     collectionManager.reload(type: .onOperationFinished)
                 }
                 
+            case .sharedArea:
+                if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
+                    collectionManager.reload(type: .onOperationFinished)
+                }
+                
             default:
                 assertionFailure()
         }
@@ -405,9 +413,7 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
     }
     
     func didMoveToTrashSharedItems(_ items: [Item]) {
-        if shareType.rootType == .withMe {
-            collectionManager.delete(uuids: items.compactMap { $0.uuid })
-        }
+        collectionManager.delete(uuids: items.compactMap { $0.uuid })
     }
     
     func didEndShareItem(uuid: String) {

@@ -187,111 +187,111 @@ class ImageDownloder {
         
     }
     
-    func getImageDataByTrimming(url: URL?, completeImage:@escaping RemoteData) {
-        guard let url = url else {
-            logError(message: "getImageDataByTrimming failed - invalid url")
-            
-            DispatchQueue.main.async {
-                completeImage(nil)
-            }
-            return
-        }
-        
-        guard let trimmedUrl = url.byTrimmingQuery else {
-            logError(message: "getImageDataByTrimming failed - invalid trimmed url")
-            
-            DispatchQueue.main.async {
-                completeImage(nil)
-            }
-            return
-        }
-        
-        let cachePath = trimmedUrl.absoluteString
-        
-        if let data = SDWebImageManager.shared().imageCache?.diskImageData(forKey: cachePath) {
-            DispatchQueue.main.async {
-                completeImage(data)
-            }
-            return
-        }
-        
-        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
-        operation.outputBlock = { [weak self] _, data in
-            guard let self = self else {
-                completeImage(nil)
-                return
-            }
-            
-            self.tokenList[trimmedUrl] = nil
-            
-            guard let data = data else {
-                completeImage(nil)
-                return
-            }
-            
-            SDWebImageManager.shared().imageCache?.storeImageData(toDisk: data, forKey: cachePath)
-            completeImage(data)
-        }
-        
-        tokenList = tokenList + [trimmedUrl : operation]
-        
-        DispatchQueue.toBackground {
-            operation.start()
-        }
-    }
+//    func getImageDataByTrimming(url: URL?, completeImage:@escaping RemoteData) {
+//        guard let url = url else {
+//            logError(message: "getImageDataByTrimming failed - invalid url")
+//
+//            DispatchQueue.main.async {
+//                completeImage(nil)
+//            }
+//            return
+//        }
+//
+//        guard let trimmedUrl = url.byTrimmingQuery else {
+//            logError(message: "getImageDataByTrimming failed - invalid trimmed url")
+//
+//            DispatchQueue.main.async {
+//                completeImage(nil)
+//            }
+//            return
+//        }
+//
+//        let cachePath = trimmedUrl.absoluteString
+//
+//        if let data = SDWebImageManager.shared().imageCache?.diskImageData(forKey: cachePath) {
+//            DispatchQueue.main.async {
+//                completeImage(data)
+//            }
+//            return
+//        }
+//
+//        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
+//        operation.outputBlock = { [weak self] _, data in
+//            guard let self = self else {
+//                completeImage(nil)
+//                return
+//            }
+//
+//            self.tokenList[trimmedUrl] = nil
+//
+//            guard let data = data else {
+//                completeImage(nil)
+//                return
+//            }
+//
+//            SDWebImageManager.shared().imageCache?.storeImageData(toDisk: data, forKey: cachePath)
+//            completeImage(data)
+//        }
+//
+//        tokenList = tokenList + [trimmedUrl : operation]
+//
+//        DispatchQueue.toBackground {
+//            operation.start()
+//        }
+//    }
     
-    func getImageByTrimming(url: URL?, completeImage:@escaping RemoteImage) {
-        guard let url = url else {
-            logError(message: "getImageByTrimming failed - invalid url")
-            
-            DispatchQueue.main.async {
-                completeImage(nil)
-            }
-            return
-        }
-        
-        guard let trimmedUrl = url.byTrimmingQuery else {
-            logError(message: "getImageByTrimming failed - invalid trimmed url")
-            
-            DispatchQueue.main.async {
-                completeImage(nil)
-            }
-            return
-        }
-        
-        let cachePath = trimmedUrl.absoluteString
-        
-        if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
-            DispatchQueue.main.async {
-                completeImage(image)
-            }
-            return
-        }
-        
-        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
-        operation.outputBlock = { [weak self] image, _ in
-            guard let self = self else {
-                completeImage(nil)
-                return
-            }
-            
-            self.tokenList[trimmedUrl] = nil
-            
-            guard let image = image as? UIImage else {
-                completeImage(nil)
-                return
-            }
-            
-            SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
-            completeImage(image)
-        }
-        
-        tokenList = tokenList + [trimmedUrl : operation]
-        
-        DispatchQueue.toBackground {
-            operation.start()
-        }
-    }
+//    func getImageByTrimming(url: URL?, completeImage:@escaping RemoteImage) {
+//        guard let url = url else {
+//            logError(message: "getImageByTrimming failed - invalid url")
+//            
+//            DispatchQueue.main.async {
+//                completeImage(nil)
+//            }
+//            return
+//        }
+//        
+//        guard let trimmedUrl = url.byTrimmingQuery else {
+//            logError(message: "getImageByTrimming failed - invalid trimmed url")
+//            
+//            DispatchQueue.main.async {
+//                completeImage(nil)
+//            }
+//            return
+//        }
+//        
+//        let cachePath = trimmedUrl.absoluteString
+//        
+//        if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
+//            DispatchQueue.main.async {
+//                completeImage(image)
+//            }
+//            return
+//        }
+//        
+//        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
+//        operation.outputBlock = { [weak self] image, _ in
+//            guard let self = self else {
+//                completeImage(nil)
+//                return
+//            }
+//            
+//            self.tokenList[trimmedUrl] = nil
+//            
+//            guard let image = image as? UIImage else {
+//                completeImage(nil)
+//                return
+//            }
+//            
+//            SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
+//            completeImage(image)
+//        }
+//        
+//        tokenList = tokenList + [trimmedUrl : operation]
+//        
+//        DispatchQueue.toBackground {
+//            operation.start()
+//        }
+//    }
     
     func getImagesByImagesURLs(list: [ImageForDowload], images: @escaping ([URL]) -> Void) {
         if list.count > 0 {

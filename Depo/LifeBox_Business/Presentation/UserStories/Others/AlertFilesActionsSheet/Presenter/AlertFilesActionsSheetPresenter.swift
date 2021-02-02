@@ -53,7 +53,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         presentedBy sender: Any?,
                         onSourceView sourceView: UIView?,
                         excludeTypes: [ElementTypes]) {
-        constractSpecifiedActions(with: types, for: items, excludeTypes: excludeTypes) {[weak self] (actions) in
+        constractSpecifiedActions(with: types, for: items, excludeTypes: excludeTypes) { [weak self] (actions) in
             DispatchQueue.main.async { [weak self] in
                 self?.presentAlertSheet(with: actions, presentedBy: sender)
             }
@@ -151,48 +151,15 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     private func constractSpecifiedActions(with types: [ElementTypes],
                                            for items: [BaseDataSourceItem]?,
                                            excludeTypes: [ElementTypes] = [ElementTypes](),
-                                           succes: @escaping AlertActionsCallback) {
-        DispatchQueue.global().async { [weak self] in
-            var filteredActionTypes = types
-            
-            if let remoteItems = items?.filter({ !$0.isLocalItem }) as? [Item], remoteItems.count > 0 {
-                if remoteItems.contains(where: { !$0.favorites }) {
-                    if !filteredActionTypes.contains(.addToFavorites) {
-                        filteredActionTypes.append(.addToFavorites)
-                    }
-                } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
-                    filteredActionTypes.remove(at: addToFavoritesIndex)
-                }
-                
-                if !remoteItems.contains(where: { !($0.fileType.isDocumentPageItem || $0.fileType == .audio) }) {
-                    if !filteredActionTypes.contains(.downloadDocument) {
-                        filteredActionTypes.append(.downloadDocument)
-                    }
-                }
-                
-                if remoteItems.contains(where: { $0.favorites }) {
-                    if !filteredActionTypes.contains(.removeFromFavorites) {
-                        filteredActionTypes.append(.removeFromFavorites)
-                    }
-                } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
-                    filteredActionTypes.remove(at: removeFromFavorites)
-                }
-                
-                if remoteItems.first(where: { !$0.isReadOnlyFolder }) == nil {
-                    filteredActionTypes.remove(.moveToTrash)
-                }
-        
-            } else {
-                if let printIndex = filteredActionTypes.index(of: .print) {
-                    filteredActionTypes.remove(at: printIndex)
-                }
+                                           success: @escaping AlertActionsCallback) {
+        DispatchQueue.toBackground { [weak self] in
+            let filteredActionTypes = types.filter({ !excludeTypes.contains($0) })
+            guard let self = self else {
+               return
             }
             
-            filteredActionTypes = filteredActionTypes.filter({ !excludeTypes.contains($0) })
-            if let `self` = self {
-                self.constractActions(with: filteredActionTypes, for: items) { actions in
-                    succes(actions)
-                }
+            self.constractActions(with: filteredActionTypes, for: items) { actions in
+                success(actions)
             }
         }
     }

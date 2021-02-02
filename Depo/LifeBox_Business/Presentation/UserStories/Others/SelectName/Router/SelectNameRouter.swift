@@ -19,7 +19,7 @@ class SelectNameRouter: SelectNameRouterInput {
            let navVC = tabBarVC.activeNavigationController,
            let controller = navVC.topViewController as? PrivateShareSharedFilesViewController {
             if let name = item.name, let permission = item.privateSharePermission {
-                let newFolder = PrivateSharedFolderItem(accountUuid: item.accountUuid, uuid: item.uuid, name: name, permissions: permission)
+                let newFolder = PrivateSharedFolderItem(accountUuid: item.accountUuid, uuid: item.uuid, name: name, permissions: permission, type: controller.shareType)
                 let newController = router.sharedFolder(rootShareType: controller.shareType, folder: newFolder)
                 router.pushViewController(viewController: newController)
             }
@@ -28,16 +28,9 @@ class SelectNameRouter: SelectNameRouterInput {
         }
         
         let folderVC = router.filesFromFolder(folder: item, type: .Grid, sortType: .None, status: .active, moduleOutput: presenter)
-
-        if !isSubFolder {
-            let allFilesVC = router.allFiles(moduleOutput: presenter,
-                                             sortType: presenter.allFilesSortType,
-                                             viewType: presenter.allFilesViewType)
-            router.pushSeveralControllers([allFilesVC, folderVC])
-            
-        } else {
-            router.pushViewController(viewController: folderVC)
-            
-        }
+        
+        router.pushViewController(viewController: folderVC)
+        
+        
     }
 }

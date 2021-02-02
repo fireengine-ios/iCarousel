@@ -9,6 +9,12 @@
 import UIKit
 
 struct ColorConstants {
+    //MARK: Business App specific
+    
+    static let bottomBarTint = UIColor(named: "bottomBarTint")
+    
+    //MARK: END
+    
     static let whiteColor = UIColor.white
     static let blueColor = UIColor(red: 68 / 255, green: 204 / 255, blue: 208 / 255, alpha: 1)
     static let lightBlueColor = UIColor(red: 180 / 255, green: 241 / 255, blue: 241 / 255, alpha: 1)
