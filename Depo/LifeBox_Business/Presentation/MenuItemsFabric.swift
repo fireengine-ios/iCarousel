@@ -54,17 +54,17 @@ extension ElementTypes {
         var imageName: String? = nil
         switch self {
         case .info:
-            imageName = "action_info"
+            imageName = "info"
         case .delete, .moveToTrash, .moveToTrashShared:
-            imageName = "action_delete"
+            imageName = "trash"
         case .copy:
             imageName = "action_copy"
         case .endSharing:
-            imageName = "action_end_share"
+            imageName = "end-sharing"
         case .leaveSharing:
             imageName = "action_leave_share"
         case .move:
-            imageName = "action_move"
+            imageName = "move"
         case .share:
             imageName = "action_share"
         case .addToFavorites, .removeFromFavorites:
@@ -103,11 +103,11 @@ extension ShareTypes {
         var imageName: String? = nil
         switch self {
         case .link:
-            imageName = "action_copy"
+            imageName = "copy-link"
         case .original:
-            imageName = "action_send_copy"
+            imageName = "share-copy"
         case .private:
-            imageName = "action_share"
+            imageName = "share-private"
         }
         
         guard let name = imageName else {
