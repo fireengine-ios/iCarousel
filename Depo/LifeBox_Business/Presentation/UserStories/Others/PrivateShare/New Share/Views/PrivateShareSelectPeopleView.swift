@@ -115,7 +115,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     private func changeButtonEnabledIfNeeded(text: String) {
         let isValid = text.count > 0
-        addButton.isEnabled = isValid
+        //Can asked to disable it for now
+//        addButton.isEnabled = isValid
         userRoleButton.isHidden = !isValid
     }
 }
