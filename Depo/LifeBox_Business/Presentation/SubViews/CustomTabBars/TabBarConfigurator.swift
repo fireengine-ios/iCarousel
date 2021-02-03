@@ -39,6 +39,17 @@ enum TabBarItem: CaseIterable {
         }
     }
     
+    var iconSelected: UIImage? {
+        switch self {
+        case .myDisk:
+            return UIImage(named: "disks-selected")
+        case .sharedFiles:
+            return UIImage(named: "share-selected")
+        case .sharedArea:
+            return UIImage(named: "publicSpace-selected")
+        }
+    }
+    
     var accessibilityLabel: String {
         return title
     }

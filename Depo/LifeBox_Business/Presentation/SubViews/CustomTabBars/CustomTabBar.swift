@@ -16,7 +16,7 @@ class CustomTabBar: UITabBar {
         tintColor = ColorConstants.bottomBarTint
         
         let items: [CustomTabBarItem] = TabBarItem.allCases.map { item -> CustomTabBarItem in
-            let tabBarItem = CustomTabBarItem(title: item.title, image: item.icon, tag: 0)
+            let tabBarItem = CustomTabBarItem(title: item.title, image: item.icon, selectedImage: item.iconSelected)
             tabBarItem.isAccessibilityElement = true
             
             if !item.accessibilityLabel.isEmpty {
