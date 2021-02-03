@@ -12,7 +12,7 @@ typealias FileInfoMoveToTrash = (accountUuid: String, uuid: String)
 
 protocol PrivateShareApiService {
     @discardableResult
-    func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
+    func getSuggestedSubjects(searchText: String, size: Int, handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
     
     @discardableResult
     func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
@@ -61,11 +61,14 @@ protocol PrivateShareApiService {
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
+    
     @discardableResult
-    func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask? {
+    func getSuggestedSubjects(searchText: String, size: Int, handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.PrivateShare.suggestionsSubjectsSearch, searchText, size)
+        
         return SessionManager
             .customDefault
-            .request(RouteRequests.PrivateShare.suggestions)
+            .request(url)
             .customValidate()
             .responseArray(handler)
             .task

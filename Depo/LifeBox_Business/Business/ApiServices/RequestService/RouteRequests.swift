@@ -261,8 +261,8 @@ struct RouteRequests {
     enum PrivateShare {
         
         static let share = baseUrl +/ "v1/business/shares"
-        static let suggestions = baseUrl +/ "v1/business/invitees"
-        static let suggestionsSubjects = share +/ "suggestions/subjects"
+        static let suggestionsSubjectsBase = baseUrl +/ "v1/business/suggestions/subjects"
+        static let suggestionsSubjectsSearch = suggestionsSubjectsBase.absoluteString + "?searchText=%@&size=%d"
         
         enum Shared {
             private static let baseShares = share.absoluteString
