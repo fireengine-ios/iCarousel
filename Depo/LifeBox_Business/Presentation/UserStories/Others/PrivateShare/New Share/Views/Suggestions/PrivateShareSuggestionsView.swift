@@ -13,7 +13,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
     static func with(contacts: [SuggestedContact], delegate: PrivateShareSelectSuggestionsDelegate?) -> PrivateShareSuggestionsView {
         let view = PrivateShareSuggestionsView.initFromNib()
         view.delegate = delegate
-        view.setup(with: contacts.filter { !$0.phones.isEmpty })
+        view.setup(with: contacts)
         return view
     }
     
