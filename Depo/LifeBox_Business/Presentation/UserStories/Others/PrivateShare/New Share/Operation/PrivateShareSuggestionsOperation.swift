@@ -6,7 +6,7 @@
 //  Copyright © 2021 LifeTech. All rights reserved.
 //
 
-class PrivateShareSuggestionsOperation: Operation {
+final class PrivateShareSuggestionsOperation: Operation {
     
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private let semaphore = DispatchSemaphore(value: 0)
@@ -24,7 +24,7 @@ class PrivateShareSuggestionsOperation: Operation {
     
     override func main() {
         guard !isCancelled else {
-            callback?(.failed(CustomOperationErrors.cancelled))
+            callback?(.failed(OperationError.cancelled))
             return
         }
 
@@ -34,7 +34,7 @@ class PrivateShareSuggestionsOperation: Operation {
                 return
             }
             guard !self.isCancelled else {
-                self.callback?(.failed(CustomOperationErrors.cancelled))
+                self.callback?(.failed(OperationError.cancelled))
                 self.semaphore.signal()
                 return
             }

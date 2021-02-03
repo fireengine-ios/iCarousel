@@ -111,7 +111,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private func setupSuggestedSubjects(searchText: String) {
         
         if let thresholdDate = startThresholdDate,
-           (Date().timeIntervalSince1970 - thresholdDate.timeIntervalSince1970) * 1000 < 50 {
+           Date().timeIntervalSince(thresholdDate) * 1000 < 50 {
             return
         }
         startThresholdDate = Date()
@@ -125,8 +125,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                 self?.remoteSuggestions = contacts
                 self?.showRemoteSuggestions()
             case .failed(let error):
-                if let customError = error as? CustomOperationErrors,
-                   case CustomOperationErrors.cancelled = customError {
+                if let customError = error as? OperationError,
+                   case OperationError.cancelled = customError {
                     debugPrint("Private Share operation cancelled")
                 } else {
                     UIApplication.showErrorAlert(message: error.description)
