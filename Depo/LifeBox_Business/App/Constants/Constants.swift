@@ -1234,8 +1234,8 @@ struct TextConstants {
 }
 
 extension TextConstants {
-    static let tabBarItemMyDisk = NSLocalizedString("tabbar_item_my_disk", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let tabBarItemSharedFiles = NSLocalizedString("tabbar_item_shared_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let tabBarItemSharedArea = NSLocalizedString("tabbar_item_shared_area", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemMyDisk = NSLocalizedString("business_app_tabbar_mydisk", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemSharedFiles = NSLocalizedString("business_app_tabbar_mysharings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemSharedArea = NSLocalizedString("business_app_tabbar_sharedarea", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarItemSettings = NSLocalizedString("tabbar_item_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

@@ -69,7 +69,7 @@ enum ElementTypes {
         else {
             return result
         }
-        if grantedPermissions.contains(.read) || grantedPermissions.contains(.writeAcl) {
+        if grantedPermissions.contains(.writeAcl) {
             result.append(.share)
         }
         
@@ -146,13 +146,15 @@ enum ElementTypes {
 
         if let grantedPermissions = item.privateSharePermission?.granted {
             if grantedPermissions.contains(.read) {
-                types.append(.share)
-                
                 if item.fileType.isContained(in: [.image, .video]) {
                     types.append(.download)
                 } else {
                     types.append(.downloadDocument)
                 }
+            }
+            
+            if grantedPermissions.contains(.writeAcl) {
+                types.append(.share)
             }
             
             //todo: add write_acl permission check if api is ready
@@ -166,8 +168,6 @@ enum ElementTypes {
                 }
             }
         }
-        
-        
         
         return types
     }

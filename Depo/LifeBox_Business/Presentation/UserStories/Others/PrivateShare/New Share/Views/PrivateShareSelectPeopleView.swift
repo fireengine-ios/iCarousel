@@ -134,20 +134,6 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if let text = textField.text, text.count == 0,
-           (string == "+" || string == "0" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
-        {
-            let code = CoreTelephonyService().getCountryCode()
-            let countryCode = code.isEmpty ? "+" : code
-            let isReplacableString = string == "+" || string == "0"
-            textField.text = countryCode
-            return !isReplacableString
-        }
-        
-        return true
-    }
 }
 
 //MARK: - PrivateShareUserRoleViewControllerDelegate
