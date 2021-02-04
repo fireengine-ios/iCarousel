@@ -46,7 +46,6 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private let scrollDirectionManager = ScrollDirectionManager()
     
-    private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
@@ -65,15 +64,6 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         setupCollection()
         setupTopRefresher()
         reload(type: .full)
-    }
-    
-    func change(viewType: MoreActionsConfig.ViewType) {
-        guard viewType != currentCollectionViewType else {
-            return
-        }
-        
-        currentCollectionViewType = viewType
-        updateLayout()
     }
     
     func change(sortingRule: SortedRules) {

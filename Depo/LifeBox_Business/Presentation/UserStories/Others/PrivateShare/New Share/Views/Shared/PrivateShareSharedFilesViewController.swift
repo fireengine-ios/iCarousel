@@ -209,10 +209,6 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
         collectionManager.change(sortingRule: rule.sortedRulesConveted)
     }
-    
-    func representationChanged(viewType: MoreActionsConfig.ViewType) {
-        collectionManager.change(viewType: viewType)
-    }
 }
 
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
