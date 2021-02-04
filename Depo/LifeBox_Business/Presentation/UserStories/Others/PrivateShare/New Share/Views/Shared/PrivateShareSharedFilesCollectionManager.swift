@@ -132,7 +132,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func setupCollection() {
-        collectionView?.register(nibCell: BasicCollectionMultiFileCell.self)
+        collectionView?.register(nibCell: MultifileCollectionViewCell.self)
         collectionView?.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self,
                                  kind: UICollectionElementKindSectionHeader)
         
@@ -294,34 +294,24 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: BasicCollectionMultiFileCell.self, for: indexPath)
-        cell.setDelegateObject(delegateObject: self)
+        let cell = collectionView.dequeue(cell: MultifileCollectionViewCell.self, for: indexPath)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? BasicCollectionMultiFileCell, let item = item(at: indexPath) else {
+        guard let cell = cell as? MultifileCollectionViewCell, let item = item(at: indexPath) else {
             return
         }
         
         let isSelectedCell = isSelected(item: item)
         cell.isSelected = isSelectedCell
-        cell.updating()
-        cell.canShowSharedIcon = false
+//        cell.canShowSharedIcon = false
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
-        cell.configureWithWrapper(wrappedObj: item)
-          
-        if case PathForItem.remoteUrl(let url) = item.patchToPreview {
-            if let url = url {
-                cell.setImage(with: url)
-            } else {
-                cell.setPlaceholderImage(fileType: item.fileType)
-            }
-        }
+        cell.setup(with: item, at: indexPath, menuActionDelegate: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? BasicCollectionMultiFileCell else {
+        guard let cell = cell as? MultifileCollectionViewCell else {
             return
         }
         
@@ -329,42 +319,9 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell, let item = item(at: indexPath) else {
-            return
-        }
-        
-        if isSelecting {
-            if isSelected(item: item) {
-                fileInfoManager.deselectItem(at: indexPath)
-                cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
-            } else {
-                fileInfoManager.selectItem(at: indexPath)
-                cell.setSelection(isSelectionActive: isSelecting, isSelected: true)
-            }
-            
-            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
-            
-        } else if checkIfCanShowDetail(for: item) {
-            if item.fileType == .audio {
-                showAudioPlayer(with: item)
-            } else {
-                showDetailView(for: item)
-            }
-        }
+        onDidSelectItem(at: indexPath)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
-//            return
-//        }
-//
-//        if isSelecting {
-//            fileInfoManager.deselectItem(at: indexPath)
-//            cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
-//            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
-//        }
-//    }
-    
+
     //MARK: Helpers
     private func item(at indexPath: IndexPath) -> WrapData? {
         return fileInfoManager.splittedItems[indexPath.section]?[safe: indexPath.row]
@@ -438,6 +395,31 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             self.router.presentViewController(controller: nController)
         }
     }
+    
+    private func onDidSelectItem(at indexPath: IndexPath) {
+        guard let cell = collectionView?.cellForItem(at: indexPath) as? MultifileCollectionViewCell, let item = item(at: indexPath) else {
+            return
+        }
+        
+        if isSelecting {
+            if isSelected(item: item) {
+                fileInfoManager.deselectItem(at: indexPath)
+                cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
+            } else {
+                fileInfoManager.selectItem(at: indexPath)
+                cell.setSelection(isSelectionActive: isSelecting, isSelected: true)
+            }
+            
+            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
+            
+        } else if checkIfCanShowDetail(for: item) {
+            if item.fileType == .audio {
+                showAudioPlayer(with: item)
+            } else {
+                showDetailView(for: item)
+            }
+        }
+    }
 }
 
 
@@ -445,26 +427,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
 extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width: CGFloat
-        let height: CGFloat
-        
-        switch currentCollectionViewType {
-            case .List:
-                width = collectionView.contentSize.width
-                height = BasicCollectionMultiFileCell.bigH
-                
-            case .Grid:
-                if Device.isIpad {
-                    width = (collectionView.contentSize.width - NumericConstants.iPadGreedInset * 2 - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1)) / NumericConstants.numerCellInDocumentLineOnIpad
-                } else {
-                    width = (collectionView.contentSize.width - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIphone - 1)) / NumericConstants.numerCellInDocumentLineOnIphone
-                }
-                height = width
-                
-            default:
-                assertionFailure()
-                return .zero
-        }
+        let width = collectionView.contentSize.width
+        let height = MultifileCollectionViewCell.height
         
         return CGSize(width: width, height: height)
     }
@@ -594,15 +558,33 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
     }
 }
 
-//MARK: - LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate
-extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
+//MARK: - LBCellsDelegate, MultifileCollectionViewCellActionDelegate
+extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, MultifileCollectionViewCellActionDelegate {
     
-    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
+    @available(iOS 14, *)
+    func onCellSelected(indexPath: IndexPath) {
+        DispatchQueue.toMain {
+            self.collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+            //collection delegate didSelectItem will not be called
+            self.onDidSelectItem(at: indexPath)
+        }
+    }
+    
+    
+    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?) {
         guard let item = itemModel else {
             return
         }
         
         delegate?.didSelectAction(type: type, on: item, sender: sender)
+    }
+    
+    func onMenuPress(sender: Any, itemModel: Item?) {
+        guard let item = itemModel else {
+            return
+        }
+        
+        delegate?.showActions(for: item, sender: sender)
     }
     
     func canLongPress() -> Bool {

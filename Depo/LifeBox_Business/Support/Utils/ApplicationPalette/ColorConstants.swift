@@ -12,6 +12,8 @@ struct ColorConstants {
     //MARK: Business App specific
     
     static let bottomBarTint = UIColor(named: "bottomBarTint")
+    static let multifileCellSubtitleText = UIColor(named: "multifileCellSubtitleText")
+    static let multifileCellTitleText = UIColor(named: "multifileCellTitleText")
     
     //MARK: END
     
