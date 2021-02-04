@@ -66,6 +66,7 @@ enum ApplicationType: String {
     case ppt = "ppt"
     case pptx = "pptx"
     case usdz = "usdz"
+    case csv = "csv"
     
 //    func bigIconImage() -> UIImage? {
 //        switch self {
@@ -162,7 +163,7 @@ enum FileType: Hashable, Equatable {
         guard case let FileType.application(applicationType) = self else {
             return false
         }
-        return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .pptx, .usdz])
+        return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .pptx, .usdz, .csv])
     }
     
     var isDocumentPageItem: Bool {
@@ -249,6 +250,9 @@ enum FileType: Hashable, Equatable {
                 switch prefix {
                 case "directory":
                     self = .folder
+                    return
+                case "csv":
+                    self = .application(.csv)
                     return
                 case "pdf":
                     self = .application(.pdf)

@@ -11,23 +11,23 @@ import UIKit
 class WrapperedItemUtil: NSObject {
     
     class func getSmallPreviewImageForWrapperedObject(fileType: FileType) -> UIImage? {
-        var imageName = "fileIconUnknown"
+        var imageName = "unknownFileThumbnail"
         
         switch fileType {
         case .image:
-            imageName = "fileIconPhoto"
+            imageName = "photoFileThumbnail"
             
         case .video:
-            imageName = "fileIconVideo"
+            imageName = "videoFileThumbnail"
             
         case .audio:
-            imageName = "fileIconAudio"
+            imageName = "audioFileThumbnail"
             
         case .folder:
-            imageName = "fileIconFolder"
+            imageName = "folderFileThumbnail"
             
         case .musicPlayList: // TODO: Add icon
-            imageName = "fileIconUnknown"
+            imageName = "unknownFileThumbnail"
             
         case let .application(applicationType):
             switch applicationType {
@@ -35,31 +35,31 @@ class WrapperedItemUtil: NSObject {
                 imageName = "fileIconRar"
                 break
             case .zip:
-                imageName = "fileIconZip"
+                imageName = "zipFileThumbnail"
                 break
             case .doc:
-                imageName = "fileIconDoc"
+                imageName = "docFileThumbnail"
                 break
             case .txt:
-                imageName = "fileIconTxt"
+                imageName = "txtFileThumbnail"
                 break
             case .html:
                 imageName = "fileIconUnknown"
                 break
             case .xls:
-                imageName = "fileIconXls"
+                imageName = "xlsFileThumbnail"
                 break
             case .pdf:
-                imageName = "fileIconPdf"
+                imageName = "pdfFileThumbnail"
                 break
             case .ppt, .pptx:
-                imageName = "fileIconPpt"
+                imageName = "pptFileThumbnail"
                 break
             default:
                 break
             }
         default:
-            imageName = "fileIconUnknown"
+            imageName = "unknownFileThumbnail"
         }
         return UIImage(named: imageName)
     }
