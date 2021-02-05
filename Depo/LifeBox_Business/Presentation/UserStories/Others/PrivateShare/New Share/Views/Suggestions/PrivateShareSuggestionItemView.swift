@@ -19,6 +19,22 @@ enum SuggestionItemType {
 
 final class PrivateShareSuggestionItemView: UIView, NibInit {
     
+    static func with(contact: SuggestedContact, text: String, type: SuggestionItemType, delegate: PrivateShareSuggestionItemViewDelegate?) -> PrivateShareSuggestionItemView {
+        let view = PrivateShareSuggestionItemView.initFromNib()
+        view.delegate = delegate
+        view.type = type
+        view.contact = contact
+        
+        if type == .phone {
+            let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
+            view.titleLabel.text = text.components(separatedBy: allowedCharacterSet.inverted).joined()
+        } else {
+            view.titleLabel.text = text
+        }
+        
+        return view
+    }
+    
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
@@ -39,20 +55,4 @@ final class PrivateShareSuggestionItemView: UIView, NibInit {
         delegate?.addItem(contact: contact, text: titleLabel.text ?? "")
     }
     
-    
-    static func with(contact: SuggestedContact, text: String, type: SuggestionItemType, delegate: PrivateShareSuggestionItemViewDelegate?) -> PrivateShareSuggestionItemView {
-        let view = PrivateShareSuggestionItemView.initFromNib()
-        view.delegate = delegate
-        view.type = type
-        view.contact = contact
-        
-        if type == .phone {
-            let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
-            view.titleLabel.text = text.components(separatedBy: allowedCharacterSet.inverted).joined()
-        } else {
-            view.titleLabel.text = text
-        }
-        
-        return view
-    }
 }
