@@ -7,13 +7,6 @@
 //
 
 import WidgetKit
-
-enum DivorseItems {
-    case items
-    case albums
-    case folders
-}
-
 enum ShareTypes {
     case original
     case link
@@ -812,7 +805,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 
 extension MoreFilesActionsInteractor {
     
-    func successAction(elementType: ElementTypes, itemsType: DivorseItems? = nil, relatedItems: [BaseDataSourceItem] = []) -> FileOperation {
+    func successAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem] = []) -> FileOperation {
         let success: FileOperation = { [weak self] in
             guard let self = self else {
                 return
@@ -820,18 +813,14 @@ extension MoreFilesActionsInteractor {
 
             self.trackGASuccessEvent(elementType: elementType)
             
-            if itemsType != nil {
-                self.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
-            }
-            
             DispatchQueue.main.async {
                 self.output?.operationFinished(type: elementType)
                 self.router.hideSpiner()
                 
                 self.output?.successPopupWillAppear()
                 if SnackbarType(operationType: elementType) != nil {
-                    self.showSnackbar(elementType: elementType, itemsType: itemsType, relatedItems: relatedItems)
-                } else if let message = elementType.alertSuccessMessage(divorseItems: itemsType) {
+                    self.showSnackbar(elementType: elementType, relatedItems: relatedItems)
+                } else if let message = elementType.alertSuccessMessage() {
                     self.showSuccessPopup(message: message)
                 }
             }
@@ -851,8 +840,8 @@ extension MoreFilesActionsInteractor {
         router.presentViewController(controller: popup)
     }
     
-    private func showSnackbar(elementType: ElementTypes, itemsType: DivorseItems? = nil, relatedItems: [BaseDataSourceItem]) {
-        SnackbarManager.shared.show(elementType: elementType, relatedItems: relatedItems, itemsType: itemsType) {
+    private func showSnackbar(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) {
+        SnackbarManager.shared.show(elementType: elementType, relatedItems: relatedItems) {
             let router = RouterVC()
             switch elementType {
             case .moveToTrash:
@@ -989,15 +978,7 @@ extension MoreFilesActionsInteractor {
                 let errorResponse = ErrorResponse.error(error)
                 self?.failAction(elementType: type, relatedItems: items)(errorResponse)
             } else {
-                let itemsType: DivorseItems
-                if photosVideos.allSatisfy({ $0.fileType == .folder }) {
-                    itemsType = .folders
-                    
-                } else {
-                    itemsType = .items
-                }
-                
-                self?.successAction(elementType: type, itemsType: itemsType, relatedItems: items)()
+                self?.successAction(elementType: type, relatedItems: items)()
             }
         }
     }

@@ -135,14 +135,14 @@ enum ElementTypes {
         //TODO: allow move and add/remove favorites if api is ready
         
         if status == .trashed {
-            return[.info] + ElementTypes.trashState
+            return ElementTypes.trashState + [.info]
         }
         
         guard let item = item as? Item else {
             return []
         }
         
-        var types: [ElementTypes] = [.info]
+        var types: [ElementTypes] = [.select]
 
         if let grantedPermissions = item.privateSharePermission?.granted {
             if grantedPermissions.contains(.read) {
@@ -167,47 +167,37 @@ enum ElementTypes {
             }
         }
         
-        
+        types.append(.info)
         
         return types
     }
     
-    func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = [], divorseItems: DivorseItems? = nil) -> String? {
-        if let divorseItems = divorseItems {
-            return divorseSuccessMessage(divorseItems: divorseItems)
-        }
-        
+    func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = []) -> String? {
         switch self {
-        case .addToFavorites:
-            return TextConstants.snackbarMessageAddedToFavorites
-        case .download:
-            let format = TextConstants.snackbarMessageDownloadedFilesFormat
-            return String(format: format, relatedItems.count)
-        case .downloadDocument:
-            let format = TextConstants.snackbarMessageDownloadedFilesFormat
-            return String(format: format, relatedItems.count)
-        case .emptyTrashBin:
-            return TextConstants.trashBinDeleteAllComplete
-        case .move:
-            return TextConstants.snackbarMessageFilesMoved
-        case .removeFromFavorites:
-            return TextConstants.snackbarMessageRemovedFromFavorites
-        case .endSharing:
-            return TextConstants.privateSharedEndSharingActionSuccess
-        case .leaveSharing:
-            return TextConstants.privateSharedLeaveSharingActionSuccess
-        case .moveToTrashShared:
-            return TextConstants.moveToTrashItemsSuccessText
-        default:
-            return nil
+            case .addToFavorites:
+                return TextConstants.snackbarMessageAddedToFavorites
+            case .download, .downloadDocument:
+                return TextConstants.downloadSuccess
+            case .emptyTrashBin:
+                return TextConstants.trashBinDeleteAllComplete
+            case .move:
+                return TextConstants.snackbarMessageFilesMoved
+            case .removeFromFavorites:
+                return TextConstants.snackbarMessageRemovedFromFavorites
+            case .endSharing:
+                return TextConstants.stopSharingSuccess
+            case .leaveSharing:
+                return TextConstants.leaveSharingSuccess
+            case .moveToTrashShared:
+                return TextConstants.deleteSuccess
+            case .rename:
+                return TextConstants.renameSuccess
+            default:
+                return nil
         }
     }
     
-    func alertSuccessMessage(divorseItems: DivorseItems? = nil) -> String? {
-        if let divorseItems = divorseItems {
-            return divorseSuccessMessage(divorseItems: divorseItems)
-        }
-        
+    func alertSuccessMessage() -> String? {
         switch self {
         case .download:
             return TextConstants.popUpDownloadComplete
@@ -256,24 +246,6 @@ enum ElementTypes {
         }
         
         return triplet
-    }
-    
-    func divorseSuccessMessage(divorseItems: DivorseItems) -> String {
-        let localizations = localizationTriplet()
-
-        let text: String
-        switch divorseItems {
-        case .items:
-            text = localizations.items
-            
-        case .albums:
-            text = localizations.albums
-            
-        case .folders:
-            text = localizations.folders
-        }
-        
-        return text
     }
     
     func actionTitle(fileType: FileType? = nil) -> String {
