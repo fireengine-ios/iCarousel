@@ -1879,3 +1879,24 @@
 
 "tabbar_item_settings" = "Settings";
 "private_share_max_number_of_item_limit_exceeded" = "private_share_max_number_of_item_limit_exceeded";
+
+
+"business_app_select_option" = "Select";
+"business_app_download_option" = "Download";
+"business_app_delete_option" = "Delete";
+"business_app_rename_option" = "Rename";
+"business_app_share_privately_option" = "Share Privately";
+"business_app_share_copy_option" = "Send a Copy";
+"business_app_stop_sharing_option" = "Stop Sharing";
+"business_app_leave_sharing_option" = "Leave Sharing";
+"business_app_info_option" = "Info";
+
+"business_app_download_success" = "Downloaded successfully";
+"business_app_delete_success" = "Deleted successfully";
+"business_app_rename_sucess" = "Renamed successfully";
+"business_app_share_privately_success" = "Shared successfully";
+"business_app_stop_sharing_success" = "Sharing is stopped";
+"business_app_leave_sharing_success" = "Sharing is left";
+ 
+"business_app_delete_confirm_popup_title" = "Are you sure to delete?";
+"business_app_delete_confirm_popup_detail" = "Deleted files will be sent to Trash Bin";
