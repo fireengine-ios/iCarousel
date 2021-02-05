@@ -152,20 +152,24 @@ struct PrivateShareObject: Encodable {
 struct PrivateShareContact: Equatable, Encodable {
     let displayName: String
     let username: String
+    
+    var type: PrivateShareSubjectType
     var role: PrivateShareUserRole
+    var identifier: String
     
     static func == (lhs: PrivateShareContact, rhs: PrivateShareContact) -> Bool {
-        return lhs.username == rhs.username
+        return lhs.identifier == rhs.identifier
     }
     
     enum CodingKeys: String, CodingKey {
-        case username, role
+        case username, role, identifier, type
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(username, forKey: .username)
+        try container.encode(type.rawValue, forKey: .type)
         try container.encode(role.rawValue, forKey: .role)
+        try container.encode(identifier, forKey: .identifier)
     }
 }
 

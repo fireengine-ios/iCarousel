@@ -62,7 +62,11 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     private weak var delegate: PrivateShareSelectPeopleViewDelegate?
+    
     private var displayName = ""
+    private var identifier = ""
+    private var type: PrivateShareSubjectType = .knownName
+    
     private var role = PrivateShareUserRole.viewer {
         didSet {
             userRoleButton.setTitle(role.title, for: .normal)
@@ -82,6 +86,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     func setContact(info: ContactInfo) {
         displayName = info.name
         textField.text = info.value
+        identifier = info.identifier
+        type = info.userType
         changeButtonEnabledIfNeeded(text: info.value)
         
         //add contact to shared with section
@@ -91,19 +97,19 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     func clear() {
-        setContact(info: ContactInfo(name: "", value: ""))
+        setContact(info: ContactInfo(name: "", value: "", identifier: "", userType: .knownName))
         role = .viewer
     }
     
     //MARK: - Private methods
     
     @IBAction private func onAddTapped(_ sender: UIButton) {
-        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", type: type, role: role, identifier: identifier)
         delegate?.addShareContact(shareContact)
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {
-        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", type: type, role: role, identifier: identifier)
         delegate?.onUserRoleTapped(contact: shareContact, sender: self)
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PrivateShareSuggestionItemViewDelegate: class {
-    func addItem(string: String)
+    func addItem(contact: SuggestedContact, text: String)
 }
 
 enum SuggestionItemType {
@@ -18,21 +18,6 @@ enum SuggestionItemType {
 }
 
 final class PrivateShareSuggestionItemView: UIView, NibInit {
-
-    static func with(text: String, type: SuggestionItemType, delegate: PrivateShareSuggestionItemViewDelegate?) -> PrivateShareSuggestionItemView {
-        let view = PrivateShareSuggestionItemView.initFromNib()
-        view.delegate = delegate
-        view.type = type
-        
-        if type == .phone {
-            let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
-            view.titleLabel.text = text.components(separatedBy: allowedCharacterSet.inverted).joined()
-        } else {
-            view.titleLabel.text = text
-        }
-
-        return view
-    }
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -45,9 +30,29 @@ final class PrivateShareSuggestionItemView: UIView, NibInit {
     
     private weak var delegate: PrivateShareSuggestionItemViewDelegate?
     private var type: SuggestionItemType = .phone
+    private var contact: SuggestedContact?
     
     @IBAction private func onAddTapped(_ sender: UIButton) {
-        delegate?.addItem(string: titleLabel.text ?? "")
+        guard let contact = contact else {
+            return
+        }
+        delegate?.addItem(contact: contact, text: titleLabel.text ?? "")
     }
     
+    
+    static func with(contact: SuggestedContact, text: String, type: SuggestionItemType, delegate: PrivateShareSuggestionItemViewDelegate?) -> PrivateShareSuggestionItemView {
+        let view = PrivateShareSuggestionItemView.initFromNib()
+        view.delegate = delegate
+        view.type = type
+        view.contact = contact
+        
+        if type == .phone {
+            let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
+            view.titleLabel.text = text.components(separatedBy: allowedCharacterSet.inverted).joined()
+        } else {
+            view.titleLabel.text = text
+        }
+        
+        return view
+    }
 }
