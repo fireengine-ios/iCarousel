@@ -118,7 +118,10 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         
         suggestionsOperationQueue.cancelAllOperations()
         
-        let operation = PrivateShareSuggestionsOperation(searchText: searchText) { [weak self] result in
+        let fixed = searchText.precomposedStringWithCanonicalMapping
+        let encodedText = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchText
+        
+        let operation = PrivateShareSuggestionsOperation(searchText: encodedText) { [weak self] result in
             switch result {
             case .success(let contacts):
                 self?.removeRemoteSuggestionsView()
