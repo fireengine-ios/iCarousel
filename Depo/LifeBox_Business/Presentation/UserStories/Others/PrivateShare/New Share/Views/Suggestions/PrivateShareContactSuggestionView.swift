@@ -38,17 +38,10 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
     private func setup(with contact: SuggestedContact) {
         nameLabel.text = contact.displayName
         nameView.isHidden = contact.displayName.isEmpty
-
-        if !contact.phones.isEmpty {
-            contact.phones.forEach { item in
-                let item = PrivateShareSuggestionItemView.with(text: item, type: .phone, delegate: self)
-                itemsStackView.addArrangedSubview(item)
-            }
-        }
         
         if !contact.emails.isEmpty {
-            contact.emails.forEach { item in
-                let item = PrivateShareSuggestionItemView.with(text: item, type: .email, delegate: self)
+            contact.emails.forEach { mail in
+                let item = PrivateShareSuggestionItemView.with(contact: contact, text: mail, type: .email, delegate: self)
                 itemsStackView.addArrangedSubview(item)
             }
         }
@@ -58,8 +51,8 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
 }
 
 extension PrivateShareContactSuggestionView: PrivateShareSuggestionItemViewDelegate {
-    func addItem(string: String) {
-        let contact = ContactInfo(name: nameLabel.text ?? "", value: string)
+    func addItem(contact: SuggestedContact, text: String) {
+        let contact = ContactInfo(name: nameLabel.text ?? "", value: text, identifier: contact.identifier, userType: contact.type)
         delegate?.selectContact(info: contact)
     }
 }
