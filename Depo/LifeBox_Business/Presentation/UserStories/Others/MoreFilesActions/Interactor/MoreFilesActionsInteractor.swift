@@ -22,11 +22,11 @@ enum ShareTypes {
     var actionTitle: String {
         switch self {
         case .original:
-            return TextConstants.actionSheetShareOriginalSize
+            return TextConstants.actionShareCopy
         case .link:
             return TextConstants.actionSheetShareShareViaLink
         case .private:
-            return TextConstants.actionSheetSharePrivate
+            return TextConstants.actionSharePrivately
         }
     }
     

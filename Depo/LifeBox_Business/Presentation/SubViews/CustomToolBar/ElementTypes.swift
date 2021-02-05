@@ -279,11 +279,11 @@ enum ElementTypes {
     func actionTitle(fileType: FileType? = nil) -> String {
         switch self {
         case .info:
-            return TextConstants.actionSheetInfo
+            return TextConstants.actionInfo
         case .download, .downloadDocument:
-            return TextConstants.actionSheetDownload
+            return TextConstants.actionDownload
         case .moveToTrash, .moveToTrashShared, .delete:
-            return TextConstants.actionSheetDelete
+            return TextConstants.actionDelete
         case .restore:
             return TextConstants.actionSheetRestore
         case .move:
@@ -327,11 +327,11 @@ enum ElementTypes {
         case .print:
             return TextConstants.tabBarPrintLabel
         case .rename:
-            return TextConstants.actionSheetRename
+            return TextConstants.actionRename
         case .endSharing:
-            return TextConstants.privateSharedEndSharingActionTitle
+            return TextConstants.actionStopSharing
         case .leaveSharing:
-            return TextConstants.privateSharedLeaveSharingActionTitle
+            return TextConstants.actionLeaveSharing
         default:
             return ""
         }

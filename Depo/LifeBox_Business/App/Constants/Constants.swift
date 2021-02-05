@@ -1244,10 +1244,10 @@ extension TextConstants {
     static let actionDelete = NSLocalizedString("business_app_delete_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionRename = NSLocalizedString("business_app_rename_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSharePrivately = NSLocalizedString("business_app_share_privately_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let actionSendCopy = NSLocalizedString("business_app_share_copy_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionShareCopy = NSLocalizedString("business_app_share_copy_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionStopSharing = NSLocalizedString("business_app_stop_sharing_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionLeaveSharing = NSLocalizedString("business_app_leave_sharing_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let actionLeaveInfo = NSLocalizedString("business_app_info_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionInfo = NSLocalizedString("business_app_info_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let downloadSuccess = NSLocalizedString("business_app_download_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteSuccess = NSLocalizedString("business_app_delete_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
