@@ -14,6 +14,8 @@ struct ColorConstants {
     static let bottomBarTint = UIColor(named: "bottomBarTint")
     static let multifileCellSubtitleText = UIColor(named: "multifileCellSubtitleText")
     static let multifileCellTitleText = UIColor(named: "multifileCellTitleText")
+    static let multifileCellBackgroundColor = UIColor(named: "multifileCellBackgroundColor")
+    static let multifileCellBackgroundColorSelected = UIColor(named: "multifileCellBackgroundColorSelected")
     
     //MARK: END
     

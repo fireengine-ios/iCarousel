@@ -75,6 +75,14 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private var itemModel : Item?
     
+    
+    override var isSelected: Bool {
+        willSet {
+            backgroundColor = newValue ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
