@@ -432,7 +432,6 @@ final class GetSharedItemsOperation: Operation {
     }
     
     private func load() {
-        let markAsShared = type.rootType.isContained(in: [.byMe, .withMe])
         loadPage { [weak self] result in
             guard let self = self, !self.isCancelled else {
                 return
@@ -442,7 +441,7 @@ final class GetSharedItemsOperation: Operation {
             
             switch result {
                 case .success(let filesInfo):
-                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0, isShared: markAsShared) }
+                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
                     self.semaphore.signal()
                     
                 case .failed(_):

@@ -911,7 +911,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = "\(fileName)\(fileSize)"
     }
     
-    init(privateShareFileInfo: SharedFileInfo, isShared: Bool) {
+    init(privateShareFileInfo: SharedFileInfo) {
         //TODO: status to enum in SharedFileInfo
         
         if let metadata = privateShareFileInfo.metadata {
@@ -946,7 +946,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         childCount = privateShareFileInfo.childCount
         privateSharePermission = privateShareFileInfo.permissions
-        self.isShared = isShared
+        isShared = privateShareFileInfo.shared
     }
     
     func copyFileData(from item: WrapData) {
