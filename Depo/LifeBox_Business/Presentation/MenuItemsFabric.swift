@@ -16,26 +16,63 @@ final class MenuItemsFabric {
     
     static func generateMenu(for item: BaseDataSourceItem, status: ItemStatus, actionHandler: @escaping ValueHandler<ActionType>) -> UIMenu {
         let actions = ElementTypes.specifiedMoreActionTypes(for: status, item: item)
-        let sortActions = actions.sorted { !$0.isDestructive && $1.isDestructive }
+
+        let infoAction = actions.first(where: { $0 == .info })
+        let nonDesctructiveActions = actions.filter { !$0.isDestructive && $0 != .info }
+        let destructiveActions = actions.filter { $0.isDestructive }
         
-        var items = [UIMenuElement]()
-        sortActions.forEach { type in
+        var infoMenu: UIMenu? = nil
+        if let infoAction = infoAction {
+            let infoItem = UIAction(title: infoAction.actionTitle(),
+                                    image: infoAction.menuImage,
+                                    attributes: infoAction.menuAttributes) { _  in
+                actionHandler(.elementType(infoAction))
+            }
+            
+            infoMenu = UIMenu(title: "",
+                              identifier: UIMenu.Identifier(rawValue: "info"),
+                              options: .displayInline,
+                              children: [infoItem])
+        }
+        
+        
+        var nonDesctructiveItems = [UIMenuElement]()
+        nonDesctructiveActions.forEach { type in
             if type == .share {
                 let shareItems = getShareItems(for: item, actionHandler: actionHandler)
-                items.append(contentsOf: shareItems)
+                nonDesctructiveItems.append(contentsOf: shareItems)
             } else {
                 let item = UIAction(title: type.actionTitle(),
                                     image: type.menuImage,
                                     attributes: type.menuAttributes) { _  in
                     actionHandler(.elementType(type))
                 }
-                items.append(item)
+                nonDesctructiveItems.append(item)
             }
         }
         
+        let desctructiveItems = destructiveActions.compactMap { type in
+            UIAction(title: type.actionTitle(),
+                                image: type.menuImage,
+                                attributes: type.menuAttributes) { _  in
+                actionHandler(.elementType(type))
+            }
+        }
+        
+        let nonDestructiveMenu = UIMenu(title: "",
+                                        identifier: UIMenu.Identifier(rawValue: "non-destructive"),
+                                        options: .displayInline,
+                                        children: nonDesctructiveItems)
+        
+        let destructiveMenu = UIMenu(title: "",
+                                     identifier: UIMenu.Identifier(rawValue: "destructive"),
+                                     options: .displayInline,
+                                     children: desctructiveItems)
+        
+        let validMenus = [infoMenu, nonDestructiveMenu, destructiveMenu].compactMap { $0 }
+        
         return UIMenu(title: "",
-                      options: .displayInline,
-                      children: items)
+                      children: validMenus)
     }
     
     static func getShareItems(for item: BaseDataSourceItem, actionHandler: @escaping ValueHandler<ActionType>) -> [UIMenuElement] {
@@ -55,10 +92,12 @@ extension ElementTypes {
         switch self {
         case .info:
             imageName = "info"
+        case .select:
+            imageName = "select"
         case .delete, .moveToTrash, .moveToTrashShared:
             imageName = "trash"
         case .copy:
-            imageName = "action_copy"
+            imageName = "copy-link"
         case .endSharing:
             imageName = "end-sharing"
         case .leaveSharing:
@@ -66,13 +105,15 @@ extension ElementTypes {
         case .move:
             imageName = "move"
         case .share:
-            imageName = "action_share"
+            imageName = "share-private"
         case .addToFavorites, .removeFromFavorites:
             imageName = "action_favorite"
         case .download, .downloadDocument:
-            imageName = "action_download"
+            imageName = "download"
         case .restore:
             imageName = "action_restore"
+        case .rename:
+            imageName = "rename"
         default:
             return nil
         }

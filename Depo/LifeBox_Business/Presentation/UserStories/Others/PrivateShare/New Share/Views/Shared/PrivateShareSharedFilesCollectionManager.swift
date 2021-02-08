@@ -129,6 +129,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.register(nibSupplementaryView: CollectionViewSpinnerFooter.self,
                                  kind: UICollectionElementKindSectionFooter)
 
+        collectionView?.allowsMultipleSelection = true
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
@@ -294,10 +295,9 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
         
         let isSelectedCell = isSelected(item: item)
-        cell.isSelected = isSelectedCell
-//        cell.canShowSharedIcon = false
+        let isSharedIconAllowed = fileInfoManager.type.rootType.isContained(in: [.myDisk])
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
-        cell.setup(with: item, at: indexPath, menuActionDelegate: self)
+        cell.setup(with: item, at: indexPath, isSharedIconAllowed: isSharedIconAllowed, menuActionDelegate: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

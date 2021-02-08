@@ -30,8 +30,7 @@ enum ShareTypes {
         }
         
         let isOriginallDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.read) ?? false) })
-        //TODO: check write_acl for private share when it's available on BE
-//        let isPrivatelDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.writeAcl) ?? false) })
+        let isPrivateDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.writeAcl) ?? false) })
         
         var allowedTypes = [ShareTypes]()
         
@@ -46,6 +45,11 @@ enum ShareTypes {
         if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits || isOriginallDisabled {
             allowedTypes.remove(.original)
         }
+        
+        if isPrivateDisabled {
+            allowedTypes.remove(.private)
+        }
+        
         
         if items.contains(where: { $0.isLocalItem }) {
             allowedTypes.remove(.private)

@@ -155,9 +155,12 @@ enum ElementTypes {
                 }
             }
             
-            //todo: add write_acl permission check if api is ready
-            if item.isShared {
+            if item.isShared, grantedPermissions.contains(.writeAcl) {
                 item.isOwner ? types.append(.endSharing) : types.append(.leaveSharing)
+            }
+            
+            if grantedPermissions.contains(.setAttribute) {
+                types.append(.rename)
             }
             
             if grantedPermissions.contains(.delete) {

@@ -61,8 +61,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         willSet {
             newValue.spacing = 8
             newValue.axis = .horizontal
-            newValue.alignment = .fill
-            newValue.distribution = .fill
+            newValue.alignment = .center
+            newValue.distribution = .fillEqually
         }
     }
     
@@ -73,7 +73,16 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    
+    @IBOutlet weak var nameEditView: UIView! {
+        willSet {
+            newValue.alpha = 0
+        }
+    }
+    
     private var itemModel : Item?
+    
+    private var isAllowedToShowShared: Bool = false
     
     
     override var isSelected: Bool {
@@ -96,12 +105,14 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         itemModel = nil
         actionDelegate = nil
+        isAllowedToShowShared = false
         
         name.text = ""
         lastModifiedDate.text = ""
         thumbnail.image = nil
-        iconsStack.arrangedSubviews.forEach { iconsStack.removeArrangedSubview($0) }
+        iconsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         selectIconWidth.constant = 0
+        nameEditView.alpha = 0
         
         if #available(iOS 14, *) {
             menuButton.menu = nil
@@ -111,8 +122,9 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         isSelected = false
     }
     
-    func setup(with item: Item, at indexPath: IndexPath, menuActionDelegate: MultifileCollectionViewCellActionDelegate?) {
+    func setup(with item: Item, at indexPath: IndexPath, isSharedIconAllowed: Bool, menuActionDelegate: MultifileCollectionViewCellActionDelegate?) {
         itemModel = item
+        isAllowedToShowShared = isSharedIconAllowed
         actionDelegate = menuActionDelegate
         
         if #available(iOS 14, *) {
@@ -123,6 +135,22 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             self.name.text = item.name
             self.lastModifiedDate.text = item.lastModifiDate?.getDateInFormat(format: "dd/MM/yyyy - HH:mm")
             self.thumbnail.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: item.fileType)
+            
+            self.iconsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            
+            if item.favorites {
+                let isFavoriteIcon = UIImage(named: "favoriteIcon")
+                let isFavoriteView = UIImageView(image: isFavoriteIcon)
+                isFavoriteView.contentMode = .scaleAspectFit
+                self.iconsStack.addArrangedSubview(isFavoriteView)
+            }
+            
+            if item.isShared, self.isAllowedToShowShared {
+                let isSharedIcon = UIImage(named: "sharedIcon")
+                let isSharedView = UIImageView(image: isSharedIcon)
+                isSharedView.contentMode = .scaleAspectFit
+                self.iconsStack.addArrangedSubview(isSharedView)
+            }
         }
     }
     
@@ -175,10 +203,7 @@ extension MultifileCollectionViewCell {
     private func setupLongTapButtonMenu() {
         menuButton.showsMenuAsPrimaryAction = false
         contentView.addSubview(menuButton)
-        menuButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).activate()
-        menuButton.topAnchor.constraint(equalTo: contentView.topAnchor).activate()
-        menuButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).activate()
-        menuButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).activate()
+        menuButton.pinToSuperviewEdges()
     }
     
     private func setupMenu(indexPath: IndexPath) {
@@ -191,7 +216,15 @@ extension MultifileCollectionViewCell {
         menuButton.addTarget(self, action: #selector(onCellSelected(_:)), for: .touchUpInside)
         
         let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
-            self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton)
+            if case .elementType(.rename) = actionType {
+                UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
+                    self?.nameEditView.alpha = 1
+                } completion: { _ in }
+
+            } else {
+                self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton)
+            }
+            
         }
         menuButton.menu = menu
     }

@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,18 +32,43 @@
                             <constraint firstAttribute="width" secondItem="lhn-YO-Hgl" secondAttribute="height" multiplier="1:1" id="c9a-3X-g8G"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vW-Vq-Son">
-                        <rect key="frame" x="85" y="10" width="159" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jr-1W-8M1">
                         <rect key="frame" x="85" y="32" width="159" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vW-Vq-Son">
+                        <rect key="frame" x="85" y="10" width="159" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEs-0c-hyo">
+                        <rect key="frame" x="81" y="0.0" width="263" height="60"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ObC-HL-XPF">
+                                <rect key="frame" x="0.0" y="13" width="167" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYK-wb-84F">
+                                <rect key="frame" x="183" y="16.5" width="64" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="4d7-kf-9jJ"/>
+                                    <constraint firstAttribute="width" constant="64" id="JfB-wm-lk6"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ObC-HL-XPF" firstAttribute="centerY" secondItem="pEs-0c-hyo" secondAttribute="centerY" id="UWT-An-bpw"/>
+                            <constraint firstAttribute="trailing" secondItem="vYK-wb-84F" secondAttribute="trailing" constant="16" id="Xph-vf-oxu"/>
+                            <constraint firstItem="vYK-wb-84F" firstAttribute="leading" secondItem="ObC-HL-XPF" secondAttribute="trailing" constant="16" id="gb7-6q-BLb"/>
+                            <constraint firstItem="ObC-HL-XPF" firstAttribute="leading" secondItem="pEs-0c-hyo" secondAttribute="leading" id="gyF-We-i72"/>
+                            <constraint firstItem="vYK-wb-84F" firstAttribute="centerY" secondItem="pEs-0c-hyo" secondAttribute="centerY" id="miQ-X8-sVY"/>
+                        </constraints>
+                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TkD-39-8w8">
                         <rect key="frame" x="254" y="0.0" width="80" height="60"/>
                         <constraints>
@@ -65,14 +91,18 @@
                 <constraint firstItem="3vW-Vq-Son" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="4Lh-6I-rKi"/>
                 <constraint firstItem="59d-BG-eK1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="5Cn-Hd-pgt"/>
                 <constraint firstItem="9jr-1W-8M1" firstAttribute="top" secondItem="3vW-Vq-Son" secondAttribute="bottom" constant="5" id="5py-I1-mR4"/>
+                <constraint firstAttribute="bottom" secondItem="pEs-0c-hyo" secondAttribute="bottom" id="9CZ-QF-EWV"/>
+                <constraint firstAttribute="trailing" secondItem="pEs-0c-hyo" secondAttribute="trailing" id="AYf-da-PNo"/>
                 <constraint firstAttribute="bottom" secondItem="lhn-YO-Hgl" secondAttribute="bottom" constant="18" id="DKi-bM-8od"/>
                 <constraint firstItem="9jr-1W-8M1" firstAttribute="trailing" secondItem="3vW-Vq-Son" secondAttribute="trailing" id="FP2-ac-26n"/>
                 <constraint firstItem="TkD-39-8w8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KgL-92-Feb"/>
                 <constraint firstAttribute="trailing" secondItem="TkD-39-8w8" secondAttribute="trailing" constant="10" id="QeZ-Ic-EBU"/>
+                <constraint firstItem="pEs-0c-hyo" firstAttribute="leading" secondItem="lhn-YO-Hgl" secondAttribute="trailing" constant="10" id="WlL-cc-lpm"/>
                 <constraint firstItem="59d-BG-eK1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="a3v-F4-EOp"/>
                 <constraint firstItem="3vW-Vq-Son" firstAttribute="leading" secondItem="lhn-YO-Hgl" secondAttribute="trailing" constant="14" id="bZH-3d-oih"/>
                 <constraint firstItem="lhn-YO-Hgl" firstAttribute="leading" secondItem="59d-BG-eK1" secondAttribute="trailing" constant="10" id="fqT-uq-KrD"/>
                 <constraint firstItem="lhn-YO-Hgl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="18" id="ggL-rK-HyH"/>
+                <constraint firstItem="pEs-0c-hyo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hTD-X3-eqb"/>
                 <constraint firstAttribute="bottom" secondItem="CLQ-h7-F9e" secondAttribute="bottom" id="lXX-hp-bSI"/>
                 <constraint firstItem="TkD-39-8w8" firstAttribute="leading" secondItem="3vW-Vq-Son" secondAttribute="trailing" constant="10" id="oAE-4V-rH0"/>
                 <constraint firstAttribute="bottom" secondItem="TkD-39-8w8" secondAttribute="bottom" id="vEn-0j-xOB"/>
@@ -83,6 +113,7 @@
                 <outlet property="iconsStack" destination="TkD-39-8w8" id="K0w-sm-htS"/>
                 <outlet property="lastModifiedDate" destination="9jr-1W-8M1" id="dek-1E-xwh"/>
                 <outlet property="name" destination="3vW-Vq-Son" id="MJs-ko-mSi"/>
+                <outlet property="nameEditView" destination="pEs-0c-hyo" id="i1a-LS-liH"/>
                 <outlet property="selectIcon" destination="59d-BG-eK1" id="McE-V1-Tze"/>
                 <outlet property="selectIconWidth" destination="vht-w9-aUb" id="yqE-0T-xmu"/>
                 <outlet property="thumbnail" destination="lhn-YO-Hgl" id="9Go-X2-VF0"/>
@@ -94,5 +125,8 @@
         <namedColor name="multifileCellSeparator">
             <color red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
