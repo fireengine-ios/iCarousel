@@ -17,9 +17,26 @@ final class MenuItemsFabric {
     static func generateMenu(for item: BaseDataSourceItem, status: ItemStatus, actionHandler: @escaping ValueHandler<ActionType>) -> UIMenu {
         let actions = ElementTypes.specifiedMoreActionTypes(for: status, item: item)
 
+        
+        let selectAction = actions.first(where: { $0 == .select })
         let infoAction = actions.first(where: { $0 == .info })
-        let nonDesctructiveActions = actions.filter { !$0.isDestructive && $0 != .info }
-        let destructiveActions = actions.filter { $0.isDestructive }
+        let sortedActions = actions.sorted { !$0.isDestructive && $1.isDestructive }
+        
+        let mainActions = sortedActions.filter { !$0.isContained(in: [.info, .select]) }
+        
+        var selectMenu: UIMenu? = nil
+        if let selectAction = selectAction {
+            let selectItem = UIAction(title: selectAction.actionTitle(),
+                                    image: selectAction.menuImage,
+                                    attributes: selectAction.menuAttributes) { _  in
+                actionHandler(.elementType(selectAction))
+            }
+            
+            selectMenu = UIMenu(title: "",
+                              identifier: UIMenu.Identifier(rawValue: "select"),
+                              options: .displayInline,
+                              children: [selectItem])
+        }
         
         var infoMenu: UIMenu? = nil
         if let infoAction = infoAction {
@@ -36,40 +53,27 @@ final class MenuItemsFabric {
         }
         
         
-        var nonDesctructiveItems = [UIMenuElement]()
-        nonDesctructiveActions.forEach { type in
+        var mainItems = [UIMenuElement]()
+        mainActions.forEach { type in
             if type == .share {
                 let shareItems = getShareItems(for: item, actionHandler: actionHandler)
-                nonDesctructiveItems.append(contentsOf: shareItems)
+                mainItems.append(contentsOf: shareItems)
             } else {
                 let item = UIAction(title: type.actionTitle(),
                                     image: type.menuImage,
                                     attributes: type.menuAttributes) { _  in
                     actionHandler(.elementType(type))
                 }
-                nonDesctructiveItems.append(item)
+                mainItems.append(item)
             }
         }
         
-        let desctructiveItems = destructiveActions.compactMap { type in
-            UIAction(title: type.actionTitle(),
-                                image: type.menuImage,
-                                attributes: type.menuAttributes) { _  in
-                actionHandler(.elementType(type))
-            }
-        }
+        let mainMenu = UIMenu(title: "",
+                              identifier: UIMenu.Identifier(rawValue: "main"),
+                              options: .displayInline,
+                              children: mainItems)
         
-        let nonDestructiveMenu = UIMenu(title: "",
-                                        identifier: UIMenu.Identifier(rawValue: "non-destructive"),
-                                        options: .displayInline,
-                                        children: nonDesctructiveItems)
-        
-        let destructiveMenu = UIMenu(title: "",
-                                     identifier: UIMenu.Identifier(rawValue: "destructive"),
-                                     options: .displayInline,
-                                     children: desctructiveItems)
-        
-        let validMenus = [infoMenu, nonDestructiveMenu, destructiveMenu].compactMap { $0 }
+        let validMenus = [selectMenu, mainMenu, infoMenu].compactMap { $0 }
         
         return UIMenu(title: "",
                       children: validMenus)
@@ -134,7 +138,7 @@ extension ElementTypes {
     }
     
     var isDestructive: Bool {
-        isContained(in: [.delete, .endSharing, .leaveSharing, .moveToTrash, .moveToTrashShared])
+        isContained(in: [.delete, .moveToTrash, .moveToTrashShared])
     }
 }
 
