@@ -1258,5 +1258,6 @@ extension TextConstants {
     
     static let deleteConfirmationTitle = NSLocalizedString("business_app_delete_confirm_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteConfirmationMessage = NSLocalizedString("business_app_delete_confirm_popup_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let delete = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
 }
