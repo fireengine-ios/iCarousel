@@ -711,13 +711,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         trackScreen(.fileOperationConfirmPopup(.trash))
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
         
-        let message = items.allSatisfy { $0.isOwner } ? TextConstants.deleteFilesText : TextConstants.privateShareMoveToTrashSharedWithMeMessage
         
-        let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                         message: message,
+        let popup = PopUpController.with(title: TextConstants.deleteConfirmationTitle,
+                                         message: TextConstants.deleteConfirmationMessage,
                                          image: .delete,
                                          firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
+                                         secondButtonTitle: TextConstants.delete,
                                          firstAction: cancelHandler,
                                          secondAction: okHandler)
         
