@@ -52,8 +52,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYK-wb-84F">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vYK-wb-84F">
                                 <rect key="frame" x="183" y="16.5" width="64" height="27"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMI-8j-33R">
+                                        <rect key="frame" x="0.0" y="0.0" width="27" height="27"/>
+                                        <state key="normal" title="B"/>
+                                        <connections>
+                                            <action selector="stopRenaming:" destination="gTV-IL-0wX" eventType="touchUpInside" id="WDq-WD-tXg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvY-Fs-gC2">
+                                        <rect key="frame" x="37" y="0.0" width="27" height="27"/>
+                                        <state key="normal" title="B"/>
+                                        <connections>
+                                            <action selector="applyRenaming:" destination="gTV-IL-0wX" eventType="touchUpInside" id="1nL-iN-rUp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="4d7-kf-9jJ"/>
                                     <constraint firstAttribute="width" constant="64" id="JfB-wm-lk6"/>
@@ -110,10 +126,13 @@
             </constraints>
             <size key="customSize" width="344" height="65"/>
             <connections>
+                <outlet property="applyRenamingButton" destination="uvY-Fs-gC2" id="V5F-kE-8s0"/>
+                <outlet property="cancelRenamingButton" destination="XMI-8j-33R" id="2C0-CB-obP"/>
                 <outlet property="iconsStack" destination="TkD-39-8w8" id="K0w-sm-htS"/>
                 <outlet property="lastModifiedDate" destination="9jr-1W-8M1" id="dek-1E-xwh"/>
                 <outlet property="name" destination="3vW-Vq-Son" id="MJs-ko-mSi"/>
                 <outlet property="nameEditView" destination="pEs-0c-hyo" id="i1a-LS-liH"/>
+                <outlet property="renameField" destination="ObC-HL-XPF" id="y4u-f9-re1"/>
                 <outlet property="selectIcon" destination="59d-BG-eK1" id="McE-V1-Tze"/>
                 <outlet property="selectIconWidth" destination="vht-w9-aUb" id="yqE-0T-xmu"/>
                 <outlet property="thumbnail" destination="lhn-YO-Hgl" id="9Go-X2-VF0"/>
