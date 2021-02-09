@@ -452,48 +452,47 @@ final class GetSharedItemsOperation: Operation {
     
     private func loadPage(completion : @escaping ResponseArrayHandler<SharedFileInfo>) {
         switch type {
-            case .myDisk:
-                let accountUuid = SingletonStorage.shared.accountInfo?.uuid ?? ""
-                let rootFolderUuid = ""
-                task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { [weak self] response in
-                    switch response {
-                        case .success(let fileSystem):
-                            self?.rootFolder = fileSystem.parentFolderList.first(where: { $0.id == 0 })
-                            completion(.success(fileSystem.fileList))
-                        case .failed(let error):
-                            completion(.failed(error))
-                    }
+        case .myDisk:
+            let accountUuid = SingletonStorage.shared.accountInfo?.uuid ?? ""
+            let rootFolderUuid = ""
+            task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { [weak self] response in
+                switch response {
+                case .success(let fileSystem):
+                    self?.rootFolder = fileSystem.parentFolderList.first(where: { $0.id == 0 })
+                    completion(.success(fileSystem.fileList))
+                case .failed(let error):
+                    completion(.failed(error))
                 }
-                
-            case .sharedArea:
-                let accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid ?? ""
-                let rootFolderUuid = ""
-                task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { [weak self] response in
-                    switch response {
-                        case .success(let fileSystem):
-                            self?.rootFolder = fileSystem.parentFolderList.first(where: { $0.id == 0 })
-                            completion(.success(fileSystem.fileList))
-                        case .failed(let error):
-                            completion(.failed(error))
-                    }
+            }
+            
+        case .sharedArea:
+            let accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid ?? ""
+            let rootFolderUuid = ""
+            task = privateShareAPIService.getFiles(projectId: accountUuid, folderUUID: rootFolderUuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { [weak self] response in
+                switch response {
+                case .success(let fileSystem):
+                    self?.rootFolder = fileSystem.parentFolderList.first(where: { $0.id == 0 })
+                    completion(.success(fileSystem.fileList))
+                case .failed(let error):
+                    completion(.failed(error))
                 }
-                
-            case .byMe:
-                task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
-                
-            case .withMe:
-                task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
-                
-            case .innerFolder(_, let folder):
-                task = privateShareAPIService.getFiles(projectId: folder.accountUuid, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
-                    switch response {
-                        case .success(let fileSystem):
-                            completion(.success(fileSystem.fileList))
-                        case .failed(let error):
-                            completion(.failed(error))
-                    }
+            }
+            
+        case .byMe:
+            task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+            
+        case .withMe:
+            task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+            
+        case .innerFolder(_, let folder):
+            task = privateShareAPIService.getFiles(projectId: folder.accountUuid, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                switch response {
+                case .success(let fileSystem):
+                    completion(.success(fileSystem.fileList))
+                case .failed(let error):
+                    completion(.failed(error))
                 }
-        break
+            }
         }
     }
 }

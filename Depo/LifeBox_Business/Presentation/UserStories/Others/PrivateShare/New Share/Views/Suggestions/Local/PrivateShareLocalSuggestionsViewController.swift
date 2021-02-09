@@ -12,6 +12,8 @@ import UIKit
 struct ContactInfo {
     let name: String
     let value: String
+    let identifier: String
+    let userType: PrivateShareSubjectType
 }
 
 

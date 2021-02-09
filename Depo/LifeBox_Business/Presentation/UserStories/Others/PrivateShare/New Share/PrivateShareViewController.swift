@@ -24,8 +24,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     @IBOutlet private weak var contentView: UIStackView!
-    @IBOutlet private weak var searchSuggestionsContainer: UIView!
-    @IBOutlet private weak var searchSuggestionsContainerBottomOffset: NSLayoutConstraint!
     
     @IBOutlet private weak var bottomView: UIView! {
         willSet {
@@ -65,15 +63,23 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private var remoteSuggestions = [SuggestedApiContact]()
     private var hasAccess = false
     
+    private var startThresholdDate: Date?
+    
     private lazy var shareApiService = PrivateShareApiServiceImpl()
-    private lazy var localContactsService = ContactsSuggestionServiceImpl()
+    
+    private let suggestionsOperationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
     private lazy var router = RouterVC()
     private lazy var analytics = PrivateShareAnalytics()
     
     override var keyboardHeight: CGFloat {
         didSet {
             let offset = max(0, keyboardHeight - bottomView.frame.height)
-            searchSuggestionsContainerBottomOffset.constant = offset
+//            searchSuggestionsContainerBottomOffset.constant = offset
             scrollView.contentInset.bottom = offset
         }
     }
@@ -88,6 +94,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         needCheckModalPresentationStyle = false
         
         contentView.addArrangedSubview(selectPeopleView)
+        setupSuggestedSubjects(searchText: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -101,36 +108,36 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         selectPeopleView.layoutSubviews()
     }
     
-    private func getRemoteSuggestions() {
-        //load remote suggestion once
-        if !remoteSuggestions.isEmpty {
-            showRemoteSuggestions()
+    private func setupSuggestedSubjects(searchText: String) {
+        
+        if let thresholdDate = startThresholdDate,
+           Date().timeIntervalSince(thresholdDate) * 1000 < 50 {
             return
         }
+        startThresholdDate = Date()
         
-        let group = DispatchGroup()
+        suggestionsOperationQueue.cancelAllOperations()
         
-        group.enter()
-        group.enter()
+        let fixed = searchText.precomposedStringWithCanonicalMapping
+        let encodedText = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? searchText
         
-        localContactsService.fetchAllContacts { [weak self] isAuthorized in
-            self?.hasAccess = isAuthorized
-            group.leave()
-        }
-            
-        shareApiService.getSuggestions { [weak self] result in
+        let operation = PrivateShareSuggestionsOperation(searchText: encodedText) { [weak self] result in
             switch result {
             case .success(let contacts):
+                self?.removeRemoteSuggestionsView()
                 self?.remoteSuggestions = contacts
+                self?.showRemoteSuggestions()
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                if let customError = error as? OperationError,
+                   case OperationError.cancelled = customError {
+                    debugPrint("Private Share operation cancelled")
+                } else {
+                    UIApplication.showErrorAlert(message: error.description)
+                }
+                
             }
-            group.leave()
         }
-        
-        group.notify(queue: .main) { [weak self] in
-            self?.showRemoteSuggestions()
-        }
+        suggestionsOperationQueue.addOperation(operation)
     }
     
     private func showRemoteSuggestions() {
@@ -139,12 +146,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         }
         
         let suggestedContacts = remoteSuggestions.map { contact -> SuggestedContact in
-            if hasAccess {
-                let names = self.localContactsService.getContactName(for: contact.username ?? "", email: contact.email ?? "")
-                return SuggestedContact(with: contact, names: names)
-            } else {
                 return SuggestedContact(with: contact)
-            }
         }
         
         if !contentView.arrangedSubviews.contains(where: { $0 is PrivateShareSuggestionsView }) {
@@ -153,39 +155,10 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         }
     }
     
-    private func searchLocalSuggestions(query: String) {
-        removeRemoteSuggestionsView()
-        
-        let preparedQuery = prepare(searchQuery: query)
-        searchSuggestionController.update(with: preparedQuery)
-    }
-    
     private func removeRemoteSuggestionsView() {
         if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
             suggestionsView.removeFromSuperview()
         }
-    }
-    
-    private func removeLocalSuggestionsView() {
-        if !searchSuggestionsContainer.isHidden {
-            searchSuggestionController.update(with: "")
-            searchSuggestionsContainer.isHidden = true
-        }
-    }
-    
-    //workaround to support search without +9 for turkish msisdn
-    private func prepare(searchQuery: String) -> String {
-        let prefixToCheck = "+90" //Turkey country code
-        let numberOfCharsToSearch = searchQuery.count - prefixToCheck.count + 1
-        
-        guard
-            numberOfCharsToSearch >= minSearchLength,
-            searchQuery.hasPrefix(prefixToCheck)
-        else {
-            return searchQuery
-        }
-        
-        return String(searchQuery.suffix(numberOfCharsToSearch))
     }
     
     private func updateShareButtonIfNeeded() {
@@ -204,24 +177,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         orderedViews.forEach { $0.removeFromSuperview() }
     }
     
-    private func showSearchLocalContactsViewIfNeeded() {
-        guard searchSuggestionsContainer.isHidden else {
-            return
-        }
-        
-        scrollView.contentOffset = .zero
-        if searchSuggestionController.contentView.superview == nil {
-            searchSuggestionsContainer.addSubview(searchSuggestionController.contentView)
-            searchSuggestionController.contentView.translatesAutoresizingMaskIntoConstraints = false
-            searchSuggestionController.contentView.pinToSuperviewEdges()
-        }
-        searchSuggestionsContainer.isHidden = false
-    }
-    
     private func endSearchContacts() {
         view.endEditing(true)
         removeRemoteSuggestionsView()
-        removeLocalSuggestionsView()
     }
 
     //MARK: - Actions
@@ -282,35 +240,17 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func startEditing(text: String) {
-        if text.count < minSearchLength {
-            getRemoteSuggestions()
-            searchSuggestionsContainer.isHidden = true
-        } else if hasAccess {
-            showSearchLocalContactsViewIfNeeded()
-            searchLocalSuggestions(query: text)
-        } else {
-            removeRemoteSuggestionsView()
-        }
+//            searchSuggestionsContainer.isHidden = true
     }
     
     func searchTextDidChange(text: String) {
-        if text.count < minSearchLength {
-            removeLocalSuggestionsView()
-        } else if hasAccess {
-            
-            //we need this trimming for prepare(), so our +90 logic would work with whitespaces
-            let trimmedText = text.filter{ $0 != " " }
-            showSearchLocalContactsViewIfNeeded()
-            searchLocalSuggestions(query: trimmedText)
-        } else {
-            removeRemoteSuggestionsView()
-        }
+        setupSuggestedSubjects(searchText: text)
     }
     
     func hideKeyboard(text: String) {
-        if text.count < minSearchLength {
-            removeRemoteSuggestionsView()
-        }
+//        if text.count < minSearchLength {
+//            removeRemoteSuggestionsView()
+//        }
     }
     
     func addShareContact(_ contact: PrivateShareContact) {
@@ -341,16 +281,6 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
                 UIApplication.showErrorAlert(message: TextConstants.privateShareEmailValidationFailPopUpText)
                 return false
             }
-        }
-        
-        if !Validator.isValid(contactsPhone: text) {
-            UIApplication.showErrorAlert(message: TextConstants.privateSharePhoneValidationFailPopUpText)
-            return false
-        }
-        
-        if !text.contains("+"), !Validator.isValid(turkcellPhone: text) {
-            UIApplication.showErrorAlert(message: TextConstants.privateShareNonTurkishMsisdnPopUpText)
-            return false
         }
         
         return true
@@ -384,6 +314,6 @@ extension PrivateShareViewController: PrivateShareSelectSuggestionsDelegate {
     
     func contactListDidUpdate(isEmpty: Bool) {
         //display container only if local suggestions count > 0
-        searchSuggestionsContainer.isHidden = isEmpty
+//        searchSuggestionsContainer.isHidden = isEmpty
     }
 }

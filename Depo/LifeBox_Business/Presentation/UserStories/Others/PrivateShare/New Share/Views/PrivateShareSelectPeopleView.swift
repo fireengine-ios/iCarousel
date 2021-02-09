@@ -62,7 +62,11 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     private weak var delegate: PrivateShareSelectPeopleViewDelegate?
+    
     private var displayName = ""
+    private var identifier = ""
+    private var type: PrivateShareSubjectType = .knownName
+    
     private var role = PrivateShareUserRole.viewer {
         didSet {
             userRoleButton.setTitle(role.title, for: .normal)
@@ -82,6 +86,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     func setContact(info: ContactInfo) {
         displayName = info.name
         textField.text = info.value
+        identifier = info.identifier
+        type = info.userType
         changeButtonEnabledIfNeeded(text: info.value)
         
         //add contact to shared with section
@@ -91,19 +97,19 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     func clear() {
-        setContact(info: ContactInfo(name: "", value: ""))
+        setContact(info: ContactInfo(name: "", value: "", identifier: "", userType: .knownName))
         role = .viewer
     }
     
     //MARK: - Private methods
     
     @IBAction private func onAddTapped(_ sender: UIButton) {
-        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", type: type, role: role, identifier: identifier)
         delegate?.addShareContact(shareContact)
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {
-        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", type: type, role: role, identifier: identifier)
         delegate?.onUserRoleTapped(contact: shareContact, sender: self)
     }
     
@@ -115,7 +121,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     private func changeButtonEnabledIfNeeded(text: String) {
         let isValid = text.count > 0
-        addButton.isEnabled = isValid
+        //Can asked to disable it for now
+//        addButton.isEnabled = isValid
         userRoleButton.isHidden = !isValid
     }
 }
@@ -134,20 +141,6 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if let text = textField.text, text.count == 0,
-           (string == "+" || string == "0" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
-        {
-            let code = CoreTelephonyService().getCountryCode()
-            let countryCode = code.isEmpty ? "+" : code
-            let isReplacableString = string == "+" || string == "0"
-            textField.text = countryCode
-            return !isReplacableString
-        }
-        
-        return true
-    }
 }
 
 //MARK: - PrivateShareUserRoleViewControllerDelegate

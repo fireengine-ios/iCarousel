@@ -24,6 +24,8 @@ struct SuggestedContact: Equatable {
     let phones: [String]
     let emails: [String]
     let isLocal: Bool
+    let identifier: String
+    let type: PrivateShareSubjectType
     
     var displayName: String {
         if !name.isEmpty, !familyName.isEmpty {
@@ -50,12 +52,14 @@ struct SuggestedContact: Equatable {
         }
         emails = contact.emailAddresses.compactMap { $0.value as String }.filter { Validator.isValid(email: $0) }
         isLocal = true
+        identifier = ""
+        type = .knownName
     }
     
-    init(with contact: SuggestedApiContact, names: LocalContactNames = ("", "")) {
-        source = .phone
-        name = names.givenName
-        familyName = names.familyName
+    init(with contact: SuggestedApiContact) {
+        source = .email
+        name = contact.name ?? ""
+        familyName = contact.username ?? ""
         
         if let phone = contact.username {
             phones = [phone]
@@ -68,8 +72,10 @@ struct SuggestedContact: Equatable {
         } else {
             emails = []
         }
-        
         isLocal = false
+        
+        self.identifier = contact.identifier ?? ""
+        self.type = contact.type ?? .knownName
     }
 }
 
