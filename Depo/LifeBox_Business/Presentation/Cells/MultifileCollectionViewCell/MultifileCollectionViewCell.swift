@@ -11,11 +11,12 @@ import UIKit
 protocol MultifileCollectionViewCellActionDelegate: class {
     func onMenuPress(sender: Any, itemModel: Item?)
     func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?)
+    func rename(item: WrapData, name: String, completion: @escaping BoolHandler)
+    func onLongPress(cell: UICollectionViewCell)
     
     @available(iOS 14, *)
     func onCellSelected(indexPath: IndexPath)
 }
-
 
 //TODO: change font when it's available
 
@@ -23,7 +24,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     static let height: CGFloat = 60.0
     
-    weak var actionDelegate: MultifileCollectionViewCellActionDelegate?
     
     @IBOutlet weak var selectIcon: UIImageView! {
        willSet {
@@ -73,10 +73,18 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
+    private lazy var longTapGestureRecognizer: UILongPressGestureRecognizer = {
+        let recognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongTap(_:)))
+        recognizer.minimumPressDuration = 0.5
+        recognizer.delaysTouchesBegan = true
+        return recognizer
+    }()
     
-    //MARK: NAme editing
+    
+    //MARK: Name editing
     @IBOutlet weak var nameEditView: UIView! {
         willSet {
+            newValue.backgroundColor = ColorConstants.multifileCellBackgroundColorSelectedSolid
             newValue.alpha = 0
         }
     }
@@ -84,12 +92,13 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var renameField: UITextField! {
         willSet {
             newValue.delegate = self
+            newValue.backgroundColor = .white
         }
     }
     
     @IBOutlet weak var cancelRenamingButton: UIButton! {
         willSet {
-            newValue.titleLabel?.text = ""
+            newValue.setTitle("", for: .normal)
             let cancelImage = UIImage(named: "cancelButton")
             newValue.setImage(cancelImage, for: .normal)
         }
@@ -97,22 +106,26 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var applyRenamingButton: UIButton! {
         willSet {
-            newValue.titleLabel?.text = ""
-            let cancelImage = UIImage(named: "applyButton")
-            newValue.setImage(cancelImage, for: .normal)
+            newValue.setTitle("", for: .normal)
+            let applyImage = UIImage(named: "applyButton")
+            newValue.setImage(applyImage, for: .normal)
         }
     }
     
-    private var itemModel : Item?
-    private var isAllowedToShowShared: Bool = false
-    private var pathExtensionLength: Int = 0
+    weak var actionDelegate: MultifileCollectionViewCellActionDelegate?
     
+    private var itemModel : Item?
+    private var isAllowedToShowShared = false
+    private(set) var isRenamingInProgress = false
+    private var isSelectionInProgress = false
+    private var pathExtensionLength = 0
+    
+    //MARK: - Override
     override var isSelected: Bool {
         willSet {
             backgroundColor = newValue ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
         }
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -128,6 +141,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         itemModel = nil
         actionDelegate = nil
         isAllowedToShowShared = false
+        isRenamingInProgress = false
+        isSelectionInProgress = false
         
         name.text = ""
         lastModifiedDate.text = ""
@@ -146,6 +161,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         isSelected = false
     }
     
+    //MARK: - Setup
+    
     func setup(with item: Item, at indexPath: IndexPath, isSharedIconAllowed: Bool, menuActionDelegate: MultifileCollectionViewCellActionDelegate?) {
         itemModel = item
         pathExtensionLength = (item.name as NSString?)?.pathExtension.count ?? 0
@@ -155,6 +172,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         if #available(iOS 14, *) {
             setupMenu(indexPath: indexPath)
         }
+        
+        setupMenuAvailability()
         
         DispatchQueue.toMain {
             self.name.text = item.name
@@ -180,6 +199,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     }
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool) {
+        isSelectionInProgress = isSelectionActive
         self.isSelected = isSelectionActive && isSelected
         
         let widthConstant: CGFloat
@@ -195,86 +215,102 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.selectIconWidth.constant = widthConstant
         } completion: { _ in
+            self.setupMenuAvailability()
             self.layoutIfNeeded()
         }
-        
-        if #available(iOS 14.0, *) {
-            setMenu(isAvailable: !isSelectionActive)
-        }
-
     }
     
     //MARK: - Menu button actions
     
     //ios < 14
     private func setupLongGesture() {
-        let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongTap(_:)))
-        gestureRecognizer.minimumPressDuration = 0.5
-        gestureRecognizer.delaysTouchesBegan = true
-        addGestureRecognizer(gestureRecognizer)
-        
+        addGestureRecognizer(longTapGestureRecognizer)
     }
     
     @objc private func onLongTap(_ sender: Any) {
-        
-        //TODO: handle renaming
-        
         if #available(iOS 14.0, *) {
-            //using button + UIMenu instead
+            //use button + UIMenu
             return
-            
-        } else {
-            actionDelegate?.onMenuPress(sender: sender, itemModel: itemModel)
         }
+        
+        actionDelegate?.onMenuPress(sender: sender, itemModel: itemModel)
+    }
+    
+    
+    //MARK: - Renaming
+    
+    func startRenaming() {
+        isRenamingInProgress = true
+
+        setupMenuAvailability()
+        showRenamingView()
     }
     
     private func showRenamingView() {
-        if #available(iOS 14.0, *) {
-            menuButton.isUserInteractionEnabled = false
-        }
-        
-        renameField.text = self.itemModel?.name
-        renameField.becomeFirstResponder()
-        
-        UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
-            self.nameEditView.alpha = 1
+        DispatchQueue.toMain {
+            self.renameField.text = self.itemModel?.name
+            self.renameField.becomeFirstResponder()
             
-        } completion: { _ in
-            
-            let offset = (self.renameField.text?.count ?? 0) - self.pathExtensionLength - 1
-            if let position = self.renameField.position(from: self.renameField.beginningOfDocument, offset: offset) {
-                self.renameField.selectedTextRange = self.renameField.textRange(from: position, to: position)
+            UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
+                self.nameEditView.alpha = 1
+                self.backgroundColor = ColorConstants.multifileCellBackgroundColorSelected
+            } completion: { _ in
+                let offset = (self.renameField.text?.count ?? 0) - self.pathExtensionLength - 1
+                if let position = self.renameField.position(from: self.renameField.beginningOfDocument, offset: offset) {
+                    self.renameField.selectedTextRange = self.renameField.textRange(from: position, to: position)
+                }
             }
         }
     }
     
     private func hideRenamignView() {
-        
-        if #available(iOS 14.0, *) {
-            self.menuButton.isUserInteractionEnabled = true
-        }
+        endEditing(true)
         
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
             self.nameEditView.alpha = 0
-            
+            self.backgroundColor = ColorConstants.multifileCellBackgroundColor
         } completion: { _ in
             //
         }
     }
     
     @IBAction func stopRenaming(_ sender: Any) {
+        isRenamingInProgress = false
         hideRenamignView()
-        //
+        setupMenuAvailability()
     }
     
     
     @IBAction func applyRenaming(_ sender: Any) {
+        isRenamingInProgress = false
         hideRenamignView()
-        //
+        setupMenuAvailability()
+        
+        guard let name = renameField.text, name.count > pathExtensionLength else {
+            return
+        }
+        
+        if let item = itemModel {
+            actionDelegate?.rename(item: item, name: name, completion: { [weak self] renamed in
+                if renamed {
+                    self?.itemModel?.name = name
+                }
+            })
+        }
+        
     }
     
+    private func setupMenuAvailability() {
+        if #available(iOS 14.0, *) {
+            setMenu(isAvailable: !(isSelectionInProgress || isRenamingInProgress))
+            setMenuButtonInteraction(isEnabled: !isRenamingInProgress)
+        } else {
+            longTapGestureRecognizer.isEnabled = !(isSelectionInProgress || isRenamingInProgress)
+        }
+    }
 }
 
+//MARK: - ios 14 pull down menu
 @available(iOS 14, *)
 extension MultifileCollectionViewCell {
     
@@ -295,7 +331,7 @@ extension MultifileCollectionViewCell {
         
         let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
             if case .elementType(.rename) = actionType {
-                self?.showRenamingView()
+                self?.startRenaming()
             } else {
                 self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton)
             }
@@ -312,6 +348,10 @@ extension MultifileCollectionViewCell {
         }
     }
     
+    private func setMenuButtonInteraction(isEnabled: Bool) {
+        menuButton.isUserInteractionEnabled = isEnabled
+    }
+    
     @objc private func onCellSelected(_ sender: Any) {
         guard let button = sender as? IndexPathButton, let indexPath = button.indexPath else {
             return
@@ -322,6 +362,7 @@ extension MultifileCollectionViewCell {
 }
 
 
+//MARK: - UITextFieldDelegate
 extension MultifileCollectionViewCell: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textLength = textField.text?.count, pathExtensionLength > 0 else {
@@ -332,6 +373,7 @@ extension MultifileCollectionViewCell: UITextFieldDelegate {
 }
 
 
+//MARK: - IndexPathButton
 final class IndexPathButton: UIButton {
     private(set) var indexPath: IndexPath?
     

@@ -38,6 +38,12 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TkD-39-8w8">
+                        <rect key="frame" x="254" y="0.0" width="80" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="rRN-9P-ISR"/>
+                        </constraints>
+                    </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vW-Vq-Son">
                         <rect key="frame" x="85" y="10" width="159" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -48,49 +54,42 @@
                         <rect key="frame" x="81" y="0.0" width="263" height="60"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ObC-HL-XPF">
-                                <rect key="frame" x="0.0" y="13" width="167" height="34"/>
+                                <rect key="frame" x="0.0" y="13" width="173" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vYK-wb-84F">
-                                <rect key="frame" x="183" y="16.5" width="64" height="27"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMI-8j-33R">
-                                        <rect key="frame" x="0.0" y="0.0" width="27" height="27"/>
-                                        <state key="normal" title="B"/>
-                                        <connections>
-                                            <action selector="stopRenaming:" destination="gTV-IL-0wX" eventType="touchUpInside" id="WDq-WD-tXg"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvY-Fs-gC2">
-                                        <rect key="frame" x="37" y="0.0" width="27" height="27"/>
-                                        <state key="normal" title="B"/>
-                                        <connections>
-                                            <action selector="applyRenaming:" destination="gTV-IL-0wX" eventType="touchUpInside" id="1nL-iN-rUp"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMI-8j-33R">
+                                <rect key="frame" x="183" y="16.5" width="27" height="27"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="4d7-kf-9jJ"/>
-                                    <constraint firstAttribute="width" constant="64" id="JfB-wm-lk6"/>
+                                    <constraint firstAttribute="width" secondItem="XMI-8j-33R" secondAttribute="height" multiplier="1:1" id="Ekk-81-xpp"/>
+                                    <constraint firstAttribute="height" constant="27" id="Rsc-ZJ-FHG"/>
                                 </constraints>
-                            </stackView>
+                                <connections>
+                                    <action selector="stopRenaming:" destination="gTV-IL-0wX" eventType="touchUpInside" id="wOK-4R-f6n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvY-Fs-gC2">
+                                <rect key="frame" x="220" y="16.5" width="27" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="uvY-Fs-gC2" secondAttribute="height" multiplier="1:1" id="HEV-SS-lLY"/>
+                                    <constraint firstAttribute="height" constant="27" id="iLR-v8-g12"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="applyRenaming:" destination="gTV-IL-0wX" eventType="touchUpInside" id="9Ky-oP-LBL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="uvY-Fs-gC2" firstAttribute="leading" secondItem="XMI-8j-33R" secondAttribute="trailing" constant="10" id="OqL-iY-KX4"/>
                             <constraint firstItem="ObC-HL-XPF" firstAttribute="centerY" secondItem="pEs-0c-hyo" secondAttribute="centerY" id="UWT-An-bpw"/>
-                            <constraint firstAttribute="trailing" secondItem="vYK-wb-84F" secondAttribute="trailing" constant="16" id="Xph-vf-oxu"/>
-                            <constraint firstItem="vYK-wb-84F" firstAttribute="leading" secondItem="ObC-HL-XPF" secondAttribute="trailing" constant="16" id="gb7-6q-BLb"/>
+                            <constraint firstAttribute="trailing" secondItem="uvY-Fs-gC2" secondAttribute="trailing" constant="16" id="YfF-v1-AW0"/>
+                            <constraint firstItem="XMI-8j-33R" firstAttribute="centerY" secondItem="pEs-0c-hyo" secondAttribute="centerY" id="aff-P3-utA"/>
                             <constraint firstItem="ObC-HL-XPF" firstAttribute="leading" secondItem="pEs-0c-hyo" secondAttribute="leading" id="gyF-We-i72"/>
-                            <constraint firstItem="vYK-wb-84F" firstAttribute="centerY" secondItem="pEs-0c-hyo" secondAttribute="centerY" id="miQ-X8-sVY"/>
+                            <constraint firstItem="uvY-Fs-gC2" firstAttribute="centerY" secondItem="pEs-0c-hyo" secondAttribute="centerY" id="iQn-r0-lnl"/>
+                            <constraint firstItem="XMI-8j-33R" firstAttribute="leading" secondItem="ObC-HL-XPF" secondAttribute="trailing" constant="10" id="oCB-uG-q5A"/>
                         </constraints>
                     </view>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TkD-39-8w8">
-                        <rect key="frame" x="254" y="0.0" width="80" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="80" id="rRN-9P-ISR"/>
-                        </constraints>
-                    </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLQ-h7-F9e">
                         <rect key="frame" x="10" y="59" width="324" height="1"/>
                         <color key="backgroundColor" name="multifileCellSeparator"/>
@@ -126,8 +125,8 @@
             </constraints>
             <size key="customSize" width="344" height="65"/>
             <connections>
-                <outlet property="applyRenamingButton" destination="uvY-Fs-gC2" id="V5F-kE-8s0"/>
-                <outlet property="cancelRenamingButton" destination="XMI-8j-33R" id="2C0-CB-obP"/>
+                <outlet property="applyRenamingButton" destination="uvY-Fs-gC2" id="Mza-SY-isO"/>
+                <outlet property="cancelRenamingButton" destination="XMI-8j-33R" id="nNg-1D-dnr"/>
                 <outlet property="iconsStack" destination="TkD-39-8w8" id="K0w-sm-htS"/>
                 <outlet property="lastModifiedDate" destination="9jr-1W-8M1" id="dek-1E-xwh"/>
                 <outlet property="name" destination="3vW-Vq-Son" id="MJs-ko-mSi"/>

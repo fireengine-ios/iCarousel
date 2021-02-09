@@ -82,6 +82,15 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         reloadVisibleCells()
     }
     
+    func startRenaming(item: WrapData) {
+        if
+            let index = fileInfoManager.splittedItems.getArray().indices(of: item),
+            let cell = collectionView?.cellForItem(at: IndexPath(row: index.1, section: index.0)) as? MultifileCollectionViewCell
+        {
+            cell.startRenaming()
+        }
+    }
+    
     func reload(type: ReloadType) {
         switch type {
             case .full:
@@ -311,6 +320,10 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         onDidSelectItem(at: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        onDidSelectItem(at: indexPath)
+    }
 
     //MARK: Helpers
     private func item(at indexPath: IndexPath) -> WrapData? {
@@ -387,7 +400,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     private func onDidSelectItem(at indexPath: IndexPath) {
-        guard let cell = collectionView?.cellForItem(at: indexPath) as? MultifileCollectionViewCell, let item = item(at: indexPath) else {
+        guard let cell = collectionView?.cellForItem(at: indexPath) as? MultifileCollectionViewCell, !cell.isRenamingInProgress, let item = item(at: indexPath) else {
             return
         }
         
@@ -549,7 +562,10 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 }
 
 //MARK: - LBCellsDelegate, MultifileCollectionViewCellActionDelegate
-extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, MultifileCollectionViewCellActionDelegate {
+extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellActionDelegate {
+    func rename(item: WrapData, name: String, completion: @escaping BoolHandler) {
+        fileInfoManager.rename(item: item, name: name, completion: completion)
+    }
     
     @available(iOS 14, *)
     func onCellSelected(indexPath: IndexPath) {
@@ -559,7 +575,6 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, MultifileCo
             self.onDidSelectItem(at: indexPath)
         }
     }
-    
     
     func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?) {
         guard let item = itemModel else {
@@ -575,10 +590,6 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, MultifileCo
         }
         
         delegate?.showActions(for: item, sender: sender)
-    }
-    
-    func canLongPress() -> Bool {
-        return fileInfoManager.type.rootType != .withMe
     }
     
     func onLongPress(cell: UICollectionViewCell) {
@@ -599,13 +610,5 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, MultifileCo
                 fileInfoManager.selectItem(at: indexPath)
             }
         }
-    }
-    
-    func morebuttonGotPressed(sender: Any, itemModel: Item?) {
-        guard let item = itemModel else {
-            return
-        }
-        
-        delegate?.showActions(for: item, sender: sender)
     }
 }

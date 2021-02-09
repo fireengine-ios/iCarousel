@@ -318,6 +318,21 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func rename(item: WrapData, name: String, completion: @escaping BoolHandler) {
+        privateShareAPIService.renameItem(projectId: item.accountUuid, uuid: item.uuid, name: name) { [weak self] response in
+            
+            ItemOperationManager.default.didRenameItem(item)
+            
+            switch response {
+                case .success:
+                    completion(true)
+                case .failed(let error):
+                    //show error?
+                    completion(false)
+            }
+        }
+    }
+    
     //MARK: - Private
     
     private func cleanAll() {

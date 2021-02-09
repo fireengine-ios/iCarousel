@@ -59,6 +59,13 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     //MARK: - Override
     
+    override var keyboardHeight: CGFloat {
+        willSet {
+            let offset = max(0, newValue + 25)
+            collectionView?.contentInset.bottom = offset
+        }
+    }
+    
     deinit {
         CardsManager.default.removeViewForNotification(view: cardsContainer)
         ItemOperationManager.default.stopUpdateView(view: self)
@@ -354,6 +361,10 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
         selectedItemsCallback(collectionManager.selectedItems())
     }
     
+    func renamingSelected(item: Item) {
+        collectionManager.startRenaming(item: item)
+    }
+    
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch shareType.rootType {
             case .withMe:
@@ -422,6 +433,10 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
         if shareType.rootType == .withMe {
             collectionManager.delete(uuids: [uuid])
         }
+    }
+    
+    func didRenameItem(_ item: BaseDataSourceItem) {
+        collectionManager.reload(type: .onOperationFinished)
     }
 }
 
