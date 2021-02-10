@@ -19,7 +19,7 @@ struct SuggestedApiContact: Codable {
 }
 
 struct SharedFileInfo: Codable {
-    let shared: Bool
+    let shared: Bool?
     let createdDate: Date?
     let lastModifiedDate: Date?
     let id: Int64
