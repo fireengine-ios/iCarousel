@@ -145,7 +145,7 @@ final class NetmeraService {
     }
     
     static func sendEvent(event: NetmeraEvent) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             Netmera.send(event)
         }
     }
