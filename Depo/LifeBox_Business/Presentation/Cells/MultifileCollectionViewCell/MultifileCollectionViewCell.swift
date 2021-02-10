@@ -317,7 +317,10 @@ extension MultifileCollectionViewCell {
     private func setupLongTapButtonMenu() {
         menuButton.showsMenuAsPrimaryAction = false
         contentView.addSubview(menuButton)
-        menuButton.pinToSuperviewEdges()
+        menuButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).activate()
+        menuButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).activate()
+        menuButton.heightAnchor.constraint(equalToConstant: 1).activate()
+        menuButton.widthAnchor.constraint(equalToConstant: 1).activate()
     }
     
     private func setupMenu(indexPath: IndexPath) {
@@ -392,5 +395,9 @@ final class IndexPathButton: UIButton {
     
     func change(indexPath: IndexPath?) {
         self.indexPath = indexPath
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        return superview?.point(inside: convert(point, to: superview), with: event) ?? false
     }
 }

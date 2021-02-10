@@ -570,7 +570,7 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
     @available(iOS 14, *)
     func onCellSelected(indexPath: IndexPath) {
         DispatchQueue.toMain {
-            self.collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+            self.collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: [])
             //collection delegate didSelectItem will not be called
             self.onDidSelectItem(at: indexPath)
         }
