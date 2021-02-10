@@ -19,10 +19,11 @@ protocol BaseItemInputPassingProtocol: class {
     func selectAllModeSelected()
     func deSelectAll()
     func stopModeSelected()
-
+    func renamingSelected(item: Item)
     func printSelected()
     
     func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>)
+    
 }
 
 protocol BaseItemOuputPassingProtocol: class {
@@ -36,6 +37,10 @@ extension BaseItemInputPassingProtocol {
         DispatchQueue.main.async {
             UIApplication.showErrorAlert(message: message)
         }
+    }
+    
+    func renamingSelected(item: Item) {
+        //
     }
     
     func successPopupClosed() {}

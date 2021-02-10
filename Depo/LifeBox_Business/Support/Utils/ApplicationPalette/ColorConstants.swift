@@ -11,7 +11,16 @@ import UIKit
 struct ColorConstants {
     //MARK: Business App specific
     
-    static let bottomBarTint = UIColor(named: "bottomBarTint")
+    static let bottomBarTint = UIColor(named: "bottomBarTint")!
+    static let multifileCellSubtitleText = UIColor(named: "multifileCellSubtitleText")!
+    static let multifileCellTitleText = UIColor(named: "multifileCellTitleText")!
+    static let multifileCellBackgroundColor = UIColor(named: "multifileCellBackgroundColor")!
+    static let multifileCellBackgroundColorSelected = UIColor(named: "multifileCellBackgroundColorSelected")!
+    static let multifileCellBackgroundColorSelectedSolid = UIColor(named: "multifileCellBackgroundColorSelectedSolid")!
+    static let confirmationPopupTitle = UIColor(named: "confirmationPopupTitle")!
+    static let confirmationPopupMessage = UIColor(named: "confirmationPopupMessage")!
+    static let confirmationPopupButton = UIColor(named: "confirmationPopupButton")!
+    
     
     //MARK: END
     

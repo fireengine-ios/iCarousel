@@ -7,11 +7,18 @@
 //
 
 protocol GridListTopBarDelegate: class {
-    
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType)
     func representationChanged(viewType: MoreActionsConfig.ViewType)
-    
 }
+
+
+extension GridListTopBarDelegate {
+    func representationChanged(viewType: MoreActionsConfig.ViewType) {
+        //
+    }
+}
+
+
 
 class GridListTopBar: ViewController {
     
