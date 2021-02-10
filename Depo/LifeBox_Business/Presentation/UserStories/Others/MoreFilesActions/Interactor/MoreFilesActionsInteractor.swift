@@ -454,28 +454,29 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func download(item: [BaseDataSourceItem]) {
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            showAccessAlert()
-            return
-        }
-        
-        if let item = item as? [Item] {
-            
-            if let firstItem = item.first {
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: item.count))
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] isAllowed, _ in
+            guard let self = self else {
+                return
             }
             
-            let successAction = { [weak self] in
-                if item.allSatisfy ({ !$0.isOwner }) {
-                    self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
+            if let item = item as? [Item] {
+                
+                if let firstItem = item.first {
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: item.count))
                 }
-                self?.successAction(elementType: .download, relatedItems: item)()
+                
+                let successAction = { [weak self] in
+                    if item.allSatisfy ({ !$0.isOwner }) {
+                        self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
+                    }
+                    self?.successAction(elementType: .download, relatedItems: item)()
+                }
+                
+                self.fileService.download(items: item, toPath: "",
+                                     success: successAction,
+                                     fail: self.failAction(elementType: .download))
+                
             }
-            
-            fileService.download(items: item, toPath: "",
-                                 success: successAction,
-                                 fail: failAction(elementType: .download))
-            
         }
     }
     
