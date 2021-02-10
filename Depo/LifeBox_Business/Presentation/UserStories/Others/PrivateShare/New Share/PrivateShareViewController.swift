@@ -206,12 +206,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
 
     @IBAction private func onShareTapped(_ sender: Any) {
-        guard let accountUuid = SingletonStorage.shared.accountInfo?.uuid else {
-            return
-        }
         
         remoteSuggestions = []
-        let sharedItems = items.compactMap { PrivateShareObjectItem(accountUuid: accountUuid, uuid: $0.uuid) }
+        let sharedItems = items.compactMap { PrivateShareObjectItem(accountUuid: $0.accountUuid, uuid: $0.uuid) }
         let shareObject = PrivateShareObject(items: sharedItems,
                                              invitationMessage: messageView.message,
                                              invitees: shareWithView.contacts,
