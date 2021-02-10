@@ -39,7 +39,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var thumbnail: UIImageView! {
         willSet {
-            newValue.contentMode = .scaleAspectFill
+            newValue.contentMode = .scaleAspectFit
         }
     }
     
