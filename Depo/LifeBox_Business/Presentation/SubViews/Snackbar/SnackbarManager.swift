@@ -105,9 +105,9 @@ final class SnackbarManager {
         setupObserving()
     }
 
-    func show(elementType: ElementTypes, relatedItems: [BaseDataSourceItem] = [], itemsType: DivorseItems? = nil, handler: VoidHandler? = nil) {
+    func show(elementType: ElementTypes, relatedItems: [BaseDataSourceItem] = [], handler: VoidHandler? = nil) {
         guard let type = SnackbarType(operationType: elementType),
-            let message = elementType.snackbarSuccessMessage(relatedItems: relatedItems, divorseItems: itemsType) else {
+            let message = elementType.snackbarSuccessMessage(relatedItems: relatedItems) else {
             assertionFailure()
             return
         }

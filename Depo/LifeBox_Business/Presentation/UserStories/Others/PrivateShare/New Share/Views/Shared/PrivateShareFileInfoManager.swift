@@ -318,6 +318,21 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func rename(item: WrapData, name: String, completion: @escaping BoolHandler) {
+        privateShareAPIService.renameItem(projectId: item.accountUuid, uuid: item.uuid, name: name) { [weak self] response in
+            
+            ItemOperationManager.default.didRenameItem(item)
+            
+            switch response {
+                case .success:
+                    completion(true)
+                case .failed(let error):
+                    //show error?
+                    completion(false)
+            }
+        }
+    }
+    
     //MARK: - Private
     
     private func cleanAll() {
@@ -432,7 +447,6 @@ final class GetSharedItemsOperation: Operation {
     }
     
     private func load() {
-        let markAsShared = type.rootType.isContained(in: [.byMe, .withMe])
         loadPage { [weak self] result in
             guard let self = self, !self.isCancelled else {
                 return
@@ -442,7 +456,7 @@ final class GetSharedItemsOperation: Operation {
             
             switch result {
                 case .success(let filesInfo):
-                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0, isShared: markAsShared) }
+                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
                     self.semaphore.signal()
                     
                 case .failed(_):

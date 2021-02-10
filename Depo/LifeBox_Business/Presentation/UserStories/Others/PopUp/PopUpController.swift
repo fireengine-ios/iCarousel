@@ -22,7 +22,7 @@ final class PopUpController: BasePopUpController {
     //MARK: IBOutlet
     @IBOutlet private weak var containerView: UIView! {
         didSet {
-            containerView.layer.cornerRadius = 5
+            containerView.layer.cornerRadius = 10
             
             containerView.layer.shadowColor = UIColor.black.cgColor
             containerView.layer.shadowRadius = 10
@@ -33,22 +33,21 @@ final class PopUpController: BasePopUpController {
     
     @IBOutlet private weak var buttonsView: UIView! {
         didSet {
-            buttonsView.layer.cornerRadius = 5
             buttonsView.layer.masksToBounds = true
         }
     }
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = ColorConstants.darkBlueColor
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            titleLabel.textColor = ColorConstants.confirmationPopupTitle
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
         }
     }
     
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
-            messageLabel.textColor = ColorConstants.lightText
-            messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+            messageLabel.textColor = ColorConstants.confirmationPopupMessage
+            messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         }
     }
     
@@ -114,7 +113,7 @@ final class PopUpController: BasePopUpController {
     private func setupButtonState() {
         switch buttonState {
         case .single:
-            setup(singleButton)
+            setup(singleButton, filled: true)
             singleButton.setTitle(singleButtonTitle, for: .normal)
             
             firstButton.isHidden = true
@@ -122,8 +121,8 @@ final class PopUpController: BasePopUpController {
             singleButton.isHidden = false
             
         case .twin:
-            setup(firstButton)
-            setup(secondButton)
+            setup(firstButton, filled: false)
+            setup(secondButton, filled: true)
             firstButton.setTitle(firstButtonTitle, for: .normal)
             secondButton.setTitle(secondButtonTitle, for: .normal)
             
@@ -152,14 +151,20 @@ final class PopUpController: BasePopUpController {
         }
     }
     
-    private func setup(_ button: InsetsButton) {
+    private func setup(_ button: InsetsButton, filled: Bool) {
+        let titleColor = filled ? UIColor.white : ColorConstants.confirmationPopupButton
+        let titleColorHigh = filled ? titleColor.lighter(by: 30) : titleColor.darker(by: 30)
+        let backgroundColor = filled ? ColorConstants.confirmationPopupButton : UIColor.white
+        let borderColor = filled ? UIColor.white.cgColor : ColorConstants.confirmationPopupButton.cgColor
+        
         button.isExclusiveTouch = true
-        button.setTitleColor(ColorConstants.blueColor, for: .normal)
-        button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
-        button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        button.layer.borderColor = ColorConstants.blueColor.cgColor
+        button.setTitleColor(titleColor, for: .normal)
+        button.backgroundColor = backgroundColor
+        button.setTitleColor(titleColorHigh, for: .highlighted)
+        button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        button.layer.borderColor = borderColor
         button.layer.borderWidth = 1
+        button.layer.cornerRadius = 5
         button.adjustsFontSizeToFitWidth()
         
         let inset: CGFloat = 2
