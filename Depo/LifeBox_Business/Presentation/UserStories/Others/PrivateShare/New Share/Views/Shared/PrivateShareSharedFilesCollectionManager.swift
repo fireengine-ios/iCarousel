@@ -132,8 +132,6 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private func setupCollection() {
         collectionView?.register(nibCell: MultifileCollectionViewCell.self)
-        collectionView?.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self,
-                                 kind: UICollectionElementKindSectionHeader)
         
         collectionView?.register(nibSupplementaryView: CollectionViewSpinnerFooter.self,
                                  kind: UICollectionElementKindSectionFooter)
@@ -457,14 +455,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let sortingRule = fileInfoManager.sorting.sortingRules
-        guard sortingRule != .size else {
-            return CGSize.zero
-        }
-        
-        let sectionIsEmpty = fileInfoManager.splittedItems[section]?.isEmpty ?? true
-        let height: CGFloat = sectionIsEmpty ? 0 : 50
-        return CGSize(width: collectionView.contentSize.width, height: height)
+        return CGSize.zero
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -480,38 +471,9 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
                 
                 return footerSpinner
                 
-            case UICollectionElementKindSectionHeader:
-                let sectionHeader = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
-                
-                let title = headerTitle(for: indexPath.section)
-                sectionHeader.setText(text: title)
-                return sectionHeader
-                
             default:
                 assertionFailure()
                 return UICollectionReusableView()
-        }
-    }
-    
-    //MARK: Helpers
-    private func headerTitle(for section: Int) -> String {
-        let furstSectionItemIndexPath = IndexPath(row: 0, section: section)
-        guard let item = item(at: furstSectionItemIndexPath) else {
-            return ""
-        }
-        
-        switch fileInfoManager.sorting {
-            case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp, .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
-                return (item.creationDate ?? Date()).getDateInTextForCollectionViewHeader()
-                
-            case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
-                return item.name?.firstLetter ?? ""
-                
-            case .sizeAZ, .sizeZA:
-                return ""
-                
-            case .metaDataTimeUp, .metaDataTimeDown:
-                return (item.creationDate ?? Date()).getDateInTextForCollectionViewHeader()
         }
     }
 }
