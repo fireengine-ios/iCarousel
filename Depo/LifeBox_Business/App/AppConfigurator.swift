@@ -57,7 +57,7 @@ final class AppConfigurator {
         AuthenticationService().logout {
             DispatchQueue.main.async {
                 let router = RouterVC()
-                router.setNavigationController(controller: router.onboardingScreen)
+                router.setNavigationController(controller: router.loginScreen)
             }
         }
     }

@@ -390,19 +390,6 @@ class RouterVC: NSObject {
         let controller = SplashModuleInitializer.initializeViewController(with: "SplashViewController")
         return controller
     }
-
-    
-    // MARK: Onboarding
-    
-    var onboardingScreen: UIViewController? {
-        let conf = IntroduceModuleInitializer()
-        let viewController = IntroduceViewController(nibName: "IntroduceViewController",
-                                                     bundle: nil)
-        conf.introduceViewController = viewController
-        conf.setupVC()
-        
-        return createRootNavigationController(controller: viewController)
-    }
     
     
     // MARK: Registartion
@@ -417,11 +404,11 @@ class RouterVC: NSObject {
     
     var loginScreen: UIViewController? {
         
-        let inicializer = LoginModuleInitializer()
+        let initializer = LoginModuleInitializer()
         let loginController = LoginViewController(nibName: "LoginViewController",
                                                   bundle: nil)
-        inicializer.loginViewController = loginController
-        inicializer.setupVC()
+        initializer.loginViewController = loginController
+        initializer.setupVC()
         return loginController
     }
     
