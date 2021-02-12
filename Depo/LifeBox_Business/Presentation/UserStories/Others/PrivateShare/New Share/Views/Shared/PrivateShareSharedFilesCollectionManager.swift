@@ -50,6 +50,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
     
+    
+    
     var rootPermissions: SharedItemPermission? {
         return fileInfoManager.rootFolder?.permissions
     }
@@ -527,6 +529,14 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellActionDelegate {
     func rename(item: WrapData, name: String, completion: @escaping BoolHandler) {
         fileInfoManager.rename(item: item, name: name, completion: completion)
+    }
+    
+    func delete(item: WrapData) {
+        
+    }
+    
+    func showInfo(item: WrapData) {
+        
     }
     
     @available(iOS 14, *)
