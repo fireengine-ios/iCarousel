@@ -157,8 +157,15 @@ enum ElementTypes {
                 types.append(.share)
             }
             
-            if item.isShared, grantedPermissions.contains(.writeAcl) {
-                item.isOwner ? types.append(.endSharing) : types.append(.leaveSharing)
+            // TODO: - Add / Delete permission check  //grantedPermissions.contains(.writeAcl)
+            if item.isShared {
+                if item.privateShareType == .withMe {
+                    types.append(.leaveSharing)
+                }
+                
+                if item.privateShareType == .byMe {
+                    types.append(.endSharing)
+                }
             }
             
             if grantedPermissions.contains(.setAttribute) {
