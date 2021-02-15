@@ -430,11 +430,15 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             
             delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
             
-        } else if checkIfCanShowDetail(for: item) {
-            if item.fileType == .audio {
-                showAudioPlayer(with: item)
-            } else {
-                showDetailView(for: item)
+        } else {
+            cell.setSelection(isSelectionActive: false, isSelected: false)
+            if checkIfCanShowDetail(for: item) {
+                
+                if item.fileType == .audio {
+                    showAudioPlayer(with: item)
+                } else {
+                    showDetailView(for: item)
+                }
             }
         }
     }
