@@ -42,6 +42,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func operationCancelled(type: ElementTypes) {
         completeAsyncOperationEnableScreen()
+        basePassingPresenter?.operationCancelled(withType: type)
     }
     
     func dismiss(animated: Bool) {} /// overriding

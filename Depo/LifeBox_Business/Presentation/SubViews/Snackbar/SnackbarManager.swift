@@ -80,7 +80,8 @@ enum SnackbarType {
              .restore,
              .endSharing,
              .leaveSharing,
-             .moveToTrashShared:
+             .moveToTrashShared,
+             .rename:
             self = .nonCritical
             
         case .moveToTrash:

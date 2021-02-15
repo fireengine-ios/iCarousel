@@ -17,6 +17,9 @@ struct ColorConstants {
     static let multifileCellBackgroundColor = UIColor(named: "multifileCellBackgroundColor")!
     static let multifileCellBackgroundColorSelected = UIColor(named: "multifileCellBackgroundColorSelected")!
     static let multifileCellBackgroundColorSelectedSolid = UIColor(named: "multifileCellBackgroundColorSelectedSolid")!
+    static let multifileCellInfoView = UIColor(named: "multifileCellInfoView")!
+    static let multifileCellDeletionView = UIColor(named: "multifileCellDeletionView")!
+    
     static let confirmationPopupTitle = UIColor(named: "confirmationPopupTitle")!
     static let confirmationPopupMessage = UIColor(named: "confirmationPopupMessage")!
     static let confirmationPopupButton = UIColor(named: "confirmationPopupButton")!
@@ -251,6 +254,10 @@ extension UIFont {
     }
     
     static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "TurkcellSaturaReg", size: size)!
+        return UIFont(name: "GT America Trial Rg", size: size)!
+    }
+    
+    static func GTAmericaStandardRegularFont(size: CGFloat = 18) -> UIFont {
+        return UIFont(name: "GT America Trial Rg", size: size)!
     }
 }

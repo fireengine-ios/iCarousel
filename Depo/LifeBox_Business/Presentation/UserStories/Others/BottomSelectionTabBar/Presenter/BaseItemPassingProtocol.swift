@@ -10,6 +10,7 @@ protocol BaseItemInputPassingProtocol: class {
     
     func operationFinished(withType type: ElementTypes, response: Any?)
     func operationFailed(withType type: ElementTypes)
+    func operationCancelled(withType type: ElementTypes)
     func successPopupClosed()
     func successPopupWillAppear()
     
@@ -46,4 +47,6 @@ extension BaseItemInputPassingProtocol {
     func successPopupClosed() {}
     
     func successPopupWillAppear() {}
+    
+    func operationCancelled(withType type: ElementTypes) {}
 }
