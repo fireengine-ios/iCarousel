@@ -339,7 +339,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
                 if self.pathExtensionLength > 0 {
                     offset = (self.renameField.text?.count ?? 0) - self.pathExtensionLength - 1
                 } else {
-                    offset = 0
+                    offset = self.renameField.text?.count ?? 0
                 }
                 
                 if let position = self.renameField.position(from: self.renameField.beginningOfDocument, offset: offset) {
