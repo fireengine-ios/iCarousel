@@ -38,6 +38,8 @@ class BaseDataSourceItem: NSObject {
     
     var isShared = false
     
+    var privateShareType: PrivateShareType = .sharedArea
+    
     func getCellReUseID() -> String {
         return CollectionViewCellsIdsConstant.cellForImage
     }
