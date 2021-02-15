@@ -325,7 +325,9 @@ final class PrivateShareFileInfoManager {
             
             switch response {
                 case .success:
+                    SnackbarManager.shared.show(elementType: .rename, relatedItems: [item], handler: nil)
                     completion(true)
+                    
                 case .failed(let error):
                     //show error?
                     completion(false)

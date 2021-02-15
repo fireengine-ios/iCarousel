@@ -29,16 +29,20 @@
                                         <rect key="frame" x="0.0" y="0.0" width="344" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgp-7q-ZcT">
-                                                <rect key="frame" x="274" y="15" width="30" height="30"/>
+                                                <rect key="frame" x="274" y="10" width="30" height="40"/>
                                                 <state key="normal" title="Info">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onInfoButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fWL-Fs-zAr"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Hgp-7q-ZcT" secondAttribute="bottom" constant="10" id="FIx-e8-REK"/>
                                             <constraint firstAttribute="trailing" secondItem="Hgp-7q-ZcT" secondAttribute="trailing" constant="40" id="FX2-rd-g26"/>
-                                            <constraint firstItem="Hgp-7q-ZcT" firstAttribute="centerY" secondItem="UHj-Hd-hZF" secondAttribute="centerY" id="Vua-CY-P8H"/>
+                                            <constraint firstItem="Hgp-7q-ZcT" firstAttribute="top" secondItem="UHj-Hd-hZF" secondAttribute="top" constant="10" id="evw-3o-0dc"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWr-DT-wGh">
@@ -152,15 +156,19 @@
                                         <rect key="frame" x="688" y="0.0" width="344" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jI5-9i-7NT">
-                                                <rect key="frame" x="40" y="15" width="45" height="30"/>
+                                                <rect key="frame" x="40" y="10" width="45" height="40"/>
                                                 <state key="normal" title="Delete">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onDeleteButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="YCv-jg-BSI"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="jI5-9i-7NT" firstAttribute="centerY" secondItem="jOq-3a-v21" secondAttribute="centerY" id="2oH-cX-kPy"/>
+                                            <constraint firstItem="jI5-9i-7NT" firstAttribute="top" secondItem="jOq-3a-v21" secondAttribute="top" constant="10" id="Xxt-bK-8iR"/>
+                                            <constraint firstAttribute="bottom" secondItem="jI5-9i-7NT" secondAttribute="bottom" constant="10" id="dDF-cJ-jT4"/>
                                             <constraint firstItem="jI5-9i-7NT" firstAttribute="leading" secondItem="jOq-3a-v21" secondAttribute="leading" constant="40" id="em0-hZ-r17"/>
                                         </constraints>
                                     </view>

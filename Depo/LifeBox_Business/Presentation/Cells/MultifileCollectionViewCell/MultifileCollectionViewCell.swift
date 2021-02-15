@@ -28,8 +28,6 @@ protocol MultifileCollectionViewCellActionDelegate: class {
     func onMenuPress(sender: Any, itemModel: Item?)
     func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?)
     func rename(item: WrapData, name: String, completion: @escaping BoolHandler)
-    func delete(item: WrapData)
-    func showInfo(item: WrapData)
     func onLongPress(cell: UICollectionViewCell)
     
     @available(iOS 14, *)
@@ -161,17 +159,25 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var infoButton: UIButton! {
         willSet {
+            newValue.tintColor = .white
             newValue.setTitle(TextConstants.actionInfo, for: .normal)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 10)
             newValue.setImage(UIImage(named: "info"), for: .normal)
+            
         }
     }
     
     @IBOutlet weak var deleteButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.actionInfo, for: .normal)
-            newValue.setImage(UIImage(named: "delete"), for: .normal)
+            newValue.tintColor = .white
+            newValue.setTitle(TextConstants.actionDelete, for: .normal)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 10)
+            newValue.setImage(UIImage(named: "trash"), for: .normal)
         }
     }
+    
+    private let actionViewsVisiblePart: CGFloat = 0.35
+    private let actionViewsTriggerPart: CGFloat = 0.2
     
     weak var actionDelegate: MultifileCollectionViewCellActionDelegate?
     
@@ -244,6 +250,9 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             guard let item = self.itemModel else {
                 return
             }
+            
+            self.infoButton.centerVertically(padding: 4)
+            self.deleteButton.centerVertically(padding: 4)
             
             self.name.text = item.name
             self.lastModifiedDate.text = item.lastModifiDate?.getDateInFormat(format: "dd/MM/yyyy - HH:mm")
@@ -379,6 +388,16 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             longTapGestureRecognizer.isEnabled = !(isSelectionInProgress || isRenamingInProgress)
         }
     }
+    
+    @IBAction func onInfoButtonTapped(_ sender: Any) {
+        actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
+    }
+    
+    @IBAction func onDeleteButtonTapped(_ sender: Any) {
+        actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
+    }
+    
+    
 }
 
 //MARK: - ios 14 pull down menu
@@ -441,18 +460,40 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         updateOffset(scrollView: scrollView, velocityX: velocity.x, targetContentOffset: targetContentOffset)
     }
     
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x == infoView.frame.origin.x {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            //
-        } else if scrollView.contentOffset.x == deletionView.frame.origin.x {
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-            //
-        }
-        
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        updateOffset(scrollView: scrollView, velocityX: 0, targetContentOffset: nil)
     }
     
-    private func updateOffset(scrollView: UIScrollView, velocityX: CGFloat, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        let defaultOffsetX = defaultView.frame.origin.x
+        let currentOffset = scrollView.contentOffset.x
+        
+        guard currentOffset != defaultOffsetX else {
+            return
+        }
+        
+        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsVisiblePart
+        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
+        let infoOffsetX = infoView.frame.origin.x
+        let deleteOffsetX = deletionView.frame.origin.x
+        
+        let lightFeedback = UIImpactFeedbackGenerator(style: .light)
+        let mediumFeedback = UIImpactFeedbackGenerator(style: .medium)
+    
+        if currentOffset == infoPauseOffsetX || currentOffset == deletePauseOffsetX {
+            lightFeedback.impactOccurred()
+            
+        } else if currentOffset == infoOffsetX {
+            mediumFeedback.impactOccurred()
+            actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
+            
+        } else if currentOffset == deleteOffsetX {
+            mediumFeedback.impactOccurred()
+            actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
+        }
+    }
+    
+    private func updateOffset(scrollView: UIScrollView, velocityX: CGFloat, targetContentOffset: UnsafeMutablePointer<CGPoint>?) {
         if  abs(velocityX) > 0.5 {
             updateOffsetFast(scrollView: scrollView, direction: HorizontalScrollDirection(velocityX: velocityX), targetContentOffset: targetContentOffset)
         } else {
@@ -460,27 +501,24 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         }
     }
     
-    private func updateOffsetFast(scrollView: UIScrollView, direction: HorizontalScrollDirection, targetContentOffset: UnsafeMutablePointer<CGPoint>){
+    private func updateOffsetFast(scrollView: UIScrollView, direction: HorizontalScrollDirection, targetContentOffset: UnsafeMutablePointer<CGPoint>?){
         
         let defaultViewOffsetX = defaultView.frame.origin.x
-        let deletionOffsetX = deletionView.frame.origin.x
-        let infoOffsetX = infoView.frame.origin.x
+        
+        //stop scrolling
+        targetContentOffset?.pointee = scrollView.contentOffset
         
         switch direction {
             case .left:
                 if scrollView.contentOffset.x > defaultViewOffsetX {
-                    targetContentOffset.pointee = scrollView.contentOffset//CGPoint(x: defaultViewOffsetX, y: scrollView.contentOffset.y)
                     scrollView.scrollRectToVisible(defaultView.frame, animated: true)
                 } else {
-                    targetContentOffset.pointee = scrollView.contentOffset//CGPoint(x: infoOffsetX, y: scrollView.contentOffset.y)
                     scrollView.scrollRectToVisible(infoView.frame, animated: true)
                 }
             case .right:
                 if scrollView.contentOffset.x < defaultViewOffsetX {
-                    targetContentOffset.pointee = scrollView.contentOffset//CGPoint(x: defaultViewOffsetX, y: scrollView.contentOffset.y)
                     scrollView.scrollRectToVisible(defaultView.frame, animated: true)
                 } else {
-                    targetContentOffset.pointee = scrollView.contentOffset//CGPoint(x: deletionOffsetX, y: scrollView.contentOffset.y)
                     scrollView.scrollRectToVisible(deletionView.frame, animated: true)
                 }
             case .none:
@@ -492,11 +530,11 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
     private func updateOffsetSlow(scrollView: UIScrollView) {
         let defaultOffsetX = defaultView.frame.origin.x
         
-        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * 0.4
-        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * 0.4
+        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsVisiblePart
+        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
         
-        let infoPauseTriggerOffsetX = defaultOffsetX - infoView.bounds.width * 0.25
-        let deletePauseTriggerOffsetX = defaultOffsetX + deletionView.bounds.width * 0.25
+        let infoPauseTriggerOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsTriggerPart
+        let deletePauseTriggerOffsetX = defaultOffsetX + deletionView.bounds.width * actionViewsTriggerPart
         
         let scrollOffsetX = scrollView.contentOffset.x
         
