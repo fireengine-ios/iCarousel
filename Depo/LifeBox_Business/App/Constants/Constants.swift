@@ -254,12 +254,6 @@ struct TextConstants {
     
     static let topBarVideosFilter = NSLocalizedString("Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let topBarPhotosFilter = NSLocalizedString("Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
-    // MARK: - Camera alert
-    static let cameraAccessAlertTitle = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertText = NSLocalizedString("Error occurred while accessing your photos.\nPlease check your settings.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertGoToSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertNo = NSLocalizedString("No", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Sync out of space alert
     static let syncOutOfSpaceAlertTitle = NSLocalizedString("Caution!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1260,4 +1254,9 @@ extension TextConstants {
     static let deleteConfirmationMessage = NSLocalizedString("business_app_delete_confirm_popup_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let delete = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    // MARK: - Camera alert
+    static let galeryPermissionNotProvidedTitle = NSLocalizedString("business_app_gallery_permission_not_provided_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedDescription = NSLocalizedString("business_app_gallery_permission_not_provided_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedAcceptButton = NSLocalizedString("business_app_gallery_permission_not_provided_popup_settings_accept", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedRejectButton = NSLocalizedString("business_app_gallery_permission_not_provided_popup_settings_reject", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

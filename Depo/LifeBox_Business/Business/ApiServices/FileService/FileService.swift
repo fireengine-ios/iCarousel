@@ -308,23 +308,6 @@ class FileService: BaseRequestService {
     
     private var error: ErrorResponse?
     
-    private func showAccessAlert() {
-        debugLog("CameraService showAccessAlert")
-        DispatchQueue.main.async {
-            let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
-                                                  message: TextConstants.cameraAccessAlertText,
-                                                  image: .none,
-                                                  firstButtonTitle: TextConstants.cameraAccessAlertNo,
-                                                  secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
-                                                  secondAction: { vc in
-                                                    vc.close {
-                                                        UIApplication.shared.openSettings()
-                                                    }
-            })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        }
-    }
-    
     func downloadDocument(items: [WrapData], success: FileOperation?, fail: FailResponse?) {
         guard !items.isEmpty else {
             return
@@ -375,7 +358,6 @@ class FileService: BaseRequestService {
         
         LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] isAllowed, _ in
             guard let self = self, isAllowed else {
-                success?()
                 return
             }
             

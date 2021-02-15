@@ -20,6 +20,7 @@ struct ColorConstants {
     static let confirmationPopupTitle = UIColor(named: "confirmationPopupTitle")!
     static let confirmationPopupMessage = UIColor(named: "confirmationPopupMessage")!
     static let confirmationPopupButton = UIColor(named: "confirmationPopupButton")!
+    static let confirmationPopupButtonDark = UIColor(named: "confirmationPopupButtonDark")!
     
     
     //MARK: END

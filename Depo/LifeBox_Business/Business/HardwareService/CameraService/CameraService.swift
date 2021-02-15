@@ -108,11 +108,11 @@ class CameraService {
     func showAccessAlert() {
         debugLog("CameraService showAccessAlert")
 
-        let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
-                                              message: TextConstants.cameraAccessAlertText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.cameraAccessAlertNo,
-                                              secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+        let controller = PopUpController.with(title: TextConstants.galeryPermissionNotProvidedTitle,
+                                              message: TextConstants.galeryPermissionNotProvidedDescription,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.galeryPermissionNotProvidedRejectButton,
+                                              secondButtonTitle: TextConstants.galeryPermissionNotProvidedAcceptButton,
                                               secondAction: { vc in
                                                 vc.close {
                                                     UIApplication.shared.openSettings()

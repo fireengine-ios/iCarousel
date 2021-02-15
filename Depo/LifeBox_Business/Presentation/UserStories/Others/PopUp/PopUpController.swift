@@ -152,10 +152,10 @@ final class PopUpController: BasePopUpController {
     }
     
     private func setup(_ button: InsetsButton, filled: Bool) {
-        let titleColor = filled ? UIColor.white : ColorConstants.confirmationPopupButton
+        let titleColor = filled ? UIColor.white : ColorConstants.confirmationPopupButtonDark
         let titleColorHigh = filled ? titleColor.lighter(by: 30) : titleColor.darker(by: 30)
         let backgroundColor = filled ? ColorConstants.confirmationPopupButton : UIColor.white
-        let borderColor = filled ? UIColor.white.cgColor : ColorConstants.confirmationPopupButton.cgColor
+        let borderColor = filled ? ColorConstants.confirmationPopupButton.cgColor : ColorConstants.confirmationPopupButtonDark.cgColor
         
         button.isExclusiveTouch = true
         button.setTitleColor(titleColor, for: .normal)
@@ -163,7 +163,7 @@ final class PopUpController: BasePopUpController {
         button.setTitleColor(titleColorHigh, for: .highlighted)
         button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
         button.layer.borderColor = borderColor
-        button.layer.borderWidth = 1
+        button.layer.borderWidth = 2
         button.layer.cornerRadius = 5
         button.adjustsFontSizeToFitWidth()
         
