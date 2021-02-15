@@ -390,6 +390,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func onInfoButtonTapped(_ sender: Any) {
+        scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
         actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
     }
     
@@ -485,10 +486,12 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
             
         } else if currentOffset == infoOffsetX {
             mediumFeedback.impactOccurred()
+            scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
             actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
             
         } else if currentOffset == deleteOffsetX {
             mediumFeedback.impactOccurred()
+            scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
             actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
         }
     }
@@ -528,6 +531,19 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
     }
     
     private func updateOffsetSlow(scrollView: UIScrollView) {
+        
+        let scrollOffsetX = scrollView.contentOffset.x
+        
+        guard scrollOffsetX != infoView.frame.origin.x else {
+            onInfoButtonTapped(self)
+            return
+        }
+        
+        guard scrollOffsetX != deletionView.frame.origin.x else {
+            onDeleteButtonTapped(self)
+            return
+        }
+        
         let defaultOffsetX = defaultView.frame.origin.x
         
         let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsVisiblePart
@@ -535,8 +551,6 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         
         let infoPauseTriggerOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsTriggerPart
         let deletePauseTriggerOffsetX = defaultOffsetX + deletionView.bounds.width * actionViewsTriggerPart
-        
-        let scrollOffsetX = scrollView.contentOffset.x
         
         if scrollOffsetX < infoPauseTriggerOffsetX {
             if scrollOffsetX >= infoPauseOffsetX {
