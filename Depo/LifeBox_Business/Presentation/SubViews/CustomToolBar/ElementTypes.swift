@@ -161,9 +161,7 @@ enum ElementTypes {
             if item.isShared {
                 if item.privateShareType == .withMe {
                     types.append(.leaveSharing)
-                }
-                
-                if item.privateShareType == .byMe {
+                } else if item.privateShareType == .byMe {
                     types.append(.endSharing)
                 }
             }
