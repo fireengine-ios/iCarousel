@@ -190,7 +190,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     //MARK: - Override
     override var isSelected: Bool {
         willSet {
-            backgroundColor = newValue ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
+            defaultView.backgroundColor = newValue ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
         }
     }
     
@@ -333,9 +333,15 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             
             UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
                 self.nameEditView.alpha = 1
-                self.backgroundColor = ColorConstants.multifileCellBackgroundColorSelected
+                self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColorSelected
             } completion: { _ in
-                let offset = (self.renameField.text?.count ?? 0) - self.pathExtensionLength - 1
+                let offset: Int
+                if self.pathExtensionLength > 0 {
+                    offset = (self.renameField.text?.count ?? 0) - self.pathExtensionLength - 1
+                } else {
+                    offset = 0
+                }
+                
                 if let position = self.renameField.position(from: self.renameField.beginningOfDocument, offset: offset) {
                     self.renameField.selectedTextRange = self.renameField.textRange(from: position, to: position)
                 }
@@ -348,7 +354,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
             self.nameEditView.alpha = 0
-            self.backgroundColor = ColorConstants.multifileCellBackgroundColor
+            self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColor
         } completion: { _ in
             //
         }
