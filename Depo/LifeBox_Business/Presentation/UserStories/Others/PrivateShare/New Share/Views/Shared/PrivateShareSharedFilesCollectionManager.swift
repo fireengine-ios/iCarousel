@@ -84,8 +84,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     func startRenaming(item: WrapData) {
         if
-            let index = fileInfoManager.splittedItems.getArray().indices(of: item),
-            let cell = collectionView?.cellForItem(at: IndexPath(row: index.1, section: index.0)) as? MultifileCollectionViewCell
+            let index = fileInfoManager.sortedItems.index(where: { $0 == item }),
+            let cell = collectionView?.cellForItem(at: IndexPath(row: index, section: 0)) as? MultifileCollectionViewCell
         {
             cell.startRenaming()
         }
@@ -125,7 +125,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
             self.collectionView?.reloadData()
-            self.setEmptyScreen(isHidden: !self.fileInfoManager.splittedItems.isEmpty)
+            self.setEmptyScreen(isHidden: !self.fileInfoManager.sortedItems.isEmpty)
             self.delegate?.didEndReload()
         }
     }
@@ -155,36 +155,47 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     @objc
     private func fullReload() {
-        fileInfoManager.reload { [weak self] shouldReload in
+        fileInfoManager.reload { [weak self] (shouldReload, indexes) in
             if shouldReload {
                 self?.changeSelection(isActive: false)
-                self?.reloadCollection()
+                if let indexes = indexes {
+                    self?.batchUpdate(indexes: indexes)
+                } else {
+                    self?.reloadCollection()
+                }
             }
         }
         
     }
     
     private func reloadAfterOperation() {
-        return fileInfoManager.reloadCurrentPages { [weak self] shouldReload in
+        return fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
             if shouldReload {
-                self?.reloadCollection()
+                if let indexes = indexes {
+                    self?.batchUpdate(indexes: indexes)
+                } else {
+                    self?.reloadCollection()
+                }
             }
         }
     }
     
     private func loadNextPage() {
         showNextPageSpinner()
-        fileInfoManager.loadNextPage(completion: { [weak self] shouldReload in
-//            self?.append(indexes: itemsLoaded)
+        fileInfoManager.loadNextPage(completion: { [weak self] (shouldReload, indexes) in
             self?.hideNextPageSpinner()
             if shouldReload {
-                self?.reloadCollection()
+                if let indexes = indexes {
+                    self?.batchUpdate(indexes: indexes)
+                } else {
+                    self?.reloadCollection()
+                }
             }
         })
     }
     
     private func showNextPageSpinner() {
-        let lastSectionIndex = IndexPath(item: 0, section: fileInfoManager.splittedItems.count - 1)
+        let lastSectionIndex = IndexPath(item: 0, section: 0)
         DispatchQueue.toMain {
             guard let footerView =
                     self.collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: lastSectionIndex) as? CollectionViewSpinnerFooter else {
@@ -196,8 +207,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func hideNextPageSpinner() {
-        
-        let lastSectionIndex = IndexPath(item: 0, section: fileInfoManager.splittedItems.count - 1)
+        let lastSectionIndex = IndexPath(item: 0, section: 0)
         DispatchQueue.toMain {
             guard let footerView =
                     self.collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: lastSectionIndex) as? CollectionViewSpinnerFooter else {
@@ -208,20 +218,27 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
-    //TODO: maybe later
-//    private func append(indexes: [IndexPath]) {
-//        guard !indexes.isEmpty else {
-//            return
-//        }
-//
-//        DispatchQueue.main.async {
-//            self.collectionView?.performBatchUpdates({
-//                self.collectionView?.insertItems(at: indexes)
-//            }, completion: { (_) in
-//                //
-//            })
-//        }
-//    }
+    private func batchUpdate(indexes: DeltaIndexes) {
+        guard !indexes.inserted.isEmpty || !indexes.deleted.isEmpty else {
+            DispatchQueue.main.async {
+                self.collectionView?.refreshControl?.endRefreshing()
+                self.setEmptyScreen(isHidden: !self.fileInfoManager.sortedItems.isEmpty)
+                self.delegate?.didEndReload()
+            }
+            return
+        }
+        DispatchQueue.main.async {
+            self.collectionView?.refreshControl?.endRefreshing()
+            self.collectionView?.performBatchUpdates({
+                self.collectionView?.deleteItems(at: indexes.deleted.compactMap { IndexPath(row: $0, section: 0) })
+                self.collectionView?.insertItems(at: indexes.inserted.compactMap { IndexPath(row: $0, section: 0) })
+                
+            }, completion: { (_) in
+                self.setEmptyScreen(isHidden: !self.fileInfoManager.sortedItems.isEmpty)
+                self.delegate?.didEndReload()
+            })
+        }
+    }
     
     private func updateLayout() {
         DispatchQueue.main.async {
@@ -284,11 +301,11 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
 extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fileInfoManager.splittedItems.count
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fileInfoManager.splittedItems[section]?.count ?? 0
+        return fileInfoManager.sortedItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -325,7 +342,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
 
     //MARK: Helpers
     private func item(at indexPath: IndexPath) -> WrapData? {
-        return fileInfoManager.splittedItems[indexPath.section]?[safe: indexPath.row]
+        return fileInfoManager.sortedItems[indexPath.row]
     }
     
     private func isSelected(item: WrapData) -> Bool {
@@ -449,7 +466,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let isLastSection = fileInfoManager.splittedItems.count == section + 1
+        let isLastSection = section == 1
         let height: CGFloat = isLastSection ? 44.0 : 0.0
         return CGSize(width: collectionView.contentSize.width, height: height)
     }

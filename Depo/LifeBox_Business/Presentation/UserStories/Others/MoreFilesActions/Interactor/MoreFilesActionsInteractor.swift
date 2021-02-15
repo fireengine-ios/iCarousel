@@ -301,6 +301,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func moveToTrash(items: [BaseDataSourceItem]) {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            self?.output?.operationCancelled(type: .moveToTrash)
             vc.close()
         }
         
@@ -336,6 +337,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .cancel)
+            self?.output?.operationCancelled(type: .restore)
             vc.close()
         }
 
@@ -588,6 +590,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func delete(items: [BaseDataSourceItem]) {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            self?.output?.operationCancelled(type: .delete)
             vc.close()
         }
         
@@ -641,7 +644,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          image: .question,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
-                                         firstAction: { vc in
+                                         firstAction: { [weak self] vc in
+                                            self?.output?.operationCancelled(type: .endSharing)
                                             vc.close()
                                          },
                                          secondAction: { [weak self] vc in
@@ -675,7 +679,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          image: .question,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
-                                         firstAction: { vc in
+                                         firstAction: { [weak self] vc in
+                                            self?.output?.operationCancelled(type: .leaveSharing)
                                             vc.close()
                                          },
                                          secondAction: { [weak self] vc in
@@ -695,6 +700,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            self?.output?.operationCancelled(type: .moveToTrashShared)
             vc.close()
         }
         
@@ -727,6 +733,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func emptyTrashBin() {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
 //            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            self?.output?.operationCancelled(type: .emptyTrashBin)
             vc.close()
         }
         
