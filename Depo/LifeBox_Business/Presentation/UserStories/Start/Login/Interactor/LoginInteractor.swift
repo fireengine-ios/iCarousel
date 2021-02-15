@@ -38,11 +38,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private var attempts: Int = 0
     
-    private var loginRetries = 0 {
-        didSet {
-            showRelatedHelperView()
-        }
-    }
+    private var loginRetries = 0
     
     private var login: String?
     private var password: String?
@@ -64,32 +60,6 @@ class LoginInteractor: LoginInteractorInput {
         let storageVars: StorageVars = factory.resolve()
         blockedUsers = storageVars.blockedUsers
         self.storageVars = storageVars
-    }
-    
-    //MARK: Utility Methods(private)
-    
-    private func showRelatedHelperView() {
-        if loginRetries == NumericConstants.showFAQViewAttempts {
-            output?.showFAQView()
-        } else {
-            #if LIFEBOX
-            FirebaseRemoteConfig.shared.fetchAttemptsBeforeSupportOnLogin { [weak self] attempts in
-                guard let self = self else {
-                    return
-                }
-                
-                if self.loginRetries >= attempts {
-                    DispatchQueue.main.async {
-                        self.output?.showSupportView()
-                    }
-                }
-            }
-            #else
-            if loginRetries >= NumericConstants.showSupportViewAttempts {
-                output?.showSupportView()
-            }
-            #endif
-        }
     }
     
     private func hasEmptyPhone(accountWarning: String) -> Bool {
@@ -307,11 +277,6 @@ class LoginInteractor: LoginInteractorInput {
             blockedUsersDic[user] = Date()
             blockedUsers = blockedUsersDic
         }
-    }
-    
-    func findCoutryPhoneCode(plus: Bool) {
-        let phoneCode = CoreTelephonyService().getColumnedCountryCode()
-        output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
     
     func checkEULA() {

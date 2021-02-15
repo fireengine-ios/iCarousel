@@ -12,8 +12,6 @@ protocol LoginInteractorInput {
     
     func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?)
     
-    func findCoutryPhoneCode(plus: Bool)
-    
     func checkEULA()
     
     func prepareTimePassed(forUserName name: String)

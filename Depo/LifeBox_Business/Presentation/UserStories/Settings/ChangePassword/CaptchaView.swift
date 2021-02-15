@@ -146,7 +146,7 @@ final class CaptchaView: UIView, FromNib {
                 
                 /// When you open the LoginViewController, another request is made to the server, which will already show 503 error
                 let topController = UIApplication.topController()
-                if !((topController is LoginViewController) || (topController is RegistrationViewController)) {
+                if !(topController is RegistrationViewController) {
                     if !error.isServerUnderMaintenance {
                         DispatchQueue.main.async {
                             UIApplication.showErrorAlert(message: error.description)
@@ -175,7 +175,7 @@ final class CaptchaView: UIView, FromNib {
                 self?.delegate?.showCaptchaError(error: error)
                 
                  let topController = UIApplication.topController()
-                if !((topController is LoginViewController) || (topController is RegistrationViewController)) {
+                if !(topController is RegistrationViewController) {
                     DispatchQueue.main.async {
                         UIApplication.showErrorAlert(message: error.description)
                     }

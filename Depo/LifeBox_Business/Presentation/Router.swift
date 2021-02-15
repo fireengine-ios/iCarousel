@@ -405,7 +405,7 @@ class RouterVC: NSObject {
     var loginScreen: UIViewController? {
         
         let initializer = LoginModuleInitializer()
-        let loginController = LoginViewController(nibName: "LoginViewController",
+        let loginController = LBLoginViewController(nibName: "LBLoginViewController",
                                                   bundle: nil)
         initializer.loginViewController = loginController
         initializer.setupVC()
@@ -756,7 +756,7 @@ class RouterVC: NSObject {
             if
                 let topController = self.defaultTopController,
                 topController is FullQuotaWarningPopUp == false,
-                topController is LoginViewController == false {
+                topController is LBLoginViewController == false {
                 topController.present(controller, animated: false)
             }
         }

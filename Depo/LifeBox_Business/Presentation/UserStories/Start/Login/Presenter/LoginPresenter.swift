@@ -29,7 +29,6 @@ class LoginPresenter: BasePresenter {
     
     private func onLogin() {
         view.hideErrorMessage()
-        view.dehighlightTitles()
         startAsyncOperationDisableScreen()
     }
     
@@ -106,10 +105,6 @@ extension LoginPresenter: LoginViewOutput {
         interactor.checkCaptchaRequerement()
     }
     
-    func prepareCaptcha(_ view: CaptchaView) {
-        view.delegate = self
-    }
-    
     func rememberMe(remember: Bool) {
         interactor.rememberMe(state: remember)
     }
@@ -126,10 +121,6 @@ extension LoginPresenter: LoginViewOutput {
         interactor.authificate(login: removeBrackets(text: login),
                                password: password,
                                atachedCaptcha: atachedCaptcha)
-    }
-    
-    func startedEnteringPhoneNumber(withPlus: Bool) {
-        interactor.findCoutryPhoneCode(plus: withPlus)
     }
     
     func openSupport() {
@@ -223,15 +214,6 @@ extension LoginPresenter: LoginInteractorOutput {
         view.showCaptcha()
     }
     
-    func foundCoutryPhoneCode(code: String, plus: Bool) {
-        if plus {
-            let countryCode = code.isEmpty ? "+" : code
-            view.enterPhoneCountryCode(countryCode: countryCode)
-        } else {
-            view.insertPhoneCountryCode(countryCode: code)
-        }
-    }
-    
     func fieldError(type: LoginFieldError) {
         completeAsyncOperationEnableScreen()
         
@@ -309,24 +291,6 @@ extension LoginPresenter: LoginInteractorOutput {
     func captchaRequiredFailed(with message: String) {
         asyncOperationSuccess()
         view.showErrorMessage(with: message)
-    }
-    
-    func showSupportView() {
-        view.showSupportView()
-    }
-    
-    func showFAQView() {
-        view.showFAQView()
-    }
-}
-
-// MARK: - CaptchaViewErrorDelegate
-
-extension LoginPresenter: CaptchaViewErrorDelegate {
-    
-    func showCaptchaError(error: Error) {
-        
-        view.showErrorMessage(with: error.description)
     }
 }
 
