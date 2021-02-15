@@ -153,7 +153,7 @@ enum ElementTypes {
                 }
             }
             
-            if grantedPermissions.contains(.writeAcl) {
+            if grantedPermissions.contains(.writeAcl) || grantedPermissions.contains(.read)  {
                 types.append(.share)
             }
             
