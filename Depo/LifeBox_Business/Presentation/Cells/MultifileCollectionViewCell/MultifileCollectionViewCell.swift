@@ -35,6 +35,7 @@ protocol MultifileCollectionViewCellActionDelegate: class {
 }
 
 //TODO: change font when it's available
+//TODO: split in views
 
 class MultifileCollectionViewCell: UICollectionViewCell {
     
@@ -213,7 +214,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         
         name.text = ""
         lastModifiedDate.text = ""
-        renameField.text = ""
+        renameField.attributedText = NSAttributedString(string: "")
         pathExtensionLength = 0
         thumbnail.image = nil
         iconsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -328,23 +329,15 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private func showRenamingView() {
         DispatchQueue.toMain {
-            self.renameField.text = self.itemModel?.name
+            self.renameField.attributedText = NSAttributedString(string: self.itemModel?.name ?? "")
             self.renameField.becomeFirstResponder()
+            self.updateNameTextColor(textField: self.renameField)
             
             UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
                 self.nameEditView.alpha = 1
                 self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColorSelected
             } completion: { _ in
-                let offset: Int
-                if self.pathExtensionLength > 0 {
-                    offset = (self.renameField.text?.count ?? 0) - self.pathExtensionLength - 1
-                } else {
-                    offset = self.renameField.text?.count ?? 0
-                }
-                
-                if let position = self.renameField.position(from: self.renameField.beginningOfDocument, offset: offset) {
-                    self.renameField.selectedTextRange = self.renameField.textRange(from: position, to: position)
-                }
+                //
             }
         }
     }
@@ -372,7 +365,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         hideRenamignView()
         setupMenuAvailability()
         
-        guard let name = renameField.text, name.count > pathExtensionLength else {
+        guard let name = renameField.attributedText?.string, name.count > pathExtensionLength else {
             return
         }
         
@@ -394,6 +387,30 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             longTapGestureRecognizer.isEnabled = !(isSelectionInProgress || isRenamingInProgress)
         }
     }
+    
+    @objc
+    private func updateNameTextColor(textField: UITextField) {
+        guard pathExtensionLength > 0, let name = textField.attributedText?.string else {
+            return
+        }
+        
+        let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.multifileCellRenameFieldNameColor,
+                          NSAttributedString.Key.font: UIFont.GTAmericaStandardRegularFont(size: 14.0)]
+        
+        let attributedString = NSMutableAttributedString(string: name, attributes: attributes)
+        let extensionRange = NSMakeRange(name.count - pathExtensionLength, pathExtensionLength)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: ColorConstants.multifileCellRenameFieldExtensionColor, range: extensionRange)
+        textField.attributedText = attributedString
+        
+        let offset = pathExtensionLength > 0 ? name.count - pathExtensionLength - 1 : name.count
+        
+        if let position = textField.position(from: textField.beginningOfDocument, offset: offset) {
+            textField.selectedTextRange = textField.textRange(from: position, to: position)
+        }
+    }
+    
+    
+    //MARK: - SCroll view actions
     
     @IBAction func onInfoButtonTapped(_ sender: Any) {
         scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
