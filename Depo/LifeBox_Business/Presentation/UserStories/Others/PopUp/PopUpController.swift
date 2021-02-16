@@ -52,14 +52,14 @@ final class PopUpController: BasePopUpController {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = ColorConstants.darkBlueColor
+            titleLabel.textColor = popUpStyle == .normal ? ColorConstants.darkBlueColor : ColorConstants.modernPopupMainTitleColor
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
         }
     }
     
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
-            messageLabel.textColor = ColorConstants.lightText
+            messageLabel.textColor = popUpStyle == .normal ? ColorConstants.lightText : ColorConstants.modernPopupDescriptionColor
             messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         }
     }
