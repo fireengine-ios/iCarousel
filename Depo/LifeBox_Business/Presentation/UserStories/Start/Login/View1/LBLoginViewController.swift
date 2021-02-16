@@ -14,30 +14,11 @@ final class LBLoginViewController: ViewController {
 
     @IBOutlet private weak var errorViewFakeHeightConstraint: NSLayoutConstraint!
 
-    //MARK: IBOutlets
-    @IBOutlet private weak var alertsStackView: UIStackView! {
-        willSet {
-            newValue.spacing = 16
-            newValue.alignment = .fill
-            newValue.axis = .vertical
-            newValue.distribution = .fill
-        }
-    }
-    
-    @IBOutlet private weak var fieldsStackView: UIStackView! {
-        willSet {
-            newValue.spacing = 16
-            newValue.alignment = .fill
-            newValue.axis = .vertical
-            newValue.distribution = .fill
-        }
-    }
-
     @IBOutlet private weak var pageTitleLabel: UILabel! {
         willSet {
             newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-//            newValue.text = TextConstants.loginRememberMyCredential
+            newValue.text = TextConstants.loginPageMainTitle
         }
     }
 
@@ -45,7 +26,7 @@ final class LBLoginViewController: ViewController {
         willSet {
             newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
-//            newValue.text = TextConstants.loginRememberMyCredential
+            newValue.text = TextConstants.loginPageLoginButtonExplanation
         }
     }
 
@@ -53,7 +34,7 @@ final class LBLoginViewController: ViewController {
         willSet {
             newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
-//            newValue.text = TextConstants.loginRememberMyCredential
+            newValue.text = TextConstants.loginPageFLButtonExplanation
         }
     }
     
@@ -80,6 +61,7 @@ final class LBLoginViewController: ViewController {
         willSet {
             newValue.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
+            newValue.setTitle(TextConstants.loginPageRememberMeButtonTitle, for: .normal)
         }
     }
 
@@ -87,12 +69,13 @@ final class LBLoginViewController: ViewController {
         willSet {
             newValue.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
+            newValue.setTitle(TextConstants.loginPageForgetPasswordButtonTitle, for: .normal)
         }
     }
     
     @IBOutlet private weak var loginButton: UIButton! {
         willSet {
-//            newValue.setTitle(TextConstants.loginTitle, for: .normal)
+            newValue.setTitle(TextConstants.loginPageLoginButtonTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 14)
             newValue.backgroundColor = UIColor(named: "loginButtonBackground")
@@ -103,12 +86,17 @@ final class LBLoginViewController: ViewController {
     @IBOutlet private weak var loginTextField: BorderedWithInsetsTextField! {
         willSet {
             
+            newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPageEmailFieldPlaceholder,
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
+            newValue.textColor = ColorConstants.loginTextfieldTextColor
         }
     }
 
     @IBOutlet private weak var passwordTextField: BorderedWithInsetsTextField! {
         willSet {
-
+            newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPagePasswordFieldPlaceholder,
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
+            newValue.textColor = ColorConstants.loginTextfieldTextColor
         }
     }
     

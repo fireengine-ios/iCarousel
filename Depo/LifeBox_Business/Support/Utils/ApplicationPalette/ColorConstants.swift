@@ -123,6 +123,9 @@ struct ColorConstants {
     static let tbMatikBlurColor = UIColor(red: 5 / 255.0, green: 52 / 255.0, blue: 79 / 255.0, alpha: 1)
     
     static let aquaMarineTwo = UIColor(red: 85 / 255.0, green: 223 / 255.0, blue: 223 / 255.0, alpha: 1)
+
+    static let loginTextfieldPlaceholderColor = UIColor(red: 100 / 255.0, green: 100 / 255.0, blue: 100 / 255.0, alpha: 1.0)
+    static let loginTextfieldTextColor = UIColor(red: 64 / 255.0, green: 64 / 255.0, blue: 64 / 255.0, alpha: 1.0)
 }
 
 extension UIColor {

@@ -51,6 +51,9 @@ final class LoginCaptchaView: UIView, FromNib {
             newValue.enablesReturnKeyAutomatically = true
             newValue.smartQuotesType = .no
             newValue.smartDashesType = .no
+            newValue.attributedPlaceholder = NSAttributedString(string: "Enter code",
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor]) // do we need to extract it to poeditor?
+            newValue.textColor = ColorConstants.loginTextfieldTextColor
         }
     }
 
@@ -150,8 +153,6 @@ final class LoginCaptchaView: UIView, FromNib {
                 }
             }
             }, fail: { [weak self] error in
-                // show captcha error
-
                  let topController = UIApplication.topController()
                 if !((topController is LBLoginViewController) || (topController is RegistrationViewController)) {
                     DispatchQueue.main.async {

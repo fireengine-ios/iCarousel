@@ -1239,3 +1239,18 @@ extension TextConstants {
     static let tabBarItemSharedArea = NSLocalizedString("business_app_tabbar_sharedarea", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarItemSettings = NSLocalizedString("tabbar_item_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+// MARK: - Login page
+extension TextConstants {
+    static let loginPageFLButtonExplanation = NSLocalizedString("business_app_login_FL_explanation", tableName: "OurLocalizable", bundle: .main, value: "To login without identity integration", comment: "")
+    static let loginPageLoginButtonExplanation = NSLocalizedString("business_app_login_pwd_login_button_explanation", tableName: "OurLocalizable", bundle: .main, value: "*It can be used when your company has identity integration with Turkcell", comment: "")
+    static let loginPageLoginButtonTitle = NSLocalizedString("business_app_login_pwd_login_button", tableName: "OurLocalizable", bundle: .main, value: "Corporate Login", comment: "")
+    static let loginPageForgetPasswordCloseButtonTitle = NSLocalizedString("business_app_login_forget_password_page_close_button", tableName: "OurLocalizable", bundle: .main, value: "Close", comment: "")
+    static let loginPageForgetPasswordDescriptionText = NSLocalizedString("business_app_login_forget_password_page_description", tableName: "OurLocalizable", bundle: .main, value: "Lorem ipsum (description may be long as 3-4 lines)", comment: "")
+    static let loginPageForgetPasswordButtonTitle = NSLocalizedString("business_app_login_forget_password_page_title", tableName: "OurLocalizable", bundle: .main, value: "Forgot your password (?)", comment: "")
+    static let loginPageForgetPasswordPageTitle = NSLocalizedString("business_app_login_forget_password", tableName: "OurLocalizable", bundle: .main, value: "Forget Password", comment: "")
+    static let loginPageRememberMeButtonTitle = NSLocalizedString("business_app_login_rememberme_checkbox", tableName: "OurLocalizable", bundle: .main, value: "Remember me", comment: "")
+    static let loginPagePasswordFieldPlaceholder = NSLocalizedString("business_app_login_password_box_inside", tableName: "OurLocalizable", bundle: .main, value: "Enter your password", comment: "")
+    static let loginPageEmailFieldPlaceholder = NSLocalizedString("business_app_login_email_box_inside", tableName: "OurLocalizable", bundle: .main, value: "Enter your e-mail", comment: "")
+    static let loginPageMainTitle = NSLocalizedString("business_app_login_title", tableName: "OurLocalizable", bundle: .main, value: "Login to Lifebox Business", comment: "")
+}
