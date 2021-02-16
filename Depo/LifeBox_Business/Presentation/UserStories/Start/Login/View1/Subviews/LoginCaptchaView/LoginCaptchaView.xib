@@ -76,7 +76,7 @@
                                 <constraint firstAttribute="height" constant="45" id="6Wn-ye-4aH"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" textContentType="password"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                     <color key="value" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -122,7 +122,7 @@
     </objects>
     <designables>
         <designable name="W0V-fQ-219">
-            <size key="intrinsicContentSize" width="103.5" height="15"/>
+            <size key="intrinsicContentSize" width="103.5" height="16"/>
         </designable>
     </designables>
     <resources>

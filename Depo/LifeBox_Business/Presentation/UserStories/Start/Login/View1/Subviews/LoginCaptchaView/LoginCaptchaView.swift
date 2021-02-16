@@ -34,25 +34,15 @@ final class LoginCaptchaView: UIView, FromNib {
 
     @IBOutlet weak var captchaAnswerTextField: BorderedWithInsetsTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = UIColor.black
-            newValue.borderStyle = .none
-            newValue.backgroundColor = .white
-            newValue.isOpaque = true
-
             newValue.returnKeyType = .done
-
-            /// removes suggestions bar above keyboard
             newValue.autocorrectionType = .no
-
-            /// removed useless features
             newValue.autocapitalizationType = .none
             newValue.spellCheckingType = .no
             newValue.enablesReturnKeyAutomatically = true
             newValue.smartQuotesType = .no
             newValue.smartDashesType = .no
-            newValue.attributedPlaceholder = NSAttributedString(string: "Enter code",
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor]) // do we need to extract it to poeditor?
+            newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.captchaViewTextfieldPlaceholder,
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
             newValue.textColor = ColorConstants.loginTextfieldTextColor
         }
     }
