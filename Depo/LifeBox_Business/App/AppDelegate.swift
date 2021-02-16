@@ -112,7 +112,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
         
-        setupPushNotifications(with: options)
+        setupPushNotifications(with: options) { [weak self] in
+            self?.askPhotoGalleryPermission()
+        }
+        
         AppConfigurator.applicationStarted(with: options)
         
         passcodeStorage.systemCallOnScreen = false
@@ -128,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
     }
     
-    private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+    private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?, completionHandler: @escaping () -> Void) {
         // required setup order
         // 1. subscribe to notification delegate
         // 2. Netmera SDK setup
@@ -137,10 +140,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
             Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
             AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
+            completionHandler()
         }
         UNUserNotificationCenter.current().delegate = self
         AnalyticsService.startNetmera()
         debugLog("AppDelegate setupPushNotifications setuped")
+    }
+    
+    private func askPhotoGalleryPermission() {
+        PHPhotoLibrary.requestAuthorizationStatus { _ in }
     }
     
     /// iOS 9+

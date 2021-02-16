@@ -153,7 +153,7 @@ enum ElementTypes {
                 }
             }
             
-            if grantedPermissions.contains(.writeAcl) {
+            if grantedPermissions.contains(.writeAcl) || grantedPermissions.contains(.read)  {
                 types.append(.share)
             }
             
@@ -198,7 +198,7 @@ enum ElementTypes {
                 return TextConstants.stopSharingSuccess
             case .leaveSharing:
                 return TextConstants.leaveSharingSuccess
-            case .moveToTrashShared:
+            case .moveToTrashShared, .moveToTrash:
                 return TextConstants.deleteSuccess
             case .rename:
                 return TextConstants.renameSuccess

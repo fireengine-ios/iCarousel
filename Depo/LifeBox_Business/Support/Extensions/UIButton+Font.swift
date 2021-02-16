@@ -22,34 +22,22 @@ extension UIButton {
 
 extension UIButton {    
     func centerVertically(padding: CGFloat = 6.0) {
-        guard
-            let imageViewSize = self.imageView?.frame.size,
-            let titleLabelSize = self.titleLabel?.frame.size else {
+        guard let imageSize = imageView?.image?.size, let label = titleLabel, let labelText = label.text else {
             return
         }
         
-        let totalHeight = imageViewSize.height + titleLabelSize.height + padding
+        self.titleEdgeInsets = UIEdgeInsets(top: padding,
+                                            left: -imageSize.width,
+                                            bottom: -(imageSize.height),
+                                            right: 0.0)
         
-        self.imageEdgeInsets = UIEdgeInsets(
-            top: -(totalHeight - imageViewSize.height),
-            left: 0.0,
-            bottom: 0.0,
-            right: -titleLabelSize.width
-        )
+        let labelString = NSString(string: labelText)
+        let titleSize = labelString.size(withAttributes: [NSAttributedString.Key.font: label.font])
         
-        self.titleEdgeInsets = UIEdgeInsets(
-            top: 0.0,
-            left: -imageViewSize.width,
-            bottom: -(totalHeight - titleLabelSize.height),
-            right: 0.0
-        )
-        
-        self.contentEdgeInsets = UIEdgeInsets(
-            top: 0.0,
-            left: 0.0,
-            bottom: titleLabelSize.height,
-            right: 0.0
-        )
+        self.imageEdgeInsets = UIEdgeInsets(top: -(titleSize.height + padding),
+                                            left: 0.0,
+                                            bottom: 0.0,
+                                            right: -titleSize.width)
     }
     
 }
