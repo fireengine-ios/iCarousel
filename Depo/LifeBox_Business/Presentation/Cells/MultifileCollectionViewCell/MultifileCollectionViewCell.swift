@@ -110,6 +110,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         willSet {
             newValue.delegate = self
             newValue.backgroundColor = .white
+            newValue.addTarget(self, action: #selector(updateNameTextColor(textField:)), for: .editingChanged)
         }
     }
     
