@@ -174,7 +174,6 @@ extension LoginPresenter: LoginInteractorOutput {
         case .needSignUp:
             debugLog("processLoginError:  .needSignUp this error should be impossible")
             failLogin(message: TextConstants.loginScreenServerError)
-//            needSignUp(message: TextConstants.loginScreenNeedSignUpError)
             
         case .incorrectUsernamePassword:
             failLogin(message: TextConstants.loginScreenCredentialsError)

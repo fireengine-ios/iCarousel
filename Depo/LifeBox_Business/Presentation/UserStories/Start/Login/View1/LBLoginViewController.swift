@@ -320,7 +320,6 @@ extension LBLoginViewController: LoginViewInput {
         errorView.message = text
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.errorView.isHidden = false
-            
             self.view.layoutIfNeeded()
         }
         
