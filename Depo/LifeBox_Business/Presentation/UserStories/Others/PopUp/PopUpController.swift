@@ -14,6 +14,18 @@ enum PopUpButtonState {
     case twin
 }
 
+enum PopUpVisualStyle {
+    case normal
+    case lbLogin
+
+    var nibName: String {
+        switch self {
+        case .normal: return "PopUpController"
+        case .lbLogin: return "ModernPopupViewController"
+        }
+    }
+}
+
 //MARK: - PopUpButtonHandler
 typealias PopUpButtonHandler = (_: PopUpController) -> Void
 
@@ -22,7 +34,7 @@ final class PopUpController: BasePopUpController {
     //MARK: IBOutlet
     @IBOutlet private weak var containerView: UIView! {
         didSet {
-            containerView.layer.cornerRadius = 5
+            containerView.layer.cornerRadius = popUpStyle == .normal ? 5 : 10
             
             containerView.layer.shadowColor = UIColor.black.cgColor
             containerView.layer.shadowRadius = 10
@@ -54,7 +66,7 @@ final class PopUpController: BasePopUpController {
     
     @IBOutlet private weak var firstButton: InsetsButton!
     @IBOutlet private weak var secondButton: InsetsButton!
-    @IBOutlet private weak var singleButton: InsetsButton!
+    @IBOutlet private weak var oneButton: UIButton!
     
     @IBOutlet private weak var darkView: UIView!
     @IBOutlet weak var firstImageView: UIImageView!
@@ -76,6 +88,8 @@ final class PopUpController: BasePopUpController {
     
     private var firstUrl: URL?
     private var secondUrl: URL?
+
+    private var popUpStyle: PopUpVisualStyle = .normal
     
     lazy var firstAction: PopUpButtonHandler = { vc in
         vc.hideSpinnerIncludeNavigationBar()
@@ -114,12 +128,12 @@ final class PopUpController: BasePopUpController {
     private func setupButtonState() {
         switch buttonState {
         case .single:
-            setup(singleButton)
-            singleButton.setTitle(singleButtonTitle, for: .normal)
+            setup(oneButton)
+            oneButton.setTitle(singleButtonTitle, for: .normal)
             
             firstButton.isHidden = true
             secondButton.isHidden = true
-            singleButton.isHidden = false
+            oneButton.isHidden = false
             
         case .twin:
             setup(firstButton)
@@ -129,7 +143,7 @@ final class PopUpController: BasePopUpController {
             
             firstButton.isHidden = false
             secondButton.isHidden = false
-            singleButton.isHidden = true
+            oneButton.isHidden = true
         }
     }
     
@@ -152,18 +166,20 @@ final class PopUpController: BasePopUpController {
         }
     }
     
-    private func setup(_ button: InsetsButton) {
-        button.isExclusiveTouch = true
-        button.setTitleColor(ColorConstants.blueColor, for: .normal)
-        button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
-        button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        button.layer.borderColor = ColorConstants.blueColor.cgColor
-        button.layer.borderWidth = 1
-        button.adjustsFontSizeToFitWidth()
-        
-        let inset: CGFloat = 2
-        button.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+    private func setup(_ button: UIButton) {
+        if popUpStyle == .normal {
+            button.isExclusiveTouch = true
+            button.setTitleColor(ColorConstants.blueColor, for: .normal)
+            button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
+            button.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
+            button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            button.layer.borderColor = ColorConstants.blueColor.cgColor
+            button.layer.borderWidth = 1
+            button.adjustsFontSizeToFitWidth()
+
+            let inset: CGFloat = 2
+            (button as? InsetsButton)?.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        }
     }
     
     //MARK: IBAction
@@ -182,13 +198,15 @@ final class PopUpController: BasePopUpController {
 
 // MARK: - Init
 extension PopUpController {
-    static func with(errorMessage: String) -> PopUpController {
-        return with(title: TextConstants.errorAlert, message: errorMessage, image: .error, buttonTitle: TextConstants.ok)
+    static func with(errorMessage: String, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
+        return with(title: TextConstants.errorAlert, message: errorMessage, image: .error, buttonTitle: TextConstants.ok, visualStyle: visualStyle)
     }
     
-    static func with(title: String?, message: String?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, message: String?,
+                     image: PopUpImage, buttonTitle: String,
+                     action: PopUpButtonHandler? = nil, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
         
-        let vc = controllerWith(title: title, message: message, image: image)
+        let vc = controllerWith(title: title, message: message, image: image, visualStyle: visualStyle)
         vc.buttonState = .single
         
         if let action = action {
@@ -199,9 +217,11 @@ extension PopUpController {
         return vc
     }
     
-    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, attributedMessage: NSAttributedString?,
+                     image: PopUpImage, buttonTitle: String,
+                     action: PopUpButtonHandler? = nil, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
         
-        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image)
+        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, visualStyle: visualStyle)
         vc.buttonState = .single
         
         if let action = action {
@@ -212,9 +232,13 @@ extension PopUpController {
         return vc
     }
     
-    static func with(title: String?, message: String?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, message: String?,
+                     image: PopUpImage, firstButtonTitle: String,
+                     secondButtonTitle: String, firstUrl: URL? = nil,
+                     secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil,
+                     secondAction: PopUpButtonHandler? = nil, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
         
-        let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
+        let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl, visualStyle: visualStyle)
         vc.buttonState = .twin
         
         if let firstAction = firstAction {
@@ -230,9 +254,13 @@ extension PopUpController {
         return vc
     }
     
-    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
+    static func with(title: String?, attributedMessage: NSAttributedString?,
+                     image: PopUpImage, firstButtonTitle: String,
+                     secondButtonTitle: String, firstUrl: URL? = nil,
+                     secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil,
+                     secondAction: PopUpButtonHandler? = nil, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
         
-        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, firstUrl: firstUrl, secondUrl: secondUrl)
+        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image, firstUrl: firstUrl, secondUrl: secondUrl, visualStyle: visualStyle)
         vc.buttonState = .twin
         
         if let firstAction = firstAction {
@@ -248,8 +276,10 @@ extension PopUpController {
         return vc
     }
     
-    private static func controllerWith(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
-        let vc = PopUpController(nibName: "PopUpController", bundle: nil)
+    private static func controllerWith(title: String?, attributedMessage: NSAttributedString?,
+                                       image: PopUpImage, firstUrl: URL? = nil,
+                                       secondUrl: URL? = nil, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
+        let vc = PopUpController(nibName: visualStyle.nibName, bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         
@@ -263,8 +293,10 @@ extension PopUpController {
     }
     
     
-    private static func controllerWith(title: String?, message: String?, image: PopUpImage, firstUrl: URL? = nil, secondUrl: URL? = nil) -> PopUpController {
-        let vc = PopUpController(nibName: "PopUpController", bundle: nil)
+    private static func controllerWith(title: String?, message: String?,
+                                       image: PopUpImage, firstUrl: URL? = nil,
+                                       secondUrl: URL? = nil, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
+        let vc = PopUpController(nibName: visualStyle.nibName, bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
         
@@ -273,6 +305,7 @@ extension PopUpController {
         vc.popUpImage = image
         vc.firstUrl = firstUrl
         vc.secondUrl = secondUrl
+        vc.popUpStyle = visualStyle
         
         return vc
     }

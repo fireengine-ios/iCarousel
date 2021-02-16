@@ -261,10 +261,10 @@
     </objects>
     <designables>
         <designable name="SnA-9S-aeD">
-            <size key="intrinsicContentSize" width="156" height="15"/>
+            <size key="intrinsicContentSize" width="116" height="15"/>
         </designable>
         <designable name="jaY-vd-khc">
-            <size key="intrinsicContentSize" width="131.5" height="16"/>
+            <size key="intrinsicContentSize" width="91.5" height="16"/>
         </designable>
     </designables>
     <resources>

@@ -191,7 +191,12 @@ final class LBLoginViewController: ViewController {
     }
     
     @IBAction private func forgotPasswordButtonTapped() {
-        print("forgot password")
+        let popupController = PopUpController.with(title: TextConstants.loginPageForgetPasswordPageTitle,
+                                                   message: TextConstants.loginPageForgetPasswordDescriptionText,
+                                                   image: .none,
+                                                   buttonTitle: TextConstants.loginPageForgetPasswordCloseButtonTitle,
+                                                   visualStyle: PopUpVisualStyle.lbLogin)
+        present(popupController, animated: false)
     }
 
     private func prepareForDisappear() {
