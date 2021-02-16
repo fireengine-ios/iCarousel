@@ -1891,3 +1891,4 @@
 "business_app_login_pwd_login_button" = "Corporate Login";
 "business_app_login_pwd_login_button_explanation" = "*It can be used when your company has identity integration with Turkcell";
 "business_app_login_FL_explanation" = "To login without identity integration";
+"business_app_login_captcha_box_inside" = "Enter the code";

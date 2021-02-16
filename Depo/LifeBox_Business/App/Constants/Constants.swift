@@ -1253,4 +1253,5 @@ extension TextConstants {
     static let loginPagePasswordFieldPlaceholder = NSLocalizedString("business_app_login_password_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageEmailFieldPlaceholder = NSLocalizedString("business_app_login_email_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageMainTitle = NSLocalizedString("business_app_login_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let captchaViewTextfieldPlaceholder = NSLocalizedString("business_app_login_captcha_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
