@@ -15,6 +15,7 @@
                 <outlet property="captchaView" destination="ii5-V8-YDl" id="Ewb-9H-0lb"/>
                 <outlet property="errorView" destination="dkR-V9-Ejo" id="8lE-yO-2Tz"/>
                 <outlet property="errorViewFakeHeightConstraint" destination="IYC-6b-oSX" id="SQX-Gf-Yvm"/>
+                <outlet property="fastLoginButton" destination="HYz-1K-Oja" id="3y7-Vc-7pi"/>
                 <outlet property="fastLoginDescriptionLabel" destination="q4u-sf-hsc" id="eRF-VF-dNc"/>
                 <outlet property="forgotPasswordButton" destination="Gi3-Ce-z7w" id="vHl-dC-MLt"/>
                 <outlet property="loginButton" destination="HaE-yH-M24" id="8vd-hq-JdS"/>
@@ -200,12 +201,13 @@
                                     <color key="textColor" name="loginDescriptionLabelColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_fast_login" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-1K-Oja">
+                                <button clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-1K-Oja">
                                     <rect key="frame" x="20" y="599" width="335" height="48"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="48" id="ts2-hy-kd6"/>
                                     </constraints>
-                                </imageView>
+                                    <state key="normal" backgroundImage="login_fast_login"/>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
@@ -261,10 +263,10 @@
     </objects>
     <designables>
         <designable name="SnA-9S-aeD">
-            <size key="intrinsicContentSize" width="116" height="15"/>
+            <size key="intrinsicContentSize" width="156" height="15"/>
         </designable>
         <designable name="jaY-vd-khc">
-            <size key="intrinsicContentSize" width="91.5" height="16"/>
+            <size key="intrinsicContentSize" width="131.5" height="16"/>
         </designable>
     </designables>
     <resources>

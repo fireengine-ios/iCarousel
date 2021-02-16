@@ -112,6 +112,14 @@ final class LBLoginViewController: ViewController {
             newValue.isHidden = true
         }
     }
+
+    @IBOutlet private weak var fastLoginButton: UIButton! {
+        willSet {
+            newValue.setTitle("", for: .normal)
+            let isTurkishLocale = Locale.current.languageCode?.lowercased().elementsEqual("tr") ?? false
+            newValue.setBackgroundImage(UIImage(named: isTurkishLocale ? "login_fast_login_tr" : "login_fast_login"), for: .normal)
+        }
+    }
     
     //MARK: Vars
     var output: LoginViewOutput!
