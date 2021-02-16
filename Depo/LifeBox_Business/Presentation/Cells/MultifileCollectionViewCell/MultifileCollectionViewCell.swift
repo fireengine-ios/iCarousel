@@ -176,8 +176,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private let actionViewsVisiblePart: CGFloat = 0.35
-    private let actionViewsTriggerPart: CGFloat = 0.2
+    private let actionViewsVisiblePart: CGFloat = 0.3
+    private let actionViewsTriggerPart: CGFloat = 0.5
     
     weak var actionDelegate: MultifileCollectionViewCellActionDelegate?
     
@@ -503,7 +503,7 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
     }
     
     private func updateOffset(scrollView: UIScrollView, velocityX: CGFloat, targetContentOffset: UnsafeMutablePointer<CGPoint>?) {
-        if  abs(velocityX) > 0.5 {
+        if  abs(velocityX) > 1 {
             updateOffsetFast(scrollView: scrollView, direction: HorizontalScrollDirection(velocityX: velocityX), targetContentOffset: targetContentOffset)
         } else {
             updateOffsetSlow(scrollView: scrollView)
@@ -514,22 +514,40 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         
         let defaultViewOffsetX = defaultView.frame.origin.x
         
+        let infoPauseOffsetX = defaultViewOffsetX - infoView.bounds.width * actionViewsVisiblePart
+        let deletePauseOffsetX = defaultViewOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
+        
+        let infoPauseTriggerOffsetX = defaultViewOffsetX - infoView.bounds.width * actionViewsTriggerPart
+        let deletePauseTriggerOffsetX = defaultViewOffsetX + deletionView.bounds.width * actionViewsTriggerPart
+        
+        let currentOffsetX = scrollView.contentOffset.x
+        
         //stop scrolling
         targetContentOffset?.pointee = scrollView.contentOffset
         
         switch direction {
             case .left:
-                if scrollView.contentOffset.x > defaultViewOffsetX {
-                    scrollView.scrollRectToVisible(defaultView.frame, animated: true)
+                if currentOffsetX < defaultViewOffsetX {
+                    if currentOffsetX < infoPauseTriggerOffsetX {
+                        scrollView.scrollRectToVisible(infoView.frame, animated: true)
+                    } else {
+                        scrollView.setContentOffset(CGPoint(x: infoPauseOffsetX, y: 0), animated: true)
+                    }
                 } else {
-                    scrollView.scrollRectToVisible(infoView.frame, animated: true)
+                    scrollView.scrollRectToVisible(defaultView.frame, animated: true)
                 }
+
             case .right:
-                if scrollView.contentOffset.x < defaultViewOffsetX {
-                    scrollView.scrollRectToVisible(defaultView.frame, animated: true)
+                if currentOffsetX > defaultViewOffsetX {
+                    if currentOffsetX > deletePauseTriggerOffsetX {
+                        scrollView.scrollRectToVisible(deletionView.frame, animated: true)
+                    } else {
+                        scrollView.setContentOffset(CGPoint(x: deletePauseOffsetX, y: 0), animated: true)
+                    }
                 } else {
-                    scrollView.scrollRectToVisible(deletionView.frame, animated: true)
+                    scrollView.scrollRectToVisible(defaultView.frame, animated: true)
                 }
+                
             case .none:
                 assertionFailure()
         }
@@ -558,18 +576,10 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         let infoPauseTriggerOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsTriggerPart
         let deletePauseTriggerOffsetX = defaultOffsetX + deletionView.bounds.width * actionViewsTriggerPart
         
-        if scrollOffsetX < infoPauseTriggerOffsetX {
-            if scrollOffsetX >= infoPauseOffsetX {
-                scrollView.setContentOffset(CGPoint(x: infoPauseOffsetX, y: 0), animated: true)
-            } else {
-                scrollView.scrollRectToVisible(infoView.frame, animated: true)
-            }
-        } else if scrollOffsetX > deletePauseTriggerOffsetX {
-            if scrollOffsetX <= deletePauseOffsetX {
-                scrollView.setContentOffset(CGPoint(x: deletePauseOffsetX, y: 0), animated: true)
-            } else {
-                scrollView.scrollRectToVisible(deletionView.frame, animated: true)
-            }
+        if scrollOffsetX < infoPauseTriggerOffsetX, scrollOffsetX <= infoPauseOffsetX {
+            scrollView.setContentOffset(CGPoint(x: infoPauseOffsetX, y: 0), animated: true)
+        } else if scrollOffsetX > deletePauseTriggerOffsetX, scrollOffsetX >= deletePauseOffsetX {
+            scrollView.setContentOffset(CGPoint(x: deletePauseOffsetX, y: 0), animated: true)
         } else {
             scrollView.scrollRectToVisible(defaultView.frame, animated: true)
         }
