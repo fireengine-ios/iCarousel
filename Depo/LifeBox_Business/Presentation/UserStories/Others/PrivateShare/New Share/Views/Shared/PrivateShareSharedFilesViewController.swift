@@ -59,6 +59,13 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     //MARK: - Override
     
+    override var keyboardHeight: CGFloat {
+        willSet {
+            let offset = max(0, newValue + 25)
+            collectionView?.contentInset.bottom = offset
+        }
+    }
+    
     deinit {
         CardsManager.default.removeViewForNotification(view: cardsContainer)
         ItemOperationManager.default.stopUpdateView(view: self)
@@ -209,10 +216,6 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
         collectionManager.change(sortingRule: rule.sortedRulesConveted)
     }
-    
-    func representationChanged(viewType: MoreActionsConfig.ViewType) {
-        collectionManager.change(viewType: viewType)
-    }
 }
 
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
@@ -358,6 +361,10 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
         selectedItemsCallback(collectionManager.selectedItems())
     }
     
+    func renamingSelected(item: Item) {
+        collectionManager.startRenaming(item: item)
+    }
+    
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch shareType.rootType {
             case .withMe:
@@ -386,6 +393,12 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     }
     
     func operationFailed(withType type: ElementTypes) {}
+    
+    func operationCancelled(withType type: ElementTypes) {
+        if type.isContained(in: [.moveToTrash, .moveToTrashShared]) {
+            collectionManager.reload(type: .onOperationFinished)
+        }
+    }
     
     func selectAllModeSelected() {}
     
@@ -426,6 +439,10 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
         if shareType.rootType == .withMe {
             collectionManager.delete(uuids: [uuid])
         }
+    }
+    
+    func didRenameItem(_ item: BaseDataSourceItem) {
+        collectionManager.reload(type: .onOperationFinished)
     }
 }
 

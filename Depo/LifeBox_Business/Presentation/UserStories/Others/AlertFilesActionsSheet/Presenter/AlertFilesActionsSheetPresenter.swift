@@ -428,7 +428,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             basePassingPresenter?.printSelected()
             
         case .rename:
-            interactor.info(item: items, isRenameMode: true)
+            if let item = items.first as? Item {
+                basePassingPresenter?.renamingSelected(item: item)
+            }
+//            interactor.info(item: items, isRenameMode: true)
             
         case .delete:
             let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits

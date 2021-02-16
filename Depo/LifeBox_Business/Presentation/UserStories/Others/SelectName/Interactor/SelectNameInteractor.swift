@@ -95,7 +95,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
                     DispatchQueue.main.async {
                         if let self = self {
                             let isSubfolder = self.rootFolderID != nil
-                            let wrapDataItem = WrapData(privateShareFileInfo: createdFolder, isShared: self.isPrivateShare)
+                            let wrapDataItem = WrapData(privateShareFileInfo: createdFolder)
                             self.output.operationSuccess(operation: self.moduleType, item: wrapDataItem, isSubFolder: isSubfolder)
                             ItemOperationManager.default.newFolderCreated()
                             self.analytics.sharedWithMe(action: .createFolder, on: nil)

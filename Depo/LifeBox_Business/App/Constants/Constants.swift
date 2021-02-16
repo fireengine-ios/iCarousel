@@ -254,12 +254,6 @@ struct TextConstants {
     
     static let topBarVideosFilter = NSLocalizedString("Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let topBarPhotosFilter = NSLocalizedString("Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
-    // MARK: - Camera alert
-    static let cameraAccessAlertTitle = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertText = NSLocalizedString("Error occurred while accessing your photos.\nPlease check your settings.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertGoToSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertNo = NSLocalizedString("No", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Sync out of space alert
     static let syncOutOfSpaceAlertTitle = NSLocalizedString("Caution!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1238,6 +1232,33 @@ extension TextConstants {
     static let tabBarItemSharedFiles = NSLocalizedString("business_app_tabbar_mysharings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarItemSharedArea = NSLocalizedString("business_app_tabbar_sharedarea", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarItemSettings = NSLocalizedString("tabbar_item_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let actionSelect = NSLocalizedString("business_app_select_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionDownload = NSLocalizedString("business_app_download_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionDelete = NSLocalizedString("business_app_delete_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionRename = NSLocalizedString("business_app_rename_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSharePrivately = NSLocalizedString("business_app_share_privately_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionShareCopy = NSLocalizedString("business_app_share_copy_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionStopSharing = NSLocalizedString("business_app_stop_sharing_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionLeaveSharing = NSLocalizedString("business_app_leave_sharing_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionInfo = NSLocalizedString("business_app_info_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let downloadSuccess = NSLocalizedString("business_app_download_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteSuccess = NSLocalizedString("business_app_delete_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let renameSuccess = NSLocalizedString("business_app_rename_sucess", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharePrivatelySuccess = NSLocalizedString("business_app_share_privately_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let stopSharingSuccess = NSLocalizedString("business_app_stop_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let leaveSharingSuccess = NSLocalizedString("business_app_leave_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteConfirmationTitle = NSLocalizedString("business_app_delete_confirm_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteConfirmationMessage = NSLocalizedString("business_app_delete_confirm_popup_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let delete = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: - Camera alert
+    static let galeryPermissionNotProvidedTitle = NSLocalizedString("business_app_gallery_permission_not_provided_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedDescription = NSLocalizedString("business_app_gallery_permission_not_provided_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedAcceptButton = NSLocalizedString("business_app_gallery_permission_not_provided_popup_settings_accept", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedRejectButton = NSLocalizedString("business_app_gallery_permission_not_provided_popup_settings_reject", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 // MARK: - Login page

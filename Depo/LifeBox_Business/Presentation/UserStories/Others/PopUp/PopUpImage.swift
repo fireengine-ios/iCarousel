@@ -29,7 +29,7 @@ enum PopUpImage {
         case .success:
             image = UIImage(named: "successImage")
         case .delete:
-            image = UIImage(named: "deleteAlert")
+            image = UIImage(named: "confirmationPopupIcon")
         case .music:
             image = UIImage(named: "musicAlert")
         case .clock:

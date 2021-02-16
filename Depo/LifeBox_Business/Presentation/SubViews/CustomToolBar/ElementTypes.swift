@@ -135,14 +135,14 @@ enum ElementTypes {
         //TODO: allow move and add/remove favorites if api is ready
         
         if status == .trashed {
-            return[.info] + ElementTypes.trashState
+            return ElementTypes.trashState + [.info]
         }
         
         guard let item = item as? Item else {
             return []
         }
         
-        var types: [ElementTypes] = [.info]
+        var types: [ElementTypes] = [.select]
 
         if let grantedPermissions = item.privateSharePermission?.granted {
             if grantedPermissions.contains(.read) {
@@ -153,13 +153,21 @@ enum ElementTypes {
                 }
             }
             
-            if grantedPermissions.contains(.writeAcl) {
+            if grantedPermissions.contains(.writeAcl) || grantedPermissions.contains(.read)  {
                 types.append(.share)
             }
             
-            //todo: add write_acl permission check if api is ready
+            // TODO: - Add / Delete permission check  //grantedPermissions.contains(.writeAcl)
             if item.isShared {
-                item.isOwner ? types.append(.endSharing) : types.append(.leaveSharing)
+                if item.privateShareType == .withMe {
+                    types.append(.leaveSharing)
+                } else if item.privateShareType == .byMe {
+                    types.append(.endSharing)
+                }
+            }
+            
+            if grantedPermissions.contains(.setAttribute) {
+                types.append(.rename)
             }
             
             if grantedPermissions.contains(.delete) {
@@ -169,45 +177,37 @@ enum ElementTypes {
             }
         }
         
+        types.append(.info)
+
         return types
     }
     
-    func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = [], divorseItems: DivorseItems? = nil) -> String? {
-        if let divorseItems = divorseItems {
-            return divorseSuccessMessage(divorseItems: divorseItems)
-        }
-        
+    func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = []) -> String? {
         switch self {
-        case .addToFavorites:
-            return TextConstants.snackbarMessageAddedToFavorites
-        case .download:
-            let format = TextConstants.snackbarMessageDownloadedFilesFormat
-            return String(format: format, relatedItems.count)
-        case .downloadDocument:
-            let format = TextConstants.snackbarMessageDownloadedFilesFormat
-            return String(format: format, relatedItems.count)
-        case .emptyTrashBin:
-            return TextConstants.trashBinDeleteAllComplete
-        case .move:
-            return TextConstants.snackbarMessageFilesMoved
-        case .removeFromFavorites:
-            return TextConstants.snackbarMessageRemovedFromFavorites
-        case .endSharing:
-            return TextConstants.privateSharedEndSharingActionSuccess
-        case .leaveSharing:
-            return TextConstants.privateSharedLeaveSharingActionSuccess
-        case .moveToTrashShared:
-            return TextConstants.moveToTrashItemsSuccessText
-        default:
-            return nil
+            case .addToFavorites:
+                return TextConstants.snackbarMessageAddedToFavorites
+            case .download, .downloadDocument:
+                return TextConstants.downloadSuccess
+            case .emptyTrashBin:
+                return TextConstants.trashBinDeleteAllComplete
+            case .move:
+                return TextConstants.snackbarMessageFilesMoved
+            case .removeFromFavorites:
+                return TextConstants.snackbarMessageRemovedFromFavorites
+            case .endSharing:
+                return TextConstants.stopSharingSuccess
+            case .leaveSharing:
+                return TextConstants.leaveSharingSuccess
+            case .moveToTrashShared, .moveToTrash:
+                return TextConstants.deleteSuccess
+            case .rename:
+                return TextConstants.renameSuccess
+            default:
+                return nil
         }
     }
     
-    func alertSuccessMessage(divorseItems: DivorseItems? = nil) -> String? {
-        if let divorseItems = divorseItems {
-            return divorseSuccessMessage(divorseItems: divorseItems)
-        }
-        
+    func alertSuccessMessage() -> String? {
         switch self {
         case .download:
             return TextConstants.popUpDownloadComplete
@@ -258,32 +258,14 @@ enum ElementTypes {
         return triplet
     }
     
-    func divorseSuccessMessage(divorseItems: DivorseItems) -> String {
-        let localizations = localizationTriplet()
-
-        let text: String
-        switch divorseItems {
-        case .items:
-            text = localizations.items
-            
-        case .albums:
-            text = localizations.albums
-            
-        case .folders:
-            text = localizations.folders
-        }
-        
-        return text
-    }
-    
     func actionTitle(fileType: FileType? = nil) -> String {
         switch self {
         case .info:
-            return TextConstants.actionSheetInfo
+            return TextConstants.actionInfo
         case .download, .downloadDocument:
-            return TextConstants.actionSheetDownload
+            return TextConstants.actionDownload
         case .moveToTrash, .moveToTrashShared, .delete:
-            return TextConstants.actionSheetDelete
+            return TextConstants.actionDelete
         case .restore:
             return TextConstants.actionSheetRestore
         case .move:
@@ -327,11 +309,11 @@ enum ElementTypes {
         case .print:
             return TextConstants.tabBarPrintLabel
         case .rename:
-            return TextConstants.actionSheetRename
+            return TextConstants.actionRename
         case .endSharing:
-            return TextConstants.privateSharedEndSharingActionTitle
+            return TextConstants.actionStopSharing
         case .leaveSharing:
-            return TextConstants.privateSharedLeaveSharingActionTitle
+            return TextConstants.actionLeaveSharing
         default:
             return ""
         }

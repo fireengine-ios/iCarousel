@@ -145,7 +145,9 @@ final class NetmeraService {
     }
     
     static func sendEvent(event: NetmeraEvent) {
-        Netmera.send(event)
+        DispatchQueue.main.async {
+            Netmera.send(event)
+        }
     }
     
     typealias TypeToCountDictionary = [FileType: Int]

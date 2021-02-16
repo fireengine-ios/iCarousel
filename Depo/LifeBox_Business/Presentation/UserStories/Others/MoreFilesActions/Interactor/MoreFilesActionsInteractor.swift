@@ -7,13 +7,6 @@
 //
 
 import WidgetKit
-
-enum DivorseItems {
-    case items
-    case albums
-    case folders
-}
-
 enum ShareTypes {
     case original
     case link
@@ -22,11 +15,11 @@ enum ShareTypes {
     var actionTitle: String {
         switch self {
         case .original:
-            return TextConstants.actionSheetShareOriginalSize
+            return TextConstants.actionShareCopy
         case .link:
             return TextConstants.actionSheetShareShareViaLink
         case .private:
-            return TextConstants.actionSheetSharePrivate
+            return TextConstants.actionSharePrivately
         }
     }
     
@@ -37,8 +30,7 @@ enum ShareTypes {
         }
         
         let isOriginallDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.read) ?? false) })
-        //TODO: check write_acl for private share when it's available on BE
-//        let isPrivatelDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.writeAcl) ?? false) })
+        let isPrivateDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.writeAcl) ?? false) })
         
         var allowedTypes = [ShareTypes]()
         
@@ -53,6 +45,11 @@ enum ShareTypes {
         if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits || isOriginallDisabled {
             allowedTypes.remove(.original)
         }
+        
+        if isPrivateDisabled {
+            allowedTypes.remove(.private)
+        }
+        
         
         if items.contains(where: { $0.isLocalItem }) {
             allowedTypes.remove(.private)
@@ -304,6 +301,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func moveToTrash(items: [BaseDataSourceItem]) {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            self?.output?.operationCancelled(type: .moveToTrash)
             vc.close()
         }
         
@@ -339,6 +337,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .cancel)
+            self?.output?.operationCancelled(type: .restore)
             vc.close()
         }
 
@@ -457,11 +456,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func download(item: [BaseDataSourceItem]) {
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            showAccessAlert()
-            return
-        }
-        
         if let item = item as? [Item] {
             
             if let firstItem = item.first {
@@ -475,10 +469,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 self?.successAction(elementType: .download, relatedItems: item)()
             }
             
-            fileService.download(items: item, toPath: "",
-                                 success: successAction,
-                                 fail: failAction(elementType: .download))
-            
+            self.fileService.download(items: item, toPath: "",
+                                      success: successAction,
+                                      fail: self.failAction(elementType: .download))
         }
     }
     
@@ -573,11 +566,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func showAccessAlert() {
         debugLog("CameraService showAccessAlert")
         DispatchQueue.main.async {
-            let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
-                                                  message: TextConstants.cameraAccessAlertText,
-                                                  image: .none,
-                                                  firstButtonTitle: TextConstants.cameraAccessAlertNo,
-                                                  secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+            let controller = PopUpController.with(title: TextConstants.galeryPermissionNotProvidedTitle,
+                                                  message: TextConstants.galeryPermissionNotProvidedDescription,
+                                                  image: .delete,
+                                                  firstButtonTitle: TextConstants.galeryPermissionNotProvidedRejectButton,
+                                                  secondButtonTitle: TextConstants.galeryPermissionNotProvidedAcceptButton,
                                                   secondAction: { vc in
                                                     vc.close {
                                                         UIApplication.shared.openSettings()
@@ -590,6 +583,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func delete(items: [BaseDataSourceItem]) {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            self?.output?.operationCancelled(type: .delete)
             vc.close()
         }
         
@@ -643,7 +637,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          image: .question,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
-                                         firstAction: { vc in
+                                         firstAction: { [weak self] vc in
+                                            self?.output?.operationCancelled(type: .endSharing)
                                             vc.close()
                                          },
                                          secondAction: { [weak self] vc in
@@ -677,7 +672,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          image: .question,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
-                                         firstAction: { vc in
+                                         firstAction: { [weak self] vc in
+                                            self?.output?.operationCancelled(type: .leaveSharing)
                                             vc.close()
                                          },
                                          secondAction: { [weak self] vc in
@@ -697,6 +693,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            self?.output?.operationCancelled(type: .moveToTrashShared)
             vc.close()
         }
         
@@ -714,13 +711,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         trackScreen(.fileOperationConfirmPopup(.trash))
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
         
-        let message = items.allSatisfy { $0.isOwner } ? TextConstants.deleteFilesText : TextConstants.privateShareMoveToTrashSharedWithMeMessage
         
-        let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                         message: message,
+        let popup = PopUpController.with(title: TextConstants.deleteConfirmationTitle,
+                                         message: TextConstants.deleteConfirmationMessage,
                                          image: .delete,
                                          firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
+                                         secondButtonTitle: TextConstants.delete,
                                          firstAction: cancelHandler,
                                          secondAction: okHandler)
         
@@ -730,6 +726,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func emptyTrashBin() {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
 //            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            self?.output?.operationCancelled(type: .emptyTrashBin)
             vc.close()
         }
         
@@ -812,7 +809,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 
 extension MoreFilesActionsInteractor {
     
-    func successAction(elementType: ElementTypes, itemsType: DivorseItems? = nil, relatedItems: [BaseDataSourceItem] = []) -> FileOperation {
+    func successAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem] = []) -> FileOperation {
         let success: FileOperation = { [weak self] in
             guard let self = self else {
                 return
@@ -820,18 +817,14 @@ extension MoreFilesActionsInteractor {
 
             self.trackGASuccessEvent(elementType: elementType)
             
-            if itemsType != nil {
-                self.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
-            }
-            
             DispatchQueue.main.async {
                 self.output?.operationFinished(type: elementType)
                 self.router.hideSpiner()
                 
                 self.output?.successPopupWillAppear()
                 if SnackbarType(operationType: elementType) != nil {
-                    self.showSnackbar(elementType: elementType, itemsType: itemsType, relatedItems: relatedItems)
-                } else if let message = elementType.alertSuccessMessage(divorseItems: itemsType) {
+                    self.showSnackbar(elementType: elementType, relatedItems: relatedItems)
+                } else if let message = elementType.alertSuccessMessage() {
                     self.showSuccessPopup(message: message)
                 }
             }
@@ -851,8 +844,8 @@ extension MoreFilesActionsInteractor {
         router.presentViewController(controller: popup)
     }
     
-    private func showSnackbar(elementType: ElementTypes, itemsType: DivorseItems? = nil, relatedItems: [BaseDataSourceItem]) {
-        SnackbarManager.shared.show(elementType: elementType, relatedItems: relatedItems, itemsType: itemsType) {
+    private func showSnackbar(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) {
+        SnackbarManager.shared.show(elementType: elementType, relatedItems: relatedItems) {
             let router = RouterVC()
             switch elementType {
             case .moveToTrash:
@@ -989,15 +982,7 @@ extension MoreFilesActionsInteractor {
                 let errorResponse = ErrorResponse.error(error)
                 self?.failAction(elementType: type, relatedItems: items)(errorResponse)
             } else {
-                let itemsType: DivorseItems
-                if photosVideos.allSatisfy({ $0.fileType == .folder }) {
-                    itemsType = .folders
-                    
-                } else {
-                    itemsType = .items
-                }
-                
-                self?.successAction(elementType: type, itemsType: itemsType, relatedItems: items)()
+                self?.successAction(elementType: type, relatedItems: items)()
             }
         }
     }

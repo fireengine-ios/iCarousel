@@ -308,23 +308,6 @@ class FileService: BaseRequestService {
     
     private var error: ErrorResponse?
     
-    private func showAccessAlert() {
-        debugLog("CameraService showAccessAlert")
-        DispatchQueue.main.async {
-            let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
-                                                  message: TextConstants.cameraAccessAlertText,
-                                                  image: .none,
-                                                  firstButtonTitle: TextConstants.cameraAccessAlertNo,
-                                                  secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
-                                                  secondAction: { vc in
-                                                    vc.close {
-                                                        UIApplication.shared.openSettings()
-                                                    }
-            })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        }
-    }
-    
     func downloadDocument(items: [WrapData], success: FileOperation?, fail: FailResponse?) {
         guard !items.isEmpty else {
             return
@@ -372,94 +355,96 @@ class FileService: BaseRequestService {
     
     func download(items: [WrapData], success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService download")
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            showAccessAlert()
-            success?()
-            return
-        }
-        let supportedItemsToDownload = items.filter { $0.hasSupportedExtension() }
         
-        guard !supportedItemsToDownload.isEmpty else {
-            fail?(ErrorResponse.string(TextConstants.errorUnsupportedExtension))
-            return
-        }
-        
-        if supportedItemsToDownload.count != items.count {
-            UIApplication.showErrorAlert(message: TextConstants.errorUnsupportedExtension)
-        }
-        
-        allOperationsCount = allOperationsCount + supportedItemsToDownload.count
-        CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
-        let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.compactMap {
-            guard let urlToFile = $0.urlToFile, let fileName = $0.name else {
-                return nil
-            }
-            
-            let url = urlToFile.isExpired ? urlToFile.byTrimmingQuery : urlToFile
-            
-            guard let downloadUrl = url else {
-                return nil
-            }
-            
-            return BaseDownloadRequestParametrs(urlToFile: downloadUrl, fileName: fileName, contentType: $0.fileType, albumName: nil, item: $0)
-        }
-        
-        let operations = downloadRequests.compactMap { baseDownloadRequest in
-            DownLoadOperation(downloadParam: baseDownloadRequest, success: { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                if let unwrapItem = baseDownloadRequest.item {
-                    switch unwrapItem.fileType {
-                    case .video:
-                        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.video))
-                    case .image:
-                        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.photo))
-                    case .audio:
-                        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.music))
-                    case .application(let applicationType):
-                        switch applicationType {
-                        case .pdf, .ppt, .xls, .txt, .doc, .pptx :
-                           self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.document))
-                        default:
-                            break
-                        }
-                    default:
-                        break
-                    }
-                }
-
-                self.completedOperationsCount += 1
-                CardsManager.default.setProgressForOperationWith(type: .download,
-                                                                 allOperations: self.allOperationsCount,
-                                                                 completedOperations: self.completedOperationsCount)
-            }, fail: { [weak self] error in
-                self?.error = error.isUnknownError ? ErrorResponse.string(TextConstants.errorUnsupportedExtension) : error
-                /// HERE MUST BE ERROR HANDLER
-                self?.completedOperationsCount += 1
-            })
-        }
-        
-        dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] isAllowed, _ in
+            guard let self = self, isAllowed else {
                 return
             }
             
-            self.downloadOperation.addOperations(operations, waitUntilFinished: true)
+            let supportedItemsToDownload = items.filter { $0.hasSupportedExtension() }
             
-            if self.allOperationsCount == self.completedOperationsCount {
-                self.trackDownloaded(lastQueueItems: items)
-                CardsManager.default.stopOperationWith(type: .download)
+            guard !supportedItemsToDownload.isEmpty else {
+                fail?(ErrorResponse.string(TextConstants.errorUnsupportedExtension))
+                return
             }
             
-            if let error = self.error {
-                fail?(error)
-                self.error = nil
-            } else {
+            if supportedItemsToDownload.count != items.count {
+                UIApplication.showErrorAlert(message: TextConstants.errorUnsupportedExtension)
+            }
+            
+            self.allOperationsCount = self.allOperationsCount + supportedItemsToDownload.count
+            CardsManager.default.startOperationWith(type: .download, allOperations: self.allOperationsCount, completedOperations: 0)
+            let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.compactMap {
+                guard let urlToFile = $0.urlToFile, let fileName = $0.name else {
+                    return nil
+                }
+                
+                let url = urlToFile.isExpired ? urlToFile.byTrimmingQuery : urlToFile
+                
+                guard let downloadUrl = url else {
+                    return nil
+                }
+                
+                return BaseDownloadRequestParametrs(urlToFile: downloadUrl, fileName: fileName, contentType: $0.fileType, albumName: nil, item: $0)
+            }
+            
+            let operations = downloadRequests.compactMap { baseDownloadRequest in
+                DownLoadOperation(downloadParam: baseDownloadRequest, success: { [weak self] in
+                    guard let `self` = self else {
+                        return
+                    }
+                    if let unwrapItem = baseDownloadRequest.item {
+                        switch unwrapItem.fileType {
+                        case .video:
+                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.video))
+                        case .image:
+                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.photo))
+                        case .audio:
+                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.music))
+                        case .application(let applicationType):
+                            switch applicationType {
+                            case .pdf, .ppt, .xls, .txt, .doc, .pptx :
+                               self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.document))
+                            default:
+                                break
+                            }
+                        default:
+                            break
+                        }
+                    }
+
+                    self.completedOperationsCount += 1
+                    CardsManager.default.setProgressForOperationWith(type: .download,
+                                                                     allOperations: self.allOperationsCount,
+                                                                     completedOperations: self.completedOperationsCount)
+                }, fail: { [weak self] error in
+                    self?.error = error.isUnknownError ? ErrorResponse.string(TextConstants.errorUnsupportedExtension) : error
+                    /// HERE MUST BE ERROR HANDLER
+                    self?.completedOperationsCount += 1
+                })
+            }
+            
+            self.dispatchQueue.async { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                
+                self.downloadOperation.addOperations(operations, waitUntilFinished: true)
+                
                 if self.allOperationsCount == self.completedOperationsCount {
-                    self.allOperationsCount = 0
-                    self.completedOperationsCount = 0
-                    success?()
+                    self.trackDownloaded(lastQueueItems: items)
+                    CardsManager.default.stopOperationWith(type: .download)
+                }
+                
+                if let error = self.error {
+                    fail?(error)
+                    self.error = nil
+                } else {
+                    if self.allOperationsCount == self.completedOperationsCount {
+                        self.allOperationsCount = 0
+                        self.completedOperationsCount = 0
+                        success?()
+                    }
                 }
             }
         }
@@ -467,69 +452,72 @@ class FileService: BaseRequestService {
     
     func downloadToCameraRoll(downloadParam: BaseDownloadRequestParametrs, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService downloadToCameraRoll \(downloadParam.fileName)")
-        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-            showAccessAlert()
-            success?()
-            return
-        }
-        executeDownloadRequest(param: downloadParam) { url, urlResponse, error in
-            
-            if let err = error {
-                fail?(.error(err))
+        
+        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] isAllowed, _ in
+            guard let self = self, isAllowed else {
+                success?()
                 return
             }
-
-            if let httpResponse = urlResponse as? HTTPURLResponse,
-                let location = url {
-                if 199...299 ~= httpResponse.statusCode {
-                    
-                    let destination = Device.documentsFolderUrl(withComponent: downloadParam.fileName)
-                    
-                    let removeDestinationFile: () -> Void = {
-
-                        do {
-                            try FileManager.default.removeItem(at: destination)
-                        } catch { }
-                    }
-                    
-                    do {
-                        try FileManager.default.moveItem(at: location, to: destination)
-                    } catch {
-                        
-                        fail?(.string("Download move file error"))
-                        return
-                    }
-                    
-                    var type = PHAssetMediaType.unknown
-                    
-                    switch downloadParam.contentType {
-                        case .image : type = .image
-                        case .video : type = .video
-                        default     : break
-                    }
-                    
-                    if let downloadItem = downloadParam.item {
-                        LocalMediaStorage.default.appendToAlbum(fileUrl: destination,
-                                                                type: type,
-                                                                album: downloadParam.albumName,
-                                                                item: downloadItem,
-                                                                success: {
-                                                                    removeDestinationFile()
-                                                                    success?()
-                                                                }, fail: { error in
-                                                                    removeDestinationFile()
-                                                                    fail?(error)
-                                                                })
-                    } else {
-                        fail?(.string("Incorrect response "))
-                    }
-                } else {
-                    fail?(.string("Incorrect response "))
+            
+            self.executeDownloadRequest(param: downloadParam) { url, urlResponse, error in
+                
+                if let err = error {
+                    fail?(.error(err))
                     return
                 }
-            } else {
-                fail?(.string("Incorrect response  "))
-                return
+
+                if let httpResponse = urlResponse as? HTTPURLResponse,
+                    let location = url {
+                    if 199...299 ~= httpResponse.statusCode {
+                        
+                        let destination = Device.documentsFolderUrl(withComponent: downloadParam.fileName)
+                        
+                        let removeDestinationFile: () -> Void = {
+
+                            do {
+                                try FileManager.default.removeItem(at: destination)
+                            } catch { }
+                        }
+                        
+                        do {
+                            try FileManager.default.moveItem(at: location, to: destination)
+                        } catch {
+                            
+                            fail?(.string("Download move file error"))
+                            return
+                        }
+                        
+                        var type = PHAssetMediaType.unknown
+                        
+                        switch downloadParam.contentType {
+                            case .image : type = .image
+                            case .video : type = .video
+                            default     : break
+                        }
+                        
+                        if let downloadItem = downloadParam.item {
+                            LocalMediaStorage.default.appendToAlbum(fileUrl: destination,
+                                                                    type: type,
+                                                                    album: downloadParam.albumName,
+                                                                    item: downloadItem,
+                                                                    success: {
+                                                                        removeDestinationFile()
+                                                                        success?()
+                                                                    }, fail: { error in
+                                                                        removeDestinationFile()
+                                                                        fail?(error)
+                                                                    })
+                        } else {
+                            fail?(.string("Incorrect response "))
+                        }
+                    } else {
+                        fail?(.string("Incorrect response "))
+                        return
+                    }
+                } else {
+                    fail?(.string("Incorrect response  "))
+                    return
+                }
             }
         }
     }
