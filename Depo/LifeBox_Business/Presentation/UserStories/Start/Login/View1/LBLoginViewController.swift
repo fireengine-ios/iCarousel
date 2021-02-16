@@ -172,16 +172,12 @@ final class LBLoginViewController: ViewController {
     private func configureKeyboard() {
         keyboard
             .on(event: .willShow) { [weak self] options in
-                guard let `self` = self else {
-                    return
-                }
+                guard let self = self else { return }
                 
                 self.updateScroll(with: options.endFrame)
             }
             .on(event: .willHide) { [weak self] _ in
-                guard let `self` = self else {
-                    return
-                }
+                guard let self = self else { return }
                 
                 var inset = self.scrollView.contentInset
                 inset.bottom = 0
@@ -248,10 +244,12 @@ final class LBLoginViewController: ViewController {
         
         if captchaView.isHidden {
             output.sendLoginAndPassword(login: loginTextField.text ?? "",
-                                        password: passwordTextField.text ?? "")
+                                        password: passwordTextField.text ?? "",
+                                        rememberMe: rememberMeButton.isSelected)
         } else {
             output.sendLoginAndPasswordWithCaptcha(login: loginTextField.text ?? "",
                                                    password: passwordTextField.text ?? "",
+                                                   rememberMe: rememberMeButton.isSelected,
                                                    captchaID: captchaView.currentCaptchaUUID,
                                                    captchaAnswer: captchaView.captchaAnswerTextField.text ?? "")
         }

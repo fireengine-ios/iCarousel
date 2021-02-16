@@ -10,7 +10,7 @@ protocol LoginInteractorInput {
         
     func rememberMe(state: Bool)
     
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?)
+    func authificate(login: String, password: String, rememberMe: Bool, atachedCaptcha: CaptchaParametrAnswer?)
     
     func checkEULA()
     

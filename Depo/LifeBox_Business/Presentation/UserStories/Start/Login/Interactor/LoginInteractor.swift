@@ -111,6 +111,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private func authificate(login: String,
                              password: String,
+                             rememberMe: Bool = true,
                              atachedCaptcha: CaptchaParametrAnswer?,
                              errorHandler: @escaping (LoginResponseError, String) -> Void) {
         
@@ -158,7 +159,7 @@ class LoginInteractor: LoginInteractorInput {
         
         let user = AuthenticationUser(login: login,
                                       password: password,
-                                      rememberMe: true,
+                                      rememberMe: rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
@@ -245,8 +246,8 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: LoginInteractorInput
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
-        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
+    func authificate(login: String, password: String, rememberMe: Bool = true, atachedCaptcha: CaptchaParametrAnswer?) {
+        authificate(login: login, password: password, rememberMe: rememberMe, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
             
             DispatchQueue.main.async { [weak self] in
                 self?.output?.processLoginError(loginError, errorText: errorText)
