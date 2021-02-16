@@ -254,10 +254,10 @@ extension UIFont {
     }
     
     static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "GT America Trial Rg", size: size)!
+        return UIFont(name: "GTAmericaTrial-Rg", size: size)!
     }
     
     static func GTAmericaStandardRegularFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "GT America Trial Rg", size: size)!
+        return UIFont(name: "GTAmericaTrial-Rg", size: size)!
     }
 }
