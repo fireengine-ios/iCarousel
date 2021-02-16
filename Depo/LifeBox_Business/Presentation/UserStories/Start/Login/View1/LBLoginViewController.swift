@@ -69,7 +69,7 @@ final class LBLoginViewController: ViewController {
         willSet {
             newValue.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
-            newValue.setTitle(TextConstants.loginPageForgetPasswordButtonTitle, for: .normal)
+            newValue.setTitle(TextConstants.loginPageForgetPasswordButtonTitle + " (?)", for: .normal)
         }
     }
     
