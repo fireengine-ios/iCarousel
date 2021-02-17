@@ -19,6 +19,8 @@ struct ColorConstants {
     static let multifileCellBackgroundColorSelectedSolid = UIColor(named: "multifileCellBackgroundColorSelectedSolid")!
     static let multifileCellInfoView = UIColor(named: "multifileCellInfoView")!
     static let multifileCellDeletionView = UIColor(named: "multifileCellDeletionView")!
+    static let multifileCellRenameFieldNameColor = UIColor(named: "multifileCellRenameFieldNameColor")!
+    static let multifileCellRenameFieldExtensionColor = UIColor(named: "multifileCellRenameFieldExtensionColor")!
     
     static let confirmationPopupTitle = UIColor(named: "confirmationPopupTitle")!
     static let confirmationPopupMessage = UIColor(named: "confirmationPopupMessage")!
