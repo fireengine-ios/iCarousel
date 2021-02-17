@@ -12,12 +12,12 @@ class LoginModuleConfigurator {
 
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
 
-        if let viewController = viewInput as? LBLoginViewController {
+        if let viewController = viewInput as? LoginViewController {
             configure(viewController: viewController)
         }
     }
 
-    private func configure(viewController: LBLoginViewController) {
+    private func configure(viewController: LoginViewController) {
 
         let router = LoginRouter()
 

@@ -11,7 +11,7 @@ import UIKit
 class LoginModuleInitializer: NSObject {
 
     //Connect with object on storyboard
-    @IBOutlet weak var loginViewController: LBLoginViewController!
+    @IBOutlet weak var loginViewController: LoginViewController!
 
     override func awakeFromNib() {
         let configurator = LoginModuleConfigurator()

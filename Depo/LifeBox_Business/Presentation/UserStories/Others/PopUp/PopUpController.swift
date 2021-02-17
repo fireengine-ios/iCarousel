@@ -21,7 +21,7 @@ enum PopUpVisualStyle {
     var nibName: String {
         switch self {
         case .normal: return "PopUpController"
-        case .lbLogin: return "ModernPopupViewController"
+        case .lbLogin: return "LoginPopupViewController"
         }
     }
 }
