@@ -51,7 +51,7 @@ final class LoginViewController: ViewController {
             let normalImage = UIImage(named: "checkBoxNotSelected")
             newValue.setImage(normalImage, for: .normal)
             
-            let selectedImage = UIImage(named: "checkbox_active")
+            let selectedImage = UIImage(named: "checkboxSelected")
             newValue.setImage(selectedImage, for: .selected)
         }
     }
