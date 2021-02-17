@@ -140,6 +140,16 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             newValue.alwaysBounceVertical = false
             newValue.bounces = false
             newValue.isPagingEnabled = false
+            
+            if #available(iOS 14, *) {
+               //
+            } else {
+                //allows cell selection
+                newValue.isUserInteractionEnabled = false
+                contentView.addGestureRecognizer(newValue.panGestureRecognizer)
+            }
+            
+            
             newValue.delegate = self
         }
     }
@@ -190,11 +200,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     private var pathExtensionLength = 0
     
     //MARK: - Override
-    override var isSelected: Bool {
-        willSet {
-            defaultView.backgroundColor = newValue ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
-        }
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -221,6 +226,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         iconsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         selectIconWidth.constant = 0
         nameEditView.alpha = 0
+        
+        setScrollableContentInteraction(isAvailable: false)
         scrollableContent.scrollRectToVisible(defaultView.frame, animated: false)
         
         if #available(iOS 14, *) {
@@ -228,7 +235,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             menuButton.change(indexPath: nil)
         }
         
-        isSelected = false
+        setupBackgroundColor(isSelected: false)
     }
     
     //MARK: - Setup
@@ -280,9 +287,17 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private func setScrollableContentInteraction(isAvailable: Bool) {
+        if #available(iOS 14, *) {
+            return
+        }
+        
+        scrollableContent.isUserInteractionEnabled = isAvailable
+    }
+    
     func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         isSelectionInProgress = isSelectionActive
-        self.isSelected = isSelectionActive && isSelected
+        setupBackgroundColor(isSelected: isSelectionActive && isSelected)
         
         let widthConstant: CGFloat
         
@@ -300,6 +315,10 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             self.setupMenuAvailability()
             self.layoutIfNeeded()
         }
+    }
+    
+    private func setupBackgroundColor(isSelected: Bool) {
+        defaultView.backgroundColor = isSelected ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
     }
     
     //MARK: - Menu button actions
@@ -330,6 +349,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private func showRenamingView() {
         DispatchQueue.toMain {
+            self.setScrollableContentInteraction(isAvailable: true)
+            
             self.renameField.attributedText = NSAttributedString(string: self.itemModel?.name ?? "")
             self.renameField.becomeFirstResponder()
             self.updateNameTextColor(textField: self.renameField)
@@ -350,7 +371,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             self.nameEditView.alpha = 0
             self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColor
         } completion: { _ in
-            //
+            self.setScrollableContentInteraction(isAvailable: false)
         }
     }
     
