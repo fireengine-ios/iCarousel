@@ -41,12 +41,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         return
     }
     
-    private func showLandingPagesIfNeeded() {
-        if storageVars.isShownLanding {
-            router.navigateToOnboarding()
-        } else {
-            router.navigateToLandingPages(isTurkCell: false)
-        }
+    private func showLoginScreen() {
+        router.navigateToLoginScreen()
     }
     
     private func showPasscodeIfNeed() {
@@ -92,7 +88,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onFailLogin() {
-        showLandingPagesIfNeeded()
+        showLoginScreen()
     }
     
     func onNetworkFail() {
@@ -123,19 +119,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     private func openApp() {
         AuthoritySingleton.shared.checkNewVersionApp()
-        
-        if turkcellLogin {
-            if !Device.isIpad, !storageVars.isShownLanding {
-                storageVars.isShownLanding = true
-                router.navigateToLandingPages(isTurkCell: turkcellLogin)
-            } else {
-                router.navigateToApplication()
-                openLink()
-            }
-        } else {
-            router.navigateToApplication()
-            openLink()
-        }
+        router.navigateToApplication()
+        openLink()
     }
     
     func onFailEULA(isFirstLogin: Bool) {

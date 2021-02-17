@@ -8,34 +8,32 @@
 
 import UIKit
 import Typist
-import WidgetKit
 
 final class LoginViewController: ViewController {
 
-    //MARK: IBOutlets
-    @IBOutlet private weak var alertsStackView: UIStackView! {
+    @IBOutlet private weak var errorViewFakeHeightConstraint: NSLayoutConstraint!
+
+    @IBOutlet private weak var pageTitleLabel: UILabel! {
         willSet {
-            newValue.spacing = 16
-            newValue.alignment = .fill
-            newValue.axis = .vertical
-            newValue.distribution = .fill
-        }
-    }
-    
-    @IBOutlet private weak var fieldsStackView: UIStackView! {
-        willSet {
-            newValue.spacing = 16
-            newValue.alignment = .fill
-            newValue.axis = .vertical
-            newValue.distribution = .fill
+            newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.text = TextConstants.loginPageMainTitle
         }
     }
 
-    @IBOutlet private weak var rememberMeLabel: UILabel! {
+    @IBOutlet private weak var loginDescriptionLabel: UILabel! {
         willSet {
-            newValue.textColor = .black
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 15)
-            newValue.text = TextConstants.loginRememberMyCredential
+            newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.text = TextConstants.loginPageLoginButtonExplanation
+        }
+    }
+
+    @IBOutlet private weak var fastLoginDescriptionLabel: UILabel! {
+        willSet {
+            newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.text = TextConstants.loginPageFLButtonExplanation
         }
     }
     
@@ -57,40 +55,52 @@ final class LoginViewController: ViewController {
             newValue.setImage(selectedImage, for: .selected)
         }
     }
-    
-    @IBOutlet private weak var loginButton: RoundedInsetsButton! {
+
+    @IBOutlet private weak var rememberMeTitleButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.loginTitle, for: .normal)
+            newValue.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
+            newValue.setTitle(TextConstants.loginPageRememberMeButtonTitle, for: .normal)
+        }
+    }
+
+    @IBOutlet private weak var forgotPasswordButton: UIButton! {
+        willSet {
+            newValue.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
+            newValue.setTitle(TextConstants.loginPageForgetPasswordButtonTitle + " (?)", for: .normal)
+        }
+    }
+    
+    @IBOutlet private weak var loginButton: UIButton! {
+        willSet {
+            newValue.setTitle(TextConstants.loginPageLoginButtonTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.backgroundColor = UIColor.lrTealish
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 14)
+            newValue.backgroundColor = UIColor(named: "loginButtonBackground")
             newValue.isOpaque = true
         }
     }
-    
-    @IBOutlet private weak var loginEnterView: ProfileTextEnterView! {
+
+    @IBOutlet private weak var loginTextField: BorderedWithInsetsTextField! {
         willSet {
-            newValue.textField.enablesReturnKeyAutomatically = true
-            newValue.textField.autocapitalizationType = .none
-            newValue.textField.autocorrectionType = .no
-            newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
-            newValue.titleLabel.text = TextConstants.loginCellTitleEmail
+            
+            newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPageEmailFieldPlaceholder,
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
+            newValue.textColor = ColorConstants.loginTextfieldTextColor
+        }
+    }
+
+    @IBOutlet private weak var passwordTextField: BorderedWithInsetsTextField! {
+        willSet {
+            newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPagePasswordFieldPlaceholder,
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
+            newValue.textColor = ColorConstants.loginTextfieldTextColor
         }
     }
     
-    @IBOutlet private weak var passwordEnterView: ProfilePasswordEnterView! {
+    @IBOutlet private weak var captchaView: LoginCaptchaView! {
         willSet {
-            newValue.textField.enablesReturnKeyAutomatically = true
-
-            newValue.textField.quickDismissPlaceholder = TextConstants.loginPasswordPlaceholder
-
-            newValue.titleLabel.text = TextConstants.loginCellTitlePassword
-        }
-    }
-    
-    @IBOutlet private weak var captchaView: CaptchaView! {
-        willSet {
-            ///need to hide content
             newValue.layer.masksToBounds = true
             newValue.isHidden = true
         }
@@ -101,12 +111,11 @@ final class LoginViewController: ViewController {
             newValue.isHidden = true
         }
     }
-    
-    @IBOutlet private weak var bannerView: SupportFormBannerView! {
+
+    @IBOutlet private weak var fastLoginButton: UIButton! {
         willSet {
-            newValue.isHidden = true
-            newValue.delegate = self
-            newValue.screenType = .login
+            newValue.setTitle("", for: .normal)
+            newValue.setBackgroundImage(UIImage(named: Locale.current.isTurkishLocale ? "login_fast_login_tr" : "login_fast_login"), for: .normal)
         }
     }
     
@@ -119,18 +128,17 @@ final class LoginViewController: ViewController {
         return .clear
     }
 
+    override func loadView() {
+        super.loadView()
+        errorViewFakeHeightConstraint.isActive = false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setup()
         
         output.viewIsReady()
-        
-        #if DEBUG
-        loginEnterView.textField.text = "mavokij291@4tmail.com"//"qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
-
-        passwordEnterView.textField.text = "qwerty"// "zxcvbn"//".FsddQ646"
-        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,26 +164,18 @@ final class LoginViewController: ViewController {
     }
     
     private func setupDelegates() {
-        output.prepareCaptcha(captchaView)
-        
-        loginEnterView.textField.delegate = self
-        passwordEnterView.textField.delegate = self
         captchaView.captchaAnswerTextField.delegate = self
     }
     
     private func configureKeyboard() {
         keyboard
             .on(event: .willShow) { [weak self] options in
-                guard let `self` = self else {
-                    return
-                }
+                guard let self = self else { return }
                 
                 self.updateScroll(with: options.endFrame)
             }
             .on(event: .willHide) { [weak self] _ in
-                guard let `self` = self else {
-                    return
-                }
+                guard let self = self else { return }
                 
                 var inset = self.scrollView.contentInset
                 inset.bottom = 0
@@ -190,11 +190,15 @@ final class LoginViewController: ViewController {
         
         setNavigationTitle(title: TextConstants.loginTitle)
         backButtonForNavigationItem(title: TextConstants.backTitle)
-        setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     
-    @objc private func handleFaqButtonTap() {
-        output.openFaqSupport()
+    @IBAction private func forgotPasswordButtonTapped() {
+        let popupController = PopUpController.with(title: TextConstants.loginPageForgetPasswordPageTitle,
+                                                   message: TextConstants.loginPageForgetPasswordDescriptionText,
+                                                   image: .none,
+                                                   buttonTitle: TextConstants.loginPageForgetPasswordCloseButtonTitle,
+                                                   visualStyle: PopUpVisualStyle.lbLogin)
+        present(popupController, animated: false)
     }
 
     private func prepareForDisappear() {
@@ -227,21 +231,23 @@ final class LoginViewController: ViewController {
     
     //MARK: - IBActions
     
-    @IBAction func onRememberMeTap(_ sender: UIButton) {
-        sender.isSelected.toggle()
+    @IBAction private func onRememberMeTap(_ sender: UIButton) {
+        rememberMeButton.isSelected.toggle()
         
-        output.rememberMe(remember: sender.isSelected)
+        output.rememberMe(remember: rememberMeButton.isSelected)
     }
     
-    @IBAction func onLoginTap(_ sender: Any) {
+    @IBAction private func onLoginTap(_ sender: Any) {
         stopEditing()
         
         if captchaView.isHidden {
-            output.sendLoginAndPassword(login: loginEnterView.textField.text ?? "",
-                                        password: passwordEnterView.textField.text ?? "")
+            output.sendLoginAndPassword(login: loginTextField.text ?? "",
+                                        password: passwordTextField.text ?? "",
+                                        rememberMe: rememberMeButton.isSelected)
         } else {
-            output.sendLoginAndPasswordWithCaptcha(login: loginEnterView.textField.text ?? "",
-                                                   password: passwordEnterView.textField.text ?? "",
+            output.sendLoginAndPasswordWithCaptcha(login: loginTextField.text ?? "",
+                                                   password: passwordTextField.text ?? "",
+                                                   rememberMe: rememberMeButton.isSelected,
                                                    captchaID: captchaView.currentCaptchaUUID,
                                                    captchaAnswer: captchaView.captchaAnswerTextField.text ?? "")
         }
@@ -252,12 +258,12 @@ extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
-        case loginEnterView.textField:
-            passwordEnterView.textField.becomeFirstResponder()
+        case loginTextField:
+            passwordTextField.becomeFirstResponder()
             
-        case passwordEnterView.textField:
+        case passwordTextField:
             if captchaView.isHidden {
-                passwordEnterView.textField.resignFirstResponder()
+                passwordTextField.resignFirstResponder()
             } else {
                 captchaView.captchaAnswerTextField.becomeFirstResponder()
             }
@@ -271,66 +277,9 @@ extension LoginViewController: UITextFieldDelegate {
         
         return true
     }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
-        switch textField {
-        case loginEnterView.textField:
-            loginEnterView.hideSubtitleAnimated()
-            
-        case passwordEnterView.textField:
-            passwordEnterView.hideSubtitleAnimated()
-            
-        case captchaView.captchaAnswerTextField:
-            captchaView.hideErrorAnimated()
-            
-        default:
-            assertionFailure()
-        }
-        
-        return true
-    }
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        switch textField {
-        case loginEnterView.textField:
-            if string == " " {
-                return false
-            } else if textField.text?.count == 0 {
-                if string == "+" {
-                    output.startedEnteringPhoneNumber(withPlus: true)
-                    return false
-                } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil {
-                    output.startedEnteringPhoneNumber(withPlus: false)
-                }
-            }
-            
-        case passwordEnterView.textField, captchaView.captchaAnswerTextField:
-            break
-            
-        default:
-            assertionFailure()
-        }
-        
-        return true
-    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        switch textField {
-        case loginEnterView.textField:
-            
-            let countryCodeWithZero = "+(90)0"
-            if var text = textField.text, text.starts(with: countryCodeWithZero) {
-                text.remove(at: text[countryCodeWithZero.count - 1])
-                textField.text = text
-            }
-        case passwordEnterView.textField, captchaView.captchaAnswerTextField:
-            break
-            
-        default:
-            assertionFailure()
-        }
-        
+        hideErrorMessage()
         return true
     }
 }
@@ -352,42 +301,23 @@ extension LoginViewController: LoginViewInput {
     
     //MARK: Fields alerts processing
     func loginFieldError(_ error: String) {
-        loginEnterView.showSubtitleTextAnimated(text: error)
+        showErrorMessage(with: error)
     }
     
     func passwordFieldError(_ error: String) {
-        passwordEnterView.showSubtitleTextAnimated(text: error)
+        showErrorMessage(with: error)
     }
     
     func captchaFieldError(_ error: String) {
-        captchaView.showErrorAnimated(text: error)
-    }
-    
-    func dehighlightTitles() {
-        loginEnterView.hideSubtitleAnimated()
-        passwordEnterView.hideSubtitleAnimated()
-        captchaView.hideErrorAnimated()
+        showErrorMessage(with: error)
     }
     
     //MARK: - Alerts processing
-    
-    func showSupportView() {
-        bannerView.type = .support
-    }
-    
-    func showFAQView() {
-        bannerView.type = .faq
-        
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.bannerView.isHidden = false
-        }
-    }
     
     func showErrorMessage(with text: String) {
         errorView.message = text
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.errorView.isHidden = false
-            
             self.view.layoutIfNeeded()
         }
         
@@ -398,51 +328,8 @@ extension LoginViewController: LoginViewInput {
     func hideErrorMessage() {
         errorView.isHidden = true
     }
-    
-    //MARK: login textField processing
-    func enterPhoneCountryCode(countryCode: String) {
-        var loginText = ""
-        
-        if let text = loginEnterView.textField.text {
-            loginText = text
-        }
-        
-        loginText = loginText + countryCode
-        loginEnterView.textField.text = loginText
-    }
-    
-    func insertPhoneCountryCode(countryCode: String) {
-        var loginText = countryCode
-        
-        if let text = loginEnterView.textField.text {
-            loginText = loginText + text
-        }
-        
-        loginEnterView.textField.text = loginText
-    }
-    
-    //MARK: block user processing
+
     func failedBlockError() {
         showErrorMessage(with: TextConstants.hourBlockLoginError)
-    }
-}
-
-extension LoginViewController: SupportFormBannerViewDelegate {
-   func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView) {
-        if bannerView.type == .support {
-            output?.openSupport()
-        } else {
-            bannerView.shouldShowPicker = true
-            bannerView.becomeFirstResponder()
-        }
-    }
-    
-    func supportFormBannerView(_ bannerView: SupportFormBannerView, didSelect type: SupportFormSubjectTypeProtocol) {
-        output.openSubjectDetails(type: type)
-    }
-  
-    func supportFormBannerViewDidCancel(_ bannerView: SupportFormBannerView) {
-        bannerView.resignFirstResponder()
-        scrollView.setContentOffset(.zero, animated: true)
     }
 }

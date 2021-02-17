@@ -15,14 +15,9 @@ class SplashRouter: SplashRouterInput {
         router.setNavigationController(controller: settings)
     }
     
-    func navigateToOnboarding() {
-        let settings = router.onboardingScreen
-        router.setNavigationController(controller: settings)
-    }
-    
-    func navigateToLandingPages(isTurkCell: Bool) {
-        let landingVC = LandingPageViewController(isTurkcell: isTurkCell)
-        router.setNavigationController(controller: landingVC)
+    func navigateToLoginScreen() {
+        let loginVC = router.loginScreen
+        router.setNavigationController(controller: loginVC)
     }
     
     func navigateToTermsAndService(isFirstLogin: Bool) {

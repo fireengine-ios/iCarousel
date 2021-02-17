@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,9 +16,9 @@
                 <outlet property="firstImageView" destination="n7C-4E-QE3" id="kqK-kB-3r2"/>
                 <outlet property="messageLabel" destination="XKY-VJ-kva" id="OAt-RS-XkI"/>
                 <outlet property="noneImageConstraint" destination="NuZ-B5-1oA" id="GYD-GP-A5d"/>
+                <outlet property="oneButton" destination="E35-PW-HUa" id="dEf-Br-nr9"/>
                 <outlet property="secondButton" destination="fg5-a4-N9J" id="tqr-x7-jg4"/>
                 <outlet property="secondIconImageView" destination="Vgj-JX-vfg" id="Uel-0F-ir3"/>
-                <outlet property="singleButton" destination="E35-PW-HUa" id="C0O-md-JWC"/>
                 <outlet property="titleLabel" destination="faa-BU-RXd" id="A6f-Kk-EXo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -91,7 +91,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTn-VC-Atd" userLabel="Buttons View">
-                                            <rect key="frame" x="20" y="158" width="260" height="46"/>
+                                            <rect key="frame" x="20" y="186" width="260" height="46"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" customClass="InsetsButton" customModule="lifeBox_Business" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="5" width="125" height="41"/>

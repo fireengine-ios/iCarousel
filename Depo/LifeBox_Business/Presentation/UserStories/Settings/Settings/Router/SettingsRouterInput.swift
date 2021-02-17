@@ -9,8 +9,8 @@
 import Foundation
 
 protocol SettingsRouterInput {
-    
-    func goToOnboarding()
+
+    func goToLoginScreen()
     
     func goToPermissions()
 

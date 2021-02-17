@@ -34,7 +34,7 @@ final class AppWormholeListener {
                     }
                     
                     let router = RouterVC()
-                    router.setNavigationController(controller: router.onboardingScreen)
+                    router.setNavigationController(controller: router.loginScreen)
                 }
             }
         }
