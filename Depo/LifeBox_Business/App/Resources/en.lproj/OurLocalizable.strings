@@ -1880,6 +1880,18 @@
 "tabbar_item_settings" = "Settings";
 "private_share_max_number_of_item_limit_exceeded" = "private_share_max_number_of_item_limit_exceeded";
 
+"business_app_login_title" = "Login to Lifebox Business";
+"business_app_login_email_box_inside" = "Enter your e-mail";
+"business_app_login_password_box_inside" = "Enter your password";
+"business_app_login_rememberme_checkbox" = "Remember me";
+"business_app_login_forget_password" = "Forget password";
+"business_app_login_forget_password_page_title" = "Forget password";
+"business_app_login_forget_password_page_description" = "Lorem ipsum (description may be long as 3-4 lines)";
+"business_app_login_forget_password_page_close_button" = "Close";
+"business_app_login_pwd_login_button" = "Corporate Login";
+"business_app_login_pwd_login_button_explanation" = "*It can be used when your company has identity integration with Turkcell";
+"business_app_login_FL_explanation" = "To login without identity integration";
+"business_app_login_captcha_box_inside" = "Enter the code";
 
 "business_app_select_option" = "Select";
 "business_app_download_option" = "Download";

@@ -38,11 +38,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private var attempts: Int = 0
     
-    private var loginRetries = 0 {
-        didSet {
-            showRelatedHelperView()
-        }
-    }
+    private var loginRetries = 0
     
     private var login: String?
     private var password: String?
@@ -64,32 +60,6 @@ class LoginInteractor: LoginInteractorInput {
         let storageVars: StorageVars = factory.resolve()
         blockedUsers = storageVars.blockedUsers
         self.storageVars = storageVars
-    }
-    
-    //MARK: Utility Methods(private)
-    
-    private func showRelatedHelperView() {
-        if loginRetries == NumericConstants.showFAQViewAttempts {
-            output?.showFAQView()
-        } else {
-            #if LIFEBOX
-            FirebaseRemoteConfig.shared.fetchAttemptsBeforeSupportOnLogin { [weak self] attempts in
-                guard let self = self else {
-                    return
-                }
-                
-                if self.loginRetries >= attempts {
-                    DispatchQueue.main.async {
-                        self.output?.showSupportView()
-                    }
-                }
-            }
-            #else
-            if loginRetries >= NumericConstants.showSupportViewAttempts {
-                output?.showSupportView()
-            }
-            #endif
-        }
     }
     
     private func hasEmptyPhone(accountWarning: String) -> Bool {
@@ -141,6 +111,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private func authificate(login: String,
                              password: String,
+                             rememberMe: Bool = true,
                              atachedCaptcha: CaptchaParametrAnswer?,
                              errorHandler: @escaping (LoginResponseError, String) -> Void) {
         
@@ -188,7 +159,7 @@ class LoginInteractor: LoginInteractorInput {
         
         let user = AuthenticationUser(login: login,
                                       password: password,
-                                      rememberMe: true,
+                                      rememberMe: rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
@@ -275,8 +246,8 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: LoginInteractorInput
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
-        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
+    func authificate(login: String, password: String, rememberMe: Bool = true, atachedCaptcha: CaptchaParametrAnswer?) {
+        authificate(login: login, password: password, rememberMe: rememberMe, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
             
             DispatchQueue.main.async { [weak self] in
                 self?.output?.processLoginError(loginError, errorText: errorText)
@@ -307,11 +278,6 @@ class LoginInteractor: LoginInteractorInput {
             blockedUsersDic[user] = Date()
             blockedUsers = blockedUsersDic
         }
-    }
-    
-    func findCoutryPhoneCode(plus: Bool) {
-        let phoneCode = CoreTelephonyService().getColumnedCountryCode()
-        output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
     
     func checkEULA() {

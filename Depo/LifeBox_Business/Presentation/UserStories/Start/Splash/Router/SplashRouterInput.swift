@@ -12,13 +12,11 @@ protocol SplashRouterInput {
     
     func navigateToApplication()
    
-    func navigateToOnboarding()
+    func navigateToLoginScreen()
     
     func navigateToTermsAndService(isFirstLogin: Bool)
     
     func showNetworkError()
-    
-    func navigateToLandingPages(isTurkCell: Bool)
     
     func showError(_ error: Error)
     

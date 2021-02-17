@@ -1260,3 +1260,19 @@ extension TextConstants {
     static let galeryPermissionNotProvidedAcceptButton = NSLocalizedString("business_app_gallery_permission_not_provided_popup_settings_accept", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let galeryPermissionNotProvidedRejectButton = NSLocalizedString("business_app_gallery_permission_not_provided_popup_settings_reject", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+// MARK: - Login page
+extension TextConstants {
+    static let loginPageFLButtonExplanation = NSLocalizedString("business_app_login_FL_explanation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageLoginButtonExplanation = NSLocalizedString("business_app_login_pwd_login_button_explanation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageLoginButtonTitle = NSLocalizedString("business_app_login_pwd_login_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageForgetPasswordCloseButtonTitle = NSLocalizedString("business_app_login_forget_password_page_close_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageForgetPasswordDescriptionText = NSLocalizedString("business_app_login_forget_password_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageForgetPasswordButtonTitle = NSLocalizedString("business_app_login_forget_password_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageForgetPasswordPageTitle = NSLocalizedString("business_app_login_forget_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageRememberMeButtonTitle = NSLocalizedString("business_app_login_rememberme_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPagePasswordFieldPlaceholder = NSLocalizedString("business_app_login_password_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageEmailFieldPlaceholder = NSLocalizedString("business_app_login_email_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageMainTitle = NSLocalizedString("business_app_login_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let captchaViewTextfieldPlaceholder = NSLocalizedString("business_app_login_captcha_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

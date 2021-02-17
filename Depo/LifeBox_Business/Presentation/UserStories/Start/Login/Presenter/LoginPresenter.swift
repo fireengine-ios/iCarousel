@@ -29,7 +29,6 @@ class LoginPresenter: BasePresenter {
     
     private func onLogin() {
         view.hideErrorMessage()
-        view.dehighlightTitles()
         startAsyncOperationDisableScreen()
     }
     
@@ -99,6 +98,7 @@ class LoginPresenter: BasePresenter {
 
 //MARK: - LoginViewOutput
 extension LoginPresenter: LoginViewOutput {
+
     func viewIsReady() {
         startAsyncOperation()
 
@@ -106,30 +106,26 @@ extension LoginPresenter: LoginViewOutput {
         interactor.checkCaptchaRequerement()
     }
     
-    func prepareCaptcha(_ view: CaptchaView) {
-        view.delegate = self
-    }
-    
     func rememberMe(remember: Bool) {
         interactor.rememberMe(state: remember)
     }
     
-    func sendLoginAndPassword(login: String, password: String) {
+    func sendLoginAndPassword(login: String, password: String, rememberMe: Bool) {
         onLogin()
-        interactor.authificate(login: removeBrackets(text: login), password: password, atachedCaptcha: nil)
+        interactor.authificate(login: removeBrackets(text: login),
+                               password: password,
+                               rememberMe: rememberMe,
+                               atachedCaptcha: nil)
     }
     
-    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String) {
+    func sendLoginAndPasswordWithCaptcha(login: String, password: String, rememberMe: Bool, captchaID: String, captchaAnswer: String) {
         onLogin()
         
         let atachedCaptcha = CaptchaParametrAnswer(uuid: captchaID, answer: captchaAnswer)
         interactor.authificate(login: removeBrackets(text: login),
                                password: password,
+                               rememberMe: rememberMe,
                                atachedCaptcha: atachedCaptcha)
-    }
-    
-    func startedEnteringPhoneNumber(withPlus: Bool) {
-        interactor.findCoutryPhoneCode(plus: withPlus)
     }
     
     func openSupport() {
@@ -178,7 +174,6 @@ extension LoginPresenter: LoginInteractorOutput {
         case .needSignUp:
             debugLog("processLoginError:  .needSignUp this error should be impossible")
             failLogin(message: TextConstants.loginScreenServerError)
-//            needSignUp(message: TextConstants.loginScreenNeedSignUpError)
             
         case .incorrectUsernamePassword:
             failLogin(message: TextConstants.loginScreenCredentialsError)
@@ -221,15 +216,6 @@ extension LoginPresenter: LoginInteractorOutput {
         completeAsyncOperationEnableScreen()
         captchaShowed = true
         view.showCaptcha()
-    }
-    
-    func foundCoutryPhoneCode(code: String, plus: Bool) {
-        if plus {
-            let countryCode = code.isEmpty ? "+" : code
-            view.enterPhoneCountryCode(countryCode: countryCode)
-        } else {
-            view.insertPhoneCountryCode(countryCode: code)
-        }
     }
     
     func fieldError(type: LoginFieldError) {
@@ -309,24 +295,6 @@ extension LoginPresenter: LoginInteractorOutput {
     func captchaRequiredFailed(with message: String) {
         asyncOperationSuccess()
         view.showErrorMessage(with: message)
-    }
-    
-    func showSupportView() {
-        view.showSupportView()
-    }
-    
-    func showFAQView() {
-        view.showFAQView()
-    }
-}
-
-// MARK: - CaptchaViewErrorDelegate
-
-extension LoginPresenter: CaptchaViewErrorDelegate {
-    
-    func showCaptchaError(error: Error) {
-        
-        view.showErrorMessage(with: error.description)
     }
 }
 
