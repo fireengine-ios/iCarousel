@@ -328,7 +328,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        if self?.tokenStorage.refreshToken == nil {
+                        if self?.tokenStorage.refreshToken == nil && user.rememberMe {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             fail?(ErrorResponse.error(error))
                             return
