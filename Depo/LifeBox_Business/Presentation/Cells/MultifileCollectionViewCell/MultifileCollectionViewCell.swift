@@ -432,7 +432,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     }
     
     
-    //MARK: - SCroll view actions
+    //MARK: - Sсroll view actions
     
     @IBAction func onInfoButtonTapped(_ sender: Any) {
         scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
@@ -442,8 +442,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     @IBAction func onDeleteButtonTapped(_ sender: Any) {
         actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
     }
-    
-    
 }
 
 //MARK: - ios 14 pull down menu
@@ -466,7 +464,7 @@ extension MultifileCollectionViewCell {
         
         menuButton.change(indexPath: indexPath)
         
-        menuButton.addTarget(self, action: #selector(onCellSelected(_:)), for: .touchUpInside)
+        menuButton.addTarget(self, action: #selector(onCellTapped(_:)), for: .touchUpInside)
         
         let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
             if case .elementType(.rename) = actionType {
@@ -491,7 +489,7 @@ extension MultifileCollectionViewCell {
         menuButton.isUserInteractionEnabled = isEnabled
     }
     
-    @objc private func onCellSelected(_ sender: Any) {
+    @objc private func onCellTapped(_ sender: Any) {
         guard let button = sender as? IndexPathButton, let indexPath = button.indexPath else {
             return
         }
@@ -501,6 +499,7 @@ extension MultifileCollectionViewCell {
 }
 
 
+//MARK: - UIScrollViewDelegate
 extension MultifileCollectionViewCell: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         updateOffset(scrollView: scrollView, velocityX: velocity.x, targetContentOffset: targetContentOffset)
