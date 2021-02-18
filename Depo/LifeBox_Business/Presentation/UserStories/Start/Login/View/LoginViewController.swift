@@ -12,6 +12,7 @@ import Typist
 final class LoginViewController: ViewController {
 
     @IBOutlet private weak var errorViewFakeHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var loginButtonToCaptchaStackViewTopConstraint: NSLayoutConstraint!
 
     @IBOutlet private weak var pageTitleLabel: UILabel! {
         willSet {
@@ -334,6 +335,7 @@ extension LoginViewController: LoginViewInput {
         ///fix animation if appears captcha and error both
         UIView.performWithoutAnimation {
             self.captchaView.isHidden = false
+            self.loginButtonToCaptchaStackViewTopConstraint.constant = 15
         }
     }
     
@@ -363,7 +365,7 @@ extension LoginViewController: LoginViewInput {
     }
     
     func captchaFieldError(_ error: String?) {
-        showErrorMessage(with: error)
+        captchaView.showError(error)
     }
     
     //MARK: - Alerts processing
