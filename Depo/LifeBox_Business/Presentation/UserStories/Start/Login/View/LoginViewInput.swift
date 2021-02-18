@@ -17,16 +17,9 @@ protocol LoginViewInput: class, Waiting {
     func passwordFieldError(_ error: String)
     func captchaFieldError(_ error: String)
     
-    func showSupportView()
-    func showFAQView()
     func showErrorMessage(with text: String)
     
     func hideErrorMessage()
-    
-    func dehighlightTitles()
-
-    func enterPhoneCountryCode(countryCode: String)
-    func insertPhoneCountryCode(countryCode: String) //at the begining of the field
     
     func failedBlockError()
 

@@ -146,8 +146,8 @@ extension SettingsPresenter: SettingsInteractorOutput {
         view.prepareCellsData(isPermissionShown: isPermissionShown)
     }
     
-    func goToOnboarding() {
-        router.goToOnboarding()
+    func goToLoginScreen() {
+        router.goToLoginScreen()
     }
     
     func profilePhotoUploadSuccessed(image: UIImage?) {

@@ -52,7 +52,7 @@ final class SettingsInteractor: SettingsInteractorInput {
             
             self?.authService.logout { [weak self] in
                 self?.output.asyncOperationStoped()
-                self?.output.goToOnboarding()
+                self?.output.goToLoginScreen()
             }
         })
     }

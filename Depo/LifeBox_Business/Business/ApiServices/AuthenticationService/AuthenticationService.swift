@@ -31,7 +31,7 @@ class AuthenticationUser: BaseRequestParametrs {
     
     override var patch: URL {
         var patch: String = RouteRequests.Login.yaaniMail
-        let rememberMeValue = rememberMe ? LbRequestkeys.on : LbRequestkeys.off
+        let rememberMeValue = rememberMe ? "?rememberMe=on" : ""
         patch = String(format: patch, rememberMeValue)
         
         return URL(string: patch, relativeTo: super.patch)!
@@ -328,7 +328,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        if self?.tokenStorage.refreshToken == nil {
+                        if self?.tokenStorage.refreshToken == nil && user.rememberMe {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             fail?(ErrorResponse.error(error))
                             return

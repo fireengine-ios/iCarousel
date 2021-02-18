@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "login_captcha_refresh.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -13,8 +13,6 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func succesLogin()
     
     func processLoginError(_ loginError: LoginResponseError, errorText: String)
-
-    func foundCoutryPhoneCode(code: String, plus: Bool)
     
     func fieldError(type: LoginFieldError)
 
@@ -33,8 +31,6 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func captchaRequiredFailed()
     func captchaRequiredFailed(with message: String)
     
-    func showSupportView()
-    func showFAQView()
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
     
     func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler)

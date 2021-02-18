@@ -12,8 +12,8 @@ class SettingsRouter: SettingsRouterInput {
     
     let router = RouterVC()
     
-    func goToOnboarding() {
-        router.setNavigationController(controller: router.onboardingScreen)
+    func goToLoginScreen() {
+        router.setNavigationController(controller: router.loginScreen)
     }
     
     func goToPermissions() {
