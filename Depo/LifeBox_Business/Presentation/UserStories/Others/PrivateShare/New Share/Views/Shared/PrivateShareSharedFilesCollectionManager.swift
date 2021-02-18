@@ -136,7 +136,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.register(nibSupplementaryView: CollectionViewSpinnerFooter.self,
                                  kind: UICollectionElementKindSectionFooter)
 
-        collectionView?.allowsMultipleSelection = true
+        collectionView?.allowsSelection = false
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
@@ -330,14 +330,6 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
         
         cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        onDidSelectItem(at: indexPath)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        onDidSelectItem(at: indexPath)
     }
 
     //MARK: Helpers
@@ -550,7 +542,6 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
         fileInfoManager.rename(item: item, name: name, completion: completion)
     }
     
-    @available(iOS 14, *)
     func onCellSelected(indexPath: IndexPath) {
         DispatchQueue.toMain {
             self.collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: [])
