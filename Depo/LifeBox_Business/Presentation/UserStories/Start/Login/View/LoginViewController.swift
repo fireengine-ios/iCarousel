@@ -109,6 +109,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var errorView: ErrorBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.errorLabelTextColor = ColorConstants.loginErrorLabelTextColor
         }
     }
 
@@ -116,6 +117,40 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.setTitle("", for: .normal)
             newValue.setBackgroundImage(UIImage(named: Locale.current.isTurkishLocale ? "login_fast_login_tr" : "login_fast_login"), for: .normal)
+        }
+    }
+
+    @IBOutlet private weak var loginErrorViewContainer: UIView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+
+    @IBOutlet private weak var loginErrorLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.loginErrorLabelTextColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.textAlignment = .left
+        }
+    }
+
+    @IBOutlet private weak var fakeLoginSpaceView: UIView! {
+        willSet {
+            newValue.isHidden = false
+        }
+    }
+
+    @IBOutlet private weak var passwordErrorViewContainer: UIView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+
+    @IBOutlet private weak var passwordErrorLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.loginErrorLabelTextColor
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.textAlignment = .left
         }
     }
     
@@ -279,6 +314,13 @@ extension LoginViewController: UITextFieldDelegate {
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == loginTextField {
+            loginFieldError(nil)
+        } else if textField == passwordTextField {
+            passwordFieldError(nil)
+        } else if textField == captchaView.captchaAnswerTextField {
+            captchaFieldError(nil)
+        }
         hideErrorMessage()
         return true
     }
@@ -300,15 +342,27 @@ extension LoginViewController: LoginViewInput {
     }
     
     //MARK: Fields alerts processing
-    func loginFieldError(_ error: String) {
-        showErrorMessage(with: error)
+    func loginFieldError(_ error: String?) {
+        guard let error = error else {
+            loginErrorViewContainer.isHidden = true
+            fakeLoginSpaceView.isHidden = false
+            return
+        }
+        loginErrorViewContainer.isHidden = false
+        fakeLoginSpaceView.isHidden = true
+        loginErrorLabel.text = error
     }
     
-    func passwordFieldError(_ error: String) {
-        showErrorMessage(with: error)
+    func passwordFieldError(_ error: String?) {
+        guard let error = error else {
+            passwordErrorViewContainer.isHidden = true
+            return
+        }
+        passwordErrorViewContainer.isHidden = false
+        passwordErrorLabel.text = error
     }
     
-    func captchaFieldError(_ error: String) {
+    func captchaFieldError(_ error: String?) {
         showErrorMessage(with: error)
     }
     
