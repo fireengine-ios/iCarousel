@@ -323,7 +323,9 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupBackgroundColor(isSelected: Bool) {
-        defaultView.backgroundColor = isSelected ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
+        UIView.animate(withDuration: NumericConstants.setImageAnimationDuration) {
+            self.defaultView.backgroundColor = isSelected ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
+        }
     }
     
     //MARK: - Menu button actions
@@ -521,6 +523,10 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         updateOffset(scrollView: scrollView, velocityX: velocity.x, targetContentOffset: targetContentOffset)
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        setupBackgroundColor(isSelected: true)
+    }
+    
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         updateOffset(scrollView: scrollView, velocityX: 0, targetContentOffset: nil)
     }
@@ -534,21 +540,14 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
             return
         }
         
-        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * SwipeConfig.visiblePart
-        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * SwipeConfig.visiblePart
         let infoOffsetX = infoView.frame.origin.x
         let deleteOffsetX = deletionView.frame.origin.x
         
-        if currentOffset == infoPauseOffsetX || currentOffset == deletePauseOffsetX {
-            setupBackgroundColor(isSelected: true)
-            
-        } else if currentOffset == infoOffsetX {
-            setupBackgroundColor(isSelected: true)
+        if currentOffset == infoOffsetX {
             scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
             actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
             
         } else if currentOffset == deleteOffsetX {
-            setupBackgroundColor(isSelected: true)
             scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
             actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
         }
