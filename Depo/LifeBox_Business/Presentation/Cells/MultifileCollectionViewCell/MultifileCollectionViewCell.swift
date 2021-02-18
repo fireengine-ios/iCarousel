@@ -24,6 +24,14 @@ private enum HorizontalScrollDirection {
     }
 }
 
+private struct SwipeConfig {
+    static let visiblePart: CGFloat = 0.3
+    static let triggerPart: CGFloat = 0.5
+    static let velocityXBeforeFastSwipe: CGFloat = 0.5
+    
+    private init() {}
+}
+
 protocol MultifileCollectionViewCellActionDelegate: class {
     func onMenuPress(sender: Any, itemModel: Item?)
     func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?)
@@ -187,9 +195,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             newValue.setImage(UIImage(named: "trash"), for: .normal)
         }
     }
-    
-    private let actionViewsVisiblePart: CGFloat = 0.3
-    private let actionViewsTriggerPart: CGFloat = 0.5
     
     weak var actionDelegate: MultifileCollectionViewCellActionDelegate?
     
@@ -529,8 +534,8 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
             return
         }
         
-        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsVisiblePart
-        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
+        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * SwipeConfig.visiblePart
+        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * SwipeConfig.visiblePart
         let infoOffsetX = infoView.frame.origin.x
         let deleteOffsetX = deletionView.frame.origin.x
         
@@ -550,7 +555,7 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
     }
     
     private func updateOffset(scrollView: UIScrollView, velocityX: CGFloat, targetContentOffset: UnsafeMutablePointer<CGPoint>?) {
-        if  abs(velocityX) > 1 {
+        if  abs(velocityX) > SwipeConfig.velocityXBeforeFastSwipe {
             updateOffsetFast(scrollView: scrollView, direction: HorizontalScrollDirection(velocityX: velocityX), targetContentOffset: targetContentOffset)
         } else {
             updateOffsetSlow(scrollView: scrollView)
@@ -561,11 +566,11 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         
         let defaultViewOffsetX = defaultView.frame.origin.x
         
-        let infoPauseOffsetX = defaultViewOffsetX - infoView.bounds.width * actionViewsVisiblePart
-        let deletePauseOffsetX = defaultViewOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
+        let infoPauseOffsetX = defaultViewOffsetX - infoView.bounds.width * SwipeConfig.visiblePart
+        let deletePauseOffsetX = defaultViewOffsetX + deletionView.bounds.width  * SwipeConfig.visiblePart
         
-        let infoPauseTriggerOffsetX = defaultViewOffsetX - infoView.bounds.width * actionViewsTriggerPart
-        let deletePauseTriggerOffsetX = defaultViewOffsetX + deletionView.bounds.width * actionViewsTriggerPart
+        let infoPauseTriggerOffsetX = defaultViewOffsetX - infoView.bounds.width * SwipeConfig.triggerPart
+        let deletePauseTriggerOffsetX = defaultViewOffsetX + deletionView.bounds.width * SwipeConfig.triggerPart
         
         let currentOffsetX = scrollView.contentOffset.x
         
@@ -617,16 +622,20 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         
         let defaultOffsetX = defaultView.frame.origin.x
         
-        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsVisiblePart
-        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
+        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * SwipeConfig.visiblePart
+        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * SwipeConfig.visiblePart
         
-        let infoPauseTriggerOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsTriggerPart
-        let deletePauseTriggerOffsetX = defaultOffsetX + deletionView.bounds.width * actionViewsTriggerPart
-        
-        if scrollOffsetX < infoPauseTriggerOffsetX, scrollOffsetX <= infoPauseOffsetX {
+        let infoFullTriggerOffsetX = defaultOffsetX - infoView.bounds.width * SwipeConfig.triggerPart
+        let deleteFullTriggerOffsetX = defaultOffsetX + deletionView.bounds.width * SwipeConfig.triggerPart
+       
+        if scrollOffsetX > infoFullTriggerOffsetX, scrollOffsetX <= infoPauseOffsetX {
             scrollView.setContentOffset(CGPoint(x: infoPauseOffsetX, y: 0), animated: true)
-        } else if scrollOffsetX > deletePauseTriggerOffsetX, scrollOffsetX >= deletePauseOffsetX {
+        } else if scrollOffsetX < infoFullTriggerOffsetX {
+            scrollView.scrollRectToVisible(infoView.frame, animated: true)
+        } else if scrollOffsetX < deleteFullTriggerOffsetX, scrollOffsetX >= deletePauseOffsetX {
             scrollView.setContentOffset(CGPoint(x: deletePauseOffsetX, y: 0), animated: true)
+        } else if scrollOffsetX > deleteFullTriggerOffsetX {
+            scrollView.scrollRectToVisible(deletionView.frame, animated: true)
         } else {
             scrollView.scrollRectToVisible(defaultView.frame, animated: true)
         }
