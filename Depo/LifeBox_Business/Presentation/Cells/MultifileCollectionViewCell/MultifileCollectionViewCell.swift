@@ -97,7 +97,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private lazy var menuButton: IndexPathButton = {
         let button = IndexPathButton(with: IndexPath(row: 0, section: 0))
-        
+        button.setBackgroundColor(ColorConstants.multifileCellBackgroundColorSelected, for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -227,6 +227,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        scrollableContent.scrollRectToVisible(defaultView.frame, animated: false)
+        
         setupLongTapButtonMenu()
     }
     
@@ -236,7 +238,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         isAllowedToShowShared = false
         isRenamingInProgress = false
         isSelectionInProgress = false
-        
+
         name.text = ""
         lastModifiedDate.text = ""
         renameField.attributedText = NSAttributedString(string: "")
@@ -246,15 +248,13 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         selectIconWidth.constant = 0
         nameEditView.alpha = 0
         
-        scrollableContent.scrollRectToVisible(defaultView.frame, animated: false)
-        
         if #available(iOS 14, *) {
             setMenu(isAvailable: false)
         }
-        
+
         menuButton.change(indexPath: nil)
         
-        setupBackgroundColor(isSelected: false)
+        resetSwipe()
     }
     
     //MARK: - Setup
@@ -300,21 +300,23 @@ class MultifileCollectionViewCell: UICollectionViewCell {
                 self.iconsStack.addArrangedSubview(isSharedView)
             }
             
-            self.scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: false)
+            self.resetSwipe()
         }
     }
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         isSelectionInProgress = isSelectionActive
-        setupBackgroundColor(isSelected: isSelectionActive && isSelected)
         
         let widthConstant: CGFloat
         
         if isSelectionActive {
+            setupBackgroundColor(isSelected: isSelected)
+            
             let selectImage = isSelected ? UIImage(named: "selected-checked") : UIImage(named: "selected-unchecked")
             selectIcon.image = selectImage
             widthConstant = 22
         } else {
+            setupBackgroundColor(isSelected: false)
             widthConstant = 0
         }
         
@@ -324,6 +326,12 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             self.setupMenuAvailability()
             self.layoutIfNeeded()
         }
+    }
+    
+    func resetSwipe() {
+        setupBackgroundColor(isSelected: false)
+        scrollableContent.scrollRectToVisible(defaultView.frame, animated: false)
+        swipeState = .defaultView
     }
     
     private func setupBackgroundColor(isSelected: Bool) {
@@ -347,8 +355,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     @objc private func onMenuTriggered() {
         let lightFeedback = UIImpactFeedbackGenerator(style: .light)
         lightFeedback.impactOccurred()
-        
-        setupBackgroundColor(isSelected: true)
     }
     
     
@@ -458,10 +464,7 @@ extension MultifileCollectionViewCell {
     
     private func setupLongTapButtonMenu() {
         defaultView.addSubview(menuButton)
-        menuButton.trailingAnchor.constraint(equalTo: defaultView.trailingAnchor).activate()
-        menuButton.centerYAnchor.constraint(equalTo: defaultView.centerYAnchor).activate()
-        menuButton.heightAnchor.constraint(equalToConstant: 1).activate()
-        menuButton.widthAnchor.constraint(equalToConstant: 1).activate()
+        menuButton.pinToSuperviewEdges()
     }
     
     private func setupMenu(indexPath: IndexPath) {
@@ -478,7 +481,6 @@ extension MultifileCollectionViewCell {
             menuButton.addTarget(self, action: #selector(onMenuTriggered), for: .menuActionTriggered)
             
             let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
-                self?.setupBackgroundColor(isSelected: false)
                 
                 if case .elementType(.rename) = actionType {
                     self?.startRenaming()

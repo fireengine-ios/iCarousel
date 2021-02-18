@@ -100,7 +100,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 reloadAfterOperation()
                 
             case .onViewAppear:
-                reloadAfterOperation()
+                reloadOnViewAppear()
         }
     }
     
@@ -155,9 +155,18 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     @objc
     private func fullReload() {
-        fileInfoManager.reload { [weak self] (shouldReload, indexes) in
+        fileInfoManager.reload { [weak self] (shouldReload, _) in
             if shouldReload {
                 self?.changeSelection(isActive: false)
+                self?.reloadCollection()
+            }
+        }
+        
+    }
+    
+    private func reloadAfterOperation() {
+        return fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
+            if shouldReload {
                 if let indexes = indexes {
                     self?.batchUpdate(indexes: indexes)
                 } else {
@@ -165,10 +174,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 }
             }
         }
-        
     }
     
-    private func reloadAfterOperation() {
+    private func reloadOnViewAppear() {
+        resetVisibleCellsSwipe()
         return fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
             if shouldReload {
                 if let indexes = indexes {
@@ -283,6 +292,16 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
             }
             
             self.collectionView?.reloadItems(at: visibleCells)
+        }
+    }
+    
+    private func resetVisibleCellsSwipe() {
+        DispatchQueue.main.async {
+            guard let visibleCells = self.collectionView?.visibleCells as? [MultifileCollectionViewCell] else {
+                return
+            }
+            
+            visibleCells.forEach { $0.resetSwipe() }
         }
     }
     
