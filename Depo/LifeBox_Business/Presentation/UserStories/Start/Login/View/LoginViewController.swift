@@ -87,7 +87,7 @@ final class LoginViewController: ViewController {
         willSet {
             
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPageEmailFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextfieldPlaceholderColor")!])
+                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextFieldPlaceholderColor")!])
             newValue.textColor = UIColor(named: "loginTextfieldTextColor")
         }
     }
