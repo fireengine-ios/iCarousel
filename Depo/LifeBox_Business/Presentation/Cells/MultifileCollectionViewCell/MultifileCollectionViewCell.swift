@@ -195,6 +195,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private var itemModel : Item?
     private var isAllowedToShowShared = false
+    private var isAllowedToSwipeDelete = false
     private(set) var isRenamingInProgress = false
     private var isSelectionInProgress = false
     private var pathExtensionLength = 0
@@ -263,6 +264,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         itemModel = item
         pathExtensionLength = (item.name as NSString?)?.pathExtension.count ?? 0
         isAllowedToShowShared = isSharedIconAllowed
+        isAllowedToSwipeDelete = item.privateSharePermission?.granted?.contains(.delete) ?? false
         actionDelegate = menuActionDelegate
         
         setupMenu(indexPath: indexPath)
@@ -536,6 +538,14 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         setupBackgroundColor(isSelected: true)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x > defaultView.frame.origin.x, !isAllowedToSwipeDelete {
+            scrollView.scrollRectToVisible(defaultView.frame, animated: false)
+            setupBackgroundColor(isSelected: false)
+            return
+        }
+    }
+    
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         updateOffset(scrollView: scrollView, velocityX: 0, targetContentOffset: nil)
     }
@@ -560,6 +570,7 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
             actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
         }
     }
+    
     
     private func updateOffset(scrollView: UIScrollView, velocityX: CGFloat, targetContentOffset: UnsafeMutablePointer<CGPoint>?) {
         if  abs(velocityX) > SwipeConfig.velocityXBeforeFastSwipe {
@@ -591,7 +602,7 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
                 }
                 
             case .right:
-                if currentOffsetX > defaultViewOffsetX {
+                if currentOffsetX > defaultViewOffsetX, isAllowedToSwipeDelete {
                     let isFull = currentOffsetX > deletePauseTriggerOffsetX
                     swipeState = .deleteView(full: isFull)
                 } else {
@@ -630,9 +641,9 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
             swipeState = .infoView(full: false)
         } else if scrollOffsetX < infoFullTriggerOffsetX {
             swipeState = .infoView(full: true)
-        } else if scrollOffsetX < deleteFullTriggerOffsetX, scrollOffsetX >= deletePauseOffsetX {
+        } else if scrollOffsetX < deleteFullTriggerOffsetX, scrollOffsetX >= deletePauseOffsetX, isAllowedToSwipeDelete {
             swipeState = .deleteView(full: false)
-        } else if scrollOffsetX > deleteFullTriggerOffsetX {
+        } else if scrollOffsetX > deleteFullTriggerOffsetX, isAllowedToSwipeDelete{
             swipeState = .deleteView(full: true)
         } else {
             swipeState = .defaultView

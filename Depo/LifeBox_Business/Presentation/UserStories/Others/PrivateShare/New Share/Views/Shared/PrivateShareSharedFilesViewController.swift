@@ -396,7 +396,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     
     func operationCancelled(withType type: ElementTypes) {
         if type.isContained(in: [.moveToTrash, .moveToTrashShared]) {
-            collectionManager.reload(type: .onOperationFinished)
+            collectionManager.reload(type: .onViewAppear)
         }
     }
     
