@@ -23,7 +23,7 @@ class LoginErrorBannerView: UIView {
         return newValue
     }()
 
-    @IBInspectable var shouldShowUnderlineLayer = true {
+    @IBInspectable var shouldShowUnderlineLayer = false {
         didSet {
             updateUnderlineLayerVisibility()
         }

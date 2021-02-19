@@ -87,7 +87,7 @@ final class LoginViewController: ViewController {
         willSet {
             
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPageEmailFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextfieldPlaceholderColor")!])
+                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextFieldPlaceholderColor")!])
             newValue.textColor = UIColor(named: "loginTextfieldTextColor")
         }
     }
@@ -95,7 +95,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var passwordTextField: BorderedWithInsetsTextField! {
         willSet {
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPagePasswordFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextfieldPlaceholderColor")!])
+                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextFieldPlaceholderColor")!])
             newValue.textColor = UIColor(named: "loginTextfieldTextColor")
 
             newValue.rightView = showHideButtonWithSpacingStackView
@@ -115,7 +115,6 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var topPageErrorView: LoginErrorBannerView! {
         willSet {
             newValue.isHidden = true
-            newValue.shouldShowUnderlineLayer = false
         }
     }
 
