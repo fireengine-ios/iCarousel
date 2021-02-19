@@ -24,13 +24,25 @@ private enum HorizontalScrollDirection {
     }
 }
 
+private struct SwipeConfig {
+    static let visiblePart: CGFloat = 0.3
+    static let triggerPart: CGFloat = 0.5
+    static let velocityXBeforeFastSwipe: CGFloat = 0.5
+    
+    private init() {}
+}
+
+private enum SwipeState: Equatable {
+    case defaultView
+    case infoView(full: Bool)
+    case deleteView(full: Bool)
+}
+
 protocol MultifileCollectionViewCellActionDelegate: class {
     func onMenuPress(sender: Any, itemModel: Item?)
     func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?)
     func rename(item: WrapData, name: String, completion: @escaping BoolHandler)
     func onLongPress(cell: UICollectionViewCell)
-    
-    @available(iOS 14, *)
     func onCellSelected(indexPath: IndexPath)
 }
 
@@ -85,7 +97,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private lazy var menuButton: IndexPathButton = {
         let button = IndexPathButton(with: IndexPath(row: 0, section: 0))
-        
+        button.setBackgroundColor(ColorConstants.multifileCellBackgroundColorSelected, for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -141,15 +153,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             newValue.bounces = false
             newValue.isPagingEnabled = false
             
-            if #available(iOS 14, *) {
-               //
-            } else {
-                //allows cell selection
-                newValue.isUserInteractionEnabled = false
-                contentView.addGestureRecognizer(newValue.panGestureRecognizer)
-            }
-            
-            
             newValue.delegate = self
         }
     }
@@ -188,9 +191,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private let actionViewsVisiblePart: CGFloat = 0.3
-    private let actionViewsTriggerPart: CGFloat = 0.5
-    
     weak var actionDelegate: MultifileCollectionViewCellActionDelegate?
     
     private var itemModel : Item?
@@ -199,16 +199,37 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     private var isSelectionInProgress = false
     private var pathExtensionLength = 0
     
+    private var swipeState: SwipeState = .defaultView {
+        willSet {
+            switch newValue {
+                case .defaultView:
+                    scrollableContent.scrollRectToVisible(defaultView.frame, animated: true)
+                    
+                case .infoView(full: true):
+                    scrollableContent.scrollRectToVisible(infoView.frame, animated: true)
+                    
+                case .deleteView(full: true):
+                    scrollableContent.scrollRectToVisible(deletionView.frame, animated: true)
+                    
+                case .infoView(full: false):
+                    let offsetX = defaultView.frame.origin.x - infoView.bounds.size.width * SwipeConfig.visiblePart
+                    scrollableContent.setContentOffset(CGPoint(x: offsetX, y: scrollableContent.contentOffset.y), animated: true)
+                    
+                case .deleteView(full: false):
+                    let offsetX = defaultView.frame.origin.x + deletionView.bounds.size.width * SwipeConfig.visiblePart
+                    scrollableContent.setContentOffset(CGPoint(x: offsetX, y: scrollableContent.contentOffset.y), animated: true)
+            }
+        }
+    }
+    
     //MARK: - Override
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if #available(iOS 14, *) {
-            setupLongTapButtonMenu()
-        } else {
-            setupLongGesture()
-        }
+        scrollableContent.scrollRectToVisible(defaultView.frame, animated: false)
+        
+        setupLongTapButtonMenu()
     }
     
     override func prepareForReuse() {
@@ -217,7 +238,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         isAllowedToShowShared = false
         isRenamingInProgress = false
         isSelectionInProgress = false
-        
+
         name.text = ""
         lastModifiedDate.text = ""
         renameField.attributedText = NSAttributedString(string: "")
@@ -227,15 +248,13 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         selectIconWidth.constant = 0
         nameEditView.alpha = 0
         
-        setScrollableContentInteraction(isAvailable: false)
-        scrollableContent.scrollRectToVisible(defaultView.frame, animated: false)
-        
         if #available(iOS 14, *) {
-            menuButton.menu = nil
-            menuButton.change(indexPath: nil)
+            setMenu(isAvailable: false)
         }
+
+        menuButton.change(indexPath: nil)
         
-        setupBackgroundColor(isSelected: false)
+        resetSwipe()
     }
     
     //MARK: - Setup
@@ -246,9 +265,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         isAllowedToShowShared = isSharedIconAllowed
         actionDelegate = menuActionDelegate
         
-        if #available(iOS 14, *) {
-            setupMenu(indexPath: indexPath)
-        }
+        setupMenu(indexPath: indexPath)
         
         setupMenuAvailability()
         setupUI()
@@ -283,29 +300,23 @@ class MultifileCollectionViewCell: UICollectionViewCell {
                 self.iconsStack.addArrangedSubview(isSharedView)
             }
             
-            self.scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: false)
+            self.resetSwipe()
         }
-    }
-    
-    private func setScrollableContentInteraction(isAvailable: Bool) {
-        if #available(iOS 14, *) {
-            return
-        }
-        
-        scrollableContent.isUserInteractionEnabled = isAvailable
     }
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         isSelectionInProgress = isSelectionActive
-        setupBackgroundColor(isSelected: isSelectionActive && isSelected)
         
         let widthConstant: CGFloat
         
         if isSelectionActive {
+            setupBackgroundColor(isSelected: isSelected)
+            
             let selectImage = isSelected ? UIImage(named: "selected-checked") : UIImage(named: "selected-unchecked")
             selectIcon.image = selectImage
             widthConstant = 22
         } else {
+            setupBackgroundColor(isSelected: false)
             widthConstant = 0
         }
         
@@ -317,16 +328,19 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    func resetSwipe() {
+        setupBackgroundColor(isSelected: false)
+        scrollableContent.scrollRectToVisible(defaultView.frame, animated: false)
+        swipeState = .defaultView
+    }
+    
     private func setupBackgroundColor(isSelected: Bool) {
-        defaultView.backgroundColor = isSelected ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
+        UIView.animate(withDuration: NumericConstants.setImageAnimationDuration) {
+            self.defaultView.backgroundColor = isSelected ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
+        }
     }
     
     //MARK: - Menu button actions
-    
-    //ios < 14
-    private func setupLongGesture() {
-        addGestureRecognizer(longTapGestureRecognizer)
-    }
     
     @objc private func onLongTap(_ sender: Any) {
         if #available(iOS 14.0, *) {
@@ -334,7 +348,13 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             return
         }
         
+        onMenuTriggered()
         actionDelegate?.onMenuPress(sender: sender, itemModel: itemModel)
+    }
+    
+    @objc private func onMenuTriggered() {
+        let lightFeedback = UIImpactFeedbackGenerator(style: .light)
+        lightFeedback.impactOccurred()
     }
     
     
@@ -349,8 +369,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private func showRenamingView() {
         DispatchQueue.toMain {
-            self.setScrollableContentInteraction(isAvailable: true)
-            
             self.renameField.attributedText = NSAttributedString(string: self.itemModel?.name ?? "")
             self.renameField.becomeFirstResponder()
             self.updateNameTextColor(textField: self.renameField)
@@ -371,7 +389,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             self.nameEditView.alpha = 0
             self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColor
         } completion: { _ in
-            self.setScrollableContentInteraction(isAvailable: false)
+            //
         }
     }
     
@@ -402,12 +420,8 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupMenuAvailability() {
-        if #available(iOS 14.0, *) {
-            setMenu(isAvailable: !(isSelectionInProgress || isRenamingInProgress))
-            setMenuButtonInteraction(isEnabled: !isRenamingInProgress)
-        } else {
-            longTapGestureRecognizer.isEnabled = !(isSelectionInProgress || isRenamingInProgress)
-        }
+        setMenu(isAvailable: !(isSelectionInProgress || isRenamingInProgress))
+        setMenuButtonInteraction(isEnabled: !isRenamingInProgress)
     }
     
     @objc
@@ -432,7 +446,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     }
     
     
-    //MARK: - SCroll view actions
+    //MARK: - Sсroll view actions
     
     @IBAction func onInfoButtonTapped(_ sender: Any) {
         scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
@@ -442,21 +456,15 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     @IBAction func onDeleteButtonTapped(_ sender: Any) {
         actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
     }
-    
-    
 }
 
-//MARK: - ios 14 pull down menu
-@available(iOS 14, *)
+//MARK: - ios 14 pull down and prior ios 14 long tap menu
+
 extension MultifileCollectionViewCell {
     
     private func setupLongTapButtonMenu() {
-        menuButton.showsMenuAsPrimaryAction = false
         defaultView.addSubview(menuButton)
-        menuButton.trailingAnchor.constraint(equalTo: defaultView.trailingAnchor).activate()
-        menuButton.centerYAnchor.constraint(equalTo: defaultView.centerYAnchor).activate()
-        menuButton.heightAnchor.constraint(equalToConstant: 1).activate()
-        menuButton.widthAnchor.constraint(equalToConstant: 1).activate()
+        menuButton.pinToSuperviewEdges()
     }
     
     private func setupMenu(indexPath: IndexPath) {
@@ -466,24 +474,37 @@ extension MultifileCollectionViewCell {
         
         menuButton.change(indexPath: indexPath)
         
-        menuButton.addTarget(self, action: #selector(onCellSelected(_:)), for: .touchUpInside)
+        menuButton.addTarget(self, action: #selector(onCellTapped(_:)), for: .touchUpInside)
         
-        let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
-            if case .elementType(.rename) = actionType {
-                self?.startRenaming()
-            } else {
-                self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton)
-            }
+        if #available(iOS 14, *) {
+            menuButton.showsMenuAsPrimaryAction = false
+            menuButton.addTarget(self, action: #selector(onMenuTriggered), for: .menuActionTriggered)
             
+            let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
+                
+                if case .elementType(.rename) = actionType {
+                    self?.startRenaming()
+                } else {
+                    self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton)
+                }
+                
+            }
+            menuButton.menu = menu
+            
+        } else {
+            menuButton.addGestureRecognizer(longTapGestureRecognizer)
         }
-        menuButton.menu = menu
     }
     
     private func setMenu(isAvailable: Bool) {
         if isAvailable, let indexPath = menuButton.indexPath {
             setupMenu(indexPath: indexPath)
         } else {
-            menuButton.menu = nil
+            if #available(iOS 14, *) {
+                menuButton.menu = nil
+            } else {
+                menuButton.removeGestureRecognizer(longTapGestureRecognizer)
+            }
         }
     }
     
@@ -491,19 +512,28 @@ extension MultifileCollectionViewCell {
         menuButton.isUserInteractionEnabled = isEnabled
     }
     
-    @objc private func onCellSelected(_ sender: Any) {
+    @objc private func onCellTapped(_ sender: Any) {
         guard let button = sender as? IndexPathButton, let indexPath = button.indexPath else {
             return
         }
         
-        actionDelegate?.onCellSelected(indexPath: indexPath)
+        if swipeState == .defaultView {
+            actionDelegate?.onCellSelected(indexPath: indexPath)
+        } else {
+            swipeState = .defaultView
+        }
     }
 }
 
 
+//MARK: - UIScrollViewDelegate
 extension MultifileCollectionViewCell: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         updateOffset(scrollView: scrollView, velocityX: velocity.x, targetContentOffset: targetContentOffset)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        setupBackgroundColor(isSelected: true)
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
@@ -515,34 +545,24 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         let currentOffset = scrollView.contentOffset.x
         
         guard currentOffset != defaultOffsetX else {
+            setupBackgroundColor(isSelected: false)
             return
         }
         
-        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsVisiblePart
-        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
         let infoOffsetX = infoView.frame.origin.x
         let deleteOffsetX = deletionView.frame.origin.x
         
-        let lightFeedback = UIImpactFeedbackGenerator(style: .light)
-        let mediumFeedback = UIImpactFeedbackGenerator(style: .medium)
-    
-        if currentOffset == infoPauseOffsetX || currentOffset == deletePauseOffsetX {
-            lightFeedback.impactOccurred()
-            
-        } else if currentOffset == infoOffsetX {
-            mediumFeedback.impactOccurred()
-            scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
+        if currentOffset == infoOffsetX {
+            swipeState = .defaultView
             actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
             
         } else if currentOffset == deleteOffsetX {
-            mediumFeedback.impactOccurred()
-            scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
             actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
         }
     }
     
     private func updateOffset(scrollView: UIScrollView, velocityX: CGFloat, targetContentOffset: UnsafeMutablePointer<CGPoint>?) {
-        if  abs(velocityX) > 1 {
+        if  abs(velocityX) > SwipeConfig.velocityXBeforeFastSwipe {
             updateOffsetFast(scrollView: scrollView, direction: HorizontalScrollDirection(velocityX: velocityX), targetContentOffset: targetContentOffset)
         } else {
             updateOffsetSlow(scrollView: scrollView)
@@ -552,12 +572,9 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
     private func updateOffsetFast(scrollView: UIScrollView, direction: HorizontalScrollDirection, targetContentOffset: UnsafeMutablePointer<CGPoint>?){
         
         let defaultViewOffsetX = defaultView.frame.origin.x
-        
-        let infoPauseOffsetX = defaultViewOffsetX - infoView.bounds.width * actionViewsVisiblePart
-        let deletePauseOffsetX = defaultViewOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
-        
-        let infoPauseTriggerOffsetX = defaultViewOffsetX - infoView.bounds.width * actionViewsTriggerPart
-        let deletePauseTriggerOffsetX = defaultViewOffsetX + deletionView.bounds.width * actionViewsTriggerPart
+       
+        let infoPauseTriggerOffsetX = defaultViewOffsetX - infoView.bounds.width * SwipeConfig.triggerPart
+        let deletePauseTriggerOffsetX = defaultViewOffsetX + deletionView.bounds.width * SwipeConfig.triggerPart
         
         let currentOffsetX = scrollView.contentOffset.x
         
@@ -567,24 +584,18 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         switch direction {
             case .left:
                 if currentOffsetX < defaultViewOffsetX {
-                    if currentOffsetX < infoPauseTriggerOffsetX {
-                        scrollView.scrollRectToVisible(infoView.frame, animated: true)
-                    } else {
-                        scrollView.setContentOffset(CGPoint(x: infoPauseOffsetX, y: 0), animated: true)
-                    }
+                    let isFull = currentOffsetX < infoPauseTriggerOffsetX
+                    swipeState = .infoView(full: isFull)
                 } else {
-                    scrollView.scrollRectToVisible(defaultView.frame, animated: true)
+                    swipeState = .defaultView
                 }
-
+                
             case .right:
                 if currentOffsetX > defaultViewOffsetX {
-                    if currentOffsetX > deletePauseTriggerOffsetX {
-                        scrollView.scrollRectToVisible(deletionView.frame, animated: true)
-                    } else {
-                        scrollView.setContentOffset(CGPoint(x: deletePauseOffsetX, y: 0), animated: true)
-                    }
+                    let isFull = currentOffsetX > deletePauseTriggerOffsetX
+                    swipeState = .deleteView(full: isFull)
                 } else {
-                    scrollView.scrollRectToVisible(defaultView.frame, animated: true)
+                    swipeState = .defaultView
                 }
                 
             case .none:
@@ -609,18 +620,22 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         
         let defaultOffsetX = defaultView.frame.origin.x
         
-        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsVisiblePart
-        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * actionViewsVisiblePart
+        let infoPauseOffsetX = defaultOffsetX - infoView.bounds.width * SwipeConfig.visiblePart
+        let deletePauseOffsetX = defaultOffsetX + deletionView.bounds.width  * SwipeConfig.visiblePart
         
-        let infoPauseTriggerOffsetX = defaultOffsetX - infoView.bounds.width * actionViewsTriggerPart
-        let deletePauseTriggerOffsetX = defaultOffsetX + deletionView.bounds.width * actionViewsTriggerPart
-        
-        if scrollOffsetX < infoPauseTriggerOffsetX, scrollOffsetX <= infoPauseOffsetX {
-            scrollView.setContentOffset(CGPoint(x: infoPauseOffsetX, y: 0), animated: true)
-        } else if scrollOffsetX > deletePauseTriggerOffsetX, scrollOffsetX >= deletePauseOffsetX {
-            scrollView.setContentOffset(CGPoint(x: deletePauseOffsetX, y: 0), animated: true)
+        let infoFullTriggerOffsetX = defaultOffsetX - infoView.bounds.width * SwipeConfig.triggerPart
+        let deleteFullTriggerOffsetX = defaultOffsetX + deletionView.bounds.width * SwipeConfig.triggerPart
+       
+        if scrollOffsetX > infoFullTriggerOffsetX, scrollOffsetX <= infoPauseOffsetX {
+            swipeState = .infoView(full: false)
+        } else if scrollOffsetX < infoFullTriggerOffsetX {
+            swipeState = .infoView(full: true)
+        } else if scrollOffsetX < deleteFullTriggerOffsetX, scrollOffsetX >= deletePauseOffsetX {
+            swipeState = .deleteView(full: false)
+        } else if scrollOffsetX > deleteFullTriggerOffsetX {
+            swipeState = .deleteView(full: true)
         } else {
-            scrollView.scrollRectToVisible(defaultView.frame, animated: true)
+            swipeState = .defaultView
         }
     }
 }
