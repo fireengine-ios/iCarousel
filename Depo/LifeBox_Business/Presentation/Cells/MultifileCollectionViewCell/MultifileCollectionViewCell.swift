@@ -195,14 +195,20 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private var itemModel : Item?
     private var isAllowedToShowShared = false
-    private var isAllowedToSwipeDelete = false
+    private var isAllowedToSwipe: Bool {
+        return !(isSelectionInProgress || isRenamingInProgress)
+    }
+    private var isAllowedToSwipeDelete: Bool {
+        return itemModel?.privateSharePermission?.granted?.contains(.delete) ?? false && isAllowedToSwipe
+    }
     private(set) var isRenamingInProgress = false
     private var isSelectionInProgress = false
     private var pathExtensionLength = 0
     
     private var swipeState: SwipeState = .defaultView {
-        willSet {
-            switch newValue {
+        didSet {
+            setupMenuAvailability()
+            switch swipeState {
                 case .defaultView:
                     scrollableContent.scrollRectToVisible(defaultView.frame, animated: true)
                     
@@ -264,7 +270,6 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         itemModel = item
         pathExtensionLength = (item.name as NSString?)?.pathExtension.count ?? 0
         isAllowedToShowShared = isSharedIconAllowed
-        isAllowedToSwipeDelete = item.privateSharePermission?.granted?.contains(.delete) ?? false
         actionDelegate = menuActionDelegate
         
         setupMenu(indexPath: indexPath)
@@ -422,7 +427,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupMenuAvailability() {
-        setMenu(isAvailable: !(isSelectionInProgress || isRenamingInProgress))
+        setMenu(isAvailable: !(isSelectionInProgress || isRenamingInProgress) && swipeState == .defaultView)
         setMenuButtonInteraction(isEnabled: !isRenamingInProgress)
     }
     
@@ -523,7 +528,7 @@ extension MultifileCollectionViewCell {
             actionDelegate?.onCellSelected(indexPath: indexPath)
         } else {
             swipeState = .defaultView
-        }
+        } 
     }
 }
 
@@ -539,6 +544,12 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard isAllowedToSwipe else {
+            scrollView.scrollRectToVisible(defaultView.frame, animated: false)
+            setupBackgroundColor(isSelected: isRenamingInProgress)
+            return
+        }
+        
         if scrollView.contentOffset.x > defaultView.frame.origin.x, !isAllowedToSwipeDelete {
             scrollView.scrollRectToVisible(defaultView.frame, animated: false)
             setupBackgroundColor(isSelected: false)
