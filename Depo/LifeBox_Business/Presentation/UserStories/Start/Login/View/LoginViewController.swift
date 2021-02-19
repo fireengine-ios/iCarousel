@@ -97,6 +97,11 @@ final class LoginViewController: ViewController {
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPagePasswordFieldPlaceholder,
                                                                 attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
             newValue.textColor = ColorConstants.loginTextfieldTextColor
+
+            newValue.rightView = showHideButtonWithSpacingStackView
+            newValue.rightViewMode = .always
+            newValue.addTarget(self, action: #selector(passwordTextFieldTextDidChange(_:)), for: .editingChanged)
+            newValue.fromRightTextInset = showHideButtonWithSpacingStackView.frame.width
         }
     }
     
@@ -152,6 +157,37 @@ final class LoginViewController: ViewController {
             newValue.textColor = ColorConstants.loginErrorLabelTextColor
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
             newValue.textAlignment = .left
+        }
+    }
+
+    private let spacingFromRightToShowHideButton: CGFloat = 20
+    private lazy var showHideButtonWithSpacingStackView: UIStackView = {
+        let stk = UIStackView()
+        stk.axis = .horizontal
+        stk.spacing = 0
+        stk.addArrangedSubview(showHideButton)
+        let spacingView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: spacingFromRightToShowHideButton, height: spacingFromRightToShowHideButton)))
+        spacingView.backgroundColor = .clear
+        stk.addArrangedSubview(spacingView)
+        stk.frame = CGRect(origin: .zero, size: CGSize(width: showHideButton.frame.size.width + spacingFromRightToShowHideButton, height: showHideButton.frame.size.height))
+        return stk
+    }()
+
+    private lazy var showHideButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
+        button.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
+        button.setTitle(TextConstants.loginPageShowPassword, for: .normal)
+        button.addTarget(self, action: #selector(showHideButtonClicked(_:)), for: .touchUpInside)
+        button.isHidden = true
+        button.sizeToFit()
+        return button
+    }()
+    private var passwordVisisble: Bool = false
+    private var passwordTextFieldTextIsEmpty: Bool = true {
+        didSet {
+            showHideButton.isHidden = passwordTextFieldTextIsEmpty
+            passwordTextField.rightViewMode = passwordTextFieldTextIsEmpty ? .never : .always
         }
     }
     
@@ -227,6 +263,15 @@ final class LoginViewController: ViewController {
         setNavigationTitle(title: TextConstants.loginTitle)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
+
+    @objc private func showHideButtonClicked(_ button: UIButton) {
+        passwordVisisble.toggle()
+
+        showHideButton.setTitle(passwordVisisble ? TextConstants.loginPageHidePassword : TextConstants.loginPageShowPassword, for: .normal)
+        showHideButton.sizeToFit()
+        resizeStackViewFrameForShowHideButtonForPasswordTextField()
+        passwordTextField.toggleTextFieldSecureType()
+    }
     
     @IBAction private func forgotPasswordButtonTapped() {
         let popupController = PopUpController.with(title: TextConstants.loginPageForgetPasswordPageTitle,
@@ -288,9 +333,19 @@ final class LoginViewController: ViewController {
                                                    captchaAnswer: captchaView.captchaAnswerTextField.text ?? "")
         }
     }
+
+    private func resizeStackViewFrameForShowHideButtonForPasswordTextField() {
+        showHideButtonWithSpacingStackView.frame = CGRect(origin: .zero, size: CGSize(width: showHideButton.frame.size.width + spacingFromRightToShowHideButton, height: showHideButton.frame.size.height))
+        passwordTextField.fromRightTextInset = showHideButtonWithSpacingStackView.frame.size.width
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
+    @objc private func passwordTextFieldTextDidChange(_ textField: UITextField) {
+        guard textField == passwordTextField else { return }
+        passwordTextFieldTextIsEmpty = passwordTextField.text?.removingWhiteSpaces().isEmpty ?? true
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
