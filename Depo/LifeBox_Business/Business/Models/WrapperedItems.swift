@@ -1068,7 +1068,9 @@ extension WrapData {
             lastModifiDate == wrapData.lastModifiDate &&
             tmpDownloadUrl?.byTrimmingQuery == wrapData.tmpDownloadUrl?.byTrimmingQuery &&
             status == wrapData.status &&
-            metaData == wrapData.metaData
+            metaData == wrapData.metaData &&
+            isShared == wrapData.isShared &&
+            privateSharePermission == wrapData.privateSharePermission
     }
 
 }

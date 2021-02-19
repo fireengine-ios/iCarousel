@@ -100,7 +100,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 reloadAfterOperation()
                 
             case .onViewAppear:
-                reloadAfterOperation()
+                reloadOnViewAppear()
         }
     }
     
@@ -136,7 +136,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.register(nibSupplementaryView: CollectionViewSpinnerFooter.self,
                                  kind: UICollectionElementKindSectionFooter)
 
-        collectionView?.allowsMultipleSelection = true
+        collectionView?.allowsSelection = false
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
@@ -155,9 +155,18 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     @objc
     private func fullReload() {
-        fileInfoManager.reload { [weak self] (shouldReload, indexes) in
+        fileInfoManager.reload { [weak self] (shouldReload, _) in
             if shouldReload {
                 self?.changeSelection(isActive: false)
+                self?.reloadCollection()
+            }
+        }
+        
+    }
+    
+    private func reloadAfterOperation() {
+        return fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
+            if shouldReload {
                 if let indexes = indexes {
                     self?.batchUpdate(indexes: indexes)
                 } else {
@@ -165,10 +174,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 }
             }
         }
-        
     }
     
-    private func reloadAfterOperation() {
+    private func reloadOnViewAppear() {
+        resetVisibleCellsSwipe()
         return fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
             if shouldReload {
                 if let indexes = indexes {
@@ -286,6 +295,16 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
+    private func resetVisibleCellsSwipe() {
+        DispatchQueue.main.async {
+            guard let visibleCells = self.collectionView?.visibleCells as? [MultifileCollectionViewCell] else {
+                return
+            }
+            
+            visibleCells.forEach { $0.resetSwipe() }
+        }
+    }
+    
     private func setEmptyScreen(isHidden: Bool) {
         guard collectionView?.backgroundView?.isHidden != isHidden else {
             return
@@ -330,14 +349,6 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
         
         cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        onDidSelectItem(at: indexPath)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        onDidSelectItem(at: indexPath)
     }
 
     //MARK: Helpers
@@ -550,7 +561,6 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
         fileInfoManager.rename(item: item, name: name, completion: completion)
     }
     
-    @available(iOS 14, *)
     func onCellSelected(indexPath: IndexPath) {
         DispatchQueue.toMain {
             self.collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: [])
