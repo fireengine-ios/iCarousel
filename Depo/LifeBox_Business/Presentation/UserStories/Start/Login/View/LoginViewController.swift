@@ -115,7 +115,6 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var topPageErrorView: LoginErrorBannerView! {
         willSet {
             newValue.isHidden = true
-            newValue.shouldShowUnderlineLayer = false
         }
     }
 
