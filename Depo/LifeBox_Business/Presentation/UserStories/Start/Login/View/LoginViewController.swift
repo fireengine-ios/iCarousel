@@ -17,7 +17,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var pageTitleLabel: UILabel! {
         willSet {
             newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             newValue.text = TextConstants.loginPageMainTitle
         }
     }
@@ -25,7 +25,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var loginDescriptionLabel: UILabel! {
         willSet {
             newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.text = TextConstants.loginPageLoginButtonExplanation
         }
     }
@@ -33,7 +33,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var fastLoginDescriptionLabel: UILabel! {
         willSet {
             newValue.textColor = UIColor(named: "loginDescriptionLabelColor")
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.text = TextConstants.loginPageFLButtonExplanation
         }
     }
@@ -60,7 +60,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var rememberMeTitleButton: UIButton! {
         willSet {
             newValue.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.setTitle(TextConstants.loginPageRememberMeButtonTitle, for: .normal)
         }
     }
@@ -68,7 +68,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var forgotPasswordButton: UIButton! {
         willSet {
             newValue.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.setTitle(TextConstants.loginPageForgetPasswordButtonTitle + " (?)", for: .normal)
         }
     }
@@ -77,7 +77,7 @@ final class LoginViewController: ViewController {
         willSet {
             newValue.setTitle(TextConstants.loginPageLoginButtonTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 14)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
             newValue.backgroundColor = UIColor(named: "loginButtonBackground")
             newValue.isOpaque = true
         }
@@ -135,7 +135,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var loginErrorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.loginErrorLabelTextColor
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .left
         }
     }
@@ -155,7 +155,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var passwordErrorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.loginErrorLabelTextColor
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .left
         }
     }
@@ -175,7 +175,7 @@ final class LoginViewController: ViewController {
 
     private lazy var showHideButton: UIButton = {
         let button = UIButton()
-        button.titleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12)
+        button.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 12)
         button.setTitleColor(UIColor(named: "loginDescriptionLabelColor"), for: .normal)
         button.setTitle(TextConstants.loginPageShowPassword, for: .normal)
         button.addTarget(self, action: #selector(showHideButtonClicked(_:)), for: .touchUpInside)
