@@ -98,7 +98,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLc-Fz-zX8">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLc-Fz-zX8">
                             <rect key="frame" x="20" y="112" width="318" height="14"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="14" id="TsF-l8-AnT"/>
@@ -114,9 +114,9 @@
                         <constraint firstAttribute="trailing" secondItem="mU4-M6-cI6" secondAttribute="trailing" id="RfS-bf-Hqu"/>
                         <constraint firstAttribute="trailing" secondItem="W0V-fQ-219" secondAttribute="trailing" id="XMd-wg-BIO"/>
                         <constraint firstItem="W0V-fQ-219" firstAttribute="top" secondItem="mU4-M6-cI6" secondAttribute="bottom" constant="10" id="awz-dJ-UVh"/>
-                        <constraint firstAttribute="bottom" secondItem="jLc-Fz-zX8" secondAttribute="bottom" priority="750" id="e8p-gF-VGZ"/>
+                        <constraint firstAttribute="bottom" secondItem="jLc-Fz-zX8" secondAttribute="bottom" priority="250" id="e8p-gF-VGZ"/>
                         <constraint firstItem="jLc-Fz-zX8" firstAttribute="top" secondItem="W0V-fQ-219" secondAttribute="bottom" constant="5" id="hJC-lH-zrJ"/>
-                        <constraint firstAttribute="bottom" secondItem="W0V-fQ-219" secondAttribute="bottom" priority="250" constant="5" id="ksj-of-yWZ"/>
+                        <constraint firstAttribute="bottom" secondItem="W0V-fQ-219" secondAttribute="bottom" priority="750" constant="5" id="ksj-of-yWZ"/>
                         <constraint firstAttribute="trailing" secondItem="jLc-Fz-zX8" secondAttribute="trailing" constant="20" id="nOD-D5-z6d"/>
                         <constraint firstItem="mU4-M6-cI6" firstAttribute="top" secondItem="4PQ-l4-ggS" secondAttribute="top" id="nTy-9v-jcq"/>
                         <constraint firstItem="W0V-fQ-219" firstAttribute="leading" secondItem="4PQ-l4-ggS" secondAttribute="leading" id="nlf-O3-9un"/>
@@ -138,7 +138,7 @@
     </objects>
     <designables>
         <designable name="W0V-fQ-219">
-            <size key="intrinsicContentSize" width="103.5" height="16"/>
+            <size key="intrinsicContentSize" width="63.5" height="16"/>
         </designable>
     </designables>
     <resources>
