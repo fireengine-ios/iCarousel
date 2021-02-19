@@ -45,14 +45,14 @@ final class LoginCaptchaView: UIView, FromNib {
             newValue.smartQuotesType = .no
             newValue.smartDashesType = .no
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.captchaViewTextfieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
-            newValue.textColor = ColorConstants.loginTextfieldTextColor
+                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextfieldPlaceholderColor")!])
+            newValue.textColor = UIColor(named: "loginTextfieldTextColor")
         }
     }
 
     @IBOutlet private weak var captchaErrorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginErrorLabelTextColor
+            newValue.textColor = UIColor(named: "loginErrorLabelTextColor")
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
             newValue.textAlignment = .left
         }

@@ -87,16 +87,16 @@ final class LoginViewController: ViewController {
         willSet {
             
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPageEmailFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
-            newValue.textColor = ColorConstants.loginTextfieldTextColor
+                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextfieldPlaceholderColor")!])
+            newValue.textColor = UIColor(named: "loginTextfieldTextColor")
         }
     }
 
     @IBOutlet private weak var passwordTextField: BorderedWithInsetsTextField! {
         willSet {
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPagePasswordFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
-            newValue.textColor = ColorConstants.loginTextfieldTextColor
+                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextfieldPlaceholderColor")!])
+            newValue.textColor = UIColor(named: "loginTextfieldTextColor")
 
             newValue.rightView = showHideButtonWithSpacingStackView
             newValue.rightViewMode = .always
@@ -134,7 +134,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var loginErrorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginErrorLabelTextColor
+            newValue.textColor = UIColor(named: "loginErrorLabelTextColor")
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .left
         }
@@ -154,7 +154,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var passwordErrorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginErrorLabelTextColor
+            newValue.textColor = UIColor(named: "loginErrorLabelTextColor")
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .left
         }
@@ -242,12 +242,16 @@ final class LoginViewController: ViewController {
     private func configureKeyboard() {
         keyboard
             .on(event: .willShow) { [weak self] options in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 
                 self.updateScroll(with: options.endFrame)
             }
             .on(event: .willHide) { [weak self] _ in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 
                 var inset = self.scrollView.contentInset
                 inset.bottom = 0
@@ -342,7 +346,9 @@ final class LoginViewController: ViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     @objc private func passwordTextFieldTextDidChange(_ textField: UITextField) {
-        guard textField == passwordTextField else { return }
+        guard textField == passwordTextField else {
+            return
+        }
         passwordTextFieldTextIsEmpty = passwordTextField.text?.removingWhiteSpaces().isEmpty ?? true
     }
 
