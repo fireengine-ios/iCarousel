@@ -30,8 +30,8 @@
                 <outlet property="passwordTextField" destination="SnA-9S-aeD" id="MyO-48-VlS"/>
                 <outlet property="rememberMeButton" destination="xQZ-uh-s8N" id="GvU-tH-seT"/>
                 <outlet property="rememberMeTitleButton" destination="zAp-Jh-fxd" id="Owl-yS-H8x"/>
-                <outlet property="screenErrorView" destination="dkR-V9-Ejo" id="lXr-zZ-evn"/>
                 <outlet property="scrollView" destination="mkB-W0-Ecj" id="gcW-Bu-wFs"/>
+                <outlet property="topPageErrorView" destination="dkR-V9-Ejo" id="lXr-zZ-evn"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wbG-EX-7FM"/>
             </connections>
         </placeholder>

@@ -1275,4 +1275,12 @@ extension TextConstants {
     static let loginPageEmailFieldPlaceholder = NSLocalizedString("business_app_login_email_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageMainTitle = NSLocalizedString("business_app_login_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let captchaViewTextfieldPlaceholder = NSLocalizedString("business_app_login_captcha_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageEmptyLoginFieldError = NSLocalizedString("business_app_login_email_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageInvalidLoginFieldError = NSLocalizedString("business_app_login_email_not_validated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageEmptyPasswordFieldError = NSLocalizedString("business_app_login_password_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageEmptyCaptchaFieldError = NSLocalizedString("business_app_login_captcha_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageInvalidCaptchaFieldError = NSLocalizedString("business_app_login_captcha_not_match", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageAuthenticationError30Error = NSLocalizedString("business_app_login_pwd_error_code_30", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageShowPassword = NSLocalizedString("business_app_login_show_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageHidePassword = NSLocalizedString("business_app_login_hide_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

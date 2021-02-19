@@ -107,7 +107,7 @@ final class LoginViewController: ViewController {
         }
     }
 
-    @IBOutlet private weak var screenErrorView: LoginErrorBannerView! {
+    @IBOutlet private weak var topPageErrorView: LoginErrorBannerView! {
         willSet {
             newValue.isHidden = true
             newValue.shouldShowUnderlineLayer = false
@@ -371,18 +371,18 @@ extension LoginViewController: LoginViewInput {
     //MARK: - Alerts processing
     
     func showErrorMessage(with text: String) {
-        screenErrorView.message = text
+        topPageErrorView.message = text
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.screenErrorView.isHidden = false
+            self.topPageErrorView.isHidden = false
             self.view.layoutIfNeeded()
         }
         
-        let errorViewRect = view.convert(screenErrorView.frame, to: view)
+        let errorViewRect = view.convert(topPageErrorView.frame, to: view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)        
     }
     
     func hideErrorMessage() {
-        screenErrorView.isHidden = true
+        topPageErrorView.isHidden = true
     }
 
     func failedBlockError() {

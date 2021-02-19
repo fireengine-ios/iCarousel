@@ -1892,6 +1892,14 @@
 "business_app_login_pwd_login_button_explanation" = "*It can be used when your company has identity integration with Turkcell";
 "business_app_login_FL_explanation" = "To login without identity integration";
 "business_app_login_captcha_box_inside" = "Enter the code";
+"business_app_login_email_empty" = "You have to fill in your email";
+"business_app_login_password_empty" = "You have to fill in your password";
+"business_app_login_captcha_empty" = "Please type the text";
+"business_app_login_email_not_validated" = "Please enter a valid e-mail";
+"business_app_login_pwd_error_code_30" = "Authentication failed";
+"business_app_login_captcha_not_match" = "Entered text does not match";
+"business_app_login_show_password" = "Show";
+"business_app_login_hide_password" = "Hide";
 
 "business_app_select_option" = "Select";
 "business_app_download_option" = "Download";
