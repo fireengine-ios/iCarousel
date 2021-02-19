@@ -176,18 +176,18 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.loginScreenServerError)
             
         case .incorrectUsernamePassword:
-            failLogin(message: TextConstants.loginScreenCredentialsError)
+            failLogin(message: TextConstants.loginPageAuthenticationError30Error)
             
         case .incorrectCaptcha:
             completeAsyncOperationEnableScreen()
             view.refreshCaptcha()
-            view.captchaFieldError(TextConstants.invalidCaptcha)
+            view.captchaFieldError(TextConstants.loginPageInvalidCaptchaFieldError)
             
         case .networkError:
             failLogin(message: errorText)
             
         case .unauthorized:
-            failLogin(message: TextConstants.loginScreenCredentialsError)
+            failLogin(message: TextConstants.loginPageAuthenticationError30Error)
             
         case .noInternetConnection:
             failLogin(message: TextConstants.errorConnectedToNetwork)
@@ -198,14 +198,14 @@ extension LoginPresenter: LoginInteractorOutput {
 //            openEmptyPhone()
             
         case .emptyCaptcha:
-            view.captchaFieldError(TextConstants.captchaIsEmpty)
+            view.captchaFieldError(TextConstants.loginPageEmptyCaptchaFieldError)
             
         case .serverError:
             failLogin(message: TextConstants.loginScreenServerError)
             
         case .emptyEmail:
             debugLog("processLoginError:  .emptyEmail this error should be impossible")
-            failLogin(message: TextConstants.loginScreenServerError)
+            failLogin(message: TextConstants.loginPageEmptyLoginFieldError)
             completeAsyncOperationEnableScreen()
 //            openEmptyEmail()
         }
@@ -223,16 +223,16 @@ extension LoginPresenter: LoginInteractorOutput {
         
         switch type {
         case .loginIsEmpty:
-            view.loginFieldError(TextConstants.loginEmailOrPhoneError)
+            view.loginFieldError(TextConstants.loginPageEmptyLoginFieldError)
             
         case .loginIsNotValid:
-            view.loginFieldError(TextConstants.loginUsernameNotValid)
+            view.loginFieldError(TextConstants.loginScreenInvalidLoginError)
             
         case .passwordIsEmpty:
-            view.passwordFieldError(TextConstants.loginPasswordError)
+            view.passwordFieldError(TextConstants.loginPageEmptyPasswordFieldError)
             
         case .captchaIsEmpty:
-            view.captchaFieldError(TextConstants.captchaIsEmpty)
+            view.captchaFieldError(TextConstants.loginPageEmptyCaptchaFieldError)
         }
     }
     
