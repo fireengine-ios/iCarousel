@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="captchaView" destination="ii5-V8-YDl" id="Ewb-9H-0lb"/>
-                <outlet property="errorView" destination="dkR-V9-Ejo" id="8lE-yO-2Tz"/>
                 <outlet property="errorViewFakeHeightConstraint" destination="IYC-6b-oSX" id="SQX-Gf-Yvm"/>
                 <outlet property="fakeLoginSpaceView" destination="E0n-t3-Dw0" id="DY1-79-C7t"/>
                 <outlet property="fastLoginButton" destination="HYz-1K-Oja" id="3y7-Vc-7pi"/>
@@ -31,6 +30,7 @@
                 <outlet property="passwordTextField" destination="SnA-9S-aeD" id="MyO-48-VlS"/>
                 <outlet property="rememberMeButton" destination="xQZ-uh-s8N" id="GvU-tH-seT"/>
                 <outlet property="rememberMeTitleButton" destination="zAp-Jh-fxd" id="Owl-yS-H8x"/>
+                <outlet property="screenErrorView" destination="dkR-V9-Ejo" id="lXr-zZ-evn"/>
                 <outlet property="scrollView" destination="mkB-W0-Ecj" id="gcW-Bu-wFs"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wbG-EX-7FM"/>
             </connections>
@@ -68,7 +68,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="s8s-VR-87Z">
                                             <rect key="frame" x="20" y="155" width="335" height="107"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkR-V9-Ejo" customClass="ErrorBannerView" customModule="lifeBox_Business" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dkR-V9-Ejo" customClass="LoginErrorBannerView" customModule="lifeBox_Business">
                                                     <rect key="frame" x="0.0" y="0.0" width="335" height="2"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>

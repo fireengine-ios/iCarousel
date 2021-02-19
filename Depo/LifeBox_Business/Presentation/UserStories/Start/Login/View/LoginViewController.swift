@@ -107,10 +107,10 @@ final class LoginViewController: ViewController {
         }
     }
 
-    @IBOutlet private weak var errorView: ErrorBannerView! {
+    @IBOutlet private weak var screenErrorView: LoginErrorBannerView! {
         willSet {
             newValue.isHidden = true
-            newValue.errorLabelTextColor = ColorConstants.loginErrorLabelTextColor
+            newValue.shouldShowUnderlineLayer = false
         }
     }
 
@@ -371,18 +371,18 @@ extension LoginViewController: LoginViewInput {
     //MARK: - Alerts processing
     
     func showErrorMessage(with text: String) {
-        errorView.message = text
+        screenErrorView.message = text
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.errorView.isHidden = false
+            self.screenErrorView.isHidden = false
             self.view.layoutIfNeeded()
         }
         
-        let errorViewRect = view.convert(errorView.frame, to: view)
+        let errorViewRect = view.convert(screenErrorView.frame, to: view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)        
     }
     
     func hideErrorMessage() {
-        errorView.isHidden = true
+        screenErrorView.isHidden = true
     }
 
     func failedBlockError() {
