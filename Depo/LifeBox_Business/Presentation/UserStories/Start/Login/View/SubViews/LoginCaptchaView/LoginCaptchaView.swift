@@ -10,6 +10,9 @@ import UIKit
 
 final class LoginCaptchaView: UIView, FromNib {
 
+    @IBOutlet private weak var noErrorTextfieldToBottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var withErrorLabelToBottomconstraint: NSLayoutConstraint!
+
     @IBOutlet private weak var captchaImageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFit
@@ -32,7 +35,7 @@ final class LoginCaptchaView: UIView, FromNib {
         }
     }
 
-    @IBOutlet weak var captchaAnswerTextField: BorderedWithInsetsTextField! {
+    @IBOutlet private(set) weak var captchaAnswerTextField: BorderedWithInsetsTextField! {
         willSet {
             newValue.returnKeyType = .done
             newValue.autocorrectionType = .no
@@ -42,8 +45,16 @@ final class LoginCaptchaView: UIView, FromNib {
             newValue.smartQuotesType = .no
             newValue.smartDashesType = .no
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.captchaViewTextfieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextfieldPlaceholderColor])
-            newValue.textColor = ColorConstants.loginTextfieldTextColor
+                                                                attributes: [NSAttributedStringKey.foregroundColor: UIColor(named: "loginTextfieldPlaceholderColor")!])
+            newValue.textColor = UIColor(named: "loginTextfieldTextColor")
+        }
+    }
+
+    @IBOutlet private weak var captchaErrorLabel: UILabel! {
+        willSet {
+            newValue.textColor = UIColor(named: "loginErrorLabelTextColor")
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.textAlignment = .left
         }
     }
 
@@ -90,6 +101,19 @@ final class LoginCaptchaView: UIView, FromNib {
 
     func clearCaptchaAnswer() {
         captchaAnswerTextField.text = ""
+    }
+
+    func showError(_ error: String?) {
+        guard let error = error else {
+            noErrorTextfieldToBottomConstraint.priority = .defaultHigh
+            withErrorLabelToBottomconstraint.priority = .defaultLow
+            captchaErrorLabel.isHidden = true
+            return
+        }
+        noErrorTextfieldToBottomConstraint.priority = .defaultLow
+        withErrorLabelToBottomconstraint.priority = .defaultHigh
+        captchaErrorLabel.isHidden = false
+        captchaErrorLabel.text = error
     }
 
     private func generateCaptchaUUID() {

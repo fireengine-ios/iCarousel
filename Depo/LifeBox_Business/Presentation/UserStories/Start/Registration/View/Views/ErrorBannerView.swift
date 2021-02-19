@@ -10,11 +10,17 @@ import UIKit
 
 class ErrorBannerView: UIView {
 
-    private let messageLabel: UILabel = {
+    var errorLabelTextColor: UIColor = ColorConstants.textOrange {
+        didSet {
+            messageLabel.textColor = errorLabelTextColor
+        }
+    }
+
+    private lazy var messageLabel: UILabel = {
         let newValue = UILabel()
         
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        newValue.textColor = ColorConstants.textOrange
+        newValue.textColor = errorLabelTextColor
         newValue.lineBreakMode = .byWordWrapping
         newValue.numberOfLines = 0
         newValue.text = ""

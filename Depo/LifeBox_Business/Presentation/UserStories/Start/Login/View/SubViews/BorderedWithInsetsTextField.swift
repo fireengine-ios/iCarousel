@@ -11,6 +11,8 @@ import UIKit
 @IBDesignable
 class BorderedWithInsetsTextField: UITextField {
 
+    private let fromRightTextThreshold: CGFloat = 4
+
     @IBInspectable
     var fromLeftTextInset: CGFloat = 0 {
         didSet {
@@ -47,10 +49,14 @@ class BorderedWithInsetsTextField: UITextField {
     }
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: fromLeftTextInset, bottom: 0, right: fromRightTextInset))
+        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: fromLeftTextInset, bottom: 0, right: fromRightTextInset + fromRightTextThreshold))
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: fromLeftTextInset, bottom: 0, right: fromRightTextInset))
+        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: fromLeftTextInset, bottom: 0, right: fromRightTextInset + fromRightTextThreshold))
+    }
+
+    override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: bounds.width - fromRightTextInset + fromRightTextThreshold, y: 0, width: fromRightTextInset, height: bounds.height)
     }
 }

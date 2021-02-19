@@ -13,9 +13,9 @@ protocol LoginViewInput: class, Waiting {
     func showCaptcha()
     func refreshCaptcha()
 
-    func loginFieldError(_ error: String)
-    func passwordFieldError(_ error: String)
-    func captchaFieldError(_ error: String)
+    func loginFieldError(_ error: String?)
+    func passwordFieldError(_ error: String?)
+    func captchaFieldError(_ error: String?)
     
     func showErrorMessage(with text: String)
     
