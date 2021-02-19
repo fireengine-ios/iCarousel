@@ -226,7 +226,7 @@ extension LoginPresenter: LoginInteractorOutput {
             view.loginFieldError(TextConstants.loginPageEmptyLoginFieldError)
             
         case .loginIsNotValid:
-            view.loginFieldError(TextConstants.loginScreenInvalidLoginError)
+            view.loginFieldError(TextConstants.loginPageInvalidLoginFieldError)
             
         case .passwordIsEmpty:
             view.passwordFieldError(TextConstants.loginPageEmptyPasswordFieldError)

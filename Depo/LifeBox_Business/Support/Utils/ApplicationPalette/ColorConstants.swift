@@ -27,6 +27,10 @@ struct ColorConstants {
     static let confirmationPopupButton = UIColor(named: "confirmationPopupButton")!
     static let confirmationPopupButtonDark = UIColor(named: "confirmationPopupButtonDark")!
     
+    static let loginTextFieldTextColor = UIColor(named: "loginTextFieldTextColor")!
+    static let loginErrorLabelTextColor = UIColor(named: "loginErrorLabelTextColor")!
+    static let loginTextFieldPlaceholderColor = UIColor(named: "loginTextFieldPlaceholderColor")!
+    static let loginDescriptionLabelColor = UIColor(named: "loginDescriptionLabelColor")!
     
     //MARK: END
     
