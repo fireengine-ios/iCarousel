@@ -11,7 +11,7 @@ import UIKit
 @IBDesignable
 class BorderedWithInsetsTextField: UITextField {
 
-    private let leftRightTextThreshold: CGFloat = 4
+    private let fromRightTextThreshold: CGFloat = 4
 
     @IBInspectable
     var fromLeftTextInset: CGFloat = 0 {
@@ -49,14 +49,14 @@ class BorderedWithInsetsTextField: UITextField {
     }
 
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: fromLeftTextInset, bottom: 0, right: fromRightTextInset + leftRightTextThreshold))
+        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: fromLeftTextInset, bottom: 0, right: fromRightTextInset + fromRightTextThreshold))
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: fromLeftTextInset, bottom: 0, right: fromRightTextInset + leftRightTextThreshold))
+        return UIEdgeInsetsInsetRect(bounds, UIEdgeInsets(top: 0, left: fromLeftTextInset, bottom: 0, right: fromRightTextInset + fromRightTextThreshold))
     }
 
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
-        return CGRect(x: bounds.width - fromRightTextInset + leftRightTextThreshold, y: 0, width: fromRightTextInset, height: bounds.height)
+        return CGRect(x: bounds.width - fromRightTextInset + fromRightTextThreshold, y: 0, width: fromRightTextInset, height: bounds.height)
     }
 }
