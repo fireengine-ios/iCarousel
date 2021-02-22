@@ -246,7 +246,7 @@ extension UIFont {
     }
     
     static func TurkcellSaturaRegFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaReg", size: size)!
+        return UIFont(name: "GTAmericaTrial-Rg", size: size)!
     }
     
     static func TurkcellSaturaBolFont(size: CGFloat = 9) -> UIFont {
@@ -258,7 +258,7 @@ extension UIFont {
     }
     
     static func TurkcellSaturaMedFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaMed", size: size)!
+        return UIFont(name: "GTAmericaTrial-Md", size: size)!
     }
     
     static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
@@ -267,5 +267,9 @@ extension UIFont {
     
     static func GTAmericaStandardRegularFont(size: CGFloat = 18) -> UIFont {
         return UIFont(name: "GTAmericaTrial-Rg", size: size)!
+    }
+    
+    static func GTAmericaStandardMediumFont(size: CGFloat = 18) -> UIFont {
+        return UIFont(name: "GTAmericaTrial-Md", size: size)!
     }
 }
