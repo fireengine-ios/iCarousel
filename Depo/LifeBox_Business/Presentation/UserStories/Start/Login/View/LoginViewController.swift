@@ -210,6 +210,11 @@ final class LoginViewController: ViewController {
         setup()
         
         output.viewIsReady()
+
+        #if DEBUG
+        loginTextField.text = "@lifeboxtest.com"
+        passwordTextField.text = "Lifebox2020"
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
