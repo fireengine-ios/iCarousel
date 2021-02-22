@@ -50,14 +50,14 @@ final class PopUpController: BasePopUpController {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = popUpStyle == .normal ? ColorConstants.confirmationPopupTitle : UIColor(named: "loginPopupMainTitleColor")
+            titleLabel.textColor = popUpStyle == .normal ? ColorConstants.confirmationPopupTitle : ColorConstants.loginPopupMainTitle
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
         }
     }
 
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
-            messageLabel.textColor = popUpStyle == .normal ? ColorConstants.confirmationPopupMessage : UIColor(named: "loginPopupDescriptionColor")
+            messageLabel.textColor = popUpStyle == .normal ? ColorConstants.confirmationPopupMessage : ColorConstants.loginPopupDescription
             messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         }
     }

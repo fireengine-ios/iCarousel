@@ -16,7 +16,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var pageTitleLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginDescriptionLabelColor
+            newValue.textColor = ColorConstants.loginDescriptionLabel
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             newValue.text = TextConstants.loginPageMainTitle
         }
@@ -24,7 +24,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var loginDescriptionLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginDescriptionLabelColor
+            newValue.textColor = ColorConstants.loginDescriptionLabel
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.text = TextConstants.loginPageLoginButtonExplanation
         }
@@ -32,7 +32,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var fastLoginDescriptionLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginDescriptionLabelColor
+            newValue.textColor = ColorConstants.loginDescriptionLabel
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.text = TextConstants.loginPageFLButtonExplanation
         }
@@ -59,7 +59,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var rememberMeTitleButton: UIButton! {
         willSet {
-            newValue.setTitleColor(ColorConstants.loginDescriptionLabelColor, for: .normal)
+            newValue.setTitleColor(ColorConstants.loginDescriptionLabel, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.setTitle(TextConstants.loginPageRememberMeButtonTitle, for: .normal)
         }
@@ -67,7 +67,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var forgotPasswordButton: UIButton! {
         willSet {
-            newValue.setTitleColor(ColorConstants.loginDescriptionLabelColor, for: .normal)
+            newValue.setTitleColor(ColorConstants.loginDescriptionLabel, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.setTitle(TextConstants.loginPageForgetPasswordButtonTitle + " (?)", for: .normal)
         }
@@ -87,16 +87,16 @@ final class LoginViewController: ViewController {
         willSet {
             
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPageEmailFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholderColor])
-            newValue.textColor = ColorConstants.loginTextFieldTextColor
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder])
+            newValue.textColor = ColorConstants.loginTextFieldText
         }
     }
 
     @IBOutlet private weak var passwordTextField: BorderedWithInsetsTextField! {
         willSet {
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPagePasswordFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholderColor])
-            newValue.textColor = ColorConstants.loginTextFieldTextColor
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder])
+            newValue.textColor = ColorConstants.loginTextFieldText
 
             newValue.rightView = showHideButtonWithSpacingStackView
             newValue.rightViewMode = .always
@@ -133,7 +133,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var loginErrorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginErrorLabelTextColor
+            newValue.textColor = ColorConstants.loginErrorLabelText
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .left
         }
@@ -153,7 +153,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var passwordErrorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginErrorLabelTextColor
+            newValue.textColor = ColorConstants.loginErrorLabelText
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .left
         }
@@ -175,7 +175,7 @@ final class LoginViewController: ViewController {
     private lazy var showHideButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        button.setTitleColor(ColorConstants.loginDescriptionLabelColor, for: .normal)
+        button.setTitleColor(ColorConstants.loginDescriptionLabel, for: .normal)
         button.setTitle(TextConstants.loginPageShowPassword, for: .normal)
         button.addTarget(self, action: #selector(showHideButtonClicked(_:)), for: .touchUpInside)
         button.isHidden = true
@@ -210,6 +210,11 @@ final class LoginViewController: ViewController {
         setup()
         
         output.viewIsReady()
+
+        #if DEBUG
+        loginTextField.text = "@lifeboxtest.com"
+        passwordTextField.text = "Lifebox2020"
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -15,8 +15,8 @@ class LoginRouter: LoginRouterInput {
     }
     
     func goToTermsAndServices() {
-        let temsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
-        router.pushViewController(viewController: temsAndServices)
+        let termsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
+        router.setNavigationController(controller: UINavigationController(rootViewController: termsAndServices))
     }
     
     func showAccountStatePopUp(image: PopUpImage,
