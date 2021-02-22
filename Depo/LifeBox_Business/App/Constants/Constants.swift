@@ -1311,7 +1311,7 @@ extension TextConstants {
         static let fail_errorcode_4116 = NSLocalizedString("business_app_private_share_fail_errorcode_4116", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         static let fail_errorcode_4118 = NSLocalizedString("business_app_private_share_fail_errorcode_4118", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         static let fail_errorcode_5101 = NSLocalizedString("business_app_private_share_fail_errorcode_5101", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-        static fail_errorcode_5102 = NSLocalizedString("business_app_private_share_fail_errorcode_5102", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_5102 = NSLocalizedString("business_app_private_share_fail_errorcode_5102", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     }
     
 }
