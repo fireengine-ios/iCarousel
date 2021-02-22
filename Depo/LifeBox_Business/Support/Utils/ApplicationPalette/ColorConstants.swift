@@ -34,6 +34,11 @@ struct ColorConstants {
     static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
     static let loginPopupDescription = UIColor(named: "loginPopupDescription")
     
+    struct PrivateShare {
+        static let shareButtonBackgroundEnabled = UIColor(named: "shareButtonBackgroundDisabled")!
+        static let shareButtonBackgroundDisabled = UIColor(named: "shareButtonBackgroundDisabled")!
+    }
+    
     //MARK: END
     
     static let whiteColor = UIColor.white
