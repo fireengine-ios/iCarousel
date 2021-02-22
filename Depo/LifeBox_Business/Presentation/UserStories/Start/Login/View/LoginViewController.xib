@@ -253,10 +253,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* It can be used when your company has identity integration with Turkcell." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ9-gW-4rJ">
-                                            <rect key="frame" x="55" y="396" width="265" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="30" id="jbU-ym-tu3"/>
-                                            </constraints>
+                                            <rect key="frame" x="55" y="396" width="265" height="29"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" name="loginDescriptionLabelColor"/>
                                             <nil key="highlightedColor"/>
@@ -343,10 +340,10 @@
     </objects>
     <designables>
         <designable name="SnA-9S-aeD">
-            <size key="intrinsicContentSize" width="116" height="15"/>
+            <size key="intrinsicContentSize" width="160" height="15"/>
         </designable>
         <designable name="jaY-vd-khc">
-            <size key="intrinsicContentSize" width="91.5" height="16"/>
+            <size key="intrinsicContentSize" width="135.5" height="16"/>
         </designable>
     </designables>
     <resources>
