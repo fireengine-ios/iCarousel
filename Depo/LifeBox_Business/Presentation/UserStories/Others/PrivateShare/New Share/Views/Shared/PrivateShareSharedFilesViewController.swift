@@ -22,6 +22,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         }
         controller.title = title
         controller.shareType = shareType
+        controller.needToShowTabBar = true
         return controller
     }
 
