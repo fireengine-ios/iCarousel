@@ -1284,3 +1284,20 @@ extension TextConstants {
     static let loginPageShowPassword = NSLocalizedString("business_app_login_show_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageHidePassword = NSLocalizedString("business_app_login_hide_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+// MARK: - Info
+extension TextConstants {
+    static let infoPageTitleForFile = NSLocalizedString("business_app_info_page_title_for_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageTitleForFolder = NSLocalizedString("business_app_info_page_title_for_folders", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemName = NSLocalizedString("business_app_info_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemSize = NSLocalizedString("business_app_info_page_size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemItems = NSLocalizedString("business_app_info_page_item", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemCreationDate = NSLocalizedString("business_app_info_page_creation_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemModifiedDate = NSLocalizedString("business_app_info_page_modified_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemSharingInfo = NSLocalizedString("business_app_info_page_sharing_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemSharedWithNumberOfPerson = NSLocalizedString("business_app_info_page_shared_with", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageRoleOwner = NSLocalizedString("business_app_info_page_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageRoleEditor = NSLocalizedString("business_app_info_page_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageRoleViewer = NSLocalizedString("business_app_info_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageRoleVaries = NSLocalizedString("business_app_info_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

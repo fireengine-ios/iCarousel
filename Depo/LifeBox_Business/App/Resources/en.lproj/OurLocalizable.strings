@@ -1929,3 +1929,17 @@
 "business_app_gallery_permission_not_provided_popup_description" = " We need your photo library access permission for this action. Please check you app settings";
 "business_app_gallery_permission_not_provided_popup_settings_accept" = "Settings";
 "business_app_gallery_permission_not_provided_popup_settings_reject" = "No";
+
+"business_app_info_page_title_for_files" = "File Info";
+"business_app_info_page_title_for_folders" = "Folder Info";
+"business_app_info_page_name" = "Name";
+"business_app_info_page_size" = "Size";
+"business_app_info_page_item" = "Items";
+"business_app_info_page_creation_date" = "Creation Date";
+"business_app_info_page_modified_date" = "Last Modified";
+"business_app_info_page_sharing_info" = "Sharing Info";
+"business_app_info_page_shared_with" = "Shared with %d people";
+"business_app_info_page_role_owner" = "Owner";
+"business_app_info_page_role_editor" = "Editor";
+"business_app_info_page_role_viewer" = "Viewer";
+"business_app_info_page_role_varies" = "Varies";
