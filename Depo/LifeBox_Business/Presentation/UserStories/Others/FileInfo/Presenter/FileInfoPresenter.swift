@@ -26,19 +26,9 @@ final class FileInfoPresenter: BasePresenter {
 // MARK: FileInfoViewOutput
 
 extension FileInfoPresenter: FileInfoViewOutput {
-    
     func viewIsReady() {
         interactor.viewIsReady()
         ItemOperationManager.default.startUpdateView(view: self)
-    }
-    
-    func validateName(newName: String) {
-        interactor.onValidateName(newName: newName)
-    }
-    
-    func onRename(newName: String) {
-        startAsyncOperation()
-        interactor.onRename(newName: newName)
     }
     
     func shareItem() {
@@ -66,33 +56,8 @@ extension FileInfoPresenter: FileInfoViewOutput {
 // MARK: FileInfoInteractorOutput
 
 extension FileInfoPresenter: FileInfoInteractorOutput {
-    
     func setObject(object: BaseDataSourceItem) {
         view.setObject(object)
-    }
-    
-    func updated() {
-        asyncOperationSuccess()
-        view.goBack()
-    }
-    
-    func albumForUuidFailed(error: Error) {
-        view.stopActivityIndicator()
-        view.showErrorAlert(message: error.description)
-    }
-
-    func cancelSave(use name: String) {
-        asyncOperationSuccess()
-        view.show(name: name)
-    }
-    
-    func failedUpdate(error: Error) {
-        asyncOperationSuccess()
-        view.showErrorAlert(message: error.description)
-    }
-    
-    func didValidateNameSuccess() {
-        view.showValidateNameSuccess()
     }
     
     func displayShareInfo(_ sharingInfo: SharedFileInfo) {
@@ -109,20 +74,14 @@ extension FileInfoPresenter: FileInfoModuleInput {
 //MARK: - FileInfoRouterOutput
 
 extension FileInfoPresenter: FileInfoRouterOutput {
-    
     func updateSharingInfo() {
         interactor.getSharingInfo()
-    }
-    
-    func deleteSharingInfo() {
-        view.deleteSharingInfo()
     }
 }
 
 //MARK: - ItemOperationManagerViewProtocol
 
 extension FileInfoPresenter: ItemOperationManagerViewProtocol {
-    
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         object === self
     }

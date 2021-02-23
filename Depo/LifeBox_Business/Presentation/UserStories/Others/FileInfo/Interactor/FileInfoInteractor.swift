@@ -31,45 +31,6 @@ extension FileInfoInteractor: FileInfoInteractorInput {
         AnalyticsService().logScreen(screen: .info(item.fileType))
     }
     
-    func onRename(newName: String) {
-        guard !newName.isEmpty else {
-            if let name = item?.name {
-                output.cancelSave(use: name)
-            } else {
-                output.updated()
-            }
-            
-            return
-        }
-        
-        if let item = item as? Item {
-            shareApiService.renameItem(projectId: item.accountUuid, uuid: item.uuid, name: newName) { [weak self] result in
-                switch result {
-                case .success():
-                    item.name = newName
-                    self?.output.updated()
-                    if !item.isOwner {
-                        self?.analytics.sharedWithMe(action: .rename, on: item)
-                    }
-                    ItemOperationManager.default.didRenameItem(item)
-                    
-                case .failed(let error):
-                    self?.output.failedUpdate(error: error)
-                }
-            }
-        }
-    }
-    
-    func onValidateName(newName: String) {
-        if newName.isEmpty {
-            if let name = item?.name {
-                output.cancelSave(use: name)
-            }
-        } else {
-            output.didValidateNameSuccess()
-        }
-    }
-    
     func getSharingInfo() {
         guard item?.isLocalItem == false, let accountUuid = item?.accountUuid , let uuid = item?.uuid else {
             return

@@ -29,10 +29,6 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     @IBOutlet private weak var shareInfoContainer: UIView!
     private lazy var sharingInfoView = FileInfoShareView.with(delegate: self)
     
-    private lazy var saveButton = UIBarButtonItem(title: TextConstants.fileInfoSave,
-                                                  target: self,
-                                                  selector: #selector(onSave))
-    
     var output: FileInfoViewOutput!
     var interactor: FileInfoInteractor!
     private var fileType: FileType = .unknown
@@ -122,8 +118,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         if item.isLocalItem {
             canEdit = false
         }
-        
-        navigationItem.rightBarButtonItem = canEdit ? saveButton : nil
+
         fileName.isEnabled = canEdit
     }
     
@@ -133,27 +128,6 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         uploadDateLabel.isHidden = true
         uploadDateTitle.isHidden = true
     }
-    
-    // MARK: Actions
-    
-    @IBAction func onHideKeyboard() {
-        if let text = fileName.text {
-            output.validateName(newName: text)
-        }
-    }
-    
-    @objc func onSave() {
-        
-        guard let text = fileName.text?.nonEmptyString else {
-            return
-        }
-        if let fileExtension = fileExtension?.nonEmptyString {
-            output.onRename(newName: text.makeFileName(with: fileExtension))
-        } else if fileType == .folder {
-            output.onRename(newName: text)
-        }
-    }
-    
 }
 
 // MARK: FileInfoViewInput
@@ -280,33 +254,6 @@ extension FileInfoViewController: FileInfoViewInput {
     func deleteSharingInfo() {
         sharingInfoView.removeFromSuperview()
     }
-}
-
-// MARK: UITextFieldDelegate
-
-extension FileInfoViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
-        if let text = textField.text {
-            output.onRename(newName: text)
-        }
-        
-        return true
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if let text = textField.text {
-            textField.text = (text as NSString).deletingPathExtension
-            if fileExtension == nil {
-                fileExtension = (text as NSString).pathExtension
-            }
-        }
-        
-        return true
-    }
-    
 }
 
 //MARK: - FileInfoShareViewDelegate
