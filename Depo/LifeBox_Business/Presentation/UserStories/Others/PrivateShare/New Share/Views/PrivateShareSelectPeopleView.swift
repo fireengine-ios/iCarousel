@@ -37,7 +37,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
             newValue.borderStyle = .roundedRect
             newValue.placeholder = TextConstants.PrivateShare.box_inside
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
-            newValue.tintColor = ColorConstants.Text.textFieldTint
+            newValue.tintColor = ColorConstants.Text.textFieldPlaceholder
+            newValue.textColor = ColorConstants.Text.textFieldText
             newValue.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             newValue.delegate = self
             newValue.returnKeyType = .done
