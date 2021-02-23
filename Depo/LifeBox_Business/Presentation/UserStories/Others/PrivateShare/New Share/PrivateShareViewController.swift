@@ -41,7 +41,14 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         }
     }
     
-    @IBOutlet private weak var contentView: UIStackView!
+    @IBOutlet private weak var contentView: UIStackView! {
+        willSet {
+            newValue.axis = .vertical
+            newValue.alignment = .fill
+            newValue.distribution = .fill
+            newValue.spacing = 0
+        }
+    }
     
     @IBOutlet private weak var bottomView: UIView! {
         willSet {

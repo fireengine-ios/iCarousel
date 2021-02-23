@@ -44,6 +44,7 @@ struct ColorConstants {
         static let textFieldPlaceholder = UIColor(named: "textFieldPlaceholder")!
         static let textFieldText = UIColor(named: "textFieldText")!
         static let labelTitle = UIColor(named: "labelTitle")!
+        static let labelTitleBackground = UIColor(named: "labelTitleBackground")!
     }
     
     //MARK: END

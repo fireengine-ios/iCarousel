@@ -271,17 +271,17 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     var title: String {
         switch self {
         case .no:
-            return TextConstants.privateShareStartPageDurationNo
+            return TextConstants.PrivateShare.share_duration_no_duration
         case .hour:
-            return TextConstants.privateShareStartPageDurationHour
+            return TextConstants.PrivateShare.share_duration_1_hour
         case .day:
-            return TextConstants.privateShareStartPageDurationDay
+            return TextConstants.PrivateShare.share_duration_1_day
         case .week:
-            return TextConstants.privateShareStartPageDurationWeek
+            return TextConstants.PrivateShare.share_duration_1_week
         case .month:
-            return TextConstants.privateShareStartPageDurationMonth
+            return TextConstants.PrivateShare.share_duration_1_month
         case .year:
-            return TextConstants.privateShareStartPageDurationYear
+            return TextConstants.PrivateShare.share_duration_1_year
         }
     }
 }

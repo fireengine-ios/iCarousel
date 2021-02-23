@@ -12,23 +12,23 @@ final class PrivateShareDurationCell: UICollectionViewCell {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.font = .GTAmericaStandardMediumFont(size: 12)
             newValue.textAlignment = .center
-            newValue.textColor = .lightGray
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     
     @IBOutlet private weak var borderView: UIView! {
         willSet {
             newValue.clipsToBounds = true
-            newValue.layer.cornerRadius = newValue.frame.height * 0.5
+            newValue.layer.cornerRadius = 5
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            borderView.backgroundColor = isSelected ? ColorConstants.aquaMarineTwo : .clear
-            titleLabel.textColor = isSelected ? .white : .lightGray
+            borderView.backgroundColor = isSelected ? ColorConstants.Text.labelTitleBackground : .clear
+            titleLabel.textColor = isSelected ? ColorConstants.Text.labelTitle : .lightGray
         }
     }
 
