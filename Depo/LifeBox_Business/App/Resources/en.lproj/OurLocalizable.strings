@@ -1950,6 +1950,7 @@
 "business_app_private_share_share_duration_1_year" = "1 year";
 "business_app_private_share_start" = "Share";
 "business_app_private_share_success" = "Shared Successfully";
+"business_app_private_share_shared_with_section_name" = "Shared with";
 
 "business_app_private_share_fail_errorcode_4115" = "Your message is too long. Please shorten your message and try again";
 "business_app_private_share_fail_errorcode_4116" = "You have added so many users to the share";

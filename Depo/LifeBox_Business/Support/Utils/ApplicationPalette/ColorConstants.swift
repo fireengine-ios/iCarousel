@@ -32,11 +32,16 @@ struct ColorConstants {
     static let loginTextFieldPlaceholder = UIColor(named: "loginTextFieldPlaceholder")!
     static let loginDescriptionLabel = UIColor(named: "loginDescriptionLabel")!
     static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
-    static let loginPopupDescription = UIColor(named: "loginPopupDescription")
+    static let loginPopupDescription = UIColor(named: "loginPopupDescription")!
     
     struct PrivateShare {
-        static let shareButtonBackgroundEnabled = UIColor(named: "shareButtonBackgroundDisabled")!
-        static let shareButtonBackgroundDisabled = UIColor(named: "shareButtonBackgroundDisabled")!
+        static let shareButtonBackgroundEnabled = UIColor(named: "shareButtonBackgroundEnabled")!
+    }
+    
+    
+    struct Text {
+        static let textFieldTint = UIColor(named: "textFieldTint")!
+        static let labelTitle = UIColor(named: "labelTitle")!
     }
     
     //MARK: END
