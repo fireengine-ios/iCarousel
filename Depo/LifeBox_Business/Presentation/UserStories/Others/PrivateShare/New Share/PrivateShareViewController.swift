@@ -16,6 +16,24 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         return controller
     }
     
+    
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.textAlignment = .left
+            newValue.font = .GTAmericaStandardMediumFont(size: 20)
+            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.text = TextConstants.PrivateShare.page_title
+        }
+    }
+    
+    
+    @IBOutlet private weak var closeButton: UIButton! {
+        willSet {
+            newValue.setTitle("", for: .normal)
+            newValue.setImage(UIImage(named: "close"), for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var scrollView: DismissKeyboardScrollView! {
         willSet {
             newValue.keyboardDismissMode = .interactive
@@ -33,23 +51,21 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             newValue.layer.shadowRadius = 5
         }
     }
-    @IBOutlet private weak var shareButton: RoundedButton! {
+    
+    @IBOutlet private weak var shareButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.privateShareStartPageShareButton, for: .normal)
+            newValue.clipsToBounds = true
+            newValue.layer.cornerRadius = 5.0
+            
+            newValue.setTitle(TextConstants.PrivateShare.start, for: .normal)
+            
             newValue.setTitleColor(.white, for: .normal)
-            newValue.backgroundColor = .lightGray
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.setBackgroundColor(ColorConstants.PrivateShare.shareButtonBackgroundEnabled, for: .normal)
+            
+            newValue.titleLabel?.font = .GTAmericaStandardMediumFont(size: 14)
             newValue.isEnabled = false
         }
     }
-    
-    private lazy var closeButton = UIBarButtonItem(title: TextConstants.privateShareStartPageCloseButton,
-                                                   font: UIFont.TurkcellSaturaDemFont(size: 19),
-                                                   tintColor: UIColor.white,
-                                                   accessibilityLabel: TextConstants.cancel,
-                                                   style: .plain,
-                                                   target: self,
-                                                   selector: #selector(onCancelTapped))
     
     private lazy var selectPeopleView = PrivateShareSelectPeopleView.with(delegate: self)
     private lazy var shareWithView = PrivateShareWithView.with(contacts: [], delegate: self)
@@ -89,10 +105,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = TextConstants.actionSheetShare
-        navigationItem.leftBarButtonItem = closeButton
-        needCheckModalPresentationStyle = false
-        
         contentView.addArrangedSubview(selectPeopleView)
         setupSuggestedSubjects(searchText: "")
     }
@@ -100,7 +112,13 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        super.viewDidDisappear(animated)
     }
     
     override func viewDidLayoutSubviews() {
@@ -162,9 +180,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func updateShareButtonIfNeeded() {
-        let needEnable = !shareWithView.contacts.isEmpty
-        shareButton.isEnabled = needEnable
-        shareButton.backgroundColor = needEnable ? ColorConstants.navy : .lightGray
+        let hasContacts = !shareWithView.contacts.isEmpty
+        shareButton.isEnabled = hasContacts
     }
     
     private func showShareViews() {
@@ -184,15 +201,15 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 
     //MARK: - Actions
     
-    @objc private func onCancelTapped(_ sender: Any) {
+    @IBAction private func onCloseTapped(_ sender: Any) {
         if shareWithView.contacts.isEmpty {
            dismiss(animated: true)
         } else {
             let popup = PopUpController.with(title: nil,
-                                             message: TextConstants.privateShareStartPageClosePopupMessage,
+                                             message: TextConstants.PrivateShare.close_page,
                                              image: .question,
-                                             firstButtonTitle: TextConstants.cancel,
-                                             secondButtonTitle: TextConstants.ok,
+                                             firstButtonTitle: TextConstants.PrivateShare.close_page_no,
+                                             secondButtonTitle: TextConstants.PrivateShare.close_page_yes,
                                              firstAction: { vc in
                                                 vc.close()
                                              },
