@@ -4,79 +4,65 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PrivateShareWithContactView" customModule="lifebox" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PrivateShareWithContactView" customModule="lifeBox_Business" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50P-EO-K4w">
-                    <rect key="frame" x="16" y="5" width="85" height="25"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qml-Ce-Crb">
-                            <rect key="frame" x="10" y="0.0" width="42" height="25"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UC5-0n-f9u">
-                            <rect key="frame" x="60" y="0.0" width="25" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="25" id="HTP-DK-j7W"/>
-                            </constraints>
-                            <state key="normal" image="CloseCardIconWhite"/>
-                            <connections>
-                                <action selector="onDeleteTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="UJk-Hi-IjM"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SJD-lq-FB8">
+                    <rect key="frame" x="15" y="5" width="274" height="34"/>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f17-3R-tig">
+                    <rect key="frame" x="373" y="9" width="26" height="26"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="UC5-0n-f9u" secondAttribute="bottom" id="Coh-Px-AAA"/>
-                        <constraint firstItem="UC5-0n-f9u" firstAttribute="leading" secondItem="qml-Ce-Crb" secondAttribute="trailing" constant="8" id="Dco-Ij-BKN"/>
-                        <constraint firstAttribute="bottom" secondItem="qml-Ce-Crb" secondAttribute="bottom" id="Dqi-oR-uUF"/>
-                        <constraint firstItem="UC5-0n-f9u" firstAttribute="top" secondItem="50P-EO-K4w" secondAttribute="top" id="pmH-Et-PHf"/>
-                        <constraint firstItem="qml-Ce-Crb" firstAttribute="top" secondItem="50P-EO-K4w" secondAttribute="top" id="t8w-5p-2td"/>
-                        <constraint firstItem="qml-Ce-Crb" firstAttribute="leading" secondItem="50P-EO-K4w" secondAttribute="leading" constant="10" id="tNX-Oc-F9Z"/>
-                        <constraint firstAttribute="trailing" secondItem="UC5-0n-f9u" secondAttribute="trailing" id="umr-mb-yEO"/>
-                        <constraint firstAttribute="height" constant="25" id="wFC-Fr-7xH"/>
+                        <constraint firstAttribute="width" secondItem="f17-3R-tig" secondAttribute="height" multiplier="1:1" id="eji-vV-jpV"/>
+                        <constraint firstAttribute="width" constant="26" id="nGV-1Q-q1x"/>
                     </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYR-xZ-VzF">
-                    <rect key="frame" x="347" y="0.0" width="51" height="35"/>
-                    <state key="normal" title="Button" image="arrow_right"/>
+                    <state key="normal" title="Button"/>
                     <connections>
-                        <action selector="onUserRoleTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="izN-W1-cKH"/>
+                        <action selector="onDeleteTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="mdK-Hl-zSR"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6T-hx-Shq">
+                    <rect key="frame" x="304" y="5" width="54" height="34"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" name="labelTitle"/>
+                    </state>
+                    <connections>
+                        <action selector="onUserRoleTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="ww5-Uj-MvR"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="ZYR-xZ-VzF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DjA-kk-Piw"/>
-                <constraint firstAttribute="bottom" secondItem="50P-EO-K4w" secondAttribute="bottom" constant="5" id="RHV-7g-FIw"/>
-                <constraint firstItem="50P-EO-K4w" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="aZS-iB-YKt"/>
-                <constraint firstAttribute="bottom" secondItem="ZYR-xZ-VzF" secondAttribute="bottom" id="ebb-ha-0IP"/>
-                <constraint firstItem="50P-EO-K4w" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="i7q-J5-xhZ"/>
-                <constraint firstAttribute="trailing" secondItem="ZYR-xZ-VzF" secondAttribute="trailing" constant="16" id="nbs-gO-PuK"/>
-                <constraint firstItem="ZYR-xZ-VzF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="50P-EO-K4w" secondAttribute="trailing" constant="8" id="urk-QM-Hsa"/>
+                <constraint firstItem="v6T-hx-Shq" firstAttribute="leading" secondItem="SJD-lq-FB8" secondAttribute="trailing" constant="15" id="LpD-ir-c5H"/>
+                <constraint firstItem="f17-3R-tig" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Xwk-9X-KzV"/>
+                <constraint firstItem="f17-3R-tig" firstAttribute="leading" secondItem="v6T-hx-Shq" secondAttribute="trailing" constant="15" id="lL8-pe-Sde"/>
+                <constraint firstItem="SJD-lq-FB8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="qbN-1o-7i5"/>
+                <constraint firstItem="SJD-lq-FB8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="rY4-uo-lgG"/>
+                <constraint firstAttribute="trailing" secondItem="f17-3R-tig" secondAttribute="trailing" constant="15" id="rbf-pd-Qiw"/>
+                <constraint firstAttribute="bottom" secondItem="SJD-lq-FB8" secondAttribute="bottom" constant="5" id="yED-Dh-m07"/>
+                <constraint firstItem="v6T-hx-Shq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ycy-5u-u88"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="borderView" destination="50P-EO-K4w" id="Ciy-eb-ddS"/>
-                <outlet property="deleteButton" destination="UC5-0n-f9u" id="Jft-s9-8gd"/>
-                <outlet property="titleLabel" destination="qml-Ce-Crb" id="LZ7-kN-1SP"/>
-                <outlet property="userRoleButton" destination="ZYR-xZ-VzF" id="Sw8-Ye-woe"/>
+                <outlet property="contactFiledsStack" destination="SJD-lq-FB8" id="JUH-FJ-prl"/>
+                <outlet property="deleteButton" destination="f17-3R-tig" id="SBo-v7-SR5"/>
+                <outlet property="userRoleButton" destination="v6T-hx-Shq" id="5gR-cp-gx8"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="197.20982142857142"/>
         </view>
     </objects>
     <resources>
-        <image name="CloseCardIconWhite" width="14" height="14"/>
-        <image name="arrow_right" width="5" height="8"/>
+        <namedColor name="labelTitle">
+            <color red="0.25099998712539673" green="0.32199999690055847" blue="0.37999999523162842" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

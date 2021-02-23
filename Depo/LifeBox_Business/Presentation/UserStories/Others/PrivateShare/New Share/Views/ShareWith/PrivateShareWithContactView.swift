@@ -21,39 +21,60 @@ final class PrivateShareWithContactView: UIView, NibInit {
         view.delegate = delegate
         return view
     }
-    
-    @IBOutlet private weak var borderView: UIView! {
+
+    @IBOutlet weak var contactFiledsStack: UIStackView! {
         willSet {
-            newValue.clipsToBounds = true
-            newValue.layer.cornerRadius = newValue.frame.height * 0.5
-            newValue.backgroundColor = ColorConstants.marineTwo
-        }
-    }
-    
-    @IBOutlet private weak var titleLabel: UILabel! {
-        willSet {
-            newValue.text = ""
-            newValue.font = .TurkcellSaturaDemFont(size: 16)
-            newValue.lineBreakMode = .byTruncatingMiddle
-            newValue.textColor = .white
+            newValue.axis = .vertical
+            newValue.alignment = .leading
+            newValue.distribution = .fillProportionally
+            newValue.spacing = 5
         }
     }
     
     @IBOutlet private weak var deleteButton: UIButton! {
         willSet {
-            newValue.imageEdgeInsets = UIEdgeInsets(topBottom: 8, rightLeft: 8)
+            newValue.setTitle("", for: .normal)
+            newValue.setImage(UIImage(named: "cancelButton"), for: .normal)
         }
     }
     
     @IBOutlet private weak var userRoleButton: UIButton! {
         willSet {
-            newValue.setTitleColor(.lrTealishFour, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
-            newValue.tintColor = .lrTealishFour
+            newValue.setImage(UIImage(named: "arrowDown"), for: .normal)
+            newValue.setTitleColor(ColorConstants.Text.labelTitle, for: .normal)
+            newValue.titleLabel?.font = .GTAmericaStandardMediumFont(size: 14)
+            newValue.tintColor = ColorConstants.Text.labelTitle
             newValue.forceImageToRightSide()
-            newValue.imageEdgeInsets.left = -10
+            newValue.imageEdgeInsets.left = -8
         }
     }
+    
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.lineBreakMode = .byWordWrapping
+        label.font = .GTAmericaStandardMediumFont(size: 12)
+        label.textColor = ColorConstants.Text.labelTitle
+        label.text = ""
+        return label
+    }()
+    
+    private lazy var groupNameLabel: UILabel = {
+        let label = UILabel()
+        label.lineBreakMode = .byWordWrapping
+        label.font = .GTAmericaStandardRegularFont(size: 14)
+        label.textColor = ColorConstants.Text.labelTitle
+        label.text = ""
+        return label
+    }()
+    
+    private lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.lineBreakMode = .byWordWrapping
+        label.font = .GTAmericaStandardRegularFont(size: 12)
+        label.textColor = ColorConstants.Text.labelTitle
+        label.text = ""
+        return label
+    }()
     
     private weak var delegate: PrivateShareWithContactViewDelegate?
     private var contact: PrivateShareContact?
@@ -61,16 +82,31 @@ final class PrivateShareWithContactView: UIView, NibInit {
     //MARK: - Public
     
     func setup(with contact: PrivateShareContact) {
+        contactFiledsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
         self.contact = contact
-        if contact.displayName.isEmpty {
-            if contact.username.contains("@") {
-                titleLabel.text = contact.username
-            } else {
-                let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
-                titleLabel.text = contact.username.components(separatedBy: allowedCharacterSet.inverted).joined()
-            }
-        } else {
-            titleLabel.text = contact.displayName
+        
+        switch contact.type {
+            case .user, .knownName:
+                if !contact.displayName.isEmpty {
+                    nameLabel.text = contact.displayName
+                    contactFiledsStack.addArrangedSubview(nameLabel)
+                }
+                
+                if !contact.username.isEmpty {
+                    if contact.username.contains("@") {
+                        emailLabel.text = contact.username
+                    } else {
+                        let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
+                        emailLabel.text = contact.username.components(separatedBy: allowedCharacterSet.inverted).joined()
+                    }
+                    
+                    contactFiledsStack.addArrangedSubview(emailLabel)
+                }
+                
+            case .group:
+                groupNameLabel.text = contact.displayName
+                contactFiledsStack.addArrangedSubview(groupNameLabel)
         }
         
         userRoleButton.setTitle(contact.role.title, for: .normal)
