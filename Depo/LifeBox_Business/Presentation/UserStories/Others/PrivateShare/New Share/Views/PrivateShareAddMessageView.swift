@@ -12,29 +12,37 @@ final class PrivateShareAddMessageView: UIView, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.privateShareStartPageAddMessageTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.text = TextConstants.PrivateShare.add_message
+            newValue.font = .GTAmericaStandardMediumFont(size: 14)
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     
     @IBOutlet private weak var textView: PlaceholderTextView! {
         willSet {
             newValue.text = ""
-            newValue.placeholder = TextConstants.privateShareStartPageMessagePlaceholder
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.placeholder = TextConstants.PrivateShare.add_message_inside
+            newValue.placeholderColor = ColorConstants.Text.textFieldPlaceholder
+            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.font = .GTAmericaStandardRegularFont(size: 12)
             newValue.contentInset = .zero
             newValue.isScrollEnabled = false
             newValue.inputAccessoryView = toolbar
+            
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.borderColor = ColorConstants.separator.cgColor
+            newValue.layer.cornerRadius = 5
+            newValue.clipsToBounds = true
+            
             newValue.delegate = self
         }
     }
     
     @IBOutlet private weak var counterLabel: UILabel! {
         willSet {
-            newValue.text = "0/\(messageLengthLimit)"
-            newValue.textColor = UIColor.black.withAlphaComponent(0.3)
-            newValue.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.text = "\(messageLengthLimit)"
+            newValue.textColor = ColorConstants.Text.textFieldPlaceholder
+            newValue.font = .GTAmericaStandardRegularFont(size: 12)
         }
     }
     
@@ -54,7 +62,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
         let done = UIBarButtonItem(barButtonSystemItem: .done,
                                    target: self,
                                    action: #selector(hideKeyboard))
-        done.tintColor = UIColor.lrTealish
+        done.tintColor = ColorConstants.Text.labelTitle
         
         toolbar.setItems([flex, done], animated: false)
         return toolbar
@@ -71,7 +79,12 @@ final class PrivateShareAddMessageView: UIView, NibInit {
     }
     
     private func updateCounter(count: Int) {
-        counterLabel.text = "\(count)/\(messageLengthLimit)"
+        guard messageLengthLimit >= count else {
+            counterLabel.text = "0"
+            assertionFailure()
+            return
+        }
+        counterLabel.text = "\(messageLengthLimit - count)"
     }
 }
 
