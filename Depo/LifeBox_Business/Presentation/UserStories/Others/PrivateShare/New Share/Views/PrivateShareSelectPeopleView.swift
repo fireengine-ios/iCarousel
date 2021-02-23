@@ -26,17 +26,18 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.privateShareStartPagePeopleSelectionTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.text = TextConstants.PrivateShare.box_name
+            newValue.font = .GTAmericaStandardMediumFont(size: 16)
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     
     @IBOutlet private weak var textField: UITextField! {
         willSet {
-            newValue.borderStyle = .none
-            newValue.placeholder = TextConstants.privateShareStartPageEnterUserPlaceholder
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.borderStyle = .roundedRect
+            newValue.placeholder = TextConstants.PrivateShare.box_inside
+            newValue.font = .GTAmericaStandardRegularFont(size: 12)
+            newValue.tintColor = ColorConstants.Text.textFieldTint
             newValue.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             newValue.delegate = self
             newValue.returnKeyType = .done
@@ -45,19 +46,22 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     @IBOutlet private weak var addButton: UIButton! {
         willSet {
+            newValue.setImage(UIImage(named: "add-inactive"), for: .disabled)
+            newValue.setImage(UIImage(named: "add-active"), for: .normal)
             newValue.isEnabled = false
         }
     }
     
     @IBOutlet private weak var userRoleButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.privateShareStartPageViewerButton, for: .normal)
-            newValue.setTitleColor(.lrTealishFour, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
-            newValue.tintColor = .lrTealishFour
+            newValue.setTitle(TextConstants.PrivateShare.role_viewer, for: .normal)
+            newValue.setTitleColor(ColorConstants.Text.labelTitle, for: .normal)
+            newValue.setImage(UIImage(named: "arrowDown"), for: .normal)
+            newValue.titleLabel?.font = .GTAmericaStandardMediumFont(size: 14)
+            newValue.tintColor = ColorConstants.Text.labelTitle
             newValue.forceImageToRightSide()
-            newValue.imageEdgeInsets.left = -10
-            newValue.isHidden = true
+            newValue.imageEdgeInsets.left = -8
+            newValue.isHidden = false
         }
     }
     
@@ -88,7 +92,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         textField.text = info.value
         identifier = info.identifier
         type = info.userType
-        changeButtonEnabledIfNeeded(text: info.value)
+//        changeButtonEnabledIfNeeded(text: info.value)
         
         //add contact to shared with section
         if !info.value.isEmpty {
@@ -116,15 +120,15 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     @objc private func textFieldDidChange(_ textField: UITextField) {
         displayName = ""
         delegate?.searchTextDidChange(text: textField.text ?? "")
-        changeButtonEnabledIfNeeded(text: textField.text ?? "")
+//        changeButtonEnabledIfNeeded(text: textField.text ?? "")
     }
     
-    private func changeButtonEnabledIfNeeded(text: String) {
-        let isValid = text.count > 0
-        //Can asked to disable it for now
-//        addButton.isEnabled = isValid
-        userRoleButton.isHidden = !isValid
-    }
+//    private func changeButtonEnabledIfNeeded(text: String) {
+//        let isValid = text.count > 0
+//        //Can asked to disable it for now
+////        addButton.isEnabled = isValid
+//        userRoleButton.isHidden = !isValid
+//    }
 }
 
 //MARK: - UITextFieldDelegate
