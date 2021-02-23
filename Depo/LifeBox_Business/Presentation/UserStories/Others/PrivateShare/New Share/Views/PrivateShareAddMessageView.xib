@@ -39,24 +39,14 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNt-pp-hqy">
-                    <rect key="frame" x="0.0" y="156" width="414" height="1"/>
-                    <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="0.29726012323943668" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="qnc-eP-8Qb"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="YNt-pp-hqy" secondAttribute="trailing" id="0q8-ue-o5f"/>
                 <constraint firstAttribute="trailing" secondItem="4OC-a4-HJX" secondAttribute="trailing" constant="16" id="4Im-Vk-ITU"/>
-                <constraint firstItem="YNt-pp-hqy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Bxv-cY-wur"/>
                 <constraint firstAttribute="bottom" secondItem="4OC-a4-HJX" secondAttribute="bottom" constant="16" id="Ecw-hQ-QEW"/>
                 <constraint firstItem="cAZ-p2-Dn1" firstAttribute="top" secondItem="4OC-a4-HJX" secondAttribute="top" constant="15" id="S1C-x4-WZX"/>
                 <constraint firstItem="4OC-a4-HJX" firstAttribute="trailing" secondItem="cAZ-p2-Dn1" secondAttribute="trailing" constant="15" id="ikx-DM-iXH"/>
                 <constraint firstItem="oe6-Aa-Uls" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="krY-kJ-h4Q"/>
-                <constraint firstAttribute="bottom" secondItem="YNt-pp-hqy" secondAttribute="bottom" id="u5V-kq-DgQ"/>
                 <constraint firstItem="oe6-Aa-Uls" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="uy1-5i-BBK"/>
                 <constraint firstItem="4OC-a4-HJX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="v5c-kC-n89"/>
                 <constraint firstItem="4OC-a4-HJX" firstAttribute="top" secondItem="oe6-Aa-Uls" secondAttribute="bottom" constant="14" id="vl1-nK-N8Y"/>

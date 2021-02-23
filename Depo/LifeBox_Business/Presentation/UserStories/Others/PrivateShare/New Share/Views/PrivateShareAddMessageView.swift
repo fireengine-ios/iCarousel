@@ -20,12 +20,14 @@ final class PrivateShareAddMessageView: UIView, NibInit {
     
     @IBOutlet private weak var textView: PlaceholderTextView! {
         willSet {
-            newValue.text = ""
-            newValue.placeholder = TextConstants.PrivateShare.add_message_inside
             newValue.placeholderColor = ColorConstants.Text.textFieldPlaceholder
             newValue.textColor = ColorConstants.Text.textFieldText
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
-            newValue.contentInset = .zero
+            newValue.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 40)
+            
+            newValue.text = ""
+            newValue.placeholder = TextConstants.PrivateShare.add_message_inside
+            
             newValue.isScrollEnabled = false
             newValue.inputAccessoryView = toolbar
             
