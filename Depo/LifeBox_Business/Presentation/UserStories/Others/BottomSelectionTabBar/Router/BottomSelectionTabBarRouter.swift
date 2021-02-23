@@ -11,12 +11,8 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
     private lazy var router = RouterVC()
 
     func onInfo(object: Item) {
-        if let topViewController = RouterVC().getViewControllerForPresent() as? PhotoVideoDetailViewController, !UIDevice.current.orientation.isLandscape {
-            topViewController.showBottomDetailView()
-        } else {
-            let fileInfo = router.fileInfo(item: object)
-            router.pushOnPresentedView(viewController: fileInfo)
-        }
+        let fileInfo = router.fileInfo(item: object)
+        router.pushOnPresentedView(viewController: fileInfo)
     }
     
     func showPrint(items: [BaseDataSourceItem]) {

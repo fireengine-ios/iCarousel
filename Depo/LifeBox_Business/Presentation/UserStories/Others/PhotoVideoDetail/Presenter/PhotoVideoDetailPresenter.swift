@@ -128,11 +128,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func onInfo(object: Item) {
-        if !UIDevice.current.orientation.isLandscape {
-            view.showBottomDetailView()
-        } else {
-            router.onInfo(object: object)
-        }
+        router.onInfo(object: object)
     }
     
     func viewWillDisappear() {
@@ -314,10 +310,6 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
         interactor.onValidateName(newName: newName)
     }
     
-    func tapGesture(recognizer: UITapGestureRecognizer) {
-        view.closeDetailViewIfNeeded()
-    }
-    
     func onSelectSharedContact(_ contact: SharedContact) {
         guard let index = interactor.currentItemIndex else {
             return
@@ -360,11 +352,5 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
 
 extension PhotoVideoDetailPresenter: PhotoVideoDetailRouterOutput {
     
-    func updateShareInfo() {
-        view.updateBottomDetailView()
-    }
-    
-    func deleteShareInfo() {
-        view.deleteShareInfo()
-    }
+    func updateShareInfo() { }
 }

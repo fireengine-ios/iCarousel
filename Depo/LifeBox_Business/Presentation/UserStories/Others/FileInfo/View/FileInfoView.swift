@@ -10,7 +10,6 @@ import UIKit
 
 protocol PhotoInfoViewControllerOutput {
     func onRename(newName: String)
-    func tapGesture(recognizer: UITapGestureRecognizer)
     func onSelectSharedContact(_ contact: SharedContact)
     func onAddNewShare()
     func showWhoHasAccess(shareInfo: SharedFileInfo)
@@ -34,11 +33,6 @@ final class FileInfoView: UIView, FromNib {
     }
     
     @IBOutlet private weak var contentView: UIStackView!
-    
-    private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerHandler))
-        return gesture
-    }()
 
     // MARK: Private Properties
     
@@ -138,9 +132,6 @@ final class FileInfoView: UIView, FromNib {
         sharingInfoView.isHidden = true
         
         views.forEach { contentView.addArrangedSubview($0) }
-        
-        tapGestureRecognizer.delegate = self
-        addGestureRecognizer(tapGestureRecognizer)
         ItemOperationManager.default.startUpdateView(view: self)
     }
     
@@ -161,10 +152,6 @@ final class FileInfoView: UIView, FromNib {
         fileNameView.title = TextConstants.fileInfoFileNameTitle
         fileInfoView.reset()
         sharingInfoView.isHidden = true
-    }
-    
-    @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {
-        output?.tapGesture(recognizer: gestureRecognizer)
     }
     
     private func getSharingInfo(projectId: String, uuid: String) {
