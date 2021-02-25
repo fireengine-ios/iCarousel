@@ -53,13 +53,17 @@ extension ServerMessageError {
         if let customErrorCode = customErrorCode {
             switch customErrorCode {
             case 4115:
-                return TextConstants.privateShareMessageLimit
+                return TextConstants.PrivateShare.fail_errorcode_4115
             case 4114:
                 return TextConstants.privateSharePhoneOrMailLimit
             case 4116:
-                return TextConstants.temporaryErrorOccurredTryAgainLater
+                return TextConstants.PrivateShare.fail_errorcode_4116
             case 4118:
-                return TextConstants.privateShareNumberOfItemsLimit
+                return TextConstants.PrivateShare.fail_errorcode_4118
+            case 5101:
+                return TextConstants.PrivateShare.fail_errorcode_5101
+            case 5102:
+                return TextConstants.PrivateShare.fail_errorcode_5102
             default:
                 return errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
             }

@@ -78,7 +78,19 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private lazy var shareWithView = PrivateShareWithView.with(contacts: [], delegate: self)
     private lazy var messageView = PrivateShareAddMessageView.initFromNib()
     private lazy var durationView = PrivateShareDurationView.initFromNib()
-    private lazy var searchSuggestionController = PrivateShareLocalSuggestionsViewController.with(delegate: self)
+    
+    private lazy var remoteSuggestionsView: PrivateShareSuggestionsView = {
+        let view = PrivateShareSuggestionsView.with(contacts: [], delegate: self)
+        
+        //TODO: shadow as an additional layer + border color + masksToBounds
+        view.layer.cornerRadius = 5
+        view.layer.shadowOffset = CGSize(width: 0, height: 4)
+        view.layer.shadowRadius = 2
+        view.layer.shadowOpacity = 0.1
+        view.layer.shadowColor = UIColor.black.cgColor
+        
+        return view
+    }()
     
     private let minSearchLength = 2
     
@@ -113,6 +125,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         super.viewDidLoad()
         
         contentView.addArrangedSubview(selectPeopleView)
+        
+        addRemoteSuggestions()
+        
         setupSuggestedSubjects(searchText: "")
     }
 
@@ -123,14 +138,23 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        
         super.viewDidDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         selectPeopleView.layoutSubviews()
+    }
+    
+    private func addRemoteSuggestions() {
+        view.addSubview(remoteSuggestionsView)
+        remoteSuggestionsView.translatesAutoresizingMaskIntoConstraints = false
+        remoteSuggestionsView.topAnchor.constraint(equalTo: selectPeopleView.dropdownListAnchors.top).activate()
+        remoteSuggestionsView.leadingAnchor.constraint(equalTo: selectPeopleView.dropdownListAnchors.leading).activate()
+        remoteSuggestionsView.trailingAnchor.constraint(equalTo: selectPeopleView.dropdownListAnchors.trailing).activate()
     }
     
     private func setupSuggestedSubjects(searchText: String) {
@@ -167,23 +191,17 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     private func showRemoteSuggestions() {
         guard !remoteSuggestions.isEmpty else {
+            removeRemoteSuggestionsView()
             return
         }
         
-        let suggestedContacts = remoteSuggestions.map { contact -> SuggestedContact in
-                return SuggestedContact(with: contact)
-        }
+        let suggestedContacts = remoteSuggestions.map { SuggestedContact(with: $0) }
         
-        if !contentView.arrangedSubviews.contains(where: { $0 is PrivateShareSuggestionsView }) {
-            let view = PrivateShareSuggestionsView.with(contacts: suggestedContacts, delegate: self)
-            contentView.insertArrangedSubview(view, at: 1)
-        }
+        remoteSuggestionsView.setup(with: suggestedContacts)
     }
     
     private func removeRemoteSuggestionsView() {
-        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
-            suggestionsView.removeFromSuperview()
-        }
+        remoteSuggestionsView.setup(with: [])
     }
     
     private func updateShareButtonIfNeeded() {
@@ -253,6 +271,12 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                 UIApplication.showErrorAlert(message: errorMessage)
             }
         }
+    }
+    
+    override func hideKeyboard() {
+        super.hideKeyboard()
+        
+        removeRemoteSuggestionsView()
     }
 }
 

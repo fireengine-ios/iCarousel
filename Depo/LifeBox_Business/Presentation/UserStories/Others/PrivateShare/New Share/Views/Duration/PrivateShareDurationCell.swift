@@ -14,7 +14,7 @@ final class PrivateShareDurationCell: UICollectionViewCell {
         willSet {
             newValue.font = .GTAmericaStandardMediumFont(size: 12)
             newValue.textAlignment = .center
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.PrivateShare.durationLabelUnselected
         }
     }
     
@@ -28,7 +28,7 @@ final class PrivateShareDurationCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             borderView.backgroundColor = isSelected ? ColorConstants.Text.labelTitleBackground : .clear
-            titleLabel.textColor = isSelected ? ColorConstants.Text.labelTitle : .lightGray
+            titleLabel.textColor = isSelected ? ColorConstants.Text.labelTitle : ColorConstants.PrivateShare.durationLabelUnselected
         }
     }
 

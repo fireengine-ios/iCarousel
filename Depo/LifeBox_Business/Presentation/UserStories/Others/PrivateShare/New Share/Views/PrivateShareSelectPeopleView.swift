@@ -78,6 +78,10 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         }
     }
     
+    var dropdownListAnchors: (top: NSLayoutYAxisAnchor, leading: NSLayoutXAxisAnchor, trailing: NSLayoutXAxisAnchor) {
+        return (textField.bottomAnchor, textField.leadingAnchor, textField.trailingAnchor)
+    }
+    
     //MARK: - Public methods
     
     override func layoutSubviews() {
@@ -93,14 +97,13 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         textField.text = info.value
         identifier = info.identifier
         type = info.userType
-//        changeButtonEnabledIfNeeded(text: info.value)
         
         //add contact to shared with section
         if !info.value.isEmpty {
             onAddTapped(addButton)
         }
     }
-    
+
     func clear() {
         setContact(info: ContactInfo(name: "", value: "", identifier: "", userType: .knownName))
         role = .viewer
@@ -121,15 +124,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     @objc private func textFieldDidChange(_ textField: UITextField) {
         displayName = ""
         delegate?.searchTextDidChange(text: textField.text ?? "")
-//        changeButtonEnabledIfNeeded(text: textField.text ?? "")
     }
-    
-//    private func changeButtonEnabledIfNeeded(text: String) {
-//        let isValid = text.count > 0
-//        //Can asked to disable it for now
-////        addButton.isEnabled = isValid
-//        userRoleButton.isHidden = !isValid
-//    }
 }
 
 //MARK: - UITextFieldDelegate
@@ -154,5 +149,15 @@ extension PrivateShareSelectPeopleView: PrivateShareUserRoleViewControllerDelega
     
     func contactRoleDidChange(_ contact: PrivateShareContact) {
         role = contact.role
+    }
+}
+
+extension PrivateShareSelectPeopleView: PrivateShareSelectSuggestionsDelegate {
+    func didSelect(contactInfo: ContactInfo) {
+        //TODO:
+    }
+    
+    func contactListDidUpdate(isEmpty: Bool) {
+        //TODO:
     }
 }

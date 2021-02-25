@@ -22,7 +22,7 @@ final class PrivateShareWithContactView: UIView, NibInit {
         return view
     }
 
-    @IBOutlet weak var contactFiledsStack: UIStackView! {
+    @IBOutlet private weak var contactFiledsStack: UIStackView! {
         willSet {
             newValue.axis = .vertical
             newValue.alignment = .leading

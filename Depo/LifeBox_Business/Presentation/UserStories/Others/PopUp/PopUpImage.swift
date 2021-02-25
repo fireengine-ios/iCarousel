@@ -41,7 +41,7 @@ enum PopUpImage {
         case .restore:
             image = UIImage(named: "restoreAlert")
         case .question:
-            image = UIImage(named: "questionAlert")
+            image = UIImage(named: "confirmationPopupIcon")
         case .none:
             image = nil
         case .custom(let customImage):

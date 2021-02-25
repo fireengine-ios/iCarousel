@@ -38,6 +38,7 @@ struct ColorConstants {
     
     struct PrivateShare {
         static let shareButtonBackgroundEnabled = UIColor(named: "shareButtonBackgroundEnabled")!
+        static let durationLabelUnselected = UIColor(named: "durationLabel")!
     }
     
     struct Text {
