@@ -121,7 +121,8 @@ extension FileInfoShareView: UICollectionViewDataSource {
             //increment for +N circle
             itemsCount += 1
         }
-        if itemsCount > 0 {
+        if itemsCount > 0,
+           info?.permissions?.granted?.contains(.writeAcl) == true {
             //increment for add button
             itemsCount += 1
         }
@@ -134,7 +135,8 @@ extension FileInfoShareView: UICollectionViewDataSource {
         let type: FileInfoShareContactCellType
         let contact = membersInfo.displayContacts[safe: indexPath.item]
         
-        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
+        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1,
+           info?.permissions?.granted?.contains(.writeAcl) == true {
             type = .plusButton
         } else if indexPath.item == membersInfo.displayContacts.count, membersInfo.additionalCount > 0 {
             type = .additionalCount
