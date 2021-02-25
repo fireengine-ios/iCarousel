@@ -145,7 +145,8 @@ extension FileInfoTableViewAdapter: UITableViewDataSource {
             }
         case 1:
             guard let sharingInfo = sharingInfo else {
-                fatalError("[FileInfoTableViewAdapter] expected SharedFileInfo to be non nil value")
+                assertionFailure("[FileInfoTableViewAdapter] expected SharedFileInfo to be non nil value")
+                return UITableViewCell()
             }
 
             if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SharingInfoTableViewCell.self), for: indexPath) as? SharingInfoTableViewCell {
@@ -203,7 +204,7 @@ fileprivate struct InfoEntityDataSourceItem {
         if sharingInfo.isFolder {
             dataArr.append((1, TextConstants.infoPageItemItems, "\(sharingInfo.childCount ?? 0)"))
         } else {
-            dataArr.append((1, TextConstants.infoPageItemSize, String(format: "%.1f", Double(sharingInfo.bytes ?? 0) / 1000000.0) + " MB"))
+            dataArr.append((1, TextConstants.infoPageItemSize, String(format: "%.2f", Double(sharingInfo.bytes ?? 0) / 1000000.0) + " MB"))
         }
 
         return dataArr.compactMap { InfoEntityDataSourceItem(orderIndex: $0.0,
