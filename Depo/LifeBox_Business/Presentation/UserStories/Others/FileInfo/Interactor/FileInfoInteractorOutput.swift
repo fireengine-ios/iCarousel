@@ -10,9 +10,5 @@ import Foundation
 
 protocol FileInfoInteractorOutput: class {
     func setObject(object: BaseDataSourceItem)
-    func updated()
-    func failedUpdate(error: Error)
-    func cancelSave(use name: String)
-    func didValidateNameSuccess()
-    func displayShareInfo(_ sharingInfo: SharedFileInfo)
+    func displayEntityInfo(_ sharingInfo: SharedFileInfo)
 }

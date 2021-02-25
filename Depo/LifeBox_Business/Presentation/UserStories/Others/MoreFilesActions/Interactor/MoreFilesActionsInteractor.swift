@@ -268,22 +268,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }, fail: failAction(elementType: .share))
     }
     
-    func info(item: [BaseDataSourceItem], isRenameMode: Bool) {
+    func info(item: [BaseDataSourceItem]) {
         self.output?.operationFinished(type: .info)
         
         guard let item = item.first, let infoController = router.fileInfo(item: item) as? FileInfoViewController else {
             return
         }
-        
-        if let topViewController = RouterVC().getViewControllerForPresent() as? PhotoVideoDetailViewInput, !UIDevice.current.orientation.isLandscape {
-            topViewController.showBottomDetailView()
-        } else {
-            router.pushOnPresentedView(viewController: infoController)
-        }
-        
-        if isRenameMode {
-            infoController.startRenaming()
-        }
+
+        router.pushOnPresentedView(viewController: infoController)
     }
     
     private func showPhotoVideoPreview(item: WrapData, completion: @escaping VoidHandler) {

@@ -19,12 +19,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var bottomBlackView: UIView!
     
     @IBOutlet private weak var swipeUpContainerView: UIView!
-    // Bottom detail view
-    
-    private(set) var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol?
-
-    var bottomDetailView: FileInfoView?
-    private var passThroughView: PassThroughView?
 
     private lazy var player: MediaPlayer = factory.resolve()
     
@@ -77,9 +71,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             if let index = selectedIndex {
                 output.setSelectedItemIndex(selectedIndex: index)
             }
-            if oldValue != selectedIndex {
-                updateFileInfo()
-            }
         }
     }
     
@@ -131,9 +122,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        addTrackSwipeUpView()
-        addBottomDetailsView()
-        
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
         
@@ -160,14 +148,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
-        bottomDetailViewManager?.updatePassThroughViewDelegate(passThroughView: passThroughView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
-        passThroughView?.enableGestures()
         updateFirstVisibleCell()
     }
     
@@ -182,14 +168,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
         NotificationCenter.default.post(name: .deinitPlayer, object: self)
         
         output.viewWillDisappear()
-        passThroughView?.disableGestures()
         backButtonForNavigationItem(title: TextConstants.backTitle)
-        passThroughView?.removeFromSuperview()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        hideDetailViewIfChangedRotation()
         collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
             guard let `self` = self else {
                 return
@@ -203,12 +186,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .black
-    }
-    
-    private func hideDetailViewIfChangedRotation() {
-        if UIDevice.current.orientation.isLandscape {
-            bottomDetailViewManager?.closeDetailView()
-        }
     }
     
     private func updateFirstVisibleCell() {
@@ -237,7 +214,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
-        updateFileInfo()
 
         guard let index = selectedIndex else  {
             return
@@ -268,12 +244,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
     private func setupTitle() {
         setNavigationTitle(title: selectedItem?.name ?? "")
-    }
-    
-    private func updateFileInfo() {
-        guard let selectedItem = selectedItem else { return }
-        bottomDetailView?.setObject(selectedItem) {
-        }
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
@@ -325,32 +295,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
-    
-    private func setupBottomDetailViewManager() {
-        guard
-            let managedView = bottomDetailView,
-            let passThroughView = passThroughView,
-            let collectionView = collectionView,
-            let parentView = view
-        else {
-            assertionFailure()
-            return
-        }
-        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, parentView: parentView, delegate: self)
-    }
-    
-    func getBottomDetailViewState() -> CardState {
-        guard let bottomDetailViewManager = bottomDetailViewManager else {
-            assertionFailure()
-            return .collapsed
-        }
-        return bottomDetailViewManager.getCurrenState()
-    }
-    
-    func showBottomDetailView() {
-        bottomDetailViewManager?.showDetailView()
-    }
-    
+
     func shareCurrentItem() {
         guard let shareTabIndex = output.tabIndex(type: .share),
               let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
@@ -360,65 +305,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
 }
 
-
-// MARK: Bottom detail view implemantation
-
-extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelegate {
-    
-    func getSelectedIindex() -> Int {
-        return selectedIndex ?? 0
-    }
-    
-    func getObjectsCount() -> Int {
-        return objects.count
-    }
-    
-    func getIsFullScreenState() -> Bool {
-        return isFullScreen
-    }
-    
-    func setIsFullScreenState(_ isFullScreen: Bool) {
-        self.isFullScreen = isFullScreen
-    }
-    
-    func setSelectedIndex(_ selectedIndex: Int) {
-        self.selectedIndex = selectedIndex
-    }
-    
-    private func addTrackSwipeUpView() {
-        
-        let window = UIApplication.shared.keyWindow
-        let view = PassThroughView(frame: UIScreen.main.bounds)
-        window?.addSubview(view)
-        passThroughView = view
-    }
-    
-    private func addBottomDetailsView() {
-        guard let topViewController = RouterVC().getViewControllerForPresent(), bottomDetailView == nil else {
-            return
-        }
-        
-        let fileInfoView = FileInfoView(frame: CGRect(origin: CGPoint(x: .zero, y: view.frame.height), size: view.frame.size))
-        output.configureFileInfo(fileInfoView)
-        topViewController.view.addSubview(fileInfoView)
-        bottomDetailView = fileInfoView
-        setupBottomDetailViewManager()
-    }
-    
-    func pullToDownEffect() {
-        //hideView()
-    }
-}
-
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func showValidateNameSuccess(name: String) {
         setNavigationTitle(title: name)
-        bottomDetailView?.showValidateNameSuccess()
     }
     
-    func show(name: String) {
-        bottomDetailView?.show(name: name)
-    }
+    func show(name: String) { }
     
     func setupInitialState() { }
     
@@ -488,18 +380,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func getNavigationController() -> UINavigationController? {
         return navigationController
-    }
-    
-    func closeDetailViewIfNeeded() {
-        bottomDetailViewManager?.closeDetailView()
-    }
-    
-    func updateBottomDetailView() {
-        bottomDetailView?.updateShareInfo()
-    }
-    
-    func deleteShareInfo() {
-        bottomDetailView?.setHiddenShareInfoView(isHidden: true)
     }
     
     func updateExpiredItem(_ item: WrapData) {
@@ -573,7 +453,6 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         if visibleIndexes.contains(indexToChange) {
             output.updateBars()
             setupNavigationBar()
-            updateFileInfo()
         }
     }
 }

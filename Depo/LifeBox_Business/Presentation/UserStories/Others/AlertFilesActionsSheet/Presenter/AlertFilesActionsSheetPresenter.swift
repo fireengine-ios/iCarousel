@@ -328,7 +328,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         switch type {
         case .info:
-            interactor.info(item: items, isRenameMode: false)
+            interactor.info(item: items)
         case .download:
             let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
             if items.count <= allowedNumberLimit {
