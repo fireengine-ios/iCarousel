@@ -12,5 +12,5 @@ protocol FileInfoInteractorInput {
     var item: BaseDataSourceItem? { get set }
     var sharingInfo: SharedFileInfo? { get }
     func viewIsReady()
-    func getSharingInfo()
+    func getEntityInfo()
 }

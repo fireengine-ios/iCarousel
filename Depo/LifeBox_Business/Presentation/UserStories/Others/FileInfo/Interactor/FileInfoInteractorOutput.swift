@@ -10,5 +10,5 @@ import Foundation
 
 protocol FileInfoInteractorOutput: class {
     func setObject(object: BaseDataSourceItem)
-    func displayShareInfo(_ sharingInfo: SharedFileInfo)
+    func displayEntityInfo(_ sharingInfo: SharedFileInfo)
 }

@@ -60,8 +60,8 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
         view.setObject(object)
     }
     
-    func displayShareInfo(_ sharingInfo: SharedFileInfo) {
-        view.showSharingInfo(sharingInfo)
+    func displayEntityInfo(_ sharingInfo: SharedFileInfo) {
+        view.showEntityInfo(sharingInfo)
     }
 }
 
@@ -74,8 +74,8 @@ extension FileInfoPresenter: FileInfoModuleInput {
 //MARK: - FileInfoRouterOutput
 
 extension FileInfoPresenter: FileInfoRouterOutput {
-    func updateSharingInfo() {
-        interactor.getSharingInfo()
+    func updateEntityInfo() {
+        interactor.getEntityInfo()
     }
 }
 
@@ -88,25 +88,25 @@ extension FileInfoPresenter: ItemOperationManagerViewProtocol {
     
     func didShare(items: [BaseDataSourceItem]) {
         if let uuid = interactor.item?.uuid, items.first(where: { $0.uuid == uuid }) != nil {
-            updateSharingInfo()
+            updateEntityInfo()
         }
     }
     
     func didEndShareItem(uuid: String) {
         if uuid == interactor.item?.uuid {
-            updateSharingInfo()
+            updateEntityInfo()
         }
     }
     
     func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
         if uuid == interactor.item?.uuid, interactor.sharingInfo?.members?.contains(contact) == true {
-            updateSharingInfo()
+            updateEntityInfo()
         }
     }
     
     func didRemove(contact: SharedContact, fromItem uuid: String) {
         if uuid == interactor.item?.uuid, interactor.sharingInfo?.members?.contains(contact) == true {
-            updateSharingInfo()
+            updateEntityInfo()
         }
     }
 }

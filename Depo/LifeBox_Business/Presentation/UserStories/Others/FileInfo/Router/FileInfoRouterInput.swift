@@ -15,5 +15,5 @@ protocol FileInfoRouterInput {
 }
 
 protocol FileInfoRouterOutput: class {
-    func updateSharingInfo()
+    func updateEntityInfo()
 }
