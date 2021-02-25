@@ -8,11 +8,18 @@
 
 import Foundation
 
-class EntityInfoHeader: UIView {
+final class EntityInfoHeader: UIView {
     private struct Constants {
         static let leadingTrailingOffset: CGFloat = 20
-        static let topOffset: CGFloat = 35
+        static let topOffset: CGFloat = 20
         static let bottomOffset: CGFloat = 15
+        static let separatorViewHeight: CGFloat = 1
+    }
+
+    var needsSeparatorViewOnTop: Bool = false {
+        didSet {
+            separatorView.backgroundColor = needsSeparatorViewOnTop ? ColorConstants.infoPageSeparator : .clear
+        }
     }
 
     private lazy var label: UILabel = {
@@ -21,6 +28,13 @@ class EntityInfoHeader: UIView {
         lbl.font = UIFont.GTAmericaStandardRegularFont()
         lbl.textColor = ColorConstants.infoPageValueText
         return lbl
+    }()
+
+    private lazy var separatorView: UIView = {
+        let vview = UIView()
+        vview.translatesAutoresizingMaskIntoConstraints = false
+        vview.backgroundColor = UIColor.clear
+        return vview
     }()
 
     override init(frame: CGRect) {
@@ -35,13 +49,20 @@ class EntityInfoHeader: UIView {
 
     private func setup() {
         addSubview(label)
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.leadingTrailingOffset).activate()
-        label.topAnchor.constraint(equalTo: topAnchor, constant: Constants.topOffset).activate()
-        label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.leadingTrailingOffset).activate()
-        label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.bottomOffset).activate()
+        addSubview(separatorView)
+
+        separatorView.leadingAnchor.constraint(equalTo: leadingAnchor).activate()
+        separatorView.trailingAnchor.constraint(equalTo: trailingAnchor).activate()
+        separatorView.topAnchor.constraint(equalTo: topAnchor).activate()
+        separatorView.heightAnchor.constraint(equalToConstant: Constants.separatorViewHeight).activate()
+
+        label.pinToSuperviewEdges(offset: UIEdgeInsets(top: Constants.topOffset + Constants.separatorViewHeight,
+                                                       left: Constants.leadingTrailingOffset,
+                                                       bottom: Constants.bottomOffset,
+                                                       right: Constants.leadingTrailingOffset))
     }
 
-    func updateText(to string: String) {
+    func updateText(to string: String?) {
         label.text = string
     }
 }
