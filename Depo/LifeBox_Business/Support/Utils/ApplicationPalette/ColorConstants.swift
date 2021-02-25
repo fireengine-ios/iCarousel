@@ -33,7 +33,17 @@ struct ColorConstants {
     static let loginDescriptionLabel = UIColor(named: "loginDescriptionLabel")!
     static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
     static let loginPopupDescription = UIColor(named: "loginPopupDescription")
-    
+
+    static let infoPageValueText = UIColor(named: "infoPageValueText")!
+    static let infoPageItemTopText = UIColor(named: "infoPageItemTopText")!
+    static let infoPageItemBottomText = UIColor(named: "infoPageItemBottomText")!
+    static let infoPageSeparator = UIColor(named: "infoPageSeparator")!
+    static let infoPageContactDarkBackground = UIColor(named: "infoContactDarkBackground")!
+    static let infoPageContactLigherBackground = UIColor(named: "infoContactLigherBackground")!
+    static let infoPagePlusButtonText = UIColor(named: "infoPagePlusButtonText")!
+    static let infoPageLigherNickname = UIColor(named: "infoPageNicknameLigher")!
+    static let infoPageDarkerNickname = UIColor(named: "infoPageNicknameDarker")!
+
     //MARK: END
     
     static let whiteColor = UIColor.white

@@ -154,6 +154,29 @@ extension UIViewController {
         statusBarColor = .clear
     }
 
+    func whiteNavBarStyle(backgroundImg: UIImage = UIImage(),
+                          tintColor: UIColor = .black,
+                          titleTextColor: UIColor = .black) {
+        visibleNavigationBarStyle()
+
+        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
+            view.hideLogo = true
+            view.isHidden = true
+
+        }
+
+        navBar?.setBackgroundImage(backgroundImg, for: .default)
+        navBar?.shadowImage = nil
+
+        navBar?.backgroundColor = .white
+        navBar?.barTintColor = .white
+        navBar?.tintColor = tintColor
+
+        navBar?.titleTextAttributes = [.foregroundColor : titleTextColor]
+
+        statusBarColor = .clear
+    }
+
     func homePageNavigationBarStyle() {
         defaultNavBarStyle()
         setTitle(withString: "")

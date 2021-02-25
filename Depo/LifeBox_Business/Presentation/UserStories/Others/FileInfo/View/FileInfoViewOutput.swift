@@ -8,8 +8,6 @@
 
 protocol FileInfoViewOutput {
     func viewIsReady()
-    func onRename(newName: String)
-    func validateName(newName: String)
     func shareItem()
     func showWhoHasAccess(shareInfo: SharedFileInfo)
     func openShareAccessList(contact: SharedContact)

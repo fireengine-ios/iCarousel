@@ -132,12 +132,12 @@ extension FileInfoInteractor: FileInfoInteractorInput {
         
         group.notify(queue: .main) { [weak self] in
             if let sharingInfo = sharingInfo {
-                self?.setupSharingInfoView(sharingInfo: sharingInfo, hasAccess: hasAccess)
+                self?.setupSharingInfoView(sharingInfo: sharingInfo)
             }
         }
     }
     
-    private func setupSharingInfoView(sharingInfo: SharedFileInfo, hasAccess: Bool) {
+    private func setupSharingInfoView(sharingInfo: SharedFileInfo) {
         let hasMembers = sharingInfo.members?.isEmpty == false
         
         if hasMembers {

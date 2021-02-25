@@ -25,9 +25,12 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
-    
+
     @discardableResult
     func getSharingInfo(projectId: String, uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func getRemoteEntityInfo(projectId: String, uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
     
     @discardableResult
     func endShare(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
@@ -117,6 +120,23 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .request(RouteRequests.PrivateShare.share, method: .post, parameters: object.parameters, encoding: JSONEncoding.default)
             .customValidate()
             .responseVoid(handler)
+            .task
+    }
+
+    @discardableResult
+    func getRemoteEntityInfo(projectId: String,
+                             uuid: String,
+                             handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.sharingInfo, projectId, uuid)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
+
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
             .task
     }
     

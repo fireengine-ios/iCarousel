@@ -128,11 +128,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func onInfo(object: Item) {
-        if !UIDevice.current.orientation.isLandscape {
-            view.showBottomDetailView()
-        } else {
-            router.onInfo(object: object)
-        }
+        router.onInfo(object: object)
     }
     
     func viewWillDisappear() {
@@ -302,55 +298,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         asyncOperationSuccess()
         view.showErrorAlert(message: error.description)
     }
-    
-    func configureFileInfo(_ view: FileInfoView) {
-        view.output = self
-    }
-}
 
-extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
-    func onRename(newName: String) {
-        startAsyncOperation()
-        interactor.onValidateName(newName: newName)
-    }
-    
-    func tapGesture(recognizer: UITapGestureRecognizer) {
-        view.closeDetailViewIfNeeded()
-    }
-    
-    func onSelectSharedContact(_ contact: SharedContact) {
-        guard let index = interactor.currentItemIndex else {
-            return
-        }
-        let currentItem = interactor.allItems[index]
-        router.openPrivateShareAccessList(projectId: currentItem.accountUuid ?? "",
-                                          uuid: currentItem.uuid,
-                                          contact: contact,
-                                          fileType: currentItem.fileType)
-    }
-        
-    func onAddNewShare() {
-        guard let index = interactor.currentItemIndex else {
-            return
-        }
-        let currentItem = interactor.allItems[index]
-        router.openPrivateShare(for: currentItem)
-    }
-    
-    func showWhoHasAccess(shareInfo: SharedFileInfo) {
-        router.openPrivateShareContacts(with: shareInfo)
-    }
-    
-    func didUpdateSharingInfo(_ sharingInfo: SharedFileInfo) {
-        let item = WrapData(privateShareFileInfo: sharingInfo)
-        view.updateExpiredItem(item)
-        interactor.updateExpiredItem(item)
-    }
-    
     func updateItem(_ item: WrapData) {
         view.updateItem(item)
     }
-    
+
     func createNewUrl() {
         interactor.createNewUrl()
     }
@@ -360,11 +312,5 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
 
 extension PhotoVideoDetailPresenter: PhotoVideoDetailRouterOutput {
     
-    func updateShareInfo() {
-        view.updateBottomDetailView()
-    }
-    
-    func deleteShareInfo() {
-        view.deleteShareInfo()
-    }
+    func updateShareInfo() { }
 }

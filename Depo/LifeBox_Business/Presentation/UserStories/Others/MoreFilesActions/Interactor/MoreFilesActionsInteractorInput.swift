@@ -12,7 +12,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?)
     
-    func info(item: [BaseDataSourceItem], isRenameMode: Bool)
+    func info(item: [BaseDataSourceItem])
     
     func moveToTrash(items: [BaseDataSourceItem])
     
