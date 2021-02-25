@@ -310,9 +310,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         setNavigationTitle(title: name)
     }
     
-    func show(name: String) {
-        // show detail view fullscreen
-    }
+    func show(name: String) { }
     
     func setupInitialState() { }
     

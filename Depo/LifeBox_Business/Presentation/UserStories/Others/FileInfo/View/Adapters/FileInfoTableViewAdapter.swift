@@ -43,7 +43,7 @@ final class FileInfoTableViewAdapter: NSObject {
     }()
 
     convenience init(with tableView: UITableView,
-                     and fileInfoShareViewDelegate: FileInfoTableViewAdapterDelegate) {
+                     delegate fileInfoShareViewDelegate: FileInfoTableViewAdapterDelegate) {
         self.init()
         self.tableView = tableView
         self.delegate = fileInfoShareViewDelegate

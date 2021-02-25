@@ -26,9 +26,14 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
-        fileInfoTableViewAdapter = FileInfoTableViewAdapter(with: tableView, and: self)
+        fileInfoTableViewAdapter = FileInfoTableViewAdapter(with: tableView,
+                                                            delegate: self)
         output.viewIsReady()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
     }
 
     private func setupNavigationBar() {
