@@ -31,9 +31,11 @@ extension FileInfoInteractor: FileInfoInteractorInput {
     }
     
     func getEntityInfo() {
-        guard item?.isLocalItem == false,
-              let accountUuid = item?.accountUuid,
-              let uuid = item?.uuid else {
+        guard
+            item?.isLocalItem == false,
+            let accountUuid = item?.accountUuid,
+            let uuid = item?.uuid
+        else {
             return
         }
         

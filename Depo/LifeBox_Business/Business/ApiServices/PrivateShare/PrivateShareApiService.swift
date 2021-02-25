@@ -25,9 +25,12 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
-    
+
     @discardableResult
     func getSharingInfo(projectId: String, uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func getRemoteEntityInfo(projectId: String, uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
     
     @discardableResult
     func endShare(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?

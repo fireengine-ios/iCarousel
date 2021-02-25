@@ -122,7 +122,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
 
 extension FileInfoShareContactCell {
     private func circleBackgroundColor(for index: Int) -> UIColor? {
-        switch index.remainderReportingOverflow(dividingBy: 6).partialValue {
+        switch index {
         case 0, 3:
             return ColorConstants.infoPageContactDarkBackground
         case 1, 2:
@@ -133,7 +133,7 @@ extension FileInfoShareContactCell {
     }
 
     private func onCircleTextColor(for index: Int) -> UIColor? {
-        switch index.remainderReportingOverflow(dividingBy: 6).partialValue {
+        switch index {
         case 0, 3:
             return ColorConstants.infoPageDarkerNickname
         case 1, 2:
