@@ -15,9 +15,9 @@ protocol FileInfoShareViewProtocol: UIView {
 }
 
 protocol FileInfoShareViewDelegate: class {
-    func didSelect(contact: SharedContact)
-    func didTappedPlusButton()
-    func didTappedArrowButton()
+    func didSelect(contact: SharedContact, view: FileInfoShareView)
+    func didTappedPlusButton(view: FileInfoShareView)
+    func didTappedArrowButton(sharedFileInfo: SharedFileInfo, view: FileInfoShareView)
 }
 
 final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
@@ -29,20 +29,12 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
         view.delegate = delegate
         return view
     }
-
-    @IBOutlet private weak var titleLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.privateShareInfoMenuSectionTitle
-            newValue.textColor = ColorConstants.marineTwo
-            newValue.font = .TurkcellSaturaBolFont(size: 14)
-        }
-    }
     
     @IBOutlet private weak var subtitleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = .lrBrownishGrey
-            newValue.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         }
     }
     
@@ -59,7 +51,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     private(set) var info: SharedFileInfo?
     private var membersInfo: MembersInfo = ([], 0, 0)
     
-    private let maxDisplayMembers = 3
+    private let maxDisplayMembers = 4
     
     //MARK: - FileInfoShareViewProtocol
     
@@ -68,7 +60,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
         
         membersInfo = getMembersInfo()
         
-        subtitleLabel.text = String(format: TextConstants.privateShareInfoMenuNumberOfPeople, membersInfo.totalCount)
+        subtitleLabel.text = String(format: TextConstants.infoPageItemSharedWithNumberOfPerson, membersInfo.totalCount)
         contactsCollectionView.reloadData()
     }
     
@@ -79,8 +71,9 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
         contactsCollectionView.dataSource = self
         
         if let layout = contactsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 50, height: 67)
-            layout.minimumLineSpacing = 2
+            layout.itemSize = CGSize(width: 40, height: 59)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 20)
+            layout.minimumInteritemSpacing = 10
         }
     }
     
@@ -112,7 +105,10 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     }
     
     @IBAction private func onArrowTapped() {
-        delegate?.didTappedArrowButton()
+        guard let info = info else {
+            return
+        }
+        delegate?.didTappedArrowButton(sharedFileInfo: info, view: self)
     }
 }
 
@@ -157,14 +153,17 @@ extension FileInfoShareView: UICollectionViewDataSource {
 extension FileInfoShareView: FileInfoShareContactCellDelegate {
     
     func didSelect(contact: SharedContact) {
-        delegate?.didSelect(contact: contact)
+        delegate?.didSelect(contact: contact, view: self)
     }
     
     func didTappedPlusButton() {
-        delegate?.didTappedPlusButton()
+        delegate?.didTappedPlusButton(view: self)
     }
     
     func didTappedOnShowAllContacts() {
-        delegate?.didTappedArrowButton()
+        guard let info = info else {
+            return
+        }
+        delegate?.didTappedArrowButton(sharedFileInfo: info, view: self)
     }
 }
