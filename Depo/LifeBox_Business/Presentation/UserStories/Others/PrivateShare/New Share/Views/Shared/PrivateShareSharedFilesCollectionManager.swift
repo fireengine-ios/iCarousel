@@ -557,6 +557,10 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 
 //MARK: - LBCellsDelegate, MultifileCollectionViewCellActionDelegate
 extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellActionDelegate {
+    func onRenameStarted(at indexPath: IndexPath) {
+        self.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+    }
+    
     func rename(item: WrapData, name: String, completion: @escaping BoolHandler) {
         fileInfoManager.rename(item: item, name: name, completion: completion)
     }
