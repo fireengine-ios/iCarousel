@@ -89,7 +89,7 @@ extension PrivateShareContactTableViewAdapter: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PrivateShareSharedContactTableViewCell.self), for: indexPath)
         (cell as? PrivateShareSharedContactTableViewCell)?.setup(with: dataSource[indexPath.row],
-                                                                 hasPermissionToEditRole: false,
+                                                                 hasPermissionToEditRole: allowedToEditRoles,
                                                                  isFirstCell: indexPath.row == 0)
         return cell
     }
