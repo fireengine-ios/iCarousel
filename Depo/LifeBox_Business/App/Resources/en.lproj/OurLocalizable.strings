@@ -1957,3 +1957,16 @@
 "business_app_private_share_fail_errorcode_4118" = "You reached maximum shared item limit";
 "business_app_private_share_fail_errorcode_5101" = "Personal invitee is not accepted";
 "business_app_private_share_fail_errorcode_5102" = "Invitee account not found";
+"business_app_info_page_title_for_files" = "File Info";
+"business_app_info_page_title_for_folders" = "Folder Info";
+"business_app_info_page_name" = "Name";
+"business_app_info_page_size" = "Size";
+"business_app_info_page_item" = "Items";
+"business_app_info_page_creation_date" = "Creation Date";
+"business_app_info_page_modified_date" = "Last Modified";
+"business_app_info_page_sharing_info" = "Sharing Info";
+"business_app_info_page_shared_with" = "Shared with %d people";
+"business_app_info_page_role_owner" = "Owner";
+"business_app_info_page_role_editor" = "Editor";
+"business_app_info_page_role_viewer" = "Viewer";
+"business_app_info_page_role_varies" = "Varies";

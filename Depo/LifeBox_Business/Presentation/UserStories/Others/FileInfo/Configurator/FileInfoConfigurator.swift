@@ -9,7 +9,6 @@
 import UIKit
 
 class FileInfoModuleConfigurator {
-
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, item: BaseDataSourceItem) {
 
         if let viewController = viewInput as? FileInfoViewController {
@@ -35,5 +34,4 @@ class FileInfoModuleConfigurator {
         
         viewController.interactor = interactor
     }
-
 }

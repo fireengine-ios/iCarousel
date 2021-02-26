@@ -32,8 +32,6 @@ protocol PhotoVideoDetailViewOutput {
     func videoStoped()
     
     func willDisplayLastCell()
-
-    func configureFileInfo(_ view: FileInfoView)
     
     func tabIndex(type: ElementTypes) -> Int?
     

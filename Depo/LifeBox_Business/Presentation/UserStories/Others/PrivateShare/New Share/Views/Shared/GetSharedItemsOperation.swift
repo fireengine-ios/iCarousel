@@ -63,7 +63,7 @@ final class GetSharedItemsOperation: Operation {
             
             switch result {
                 case .success(let filesInfo):
-                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
+                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0, shareType: self.type) }
                     self.semaphore.signal()
                     
                 case .failed(_):

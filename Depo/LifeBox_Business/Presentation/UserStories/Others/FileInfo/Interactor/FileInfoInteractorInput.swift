@@ -12,7 +12,5 @@ protocol FileInfoInteractorInput {
     var item: BaseDataSourceItem? { get set }
     var sharingInfo: SharedFileInfo? { get }
     func viewIsReady()
-    func onRename(newName: String)
-    func onValidateName(newName: String)
-    func getSharingInfo()
+    func getEntityInfo()
 }

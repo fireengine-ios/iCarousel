@@ -7,13 +7,9 @@
 //
 
 protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
-    func startRenaming()
     func setObject(_ object: BaseDataSourceItem)
     func goBack()
     func hideViews()
     func showViews()
-    func show(name: String)
-    func showValidateNameSuccess()
-    func showSharingInfo(_ sharingInfo: SharedFileInfo)
-    func deleteSharingInfo()
+    func showEntityInfo(_ sharingInfo: SharedFileInfo)
 }

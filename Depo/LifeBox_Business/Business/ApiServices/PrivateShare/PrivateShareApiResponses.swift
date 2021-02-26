@@ -205,13 +205,13 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     var infoMenuTitle: String {
         switch self {
         case .editor:
-            return TextConstants.privateShareInfoMenuEditor
+            return TextConstants.infoPageRoleEditor
         case .viewer:
-            return TextConstants.privateShareInfoMenuViewer
+            return TextConstants.infoPageRoleViewer
         case .owner:
-            return TextConstants.privateShareInfoMenuOwner
+            return TextConstants.infoPageRoleOwner
         case .varying:
-            return TextConstants.privateShareInfoMenuVarying
+            return TextConstants.infoPageRoleVaries
         }
     }
     
