@@ -173,9 +173,10 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         let operation = PrivateShareSuggestionsOperation(searchText: encodedText) { [weak self] result in
             switch result {
             case .success(let contacts):
-                self?.removeRemoteSuggestionsView()
                 self?.remoteSuggestions = contacts
                 self?.showRemoteSuggestions()
+                self?.alloweManualAddIfNeeded(searchQuery: searchText)
+                
             case .failed(let error):
                 if let customError = error as? OperationError,
                    case OperationError.cancelled = customError {
@@ -222,6 +223,11 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private func endSearchContacts() {
         view.endEditing(true)
         removeRemoteSuggestionsView()
+    }
+    
+    private func alloweManualAddIfNeeded(searchQuery: String) {
+        let isAllowed = (remoteSuggestions.first(where: { $0.email == searchQuery }) != nil)
+        selectPeopleView.addManually(isAllowed: isAllowed)
     }
 
     //MARK: - Actions
@@ -283,7 +289,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 //MARK: - PrivateShareSelectPeopleViewDelegate
 
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
-    
+
     func startEditing(text: String) {
 //            searchSuggestionsContainer.isHidden = true
     }
@@ -298,19 +304,33 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
 //        }
     }
     
-    func addShareContact(_ contact: PrivateShareContact) {
+    func addShareContact(_ contact: PrivateShareContact, fromSuggestions: Bool) {
+        var suggestedContact: PrivateShareContact? = nil
+        
+        if fromSuggestions {
+            if let remoteSuggestion = remoteSuggestions.first(where: { $0.email == contact.username }) {
+                suggestedContact = PrivateShareContact(displayName: remoteSuggestion.name ?? "", username: contact.username, type: remoteSuggestion.type ?? .knownName, role: contact.role, identifier: remoteSuggestion.identifier ?? "")
+            }
+        } else {
+            suggestedContact = contact
+        }
+        
+        guard let contactToShare = suggestedContact else {
+            return
+        }
+        
         if let maxInviteeCount = SingletonStorage.shared.featuresInfo?.maxSharingInviteeCount,
             shareWithView.contacts.count >= maxInviteeCount {
             UIApplication.showErrorAlert(message: String(format: TextConstants.privateShareMaxNumberOfUsersMessageFormat, maxInviteeCount))
             return
         }
         
-        guard isValidContact(text: contact.username) else {
+        guard isValidContact(text: contactToShare.username) else {
             return
         }
         
         selectPeopleView.clear()
-        shareWithView.add(contact: contact)
+        shareWithView.add(contact: contactToShare)
         if shareWithView.superview == nil {
             showShareViews()
         }
@@ -342,9 +362,26 @@ extension PrivateShareViewController: PrivateShareWithViewDelegate {
         updateShareButtonIfNeeded()
     }
     
-    func onUserRoleTapped(contact: PrivateShareContact, sender: Any) {
-        let userRoleController = PrivateShareUserRoleViewController.with(contact: contact, delegate: sender as? PrivateShareUserRoleViewControllerDelegate)
-        present(userRoleController, animated: true)
+    func onUserRoleTapped(contact: PrivateShareContact, sender: Any, completion: @escaping ValueHandler<PrivateShareUserRole>) {
+        showRoleSelectionMenu(sender: sender as? UIView, handler: completion)
+    }
+    
+    private func showRoleSelectionMenu(sender: UIView?, handler: @escaping ValueHandler<PrivateShareUserRole>) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let allowedRoles: [PrivateShareUserRole] = [.viewer, .editor]
+        
+        allowedRoles.forEach { role in
+            let action = UIAlertAction(title: role.selectionTitle, style: .default) { _ in
+                handler(role)
+            }
+            actionSheet.addAction(action)
+        }
+
+        let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: nil)
+        actionSheet.addAction(cancelAction)
+        actionSheet.popoverPresentationController?.sourceView = sender
+
+        present(actionSheet, animated: true)
     }
 }
 
@@ -355,10 +392,5 @@ extension PrivateShareViewController: PrivateShareSelectSuggestionsDelegate {
     func didSelect(contactInfo: ContactInfo) {
         selectPeopleView.setContact(info: contactInfo)
         endSearchContacts()
-    }
-    
-    func contactListDidUpdate(isEmpty: Bool) {
-        //display container only if local suggestions count > 0
-//        searchSuggestionsContainer.isHidden = isEmpty
     }
 }

@@ -12,8 +12,8 @@ protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
     func searchTextDidChange(text: String)
     func hideKeyboard(text: String)
-    func addShareContact(_ contact: PrivateShareContact)
-    func onUserRoleTapped(contact: PrivateShareContact, sender: Any)
+    func addShareContact(_ contact: PrivateShareContact, fromSuggestions: Bool)
+    func onUserRoleTapped(contact: PrivateShareContact, sender: Any, completion: @escaping ValueHandler<PrivateShareUserRole>)
 }
 
 final class PrivateShareSelectPeopleView: UIView, NibInit {
@@ -100,8 +100,10 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         
         //add contact to shared with section
         if !info.value.isEmpty {
-            onAddTapped(addButton)
+            addContact(fromSuggestions: false)
         }
+        
+        setupUserRoleMenu()
     }
 
     func clear() {
@@ -109,21 +111,53 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         role = .viewer
     }
     
+    func addManually(isAllowed: Bool) {
+        addButton.isEnabled = isAllowed
+    }
+    
     //MARK: - Private methods
     
     @IBAction private func onAddTapped(_ sender: UIButton) {
-        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", type: type, role: role, identifier: identifier)
-        delegate?.addShareContact(shareContact)
+        addContact(fromSuggestions: true)
     }
     
-    @IBAction private func onUserRoleTapped(_ sender: UIButton) {
+    @objc private func onUserRoleTapped(_ sender: UIButton) {
         let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", type: type, role: role, identifier: identifier)
-        delegate?.onUserRoleTapped(contact: shareContact, sender: self)
+        delegate?.onUserRoleTapped(contact: shareContact, sender: self, completion: { [weak self] newRole in
+            self?.role = newRole
+        })
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
         displayName = ""
+        addManually(isAllowed: false)
         delegate?.searchTextDidChange(text: textField.text ?? "")
+    }
+    
+    private func addContact(fromSuggestions: Bool) {
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", type: type, role: role, identifier: identifier)
+        addButton.isEnabled = false
+        delegate?.addShareContact(shareContact, fromSuggestions: fromSuggestions)
+    }
+    
+    private func setupUserRoleMenu() {
+        if #available(iOS 14, *) {
+            let completion: ValueHandler<PrivateShareUserRole> = { [weak self] updatedRole in
+                if updatedRole != self?.role {
+                    self?.role = updatedRole
+                    self?.userRoleButton.setTitle(updatedRole.title, for: .normal)
+                    self?.setupUserRoleMenu()
+                }
+            }
+            
+            let roles: [PrivateShareUserRole] = [.viewer, .editor]
+            let menu = MenuItemsFabric.privateShareUserRoleMenu(roles: roles, currentRole: role, completion: completion)
+            userRoleButton.showsMenuAsPrimaryAction = true
+            userRoleButton.menu = menu
+            
+        } else {
+            userRoleButton.addTarget(self, action: #selector(onUserRoleTapped), for: .touchUpInside)
+        }
     }
 }
 
@@ -141,23 +175,4 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
         return true
     }
     
-}
-
-//MARK: - PrivateShareUserRoleViewControllerDelegate
-
-extension PrivateShareSelectPeopleView: PrivateShareUserRoleViewControllerDelegate {
-    
-    func contactRoleDidChange(_ contact: PrivateShareContact) {
-        role = contact.role
-    }
-}
-
-extension PrivateShareSelectPeopleView: PrivateShareSelectSuggestionsDelegate {
-    func didSelect(contactInfo: ContactInfo) {
-        //TODO:
-    }
-    
-    func contactListDidUpdate(isEmpty: Bool) {
-        //TODO:
-    }
 }

@@ -19,6 +19,5 @@ struct ContactInfo {
 
 protocol PrivateShareSelectSuggestionsDelegate: class {
     func didSelect(contactInfo: ContactInfo)
-    func contactListDidUpdate(isEmpty: Bool)
 }
 

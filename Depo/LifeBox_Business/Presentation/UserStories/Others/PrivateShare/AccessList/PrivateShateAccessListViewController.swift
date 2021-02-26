@@ -8,6 +8,34 @@
 
 import UIKit
 
+enum SelectionRole: CaseIterable {
+    case editor
+    case viewer
+    case delete
+    
+    var title: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareAccessEditor
+        case .viewer:
+            return TextConstants.privateShareAccessViewer
+        case .delete:
+            return TextConstants.privateShareAccessRemove
+        }
+    }
+    
+    var actionStyle: UIAlertActionStyle {
+        switch self {
+        case .editor, .viewer:
+            return .default
+        case .delete:
+            return .destructive
+        }
+    }
+    
+}
+
+
 final class PrivateShateAccessListViewController: BaseViewController, NibInit {
 
     static func with(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> PrivateShateAccessListViewController {
@@ -17,33 +45,6 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
         controller.contact = contact
         controller.fileType = fileType
         return controller
-    }
-    
-    private enum SelectionRole: CaseIterable {
-        case editor
-        case viewer
-        case delete
-        
-        var title: String {
-            switch self {
-            case .editor:
-                return TextConstants.privateShareAccessEditor
-            case .viewer:
-                return TextConstants.privateShareAccessViewer
-            case .delete:
-                return TextConstants.privateShareAccessRemove
-            }
-        }
-        
-        var actionStyle: UIAlertActionStyle {
-            switch self {
-            case .editor, .viewer:
-                return .default
-            case .delete:
-                return .destructive
-            }
-        }
-        
     }
     
     @IBOutlet private weak var tableView: UITableView!

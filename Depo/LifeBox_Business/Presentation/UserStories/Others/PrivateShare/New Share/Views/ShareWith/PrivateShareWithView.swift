@@ -10,7 +10,7 @@ import UIKit
 
 protocol PrivateShareWithViewDelegate: class {
     func shareListDidEmpty()
-    func onUserRoleTapped(contact: PrivateShareContact, sender: Any)
+    func onUserRoleTapped(contact: PrivateShareContact, sender: Any, completion: @escaping ValueHandler<PrivateShareUserRole>)
 }
 
 final class PrivateShareWithView: UIView, NibInit {
@@ -79,16 +79,18 @@ extension PrivateShareWithView: PrivateShareWithContactViewDelegate {
         }
     }
     
-    func onUserRoleTapped(contact: PrivateShareContact) {
-        delegate?.onUserRoleTapped(contact: contact, sender: self)
-    }
-}
-
-//MARK: - PrivateShareUserRoleViewControllerDelegate
-
-extension PrivateShareWithView: PrivateShareUserRoleViewControllerDelegate {
-    
-    func contactRoleDidChange(_ contact: PrivateShareContact) {
+    @available(iOS 14, *)
+    func onUserRoleChanged(contact: PrivateShareContact) {
         update(contact: contact)
+    }
+    
+    func onUserRoleTapped(contact: PrivateShareContact) {
+        delegate?.onUserRoleTapped(contact: contact, sender: self, completion: { [weak self] newRole in
+            if newRole != contact.role {
+                var mutableContact = contact
+                mutableContact.role = newRole
+                self?.update(contact: mutableContact)
+            }
+        })
     }
 }

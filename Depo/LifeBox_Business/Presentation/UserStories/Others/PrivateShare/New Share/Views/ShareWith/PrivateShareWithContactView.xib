@@ -34,9 +34,6 @@
                     <state key="normal" title="Button">
                         <color key="titleColor" name="labelTitle"/>
                     </state>
-                    <connections>
-                        <action selector="onUserRoleTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="ww5-Uj-MvR"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>

@@ -11,6 +11,9 @@ import UIKit
 protocol PrivateShareWithContactViewDelegate: class {
     func onDeleteTapped(contact: PrivateShareContact)
     func onUserRoleTapped(contact: PrivateShareContact)
+    
+    @available(iOS 14, *)
+    func onUserRoleChanged(contact: PrivateShareContact)
 }
 
 final class PrivateShareWithContactView: UIView, NibInit {
@@ -110,6 +113,7 @@ final class PrivateShareWithContactView: UIView, NibInit {
         }
         
         userRoleButton.setTitle(contact.role.title, for: .normal)
+        setupUserRoleMenu()
     }
     
     //MARK: - Private
@@ -121,9 +125,33 @@ final class PrivateShareWithContactView: UIView, NibInit {
         removeFromSuperview()
     }
     
-    @IBAction private func onUserRoleTapped(_ sender: UIButton) {
+    @objc private func onUserRoleTapped(_ sender: UIButton) {
         if let contact = contact {
             delegate?.onUserRoleTapped(contact: contact)
+        }
+    }
+    
+    private func setupUserRoleMenu() {
+        if #available(iOS 14, *) {
+            let completion: ValueHandler<PrivateShareUserRole> = { [weak self] updatedRole in
+                if updatedRole != self?.contact?.role {
+                    self?.contact?.role = updatedRole
+                    self?.userRoleButton.setTitle(updatedRole.title, for: .normal)
+                    self?.setupUserRoleMenu()
+                    
+                    if let updatedContact = self?.contact {
+                        self?.delegate?.onUserRoleChanged(contact: updatedContact)
+                    }
+                }
+            }
+            
+            let roles: [PrivateShareUserRole] = [.viewer, .editor]
+            let menu = MenuItemsFabric.privateShareUserRoleMenu(roles: roles, currentRole: contact?.role ?? .viewer, completion: completion)
+            userRoleButton.showsMenuAsPrimaryAction = true
+            userRoleButton.menu = menu
+            
+        } else {
+            userRoleButton.addTarget(self, action: #selector(onUserRoleTapped), for: .touchUpInside)
         }
     }
 }
