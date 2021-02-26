@@ -74,7 +74,11 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     private var role = PrivateShareUserRole.viewer {
         didSet {
-            userRoleButton.setTitle(role.title, for: .normal)
+            UIView.performWithoutAnimation {
+                self.userRoleButton.setTitle(role.title, for: .normal)
+                self.userRoleButton.layoutIfNeeded()
+            }
+            
         }
     }
     
