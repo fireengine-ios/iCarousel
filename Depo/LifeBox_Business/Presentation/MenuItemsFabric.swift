@@ -88,6 +88,18 @@ final class MenuItemsFabric {
             }
         }
     }
+    
+    static func privateShareUserRoleMenu(roles: [PrivateShareUserRole], currentRole: PrivateShareUserRole, completion: @escaping ValueHandler<PrivateShareUserRole>) -> UIMenu {
+        
+        let actions: [UIAction] = roles.compactMap { role in
+            let actionState: UIAction.State = (role == currentRole) ? .on : .off
+            return UIAction(title: role.selectionTitle, state: actionState) { _ in
+                completion(role)
+            }
+        }
+        
+        return UIMenu(title: "", children: actions)
+    }
 }
 
 extension ElementTypes {
