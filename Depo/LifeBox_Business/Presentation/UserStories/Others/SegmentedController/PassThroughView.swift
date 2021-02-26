@@ -59,16 +59,6 @@ final class PassThroughView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
     
         let hitView = super.hitTest(point, with: event)
-
-        if let parentViewController = getTopViewController(), let bottomDetailView = parentViewController.bottomDetailView {
-            if parentViewController.getBottomDetailViewState() != .collapsed {
-                if bottomDetailView.frame.contains(point) {
-                    return nil
-                } else {
-                    return hitView
-                }
-            }
-        }
         
         if hitView == self {
             return nil

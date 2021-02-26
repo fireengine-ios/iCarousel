@@ -25,5 +25,4 @@ protocol PhotoVideoDetailRouterInput {
 
 protocol PhotoVideoDetailRouterOutput: class {
     func updateShareInfo()
-    func deleteShareInfo()
 }
