@@ -32,6 +32,8 @@ extension ServerMessageError: LocalizedError {
             return TextConstants.errorServer
         }
         
+        //in case we didn't receive customErrorCode
+        //for some error codes we didn't check this mesage
         switch message {
         case ErrorKeys.accountNotFoundForEmail:
             return TextConstants.forgotPasswordErrorNotRegisteredText
