@@ -194,9 +194,9 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     var selectionTitle: String {
         switch self {
         case .editor:
-            return TextConstants.privateShareRoleSelectionEditor
+            return TextConstants.PrivateShare.role_editor
         case .viewer:
-            return TextConstants.privateShareRoleSelectionViewer
+            return TextConstants.PrivateShare.role_viewer
         case .owner, .varying:
             return ""
         }

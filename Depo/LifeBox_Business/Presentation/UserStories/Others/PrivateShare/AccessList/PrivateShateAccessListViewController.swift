@@ -16,9 +16,9 @@ enum SelectionRole: CaseIterable {
     var title: String {
         switch self {
         case .editor:
-            return TextConstants.privateShareAccessEditor
+            return TextConstants.PrivateShare.role_editor
         case .viewer:
-            return TextConstants.privateShareAccessViewer
+            return TextConstants.PrivateShare.role_viewer
         case .delete:
             return TextConstants.privateShareAccessRemove
         }
