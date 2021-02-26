@@ -1301,3 +1301,12 @@ extension TextConstants {
     static let infoPageRoleViewer = NSLocalizedString("business_app_info_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let infoPageRoleVaries = NSLocalizedString("business_app_info_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+// MARK: - SharedContacts
+extension TextConstants {
+    static let sharedContactsPageTitle = NSLocalizedString("business_app_whohasaccess_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleOwner = NSLocalizedString("business_app_whohasaccess_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleEditor = NSLocalizedString("business_app_whohasaccess_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleViewer = NSLocalizedString("business_app_whohasaccess_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleVaries = NSLocalizedString("business_app_whohasaccess_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
