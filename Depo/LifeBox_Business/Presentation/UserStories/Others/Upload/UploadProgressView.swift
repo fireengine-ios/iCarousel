@@ -13,6 +13,8 @@ final class UploadProgressView: UIView, FromNib {
     @IBOutlet private weak var progressBarHeader: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    private lazy var collectionManager = UploadProgressCollectionManager.with(collectionView: collectionView)
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,9 +34,9 @@ final class UploadProgressView: UIView, FromNib {
         progressBarHeader.roundCorners(corners: [.topLeft, .topRight], radius: 10)
     }
 
-    //MARK: - Private
+    //MARK: - Public
     
-    private func setupCollectionView() {
-        
-    }
+    
 }
+
+
