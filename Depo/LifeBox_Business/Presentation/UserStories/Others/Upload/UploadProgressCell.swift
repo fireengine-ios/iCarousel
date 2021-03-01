@@ -20,26 +20,44 @@ final class UploadProgressCell: UICollectionViewCell {
     
     @IBOutlet private weak var fileName: UILabel! {
         willSet {
+            newValue.text = ""
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     
     @IBOutlet private weak var fileSize: UILabel! {
         willSet {
-            
+            newValue.text = ""
+            newValue.font = .GTAmericaStandardRegularFont(size: 11)
+            newValue.textColor = ColorConstants.Text.textFieldText
         }
     }
     
     @IBOutlet private weak var removeButton: UIButton! {
         willSet {
-            
+            newValue.setTitle("", for: .normal)
+            newValue.setImage(UIImage(named: "cancelButton"), for: .normal)
+        }
+    }
+    
+    @IBOutlet private weak var separator: UIView! {
+        willSet {
+            newValue.backgroundColor = ColorConstants.separator
         }
     }
     
     
-    @IBAction private func onRemoveTapped(_ sender: Any) {
+    //MARK: - Public
+    
+    func setup(with item: WrapData) {
         
+    }
+    
+    //MARK: - Private
+    
+    @IBAction private func onRemoveTapped(_ sender: Any) {
+        //
     }
     
 }
