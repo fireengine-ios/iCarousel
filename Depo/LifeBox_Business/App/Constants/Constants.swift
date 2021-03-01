@@ -485,9 +485,9 @@ struct TextConstants {
     static let tabBarDownloadLabel = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarSyncLabel = NSLocalizedString("Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarMoveLabel = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let tabBarShareLabel = NSLocalizedString("Send a Copy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarInfoLabel = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let tabBarSharePrivatelyLabel = NSLocalizedString("private_share_option", tableName: "OurLocalizable", bundle: .main, comment: "")
+    static let tabBarShareLabel = NSLocalizedString("business_app_share_copy_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarSharePrivatelyLabel = NSLocalizedString("business_app_share_privately_option", tableName: "OurLocalizable", bundle: .main, comment: "")
     
     // MARK: Select Name
     static let selectNameTitleFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
