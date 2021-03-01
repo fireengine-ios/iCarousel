@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PrivateShareSharedContactTableViewCell: UITableViewCell {
+final class PrivateShareSharedContactTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var stackViewTrailingToSuperviewConstraint: NSLayoutConstraint!
     @IBOutlet private weak var stackViewTrailingToImageViewConstraint: NSLayoutConstraint!
