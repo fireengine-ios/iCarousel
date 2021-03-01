@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol PrivateShareSuggestionItemViewDelegate: class {
-    func addItem(contact: SuggestedContact, text: String)
-}
-
 enum SuggestionItemType {
     case phone
     case email
@@ -19,11 +15,11 @@ enum SuggestionItemType {
 
 final class PrivateShareSuggestionItemView: UIView, NibInit {
     
-    static func with(contact: SuggestedContact, text: String, type: SuggestionItemType, delegate: PrivateShareSuggestionItemViewDelegate?) -> PrivateShareSuggestionItemView {
+    static func with(contact: SuggestedContact, text: String, type: SuggestionItemType) -> PrivateShareSuggestionItemView {
         let view = PrivateShareSuggestionItemView.initFromNib()
-        view.delegate = delegate
         view.type = type
         view.contact = contact
+        view.backgroundColor = .clear
         
         if type == .phone {
             let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
@@ -38,21 +34,11 @@ final class PrivateShareSuggestionItemView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .GTAmericaStandardRegularFont(size: 12)
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     
-    @IBOutlet private weak var addButton: UIButton!
-    
-    private weak var delegate: PrivateShareSuggestionItemViewDelegate?
     private var type: SuggestionItemType = .phone
     private var contact: SuggestedContact?
-    
-    @IBAction private func onAddTapped(_ sender: UIButton) {
-        guard let contact = contact else {
-            return
-        }
-        delegate?.addItem(contact: contact, text: titleLabel.text ?? "")
-    }
-    
 }

@@ -32,7 +32,21 @@ struct ColorConstants {
     static let loginTextFieldPlaceholder = UIColor(named: "loginTextFieldPlaceholder")!
     static let loginDescriptionLabel = UIColor(named: "loginDescriptionLabel")!
     static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
-    static let loginPopupDescription = UIColor(named: "loginPopupDescription")
+    static let loginPopupDescription = UIColor(named: "loginPopupDescription")!
+    
+    static let separator = UIColor(named: "separator")!
+    
+    struct PrivateShare {
+        static let shareButtonBackgroundEnabled = UIColor(named: "shareButtonBackgroundEnabled")!
+        static let durationLabelUnselected = UIColor(named: "durationLabel")!
+    }
+    
+    struct Text {
+        static let textFieldPlaceholder = UIColor(named: "textFieldPlaceholder")!
+        static let textFieldText = UIColor(named: "textFieldText")!
+        static let labelTitle = UIColor(named: "labelTitle")!
+        static let labelTitleBackground = UIColor(named: "labelTitleBackground")!
+    }
 
     static let infoPageValueText = UIColor(named: "infoPageValueText")!
     static let infoPageItemTopText = UIColor(named: "infoPageItemTopText")!
@@ -43,6 +57,9 @@ struct ColorConstants {
     static let infoPagePlusButtonText = UIColor(named: "infoPagePlusButtonText")!
     static let infoPageLigherNickname = UIColor(named: "infoPageNicknameLigher")!
     static let infoPageDarkerNickname = UIColor(named: "infoPageNicknameDarker")!
+    static let sharedContactTitleSubtitle = UIColor(named: "sharedContactTitleSubtitle")!
+    static let sharedContactCircleBackground = UIColor(named: "sharedContactCircleBackground")!
+    static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
 
     //MARK: END
     
@@ -256,7 +273,7 @@ extension UIFont {
     }
     
     static func TurkcellSaturaRegFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaReg", size: size)!
+        return UIFont(name: "GTAmericaTrial-Rg", size: size)!
     }
     
     static func TurkcellSaturaBolFont(size: CGFloat = 9) -> UIFont {
@@ -268,7 +285,7 @@ extension UIFont {
     }
     
     static func TurkcellSaturaMedFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaMed", size: size)!
+        return UIFont(name: "GTAmericaTrial-Md", size: size)!
     }
     
     static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
@@ -277,5 +294,9 @@ extension UIFont {
     
     static func GTAmericaStandardRegularFont(size: CGFloat = 18) -> UIFont {
         return UIFont(name: "GTAmericaTrial-Rg", size: size)!
+    }
+    
+    static func GTAmericaStandardMediumFont(size: CGFloat = 18) -> UIFont {
+        return UIFont(name: "GTAmericaTrial-Md", size: size)!
     }
 }

@@ -13,7 +13,7 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
 
     @IBOutlet var editingBar: EditinglBar!
     var output: BottomSelectionTabBarViewOutput!
-    
+    var config: EditingBarConfig?
     var sourceView: UIView?
     
     
@@ -34,7 +34,8 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         
     }
     
-    func setupBar(tintColor: UIColor?, style: UIBarStyle?, items: [ImageNameToTitleTupple]) {
+    func setupBar(tintColor: UIColor?, style: UIBarStyle?, items: [ImageNameToTitleTupple], config: EditingBarConfig) {
+        self.config = config
         if let tintColor = tintColor {
             editingBar.tintColor = tintColor
         } else {
@@ -88,7 +89,7 @@ extension BottomSelectionTabBarViewController: UITabBarDelegate {
             return
         }
         
-        output.bottomBarSelectedItem(index: selectedItemIndex, sender: item)
+        output.bottomBarSelectedItem(index: selectedItemIndex, sender: item, config: config)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {[weak self] in
             self?.unselectAll()

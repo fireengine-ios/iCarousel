@@ -485,8 +485,9 @@ struct TextConstants {
     static let tabBarDownloadLabel = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarSyncLabel = NSLocalizedString("Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarMoveLabel = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let tabBarShareLabel = NSLocalizedString("Share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarInfoLabel = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarShareLabel = NSLocalizedString("business_app_share_copy_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarSharePrivatelyLabel = NSLocalizedString("business_app_share_privately_option", tableName: "OurLocalizable", bundle: .main, comment: "")
     
     // MARK: Select Name
     static let selectNameTitleFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1283,6 +1284,39 @@ extension TextConstants {
     static let loginPageAuthenticationError30Error = NSLocalizedString("business_app_login_pwd_error_code_30", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageShowPassword = NSLocalizedString("business_app_login_show_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageHidePassword = NSLocalizedString("business_app_login_hide_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    
+    struct PrivateShare {
+        static let close_page = NSLocalizedString("business_app_private_share_close_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let close_page_no = NSLocalizedString("business_app_private_share_close_page_no", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let close_page_yes = NSLocalizedString("business_app_private_share_close_page_yes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        
+        static let page_title = NSLocalizedString("business_app_private_share_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let box_name = NSLocalizedString("business_app_private_share_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let box_inside = NSLocalizedString("business_app_private_share_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let role_editor = NSLocalizedString("business_app_private_share_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let role_viewer = NSLocalizedString("business_app_private_share_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let add_message = NSLocalizedString("business_app_private_share_add_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let add_message_inside = NSLocalizedString("business_app_private_share_add_message_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration = NSLocalizedString("business_app_private_share_share_duration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_no_duration = NSLocalizedString("business_app_private_share_share_duration_no_duration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_hour = NSLocalizedString("business_app_private_share_share_duration_1_hour", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_day = NSLocalizedString("business_app_private_share_share_duration_1_day", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_week = NSLocalizedString("business_app_private_share_share_duration_1_week", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_month = NSLocalizedString("business_app_private_share_share_duration_1_month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_year = NSLocalizedString("business_app_private_share_share_duration_1_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let start = NSLocalizedString("business_app_private_share_start", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let success = NSLocalizedString("business_app_private_share_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+        static let fail_errorcode_4115 = NSLocalizedString("business_app_private_share_fail_errorcode_4115", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_4116 = NSLocalizedString("business_app_private_share_fail_errorcode_4116", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_4118 = NSLocalizedString("business_app_private_share_fail_errorcode_4118", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_5101 = NSLocalizedString("business_app_private_share_fail_errorcode_5101", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_5102 = NSLocalizedString("business_app_private_share_fail_errorcode_5102", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        
+        static let shared_with_section_name = NSLocalizedString("business_app_private_share_shared_with_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    }
+    
 }
 
 // MARK: - Info
@@ -1300,4 +1334,13 @@ extension TextConstants {
     static let infoPageRoleEditor = NSLocalizedString("business_app_info_page_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let infoPageRoleViewer = NSLocalizedString("business_app_info_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let infoPageRoleVaries = NSLocalizedString("business_app_info_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - SharedContacts
+extension TextConstants {
+    static let sharedContactsPageTitle = NSLocalizedString("business_app_whohasaccess_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleOwner = NSLocalizedString("business_app_whohasaccess_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleEditor = NSLocalizedString("business_app_whohasaccess_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleViewer = NSLocalizedString("business_app_whohasaccess_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleVaries = NSLocalizedString("business_app_whohasaccess_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

@@ -1930,6 +1930,33 @@
 "business_app_gallery_permission_not_provided_popup_settings_accept" = "Settings";
 "business_app_gallery_permission_not_provided_popup_settings_reject" = "No";
 
+"business_app_private_share_close_page" = "Are you sure to quit from private share?";
+"business_app_private_share_close_page_no" = "Cancel";
+"business_app_private_share_close_page_yes" = "OK";
+ 
+"business_app_private_share_page_title" = "Share Privately";
+"business_app_private_share_box_name" = "Select people to share";
+"business_app_private_share_box_inside" = "Enter e-mail";
+"business_app_private_share_role_editor" = "Editor";
+"business_app_private_share_role_viewer" = "Viewer";
+"business_app_private_share_add_message" = "Add message";
+"business_app_private_share_add_message_inside" = "(optional)";
+"business_app_private_share_share_duration" = "Share Duration:";
+"business_app_private_share_share_duration_no_duration" = "No duration";
+"business_app_private_share_share_duration_1_hour" = "1 hour";
+"business_app_private_share_share_duration_1_day" = "1 day";
+"business_app_private_share_share_duration_1_week" = "1 week";
+"business_app_private_share_share_duration_1_month" = "1 month";
+"business_app_private_share_share_duration_1_year" = "1 year";
+"business_app_private_share_start" = "Share";
+"business_app_private_share_success" = "Shared Successfully";
+"business_app_private_share_shared_with_section_name" = "Shared with";
+
+"business_app_private_share_fail_errorcode_4115" = "Your message is too long. Please shorten your message and try again";
+"business_app_private_share_fail_errorcode_4116" = "You have added so many users to the share";
+"business_app_private_share_fail_errorcode_4118" = "You reached maximum shared item limit";
+"business_app_private_share_fail_errorcode_5101" = "Personal invitee is not accepted";
+"business_app_private_share_fail_errorcode_5102" = "Invitee account not found";
 "business_app_info_page_title_for_files" = "File Info";
 "business_app_info_page_title_for_folders" = "Folder Info";
 "business_app_info_page_name" = "Name";
@@ -1943,3 +1970,9 @@
 "business_app_info_page_role_editor" = "Editor";
 "business_app_info_page_role_viewer" = "Viewer";
 "business_app_info_page_role_varies" = "Varies";
+
+"business_app_whohasaccess_page_title" = "Who Has Access";
+"business_app_whohasaccess_role_owner" = "Owner";
+"business_app_whohasaccess_role_editor" = "Editor";
+"business_app_whohasaccess_role_viewer" = "Viewer";
+"business_app_whohasaccess_role_varies" = "Varies";
