@@ -775,7 +775,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 //            let operations = syncOperations
 //            if operations != nil {
 //                self?.output?.startCancelableAsync {
-//                    UploadService.default.cancelSyncToUseOperations()
+//                    UploadService.shared.cancelSyncToUseOperations()
 //                    cancel()
 //                }
 //            } else {

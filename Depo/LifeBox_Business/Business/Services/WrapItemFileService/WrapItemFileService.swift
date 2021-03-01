@@ -39,7 +39,7 @@ class WrapItemFileService: WrapItemFileOperations {
     
     let remoteFileService = FileService.shared
     let sharedFileService = SharedService()
-    let uploadService = UploadService.default
+    let uploadService = UploadService.shared
     private let hiddenService = HiddenService()
     private lazy var privateShareApiService = PrivateShareApiServiceImpl()
     

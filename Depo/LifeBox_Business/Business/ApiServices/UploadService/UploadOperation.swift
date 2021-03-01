@@ -530,13 +530,13 @@ final class UploadOperation: Operation {
     }
     
     private func upload(uploadParam: UploadRequestParametrs, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
-        return UploadService.default.upload(uploadParam: uploadParam,
+        return UploadService.shared.upload(uploadParam: uploadParam,
                                             success: success,
                                             fail: fail)
     }
     
     private func resumableUpload(uploadParam: ResumableUpload, handler: @escaping ResumableUploadHandler) -> URLSessionTask? {
-        return UploadService.default.resumableUpload(uploadParam: uploadParam, handler: handler)
+        return UploadService.shared.resumableUpload(uploadParam: uploadParam, handler: handler)
     }
 }
 

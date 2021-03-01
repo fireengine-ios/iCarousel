@@ -11,7 +11,7 @@ import SwiftyJSON
 
 final class UploadService: BaseRequestService {
     
-    static let `default` = UploadService()
+    static let shared = UploadService()
     
     static let notificatioUploadServiceDidUpload = "notificatioUploadServiceDidUpload"
     
