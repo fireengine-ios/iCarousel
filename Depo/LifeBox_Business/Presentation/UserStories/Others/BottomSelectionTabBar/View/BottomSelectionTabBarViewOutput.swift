@@ -15,5 +15,5 @@ protocol BottomSelectionTabBarViewOutput {
 
     func viewIsReady()
     
-    func bottomBarSelectedItem(index: Int, sender: UITabBarItem)
+    func bottomBarSelectedItem(index: Int, sender: UITabBarItem, config: EditingBarConfig?)
 }

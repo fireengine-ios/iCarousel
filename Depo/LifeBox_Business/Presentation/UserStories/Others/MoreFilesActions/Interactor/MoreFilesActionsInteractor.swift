@@ -79,6 +79,16 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     var sharingItems = [BaseDataSourceItem]()
     
+    func privateShare(item: [BaseDataSourceItem], sourceRect: CGRect?) {
+        guard !item.isEmpty else {
+            return
+        }
+        
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: item)
+        privateShare()
+    }
+    
     func share(item: [BaseDataSourceItem], sourceRect: CGRect?) {
         guard !item.isEmpty else {
             return
@@ -86,8 +96,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         sharingItems.removeAll()
         sharingItems.append(contentsOf: item)
-        
-        selectShareType(sourceRect: sourceRect)
+        origiginalShare(sourceRect: sourceRect)
     }
     
     func selectShareType(sourceRect: CGRect?) {
@@ -139,14 +148,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 shareViaLink(sourceRect: sourceRect)
             }
         case .original:
-            sync(items: sharingItems, action: { [weak self] in
-                self?.shareOrignalSize(sourceRect: sourceRect)
-                }, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-            })
+            origiginalShare(sourceRect: sourceRect)
         case .private:
             privateShare()
         }
+    }
+    
+    func origiginalShare(sourceRect: CGRect?) {
+        sync(items: sharingItems, action: { [weak self] in
+            self?.shareOrignalSize(sourceRect: sourceRect)
+            }, fail: { errorResponse in
+                UIApplication.showErrorAlert(message: errorResponse.description)
+        })
     }
     
     func privateShare() {
