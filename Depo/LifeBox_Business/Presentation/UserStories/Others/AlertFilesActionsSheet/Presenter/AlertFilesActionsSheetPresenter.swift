@@ -226,7 +226,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         self?.handleAction(type: type, items: currentItems)
                     })
 
-                case .share:
+                case .share, .privateShare:
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
                         self.handleAction(type: type, items: currentItems, sender: sender)
                     })

@@ -38,6 +38,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.move)
             case .share:
                 itemTupple.append(EditinglBar.PreDetermendTypes.share)
+            case .privateShare:
+                itemTupple.append(EditinglBar.PreDetermendTypes.privateShare)
             case .sync:
                 itemTupple.append(EditinglBar.PreDetermendTypes.sync)
             case .syncInProgress:
@@ -57,46 +59,16 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             }
         }
 
-        view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple)
+        view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple, config: config)
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
-        let downloadIndex = originalConfig.elementsConfig.index(of: .download)
-        let syncIndex = originalConfig.elementsConfig.index(of: .sync)
-        let moveToTrashIndex = originalConfig.elementsConfig.index(of: .moveToTrash)
-
-        let validIndexes = [downloadIndex, syncIndex, moveToTrashIndex].compactMap { $0 }
+        guard let items = items as? [WrapData] else { return }
         
-        guard !validIndexes.isEmpty else {
-            return
-        }
-        
-        view.disableItems(at: validIndexes)
-        
-        guard !items.isEmpty else {
-            return
-        }
-        
-        let hasLocal = items.contains(where: { $0.isLocalItem == true })
-        let hasRemote = items.contains(where: { $0.isLocalItem != true })
-
-        if hasRemote {
-            view.enableItems(at: [moveToTrashIndex, downloadIndex].compactMap { $0 })
-        }
-        
-        if hasLocal {
-            view.enableItems(at: [syncIndex].compactMap { $0 })
-        }
-        
-        guard items.allSatisfy({ $0 is WrapData }) else {
-            return
-        }
-        
-        let hasReadOnlyFolders = items.first(where: { ($0 as? WrapData)?.isReadOnlyFolder == false}) == nil
-        
-        if hasReadOnlyFolders {
-            view.disableItems(at: [moveToTrashIndex].compactMap { $0 })
-        }
+        let matchesBitmasks = calculateMatchesBitmasks(from: items)
+        let elementsConfig = createElementTypesArray(from: matchesBitmasks)
+        let config = EditingBarConfig(elementsConfig: elementsConfig, style: .blackOpaque, tintColor: nil)
+        setupConfig(withConfig: config)
     }
     
     override func dismiss(animated: Bool) {
@@ -127,11 +99,84 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         view.showBar(animated: animated, onView: shownSourceView)
     }
     
-    func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
+    
+    /// Returns matches  bitmask value after bitwise "and" of selection
+    private func calculateMatchesBitmasks(from selectedItems: [WrapData]) -> Int {
+        let itemsBitmasksArray = selectedItems.compactMap { $0.privateSharePermission?.bitmask }
+        guard let firstElement = itemsBitmasksArray.first else { return 0 }
+        
+        return Int(itemsBitmasksArray.reduce(firstElement, &))
+    }
+
+    /// Returns element types array calculated from bitmask v
+    private func createElementTypesArray(from bitmask: Int) -> [ElementTypes] {
+        var bitmaskValue = bitmask
+        var elementTypesArray = [ElementTypes]()
+
+        if bitmaskValue >= 512 {
+            // Read acl
+            elementTypesArray.append(.privateShare)
+            bitmaskValue -= 512
+        }
+        
+        if bitmaskValue >= 256 {
+            // Write acl
+            bitmaskValue -= 256
+        }
+        
+        if bitmaskValue >= 128 {
+            // Comment
+            bitmaskValue -= 128
+        }
+        
+        if bitmaskValue >= 64 {
+            // Update
+            bitmaskValue -= 64
+        }
+        
+        if bitmaskValue >= 32 {
+            // Set attribute
+            bitmaskValue -= 32
+        }
+        
+        if bitmaskValue >= 16 {
+            // Delete
+            elementTypesArray.append(.delete)
+            bitmaskValue -= 16
+        }
+        
+        if bitmaskValue >= 8 {
+            // Create
+            bitmaskValue -= 8
+        }
+        
+        if bitmaskValue >= 4 {
+            // List
+            bitmaskValue -= 4
+        }
+        
+        if bitmaskValue >= 2 {
+            // Preview
+            bitmaskValue -= 2
+        }
+        
+        if bitmaskValue >= 1 {
+            // Read
+            elementTypesArray.append(.download)
+            elementTypesArray.append(.share)
+            bitmaskValue -= 1
+        }
+
+        return elementTypesArray
+    }
+    
+
+    
+    // error when added private share
+    func bottomBarSelectedItem(index: Int, sender: UITabBarItem, config: EditingBarConfig?) {
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
             guard let self = self,
-                let bottomBarInteractor = self.interactor as? BottomSelectionTabBarInteractorInput,
-                let types = bottomBarInteractor.currentBarcongfig?.elementsConfig else {
+                  let types = config?.elementsConfig else {
                     return
             }
             
@@ -191,6 +236,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .share:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
                 self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
+            case .privateShare:
+                //\AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share)) // add analytics here later?
+                self.interactor.privateShare(item: selectedItems, sourceRect: self.middleTabBarRect)
+
             case .sync:
                 self.basePassingPresenter?.stopModeSelected()
                 self.interactor.sync(item: selectedItems)
