@@ -1970,3 +1970,9 @@
 "business_app_info_page_role_editor" = "Editor";
 "business_app_info_page_role_viewer" = "Viewer";
 "business_app_info_page_role_varies" = "Varies";
+
+"business_app_whohasaccess_page_title" = "Who Has Access";
+"business_app_whohasaccess_role_owner" = "Owner";
+"business_app_whohasaccess_role_editor" = "Editor";
+"business_app_whohasaccess_role_viewer" = "Viewer";
+"business_app_whohasaccess_role_varies" = "Varies";

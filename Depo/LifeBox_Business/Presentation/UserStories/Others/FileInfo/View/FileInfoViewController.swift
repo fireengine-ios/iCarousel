@@ -37,7 +37,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     }
 
     private func setupNavigationBar() {
-        title = ""
+        title = fileType == .folder ? TextConstants.infoPageTitleForFolder : TextConstants.infoPageTitleForFile
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
