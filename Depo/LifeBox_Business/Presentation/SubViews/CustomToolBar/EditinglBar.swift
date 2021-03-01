@@ -12,7 +12,8 @@ typealias PreDetermendType = (String, String, String)
 class EditinglBar: CustomTabBar {
     
     struct PreDetermendTypes { //use super setup method with these
-        static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel, "")
+        static let share = ("share-copy", TextConstants.tabBarShareLabel, "")
+        static let privateShare = ("share-private", TextConstants.tabBarSharePrivatelyLabel, "")
         static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel, "")
         static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel, "")
         static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
