@@ -32,6 +32,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     @IBOutlet weak var bottomTabBarConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var musicBar: MusicBar!
+    
+    @IBOutlet weak var uploadProgressView: UploadProgressView!
+    @IBOutlet weak var uploadProgressViewHeightConstraint: NSLayoutConstraint!
+    
 
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var externalFileUploadService = ExternalFileUploadService()
@@ -179,6 +183,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
+                self.uploadProgressViewHeightConstraint.constant = self.uploadProgressView.isHidden ? 0 : UIScreen.main.bounds.size.height / 2
                 debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
@@ -194,6 +199,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.musicBarHeightConstraint.constant = 0
+                self.uploadProgressViewHeightConstraint.constant = 0
                 debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
             }, completion: { _ in

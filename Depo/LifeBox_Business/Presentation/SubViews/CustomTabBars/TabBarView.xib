@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18121" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,6 +17,8 @@
                 <outlet property="musicBar" destination="W0f-ko-odc" id="s5m-3f-Nav"/>
                 <outlet property="musicBarHeightConstraint" destination="oLW-8y-KOm" id="Xal-XQ-eOu"/>
                 <outlet property="tabBar" destination="Pdh-iF-uTx" id="M3i-be-cg9"/>
+                <outlet property="uploadProgressView" destination="gxz-1O-hIp" id="aNW-Uy-nY3"/>
+                <outlet property="uploadProgressViewHeightConstraint" destination="avF-El-1x1" id="5uQ-0c-q0C"/>
                 <outlet property="view" destination="iN0-l3-epB" id="mau-IS-hKw"/>
             </connections>
         </placeholder>
@@ -30,6 +33,13 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0i-at-wPy" userLabel="Contenst View">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="802"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxz-1O-hIp" customClass="UploadProgressView" customModule="lifeBox_Business" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="896" width="414" height="0.0"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="avF-El-1x1"/>
+                            </constraints>
                         </view>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="lifeBox_Business" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="802" width="414" height="0.0"/>
@@ -58,9 +68,12 @@
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="W0f-ko-odc" secondAttribute="bottom" id="N1V-LQ-PIK"/>
                         <constraint firstAttribute="trailing" secondItem="i0i-at-wPy" secondAttribute="trailing" id="NOK-Ih-oLn"/>
                         <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="Pdh-iF-uTx" secondAttribute="bottom" id="Nv2-yE-i9E"/>
+                        <constraint firstItem="ero-vK-F2b" firstAttribute="trailing" secondItem="gxz-1O-hIp" secondAttribute="trailing" id="hxk-7z-Xx9"/>
                         <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="iee-hk-ssn"/>
+                        <constraint firstItem="gxz-1O-hIp" firstAttribute="leading" secondItem="ero-vK-F2b" secondAttribute="leading" id="j0G-2e-cWg"/>
                         <constraint firstItem="W0f-ko-odc" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="rlX-hu-WYO"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="uSv-rF-MBk"/>
+                        <constraint firstAttribute="bottom" secondItem="gxz-1O-hIp" secondAttribute="bottom" id="yYv-UQ-NGV"/>
                     </constraints>
                 </view>
             </subviews>
@@ -77,4 +90,9 @@
             <point key="canvasLocation" x="46.376811594202906" y="100.44642857142857"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
