@@ -41,6 +41,7 @@ private enum SwipeState: Equatable {
 protocol MultifileCollectionViewCellActionDelegate: class {
     func onMenuPress(sender: Any, itemModel: Item?)
     func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?)
+    func onRenameStarted(at indexPath: IndexPath)
     func rename(item: WrapData, name: String, completion: @escaping BoolHandler)
     func onLongPress(cell: UICollectionViewCell)
     func onCellSelected(indexPath: IndexPath)
@@ -379,6 +380,10 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             self.renameField.attributedText = NSAttributedString(string: self.itemModel?.name ?? "")
             self.renameField.becomeFirstResponder()
             self.updateNameTextColor(textField: self.renameField)
+            
+            if let indexPath = self.menuButton.indexPath {
+                self.actionDelegate?.onRenameStarted(at: indexPath)
+            }
             
             UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
                 self.nameEditView.alpha = 1

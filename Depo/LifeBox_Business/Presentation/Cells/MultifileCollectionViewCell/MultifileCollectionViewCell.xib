@@ -121,7 +121,7 @@
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLQ-h7-F9e">
                                                 <rect key="frame" x="10" y="59" width="324" height="1"/>
-                                                <color key="backgroundColor" name="multifileCellSeparator"/>
+                                                <color key="backgroundColor" name="separator"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="JcN-9r-1wH"/>
                                                 </constraints>
@@ -216,7 +216,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="multifileCellSeparator">
+        <namedColor name="separator">
             <color red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
