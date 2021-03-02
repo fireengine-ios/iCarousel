@@ -57,6 +57,16 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
     private var info: PrivateShareAccessListInfo?
     weak var delegate: PrivateShareAccessItemTableViewCellDelegate?
 
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = ColorConstants.tableBackground
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        contentView.backgroundColor = ColorConstants.tableBackground
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
         if #available(iOS 14.0, *) {

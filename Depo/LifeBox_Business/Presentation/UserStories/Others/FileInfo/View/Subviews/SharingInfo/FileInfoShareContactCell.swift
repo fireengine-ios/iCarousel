@@ -53,10 +53,19 @@ final class FileInfoShareContactCell: UICollectionViewCell {
     private let imageDownloder = ImageDownloder()
     
     //MARK: -
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView.backgroundColor = ColorConstants.tableBackground
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        contentView.backgroundColor = ColorConstants.tableBackground
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        contentView.backgroundColor = ColorConstants.tableBackground
         button.setTitle("", for: .normal)
         button.setImage(nil, for: .normal)
         button.backgroundColor = .clear

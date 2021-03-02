@@ -56,9 +56,18 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
         }
     }
 
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = ColorConstants.tableBackground
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        contentView.backgroundColor = ColorConstants.tableBackground
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
-        contentView.backgroundColor = ColorConstants.tableBackground
         roleLabel.text = ""
         emailLabel.text = ""
         nameLabel.text = ""

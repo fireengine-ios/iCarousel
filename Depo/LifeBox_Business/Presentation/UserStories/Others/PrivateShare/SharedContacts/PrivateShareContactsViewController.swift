@@ -74,6 +74,9 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
             switch result {
             case .success(let info):
                 self?.shareInfo = info
+                if info.members?.isEmpty == true {
+                    self?.navigationController?.popViewController(animated: true)
+                }
                 self?.privateShareContactTableViewAdapter.update(with: info)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)

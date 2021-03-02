@@ -223,7 +223,7 @@ private extension PrivateShareAccessListViewController {
                 self.analytics.removeFromShare()
                 
                 if self.objects.count == 1 {
-                    self.navigationController?.popViewController(animated: true)
+                    self.dismiss(animated: true, completion: nil)
                 } else {
                     self.updateAccessList()
                 }

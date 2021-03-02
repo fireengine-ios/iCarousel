@@ -38,6 +38,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        interactor.getEntityInfo()
     }
 
     private func setupNavigationBar() {
