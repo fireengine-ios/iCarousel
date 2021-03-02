@@ -117,9 +117,9 @@ final class UploadOperation: Operation {
         
         ItemOperationManager.default.startUploadFile(file: inputItem)
         
-        WidgetService.shared.notifyWidgetAbout(syncFileName: inputItem.name ?? "")
-        
         SingletonStorage.shared.progressDelegates.add(self)
+        
+        UploadProgressManager.shared.update(item: inputItem, status: .inProgress)
         
         attemptUpload()
         
@@ -557,6 +557,7 @@ extension UploadOperation: OperationProgressServiceDelegate {
         }
         
         if requestObject?.currentRequest?.url == url, let uploadType = uploadType {
+            UploadProgressManager.shared.setUploadProgress(for: inputItem, bytesUploaded: bytes, ratio: ratio)
             CardsManager.default.setProgress(ratio: actualRatio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: inputItem)
             ItemOperationManager.default.setProgressForUploadingFile(file: inputItem, progress: actualRatio)
         }

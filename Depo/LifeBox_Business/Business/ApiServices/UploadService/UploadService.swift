@@ -43,6 +43,9 @@ final class UploadService: BaseRequestService {
         return finishedSharedWithMeUploadOperationsCount + 1
     }
     
+    private let uploadProgress = UploadProgressManager.shared
+    
+    
     override init() {
         uploadQueue.maxConcurrentOperationCount = 1
         uploadQueue.qualityOfService = .userInteractive
@@ -260,15 +263,19 @@ final class UploadService: BaseRequestService {
                             //operation was cancelled - not an actual error
                             self.showCardProgress(type: cardType)
                             checkIfFinished()
-                        } else if error.errorCode == 403 {
-                            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.unauthorizedUploadOperation)
                         } else {
-                            self.uploadOperations.removeIfExists(finishedOperation)
-                            if let fileName = finishedOperation.inputItem.name {
-                                self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
+                            if error.errorCode == 403 {
+                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.unauthorizedUploadOperation)
+                            } else {
+                                self.uploadOperations.removeIfExists(finishedOperation)
+                                if let fileName = finishedOperation.inputItem.name {
+                                    self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
+                                }
+                                ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
+                                fail(error)
                             }
-                            ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
-                            fail(error)
+                            
+                            UploadProgressManager.shared.update(item: finishedOperation.inputItem, status: .failed)
                         }
                         return
                     }
@@ -276,6 +283,8 @@ final class UploadService: BaseRequestService {
                     if let fileName = finishedOperation.inputItem.name {
                         self.logEvent("FinishUpload \(fileName)")
                     }
+                    
+                    UploadProgressManager.shared.update(item: finishedOperation.inputItem, status: .completed)
                     
                     self.uploadOperations.removeIfExists(finishedOperation)
                     
@@ -300,11 +309,14 @@ final class UploadService: BaseRequestService {
         }
         
         uploadOperations.append(operations)
+        uploadProgress.append(items: operations.compactMap { $0.inputItem })
         
         uploadQueue.addOperations(operations, waitUntilFinished: false)
         debugLog("UPLOADING upload: \(operations.count) have been added to the upload queue")
         print("UPLOADING upload: \(operations.count) have been added to the upload queue")
+        
         let operationsToReturn = uploadOperations.filter({ $0.uploadType.isContained(in: [uploadType]) })
+        
         returnedOprations(operationsToReturn)
     }
     
@@ -341,6 +353,8 @@ final class UploadService: BaseRequestService {
         
         clearUploadCounters()
         clearSharedWithMeUploadCounters()
+        
+        uploadProgress.cleanAll()
         
         CardsManager.default.stopOperationWith(type: .upload)
         CardsManager.default.stopOperationWith(type: .sharedWithMeUpload)

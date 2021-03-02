@@ -33,7 +33,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var musicBar: MusicBar!
     
-    @IBOutlet weak var uploadProgressView: UploadProgressView!
+    @IBOutlet weak var uploadProgressView: UploadProgressView! {
+        willSet {
+            UploadProgressManager.shared.delegate = newValue
+        }
+    }
     @IBOutlet weak var uploadProgressViewHeightConstraint: NSLayoutConstraint!
     
 

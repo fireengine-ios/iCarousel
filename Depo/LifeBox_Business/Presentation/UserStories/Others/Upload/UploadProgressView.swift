@@ -11,7 +11,14 @@ import UIKit
 final class UploadProgressView: UIView, FromNib {
 
     @IBOutlet private weak var progressBarHeader: UIView!
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        willSet {
+            newValue.allowsSelection = false
+            newValue.isScrollEnabled = true
+            newValue.alwaysBounceVertical = true
+            newValue.alwaysBounceHorizontal = false
+        }
+    }
     
     private lazy var collectionManager = UploadProgressCollectionManager.with(collectionView: collectionView)
     
@@ -33,10 +40,27 @@ final class UploadProgressView: UIView, FromNib {
         
         progressBarHeader.roundCorners(corners: [.topLeft, .topRight], radius: 10)
     }
-
-    //MARK: - Public
-    
-    
 }
 
 
+extension UploadProgressView: UploadProgressManagerDelegate {
+    func append(items: [UploadProgressItem]) {
+        collectionManager.append(items: items)
+    }
+    
+    func remove(items: [UploadProgressItem]) {
+        collectionManager.remove(items: items)
+    }
+    
+    func update(item: UploadProgressItem) {
+        collectionManager.update(item: item)
+    }
+    
+    func setUploadProgress(for item: UploadProgressItem, bytesUploaded: Int, ratio: Float) {
+        //TODO:
+    }
+    
+    func cleanAll() {
+        collectionManager.clean()
+    }
+}
