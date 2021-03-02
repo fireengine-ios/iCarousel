@@ -44,6 +44,7 @@ final class EntityInfoItemTableViewCell: UITableViewCell {
     }
 
     private func setup() {
+        contentView.backgroundColor = ColorConstants.tableBackground
         contentView.addSubview(topLabel)
         contentView.addSubview(bottomLabel)
 
