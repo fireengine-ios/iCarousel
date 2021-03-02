@@ -13,6 +13,36 @@ enum ActionType {
 
 @available(iOS 14.0, *)
 final class MenuItemsFabric {
+
+    static func generateMenuForManagingRole(currentState: ElementTypes,
+                                            actionHandler: @escaping ValueHandler<ActionType>) -> UIMenu {
+        let editorItem = UIAction(title: TextConstants.accessPageRoleEditor,
+                                  image: currentState == .editorRole ? UIImage(named: "selected-checkmark") : nil,
+                                  attributes: []) { _  in
+            actionHandler(.elementType(.editorRole))
+        }
+
+        let viewerItem = UIAction(title: TextConstants.accessPageRoleViewer,
+                                  image: currentState == .viewerRole ? UIImage(named: "selected-checkmark") : nil,
+                                  attributes: []) { _  in
+            actionHandler(.elementType(.viewerRole))
+        }
+
+        let deleteItem = UIAction(title: TextConstants.accessPageRemoveRole,
+                                  image: nil,
+                                  attributes: [.destructive]) { _  in
+            actionHandler(.elementType(.removeRole))
+        }
+
+        return UIMenu(title: "",
+                      identifier: UIMenu.Identifier(rawValue: "selectRoleAction"),
+                      options: .displayInline,
+                      children: [
+                        editorItem,
+                        viewerItem,
+                        deleteItem
+                      ])
+    }
     
     static func generateMenu(for item: BaseDataSourceItem, status: ItemStatus, actionHandler: @escaping ValueHandler<ActionType>) -> UIMenu {
         let actions = ElementTypes.specifiedMoreActionTypes(for: status, item: item)

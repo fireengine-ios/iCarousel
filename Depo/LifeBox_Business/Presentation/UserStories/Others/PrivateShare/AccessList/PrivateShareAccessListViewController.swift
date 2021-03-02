@@ -237,25 +237,54 @@ private extension PrivateShareAccessListViewController {
 //MARK: - PrivateShareAccessTableViewAdapterDelegate
 
 extension PrivateShareAccessListViewController: PrivateShareAccessTableViewAdapterDelegate {
+    func onExactRoleDecisionTapped(_ type: ElementTypes,
+                                   _ info: PrivateShareAccessListInfo,
+                                   _ adapter: PrivateShareAccessTableViewAdapter) {
+        switch type {
+        case .editorRole:
+            changeToEditorRoleIfNeeded(info: info)
+        case .viewerRole:
+            changeToViewerRoleIfNeeded(info: info)
+        case .removeRole:
+            removeRoleWithConfirmationPopup(info: info)
+        default:
+            break
+        }
+    }
+
     func onRoleTapped(sender: UIButton,
                       info: PrivateShareAccessListInfo,
                       _ adapter: PrivateShareAccessTableViewAdapter) {
         showRoleSelectionMenu(sender: sender) { [weak self] role in
             switch role {
             case .editor:
-                if info.role != .editor {
-                    self?.updateUserRole(newRole: .editor, oldRole: info.role, aclId: info.id, uuid: info.object.uuid)
-                }
+                self?.changeToEditorRoleIfNeeded(info: info)
             case .viewer:
-                if info.role != .viewer {
-                    self?.updateUserRole(newRole: .viewer, oldRole: info.role, aclId: info.id, uuid: info.object.uuid)
-                }
+                self?.changeToViewerRoleIfNeeded(info: info)
             case .delete:
-                self?.showDeleteConfirmationPopup { [weak self] isConfirm in
-                    if isConfirm {
-                        self?.deleteUser(aclId: info.id, uuid: info.object.uuid)
-                    }
-                }
+                self?.removeRoleWithConfirmationPopup(info: info)
+            }
+        }
+    }
+}
+
+private extension PrivateShareAccessListViewController {
+    private func changeToEditorRoleIfNeeded(info: PrivateShareAccessListInfo) {
+        if info.role != .editor {
+            updateUserRole(newRole: .editor, oldRole: info.role, aclId: info.id, uuid: info.object.uuid)
+        }
+    }
+
+    private func changeToViewerRoleIfNeeded(info: PrivateShareAccessListInfo) {
+        if info.role != .viewer {
+            updateUserRole(newRole: .viewer, oldRole: info.role, aclId: info.id, uuid: info.object.uuid)
+        }
+    }
+
+    private func removeRoleWithConfirmationPopup(info: PrivateShareAccessListInfo) {
+        showDeleteConfirmationPopup { [weak self] isConfirm in
+            if isConfirm {
+                self?.deleteUser(aclId: info.id, uuid: info.object.uuid)
             }
         }
     }

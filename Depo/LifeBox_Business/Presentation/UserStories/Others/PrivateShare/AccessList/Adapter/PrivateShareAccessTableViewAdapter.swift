@@ -13,6 +13,9 @@ protocol PrivateShareAccessTableViewAdapterDelegate: class {
     func onRoleTapped(sender: UIButton,
                       info: PrivateShareAccessListInfo,
                       _ adapter: PrivateShareAccessTableViewAdapter)
+    func onExactRoleDecisionTapped(_ type: ElementTypes,
+                                   _ info: PrivateShareAccessListInfo,
+                                   _ adapter: PrivateShareAccessTableViewAdapter)
 }
 
 final class PrivateShareAccessTableViewAdapter: NSObject {
@@ -96,9 +99,15 @@ extension PrivateShareAccessTableViewAdapter: UITableViewDataSource {
 
         let object = dataSource[indexPath.row]
         if object.object.uuid == uuid {
-            cell.setup(with: object, fileType: fileType, isRootItem: true)
+            cell.setup(with: object,
+                       fileType: fileType,
+                       isRootItem: true,
+                       indexPath: indexPath)
         } else {
-            cell.setup(with: object, fileType: .folder, isRootItem: false)
+            cell.setup(with: object,
+                       fileType: .folder,
+                       isRootItem: false,
+                       indexPath: indexPath)
         }
 
         cell.delegate = self
@@ -109,7 +118,16 @@ extension PrivateShareAccessTableViewAdapter: UITableViewDataSource {
 // MARK: - PrivateShareAccessItemTableViewCellDelegate
 
 extension PrivateShareAccessTableViewAdapter: PrivateShareAccessItemTableViewCellDelegate {
-    func onRoleTapped(sender: UIButton, info: PrivateShareAccessListInfo) {
+    func onExactRoleDecisionTapped(_ type: ElementTypes,
+                                   _ info: PrivateShareAccessListInfo,
+                                   _ cell: PrivateShareAccessItemTableViewCell) {
+        delegate?.onExactRoleDecisionTapped(type,
+                                            info,
+                                            self)
+    }
+
+    func onRoleTapped(sender: UIButton,
+                      info: PrivateShareAccessListInfo) {
         delegate?.onRoleTapped(sender: sender,
                                info: info,
                                self)

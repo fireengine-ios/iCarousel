@@ -9,7 +9,11 @@
 import UIKit
 
 protocol PrivateShareAccessItemTableViewCellDelegate: class {
-    func onRoleTapped(sender: UIButton, info: PrivateShareAccessListInfo)
+    func onRoleTapped(sender: UIButton,
+                      info: PrivateShareAccessListInfo)
+    func onExactRoleDecisionTapped(_ type: ElementTypes,
+                                   _ info: PrivateShareAccessListInfo,
+                                   _ cell: PrivateShareAccessItemTableViewCell)
 }
 
 final class PrivateShareAccessItemTableViewCell: UITableViewCell {
@@ -40,7 +44,7 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
         }
     }
 
-    @IBOutlet private weak var roleButton: UIButton! {
+    @IBOutlet private weak var roleButton: IndexPathButton! {
         willSet {
             newValue.setTitleColor(ColorConstants.infoPageValueText, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
@@ -53,7 +57,20 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
     private var info: PrivateShareAccessListInfo?
     weak var delegate: PrivateShareAccessItemTableViewCellDelegate?
 
-    func setup(with info: PrivateShareAccessListInfo, fileType: FileType, isRootItem: Bool) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        if #available(iOS 14.0, *) {
+            roleButton.menu = nil
+        }
+        roleButton.setTitle("", for: .normal)
+        nameLabel.text = ""
+        dateLabel.text = ""
+    }
+
+    func setup(with info: PrivateShareAccessListInfo,
+               fileType: FileType,
+               isRootItem: Bool,
+               indexPath: IndexPath) {
         self.info = info
 
         if isRootItem {
@@ -81,12 +98,25 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
             roleButton.setImage(UIImage(named: "access_list_arrow_down"), for: .normal)
             roleButton.isUserInteractionEnabled = true
         }
+
+        setupMenu(indexPath: indexPath)
     }
 
     @IBAction private func onRoleTapped(sender: UIButton) {
+        if #available(iOS 14.0, *) {
+            //use button + UIMenu
+            return
+        }
+
+        triggerHapticFeedback()
         if let info = info {
             delegate?.onRoleTapped(sender: sender, info: info)
         }
+    }
+
+    @objc private func triggerHapticFeedback() {
+        let lightFeedback = UIImpactFeedbackGenerator(style: .light)
+        lightFeedback.impactOccurred()
     }
 }
 
@@ -101,6 +131,48 @@ private extension PrivateShareAccessItemTableViewCell {
             return TextConstants.accessPageRoleVaries
         case .owner:
             return ""
+        }
+    }
+}
+
+private extension PrivateShareAccessItemTableViewCell {
+
+    private func setupMenu(indexPath: IndexPath) {
+        guard #available(iOS 14, *) else {
+            return
+        }
+
+        roleButton.change(indexPath: indexPath)
+
+        roleButton.showsMenuAsPrimaryAction = true
+        roleButton.addTarget(self, action: #selector(triggerHapticFeedback), for: .menuActionTriggered)
+
+        let currentState = info?.role == .editor ? ElementTypes.editorRole : ElementTypes.viewerRole
+
+        let menu = MenuItemsFabric.generateMenuForManagingRole(currentState: currentState) { [weak self] decision in
+            guard
+                let self = self,
+                let info = self.info
+            else {
+                return
+            }
+
+            switch decision {
+            case .elementType(let type):
+                self.triggerHapticFeedback()
+                self.delegate?.onExactRoleDecisionTapped(type,
+                                                         info,
+                                                         self)
+            default:
+                break
+            }
+        }
+        roleButton.menu = menu
+    }
+
+    private func setMenu(isAvailable: Bool) {
+        if isAvailable, let indexPath = roleButton.indexPath {
+            setupMenu(indexPath: indexPath)
         }
     }
 }

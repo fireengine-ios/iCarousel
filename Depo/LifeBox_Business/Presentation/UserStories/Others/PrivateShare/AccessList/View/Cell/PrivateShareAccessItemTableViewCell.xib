@@ -49,7 +49,7 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4M4-FR-4EZ">
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4M4-FR-4EZ" customClass="IndexPathButton" customModule="lifeBox_Business" customModuleProvider="target">
                         <rect key="frame" x="254" y="7.5" width="46" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="TkH-GH-4pK"/>

@@ -1983,3 +1983,4 @@
 "business_app_access_page_role_varies" = "Varies";
 "business_app_access_page_expire_date" = "Expires on: %@";
 "business_app_access_page_from_folder" = "From %@ folder";
+"business_app_access_page_role_change_remove" = "Remove";

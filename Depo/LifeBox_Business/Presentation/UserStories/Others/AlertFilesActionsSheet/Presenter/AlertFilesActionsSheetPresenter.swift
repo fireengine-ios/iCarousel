@@ -220,7 +220,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .delete,
                      .endSharing,
                      .leaveSharing,
-                     .moveToTrashShared:
+                     .moveToTrashShared,
+                     .editorRole,
+                     .viewerRole,
+                     .removeRole:
                     
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
                         self?.handleAction(type: type, items: currentItems)
