@@ -35,13 +35,13 @@
       "size" : "40x40"
     },
     {
-      "filename" : "Icon-App-60x60@2x.png",
+      "filename" : "120x120_ios_Lifebox_Business.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "Icon-App-60x60@3x.png",
+      "filename" : "180x180_ios_Lifebox_Business.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -81,25 +81,24 @@
       "size" : "40x40"
     },
     {
-      "filename" : "Icon-App-76x76@1x.png",
+      "filename" : "76x76_ios_Lifebox_Business.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "76x76"
     },
     {
-      "filename" : "Icon-App-76x76@2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "76x76"
     },
     {
-      "filename" : "Icon-App-83.5x83.5@2x.png",
+      "filename" : "167x167_ios_Lifebox_Business.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "83.5x83.5"
     },
     {
-      "filename" : "ItunesArtwork@2x.png",
+      "filename" : "1024x1024_ios_Lifebox_Business.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
