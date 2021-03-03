@@ -266,10 +266,7 @@ final class LoginViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
-        
-        setNavigationTitle(title: TextConstants.loginTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     @objc private func showHideButtonClicked(_ button: UIButton) {
