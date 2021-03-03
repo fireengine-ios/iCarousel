@@ -16,7 +16,11 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         return controller
     }
     
-    @IBOutlet private weak var contactsTableView: UITableView!
+    @IBOutlet private weak var contactsTableView: UITableView! {
+        willSet {
+            newValue.backgroundColor = ColorConstants.tableBackground
+        }
+    }
 
     private var privateShareContactTableViewAdapter: PrivateShareContactTableViewAdapter!
     private var shareInfo: SharedFileInfo?
@@ -70,6 +74,9 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
             switch result {
             case .success(let info):
                 self?.shareInfo = info
+                if info.members?.isEmpty == true {
+                    self?.navigationController?.popViewController(animated: true)
+                }
                 self?.privateShareContactTableViewAdapter.update(with: info)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
@@ -139,6 +146,7 @@ extension PrivateShareContactsViewController: PrivateShareContactTableViewAdapte
                                                        uuid: uuid,
                                                        contact: contact,
                                                        fileType: fileType)
-        router.pushViewController(viewController: controller)
+        let navC = UINavigationController(rootViewController: controller)
+        router.presentViewController(controller: navC)
     }
 }
