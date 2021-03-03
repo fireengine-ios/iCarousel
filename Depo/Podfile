@@ -159,18 +159,6 @@ target 'lifeBox_Business_Bundle' do
   core_pods
 end
 
-target 'lifeBox_Business_Shared' do
-  sharing_pods
-end
-
-target 'lifeBox_Business_FileProvider' do
-  file_provider_pods
-end
-
-target 'lifeBox_Business_FileProviderUI' do
-  file_provider_ui_pods
-end
-
 target "lifeBox_Business_NotificationService" do
   notification_pods
 end
