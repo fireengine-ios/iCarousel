@@ -50,6 +50,7 @@ struct ColorConstants {
     
     struct UploadProgress {
         static let cellBackground = UIColor(named: "uploadProgressCellBackground")!
+        static let headerBackground = UIColor(named: "confirmationPopupTitle")!
     }
 
     static let infoPageValueText = UIColor(named: "infoPageValueText")!

@@ -67,6 +67,17 @@ final class UploadProgressCollectionManager: NSObject {
         reload()
     }
     
+    func setProgress(item: UploadProgressItem, ratio: Float) {
+        guard
+            let index = sortedItems.index(where: { $0.item == item.item }),
+            let cell = collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as? UploadProgressCell
+        else {
+            return
+        }
+        
+        cell.set(ratio: ratio)
+    }
+    
     //MARK: - Private
     
     private func setupCollection() {
@@ -96,6 +107,7 @@ extension UploadProgressCollectionManager: UICollectionViewDelegate {
         }
         
         cell.setup(with: item)
+        cell.delegate = self
     }
 }
 
@@ -136,5 +148,25 @@ extension UploadProgressCollectionManager: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+}
 
+
+extension UploadProgressCollectionManager: UploadProgressCellDelegate {
+    func onRemoveTapped(cell: UploadProgressCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else {
+            return
+        }
+
+        sortedItems.safeRemove(at: indexPath.row) { [weak self] removedItem in
+            
+            UploadService.shared.cancelOperation(item: removedItem.item)
+            
+            self?.collectionView.performBatchUpdates {
+                self?.collectionView.deleteItems(at: [indexPath])
+            } completion: { _ in
+                //
+            }
+
+        }
+    }
 }

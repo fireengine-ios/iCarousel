@@ -1334,3 +1334,8 @@ extension TextConstants {
     static let infoPageRoleViewer = NSLocalizedString("business_app_info_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let infoPageRoleVaries = NSLocalizedString("business_app_info_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+
+extension TextConstants {
+    static let uploadProgressHederTitle = NSLocalizedString("business_app_upload_bar_uploading_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "") 
+}

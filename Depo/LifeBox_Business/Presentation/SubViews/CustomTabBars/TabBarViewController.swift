@@ -35,6 +35,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var uploadProgressView: UploadProgressView! {
         willSet {
+            newValue.delegate = self
             UploadProgressManager.shared.delegate = newValue
         }
     }
@@ -187,7 +188,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
-                self.uploadProgressViewHeightConstraint.constant = self.uploadProgressView.isHidden ? 0 : UIScreen.main.bounds.size.height / 2
+                self.uploadProgressViewHeightConstraint.constant = self.uploadProgressView.isMinified ? 50 : UIScreen.main.bounds.size.height / 2
+                self.uploadProgressViewHeightConstraint.constant = self.uploadProgressView.isHidden ? 0 : self.uploadProgressViewHeightConstraint.constant
                 debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
@@ -352,5 +354,16 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         }
+    }
+}
+
+
+extension TabBarViewController: UploadProgressViewDelegate {
+    func show(isMinified: Bool) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.uploadProgressViewHeightConstraint.constant = isMinified ? 50 : UIScreen.main.bounds.size.height / 2
+            self.view.layoutIfNeeded()
+        })
+                        
     }
 }

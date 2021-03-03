@@ -8,33 +8,14 @@
 
 import Foundation
 
-enum UploadProgressStatus {
-    case ready
-    case inProgress
-    case completed
-    case failed
-}
-
-final class UploadProgressItem {
-    private(set) var item: WrapData?
-    private(set) var status: UploadProgressStatus = .ready
-    
-    init(item: WrapData, status: UploadProgressStatus) {
-        self.item = item
-        self.status = status
-    }
-    
-    func set(status: UploadProgressStatus) {
-        self.status = status
-    }
-}
-
 protocol UploadProgressManagerDelegate: class {
     func append(items: [UploadProgressItem])
     func remove(items: [UploadProgressItem])
     func setUploadProgress(for item: UploadProgressItem, bytesUploaded: Int, ratio: Float)
     func update(item: UploadProgressItem)
     func cleanAll()
+    
+    func setUploadProgress(uploaded: Int, total: Int)
 }
 
 
@@ -66,5 +47,9 @@ final class UploadProgressManager {
     
     func cleanAll() {
         delegate?.cleanAll()
+    }
+    
+    func set(uploaded: Int, total: Int) {
+        delegate?.setUploadProgress(uploaded: uploaded, total: total)
     }
 }

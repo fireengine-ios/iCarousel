@@ -160,14 +160,22 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    private func showCardProgress(type: OperationType, object: WrapData? = nil, newItemsCount: Int = 0, forced: Bool = false) {
+    private func showProgress(type: OperationType, object: WrapData? = nil, newItemsCount: Int = 0, forced: Bool = false) {
+        
+        let uploaded = finishedUploadOperationsCount + finishedSharedWithMeUploadOperationsCount + 1
+        let total = allUploadOperationsCount + allSharedWithMeUploadOperationsCount + newItemsCount
+        
+        if total >= uploaded {
+            uploadProgress.set(uploaded: uploaded, total: total)
+        }
+        
         switch type {
             case .upload:
                 showUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
-                
+
             case .sharedWithMeUpload:
                 showSharedWithMeUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
-                
+
             default:
                 assertionFailure()
                 showUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
@@ -222,7 +230,7 @@ final class UploadService: BaseRequestService {
         }
         
         let cardType = UploadService.convertUploadType(uploadType: uploadType)
-        showCardProgress(type: cardType, object: firstObject, newItemsCount: itemsToUpload.count, forced: true)
+        showProgress(type: cardType, object: firstObject, newItemsCount: itemsToUpload.count, forced: true)
         
         // change cells into inQueue state
         itemsToUpload.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
@@ -250,6 +258,8 @@ final class UploadService: BaseRequestService {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                             }
                             
+                            self.uploadProgress.cleanAll()
+                            
                             ItemOperationManager.default.syncFinished()
                             
                             self.logSyncSettings(state: "FinishedUploadFileList")
@@ -261,7 +271,8 @@ final class UploadService: BaseRequestService {
                         print("UPLOAD: \(error.description)")
                         if finishedOperation.isCancelled {
                             //operation was cancelled - not an actual error
-                            self.showCardProgress(type: cardType)
+                            self.showProgress(type: cardType)
+                            
                             checkIfFinished()
                         } else {
                             if error.errorCode == 403 {
@@ -294,7 +305,7 @@ final class UploadService: BaseRequestService {
                         self.finishedUploadOperationsCount += 1
                     }
                     
-                    self.showCardProgress(type: cardType)
+                    self.showProgress(type: cardType)
                     
                     if let outputItem = finishedOperation.outputItem {
                         ItemOperationManager.default.finishedUploadFile(file: outputItem)
@@ -373,36 +384,18 @@ final class UploadService: BaseRequestService {
         cancelAndRemove(operations: operations)
     }
     
-    func cancelOperations(md5s: [String]) {
-        guard !md5s.isEmpty else {
+    func cancelOperation(item: WrapData?) {
+        guard let item = item else {
             return
         }
         
         var operationsToRemove = uploadOperations.filter {
-            !$0.isCancelled && md5s.contains($0.inputItem.md5)
+            !$0.isCancelled && $0.inputItem == item
         }
         
         cancelAndRemove(operations: operationsToRemove)
         
-        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
-        operationsToRemove.removeAll()
-    }
-    
-    func cancelOperations(with assets: [PHAsset]?) {
-        guard let assets = assets else {
-            return
-        }
-        
-        var operationsToRemove = uploadOperations.filter { operation -> Bool in
-            if let asset = operation.inputItem.asset {
-                return !operation.isCancelled && assets.contains(asset)
-            }
-            return false
-        }
-        
-        cancelAndRemove(operations: operationsToRemove)
-        
-        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+        print(" removed \(operationsToRemove.count) operations")
         operationsToRemove.removeAll()
     }
     

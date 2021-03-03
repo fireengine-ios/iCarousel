@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol UploadProgressCellDelegate: class {
+    func onRemoveTapped(cell: UploadProgressCell)
+}
+
 final class UploadProgressCell: UICollectionViewCell {
     static let height: CGFloat = 48.0
     
@@ -54,6 +58,19 @@ final class UploadProgressCell: UICollectionViewCell {
         }
     }
     
+    private var circleLoader: CircleProgressView = {
+        let loader = CircleProgressView()
+        loader.progressWidth = 2
+        loader.backWidth = 2
+        loader.progressRatio = 0
+        loader.backColor = .white
+        loader.progressColor = ColorConstants.Text.labelTitle
+        return loader
+    }()
+    
+    
+    weak var delegate: UploadProgressCellDelegate?
+    
     //MARK: - Override
     
     override func awakeFromNib() {
@@ -69,9 +86,18 @@ final class UploadProgressCell: UICollectionViewCell {
         fileSize.text = ""
         thumbnail.image = nil
         removeButton.isHidden = false
+        circleLoader.set(progress: 0, withAnimation: false)
         progressStatusView.subviews.forEach { $0.removeFromSuperview() }
+        
+        delegate = nil
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        circleLoader.layoutIfNeeded()
+    }
+   
     //MARK: - Public
     
     func setup(with item: UploadProgressItem) {
@@ -97,6 +123,12 @@ final class UploadProgressCell: UICollectionViewCell {
         }
     }
     
+    func set(ratio: Float) {
+        DispatchQueue.main.async {
+            self.circleLoader.set(progress: CGFloat(ratio), withAnimation: true)
+        }
+    }
+    
     //MARK: - Private
     
     private func createView(for status: UploadProgressStatus) -> UIView? {
@@ -114,7 +146,7 @@ final class UploadProgressCell: UICollectionViewCell {
                 return imageView
                 
             case .inProgress:
-                return nil
+                return circleLoader
                 
             case .ready:
                 return nil
@@ -122,7 +154,7 @@ final class UploadProgressCell: UICollectionViewCell {
     }
     
     @IBAction private func onRemoveTapped(_ sender: Any) {
-        //TODO:
+        delegate?.onRemoveTapped(cell: self)
     }
     
 }

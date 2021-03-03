@@ -8,9 +8,17 @@
 
 import UIKit
 
+protocol UploadProgressViewDelegate: class {
+    func show(isMinified: Bool)
+}
+
 final class UploadProgressView: UIView, FromNib {
 
-    @IBOutlet private weak var progressBarHeader: UIView!
+    @IBOutlet private weak var progressHeaderContainer: UIView! {
+        willSet {
+            newValue.clipsToBounds = true
+        }
+    }
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
             newValue.allowsSelection = false
@@ -21,16 +29,27 @@ final class UploadProgressView: UIView, FromNib {
     }
     
     private lazy var collectionManager = UploadProgressCollectionManager.with(collectionView: collectionView)
+    private lazy var progressHeader = UploadProgressHeader.initFromNib()
+    
+    private(set) var isMinified = false {
+        didSet {
+            delegate?.show(isMinified: isMinified)
+        }
+    }
+    
+    weak var delegate: UploadProgressViewDelegate?
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupFromNib()
+        setupHeader()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupFromNib()
+        setupHeader()
     }
     
     //MARK: - Override
@@ -38,7 +57,14 @@ final class UploadProgressView: UIView, FromNib {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        progressBarHeader.roundCorners(corners: [.topLeft, .topRight], radius: 10)
+        progressHeaderContainer.roundCorners(corners: [.topLeft, .topRight], radius: 10)
+    }
+    
+    private func setupHeader() {
+        progressHeader.delegate = self
+        progressHeaderContainer.addSubview(progressHeader)
+        progressHeader.translatesAutoresizingMaskIntoConstraints = false
+        progressHeader.pinToSuperviewEdges()
     }
 }
 
@@ -57,10 +83,22 @@ extension UploadProgressView: UploadProgressManagerDelegate {
     }
     
     func setUploadProgress(for item: UploadProgressItem, bytesUploaded: Int, ratio: Float) {
-        //TODO:
+        collectionManager.setProgress(item: item, ratio: ratio)
     }
     
     func cleanAll() {
         collectionManager.clean()
+        progressHeader.clean()
+    }
+    
+    func setUploadProgress(uploaded: Int, total: Int) {
+        progressHeader.set(uploaded: uploaded, total: total)
+    }
+}
+
+
+extension UploadProgressView: UploadProgressHeaderDelegate {
+    func onActionButtonTap() {
+        isMinified = !isMinified
     }
 }
