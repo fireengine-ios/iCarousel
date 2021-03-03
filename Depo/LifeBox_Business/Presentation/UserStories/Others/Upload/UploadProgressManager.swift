@@ -11,11 +11,12 @@ import Foundation
 protocol UploadProgressManagerDelegate: class {
     func append(items: [UploadProgressItem])
     func remove(item: UploadProgressItem)
-    func setUploadProgress(for item: UploadProgressItem, bytesUploaded: Int, ratio: Float)
     func update(item: UploadProgressItem)
+    
     func cleanAll()
     
     func setUploadProgress(uploaded: Int, total: Int)
+    func setUploadProgress(for item: UploadProgressItem, bytesUploaded: Int, ratio: Float)
 }
 
 

@@ -20,6 +20,7 @@ final class UploadProgressView: UIView, FromNib {
             newValue.clipsToBounds = true
         }
     }
+    
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
             newValue.backgroundColor = ColorConstants.UploadProgress.cellBackground
@@ -51,6 +52,7 @@ final class UploadProgressView: UIView, FromNib {
     
     weak var delegate: UploadProgressViewDelegate?
     
+    //MARK: - Override
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -64,13 +66,13 @@ final class UploadProgressView: UIView, FromNib {
         setupHeader()
     }
     
-    //MARK: - Override
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         
         progressHeaderContainer.roundCorners(corners: [.topLeft, .topRight], radius: 10)
     }
+    
+    //MARK: - Private
     
     private func setupHeader() {
         progressHeader.delegate = self

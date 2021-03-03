@@ -39,6 +39,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UploadProgressManager.shared.delegate = newValue
         }
     }
+    
     @IBOutlet weak var uploadProgressViewHeightConstraint: NSLayoutConstraint!
     
 
