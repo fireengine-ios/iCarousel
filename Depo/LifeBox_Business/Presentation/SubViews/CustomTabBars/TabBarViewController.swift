@@ -188,8 +188,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
-                self.uploadProgressViewHeightConstraint.constant = self.uploadProgressView.isMinified ? 50 : UIScreen.main.bounds.size.height / 2
-                self.uploadProgressViewHeightConstraint.constant = self.uploadProgressView.isHidden ? 0 : self.uploadProgressViewHeightConstraint.constant
+                self.setHeightConstantForUploadProgress()
                 debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
@@ -205,7 +204,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.musicBarHeightConstraint.constant = 0
-                self.uploadProgressViewHeightConstraint.constant = 0
+                self.setHeightConstantForUploadProgress()
                 debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
             }, completion: { _ in
@@ -359,11 +358,30 @@ extension TabBarViewController: TabBarActionHandler {
 
 
 extension TabBarViewController: UploadProgressViewDelegate {
-    func show(isMinified: Bool) {
+    func show() {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.uploadProgressViewHeightConstraint.constant = isMinified ? 50 : UIScreen.main.bounds.size.height / 2
+            self.setHeightConstantForUploadProgress()
             self.view.layoutIfNeeded()
         })
-                        
+    }
+    
+    func hide() {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.setHeightConstantForUploadProgress()
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    private func setHeightConstantForUploadProgress() {
+        let value: CGFloat
+        if uploadProgressView.isClosed {
+            value = 0
+        } else if uploadProgressView.isMinified {
+            value = 50
+        } else {
+            value = UIScreen.main.bounds.size.height / 2
+        }
+        
+        uploadProgressViewHeightConstraint.constant = value
     }
 }

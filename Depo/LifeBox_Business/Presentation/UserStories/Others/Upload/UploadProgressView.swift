@@ -9,7 +9,8 @@
 import UIKit
 
 protocol UploadProgressViewDelegate: class {
-    func show(isMinified: Bool)
+    func show()
+    func hide()
 }
 
 final class UploadProgressView: UIView, FromNib {
@@ -31,9 +32,19 @@ final class UploadProgressView: UIView, FromNib {
     private lazy var collectionManager = UploadProgressCollectionManager.with(collectionView: collectionView)
     private lazy var progressHeader = UploadProgressHeader.initFromNib()
     
-    private(set) var isMinified = false {
+    private(set) var isMinified = true {
         didSet {
-            delegate?.show(isMinified: isMinified)
+            delegate?.show()
+        }
+    }
+    
+    private(set) var isClosed = true {
+        didSet {
+            if isClosed {
+                delegate?.hide()
+            } else {
+                delegate?.show()
+            }
         }
     }
     
@@ -71,6 +82,7 @@ final class UploadProgressView: UIView, FromNib {
 
 extension UploadProgressView: UploadProgressManagerDelegate {
     func append(items: [UploadProgressItem]) {
+        isClosed = false
         collectionManager.append(items: items)
     }
     
@@ -87,6 +99,7 @@ extension UploadProgressView: UploadProgressManagerDelegate {
     }
     
     func cleanAll() {
+        isClosed = true
         collectionManager.clean()
         progressHeader.clean()
     }
