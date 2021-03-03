@@ -9,15 +9,21 @@
 import Foundation
 
 
-enum UploadProgressStatus {
+enum UploadProgressStatus: Int, Comparable {
+    
+    static func < (lhs: UploadProgressStatus, rhs: UploadProgressStatus) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+    
+    case inProgress = 0
     case ready
-    case inProgress
     case completed
     case failed
 }
 
 final class UploadProgressItem {
     private(set) var item: WrapData?
+    private let addedToQueue = Date()
     private(set) var status: UploadProgressStatus = .ready
     
     init(item: WrapData, status: UploadProgressStatus) {
@@ -28,4 +34,12 @@ final class UploadProgressItem {
     func set(status: UploadProgressStatus) {
         self.status = status
     }
+}
+
+extension UploadProgressItem {
+  enum Comparison {
+    static let ascending: (UploadProgressItem, UploadProgressItem) -> Bool = {
+        return ($0.status, $0.addedToQueue, $0.item?.name ?? "") < ($1.status, $1.addedToQueue, $0.item?.name ?? "")
+    }
+  }
 }

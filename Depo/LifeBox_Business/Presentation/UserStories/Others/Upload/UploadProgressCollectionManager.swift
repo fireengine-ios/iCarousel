@@ -27,8 +27,10 @@ final class UploadProgressCollectionManager: NSObject {
     }
     
     func reload() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+        sortItems { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
         }
     }
     
@@ -86,6 +88,10 @@ final class UploadProgressCollectionManager: NSObject {
             self.collectionView.delegate = self
             self.collectionView.dataSource = self
         }
+    }
+    
+    private func sortItems(completion: @escaping VoidHandler) {
+        sortedItems.sortItself(by: UploadProgressItem.Comparison.ascending, completion: completion)
     }
 }
 

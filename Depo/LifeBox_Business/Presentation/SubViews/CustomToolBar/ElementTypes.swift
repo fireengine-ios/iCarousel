@@ -199,7 +199,7 @@ enum ElementTypes {
                 return TextConstants.stopSharingSuccess
             case .leaveSharing:
                 return TextConstants.leaveSharingSuccess
-            case .moveToTrashShared, .moveToTrash:
+            case .delete, .moveToTrashShared, .moveToTrash:
                 return TextConstants.deleteSuccess
             case .rename:
                 return TextConstants.renameSuccess

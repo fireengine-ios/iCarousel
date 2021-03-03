@@ -30,7 +30,7 @@ class CircleProgressView: UIView {
     
     @IBInspectable var progressRatio: CGFloat = 0.5 {
         didSet {
-            print("RATIO: \(progressRatio)")
+//            print("RATIO: \(progressRatio)")
             let optimisedValue = min(max(progressRatio, 0.0), 1.0)
             if progressRatio != optimisedValue {
                 progressRatio = optimisedValue
