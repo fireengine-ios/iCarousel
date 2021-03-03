@@ -166,7 +166,7 @@ extension UIViewController {
         }
 
         navBar?.setBackgroundImage(backgroundImg, for: .default)
-        navBar?.shadowImage = nil
+        navBar?.shadowImage = UIImage()
 
         navBar?.backgroundColor = .white
         navBar?.barTintColor = .white

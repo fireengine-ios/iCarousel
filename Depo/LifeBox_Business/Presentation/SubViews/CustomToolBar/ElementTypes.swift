@@ -52,6 +52,7 @@ enum ElementTypes {
     case shareAlbum
     case makeAlbumCover
     //private share
+    case privateShare
     case endSharing
     case leaveSharing
     case moveToTrashShared
@@ -314,6 +315,8 @@ enum ElementTypes {
             return TextConstants.actionStopSharing
         case .leaveSharing:
             return TextConstants.actionLeaveSharing
+        case .privateShare:
+            return TextConstants.actionSharePrivately
         default:
             return ""
         }

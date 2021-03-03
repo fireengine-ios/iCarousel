@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivateShareContactsViewController" customModule="Billo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivateShareContactsViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="contactsTableView" destination="hXJ-pM-PBw" id="c1X-IN-EEd"/>
-                <outlet property="endSharingButton" destination="KZg-Tb-y6y" id="sAk-5a-mxX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,23 +24,10 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZg-Tb-y6y" customClass="WhiteButtonWithRoundedCorner" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="117" y="832" width="180" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="MQK-Jg-hf1"/>
-                        <constraint firstAttribute="height" constant="44" id="R45-dR-Ai0"/>
-                    </constraints>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="onEndShare" destination="-1" eventType="touchUpInside" id="YZY-2F-Bp8"/>
-                    </connections>
-                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="KZg-Tb-y6y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3ic-4t-8fA"/>
-                <constraint firstAttribute="bottom" secondItem="KZg-Tb-y6y" secondAttribute="bottom" constant="20" id="5gb-SH-dIh"/>
                 <constraint firstItem="hXJ-pM-PBw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Q1c-gL-DtD"/>
                 <constraint firstAttribute="bottom" secondItem="hXJ-pM-PBw" secondAttribute="bottom" id="SL1-0T-tJ4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hXJ-pM-PBw" secondAttribute="trailing" id="gxN-Tz-U1R"/>

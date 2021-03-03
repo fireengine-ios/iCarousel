@@ -23,7 +23,7 @@ private final class TrashBinBottomTabBarPresenter: BottomSelectionTabBarPresente
         self.delegate = delegate
     }
     
-    override func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
+    override func bottomBarSelectedItem(index: Int, sender: UITabBarItem, config: EditingBarConfig?) {
         delegate?.bottomBarSelectedItem(types[index])
     }
 }

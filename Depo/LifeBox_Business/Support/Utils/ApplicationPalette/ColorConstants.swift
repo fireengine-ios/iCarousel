@@ -62,6 +62,9 @@ struct ColorConstants {
     static let infoPagePlusButtonText = UIColor(named: "infoPagePlusButtonText")!
     static let infoPageLigherNickname = UIColor(named: "infoPageNicknameLigher")!
     static let infoPageDarkerNickname = UIColor(named: "infoPageNicknameDarker")!
+    static let sharedContactTitleSubtitle = UIColor(named: "sharedContactTitleSubtitle")!
+    static let sharedContactCircleBackground = UIColor(named: "sharedContactCircleBackground")!
+    static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
 
     //MARK: END
     
