@@ -23,11 +23,11 @@ final class EntityInfoHeader: UIView {
     }
 
     private lazy var label: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.GTAmericaStandardRegularFont()
-        lbl.textColor = ColorConstants.infoPageValueText
-        return lbl
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.GTAmericaStandardRegularFont()
+        label.textColor = ColorConstants.infoPageValueText
+        return label
     }()
 
     private lazy var separatorView: UIView = {

@@ -15,28 +15,28 @@ final class PrivateShareAccessHeaderView: UIView {
     }
 
     private lazy var nameLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-        lbl.textColor = ColorConstants.infoPageValueText
-        return lbl
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+        label.textColor = ColorConstants.infoPageValueText
+        return label
     }()
 
     private lazy var emailLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-        lbl.textColor = ColorConstants.sharedContactTitleSubtitle
-        return lbl
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+        label.textColor = ColorConstants.sharedContactTitleSubtitle
+        return label
     }()
 
     private lazy var stackView: UIStackView = {
-        let stk = UIStackView()
-        stk.translatesAutoresizingMaskIntoConstraints = false
-        stk.axis = .vertical
-        stk.spacing = Constants.emailToLabelVerticalOffset
-        stk.backgroundColor = .clear
-        return stk
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = Constants.emailToLabelVerticalOffset
+        stack.backgroundColor = .clear
+        return stack
     }()
 
     override init(frame: CGRect) {
