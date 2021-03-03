@@ -266,6 +266,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return nil
     }
 
+    
+    @IBAction func tempUploadStart(_ sender: Any) {
+        handleAction(.upload(type: .regular))
+    }
 }
 
 //MARK: - UIImagePickerControllerDelegate
@@ -359,17 +363,21 @@ extension TabBarViewController: TabBarActionHandler {
 
 extension TabBarViewController: UploadProgressViewDelegate {
     func show() {
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.setHeightConstantForUploadProgress()
-            self.view.layoutIfNeeded()
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+                self.setHeightConstantForUploadProgress()
+                self.view.layoutIfNeeded()
+            })
+        }
     }
     
     func hide() {
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.setHeightConstantForUploadProgress()
-            self.view.layoutIfNeeded()
-        })
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+                self.setHeightConstantForUploadProgress()
+                self.view.layoutIfNeeded()
+            })
+        }
     }
     
     private func setHeightConstantForUploadProgress() {
