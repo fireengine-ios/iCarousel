@@ -60,6 +60,9 @@ struct ColorConstants {
     static let sharedContactTitleSubtitle = UIColor(named: "sharedContactTitleSubtitle")!
     static let sharedContactCircleBackground = UIColor(named: "sharedContactCircleBackground")!
     static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
+    static let accessListItemExpireDate = UIColor(named: "accessListItemExpireDate")!
+    static let accessListItemName = UIColor(named: "accessListItemName")!
+    static let tableBackground = UIColor(named: "tableBackground")!
 
     //MARK: END
     

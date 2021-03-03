@@ -58,6 +58,7 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
                                                        uuid: uuid,
                                                        contact: contact,
                                                        fileType: fileType)
-        router.pushViewController(viewController: controller)
+        let navC = UINavigationController(rootViewController: controller)
+        router.presentViewController(controller: navC)
     }
 }

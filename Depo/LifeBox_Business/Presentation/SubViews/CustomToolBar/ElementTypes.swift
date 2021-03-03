@@ -56,6 +56,10 @@ enum ElementTypes {
     case endSharing
     case leaveSharing
     case moveToTrashShared
+    //changing role
+    case editorRole
+    case viewerRole
+    case removeRole
     
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var activeState: [ElementTypes] = [.moveToTrash]

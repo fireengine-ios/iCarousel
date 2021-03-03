@@ -40,6 +40,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     
     @IBOutlet private weak var contactsCollectionView: UICollectionView! {
         didSet {
+            contactsCollectionView.backgroundColor = ColorConstants.tableBackground
             setupCollectionView()
         }
     }
@@ -56,6 +57,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     //MARK: - FileInfoShareViewProtocol
     
     func setup(with info: SharedFileInfo) {
+        backgroundColor = ColorConstants.tableBackground
         self.info = info
         
         membersInfo = getMembersInfo()
