@@ -10,6 +10,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func share(item: [BaseDataSourceItem], sourceRect: CGRect?)
     
+    func originalShare(item: [BaseDataSourceItem], sourceRect: CGRect?)
+    
     func privateShare(item: [BaseDataSourceItem], sourceRect: CGRect?)
     
     func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?)
