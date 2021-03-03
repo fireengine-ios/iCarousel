@@ -170,9 +170,7 @@ private extension PrivateShareAccessItemTableViewCell {
             switch decision {
             case .elementType(let type):
                 self.triggerHapticFeedback()
-                self.delegate?.onExactRoleDecisionTapped(type,
-                                                         info,
-                                                         self)
+                self.delegate?.onExactRoleDecisionTapped(type, info, self)
             default:
                 break
             }

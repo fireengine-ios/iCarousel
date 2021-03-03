@@ -121,15 +121,11 @@ extension PrivateShareAccessTableViewAdapter: PrivateShareAccessItemTableViewCel
     func onExactRoleDecisionTapped(_ type: ElementTypes,
                                    _ info: PrivateShareAccessListInfo,
                                    _ cell: PrivateShareAccessItemTableViewCell) {
-        delegate?.onExactRoleDecisionTapped(type,
-                                            info,
-                                            self)
+        delegate?.onExactRoleDecisionTapped(type, info, self)
     }
 
     func onRoleTapped(sender: UIButton,
                       info: PrivateShareAccessListInfo) {
-        delegate?.onRoleTapped(sender: sender,
-                               info: info,
-                               self)
+        delegate?.onRoleTapped(sender: sender, info: info, self)
     }
 }

@@ -10,10 +10,8 @@ import Foundation
 
 final class PrivateShareAccessHeaderView: UIView {
     private struct Constants {
-        static let leadingTrailingOffset: CGFloat = 20
-        static let topOffset: CGFloat = 30
+        static let stackViewEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: 30, left: 20, bottom: 15, right: 20)
         static let emailToLabelVerticalOffset: CGFloat = 5
-        static let bottomOffset: CGFloat = 15
     }
 
     private lazy var nameLabel: UILabel = {
@@ -53,12 +51,7 @@ final class PrivateShareAccessHeaderView: UIView {
 
     private func setup() {
         addSubview(stackView)
-
-        stackView.pinToSuperviewEdges(offset: UIEdgeInsets(top: Constants.topOffset,
-                                                       left: Constants.leadingTrailingOffset,
-                                                       bottom: Constants.bottomOffset,
-                                                       right: Constants.leadingTrailingOffset))
-
+        stackView.pinToSuperviewEdges(offset: Constants.stackViewEdgeInsets)
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(emailLabel)
     }
