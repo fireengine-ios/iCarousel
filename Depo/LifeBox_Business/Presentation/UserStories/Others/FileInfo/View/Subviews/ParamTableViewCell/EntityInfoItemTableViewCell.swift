@@ -18,19 +18,19 @@ final class EntityInfoItemTableViewCell: UITableViewCell {
     }
 
     private lazy var topLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        lbl.textColor = ColorConstants.infoPageItemTopText
-        return lbl
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.GTAmericaStandardRegularFont(size: 12)
+        label.textColor = ColorConstants.infoPageItemTopText
+        return label
     }()
 
     private lazy var bottomLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-        lbl.textColor = ColorConstants.infoPageItemBottomText
-        return lbl
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+        label.textColor = ColorConstants.infoPageItemBottomText
+        return label
     }()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -44,6 +44,7 @@ final class EntityInfoItemTableViewCell: UITableViewCell {
     }
 
     private func setup() {
+        contentView.backgroundColor = ColorConstants.tableBackground
         contentView.addSubview(topLabel)
         contentView.addSubview(bottomLabel)
 
