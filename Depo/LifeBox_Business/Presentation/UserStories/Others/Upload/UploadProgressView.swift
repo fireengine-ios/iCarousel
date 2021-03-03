@@ -9,8 +9,7 @@
 import UIKit
 
 protocol UploadProgressViewDelegate: class {
-    func show()
-    func hide()
+    func update()
 }
 
 final class UploadProgressView: UIView, FromNib {
@@ -36,18 +35,18 @@ final class UploadProgressView: UIView, FromNib {
     
     private(set) var isMinified = true {
         didSet {
-            delegate?.show()
+            delegate?.update()
         }
     }
     
     private(set) var isClosed = true {
         didSet {
-            if isClosed {
-                delegate?.hide()
-            } else {
-                delegate?.show()
-            }
+            delegate?.update()
         }
+    }
+    
+    var contentHeight: CGFloat {
+        return CGFloat(collectionManager.numberOfItems) * UploadProgressCell.height
     }
     
     weak var delegate: UploadProgressViewDelegate?
@@ -89,12 +88,14 @@ extension UploadProgressView: UploadProgressManagerDelegate {
         let addedTotal = items.reduce(0) { $0 + ($1.item?.fileSize ?? 0) }.intValue
         progressHeader.addTo(totalBytes: addedTotal)
         collectionManager.append(items: items)
+        delegate?.update()
     }
     
     func remove(item: UploadProgressItem) {
         let removedTotal = item.item?.fileSize.intValue ?? 0
         progressHeader.addTo(totalBytes: -removedTotal)
         collectionManager.remove(item: item)
+        delegate?.update()
     }
     
     func update(item: UploadProgressItem) {

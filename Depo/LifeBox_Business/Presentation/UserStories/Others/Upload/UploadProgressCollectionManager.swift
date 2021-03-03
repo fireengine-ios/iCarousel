@@ -16,6 +16,11 @@ final class UploadProgressCollectionManager: NSObject {
         }
     }
     
+    var numberOfItems: Int {
+        return sortedItems.count
+    }
+    
+    
     private var sortedItems = SynchronizedArray<UploadProgressItem>()
     
     //MARK: - Public

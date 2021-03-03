@@ -363,16 +363,7 @@ extension TabBarViewController: TabBarActionHandler {
 
 
 extension TabBarViewController: UploadProgressViewDelegate {
-    func show() {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                self.setHeightConstantForUploadProgress()
-                self.view.layoutIfNeeded()
-            })
-        }
-    }
-    
-    func hide() {
+    func update() {
         DispatchQueue.main.async {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.setHeightConstantForUploadProgress()
@@ -388,7 +379,7 @@ extension TabBarViewController: UploadProgressViewDelegate {
         } else if uploadProgressView.isMinified {
             value = 50
         } else {
-            value = UIScreen.main.bounds.size.height / 2
+            value = min(UIScreen.main.bounds.size.height / 2, uploadProgressView.contentHeight + 50)
         }
         
         uploadProgressViewHeightConstraint.constant = value
