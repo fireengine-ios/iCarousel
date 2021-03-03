@@ -37,24 +37,23 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v0W-fU-n0N">
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BYc-va-Hz1">
                     <rect key="frame" x="72" y="23" width="222" height="4"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="4" id="ZWq-YM-xIm"/>
+                        <constraint firstAttribute="height" constant="4" id="6f8-xc-sdE"/>
                     </constraints>
-                </view>
+                </progressView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="v0W-fU-n0N" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3IE-JK-dKD"/>
                 <constraint firstItem="Hoe-pN-mWD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="3po-U5-Xse"/>
+                <constraint firstItem="dLk-75-vBN" firstAttribute="leading" secondItem="BYc-va-Hz1" secondAttribute="trailing" constant="10" id="Pvn-kB-enS"/>
                 <constraint firstItem="qBA-OY-KMh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="S4F-PS-Tgd"/>
                 <constraint firstItem="dLk-75-vBN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="YjP-yo-H7w"/>
                 <constraint firstItem="Hoe-pN-mWD" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bkB-Bp-rWH"/>
-                <constraint firstItem="dLk-75-vBN" firstAttribute="leading" secondItem="v0W-fU-n0N" secondAttribute="trailing" constant="10" id="cvg-EJ-iGq"/>
-                <constraint firstItem="v0W-fU-n0N" firstAttribute="leading" secondItem="Hoe-pN-mWD" secondAttribute="trailing" constant="10" id="moG-ks-6JK"/>
+                <constraint firstItem="BYc-va-Hz1" firstAttribute="leading" secondItem="Hoe-pN-mWD" secondAttribute="trailing" constant="10" id="fy4-2v-l5J"/>
+                <constraint firstItem="BYc-va-Hz1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ocK-Je-G9a"/>
                 <constraint firstItem="qBA-OY-KMh" firstAttribute="leading" secondItem="dLk-75-vBN" secondAttribute="trailing" constant="4" id="yK8-AR-mKn"/>
                 <constraint firstAttribute="trailing" secondItem="qBA-OY-KMh" secondAttribute="trailing" constant="20" id="zae-2V-w2a"/>
             </constraints>
@@ -62,6 +61,7 @@
             <connections>
                 <outlet property="actionButton" destination="qBA-OY-KMh" id="Uaw-Ou-bLA"/>
                 <outlet property="counter" destination="dLk-75-vBN" id="qEd-by-NZb"/>
+                <outlet property="progress" destination="BYc-va-Hz1" id="a2v-Bk-0h8"/>
                 <outlet property="title" destination="Hoe-pN-mWD" id="DyG-nY-rzN"/>
             </connections>
             <point key="canvasLocation" x="-17.39130434782609" y="108.48214285714285"/>

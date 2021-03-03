@@ -31,6 +31,14 @@ final class UploadProgressHeader: UIView, NibInit {
         }
     }
     
+    @IBOutlet private weak var progress: UIProgressView! {
+        willSet {
+            newValue.progressTintColor = .white
+            newValue.backgroundColor = ColorConstants.UploadProgress.progressBackground
+            newValue.progress = 0
+        }
+    }
+    
     @IBOutlet weak var counter: UILabel! {
         willSet {
             newValue.text = ""
@@ -40,8 +48,22 @@ final class UploadProgressHeader: UIView, NibInit {
         }
     }
     
-    
     weak var delegate: UploadProgressHeaderDelegate?
+    
+    private var uploadedBytesStable: Int = 0
+    
+    private var uploadedBytesProgress: Int = 0 {
+        didSet {
+           updateTotalProgress()
+        }
+    }
+    
+    private var totalBytes: Int = 0 {
+        didSet {
+            updateTotalProgress()
+        }
+    }
+    
 
     //MARK: - Override
     override func awakeFromNib() {
@@ -59,10 +81,26 @@ final class UploadProgressHeader: UIView, NibInit {
         }
     }
     
+    func addTo(uploadedBytesProgress: Int) {
+        self.uploadedBytesProgress = uploadedBytesStable + uploadedBytesProgress
+    }
+    
+    func addTo(uploadedBytesStable: Int) {
+        self.uploadedBytesStable += uploadedBytesStable
+        uploadedBytesProgress = self.uploadedBytesStable
+    }
+    
+    func addTo(totalBytes: Int) {
+        self.totalBytes += totalBytes
+    }
+    
     func clean() {
         DispatchQueue.main.async {
             self.counter.isHidden = true
             self.counter.text = ""
+            self.totalBytes = 0
+            self.uploadedBytesProgress = 0
+            self.uploadedBytesStable = 0
         }
     }
     
@@ -70,5 +108,18 @@ final class UploadProgressHeader: UIView, NibInit {
     
     @IBAction private func onActionButtonTap() {
         delegate?.onActionButtonTap()
+    }
+    
+    private func updateTotalProgress() {
+        DispatchQueue.main.async {
+            guard self.totalBytes != 0 else {
+                self.progress.setProgress(0, animated: false)
+                return
+            }
+            
+            let ratio = Float(self.uploadedBytesProgress) / Float(self.totalBytes)
+            print("Total Ratio: \(ratio)")
+            self.progress.setProgress(ratio, animated: true)
+        }
     }
 }

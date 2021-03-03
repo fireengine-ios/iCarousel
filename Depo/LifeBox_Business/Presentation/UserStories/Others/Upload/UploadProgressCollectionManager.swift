@@ -45,19 +45,18 @@ final class UploadProgressCollectionManager: NSObject {
         reload()
     }
     
-    func remove(items: [UploadProgressItem]) {
-        let group = DispatchGroup()
-        items.forEach { itemToRemove in
-            group.enter()
-            sortedItems.remove { existingItem in
-                existingItem.item == itemToRemove.item
-            } completion: {  _ in
-                group.leave()
-            }
+    func remove(item: UploadProgressItem) {
+        guard let index = sortedItems.index(where: { $0.item == item.item }) else {
+            return
         }
         
-        group.notify(queue: .main) {
-            self.reload()
+        sortedItems.safeRemove(at: index) { [weak self] removedItem in
+            let indexPath = IndexPath(row: index, section: 0)
+            self?.collectionView.performBatchUpdates {
+                self?.collectionView.deleteItems(at: [indexPath])
+            } completion: { _ in
+                //
+            }
         }
     }
     
@@ -163,16 +162,8 @@ extension UploadProgressCollectionManager: UploadProgressCellDelegate {
             return
         }
 
-        sortedItems.safeRemove(at: indexPath.row) { [weak self] removedItem in
-            
-            UploadService.shared.cancelOperation(item: removedItem.item)
-            
-            self?.collectionView.performBatchUpdates {
-                self?.collectionView.deleteItems(at: [indexPath])
-            } completion: { _ in
-                //
-            }
-
+        if let itemToRemove = sortedItems[indexPath.row]?.item {
+            UploadProgressManager.shared.remove(item: itemToRemove)
         }
     }
 }

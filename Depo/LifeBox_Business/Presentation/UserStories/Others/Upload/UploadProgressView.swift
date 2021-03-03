@@ -84,18 +84,26 @@ final class UploadProgressView: UIView, FromNib {
 extension UploadProgressView: UploadProgressManagerDelegate {
     func append(items: [UploadProgressItem]) {
         isClosed = false
+        let addedTotal = items.reduce(0) { $0 + ($1.item?.fileSize ?? 0) }.intValue
+        progressHeader.addTo(totalBytes: addedTotal)
         collectionManager.append(items: items)
     }
     
-    func remove(items: [UploadProgressItem]) {
-        collectionManager.remove(items: items)
+    func remove(item: UploadProgressItem) {
+        let removedTotal = item.item?.fileSize.intValue ?? 0
+        progressHeader.addTo(totalBytes: -removedTotal)
+        collectionManager.remove(item: item)
     }
     
     func update(item: UploadProgressItem) {
+        if item.status.isContained(in: [.failed, .completed]) {
+            progressHeader.addTo(uploadedBytesStable: item.item?.fileSize.intValue ?? 0)
+        }
         collectionManager.update(item: item)
     }
     
     func setUploadProgress(for item: UploadProgressItem, bytesUploaded: Int, ratio: Float) {
+        progressHeader.addTo(uploadedBytesProgress: bytesUploaded)
         collectionManager.setProgress(item: item, ratio: ratio)
     }
     

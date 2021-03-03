@@ -10,7 +10,7 @@ import Foundation
 
 protocol UploadProgressManagerDelegate: class {
     func append(items: [UploadProgressItem])
-    func remove(items: [UploadProgressItem])
+    func remove(item: UploadProgressItem)
     func setUploadProgress(for item: UploadProgressItem, bytesUploaded: Int, ratio: Float)
     func update(item: UploadProgressItem)
     func cleanAll()
@@ -30,9 +30,11 @@ final class UploadProgressManager {
         delegate?.append(items: uploadProgressItems)
     }
     
-    func remove(items: [WrapData]) {
-        let uploadProgressItems = items.compactMap { UploadProgressItem(item: $0, status: .ready) }
-        delegate?.remove(items: uploadProgressItems)
+    func remove(item: WrapData) {
+        UploadService.shared.cancelOperation(item: item)
+        
+        let uploadProgressItem = UploadProgressItem(item: item, status: .ready)
+        delegate?.remove(item: uploadProgressItem)
     }
     
     func update(item: WrapData, status: UploadProgressStatus) {
