@@ -83,7 +83,7 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
                indexPath: IndexPath) {
         self.info = info
 
-        if isRootItem {
+        if isRootItem, fileType != .folder {
             nameLabel.text = info.object.name
         } else {
             nameLabel.text = String(format: TextConstants.accessPageFromFolder, info.object.name)
