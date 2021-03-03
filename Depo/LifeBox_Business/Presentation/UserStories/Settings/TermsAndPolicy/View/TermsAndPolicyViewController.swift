@@ -26,7 +26,7 @@ final class TermsAndPolicyViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         if !Device.isIpad {
-            navigationBarWithGradientStyle()
+            defaultNavBarStyle()
         }
     }
     

@@ -25,7 +25,7 @@ extension UIViewController {
     func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
         
         navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
-        navBar?.topItem?.backBarButtonItem?.tintColor = .white
+        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
         
         if let subTitle = subTitle {
             navigationItem.title = nil

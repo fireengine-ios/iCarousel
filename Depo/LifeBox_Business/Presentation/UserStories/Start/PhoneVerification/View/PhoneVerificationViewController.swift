@@ -67,7 +67,7 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
     }
     
     @IBAction func ResendCode(_ sender: Any) {

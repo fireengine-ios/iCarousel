@@ -55,7 +55,7 @@ final class SettingsViewController: BaseViewController {
             return
         }
         
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
         if Device.isIpad {
             splitViewController?.navigationController?.viewControllers.last?.title = TextConstants.settings
         } else {
@@ -85,7 +85,7 @@ final class SettingsViewController: BaseViewController {
         if isTabBarItem {
             homePageNavigationBarStyle()
         } else {
-            navigationBarWithGradientStyle()
+            defaultNavBarStyle()
             if Device.isIpad {
                 splitViewController?.navigationController?.viewControllers.last?.title = TextConstants.settings
             } else {

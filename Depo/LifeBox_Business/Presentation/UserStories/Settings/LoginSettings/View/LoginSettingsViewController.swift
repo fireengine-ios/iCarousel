@@ -34,7 +34,7 @@ final class LoginSettingsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setTitle(withString: TextConstants.settingsViewCellLoginSettings)
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
     }
 }
 

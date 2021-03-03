@@ -23,7 +23,7 @@ class SelectFolderViewController: BaseFilesGreedChildrenViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
         
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItems = nil

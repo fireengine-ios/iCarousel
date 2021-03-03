@@ -33,8 +33,6 @@ struct ColorConstants {
     static let loginDescriptionLabel = UIColor(named: "loginDescriptionLabel")!
     static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
 
-    static let topBarColor = UIColor(named: "topBarBackground")!
-
     static let loginPopupDescription = UIColor(named: "loginPopupDescription")!
     
     static let separator = UIColor(named: "separator")!
@@ -64,6 +62,9 @@ struct ColorConstants {
     static let sharedContactCircleBackground = UIColor(named: "sharedContactCircleBackground")!
     static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
 
+    static let topBarColor = UIColor(named: "topBarBackground")!
+    static let topBarSettingsIconColor = UIColor(named: "topBarSettingsIconColor")!
+    
     //MARK: END
     
     static let whiteColor = UIColor.white

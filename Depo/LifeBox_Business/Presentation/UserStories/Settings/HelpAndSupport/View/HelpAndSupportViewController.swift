@@ -47,7 +47,7 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
         super.viewWillAppear(animated)
         
         if !Device.isIpad {
-            navigationBarWithGradientStyle()
+            defaultNavBarStyle()
         }
     }
     

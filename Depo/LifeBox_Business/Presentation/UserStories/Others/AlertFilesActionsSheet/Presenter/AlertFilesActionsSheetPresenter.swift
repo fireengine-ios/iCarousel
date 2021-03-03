@@ -96,6 +96,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    func showSubPlusSheet(with actions: [UIAlertAction], sender: Any?, viewController: UIViewController?) {
+        DispatchQueue.main.async {
+            self.presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+        }
+    }
+    
     private func adjastActionTypes(for items: [Item]) -> [ElementTypes] {
         var actionTypes: [ElementTypes] = []
         if items.count == 1, let item = items.first {

@@ -128,7 +128,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     private func configureNavBar() {
         setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
 
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
     }
     
     private func setReasonDescriptionLabel() {

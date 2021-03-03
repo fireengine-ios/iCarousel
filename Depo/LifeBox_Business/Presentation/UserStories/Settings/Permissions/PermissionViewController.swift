@@ -61,7 +61,7 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
         hideTabBar()
     }
     

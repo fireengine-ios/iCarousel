@@ -1315,6 +1315,7 @@ extension TextConstants {
         static let fail_errorcode_5102 = NSLocalizedString("business_app_private_share_fail_errorcode_5102", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
         
         static let shared_with_section_name = NSLocalizedString("business_app_private_share_shared_with_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let uploadVideoToReadOnlyAlbumError = NSLocalizedString("uploadVideoToReadOnlyAlbumError", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     }
     
 }

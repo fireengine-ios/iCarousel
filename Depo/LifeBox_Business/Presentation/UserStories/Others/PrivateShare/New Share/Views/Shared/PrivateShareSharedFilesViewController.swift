@@ -34,6 +34,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private var contentSliderTopY: NSLayoutConstraint?
     private var contentSliderH: NSLayoutConstraint?
     
+    private lazy var cameraService = CameraService()
+    private lazy var galleryFileUploadService = GalleryFileUploadService()
+    private lazy var externalFileUploadService = ExternalFileUploadService()
+    
     private lazy var gridListBar: GridListTopBar = {
         let bar = GridListTopBar.initFromXib()
         bar.delegate = self
@@ -54,6 +58,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private lazy var bottomBarManager = PrivateShareSharedFilesBottomBarManager(delegate: self)
     private lazy var threeDotsManager = PrivateShareSharedWithThreeDotsManager(delegate: self)
     private lazy var itemThreeDotsManager = PrivateShareSharedItemThreeDotsManager(delegate: self)
+    private lazy var plusButtonActionsManager = PrivateShareSharedPlusButtonActtionManager(delegate: self)
     
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
@@ -76,9 +81,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewDidLoad()
         
         collectionManager.setup()
+        setupPlusButton()//should be called before bars, otherwise plus button  would be innactive for ios14+
         setupBars()
         setupCardsContainer()
-        setupPlusButton()
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
@@ -294,27 +299,22 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             guard self.viewIfLoaded?.window != nil else {
                 return
             }
-            
+            self.defaultNavBarStyle()
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
             
             if editingMode, isSelectionAllowed {
-                self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
+                
                 let isTabBarItem = (self.parent as? SegmentedController)?.isTabBarItem == true
                 
                 let title = isTabBarItem ? "" : self.title ?? ""
-                if !isSelectionAllowed {
-                    self.navBarManager.setDefaultModeWithoutThreeDot(title: title)
+
+                if case .innerFolder(_, _) = self.shareType {
+                    self.navBarManager.setNestedMode(title: title)
                 } else {
                     self.navBarManager.setDefaultMode(title: title)
-                }
-                
-                if isTabBarItem {
-                    self.homePageNavigationBarStyle()
-                } else {
-                    self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
                 }
             }
         }
@@ -324,6 +324,19 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
 
 //MARK: - SegmentedChildNavBarManagerDelegate
 extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDelegate {
+    
+    func plussButtonCreated(button: UIBarButtonItem) {
+        guard #available(iOS 14, *),
+              let realButton = button.customView as? UIButton
+        else {
+            return
+        }
+        
+        realButton.showsMenuAsPrimaryAction = true
+        realButton.menu = plusButtonActionsManager.generateMenu(for: floatingButtonsArray, actionsDelegate: self)
+        
+    }
+    
     func onCancelSelectionButton() {
         collectionManager.endSelection()
     }
@@ -340,11 +353,29 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         showSearchScreen()
     }
     
+    func onPlusButton() {
+        plusButtonActionsManager.showActions(for: floatingButtonsArray, sender:  navigationItem.rightBarButtonItem, actionsDelegate: self)
+    }
+    
+    func onSettingsButton() {
+        var controller: UIViewController?
+        
+        if Device.isIpad {
+            controller = router.settingsIpad(settingsController: router.settings)
+        } else {
+            controller = router.settings
+        }
+        
+        router.pushViewController(viewController: controller!)
+    }
+    
     //MARK: Helpers
     private func showSearchScreen() {
         let controller = router.searchView(navigationController: navigationController)
         router.pushViewController(viewController: controller)
     }
+    
+   
 }
 
 
@@ -469,5 +500,74 @@ extension PrivateShareSharedFilesViewController: CardsContainerViewDelegate {
                 self.collectionView.contentOffset = CGPoint(x: 0.0, y: -self.collectionView.contentInset.top)
             }
         })
+    }
+}
+
+//MARK: - UIImagePickerControllerDelegate
+
+extension PrivateShareSharedFilesViewController: GalleryFileUploadServiceDelegate {
+    func uploaded(items: [WrapData]) {
+        //
+    }
+    
+    func failed(error: ErrorResponse?) {
+        guard let error = error else {
+            return
+        }
+        
+        guard !error.isOutOfSpaceError else {
+            //showing special popup for this error
+            return
+        }
+        
+        DispatchQueue.main.async {
+            let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                          message: error.description,
+                                          image: .error,
+                                          buttonTitle: TextConstants.ok)
+            self.router.presentViewController(controller: vc, animated: true, completion: nil)//.present(vc, animated: true, completion: nil)
+        }
+    }
+}
+
+extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonActtionDelegate {
+    
+    func subPlusActionPressed(type: TabBarViewController.Action) {
+        handlePlusButtonAction(type)
+    }
+
+    private func handlePlusButtonAction(_ action: TabBarViewController.Action) {
+        
+        switch action {
+        case .createFolder(type: _):
+            let controller: UIViewController
+            if let sharedFolder = router.sharedFolderItem {
+                let isSharedByWithMe = sharedFolder.type.isContained(in: [.byMe, .withMe])
+                let parameters = CreateFolderParameters(accountUuid: sharedFolder.accountUuid, rootFolderUuid: sharedFolder.uuid, isShared: isSharedByWithMe)
+                controller = router.createNewFolder(parameters: parameters)
+            } else {
+                assertionFailure()
+                return
+            }
+            
+            let nController = NavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
+            
+        case .upload(type: let uploadType):
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
+            galleryFileUploadService.upload(type:uploadType, rootViewController: self, delegate: self)
+            
+        case .uploadFiles(type: let uploadType):
+            externalFileUploadService.showViewController(type: uploadType, router: router, externalFileType: .any)
+            
+        case .uploadFromApp:
+            let parentFolder = router.getParentUUID()
+            
+             let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            
+            let navigationController = NavigationController(rootViewController: controller)
+            navigationController.navigationBar.isHidden = false
+            router.presentViewController(controller: navigationController)
+        }
     }
 }

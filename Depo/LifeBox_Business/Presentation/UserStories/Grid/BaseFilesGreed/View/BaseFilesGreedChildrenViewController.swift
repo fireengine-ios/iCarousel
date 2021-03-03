@@ -22,7 +22,7 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
             homePageNavigationBarStyle()
             
         } else {
-            navigationBarWithGradientStyle()
+            defaultNavBarStyle()
             
         }
         
@@ -42,7 +42,7 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         if status.isContained(in: [.trashed]) {
             navigationItem.rightBarButtonItem = nil
         }
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
     }
     
     override func stopSelection() {
@@ -59,7 +59,7 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         if let _ = parent as? SegmentedController {
             homePageNavigationBarStyle()
         } else {
-            navigationBarWithGradientStyle()
+            defaultNavBarStyle()
         }
         
         configureNavBarActions(isSelecting: false)

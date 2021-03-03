@@ -36,7 +36,7 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
     
     private func setupNavigation() {
         hideTabBar()
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
         let backButton = UIBarButtonItem(title: TextConstants.backTitle, target: self, selector: #selector(backTapped))
         navigationItem.leftBarButtonItem = backButton
     }

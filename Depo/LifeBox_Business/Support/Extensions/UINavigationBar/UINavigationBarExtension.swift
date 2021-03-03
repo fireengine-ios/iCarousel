@@ -36,28 +36,10 @@ extension UIViewController {
         return height
     }
     
-    private var customNavBarView: CustomNavBarView? {
-        guard navBar != nil else {
-            return nil
-        }
-        
-        let view = CustomNavBarView()
-        view.tag = tagHomeView
-        
-        let frame = CGRect(x: 0,
-                           y: 0,
-                           width: Device.winSize.width,
-                           height: navBarHeight)
-        
-        view.frame = frame
-        
-        return view
-    }
-    
     private var backButtonTitleAttributes: [NSAttributedStringKey : Any]? {
         return [
-            .font: UIFont.TurkcellSaturaRegFont(size: 19),
-            .foregroundColor: UIColor.white
+            .font: UIFont.GTAmericaStandardRegularFont(size: 19),
+            .foregroundColor: UIColor.black
         ]
     }
     
@@ -75,7 +57,7 @@ extension UIViewController {
         
         navigationItem.backBarButtonItem?.setTitleTextAttributes(backButtonTitleAttributes, for: .normal)
         
-        navigationItem.backBarButtonItem?.tintColor = .white
+        navigationItem.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
     }
     
     func setNavigationTitle(title: String) {
@@ -112,7 +94,7 @@ extension UIViewController {
         
         navigationController?.view.backgroundColor = .clear
 
-        navigationBarWithGradientStyle(isHidden: true)
+        defaultNavBarStyle()//(isHidden: true)
         
         navBar?.setBackgroundImage(UIImage(), for: .default)
         navBar?.shadowImage = UIImage()
@@ -133,23 +115,15 @@ extension UIViewController {
     
 //MARK: NavBar presets
     
-    func defaultNavBarStyle(backgroundImg: UIImage = UIImage()) {
+    func defaultNavBarStyle() {
         visibleNavigationBarStyle()
         
-        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
-            view.hideLogo = true
-            view.isHidden = true
-            
-        }
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
+        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
         
-        navBar?.setBackgroundImage(backgroundImg, for: .default)
-        navBar?.shadowImage = UIImage()
+        navBar?.barTintColor = ColorConstants.topBarColor
         
-        navBar?.backgroundColor = .clear
-        navBar?.barTintColor = .clear
-        navBar?.tintColor = .white
-        
-        navBar?.titleTextAttributes = [.foregroundColor : UIColor.white]
+        navBar?.titleTextAttributes = [.foregroundColor : ColorConstants.confirmationPopupTitle]
         
         statusBarColor = .clear
     }
@@ -159,11 +133,11 @@ extension UIViewController {
                           titleTextColor: UIColor = .black) {
         visibleNavigationBarStyle()
 
-        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
-            view.hideLogo = true
-            view.isHidden = true
-
-        }
+//        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
+////            view.hideLogo = true
+//            view.isHidden = true
+//
+//        }
 
         navBar?.setBackgroundImage(backgroundImg, for: .default)
         navBar?.shadowImage = UIImage()
@@ -181,7 +155,7 @@ extension UIViewController {
         defaultNavBarStyle()
         setTitle(withString: "")
         
-        navigationBarWithGradientStyle(hideLogo: false)
+        defaultNavBarStyle()//(hideLogo: false)
     }
     
     func blackNavigationBarStyle() {
@@ -196,23 +170,8 @@ extension UIViewController {
         navBar?.backgroundColor = .black
     }
     
-    func navigationBarWithGradientStyle(isHidden: Bool = false, hideLogo: Bool = true) {
+    func defaultNavBarStyleWithoutInsets() {
         defaultNavBarStyle()
-
-        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
-            view.hideLogo = hideLogo
-            view.isHidden = isHidden
-            
-        } else if let view = customNavBarView {
-            view.hideLogo = hideLogo
-            view.isHidden = isHidden
-
-            navBar?.subviews.first?.addSubview(view)
-        }
-    }
-    
-    func navigationBarWithGradientStyleWithoutInsets() {
-        navigationBarWithGradientStyle()
         setTitle(withString: "")
     }
     

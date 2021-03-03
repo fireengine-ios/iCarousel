@@ -212,7 +212,7 @@ final class LoginViewController: ViewController {
         output.viewIsReady()
 
         #if DEBUG
-        loginTextField.text = "@lifeboxtest.com"
+        loginTextField.text = "gkngln2@lifeboxtest.com"
         passwordTextField.text = "Lifebox2020"
         #endif
     }
@@ -266,7 +266,7 @@ final class LoginViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
         
         setNavigationTitle(title: TextConstants.loginTitle)
         backButtonForNavigationItem(title: TextConstants.backTitle)

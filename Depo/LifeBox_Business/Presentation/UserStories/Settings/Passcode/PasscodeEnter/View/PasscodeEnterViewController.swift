@@ -49,7 +49,7 @@ class PasscodeEnterViewController: ViewController, NibInit {
         
         ///to show correct navBar we needs to call "make up" method inside class
         #if MAIN_APP
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
         #endif
         
         setTitle(withString: navigationTitle)

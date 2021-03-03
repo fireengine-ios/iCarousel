@@ -49,7 +49,7 @@ final class TermsDescriptionController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     

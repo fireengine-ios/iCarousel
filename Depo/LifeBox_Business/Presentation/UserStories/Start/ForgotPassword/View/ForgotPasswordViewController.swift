@@ -47,7 +47,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+        defaultNavBarStyle()
     }
 
     override func viewDidAppear(_ animated: Bool) {
