@@ -115,12 +115,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
 
         if bitmaskValue >= 512 {
             // Read acl
-            elementTypesArray.append(.privateShare)
             bitmaskValue -= 512
         }
         
         if bitmaskValue >= 256 {
             // Write acl
+            elementTypesArray.append(.privateShare)
             bitmaskValue -= 256
         }
         
