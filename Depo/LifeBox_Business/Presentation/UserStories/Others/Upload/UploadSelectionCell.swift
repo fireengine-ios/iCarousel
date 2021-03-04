@@ -46,6 +46,14 @@ final class UploadSelectionCell: UICollectionViewCell {
     
     weak var delegate: UploadSelectionCellDelegate?
     
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        layer.cornerRadius = 4
+        layer.borderWidth = 1
+        layer.backgroundColor = ColorConstants.separator.cgColor
+    }
    
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -56,6 +64,7 @@ final class UploadSelectionCell: UICollectionViewCell {
         removeButton.isHidden = false
         delegate = nil
     }
+
     
     //MARK: - Public
     
