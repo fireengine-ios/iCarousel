@@ -16,7 +16,7 @@ protocol BaseItemInputPassingProtocol: class {
     
     func showAlert(with message: String)
     
-    func selectModeSelected()
+    func selectModeSelected(with item: WrapData)
     func selectAllModeSelected()
     func deSelectAll()
     func stopModeSelected()

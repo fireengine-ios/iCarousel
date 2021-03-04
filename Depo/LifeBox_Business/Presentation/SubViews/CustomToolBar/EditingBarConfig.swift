@@ -11,3 +11,7 @@ struct EditingBarConfig {
     let style: UIBarStyle
     let tintColor: UIColor?
 }
+
+extension EditingBarConfig {
+    static let emptyConfig = EditingBarConfig(elementsConfig: [], style: .black, tintColor: nil)
+}
