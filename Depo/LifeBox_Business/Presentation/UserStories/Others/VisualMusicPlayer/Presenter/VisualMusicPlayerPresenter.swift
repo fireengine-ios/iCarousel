@@ -11,7 +11,7 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func operationFinished(withType type: ElementTypes, response: Any?) {}
     func operationFailed(withType type: ElementTypes) {}
     func changeCover() {}
-    func selectModeSelected(with item: WrapData) {}
+    func selectModeSelected(with item: WrapData?) {}
     func selectAllModeSelected() {}
     func deSelectAll() {}
     func stopModeSelected() {}
