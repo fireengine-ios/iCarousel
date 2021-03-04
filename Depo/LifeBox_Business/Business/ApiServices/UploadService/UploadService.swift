@@ -92,14 +92,14 @@ final class UploadService: BaseRequestService {
             self.uploadFileList(items: filteredItems, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, success: { [weak self] in
                 self?.stopTracking()
                 self?.clearCounters(uploadType: uploadType)
-                self?.hideIfNeededCard(for: uploadType)
+                self?.hideIfNeededUploadProgress()
                 ItemOperationManager.default.finishUploadFiles()
                 success()
                 
             }, fail: { [weak self] errorResponse in
                 self?.stopTracking()
                 self?.clearCounters(uploadType: uploadType)
-                self?.hideIfNeededCard(for: uploadType)
+                self?.hideIfNeededUploadProgress()
                 
                 if errorResponse.isOutOfSpaceError {
                     self?.cancelUploadOperations()
@@ -135,28 +135,9 @@ final class UploadService: BaseRequestService {
         analyticsService.stopTimelyTracking()
     }
     
-    private func hideIfNeededCard(for uploadType: UploadType) {
-        switch uploadType {
-            case .regular, .sharedArea:
-                hideUploadCardIfNeeded()
-                
-            case .sharedWithMe:
-                hideSharedWithMeUploadCardIfNeeded()
-                
-            default:
-                assertionFailure()
-                hideUploadCardIfNeeded()
-        }
-    }
-    
-    private func hideUploadCardIfNeeded() {
-        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.regular, .sharedArea]) ?? false }).count == 0 {
-            CardsManager.default.stopOperationWith(type: .upload)
-        }
-    }
-    private func hideSharedWithMeUploadCardIfNeeded() {
-        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.sharedWithMe]) ?? false }).count == 0 {
-            CardsManager.default.stopOperationWith(type: .sharedWithMeUpload)
+    private func hideIfNeededUploadProgress() {
+        if uploadOperations.count == 0 {
+            uploadProgress.cleanAll()
         }
     }
     
@@ -168,52 +149,7 @@ final class UploadService: BaseRequestService {
         if total >= uploaded {
             uploadProgress.set(uploaded: uploaded, total: total)
         }
-        
-        switch type {
-            case .upload:
-                showUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
-
-            case .sharedWithMeUpload:
-                showSharedWithMeUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
-
-            default:
-                assertionFailure()
-                showUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
-        }
     }
-    
-    private func showUploadCardProgress(object: WrapData? = nil, newItemsCount: Int = 0, forced: Bool = false) {
-        let allOperations = allUploadOperationsCount + newItemsCount
-        guard
-            forced ||
-            (allOperations != 0 &&
-            currentUploadOperationNumber <= allOperations)
-        else {
-            return
-        }
-        
-        CardsManager.default.setProgressForOperationWith(type: .upload,
-                                                         object: object,
-                                                         allOperations: allOperations,
-                                                         completedOperations: currentUploadOperationNumber)
-    }
-    
-    private func showSharedWithMeUploadCardProgress(object: WrapData? = nil, newItemsCount: Int = 0, forced: Bool = false) {
-        let allOperations = allSharedWithMeUploadOperationsCount + newItemsCount
-        guard
-            forced ||
-            (allOperations != 0 &&
-            currentSharedWithMeUploadOperationNumber <= allOperations)
-        else {
-            return
-        }
-        
-        CardsManager.default.setProgressForOperationWith(type: .sharedWithMeUpload,
-                                                         object: object,
-                                                         allOperations: allOperations,
-                                                         completedOperations: currentSharedWithMeUploadOperationNumber)
-    }
-    
     
     private func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, projectId: String? = nil, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedOprations: @escaping ([UploadOperation]?) -> Void) {
         
@@ -257,8 +193,6 @@ final class UploadService: BaseRequestService {
                             if uploadType != .sharedWithMe {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                             }
-                            
-                            self.uploadProgress.cleanAll()
                             
                             ItemOperationManager.default.syncFinished()
                             
@@ -367,8 +301,6 @@ final class UploadService: BaseRequestService {
         
         uploadProgress.cleanAll()
         
-        CardsManager.default.stopOperationWith(type: .upload)
-        CardsManager.default.stopOperationWith(type: .sharedWithMeUpload)
         ItemOperationManager.default.syncFinished()
     }
     
