@@ -217,7 +217,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         goBack()
     }
     
-    func selectModeSelected() {
+    func selectModeSelected(with item: WrapData) {
         
     }
     

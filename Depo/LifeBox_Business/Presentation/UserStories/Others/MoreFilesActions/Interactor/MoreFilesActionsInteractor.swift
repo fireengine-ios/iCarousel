@@ -96,7 +96,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         sharingItems.removeAll()
         sharingItems.append(contentsOf: item)
-        originalShare(sourceRect: sourceRect)
+        shareOrignalSize(sourceRect: sourceRect)
     }
     
     func share(item: [BaseDataSourceItem], sourceRect: CGRect?) {
@@ -108,7 +108,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         sharingItems.append(contentsOf: item)
         
         if #available(iOS 14.0, *) {
-            originalShare(sourceRect: sourceRect)
+            shareOrignalSize(sourceRect: sourceRect)
         } else {
             selectShareType(sourceRect: sourceRect)
         }
@@ -163,21 +163,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 shareViaLink(sourceRect: sourceRect)
             }
         case .original:
-            originalShare(sourceRect: sourceRect)
+            shareOrignalSize(sourceRect: sourceRect)
         case .private:
             privateShare()
         }
     }
     
-    func originalShare(sourceRect: CGRect?) {
-        sync(items: sharingItems, action: { [weak self] in
-            self?.shareOrignalSize(sourceRect: sourceRect)
-            }, fail: { errorResponse in
-                UIApplication.showErrorAlert(message: errorResponse.description)
-        })
-    }
-    
-    func privateShare() {
+    private func privateShare() {
         guard let items = sharingItems as? [WrapData] else {
             return
         }
@@ -196,7 +188,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
     }
     
-    func shareOrignalSize(sourceRect: CGRect?) {
+    private func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
             let filesWithoutUrl = items.filter { $0.tmpDownloadUrl == nil }
             fileService.createDownloadUrls(for: filesWithoutUrl) { [weak self] in

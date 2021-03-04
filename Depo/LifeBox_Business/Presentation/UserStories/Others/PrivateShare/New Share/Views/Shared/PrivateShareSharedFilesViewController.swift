@@ -350,9 +350,8 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
 
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
-    
-    func selectModeSelected() {
-        collectionManager.startSelection()
+    func selectModeSelected(with item: WrapData) {
+        collectionManager.startSelection(with: item)
     }
     
     func stopModeSelected() {

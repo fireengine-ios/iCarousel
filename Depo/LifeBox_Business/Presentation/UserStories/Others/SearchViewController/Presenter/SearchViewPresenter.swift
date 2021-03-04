@@ -402,7 +402,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.setSelectionState(selectionState: false)
     }
     
-    func selectModeSelected() {
+    func selectModeSelected(with item: WrapData) {
         debugLog("SearchViewPresenter selectModeSelected")
         
         startEditing()
