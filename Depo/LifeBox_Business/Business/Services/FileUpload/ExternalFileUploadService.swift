@@ -33,7 +33,7 @@ enum ExternalFileType {
 
 final class ExternalFileUploadService: NSObject {
     
-    private let uploadService = UploadService.default
+    private let uploadService = UploadService.shared
     private var isFavorites = false
     private var folderUUID = ""
     private var accountUuid = SingletonStorage.shared.accountInfo?.uuid
