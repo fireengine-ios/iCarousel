@@ -22,6 +22,7 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
             newValue.layer.cornerRadius = 5
             newValue.layer.borderWidth = 1
             newValue.layer.borderColor = ColorConstants.a2FABorderColor.cgColor
+            newValue.backgroundColor = ColorConstants.tableBackground
         }
     }
 
@@ -46,6 +47,7 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
     var delegate: TwoFactorAuthenticationCellDelegate?
     
     override func awakeFromNib() {
+        contentView.backgroundColor = ColorConstants.tableBackground
         selectButton.setImage(deselectedRadioButtonImage, for: .normal)
         selectButton.setImage(selectedRadioButtonImage, for: .selected)
     }

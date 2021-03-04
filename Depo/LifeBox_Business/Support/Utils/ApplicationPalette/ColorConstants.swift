@@ -66,6 +66,7 @@ struct ColorConstants {
     static let accessListItemName = UIColor(named: "accessListItemName")!
     static let tableBackground = UIColor(named: "tableBackground")!
     static let a2FABorderColor = UIColor(named: "a2FABorderColor")!
+    static let a2FAActiveProgress = UIColor(named: "a2FAActiveProgress")!
 
     //MARK: END
     
