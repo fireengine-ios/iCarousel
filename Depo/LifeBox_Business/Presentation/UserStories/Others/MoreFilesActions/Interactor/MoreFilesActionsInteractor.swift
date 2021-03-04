@@ -150,18 +150,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem]) {
         self.sharingItems = items
         switch type {
-        case .link:
-            let needSync = items.contains(where: { $0.isLocalItem })
-            if needSync {
-                sync(items: sharingItems, action: { [weak self] in
-                    self?.shareViaLink(sourceRect: sourceRect)
-                }, fail: { errorResponse in
-                    debugLog("sync(items: \(errorResponse.description)")
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-                })
-            } else {
-                shareViaLink(sourceRect: sourceRect)
-            }
+            case .link:
+            shareViaLink(sourceRect: sourceRect)
         case .original:
             shareOrignalSize(sourceRect: sourceRect)
         case .private:
@@ -763,46 +753,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func deleteAllFromTrashBin() {
         fileService.deletAllFromTrashBin(success: successAction(elementType: .emptyTrashBin),
                                          fail: failAction(elementType: .emptyTrashBin))
-    }
-    
-    private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, fail: FailResponse?) {
-        
-        guard let items = items as? [WrapData] else {
-            assertionFailure()
-            return
-        }
-        
-        let successClosure = { [weak self] in
-            debugLog("SyncToUse - Success closure")
-            DispatchQueue.main.async {
-//                self?.output?.completeAsyncOperationEnableScreen()
-                action()
-            }
-        }
-        
-        let failClosure: FailResponse = { [weak self] errorResponse in
-            debugLog("SyncToUse - Fail closure")
-            DispatchQueue.main.async {
-//                self?.output?.completeAsyncOperationEnableScreen()
-//                if errorResponse.errorDescription == TextConstants.canceledOperationTextError {
-//                    cancel()
-//                    return
-//                }
-                fail?(errorResponse)
-            }
-        }
-        fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure, syncOperations: { [weak self] syncOperations in
-//            let operations = syncOperations
-//            if operations != nil {
-//                self?.output?.startCancelableAsync {
-//                    UploadService.default.cancelSyncToUseOperations()
-//                    cancel()
-//                }
-//            } else {
-                debugLog("syncItemsIfNeeded count: \(syncOperations?.count ?? -1)")
-//            }
-        })
-        
     }
     
     func trackEvent(elementType: ElementTypes) {

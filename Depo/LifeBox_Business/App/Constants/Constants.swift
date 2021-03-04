@@ -1338,6 +1338,7 @@ extension TextConstants {
 
 // MARK: - SharedContacts
 extension TextConstants {
+    static let uploadProgressHederTitle = NSLocalizedString("business_app_upload_bar_uploading_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedContactsPageTitle = NSLocalizedString("business_app_whohasaccess_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedContactsPageRoleOwner = NSLocalizedString("business_app_whohasaccess_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedContactsPageRoleEditor = NSLocalizedString("business_app_whohasaccess_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
