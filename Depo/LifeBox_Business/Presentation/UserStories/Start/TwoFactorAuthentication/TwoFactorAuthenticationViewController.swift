@@ -20,9 +20,9 @@ enum TwoFAChallengeType: String {
     var typeDescription:String {
         switch self {
         case .phone:
-            return TextConstants.twoFactorAuthenticationPhoneNumberCell
+            return TextConstants.a2FAFirstPageSendSecurityCodeToPhone
         case .email:
-            return TextConstants.twoFactorAuthenticationEmailCell
+            return TextConstants.a2FAFirstPageSendSecurityCodeToEmail
         }
     }
     
@@ -138,14 +138,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     }
     
     private func setReasonDescriptionLabel() {
-        if let reason = challengingReason {
-            switch reason {
-            case .accountSetting:
-                reasonOfAuthLabel.text = TextConstants.twoFactorAuthenticationAccountSettingReason
-            case .newDevice:
-                reasonOfAuthLabel.text = TextConstants.twoFactorAuthenticationNewDeviceReason
-            }
-        }
+        reasonOfAuthLabel.text = TextConstants.a2FAFirstPageDescription
     }
     
     private func createAvailableTypesArray(availableTypes: [TwoFactorAuthErrorResponseChallengeType]?) {

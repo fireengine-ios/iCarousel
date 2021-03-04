@@ -1981,8 +1981,8 @@
 "business_app_2FA_first_page_description_title" = "Two factor authentication is needed.";
 "business_app_2FA_first_page_description_detail" = "To secure your account and login safely, we'll send you a security code to verify your identity";
 "business_app_2FA_first_page_sendsecuritycode" = "Send the security code";
-"business_app_2FA_first_page_sendsecuritycode_to_phone" = "To my Phone: %@";
-"business_app_2FA_first_page_sendsecuritycode_to_email" = "To my e-mail: %@";
+"business_app_2FA_first_page_sendsecuritycode_to_phone" = "To my Phone:";
+"business_app_2FA_first_page_sendsecuritycode_to_email" = "To my e-mail:";
 "business_app_2FA_first_page_send_button_name" = "Send";
 
 "business_app_2FA_second_page_title" = "Security Check";

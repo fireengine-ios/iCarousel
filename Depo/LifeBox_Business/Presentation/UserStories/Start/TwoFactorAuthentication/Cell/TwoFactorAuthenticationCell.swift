@@ -19,9 +19,9 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
 
     @IBOutlet private weak var innerContentView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 4
+            newValue.layer.cornerRadius = 5
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = ColorConstants.infoPageContactDarkBackground.cgColor
+            newValue.layer.borderColor = ColorConstants.a2FABorderColor.cgColor
         }
     }
 

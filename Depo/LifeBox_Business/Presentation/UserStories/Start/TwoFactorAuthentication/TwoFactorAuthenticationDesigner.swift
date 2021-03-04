@@ -53,9 +53,10 @@ final class TwoFactorAuthenticationDesigner: NSObject {
         willSet {
             newValue.register(nibCell: TwoFactorAuthenticationCell.self)
             newValue.separatorColor = .clear
-            newValue.backgroundColor = .clear
+            newValue.backgroundColor = ColorConstants.tableBackground
             newValue.tableFooterView = UIView()
             newValue.tableHeaderView = UIView()
+            newValue.separatorStyle = .none
         }
     }
     
