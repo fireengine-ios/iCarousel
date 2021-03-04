@@ -768,7 +768,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         backHandler?()
     }
     
-    func selectModeSelected(with item: WrapData) {
+    func selectModeSelected(with item: WrapData?) {
         debugLog("BaseFilesGreedPresenter selectModeSelected")
 
         startEditing()

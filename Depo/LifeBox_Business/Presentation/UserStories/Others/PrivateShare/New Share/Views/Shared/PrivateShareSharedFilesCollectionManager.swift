@@ -72,8 +72,11 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
-    func startSelection(with item: WrapData) {
-        fileInfoManager.selectItem(item)
+    func startSelection(with item: WrapData?) {
+        if let item = item {
+            fileInfoManager.selectItem(item)
+        }
+        
         changeSelection(isActive: true)
         reloadVisibleCells()
     }
