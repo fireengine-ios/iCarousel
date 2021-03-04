@@ -282,6 +282,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 let selectedItems = self.collectionManager.selectedItems()
                 self.show(selectedItemsCount: selectedItems.count)
                 self.bottomBarManager.show()
+                self.bottomBarManager.update(for: selectedItems)
             } else {
                 self.bottomBarManager.hide()
             }
