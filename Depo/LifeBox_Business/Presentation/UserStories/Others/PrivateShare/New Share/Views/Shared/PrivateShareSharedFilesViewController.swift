@@ -63,6 +63,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
     
+    private let composedScrollableTopBarManager = ComposedTopBarManager()
+    
     //MARK: - Override
     
     override var keyboardHeight: CGFloat {
@@ -145,17 +147,38 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func setupCollectionViewBar() {
-        gridListBar.view.translatesAutoresizingMaskIntoConstraints = false
-        collectionViewBarContainer.addSubview(gridListBar.view)
-        gridListBar.view.pinToSuperviewEdges()
-        
         let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
-        let config = GridListTopBarConfig(defaultGridListViewtype: .Grid,
-                                          availableSortTypes: sortingTypes,
-                                          defaultSortType: .TimeNewOld,
-                                          availableFilter: false,
-                                          showGridListButton: true)
-        gridListBar.setupWithConfig(config: config)
+        
+        composedScrollableTopBarManager.delegate = self
+        
+        let topbarView = composedScrollableTopBarManager.getTopBarView(sortTypes: sortingTypes, defaultSortType: .TimeNewOld, titlteText: title ?? "")
+        
+        topbarView.translatesAutoresizingMaskIntoConstraints = false
+//        gridListBar.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.collectionView.addSubview(topbarView)
+//        topbarView.frame.origin.y = -topbarView.frame.height
+        
+        
+        //-topbarView.frame.height
+//        collectionView.setContentOffset(CGPoint(x: 0, y: -500), animated: false)
+        
+//        collectionViewBarContainer.addSubview(topbarView)//(gridListBar.view)
+        //gridListBar.view.pinToSuperviewEdges()
+//        topbarView.pinToSuperviewEdges()
+        
+        topbarView.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -topbarView.frame.height).activate()
+        topbarView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
+        topbarView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
+        
+        
+//
+//        let config = GridListTopBarConfig(defaultGridListViewtype: .Grid,
+//                                          availableSortTypes: sortingTypes,
+//                                          defaultSortType: .TimeNewOld,
+//                                          availableFilter: false,
+//                                          showGridListButton: true)
+//        gridListBar.setupWithConfig(config: config)
     }
     
     private func setupCardsContainer() {
@@ -180,7 +203,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
         
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: composedScrollableTopBarManager.topBar.frame.height, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(cardsContainer)
         
         cardsContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -318,6 +341,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 }
             }
         }
+    }
+    
+    func collectionOffsetChanged(offsetY: CGFloat) {
+        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
     }
 }
 
@@ -483,14 +510,14 @@ extension PrivateShareSharedFilesViewController: CardsContainerViewDelegate {
     func onUpdateViewForPopUpH(h: CGFloat) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             if let yConstr = self.contentSliderTopY {
-                yConstr.constant = -h
+                yConstr.constant = -h + self.composedScrollableTopBarManager.topBar.frame.height
             }
             if let hConstr = self.contentSliderH {
-                hConstr.constant = h
+                hConstr.constant = h + self.composedScrollableTopBarManager.topBar.frame.height
             }
 
             self.collectionView.superview?.layoutIfNeeded()
-            self.collectionView.contentInset = UIEdgeInsets(top: h, left: 0, bottom: 25, right: 0)
+            self.collectionView.contentInset = UIEdgeInsets(top: h + self.composedScrollableTopBarManager.topBar.frame.height, left: 0, bottom: 25, right: 0)
         }, completion: { [weak self] _ in
             guard let self = self else {
                 return
@@ -569,5 +596,11 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         }
+    }
+}
+
+extension PrivateShareSharedFilesViewController: ComposedTopBarManagerDelegate {
+    func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
+        collectionManager.change(sortingRule: sortType.sortedRulesConveted)
     }
 }
