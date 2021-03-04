@@ -13,6 +13,9 @@ protocol UploadSelectionCellDelegate: class {
 }
 
 final class UploadSelectionCell: UICollectionViewCell {
+    
+    static let height: CGFloat = 44
+    
 
     @IBOutlet private weak var thumbnail: UIImageView! {
         willSet {

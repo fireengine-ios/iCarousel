@@ -11,6 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UploadSelectionListViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="M92-0S-ptF" id="iPd-Sw-vy0"/>
+                <outlet property="collectionView" destination="sra-sb-qe9" id="Xa5-Da-r3z"/>
+                <outlet property="footerContainer" destination="DR8-TK-wWz" id="Sj9-OR-U8P"/>
+                <outlet property="headerContainer" destination="XGm-ep-YbO" id="GBA-cq-0fX"/>
+                <outlet property="shareButton" destination="fDW-rH-bAh" id="O5l-GV-HlA"/>
+                <outlet property="titleLabel" destination="xAE-wU-DWu" id="1cf-yf-bur"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,6 +41,9 @@
                                 <constraint firstAttribute="width" constant="26" id="vax-w0-5Z8"/>
                             </constraints>
                             <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="onCloseButtonTap:" destination="-1" eventType="touchUpInside" id="lhp-9S-NBJ"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -50,12 +59,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DR8-TK-wWz">
                     <rect key="frame" x="0.0" y="797" width="414" height="65"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDW-rH-bAh">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDW-rH-bAh" customClass="InsetsButton" customModule="lifeBox_Business" customModuleProvider="target">
                             <rect key="frame" x="20" y="0.0" width="374" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="3Ga-L7-uKQ"/>
                             </constraints>
                             <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="onShareTap:" destination="-1" eventType="touchUpInside" id="zfF-lZ-GV7"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -66,6 +78,16 @@
                         <constraint firstAttribute="bottom" secondItem="fDW-rH-bAh" secondAttribute="bottom" constant="20" id="yuo-D4-SWz"/>
                     </constraints>
                 </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="sra-sb-qe9">
+                    <rect key="frame" x="0.0" y="65" width="414" height="732"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Sle-aw-2oP">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -74,11 +96,15 @@
                 <constraint firstItem="DR8-TK-wWz" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="K1D-hK-TsP"/>
                 <constraint firstItem="DR8-TK-wWz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="KqG-SE-17X"/>
                 <constraint firstItem="XGm-ep-YbO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Qo4-Tn-pdB"/>
+                <constraint firstItem="DR8-TK-wWz" firstAttribute="top" secondItem="sra-sb-qe9" secondAttribute="bottom" id="RQc-yn-HHo"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DR8-TK-wWz" secondAttribute="trailing" id="TQr-Wh-NSf"/>
+                <constraint firstItem="sra-sb-qe9" firstAttribute="top" secondItem="XGm-ep-YbO" secondAttribute="bottom" id="VPC-Kc-Fe0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sra-sb-qe9" secondAttribute="trailing" id="bOv-vb-s6e"/>
+                <constraint firstItem="sra-sb-qe9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tmU-rZ-2k8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XGm-ep-YbO" secondAttribute="trailing" id="xom-F5-HCG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="70" y="109"/>
+            <point key="canvasLocation" x="69.565217391304358" y="108.48214285714285"/>
         </view>
     </objects>
     <resources>

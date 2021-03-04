@@ -1356,3 +1356,9 @@ extension TextConstants {
     static let accessPageFromFolder = NSLocalizedString("business_app_access_page_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRemoveRole = NSLocalizedString("business_app_access_page_role_change_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+extension TextConstants {
+    static let uploadSelectPageTitle = NSLocalizedString("business_app_upload_select_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadSelectButtonTitle = NSLocalizedString("business_app_upload_select_page_upload_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+}

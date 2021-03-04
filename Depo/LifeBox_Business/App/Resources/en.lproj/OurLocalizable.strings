@@ -1985,3 +1985,6 @@
 "business_app_access_page_expire_date" = "Expires on: %@";
 "business_app_access_page_from_folder" = "From %@ folder";
 "business_app_access_page_role_change_remove" = "Remove";
+
+"business_app_upload_select_page_title" = "Upload Files";
+"business_app_upload_select_page_upload_button" = "Upload";
