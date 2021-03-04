@@ -172,7 +172,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
 
     
-    // error when added private share
     func bottomBarSelectedItem(index: Int, sender: UITabBarItem, config: EditingBarConfig?) {
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
             guard let self = self,
@@ -235,7 +234,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 self.interactor.move(item: selectedItems, toPath: "")
             case .share:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
-                self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
+                self.interactor.originalShare(item: selectedItems, sourceRect: self.middleTabBarRect)
             case .privateShare:
                 //\AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share)) // add analytics here later?
                 self.interactor.privateShare(item: selectedItems, sourceRect: self.middleTabBarRect)

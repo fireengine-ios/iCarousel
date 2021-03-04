@@ -62,6 +62,9 @@ struct ColorConstants {
     static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
     static let a2FAMethodLabel = UIColor(named: "a2FAMethodLabel")!
     static let a2FADescriptionLabel = UIColor(named: "a2FADescriptionLabel")!
+    static let accessListItemExpireDate = UIColor(named: "accessListItemExpireDate")!
+    static let accessListItemName = UIColor(named: "accessListItemName")!
+    static let tableBackground = UIColor(named: "tableBackground")!
 
     //MARK: END
     

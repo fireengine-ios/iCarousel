@@ -161,15 +161,15 @@ final class LoginViewController: ViewController {
 
     private let spacingFromRightToShowHideButton: CGFloat = 20
     private lazy var showHideButtonWithSpacingStackView: UIStackView = {
-        let stk = UIStackView()
-        stk.axis = .horizontal
-        stk.spacing = 0
-        stk.addArrangedSubview(showHideButton)
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 0
+        stack.addArrangedSubview(showHideButton)
         let spacingView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: spacingFromRightToShowHideButton, height: spacingFromRightToShowHideButton)))
         spacingView.backgroundColor = .clear
-        stk.addArrangedSubview(spacingView)
-        stk.frame = CGRect(origin: .zero, size: CGSize(width: showHideButton.frame.size.width + spacingFromRightToShowHideButton, height: showHideButton.frame.size.height))
-        return stk
+        stack.addArrangedSubview(spacingView)
+        stack.frame = CGRect(origin: .zero, size: CGSize(width: showHideButton.frame.size.width + spacingFromRightToShowHideButton, height: showHideButton.frame.size.height))
+        return stack
     }()
 
     private lazy var showHideButton: UIButton = {

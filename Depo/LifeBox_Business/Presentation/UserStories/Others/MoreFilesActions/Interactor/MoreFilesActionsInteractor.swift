@@ -89,7 +89,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         privateShare()
     }
     
-    func share(item: [BaseDataSourceItem], sourceRect: CGRect?) {
+    func originalShare(item: [BaseDataSourceItem], sourceRect: CGRect?) {
         guard !item.isEmpty else {
             return
         }
@@ -97,6 +97,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         sharingItems.removeAll()
         sharingItems.append(contentsOf: item)
         origiginalShare(sourceRect: sourceRect)
+    }
+    
+    func share(item: [BaseDataSourceItem], sourceRect: CGRect?) {
+        guard !item.isEmpty else {
+            return
+        }
+        
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: item)
+        
+        if #available(iOS 14.0, *) {
+            origiginalShare(sourceRect: sourceRect)
+        } else {
+            selectShareType(sourceRect: sourceRect)
+        }
     }
     
     func selectShareType(sourceRect: CGRect?) {
