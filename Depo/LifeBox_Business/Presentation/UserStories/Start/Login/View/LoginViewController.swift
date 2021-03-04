@@ -219,6 +219,7 @@ final class LoginViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = ""
         setupNavBar()
         
         if !captchaView.isHidden {
@@ -228,7 +229,6 @@ final class LoginViewController: ViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         prepareForDisappear()
     }
     

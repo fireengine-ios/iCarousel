@@ -17,6 +17,14 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
     private let selectedRadioButtonImage = UIImage(named: "selected_method")
     private let deselectedRadioButtonImage = UIImage(named: "not_selected_method")
 
+    @IBOutlet private weak var innerContentView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 4
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = ColorConstants.infoPageContactDarkBackground.cgColor
+        }
+    }
+
     @IBOutlet private weak var methodLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.a2FAMethodLabel
@@ -38,9 +46,6 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
     var delegate: TwoFactorAuthenticationCellDelegate?
     
     override func awakeFromNib() {
-        contentView.layer.cornerRadius = 4
-        contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = ColorConstants.infoPageContactDarkBackground.cgColor
         selectButton.setImage(deselectedRadioButtonImage, for: .normal)
         selectButton.setImage(selectedRadioButtonImage, for: .selected)
     }

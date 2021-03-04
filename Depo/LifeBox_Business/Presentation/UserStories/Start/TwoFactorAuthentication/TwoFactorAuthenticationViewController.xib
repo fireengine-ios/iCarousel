@@ -41,7 +41,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You actived two-factor authentication on your account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="WNf-eD-Chw">
-                                    <rect key="frame" x="43" y="60" width="290" height="82"/>
+                                    <rect key="frame" x="48" y="60" width="279" height="82"/>
                                     <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="35"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOG-Q9-eRz" userLabel="Error View" customClass="ErrorBannerView" customModule="lifeBox_Business" customModuleProvider="target">
-                                    <rect key="frame" x="16" y="415" width="343" height="31"/>
+                                    <rect key="frame" x="16" y="405" width="343" height="31"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="31" placeholder="YES" id="7do-eh-NeB"/>
@@ -70,7 +70,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="26" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-nx-O4M" customClass="ResizableTableView" customModule="lifeBox_Business" customModuleProvider="target">
-                                    <rect key="frame" x="15" y="267" width="345" height="128"/>
+                                    <rect key="frame" x="15" y="257" width="345" height="128"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="0tB-eC-E0P"/>
@@ -91,7 +91,7 @@
                             <viewLayoutGuide key="safeArea" id="BTt-iN-5Wh"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="WNf-eD-Chw" secondAttribute="trailing" constant="42" id="1TB-1Q-xE5"/>
+                                <constraint firstAttribute="trailing" secondItem="WNf-eD-Chw" secondAttribute="trailing" constant="48" id="1TB-1Q-xE5"/>
                                 <constraint firstItem="kjs-RZ-630" firstAttribute="top" secondItem="yIj-7j-Nxa" secondAttribute="bottom" constant="43" id="CNy-0e-NLt"/>
                                 <constraint firstItem="Yra-nx-O4M" firstAttribute="leading" secondItem="BTt-iN-5Wh" secondAttribute="leading" constant="15" id="EXG-9k-MYf"/>
                                 <constraint firstItem="m5f-k5-CES" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZOG-Q9-eRz" secondAttribute="bottom" constant="20" id="J0f-of-9Bh"/>
@@ -104,12 +104,12 @@
                                 <constraint firstItem="WNf-eD-Chw" firstAttribute="top" secondItem="BTt-iN-5Wh" secondAttribute="top" constant="60" id="cnM-9K-68R"/>
                                 <constraint firstItem="yIj-7j-Nxa" firstAttribute="top" secondItem="WNf-eD-Chw" secondAttribute="bottom" constant="20" id="d0i-Wx-x05"/>
                                 <constraint firstItem="BTt-iN-5Wh" firstAttribute="trailing" secondItem="kjs-RZ-630" secondAttribute="trailing" constant="21" id="gWA-RI-BKz"/>
-                                <constraint firstItem="Yra-nx-O4M" firstAttribute="top" secondItem="kjs-RZ-630" secondAttribute="bottom" constant="10" id="i2E-iZ-R93"/>
+                                <constraint firstItem="Yra-nx-O4M" firstAttribute="top" secondItem="kjs-RZ-630" secondAttribute="bottom" id="i2E-iZ-R93"/>
                                 <constraint firstItem="yIj-7j-Nxa" firstAttribute="leading" secondItem="zbf-N2-N7N" secondAttribute="leading" constant="20" id="l4i-rc-8oH"/>
                                 <constraint firstItem="m5f-k5-CES" firstAttribute="leading" secondItem="BTt-iN-5Wh" secondAttribute="leading" constant="20" id="lks-co-dPd"/>
                                 <constraint firstItem="ZOG-Q9-eRz" firstAttribute="top" secondItem="Yra-nx-O4M" secondAttribute="bottom" constant="20" id="mEl-OO-OGu"/>
                                 <constraint firstItem="BTt-iN-5Wh" firstAttribute="trailing" secondItem="m5f-k5-CES" secondAttribute="trailing" constant="20" id="mPP-CC-fNI"/>
-                                <constraint firstItem="WNf-eD-Chw" firstAttribute="leading" secondItem="zbf-N2-N7N" secondAttribute="leading" constant="43" id="r0V-YJ-BPj"/>
+                                <constraint firstItem="WNf-eD-Chw" firstAttribute="leading" secondItem="zbf-N2-N7N" secondAttribute="leading" constant="48" id="r0V-YJ-BPj"/>
                                 <constraint firstItem="BTt-iN-5Wh" firstAttribute="trailing" secondItem="ZOG-Q9-eRz" secondAttribute="trailing" constant="16" id="ufZ-Tg-PGp"/>
                                 <constraint firstItem="ZOG-Q9-eRz" firstAttribute="leading" secondItem="BTt-iN-5Wh" secondAttribute="leading" constant="16" id="wbQ-xz-Gq6"/>
                             </constraints>
