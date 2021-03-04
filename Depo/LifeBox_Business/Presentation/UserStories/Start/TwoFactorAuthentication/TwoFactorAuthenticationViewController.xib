@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -89,7 +90,7 @@
                                 </button>
                             </subviews>
                             <viewLayoutGuide key="safeArea" id="BTt-iN-5Wh"/>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" name="tableBackground"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="WNf-eD-Chw" secondAttribute="trailing" constant="48" id="1TB-1Q-xE5"/>
                                 <constraint firstItem="kjs-RZ-630" firstAttribute="top" secondItem="yIj-7j-Nxa" secondAttribute="bottom" constant="43" id="CNy-0e-NLt"/>
@@ -146,4 +147,9 @@
             </connections>
         </customObject>
     </objects>
+    <resources>
+        <namedColor name="tableBackground">
+            <color red="0.99199998378753662" green="0.99199998378753662" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

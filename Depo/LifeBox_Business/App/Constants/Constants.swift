@@ -1359,6 +1359,8 @@ extension TextConstants {
     static let a2FASecondPageVerifyEmail = NSLocalizedString("business_app_2FA_second_page_verify_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let a2FASecondPageInfo = NSLocalizedString("business_app_2FA_second_page_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let a2FASecondPageSecurityCode = NSLocalizedString("business_app_2FA_second_page_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
 // MARK: - Access page
 extension TextConstants {
     static let accessPageTitle = NSLocalizedString("business_app_access_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
