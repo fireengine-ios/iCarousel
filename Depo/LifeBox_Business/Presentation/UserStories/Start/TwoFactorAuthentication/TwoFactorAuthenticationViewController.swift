@@ -106,11 +106,24 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         setup()
         trackScreen()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        configureNavBar()
+        setupNavigationBar()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigationBar()
+    }
+
+    private func setupNavigationBar() {
+        title = TextConstants.a2FAFirstPageTitle
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
+        whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
+                         titleTextColor: ColorConstants.infoPageItemBottomText)
     }
     
     //MARK: Utility methods
@@ -123,12 +136,6 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     private func trackScreen() {
         analyticsService.logScreen(screen: .securityCheck)
-    }
-    
-    private func configureNavBar() {
-        setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
-
-        navigationBarWithGradientStyle()
     }
     
     private func setReasonDescriptionLabel() {
@@ -236,10 +243,10 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         errorView.message = text
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.errorView.isHidden = false
-            
+
             self.view.layoutIfNeeded()
         }
-        
+
         let errorViewRect = self.view.convert(errorView.frame, to: self.view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)
     }
