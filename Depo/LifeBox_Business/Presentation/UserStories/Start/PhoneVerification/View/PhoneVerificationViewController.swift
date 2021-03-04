@@ -26,12 +26,12 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     
     @IBOutlet private weak var infoTitle: UILabel!
     
-    @IBOutlet private weak var firstSecurityCodeTextField: SecurityCodeTextField!
+    @IBOutlet private weak var firstSecurityCodeTextField: OneSignSquareTextField!
     
     @IBOutlet private weak var errorLabel: UILabel!
     @IBOutlet private weak var bottomTimerConstraint: NSLayoutConstraint!
     
-    @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
+    @IBOutlet private var codeTextFields: [OneSignSquareTextField]!
     
     @IBOutlet private weak var resendCodeButton: BlueButtonWithWhiteText! {
         willSet {

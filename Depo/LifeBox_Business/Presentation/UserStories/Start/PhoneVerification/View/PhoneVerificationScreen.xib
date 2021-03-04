@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -17,7 +15,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVerificationViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneVerificationViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="bottomTimerConstraint" destination="EVf-ei-CA7" id="ZY5-oN-FV8"/>
                 <outlet property="errorLabel" destination="IFw-4W-fGh" id="wl4-aG-2z8"/>
@@ -45,80 +43,75 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-Ei-3RR">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="302.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="304.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LGv-1U-f4g">
-                                    <rect key="frame" x="40" y="35" width="334" height="57"/>
+                                    <rect key="frame" x="40" y="35" width="334" height="59"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Your Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v4-fr-f41">
-                                            <rect key="frame" x="70" y="0.0" width="194.5" height="21.5"/>
+                                            <rect key="frame" x="55.5" y="0.0" width="223.5" height="22.5"/>
                                             <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="19"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the verification code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccz-va-Sqj">
-                                            <rect key="frame" x="76.5" y="35.5" width="181" height="21.5"/>
+                                            <rect key="frame" x="56" y="36.5" width="222.5" height="22.5"/>
                                             <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
                                             <color key="textColor" red="1" green="0.94117647059999998" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-An-V0t">
-                                    <rect key="frame" x="87" y="128" width="240" height="50"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-An-V0t">
+                                    <rect key="frame" x="42" y="130" width="330" height="50"/>
                                     <subviews>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CWG-cv-wHj" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="30" height="50"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CWG-cv-wHj" customClass="OneSignSquareTextField" customModule="lifeBox_Business" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="GWX-wV-gev"/>
-                                                <constraint firstAttribute="width" constant="30" id="mP2-Aj-1PF"/>
+                                                <constraint firstAttribute="width" constant="50" id="mP2-Aj-1PF"/>
                                             </constraints>
-                                            <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="tjj-Yh-aFA"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPz-vZ-oad" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="42" y="0.0" width="30" height="50"/>
-                                            <nil key="textColor"/>
+                                        <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EPz-vZ-oad" customClass="OneSignSquareTextField" customModule="lifeBox_Business" customModuleProvider="target">
+                                            <rect key="frame" x="56" y="0.0" width="50" height="50"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="W3F-JU-OZN"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="puo-ZC-r3M" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="84" y="0.0" width="30" height="50"/>
-                                            <nil key="textColor"/>
+                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="puo-ZC-r3M" customClass="OneSignSquareTextField" customModule="lifeBox_Business" customModuleProvider="target">
+                                            <rect key="frame" x="112" y="0.0" width="50" height="50"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="2Hw-no-4wp"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uDo-3B-FdI" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="126" y="0.0" width="30" height="50"/>
-                                            <nil key="textColor"/>
+                                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uDo-3B-FdI" customClass="OneSignSquareTextField" customModule="lifeBox_Business" customModuleProvider="target">
+                                            <rect key="frame" x="168" y="0.0" width="50" height="50"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="Xln-vi-yR9"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n5t-Bp-TVZ" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="168" y="0.0" width="30" height="50"/>
-                                            <nil key="textColor"/>
+                                        <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n5t-Bp-TVZ" customClass="OneSignSquareTextField" customModule="lifeBox_Business" customModuleProvider="target">
+                                            <rect key="frame" x="224" y="0.0" width="50" height="50"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="IOY-qF-NrX"/>
                                             </connections>
                                         </textField>
-                                        <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uq4-jS-Fuc" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="210" y="0.0" width="30" height="50"/>
-                                            <nil key="textColor"/>
+                                        <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uq4-jS-Fuc" customClass="OneSignSquareTextField" customModule="lifeBox_Business" customModuleProvider="target">
+                                            <rect key="frame" x="280" y="0.0" width="50" height="50"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
@@ -128,17 +121,17 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGS-6f-YoM" userLabel="barrier view">
-                                    <rect key="frame" x="87" y="128" width="240" height="50"/>
+                                    <rect key="frame" x="42" y="130" width="330" height="50"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFw-4W-fGh">
-                                    <rect key="frame" x="38" y="198" width="338" height="20.5"/>
+                                    <rect key="frame" x="38" y="200" width="338" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="93" y="242.5" width="228" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYV-5x-qeY" customClass="BlueButtonWithWhiteText" customModule="lifeBox_Business" customModuleProvider="target">
+                                    <rect key="frame" x="93" y="244.5" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Seq-Qi-lY5"/>
                                     </constraints>
@@ -179,8 +172,8 @@
                         <constraint firstItem="0SH-Ei-3RR" firstAttribute="leading" secondItem="4dA-Bj-4aO" secondAttribute="leading" id="yq5-pZ-TkA"/>
                     </constraints>
                 </scrollView>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBT-Oh-9zN" customClass="SmartTimerLabel" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="175" y="830.5" width="64" height="45.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBT-Oh-9zN" customClass="SmartTimerLabel" customModule="lifeBox_Business" customModuleProvider="target">
+                    <rect key="frame" x="168" y="829" width="78" height="47"/>
                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="40"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
