@@ -55,13 +55,13 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     static let height: CGFloat = 60.0
     
     
-    @IBOutlet weak var selectIcon: UIImageView! {
+    @IBOutlet private weak var selectIcon: UIImageView! {
        willSet {
            newValue.contentMode = .scaleAspectFill
        }
    }
     
-    @IBOutlet weak var selectIconWidth: NSLayoutConstraint! {
+    @IBOutlet private weak var selectIconWidth: NSLayoutConstraint! {
         willSet {
             newValue.constant = 0
         }
@@ -112,14 +112,14 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     
     //MARK: Name editing
-    @IBOutlet weak var nameEditView: UIView! {
+    @IBOutlet private weak var nameEditView: UIView! {
         willSet {
             newValue.backgroundColor = ColorConstants.multifileCellBackgroundColorSelectedSolid
             newValue.alpha = 0
         }
     }
     
-    @IBOutlet weak var renameField: UITextField! {
+    @IBOutlet private weak var renameField: UITextField! {
         willSet {
             newValue.delegate = self
             newValue.backgroundColor = .white
@@ -127,7 +127,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var cancelRenamingButton: UIButton! {
+    @IBOutlet private weak var cancelRenamingButton: UIButton! {
         willSet {
             newValue.setTitle("", for: .normal)
             let cancelImage = UIImage(named: "cancelButton")
@@ -135,7 +135,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var applyRenamingButton: UIButton! {
+    @IBOutlet private weak var applyRenamingButton: UIButton! {
         willSet {
             newValue.setTitle("", for: .normal)
             let applyImage = UIImage(named: "applyButton")
@@ -145,7 +145,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     
     //MARK: - scroll view
-    @IBOutlet weak var scrollableContent: UIScrollView! {
+    @IBOutlet private weak var scrollableContent: UIScrollView! {
         willSet {
             newValue.showsHorizontalScrollIndicator = false
             newValue.showsVerticalScrollIndicator = false
@@ -158,22 +158,22 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var defaultView: UIView!
+    @IBOutlet private weak var defaultView: UIView!
     
-    @IBOutlet weak var infoView: UIView! {
+    @IBOutlet private weak var infoView: UIView! {
         willSet {
             newValue.backgroundColor = ColorConstants.multifileCellInfoView
         }
     }
     
-    @IBOutlet weak var deletionView: UIView! {
+    @IBOutlet private weak var deletionView: UIView! {
         willSet {
             newValue.backgroundColor = ColorConstants.multifileCellDeletionView
         }
     }
     //MARK: -
     
-    @IBOutlet weak var infoButton: UIButton! {
+    @IBOutlet private weak var infoButton: UIButton! {
         willSet {
             newValue.tintColor = .white
             newValue.setTitle(TextConstants.actionInfo, for: .normal)
@@ -183,7 +183,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet weak var deleteButton: UIButton! {
+    @IBOutlet private weak var deleteButton: UIButton! {
         willSet {
             newValue.tintColor = .white
             newValue.setTitle(TextConstants.actionDelete, for: .normal)
@@ -405,14 +405,14 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBAction func stopRenaming(_ sender: Any) {
+    @IBAction private func stopRenaming(_ sender: Any) {
         isRenamingInProgress = false
         hideRenamignView()
         setupMenuAvailability()
     }
     
     
-    @IBAction func applyRenaming(_ sender: Any) {
+    @IBAction private func applyRenaming(_ sender: Any) {
         isRenamingInProgress = false
         hideRenamignView()
         setupMenuAvailability()
@@ -460,12 +460,12 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Sсroll view actions
     
-    @IBAction func onInfoButtonTapped(_ sender: Any) {
+    @IBAction private func onInfoButtonTapped(_ sender: Any) {
         scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
         actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
     }
     
-    @IBAction func onDeleteButtonTapped(_ sender: Any) {
+    @IBAction private func onDeleteButtonTapped(_ sender: Any) {
         actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
     }
 }

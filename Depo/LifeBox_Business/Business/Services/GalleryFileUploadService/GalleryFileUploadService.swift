@@ -112,7 +112,7 @@ final class GalleryFileUploadService: NSObject {
                 break
         }
         
-        UploadService.default.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .ROOT, folder: rootUUID, isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: accountUuid, success: { [weak self] in
+        UploadService.shared.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .ROOT, folder: rootUUID, isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: accountUuid, success: { [weak self] in
             self?.delegate?.uploaded(items: items)
             
         }, fail: { [weak self] error in
