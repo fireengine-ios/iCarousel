@@ -62,7 +62,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple, config: config)
     }
 
-    func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
+    func setupTabBarWith(items: [BaseDataSourceItem]) {
         guard let items = items as? [WrapData] else { return }
         
         let matchesBitmasks = calculateMatchesBitmasks(from: items)

@@ -417,7 +417,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             interactor.documentDetails(items: items)
             
         case .select:
-            basePassingPresenter?.selectModeSelected()
+            basePassingPresenter?.selectModeSelected(with: items.first as? Item)
 //                    self.interactor.//TODO: select and select all pass to grid's presenter
             
         case .selectAll:

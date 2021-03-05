@@ -158,6 +158,13 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func selectItem(_ item: WrapData) {
+        if let alreadySelected = selectedItems.getSet().first(where: { $0.uuid == item.uuid }) {
+            selectedItems.remove(alreadySelected)
+        }
+        selectedItems.insert(item)
+    }
+    
     func deselectItem(at indexPath: IndexPath) {
         if let item = sortedItems[indexPath.row] {
             selectedItems.remove(item)
