@@ -69,6 +69,8 @@ struct ColorConstants {
     static let accessListItemExpireDate = UIColor(named: "accessListItemExpireDate")!
     static let accessListItemName = UIColor(named: "accessListItemName")!
     static let tableBackground = UIColor(named: "tableBackground")!
+    
+    static let dimmedBackground = UIColor(named: "dimmedBackground")!
 
     //MARK: END
     

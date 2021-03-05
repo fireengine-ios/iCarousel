@@ -817,8 +817,8 @@ class RouterVC: NSObject {
     
     func uploadSelectionList(with items: [WrapData], completion: @escaping ValueHandler<[WrapData]>) -> UIViewController {
         let controller = UploadSelectionListViewController.with(items: items, completion: completion)
-        controller.modalTransitionStyle = .coverVertical
-        controller.modalPresentationStyle = .currentContext
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
         return controller
     }
     

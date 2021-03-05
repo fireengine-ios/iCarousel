@@ -10,6 +10,23 @@ import UIKit
 
 final class UploadSelectionListViewController: BaseViewController, NibInit {
 
+    @IBOutlet private weak var containerView: UIView! {
+        willSet {
+            newValue.layer.masksToBounds = true
+            newValue.layer.cornerRadius = 10
+            newValue.backgroundColor = ColorConstants.dimmedBackground
+        }
+    }
+    
+    @IBOutlet private weak var containerViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var gradientView: UIView! {
+        willSet {
+            newValue.backgroundColor = .clear
+            newValue.isHidden = true
+        }
+    }
+    
     @IBOutlet private weak var headerContainer: UIView!
     
     @IBOutlet private weak var titleLabel: UILabel! {
@@ -59,12 +76,26 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
         }
     }
     
-    private lazy var collectionManager = UploadSelectionListCollectionManager.with(collectionView: collectionView)
+    private lazy var collectionManager = UploadSelectionListCollectionManager.with(collectionView: collectionView,
+                                                                                   gradientView: gradientView,
+                                                                                   delegate: self)
     
     private var items = [WrapData]()
     private var completionHandler: ValueHandler<[WrapData]>?
     
     //MARK: - Override
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        needToShowTabBar = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupHeight(needsLayout: false)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,17 +104,29 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        needToShowTabBar = true
         super.viewDidDisappear(animated)
     }
     
     //MARK: - Private
     
+    private func setupHeight(needsLayout: Bool) {
+        let maxHeight = UIScreen.main.bounds.height - 40
+        let collectionItemsHeight = CGFloat(collectionManager.items.count) * UploadSelectionCell.height + 20
+        let subviewsHeight = headerContainer.bounds.height + footerContainer.bounds.height + collectionItemsHeight
+        
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.containerViewHeight.constant = min(subviewsHeight, maxHeight)
+            if needsLayout {
+                self.view.layoutIfNeeded()
+            }
+        })
+    }
+    
     @IBAction private func onShareTap(_ sender: Any) {
         dismiss(animated: true) {
             self.completionHandler?(self.collectionManager.items)
         }
-        
     }
     
     @IBAction func onCloseButtonTap(_ sender: Any) {
@@ -98,5 +141,16 @@ extension UploadSelectionListViewController {
         controller.items = items
         controller.completionHandler = completion
         return controller
+    }
+}
+
+extension UploadSelectionListViewController: UploadSelectionListCollectionManagerDelegate {
+    func onItemRemoved(isLast: Bool) {
+        guard !isLast else {
+            dismiss(animated: true)
+            return
+        }
+        
+        setupHeight(needsLayout: true)
     }
 }

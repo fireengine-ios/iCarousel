@@ -8,6 +8,9 @@
 
 import Foundation
 
+protocol UploadSelectionListCollectionManagerDelegate: class {
+    func onItemRemoved(isLast: Bool)
+}
 
 final class UploadSelectionListCollectionManager: NSObject {
     private weak var collectionView: UICollectionView! {
@@ -16,25 +19,21 @@ final class UploadSelectionListCollectionManager: NSObject {
         }
     }
     
+    private weak var gradientView: UIView!
+    
     var items: [WrapData] {
         sortedItems.getArray()
     }
     
-    
+    private let rowInset = UIEdgeInsets(top: 0, left: 20, bottom: 22, right: 20)
     private var sortedItems = SynchronizedArray<WrapData>()
+    
+    weak var delegate: UploadSelectionListCollectionManagerDelegate?
     
     //MARK: - Public
     
-    func reload() {
-        sortItems { [weak self] in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-            }
-        }
-    }
-    
     func reload(with items: [WrapData]) {
-        sortedItems.replace(with: items) { [weak self] in
+        sortItems(items: items) { [weak self] in
             self?.reload()
         }
     }
@@ -49,7 +48,7 @@ final class UploadSelectionListCollectionManager: NSObject {
             self?.collectionView.performBatchUpdates {
                 self?.collectionView.deleteItems(at: [indexPath])
             } completion: { _ in
-                //
+                self?.delegate?.onItemRemoved(isLast: self?.sortedItems.isEmpty == true)
             }
         }
     }
@@ -64,20 +63,31 @@ final class UploadSelectionListCollectionManager: NSObject {
         }
     }
     
-    private func sortItems(completion: @escaping VoidHandler) {
-        //
+    private func reload() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    private func sortItems(items: [WrapData], completion: @escaping VoidHandler) {
+        let notVideos = items.filter { $0.fileType != .video }.sorted(by: { $0.creationDate ?? Date() > $1.creationDate ?? Date() })
+        let videos = items.filter { $0.fileType == .video }.sorted(by: { $0.fileSize < $1.fileSize})
+        let resultItems = notVideos + videos
+        
+        sortedItems.replace(with: resultItems, completion: completion)
     }
 }
 
-//MARK: - static
+//MARK: - Static
 extension UploadSelectionListCollectionManager {
-    static func with(collectionView: UICollectionView) -> UploadSelectionListCollectionManager {
+    static func with(collectionView: UICollectionView, gradientView: UIView, delegate: UploadSelectionListCollectionManagerDelegate) -> UploadSelectionListCollectionManager {
         let manager = UploadSelectionListCollectionManager()
+        manager.delegate = delegate
         manager.collectionView = collectionView
+        manager.gradientView = gradientView
         return manager
     }
 }
-
 
 //MARK: - UICollectionViewDelegate
 extension UploadSelectionListCollectionManager: UICollectionViewDelegate {
@@ -110,26 +120,31 @@ extension UploadSelectionListCollectionManager: UICollectionViewDataSource {
 extension UploadSelectionListCollectionManager: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.bounds.size.width - 40
+        let width = collectionView.bounds.size.width - (rowInset.left + rowInset.right)
         let height = UploadSelectionCell.height
         
         return CGSize(width: width, height: height)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 22, right: 20)
+        return rowInset
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
 }
 
+
+extension UploadSelectionListCollectionManager: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.gradientView.isHidden = scrollView.contentOffset == CGPoint(x: 0, y: 0)
+            self.gradientView.layoutSubviews()
+        }
+        
+    }
+}
 
 extension UploadSelectionListCollectionManager: UploadSelectionCellDelegate {
     func onRemoveTapped(cell: UploadSelectionCell) {
