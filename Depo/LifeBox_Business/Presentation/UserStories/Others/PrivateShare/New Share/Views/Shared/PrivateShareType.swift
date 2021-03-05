@@ -58,10 +58,9 @@ indirect enum PrivateShareType: Equatable {
         
         switch typeAndRoot {
             case (.myDisk, _):
-                //FIXME: SOMETHING WRONG WITTH ACCESS
-//                if rootPermissions?.granted?.contains(.create) == true {
+                if rootPermissions?.granted?.contains(.create) == true {
                     return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
-//                }
+                }
                 return []
                 
             case (.sharedArea, _):

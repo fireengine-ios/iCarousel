@@ -30,11 +30,12 @@ enum FloatingButtonsType {
     var image: UIImage? {
         switch self {
         case .upload,
-             .uploadFiles,
              .uploadFromLifebox:
-            return UIImage(named: "Upload")
+            return UIImage(named: "menuUploadGallery")
+        case .uploadFiles:
+            return UIImage(named: "menuUploadFile")
         case .newFolder:
-            return UIImage(named: "NewFolder")
+            return UIImage(named: "menuCreateFolder")
         }
     }
     

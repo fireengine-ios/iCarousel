@@ -177,7 +177,7 @@
 "Create" = "Create";
 "New PlayList" = "New PlayList";
 "New Album" = "New Album";
-"New Folder" = "New Folder";
+"business_app_new_folder" = "Create New Folder";
 "Print" = "Print";
 "Make album cover" = "Make album cover";
 "Add To Album" = "Add To Album";
@@ -201,7 +201,7 @@
 "Nothing to upload" = "Nothing to upload";
 "Items Selected" = "Items Selected";
 "Item Selected" = "Item Selected";
-"Upload" = "Upload";
+"business_app_plus_button_upload" = "Upload from Gallery";
 "You can change the sequence " = "You can change the sequence of photos ";
 "Save" = "Save";
 "Add Music" = "Add Music";
@@ -464,7 +464,7 @@
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any files in your lifebox, yet. Start uploading your memories on lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %d%% of your device storage. It’s a great time to free up space on your device.";
-"Upload Files" = "Upload Files";
+"business_app_plus_button_upload_files" = "Upload Files";
 "Free Up Space" = "Free Up Space";
 "Collage" = "Collage";
 "We have created a collage from your photos!" = "We have created a collage for you!";
