@@ -78,7 +78,7 @@ final class LoginViewController: ViewController {
             newValue.setTitle(TextConstants.loginPageLoginButtonTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.backgroundColor = UIColor(named: "loginButtonBackground")
+            newValue.backgroundColor = ColorConstants.buttonDarkBlueBackground
             newValue.isOpaque = true
         }
     }
