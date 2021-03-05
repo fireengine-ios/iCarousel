@@ -32,10 +32,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t3z-1z-aMS">
                     <rect key="frame" x="20" y="256" width="374" height="384"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-ZV-wMy">
-                            <rect key="frame" x="0.0" y="65" width="374" height="254"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGm-ep-YbO">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="65"/>
                             <subviews>
@@ -98,6 +94,10 @@
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
                         </collectionView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1tU-ZV-wMy" customClass="ScrollGradientView" customModule="lifeBox_Business" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="65" width="374" height="254"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>

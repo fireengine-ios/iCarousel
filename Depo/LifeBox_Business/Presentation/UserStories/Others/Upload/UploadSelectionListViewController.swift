@@ -20,8 +20,10 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var containerViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var gradientView: UIView! {
+    @IBOutlet weak var gradientView: ScrollGradientView! {
         willSet {
+            newValue.addGradientLayer()
+            newValue.isUserInteractionEnabled = false
             newValue.backgroundColor = .clear
             newValue.isHidden = true
         }
@@ -112,7 +114,8 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
     
     private func setupHeight(needsLayout: Bool) {
         let maxHeight = UIScreen.main.bounds.height - 40
-        let collectionItemsHeight = CGFloat(collectionManager.items.count) * UploadSelectionCell.height + 20
+        let cellInsets = collectionManager.rowInset.bottom + collectionManager.rowInset.top
+        let collectionItemsHeight = CGFloat(collectionManager.items.count) * (UploadSelectionCell.height + collectionManager.spaceBetweenRows) + cellInsets
         let subviewsHeight = headerContainer.bounds.height + footerContainer.bounds.height + collectionItemsHeight
         
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {

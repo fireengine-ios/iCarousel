@@ -19,13 +19,14 @@ final class UploadSelectionListCollectionManager: NSObject {
         }
     }
     
-    private weak var gradientView: UIView!
+    private weak var gradientView: ScrollGradientView!
     
     var items: [WrapData] {
         sortedItems.getArray()
     }
     
-    private let rowInset = UIEdgeInsets(top: 0, left: 20, bottom: 22, right: 20)
+    let spaceBetweenRows: CGFloat = 5
+    let rowInset = UIEdgeInsets(top: 0, left: 20, bottom: 22, right: 20)
     private var sortedItems = SynchronizedArray<WrapData>()
     
     weak var delegate: UploadSelectionListCollectionManagerDelegate?
@@ -80,7 +81,7 @@ final class UploadSelectionListCollectionManager: NSObject {
 
 //MARK: - Static
 extension UploadSelectionListCollectionManager {
-    static func with(collectionView: UICollectionView, gradientView: UIView, delegate: UploadSelectionListCollectionManagerDelegate) -> UploadSelectionListCollectionManager {
+    static func with(collectionView: UICollectionView, gradientView: ScrollGradientView, delegate: UploadSelectionListCollectionManagerDelegate) -> UploadSelectionListCollectionManager {
         let manager = UploadSelectionListCollectionManager()
         manager.delegate = delegate
         manager.collectionView = collectionView
@@ -131,18 +132,18 @@ extension UploadSelectionListCollectionManager: UICollectionViewDelegateFlowLayo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return spaceBetweenRows
     }
 }
 
 
 extension UploadSelectionListCollectionManager: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.gradientView.isHidden = scrollView.contentOffset == CGPoint(x: 0, y: 0)
-            self.gradientView.layoutSubviews()
+        if scrollView.contentOffset.y > 0, scrollView.contentSize.height > scrollView.frame.size.height {
+            gradientView.showAnimated()
+        } else {
+            gradientView.hideAnimated()
         }
-        
     }
 }
 
