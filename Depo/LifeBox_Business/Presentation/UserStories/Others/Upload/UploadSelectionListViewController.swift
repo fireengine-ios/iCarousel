@@ -60,33 +60,43 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
     }
     
     private lazy var collectionManager = UploadSelectionListCollectionManager.with(collectionView: collectionView)
-        
+    
+    private var items = [WrapData]()
+    private var completionHandler: ValueHandler<[WrapData]>?
     
     //MARK: - Override
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        collectionManager.reload(with: items)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        super.viewDidDisappear(animated)
     }
     
     //MARK: - Private
     
     @IBAction private func onShareTap(_ sender: Any) {
-        //
+        dismiss(animated: true) {
+            self.completionHandler?(self.collectionManager.items)
+        }
+        
     }
     
     @IBAction func onCloseButtonTap(_ sender: Any) {
-        dismiss(animated: true) {
-            //
-        }
+        dismiss(animated: true)
     }
 }
 
 extension UploadSelectionListViewController {
     
-    static func with(items: [WrapData]) -> UploadSelectionListViewController {
+    static func with(items: [WrapData], completion: @escaping ValueHandler<[WrapData]>) -> UploadSelectionListViewController {
         let controller = UploadSelectionListViewController.initFromNib()
-        controller.collectionManager.reload(with: items)
+        controller.items = items
+        controller.completionHandler = completion
         return controller
     }
 }

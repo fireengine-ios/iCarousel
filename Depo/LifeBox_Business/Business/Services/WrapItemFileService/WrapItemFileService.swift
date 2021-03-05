@@ -168,12 +168,16 @@ class WrapItemFileService: WrapItemFileOperations {
     func upload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         let localFiles = localWrapedData(files: items)
         
-        uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .regular,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .ROOT,
-                                     success: success,
-                                     fail: fail, returnedUploadOperation: { _ in})
+        let router = RouterVC()
+        let controller = router.uploadSelectionList(with: localFiles) { [weak self] selectedItems in
+            self?.uploadService.uploadFileList(items: selectedItems,
+                                         uploadType: .regular,
+                                         uploadStategy: .WithoutConflictControl,
+                                         uploadTo: .ROOT,
+                                         success: success,
+                                         fail: fail, returnedUploadOperation: { _ in})
+        }
+        router.presentViewController(controller: controller)
     }
     
     func downloadDocuments(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {

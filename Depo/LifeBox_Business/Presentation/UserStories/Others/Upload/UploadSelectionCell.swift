@@ -55,7 +55,7 @@ final class UploadSelectionCell: UICollectionViewCell {
         
         layer.cornerRadius = 4
         layer.borderWidth = 1
-        layer.backgroundColor = ColorConstants.separator.cgColor
+        layer.borderColor = ColorConstants.separator.cgColor
     }
    
     override func prepareForReuse() {

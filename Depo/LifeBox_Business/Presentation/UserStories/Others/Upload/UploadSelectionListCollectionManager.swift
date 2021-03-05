@@ -16,8 +16,8 @@ final class UploadSelectionListCollectionManager: NSObject {
         }
     }
     
-    var numberOfItems: Int {
-        return sortedItems.count
+    var items: [WrapData] {
+        sortedItems.getArray()
     }
     
     
@@ -94,7 +94,7 @@ extension UploadSelectionListCollectionManager: UICollectionViewDelegate {
 //MARK: - UICollectionViewDataSource
 extension UploadSelectionListCollectionManager: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeue(cell: UploadProgressCell.self, for: indexPath)
+        return collectionView.dequeue(cell: UploadSelectionCell.self, for: indexPath)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -110,7 +110,7 @@ extension UploadSelectionListCollectionManager: UICollectionViewDataSource {
 extension UploadSelectionListCollectionManager: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.bounds.size.width
+        let width = collectionView.bounds.size.width - 40
         let height = UploadSelectionCell.height
         
         return CGSize(width: width, height: height)

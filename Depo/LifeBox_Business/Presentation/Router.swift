@@ -815,10 +815,10 @@ class RouterVC: NSObject {
         PrivateShareSharedFilesViewController.with(shareType: .sharedArea)
     }
     
-    func uploadSelectionList(with items: [WrapData]) -> UIViewController {
-        let controller = UploadSelectionListViewController.with(items: items)
+    func uploadSelectionList(with items: [WrapData], completion: @escaping ValueHandler<[WrapData]>) -> UIViewController {
+        let controller = UploadSelectionListViewController.with(items: items, completion: completion)
         controller.modalTransitionStyle = .coverVertical
-        controller.modalPresentationStyle = .overFullScreen
+        controller.modalPresentationStyle = .currentContext
         return controller
     }
     
