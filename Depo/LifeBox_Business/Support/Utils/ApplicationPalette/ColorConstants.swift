@@ -66,9 +66,14 @@ struct ColorConstants {
     static let sharedContactTitleSubtitle = UIColor(named: "sharedContactTitleSubtitle")!
     static let sharedContactCircleBackground = UIColor(named: "sharedContactCircleBackground")!
     static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
+    static let a2FAMethodLabel = UIColor(named: "a2FAMethodLabel")!
+    static let a2FADescriptionLabel = UIColor(named: "a2FADescriptionLabel")!
     static let accessListItemExpireDate = UIColor(named: "accessListItemExpireDate")!
     static let accessListItemName = UIColor(named: "accessListItemName")!
     static let tableBackground = UIColor(named: "tableBackground")!
+    static let a2FABorder = UIColor(named: "a2FABorderColor")!
+    static let a2FAActiveProgress = UIColor(named: "a2FAActiveProgress")!
+    static let buttonDarkBlueBackground = UIColor(named: "loginButtonBackground")!
 
     //MARK: END
     

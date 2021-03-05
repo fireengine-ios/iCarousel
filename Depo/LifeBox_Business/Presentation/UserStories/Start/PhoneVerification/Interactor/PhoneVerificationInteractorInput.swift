@@ -13,6 +13,8 @@ protocol PhoneVerificationInteractorInput {
     var email: String { get }
     
     var phoneNumber: String { get }
+
+    var mainTitle: String { get }
     
     var textDescription: String { get }
     

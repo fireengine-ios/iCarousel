@@ -16,9 +16,28 @@ class ErrorBannerView: UIView {
         }
     }
 
+    var errorLabelTextFont: UIFont {
+        get {
+            return messageLabel.font
+        }
+
+        set {
+            messageLabel.font = newValue
+        }
+    }
+
+    var errorTextAlignment: NSTextAlignment {
+        get {
+            return messageLabel.textAlignment
+        }
+
+        set {
+            messageLabel.textAlignment = newValue
+        }
+    }
+
     private lazy var messageLabel: UILabel = {
         let newValue = UILabel()
-        
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         newValue.textColor = errorLabelTextColor
         newValue.lineBreakMode = .byWordWrapping
