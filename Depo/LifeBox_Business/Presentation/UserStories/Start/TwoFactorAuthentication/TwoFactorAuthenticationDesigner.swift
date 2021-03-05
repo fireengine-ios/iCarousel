@@ -12,6 +12,10 @@ final class TwoFactorAuthenticationDesigner: NSObject {
 
     @IBOutlet private weak var errorView: ErrorBannerView! {
         willSet {
+            newValue.errorLabelTextColor = ColorConstants.loginErrorLabelText
+            newValue.errorLabelTextFont = UIFont.GTAmericaStandardRegularFont(size: 12)
+            newValue.errorTextAlignment = .center
+            newValue.backgroundColor = .clear
             newValue.isHidden = true
         }
     }

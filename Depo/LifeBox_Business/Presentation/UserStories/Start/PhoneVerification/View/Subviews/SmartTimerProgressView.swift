@@ -74,7 +74,7 @@ final class SmartTimerProgressView: UIView {
     }
 
     private func baseSetup() {
-        backgroundColor = ColorConstants.tableBackground
+        backgroundColor = .clear
         addSubview(containerStackView)
         containerStackView.pinToSuperviewEdges()
         containerStackView.addArrangedSubview(lineProgressView)
