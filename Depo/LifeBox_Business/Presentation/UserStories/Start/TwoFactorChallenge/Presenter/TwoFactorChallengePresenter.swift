@@ -12,12 +12,10 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
 
     override func configure() {
         view.setupTextLengh(lenght: interactor.expectedInputLength ?? 6)
-        view.setupPhoneLable(with: TextConstants.a2FASecondPageInfo, number: interactor.phoneNumber)
-        let type = (interactor as? TwoFactorChallengeInteractor)?.challenge.challengeType ?? .phone
-        let mainTitle = type == .phone ? TextConstants.a2FASecondPageVerifyNumber : TextConstants.a2FASecondPageVerifyEmail
+        view.setupPhoneLable(with: interactor.textDescription, number: interactor.phoneNumber)
         view.configureTexts(navigationTitle: TextConstants.a2FASecondPageTitle,
-                            mainPageTitle: mainTitle,
-                            infoTitle: String(format: TextConstants.a2FASecondPageInfo, interactor.phoneNumber),
+                            mainPageTitle: interactor.mainTitle,
+                            infoTitle: String(format: interactor.textDescription, interactor.phoneNumber),
                             underTextfieldText: TextConstants.a2FASecondPageSecurityCode)
     }
     

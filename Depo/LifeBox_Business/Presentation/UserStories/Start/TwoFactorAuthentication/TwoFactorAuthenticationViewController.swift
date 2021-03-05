@@ -34,15 +34,24 @@ enum TwoFAChallengeType: String {
                 return .email
         }
     }
+
+    func getMainTitle(for challengeStatus: TwoFAChallengeParametersResponse.ChallengeStatus) -> String {
+        switch self {
+        case .phone:
+            return TextConstants.a2FASecondPageVerifyNumber
+        case .email:
+            return TextConstants.a2FASecondPageVerifyEmail
+        }
+    }
     
     func getOTPDescription(for challengeStatus: TwoFAChallengeParametersResponse.ChallengeStatus) -> String {
         switch self {
         case .phone:
             return challengeStatus == .new ?
-                TextConstants.twoFAPhoneNewOTPDescription : TextConstants.twoFAPhoneExistingOTPDescription
+                TextConstants.a2FASecondPageInfo : TextConstants.twoFAPhoneExistingOTPDescription
         case .email:
             return challengeStatus == .new ?
-                TextConstants.twoFAEmailNewOTPDescription : TextConstants.twoFAEmailExistingOTPDescription
+                TextConstants.a2FASecondPageInfo : TextConstants.twoFAEmailExistingOTPDescription
         }
     }
 }

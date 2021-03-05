@@ -38,6 +38,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     override var phoneNumber: String {
         return challenge.userData
     }
+
+    override var mainTitle: String {
+        guard let status = otpParams.status else {
+            return super.mainTitle
+        }
+
+        return challenge.challengeType.getMainTitle(for: status)
+    }
     
     override var textDescription: String {
         guard let status = otpParams.status else {
