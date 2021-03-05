@@ -49,10 +49,6 @@ class LineProgressView: UIView {
         progressShape.strokeColor = lineColor
         progressShape.lineWidth = lineWidth
         progressShape.lineCap = kCALineCapRound
-        progressShape.shadowColor = UIColor.black.cgColor
-        progressShape.shadowOffset = CGSize(width: 0.0, height: 0.5)
-        progressShape.shadowRadius = 2.0
-        progressShape.shadowOpacity = 0.5
         progressShape.strokeEnd = 0.0
 
         return progressShape
