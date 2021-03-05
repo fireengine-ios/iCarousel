@@ -20,7 +20,7 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var containerViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var gradientView: ScrollGradientView! {
+    @IBOutlet private weak var gradientView: ScrollGradientView! {
         willSet {
             newValue.addGradientLayer()
             newValue.isUserInteractionEnabled = false
