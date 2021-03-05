@@ -1998,3 +1998,6 @@
 "business_app_access_page_expire_date" = "Expires on: %@";
 "business_app_access_page_from_folder" = "From %@ folder";
 "business_app_access_page_role_change_remove" = "Remove";
+
+"business_app_role_delete" = "Member is removed from private share";
+"business_app_role_update" = "Role is updated";
