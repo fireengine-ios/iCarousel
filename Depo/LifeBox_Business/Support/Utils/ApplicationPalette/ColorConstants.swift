@@ -65,8 +65,9 @@ struct ColorConstants {
     static let accessListItemExpireDate = UIColor(named: "accessListItemExpireDate")!
     static let accessListItemName = UIColor(named: "accessListItemName")!
     static let tableBackground = UIColor(named: "tableBackground")!
-    static let a2FABorderColor = UIColor(named: "a2FABorderColor")!
+    static let a2FABorder = UIColor(named: "a2FABorderColor")!
     static let a2FAActiveProgress = UIColor(named: "a2FAActiveProgress")!
+    static let buttonDarkBlueBackground = UIColor(named: "loginButtonBackground")!
 
     //MARK: END
     

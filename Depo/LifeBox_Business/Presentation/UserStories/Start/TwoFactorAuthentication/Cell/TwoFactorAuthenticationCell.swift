@@ -21,7 +21,7 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
         willSet {
             newValue.layer.cornerRadius = 5
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = ColorConstants.a2FABorderColor.cgColor
+            newValue.layer.borderColor = ColorConstants.a2FABorder.cgColor
             newValue.backgroundColor = ColorConstants.tableBackground
         }
     }

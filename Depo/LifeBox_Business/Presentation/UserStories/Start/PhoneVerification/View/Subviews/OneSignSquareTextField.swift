@@ -24,7 +24,7 @@ final class OneSignSquareTextField: UITextField {
         super.layoutSubviews()
         layer.cornerRadius = 5
         layer.borderWidth = 1.3
-        layer.borderColor = ColorConstants.a2FABorderColor.cgColor
+        layer.borderColor = ColorConstants.a2FABorder.cgColor
         layer.backgroundColor = UIColor.white.cgColor
     }
 
