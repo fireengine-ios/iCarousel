@@ -47,6 +47,12 @@ struct ColorConstants {
         static let labelTitle = UIColor(named: "labelTitle")!
         static let labelTitleBackground = UIColor(named: "labelTitleBackground")!
     }
+    
+    struct UploadProgress {
+        static let cellBackground = UIColor(named: "uploadProgressCellBackground")!
+        static let headerBackground = UIColor(named: "confirmationPopupTitle")!
+        static let progressBackground = UIColor(named: "progressBackgroundColor")!
+    }
 
     static let infoPageValueText = UIColor(named: "infoPageValueText")!
     static let infoPageItemTopText = UIColor(named: "infoPageItemTopText")!

@@ -247,7 +247,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             let array = dataSource.getSelectedItems() as? [Item] else {
                 return
         }
-        bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
+        // TODO: - update later without config. task should be in backlog
+        bottomBarPresenter?.setupTabBarWith(items: array)
     }
     
     func onMaxSelectionExeption() {}
@@ -401,7 +402,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.setSelectionState(selectionState: false)
     }
     
-    func selectModeSelected() {
+    func selectModeSelected(with item: WrapData?) {
         debugLog("SearchViewPresenter selectModeSelected")
         
         startEditing()

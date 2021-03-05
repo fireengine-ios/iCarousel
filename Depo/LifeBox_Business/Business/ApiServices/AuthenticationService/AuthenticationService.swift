@@ -430,7 +430,7 @@ class AuthenticationService: BaseRequestService {
             ItemOperationManager.default.clear()
             CellImageManager.clear()
             RecentSearchesService.shared.clearAll()
-            UploadService.default.cancelOperations()
+            UploadService.shared.cancelOperations()
             AuthoritySingleton.shared.clear()
             storageVars.isAutoSyncSet = false
             SingletonStorage.shared.logoutClear()
