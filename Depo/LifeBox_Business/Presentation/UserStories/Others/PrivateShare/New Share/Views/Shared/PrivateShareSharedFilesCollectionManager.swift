@@ -72,7 +72,11 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
-    func startSelection() {
+    func startSelection(with item: WrapData?) {
+        if let item = item {
+            fileInfoManager.selectItem(item)
+        }
+        
         changeSelection(isActive: true)
         reloadVisibleCells()
     }
@@ -579,9 +583,12 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
         }
     }
     
-    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?) {
+    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?, indexPath: IndexPath?) {
         guard let item = itemModel else {
             return
+        }
+        if let indexPath = indexPath {
+            fileInfoManager.selectItem(at: indexPath)
         }
         
         delegate?.didSelectAction(type: type, on: item, sender: sender)

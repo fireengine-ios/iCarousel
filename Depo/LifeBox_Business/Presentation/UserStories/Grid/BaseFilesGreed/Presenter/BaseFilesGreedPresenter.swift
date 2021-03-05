@@ -565,7 +565,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         
         let selectedItems = dataSource.getSelectedItems()
-        bottomBarPresenter?.setupTabBarWith(items: selectedItems, originalConfig: barConfig)
+        // TODO: - update later without config. task should be in backlog
+        bottomBarPresenter?.setupTabBarWith(items: selectedItems)
     }
     
     func onMoreActions(ofItem: Item?, sender: Any) {
@@ -767,7 +768,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         backHandler?()
     }
     
-    func selectModeSelected() {
+    func selectModeSelected(with item: WrapData?) {
         debugLog("BaseFilesGreedPresenter selectModeSelected")
 
         startEditing()

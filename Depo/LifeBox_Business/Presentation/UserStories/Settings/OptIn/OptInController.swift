@@ -80,8 +80,7 @@ final class OptInController: ViewController, NibInit {
     }
     
     func setupTimer(withRemainingTime remainingTime: Int) {
-        timerLabel.setupTimer(withTimeInterval: 1.0,
-                              timerLimit: remainingTime)
+        timerLabel.setupTimer(timerLimit: remainingTime)
         timerLabel.delegate = self
     }
     
@@ -257,6 +256,8 @@ extension OptInController: SmartTimerLabelDelegate {
 
         timerLabel.isShowMessageWithDropTimer = true
     }
+
+    func timerDidTick(currentCycle: Int, ofTotalDuration: Int, label: SmartTimerLabel) { }
 }
 
 // MARK: - UITextFieldDelegate

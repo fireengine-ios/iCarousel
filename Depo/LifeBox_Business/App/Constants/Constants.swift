@@ -1346,6 +1346,22 @@ extension TextConstants {
     static let sharedContactsPageRoleVaries = NSLocalizedString("business_app_whohasaccess_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
+extension TextConstants {
+    static let a2FAFirstPageTitle = NSLocalizedString("business_app_2FA_first_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageDescription = NSLocalizedString("business_app_2FA_first_page_description_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageDescriptionDetail = NSLocalizedString("business_app_2FA_first_page_description_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCode = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCodeToPhone = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode_to_phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCodeToEmail = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode_to_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageButtonSend = NSLocalizedString("business_app_2FA_first_page_send_button_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let a2FASecondPageTitle = NSLocalizedString("business_app_2FA_second_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageVerifyNumber = NSLocalizedString("business_app_2FA_second_page_verify_number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageVerifyEmail = NSLocalizedString("business_app_2FA_second_page_verify_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageInfo = NSLocalizedString("business_app_2FA_second_page_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageSecurityCode = NSLocalizedString("business_app_2FA_second_page_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
 // MARK: - Access page
 extension TextConstants {
     static let accessPageTitle = NSLocalizedString("business_app_access_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1355,6 +1371,8 @@ extension TextConstants {
     static let accessPageDueDateTo = NSLocalizedString("business_app_access_page_expire_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageFromFolder = NSLocalizedString("business_app_access_page_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRemoveRole = NSLocalizedString("business_app_access_page_role_change_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleUpdated = NSLocalizedString("business_app_role_update", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleDeleted = NSLocalizedString("business_app_role_delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 extension TextConstants {

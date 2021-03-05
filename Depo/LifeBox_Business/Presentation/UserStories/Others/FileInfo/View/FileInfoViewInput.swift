@@ -12,4 +12,6 @@ protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
     func hideViews()
     func showViews()
     func showEntityInfo(_ sharingInfo: SharedFileInfo)
+    func showProgress()
+    func hideProgress()
 }

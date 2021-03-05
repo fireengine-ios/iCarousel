@@ -40,7 +40,7 @@ private enum SwipeState: Equatable {
 
 protocol MultifileCollectionViewCellActionDelegate: class {
     func onMenuPress(sender: Any, itemModel: Item?)
-    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?)
+    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?, indexPath: IndexPath?)
     func onRenameStarted(at indexPath: IndexPath)
     func rename(item: WrapData, name: String, completion: @escaping BoolHandler)
     func onLongPress(cell: UICollectionViewCell)
@@ -462,11 +462,11 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     @IBAction private func onInfoButtonTapped(_ sender: Any) {
         scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
-        actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
+        actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self, indexPath: nil)
     }
     
     @IBAction private func onDeleteButtonTapped(_ sender: Any) {
-        actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
+        actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self, indexPath: nil)
     }
 }
 
@@ -497,7 +497,7 @@ extension MultifileCollectionViewCell {
                 if case .elementType(.rename) = actionType {
                     self?.startRenaming()
                 } else {
-                    self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton)
+                    self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton, indexPath: indexPath)
                 }
                 
             }
@@ -580,10 +580,10 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         
         if currentOffset == infoOffsetX {
             swipeState = .defaultView
-            actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self)
+            actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self, indexPath: nil)
             
         } else if currentOffset == deleteOffsetX {
-            actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self)
+            actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self, indexPath: nil)
         }
     }
     

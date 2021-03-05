@@ -16,8 +16,8 @@ class SplashRouter: SplashRouterInput {
     }
     
     func navigateToLoginScreen() {
-        let loginVC = router.loginScreen
-        router.setNavigationController(controller: loginVC)
+        let navC = UINavigationController(rootViewController: router.loginScreen!)
+        router.setNavigationController(controller: navC)
     }
     
     func navigateToTermsAndService(isFirstLogin: Bool) {

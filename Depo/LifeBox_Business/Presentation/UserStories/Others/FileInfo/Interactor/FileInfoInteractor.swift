@@ -43,11 +43,15 @@ extension FileInfoInteractor: FileInfoInteractorInput {
            item.status != .active {
             return
         }
+
+        output.showProgress()
         
         var sharingInfo: SharedFileInfo?
             
         shareApiService.getRemoteEntityInfo(projectId: accountUuid,
                                             uuid: uuid) { [weak self] result in
+            self?.output.hideProgress()
+            
             switch result {
             case .success(let info):
                 sharingInfo = info

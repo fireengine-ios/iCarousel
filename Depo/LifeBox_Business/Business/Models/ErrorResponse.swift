@@ -22,6 +22,7 @@ enum ErrorResponseText {
     static let accountDeleted = "DELETION_REQUESTED"
     static let accountReadOnly = "READ_ONLY"
     static let captchaIsEmpty = "CAPTCHA_FIELD_IS_EMPTY"
+    static let serverUnavailable = "Temporary error occurred, please try again later"
 }
 
 extension ErrorResponse {

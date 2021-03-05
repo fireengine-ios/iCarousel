@@ -78,7 +78,7 @@ final class LoginViewController: ViewController {
             newValue.setTitle(TextConstants.loginPageLoginButtonTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.backgroundColor = UIColor(named: "loginButtonBackground")
+            newValue.backgroundColor = ColorConstants.buttonDarkBlueBackground
             newValue.isOpaque = true
         }
     }
@@ -219,6 +219,7 @@ final class LoginViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = ""
         setupNavBar()
         
         if !captchaView.isHidden {
@@ -228,7 +229,6 @@ final class LoginViewController: ViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         prepareForDisappear()
     }
     
@@ -266,10 +266,7 @@ final class LoginViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
-        
-        setNavigationTitle(title: TextConstants.loginTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     @objc private func showHideButtonClicked(_ button: UIButton) {

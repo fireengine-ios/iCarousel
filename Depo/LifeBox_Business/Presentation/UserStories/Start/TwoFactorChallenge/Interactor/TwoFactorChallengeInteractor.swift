@@ -11,7 +11,7 @@ import WidgetKit
 final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     
     private var otpParams: TwoFAChallengeParametersResponse
-    private let challenge: TwoFAChallengeModel
+    let challenge: TwoFAChallengeModel
     private lazy var authService = AuthenticationService()
     private var accountWarningService: AccountWarningService?
     private lazy var eulaService = EulaService()
@@ -37,6 +37,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     
     override var phoneNumber: String {
         return challenge.userData
+    }
+
+    override var mainTitle: String {
+        guard let status = otpParams.status else {
+            return super.mainTitle
+        }
+
+        return challenge.challengeType.getMainTitle(for: status)
     }
     
     override var textDescription: String {

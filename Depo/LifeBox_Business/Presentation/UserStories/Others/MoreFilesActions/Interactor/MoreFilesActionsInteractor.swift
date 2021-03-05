@@ -151,15 +151,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         self.sharingItems = items
         switch type {
             case .link:
-                shareViaLink(sourceRect: sourceRect)
-            case .original:
-                shareOrignalSize(sourceRect: sourceRect)
-            case .private:
-                privateShare()
+            shareViaLink(sourceRect: sourceRect)
+        case .original:
+            shareOrignalSize(sourceRect: sourceRect)
+        case .private:
+            privateShare()
         }
     }
     
-    func privateShare() {
+    private func privateShare() {
         guard let items = sharingItems as? [WrapData] else {
             return
         }
@@ -178,7 +178,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
     }
     
-    func shareOrignalSize(sourceRect: CGRect?) {
+    private func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
             let filesWithoutUrl = items.filter { $0.tmpDownloadUrl == nil }
             fileService.createDownloadUrls(for: filesWithoutUrl) { [weak self] in
