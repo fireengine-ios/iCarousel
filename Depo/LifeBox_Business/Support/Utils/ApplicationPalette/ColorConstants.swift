@@ -48,6 +48,12 @@ struct ColorConstants {
         static let labelTitle = UIColor(named: "labelTitle")!
         static let labelTitleBackground = UIColor(named: "labelTitleBackground")!
     }
+    
+    struct UploadProgress {
+        static let cellBackground = UIColor(named: "uploadProgressCellBackground")!
+        static let headerBackground = UIColor(named: "confirmationPopupTitle")!
+        static let progressBackground = UIColor(named: "progressBackgroundColor")!
+    }
 
     static let infoPageValueText = UIColor(named: "infoPageValueText")!
     static let infoPageItemTopText = UIColor(named: "infoPageItemTopText")!
@@ -61,6 +67,14 @@ struct ColorConstants {
     static let sharedContactTitleSubtitle = UIColor(named: "sharedContactTitleSubtitle")!
     static let sharedContactCircleBackground = UIColor(named: "sharedContactCircleBackground")!
     static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
+    static let a2FAMethodLabel = UIColor(named: "a2FAMethodLabel")!
+    static let a2FADescriptionLabel = UIColor(named: "a2FADescriptionLabel")!
+    static let accessListItemExpireDate = UIColor(named: "accessListItemExpireDate")!
+    static let accessListItemName = UIColor(named: "accessListItemName")!
+    static let tableBackground = UIColor(named: "tableBackground")!
+    static let a2FABorder = UIColor(named: "a2FABorderColor")!
+    static let a2FAActiveProgress = UIColor(named: "a2FAActiveProgress")!
+    static let buttonDarkBlueBackground = UIColor(named: "loginButtonBackground")!
 
     static let topBarColor = UIColor(named: "topBarBackground")!
     static let topBarSettingsIconColor = UIColor(named: "topBarSettingsIconColor")!

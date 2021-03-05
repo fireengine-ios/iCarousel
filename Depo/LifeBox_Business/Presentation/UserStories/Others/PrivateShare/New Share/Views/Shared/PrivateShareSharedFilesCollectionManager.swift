@@ -74,7 +74,11 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
-    func startSelection() {
+    func startSelection(with item: WrapData?) {
+        if let item = item {
+            fileInfoManager.selectItem(item)
+        }
+        
         changeSelection(isActive: true)
         reloadVisibleCells()
     }
@@ -167,12 +171,18 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func reloadAfterOperation() {
-        return fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
-            if shouldReload {
-                if let indexes = indexes {
-                    self?.batchUpdate(indexes: indexes)
-                } else {
-                    self?.reloadCollection()
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500)) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
+                if shouldReload {
+                    if let indexes = indexes {
+                        self?.batchUpdate(indexes: indexes)
+                    } else {
+                        self?.reloadCollection()
+                    }
                 }
             }
         }
@@ -180,7 +190,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private func reloadOnViewAppear() {
         resetVisibleCellsSwipe()
-        return fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
+        fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
             if shouldReload {
                 if let indexes = indexes {
                     self?.batchUpdate(indexes: indexes)
@@ -579,9 +589,12 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
         }
     }
     
-    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?) {
+    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?, indexPath: IndexPath?) {
         guard let item = itemModel else {
             return
+        }
+        if let indexPath = indexPath {
+            fileInfoManager.selectItem(at: indexPath)
         }
         
         delegate?.didSelectAction(type: type, on: item, sender: sender)

@@ -20,9 +20,9 @@ enum TwoFAChallengeType: String {
     var typeDescription:String {
         switch self {
         case .phone:
-            return TextConstants.twoFactorAuthenticationPhoneNumberCell
+            return TextConstants.a2FAFirstPageSendSecurityCodeToPhone
         case .email:
-            return TextConstants.twoFactorAuthenticationEmailCell
+            return TextConstants.a2FAFirstPageSendSecurityCodeToEmail
         }
     }
     
@@ -34,15 +34,24 @@ enum TwoFAChallengeType: String {
                 return .email
         }
     }
+
+    func getMainTitle(for challengeStatus: TwoFAChallengeParametersResponse.ChallengeStatus) -> String {
+        switch self {
+        case .phone:
+            return TextConstants.a2FASecondPageVerifyNumber
+        case .email:
+            return TextConstants.a2FASecondPageVerifyEmail
+        }
+    }
     
     func getOTPDescription(for challengeStatus: TwoFAChallengeParametersResponse.ChallengeStatus) -> String {
         switch self {
         case .phone:
             return challengeStatus == .new ?
-                TextConstants.twoFAPhoneNewOTPDescription : TextConstants.twoFAPhoneExistingOTPDescription
+                TextConstants.a2FASecondPageInfo : TextConstants.twoFAPhoneExistingOTPDescription
         case .email:
             return challengeStatus == .new ?
-                TextConstants.twoFAEmailNewOTPDescription : TextConstants.twoFAEmailExistingOTPDescription
+                TextConstants.a2FASecondPageInfo : TextConstants.twoFAEmailExistingOTPDescription
         }
     }
 }
@@ -106,11 +115,23 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         setup()
         trackScreen()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        configureNavBar()
+        setupNavigationBar()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNavigationBar()
+    }
+
+    private func setupNavigationBar() {
+        title = TextConstants.a2FAFirstPageTitle
+        whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
+                         titleTextColor: ColorConstants.infoPageItemBottomText)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
     
     //MARK: Utility methods
@@ -125,21 +146,8 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         analyticsService.logScreen(screen: .securityCheck)
     }
     
-    private func configureNavBar() {
-        setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
-
-        defaultNavBarStyle()
-    }
-    
     private func setReasonDescriptionLabel() {
-        if let reason = challengingReason {
-            switch reason {
-            case .accountSetting:
-                reasonOfAuthLabel.text = TextConstants.twoFactorAuthenticationAccountSettingReason
-            case .newDevice:
-                reasonOfAuthLabel.text = TextConstants.twoFactorAuthenticationNewDeviceReason
-            }
-        }
+        reasonOfAuthLabel.text = TextConstants.a2FAFirstPageDescription
     }
     
     private func createAvailableTypesArray(availableTypes: [TwoFactorAuthErrorResponseChallengeType]?) {
@@ -236,10 +244,10 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         errorView.message = text
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.errorView.isHidden = false
-            
+
             self.view.layoutIfNeeded()
         }
-        
+
         let errorViewRect = self.view.convert(errorView.frame, to: self.view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)
     }

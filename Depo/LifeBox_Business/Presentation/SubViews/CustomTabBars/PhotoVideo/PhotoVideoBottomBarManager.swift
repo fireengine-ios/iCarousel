@@ -31,7 +31,8 @@ final class PhotoVideoBottomBarManager {
     }
     
     func update(for items: [WrapData]) {
-        bottomBarPresenter.setupTabBarWith(items: items, originalConfig: photoVideoBottomBarConfig)
+        // TODO: - update later without config. task should be in backlog
+        bottomBarPresenter.setupTabBarWith(items: items)
     }
     
     func show() {

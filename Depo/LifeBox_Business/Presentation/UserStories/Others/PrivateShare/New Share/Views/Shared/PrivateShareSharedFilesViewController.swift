@@ -310,6 +310,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 let selectedItems = self.collectionManager.selectedItems()
                 self.show(selectedItemsCount: selectedItems.count)
                 self.bottomBarManager.show()
+                self.bottomBarManager.update(for: selectedItems)
             } else {
                 self.bottomBarManager.hide()
             }
@@ -407,9 +408,8 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
 
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
-    
-    func selectModeSelected() {
-        collectionManager.startSelection()
+    func selectModeSelected(with item: WrapData?) {
+        collectionManager.startSelection(with: item)
     }
     
     func stopModeSelected() {

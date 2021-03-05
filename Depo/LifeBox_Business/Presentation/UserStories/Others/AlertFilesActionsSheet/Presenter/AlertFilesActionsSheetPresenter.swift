@@ -226,7 +226,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .delete,
                      .endSharing,
                      .leaveSharing,
-                     .moveToTrashShared:
+                     .moveToTrashShared,
+                     .editorRole,
+                     .viewerRole,
+                     .removeRole:
                     
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
                         self?.handleAction(type: type, items: currentItems)
@@ -420,7 +423,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             interactor.documentDetails(items: items)
             
         case .select:
-            basePassingPresenter?.selectModeSelected()
+            basePassingPresenter?.selectModeSelected(with: items.first as? Item)
 //                    self.interactor.//TODO: select and select all pass to grid's presenter
             
         case .selectAll:

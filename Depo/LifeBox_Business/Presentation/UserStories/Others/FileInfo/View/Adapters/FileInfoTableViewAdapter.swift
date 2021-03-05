@@ -141,6 +141,7 @@ extension FileInfoTableViewAdapter: UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EntityInfoItemTableViewCell.self), for: indexPath) as? EntityInfoItemTableViewCell {
                 let item = dataSource[indexPath.row]
                 cell.setup(with: item.key, and: item.value)
+                cell.selectionStyle = .none
                 return cell
             }
         case 1:
@@ -152,6 +153,7 @@ extension FileInfoTableViewAdapter: UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SharingInfoTableViewCell.self), for: indexPath) as? SharingInfoTableViewCell {
                 cell.setup(with: sharingInfo)
                 cell.delegate = self
+                cell.selectionStyle = .none
                 return cell
             }
         default: break

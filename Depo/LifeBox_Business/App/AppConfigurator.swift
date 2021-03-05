@@ -57,7 +57,8 @@ final class AppConfigurator {
         AuthenticationService().logout {
             DispatchQueue.main.async {
                 let router = RouterVC()
-                router.setNavigationController(controller: router.loginScreen)
+                let navC = UINavigationController(rootViewController: router.loginScreen!)
+                router.setNavigationController(controller: navC)
             }
         }
     }

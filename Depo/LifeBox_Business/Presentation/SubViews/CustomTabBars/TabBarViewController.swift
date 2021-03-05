@@ -32,6 +32,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     @IBOutlet weak var bottomTabBarConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var musicBar: MusicBar!
+    
+    @IBOutlet weak var uploadProgressView: UploadProgressView! {
+        willSet {
+            newValue.delegate = self
+            UploadProgressManager.shared.delegate = newValue
+        }
+    }
+    
+    @IBOutlet weak var uploadProgressViewHeightConstraint: NSLayoutConstraint!
+    
 
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var externalFileUploadService = ExternalFileUploadService()
@@ -179,6 +189,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = 0
                 self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
+                self.setHeightConstantForUploadProgress()
                 debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
@@ -194,6 +205,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.musicBarHeightConstraint.constant = 0
+                self.setHeightConstantForUploadProgress()
                 debugLog("TabBarVC showTabBar about to layout")
                 self.view.layoutIfNeeded()
             }, completion: { _ in
@@ -255,6 +267,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return nil
     }
 
+    
+    @IBAction func tempUploadStart(_ sender: Any) {
+        handleAction(.upload(type: .regular))
+    }
 }
 
 //MARK: - UIImagePickerControllerDelegate
@@ -342,5 +358,30 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         }
+    }
+}
+
+
+extension TabBarViewController: UploadProgressViewDelegate {
+    func update() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+                self.setHeightConstantForUploadProgress()
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    private func setHeightConstantForUploadProgress() {
+        let value: CGFloat
+        if uploadProgressView.isClosed {
+            value = 0
+        } else if uploadProgressView.isMinified {
+            value = 50
+        } else {
+            value = min(UIScreen.main.bounds.size.height / 2, uploadProgressView.contentHeight + 50)
+        }
+        
+        uploadProgressViewHeightConstraint.constant = value
     }
 }

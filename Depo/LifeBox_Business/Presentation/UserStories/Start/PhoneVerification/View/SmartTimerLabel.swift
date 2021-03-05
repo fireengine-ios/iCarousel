@@ -9,6 +9,9 @@
 import UIKit
 
 protocol SmartTimerLabelDelegate: class {
+    func timerDidTick(currentCycle: Int,
+                      ofTotalDuration: Int,
+                      label: SmartTimerLabel)
     func timerDidFinishRunning()
 }
 
@@ -17,6 +20,8 @@ class SmartTimerLabel: UILabel {
     weak var delegate: SmartTimerLabelDelegate?
     
     private var timer: Timer?
+
+    private let tickInterval: TimeInterval = TimeInterval(1)
     
     //timer Life time
     private var lifeLimit: Int = 0
@@ -29,14 +34,14 @@ class SmartTimerLabel: UILabel {
     
     var startDate: Date?
     
-    func setupTimer(withTimeInterval timeInterval: Float = 1.0, timerLimit lifetime: Int) {
+    func setupTimer(timerLimit lifetime: Int) {
         stopTimer()
         isDead = false
         lifeLimit = lifetime
         timerCycle = 0
         stopTimer()
         
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(timeInterval),
+        timer = Timer.scheduledTimer(timeInterval: tickInterval,
                                           target: self,
                                           selector: #selector(self.timerUpdate),
                                           userInfo: nil, repeats: true)
@@ -79,6 +84,9 @@ class SmartTimerLabel: UILabel {
         timerCycle += 1
         setupTimerLabel()
         checkLifeSpent()
+        delegate?.timerDidTick(currentCycle: timerCycle,
+                               ofTotalDuration: lifeLimit,
+                               label: self)
     }
     
     private func stopTimer() {

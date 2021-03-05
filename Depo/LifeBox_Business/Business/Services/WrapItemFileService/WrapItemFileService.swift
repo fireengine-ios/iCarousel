@@ -39,7 +39,7 @@ class WrapItemFileService: WrapItemFileOperations {
     
     let remoteFileService = FileService.shared
     let sharedFileService = SharedService()
-    let uploadService = UploadService.default
+    let uploadService = UploadService.shared
     private let hiddenService = HiddenService()
     private lazy var privateShareApiService = PrivateShareApiServiceImpl()
     
@@ -174,35 +174,6 @@ class WrapItemFileService: WrapItemFileOperations {
                                      uploadTo: .ROOT,
                                      success: success,
                                      fail: fail, returnedUploadOperation: { _ in})
-    }
-    
-    func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperations: @escaping ([UploadOperation]?) -> Void) {
-        let localFiles = localWrapedData(files: items)
-        guard localFiles.count > 0 else {
-            success()
-            return
-        }
-        
-        
-        uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .syncToUse,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .ROOT,
-                                     success: {
-                                        debugLog("SyncToUse - Waiting for item details")
-                                        WrapItemFileService.waitItemsDetails(for: items,
-                                                                             maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
-                                                                             success: success,
-                                                                             fail: fail)
-        },
-                                     fail: { error in
-                                        if error.description == TextConstants.canceledOperationTextError {
-                                            return
-                                        }
-                                        fail(error)
-        }, returnedUploadOperation: { operations in
-            syncOperations(operations)
-        })
     }
     
     func downloadDocuments(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {

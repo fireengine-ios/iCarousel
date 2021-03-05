@@ -78,7 +78,7 @@ final class LoginViewController: ViewController {
             newValue.setTitle(TextConstants.loginPageLoginButtonTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.backgroundColor = UIColor(named: "loginButtonBackground")
+            newValue.backgroundColor = ColorConstants.buttonDarkBlueBackground
             newValue.isOpaque = true
         }
     }
@@ -161,15 +161,15 @@ final class LoginViewController: ViewController {
 
     private let spacingFromRightToShowHideButton: CGFloat = 20
     private lazy var showHideButtonWithSpacingStackView: UIStackView = {
-        let stk = UIStackView()
-        stk.axis = .horizontal
-        stk.spacing = 0
-        stk.addArrangedSubview(showHideButton)
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 0
+        stack.addArrangedSubview(showHideButton)
         let spacingView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: spacingFromRightToShowHideButton, height: spacingFromRightToShowHideButton)))
         spacingView.backgroundColor = .clear
-        stk.addArrangedSubview(spacingView)
-        stk.frame = CGRect(origin: .zero, size: CGSize(width: showHideButton.frame.size.width + spacingFromRightToShowHideButton, height: showHideButton.frame.size.height))
-        return stk
+        stack.addArrangedSubview(spacingView)
+        stack.frame = CGRect(origin: .zero, size: CGSize(width: showHideButton.frame.size.width + spacingFromRightToShowHideButton, height: showHideButton.frame.size.height))
+        return stack
     }()
 
     private lazy var showHideButton: UIButton = {
@@ -219,6 +219,7 @@ final class LoginViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = ""
         setupNavBar()
         
         if !captchaView.isHidden {
@@ -228,7 +229,6 @@ final class LoginViewController: ViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         prepareForDisappear()
     }
     
@@ -266,10 +266,7 @@ final class LoginViewController: ViewController {
     }
     
     private func setupNavBar() {
-        defaultNavBarStyle()
-        
-        setNavigationTitle(title: TextConstants.loginTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     @objc private func showHideButtonClicked(_ button: UIButton) {

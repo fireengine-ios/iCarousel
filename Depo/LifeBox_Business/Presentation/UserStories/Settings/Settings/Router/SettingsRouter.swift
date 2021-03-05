@@ -13,7 +13,8 @@ class SettingsRouter: SettingsRouterInput {
     let router = RouterVC()
     
     func goToLoginScreen() {
-        router.setNavigationController(controller: router.loginScreen)
+        let navC = UINavigationController(rootViewController: router.loginScreen!)
+        router.setNavigationController(controller: navC)
     }
     
     func goToPermissions() {

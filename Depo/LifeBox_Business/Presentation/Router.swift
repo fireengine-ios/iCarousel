@@ -812,7 +812,7 @@ class RouterVC: NSObject {
     }
     
     func privateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> UIViewController {
-        PrivateShateAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
+        PrivateShareAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
     }
     
     var sharedAreaController: UIViewController {

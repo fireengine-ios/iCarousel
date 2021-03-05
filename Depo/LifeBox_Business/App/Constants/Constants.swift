@@ -1339,9 +1339,37 @@ extension TextConstants {
 
 // MARK: - SharedContacts
 extension TextConstants {
+    static let uploadProgressHederTitle = NSLocalizedString("business_app_upload_bar_uploading_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedContactsPageTitle = NSLocalizedString("business_app_whohasaccess_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedContactsPageRoleOwner = NSLocalizedString("business_app_whohasaccess_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedContactsPageRoleEditor = NSLocalizedString("business_app_whohasaccess_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedContactsPageRoleViewer = NSLocalizedString("business_app_whohasaccess_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedContactsPageRoleVaries = NSLocalizedString("business_app_whohasaccess_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
+    static let a2FAFirstPageTitle = NSLocalizedString("business_app_2FA_first_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageDescription = NSLocalizedString("business_app_2FA_first_page_description_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageDescriptionDetail = NSLocalizedString("business_app_2FA_first_page_description_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCode = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCodeToPhone = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode_to_phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCodeToEmail = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode_to_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageButtonSend = NSLocalizedString("business_app_2FA_first_page_send_button_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let a2FASecondPageTitle = NSLocalizedString("business_app_2FA_second_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageVerifyNumber = NSLocalizedString("business_app_2FA_second_page_verify_number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageVerifyEmail = NSLocalizedString("business_app_2FA_second_page_verify_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageInfo = NSLocalizedString("business_app_2FA_second_page_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageSecurityCode = NSLocalizedString("business_app_2FA_second_page_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Access page
+extension TextConstants {
+    static let accessPageTitle = NSLocalizedString("business_app_access_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleEditor = NSLocalizedString("business_app_access_page_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleViewer = NSLocalizedString("business_app_access_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleVaries = NSLocalizedString("business_app_access_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageDueDateTo = NSLocalizedString("business_app_access_page_expire_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageFromFolder = NSLocalizedString("business_app_access_page_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRemoveRole = NSLocalizedString("business_app_access_page_role_change_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
