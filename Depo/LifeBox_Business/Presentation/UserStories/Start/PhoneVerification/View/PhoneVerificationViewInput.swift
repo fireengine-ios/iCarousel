@@ -9,6 +9,11 @@
 protocol PhoneVerificationViewInput: class, Waiting {
 
     func setupInitialState()
+
+    func configureTexts(navigationTitle: String?,
+                        mainPageTitle: String,
+                        infoTitle: String,
+                        underTextfieldText: String)
     
     func resendButtonShow(show: Bool)
     
@@ -27,5 +32,4 @@ protocol PhoneVerificationViewInput: class, Waiting {
     func updateEditingState() 
         
     func showError(_ error: String)
-    
 }
