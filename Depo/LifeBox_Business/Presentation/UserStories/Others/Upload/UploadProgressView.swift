@@ -33,7 +33,7 @@ final class UploadProgressView: UIView, FromNib {
     private lazy var collectionManager = UploadProgressCollectionManager.with(collectionView: collectionView)
     private lazy var progressHeader = UploadProgressHeader.initFromNib()
     
-    private(set) var isMinified = true {
+    private(set) var isMinified = false {
         didSet {
             delegate?.update()
         }

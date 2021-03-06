@@ -68,9 +68,11 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         guard let shareInfo = shareInfo else {
             return
         }
+        showSpinner()
 
         privateShareApiService.getRemoteEntityInfo(projectId: shareInfo.accountUuid,
                                                    uuid: shareInfo.uuid) { [weak self] result in
+            self?.hideSpinner()
             switch result {
             case .success(let info):
                 self?.shareInfo = info

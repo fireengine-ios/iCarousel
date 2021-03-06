@@ -2007,3 +2007,7 @@
 "business_app_sortby_oldest" = "Oldest";
 "business_app_sortby_largest" = "Largest";
 "business_app_sortby_smallest" = "Smallest";
+"business_app_upload_select_page_title" = "Upload Files";
+"business_app_upload_select_page_upload_button" = "Upload";
+"business_app_role_delete" = "Member is removed from private share";
+"business_app_role_update" = "Role is updated";

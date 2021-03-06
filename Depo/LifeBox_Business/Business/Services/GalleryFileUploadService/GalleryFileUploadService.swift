@@ -112,13 +112,28 @@ final class GalleryFileUploadService: NSObject {
                 break
         }
         
-        UploadService.shared.uploadFileList(items: items, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .ROOT, folder: rootUUID, isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: false, projectId: accountUuid, success: { [weak self] in
-            self?.delegate?.uploaded(items: items)
-            
-        }, fail: { [weak self] error in
-            self?.delegate?.failed(error: ErrorResponse.error(error))
-            
-        }, returnedUploadOperation: { _ in })
+        let controller = router.uploadSelectionList(with: items) { [weak self] selectedItems in
+            guard let self = self else {
+                return
+            }
+            UploadService.shared.uploadFileList(items: selectedItems,
+                                                uploadType: self.uploadType,
+                                                uploadStategy: .WithoutConflictControl,
+                                                uploadTo: .ROOT,
+                                                folder: rootUUID,
+                                                isFavorites: false,
+                                                isFromAlbum: isFromAlbum,
+                                                isFromCamera: false,
+                                                projectId: accountUuid,
+                                                success: { [weak self] in
+                self?.delegate?.uploaded(items: items)
+                
+            }, fail: { [weak self] error in
+                self?.delegate?.failed(error: ErrorResponse.error(error))
+                
+            }, returnedUploadOperation: { _ in })
+        }
+        router.presentViewController(controller: controller)
     }
     
     private func verify(items: [WrapData]) -> String? {

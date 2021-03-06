@@ -21,23 +21,23 @@ class GradientView: UIView {
         }
     }
     
-    func update(withFrame newFrame: CGRect, startColor: UIColor, endColoer: UIColor, startPoint: CGPoint, endPoint: CGPoint) {
+    func update(withFrame newFrame: CGRect, startColor: UIColor, endColor: UIColor, startPoint: CGPoint, endPoint: CGPoint) {
         
         frame = newFrame
         
         gradientLayer.frame = bounds
-        gradientLayer.colors = [startColor.cgColor, endColoer.cgColor]
+        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
     }
     
-    func setup(withFrame newFrame: CGRect, startColor: UIColor, endColoer: UIColor, startPoint: CGPoint, endPoint: CGPoint) {
+    func setup(withFrame newFrame: CGRect, startColor: UIColor, endColor: UIColor, startPoint: CGPoint, endPoint: CGPoint) {
         
         frame = newFrame
         autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
         gradientLayer.frame = bounds
-        gradientLayer.colors = [startColor.cgColor, endColoer.cgColor]
+        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
         gradientLayer.startPoint = startPoint
         gradientLayer.endPoint = endPoint
         layer.addSublayer(gradientLayer)
