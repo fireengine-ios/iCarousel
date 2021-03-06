@@ -59,13 +59,13 @@ indirect enum PrivateShareType: Equatable {
         switch typeAndRoot {
             case (.myDisk, _):
                 if rootPermissions?.granted?.contains(.create) == true {
-                    return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                    return [.upload(type: .regular), .uploadFiles(type: .regular),  .newFolder(type: .regular)]
                 }
                 return []
                 
             case (.sharedArea, _):
                 if rootPermissions?.granted?.contains(.create) == true {
-                    return [.newFolder(type: .sharedArea), .upload(type: .sharedArea), .uploadFiles(type: .sharedArea)]
+                    return [.upload(type: .sharedArea), .uploadFiles(type: .sharedArea), .newFolder(type: .sharedArea)]
                 }
                 return []
             
@@ -84,22 +84,22 @@ indirect enum PrivateShareType: Equatable {
         switch innerFolderVeryRootType {
             case .myDisk:
                 if permissions.contains(.create) {
-                    return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                    return [ .upload(type: .regular), .uploadFiles(type: .regular), .newFolder(type: .regular)]
                 }
                 return []
                 
             case .byMe:
-                return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                return [.upload(type: .regular), .uploadFiles(type: .regular), .newFolder(type: .regular)]
                 
             case .withMe:
                 if permissions.contains(.create) {
-                    return [.newFolder(type: .sharedWithMe), .upload(type: .sharedWithMe), .uploadFiles(type: .sharedWithMe)]
+                    return [.upload(type: .sharedWithMe), .uploadFiles(type: .sharedWithMe), .newFolder(type: .sharedWithMe)]
                 }
                 return []
                 
             case .sharedArea:
                 if permissions.contains(.create) {
-                    return [.newFolder(type: .sharedArea), .upload(type: .sharedArea), .uploadFiles(type: .sharedArea)]
+                    return [.upload(type: .sharedArea), .uploadFiles(type: .sharedArea), .newFolder(type: .sharedArea)]
                 }
                 return []
                 

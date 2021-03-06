@@ -266,11 +266,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         return nil
     }
-
-    
-    @IBAction func tempUploadStart(_ sender: Any) {
-        handleAction(.upload(type: .regular))
-    }
 }
 
 //MARK: - UIImagePickerControllerDelegate
@@ -308,59 +303,6 @@ extension TabBarViewController: MediaPlayerDelegate {
     func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {}
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {}
 }
-
-import CoreServices
-extension TabBarViewController: TabBarActionHandler {
-    
-    func canHandleTabBarAction(_ action: TabBarViewController.Action) -> Bool {
-        return true
-    }
-    
-    func handleAction(_ action: TabBarViewController.Action) {
-        let router = RouterVC()
-        
-        switch action {
-            case .createFolder(type: _):
-            let controller: UIViewController
-            if let sharedFolder = router.sharedFolderItem {
-                let isSharedByWithMe = sharedFolder.type.isContained(in: [.byMe, .withMe])
-                let parameters = CreateFolderParameters(accountUuid: sharedFolder.accountUuid, rootFolderUuid: sharedFolder.uuid, isShared: isSharedByWithMe)
-                controller = router.createNewFolder(parameters: parameters)
-            } else {
-                assertionFailure()
-                return
-            }
-            
-            let nController = NavigationController(rootViewController: controller)
-            router.presentViewController(controller: nController)
-
-        case .upload(type: let uploadType):
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
-            galleryFileUploadService.upload(type:uploadType, rootViewController: self, delegate: self)
-            
-        case .uploadFiles(type: let uploadType):
-            externalFileUploadService.showViewController(type: uploadType, router: router, externalFileType: .any)
-                
-        case .uploadFromApp:
-            let parentFolder = router.getParentUUID()
-            
-            let controller: UIViewController
-            if let currentVC = currentViewController as? BaseFilesGreedViewController {
-                controller = router.uploadFromLifeBox(folderUUID: parentFolder,
-                                                      soorceUUID: "",
-                                                      sortRule: currentVC.getCurrentSortRule(),
-                                                      type: .List)
-            } else {
-                controller = router.uploadFromLifeBox(folderUUID: parentFolder)
-            }
-            
-            let navigationController = NavigationController(rootViewController: controller)
-            navigationController.navigationBar.isHidden = false
-            router.presentViewController(controller: navigationController)
-        }
-    }
-}
-
 
 extension TabBarViewController: UploadProgressViewDelegate {
     func update() {

@@ -1999,3 +1999,11 @@
 "business_app_access_page_expire_date" = "Expires on: %@";
 "business_app_access_page_from_folder" = "From %@ folder";
 "business_app_access_page_role_change_remove" = "Remove";
+
+"business_app_sortby" = "Sort by:";
+"business_app_sortby_name_a_z" = "Name(A-Z)";
+"business_app_sortby_name_z_a" = "Name(Z-A)";
+"business_app_sortby_newest" = "Newest";
+"business_app_sortby_oldest" = "Oldest";
+"business_app_sortby_largest" = "Largest";
+"business_app_sortby_smallest" = "Smallest";

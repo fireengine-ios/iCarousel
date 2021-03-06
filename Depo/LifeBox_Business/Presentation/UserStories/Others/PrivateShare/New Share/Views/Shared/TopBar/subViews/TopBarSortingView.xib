@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0n-3Z-yT3">
-                    <rect key="frame" x="15" y="5" width="68" height="43"/>
+                    <rect key="frame" x="59" y="5" width="68" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="68" id="wQI-Xm-eNg"/>
                         <constraint firstAttribute="height" constant="43" id="wnT-vG-7Hi"/>
@@ -29,21 +29,30 @@
                         <action selector="sortByAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Enq-QW-0Q2"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gF6-W3-MQN">
+                    <rect key="frame" x="15" y="16" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <viewLayoutGuide key="safeArea" id="ow9-gF-SU6"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="D0n-3Z-yT3" secondAttribute="bottom" constant="5" id="BR6-Ed-l8K"/>
+                <constraint firstItem="gF6-W3-MQN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="XLb-Xd-YxL"/>
                 <constraint firstItem="D0n-3Z-yT3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="a1F-eo-eck"/>
-                <constraint firstItem="D0n-3Z-yT3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="gI8-9e-n0y"/>
                 <constraint firstItem="D0n-3Z-yT3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="j8P-gN-bUl"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="D0n-3Z-yT3" secondAttribute="trailing" constant="200" id="tza-bx-Bgl"/>
+                <constraint firstItem="gF6-W3-MQN" firstAttribute="leading" secondItem="ow9-gF-SU6" secondAttribute="leading" constant="15" id="kLH-6Y-GmY"/>
+                <constraint firstItem="D0n-3Z-yT3" firstAttribute="leading" secondItem="gF6-W3-MQN" secondAttribute="trailing" constant="2" id="lev-VT-t4o"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="D0n-3Z-yT3" secondAttribute="trailing" constant="20" id="tza-bx-Bgl"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="sortByButton" destination="D0n-3Z-yT3" id="wAl-2P-4zB"/>
+                <outlet property="sortLabel" destination="gF6-W3-MQN" id="voT-hP-s5f"/>
             </connections>
             <point key="canvasLocation" x="133.33333333333334" y="343.19196428571428"/>
         </view>

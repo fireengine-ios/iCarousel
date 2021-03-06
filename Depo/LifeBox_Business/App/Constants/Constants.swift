@@ -1373,3 +1373,15 @@ extension TextConstants {
     static let accessPageFromFolder = NSLocalizedString("business_app_access_page_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRemoveRole = NSLocalizedString("business_app_access_page_role_change_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+//MARK: - TopBar Sorting
+
+extension TextConstants {
+    static let topBarSortSubviewSortByLabel = NSLocalizedString("business_app_sortby", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByName_a_z = NSLocalizedString("business_app_sortby_name_a_z", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByName_z_a = NSLocalizedString("business_app_sortby_name_z_a", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByNewest = NSLocalizedString("business_app_sortby_newest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByOldest = NSLocalizedString("business_app_sortby_oldest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByLargest = NSLocalizedString("business_app_sortby_largest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortBySmallest = NSLocalizedString("business_app_sortby_smallest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

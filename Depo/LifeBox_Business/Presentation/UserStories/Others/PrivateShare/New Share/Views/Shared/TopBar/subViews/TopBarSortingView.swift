@@ -12,12 +12,23 @@ protocol TopBarSortingViewDelegate: class {
 
 final class TopBarSortingView: UIView, NibInit {
     
+    @IBOutlet weak var sortLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.topBarSortSubviewSortByLabel
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+            newValue.textColor = ColorConstants.confirmationPopupTitle
+            newValue.adjustsFontSizeToFitWidth()
+        }
+    }
+    
     @IBOutlet private weak var sortByButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.sortby, for: .normal)
+            newValue.setTitle("", for: .normal)
+            
+            newValue.setImage(UIImage(named: "sortingArrow"), for: .normal)
             newValue.adjustsFontSizeToFitWidth()
             
-            newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
             newValue.titleLabel?.textColor = ColorConstants.confirmationPopupTitle
             
             newValue.forceImageToRightSide()
@@ -26,7 +37,11 @@ final class TopBarSortingView: UIView, NibInit {
     
     private let floatingContainerWidth: CGFloat = 236
     
-    private var currentSortOption: MoreActionsConfig.SortRullesType = .AlphaBetricAZ
+    private var currentSortOption: MoreActionsConfig.SortRullesType = .AlphaBetricAZ {
+        willSet {
+            sortByButton.setTitle("\(newValue.description) ", for: .normal)
+        }
+    }
     private var availableSortOptions = [MoreActionsConfig.SortRullesType]()
     
     weak var delegate: TopBarSortingViewDelegate?

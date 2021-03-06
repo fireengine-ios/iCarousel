@@ -362,8 +362,14 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         
         realButton.showsMenuAsPrimaryAction = true
         realButton.menu = plusButtonActionsManager.generateMenu(for: floatingButtonsArray, actionsDelegate: self)
+        realButton.addTarget(self, action: #selector(onMenuTriggered), for: .menuActionTriggered)
         
     }
+    
+    @objc private func onMenuTriggered() {
+            let lightFeedback = UIImpactFeedbackGenerator(style: .light)
+            lightFeedback.impactOccurred()
+        }
     
     func onCancelSelectionButton() {
         collectionManager.endSelection()
