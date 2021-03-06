@@ -427,6 +427,7 @@ pipeline {
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
                 TESTFLIGHT_UPLOAD = credentials('testflight_appSpesific')
                 FASTLANE_DONT_STORE_PASSWORD = 1
+                FASTLANE_SESSION = credentials('fastlane_session')
            }
             steps {
                 script {
