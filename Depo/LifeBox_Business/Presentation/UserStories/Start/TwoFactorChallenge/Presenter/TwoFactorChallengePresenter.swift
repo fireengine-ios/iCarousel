@@ -9,6 +9,15 @@
 final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     
     private var isPhoneJustUpdated = false
+
+    override func configure() {
+        view.setupTextLengh(lenght: interactor.expectedInputLength ?? 6)
+        view.setupPhoneLable(with: interactor.textDescription, number: interactor.phoneNumber)
+        view.configureTexts(navigationTitle: TextConstants.a2FASecondPageTitle,
+                            mainPageTitle: interactor.mainTitle,
+                            infoTitle: String(format: interactor.textDescription, interactor.phoneNumber),
+                            underTextfieldText: TextConstants.a2FASecondPageSecurityCode)
+    }
     
     override func viewIsReady() {
         view.setupButtonsInitialState()
@@ -86,6 +95,8 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
         } else if error.contains(ErrorResponseText.resendCodeExceeded)  {
             errorText = TextConstants.twoFATooManyRequestsErrorMessage
             
+        } else if error.contains(ErrorResponseText.serverUnavailable){
+            errorText = TextConstants.temporaryErrorOccurredTryAgainLater
         } else {
             assertionFailure("Unrecognized error")
             errorText = "Unrecognized error"

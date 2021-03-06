@@ -1978,6 +1978,19 @@
 "business_app_whohasaccess_role_viewer" = "Viewer";
 "business_app_whohasaccess_role_varies" = "Varies";
 
+"business_app_2FA_first_page_title" = "Security Check";
+"business_app_2FA_first_page_description_title" = "Two factor authentication is needed.";
+"business_app_2FA_first_page_description_detail" = "To secure your account and login safely, we'll send you a security code to verify your identity";
+"business_app_2FA_first_page_sendsecuritycode" = "Send the security code";
+"business_app_2FA_first_page_sendsecuritycode_to_phone" = "To my Phone:";
+"business_app_2FA_first_page_sendsecuritycode_to_email" = "To my e-mail:";
+"business_app_2FA_first_page_send_button_name" = "Send";
+
+"business_app_2FA_second_page_title" = "Security Check";
+"business_app_2FA_second_page_verify_number" = "Verify your number";
+"business_app_2FA_second_page_verify_email" = "Verify your e-mail";
+"business_app_2FA_second_page_info" = "We have sent a code to %@";
+"business_app_2FA_second_page_code" = "Enter the security code";
 "business_app_access_page_title" = "Access";
 "business_app_access_page_role_editor" = "Editor";
 "business_app_access_page_role_viewer" = "Viewer";
@@ -1985,3 +1998,8 @@
 "business_app_access_page_expire_date" = "Expires on: %@";
 "business_app_access_page_from_folder" = "From %@ folder";
 "business_app_access_page_role_change_remove" = "Remove";
+
+"business_app_upload_select_page_title" = "Upload Files";
+"business_app_upload_select_page_upload_button" = "Upload";
+"business_app_role_delete" = "Member is removed from private share";
+"business_app_role_update" = "Role is updated";

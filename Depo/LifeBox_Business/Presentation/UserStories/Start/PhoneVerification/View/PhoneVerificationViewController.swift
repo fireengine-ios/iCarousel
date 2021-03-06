@@ -9,7 +9,7 @@
 import UIKit
 import Typist
 
-class PhoneVerificationViewController: ViewController, PhoneVerificationViewInput {
+final class PhoneVerificationViewController: ViewController {
     
     private enum Constants {
         static let timerLabelBottomOffset: CGFloat = 8
@@ -17,46 +17,66 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     }
     
     var output: PhoneVerificationViewOutput!
-        
+
     @IBOutlet private weak var scrollView: UIScrollView!
-    
-    @IBOutlet private weak var timerLabel: SmartTimerLabel!
-        
-    @IBOutlet private weak var mainTitle: UILabel!
-    
-    @IBOutlet private weak var infoTitle: UILabel!
-    
-    @IBOutlet private weak var firstSecurityCodeTextField: SecurityCodeTextField!
-    
-    @IBOutlet private weak var errorLabel: UILabel!
-    @IBOutlet private weak var bottomTimerConstraint: NSLayoutConstraint!
-    
-    @IBOutlet private var codeTextFields: [SecurityCodeTextField]!
-    
-    @IBOutlet private weak var resendCodeButton: BlueButtonWithWhiteText! {
+    @IBOutlet private weak var firstSecurityCodeTextField: OneSignSquareTextField!
+    @IBOutlet private var codeTextFields: [OneSignSquareTextField]!
+    @IBOutlet private var smartTimerProgressView: SmartTimerProgressView!
+
+    @IBOutlet private weak var mainTitle: UILabel! {
         willSet {
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 18)
+            newValue.textColor = ColorConstants.infoPageValueText
+        }
+    }
+
+    @IBOutlet private weak var infoTitle: UILabel! {
+        willSet {
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+            newValue.textColor = ColorConstants.a2FADescriptionLabel
+        }
+    }
+
+
+    @IBOutlet private weak var underTextfieldsLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
+            newValue.textColor = ColorConstants.infoPageValueText
+        }
+    }
+
+    @IBOutlet private weak var errorLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.loginErrorLabelText
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
+            newValue.textAlignment = .center
+        }
+    }
+
+    @IBOutlet private weak var scrollViewContainerView: UIView! {
+        willSet {
+            newValue.backgroundColor = ColorConstants.tableBackground
+        }
+    }
+
+    @IBOutlet private weak var resendCodeActionButton: UIButton! {
+        willSet {
             newValue.setTitle(TextConstants.resendCode, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
+            newValue.setBackgroundColor(ColorConstants.buttonDarkBlueBackground, for: .normal)
+            newValue.layer.cornerRadius = 6
             newValue.isOpaque = true
         }
     }
-    
-    var inputTextLimit: Int = NumericConstants.verificationCharacterLimit
-        
+
+    private var inputTextLimit: Int = NumericConstants.verificationCharacterLimit
     private let keyboard = Typist()
-    
     private var isRemoveLetter: Bool = false
-    
-    // MARK: Life cycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = ColorConstants.tableBackground
         
         setupKeyboard()
     
@@ -66,12 +86,19 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationBarWithGradientStyle()
+        setupNavigationBar()
+    }
+
+    private func setupNavigationBar() {
+        title = TextConstants.a2FASecondPageSecurityCode
+        whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
+                         titleTextColor: ColorConstants.infoPageItemBottomText)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
     
-    @IBAction func ResendCode(_ sender: Any) {
-        hiddenError()
+    @IBAction func resendCode(_ sender: Any) {
+        hideError()
         output.resendButtonPressed()
     }
     
@@ -96,7 +123,7 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         }
     }
     
-    fileprivate func hideKeyboard() {
+    private func hideKeyboard() {
         view.endEditing(true)
     }
     
@@ -113,12 +140,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
             .on(event: .didShow) { [weak self] options in
                 guard let `self` = self else {
                     return
-                }
-                
-                UIView.animate(withDuration: options.animationDuration) {
-                    self.bottomTimerConstraint?.constant = options.endFrame.height + Constants.timerLabelBottomOffset
-                    
-                    self.view.layoutIfNeeded()
                 }
                 
                 if let viewToScroll = (self.errorLabel.isHidden ? self.firstSecurityCodeTextField : self.errorLabel) {
@@ -141,8 +162,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
                 }
                 
                 UIView.animate(withDuration: options.animationDuration) {
-                    self.bottomTimerConstraint?.constant =  Constants.timerLabelBottomOffset
-                    
                     var inset = self.scrollView.contentInset
                     inset.bottom = 0
                     self.scrollView.contentInset = inset
@@ -162,106 +181,91 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         self.scrollView.scrollIndicatorInsets = insets
     }
     
-    private func hiddenError() {
+    private func hideError() {
         errorLabel.text = ""
         errorLabel.isHidden = true
     }
-    
-    // MARK: PhoneVerificationViewInput
+}
+
+// MARK: - PhoneVerificationViewInput
+extension PhoneVerificationViewController: PhoneVerificationViewInput {
+    func configureTexts(navigationTitle: String?,
+                        mainPageTitle: String,
+                        infoTitle: String,
+                        underTextfieldText: String) {
+        title = navigationTitle
+        mainTitle.text = mainPageTitle
+        self.infoTitle.text = infoTitle
+        underTextfieldsLabel.text = underTextfieldText
+    }
+
     func setupInitialState() {
         codeTextFields.forEach({
             $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         })
-        
-        firstSecurityCodeTextField.becomeFirstResponder()
 
-        if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.enterSecurityCode)
-        }
-        navigationItem.backBarButtonItem?.title = TextConstants.backTitle
-        
-        mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
-        mainTitle.textColor = .black
-        mainTitle.text = TextConstants.enterSecurityCode
-        infoTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        infoTitle.text = TextConstants.phoneVerificationInfoTitleText
-        timerLabel.isHidden = true
-        
-        infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)
-        infoTitle.textColor = ColorConstants.blueGrey
-        
-        timerLabel.font = UIFont.TurkcellSaturaRegFont(size: 35)
-        timerLabel.textColor = ColorConstants.cloudyBlue
-        timerLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-      
-        errorLabel.textColor = ColorConstants.textOrange
-        errorLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        firstSecurityCodeTextField.becomeFirstResponder()
     }
-    
+
     func setupButtonsInitialState() {
         resendButtonShow(show: false)
     }
-    
+
     func setupTimer(withRemainingTime remainingTime: Int) {
-        timerLabel.isHidden = false
-        timerLabel.setupTimer(withTimeInterval: 1.0,
-                                   timerLimit: remainingTime)
-        timerLabel.delegate = self
+        smartTimerProgressView.setupProgressViewWithTimer(timerLimit: remainingTime)
+        smartTimerProgressView.delegate = self
     }
-    
+
     func dropTimer() {
-        timerLabel.dropTimer()
+        smartTimerProgressView.dropTimer()
     }
-    
+
     func resendButtonShow(show: Bool) {
-        resendCodeButton.isHidden = !show
-        resendCodeButton.isEnabled = show
+        resendCodeActionButton.isHidden = !show
+        resendCodeActionButton.isEnabled = show
     }
-    
+
     func setupTextLengh(lenght: Int) {
          inputTextLimit = lenght
     }
-    
+
     func setupPhoneLable(with textDescription: String, number: String) {
         let text = String(format: textDescription, number)
         let range = (text as NSString).range(of: number)
         let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaMedFont(size: 15),
                                                         NSAttributedStringKey.foregroundColor: ColorConstants.textGrayColor]
-        
+
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes(attr, range: range)
         infoTitle.attributedText = attributedString
     }
-    
+
     func getNavigationController() -> UINavigationController? {
         return self.navigationController
     }
-    
+
     func updateEditingState() {
         codeTextFields.forEach({
             $0.text = ""
         })
-        
-        timerLabel.isHidden = !resendCodeButton.isHidden        
-        
+
         output.clearCurrentSecurityCode()
-        
-        if resendCodeButton.isHidden {
+
+        if resendCodeActionButton.isHidden {
             firstSecurityCodeTextField.becomeFirstResponder()
         } else {
             hideKeyboard()
         }
     }
-    
+
     func showError(_ error: String) {
         errorLabel.isHidden = false
         errorLabel.text = error
     }
-    
 }
 
 // MARK: - UITextFieldDelegate, SmartTimerLabelDelegate
-extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelDelegate {
+extension PhoneVerificationViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         /// For autoFill one time password
@@ -285,7 +289,7 @@ extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelD
         /// clear the space that we added to work delegate methods with an empty string
         textField.text = ""
         
-        hiddenError()
+        hideError()
         
         let notAvailableCharacterSet = CharacterSet.decimalDigits.inverted
         let result = string.rangeOfCharacter(from: notAvailableCharacterSet)
@@ -296,7 +300,7 @@ extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelD
         let currentStr = output.currentSecurityCode + string
         
         if currentStr.count == inputTextLimit,
-                !timerLabel.isDead {
+                !smartTimerProgressView.isDead {
             output.currentSecurityCodeChanged(with: string)
             output.verificationCodeEntered()
             return true
@@ -310,9 +314,11 @@ extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelD
         
         return true
     }
-    
-    func timerDidFinishRunning() {
-        output.timerFinishedRunning(with: timerLabel.isShowMessageWithDropTimer)
-        timerLabel.isShowMessageWithDropTimer = true
+}
+
+extension PhoneVerificationViewController: SmartTimerProgressViewDelegate {
+    func didPassedRequestedTimeInterval(_ vview: SmartTimerProgressView) {
+        output.timerFinishedRunning(with: vview.isShowMessageWithDropTimer)
+        vview.isShowMessageWithDropTimer = true
     }
 }

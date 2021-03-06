@@ -56,6 +56,14 @@ extension FileInfoPresenter: FileInfoViewOutput {
 // MARK: FileInfoInteractorOutput
 
 extension FileInfoPresenter: FileInfoInteractorOutput {
+    func showProgress() {
+        view.showProgress()
+    }
+
+    func hideProgress() {
+        view.hideProgress()
+    }
+
     func setObject(object: BaseDataSourceItem) {
         view.setObject(object)
     }

@@ -51,8 +51,15 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
 }
 
 // MARK: FileInfoViewInput
-
 extension FileInfoViewController: FileInfoViewInput {
+    func showProgress() {
+        showSpinner()
+    }
+
+    func hideProgress() {
+        hideSpinner()
+    }
+
     func goBack() {
         navigationController?.popViewController(animated: true)
     }
