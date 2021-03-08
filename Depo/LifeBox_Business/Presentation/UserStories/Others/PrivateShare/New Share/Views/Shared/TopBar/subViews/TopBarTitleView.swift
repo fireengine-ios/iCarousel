@@ -8,7 +8,7 @@
 
 final class TopBarTitleView: UIView, NibInit {
     
-    @IBOutlet private weak var titleLabel: UILabel! {
+    @IBOutlet private(set) weak var titleLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 24)
             newValue.textColor = ColorConstants.confirmationPopupTitle

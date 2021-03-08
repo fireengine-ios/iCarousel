@@ -14,7 +14,6 @@ protocol SegmentedChildNavBarManagerDelegate: SegmentedChildController {
     func onSearchButton()
     func onPlusButton()
     func onSettingsButton()
-    func plussButtonCreated(button: UIBarButtonItem)
 }
 
 final class SegmentedChildNavBarManager {
@@ -37,7 +36,7 @@ final class SegmentedChildNavBarManager {
         target: self,
         action: #selector(onThreeDotsButton))
     
-    private lazy var plusButton: UIBarButtonItem =  {
+    private(set) lazy var plusButton: UIBarButtonItem =  {
         
             let button = UIButton(type: .custom)
             button.setImage(UIImage(named: "PlusButtonBusiness"),
@@ -91,14 +90,12 @@ final class SegmentedChildNavBarManager {
         delegate?.setTitle(title)
         delegate?.setRightBarButtonItems([plusButton], animated: false)
         delegate?.setLeftBarButtonItems([settingsButton], animated: false)
-        delegate?.plussButtonCreated(button: plusButton)
         threeDotsButton.isEnabled = true
     }
     
     func setNestedMode(title: String = "") {
         delegate?.setTitle(title)
         delegate?.setRightBarButtonItems([plusButton], animated: false)
-        delegate?.plussButtonCreated(button: plusButton)
         threeDotsButton.isEnabled = true
     }
     

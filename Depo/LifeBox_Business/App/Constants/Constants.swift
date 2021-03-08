@@ -206,15 +206,6 @@ struct TextConstants {
     static let homeButtonFavorites = NSLocalizedString("Favorites", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeButtonSyncContacts = NSLocalizedString("Sync Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    // MARK: - Home page subButtons Lables
-    static let takePhoto = NSLocalizedString("Take Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let upload = NSLocalizedString("business_app_plus_button_upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let uploadFiles = NSLocalizedString("business_app_plus_button_upload_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let uploadMusic = NSLocalizedString("Upload Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let newFolder = NSLocalizedString("business_app_new_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let uploadFromLifebox = NSLocalizedString("Upload from lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    
     // MARK: - Searchbar img name
     
     static let searchIcon = NSLocalizedString("searchIcon", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1392,4 +1383,29 @@ extension TextConstants {
     static let topBarSortSubviewSortByOldest = NSLocalizedString("business_app_sortby_oldest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let topBarSortSubviewSortByLargest = NSLocalizedString("business_app_sortby_largest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let topBarSortSubviewSortBySmallest = NSLocalizedString("business_app_sortby_smallest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - PlusButton
+
+extension TextConstants {
+    static let upload = NSLocalizedString("business_app_plus_button_upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadFiles = NSLocalizedString("business_app_plus_button_upload_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let newFolder = NSLocalizedString("business_app_new_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let noAccessSnackBarTitle = NSLocalizedString("business_app_no_permission_for_upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - NavBar Root titles
+
+extension TextConstants {
+    static let navbarRootTitleMyDisk = NSLocalizedString("business_app_mydisk_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let navbarRootTitleMySharings = NSLocalizedString("business_app_mysharings_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let navbarRootTitleSharedArea = NSLocalizedString("business_app_sharedarea_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - TopBar Segment and Search
+
+extension TextConstants {
+    static let topBarSearchSubViewDescriptionTitle = NSLocalizedString("business_app_search_bar_explanation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSegmentSharedWithMe = NSLocalizedString("business_app_sharedwithme_menu", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSegmentSharedByMe = NSLocalizedString("business_app_sharedbyme_menu", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

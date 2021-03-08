@@ -35,9 +35,7 @@ final class ComposedTopBarManager {
     
     let topBar = ComposedTopBar.initFromNib()
     
-//    private var currentTopBarStackSubViews = [UIView]()
-    
-    private var titleSubView: TopBarTitleView?
+    private(set) var titleSubView: TopBarTitleView?
     private var sortingSubView: TopBarSortingView?
     private var searchSubView: TopBarSearchView?
     

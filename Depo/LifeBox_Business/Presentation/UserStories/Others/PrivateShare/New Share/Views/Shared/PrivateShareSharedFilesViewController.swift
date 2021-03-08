@@ -83,7 +83,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewDidLoad()
         
         collectionManager.setup()
-        setupPlusButton()//should be called before bars, otherwise plus button  would be innactive for ios14+
+        setupPlusButton()//do we need to call it here, since we have on reload setup?
         setupBars()
         setupCardsContainer()
         showSpinner()
@@ -140,6 +140,32 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupPlusButton() {
         floatingButtonsArray = shareType.floatingButtonTypes(rootPermissions: collectionManager.rootPermissions)
+        guard #available(iOS 14, *) else {
+            return
+        }
+        setupPlusButtonMenu()
+    }
+    
+    @available(iOS 14.0, *)
+    private func setupPlusButtonMenu() {
+        guard
+            let realButton = navBarManager.plusButton.customView as? UIButton
+        else {
+            return
+        }
+        realButton.showsMenuAsPrimaryAction = true
+        realButton.menu = nil
+        realButton.menu = plusButtonActionsManager.generateMenu(for: floatingButtonsArray, actionsDelegate: self)
+        realButton.addTarget(self, action: #selector(onMenuTriggered), for: .menuActionTriggered)
+    }
+
+    @objc private func onMenuTriggered() {
+        if floatingButtonsArray.isEmpty {
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.noAccessSnackBarTitle)
+        }
+        
+        let lightFeedback = UIImpactFeedbackGenerator(style: .light)
+        lightFeedback.impactOccurred()
     }
     
     private func setDefaultTabBarState() {
@@ -154,31 +180,13 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let topbarView = composedScrollableTopBarManager.getTopBarView(sortTypes: sortingTypes, defaultSortType: .TimeNewOld, titlteText: title ?? "")
         
         topbarView.translatesAutoresizingMaskIntoConstraints = false
-//        gridListBar.view.translatesAutoresizingMaskIntoConstraints = false
         
         self.collectionView.addSubview(topbarView)
-//        topbarView.frame.origin.y = -topbarView.frame.height
-        
-        
-        //-topbarView.frame.height
-//        collectionView.setContentOffset(CGPoint(x: 0, y: -500), animated: false)
-        
-//        collectionViewBarContainer.addSubview(topbarView)//(gridListBar.view)
-        //gridListBar.view.pinToSuperviewEdges()
-//        topbarView.pinToSuperviewEdges()
-        
+
         topbarView.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -topbarView.frame.height).activate()
         topbarView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
         topbarView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
         
-        
-//
-//        let config = GridListTopBarConfig(defaultGridListViewtype: .Grid,
-//                                          availableSortTypes: sortingTypes,
-//                                          defaultSortType: .TimeNewOld,
-//                                          availableFilter: false,
-//                                          showGridListButton: true)
-//        gridListBar.setupWithConfig(config: config)
     }
     
     private func setupCardsContainer() {
@@ -271,6 +279,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didEndReload() {
         hideSpinner()
         setupPlusButton()
+//        setupNavigationBar(editingMode: isEditing)
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -336,8 +345,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 let title = isTabBarItem ? "" : self.title ?? ""
 
                 if case .innerFolder(_, _) = self.shareType {
+                    //no title, no segment
                     self.navBarManager.setNestedMode(title: title)
                 } else {
+//
                     self.navBarManager.setDefaultMode(title: title)
                 }
             }
@@ -345,31 +356,21 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
     
     func collectionOffsetChanged(offsetY: CGFloat) {
-        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
+//        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
+//        let navItem = self.navigationItem
+//        self.navigationController?.navigationBar
+//        RouterVC().navigationController?.navigationItem
+//        navigationController?.navigationBar.items?.first?.title
+        debugPrint("!!! collectionOffsetChanged \(offsetY)")
+        debugPrint("!!! navitem \(navigationController?.navigationBar.items?.first)")
+        navigationController?.navigationBar.items?.first?.titleView?.alpha = 1 - (composedScrollableTopBarManager.titleSubView?.titleLabel.alpha ?? 0)
+        
     }
 }
 
 
 //MARK: - SegmentedChildNavBarManagerDelegate
 extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDelegate {
-    
-    func plussButtonCreated(button: UIBarButtonItem) {
-        guard #available(iOS 14, *),
-              let realButton = button.customView as? UIButton
-        else {
-            return
-        }
-        
-        realButton.showsMenuAsPrimaryAction = true
-        realButton.menu = plusButtonActionsManager.generateMenu(for: floatingButtonsArray, actionsDelegate: self)
-        realButton.addTarget(self, action: #selector(onMenuTriggered), for: .menuActionTriggered)
-        
-    }
-    
-    @objc private func onMenuTriggered() {
-            let lightFeedback = UIImpactFeedbackGenerator(style: .light)
-            lightFeedback.impactOccurred()
-        }
     
     func onCancelSelectionButton() {
         collectionManager.endSelection()
@@ -388,6 +389,10 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onPlusButton() {
+        guard !floatingButtonsArray.isEmpty else {
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.noAccessSnackBarTitle)
+            return
+        }
         plusButtonActionsManager.showActions(for: floatingButtonsArray, sender:  navigationItem.rightBarButtonItem, actionsDelegate: self)
     }
     
@@ -416,10 +421,12 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func selectModeSelected(with item: WrapData?) {
         collectionManager.startSelection(with: item)
+        isEditing = true
     }
     
     func stopModeSelected() {
         collectionManager.endSelection()
+        isEditing = false
     }
     
     func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>) {

@@ -2011,3 +2011,10 @@
 "business_app_upload_select_page_upload_button" = "Upload";
 "business_app_role_delete" = "Member is removed from private share";
 "business_app_role_update" = "Role is updated";
+"business_app_no_permission_for_upload" = "You are not authorized to make upload or create folder for this level";
+"business_app_mydisk_page_title" = "My Disk";
+"business_app_mysharings_page_title" = "My Sharings";
+"business_app_sharedarea_page_title" = "Shared Area";
+"business_app_search_bar_explanation" = "Search";
+"business_app_sharedwithme_menu" = "Shared with me";
+"business_app_sharedbyme_menu" = "Shared by me";
