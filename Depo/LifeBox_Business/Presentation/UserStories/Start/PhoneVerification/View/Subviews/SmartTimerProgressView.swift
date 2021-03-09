@@ -20,7 +20,7 @@ final class SmartTimerProgressView: UIView {
         let lineProgressView = LineProgressView()
         lineProgressView.translatesAutoresizingMaskIntoConstraints = false
         lineProgressView.targetValue = 1
-        lineProgressView.set(progress: 1)
+        lineProgressView.set(progress: 0)
         lineProgressView.set(lineBackgroundColor: ColorConstants.infoPageSeparator)
         lineProgressView.set(lineColor: ColorConstants.a2FAActiveProgress)
         lineProgressView.setContentCompressionResistancePriority(.required, for: .vertical)
@@ -84,8 +84,8 @@ final class SmartTimerProgressView: UIView {
 
     func setupProgressViewWithTimer(timerLimit lifetime: Int) {
         smartTimerLabel.setupTimer(timerLimit: lifetime)
+        lineProgressView.resetProgress()
         lineProgressView.targetValue = CGFloat(lifetime)
-        lineProgressView.set(progress: lifetime)
     }
 
     func dropTimer() {
@@ -96,7 +96,7 @@ final class SmartTimerProgressView: UIView {
 // MARK: - SmartTimerLabelDelegate
 extension SmartTimerProgressView: SmartTimerLabelDelegate {
     func timerDidTick(currentCycle: Int, ofTotalDuration: Int, label: SmartTimerLabel) {
-        lineProgressView.set(progress: ofTotalDuration - currentCycle)
+        lineProgressView.set(progress: currentCycle)
     }
 
     func timerDidFinishRunning() {
