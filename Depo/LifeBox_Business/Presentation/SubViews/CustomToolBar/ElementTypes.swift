@@ -59,6 +59,7 @@ enum ElementTypes {
     //changing role
     case editorRole
     case viewerRole
+    case variesRole
     case removeRole
     
     static var trashState: [ElementTypes] = [.restore, .delete]
