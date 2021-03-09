@@ -111,6 +111,8 @@ extension LoginPresenter: LoginViewOutput {
     }
     
     func sendLoginAndPassword(login: String, password: String, rememberMe: Bool) {
+        router.goToTermsAndServices() //Test purposes navigation (Delete when will be finished)
+
         onLogin()
         interactor.authificate(login: removeBrackets(text: login),
                                password: password,

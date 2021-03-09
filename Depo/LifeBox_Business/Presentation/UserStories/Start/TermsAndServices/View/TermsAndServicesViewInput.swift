@@ -19,8 +19,4 @@ protocol TermsAndServicesViewInput: class, Waiting {
     func hideBackButton()
     
     func popNavigationVC()
-    
-    func showEtk()
-    
-    func showGlobalPermissions()
 }

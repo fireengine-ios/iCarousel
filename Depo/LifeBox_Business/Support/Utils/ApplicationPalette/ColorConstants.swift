@@ -19,7 +19,7 @@ struct ColorConstants {
     static let multifileCellBackgroundColorSelectedSolid = UIColor(named: "multifileCellBackgroundColorSelectedSolid")!
     static let multifileCellInfoView = UIColor(named: "multifileCellInfoView")!
     static let multifileCellDeletionView = UIColor(named: "multifileCellDeletionView")!
-    static let multifileCellRenameFieldNameColor = UIColor(named: "multifileCellRenameFieldNameColor")!
+    static let multifileCellRenameFieldNameColor = UIColor(named: "multifileCellRenameFieldNameColor")! // title color
     static let multifileCellRenameFieldExtensionColor = UIColor(named: "multifileCellRenameFieldExtensionColor")!
     
     static let confirmationPopupTitle = UIColor(named: "confirmationPopupTitle")!
@@ -183,7 +183,9 @@ struct ColorConstants {
 }
 
 extension UIColor {
-    
+    class var privacyPolicyTextFieldBackgroundColor: UIColor {
+        return UIColor(red: 233.0 / 255.0, green: 235.0 / 255.0, blue: 237.0 / 255.0, alpha: 1)
+    }
     class var lrTealish: UIColor {
         return UIColor(red: 51.0 / 255.0, green: 204.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
     }
