@@ -147,7 +147,7 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         
-        if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
+        if !Validator.isValid(email: login) {
             analyticsService.trackLoginEvent(loginType: loginType, error: .incorrectUsernamePassword)
             output?.fieldError(type: .loginIsNotValid)
             loginRetries += 1
