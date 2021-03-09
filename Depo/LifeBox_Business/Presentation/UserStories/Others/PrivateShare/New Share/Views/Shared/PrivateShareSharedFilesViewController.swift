@@ -236,6 +236,15 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         }
     }
     
+    private func handleOffsetChange(offsetY: CGFloat) {
+        guard !isEditing else {
+            composedScrollableTopBarManager.titleSubView?.titleLabel.alpha = 1
+            return
+        }
+        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
+        navigationController?.navigationBar.items?.first?.titleView?.alpha = 1 - (composedScrollableTopBarManager.titleSubView?.titleLabel.alpha ?? 0)
+    }
+    
     private func trackScreen() {
         switch shareType {
         case .byMe:
@@ -260,10 +269,12 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
+        isEditing = true
         updateBars(isSelecting: true)
     }
     
     func didEndSelection() {
+        isEditing = false
         updateBars(isSelecting: false)
     }
     
@@ -281,7 +292,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didEndReload() {
         hideSpinner()
         setupPlusButton()
-        collectionOffsetChanged(offsetY: collectionView.contentOffset.y)
+        handleOffsetChange(offsetY: collectionView.contentOffset.y)
 //        setupNavigationBar(editingMode: isEditing)
     }
     
@@ -326,7 +337,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             } else {
                 self.bottomBarManager.hide()
             }
-//            self.collectionOffsetChanged(offsetY: self.collectionView.contentOffset.y)
         }
     }
 
@@ -356,19 +366,14 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                     self.navBarManager.setDefaultMode(title: title)
                 }
             }
+            self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
         }
     }
     
     func collectionOffsetChanged(offsetY: CGFloat) {
-        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
-//        let navItem = self.navigationItem
-//        self.navigationController?.navigationBar
-//        RouterVC().navigationController?.navigationItem
-//        navigationController?.navigationBar.items?.first?.title
-     
-        navigationController?.navigationBar.items?.first?.titleView?.alpha = 1 - (composedScrollableTopBarManager.titleSubView?.titleLabel.alpha ?? 0)
-        
+        handleOffsetChange(offsetY: offsetY)
     }
+    
 }
 
 
@@ -417,19 +422,17 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         router.pushViewController(viewController: controller)
     }
     
-   
 }
-
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func selectModeSelected(with item: WrapData?) {
-        collectionManager.startSelection(with: item)
         isEditing = true
+        collectionManager.startSelection(with: item)
     }
     
     func stopModeSelected() {
-        collectionManager.endSelection()
         isEditing = false
+        collectionManager.endSelection()
     }
     
     func getSelectedItems(selectedItemsCallback: @escaping ValueHandler<[BaseDataSourceItem]>) {
@@ -477,7 +480,10 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     
     func selectAllModeSelected() {}
     
-    func deSelectAll() {}
+    func deSelectAll() {
+        isEditing = false
+        handleOffsetChange(offsetY: collectionView.contentOffset.y)
+    }
     
     func printSelected() {}
     
