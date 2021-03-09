@@ -136,7 +136,7 @@ extension PrivateShareContactsViewController: PrivateShareContactTableViewAdapte
         }
 
         guard
-            contact.role.isContained(in: [.editor, .viewer]),
+            contact.role.isContained(in: [.editor, .viewer, .varying]),
             let accountUuid = shareInfo?.accountUuid,
             let uuid = shareInfo?.uuid,
             let fileType = shareInfo?.fileType

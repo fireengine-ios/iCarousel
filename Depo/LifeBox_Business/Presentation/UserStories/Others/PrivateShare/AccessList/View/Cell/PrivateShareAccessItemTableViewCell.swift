@@ -148,7 +148,10 @@ private extension PrivateShareAccessItemTableViewCell {
 private extension PrivateShareAccessItemTableViewCell {
 
     private func setupMenu(indexPath: IndexPath) {
-        guard #available(iOS 14, *) else {
+        guard
+            #available(iOS 14, *),
+            let info = info
+        else {
             return
         }
 
@@ -157,7 +160,9 @@ private extension PrivateShareAccessItemTableViewCell {
         roleButton.showsMenuAsPrimaryAction = true
         roleButton.addTarget(self, action: #selector(triggerHapticFeedback), for: .menuActionTriggered)
 
-        let currentState = info?.role == .editor ? ElementTypes.editorRole : ElementTypes.viewerRole
+        let isRoleEditor: Bool = info.role == .editor
+        let isRoleViewer: Bool = info.role == .viewer
+        let currentState = isRoleEditor ? ElementTypes.editorRole : isRoleViewer ? ElementTypes.viewerRole : ElementTypes.variesRole
 
         let menu = MenuItemsFabric.generateMenuForManagingRole(currentState: currentState) { [weak self] decision in
             guard
