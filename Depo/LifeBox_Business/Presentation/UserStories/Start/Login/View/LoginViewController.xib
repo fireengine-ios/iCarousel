@@ -219,6 +219,7 @@
                                                             </state>
                                                             <connections>
                                                                 <action selector="forgotPasswordButtonTapped" destination="-1" eventType="touchUpInside" id="zJO-EB-HmY"/>
+                                                                <action selector="onForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="rbS-hg-i4O"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -267,12 +268,15 @@
                                             <color key="textColor" name="loginDescriptionLabelColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-1K-Oja">
+                                        <button clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-1K-Oja">
                                             <rect key="frame" x="20" y="599" width="335" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="ts2-hy-kd6"/>
                                             </constraints>
                                             <state key="normal" backgroundImage="login_fast_login"/>
+                                            <connections>
+                                                <action selector="fastLoginButtonTapped" destination="-1" eventType="touchUpInside" id="YFe-qc-CRN"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>

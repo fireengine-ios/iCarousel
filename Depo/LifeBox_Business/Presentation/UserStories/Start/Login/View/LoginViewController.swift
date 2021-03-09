@@ -8,6 +8,7 @@
 
 import UIKit
 import Typist
+import DigitalGate
 
 final class LoginViewController: ViewController {
 
@@ -193,6 +194,7 @@ final class LoginViewController: ViewController {
     //MARK: Vars
     var output: LoginViewOutput!
     private let keyboard = Typist.shared
+    private var loginCoordinator: DGLoginCoordinator!
     
     //MARK: - Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -237,6 +239,7 @@ final class LoginViewController: ViewController {
     private func setup() {
         setupDelegates()
         configureKeyboard()
+        setupLoginCoordinator()
     }
     
     private func setupDelegates() {
@@ -285,6 +288,10 @@ final class LoginViewController: ViewController {
                                                    buttonTitle: TextConstants.loginPageForgetPasswordCloseButtonTitle,
                                                    visualStyle: PopUpVisualStyle.lbLogin)
         present(popupController, animated: false)
+    }
+
+    @IBAction private func fastLoginButtonTapped() {
+        loginCoordinator.start()
     }
 
     private func prepareForDisappear() {
@@ -345,6 +352,45 @@ final class LoginViewController: ViewController {
     }
 }
 
+// MARK: -LoginCoordinatorDelegate(FastLogin)
+extension LoginViewController: LoginCoordinatorDelegate {
+    private var iPadAppId: String {
+        return "59322"
+    }
+
+    private var iPhoneAppId: String {
+        return "59320"
+    }
+
+    private var currentFastLoginServerType: DGEnvironment {
+        return .prp
+    }
+
+    private func setupLoginCoordinator() {
+        loginCoordinator = DGLoginCoordinator(self)
+        loginCoordinator.appID = Device.isIpad ? iPadAppId : iPhoneAppId
+        loginCoordinator.language = Locale.current.isTurkishLocale ? "TR" : "EN"
+        loginCoordinator.environment = currentFastLoginServerType
+        loginCoordinator.disableCell = true
+        loginCoordinator.autoLoginOnly = false
+        loginCoordinator.disableAutoLogin = true
+        loginCoordinator.coordinatorDelegate = self
+    }
+
+    func dgLoginToken(_ token: String) {
+        // make call to backend
+    }
+
+    func dgLoginFailure(_ reason: String, errorMessage: String) {
+        // handle errors here COF-1168
+    }
+
+    func dgConfigurationFailure(configError: String) {
+        // handle errors here COF-1168
+    }
+}
+
+// MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
     @objc private func passwordTextFieldTextDidChange(_ textField: UITextField) {
         guard textField == passwordTextField else {
