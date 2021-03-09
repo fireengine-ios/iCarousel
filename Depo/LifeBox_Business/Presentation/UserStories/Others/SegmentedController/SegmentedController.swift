@@ -21,7 +21,11 @@ extension SegmentedChildController where Self: UIViewController {
 
     func setTitle(_ title: String) {
         let navItem = parentVC?.navigationItem ?? navigationItem
-        navItem.title = title
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = UIColor.green
+        navItem.titleView = titleLabel
+//        navItem.title = title
     }
     
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {

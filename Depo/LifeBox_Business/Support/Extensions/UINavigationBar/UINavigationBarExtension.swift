@@ -39,14 +39,14 @@ extension UIViewController {
     private var backButtonTitleAttributes: [NSAttributedStringKey : Any]? {
         return [
             .font: UIFont.GTAmericaStandardRegularFont(size: 19),
-            .foregroundColor: UIColor.black
+            .foregroundColor: ColorConstants.confirmationPopupTitle
         ]
     }
     
     private var titleAttributes: [NSAttributedStringKey : Any]? {
         return [
-            .font: UIFont.TurkcellSaturaDemFont(size: 19),
-            .foregroundColor: UIColor.white
+            .font: UIFont.GTAmericaStandardMediumFont(size: 19),
+            .foregroundColor: UIColor.green//ColorConstants.confirmationPopupTitle
         ]
     }
     
@@ -61,8 +61,11 @@ extension UIViewController {
     }
     
     func setNavigationTitle(title: String) {
-        navigationItem.titleView = nil
-        navigationItem.title = title
+        let titleLabel = UILabel()
+        titleLabel.text = title
+//        titleLabel.at
+        navigationItem.titleView = titleLabel
+//        navigationItem.title = title
         navBar?.titleTextAttributes = titleAttributes
     }
     

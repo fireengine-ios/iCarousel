@@ -72,41 +72,19 @@ final class ComposedTopBarManager {
             return
         }
         
-//        25
+        let relativeFrame = topBar.convert(titleSubView.frame, to: topBar.superview)
         
-//        let relativeFrame = topBar.superview?.convert(titleSubView.frame, from:topBar)
-//        debugPrint("!!!!! relativeFrame \(relativeFrame)")
-        debugPrint("!!!! offset \(offset)")
+        let relativeTitleViewTopY = relativeFrame.origin.y
+        let relativeTitleViewBotY = relativeTitleViewTopY + titleSubView.frame.height
         
-//        let offsetWithoutTopBar: CGFloat = offset + topBar.frame.height
-
-       
-        //would work only if its first in the sttack
-        let specialOffsett = offset + (topBar.frame.height - titleSubView.frame.height)
-        debugPrint("!!!! nenw offset \(specialOffsett)")
-        if specialOffsett < 0 {
-            
-            let percent: CGFloat = 100/titleSubView.frame.height
-            debugPrint("!!!! percent \(percent)")
-            let alpha: CGFloat = -specialOffsett/titleSubView.frame.height//percent
-            debugPrint("!!!! alpha \(alpha)")
-            titleSubView.setTitleAlpha(alpha: alpha)
+        let specialOffsett = offset - relativeTitleViewBotY
+        
+        if (relativeTitleViewTopY...relativeTitleViewBotY).contains(offset) {
+            let alpha: CGFloat = -specialOffsett/titleSubView.frame.height
+            titleSubView.titleLabel.alpha = alpha
+        } else {
+            titleSubView.titleLabel.alpha = offset > relativeTitleViewBotY ? 0 : 1
         }
-        
-//        let val: CGFloat = (titleSubView?.frame.origin.y ?? 0) - (titleSubView?.frame.height ?? 0)
-//        debugPrint("!!!! \(titleSubView?.frame.origin.y)")
-//        debugPrint("dsafsf!!!!!! \(val)")
-//        if val > 0 {
-//
-////            titleSubView?.setTitleAlpha(alpha: val/100)
-//        } else {
-//
-//        }
-        
-        
-//
-        
-        
     }
     
     private func composeTopBar() {

@@ -104,11 +104,13 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         let isSelecting = collectionManager.isSelecting
         updateBars(isSelecting: isSelecting)
+        
         if isSelecting {
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
         }
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -279,6 +281,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didEndReload() {
         hideSpinner()
         setupPlusButton()
+        collectionOffsetChanged(offsetY: collectionView.contentOffset.y)
 //        setupNavigationBar(editingMode: isEditing)
     }
     
@@ -323,6 +326,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             } else {
                 self.bottomBarManager.hide()
             }
+//            self.collectionOffsetChanged(offsetY: self.collectionView.contentOffset.y)
         }
     }
 
@@ -356,13 +360,12 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
     
     func collectionOffsetChanged(offsetY: CGFloat) {
-//        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
+        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
 //        let navItem = self.navigationItem
 //        self.navigationController?.navigationBar
 //        RouterVC().navigationController?.navigationItem
 //        navigationController?.navigationBar.items?.first?.title
-        debugPrint("!!! collectionOffsetChanged \(offsetY)")
-        debugPrint("!!! navitem \(navigationController?.navigationBar.items?.first)")
+     
         navigationController?.navigationBar.items?.first?.titleView?.alpha = 1 - (composedScrollableTopBarManager.titleSubView?.titleLabel.alpha ?? 0)
         
     }
