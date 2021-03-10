@@ -512,6 +512,7 @@ class AuthenticationService: BaseRequestService {
             if tokenStorage.isLoggedInWithFastLogin {
                 let loginCoordinator = DGLoginCoordinator(nil)
                 loginCoordinator.logout()
+                printLog("[AuthenticationService] FL logout")
                 tokenStorage.isLoggedInWithFastLogin = false
             }
 
@@ -564,6 +565,7 @@ class AuthenticationService: BaseRequestService {
             let loginCoordinator = DGLoginCoordinator(nil)
             loginCoordinator.logout()
             tokenStorage.isLoggedInWithFastLogin = false
+            printLog("[AuthenticationService] FL logout")
         }
     }
     

@@ -288,6 +288,7 @@ class LoginInteractor: LoginInteractorInput {
                                             return
                                         }
                                         self.processLoginWithFastLogin(headers: headers)
+                                        printLog("[LoginInteractor] authneticate with FL login succeded")
                                     },
                                     fail: { [weak self] errorResponse in
                                         let loginError = LoginResponseError(with: errorResponse)
@@ -304,6 +305,8 @@ class LoginInteractor: LoginInteractorInput {
                                         DispatchQueue.main.async { [weak self] in
                                             self?.output?.processLoginError(loginError, errorText: errorResponse.description)
                                         }
+
+                                        printLog("[LoginInteractor] authneticate with FL login failed \(errorResponse.description)")
                                     },
                                     twoFactorAuth: { [weak self] response in
                                         guard let self = self else {
@@ -312,6 +315,8 @@ class LoginInteractor: LoginInteractorInput {
 
                                         self.tokenStorage.isRememberMe = self.rememberMe
                                         self.output?.showTwoFactorAuthViewController(response: response)
+
+                                        printLog("[LoginInteractor] authneticate with FL login not completed. 2FA is expected")
                                     })
     }
 

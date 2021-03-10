@@ -292,6 +292,7 @@ final class LoginViewController: ViewController {
 
     @IBAction private func fastLoginButtonTapped() {
         loginCoordinator.start()
+        printLog("[LoginViewController] fastLoginButtonTapped FL login scenario started")
     }
 
     private func prepareForDisappear() {
@@ -387,17 +388,21 @@ extension LoginViewController: LoginCoordinatorDelegate {
     }
 
     func dgLoginToken(_ token: String) {
+        printLog("[LoginViewController] dgLoginToken FL login succeded. Passed to be")
         output.authenticateWith(flToken: token)
     }
 
     func dgLoginFailure(_ reason: String, errorMessage: String) {
         if reason == dgKSessionTimeout as String {
+            printLog("[LoginViewController] Fast Login SDK error - SessionTimeout")
             showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErrorTimeout)
         } else if reason == dgKUserExit as String {
-        
+            printLog("[LoginViewController] Fast Login SDK error - UserExit")
         } else if reason == dgKNotLoginToLoginSDK as String {
+            printLog("[LoginViewController] Fast Login SDK error - dgKNotLoginToLoginSDK")
             showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErorNotLoginSDK)
         } else {
+            printLog("[LoginViewController] Fast Login SDK error - unknown error")
             showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.errorUnknown)
         }
     }

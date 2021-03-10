@@ -69,6 +69,7 @@ final class AppConfigurator {
             if tokenStorage.isLoggedInWithFastLogin {
                 let loginCoordinator = DGLoginCoordinator(nil)
                 loginCoordinator.logout()
+                printLog("[AppConfigurator] FL logout")
             }
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()
