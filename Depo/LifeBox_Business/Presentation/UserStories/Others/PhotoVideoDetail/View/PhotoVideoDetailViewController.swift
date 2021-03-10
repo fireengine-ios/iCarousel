@@ -17,13 +17,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
     @IBOutlet private weak var bottomBlackView: UIView!
-    
     @IBOutlet private weak var swipeUpContainerView: UIView!
-
-    private lazy var player: MediaPlayer = factory.resolve()
-    
-    private var localPlayer: AVPlayer?
-    private var playerController: FixedAVPlayerViewController?
     
     var status: ItemStatus = .active
     var hideTreeDotButton = false
@@ -96,10 +90,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     // MARK: Life cycle
     
-    deinit {
-        NotificationCenter.default.post(name: .deinitPlayer, object: self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -116,6 +106,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
+        
         showSpinner()
     }
     
@@ -283,7 +274,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     @objc private func applicationDidEnterBackground(_ application: UIApplication) {
-        localPlayer?.pause()
+//        localPlayer?.pause()
     }
     
     private func updateAllItems(with items: [Item], updateCollection: Bool) {
@@ -335,20 +326,11 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.VideoDisplayed())
         
-        localPlayer?.replaceCurrentItem(with: item)
-        playerController = FixedAVPlayerViewController()
-        playerController?.player = localPlayer
-        ///needs to expend from everywhere
-        playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
-        debugLog("about to play video item with isEmptyController \(playerController == nil) and \(playerController?.player == nil)")
-        present(playerController!, animated: true) { [weak self] in
-            UIApplication.setIdleTimerDisabled(true)
-            self?.playerController?.player?.play()
-            self?.output.videoStarted()
-            if Device.operationSystemVersionLessThen(11) {
-                self?.statusBarHidden = true
-            }
+        guard let url = (item.asset as? AVURLAsset)?.url else {
+            return
         }
+        
+        //
     }
     
     func onStopPlay() {
@@ -404,10 +386,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.item == index }),
            let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell {
             cell.setObject(object: item)
-            if item.fileType == .video && waitVideoPreviewURL {
-                tapOnSelectedItem()
-                waitVideoPreviewURL = false
-            }
         }
     }
 }
@@ -474,6 +452,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         guard selectedIndex != nil else {
             return
         }
+        
         cell.delegate = self
         let object = objects[indexPath.row]
         cell.setObject(object: object)
@@ -500,6 +479,10 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     
+    func preparedMediaItem(completion: @escaping ValueHandler<AVURLAsset?>) {
+       
+    }
+    
     func imageLoadingFinished() {
         hideSpinner()
     }
@@ -508,77 +491,58 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         isFullScreen.toggle()
     }
     
-    func tapOnSelectedItem() {
-        guard let index = selectedIndex else {
-            return
-        }
-        
-        showSpinnerIncludeNavigationBar()
-        let file = objects[index]
-        if file.fileType == .video {
-            self.prepareToPlayVideo(file: file)
-        }
-    }
-    
-    private func prepareToPlayVideo(file: Item) {
-        let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
-
-        if !waitVideoPreviewURL, preUrl == nil || preUrl?.isExpired == true {
-            waitVideoPreviewURL = true
-            output.createNewUrl()
-            return
-        }
-        
-        guard let url = preUrl else {
-            hideSpinnerIncludeNavigationBar()
-            if !file.isOwner {
-                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePreviewNotReady)
-            }
-            return
-        }
-        player.pause()
-        playerController?.player = nil
-        playerController?.removeFromParentViewController()
-        playerController = nil
-        localPlayer?.pause()
-        localPlayer = nil
-        localPlayer = AVPlayer()
-        
-        switch file.patchToPreview {
-        case let .localMediaContent(local):
-            guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-                return
-            }
-            let option = PHVideoRequestOptions()
-            
-            output.startCreatingAVAsset()
-            debugLog("about to play local video item")
-            DispatchQueue.global(qos: .default).async { [weak self] in
-                PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
-                    debugPrint("!!!! after local request")
-                    DispatchQueue.main.async {
-                        self?.output.stopCreatingAVAsset()
-                        guard let asset = asset else {
-                            return
-                        }
-                        let playerItem = AVPlayerItem(asset: asset)
-                        debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                        self?.play(item: playerItem)
-                    }
-                }
-            }
-            
-        case .remoteUrl(_):
-            debugLog("about to play remote video item")
-            DispatchQueue.global(qos: .default).async { [weak self] in
-                let playerItem = AVPlayerItem(url: url)
-                debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                DispatchQueue.main.async {
-                    self?.play(item: playerItem)
-                }
-            }
-        }
-    }
+//    private func prepareToPlayVideo(file: Item) {
+//        let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+//
+//        if !waitVideoPreviewURL, preUrl == nil || preUrl?.isExpired == true {
+//            waitVideoPreviewURL = true
+//            output.createNewUrl()
+//            return
+//        }
+//
+//        guard let url = preUrl else {
+//            hideSpinnerIncludeNavigationBar()
+//            if !file.isOwner {
+//                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePreviewNotReady)
+//            }
+//            return
+//        }
+//
+//        switch file.patchToPreview {
+//        case let .localMediaContent(local):
+//            guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+//                return
+//            }
+//            let option = PHVideoRequestOptions()
+//
+//            output.startCreatingAVAsset()
+//            debugLog("about to play local video item")
+//            DispatchQueue.global(qos: .default).async { [weak self] in
+//                PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
+//                    debugPrint("!!!! after local request")
+//                    DispatchQueue.main.async {
+//                        self?.output.stopCreatingAVAsset()
+//                        guard let asset = asset else {
+//                            return
+//                        }
+//                        let playerItem = AVPlayerItem(asset: asset)
+//                        debugLog("playerItem created \(playerItem.asset.isPlayable)")
+//                        self?.play(item: playerItem)
+//                    }
+//                }
+//            }
+//
+//        case .remoteUrl(_):
+//            debugLog("about to play remote video item")
+//            DispatchQueue.global(qos: .default).async { [weak self] in
+//                let playerItem = AVPlayerItem(url: url)
+//                debugLog("playerItem created \(playerItem.asset.isPlayable)")
+//                DispatchQueue.main.async {
+//                    self?.play(item: playerItem)
+//                }
+//            }
+//        }
+//    }
     
     func didExpireUrl() {
         output.createNewUrl()
@@ -615,4 +579,3 @@ extension TabBarViewController: AVPlayerViewControllerDelegate {
         }
     }
 }
-

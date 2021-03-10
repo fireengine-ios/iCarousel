@@ -10,18 +10,23 @@ import UIKit
 import WebKit
 
 protocol PhotoVideoDetailCellDelegate: class {
-    func tapOnSelectedItem()
     func tapOnCellForFullScreen()
     func imageLoadingFinished()
     func didExpireUrl()
+    func preparedMediaItem(completion: @escaping ValueHandler<AVURLAsset?>)
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
     
     @IBOutlet private weak var imageScrollView: ImageScrollView!
     @IBOutlet private weak var activity: UIActivityIndicatorView!
-    @IBOutlet private weak var playVideoButton: UIButton!
     @IBOutlet private weak var placeholderImageView: UIImageView!
+    @IBOutlet private weak var playerView: DetailMediaPlayerView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.backgroundColor = .black
+        }
+    }
     
     private lazy var webView = WKWebView(frame: .zero)
     
@@ -58,6 +63,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         addGestureRecognizer(tapGesture)
         
+        playerView.addPlayer(on: contentView)
+        
         reset()
     }
     
@@ -76,7 +83,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             imageScrollView.updateZoom()
             imageScrollView.adjustFrameToCenter()
         }
-        
     }
     
     override func prepareForReuse() {
@@ -108,9 +114,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             webView.isHidden = true
         }
         
-        playVideoButton.isHidden = true
         imageScrollView.isHidden = true
         placeholderImageView.isHidden = true
+        
+        playerView.stop()
+        playerView.isHidden = true
     }
     
     func setObject(object: Item) {
@@ -124,13 +132,30 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         fileType = object.fileType
         placeholderImageView.isHidden = true
         
-        if fileType == .video || fileType == .image {
+        if fileType.isContained(in: [.video, .audio]) {
+            playerView.isHidden = false
+            imageScrollView.isHidden = true
+            tapGesture.isEnabled = true
+            if let url = object.metaData?.videoPreviewURL ?? object.urlToFile {
+                if !url.isExpired {
+                    delegate?.imageLoadingFinished()
+                    playerView.play(with: url)
+                } else {
+                    delegate?.didExpireUrl()
+                }
+            } else {
+                //TODO: show message?
+            }
+            
+        } else if fileType == .image {
+            playerView.isHidden = true
             imageScrollView.isHidden = false
             imageScrollView.imageView.loadImageIncludingGif(with: object)
             imageScrollView.adjustFrameToCenter()
-            playVideoButton.isHidden = (fileType != .video)
-            tapGesture.isEnabled = (fileType != .video)
-        } else if fileType != .audio, fileType.isSupportedOpenType {
+            tapGesture.isEnabled = true
+            
+        } else if fileType.isSupportedOpenType {
+            playerView.isHidden = true
             webView.isHidden = false
             webView.navigationDelegate = self
             webView.clearPage()
@@ -151,6 +176,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 delegate?.didExpireUrl()
             }
         } else {
+            playerView.isHidden = true
             setPlaceholder()
         }
     }
@@ -158,11 +184,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
         delegate?.tapOnCellForFullScreen()
     }
-    
-    @IBAction private func onPlayVideoButton() {
-        delegate?.tapOnSelectedItem()
-    }
-
 }
 
 extension PhotoVideoDetailCell: UIScrollViewDelegate {

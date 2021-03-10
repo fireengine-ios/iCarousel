@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18121" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="Billo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="bottomBlackView" destination="XFi-qo-p1Z" id="n2g-5n-Pae"/>
                 <outlet property="collectionView" destination="ZzB-kC-yvt" id="Ggb-ac-yeQ"/>
@@ -25,7 +25,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8L-hg-9Ki">
                     <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                     <subviews>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="Billo" customModuleProvider="target">
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="lifeBox_Business" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zTm-wi-nWa">
@@ -64,13 +64,13 @@
                 <constraint firstItem="EkB-f5-2OH" firstAttribute="top" secondItem="hTs-d8-e25" secondAttribute="bottom" constant="-44" id="5yt-1W-3TW"/>
                 <constraint firstAttribute="trailing" secondItem="EkB-f5-2OH" secondAttribute="trailing" id="6NC-Rh-Ca5"/>
                 <constraint firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="NfP-1l-2sH"/>
-                <constraint firstItem="W8L-hg-9Ki" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T96-8x-22r" customClass="TopSafeAreaConstraint" customModule="Billo" customModuleProvider="target"/>
+                <constraint firstItem="W8L-hg-9Ki" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T96-8x-22r" customClass="TopSafeAreaConstraint" customModule="lifeBox_Business" customModuleProvider="target"/>
                 <constraint firstItem="W8L-hg-9Ki" firstAttribute="trailing" secondItem="EkB-f5-2OH" secondAttribute="trailing" id="XCq-UU-yaw"/>
                 <constraint firstItem="W8L-hg-9Ki" firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="fDW-8e-SDZ"/>
                 <constraint firstItem="EkB-f5-2OH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vGC-fV-ORB"/>
                 <constraint firstItem="W8L-hg-9Ki" firstAttribute="leading" secondItem="EkB-f5-2OH" secondAttribute="leading" id="zU2-XF-l9j"/>
             </constraints>
-            <point key="canvasLocation" x="31.199999999999999" y="63.418290854572717"/>
+            <point key="canvasLocation" x="30.769230769230766" y="63.270142180094787"/>
         </view>
     </objects>
 </document>

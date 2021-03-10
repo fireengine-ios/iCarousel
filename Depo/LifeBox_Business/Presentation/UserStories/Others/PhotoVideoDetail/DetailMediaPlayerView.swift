@@ -58,6 +58,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
         let player = Player()
         
         player.fillMode = .resizeAspect
+        player.playbackLoops = true
         
         player.playerDelegate = self
         player.playbackDelegate = self
@@ -86,23 +87,39 @@ final class DetailMediaPlayerView: UIView, FromNib {
         mediaPlayer.view.frame = playerContainerView.bounds
     }
     
-    
     func addPlayer(on controller: UIViewController) {
         controller.addChildViewController(mediaPlayer)
         playerContainerView.addSubview(mediaPlayer.view)
         controller.didMove(toParentViewController: controller)
     }
     
+    func addPlayer(on view: UIView) {
+        playerContainerView.addSubview(mediaPlayer.view)
+    }
+    
     func play(with url: URL) {
         mediaPlayer.url = url
         mediaPlayer.playFromBeginning()
     }
-
+    
+    func play() {
+        mediaPlayer.playFromCurrentTime()
+    }
+    
+    func pause() {
+        mediaPlayer.pause()
+    }
+    
+    func stop() {
+        mediaPlayer.stop()
+        mediaPlayer.url = nil
+    }
 }
 
 extension DetailMediaPlayerView: PlayerDelegate {
     
     func playerReady(_ player: Player) {
+        
     }
     
     func playerPlaybackStateDidChange(_ player: Player) {
