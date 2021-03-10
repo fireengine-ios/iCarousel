@@ -81,6 +81,6 @@ final class TokenKeychainStorage: TokenStorage {
         accessToken = nil
         refreshToken = nil
         isRememberMe = false
-        isLoggedInWithFastLogin = nil
+        isLoggedInWithFastLogin = false
     }
 }

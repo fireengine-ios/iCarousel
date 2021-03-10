@@ -301,6 +301,15 @@ final class LoginViewController: ViewController {
         }
         output.isPresenting = false
     }
+
+    private func showErrorAlert(with title: String?, subtitle: String?) {
+        let popupController = PopUpController.with(title: title,
+                                                   message: subtitle,
+                                                   image: .error,
+                                                   buttonTitle: TextConstants.accessibilityClose,
+                                                   visualStyle: PopUpVisualStyle.lbLogin)
+        present(popupController, animated: false)
+    }
     
     private func updateScroll(with keyboardFrame: CGRect) {
         let bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY - scrollView.safeAreaInsets.bottom
@@ -382,11 +391,19 @@ extension LoginViewController: LoginCoordinatorDelegate {
     }
 
     func dgLoginFailure(_ reason: String, errorMessage: String) {
-        // handle errors here COF-1168
+        if reason == dgKSessionTimeout as String {
+            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErrorTimeout)
+        } else if reason == dgKUserExit as String {
+        
+        } else if reason == dgKNotLoginToLoginSDK as String {
+            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErorNotLoginSDK)
+        } else {
+            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.errorUnknown)
+        }
     }
 
     func dgConfigurationFailure(configError: String) {
-        // handle errors here COF-1168
+        showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.errorUnknown)
     }
 }
 
