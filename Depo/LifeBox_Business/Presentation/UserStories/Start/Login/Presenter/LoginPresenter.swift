@@ -109,6 +109,11 @@ extension LoginPresenter: LoginViewOutput {
     func rememberMe(remember: Bool) {
         interactor.rememberMe(state: remember)
     }
+
+    func authenticateWith(flToken: String) {
+        onLogin()
+        interactor.authneticate(with: flToken)
+    }
     
     func sendLoginAndPassword(login: String, password: String, rememberMe: Bool) {
         onLogin()

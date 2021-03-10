@@ -290,6 +290,74 @@ class AuthenticationService: BaseRequestService {
     private lazy var sessionManager: SessionManager = factory.resolve()
 
     // MARK: - Login
+
+    func login(with flToken: String, sucess: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
+        debugLog("AuthenticationService loginUser with fastlogin token")
+
+        let params: [String: Any] = ["authenticationCode": flToken,
+                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
+
+        let endpoint = URL(string: RouteRequests.Login.flLogin)!
+
+        SessionManager.customDefault.request(endpoint, method: .post,
+                                             parameters: params, encoding: JSONEncoding.prettyPrinted)
+                .responseString { [weak self] response in
+                    switch response.result {
+                    case .success(_):
+                        guard let headers = response.response?.allHeaderFields as? [String: Any] else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+                        if let accessToken = headers[HeaderConstant.AuthToken] as? String {
+                            self?.tokenStorage.accessToken = accessToken
+                        }
+                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+                            self?.tokenStorage.refreshToken = refreshToken
+                        }
+
+                        /// must be after accessToken save logic
+                        if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                            accountStatus.uppercased() == ErrorResponseText.accountDeleted {
+                            sucess?(headers)
+                            return
+                        }
+
+                        // rememberMe is always ON so server must return refreshToken
+                        if self?.tokenStorage.refreshToken == nil {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+
+                        if let statusCode = response.response?.statusCode,
+                            statusCode >= 300, statusCode != 403,
+                            let data = response.data,
+                            let jsonString = String(data: data, encoding: .utf8) {
+
+                            fail?(ErrorResponse.string(jsonString))
+                            return
+                        }
+
+                        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
+                            // not sure if it's needed, theme to discuss at code review
+                            self?.storageVars.currentUserID = response.externalId
+
+                            SingletonStorage.shared.isTwoFactorAuthEnabled = false
+
+
+                            self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
+                                sucess?(headers)
+                            })
+                        }, fail: { error in
+                            fail?(error)
+                        })
+
+                    case .failure(let error):
+                        fail?(ErrorResponse.error(error))
+                    }
+        }
+    }
     
     func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
         debugLog("AuthenticationService loginUser")

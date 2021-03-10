@@ -222,6 +222,35 @@ class LoginInteractor: LoginInteractorInput {
             self.output?.succesLogin()
         }
     }
+
+    private func processLoginWithFastLogin(headers: [String: Any]) {
+        var handler: VoidHandler?
+
+        if self.hasAccountDeletedStatus(headers: headers) {
+            handler = { [weak self] in
+                self?.trackFLLoginSucceedAndPassNext()
+            }
+        }
+
+        if let handler = handler {
+            self.output?.loginDeletedAccount(deletedAccountHandler: handler)
+        } else {
+            self.trackFLLoginSucceedAndPassNext()
+        }
+    }
+
+    private func trackFLLoginSucceedAndPassNext() {
+        debugLog("login fastlogin isRememberMe \(self.rememberMe)")
+        self.tokenStorage.isRememberMe = self.rememberMe
+
+        self.loginRetries = 0
+
+        self.accountService.updateBrandType()
+
+        DispatchQueue.main.async {
+            self.output?.succesLogin()
+        }
+    }
     
     private func isBlocked(userName: String) -> Bool {
         guard let blockedDate = blockedUsers[userName] else {
@@ -246,6 +275,44 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: LoginInteractorInput
+    func authneticate(with flToken: String) {
+
+        // due to task requirement- rememberme is always ON
+        self.rememberMe = true
+
+        authenticationService.login(with: flToken,
+                                    sucess: { [weak self] headers in
+                                        guard let self = self else {
+                                            return
+                                        }
+                                        self.processLoginWithFastLogin(headers: headers)
+                                    },
+                                    fail: { [weak self] errorResponse in
+                                        let loginError = LoginResponseError(with: errorResponse)
+
+                                        if !(loginError == .noInternetConnection) {
+                                            self?.loginRetries += 1
+                                        }
+
+                                        if loginError == .incorrectUsernamePassword {
+                                            self?.attempts += 1
+                                            self?.loginRetries += 1
+                                        }
+
+                                        DispatchQueue.main.async { [weak self] in
+                                            self?.output?.processLoginError(loginError, errorText: errorResponse.description)
+                                        }
+                                    },
+                                    twoFactorAuth: { [weak self] response in
+                                        guard let self = self else {
+                                            return
+                                        }
+
+                                        self.tokenStorage.isRememberMe = self.rememberMe
+                                        self.output?.showTwoFactorAuthViewController(response: response)
+                                    })
+    }
+
     func authificate(login: String, password: String, rememberMe: Bool = true, atachedCaptcha: CaptchaParametrAnswer?) {
         authificate(login: login, password: password, rememberMe: rememberMe, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
             

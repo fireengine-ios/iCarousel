@@ -378,7 +378,7 @@ extension LoginViewController: LoginCoordinatorDelegate {
     }
 
     func dgLoginToken(_ token: String) {
-        // make call to backend
+        output.authenticateWith(flToken: token)
     }
 
     func dgLoginFailure(_ reason: String, errorMessage: String) {
