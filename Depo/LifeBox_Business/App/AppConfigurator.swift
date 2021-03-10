@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
+import DigitalGate
 
 final class AppConfigurator {
     
@@ -37,7 +38,6 @@ final class AppConfigurator {
         AppWormholeListener.shared.startListen()
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
         LocalMediaStorage.default.clearTemporaryFolder()
-        
         
         AuthoritySingleton.shared.checkNewVersionApp()
     }
@@ -66,6 +66,10 @@ final class AppConfigurator {
     private static func clearTokensIfNeed() {
         if tokenStorage.isClearTokens {
             debugLog("clearTokensIfNeed")
+            if tokenStorage.isLoggedInWithFastLogin {
+                let loginCoordinator = DGLoginCoordinator(nil)
+                loginCoordinator.logout()
+            }
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()
         }

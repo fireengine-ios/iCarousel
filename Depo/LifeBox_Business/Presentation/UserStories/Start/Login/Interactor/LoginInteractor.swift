@@ -247,6 +247,8 @@ class LoginInteractor: LoginInteractorInput {
 
         self.accountService.updateBrandType()
 
+        self.tokenStorage.isLoggedInWithFastLogin = true
+
         DispatchQueue.main.async {
             self.output?.succesLogin()
         }

@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 import WidgetKit
+import DigitalGate
 
 typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
 typealias FailResponse = (_ value: ErrorResponse) -> Void
@@ -309,6 +310,26 @@ class AuthenticationService: BaseRequestService {
                             fail?(ErrorResponse.error(error))
                             return
                         }
+
+                        if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                           accountStatus.elementsEqual("POOL_USER") {
+                            /*
+                             If it is POOL_USER, call SDK's logout method and return to our login page by displaying this error pop up with below tag:  https://zpl.io/V0XBDmw
+                             business_app_FL_error_popup_title: Authentication Failed
+                             business_app_fast_login_pool_user_popup: Please get in touch with your company to get access to the app
+                             */
+                        }
+
+                        if let statusCode = response.response?.statusCode,
+                           statusCode == 400 {
+
+                            /*
+                             If this API returns HTTP 400, return to our login page by displaying this error pop up with below tag:  https://zpl.io/V0XBDmw
+                             business_app_FL_error_popup_title: Authentication Failed
+                             business_app_fast_login_authentication_fail_popup: Authentication Failure in Fast Login
+                             */
+                        }
+
                         if let accessToken = headers[HeaderConstant.AuthToken] as? String {
                             self?.tokenStorage.accessToken = accessToken
                         }
@@ -492,6 +513,13 @@ class AuthenticationService: BaseRequestService {
             debugLog("starting logout")
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
+
+            if tokenStorage.isLoggedInWithFastLogin {
+                let loginCoordinator = DGLoginCoordinator(nil)
+                loginCoordinator.logout()
+                tokenStorage.isLoggedInWithFastLogin = false
+            }
+
             self.tokenStorage.clearTokens()
             self.cancellAllRequests()
             
@@ -516,9 +544,8 @@ class AuthenticationService: BaseRequestService {
             self.storageVars.currentUserID = nil
             
             WormholePoster().didLogout()
-            
+
             success?()
-            
         }
         if async {
             DispatchQueue.main.async {
@@ -537,6 +564,12 @@ class AuthenticationService: BaseRequestService {
             complition(false)
         })
         executePostRequest(param: requestParametrs, handler: handler)
+
+        if tokenStorage.isLoggedInWithFastLogin {
+            let loginCoordinator = DGLoginCoordinator(nil)
+            loginCoordinator.logout()
+            tokenStorage.isLoggedInWithFastLogin = false
+        }
     }
     
     func cancellAllRequests() {
