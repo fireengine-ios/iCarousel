@@ -657,6 +657,12 @@ class RouterVC: NSObject {
         return TermsAndPolicyViewController.initFromNib()
     }
     
+    //MARK: Agreement
+    
+    var agreements: UIViewController? {
+        return AgreementsViewController.initFromNib()
+    }
+    
     // MARK: Turkcell Security
     
     func turkcellSecurity(isTurkcell: Bool) -> UIViewController {

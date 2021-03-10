@@ -17,6 +17,8 @@ protocol SettingsViewOutput {
     func goToHelpAndSupport()
     
     func goToTermsAndPolicy()
+    
+    func goToAgreements()
         
     func goToPermissions()
     //Photo related methods - below

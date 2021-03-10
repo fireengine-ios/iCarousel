@@ -85,6 +85,10 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToTermsAndPolicy()
     }
     
+    func goToAgreements() {
+        router.goToAgreements()
+    }
+    
     func goToPermissions() {
         router.goToPermissions()
     }

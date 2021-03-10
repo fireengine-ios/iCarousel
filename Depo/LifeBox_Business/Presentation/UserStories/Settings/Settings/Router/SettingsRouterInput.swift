@@ -18,6 +18,8 @@ protocol SettingsRouterInput {
     
     func goToTermsAndPolicy()
     
+    func goToAgreements()
+    
     func goToUserInfo(userInfo: AccountInfoResponse)
     
     func goToActivityTimeline()
