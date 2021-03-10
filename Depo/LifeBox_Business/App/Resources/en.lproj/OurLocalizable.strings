@@ -997,6 +997,8 @@
 "login_support_info" = "If you are having difficulty during login, contact us for support.";
 "terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
 "business_app_agreement_page_title" = "Agreements";
+"business_app_agreement_eula" = "Terms of Use";
+"business_app_agreement_privacy_policy" = "Privacy Policy";
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "face_tags_description_premium" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
 "terms_of_use" = "Terms of Use";

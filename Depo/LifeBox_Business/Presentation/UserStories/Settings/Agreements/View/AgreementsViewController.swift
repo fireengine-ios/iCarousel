@@ -8,7 +8,9 @@
 
 import UIKit
 
-class AgreementsViewController: BaseViewController, NibInit {
+final class AgreementsViewController: BaseViewController, NibInit {
+    
+    private let buttonTiteles = [TextConstants.termsOfUseAgreement, TextConstants.privacyPolicyAgreement]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +27,8 @@ class AgreementsViewController: BaseViewController, NibInit {
     }
     
     private func setSegmentedControl() {
-        let segmentedControl = AgreementsSegmentedControl(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 43), buttonTitles: ["Terms of Use", "Privacy Policy"])
+        let segmentedControl = AgreementsSegmentedControl(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 43),
+                                                          buttonTitles: buttonTiteles)
         segmentedControl.backgroundColor = .clear
         segmentedControl.delegate = self
         view.addSubview(segmentedControl)

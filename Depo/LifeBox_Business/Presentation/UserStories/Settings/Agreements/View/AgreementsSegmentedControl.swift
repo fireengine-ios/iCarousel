@@ -12,7 +12,7 @@ protocol AgreementsSegmentedControlDelegate: class {
     func segmentedControlButton(didChangeIndexTo index: Int)
 }
 
-class AgreementsSegmentedControl: UIView {
+final class AgreementsSegmentedControl: UIView {
     
     weak var delegate: AgreementsSegmentedControlDelegate?
     
