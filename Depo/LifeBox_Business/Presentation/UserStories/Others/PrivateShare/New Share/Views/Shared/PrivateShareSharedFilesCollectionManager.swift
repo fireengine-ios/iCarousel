@@ -383,23 +383,23 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
     }
     
-    private func showAudioPlayer(with item: WrapData) {
-        if item.urlToFile == nil || item.urlToFile?.isExpired == true {
-            delegate?.needToShowSpinner()
-            fileInfoManager.createDownloadUrl(item: item) { [weak self] newUrl in
-                self?.delegate?.needToHideSpinner()
-                
-                guard let url = newUrl else {
-                    return
-                }
-                
-                item.tmpDownloadUrl = url
-                self?.mediaPlayer.play(list: [item], startAt: 0)
-            }
-        } else {
-            mediaPlayer.play(list: [item], startAt: 0)
-        }
-    }
+//    private func showAudioPlayer(with item: WrapData) {
+//        if item.urlToFile == nil || item.urlToFile?.isExpired == true {
+//            delegate?.needToShowSpinner()
+//            fileInfoManager.createDownloadUrl(item: item) { [weak self] newUrl in
+//                self?.delegate?.needToHideSpinner()
+//
+//                guard let url = newUrl else {
+//                    return
+//                }
+//
+//                item.tmpDownloadUrl = url
+//                self?.mediaPlayer.play(list: [item], startAt: 0)
+//            }
+//        } else {
+//            mediaPlayer.play(list: [item], startAt: 0)
+//        }
+//    }
     
     private func checkIfCanShowDetail(for item: WrapData) -> Bool {
         guard item.isFolder == false else {
@@ -454,12 +454,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         } else {
             cell.setSelection(isSelectionActive: false, isSelected: false)
             if checkIfCanShowDetail(for: item) {
-                
-                if item.fileType == .audio {
-                    showAudioPlayer(with: item)
-                } else {
-                    showDetailView(for: item)
-                }
+                showDetailView(for: item)
             }
         }
     }
