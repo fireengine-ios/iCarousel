@@ -115,8 +115,8 @@ class LineProgressView: UIView {
     //MARK:- Private
 
     private func setup() {
-        self.layer.addSublayer(self.backLayer)
-        self.layer.addSublayer(self.progressLayer)
+        layer.addSublayer(backLayer)
+        layer.addSublayer(progressLayer)
     }
 
     private func updateLayers() {
