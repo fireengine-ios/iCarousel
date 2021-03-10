@@ -2003,3 +2003,10 @@
 "business_app_upload_select_page_upload_button" = "Upload";
 "business_app_role_delete" = "Member is removed from private share";
 "business_app_role_update" = "Role is updated";
+
+"business_app_FL_error_popup_title" = "Authentication Failed";
+"business_app_fast_login_pool_user_popup" = "Please get in touch with your company to get access to the app";
+"business_app_fast_login_authentication_fail_popup" = "Authentication Failure in Fast Login";
+"business_app_FL_error_session_timeout" = "Your Fast Login session is expired. Please try again later.";
+"business_app_FL_error_not_logintologinSDK" = "Authentication Error in Fast Login";
+"business_app_FL_else_error" = "Temporary error occured in Fast Login. Please try again later.";
