@@ -90,6 +90,8 @@ final class SmartTimerProgressView: UIView {
 
     func dropTimer() {
         smartTimerLabel.dropTimer()
+        lineProgressView.targetValue = 1
+        lineProgressView.set(progress: 1)
     }
 }
 
