@@ -467,6 +467,10 @@ extension LoginViewController: LoginViewInput {
     func refreshCaptcha() {
         captchaView.updateCaptcha()
     }
+
+    func showErrorAlert(with title: String?, and message: String?) {
+        showErrorAlert(with: title, subtitle: message)
+    }
     
     //MARK: Fields alerts processing
     func loginFieldError(_ error: String?) {

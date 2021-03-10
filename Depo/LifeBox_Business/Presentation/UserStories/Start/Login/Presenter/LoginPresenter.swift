@@ -36,6 +36,11 @@ class LoginPresenter: BasePresenter {
         completeAsyncOperationEnableScreen()
         view.showErrorMessage(with: text)
     }
+
+    private func showErrorAlertHideSpinner(with title: String?, and subtitle: String?) {
+        completeAsyncOperationEnableScreen()
+        view.showErrorAlert(with: title, and: subtitle)
+    }
     
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
             interactor.updateUserLanguage()
@@ -213,8 +218,11 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.loginPageEmptyLoginFieldError)
             completeAsyncOperationEnableScreen()
 //            openEmptyEmail()
+        case .flAuthFailure:
+            showErrorAlertHideSpinner(with: TextConstants.flLoginErrorPopupTitle, and: TextConstants.flLoginAuthFailure)
+        case .flNotInPool:
+            showErrorAlertHideSpinner(with: TextConstants.flLoginErrorPopupTitle, and: TextConstants.flLoginUserNotInPool)
         }
-        
     }
     
     func needShowCaptcha() {

@@ -313,21 +313,16 @@ class AuthenticationService: BaseRequestService {
 
                         if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
                            accountStatus.elementsEqual("POOL_USER") {
-                            /*
-                             If it is POOL_USER, call SDK's logout method and return to our login page by displaying this error pop up with below tag:  https://zpl.io/V0XBDmw
-                             business_app_FL_error_popup_title: Authentication Failed
-                             business_app_fast_login_pool_user_popup: Please get in touch with your company to get access to the app
-                             */
+                            let error = ServerError(code: -111, data: (TextConstants.flIdentifierKey + " " + TextConstants.flLoginUserNotInPool).data(using: .utf8))
+                            fail?(ErrorResponse.error(error))
+                            return
                         }
 
                         if let statusCode = response.response?.statusCode,
                            statusCode == 400 {
-
-                            /*
-                             If this API returns HTTP 400, return to our login page by displaying this error pop up with below tag:  https://zpl.io/V0XBDmw
-                             business_app_FL_error_popup_title: Authentication Failed
-                             business_app_fast_login_authentication_fail_popup: Authentication Failure in Fast Login
-                             */
+                            let error = ServerError(code: -1111, data: (TextConstants.flIdentifierKey + " " + TextConstants.flLoginAuthFailure).data(using: .utf8))
+                            fail?(ErrorResponse.error(error))
+                            return
                         }
 
                         if let accessToken = headers[HeaderConstant.AuthToken] as? String {
