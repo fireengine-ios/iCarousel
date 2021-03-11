@@ -14,20 +14,30 @@ protocol AgreementsSegmentedControlDelegate: class {
 
 final class AgreementsSegmentedControl: UIView {
     
-    weak var delegate: AgreementsSegmentedControlDelegate?
+    //MARK: - Public properties
     
-    private var buttonTitles: [String]!
-    private var buttons: [UIButton]!
-    private var selectorView: UIView!
+    weak var delegate: AgreementsSegmentedControlDelegate?
     
     var textColor: UIColor = ColorConstants.multifileCellSubtitleText
     var selectorViewColor: UIColor = ColorConstants.confirmationPopupTitle
     var selectorTextColor: UIColor = ColorConstants.confirmationPopupTitle
+    var dividerViewColor: UIColor = ColorConstants.separator
+    
+    //MARK: - Private properties
+    
+    private var buttonTitles: [String]!
+    private var buttons: [UIButton]!
+    private var selectorView: UIView!
+    private var dividerView: UIView!
+    
+    //MARK: - Init
     
     convenience init(frame: CGRect, buttonTitles: [String]) {
         self.init(frame: frame)
         self.buttonTitles = buttonTitles
     }
+    
+    //MARK: - Setup
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -47,10 +57,20 @@ final class AgreementsSegmentedControl: UIView {
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
             button.setTitle(buttonTitle, for: .normal)
+            setButtonLikeNotPressed(button)
             button.addTarget(self, action: #selector(AgreementsSegmentedControl.buttonAction(sender:)), for: .touchUpInside)
-            button.setTitleColor(textColor, for: .normal)
             buttons.append(button)
         }
+    }
+    
+    private func setButtonLikePressed(_ button: UIButton?) {
+        button?.titleLabel?.font =  UIFont.GTAmericaStandardMediumFont(size: 14)
+        button?.setTitleColor(selectorTextColor, for: .normal)
+    }
+    
+    private func setButtonLikeNotPressed(_ button: UIButton?) {
+        button?.titleLabel?.font =  UIFont.GTAmericaStandardRegularFont(size: 14)
+        button?.setTitleColor(textColor, for: .normal)
     }
     
     private func configStackView() {
@@ -68,27 +88,36 @@ final class AgreementsSegmentedControl: UIView {
     
     private func configSelectorView() {
         let selectorWidth = frame.width / CGFloat(self.buttonTitles.count)
-        selectorView = UIView(frame: CGRect(x: 0, y: self.frame.height, width: selectorWidth, height: 1))
+        selectorView = UIView(frame: CGRect(x: 0, y: self.frame.height, width: selectorWidth, height: 3))
         selectorView.backgroundColor = selectorViewColor
+        
+        dividerView = UIView(frame: CGRect(x: 0, y: self.frame.height + 3, width: self.frame.width, height: 0.7))
+        dividerView.backgroundColor = dividerViewColor
+        
         addSubview(selectorView)
+        addSubview(dividerView)
     }
     
     private func updateView() {
         createButton()
         configStackView()
         configSelectorView()
+        setButtonLikePressed(buttons.first)
     }
     
+    //MARK: - Action
+    
     @objc func buttonAction(sender: UIButton) {
-        for (buttonIndex, btn) in buttons.enumerated() {
-            btn.setTitleColor(textColor, for: .normal)
-            if btn == sender {
+        for (buttonIndex, button) in buttons.enumerated() {
+            setButtonLikeNotPressed(button)
+            
+            if button == sender {
                 let selectorPosition = frame.width / CGFloat(buttonTitles.count) * CGFloat(buttonIndex)
                 delegate?.segmentedControlButton(didChangeIndexTo: buttonIndex)
                 UIView.animate(withDuration: 0.3) {
                     self.selectorView.frame.origin.x = selectorPosition
                 }
-                btn.setTitleColor(selectorTextColor, for: .normal)
+                setButtonLikePressed(button)
             }
         }
     }
