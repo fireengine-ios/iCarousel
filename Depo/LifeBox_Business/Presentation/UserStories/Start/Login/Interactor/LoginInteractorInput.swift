@@ -10,7 +10,7 @@ protocol LoginInteractorInput {
         
     func rememberMe(state: Bool)
 
-    func authneticate(with flToken: String)
+    func authenticate(with flToken: String)
     
     func authificate(login: String, password: String, rememberMe: Bool, atachedCaptcha: CaptchaParametrAnswer?)
     

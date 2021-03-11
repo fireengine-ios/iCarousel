@@ -277,18 +277,18 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: LoginInteractorInput
-    func authneticate(with flToken: String) {
+    func authenticate(with flToken: String) {
 
         // due to task requirement- rememberme is always ON
         self.rememberMe = true
 
         authenticationService.login(with: flToken,
-                                    sucess: { [weak self] headers in
+                                    success: { [weak self] headers in
                                         guard let self = self else {
                                             return
                                         }
                                         self.processLoginWithFastLogin(headers: headers)
-                                        printLog("[LoginInteractor] authneticate with FL login succeded")
+                                        printLog("[LoginInteractor] authenticate with FL login succeded")
                                     },
                                     fail: { [weak self] errorResponse in
                                         let loginError = LoginResponseError(with: errorResponse)
@@ -306,7 +306,7 @@ class LoginInteractor: LoginInteractorInput {
                                             self?.output?.processLoginError(loginError, errorText: errorResponse.description)
                                         }
 
-                                        printLog("[LoginInteractor] authneticate with FL login failed \(errorResponse.description)")
+                                        printLog("[LoginInteractor] authenticate with FL login failed \(errorResponse.description)")
                                     },
                                     twoFactorAuth: { [weak self] response in
                                         guard let self = self else {
@@ -316,7 +316,7 @@ class LoginInteractor: LoginInteractorInput {
                                         self.tokenStorage.isRememberMe = self.rememberMe
                                         self.output?.showTwoFactorAuthViewController(response: response)
 
-                                        printLog("[LoginInteractor] authneticate with FL login not completed. 2FA is expected")
+                                        printLog("[LoginInteractor] authenticate with FL login not completed. 2FA is expected")
                                     })
     }
 

@@ -21,6 +21,7 @@ struct TextConstants {
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         static let wrongVideoData = "Wrong video data"
         static let wrongImageData = "Wrong image data"
+        static let flIdentifierKey = "FastLogin"
         
         static let appNameLowercased: String = {
             #if LIFEDRIVE
@@ -1383,7 +1384,6 @@ extension TextConstants {
 
 // MARK: - FastLogin
 extension TextConstants {
-    static let flIdentifierKey = "FastLogin"
     static let flLoginErrorPopupTitle = NSLocalizedString("business_app_FL_error_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let flLoginErrorTimeout = NSLocalizedString("business_app_FL_error_session_timeout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let flLoginErorNotLoginSDK = NSLocalizedString("business_app_FL_error_not_logintologinSDK", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

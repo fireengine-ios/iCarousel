@@ -28,7 +28,7 @@ enum LoginResponseError: Error {
     case flAuthFailure
     
     init(with errorResponse: ErrorResponse) {
-        if errorResponse.description.contains(TextConstants.flIdentifierKey) {
+        if errorResponse.description.contains(TextConstants.NotLocalized.flIdentifierKey) {
             if errorResponse.description.contains(TextConstants.flLoginAuthFailure) {
                 self = .flAuthFailure
             } else if errorResponse.description.contains(TextConstants.flLoginUserNotInPool) {
@@ -104,9 +104,9 @@ enum LoginResponseError: Error {
         case .emptyCaptcha:
             return GADementionValues.loginError.captchaIsEmpty.text
         case .flAuthFailure:
-            return "what to return here"
+            return "" // TODO: add analytics keys when appropriate task will be created
         case .flNotInPool:
-            return "what to return here"
+            return "" // TODO: add analytics keys when appropriate task will be created
         }
     }
 }

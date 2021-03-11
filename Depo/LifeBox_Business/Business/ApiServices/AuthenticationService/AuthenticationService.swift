@@ -24,9 +24,9 @@ class AuthenticationUser: BaseRequestParametrs {
     let attachedCaptcha: CaptchaParametrAnswer?
     
     override var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.username   : login,
-                                   LbRequestkeys.password   : password,
-                                   LbRequestkeys.deviceInfo : Device.deviceInfo]
+        let dict: [String: Any] = [LbRequestKeys.username   : login,
+                                   LbRequestKeys.password   : password,
+                                   LbRequestKeys.deviceInfo : Device.deviceInfo]
         return dict
     }
     
@@ -102,13 +102,13 @@ class SignUpUser: BaseRequestParametrs {
 
     override var requestParametrs: Any {
         return [
-            LbRequestkeys.email: mail,
-            LbRequestkeys.phoneNumber: phone,
-            LbRequestkeys.password: password,
+            LbRequestKeys.email: mail,
+            LbRequestKeys.phoneNumber: phone,
+            LbRequestKeys.password: password,
 //            LbRequestkeys.language: Device.locale,
-            LbRequestkeys.sendOtp: sendOtp,
-            LbRequestkeys.brandType: brandType,
-            LbRequestkeys.passwordRuleSetVersion: NumericConstants.passwordRuleSetVersion
+            LbRequestKeys.sendOtp: sendOtp,
+            LbRequestKeys.brandType: brandType,
+            LbRequestKeys.passwordRuleSetVersion: NumericConstants.passwordRuleSetVersion
         ]
     }
 
@@ -152,8 +152,8 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     let otp: String
     
     var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
-                                   LbRequestkeys.otp                 : otp]
+        let dict: [String: Any] = [LbRequestKeys.referenceToken      : token,
+                                   LbRequestKeys.otp                 : otp]
 
         return dict
     }
@@ -223,7 +223,7 @@ class EmailVerification: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        return [LbRequestkeys.email : email]
+        return [LbRequestKeys.email : email]
     }
     
     override var patch: URL {
@@ -249,17 +249,17 @@ struct ResendVerificationSMS: RequestParametrs {
     let kvkkAuth: Bool?
     
     var requestParametrs: Any {
-        var parameters: [String : Any] = [LbRequestkeys.referenceToken : refreshToken,
-                                          LbRequestkeys.eulaId : eulaId,
-                                          LbRequestkeys.processPersonalData : processPersonalData,
-                                          LbRequestkeys.globalPermAuth: globalPermAuth]
+        var parameters: [String : Any] = [LbRequestKeys.referenceToken : refreshToken,
+                                          LbRequestKeys.eulaId : eulaId,
+                                          LbRequestKeys.processPersonalData : processPersonalData,
+                                          LbRequestKeys.globalPermAuth: globalPermAuth]
         
         if let etkAuth = etkAuth {
-            parameters[LbRequestkeys.etkAuth] = etkAuth
+            parameters[LbRequestKeys.etkAuth] = etkAuth
         }
         
         if let kvkkAuth = kvkkAuth {
-            parameters[LbRequestkeys.kvkkAuth] = kvkkAuth
+            parameters[LbRequestKeys.kvkkAuth] = kvkkAuth
         }
         
         return parameters
@@ -292,11 +292,11 @@ class AuthenticationService: BaseRequestService {
 
     // MARK: - Login
 
-    func login(with flToken: String, sucess: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
+    func login(with flToken: String, success: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
         debugLog("AuthenticationService loginUser with fastlogin token")
 
-        let params: [String: Any] = ["authenticationCode": flToken,
-                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
+        let params: [String: Any] = [LbRequestKeys.flToken: flToken,
+                                     LbRequestKeys.deviceInfo: Device.deviceInfo]
 
         let endpoint = URL(string: RouteRequests.Login.flLogin)!
 
@@ -312,15 +312,15 @@ class AuthenticationService: BaseRequestService {
                         }
 
                         if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
-                           accountStatus.elementsEqual("POOL_USER") {
-                            let error = ServerError(code: -111, data: (TextConstants.flIdentifierKey + " " + TextConstants.flLoginUserNotInPool).data(using: .utf8))
+                           accountStatus.elementsEqual(LbRequestKeys.poolUser) {
+                            let error = ServerError(code: -111, data: (TextConstants.NotLocalized.flIdentifierKey + " " + TextConstants.flLoginUserNotInPool).data(using: .utf8))
                             fail?(ErrorResponse.error(error))
                             return
                         }
 
                         if let statusCode = response.response?.statusCode,
                            statusCode == 400 {
-                            let error = ServerError(code: -1111, data: (TextConstants.flIdentifierKey + " " + TextConstants.flLoginAuthFailure).data(using: .utf8))
+                            let error = ServerError(code: -1111, data: (TextConstants.NotLocalized.flIdentifierKey + " " + TextConstants.flLoginAuthFailure).data(using: .utf8))
                             fail?(ErrorResponse.error(error))
                             return
                         }
@@ -335,7 +335,7 @@ class AuthenticationService: BaseRequestService {
                         /// must be after accessToken save logic
                         if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
                             accountStatus.uppercased() == ErrorResponseText.accountDeleted {
-                            sucess?(headers)
+                            success?(headers)
                             return
                         }
 
@@ -363,7 +363,7 @@ class AuthenticationService: BaseRequestService {
 
 
                             self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
-                                sucess?(headers)
+                                success?(headers)
                             })
                         }, fail: { error in
                             fail?(error)
@@ -380,9 +380,9 @@ class AuthenticationService: BaseRequestService {
         
         storageVars.currentUserID = user.login
         
-        let params: [String: Any] = ["username": user.login,
-                                     "password": user.password,
-                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
+        let params: [String: Any] = [LbRequestKeys.username: user.login,
+                                     LbRequestKeys.password: user.password,
+                                     LbRequestKeys.deviceInfo: Device.deviceInfo]
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
@@ -699,8 +699,8 @@ class AuthenticationService: BaseRequestService {
         sessionManagerWithoutToken
             .request(RouteRequests.silentLogin,
                      method: .post,
-                     parameters: [LbRequestkeys.token: token,
-                                  LbRequestkeys.deviceInfo: Device.deviceInfo],
+                     parameters: [LbRequestKeys.token: token,
+                                  LbRequestKeys.deviceInfo: Device.deviceInfo],
                      encoding: JSONEncoding.default)
             .responseString { [weak self] response in
                 self?.loginHandler(response, success, fail)
