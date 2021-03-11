@@ -16,8 +16,6 @@ protocol SettingsViewOutput {
     
     func goToHelpAndSupport()
     
-    func goToTermsAndPolicy()
-    
     func goToAgreements()
         
     func goToPermissions()

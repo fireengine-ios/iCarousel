@@ -16,8 +16,6 @@ protocol SettingsRouterInput {
 
     func goToHelpAndSupport()
     
-    func goToTermsAndPolicy()
-    
     func goToAgreements()
     
     func goToUserInfo(userInfo: AccountInfoResponse)

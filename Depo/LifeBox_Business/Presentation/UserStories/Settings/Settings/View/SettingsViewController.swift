@@ -11,8 +11,6 @@ import UIKit
 protocol SettingsDelegate: class {
     func goToHelpAndSupport()
     
-    func goToTermsAndPolicy()
-    
     func goToAgreements()
         
     func goToActivityTimeline()
@@ -196,12 +194,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 delegate.goToHelpAndSupport()
             } else {
                 output.goToHelpAndSupport()
-            }
-        case .termsAndPolicy:
-            if let delegate = settingsDelegate {
-                delegate.goToTermsAndPolicy()
-            } else {
-                output.goToTermsAndPolicy()
             }
         case .agreements:
             if let delegate = settingsDelegate {

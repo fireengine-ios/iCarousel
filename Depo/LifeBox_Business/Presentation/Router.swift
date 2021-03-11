@@ -651,12 +651,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: Terms and policy
-    
-    var termsAndPolicy: UIViewController? {
-        return TermsAndPolicyViewController.initFromNib()
-    }
-    
     //MARK: Agreement
     
     var agreements: UIViewController? {
