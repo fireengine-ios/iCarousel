@@ -13,8 +13,23 @@ final class AgreementsViewController: BaseViewController, NibInit {
     
     //MARK: - Private properties
     
+    private let eulaService = EulaService()
+    private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
+    
     private let buttonTiteles = [TextConstants.termsOfUseAgreement, TextConstants.privacyPolicyAgreement]
-    private var webView: WKWebView!
+    
+    private lazy var webView: WKWebView = {
+        let contentController = WKUserContentController()
+        
+        let webConfig = WKWebViewConfiguration()
+        webConfig.userContentController = contentController
+        webConfig.dataDetectorTypes = [.phoneNumber, .link]
+        
+        let web = WKWebView(frame: .zero, configuration: webConfig)
+        web.navigationDelegate = self
+        
+        return web
+    }()
     
     //MARK: - Lifecycle
     
@@ -24,6 +39,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
         setSegmentedControl()
         setWebView()
         loadTermsOfUse()
+        hidenNavigationBarStyle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +53,10 @@ final class AgreementsViewController: BaseViewController, NibInit {
     //MARK: - Setup
     
     private func setSegmentedControl() {
-        let segmentedControl = AgreementsSegmentedControl(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 43),
+        let segmentedControl = AgreementsSegmentedControl(frame: CGRect(x: 0,
+                                                                        y: 0,
+                                                                        width: UIScreen.main.bounds.width,
+                                                                        height: 43),
                                                           buttonTitles: buttonTiteles)
         segmentedControl.backgroundColor = .clear
         segmentedControl.delegate = self
@@ -45,7 +64,6 @@ final class AgreementsViewController: BaseViewController, NibInit {
     }
     
     private func setWebView() {
-        webView = WKWebView()
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 62).isActive = true
@@ -57,15 +75,36 @@ final class AgreementsViewController: BaseViewController, NibInit {
     //MARK: - Private funcs
     
     private func loadTermsOfUse() {
-        let url = URL(string: "https://www.apple.com")!
-        webView.load(URLRequest(url: url))
-        webView.allowsBackForwardNavigationGestures = true
+        eulaService.eulaGet { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let termsOfUse):
+                guard let content = termsOfUse.content else {
+                    assertionFailure()
+                    return
+                }
+                
+                let prepearedContent = content.setHTMLStringFont(UIFont.GTAmericaStandardRegularFont(),
+                                                                 fontSizeInPixels: 16)
+                self.webView.loadHTMLString(prepearedContent, baseURL: nil)
+            case .failed(_):
+                assertionFailure()
+            }
+        }
     }
     
     private func loadPrivacyPolicy() {
-        let url = URL(string: "https://www.google.com")!
-        webView.load(URLRequest(url: url))
-        webView.allowsBackForwardNavigationGestures = true
+        privacyPolicyService.getPrivacyPolicy { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success(let privacyPolicy):
+                let prepearedContent = privacyPolicy.content.setHTMLStringFont(UIFont.GTAmericaStandardRegularFont(),
+                                                                               fontSizeInPixels: 16)
+                self.webView.loadHTMLString(prepearedContent, baseURL: nil)
+            case .failed(_):
+                assertionFailure()
+            }
+        }
     }
 }
 
