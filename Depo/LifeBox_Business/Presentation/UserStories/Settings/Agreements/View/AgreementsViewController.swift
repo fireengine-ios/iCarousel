@@ -31,6 +31,15 @@ final class AgreementsViewController: BaseViewController, NibInit {
         return web
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.frame = view.bounds
+        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        activityIndicator.color = UIColor.lightGray
+        return activityIndicator
+    }()
+    
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -38,6 +47,8 @@ final class AgreementsViewController: BaseViewController, NibInit {
         setTitle(withString: TextConstants.agreements)
         setSegmentedControl()
         setWebView()
+        setActivityIndicator()
+        startActivity()
         loadTermsOfUse()
         hidenNavigationBarStyle()
     }
@@ -48,6 +59,12 @@ final class AgreementsViewController: BaseViewController, NibInit {
         if !Device.isIpad {
             defaultNavBarStyle()
         }
+    }
+    
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     //MARK: - Setup
@@ -63,6 +80,10 @@ final class AgreementsViewController: BaseViewController, NibInit {
         view.addSubview(segmentedControl)
     }
     
+    private func setActivityIndicator() {
+        view.addSubview(activityIndicator)
+    }
+    
     private func setWebView() {
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +94,16 @@ final class AgreementsViewController: BaseViewController, NibInit {
     }
     
     //MARK: - Private funcs
+    
+    private func startActivity() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        activityIndicator.startAnimating()
+    }
+    
+    private func stopActivity() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        activityIndicator.stopAnimating()
+    }
     
     private func loadTermsOfUse() {
         eulaService.eulaGet { [weak self] response in
@@ -88,7 +119,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
                                                                  fontSizeInPixels: 16)
                 self.webView.loadHTMLString(prepearedContent, baseURL: nil)
             case .failed(_):
-                assertionFailure()
+                self.stopActivity()
             }
         }
     }
@@ -102,7 +133,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
                                                                                fontSizeInPixels: 16)
                 self.webView.loadHTMLString(prepearedContent, baseURL: nil)
             case .failed(_):
-                assertionFailure()
+                self.stopActivity()
             }
         }
     }
@@ -113,6 +144,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
 extension AgreementsViewController: AgreementsSegmentedControlDelegate {
     func segmentedControlButton(didChangeIndexTo index: Int) {
         webView.clearPage()
+        startActivity()
         
         switch index {
         case 0:
@@ -136,5 +168,13 @@ extension AgreementsViewController: WKNavigationDelegate {
         default:
             decisionHandler(.allow)
         }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        stopActivity()
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        stopActivity()
     }
 }
