@@ -21,6 +21,7 @@ struct TextConstants {
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         static let wrongVideoData = "Wrong video data"
         static let wrongImageData = "Wrong image data"
+        static let flIdentifierKey = "FastLogin"
         
         static let appNameLowercased: String = {
             #if LIFEDRIVE
@@ -1379,4 +1380,14 @@ extension TextConstants {
     static let uploadSelectPageTitle = NSLocalizedString("business_app_upload_select_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadSelectButtonTitle = NSLocalizedString("business_app_upload_select_page_upload_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+}
+
+// MARK: - FastLogin
+extension TextConstants {
+    static let flLoginErrorPopupTitle = NSLocalizedString("business_app_FL_error_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginErrorTimeout = NSLocalizedString("business_app_FL_error_session_timeout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginErorNotLoginSDK = NSLocalizedString("business_app_FL_error_not_logintologinSDK", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginElseError = NSLocalizedString("business_app_FL_else_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginUserNotInPool = NSLocalizedString("business_app_fast_login_pool_user_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginAuthFailure = NSLocalizedString("business_app_fast_login_authentication_fail_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

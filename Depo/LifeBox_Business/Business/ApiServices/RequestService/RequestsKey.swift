@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct LbRequestkeys {
-    // MARK: Authificate 
+struct LbRequestKeys {
+    // MARK: Authificate
     static let username = "username"
     static let password = "password"
     static let phoneNumber = "phoneNumber"
@@ -26,6 +26,8 @@ struct LbRequestkeys {
     static let osVersion = "osVersion"
     static let brandType = "brandType"
     static let passwordRuleSetVersion = "passwordRuleSetVersion"
+    static let flToken = "authenticationCode"
+    static let poolUser = "POOL_USER"
     //
     static let fileName = "Folder-Name"
     static let etkAuth = "etkAuth"

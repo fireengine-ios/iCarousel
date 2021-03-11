@@ -16,6 +16,7 @@ final class TokenKeychainStorage: TokenStorage {
     private let refreshTokenKey = "refreshToken"
     private let isRememberMeKey = "isRememberMeKey"
     private let isClearTokensKey = "isClearTokensKey"
+    private let isAuthorizedThroughtFastLoginKey = "thoughtFastLoginAuthorized"
     
     private let keychain = KeychainSwift()
     
@@ -62,6 +63,15 @@ final class TokenKeychainStorage: TokenStorage {
         get { return keychain.getBool(isClearTokensKey) ?? false }
         set { keychain.set(newValue, forKey: isClearTokensKey, withAccess: .accessibleAfterFirstUnlock) }
     }
+
+    var isLoggedInWithFastLogin: Bool {
+        get {
+            return keychain.getBool(isAuthorizedThroughtFastLoginKey) ?? false
+        }
+        set {
+            keychain.set(newValue, forKey: isAuthorizedThroughtFastLoginKey, withAccess: .accessibleAfterFirstUnlock)
+        }
+    }
     
     init() {
         savedAccessToken = accessToken
@@ -71,5 +81,6 @@ final class TokenKeychainStorage: TokenStorage {
         accessToken = nil
         refreshToken = nil
         isRememberMe = false
+        isLoggedInWithFastLogin = false
     }
 }
