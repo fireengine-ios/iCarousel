@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class FAQInteractor: FAQInteractorInput {
+final class FAQInteractor: FAQInteractorInput {
 
     weak var output: FAQInteractorOutput!
     

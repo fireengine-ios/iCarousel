@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class FAQPresenter: FAQModuleInput, FAQViewOutput, FAQInteractorOutput {
+final class FAQPresenter: FAQModuleInput, FAQViewOutput, FAQInteractorOutput {
 
     weak var view: FAQViewInput!
     var interactor: FAQInteractorInput!

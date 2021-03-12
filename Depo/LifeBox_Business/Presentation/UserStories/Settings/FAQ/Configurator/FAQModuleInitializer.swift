@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FAQModuleInitializer: NSObject {
+final class FAQModuleInitializer: NSObject {
 
     //Connect with object on storyboard
     @IBOutlet weak var faqViewController: FAQViewController!

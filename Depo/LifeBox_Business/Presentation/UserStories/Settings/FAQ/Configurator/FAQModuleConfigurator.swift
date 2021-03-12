@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FAQModuleConfigurator {
+final class FAQModuleConfigurator {
 
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
 

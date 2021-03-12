@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class FAQViewController: BaseViewController {
+final class FAQViewController: BaseViewController {
     
     //MARK: - Private properties
     

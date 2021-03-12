@@ -6,6 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class FAQRouter: FAQRouterInput {
+final class FAQRouter: FAQRouterInput {
 
 }
