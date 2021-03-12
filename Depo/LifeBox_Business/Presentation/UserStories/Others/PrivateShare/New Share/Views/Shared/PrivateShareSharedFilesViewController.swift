@@ -97,6 +97,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setCardsContainer(isActive: true)
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,6 +106,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         let isSelecting = collectionManager.isSelecting
         updateBars(isSelecting: isSelecting)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = true
         
         if isSelecting {
             let selectedItems = collectionManager.selectedItems()
@@ -115,7 +121,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         setCardsContainer(isActive: false)
     }
     
@@ -174,20 +179,31 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         needToShowTabBar = true
     }
     
+    private let searchController: UISearchController = {
+        let searchCntrlr = UISearchController(searchResultsController: nil)
+        searchCntrlr.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
+        searchCntrlr.obscuresBackgroundDuringPresentation = true
+        //also delegate here
+        return searchCntrlr
+    }()
+    
     private func setupCollectionViewBar() {
         let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
         
-        composedScrollableTopBarManager.delegate = self
+//        composedScrollableTopBarManager.delegate = self
         
-        let topbarView = composedScrollableTopBarManager.getTopBarView(sortTypes: sortingTypes, defaultSortType: .TimeNewOld, titlteText: title ?? "")
         
-        topbarView.translatesAutoresizingMaskIntoConstraints = false
+//        definesPresentationContext = true
         
-        self.collectionView.addSubview(topbarView)
-
-        topbarView.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -topbarView.frame.height).activate()
-        topbarView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
-        topbarView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
+//        let topbarView = composedScrollableTopBarManager.getTopBarView(sortTypes: sortingTypes, defaultSortType: .TimeNewOld, titlteText: title ?? "")
+//        
+//        topbarView.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        self.collectionView.addSubview(topbarView)
+//
+//        topbarView.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -topbarView.frame.height).activate()
+//        topbarView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
+//        topbarView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
         
     }
     
@@ -213,7 +229,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
         
-        collectionView.contentInset = UIEdgeInsets(top: composedScrollableTopBarManager.topBar.frame.height, left: 0, bottom: 25, right: 0)
+        let topInset: CGFloat = 0 //+ composedScrollableTopBarManager.topBar.frame.height
+        
+        collectionView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(cardsContainer)
         
         cardsContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -237,12 +255,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func handleOffsetChange(offsetY: CGFloat) {
-        guard !isEditing else {
-            composedScrollableTopBarManager.titleSubView?.titleLabel.alpha = 1
-            return
-        }
-        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
-        navigationController?.navigationBar.items?.first?.titleView?.alpha = 1 - (composedScrollableTopBarManager.titleSubView?.titleLabel.alpha ?? 0)
+//        guard !isEditing else {
+//            composedScrollableTopBarManager.titleSubView?.titleLabel.alpha = 1
+//            return
+//        }
+//        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
+//        navigationController?.navigationBar.items?.first?.titleView?.alpha = 1 - (composedScrollableTopBarManager.titleSubView?.titleLabel.alpha ?? 0)
     }
     
     private func trackScreen() {
@@ -532,14 +550,15 @@ extension PrivateShareSharedFilesViewController: CardsContainerViewDelegate {
     func onUpdateViewForPopUpH(h: CGFloat) {
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             if let yConstr = self.contentSliderTopY {
-                yConstr.constant = -h + self.composedScrollableTopBarManager.topBar.frame.height
+                yConstr.constant = -h //+ self.composedScrollableTopBarManager.topBar.frame.height
             }
             if let hConstr = self.contentSliderH {
-                hConstr.constant = h + self.composedScrollableTopBarManager.topBar.frame.height
+                hConstr.constant = h //+ self.composedScrollableTopBarManager.topBar.frame.height
             }
 
             self.collectionView.superview?.layoutIfNeeded()
-            self.collectionView.contentInset = UIEdgeInsets(top: h + self.composedScrollableTopBarManager.topBar.frame.height, left: 0, bottom: 25, right: 0)
+            let topInset: CGFloat = h //+ composedScrollableTopBarManager.topBar.frame.heigh
+            self.collectionView.contentInset = UIEdgeInsets(top: topInset, left: 0, bottom: 25, right: 0)
         }, completion: { [weak self] _ in
             guard let self = self else {
                 return

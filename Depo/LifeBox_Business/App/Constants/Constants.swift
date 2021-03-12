@@ -1414,6 +1414,8 @@ extension TextConstants {
     static let topBarSearchSubViewDescriptionTitle = NSLocalizedString("business_app_search_bar_explanation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let topBarSegmentSharedWithMe = NSLocalizedString("business_app_sharedwithme_menu", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let topBarSegmentSharedByMe = NSLocalizedString("business_app_sharedbyme_menu", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
 // MARK: - FastLogin
 extension TextConstants {
     static let flLoginErrorPopupTitle = NSLocalizedString("business_app_FL_error_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
