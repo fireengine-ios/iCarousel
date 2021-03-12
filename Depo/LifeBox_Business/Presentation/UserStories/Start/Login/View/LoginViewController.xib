@@ -219,6 +219,7 @@
                                                             </state>
                                                             <connections>
                                                                 <action selector="forgotPasswordButtonTapped" destination="-1" eventType="touchUpInside" id="zJO-EB-HmY"/>
+                                                                <action selector="onForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="rbS-hg-i4O"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -267,12 +268,15 @@
                                             <color key="textColor" name="loginDescriptionLabelColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-1K-Oja">
+                                        <button clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYz-1K-Oja">
                                             <rect key="frame" x="20" y="599" width="335" height="48"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="48" id="ts2-hy-kd6"/>
                                             </constraints>
                                             <state key="normal" backgroundImage="login_fast_login"/>
+                                            <connections>
+                                                <action selector="fastLoginButtonTapped" destination="-1" eventType="touchUpInside" id="YFe-qc-CRN"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -294,6 +298,7 @@
                                         <constraint firstAttribute="trailing" secondItem="HYz-1K-Oja" secondAttribute="trailing" constant="20" id="g38-sW-DPL"/>
                                         <constraint firstItem="giO-N6-JF0" firstAttribute="centerX" secondItem="1LQ-nZ-JcX" secondAttribute="centerX" id="h13-yA-GGj"/>
                                         <constraint firstAttribute="trailing" secondItem="ZZ9-gW-4rJ" secondAttribute="trailing" constant="55" id="ipM-cy-HtU"/>
+                                        <constraint firstItem="HYz-1K-Oja" firstAttribute="centerX" secondItem="1LQ-nZ-JcX" secondAttribute="centerX" id="iw5-Bb-3fk"/>
                                         <constraint firstItem="Uji-2f-wET" firstAttribute="top" secondItem="giO-N6-JF0" secondAttribute="bottom" constant="30" id="lYV-Q7-Y5L"/>
                                         <constraint firstItem="s8s-VR-87Z" firstAttribute="top" secondItem="Uji-2f-wET" secondAttribute="bottom" constant="21" id="qw7-sD-8pb"/>
                                         <constraint firstItem="2OX-NS-ngt" firstAttribute="leading" secondItem="1LQ-nZ-JcX" secondAttribute="leading" constant="20" id="r6q-ve-TY7"/>
@@ -301,7 +306,40 @@
                                         <constraint firstItem="HYz-1K-Oja" firstAttribute="top" secondItem="q4u-sf-hsc" secondAttribute="bottom" constant="20" id="tVV-kP-NuU"/>
                                         <constraint firstAttribute="trailing" secondItem="2OX-NS-ngt" secondAttribute="trailing" constant="20" id="uNL-wD-wVF"/>
                                         <constraint firstItem="2OX-NS-ngt" firstAttribute="top" secondItem="s8s-VR-87Z" secondAttribute="bottom" constant="10" id="vbM-aA-AOx"/>
+                                        <constraint firstItem="HYz-1K-Oja" firstAttribute="width" secondItem="1LQ-nZ-JcX" secondAttribute="width" multiplier="0.5" id="vsH-hU-Xce"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="7YO-Mp-tX7"/>
+                                            <exclude reference="g38-sW-DPL"/>
+                                            <exclude reference="iw5-Bb-3fk"/>
+                                            <exclude reference="vsH-hU-Xce"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=compact-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="7YO-Mp-tX7"/>
+                                            <include reference="g38-sW-DPL"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=compact-widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="7YO-Mp-tX7"/>
+                                            <include reference="g38-sW-DPL"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="7YO-Mp-tX7"/>
+                                            <include reference="g38-sW-DPL"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="iw5-Bb-3fk"/>
+                                            <include reference="vsH-hU-Xce"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                             </subviews>
                             <constraints>
