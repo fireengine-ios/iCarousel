@@ -9,38 +9,29 @@
 import UIKit
 import WebKit
 
-class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
+class HelpAndSupportViewController: BaseViewController {
+    
+    //MARK: - Private properties
     
     private let accountSerivce = AccountService()
     
-    private var webView: WKWebView!
+    private lazy var webView: WKWebView = {
+        let webConfig = WKWebViewConfiguration()
+        
+        let web = WKWebView(frame: .zero, configuration: webConfig)
+        web.navigationDelegate = self
+        
+        return web
+    }()
     
     // MARK: Life cycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
-    override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.navigationDelegate = self
-        view = webView
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = TextConstants.faqViewTitle
-        
-        accountSerivce.faqUrl { [weak self] faqUrl in
-            if let url = URL(string: faqUrl) {
-                let request = URLRequest(url: url)
-                DispatchQueue.toMain {
-                    self?.webView.load(request)
-                    self?.showSpinner()
-                }
-            }
-        }
+        setTitle(withString: TextConstants.faqTitle)
+        setWebView()
+        loadFAQ()
+        hidenNavigationBarStyle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,8 +42,40 @@ class HelpAndSupportViewController: BaseViewController, WKNavigationDelegate {
         }
     }
     
-    // MARK: WKNavigationDelegate
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+    }
     
+    //MARK: - Setup
+    
+    private func setWebView() {
+        view.addSubview(webView)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 15).activate()
+        webView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).activate()
+        webView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).activate()
+        webView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).activate()
+    }
+    
+    //MARK: - Private funcs
+    
+    private func loadFAQ() {
+        accountSerivce.faqUrl { [weak self] faqUrl in
+            if let url = URL(string: faqUrl) {
+                let request = URLRequest(url: url)
+                DispatchQueue.toMain {
+                    self?.webView.load(request)
+                    self?.showSpinner()
+                }
+            }
+        }
+    }
+}
+
+// MARK: - WKNavigationDelegate
+
+extension HelpAndSupportViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         hideSpinner()
     }
