@@ -16,8 +16,6 @@ final class AgreementsViewController: BaseViewController, NibInit {
     private let eulaService = EulaService()
     private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
     
-    private let buttonTiteles = [TextConstants.termsOfUseAgreement, TextConstants.privacyPolicyAgreement]
-    
     private lazy var webView: WKWebView = {
         let contentController = WKUserContentController()
         
@@ -70,14 +68,14 @@ final class AgreementsViewController: BaseViewController, NibInit {
     //MARK: - Setup
     
     private func setSegmentedControl() {
-        let segmentedControl = AgreementsSegmentedControl(frame: CGRect(x: 0,
-                                                                        y: 0,
-                                                                        width: UIScreen.main.bounds.width,
-                                                                        height: 43),
-                                                          buttonTitles: buttonTiteles)
+        let segmentedControl = AgreementsSegmentedControl.initFromNib()
         segmentedControl.backgroundColor = .clear
         segmentedControl.delegate = self
         view.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.topAnchor.constraint(equalTo: view.topAnchor).activate()
+        segmentedControl.leftAnchor.constraint(equalTo: view.leftAnchor).activate()
+        segmentedControl.rightAnchor.constraint(equalTo: view.rightAnchor).activate()
     }
     
     private func setActivityIndicator() {
@@ -87,10 +85,10 @@ final class AgreementsViewController: BaseViewController, NibInit {
     private func setWebView() {
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 62).isActive = true
-        webView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).isActive = true
-        webView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        webView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        webView.topAnchor.constraint(equalTo: view.topAnchor, constant: 62).activate()
+        webView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).activate()
+        webView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).activate()
+        webView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).activate()
     }
     
     //MARK: - Private funcs
