@@ -21,8 +21,8 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.permissions)
     }
 
-    func goToHelpAndSupport() {
-        router.pushViewController(viewController: router.helpAndSupport)
+    func goToFAQ() {
+        router.pushViewController(viewController: router.faq)
     }
     
     func goToTermsAndPolicy() {

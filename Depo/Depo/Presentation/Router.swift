@@ -932,7 +932,7 @@ class RouterVC: NSObject {
     // MARK: Help and support
     
     var helpAndSupport: UIViewController {
-        let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
+        let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "FAQViewController")
         return controller
     }
     

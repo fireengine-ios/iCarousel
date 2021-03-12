@@ -14,7 +14,7 @@ protocol SettingsViewOutput {
     
     func onLogout()
     
-    func goToHelpAndSupport()
+    func goToFAQ()
     
     func goToTermsAndPolicy()
         

@@ -77,8 +77,8 @@ extension SettingsPresenter: SettingsViewOutput {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func goToHelpAndSupport() {
-        router.goToHelpAndSupport()
+    func goToFAQ() {
+        router.goToFAQ()
     }
     
     func goToTermsAndPolicy() {

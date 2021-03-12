@@ -14,7 +14,7 @@ protocol SettingsRouterInput {
     
     func goToPermissions()
 
-    func goToHelpAndSupport()
+    func goToFAQ()
     
     func goToTermsAndPolicy()
     

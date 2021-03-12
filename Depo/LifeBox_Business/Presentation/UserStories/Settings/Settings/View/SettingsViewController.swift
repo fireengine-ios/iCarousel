@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SettingsDelegate: class {
-    func goToHelpAndSupport()
+    func goToFAQ()
     
     func goToTermsAndPolicy() 
         
@@ -189,11 +189,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .passcode:
             showPasscodeOrPasscodeSettings()
 
-        case .helpAndSupport:
+        case .faq:
             if let delegate = settingsDelegate {
-                delegate.goToHelpAndSupport()
+                delegate.goToFAQ()
             } else {
-                output.goToHelpAndSupport()
+                output.goToFAQ()
             }
         case .termsAndPolicy:
             if let delegate = settingsDelegate {

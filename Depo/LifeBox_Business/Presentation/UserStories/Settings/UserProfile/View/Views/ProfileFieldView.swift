@@ -243,7 +243,7 @@ class ProfileFieldView: UIView {
     
     private func openFAQ() {
         let router = RouterVC()
-        let controller = router.helpAndSupport
+        let controller = router.faq
         router.pushViewController(viewController: controller)
     }
 }
