@@ -91,6 +91,10 @@ def widget_pods
   pod 'XCGLogger', '~> 7'
 end
 
+def authentication_pods
+  pod 'FastLogin', :git => 'https://github.com/Turkcell/FastLogin.git', :branch => 'v2.0'
+end
+
 target 'Depo_LifeTech' do
   lifebox_pods
 end
@@ -153,10 +157,12 @@ end
 
 target 'lifeBox_Business' do
   core_pods
+  authentication_pods
 end
 
 target 'lifeBox_Business_Bundle' do
   core_pods
+  authentication_pods
 end
 
 target "lifeBox_Business_NotificationService" do
