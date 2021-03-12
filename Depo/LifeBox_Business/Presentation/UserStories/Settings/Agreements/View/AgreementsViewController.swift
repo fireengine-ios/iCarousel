@@ -107,7 +107,9 @@ final class AgreementsViewController: BaseViewController, NibInit {
     
     private func loadTermsOfUse() {
         eulaService.eulaGet { [weak self] response in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             switch response {
             case .success(let termsOfUse):
                 guard let content = termsOfUse.content else {
@@ -126,7 +128,9 @@ final class AgreementsViewController: BaseViewController, NibInit {
     
     private func loadPrivacyPolicy() {
         privacyPolicyService.getPrivacyPolicy { [weak self] response in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             switch response {
             case .success(let privacyPolicy):
                 let prepearedContent = privacyPolicy.content.setHTMLStringFont(UIFont.GTAmericaStandardRegularFont(),

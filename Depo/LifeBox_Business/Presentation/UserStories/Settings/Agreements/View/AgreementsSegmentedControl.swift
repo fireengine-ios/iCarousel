@@ -18,23 +18,21 @@ final class AgreementsSegmentedControl: UIView {
     
     weak var delegate: AgreementsSegmentedControlDelegate?
     
-    var textColor: UIColor = ColorConstants.multifileCellSubtitleText
-    var selectorViewColor: UIColor = ColorConstants.confirmationPopupTitle
-    var selectorTextColor: UIColor = ColorConstants.confirmationPopupTitle
-    var dividerViewColor: UIColor = ColorConstants.separator
-    
     //MARK: - Private properties
     
-    private var buttonTitles: [String]!
-    private var buttons: [UIButton]!
+    private var buttonTitles = [String]()
+    private var buttons = [UIButton]()
     private var selectorView: UIView!
     private var dividerView: UIView!
+    
+    private lazy var stack = UIStackView(arrangedSubviews: buttons)
     
     //MARK: - Init
     
     convenience init(frame: CGRect, buttonTitles: [String]) {
         self.init(frame: frame)
         self.buttonTitles = buttonTitles
+        updateView()
     }
     
     //MARK: - Setup
@@ -50,9 +48,8 @@ final class AgreementsSegmentedControl: UIView {
     }
     
     private func createButton() {
-        buttons = [UIButton]()
         buttons.removeAll()
-        subviews.forEach ({ $0.removeFromSuperview() })
+        subviews.forEach { $0.removeFromSuperview() }
         
         for buttonTitle in buttonTitles {
             let button = UIButton(type: .system)
@@ -65,34 +62,37 @@ final class AgreementsSegmentedControl: UIView {
     
     private func setButtonLikePressed(_ button: UIButton?) {
         button?.titleLabel?.font =  UIFont.GTAmericaStandardMediumFont(size: 14)
-        button?.setTitleColor(selectorTextColor, for: .normal)
+        button?.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
     }
     
     private func setButtonLikeNotPressed(_ button: UIButton?) {
         button?.titleLabel?.font =  UIFont.GTAmericaStandardRegularFont(size: 14)
-        button?.setTitleColor(textColor, for: .normal)
+        button?.setTitleColor(ColorConstants.multifileCellSubtitleText, for: .normal)
     }
     
     private func configStackView() {
-        let stack = UIStackView(arrangedSubviews: buttons)
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fillEqually
         addSubview(stack)
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        stack.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        stack.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        stack.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        stack.pinToSuperviewEdges()
     }
     
     private func configSelectorView() {
-        let selectorWidth = frame.width / CGFloat(self.buttonTitles.count)
-        selectorView = UIView(frame: CGRect(x: 0, y: self.frame.height, width: selectorWidth, height: 3))
-        selectorView.backgroundColor = selectorViewColor
+        let selectorWidth = frame.width / CGFloat(buttonTitles.count)
+        let selectorHeight: CGFloat = 3
+        selectorView = UIView(frame: CGRect(x: 0,
+                                            y: self.frame.height,
+                                            width: selectorWidth,
+                                            height: selectorHeight))
+        selectorView.backgroundColor = ColorConstants.confirmationPopupTitle
         
-        dividerView = UIView(frame: CGRect(x: 0, y: self.frame.height + 3, width: self.frame.width, height: 0.7))
-        dividerView.backgroundColor = dividerViewColor
+        dividerView = UIView(frame: CGRect(x: 0,
+                                           y: self.frame.height + selectorHeight,
+                                           width: self.frame.width,
+                                           height: 0.7))
+        dividerView.backgroundColor = ColorConstants.separator
         
         addSubview(selectorView)
         addSubview(dividerView)
