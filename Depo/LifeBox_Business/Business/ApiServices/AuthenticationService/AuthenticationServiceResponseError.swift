@@ -23,9 +23,20 @@ enum LoginResponseError: Error {
     case emptyPhone
     case emptyCaptcha
     case emptyEmail
+
+    case flNotInPool
+    case flAuthFailure
     
     init(with errorResponse: ErrorResponse) {
-        if errorResponse.description.contains("LDAP account is locked") {
+        if errorResponse.description.contains(TextConstants.NotLocalized.flIdentifierKey) {
+            if errorResponse.description.contains(TextConstants.flLoginAuthFailure) {
+                self = .flAuthFailure
+            } else if errorResponse.description.contains(TextConstants.flLoginUserNotInPool) {
+                self = .flNotInPool
+            } else {
+                self = .serverError
+            }
+        } else if errorResponse.description.contains("LDAP account is locked") {
             self = .block
         }
         else if !ReachabilityService.shared.isReachable {
@@ -92,6 +103,10 @@ enum LoginResponseError: Error {
             return GADementionValues.loginError.serverError.text
         case .emptyCaptcha:
             return GADementionValues.loginError.captchaIsEmpty.text
+        case .flAuthFailure:
+            return "" // TODO: add analytics keys when appropriate task will be created
+        case .flNotInPool:
+            return "" // TODO: add analytics keys when appropriate task will be created
         }
     }
 }

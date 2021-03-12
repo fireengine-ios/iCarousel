@@ -14,6 +14,8 @@ protocol LoginViewOutput {
     
     func rememberMe(remember: Bool)
 
+    func authenticateWith(flToken: String)
+
     func sendLoginAndPassword(login: String, password: String, rememberMe: Bool)
     func sendLoginAndPasswordWithCaptcha(login: String, password: String, rememberMe: Bool, captchaID: String, captchaAnswer: String)
     
