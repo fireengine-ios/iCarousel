@@ -84,6 +84,26 @@ class SingletonStorage {
             }
         }
     }
+
+    func getStorageUsageInfo(projectId: String, userAccountId: String, success:@escaping (SettingsStorageUsageResponseItem) -> Void, fail: @escaping FailResponse) {
+        AccountService().storageUsageInfo(projectId: projectId, accoundId: userAccountId) { [weak self] response in
+                switch response {
+                    case .success(let usageInfo):
+                        self?.resumableUploadInfoService.updateInfo { [weak self] featuresInfo in
+                            self?.featuresInfo = featuresInfo
+                            DispatchQueue.toMain {
+                                success(usageInfo)
+                            }
+                        }
+
+                    case .failed(let error):
+                        DispatchQueue.toMain {
+                            fail(ErrorResponse.error(error))
+                        }
+                }
+        }
+
+    }
     
     func getOverQuotaStatus(completion: @escaping VoidHandler) {
         let storageVars: StorageVars = factory.resolve()
