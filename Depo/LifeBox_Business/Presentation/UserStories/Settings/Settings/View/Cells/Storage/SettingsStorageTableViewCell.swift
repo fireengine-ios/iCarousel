@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsStorageTableViewCell: UITableViewCell {
+final class SettingsStorageTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var iconContainerView: UIView! {
         willSet {

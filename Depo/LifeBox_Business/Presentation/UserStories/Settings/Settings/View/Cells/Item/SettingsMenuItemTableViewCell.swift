@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsMenuItemTableViewCell: UITableViewCell {
+final class SettingsMenuItemTableViewCell: UITableViewCell {
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
