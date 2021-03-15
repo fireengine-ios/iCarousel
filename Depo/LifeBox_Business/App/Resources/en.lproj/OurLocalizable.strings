@@ -2025,3 +2025,14 @@
 "business_app_FL_error_session_timeout" = "Your Fast Login session is expired. Please try again later.";
 "business_app_FL_error_not_logintologinSDK" = "Authentication Error in Fast Login";
 "business_app_FL_else_error" = "Temporary error occured in Fast Login. Please try again later.";
+
+"business_app_settings_page_title" = "Settings";
+"business_app_settings_storage_use_limited_header" = "Storage Use";
+"business_app_settings_storage_used_limited_values" = "%@ / %@ using";
+"business_app_settings_storage_use_unlimited_text" = "Storage Used: %@";
+"business_app_settings_profile" = "Profile";
+"business_app_settings_agreements" = "Agreements";
+"business_app_settings_faq" = "FAQ";
+"business_app_settings_contactus" = "Contact Us";
+"business_app_settings_deletedfiles" = "Trash Bin";
+"business_app_settings_logout" = "Log out";

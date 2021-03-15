@@ -68,7 +68,7 @@ extension UIViewController: Waiting {
         }
     }
     
-    func showSpinner() {
+    @objc func showSpinner() {
         DispatchQueue.main.async {
             _ = MBProgressHUD.showAdded(to: self.view, animated: true)
         }
@@ -95,7 +95,7 @@ extension UIViewController: Waiting {
         }
     }
     
-    func hideSpinner() {
+    @objc func hideSpinner() {
         DispatchQueue.main.async {
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         }

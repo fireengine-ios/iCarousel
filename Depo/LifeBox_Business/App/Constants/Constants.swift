@@ -1420,3 +1420,17 @@ extension TextConstants {
     static let flLoginUserNotInPool = NSLocalizedString("business_app_fast_login_pool_user_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let flLoginAuthFailure = NSLocalizedString("business_app_fast_login_authentication_fail_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+// MARK: - Settings general
+extension TextConstants {
+    static let settingsPageTitle = NSLocalizedString("business_app_settings_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUseHeader = NSLocalizedString("business_app_settings_storage_use_limited_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUsedLimited = NSLocalizedString("business_app_settings_storage_used_limited_values", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUsedUnlimited = NSLocalizedString("business_app_settings_storage_use_unlimited_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageProfile = NSLocalizedString("business_app_settings_profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageAgreements = NSLocalizedString("business_app_settings_agreements", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageFAQ = NSLocalizedString("business_app_settings_faq", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageContactUs = NSLocalizedString("business_app_settings_contactus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageDeletedFiles = NSLocalizedString("business_app_settings_deletedfiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
