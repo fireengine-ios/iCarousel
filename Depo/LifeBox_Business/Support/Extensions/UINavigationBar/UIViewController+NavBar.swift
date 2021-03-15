@@ -22,25 +22,25 @@ extension UIViewController {
         return 787878
     }
     
-    func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
-        
-        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
-        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
-        
-        if let subTitle = subTitle {
-            navigationItem.title = nil
-            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-            
-            let customTitleView = TitleView.initFromXib()
-            customTitleView.tag = tagTitleView
-            customTitleView.setTitle(title)
-            customTitleView.setSubTitle(subTitle)
-            
-            navigationItem.titleView = customTitleView
-        } else {
-            navigationItem.titleView = nil
-            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-            navigationItem.title = title
-        }
-    }
+//    func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
+//        
+//        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
+//        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
+//        
+//        if let subTitle = subTitle {
+//            navigationItem.title = nil
+//            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
+//            
+//            let customTitleView = TitleView.initFromXib()
+//            customTitleView.tag = tagTitleView
+//            customTitleView.setTitle(title)
+//            customTitleView.setSubTitle(subTitle)
+//            
+//            navigationItem.titleView = customTitleView
+//        } else {
+//            navigationItem.titleView = nil
+//            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
+//            navigationItem.title = title
+//        }
+//    }
 }

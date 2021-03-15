@@ -28,13 +28,13 @@ extension UIViewController {
     
 //MARK: Properties (private)
     
-    private var navBarHeight: CGFloat {
-        var height: CGFloat = UIApplication.shared.statusBarFrame.height
-        
-        height += navBar?.frame.height ?? 0
-
-        return height
-    }
+//    private var navBarHeight: CGFloat {
+//        var height: CGFloat = UIApplication.shared.statusBarFrame.height
+//        
+//        height += navBar?.frame.height ?? 0
+//
+//        return height
+//    }
     
     private var backButtonTitleAttributes: [NSAttributedStringKey : Any]? {
         return [
@@ -46,7 +46,7 @@ extension UIViewController {
     private var titleAttributes: [NSAttributedStringKey : Any]? {
         return [
             .font: UIFont.GTAmericaStandardMediumFont(size: 19),
-            .foregroundColor: UIColor.green//ColorConstants.confirmationPopupTitle
+            .foregroundColor: ColorConstants.confirmationPopupTitle
         ]
     }
     
@@ -61,11 +61,7 @@ extension UIViewController {
     }
     
     func setNavigationTitle(title: String) {
-        let titleLabel = UILabel()
-        titleLabel.text = title
-//        titleLabel.at
-        navigationItem.titleView = titleLabel
-//        navigationItem.title = title
+        navigationItem.title = title
         navBar?.titleTextAttributes = titleAttributes
     }
     
@@ -119,46 +115,46 @@ extension UIViewController {
 //MARK: NavBar presets
     
     func defaultNavBarStyle() {
-        visibleNavigationBarStyle()
-        
-        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
+//        visibleNavigationBarStyle()
+        //TextConstants.backTitle
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
-        
-        navBar?.barTintColor = ColorConstants.topBarColor
-        
+
         navBar?.titleTextAttributes = [.foregroundColor : ColorConstants.confirmationPopupTitle]
         
         statusBarColor = .clear
     }
 
-    func whiteNavBarStyle(backgroundImg: UIImage = UIImage(),
-                          tintColor: UIColor = .black,
-                          titleTextColor: UIColor = .black) {
+    func whiteNavBarStyle(isLargeTitle: Bool) {
+        
         visibleNavigationBarStyle()
 
-//        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
-////            view.hideLogo = true
-//            view.isHidden = true
-//
-//        }
-
-        navBar?.setBackgroundImage(backgroundImg, for: .default)
-        navBar?.shadowImage = UIImage()
-
-        navBar?.backgroundColor = .white
-        navBar?.barTintColor = .white
-        navBar?.tintColor = tintColor
-
-        navBar?.titleTextAttributes = [.foregroundColor : titleTextColor]
-
-        statusBarColor = .clear
-    }
-
-    func homePageNavigationBarStyle() {
-        defaultNavBarStyle()
-        setTitle(withString: "")
+        changeLargeTitle(prefersLargeTitles: isLargeTitle)
         
-        defaultNavBarStyle()//(hideLogo: false)
+        navigationItem.hidesSearchBarWhenScrolling = true
+        
+        navBar?.barTintColor = ColorConstants.topBarColor
+        navBar?.shadowImage = UIImage()
+        navBar?.backgroundColor = .clear
+        navBar?.tintColor = .clear
+    }
+    
+    func changeSearchBar(controller: UISearchController?) {
+        navigationItem.searchController = controller
+    }
+    
+    func  changeLargeTitle(prefersLargeTitles: Bool) {
+        debugPrint("!!!!  is prefered large \(prefersLargeTitles)")
+        navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
+    }
+    
+    func transparentNavBarStyle() {
+        navBar?.isTranslucent = true
+
+        navBar?.barTintColor = .clear
+        navBar?.shadowImage = UIImage()
+        navBar?.backgroundColor = .clear
+        navBar?.tintColor = .clear
     }
     
     func blackNavigationBarStyle() {
@@ -173,39 +169,41 @@ extension UIViewController {
         navBar?.backgroundColor = .black
     }
     
-    func defaultNavBarStyleWithoutInsets() {
-        defaultNavBarStyle()
-        setTitle(withString: "")
+}
+
+extension UIViewController {
+    
+    var navBar: UINavigationBar? {
+        return navigationController?.navigationBar
     }
     
-//MARK: ToolBar
-    
-    func barButtonItemsWithRitht(button: UIBarButtonItem) -> UIToolbar {
-        
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.sizeToFit()
-        
-        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                   target: nil,
-                                   action: nil)
-        
-        toolBar.setItems([flex, button], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        return toolBar
+    var tagHomeView: Int {
+        return 45634
     }
     
-    func setTouchableTitle(title: String) {
-        navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-        
-        let customTitleView = TitleView.initFromXib()
-        customTitleView.tag = tagTitleView
-        customTitleView.setTitle(title)
-        
-        navigationItem.titleView = customTitleView
-        
-        navigationItem.titleView?.isUserInteractionEnabled = true
+    var tagTitleView: Int {
+        return 787878
+    }
+    
+    func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
+
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
+        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
+
+        if let subTitle = subTitle {
+            navigationItem.title = nil
+            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
+
+            let customTitleView = TitleView.initFromXib()
+            customTitleView.tag = tagTitleView
+            customTitleView.setTitle(title)
+            customTitleView.setSubTitle(subTitle)
+
+            navigationItem.titleView = customTitleView
+        } else {
+            navigationItem.titleView = nil
+            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
+            navigationItem.title = title
+        }
     }
 }

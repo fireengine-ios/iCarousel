@@ -20,7 +20,7 @@ final class SharedAreaViewController: BaseViewController, NibInit {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        homePageNavigationBarStyle()
+        whiteNavBarStyle(isLargeTitle: false)
     }
 
 }

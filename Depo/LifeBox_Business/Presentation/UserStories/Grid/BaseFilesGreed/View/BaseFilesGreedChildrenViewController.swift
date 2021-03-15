@@ -12,14 +12,14 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homePageNavigationBarStyle()
+        defaultNavBarStyle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if parent is SegmentedController {
-            homePageNavigationBarStyle()
+            defaultNavBarStyle()
             
         } else {
             defaultNavBarStyle()
@@ -56,11 +56,7 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         }
         setTitle(withString: mainTitle, andSubTitle: subTitle)
         
-        if let _ = parent as? SegmentedController {
-            homePageNavigationBarStyle()
-        } else {
-            defaultNavBarStyle()
-        }
+        defaultNavBarStyle()
         
         configureNavBarActions(isSelecting: false)
     }

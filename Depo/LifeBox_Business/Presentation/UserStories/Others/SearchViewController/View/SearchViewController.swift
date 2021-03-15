@@ -39,7 +39,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     var searchBar: UISearchBar!
     var searchTextField: UITextField?
-    var navBarConfigurator = NavigationBarConfigurator()
     var editingTabBar: BottomSelectionTabBarViewController?
     
     private var goBack = false

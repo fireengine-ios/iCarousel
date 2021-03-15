@@ -83,7 +83,7 @@ final class SettingsViewController: BaseViewController {
     
     func setupNavBar() {
         if isTabBarItem {
-            homePageNavigationBarStyle()
+            defaultNavBarStyle()
         } else {
             defaultNavBarStyle()
             if Device.isIpad {

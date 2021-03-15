@@ -7,8 +7,6 @@
 //
 
 enum TopBarOptions {
-    case title
-//    case search
     case sorting
     case segmented
 }
@@ -33,85 +31,19 @@ final class ComposedTopBarManager {
     
     private var options = [TopBarOptions]()
     
-    private(set) var titleSubView: TopBarTitleView?
     private var sortingSubView: TopBarSortingView?
-    private var searchSubView: TopBarSearchView?
     
-    init(topBarOptions: [TopBarOptions] = [.title, .sorting]) {
+    init(topBarOptions: [TopBarOptions] = [.segmented, .sorting]) {
         options = topBarOptions
     }
     
 
-    
-    
-    func getTopBarHeight() -> CGFloat {
-        return 0//we dont count height till scroll? or we do inset and then make an offset chanhge?
-    }
-    
-    
-    
-    func adaptOffset(offset: CGFloat) {
-        adaptTitleView(offsetY: offset)
-    }
-    
-    private func composeTopBar() {
-        
-//        options.forEach { type in
-//
-//            let newSubView: UIView
-//
-//            switch type {
-//            case .title:
-//
-//            case .sorting:
-//
-//            case .search:
-//                let searchView = TopBarSearchView.initFromNib()
-//
-//                searchSubView = searchView
-//                newSubView = searchView
-//            }
-//
-//            self.topBar.stackView.addArrangedSubview(newSubView)
-//        }
-    }
     
 }
 
 extension ComposedTopBarManager: TopBarSortingViewDelegate {
     func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
         delegate?.sortingTypeChanged(sortType: sortType)
-    }
-}
-
-//MARK: - TitleView
-extension ComposedTopBarManager {
-    
-    func getTitleSubView(titlteText: String) -> UIView {
-        let titleView = TopBarTitleView.initFromNib()
-        titleView.setup(text: title)
-        titleSubView = titleView
-        return titleView
-    }
-    
-    private func adaptTitleView(offsetY: CGFloat) {
-        guard let titleSubView = titleSubView else {
-            return
-        }
-        
-        let relativeFrame = titleSubView.frame//topBar.convert(titleSubView.frame, to: topBar.superview)
-        
-        let relativeTitleViewTopY = relativeFrame.origin.y
-        let relativeTitleViewBotY = relativeTitleViewTopY + titleSubView.frame.height
-        
-        let specialOffsett = offsetY - relativeTitleViewBotY
-        
-        if (relativeTitleViewTopY...relativeTitleViewBotY).contains(offsetY) {
-            let alpha: CGFloat = -specialOffsett/titleSubView.frame.height
-            titleSubView.titleLabel.alpha = alpha
-        } else {
-            titleSubView.titleLabel.alpha = offsetY > relativeTitleViewBotY ? 0 : 1
-        }
     }
 }
 

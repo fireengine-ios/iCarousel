@@ -16,7 +16,7 @@ class GridListTopBarSortingTableCell: UITableViewCell {
         
         titleLabel.text = text
         
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        titleLabel.font = UIFont.GTAmericaStandardRegularFont(size: 19)
         titleLabel.textColor = ColorConstants.textGrayColor
         
         approveImage.isHidden = selected ? false : true
