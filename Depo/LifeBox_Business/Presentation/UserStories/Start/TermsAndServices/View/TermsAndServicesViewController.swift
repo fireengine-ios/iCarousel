@@ -72,7 +72,7 @@ final class TermsAndServicesViewController: ViewController {
             newValue.delegate = self
             newValue.backgroundColor = .clear
             newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkText,
+                NSAttributedStringKey.foregroundColor.rawValue: ColorConstants.Text.labelTitle,
                 NSAttributedStringKey.font.rawValue: UIFont.GTAmericaStandardMediumFont(size: 12)
             ]
         }
@@ -138,7 +138,8 @@ final class TermsAndServicesViewController: ViewController {
                                                             .foregroundColor: ColorConstants.Text.labelTitle])
         
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
-        header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
+        header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions,
+                              .font: UIFont.GTAmericaStandardMediumFont(size: 12)], range: rangeLink)
         
         privacyPolicyTextView.attributedText = header
     }
