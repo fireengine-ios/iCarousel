@@ -43,25 +43,25 @@ extension SettingsPresenter: SettingsViewOutput {
         
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
-    
-    func goToHelpAndSupport() {
-        router.goToHelpAndSupport()
+
+    func navigateToProfile() {
+        router.navigateToProfile()
     }
-    
-    func goToTermsAndPolicy() {
-        router.goToTermsAndPolicy()
+
+    func navigateToAgreements() {
+        router.navigateToAgreements()
     }
-    
-    func goToPermissions() {
-        router.goToPermissions()
+
+    func navigateToFAQ() {
+        router.navigateToFAQ()
     }
-    
-    func goToActivityTimeline() {
-        router.goToActivityTimeline()
+
+    func navigateToContactUs() {
+        router.navigateToContactUs()
     }
-    
-    func goToMyProfile(userInfo: AccountInfoResponse) {
-        router.goToUserInfo(userInfo: userInfo)
+
+    func navigateToTrashBin() {
+        router.navigateToTrashBin()
     }
     
     func presentErrorMessage(errorMessage: String) {

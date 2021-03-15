@@ -103,6 +103,25 @@ extension SettingsViewController: SettingsViewInput {
     }
 }
 
+// MARK: - SettingsTableViewAdapterDelegate
 extension SettingsViewController: SettingsTableViewAdapterDelegate {
+    func navigateToProfile(_ adapter: SettingsTableViewAdapter) {
+        output.navigateToProfile()
+    }
 
+    func navigateToFAQ(_ adapter: SettingsTableViewAdapter) {
+        output.navigateToFAQ()
+    }
+
+    func navigateToTrashBin(_ adapter: SettingsTableViewAdapter) {
+        output.navigateToTrashBin()
+    }
+
+    func navigateToContactUs(_ adapter: SettingsTableViewAdapter) {
+        output.navigateToContactUs()
+    }
+
+    func navigateToAgreements(_ adapter: SettingsTableViewAdapter) {
+        output.navigateToAgreements()
+    }
 }

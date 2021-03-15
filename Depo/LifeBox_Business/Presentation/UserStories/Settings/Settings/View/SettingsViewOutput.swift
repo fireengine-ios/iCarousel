@@ -9,12 +9,13 @@
 protocol SettingsViewOutput {
 
     func viewIsReady()
-    
-    func onLogout()
-    
-    func goToHelpAndSupport()
-    
-    func goToTermsAndPolicy()
-    
     func presentErrorMessage(errorMessage: String)
+
+    func navigateToFAQ()
+    func navigateToProfile()
+    func navigateToAgreements()
+    func navigateToTrashBin()
+    func navigateToContactUs()
+
+    func onLogout()
 }
