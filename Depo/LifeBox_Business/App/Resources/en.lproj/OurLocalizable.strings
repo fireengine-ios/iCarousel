@@ -2013,8 +2013,8 @@
 
 "business_app_settings_page_title" = "Settings";
 "business_app_settings_storage_use_limited_header" = "Storage Use";
-"business_app_settings_storage_used_limited_values" = "%d/%d using";
-"business_app_settings_storage_use_unlimited_text" = "Storage Used: %d";
+"business_app_settings_storage_used_limited_values" = "%@ / %@ using";
+"business_app_settings_storage_use_unlimited_text" = "Storage Used: %@";
 "business_app_settings_profile" = "Profile";
 "business_app_settings_agreements" = "Agreements";
 "business_app_settings_faq" = "FAQ";
