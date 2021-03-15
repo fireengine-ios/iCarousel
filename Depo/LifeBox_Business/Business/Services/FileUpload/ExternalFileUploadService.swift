@@ -39,10 +39,12 @@ final class ExternalFileUploadService: NSObject {
     private var accountUuid = SingletonStorage.shared.accountInfo?.uuid
     private var isFromAlbum = false
     private var uploadType: UploadType = .regular
+    private var router: RouterVC?
     
     
     func showViewController(type: UploadType, router: RouterVC, externalFileType: ExternalFileType) {
         uploadType = type
+        self.router = router
         
         switch type {
             case .regular:
@@ -93,21 +95,29 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
     }
     
     private func upload(items: [WrapData]) {
-        guard !items.isEmpty else {
+        guard !items.isEmpty, let router = router else {
             return
         }
         
-        uploadService.uploadFileList(items: items,
-                                     uploadType: uploadType,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .ROOT,
-                                     folder: folderUUID,
-                                     isFavorites: isFavorites,
-                                     isFromAlbum: isFromAlbum,
-                                     isFromCamera: false,
-                                     projectId: accountUuid,
-                                     success: {},
-                                     fail: { _ in },
-                                     returnedUploadOperation: { _ in})
+        
+        let controller = router.uploadSelectionList(with: items) { [weak self] selectedItems in
+            guard let self = self else {
+                return
+            }
+            self.uploadService.uploadFileList(items: selectedItems,
+                                         uploadType: self.uploadType,
+                                         uploadStategy: .WithoutConflictControl,
+                                         uploadTo: .ROOT,
+                                         folder: self.folderUUID,
+                                         isFavorites: self.isFavorites,
+                                         isFromAlbum: self.isFromAlbum,
+                                         isFromCamera: false,
+                                         projectId: self.accountUuid,
+                                         success: {},
+                                         fail: { _ in },
+                                         returnedUploadOperation: { _ in})
+        }
+        
+        router.presentViewController(controller: controller)
     }
 }

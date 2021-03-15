@@ -102,7 +102,7 @@ class VerifyPhoneNumberParameter: BaseRequestParametrs {
     override var requestParametrs: Any {
         let dict: [String: String] = [AccountJSONConstants.otp: otp ?? "",
                                       AccountJSONConstants.referenceToken: referenceToken ?? "",
-                                      LbRequestkeys.processPersonalData: String(processPersonalData)]
+                                      LbRequestKeys.processPersonalData: String(processPersonalData)]
         return dict
     }
     

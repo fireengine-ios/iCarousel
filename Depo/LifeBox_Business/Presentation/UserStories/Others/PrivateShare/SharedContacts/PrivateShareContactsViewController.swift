@@ -68,9 +68,11 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         guard let shareInfo = shareInfo else {
             return
         }
+        showSpinner()
 
         privateShareApiService.getRemoteEntityInfo(projectId: shareInfo.accountUuid,
                                                    uuid: shareInfo.uuid) { [weak self] result in
+            self?.hideSpinner()
             switch result {
             case .success(let info):
                 self?.shareInfo = info
@@ -134,7 +136,7 @@ extension PrivateShareContactsViewController: PrivateShareContactTableViewAdapte
         }
 
         guard
-            contact.role.isContained(in: [.editor, .viewer]),
+            contact.role.isContained(in: [.editor, .viewer, .varying]),
             let accountUuid = shareInfo?.accountUuid,
             let uuid = shareInfo?.uuid,
             let fileType = shareInfo?.fileType

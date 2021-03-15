@@ -184,7 +184,7 @@ private extension PrivateShareAccessListViewController {
             
             switch result {
             case .success():
-                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareAccessRoleChangeSuccess)
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.accessPageRoleUpdated)
                 
                 if let contact = self.contact {
                     ItemOperationManager.default.didChangeRole(newRole, contact: contact, uuid: uuid)
@@ -215,7 +215,7 @@ private extension PrivateShareAccessListViewController {
             
             switch result {
             case .success():
-                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareAccessDeleteUserSuccess)
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.accessPageRoleDeleted)
                 if let contact = self.contact {
                     ItemOperationManager.default.didRemove(contact: contact, fromItem: uuid)
                 }

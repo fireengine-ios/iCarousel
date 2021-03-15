@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
+import DigitalGate
 
 final class AppConfigurator {
     
@@ -38,7 +39,6 @@ final class AppConfigurator {
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
         LocalMediaStorage.default.clearTemporaryFolder()
         
-        
         AuthoritySingleton.shared.checkNewVersionApp()
     }
     
@@ -57,7 +57,8 @@ final class AppConfigurator {
         AuthenticationService().logout {
             DispatchQueue.main.async {
                 let router = RouterVC()
-                router.setNavigationController(controller: router.loginScreen)
+                let navC = UINavigationController(rootViewController: router.loginScreen!)
+                router.setNavigationController(controller: navC)
             }
         }
     }
@@ -65,6 +66,11 @@ final class AppConfigurator {
     private static func clearTokensIfNeed() {
         if tokenStorage.isClearTokens {
             debugLog("clearTokensIfNeed")
+            if tokenStorage.isLoggedInWithFastLogin {
+                let loginCoordinator = DGLoginCoordinator(nil)
+                loginCoordinator.logout()
+                printLog("[AppConfigurator] FL logout")
+            }
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()
         }

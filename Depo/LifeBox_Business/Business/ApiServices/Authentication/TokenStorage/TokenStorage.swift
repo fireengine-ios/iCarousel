@@ -14,5 +14,6 @@ protocol TokenStorage: class {
     var refreshToken: String? { get set }
     var isRememberMe: Bool { get set }
     var isClearTokens: Bool { get set }
+    var isLoggedInWithFastLogin: Bool { get set }
     func clearTokens()
 }

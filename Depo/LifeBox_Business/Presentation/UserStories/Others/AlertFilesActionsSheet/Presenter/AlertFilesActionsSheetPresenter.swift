@@ -223,6 +223,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .moveToTrashShared,
                      .editorRole,
                      .viewerRole,
+                     .variesRole,
                      .removeRole:
                     
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in

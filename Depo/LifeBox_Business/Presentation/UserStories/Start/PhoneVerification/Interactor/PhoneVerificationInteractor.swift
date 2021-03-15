@@ -44,6 +44,10 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     var phoneNumber: String {
         return dataStorage.signUpUserInfo.phone
     }
+
+    var mainTitle: String {
+        return ""
+    }
     
     var textDescription: String {
         return TextConstants.enterCodeToGetCodeOnPhone

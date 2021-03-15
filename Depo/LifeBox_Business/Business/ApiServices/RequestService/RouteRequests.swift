@@ -78,6 +78,7 @@ struct RouteRequests {
     
     enum Login {
         static let yaaniMail = baseShortUrlString + "api/v1/business/auth-methods/pwd/tokens%@"
+        static let flLogin = baseShortUrlString + "api/v1/business/auth-methods/fla/tokens?rememberMe=on"
     }
     
     static let authificationByRememberMe = "auth/rememberMe"

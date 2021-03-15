@@ -40,18 +40,18 @@ struct EULAApprove: RequestParametrs {
     let globalPermAuth: Bool?
     
     var requestParametrs: Any {
-        var params: [String: Any] = [LbRequestkeys.eulaId: id]
+        var params: [String: Any] = [LbRequestKeys.eulaId: id]
         
         if let etkAuth = etkAuth {
-            params[LbRequestkeys.etkAuth] = etkAuth
+            params[LbRequestKeys.etkAuth] = etkAuth
         }
         
         if let globalPermAuth = globalPermAuth {
-            params[LbRequestkeys.globalPermAuth] = globalPermAuth
+            params[LbRequestKeys.globalPermAuth] = globalPermAuth
         }
         
         if let kvkkAuth = kvkkAuth {
-            params[LbRequestkeys.kvkkAuth] = kvkkAuth
+            params[LbRequestKeys.kvkkAuth] = kvkkAuth
         }
         
         return params

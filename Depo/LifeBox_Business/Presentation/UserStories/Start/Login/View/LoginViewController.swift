@@ -8,6 +8,7 @@
 
 import UIKit
 import Typist
+import DigitalGate
 
 final class LoginViewController: ViewController {
 
@@ -78,7 +79,7 @@ final class LoginViewController: ViewController {
             newValue.setTitle(TextConstants.loginPageLoginButtonTitle, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.backgroundColor = UIColor(named: "loginButtonBackground")
+            newValue.backgroundColor = ColorConstants.buttonDarkBlueBackground
             newValue.isOpaque = true
         }
     }
@@ -193,6 +194,7 @@ final class LoginViewController: ViewController {
     //MARK: Vars
     var output: LoginViewOutput!
     private let keyboard = Typist.shared
+    private var loginCoordinator: DGLoginCoordinator!
     
     //MARK: - Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -219,6 +221,7 @@ final class LoginViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = ""
         setupNavBar()
         
         if !captchaView.isHidden {
@@ -228,7 +231,6 @@ final class LoginViewController: ViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
         prepareForDisappear()
     }
     
@@ -237,6 +239,7 @@ final class LoginViewController: ViewController {
     private func setup() {
         setupDelegates()
         configureKeyboard()
+        setupLoginCoordinator()
     }
     
     private func setupDelegates() {
@@ -266,10 +269,7 @@ final class LoginViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
-        
-        setNavigationTitle(title: TextConstants.loginTitle)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     @objc private func showHideButtonClicked(_ button: UIButton) {
@@ -290,12 +290,26 @@ final class LoginViewController: ViewController {
         present(popupController, animated: false)
     }
 
+    @IBAction private func fastLoginButtonTapped() {
+        loginCoordinator.start()
+        printLog("[LoginViewController] fastLoginButtonTapped FL login scenario started")
+    }
+
     private func prepareForDisappear() {
         ///rootViewController's navBar is hidden. But on push we shouldn't hide it
         if !output.isPresenting {
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
         output.isPresenting = false
+    }
+
+    private func showErrorAlert(with title: String?, subtitle: String?) {
+        let popupController = PopUpController.with(title: title,
+                                                   message: subtitle,
+                                                   image: .error,
+                                                   buttonTitle: TextConstants.accessibilityClose,
+                                                   visualStyle: PopUpVisualStyle.lbLogin)
+        present(popupController, animated: false)
     }
     
     private func updateScroll(with keyboardFrame: CGRect) {
@@ -348,6 +362,57 @@ final class LoginViewController: ViewController {
     }
 }
 
+// MARK: -LoginCoordinatorDelegate(FastLogin)
+extension LoginViewController: LoginCoordinatorDelegate {
+    private var iPadAppId: String {
+        return "59322"
+    }
+
+    private var iPhoneAppId: String {
+        return "59320"
+    }
+
+    private var currentFastLoginServerType: DGEnvironment {
+        return .prp
+    }
+
+    private func setupLoginCoordinator() {
+        loginCoordinator = DGLoginCoordinator(self)
+        loginCoordinator.appID = Device.isIpad ? iPadAppId : iPhoneAppId
+        loginCoordinator.language = Locale.current.isTurkishLocale ? "TR" : "EN"
+        loginCoordinator.environment = currentFastLoginServerType
+        loginCoordinator.disableCell = true
+        loginCoordinator.autoLoginOnly = false
+        loginCoordinator.disableAutoLogin = true
+        loginCoordinator.coordinatorDelegate = self
+    }
+
+    func dgLoginToken(_ token: String) {
+        printLog("[LoginViewController] dgLoginToken FL login succeded. Passed to be")
+        output.authenticateWith(flToken: token)
+    }
+
+    func dgLoginFailure(_ reason: String, errorMessage: String) {
+        if reason == dgKSessionTimeout as String {
+            printLog("[LoginViewController] Fast Login SDK error - SessionTimeout")
+            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErrorTimeout)
+        } else if reason == dgKUserExit as String {
+            printLog("[LoginViewController] Fast Login SDK error - UserExit")
+        } else if reason == dgKNotLoginToLoginSDK as String {
+            printLog("[LoginViewController] Fast Login SDK error - dgKNotLoginToLoginSDK")
+            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErorNotLoginSDK)
+        } else {
+            printLog("[LoginViewController] Fast Login SDK error - unknown error")
+            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.errorUnknown)
+        }
+    }
+
+    func dgConfigurationFailure(configError: String) {
+        showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.errorUnknown)
+    }
+}
+
+// MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
     @objc private func passwordTextFieldTextDidChange(_ textField: UITextField) {
         guard textField == passwordTextField else {
@@ -406,6 +471,10 @@ extension LoginViewController: LoginViewInput {
     
     func refreshCaptcha() {
         captchaView.updateCaptcha()
+    }
+
+    func showErrorAlert(with title: String?, and message: String?) {
+        showErrorAlert(with: title, subtitle: message)
     }
     
     //MARK: Fields alerts processing

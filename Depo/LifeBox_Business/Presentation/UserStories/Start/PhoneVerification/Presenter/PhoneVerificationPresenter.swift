@@ -36,6 +36,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         
         view.resendButtonShow(show: true)
         view.updateEditingState()
+        view.dropTimer()
     }
     
     func resendButtonPressed() {
