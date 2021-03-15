@@ -63,7 +63,7 @@ final class TermsAndServicesViewController: ViewController {
     @IBOutlet private weak var privacyPolicyView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 5
-            newValue.backgroundColor =  UIColor.privacyPolicyTextFieldBackgroundColor
+            newValue.backgroundColor = ColorConstants.textViewBackground
         }
     }
     
