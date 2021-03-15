@@ -45,11 +45,8 @@ final class SettingsStorageTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var storageUsageLabel: UILabel! {
         willSet {
-            // TODO need to be attributed string
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
             newValue.textColor = ColorConstants.infoPageValueText
-            // TODO text may vary depending on server response(maybe be only used, or used in mb/gb, gb/gb, mb/mb etc
-            newValue.text = TextConstants.settingsPageStorageUsedUnlimited
         }
     }
 
