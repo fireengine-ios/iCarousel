@@ -302,6 +302,7 @@ struct RouteRequests {
         static let info = baseAccountsURLString + "%@"
         static let quota = baseAccountsURLString + "new_api_is_required"
         static let settings = baseAccountsURLString + "new_api_is_required"
+        static let storageUsageInfo = baseAccountsURLString + "%@/users/%@/disk"
     }
     
     enum Account {

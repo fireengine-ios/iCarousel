@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
+                <outlet property="logoutButton" destination="4WJ-Hn-jBO" id="hgJ-Gn-vhc"/>
                 <outlet property="tableView" destination="M7i-kt-Jaj" id="GTQ-UF-Iv2"/>
                 <outlet property="view" destination="iN0-l3-epB" id="s9h-jf-rhR"/>
             </connections>
@@ -20,23 +22,37 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="M7i-kt-Jaj">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="AeJ-9b-l3Y"/>
-                        <outlet property="delegate" destination="-1" id="9ib-Xd-QUG"/>
-                    </connections>
+                    <rect key="frame" x="15" y="0.0" width="345" height="667"/>
+                    <color key="backgroundColor" name="settingsTableBackground"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WJ-Hn-jBO">
+                    <rect key="frame" x="15" y="597" width="345" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="auc-yN-YFV"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="logoutButtonDidPress:" destination="-1" eventType="touchUpInside" id="5Dg-DT-jce"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="2EM-su-Qne"/>
+            <color key="backgroundColor" name="settingsTableBackground"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="M7i-kt-Jaj" secondAttribute="trailing" id="9oR-9J-diX"/>
+                <constraint firstItem="4WJ-Hn-jBO" firstAttribute="centerX" secondItem="2EM-su-Qne" secondAttribute="centerX" id="0JN-LS-6Dz"/>
+                <constraint firstAttribute="trailing" secondItem="M7i-kt-Jaj" secondAttribute="trailing" constant="15" id="9oR-9J-diX"/>
+                <constraint firstItem="4WJ-Hn-jBO" firstAttribute="width" secondItem="M7i-kt-Jaj" secondAttribute="width" id="AnO-IL-rZW"/>
                 <constraint firstAttribute="bottom" secondItem="M7i-kt-Jaj" secondAttribute="bottom" id="Lcu-qq-RWK"/>
                 <constraint firstItem="M7i-kt-Jaj" firstAttribute="top" secondItem="2EM-su-Qne" secondAttribute="top" id="P8Z-fN-pp0"/>
-                <constraint firstItem="M7i-kt-Jaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hKh-jC-yLe"/>
+                <constraint firstItem="2EM-su-Qne" firstAttribute="bottom" secondItem="4WJ-Hn-jBO" secondAttribute="bottom" constant="20" id="T0x-Vw-Eht"/>
+                <constraint firstItem="M7i-kt-Jaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="hKh-jC-yLe"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="2EM-su-Qne"/>
             <point key="canvasLocation" x="32.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="settingsTableBackground">
+            <color red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
