@@ -9,11 +9,13 @@
 import UIKit
 import WebKit
 
-final class PrivacyPolicyController: UIViewController {
+final class PrivacyPolicyController: BaseViewController, NibInit {
+    
+    //MARK: - Private properties
     
     private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
     
-    private let webView: WKWebView = {
+    private lazy var webView: WKWebView = {
         let contentController = WKUserContentController()
       
         let webConfig = WKWebViewConfiguration()
@@ -21,6 +23,7 @@ final class PrivacyPolicyController: UIViewController {
         webConfig.dataDetectorTypes = [.phoneNumber, .link]
         
         let webView = WKWebView(frame: .zero, configuration: webConfig)
+        webView.navigationDelegate = self
         webView.isOpaque = false
         webView.backgroundColor = UIColor.white
         
@@ -39,9 +42,11 @@ final class PrivacyPolicyController: UIViewController {
         return activityIndicator
     }()
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+    //MARK: - @IBOutlets
+    
+    @IBOutlet private weak var titleLabel: UILabel!
+    
+    //MARK: - Init
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -51,24 +56,19 @@ final class PrivacyPolicyController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    deinit {
-        webView.navigationDelegate = nil
-        webView.stopLoading()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
+    //MARK: - Lifecycle
     
-    override func loadView() {
-        view = webView
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.navigationDelegate = self
-        view.addSubview(activityIndicator)
-        
+        setupView()
         setupWebView()
+        setActivityIndicator()
         startActivity()
-        setTitle(withString: TextConstants.privacyPolicyCondition)
+        loadPrivacyPolicy()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +77,38 @@ final class PrivacyPolicyController: UIViewController {
         whiteNavBarStyle()
     }
     
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+    //MARK: - Setup
+    
+    private func setupView() {
+        setTitle(withString: TextConstants.privacyPolicyCondition)
+        
+        titleLabel.text = TextConstants.privacyPolicyCondition
+        titleLabel.font = UIFont.GTAmericaStandardMediumFont(size: 18)
+        titleLabel.textColor = ColorConstants.Text.labelTitle
+    }
+    
     private func setupWebView() {
+        view.addSubview(webView)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).activate()
+        webView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).activate()
+        webView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).activate()
+        webView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).activate()
+    }
+    
+    private func setActivityIndicator() {
+        view.addSubview(activityIndicator)
+    }
+    
+    //MARK: - Private funcs
+    
+    private func loadPrivacyPolicy() {
         privacyPolicyService.getPrivacyPolicy { [weak self] response in
             switch response {
             case .success(let privacyPolicy):
