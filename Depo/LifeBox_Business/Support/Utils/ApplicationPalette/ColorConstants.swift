@@ -77,6 +77,8 @@ struct ColorConstants {
     static let a2FABorder = UIColor(named: "a2FABorderColor")!
     static let a2FAActiveProgress = UIColor(named: "a2FAActiveProgress")!
     static let buttonDarkBlueBackground = UIColor(named: "loginButtonBackground")!
+    static let iconBackgroundView = UIColor(named: "iconBackgroundView")!
+    static let settingsTableBackground = UIColor(named: "settingsTableBackground")!
 
     //MARK: END
     
