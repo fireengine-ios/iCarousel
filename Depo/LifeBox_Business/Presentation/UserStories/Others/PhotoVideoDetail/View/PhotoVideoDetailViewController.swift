@@ -15,9 +15,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var output: PhotoVideoDetailViewOutput!
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var viewForBottomBar: UIView!
+    @IBOutlet private weak var viewForBottomBar: UIView! {
+        willSet {
+            newValue.backgroundColor = .clear
+        }
+    }
     @IBOutlet private weak var bottomBlackView: UIView!
     @IBOutlet private weak var swipeUpContainerView: UIView!
+    
+    @IBOutlet weak var gradientView: MediaContentGradientView!
     
     var status: ItemStatus = .active
     var hideTreeDotButton = false
@@ -46,10 +52,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //                }
 //            }
             
-            /// without animation
-
+            gradientView.set(isHidden: isFullScreen, animated: true)
             editingTabBar.view.isHidden = isFullScreen
-            navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
+            navigationController?.setNavigationBarHidden(isFullScreen, animated: true)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             
             bottomBlackView.isHidden = self.isFullScreen
@@ -120,8 +125,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         rootNavController(vizible: true)
         blackNavigationBarStyle()
         editingTabBar?.view.layoutIfNeeded()
-        editingTabBar.view.backgroundColor = .black
-        viewForBottomBar.backgroundColor = .black
         setupTitle()
         
         if hideTreeDotButton {
@@ -129,11 +132,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         // TODO: EditingBarConfig is not working
-        editingTabBar.editingBar.barStyle = .blackOpaque
-        editingTabBar.editingBar.clipsToBounds = true
+//        editingTabBar.editingBar.barStyle = .blackOpaque
+//        editingTabBar.editingBar.clipsToBounds = true
         //editingTabBar.editingBar.layer.borderWidth = 0
         
-        statusBarColor = .black
+        statusBarColor = .clear
         
         NotificationCenter.default.post(name: .reusePlayer, object: self)
         

@@ -37,6 +37,9 @@
                                 <constraint firstAttribute="width" constant="15" id="Zei-Wy-W1N"/>
                             </constraints>
                             <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="onPlayPause:" destination="-1" eventType="touchUpInside" id="qcp-to-JE4"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vB-eT-0cT">
                             <rect key="frame" x="29" y="5.5" width="42" height="21"/>

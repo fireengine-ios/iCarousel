@@ -20,6 +20,8 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .clear
+        
         setupDelegate()
         output.viewIsReady()
     }
@@ -41,11 +43,27 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         } else {
             editingBar.tintColor = ColorConstants.blueColor
         }
-        if let style = style, style != .default {
+
+        if let style = style {
+            editingBar.barStyle = style
+            
+            switch style {
+                case .default:
+                    editingBar.clipsToBounds = true
+                    editingBar.isTranslucent = true
+                    editingBar.backgroundImage = UIImage(color: .clear)
+                    editingBar.shadowImage = UIImage(color: .clear)
+                    editingBar.tintColor = .white
+                default:
+                    editingBar.backgroundImage = UIImage()
+                    editingBar.tintColor = ColorConstants.bottomBarTint
+            }
+        } else {
             editingBar.backgroundImage = UIImage()
         }
         
-        editingBar.setupItems(withImageToTitleNames: items)
+        
+        editingBar.setupItems(withImageToTitleNames: items, style: style)
     }
     
     func showBar(animated: Bool, onView sourceView: UIView) {
@@ -55,7 +73,7 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
     }
     
     func hideBar(animated: Bool) {
-        editingBar?.dismiss(animated: animated)
+            ?.dismiss(animated: animated)
     }
     
     func unselectAll() {

@@ -12,20 +12,13 @@ typealias PreDetermendType = (String, String, String)
 class EditinglBar: CustomTabBar {
     
     struct PreDetermendTypes { //use super setup method with these
-        static let share = ("share-copy", TextConstants.tabBarShareLabel, "")
-        static let privateShare = ("share-private", TextConstants.tabBarSharePrivatelyLabel, "")
-        static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel, "")
-        static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel, "")
-        static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
-        static let removeAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveAlbumLabel, "")
-        static let move = ("MoveButtonIcon", TextConstants.tabBarMoveLabel, "")
-        static let makeCover = ("MoveButtonIcon", TextConstants.tabAlbumCoverAlbumLabel, "")
-        static let removeFromAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
-        static let removeFromFaceImageAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
-        static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
-        static let syncInProgress = ("", TextConstants.tabBarSyncLabel, "")
-        static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
-        static let downloadDocument = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
+        static let share = ("moveBottom", TextConstants.tabBarShareLabel, "")
+        static let privateShare = ("shareBottom", TextConstants.tabBarSharePrivatelyLabel, "")
+        static let info = ("infoBottom", TextConstants.tabBarInfoLabel, "")
+        static let delete = ("trashBottom", TextConstants.tabBarDeleteLabel, "")
+        static let move = ("moveBottom", TextConstants.tabBarMoveLabel, "")
+        static let download = ("downloadBottom", TextConstants.tabBarDownloadLabel, "")
+        static let downloadDocument = ("downloadBottom", TextConstants.tabBarDownloadLabel, "")
         static let restore = ("RestoreButtonIcon", TextConstants.actionSheetRestore, "")
     }
     
@@ -36,31 +29,7 @@ class EditinglBar: CustomTabBar {
     
     private var animationsArray = [AnimationBlock]()
     
-    private lazy var syncProgressAnimation: AnimatedCircularLoader = {
-        let side = bounds.height / 2
-        let frame = CGRect(x: bounds.width / 2 - side / 2,
-                           y: 8,
-                           width: side, height: side)
-        let loader = AnimatedCircularLoader(frame: frame)
-        
-        loader.set(lineBackgroundColor: .clear)
-        loader.set(lineColor: .white)
-        loader.set(duration: 1.0)
-        
-        loader.translatesAutoresizingMaskIntoConstraints = true
-        loader.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        loader.isHidden = true
-        
-        return loader
-    }()
-
     // MARK: - Override
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        setupAnimation()
-    }
     
     deinit {
         animationsArray.removeAll()
@@ -76,34 +45,20 @@ class EditinglBar: CustomTabBar {
         animationWithBlock(needShow: false, withAnimation: animated)
     }
     
-    func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {
-          var syncInProgress = false
-          
-          let items = names.map { item -> CustomTabBarItem in
-              var image = UIImage(named: item.imageName)
-              
-              ///red 'delete', 'hide', 'unhide', 'restore' icons
-              switch item.imageName {
-                  case PreDetermendTypes.delete.0,
-                       PreDetermendTypes.restore.0:
-                      image = image?.withRenderingMode(.alwaysTemplate)
-                  case PreDetermendTypes.syncInProgress.0:
-                      image = nil
-                      syncInProgress = true
-                  default: break
-              }
-              
-              return CustomTabBarItem(title: item.title,
-                               image: image,
-                               tag: 0)
-          }
+    func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple], style: UIBarStyle?) {
+        let items = names.map { item -> CustomTabBarItem in
+            let image = UIImage(named: item.imageName)?.withRenderingMode(.alwaysOriginal)
+            
+            let tabBarItem = CustomTabBarItem(title: item.title, image: image, tag: 0)
+            let color: UIColor = (style == .default) ? .white : ColorConstants.bottomBarTint
+            tabBarItem.set(textColor: color)
+            return tabBarItem
+        }
           
           items.forEach { item in
               item.isAccessibilityElement = true
               item.accessibilityLabel = item.title
           }
-          
-          syncInProgress ? showAnimation() : hideAnimation()
     
           setItems(items, animated: false)
       }
@@ -119,8 +74,8 @@ class EditinglBar: CustomTabBar {
     }
     
     private func animationWithBlock(needShow: Bool, withAnimation: Bool, onView: UIView? = nil) {
-        let animationBlock : AnimationBlock = ({ [weak self, weak onView] in
-            guard let `self` = self else {
+        let animationBlock : AnimationBlock = { [weak self, weak onView] in
+            guard let self = self else {
                 return
             }
             
@@ -142,7 +97,7 @@ class EditinglBar: CustomTabBar {
                 let newY = sourceViewSize.height - self.tabBarHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
                 if withAnimation {
                     self.animateAppearance(with: newY, completionBlock: { [weak self] in
-                        guard let `self` = self else {
+                        guard let self = self else {
                             return
                         }
                         
@@ -170,10 +125,10 @@ class EditinglBar: CustomTabBar {
                     self.nextAnimation()
                 }
             }
-        })
+        }
         
         animationsArray.append(animationBlock)
-        if animationsArray.count == 1{
+        if animationsArray.count == 1 {
             animationBlock()
         }
     }
@@ -187,25 +142,5 @@ class EditinglBar: CustomTabBar {
         } else {
             animationsArray.removeAll()
         }
-    }
-}
-
-
-// MARK: - Sync in progress animation
-
-extension EditinglBar {
-    private func setupAnimation() {
-        syncProgressAnimation.removeFromSuperview()
-        addSubview(syncProgressAnimation)
-    }
-    
-    private func showAnimation() {
-        syncProgressAnimation.isHidden = false
-        syncProgressAnimation.startAnimation()
-    }
-    
-    private func hideAnimation() {
-        syncProgressAnimation.stopAnimation()
-        syncProgressAnimation.isHidden = true
     }
 }

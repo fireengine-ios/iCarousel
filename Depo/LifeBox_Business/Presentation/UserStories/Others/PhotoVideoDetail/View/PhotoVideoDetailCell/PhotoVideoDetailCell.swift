@@ -63,8 +63,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         addGestureRecognizer(tapGesture)
         
-        playerView.addPlayer(on: contentView)
-        
         reset()
     }
     
@@ -139,7 +137,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             if let url = object.metaData?.videoPreviewURL ?? object.urlToFile {
                 if !url.isExpired {
                     delegate?.imageLoadingFinished()
-                    playerView.play(with: url)
+                    playerView.set(url: url)
                 } else {
                     delegate?.didExpireUrl()
                 }

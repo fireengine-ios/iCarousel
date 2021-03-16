@@ -40,14 +40,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.share)
             case .privateShare:
                 itemTupple.append(EditinglBar.PreDetermendTypes.privateShare)
-            case .sync:
-                itemTupple.append(EditinglBar.PreDetermendTypes.sync)
-            case .syncInProgress:
-                itemTupple.append(EditinglBar.PreDetermendTypes.syncInProgress)
-            case .makeAlbumCover:
-                itemTupple.append(EditinglBar.PreDetermendTypes.makeCover)
-            case .print:
-                itemTupple.append(EditinglBar.PreDetermendTypes.print)
             case .moveToTrash:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .restore:

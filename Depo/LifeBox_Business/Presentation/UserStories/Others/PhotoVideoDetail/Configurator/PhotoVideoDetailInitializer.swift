@@ -16,7 +16,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
-                                               style: .blackOpaque, tintColor: nil)
+                                               style: .default, tintColor: nil)
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
