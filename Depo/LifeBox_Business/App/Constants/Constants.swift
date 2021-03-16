@@ -261,6 +261,9 @@ struct TextConstants {
     static let syncOutOfSpaceAlertText = NSLocalizedString("You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let upgrade = NSLocalizedString("Upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncOutOfSpaceAlertCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpTitle = NSLocalizedString("business_app_quota_full_upload_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpDescription = NSLocalizedString("business_app_quota_full_upload_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpButton = NSLocalizedString("business_app_quota_full_upload_pop_up_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: Home Storage card
     static let homeStorageCardCloudTitle = NSLocalizedString("Your lifebox storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
