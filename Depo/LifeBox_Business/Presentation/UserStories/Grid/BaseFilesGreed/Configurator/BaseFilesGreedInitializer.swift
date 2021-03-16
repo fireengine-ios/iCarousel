@@ -34,7 +34,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let configurator = BaseFilesGreedModuleConfigurator()
         let elementsConfig = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .bottomBar)
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
-                                               style: .default, tintColor: nil)
+                                               style: .opaque, tintColor: nil)
 
         let sortedRule: SortedRules = status == .active ? .lastModifiedTimeDown : .timeDown
         let presenter = DocumentsGreedPresenter(sortedRule: sortedRule)

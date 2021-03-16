@@ -11,7 +11,11 @@ import UIKit
 
 class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabBarViewInput, NibInit {
 
-    @IBOutlet var editingBar: EditinglBar!
+    @IBOutlet var bottomActionsBar: BottomActionsBar! {
+        willSet {
+            newValue.delegate = self
+        }
+    }
     var output: BottomSelectionTabBarViewOutput!
     var config: EditingBarConfig?
     var sourceView: UIView?
@@ -27,7 +31,8 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
     }
 
     private func setupDelegate() {
-        editingBar.delegate = self
+        //TODO: bottom bar
+//        editingBar.delegate = self
     }
     
     
@@ -36,58 +41,34 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         
     }
     
-    func setupBar(tintColor: UIColor?, style: UIBarStyle?, items: [ImageNameToTitleTupple], config: EditingBarConfig) {
+    func setupBar(tintColor: UIColor?, style: BottomActionsBarStyle = .opaque, items: [ImageNameToTitleTupple], config: EditingBarConfig) {
         self.config = config
-        if let tintColor = tintColor {
-            editingBar.tintColor = tintColor
-        } else {
-            editingBar.tintColor = ColorConstants.blueColor
-        }
-
-        if let style = style {
-            editingBar.barStyle = style
-            
-            switch style {
-                case .default:
-                    editingBar.clipsToBounds = true
-                    editingBar.isTranslucent = true
-                    editingBar.backgroundImage = UIImage(color: .clear)
-                    editingBar.shadowImage = UIImage(color: .clear)
-                    editingBar.tintColor = .white
-                default:
-                    editingBar.backgroundImage = UIImage()
-                    editingBar.tintColor = ColorConstants.bottomBarTint
-            }
-        } else {
-            editingBar.backgroundImage = UIImage()
-        }
-        
-        
-        editingBar.setupItems(withImageToTitleNames: items, style: style)
+       
+        bottomActionsBar.setup(style: style, elementTypes: [.delete, .download])
     }
     
     func showBar(animated: Bool, onView sourceView: UIView) {
         self.sourceView = sourceView
-
-        editingBar.show(animated: animated, onView: sourceView)
+        bottomActionsBar.show(onSourceView: sourceView, animated: animated)
     }
     
     func hideBar(animated: Bool) {
-            ?.dismiss(animated: animated)
+        bottomActionsBar.hide(animated: animated)
     }
     
     func unselectAll() {
-        editingBar.selectedItem = nil
+//        editingBar.selectedItem = nil
     }
     
     private func changeStatusForTabs(atIntdex indexes: [Int], enabled: Bool) {
-        indexes.forEach {
-            guard let item = editingBar.items?[$0] else {
-                return
-            }
-            
-            item.isEnabled = enabled
-        }
+        //TODO: bottom bar
+//        indexes.forEach {
+//            guard let item = editingBar.items?[$0] else {
+//                return
+//            }
+//
+//            item.isEnabled = enabled
+//        }
     }
     
     func disableItems(at indexes: [Int]) {
@@ -100,18 +81,17 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
 }
 
 
-extension BottomSelectionTabBarViewController: UITabBarDelegate {
+extension BottomSelectionTabBarViewController: BottomActionsBarDelegate {
     
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        guard let selectedItemIndex = tabBar.items?.index(of: item) else {
-            return
-        }
+    func onSelected(action: BottomBarActionType) {
+//        guard let selectedItemIndex = tabBar.items?.index(of: item) else {
+//            return
+//        }
+//
+//        output.bottomBarSelectedItem(index: selectedItemIndex, sender: item, config: config)
         
-        output.bottomBarSelectedItem(index: selectedItemIndex, sender: item, config: config)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {[weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) { [weak self] in
             self?.unselectAll()
         }
     }
-    
 }

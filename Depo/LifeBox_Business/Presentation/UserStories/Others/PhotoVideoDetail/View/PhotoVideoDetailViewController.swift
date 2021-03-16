@@ -291,11 +291,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
 
     func shareCurrentItem() {
-        guard let shareTabIndex = output.tabIndex(type: .share),
-              let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
-            return
-        }
-        editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
+        //TODO: Bottom bar
+//        guard let shareTabIndex = output.tabIndex(type: .share),
+//              let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
+//            return
+//        }
+//        editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
     }
 }
 

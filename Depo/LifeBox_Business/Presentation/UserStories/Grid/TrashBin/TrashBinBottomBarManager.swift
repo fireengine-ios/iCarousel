@@ -36,7 +36,7 @@ protocol TrashBinBottomBarManagerDelegate: class {
 final class TrashBinBottomBarManager {
 
     private let bottomBarConfig = EditingBarConfig(elementsConfig:  ElementTypes.trashState,
-                                                          style: .blackOpaque,
+                                                          style: .opaque,
                                                           tintColor: nil)
     
     var editingTabBar: BottomSelectionTabBarViewController?

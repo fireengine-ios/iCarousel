@@ -59,7 +59,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         let matchesBitmasks = calculateMatchesBitmasks(from: items)
         let elementsConfig = createElementTypesArray(from: matchesBitmasks)
-        let config = EditingBarConfig(elementsConfig: elementsConfig, style: .blackOpaque, tintColor: nil)
+        let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque, tintColor: nil)
         setupConfig(withConfig: config)
     }
     
