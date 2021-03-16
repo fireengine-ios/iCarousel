@@ -2027,3 +2027,10 @@
 "business_app_settings_contactus" = "Contact Us";
 "business_app_settings_deletedfiles" = "Trash Bin";
 "business_app_settings_logout" = "Log out";
+
+/*empty pages or folders*/
+"business_app_my_disk_empty page" = "Don't have any files yet";
+"business_app_shared_with_me_empty page" = "Don't have any shared files yet";
+"business_app_shared_by_me_empty page" = "Haven't shared any files yet";
+"business_app_shared_area_empty page" = "Don't have any shared files yet";
+"business_app_folder_empty page" = "Empty Folder";
