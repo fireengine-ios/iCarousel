@@ -51,7 +51,9 @@ extension UIApplication {
         if controller is PopUpController {
             return
         }
-        let vc = PopUpController.with(title: TextConstants.quotaFullUploadPopUpTitle, message: TextConstants.quotaFullUploadPopUpDescription, image: .quota, buttonTitle: TextConstants.quotaFullUploadPopUpButton)
+        let vc = PopUpController.with(title: TextConstants.quotaFullUploadPopUpTitle, message: TextConstants.quotaFullUploadPopUpDescription, image: .quota, buttonTitle: TextConstants.quotaFullUploadPopUpButton, dismissAction:  {
+            
+        })
         DispatchQueue.toMain {
             controller?.present(vc, animated: false, completion: nil)
         }
