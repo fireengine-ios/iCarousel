@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivacyPolicyController" customModule="lifeBox_Business" customModuleProvider="target">
+            <connections>
+                <outlet property="titleLabel" destination="Ojr-yJ-xbt" id="dS3-Xa-fll"/>
+                <outlet property="view" destination="0lm-mL-My4" id="Wgw-2a-2dA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="0lm-mL-My4">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojr-yJ-xbt">
+                    <rect key="frame" x="20" y="64" width="374" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="9GF-fj-nQB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="BR0-ig-pDJ"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Ojr-yJ-xbt" firstAttribute="leading" secondItem="BR0-ig-pDJ" secondAttribute="leading" constant="20" id="3Pr-We-hhs"/>
+                <constraint firstItem="BR0-ig-pDJ" firstAttribute="trailing" secondItem="Ojr-yJ-xbt" secondAttribute="trailing" constant="20" id="569-5u-Jdh"/>
+                <constraint firstItem="Ojr-yJ-xbt" firstAttribute="top" secondItem="BR0-ig-pDJ" secondAttribute="top" constant="20" id="7Vg-FQ-2tu"/>
+            </constraints>
+            <point key="canvasLocation" x="-583" y="-646"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

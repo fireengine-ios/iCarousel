@@ -99,8 +99,6 @@ struct RouteRequests {
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
-    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth/v2"
-    static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"
@@ -302,6 +300,7 @@ struct RouteRequests {
         static let info = baseAccountsURLString + "%@"
         static let quota = baseAccountsURLString + "new_api_is_required"
         static let settings = baseAccountsURLString + "new_api_is_required"
+        static let storageUsageInfo = baseAccountsURLString + "%@/users/%@/disk"
     }
     
     enum Account {

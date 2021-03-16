@@ -34,6 +34,8 @@ struct ColorConstants {
     static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
     static let loginPopupDescription = UIColor(named: "loginPopupDescription")!
     
+    static let textViewBackground = UIColor(named: "textViewBackground")!
+    
     static let separator = UIColor(named: "separator")!
     
     struct PrivateShare {
@@ -75,6 +77,8 @@ struct ColorConstants {
     static let a2FABorder = UIColor(named: "a2FABorderColor")!
     static let a2FAActiveProgress = UIColor(named: "a2FAActiveProgress")!
     static let buttonDarkBlueBackground = UIColor(named: "loginButtonBackground")!
+    static let iconBackgroundView = UIColor(named: "iconBackgroundView")!
+    static let settingsTableBackground = UIColor(named: "settingsTableBackground")!
 
     //MARK: END
     
@@ -189,7 +193,6 @@ struct ColorConstants {
 }
 
 extension UIColor {
-    
     class var lrTealish: UIColor {
         return UIColor(red: 51.0 / 255.0, green: 204.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
     }

@@ -104,17 +104,17 @@ struct TextConstants {
     static let signUpErrorNumberMissing = NSLocalizedString("sing_up_error_number_missing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let signUpErrorUnauthorized = NSLocalizedString("sing_up_error_unauthorized", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     // MARK: -
-    static let termsAndUsesTitle = NSLocalizedString("eula_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUsesTitle = NSLocalizedString("business_app_eula_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUsesApplyButtonText = NSLocalizedString("Accept  Terms", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseTextFormat = NSLocalizedString("<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let termsAndUseStartUsingText = NSLocalizedString("Get Started", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let termsAndUseCheckboxText = NSLocalizedString("I have read and accepted terms of use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUseStartUsingText = NSLocalizedString("business_app_privacy_policy_start", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUseCheckboxText = NSLocalizedString("business_app_eula_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkCheckbox = NSLocalizedString("terms_and_use_etk_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkCheckboxHeader = NSLocalizedString("terms_and_use_etk_checkbox_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseIntroductionCheckbox = NSLocalizedString("terms_and_use_introduction_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let privacyPolicy = NSLocalizedString("privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicy = NSLocalizedString("business_app_eula_privacy_policy_textbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkTurkcellAndGroupCompanies = NSLocalizedString("terms_and_use_etk_link_turkcell_and_group_companies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let privacyPolicyCondition = NSLocalizedString("privacy_policy_condition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyCondition = NSLocalizedString("business_app_privacy_policy_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privacyPolicyHeadLine = NSLocalizedString("privacy_policy_head_line", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkCommercialEmailMessages = NSLocalizedString("terms_and_use_etk_link_commercial_email_messages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxErrorText = NSLocalizedString("You need to confirm the User Agreement to continue.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1390,4 +1390,18 @@ extension TextConstants {
     static let flLoginElseError = NSLocalizedString("business_app_FL_else_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let flLoginUserNotInPool = NSLocalizedString("business_app_fast_login_pool_user_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let flLoginAuthFailure = NSLocalizedString("business_app_fast_login_authentication_fail_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Settings general
+extension TextConstants {
+    static let settingsPageTitle = NSLocalizedString("business_app_settings_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUseHeader = NSLocalizedString("business_app_settings_storage_use_limited_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUsedLimited = NSLocalizedString("business_app_settings_storage_used_limited_values", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUsedUnlimited = NSLocalizedString("business_app_settings_storage_use_unlimited_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageProfile = NSLocalizedString("business_app_settings_profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageAgreements = NSLocalizedString("business_app_settings_agreements", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageFAQ = NSLocalizedString("business_app_settings_faq", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageContactUs = NSLocalizedString("business_app_settings_contactus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageDeletedFiles = NSLocalizedString("business_app_settings_deletedfiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

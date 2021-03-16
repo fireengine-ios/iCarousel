@@ -63,8 +63,8 @@ extension UIViewController {
     
     private var titleAttributes: [NSAttributedStringKey : Any]? {
         return [
-            .font: UIFont.TurkcellSaturaDemFont(size: 19),
-            .foregroundColor: UIColor.white
+            .font: UIFont.GTAmericaStandardMediumFont(size: 17),
+            .foregroundColor: ColorConstants.multifileCellRenameFieldNameColor
         ]
     }
     
@@ -173,6 +173,7 @@ extension UIViewController {
         navBar?.tintColor = tintColor
 
         navBar?.titleTextAttributes = [.foregroundColor : titleTextColor]
+        navBar?.topItem?.backBarButtonItem?.tintColor = .black
 
         statusBarColor = .clear
     }
