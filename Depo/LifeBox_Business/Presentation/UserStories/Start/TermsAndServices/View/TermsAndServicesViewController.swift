@@ -158,46 +158,8 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
     }
     
     func showLoadedTermsAndUses(eula: String) {
-        guard let htmlString = prepareHtml(from: eula) else {
-            assertionFailure()
-            return
-        }
-        
-        // https://www.oipapio.com/question-726375
-        eulaTextView.textStorage.append(htmlString)
-        eulaTextView.dataDetectorTypes = [.phoneNumber, .address]
-    }
-    
-    // TODO: - Finish issue with textfields font
-    // TODO: - Add localizable tags
-    private func prepareHtml(from text: String) -> NSAttributedString? {
-        guard !text.isEmpty else {
-            return nil
-        }
-        
-        let font = UIFont.GTAmericaStandardRegularFont(size: 14)
-        /// https://stackoverflow.com/a/27422343
-        //  body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
-        let customFontString = "<style>font-size:\(font.pointSize);}</style>" + text
-        
-        guard let data = customFontString.data(using: .utf8) else {
-            assertionFailure()
-            return nil
-        }
-        
-        /// https://stackoverflow.com/q/50969015/5893286
-        /// fixed black screen
-        /// and error "AttributedString called within transaction"
-        do {
-            let attributedString = try NSAttributedString(data: data,
-                                                          options: [.documentType: NSAttributedString.DocumentType.html,
-                                                                    .characterEncoding: String.Encoding.utf8.rawValue],
-                                                          documentAttributes: nil)
-            return attributedString
-        } catch {
-            assertionFailure()
-            return nil
-        }
+        eulaTextView.attributedText = eula.attributedString
+        eulaTextView.setupEulaStyle(cleaned: false)
     }
     
     func hideBackButton() {
@@ -209,7 +171,7 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
     }
     
     func failLoadTermsAndUses(errorString: String) {
-        //TO-DO show error
+        UIApplication.showErrorAlert(message: errorString)
     }
     
     func popNavigationVC() {
@@ -281,15 +243,18 @@ extension TermsAndServicesViewController: UITextViewDelegate {
 }
 
 private extension UITextView {
-    func setupEulaStyle() {
-        text = ""
+    func setupEulaStyle(cleaned: Bool = true) {
+        if cleaned {
+            text = ""
+        }
+        
         backgroundColor = .white
         layer.borderColor = ColorConstants.profileGrayColor.cgColor
         layer.borderWidth = 1
         layer.masksToBounds = true
         layer.cornerRadius = 5
         
-        font = UIFont.GTAmericaStandardRegularFont(size: 10)
+        font = UIFont.GTAmericaStandardRegularFont(size: 11)
         textColor = ColorConstants.lightText
         
         linkTextAttributes = [
@@ -300,8 +265,6 @@ private extension UITextView {
         dataDetectorTypes = [.link, .phoneNumber]
         isEditable = false
         
-        /// to remove insets
-        /// https://stackoverflow.com/a/42333832/5893286
         textContainer.lineFragmentPadding = 0
         let defaultInset: CGFloat = 14
         textContainerInset = UIEdgeInsets(top: defaultInset, left: defaultInset, bottom: defaultInset, right: defaultInset)
