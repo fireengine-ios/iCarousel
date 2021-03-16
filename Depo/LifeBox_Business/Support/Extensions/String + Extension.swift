@@ -48,6 +48,7 @@ extension String {
         do {
             return try NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue], documentAttributes: nil)
         } catch {
+            assertionFailure()
             return nil
         }
     }
