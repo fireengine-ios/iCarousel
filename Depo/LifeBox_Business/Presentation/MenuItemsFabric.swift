@@ -132,14 +132,31 @@ final class MenuItemsFabric {
     }
     
     static func createMenu(bottomBarActions: [BottomBarActionType], actionHandler: @escaping ValueHandler<BottomBarActionType>) -> UIMenu {
-        let actions: [UIAction] = bottomBarActions.compactMap { bottomAction in
-            let elementType = bottomAction.toElementType
-            return UIAction(title: elementType.actionTitle(), image: elementType.menuImage) { action in
+        let infoMenuActions = bottomBarActions.filter { $0 == .info }
+        let generalMenuActions = bottomBarActions.filter { !$0.toElementType.isDestructive && $0 != .info }
+        let destructiveMenuActions = bottomBarActions.filter { $0.toElementType.isDestructive }
+        
+        let infoMenu = constractInlineMenu(from: infoMenuActions, identifier: UIMenu.Identifier("info"), actionHandler: actionHandler)
+        let generalMenu = constractInlineMenu(from: generalMenuActions, identifier: UIMenu.Identifier("general"), actionHandler: actionHandler)
+        let destructiveMenu = constractInlineMenu(from: destructiveMenuActions, identifier: UIMenu.Identifier("destructive"), actionHandler: actionHandler)
+      
+        return UIMenu(title: "", children: [infoMenu, generalMenu, destructiveMenu])
+    }
+    
+    static private func constractInlineMenu(from bottomBarActions: [BottomBarActionType], identifier: UIMenu.Identifier, actionHandler: @escaping ValueHandler<BottomBarActionType>) -> UIMenu {
+        
+        var menuItems = [UIMenuElement]()
+        bottomBarActions.forEach { bottomAction in
+            let element = bottomAction.toElementType
+            let item = UIAction(title: element.actionTitle(),
+                                image: element.menuImage,
+                                attributes: element.menuAttributes) { _  in
                 actionHandler(bottomAction)
             }
+            menuItems.append(item)
         }
         
-        return UIMenu(title: "", children: actions)
+        return UIMenu(title: "", identifier: identifier, options: .displayInline, children: menuItems)
     }
 }
 

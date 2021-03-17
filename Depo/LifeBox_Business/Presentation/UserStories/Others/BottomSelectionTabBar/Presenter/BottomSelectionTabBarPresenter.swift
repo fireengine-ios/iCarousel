@@ -131,6 +131,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             bitmaskValue -= 1
         }
 
+        elementTypesArray.append(.info)
+        
         return elementTypesArray
     }
     

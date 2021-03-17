@@ -109,7 +109,7 @@ protocol BottomActionsBarDelegate: class {
 
 final class BottomActionsBar: UIView {
     
-    private let buttonsBeforeMoreButton = 3
+    private let buttonsBeforeMoreButton = 5
 
     private lazy var actionButtonsStack: UIStackView = {
         let newValue = UIStackView()
