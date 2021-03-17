@@ -291,10 +291,6 @@ final class LoginViewController: ViewController {
     }
 
     @IBAction private func fastLoginButtonTapped() {
-        guard ReachabilityService.shared.isReachable else {
-            showErrorAlert(with: TextConstants.errorAlert, subtitle: TextConstants.errorConnectedToNetwork)
-            return
-        }
         loginCoordinator.start()
         printLog("[LoginViewController] fastLoginButtonTapped FL login scenario started")
     }
@@ -397,22 +393,26 @@ extension LoginViewController: LoginCoordinatorDelegate {
     }
 
     func dgLoginFailure(_ reason: String, errorMessage: String) {
-        if reason == dgKSessionTimeout as String {
-            printLog("[LoginViewController] Fast Login SDK error - SessionTimeout")
-            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErrorTimeout)
-        } else if reason == dgKUserExit as String {
-            printLog("[LoginViewController] Fast Login SDK error - UserExit")
-        } else if reason == dgKNotLoginToLoginSDK as String {
-            printLog("[LoginViewController] Fast Login SDK error - dgKNotLoginToLoginSDK")
-            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErorNotLoginSDK)
-        } else {
-            printLog("[LoginViewController] Fast Login SDK error - unknown error")
-            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginElseError)
+        DispatchQueue.toMain {
+            if reason == dgKSessionTimeout as String {
+                printLog("[LoginViewController] Fast Login SDK error - SessionTimeout")
+                self.showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErrorTimeout)
+            } else if reason == dgKUserExit as String {
+                printLog("[LoginViewController] Fast Login SDK error - UserExit")
+            } else if reason == dgKNotLoginToLoginSDK as String {
+                printLog("[LoginViewController] Fast Login SDK error - dgKNotLoginToLoginSDK")
+                self.showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErorNotLoginSDK)
+            } else {
+                printLog("[LoginViewController] Fast Login SDK error - unknown error")
+                self.showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginElseError)
+            }
         }
     }
 
     func dgConfigurationFailure(configError: String) {
-        showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.errorUnknown)
+        DispatchQueue.toMain {
+            self.showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.errorUnknown)
+        }
     }
 }
 
