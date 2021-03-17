@@ -170,7 +170,7 @@ final class OptInController: ViewController, NibInit {
         setupPhoneLable(with: phone)
         
         if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.enterSecurityCode)
+            setNavigationTitle(title: TextConstants.enterSecurityCode, isLargeTitle: false)
         }
         navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         

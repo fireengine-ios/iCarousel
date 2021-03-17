@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildController, NibInit {
+final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildTopBarSupportedControllerProtocol, NibInit {
     
     static func with(shareType: PrivateShareType) -> PrivateShareSharedFilesViewController {
         let controller = PrivateShareSharedFilesViewController.initFromNib()
@@ -59,14 +59,22 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     lazy private var topBarCustomSegmentedBar: TopBarCustomSegmentedView = TopBarCustomSegmentedView.initFromNib()
     
-    private var collectionTopYInset: CGFloat = 25
+    private var collectionTopYInset: CGFloat = 0
     
     override var isEditing: Bool {
         willSet {
-            changeLargeTitle(prefersLargeTitles: !newValue)
-            changeSearchBar(controller: newValue ? nil : searchController)
+            changeNavbarLargeTitle(!newValue)
+            setNavSearchConntroller(newValue ? nil : searchController)
         }
     }
+    
+    lazy private var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
+        searchController.obscuresBackgroundDuringPresentation = true
+        //also delegate here
+        return searchController
+    }()
     
     //MARK: - Override
     
@@ -95,7 +103,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        changeSearchBar(controller: nil)
+        setupNavBar()
         
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
@@ -119,7 +127,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        changeSearchBar(controller: nil)
+        setNavSearchConntroller(nil)
     }
     
     override func removeFromParentViewController() {
@@ -134,12 +142,13 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupBars() {
         setDefaultTabBarState()
-        setupNavBar()
         setupCollectionViewBars()
         bottomBarManager.setup()
     }
     
     private func setupNavBar() {
+        setNavSearchConntroller(nil)
+        setTitle(title ?? "", true)
         setupNavigationBar(editingMode: false)
     }
     
@@ -177,31 +186,14 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         needToShowTabBar = true
     }
     
-    lazy private var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
-        searchController.obscuresBackgroundDuringPresentation = true
-        //also delegate here
-        return searchController
-    }()
-    
     private func setupCollectionViewBars() {
-        debugPrint("!!!! collection setupCollectionViewBars")
-//        collectionTopYInset = collectionView.contentInset.top
-        
-        
         setupSorttingBar()
-//        if {
-        setupSegmentedBar()
-//    }
 
-        collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 0, right: 0)
-        
+        collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
     }
     
     private func setupSorttingBar() {
         let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
-        
            
         topBarSortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .TimeNewOld)
         
@@ -209,49 +201,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionTopYInset += topBarSortingBar.frame.height
         
-        
-        //constraints
         topBarSortingBar.translatesAutoresizingMaskIntoConstraints = false
         
-        let topConstraint = topBarSortingBar.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -collectionTopYInset)
-        let leading = topBarSortingBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
-        let trailing = topBarSortingBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
-        NSLayoutConstraint.activate([topConstraint, leading, trailing])
-
-    }
-    
-    private func setupSegmentedBar() {
-//        case myDisk
-//        case byMe
-//        case withMe
-//        case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
-//        case sharedArea
-        
-        topBarCustomSegmentedBar.translatesAutoresizingMaskIntoConstraints = false
-        topBarCustomSegmentedBar.setup(models: [TopBarCustomSegmentedViewButtonModel(title: "ONE", callback: {}), TopBarCustomSegmentedViewButtonModel(title: "TWO", callback: {})], selectedIndex: 0)
-        
-        
-        collectionView.addSubview(topBarCustomSegmentedBar)
-
-
-        collectionTopYInset += topBarCustomSegmentedBar.frame.height
-        
-        
-        let topConstraint = topBarCustomSegmentedBar.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -collectionTopYInset)
-        topConstraint.priority = .defaultLow
-
-
-        let topv2 = NSLayoutConstraint(item: topBarCustomSegmentedBar, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .top, multiplier: 1, constant: 0)
-        topv2.priority = .defaultHigh
-        
-        
-        let leading = topBarCustomSegmentedBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
-        let trailing = topBarCustomSegmentedBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
-        
-        
-        NSLayoutConstraint.activate([leading, trailing,topConstraint, topv2])
-        
-        
+        topBarSortingBar.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -collectionTopYInset).activate()
+        topBarSortingBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
+        topBarSortingBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
     }
     
     private func handleOffsetChange(offsetY: CGFloat) {
@@ -309,7 +263,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
-        changeSearchBar(controller: searchController)
+        setNavSearchConntroller(searchController)
         setupPlusButton()
         handleOffsetChange(offsetY: collectionView.contentOffset.y)
 //        setupNavigationBar(editingMode: isEditing)
@@ -335,7 +289,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     private func show(selectedItemsCount: Int) {
         DispatchQueue.main.async {
-            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
+            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)", false)
         }
     }
     
@@ -362,7 +316,9 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             guard self.viewIfLoaded?.window != nil else {
                 return
             }
-            self.whiteNavBarStyle(isLargeTitle: !editingMode)
+
+            self.setNavigationBarStyle(.white)
+            
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
             

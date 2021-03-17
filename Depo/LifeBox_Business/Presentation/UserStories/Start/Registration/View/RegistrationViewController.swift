@@ -177,7 +177,7 @@ final class RegistrationViewController: ViewController {
     private func setupNavBar() {
         defaultNavBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
-        setNavigationTitle(title: TextConstants.registerTitle)
+        setNavigationTitle(title: TextConstants.registerTitle, isLargeTitle: false)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     

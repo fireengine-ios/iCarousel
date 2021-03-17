@@ -31,7 +31,7 @@ final class FAQViewController: BaseViewController {
         setTitle(withString: TextConstants.faqTitle)
         setWebView()
         loadFAQ()
-        hidenNavigationBarStyle()
+        setNavigationBarStyle(.hidden)
     }
     
     override func viewWillAppear(_ animated: Bool) {

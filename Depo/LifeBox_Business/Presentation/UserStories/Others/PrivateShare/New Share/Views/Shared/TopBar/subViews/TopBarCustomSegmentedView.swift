@@ -13,7 +13,7 @@ struct TopBarCustomSegmentedViewButtonModel {
 
 final class TopBarCustomSegmentedView: UIView, NibInit {
     
-    @IBOutlet weak var separartorView: UIView! {
+    @IBOutlet private weak var separartorView: UIView! {
         willSet {
             newValue.backgroundColor = ColorConstants.infoPageSeparator
         }
@@ -21,12 +21,9 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     
     @IBOutlet private weak var stackView: UIStackView! {
         willSet {
-            newValue.backgroundColor = .blue
-            
             newValue.distribution = .fillEqually
         }
     }
-    
     
     private var highlightView: UIView = {
        let view = UIView()
@@ -37,14 +34,9 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     }()
     
     private var buttons = [UIButton]()
-    
     private var models = [TopBarCustomSegmentedViewButtonModel]()
-    
     private var selectedIndex: Int = 0
-    
-//    private var highlightViewBotConstraint
     private var highlightViewLeaningConstraint: NSLayoutConstraint?
-//    private var highlightViewTrailingConstraint: NSLayoutConstraint?
     
     func setup(models: [TopBarCustomSegmentedViewButtonModel], selectedIndex: Int) {
         guard
@@ -67,13 +59,12 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
        
         
         setupHighlightView()
-        updateHighlightView()
+        updateSelection()
     }
     
     private func setupHighlightView() {
         
         addSubview(highlightView)
-//        stackView.addSubview(highlightView)
         highlightView.isHidden =  false
         
         guard
@@ -92,11 +83,10 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         highlightView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).activate()
         
         highlightView.widthAnchor.constraint(equalTo: selectedButton.widthAnchor, constant: 0).activate()
-//        NSLayoutConstraint(item: highlightView, attribute: .width, relatedBy: .equal, toItem: selectedButton, attribute: .width, multiplier: 1, constant: 0).activate()
         
     }
     
-    private func updateHighlightView(animated: Bool = false) {
+    private func updateSelection(animated: Bool = false) {
         guard
             !buttons.isEmpty,
             selectedIndex < buttons.count,
@@ -107,27 +97,34 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         }
         
         if let highlightViewLeaningConstraint = highlightViewLeaningConstraint {
-//            stackView
             removeConstraint(highlightViewLeaningConstraint)
             self.highlightViewLeaningConstraint = nil
         }
         
-        
         highlightViewLeaningConstraint = highlightView.leadingAnchor.constraint(equalTo: selectedButton.leadingAnchor, constant: 0)
         highlightViewLeaningConstraint?.activate()
         
+        buttons.forEach {
+            if $0 != selectedButton {
+                $0.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+            }
+        }
+        selectedButton.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
+        
+        guard animated else {
+            return
+        }
         
         UIView.animate(withDuration: 0.1, animations: {
             self.layoutIfNeeded()
         })
-        
     }
     
     private func createButton(models: TopBarCustomSegmentedViewButtonModel, tag: Int) -> UIButton {
         let button = UIButton(type: .custom)
         
         button.setTitle(models.title, for: .normal)
-        button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
+        button.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
         
         button.tag = tag
@@ -151,7 +148,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         
         selectedIndex = button.tag
         
-        updateHighlightView()
+        updateSelection(animated: true)
         
         models[safe: button.tag]?.callback()
     }

@@ -65,8 +65,7 @@ final class SettingsViewController: BaseViewController {
 
     private func setupNavigationBar() {
         title = TextConstants.settingsPageTitle
-        whiteNavBarStyle(isLargeTitle: false)//tintColor: ColorConstants.infoPageItemBottomText,
-//        titleTextColor: ColorConstants.infoPageItemBottomText
+        setNavigationBarStyle(.white)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }

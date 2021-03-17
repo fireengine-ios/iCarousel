@@ -78,7 +78,7 @@ class TermsAndServicesViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        hidenNavigationBarStyle()
+        setNavigationBarStyle(.hidden)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
@@ -86,7 +86,7 @@ class TermsAndServicesViewController: ViewController {
         super.viewDidLoad()
 
         if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.termsAndUsesTitle)
+            setNavigationTitle(title: TextConstants.termsAndUsesTitle, isLargeTitle: false)
         }
 
         contenViewHeightConstraint.constant = Device.winSize.height * 0.5

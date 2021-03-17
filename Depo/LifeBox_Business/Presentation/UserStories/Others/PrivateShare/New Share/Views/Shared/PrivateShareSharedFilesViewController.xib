@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="c4H-7I-uCm">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KbB-cg-g9h">
                         <size key="itemSize" width="128" height="128"/>
@@ -35,8 +35,8 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="c4H-7I-uCm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Rr6-mH-9ER"/>
-                <constraint firstItem="c4H-7I-uCm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="VYX-m9-2g2"/>
-                <constraint firstAttribute="bottom" secondItem="c4H-7I-uCm" secondAttribute="bottom" id="ZB1-LM-lx5"/>
+                <constraint firstItem="c4H-7I-uCm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="VYX-m9-2g2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="c4H-7I-uCm" secondAttribute="bottom" id="ZB1-LM-lx5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="c4H-7I-uCm" secondAttribute="trailing" id="sw8-4z-rRR"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SegmentedChildNavBarManagerDelegate: SegmentedChildController {
+protocol SegmentedChildNavBarManagerDelegate: SegmentedChildTopBarSupportedControllerProtocol {
     func onCancelSelectionButton()
     func onPlusButton()
     func onSettingsButton()
@@ -70,18 +70,18 @@ final class SegmentedChildNavBarManager {
     }
     
     func setRootMode(title: String = "") {
-        delegate?.setTitle(title)
+        delegate?.setTitle(title, true)
         delegate?.setRightBarButtonItems([plusButton], animated: false)
         delegate?.setLeftBarButtonItems([settingsButton], animated: false)
     }
     
     func setNestedMode(title: String = "") {
-        delegate?.setTitle(title)
+        delegate?.setTitle(title, false)
         delegate?.setRightBarButtonItems([plusButton], animated: false)
     }
     
     func setDefaultModeWithoutThreeDot(title: String = "") {
-        delegate?.setTitle(title)
+        delegate?.setTitle(title, true)
         delegate?.setLeftBarButtonItems(nil, animated: true)
     }
     

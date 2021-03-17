@@ -483,7 +483,7 @@ class RouterVC: NSObject {
     }
     
     var sharedFiles: UIViewController {
-        return SegmentedController.initWithControllers([sharedWithMe, sharedByMe], alignment: .center)
+        return TopBarSupportedSegmentedController.initWithControllers(with: [sharedWithMe, sharedByMe], currentIndex: 0)//SegmentedController.initWithControllers([sharedWithMe, sharedByMe], alignment: .center)
     }
     
     var sharedWithMe: UIViewController {

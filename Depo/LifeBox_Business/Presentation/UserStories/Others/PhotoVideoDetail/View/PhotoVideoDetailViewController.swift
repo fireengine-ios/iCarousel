@@ -243,7 +243,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
 
     private func setupTitle() {
-        setNavigationTitle(title: selectedItem?.name ?? "")
+        setNavigationTitle(title: selectedItem?.name ?? "", isLargeTitle: false)
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
@@ -307,7 +307,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func showValidateNameSuccess(name: String) {
-        setNavigationTitle(title: name)
+        setNavigationTitle(title: name, isLargeTitle: false)
     }
     
     func show(name: String) { }

@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum NavigationBarStyles {
+    case byDefault
+    case white
+    case transparetn
+    case visible
+    case hidden
+    case black
+}
+
 extension UIViewController {
     
     func rootNavController(vizible: Bool) {
@@ -28,14 +37,6 @@ extension UIViewController {
     
 //MARK: Properties (private)
     
-//    private var navBarHeight: CGFloat {
-//        var height: CGFloat = UIApplication.shared.statusBarFrame.height
-//        
-//        height += navBar?.frame.height ?? 0
-//
-//        return height
-//    }
-    
     private var backButtonTitleAttributes: [NSAttributedStringKey : Any]? {
         return [
             .font: UIFont.GTAmericaStandardRegularFont(size: 19),
@@ -45,7 +46,14 @@ extension UIViewController {
     
     private var titleAttributes: [NSAttributedStringKey : Any]? {
         return [
-            .font: UIFont.GTAmericaStandardMediumFont(size: 19),
+            .font: UIFont.GTAmericaStandardMediumFont(size: 17),
+            .foregroundColor: ColorConstants.confirmationPopupTitle
+        ]
+    }
+    
+    private var largeTitleAttributes: [NSAttributedStringKey : Any]? {
+        return [
+            .font: UIFont.GTAmericaStandardMediumFont(size: 24),
             .foregroundColor: ColorConstants.confirmationPopupTitle
         ]
     }
@@ -60,9 +68,11 @@ extension UIViewController {
         navigationItem.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
     }
     
-    func setNavigationTitle(title: String) {
+    func setNavigationTitle(title: String, isLargeTitle: Bool) {
         navigationItem.title = title
         navBar?.titleTextAttributes = titleAttributes
+
+        changeLargeTitle(prefersLargeTitles: isLargeTitle)
     }
     
     func setNavigationRightBarButton(title: String, target: AnyObject, action: Selector) {
@@ -86,91 +96,20 @@ extension UIViewController {
         navBar?.backgroundColor = color
     }
     
-    //MARK: NavBar visibility states
-
-    func hidenNavigationBarStyle() {
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        
-        navigationController?.view.backgroundColor = .clear
-
-        defaultNavBarStyle()//(isHidden: true)
-        
-        navBar?.setBackgroundImage(UIImage(), for: .default)
-        navBar?.shadowImage = UIImage()
-        navBar?.isTranslucent = true
-        
-        navBar?.tintColor = .white
-        navBar?.barTintColor = .clear
-        navBar?.titleTextAttributes = [.foregroundColor : UIColor.white]
-
-        statusBarColor = .clear
-    }
-
-    func visibleNavigationBarStyle() {
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        
-        navBar?.isTranslucent = false
-    }
-    
-//MARK: NavBar presets
-    
-    func defaultNavBarStyle() {
-//        visibleNavigationBarStyle()
-        //TextConstants.backTitle
-        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
-
-        navBar?.titleTextAttributes = [.foregroundColor : ColorConstants.confirmationPopupTitle]
-        
-        statusBarColor = .clear
-    }
-
-    func whiteNavBarStyle(isLargeTitle: Bool) {
-        
-        visibleNavigationBarStyle()
-
-        changeLargeTitle(prefersLargeTitles: isLargeTitle)
-        
-        navigationItem.hidesSearchBarWhenScrolling = true
-        
-        navBar?.barTintColor = ColorConstants.topBarColor
-        navBar?.shadowImage = UIImage()
-        navBar?.backgroundColor = .clear
-        navBar?.tintColor = .clear
-    }
-    
     func changeSearchBar(controller: UISearchController?) {
         navigationItem.searchController = controller
     }
     
-    func  changeLargeTitle(prefersLargeTitles: Bool) {
-        debugPrint("!!!!  is prefered large \(prefersLargeTitles)")
+    func changeLargeTitle(prefersLargeTitles: Bool) {
         navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
-    }
-    
-    func transparentNavBarStyle() {
-        navBar?.isTranslucent = true
-
-        navBar?.barTintColor = .clear
-        navBar?.shadowImage = UIImage()
-        navBar?.backgroundColor = .clear
-        navBar?.tintColor = .clear
-    }
-    
-    func blackNavigationBarStyle() {
-        defaultNavBarStyle()
-        
-        let image = UIImage(named: "NavigatonBarBlackBacground")
-        navBar?.setBackgroundImage(image, for: .default)
-
-        statusBarColor = .black
-
-        navBar?.barTintColor = .black
-        navBar?.backgroundColor = .black
+        if prefersLargeTitles {
+            navigationController?.navigationBar.largeTitleTextAttributes = largeTitleAttributes
+        }
     }
     
 }
 
+//MARK: - Subtitle
 extension UIViewController {
     
     var navBar: UINavigationBar? {
@@ -205,5 +144,102 @@ extension UIViewController {
             navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
             navigationItem.title = title
         }
+    }
+}
+
+
+//MARK: - Styles
+
+extension UIViewController {
+    
+//MARK: NavBar presets
+    
+    func setNavigationBarStyle(_ style: NavigationBarStyles) {
+        switch style {
+        case .byDefault:
+            defaultNavBarStyle()
+        case .white:
+            whiteNavBarStyle()
+        case .transparetn:
+            transparentNavBarStyle()
+        case .visible:
+            visibleNavigationBarStyle()
+        case .hidden:
+            hiddenNavigationBarStyle()
+        case .black:
+            blackNavigationBarStyle()
+        }
+    }
+    
+    func defaultNavBarStyle() {
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
+
+        navBar?.titleTextAttributes = [.foregroundColor : ColorConstants.confirmationPopupTitle]
+        
+        statusBarColor = .clear
+    }
+
+    func whiteNavBarStyle() {
+        
+        visibleNavigationBarStyle()
+
+        defaultNavBarStyle()
+        
+//        changeLargeTitle(prefersLargeTitles: isLargeTitle)
+        
+        navigationItem.hidesSearchBarWhenScrolling = true
+        
+        navBar?.barTintColor = ColorConstants.topBarColor
+        navBar?.shadowImage = UIImage()
+        navBar?.backgroundColor = .clear
+        navBar?.tintColor = .clear
+    }
+    
+    func transparentNavBarStyle() {
+        navBar?.isTranslucent = true
+
+        navBar?.barTintColor = .clear
+        navBar?.shadowImage = UIImage()
+        navBar?.backgroundColor = .clear
+        navBar?.tintColor = .clear
+    }
+    
+    func blackNavigationBarStyle() {
+        defaultNavBarStyle()
+        
+        let image = UIImage(named: "NavigatonBarBlackBacground")
+        navBar?.setBackgroundImage(image, for: .default)
+
+        statusBarColor = .black
+
+        navBar?.barTintColor = .black
+        navBar?.backgroundColor = .black
+    }
+    
+    //MARK: NavBar visibility states
+
+    func hiddenNavigationBarStyle() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        navigationController?.view.backgroundColor = .clear
+
+        defaultNavBarStyle()//(isHidden: true)
+        
+        navBar?.setBackgroundImage(UIImage(), for: .default)
+        navBar?.shadowImage = UIImage()
+        navBar?.isTranslucent = true
+        
+        navBar?.tintColor = .white
+        navBar?.barTintColor = .clear
+        navBar?.titleTextAttributes = [.foregroundColor : UIColor.white]
+
+        statusBarColor = .clear
+    }
+
+    func visibleNavigationBarStyle() {
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        navBar?.isTranslucent = false
     }
 }

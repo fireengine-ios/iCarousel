@@ -48,7 +48,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
         setActivityIndicator()
         startActivity()
         loadTermsOfUse()
-        hidenNavigationBarStyle()
+        setNavigationBarStyle(.hidden)
     }
     
     override func viewWillAppear(_ animated: Bool) {

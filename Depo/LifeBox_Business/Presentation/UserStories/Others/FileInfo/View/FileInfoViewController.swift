@@ -45,7 +45,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         title = fileType == .folder ? TextConstants.infoPageTitleForFolder : TextConstants.infoPageTitleForFile
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        whiteNavBarStyle(isLargeTitle: false)
+        setNavigationBarStyle(.white)
 //        tintColor: ColorConstants.infoPageItemBottomText,
 //                         titleTextColor: ColorConstants.infoPageItemBottomText
     }
