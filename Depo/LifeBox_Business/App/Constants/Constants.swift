@@ -1412,5 +1412,5 @@ extension TextConstants {
     static let sharedWithMeEmptyPage = NSLocalizedString("business_app_shared_with_me_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedByMeEmptyPage = NSLocalizedString("business_app_shared_by_me_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let sharedAreaEmptyPage = NSLocalizedString("business_app_shared_area_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let emptyFolder = NSLocalizedString("business_app_folder_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let folderEmptyPage = NSLocalizedString("business_app_folder_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
