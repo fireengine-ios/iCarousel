@@ -933,11 +933,6 @@ struct TextConstants {
     static let onSignupSupportFormSubject2DetailedInfoText = NSLocalizedString("signup_support_form_subject_2_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let onSignupSupportFormSubject3DetailedInfoText = NSLocalizedString("signup_support_form_subject_3_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let contactUsSubject1 = NSLocalizedString("contact_us_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject2 = NSLocalizedString("contact_us_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject3 = NSLocalizedString("contact_us_subject_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject4 = NSLocalizedString("contact_us_subject_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject5 = NSLocalizedString("contact_us_subject_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject6 = NSLocalizedString("contact_us_subject_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject7 = NSLocalizedString("contact_us_subject_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject8 = NSLocalizedString("contact_us_subject_8", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1407,4 +1402,19 @@ extension TextConstants {
     static let settingsPageContactUs = NSLocalizedString("business_app_settings_contactus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsPageDeletedFiles = NSLocalizedString("business_app_settings_deletedfiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Contact us
+
+extension TextConstants {
+    static let contactUsPageTitle = NSLocalizedString("business_app_contact_us_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsPageDescription = NSLocalizedString("business_app_contact_us_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubjectBoxName = NSLocalizedString("business_app_contact_us_subject_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsMessageBoxName = NSLocalizedString("business_app_contact_us_message_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactUsSubject1 = NSLocalizedString("business_app_contact_us_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject2 = NSLocalizedString("business_app_contact_us_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject3 = NSLocalizedString("business_app_contact_us_subject_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject4 = NSLocalizedString("business_app_contact_us_subject_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject5 = NSLocalizedString("business_app_contact_us_subject_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

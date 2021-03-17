@@ -2032,3 +2032,15 @@
 "business_app_quota_full_upload_pop_up_title" = "You have reached your Lifebox Business Storage Limit";
 "business_app_quota_full_upload_pop_up_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 "business_app_quota_full_upload_pop_up_button" = "Manage Files";
+
+/*contact us*/
+"business_app_contact_us_page_title" = "Contact Us";
+"business_app_contact_us_page_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+"business_app_contact_us_subject_box_name" = "Subject";
+"business_app_contact_us_message_box_name" = "Your message (optional)";
+
+"business_app_contact_us_subject_1" = "Subject_1";
+"business_app_contact_us_subject_2" = "Subject_2";
+"business_app_contact_us_subject_3" = "Subject_3";
+"business_app_contact_us_subject_4" = "Subject_4";
+"business_app_contact_us_subject_5" = "Subject_5";
