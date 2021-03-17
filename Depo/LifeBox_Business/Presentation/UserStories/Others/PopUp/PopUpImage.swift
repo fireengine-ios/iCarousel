@@ -25,7 +25,7 @@ enum PopUpImage {
         let image: UIImage?
         switch self {
         case .error:
-            image = UIImage(named: "customPopUpInfo")
+            image = UIImage(named: "xmarkAlert")
         case .success:
             image = UIImage(named: "successImage")
         case .delete:

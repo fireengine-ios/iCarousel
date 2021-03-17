@@ -9,18 +9,13 @@
 import Foundation
 
 protocol SettingsInteractorOutput: class {
-    
-    func cellsDataForSettings(isPermissionShown: Bool)
-    
+
     func goToLoginScreen()
-        
-    func profilePhotoUploadSuccessed(image: UIImage?)
-    func profilePhotoUploadFailed(error: Error)
     
     func connectToNetworkFailed()
     func asyncOperationStarted()
     func asyncOperationStoped()
     
-    func didObtainUserStatus()
-    func didFailToObtainUserStatus(errorMessage: String)
+    func updateStorageUsageDataInfo()
+    func didFailToRetrieveUsageData(error: ErrorResponse)
 }

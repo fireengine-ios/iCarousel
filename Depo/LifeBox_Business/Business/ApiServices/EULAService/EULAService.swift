@@ -40,18 +40,18 @@ struct EULAApprove: RequestParametrs {
     let globalPermAuth: Bool?
     
     var requestParametrs: Any {
-        var params: [String: Any] = [LbRequestkeys.eulaId: id]
+        var params: [String: Any] = [LbRequestKeys.eulaId: id]
         
         if let etkAuth = etkAuth {
-            params[LbRequestkeys.etkAuth] = etkAuth
+            params[LbRequestKeys.etkAuth] = etkAuth
         }
         
         if let globalPermAuth = globalPermAuth {
-            params[LbRequestkeys.globalPermAuth] = globalPermAuth
+            params[LbRequestKeys.globalPermAuth] = globalPermAuth
         }
         
         if let kvkkAuth = kvkkAuth {
-            params[LbRequestkeys.kvkkAuth] = kvkkAuth
+            params[LbRequestKeys.kvkkAuth] = kvkkAuth
         }
         
         return params
@@ -88,37 +88,6 @@ class EulaService: BaseRequestService {
     
     private let sessionManager: SessionManager = factory.resolve()
     
-    func getEtkAuth(for phoneNumber: String?, handler: @escaping ResponseBool) {
-        debugLog("EulaService getEtkAuth")
-        
-        let params: Parameters?
-        if let phoneNumber = phoneNumber {
-            params = ["phoneNumber": phoneNumber]
-        } else {
-            params = [:]
-        }
-        
-        sessionManager
-            .request(RouteRequests.eulaGetEtkAuth,
-                     method: .post,
-                     parameters: params,
-                     encoding: JSONEncoding.prettyPrinted)
-            .customValidate()
-            .responseString { response in
-                switch response.result {
-                case .success(let text):
-                    if let isShowEtk = Bool(string: text) {
-                        handler(.success(isShowEtk))
-                    } else {
-                        let error = CustomErrors.serverError(text)
-                        handler(.failed(error))
-                    }
-                case .failure(let error):
-                    handler(.failed(error))
-                }
-        }
-    }
-    
     func eulaGet(handler: @escaping (ResponseResult<EULAResponse>) -> Void) {
         
         let path = String(format: RouteRequests.eulaGet, Device.locale)
@@ -144,37 +113,6 @@ class EulaService: BaseRequestService {
                    
                 case .failure(let error):
                     handler(.failed(CustomErrors.serverError("Failed request eulaGet, \(error.localizedDescription)")))
-                }
-        }
-    }
-    
-    func getGlobalPermAuth(for phoneNumber: String?, handler: @escaping ResponseBool) {
-        debugLog("EulaService getGlobalPermissionAuth")
-        
-        let params: Parameters
-        if let phoneNumber = phoneNumber {
-            params = ["phoneNumber": phoneNumber]
-        } else {
-            params = [:]
-        }
-        
-        sessionManager
-            .request(RouteRequests.eulaGetGlobalPermAuth,
-                     method: .post,
-                     parameters: params,
-                     encoding: JSONEncoding.prettyPrinted)
-            .customValidate()
-            .responseString { response in
-                switch response.result {
-                case .success(let text):
-                    if let isShowGlobalPerm = Bool(string: text) {
-                        handler(.success(isShowGlobalPerm))
-                    } else {
-                        let error = CustomErrors.serverError(text)
-                        handler(.failed(error))
-                    }
-                case .failure(let error):
-                    handler(.failed(error))
                 }
         }
     }

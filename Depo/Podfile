@@ -60,6 +60,7 @@ end
 
 def business_pods
   core_pods
+  authentication_pods
   pod "Player", "~> 0.13.2"
 end
 
@@ -94,6 +95,10 @@ def widget_pods
   pod 'SDWebImage', '~> 4'
   pod 'MMWormhole', '~> 2.0.0'
   pod 'XCGLogger', '~> 7'
+end
+
+def authentication_pods
+  pod 'FastLogin', :git => 'https://github.com/Turkcell/FastLogin.git', :branch => 'v2.0'
 end
 
 target 'Depo_LifeTech' do
