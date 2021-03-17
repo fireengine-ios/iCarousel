@@ -750,18 +750,6 @@ class RouterVC: NSObject {
         return TrashBinViewController.initFromNib()
     }
     
-    func showFullQuotaPopUp(_ popUpType: FullQuotaWarningPopUpType = .standard) {
-        let controller = FullQuotaWarningPopUp(popUpType)
-        DispatchQueue.main.async {
-            if
-                let topController = self.defaultTopController,
-                topController is FullQuotaWarningPopUp == false,
-                topController is LoginViewController == false {
-                topController.present(controller, animated: false)
-            }
-        }
-    }
-    
     func mobilePaymentPermissionController() -> MobilePaymentPermissionViewController {
         return MobilePaymentPermissionViewController.initFromNib()
     }
