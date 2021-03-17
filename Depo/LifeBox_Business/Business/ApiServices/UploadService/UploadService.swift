@@ -471,7 +471,7 @@ final class UploadService: BaseRequestService {
 
 extension UploadService {
     fileprivate func showOutOfSpaceAlert() {
-        RouterVC().showFullQuotaPopUp()
+        UIApplication.showQuotaAlert()
     }
     
     fileprivate func filter(items: [WrapData]) -> [WrapData] {

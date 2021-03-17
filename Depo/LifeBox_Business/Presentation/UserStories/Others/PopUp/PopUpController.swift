@@ -28,6 +28,7 @@ enum PopUpVisualStyle {
 
 //MARK: - PopUpButtonHandler
 typealias PopUpButtonHandler = (_: PopUpController) -> Void
+typealias PopUpDismissAction = () -> Void
 
 final class PopUpController: BasePopUpController {
 
@@ -88,6 +89,8 @@ final class PopUpController: BasePopUpController {
     private var secondUrl: URL?
 
     private var popUpStyle: PopUpVisualStyle = .normal
+    
+    private var dismissAction: PopUpDismissAction?
 
     lazy var firstAction: PopUpButtonHandler = { vc in
         vc.hideSpinnerIncludeNavigationBar()
@@ -97,7 +100,9 @@ final class PopUpController: BasePopUpController {
         vc.close()
     }
     lazy var singleAction: PopUpButtonHandler = { vc in
-        vc.close()
+        vc.close() {
+            self.dismissAction?()
+        }
     }
 
     //MARK: Life cycle
@@ -207,9 +212,9 @@ extension PopUpController {
 
     static func with(title: String?, message: String?,
                      image: PopUpImage, buttonTitle: String,
-                     action: PopUpButtonHandler? = nil, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
+                     action: PopUpButtonHandler? = nil, visualStyle: PopUpVisualStyle = .normal, dismissAction: PopUpDismissAction? = nil) -> PopUpController {
 
-        let vc = controllerWith(title: title, message: message, image: image, visualStyle: visualStyle)
+        let vc = controllerWith(title: title, message: message, image: image, visualStyle: visualStyle, dismissAction: dismissAction)
         vc.buttonState = .single
 
         if let action = action {
@@ -298,7 +303,7 @@ extension PopUpController {
 
     private static func controllerWith(title: String?, message: String?,
                                        image: PopUpImage, firstUrl: URL? = nil,
-                                       secondUrl: URL? = nil, visualStyle: PopUpVisualStyle = .normal) -> PopUpController {
+                                       secondUrl: URL? = nil, visualStyle: PopUpVisualStyle = .normal, dismissAction: PopUpDismissAction? = nil) -> PopUpController {
         let vc = PopUpController(nibName: visualStyle.nibName, bundle: nil)
         vc.modalTransitionStyle = .crossDissolve
         vc.modalPresentationStyle = .overFullScreen
@@ -309,6 +314,7 @@ extension PopUpController {
         vc.firstUrl = firstUrl
         vc.secondUrl = secondUrl
         vc.popUpStyle = visualStyle
+        vc.dismissAction = dismissAction
 
         return vc
     }
