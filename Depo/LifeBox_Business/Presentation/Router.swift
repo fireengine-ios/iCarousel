@@ -651,10 +651,10 @@ class RouterVC: NSObject {
         return controller
     }
     
-    // MARK: Terms and policy
+    //MARK: Agreement
     
-    var termsAndPolicy: UIViewController? {
-        return TermsAndPolicyViewController.initFromNib()
+    var agreements: UIViewController? {
+        return AgreementsViewController.initFromNib()
     }
     
     // MARK: Turkcell Security

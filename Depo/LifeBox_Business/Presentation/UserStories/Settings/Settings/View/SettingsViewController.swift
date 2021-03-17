@@ -11,7 +11,7 @@ import UIKit
 protocol SettingsDelegate: class {
     func goToFAQ()
     
-    func goToTermsAndPolicy() 
+    func goToAgreements()
         
     func goToActivityTimeline()
     
