@@ -10,7 +10,7 @@ enum SettingsTypes: Int {
     case permissions
     case myActivities
     case passcode
-    case helpAndSupport
+    case faq
     case termsAndPolicy
     case logout
     
@@ -19,7 +19,7 @@ enum SettingsTypes: Int {
         case .permissions: return TextConstants.settingsViewCellPermissions
         case .myActivities: return TextConstants.settingsViewCellActivityTimline
         case .passcode: return TextConstants.settingsViewCellPasscode
-        case .helpAndSupport: return TextConstants.settingsViewCellHelp
+        case .faq: return TextConstants.settingsViewCellHelp
         case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
         case .logout: return TextConstants.settingsViewCellLogout
         }
@@ -27,7 +27,7 @@ enum SettingsTypes: Int {
     
     static let allSectionTwoTypes = [permissions]
     static let allSectionThreeTypes = [myActivities, passcode]
-    static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
+    static let allSectionFourTypes = [faq, termsAndPolicy, logout]
 
     static func prepareTypes(hasPermissions: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()

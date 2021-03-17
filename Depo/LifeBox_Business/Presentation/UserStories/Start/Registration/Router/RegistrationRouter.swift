@@ -32,7 +32,7 @@ class RegistrationRouter: RegistrationRouterInput {
     }
     
     func goToFaqSupportPage() {
-        let faqSupportController = router.helpAndSupport
+        let faqSupportController = router.faq
         router.pushViewController(viewController: faqSupportController)
     }
     
