@@ -10,27 +10,19 @@ import Foundation
 
 protocol SettingsRouterInput {
 
-    func goToLoginScreen()
-    
-    func goToPermissions()
+    func navigateToFAQ()
 
-    func goToHelpAndSupport()
+    func navigateToProfile()
+
+    func navigateToAgreements()
+
+    func navigateToTrashBin()
     
-    func goToAgreements()
-    
-    func goToUserInfo(userInfo: AccountInfoResponse)
-    
-    func goToActivityTimeline()
-    
-    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool)
-    
-    func closeEnterPasscode()
-    
-    func openPasscode(handler: @escaping VoidHandler)
+    func navigateToContactUs()
+
+    func goToLoginScreen()
 
     func goToConnectedToNetworkFailed()
-    
-    func goTurkcellSecurity(isTurkcell: Bool)
     
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
     

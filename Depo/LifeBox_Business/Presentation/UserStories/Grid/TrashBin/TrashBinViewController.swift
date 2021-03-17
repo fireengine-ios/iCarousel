@@ -54,11 +54,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .trashBin))
         
-        if dataSource.isSelectionStateActive {
-            defaultNavBarStyle()
-        } else {
-            homePageNavigationBarStyle()
-        }
+        defaultNavBarStyle()
+        
         navbarManager.setupNavBarButtons(animated: false)
         
         //need to fix crash on show bottom bar
@@ -151,7 +148,7 @@ extension TrashBinViewController {
         navigationItem.hidesBackButton = false
         dataSource.cancelSelection()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
-        homePageNavigationBarStyle()
+        defaultNavBarStyle()
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
         updateMoreButton()

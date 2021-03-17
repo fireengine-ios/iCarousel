@@ -219,7 +219,6 @@
                                                             </state>
                                                             <connections>
                                                                 <action selector="forgotPasswordButtonTapped" destination="-1" eventType="touchUpInside" id="zJO-EB-HmY"/>
-                                                                <action selector="onForgotPasswordTap:" destination="-1" eventType="touchUpInside" id="rbS-hg-i4O"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>

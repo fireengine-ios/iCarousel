@@ -13,6 +13,7 @@ import SwiftyJSON
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
     func info(handler: @escaping (ResponseResult<AccountInfoResponse>) -> Void)
+    func storageUsageInfo(projectId: String, accoundId: String, handler: @escaping (ResponseResult<SettingsStorageUsageResponseItem>) -> Void)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
@@ -29,6 +30,22 @@ class AccountService: BaseRequestService, AccountServicePrl {
         
         sessionManager
             .request(RouteRequests.BusinessAccount.myInfo)
+            .customValidate()
+            .responseObject(handler)
+    }
+
+    func storageUsageInfo(projectId: String,
+                          accoundId: String,
+                          handler: @escaping (ResponseResult<SettingsStorageUsageResponseItem>) -> Void) {
+        debugLog("Storage usage info")
+
+        guard let url = URL(string: String(format: RouteRequests.BusinessAccount.storageUsageInfo, projectId, accoundId)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return
+        }
+
+        sessionManager
+            .request(url)
             .customValidate()
             .responseObject(handler)
     }
