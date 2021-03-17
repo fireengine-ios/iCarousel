@@ -55,7 +55,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     var customNavigationControllers: [UINavigationController] = []
     
     var selectedViewController: UIViewController? {
-        if customNavigationControllers.count > 0 {
+        if customNavigationControllers.count > selectedIndex {
             return customNavigationControllers[selectedIndex]
         }
         return nil
@@ -84,20 +84,24 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
         
         didSet {
-            guard tabBar.items?.count != 0 else {
+            guard
+                tabBar.items?.count != 0,
+                  let selectedViewController = selectedViewController
+            else {
                 return
             }
-            addChildViewController(selectedViewController!)
-            selectedViewController?.view.frame = contentView.bounds
-            contentView.addSubview(selectedViewController!.view)
-            selectedViewController?.didMove(toParentViewController: self)
+            addChildViewController(selectedViewController)
+            selectedViewController.view.frame = contentView.bounds
+            contentView.addSubview(selectedViewController.view)
+            selectedViewController
+                .didMove(toParentViewController: self)
             popToRootCurrentNavigationController(animated: true)
         }
     }
     
     var activeNavigationController: UINavigationController? {
         var  result: UINavigationController?
-        if customNavigationControllers.count > 0 {
+        if customNavigationControllers.count > selectedIndex {
             result = customNavigationControllers[selectedIndex]
         }
         return result

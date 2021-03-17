@@ -26,7 +26,7 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         
         splitViewController.viewControllers = controllersArray
         splitViewController.preferredDisplayMode = .allVisible
-        leftController?.setupNavBar()
+//        leftController?.setupNavBar() // not needed for LB, at least now
         //splitViewController.delegate = self
     }
     

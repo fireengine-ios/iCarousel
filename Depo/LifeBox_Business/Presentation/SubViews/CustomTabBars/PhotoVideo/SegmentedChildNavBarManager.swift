@@ -10,8 +10,6 @@ import UIKit
 
 protocol SegmentedChildNavBarManagerDelegate: SegmentedChildController {
     func onCancelSelectionButton()
-    func onThreeDotsButton()
-    func onSearchButton()
     func onPlusButton()
     func onSettingsButton()
 }
@@ -29,25 +27,16 @@ final class SegmentedChildNavBarManager {
        return UIBarButtonItem(customView: button)
     }()
     
-    /// public bcz can be disabled
-    lazy var threeDotsButton = UIBarButtonItem(
-        image: Images.threeDots,
-        style: .plain,
-        target: self,
-        action: #selector(onThreeDotsButton))
-    
     private(set) lazy var plusButton: UIBarButtonItem =  {
-        
             let button = UIButton(type: .custom)
             button.setImage(UIImage(named: "PlusButtonBusiness"),
                             for: .normal)
 
             button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
-            
+
             button.addTarget(self, action: #selector(onPlusButton),
                              for: UIControlEvents.touchUpInside)
             return UIBarButtonItem(customView: button)
-
     }()
     
     lazy var settingsButton: UIBarButtonItem = {
@@ -69,12 +58,6 @@ final class SegmentedChildNavBarManager {
         return UIBarButtonItem(customView: button)
     }()
     
-    private lazy var searchButton = UIBarButtonItem(
-        image: Images.search,
-        style: .plain,
-        target: self,
-        action: #selector(onSearchButton))
-    
     private weak var delegate: SegmentedChildNavBarManagerDelegate?
     
     init(delegate: SegmentedChildNavBarManagerDelegate?) {
@@ -83,38 +66,27 @@ final class SegmentedChildNavBarManager {
     
     func setSelectionMode() {
         delegate?.setLeftBarButtonItems([cancelSelectionButton], animated: true)
-        delegate?.setRightBarButtonItems([threeDotsButton], animated: false)
+        delegate?.setRightBarButtonItems([], animated: false)
     }
     
-    func setDefaultMode(title: String = "") {
+    func setRootMode(title: String = "") {
         delegate?.setTitle(title)
         delegate?.setRightBarButtonItems([plusButton], animated: false)
         delegate?.setLeftBarButtonItems([settingsButton], animated: false)
-        threeDotsButton.isEnabled = true
     }
     
     func setNestedMode(title: String = "") {
         delegate?.setTitle(title)
         delegate?.setRightBarButtonItems([plusButton], animated: false)
-        threeDotsButton.isEnabled = true
     }
     
     func setDefaultModeWithoutThreeDot(title: String = "") {
         delegate?.setTitle(title)
-        delegate?.setRightBarButtonItems([searchButton], animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: true)
     }
     
     @objc private func onCancelSelectionButton() {
         delegate?.onCancelSelectionButton()
-    }
-    
-    @objc private func onThreeDotsButton() {
-        delegate?.onThreeDotsButton()
-    }
-    
-    @objc private func onSearchButton() {
-        delegate?.onSearchButton()
     }
     
     @objc private func onPlusButton() {

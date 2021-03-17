@@ -291,6 +291,10 @@ final class LoginViewController: ViewController {
     }
 
     @IBAction private func fastLoginButtonTapped() {
+        guard ReachabilityService.shared.isReachable else {
+            showErrorAlert(with: TextConstants.errorAlert, subtitle: TextConstants.errorConnectedToNetwork)
+            return
+        }
         loginCoordinator.start()
         printLog("[LoginViewController] fastLoginButtonTapped FL login scenario started")
     }
@@ -403,7 +407,7 @@ extension LoginViewController: LoginCoordinatorDelegate {
             showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginErorNotLoginSDK)
         } else {
             printLog("[LoginViewController] Fast Login SDK error - unknown error")
-            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.errorUnknown)
+            showErrorAlert(with: TextConstants.flLoginErrorPopupTitle, subtitle: TextConstants.flLoginElseError)
         }
     }
 

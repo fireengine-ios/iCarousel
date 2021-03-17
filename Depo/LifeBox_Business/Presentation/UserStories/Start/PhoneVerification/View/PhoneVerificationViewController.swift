@@ -83,7 +83,6 @@ final class PhoneVerificationViewController: ViewController {
         output.viewIsReady()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
