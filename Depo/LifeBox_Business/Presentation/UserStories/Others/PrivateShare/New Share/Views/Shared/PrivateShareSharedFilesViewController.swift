@@ -59,7 +59,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     lazy private var topBarCustomSegmentedBar: TopBarCustomSegmentedView = TopBarCustomSegmentedView.initFromNib()
     
-    private var collectionTopYInset: CGFloat = 0
+    private var collectionTopYInset: CGFloat = 25
     
     override var isEditing: Bool {
         willSet {
@@ -186,8 +186,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }()
     
     private func setupCollectionViewBars() {
-        
-        collectionTopYInset = collectionView.contentInset.top
+        debugPrint("!!!! collection setupCollectionViewBars")
+//        collectionTopYInset = collectionView.contentInset.top
         
         
         setupSorttingBar()
@@ -228,7 +228,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
 //        case sharedArea
         
         topBarCustomSegmentedBar.translatesAutoresizingMaskIntoConstraints = false
-        topBarCustomSegmentedBar.setup(models: [TopBarCustomSegmentedViewButtonModel(title: "ONE", callback: {}), TopBarCustomSegmentedViewButtonModel(title: "TWO", callback: {})])
+        topBarCustomSegmentedBar.setup(models: [TopBarCustomSegmentedViewButtonModel(title: "ONE", callback: {}), TopBarCustomSegmentedViewButtonModel(title: "TWO", callback: {})], selectedIndex: 0)
         
         
         collectionView.addSubview(topBarCustomSegmentedBar)
