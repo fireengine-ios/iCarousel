@@ -330,6 +330,7 @@ struct TextConstants {
     // MARK: FAQ
     
     static let faqViewTitle = NSLocalizedString("Help and Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faqTitle = NSLocalizedString("business_app_faq_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Terms of Use and Privacy Policy
      static let termsOfUseCell = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
