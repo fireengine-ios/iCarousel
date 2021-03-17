@@ -22,21 +22,23 @@ enum BottomBarActionType: Int {
     case download
     case downloadDocument
     case restore
+    case more
     
     var image: UIImage? {
         let imageName: String
         switch self {
-            case .share: imageName = "share-copy"
-            case .privateShare: imageName = "share-private"
-            case .info: imageName = "InfoButtonIcon"
-            case .delete: imageName = "DeleteShareButton"
-            case .move: imageName = "MoveButtonIcon"
-            case .download: imageName = "downloadTB"
-            case .downloadDocument: imageName = "downloadTB"
+            case .share: imageName = "moveBottom"
+            case .privateShare: imageName = "shareBottom"
+            case .info: imageName = "infoBottom"
+            case .delete: imageName = "trashBottom"
+            case .move: imageName = "moveBottom"
+            case .download: imageName = "downloadBottom"
+            case .downloadDocument: imageName = "downloadBottom"
             case .restore: imageName = "RestoreButtonIcon"
+            case .more: imageName = "moreBottom"
         }
         
-        return UIImage(named: imageName)
+        return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
     }
     
     var title: String {
@@ -49,6 +51,7 @@ enum BottomBarActionType: Int {
             case .download: return TextConstants.tabBarDownloadLabel
             case .downloadDocument: return TextConstants.tabBarDownloadLabel
             case .restore: return TextConstants.actionSheetRestore
+            case .more: return TextConstants.actionSheetMore
         }
     }
     
@@ -74,15 +77,39 @@ enum BottomBarActionType: Int {
                 return nil
         }
     }
+    
+    var toElementType: ElementTypes {
+        switch self {
+            case .share:
+                return .share
+            case .privateShare:
+                return .privateShare
+            case .info:
+                return .info
+            case .delete:
+                return .delete
+            case .move:
+                return .move
+            case .download:
+                return .download
+            case .downloadDocument:
+                return .downloadDocument
+            case .restore:
+                return .restore
+            case .more:
+                return .more
+        }
+    }
 }
 
 protocol BottomActionsBarDelegate: class {
     func onSelected(action: BottomBarActionType)
+    func onMoreButton(actions: [BottomBarActionType], sender: UIButton)
 }
 
 final class BottomActionsBar: UIView {
     
-    private let buttonsBeforeMoreButton = 5
+    private let buttonsBeforeMoreButton = 3
 
     private lazy var actionButtonsStack: UIStackView = {
         let newValue = UIStackView()
@@ -97,6 +124,7 @@ final class BottomActionsBar: UIView {
     private lazy var animator = BottomActionsBarAnimator(barView: self)
 
     private(set) var style: BottomActionsBarStyle = .opaque
+    private var actionsUnderMoreButton = [BottomBarActionType]()
     
     
     //MARK: Override
@@ -126,6 +154,7 @@ final class BottomActionsBar: UIView {
     
     func setup(style: BottomActionsBarStyle, elementTypes: [ElementTypes]) {
         self.style = style
+        actionsUnderMoreButton = []
         
         DispatchQueue.main.async {
             switch style {
@@ -186,22 +215,50 @@ final class BottomActionsBar: UIView {
                 actionButtonsStack.addArrangedSubview(button)
             }
         } else {
-            //TODO:
+            let mainTypes = Array(actionTypes.prefix(upTo: buttonsBeforeMoreButton - 2))
+            let coveredTypes = Array(actionTypes.suffix(from: mainTypes.count))
+            actionsUnderMoreButton = coveredTypes
+            
+            mainTypes.forEach { actionType in
+                let button = createButton(type: actionType)
+                actionButtonsStack.addArrangedSubview(button)
+            }
+            
+            let menuButton = createMenuButton(actions: coveredTypes)
+            actionButtonsStack.addArrangedSubview(menuButton)
         }
     }
     
     private func createButton(type: BottomBarActionType) -> UIButton {
-        let textColor = (style == .opaque) ? ColorConstants.Text.labelTitle : .white
+        let tintColor = (style == .opaque) ? ColorConstants.Text.labelTitle : .white
         
         let button = UIButton()
         button.addTarget(self, action: #selector(onButtonTap(_:)), for: .touchUpInside)
         button.setImage(type.image, for: .normal)
         button.setTitle(type.title, for: .normal)
-        button.setTitleColor(textColor, for: .normal)
+        button.setTitleColor(tintColor, for: .normal)
+        button.tintColor = tintColor
         button.titleLabel?.font = .GTAmericaStandardRegularFont(size: 10)
         button.adjustsFontSizeToFitWidth()
         button.centerVertically(padding: 8)
         button.tag = type.rawValue
+        return button
+    }
+    
+    private func createMenuButton(actions: [BottomBarActionType]) -> UIButton {
+        let button = createButton(type: .more)
+        
+        button.removeTarget(self, action: #selector(onButtonTap(_:)), for: .touchUpInside)
+        
+        if #available(iOS 14, *) {
+            button.showsMenuAsPrimaryAction = true
+            button.menu = MenuItemsFabric.createMenu(bottomBarActions: actions, actionHandler: { [weak self] actionType in
+                self?.delegate?.onSelected(action: actionType)
+            })
+        } else {
+            button.addTarget(self, action: #selector(onMenuButtonTap(_:)), for: .touchUpInside)
+        }
+        
         return button
     }
     
@@ -212,5 +269,10 @@ final class BottomActionsBar: UIView {
         }
         
         delegate?.onSelected(action: actionType)
+    }
+    
+    @objc
+    private func onMenuButtonTap(_ sender: UIButton) {
+        delegate?.onMoreButton(actions: actionsUnderMoreButton, sender: sender)
     }
 }

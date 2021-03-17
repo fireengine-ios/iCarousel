@@ -22,8 +22,6 @@ protocol MoreFilesActionsInteractorInput {
     
     func move(item: [BaseDataSourceItem], toPath: String)
     
-    func sync(item: [BaseDataSourceItem])
-    
     func download(item: [BaseDataSourceItem])
     
     func downloadDocument(items: [WrapData]?)
@@ -67,8 +65,6 @@ protocol MoreFilesActionsInteractorInput {
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
     
     func delete(items: [BaseDataSourceItem])
-    
-    func trackEvent(elementType: ElementTypes)
     
     func emptyTrashBin()
     

@@ -338,6 +338,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func onStopPlay() {
+        //TODO: Player
         UIApplication.setIdleTimerDisabled(false)
         output.videoStoped()
         if Device.operationSystemVersionLessThen(11) {

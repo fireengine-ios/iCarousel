@@ -15,8 +15,6 @@ protocol PhotoVideoDetailViewOutput {
     func onInfo(object: Item)
     
     func viewWillDisappear()
-    func viewFullyLoaded()
-    
 
     func startCreatingAVAsset()
     func stopCreatingAVAsset()

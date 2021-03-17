@@ -69,10 +69,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
         guard let selectedItem = array[selectedIndex] else {
-            return EditingBarConfig(elementsConfig: [], style: .transparent, tintColor: nil)
+            return EditingBarConfig(elementsConfig: [], style: .transparent)
         }
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status)
-        return EditingBarConfig(elementsConfig: elementsConfig, style: .transparent, tintColor: nil)
+        return EditingBarConfig(elementsConfig: elementsConfig, style: .transparent)
     }
     
     func deleteSelectedItem(type: ElementTypes) {

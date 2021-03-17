@@ -130,6 +130,17 @@ final class MenuItemsFabric {
         
         return UIMenu(title: "", children: actions)
     }
+    
+    static func createMenu(bottomBarActions: [BottomBarActionType], actionHandler: @escaping ValueHandler<BottomBarActionType>) -> UIMenu {
+        let actions: [UIAction] = bottomBarActions.compactMap { bottomAction in
+            let elementType = bottomAction.toElementType
+            return UIAction(title: elementType.actionTitle(), image: elementType.menuImage) { action in
+                actionHandler(bottomAction)
+            }
+        }
+        
+        return UIMenu(title: "", children: actions)
+    }
 }
 
 extension ElementTypes {

@@ -23,35 +23,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupConfig(withConfig config: EditingBarConfig) {
-        var itemTupple = [PreDetermendType]()
-        for type in config.elementsConfig {
-            switch type {
-            case .delete:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .download:
-                itemTupple.append(EditinglBar.PreDetermendTypes.download)
-            case .downloadDocument:
-                itemTupple.append(EditinglBar.PreDetermendTypes.downloadDocument)
-            case .info:
-                itemTupple.append(EditinglBar.PreDetermendTypes.info)
-            case .move:
-                itemTupple.append(EditinglBar.PreDetermendTypes.move)
-            case .share:
-                itemTupple.append(EditinglBar.PreDetermendTypes.share)
-            case .privateShare:
-                itemTupple.append(EditinglBar.PreDetermendTypes.privateShare)
-            case .moveToTrash:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .restore:
-                itemTupple.append(EditinglBar.PreDetermendTypes.restore)
-            case .moveToTrashShared:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            default:
-                break
-            }
-        }
-
-        view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple, config: config)
+        view.setupBar(style: config.style, config: config)
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem]) {
@@ -59,7 +31,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         let matchesBitmasks = calculateMatchesBitmasks(from: items)
         let elementsConfig = createElementTypesArray(from: matchesBitmasks)
-        let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque, tintColor: nil)
+        let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque)
         setupConfig(withConfig: config)
     }
     
@@ -162,18 +134,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         return elementTypesArray
     }
     
-
-    
-    func bottomBarSelectedItem(index: Int, sender: UITabBarItem, config: EditingBarConfig?) {
+    func bottomBarSelected(actionType: ElementTypes) {
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
-            guard let self = self,
-                  let types = config?.elementsConfig else {
+            guard let self = self else {
                     return
             }
             
-            let type = types[index]
-            
-            switch type {
+            switch actionType {
             case .moveToTrash:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -221,7 +188,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     self.router.onInfo(object: firstSelected)
                 }
                 
-                self.view.unselectAll()
             case .move:
                 self.interactor.move(item: selectedItems, toPath: "")
             case .share:
@@ -231,13 +197,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 //\AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share)) // add analytics here later?
                 self.interactor.privateShare(item: selectedItems, sourceRect: self.middleTabBarRect)
 
-            case .sync:
-                self.basePassingPresenter?.stopModeSelected()
-                self.interactor.sync(item: selectedItems)
-            case .print:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .print))
-                self.interactor.trackEvent(elementType: .print)
-                self.router.showPrint(items: selectedItems)
             case .moveToTrashShared:
                 self.interactor.moveToTrashShared(items: selectedItems)
             default:
@@ -245,42 +204,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             }
         }
     }
+    
+    func showMenu(actionTypes: [ElementTypes], sender: UIButton) {
+        showAlertSheet(withTypes: actionTypes, presentedBy: sender)
+    }
 
-    func showAlertSheet(withTypes types: [ElementTypes], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
+    private func showAlertSheet(withTypes types: [ElementTypes], presentedBy sender: Any?) {
         constractActions(withTypes: types, forItem: nil) { [weak self] actions in
             self?.presentAlertSheet(withActions: actions, presentedBy: sender)
-        }
-    }
-    
-    func showAlertSheet(withItems items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        if items.count == 0 {//TODO: FOR NOW
-            return
-        }
-        guard let items = items as? [Item] else {
-            return
-        }
-        constractActions(withTypes: adjastActionTypes(forItems: items), forItem: nil) { [weak self] actions in
-            self?.presentAlertSheet(withActions: actions, presentedBy: sender)
-        }
-    }
-    
-    func showSpecifiedAlertSheet(withItem item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        
-        let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
-            
-        })
-        headerAction.isEnabled = false
-        
-        var types: [ElementTypes] = [.info, .share, .move]
-        
-        guard let item = item as? Item else {
-            return
-        }
-        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        types.append(.moveToTrash)
-        
-        constractActions(withTypes: types, forItem: [item]) { [weak self] actions in
-            self?.presentAlertSheet(withActions: [headerAction] + actions, presentedBy: sender)
         }
     }
     
@@ -366,7 +297,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .info:
                     action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
                         self.router.onInfo(object: currentItems.first!)
-                        self.view.unselectAll()
                     })
                     
                 case .download:
@@ -461,10 +391,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
                         //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
                     })
-                case .print:
-                    action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
-                        //TODO: will be implemented in the next package
-                    })
                     
                 default:
                     assertionFailure("👆PLEASE add your new type into switch in constractActions( method in BottomSelectionTabBarPresenter class👆")
@@ -476,18 +402,17 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
     }
     
-    private func presentAlertSheet(withActions actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil) {
-        let routerVC = RouterVC()
-        guard let rootVC = routerVC.rootViewController else {
+    private func presentAlertSheet(withActions actions: [UIAlertAction], presentedBy sender: Any?) {
+        guard let rootVC = RouterVC().getViewControllerForPresent() else {
             return
         }
-        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
-            
-        })
-        let actionsWithCancell: [UIAlertAction] = actions + [cancellAction]
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
+        actionSheetVC.view.tintColor = UIColor.black
+        
+        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
+        let allActions = actions + [cancellAction]
+        allActions.forEach { actionSheetVC.addAction($0) }
 
         actionSheetVC.popoverPresentationController?.sourceView = rootVC.view
 
@@ -518,13 +443,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     override func operationFinished(type: ElementTypes) {
         completeAsyncOperationEnableScreen()
-        view.unselectAll()
         basePassingPresenter?.operationFinished(withType: type, response: nil)
     }
     
     override func operationFailed(type: ElementTypes, message: String) {
         completeAsyncOperationEnableScreen()
-        view.unselectAll()
         basePassingPresenter?.operationFailed(withType: type)
         UIApplication.showErrorAlert(message: message)
     }

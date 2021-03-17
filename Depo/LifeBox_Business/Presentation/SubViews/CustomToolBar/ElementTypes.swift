@@ -18,8 +18,6 @@ enum ElementTypes {
     case delete
     case emptyTrashBin
     case move
-    case sync
-    case syncInProgress
     case download
     case downloadDocument
     case undetermend
@@ -34,7 +32,6 @@ enum ElementTypes {
     case removeFromFavorites
     case backUp
     case addToCmeraRoll
-    case print
     //upload?
     case photos
     case iCloudDrive
@@ -311,8 +308,6 @@ enum ElementTypes {
             return TextConstants.actionSheetSelectAll
         case .deSelectAll:
             return TextConstants.actionSheetDeSelectAll
-        case .print:
-            return TextConstants.tabBarPrintLabel
         case .rename:
             return TextConstants.actionRename
         case .endSharing:

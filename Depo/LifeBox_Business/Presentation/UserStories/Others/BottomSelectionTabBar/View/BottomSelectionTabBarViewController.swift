@@ -11,11 +11,7 @@ import UIKit
 
 class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabBarViewInput, NibInit {
 
-    @IBOutlet var bottomActionsBar: BottomActionsBar! {
-        willSet {
-            newValue.delegate = self
-        }
-    }
+    @IBOutlet var bottomActionsBar: BottomActionsBar! 
     var output: BottomSelectionTabBarViewOutput!
     var config: EditingBarConfig?
     var sourceView: UIView?
@@ -31,8 +27,7 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
     }
 
     private func setupDelegate() {
-        //TODO: bottom bar
-//        editingBar.delegate = self
+        bottomActionsBar.delegate = self
     }
     
     
@@ -41,10 +36,10 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         
     }
     
-    func setupBar(tintColor: UIColor?, style: BottomActionsBarStyle = .opaque, items: [ImageNameToTitleTupple], config: EditingBarConfig) {
+    func setupBar(style: BottomActionsBarStyle = .opaque, config: EditingBarConfig) {
         self.config = config
        
-        bottomActionsBar.setup(style: style, elementTypes: [.delete, .download])
+        bottomActionsBar.setup(style: style, elementTypes: config.elementsConfig)
     }
     
     func showBar(animated: Bool, onView sourceView: UIView) {
@@ -55,43 +50,16 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
     func hideBar(animated: Bool) {
         bottomActionsBar.hide(animated: animated)
     }
-    
-    func unselectAll() {
-//        editingBar.selectedItem = nil
-    }
-    
-    private func changeStatusForTabs(atIntdex indexes: [Int], enabled: Bool) {
-        //TODO: bottom bar
-//        indexes.forEach {
-//            guard let item = editingBar.items?[$0] else {
-//                return
-//            }
-//
-//            item.isEnabled = enabled
-//        }
-    }
-    
-    func disableItems(at indexes: [Int]) {
-        changeStatusForTabs(atIntdex: indexes, enabled: false)
-    }
-    
-    func enableItems(at indexes: [Int]) {
-        changeStatusForTabs(atIntdex: indexes, enabled: true)
-    }
 }
 
 
 extension BottomSelectionTabBarViewController: BottomActionsBarDelegate {
     
     func onSelected(action: BottomBarActionType) {
-//        guard let selectedItemIndex = tabBar.items?.index(of: item) else {
-//            return
-//        }
-//
-//        output.bottomBarSelectedItem(index: selectedItemIndex, sender: item, config: config)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) { [weak self] in
-            self?.unselectAll()
-        }
+        output.bottomBarSelected(actionType: action.toElementType)
+    }
+    
+    func onMoreButton(actions: [BottomBarActionType], sender: UIButton) {
+        output.showMenu(actionTypes: actions.compactMap { $0.toElementType }, sender: sender)
     }
 }

@@ -15,12 +15,7 @@ protocol BottomSelectionTabBarViewInput: class, Waiting {
 
     func setupInitialState()
     
-    func setupBar(tintColor: UIColor?, style: BottomActionsBarStyle, items: [ImageNameToTitleTupple], config: EditingBarConfig)
+    func setupBar(style: BottomActionsBarStyle, config: EditingBarConfig)
     func showBar(animated: Bool, onView sourceView: UIView)
     func hideBar(animated: Bool)
-    
-    func unselectAll() //FORNOW
-    
-    func disableItems(at indexes: [Int])
-    func enableItems(at indexes: [Int])
 }
