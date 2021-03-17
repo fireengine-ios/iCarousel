@@ -795,6 +795,22 @@ class RouterVC: NSObject {
         }
     }
     
+    func openMyDisk() {
+        guard let tabBarVC = tabBarController else {
+            return
+        }
+        
+        tabBarVC.dismiss(animated: true)
+        
+        let index = TabScreenIndex.myDisk.rawValue
+        guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
+            assertionFailure("This index is non existent 😵")
+            return
+        }
+        tabBarVC.tabBar.selectedItem = newSelectedItem
+        tabBarVC.selectedIndex = index
+    }
+    
     func privateShare(items: [WrapData]) -> UIViewController {
         let shareController = PrivateShareViewController.with(items: items)
         let navigationController = NavigationController(rootViewController: shareController)
