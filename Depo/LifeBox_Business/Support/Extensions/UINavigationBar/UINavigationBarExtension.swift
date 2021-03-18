@@ -145,7 +145,7 @@ extension UIViewController {
         } else {
             navigationItem.titleView = nil
             navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-            navigationItem.title = title
+            setNavigationTitle(title: title, isLargeTitle: false)
         }
     }
 }
