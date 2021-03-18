@@ -25,10 +25,12 @@ indirect enum PrivateShareType: Equatable {
                 return .sharedBy
             case .withMe:
                 return .sharedWith
-            case .innerFolder, .myDisk:
+            case .innerFolder:
                 return .sharedInnerFolder
-        case .sharedArea:
-            return .sharedArea
+            case .sharedArea:
+                return .sharedArea
+            case .myDisk:
+                return .myDisk
         }
     }
     
