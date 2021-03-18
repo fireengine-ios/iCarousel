@@ -12,6 +12,8 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     //MARK: - Private properties
     
+    private let textViewPlaceholder = TextConstants.contactUsMessageBoxName
+    
     private lazy var textViewCounterLabel: UILabel = {
         let label = UILabel()
         label.text = "500"
@@ -36,7 +38,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
         super.viewDidLoad()
         setView()
         setSubjectButton()
-        setTextField()
+        setTextView()
         setSendButton()
     }
     
@@ -71,14 +73,20 @@ final class ContactUsViewController: BaseViewController, NibInit {
         subjectLabel.textColor = ColorConstants.Text.textFieldText
     }
     
-    private func setTextField() {
+    private func setTextView() {
+        textView.delegate = self
+        
         textView.layer.cornerRadius = 5
         textView.layer.borderWidth = 1
         textView.layer.borderColor = ColorConstants.a2FABorder.cgColor
         
-        textView.addSubview(textViewCounterLabel)
-        textViewCounterLabel.rightAnchor.constraint(equalTo: textView.rightAnchor, constant: -10).activate()
-        textViewCounterLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 5).activate()
+        textView.text = textViewPlaceholder
+        textView.font = UIFont.GTAmericaStandardRegularFont(size: 12)
+        textView.textColor = ColorConstants.Text.textFieldPlaceholder
+        
+        view.addSubview(textViewCounterLabel)
+        textViewCounterLabel.rightAnchor.constraint(equalTo: textView.rightAnchor, constant: -5).activate()
+        textViewCounterLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 7).activate()
     }
     
     private func setSendButton() {
@@ -107,5 +115,32 @@ final class ContactUsViewController: BaseViewController, NibInit {
     }
     
     @IBAction func sendButtonPressed(_ sender: Any) {
+    }
+}
+
+//MARK: - UITextViewDelegate
+
+extension ContactUsViewController: UITextViewDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textViewDidBeginEditing (_ textView: UITextView) {
+        if textView.text == textViewPlaceholder {
+            textView.text = ""
+            textView.textColor = ColorConstants.Text.textFieldText
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = textViewPlaceholder
+            textView.textColor = ColorConstants.Text.textFieldPlaceholder
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        
+        return true
     }
 }
