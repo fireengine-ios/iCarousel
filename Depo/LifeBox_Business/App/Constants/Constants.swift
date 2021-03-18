@@ -1408,3 +1408,12 @@ extension TextConstants {
     static let settingsPageDeletedFiles = NSLocalizedString("business_app_settings_deletedfiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+// MARK: - Empty pages or folders
+extension TextConstants {
+    static let myDiskEmptyPage = NSLocalizedString("business_app_my_disk_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedWithMeEmptyPage = NSLocalizedString("business_app_shared_with_me_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedByMeEmptyPage = NSLocalizedString("business_app_shared_by_me_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedAreaEmptyPage = NSLocalizedString("business_app_shared_area_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let folderEmptyPage = NSLocalizedString("business_app_folder_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
