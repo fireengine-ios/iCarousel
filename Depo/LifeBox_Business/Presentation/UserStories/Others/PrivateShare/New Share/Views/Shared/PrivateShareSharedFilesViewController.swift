@@ -14,11 +14,18 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         let title: String
         switch shareType {
-            case .myDisk: title = TextConstants.tabBarItemMyDisk
-            case .byMe: title = TextConstants.privateShareSharedByMeTab
-            case .withMe: title = TextConstants.privateShareSharedWithMeTab
-            case .innerFolder(_, let folder): title = folder.name
-            case .sharedArea: title = TextConstants.tabBarItemSharedArea
+            case .myDisk:
+                controller.isSearchEnabled = true
+                title = TextConstants.tabBarItemMyDisk
+            case .byMe:
+                title = TextConstants.privateShareSharedByMeTab
+            case .withMe:
+                title = TextConstants.privateShareSharedWithMeTab
+            case .innerFolder(_, let folder):
+                title = folder.name
+            case .sharedArea:
+                title = TextConstants.tabBarItemSharedArea
+                controller.isSearchEnabled = true
         }
         controller.title = title
         controller.shareType = shareType
@@ -57,12 +64,16 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return sortingBar
     }()
     
+    private var isSearchEnabled = false
+    
     private var collectionTopYInset: CGFloat = 0
     
     override var isEditing: Bool {
         willSet {
             changeNavbarLargeTitle(!newValue)
-            setNavSearchConntroller(newValue ? nil : searchController)
+            if isSearchEnabled {
+                setNavSearchConntroller(newValue ? nil : searchController)
+            }
         }
     }
     
@@ -261,7 +272,9 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
-        setNavSearchConntroller(searchController)
+        if isSearchEnabled {
+            setNavSearchConntroller(searchController)
+        }
         setupPlusButton()
         handleOffsetChange(offsetY: collectionView.contentOffset.y)
 //        setupNavigationBar(editingMode: isEditing)

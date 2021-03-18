@@ -100,7 +100,9 @@ extension UIViewController {
     }
     
     func changeSearchBar(controller: UISearchController?) {
-        navigationItem.searchController = controller
+        if navigationItem.searchController == nil {
+            navigationItem.searchController = controller
+        }
     }
     
     func changeLargeTitle(prefersLargeTitles: Bool) {
