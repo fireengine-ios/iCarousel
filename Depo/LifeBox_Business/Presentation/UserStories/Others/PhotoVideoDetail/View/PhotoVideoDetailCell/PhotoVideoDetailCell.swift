@@ -149,6 +149,10 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
     }
     
+    func didEndDisplaying() {
+        playerView.stop()
+    }
+    
     private func setupViews() {
         imageScrollView.imageViewDelegate = self
         contentView.addSubview(webView)

@@ -459,6 +459,14 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
             analytics.sharedWithMe(action: .preview, on: object)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? PhotoVideoDetailCell else {
+            return
+        }
+        
+        cell.didEndDisplaying()
+    }
 }
 
 extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
