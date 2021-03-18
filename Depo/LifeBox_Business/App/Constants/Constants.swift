@@ -261,6 +261,9 @@ struct TextConstants {
     static let syncOutOfSpaceAlertText = NSLocalizedString("You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let upgrade = NSLocalizedString("Upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncOutOfSpaceAlertCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpTitle = NSLocalizedString("business_app_quota_full_upload_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpDescription = NSLocalizedString("business_app_quota_full_upload_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpButton = NSLocalizedString("business_app_quota_full_upload_pop_up_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: Home Storage card
     static let homeStorageCardCloudTitle = NSLocalizedString("Your lifebox storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1412,4 +1415,13 @@ extension TextConstants {
     static let documentNoPreview = NSLocalizedString("business_app_document_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoNoPreview = NSLocalizedString("business_app_photo_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let audioNoPreview = NSLocalizedString("business_app_music_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Empty pages or folders
+extension TextConstants {
+    static let myDiskEmptyPage = NSLocalizedString("business_app_my_disk_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedWithMeEmptyPage = NSLocalizedString("business_app_shared_with_me_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedByMeEmptyPage = NSLocalizedString("business_app_shared_by_me_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedAreaEmptyPage = NSLocalizedString("business_app_shared_area_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let folderEmptyPage = NSLocalizedString("business_app_folder_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

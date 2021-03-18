@@ -2032,3 +2032,13 @@
 "business_app_document_no_preview" = "This file type is not supported for preview";
 "business_app_photo_no_preview" = "There is no preview for this file. Please try again later";
 "business_app_music_no_preview" = "There is no preview for this file";
+/*storage limit*/
+"business_app_quota_full_upload_pop_up_title" = "You have reached your Lifebox Business Storage Limit";
+"business_app_quota_full_upload_pop_up_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+"business_app_quota_full_upload_pop_up_button" = "Manage Files";
+/*empty pages or folders*/
+"business_app_my_disk_empty page" = "Don't have any files yet";
+"business_app_shared_with_me_empty page" = "Don't have any shared files yet";
+"business_app_shared_by_me_empty page" = "Haven't shared any files yet";
+"business_app_shared_area_empty page" = "Don't have any shared files yet";
+"business_app_folder_empty page" = "Empty Folder";
