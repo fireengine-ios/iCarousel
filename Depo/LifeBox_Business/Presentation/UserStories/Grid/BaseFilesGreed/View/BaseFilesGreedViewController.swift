@@ -93,7 +93,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesLabel.textColor = ColorConstants.textGrayColor
         noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
-        noFilesTopLabel?.text = TextConstants.folderEmptyPage
+        noFilesTopLabel?.text = TextConstants.folderEmptyText
         noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
         noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         

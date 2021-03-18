@@ -36,7 +36,7 @@ final class EmptyView: UIView, NibInit {
                 case .sharedWith:
                     return TextConstants.sharedWithMeEmptyPage
                 case .sharedInnerFolder:
-                    return TextConstants.privateSharedInnerFolderEmptyText
+                    return TextConstants.folderEmptyPage
                 case .sharedArea:
                     return TextConstants.sharedAreaEmptyPage
             }

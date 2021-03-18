@@ -143,7 +143,7 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
     }
     
     func textForNoFileTopLabel() -> String {
-        return TextConstants.folderEmptyPage
+        return TextConstants.folderEmptyText
     }
     
     func textForNoFileLbel() -> String {
