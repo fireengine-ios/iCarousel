@@ -36,6 +36,10 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         
     }
     
+    func changeBar(style: BottomActionsBarStyle) {
+        bottomActionsBar.set(style: style)
+    }
+    
     func setupBar(style: BottomActionsBarStyle = .opaque, config: EditingBarConfig) {
         self.config = config
        

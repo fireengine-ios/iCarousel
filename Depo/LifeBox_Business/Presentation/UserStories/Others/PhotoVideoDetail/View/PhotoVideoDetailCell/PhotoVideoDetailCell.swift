@@ -18,7 +18,11 @@ protocol PhotoVideoDetailCellDelegate: class {
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
     
-    @IBOutlet private weak var imageScrollView: ImageScrollView!
+    @IBOutlet private weak var imageScrollView: ImageScrollView! {
+        willSet {
+            newValue.backgroundColor = .black
+        }
+    }
     @IBOutlet private weak var activity: UIActivityIndicatorView!
     @IBOutlet private weak var placeholderImageView: UIImageView!
     @IBOutlet private weak var playerView: DetailMediaPlayerView! {
@@ -48,13 +52,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        imageScrollView.imageViewDelegate = self
-        contentView.addSubview(webView)
         
-        imageScrollView.contentInsetAdjustmentBehavior = .never
-        webView.scrollView.contentInsetAdjustmentBehavior = .never
-        
-        backgroundColor = UIColor.clear
+        setupViews()
         
         if let zoomGesture = webView.doubleTapZoomGesture {
             doubleTapWebViewGesture = zoomGesture
@@ -88,9 +87,85 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         reset()
     }
+
+    func setup(with object: Item, isFullScreen: Bool) {
+        if isNeedToUpdateWebView, object.uuid == currentItemId {
+            return
+        }
+        
+        isNeedToUpdateWebView = false
+        
+        currentItemId = object.uuid
+        fileType = object.fileType
+        placeholderImageView.isHidden = true
+        
+        switch fileType {
+            case .video, .audio:
+                backgroundColor = .clear
+                imageScrollView.backgroundColor = .black
+                playerView.isHidden = false
+                playerView.setControls(isHidden: isFullScreen)
+                imageScrollView.isHidden = true
+                tapGesture.isEnabled = true
+                
+                if let url = object.urlToFile {
+                    if !url.isExpired {
+                        delegate?.imageLoadingFinished()
+                        playerView.set(url: url)
+                    } else {
+                        delegate?.didExpireUrl()
+                    }
+                } else {
+                    delegate?.didExpireUrl()
+                }
+            
+            case .image:
+                backgroundColor = .clear
+                imageScrollView.backgroundColor = .black
+                playerView.isHidden = true
+                imageScrollView.isHidden = false
+                imageScrollView.imageView.loadImageIncludingGif(with: object)
+                imageScrollView.adjustFrameToCenter()
+                tapGesture.isEnabled = true
+            
+            default:
+                backgroundColor = .white
+                playerView.isHidden = true
+                
+                if fileType.isSupportedOpenType {
+                    webView.isHidden = false
+                    webView.navigationDelegate = self
+                    webView.clearPage()
+
+                    let loadURL: URL?
+                    if fileType.isDocument, let preview = object.metaData?.documentPreviewURL {
+                        loadURL = preview
+                    } else if let url = object.urlToFile {
+                        loadURL = url
+                    } else {
+                        loadURL = nil
+                    }
+                    
+                    if let url = loadURL, object.isOwner || !url.isExpired {
+                        isNeedToUpdateWebView = true
+                        webView.load(URLRequest(url: url))
+                    } else {
+                        delegate?.didExpireUrl()
+                    }
+                } else {
+                    setPlaceholder()
+                }
+        }
+    }
     
-    func imageViewMaxY() -> CGFloat {
-        return imageScrollView.getImageViewMaxY()
+    private func setupViews() {
+        imageScrollView.imageViewDelegate = self
+        contentView.addSubview(webView)
+        
+        imageScrollView.contentInsetAdjustmentBehavior = .never
+        webView.scrollView.contentInsetAdjustmentBehavior = .never
+        
+        backgroundColor = UIColor.clear
     }
     
     private func reset() {
@@ -119,67 +194,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         playerView.isHidden = true
     }
     
-    func setObject(object: Item) {
-        if isNeedToUpdateWebView, object.uuid == currentItemId {
-            return
-        }
-        
-        isNeedToUpdateWebView = false
-        
-        currentItemId = object.uuid
-        fileType = object.fileType
-        placeholderImageView.isHidden = true
-        
-        if fileType.isContained(in: [.video, .audio]) {
-            playerView.isHidden = false
-            imageScrollView.isHidden = true
-            tapGesture.isEnabled = true
-            if let url = object.metaData?.videoPreviewURL ?? object.urlToFile {
-                if !url.isExpired {
-                    delegate?.imageLoadingFinished()
-                    playerView.set(url: url)
-                } else {
-                    delegate?.didExpireUrl()
-                }
-            } else {
-                //TODO: show message?
-            }
-            
-        } else if fileType == .image {
-            playerView.isHidden = true
-            imageScrollView.isHidden = false
-            imageScrollView.imageView.loadImageIncludingGif(with: object)
-            imageScrollView.adjustFrameToCenter()
-            tapGesture.isEnabled = true
-            
-        } else if fileType.isSupportedOpenType {
-            playerView.isHidden = true
-            webView.isHidden = false
-            webView.navigationDelegate = self
-            webView.clearPage()
-
-            let loadURL: URL?
-            if fileType.isDocument, let preview = object.metaData?.documentPreviewURL {
-                loadURL = preview
-            } else if let url = object.urlToFile {
-                loadURL = url
-            } else {
-                loadURL = nil
-            }
-            
-            if let url = loadURL, object.isOwner || !url.isExpired {
-                isNeedToUpdateWebView = true
-                webView.load(URLRequest(url: url))
-            } else {
-                delegate?.didExpireUrl()
-            }
-        } else {
-            playerView.isHidden = true
-            setPlaceholder()
-        }
-    }
-    
     @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
+        playerView.toggleControlsVisibility()
         delegate?.tapOnCellForFullScreen()
     }
 }
@@ -226,7 +242,7 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
     }
     
     private func setPlaceholder() {
-        placeholderImageView.image = WrapperedItemUtil.privateSharePlaceholderImage(fileType: fileType)
+        placeholderImageView.image = WrapperedItemUtil.previewPlaceholderImage(fileType: fileType)
         imageScrollView.isHidden = true
         webView.isHidden = true
         placeholderImageView.isHidden = false

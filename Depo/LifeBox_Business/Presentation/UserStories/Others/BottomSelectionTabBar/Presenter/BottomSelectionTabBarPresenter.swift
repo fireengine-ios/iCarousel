@@ -130,7 +130,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             elementTypesArray.append(.share)
             bitmaskValue -= 1
         }
-
+        
         elementTypesArray.append(.info)
         
         return elementTypesArray
@@ -434,10 +434,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             return
         }
         bottomBarInteractor.currentBarcongfig = config
-        
-        DispatchQueue.main.async {
-            self.setupConfig(withConfig: config)
-        }
+        setupConfig(withConfig: config)
     }
     
     

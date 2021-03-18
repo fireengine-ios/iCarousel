@@ -13,7 +13,7 @@ final class MediaContentGradientView: UIView {
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor]
-        layer.locations = [0, 0.15, 0.85, 1]
+        layer.locations = [0, 0.12, 0.88, 1]
         layer.startPoint = CGPoint(x: 0.5, y: 0)
         layer.endPoint = CGPoint(x: 0.5, y: 1)
         
@@ -40,11 +40,17 @@ final class MediaContentGradientView: UIView {
         gradientLayer.frame = bounds
     }
     
+    func toggleVisibility() {
+        set(isHidden: !gradientLayer.isHidden, animated: true)
+    }
+    
     func set(isHidden: Bool, animated: Bool) {
-        let animationDuration = animated ? NumericConstants.animationDuration : 0
-        UIView.animate(withDuration: animationDuration) {
-            self.gradientLayer.isHidden = isHidden
-            self.layoutIfNeeded()
+        DispatchQueue.main.async {
+            let animationDuration = animated ? NumericConstants.animationDuration : 0
+            UIView.animate(withDuration: animationDuration) {
+                self.gradientLayer.isHidden = isHidden
+                self.layoutIfNeeded()
+            }
         }
     }
     

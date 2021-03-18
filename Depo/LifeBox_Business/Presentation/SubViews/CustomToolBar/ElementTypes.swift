@@ -94,6 +94,8 @@ enum ElementTypes {
             result = ElementTypes.trashState
         }
         
+        result.append(.info)
+        
         return result
     }
     

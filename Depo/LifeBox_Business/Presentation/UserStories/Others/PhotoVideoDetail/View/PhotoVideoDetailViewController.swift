@@ -101,6 +101,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -109,8 +110,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.isHidden = true
         
         navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         
         showSpinner()
     }
@@ -131,14 +130,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
         
-        // TODO: EditingBarConfig is not working
-//        editingTabBar.editingBar.barStyle = .blackOpaque
-//        editingTabBar.editingBar.clipsToBounds = true
-        //editingTabBar.editingBar.layer.borderWidth = 0
-        
         statusBarColor = .clear
-        
-        NotificationCenter.default.post(name: .reusePlayer, object: self)
         
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
@@ -158,8 +150,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         visibleNavigationBarStyle()
         statusBarColor = .clear
-        
-        NotificationCenter.default.post(name: .deinitPlayer, object: self)
         
         output.viewWillDisappear()
         backButtonForNavigationItem(title: TextConstants.backTitle)
@@ -188,7 +178,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
-        cells.first?.setObject(object: objects[selectedIndex])
+        cells.first?.setup(with: objects[selectedIndex], isFullScreen: isFullScreen)
     }
     
     func hideView() {
@@ -276,10 +266,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         return UIColor.black
     }
     
-    @objc private func applicationDidEnterBackground(_ application: UIApplication) {
-//        localPlayer?.pause()
-    }
-    
     private func updateAllItems(with items: [Item], updateCollection: Bool) {
         objects = items
         
@@ -288,15 +274,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             scrollToSelectedIndex()
             collectionView.layoutIfNeeded()
         }
-    }
-
-    func shareCurrentItem() {
-        //TODO: Bottom bar
-//        guard let shareTabIndex = output.tabIndex(type: .share),
-//              let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
-//            return
-//        }
-//        editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
     }
 }
 
@@ -333,7 +310,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         guard let url = (item.asset as? AVURLAsset)?.url else {
             return
         }
-        
+        //TODO: player
         //
     }
     
@@ -390,7 +367,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         
         if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.item == index }),
            let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell {
-            cell.setObject(object: item)
+            cell.setup(with: item, isFullScreen: isFullScreen)
         }
     }
 }
@@ -460,7 +437,11 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         
         cell.delegate = self
         let object = objects[indexPath.row]
-        cell.setObject(object: object)
+        
+        let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
+        editingTabBar.changeBar(style: barStyle)
+        
+        cell.setup(with: object, isFullScreen: isFullScreen)
         
         if indexPath.row == objects.count - 1 {
             output.willDisplayLastCell()

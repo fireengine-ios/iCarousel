@@ -123,7 +123,17 @@ final class BottomActionsBar: UIView {
     weak var delegate: BottomActionsBarDelegate?
     private lazy var animator = BottomActionsBarAnimator(barView: self)
 
-    private(set) var style: BottomActionsBarStyle = .opaque
+    private(set) var style: BottomActionsBarStyle = .opaque {
+        didSet {
+            switch style {
+                case .opaque:
+                    self.backgroundColor = .white
+                    
+                case .transparent:
+                    self.backgroundColor = .clear
+            }
+        }
+    }
     private var actionsUnderMoreButton = [BottomBarActionType]()
     
     
@@ -152,18 +162,25 @@ final class BottomActionsBar: UIView {
     
     //MARK: Public
     
+    func set(style: BottomActionsBarStyle) {
+        guard self.style != style else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.style = style
+            self.setupShadow()
+            
+            self.layoutIfNeeded()
+        }
+    }
+    
     func setup(style: BottomActionsBarStyle, elementTypes: [ElementTypes]) {
-        self.style = style
+        
         actionsUnderMoreButton = []
         
         DispatchQueue.main.async {
-            switch style {
-                case .opaque:
-                    self.backgroundColor = .white
-                    
-                case .transparent:
-                    self.backgroundColor = .clear
-            }
+            self.style = style
             
             self.setupShadow()
             self.addButtons(for: elementTypes.compactMap { BottomBarActionType.from(type: $0) })

@@ -19,6 +19,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
     }
     @IBOutlet private weak var playbackControlsView: UIView! {
         willSet {
+            newValue.isExclusiveTouch = true
             newValue.backgroundColor = .clear
         }
     }
@@ -105,6 +106,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
     
     func set(url: URL) {
         mediaPlayer.url = url
+        mediaPlayer.playFromBeginning()
     }
     
     func play() {
@@ -122,9 +124,20 @@ final class DetailMediaPlayerView: UIView, FromNib {
         mediaPlayer.url = nil
     }
     
+    func setControls(isHidden: Bool) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.playbackControlsView.isHidden = isHidden
+            self.layoutIfNeeded()
+        }
+    }
+    
+    func toggleControlsVisibility() {
+        setControls(isHidden: !playbackControlsView.isHidden)
+    }
+    
     //MARK: Private
     
-    @IBAction func onPlayPause(_ sender: Any) {
+    @IBAction private func onPlayPause(_ sender: Any) {
         switch mediaPlayer.playbackState {
             case .playing:
                 pause()
@@ -172,7 +185,7 @@ extension DetailMediaPlayerView: PlayerDelegate {
     }
     
     func player(_ player: Player, didFailWithError error: Error?) {
-        
+        progressSlider.isUserInteractionEnabled = false
     }
 }
 
