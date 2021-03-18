@@ -28,14 +28,14 @@ final class FAQViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTitle(withString: TextConstants.faqTitle)
         setWebView()
         loadFAQ()
-        setNavigationBarStyle(.hidden)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNavigationTitle(title: TextConstants.faqTitle, isLargeTitle: false)
+        setNavigationBarStyle(.white)
         
         if !Device.isIpad {
             defaultNavBarStyle()
