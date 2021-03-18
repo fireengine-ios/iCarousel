@@ -2027,3 +2027,8 @@
 "business_app_settings_contactus" = "Contact Us";
 "business_app_settings_deletedfiles" = "Trash Bin";
 "business_app_settings_logout" = "Log out";
+
+
+"business_app_document_no_preview" = "This file type is not supported for preview";
+"business_app_photo_no_preview" = "There is no preview for this file. Please try again later";
+"business_app_music_no_preview" = "There is no preview for this file";

@@ -172,9 +172,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
     }
     
-    func createNewUrl() {
-        guard let index = currentItemIndex,
-              let item = allItems[safe: index] else {
+    func createNewUrl(at index: Int) {
+        guard let item = allItems[safe: index] else {
             return
         }
         
@@ -182,7 +181,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             switch result {
             case .success(let object):
                 if let url = object.url {
-                    item.tmpDownloadUrl = url
+                    item.urlToFile = url
                     self?.updateItem(item)
                     self?.output.updateItem(item)
                 }

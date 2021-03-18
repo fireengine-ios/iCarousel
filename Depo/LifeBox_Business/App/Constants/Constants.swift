@@ -1405,3 +1405,11 @@ extension TextConstants {
     static let settingsPageDeletedFiles = NSLocalizedString("business_app_settings_deletedfiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+
+//MARK: - Detail view screen
+extension TextConstants {
+    static let documentNoPreview = NSLocalizedString("business_app_document_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoNoPreview = NSLocalizedString("business_app_photo_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let audioNoPreview = NSLocalizedString("business_app_music_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

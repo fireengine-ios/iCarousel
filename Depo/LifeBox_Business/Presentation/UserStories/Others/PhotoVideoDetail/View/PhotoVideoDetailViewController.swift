@@ -23,7 +23,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var bottomBlackView: UIView!
     @IBOutlet private weak var swipeUpContainerView: UIView!
     
-    @IBOutlet weak var gradientView: MediaContentGradientView!
+    @IBOutlet weak var gradientView: MediaContentGradientView! {
+        willSet {
+            newValue.isUserInteractionEnabled = false
+        }
+    }
     
     var status: ItemStatus = .active
     var hideTreeDotButton = false
@@ -178,7 +182,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
-        cells.first?.setup(with: objects[selectedIndex], isFullScreen: isFullScreen)
+        cells.first?.setup(with: objects[selectedIndex], index: selectedIndex, isFullScreen: isFullScreen)
     }
     
     func hideView() {
@@ -261,6 +265,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         collectionView.reloadData()
     }
+    
+    
     
     override func getBackgroundColor() -> UIColor {
         return UIColor.black
@@ -365,9 +371,9 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     private func update(item: Item, at index: Int) {
         objects[index] = item
         
-        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.item == index }),
+        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.row == index }),
            let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell {
-            cell.setup(with: item, isFullScreen: isFullScreen)
+            cell.setup(with: item, index: index, isFullScreen: isFullScreen)
         }
     }
 }
@@ -441,7 +447,9 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
         editingTabBar.changeBar(style: barStyle)
         
-        cell.setup(with: object, isFullScreen: isFullScreen)
+        gradientView.set(isHidden: isFullScreen || (object.fileType.isDocument || !object.fileType.isSupportedOpenType), animated: false)
+        
+        cell.setup(with: object, index: indexPath.row, isFullScreen: isFullScreen)
         
         if indexPath.row == objects.count - 1 {
             output.willDisplayLastCell()
@@ -464,74 +472,16 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
-    
-    func preparedMediaItem(completion: @escaping ValueHandler<AVURLAsset?>) {
-       
-    }
-    
-    func imageLoadingFinished() {
+    func loadingFinished() {
         hideSpinner()
     }
     
     func tapOnCellForFullScreen() {
         isFullScreen.toggle()
     }
-    
-//    private func prepareToPlayVideo(file: Item) {
-//        let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
-//
-//        if !waitVideoPreviewURL, preUrl == nil || preUrl?.isExpired == true {
-//            waitVideoPreviewURL = true
-//            output.createNewUrl()
-//            return
-//        }
-//
-//        guard let url = preUrl else {
-//            hideSpinnerIncludeNavigationBar()
-//            if !file.isOwner {
-//                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePreviewNotReady)
-//            }
-//            return
-//        }
-//
-//        switch file.patchToPreview {
-//        case let .localMediaContent(local):
-//            guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-//                return
-//            }
-//            let option = PHVideoRequestOptions()
-//
-//            output.startCreatingAVAsset()
-//            debugLog("about to play local video item")
-//            DispatchQueue.global(qos: .default).async { [weak self] in
-//                PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
-//                    debugPrint("!!!! after local request")
-//                    DispatchQueue.main.async {
-//                        self?.output.stopCreatingAVAsset()
-//                        guard let asset = asset else {
-//                            return
-//                        }
-//                        let playerItem = AVPlayerItem(asset: asset)
-//                        debugLog("playerItem created \(playerItem.asset.isPlayable)")
-//                        self?.play(item: playerItem)
-//                    }
-//                }
-//            }
-//
-//        case .remoteUrl(_):
-//            debugLog("about to play remote video item")
-//            DispatchQueue.global(qos: .default).async { [weak self] in
-//                let playerItem = AVPlayerItem(url: url)
-//                debugLog("playerItem created \(playerItem.asset.isPlayable)")
-//                DispatchQueue.main.async {
-//                    self?.play(item: playerItem)
-//                }
-//            }
-//        }
-//    }
-    
-    func didExpireUrl() {
-        output.createNewUrl()
+   
+    func didExpireUrl(at index: Int) {
+        output.createNewUrl(at: index)
     }
 }
 

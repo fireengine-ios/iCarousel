@@ -155,7 +155,6 @@ final class BottomActionsBar: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         updateShadowLayer()
     }
     
@@ -187,6 +186,10 @@ final class BottomActionsBar: UIView {
             
             self.layoutIfNeeded()
         }
+    }
+    
+    func updateLayout(animated: Bool) {
+        animator.updateLayout(animated: animated)
     }
     
     func show(onSourceView: UIView, animated: Bool) {

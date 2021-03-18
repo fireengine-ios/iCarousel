@@ -13,7 +13,7 @@ import SwiftyGif
 protocol LoadingImageViewDelegate: class {
     func onImageLoaded(image: UIImage?)
     func onLoadingImageCanceled()
-    func loadingFinished()
+    func loadingFinished(hasData: Bool)
 }
 extension LoadingImageViewDelegate {
     func onImageLoaded(image: UIImage?) {}
@@ -239,7 +239,7 @@ final class LoadingImageView: UIImageView {
                 return
             }
             self.activity.stopAnimating()
-            self.loadingImageViewDelegate?.loadingFinished()
+            self.loadingImageViewDelegate?.loadingFinished(hasData: image != nil)
             
             if animated {
                 self.changeImageAnimatedly(image: image)

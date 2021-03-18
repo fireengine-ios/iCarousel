@@ -569,11 +569,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var localFileUrl: URL?
     
-    var tmpDownloadUrl: URL?
-    
-    var urlToFile: URL? {
-        return tmpDownloadUrl
-    }
+    var urlToFile: URL?
     
     var mimeType: String?
     
@@ -642,19 +638,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return Date()
     }
     
-    var hasPreviewUrl: Bool {
-        //based on func getImageData(item: Item, completeData: @escaping RemoteData) -> URL?
-        if case let PathForItem.remoteUrl(url) = patchToPreview, url != nil {
-            return true
-        }
-        
-        if case PathForItem.localMediaContent = patchToPreview {
-            return true
-        }
-        
-        return metaData?.largeUrl != nil
-    }
-    
     @available(*, deprecated: 1.0, message: "Use convenience init(info: AssetInfo) instead")
     convenience init(asset: PHAsset) {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
@@ -674,7 +657,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         let tmp = LocalMediaContent(asset: baseModel.asset,
                                      urlToFile: baseModel.urlToFile)
         patchToPreview = .localMediaContent(tmp)
-        tmpDownloadUrl = baseModel.urlToFile
+        urlToFile = baseModel.urlToFile
         duration = WrapData.getDuration(duration: baseModel.asset.duration)
         durationValue = baseModel.asset.duration
             
@@ -731,7 +714,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     init (remote: SearchItemResponse, previewSize: PreviewSize = .large) {
         metaData = remote.metadata
         favorites = remote.metadata?.favourite ?? false
-        tmpDownloadUrl = remote.tempDownloadURL
+        urlToFile = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
         fileSize = remote.bytes ?? 0
         status = ItemStatus(string: remote.status)
@@ -813,7 +796,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         isFolder = searchResponse[SearchJsonKey.folder].bool
 //        uploaderDeviceType = searchResponse[SearchJsonKey.uploaderDeviceType].string
         parent = searchResponse[SearchJsonKey.parent].string
-        tmpDownloadUrl = searchResponse[SearchJsonKey.tempDownloadURL].url
+        urlToFile = searchResponse[SearchJsonKey.tempDownloadURL].url
         
 //        subordinates = searchResponse[SearchJsonKey.subordinates].array
         albums = searchResponse[SearchJsonKey.album].array?.flatMap { $0.string }
@@ -862,7 +845,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = false
         patchToPreview = .remoteUrl(nil)
         status = .unknown
-        tmpDownloadUrl = nil
+        urlToFile = nil
 
         let creationDate = Date()
         super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: isLocal)
@@ -878,7 +861,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = false
         patchToPreview = .remoteUrl(nil)
         status = .unknown
-        tmpDownloadUrl = nil
+        urlToFile = nil
 
         let creationDate = Date()
         super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .video, syncStatus: .notSynced, isLocalItem: isLocal)
@@ -898,7 +881,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         favorites = false
         patchToPreview = .remoteUrl(nil)
         status = .unknown
-        tmpDownloadUrl = importedDocumentURL
+        urlToFile = importedDocumentURL
         localFileUrl = importedDocumentURL
         
         let fileName = importedDocumentURL.lastPathComponent
@@ -957,7 +940,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         creationDate = item.creationDate
         lastModifiDate = item.lastModifiDate
         md5 = item.md5
-        tmpDownloadUrl = item.tmpDownloadUrl
+        urlToFile = item.urlToFile
         status = item.status
         metaData?.copy(metaData: item.metaData)
     }
@@ -1014,7 +997,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     func hasExpiredUrl() -> Bool {
-        let urlsToCheck = [tmpDownloadUrl, metaData?.videoPreviewURL]
+        let urlsToCheck = [urlToFile, metaData?.videoPreviewURL]
         for url in urlsToCheck {
             if let url = url, url.isExpired {
                 return true
@@ -1025,7 +1008,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     func hasExpiredPreviewUrl() -> Bool {
-        let urlsToCheck = [tmpDownloadUrl, metaData?.largeUrl, metaData?.mediumUrl, metaData?.smalURl]
+        let urlsToCheck = [urlToFile, metaData?.largeUrl, metaData?.mediumUrl, metaData?.smalURl]
         for url in urlsToCheck {
             if let url = url, url.isExpired {
                 return true
@@ -1066,7 +1049,7 @@ extension WrapData {
             md5 == wrapData.md5 &&
             metaDate == wrapData.metaDate &&
             lastModifiDate == wrapData.lastModifiDate &&
-            tmpDownloadUrl?.byTrimmingQuery == wrapData.tmpDownloadUrl?.byTrimmingQuery &&
+            urlToFile?.byTrimmingQuery == wrapData.urlToFile?.byTrimmingQuery &&
             status == wrapData.status &&
             metaData == wrapData.metaData &&
             isShared == wrapData.isShared &&

@@ -18,13 +18,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGW-xm-Jy7" customClass="ImageScrollView" customModule="lifeBox_Business" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
+                    </scrollView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4w-b9-iqY" customClass="DetailMediaPlayerView" customModule="lifeBox_Business" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGW-xm-Jy7" customClass="ImageScrollView" customModule="lifeBox_Business" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
-                    </scrollView>
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="JVY-Sc-8sq">
                         <rect key="frame" x="124.5" y="115" width="20" height="20"/>
                     </activityIndicatorView>

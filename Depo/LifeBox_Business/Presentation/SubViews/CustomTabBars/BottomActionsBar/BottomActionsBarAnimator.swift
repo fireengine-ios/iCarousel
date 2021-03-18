@@ -34,6 +34,17 @@ final class BottomActionsBarAnimator {
         addShowAnimationBlock(duration: animationDuration)
     }
     
+    func updateLayout(animated: Bool) {
+        guard let view = barView, let sourceView = view.superview else {
+            return
+        }
+        
+        let sourceViewSize = sourceView.frame.size
+        
+        view.frame = CGRect(x: view.frame.origin.x, y: view.frame.origin.y,
+                            width: sourceViewSize.width, height: view.frame.size.height)
+    }
+    
     
     // MARK: - Private
     

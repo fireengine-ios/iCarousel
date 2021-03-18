@@ -179,7 +179,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     private func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
-            let filesWithoutUrl = items.filter { $0.tmpDownloadUrl == nil }
+            let filesWithoutUrl = items.filter { $0.urlToFile == nil }
             fileService.createDownloadUrls(for: filesWithoutUrl) { [weak self] in
                 guard let self = self else {
                     return

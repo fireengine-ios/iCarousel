@@ -9,6 +9,13 @@
 import UIKit
 import Player
 
+
+protocol DetailMediaPlayerViewDelegate: class {
+    func playerIsReady()
+    func playerIsFailed()
+}
+
+
 final class DetailMediaPlayerView: UIView, FromNib {
 
     @IBOutlet weak var playerContainerView: UIView! {
@@ -19,8 +26,9 @@ final class DetailMediaPlayerView: UIView, FromNib {
     }
     @IBOutlet private weak var playbackControlsView: UIView! {
         willSet {
+            newValue.layer.cornerRadius = 5
             newValue.isExclusiveTouch = true
-            newValue.backgroundColor = .clear
+            newValue.backgroundColor = .black.withAlphaComponent(0.4)
         }
     }
     
@@ -57,6 +65,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
             newValue.tintColor = .white
             newValue.thumbTintColor = .white
             newValue.isUserInteractionEnabled = false
+            newValue.setThumbImage(UIImage(named: "playerThumb"), for: .normal)
             newValue.addTarget(self, action: #selector(seekWithSliderRatio), for: .valueChanged)
         }
     }
@@ -72,6 +81,8 @@ final class DetailMediaPlayerView: UIView, FromNib {
 
         return player
     }()
+    
+    weak var delegate: DetailMediaPlayerViewDelegate?
     
     
     //MARK: Override
@@ -105,6 +116,10 @@ final class DetailMediaPlayerView: UIView, FromNib {
     }
     
     func set(url: URL) {
+        timeAfter.text = "00:00"
+        timeBefore.text = "00:00"
+        progressSlider.value = 0
+        
         mediaPlayer.url = url
         mediaPlayer.playFromBeginning()
     }
@@ -185,6 +200,7 @@ extension DetailMediaPlayerView: PlayerDelegate {
     }
     
     func player(_ player: Player, didFailWithError error: Error?) {
+        delegate?.playerIsFailed()
         progressSlider.isUserInteractionEnabled = false
     }
 }
@@ -205,7 +221,7 @@ extension DetailMediaPlayerView: PlayerPlaybackDelegate {
     }
     
     func playerPlaybackWillStartFromBeginning(_ player: Player) {
-        
+        delegate?.playerIsReady()
     }
     
     func playerPlaybackDidEnd(_ player: Player) {

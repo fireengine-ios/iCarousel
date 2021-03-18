@@ -25,6 +25,12 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         setupDelegate()
         output.viewIsReady()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        bottomActionsBar.updateLayout(animated: false)
+    }
 
     private func setupDelegate() {
         bottomActionsBar.delegate = self

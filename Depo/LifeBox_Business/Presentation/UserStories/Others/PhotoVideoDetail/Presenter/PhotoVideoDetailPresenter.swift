@@ -299,8 +299,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.updateItem(item)
     }
 
-    func createNewUrl() {
-        interactor.createNewUrl()
+    func createNewUrl(at index: Int) {
+        interactor.createNewUrl(at: index)
     }
 }
 

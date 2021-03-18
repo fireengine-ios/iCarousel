@@ -383,38 +383,6 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
     }
     
-//    private func showAudioPlayer(with item: WrapData) {
-//        if item.urlToFile == nil || item.urlToFile?.isExpired == true {
-//            delegate?.needToShowSpinner()
-//            fileInfoManager.createDownloadUrl(item: item) { [weak self] newUrl in
-//                self?.delegate?.needToHideSpinner()
-//
-//                guard let url = newUrl else {
-//                    return
-//                }
-//
-//                item.tmpDownloadUrl = url
-//                self?.mediaPlayer.play(list: [item], startAt: 0)
-//            }
-//        } else {
-//            mediaPlayer.play(list: [item], startAt: 0)
-//        }
-//    }
-    
-    private func checkIfCanShowDetail(for item: WrapData) -> Bool {
-        guard item.isFolder == false else {
-            return true
-        }
-        
-        
-        if item.fileType.isContained(in: [.image, .video]), !item.hasPreviewUrl {
-            SnackbarManager.shared.show(type: SnackbarType.action, message: TextConstants.privateSharePreviewNotReady)
-            return false
-        }
-
-        return true
-    }
-    
     private func openFolder(with folder: PrivateSharedFolderItem) {
         DispatchQueue.main.async {
             let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folder: folder)
@@ -453,9 +421,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             
         } else {
             cell.setSelection(isSelectionActive: false, isSelected: false)
-            if checkIfCanShowDetail(for: item) {
-                showDetailView(for: item)
-            }
+            showDetailView(for: item)
         }
     }
 }
