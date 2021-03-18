@@ -71,11 +71,13 @@ extension UIViewController {
         navigationItem.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
     }
     
-    func setNavigationTitle(title: String, isLargeTitle: Bool) {
-        navigationItem.title = title
+    func setNavigationTitle(title: String) {
+//        navigationItem.
+//        guard self.title != title else {
+//            return
+//        }
+        self.title = title
         navBar?.titleTextAttributes = titleAttributes
-
-        changeLargeTitle(prefersLargeTitles: isLargeTitle)
     }
     
     func setNavigationRightBarButton(title: String, target: AnyObject, action: Selector) {
@@ -100,13 +102,17 @@ extension UIViewController {
     }
     
     func changeSearchBar(controller: UISearchController?) {
-        if navigationItem.searchController == nil {
+        if let controller = controller, navigationItem.searchController == nil {
+            navigationItem.searchController = controller
+        } else if controller == nil {
             navigationItem.searchController = controller
         }
     }
     
     func changeLargeTitle(prefersLargeTitles: Bool) {
+//        navigationItem.largeTitleDisplayMode = prefersLargeTitles ? .always : .never
         navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
+//        navigationController?.navigationItem.largeTitleDisplayMode = prefersLargeTitles ? .always : .never
         if prefersLargeTitles {
             navigationController?.navigationBar.largeTitleTextAttributes = largeTitleAttributes
         }
@@ -147,7 +153,7 @@ extension UIViewController {
         } else {
             navigationItem.titleView = nil
             navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-            setNavigationTitle(title: title, isLargeTitle: false)
+            setNavigationTitle(title: title)
         }
     }
 }

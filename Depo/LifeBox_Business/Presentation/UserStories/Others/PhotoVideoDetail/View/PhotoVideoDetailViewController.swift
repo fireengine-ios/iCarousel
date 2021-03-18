@@ -103,6 +103,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        changeLargeTitle(prefersLargeTitles: false)
+        
         collectionView.contentInsetAdjustmentBehavior = .never
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -243,7 +245,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
 
     private func setupTitle() {
-        setNavigationTitle(title: selectedItem?.name ?? "", isLargeTitle: false)
+        setNavigationTitle(title: selectedItem?.name ?? "")
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
@@ -307,7 +309,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func showValidateNameSuccess(name: String) {
-        setNavigationTitle(title: name, isLargeTitle: false)
+        setNavigationTitle(title: name)
     }
     
     func show(name: String) { }

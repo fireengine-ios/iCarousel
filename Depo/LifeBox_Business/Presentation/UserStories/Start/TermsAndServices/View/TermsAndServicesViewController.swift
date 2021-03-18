@@ -117,8 +117,9 @@ final class TermsAndServicesViewController: ViewController {
     
     private func setupNavigationControler() {
         setNavigationBarStyle(.white)
+        changeLargeTitle(prefersLargeTitles: false)
         if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.termsAndUsesTitle, isLargeTitle: false)
+            setNavigationTitle(title: TextConstants.termsAndUsesTitle)
         }
     }
     

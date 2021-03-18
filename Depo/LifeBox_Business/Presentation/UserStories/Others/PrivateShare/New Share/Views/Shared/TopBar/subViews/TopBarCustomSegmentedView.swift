@@ -27,7 +27,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     
     private var highlightView: UIView = {
        let view = UIView()
-        view.backgroundColor = ColorConstants.confirmationPopupTitle
+        view.backgroundColor = ColorConstants.multifileCellSubtitleText// this one by design ColorConstants.confirmationPopupTitle
         view.isHidden = true
         view.isUserInteractionEnabled = false
         return view
@@ -55,9 +55,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
             buttons.append(button)
             stackView.addArrangedSubview(button)
         }
-        
-       
-        
+
         setupHighlightView()
         updateSelection()
     }

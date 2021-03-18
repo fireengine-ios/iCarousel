@@ -15,6 +15,23 @@ indirect enum PrivateShareType: Equatable {
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
     case sharedArea
     
+    var title: String {
+        let title: String
+        switch self {
+            case .myDisk:
+                title = TextConstants.tabBarItemMyDisk
+            case .byMe:
+                title = TextConstants.privateShareSharedByMeTab
+            case .withMe:
+                title = TextConstants.privateShareSharedWithMeTab
+            case .innerFolder(_, let folder):
+                title = folder.name
+            case .sharedArea:
+                title = TextConstants.tabBarItemSharedArea
+        }
+        return title
+    }
+    
     var rootType: PrivateShareType {
         return veryRootType(for: self)
     }
@@ -51,6 +68,17 @@ indirect enum PrivateShareType: Equatable {
                 
             case .sharedArea:
                 return true
+        }
+    }
+    
+    //with this flag we check if we need to show search bar or not
+    var isSearchAllowed: Bool {
+        switch self {
+            case .myDisk, .sharedArea:
+                return true
+                
+            case .byMe, .withMe, .innerFolder:
+                return false
         }
     }
     

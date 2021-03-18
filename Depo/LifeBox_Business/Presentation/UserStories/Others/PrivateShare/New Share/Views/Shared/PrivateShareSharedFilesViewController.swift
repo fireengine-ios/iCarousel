@@ -8,26 +8,15 @@
 
 import UIKit
 
+protocol PrivateShareSharedFilesViewControllerOffsetChangeDelegate: class {
+    func offsettChanged(newOffSet: CGFloat)
+}
+
 final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildTopBarSupportedControllerProtocol, NibInit {
     
     static func with(shareType: PrivateShareType) -> PrivateShareSharedFilesViewController {
         let controller = PrivateShareSharedFilesViewController.initFromNib()
-        let title: String
-        switch shareType {
-            case .myDisk:
-                controller.isSearchEnabled = true
-                title = TextConstants.tabBarItemMyDisk
-            case .byMe:
-                title = TextConstants.privateShareSharedByMeTab
-            case .withMe:
-                title = TextConstants.privateShareSharedWithMeTab
-            case .innerFolder(_, let folder):
-                title = folder.name
-            case .sharedArea:
-                title = TextConstants.tabBarItemSharedArea
-                controller.isSearchEnabled = true
-        }
-        controller.title = title
+        controller.title = shareType.title
         controller.shareType = shareType
         controller.needToShowTabBar = true
         return controller
@@ -64,14 +53,14 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return sortingBar
     }()
     
-    private var isSearchEnabled = false
-    
     private var collectionTopYInset: CGFloat = 0
+    
+    weak var offsetChangedDelegate: PrivateShareSharedFilesViewControllerOffsetChangeDelegate?
     
     override var isEditing: Bool {
         willSet {
             changeNavbarLargeTitle(!newValue)
-            if isSearchEnabled {
+            if shareType.isSearchAllowed {
                 setNavSearchConntroller(newValue ? nil : searchController)
             }
         }
@@ -113,7 +102,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewWillAppear(animated)
         
         setupNavBar()
-        
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
         
@@ -123,8 +111,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewDidAppear(animated)
         
         let isSelecting = collectionManager.isSelecting
-        updateBars(isSelecting: isSelecting)
-         
         
         if isSelecting {
             let selectedItems = collectionManager.selectedItems()
@@ -136,7 +122,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        setNavSearchConntroller(nil)
+//        setNavSearchConntroller(nil)
     }
     
     override func removeFromParentViewController() {
@@ -150,15 +136,19 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Private
     
     private func setupBars() {
+        if case .innerFolder(_, _) = self.shareType {
+            navBarManager.setupLargetitle(isLarge: false)
+        } else {
+            navBarManager.setupLargetitle(isLarge: true)
+        }
         setDefaultTabBarState()
         setupCollectionViewBars()
         bottomBarManager.setup()
     }
     
     private func setupNavBar() {
-        setNavSearchConntroller(nil)
-        setTitle(title ?? "", true)
-        setupNavigationBar(editingMode: false)
+//        setNavSearchConntroller(nil)
+        setupNavigationBar(editingMode: collectionManager.isSelecting)
     }
     
     private func setupPlusButton() {
@@ -218,12 +208,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func handleOffsetChange(offsetY: CGFloat) {
-//        guard !isEditing else {
-//            composedScrollableTopBarManager.titleSubView?.titleLabel.alpha = 1
-//            return
-//        }
-//        composedScrollableTopBarManager.adaptOffset(offset: offsetY)
-//        navigationController?.navigationBar.items?.first?.titleView?.alpha = 1 - (composedScrollableTopBarManager.titleSubView?.titleLabel.alpha ?? 0)
+        offsetChangedDelegate?.offsettChanged(newOffSet: offsetY + collectionTopYInset)
     }
     
     private func trackScreen() {
@@ -250,8 +235,8 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
-        updateBars(isSelecting: true)
         isEditing = true
+        updateBars(isSelecting: true)
     }
     
     func didEndSelection() {
@@ -272,12 +257,11 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
-        if isSearchEnabled {
+        if shareType.isSearchAllowed {
             setNavSearchConntroller(searchController)
         }
         setupPlusButton()
         handleOffsetChange(offsetY: collectionView.contentOffset.y)
-//        setupNavigationBar(editingMode: isEditing)
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -300,12 +284,12 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     private func show(selectedItemsCount: Int) {
         DispatchQueue.main.async {
-            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)", false)
+            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)", isSelectionMode: true)
         }
     }
     
     private func updateBars(isSelecting: Bool) {
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.setupNavigationBar(editingMode: isSelecting)
             
             self.needToShowTabBar = !isSelecting
@@ -336,16 +320,11 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             if editingMode, isSelectionAllowed {
                 self.navBarManager.setSelectionMode()
             } else {
-                
-                let isTabBarItem = (self.parent as? SegmentedController)?.isTabBarItem == true
-                
-                let title = isTabBarItem ? "" : self.title ?? ""
-
                 if case .innerFolder(_, _) = self.shareType {
-                    //no title, no segment
-                    self.navBarManager.setNestedMode(title: title)
+                    self.navBarManager.setNestedMode(title: self.shareType.title)
                 } else {
-                    self.navBarManager.setRootMode(title: title)
+                    self.navBarManager.setupLargetitle(isLarge: true)///????
+                    self.navBarManager.setRootMode(title: self.shareType.title)
                 }
             }
             self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
