@@ -10,13 +10,24 @@ import UIKit
 
 final class ContactUsViewController: BaseViewController, NibInit {
     
+    //MARK: - Private properties
+    
+    private lazy var textViewCounterLabel: UILabel = {
+        let label = UILabel()
+        label.text = "500"
+        label.font = UIFont.GTAmericaStandardRegularFont(size: 12)
+        label.textColor = ColorConstants.Text.textFieldPlaceholder
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     //MARK: - @IBOutlets
     
     @IBOutlet weak private var descriptionLabel: UILabel!
     @IBOutlet weak private var subjectContainerView: UIView!
     @IBOutlet weak private var subjectLabel: UILabel!
     @IBOutlet weak private var subjectButton: UIButton!
-    @IBOutlet weak private var textField: UITextField!
+    @IBOutlet weak private var textView: UITextView!
     @IBOutlet weak private var sendButton: UIButton!
     
     //MARK: - Lifecycle
@@ -61,11 +72,13 @@ final class ContactUsViewController: BaseViewController, NibInit {
     }
     
     private func setTextField() {
-        textField.layer.cornerRadius = 5
-        textField.layer.borderWidth = 1
-        textField.layer.borderColor = ColorConstants.a2FABorder.cgColor
+        textView.layer.cornerRadius = 5
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = ColorConstants.a2FABorder.cgColor
         
-        textField.placeholder = TextConstants.contactUsMessageBoxName
+        textView.addSubview(textViewCounterLabel)
+        textViewCounterLabel.rightAnchor.constraint(equalTo: textView.rightAnchor, constant: -10).activate()
+        textViewCounterLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 5).activate()
     }
     
     private func setSendButton() {

@@ -17,7 +17,7 @@
                 <outlet property="subjectButton" destination="pJ8-v8-cFi" id="RoU-v0-h9g"/>
                 <outlet property="subjectContainerView" destination="q06-FI-X9Q" id="XJ4-Jf-Nzr"/>
                 <outlet property="subjectLabel" destination="DWY-2u-zOT" id="wp4-bN-fS8"/>
-                <outlet property="textField" destination="rUm-5l-2Ob" id="lTM-A0-38N"/>
+                <outlet property="textView" destination="nLe-pV-cYL" id="bgM-cc-Iy9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="olG-sX-klo"/>
             </connections>
         </placeholder>
@@ -74,11 +74,6 @@
                         <constraint firstItem="DWY-2u-zOT" firstAttribute="leading" secondItem="q06-FI-X9Q" secondAttribute="leading" constant="20" id="yky-Wv-8Yu"/>
                     </constraints>
                 </view>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Placeholder text" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rUm-5l-2Ob">
-                    <rect key="frame" x="20" y="158" width="335" height="209"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O5M-Ln-gJK">
                     <rect key="frame" x="20" y="603" width="335" height="44"/>
                     <constraints>
@@ -90,22 +85,32 @@
                         <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="Tej-nl-M1e"/>
                     </connections>
                 </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nLe-pV-cYL">
+                    <rect key="frame" x="20" y="158" width="335" height="209"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="rUm-5l-2Ob" firstAttribute="top" secondItem="q06-FI-X9Q" secondAttribute="bottom" constant="10" id="3KC-5T-aon"/>
                 <constraint firstItem="WnP-L2-Zf2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="IP6-nk-UjF"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="rUm-5l-2Ob" secondAttribute="bottom" constant="300" id="Ib5-sP-yd4"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="q06-FI-X9Q" secondAttribute="trailing" constant="20" id="J6p-Rq-T0N"/>
                 <constraint firstItem="q06-FI-X9Q" firstAttribute="top" secondItem="WnP-L2-Zf2" secondAttribute="bottom" constant="30" id="OmU-zN-b7V"/>
                 <constraint firstItem="O5M-Ln-gJK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Yle-yQ-nf8"/>
+                <constraint firstItem="O5M-Ln-gJK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-64" id="Zlj-hm-JQa"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WnP-L2-Zf2" secondAttribute="trailing" constant="40" id="bUF-Ju-hzt"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="nLe-pV-cYL" secondAttribute="bottom" constant="300" id="cwz-p1-6eR"/>
+                <constraint firstItem="O5M-Ln-gJK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-64" id="dPi-a7-dXE"/>
+                <constraint firstItem="O5M-Ln-gJK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-64" id="gNK-id-C10"/>
                 <constraint firstItem="q06-FI-X9Q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="hhh-bn-qpa"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="O5M-Ln-gJK" secondAttribute="bottom" constant="20" id="jcz-tC-zzh"/>
-                <constraint firstItem="rUm-5l-2Ob" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="kT0-1H-9BS"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nLe-pV-cYL" secondAttribute="trailing" constant="20" id="lSg-bE-26A"/>
                 <constraint firstItem="WnP-L2-Zf2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="oz0-tg-JpV"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rUm-5l-2Ob" secondAttribute="trailing" constant="20" id="skX-z5-CHP"/>
+                <constraint firstItem="nLe-pV-cYL" firstAttribute="top" secondItem="q06-FI-X9Q" secondAttribute="bottom" constant="10" id="y5d-iJ-Jtv"/>
+                <constraint firstItem="nLe-pV-cYL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="ySA-pg-FEb"/>
             </constraints>
             <point key="canvasLocation" x="-159.19999999999999" y="75.112443778110944"/>
         </view>
@@ -115,6 +120,9 @@
         <namedColor name="labelTitle">
             <color red="0.25098039215686274" green="0.32156862745098042" blue="0.38039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
