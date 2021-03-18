@@ -57,8 +57,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return sortingBar
     }()
     
-    lazy private var topBarCustomSegmentedBar: TopBarCustomSegmentedView = TopBarCustomSegmentedView.initFromNib()
-    
     private var collectionTopYInset: CGFloat = 0
     
     override var isEditing: Bool {

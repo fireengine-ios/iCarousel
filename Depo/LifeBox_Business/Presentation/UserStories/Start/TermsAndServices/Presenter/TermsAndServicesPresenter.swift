@@ -23,8 +23,8 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         if interactor.cameFromLogin {
             view.hideBackButton()
         }
-        startAsyncOperationDisableScreen()
-        interactor.checkEtkAndGlobalPermissions()
+        
+        interactor.loadTermsAndUses()
     }
     
     func startUsing() {
@@ -101,30 +101,5 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     override func outputView() -> Waiting? {
         return view
-    }
-    
-    func setupEtk(isShowEtk: Bool) {
-        if isShowEtk {
-            view.showEtk()
-        }
-        interactor.loadTermsAndUses()
-    }
-    
-    func setupGlobalPerm(isShowGlobalPerm: Bool) {
-        if isShowGlobalPerm {
-//            TODO: add logic with UI
-//            view.showGlobalPermission()
-        }
-        interactor.loadTermsAndUses()
-    }
-    
-    func setupEtkAndGlobalPermissions(isShowEtk: Bool, isShowGlobalPerm: Bool) {
-        if isShowEtk {
-            view.showEtk()
-        }
-        if isShowGlobalPerm {
-            view.showGlobalPermissions()
-        }
-        interactor.loadTermsAndUses()
     }
 }

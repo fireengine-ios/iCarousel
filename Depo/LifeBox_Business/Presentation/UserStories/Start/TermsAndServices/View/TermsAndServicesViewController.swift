@@ -9,8 +9,8 @@
 import UIKit
 import WebKit
 
-class TermsAndServicesViewController: ViewController {
-
+final class TermsAndServicesViewController: ViewController {
+    
     var output: TermsAndServicesViewOutput!
     
     @IBOutlet private weak var contenViewHeightConstraint: NSLayoutConstraint!
@@ -35,7 +35,17 @@ class TermsAndServicesViewController: ViewController {
         }
     }
     
-    @IBOutlet private weak var acceptButton: BlueButtonWithWhiteText!
+    @IBOutlet private weak var acceptButton: UIButton! {
+        willSet {
+            newValue.layer.cornerRadius = 5
+            newValue.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
+            newValue.backgroundColor = UIColor(named: "loginButtonBackground")
+            newValue.isOpaque = true
+        }
+    }
+    
     @IBOutlet private weak var checkboxesStack: UIStackView! {
         willSet {
             newValue.spacing = 10 //Design
@@ -52,8 +62,8 @@ class TermsAndServicesViewController: ViewController {
     
     @IBOutlet private weak var privacyPolicyView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 6
-            newValue.backgroundColor =  UIColor.lrTealishTwo.withAlphaComponent(0.05)
+            newValue.layer.cornerRadius = 5
+            newValue.backgroundColor = ColorConstants.textViewBackground
         }
     }
     
@@ -62,9 +72,8 @@ class TermsAndServicesViewController: ViewController {
             newValue.delegate = self
             newValue.backgroundColor = .clear
             newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+                NSAttributedStringKey.foregroundColor.rawValue: ColorConstants.Text.labelTitle,
+                NSAttributedStringKey.font.rawValue: UIFont.GTAmericaStandardMediumFont(size: 12)
             ]
         }
     }
@@ -74,27 +83,17 @@ class TermsAndServicesViewController: ViewController {
     private var globalDataPermissionTermsCheckboxView: TermsCheckboxTextView?
     
     //MARK: - Life cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configureUI()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        setNavigationBarStyle(.hidden)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.termsAndUsesTitle, isLargeTitle: false)
-        }
-
-        contenViewHeightConstraint.constant = Device.winSize.height * 0.5
         
-        configureUI()
-        setupIntroductionTextView()
-        setupPrivacyPolicyTextView()
-        output.viewIsReady()
+        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -108,70 +107,41 @@ class TermsAndServicesViewController: ViewController {
     
     //MARK: - Configuration and Input
     private func configureUI() {
-        acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
+        setupNavigationControler()
+        
+        contenViewHeightConstraint.constant = Device.winSize.height * 0.54
+        setupIntroductionTextView()
+        setupPrivacyPolicyTextView()
+        output.viewIsReady()
     }
     
-    func showEtk() {
-        showEtkText()
-        setupEtkCheckbox()
-        view.layoutIfNeeded()
-    }
-    
-    func showGlobalPermissions() {
-        setupGlobalPermissionTextView()
-        view.layoutIfNeeded()
+    private func setupNavigationControler() {
+        setNavigationBarStyle(.white)
+        if !Device.isIpad {
+            setNavigationTitle(title: TextConstants.termsAndUsesTitle, isLargeTitle: false)
+        }
     }
     
     private func setupIntroductionTextView() {
         checkboxesStack.addArrangedSubview(generalTermsCheckboxView)
         
         let header = NSMutableAttributedString(string: TextConstants.termsAndUseIntroductionCheckbox,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                               attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 14),
                                                             .foregroundColor: ColorConstants.darkText])
-        
         generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
     }
     
     private func setupPrivacyPolicyTextView() {
         
         let header = NSMutableAttributedString(string: TextConstants.privacyPolicy,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                            .foregroundColor: ColorConstants.darkText])
+                                               attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 12),
+                                                            .foregroundColor: ColorConstants.Text.labelTitle])
         
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
-        header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
+        header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions,
+                              .font: UIFont.GTAmericaStandardMediumFont(size: 12)], range: rangeLink)
         
         privacyPolicyTextView.attributedText = header
-    }
-    
-    private func setupEtkCheckbox() {
-        let etkChecboxView = TermsCheckboxTextView.initFromNib()
-        etkTermsCheckboxView = etkChecboxView
-        checkboxesStack.addArrangedSubview(etkChecboxView)
-        
-        let header = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckboxHeader,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                            .foregroundColor: ColorConstants.darkText])
-
-        etkChecboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
-    }
-
-    func setupGlobalPermissionTextView() {
-        let globalPermissionsView = TermsCheckboxTextView.initFromNib()
-        globalDataPermissionTermsCheckboxView = globalPermissionsView
-        checkboxesStack.addArrangedSubview(globalPermissionsView)
-        
-        let header = NSMutableAttributedString(string: TextConstants.termsOfUseGlobalPermHeader,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                            .foregroundColor: ColorConstants.darkText])
-        
-        let descriptionText = NSMutableAttributedString(string: TextConstants.termsOfUseGlobalDataPermCheckbox,
-                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
-                                                              .foregroundColor: UIColor.lightGray])
-        let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsOfUseGlobalDataPermLinkSeeDetails)
-        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseGlobalDataPermLink1], range: rangeLink1)
-        
-        globalPermissionsView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self, textViewDelegate: self)
     }
     
     // MARK: Buttons action
@@ -188,55 +158,8 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
     }
     
     func showLoadedTermsAndUses(eula: String) {
-        guard let htmlString = prepareHtml(from: eula) else {
-            assertionFailure()
-            return
-        }
-        
-        // https://www.oipapio.com/question-726375
-        eulaTextView.textStorage.append(htmlString)
-        eulaTextView.dataDetectorTypes = [.phoneNumber, .address]
-    }
-    
-    func showEtkText() {
-        guard let htmlString = prepareHtml(from: TextConstants.etkHTMLText) else {
-            assertionFailure()
-            return
-        }
-        
-        etkTextView.textStorage.append(htmlString)
-        etkTextView.dataDetectorTypes = [.phoneNumber, .address]
-        etkTextView.isHidden = false
-    }
-    
-    private func prepareHtml(from text: String) -> NSAttributedString? {
-        guard !text.isEmpty else {
-            return nil
-        }
-        
-        let font = UIFont.TurkcellSaturaRegFont(size: 14)
-        /// https://stackoverflow.com/a/27422343
-        //  body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
-        let customFontString = "<style>font-size:\(font.pointSize);}</style>" + text
-        
-        guard let data = customFontString.data(using: .utf8) else {
-            assertionFailure()
-            return nil
-        }
-        
-        /// https://stackoverflow.com/q/50969015/5893286
-        /// fixed black screen
-        /// and error "AttributedString called within transaction"
-        do {
-            let attributedString = try NSAttributedString(data: data,
-                                                          options: [.documentType: NSAttributedString.DocumentType.html,
-                                                                    .characterEncoding: String.Encoding.utf8.rawValue],
-                                                          documentAttributes: nil)
-            return attributedString
-        } catch {
-            assertionFailure()
-            return nil
-        }
+        eulaTextView.attributedText = eula.attributedString
+        eulaTextView.setupEulaStyle(cleaned: false)
     }
     
     func hideBackButton() {
@@ -248,7 +171,7 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
     }
     
     func failLoadTermsAndUses(errorString: String) {
-        //TO-DO show error
+        UIApplication.showErrorAlert(message: errorString)
     }
     
     func popNavigationVC() {
@@ -265,10 +188,10 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
         if sender == generalTermsCheckboxView {
             output.confirmAgreements(isSelected)
         } else if let etkTermsCheckboxView = etkTermsCheckboxView,
-            sender == etkTermsCheckboxView {
+                  sender == etkTermsCheckboxView {
             output.confirmEtk(isSelected)
         } else if let globalDataPermissionTermsCheckboxView = globalDataPermissionTermsCheckboxView,
-            sender == globalDataPermissionTermsCheckboxView {
+                  sender == globalDataPermissionTermsCheckboxView {
             output.confirmGlobalPerm(isSelected)
         }
     }
@@ -307,28 +230,41 @@ extension TermsAndServicesViewController: UITextViewDelegate {
         }
         return defaultHandle(url: URL, interaction: interaction)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if #available(iOS 13, *) {
+            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor(named: "loginButtonBackground")
+        } else {
+            if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
+                verticalIndicator.backgroundColor = UIColor(named: "loginButtonBackground")
+            }
+        }
+    }
 }
 
 private extension UITextView {
-    func setupEulaStyle() {
-        text = ""
-        backgroundColor = ColorConstants.lighterGray
-        layer.borderColor = ColorConstants.darkTintGray.cgColor
+    func setupEulaStyle(cleaned: Bool = true) {
+        if cleaned {
+            text = ""
+        }
+        
+        backgroundColor = .white
+        layer.borderColor = ColorConstants.profileGrayColor.cgColor
         layer.borderWidth = 1
         layer.masksToBounds = true
-        layer.cornerRadius = 10
+        layer.cornerRadius = 5
+        
+        font = UIFont.GTAmericaStandardRegularFont(size: 11)
+        textColor = ColorConstants.lightText
         
         linkTextAttributes = [
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
-            NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
-            NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkText,
+            NSAttributedStringKey.font.rawValue: UIFont.GTAmericaStandardMediumFont(size: 12)
         ]
         
         dataDetectorTypes = [.link, .phoneNumber]
         isEditable = false
         
-        /// to remove insets
-        /// https://stackoverflow.com/a/42333832/5893286
         textContainer.lineFragmentPadding = 0
         let defaultInset: CGFloat = 14
         textContainerInset = UIEdgeInsets(top: defaultInset, left: defaultInset, bottom: defaultInset, right: defaultInset)

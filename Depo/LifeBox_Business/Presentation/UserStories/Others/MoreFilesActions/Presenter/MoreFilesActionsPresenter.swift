@@ -63,6 +63,6 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func showOutOfSpaceAlert(failedType type: ElementTypes) {
         operationFailed(with: type)
-        RouterVC().showFullQuotaPopUp()
+        UIApplication.showQuotaAlert()
     }
 }

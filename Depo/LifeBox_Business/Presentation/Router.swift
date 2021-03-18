@@ -754,18 +754,6 @@ class RouterVC: NSObject {
         return TrashBinViewController.initFromNib()
     }
     
-    func showFullQuotaPopUp(_ popUpType: FullQuotaWarningPopUpType = .standard) {
-        let controller = FullQuotaWarningPopUp(popUpType)
-        DispatchQueue.main.async {
-            if
-                let topController = self.defaultTopController,
-                topController is FullQuotaWarningPopUp == false,
-                topController is LoginViewController == false {
-                topController.present(controller, animated: false)
-            }
-        }
-    }
-    
     func mobilePaymentPermissionController() -> MobilePaymentPermissionViewController {
         return MobilePaymentPermissionViewController.initFromNib()
     }
@@ -797,6 +785,22 @@ class RouterVC: NSObject {
             tabBarVC.tabBar.selectedItem = newSelectedItem
             switchToTrashBin()
         }
+    }
+    
+    func openMyDisk() {
+        guard let tabBarVC = tabBarController else {
+            return
+        }
+        
+        tabBarVC.dismiss(animated: true)
+        
+        let index = TabScreenIndex.myDisk.rawValue
+        guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
+            assertionFailure("This index is non existent 😵")
+            return
+        }
+        tabBarVC.tabBar.selectedItem = newSelectedItem
+        tabBarVC.selectedIndex = index
     }
     
     func privateShare(items: [WrapData]) -> UIViewController {

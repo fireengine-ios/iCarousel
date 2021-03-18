@@ -317,7 +317,7 @@ pipeline {
                     expression { isSkipApproval }
                 }
             }
-            agent { label 'devops-dss-js-default' }
+            agent { label agentName }
             options {
                 skipDefaultCheckout true
             }

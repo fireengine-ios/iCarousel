@@ -55,6 +55,9 @@ extension UIViewController {
         return [
             .font: UIFont.GTAmericaStandardMediumFont(size: 24),
             .foregroundColor: ColorConstants.confirmationPopupTitle
+//=======
+//            .foregroundColor: ColorConstants.multifileCellRenameFieldNameColor
+//>>>>>>> develop_v2
         ]
     }
     
@@ -174,6 +177,10 @@ extension UIViewController {
     func defaultNavBarStyle() {
         navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
+//=======
+//        navBar?.titleTextAttributes = [.foregroundColor : titleTextColor]
+//        navBar?.topItem?.backBarButtonItem?.tintColor = .black
+//>>>>>>> develop_v2
 
         navBar?.titleTextAttributes = [.foregroundColor : ColorConstants.confirmationPopupTitle]
         

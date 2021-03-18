@@ -99,8 +99,6 @@ struct RouteRequests {
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
-    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth/v2"
-    static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"

@@ -18,6 +18,7 @@ enum PopUpImage {
     case unhide
     case restore
     case question
+    case quota
     case none
     case custom(UIImage?)
     
@@ -25,7 +26,7 @@ enum PopUpImage {
         let image: UIImage?
         switch self {
         case .error:
-            image = UIImage(named: "customPopUpInfo")
+            image = UIImage(named: "xmarkAlert")
         case .success:
             image = UIImage(named: "successImage")
         case .delete:
@@ -42,6 +43,8 @@ enum PopUpImage {
             image = UIImage(named: "restoreAlert")
         case .question:
             image = UIImage(named: "confirmationPopupIcon")
+        case .quota:
+            image = UIImage(named: "quotaAlert")
         case .none:
             image = nil
         case .custom(let customImage):

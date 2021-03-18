@@ -84,7 +84,7 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
     
     func showOutOfSpaceAlert() {
         dismiss(animated: true) {
-            RouterVC().showFullQuotaPopUp()
+            UIApplication.showQuotaAlert()
         }
     }
 }
