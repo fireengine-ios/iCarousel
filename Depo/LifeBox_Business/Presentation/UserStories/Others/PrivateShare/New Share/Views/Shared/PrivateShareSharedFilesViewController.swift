@@ -59,7 +59,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override var isEditing: Bool {
         willSet {
-            if case .innerFolder(_, _) = self.shareType {
+            if case .innerFolder = self.shareType {
                 
             } else {
                 changeNavbarLargeTitle(!newValue)
