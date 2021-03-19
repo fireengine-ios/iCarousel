@@ -109,7 +109,7 @@ protocol BottomActionsBarDelegate: class {
 
 final class BottomActionsBar: UIView {
     
-    private let buttonsBeforeMoreButton = 5
+    private let actionsToShowMoreButton = 5
 
     private lazy var actionButtonsStack: UIStackView = {
         let newValue = UIStackView()
@@ -229,13 +229,13 @@ final class BottomActionsBar: UIView {
         
         actionButtonsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        if actionTypes.count < buttonsBeforeMoreButton {
+        if actionTypes.count < actionsToShowMoreButton {
             actionTypes.forEach { actionType in
                 let button = createButton(type: actionType)
                 actionButtonsStack.addArrangedSubview(button)
             }
         } else {
-            let mainTypes = Array(actionTypes.prefix(upTo: buttonsBeforeMoreButton - 2))
+            let mainTypes = Array(actionTypes.prefix(upTo: actionsToShowMoreButton - 2))
             let coveredTypes = Array(actionTypes.suffix(from: mainTypes.count))
             actionsUnderMoreButton = coveredTypes
             
