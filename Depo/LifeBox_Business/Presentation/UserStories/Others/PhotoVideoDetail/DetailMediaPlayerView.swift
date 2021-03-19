@@ -28,7 +28,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
         willSet {
             newValue.layer.cornerRadius = 5
             newValue.isExclusiveTouch = true
-            newValue.backgroundColor = .black.withAlphaComponent(0.4)
+            newValue.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         }
     }
     
