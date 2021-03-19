@@ -13,15 +13,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
     //MARK: - Private properties
     
     private let textViewPlaceholder = TextConstants.contactUsMessageBoxName
-    
-    private lazy var textViewCounterLabel: UILabel = {
-        let label = UILabel()
-        label.text = "500"
-        label.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        label.textColor = ColorConstants.Text.textFieldPlaceholder
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let maxCharactersCount = 500
     
     //MARK: - @IBOutlets
     
@@ -29,7 +21,9 @@ final class ContactUsViewController: BaseViewController, NibInit {
     @IBOutlet weak private var subjectContainerView: UIView!
     @IBOutlet weak private var subjectLabel: UILabel!
     @IBOutlet weak private var subjectButton: UIButton!
+    @IBOutlet weak private var textViewContainerView: UIView!
     @IBOutlet weak private var textView: UITextView!
+    @IBOutlet weak private var textViewCounterLabel: UILabel!
     @IBOutlet weak private var sendButton: UIButton!
     
     //MARK: - Lifecycle
@@ -70,23 +64,23 @@ final class ContactUsViewController: BaseViewController, NibInit {
         
         subjectLabel.text = TextConstants.contactUsSubjectBoxName
         subjectLabel.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        subjectLabel.textColor = ColorConstants.Text.textFieldText
+        subjectLabel.textColor = ColorConstants.Text.textFieldPlaceholder
     }
     
     private func setTextView() {
-        textView.delegate = self
+        textViewContainerView.layer.cornerRadius = 5
+        textViewContainerView.layer.borderWidth = 1
+        textViewContainerView.layer.borderColor = ColorConstants.a2FABorder.cgColor
         
-        textView.layer.cornerRadius = 5
-        textView.layer.borderWidth = 1
-        textView.layer.borderColor = ColorConstants.a2FABorder.cgColor
+        textView.delegate = self
         
         textView.text = textViewPlaceholder
         textView.font = UIFont.GTAmericaStandardRegularFont(size: 12)
         textView.textColor = ColorConstants.Text.textFieldPlaceholder
         
-        view.addSubview(textViewCounterLabel)
-        textViewCounterLabel.rightAnchor.constraint(equalTo: textView.rightAnchor, constant: -5).activate()
-        textViewCounterLabel.topAnchor.constraint(equalTo: textView.topAnchor, constant: 7).activate()
+        textViewCounterLabel.text = "\(maxCharactersCount)"
+        textViewCounterLabel.font = UIFont.GTAmericaStandardRegularFont(size: 12)
+        textViewCounterLabel.textColor = ColorConstants.Text.textFieldPlaceholder
     }
     
     private func setSendButton() {
@@ -98,6 +92,8 @@ final class ContactUsViewController: BaseViewController, NibInit {
         sendButton.backgroundColor = ColorConstants.confirmationPopupButton
         sendButton.layer.cornerRadius = 5
     }
+    
+    //MARK: - Private funcs
     
     private func disableSendButton() {
         sendButton.isEnabled = false
@@ -132,6 +128,10 @@ extension ContactUsViewController: UITextViewDelegate {
         }
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        textViewCounterLabel.text = "\(maxCharactersCount - textView.text.count)"
+    }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = textViewPlaceholder
@@ -140,7 +140,6 @@ extension ContactUsViewController: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
-        return true
+        return textView.text.count +  (text.count - range.length) <= maxCharactersCount
     }
 }
