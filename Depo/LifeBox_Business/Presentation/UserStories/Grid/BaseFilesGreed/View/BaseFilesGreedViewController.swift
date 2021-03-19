@@ -12,7 +12,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
 
     var output: BaseFilesGreedViewOutput!
     
-    var navBarConfigurator = NavigationBarConfigurator()
+//    var navBarConfigurator = NavigationBarConfigurator()
 
     var refresher: UIRefreshControl!
         
@@ -53,7 +53,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var underNavBarBar: GridListTopBar?
     
-    let conf = NavigationBarConfigurator()
     var refresherY: CGFloat = 0
     
     let underNavBarBarHeight: CGFloat = 53
@@ -140,7 +139,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func configurateNavigationBar() {
-        homePageNavigationBarStyle()
+        setNavigationBarStyle(.byDefault)
         configureNavBarActions()
     }
 
@@ -157,52 +156,52 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     // MARK: - SearchBarButtonPressed
     
    func configureNavBarActions(isSelecting: Bool = false) {
-        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
-            self?.output.searchPressed(output: self)
-        })
-        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
-            self?.output.moreActionsPressed(sender: NavigationBarList().more)
-        })
-        let rightActions: [NavBarWithAction] = isSelecting ? [more] : [more, search]
-        navBarConfigurator.configure(right: rightActions, left: [])
-    
+//        let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
+//            self?.output.searchPressed(output: self)
+//        })
+//        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+//            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+//        })
+//        let rightActions: [NavBarWithAction] = isSelecting ? [more] : [more, search]
+//        navBarConfigurator.configure(right: rightActions, left: [])
+//
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+//        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         navigationItem.title = ""
     }
     
     func configurateFreeAppSpaceActions(deleteAction: @escaping VoidHandler) {
-        let delete = NavBarWithAction(navItem: NavigationBarList().delete) { _ in
-            deleteAction()
-        }
+//        let delete = NavBarWithAction(navItem: NavigationBarList().delete) { _ in
+//            deleteAction()
+//        }
+//
+//        let more = NavBarWithAction(navItem: NavigationBarList().more) { [weak self] _ in
+//            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+//        }
         
-        let more = NavBarWithAction(navItem: NavigationBarList().more) { [weak self] _ in
-            self?.output.moreActionsPressed(sender: NavigationBarList().more)
-        }
+//        navBarConfigurator.configure(right: [more, delete], left: [])
         
-        navBarConfigurator.configure(right: [more, delete], left: [])
-        
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+//        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
         navigationItem.leftBarButtonItem = backAsCancelBarButton
     }
     
     func configurateFaceImagePeopleActions(showHideAction: @escaping VoidHandler) {
-        let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { _ in
-            showHideAction()
-        })
-        
-        navBarConfigurator.configure(right: [showHide], left: [])
-        
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+//        let showHide = NavBarWithAction(navItem: NavigationBarList().showHide, action: { _ in
+//            showHideAction()
+//        })
+//
+//        navBarConfigurator.configure(right: [showHide], left: [])
+//
+//        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
     func configureFaceImageItemsPhotoActions() {
-        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
-            self?.output.moreActionsPressed(sender: NavigationBarList().more)
-        })
-        let rightActions: [NavBarWithAction] = [more]
-        navBarConfigurator.configure(right: rightActions, left: [])
-        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
+//        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
+//            self?.output.moreActionsPressed(sender: NavigationBarList().more)
+//        })
+//        let rightActions: [NavBarWithAction] = [more]
+//        navBarConfigurator.configure(right: rightActions, left: [])
+//        navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
 
     
@@ -260,7 +259,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = cancelSelectionButton
         selectedItemsCountChange(with: numberOfItems)
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
         configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
     }
@@ -269,7 +268,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = nil
         
-        homePageNavigationBarStyle()
+        setNavigationBarStyle(.byDefault)
         configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
     }

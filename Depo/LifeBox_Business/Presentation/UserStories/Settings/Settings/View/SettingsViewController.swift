@@ -9,9 +9,9 @@
 import UIKit
 
 protocol SettingsDelegate: class {
-    func goToHelpAndSupport()
+    func goToFAQ()
     
-    func goToTermsAndPolicy() 
+    func goToAgreements()
         
     func goToActivityTimeline()
     
@@ -54,6 +54,7 @@ final class SettingsViewController: BaseViewController {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeLargeTitle(prefersLargeTitles: false)
         settingsTableViewAdapter = SettingsTableViewAdapter(with: tableView, delegate: self)
         output.viewIsReady()
     }
@@ -64,11 +65,9 @@ final class SettingsViewController: BaseViewController {
     }
 
     private func setupNavigationBar() {
-        title = TextConstants.settingsPageTitle
-        whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
-                         titleTextColor: ColorConstants.infoPageItemBottomText)
+        setNavigationTitle(title: TextConstants.settingsPageTitle)
+        setNavigationBarStyle(.white)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
     
     override func viewWillDisappear(_ animated: Bool) {

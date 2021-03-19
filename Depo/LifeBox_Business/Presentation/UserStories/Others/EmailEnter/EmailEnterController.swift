@@ -43,7 +43,7 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
     }
     
     @IBAction func onContinueButton(_ sender: UIButton) {

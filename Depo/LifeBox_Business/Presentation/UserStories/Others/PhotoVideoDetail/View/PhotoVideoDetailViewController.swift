@@ -102,6 +102,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        changeLargeTitle(prefersLargeTitles: false)
+        
         collectionView.contentInsetAdjustmentBehavior = .never
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -125,17 +127,19 @@ final class PhotoVideoDetailViewController: BaseViewController {
         ItemOperationManager.default.startUpdateView(view: self)
         
         onStopPlay()
-        rootNavController(vizible: true)
-        blackNavigationBarStyle()
+        
+        
+//        rootNavController(vizible: true)
+        
+        setNavigationBarStyle(.transparent)
+        
         editingTabBar?.view.layoutIfNeeded()
         setupTitle()
         
         if hideTreeDotButton {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
-        
-        statusBarColor = .clear
-        
+
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
     }
@@ -150,10 +154,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        setNavigationBackgroundColor(color: UIColor.clear)
+//        setNavigationBackgroundColor(color: UIColor.clear)
+//        statusBarColor = .clear
+//        setNavigationBarStyle(.visible)
         
-        visibleNavigationBarStyle()
-        statusBarColor = .clear
         
         output.viewWillDisappear()
         backButtonForNavigationItem(title: TextConstants.backTitle)
@@ -231,7 +235,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
 
     private func setupTitle() {
-        setNavigationTitle(title: selectedItem?.name ?? "")
+        DispatchQueue.main.async {
+            self.setNavigationTitle(title: self.selectedItem?.name ?? "")
+        }
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {

@@ -140,6 +140,7 @@ final class RegistrationViewController: ViewController {
         super.viewDidLoad()
         
         setup()
+        changeLargeTitle(prefersLargeTitles: false)
         
         output.viewIsReady()
     }
@@ -175,7 +176,7 @@ final class RegistrationViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
         backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationTitle(title: TextConstants.registerTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))

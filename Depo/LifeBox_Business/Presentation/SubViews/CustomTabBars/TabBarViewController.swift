@@ -55,7 +55,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     var customNavigationControllers: [UINavigationController] = []
     
     var selectedViewController: UIViewController? {
-        if customNavigationControllers.count > 0 {
+        if customNavigationControllers.count > selectedIndex {
             return customNavigationControllers[selectedIndex]
         }
         return nil
@@ -84,20 +84,24 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
         
         didSet {
-            guard tabBar.items?.count != 0 else {
+            guard
+                tabBar.items?.count != 0,
+                  let selectedViewController = selectedViewController
+            else {
                 return
             }
-            addChildViewController(selectedViewController!)
-            selectedViewController?.view.frame = contentView.bounds
-            contentView.addSubview(selectedViewController!.view)
-            selectedViewController?.didMove(toParentViewController: self)
+            addChildViewController(selectedViewController)
+            selectedViewController.view.frame = contentView.bounds
+            contentView.addSubview(selectedViewController.view)
+            selectedViewController
+                .didMove(toParentViewController: self)
             popToRootCurrentNavigationController(animated: true)
         }
     }
     
     var activeNavigationController: UINavigationController? {
         var  result: UINavigationController?
-        if customNavigationControllers.count > 0 {
+        if customNavigationControllers.count > selectedIndex {
             result = customNavigationControllers[selectedIndex]
         }
         return result
@@ -266,11 +270,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         return nil
     }
-
-    
-    @IBAction func tempUploadStart(_ sender: Any) {
-        handleAction(.upload(type: .regular))
-    }
 }
 
 //MARK: - UIImagePickerControllerDelegate
@@ -308,59 +307,6 @@ extension TabBarViewController: MediaPlayerDelegate {
     func didStartMediaPlayer(_ mediaPlayer: MediaPlayer) {}
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {}
 }
-
-import CoreServices
-extension TabBarViewController: TabBarActionHandler {
-    
-    func canHandleTabBarAction(_ action: TabBarViewController.Action) -> Bool {
-        return true
-    }
-    
-    func handleAction(_ action: TabBarViewController.Action) {
-        let router = RouterVC()
-        
-        switch action {
-            case .createFolder(type: _):
-            let controller: UIViewController
-            if let sharedFolder = router.sharedFolderItem {
-                let isSharedByWithMe = sharedFolder.type.isContained(in: [.byMe, .withMe])
-                let parameters = CreateFolderParameters(accountUuid: sharedFolder.accountUuid, rootFolderUuid: sharedFolder.uuid, isShared: isSharedByWithMe)
-                controller = router.createNewFolder(parameters: parameters)
-            } else {
-                assertionFailure()
-                return
-            }
-            
-            let nController = NavigationController(rootViewController: controller)
-            router.presentViewController(controller: nController)
-
-        case .upload(type: let uploadType):
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
-            galleryFileUploadService.upload(type:uploadType, rootViewController: self, delegate: self)
-            
-        case .uploadFiles(type: let uploadType):
-            externalFileUploadService.showViewController(type: uploadType, router: router, externalFileType: .any)
-                
-        case .uploadFromApp:
-            let parentFolder = router.getParentUUID()
-            
-            let controller: UIViewController
-            if let currentVC = currentViewController as? BaseFilesGreedViewController {
-                controller = router.uploadFromLifeBox(folderUUID: parentFolder,
-                                                      soorceUUID: "",
-                                                      sortRule: currentVC.getCurrentSortRule(),
-                                                      type: .List)
-            } else {
-                controller = router.uploadFromLifeBox(folderUUID: parentFolder)
-            }
-            
-            let navigationController = NavigationController(rootViewController: controller)
-            navigationController.navigationBar.isHidden = false
-            router.presentViewController(controller: navigationController)
-        }
-    }
-}
-
 
 extension TabBarViewController: UploadProgressViewDelegate {
     func update() {

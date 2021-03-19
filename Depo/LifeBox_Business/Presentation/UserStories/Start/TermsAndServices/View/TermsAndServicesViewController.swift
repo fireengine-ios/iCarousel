@@ -83,6 +83,7 @@ final class TermsAndServicesViewController: ViewController {
     private var globalDataPermissionTermsCheckboxView: TermsCheckboxTextView?
     
     //MARK: - Life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -115,10 +116,10 @@ final class TermsAndServicesViewController: ViewController {
     }
     
     private func setupNavigationControler() {
-        whiteNavBarStyle()
+        setNavigationBarStyle(.white)
+        changeLargeTitle(prefersLargeTitles: false)
         if !Device.isIpad {
-            
-            setNavigationTitle(title: TextConstants.termsAndUsesTitle)  // changed
+            setNavigationTitle(title: TextConstants.termsAndUsesTitle)
         }
     }
     

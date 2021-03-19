@@ -83,7 +83,7 @@ final class PasscodeSettingsViewController: ViewController {
         super.viewWillAppear(animated)
         
         if !Device.isIpad {
-            navigationBarWithGradientStyle()
+            setNavigationBarStyle(.byDefault)
         }
         
         output.isPasscodeEmpty ? setup(state: .set) : setup(state: .ready)
