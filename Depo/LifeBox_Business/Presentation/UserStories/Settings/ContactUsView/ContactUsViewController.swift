@@ -14,13 +14,24 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     private let textViewPlaceholder = TextConstants.contactUsMessageBoxName
     private let maxCharactersCount = 500
+    private let subjects = [TextConstants.contactUsSubject1,
+                            TextConstants.contactUsSubject2,
+                            TextConstants.contactUsSubject3,
+                            TextConstants.contactUsSubject4,
+                            TextConstants.contactUsSubject5]
+    
+    private lazy var subjectView: TextFieldWithPickerView = {
+        let view = TextFieldWithPickerView()
+        view.textField.delegate = self
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.models = subjects
+        return view
+    }()
     
     //MARK: - @IBOutlets
     
     @IBOutlet weak private var descriptionLabel: UILabel!
     @IBOutlet weak private var subjectContainerView: UIView!
-    @IBOutlet weak private var subjectLabel: UILabel!
-    @IBOutlet weak private var subjectButton: UIButton!
     @IBOutlet weak private var textViewContainerView: UIView!
     @IBOutlet weak private var textView: UITextView!
     @IBOutlet weak private var textViewCounterLabel: UILabel!
@@ -31,19 +42,19 @@ final class ContactUsViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
-        setSubjectButton()
         setTextView()
         setSendButton()
+        setSubjectView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //TODO: uncomment after merge with bar branch
-//        setNavigationBarStyle(.white)
+        //        setNavigationBarStyle(.white)
         
-//        if !Device.isIpad {
-//            defaultNavBarStyle()
-//        }
+        //        if !Device.isIpad {
+        //            defaultNavBarStyle()
+        //        }
     }
     
     //MARK: - Setup
@@ -51,26 +62,30 @@ final class ContactUsViewController: BaseViewController, NibInit {
     private func setView() {
         setTitle(withString: TextConstants.contactUsPageTitle)
         //TODO: replace setTitle to it after merge with bar branch
-//        setNavigationTitle(title: TextConstants.contactUsPageTitle, isLargeTitle: false)
+        //        setNavigationTitle(title: TextConstants.contactUsPageTitle, isLargeTitle: false)
         
         descriptionLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         descriptionLabel.textColor = ColorConstants.Text.textFieldText
     }
     
-    private func setSubjectButton() {
-        subjectContainerView.layer.cornerRadius = 5
-        subjectContainerView.layer.borderWidth = 1
-        subjectContainerView.layer.borderColor = ColorConstants.a2FABorder.cgColor
+    private func setBorder(for view: UIView) {
+        view.layer.cornerRadius = 5
+        view.layer.borderWidth = 1
+        view.layer.borderColor = ColorConstants.a2FABorder.cgColor
+    }
+    
+    private func setSubjectView() {
+        setBorder(for: subjectContainerView)
         
-        subjectLabel.text = TextConstants.contactUsSubjectBoxName
-        subjectLabel.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        subjectLabel.textColor = ColorConstants.Text.textFieldPlaceholder
+        subjectContainerView.addSubview(subjectView)
+        subjectView.topAnchor.constraint(equalTo: subjectContainerView.topAnchor).activate()
+        subjectView.bottomAnchor.constraint(equalTo: subjectContainerView.bottomAnchor).activate()
+        subjectView.leftAnchor.constraint(equalTo: subjectContainerView.leftAnchor, constant: 20).activate()
+        subjectView.rightAnchor.constraint(equalTo: subjectContainerView.rightAnchor, constant: -20).activate()
     }
     
     private func setTextView() {
-        textViewContainerView.layer.cornerRadius = 5
-        textViewContainerView.layer.borderWidth = 1
-        textViewContainerView.layer.borderColor = ColorConstants.a2FABorder.cgColor
+        setBorder(for: textViewContainerView)
         
         textView.delegate = self
         
@@ -107,9 +122,6 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     //MARK: - @IBActions
     
-    @IBAction func subjectButonPressed(_ sender: Any) {
-    }
-    
     @IBAction func sendButtonPressed(_ sender: Any) {
     }
 }
@@ -141,5 +153,13 @@ extension ContactUsViewController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         return textView.text.count +  (text.count - range.length) <= maxCharactersCount
+    }
+}
+
+//MARK: - UITextFieldDelegate
+
+extension ContactUsViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return false
     }
 }
