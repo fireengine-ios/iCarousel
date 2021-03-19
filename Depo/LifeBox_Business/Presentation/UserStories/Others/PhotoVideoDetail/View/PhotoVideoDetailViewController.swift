@@ -15,15 +15,19 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var output: PhotoVideoDetailViewOutput!
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var viewForBottomBar: UIView!
+    @IBOutlet private weak var viewForBottomBar: UIView! {
+        willSet {
+            newValue.backgroundColor = .clear
+        }
+    }
     @IBOutlet private weak var bottomBlackView: UIView!
-    
     @IBOutlet private weak var swipeUpContainerView: UIView!
-
-    private lazy var player: MediaPlayer = factory.resolve()
     
-    private var localPlayer: AVPlayer?
-    private var playerController: FixedAVPlayerViewController?
+    @IBOutlet weak var gradientView: MediaContentGradientView! {
+        willSet {
+            newValue.isUserInteractionEnabled = false
+        }
+    }
     
     var status: ItemStatus = .active
     var hideTreeDotButton = false
@@ -52,10 +56,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //                }
 //            }
             
-            /// without animation
-
+            gradientView.set(isHidden: isFullScreen, animated: true)
             editingTabBar.view.isHidden = isFullScreen
-            navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
+            navigationController?.setNavigationBarHidden(isFullScreen, animated: true)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             
             bottomBlackView.isHidden = self.isFullScreen
@@ -96,16 +99,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     // MARK: Life cycle
     
-    deinit {
-        NotificationCenter.default.post(name: .deinitPlayer, object: self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.contentInsetAdjustmentBehavior = .never
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -115,7 +115,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         showSpinner()
     }
     
@@ -129,22 +128,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
         rootNavController(vizible: true)
         blackNavigationBarStyle()
         editingTabBar?.view.layoutIfNeeded()
-        editingTabBar.view.backgroundColor = .black
-        viewForBottomBar.backgroundColor = .black
         setupTitle()
         
         if hideTreeDotButton {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
         
-        // TODO: EditingBarConfig is not working
-        editingTabBar.editingBar.barStyle = .blackOpaque
-        editingTabBar.editingBar.clipsToBounds = true
-        //editingTabBar.editingBar.layer.borderWidth = 0
-        
-        statusBarColor = .black
-        
-        NotificationCenter.default.post(name: .reusePlayer, object: self)
+        statusBarColor = .clear
         
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
@@ -164,8 +154,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         visibleNavigationBarStyle()
         statusBarColor = .clear
-        
-        NotificationCenter.default.post(name: .deinitPlayer, object: self)
         
         output.viewWillDisappear()
         backButtonForNavigationItem(title: TextConstants.backTitle)
@@ -194,7 +182,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
-        cells.first?.setObject(object: objects[selectedIndex])
+        cells.first?.setup(with: objects[selectedIndex], index: selectedIndex, isFullScreen: isFullScreen)
     }
     
     func hideView() {
@@ -278,12 +266,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.reloadData()
     }
     
+    
+    
     override func getBackgroundColor() -> UIColor {
         return UIColor.black
-    }
-    
-    @objc private func applicationDidEnterBackground(_ application: UIApplication) {
-        localPlayer?.pause()
     }
     
     private func updateAllItems(with items: [Item], updateCollection: Bool) {
@@ -294,14 +280,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             scrollToSelectedIndex()
             collectionView.layoutIfNeeded()
         }
-    }
-
-    func shareCurrentItem() {
-        guard let shareTabIndex = output.tabIndex(type: .share),
-              let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
-            return
-        }
-        editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
     }
 }
 
@@ -335,23 +313,15 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.VideoDisplayed())
         
-        localPlayer?.replaceCurrentItem(with: item)
-        playerController = FixedAVPlayerViewController()
-        playerController?.player = localPlayer
-        ///needs to expend from everywhere
-        playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
-        debugLog("about to play video item with isEmptyController \(playerController == nil) and \(playerController?.player == nil)")
-        present(playerController!, animated: true) { [weak self] in
-            UIApplication.setIdleTimerDisabled(true)
-            self?.playerController?.player?.play()
-            self?.output.videoStarted()
-            if Device.operationSystemVersionLessThen(11) {
-                self?.statusBarHidden = true
-            }
+        guard let url = (item.asset as? AVURLAsset)?.url else {
+            return
         }
+        //TODO: player
+        //
     }
     
     func onStopPlay() {
+        //TODO: Player
         UIApplication.setIdleTimerDisabled(false)
         output.videoStoped()
         if Device.operationSystemVersionLessThen(11) {
@@ -401,13 +371,9 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     private func update(item: Item, at index: Int) {
         objects[index] = item
         
-        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.item == index }),
+        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.row == index }),
            let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell {
-            cell.setObject(object: item)
-            if item.fileType == .video && waitVideoPreviewURL {
-                tapOnSelectedItem()
-                waitVideoPreviewURL = false
-            }
+            cell.setup(with: item, index: index, isFullScreen: isFullScreen)
         }
     }
 }
@@ -474,9 +440,16 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         guard selectedIndex != nil else {
             return
         }
+        
         cell.delegate = self
         let object = objects[indexPath.row]
-        cell.setObject(object: object)
+        
+        let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
+        editingTabBar.changeBar(style: barStyle)
+        
+        gradientView.set(isHidden: isFullScreen || (object.fileType.isDocument || !object.fileType.isSupportedOpenType), animated: false)
+        
+        cell.setup(with: object, index: indexPath.row, isFullScreen: isFullScreen)
         
         if indexPath.row == objects.count - 1 {
             output.willDisplayLastCell()
@@ -485,6 +458,14 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         if !object.isOwner {
             analytics.sharedWithMe(action: .preview, on: object)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? PhotoVideoDetailCell else {
+            return
+        }
+        
+        cell.didEndDisplaying()
     }
 }
 
@@ -499,89 +480,16 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
-    
-    func imageLoadingFinished() {
+    func loadingFinished() {
         hideSpinner()
     }
     
     func tapOnCellForFullScreen() {
         isFullScreen.toggle()
     }
-    
-    func tapOnSelectedItem() {
-        guard let index = selectedIndex else {
-            return
-        }
-        
-        showSpinnerIncludeNavigationBar()
-        let file = objects[index]
-        if file.fileType == .video {
-            self.prepareToPlayVideo(file: file)
-        }
-    }
-    
-    private func prepareToPlayVideo(file: Item) {
-        let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
-
-        if !waitVideoPreviewURL, preUrl == nil || preUrl?.isExpired == true {
-            waitVideoPreviewURL = true
-            output.createNewUrl()
-            return
-        }
-        
-        guard let url = preUrl else {
-            hideSpinnerIncludeNavigationBar()
-            if !file.isOwner {
-                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePreviewNotReady)
-            }
-            return
-        }
-        player.pause()
-        playerController?.player = nil
-        playerController?.removeFromParentViewController()
-        playerController = nil
-        localPlayer?.pause()
-        localPlayer = nil
-        localPlayer = AVPlayer()
-        
-        switch file.patchToPreview {
-        case let .localMediaContent(local):
-            guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-                return
-            }
-            let option = PHVideoRequestOptions()
-            
-            output.startCreatingAVAsset()
-            debugLog("about to play local video item")
-            DispatchQueue.global(qos: .default).async { [weak self] in
-                PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
-                    debugPrint("!!!! after local request")
-                    DispatchQueue.main.async {
-                        self?.output.stopCreatingAVAsset()
-                        guard let asset = asset else {
-                            return
-                        }
-                        let playerItem = AVPlayerItem(asset: asset)
-                        debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                        self?.play(item: playerItem)
-                    }
-                }
-            }
-            
-        case .remoteUrl(_):
-            debugLog("about to play remote video item")
-            DispatchQueue.global(qos: .default).async { [weak self] in
-                let playerItem = AVPlayerItem(url: url)
-                debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                DispatchQueue.main.async {
-                    self?.play(item: playerItem)
-                }
-            }
-        }
-    }
-    
-    func didExpireUrl() {
-        output.createNewUrl()
+   
+    func didExpireUrl(at index: Int) {
+        output.createNewUrl(at: index)
     }
 }
 
@@ -615,4 +523,3 @@ extension TabBarViewController: AVPlayerViewControllerDelegate {
         }
     }
 }
-

@@ -166,7 +166,7 @@ extension TrashBinViewController {
             collectionView.contentInset.bottom = 0
         } else {
             bottomBarManager.show()
-            collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
+            collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.bottomActionsBar.bounds.height ?? 0
         }
     }
     

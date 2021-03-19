@@ -27,7 +27,7 @@ class SearchViewInitializer {
         )
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
+                                               style: .opaque)
         
         configurator.configure(viewController: viewController,
                                remoteServices: RemoteSearchService(requestSize: 100),
@@ -36,7 +36,7 @@ class SearchViewInitializer {
                                topBarConfig: gridListTopBarConfig,
                                bottomBarConfig: bottomBarConfig,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select], selectionModeTypes: [.rename]),
-                               alertSheetExcludeTypes: [.print])
+                               alertSheetExcludeTypes: [])
         
         return viewController
     }

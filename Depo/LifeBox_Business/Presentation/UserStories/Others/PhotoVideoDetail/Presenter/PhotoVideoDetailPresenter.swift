@@ -42,23 +42,23 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
         var barConfig = interactor.bottomBarConfig(for: selectedIndex)
         var actionTypes = barConfig.elementsConfig
-          
+        
         if !fileTypes.contains(.image) {
-            if let printIndex = actionTypes.index(of: .print) {
-                actionTypes.remove(at: printIndex)
-            }
-//            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
-//                actionTypes.remove(at: infoIndex)
-//            }
             if fileTypes.contains(where: { $0.isDocumentPageItem || $0 == .audio }) {
                 if let downloadIndex = actionTypes.index(of: .download) {
                     actionTypes.remove(at: downloadIndex)
                     actionTypes.insert(.downloadDocument, at: downloadIndex)
                 }
             }
-            barConfig = EditingBarConfig(elementsConfig: actionTypes,
-                                         style: barConfig.style,
-                                         tintColor: barConfig.tintColor)
+            
+            let style: BottomActionsBarStyle
+            if fileTypes.contains(where: { $0.isDocumentPageItem }) {
+                style = .opaque
+            } else {
+                style = .transparent
+            }
+            
+            barConfig = EditingBarConfig(elementsConfig: actionTypes, style: style)
         }
         return barConfig
     }
@@ -133,10 +133,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func viewWillDisappear() {
         bottomBarPresenter?.dismiss(animated: false)
-    }
-    
-    func viewFullyLoaded() {
-//        bottomBarPresenter?.show(animated: false, onView: self.view)
     }
     
     func startCreatingAVAsset() {
@@ -303,8 +299,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.updateItem(item)
     }
 
-    func createNewUrl() {
-        interactor.createNewUrl()
+    func createNewUrl(at index: Int) {
+        interactor.createNewUrl(at: index)
     }
 }
 

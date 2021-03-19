@@ -683,10 +683,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: renameIndex)
             }
 
-            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
-                actionTypes.remove(at: printIndex)
-            }
-            
             DispatchQueue.global().async {[weak self] in
                 if let self = self {
                     self.alertSheetModule?.showAlertSheet(with: actionTypes,

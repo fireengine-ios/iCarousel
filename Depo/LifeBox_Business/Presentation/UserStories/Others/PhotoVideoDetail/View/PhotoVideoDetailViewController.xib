@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18121" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="Billo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="bottomBlackView" destination="XFi-qo-p1Z" id="n2g-5n-Pae"/>
                 <outlet property="collectionView" destination="ZzB-kC-yvt" id="Ggb-ac-yeQ"/>
+                <outlet property="gradientView" destination="KWJ-pd-yH0" id="o0w-Hz-2zg"/>
                 <outlet property="swipeUpContainerView" destination="W8L-hg-9Ki" id="utr-Qe-8xW"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kbZ-Zd-ek1"/>
                 <outlet property="viewForBottomBar" destination="EkB-f5-2OH" id="vOp-R9-AI9"/>
@@ -25,7 +27,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8L-hg-9Ki">
                     <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                     <subviews>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="Billo" customModuleProvider="target">
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="lifeBox_Business" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zTm-wi-nWa">
@@ -40,37 +42,52 @@
                             <rect key="frame" x="0.0" y="844" width="390" height="0.0"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWJ-pd-yH0" customClass="MediaContentGradientView" customModule="lifeBox_Business" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ZzB-kC-yvt" secondAttribute="trailing" id="9IQ-Yx-cOx"/>
                         <constraint firstItem="ZzB-kC-yvt" firstAttribute="leading" secondItem="W8L-hg-9Ki" secondAttribute="leading" id="IoM-cZ-4Pj"/>
                         <constraint firstAttribute="bottom" secondItem="ZzB-kC-yvt" secondAttribute="bottom" id="Jch-3f-64W"/>
+                        <constraint firstAttribute="trailing" secondItem="KWJ-pd-yH0" secondAttribute="trailing" id="QF7-eF-6xo"/>
                         <constraint firstItem="XFi-qo-p1Z" firstAttribute="top" secondItem="ZzB-kC-yvt" secondAttribute="bottom" id="Uoy-LN-LQB"/>
                         <constraint firstItem="XFi-qo-p1Z" firstAttribute="leading" secondItem="W8L-hg-9Ki" secondAttribute="leading" id="WtZ-PH-AU5"/>
+                        <constraint firstItem="XFi-qo-p1Z" firstAttribute="top" secondItem="KWJ-pd-yH0" secondAttribute="bottom" id="Zw5-Sa-Urz"/>
+                        <constraint firstItem="KWJ-pd-yH0" firstAttribute="top" secondItem="W8L-hg-9Ki" secondAttribute="top" id="ls5-QM-TZ5"/>
                         <constraint firstItem="ZzB-kC-yvt" firstAttribute="top" secondItem="W8L-hg-9Ki" secondAttribute="top" id="ouU-5A-Ugf"/>
+                        <constraint firstItem="KWJ-pd-yH0" firstAttribute="leading" secondItem="W8L-hg-9Ki" secondAttribute="leading" id="qjg-Qp-MpK"/>
                         <constraint firstAttribute="bottom" secondItem="XFi-qo-p1Z" secondAttribute="bottom" id="tSJ-oL-Nxi"/>
                         <constraint firstAttribute="trailing" secondItem="XFi-qo-p1Z" secondAttribute="trailing" id="uQA-AF-G1K"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EkB-f5-2OH">
-                    <rect key="frame" x="0.0" y="766" width="390" height="78"/>
+                    <rect key="frame" x="0.0" y="750" width="390" height="60"/>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="rMN-w4-uOU"/>
+                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="hTs-d8-e25"/>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="EkB-f5-2OH" firstAttribute="top" secondItem="hTs-d8-e25" secondAttribute="bottom" constant="-44" id="5yt-1W-3TW"/>
                 <constraint firstAttribute="trailing" secondItem="EkB-f5-2OH" secondAttribute="trailing" id="6NC-Rh-Ca5"/>
-                <constraint firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="NfP-1l-2sH"/>
-                <constraint firstItem="W8L-hg-9Ki" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T96-8x-22r" customClass="TopSafeAreaConstraint" customModule="Billo" customModuleProvider="target"/>
-                <constraint firstItem="W8L-hg-9Ki" firstAttribute="trailing" secondItem="EkB-f5-2OH" secondAttribute="trailing" id="XCq-UU-yaw"/>
-                <constraint firstItem="W8L-hg-9Ki" firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="fDW-8e-SDZ"/>
+                <constraint firstAttribute="bottom" secondItem="W8L-hg-9Ki" secondAttribute="bottom" id="7mV-Tt-Qce"/>
+                <constraint firstItem="W8L-hg-9Ki" firstAttribute="trailing" secondItem="hTs-d8-e25" secondAttribute="trailing" id="JNs-gU-WON"/>
+                <constraint firstItem="W8L-hg-9Ki" firstAttribute="leading" secondItem="hTs-d8-e25" secondAttribute="leading" id="QPo-l1-A5Y"/>
+                <constraint firstItem="W8L-hg-9Ki" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T96-8x-22r" customClass="TopSafeAreaConstraint" customModule="lifeBox_Business" customModuleProvider="target"/>
+                <constraint firstItem="hTs-d8-e25" firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="fDW-8e-SDZ"/>
                 <constraint firstItem="EkB-f5-2OH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vGC-fV-ORB"/>
-                <constraint firstItem="W8L-hg-9Ki" firstAttribute="leading" secondItem="EkB-f5-2OH" secondAttribute="leading" id="zU2-XF-l9j"/>
             </constraints>
-            <point key="canvasLocation" x="31.199999999999999" y="63.418290854572717"/>
+            <point key="canvasLocation" x="30.769230769230766" y="63.270142180094787"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

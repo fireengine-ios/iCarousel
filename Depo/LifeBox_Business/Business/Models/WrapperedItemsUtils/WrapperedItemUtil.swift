@@ -202,4 +202,38 @@ class WrapperedItemUtil: NSObject {
         }
     }
     
+    static func previewPlaceholderImage(fileType: FileType) -> UIImage? {
+        switch fileType {
+            case .image:
+                return UIImage(named: "photoLoading")
+            case .video:
+                return UIImage(named: "videoLoading")
+            case .audio:
+                return UIImage(named: "audioLoading")
+            case .application(let subType):
+                switch subType {
+                    case .txt:
+                        return UIImage(named: "txtLoading")
+                    case .doc:
+                        return UIImage(named: "docLoading")
+                    case .pdf:
+                        return UIImage(named: "pdfLoading")
+                    case .ppt, .pptx:
+                        return UIImage(named: "pptLoading")
+                    case .csv:
+                        return UIImage(named: "csvLoading")
+                    case .xls:
+                        return UIImage(named: "xlsLoading")
+                    case .zip:
+                        return UIImage(named: "zipLoading")
+                    default:
+                        //unknown
+                        return UIImage(named: "unknownLoading")
+                }
+            default:
+                //unknown
+                return UIImage(named: "unknownLoading")
+        }
+    }
+    
 }
