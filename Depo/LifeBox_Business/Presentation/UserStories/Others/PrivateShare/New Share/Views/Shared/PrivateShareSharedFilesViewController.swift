@@ -191,12 +191,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func setupCollectionViewBars() {
-        setupSorttingBar()
+        setupSortingBar()
 
         collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
     }
     
-    private func setupSorttingBar() {
+    private func setupSortingBar() {
         let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
            
         topBarSortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .TimeNewOld)

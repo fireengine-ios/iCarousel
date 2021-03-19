@@ -59,13 +59,10 @@ final class TopBarSortingView: UIView, NibInit {
         }
         let sortingTable = GridListTopBarSortingTableView(style: .plain)
         sortingTable.actionDelegate = self
-        let titles = availableSortOptions.map({ $0.description })
+        let titles = availableSortOptions.map{ $0.description }
         let selectedSort: Int = availableSortOptions.index(of: currentSortOption) ?? 0
         
         sortingTable.setup(withTitles: titles, selectedIndex: selectedSort)
-       
-        let router = RouterVC()
-        let rootVC = router.tabBarVC
 
         let popUpHeight = sortingTable.defaultCellHeight * CGFloat(titles.count)
         
@@ -74,7 +71,7 @@ final class TopBarSortingView: UIView, NibInit {
                                                                popOverSize: CGSize(width: floatingContainerWidth,
                                                                                    height: popUpHeight))
         
-        rootVC?.present(floatingVC, animated: true, completion: nil)
+        RouterVC().tabBarVC?.present(floatingVC, animated: true, completion: nil)
     }
     
 }

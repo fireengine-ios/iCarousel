@@ -95,7 +95,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         }
         
         if let highlightViewLeaningConstraint = highlightViewLeaningConstraint {
-            highlightViewLeaningConstraint.isActive = false
+            highlightViewLeaningConstraint.deactivate()
             self.highlightViewLeaningConstraint = nil
         }
         
@@ -113,7 +113,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
             return
         }
         
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: NumericConstants.fastAnimationDuration, animations: {
             self.layoutIfNeeded()
         })
     }
