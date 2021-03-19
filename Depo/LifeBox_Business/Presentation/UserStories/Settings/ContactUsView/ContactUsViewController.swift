@@ -67,6 +67,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
         
         descriptionLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         descriptionLabel.textColor = ColorConstants.Text.textFieldText
+        descriptionLabel.text = TextConstants.contactUsPageDescription
     }
     
     private func setBorder(for view: UIView) {
