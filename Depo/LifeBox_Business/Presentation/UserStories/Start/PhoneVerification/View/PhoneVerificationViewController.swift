@@ -91,9 +91,7 @@ final class PhoneVerificationViewController: ViewController {
 
     private func setupNavigationBar() {
         title = TextConstants.a2FASecondPageSecurityCode
-        defaultNavBarStyle()
-//        whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
-//                         titleTextColor: ColorConstants.infoPageItemBottomText)
+        setNavigationBarStyle(.byDefault)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }

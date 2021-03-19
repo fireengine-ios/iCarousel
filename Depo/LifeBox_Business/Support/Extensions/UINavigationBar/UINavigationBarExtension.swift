@@ -55,9 +55,6 @@ extension UIViewController {
         return [
             .font: UIFont.GTAmericaStandardMediumFont(size: 24),
             .foregroundColor: ColorConstants.confirmationPopupTitle
-//=======
-//            .foregroundColor: ColorConstants.multifileCellRenameFieldNameColor
-//>>>>>>> develop_v2
         ]
     }
     
@@ -72,10 +69,6 @@ extension UIViewController {
     }
     
     func setNavigationTitle(title: String) {
-//        navigationItem.
-//        guard self.title != title else {
-//            return
-//        }
         self.title = title
         navBar?.titleTextAttributes = titleAttributes
     }
@@ -179,26 +172,19 @@ extension UIViewController {
         }
     }
     
-    func defaultNavBarStyle() {
+    private func defaultNavBarStyle() {
         navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
-//=======
-//        navBar?.titleTextAttributes = [.foregroundColor : titleTextColor]
-//        navBar?.topItem?.backBarButtonItem?.tintColor = .black
-//>>>>>>> develop_v2
-
         navBar?.titleTextAttributes = [.foregroundColor : ColorConstants.confirmationPopupTitle]
         
         statusBarColor = .clear
     }
 
-    func whiteNavBarStyle() {
+    private func whiteNavBarStyle() {
         
         visibleNavigationBarStyle()
 
         defaultNavBarStyle()
-        
-//        changeLargeTitle(prefersLargeTitles: isLargeTitle)
         
         navigationItem.hidesSearchBarWhenScrolling = true
         
@@ -208,7 +194,7 @@ extension UIViewController {
         navBar?.tintColor = .clear
     }
     
-    func transparentNavBarStyle() {
+    private func transparentNavBarStyle() {
         navBar?.isTranslucent = true
 
         navBar?.barTintColor = .clear
@@ -217,7 +203,7 @@ extension UIViewController {
         navBar?.tintColor = .clear
     }
     
-    func blackNavigationBarStyle() {
+    private func blackNavigationBarStyle() {
         defaultNavBarStyle()
         
         let image = UIImage(named: "NavigatonBarBlackBacground")
@@ -231,7 +217,7 @@ extension UIViewController {
     
     //MARK: NavBar visibility states
 
-    func hiddenNavigationBarStyle() {
+    private func hiddenNavigationBarStyle() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         
         navigationController?.view.backgroundColor = .clear
@@ -249,7 +235,7 @@ extension UIViewController {
         statusBarColor = .clear
     }
 
-    func visibleNavigationBarStyle() {
+    private func visibleNavigationBarStyle() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         
         navBar?.isTranslucent = false

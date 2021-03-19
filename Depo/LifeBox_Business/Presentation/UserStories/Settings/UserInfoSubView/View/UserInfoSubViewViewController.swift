@@ -107,7 +107,7 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
     }
     
     override func viewDidLayoutSubviews() {

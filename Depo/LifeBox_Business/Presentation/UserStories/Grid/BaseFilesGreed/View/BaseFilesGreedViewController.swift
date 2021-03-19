@@ -139,7 +139,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     func configurateNavigationBar() {
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
         configureNavBarActions()
     }
 
@@ -259,7 +259,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = cancelSelectionButton
         selectedItemsCountChange(with: numberOfItems)
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
         configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
     }
@@ -268,7 +268,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = nil
         
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
         configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
     }

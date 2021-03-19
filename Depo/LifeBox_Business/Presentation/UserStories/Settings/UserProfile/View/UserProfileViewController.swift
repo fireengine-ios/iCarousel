@@ -148,7 +148,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

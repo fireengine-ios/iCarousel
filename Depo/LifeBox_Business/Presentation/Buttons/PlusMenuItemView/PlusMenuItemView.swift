@@ -11,7 +11,6 @@ import UIKit
 enum FloatingButtonsType {
     case upload(type: UploadType)
     case newFolder(type: UploadType)
-//    case uploadFromLifebox
     case uploadFiles(type: UploadType)
     
     var title: String {

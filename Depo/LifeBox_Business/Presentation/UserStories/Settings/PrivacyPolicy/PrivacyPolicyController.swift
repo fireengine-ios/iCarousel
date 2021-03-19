@@ -73,9 +73,7 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-
-        whiteNavBarStyle()//TODO: change to set style
+        setNavigationBarStyle(.white)
     }
     
     deinit {

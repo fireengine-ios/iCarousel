@@ -63,7 +63,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
 
         statusBarColor = .white
         
@@ -91,7 +91,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         super.viewDidAppear(animated)
         
         if Device.operationSystemVersionLessThen(13) {
-            defaultNavBarStyle()
+            setNavigationBarStyle(.byDefault)
             statusBarColor = .white
         }
         

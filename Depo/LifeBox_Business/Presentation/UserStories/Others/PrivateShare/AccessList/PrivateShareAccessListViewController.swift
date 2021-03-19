@@ -90,9 +90,7 @@ final class PrivateShareAccessListViewController: BaseViewController, NibInit {
         navigationController?.navigationBar.topItem?.backBarButtonItem = nil
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "close"), style: .plain, target: self, action: #selector(dismissSelf(_:)))
         
-        defaultNavBarStyle()
-//        whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
-//                         titleTextColor: ColorConstants.infoPageItemBottomText)
+        setNavigationBarStyle(.white)
     }
 
     @objc private func dismissSelf(_ sender: UIBarButtonItem) {

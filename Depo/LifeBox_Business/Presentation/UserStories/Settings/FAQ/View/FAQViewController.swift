@@ -40,7 +40,7 @@ final class FAQViewController: BaseViewController {
         setNavigationBarStyle(.white)
         
         if !Device.isIpad {
-            defaultNavBarStyle()
+            setNavigationBarStyle(.byDefault)
         }
     }
     

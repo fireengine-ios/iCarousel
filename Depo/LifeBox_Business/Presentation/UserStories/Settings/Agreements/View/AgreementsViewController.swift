@@ -56,7 +56,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
         setNavigationBarStyle(.white)
         
         if !Device.isIpad {
-            defaultNavBarStyle()
+            setNavigationBarStyle(.byDefault)
         }
     }
     

@@ -24,7 +24,7 @@ class EmptyContainerNavVC: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
     }
     
     private func configurate(_ subVC: UIViewController) {

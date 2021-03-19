@@ -156,7 +156,7 @@ final class OptInController: ViewController, NibInit {
     
     // MARK: - Utility methods
     private func setupNavBar() {
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     

@@ -128,7 +128,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         onStopPlay()
         rootNavController(vizible: true)
-        blackNavigationBarStyle()
+        setNavigationBarStyle(.black)
         editingTabBar?.view.layoutIfNeeded()
         setupTitle()
         
@@ -154,7 +154,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         setNavigationBackgroundColor(color: UIColor.clear)
         
-        visibleNavigationBarStyle()
+        setNavigationBarStyle(.visible)
         statusBarColor = .clear
         
         output.viewWillDisappear()

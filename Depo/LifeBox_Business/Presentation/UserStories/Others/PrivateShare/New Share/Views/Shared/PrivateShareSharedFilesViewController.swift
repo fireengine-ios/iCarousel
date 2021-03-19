@@ -76,7 +76,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
         searchController.obscuresBackgroundDuringPresentation = true
-        //also delegate here
+        //TODO: also setup delegate here
         return searchController
     }()
     
@@ -128,7 +128,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-//        setNavSearchConntroller(nil)
     }
     
     override func removeFromParentViewController() {
@@ -153,8 +152,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         bottomBarManager.setup()
     }
     
-    private func setupNavBar() {
-//        setNavSearchConntroller(nil)
+//    private func setupNavBar() {
         setupNavigationBar(editingMode: collectionManager.isSelecting)
     }
     
@@ -523,7 +521,7 @@ extension PrivateShareSharedFilesViewController: GalleryFileUploadServiceDelegat
                                           message: error.description,
                                           image: .error,
                                           buttonTitle: TextConstants.ok)
-            self.router.presentViewController(controller: vc, animated: true, completion: nil)//.present(vc, animated: true, completion: nil)
+            self.router.presentViewController(controller: vc, animated: true, completion: nil)
         }
     }
 }

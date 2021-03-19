@@ -39,7 +39,7 @@ final class FullscreenTextController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     

@@ -46,8 +46,6 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setNavigationBarStyle(.white)
-//        tintColor: ColorConstants.infoPageItemBottomText,
-//                         titleTextColor: ColorConstants.infoPageItemBottomText
     }
 }
 

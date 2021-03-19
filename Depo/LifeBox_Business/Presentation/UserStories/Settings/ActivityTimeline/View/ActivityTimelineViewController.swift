@@ -29,7 +29,7 @@ class ActivityTimelineViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        defaultNavBarStyle()
+        setNavigationBarStyle(.byDefault)
     }
     
     private func setupTableView() {
