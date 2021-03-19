@@ -59,7 +59,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override var isEditing: Bool {
         willSet {
-            changeNavbarLargeTitle(!newValue)
+            if case .innerFolder(_, _) = self.shareType {
+                
+            } else {
+                changeNavbarLargeTitle(!newValue)
+            }
             if shareType.isSearchAllowed {
                 setNavSearchConntroller(newValue ? nil : searchController)
             }
@@ -323,8 +327,12 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 if case .innerFolder(_, _) = self.shareType {
                     self.navBarManager.setNestedMode(title: self.shareType.title)
                 } else {
+                    var newTitle = self.shareType.title
+                    if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
+                        newTitle = segmentedParent.rootTitle
+                    }
                     self.navBarManager.setupLargetitle(isLarge: true)///????
-                    self.navBarManager.setRootMode(title: self.shareType.title)
+                    self.navBarManager.setRootMode(title: newTitle)
                 }
             }
             self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)

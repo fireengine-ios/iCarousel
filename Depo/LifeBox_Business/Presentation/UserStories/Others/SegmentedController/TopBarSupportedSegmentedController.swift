@@ -83,7 +83,7 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     
     private var collectionTopYInset: CGFloat = 0
     
-    private var rootTitle = TextConstants.navbarRootTitleMySharings
+    let rootTitle = TextConstants.navbarRootTitleMySharings
     
     class func initWithControllers(with controllers: [UIViewController], currentIndex: Int = 0) -> TopBarSupportedSegmentedController {
         let controller = TopBarSupportedSegmentedController.initFromNib()
