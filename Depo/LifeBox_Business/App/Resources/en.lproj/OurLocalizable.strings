@@ -177,7 +177,7 @@
 "Create" = "Create";
 "New PlayList" = "New PlayList";
 "New Album" = "New Album";
-"New Folder" = "New Folder";
+"business_app_new_folder" = "Create New Folder";
 "Print" = "Print";
 "Make album cover" = "Make album cover";
 "Add To Album" = "Add To Album";
@@ -201,7 +201,7 @@
 "Nothing to upload" = "Nothing to upload";
 "Items Selected" = "Items Selected";
 "Item Selected" = "Item Selected";
-"Upload" = "Upload";
+"business_app_plus_button_upload" = "Upload from Gallery";
 "You can change the sequence " = "You can change the sequence of photos ";
 "Save" = "Save";
 "Add Music" = "Add Music";
@@ -464,7 +464,7 @@
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any files in your lifebox, yet. Start uploading your memories on lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %d%% of your device storage. It’s a great time to free up space on your device.";
-"Upload Files" = "Upload Files";
+"business_app_plus_button_upload_files" = "Upload Files";
 "Free Up Space" = "Free Up Space";
 "Collage" = "Collage";
 "We have created a collage from your photos!" = "We have created a collage for you!";
@@ -541,6 +541,7 @@
 "You don’t have any stories  on your Lifebox yet." = "You don’t have any stories on your lifebox yet.";
 "Start creating stories" = "Start creating stories";
 "Help and Support" = "Help and Support";
+"business_app_faq_page_title" = "FAQ";
 "Album is Empty" = "Album is empty";
 "You don’t have any files on your Lifebox yet." = "You don’t have any files on your lifebox yet.";
 "You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorite files on your lifebox yet.";
@@ -998,6 +999,9 @@
 "login_username_not_valid" = "Please check your username";
 "login_support_info" = "If you are having difficulty during login, contact us for support.";
 "terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
+"business_app_agreement_page_title" = "Agreements";
+"business_app_agreement_eula" = "Terms of Use";
+"business_app_agreement_privacy_policy" = "Privacy Policy";
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "face_tags_description_premium" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
 "terms_of_use" = "Terms of Use";
@@ -1983,6 +1987,7 @@
 "business_app_whohasaccess_role_editor" = "Editor";
 "business_app_whohasaccess_role_viewer" = "Viewer";
 "business_app_whohasaccess_role_varies" = "Varies";
+"uploadVideoToReadOnlyAlbumError" =  "uploadVideoToReadOnlyAlbumError";
 
 "business_app_2FA_first_page_title" = "Security Check";
 "business_app_2FA_first_page_description_title" = "Two factor authentication is needed.";
@@ -2005,10 +2010,24 @@
 "business_app_access_page_from_folder" = "From %@ folder";
 "business_app_access_page_role_change_remove" = "Remove";
 
+"business_app_sortby" = "Sort by:";
+"business_app_sortby_name_a_z" = "Name(A-Z)";
+"business_app_sortby_name_z_a" = "Name(Z-A)";
+"business_app_sortby_newest" = "Newest";
+"business_app_sortby_oldest" = "Oldest";
+"business_app_sortby_largest" = "Largest";
+"business_app_sortby_smallest" = "Smallest";
 "business_app_upload_select_page_title" = "Upload Files";
 "business_app_upload_select_page_upload_button" = "Upload";
 "business_app_role_delete" = "Member is removed from private share";
 "business_app_role_update" = "Role is updated";
+"business_app_no_permission_for_upload" = "You are not authorized to make upload or create folder for this level";
+"business_app_mydisk_page_title" = "My Disk";
+"business_app_mysharings_page_title" = "My Sharings";
+"business_app_sharedarea_page_title" = "Shared Area";
+"business_app_search_bar_explanation" = "Search";
+"business_app_sharedwithme_menu" = "Shared with me";
+"business_app_sharedbyme_menu" = "Shared by me";
 
 "business_app_FL_error_popup_title" = "Authentication Failed";
 "business_app_fast_login_pool_user_popup" = "Please get in touch with your company to get access to the app";

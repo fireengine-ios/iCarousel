@@ -13,7 +13,10 @@ class SettingsRouter: SettingsRouterInput {
     let router = RouterVC()
 
     func navigateToAgreements() {
-        // TODO when ready- add routing to agreements screen
+        guard let agreements = router.agreements else {
+            return
+        }
+        router.pushViewController(viewController: agreements)
     }
 
     func navigateToProfile() {
@@ -21,7 +24,7 @@ class SettingsRouter: SettingsRouterInput {
     }
 
     func navigateToFAQ() {
-        // TODO when ready- add routing to FAQ
+        router.pushViewController(viewController: router.faq)
     }
 
     func navigateToContactUs() {

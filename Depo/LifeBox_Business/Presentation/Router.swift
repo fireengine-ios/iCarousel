@@ -66,6 +66,10 @@ class RouterVC: NSObject {
                currentViewController is PhoneVerificationViewController
     }
     
+    func currentContrroller() -> UIViewController? {
+        return navigationController?.viewControllers.last
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {
@@ -479,7 +483,7 @@ class RouterVC: NSObject {
     }
     
     var sharedFiles: UIViewController {
-        return SegmentedController.initWithControllers([sharedWithMe, sharedByMe], alignment: .center)
+        return TopBarSupportedSegmentedController.initWithControllers(with: [sharedWithMe, sharedByMe], currentIndex: 0)//SegmentedController.initWithControllers([sharedWithMe, sharedByMe], alignment: .center)
     }
     
     var sharedWithMe: UIViewController {
@@ -642,15 +646,15 @@ class RouterVC: NSObject {
     
     // MARK: Help and support
     
-    var helpAndSupport: UIViewController {
-        let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
+    var faq: UIViewController {
+        let controller = FAQModuleInitializer.initializeViewController(with: "FAQViewController")
         return controller
     }
     
-    // MARK: Terms and policy
+    //MARK: Agreement
     
-    var termsAndPolicy: UIViewController? {
-        return TermsAndPolicyViewController.initFromNib()
+    var agreements: UIViewController? {
+        return AgreementsViewController.initFromNib()
     }
     
     // MARK: Turkcell Security

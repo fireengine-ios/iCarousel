@@ -119,7 +119,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         
         subjects = screenType.subjects
         subjectView.models = subjects.map { $0.localizedSubject }
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
 
         addTapGestureToHideKeyboard()
         setupTextFields()

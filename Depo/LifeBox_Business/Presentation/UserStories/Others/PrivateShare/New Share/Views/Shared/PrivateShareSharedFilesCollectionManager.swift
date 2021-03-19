@@ -27,6 +27,8 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     
     func needToShowSpinner()
     func needToHideSpinner()
+    
+    func collectionOffsetChanged(offsetY: CGFloat)
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -483,6 +485,10 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
 
 //MARK: - UIScrollView
 extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.collectionOffsetChanged(offsetY: scrollView.contentOffset.y)
+    }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)

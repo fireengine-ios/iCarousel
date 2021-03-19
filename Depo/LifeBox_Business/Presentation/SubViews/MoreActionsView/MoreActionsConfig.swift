@@ -145,17 +145,17 @@ class MoreActionsConfig {
         var description: String {
             switch self {
             case .AlphaBetricAZ, .LettersAZ:
-                return TextConstants.sortTypeAlphabeticAZTitle
+                return TextConstants.topBarSortSubviewSortByName_a_z
             case .AlphaBetricZA, .LettersZA:
-                return TextConstants.sortTypeAlphabeticZATitle
+                return TextConstants.topBarSortSubviewSortByName_z_a
             case .TimeNewOld, .metaDataTimeNewOld, .lastModifiedTimeNewOld:
-                return TextConstants.sortTimeNewOldTitle
+                return TextConstants.topBarSortSubviewSortByNewest
             case .TimeOldNew, .metaDataTimeOldNew, .lastModifiedTimeOldNew:
-                return TextConstants.sortTimeOldNewTitle
+                return TextConstants.topBarSortSubviewSortByOldest
             case .Largest:
-                return TextConstants.sortTimeSizeLargestTitle
+                return TextConstants.topBarSortSubviewSortByLargest
             case .Smallest:
-                return TextConstants.sortTimeSizeSmallestTitle
+                return TextConstants.topBarSortSubviewSortBySmallest
             default:
                 return "None"
             }
