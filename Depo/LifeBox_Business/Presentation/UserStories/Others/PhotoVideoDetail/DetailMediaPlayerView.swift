@@ -74,7 +74,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
         let player = Player()
         
         player.fillMode = .resizeAspect
-        player.playbackLoops = true
+        player.playbackLoops = false
         
         player.playerDelegate = self
         player.playbackDelegate = self
@@ -116,12 +116,8 @@ final class DetailMediaPlayerView: UIView, FromNib {
     }
     
     func set(url: URL) {
-        timeAfter.text = "00:00"
-        timeBefore.text = "00:00"
-        progressSlider.value = 0
-        
         mediaPlayer.url = url
-        mediaPlayer.playFromBeginning()
+        resetControls()
     }
     
     func play() {
@@ -169,6 +165,14 @@ final class DetailMediaPlayerView: UIView, FromNib {
     private func seekWithSliderRatio() {
         let time = mediaPlayer.maximumDuration * Double(progressSlider.value)
         mediaPlayer.seek(to: CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
+    }
+    
+    private func resetControls() {
+        timeAfter.text = "00:00"
+        timeBefore.text = "00:00"
+        playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+        
+        progressSlider.value = 0
     }
 }
 
@@ -225,7 +229,7 @@ extension DetailMediaPlayerView: PlayerPlaybackDelegate {
     }
     
     func playerPlaybackDidEnd(_ player: Player) {
-        
+        resetControls()
     }
     
     func playerPlaybackWillLoop(_ player: Player) {
