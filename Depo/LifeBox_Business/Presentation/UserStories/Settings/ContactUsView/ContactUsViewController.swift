@@ -161,6 +161,12 @@ extension ContactUsViewController: UITextViewDelegate {
 //MARK: - UITextFieldDelegate
 
 extension ContactUsViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let _ = textField.text {
+            enableSendButton()
+        }
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return false
     }
