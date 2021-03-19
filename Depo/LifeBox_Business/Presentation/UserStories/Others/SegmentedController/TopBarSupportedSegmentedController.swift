@@ -155,7 +155,6 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
             return
         }
         
-        
         currentIndex = index
         
         childViewControllers.forEach { $0.removeFromParentVC() }

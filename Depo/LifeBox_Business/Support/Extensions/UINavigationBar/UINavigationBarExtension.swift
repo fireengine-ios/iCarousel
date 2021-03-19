@@ -11,7 +11,7 @@ import UIKit
 enum NavigationBarStyles {
     case byDefault
     case white
-    case transparetn
+    case transparent
     case visible
     case hidden
     case black
@@ -161,7 +161,7 @@ extension UIViewController {
             defaultNavBarStyle()
         case .white:
             whiteNavBarStyle()
-        case .transparetn:
+        case .transparent:
             transparentNavBarStyle()
         case .visible:
             visibleNavigationBarStyle()
@@ -195,6 +195,7 @@ extension UIViewController {
     }
     
     private func transparentNavBarStyle() {
+        defaultNavBarStyle()
         navBar?.isTranslucent = true
 
         navBar?.barTintColor = .clear

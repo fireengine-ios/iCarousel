@@ -269,6 +269,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         }
         setupPlusButton()
         handleOffsetChange(offsetY: collectionView.contentOffset.y)
+        view.layoutSubviews()
     }
     
     func showActions(for item: WrapData, sender: Any) {
