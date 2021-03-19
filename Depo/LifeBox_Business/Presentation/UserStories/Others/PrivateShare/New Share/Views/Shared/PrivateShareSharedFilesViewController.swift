@@ -152,7 +152,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         bottomBarManager.setup()
     }
     
-//    private func setupNavBar() {
+    private func setupNavBar() {
         setupNavigationBar(editingMode: collectionManager.isSelecting)
     }
     

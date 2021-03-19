@@ -95,7 +95,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         }
         
         if let highlightViewLeaningConstraint = highlightViewLeaningConstraint {
-            removeConstraint(highlightViewLeaningConstraint)
+            highlightViewLeaningConstraint.isActive = false
             self.highlightViewLeaningConstraint = nil
         }
         
