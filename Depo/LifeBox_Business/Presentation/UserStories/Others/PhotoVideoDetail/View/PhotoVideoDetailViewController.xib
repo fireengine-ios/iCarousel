@@ -64,7 +64,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EkB-f5-2OH">
-                    <rect key="frame" x="0.0" y="750" width="390" height="60"/>
+                    <rect key="frame" x="0.0" y="784" width="390" height="60"/>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="rMN-w4-uOU"/>
@@ -79,7 +79,7 @@
                 <constraint firstItem="W8L-hg-9Ki" firstAttribute="trailing" secondItem="hTs-d8-e25" secondAttribute="trailing" id="JNs-gU-WON"/>
                 <constraint firstItem="W8L-hg-9Ki" firstAttribute="leading" secondItem="hTs-d8-e25" secondAttribute="leading" id="QPo-l1-A5Y"/>
                 <constraint firstItem="W8L-hg-9Ki" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T96-8x-22r" customClass="TopSafeAreaConstraint" customModule="lifeBox_Business" customModuleProvider="target"/>
-                <constraint firstItem="hTs-d8-e25" firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="fDW-8e-SDZ"/>
+                <constraint firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="fDW-8e-SDZ"/>
                 <constraint firstItem="EkB-f5-2OH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vGC-fV-ORB"/>
             </constraints>
             <point key="canvasLocation" x="30.769230769230766" y="63.270142180094787"/>

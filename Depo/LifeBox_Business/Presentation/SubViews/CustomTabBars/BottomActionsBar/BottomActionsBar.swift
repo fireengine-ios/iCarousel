@@ -204,10 +204,10 @@ final class BottomActionsBar: UIView {
     
     private func setupShadow() {
         updateShadowLayer()
-        layer.shadowRadius = 4
+        layer.shadowRadius = 2
         layer.shadowOpacity = (style == .opaque) ? 0.2 : 0
         layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 5.0)
+        layer.shadowOffset = CGSize(width: 0, height: -3.0)
     }
     
     private func updateShadowLayer() {
