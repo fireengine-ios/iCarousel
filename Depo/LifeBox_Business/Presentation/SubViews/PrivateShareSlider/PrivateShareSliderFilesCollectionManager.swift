@@ -86,7 +86,7 @@ extension PrivateShareSliderFilesCollectionManager: SharedFilesCollectionDataSou
                 delegate?.startAsyncOperation()
                 createNewUrl(for: withModel) { [weak self] newUrl in
                     if newUrl != nil {
-                        withModel.tmpDownloadUrl = newUrl
+                        withModel.urlToFile = newUrl
                         self?.delegate?.open(entity: withModel, allEnteties: [withModel])
                     }
                     self?.delegate?.completeAsyncOperation()

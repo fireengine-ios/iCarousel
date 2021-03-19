@@ -183,7 +183,7 @@ class WrapItemFileService: WrapItemFileOperations {
     func downloadDocuments(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
+        let itemsWithoutUrl = items.filter { $0.urlToFile == nil || !$0.isOwner }
         
         createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
             self?.remoteFileService.downloadDocument(items: downloadItems, success: success, fail: fail)
@@ -193,7 +193,7 @@ class WrapItemFileService: WrapItemFileOperations {
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
+        let itemsWithoutUrl = items.filter { $0.urlToFile == nil || !$0.isOwner }
         
         createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
             self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
@@ -208,7 +208,7 @@ class WrapItemFileService: WrapItemFileOperations {
             
             privateShareApiService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { response in
                 if case let ResponseResult.success(urlToDownload) = response {
-                    item.tmpDownloadUrl = urlToDownload.url
+                    item.urlToFile = urlToDownload.url
                 }
                 group.leave()
             }
@@ -315,7 +315,7 @@ class WrapItemFileService: WrapItemFileOperations {
     
     private func uuidsOfItemsThatHaveRemoteURL(files: [WrapData]) -> [String] {
         return files
-            .filter { $0.tmpDownloadUrl != nil }
+            .filter { $0.urlToFile != nil }
             .compactMap { $0.uuid }
     }
     
@@ -325,11 +325,11 @@ class WrapItemFileService: WrapItemFileOperations {
             for item in updatedItems {
                 if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
                     itemToUpdate.metaData = item.metaData
-                    itemToUpdate.tmpDownloadUrl = item.tmpDownloadUrl
+                    itemToUpdate.urlToFile = item.urlToFile
                     itemToUpdate.status = item.status
                 }
             }
-            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status.isTranscoded })
+            let isCompleted = items.contains(where: { $0.urlToFile != nil || $0.status.isTranscoded })
             /// old logic, now we consider its ok, neither if its active or tempo url online
             //!items.contains(where: { $0.status != .active})
             if isCompleted {

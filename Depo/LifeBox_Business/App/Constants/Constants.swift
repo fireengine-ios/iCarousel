@@ -1409,6 +1409,14 @@ extension TextConstants {
     static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
+
+//MARK: - Detail view screen
+extension TextConstants {
+    static let documentNoPreview = NSLocalizedString("business_app_document_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoNoPreview = NSLocalizedString("business_app_photo_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let audioNoPreview = NSLocalizedString("business_app_music_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
 // MARK: - Empty pages or folders
 extension TextConstants {
     static let myDiskEmptyPage = NSLocalizedString("business_app_my_disk_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

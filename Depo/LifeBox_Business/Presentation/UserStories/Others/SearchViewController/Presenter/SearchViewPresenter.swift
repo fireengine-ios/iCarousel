@@ -291,11 +291,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
                 actionTypes.remove(at: renameIndex)
             }
-            
-            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
-                actionTypes.remove(at: printIndex)
-            }
-            
+          
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
