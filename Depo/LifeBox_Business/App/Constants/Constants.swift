@@ -1417,4 +1417,7 @@ extension TextConstants {
     static let contactUsSubject3 = NSLocalizedString("business_app_contact_us_subject_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject4 = NSLocalizedString("business_app_contact_us_subject_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject5 = NSLocalizedString("business_app_contact_us_subject_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactUsMailBodyUnlimitedStorage = NSLocalizedString("business_app_contact_us_email_body_unlimited", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsMailTextFormat = NSLocalizedString("business_app_contact_us_email_body", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

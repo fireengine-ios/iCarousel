@@ -2044,3 +2044,6 @@
 "business_app_contact_us_subject_3" = "Subject_3";
 "business_app_contact_us_subject_4" = "Subject_4";
 "business_app_contact_us_subject_5" = "Subject_5";
+
+"business_app_contact_us_email_body_unlimited" = "Unlimited";
+"business_app_contact_us_email_body" = "\ne-mail: %@\nApplication Version: %@\nDevice Name: %@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@\nTotal Storage: %@\nUsed Storage: %@\nSubject: %@";
