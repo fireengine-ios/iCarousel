@@ -17,6 +17,8 @@ final class TextFieldWithPickerView: UIView {
     
     //MARK: - Public properties
     
+    var responderOnNext: UIResponder?
+    
     var models = [String]() {
         didSet {
             pickerView.reloadAllComponents()
@@ -84,7 +86,7 @@ final class TextFieldWithPickerView: UIView {
     //MARK: - Actions
     
     @objc private func doneButtonPressed() {
-        print("Done Done Done Done Done Done Done Done Done Done Done Done Done ")
+        responderOnNext?.becomeFirstResponder()
     }
     
     @objc private func textFieldDidBeginEditing() {

@@ -22,9 +22,10 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     private lazy var subjectView: TextFieldWithPickerView = {
         let view = TextFieldWithPickerView()
+        view.responderOnNext = textView
+        view.models = subjects
         view.textField.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.models = subjects
         return view
     }()
     
