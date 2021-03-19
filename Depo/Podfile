@@ -61,7 +61,7 @@ end
 def business_pods
   core_pods
   authentication_pods
-  pod "Player", "~> 0.13.2"
+  pod 'Player', '~> 0.13.2'
 end
 
 def sharing_pods
