@@ -61,7 +61,7 @@ indirect enum PrivateShareType: Equatable {
                 return true
                 
             case .withMe:
-                return false
+                return true
                 
             case .innerFolder:
                 return veryRootType(for: self).isSelectionAllowed

@@ -59,13 +59,15 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override var isEditing: Bool {
         willSet {
-            if case .innerFolder = self.shareType {
-                
-            } else {
-                changeNavbarLargeTitle(!newValue)
-            }
-            if shareType.isSearchAllowed {
-                setNavSearchConntroller(newValue ? nil : searchController)
+            DispatchQueue.main.async {
+                if case .innerFolder = self.shareType {
+                    
+                } else {
+                    self.changeNavbarLargeTitle(!newValue)
+                }
+                if self.shareType.isSearchAllowed {
+                    self.setNavSearchConntroller(newValue ? nil : self.searchController)
+                }
             }
         }
     }
@@ -140,6 +142,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Private
     
     private func setupBars() {
+        //in theory should provide smoother animation if initial setup wasn on viewDidLoad
         if case .innerFolder(_, _) = self.shareType {
             navBarManager.setupLargetitle(isLarge: false)
         } else {
@@ -262,7 +265,9 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didEndReload() {
         hideSpinner()
         if shareType.isSearchAllowed {
-            setNavSearchConntroller(searchController)
+            DispatchQueue.main.async {
+                self.setNavSearchConntroller(self.searchController)
+            }
         }
         setupPlusButton()
         handleOffsetChange(offsetY: collectionView.contentOffset.y)
@@ -293,7 +298,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
     
     private func updateBars(isSelecting: Bool) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.setupNavigationBar(editingMode: isSelecting)
             
             self.needToShowTabBar = !isSelecting
@@ -331,7 +336,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                     if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
                         newTitle = segmentedParent.rootTitle
                     }
-                    self.navBarManager.setupLargetitle(isLarge: true)///????
+                    self.navBarManager.setupLargetitle(isLarge: true)
                     self.navBarManager.setRootMode(title: newTitle)
                 }
             }

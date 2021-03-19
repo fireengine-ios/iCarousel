@@ -110,14 +110,11 @@ extension UIViewController {
     }
     
     func changeLargeTitle(prefersLargeTitles: Bool) {
-//        navigationItem.largeTitleDisplayMode = prefersLargeTitles ? .always : .never
         navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
-//        navigationController?.navigationItem.largeTitleDisplayMode = prefersLargeTitles ? .always : .never
         if prefersLargeTitles {
             navigationController?.navigationBar.largeTitleTextAttributes = largeTitleAttributes
         }
     }
-    
 }
 
 //MARK: - Subtitle

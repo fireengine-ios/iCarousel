@@ -34,12 +34,7 @@ extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewCont
     }
     
     func setTitle(_ title: String, isSelectionMode: Bool) {
-        
-//        if let parent = parentVC, !isSelectionMode {
-//            parent.setNavigationTitle(title: parent.title ?? "")
-//        } else  {
-            currentViewController.setNavigationTitle(title: title)
-//        }
+        currentViewController.setNavigationTitle(title: title)
     }
     
     func changeNavbarLargeTitle(_ isEnabled: Bool) {
@@ -112,7 +107,6 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         needToShowTabBar = true
-//        changeLargeTitle(prefersLargeTitles: true)
         setupContainer()
     }
     
