@@ -166,7 +166,6 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
         newChildVC.view.frame = CGRect(x: 0, y: topBarCustomSegmentedBar.frame.height, width: view.bounds.width, height: view.bounds.height)
         newChildVC.didMove(toParentViewController: self)
         
-        
         topBarCustomSegmentedBar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
         
         view.bringSubview(toFront: topBarCustomSegmentedBar)
