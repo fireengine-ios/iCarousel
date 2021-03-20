@@ -42,10 +42,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9i9-Hw-MaQ">
-                    <rect key="frame" x="20" y="158" width="335" height="209"/>
+                    <rect key="frame" x="20" y="158" width="335" height="150"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLe-pV-cYL">
-                            <rect key="frame" x="10" y="5" width="277" height="181"/>
+                            <rect key="frame" x="10" y="5" width="277" height="122"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium sodales ex, eu iaculis nunc finibus at. Nam rutrum dui ligula. Nullam cursus tortor id maximus pulvinar. Nam et enim et nunc accumsan mollis vel sodales magna. Nullam ut ante vel ipsum sodales lobortis. Etiam molestie dignissim velit.</string>
                             <color key="textColor" systemColor="labelColor"/>
@@ -69,13 +69,14 @@
                         <constraint firstAttribute="trailing" secondItem="nLe-pV-cYL" secondAttribute="trailing" constant="48" id="8mb-Oz-sXu"/>
                         <constraint firstItem="nLe-pV-cYL" firstAttribute="top" secondItem="9i9-Hw-MaQ" secondAttribute="top" constant="5" id="A1R-p8-1nX"/>
                         <constraint firstItem="nLe-pV-cYL" firstAttribute="leading" secondItem="9i9-Hw-MaQ" secondAttribute="leading" constant="10" id="lQj-BT-gm2"/>
+                        <constraint firstAttribute="height" constant="150" id="pXf-St-OnX"/>
                         <constraint firstAttribute="bottom" secondItem="nLe-pV-cYL" secondAttribute="bottom" constant="23" id="r1d-cQ-ZAv"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O5M-Ln-gJK">
                     <rect key="frame" x="20" y="603" width="335" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="335" id="GYl-oK-zbQ"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="335" id="GYl-oK-zbQ"/>
                         <constraint firstAttribute="height" constant="44" id="fM3-Ep-h3X"/>
                     </constraints>
                     <state key="normal" title="Send"/>
@@ -87,12 +88,13 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="O5M-Ln-gJK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" priority="999" constant="20" id="Go2-1c-Hck"/>
                 <constraint firstItem="WnP-L2-Zf2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="IP6-nk-UjF"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="q06-FI-X9Q" secondAttribute="trailing" constant="20" id="J6p-Rq-T0N"/>
                 <constraint firstItem="q06-FI-X9Q" firstAttribute="top" secondItem="WnP-L2-Zf2" secondAttribute="bottom" constant="30" id="OmU-zN-b7V"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="O5M-Ln-gJK" secondAttribute="trailing" priority="999" constant="20" id="Qas-3m-38Y"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9i9-Hw-MaQ" secondAttribute="trailing" constant="20" id="Rad-MH-dhe"/>
                 <constraint firstItem="9i9-Hw-MaQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="WU7-ds-lSr"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="9i9-Hw-MaQ" secondAttribute="bottom" constant="300" id="XdT-Jx-QNj"/>
                 <constraint firstItem="O5M-Ln-gJK" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Yle-yQ-nf8"/>
                 <constraint firstItem="O5M-Ln-gJK" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="-64" id="Zlj-hm-JQa"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WnP-L2-Zf2" secondAttribute="trailing" constant="40" id="bUF-Ju-hzt"/>
@@ -102,7 +104,6 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="O5M-Ln-gJK" secondAttribute="bottom" constant="20" id="jcz-tC-zzh"/>
                 <constraint firstItem="WnP-L2-Zf2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="oz0-tg-JpV"/>
                 <constraint firstItem="9i9-Hw-MaQ" firstAttribute="top" secondItem="q06-FI-X9Q" secondAttribute="bottom" constant="10" id="vTM-at-mBz"/>
-                <constraint firstItem="9i9-Hw-MaQ" firstAttribute="top" secondItem="WnP-L2-Zf2" secondAttribute="bottom" constant="85" id="z15-yQ-YY8"/>
             </constraints>
             <point key="canvasLocation" x="-159.19999999999999" y="75.112443778110944"/>
         </view>
