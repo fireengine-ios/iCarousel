@@ -75,9 +75,9 @@ final class OptInController: ViewController, NibInit {
         setupNavBar()
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     func setupTimer(withRemainingTime remainingTime: Int) {
         timerLabel.setupTimer(timerLimit: remainingTime)
@@ -157,7 +157,7 @@ final class OptInController: ViewController, NibInit {
     // MARK: - Utility methods
     private func setupNavBar() {
         setNavigationBarStyle(.byDefault)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        setBackButtonForNavigationItem(style: .byDefault, title: TextConstants.backTitle, target: nil, action: nil)
     }
     
     private func setupInitialState() {
@@ -169,10 +169,10 @@ final class OptInController: ViewController, NibInit {
         
         setupPhoneLable(with: phone)
         
-        changeLargeTitle(prefersLargeTitles: false)
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .byDefault)
         
         if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.enterSecurityCode)
+            setNavigationTitle(title: TextConstants.enterSecurityCode, style: .byDefault)
         }
         navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         

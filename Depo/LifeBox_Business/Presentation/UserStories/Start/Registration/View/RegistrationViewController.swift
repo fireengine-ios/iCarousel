@@ -140,7 +140,7 @@ final class RegistrationViewController: ViewController {
         super.viewDidLoad()
         
         setup()
-        changeLargeTitle(prefersLargeTitles: false)
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .byDefault)
         
         output.viewIsReady()
     }
@@ -165,9 +165,9 @@ final class RegistrationViewController: ViewController {
 
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     //MARK: Utility Methods (private)
     private func setup() {
@@ -177,8 +177,8 @@ final class RegistrationViewController: ViewController {
     
     private func setupNavBar() {
         setNavigationBarStyle(.byDefault)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
-        setNavigationTitle(title: TextConstants.registerTitle)
+        setBackButtonForNavigationItem(style: .byDefault, title: TextConstants.backTitle, target: nil, action: nil)
+        setNavigationTitle(title: TextConstants.registerTitle, style: .byDefault)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     

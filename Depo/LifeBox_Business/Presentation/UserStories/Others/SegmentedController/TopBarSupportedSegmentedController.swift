@@ -8,8 +8,8 @@
 
 protocol SegmentedChildTopBarSupportedControllerProtocol: class {
     func setNavBarStyle(_ style: NavigationBarStyles)
-    func setTitle(_ title: String, isSelectionMode: Bool)
-    func changeNavbarLargeTitle(_ isEnabled: Bool)
+    func setTitle(_ title: String, isSelectionMode: Bool, style: NavigationBarStyles)
+    func changeNavbarLargeTitle(_ isEnabled: Bool, style: NavigationBarStyles)
     func setNavSearchConntroller(_ controller: UISearchController?)
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
     func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
@@ -33,12 +33,12 @@ extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewCont
         currentViewController.setNavigationBarStyle(style)
     }
     
-    func setTitle(_ title: String, isSelectionMode: Bool) {
-        currentViewController.setNavigationTitle(title: title)
+    func setTitle(_ title: String, isSelectionMode: Bool, style: NavigationBarStyles) {
+        currentViewController.setNavigationTitle(title: title, style: style)
     }
     
-    func changeNavbarLargeTitle(_ isEnabled: Bool) {
-        currentViewController.changeLargeTitle(prefersLargeTitles: isEnabled)
+    func changeNavbarLargeTitle(_ isEnabled: Bool, style: NavigationBarStyles) {
+        currentViewController.changeLargeTitle(prefersLargeTitles: isEnabled, barStyle: style)
     }
     
     func setNavSearchConntroller(_ controller: UISearchController?) {

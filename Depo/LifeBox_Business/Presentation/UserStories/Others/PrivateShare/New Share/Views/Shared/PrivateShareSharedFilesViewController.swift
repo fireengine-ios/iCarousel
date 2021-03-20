@@ -63,7 +63,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
                 if case .innerFolder = self.shareType {
                     
                 } else {
-                    self.changeNavbarLargeTitle(!newValue)
+                    self.changeNavbarLargeTitle(!newValue, style: .white)
                 }
                 if self.shareType.isSearchAllowed {
                     self.setNavSearchConntroller(newValue ? nil : self.searchController)
@@ -292,7 +292,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     private func show(selectedItemsCount: Int) {
         DispatchQueue.main.async {
-            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)", isSelectionMode: true)
+            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)", isSelectionMode: true, style: .white)
         }
     }
     
