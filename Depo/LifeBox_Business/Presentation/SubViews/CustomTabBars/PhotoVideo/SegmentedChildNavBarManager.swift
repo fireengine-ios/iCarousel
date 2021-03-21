@@ -12,9 +12,16 @@ protocol SegmentedChildNavBarManagerDelegate: SegmentedChildTopBarSupportedContr
     func onCancelSelectionButton()
     func onPlusButton()
     func onSettingsButton()
+    func onTrashBinButton()
+    func onBackButton()
 }
 
 final class SegmentedChildNavBarManager {
+
+    private lazy var cancelSelectionForTrashBinButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(image: UIImage(named: "close_dark"), style: .plain, target: self, action: #selector(onCancelSelectionButton))
+        return barButtonItem
+    }()
     
     private lazy var cancelSelectionButton: UIBarButtonItem = {
         let button = UIButton(type: .custom)
@@ -27,7 +34,7 @@ final class SegmentedChildNavBarManager {
        return UIBarButtonItem(customView: button)
     }()
     
-    private(set) lazy var plusButton: UIBarButtonItem =  {
+    private(set) lazy var plusButton: UIBarButtonItem = {
             let button = UIButton(type: .custom)
             button.setImage(UIImage(named: "PlusButtonBusiness"),
                             for: .normal)
@@ -37,6 +44,23 @@ final class SegmentedChildNavBarManager {
             button.addTarget(self, action: #selector(onPlusButton),
                              for: UIControlEvents.touchUpInside)
             return UIBarButtonItem(customView: button)
+    }()
+
+    private(set) lazy var trashButton: UIBarButtonItem = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "trash_bin_nav_bar"),
+                        for: .normal)
+
+        button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
+
+        button.addTarget(self, action: #selector(onTrashBinButton),
+                         for: UIControlEvents.touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+
+    private(set) lazy var customBackButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(image: UIImage(named: "nav_bar_back"), style: .plain, target: self, action: #selector(onBackButton))
+        return barButtonItem
     }()
     
     lazy var settingsButton: UIBarButtonItem = {
@@ -68,6 +92,11 @@ final class SegmentedChildNavBarManager {
         delegate?.setLeftBarButtonItems([cancelSelectionButton], animated: true)
         delegate?.setRightBarButtonItems([], animated: false)
     }
+
+    func setSelectionModeForTrashBin() {
+        delegate?.setLeftBarButtonItems([cancelSelectionForTrashBinButton], animated: true)
+        delegate?.setRightBarButtonItems([], animated: false)
+    }
     
     func setRootMode(title: String = "") {
         delegate?.setTitle(title, isSelectionMode: false)
@@ -88,6 +117,12 @@ final class SegmentedChildNavBarManager {
         delegate?.setTitle(title, isSelectionMode: false)
         delegate?.setLeftBarButtonItems(nil, animated: true)
     }
+
+    func setTrashBinMode(title: String) {
+        delegate?.setTitle(title, isSelectionMode: false)
+        delegate?.setRightBarButtonItems([trashButton], animated: true)
+        delegate?.setLeftBarButtonItems([customBackButton], animated: true)
+    }
     
     @objc private func onCancelSelectionButton() {
         delegate?.onCancelSelectionButton()
@@ -99,5 +134,13 @@ final class SegmentedChildNavBarManager {
     
     @objc private func onSettingsButton() {
         delegate?.onSettingsButton()
+    }
+
+    @objc private func onTrashBinButton() {
+        delegate?.onTrashBinButton()
+    }
+
+    @objc private func onBackButton() {
+        delegate?.onBackButton()
     }
 }

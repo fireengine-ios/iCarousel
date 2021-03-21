@@ -18,7 +18,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         controller.title = shareType.title
         controller.shareType = shareType
-        controller.needToShowTabBar = true
+        controller.needToShowTabBar = shareType != .trashBin
         return controller
     }
 
@@ -121,7 +121,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         if isSelecting {
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
-            bottomBarManager.update(for: selectedItems)
+            bottomBarManager.update(for: selectedItems, shareType: shareType)
         }
         
     }
@@ -142,9 +142,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupBars() {
         //in theory should provide smoother animation if initial setup wasn on viewDidLoad
-        if case .innerFolder(_, _) = self.shareType {
+        switch shareType {
+        case .innerFolder(_, _), .trashBin:
             navBarManager.setupLargetitle(isLarge: false)
-        } else {
+        default:
             navBarManager.setupLargetitle(isLarge: true)
         }
         setDefaultTabBarState()
@@ -167,6 +168,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     @available(iOS 14.0, *)
     private func setupPlusButtonMenu() {
         guard
+            shareType != .trashBin,
             let realButton = navBarManager.plusButton.customView as? UIButton
         else {
             return
@@ -187,7 +189,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func setDefaultTabBarState() {
-        needToShowTabBar = true
+        needToShowTabBar = shareType != .trashBin
     }
     
     private func setupCollectionViewBars() {
@@ -251,7 +253,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
-        bottomBarManager.update(for: selectedItems)
+        bottomBarManager.update(for: selectedItems, shareType: shareType)
         
         if selectedItems.isEmpty {
             bottomBarManager.hide()
@@ -299,14 +301,19 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     private func updateBars(isSelecting: Bool) {
         DispatchQueue.main.async {
             self.setupNavigationBar(editingMode: isSelecting)
-            
-            self.needToShowTabBar = !isSelecting
-            self.showTabBarIfNeeded()
+
+            let tabBarNeeded = self.shareType != .trashBin
+
+            if tabBarNeeded {
+                self.needToShowTabBar = !isSelecting
+                self.showTabBarIfNeeded()
+            }
+
             if isSelecting {
                 let selectedItems = self.collectionManager.selectedItems()
                 self.show(selectedItemsCount: selectedItems.count)
                 self.bottomBarManager.show()
-                self.bottomBarManager.update(for: selectedItems)
+                self.bottomBarManager.update(for: selectedItems, shareType: self.shareType)
             } else {
                 self.bottomBarManager.hide()
             }
@@ -321,16 +328,24 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             }
 
             self.setNavigationBarStyle(.white)
-            
+
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
-            
+
             if editingMode, isSelectionAllowed {
-                self.navBarManager.setSelectionMode()
+                switch self.shareType {
+                case .trashBin:
+                    self.navBarManager.setSelectionModeForTrashBin()
+                default:
+                    self.navBarManager.setSelectionMode()
+                }
             } else {
-                if case .innerFolder(_, _) = self.shareType {
+                switch self.shareType {
+                case .trashBin:
+                    self.navBarManager.setTrashBinMode(title: self.shareType.title)
+                case .innerFolder(_, _):
                     self.navBarManager.setNestedMode(title: self.shareType.title)
-                } else {
+                default:
                     var newTitle = self.shareType.title
                     if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
                         newTitle = segmentedParent.rootTitle
@@ -388,13 +403,20 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         
         router.pushViewController(viewController: controller!)
     }
+
+    func onTrashBinButton() {
+        // TODO handle delete all button
+    }
+
+    func onBackButton() {
+        router.popViewController()
+    }
     
     //MARK: Helpers
     private func showSearchScreen() {
         let controller = router.searchView(navigationController: navigationController)
         router.pushViewController(viewController: controller)
     }
-    
 }
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {

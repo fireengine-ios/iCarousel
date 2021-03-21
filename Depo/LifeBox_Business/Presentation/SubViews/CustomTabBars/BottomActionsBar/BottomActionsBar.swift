@@ -18,6 +18,7 @@ enum BottomBarActionType: Int {
     case privateShare
     case info
     case delete
+    case deletePermanently
     case move
     case download
     case downloadDocument
@@ -30,7 +31,7 @@ enum BottomBarActionType: Int {
             case .share: imageName = "moveBottom"
             case .privateShare: imageName = "shareBottom"
             case .info: imageName = "infoBottom"
-            case .delete: imageName = "trashBottom"
+            case .delete, .deletePermanently: imageName = "trashBottom"
             case .move: imageName = "moveBottom"
             case .download: imageName = "downloadBottom"
             case .downloadDocument: imageName = "downloadBottom"
@@ -52,6 +53,7 @@ enum BottomBarActionType: Int {
             case .downloadDocument: return TextConstants.tabBarDownloadLabel
             case .restore: return TextConstants.actionSheetRestore
             case .more: return TextConstants.actionSheetMore
+            case .deletePermanently: return TextConstants.trashBinEmptyTrashConfirmTitle
         }
     }
     
@@ -65,6 +67,8 @@ enum BottomBarActionType: Int {
                 return .info
             case .delete, .moveToTrash, .moveToTrashShared:
                 return .delete
+            case .deletePermanently:
+                return .deletePermanently
             case .move:
                 return .move
             case .download:
@@ -98,6 +102,8 @@ enum BottomBarActionType: Int {
                 return .restore
             case .more:
                 return .more
+            case .deletePermanently:
+                return .deletePermanently
         }
     }
 }
