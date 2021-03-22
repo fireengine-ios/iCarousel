@@ -14,7 +14,7 @@ enum BottomActionsBarStyle {
 }
 
 enum BottomBarActionType: Int {
-    case share = 0
+    case shareCopy = 0
     case privateShare
     case info
     case delete
@@ -27,7 +27,7 @@ enum BottomBarActionType: Int {
     var image: UIImage? {
         let imageName: String
         switch self {
-            case .share: imageName = "moveBottom"
+            case .shareCopy: imageName = "moveBottom"
             case .privateShare: imageName = "shareBottom"
             case .info: imageName = "infoBottom"
             case .delete: imageName = "trashBottom"
@@ -43,7 +43,7 @@ enum BottomBarActionType: Int {
     
     var title: String {
         switch self {
-            case .share: return TextConstants.tabBarShareLabel
+            case .shareCopy: return TextConstants.tabBarShareLabel
             case .privateShare: return TextConstants.tabBarSharePrivatelyLabel
             case .info: return TextConstants.tabBarInfoLabel
             case .delete: return TextConstants.tabBarDeleteLabel
@@ -58,7 +58,7 @@ enum BottomBarActionType: Int {
     static func from(type: ElementTypes) -> Self? {
         switch type {
             case .share:
-                return .share
+                return .shareCopy
             case .privateShare:
                 return .privateShare
             case .info:
@@ -80,7 +80,7 @@ enum BottomBarActionType: Int {
     
     var toElementType: ElementTypes {
         switch self {
-            case .share:
+            case .shareCopy:
                 return .share
             case .privateShare:
                 return .privateShare

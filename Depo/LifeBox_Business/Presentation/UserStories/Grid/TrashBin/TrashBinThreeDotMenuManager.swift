@@ -58,7 +58,7 @@ final class TrashBinThreeDotMenuManager {
             let action: UIAlertAction?
             switch type {
             case .restore, .select, .delete, .emptyTrashBin, .info:
-                action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
+                action = UIAlertAction(title: type.actionTitle, style: .default, handler: { [weak self] _ in
                     self?.handleAction(type: type, item: item)
                 })
             default:

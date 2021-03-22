@@ -73,7 +73,7 @@ enum ElementTypes {
             return result
         }
         if grantedPermissions.contains(.writeAcl) {
-            result.append(.share)
+            result.append(.privateShare)
         }
         
         if grantedPermissions.contains(.read) {
@@ -82,6 +82,7 @@ enum ElementTypes {
             } else {
                 result.append(.downloadDocument)
             }
+            result.append(.share)
         }
         
         if grantedPermissions.contains(.delete) {
@@ -263,7 +264,7 @@ enum ElementTypes {
         return triplet
     }
     
-    func actionTitle(fileType: FileType? = nil) -> String {
+    var actionTitle: String {
         switch self {
         case .info:
             return TextConstants.actionInfo
@@ -276,7 +277,7 @@ enum ElementTypes {
         case .move:
             return TextConstants.actionSheetMove
         case .share, .shareAlbum:
-            return TextConstants.actionSheetShare
+            return TextConstants.actionShareCopy
         case .emptyTrashBin:
             return TextConstants.actionSheetEmptyTrashBin
         case .photos:
@@ -306,7 +307,7 @@ enum ElementTypes {
         case .documentDetails:
             return TextConstants.actionSheetDocumentDetails
         case .select:
-            return TextConstants.actionSheetSelect
+            return TextConstants.actionSelect
         case .selectAll:
             return TextConstants.actionSheetSelectAll
         case .deSelectAll:
