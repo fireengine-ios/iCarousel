@@ -150,9 +150,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
-//        output.viewIsReady(view: viewForBottomBar)
-        updateFirstVisibleCell()
         output.viewIsReady(view: viewForBottomBar)
+        updateFirstVisibleCell()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

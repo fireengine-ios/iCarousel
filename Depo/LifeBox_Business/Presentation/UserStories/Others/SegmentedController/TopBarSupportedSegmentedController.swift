@@ -11,6 +11,7 @@ protocol SegmentedChildTopBarSupportedControllerProtocol: class {
     func setTitle(_ title: String, isSelectionMode: Bool, style: NavigationBarStyles)
     func changeNavbarLargeTitle(_ isEnabled: Bool, style: NavigationBarStyles)
     func setNavSearchConntroller(_ controller: UISearchController?)
+    func setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: Bool)
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
     func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
 }
@@ -43,6 +44,14 @@ extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewCont
     
     func setNavSearchConntroller(_ controller: UISearchController?) {
         currentViewController.changeSearchBar(controller: controller)
+    }
+    
+    func setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: Bool) {
+        
+        //FIXME: temporary solution so segmented coontroler would function well enough
+//        currentViewController
+        self.extendedLayoutIncludesOpaqueBars = extendedLayoutIncludesOpaqueBars
+        currentViewController.view.layoutSubviews()
     }
     
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {

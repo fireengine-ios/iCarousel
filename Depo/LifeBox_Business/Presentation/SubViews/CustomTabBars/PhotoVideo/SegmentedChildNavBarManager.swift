@@ -84,6 +84,10 @@ final class SegmentedChildNavBarManager {
         delegate?.setRightBarButtonItems([plusButton], animated: false)
     }
     
+    func setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: Bool) {
+        delegate?.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: extendedLayoutIncludesOpaqueBars)
+    }
+    
     func setDefaultModeWithoutThreeDot(title: String = "") {
         delegate?.setTitle(title, isSelectionMode: false, style: .white)
         delegate?.setLeftBarButtonItems(nil, animated: true)

@@ -106,11 +106,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        setupNavigationBar(editingMode: collectionManager.isSelecting)
         
-        setupNavBar()
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -128,6 +128,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: false)
     }
     
     override func removeFromParentViewController() {
@@ -150,10 +151,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setDefaultTabBarState()
         setupCollectionViewBars()
         bottomBarManager.setup()
-    }
-    
-    private func setupNavBar() {
-        setupNavigationBar(editingMode: collectionManager.isSelecting)
     }
     
     private func setupPlusButton() {
@@ -240,13 +237,15 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
-        isEditing = true
         updateBars(isSelecting: true)
+        isEditing = true
+        
     }
     
     func didEndSelection() {
-        isEditing = false
         updateBars(isSelecting: false)
+        isEditing = false
+        
     }
     
     func didChangeSelection(selectedItems: [WrapData]) {
@@ -262,14 +261,14 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
-        if shareType.isSearchAllowed {
-            DispatchQueue.main.async {
-                self.setNavSearchConntroller(self.searchController)
-            }
+        
+        if self.shareType.isSearchAllowed {
+            self.setNavSearchConntroller(self.searchController)
         }
-        setupPlusButton()
-        handleOffsetChange(offsetY: collectionView.contentOffset.y)
-        view.layoutSubviews()
+        
+        self.setupPlusButton()
+        self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
+        self.view.layoutSubviews()
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -331,6 +330,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 if case .innerFolder(_, _) = self.shareType {
                     self.navBarManager.setNestedMode(title: self.shareType.title)
                 } else {
+                    self.navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                     var newTitle = self.shareType.title
                     if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
                         newTitle = segmentedParent.rootTitle
