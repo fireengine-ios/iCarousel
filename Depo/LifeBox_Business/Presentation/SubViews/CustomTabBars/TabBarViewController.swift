@@ -153,7 +153,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @objc func showMusicBar(_ sender: Any) {
         if let segmentedController = customNavigationControllers[selectedIndex].viewControllers.first as? SegmentedController,
-            segmentedController.currentController is TrashBinViewController {
+            let vc = segmentedController.currentController as? PrivateShareSharedFilesViewController,
+            vc.shareType == .trashBin || vc.shareType.rootType == .trashBin {
             musicBar.status = .trashed
         } else {
             musicBar.status = .active
