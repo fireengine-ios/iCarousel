@@ -41,23 +41,19 @@ final class TextFieldWithPickerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initialSetup()
+        addTextField()
         setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initialSetup()
+        addTextField()
         setup()
     }
     
     //MARK: - Private funcs
     
-    private func initialSetup() {
-        setupStackView()
-    }
-    
-    private func setupStackView() {
+    private func addTextField() {
         addSubview(textField)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.pinToSuperviewEdges()
@@ -65,6 +61,7 @@ final class TextFieldWithPickerView: UIView {
     
     private func setup() {
         pickerView.delegate = self
+        pickerView.backgroundColor = .white
         
         let image = UIImage(named: "downArrow")
         let imageView = UIImageView(image: image)
