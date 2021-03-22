@@ -127,9 +127,11 @@ final class BottomActionsBar: UIView {
         didSet {
             switch style {
                 case .opaque:
+                    self.superview?.backgroundColor = .white
                     self.backgroundColor = .white
                     
                 case .transparent:
+                    self.superview?.backgroundColor = .clear
                     self.backgroundColor = .clear
             }
         }
