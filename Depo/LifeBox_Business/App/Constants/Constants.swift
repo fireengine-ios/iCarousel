@@ -1440,7 +1440,6 @@ extension TextConstants {
 }
 
 // MARK: - Contact us
-
 extension TextConstants {
     static let contactUsPageTitle = NSLocalizedString("business_app_contact_us_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsPageDescription = NSLocalizedString("business_app_contact_us_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

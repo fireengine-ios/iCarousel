@@ -31,12 +31,53 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     //MARK: - @IBOutlets
     
-    @IBOutlet weak private var descriptionLabel: UILabel!
-    @IBOutlet weak private var subjectContainerView: UIView!
-    @IBOutlet weak private var textViewContainerView: UIView!
-    @IBOutlet weak private var textView: UITextView!
-    @IBOutlet weak private var textViewCounterLabel: UILabel!
-    @IBOutlet weak private var sendButton: UIButton!
+    @IBOutlet weak private var descriptionLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.text = TextConstants.contactUsPageDescription
+        }
+    }
+    
+    @IBOutlet weak private var subjectContainerView: UIView! {
+        willSet {
+            setBorder(for: newValue)
+        }
+    }
+    
+    @IBOutlet weak private var textViewContainerView: UIView! {
+        willSet {
+            setBorder(for: newValue)
+        }
+    }
+    
+    @IBOutlet weak private var textView: UITextView! {
+        willSet {
+            newValue.delegate = self
+            newValue.text = textViewPlaceholder
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
+            newValue.textColor = ColorConstants.Text.textFieldPlaceholder
+        }
+    }
+    
+    @IBOutlet weak private var textViewCounterLabel: UILabel! {
+        willSet {
+            newValue.text = "\(maxCharactersCount)"
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
+            newValue.textColor = ColorConstants.Text.textFieldPlaceholder
+        }
+    }
+    
+    @IBOutlet weak private var sendButton: UIButton! {
+        willSet {
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
+            newValue.backgroundColor = ColorConstants.confirmationPopupButton
+            newValue.layer.cornerRadius = 5
+            newValue.isEnabled = false
+            newValue.alpha = 0.4
+        }
+    }
     
     //MARK: - Lifecycle
     
@@ -44,9 +85,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
         super.viewDidLoad()
         changeLargeTitle(prefersLargeTitles: false)
         setView()
-        setTextView()
-        setSendButton()
-        setSubjectView()
+        addSubjectView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,9 +102,6 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     private func setView() {
         view.backgroundColor = ColorConstants.tableBackground
-        descriptionLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-        descriptionLabel.textColor = ColorConstants.Text.textFieldText
-        descriptionLabel.text = TextConstants.contactUsPageDescription
     }
     
     private func setBorder(for view: UIView) {
@@ -74,9 +110,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
         view.layer.borderColor = ColorConstants.a2FABorder.cgColor
     }
     
-    private func setSubjectView() {
-        setBorder(for: subjectContainerView)
-        
+    private func addSubjectView() {
         subjectContainerView.addSubview(subjectView)
         subjectView.topAnchor.constraint(equalTo: subjectContainerView.topAnchor).activate()
         subjectView.bottomAnchor.constraint(equalTo: subjectContainerView.bottomAnchor).activate()
@@ -84,36 +118,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
         subjectView.rightAnchor.constraint(equalTo: subjectContainerView.rightAnchor, constant: -20).activate()
     }
     
-    private func setTextView() {
-        setBorder(for: textViewContainerView)
-        
-        textView.delegate = self
-        
-        textView.text = textViewPlaceholder
-        textView.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        textView.textColor = ColorConstants.Text.textFieldPlaceholder
-        
-        textViewCounterLabel.text = "\(maxCharactersCount)"
-        textViewCounterLabel.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        textViewCounterLabel.textColor = ColorConstants.Text.textFieldPlaceholder
-    }
-    
-    private func setSendButton() {
-        disableSendButton()
-        
-        sendButton.setTitleColor(UIColor.white, for: .normal)
-        sendButton.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-        
-        sendButton.backgroundColor = ColorConstants.confirmationPopupButton
-        sendButton.layer.cornerRadius = 5
-    }
-    
     //MARK: - Private funcs
-    
-    private func disableSendButton() {
-        sendButton.isEnabled = false
-        sendButton.alpha = 0.4
-    }
     
     private func enableSendButton() {
         sendButton.isEnabled = true
