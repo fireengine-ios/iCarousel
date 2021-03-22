@@ -62,6 +62,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
     //MARK: - Setup
     
     private func setView() {
+        view.backgroundColor = ColorConstants.tableBackground
         descriptionLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         descriptionLabel.textColor = ColorConstants.Text.textFieldText
         descriptionLabel.text = TextConstants.contactUsPageDescription
