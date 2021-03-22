@@ -24,6 +24,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
         webConfig.dataDetectorTypes = [.phoneNumber, .link]
         
         let web = WKWebView(frame: .zero, configuration: webConfig)
+        web.isOpaque = false
         web.navigationDelegate = self
         
         return web
@@ -43,6 +44,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         changeLargeTitle(prefersLargeTitles: false)
+        setView()
         setSegmentedControl()
         setWebView()
         setActivityIndicator()
@@ -67,6 +69,10 @@ final class AgreementsViewController: BaseViewController, NibInit {
     }
     
     //MARK: - Setup
+    
+    private func setView() {
+        view.backgroundColor = ColorConstants.tableBackground
+    }
     
     private func setSegmentedControl() {
         let segmentedControl = AgreementsSegmentedControl.initFromNib()
