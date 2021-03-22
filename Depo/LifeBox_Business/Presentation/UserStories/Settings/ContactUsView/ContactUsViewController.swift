@@ -83,14 +83,14 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        changeLargeTitle(prefersLargeTitles: false)
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
         setView()
         addSubjectView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(title: TextConstants.contactUsPageTitle)
+        setNavigationTitle(title: TextConstants.contactUsPageTitle, style: .white)
         setNavigationBarStyle(.white)
         
         if !Device.isIpad {
