@@ -107,7 +107,7 @@ enum NavigationBarStyles {
         case .byDefault, .white, .visible, .black:
             return false
         case .transparent, .hidden:
-            return false
+            return true
         }
     }
     
@@ -122,8 +122,10 @@ enum NavigationBarStyles {
     
     var backgroundImage: UIImage? {
         switch self {
-        case .byDefault, .white, .visible, .transparent, .hidden:
+        case .byDefault, .white, .visible, .hidden:
             return nil
+        case .transparent:
+            return UIImage()
         case .black:
             return UIImage(named: "NavigatonBarBlackBacground")
         }
@@ -165,7 +167,7 @@ extension UIViewController {
         navBar?.tintColor = style.tintColor
         navBar?.backgroundColor = style.backgroundColor
         navBar?.setBackgroundImage(style.backgroundImage, for: .default)
-        navBar?.shadowImage = nil
+        navBar?.shadowImage = UIImage()
         
         statusBarColor = style.statusBarColor
     }
