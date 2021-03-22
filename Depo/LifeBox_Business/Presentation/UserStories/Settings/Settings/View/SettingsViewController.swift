@@ -62,6 +62,8 @@ final class SettingsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        // TODO change it after merge to dev_2
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
 
     private func setupNavigationBar() {
@@ -73,6 +75,10 @@ final class SettingsViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         backButtonForNavigationItem(title: TextConstants.backTitle)
+        // TODO change it after merge to dev_2
+        if isMovingFromParentViewController {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        }
     }
 
     override func showSpinner() {

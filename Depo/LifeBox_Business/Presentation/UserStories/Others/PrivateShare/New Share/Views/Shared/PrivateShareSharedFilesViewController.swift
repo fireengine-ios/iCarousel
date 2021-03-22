@@ -299,6 +299,13 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func needToShowSpinner() {
         showSpinner()
     }
+
+    func onEmptyViewUpdate(isHidden: Bool) {
+        if shareType == .trashBin {
+            navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: !isHidden)
+            topBarSortingBar.isHidden = !isHidden
+        }
+    }
     
     //MARK: Helpers
     

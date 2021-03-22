@@ -29,6 +29,8 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func needToHideSpinner()
     
     func collectionOffsetChanged(offsetY: CGFloat)
+
+    func onEmptyViewUpdate(isHidden: Bool)
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -324,6 +326,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         DispatchQueue.main.async {
             self.collectionView?.backgroundView?.isHidden = isHidden
+            self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
         }
     }
 }
