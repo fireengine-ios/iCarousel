@@ -166,10 +166,6 @@ final class ContactUsViewController: BaseViewController, NibInit {
             
             let emailSubject = userEmail + " - " + TextConstants.NotLocalized.appNameMailSubject + subject
             
-            print(emailSubject)
-            print("")
-            print(emailBody)
-            
             Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: emailSubject,
                                     emails: ["lifeboxipadpro@gmail.com"],
