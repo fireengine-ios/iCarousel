@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum NavigationBarStyles {
+    case byDefault
+    case white
+    case transparent
+    case visible
+    case hidden
+    case black
+}
+
 extension UIViewController {
     
     func rootNavController(vizible: Bool) {
@@ -28,43 +37,24 @@ extension UIViewController {
     
 //MARK: Properties (private)
     
-    private var navBarHeight: CGFloat {
-        var height: CGFloat = UIApplication.shared.statusBarFrame.height
-        
-        height += navBar?.frame.height ?? 0
-
-        return height
-    }
-    
-    private var customNavBarView: CustomNavBarView? {
-        guard navBar != nil else {
-            return nil
-        }
-        
-        let view = CustomNavBarView()
-        view.tag = tagHomeView
-        
-        let frame = CGRect(x: 0,
-                           y: 0,
-                           width: Device.winSize.width,
-                           height: navBarHeight)
-        
-        view.frame = frame
-        
-        return view
-    }
-    
     private var backButtonTitleAttributes: [NSAttributedStringKey : Any]? {
         return [
-            .font: UIFont.TurkcellSaturaRegFont(size: 19),
-            .foregroundColor: UIColor.white
+            .font: UIFont.GTAmericaStandardRegularFont(size: 19),
+            .foregroundColor: ColorConstants.confirmationPopupTitle
         ]
     }
     
     private var titleAttributes: [NSAttributedStringKey : Any]? {
         return [
             .font: UIFont.GTAmericaStandardMediumFont(size: 17),
-            .foregroundColor: ColorConstants.multifileCellRenameFieldNameColor
+            .foregroundColor: ColorConstants.confirmationPopupTitle
+        ]
+    }
+    
+    private var largeTitleAttributes: [NSAttributedStringKey : Any]? {
+        return [
+            .font: UIFont.GTAmericaStandardMediumFont(size: 24),
+            .foregroundColor: ColorConstants.confirmationPopupTitle
         ]
     }
     
@@ -75,12 +65,11 @@ extension UIViewController {
         
         navigationItem.backBarButtonItem?.setTitleTextAttributes(backButtonTitleAttributes, for: .normal)
         
-        navigationItem.backBarButtonItem?.tintColor = .white
+        navigationItem.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
     }
     
     func setNavigationTitle(title: String) {
-        navigationItem.titleView = nil
-        navigationItem.title = title
+        self.title = title
         navBar?.titleTextAttributes = titleAttributes
     }
     
@@ -105,14 +94,136 @@ extension UIViewController {
         navBar?.backgroundColor = color
     }
     
+    func changeSearchBar(controller: UISearchController?) {
+        if let controller = controller, navigationItem.searchController == nil {
+            navigationItem.searchController = controller
+        } else if controller == nil {
+            navigationItem.searchController = controller
+        }
+    }
+    
+    func changeLargeTitle(prefersLargeTitles: Bool) {
+        navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
+        if prefersLargeTitles {
+            navigationController?.navigationBar.largeTitleTextAttributes = largeTitleAttributes
+        }
+    }
+}
+
+//MARK: - Subtitle
+extension UIViewController {
+    
+    var navBar: UINavigationBar? {
+        return navigationController?.navigationBar
+    }
+    
+    var tagHomeView: Int {
+        return 45634
+    }
+    
+    var tagTitleView: Int {
+        return 787878
+    }
+    
+    func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
+
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
+        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
+
+        if let subTitle = subTitle {
+            navigationItem.title = nil
+            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
+
+            let customTitleView = TitleView.initFromXib()
+            customTitleView.tag = tagTitleView
+            customTitleView.setTitle(title)
+            customTitleView.setSubTitle(subTitle)
+
+            navigationItem.titleView = customTitleView
+        } else {
+            navigationItem.titleView = nil
+            navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
+            setNavigationTitle(title: title)
+        }
+    }
+}
+
+
+//MARK: - Styles
+
+extension UIViewController {
+    
+//MARK: NavBar presets
+    
+    func setNavigationBarStyle(_ style: NavigationBarStyles) {
+        switch style {
+        case .byDefault:
+            defaultNavBarStyle()
+        case .white:
+            whiteNavBarStyle()
+        case .transparent:
+            transparentNavBarStyle()
+        case .visible:
+            visibleNavigationBarStyle()
+        case .hidden:
+            hiddenNavigationBarStyle()
+        case .black:
+            blackNavigationBarStyle()
+        }
+    }
+    
+    private func defaultNavBarStyle() {
+        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
+        navBar?.titleTextAttributes = [.foregroundColor : ColorConstants.confirmationPopupTitle]
+        
+        statusBarColor = .clear
+    }
+
+    private func whiteNavBarStyle() {
+        
+        visibleNavigationBarStyle()
+
+        defaultNavBarStyle()
+        
+        navigationItem.hidesSearchBarWhenScrolling = true
+        
+        navBar?.barTintColor = ColorConstants.topBarColor
+        navBar?.shadowImage = UIImage()
+        navBar?.backgroundColor = .clear
+        navBar?.tintColor = .clear
+    }
+    
+    private func transparentNavBarStyle() {
+        defaultNavBarStyle()
+        navBar?.isTranslucent = true
+
+        navBar?.barTintColor = .clear
+        navBar?.shadowImage = UIImage()
+        navBar?.backgroundColor = .clear
+        navBar?.tintColor = .clear
+    }
+    
+    private func blackNavigationBarStyle() {
+        defaultNavBarStyle()
+        
+        let image = UIImage(named: "NavigatonBarBlackBacground")
+        navBar?.setBackgroundImage(image, for: .default)
+
+        statusBarColor = .black
+
+        navBar?.barTintColor = .black
+        navBar?.backgroundColor = .black
+    }
+    
     //MARK: NavBar visibility states
 
-    func hidenNavigationBarStyle() {
+    private func hiddenNavigationBarStyle() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         
         navigationController?.view.backgroundColor = .clear
 
-        navigationBarWithGradientStyle(isHidden: true)
+        defaultNavBarStyle()//(isHidden: true)
         
         navBar?.setBackgroundImage(UIImage(), for: .default)
         navBar?.shadowImage = UIImage()
@@ -125,126 +236,9 @@ extension UIViewController {
         statusBarColor = .clear
     }
 
-    func visibleNavigationBarStyle() {
+    private func visibleNavigationBarStyle() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         
         navBar?.isTranslucent = false
-    }
-    
-//MARK: NavBar presets
-    
-    func defaultNavBarStyle(backgroundImg: UIImage = UIImage()) {
-        visibleNavigationBarStyle()
-        
-        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
-            view.hideLogo = true
-            view.isHidden = true
-            
-        }
-        
-        navBar?.setBackgroundImage(backgroundImg, for: .default)
-        navBar?.shadowImage = UIImage()
-        
-        navBar?.backgroundColor = .clear
-        navBar?.barTintColor = .clear
-        navBar?.tintColor = .white
-        
-        navBar?.titleTextAttributes = [.foregroundColor : UIColor.white]
-        
-        statusBarColor = .clear
-    }
-
-    func whiteNavBarStyle(backgroundImg: UIImage = UIImage(),
-                          tintColor: UIColor = .black,
-                          titleTextColor: UIColor = .black) {
-        visibleNavigationBarStyle()
-
-        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
-            view.hideLogo = true
-            view.isHidden = true
-
-        }
-
-        navBar?.setBackgroundImage(backgroundImg, for: .default)
-        navBar?.shadowImage = UIImage()
-
-        navBar?.backgroundColor = .white
-        navBar?.barTintColor = .white
-        navBar?.tintColor = tintColor
-
-        navBar?.titleTextAttributes = [.foregroundColor : titleTextColor]
-        navBar?.topItem?.backBarButtonItem?.tintColor = .black
-
-        statusBarColor = .clear
-    }
-
-    func homePageNavigationBarStyle() {
-        defaultNavBarStyle()
-        setTitle(withString: "")
-        
-        navigationBarWithGradientStyle(hideLogo: false)
-    }
-    
-    func blackNavigationBarStyle() {
-        defaultNavBarStyle()
-        
-        let image = UIImage(named: "NavigatonBarBlackBacground")
-        navBar?.setBackgroundImage(image, for: .default)
-
-        statusBarColor = .black
-
-        navBar?.barTintColor = .black
-        navBar?.backgroundColor = .black
-    }
-    
-    func navigationBarWithGradientStyle(isHidden: Bool = false, hideLogo: Bool = true) {
-        defaultNavBarStyle()
-
-        if let view = navBar?.viewWithTag(tagHomeView) as? CustomNavBarView {
-            view.hideLogo = hideLogo
-            view.isHidden = isHidden
-            
-        } else if let view = customNavBarView {
-            view.hideLogo = hideLogo
-            view.isHidden = isHidden
-
-            navBar?.subviews.first?.addSubview(view)
-        }
-    }
-    
-    func navigationBarWithGradientStyleWithoutInsets() {
-        navigationBarWithGradientStyle()
-        setTitle(withString: "")
-    }
-    
-//MARK: ToolBar
-    
-    func barButtonItemsWithRitht(button: UIBarButtonItem) -> UIToolbar {
-        
-        let toolBar = UIToolbar()
-        toolBar.barStyle = .default
-        toolBar.isTranslucent = true
-        toolBar.sizeToFit()
-        
-        let flex = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
-                                   target: nil,
-                                   action: nil)
-        
-        toolBar.setItems([flex, button], animated: false)
-        toolBar.isUserInteractionEnabled = true
-        
-        return toolBar
-    }
-    
-    func setTouchableTitle(title: String) {
-        navBar?.viewWithTag(tagTitleView)?.removeFromSuperview()
-        
-        let customTitleView = TitleView.initFromXib()
-        customTitleView.tag = tagTitleView
-        customTitleView.setTitle(title)
-        
-        navigationItem.titleView = customTitleView
-        
-        navigationItem.titleView?.isUserInteractionEnabled = true
     }
 }

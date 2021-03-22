@@ -74,6 +74,7 @@ enum SnackbarType {
         case .addToFavorites,
              .delete,
              .download,
+             .downloadDocument,
              .emptyTrashBin,
              .move,
              .removeFromFavorites,
@@ -81,6 +82,7 @@ enum SnackbarType {
              .endSharing,
              .leaveSharing,
              .moveToTrashShared,
+             .privateShare,
              .rename:
             self = .nonCritical
             

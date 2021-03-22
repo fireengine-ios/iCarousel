@@ -40,14 +40,14 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     
     // MARK: SettingsDelegate
     
-    func goToHelpAndSupport() {
+    func goToFAQ() {
         if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().helpAndSupport])
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().faq])
         }
     }
     
-    func goToTermsAndPolicy() {
-        if let left = leftController, let controller = RouterVC().termsAndPolicy {
+    func goToAgreements() {
+        if let left = leftController, let controller = RouterVC().agreements {
             configurateWithControllers(leftViewController: left, controllers: [controller])
         }
     }

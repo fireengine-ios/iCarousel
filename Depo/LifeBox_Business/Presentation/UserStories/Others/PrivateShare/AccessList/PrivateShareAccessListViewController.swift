@@ -89,8 +89,8 @@ final class PrivateShareAccessListViewController: BaseViewController, NibInit {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backBarButtonItem = nil
         navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "close"), style: .plain, target: self, action: #selector(dismissSelf(_:)))
-        whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
-                         titleTextColor: ColorConstants.infoPageItemBottomText)
+        
+        setNavigationBarStyle(.white)
     }
 
     @objc private func dismissSelf(_ sender: UIBarButtonItem) {

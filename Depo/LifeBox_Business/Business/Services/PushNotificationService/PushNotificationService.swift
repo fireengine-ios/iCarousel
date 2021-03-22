@@ -224,7 +224,7 @@ final class PushNotificationService {
     }
     
     private func openFaq() {
-        pushTo(router.helpAndSupport)
+        pushTo(router.faq)
     }
     
     private func openPasscode() {

@@ -96,6 +96,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    func showSubPlusSheet(with actions: [UIAlertAction], sender: Any?, viewController: UIViewController?) {
+        DispatchQueue.main.async {
+            self.presentAlertSheet(with: actions, presentedBy: sender, viewController: viewController)
+        }
+    }
+    
     private func adjastActionTypes(for items: [Item]) -> [ElementTypes] {
         var actionTypes: [ElementTypes] = []
         if items.count == 1, let item = items.first {
@@ -215,7 +221,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .select,
                      .selectAll,
                      .deSelectAll,
-                     .print,
                      .rename,
                      .delete,
                      .endSharing,
@@ -234,7 +239,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
                         self.handleAction(type: type, items: currentItems, sender: sender)
                     })
-                case .sync, .syncInProgress, .undetermend:
+                case .undetermend:
                     action = UIAlertAction()
                 }
                 return action
@@ -428,9 +433,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         case .deSelectAll:
             basePassingPresenter?.deSelectAll()
             
-        case .print:
-            basePassingPresenter?.printSelected()
-            
         case .rename:
             if let item = items.first as? Item {
                 basePassingPresenter?.renamingSelected(item: item)
@@ -493,8 +495,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             button = .addToFavorites
         case .removeFromFavorites:
             button = .removeFromFavorites
-        case .print:
-            button = .print
         case .endSharing:
             button = .endSharing
         case .leaveSharing:

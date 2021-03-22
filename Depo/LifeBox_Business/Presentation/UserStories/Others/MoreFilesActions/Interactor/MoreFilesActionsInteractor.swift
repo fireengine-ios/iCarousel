@@ -60,7 +60,6 @@ enum ShareTypes {
 }
 
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
-    
     weak var output: MoreFilesActionsInteractorOutput?
     
     lazy var player: MediaPlayer = factory.resolve()
@@ -180,7 +179,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     private func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
-            let filesWithoutUrl = items.filter { $0.tmpDownloadUrl == nil }
+            let filesWithoutUrl = items.filter { $0.urlToFile == nil }
             fileService.createDownloadUrls(for: filesWithoutUrl) { [weak self] in
                 guard let self = self else {
                     return
@@ -430,16 +429,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         } else {
             return router.selectFolder(folder: nil)
         }
-    }
-    
-    func sync(item: [BaseDataSourceItem]) {
-        guard let items = item as? [Item] else {
-            return
-        }
-        
-        fileService.upload(items: items, toPath: "",
-                           success: successAction(elementType: .sync),
-                           fail: failAction(elementType: .sync))
     }
     
     func downloadDocument(items: [WrapData]?) {
@@ -754,15 +743,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         fileService.deletAllFromTrashBin(success: successAction(elementType: .emptyTrashBin),
                                          fail: failAction(elementType: .emptyTrashBin))
     }
-    
-    func trackEvent(elementType: ElementTypes) {
-        switch elementType {
-        case .print:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
-        default:
-            break
-        }
-    }
 }
 
 
@@ -826,8 +806,6 @@ extension MoreFilesActionsInteractor {
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
         case .delete:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
-        case .print:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
         default:
             break
         }

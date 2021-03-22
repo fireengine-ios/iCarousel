@@ -24,6 +24,7 @@ final class EmptyView: UIView, NibInit {
         case sharedWith
         case sharedInnerFolder
         case sharedArea
+        case myDisk
         
         var title: String {
             switch self {
@@ -32,13 +33,15 @@ final class EmptyView: UIView, NibInit {
                 case .trashBin:
                     return TextConstants.trashBinEmpty
                 case .sharedBy:
-                    return TextConstants.privateSharedByMeEmptyText
+                    return TextConstants.sharedByMeEmptyPage
                 case .sharedWith:
-                    return TextConstants.privateSharedWithMeEmptyText
+                    return TextConstants.sharedWithMeEmptyPage
                 case .sharedInnerFolder:
-                    return TextConstants.privateSharedInnerFolderEmptyText
+                    return TextConstants.folderEmptyPage
                 case .sharedArea:
-                    return TextConstants.privateShareSharedAreaEmptyText
+                    return TextConstants.sharedAreaEmptyPage
+                case .myDisk:
+                    return TextConstants.myDiskEmptyPage
             }
         }
         
@@ -55,6 +58,8 @@ final class EmptyView: UIView, NibInit {
                 case .sharedInnerFolder:
                     return nil
                 case .sharedArea:
+                    return nil
+                case .myDisk:
                     return nil
             }
         }

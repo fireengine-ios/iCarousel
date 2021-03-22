@@ -52,8 +52,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         title = TextConstants.sharedContactsPageTitle
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
-        whiteNavBarStyle(tintColor: ColorConstants.infoPageItemBottomText,
-                         titleTextColor: ColorConstants.infoPageItemBottomText)
+        setNavigationBarStyle(.white)
     }
 
     private func setupTableViewAdapter() {

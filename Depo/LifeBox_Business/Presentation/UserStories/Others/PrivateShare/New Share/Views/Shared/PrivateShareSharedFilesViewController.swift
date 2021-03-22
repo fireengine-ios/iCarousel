@@ -8,37 +8,25 @@
 
 import UIKit
 
-final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildController, NibInit {
+protocol PrivateShareSharedFilesViewControllerOffsetChangeDelegate: class {
+    func offsettChanged(newOffSet: CGFloat)
+}
+
+final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildTopBarSupportedControllerProtocol, NibInit {
     
     static func with(shareType: PrivateShareType) -> PrivateShareSharedFilesViewController {
         let controller = PrivateShareSharedFilesViewController.initFromNib()
-        let title: String
-        switch shareType {
-            case .myDisk: title = TextConstants.tabBarItemMyDisk
-            case .byMe: title = TextConstants.privateShareSharedByMeTab
-            case .withMe: title = TextConstants.privateShareSharedWithMeTab
-            case .innerFolder(_, let folder): title = folder.name
-            case .sharedArea: title = TextConstants.tabBarItemSharedArea
-        }
-        controller.title = title
+        controller.title = shareType.title
         controller.shareType = shareType
         controller.needToShowTabBar = true
         return controller
     }
 
-    
-    @IBOutlet weak var collectionViewBarContainer: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private let cardsContainer = CardsContainerView()
-    private var contentSliderTopY: NSLayoutConstraint?
-    private var contentSliderH: NSLayoutConstraint?
-    
-    private lazy var gridListBar: GridListTopBar = {
-        let bar = GridListTopBar.initFromXib()
-        bar.delegate = self
-        return bar
-    }()
+    private lazy var cameraService = CameraService()
+    private lazy var galleryFileUploadService = GalleryFileUploadService()
+    private lazy var externalFileUploadService = ExternalFileUploadService()
     
     private(set) var shareType: PrivateShareType = .byMe
     
@@ -54,9 +42,43 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private lazy var bottomBarManager = PrivateShareSharedFilesBottomBarManager(delegate: self)
     private lazy var threeDotsManager = PrivateShareSharedWithThreeDotsManager(delegate: self)
     private lazy var itemThreeDotsManager = PrivateShareSharedItemThreeDotsManager(delegate: self)
+    private lazy var plusButtonActionsManager = PrivateShareSharedPlusButtonActtionManager(delegate: self)
     
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
+    
+    lazy private var topBarSortingBar: TopBarSortingView = {
+        let sortingBar = TopBarSortingView.initFromNib()
+        sortingBar.delegate = self
+        return sortingBar
+    }()
+    
+    private var collectionTopYInset: CGFloat = 0
+    
+    weak var offsetChangedDelegate: PrivateShareSharedFilesViewControllerOffsetChangeDelegate?
+    
+    override var isEditing: Bool {
+        willSet {
+            DispatchQueue.main.async {
+                if case .innerFolder = self.shareType {
+                    
+                } else {
+                    self.changeNavbarLargeTitle(!newValue)
+                }
+                if self.shareType.isSearchAllowed {
+                    self.setNavSearchConntroller(newValue ? nil : self.searchController)
+                }
+            }
+        }
+    }
+    
+    lazy private var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
+        searchController.obscuresBackgroundDuringPresentation = true
+        //TODO: also setup delegate here
+        return searchController
+    }()
     
     //MARK: - Override
     
@@ -68,7 +90,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     deinit {
-        CardsManager.default.removeViewForNotification(view: cardsContainer)
         ItemOperationManager.default.stopUpdateView(view: self)
     }
     
@@ -76,9 +97,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewDidLoad()
         
         collectionManager.setup()
-        setupBars()
-        setupCardsContainer()
         setupPlusButton()
+        setupBars()
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
@@ -87,27 +107,27 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setCardsContainer(isActive: true)
+        setupNavBar()
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         let isSelecting = collectionManager.isSelecting
-        updateBars(isSelecting: isSelecting)
+        
         if isSelecting {
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
         }
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        setCardsContainer(isActive: false)
     }
     
     override func removeFromParentViewController() {
@@ -121,81 +141,79 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Private
     
     private func setupBars() {
+        //in theory should provide smoother animation if initial setup wasn on viewDidLoad
+        if case .innerFolder(_, _) = self.shareType {
+            navBarManager.setupLargetitle(isLarge: false)
+        } else {
+            navBarManager.setupLargetitle(isLarge: true)
+        }
         setDefaultTabBarState()
-        setupNavBar()
-        setupCollectionViewBar()
+        setupCollectionViewBars()
         bottomBarManager.setup()
     }
     
     private func setupNavBar() {
-        setupNavigationBar(editingMode: false)
+        setupNavigationBar(editingMode: collectionManager.isSelecting)
     }
     
     private func setupPlusButton() {
         floatingButtonsArray = shareType.floatingButtonTypes(rootPermissions: collectionManager.rootPermissions)
+        guard #available(iOS 14, *) else {
+            return
+        }
+        setupPlusButtonMenu()
+    }
+    
+    @available(iOS 14.0, *)
+    private func setupPlusButtonMenu() {
+        guard
+            let realButton = navBarManager.plusButton.customView as? UIButton
+        else {
+            return
+        }
+        realButton.showsMenuAsPrimaryAction = true
+        realButton.menu = nil
+        realButton.menu = plusButtonActionsManager.generateMenu(for: floatingButtonsArray, actionsDelegate: self)
+        realButton.addTarget(self, action: #selector(onMenuTriggered), for: .menuActionTriggered)
+    }
+
+    @objc private func onMenuTriggered() {
+        if floatingButtonsArray.isEmpty {
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.noAccessSnackBarTitle)
+        }
+        
+        let lightFeedback = UIImpactFeedbackGenerator(style: .light)
+        lightFeedback.impactOccurred()
     }
     
     private func setDefaultTabBarState() {
         needToShowTabBar = true
     }
     
-    private func setupCollectionViewBar() {
-        gridListBar.view.translatesAutoresizingMaskIntoConstraints = false
-        collectionViewBarContainer.addSubview(gridListBar.view)
-        gridListBar.view.pinToSuperviewEdges()
-        
+    private func setupCollectionViewBars() {
+        setupSortingBar()
+
+        collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
+    }
+    
+    private func setupSortingBar() {
         let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
-        let config = GridListTopBarConfig(defaultGridListViewtype: .Grid,
-                                          availableSortTypes: sortingTypes,
-                                          defaultSortType: .TimeNewOld,
-                                          availableFilter: false,
-                                          showGridListButton: true)
-        gridListBar.setupWithConfig(config: config)
+           
+        topBarSortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .TimeNewOld)
+        
+        collectionView.addSubview(topBarSortingBar)
+        
+        collectionTopYInset += topBarSortingBar.frame.height
+        
+        topBarSortingBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        topBarSortingBar.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -collectionTopYInset).activate()
+        topBarSortingBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
+        topBarSortingBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
     }
     
-    private func setupCardsContainer() {
-        CardsManager.default.addViewForNotification(view: cardsContainer)
-        
-        cardsContainer.delegate = self
-        cardsContainer.isEnable = true
-        
-        let permittedTypes: [OperationType]
-        switch shareType.rootType {
-            case .byMe:
-                permittedTypes = [.upload, .download]
-            case .withMe:
-                permittedTypes = [.sharedWithMeUpload, .download]
-            case .myDisk:
-                permittedTypes = [.upload, .download]
-            case .sharedArea:
-                permittedTypes = [.upload, .download]
-            default:
-                permittedTypes = []
-        }
-        
-        cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
-        
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        collectionView.addSubview(cardsContainer)
-        
-        cardsContainer.translatesAutoresizingMaskIntoConstraints = false
-        
-        var constraintsArray = [NSLayoutConstraint]()
-        contentSliderTopY = NSLayoutConstraint(item: cardsContainer, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
-        constraintsArray.append(contentSliderTopY!)
-        constraintsArray.append(NSLayoutConstraint(item: cardsContainer, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: cardsContainer, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
-        contentSliderH = NSLayoutConstraint(item: cardsContainer, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
-        constraintsArray.append(contentSliderH!)
-        
-        NSLayoutConstraint.activate(constraintsArray)
-    }
-    
-    private func setCardsContainer(isActive: Bool) {
-        cardsContainer.isActive = isActive
-        if isActive {
-            CardsManager.default.updateAllProgressesInCardsForView(view: cardsContainer)
-        }
+    private func handleOffsetChange(offsetY: CGFloat) {
+        offsetChangedDelegate?.offsettChanged(newOffSet: offsetY + collectionTopYInset)
     }
     
     private func trackScreen() {
@@ -222,10 +240,12 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
+        isEditing = true
         updateBars(isSelecting: true)
     }
     
     func didEndSelection() {
+        isEditing = false
         updateBars(isSelecting: false)
     }
     
@@ -242,7 +262,14 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
+        if shareType.isSearchAllowed {
+            DispatchQueue.main.async {
+                self.setNavSearchConntroller(self.searchController)
+            }
+        }
         setupPlusButton()
+        handleOffsetChange(offsetY: collectionView.contentOffset.y)
+        view.layoutSubviews()
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -265,7 +292,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     private func show(selectedItemsCount: Int) {
         DispatchQueue.main.async {
-            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
+            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)", isSelectionMode: true)
         }
     }
     
@@ -273,9 +300,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         DispatchQueue.main.async {
             self.setupNavigationBar(editingMode: isSelecting)
             
-            if self.shareType.isSelectionAllowed {
-                self.navBarManager.threeDotsButton.isEnabled = !isSelecting
-            }
             self.needToShowTabBar = !isSelecting
             self.showTabBarIfNeeded()
             if isSelecting {
@@ -295,36 +319,40 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             guard self.viewIfLoaded?.window != nil else {
                 return
             }
+
+            self.setNavigationBarStyle(.white)
             
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
             
             if editingMode, isSelectionAllowed {
-                self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
-                let isTabBarItem = (self.parent as? SegmentedController)?.isTabBarItem == true
-                
-                let title = isTabBarItem ? "" : self.title ?? ""
-                if !isSelectionAllowed {
-                    self.navBarManager.setDefaultModeWithoutThreeDot(title: title)
+                if case .innerFolder(_, _) = self.shareType {
+                    self.navBarManager.setNestedMode(title: self.shareType.title)
                 } else {
-                    self.navBarManager.setDefaultMode(title: title)
-                }
-                
-                if isTabBarItem {
-                    self.homePageNavigationBarStyle()
-                } else {
-                    self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
+                    var newTitle = self.shareType.title
+                    if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
+                        newTitle = segmentedParent.rootTitle
+                    }
+                    self.navBarManager.setupLargetitle(isLarge: true)
+                    self.navBarManager.setRootMode(title: newTitle)
                 }
             }
+            self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
         }
     }
+    
+    func collectionOffsetChanged(offsetY: CGFloat) {
+        handleOffsetChange(offsetY: offsetY)
+    }
+    
 }
 
 
 //MARK: - SegmentedChildNavBarManagerDelegate
 extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDelegate {
+    
     func onCancelSelectionButton() {
         collectionManager.endSelection()
     }
@@ -341,20 +369,42 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         showSearchScreen()
     }
     
+    func onPlusButton() {
+        guard !floatingButtonsArray.isEmpty else {
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.noAccessSnackBarTitle)
+            return
+        }
+        plusButtonActionsManager.showActions(for: floatingButtonsArray, sender:  navigationItem.rightBarButtonItem, actionsDelegate: self)
+    }
+    
+    func onSettingsButton() {
+        var controller: UIViewController?
+        
+        if Device.isIpad {
+            controller = router.settingsIpad(settingsController: router.settings)
+        } else {
+            controller = router.settings
+        }
+        
+        router.pushViewController(viewController: controller!)
+    }
+    
     //MARK: Helpers
     private func showSearchScreen() {
         let controller = router.searchView(navigationController: navigationController)
         router.pushViewController(viewController: controller)
     }
+    
 }
-
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func selectModeSelected(with item: WrapData?) {
+        isEditing = true
         collectionManager.startSelection(with: item)
     }
     
     func stopModeSelected() {
+        isEditing = false
         collectionManager.endSelection()
     }
     
@@ -403,7 +453,10 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     
     func selectAllModeSelected() {}
     
-    func deSelectAll() {}
+    func deSelectAll() {
+        isEditing = false
+        handleOffsetChange(offsetY: collectionView.contentOffset.y)
+    }
     
     func printSelected() {}
     
@@ -447,27 +500,77 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
     }
 }
 
+//MARK: - UIImagePickerControllerDelegate
 
-extension PrivateShareSharedFilesViewController: CardsContainerViewDelegate {
-    func onUpdateViewForPopUpH(h: CGFloat) {
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            if let yConstr = self.contentSliderTopY {
-                yConstr.constant = -h
-            }
-            if let hConstr = self.contentSliderH {
-                hConstr.constant = h
-            }
+extension PrivateShareSharedFilesViewController: GalleryFileUploadServiceDelegate {
+    func uploaded(items: [WrapData]) {
+        //
+    }
+    
+    func failed(error: ErrorResponse?) {
+        guard let error = error else {
+            return
+        }
+        
+        guard !error.isOutOfSpaceError else {
+            //showing special popup for this error
+            return
+        }
+        
+        DispatchQueue.main.async {
+            let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                          message: error.description,
+                                          image: .error,
+                                          buttonTitle: TextConstants.ok)
+            self.router.presentViewController(controller: vc, animated: true, completion: nil)
+        }
+    }
+}
 
-            self.collectionView.superview?.layoutIfNeeded()
-            self.collectionView.contentInset = UIEdgeInsets(top: h, left: 0, bottom: 25, right: 0)
-        }, completion: { [weak self] _ in
-            guard let self = self else {
+extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonActtionDelegate {
+    
+    func subPlusActionPressed(type: TabBarViewController.Action) {
+        handlePlusButtonAction(type)
+    }
+
+    private func handlePlusButtonAction(_ action: TabBarViewController.Action) {
+        
+        switch action {
+        case .createFolder(type: _):
+            let controller: UIViewController
+            if let sharedFolder = router.sharedFolderItem {
+                let isSharedByWithMe = sharedFolder.type.isContained(in: [.byMe, .withMe])
+                let parameters = CreateFolderParameters(accountUuid: sharedFolder.accountUuid, rootFolderUuid: sharedFolder.uuid, isShared: isSharedByWithMe)
+                controller = router.createNewFolder(parameters: parameters)
+            } else {
+                assertionFailure()
                 return
             }
+            
+            let nController = NavigationController(rootViewController: controller)
+            router.presentViewController(controller: nController)
+            
+        case .upload(type: let uploadType):
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
+            galleryFileUploadService.upload(type:uploadType, rootViewController: self, delegate: self)
+            
+        case .uploadFiles(type: let uploadType):
+            externalFileUploadService.showViewController(type: uploadType, router: router, externalFileType: .any)
+            
+        case .uploadFromApp:
+            let parentFolder = router.getParentUUID()
+            
+             let controller = router.uploadFromLifeBox(folderUUID: parentFolder)
+            
+            let navigationController = NavigationController(rootViewController: controller)
+            navigationController.navigationBar.isHidden = false
+            router.presentViewController(controller: navigationController)
+        }
+    }
+}
 
-            if self.collectionView.contentOffset.y < 1 {
-                self.collectionView.contentOffset = CGPoint(x: 0.0, y: -self.collectionView.contentInset.top)
-            }
-        })
+extension PrivateShareSharedFilesViewController: TopBarSortingViewDelegate {
+    func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
+        collectionManager.change(sortingRule: sortType.sortedRulesConveted)
     }
 }

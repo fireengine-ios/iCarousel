@@ -156,7 +156,7 @@ final class OptInController: ViewController, NibInit {
     
     // MARK: - Utility methods
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
@@ -168,6 +168,8 @@ final class OptInController: ViewController, NibInit {
         startEnterCode()
         
         setupPhoneLable(with: phone)
+        
+        changeLargeTitle(prefersLargeTitles: false)
         
         if !Device.isIpad {
             setNavigationTitle(title: TextConstants.enterSecurityCode)

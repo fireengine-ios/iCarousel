@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ImageScrollViewDelegate: class {
-    func imageViewFinishedLoading()
+    func imageViewFinishedLoading(hasData: Bool)
     func onImageLoaded(image: UIImage?)
 }
 
@@ -39,10 +39,6 @@ final class ImageScrollView: UIScrollView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
-    }
-    
-    func getImageViewMaxY() -> CGFloat {
-        return imageView.frame.maxY
     }
     
     private func setup() {
@@ -139,8 +135,8 @@ final class ImageScrollView: UIScrollView {
 }
 
 extension ImageScrollView: LoadingImageViewDelegate {
-    func loadingFinished() {
-        imageViewDelegate?.imageViewFinishedLoading()
+    func loadingFinished(hasData: Bool) {
+        imageViewDelegate?.imageViewFinishedLoading(hasData: hasData)
     }
     
     func onImageLoaded(image: UIImage?) {

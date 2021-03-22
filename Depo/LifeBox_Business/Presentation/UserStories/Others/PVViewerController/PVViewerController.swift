@@ -48,7 +48,7 @@ final class PVViewerController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        blackNavigationBarStyle()
+        setNavigationBarStyle(.black)
     }
     
     override func viewDidLayoutSubviews() {

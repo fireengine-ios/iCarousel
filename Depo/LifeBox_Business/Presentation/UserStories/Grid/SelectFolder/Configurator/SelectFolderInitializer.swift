@@ -16,7 +16,7 @@ class SelectFolderModuleInitializer: NSObject {
         let configurator = BaseFilesGreedModuleConfigurator()
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
+                                               style: .opaque)
         
         let presentor = SelectFolderPresenter()
         presentor.sortedRule = sortRule

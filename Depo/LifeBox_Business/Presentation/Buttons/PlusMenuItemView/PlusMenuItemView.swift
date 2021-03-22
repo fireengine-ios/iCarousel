@@ -11,7 +11,6 @@ import UIKit
 enum FloatingButtonsType {
     case upload(type: UploadType)
     case newFolder(type: UploadType)
-    case uploadFromLifebox
     case uploadFiles(type: UploadType)
     
     var title: String {
@@ -20,8 +19,6 @@ enum FloatingButtonsType {
             return TextConstants.upload
         case .uploadFiles:
             return TextConstants.uploadFiles
-        case .uploadFromLifebox:
-            return TextConstants.uploadFromLifebox
         case .newFolder:
             return TextConstants.newFolder
         }
@@ -29,12 +26,12 @@ enum FloatingButtonsType {
     
     var image: UIImage? {
         switch self {
-        case .upload,
-             .uploadFiles,
-             .uploadFromLifebox:
-            return UIImage(named: "Upload")
+        case .upload:
+            return UIImage(named: "menuUploadGallery")
+        case .uploadFiles:
+            return UIImage(named: "menuUploadFile")
         case .newFolder:
-            return UIImage(named: "NewFolder")
+            return UIImage(named: "menuCreateFolder")
         }
     }
     
@@ -44,8 +41,6 @@ enum FloatingButtonsType {
                 return .upload(type: uploadType)
             case .uploadFiles(type: let uploadType):
                 return .uploadFiles(type: uploadType)
-            case .uploadFromLifebox:
-                return .uploadFromApp
             case .newFolder(type: let uploadType):
                 return .createFolder(type: uploadType)
         }

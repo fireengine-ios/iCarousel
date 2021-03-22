@@ -48,7 +48,7 @@ class LoginRouter: LoginRouterInput {
     }
     
     func goToFaqSupportPage() {
-        let faqSupportController = router.helpAndSupport
+        let faqSupportController = router.faq
         router.pushViewController(viewController: faqSupportController)
     }
     

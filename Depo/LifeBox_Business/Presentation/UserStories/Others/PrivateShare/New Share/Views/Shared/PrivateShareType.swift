@@ -15,6 +15,23 @@ indirect enum PrivateShareType: Equatable {
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
     case sharedArea
     
+    var title: String {
+        let title: String
+        switch self {
+            case .myDisk:
+                title = TextConstants.tabBarItemMyDisk
+            case .byMe:
+                title = TextConstants.privateShareSharedByMeTab
+            case .withMe:
+                title = TextConstants.privateShareSharedWithMeTab
+            case .innerFolder(_, let folder):
+                title = folder.name
+            case .sharedArea:
+                title = TextConstants.tabBarItemSharedArea
+        }
+        return title
+    }
+    
     var rootType: PrivateShareType {
         return veryRootType(for: self)
     }
@@ -25,10 +42,12 @@ indirect enum PrivateShareType: Equatable {
                 return .sharedBy
             case .withMe:
                 return .sharedWith
-            case .innerFolder, .myDisk:
+            case .innerFolder:
                 return .sharedInnerFolder
-        case .sharedArea:
-            return .sharedArea
+            case .sharedArea:
+                return .sharedArea
+            case .myDisk:
+                return .myDisk
         }
     }
     
@@ -42,13 +61,24 @@ indirect enum PrivateShareType: Equatable {
                 return true
                 
             case .withMe:
-                return false
+                return true
                 
             case .innerFolder:
                 return veryRootType(for: self).isSelectionAllowed
                 
             case .sharedArea:
                 return true
+        }
+    }
+    
+    //with this flag we check if we need to show search bar or not
+    var isSearchAllowed: Bool {
+        switch self {
+            case .myDisk, .sharedArea:
+                return true
+                
+            case .byMe, .withMe, .innerFolder:
+                return false
         }
     }
     
@@ -59,13 +89,13 @@ indirect enum PrivateShareType: Equatable {
         switch typeAndRoot {
             case (.myDisk, _):
                 if rootPermissions?.granted?.contains(.create) == true {
-                    return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                    return [.upload(type: .regular), .uploadFiles(type: .regular),  .newFolder(type: .regular)]
                 }
                 return []
                 
             case (.sharedArea, _):
                 if rootPermissions?.granted?.contains(.create) == true {
-                    return [.newFolder(type: .sharedArea), .upload(type: .sharedArea), .uploadFiles(type: .sharedArea)]
+                    return [.upload(type: .sharedArea), .uploadFiles(type: .sharedArea), .newFolder(type: .sharedArea)]
                 }
                 return []
             
@@ -84,22 +114,22 @@ indirect enum PrivateShareType: Equatable {
         switch innerFolderVeryRootType {
             case .myDisk:
                 if permissions.contains(.create) {
-                    return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                    return [ .upload(type: .regular), .uploadFiles(type: .regular), .newFolder(type: .regular)]
                 }
                 return []
                 
             case .byMe:
-                return [.newFolder(type: .regular), .upload(type: .regular), .uploadFiles(type: .regular)]
+                return [.upload(type: .regular), .uploadFiles(type: .regular), .newFolder(type: .regular)]
                 
             case .withMe:
                 if permissions.contains(.create) {
-                    return [.newFolder(type: .sharedWithMe), .upload(type: .sharedWithMe), .uploadFiles(type: .sharedWithMe)]
+                    return [.upload(type: .sharedWithMe), .uploadFiles(type: .sharedWithMe), .newFolder(type: .sharedWithMe)]
                 }
                 return []
                 
             case .sharedArea:
                 if permissions.contains(.create) {
-                    return [.newFolder(type: .sharedArea), .upload(type: .sharedArea), .uploadFiles(type: .sharedArea)]
+                    return [.upload(type: .sharedArea), .uploadFiles(type: .sharedArea), .newFolder(type: .sharedArea)]
                 }
                 return []
                 

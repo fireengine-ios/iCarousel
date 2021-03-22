@@ -12,15 +12,19 @@ import UIKit
 /// use file owner to setup outlets instead of view
 /// https://stackoverflow.com/a/34524346/5893286
 protocol FromNib: class {
-    func setupFromNib()
+    @discardableResult
+    func setupFromNib() -> UIView
 }
 
 extension FromNib where Self: UIView {
-    func setupFromNib() {
+    
+    @discardableResult
+    func setupFromNib() -> UIView {
         let view = loadFromNib()
         view.frame = bounds
         view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addSubview(view)
+        return view
     }
     
     private func loadFromNib() -> UIView {

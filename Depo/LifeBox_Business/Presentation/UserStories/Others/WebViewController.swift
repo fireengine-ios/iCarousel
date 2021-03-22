@@ -74,7 +74,7 @@ final class WebViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     

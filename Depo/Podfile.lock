@@ -175,6 +175,7 @@ PODS:
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
+  - Player (0.13.3)
   - PromisesObjC (1.2.12)
   - ReachabilitySwift (5.0.0)
   - SDWebImage (4.4.8):
@@ -219,6 +220,7 @@ DEPENDENCIES:
   - MMWormhole (~> 2.0.0)
   - Netmera (~> 3)
   - Netmera (~> 3.8.4)
+  - Player (~> 0.13.2)
   - ReachabilitySwift
   - SDWebImage (~> 4)
   - SQLite.swift (= 0.11.4)
@@ -264,6 +266,7 @@ SPEC REPOS:
     - nanopb
     - Netmera
     - ObjcExceptionBridging
+    - Player
     - PromisesObjC
     - ReachabilitySwift
     - SDWebImage
@@ -327,6 +330,7 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   Netmera: 6aa97985b1db4517cbb2b0ba9753949a4d821d95
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
+  Player: e1889a481f14b3bc4065b62bed304c3de3b47dfe
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
@@ -339,6 +343,6 @@ SPEC CHECKSUMS:
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 40c37eb533b95b0f12d43b2f40a3cf5a52efb6dc
+PODFILE CHECKSUM: 2d5cf64941b20396e765e1b31893ad637e13c515
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.0

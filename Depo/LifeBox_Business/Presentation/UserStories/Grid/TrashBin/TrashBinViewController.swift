@@ -54,11 +54,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .trashBin))
         
-        if dataSource.isSelectionStateActive {
-            navigationBarWithGradientStyle()
-        } else {
-            homePageNavigationBarStyle()
-        }
+        setNavigationBarStyle(.byDefault)
+        
         navbarManager.setupNavBarButtons(animated: false)
         
         //need to fix crash on show bottom bar
@@ -143,7 +140,7 @@ extension TrashBinViewController {
     private func startSelectionState() {
         navigationItem.hidesBackButton = true
         navbarManager.setSelectionState()
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
         sortingManager.isActive = false
     }
     
@@ -151,7 +148,7 @@ extension TrashBinViewController {
         navigationItem.hidesBackButton = false
         dataSource.cancelSelection()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
-        homePageNavigationBarStyle()
+        setNavigationBarStyle(.byDefault)
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
         updateMoreButton()
@@ -166,7 +163,7 @@ extension TrashBinViewController {
             collectionView.contentInset.bottom = 0
         } else {
             bottomBarManager.show()
-            collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.editingBar.bounds.height ?? 0
+            collectionView.contentInset.bottom = bottomBarManager.editingTabBar?.bottomActionsBar.bounds.height ?? 0
         }
     }
     

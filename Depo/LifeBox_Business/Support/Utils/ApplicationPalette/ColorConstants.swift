@@ -33,6 +33,7 @@ struct ColorConstants {
     static let loginTextFieldPlaceholder = UIColor(named: "loginTextFieldPlaceholder")!
     static let loginDescriptionLabel = UIColor(named: "loginDescriptionLabel")!
     static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
+
     static let loginPopupDescription = UIColor(named: "loginPopupDescription")!
     
     static let textViewBackground = UIColor(named: "textViewBackground")!
@@ -81,6 +82,9 @@ struct ColorConstants {
     static let iconBackgroundView = UIColor(named: "iconBackgroundView")!
     static let settingsTableBackground = UIColor(named: "settingsTableBackground")!
 
+    static let topBarColor = UIColor(named: "topBarBackground")!
+    static let topBarSettingsIconColor = UIColor(named: "topBarSettingsIconColor")!
+    
     //MARK: END
     
     static let whiteColor = UIColor.white
