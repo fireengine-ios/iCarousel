@@ -82,6 +82,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         var bitmaskValue = bitmask
         var elementTypesArray = [ElementTypes]()
 
+        var appendDelete = false
+        
         if bitmaskValue >= 512 {
             // Read acl
             bitmaskValue -= 512
@@ -110,7 +112,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         if bitmaskValue >= 16 {
             // Delete
-            elementTypesArray.append(.delete)
+            appendDelete = true
             bitmaskValue -= 16
         }
         
@@ -131,9 +133,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         if bitmaskValue >= 1 {
             // Read
-            elementTypesArray.append(.download)
             elementTypesArray.append(.share)
+            elementTypesArray.append(.download)
             bitmaskValue -= 1
+        }
+        
+        if appendDelete {
+            elementTypesArray.append(.delete)
         }
         
         return elementTypesArray

@@ -77,12 +77,13 @@ enum ElementTypes {
         }
         
         if grantedPermissions.contains(.read) {
+            result.append(.share)
+            
             if item.fileType.isContained(in: [.image, .video]) {
                 result.append(.download)
             } else {
                 result.append(.downloadDocument)
-            }
-            result.append(.share)
+            }   
         }
         
         if grantedPermissions.contains(.delete) {
