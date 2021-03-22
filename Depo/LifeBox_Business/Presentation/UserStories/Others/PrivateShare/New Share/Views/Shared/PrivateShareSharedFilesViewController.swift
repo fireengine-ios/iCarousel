@@ -375,6 +375,11 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onPlusButton() {
+        guard ReachabilityService.shared.isReachable else {
+            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+            return
+        }
+        
         guard !floatingButtonsArray.isEmpty else {
             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.noAccessSnackBarTitle)
             return
