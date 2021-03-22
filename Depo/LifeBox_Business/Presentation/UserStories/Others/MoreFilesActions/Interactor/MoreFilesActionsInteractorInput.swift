@@ -65,6 +65,8 @@ protocol MoreFilesActionsInteractorInput {
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
     
     func delete(items: [BaseDataSourceItem])
+
+    func deletePermanently(items: [BaseDataSourceItem])
     
     func emptyTrashBin()
     

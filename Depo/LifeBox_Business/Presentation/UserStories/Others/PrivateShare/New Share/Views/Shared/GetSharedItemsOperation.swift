@@ -106,8 +106,29 @@ final class GetSharedItemsOperation: Operation {
         case .withMe:
             task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
             
-        case .innerFolder(_, let folder):
-            task = privateShareAPIService.getFiles(projectId: folder.accountUuid, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+        case .innerFolder(let type, let folder):
+            switch type {
+            case .trashBin:
+                task = privateShareAPIService.trashedList(folderUUID: folder.uuid, sortBy: sortBy, sortOrder: sortOrder, page: page, size: size) { response in
+                    switch response {
+                    case .success(let fileSystem):
+                        completion(.success(fileSystem.fileList))
+                    case .failed(let error):
+                        completion(.failed(error))
+                    }
+                }
+            default:
+                task = privateShareAPIService.getFiles(projectId: folder.accountUuid, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                    switch response {
+                    case .success(let fileSystem):
+                        completion(.success(fileSystem.fileList))
+                    case .failed(let error):
+                        completion(.failed(error))
+                    }
+                }
+            }
+        case .trashBin:
+            task = privateShareAPIService.trashedList(folderUUID: "", sortBy: sortBy, sortOrder: sortOrder, page: page, size: size) { response in
                 switch response {
                 case .success(let fileSystem):
                     completion(.success(fileSystem.fileList))

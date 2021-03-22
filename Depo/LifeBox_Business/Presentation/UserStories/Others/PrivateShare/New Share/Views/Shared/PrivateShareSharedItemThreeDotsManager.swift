@@ -41,6 +41,13 @@ final class PrivateShareSharedItemThreeDotsManager {
             case .byMe, .myDisk, .withMe, .sharedArea:
                 return ElementTypes.specifiedMoreActionTypes(for: item.status, item: item)
 
+            case .trashBin:
+                var actionsArray: [ElementTypes] = [.select]
+                if item.privateSharePermission?.granted?.contains(.delete) == true {
+                    actionsArray.append(contentsOf: [.restore, .deletePermanently])
+                }
+                actionsArray.append(.info)
+                return actionsArray
             case .innerFolder:
                 assertionFailure("should not be the case")
                 return []

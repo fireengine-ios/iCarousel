@@ -18,7 +18,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         controller.title = shareType.title
         controller.shareType = shareType
-        controller.needToShowTabBar = shareType != .trashBin
+        var needToShowTabBar = !(shareType == .trashBin)
+        if case .innerFolder = shareType, shareType.rootType == .trashBin  {
+            needToShowTabBar = false
+        }
+        controller.needToShowTabBar = needToShowTabBar
         return controller
     }
 
@@ -31,9 +35,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private(set) var shareType: PrivateShareType = .byMe
     
     private lazy var collectionManager: PrivateShareSharedFilesCollectionManager = {
-        let apiService = PrivateShareApiServiceImpl()
-        let sharedItemsManager = PrivateShareFileInfoManager.with(type: shareType, privateShareAPIService: apiService)
-        let manager = PrivateShareSharedFilesCollectionManager.with(collection: collectionView, fileInfoManager: sharedItemsManager)
+        let manager = PrivateShareSharedFilesCollectionManager.with(collection: collectionView, fileInfoManager: fileInfoManager)
         manager.delegate = self
         return manager
     }()
@@ -43,6 +45,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private lazy var threeDotsManager = PrivateShareSharedWithThreeDotsManager(delegate: self)
     private lazy var itemThreeDotsManager = PrivateShareSharedItemThreeDotsManager(delegate: self)
     private lazy var plusButtonActionsManager = PrivateShareSharedPlusButtonActtionManager(delegate: self)
+    private lazy var fileInfoManager: PrivateShareFileInfoManager = {
+        let apiService = PrivateShareApiServiceImpl()
+        return PrivateShareFileInfoManager.with(type: shareType, privateShareAPIService: apiService)
+    }()
     
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
@@ -189,7 +195,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func setDefaultTabBarState() {
-        needToShowTabBar = shareType != .trashBin
+        if case .innerFolder = shareType, shareType.rootType == .trashBin  {
+            needToShowTabBar = false
+            return
+        }
+        needToShowTabBar = !(shareType == .trashBin)
     }
     
     private func setupCollectionViewBars() {
@@ -333,18 +343,21 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             let isSelectionAllowed = self.shareType.isSelectionAllowed
 
             if editingMode, isSelectionAllowed {
-                switch self.shareType {
-                case .trashBin:
+                if self.shareType == .trashBin {
                     self.navBarManager.setSelectionModeForTrashBin()
-                default:
+                } else {
                     self.navBarManager.setSelectionMode()
                 }
             } else {
                 switch self.shareType {
                 case .trashBin:
                     self.navBarManager.setTrashBinMode(title: self.shareType.title)
-                case .innerFolder(_, _):
-                    self.navBarManager.setNestedMode(title: self.shareType.title)
+                case .innerFolder(let rootType, let folderItem):
+                    if rootType != .trashBin {
+                        self.navBarManager.setNestedMode(title: self.shareType.title)
+                    } else {
+                        self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true)
+                    }
                 default:
                     var newTitle = self.shareType.title
                     if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
@@ -459,7 +472,10 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
                 if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
-                
+            case .trashBin:
+                if type.isContained(in: [.restore, .deletePermanently]) {
+                    collectionManager.reload(type: .onOperationFinished)
+                }
             default:
                 assertionFailure()
         }

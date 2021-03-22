@@ -328,6 +328,43 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: popup, animated: false)
         
     }
+
+    func deletePermanently(items: [BaseDataSourceItem]) {
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            assertionFailure("Locals only must not be passed to hide them")
+            return
+        }
+
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            self?.output?.operationCancelled(type: .restore)
+            vc.close()
+        }
+
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .ok)
+            self?.output?.operationStarted(type: .deletePermanently)
+            vc.close { [weak self] in
+                self?.permanentlyDelete(items)
+            }
+        }
+
+        trackScreen(.fileOperationConfirmPopup(.restore))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.RestoreConfirmPopUp())
+
+        let message = TextConstants.trashBinDeleteConfirmDescription
+        let controller = PopUpController.with(title: TextConstants.trashBinDeleteConfirmTitle,
+                                              message: message,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.trashBinDeleteNoAction,
+                                              secondButtonTitle: TextConstants.trashBinDeleteYesAction,
+                                              firstAction: cancelHandler,
+                                              secondAction: okHandler)
+
+        router.presentViewController(controller: controller)
+        router.hideSpiner()
+    }
     
     func restore(items: [BaseDataSourceItem]) {
         let remoteItems = items.filter { !$0.isLocalItem }
@@ -354,17 +391,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.RestoreConfirmPopUp())
         
 
-        let message: String
-        if items.allSatisfy({ $0.fileType == .folder }) {
-            message = TextConstants.restoreFoldersConfirmationPopupText
-        } else {
-            message = TextConstants.restoreItemsConfirmationPopupText
-        }
-        let controller = PopUpController.with(title: TextConstants.restoreConfirmationPopupTitle,
+        let message = TextConstants.trashBinRestoreConfirmDescription
+        let controller = PopUpController.with(title: TextConstants.trashBinRestoreConfirmTitle,
                                               message: message,
                                               image: .restore,
-                                              firstButtonTitle: TextConstants.cancel,
-                                              secondButtonTitle: TextConstants.ok,
+                                              firstButtonTitle: TextConstants.trashBinRestoreNoAction,
+                                              secondButtonTitle: TextConstants.trashBinRestoreYesAction,
                                               firstAction: cancelHandler,
                                               secondAction: okHandler)
         
@@ -974,6 +1006,13 @@ extension MoreFilesActionsInteractor {
 
 //MARK: - DELETE
 extension MoreFilesActionsInteractor {
+
+    private func permanentlyDelete(_ items: [BaseDataSourceItem]) {
+        divorceItems(type: .deletePermanently, items: items) { [weak self] items, success, fail in
+            self?.permanentlyDeleteSelectedItems(items, success: success, fail: fail)
+        }
+    }
+
     private func deleteItems(_ items: [BaseDataSourceItem]) {
         divorceItems(type: .delete,
                      items: items,
@@ -988,6 +1027,14 @@ extension MoreFilesActionsInteractor {
         fileService.delete(items: items, success: { [weak self] in
             self?.removeItemsFromPlayer(items: items)
             success()
+        }, fail: fail)
+    }
+
+    private func permanentlyDeleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        fileService.delete(items: items, success: { [weak self] in
+            self?.removeItemsFromPlayer(items: items)
+            success()
+            SnackbarManager.shared.show(elementType: .deletePermanently, relatedItems: items, handler: nil)
         }, fail: fail)
     }
 }
