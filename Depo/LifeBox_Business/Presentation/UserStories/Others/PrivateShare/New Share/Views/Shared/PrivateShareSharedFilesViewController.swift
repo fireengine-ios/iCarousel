@@ -178,6 +178,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
 
     @objc private func onMenuTriggered() {
+        guard ReachabilityService.shared.isReachable else {
+            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+            return
+        }
+        
         if floatingButtonsArray.isEmpty {
             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.noAccessSnackBarTitle)
         }
