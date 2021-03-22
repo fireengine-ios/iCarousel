@@ -43,7 +43,8 @@ final class AgreementsViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        changeLargeTitle(prefersLargeTitles: false)
+
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
         setView()
         setSegmentedControl()
         setWebView()
@@ -54,7 +55,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(title: TextConstants.agreements)
+        setNavigationTitle(title: TextConstants.agreements, style: .white)
         setNavigationBarStyle(.white)
         
         if !Device.isIpad {

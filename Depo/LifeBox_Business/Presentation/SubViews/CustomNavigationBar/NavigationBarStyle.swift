@@ -7,15 +7,15 @@
 //
 
 import Foundation
-
-enum NavigationBarStyle {
-    case black
-    case clear
-    
-    var backgroundImage: UIImage? {
-        switch self {
-        case .black: return UIImage(named: "NavigatonBarBlackBacground")
-        case .clear: return UIImage()
-        }
-    }
-}
+//
+//enum NavigationBarStyle {
+//    case black
+//    case clear
+//    
+//    var backgroundImage: UIImage? {
+//        switch self {
+//        case .black: return UIImage(named: "NavigatonBarBlackBacground")
+//        case .clear: return UIImage()
+//        }
+//    }
+//}

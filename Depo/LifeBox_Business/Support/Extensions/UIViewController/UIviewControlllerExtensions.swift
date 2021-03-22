@@ -107,16 +107,3 @@ extension UIViewController: Waiting {
         }
     }
 }
-
-
-// MARK: - CustomNavController
-
-protocol CurrentNavController {
-    var currentNavController: UINavigationController? { get }
-}
-
-extension UIViewController: CurrentNavController {
-    var currentNavController: UINavigationController? {
-        return navigationController
-    }
-}
