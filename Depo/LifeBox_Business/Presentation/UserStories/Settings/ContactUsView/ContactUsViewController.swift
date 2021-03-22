@@ -122,9 +122,66 @@ final class ContactUsViewController: BaseViewController, NibInit {
         sendButton.alpha = 1
     }
     
+    private func getUserInfo(_ handler: @escaping ( _ userEmail: String, _ unlimitedStorage: Bool, _ storageInBytes: String, _ usageInBytes: String) -> Void) {
+        let organizationUUID = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid ?? ""
+        let userAccountUuid = SingletonStorage.shared.accountInfo?.uuid ?? ""
+        
+        SingletonStorage.shared.getStorageUsageInfo(projectId: organizationUUID, userAccountId: userAccountUuid) { response in
+            handler(response.email ?? "No user email",
+                    response.unlimitedStorage ?? false,
+                    (response.storageInBytes?.convertBytesToGb ?? ""),
+                    response.usageInBytes.convertBytesToGb)
+        } fail: { error in
+            assertionFailure(error.localizedDescription)
+        }
+    }
+    
+    private func openEmail() {
+        guard Mail.canSendEmail() else {
+            UIApplication.showErrorAlert(message: TextConstants.feedbackEmailError)
+            return
+        }
+        
+        let subject = subjectView.textField.text ?? ""
+        let usersDescription = textView.text ?? ""
+        
+        getUserInfo { userEmail, unlimitedStorage, storageUsage, storageQuota in
+            let versionString = SettingsBundleHelper.appVersion()
+            let storageQuota = unlimitedStorage ? TextConstants.contactUsMailBodyUnlimitedStorage : storageQuota
+            
+            let emailBody = usersDescription + "\n" +
+                String(format: TextConstants.contactUsMailTextFormat,
+                       userEmail,
+                       versionString,
+                       UIDevice.current.modelName,
+                       UIDevice.current.systemVersion,
+                       Device.locale,
+                       ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
+                       storageUsage,
+                       storageQuota,
+                       subject)
+            
+            let emailSubject = userEmail + " - " + TextConstants.NotLocalized.appNameMailSubject + subject
+            
+            print(emailSubject)
+            print("")
+            print(emailBody)
+            
+            Mail.shared().sendEmail(emailBody: emailBody,
+                                    subject: emailSubject,
+                                    emails: ["lifeboxipadpro@gmail.com"],
+                                    presentCompletion: {
+                                        RouterVC().popViewController()
+                                    }, success: nil, fail: { error in
+                                        UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
+                                    })
+        }
+    }
+    
     //MARK: - @IBActions
     
     @IBAction func sendButtonPressed(_ sender: Any) {
+        openEmail()
     }
 }
 
