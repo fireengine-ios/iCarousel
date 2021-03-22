@@ -77,7 +77,7 @@ final class SettingsViewController: BaseViewController {
         // TODO change it after merge to dev_2
         if isMovingFromParentViewController {
             navigationController?.navigationBar.prefersLargeTitles = true
-            setBackButtonForNavigationItem(title: TextConstants.backTitle, style: .white, target: nil, action: nil)
+            setBackButtonForNavigationItem(style: .white, title: TextConstants.backTitle, target: nil, action: nil)
         }
     }
 

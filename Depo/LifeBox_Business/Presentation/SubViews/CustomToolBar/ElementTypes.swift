@@ -94,7 +94,7 @@ enum ElementTypes {
         }
         
         if status == .trashed {
-            result = ElementTypes.trashState // TODO check here if permissions contains DELETE and give appropriate action list for that
+            result = item.privateSharePermission?.granted?.contains(.delete) == true ? ElementTypes.trashState : []
         }
         
         result.append(.info)

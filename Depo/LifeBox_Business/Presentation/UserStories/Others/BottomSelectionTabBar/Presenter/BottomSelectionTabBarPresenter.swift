@@ -32,14 +32,19 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
         var elementsConfig = createElementTypesArray(from: matchesBitmasks)
 
-        if shareType == .trashBin {
-            elementsConfig = elementsConfig.filter { $0 == .restore || $0 == .deletePermanently }.reversed()
+        var trashBinRelated = shareType == .trashBin
+        if case .innerFolder = shareType, shareType?.rootType == .trashBin  {
+            trashBinRelated = true
+        }
+
+        if trashBinRelated {
+            elementsConfig = elementsConfig.filter { $0 == .restore || $0 == .deletePermanently }
         } else {
             elementsConfig.remove(.deletePermanently)
             elementsConfig.remove(.restore)
         }
         
-        if items.count == 1 {
+        if items.count == 1 && !trashBinRelated {
             elementsConfig.append(.info)
         }
 
@@ -183,12 +188,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
                 self.interactor.restore(items: selectedItems)
-<<<<<<< HEAD
             case .deletePermanently:
                 self.interactor.deletePermanently(items: selectedItems)
-=======
-                
->>>>>>> origin/develop_v2
             case .download:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
