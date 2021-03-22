@@ -72,9 +72,9 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         setNavigationBarStyle(.hidden)
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     private func setupCarousel() {
         carouselView.type = .custom

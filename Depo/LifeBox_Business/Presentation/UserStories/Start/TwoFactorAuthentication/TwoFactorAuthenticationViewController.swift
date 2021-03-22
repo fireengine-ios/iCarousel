@@ -92,9 +92,9 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     //MARK: lifecycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     init(response: TwoFactorAuthErrorResponse) {
         self.twoFactorAuthResponse = response

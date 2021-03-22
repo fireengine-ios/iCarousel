@@ -110,9 +110,9 @@ final class SupportFormController: ViewController, KeyboardHandler {
     
     // MARK: -
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

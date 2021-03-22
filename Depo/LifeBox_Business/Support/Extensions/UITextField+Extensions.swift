@@ -15,10 +15,10 @@ extension UITextField {
         self.font = font
     }
     
-    func addToolBarWithButton(title: String, target: Any, selector: Selector) {
+    func addToolBarWithButton(title: String, target: Any, selector: Selector, font: UIFont = UIFont.TurkcellSaturaRegFont(size: 19), tintColor: UIColor = UIColor.lrTealish) {
         let doneButton = UIBarButtonItem(title: title,
-                                         font: UIFont.TurkcellSaturaRegFont(size: 19),
-                                         tintColor: UIColor.lrTealish,
+                                         font: font,
+                                         tintColor: tintColor,
                                          accessibilityLabel: title,
                                          style: .plain,
                                          target: target,

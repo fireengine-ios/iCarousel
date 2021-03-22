@@ -28,7 +28,8 @@ class SettingsRouter: SettingsRouterInput {
     }
 
     func navigateToContactUs() {
-        // TODO when ready- add routing to contact us screen
+        let controller = ContactUsViewController.initFromNib()
+        router.pushViewController(viewController: controller)
     }
 
     func navigateToTrashBin() {

@@ -232,12 +232,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .removeRole,
                      .deletePermanently:
                     
-                    action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
+                    action = UIAlertAction(title: type.actionTitle, style: .default, handler: { [weak self] _ in
                         self?.handleAction(type: type, items: currentItems)
                     })
 
                 case .share, .privateShare:
-                    action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
+                    action = UIAlertAction(title: type.actionTitle, style: .default, handler: { _ in
                         self.handleAction(type: type, items: currentItems, sender: sender)
                     })
                 case .undetermend:

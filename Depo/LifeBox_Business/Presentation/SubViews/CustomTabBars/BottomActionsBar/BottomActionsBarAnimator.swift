@@ -90,7 +90,18 @@ final class BottomActionsBarAnimator {
             view.frame = CGRect(x: self.originalX, y: sourceViewSize.height - self.originalY,
                                 width: sourceViewSize.width, height: self.height)
             
-            let newY = sourceViewSize.height - self.height - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
+            var newY = sourceViewSize.height - self.height
+            
+            let newTempOrigin = CGPoint(x: 0, y: newY)
+            let windowOrigin = sourceView.convert(newTempOrigin, to: nil)
+            
+            if
+                let bottomSafeInsetY = UIApplication.shared.keyWindow?.safeAreaInsets.bottom,
+                bottomSafeInsetY > 0,
+                windowOrigin.y + self.height > bottomSafeInsetY
+            {
+                newY -= bottomSafeInsetY
+            }
             
             UIView.animate(withDuration: duration, animations: {
                 view.frame.origin = CGPoint(x: 0, y: newY)

@@ -436,7 +436,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
 extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.contentSize.width
+        let width = collectionView.contentSize.width - NumericConstants.iPhoneGreedInset - NumericConstants.iPhoneGreedInset
         let height = MultifileCollectionViewCell.height
         
         return CGSize(width: width, height: height)
@@ -523,7 +523,7 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
     
     private func isNearTheNextPage(_ scrollView: UIScrollView) -> Bool {
         let nearTheNextPageValue = scrollView.bounds.height / 2.0
-        
+        //add insett here?
         guard scrollView.contentSize.height > scrollView.bounds.height + nearTheNextPageValue else {
             //prevents intersection with refresh when content height is too small
             return false

@@ -56,7 +56,7 @@ final class MenuItemsFabric {
         
         var selectMenu: UIMenu? = nil
         if let selectAction = selectAction {
-            let selectItem = UIAction(title: selectAction.actionTitle(),
+            let selectItem = UIAction(title: selectAction.actionTitle,
                                     image: selectAction.menuImage,
                                     attributes: selectAction.menuAttributes) { _  in
                 actionHandler(.elementType(selectAction))
@@ -70,7 +70,7 @@ final class MenuItemsFabric {
         
         var infoMenu: UIMenu? = nil
         if let infoAction = infoAction {
-            let infoItem = UIAction(title: infoAction.actionTitle(),
+            let infoItem = UIAction(title: infoAction.actionTitle,
                                     image: infoAction.menuImage,
                                     attributes: infoAction.menuAttributes) { _  in
                 actionHandler(.elementType(infoAction))
@@ -89,7 +89,7 @@ final class MenuItemsFabric {
                 let shareItems = getShareItems(for: item, actionHandler: actionHandler)
                 mainItems.append(contentsOf: shareItems)
             } else {
-                let item = UIAction(title: type.actionTitle(),
+                let item = UIAction(title: type.actionTitle,
                                     image: type.menuImage,
                                     attributes: type.menuAttributes) { _  in
                     actionHandler(.elementType(type))
@@ -148,7 +148,7 @@ final class MenuItemsFabric {
         var menuItems = [UIMenuElement]()
         bottomBarActions.forEach { bottomAction in
             let element = bottomAction.toElementType
-            let item = UIAction(title: element.actionTitle(),
+            let item = UIAction(title: element.actionTitle,
                                 image: element.menuImage,
                                 attributes: element.menuAttributes) { _  in
                 actionHandler(bottomAction)
@@ -179,7 +179,7 @@ extension ElementTypes {
         case .move:
             imageName = "move"
         case .share:
-            imageName = "share-private"
+            imageName = "share-copy"
         case .addToFavorites, .removeFromFavorites:
             imageName = "action_favorite"
         case .download, .downloadDocument:

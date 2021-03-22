@@ -69,7 +69,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
                 if case .innerFolder = self.shareType {
                     
                 } else {
-                    self.changeNavbarLargeTitle(!newValue)
+                    self.changeNavbarLargeTitle(!newValue, style: .white)
                 }
                 if self.shareType.isSearchAllowed {
                     self.setNavSearchConntroller(newValue ? nil : self.searchController)
@@ -112,11 +112,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        setupNavigationBar(editingMode: collectionManager.isSelecting)
         
-        setupNavBar()
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -134,6 +134,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: false)
     }
     
     override func removeFromParentViewController() {
@@ -159,10 +160,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         bottomBarManager.setup()
     }
     
-    private func setupNavBar() {
-        setupNavigationBar(editingMode: collectionManager.isSelecting)
-    }
-    
     private func setupPlusButton() {
         floatingButtonsArray = shareType.floatingButtonTypes(rootPermissions: collectionManager.rootPermissions)
         guard #available(iOS 14, *) else {
@@ -186,6 +183,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
 
     @objc private func onMenuTriggered() {
+        guard ReachabilityService.shared.isReachable else {
+            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+            return
+        }
+        
         if floatingButtonsArray.isEmpty {
             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.noAccessSnackBarTitle)
         }
@@ -252,13 +254,15 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
-        isEditing = true
         updateBars(isSelecting: true)
+        isEditing = true
+        
     }
     
     func didEndSelection() {
-        isEditing = false
         updateBars(isSelecting: false)
+        isEditing = false
+        
     }
     
     func didChangeSelection(selectedItems: [WrapData]) {
@@ -274,14 +278,14 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didEndReload() {
         hideSpinner()
-        if shareType.isSearchAllowed {
-            DispatchQueue.main.async {
-                self.setNavSearchConntroller(self.searchController)
-            }
+        
+        if self.shareType.isSearchAllowed {
+            self.setNavSearchConntroller(self.searchController)
         }
-        setupPlusButton()
-        handleOffsetChange(offsetY: collectionView.contentOffset.y)
-        view.layoutSubviews()
+        
+        self.setupPlusButton()
+        self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
+        self.view.layoutSubviews()
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -311,7 +315,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     private func show(selectedItemsCount: Int) {
         DispatchQueue.main.async {
-            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)", isSelectionMode: true)
+            self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)", isSelectionMode: true, style: .white)
         }
     }
     
@@ -350,7 +354,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             let isSelectionAllowed = self.shareType.isSelectionAllowed
 
             if editingMode, isSelectionAllowed {
-                if self.shareType == .trashBin {
+                if self.shareType == .trashBin || self.shareType.rootType == .trashBin {
                     self.navBarManager.setSelectionModeForTrashBin()
                 } else {
                     self.navBarManager.setSelectionMode()
@@ -366,6 +370,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                         self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true)
                     }
                 default:
+                    self.navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                     var newTitle = self.shareType.title
                     if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
                         newTitle = segmentedParent.rootTitle
@@ -405,6 +410,11 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onPlusButton() {
+        guard ReachabilityService.shared.isReachable else {
+            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+            return
+        }
+        
         guard !floatingButtonsArray.isEmpty else {
             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.noAccessSnackBarTitle)
             return
