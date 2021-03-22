@@ -48,7 +48,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
         }
     }
     
-    @IBOutlet private weak var timeBefore: UILabel! {
+    @IBOutlet private weak var totalDuration: UILabel! {
         willSet {
             newValue.text = "00:00"
             newValue.font = .GTAmericaStandardMediumFont(size: 12)
@@ -169,7 +169,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
     
     private func resetControls() {
         timeAfter.text = "00:00"
-        timeBefore.text = "00:00"
+        totalDuration.text = "00:00"
         playPauseButton.setImage(UIImage(named: "play"), for: .normal)
         
         progressSlider.value = 0
@@ -214,11 +214,11 @@ extension DetailMediaPlayerView: PlayerPlaybackDelegate {
     
     func playerCurrentTimeDidChange(_ player: Player) {
         let afterStart = player.currentTimeInterval
-        let beforeEnd = player.maximumDuration - player.currentTimeInterval
         let ratio = Float(afterStart / player.maximumDuration)
             
         timeAfter.text = afterStart.playbackTime
-        timeBefore.text = beforeEnd.playbackTime
+        totalDuration.text = player.maximumDuration.playbackTime
+        
         if !progressSlider.isTracking {
             progressSlider.setValue(ratio, animated: false)
         }
