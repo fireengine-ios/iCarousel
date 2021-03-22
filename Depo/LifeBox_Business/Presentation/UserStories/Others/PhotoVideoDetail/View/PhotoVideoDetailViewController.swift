@@ -15,11 +15,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var output: PhotoVideoDetailViewOutput!
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var viewForBottomBar: UIView! {
-        willSet {
-            newValue.backgroundColor = .clear
-        }
-    }
+    @IBOutlet private weak var viewForBottomBar: UIView!
     @IBOutlet private weak var bottomBlackView: UIView!
     @IBOutlet private weak var swipeUpContainerView: UIView!
     
