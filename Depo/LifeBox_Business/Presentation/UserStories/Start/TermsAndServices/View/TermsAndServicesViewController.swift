@@ -93,7 +93,7 @@ final class TermsAndServicesViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        setBackButtonForNavigationItem(style: .white, title: TextConstants.backTitle, target: nil, action: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -101,9 +101,9 @@ final class TermsAndServicesViewController: ViewController {
         hideSpinnerIncludeNavigationBar()
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     //MARK: - Configuration and Input
     private func configureUI() {
@@ -117,9 +117,9 @@ final class TermsAndServicesViewController: ViewController {
     
     private func setupNavigationControler() {
         setNavigationBarStyle(.white)
-        changeLargeTitle(prefersLargeTitles: false)
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
         if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.termsAndUsesTitle)
+            setNavigationTitle(title: TextConstants.termsAndUsesTitle, style: .white)
         }
     }
     

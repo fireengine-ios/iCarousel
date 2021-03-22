@@ -54,7 +54,7 @@ final class SettingsViewController: BaseViewController {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        changeLargeTitle(prefersLargeTitles: false)
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
         settingsTableViewAdapter = SettingsTableViewAdapter(with: tableView, delegate: self)
         output.viewIsReady()
     }
@@ -65,14 +65,14 @@ final class SettingsViewController: BaseViewController {
     }
 
     private func setupNavigationBar() {
-        setNavigationTitle(title: TextConstants.settingsPageTitle)
+        setNavigationTitle(title: TextConstants.settingsPageTitle, style: .white)
         setNavigationBarStyle(.white)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+//        setBackButtonForNavigationItem(title: TextConstants.backTitle, style: .white, action: nil)
     }
 
     override func showSpinner() {

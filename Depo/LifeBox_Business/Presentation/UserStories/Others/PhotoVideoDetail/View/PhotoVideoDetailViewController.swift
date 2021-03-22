@@ -15,11 +15,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var output: PhotoVideoDetailViewOutput!
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    @IBOutlet private weak var viewForBottomBar: UIView! {
-        willSet {
-            newValue.backgroundColor = .clear
-        }
-    }
+    @IBOutlet private weak var viewForBottomBar: UIView!
     @IBOutlet private weak var bottomBlackView: UIView!
     @IBOutlet private weak var swipeUpContainerView: UIView!
     
@@ -30,9 +26,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     var status: ItemStatus = .active
-    var hideTreeDotButton = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
+    
+    var initinalBarStyle: NavigationBarStyles = .transparent
     
     private var isFullScreen = false {
         didSet {
@@ -86,13 +83,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         return objects[safe: index]
     }
     
-    private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        button.setImage(UIImage(named: "more"), for: .normal)
-        button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
-        return UIBarButtonItem(customView: button)
-    }()
-    
     private var waitVideoPreviewURL = false
     
     private lazy var analytics = PrivateShareAnalytics()
@@ -101,8 +91,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        changeLargeTitle(prefersLargeTitles: false)
         
         collectionView.contentInsetAdjustmentBehavior = .never
         
@@ -115,9 +103,18 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
         
-        navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .transparent)
         
+        
+//        setNavigationBarStyle(.transparent)
+        
+//        navigationController.leftBarButtonItem =
+//        BackButtonItem(action: hideView)
+        setNavigationBarStyle(initinalBarStyle)
+        setNavigationLeftBarButton(style: initinalBarStyle, title: "", target: self, image: UIImage(named: "blackBackButton"), action: #selector(hideView))
+//        setupNavigationBar()
         showSpinner()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,14 +128,16 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
 //        rootNavController(vizible: true)
         
-        setNavigationBarStyle(.transparent)
+//        setNavigationBarStyle(.transparent)
+//        setBackButtonForNavigationItem(style: .transparent, title: "BACK", target: self, action: #selector(hideView))
         
+        setupNavigationBar()
         editingTabBar?.view.layoutIfNeeded()
         setupTitle()
         
-        if hideTreeDotButton {
-            navigationItem.rightBarButtonItem?.customView?.isHidden = true
-        }
+//        if hideTreeDotButton {
+//            navigationItem.rightBarButtonItem?.customView?.isHidden = true
+//        }
 
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
@@ -160,7 +159,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         
         output.viewWillDisappear()
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+//        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func viewDidLayoutSubviews() {
@@ -176,9 +175,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         })
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .black
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .black
+//    }
     
     private func updateFirstVisibleCell() {
         guard let selectedIndex = selectedIndex else {
@@ -189,7 +188,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         cells.first?.setup(with: objects[selectedIndex], index: selectedIndex, isFullScreen: isFullScreen)
     }
     
-    func hideView() {
+    @objc func hideView() {
         customDeinit()
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         
@@ -222,21 +221,41 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func setupNavigationBar() {
-        if navigationItem.rightBarButtonItem == nil && !hideTreeDotButton {
-            navigationItem.rightBarButtonItem = threeDotsBarButtonItem
+        guard let selectedItem = selectedItem else {
+            return
         }
-
-        if let selectedItem = selectedItem {
-            //hide 3 dots button for shared or local items
-            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem || !selectedItem.isOwner
+        let style: NavigationBarStyles
+        if case .application = selectedItem.fileType {
+            style = .white
         } else {
-            navigationItem.rightBarButtonItem?.customView?.isHidden = true
+            style = .transparent
         }
+        setNavigationBarStyle(style)
+        navigationItem.leftBarButtonItem?.tintColor = style.textTintColor
+//        if navigationItem.rightBarButtonItem == nil && !hideTreeDotButton {
+//            navigationItem.rightBarButtonItem = threeDotsBarButtonItem
+//        }
+
+//        if let selectedItem = selectedItem {
+//            //hide 3 dots button for shared or local items
+//            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem || !selectedItem.isOwner
+//        } else {
+//            navigationItem.rightBarButtonItem?.customView?.isHidden = true
+//        }
     }
 
     private func setupTitle() {
+        guard let selectedItem = selectedItem else {
+            return
+        }
+        let style: NavigationBarStyles
+        if case .application = selectedItem.fileType {
+            style = .white
+        } else {
+            style = .transparent
+        }
         DispatchQueue.main.async {
-            self.setNavigationTitle(title: self.selectedItem?.name ?? "")
+            self.setNavigationTitle(title: selectedItem.name ?? "", style: style)
         }
     }
     
@@ -291,7 +310,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func showValidateNameSuccess(name: String) {
-        setNavigationTitle(title: name)
+//        setNavigationTitle(title: name)
+        self.title = name
     }
     
     func show(name: String) { }
@@ -299,19 +319,15 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func setupInitialState() { }
     
     func onItemSelected(at index: Int, from items: [Item]) {
-        if items.isEmpty {
-            return
-        }
-        
-        if let item = items[safe: index], item.isLocalItem && item.fileType == .image {
-            setThreeDotsMenu(active: false)
-        } else {
-            setThreeDotsMenu(active: true)
-        }
-    }
-    
-    func setThreeDotsMenu(active isActive: Bool) {
-        navigationItem.rightBarButtonItem?.isEnabled = isActive
+//        if items.isEmpty {
+//            return
+//        }
+//
+//        if let item = items[safe: index], item.isLocalItem && item.fileType == .image {
+//            setThreeDotsMenu(active: false)
+//        } else {
+//            setThreeDotsMenu(active: true)
+//        }
     }
     
     func play(item: AVPlayerItem) {

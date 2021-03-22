@@ -106,11 +106,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         sharingItems.removeAll()
         sharingItems.append(contentsOf: item)
         
-        if #available(iOS 14.0, *) {
-            shareOrignalSize(sourceRect: sourceRect)
-        } else {
-            selectShareType(sourceRect: sourceRect)
-        }
+        shareOrignalSize(sourceRect: sourceRect)
     }
     
     func selectShareType(sourceRect: CGRect?) {

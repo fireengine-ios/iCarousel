@@ -19,6 +19,7 @@ final class FAQViewController: BaseViewController {
         let webConfig = WKWebViewConfiguration()
         
         let web = WKWebView(frame: .zero, configuration: webConfig)
+        web.isOpaque = false
         web.navigationDelegate = self
         
         return web
@@ -28,15 +29,16 @@ final class FAQViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        changeLargeTitle(prefersLargeTitles: false)
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
         view.backgroundColor = ColorConstants.tableBackground
+        setView()
         setWebView()
         loadFAQ()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationTitle(title: TextConstants.faqTitle)
+        setNavigationTitle(title: TextConstants.faqTitle, style: .white)
         setNavigationBarStyle(.white)
         
         if !Device.isIpad {
@@ -50,6 +52,10 @@ final class FAQViewController: BaseViewController {
     }
     
     //MARK: - Setup
+    
+    private func setView() {
+        view.backgroundColor = ColorConstants.tableBackground
+    }
     
     private func setWebView() {
         view.addSubview(webView)

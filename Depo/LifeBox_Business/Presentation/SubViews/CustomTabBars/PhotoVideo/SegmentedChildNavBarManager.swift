@@ -70,22 +70,26 @@ final class SegmentedChildNavBarManager {
     }
     
     func setRootMode(title: String = "") {
-        delegate?.setTitle(title, isSelectionMode: false)
+        delegate?.setTitle(title, isSelectionMode: false, style: .white)
         delegate?.setRightBarButtonItems([plusButton], animated: false)
         delegate?.setLeftBarButtonItems([settingsButton], animated: false)
     }
     
     func setupLargetitle(isLarge: Bool) {
-        delegate?.changeNavbarLargeTitle(isLarge)
+        delegate?.changeNavbarLargeTitle(isLarge, style: .white)
     }
     
     func setNestedMode(title: String = "") {
-        delegate?.setTitle(title, isSelectionMode: false)
+        delegate?.setTitle(title, isSelectionMode: false, style: .white)
         delegate?.setRightBarButtonItems([plusButton], animated: false)
     }
     
+    func setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: Bool) {
+        delegate?.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: extendedLayoutIncludesOpaqueBars)
+    }
+    
     func setDefaultModeWithoutThreeDot(title: String = "") {
-        delegate?.setTitle(title, isSelectionMode: false)
+        delegate?.setTitle(title, isSelectionMode: false, style: .white)
         delegate?.setLeftBarButtonItems(nil, animated: true)
     }
     

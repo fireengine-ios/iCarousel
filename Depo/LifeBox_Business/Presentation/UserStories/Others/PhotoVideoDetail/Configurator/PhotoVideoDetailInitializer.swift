@@ -19,6 +19,13 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                style: .transparent)
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
+//        initinalBarStyle
+        if case .application = selectedItem.fileType {
+            viewController.initinalBarStyle = .white
+        } else {
+            viewController.initinalBarStyle = .transparent
+        }
+        
         let configurator = PhotoVideoDetailModuleConfigurator()
         let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleForViewInput(viewInput: viewController,

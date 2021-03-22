@@ -30,7 +30,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         guard let items = items as? [WrapData] else { return }
         
         let matchesBitmasks = calculateMatchesBitmasks(from: items)
-        let elementsConfig = createElementTypesArray(from: matchesBitmasks)
+        var elementsConfig = createElementTypesArray(from: matchesBitmasks)
+        
+        if items.count == 1 {
+            elementsConfig.append(.info)
+        }
+        
         let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque)
         setupConfig(withConfig: config)
     }
@@ -72,11 +77,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         return Int(itemsBitmasksArray.reduce(firstElement, &))
     }
 
-    /// Returns element types array calculated from bitmask v
+    /// Returns element types array calculated from bitmask
     private func createElementTypesArray(from bitmask: Int) -> [ElementTypes] {
         var bitmaskValue = bitmask
         var elementTypesArray = [ElementTypes]()
 
+        var appendDelete = false
+        
         if bitmaskValue >= 512 {
             // Read acl
             bitmaskValue -= 512
@@ -105,7 +112,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         if bitmaskValue >= 16 {
             // Delete
-            elementTypesArray.append(.delete)
+            appendDelete = true
             bitmaskValue -= 16
         }
         
@@ -126,12 +133,14 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         if bitmaskValue >= 1 {
             // Read
-            elementTypesArray.append(.download)
             elementTypesArray.append(.share)
+            elementTypesArray.append(.download)
             bitmaskValue -= 1
         }
         
-        elementTypesArray.append(.info)
+        if appendDelete {
+            elementTypesArray.append(.delete)
+        }
         
         return elementTypesArray
     }
@@ -152,6 +161,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+                
             case .delete:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -164,6 +174,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
                 self.interactor.restore(items: selectedItems)
+                
             case .download:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -174,6 +185,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+                
             case .downloadDocument:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -192,15 +204,18 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 
             case .move:
                 self.interactor.move(item: selectedItems, toPath: "")
+                
             case .share:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
                 self.interactor.originalShare(item: selectedItems, sourceRect: self.middleTabBarRect)
+                
             case .privateShare:
                 //\AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share)) // add analytics here later?
                 self.interactor.privateShare(item: selectedItems, sourceRect: self.middleTabBarRect)
 
             case .moveToTrashShared:
                 self.interactor.moveToTrashShared(items: selectedItems)
+                
             default:
                 break
             }
@@ -297,20 +312,20 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 var action: UIAlertAction
                 switch $0 {
                 case .info:
-                    action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionInfo, style: .default, handler: { _ in
                         self.router.onInfo(object: currentItems.first!)
                     })
                     
                 case .download:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionDownload, style: .default, handler: { _ in
                         self.interactor.download(item: currentItems)
                     })
                 case .downloadDocument:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionDownload, style: .default, handler: { _ in
                         self.interactor.downloadDocument(items: currentItems)
                     })
                 case .delete:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionDelete, style: .default, handler: { _ in
                         self.interactor.delete(items: currentItems)
                     })
                 case .restore:
@@ -322,7 +337,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                         self.interactor.move(item: currentItems, toPath: "")
                     })
                 case .share:
-                    action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionShareCopy, style: .default, handler: { _ in
                         self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
                     })
                 //Photos and albumbs

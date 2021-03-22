@@ -16,7 +16,7 @@
                 <outlet property="playerContainerView" destination="FI5-J5-ukw" id="ftq-kh-4vH"/>
                 <outlet property="progressSlider" destination="ep4-Fp-8zW" id="TwO-gF-tjI"/>
                 <outlet property="timeAfter" destination="9vB-eT-0cT" id="vP8-6S-6uA"/>
-                <outlet property="timeBefore" destination="4H0-Bw-CWz" id="URs-D2-K9G"/>
+                <outlet property="totalDuration" destination="4H0-Bw-CWz" id="CXU-bT-Db9"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

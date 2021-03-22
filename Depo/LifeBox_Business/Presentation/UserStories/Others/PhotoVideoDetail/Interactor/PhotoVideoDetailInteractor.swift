@@ -63,7 +63,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         guard let index = selectedIndex else {
             return
         }
-        
         output.onShowSelectedItem(at: index, from: array.getArray())
     }
 
