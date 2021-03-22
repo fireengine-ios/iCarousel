@@ -42,6 +42,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeLargeTitle(prefersLargeTitles: false)
         setView()
         setTextView()
         setSendButton()
@@ -50,21 +51,17 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //TODO: uncomment after merge with bar branch
-        //        setNavigationBarStyle(.white)
+        setNavigationTitle(title: TextConstants.contactUsPageTitle)
+        setNavigationBarStyle(.white)
         
-        //        if !Device.isIpad {
-        //            defaultNavBarStyle()
-        //        }
+        if !Device.isIpad {
+            setNavigationBarStyle(.byDefault)
+        }
     }
     
     //MARK: - Setup
     
     private func setView() {
-        setTitle(withString: TextConstants.contactUsPageTitle)
-        //TODO: replace setTitle to it after merge with bar branch
-        //        setNavigationTitle(title: TextConstants.contactUsPageTitle, isLargeTitle: false)
-        
         descriptionLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         descriptionLabel.textColor = ColorConstants.Text.textFieldText
         descriptionLabel.text = TextConstants.contactUsPageDescription
@@ -211,7 +208,7 @@ extension ContactUsViewController: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        return textView.text.count +  (text.count - range.length) <= maxCharactersCount
+        return textView.text.count + (text.count - range.length) <= maxCharactersCount
     }
 }
 
