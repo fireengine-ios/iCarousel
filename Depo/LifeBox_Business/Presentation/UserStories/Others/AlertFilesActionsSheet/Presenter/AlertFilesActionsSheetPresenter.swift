@@ -368,6 +368,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
         case .restore:
             interactor.restore(items: items)
+
+        case .deletePermanently:
+            interactor.deletePermanently(items: items)
             
         case .move:
             interactor.move(item: items, toPath: "")

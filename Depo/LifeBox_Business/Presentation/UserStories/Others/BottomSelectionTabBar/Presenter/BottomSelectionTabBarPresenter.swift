@@ -26,11 +26,19 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         view.setupBar(style: config.style, config: config)
     }
 
-    func setupTabBarWith(items: [BaseDataSourceItem]) {
-        guard let items = items as? [WrapData] else { return }
-        
-        let matchesBitmasks = calculateMatchesBitmasks(from: items)
-        let elementsConfig = createElementTypesArray(from: matchesBitmasks)
+    func setupTabBarWith(items: [BaseDataSourceItem], shareType: PrivateShareType? = nil) {
+        guard let wrapData = items as? [WrapData] else { return }
+
+        let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
+        var elementsConfig = createElementTypesArray(from: matchesBitmasks)
+
+        if shareType == .trashBin {
+            elementsConfig = elementsConfig.filter { $0 == .restore || $0 == .deletePermanently }.reversed()
+        } else {
+            elementsConfig.remove(.deletePermanently)
+            elementsConfig.remove(.restore)
+        }
+
         let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque)
         setupConfig(withConfig: config)
     }
@@ -106,6 +114,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         if bitmaskValue >= 16 {
             // Delete
             elementTypesArray.append(.delete)
+            elementTypesArray.append(.deletePermanently)
+            elementTypesArray.append(.restore)
             bitmaskValue -= 16
         }
         
@@ -164,6 +174,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
                 self.interactor.restore(items: selectedItems)
+            case .deletePermanently:
+                self.interactor.deletePermanently(items: selectedItems)
             case .download:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -312,6 +324,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         self.interactor.delete(items: currentItems)
+                    })
+                case .deletePermanently:
+                    action = UIAlertAction(title: TextConstants.trashBinDeleteYesAction, style: .default, handler: { _ in
+                        self.interactor.deletePermanently(items: currentItems)
                     })
                 case .restore:
                     action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in

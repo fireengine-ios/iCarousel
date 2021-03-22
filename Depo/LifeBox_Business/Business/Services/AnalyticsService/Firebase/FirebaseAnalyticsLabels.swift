@@ -583,10 +583,6 @@ enum GAEventLabel {
                 return "Upload Files"
             case .uploadFromApp:
                 return "Upload from \(TextConstants.NotLocalized.appName)"
-            case .deletePermanently:
-                return "" // TODO ask team of Can about it, will be added when analytics task started
-            case .restore:
-                return ""  // TODO ask team of Can about it, will be added when analytics task started
             }
         case .shareViaLink:
             return "Share via Link"

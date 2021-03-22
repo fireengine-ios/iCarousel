@@ -118,9 +118,10 @@ final class SegmentedChildNavBarManager {
         delegate?.setLeftBarButtonItems(nil, animated: true)
     }
 
-    func setTrashBinMode(title: String) {
+    func setTrashBinMode(title: String, innerFolder: Bool = false) {
         delegate?.setTitle(title, isSelectionMode: false)
-        delegate?.setRightBarButtonItems([trashButton], animated: true)
+        let rightButtons: [UIBarButtonItem] = innerFolder ? [] : [trashButton]
+        delegate?.setRightBarButtonItems(rightButtons, animated: true)
         delegate?.setLeftBarButtonItems([customBackButton], animated: true)
     }
     

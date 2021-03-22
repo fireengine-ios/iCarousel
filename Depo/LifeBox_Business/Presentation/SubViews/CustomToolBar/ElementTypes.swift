@@ -16,6 +16,7 @@ enum ElementTypes {
     case share
     case info//one for alert one for tab
     case delete
+    case deletePermanently
     case emptyTrashBin
     case move
     case download
@@ -59,7 +60,7 @@ enum ElementTypes {
     case variesRole
     case removeRole
     
-    static var trashState: [ElementTypes] = [.restore, .delete]
+    static var trashState: [ElementTypes] = [.restore, .deletePermanently]
     static var activeState: [ElementTypes] = [.moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus) -> [ElementTypes] {
@@ -91,7 +92,7 @@ enum ElementTypes {
         }
         
         if status == .trashed {
-            result = ElementTypes.trashState
+            result = ElementTypes.trashState // TODO check here if permissions contains DELETE and give appropriate action list for that
         }
         
         result.append(.info)
@@ -103,7 +104,7 @@ enum ElementTypes {
         var result: [ElementTypes]
 
         switch status {
-        case .trashed:
+        case .trashed: // TODO check here if permissions contains DELETE and give appropriate action list for that
             if viewType == .actionSheet {
                 result = [.select] + ElementTypes.trashState
             } else {
@@ -138,9 +139,13 @@ enum ElementTypes {
     
     static func specifiedMoreActionTypes(for status: ItemStatus, item: BaseDataSourceItem) -> [ElementTypes] {
         //TODO: allow move and add/remove favorites if api is ready
+        var trashBinRelated = item.privateShareType == .trashBin
+        if case .innerFolder = item.privateShareType, item.privateShareType.rootType == .trashBin {
+            trashBinRelated = true
+        }
         
-        if status == .trashed {
-            return ElementTypes.trashState + [.info]
+        if trashBinRelated {
+            return (item as? WrapData)?.privateSharePermission?.granted?.contains(.delete) ?? false ? [.select] + ElementTypes.trashState + [.info] : [.select, .info]
         }
         
         guard let item = item as? Item else {
@@ -207,6 +212,10 @@ enum ElementTypes {
                 return TextConstants.deleteSuccess
             case .rename:
                 return TextConstants.renameSuccess
+            case .deletePermanently:
+                return TextConstants.trashBinDeleteActionSucceed
+            case .restore:
+                return TextConstants.trashBinRestoreSucceed
             default:
                 return nil
         }
@@ -319,6 +328,8 @@ enum ElementTypes {
             return TextConstants.actionLeaveSharing
         case .privateShare:
             return TextConstants.actionSharePrivately
+        case .deletePermanently:
+            return TextConstants.trashBinDeleteAction
         default:
             return ""
         }
