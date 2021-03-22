@@ -23,7 +23,7 @@ final class PrivateShareFileInfoManager {
     private(set) var isNextPageLoading = false
     
     private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
-    private var privateShareAPIService: PrivateShareApiService!
+    private(set) var privateShareAPIService: PrivateShareApiService!
     private let pageSize = Device.isIpad ? 64 : 32
     private var pagesLoaded = 0
     

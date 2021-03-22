@@ -425,11 +425,45 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
 
     func onTrashBinButton() {
-        // TODO handle delete all button
+        let cancelHandler: PopUpButtonHandler = { vc in
+            vc.close()
+        }
+
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            vc.close { [weak self] in
+                self?.deleteAllFromTrashBin()
+            }
+        }
+
+        let message = TextConstants.trashBinEmptyTrashConfirmDescription
+        let controller = PopUpController.with(title: TextConstants.trashBinEmptyTrashConfirmTitle,
+                                              message: message,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.trashBinEmptyTrashNoAction,
+                                              secondButtonTitle: TextConstants.trashBinEmptyTrashYesAction,
+                                              firstAction: cancelHandler,
+                                              secondAction: okHandler)
+
+        router.presentViewController(controller: controller)
     }
 
     func onBackButton() {
         router.popViewController()
+    }
+
+    private func deleteAllFromTrashBin() {
+        needToShowSpinner()
+        fileInfoManager.privateShareAPIService.deleteAllFromTrashBin(handler: { [weak self] response in
+            self?.needToHideSpinner()
+            switch response {
+            case .success():
+                self?.collectionManager.reload(type: .onOperationFinished)
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.trashBinEmptyTrashSucceed)
+            case .failed(let error):
+                let errorMessage = (error as? ServerMessageError)?.getPrivateShareError() ?? TextConstants.temporaryErrorOccurredTryAgainLater
+                UIApplication.showErrorAlert(message: errorMessage)
+            }
+        })
     }
     
     //MARK: Helpers
