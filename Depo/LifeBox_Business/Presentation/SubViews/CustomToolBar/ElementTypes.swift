@@ -142,6 +142,15 @@ enum ElementTypes {
 
         return result
     }
+
+    static func specifiedMoreActionTypesForTrashBin(for status: ItemStatus, item: WrapData) -> [ElementTypes] {
+        var actionsArray: [ElementTypes] = [.select]
+        if item.privateSharePermission?.granted?.contains(.delete) == true {
+            actionsArray.append(contentsOf: [.restore, .deletePermanently])
+        }
+        actionsArray.append(.info)
+        return actionsArray
+    }
     
     static func specifiedMoreActionTypes(for status: ItemStatus, item: BaseDataSourceItem) -> [ElementTypes] {
         //TODO: allow move and add/remove favorites if api is ready

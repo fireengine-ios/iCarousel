@@ -29,20 +29,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     func setupTabBarWith(items: [BaseDataSourceItem], shareType: PrivateShareType? = nil) {
         guard let wrapData = items as? [WrapData] else { return }
 
-        let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
-        var elementsConfig = createElementTypesArray(from: matchesBitmasks)
-
         var trashBinRelated = shareType == .trashBin
         if case .innerFolder = shareType, shareType?.rootType == .trashBin  {
             trashBinRelated = true
         }
 
-        if trashBinRelated {
-            elementsConfig = elementsConfig.filter { $0 == .restore || $0 == .deletePermanently }
-        } else {
-            elementsConfig.remove(.deletePermanently)
-            elementsConfig.remove(.restore)
-        }
+        let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
+        var elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
         
         if items.count == 1 && !trashBinRelated {
             elementsConfig.append(.info)
@@ -90,7 +83,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
 
     /// Returns element types array calculated from bitmask
-        private func createElementTypesArray(from bitmask: Int) -> [ElementTypes] {
+    private func createElementTypesArray(from bitmask: Int, trashBinRelated: Bool = false) -> [ElementTypes] {
             var bitmaskValue = bitmask
             var permissions = [PrivateSharePermission]()
 
@@ -172,6 +165,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
 
             if permissions.contains(.read) {
                 elementTypesArray.append(.download)
+            }
+
+            if trashBinRelated {
+                elementTypesArray = elementTypesArray.filter { $0 == .restore || $0 == .deletePermanently }
+            } else {
+                elementTypesArray.remove(.deletePermanently)
+                elementTypesArray.remove(.restore)
             }
 
             return elementTypesArray
