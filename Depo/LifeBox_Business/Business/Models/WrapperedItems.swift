@@ -461,7 +461,7 @@ enum SyncWrapperedStatus {
 }
 
 
-enum ItemStatus: String {
+enum ItemStatus: String, Codable {
     case active = "ACTIVE"
     case uploaded = "UPLOADED"
     case transcoding = "TRANSCODING"
@@ -911,7 +911,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
 //        } else {
             patchToPreview = .remoteUrl(metaData?.mediumUrl)
 //        }
-        status = .active
+        status = privateShareFileInfo.fileInfoStatus ?? .active
         
         super.init(uuid: privateShareFileInfo.uuid,
                    name: privateShareFileInfo.name,
