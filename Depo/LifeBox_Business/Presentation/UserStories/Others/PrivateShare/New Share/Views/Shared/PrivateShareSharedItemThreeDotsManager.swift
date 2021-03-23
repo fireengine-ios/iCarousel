@@ -27,13 +27,8 @@ final class PrivateShareSharedItemThreeDotsManager {
         alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
     }
     
-    func handleAction(type: ActionType, item: Item, sender: Any?) {
-        switch type {
-        case .elementType(let elementType):
-            alert.handleAction(type: elementType, items: [item], sender: sender)
-        case .shareType(let shareType):
-            alert.handleShare(type: shareType, items: [item], sender: sender)
-        }
+    func handleAction(type: ElementTypes, item: Item, sender: Any?) {
+        alert.handleAction(type: type, items: [item], sender: sender)
     }
     
     private func innerFolderActionTypes(for rootType: PrivateShareType, item: WrapData) -> [ElementTypes] {

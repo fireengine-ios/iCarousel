@@ -7,57 +7,6 @@
 //
 
 import WidgetKit
-enum ShareTypes {
-    case original
-    case link
-    case `private`
-    
-    var actionTitle: String {
-        switch self {
-        case .original:
-            return TextConstants.actionShareCopy
-        case .link:
-            return TextConstants.actionSheetShareShareViaLink
-        case .private:
-            return TextConstants.actionSharePrivately
-        }
-    }
-    
-    static func allowedTypes(for items: [BaseDataSourceItem]) -> [ShareTypes] {
-        guard let items = items as? [Item] else {
-            assertionFailure()
-            return []
-        }
-        
-        let isOriginallDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.read) ?? false) })
-        let isPrivateDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.writeAcl) ?? false) })
-        
-        var allowedTypes = [ShareTypes]()
-        
-        if items.contains(where: { $0.fileType == .folder}) {
-            allowedTypes = [.original, .private]
-        } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
-            allowedTypes = []
-        } else {
-            allowedTypes = [.original, .private]
-        }
-        
-        if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits || isOriginallDisabled {
-            allowedTypes.remove(.original)
-        }
-        
-        if isPrivateDisabled {
-            allowedTypes.remove(.private)
-        }
-        
-        
-        if items.contains(where: { $0.isLocalItem }) {
-            allowedTypes.remove(.private)
-        }
-        
-        return allowedTypes
-    }
-}
 
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     weak var output: MoreFilesActionsInteractorOutput?
@@ -96,62 +45,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         sharingItems.removeAll()
         sharingItems.append(contentsOf: item)
         shareOrignalSize(sourceRect: sourceRect)
-    }
-    
-    func share(item: [BaseDataSourceItem], sourceRect: CGRect?) {
-        guard !item.isEmpty else {
-            return
-        }
-        
-        sharingItems.removeAll()
-        sharingItems.append(contentsOf: item)
-        
-        shareOrignalSize(sourceRect: sourceRect)
-    }
-    
-    func selectShareType(sourceRect: CGRect?) {
-        let sharedTypes = ShareTypes.allowedTypes(for: sharingItems)
-        showSharingMenu(types: sharedTypes, sourceRect: sourceRect)
-    }
-    
-    private func showSharingMenu(types: [ShareTypes], sourceRect: CGRect?) {
-        let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        controler.view.tintColor = ColorConstants.darkBlueColor
-        
-        types.forEach {
-            controler.addAction(getAction(shareType: $0, sourceRect: sourceRect))
-        }
-        
-        let cancelAction = UIAlertAction(title: TextConstants.actionSheetShareCancel, style: .cancel, handler: nil)
-        controler.addAction(cancelAction)
-        
-        if let tempoRect = sourceRect {//if ipad
-            controler.popoverPresentationController?.sourceRect = tempoRect
-        }
-        
-        router.presentViewController(controller: controler)
-    }
-    
-    private func getAction(shareType: ShareTypes, sourceRect: CGRect?) -> UIAlertAction {
-        
-        return UIAlertAction(title: shareType.actionTitle, style: .default) { [weak self] action in
-            guard let self = self else {
-                return
-            }
-            self.handleShare(type: shareType, sourceRect: sourceRect, items: self.sharingItems)
-        }
-    }
-    
-    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem]) {
-        self.sharingItems = items
-        switch type {
-            case .link:
-            shareViaLink(sourceRect: sourceRect)
-        case .original:
-            shareOrignalSize(sourceRect: sourceRect)
-        case .private:
-            privateShare()
-        }
     }
     
     private func privateShare() {

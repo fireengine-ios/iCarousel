@@ -355,9 +355,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
                         self.interactor.move(item: currentItems, toPath: "")
                     })
+                case .privateShare:
+                    action = UIAlertAction(title: TextConstants.actionShareCopy, style: .default, handler: { _ in
+                        self.interactor.privateShare(item: currentItems, sourceRect: self.middleTabBarRect)
+                    })
                 case .share:
                     action = UIAlertAction(title: TextConstants.actionShareCopy, style: .default, handler: { _ in
-                        self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
+                        self.interactor.originalShare(item: currentItems, sourceRect: self.middleTabBarRect)
                     })
                 //Photos and albumbs
                 case .photos:
