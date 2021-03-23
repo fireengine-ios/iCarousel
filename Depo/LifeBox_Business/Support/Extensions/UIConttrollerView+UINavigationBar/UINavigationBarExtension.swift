@@ -314,14 +314,7 @@ extension UIViewController {
         let rightBarButtonItem = style.getBarButton(title: title, target: target, acion: action)
         rightBarButtonItem.image = image
         rightBarButtonItem.style = .done
-//            UIBarButtonItem(title: title,
-//                                                 font: UIFont.GTAmericaStandardMediumFont(size: 18),
-//                                                 tintColor: .white,
-//                                                 accessibilityLabel: nil,
-//                                                 style: .done,
-//                                                 target: target,
-//                                                 selector: action)
-        
+
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 }
