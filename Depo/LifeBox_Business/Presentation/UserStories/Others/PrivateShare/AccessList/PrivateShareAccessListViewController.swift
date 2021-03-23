@@ -85,16 +85,12 @@ final class PrivateShareAccessListViewController: BaseViewController, NibInit {
     }
 
     private func setupNavigationBar() {
+        setNavigationBarStyle(.white)
         title = TextConstants.accessPageTitle
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backBarButtonItem = nil
-        navigationController?.navigationBar.topItem?.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "close"), style: .plain, target: self, action: #selector(dismissSelf(_:)))
         
-        setNavigationBarStyle(.white)
-    }
-
-    @objc private func dismissSelf(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        setupCustomButtonAsNavigationBackButton(style: .white, asLeftButton: false, title: "", target: nil, image: CustomBackButtonType.cross.image, action: nil)
     }
 }
 
