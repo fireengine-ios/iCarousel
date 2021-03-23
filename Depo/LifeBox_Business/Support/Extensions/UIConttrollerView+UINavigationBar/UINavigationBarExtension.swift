@@ -148,6 +148,20 @@ enum NavigationBarStyles {
     
 }
 
+enum CustomBackButtonType {
+    case regular
+    case cross
+    
+    var image: UIImage? {
+        switch self {
+        case .regular:
+            return UIImage(named: "blackBackButton")
+        case .cross:
+            return UIImage(named: "close")
+        }
+    }
+}
+
 //MARK: - NavBar Styles
 
 extension UIViewController {
@@ -160,8 +174,10 @@ extension UIViewController {
             return
         }
         
-        //
-        setupBackButton(style: style)
+        if !isModal() {
+            //TODO: change so we dont always setup, but check first if this button exiist and then just channge properties
+            navBar?.topItem?.backBarButtonItem = style.backButon
+        }
         
         navBar?.titleTextAttributes = style.titleAtributes
         navBar?.barTintColor = style.barTintColor
@@ -213,7 +229,7 @@ extension UIViewController {
 
 extension UIViewController {
     func isModal() -> Bool {
-        if presentedViewController != nil || navigationController?.presentingViewController?.presentedViewController != nil {
+        if presentedViewController != nil || navigationController?.presentingViewController?.presentedViewController != nil || presentingViewController != nil {
             return true
         } else {
             return false
@@ -222,6 +238,14 @@ extension UIViewController {
     
     @objc private func popModal() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func popNavigation() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func backAction() {
+        isModal() ? popModal() : popNavigation()
     }
 }
 
@@ -277,12 +301,23 @@ extension UIViewController {
 
 extension UIViewController {
     
-    func setupBackButton(style: NavigationBarStyles) {
-        //change so we dont always setup, but check first if this button exiist and then just channge properties
-        if isModal() { //default implementaion
-            setNavigationLeftBarButton(style: style, title: "", target: self, image: UIImage(named: "blackBackButton"), action: #selector(popModal))
+    func setupCustomButtonAsNavigationBackButton(style: NavigationBarStyles, asLeftButton: Bool, title: String, target: Any?, image: UIImage?, action: Selector?) {
+
+        navigationItem.hidesBackButton = true
+        
+        let buttonImage: UIImage? = image == nil ? CustomBackButtonType.regular.image : image
+        
+        let barButton = style.getBarButton(title: title, target: target, acion: action)
+        barButton.image = buttonImage
+        
+        if action == nil {
+            barButton.action = #selector(backAction)
+        }
+        
+        if asLeftButton {
+            navigationItem.leftBarButtonItem = barButton
         } else {
-            navBar?.topItem?.backBarButtonItem = style.backButon
+            navigationItem.rightBarButtonItem = barButton
         }
     }
     
