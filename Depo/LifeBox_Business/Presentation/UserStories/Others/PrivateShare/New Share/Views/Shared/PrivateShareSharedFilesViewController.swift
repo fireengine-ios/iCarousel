@@ -280,6 +280,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         self.setupPlusButton()
         self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
         self.view.layoutSubviews()
+        
+        if !ReachabilityService.shared.isReachable {
+            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        }
     }
     
     func showActions(for item: WrapData, sender: Any) {
