@@ -22,6 +22,8 @@ struct TextConstants {
         static let wrongVideoData = "Wrong video data"
         static let wrongImageData = "Wrong image data"
         static let flIdentifierKey = "FastLogin"
+        static let ipadFastLoginAppIdentifier: String = "59322"
+        static let iPhoneFastLoginAppIdentifier: String = "59320"
         
         static let appNameLowercased: String = {
             #if LIFEDRIVE
