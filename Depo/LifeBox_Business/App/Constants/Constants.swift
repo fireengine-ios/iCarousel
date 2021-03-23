@@ -1471,3 +1471,29 @@ extension TextConstants {
     static let sharedAreaEmptyPage = NSLocalizedString("business_app_shared_area_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let folderEmptyPage = NSLocalizedString("business_app_folder_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+// MARK: - Trash Bin
+extension TextConstants {
+    static let trashBinPageTitle = NSLocalizedString("business_app_trash_bin_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyPage = NSLocalizedString("business_app_trash_bin_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreAction = NSLocalizedString("business_app_trash_bin_restore_action_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAction = NSLocalizedString("business_app_trash_bin_delete_action_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let trashBinRestoreConfirmTitle = NSLocalizedString("business_app_trash_bin_restore_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreConfirmDescription = NSLocalizedString("business_app_trash_bin_restore_confirm_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreYesAction = NSLocalizedString("business_app_trash_bin_restore_confirm_YES_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreNoAction = NSLocalizedString("business_app_trash_bin_restore_confirm_NO_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreSucceed = NSLocalizedString("business_app_trash_bin_restore_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let trashBinDeleteConfirmTitle = NSLocalizedString("business_app_trash_bin_delete_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteConfirmDescription = NSLocalizedString("business_app_trash_bin_delete_confirm_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteYesAction = NSLocalizedString("business_app_trash_bin_delete_confirm_YES_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteNoAction = NSLocalizedString("business_app_trash_bin_delete_confirm_NO_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteActionSucceed = NSLocalizedString("business_app_trash_bin_delete_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let trashBinEmptyTrashConfirmTitle = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyTrashConfirmDescription = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyTrashYesAction = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_YES_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyTrashNoAction = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_NO_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyTrashSucceed = NSLocalizedString("business_app_trash_bin_empty_trash_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

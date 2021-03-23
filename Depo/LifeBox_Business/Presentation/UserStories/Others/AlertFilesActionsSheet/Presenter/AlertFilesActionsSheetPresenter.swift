@@ -229,7 +229,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .editorRole,
                      .viewerRole,
                      .variesRole,
-                     .removeRole:
+                     .removeRole,
+                     .deletePermanently:
                     
                     action = UIAlertAction(title: type.actionTitle, style: .default, handler: { [weak self] _ in
                         self?.handleAction(type: type, items: currentItems)
@@ -367,6 +368,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
         case .restore:
             interactor.restore(items: items)
+
+        case .deletePermanently:
+            interactor.deletePermanently(items: items)
             
         case .move:
             interactor.move(item: items, toPath: "")

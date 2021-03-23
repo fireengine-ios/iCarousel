@@ -248,7 +248,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                 return
         }
         // TODO: - update later without config. task should be in backlog
-        bottomBarPresenter?.setupTabBarWith(items: array)
+        bottomBarPresenter?.setupTabBarWith(items: array, shareType: nil)
     }
     
     func onMaxSelectionExeption() {}

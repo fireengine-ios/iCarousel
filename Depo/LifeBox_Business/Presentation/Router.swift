@@ -382,6 +382,12 @@ class RouterVC: NSObject {
                     return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
                 }
                 return nil
+
+            case .trashBin:
+                if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
+                return nil
                 
             case .innerFolder(type: _, folderItem: let folder):
                 return folder
@@ -469,9 +475,9 @@ class RouterVC: NSObject {
         let controller = TabBarViewController(nibName: "TabBarView", bundle: nil)
         return controller
     }
-    
-    var trashBin: UIViewController? {
-        let controller = trashBinController()
+
+    var trashBin: UIViewController {
+        let controller = PrivateShareSharedFilesViewController.with(shareType: .trashBin)
         controller.segmentImage = .trashBin
         return controller
     }
@@ -748,10 +754,6 @@ class RouterVC: NSObject {
         controller.modalPresentationStyle = .overFullScreen
         
         return controller
-    }
-    
-    func trashBinController() -> TrashBinViewController {
-        return TrashBinViewController.initFromNib()
     }
     
     func mobilePaymentPermissionController() -> MobilePaymentPermissionViewController {

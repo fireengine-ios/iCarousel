@@ -36,6 +36,8 @@ final class PrivateShareSharedItemThreeDotsManager {
             case .byMe, .myDisk, .withMe, .sharedArea:
                 return ElementTypes.specifiedMoreActionTypes(for: item.status, item: item)
 
+            case .trashBin:
+                return ElementTypes.specifiedMoreActionTypesForTrashBin(for: item.status, item: item)
             case .innerFolder:
                 assertionFailure("should not be the case")
                 return []

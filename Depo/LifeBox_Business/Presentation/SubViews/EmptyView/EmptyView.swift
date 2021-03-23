@@ -50,7 +50,7 @@ final class EmptyView: UIView, NibInit {
                 case .hiddenBin:
                     return UIImage(named: "hidden_big")
                 case .trashBin:
-                    return UIImage(named: "trash_big")
+                    return UIImage(named: "trash_bin_empty")
                 case .sharedBy:
                     return nil
                 case .sharedWith:

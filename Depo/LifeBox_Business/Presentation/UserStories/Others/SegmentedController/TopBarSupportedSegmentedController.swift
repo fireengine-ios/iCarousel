@@ -56,6 +56,7 @@ extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewCont
     
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
         let navItem = currenttNavigationItem
+        navigationItem.hidesBackButton = true
         navItem.leftBarButtonItems = nil
         navItem.setLeftBarButtonItems(items, animated: animated)
     }

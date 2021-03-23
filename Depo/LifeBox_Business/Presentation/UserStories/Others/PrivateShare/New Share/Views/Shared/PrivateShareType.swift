@@ -14,6 +14,7 @@ indirect enum PrivateShareType: Equatable {
     case withMe
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
     case sharedArea
+    case trashBin
     
     var title: String {
         let title: String
@@ -28,6 +29,8 @@ indirect enum PrivateShareType: Equatable {
                 title = folder.name
             case .sharedArea:
                 title = TextConstants.tabBarItemSharedArea
+            case .trashBin:
+                title = TextConstants.trashBinPageTitle
         }
         return title
     }
@@ -48,6 +51,23 @@ indirect enum PrivateShareType: Equatable {
                 return .sharedArea
             case .myDisk:
                 return .myDisk
+            case .trashBin:
+                return .trashBin
+        }
+    }
+
+    var isTabBarNeeded: Bool {
+        return !isTrashBinRelated
+    }
+
+    var isTrashBinRelated: Bool {
+        switch self {
+        case .trashBin:
+            return true
+        case .innerFolder(let folderType, _):
+            return folderType == .trashBin ? true : false
+        case .byMe, .myDisk, .sharedArea, .withMe:
+            return false
         }
     }
     
@@ -68,6 +88,9 @@ indirect enum PrivateShareType: Equatable {
                 
             case .sharedArea:
                 return true
+
+            case .trashBin:
+                return true
         }
     }
     
@@ -77,7 +100,7 @@ indirect enum PrivateShareType: Equatable {
             case .myDisk, .sharedArea:
                 return true
                 
-            case .byMe, .withMe, .innerFolder:
+            case .byMe, .withMe, .innerFolder, .trashBin:
                 return false
         }
     }
@@ -107,6 +130,9 @@ indirect enum PrivateShareType: Equatable {
                 
             case (.innerFolder(_, let folder), let veryRootType):
                 return floatingButtonTypes(innerFolderVeryRootType: veryRootType, permissions: folder.permissions.granted ?? [])
+
+            case (.trashBin, _):
+                return []
         }
     }
     
@@ -132,18 +158,19 @@ indirect enum PrivateShareType: Equatable {
                     return [.upload(type: .sharedArea), .uploadFiles(type: .sharedArea), .newFolder(type: .sharedArea)]
                 }
                 return []
+
+            case .trashBin:
+                return []
                 
             case .innerFolder:
                 assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
                 return []
-                
-            
         }
     }
     
     private func veryRootType(for type: PrivateShareType) -> PrivateShareType {
         switch type {
-            case .byMe, .withMe, .myDisk, .sharedArea:
+            case .byMe, .withMe, .myDisk, .sharedArea, .trashBin:
                 return type
                 
             case .innerFolder(type: let rootType, _):

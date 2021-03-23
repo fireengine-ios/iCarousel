@@ -561,7 +561,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         
         let selectedItems = dataSource.getSelectedItems()
         // TODO: - update later without config. task should be in backlog
-        bottomBarPresenter?.setupTabBarWith(items: selectedItems)
+        bottomBarPresenter?.setupTabBarWith(items: selectedItems, shareType: nil)
     }
     
     func onMoreActions(ofItem: Item?, sender: Any) {

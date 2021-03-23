@@ -194,7 +194,7 @@ extension ElementTypes {
             imageName = "info"
         case .select:
             imageName = "select"
-        case .delete, .moveToTrash, .moveToTrashShared:
+        case .delete, .moveToTrash, .moveToTrashShared, .deletePermanently:
             imageName = "trash"
         case .copy:
             imageName = "copy-link"
@@ -236,6 +236,6 @@ extension ElementTypes {
     }
     
     var isDestructive: Bool {
-        isContained(in: [.delete, .moveToTrash, .moveToTrashShared])
+        isContained(in: [.delete, .moveToTrash, .moveToTrashShared, .deletePermanently])
     }
 }

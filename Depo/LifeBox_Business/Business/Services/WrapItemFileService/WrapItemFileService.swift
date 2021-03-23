@@ -354,8 +354,30 @@ class WrapItemFileService: WrapItemFileOperations {
 extension WrapItemFileService {
     
     //MARK: - Delete Items
-    
+
     func delete(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.deleteItems(items: items)
+            success?()
+        }
+
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+
+        hiddenService.delete(items: remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deletePermanently(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
             ItemOperationManager.default.deleteItems(items: items)
             success?()
@@ -367,7 +389,7 @@ extension WrapItemFileService {
             return
         }
         
-        hiddenService.delete(items: remoteItems) { response in
+        hiddenService.deletePermanently(items: remoteItems) { response in
             switch response {
             case .success(()):
                 wrappedSuccessOperation()

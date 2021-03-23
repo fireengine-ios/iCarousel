@@ -197,10 +197,18 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     private var itemModel : Item?
     private var isAllowedToShowShared = false
     private var isAllowedToSwipe: Bool {
-        return !(isSelectionInProgress || isRenamingInProgress)
+        var isNotATrashBinRelative = itemModel?.privateShareType != .trashBin
+        if case .innerFolder = itemModel?.privateShareType, itemModel?.privateShareType.rootType == .trashBin  {
+            isNotATrashBinRelative = false
+        }
+        return !(isSelectionInProgress || isRenamingInProgress) && isNotATrashBinRelative
     }
     private var isAllowedToSwipeDelete: Bool {
-        return itemModel?.privateSharePermission?.granted?.contains(.delete) ?? false && isAllowedToSwipe
+        var isNotATrashBinRelative = itemModel?.privateShareType != .trashBin
+        if case .innerFolder = itemModel?.privateShareType, itemModel?.privateShareType.rootType == .trashBin  {
+            isNotATrashBinRelative = false
+        }
+        return itemModel?.privateSharePermission?.granted?.contains(.delete) ?? false && isAllowedToSwipe && isNotATrashBinRelative
     }
     private(set) var isRenamingInProgress = false
     private var isSelectionInProgress = false
