@@ -247,16 +247,12 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
         updateBars(isSelecting: true)
-        DispatchQueue.main.async {
-            self.isEditing = true
-        }
+        isEditing = true
     }
     
     func didEndSelection() {
         updateBars(isSelecting: false)
-        DispatchQueue.main.async {
-            self.isEditing = false
-        }
+        isEditing = false
     }
     
     func didChangeSelection(selectedItems: [WrapData]) {
