@@ -42,16 +42,11 @@ final class HiddenService {
                       handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverItems")
 
-        guard let url = URL(string: RouteRequests.FileSystem.Version_3.recoverFromTrashBin) else {
-            handler(.failed(ErrorResponse.string("Incorrect URL")))
-            return nil
-        }
-
         let parameters = items.compactMap {["accountUuid" : $0.accountUuid, "uuid" : $0.uuid]}.asParameters()
         
         return SessionManager
             .customDefault
-            .request(url,
+            .request(RouteRequests.FileSystem.Version_3.recover,
                      method: .post,
                      parameters: parameters,
                      encoding: ArrayEncoding())
@@ -99,16 +94,11 @@ final class HiddenService {
 
         debugLog("deleteItems")
 
-        guard let url = URL(string: RouteRequests.FileSystem.Version_3.deletePermanently) else {
-            handler(.failed(ErrorResponse.string("Incorrect URL")))
-            return nil
-        }
-
         let parameters = items.compactMap {["accountUuid" : $0.accountUuid, "uuid" : $0.uuid]}.asParameters()
 
         return SessionManager
         .customDefault
-        .request(url,
+        .request(RouteRequests.FileSystem.Version_3.delete,
                  method: .post,
                  parameters: parameters,
                  encoding: ArrayEncoding())
