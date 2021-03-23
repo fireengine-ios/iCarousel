@@ -29,15 +29,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     func setupTabBarWith(items: [BaseDataSourceItem], shareType: PrivateShareType? = nil) {
         guard let wrapData = items as? [WrapData] else { return }
 
-        var trashBinRelated = shareType == .trashBin
-        if case .innerFolder = shareType, shareType?.rootType == .trashBin  {
-            trashBinRelated = true
-        }
+        let trashBinRelated = shareType?.isTrashBinRelated ?? false
 
         let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
         var elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
         
-        if items.count == 1 && !trashBinRelated {
+        if items.count == 1 && trashBinRelated {
             elementsConfig.append(.info)
         }
 

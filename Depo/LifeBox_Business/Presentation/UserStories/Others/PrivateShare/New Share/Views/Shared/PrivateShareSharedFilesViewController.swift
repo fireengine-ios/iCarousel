@@ -18,11 +18,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         controller.title = shareType.title
         controller.shareType = shareType
-        var needToShowTabBar = !(shareType == .trashBin)
-        if case .innerFolder = shareType, shareType.rootType == .trashBin  {
-            needToShowTabBar = false
-        }
-        controller.needToShowTabBar = needToShowTabBar
+        controller.needToShowTabBar = shareType.isTabBarNeeded
         return controller
     }
 
@@ -197,11 +193,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func setDefaultTabBarState() {
-        if case .innerFolder = shareType, shareType.rootType == .trashBin  {
-            needToShowTabBar = false
-            return
-        }
-        needToShowTabBar = !(shareType == .trashBin)
+        needToShowTabBar = shareType.isTabBarNeeded
     }
     
     private func setupCollectionViewBars() {
