@@ -93,7 +93,6 @@ class SplashInteractor: SplashInteractorInput {
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
                     /// we don't need logout here
                     /// only internet error
-                    self?.failLogin()
                     DispatchQueue.toMain {
                         if self?.reachabilityService.isReachable == true {
                             self?.output.onFailGetAccountInfo(error: error)
