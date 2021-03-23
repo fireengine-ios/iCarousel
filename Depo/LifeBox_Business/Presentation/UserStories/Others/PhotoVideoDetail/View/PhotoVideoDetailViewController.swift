@@ -16,8 +16,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
-    @IBOutlet private weak var bottomBlackView: UIView!
-    @IBOutlet private weak var swipeUpContainerView: UIView!
     
     @IBOutlet weak var gradientView: MediaContentGradientView! {
         willSet {
@@ -58,7 +56,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             navigationController?.setNavigationBarHidden(isFullScreen, animated: true)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             
-            bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
         }
     }
