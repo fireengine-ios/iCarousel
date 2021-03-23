@@ -180,6 +180,7 @@ extension DetailMediaPlayerView: PlayerDelegate {
     
     func playerReady(_ player: Player) {
         progressSlider.isUserInteractionEnabled = true
+        delegate?.playerIsReady()
     }
     
     func playerPlaybackStateDidChange(_ player: Player) {
