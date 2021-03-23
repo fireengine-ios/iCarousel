@@ -1027,7 +1027,7 @@ extension MoreFilesActionsInteractor {
     }
 
     private func permanentlyDeleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        fileService.delete(items: items, success: { [weak self] in
+        fileService.deletePermanently(items: items, success: { [weak self] in
             self?.removeItemsFromPlayer(items: items)
             success()
             SnackbarManager.shared.show(elementType: .deletePermanently, relatedItems: items, handler: nil)

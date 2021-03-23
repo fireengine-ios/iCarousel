@@ -33,6 +33,7 @@ final class FileInfoTableViewAdapter: NSObject {
         }
     }
     private var sharingInfo: SharedFileInfo?
+    private var isFromTrashBin = false
 
     private lazy var infoHeaderView: EntityInfoHeader = EntityInfoHeader()
     private lazy var sharingInfoHeaderView: EntityInfoHeader = {
@@ -60,6 +61,7 @@ final class FileInfoTableViewAdapter: NSObject {
     }
 
     func update(with wrapData: WrapData) {
+        isFromTrashBin = wrapData.privateShareType == .trashBin || wrapData.privateShareType.rootType == .trashBin
         masterEntityObject = FileInfoTableViewGeneralEntity.from(wrapData)
     }
 
@@ -120,7 +122,7 @@ extension FileInfoTableViewAdapter: UITableViewDelegate {
 extension FileInfoTableViewAdapter: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let masterEntity = masterEntityObject else { return 0 }
-        return masterEntity.sharedToMembersCount > 0 ? 2 : 1
+        return masterEntity.sharedToMembersCount > 0 && !isFromTrashBin ? 2 : 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

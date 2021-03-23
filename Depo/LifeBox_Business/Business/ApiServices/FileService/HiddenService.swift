@@ -63,7 +63,39 @@ final class HiddenService {
     //MARK: - Delete
 
     @discardableResult
-    func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+            debugLog("deleteItems")
+            let uuids = items.compactMap { $0.uuid }
+            return deleteItemsBy(uuids: uuids, handler: handler)
+        }
+
+        private func deleteItemsBy(uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
+            let path = RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.delete
+            return SessionManager
+            .customDefault
+            .request(path,
+                     method: .delete,
+                     parameters: uuids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+        }
+
+        private func deleteItemsBy(ids: [Int64], path: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+            return SessionManager
+            .customDefault
+            .request(path,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+        }
+
+    @discardableResult
+    func deletePermanently(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
 
         debugLog("deleteItems")
 

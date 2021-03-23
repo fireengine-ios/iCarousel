@@ -365,6 +365,11 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
 
     @discardableResult
+    func deletePermanently(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.deletePermanently(items: items, handler: handler)
+    }
+
+    @discardableResult
     func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask? {
         return hiddenService.deleteAllFromTrashBin(handler: handler)
     }
