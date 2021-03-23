@@ -72,23 +72,27 @@ enum ElementTypes {
         else {
             return result
         }
-        if grantedPermissions.contains(.writeAcl) {
-            result.append(.privateShare)
-        }
         
+        //specific actions order
         if grantedPermissions.contains(.read) {
             result.append(.share)
-            
-            if item.fileType.isContained(in: [.image, .video]) {
-                result.append(.download)
-            } else {
-                result.append(.downloadDocument)
-            }   
+        }
+        
+        if grantedPermissions.contains(.writeAcl) {
+            result.append(.privateShare)
         }
         
         if grantedPermissions.contains(.delete) {
             if !item.isReadOnlyFolder {
                 result.append(.moveToTrashShared)
+            }
+        }
+        
+        if grantedPermissions.contains(.read) {
+            if item.fileType.isContained(in: [.image, .video]) {
+                result.append(.download)
+            } else {
+                result.append(.downloadDocument)
             }
         }
         
@@ -153,15 +157,11 @@ enum ElementTypes {
 
         if let grantedPermissions = item.privateSharePermission?.granted {
             if grantedPermissions.contains(.read) {
-                if item.fileType.isContained(in: [.image, .video]) {
-                    types.append(.download)
-                } else {
-                    types.append(.downloadDocument)
-                }
+                types.append(.share)
             }
             
-            if grantedPermissions.contains(.writeAcl) || grantedPermissions.contains(.read)  {
-                types.append(.share)
+            if grantedPermissions.contains(.writeAcl) {
+                types.append(.privateShare)
             }
             
             // TODO: - Add / Delete permission check  //grantedPermissions.contains(.writeAcl)
@@ -170,6 +170,14 @@ enum ElementTypes {
                     types.append(.leaveSharing)
                 } else if item.privateShareType == .byMe {
                     types.append(.endSharing)
+                }
+            }
+            
+            if grantedPermissions.contains(.read) {
+                if item.fileType.isContained(in: [.image, .video]) {
+                    types.append(.download)
+                } else {
+                    types.append(.downloadDocument)
                 }
             }
             
