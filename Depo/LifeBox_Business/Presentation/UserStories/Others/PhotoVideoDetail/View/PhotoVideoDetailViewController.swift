@@ -507,8 +507,12 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         isFullScreen.toggle()
     }
    
-    func didExpireUrl(at index: Int) {
-        output.createNewUrl(at: index)
+    func didExpireUrl(at index: Int, isFull: Bool) {
+        if isFull {
+            output.createNewUrl(at: index)
+        } else {
+            output.updateInfo(at: index)
+        }
     }
 }
 

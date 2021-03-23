@@ -34,4 +34,5 @@ protocol PhotoVideoDetailViewOutput {
     func tabIndex(type: ElementTypes) -> Int?
     
     func createNewUrl(at index: Int)
+    func updateInfo(at index: Int)
 }
