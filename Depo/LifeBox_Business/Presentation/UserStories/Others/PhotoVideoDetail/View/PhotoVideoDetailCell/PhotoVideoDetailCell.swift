@@ -12,7 +12,7 @@ import WebKit
 protocol PhotoVideoDetailCellDelegate: class {
     func tapOnCellForFullScreen()
     func loadingFinished()
-    func didExpireUrl(at index: Int)
+    func didExpireUrl(at index: Int, isFull: Bool)
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -44,6 +44,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }()
     
     private var isNeedToUpdateWebView = true
+    private var isNeedToUpdateUrl = false
     private var oldFrame = CGRect.zero
     private var currentItemId = ""
     private var fileType: FileType = .unknown
@@ -99,13 +100,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         currentItemId = object.uuid
         fileType = object.fileType
         
-        guard let url = object.urlToFile, !url.isExpired else {
-            delegate?.didExpireUrl(at: index)
-            return
-        }
         
         switch fileType {
             case .video:
+                guard let url = object.metaData?.videoPreviewURL, !url.isExpired else {
+                    processMissingUrl(at: index, isFullRequired: false)
+                    return
+                }
+                
                 backgroundColor = .clear
                 imageScrollView.backgroundColor = .black
                 playerView.isHidden = false
@@ -115,6 +117,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 playerView.set(url: url)
                 
             case .audio:
+                guard let url = object.urlToFile, !url.isExpired else {
+                    processMissingUrl(at: index, isFullRequired: true)
+                    return
+                }
+                
                 backgroundColor = .clear
                 imageScrollView.backgroundColor = .black
 //                imageScrollView.imageView.loadImageIncludingGif(with: object)
@@ -125,6 +132,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 playerView.set(url: url)
                 
             case .image:
+                guard let url = object.metaData?.largeUrl, !url.isExpired else {
+                    processMissingUrl(at: index, isFullRequired: false)
+                    return
+                }
+                
                 backgroundColor = .clear
                 imageScrollView.backgroundColor = .black
                 imageScrollView.isHidden = false
@@ -136,6 +148,12 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 backgroundColor = .white
                 
                 if fileType.isSupportedOpenType {
+                    
+                    guard let url = object.urlToFile, !url.isExpired else {
+                        processMissingUrl(at: index, isFullRequired: true)
+                        return
+                    }
+                    
                     webView.isHidden = false
                     webView.navigationDelegate = self
                     webView.clearPage()
@@ -153,6 +171,17 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         playerView.stop()
     }
     
+    private func processMissingUrl(at index: Int, isFullRequired: Bool) {
+        if !isNeedToUpdateUrl {
+            isNeedToUpdateUrl = true
+            delegate?.didExpireUrl(at: index, isFull: isFullRequired)
+            return
+        }
+        
+        setPlaceholder()
+        showNoPreviewMessage()
+    }
+    
     private func setupViews() {
         imageScrollView.imageViewDelegate = self
         contentView.addSubview(webView)
@@ -167,6 +196,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         currentItemId = ""
         fileType = .unknown
         isNeedToUpdateWebView = true
+        isNeedToUpdateUrl = false
 
         tapGesture.isEnabled = true
         
@@ -246,6 +276,8 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
         }
     }
     private func showNoPreviewMessage() {
+        delegate?.loadingFinished()
+        
         switch fileType {
             case .image:
                 SnackbarManager.shared.show(type: SnackbarType.action, message: TextConstants.photoNoPreview)

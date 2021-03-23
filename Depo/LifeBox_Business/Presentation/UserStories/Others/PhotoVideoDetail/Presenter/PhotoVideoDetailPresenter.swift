@@ -303,6 +303,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func createNewUrl(at index: Int) {
         interactor.createNewUrl(at: index)
     }
+    
+    func updateInfo(at index: Int) {
+        interactor.updateInfo(at: index)
+    }
 }
 
 //MARK: - PhotoVideoDetailRouterOutput
