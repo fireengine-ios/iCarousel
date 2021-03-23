@@ -55,6 +55,21 @@ indirect enum PrivateShareType: Equatable {
                 return .trashBin
         }
     }
+
+    var isTabBarNeeded: Bool {
+        return !isTrashBinRelated
+    }
+
+    var isTrashBinRelated: Bool {
+        switch self {
+        case .trashBin:
+            return true
+        case .innerFolder(let folderType, _):
+            return folderType == .trashBin ? true : false
+        case .byMe, .myDisk, .sharedArea, .withMe:
+            return false
+        }
+    }
     
     //isSelectionAllowed is predefined by the veryRootType only
     var isSelectionAllowed: Bool {
