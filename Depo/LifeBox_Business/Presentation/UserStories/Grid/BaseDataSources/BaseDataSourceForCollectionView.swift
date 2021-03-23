@@ -66,7 +66,7 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath)
     
-    func didSelectAction(type: ActionType, on item: Item?, sender: Any?)
+    func didSelectAction(type: ElementTypes, on item: Item?, sender: Any?)
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -1132,7 +1132,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         delegate?.onMoreActions(ofItem: itemModel, sender: sender)
     }
     
-    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
+    func onSelectMoreAction(type: ElementTypes, itemModel: Item?, sender: Any?) {
         delegate?.didSelectAction(type: type, on: itemModel, sender: sender)
     }
     

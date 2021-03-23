@@ -10,6 +10,5 @@ protocol BottomSelectionTabBarModuleInput: BaseItemOuputPassingProtocol {
     
     func setupTabBarWith(config: EditingBarConfig)
     
-    func setupTabBarWith(items: [BaseDataSourceItem])//  Disable/Enable tabs
-    
+    func setupTabBarWith(items: [BaseDataSourceItem], shareType: PrivateShareType?)//  Disable/Enable tabs
 }

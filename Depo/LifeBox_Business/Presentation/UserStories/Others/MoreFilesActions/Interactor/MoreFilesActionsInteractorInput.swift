@@ -8,8 +8,6 @@
 
 protocol MoreFilesActionsInteractorInput {
     
-    func share(item: [BaseDataSourceItem], sourceRect: CGRect?)
-    
     func originalShare(item: [BaseDataSourceItem], sourceRect: CGRect?)
     
     func privateShare(item: [BaseDataSourceItem], sourceRect: CGRect?)
@@ -65,6 +63,8 @@ protocol MoreFilesActionsInteractorInput {
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
     
     func delete(items: [BaseDataSourceItem])
+
+    func deletePermanently(items: [BaseDataSourceItem])
     
     func emptyTrashBin()
     
@@ -73,6 +73,4 @@ protocol MoreFilesActionsInteractorInput {
     func leaveSharing(item: BaseDataSourceItem?)
     
     func moveToTrashShared(items: [BaseDataSourceItem])
-    
-    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
 }

@@ -139,7 +139,7 @@ enum NavigationBarStyles {
         return defaultBackButton
     }
     
-    func getBackButton(title: String, target: Any?, acion: Selector?) -> UIBarButtonItem {
+    func getBarButton(title: String, target: Any?, acion: Selector?) -> UIBarButtonItem {
         let defaultBackButton = UIBarButtonItem(title: title, style: .plain, target: target, action: acion)
         defaultBackButton.tintColor = self.textTintColor
         defaultBackButton.setTitleTextAttributes(self.backButtonTitleAttributes, for: .normal)
@@ -160,7 +160,8 @@ extension UIViewController {
             return
         }
         
-        navBar?.topItem?.backBarButtonItem = style.backButon
+        //
+        setupBackButton(style: style)
         
         navBar?.titleTextAttributes = style.titleAtributes
         navBar?.barTintColor = style.barTintColor
@@ -205,6 +206,22 @@ extension UIViewController {
         } else if controller == nil {
             navigationItem.searchController = controller
         }
+    }
+}
+
+//MARK: - Modal
+
+extension UIViewController {
+    func isModal() -> Bool {
+        if presentedViewController != nil || navigationController?.presentingViewController?.presentedViewController != nil {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    @objc private func popModal() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -259,10 +276,19 @@ extension UIViewController {
 //MARK: Buttons
 
 extension UIViewController {
-    func setBackButtonForNavigationItem(style: NavigationBarStyles, title: String, target: Any?, action: Selector?) {
-        navigationItem.backBarButtonItem = style.getBackButton(title: title, target: target, acion: action)
+    
+    func setupBackButton(style: NavigationBarStyles) {
+        //change so we dont always setup, but check first if this button exiist and then just channge properties
+        if isModal() { //default implementaion
+            setNavigationLeftBarButton(style: style, title: "", target: self, image: UIImage(named: "blackBackButton"), action: #selector(popModal))
+        } else {
+            navBar?.topItem?.backBarButtonItem = style.backButon
+        }
     }
     
+    func setBackButtonForNavigationItem(style: NavigationBarStyles, title: String, target: Any?, action: Selector?) {
+        navigationItem.backBarButtonItem = style.getBarButton(title: title, target: target, acion: action)
+    }
     
     func setBackButtonForNavigationItem(button: UIBarButtonItem, style: NavigationBarStyles) {
         navigationItem.backBarButtonItem = button
@@ -273,26 +299,22 @@ extension UIViewController {
     }
     
     func setNavigationLeftBarButton(style: NavigationBarStyles, title: String, target: Any?, image: UIImage?, action: Selector?) {
-        let leftButton = style.getBackButton(title: title, target: target, acion: action)
+        let leftButton = style.getBarButton(title: title, target: target, acion: action)
         leftButton.image = image
         
         navigationItem.leftBarButtonItem = leftButton
     }
     
-    func setNavigationRightBarButton(title: String, target: AnyObject, action: Selector) {
+    func setNavigationRightBarButton(style: NavigationBarStyles, title: String, image: UIImage? = nil, target: AnyObject, action: Selector) {
         guard target.responds(to: action) else {
             assertionFailure()
             return
         }
         
-        let rightBarButtonItem = UIBarButtonItem(title: title,
-                                                 font: UIFont.GTAmericaStandardMediumFont(size: 18),
-                                                 tintColor: .white,
-                                                 accessibilityLabel: nil,
-                                                 style: .done,
-                                                 target: target,
-                                                 selector: action)
-        
+        let rightBarButtonItem = style.getBarButton(title: title, target: target, acion: action)
+        rightBarButtonItem.image = image
+        rightBarButtonItem.style = .done
+
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 }

@@ -40,7 +40,7 @@ private enum SwipeState: Equatable {
 
 protocol MultifileCollectionViewCellActionDelegate: class {
     func onMenuPress(sender: Any, itemModel: Item?)
-    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?, indexPath: IndexPath?)
+    func onSelectMenuAction(type: ElementTypes, itemModel: Item?, sender: Any?, indexPath: IndexPath?)
     func onRenameStarted(at indexPath: IndexPath)
     func rename(item: WrapData, name: String, completion: @escaping BoolHandler)
     func onLongPress(cell: UICollectionViewCell)
@@ -197,10 +197,18 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     private var itemModel : Item?
     private var isAllowedToShowShared = false
     private var isAllowedToSwipe: Bool {
-        return !(isSelectionInProgress || isRenamingInProgress)
+        var isNotATrashBinRelative = itemModel?.privateShareType != .trashBin
+        if case .innerFolder = itemModel?.privateShareType, itemModel?.privateShareType.rootType == .trashBin  {
+            isNotATrashBinRelative = false
+        }
+        return !(isSelectionInProgress || isRenamingInProgress) && isNotATrashBinRelative
     }
     private var isAllowedToSwipeDelete: Bool {
-        return itemModel?.privateSharePermission?.granted?.contains(.delete) ?? false && isAllowedToSwipe
+        var isNotATrashBinRelative = itemModel?.privateShareType != .trashBin
+        if case .innerFolder = itemModel?.privateShareType, itemModel?.privateShareType.rootType == .trashBin  {
+            isNotATrashBinRelative = false
+        }
+        return itemModel?.privateSharePermission?.granted?.contains(.delete) ?? false && isAllowedToSwipe && isNotATrashBinRelative
     }
     private(set) var isRenamingInProgress = false
     private var isSelectionInProgress = false
@@ -462,11 +470,11 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     @IBAction private func onInfoButtonTapped(_ sender: Any) {
         scrollableContent.scrollRectToVisible(self.defaultView.frame, animated: true)
-        actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self, indexPath: nil)
+        actionDelegate?.onSelectMenuAction(type: .info, itemModel: itemModel, sender: self, indexPath: nil)
     }
     
     @IBAction private func onDeleteButtonTapped(_ sender: Any) {
-        actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self, indexPath: nil)
+        actionDelegate?.onSelectMenuAction(type: .moveToTrash, itemModel: itemModel, sender: self, indexPath: nil)
     }
 }
 
@@ -494,7 +502,7 @@ extension MultifileCollectionViewCell {
             
             let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
                 
-                if case .elementType(.rename) = actionType {
+                if actionType == .rename {
                     self?.startRenaming()
                 } else {
                     self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton, indexPath: indexPath)
@@ -580,10 +588,10 @@ extension MultifileCollectionViewCell: UIScrollViewDelegate {
         
         if currentOffset == infoOffsetX {
             swipeState = .defaultView
-            actionDelegate?.onSelectMenuAction(type: .elementType(.info), itemModel: itemModel, sender: self, indexPath: nil)
+            actionDelegate?.onSelectMenuAction(type: .info, itemModel: itemModel, sender: self, indexPath: nil)
             
         } else if currentOffset == deleteOffsetX {
-            actionDelegate?.onSelectMenuAction(type: .elementType(.moveToTrash), itemModel: itemModel, sender: self, indexPath: nil)
+            actionDelegate?.onSelectMenuAction(type: .moveToTrash, itemModel: itemModel, sender: self, indexPath: nil)
         }
     }
     

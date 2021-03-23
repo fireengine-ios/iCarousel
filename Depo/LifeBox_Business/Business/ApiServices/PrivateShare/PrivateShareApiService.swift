@@ -61,9 +61,22 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func getUrlToUpload(projectId: String, parentFolderUuid: String, requestItem: UploadFileRequestItem, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask?
+
+    @discardableResult
+    func trashedList(folderUUID: String, sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping (ResponseResult<TrashBinRequestResponse>) -> Void) -> URLSessionTask?
+
+    @discardableResult
+    func recoverItems(_ items: [WrapData], handler: @escaping ResponseVoid) -> URLSessionTask?
+
+    @discardableResult
+    func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask?
+
+    @discardableResult
+    func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
+    private lazy var hiddenService = HiddenService()
     
     @discardableResult
     func getSuggestedSubjects(searchText: String, size: Int, handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask? {
@@ -334,5 +347,30 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .customValidate()
             .responseObject(handler)
             .task
+    }
+
+    @discardableResult
+    func trashedList(folderUUID: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping (ResponseResult<TrashBinRequestResponse>) -> Void) -> URLSessionTask? {
+        return hiddenService.trashedList(folderUUID: folderUUID, sortBy: sortBy, sortOrder: sortOrder, page: page, size: size, handler: handler)
+    }
+
+    @discardableResult
+    func recoverItems(_ items: [WrapData], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.recoverItems(items, handler: handler)
+    }
+
+    @discardableResult
+    func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.delete(items: items, handler: handler)
+    }
+
+    @discardableResult
+    func deletePermanently(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.deletePermanently(items: items, handler: handler)
+    }
+
+    @discardableResult
+    func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.deleteAllFromTrashBin(handler: handler)
     }
 }

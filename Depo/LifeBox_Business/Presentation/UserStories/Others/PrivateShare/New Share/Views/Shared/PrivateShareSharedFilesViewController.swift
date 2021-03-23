@@ -18,7 +18,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         controller.title = shareType.title
         controller.shareType = shareType
-        controller.needToShowTabBar = true
+        controller.needToShowTabBar = shareType.isTabBarNeeded
         return controller
     }
 
@@ -31,9 +31,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private(set) var shareType: PrivateShareType = .byMe
     
     private lazy var collectionManager: PrivateShareSharedFilesCollectionManager = {
-        let apiService = PrivateShareApiServiceImpl()
-        let sharedItemsManager = PrivateShareFileInfoManager.with(type: shareType, privateShareAPIService: apiService)
-        let manager = PrivateShareSharedFilesCollectionManager.with(collection: collectionView, fileInfoManager: sharedItemsManager)
+        let manager = PrivateShareSharedFilesCollectionManager.with(collection: collectionView, fileInfoManager: fileInfoManager)
         manager.delegate = self
         return manager
     }()
@@ -43,6 +41,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private lazy var threeDotsManager = PrivateShareSharedWithThreeDotsManager(delegate: self)
     private lazy var itemThreeDotsManager = PrivateShareSharedItemThreeDotsManager(delegate: self)
     private lazy var plusButtonActionsManager = PrivateShareSharedPlusButtonActtionManager(delegate: self)
+    private lazy var fileInfoManager: PrivateShareFileInfoManager = {
+        let apiService = PrivateShareApiServiceImpl()
+        return PrivateShareFileInfoManager.with(type: shareType, privateShareAPIService: apiService)
+    }()
     
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
@@ -121,7 +123,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         if isSelecting {
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
-            bottomBarManager.update(for: selectedItems)
+            bottomBarManager.update(for: selectedItems, shareType: shareType)
         }
         
     }
@@ -143,9 +145,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupBars() {
         //in theory should provide smoother animation if initial setup wasn on viewDidLoad
-        if case .innerFolder(_, _) = self.shareType {
+        switch shareType {
+        case .innerFolder(_, _), .trashBin:
             navBarManager.setupLargetitle(isLarge: false)
-        } else {
+        default:
             navBarManager.setupLargetitle(isLarge: true)
         }
         setDefaultTabBarState()
@@ -164,6 +167,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     @available(iOS 14.0, *)
     private func setupPlusButtonMenu() {
         guard
+            shareType != .trashBin,
             let realButton = navBarManager.plusButton.customView as? UIButton
         else {
             return
@@ -189,7 +193,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     private func setDefaultTabBarState() {
-        needToShowTabBar = true
+        needToShowTabBar = shareType.isTabBarNeeded
     }
     
     private func setupCollectionViewBars() {
@@ -255,7 +259,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
-        bottomBarManager.update(for: selectedItems)
+        bottomBarManager.update(for: selectedItems, shareType: shareType)
         
         if selectedItems.isEmpty {
             bottomBarManager.hide()
@@ -280,7 +284,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         itemThreeDotsManager.showActions(for: shareType, item: item, sender: sender)
     }
     
-    func didSelectAction(type: ActionType, on item: Item, sender: Any?) {
+    func didSelectAction(type: ElementTypes, on item: Item, sender: Any?) {
         itemThreeDotsManager.handleAction(type: type, item: item, sender: sender)
     }
     
@@ -290,6 +294,13 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func needToShowSpinner() {
         showSpinner()
+    }
+
+    func onEmptyViewUpdate(isHidden: Bool) {
+        if shareType == .trashBin {
+            navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: !isHidden)
+            topBarSortingBar.isHidden = !isHidden
+        }
     }
     
     //MARK: Helpers
@@ -303,14 +314,19 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     private func updateBars(isSelecting: Bool) {
         DispatchQueue.main.async {
             self.setupNavigationBar(editingMode: isSelecting)
-            
-            self.needToShowTabBar = !isSelecting
-            self.showTabBarIfNeeded()
+
+            let tabBarNeeded = self.shareType != .trashBin
+
+            if tabBarNeeded {
+                self.needToShowTabBar = !isSelecting
+                self.showTabBarIfNeeded()
+            }
+
             if isSelecting {
                 let selectedItems = self.collectionManager.selectedItems()
                 self.show(selectedItemsCount: selectedItems.count)
                 self.bottomBarManager.show()
-                self.bottomBarManager.update(for: selectedItems)
+                self.bottomBarManager.update(for: selectedItems, shareType: self.shareType)
             } else {
                 self.bottomBarManager.hide()
             }
@@ -325,16 +341,27 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             }
 
             self.setNavigationBarStyle(.white)
-            
+
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
-            
+
             if editingMode, isSelectionAllowed {
-                self.navBarManager.setSelectionMode()
-            } else {
-                if case .innerFolder(_, _) = self.shareType {
-                    self.navBarManager.setNestedMode(title: self.shareType.title)
+                if self.shareType == .trashBin || self.shareType.rootType == .trashBin {
+                    self.navBarManager.setSelectionModeForTrashBin()
                 } else {
+                    self.navBarManager.setSelectionMode()
+                }
+            } else {
+                switch self.shareType {
+                case .trashBin:
+                    self.navBarManager.setTrashBinMode(title: self.shareType.title)
+                case .innerFolder(let rootType, let folderItem):
+                    if rootType != .trashBin {
+                        self.navBarManager.setNestedMode(title: self.shareType.title)
+                    } else {
+                        self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true)
+                    }
+                default:
                     self.navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                     var newTitle = self.shareType.title
                     if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
@@ -398,13 +425,54 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         
         router.pushViewController(viewController: controller!)
     }
+
+    func onTrashBinButton() {
+        let cancelHandler: PopUpButtonHandler = { vc in
+            vc.close()
+        }
+
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            vc.close { [weak self] in
+                self?.deleteAllFromTrashBin()
+            }
+        }
+
+        let message = TextConstants.trashBinEmptyTrashConfirmDescription
+        let controller = PopUpController.with(title: TextConstants.trashBinEmptyTrashConfirmTitle,
+                                              message: message,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.trashBinEmptyTrashNoAction,
+                                              secondButtonTitle: TextConstants.trashBinEmptyTrashYesAction,
+                                              firstAction: cancelHandler,
+                                              secondAction: okHandler)
+
+        router.presentViewController(controller: controller)
+    }
+
+    func onBackButton() {
+        router.popViewController()
+    }
+
+    private func deleteAllFromTrashBin() {
+        needToShowSpinner()
+        fileInfoManager.privateShareAPIService.deleteAllFromTrashBin(handler: { [weak self] response in
+            self?.needToHideSpinner()
+            switch response {
+            case .success():
+                self?.collectionManager.reload(type: .onOperationFinished)
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.trashBinEmptyTrashSucceed)
+            case .failed(let error):
+                let errorMessage = (error as? ServerMessageError)?.getPrivateShareError() ?? TextConstants.temporaryErrorOccurredTryAgainLater
+                UIApplication.showErrorAlert(message: errorMessage)
+            }
+        })
+    }
     
     //MARK: Helpers
     private func showSearchScreen() {
         let controller = router.searchView(navigationController: navigationController)
         router.pushViewController(viewController: controller)
     }
-    
 }
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
@@ -447,7 +515,10 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
                 if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
-                
+            case .trashBin:
+                if type.isContained(in: [.restore, .deletePermanently]) {
+                    collectionManager.reload(type: .onOperationFinished)
+                }
             default:
                 assertionFailure()
         }

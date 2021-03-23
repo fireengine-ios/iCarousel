@@ -33,7 +33,8 @@ class SettingsRouter: SettingsRouterInput {
     }
 
     func navigateToTrashBin() {
-        // TODO when ready- add routing to trash bin screen
+        let vc = router.trashBin
+        router.pushViewController(viewController: vc)
     }
     
     func goToLoginScreen() {

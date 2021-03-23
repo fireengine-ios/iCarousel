@@ -352,7 +352,7 @@ struct RouteRequests {
     
     enum FileSystem {
         static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
-        static let trashedList = "filesystem/trashed?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        static let trashedList = "filesystem/trashed?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
         static let hiddenList = baseUrl.absoluteString + "filesystem/hidden?sortBy=%@&sortOrder=%@&page=%@&size=%@&category=photos_and_videos"
         
         static let filesystemBase = "filesystem/"
@@ -387,6 +387,9 @@ struct RouteRequests {
             static let move = baseV3UrlBulk +/ "move"
             static let delete = baseV3UrlBulk +/ "delete"
             static let trash = baseV3UrlBulk +/ "trash"
+            static let recover = baseV3UrlBulk +/ "recover"
+
+            static let trashedBinList = baseUrl.absoluteString + "v3/files/trash?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
         }
     }
 

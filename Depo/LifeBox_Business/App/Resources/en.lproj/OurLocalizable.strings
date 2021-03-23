@@ -2077,3 +2077,23 @@
 "business_app_shared_by_me_empty page" = "Haven't shared any files yet";
 "business_app_shared_area_empty page" = "Don't have any shared files yet";
 "business_app_folder_empty page" = "Empty Folder";
+
+"business_app_trash_bin_page_title" = "Trash Bin";
+"business_app_trash_bin_empty_page" = "You do not have any deleted files";
+"business_app_trash_bin_restore_action_name" = "Restore";
+"business_app_trash_bin_delete_action_name" = "Delete Permanantly";
+"business_app_trash_bin_restore_confirm_title" = "Restore";
+"business_app_trash_bin_restore_confirm_description" = "Are you sure to restore item(s)?";
+"business_app_trash_bin_restore_confirm_YES_button" = "Restore";
+"business_app_trash_bin_restore_confirm_NO_button" = "Cancel";
+"business_app_trash_bin_delete_confirm_title" = "Delete Permanantly";
+"business_app_trash_bin_delete_confirm_description" = "Are you sure to delete item(s) permanantly?";
+"business_app_trash_bin_delete_confirm_YES_button" = "Delete";
+"business_app_trash_bin_delete_confirm_NO_button" = "Cancel";
+"business_app_trash_bin_delete_success" = "Delete success";
+"business_app_trash_bin_restore_success" = "Restore success";
+"business_app_trash_bin_empty_trash_confirm_title" = "Delete Permanantly";
+"business_app_trash_bin_empty_trash_confirm_description" = "Are you sure to delete item(s) permanantly?";
+"business_app_trash_bin_empty_trash_confirm_YES_button" = "Empty Trash Bin";
+"business_app_trash_bin_empty_trash_confirm_NO_button" = "Cancel";
+"business_app_trash_bin_empty_trash_success" = "All items are permanantly deleted";

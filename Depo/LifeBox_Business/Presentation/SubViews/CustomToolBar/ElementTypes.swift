@@ -16,6 +16,7 @@ enum ElementTypes {
     case share
     case info//one for alert one for tab
     case delete
+    case deletePermanently
     case emptyTrashBin
     case move
     case download
@@ -59,7 +60,7 @@ enum ElementTypes {
     case variesRole
     case removeRole
     
-    static var trashState: [ElementTypes] = [.restore, .delete]
+    static var trashState: [ElementTypes] = [.restore, .deletePermanently]
     static var activeState: [ElementTypes] = [.moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus) -> [ElementTypes] {
@@ -72,18 +73,14 @@ enum ElementTypes {
         else {
             return result
         }
-        if grantedPermissions.contains(.writeAcl) {
-            result.append(.privateShare)
-        }
         
+        //specific actions order
         if grantedPermissions.contains(.read) {
             result.append(.share)
-            
-            if item.fileType.isContained(in: [.image, .video]) {
-                result.append(.download)
-            } else {
-                result.append(.downloadDocument)
-            }   
+        }
+        
+        if grantedPermissions.contains(.writeAcl) {
+            result.append(.privateShare)
         }
         
         if grantedPermissions.contains(.delete) {
@@ -92,8 +89,16 @@ enum ElementTypes {
             }
         }
         
+        if grantedPermissions.contains(.read) {
+            if item.fileType.isContained(in: [.image, .video]) {
+                result.append(.download)
+            } else {
+                result.append(.downloadDocument)
+            }
+        }
+        
         if status == .trashed {
-            result = ElementTypes.trashState
+            result = item.privateSharePermission?.granted?.contains(.delete) == true ? ElementTypes.trashState : []
         }
         
         result.append(.info)
@@ -105,7 +110,7 @@ enum ElementTypes {
         var result: [ElementTypes]
 
         switch status {
-        case .trashed:
+        case .trashed: // TODO check here if permissions contains DELETE and give appropriate action list for that
             if viewType == .actionSheet {
                 result = [.select] + ElementTypes.trashState
             } else {
@@ -137,12 +142,25 @@ enum ElementTypes {
 
         return result
     }
+
+    static func specifiedMoreActionTypesForTrashBin(for status: ItemStatus, item: WrapData) -> [ElementTypes] {
+        var actionsArray: [ElementTypes] = [.select]
+        if item.privateSharePermission?.granted?.contains(.delete) == true {
+            actionsArray.append(contentsOf: [.restore, .deletePermanently])
+        }
+        actionsArray.append(.info)
+        return actionsArray
+    }
     
     static func specifiedMoreActionTypes(for status: ItemStatus, item: BaseDataSourceItem) -> [ElementTypes] {
         //TODO: allow move and add/remove favorites if api is ready
+        var trashBinRelated = item.privateShareType == .trashBin
+        if case .innerFolder = item.privateShareType, item.privateShareType.rootType == .trashBin {
+            trashBinRelated = true
+        }
         
-        if status == .trashed {
-            return ElementTypes.trashState + [.info]
+        if trashBinRelated {
+            return (item as? WrapData)?.privateSharePermission?.granted?.contains(.delete) ?? false ? [.select] + ElementTypes.trashState + [.info] : [.select, .info]
         }
         
         guard let item = item as? Item else {
@@ -153,15 +171,11 @@ enum ElementTypes {
 
         if let grantedPermissions = item.privateSharePermission?.granted {
             if grantedPermissions.contains(.read) {
-                if item.fileType.isContained(in: [.image, .video]) {
-                    types.append(.download)
-                } else {
-                    types.append(.downloadDocument)
-                }
+                types.append(.share)
             }
             
-            if grantedPermissions.contains(.writeAcl) || grantedPermissions.contains(.read)  {
-                types.append(.share)
+            if grantedPermissions.contains(.writeAcl) {
+                types.append(.privateShare)
             }
             
             // TODO: - Add / Delete permission check  //grantedPermissions.contains(.writeAcl)
@@ -170,6 +184,14 @@ enum ElementTypes {
                     types.append(.leaveSharing)
                 } else if item.privateShareType == .byMe {
                     types.append(.endSharing)
+                }
+            }
+            
+            if grantedPermissions.contains(.read) {
+                if item.fileType.isContained(in: [.image, .video]) {
+                    types.append(.download)
+                } else {
+                    types.append(.downloadDocument)
                 }
             }
             
@@ -209,6 +231,10 @@ enum ElementTypes {
                 return TextConstants.deleteSuccess
             case .rename:
                 return TextConstants.renameSuccess
+            case .deletePermanently:
+                return TextConstants.trashBinDeleteActionSucceed
+            case .restore:
+                return TextConstants.trashBinRestoreSucceed
             default:
                 return nil
         }
@@ -321,6 +347,8 @@ enum ElementTypes {
             return TextConstants.actionLeaveSharing
         case .privateShare:
             return TextConstants.actionSharePrivately
+        case .deletePermanently:
+            return TextConstants.trashBinDeleteAction
         default:
             return ""
         }

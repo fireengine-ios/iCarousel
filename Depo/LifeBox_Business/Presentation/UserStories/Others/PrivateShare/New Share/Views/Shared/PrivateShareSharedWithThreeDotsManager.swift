@@ -37,6 +37,8 @@ final class PrivateShareSharedWithThreeDotsManager {
                 
             case .sharedArea:
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+            case .trashBin:
+                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     
@@ -58,6 +60,9 @@ final class PrivateShareSharedWithThreeDotsManager {
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
                 
             case .sharedArea:
+                let types = actionTypes(for: selectedItems)
+                alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
+            case .trashBin:
                 let types = actionTypes(for: selectedItems)
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
         }

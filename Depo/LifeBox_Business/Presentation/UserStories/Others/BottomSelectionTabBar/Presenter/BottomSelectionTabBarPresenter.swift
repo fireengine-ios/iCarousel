@@ -26,16 +26,18 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         view.setupBar(style: config.style, config: config)
     }
 
-    func setupTabBarWith(items: [BaseDataSourceItem]) {
-        guard let items = items as? [WrapData] else { return }
+    func setupTabBarWith(items: [BaseDataSourceItem], shareType: PrivateShareType? = nil) {
+        guard let wrapData = items as? [WrapData] else { return }
+
+        let trashBinRelated = shareType?.isTrashBinRelated ?? false
+
+        let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
+        var elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
         
-        let matchesBitmasks = calculateMatchesBitmasks(from: items)
-        var elementsConfig = createElementTypesArray(from: matchesBitmasks)
-        
-        if items.count == 1 {
+        if items.count == 1 && trashBinRelated {
             elementsConfig.append(.info)
         }
-        
+
         let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque)
         setupConfig(withConfig: config)
     }
@@ -78,72 +80,99 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
 
     /// Returns element types array calculated from bitmask
-    private func createElementTypesArray(from bitmask: Int) -> [ElementTypes] {
-        var bitmaskValue = bitmask
-        var elementTypesArray = [ElementTypes]()
+    private func createElementTypesArray(from bitmask: Int, trashBinRelated: Bool = false) -> [ElementTypes] {
+            var bitmaskValue = bitmask
+            var permissions = [PrivateSharePermission]()
 
-        var appendDelete = false
-        
-        if bitmaskValue >= 512 {
-            // Read acl
-            bitmaskValue -= 512
+            if bitmaskValue >= 512 {
+                // Read acl
+                permissions.append(.readAcl)
+                bitmaskValue -= 512
+            }
+
+            if bitmaskValue >= 256 {
+                // Write acl
+                permissions.append(.writeAcl)
+                bitmaskValue -= 256
+            }
+
+            if bitmaskValue >= 128 {
+                // Comment
+                permissions.append(.comment)
+                bitmaskValue -= 128
+            }
+
+            if bitmaskValue >= 64 {
+                // Update
+                permissions.append(.update)
+                bitmaskValue -= 64
+            }
+
+            if bitmaskValue >= 32 {
+                // Set attribute
+                permissions.append(.setAttribute)
+                bitmaskValue -= 32
+            }
+
+            if bitmaskValue >= 16 {
+                // Delete
+                permissions.append(.delete)
+                bitmaskValue -= 16
+            }
+
+            if bitmaskValue >= 8 {
+                // Create
+                permissions.append(.create)
+                bitmaskValue -= 8
+            }
+
+            if bitmaskValue >= 4 {
+                // List
+                permissions.append(.list)
+                bitmaskValue -= 4
+            }
+
+            if bitmaskValue >= 2 {
+                // Preview
+                permissions.append(.preview)
+                bitmaskValue -= 2
+            }
+
+            if bitmaskValue >= 1 {
+                // Read
+                permissions.append(.read)
+                bitmaskValue -= 1
+            }
+
+            //specific actions order
+            var elementTypesArray = [ElementTypes]()
+
+            if permissions.contains(.read) {
+                elementTypesArray.append(.share)
+            }
+
+            if permissions.contains(.writeAcl) {
+                elementTypesArray.append(.privateShare)
+            }
+
+            if permissions.contains(.delete) {
+                elementTypesArray.append(.delete)
+                elementTypesArray.append(.deletePermanently)
+            }
+
+            if permissions.contains(.read) {
+                elementTypesArray.append(.download)
+            }
+
+            if trashBinRelated {
+                elementTypesArray = elementTypesArray.filter { $0 == .restore || $0 == .deletePermanently }
+            } else {
+                elementTypesArray.remove(.deletePermanently)
+                elementTypesArray.remove(.restore)
+            }
+
+            return elementTypesArray
         }
-        
-        if bitmaskValue >= 256 {
-            // Write acl
-            elementTypesArray.append(.privateShare)
-            bitmaskValue -= 256
-        }
-        
-        if bitmaskValue >= 128 {
-            // Comment
-            bitmaskValue -= 128
-        }
-        
-        if bitmaskValue >= 64 {
-            // Update
-            bitmaskValue -= 64
-        }
-        
-        if bitmaskValue >= 32 {
-            // Set attribute
-            bitmaskValue -= 32
-        }
-        
-        if bitmaskValue >= 16 {
-            // Delete
-            appendDelete = true
-            bitmaskValue -= 16
-        }
-        
-        if bitmaskValue >= 8 {
-            // Create
-            bitmaskValue -= 8
-        }
-        
-        if bitmaskValue >= 4 {
-            // List
-            bitmaskValue -= 4
-        }
-        
-        if bitmaskValue >= 2 {
-            // Preview
-            bitmaskValue -= 2
-        }
-        
-        if bitmaskValue >= 1 {
-            // Read
-            elementTypesArray.append(.share)
-            elementTypesArray.append(.download)
-            bitmaskValue -= 1
-        }
-        
-        if appendDelete {
-            elementTypesArray.append(.delete)
-        }
-        
-        return elementTypesArray
-    }
     
     func bottomBarSelected(actionType: ElementTypes) {
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
@@ -174,7 +203,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
                 self.interactor.restore(items: selectedItems)
-                
+            case .deletePermanently:
+                self.interactor.deletePermanently(items: selectedItems)
             case .download:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -328,6 +358,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionDelete, style: .default, handler: { _ in
                         self.interactor.delete(items: currentItems)
                     })
+                case .deletePermanently:
+                    action = UIAlertAction(title: TextConstants.trashBinDeleteYesAction, style: .default, handler: { _ in
+                        self.interactor.deletePermanently(items: currentItems)
+                    })
                 case .restore:
                     action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
                         self.interactor.restore(items: currentItems)
@@ -336,9 +370,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
                         self.interactor.move(item: currentItems, toPath: "")
                     })
+                case .privateShare:
+                    action = UIAlertAction(title: TextConstants.actionShareCopy, style: .default, handler: { _ in
+                        self.interactor.privateShare(item: currentItems, sourceRect: self.middleTabBarRect)
+                    })
                 case .share:
                     action = UIAlertAction(title: TextConstants.actionShareCopy, style: .default, handler: { _ in
-                        self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
+                        self.interactor.originalShare(item: currentItems, sourceRect: self.middleTabBarRect)
                     })
                 //Photos and albumbs
                 case .photos:

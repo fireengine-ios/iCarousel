@@ -32,8 +32,8 @@ final class PrivateShareSharedFilesBottomBarManager {
         }
     }
     
-    func update(for items: [WrapData]) {
-        bottomBarPresenter.setupTabBarWith(items: items)
+    func update(for items: [WrapData], shareType: PrivateShareType) {
+        bottomBarPresenter.setupTabBarWith(items: items, shareType: shareType)
     }
     
     func show() {

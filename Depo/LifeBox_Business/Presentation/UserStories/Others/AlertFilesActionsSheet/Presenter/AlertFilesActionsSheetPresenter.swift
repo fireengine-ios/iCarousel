@@ -229,7 +229,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .editorRole,
                      .viewerRole,
                      .variesRole,
-                     .removeRole:
+                     .removeRole,
+                     .deletePermanently:
                     
                     action = UIAlertAction(title: type.actionTitle, style: .default, handler: { [weak self] _ in
                         self?.handleAction(type: type, items: currentItems)
@@ -367,13 +368,19 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
         case .restore:
             interactor.restore(items: items)
+
+        case .deletePermanently:
+            interactor.deletePermanently(items: items)
             
         case .move:
             interactor.move(item: items, toPath: "")
             
         case .share:
-            interactor.share(item: items, sourceRect: self.getSourceRect(sender: sender, controller: nil))
+            interactor.originalShare(item: items, sourceRect: self.getSourceRect(sender: sender, controller: nil))
             
+        case .privateShare:
+            interactor.privateShare(item: items, sourceRect: self.getSourceRect(sender: sender, controller: nil))
+                
         case .emptyTrashBin:
             interactor.emptyTrashBin()
 
@@ -468,11 +475,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         default:
             break
         }
-    }
-    
-    func handleShare(type: ShareTypes, items: [BaseDataSourceItem], sender: Any?) {
-        let sourceRect = getSourceRect(sender: sender, controller: nil)
-        interactor.handleShare(type: type, sourceRect: sourceRect, items: items)
     }
     
     private func trackNetmeraAction(type: ElementTypes) {

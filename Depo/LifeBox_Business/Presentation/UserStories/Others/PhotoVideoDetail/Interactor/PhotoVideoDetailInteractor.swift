@@ -190,6 +190,24 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
     }
     
+    func updateInfo(at index: Int) {
+        guard let item = allItems[safe: index] else {
+            return
+        }
+        
+        shareApiService.getSharingInfo(projectId: item.accountUuid, uuid: item.uuid) { [weak self] result in
+            switch result {
+            case .success(let updatedObject):
+                let wrapData = WrapData(privateShareFileInfo: updatedObject)
+                self?.updateItem(wrapData)
+                self?.output.updateItem(wrapData)
+                
+            case .failed(let error):
+                self?.output.failedUpdate(error: error)
+            }
+        }
+    }
+    
     private func updateItem(_ item: Item) {
         if let index = allItems.firstIndex(where: { $0 == item }) {
             array[index] = item

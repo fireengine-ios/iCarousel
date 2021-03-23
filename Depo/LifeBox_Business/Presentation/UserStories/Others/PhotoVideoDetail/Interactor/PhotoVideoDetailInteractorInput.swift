@@ -38,4 +38,5 @@ protocol PhotoVideoDetailInteractorInput: class {
     func onValidateName(newName: String)
     
     func createNewUrl(at index: Int)
+    func updateInfo(at index: Int)
 }
