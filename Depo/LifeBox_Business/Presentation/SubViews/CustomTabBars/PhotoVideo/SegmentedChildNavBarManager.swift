@@ -59,7 +59,7 @@ final class SegmentedChildNavBarManager {
     }()
 
     private(set) lazy var customBackButton: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(image: UIImage(named: "nav_bar_back"), style: .plain, target: self, action: #selector(onBackButton))
+        let barButtonItem = UIBarButtonItem(image: UIImage(named: "blackBackButton"), style: .plain, target: self, action: #selector(onBackButton))
         return barButtonItem
     }()
     
