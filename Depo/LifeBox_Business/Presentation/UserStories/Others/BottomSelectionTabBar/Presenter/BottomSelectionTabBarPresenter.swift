@@ -81,98 +81,98 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
 
     /// Returns element types array calculated from bitmask
     private func createElementTypesArray(from bitmask: Int, trashBinRelated: Bool = false) -> [ElementTypes] {
-            var bitmaskValue = bitmask
-            var permissions = [PrivateSharePermission]()
-
-            if bitmaskValue >= 512 {
-                // Read acl
-                permissions.append(.readAcl)
-                bitmaskValue -= 512
+        var bitmaskValue = bitmask
+        var permissions = [PrivateSharePermission]()
+        
+        if bitmaskValue >= 512 {
+            // Read acl
+            permissions.append(.readAcl)
+            bitmaskValue -= 512
+        }
+        
+        if bitmaskValue >= 256 {
+            // Write acl
+            permissions.append(.writeAcl)
+            bitmaskValue -= 256
+        }
+        
+        if bitmaskValue >= 128 {
+            // Comment
+            permissions.append(.comment)
+            bitmaskValue -= 128
+        }
+        
+        if bitmaskValue >= 64 {
+            // Update
+            permissions.append(.update)
+            bitmaskValue -= 64
+        }
+        
+        if bitmaskValue >= 32 {
+            // Set attribute
+            permissions.append(.setAttribute)
+            bitmaskValue -= 32
+        }
+        
+        if bitmaskValue >= 16 {
+            // Delete
+            permissions.append(.delete)
+            bitmaskValue -= 16
+        }
+        
+        if bitmaskValue >= 8 {
+            // Create
+            permissions.append(.create)
+            bitmaskValue -= 8
+        }
+        
+        if bitmaskValue >= 4 {
+            // List
+            permissions.append(.list)
+            bitmaskValue -= 4
+        }
+        
+        if bitmaskValue >= 2 {
+            // Preview
+            permissions.append(.preview)
+            bitmaskValue -= 2
+        }
+        
+        if bitmaskValue >= 1 {
+            // Read
+            permissions.append(.read)
+            bitmaskValue -= 1
+        }
+        
+        //specific actions order
+        var elementTypesArray = [ElementTypes]()
+        
+        if trashBinRelated {
+            if permissions.contains(.delete) {
+                elementTypesArray.append(.restore)
+                elementTypesArray.append(.deletePermanently)
             }
-
-            if bitmaskValue >= 256 {
-                // Write acl
-                permissions.append(.writeAcl)
-                bitmaskValue -= 256
-            }
-
-            if bitmaskValue >= 128 {
-                // Comment
-                permissions.append(.comment)
-                bitmaskValue -= 128
-            }
-
-            if bitmaskValue >= 64 {
-                // Update
-                permissions.append(.update)
-                bitmaskValue -= 64
-            }
-
-            if bitmaskValue >= 32 {
-                // Set attribute
-                permissions.append(.setAttribute)
-                bitmaskValue -= 32
-            }
-
-            if bitmaskValue >= 16 {
-                // Delete
-                permissions.append(.delete)
-                bitmaskValue -= 16
-            }
-
-            if bitmaskValue >= 8 {
-                // Create
-                permissions.append(.create)
-                bitmaskValue -= 8
-            }
-
-            if bitmaskValue >= 4 {
-                // List
-                permissions.append(.list)
-                bitmaskValue -= 4
-            }
-
-            if bitmaskValue >= 2 {
-                // Preview
-                permissions.append(.preview)
-                bitmaskValue -= 2
-            }
-
-            if bitmaskValue >= 1 {
-                // Read
-                permissions.append(.read)
-                bitmaskValue -= 1
-            }
-
-            //specific actions order
-            var elementTypesArray = [ElementTypes]()
-
+            
+        } else {
             if permissions.contains(.read) {
                 elementTypesArray.append(.share)
             }
-
+            
             if permissions.contains(.writeAcl) {
                 elementTypesArray.append(.privateShare)
             }
-
+            
             if permissions.contains(.delete) {
                 elementTypesArray.append(.delete)
-                elementTypesArray.append(.deletePermanently)
             }
-
+            
             if permissions.contains(.read) {
                 elementTypesArray.append(.download)
             }
-
-            if trashBinRelated {
-                elementTypesArray = elementTypesArray.filter { $0 == .restore || $0 == .deletePermanently }
-            } else {
-                elementTypesArray.remove(.deletePermanently)
-                elementTypesArray.remove(.restore)
-            }
-
-            return elementTypesArray
         }
+        
+        return elementTypesArray
+    }
     
     func bottomBarSelected(actionType: ElementTypes) {
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in

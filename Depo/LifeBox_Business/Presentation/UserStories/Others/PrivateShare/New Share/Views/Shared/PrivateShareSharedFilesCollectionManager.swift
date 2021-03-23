@@ -399,7 +399,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         DispatchQueue.main.async {
             let detailModule = self.router.filesDetailModule(fileObject: item,
                                                         items: items,
-                                                        status: .active,
+                                                        status: item.status,
                                                         canLoadMoreItems: true,
                                                         moduleOutput: nil)
 

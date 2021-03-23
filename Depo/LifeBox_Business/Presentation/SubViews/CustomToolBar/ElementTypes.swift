@@ -75,33 +75,34 @@ enum ElementTypes {
         }
         
         //specific actions order
-        if grantedPermissions.contains(.read) {
-            result.append(.share)
-        }
-        
-        if grantedPermissions.contains(.writeAcl) {
-            result.append(.privateShare)
-        }
-        
-        if grantedPermissions.contains(.delete) {
-            if !item.isReadOnlyFolder {
-                result.append(.moveToTrashShared)
-            }
-        }
-        
-        if grantedPermissions.contains(.read) {
-            if item.fileType.isContained(in: [.image, .video]) {
-                result.append(.download)
-            } else {
-                result.append(.downloadDocument)
-            }
-        }
-        
         if status == .trashed {
             result = item.privateSharePermission?.granted?.contains(.delete) == true ? ElementTypes.trashState : []
+            
+        } else {
+            if grantedPermissions.contains(.read) {
+                result.append(.share)
+            }
+            
+            if grantedPermissions.contains(.writeAcl) {
+                result.append(.privateShare)
+            }
+            
+            if grantedPermissions.contains(.delete) {
+                if !item.isReadOnlyFolder {
+                    result.append(.moveToTrashShared)
+                }
+            }
+            
+            if grantedPermissions.contains(.read) {
+                if item.fileType.isContained(in: [.image, .video]) {
+                    result.append(.download)
+                } else {
+                    result.append(.downloadDocument)
+                }
+            }
+            
+            result.append(.info)
         }
-        
-        result.append(.info)
         
         return result
     }
