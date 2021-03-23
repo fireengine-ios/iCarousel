@@ -80,66 +80,85 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     /// Returns element types array calculated from bitmask
     private func createElementTypesArray(from bitmask: Int) -> [ElementTypes] {
         var bitmaskValue = bitmask
-        var elementTypesArray = [ElementTypes]()
-
-        var appendDelete = false
+        var permissions = [PrivateSharePermission]()
         
         if bitmaskValue >= 512 {
             // Read acl
+            permissions.append(.readAcl)
             bitmaskValue -= 512
         }
         
         if bitmaskValue >= 256 {
             // Write acl
-            elementTypesArray.append(.privateShare)
+            permissions.append(.writeAcl)
             bitmaskValue -= 256
         }
         
         if bitmaskValue >= 128 {
             // Comment
+            permissions.append(.comment)
             bitmaskValue -= 128
         }
         
         if bitmaskValue >= 64 {
             // Update
+            permissions.append(.update)
             bitmaskValue -= 64
         }
         
         if bitmaskValue >= 32 {
             // Set attribute
+            permissions.append(.setAttribute)
             bitmaskValue -= 32
         }
         
         if bitmaskValue >= 16 {
             // Delete
-            appendDelete = true
+            permissions.append(.delete)
             bitmaskValue -= 16
         }
         
         if bitmaskValue >= 8 {
             // Create
+            permissions.append(.create)
             bitmaskValue -= 8
         }
         
         if bitmaskValue >= 4 {
             // List
+            permissions.append(.list)
             bitmaskValue -= 4
         }
         
         if bitmaskValue >= 2 {
             // Preview
+            permissions.append(.preview)
             bitmaskValue -= 2
         }
         
         if bitmaskValue >= 1 {
             // Read
-            elementTypesArray.append(.share)
-            elementTypesArray.append(.download)
+            permissions.append(.read)
             bitmaskValue -= 1
         }
         
-        if appendDelete {
+        //specific actions order
+        var elementTypesArray = [ElementTypes]()
+        
+        if permissions.contains(.read) {
+            elementTypesArray.append(.share)
+        }
+        
+        if permissions.contains(.writeAcl) {
+            elementTypesArray.append(.privateShare)
+        }
+        
+        if permissions.contains(.delete) {
             elementTypesArray.append(.delete)
+        }
+        
+        if permissions.contains(.read) {
+            elementTypesArray.append(.download)
         }
         
         return elementTypesArray
