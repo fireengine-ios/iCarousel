@@ -30,7 +30,7 @@ struct SharedFileInfo: Codable {
     let bytes: Int64?
     let folder: Bool?
     let childCount: Int64?
-    let status: String? // enum
+    let fileInfoStatus: ItemStatus?
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
     let contentType: String?
