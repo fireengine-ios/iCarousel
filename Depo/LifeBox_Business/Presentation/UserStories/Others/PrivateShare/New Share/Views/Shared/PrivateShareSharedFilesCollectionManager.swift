@@ -23,7 +23,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didEndReload()
     
     func showActions(for item: WrapData, sender: Any)
-    func didSelectAction(type: ActionType, on item: Item, sender: Any?)
+    func didSelectAction(type: ElementTypes, on item: Item, sender: Any?)
     
     func needToShowSpinner()
     func needToHideSpinner()
@@ -550,7 +550,7 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
         }
     }
     
-    func onSelectMenuAction(type: ActionType, itemModel: Item?, sender: Any?, indexPath: IndexPath?) {
+    func onSelectMenuAction(type: ElementTypes, itemModel: Item?, sender: Any?, indexPath: IndexPath?) {
         guard let item = itemModel else {
             return
         }

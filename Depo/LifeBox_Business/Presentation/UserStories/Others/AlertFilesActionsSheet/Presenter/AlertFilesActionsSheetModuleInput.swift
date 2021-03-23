@@ -24,6 +24,4 @@ protocol AlertFilesActionsSheetModuleInput: class {
     func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item], sender: Any?)
     
     func handleAction(type: ElementTypes, items: [BaseDataSourceItem], sender: Any?)
-    
-    func handleShare(type: ShareTypes, items: [BaseDataSourceItem], sender: Any?)
 }

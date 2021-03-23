@@ -36,15 +36,6 @@ final class TrashBinThreeDotMenuManager {
         let types = [.info] + ElementTypes.trashState
         showAlertSheet(with: types, item: item, sender: sender)
     }
-    
-    func handleAction(type: ActionType, item: Item) {
-        switch type {
-        case .elementType(let elementType):
-            handleAction(type: elementType, item: item)
-        case .shareType:
-            break
-        }
-    }
 
     private func showAlertSheet(with types: [ElementTypes], item: Item?, sender: Any) {
         guard let controller = RouterVC().getViewControllerForPresent() else {
@@ -90,7 +81,7 @@ final class TrashBinThreeDotMenuManager {
         controller.present(actionSheetVC, animated: true)
     }
     
-    private func handleAction(type: ElementTypes, item: Item?) {
+    func handleAction(type: ElementTypes, item: Item?) {
         switch type {
         case .restore:
             delegate.onThreeDotsManagerRestore(item: item)

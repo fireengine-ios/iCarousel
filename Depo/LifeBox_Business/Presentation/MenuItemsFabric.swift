@@ -6,32 +6,27 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
-enum ActionType {
-    case elementType(ElementTypes)
-    case shareType(ShareTypes)
-}
-
 @available(iOS 14.0, *)
 final class MenuItemsFabric {
 
     static func generateMenuForManagingRole(currentState: ElementTypes,
-                                            actionHandler: @escaping ValueHandler<ActionType>) -> UIMenu {
+                                            actionHandler: @escaping ValueHandler<ElementTypes>) -> UIMenu {
         let editorItem = UIAction(title: TextConstants.accessPageRoleEditor,
                                   image: currentState == .editorRole ? UIImage(named: "selected-checkmark") : nil,
                                   attributes: []) { _  in
-            actionHandler(.elementType(.editorRole))
+            actionHandler(.editorRole)
         }
 
         let viewerItem = UIAction(title: TextConstants.accessPageRoleViewer,
                                   image: currentState == .viewerRole ? UIImage(named: "selected-checkmark") : nil,
                                   attributes: []) { _  in
-            actionHandler(.elementType(.viewerRole))
+            actionHandler(.viewerRole)
         }
 
         let deleteItem = UIAction(title: TextConstants.accessPageRemoveRole,
                                   image: nil,
                                   attributes: [.destructive]) { _  in
-            actionHandler(.elementType(.removeRole))
+            actionHandler(.removeRole)
         }
 
         return UIMenu(title: "",
@@ -44,7 +39,7 @@ final class MenuItemsFabric {
                       ])
     }
     
-    static func generateMenu(for item: BaseDataSourceItem, status: ItemStatus, actionHandler: @escaping ValueHandler<ActionType>) -> UIMenu {
+    static func generateMenu(for item: BaseDataSourceItem, status: ItemStatus, actionHandler: @escaping ValueHandler<ElementTypes>) -> UIMenu {
         let actions = ElementTypes.specifiedMoreActionTypes(for: status, item: item)
 
         
@@ -59,7 +54,7 @@ final class MenuItemsFabric {
             let selectItem = UIAction(title: selectAction.actionTitle,
                                     image: selectAction.menuImage,
                                     attributes: selectAction.menuAttributes) { _  in
-                actionHandler(.elementType(selectAction))
+                actionHandler(selectAction)
             }
             
             selectMenu = UIMenu(title: "",
@@ -73,7 +68,7 @@ final class MenuItemsFabric {
             let infoItem = UIAction(title: infoAction.actionTitle,
                                     image: infoAction.menuImage,
                                     attributes: infoAction.menuAttributes) { _  in
-                actionHandler(.elementType(infoAction))
+                actionHandler(infoAction)
             }
             
             infoMenu = UIMenu(title: "",
@@ -85,17 +80,13 @@ final class MenuItemsFabric {
         
         var mainItems = [UIMenuElement]()
         mainActions.forEach { type in
-            if type == .share {
-                let shareItems = getShareItems(for: item, actionHandler: actionHandler)
-                mainItems.append(contentsOf: shareItems)
-            } else {
-                let item = UIAction(title: type.actionTitle,
-                                    image: type.menuImage,
-                                    attributes: type.menuAttributes) { _  in
-                    actionHandler(.elementType(type))
-                }
-                mainItems.append(item)
+            
+            let item = UIAction(title: type.actionTitle,
+                                image: type.menuImage,
+                                attributes: type.menuAttributes) { _  in
+                actionHandler(type)
             }
+            mainItems.append(item)
         }
         
         let mainMenu = UIMenu(title: "",
@@ -109,14 +100,49 @@ final class MenuItemsFabric {
                       children: validMenus)
     }
     
-    static func getShareItems(for item: BaseDataSourceItem, actionHandler: @escaping ValueHandler<ActionType>) -> [UIMenuElement] {
-        let shareTypes = ShareTypes.allowedTypes(for: [item])
+    static func getShareItems(for item: BaseDataSourceItem, actionHandler: @escaping ValueHandler<ElementTypes>) -> [UIMenuElement] {
+        let shareTypes = allowedShareTypes(for: [item])
         return shareTypes.map { type in
             UIAction(title: type.actionTitle,
                      image: type.menuImage) { _ in
-                actionHandler(.shareType(type))
+                actionHandler(type)
             }
         }
+    }
+    
+    static private func allowedShareTypes(for items: [BaseDataSourceItem]) -> [ElementTypes] {
+        guard let items = items as? [Item] else {
+            assertionFailure()
+            return []
+        }
+        
+        let isOriginallDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.read) ?? false) })
+        let isPrivateDisabled = items.contains(where: { !($0.privateSharePermission?.granted?.contains(.writeAcl) ?? false) })
+        
+        var allowedTypes = [ElementTypes]()
+        
+        if items.contains(where: { $0.fileType == .folder}) {
+            allowedTypes = [.share, .privateShare]
+        } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
+            allowedTypes = []
+        } else {
+            allowedTypes = [.share, .privateShare]
+        }
+        
+        if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits || isOriginallDisabled {
+            allowedTypes.remove(.share)
+        }
+        
+        if isPrivateDisabled {
+            allowedTypes.remove(.privateShare)
+        }
+        
+        
+        if items.contains(where: { $0.isLocalItem }) {
+            allowedTypes.remove(.privateShare)
+        }
+        
+        return allowedTypes
     }
     
     static func privateShareUserRoleMenu(roles: [PrivateShareUserRole], currentRole: PrivateShareUserRole, completion: @escaping ValueHandler<PrivateShareUserRole>) -> UIMenu {
@@ -180,6 +206,8 @@ extension ElementTypes {
             imageName = "move"
         case .share:
             imageName = "share-copy"
+        case .privateShare:
+            imageName = "share-private"
         case .addToFavorites, .removeFromFavorites:
             imageName = "action_favorite"
         case .download, .downloadDocument:
@@ -209,26 +237,5 @@ extension ElementTypes {
     
     var isDestructive: Bool {
         isContained(in: [.delete, .moveToTrash, .moveToTrashShared])
-    }
-}
-
-extension ShareTypes {
-    
-    var menuImage: UIImage? {
-        var imageName: String? = nil
-        switch self {
-        case .link:
-            imageName = "copy-link"
-        case .original:
-            imageName = "share-copy"
-        case .private:
-            imageName = "share-private"
-        }
-        
-        guard let name = imageName else {
-            return nil
-        }
-        
-        return UIImage(named: name)?.withRenderingMode(.alwaysTemplate)
     }
 }
