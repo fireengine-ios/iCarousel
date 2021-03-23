@@ -365,11 +365,11 @@ final class LoginViewController: ViewController {
 // MARK: -LoginCoordinatorDelegate(FastLogin)
 extension LoginViewController: LoginCoordinatorDelegate {
     private var iPadAppId: String {
-        return "59322"
+        return TextConstants.NotLocalized.ipadFastLoginAppIdentifier
     }
 
     private var iPhoneAppId: String {
-        return "59320"
+        return TextConstants.NotLocalized.iPhoneFastLoginAppIdentifier
     }
 
     private var currentFastLoginServerType: DGEnvironment {
