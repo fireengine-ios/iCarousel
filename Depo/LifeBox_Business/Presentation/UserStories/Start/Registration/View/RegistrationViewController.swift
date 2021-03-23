@@ -179,7 +179,7 @@ final class RegistrationViewController: ViewController {
         setNavigationBarStyle(.byDefault)
         setBackButtonForNavigationItem(style: .byDefault, title: TextConstants.backTitle, target: nil, action: nil)
         setNavigationTitle(title: TextConstants.registerTitle, style: .byDefault)
-        setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
+        setNavigationRightBarButton(style: .byDefault, title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     
     private func setupStackView() {
