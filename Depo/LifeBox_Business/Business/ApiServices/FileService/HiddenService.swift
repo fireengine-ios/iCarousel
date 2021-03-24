@@ -113,7 +113,7 @@ final class HiddenService {
     func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask? {
         return SessionManager
         .customDefault
-        .request(RouteRequests.FileSystem.emptyTrash, method: .delete)
+        .request(RouteRequests.FileSystem.Version_3.deleteAll, method: .delete)
         .customValidate()
         .responseVoid(handler)
         .task
