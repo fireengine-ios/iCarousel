@@ -174,7 +174,7 @@ extension UIViewController {
             return
         }
         
-        if !isModal() {
+        if !isModal() || navigationController != nil {
             //TODO: change so we dont always setup, but check first if this button exiist and then just channge properties
             navBar?.topItem?.backBarButtonItem = style.backButon
         }
@@ -241,6 +241,21 @@ extension UIViewController {
     }
     
     @objc private func popNavigation() {
+//        let navController = navigationController ?? self
+//        navController.
+//        var navigationController: UINavigationController? {
+//            if let navController = rootViewController as? UINavigationController {
+//                return navController
+//            } else if let tabBarController = tabBarController {
+//                if let navVC = tabBarController.presentedViewController as? NavigationController {
+//                    return navVC
+//                } else {
+//                    return tabBarController.activeNavigationController
+//                }
+//            } else {
+//                return nil
+//            }
+//        }
         navigationController?.popViewController(animated: true)
     }
     
