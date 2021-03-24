@@ -79,7 +79,9 @@ final class TwoFactorAuthenticationDesigner: NSObject {
         willSet {
             let window = UIApplication.shared.keyWindow
             let topPadding = window?.safeAreaInsets.top ?? 0
-            newValue.constant = -topPadding
+            if topPadding > 20 {
+                newValue.constant = -topPadding
+            }
         }
     }
 }
