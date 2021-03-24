@@ -222,7 +222,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .selectAll,
                      .deSelectAll,
                      .rename,
-                     .delete,
                      .endSharing,
                      .leaveSharing,
                      .moveToTrashShared,
@@ -445,16 +444,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 basePassingPresenter?.renamingSelected(item: item)
             }
 //            interactor.info(item: items, isRenameMode: true)
-            
-        case .delete:
-            let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-            if items.count <= allowedNumberLimit {
-                interactor.delete(items: items)
-            } else {
-                let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
-                UIApplication.showErrorAlert(message: text)
-            }
-        
+       
         case .endSharing:
             //currently only for one file is supported
             interactor.endSharing(item: items.first)
@@ -486,8 +476,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         case .download, .downloadDocument:
             button = .download
         case .moveToTrash,
-             .moveToTrashShared,
-             .delete:
+             .moveToTrashShared:
             button = .delete
         case .restore:
             button = .restore

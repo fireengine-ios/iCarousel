@@ -30,6 +30,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
         fileInfoTableViewAdapter = FileInfoTableViewAdapter(with: tableView,
                                                             delegate: self)
         output.viewIsReady()
@@ -44,7 +45,6 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     private func setupNavigationBar() {
         title = fileType == .folder ? TextConstants.infoPageTitleForFolder : TextConstants.infoPageTitleForFile
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setNavigationBarStyle(.white)
     }
 }

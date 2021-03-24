@@ -13,11 +13,9 @@ class GridListTopBarSortingTableCell: UITableViewCell {
     @IBOutlet weak var approveImage: UIImageView!
     
     func setup(withText text: String, selected: Bool) {
-        
         titleLabel.text = text
-        
-        titleLabel.font = UIFont.GTAmericaStandardRegularFont(size: 19)
-        titleLabel.textColor = ColorConstants.textGrayColor
+        titleLabel.font = selected ? UIFont.GTAmericaStandardMediumFont(size: 14) : UIFont.GTAmericaStandardRegularFont(size: 14)
+        titleLabel.textColor = ColorConstants.Text.labelTitle
         
         approveImage.isHidden = selected ? false : true
         

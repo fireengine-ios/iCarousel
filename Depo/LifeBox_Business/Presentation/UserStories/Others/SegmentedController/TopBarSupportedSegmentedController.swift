@@ -14,6 +14,7 @@ protocol SegmentedChildTopBarSupportedControllerProtocol: class {
     func setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: Bool)
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
     func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
+    func setupCustomBackButton(style: NavigationBarStyles, asLeftButton: Bool, title: String, target: Any?, image: UIImage?, action: Selector?)
 }
 
 extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewController {
@@ -56,7 +57,6 @@ extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewCont
     
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
         let navItem = currenttNavigationItem
-        navigationItem.hidesBackButton = true
         navItem.leftBarButtonItems = nil
         navItem.setLeftBarButtonItems(items, animated: animated)
     }
@@ -65,6 +65,10 @@ extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewCont
         let navItem = currenttNavigationItem
         navItem.rightBarButtonItems = nil
         navItem.setRightBarButtonItems(items, animated: animated)
+    }
+    
+    func setupCustomBackButton(style: NavigationBarStyles, asLeftButton: Bool, title: String, target: Any?, image: UIImage?, action: Selector?) {
+        setupCustomButtonAsNavigationBackButton(style: style, asLeftButton: asLeftButton, title: title, target: target, image: image, action: action)
     }
 }
 

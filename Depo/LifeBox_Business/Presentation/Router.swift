@@ -632,24 +632,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func settingsIpad(settingsController: UIViewController?) -> UIViewController? {
-        guard let leftController = settingsController as? SettingsViewController else {
-            return nil
-        }
-
-        let rightController = vcActivityTimeline
-        
-        splitContr = SplitIpadViewContoller()
-        splitContr?.configurateWithControllers(leftViewController: leftController, controllers: [rightController])
-        
-        guard let splitVC = splitContr?.getSplitVC() else {
-            return nil
-        }
-        
-        let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitVC)
-        return containerController
-    }
-    
     // MARK: Help and support
     
     var faq: UIViewController {

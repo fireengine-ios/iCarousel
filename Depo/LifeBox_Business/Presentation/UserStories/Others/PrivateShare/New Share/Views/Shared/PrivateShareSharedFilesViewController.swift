@@ -59,21 +59,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     weak var offsetChangedDelegate: PrivateShareSharedFilesViewControllerOffsetChangeDelegate?
     
-    override var isEditing: Bool {
-        willSet {
-            DispatchQueue.main.async {
-                if case .innerFolder = self.shareType {
-                    
-                } else {
-                    self.changeNavbarLargeTitle(!newValue, style: .white)
-                }
-                if self.shareType.isSearchAllowed {
-                    self.setNavSearchConntroller(newValue ? nil : self.searchController)
-                }
-            }
-        }
-    }
-    
     lazy private var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
@@ -99,8 +84,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewDidLoad()
         
         collectionManager.setup()
-        setupPlusButton()
         setupBars()
+        setupNavigationBar(editingMode: collectionManager.isSelecting)
+        setupPlusButton()
+        
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
@@ -246,13 +233,33 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
-        updateBars(isSelecting: true)
-        isEditing = true
+        DispatchQueue.main.async {
+            self.updateBars(isSelecting: true)
+            if case .innerFolder = self.shareType {
+                
+            } else {
+                self.changeNavbarLargeTitle(false, style: .white)
+                if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
+                    self.setNavSearchConntroller(nil)
+                }
+            }
+            
+        }
+        
     }
     
     func didEndSelection() {
-        updateBars(isSelecting: false)
-        isEditing = false
+        DispatchQueue.main.async {
+            self.updateBars(isSelecting: false)
+            if case .innerFolder = self.shareType {
+                
+            } else {
+                self.changeNavbarLargeTitle(true, style: .white)
+                if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
+                    self.setNavSearchConntroller(self.searchController)
+                }
+            }
+        }
     }
     
     func didChangeSelection(selectedItems: [WrapData]) {
@@ -315,7 +322,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
     
     private func updateBars(isSelecting: Bool) {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             self.setupNavigationBar(editingMode: isSelecting)
 
             let tabBarNeeded = self.shareType != .trashBin
@@ -333,15 +340,15 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             } else {
                 self.bottomBarManager.hide()
             }
-        }
+//        }
     }
 
     private func setupNavigationBar(editingMode: Bool) {
-        DispatchQueue.main.async {
+//        DispatchQueue.main.async {
             /// don't let vc to change navBar if vc is not visible at this moment
-            guard self.viewIfLoaded?.window != nil else {
-                return
-            }
+//            guard self.viewIfLoaded?.window != nil else {
+//                return
+//            }
 
             self.setNavigationBarStyle(.white)
 
@@ -357,7 +364,9 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             } else {
                 switch self.shareType {
                 case .trashBin:
+//                    self.setNavBarStyle(.white)
                     self.navBarManager.setTrashBinMode(title: self.shareType.title)
+                    
                 case .innerFolder(let rootType, let folderItem):
                     if rootType != .trashBin {
                         self.navBarManager.setNestedMode(title: self.shareType.title)
@@ -375,7 +384,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 }
             }
             self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
-        }
+//        }
     }
     
     func collectionOffsetChanged(offsetY: CGFloat) {
@@ -418,14 +427,7 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onSettingsButton() {
-        var controller: UIViewController?
-        
-        if Device.isIpad {
-            controller = router.settingsIpad(settingsController: router.settings)
-        } else {
-            controller = router.settings
-        }
-        
+        let controller = router.settings
         router.pushViewController(viewController: controller!)
     }
 
@@ -480,12 +482,10 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
 
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func selectModeSelected(with item: WrapData?) {
-        isEditing = true
         collectionManager.startSelection(with: item)
     }
     
     func stopModeSelected() {
-        isEditing = false
         collectionManager.endSelection()
     }
     
@@ -538,7 +538,16 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func selectAllModeSelected() {}
     
     func deSelectAll() {
-        isEditing = false
+        DispatchQueue.main.async {
+            if case .innerFolder = self.shareType {
+                
+            } else {
+                self.changeNavbarLargeTitle(true, style: .white)
+                if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
+                    self.setNavSearchConntroller(self.searchController)
+                }
+            }
+        }
         handleOffsetChange(offsetY: collectionView.contentOffset.y)
     }
     

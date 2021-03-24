@@ -492,41 +492,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
-    func delete(items: [BaseDataSourceItem]) {
-        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
-            self?.output?.operationCancelled(type: .delete)
-            vc.close()
-        }
-        
-        let okHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .ok)
-            self?.output?.operationStarted(type: .delete)
-            vc.close { [weak self] in
-                self?.deleteItems(items)
-            }
-        }
-        
-        trackScreen(.fileOperationConfirmPopup(.delete))
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeletePermanentlyConfirmPopUp())
-        
-        let message: String
-        if items.allSatisfy({ $0.fileType == .folder }) {
-            message = TextConstants.deleteFoldersConfirmationPopupText
-        } else {
-            message = TextConstants.deleteItemsConfirmationPopupText
-        }
-        let popup = PopUpController.with(title: TextConstants.deleteConfirmationPopupTitle,
-                                         message: message,
-                                         image: .delete,
-                                         firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
-                                         firstAction: cancelHandler,
-                                         secondAction: okHandler)
-        
-        router.presentViewController(controller: popup, animated: false)
-    }
-    
     func endSharing(item: BaseDataSourceItem?) {
         guard let item = item as? WrapData else {
             return
@@ -725,7 +690,7 @@ extension MoreFilesActionsInteractor {
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
         case .removeFromFavorites:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
-        case .delete:
+            case .moveToTrash, .moveToTrashShared:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
         default:
             break
@@ -739,14 +704,6 @@ extension MoreFilesActionsInteractor {
             let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
             typeToCountDictionary.keys.forEach {
                 guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Trash(status: successStatus, type: $0, count: count) else {
-                    return
-                }
-                AnalyticsService.sendNetmeraEvent(event: event)
-            }
-        case .delete:
-            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
-            typeToCountDictionary.keys.forEach {
-                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Delete(status: successStatus, type: $0, count: count) else {
                     return
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)
@@ -903,15 +860,6 @@ extension MoreFilesActionsInteractor {
         divorceItems(type: .deletePermanently, items: items) { [weak self] items, success, fail in
             self?.permanentlyDeleteSelectedItems(items, success: success, fail: fail)
         }
-    }
-
-    private func deleteItems(_ items: [BaseDataSourceItem]) {
-        divorceItems(type: .delete,
-                     items: items,
-                     itemsOperation:
-            { [weak self] items, success, fail in
-                        self?.deleteSelectedItems(items, success: success, fail: fail)
-            })
     }
     
     private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {

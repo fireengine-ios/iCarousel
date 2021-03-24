@@ -34,7 +34,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
         var elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
         
-        if items.count == 1 && trashBinRelated {
+        if items.count == 1 && !trashBinRelated {
             elementsConfig.append(.info)
         }
 
@@ -61,7 +61,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             shownSourceView = newSourceView
         } else {
             if let tabBarViewController = rootVC as? TabBarViewController {
-                shownSourceView = tabBarViewController.mainContentView
+                shownSourceView = tabBarViewController.bottomBarView
             } else {
                 shownSourceView = rootVC.view
             }
@@ -163,7 +163,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             }
             
             if permissions.contains(.delete) {
-                elementTypesArray.append(.delete)
+                elementTypesArray.append(.moveToTrash)
             }
             
             if permissions.contains(.read) {
@@ -190,16 +190,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
-                
-            case .delete:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.delete(items: selectedItems)
-                } else {
-                    let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
-                    UIApplication.showErrorAlert(message: text)
-                }
+             
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
                 self.interactor.restore(items: selectedItems)
@@ -353,10 +344,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .downloadDocument:
                     action = UIAlertAction(title: TextConstants.actionDownload, style: .default, handler: { _ in
                         self.interactor.downloadDocument(items: currentItems)
-                    })
-                case .delete:
-                    action = UIAlertAction(title: TextConstants.actionDelete, style: .default, handler: { _ in
-                        self.interactor.delete(items: currentItems)
                     })
                 case .deletePermanently:
                     action = UIAlertAction(title: TextConstants.trashBinDeleteYesAction, style: .default, handler: { _ in

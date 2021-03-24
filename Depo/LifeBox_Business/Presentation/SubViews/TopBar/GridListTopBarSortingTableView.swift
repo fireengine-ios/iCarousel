@@ -17,11 +17,11 @@ class GridListTopBarSortingTableView: UITableViewController {
     
     weak var actionDelegate: GridListTopBarSortingTableViewDelegate?
     
-    let defaultCellHeight: CGFloat = 43.7
+    let defaultCellHeight: CGFloat = 46
     
     let gridListTableCellNibName = "GridListTopBarSortingTableCell"
     let gridListTableCellReuseIdentifier = "GridListTopBarSortingTableCell"
-    let separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    let separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -65,7 +65,7 @@ enum BottomBarActionType: Int {
                 return .privateShare
             case .info:
                 return .info
-            case .delete, .moveToTrash, .moveToTrashShared:
+            case .moveToTrash, .moveToTrashShared:
                 return .delete
             case .deletePermanently:
                 return .deletePermanently
@@ -91,7 +91,7 @@ enum BottomBarActionType: Int {
             case .info:
                 return .info
             case .delete:
-                return .delete
+                return .moveToTrash
             case .move:
                 return .move
             case .download:
