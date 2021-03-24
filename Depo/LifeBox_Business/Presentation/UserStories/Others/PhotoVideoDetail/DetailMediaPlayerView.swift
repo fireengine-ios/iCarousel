@@ -199,6 +199,9 @@ extension DetailMediaPlayerView: PlayerDelegate {
                 playPauseButton.setImage(UIImage(named: "play"), for: .normal)
         }
         
+        timeAfter.text = player.currentTimeInterval.playbackTime
+        totalDuration.text = player.maximumDuration.playbackTime
+        
         delegate?.playerIsReady()
     }
     
