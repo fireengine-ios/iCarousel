@@ -30,6 +30,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
         fileInfoTableViewAdapter = FileInfoTableViewAdapter(with: tableView,
                                                             delegate: self)
         output.viewIsReady()
