@@ -91,22 +91,24 @@ final class BottomActionsBarAnimator {
             view.frame = CGRect(x: self.originalX, y: sourceViewSize.height - self.originalY,
                                 width: sourceViewSize.width, height: self.height)
             
-            var newY = sourceViewSize.height - self.height
+            /// In case of missing container view
+//            var newY = sourceViewSize.height - self.height
             
-            let newTempOrigin = CGPoint(x: 0, y: newY)
-            let windowOrigin = sourceView.convert(newTempOrigin, to: nil)
+//            let newTempOrigin = CGPoint(x: 0, y: newY)
+//            let windowOrigin = sourceView.convert(newTempOrigin, to: nil)
+//
+//            if
+//                let bottomSafeInsetY = UIApplication.shared.keyWindow?.safeAreaInsets.bottom,
+//                bottomSafeInsetY > 0,
+//                windowOrigin.y + self.height > bottomSafeInsetY
+//            {
+//                newY -= bottomSafeInsetY
+//            }
             
-            if
-                let bottomSafeInsetY = UIApplication.shared.keyWindow?.safeAreaInsets.bottom,
-                bottomSafeInsetY > 0,
-                windowOrigin.y + self.height > bottomSafeInsetY
-            {
-                newY -= bottomSafeInsetY
-            }
-            
+            let newY = 0
             UIView.animate(withDuration: duration, animations: {
-                view.frame.origin = CGPoint(x: 0, y: newY)
                 view.superview?.isHidden = false
+                view.frame.origin = CGPoint(x: 0, y: newY)
             }, completion: { _ in
                 self.nextAnimation()
             })
