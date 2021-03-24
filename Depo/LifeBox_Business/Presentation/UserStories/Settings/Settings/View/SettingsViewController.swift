@@ -103,7 +103,6 @@ extension SettingsViewController: SettingsViewInput {
     }
 
     func updateUserDataUsageSection(usageData: SettingsStorageUsageResponseItem?) {
-        guard let usageData = usageData else { return }
         settingsTableViewAdapter.update(with: usageData)
     }
 }
