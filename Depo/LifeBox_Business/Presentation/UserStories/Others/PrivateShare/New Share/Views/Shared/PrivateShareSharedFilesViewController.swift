@@ -248,13 +248,11 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didStartSelection(selected: Int) {
         updateBars(isSelecting: true)
         isEditing = true
-        
     }
     
     func didEndSelection() {
         updateBars(isSelecting: false)
         isEditing = false
-        
     }
     
     func didChangeSelection(selectedItems: [WrapData]) {
@@ -278,6 +276,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         self.setupPlusButton()
         self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
         self.view.layoutSubviews()
+        
+        if !ReachabilityService.shared.isReachable {
+            UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        }
     }
     
     func showActions(for item: WrapData, sender: Any) {

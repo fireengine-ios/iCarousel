@@ -779,7 +779,10 @@ extension MoreFilesActionsInteractor {
 //                    }
                 } else {
                     debugLog("failAction 3 \(value.description)")
-                    self?.output?.operationFailed(type: elementType, message: value.description)
+                    
+                    let errorDescription = value.description == TextConstants.errorBadConnection ? TextConstants.errorConnectedToNetwork : value.description
+                    
+                    self?.output?.operationFailed(type: elementType, message: errorDescription)
                 }
             }
         }
