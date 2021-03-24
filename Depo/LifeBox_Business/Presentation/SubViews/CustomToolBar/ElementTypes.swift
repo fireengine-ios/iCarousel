@@ -15,7 +15,6 @@ enum UniversalViewType {
 enum ElementTypes {
     case share
     case info//one for alert one for tab
-    case delete
     case deletePermanently
     case emptyTrashBin
     case move
@@ -228,7 +227,7 @@ enum ElementTypes {
                 return TextConstants.stopSharingSuccess
             case .leaveSharing:
                 return TextConstants.leaveSharingSuccess
-            case .delete, .moveToTrashShared, .moveToTrash:
+            case .moveToTrashShared, .moveToTrash:
                 return TextConstants.deleteSuccess
             case .rename:
                 return TextConstants.renameSuccess
@@ -265,14 +264,7 @@ enum ElementTypes {
                 albums: TextConstants.moveToTrashAlbumsSuccessText,
                 folders: TextConstants.moveToTrashFoldersSuccessText
             )
-            
-        case .delete:
-            triplet = SuccessLocalizationTriplet(
-                items: TextConstants.deleteItemsSuccessText,
-                albums: TextConstants.deleteAlbumsSuccessText,
-                folders: TextConstants.deleteFoldersSuccessText
-            )
-            
+             
         case .restore:
             triplet = SuccessLocalizationTriplet(
                 items: TextConstants.restoreItemsSuccessText,
@@ -298,7 +290,7 @@ enum ElementTypes {
             return TextConstants.actionInfo
         case .download, .downloadDocument:
             return TextConstants.actionDownload
-        case .moveToTrash, .moveToTrashShared, .delete:
+        case .moveToTrash, .moveToTrashShared:
             return TextConstants.actionDelete
         case .restore:
             return TextConstants.actionSheetRestore

@@ -72,7 +72,6 @@ enum SnackbarType {
     init?(operationType: ElementTypes) {
         switch operationType {
         case .addToFavorites,
-             .delete,
              .download,
              .downloadDocument,
              .emptyTrashBin,
