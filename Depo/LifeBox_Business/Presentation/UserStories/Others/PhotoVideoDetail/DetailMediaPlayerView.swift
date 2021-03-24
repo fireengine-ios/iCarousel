@@ -198,6 +198,11 @@ extension DetailMediaPlayerView: PlayerDelegate {
             case .failed:
                 playPauseButton.setImage(UIImage(named: "play"), for: .normal)
         }
+        
+        timeAfter.text = player.currentTimeInterval.playbackTime
+        totalDuration.text = player.maximumDuration.playbackTime
+        
+        delegate?.playerIsReady()
     }
     
     func playerBufferingStateDidChange(_ player: Player) {

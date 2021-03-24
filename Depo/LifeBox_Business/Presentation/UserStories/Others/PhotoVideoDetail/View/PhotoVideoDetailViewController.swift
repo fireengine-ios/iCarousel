@@ -29,6 +29,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     var initinalBarStyle: NavigationBarStyles = .transparent
     
+    private var isGradientAllowed = true
+    
     private var isFullScreen = false {
         didSet {
             ///  ANIMATION
@@ -51,7 +53,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //                }
 //            }
             
-            gradientView.set(isHidden: isFullScreen, animated: true)
+            gradientView.set(isHidden: isFullScreen || !isGradientAllowed, animated: true)
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.setNavigationBarHidden(isFullScreen, animated: true)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
@@ -182,7 +184,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
-        cells.first?.setup(with: objects[selectedIndex], index: selectedIndex, isFullScreen: isFullScreen)
+        cells.first?.update(with: objects[selectedIndex], index: selectedIndex, isFullScreen: isFullScreen)
     }
     
     @objc func hideView() {
@@ -371,15 +373,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         return navigationController
     }
     
-    func updateExpiredItem(_ item: WrapData) {
-        guard let indexToChange = objects.firstIndex(where: { !$0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }),
-              objects[indexToChange].hasExpiredPreviewUrl() else {
-            return
-        }
-        update(item: item, at: indexToChange)
-    }
-    
-    
     func updateItem(_ item: WrapData) {
         guard let index = objects.firstIndex(where: { $0 == item }) else {
             return
@@ -466,7 +459,8 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
         editingTabBar.changeBar(style: barStyle)
         
-        gradientView.set(isHidden: isFullScreen || (object.fileType.isDocument || !object.fileType.isSupportedOpenType), animated: false)
+        isGradientAllowed = object.fileType.isContained(in: [.image, .video, .audio])
+        gradientView.set(isHidden: isFullScreen || !isGradientAllowed, animated: false)
         
         cell.setup(with: object, index: indexPath.row, isFullScreen: isFullScreen)
         
