@@ -180,6 +180,10 @@ extension DetailMediaPlayerView: PlayerDelegate {
     
     func playerReady(_ player: Player) {
         progressSlider.isUserInteractionEnabled = true
+        
+        timeAfter.text = player.currentTimeInterval.playbackTime
+        totalDuration.text = player.maximumDuration.playbackTime
+        
         delegate?.playerIsReady()
     }
     

@@ -47,7 +47,7 @@ final class TopBarSortingView: UIView, NibInit {
     weak var delegate: TopBarSortingViewDelegate?
 
     
-    func setupSortingMenu(sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest], defaultSortType: MoreActionsConfig.SortRullesType) {
+    func setupSortingMenu(sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest], defaultSortType: MoreActionsConfig.SortRullesType) {
         availableSortOptions = sortTypes
         currentSortOption = defaultSortType
     }
