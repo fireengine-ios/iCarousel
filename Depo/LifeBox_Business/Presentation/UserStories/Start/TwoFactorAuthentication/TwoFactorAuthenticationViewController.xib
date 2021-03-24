@@ -35,7 +35,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZZ-By-E4b">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZZ-By-E4b">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-N2-N7N">
@@ -136,6 +136,7 @@
         </view>
         <customObject id="Ebc-xL-lds" customClass="TwoFactorAuthenticationDesigner" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
+                <outlet property="contentViewHeightToScrollInnerViewConstaint" destination="7eP-uj-k65" id="GqR-HY-SLx"/>
                 <outlet property="descriptionLabel" destination="yIj-7j-Nxa" id="GzO-o4-jJm"/>
                 <outlet property="errorView" destination="ZOG-Q9-eRz" id="eeT-sp-pDX"/>
                 <outlet property="reasonLabel" destination="WNf-eD-Chw" id="cGw-47-6Zj"/>
