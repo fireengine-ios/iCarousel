@@ -49,7 +49,7 @@ final class SettingsTableViewAdapter: NSObject {
         tableView?.contentInset = .init(top: 5, left: 0, bottom: 64, right: 0)
     }
 
-    func update(with storageUsageData: SettingsStorageUsageResponseItem) {
+    func update(with storageUsageData: SettingsStorageUsageResponseItem?) {
         storageUsageInfo = storageUsageData
         reloadContent()
     }

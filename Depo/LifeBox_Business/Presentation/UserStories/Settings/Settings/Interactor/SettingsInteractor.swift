@@ -34,6 +34,8 @@ final class SettingsInteractor: SettingsInteractorInput {
             self?.output.updateStorageUsageDataInfo()
             self?.output.asyncOperationStoped()
         }, fail: { [weak self] errorResponse in
+            self?.userStorageInfo = nil
+            self?.output.updateStorageUsageDataInfo()
             self?.output.asyncOperationStoped()
             self?.output.didFailToRetrieveUsageData(error: errorResponse)
         })
