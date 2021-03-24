@@ -35,7 +35,7 @@ final class TopBarSortingView: UIView, NibInit {
         }
     }
     
-    private let floatingContainerWidth: CGFloat = 236
+    private let floatingContainerWidth: CGFloat = 192
     
     private var currentSortOption: MoreActionsConfig.SortRullesType = .AlphaBetricAZ {
         willSet {
