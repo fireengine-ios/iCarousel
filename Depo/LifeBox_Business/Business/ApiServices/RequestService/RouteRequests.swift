@@ -373,7 +373,8 @@ struct RouteRequests {
         enum Version_3 {
             private static let baseV3Url = baseUrl +/ "v3/files/%@"
             static let baseV3UrlString = baseV3Url.absoluteString
-            private static let baseV3UrlBulk = baseUrl +/ "v3/files/_bulk"
+            private static let baseV3General = baseUrl +/ "v3/files"
+            private static let baseV3UrlBulk = baseV3General +/ "_bulk"
             
             //"https://run.mocky.io/v3/d8067201-dc7d-4990-8467-b5b4de18e26a"//
             static let filesFromFolder = baseV3UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
@@ -388,8 +389,9 @@ struct RouteRequests {
             static let delete = baseV3UrlBulk +/ "delete"
             static let trash = baseV3UrlBulk +/ "trash"
             static let recover = baseV3UrlBulk +/ "recover"
+            static let deleteAll = baseV3General +/ "trash"
 
-            static let trashedBinList = baseUrl.absoluteString + "v3/files/trash?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
+            static let trashedBinList = baseV3General.absoluteString + "/trash?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
         }
     }
 
