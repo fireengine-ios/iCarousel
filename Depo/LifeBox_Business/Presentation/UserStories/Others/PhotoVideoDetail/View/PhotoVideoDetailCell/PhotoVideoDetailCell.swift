@@ -113,6 +113,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 playerView.setControls(isHidden: isFullScreen)
                 tapGesture.isEnabled = true
                 
+                playerView.delegate = self
                 playerView.set(url: url)
                 
             case .audio:
@@ -128,6 +129,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 playerView.setControls(isHidden: isFullScreen)
                 tapGesture.isEnabled = true
                 
+                playerView.delegate = self
                 playerView.set(url: url)
                 
             case .image:
@@ -223,6 +225,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         placeholderImageView.isHidden = true
         
         playerView.stop()
+        playerView.delegate = nil
         playerView.isHidden = true
     }
     

@@ -194,6 +194,8 @@ extension DetailMediaPlayerView: PlayerDelegate {
             case .failed:
                 playPauseButton.setImage(UIImage(named: "play"), for: .normal)
         }
+        
+        delegate?.playerIsReady()
     }
     
     func playerBufferingStateDidChange(_ player: Player) {
