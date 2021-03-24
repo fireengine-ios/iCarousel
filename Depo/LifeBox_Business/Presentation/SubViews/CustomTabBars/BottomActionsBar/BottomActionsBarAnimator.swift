@@ -58,6 +58,7 @@ final class BottomActionsBarAnimator {
             
             UIView.animate(withDuration: duration, animations: {
                 view.frame.origin = CGPoint(x: 0, y: newY)
+                view.superview?.isHidden = true
             }, completion: { _ in
                 view.removeFromSuperview()
                 self.nextAnimation()
@@ -105,7 +106,7 @@ final class BottomActionsBarAnimator {
             
             UIView.animate(withDuration: duration, animations: {
                 view.frame.origin = CGPoint(x: 0, y: newY)
-                
+                view.superview?.isHidden = false
             }, completion: { _ in
                 self.nextAnimation()
             })

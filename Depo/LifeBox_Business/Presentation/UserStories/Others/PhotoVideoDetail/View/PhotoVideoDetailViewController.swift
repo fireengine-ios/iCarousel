@@ -53,8 +53,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //                }
 //            }
             
-            gradientView.set(isHidden: isFullScreen || !isGradientAllowed, animated: true)
-            editingTabBar.view.isHidden = isFullScreen
+            if isFullScreen {
+                gradientView.set(isHidden: !isGradientAllowed, animated: true)
+                editingTabBar.hideBar(animated: true)
+                
+            } else {
+                gradientView.set(isHidden: true, animated: true)
+                editingTabBar.showBar(animated: true, onView: viewForBottomBar)
+            }
+            
             navigationController?.setNavigationBarHidden(isFullScreen, animated: true)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             

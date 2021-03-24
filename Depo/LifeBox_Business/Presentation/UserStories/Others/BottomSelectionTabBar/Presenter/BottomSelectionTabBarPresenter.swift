@@ -61,7 +61,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             shownSourceView = newSourceView
         } else {
             if let tabBarViewController = rootVC as? TabBarViewController {
-                shownSourceView = tabBarViewController.mainContentView
+                shownSourceView = tabBarViewController.bottomBarView
             } else {
                 shownSourceView = rootVC.view
             }

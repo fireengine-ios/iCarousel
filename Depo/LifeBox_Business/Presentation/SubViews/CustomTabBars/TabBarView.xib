@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
+                <outlet property="bottomBarView" destination="ozv-Yv-Xg7" id="LSZ-1m-e3e"/>
                 <outlet property="bottomTabBarConstraint" destination="Nv2-yE-i9E" id="iIg-GK-gy1"/>
                 <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
                 <outlet property="mainContentView" destination="FJl-Cl-AGP" id="bHk-JG-24y"/>
@@ -34,6 +35,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="802"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="lifeBox_Business" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="802" width="414" height="0.0"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="oLW-8y-KOm"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxz-1O-hIp" customClass="UploadProgressView" customModule="lifeBox_Business" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="802" width="414" height="0.0"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -41,12 +49,9 @@
                                 <constraint firstAttribute="height" id="avF-El-1x1"/>
                             </constraints>
                         </view>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="lifeBox_Business" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="802" width="414" height="0.0"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" id="oLW-8y-KOm"/>
-                            </constraints>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozv-Yv-Xg7">
+                            <rect key="frame" x="0.0" y="802" width="414" height="94"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="CustomTabBar" customModule="lifeBox_Business" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="802" width="414" height="60"/>
@@ -68,11 +73,15 @@
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="W0f-ko-odc" secondAttribute="bottom" id="N1V-LQ-PIK"/>
                         <constraint firstAttribute="trailing" secondItem="i0i-at-wPy" secondAttribute="trailing" id="NOK-Ih-oLn"/>
                         <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="Pdh-iF-uTx" secondAttribute="bottom" id="Nv2-yE-i9E"/>
+                        <constraint firstItem="ero-vK-F2b" firstAttribute="trailing" secondItem="ozv-Yv-Xg7" secondAttribute="trailing" id="eqZ-Vj-rgB"/>
                         <constraint firstItem="ero-vK-F2b" firstAttribute="trailing" secondItem="gxz-1O-hIp" secondAttribute="trailing" id="hxk-7z-Xx9"/>
                         <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="iee-hk-ssn"/>
                         <constraint firstItem="gxz-1O-hIp" firstAttribute="leading" secondItem="ero-vK-F2b" secondAttribute="leading" id="j0G-2e-cWg"/>
+                        <constraint firstAttribute="bottom" secondItem="ozv-Yv-Xg7" secondAttribute="bottom" id="rD0-7p-WWm"/>
                         <constraint firstItem="W0f-ko-odc" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="rlX-hu-WYO"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="uSv-rF-MBk"/>
+                        <constraint firstItem="ozv-Yv-Xg7" firstAttribute="leading" secondItem="ero-vK-F2b" secondAttribute="leading" id="vbJ-hv-sZD"/>
+                        <constraint firstItem="ozv-Yv-Xg7" firstAttribute="top" secondItem="ero-vK-F2b" secondAttribute="bottom" constant="-60" id="wmR-LG-NLA"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="gxz-1O-hIp" secondAttribute="bottom" id="yYv-UQ-NGV"/>
                     </constraints>
                 </view>
