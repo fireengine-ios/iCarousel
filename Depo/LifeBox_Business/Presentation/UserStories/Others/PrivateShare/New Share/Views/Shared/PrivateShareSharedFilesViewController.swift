@@ -427,14 +427,7 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onSettingsButton() {
-        var controller: UIViewController?
-        
-        if Device.isIpad {
-            controller = router.settingsIpad(settingsController: router.settings)
-        } else {
-            controller = router.settings
-        }
-        
+        let controller = router.settings
         router.pushViewController(viewController: controller!)
     }
 
