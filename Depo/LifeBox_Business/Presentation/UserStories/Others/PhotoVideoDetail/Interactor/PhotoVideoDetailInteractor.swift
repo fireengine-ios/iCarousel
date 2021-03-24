@@ -100,12 +100,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
     }
     
-    func updateExpiredItem(_ item: WrapData) {
-        if let index = allItems.firstIndex(where: { $0 == item && $0.hasExpiredPreviewUrl() }) {
-            array[index] = item
-        }
-    }
-    
     func trackVideoStart() {
         if
             let index = currentItemIndex,

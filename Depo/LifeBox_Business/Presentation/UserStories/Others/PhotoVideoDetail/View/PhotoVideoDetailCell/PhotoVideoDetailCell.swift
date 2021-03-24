@@ -100,7 +100,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         currentItemId = object.uuid
         fileType = object.fileType
         
-        
         switch fileType {
             case .video:
                 guard let url = object.metaData?.videoPreviewURL, !url.isExpired else {
@@ -114,6 +113,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 playerView.setControls(isHidden: isFullScreen)
                 tapGesture.isEnabled = true
                 
+                playerView.delegate = self
                 playerView.set(url: url)
                 
             case .audio:
@@ -129,6 +129,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 playerView.setControls(isHidden: isFullScreen)
                 tapGesture.isEnabled = true
                 
+                playerView.delegate = self
                 playerView.set(url: url)
                 
             case .image:
@@ -162,9 +163,16 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 } else {
                     setPlaceholder()
                     showNoPreviewMessage()
-                    delegate?.loadingFinished()
                 }
         }
+    }
+    
+    func update(with object: Item, index: Int, isFullScreen: Bool) {
+        guard !isNeedToUpdateUrl else {
+            return
+        }
+        
+        setup(with: object, index: index, isFullScreen: isFullScreen)
     }
     
     func didEndDisplaying() {
@@ -178,6 +186,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             return
         }
         
+        isNeedToUpdateUrl = false
         setPlaceholder()
         showNoPreviewMessage()
     }
@@ -216,6 +225,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         placeholderImageView.isHidden = true
         
         playerView.stop()
+        playerView.delegate = nil
         playerView.isHidden = true
     }
     

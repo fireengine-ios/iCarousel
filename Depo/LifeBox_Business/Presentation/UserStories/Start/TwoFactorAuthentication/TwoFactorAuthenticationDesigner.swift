@@ -74,4 +74,14 @@ final class TwoFactorAuthenticationDesigner: NSObject {
             newValue.layer.cornerRadius = 5
         }
     }
+
+    @IBOutlet private weak var contentViewHeightToScrollInnerViewConstaint: NSLayoutConstraint! {
+        willSet {
+            let window = UIApplication.shared.keyWindow
+            let topPadding = window?.safeAreaInsets.top ?? 0
+            if topPadding > 20 {
+                newValue.constant = -topPadding
+            }
+        }
+    }
 }

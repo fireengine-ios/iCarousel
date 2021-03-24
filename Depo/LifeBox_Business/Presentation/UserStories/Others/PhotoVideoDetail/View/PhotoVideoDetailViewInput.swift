@@ -30,7 +30,5 @@ protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     
     func showValidateNameSuccess(name: String)
     
-    func updateExpiredItem(_ item: WrapData)
-    
     func updateItem(_ item: WrapData)
 }

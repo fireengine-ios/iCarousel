@@ -29,8 +29,6 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     func replaceUploaded(_ item: WrapData)
     
-    func updateExpiredItem(_ item: WrapData)
-    
     func appendItems(_ items: [Item])
     
     func onRename(newName: String)
