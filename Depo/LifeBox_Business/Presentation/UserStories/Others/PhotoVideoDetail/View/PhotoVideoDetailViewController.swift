@@ -182,7 +182,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
-        cells.first?.setup(with: objects[selectedIndex], index: selectedIndex, isFullScreen: isFullScreen)
+        cells.first?.update(with: objects[selectedIndex], index: selectedIndex, isFullScreen: isFullScreen)
     }
     
     @objc func hideView() {
