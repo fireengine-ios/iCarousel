@@ -33,6 +33,13 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var musicBar: MusicBar!
     
+    @IBOutlet weak var bottomBarView: UIView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.backgroundColor = .white
+        }
+    }
+    
     @IBOutlet weak var uploadProgressView: UploadProgressView! {
         willSet {
             newValue.delegate = self
