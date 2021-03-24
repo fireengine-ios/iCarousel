@@ -256,7 +256,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             } else {
                 self.changeNavbarLargeTitle(true, style: .white)
                 if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
-                    self.setNavSearchConntroller(nil)
+                    self.setNavSearchConntroller(self.searchController)
                 }
             }
         }
@@ -549,9 +549,9 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
             if case .innerFolder = self.shareType {
                 
             } else {
-                self.changeNavbarLargeTitle(false, style: .white)
+                self.changeNavbarLargeTitle(true, style: .white)
                 if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
-                    self.setNavSearchConntroller(nil)
+                    self.setNavSearchConntroller(self.searchController)
                 }
             }
         }
