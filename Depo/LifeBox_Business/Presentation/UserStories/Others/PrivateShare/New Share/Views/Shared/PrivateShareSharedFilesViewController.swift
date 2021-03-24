@@ -301,6 +301,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func onEmptyViewUpdate(isHidden: Bool) {
         if shareType == .trashBin {
             navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: !isHidden)
+            navBarManager.setupLargetitle(isLarge: false)
             topBarSortingBar.isHidden = !isHidden
         }
     }
