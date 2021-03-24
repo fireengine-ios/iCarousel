@@ -29,6 +29,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     var initinalBarStyle: NavigationBarStyles = .transparent
     
+    private var isGradientAllowed = true
+    
     private var isFullScreen = false {
         didSet {
             ///  ANIMATION
@@ -51,7 +53,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //                }
 //            }
             
-            gradientView.set(isHidden: isFullScreen, animated: true)
+            gradientView.set(isHidden: isFullScreen || !isGradientAllowed, animated: true)
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.setNavigationBarHidden(isFullScreen, animated: true)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
@@ -457,7 +459,8 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
         editingTabBar.changeBar(style: barStyle)
         
-        gradientView.set(isHidden: isFullScreen || (object.fileType.isDocument || !object.fileType.isSupportedOpenType), animated: false)
+        isGradientAllowed = object.fileType.isContained(in: [.image, .video, .audio])
+        gradientView.set(isHidden: isFullScreen || !isGradientAllowed, animated: false)
         
         cell.setup(with: object, index: indexPath.row, isFullScreen: isFullScreen)
         
