@@ -34,7 +34,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
         var elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
         
-        if items.count == 1 && trashBinRelated {
+        if items.count == 1 && !trashBinRelated {
             elementsConfig.append(.info)
         }
 
