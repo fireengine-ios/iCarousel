@@ -371,15 +371,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         return navigationController
     }
     
-    func updateExpiredItem(_ item: WrapData) {
-        guard let indexToChange = objects.firstIndex(where: { !$0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }),
-              objects[indexToChange].hasExpiredPreviewUrl() else {
-            return
-        }
-        update(item: item, at: indexToChange)
-    }
-    
-    
     func updateItem(_ item: WrapData) {
         guard let index = objects.firstIndex(where: { $0 == item }) else {
             return
