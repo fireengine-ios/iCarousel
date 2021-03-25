@@ -5,14 +5,12 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="ZzB-kC-yvt" id="Ggb-ac-yeQ"/>
-                <outlet property="gradientView" destination="KWJ-pd-yH0" id="o0w-Hz-2zg"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kbZ-Zd-ek1"/>
                 <outlet property="viewForBottomBar" destination="EkB-f5-2OH" id="vOp-R9-AI9"/>
             </connections>
@@ -33,10 +31,6 @@
                     </collectionViewFlowLayout>
                     <cells/>
                 </collectionView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KWJ-pd-yH0" customClass="MediaContentGradientView" customModule="lifeBox_Business" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EkB-f5-2OH">
                     <rect key="frame" x="0.0" y="750" width="390" height="94"/>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,22 +42,13 @@
                 <constraint firstAttribute="trailing" secondItem="EkB-f5-2OH" secondAttribute="trailing" id="6NC-Rh-Ca5"/>
                 <constraint firstItem="ZzB-kC-yvt" firstAttribute="leading" secondItem="hTs-d8-e25" secondAttribute="leading" id="70x-gj-egE"/>
                 <constraint firstItem="ZzB-kC-yvt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="85L-gy-VwC"/>
-                <constraint firstAttribute="bottom" secondItem="KWJ-pd-yH0" secondAttribute="bottom" id="DqM-mg-yVx"/>
                 <constraint firstItem="ZzB-kC-yvt" firstAttribute="trailing" secondItem="hTs-d8-e25" secondAttribute="trailing" id="QY1-TF-elS"/>
-                <constraint firstItem="KWJ-pd-yH0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="T4p-dy-s0o"/>
                 <constraint firstAttribute="bottom" secondItem="ZzB-kC-yvt" secondAttribute="bottom" id="VeL-eh-aLK"/>
                 <constraint firstItem="EkB-f5-2OH" firstAttribute="top" secondItem="hTs-d8-e25" secondAttribute="bottom" constant="-60" id="aAd-SR-dzc"/>
                 <constraint firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="fDW-8e-SDZ"/>
-                <constraint firstItem="KWJ-pd-yH0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nLZ-vT-I5q"/>
-                <constraint firstItem="KWJ-pd-yH0" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="qjf-mk-EGI"/>
                 <constraint firstItem="EkB-f5-2OH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vGC-fV-ORB"/>
             </constraints>
             <point key="canvasLocation" x="30.769230769230766" y="63.270142180094787"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
