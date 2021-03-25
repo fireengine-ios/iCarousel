@@ -179,7 +179,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         switch type {
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
-        case .moveToTrash, .restore, .moveToTrashShared:
+            case .moveToTrash, .restore, .moveToTrashShared, .deletePermanently:
             interactor.deleteSelectedItem(type: type)
         default:
             break
