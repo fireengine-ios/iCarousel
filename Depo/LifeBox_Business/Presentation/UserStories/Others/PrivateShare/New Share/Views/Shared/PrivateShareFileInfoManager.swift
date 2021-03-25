@@ -34,7 +34,7 @@ final class PrivateShareFileInfoManager {
         return queue
     }()
     
-    private(set) var sorting: SortedRules = .timeUp
+    private(set) var sorting: SortedRules = .lastModifiedTimeUp
     private(set) var type: PrivateShareType = .byMe
     private(set) var sortedItems = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()

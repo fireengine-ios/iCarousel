@@ -192,7 +192,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private func setupSortingBar() {
         let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
            
-        topBarSortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .TimeNewOld)
+        topBarSortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .lastModifiedTimeNewOld)
         
         collectionView.addSubview(topBarSortingBar)
         
