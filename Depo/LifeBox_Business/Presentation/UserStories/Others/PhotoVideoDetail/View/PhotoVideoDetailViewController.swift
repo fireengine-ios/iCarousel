@@ -17,19 +17,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
     
-    @IBOutlet weak var gradientView: MediaContentGradientView! {
-        willSet {
-            newValue.isUserInteractionEnabled = false
-        }
-    }
-    
     var status: ItemStatus = .active
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
     
     var initinalBarStyle: NavigationBarStyles = .transparent
-    
-    private var isGradientAllowed = true
     
     private var isFullScreen = false {
         didSet {
@@ -54,11 +46,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //            }
             
             if isFullScreen {
-                gradientView.set(isHidden: true, animated: true)
                 editingTabBar.hideBar(animated: true)
-                
             } else {
-                gradientView.set(isHidden: !isGradientAllowed, animated: true)
                 editingTabBar.showBar(animated: true, onView: viewForBottomBar)
             }
             
@@ -465,9 +454,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         
         let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
         editingTabBar.changeBar(style: barStyle)
-        
-        isGradientAllowed = object.fileType.isContained(in: [.image, .video, .audio])
-        gradientView.set(isHidden: isFullScreen || !isGradientAllowed, animated: false)
+        viewForBottomBar.backgroundColor = object.fileType.isDocument ? .white : .clear
         
         cell.setup(with: object, index: indexPath.row, isFullScreen: isFullScreen)
         
