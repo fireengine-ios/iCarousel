@@ -168,8 +168,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 
                 if fileType.isSupportedOpenType {
                     
-                    guard let url = object.metaData?.documentPreviewURL, !url.isExpired else {
-                        processMissingUrl(at: index, isFullRequired: false)
+                    guard let url = object.urlToFile, !url.isExpired else {
+                        processMissingUrl(at: index, isFullRequired: true)
                         return
                     }
                     
