@@ -70,7 +70,7 @@ struct RouteRequests {
     }()
     
     
-    static let privacyPolicy = baseUrl +/ "privacyPolicy/get/\(Device.locale)"
+    static let privacyPolicy = "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
     
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
@@ -198,16 +198,16 @@ struct RouteRequests {
     static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
     
     //MARK : Faq
-    static var faqContentUrl: String {
+    static var faqUrl: String {
         switch currentServerEnvironment {
         case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
-                                           "https://mylifebox.com/faq/?lang=%@"
+                                           "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
-                                              "https://mylifebox.com/faq/?lang=%@"
+                                              "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
             
         case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                                     "https://mylifebox.com/faq/?lang=%@"
+                                     "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
         }
     }
 
