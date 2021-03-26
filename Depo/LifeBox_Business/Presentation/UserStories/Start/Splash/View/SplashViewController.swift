@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SplashViewController: ViewController, SplashViewInput, ErrorPresenter {
+class SplashViewController: ViewController, NibInit, SplashViewInput, ErrorPresenter {
 
     var output: SplashViewOutput!
 
@@ -17,7 +17,12 @@ class SplashViewController: ViewController, SplashViewInput, ErrorPresenter {
         super.viewDidLoad()
         output.viewIsReady()
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        output.securityValidation()
+    }
 
     // MARK: SplashViewInput
     func setupInitialState() {

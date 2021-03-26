@@ -16,7 +16,7 @@ class Device {
     
     static let applicationId = "665036334"
     
-    static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es", "sq", "fr"]
+    static private let supportedLanguages = ["tr", "en"]
     static private let defaultLocale = "en"
     
     static func documentsFolderUrl(withComponent: String) -> URL {

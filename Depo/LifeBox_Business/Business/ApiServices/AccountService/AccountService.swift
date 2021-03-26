@@ -616,37 +616,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
-    func faqUrl(_ handler: @escaping (String) -> Void) {
-        debugLog("AccountService faqUrl")
-        
-        func defaultURLCallback() {
-            let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
-            handler(defaultFaqUrl)
-        }
-        
-        let tokenStorage: TokenStorage = factory.resolve()
-        guard tokenStorage.accessToken != nil else {
-            defaultURLCallback()
-            return
-        }
-        
-        SessionManager.customDefault
-            .request(RouteRequests.Account.getFaqUrl)
-            .customValidate()
-            .responseJSON(queue: .global()) { response in
-                switch response.result {
-                case .success(let json):
-                    if let json = json as? [String: String], let faqUrl = json["value"] {
-                        handler(faqUrl)
-                    } else {
-                        defaultURLCallback()
-                    }
-                case .failure(_):
-                    defaultURLCallback()
-                }
-        }
-    }
-    
     func feedbackEmail(_ handler: @escaping (ResponseResult<FeedbackEmailResponse>) -> Void) {
         debugLog("AccountService feedbackEmail")
         

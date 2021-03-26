@@ -18,7 +18,14 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func viewIsReady() {
         interactor.trackScreen()
-
+    }
+    
+    func securityValidation() {
+        guard !UIDevice.current.isJailBroken else {
+            showDeviceIsJailBroken()
+            return
+        }
+        
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] shouldProceed in
             guard shouldProceed else {
                 self?.showUpdateIsRequiredPopup()
@@ -27,6 +34,18 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
 
             self?.showPasscodeIfNeed()
         }
+    }
+    
+    private func showDeviceIsJailBroken() {
+        let popup = PopUpController.with(title: TextConstants.rootDevicePopupTitle, message: TextConstants.rootDevicePopupDescription, image: .error, buttonTitle: TextConstants.rootDevicePopupCloseAppButton) { popup in
+            debugLog("Device is jailBroken. The app will be killed.")
+            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                exit(EXIT_SUCCESS)
+            })
+        }
+        UIApplication.topController()?.present(popup, animated: false, completion: nil)
+        return
     }
     
     private func showUpdateIsRequiredPopup() {

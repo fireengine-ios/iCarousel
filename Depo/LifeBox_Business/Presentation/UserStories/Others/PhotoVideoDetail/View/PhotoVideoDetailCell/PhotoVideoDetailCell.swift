@@ -244,6 +244,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         placeholderImageView.isHidden = true
         
         playerView.stop()
+        playerView.clearArtwork()
         playerView.delegate = nil
         playerView.isHidden = true
     }
