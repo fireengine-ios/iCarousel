@@ -1499,3 +1499,10 @@ extension TextConstants {
     static let trashBinEmptyTrashNoAction = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_NO_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinEmptyTrashSucceed = NSLocalizedString("business_app_trash_bin_empty_trash_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+
+extension TextConstants {
+    static let rootDevicePopupTitle = NSLocalizedString("business_app_root_device_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let rootDevicePopupDescription = NSLocalizedString("business_app_root_device_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let rootDevicePopupCloseAppButton = NSLocalizedString("business_app_root_device_popup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
