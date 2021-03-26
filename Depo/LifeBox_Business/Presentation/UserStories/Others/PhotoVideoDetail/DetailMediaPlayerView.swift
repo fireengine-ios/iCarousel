@@ -274,7 +274,7 @@ extension DetailMediaPlayerView: PlayerPlaybackDelegate {
         let ratio = Float(afterStart / player.maximumDuration)
             
         timeAfter.text = afterStart.playbackTime
-        totalDuration.text = (player.maximumDuration - afterStart).playbackTime
+        totalDuration.text = player.maximumDuration.playbackTime
         
         if !progressSlider.isTracking {
             progressSlider.setValue(ratio, animated: false)
