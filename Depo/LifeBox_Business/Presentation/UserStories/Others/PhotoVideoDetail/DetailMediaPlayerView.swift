@@ -82,6 +82,16 @@ final class DetailMediaPlayerView: UIView, FromNib {
         return player
     }()
     
+    private lazy var artworkImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
+        
+        return imageView
+    }()
+    
     weak var delegate: DetailMediaPlayerViewDelegate?
     
     
@@ -104,6 +114,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
         super.layoutSubviews()
         
         mediaPlayer.view.frame = playerContainerView.bounds
+        addArtworkImageView()
     }
     
     
@@ -167,12 +178,41 @@ final class DetailMediaPlayerView: UIView, FromNib {
         mediaPlayer.seek(to: CMTime(seconds: time, preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
     }
     
+    private func addArtworkImageView() {
+        artworkImageView.frame = CGRect(x: 0, y: 0, width: 335, height: 335)
+        artworkImageView.center = self.center
+        
+        addSubview(artworkImageView)
+    }
+    
     private func resetControls() {
         timeAfter.text = "00:00"
         totalDuration.text = "00:00"
         playPauseButton.setImage(UIImage(named: "play"), for: .normal)
         
         progressSlider.value = 0
+    }
+    
+    private func getArtwork(_ player: Player) {
+        guard let metadataList = player.asset?.metadata else {
+            return
+        }
+        
+        for item in metadataList {
+            guard let key = item.commonKey?.rawValue, let value = item.value else {
+                continue
+            }
+            
+            switch key {
+            case "artwork" where value is Data:
+                guard let data = value as? Data else {
+                    continue
+                }
+                artworkImageView.image = UIImage(data: data)
+            default:
+                continue
+            }
+        }
     }
 }
 
@@ -196,17 +236,24 @@ extension DetailMediaPlayerView: PlayerDelegate {
                 playPauseButton.setImage(UIImage(named: "play"), for: .normal)
                 
             case .failed:
-                playPauseButton.setImage(UIImage(named: "play"), for: .normal)
+                resetControls()
         }
-        
-        timeAfter.text = player.currentTimeInterval.playbackTime
-        totalDuration.text = player.maximumDuration.playbackTime
-        
-        delegate?.playerIsReady()
     }
     
     func playerBufferingStateDidChange(_ player: Player) {
-        
+        switch player.bufferingState {
+        case .ready:
+            progressSlider.isUserInteractionEnabled = true
+            
+            timeAfter.text = player.currentTimeInterval.playbackTime
+            totalDuration.text = player.maximumDuration.playbackTime
+            
+            getArtwork(player)
+            
+            delegate?.playerIsReady()
+        default:
+            break
+        }
     }
     
     func playerBufferTimeDidChange(_ bufferTime: Double) {
@@ -227,7 +274,7 @@ extension DetailMediaPlayerView: PlayerPlaybackDelegate {
         let ratio = Float(afterStart / player.maximumDuration)
             
         timeAfter.text = afterStart.playbackTime
-        totalDuration.text = player.maximumDuration.playbackTime
+        totalDuration.text = (player.maximumDuration - afterStart).playbackTime
         
         if !progressSlider.isTracking {
             progressSlider.setValue(ratio, animated: false)
