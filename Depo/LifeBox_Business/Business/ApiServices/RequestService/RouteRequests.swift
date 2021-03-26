@@ -69,8 +69,18 @@ struct RouteRequests {
         }
     }()
     
-    
-    static let privacyPolicy = "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
+    //MARK: Privacy Policy
+    static var privacyPolicy: String {
+        //TODO: set urls depending on environment
+        switch currentServerEnvironment {
+        case .production:
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
+        case .preProduction:
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
+        case .test:
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
+        }
+    }
     
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
@@ -199,15 +209,17 @@ struct RouteRequests {
     
     //MARK : Faq
     static var faqUrl: String {
+        //TODO: set urls depending on environment
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
-                                           "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
-            
-        case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
-                                              "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
-            
-        case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                                     "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
+        case .production:
+            return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
+                "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
+        case .preProduction:
+            return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
+                "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
+        case .test:
+            return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
+                "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
         }
     }
 
