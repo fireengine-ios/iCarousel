@@ -24,6 +24,12 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }
     @IBOutlet private weak var activity: UIActivityIndicatorView!
     @IBOutlet private weak var placeholderImageView: UIImageView!
+    @IBOutlet private weak var gradientView: MediaContentGradientView! {
+        willSet {
+            newValue.isUserInteractionEnabled = false
+        }
+    }
+    
     @IBOutlet private weak var playerView: DetailMediaPlayerView! {
         willSet {
             newValue.delegate = self
@@ -43,11 +49,16 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         return gesture
     }()
     
+    private var isGradientHidden = true
     private var isNeedToUpdateWebView = true
     private var isNeedToUpdateUrl = false
     private var oldFrame = CGRect.zero
     private var currentItemId = ""
-    private var fileType: FileType = .unknown
+    private var fileType: FileType = .unknown {
+        didSet {
+            isGradientHidden = !fileType.isContained(in: [.audio, .video, .image])
+        }
+    }
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
     
@@ -99,15 +110,18 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         currentItemId = object.uuid
         fileType = object.fileType
+        gradientView.set(isHidden: isFullScreen || isGradientHidden, animated: false)
         
         switch fileType {
             case .video:
+                
+                backgroundColor = .clear
+                
                 guard let url = object.metaData?.videoPreviewURL, !url.isExpired else {
                     processMissingUrl(at: index, isFullRequired: false)
                     return
                 }
                 
-                backgroundColor = .clear
                 imageScrollView.backgroundColor = .black
                 playerView.isHidden = false
                 playerView.setControls(isHidden: isFullScreen)
@@ -117,12 +131,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 playerView.set(url: url)
                 
             case .audio:
+                
+                backgroundColor = .clear
+                
                 guard let url = object.urlToFile, !url.isExpired else {
                     processMissingUrl(at: index, isFullRequired: true)
                     return
                 }
                 
-                backgroundColor = .clear
                 imageScrollView.backgroundColor = .black
 //                imageScrollView.imageView.loadImageIncludingGif(with: object)
                 playerView.isHidden = false
@@ -133,12 +149,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 playerView.set(url: url)
                 
             case .image:
+                
+                backgroundColor = .clear
+                
                 guard let url = object.metaData?.largeUrl, !url.isExpired else {
                     processMissingUrl(at: index, isFullRequired: false)
                     return
                 }
                 
-                backgroundColor = .clear
                 imageScrollView.backgroundColor = .black
                 imageScrollView.isHidden = false
                 imageScrollView.imageView.loadImageIncludingGif(with: object)
@@ -198,7 +216,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         imageScrollView.contentInsetAdjustmentBehavior = .never
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
     }
     
     private func reset() {
@@ -231,6 +250,9 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     
     @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
         playerView.toggleControlsVisibility()
+        if !isGradientHidden {
+            gradientView.toggleVisibility()
+        }
         delegate?.tapOnCellForFullScreen()
     }
 }
@@ -260,9 +282,10 @@ extension PhotoVideoDetailCell: WKNavigationDelegate {
 
 extension PhotoVideoDetailCell: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer == tapGesture, otherGestureRecognizer == doubleTapWebViewGesture {
-            return false
+        if gestureRecognizer == tapGesture {
+            return !(otherGestureRecognizer == doubleTapWebViewGesture || otherGestureRecognizer is UIPanGestureRecognizer)
         }
+        
         return true
     }
 }

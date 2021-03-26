@@ -25,6 +25,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Dt-Yi-4DR" customClass="MediaContentGradientView" customModule="lifeBox_Business" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="269" height="250"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="JVY-Sc-8sq">
                         <rect key="frame" x="124.5" y="115" width="20" height="20"/>
                     </activityIndicatorView>
@@ -39,22 +43,27 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="0Dt-Yi-4DR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8sn-XP-nNc"/>
                 <constraint firstItem="vGW-xm-Jy7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8wZ-NE-75O"/>
                 <constraint firstAttribute="trailing" secondItem="Z4w-b9-iqY" secondAttribute="trailing" id="Aqs-OC-WYk"/>
                 <constraint firstAttribute="bottom" secondItem="Z4w-b9-iqY" secondAttribute="bottom" id="Bte-Wv-czw"/>
                 <constraint firstItem="vGW-xm-Jy7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JVq-N4-FDW"/>
                 <constraint firstItem="6Om-pX-vip" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Jy7-P1-xAm"/>
+                <constraint firstAttribute="trailing" secondItem="0Dt-Yi-4DR" secondAttribute="trailing" id="M0c-Gw-gNO"/>
                 <constraint firstAttribute="bottom" secondItem="vGW-xm-Jy7" secondAttribute="bottom" id="Ppj-jx-2QC"/>
+                <constraint firstItem="0Dt-Yi-4DR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Qv6-6v-PRd"/>
                 <constraint firstItem="6Om-pX-vip" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="T9n-JY-N9O"/>
                 <constraint firstAttribute="trailing" secondItem="vGW-xm-Jy7" secondAttribute="trailing" id="TTN-TF-VwY"/>
                 <constraint firstItem="JVY-Sc-8sq" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="aYa-9y-9oN"/>
                 <constraint firstItem="Z4w-b9-iqY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="d54-Gf-koN"/>
                 <constraint firstItem="JVY-Sc-8sq" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="off-Ep-f2O"/>
                 <constraint firstItem="Z4w-b9-iqY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="oxT-WK-L8V"/>
+                <constraint firstAttribute="bottom" secondItem="0Dt-Yi-4DR" secondAttribute="bottom" id="rSi-T5-7Pv"/>
             </constraints>
             <size key="customSize" width="269" height="250"/>
             <connections>
                 <outlet property="activity" destination="JVY-Sc-8sq" id="nRu-oT-LPY"/>
+                <outlet property="gradientView" destination="0Dt-Yi-4DR" id="9rN-ZQ-DIt"/>
                 <outlet property="imageScrollView" destination="vGW-xm-Jy7" id="zw5-gl-tsP"/>
                 <outlet property="placeholderImageView" destination="6Om-pX-vip" id="Po9-l7-Bit"/>
                 <outlet property="playerView" destination="Z4w-b9-iqY" id="QQt-8G-qm3"/>
