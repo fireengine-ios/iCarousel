@@ -32,11 +32,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         let trashBinRelated = shareType?.isTrashBinRelated ?? false
 
         let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
-        var elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
-        
-        if items.count == 1 && !trashBinRelated {
-            elementsConfig.append(.info)
-        }
+        let elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
 
         let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque)
         setupConfig(withConfig: config)
