@@ -157,6 +157,11 @@ final class DetailMediaPlayerView: UIView, FromNib {
         setControls(isHidden: !playbackControlsView.isHidden)
     }
     
+    func clearArtwork() {
+        artworkImageView.image = nil
+        artworkImageView.isHidden = true
+    }
+    
     //MARK: Private
     
     @IBAction private func onPlayPause(_ sender: Any) {
@@ -208,6 +213,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
                 guard let data = value as? Data else {
                     continue
                 }
+                artworkImageView.isHidden = false
                 artworkImageView.image = UIImage(data: data)
             default:
                 continue
