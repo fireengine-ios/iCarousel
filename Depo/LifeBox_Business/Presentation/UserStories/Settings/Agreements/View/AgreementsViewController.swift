@@ -14,7 +14,6 @@ final class AgreementsViewController: BaseViewController, NibInit {
     //MARK: - Private properties
     
     private let eulaService = EulaService()
-    private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
     
     private lazy var webView: WKWebView = {
         let contentController = WKUserContentController()
@@ -133,18 +132,11 @@ final class AgreementsViewController: BaseViewController, NibInit {
     }
     
     private func loadPrivacyPolicy() {
-        privacyPolicyService.getPrivacyPolicy { [weak self] response in
-            guard let self = self else {
-                return
-            }
-            switch response {
-            case .success(let privacyPolicy):
-                let prepearedContent = privacyPolicy.content.setHTMLStringFont(UIFont.GTAmericaStandardRegularFont(),
-                                                                               fontSizeInPixels: 16)
-                self.webView.loadHTMLString(prepearedContent, baseURL: nil)
-            case .failed(_):
-                self.stopActivity()
-            }
+        startActivity()
+        
+        if let url = URL(string: String(format: RouteRequests.privacyPolicy, Device.supportedLocale)) {
+            let request = URLRequest(url: url)
+            webView.load(request)
         }
     }
 }

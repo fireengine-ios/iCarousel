@@ -13,8 +13,6 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
     
     //MARK: - Private properties
     
-    private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
-    
     private lazy var webView: WKWebView = {
         let contentController = WKUserContentController()
       
@@ -108,13 +106,9 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
     //MARK: - Private funcs
     
     private func loadPrivacyPolicy() {
-        privacyPolicyService.getPrivacyPolicy { [weak self] response in
-            switch response {
-            case .success(let privacyPolicy):
-                self?.webView.loadHTMLString(privacyPolicy.content, baseURL: nil)
-            case .failed(_):
-                self?.stopActivity()
-            }
+        if let url = URL(string: String(format: RouteRequests.privacyPolicy, Device.supportedLocale)) {
+            let request = URLRequest(url: url)
+            webView.load(request)
         }
     }
     

@@ -13,8 +13,6 @@ final class FAQViewController: BaseViewController {
     
     //MARK: - Private properties
     
-    private let accountSerivce = AccountService()
-    
     private lazy var webView: WKWebView = {
         let webConfig = WKWebViewConfiguration()
         
@@ -69,14 +67,11 @@ final class FAQViewController: BaseViewController {
     //MARK: - Private funcs
     
     private func loadFAQ() {
-        accountSerivce.faqUrl { [weak self] faqUrl in
-            if let url = URL(string: faqUrl) {
-                let request = URLRequest(url: url)
-                DispatchQueue.toMain {
-                    self?.webView.load(request)
-                    self?.showSpinner()
-                }
-            }
+        showSpinner()
+        
+        if let url = URL(string: String(format: RouteRequests.faqUrl, Device.supportedLocale)) {
+            let request = URLRequest(url: url)
+            webView.load(request)
         }
     }
 }
