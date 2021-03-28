@@ -22,7 +22,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return controller
     }
 
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private(set) weak var collectionView: UICollectionView!
     
     private lazy var cameraService = CameraService()
     private lazy var galleryFileUploadService = GalleryFileUploadService()
@@ -55,7 +55,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return sortingBar
     }()
     
-    private var collectionTopYInset: CGFloat = 0
+    var collectionTopYInset: CGFloat = 0
+    
+    var segmentedView: UIView?
     
     weak var offsetChangedDelegate: PrivateShareSharedFilesViewControllerOffsetChangeDelegate?
     
@@ -185,7 +187,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupCollectionViewBars() {
         setupSortingBar()
-
+        setupSegmentedConrolView()
         collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
     }
     
@@ -196,13 +198,45 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionView.addSubview(topBarSortingBar)
         
-        collectionTopYInset += topBarSortingBar.frame.height
+        
         
         topBarSortingBar.translatesAutoresizingMaskIntoConstraints = false
         
-        topBarSortingBar.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: -collectionTopYInset).activate()
+        topBarSortingBar.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: collectionTopYInset - topBarSortingBar.frame.height).activate()
         topBarSortingBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
         topBarSortingBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
+        
+        collectionTopYInset += topBarSortingBar.frame.height
+    }
+    
+    
+    //shall be called frorm segment
+    func setupSegmentedConrolView() {
+        guard let segmentedView = segmentedView else  {
+            return
+        }
+        
+        collectionTopYInset += segmentedView.frame.height
+        
+        collectionView.addSubview(segmentedView)
+        segmentedView.translatesAutoresizingMaskIntoConstraints = false
+        
+
+        let collectionTopConstraint = segmentedView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: -collectionTopYInset)
+        collectionTopConstraint.priority = .defaultLow
+        
+        let superTopConstraint = NSLayoutConstraint(item: segmentedView, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .top, multiplier: 1, constant: segmentedView.frame.height + 46)
+        superTopConstraint.priority = .defaultHigh
+        
+        
+        let leading = segmentedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
+        let trailing = segmentedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
+        NSLayoutConstraint.activate([collectionTopConstraint, leading, trailing, superTopConstraint])
+        
+//        collectionTopYInset += segmentedView.frame.height
+//        collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
+        
+        
     }
     
     private func handleOffsetChange(offsetY: CGFloat) {
@@ -322,69 +356,63 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
     
     private func updateBars(isSelecting: Bool) {
-//        DispatchQueue.main.async {
-            self.setupNavigationBar(editingMode: isSelecting)
-
-            let tabBarNeeded = self.shareType != .trashBin
-
-            if tabBarNeeded {
-                self.needToShowTabBar = !isSelecting
-                self.showTabBarIfNeeded()
-            }
-
-            if isSelecting {
-                let selectedItems = self.collectionManager.selectedItems()
-                self.show(selectedItemsCount: selectedItems.count)
-                self.bottomBarManager.show()
-                self.bottomBarManager.update(for: selectedItems, shareType: self.shareType)
-            } else {
-                self.bottomBarManager.hide()
-            }
-//        }
+        
+        self.setupNavigationBar(editingMode: isSelecting)
+        
+        let tabBarNeeded = self.shareType != .trashBin
+        
+        if tabBarNeeded {
+            self.needToShowTabBar = !isSelecting
+            self.showTabBarIfNeeded()
+        }
+        
+        if isSelecting {
+            let selectedItems = self.collectionManager.selectedItems()
+            self.show(selectedItemsCount: selectedItems.count)
+            self.bottomBarManager.show()
+            self.bottomBarManager.update(for: selectedItems, shareType: self.shareType)
+        } else {
+            self.bottomBarManager.hide()
+        }
+        
     }
 
     private func setupNavigationBar(editingMode: Bool) {
-//        DispatchQueue.main.async {
-            /// don't let vc to change navBar if vc is not visible at this moment
-//            guard self.viewIfLoaded?.window != nil else {
-//                return
-//            }
 
-            self.setNavigationBarStyle(.white)
-
-            /// be sure to configure navbar items after setup navigation bar
-            let isSelectionAllowed = self.shareType.isSelectionAllowed
-
-            if editingMode, isSelectionAllowed {
-                if self.shareType == .trashBin || self.shareType.rootType == .trashBin {
-                    self.navBarManager.setSelectionModeForTrashBin()
-                } else {
-                    self.navBarManager.setSelectionMode()
-                }
+        self.setNavigationBarStyle(.white)
+        
+        /// be sure to configure navbar items after setup navigation bar
+        let isSelectionAllowed = self.shareType.isSelectionAllowed
+        
+        if editingMode, isSelectionAllowed {
+            if self.shareType == .trashBin || self.shareType.rootType == .trashBin {
+                self.navBarManager.setSelectionModeForTrashBin()
             } else {
-                switch self.shareType {
-                case .trashBin:
-//                    self.setNavBarStyle(.white)
-                    self.navBarManager.setTrashBinMode(title: self.shareType.title)
-                    
-                case .innerFolder(let rootType, let folderItem):
-                    if rootType != .trashBin {
-                        self.navBarManager.setNestedMode(title: self.shareType.title)
-                    } else {
-                        self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true)
-                    }
-                default:
-                    self.navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
-                    var newTitle = self.shareType.title
-                    if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
-                        newTitle = segmentedParent.rootTitle
-                    }
-                    self.navBarManager.setupLargetitle(isLarge: true)
-                    self.navBarManager.setRootMode(title: newTitle)
-                }
+                self.navBarManager.setSelectionMode()
             }
-            self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
-//        }
+        } else {
+            switch self.shareType {
+            case .trashBin:
+                //                    self.setNavBarStyle(.white)
+                self.navBarManager.setTrashBinMode(title: self.shareType.title)
+                
+            case .innerFolder(let rootType, let folderItem):
+                if rootType != .trashBin {
+                    self.navBarManager.setNestedMode(title: self.shareType.title)
+                } else {
+                    self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true)
+                }
+            default:
+                self.navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+                var newTitle = self.shareType.title
+                if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
+                    newTitle = segmentedParent.rootTitle
+                }
+                self.navBarManager.setupLargetitle(isLarge: true)
+                self.navBarManager.setRootMode(title: newTitle)
+            }
+        }
+        self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
     }
     
     func collectionOffsetChanged(offsetY: CGFloat) {

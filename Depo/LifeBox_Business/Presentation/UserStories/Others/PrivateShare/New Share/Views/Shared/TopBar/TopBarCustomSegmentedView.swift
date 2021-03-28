@@ -38,6 +38,11 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     private var selectedIndex: Int = 0
     private var highlightViewLeaningConstraint: NSLayoutConstraint?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+//        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
     func setup(models: [TopBarCustomSegmentedViewButtonModel], selectedIndex: Int) {
         guard
             !models.isEmpty,
@@ -124,6 +129,11 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         button.setTitle(models.title, for: .normal)
         button.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
+        
+        let screenWidh = UIScreen.main.bounds.width
+        button.bounds = CGRect(x: 0, y: 0, width: screenWidh/3, height: 40)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         button.tag = tag
         
