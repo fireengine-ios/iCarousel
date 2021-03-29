@@ -672,6 +672,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
 
 extension PrivateShareSharedFilesViewController: TopBarSortingViewDelegate {
     func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
+        showSpinner()
         collectionManager.change(sortingRule: sortType.sortedRulesConveted)
     }
 }

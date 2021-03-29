@@ -68,8 +68,11 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     func change(sortingRule: SortedRules) {
-        fileInfoManager.change(sortingRules: sortingRule) { [weak self] in
-            self?.reloadCollection()
+        fileInfoManager.change(sortingRules: sortingRule) { [weak self] (shouldReload, _) in
+            if shouldReload {
+                self?.changeSelection(isActive: false)
+                self?.reloadCollection()
+            }
         }
     }
     
@@ -89,7 +92,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     func startRenaming(item: WrapData) {
         if
-            let index = fileInfoManager.sortedItems.index(where: { $0 == item }),
+            let index = fileInfoManager.items.index(where: { $0 == item }),
             let cell = collectionView?.cellForItem(at: IndexPath(row: index, section: 0)) as? MultifileCollectionViewCell
         {
             cell.startRenaming()
@@ -130,7 +133,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
             self.collectionView?.reloadData()
-            self.setEmptyScreen(isHidden: !self.fileInfoManager.sortedItems.isEmpty)
+            self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
             self.delegate?.didEndReload()
         }
     }
@@ -242,7 +245,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         guard !indexes.inserted.isEmpty || !indexes.deleted.isEmpty else {
             DispatchQueue.main.async {
                 self.collectionView?.refreshControl?.endRefreshing()
-                self.setEmptyScreen(isHidden: !self.fileInfoManager.sortedItems.isEmpty)
+                self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
                 self.delegate?.didEndReload()
             }
             return
@@ -254,7 +257,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 self.collectionView?.insertItems(at: indexes.inserted.compactMap { IndexPath(row: $0, section: 0) })
                 
             }, completion: { (_) in
-                self.setEmptyScreen(isHidden: !self.fileInfoManager.sortedItems.isEmpty)
+                self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
                 self.delegate?.didEndReload()
             })
         }
@@ -336,7 +339,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fileInfoManager.sortedItems.count
+        return fileInfoManager.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -365,7 +368,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
 
     //MARK: Helpers
     private func item(at indexPath: IndexPath) -> WrapData? {
-        return fileInfoManager.sortedItems[indexPath.row]
+        return fileInfoManager.items[indexPath.row]
     }
     
     private func isSelected(item: WrapData) -> Bool {
@@ -380,7 +383,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             }
             
         } else {
-            let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
+            let items = fileInfoManager.items.getArray().filter({ !($0.isFolder ?? false) })
             openPreview(for: item, with: items)
         }
     }

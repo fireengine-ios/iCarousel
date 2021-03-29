@@ -36,7 +36,7 @@ final class PrivateShareFileInfoManager {
     
     private(set) var sorting: SortedRules = .lastModifiedTimeUp
     private(set) var type: PrivateShareType = .byMe
-    private(set) var sortedItems = SynchronizedArray<WrapData>()
+    private(set) var items = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     
     private(set) var rootFolder: SharedFileInfo?
@@ -71,9 +71,9 @@ final class PrivateShareFileInfoManager {
             
             self.pagesLoaded += 1
             
-            let sorted = self.sortedItems.getArray() + self.sorted(items: loadedItems)
-            let indexes = self.getDeltaIndexes(objects: sorted)
-            self.sortedItems.replace(with: sorted) { [weak self] in
+            let combinedItems = self.items.getArray() + loadedItems
+            let indexes = self.getDeltaIndexes(objects: combinedItems)
+            self.items.replace(with: combinedItems) { [weak self] in
                 self?.queue.async {
                     self?.isNextPageLoading = false
                     completion((true, indexes))
@@ -108,9 +108,8 @@ final class PrivateShareFileInfoManager {
                 
                 self.pagesLoaded += 1
                 
-                let sorted = self.sorted(items: loadedItems)
-                let indexes = self.getDeltaIndexes(objects: sorted)
-                self.sortedItems.replace(with: sorted) {
+                let indexes = self.getDeltaIndexes(objects: loadedItems)
+                self.items.replace(with: loadedItems) {
                     completion((true, indexes))
                 }
             }
@@ -136,21 +135,18 @@ final class PrivateShareFileInfoManager {
         }
     }
     
-    func change(sortingRules: SortedRules, completion: @escaping VoidHandler) {
+    func change(sortingRules: SortedRules, completion: @escaping ReloadCompletionHandler) {
         guard sorting != sortingRules else {
             return
         }
         
         sorting = sortingRules
         
-        let changedSorted = sorted(items: sortedItems.getArray())
-        sortedItems.replace(with: changedSorted) {
-            completion()
-        }
+        reload(completion: completion)
     }
     
     func selectItem(at indexPath: IndexPath) {
-        if let item = sortedItems[indexPath.row] {
+        if let item = items[indexPath.row] {
             if let alreadySelected = selectedItems.getSet().first(where: { $0.uuid == item.uuid }) {
                 selectedItems.remove(alreadySelected)
             }
@@ -166,7 +162,7 @@ final class PrivateShareFileInfoManager {
     }
     
     func deselectItem(at indexPath: IndexPath) {
-        if let item = sortedItems[indexPath.row] {
+        if let item = items[indexPath.row] {
             selectedItems.remove(item)
         }
     }
@@ -180,9 +176,9 @@ final class PrivateShareFileInfoManager {
             return
         }
         
-        let changedSorted = sortedItems.filter { !$0.uuid.isContained(in: uuids) }
+        let changedItems = items.filter { !$0.uuid.isContained(in: uuids) }
         
-        sortedItems.replace(with: changedSorted, completion: completion)
+        items.replace(with: changedItems, completion: completion)
     }
     
     func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
@@ -218,7 +214,7 @@ final class PrivateShareFileInfoManager {
     
     private func cleanAll() {
         selectedItems.removeAll()
-        sortedItems.removeAll()
+        items.removeAll()
     }
     
     private func loadPages(till page: Int, completion: @escaping ReloadCompletionHandler) {
@@ -231,13 +227,12 @@ final class PrivateShareFileInfoManager {
                 return
             }
             
-            self.tempLoaded.append(contentsOf: self.sorted(items: loadedItems))
+            self.tempLoaded.append(contentsOf: loadedItems)
             self.pagesLoaded += 1
             
             guard self.pagesLoaded < page, !loadedItems.isEmpty else {
-                let sorted = self.sorted(items: self.tempLoaded)
-                let indexes = self.getDeltaIndexes(objects: sorted)
-                self.sortedItems.replace(with: sorted) {
+                let indexes = self.getDeltaIndexes(objects: self.tempLoaded)
+                self.items.replace(with: self.tempLoaded) {
                     completion((true, indexes))
                 }
                 return
@@ -249,12 +244,8 @@ final class PrivateShareFileInfoManager {
         operationQueue.addOperation(operation)
     }
     
-    private func sorted(items: [WrapData]) -> [WrapData] {
-        return WrapDataSorting.sort(items: items, sortType: sorting)
-    }
-    
     private func getDeltaIndexes(objects: [WrapData]) -> (inserted: [Int], deleted: [Int]) {
-        let original = sortedItems.getArray()
+        let original = items.getArray()
         
         let insertions = objects.filter { !original.contains($0) }.compactMap { objects.index(of: $0) }
         let deletions = original.filter { !objects.contains($0) }.compactMap { original.index(of: $0) }
