@@ -276,9 +276,18 @@ struct RouteRequests {
     }
     
     //MARK: - Turkcell Updater
-    
+
     static func updaterUrl() -> String {
-        return baseShortUrlString + "download/lifebox_business_update_ios_test.json"
+        #if LIFEBOX
+            let jsonName = "download/update_ios.json"
+        #elseif LIFEDRIVE
+            let jsonName = "download/update_lifedrive_ios.json"
+        #else
+            let jsonName = "unknown"
+            debugPrint("⚠️: unknown turkcell updater url")
+        #endif
+        
+        return baseShortUrlString + jsonName
     }
     
     struct HomeCards {
