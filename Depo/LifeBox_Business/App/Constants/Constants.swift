@@ -1279,7 +1279,12 @@ extension TextConstants {
     static let loginPageEmptyPasswordFieldError = NSLocalizedString("business_app_login_password_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageEmptyCaptchaFieldError = NSLocalizedString("business_app_login_captcha_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageInvalidCaptchaFieldError = NSLocalizedString("business_app_login_captcha_not_match", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let loginPageAuthenticationError30Error = NSLocalizedString("business_app_login_pwd_error_code_30", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageErrorCode30 = NSLocalizedString("business_app_login_pwd_error_code_30", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageErrorCode31 = NSLocalizedString("business_app_login_ldap_error_code_31", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageErrorCode32 = NSLocalizedString("business_app_login_ldap_error_code_32", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageErrorCode33 = NSLocalizedString("business_app_login_ldap_error_code_33", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageBlockedIpError = NSLocalizedString("business_app_login_blocked_ip", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginGenericError = NSLocalizedString("business_app_login_generic_error_tag", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageShowPassword = NSLocalizedString("business_app_login_show_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginPageHidePassword = NSLocalizedString("business_app_login_hide_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
