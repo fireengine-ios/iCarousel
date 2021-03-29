@@ -232,6 +232,8 @@ final class BottomActionsBar: UIView {
     
     private func addButtons(for actionTypes: [BottomBarActionType]) {
         guard !actionTypes.isEmpty else {
+            actionButtonsStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+            actionsUnderMoreButton = []
             return
         }
         
