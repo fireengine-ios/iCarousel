@@ -80,55 +80,28 @@ final class PushNotificationService {
     }
     
     func openActionScreen() {
-        guard var action = notificationAction else {
+        guard let action = notificationAction else {
             return
         }
         
-        let isLoggedIn = tokenStorage.accessToken != nil
-        if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
-            action = .login
-        }
-        
-        if isLoggedIn && action.isContained(in: [.login]) {
+        if tokenStorage.accessToken == nil {
+            openLogin()
             clear()
-            return
         }
                 
         switch action {
-        case .main, .home: openMain()
-//        case .floatingMenu: openFloatingMenu()
         case .myDisk: openMyDisk()
-//        case .favorites: openFavorites()
-        case .contactUs: openContactUs()
-        case .usageInfo: openUsageInfo()
-        case .recentActivities: openRecentActivities()
-        case .email: openEmail()
-        case .faq: openFaq()
-        case .passcode: openPasscode()
-        case .http: openURL(notificationParameters)
-        case .login:
-            openLogin()
-            clear()
-        case .search: openSearch()
         case .settings: openSettings()
-        case .profileEdit: openProfileEdit()
-        case .changePassword: openChangePassword()
-        case .securityQuestion: openSecurityQuestion()
-        case .permissions: openPermissions()
-        case .supportFormSignup, .supportFormLogin:
-            if isLoggedIn {
-                openContactUs()
-            } else { 
-                openSupport(type: action == .supportFormSignup ? .signup : .login)
-            }
-//        case .trashBin:
-//            openTrashBin()
+        case .agreements: openAgreements()
+        case .faq: openFaq()
+        case .profile: openProfile()
+        case .trashBin: openTrashBin()
         case .sharedWithMe: openSharedWithMe()
         case .sharedByMe: openShareByMe()
-            default:
-                assertionFailure()
+        case .sharedArea: openSharedArea()
+        default:
+            assertionFailure()
         }
-        
         
         if router.tabBarController != nil {
             clear()
@@ -189,68 +162,23 @@ final class PushNotificationService {
         pushTo(router.loginScreen)
     }
     
-    private func openMain() {
-        openMyDisk()
-    }
-    
     private func openMyDisk() {
         pushTo(router.myDisk)
-    }
-    
-//    private func openFavorites() {
-//        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
-//    }
-//
-//    private func openTrashBin() {
-//        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
-//    }
-    
-    private func openContactUs() {
-        router.showFeedbackSubView()
-    }
-    
-    private func openUsageInfo() {
-        pushTo(router.usageInfo)
-    }
-    
-    private func openRecentActivities() {
-        pushTo(router.vcActivityTimeline)
-    }
-    
-    private func openEmail() {
-        if let userInfo = SingletonStorage.shared.accountInfo {
-            pushTo(router.userProfile(userInfo: userInfo))
-        }
-    }
-    
-    private func openFaq() {
-        pushTo(router.faq)
-    }
-    
-    private func openPasscode() {
-        let isTurkcellAccount = SingletonStorage.shared.isTurkcellUser
-        pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
-    }
-      
-    private func openSearch() {
-        let output = router.getViewControllerForPresent()
-        let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
-        pushTo(controller)
-    }
-    
-    private func openURL(_ path: String?) {
-        guard let path = path, let url = URL(string: path) else {
-            return
-        }
-        
-        UIApplication.shared.openSafely(url)
     }
     
     private func openSettings() {
         pushTo(router.settings)
     }
     
-    private func openProfileEdit() {
+    private func openAgreements() {
+        pushTo(router.agreements)
+    }
+    
+    private func openFaq() {
+        pushTo(router.faq)
+    }
+    
+    private func openProfile() {
         SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { [weak self] response in
             let vc = self?.router.userProfile(userInfo: response)
             self?.pushTo(vc)
@@ -259,27 +187,8 @@ final class PushNotificationService {
         
     }
     
-    private func openChangePassword() {
-        pushTo(router.changePassword)
-    }
-    
-    private func openSecurityQuestion() {
-        debugLog("PushNotificationService try to open Security Question screen")
-
-        let controller = SetSecurityQuestionViewController.initFromNib()
-        pushTo(controller)
-    }
-    
-    private func openPermissions() {
-        debugLog("PushNotificationService try to open Permission screen")
-
-        let controller = router.permissions
-        pushTo(controller)
-    }
-    
-    private func openSupport(type: SupportFormScreenType) {
-        let controller = SupportFormController.with(screenType: type)
-        pushTo(controller)
+    private func openTrashBin() {
+        pushTo(router.trashBin)
     }
     
     private func openSharedWithMe() {
@@ -288,6 +197,10 @@ final class PushNotificationService {
     
     private func openShareByMe() {
         openSharedController(type: .byMe)
+    }
+    
+    private func openSharedArea() {
+        openSharedController(type: .sharedArea)
     }
     
     private func openSharedController(type: PrivateShareType) {
