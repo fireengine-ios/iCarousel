@@ -110,7 +110,7 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     
     func selectChildVC(index: Int) {
         changeChildVC(index: index)
-        topBarCustomSegmentedBar.changeSegmentedControlView(index)
+        topBarCustomSegmentedBar.changeSelection(to: index)
     }
     
     override func viewDidLoad() {

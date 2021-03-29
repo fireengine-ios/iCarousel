@@ -60,7 +60,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         updateSelection()
     }
     
-    func changeSegmentedControlView(_ index: Int) {
+    func changeSelection(to index: Int) {
         guard index < models.count
         else {
             assertionFailure("button or tag is invalid")
