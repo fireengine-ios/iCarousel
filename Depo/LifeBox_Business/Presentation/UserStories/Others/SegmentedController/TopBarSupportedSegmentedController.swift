@@ -171,7 +171,7 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
         newChildVC.view.translatesAutoresizingMaskIntoConstraints = false
         newChildVC.view.pinToSuperviewEdges()
 
-        newChildVC.setupSegmentedConrolView(segmentedView: topBarCustomSegmentedBar)
+        newChildVC.setupSegmentedControlView(segmentedView: topBarCustomSegmentedBar)
         newChildVC.didMove(toParentViewController: self)
  
         self.view.layoutSubviews()

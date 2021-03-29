@@ -202,7 +202,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     
     //shall be called frorm segment
-    func setupSegmentedConrolView(segmentedView: UIView) {
+    func setupSegmentedControlView(segmentedView: UIView) {
         
         let newOffset = collectionTopYInset + segmentedView.frame.height
 
