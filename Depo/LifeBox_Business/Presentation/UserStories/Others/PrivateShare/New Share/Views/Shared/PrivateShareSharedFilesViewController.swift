@@ -213,11 +213,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let collectionTopConstraint = segmentedView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: -newOffset)
         collectionTopConstraint.priority = .defaultLow
         
-        let minimalNavBarHeight: CGFloat = 46
-        
-        let superTopConstraintValue: CGFloat = segmentedView.frame.height + minimalNavBarHeight
-        
-        let superTopConstraint = NSLayoutConstraint(item: segmentedView, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .top, multiplier: 1, constant: superTopConstraintValue)
+        let superTopConstraint = NSLayoutConstraint(item: segmentedView.safeAreaLayoutGuide, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0)
         superTopConstraint.priority = .defaultHigh
         
         let leading = segmentedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
