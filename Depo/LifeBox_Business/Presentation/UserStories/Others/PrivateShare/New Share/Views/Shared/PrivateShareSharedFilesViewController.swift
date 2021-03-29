@@ -223,7 +223,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let leading = segmentedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
         let trailing = segmentedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
         
-        
         NSLayoutConstraint.activate([collectionTopConstraint, leading, trailing, superTopConstraint])
         
         collectionView.contentInset = UIEdgeInsets(top: newOffset, left: 0, bottom: 25, right: 0)
