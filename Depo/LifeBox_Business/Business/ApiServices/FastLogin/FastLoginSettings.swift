@@ -9,6 +9,8 @@
 import DigitalGate
 
 struct FastLoginSettings {
+    private init() { }
+
     static let disableCell = true
     static let autoLoginOnly = false
     static let disableAutoLogin = true
