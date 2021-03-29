@@ -210,13 +210,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionView.addSubview(segmentedView)
         
-        
         let collectionTopConstraint = segmentedView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: -newOffset)
         collectionTopConstraint.priority = .defaultLow
         
         let superTopConstraint = NSLayoutConstraint(item: segmentedView, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .top, multiplier: 1, constant: 40 + 46)
         superTopConstraint.priority = .defaultHigh
-        
         
         let leading = segmentedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
         let trailing = segmentedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
