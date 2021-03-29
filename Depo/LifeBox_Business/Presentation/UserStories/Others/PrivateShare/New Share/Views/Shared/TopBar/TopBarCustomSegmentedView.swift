@@ -38,11 +38,6 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     private var selectedIndex: Int = 0
     private var highlightViewLeaningConstraint: NSLayoutConstraint?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-//        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     func setup(models: [TopBarCustomSegmentedViewButtonModel], selectedIndex: Int) {
         guard
             !models.isEmpty,
