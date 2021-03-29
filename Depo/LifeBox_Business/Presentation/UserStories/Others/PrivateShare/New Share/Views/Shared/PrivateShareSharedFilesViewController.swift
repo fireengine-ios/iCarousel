@@ -555,7 +555,6 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
                 }
             }
         }
-        handleOffsetChange(offsetY: collectionView.contentOffset.y)
     }
     
     func printSelected() {}
