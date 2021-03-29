@@ -228,10 +228,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         collectionView.contentInset = UIEdgeInsets(top: newOffset, left: 0, bottom: 25, right: 0)
     }
     
-    private func handleOffsetChange(offsetY: CGFloat) {
-        
-    }
-    
     private func trackScreen() {
         switch shareType {
         case .byMe:
@@ -304,7 +300,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         }
         
         self.setupPlusButton()
-        self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
         self.view.layoutSubviews()
         
         if !ReachabilityService.shared.isReachable {
@@ -401,11 +396,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 self.navBarManager.setRootMode(title: newTitle)
             }
         }
-        self.handleOffsetChange(offsetY: self.collectionView.contentOffset.y)
-    }
-    
-    func collectionOffsetChanged(offsetY: CGFloat) {
-        handleOffsetChange(offsetY: offsetY)
     }
     
 }
