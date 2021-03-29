@@ -48,11 +48,7 @@ extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewCont
     }
     
     func setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: Bool) {
-        
-        //FIXME: temporary solution so segmented coontroler would function well enough
-//        currentViewController
-        self.extendedLayoutIncludesOpaqueBars = extendedLayoutIncludesOpaqueBars
-        currentViewController.view.layoutSubviews()
+        currentViewController.extendedLayoutIncludesOpaqueBars = extendedLayoutIncludesOpaqueBars
     }
     
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
@@ -90,18 +86,12 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     
     private var currentIndex: Int = 0
     
-    private var collectionTopYInset: CGFloat = 0
-    
     let rootTitle = TextConstants.navbarRootTitleMySharings
     
     class func initWithControllers(with controllers: [UIViewController], currentIndex: Int = 0) -> TopBarSupportedSegmentedController {
         let controller = TopBarSupportedSegmentedController.initFromNib()
         let privateShareControllers: [PrivateShareSharedFilesViewController] = controllers.compactMap {
-            if let privateShareFilesController = $0 as? PrivateShareSharedFilesViewController {
-                privateShareFilesController.offsetChangedDelegate = controller
-                return privateShareFilesController
-            }
-           return nil
+            return $0 as? PrivateShareSharedFilesViewController
         }
         
         controller.title = TextConstants.navbarRootTitleMySharings
@@ -121,6 +111,9 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         needToShowTabBar = true
+        
+        view.backgroundColor = .blue
+
         setupContainer()
     }
     
@@ -129,8 +122,8 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     }
     
     private func setupContainer() {
-        changeChildVC(index: currentIndex)
         setupSegmentedBar()
+        changeChildVC(index: currentIndex)
     }
     
     private func prepareModels() -> [TopBarCustomSegmentedViewButtonModel] {
@@ -150,14 +143,12 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     
     private func setupSegmentedBar() {
         topBarCustomSegmentedBar.setup(models: prepareModels() , selectedIndex: 0)
-        view.addSubview(topBarCustomSegmentedBar)
-
-        topBarCustomSegmentedBar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
-        
-        collectionTopYInset += topBarCustomSegmentedBar.frame.height
     }
     
     private func handleSegmentedAction(index: Int) {
+        guard index != currentIndex else {
+            return
+        }
         changeChildVC(index: index)
     }
     
@@ -168,29 +159,21 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
         else {
             return
         }
-        
         currentIndex = index
+
+        childViewControllers.forEach {
+            $0.removeFromParentVC()
+        }
         
-        childViewControllers.forEach { $0.removeFromParentVC() }
-        
-        newChildVC.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addChildViewController(newChildVC)
         view.addSubview(newChildVC.view)
-        
-        newChildVC.view.frame = CGRect(x: 0, y: topBarCustomSegmentedBar.frame.height, width: view.bounds.width, height: view.bounds.height)
-        newChildVC.didMove(toParentViewController: self)
-        
-        topBarCustomSegmentedBar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
-        
-        view.bringSubview(toFront: topBarCustomSegmentedBar)
-    }
-    
-}
 
-extension TopBarSupportedSegmentedController:  PrivateShareSharedFilesViewControllerOffsetChangeDelegate {
-    //TODO: check for the better solution (nav bar frame obsevation didnt produce satisfying result)
-    func offsettChanged(newOffSet: CGFloat) {
-        let newY: CGFloat = (newOffSet < 0) ? -newOffSet : 0
-        topBarCustomSegmentedBar.frame = CGRect(x: 0, y: newY, width: view.frame.width, height: 40)
+        newChildVC.view.translatesAutoresizingMaskIntoConstraints = false
+        newChildVC.view.pinToSuperviewEdges()
+
+        newChildVC.setupSegmentedControlView(segmentedView: topBarCustomSegmentedBar)
+        newChildVC.didMove(toParentViewController: self)
+ 
+        self.view.layoutSubviews()
     }
 }
