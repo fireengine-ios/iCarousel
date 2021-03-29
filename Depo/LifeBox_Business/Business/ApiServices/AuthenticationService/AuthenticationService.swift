@@ -511,8 +511,7 @@ class AuthenticationService: BaseRequestService {
 
             if tokenStorage.isLoggedInWithFastLogin {
                 let loginCoordinator = DGLoginCoordinator(nil)
-                loginCoordinator.appID = Device.isIpad ? TextConstants.NotLocalized.ipadFastLoginAppIdentifier : TextConstants.NotLocalized.iPhoneFastLoginAppIdentifier
-                loginCoordinator.environment = .prp
+                FastLoginSettings.setupFastLoginCoordinator(loginCoordinator)
                 loginCoordinator.logout()
 
                 printLog("[AuthenticationService] FL logout")
@@ -566,8 +565,7 @@ class AuthenticationService: BaseRequestService {
 
         if tokenStorage.isLoggedInWithFastLogin {
             let loginCoordinator = DGLoginCoordinator(nil)
-            loginCoordinator.appID = Device.isIpad ? TextConstants.NotLocalized.ipadFastLoginAppIdentifier : TextConstants.NotLocalized.iPhoneFastLoginAppIdentifier
-            loginCoordinator.environment = .prp
+            FastLoginSettings.setupFastLoginCoordinator(loginCoordinator)
             loginCoordinator.logout()
             tokenStorage.isLoggedInWithFastLogin = false
             printLog("[AuthenticationService] FL logout")
