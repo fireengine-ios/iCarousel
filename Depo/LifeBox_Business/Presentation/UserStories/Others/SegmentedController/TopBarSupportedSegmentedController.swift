@@ -91,13 +91,7 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     class func initWithControllers(with controllers: [UIViewController], currentIndex: Int = 0) -> TopBarSupportedSegmentedController {
         let controller = TopBarSupportedSegmentedController.initFromNib()
         let privateShareControllers: [PrivateShareSharedFilesViewController] = controllers.compactMap {
-            if let privateShareFilesController = $0 as? PrivateShareSharedFilesViewController {
-                privateShareFilesController.segmentedView = controller.topBarCustomSegmentedBar
-//                privateShareFilesController.collectionTopYInset = 40
-                privateShareFilesController.offsetChangedDelegate = controller
-                return privateShareFilesController
-            }
-           return nil
+            return $0 as? PrivateShareSharedFilesViewController
         }
         
         controller.title = TextConstants.navbarRootTitleMySharings
@@ -149,19 +143,10 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     
     private func setupSegmentedBar() {
         topBarCustomSegmentedBar.setup(models: prepareModels() , selectedIndex: 0)
-//        view.addSubview(topBarCustomSegmentedBar)
-
-//        viewControllers.forEach {
-//            $0.setupSegmentedConrolView(segmentedView: topBarCustomSegmentedBar)
-//        }
-    
-        
-//        topBarCustomSegmentedBar.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 40)
     }
     
     private func handleSegmentedAction(index: Int) {
         guard index != currentIndex else {
-            debugLog("!!!! SAME INDEX")
             return
         }
         changeChildVC(index: index)
@@ -175,53 +160,20 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
             return
         }
         currentIndex = index
-        
-        
-        
+
         childViewControllers.forEach {
             $0.removeFromParentVC()
         }
         
-        
         addChildViewController(newChildVC)
         view.addSubview(newChildVC.view)
-        
-        view.constraints.forEach {//i theory we dont need it since we remove child from super view, but in reality, without it, we have many constrains hannginng about(like 16, with this its 4-8)
-            $0.deactivate()
-        }
-        
+
         newChildVC.view.translatesAutoresizingMaskIntoConstraints = false
         newChildVC.view.pinToSuperviewEdges()
-//        view.layoutSubviews()
-//        newChildVC.collectionView.bringSubview(toFront: topBarCustomSegmentedBar)
-        
-        
-//        newChildVC.setupSegmentedConrolView(segmentedView: topBarCustomSegmentedBar)
+
+        newChildVC.setupSegmentedConrolView(segmentedView: topBarCustomSegmentedBar)
         newChildVC.didMove(toParentViewController: self)
-        
-        
-
  
-    }
-    
-}
-
-extension TopBarSupportedSegmentedController:  PrivateShareSharedFilesViewControllerOffsetChangeDelegate {
-
-    func offsettChanged(newOffSet: CGFloat) {
-
-        return
-        
-        let navBarHeigh: CGFloat = navigationController?.navigationBar.frame.size.height ?? 0
-        
-        let newNewOffset: CGFloat
-
-        if newOffSet + navBarHeigh + 40 < 0 {
-            newNewOffset = -newOffSet
-        } else {
-            newNewOffset =  navBarHeigh + 40
-        }
-
-        topBarCustomSegmentedBar.frame = CGRect(x: 0, y: newNewOffset, width: view.frame.width, height: 40)
+        self.view.layoutSubviews()
     }
 }

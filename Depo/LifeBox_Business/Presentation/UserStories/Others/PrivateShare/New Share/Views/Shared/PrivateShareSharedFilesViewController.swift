@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol PrivateShareSharedFilesViewControllerOffsetChangeDelegate: class {
-    func offsettChanged(newOffSet: CGFloat)
-}
-
 final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildTopBarSupportedControllerProtocol, NibInit {
     
     static func with(shareType: PrivateShareType) -> PrivateShareSharedFilesViewController {
@@ -56,11 +52,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }()
     
     var collectionTopYInset: CGFloat = 0
-    
-    var segmentedView: UIView?
-    
-    weak var offsetChangedDelegate: PrivateShareSharedFilesViewControllerOffsetChangeDelegate?
-    
+ 
     lazy private var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
@@ -187,7 +179,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupCollectionViewBars() {
         setupSortingBar()
-        setupSegmentedConrolView()
         collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
     }
     
@@ -211,36 +202,33 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     
     //shall be called frorm segment
-    func setupSegmentedConrolView() {
-        guard let segmentedView = segmentedView else  {
-            return
-        }
+    func setupSegmentedConrolView(segmentedView: UIView) {
         
-        collectionTopYInset += segmentedView.frame.height
-        
-        collectionView.addSubview(segmentedView)
+        let newOffset = collectionTopYInset + segmentedView.frame.height
+
         segmentedView.translatesAutoresizingMaskIntoConstraints = false
         
-
-        let collectionTopConstraint = segmentedView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: -collectionTopYInset)
+        collectionView.addSubview(segmentedView)
+        
+        
+        let collectionTopConstraint = segmentedView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: -newOffset)
         collectionTopConstraint.priority = .defaultLow
         
-        let superTopConstraint = NSLayoutConstraint(item: segmentedView, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .top, multiplier: 1, constant: segmentedView.frame.height + 46)
+        let superTopConstraint = NSLayoutConstraint(item: segmentedView, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view, attribute: .top, multiplier: 1, constant: 40 + 46)
         superTopConstraint.priority = .defaultHigh
         
         
         let leading = segmentedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
         let trailing = segmentedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
+        
+        
         NSLayoutConstraint.activate([collectionTopConstraint, leading, trailing, superTopConstraint])
         
-//        collectionTopYInset += segmentedView.frame.height
-//        collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
-        
-        
+        collectionView.contentInset = UIEdgeInsets(top: newOffset, left: 0, bottom: 25, right: 0)
     }
     
     private func handleOffsetChange(offsetY: CGFloat) {
-        offsetChangedDelegate?.offsettChanged(newOffSet: offsetY + collectionTopYInset)
+        
     }
     
     private func trackScreen() {
