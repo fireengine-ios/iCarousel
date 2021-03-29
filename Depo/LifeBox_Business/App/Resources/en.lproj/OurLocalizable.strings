@@ -177,7 +177,7 @@
 "Create" = "Create";
 "New PlayList" = "New PlayList";
 "New Album" = "New Album";
-"business_app_new_folder" = "Create New Folder";
+"New Folder" = "New Folder";
 "Print" = "Print";
 "Make album cover" = "Make album cover";
 "Add To Album" = "Add To Album";
@@ -201,7 +201,7 @@
 "Nothing to upload" = "Nothing to upload";
 "Items Selected" = "Items Selected";
 "Item Selected" = "Item Selected";
-"business_app_plus_button_upload" = "Upload from Gallery";
+"Upload" = "Upload";
 "You can change the sequence " = "You can change the sequence of photos ";
 "Save" = "Save";
 "Add Music" = "Add Music";
@@ -464,7 +464,7 @@
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any files in your lifebox, yet. Start uploading your memories on lifebox!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "You are using %d%% of your device storage. It’s a great time to free up space on your device.";
-"business_app_plus_button_upload_files" = "Upload Files";
+"Upload Files" = "Upload Files";
 "Free Up Space" = "Free Up Space";
 "Collage" = "Collage";
 "We have created a collage from your photos!" = "We have created a collage for you!";
@@ -541,7 +541,6 @@
 "You don’t have any stories  on your Lifebox yet." = "You don’t have any stories on your lifebox yet.";
 "Start creating stories" = "Start creating stories";
 "Help and Support" = "Help and Support";
-"business_app_faq_page_title" = "FAQ";
 "Album is Empty" = "Album is empty";
 "You don’t have any files on your Lifebox yet." = "You don’t have any files on your lifebox yet.";
 "You don’t have any favorited files on your Lifebox yet." = "You don’t have any favorite files on your lifebox yet.";
@@ -549,10 +548,8 @@
 "Suggestions" = "Suggestions";
 "Recent Searches" = "Recent Searches";
 "Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically. \n\nTo enable background sync of your photos and videos, please make sure that your location permission is set to \"ALWAYS\" by going to “Device Settings > lifebox > Location\" menu.";
-"Start Using" = "Start Using";
+"Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
-"business_app_privacy_policy_start" = "Start Using";
-"business_app_eula_checkbox" = "I have read and accepted terms of use";
 "Welcome to Lifebox!" = "Welcome to lifebox!";
 "You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
 "PhotosAndViedos" = "Photos and Videos";
@@ -993,24 +990,16 @@
 "enter_code_get_code_on_phone" = "Please enter 6-digit security code that we sent to this phone number: %@";
 "time_is_up_for_code" = "Time is up, please request a new code.";
 "resend_code" = "Resend Code";
-
-/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
-"frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Please check your username";
 "login_support_info" = "If you are having difficulty during login, contact us for support.";
 "terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
-"business_app_agreement_page_title" = "Agreements";
-"business_app_agreement_eula" = "Terms of Use";
-"business_app_agreement_privacy_policy" = "Privacy Policy";
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "face_tags_description_premium" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
 "terms_of_use" = "Terms of Use";
 "privacy_policy" = "For detailed information about your personal data that we collect through lifebox, please read our Privacy Policy";
-"business_app_eula_privacy_policy_textbox" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus, ipsum sit amet aliquam iaculis, lectus enim suscipit purus, fringilla dapibus risus lorem vehicula quam Privacy Policy";
 "face_tags_description_standart" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
 "terms_and_use_introduction_checkbox" = "I have read and accepted Terms of Use.";
 "privacy_policy_condition" = "Privacy Policy";
-"business_app_privacy_policy_page_title" = "Privacy Policy";
 "photo_pick_description" = "If you enable the button and connect your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick analysis.";
 
 /*Permission screen in Settings*/
@@ -1061,9 +1050,6 @@
 "contact_us_subject_10" = "Packages & Storage Problem";
 "contact_us_subject_11" = "Touch ID and Password";
 "contact_us_subject_12" = "Connection, Speed, Freezing Problems";
-
-/*Settings page*/
-"Permissions" = "Permissions";
 "selected_items_limit_download" = "You cannot download more than %d files";
 "selected_items_limit_delete" = "You cannot delete more than %d files";
 "login_settings_security_passcode_description" = "You can receive your Turkcell Password by texting SIFRE to 2200 and if you enable this button, you can login to lifebox using this password.";
@@ -1664,8 +1650,6 @@
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Delete Duplicates";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Delete Contacts";
 "eula_title" = "Terms of Use";
-"eula_title_new" = "Welcome to Lifebox";
-"business_app_eula_page_title" = "Terms of Use";
 "photo_video_empty_no_unsync_photos_title" = "All your files are synced!";
 "photo_edit_navbar_save" = "Save";
 "photo_edit_save_as_copy" = "Save as copy";
@@ -1882,14 +1866,37 @@
 "private_share_long_message" = "private_share_long_message";
 "private_share_long_emailmsisdn" = "Your E-mail or GSM number exceeds character limitation.";
 "private_share_start_max_number_of_users" = "You can not share with more than %d people.";
-
 "business_app_tabbar_mydisk" = "My Disk";
 "business_app_tabbar_mysharings" = "My Sharings";
 "business_app_tabbar_sharedarea" = "Shared Area";
-
 "tabbar_item_settings" = "Settings";
 "private_share_max_number_of_item_limit_exceeded" = "private_share_max_number_of_item_limit_exceeded";
-
+"business_app_select_option" = "Select";
+"business_app_download_option" = "Download";
+"business_app_delete_option" = "Delete";
+"business_app_rename_option" = "Rename";
+"business_app_share_privately_option" = "Share Privately";
+"business_app_share_copy_option" = "Send a Copy";
+"business_app_stop_sharing_option" = "Stop Sharing";
+"business_app_leave_sharing_option" = "Leave Sharing";
+"business_app_info_option" = "Info";
+"business_app_download_success" = "Downloaded successfully";
+"business_app_delete_success" = "Deleted successfully";
+"business_app_rename_sucess" = "Renamed successfully";
+"business_app_share_privately_success" = "Shared successfully";
+"business_app_stop_sharing_success" = "Sharing is stopped";
+"business_app_leave_sharing_success" = "Sharing is left";
+"business_app_delete_confirm_popup_title" = "Are you sure to delete?";
+"business_app_delete_confirm_popup_detail" = "Deleted files will be sent to Trash Bin";
+"business_app_notification_permission" = "Notifications may include alerts, sounds and icon badges. These can be configured in Settings";
+"business_app_gallery_permission" = "Lifebox needs your photo library access in order to be able to upload them to the app and download your photos in application to the device gallery";
+"business_app_gallery_permission_not_provided_popup_title" = "Photo Library Access Permission";
+"business_app_gallery_permission_not_provided_popup_description" = "We need your photo library access permission for this action. Please check you app settings";
+"business_app_gallery_permission_not_provided_popup_settings_accept" = "Settings";
+"business_app_gallery_permission_not_provided_popup_settings_reject" = "No";
+"business_app_new_folder" = "Create New Folder";
+"business_app_plus_button_upload" = "Upload from Gallery";
+"business_app_plus_button_upload_files" = "Upload Files";
 "business_app_login_title" = "Login to Lifebox Business";
 "business_app_login_email_box_inside" = "Enter your e-mail";
 "business_app_login_password_box_inside" = "Enter your password";
@@ -1907,48 +1914,12 @@
 "business_app_login_captcha_empty" = "Please type the text";
 "business_app_login_email_not_validated" = "Please enter a valid e-mail";
 "business_app_login_pwd_error_code_30" = "Authentication failed";
-"business_app_login_ldap_error_code_31" = "Temporary error occured. Please try again later.";
-"business_app_login_ldap_error_code_32" = "Authentication failed";
-"business_app_login_ldap_error_code_33" = "Authentication failed";
-"business_app_login_blocked_ip" = "Your IP is blocked. Authentication failed.";
-"business_app_login_generic_error_tag" = "Authentication failed.";
 "business_app_login_captcha_not_match" = "Entered text does not match";
 "business_app_login_show_password" = "Show";
 "business_app_login_hide_password" = "Hide";
-
-"business_app_select_option" = "Select";
-"business_app_download_option" = "Download";
-"business_app_delete_option" = "Delete";
-"business_app_rename_option" = "Rename";
-"business_app_share_privately_option" = "Share Privately";
-"business_app_share_copy_option" = "Send a Copy";
-"business_app_stop_sharing_option" = "Stop Sharing";
-"business_app_leave_sharing_option" = "Leave Sharing";
-"business_app_info_option" = "Info";
-
-"business_app_download_success" = "Downloaded successfully";
-"business_app_delete_success" = "Deleted successfully";
-"business_app_rename_sucess" = "Renamed successfully";
-"business_app_share_privately_success" = "Shared successfully";
-"business_app_stop_sharing_success" = "Sharing is stopped";
-"business_app_leave_sharing_success" = "Sharing is left";
- 
-"business_app_delete_confirm_popup_title" = "Are you sure to delete?";
-"business_app_delete_confirm_popup_detail" = "Deleted files will be sent to Trash Bin";
-
-"business_app_notification_permission" = "Notifications may include alerts, sounds and icon badges. These can be configured in Settings";
-
-"business_app_gallery_permission" = "Lifebox needs your photo library access in order to be able to upload them to the app and download your photos in application to the device gallery";
-
-"business_app_gallery_permission_not_provided_popup_title" = "Photo Library Access Permission";
-"business_app_gallery_permission_not_provided_popup_description" = " We need your photo library access permission for this action. Please check you app settings";
-"business_app_gallery_permission_not_provided_popup_settings_accept" = "Settings";
-"business_app_gallery_permission_not_provided_popup_settings_reject" = "No";
-
 "business_app_private_share_close_page" = "Are you sure to quit from private share?";
 "business_app_private_share_close_page_no" = "Cancel";
 "business_app_private_share_close_page_yes" = "OK";
- 
 "business_app_private_share_page_title" = "Share Privately";
 "business_app_private_share_box_name" = "Select people to share";
 "business_app_private_share_box_inside" = "Enter e-mail";
@@ -1966,7 +1937,6 @@
 "business_app_private_share_start" = "Share";
 "business_app_private_share_success" = "Shared Successfully";
 "business_app_private_share_shared_with_section_name" = "Shared with";
-
 "business_app_private_share_fail_errorcode_4115" = "Your message is too long. Please shorten your message and try again";
 "business_app_private_share_fail_errorcode_4116" = "You have added so many users to the share";
 "business_app_private_share_fail_errorcode_4118" = "You reached maximum shared item limit";
@@ -1985,15 +1955,13 @@
 "business_app_info_page_role_editor" = "Editor";
 "business_app_info_page_role_viewer" = "Viewer";
 "business_app_info_page_role_varies" = "Varies";
-
 "business_app_upload_bar_uploading_text" = "Uploading";
 "business_app_whohasaccess_page_title" = "Who Has Access";
 "business_app_whohasaccess_role_owner" = "Owner";
 "business_app_whohasaccess_role_editor" = "Editor";
 "business_app_whohasaccess_role_viewer" = "Viewer";
 "business_app_whohasaccess_role_varies" = "Varies";
-"uploadVideoToReadOnlyAlbumError" =  "uploadVideoToReadOnlyAlbumError";
-
+"uploadVideoToReadOnlyAlbumError" = "uploadVideoToReadOnlyAlbumError";
 "business_app_2FA_first_page_title" = "Security Check";
 "business_app_2FA_first_page_description_title" = "Two factor authentication is needed.";
 "business_app_2FA_first_page_description_detail" = "To secure your account and login safely, we'll send you a security code to verify your identity";
@@ -2001,7 +1969,6 @@
 "business_app_2FA_first_page_sendsecuritycode_to_phone" = "To my Phone:";
 "business_app_2FA_first_page_sendsecuritycode_to_email" = "To my e-mail:";
 "business_app_2FA_first_page_send_button_name" = "Send";
-
 "business_app_2FA_second_page_title" = "Security Check";
 "business_app_2FA_second_page_verify_number" = "Verify your number";
 "business_app_2FA_second_page_verify_email" = "Verify your e-mail";
@@ -2014,7 +1981,6 @@
 "business_app_access_page_expire_date" = "Expires on: %@";
 "business_app_access_page_from_folder" = "From %@ folder";
 "business_app_access_page_role_change_remove" = "Remove";
-
 "business_app_sortby" = "Sort by:";
 "business_app_sortby_name_a_z" = "Name(A-Z)";
 "business_app_sortby_name_z_a" = "Name(Z-A)";
@@ -2033,14 +1999,23 @@
 "business_app_search_bar_explanation" = "Search";
 "business_app_sharedwithme_menu" = "Shared with me";
 "business_app_sharedbyme_menu" = "Shared by me";
-
 "business_app_FL_error_popup_title" = "Authentication Failed";
 "business_app_fast_login_pool_user_popup" = "Please get in touch with your company to get access to the app";
 "business_app_fast_login_authentication_fail_popup" = "Authentication Failure";
 "business_app_FL_error_session_timeout" = "Your Fast Login session is expired. Please try again later.";
 "business_app_FL_error_not_logintologinSDK" = "Authentication Error in Fast Login";
 "business_app_FL_else_error" = "Temporary error occured in Fast Login. Please try again later.";
-
+"business_app_faq_page_title" = "FAQ";
+"Start Using" = "Start Using";
+"business_app_privacy_policy_start" = "Start Using";
+"business_app_eula_checkbox" = "I have read and accepted terms of use";
+"business_app_agreement_page_title" = "Agreements";
+"business_app_agreement_eula" = "Terms of Use";
+"business_app_agreement_privacy_policy" = "Privacy Policy";
+"business_app_eula_privacy_policy_textbox" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus, ipsum sit amet aliquam iaculis, lectus enim suscipit purus, fringilla dapibus risus lorem vehicula quam Privacy Policy";
+"business_app_privacy_policy_page_title" = "Privacy Policy";
+"eula_title_new" = "Welcome to Lifebox";
+"business_app_eula_page_title" = "Terms of Use";
 "business_app_settings_page_title" = "Settings";
 "business_app_settings_storage_use_limited_header" = "Storage Use";
 "business_app_settings_storage_used_limited_values" = "%@ / %@ using";
@@ -2051,7 +2026,6 @@
 "business_app_settings_contactus" = "Contact Us";
 "business_app_settings_deletedfiles" = "Trash Bin";
 "business_app_settings_logout" = "Log out";
-
 "business_app_document_no_preview" = "This file type is not supported for preview";
 "business_app_photo_no_preview" = "There is no preview for this file. Please try again later";
 "business_app_music_no_preview" = "There is no preview for this file";
@@ -2066,13 +2040,11 @@
 "business_app_contact_us_page_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 "business_app_contact_us_subject_box_name" = "Subject";
 "business_app_contact_us_message_box_name" = "Your message (optional)";
-
 "business_app_contact_us_subject_1" = "Subject_1";
 "business_app_contact_us_subject_2" = "Subject_2";
 "business_app_contact_us_subject_3" = "Subject_3";
 "business_app_contact_us_subject_4" = "Subject_4";
 "business_app_contact_us_subject_5" = "Subject_5";
-
 "business_app_contact_us_email_body_unlimited" = "Unlimited";
 "business_app_contact_us_email_body" = "\ne-mail: %@\nApplication Version: %@\nDevice Name: %@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@\nTotal Storage: %@\nUsed Storage: %@\nSubject: %@";
 
@@ -2082,7 +2054,6 @@
 "business_app_shared_by_me_empty page" = "Haven't shared any files yet";
 "business_app_shared_area_empty page" = "Don't have any shared files yet";
 "business_app_folder_empty page" = "Empty Folder";
-
 "business_app_trash_bin_page_title" = "Trash Bin";
 "business_app_trash_bin_empty_page" = "You do not have any deleted files";
 "business_app_trash_bin_restore_action_name" = "Restore";
@@ -2102,7 +2073,3 @@
 "business_app_trash_bin_empty_trash_confirm_YES_button" = "Empty Trash Bin";
 "business_app_trash_bin_empty_trash_confirm_NO_button" = "Cancel";
 "business_app_trash_bin_empty_trash_success" = "All items are permanantly deleted";
-
-"business_app_root_device_popup_title" = "This device is rooted";
-"business_app_root_device_popup_description" = "You can not use this app with rooted device due to security reasons";
-"business_app_root_device_popup_button" = "Close the app";
