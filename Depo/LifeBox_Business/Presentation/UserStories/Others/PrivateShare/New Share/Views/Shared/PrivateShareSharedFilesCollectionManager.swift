@@ -67,7 +67,6 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     func setup() {
         setupCollection()
         setupTopRefresher()
-        reload(type: .full)
     }
     
     func change(sortingRule: SortedRules) {
