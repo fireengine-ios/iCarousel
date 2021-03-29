@@ -771,14 +771,14 @@ class RouterVC: NSObject {
         }
     }
     
-    func openMyDisk() {
+    func openTab(_ tab: TabScreenIndex) {
         guard let tabBarVC = tabBarController else {
             return
         }
         
         tabBarVC.dismiss(animated: true)
         
-        let index = TabScreenIndex.myDisk.rawValue
+        let index = tab.rawValue
         guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
             assertionFailure("This index is non existent 😵")
             return
