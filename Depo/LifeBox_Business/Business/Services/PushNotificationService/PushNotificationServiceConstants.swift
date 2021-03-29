@@ -7,31 +7,16 @@
 //
 
 enum PushNotificationAction: String {
-    case main = "main"
-    case floatingMenu = "floating_menu"
-    case myDisk = "all_files"
-    case favorites = "favourites"
-    case contactUs = "contact_us"
-    case usageInfo = "usage_info"
-    case recentActivities = "recent_activities"
-    case email = "email"
-    case faq = "faq"
-    case passcode = "passcode"
     case http = "http"
-    case login = "login"
-    case search = "search"
-    case home = "home_page"
+    case myDisk = "my_disk"
     case settings = "settings"
-    case profileEdit = "profile_edit"
-    case changePassword = "change_password"
-    case securityQuestion = "security_question"
-    case permissions = "permissions"
-    case supportFormLogin = "support_form_login"
-    case supportFormSignup = "support_form_signup"
+    case agreements = "agreements"
+    case faq = "faq"
+    case profile = "profile"
     case trashBin = "trash_bin"
-    
     case sharedWithMe = "shared_with_me"
     case sharedByMe = "shared_by_me"
+    case sharedArea = "shared_area"
 }
 
 enum PushNotificationParameter: String {
