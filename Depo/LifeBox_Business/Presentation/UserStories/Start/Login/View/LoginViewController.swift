@@ -364,26 +364,9 @@ final class LoginViewController: ViewController {
 
 // MARK: -LoginCoordinatorDelegate(FastLogin)
 extension LoginViewController: LoginCoordinatorDelegate {
-    private var iPadAppId: String {
-        return TextConstants.NotLocalized.ipadFastLoginAppIdentifier
-    }
-
-    private var iPhoneAppId: String {
-        return TextConstants.NotLocalized.iPhoneFastLoginAppIdentifier
-    }
-
-    private var currentFastLoginServerType: DGEnvironment {
-        return .prp
-    }
-
     private func setupLoginCoordinator() {
         loginCoordinator = DGLoginCoordinator(self)
-        loginCoordinator.appID = Device.isIpad ? iPadAppId : iPhoneAppId
-        loginCoordinator.language = Locale.current.isTurkishLocale ? "TR" : "EN"
-        loginCoordinator.environment = currentFastLoginServerType
-        loginCoordinator.disableCell = true
-        loginCoordinator.autoLoginOnly = false
-        loginCoordinator.disableAutoLogin = true
+        FastLoginSettings.setupFastLoginCoordinator(loginCoordinator)
         loginCoordinator.coordinatorDelegate = self
     }
 

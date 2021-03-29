@@ -171,7 +171,7 @@ extension LoginPresenter: LoginInteractorOutput {
 
     func processLoginError(_ loginError: LoginResponseError, errorText: String) {
         switch loginError {
-        case .block:
+        case .block, .errorCode10:
             failedBlockError()
             
         case .needCaptcha:
@@ -186,7 +186,7 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.loginScreenServerError)
             
         case .incorrectUsernamePassword:
-            failLogin(message: TextConstants.loginPageAuthenticationError30Error)
+            failLogin(message: TextConstants.loginPageErrorCode30)
             
         case .incorrectCaptcha:
             completeAsyncOperationEnableScreen()
@@ -196,8 +196,20 @@ extension LoginPresenter: LoginInteractorOutput {
         case .networkError:
             failLogin(message: errorText)
             
-        case .unauthorized:
-            failLogin(message: TextConstants.loginPageAuthenticationError30Error)
+        case .unauthorized, .errorCode401, .errorCode0, .errorCode30:
+            failLogin(message: TextConstants.loginPageErrorCode30)
+            
+        case .errorCode4201:
+            failLogin(message: TextConstants.loginPageBlockedIpError)
+            
+        case .errorCode31:
+            failLogin(message: TextConstants.loginPageErrorCode31)
+            
+        case .errorCode32:
+            failLogin(message: TextConstants.loginPageErrorCode32)
+            
+        case .errorCode33:
+            failLogin(message: TextConstants.loginPageErrorCode33)
             
         case .noInternetConnection:
             failLogin(message: TextConstants.errorConnectedToNetwork)

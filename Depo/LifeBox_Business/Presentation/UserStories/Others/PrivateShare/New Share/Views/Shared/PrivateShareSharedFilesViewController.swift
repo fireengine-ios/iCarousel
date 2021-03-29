@@ -254,15 +254,15 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didStartSelection(selected: Int) {
         DispatchQueue.main.async {
             self.updateBars(isSelecting: true)
-            if case .innerFolder = self.shareType {
-                
-            } else {
+            switch self.shareType {
+            case .innerFolder, .trashBin:
+                break
+            default:
                 self.changeNavbarLargeTitle(false, style: .white)
                 if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
                     self.setNavSearchConntroller(nil)
                 }
             }
-            
         }
         
     }
@@ -270,9 +270,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didEndSelection() {
         DispatchQueue.main.async {
             self.updateBars(isSelecting: false)
-            if case .innerFolder = self.shareType {
-                
-            } else {
+            switch self.shareType {
+            case .innerFolder, .trashBin:
+                break
+            default:
                 self.changeNavbarLargeTitle(true, style: .white)
                 if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
                     self.setNavSearchConntroller(self.searchController)
@@ -546,9 +547,10 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     
     func deSelectAll() {
         DispatchQueue.main.async {
-            if case .innerFolder = self.shareType {
-                
-            } else {
+            switch self.shareType {
+            case .innerFolder, .trashBin:
+                break
+            default:
                 self.changeNavbarLargeTitle(true, style: .white)
                 if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
                     self.setNavSearchConntroller(self.searchController)
@@ -670,6 +672,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
 
 extension PrivateShareSharedFilesViewController: TopBarSortingViewDelegate {
     func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
+        showSpinner()
         collectionManager.change(sortingRule: sortType.sortedRulesConveted)
     }
 }

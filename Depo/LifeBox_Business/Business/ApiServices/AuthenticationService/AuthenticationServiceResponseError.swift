@@ -19,6 +19,14 @@ enum LoginResponseError: Error {
     case networkError
     case serverError
     case unauthorized
+    case errorCode401
+    case errorCode10
+    case errorCode0
+    case errorCode4201
+    case errorCode30
+    case errorCode31
+    case errorCode32
+    case errorCode33
     case noInternetConnection
     case emptyPhone
     case emptyCaptcha
@@ -52,8 +60,7 @@ enum LoginResponseError: Error {
         else if errorResponse.description.contains("Sign up required") {
             self = .needSignUp
         }
-        else if errorResponse.description.contains("Authentication failure") ||
-                    errorResponse.description.contains("LDAP system failure") || errorResponse.description.contains("LDAP Bad credentials") {
+        else if errorResponse.description.contains("LDAP system failure") {
             self = .incorrectUsernamePassword
         }
         else if errorResponse.description.contains("Invalid captcha") ||
@@ -68,15 +75,34 @@ enum LoginResponseError: Error {
         }
         else if errorResponse.description.contains(HeaderConstant.emptyEmail) {
             self = .emptyEmail
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 401 {
-            self = .unauthorized
         } else if errorResponse.description.contains(ErrorResponseText.captchaIsEmpty) {
             self = .emptyCaptcha
         }
+        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 401 {
+            self = .errorCode401
+        }
         else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 10 {
-            self = .block
-        } else {
+            self = .errorCode10
+        }
+        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 0 {
+            self = .errorCode0
+        }
+        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 4201 {
+            self = .errorCode4201
+        }
+        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 30 {
+            self = .errorCode30
+        }
+        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 31 {
+            self = .errorCode31
+        }
+        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 32 {
+            self = .errorCode32
+        }
+        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 33 {
+            self = .errorCode33
+        }
+        else {
             self = .serverError
         }
     }
@@ -103,10 +129,9 @@ enum LoginResponseError: Error {
             return GADementionValues.loginError.serverError.text
         case .emptyCaptcha:
             return GADementionValues.loginError.captchaIsEmpty.text
-        case .flAuthFailure:
-            return "" // TODO: add analytics keys when appropriate task will be created
-        case .flNotInPool:
-            return "" // TODO: add analytics keys when appropriate task will be created
+        default:
+            // TODO: add analytics keys when appropriate task will be created
+            return ""
         }
     }
 }

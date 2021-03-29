@@ -68,8 +68,7 @@ final class AppConfigurator {
             debugLog("clearTokensIfNeed")
             if tokenStorage.isLoggedInWithFastLogin {
                 let loginCoordinator = DGLoginCoordinator(nil)
-                loginCoordinator.appID = Device.isIpad ? TextConstants.NotLocalized.ipadFastLoginAppIdentifier : TextConstants.NotLocalized.iPhoneFastLoginAppIdentifier
-                loginCoordinator.environment = .prp
+                FastLoginSettings.setupFastLoginCoordinator(loginCoordinator)
                 loginCoordinator.logout()
                 printLog("[AppConfigurator] FL logout")
             }
