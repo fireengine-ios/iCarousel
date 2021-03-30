@@ -1512,3 +1512,10 @@ extension TextConstants {
     static let rootDevicePopupDescription = NSLocalizedString("business_app_root_device_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let rootDevicePopupCloseAppButton = NSLocalizedString("business_app_root_device_popup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+//MARK: - Profile page
+extension TextConstants {
+    static let profilePageTitle = NSLocalizedString("business_app_profile_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let profileNameSurname = NSLocalizedString("business_app_profile_name_surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let profileEmail = NSLocalizedString("business_app_profile_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

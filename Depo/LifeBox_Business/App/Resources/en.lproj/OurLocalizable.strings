@@ -2074,3 +2074,8 @@
 "business_app_trash_bin_empty_trash_confirm_YES_button" = "Empty Trash Bin";
 "business_app_trash_bin_empty_trash_confirm_NO_button" = "Cancel";
 "business_app_trash_bin_empty_trash_success" = "All items are permanantly deleted";
+
+/*profile page*/
+"business_app_profile_page_title" = "Profile";
+"business_app_profile_name_surname" = "Name Surname";
+"business_app_profile_email" = "Email";
