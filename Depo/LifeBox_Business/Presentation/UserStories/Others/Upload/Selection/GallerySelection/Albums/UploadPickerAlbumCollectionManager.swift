@@ -35,6 +35,7 @@ final class UploadPickerAlbumCollectionManager: NSObject {
         albums.replace(with: items) { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView?.reloadData()
+                self?.collectionView?.refreshControl?.endRefreshing()
             }
         }
     }
@@ -92,8 +93,8 @@ extension UploadPickerAlbumCollectionManager: UICollectionViewDelegate, UICollec
 //MARK: - UICollectionViewDelegateFlowLayout
 extension UploadPickerAlbumCollectionManager: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let insets = collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
-        return CGSize(width: collectionView.bounds.size.width - insets, height: UploadPickerAlbumCell.height)
+        let width = UIEdgeInsetsInsetRect(collectionView.bounds, collectionView.layoutMargins).width
+        return CGSize(width: width, height: UploadPickerAlbumCell.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

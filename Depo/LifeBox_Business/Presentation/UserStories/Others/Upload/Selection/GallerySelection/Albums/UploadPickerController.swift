@@ -9,7 +9,7 @@
 import UIKit
 
 protocol UploadPickerControllerDelegate: class {
-    
+    func uploadPicker(_ controller: UploadPickerController, didSelect assets: [PHAsset])
 }
 
 
@@ -24,6 +24,8 @@ final class UploadPickerController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UploadPickerAssetSelectionHelper.shared.clear()
 
         setupNavBar()
         setupTopRefresher()
@@ -65,6 +67,14 @@ final class UploadPickerController: BaseViewController, NibInit {
 extension UploadPickerController: UploadPickerAlbumCollectionManagerDelegate {
     func didSelectAlbum(with albumId: String) {
         let controller = UploadGalleryAssetPickerController.with(albumId: albumId)
+        controller.delegate = self
         RouterVC().pushViewController(viewController: controller, animated: true)
+    }
+}
+
+
+extension UploadPickerController: UploadGalleryAssetPickerControllerDelegate {
+    func didSelect(assets: [PHAsset]) {
+        delegate?.uploadPicker(self, didSelect: assets)
     }
 }

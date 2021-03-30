@@ -11,14 +11,17 @@ import Foundation
 
 final class UploadGalleryAssetPickerCollectionManager: NSObject {
     private weak var collectionView: QuickSelectCollectionView?
+    private let collectionFlowLayout = UploadGalleryAssetPickerCollectionLayout()
     
     private var assets = SynchronizedArray<PHAsset>()
+    private lazy var thumbnailProvider = FilesDataSource()
     
     
     init(collection: QuickSelectCollectionView) {
         super.init()
         
         collectionView = collection
+        
         setupCollection()
     }
     
@@ -29,6 +32,7 @@ final class UploadGalleryAssetPickerCollectionManager: NSObject {
         assets.replace(with: items) { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView?.reloadData()
+                self?.collectionView?.refreshControl?.endRefreshing()
             }
         }
     }
@@ -38,6 +42,7 @@ final class UploadGalleryAssetPickerCollectionManager: NSObject {
     private func setupCollection() {
         collectionView?.delegate = self
         collectionView?.dataSource = self
+        collectionView?.collectionViewLayout = collectionFlowLayout
         
         collectionView?.register(nibCell: UploadGalleryAssetPickerCell.self)
         
@@ -46,7 +51,6 @@ final class UploadGalleryAssetPickerCollectionManager: NSObject {
     }
     
 }
-
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension UploadGalleryAssetPickerCollectionManager: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -61,6 +65,8 @@ extension UploadGalleryAssetPickerCollectionManager: UICollectionViewDelegate, U
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: UploadGalleryAssetPickerCell.self, for: indexPath)
+        cell.set(thumbnailProvider: thumbnailProvider)
+        
         return cell
     }
     
@@ -70,37 +76,37 @@ extension UploadGalleryAssetPickerCollectionManager: UICollectionViewDelegate, U
         }
         
         cell.setup(with: asset)
+        
+        if !cell.isSelected {
+            let isAlreadySelected = UploadPickerAssetSelectionHelper.shared.has(identifier: asset.localIdentifier)
+            if isAlreadySelected {
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        //
-    }
-}
-
-//MARK: - UICollectionViewDelegateFlowLayout
-extension UploadGalleryAssetPickerCollectionManager: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let cell = cell as? UploadGalleryAssetPickerCell else {
+            return
+        }
         
-        let numberOfColumns = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
-        let sideInsets = collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
-        let horizonatlSpacing = Device.isIpad ? NumericConstants.iPadGreedHorizontalSpace : NumericConstants.iPhoneGreedHorizontalSpace
-        let spacing = horizonatlSpacing * (numberOfColumns - 1)
-        
-        let side = (collectionView.bounds.size.width - sideInsets - spacing) / numberOfColumns
-        
-        return CGSize(width: side, height: side)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(topBottom: 0, rightLeft: 0)
+        cell.onDidEndDisplaying()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize.zero
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let asset = assets[indexPath.row] else {
+            return
+        }
+        
+        UploadPickerAssetSelectionHelper.shared.appendAsset(identifier: asset.localIdentifier)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize.zero
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard let asset = assets[indexPath.row] else {
+            return
+        }
+        
+        UploadPickerAssetSelectionHelper.shared.removeAsset(identifier: asset.localIdentifier)
     }
-
+    
 }

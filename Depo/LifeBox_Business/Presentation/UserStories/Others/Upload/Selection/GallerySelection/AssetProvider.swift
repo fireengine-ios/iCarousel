@@ -76,5 +76,19 @@ final class AssetProvider {
         return assets
     }
     
-    
+    func getAssets(with identifiers: [String]) -> [PHAsset] {
+        let authStatus = PHPhotoLibrary.authorizationStatus()
+        guard authStatus.isAccessible else {
+            debugLog("Authorization status is \(authStatus)")
+            return []
+        }
+        
+        let assetsResult = PHAsset.fetchAssets(withLocalIdentifiers: identifiers, options: nil)
+        var assets = [PHAsset]()
+        assetsResult.enumerateObjects { asset, _, _ in
+            assets.append(asset)
+        }
+        
+        return assets
+    }
 }

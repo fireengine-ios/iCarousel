@@ -7,16 +7,16 @@
 //
 
 import UIKit
-
 protocol UploadGalleryAssetPickerControllerDelegate: class {
-    
+    func didSelect(assets: [PHAsset])
 }
+
 
 final class UploadGalleryAssetPickerController: BaseViewController, NibInit {
     
     @IBOutlet private weak var collectionView: QuickSelectCollectionView!
-
-    private let selectedPhotosLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+    
+    private let selectedAssetsLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
     private lazy var collectionManager = UploadGalleryAssetPickerCollectionManager(collection: collectionView)
     private var albumId: String?
     
@@ -28,6 +28,7 @@ final class UploadGalleryAssetPickerController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+//        title = "0"
         setupNavBar()
         setupTopRefresher()
     }
@@ -38,11 +39,21 @@ final class UploadGalleryAssetPickerController: BaseViewController, NibInit {
         fullReload()
     }
     
+    
     //MARK: Private
     
     private func setupNavBar() {
         setNavigationBarStyle(.white)
+
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.setNavigationRightBarButton(style: .white, title: TextConstants.upload, target: self, action: #selector(upload))
+    }
+    
+    @objc private func upload() {
+        let selectedIds = Array(UploadPickerAssetSelectionHelper.shared.getAll())
+        let assets = AssetProvider.shared.getAssets(with: selectedIds)
+        delegate?.didSelect(assets: assets)
+        UploadPickerAssetSelectionHelper.shared.clear()
     }
     
     private func setupTopRefresher() {
