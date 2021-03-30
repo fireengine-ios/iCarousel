@@ -40,10 +40,6 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
         return activityIndicator
     }()
     
-    //MARK: - @IBOutlets
-    
-    @IBOutlet private weak var titleLabel: UILabel!
-    
     //MARK: - Init
     
     required init?(coder aDecoder: NSCoder) {
@@ -84,16 +80,12 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
     
     private func setupView() {
         setTitle(withString: TextConstants.privacyPolicyCondition)
-        
-        titleLabel.text = TextConstants.privacyPolicyCondition
-        titleLabel.font = UIFont.GTAmericaStandardMediumFont(size: 18)
-        titleLabel.textColor = ColorConstants.Text.labelTitle
     }
     
     private func setupWebView() {
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).activate()
+        webView.topAnchor.constraint(equalTo: view.safeTopAnchor, constant: 20).activate()
         webView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).activate()
         webView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).activate()
         webView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).activate()
