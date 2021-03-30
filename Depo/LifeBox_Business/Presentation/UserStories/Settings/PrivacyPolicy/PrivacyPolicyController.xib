@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivacyPolicyController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
-                <outlet property="titleLabel" destination="Ojr-yJ-xbt" id="dS3-Xa-fll"/>
                 <outlet property="view" destination="0lm-mL-My4" id="Wgw-2a-2dA"/>
             </connections>
         </placeholder>
@@ -19,24 +18,8 @@
         <view contentMode="scaleToFill" id="0lm-mL-My4">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojr-yJ-xbt">
-                    <rect key="frame" x="20" y="64" width="374" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="9GF-fj-nQB"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-            </subviews>
             <viewLayoutGuide key="safeArea" id="BR0-ig-pDJ"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <constraints>
-                <constraint firstItem="Ojr-yJ-xbt" firstAttribute="leading" secondItem="BR0-ig-pDJ" secondAttribute="leading" constant="20" id="3Pr-We-hhs"/>
-                <constraint firstItem="BR0-ig-pDJ" firstAttribute="trailing" secondItem="Ojr-yJ-xbt" secondAttribute="trailing" constant="20" id="569-5u-Jdh"/>
-                <constraint firstItem="Ojr-yJ-xbt" firstAttribute="top" secondItem="BR0-ig-pDJ" secondAttribute="top" constant="20" id="7Vg-FQ-2tu"/>
-            </constraints>
             <point key="canvasLocation" x="-583" y="-646"/>
         </view>
     </objects>
