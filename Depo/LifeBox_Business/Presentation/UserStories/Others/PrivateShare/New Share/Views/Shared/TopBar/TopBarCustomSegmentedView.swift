@@ -60,6 +60,20 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         updateSelection()
     }
     
+    func changeSelection(to index: Int) {
+        guard index < models.count
+        else {
+            assertionFailure("button or tag is invalid")
+            return
+        }
+        
+        selectedIndex = index
+        
+        updateSelection(animated: true)
+        
+        models[safe: index]?.callback()
+    }
+    
     private func setupHighlightView() {
         
         addSubview(highlightView)
