@@ -225,6 +225,9 @@ extension LoginPresenter: LoginInteractorOutput {
         case .serverError:
             failLogin(message: TextConstants.loginScreenServerError)
             
+        case .genericError:
+            failLogin(message: TextConstants.loginGenericError)
+            
         case .emptyEmail:
             debugLog("processLoginError:  .emptyEmail this error should be impossible")
             failLogin(message: TextConstants.loginPageEmptyLoginFieldError)
