@@ -103,7 +103,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         type = info.userType
         
         //add contact to shared with section
-        if !info.value.isEmpty {
+        if !info.identifier.isEmpty {
             addContact(fromSuggestions: false)
         }
         

@@ -98,7 +98,7 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
             return
         }
         
-        let contactInfo = ContactInfo(name: nameLabel.text ?? "", value: contact.emails.first ?? "", identifier: contact.identifier, userType: contact.type)
+        let contactInfo = ContactInfo(name: contact.displayName, value: contact.emails.first ?? "", identifier: contact.identifier, userType: contact.type)
         
         delegate?.selectContact(info: contactInfo)
     }
