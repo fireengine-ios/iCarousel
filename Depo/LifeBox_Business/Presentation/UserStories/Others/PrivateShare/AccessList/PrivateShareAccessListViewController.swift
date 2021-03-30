@@ -138,13 +138,16 @@ private extension PrivateShareAccessListViewController {
 //MARK: - API Requests
 private extension PrivateShareAccessListViewController {
     func updateAccessList() {
-        guard let subjectId = contact?.subject?.identifier else {
+        guard
+            let contact = contact,
+            let subjectId = contact.subject?.identifier
+        else {
             return
         }
         
         showSpinner()
         
-        privateShareApiService.getAccessList(projectId: projectId, uuid: uuid, subjectId: subjectId) { [weak self] result in
+        privateShareApiService.getAccessList(projectId: projectId, uuid: uuid, subjectType: contact.subject?.type == .group ? .group : .user, subjectId: subjectId) { [weak self] result in
             guard let self = self else {
                 return
             }
