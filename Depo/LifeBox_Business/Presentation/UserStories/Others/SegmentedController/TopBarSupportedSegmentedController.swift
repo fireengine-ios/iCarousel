@@ -108,6 +108,11 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
         viewControllers = controllers
     }
     
+    func selectChildVC(index: Int) {
+        changeChildVC(index: index)
+        topBarCustomSegmentedBar.changeSelection(to: index)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         needToShowTabBar = true

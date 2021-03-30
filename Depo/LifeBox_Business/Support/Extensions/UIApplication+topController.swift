@@ -52,7 +52,7 @@ extension UIApplication {
             return
         }
         let vc = PopUpController.with(title: TextConstants.quotaFullUploadPopUpTitle, message: TextConstants.quotaFullUploadPopUpDescription, image: .quota, buttonTitle: TextConstants.quotaFullUploadPopUpButton, dismissAction: {
-            RouterVC().openMyDisk()
+            RouterVC().openTab(.myDisk)
         })
         DispatchQueue.toMain {
             controller?.present(vc, animated: false, completion: nil)

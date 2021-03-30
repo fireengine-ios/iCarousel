@@ -163,7 +163,7 @@ final class PushNotificationService {
     }
     
     private func openMyDisk() {
-        pushTo(router.myDisk)
+        router.openTab(.myDisk)
     }
     
     private func openSettings() {
@@ -179,37 +179,35 @@ final class PushNotificationService {
     }
     
     private func openProfile() {
+        //TODO: change roating to new page when it will be done
         SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { [weak self] response in
             let vc = self?.router.userProfile(userInfo: response)
             self?.pushTo(vc)
             /// we don't need error handling here
         }, fail: {_ in})
-        
     }
     
     private func openTrashBin() {
-        pushTo(router.trashBin)
+        router.pushViewController(viewController: router.trashBin)
     }
     
     private func openSharedWithMe() {
-        openSharedController(type: .withMe)
+        router.openTab(.sharedFiles)
+        selectChildVC(index: 0)
     }
     
     private func openShareByMe() {
-        openSharedController(type: .byMe)
+        router.openTab(.sharedFiles)
+        selectChildVC(index: 1)
     }
     
     private func openSharedArea() {
-        openSharedController(type: .sharedArea)
+        router.openTab(.sharedArea)
     }
     
-    private func openSharedController(type: PrivateShareType) {
-        guard let controller = router.sharedFiles as? SegmentedController,
-              let index = controller.viewControllers.firstIndex(where: { ($0 as? PrivateShareSharedFilesViewController)?.shareType == type }) else {
-            return
+    private func selectChildVC(index: Int) {
+        if let controller = router.currentContrroller() as? TopBarSupportedSegmentedController {
+            controller.selectChildVC(index: index)
         }
-        controller.loadViewIfNeeded()
-        controller.switchSegment(to: index)
-        pushTo(controller)
     }
 }

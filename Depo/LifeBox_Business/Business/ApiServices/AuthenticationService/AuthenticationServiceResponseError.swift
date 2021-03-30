@@ -18,6 +18,7 @@ enum LoginResponseError: Error {
     case incorrectCaptcha
     case networkError
     case serverError
+    case genericError
     case unauthorized
     case errorCode401
     case errorCode10
@@ -44,8 +45,6 @@ enum LoginResponseError: Error {
             } else {
                 self = .serverError
             }
-        } else if errorResponse.description.contains("LDAP account is locked") {
-            self = .block
         }
         else if !ReachabilityService.shared.isReachable {
             self = .noInternetConnection
@@ -53,18 +52,11 @@ enum LoginResponseError: Error {
         else if errorResponse.description.contains("Captcha required") {
             self = .needCaptcha
         }
-        else if errorResponse.description.contains("Authentication with Turkcell Password is disabled for the account") ||
-            errorResponse.description.contains("TURKCELL_PASSWORD_DISABLED") {
-            self = .authenticationDisabledForAccount
-        }
         else if errorResponse.description.contains("Sign up required") {
             self = .needSignUp
         }
-        else if errorResponse.description.contains("LDAP system failure") {
-            self = .incorrectUsernamePassword
-        }
         else if errorResponse.description.contains("Invalid captcha") ||
-            errorResponse.description.contains("Unexpected char") {
+                    errorResponse.description.contains("Unexpected char") {
             self = .incorrectCaptcha
         }
         else if errorResponse.description.contains("Internet") {
@@ -77,33 +69,34 @@ enum LoginResponseError: Error {
             self = .emptyEmail
         } else if errorResponse.description.contains(ErrorResponseText.captchaIsEmpty) {
             self = .emptyCaptcha
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 401 {
-            self = .errorCode401
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 10 {
-            self = .errorCode10
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 0 {
-            self = .errorCode0
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 4201 {
-            self = .errorCode4201
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 30 {
-            self = .errorCode30
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 31 {
-            self = .errorCode31
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 32 {
-            self = .errorCode32
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 33 {
-            self = .errorCode33
-        }
-        else {
-            self = .serverError
+        } else {
+            guard let data: Data = errorResponse.description.data(using: .utf8),
+                  let error: ServerErrorDescription = try? JSONDecoder().decode(ServerErrorDescription.self, from: data)
+            else {
+                self = .serverError
+                return
+            }
+            
+            switch error.errorCode {
+            case 0:
+                self = .errorCode0
+            case 10:
+                self = .errorCode10
+            case 30:
+                self = .errorCode30
+            case 31:
+                self = .errorCode31
+            case 32:
+                self = .errorCode32
+            case 33:
+                self = .errorCode33
+            case 401:
+                self = .errorCode401
+            case 4201:
+                self = .errorCode4201
+            default:
+                self = .genericError
+            }
         }
     }
     
@@ -134,6 +127,11 @@ enum LoginResponseError: Error {
             return ""
         }
     }
+}
+
+struct ServerErrorDescription: Codable {
+    var errorCode: Int
+    var errorMessage: String
 }
 
 final class SignUpReasonError: Map {
