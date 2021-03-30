@@ -18,6 +18,7 @@ enum LoginResponseError: Error {
     case incorrectCaptcha
     case networkError
     case serverError
+    case genericError
     case unauthorized
     case errorCode401
     case errorCode10
@@ -94,7 +95,7 @@ enum LoginResponseError: Error {
             case 4201:
                 self = .errorCode4201
             default:
-                self = .serverError
+                self = .genericError
             }
         }
     }
