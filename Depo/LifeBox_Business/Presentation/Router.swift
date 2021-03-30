@@ -627,6 +627,11 @@ class RouterVC: NSObject {
     
     // MARK: - SETTINGS
     
+    var profile: UIViewController? {
+        let controller = ProfileViewController.initFromNib()
+        return controller
+    }
+    
     var settings: UIViewController? {
         let controller = SettingsModuleInitializer.initializeViewController(with: "SettingsViewController")
         return controller
