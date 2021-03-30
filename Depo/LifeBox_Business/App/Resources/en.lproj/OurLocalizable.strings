@@ -1914,6 +1914,11 @@
 "business_app_login_captcha_empty" = "Please type the text";
 "business_app_login_email_not_validated" = "Please enter a valid e-mail";
 "business_app_login_pwd_error_code_30" = "Authentication failed";
+"business_app_login_ldap_error_code_31" = "Temporary error occured. Please try again later.";
+"business_app_login_ldap_error_code_32" = "Authentication failed";
+"business_app_login_ldap_error_code_33" = "Authentication failed";
+"business_app_login_blocked_ip" = "Your IP is blocked. Authentication failed.";
+"business_app_login_generic_error_tag" = "Authentication failed.";
 "business_app_login_captcha_not_match" = "Entered text does not match";
 "business_app_login_show_password" = "Show";
 "business_app_login_hide_password" = "Hide";
