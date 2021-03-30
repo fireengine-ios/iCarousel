@@ -32,8 +32,9 @@ class AuthenticationUser: BaseRequestParametrs {
     
     override var patch: URL {
         var patch: String = RouteRequests.Login.yaaniMail
-        let rememberMeValue = rememberMe ? "?rememberMe=on" : ""
-        patch = String(format: patch, rememberMeValue)
+        var rememberMeSuffix = "?rememberMe=on"
+        rememberMeSuffix.append(rememberMe ? "&extendRememberMeDuration=true" : "")
+        patch = String(format: patch, rememberMeSuffix)
         
         return URL(string: patch, relativeTo: super.patch)!
     }

@@ -55,6 +55,8 @@ final class LoginViewController: ViewController {
             
             let selectedImage = UIImage(named: "checkboxSelected")
             newValue.setImage(selectedImage, for: .selected)
+
+            newValue.isSelected = false
         }
     }
 
@@ -197,10 +199,6 @@ final class LoginViewController: ViewController {
     private var loginCoordinator: DGLoginCoordinator!
     
     //MARK: - Life cycle
-//    override var preferredNavigationBarStyle: NavigationBarStyle {
-//        return .clear
-//    }
-
     override func loadView() {
         super.loadView()
         errorViewFakeHeightConstraint.isActive = false
