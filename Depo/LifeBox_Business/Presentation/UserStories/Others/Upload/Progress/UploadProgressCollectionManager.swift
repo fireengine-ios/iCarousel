@@ -34,6 +34,7 @@ final class UploadProgressCollectionManager: NSObject {
     func reload() {
         sortItems { [weak self] in
             DispatchQueue.main.async {
+                self?.collectionView.refreshControl?.endRefreshing()
                 self?.collectionView.reloadData()
             }
         }
