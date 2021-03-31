@@ -42,8 +42,9 @@ final class ProfileTableViewAdapter: NSObject {
         tableView?.tableFooterView = UIView()
         tableView?.register(nibCell: ProfileCell.self)
         tableView?.register(nibCell: SettingsStorageTableViewCell.self)
+        tableView?.backgroundColor = ColorConstants.settingsTableBackground
         tableView?.separatorStyle = .none
-        tableView?.contentInset = .init(top: 5, left: 0, bottom: 64, right: 0)
+        tableView?.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
     }
 
     private func reloadContent() {
@@ -54,13 +55,13 @@ final class ProfileTableViewAdapter: NSObject {
 //MARK: - UITableViewDelegate
 
 extension ProfileTableViewAdapter: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return UIView()
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 10
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {

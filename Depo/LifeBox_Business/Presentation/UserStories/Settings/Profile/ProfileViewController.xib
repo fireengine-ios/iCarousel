@@ -21,8 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T5M-qC-h77">
-                    <rect key="frame" x="0.0" y="49" width="414" height="813"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -31,7 +30,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="T5M-qC-h77" secondAttribute="bottom" id="8aP-Ol-JnB"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="T5M-qC-h77" secondAttribute="trailing" id="HmO-at-zZU"/>
                 <constraint firstItem="T5M-qC-h77" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bIT-Tp-8za"/>
-                <constraint firstItem="T5M-qC-h77" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="kGO-4f-UF4"/>
+                <constraint firstItem="T5M-qC-h77" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="kGO-4f-UF4"/>
             </constraints>
             <point key="canvasLocation" x="86.956521739130437" y="79.6875"/>
         </view>

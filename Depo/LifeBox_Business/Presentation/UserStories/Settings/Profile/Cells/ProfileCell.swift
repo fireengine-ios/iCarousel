@@ -12,6 +12,12 @@ final class ProfileCell: UITableViewCell {
     
     //MARK: - @IBOutlets
     
+    @IBOutlet weak var containerView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 5
+        }
+    }
+    
     @IBOutlet weak var nameSurnameLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.profileNameSurname
@@ -80,6 +86,7 @@ final class ProfileCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.layer.cornerRadius = 5
+        selectionStyle = .none
         setUserAvatar()
     }
     
