@@ -41,12 +41,9 @@ final class AnalyticsService: NSObject {
         #else
         let environment = ADJEnvironmentProduction
         #endif
-        
-        #if LIFEBOX
-        let adjustConfig = ADJConfig(appToken: "hlqdgtbmrdb9", environment: environment)
-        #else
-        let adjustConfig = ADJConfig(appToken: "lonks83r2gow", environment: environment)
-        #endif
+
+        let adjustConfig = ADJConfig(appToken: "bvo85upzcef4", environment: environment)
+       
         Adjust.appDidLaunch(adjustConfig)
     }
     
