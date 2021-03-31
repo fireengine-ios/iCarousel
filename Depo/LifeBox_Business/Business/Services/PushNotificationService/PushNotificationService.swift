@@ -179,12 +179,7 @@ final class PushNotificationService {
     }
     
     private func openProfile() {
-        //TODO: change roating to new page when it will be done
-        SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { [weak self] response in
-            let vc = self?.router.userProfile(userInfo: response)
-            self?.pushTo(vc)
-            /// we don't need error handling here
-        }, fail: {_ in})
+        pushTo(router.profile)
     }
     
     private func openTrashBin() {

@@ -19,7 +19,7 @@ enum SnackbarAction {
         case .ok:
             return TextConstants.snackbarOk
         case .trashBin:
-            return TextConstants.snackbarTrashBin
+            return TextConstants.snackBarTrashBinLinkTitle
         case .hiddenBin:
             return TextConstants.snackbarHiddenBin
         }
@@ -61,7 +61,7 @@ enum SnackbarType {
             return .ok
         case .action:
             switch operationType {
-            case .moveToTrash:
+            case .moveToTrash, .moveToTrashShared:
                 return .trashBin
             default:
                 return .ok
@@ -80,13 +80,12 @@ enum SnackbarType {
              .restore,
              .endSharing,
              .leaveSharing,
-             .moveToTrashShared,
              .privateShare,
              .rename,
              .deletePermanently:
             self = .nonCritical
             
-        case .moveToTrash:
+        case .moveToTrash, .moveToTrashShared:
             self = .action
             
         default:
@@ -108,14 +107,14 @@ final class SnackbarManager {
         setupObserving()
     }
 
-    func show(elementType: ElementTypes, relatedItems: [BaseDataSourceItem] = [], handler: VoidHandler? = nil) {
+    func show(elementType: ElementTypes, relatedItems: [BaseDataSourceItem] = [], axis: NSLayoutConstraint.Axis = .vertical, handler: VoidHandler? = nil) {
         guard let type = SnackbarType(operationType: elementType),
             let message = elementType.snackbarSuccessMessage(relatedItems: relatedItems) else {
             assertionFailure()
             return
         }
         
-        show(type: type, message: message, action: type.action(operationType: elementType), axis: .vertical, handler: handler)
+        show(type: type, message: message, action: type.action(operationType: elementType), axis: axis, handler: handler)
     }
     
     func show(type: SnackbarType, message: String, action: SnackbarAction? = nil, axis: NSLayoutConstraint.Axis = .vertical, handler: VoidHandler? = nil) {
@@ -130,7 +129,7 @@ final class SnackbarManager {
 
         let contentView = SnackbarView.with(type: type,
                                             message: message,
-                                            actionTitle: action?.localizedTitle,
+                                            actionType: action,
                                             axis: axis,
                                             action: actionHandler)
     

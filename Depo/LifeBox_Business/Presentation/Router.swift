@@ -529,15 +529,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    
-    // MARK: User profile
-    
-    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
-        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo, isTurkcellUser: isTurkcellUser)
-        return viewController
-    }
-    
-    
     // MARK: File info
     
     func fileInfo(item: BaseDataSourceItem) -> UIViewController {
@@ -545,7 +536,6 @@ class RouterVC: NSObject {
                                                                                 item: item)
         return viewController
     }
-    
     
     // MARK: Create Folder
     
@@ -626,6 +616,11 @@ class RouterVC: NSObject {
     }
     
     // MARK: - SETTINGS
+    
+    var profile: UIViewController? {
+        let controller = ProfileViewController.initFromNib()
+        return controller
+    }
     
     var settings: UIViewController? {
         let controller = SettingsModuleInitializer.initializeViewController(with: "SettingsViewController")
@@ -743,32 +738,7 @@ class RouterVC: NSObject {
     }
     
     func openTrashBin() {
-        guard let tabBarVC = tabBarController else {
-            return
-        }
-        
-        tabBarVC.dismiss(animated: true)
-        
-        func switchToTrashBin() {
-            guard let segmentedController = tabBarVC.currentViewController as? SegmentedController else {
-                return
-            }
-            
-            segmentedController.loadViewIfNeeded()
-            segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
-        }
-        
-        let index = TabScreenIndex.myDisk.rawValue
-        if tabBarVC.selectedIndex == index {
-            switchToTrashBin()
-        } else {
-            guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
-                assertionFailure("This index is non existent 😵")
-                return
-            }
-            tabBarVC.tabBar.selectedItem = newSelectedItem
-            switchToTrashBin()
-        }
+        pushViewController(viewController: trashBin)
     }
     
     func openTab(_ tab: TabScreenIndex) {
