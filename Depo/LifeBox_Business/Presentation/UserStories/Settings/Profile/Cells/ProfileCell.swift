@@ -12,15 +12,15 @@ final class ProfileCell: UITableViewCell {
     
     //MARK: - @IBOutlets
     
-    @IBOutlet weak var containerView: UIView! {
+    @IBOutlet private weak var containerView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 5
         }
     }
-    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
-    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leftConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var rightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var nameSurnameLabel: UILabel! {
+    @IBOutlet private weak var nameSurnameLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.profileNameSurname
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
@@ -28,7 +28,7 @@ final class ProfileCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var userNameSurnameLabel: UILabel! {
+    @IBOutlet private weak var userNameSurnameLabel: UILabel! {
         willSet {
             let initials = (SingletonStorage.shared.accountInfo?.name ?? "") + " " +  (SingletonStorage.shared.accountInfo?.surname ?? "")
             newValue.text = initials
@@ -37,7 +37,7 @@ final class ProfileCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var emailLabel: UILabel! {
+    @IBOutlet private weak var emailLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.profileEmail
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
@@ -45,7 +45,7 @@ final class ProfileCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var userEmailLabel: UILabel! {
+    @IBOutlet private weak var userEmailLabel: UILabel! {
         willSet {
             newValue.text = SingletonStorage.shared.accountInfo?.email ?? ""
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
@@ -53,7 +53,7 @@ final class ProfileCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var userAvatarImageView: UIImageView! {
+    @IBOutlet private weak var userAvatarImageView: UIImageView! {
         willSet {
             newValue.layer.cornerRadius = 5
             newValue.contentMode = .scaleAspectFit
@@ -61,7 +61,7 @@ final class ProfileCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var userAvatarPlaceholder: UIButton! {
+    @IBOutlet private weak var userAvatarPlaceholder: UIButton! {
         willSet {
             let initials = (SingletonStorage.shared.accountInfo?.name?.firstLetter ?? "") + (SingletonStorage.shared.accountInfo?.surname?.firstLetter ?? "")
             newValue.setTitle(initials, for: .normal)
@@ -74,7 +74,7 @@ final class ProfileCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var changeAvatarButton: UIButton! {
+    @IBOutlet private weak var changeAvatarButton: UIButton! {
         willSet {
             //TODO: - add tag for button when it'll be provided
             newValue.setTitle("Change", for: .normal)

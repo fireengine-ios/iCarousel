@@ -25,7 +25,7 @@ final class ProfileViewController: BaseViewController, NibInit {
     
     //MARK: - @IBOutlets
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     //MARK: - Lifecycle
     
