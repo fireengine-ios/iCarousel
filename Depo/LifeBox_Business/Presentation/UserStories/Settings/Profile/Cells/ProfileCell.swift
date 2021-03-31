@@ -72,15 +72,6 @@ final class ProfileCell: UITableViewCell {
         }
     }
     
-    @IBOutlet private weak var changeAvatarButton: UIButton! {
-        willSet {
-            //TODO: - add tag for button when it'll be provided and choose Install in xib
-            newValue.setTitle("Change", for: .normal)
-            newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 12)
-            newValue.tintColor = ColorConstants.Text.labelTitle
-        }
-    }
-    
     //MARK: - Lifecycle
     
     override func awakeFromNib() {
@@ -102,10 +93,5 @@ final class ProfileCell: UITableViewCell {
     private func setUserAvatar() {
         //TODO: - if user set avatar - show avatar and hide placeholder, else
         userAvatarImageView.isHidden = true
-    }
-    
-    //MARK: - @IBActions
-    
-    @IBAction func changeAvatarButtonPressed(_ sender: Any) {
     }
 }
