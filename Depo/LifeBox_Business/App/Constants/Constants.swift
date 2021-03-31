@@ -1515,6 +1515,10 @@ extension TextConstants {
 }
 
 extension TextConstants {
+    static let snackBarTrashBinLinkTitle = NSLocalizedString("business_app_delete_success_snackbar_trashbin_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
     static let turkcellUpdaterPopupTitle = NSLocalizedString("turkcell_updater_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let turkcellUpdaterPopupDescription = NSLocalizedString("turkcell_updater_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
