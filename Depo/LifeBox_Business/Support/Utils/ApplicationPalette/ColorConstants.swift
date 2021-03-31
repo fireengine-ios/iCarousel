@@ -81,6 +81,7 @@ struct ColorConstants {
     static let buttonDarkBlueBackground = UIColor(named: "loginButtonBackground")!
     static let iconBackgroundView = UIColor(named: "iconBackgroundView")!
     static let settingsTableBackground = UIColor(named: "settingsTableBackground")!
+    static let snackBarTrashBin = UIColor(named: "snackBarTrashBin")!
 
     static let topBarColor = UIColor(named: "topBarBackground")!
     static let topBarSettingsIconColor = UIColor(named: "topBarSettingsIconColor")!

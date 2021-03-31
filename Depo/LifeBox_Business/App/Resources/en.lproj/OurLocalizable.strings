@@ -2078,3 +2078,5 @@
 "business_app_trash_bin_empty_trash_confirm_YES_button" = "Empty Trash Bin";
 "business_app_trash_bin_empty_trash_confirm_NO_button" = "Cancel";
 "business_app_trash_bin_empty_trash_success" = "All items are permanantly deleted";
+
+"business_app_delete_success_snackbar_trashbin_link" = "Trash Bin";
