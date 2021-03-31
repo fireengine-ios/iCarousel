@@ -192,7 +192,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func reloadOnViewAppear() {
-        resetVisibleCellsSwipe()
+        resetVisibleCellsSwipe(animated: false)
         fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
             if shouldReload {
                 if let indexes = indexes {
@@ -310,13 +310,17 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
-    private func resetVisibleCellsSwipe() {
+    private func resetVisibleCellsSwipe(exceptCell: MultifileCollectionViewCell? = nil, animated: Bool) {
         DispatchQueue.main.async {
             guard let visibleCells = self.collectionView?.visibleCells as? [MultifileCollectionViewCell] else {
                 return
             }
             
-            visibleCells.forEach { $0.resetSwipe() }
+            visibleCells.forEach {
+                if $0 != exceptCell {
+                    $0.resetSwipe(animated: animated)
+                }
+            }
         }
     }
     
@@ -491,6 +495,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
 extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        resetVisibleCellsSwipe(animated: true)
         scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)
     }
     
@@ -587,5 +592,9 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
                 fileInfoManager.selectItem(at: indexPath)
             }
         }
+    }
+    
+    func willSwipe(cell: MultifileCollectionViewCell) {
+        resetVisibleCellsSwipe(exceptCell: cell, animated: true)
     }
 }
