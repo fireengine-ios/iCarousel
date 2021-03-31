@@ -1062,8 +1062,6 @@ struct TextConstants {
     static let trashBinDeleteAllConfirmText = NSLocalizedString("confirm_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinDeleteAllConfirmOkButton = NSLocalizedString("confirm_empty_trashbin_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinDeleteAllComplete = NSLocalizedString("success_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let turkcellUpdateRequiredTitle = NSLocalizedString("turkcell_updater_update_required_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let turkcellUpdateRequiredMessage = NSLocalizedString("turkcell_updater_update_required_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let moveToTrashItemsSuccessText = NSLocalizedString("move_to_trash_items_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let moveToTrashAlbumsSuccessText = NSLocalizedString("move_to_trash_albums_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1522,6 +1520,13 @@ extension TextConstants {
 
 extension TextConstants {
     static let itemsSelectedTitle = NSLocalizedString("business_app_manual_picker_selected_counter", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
 extension TextConstants {
     static let snackBarTrashBinLinkTitle = NSLocalizedString("business_app_delete_success_snackbar_trashbin_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
+    static let turkcellUpdaterPopupTitle = NSLocalizedString("turkcell_updater_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let turkcellUpdaterPopupDescription = NSLocalizedString("turkcell_updater_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

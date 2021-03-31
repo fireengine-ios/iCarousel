@@ -49,7 +49,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func showUpdateIsRequiredPopup() {
-        let popup = PopUpController.with(title: TextConstants.turkcellUpdateRequiredTitle, message: TextConstants.turkcellUpdateRequiredMessage, image: .error, buttonTitle: TextConstants.ok) { popup in
+        let popup = PopUpController.with(title: TextConstants.turkcellUpdaterPopupTitle, message: TextConstants.turkcellUpdaterPopupDescription, image: .error, buttonTitle: TextConstants.ok) { popup in
             debugLog("required app killing")
             UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
