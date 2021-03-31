@@ -1522,6 +1522,8 @@ extension TextConstants {
 
 extension TextConstants {
     static let itemsSelectedTitle = NSLocalizedString("business_app_manual_picker_selected_counter", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
 extension TextConstants {
     static let snackBarTrashBinLinkTitle = NSLocalizedString("business_app_delete_success_snackbar_trashbin_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
