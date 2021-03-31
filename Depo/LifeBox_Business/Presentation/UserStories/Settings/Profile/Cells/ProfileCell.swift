@@ -74,7 +74,7 @@ final class ProfileCell: UITableViewCell {
     
     @IBOutlet private weak var changeAvatarButton: UIButton! {
         willSet {
-            //TODO: - add tag for button when it'll be provided
+            //TODO: - add tag for button when it'll be provided and choose Install in xib
             newValue.setTitle("Change", for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 12)
             newValue.tintColor = ColorConstants.Text.labelTitle

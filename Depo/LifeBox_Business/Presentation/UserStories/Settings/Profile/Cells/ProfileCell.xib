@@ -112,6 +112,11 @@
                             <constraint firstItem="ekt-Xa-6VN" firstAttribute="centerY" secondItem="uml-FK-KvC" secondAttribute="centerY" id="qf8-8J-Bp1"/>
                             <constraint firstAttribute="trailing" secondItem="z0u-0Y-ok6" secondAttribute="trailing" constant="15" id="tCR-bo-8zc"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ekt-Xa-6VN"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
