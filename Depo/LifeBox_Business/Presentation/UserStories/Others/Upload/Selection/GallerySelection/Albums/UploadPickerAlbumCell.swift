@@ -36,11 +36,6 @@ final class UploadPickerAlbumCell: UICollectionViewCell {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         
