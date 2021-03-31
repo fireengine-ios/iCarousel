@@ -750,6 +750,7 @@ class AuthenticationService: BaseRequestService {
     func loginViaTwoFactorAuth(token: String,
                                challengeType: String,
                                otpCode: String,
+                               rememberMe: Bool,
                                handler: @escaping (ResponseResult<[String: Any]>) -> Void) {
         debugLog("AuthenticationService loginViaTwoFactorAuth")
         
@@ -758,9 +759,15 @@ class AuthenticationService: BaseRequestService {
             "challengeType" : challengeType,
             "otpCode"       : otpCode,
         ]
-        
+
+        let urlSuffix = rememberMe ? "&extendRememberMeDuration=true" : ""
+        guard let url = URL(string: String(format: RouteRequests.twoFactorAuthLogin, urlSuffix)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return
+        }
+
         sessionManagerWithoutToken
-            .request(RouteRequests.twoFactorAuthLogin,
+            .request(url,
                      method: .post,
                      parameters: params,
                      encoding: JSONEncoding.default)
