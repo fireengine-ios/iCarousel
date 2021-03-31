@@ -1511,3 +1511,7 @@ extension TextConstants {
     static let rootDevicePopupDescription = NSLocalizedString("business_app_root_device_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let rootDevicePopupCloseAppButton = NSLocalizedString("business_app_root_device_popup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+extension TextConstants {
+    static let itemsSelectedTitle = NSLocalizedString("business_app_manual_picker_selected_counter", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

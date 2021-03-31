@@ -2078,3 +2078,10 @@
 "business_app_trash_bin_empty_trash_confirm_YES_button" = "Empty Trash Bin";
 "business_app_trash_bin_empty_trash_confirm_NO_button" = "Cancel";
 "business_app_trash_bin_empty_trash_success" = "All items are permanantly deleted";
+
+"business_app_root_device_popup_title" = "This device is rooted";
+"business_app_root_device_popup_description" = "You can not use this app with rooted device due to security reasons";
+"business_app_root_device_popup_button" = "Close the app";
+
+
+"business_app_manual_picker_selected_counter" = "%d Selected";

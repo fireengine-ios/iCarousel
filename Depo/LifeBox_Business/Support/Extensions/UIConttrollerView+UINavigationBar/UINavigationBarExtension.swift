@@ -139,8 +139,8 @@ enum NavigationBarStyles {
         return defaultBackButton
     }
     
-    func getBarButton(title: String, target: Any?, acion: Selector?) -> UIBarButtonItem {
-        let defaultBackButton = UIBarButtonItem(title: title, style: .plain, target: target, action: acion)
+    func getBarButton(title: String, target: Any?, action: Selector?) -> UIBarButtonItem {
+        let defaultBackButton = UIBarButtonItem(title: title, style: .plain, target: target, action: action)
         defaultBackButton.tintColor = self.textTintColor
         defaultBackButton.setTitleTextAttributes(self.backButtonTitleAttributes, for: .normal)
         return defaultBackButton
@@ -322,7 +322,7 @@ extension UIViewController {
         
         let buttonImage: UIImage? = image == nil ? CustomBackButtonType.regular.image : image
         
-        let barButton = style.getBarButton(title: title, target: target, acion: action)
+        let barButton = style.getBarButton(title: title, target: target, action: action)
         barButton.image = buttonImage
         
         if action == nil {
@@ -337,7 +337,7 @@ extension UIViewController {
     }
     
     func setBackButtonForNavigationItem(style: NavigationBarStyles, title: String, target: Any?, action: Selector?) {
-        navigationItem.backBarButtonItem = style.getBarButton(title: title, target: target, acion: action)
+        navigationItem.backBarButtonItem = style.getBarButton(title: title, target: target, action: action)
     }
     
     func setBackButtonForNavigationItem(button: UIBarButtonItem, style: NavigationBarStyles) {
@@ -349,7 +349,7 @@ extension UIViewController {
     }
     
     func setNavigationLeftBarButton(style: NavigationBarStyles, title: String, target: Any?, image: UIImage?, action: Selector?) {
-        let leftButton = style.getBarButton(title: title, target: target, acion: action)
+        let leftButton = style.getBarButton(title: title, target: target, action: action)
         leftButton.image = image
         
         navigationItem.leftBarButtonItem = leftButton
@@ -361,7 +361,7 @@ extension UIViewController {
             return
         }
         
-        let rightBarButtonItem = style.getBarButton(title: title, target: target, acion: action)
+        let rightBarButtonItem = style.getBarButton(title: title, target: target, action: action)
         rightBarButtonItem.image = image
         rightBarButtonItem.style = .done
 
