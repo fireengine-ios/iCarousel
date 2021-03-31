@@ -15,7 +15,7 @@ final class SnackbarView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
+            newValue.font = .GTAmericaStandardMediumFont(size: 16)
             newValue.textColor = .white
             newValue.lineBreakMode = .byTruncatingTail
         }
@@ -24,7 +24,7 @@ final class SnackbarView: UIView, NibInit {
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(ColorConstants.blueColor, for: .normal)
-        button.titleLabel?.font = .TurkcellSaturaMedFont(size: 16)
+        button.titleLabel?.font = .GTAmericaStandardMediumFont(size: 16)
         button.contentHorizontalAlignment = .right
         button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
