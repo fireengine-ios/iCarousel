@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol UploadGalleryAssetPickerCollectionManagerDelegate: class {
+    func didChangeSelection()
+}
+
 
 final class UploadGalleryAssetPickerCollectionManager: NSObject {
     private weak var collectionView: QuickSelectCollectionView?
@@ -16,10 +20,13 @@ final class UploadGalleryAssetPickerCollectionManager: NSObject {
     private var assets = SynchronizedArray<PHAsset>()
     private lazy var thumbnailProvider = FilesDataSource()
     
+    weak var delegate: UploadGalleryAssetPickerCollectionManagerDelegate?
     
-    init(collection: QuickSelectCollectionView) {
+    
+    init(collection: QuickSelectCollectionView, selectionDelegate: UploadGalleryAssetPickerCollectionManagerDelegate) {
         super.init()
         
+        delegate = selectionDelegate
         collectionView = collection
         
         setupCollection()
@@ -75,14 +82,13 @@ extension UploadGalleryAssetPickerCollectionManager: UICollectionViewDelegate, U
             return
         }
         
-        cell.setup(with: asset)
-        
-        if !cell.isSelected {
-            let isAlreadySelected = UploadPickerAssetSelectionHelper.shared.has(identifier: asset.localIdentifier)
-            if isAlreadySelected {
-                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
-            }
+        let isAlreadySelected = UploadPickerAssetSelectionHelper.shared.has(identifier: asset.localIdentifier)
+        cell.isSelected = isAlreadySelected
+        if isAlreadySelected {
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
         }
+
+        cell.setup(with: asset)
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -99,6 +105,7 @@ extension UploadGalleryAssetPickerCollectionManager: UICollectionViewDelegate, U
         }
         
         UploadPickerAssetSelectionHelper.shared.appendAsset(identifier: asset.localIdentifier)
+        delegate?.didChangeSelection()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -107,6 +114,7 @@ extension UploadGalleryAssetPickerCollectionManager: UICollectionViewDelegate, U
         }
         
         UploadPickerAssetSelectionHelper.shared.removeAsset(identifier: asset.localIdentifier)
+        delegate?.didChangeSelection()
     }
     
 }

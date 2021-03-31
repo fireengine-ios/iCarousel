@@ -17,7 +17,7 @@ final class UploadGalleryAssetPickerController: BaseViewController, NibInit {
     @IBOutlet private weak var collectionView: QuickSelectCollectionView!
     
     private let selectedAssetsLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-    private lazy var collectionManager = UploadGalleryAssetPickerCollectionManager(collection: collectionView)
+    private lazy var collectionManager = UploadGalleryAssetPickerCollectionManager(collection: collectionView, selectionDelegate: self)
     private var albumId: String?
     
     weak var delegate: UploadGalleryAssetPickerControllerDelegate?
@@ -28,7 +28,7 @@ final class UploadGalleryAssetPickerController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        title = "0"
+        title = String(format: TextConstants.itemsSelectedTitle, 0)
         setupNavBar()
         setupTopRefresher()
     }
@@ -36,6 +36,7 @@ final class UploadGalleryAssetPickerController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        updateTitle()
         fullReload()
     }
     
@@ -46,7 +47,9 @@ final class UploadGalleryAssetPickerController: BaseViewController, NibInit {
         setNavigationBarStyle(.white)
 
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        navigationController?.setNavigationRightBarButton(style: .white, title: TextConstants.upload, target: self, action: #selector(upload))
+        setNavigationRightBarButton(style: .byDefault,
+                                    title: TextConstants.uploadSelectButtonTitle,
+                                    target: self, action: #selector(upload))
     }
     
     @objc private func upload() {
@@ -54,6 +57,11 @@ final class UploadGalleryAssetPickerController: BaseViewController, NibInit {
         let assets = AssetProvider.shared.getAssets(with: selectedIds)
         delegate?.didSelect(assets: assets)
         UploadPickerAssetSelectionHelper.shared.clear()
+    }
+    
+    private func updateTitle() {
+        let itemsSelected = UploadPickerAssetSelectionHelper.shared.getAll().count
+        title = String(format: TextConstants.itemsSelectedTitle, itemsSelected)
     }
     
     private func setupTopRefresher() {
@@ -81,5 +89,12 @@ extension UploadGalleryAssetPickerController {
         let controller = UploadGalleryAssetPickerController.initFromNib()
         controller.albumId = albumId
         return controller
+    }
+}
+
+
+extension UploadGalleryAssetPickerController: UploadGalleryAssetPickerCollectionManagerDelegate {
+    func didChangeSelection() {
+        updateTitle()
     }
 }

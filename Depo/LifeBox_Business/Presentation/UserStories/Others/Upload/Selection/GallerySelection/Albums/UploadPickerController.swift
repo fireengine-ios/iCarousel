@@ -45,7 +45,7 @@ final class UploadPickerController: BaseViewController, NibInit {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backBarButtonItem = nil
         
-        setupCustomButtonAsNavigationBackButton(style: .white, asLeftButton: false, title: "", target: nil, image: CustomBackButtonType.cross.image, action: nil)
+        setupCustomButtonAsNavigationBackButton(style: .white, asLeftButton: true, title: "", target: nil, image: CustomBackButtonType.cross.image, action: nil)
     }
     
     private func setupTopRefresher() {
