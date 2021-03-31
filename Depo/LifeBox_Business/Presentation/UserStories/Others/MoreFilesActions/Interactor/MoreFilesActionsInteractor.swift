@@ -673,10 +673,11 @@ extension MoreFilesActionsInteractor {
     }
     
     private func showSnackbar(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) {
-        SnackbarManager.shared.show(elementType: elementType, relatedItems: relatedItems) {
+        let trashingRelated = elementType == .moveToTrash || elementType == .moveToTrashShared
+        SnackbarManager.shared.show(elementType: elementType, relatedItems: relatedItems, axis: trashingRelated ? .horizontal : .vertical) {
             let router = RouterVC()
             switch elementType {
-            case .moveToTrash:
+            case .moveToTrash, .moveToTrashShared:
                 router.openTrashBin()
             default:
                 return

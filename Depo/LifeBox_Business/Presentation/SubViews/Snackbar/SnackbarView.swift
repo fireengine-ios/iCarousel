@@ -24,7 +24,7 @@ final class SnackbarView: UIView, NibInit {
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(ColorConstants.blueColor, for: .normal)
-        button.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
+        button.titleLabel?.font = .TurkcellSaturaMedFont(size: 16)
         button.contentHorizontalAlignment = .right
         button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -41,16 +41,25 @@ final class SnackbarView: UIView, NibInit {
         backgroundColor = ColorConstants.snackbarGray
     }
     
-    static func with(type: SnackbarType, message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) -> SnackbarView {
+    static func with(type: SnackbarType, message: String, actionType: SnackbarAction?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) -> SnackbarView {
         let view = SnackbarView.initFromNib()
         
         view.titleLabel.numberOfLines = type.numberOfLinesLimit
         view.titleLabel.text = message
         
-        if let actionTitle = actionTitle {
+        if let actionTitle = actionType?.localizedTitle {
             view.actionButton.setTitle(actionTitle, for: .normal)
             view.setup(axis: axis)
             view.action = action
+        }
+
+        switch actionType {
+        case .trashBin:
+            view.actionButton.setTitleColor(ColorConstants.snackBarTrashBin, for: .normal)
+        case .ok, .some:
+            view.actionButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+        case .none:
+            break
         }
 
         return view
@@ -58,6 +67,14 @@ final class SnackbarView: UIView, NibInit {
 
     private func setup(axis: NSLayoutConstraint.Axis) {
         contentView.axis = axis
+
+        if axis == .horizontal {
+            contentView.alignment = .fill
+            contentView.distribution = .equalSpacing
+        } else {
+            contentView.distribution = .fill
+            contentView.alignment = .fill
+        }
         
         switch axis {
         case .horizontal:
