@@ -19,8 +19,13 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var collectionView: UICollectionView!
-    
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        willSet {
+            newValue.allowsSelection = true
+            newValue.showsHorizontalScrollIndicator = false
+            newValue.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 16)
+        }
+    }
     
     private var highlightView: UIView = {
        let view = UIView()
@@ -34,6 +39,12 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     private var selectedIndex: Int = 0
     private var highlightViewLeaningConstraint: NSLayoutConstraint?
     
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = ColorConstants.topBarColor
+    }
+    
     func setup(models: [TopBarCustomSegmentedViewButtonModel], selectedIndex: Int) {
         guard
             !models.isEmpty,
@@ -42,18 +53,31 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
             assertionFailure()
             return
         }
+        
         self.selectedIndex = selectedIndex
         self.models = models
-//        buttons.removeAll()
         
-        for (i, model) in models.enumerated() {
-            let button = createButton(models: model, tag: i)
-//            buttons.append(button)
-//            stackView.addArrangedSubview(button)
-        }
-
+        setupCollection()
+        
         setupHighlightView()
         updateSelection()
+    }
+    
+    private func setupCollection() {
+        
+        collectionView.register(nibCell: TopBarCustomSegmentedCell.self)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        if let collectionViewFlowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            collectionViewFlowLayout.scrollDirection = .horizontal
+            collectionViewFlowLayout.estimatedItemSize = CGSize(width: 120, height: 40)
+            collectionViewFlowLayout.minimumLineSpacing = 4
+        }
+        
+        collectionView.reloadData()
+        collectionView.selectItem(at: IndexPath(item: selectedIndex, section: 0), animated: false, scrollPosition: .left)
+        
     }
     
     func changeSelection(to index: Int) {
@@ -71,94 +95,86 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     }
     
     private func setupHighlightView() {
-//
-//        addSubview(highlightView)
-//        highlightView.isHidden =  false
-//
-//        guard
-//            !buttons.isEmpty,
-//            selectedIndex < buttons.count,
-//            let selectedButton = buttons[safe: selectedIndex]
-//        else {
-//            assertionFailure()
-//            return
-//        }
-//
-//        highlightView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        highlightView.heightAnchor.constraint(equalToConstant: 4).activate()
-//
-//        highlightView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).activate()
-//
-//        highlightView.widthAnchor.constraint(equalTo: selectedButton.widthAnchor, constant: 0).activate()
+
+        addSubview(highlightView)
+        highlightView.isHidden =  false
+
+        guard
+            models.count > 0,
+            collectionView.numberOfItems(inSection: 0) > 0,
+            collectionView.numberOfItems(inSection: 0) < models.count,
+            let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0))
+        else {
+            assertionFailure()
+            return
+        }
+
+        highlightView.translatesAutoresizingMaskIntoConstraints = false
+
+        highlightView.heightAnchor.constraint(equalToConstant: 4).activate()
+
+        highlightView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).activate()
+
+        highlightView.widthAnchor.constraint(equalTo: cell.widthAnchor, constant: 0).activate()
         
     }
     
     private func updateSelection(animated: Bool = false) {
-//        guard
-//            !buttons.isEmpty,
-//            selectedIndex < buttons.count,
-//            let selectedButton = buttons[safe: selectedIndex]
-//        else {
-//            assertionFailure()
-//            return
-//        }
-//
-//        if let highlightViewLeaningConstraint = highlightViewLeaningConstraint {
-//            highlightViewLeaningConstraint.deactivate()
-//            self.highlightViewLeaningConstraint = nil
-//        }
-//
-//        highlightViewLeaningConstraint = highlightView.leadingAnchor.constraint(equalTo: selectedButton.leadingAnchor, constant: 0)
-//        highlightViewLeaningConstraint?.activate()
-//
-//        buttons.forEach {
-//            if $0 != selectedButton {
-//                $0.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-//            }
-//        }
-//        selectedButton.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-//
-//        guard animated else {
-//            return
-//        }
-//
-//        UIView.animate(withDuration: NumericConstants.fastAnimationDuration, animations: {
-//            self.layoutIfNeeded()
-//        })
-    }
-    
-    private func createButton(models: TopBarCustomSegmentedViewButtonModel, tag: Int) -> UIButton {
-        let button = UIButton(type: .custom)
-        
-        button.setTitle(models.title, for: .normal)
-        button.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-        button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
-        
-        button.tag = tag
-        
-        button.backgroundColor = ColorConstants.topBarColor
-        
-        button.addTarget(self, action: #selector(buttonAction),
-                         for: UIControlEvents.touchUpInside)
-        
-        return button
-    }
-    
-    @objc private func buttonAction(_ sender: UIButton?) {
         guard
-            let button = sender,
-            button.tag < models.count
+            !models.isEmpty,
+            selectedIndex < models.count,
+            collectionView.numberOfItems(inSection: 0) < models.count,
+            let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0))
         else {
-            assertionFailure("button or tag is invalid")
+            assertionFailure()
+            return
+        }
+
+        if let highlightViewLeaningConstraint = highlightViewLeaningConstraint {
+            highlightViewLeaningConstraint.deactivate()
+            self.highlightViewLeaningConstraint = nil
+        }
+
+        highlightViewLeaningConstraint = highlightView.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 0)
+        highlightViewLeaningConstraint?.activate()
+
+        guard animated else {
+            return
+        }
+
+        UIView.animate(withDuration: NumericConstants.fastAnimationDuration, animations: {
+            self.layoutIfNeeded()
+        })
+    }
+}
+
+extension TopBarCustomSegmentedView: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        models.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeue(cell: TopBarCustomSegmentedCell.self, for: indexPath)
+        guard indexPath.item < models.count else {
+            return cell
+        }
+        cell.setup(title: models[safe: indexPath.item]?.title ?? "")
+        return cell
+    }
+    
+}
+
+extension TopBarCustomSegmentedView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.item < models.count else {
             return
         }
         
-        selectedIndex = button.tag
-        
+        selectedIndex = indexPath.item
         updateSelection(animated: true)
         
-        models[safe: button.tag]?.callback()
+        models[safe: indexPath.item]?.callback()
     }
     
 }
