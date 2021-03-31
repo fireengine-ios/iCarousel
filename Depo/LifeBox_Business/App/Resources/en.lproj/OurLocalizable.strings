@@ -2085,3 +2085,6 @@
 
 
 "business_app_manual_picker_selected_counter" = "%d Selected";
+
+"turkcell_updater_pop_up_title" = "Warning";
+"turkcell_updater_pop_up_description" = "Please update your app from AppStore";
