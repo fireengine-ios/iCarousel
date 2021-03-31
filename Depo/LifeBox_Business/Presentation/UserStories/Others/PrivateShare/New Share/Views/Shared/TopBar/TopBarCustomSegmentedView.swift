@@ -19,11 +19,8 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var stackView: UIStackView! {
-        willSet {
-            newValue.distribution = .fillEqually
-        }
-    }
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     
     private var highlightView: UIView = {
        let view = UIView()
@@ -33,7 +30,6 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         return view
     }()
     
-    private var buttons = [UIButton]()
     private var models = [TopBarCustomSegmentedViewButtonModel]()
     private var selectedIndex: Int = 0
     private var highlightViewLeaningConstraint: NSLayoutConstraint?
@@ -48,12 +44,12 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         }
         self.selectedIndex = selectedIndex
         self.models = models
-        buttons.removeAll()
+//        buttons.removeAll()
         
         for (i, model) in models.enumerated() {
             let button = createButton(models: model, tag: i)
-            buttons.append(button)
-            stackView.addArrangedSubview(button)
+//            buttons.append(button)
+//            stackView.addArrangedSubview(button)
         }
 
         setupHighlightView()
@@ -75,61 +71,61 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     }
     
     private func setupHighlightView() {
-        
-        addSubview(highlightView)
-        highlightView.isHidden =  false
-        
-        guard
-            !buttons.isEmpty,
-            selectedIndex < buttons.count,
-            let selectedButton = buttons[safe: selectedIndex]
-        else {
-            assertionFailure()
-            return
-        }
-        
-        highlightView.translatesAutoresizingMaskIntoConstraints = false
-        
-        highlightView.heightAnchor.constraint(equalToConstant: 4).activate()
-        
-        highlightView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).activate()
-        
-        highlightView.widthAnchor.constraint(equalTo: selectedButton.widthAnchor, constant: 0).activate()
+//
+//        addSubview(highlightView)
+//        highlightView.isHidden =  false
+//
+//        guard
+//            !buttons.isEmpty,
+//            selectedIndex < buttons.count,
+//            let selectedButton = buttons[safe: selectedIndex]
+//        else {
+//            assertionFailure()
+//            return
+//        }
+//
+//        highlightView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        highlightView.heightAnchor.constraint(equalToConstant: 4).activate()
+//
+//        highlightView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).activate()
+//
+//        highlightView.widthAnchor.constraint(equalTo: selectedButton.widthAnchor, constant: 0).activate()
         
     }
     
     private func updateSelection(animated: Bool = false) {
-        guard
-            !buttons.isEmpty,
-            selectedIndex < buttons.count,
-            let selectedButton = buttons[safe: selectedIndex]
-        else {
-            assertionFailure()
-            return
-        }
-        
-        if let highlightViewLeaningConstraint = highlightViewLeaningConstraint {
-            highlightViewLeaningConstraint.deactivate()
-            self.highlightViewLeaningConstraint = nil
-        }
-        
-        highlightViewLeaningConstraint = highlightView.leadingAnchor.constraint(equalTo: selectedButton.leadingAnchor, constant: 0)
-        highlightViewLeaningConstraint?.activate()
-        
-        buttons.forEach {
-            if $0 != selectedButton {
-                $0.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            }
-        }
-        selectedButton.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-        
-        guard animated else {
-            return
-        }
-        
-        UIView.animate(withDuration: NumericConstants.fastAnimationDuration, animations: {
-            self.layoutIfNeeded()
-        })
+//        guard
+//            !buttons.isEmpty,
+//            selectedIndex < buttons.count,
+//            let selectedButton = buttons[safe: selectedIndex]
+//        else {
+//            assertionFailure()
+//            return
+//        }
+//
+//        if let highlightViewLeaningConstraint = highlightViewLeaningConstraint {
+//            highlightViewLeaningConstraint.deactivate()
+//            self.highlightViewLeaningConstraint = nil
+//        }
+//
+//        highlightViewLeaningConstraint = highlightView.leadingAnchor.constraint(equalTo: selectedButton.leadingAnchor, constant: 0)
+//        highlightViewLeaningConstraint?.activate()
+//
+//        buttons.forEach {
+//            if $0 != selectedButton {
+//                $0.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+//            }
+//        }
+//        selectedButton.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
+//
+//        guard animated else {
+//            return
+//        }
+//
+//        UIView.animate(withDuration: NumericConstants.fastAnimationDuration, animations: {
+//            self.layoutIfNeeded()
+//        })
     }
     
     private func createButton(models: TopBarCustomSegmentedViewButtonModel, tag: Int) -> UIButton {
