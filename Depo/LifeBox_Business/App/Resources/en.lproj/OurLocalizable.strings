@@ -2019,6 +2019,7 @@
 "business_app_agreement_privacy_policy" = "Privacy Policy";
 "business_app_eula_privacy_policy_textbox" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus, ipsum sit amet aliquam iaculis, lectus enim suscipit purus, fringilla dapibus risus lorem vehicula quam Privacy Policy";
 "business_app_privacy_policy_page_title" = "Privacy Policy";
+"business_app_privacy_policy_condition" = "Privacy Policy";
 "eula_title_new" = "Welcome to Lifebox";
 "business_app_eula_page_title" = "Terms of Use";
 "business_app_settings_page_title" = "Settings";
@@ -2079,6 +2080,10 @@
 "business_app_trash_bin_empty_trash_confirm_NO_button" = "Cancel";
 "business_app_trash_bin_empty_trash_success" = "All items are permanantly deleted";
 
+/*profile page*/
+"business_app_profile_page_title" = "Profile";
+"business_app_profile_name_surname" = "Name Surname";
+"business_app_profile_email" = "Email";
 "business_app_root_device_popup_title" = "This device is rooted";
 "business_app_root_device_popup_description" = "You can not use this app with rooted device due to security reasons";
 "business_app_root_device_popup_button" = "Close the app";

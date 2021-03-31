@@ -20,7 +20,10 @@ class SettingsRouter: SettingsRouterInput {
     }
 
     func navigateToProfile() {
-        // TODO when ready- add routing to profile screen
+        guard let profile = router.profile else {
+            return
+        }
+        router.pushViewController(viewController: profile)
     }
 
     func navigateToFAQ() {
