@@ -743,32 +743,7 @@ class RouterVC: NSObject {
     }
     
     func openTrashBin() {
-        guard let tabBarVC = tabBarController else {
-            return
-        }
-        
-        tabBarVC.dismiss(animated: true)
-        
-        func switchToTrashBin() {
-            guard let segmentedController = tabBarVC.currentViewController as? SegmentedController else {
-                return
-            }
-            
-            segmentedController.loadViewIfNeeded()
-            segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
-        }
-        
-        let index = TabScreenIndex.myDisk.rawValue
-        if tabBarVC.selectedIndex == index {
-            switchToTrashBin()
-        } else {
-            guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
-                assertionFailure("This index is non existent 😵")
-                return
-            }
-            tabBarVC.tabBar.selectedItem = newSelectedItem
-            switchToTrashBin()
-        }
+        pushViewController(viewController: trashBin)
     }
     
     func openTab(_ tab: TabScreenIndex) {
