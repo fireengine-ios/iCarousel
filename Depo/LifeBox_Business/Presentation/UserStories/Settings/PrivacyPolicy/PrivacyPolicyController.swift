@@ -21,9 +21,8 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
         webConfig.dataDetectorTypes = [.phoneNumber, .link]
         
         let webView = WKWebView(frame: .zero, configuration: webConfig)
-        webView.navigationDelegate = self
         webView.isOpaque = false
-        webView.backgroundColor = UIColor.white
+        webView.navigationDelegate = self
         
         /// there is a bug for iOS 9
         /// https://stackoverflow.com/a/32843700/5893286
@@ -58,8 +57,9 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setupWebView()
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
+        setView()
+        setWebView()
         setActivityIndicator()
         startActivity()
         loadPrivacyPolicy()
@@ -67,7 +67,12 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNavigationTitle(title: TextConstants.privacyPolicyPageTitle, style: .white)
         setNavigationBarStyle(.white)
+        
+        if !Device.isIpad {
+            setNavigationBarStyle(.byDefault)
+        }
     }
     
     deinit {
@@ -78,11 +83,11 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
     
     //MARK: - Setup
     
-    private func setupView() {
-        setTitle(withString: TextConstants.privacyPolicyCondition)
+    private func setView() {
+        view.backgroundColor = ColorConstants.tableBackground
     }
     
-    private func setupWebView() {
+    private func setWebView() {
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.topAnchor.constraint(equalTo: view.safeTopAnchor, constant: 20).activate()

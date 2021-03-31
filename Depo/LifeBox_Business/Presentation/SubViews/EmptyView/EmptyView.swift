@@ -31,7 +31,7 @@ final class EmptyView: UIView, NibInit {
                 case .hiddenBin:
                     return TextConstants.hiddenBinEmpty
                 case .trashBin:
-                    return TextConstants.trashBinEmpty
+                    return TextConstants.trashBinEmptyPage
                 case .sharedBy:
                     return TextConstants.sharedByMeEmptyPage
                 case .sharedWith:

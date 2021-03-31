@@ -65,12 +65,6 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         }
     }
     
-    func onUpdatUserInfo(userInfo: AccountInfoResponse) {
-        if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().userProfile(userInfo: userInfo)])
-        }
-    }
-    
     func goToActivityTimeline() {
         guard let left = leftController else { return }
         configurateWithControllers(leftViewController: left, controllers: [RouterVC().vcActivityTimeline])

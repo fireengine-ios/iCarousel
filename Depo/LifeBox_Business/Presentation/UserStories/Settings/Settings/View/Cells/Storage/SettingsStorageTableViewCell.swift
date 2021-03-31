@@ -9,6 +9,8 @@
 import UIKit
 
 final class SettingsStorageTableViewCell: UITableViewCell {
+    
+    private var isProfilePage = false
 
     @IBOutlet private weak var iconContainerView: UIView! {
         willSet {
@@ -21,7 +23,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
             newValue.layer.cornerRadius = 5
         }
     }
-
+    
     @IBOutlet private weak var iconImageView: UIImageView!
 
     @IBOutlet private weak var mainLabel: UILabel! {
@@ -52,11 +54,21 @@ final class SettingsStorageTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         contentView.layer.cornerRadius = 5
+        selectionStyle = .none
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        
+        if isProfilePage {
+            innerContainerView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15).activate()
+            innerContainerView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15).activate()
+            layoutIfNeeded()
+        }
     }
 
-    func setup(with storageUsageInfo: SettingsStorageUsageResponseItem) {
+    func setup(with storageUsageInfo: SettingsStorageUsageResponseItem, isProfilePage: Bool = false) {
         storageFullnessProgressView.isHidden = storageUsageInfo.unlimitedStorage ?? true
         mainLabel.isHidden = storageUsageInfo.unlimitedStorage ?? true
 
@@ -86,6 +98,10 @@ final class SettingsStorageTableViewCell: UITableViewCell {
         let usedStorageInKb = CGFloat(storageUsageInfo.usageInBytes) / 1024.0
         storageFullnessProgressView.targetValue = storageInKb
         storageFullnessProgressView.set(progress: usedStorageInKb)
+        
+        if isProfilePage {
+            self.isProfilePage = isProfilePage
+        }
     }
 
     private func storageInBytesToReadableFormat(_ input: Int64) -> String {
