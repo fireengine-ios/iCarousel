@@ -2090,3 +2090,4 @@
 
 
 "business_app_manual_picker_selected_counter" = "%d Selected";
+"business_app_delete_success_snackbar_trashbin_link" = "Trash Bin";
