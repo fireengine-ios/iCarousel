@@ -17,6 +17,8 @@ final class ProfileCell: UITableViewCell {
             newValue.layer.cornerRadius = 5
         }
     }
+    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var nameSurnameLabel: UILabel! {
         willSet {
@@ -88,6 +90,13 @@ final class ProfileCell: UITableViewCell {
         contentView.layer.cornerRadius = 5
         selectionStyle = .none
         setUserAvatar()
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        leftConstraint.constant = 15
+        rightConstraint.constant = 15
+        layoutIfNeeded()
     }
     
     //MARK: - Private funcs

@@ -14,6 +14,15 @@ final class ProfileViewController: BaseViewController, NibInit {
     
     private var profileTableViewAdapter: ProfileTableViewAdapter?
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.frame = view.bounds
+        activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        activityIndicator.color = UIColor.lightGray
+        return activityIndicator
+    }()
+    
     //MARK: - @IBOutlets
 
     @IBOutlet weak var tableView: UITableView!
@@ -24,7 +33,8 @@ final class ProfileViewController: BaseViewController, NibInit {
         super.viewDidLoad()
         changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
         setView()
-        profileTableViewAdapter = ProfileTableViewAdapter(with: tableView)
+        setActivityIndicator()
+        profileTableViewAdapter = ProfileTableViewAdapter(with: tableView, delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,14 +52,30 @@ final class ProfileViewController: BaseViewController, NibInit {
     private func setView() {
         view.backgroundColor = ColorConstants.settingsTableBackground
     }
+    
+    private func setActivityIndicator() {
+        view.addSubview(activityIndicator)
+    }
+    
+    internal func startActivity() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        activityIndicator.startAnimating()
+    }
+    
+    internal func stopActivity() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        activityIndicator.stopAnimating()
+    }
 }
 
-extension ProfileViewController: SettingsViewInput {
-    func prepareCellsData() {
+//MARK: - ProfileDelegate
 
+extension ProfileViewController: ProfileDelegate {
+    func showActivityIndicator() {
+        startActivity()
     }
-
-    func updateUserDataUsageSection(usageData: SettingsStorageUsageResponseItem?) {
-        profileTableViewAdapter?.update(with: usageData)
+    
+    func hideActivityIndicator() {
+        stopActivity()
     }
 }

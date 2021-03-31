@@ -9,6 +9,8 @@
 import UIKit
 
 final class SettingsStorageTableViewCell: UITableViewCell {
+    
+    var isProfilePage: Bool = false
 
     @IBOutlet private weak var iconContainerView: UIView! {
         willSet {
@@ -21,7 +23,11 @@ final class SettingsStorageTableViewCell: UITableViewCell {
             newValue.layer.cornerRadius = 5
         }
     }
-
+    
+    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
+    
     @IBOutlet private weak var iconImageView: UIImageView!
 
     @IBOutlet private weak var mainLabel: UILabel! {
@@ -52,8 +58,18 @@ final class SettingsStorageTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         contentView.layer.cornerRadius = 5
+        selectionStyle = .none
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+        
+        if isProfilePage {
+            leftConstraint.constant = 15
+            rightConstraint.constant = 15
+            layoutIfNeeded()
+        }
     }
 
     func setup(with storageUsageInfo: SettingsStorageUsageResponseItem) {

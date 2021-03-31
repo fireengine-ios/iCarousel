@@ -8,32 +8,35 @@
 
 import UIKit
 
+protocol ProfileDelegate: class {
+    func showActivityIndicator()
+    func hideActivityIndicator()
+}
+
 final class ProfileTableViewAdapter: NSObject {
+    
+    //MARK: - Public properties
+    
+    weak var profileDelegate: ProfileDelegate?
     
     //MARK: - Private properties
 
     private weak var tableView: UITableView?
-    private weak var delegate: SettingsTableViewAdapterDelegate?
+    private weak var delegate: ProfileDelegate?
 
     private var storageUsageInfo: SettingsStorageUsageResponseItem?
     
     //MARK: - Init
 
     convenience init(with tableView: UITableView,
-                     delegate fileInfoShareViewDelegate: SettingsTableViewAdapterDelegate? = nil) {
+                     delegate fileInfoShareViewDelegate: ProfileDelegate) {
         self.init()
         self.tableView = tableView
         self.delegate = fileInfoShareViewDelegate
         tableView.delegate = self
         tableView.dataSource = self
         setupTableView()
-    }
-    
-    //MARK: - Public funcs
-
-    func update(with storageUsageData: SettingsStorageUsageResponseItem?) {
-        storageUsageInfo = storageUsageData
-        reloadContent()
+        getStorageUsageInfo()
     }
     
     //MARK: - Private funcs
@@ -46,9 +49,23 @@ final class ProfileTableViewAdapter: NSObject {
         tableView?.separatorStyle = .none
         tableView?.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
     }
-
+    
     private func reloadContent() {
         tableView?.reloadData()
+        delegate?.hideActivityIndicator()
+    }
+    
+    private func getStorageUsageInfo() {
+        delegate?.showActivityIndicator()
+        let userAccountUuid = SingletonStorage.shared.accountInfo?.uuid ?? ""
+        let organizationUUID = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid ?? ""
+        SingletonStorage.shared.getStorageUsageInfo(projectId: organizationUUID, userAccountId: userAccountUuid, success: { [weak self] info in
+            self?.storageUsageInfo = info
+            self?.reloadContent()
+        }, fail: { [weak self] errorResponse in
+            self?.storageUsageInfo = nil
+            self?.reloadContent()
+        })
     }
 }
 
@@ -79,6 +96,10 @@ extension ProfileTableViewAdapter: UITableViewDelegate {
 
 extension ProfileTableViewAdapter: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard storageUsageInfo != nil else {
+            return 1
+        }
+        
         return 2
     }
 
@@ -93,16 +114,16 @@ extension ProfileTableViewAdapter: UITableViewDataSource {
             return cell
         case 1:
             guard let storageUsageInfo = storageUsageInfo else {
-//                assertionFailure("storageUsageInfo is nil but cellForRowAt called. Recheck logic")
                 return UITableViewCell()
             }
             let cell = tableView.dequeue(reusable: SettingsStorageTableViewCell.self)
+            cell.isProfilePage = true
             cell.setup(with: storageUsageInfo)
-            cell.selectionStyle = .none
             return cell
-        default: break
+        default:
+            break
         }
-
+        
         return UITableViewCell()
     }
 }
