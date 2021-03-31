@@ -116,7 +116,8 @@ struct TextConstants {
     static let termsAndUseIntroductionCheckbox = NSLocalizedString("terms_and_use_introduction_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privacyPolicy = NSLocalizedString("business_app_eula_privacy_policy_textbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkTurkcellAndGroupCompanies = NSLocalizedString("terms_and_use_etk_link_turkcell_and_group_companies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let privacyPolicyCondition = NSLocalizedString("business_app_privacy_policy_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyPageTitle = NSLocalizedString("business_app_privacy_policy_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyCondition = NSLocalizedString("business_app_privacy_policy_condition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privacyPolicyHeadLine = NSLocalizedString("privacy_policy_head_line", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkCommercialEmailMessages = NSLocalizedString("terms_and_use_etk_link_commercial_email_messages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxErrorText = NSLocalizedString("You need to confirm the User Agreement to continue.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1510,4 +1511,17 @@ extension TextConstants {
     static let rootDevicePopupTitle = NSLocalizedString("business_app_root_device_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let rootDevicePopupDescription = NSLocalizedString("business_app_root_device_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let rootDevicePopupCloseAppButton = NSLocalizedString("business_app_root_device_popup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - Profile page
+extension TextConstants {
+    static let profilePageTitle = NSLocalizedString("business_app_profile_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let profileNameSurname = NSLocalizedString("business_app_profile_name_surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let profileEmail = NSLocalizedString("business_app_profile_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
+    static let itemsSelectedTitle = NSLocalizedString("business_app_manual_picker_selected_counter", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+extension TextConstants {
+    static let snackBarTrashBinLinkTitle = NSLocalizedString("business_app_delete_success_snackbar_trashbin_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

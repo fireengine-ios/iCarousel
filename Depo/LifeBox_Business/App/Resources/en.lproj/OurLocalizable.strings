@@ -1914,6 +1914,11 @@
 "business_app_login_captcha_empty" = "Please type the text";
 "business_app_login_email_not_validated" = "Please enter a valid e-mail";
 "business_app_login_pwd_error_code_30" = "Authentication failed";
+"business_app_login_ldap_error_code_31" = "Temporary error occured. Please try again later.";
+"business_app_login_ldap_error_code_32" = "Authentication failed";
+"business_app_login_ldap_error_code_33" = "Authentication failed";
+"business_app_login_blocked_ip" = "Your IP is blocked. Authentication failed.";
+"business_app_login_generic_error_tag" = "Authentication failed.";
 "business_app_login_captcha_not_match" = "Entered text does not match";
 "business_app_login_show_password" = "Show";
 "business_app_login_hide_password" = "Hide";
@@ -2014,6 +2019,7 @@
 "business_app_agreement_privacy_policy" = "Privacy Policy";
 "business_app_eula_privacy_policy_textbox" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus, ipsum sit amet aliquam iaculis, lectus enim suscipit purus, fringilla dapibus risus lorem vehicula quam Privacy Policy";
 "business_app_privacy_policy_page_title" = "Privacy Policy";
+"business_app_privacy_policy_condition" = "Privacy Policy";
 "eula_title_new" = "Welcome to Lifebox";
 "business_app_eula_page_title" = "Terms of Use";
 "business_app_settings_page_title" = "Settings";
@@ -2073,3 +2079,15 @@
 "business_app_trash_bin_empty_trash_confirm_YES_button" = "Empty Trash Bin";
 "business_app_trash_bin_empty_trash_confirm_NO_button" = "Cancel";
 "business_app_trash_bin_empty_trash_success" = "All items are permanantly deleted";
+
+/*profile page*/
+"business_app_profile_page_title" = "Profile";
+"business_app_profile_name_surname" = "Name Surname";
+"business_app_profile_email" = "Email";
+"business_app_root_device_popup_title" = "This device is rooted";
+"business_app_root_device_popup_description" = "You can not use this app with rooted device due to security reasons";
+"business_app_root_device_popup_button" = "Close the app";
+
+
+"business_app_manual_picker_selected_counter" = "%d Selected";
+"business_app_delete_success_snackbar_trashbin_link" = "Trash Bin";

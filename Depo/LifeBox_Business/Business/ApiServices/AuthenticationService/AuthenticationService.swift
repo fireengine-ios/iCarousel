@@ -32,8 +32,9 @@ class AuthenticationUser: BaseRequestParametrs {
     
     override var patch: URL {
         var patch: String = RouteRequests.Login.yaaniMail
-        let rememberMeValue = rememberMe ? "?rememberMe=on" : ""
-        patch = String(format: patch, rememberMeValue)
+        var rememberMeSuffix = "?rememberMe=on"
+        rememberMeSuffix.append(rememberMe ? "&extendRememberMeDuration=true" : "")
+        patch = String(format: patch, rememberMeSuffix)
         
         return URL(string: patch, relativeTo: super.patch)!
     }
@@ -749,6 +750,7 @@ class AuthenticationService: BaseRequestService {
     func loginViaTwoFactorAuth(token: String,
                                challengeType: String,
                                otpCode: String,
+                               rememberMe: Bool,
                                handler: @escaping (ResponseResult<[String: Any]>) -> Void) {
         debugLog("AuthenticationService loginViaTwoFactorAuth")
         
@@ -757,9 +759,15 @@ class AuthenticationService: BaseRequestService {
             "challengeType" : challengeType,
             "otpCode"       : otpCode,
         ]
-        
+
+        let urlSuffix = rememberMe ? "&extendRememberMeDuration=true" : ""
+        guard let url = URL(string: String(format: RouteRequests.twoFactorAuthLogin, urlSuffix)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return
+        }
+
         sessionManagerWithoutToken
-            .request(RouteRequests.twoFactorAuthLogin,
+            .request(url,
                      method: .post,
                      parameters: params,
                      encoding: JSONEncoding.default)

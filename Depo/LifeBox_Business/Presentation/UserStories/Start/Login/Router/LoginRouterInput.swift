@@ -16,7 +16,7 @@ protocol LoginRouterInput {
     
     func openSupport()
         
-    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse, rememberMe: Bool)
     
     func showAccountStatePopUp(image: PopUpImage,
                                title: String,

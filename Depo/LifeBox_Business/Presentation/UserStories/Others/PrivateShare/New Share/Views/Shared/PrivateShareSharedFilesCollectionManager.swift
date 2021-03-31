@@ -167,9 +167,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
             if shouldReload {
                 self?.changeSelection(isActive: false)
                 self?.reloadCollection()
+            } else {
+                self?.collectionView?.refreshControl?.endRefreshing()
             }
         }
-        
     }
     
     private func reloadAfterOperation() {
