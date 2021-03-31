@@ -37,8 +37,8 @@ class LoginRouter: LoginRouterInput {
         router.presentViewController(controller: popUp, animated: false)
     }
     
-    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
-        let vc = TwoFactorAuthenticationViewController(response: response)
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse, rememberMe: Bool) {
+        let vc = TwoFactorAuthenticationViewController(response: response, rememberMe: rememberMe)
         router.pushViewController(viewController: vc)
     }
     

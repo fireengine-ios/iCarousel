@@ -17,10 +17,12 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     private lazy var eulaService = EulaService()
     
     private var isFirstAppear = true
+    private let rememberMe: Bool
     
-    init(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
+    init(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel, rememberMe: Bool) {
         self.otpParams = otpParams
         self.challenge = challenge
+        self.rememberMe = rememberMe
     }
     
     override var expectedInputLength: Int? {
@@ -100,7 +102,8 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     override func verifyCode(code: String) {
         authenticationService.loginViaTwoFactorAuth(token: challenge.token,
                                                     challengeType: challenge.challengeType.rawValue,
-                                                    otpCode: code) { [weak self] response in
+                                                    otpCode: code,
+                                                    rememberMe: rememberMe) { [weak self] response in
             DispatchQueue.main.async {
                 switch response {
                 case .success(let result):

@@ -103,7 +103,7 @@ struct RouteRequests {
     static let mailUpdate = "account/email"
     
     static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
-    static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
+    static let twoFactorAuthLogin = baseUrl.absoluteString + "auth/2fa/token?rememberMe=on%@"
 
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
