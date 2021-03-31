@@ -91,14 +91,17 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
 
+    private var rememberMe: Bool = false
+
     //MARK: lifecycle
 //    override var preferredNavigationBarStyle: NavigationBarStyle {
 //        return .clear
 //    }
     
-    init(response: TwoFactorAuthErrorResponse) {
+    init(response: TwoFactorAuthErrorResponse, rememberMe: Bool) {
         self.twoFactorAuthResponse = response
         self.challengingReason = response.reason
+        self.rememberMe = rememberMe
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -201,7 +204,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     }
     
     private func openTwoFactorChallenge(with otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
-        let controller = router.twoFactorChallenge(otpParams: otpParams, challenge: challenge)
+        let controller = router.twoFactorChallenge(otpParams: otpParams, challenge: challenge, rememberMe: rememberMe)
         router.pushViewController(viewController: controller)
     }
     

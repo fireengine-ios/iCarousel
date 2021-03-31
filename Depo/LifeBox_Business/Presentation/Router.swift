@@ -720,8 +720,8 @@ class RouterVC: NSObject {
         return SupportFormPrefilledController()
     }
     
-    func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
-        return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
+    func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel, rememberMe: Bool) -> UIViewController {
+        return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge, rememberMe: rememberMe)
     }
     
     var changeEmailPopUp: ChangeEmailPopUp {

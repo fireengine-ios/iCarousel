@@ -1519,3 +1519,7 @@ extension TextConstants {
     static let profileNameSurname = NSLocalizedString("business_app_profile_name_surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let profileEmail = NSLocalizedString("business_app_profile_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+extension TextConstants {
+    static let itemsSelectedTitle = NSLocalizedString("business_app_manual_picker_selected_counter", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

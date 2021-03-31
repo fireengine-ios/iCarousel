@@ -2084,3 +2084,9 @@
 "business_app_profile_page_title" = "Profile";
 "business_app_profile_name_surname" = "Name Surname";
 "business_app_profile_email" = "Email";
+"business_app_root_device_popup_title" = "This device is rooted";
+"business_app_root_device_popup_description" = "You can not use this app with rooted device due to security reasons";
+"business_app_root_device_popup_button" = "Close the app";
+
+
+"business_app_manual_picker_selected_counter" = "%d Selected";

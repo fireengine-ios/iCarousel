@@ -31,7 +31,7 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     func captchaRequiredFailed()
     func captchaRequiredFailed(with message: String)
     
-    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse, rememberMe: Bool)
     
     func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler)
 }

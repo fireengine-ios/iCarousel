@@ -34,7 +34,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private var accountWarningService: AccountWarningService?
 
-    private var rememberMe: Bool = true
+    private var rememberMe: Bool = false
     
     private var attempts: Int = 0
     
@@ -111,7 +111,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private func authificate(login: String,
                              password: String,
-                             rememberMe: Bool = true,
+                             rememberMe: Bool,
                              atachedCaptcha: CaptchaParametrAnswer?,
                              errorHandler: @escaping (LoginResponseError, String) -> Void) {
         
@@ -197,7 +197,7 @@ class LoginInteractor: LoginInteractorInput {
             }
             
             self.tokenStorage.isRememberMe = self.rememberMe
-            self.output?.showTwoFactorAuthViewController(response: response)
+            self.output?.showTwoFactorAuthViewController(response: response, rememberMe: rememberMe)
         })
     }
     
@@ -280,7 +280,7 @@ class LoginInteractor: LoginInteractorInput {
     func authenticate(with flToken: String) {
 
         // due to task requirement- rememberme is always ON
-        self.rememberMe = true
+        self.rememberMe = false
 
         authenticationService.login(with: flToken,
                                     success: { [weak self] headers in
@@ -314,13 +314,13 @@ class LoginInteractor: LoginInteractorInput {
                                         }
 
                                         self.tokenStorage.isRememberMe = self.rememberMe
-                                        self.output?.showTwoFactorAuthViewController(response: response)
+                                        self.output?.showTwoFactorAuthViewController(response: response, rememberMe: self.rememberMe)
 
                                         printLog("[LoginInteractor] authenticate with FL login not completed. 2FA is expected")
                                     })
     }
 
-    func authificate(login: String, password: String, rememberMe: Bool = true, atachedCaptcha: CaptchaParametrAnswer?) {
+    func authificate(login: String, password: String, rememberMe: Bool, atachedCaptcha: CaptchaParametrAnswer?) {
         authificate(login: login, password: password, rememberMe: rememberMe, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
             
             DispatchQueue.main.async { [weak self] in
