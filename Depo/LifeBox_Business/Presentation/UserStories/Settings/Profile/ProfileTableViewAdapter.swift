@@ -33,8 +33,6 @@ final class ProfileTableViewAdapter: NSObject {
         self.init()
         self.tableView = tableView
         self.delegate = fileInfoShareViewDelegate
-        tableView.delegate = self
-        tableView.dataSource = self
         setupTableView()
         getStorageUsageInfo()
     }
@@ -48,6 +46,9 @@ final class ProfileTableViewAdapter: NSObject {
         tableView?.backgroundColor = ColorConstants.settingsTableBackground
         tableView?.separatorStyle = .none
         tableView?.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
+        
+        tableView?.delegate = self
+        tableView?.dataSource = self
     }
     
     private func reloadContent() {
@@ -117,8 +118,7 @@ extension ProfileTableViewAdapter: UITableViewDataSource {
                 return UITableViewCell()
             }
             let cell = tableView.dequeue(reusable: SettingsStorageTableViewCell.self)
-            cell.isProfilePage = true
-            cell.setup(with: storageUsageInfo)
+            cell.setup(with: storageUsageInfo, isProfilePage: true)
             return cell
         default:
             break

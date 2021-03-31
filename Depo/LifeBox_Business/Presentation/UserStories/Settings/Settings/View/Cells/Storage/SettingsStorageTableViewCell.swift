@@ -10,7 +10,7 @@ import UIKit
 
 final class SettingsStorageTableViewCell: UITableViewCell {
     
-    var isProfilePage: Bool = false
+    private var isProfilePage = false
 
     @IBOutlet private weak var iconContainerView: UIView! {
         willSet {
@@ -68,7 +68,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
         }
     }
 
-    func setup(with storageUsageInfo: SettingsStorageUsageResponseItem) {
+    func setup(with storageUsageInfo: SettingsStorageUsageResponseItem, isProfilePage: Bool = false) {
         storageFullnessProgressView.isHidden = storageUsageInfo.unlimitedStorage ?? true
         mainLabel.isHidden = storageUsageInfo.unlimitedStorage ?? true
 
@@ -98,6 +98,10 @@ final class SettingsStorageTableViewCell: UITableViewCell {
         let usedStorageInKb = CGFloat(storageUsageInfo.usageInBytes) / 1024.0
         storageFullnessProgressView.targetValue = storageInKb
         storageFullnessProgressView.set(progress: usedStorageInKb)
+        
+        if isProfilePage {
+            self.isProfilePage = isProfilePage
+        }
     }
 
     private func storageInBytesToReadableFormat(_ input: Int64) -> String {
