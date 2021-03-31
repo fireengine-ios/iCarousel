@@ -17,8 +17,6 @@ final class ProfileCell: UITableViewCell {
             newValue.layer.cornerRadius = 5
         }
     }
-    @IBOutlet private weak var leftConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var rightConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var nameSurnameLabel: UILabel! {
         willSet {
@@ -94,8 +92,8 @@ final class ProfileCell: UITableViewCell {
     
     override func updateConstraints() {
         super.updateConstraints()
-        leftConstraint.constant = 15
-        rightConstraint.constant = 15
+        containerView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15).activate()
+        containerView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15).activate()
         layoutIfNeeded()
     }
     

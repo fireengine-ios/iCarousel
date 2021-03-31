@@ -96,9 +96,7 @@
                 <outlet property="iconContainerView" destination="Joa-cf-hAI" id="LHC-MD-sSg"/>
                 <outlet property="iconImageView" destination="day-Sg-NAp" id="H6h-Df-RRp"/>
                 <outlet property="innerContainerView" destination="rkR-cK-Yar" id="4cj-Ao-OPX"/>
-                <outlet property="leftConstraint" destination="7BA-MI-OrF" id="SVs-wn-G6A"/>
                 <outlet property="mainLabel" destination="lqm-oC-Ute" id="OQ1-UB-n7C"/>
-                <outlet property="rightConstraint" destination="Mrr-7c-d2T" id="EbB-Su-eRQ"/>
                 <outlet property="storageFullnessProgressView" destination="OZ4-I8-VCh" id="sBi-Bb-hDT"/>
                 <outlet property="storageUsageLabel" destination="1ec-zQ-nz8" id="2AI-fC-tcp"/>
             </connections>

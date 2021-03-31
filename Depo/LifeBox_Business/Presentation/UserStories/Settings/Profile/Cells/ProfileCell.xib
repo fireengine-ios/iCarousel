@@ -127,9 +127,7 @@
                 <outlet property="changeAvatarButton" destination="ekt-Xa-6VN" id="1Mc-bf-riU"/>
                 <outlet property="containerView" destination="9RP-29-vza" id="c3R-VO-2dg"/>
                 <outlet property="emailLabel" destination="YH5-mD-cgV" id="rrZ-9v-gSF"/>
-                <outlet property="leftConstraint" destination="j9T-2N-ReX" id="sun-Qg-TI1"/>
                 <outlet property="nameSurnameLabel" destination="sDk-dx-C7X" id="a4d-Qt-mBd"/>
-                <outlet property="rightConstraint" destination="fZC-RC-9YC" id="lTj-Lh-frE"/>
                 <outlet property="userAvatarImageView" destination="z0u-0Y-ok6" id="i8T-hU-NcG"/>
                 <outlet property="userAvatarPlaceholder" destination="66L-St-I9h" id="61B-b0-tZC"/>
                 <outlet property="userEmailLabel" destination="uml-FK-KvC" id="hJO-E8-iYc"/>

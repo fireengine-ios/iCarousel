@@ -24,10 +24,6 @@ final class SettingsStorageTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var leftConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var rightConstraint: NSLayoutConstraint!
-    
     @IBOutlet private weak var iconImageView: UIImageView!
 
     @IBOutlet private weak var mainLabel: UILabel! {
@@ -66,8 +62,8 @@ final class SettingsStorageTableViewCell: UITableViewCell {
         super.updateConstraints()
         
         if isProfilePage {
-            leftConstraint.constant = 15
-            rightConstraint.constant = 15
+            innerContainerView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 15).activate()
+            innerContainerView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15).activate()
             layoutIfNeeded()
         }
     }
