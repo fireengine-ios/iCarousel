@@ -26,11 +26,7 @@ struct TextConstants {
         static let iPhoneFastLoginAppIdentifier: String = "59320"
         
         static let appNameLowercased: String = {
-            #if LIFEDRIVE
-                return "billo"
-            #else
-                return "lifebox"
-            #endif
+            return "lifebox business"
         }()
         private static let appNameUppercased = appNameLowercased.uppercased()
         private static let appNameCapitalized = appNameLowercased.capitalized
