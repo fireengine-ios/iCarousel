@@ -41,6 +41,8 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
     private lazy var heightConstraint = heightAnchor.constraint(equalToConstant: 0)
     private weak var delegate: PrivateShareSelectSuggestionsDelegate?
     private lazy var analytics = PrivateShareAnalytics()
+
+    private(set) var isShowingContacts = false
     
     
     override func awakeFromNib() {
@@ -55,6 +57,8 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
         }
         
         suggestionsView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        isShowingContacts = !contacts.isEmpty
         
         guard !contacts.isEmpty else {
             heightConstraint.constant = 0

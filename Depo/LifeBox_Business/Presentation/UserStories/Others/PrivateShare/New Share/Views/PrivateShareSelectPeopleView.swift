@@ -32,7 +32,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var textField: UITextField! {
+    @IBOutlet private(set) weak var textField: UITextField! {
         willSet {
             newValue.borderStyle = .roundedRect
             newValue.placeholder = TextConstants.PrivateShare.box_inside
