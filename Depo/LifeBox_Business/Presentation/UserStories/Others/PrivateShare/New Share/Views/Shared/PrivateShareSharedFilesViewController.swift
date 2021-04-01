@@ -85,6 +85,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
+
+        if shareType == .trashBin {
+            topBarSortingBar.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
