@@ -116,7 +116,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
-        ItemOperationManager.default.startUpdateView(view: self)
         
         onStopPlay()
         
@@ -142,6 +141,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
+        ItemOperationManager.default.startUpdateView(view: self)
         updateFirstVisibleCell()
     }
     
