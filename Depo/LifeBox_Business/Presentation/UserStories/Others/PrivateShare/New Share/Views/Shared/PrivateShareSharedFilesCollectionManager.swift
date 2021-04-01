@@ -132,6 +132,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private func reloadCollection() {
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
+            self.collectionView?.layoutIfNeeded()
             self.collectionView?.reloadData()
             self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
             self.delegate?.didEndReload()
@@ -165,10 +166,14 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private func fullReload() {
         fileInfoManager.reload { [weak self] (shouldReload, _) in
             if shouldReload {
-                self?.changeSelection(isActive: false)
-                self?.reloadCollection()
+                DispatchQueue.toMain {
+                    self?.changeSelection(isActive: false)
+                    self?.reloadCollection()
+                }
             } else {
-                self?.collectionView?.refreshControl?.endRefreshing()
+                DispatchQueue.toMain {
+                    self?.collectionView?.refreshControl?.endRefreshing()
+                }
             }
         }
     }
@@ -325,13 +330,16 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func setEmptyScreen(isHidden: Bool) {
+        DispatchQueue.toMain {
+            self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
+        }
+
         guard collectionView?.backgroundView?.isHidden != isHidden else {
             return
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.collectionView?.backgroundView?.isHidden = isHidden
-            self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
         }
     }
 }

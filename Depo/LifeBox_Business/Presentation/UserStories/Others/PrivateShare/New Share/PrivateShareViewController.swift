@@ -135,6 +135,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+        selectPeopleView.textField.becomeFirstResponder()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -226,7 +227,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func alloweManualAddIfNeeded(searchQuery: String) {
-        let isAllowed = (remoteSuggestions.first(where: { $0.email == searchQuery }) != nil)
+        let isAllowed = !searchQuery.isEmpty && (remoteSuggestions.first(where: { $0.email == searchQuery }) != nil)
         selectPeopleView.addManually(isAllowed: isAllowed)
     }
 
@@ -291,7 +292,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
 
     func startEditing(text: String) {
-//            searchSuggestionsContainer.isHidden = true
+        if !remoteSuggestionsView.isShowingContacts {
+            setupSuggestedSubjects(searchText: text)
+        }
     }
     
     func searchTextDidChange(text: String) {

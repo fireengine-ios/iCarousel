@@ -134,6 +134,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 
                 backgroundColor = .clear
                 
+                showPlaceholder()
+                
                 guard let url = object.urlToFile, !url.isExpired else {
                     processMissingUrl(at: index, isFullRequired: true)
                     return
@@ -179,7 +181,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                     webView.load(URLRequest(url: url))
                     
                 } else {
-                    setPlaceholder()
+                    showPlaceholder()
+                    hidePreviewViews()
                     showNoPreviewMessage()
                 }
         }
@@ -205,7 +208,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
         
         isNeedToUpdateUrl = false
-        setPlaceholder()
+        showPlaceholder()
+        hidePreviewViews()
         showNoPreviewMessage()
     }
     
@@ -276,7 +280,8 @@ extension PhotoVideoDetailCell: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        setPlaceholder()
+        showPlaceholder()
+        hidePreviewViews()
         showNoPreviewMessage()
     }
 }
@@ -303,7 +308,8 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
     
     func onImageLoaded(image: UIImage?) {
         if image == nil {
-            setPlaceholder()
+            showPlaceholder()
+            hidePreviewViews()
         } else {
             placeholderImageView.isHidden = true
             imageScrollView.isHidden = false
@@ -324,10 +330,12 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
         }
     }
     
-    private func setPlaceholder() {
+    private func showPlaceholder() {
         placeholderImageView.image = WrapperedItemUtil.previewPlaceholderImage(fileType: fileType)
         placeholderImageView.isHidden = false
-        
+    }
+    
+    private func hidePreviewViews() {
         imageScrollView.isHidden = true
         webView.isHidden = true
         playerView.isHidden = true
@@ -336,14 +344,18 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
 
 
 extension PhotoVideoDetailCell: DetailMediaPlayerViewDelegate {
-    func playerIsReady() {
-        placeholderImageView.isHidden = true
+    func playerHasData() {
         delegate?.loadingFinished()
     }
     
     func playerIsFailed() {
         delegate?.loadingFinished()
-        setPlaceholder()
+        showPlaceholder()
+        hidePreviewViews()
         showNoPreviewMessage()
+    }
+    
+    func artworkIsLoaded() {
+        placeholderImageView.isHidden = true
     }
 }
