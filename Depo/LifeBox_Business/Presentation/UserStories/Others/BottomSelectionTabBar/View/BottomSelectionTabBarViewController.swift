@@ -11,7 +11,8 @@ import UIKit
 
 class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabBarViewInput, NibInit {
 
-    @IBOutlet var bottomActionsBar: BottomActionsBar! 
+    @IBOutlet var bottomActionsBar: BottomActionsBar!
+    
     var output: BottomSelectionTabBarViewOutput!
     var config: EditingBarConfig?
     var sourceView: UIView?
