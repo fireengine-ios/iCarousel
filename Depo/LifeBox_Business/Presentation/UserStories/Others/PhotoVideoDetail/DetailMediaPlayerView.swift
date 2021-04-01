@@ -11,8 +11,9 @@ import Player
 
 
 protocol DetailMediaPlayerViewDelegate: class {
-    func playerIsReady()
+    func playerHasData()
     func playerIsFailed()
+    func artworkIsLoaded()
 }
 
 
@@ -215,6 +216,7 @@ final class DetailMediaPlayerView: UIView, FromNib {
                 }
                 artworkImageView.isHidden = false
                 artworkImageView.image = UIImage(data: data)
+                delegate?.artworkIsLoaded()
             default:
                 continue
             }
@@ -229,8 +231,6 @@ extension DetailMediaPlayerView: PlayerDelegate {
         
         timeAfter.text = player.currentTimeInterval.playbackTime
         totalDuration.text = player.maximumDuration.playbackTime
-        
-        delegate?.playerIsReady()
     }
     
     func playerPlaybackStateDidChange(_ player: Player) {
@@ -256,7 +256,7 @@ extension DetailMediaPlayerView: PlayerDelegate {
             
             getArtwork(player)
             
-            delegate?.playerIsReady()
+            delegate?.playerHasData()
         default:
             break
         }
@@ -288,7 +288,7 @@ extension DetailMediaPlayerView: PlayerPlaybackDelegate {
     }
     
     func playerPlaybackWillStartFromBeginning(_ player: Player) {
-        delegate?.playerIsReady()
+        delegate?.playerHasData()
     }
     
     func playerPlaybackDidEnd(_ player: Player) {
