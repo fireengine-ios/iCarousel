@@ -227,7 +227,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func alloweManualAddIfNeeded(searchQuery: String) {
-        let isAllowed = (remoteSuggestions.first(where: { $0.email == searchQuery }) != nil)
+        let isAllowed = !searchQuery.isEmpty && (remoteSuggestions.first(where: { $0.email == searchQuery }) != nil)
         selectPeopleView.addManually(isAllowed: isAllowed)
     }
 
