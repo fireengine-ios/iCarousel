@@ -375,13 +375,13 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             switch self.shareType {
             case .trashBin:
                 //                    self.setNavBarStyle(.white)
-                self.navBarManager.setTrashBinMode(title: self.shareType.title)
+                self.navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
                 
             case .innerFolder(let rootType, let folderItem):
                 if rootType != .trashBin {
                     self.navBarManager.setNestedMode(title: self.shareType.title)
                 } else {
-                    self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true)
+                    self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
                 }
             default:
                 self.navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)

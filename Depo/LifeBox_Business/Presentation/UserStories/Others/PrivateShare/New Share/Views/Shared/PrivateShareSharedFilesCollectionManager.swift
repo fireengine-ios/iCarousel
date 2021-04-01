@@ -326,13 +326,16 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func setEmptyScreen(isHidden: Bool) {
+        DispatchQueue.toMain {
+            self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
+        }
+
         guard collectionView?.backgroundView?.isHidden != isHidden else {
             return
         }
         
-        DispatchQueue.main.async {
+        DispatchQueue.toMain {
             self.collectionView?.backgroundView?.isHidden = isHidden
-            self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
         }
     }
 }
