@@ -462,8 +462,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let isLastSection = section == 1
-        let height: CGFloat = isLastSection ? 44.0 : 0.0
+        let height: CGFloat = 44.0
         return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
