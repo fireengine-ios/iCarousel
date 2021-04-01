@@ -45,9 +45,9 @@ protocol MultifileCollectionViewCellActionDelegate: class {
     func rename(item: WrapData, name: String, completion: @escaping BoolHandler)
     func onLongPress(cell: UICollectionViewCell)
     func onCellSelected(indexPath: IndexPath)
+    func willSwipe(cell: MultifileCollectionViewCell)
 }
 
-//TODO: change font when it's available
 //TODO: split in views
 
 class MultifileCollectionViewCell: UICollectionViewCell {
@@ -215,6 +215,12 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     private var pathExtensionLength = 0
     
     private var swipeState: SwipeState = .defaultView {
+        willSet {
+            if newValue != .defaultView {
+                actionDelegate?.willSwipe(cell: self)
+            }
+        }
+        
         didSet {
             setupMenuAvailability()
             switch swipeState {
@@ -344,9 +350,9 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func resetSwipe() {
+    func resetSwipe(animated: Bool = false) {
         setupBackgroundColor(isSelected: false)
-        scrollableContent.scrollRectToVisible(defaultView.frame, animated: false)
+        scrollableContent.scrollRectToVisible(defaultView.frame, animated: animated)
         swipeState = .defaultView
     }
     
