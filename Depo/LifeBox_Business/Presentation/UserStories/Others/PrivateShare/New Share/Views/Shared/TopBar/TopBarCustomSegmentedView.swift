@@ -23,7 +23,6 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         willSet {
             newValue.allowsSelection = true
             newValue.showsHorizontalScrollIndicator = false
-            newValue.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 16)
         }
     }
     
@@ -38,7 +37,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     private let cellWidth: CGFloat = 120
     
     private var models = [TopBarCustomSegmentedViewButtonModel]()
-    private var selectedIndex: Int = 0
+    private var selectedIndex: Int = -1
     private var highlightViewLeaningConstraint: NSLayoutConstraint?
     
     
@@ -59,11 +58,11 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         self.selectedIndex = selectedIndex
         self.models = models
         
-        setupCollection()
+        setupCollection(selectedIndex: selectedIndex)
         setupHighlightView()
     }
     
-    private func setupCollection() {
+    private func setupCollection(selectedIndex: Int) {
         
         collectionView.register(nibCell: TopBarCustomSegmentedCell.self)
         collectionView.dataSource = self
@@ -166,7 +165,9 @@ extension TopBarCustomSegmentedView: UICollectionViewDataSource {
 
 extension TopBarCustomSegmentedView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.item < models.count else {
+        guard indexPath.item < models.count,
+              selectedIndex != indexPath.item
+        else {
             return
         }
         
