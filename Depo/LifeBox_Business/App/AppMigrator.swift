@@ -27,7 +27,6 @@ final class AppMigrator {
         
         let tokenStorage: TokenStorage = factory.resolve()
         tokenStorage.refreshToken = token
-        tokenStorage.isRememberMe = true
         
         if tokenStorage.accessToken == nil {
             tokenStorage.accessToken = "" /// need not nil to get new token

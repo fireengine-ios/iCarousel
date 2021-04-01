@@ -175,7 +175,6 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     }
     
     private func onSuccessLogin() {
-        tokenStorage.isRememberMe = true
         analyticsService.track(event: .login)
         analyticsService.trackLoginEvent(loginType: .gsm)
         AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: true)

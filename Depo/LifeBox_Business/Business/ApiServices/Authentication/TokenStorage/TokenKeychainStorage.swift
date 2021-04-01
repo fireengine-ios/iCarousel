@@ -14,7 +14,6 @@ final class TokenKeychainStorage: TokenStorage {
     
     private let accessTokenKey = "accessToken"
     private let refreshTokenKey = "refreshToken"
-    private let isRememberMeKey = "isRememberMeKey"
     private let isClearTokensKey = "isClearTokensKey"
     private let isAuthorizedThroughtFastLoginKey = "thoughtFastLoginAuthorized"
     
@@ -54,11 +53,6 @@ final class TokenKeychainStorage: TokenStorage {
         }
     }
     
-    var isRememberMe: Bool {
-        get { return keychain.getBool(isRememberMeKey) ?? false }
-        set { keychain.set(newValue, forKey: isRememberMeKey, withAccess: .accessibleAfterFirstUnlock) }
-    }
-    
     var isClearTokens: Bool {
         get { return keychain.getBool(isClearTokensKey) ?? false }
         set { keychain.set(newValue, forKey: isClearTokensKey, withAccess: .accessibleAfterFirstUnlock) }
@@ -80,7 +74,6 @@ final class TokenKeychainStorage: TokenStorage {
     func clearTokens() {
         accessToken = nil
         refreshToken = nil
-        isRememberMe = false
         isLoggedInWithFastLogin = false
     }
 }

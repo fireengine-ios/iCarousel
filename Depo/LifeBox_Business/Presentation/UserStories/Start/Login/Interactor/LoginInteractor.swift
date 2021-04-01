@@ -196,14 +196,12 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             
-            self.tokenStorage.isRememberMe = self.rememberMe
             self.output?.showTwoFactorAuthViewController(response: response, rememberMe: rememberMe)
         })
     }
     
     private func processLogin(login: String, headers: [String: Any]) {
         debugLog("login isRememberMe \(self.rememberMe)")
-        self.tokenStorage.isRememberMe = self.rememberMe
         self.analyticsService.track(event: .login)
         
         if Validator.isValid(email: login) {
@@ -241,7 +239,6 @@ class LoginInteractor: LoginInteractorInput {
 
     private func trackFLLoginSucceedAndPassNext() {
         debugLog("login fastlogin isRememberMe \(self.rememberMe)")
-        self.tokenStorage.isRememberMe = self.rememberMe
 
         self.loginRetries = 0
 
@@ -313,7 +310,6 @@ class LoginInteractor: LoginInteractorInput {
                                             return
                                         }
 
-                                        self.tokenStorage.isRememberMe = self.rememberMe
                                         self.output?.showTwoFactorAuthViewController(response: response, rememberMe: self.rememberMe)
 
                                         printLog("[LoginInteractor] authenticate with FL login not completed. 2FA is expected")

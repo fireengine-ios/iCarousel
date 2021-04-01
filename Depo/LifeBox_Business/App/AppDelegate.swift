@@ -101,8 +101,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = router.vcForCurrentState()
         self.window?.makeKeyAndVisible()
         
-        AppConfigurator.logoutIfNeed()
-        
         self.window?.isHidden = false
         
         return true
