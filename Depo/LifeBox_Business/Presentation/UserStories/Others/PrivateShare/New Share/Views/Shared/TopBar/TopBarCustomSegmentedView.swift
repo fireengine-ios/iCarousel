@@ -35,6 +35,8 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         return view
     }()
     
+    private let cellWidth: CGFloat = 120
+    
     private var models = [TopBarCustomSegmentedViewButtonModel]()
     private var selectedIndex: Int = 0
     private var highlightViewLeaningConstraint: NSLayoutConstraint?
@@ -58,9 +60,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         self.models = models
         
         setupCollection()
-        
         setupHighlightView()
-        updateSelection()
     }
     
     private func setupCollection() {
@@ -71,7 +71,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         
         if let collectionViewFlowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             collectionViewFlowLayout.scrollDirection = .horizontal
-            collectionViewFlowLayout.estimatedItemSize = CGSize(width: 120, height: 40)
+            collectionViewFlowLayout.estimatedItemSize = CGSize(width: cellWidth, height: 40)
             collectionViewFlowLayout.minimumLineSpacing = 4
         }
         
@@ -102,8 +102,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         guard
             models.count > 0,
             collectionView.numberOfItems(inSection: 0) > 0,
-            collectionView.numberOfItems(inSection: 0) < models.count,
-            let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0))
+            collectionView.numberOfItems(inSection: 0) <= models.count
         else {
             assertionFailure()
             return
@@ -115,7 +114,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
 
         highlightView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).activate()
 
-        highlightView.widthAnchor.constraint(equalTo: cell.widthAnchor, constant: 0).activate()
+        highlightView.widthAnchor.constraint(equalToConstant: cellWidth).activate()
         
     }
     
@@ -123,7 +122,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         guard
             !models.isEmpty,
             selectedIndex < models.count,
-            collectionView.numberOfItems(inSection: 0) < models.count,
+            collectionView.numberOfItems(inSection: 0) <= models.count,
             let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0))
         else {
             assertionFailure()
