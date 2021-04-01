@@ -77,13 +77,6 @@ final class AppConfigurator {
         }
     }
     
-    static func logoutIfNeed() {
-        if !tokenStorage.isRememberMe {
-            debugLog("logoutIfNeed isRememberMe false")
-            AuthenticationService().logout(async: false, success: nil)
-        }
-    }
-    
    private static func prepareSessionManager() {
         var auth: AuthorizationRepository = factory.resolve()
         auth.refreshFailedHandler = setRefreshFailedHandler
@@ -99,7 +92,6 @@ final class AppConfigurator {
             logout()
         }
     }
-
     
     private static func configureSDWebImage() {
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb
