@@ -299,9 +299,12 @@ extension UIViewController {
     
     //MARK: with style
     func changeLargeTitle(prefersLargeTitles: Bool, barStyle: NavigationBarStyles) {
-        navigationController?.navigationBar.prefersLargeTitles = prefersLargeTitles
         if prefersLargeTitles {
+            navigationItem.largeTitleDisplayMode = .always
+            navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.navigationBar.largeTitleTextAttributes = barStyle.largeTitleAttributes
+        } else {
+            navigationItem.largeTitleDisplayMode = .never
         }
     }
     

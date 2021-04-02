@@ -129,13 +129,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Private
     
     private func setupBars() {
-        //in theory should provide smoother animation if initial setup wasn on viewDidLoad
-        switch shareType {
-        case .innerFolder(_, _), .trashBin:
-            navBarManager.setupLargetitle(isLarge: false)
-        default:
-            navBarManager.setupLargetitle(isLarge: true)
-        }
         setDefaultTabBarState()
         setupCollectionViewBars()
         bottomBarManager.setup()
@@ -364,37 +357,37 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
 
     private func setupNavigationBar(editingMode: Bool) {
 
-        self.setNavigationBarStyle(.white)
+        setNavigationBarStyle(.white)
         
         /// be sure to configure navbar items after setup navigation bar
-        let isSelectionAllowed = self.shareType.isSelectionAllowed
+        let isSelectionAllowed = shareType.isSelectionAllowed
         
         if editingMode, isSelectionAllowed {
-            if self.shareType == .trashBin || self.shareType.rootType == .trashBin {
-                self.navBarManager.setSelectionModeForTrashBin()
+            if shareType.rootType == .trashBin {
+                navBarManager.setSelectionModeForTrashBin()
             } else {
-                self.navBarManager.setSelectionMode()
+                navBarManager.setSelectionMode()
             }
         } else {
-            switch self.shareType {
+            switch shareType {
             case .trashBin:
-                //                    self.setNavBarStyle(.white)
-                self.navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
+                navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
                 
             case .innerFolder(let rootType, let folderItem):
+                navBarManager.setupLargetitle(isLarge: false)
                 if rootType != .trashBin {
-                    self.navBarManager.setNestedMode(title: self.shareType.title)
+                    navBarManager.setNestedMode(title: shareType.title)
                 } else {
-                    self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
+                    navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
                 }
             default:
-                self.navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
-                var newTitle = self.shareType.title
-                if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
+                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+                var newTitle = shareType.title
+                if let segmentedParent = parent as? TopBarSupportedSegmentedController {
                     newTitle = segmentedParent.rootTitle
                 }
-                self.navBarManager.setupLargetitle(isLarge: true)
-                self.navBarManager.setRootMode(title: newTitle)
+                navBarManager.setupLargetitle(isLarge: true)
+                navBarManager.setRootMode(title: newTitle)
             }
         }
     }
