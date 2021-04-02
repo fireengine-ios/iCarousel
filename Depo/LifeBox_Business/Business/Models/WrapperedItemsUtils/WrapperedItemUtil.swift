@@ -173,32 +173,32 @@ class WrapperedItemUtil: NSObject {
     static func privateSharePlaceholderImage(fileType: FileType) -> UIImage? {
         switch fileType {
         case .folder:
-            return UIImage(named: "AF_PS_folder")
+            return UIImage(named: "folderFileThumbnail")
         case .image:
-            return UIImage(named: "AF_PS_photo")
+            return UIImage(named: "photoFileThumbnail")
         case .video:
-            return UIImage(named: "AF_PS_video")
+            return UIImage(named: "videoFileThumbnail")
         case .audio:
-            return UIImage(named: "AF_PS_audio")
+            return UIImage(named: "audioFileThumbnail")
         case .application(let subType):
             switch subType {
             case .doc:
-                return UIImage(named: "AF_PS_DOC")
+                return UIImage(named: "docFileThumbnail")
             case .pdf:
-                return UIImage(named: "AF_PS_PDF")
+                return UIImage(named: "pdfFileThumbnail")
             case .ppt, .pptx:
-                return UIImage(named: "AF_PS_PPT")
+                return UIImage(named: "pptFileThumbnail")
             case .xls:
-                return UIImage(named: "AF_PS_XLS")
+                return UIImage(named: "xlsFileThumbnail")
             case .zip:
-                return UIImage(named: "AF_PS_ZIP")
+                return UIImage(named: "zipFileThumbnail")
             default:
                 //unknown
-                return UIImage(named: "AF_PS_Unknown")
+                return UIImage(named: "unknownFileThumbnail")
             }
         default:
             //unknown
-            return UIImage(named: "AF_PS_Unknown")
+            return UIImage(named: "unknownFileThumbnail")
         }
     }
     
