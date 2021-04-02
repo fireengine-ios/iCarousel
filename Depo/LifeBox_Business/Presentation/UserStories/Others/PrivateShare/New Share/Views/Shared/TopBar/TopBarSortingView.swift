@@ -10,7 +10,7 @@ protocol TopBarSortingViewDelegate: class {
     func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType)
 }
 
-final class TopBarSortingView: UIView, NibInit {
+final class TopBarSortingView: UICollectionReusableView, NibInit {
     
     @IBOutlet weak var sortLabel: UILabel! {
         willSet {
