@@ -123,7 +123,7 @@ final class SegmentedChildNavBarManager {
         delegate?.setLeftBarButtonItems(nil, animated: true)
     }
 
-    func setTrashBinMode(title: String, innerFolder: Bool = false, emptyDataList: Bool = false) {
+    func setTrashBinMode(title: String, innerFolder: Bool = false, emptyDataList: Bool = true) {
         delegate?.setTitle(title, isSelectionMode: false, style: .white)
         let rightButtons: [UIBarButtonItem]? = innerFolder || emptyDataList ? nil : [trashButton]
         //TODO:  postpone setup after we get files list

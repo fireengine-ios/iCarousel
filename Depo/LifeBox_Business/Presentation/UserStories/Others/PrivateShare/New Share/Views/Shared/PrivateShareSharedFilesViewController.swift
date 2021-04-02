@@ -85,6 +85,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
+
+        if shareType == .trashBin {
+            topBarSortingBar.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -365,16 +369,16 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 navBarManager.setSelectionMode()
             }
         } else {
-            switch self.shareType {
+            switch shareType {
             case .trashBin:
-                navBarManager.setTrashBinMode(title: shareType.title)
+                navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
                 
             case .innerFolder(let rootType, let folderItem):
                 navBarManager.setupLargetitle(isLarge: false)
                 if rootType != .trashBin {
                     navBarManager.setNestedMode(title: shareType.title)
                 } else {
-                    navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true)
+                    navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
                 }
             default:
                 navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
