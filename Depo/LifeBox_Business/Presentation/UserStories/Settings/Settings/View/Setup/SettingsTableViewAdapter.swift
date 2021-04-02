@@ -111,6 +111,7 @@ extension SettingsTableViewAdapter: UITableViewDataSource {
         case 1:
             let cell = tableView.dequeue(reusable: SettingsMenuItemTableViewCell.self)
             cell.setup(with: menuItems[indexPath.row], isFirstCell: indexPath.row == 0, isLastCell: indexPath.row == menuItems.count - 1)
+            cell.selectionStyle = .none
             return cell
         default: break
         }
