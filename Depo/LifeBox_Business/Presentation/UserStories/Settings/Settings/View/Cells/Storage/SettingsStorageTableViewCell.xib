@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkR-cK-Yar" userLabel="ExtractableView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="104.5"/>
+                        <rect key="frame" x="2" y="2" width="316" height="104.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Joa-cf-hAI">
                                 <rect key="frame" x="15" y="17.5" width="70" height="70"/>
@@ -41,10 +41,10 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="v6M-SX-iDe">
-                                <rect key="frame" x="100" y="16" width="205" height="69.5"/>
+                                <rect key="frame" x="100" y="16" width="201" height="69.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Storage Use" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqm-oC-Ute">
-                                        <rect key="frame" x="0.0" y="0.0" width="205" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="201" height="20.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="zdV-Hb-RZD"/>
                                         </constraints>
@@ -53,14 +53,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZ4-I8-VCh" customClass="LineProgressView" customModule="lifeBox_Business" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="34.5" width="205" height="6"/>
+                                        <rect key="frame" x="0.0" y="34.5" width="201" height="6"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="6" id="n8Z-OJ-6OZ"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- / - GB Using" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ec-zQ-nz8">
-                                        <rect key="frame" x="0.0" y="54.5" width="205" height="15"/>
+                                        <rect key="frame" x="0.0" y="54.5" width="201" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="yfi-Lk-aQ8"/>
                                         </constraints>
@@ -84,10 +84,10 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="rkR-cK-Yar" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7BA-MI-OrF"/>
-                    <constraint firstAttribute="bottom" secondItem="rkR-cK-Yar" secondAttribute="bottom" id="Cxk-Rt-Oxs"/>
-                    <constraint firstAttribute="trailing" secondItem="rkR-cK-Yar" secondAttribute="trailing" id="Mrr-7c-d2T"/>
-                    <constraint firstItem="rkR-cK-Yar" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dB4-uz-Wcw"/>
+                    <constraint firstItem="rkR-cK-Yar" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="7BA-MI-OrF"/>
+                    <constraint firstAttribute="bottom" secondItem="rkR-cK-Yar" secondAttribute="bottom" constant="2" id="Cxk-Rt-Oxs"/>
+                    <constraint firstAttribute="trailing" secondItem="rkR-cK-Yar" secondAttribute="trailing" constant="2" id="Mrr-7c-d2T"/>
+                    <constraint firstItem="rkR-cK-Yar" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="dB4-uz-Wcw"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

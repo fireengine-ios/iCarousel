@@ -22,11 +22,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="M7i-kt-Jaj">
-                    <rect key="frame" x="15" y="0.0" width="345" height="667"/>
+                    <rect key="frame" x="13" y="0.0" width="349" height="667"/>
                     <color key="backgroundColor" name="settingsTableBackground"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WJ-Hn-jBO">
-                    <rect key="frame" x="15" y="597" width="345" height="50"/>
+                    <rect key="frame" x="13" y="597" width="349" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="auc-yN-YFV"/>
                     </constraints>
@@ -40,12 +40,12 @@
             <color key="backgroundColor" name="settingsTableBackground"/>
             <constraints>
                 <constraint firstItem="4WJ-Hn-jBO" firstAttribute="centerX" secondItem="2EM-su-Qne" secondAttribute="centerX" id="0JN-LS-6Dz"/>
-                <constraint firstAttribute="trailing" secondItem="M7i-kt-Jaj" secondAttribute="trailing" constant="15" id="9oR-9J-diX"/>
+                <constraint firstAttribute="trailing" secondItem="M7i-kt-Jaj" secondAttribute="trailing" constant="13" id="9oR-9J-diX"/>
                 <constraint firstItem="4WJ-Hn-jBO" firstAttribute="width" secondItem="M7i-kt-Jaj" secondAttribute="width" id="AnO-IL-rZW"/>
                 <constraint firstAttribute="bottom" secondItem="M7i-kt-Jaj" secondAttribute="bottom" id="Lcu-qq-RWK"/>
                 <constraint firstItem="M7i-kt-Jaj" firstAttribute="top" secondItem="2EM-su-Qne" secondAttribute="top" id="P8Z-fN-pp0"/>
                 <constraint firstItem="2EM-su-Qne" firstAttribute="bottom" secondItem="4WJ-Hn-jBO" secondAttribute="bottom" constant="20" id="T0x-Vw-Eht"/>
-                <constraint firstItem="M7i-kt-Jaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="hKh-jC-yLe"/>
+                <constraint firstItem="M7i-kt-Jaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="hKh-jC-yLe"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="53.5"/>
         </view>
