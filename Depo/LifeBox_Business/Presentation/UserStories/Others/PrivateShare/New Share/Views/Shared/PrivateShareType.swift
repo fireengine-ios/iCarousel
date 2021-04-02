@@ -46,6 +46,9 @@ indirect enum PrivateShareType: Equatable {
             case .withMe:
                 return .sharedWith
             case .innerFolder:
+                if rootType == .trashBin {
+                    return .trashBinInnerFolder
+                }
                 return .sharedInnerFolder
             case .sharedArea:
                 return .sharedArea
