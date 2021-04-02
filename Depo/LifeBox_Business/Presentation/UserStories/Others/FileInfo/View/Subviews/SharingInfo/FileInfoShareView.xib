@@ -42,7 +42,7 @@
                         <constraint firstAttribute="height" constant="45" id="Gkx-Q2-zTO"/>
                         <constraint firstAttribute="width" constant="45" id="UaF-IU-SUZ"/>
                     </constraints>
-                    <state key="normal" image="Arrow"/>
+                    <state key="normal" image="sharingInfoArrow"/>
                     <connections>
                         <action selector="onArrowTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="rJT-Qr-9Yh"/>
                     </connections>
@@ -70,7 +70,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Arrow" width="8" height="12"/>
+        <image name="sharingInfoArrow" width="8" height="12"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
