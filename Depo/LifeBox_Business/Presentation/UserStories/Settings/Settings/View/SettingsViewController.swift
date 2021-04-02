@@ -62,13 +62,13 @@ final class SettingsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
-        // TODO change it after merge to dev_2
-        navigationController?.navigationBar.prefersLargeTitles = false
     }
 
     private func setupNavigationBar() {
-        setNavigationTitle(title: TextConstants.settingsPageTitle, style: .white)
-        setNavigationBarStyle(.white)
+        let barStyle = NavigationBarStyles.white
+        setNavigationTitle(title: TextConstants.settingsPageTitle, style: barStyle)
+        setNavigationBarStyle(barStyle)
+        navigationController?.changeLargeTitle(prefersLargeTitles: false, barStyle: barStyle)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
