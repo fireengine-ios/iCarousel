@@ -23,6 +23,7 @@ final class EmptyView: UIView, NibInit {
         case sharedBy
         case sharedWith
         case sharedInnerFolder
+        case trashBinInnerFolder
         case sharedArea
         case myDisk
         
@@ -30,7 +31,7 @@ final class EmptyView: UIView, NibInit {
             switch self {
                 case .hiddenBin:
                     return TextConstants.hiddenBinEmpty
-                case .trashBin:
+            case .trashBin, .trashBinInnerFolder:
                     return TextConstants.trashBinEmptyPage
                 case .sharedBy:
                     return TextConstants.sharedByMeEmptyPage
@@ -49,7 +50,7 @@ final class EmptyView: UIView, NibInit {
             switch self {
                 case .hiddenBin:
                     return UIImage(named: "hidden_big")
-                case .trashBin:
+                case .trashBin, .trashBinInnerFolder:
                     return UIImage(named: "trash_bin_empty")
                 case .sharedBy:
                     return nil
