@@ -44,14 +44,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
-    
-    lazy private var topBarSortingBar: TopBarSortingView = {
-        let sortingBar = TopBarSortingView.initFromNib()
-        sortingBar.delegate = self
-        return sortingBar
-    }()
-    
-    var collectionTopYInset: CGFloat = 0
  
     lazy private var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -85,10 +77,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
-
-        if shareType == .trashBin {
-            topBarSortingBar.isHidden = true
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,7 +118,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupBars() {
         setDefaultTabBarState()
-        setupCollectionViewBars()
+//        setupCollectionViewBars()
         bottomBarManager.setup()
     }
     
@@ -173,35 +161,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private func setDefaultTabBarState() {
         needToShowTabBar = shareType.isTabBarNeeded
     }
-    
-    private func setupCollectionViewBars() {
-        setupSortingBar()
-        collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
-    }
-    
-    private func setupSortingBar() {
-        let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
-           
-        topBarSortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .lastModifiedTimeNewOld)
-        
-        collectionView.addSubview(topBarSortingBar)
-        
-        
-        
-        topBarSortingBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        topBarSortingBar.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: collectionTopYInset - topBarSortingBar.frame.height).activate()
-        topBarSortingBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
-        topBarSortingBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
-        
-        collectionTopYInset += topBarSortingBar.frame.height
-    }
-    
+
     
     //shall be called frorm segment
     func setupSegmentedControlView(segmentedView: UIView) {
         
-        let newOffset = collectionTopYInset + segmentedView.frame.height
+        let newOffset = segmentedView.frame.height
 
         segmentedView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -321,7 +286,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         if shareType == .trashBin {
             navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: !isHidden)
             navBarManager.setupLargetitle(isLarge: false)
-            topBarSortingBar.isHidden = !isHidden
         }
     }
     
@@ -660,12 +624,5 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         }
-    }
-}
-
-extension PrivateShareSharedFilesViewController: TopBarSortingViewDelegate {
-    func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
-        showSpinner()
-        collectionManager.change(sortingRule: sortType.sortedRulesConveted)
     }
 }
