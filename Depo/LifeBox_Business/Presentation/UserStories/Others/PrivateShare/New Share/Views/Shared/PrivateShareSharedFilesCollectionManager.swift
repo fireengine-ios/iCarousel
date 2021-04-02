@@ -124,7 +124,6 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         fileInfoManager.delete(uuids: uuids) { [weak self] in
             self?.reloadCollection()
-            self?.reload(type: .onOperationFinished)
         }
     }
     
