@@ -43,12 +43,7 @@ final class SettingsMenuItemTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        innerContainerView.layer.masksToBounds = false
-
-        innerContainerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.25).cgColor
-        innerContainerView.layer.shadowOffset = CGSize.zero
-        innerContainerView.layer.shadowRadius = 5
-        innerContainerView.layer.shadowOpacity = 0.5
+        updateShadowLayer()
     }
 
     func setup(with menuItem: SettingsMenuItem, isFirstCell: Bool = false, isLastCell: Bool = false) {
@@ -59,5 +54,13 @@ final class SettingsMenuItemTableViewCell: UITableViewCell {
         iconImageView.image = menuItem.icon
         titleLabel.text = menuItem.title
         separatorView.isHidden = isLastCell
+    }
+
+    private func updateShadowLayer() {
+        innerContainerView.layer.masksToBounds = false
+        innerContainerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.25).cgColor
+        innerContainerView.layer.shadowOffset = CGSize.zero
+        innerContainerView.layer.shadowRadius = 5
+        innerContainerView.layer.shadowOpacity = 0.5
     }
 }

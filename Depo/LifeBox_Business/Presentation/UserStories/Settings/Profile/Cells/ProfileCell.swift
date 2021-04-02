@@ -90,18 +90,21 @@ final class ProfileCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        containerView.layer.masksToBounds = false
-
-        containerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        containerView.layer.shadowOffset = CGSize.zero
-        containerView.layer.shadowRadius = 5
-        containerView.layer.shadowOpacity = 0.3
+        updateShadowLayer()
     }
-    
+
     //MARK: - Private funcs
     
     private func setUserAvatar() {
         //TODO: - if user set avatar - show avatar and hide placeholder, else
         userAvatarImageView.isHidden = true
+    }
+
+    private func updateShadowLayer() {
+        containerView.layer.masksToBounds = false
+        containerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        containerView.layer.shadowOffset = CGSize.zero
+        containerView.layer.shadowRadius = 5
+        containerView.layer.shadowOpacity = 0.3
     }
 }

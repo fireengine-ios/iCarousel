@@ -70,12 +70,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        innerContainerView.layer.masksToBounds = false
-
-        innerContainerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        innerContainerView.layer.shadowOffset = CGSize.zero
-        innerContainerView.layer.shadowRadius = 5
-        innerContainerView.layer.shadowOpacity = 0.2
+        updateShadowLayer()
     }
 
     func setup(with storageUsageInfo: SettingsStorageUsageResponseItem, isProfilePage: Bool = false) {
@@ -113,6 +108,14 @@ final class SettingsStorageTableViewCell: UITableViewCell {
         let usedStorageInKb = CGFloat(storageUsageInfo.usageInBytes) / 1024.0
         storageFullnessProgressView.targetValue = storageInKb
         storageFullnessProgressView.set(progress: usedStorageInKb)
+    }
+
+    private func updateShadowLayer() {
+        innerContainerView.layer.masksToBounds = false
+        innerContainerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        innerContainerView.layer.shadowOffset = CGSize.zero
+        innerContainerView.layer.shadowRadius = 5
+        innerContainerView.layer.shadowOpacity = 0.2
     }
 
     private func storageInBytesToReadableFormat(_ input: Int64) -> String {
