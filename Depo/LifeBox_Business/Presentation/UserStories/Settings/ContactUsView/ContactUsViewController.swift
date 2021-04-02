@@ -18,7 +18,10 @@ final class ContactUsViewController: BaseViewController, NibInit {
                             TextConstants.contactUsSubject2,
                             TextConstants.contactUsSubject3,
                             TextConstants.contactUsSubject4,
-                            TextConstants.contactUsSubject5]
+                            TextConstants.contactUsSubject5,
+                            TextConstants.contactUsSubject6,
+                            TextConstants.contactUsSubject7,
+                            TextConstants.contactUsSubject8]
     
     private lazy var subjectView: TextFieldWithPickerView = {
         let view = TextFieldWithPickerView()

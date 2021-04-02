@@ -929,9 +929,6 @@ struct TextConstants {
     static let onSignupSupportFormSubject2DetailedInfoText = NSLocalizedString("signup_support_form_subject_2_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let onSignupSupportFormSubject3DetailedInfoText = NSLocalizedString("signup_support_form_subject_3_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let contactUsSubject6 = NSLocalizedString("contact_us_subject_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject7 = NSLocalizedString("contact_us_subject_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject8 = NSLocalizedString("contact_us_subject_8", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject9 = NSLocalizedString("contact_us_subject_9", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject10 = NSLocalizedString("contact_us_subject_10", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject11 = NSLocalizedString("contact_us_subject_11", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1453,6 +1450,9 @@ extension TextConstants {
     static let contactUsSubject3 = NSLocalizedString("business_app_contact_us_subject_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject4 = NSLocalizedString("business_app_contact_us_subject_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject5 = NSLocalizedString("business_app_contact_us_subject_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject6 = NSLocalizedString("business_app_contact_us_subject_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject7 = NSLocalizedString("business_app_contact_us_subject_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject8 = NSLocalizedString("business_app_contact_us_subject_8", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let contactUsMailBodyUnlimitedStorage = NSLocalizedString("business_app_contact_us_email_body_unlimited", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsMailTextFormat = NSLocalizedString("business_app_contact_us_email_body", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
