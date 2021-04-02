@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "volumeMute.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
