@@ -66,6 +66,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         setupCollection()
         setupTopRefresher()
     }
+
     
     func change(sortingRule: SortedRules) {
         fileInfoManager.change(sortingRules: sortingRule) { [weak self] (shouldReload, _) in
@@ -123,7 +124,6 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         fileInfoManager.delete(uuids: uuids) { [weak self] in
             self?.reloadCollection()
-            self?.reload(type: .onOperationFinished)
         }
     }
     
@@ -144,6 +144,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         collectionView?.register(nibSupplementaryView: CollectionViewSpinnerFooter.self,
                                  kind: UICollectionElementKindSectionFooter)
+        
+        collectionView?.register(nibSupplementaryView: TopBarSortingView.self,
+                                 kind: UICollectionElementKindSectionHeader)
 
         collectionView?.allowsSelection = false
         collectionView?.alwaysBounceVertical = true
@@ -475,7 +478,12 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize.zero
+        guard !fileInfoManager.items.isEmpty, fileInfoManager.type.rootType != .trashBin else {
+            return .zero
+        }
+        
+        let height: CGFloat = 44.0
+        return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -491,10 +499,25 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
                 
                 return footerSpinner
                 
+            case UICollectionElementKindSectionHeader:
+                if indexPath.section == 0  {
+                    let header = collectionView.dequeue(supplementaryView: TopBarSortingView.self, kind: kind, for: indexPath)
+                    setup(sortingBar: header)
+                    return header
+                }
+                return UICollectionReusableView()
+                
             default:
                 assertionFailure()
                 return UICollectionReusableView()
         }
+    }
+    
+    private func setup(sortingBar: TopBarSortingView) {
+        let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
+        
+        sortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .lastModifiedTimeNewOld)
+        sortingBar.delegate = self
     }
 }
 
@@ -603,5 +626,12 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
     
     func willSwipe(cell: MultifileCollectionViewCell) {
         resetVisibleCellsSwipe(exceptCell: cell, animated: true)
+    }
+}
+
+extension PrivateShareSharedFilesCollectionManager: TopBarSortingViewDelegate {
+    func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
+        delegate?.needToShowSpinner()
+        change(sortingRule: sortType.sortedRulesConveted)
     }
 }

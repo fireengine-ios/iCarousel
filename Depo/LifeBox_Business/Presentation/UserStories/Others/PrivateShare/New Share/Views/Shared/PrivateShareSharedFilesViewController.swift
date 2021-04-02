@@ -44,14 +44,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
-    
-    lazy private var topBarSortingBar: TopBarSortingView = {
-        let sortingBar = TopBarSortingView.initFromNib()
-        sortingBar.delegate = self
-        return sortingBar
-    }()
-    
-    var collectionTopYInset: CGFloat = 0
  
     lazy private var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -85,10 +77,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
-
-        if shareType == .trashBin {
-            topBarSortingBar.isHidden = true
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,15 +117,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Private
     
     private func setupBars() {
-        //in theory should provide smoother animation if initial setup wasn on viewDidLoad
-        switch shareType {
-        case .innerFolder(_, _), .trashBin:
-            navBarManager.setupLargetitle(isLarge: false)
-        default:
-            navBarManager.setupLargetitle(isLarge: true)
-        }
         setDefaultTabBarState()
-        setupCollectionViewBars()
+//        setupCollectionViewBars()
         bottomBarManager.setup()
     }
     
@@ -180,35 +161,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private func setDefaultTabBarState() {
         needToShowTabBar = shareType.isTabBarNeeded
     }
-    
-    private func setupCollectionViewBars() {
-        setupSortingBar()
-        collectionView.contentInset = UIEdgeInsets(top: collectionTopYInset, left: 0, bottom: 25, right: 0)
-    }
-    
-    private func setupSortingBar() {
-        let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
-           
-        topBarSortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .lastModifiedTimeNewOld)
-        
-        collectionView.addSubview(topBarSortingBar)
-        
-        
-        
-        topBarSortingBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        topBarSortingBar.topAnchor.constraint(equalTo: self.collectionView.topAnchor, constant: collectionTopYInset - topBarSortingBar.frame.height).activate()
-        topBarSortingBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).activate()
-        topBarSortingBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).activate()
-        
-        collectionTopYInset += topBarSortingBar.frame.height
-    }
-    
+
     
     //shall be called frorm segment
     func setupSegmentedControlView(segmentedView: UIView) {
         
-        let newOffset = collectionTopYInset + segmentedView.frame.height
+        let newOffset = segmentedView.frame.height
 
         segmentedView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -328,7 +286,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         if shareType == .trashBin {
             navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: !isHidden)
             navBarManager.setupLargetitle(isLarge: false)
-            topBarSortingBar.isHidden = !isHidden
         }
     }
     
@@ -364,37 +321,37 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
 
     private func setupNavigationBar(editingMode: Bool) {
 
-        self.setNavigationBarStyle(.white)
+        setNavigationBarStyle(.white)
         
         /// be sure to configure navbar items after setup navigation bar
-        let isSelectionAllowed = self.shareType.isSelectionAllowed
+        let isSelectionAllowed = shareType.isSelectionAllowed
         
         if editingMode, isSelectionAllowed {
-            if self.shareType == .trashBin || self.shareType.rootType == .trashBin {
-                self.navBarManager.setSelectionModeForTrashBin()
+            if shareType.rootType == .trashBin {
+                navBarManager.setSelectionModeForTrashBin()
             } else {
-                self.navBarManager.setSelectionMode()
+                navBarManager.setSelectionMode()
             }
         } else {
-            switch self.shareType {
+            switch shareType {
             case .trashBin:
-                //                    self.setNavBarStyle(.white)
-                self.navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
+                navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
                 
             case .innerFolder(let rootType, let folderItem):
+                navBarManager.setupLargetitle(isLarge: false)
                 if rootType != .trashBin {
-                    self.navBarManager.setNestedMode(title: self.shareType.title)
+                    navBarManager.setNestedMode(title: shareType.title)
                 } else {
-                    self.navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
+                    navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
                 }
             default:
-                self.navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
-                var newTitle = self.shareType.title
-                if let segmentedParent = self.parent as? TopBarSupportedSegmentedController {
+                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+                var newTitle = shareType.title
+                if let segmentedParent = parent as? TopBarSupportedSegmentedController {
                     newTitle = segmentedParent.rootTitle
                 }
-                self.navBarManager.setupLargetitle(isLarge: true)
-                self.navBarManager.setRootMode(title: newTitle)
+                navBarManager.setupLargetitle(isLarge: true)
+                navBarManager.setRootMode(title: newTitle)
             }
         }
     }
@@ -667,12 +624,5 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         }
-    }
-}
-
-extension PrivateShareSharedFilesViewController: TopBarSortingViewDelegate {
-    func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
-        showSpinner()
-        collectionManager.change(sortingRule: sortType.sortedRulesConveted)
     }
 }

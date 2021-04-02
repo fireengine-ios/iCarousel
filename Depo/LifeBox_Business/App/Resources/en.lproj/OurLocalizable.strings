@@ -194,7 +194,7 @@
 "Fail while uploading from LifeBox" = "Upload from lifebox failed";
 
 /*I don't understand*/
-"Sorry, but photos not selected" = "Photos are not selected";
+"Sorry, but photos not selected" = "Please change your gallery access permission to allow access for selected photos and try to upolad them again";
 "Upload from lifebox" = "Add from lifebox";
 "Upload failed" = "Upload failed";
 "Upload was successful" = "Uploaded successfully";
@@ -630,7 +630,7 @@
 "landingTitle6" = "Social Media";
 "landingSubTitle6" = "Easily transfer your social media archives to lifebox";
 "Add GSM Number" = "Add Phone Number";
-"The videos larger than 4GB can not be uploaded to lifebox" = "Videos larger than 4GB can not be uploaded to lifebox";
+"The videos larger than 4GB can not be uploaded to lifebox" = "Items larger than 4GB can not be uploaded";
 "You have not enough memory in your device" = "You don't have enough memory on your device";
 "The purchase was canceled" = "The purchase is canceled.";
 "The purchase in progress" = "The purchase is in progress.";
@@ -1868,7 +1868,7 @@
 "private_share_start_max_number_of_users" = "You can not share with more than %d people.";
 "business_app_tabbar_mydisk" = "My Disk";
 "business_app_tabbar_mysharings" = "My Sharings";
-"business_app_tabbar_sharedarea" = "Shared Area";
+"business_app_tabbar_sharedarea" = "Public Disk";
 "tabbar_item_settings" = "Settings";
 "private_share_max_number_of_item_limit_exceeded" = "private_share_max_number_of_item_limit_exceeded";
 "business_app_select_option" = "Select";
@@ -1877,62 +1877,57 @@
 "business_app_rename_option" = "Rename";
 "business_app_share_privately_option" = "Share Privately";
 "business_app_share_copy_option" = "Send a Copy";
-"business_app_stop_sharing_option" = "Stop Sharing";
+"business_app_stop_sharing_option" = "End Sharing";
 "business_app_leave_sharing_option" = "Leave Sharing";
 "business_app_info_option" = "Info";
-"business_app_download_success" = "Downloaded successfully";
-"business_app_delete_success" = "Deleted successfully";
-"business_app_rename_sucess" = "Renamed successfully";
-"business_app_share_privately_success" = "Shared successfully";
-"business_app_stop_sharing_success" = "Sharing is stopped";
-"business_app_leave_sharing_success" = "Sharing is left";
+"business_app_download_success" = "Downloaded Successfully";
+"business_app_delete_success" = "Deleted Successfully";
+"business_app_rename_sucess" = "Renamed Successfully";
+"business_app_share_privately_success" = "Shared Successfully";
+"business_app_stop_sharing_success" = "Sharing stopped";
+"business_app_leave_sharing_success" = "Left Successfully";
 "business_app_delete_confirm_popup_title" = "Are you sure to delete?";
-"business_app_delete_confirm_popup_detail" = "Deleted files will be sent to Trash Bin";
+"business_app_delete_confirm_popup_detail" = "Deleted files will be sent to the trash bin. All the items in the trash bin will be deleted permanently after 30 days and you won't be able to restore them.";
 "business_app_notification_permission" = "Notifications may include alerts, sounds and icon badges. These can be configured in Settings";
-"business_app_gallery_permission" = "Lifebox needs your photo library access in order to be able to upload them to the app and download your photos in application to the device gallery";
+"business_app_gallery_permission" = "lifebox business needs your photo library access in order to be able to upload them to the app and download your photos in application to the device gallery";
 "business_app_gallery_permission_not_provided_popup_title" = "Photo Library Access Permission";
 "business_app_gallery_permission_not_provided_popup_description" = "We need your photo library access permission for this action. Please check you app settings";
 "business_app_gallery_permission_not_provided_popup_settings_accept" = "Settings";
 "business_app_gallery_permission_not_provided_popup_settings_reject" = "No";
-"business_app_new_folder" = "Create New Folder";
+"business_app_new_folder" = "Create Folder";
 "business_app_plus_button_upload" = "Upload from Gallery";
 "business_app_plus_button_upload_files" = "Upload Files";
-"business_app_login_title" = "Login to Lifebox Business";
-"business_app_login_email_box_inside" = "Enter your e-mail";
-"business_app_login_password_box_inside" = "Enter your password";
+"business_app_login_title" = "Login to lifebox business";
+"business_app_login_email_box_inside" = "Enter Your E-mail";
+"business_app_login_password_box_inside" = "Enter Your Password";
 "business_app_login_rememberme_checkbox" = "Remember me";
-"business_app_login_forget_password" = "Forget password";
-"business_app_login_forget_password_page_title" = "Forget password";
-"business_app_login_forget_password_page_description" = "Lorem ipsum (description may be long as 3-4 lines)";
+"business_app_login_forget_password" = "Forget your password?";
+"business_app_login_forget_password_page_title" = "Forget Your Password?";
+"business_app_login_forget_password_page_description" = "Please change your company identity password. If you have already changed your password and you are still having problem, you can contact lifebox business admin at your company.";
 "business_app_login_forget_password_page_close_button" = "Close";
-"business_app_login_pwd_login_button" = "Corporate Login";
-"business_app_login_pwd_login_button_explanation" = "*It can be used when your company has identity integration with Turkcell";
-"business_app_login_FL_explanation" = "To login without identity integration";
+"business_app_login_pwd_login_button" = "Login with Company Identity";
+"business_app_login_pwd_login_button_explanation" = "*Applicable if your company has identity integration with lifebox business";
+"business_app_login_FL_explanation" = "Login without company integration";
 "business_app_login_captcha_box_inside" = "Enter the code";
-"business_app_login_email_empty" = "You have to fill in your email";
+"business_app_login_email_empty" = "You have to fill in your e-mail";
 "business_app_login_password_empty" = "You have to fill in your password";
 "business_app_login_captcha_empty" = "Please type the text";
-"business_app_login_email_not_validated" = "Please enter a valid e-mail";
+"business_app_login_email_not_validated" = "Please enter a valid e-mail address";
 "business_app_login_pwd_error_code_30" = "Authentication failed";
-"business_app_login_ldap_error_code_31" = "Temporary error occured. Please try again later.";
-"business_app_login_ldap_error_code_32" = "Authentication failed";
-"business_app_login_ldap_error_code_33" = "Authentication failed";
-"business_app_login_blocked_ip" = "Your IP is blocked. Authentication failed.";
-"business_app_login_generic_error_tag" = "Authentication failed.";
-"business_app_login_captcha_not_match" = "Entered text does not match";
+"business_app_login_captcha_not_match" = "Entered invalid text";
 "business_app_login_show_password" = "Show";
 "business_app_login_hide_password" = "Hide";
-"business_app_private_share_close_page" = "Are you sure to quit from private share?";
+"business_app_private_share_close_page" = "Are you sure to quit from share?";
 "business_app_private_share_close_page_no" = "Cancel";
 "business_app_private_share_close_page_yes" = "OK";
 "business_app_private_share_page_title" = "Share Privately";
 "business_app_private_share_box_name" = "Select people to share";
-"business_app_private_share_box_inside" = "Enter e-mail";
+"business_app_private_share_box_inside" = "Enter E-mail";
 "business_app_private_share_role_editor" = "Editor";
 "business_app_private_share_role_viewer" = "Viewer";
-"business_app_private_share_add_message" = "Add message";
-"business_app_private_share_add_message_inside" = "(optional)";
-"business_app_private_share_share_duration" = "Share Duration:";
+"business_app_private_share_add_message" = "Add Message";
+"business_app_private_share_add_message_inside" = "(Optional)";
+"business_app_private_share_share_duration" = "Share Duration";
 "business_app_private_share_share_duration_no_duration" = "No duration";
 "business_app_private_share_share_duration_1_hour" = "1 hour";
 "business_app_private_share_share_duration_1_day" = "1 day";
@@ -1942,11 +1937,15 @@
 "business_app_private_share_start" = "Share";
 "business_app_private_share_success" = "Shared Successfully";
 "business_app_private_share_shared_with_section_name" = "Shared with";
+
+/*We can remove this tag since we will limit the text area with 500 characters*/
 "business_app_private_share_fail_errorcode_4115" = "Your message is too long. Please shorten your message and try again";
+
+/*There won't be a share limit in lifebox business*/
 "business_app_private_share_fail_errorcode_4116" = "You have added so many users to the share";
 "business_app_private_share_fail_errorcode_4118" = "You reached maximum shared item limit";
-"business_app_private_share_fail_errorcode_5101" = "Personal invitee is not accepted";
-"business_app_private_share_fail_errorcode_5102" = "Invitee account not found";
+"business_app_private_share_fail_errorcode_5101" = "An error occured, please try again later.";
+"business_app_private_share_fail_errorcode_5102" = "An error occured, please try again later.";
 "business_app_info_page_title_for_files" = "File Info";
 "business_app_info_page_title_for_folders" = "Folder Info";
 "business_app_info_page_name" = "Name";
@@ -1959,141 +1958,169 @@
 "business_app_info_page_role_owner" = "Owner";
 "business_app_info_page_role_editor" = "Editor";
 "business_app_info_page_role_viewer" = "Viewer";
-"business_app_info_page_role_varies" = "Varies";
+"business_app_info_page_role_varies" = "Custom";
 "business_app_upload_bar_uploading_text" = "Uploading";
 "business_app_whohasaccess_page_title" = "Who Has Access";
 "business_app_whohasaccess_role_owner" = "Owner";
 "business_app_whohasaccess_role_editor" = "Editor";
 "business_app_whohasaccess_role_viewer" = "Viewer";
-"business_app_whohasaccess_role_varies" = "Varies";
+"business_app_whohasaccess_role_varies" = "Custom";
 "uploadVideoToReadOnlyAlbumError" = "uploadVideoToReadOnlyAlbumError";
-"business_app_2FA_first_page_title" = "Security Check";
-"business_app_2FA_first_page_description_title" = "Two factor authentication is needed.";
+"business_app_2FA_first_page_title" = "We Detected An Unusual Login Attempt";
+"business_app_2FA_first_page_description_title" = "You activated two-factor authentication on your account";
 "business_app_2FA_first_page_description_detail" = "To secure your account and login safely, we'll send you a security code to verify your identity";
 "business_app_2FA_first_page_sendsecuritycode" = "Send the security code";
 "business_app_2FA_first_page_sendsecuritycode_to_phone" = "To my Phone:";
-"business_app_2FA_first_page_sendsecuritycode_to_email" = "To my e-mail:";
+"business_app_2FA_first_page_sendsecuritycode_to_email" = "To my E-mail:";
 "business_app_2FA_first_page_send_button_name" = "Send";
 "business_app_2FA_second_page_title" = "Security Check";
-"business_app_2FA_second_page_verify_number" = "Verify your number";
-"business_app_2FA_second_page_verify_email" = "Verify your e-mail";
+"business_app_2FA_second_page_verify_number" = "Verify your identity";
+"business_app_2FA_second_page_verify_email" = "Verify your identity";
 "business_app_2FA_second_page_info" = "We have sent a code to %@";
-"business_app_2FA_second_page_code" = "Enter the security code";
+"business_app_2FA_second_page_code" = "Enter the Verification Code";
 "business_app_access_page_title" = "Access";
 "business_app_access_page_role_editor" = "Editor";
 "business_app_access_page_role_viewer" = "Viewer";
-"business_app_access_page_role_varies" = "Varies";
+"business_app_access_page_role_varies" = "Custom";
 "business_app_access_page_expire_date" = "Expires on: %@";
 "business_app_access_page_from_folder" = "From %@ folder";
 "business_app_access_page_role_change_remove" = "Remove";
 "business_app_sortby" = "Sort by:";
-"business_app_sortby_name_a_z" = "Name(A-Z)";
-"business_app_sortby_name_z_a" = "Name(Z-A)";
+"business_app_sortby_name_a_z" = "Name (A-Z)";
+"business_app_sortby_name_z_a" = "Name (Z-A)";
 "business_app_sortby_newest" = "Newest";
 "business_app_sortby_oldest" = "Oldest";
 "business_app_sortby_largest" = "Largest";
 "business_app_sortby_smallest" = "Smallest";
 "business_app_upload_select_page_title" = "Upload Files";
 "business_app_upload_select_page_upload_button" = "Upload";
-"business_app_role_delete" = "Member is removed from private share";
-"business_app_role_update" = "Role is updated";
-"business_app_no_permission_for_upload" = "You are not authorized to make upload or create folder for this level";
+"business_app_role_delete" = "Remove";
+"business_app_role_update" = "Role Changed";
+"business_app_no_permission_for_upload" = "You don't have permission to upload/create a new file.";
 "business_app_mydisk_page_title" = "My Disk";
 "business_app_mysharings_page_title" = "My Sharings";
-"business_app_sharedarea_page_title" = "Shared Area";
+"business_app_sharedarea_page_title" = "Public Disk";
 "business_app_search_bar_explanation" = "Search";
-"business_app_sharedwithme_menu" = "Shared with me";
-"business_app_sharedbyme_menu" = "Shared by me";
+"business_app_sharedwithme_menu" = "Shared with Me";
+"business_app_sharedbyme_menu" = "Shared by Me";
 "business_app_FL_error_popup_title" = "Authentication Failed";
-"business_app_fast_login_pool_user_popup" = "Please get in touch with your company to get access to the app";
+"business_app_fast_login_pool_user_popup" = "Please get in touch with your company admin to get access to the app";
 "business_app_fast_login_authentication_fail_popup" = "Authentication Failure";
-"business_app_FL_error_session_timeout" = "Your Fast Login session is expired. Please try again later.";
+"business_app_FL_error_session_timeout" = "Your session is expired in FastLogin system. Please login again.";
 "business_app_FL_error_not_logintologinSDK" = "Authentication Error in Fast Login";
-"business_app_FL_else_error" = "Temporary error occured in Fast Login. Please try again later.";
+"business_app_FL_else_error" = "A temporary error occurred in the FastLogin system. Please try again later.";
 "business_app_faq_page_title" = "FAQ";
 "Start Using" = "Start Using";
 "business_app_privacy_policy_start" = "Start Using";
-"business_app_eula_checkbox" = "I have read and accepted terms of use";
-"business_app_agreement_page_title" = "Agreements";
+"business_app_eula_checkbox" = "I have read and accepted Terms of Use.";
+"business_app_agreement_page_title" = "Terms of Use & Privacy Notice";
 "business_app_agreement_eula" = "Terms of Use";
-"business_app_agreement_privacy_policy" = "Privacy Policy";
-"business_app_eula_privacy_policy_textbox" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus, ipsum sit amet aliquam iaculis, lectus enim suscipit purus, fringilla dapibus risus lorem vehicula quam Privacy Policy";
-"business_app_privacy_policy_page_title" = "Privacy Policy";
-"business_app_privacy_policy_condition" = "Privacy Policy";
+"business_app_agreement_privacy_policy" = "Privacy Notice";
+"business_app_eula_privacy_policy_textbox" = "For detailed information about your personal data that we collect through lifebox business, please read our Privacy Notice.";
+"business_app_privacy_policy_page_title" = "Privacy Notice";
 "eula_title_new" = "Welcome to Lifebox";
 "business_app_eula_page_title" = "Terms of Use";
 "business_app_settings_page_title" = "Settings";
-"business_app_settings_storage_use_limited_header" = "Storage Use";
-"business_app_settings_storage_used_limited_values" = "%@ / %@ using";
-"business_app_settings_storage_use_unlimited_text" = "Storage Used: %@";
-"business_app_settings_profile" = "Profile";
-"business_app_settings_agreements" = "Agreements";
+"business_app_settings_storage_use_limited_header" = "Quota Usage";
+"business_app_settings_storage_used_limited_values" = "%@ / %@ Using";
+"business_app_settings_storage_use_unlimited_text" = "Quota Usage: %@";
+"business_app_settings_profile" = "Profile Settings";
+"business_app_settings_agreements" = "Terms of Use & Privacy Notice";
 "business_app_settings_faq" = "FAQ";
 "business_app_settings_contactus" = "Contact Us";
 "business_app_settings_deletedfiles" = "Trash Bin";
-"business_app_settings_logout" = "Log out";
-"business_app_document_no_preview" = "This file type is not supported for preview";
-"business_app_photo_no_preview" = "There is no preview for this file. Please try again later";
-"business_app_music_no_preview" = "There is no preview for this file";
+"business_app_settings_logout" = "Logout";
+"business_app_document_no_preview" = "Unable to preview now, please try again later.";
+"business_app_photo_no_preview" = "Unable to preview now, please try again later.";
+"business_app_music_no_preview" = "Unable to preview now, please try again later.";
 
 /*storage limit*/
-"business_app_quota_full_upload_pop_up_title" = "You have reached your Lifebox Business Storage Limit";
-"business_app_quota_full_upload_pop_up_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-"business_app_quota_full_upload_pop_up_button" = "Manage Files";
+"business_app_quota_full_upload_pop_up_title" = "Your lifebox business Quota is Full";
+"business_app_quota_full_upload_pop_up_description" = "To continue to upload new files, you can manage/delete your existing files or contact your company admin to increase your quota.";
+"business_app_quota_full_upload_pop_up_button" = "Manage Existing Files";
 
 /*contact us*/
 "business_app_contact_us_page_title" = "Contact Us";
-"business_app_contact_us_page_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+"business_app_contact_us_page_description" = "If you are looking for any support or assistance for your lifebox business experience, please take a look at the FAQ page. You can also get in touch with us by submitting your issue or suggestion below.";
 "business_app_contact_us_subject_box_name" = "Subject";
-"business_app_contact_us_message_box_name" = "Your message (optional)";
-"business_app_contact_us_subject_1" = "Subject_1";
-"business_app_contact_us_subject_2" = "Subject_2";
-"business_app_contact_us_subject_3" = "Subject_3";
-"business_app_contact_us_subject_4" = "Subject_4";
-"business_app_contact_us_subject_5" = "Subject_5";
-"business_app_contact_us_subject_6" = "Subject_6";
-"business_app_contact_us_subject_7" = "Subject_7";
-"business_app_contact_us_subject_8" = "Subject_8";
+"business_app_contact_us_message_box_name" = "Your Message (Optional)";
+"business_app_contact_us_subject_1" = "Payment (NT)";
+"business_app_contact_us_subject_2" = "Licence, Storage";
+"business_app_contact_us_subject_3" = "File Upload/Download";
+"business_app_contact_us_subject_4" = "Permission, Sharing";
+"business_app_contact_us_subject_5" = "Reporting";
+
+/*Contact Us will be available only for platform admin. There won't be an unlimited option for users.
+
+
+
+In the context of the e-mail body generated through the contact us form; Total Storage & Used Storage can be represented as total/used quota of the company account.
+
+
+
+e-mail: admin@xcompany.com
+
+Application Version: 1.0
+
+Device Name: iPhone X
+
+Device OS: 14.4.2
+
+Language: en
+
+Network Status: WWAN
+
+Total Storage: Zero KB
+
+Used Storage: Zero KB
+
+Subject: Subject_1*/
 "business_app_contact_us_email_body_unlimited" = "Unlimited";
-"business_app_contact_us_email_body" = "\ne-mail: %@\nApplication Version: %@\nDevice Name: %@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@\nTotal Storage: %@\nUsed Storage: %@\nSubject: %@";
+"business_app_contact_us_email_body" = "\nE-mail: %@\nApplication Version: %@\nDevice Name: %@\nDevice OS: %@\nLanguage: %@\nNetwork Status: %@\nTotal Quota: %@\nUsed Quota: %@\nSubject: %@";
 
 /*empty pages or folders*/
-"business_app_my_disk_empty page" = "Don't have any files yet";
-"business_app_shared_with_me_empty page" = "Don't have any shared files yet";
-"business_app_shared_by_me_empty page" = "Haven't shared any files yet";
-"business_app_shared_area_empty page" = "Don't have any shared files yet";
+"business_app_my_disk_empty page" = "You haven't uploaded any files in your disk yet.";
+"business_app_shared_with_me_empty page" = "There are no files or folders shared with you.";
+"business_app_shared_by_me_empty page" = "There are no files or folders shared by you.";
+"business_app_shared_area_empty page" = "There aren't any shared files on public disk yet.";
 "business_app_folder_empty page" = "Empty Folder";
 "business_app_trash_bin_page_title" = "Trash Bin";
 "business_app_trash_bin_empty_page" = "You do not have any deleted files";
 "business_app_trash_bin_restore_action_name" = "Restore";
-"business_app_trash_bin_delete_action_name" = "Delete Permanantly";
+"business_app_trash_bin_delete_action_name" = "Delete Permanently";
 "business_app_trash_bin_restore_confirm_title" = "Restore";
-"business_app_trash_bin_restore_confirm_description" = "Are you sure to restore item(s)?";
+"business_app_trash_bin_restore_confirm_description" = "Are you sure to restore?";
 "business_app_trash_bin_restore_confirm_YES_button" = "Restore";
 "business_app_trash_bin_restore_confirm_NO_button" = "Cancel";
-"business_app_trash_bin_delete_confirm_title" = "Delete Permanantly";
-"business_app_trash_bin_delete_confirm_description" = "Are you sure to delete item(s) permanantly?";
+"business_app_trash_bin_delete_confirm_title" = "Delete Permanently";
+"business_app_trash_bin_delete_confirm_description" = "Are you sure to delete permanently?";
 "business_app_trash_bin_delete_confirm_YES_button" = "Delete";
 "business_app_trash_bin_delete_confirm_NO_button" = "Cancel";
-"business_app_trash_bin_delete_success" = "Delete success";
-"business_app_trash_bin_restore_success" = "Restore success";
-"business_app_trash_bin_empty_trash_confirm_title" = "Delete Permanantly";
-"business_app_trash_bin_empty_trash_confirm_description" = "Are you sure to delete item(s) permanantly?";
+"business_app_trash_bin_delete_success" = "Successfully deleted.";
+"business_app_trash_bin_restore_success" = "Successfully restored.";
+"business_app_trash_bin_empty_trash_confirm_title" = "Delete Permanently";
+"business_app_trash_bin_empty_trash_confirm_description" = "Are you sure to delete item(s) permanently?";
 "business_app_trash_bin_empty_trash_confirm_YES_button" = "Empty Trash Bin";
 "business_app_trash_bin_empty_trash_confirm_NO_button" = "Cancel";
-"business_app_trash_bin_empty_trash_success" = "All items are permanantly deleted";
+"business_app_trash_bin_empty_trash_success" = "All items are permanently deleted";
+"business_app_login_ldap_error_code_31" = "A temporary error occurred. Please try again later.";
+"business_app_login_ldap_error_code_32" = "Authentication failed";
+"business_app_login_ldap_error_code_33" = "Authentication failed";
+"business_app_login_blocked_ip" = "Authentication failed";
+"business_app_login_generic_error_tag" = "Authentication failed";
+"business_app_privacy_policy_condition" = "Privacy Notice";
 
 /*profile page*/
 "business_app_profile_page_title" = "Profile";
 "business_app_profile_name_surname" = "Name Surname";
-"business_app_profile_email" = "Email";
+"business_app_profile_email" = "E-mail";
 "business_app_root_device_popup_title" = "This device is rooted";
-"business_app_root_device_popup_description" = "You can not use this app with rooted device due to security reasons";
-"business_app_root_device_popup_button" = "Close the app";
-
-
+"business_app_root_device_popup_description" = "This app can't be used with rooted device due to security reasons";
+"business_app_root_device_popup_button" = "Close App";
 "business_app_manual_picker_selected_counter" = "%d Selected";
-
 "turkcell_updater_pop_up_title" = "Warning";
 "turkcell_updater_pop_up_description" = "Please update your app from AppStore";
 "business_app_delete_success_snackbar_trashbin_link" = "Trash Bin";
+"business_app_contact_us_subject_6" = "Login/Signup";
+"business_app_contact_us_subject_7" = "Connection, Speed";
+"business_app_contact_us_subject_8" = "Suggestions (NT)";

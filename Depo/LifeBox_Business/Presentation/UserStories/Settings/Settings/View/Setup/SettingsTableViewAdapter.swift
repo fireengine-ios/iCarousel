@@ -65,15 +65,15 @@ extension SettingsTableViewAdapter: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 8
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 100
+            return 102
         case 1:
-            return 55
+            return 57
         default:
             return 0.1
         }
@@ -111,6 +111,7 @@ extension SettingsTableViewAdapter: UITableViewDataSource {
         case 1:
             let cell = tableView.dequeue(reusable: SettingsMenuItemTableViewCell.self)
             cell.setup(with: menuItems[indexPath.row], isFirstCell: indexPath.row == 0, isLastCell: indexPath.row == menuItems.count - 1)
+            cell.selectionStyle = .none
             return cell
         default: break
         }
