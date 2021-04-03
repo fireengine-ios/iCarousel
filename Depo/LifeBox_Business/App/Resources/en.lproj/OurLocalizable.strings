@@ -1901,8 +1901,10 @@
 "business_app_login_email_box_inside" = "Enter Your E-mail";
 "business_app_login_password_box_inside" = "Enter Your Password";
 "business_app_login_rememberme_checkbox" = "Remember me";
-"business_app_login_forget_password" = "Forget your password?";
-"business_app_login_forget_password_page_title" = "Forget Your Password?";
+
+/*kodda title tagi olarak içeri alındığından büyük harfle yazıldı*/
+"business_app_login_forget_password" = "Forgot Your Password";
+"business_app_login_forget_password_page_title" = "Forgot your password";
 "business_app_login_forget_password_page_description" = "Please change your company identity password. If you have already changed your password and you are still having problem, you can contact lifebox business admin at your company.";
 "business_app_login_forget_password_page_close_button" = "Close";
 "business_app_login_pwd_login_button" = "Login with Company Identity";

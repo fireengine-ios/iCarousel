@@ -309,18 +309,18 @@ extension UIFont {
     }
     
     static func TurkcellSaturaMedFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "GTAmericaTrial-Md", size: size)!
+        return GTAmericaStandardMediumFont(size: size)//UIFont(name: "GTAmericaTrial-Md", size: size)!
     }
     
     static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "GTAmericaTrial-Rg", size: size)!
+        return GTAmericaStandardRegularFont(size: size)//UIFont(name: "GTAmericaTrial-Rg", size: size)!
     }
     
     static func GTAmericaStandardRegularFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "GTAmericaTrial-Rg", size: size)!
+        return .systemFont(ofSize: size)//UIFont(name: "GTAmericaTrial-Rg", size: size)!
     }
     
     static func GTAmericaStandardMediumFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "GTAmericaTrial-Md", size: size)!
+        return .boldSystemFont(ofSize: size)//UIFont(name: "GTAmericaTrial-Md", size: size)!
     }
 }

@@ -1901,9 +1901,11 @@
 "business_app_login_email_box_inside" = "E-posta Adresinizi Girin";
 "business_app_login_password_box_inside" = "Şifrenizi Girin";
 "business_app_login_rememberme_checkbox" = "Beni Hatırla";
-"business_app_login_forget_password" = "Şifrenizi mi unuttunuz?";
-"business_app_login_forget_password_page_title" = "Şifrenizi mi Unuttunuz?";
-"business_app_login_forget_password_page_description" = "Lütfen şirket kimlik şifrenizi değiştiriniz. Şifrenizi değiştirdiyseniz ve halen giriş yapamıyorsanız, şirketinizdeki lifebox business admini ile iletişime geçebilirsiniz.";
+"business_app_login_forget_password" = "Şifrenizi mi Unuttunuz";
+
+/*kodda login tagi olarak içeri alındaığından küçük harfle yazıldı*/
+"business_app_login_forget_password_page_title" = "Şifrenizi mi unuttunuz";
+"business_app_login_forget_password_page_description" = "Lütfen şirket kimliğinizin şifresini değiştiriniz. Şifrenizi değiştirdiyseniz ve halen giriş yapamıyorsanız, şirketinizdeki lifebox business admini ile iletişime geçebilirsiniz.";
 "business_app_login_forget_password_page_close_button" = "Kapat";
 "business_app_login_pwd_login_button" = "Şirket Kimliği ile Giriş";
 "business_app_login_pwd_login_button_explanation" = "* Şirketinizin lifebox business ile kimlik entegrasyonu olması durumunda kullanılabilir";
