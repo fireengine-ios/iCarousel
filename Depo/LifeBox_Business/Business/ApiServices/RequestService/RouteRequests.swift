@@ -26,7 +26,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.test
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -150,6 +150,8 @@ struct RouteRequests {
     static let unifiedSearch = "search/unified?text=%@&category=%@&page=%@&size=%@"
     static let unifiedSearchWithoutCategory = "search/unified?text=%@&page=%@&size=%@"
     static let suggestion    = "search/unified/suggest?text=%@"
+    
+    static let privateShareSearch = baseUrl +/ "v1/busines/search"
     
     // MARK: Album
     

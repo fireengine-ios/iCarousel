@@ -48,8 +48,13 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     lazy private var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
-        searchController.obscuresBackgroundDuringPresentation = true
-        //TODO: also setup delegate here
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+//        searchController.hidesSearchBarWhenScrolling = false
+//        navigationItem.hidesSearchBarWhenScrolling = true
+//        searchController.searchBar.delegate
         return searchController
     }()
     
@@ -625,4 +630,46 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
             router.presentViewController(controller: navigationController)
         }
     }
+}
+
+extension PrivateShareSharedFilesViewController: TopBarSortingViewDelegate {
+    func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
+        showSpinner()
+        collectionManager.change(sortingRule: sortType.sortedRulesConveted)
+    }
+}
+
+extension PrivateShareSharedFilesViewController: UISearchControllerDelegate {
+//    @available(iOS 8.0, *)
+//    optional func willPresentSearchController(_ searchController: UISearchController)
+//
+//    @available(iOS 8.0, *)
+//    optional func didPresentSearchController(_ searchController: UISearchController)
+//
+//    @available(iOS 8.0, *)
+//    optional func willDismissSearchController(_ searchController: UISearchController)
+//
+//    @available(iOS 8.0, *)
+//    optional func didDismissSearchController(_ searchController: UISearchController)
+//
+//    
+//    // Called after the search controller's search bar has agreed to begin editing or when 'active' is set to YES. If you choose not to present the controller yourself or do not implement this method, a default presentation is performed on your behalf.
+//    @available(iOS 8.0, *)
+//    optional func presentSearchController(_ searchController: UISearchController)
+//}
+//
+//public protocol UISearchResultsUpdating : NSObjectProtocol {
+//
+//    
+//    // Called when the search bar's text or scope has changed or when the search bar becomes first responder.
+//    @available(iOS 8.0, *)
+//    func updateSearchResults(for searchController: UISearchController)
+}
+
+extension PrivateShareSharedFilesViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+
 }

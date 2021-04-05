@@ -22,9 +22,9 @@ indirect enum PrivateShareType: Equatable {
             case .myDisk:
                 title = TextConstants.tabBarItemMyDisk
             case .byMe:
-                title = TextConstants.privateShareSharedByMeTab
+                title = TextConstants.topBarSegmentSharedByMe
             case .withMe:
-                title = TextConstants.privateShareSharedWithMeTab
+                title = TextConstants.topBarSegmentSharedWithMe
             case .innerFolder(_, let folder):
                 title = folder.name
             case .sharedArea:

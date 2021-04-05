@@ -127,7 +127,7 @@ class SingletonStorage {
             completion()
             
             }, fail: { error in
-               assertionFailure("Тo data received for overQuotaStatus request \(error.localizedDescription) ")
+//               assertionFailure("Тo data received for overQuotaStatus request \(error.localizedDescription) ")
                completion()
         })
     }
