@@ -15,6 +15,8 @@ protocol GalleryFileUploadServiceDelegate: class {
     func cancelled()
     func failed(error: ErrorResponse?)
     func uploaded(items: [WrapData])
+    func showSpinner()
+    func hideSpinner()
 }
 
 extension GalleryFileUploadServiceDelegate {
@@ -147,6 +149,29 @@ final class GalleryFileUploadService: NSObject {
         return nil
     }
     
+    private func tryToUpload(assets: [PHAsset], picker: UIViewController) {
+        dismiss(picker: picker) { [weak self] in
+            self?.delegate?.showSpinner()
+            
+            self?.itemsToUpload(from: assets) { items in
+                DispatchQueue.main.async {
+                    self?.delegate?.hideSpinner()
+                    
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    if let errorMessage = self.verify(items: items) {
+                        self.delegate?.failed(error: ErrorResponse.string(errorMessage))
+                        return
+                    }
+                    
+                    self.upload(items: items)
+                }
+            }
+        }
+    }
+    
     private func itemsToUpload(from assets: [PHAsset], completion: @escaping ValueHandler<[WrapData]>) {
         DispatchQueue.toBackground {
             let items = assets.map { asset -> WrapData in
@@ -155,6 +180,12 @@ final class GalleryFileUploadService: NSObject {
             }
             
             completion(items)
+        }
+    }
+    
+    private func dismiss(picker: UIViewController, completion: @escaping VoidHandler) {
+        DispatchQueue.main.async {
+            picker.dismiss(animated: true, completion: completion)
         }
     }
 }
@@ -172,54 +203,12 @@ extension GalleryFileUploadService: PHPickerViewControllerDelegate {
         
         let pickedAssets = PHAsset.getAllAssets(with: results.compactMap { $0.assetIdentifier })
         
-        itemsToUpload(from: pickedAssets) { [weak self] items in
-            guard let self = self else {
-                return
-            }
-            
-            if let errorMessage = self.verify(items: items) {
-                self.dismiss(picker: picker) { [weak self] in
-                    self?.delegate?.failed(error: ErrorResponse.string(errorMessage))
-                }
-                return
-            }
-            
-            self.dismiss(picker: picker) { [weak self] in
-                self?.upload(items: items)
-            }
-        }
-    }
-    
-    private func dismiss(picker: PHPickerViewController, completion: @escaping VoidHandler) {
-        DispatchQueue.main.async {
-            picker.dismiss(animated: true, completion: completion)
-        }
+       tryToUpload(assets: pickedAssets, picker: picker)
     }
 }
 
 extension GalleryFileUploadService: UploadPickerControllerDelegate {
     func uploadPicker(_ controller: UploadPickerController, didSelect assets: [PHAsset]) {
-        itemsToUpload(from: assets) { [weak self] items in
-            guard let self = self else {
-                return
-            }
-            
-            if let errorMessage = self.verify(items: items) {
-                self.dismiss(picker: controller) { [weak self] in
-                    self?.delegate?.failed(error: ErrorResponse.string(errorMessage))
-                }
-                return
-            }
-            
-            self.dismiss(picker: controller) { [weak self] in
-                self?.upload(items: items)
-            }
-        }
-    }
-    
-    private func dismiss(picker: UploadPickerController, completion: @escaping VoidHandler) {
-        DispatchQueue.main.async {
-            picker.dismiss(animated: true, completion: completion)
-        }
+        tryToUpload(assets: assets, picker: controller)
     }
 }
