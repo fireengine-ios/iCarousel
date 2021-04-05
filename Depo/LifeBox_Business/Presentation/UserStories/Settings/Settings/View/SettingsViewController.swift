@@ -60,7 +60,7 @@ final class SettingsViewController: BaseViewController {
     }
     
     private var appVersion: String {
-        let fullAppVersion = SettingsBundleHelper.appVersion() + " " + "(\(SettingsBundleHelper.appBuild()))"
+        let fullAppVersion = "\(SettingsBundleHelper.appVersion()) (\(SettingsBundleHelper.appBuild()))"
         let formattedAppVersion = String(format: TextConstants.appVersion, fullAppVersion)
         return formattedAppVersion
     }
