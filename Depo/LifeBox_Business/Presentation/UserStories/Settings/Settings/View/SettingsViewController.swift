@@ -32,7 +32,13 @@ final class SettingsViewController: BaseViewController {
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
         }
     }
-
+    @IBOutlet weak var appVersionLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 11)
+            newValue.textColor = ColorConstants.multifileCellSubtitleText
+        }
+    }
+    
     private var settingsTableViewAdapter: SettingsTableViewAdapter!
     
     var output: SettingsViewOutput!
