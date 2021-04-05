@@ -1364,6 +1364,7 @@ extension TextConstants {
     static let accessPageRoleEditor = NSLocalizedString("business_app_access_page_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRoleViewer = NSLocalizedString("business_app_access_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRoleVaries = NSLocalizedString("business_app_access_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleOwner = NSLocalizedString("business_app_access_page_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageDueDateTo = NSLocalizedString("business_app_access_page_expire_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageFromFolder = NSLocalizedString("business_app_access_page_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRemoveRole = NSLocalizedString("business_app_access_page_role_change_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
