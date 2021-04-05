@@ -73,7 +73,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
         contactsCollectionView.dataSource = self
         
         if let layout = contactsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 40, height: 59)
+            layout.itemSize = CGSize(width: 50, height: 59)
             layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 20)
             layout.minimumInteritemSpacing = 10
         }
