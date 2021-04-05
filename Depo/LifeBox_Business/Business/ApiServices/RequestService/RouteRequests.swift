@@ -106,7 +106,7 @@ struct RouteRequests {
     static let twoFactorAuthLogin = baseUrl.absoluteString + "auth/2fa/token?rememberMe=on%@"
 
     // MARK: EULA 
-    static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
+    static let eulaGet     = "eula/get/%@?brand=LIFEBOX"
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
     
