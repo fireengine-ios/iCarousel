@@ -42,6 +42,7 @@ final class SettingsTableViewAdapter: NSObject {
     }
 
     private func setupTableView() {
+        tableView?.isScrollEnabled = false
         tableView?.tableFooterView = UIView()
         tableView?.register(nibCell: SettingsMenuItemTableViewCell.self)
         tableView?.register(nibCell: SettingsStorageTableViewCell.self)

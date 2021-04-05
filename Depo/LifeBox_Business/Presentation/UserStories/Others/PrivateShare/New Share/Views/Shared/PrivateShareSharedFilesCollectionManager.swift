@@ -50,7 +50,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private(set) var isSelecting = false
     
-    private lazy var mediaPlayer: MediaPlayer = factory.resolve()
+    private var sortViewRulesType: MoreActionsConfig.SortRullesType = .lastModifiedTimeNewOld
     
     var rootPermissions: SharedItemPermission? {
         return fileInfoManager.rootFolder?.permissions
@@ -478,7 +478,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        guard !fileInfoManager.items.isEmpty, fileInfoManager.type.rootType != .trashBin else {
+        guard !fileInfoManager.items.isEmpty else {
             return .zero
         }
         
@@ -516,7 +516,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     private func setup(sortingBar: TopBarSortingView) {
         let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
         
-        sortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: .lastModifiedTimeNewOld)
+        sortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: sortViewRulesType)
         sortingBar.delegate = self
     }
 }
@@ -632,6 +632,7 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
 extension PrivateShareSharedFilesCollectionManager: TopBarSortingViewDelegate {
     func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
         delegate?.needToShowSpinner()
+        sortViewRulesType = sortType
         change(sortingRule: sortType.sortedRulesConveted)
     }
 }

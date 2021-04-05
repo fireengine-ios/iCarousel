@@ -1364,6 +1364,7 @@ extension TextConstants {
     static let accessPageRoleEditor = NSLocalizedString("business_app_access_page_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRoleViewer = NSLocalizedString("business_app_access_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRoleVaries = NSLocalizedString("business_app_access_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleOwner = NSLocalizedString("business_app_access_page_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageDueDateTo = NSLocalizedString("business_app_access_page_expire_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageFromFolder = NSLocalizedString("business_app_access_page_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessPageRemoveRole = NSLocalizedString("business_app_access_page_role_change_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1436,6 +1437,7 @@ extension TextConstants {
     static let settingsPageContactUs = NSLocalizedString("business_app_settings_contactus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsPageDeletedFiles = NSLocalizedString("business_app_settings_deletedfiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let appVersion = NSLocalizedString("business_app_app_version_under_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 // MARK: - Contact us

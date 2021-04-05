@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
+                <outlet property="appVersionLabel" destination="tNe-6O-H6J" id="EP8-Tn-xxo"/>
                 <outlet property="logoutButton" destination="4WJ-Hn-jBO" id="hgJ-Gn-vhc"/>
                 <outlet property="tableView" destination="M7i-kt-Jaj" id="GTQ-UF-Iv2"/>
                 <outlet property="view" destination="iN0-l3-epB" id="s9h-jf-rhR"/>
@@ -26,7 +27,7 @@
                     <color key="backgroundColor" name="settingsTableBackground"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WJ-Hn-jBO">
-                    <rect key="frame" x="13" y="597" width="349" height="50"/>
+                    <rect key="frame" x="13" y="572" width="349" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="auc-yN-YFV"/>
                     </constraints>
@@ -35,16 +36,24 @@
                         <action selector="logoutButtonDidPress:" destination="-1" eventType="touchUpInside" id="5Dg-DT-jce"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNe-6O-H6J">
+                    <rect key="frame" x="173.5" y="636" width="28.5" height="13.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="2EM-su-Qne"/>
             <color key="backgroundColor" name="settingsTableBackground"/>
             <constraints>
                 <constraint firstItem="4WJ-Hn-jBO" firstAttribute="centerX" secondItem="2EM-su-Qne" secondAttribute="centerX" id="0JN-LS-6Dz"/>
                 <constraint firstAttribute="trailing" secondItem="M7i-kt-Jaj" secondAttribute="trailing" constant="13" id="9oR-9J-diX"/>
+                <constraint firstItem="tNe-6O-H6J" firstAttribute="top" secondItem="4WJ-Hn-jBO" secondAttribute="bottom" constant="14" id="AIl-NX-0bL"/>
                 <constraint firstItem="4WJ-Hn-jBO" firstAttribute="width" secondItem="M7i-kt-Jaj" secondAttribute="width" id="AnO-IL-rZW"/>
                 <constraint firstAttribute="bottom" secondItem="M7i-kt-Jaj" secondAttribute="bottom" id="Lcu-qq-RWK"/>
                 <constraint firstItem="M7i-kt-Jaj" firstAttribute="top" secondItem="2EM-su-Qne" secondAttribute="top" id="P8Z-fN-pp0"/>
-                <constraint firstItem="2EM-su-Qne" firstAttribute="bottom" secondItem="4WJ-Hn-jBO" secondAttribute="bottom" constant="20" id="T0x-Vw-Eht"/>
+                <constraint firstItem="2EM-su-Qne" firstAttribute="bottom" secondItem="4WJ-Hn-jBO" secondAttribute="bottom" constant="45" id="T0x-Vw-Eht"/>
+                <constraint firstItem="tNe-6O-H6J" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fjz-WI-4Ew"/>
                 <constraint firstItem="M7i-kt-Jaj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="hKh-jC-yLe"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="53.5"/>

@@ -32,7 +32,15 @@ final class SettingsViewController: BaseViewController {
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
         }
     }
-
+    
+    @IBOutlet private weak var appVersionLabel: UILabel! {
+        willSet {
+            newValue.text = appVersion
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 11)
+            newValue.textColor = ColorConstants.multifileCellSubtitleText
+        }
+    }
+    
     private var settingsTableViewAdapter: SettingsTableViewAdapter!
     
     var output: SettingsViewOutput!
@@ -49,6 +57,12 @@ final class SettingsViewController: BaseViewController {
         didSet {
             tableView?.reloadData()
         }
+    }
+    
+    private var appVersion: String {
+        let fullAppVersion = "\(SettingsBundleHelper.appVersion()) (\(SettingsBundleHelper.appBuild()))"
+        let formattedAppVersion = String(format: TextConstants.appVersion, fullAppVersion)
+        return formattedAppVersion
     }
     
     // MARK: Life cycle

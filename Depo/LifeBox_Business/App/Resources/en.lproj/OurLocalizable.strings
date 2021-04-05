@@ -1984,6 +1984,7 @@
 "business_app_access_page_role_editor" = "Editor";
 "business_app_access_page_role_viewer" = "Viewer";
 "business_app_access_page_role_varies" = "Custom";
+"business_app_access_page_role_owner" = "Owner";
 "business_app_access_page_expire_date" = "Expires on: %@";
 "business_app_access_page_from_folder" = "From %@ folder";
 "business_app_access_page_role_change_remove" = "Remove";
@@ -2032,6 +2033,7 @@
 "business_app_settings_contactus" = "Contact Us";
 "business_app_settings_deletedfiles" = "Trash Bin";
 "business_app_settings_logout" = "Logout";
+"business_app_app_version_under_settings" = "Version: %@";
 "business_app_document_no_preview" = "Unable to preview now, please try again later.";
 "business_app_photo_no_preview" = "Unable to preview now, please try again later.";
 "business_app_music_no_preview" = "Unable to preview now, please try again later.";

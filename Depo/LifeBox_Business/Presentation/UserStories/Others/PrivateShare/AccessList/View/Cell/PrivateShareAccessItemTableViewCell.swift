@@ -109,6 +109,15 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
             roleButton.isUserInteractionEnabled = true
         }
 
+        switch info.object.type {
+        case .disk, .account:
+            roleButton.setImage(nil, for: .normal)
+            roleButton.isUserInteractionEnabled = false
+            roleButton.setTitleColor(ColorConstants.sharedContactRoleDisabled, for: .normal)
+        case .album, .file:
+            break
+        }
+
         setupMenu(indexPath: indexPath)
     }
 
@@ -140,7 +149,7 @@ private extension PrivateShareAccessItemTableViewCell {
         case .varying:
             return TextConstants.accessPageRoleVaries
         case .owner:
-            return ""
+            return TextConstants.accessPageRoleOwner
         }
     }
 }
