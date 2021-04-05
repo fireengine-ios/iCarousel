@@ -27,7 +27,6 @@ struct RouteRequests {
     // MARK: Environment
     
     static var currentServerEnvironment = ServerEnvironment.production
-    private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
         switch currentServerEnvironment {
