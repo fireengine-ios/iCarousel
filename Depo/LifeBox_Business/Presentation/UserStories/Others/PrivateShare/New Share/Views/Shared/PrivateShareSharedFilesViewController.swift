@@ -71,7 +71,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionManager.setup()
         setupBars()
-        setupNavigationBar(editingMode: collectionManager.isSelecting)
         setupPlusButton()
         
         showSpinner()
@@ -335,6 +334,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         } else {
             switch shareType {
             case .trashBin:
+                navBarManager.setupLargetitle(isLarge: false)
                 navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
                 
             case .innerFolder(let rootType, let folderItem):
