@@ -1436,6 +1436,7 @@ extension TextConstants {
     static let settingsPageContactUs = NSLocalizedString("business_app_settings_contactus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsPageDeletedFiles = NSLocalizedString("business_app_settings_deletedfiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let appVersion = NSLocalizedString("business_app_app_version_under_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 // MARK: - Contact us

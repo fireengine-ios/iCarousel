@@ -2030,6 +2030,7 @@
 "business_app_settings_contactus" = "Contact Us";
 "business_app_settings_deletedfiles" = "Trash Bin";
 "business_app_settings_logout" = "Logout";
+"business_app_app_version_under_settings" = "Version: %@";
 "business_app_document_no_preview" = "Unable to preview now, please try again later.";
 "business_app_photo_no_preview" = "Unable to preview now, please try again later.";
 "business_app_music_no_preview" = "Unable to preview now, please try again later.";
