@@ -258,6 +258,8 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
 enum PrivateShareItemType: String, Codable {
     case file = "FILE"
     case album = "ALBUM"
+    case account = "ACCOUNT"
+    case disk = "DISK"
 }
 
 enum PrivateShareDuration: String, CaseIterable, Codable {
