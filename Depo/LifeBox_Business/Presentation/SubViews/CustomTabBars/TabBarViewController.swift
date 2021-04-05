@@ -305,6 +305,14 @@ extension TabBarViewController: GalleryFileUploadServiceDelegate {
             self.present(vc, animated: true, completion: nil)
         }
     }
+    
+    override func showSpinner() {
+        showSpinner()
+    }
+    
+    override func hideSpinner() {
+        hideSpinner()
+    }
 }
 
 extension TabBarViewController: MediaPlayerDelegate {

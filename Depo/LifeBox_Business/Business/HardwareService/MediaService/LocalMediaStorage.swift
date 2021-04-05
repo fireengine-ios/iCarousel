@@ -476,7 +476,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 data(imageData)
             }
         }
-        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset, callback: callBack)
+        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset, isNetworkAccessAllowed: true, callback: callBack)
         queue.addOperation(operation)
     }
     
@@ -769,7 +769,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let operation = GetOriginalImageOperation(photoManager: photoManager,
-                                                  asset: asset) { data, string, orientation, dict in
+                                                  asset: asset, isNetworkAccessAllowed: true) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
                                                     let tmpURL = Device.tmpFolderUrl(withComponent: file)
                                                     do {
@@ -884,7 +884,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalImageOperation(photoManager: photoManager,
-                                                  asset: asset) { data, string, orientation, dict in
+                                                  asset: asset, isNetworkAccessAllowed: true) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
                                                     guard let data = data else {
                                                         Crashlytics.crashlytics().record(error: CustomErrors.text("copyImageAsset: found nil data while trying to get it from asset(after GetOriginalImageOperation)"))
@@ -1200,7 +1200,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset) { [weak self] data, string, orientation, dict in
+        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset, isNetworkAccessAllowed: true) { [weak self] data, string, orientation, dict in
             
             guard let self = self else {
                 assetInfo.isValid = false
@@ -1348,19 +1348,21 @@ class GetImageOperation: Operation {
 
 class GetOriginalImageOperation: Operation {
     
-    let photoManager: PHImageManager
-    let callback: PhotoManagerOriginalCallBack
-    let asset: PHAsset
+    private let photoManager: PHImageManager
+    private let callback: PhotoManagerOriginalCallBack
+    private let asset: PHAsset
+    private let isNetworkAccessAllowed: Bool
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var requestId: PHImageRequestID?
     
     
-    init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalCallBack) {
+    init(photoManager: PHImageManager, asset: PHAsset, isNetworkAccessAllowed: Bool, callback: @escaping PhotoManagerOriginalCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback
         self.asset = asset
+        self.isNetworkAccessAllowed = isNetworkAccessAllowed
         
         super.init()
     }
@@ -1389,6 +1391,7 @@ class GetOriginalImageOperation: Operation {
         let options = PHImageRequestOptions()
         options.version = .current
         options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = isNetworkAccessAllowed
         
         requestId = photoManager.requestImageData(for: asset, options: options, resultHandler: { [weak self] data, string, orientation, dict in
             if data == nil, let error = dict?[PHImageErrorKey] as? Error {
