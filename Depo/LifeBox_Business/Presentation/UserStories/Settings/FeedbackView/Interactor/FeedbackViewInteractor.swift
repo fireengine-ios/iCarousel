@@ -23,7 +23,6 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
         group.enter()
         group.enter()
         group.enter()
-        group.enter()
         
         var phoneString = ""
         var quota: Int64 = 0
@@ -34,15 +33,6 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
 //            if let phone = userInfoResponse.phoneNumber {
 //                phoneString = phone
 //            }
-            group.leave()
-        }, fail: { error in
-            group.leave()
-        })
-        
-        accountService.quotaInfo(success: { response in
-            let quotaInfoResponse = response as? QuotaInfoResponse
-            quota = quotaInfoResponse?.bytes ?? 0
-            quotaUsed = quotaInfoResponse?.bytesUsed ?? 0
             group.leave()
         }, fail: { error in
             group.leave()

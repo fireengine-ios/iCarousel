@@ -19,7 +19,6 @@ final class AppWormholeListener {
     
     func startListen() {
         listenLogout()
-        listenOffTurkcellPassword()
         listenWidgetChangeState()
     }
     
@@ -37,24 +36,6 @@ final class AppWormholeListener {
                     router.setNavigationController(controller: router.loginScreen)
                 }
             }
-        }
-    }
-    
-    private func listenOffTurkcellPassword() {
-        wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeOffTurkcellPassword) { [weak self] _ in
-            
-            self?.accountService.securitySettingsInfo(success: { [weak self] response in
-                
-                if let twoFactorAuthEnabled = (response as? SecuritySettingsInfoResponse)?.twoFactorAuthEnabled {
-                    self?.accountService.securitySettingsChange(turkcellPasswordAuthEnabled: true,
-                                                                mobileNetworkAuthEnabled: false,
-                                                                twoFactorAuthEnabled: twoFactorAuthEnabled,
-                                                                success: nil,
-                                                                fail: nil)
-                } else {
-                    assertionFailure("server returned wrong/updated response")
-                }
-            }, fail: nil)
         }
     }
     

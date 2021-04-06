@@ -26,6 +26,10 @@ class SingletonStorage {
     
     var isTwoFactorAuthEnabled: Bool?
     
+    var isUserAdmin: Bool {
+        return accountInfo?.parentAccountAdmin ?? false
+    }
+    
     private let resumableUploadInfoService: ResumableUploadInfoService = factory.resolve()
     
     private static let isEmailVerificationCodeSentKey = "isEmailVerificationCodeSentKeyFor\(SingletonStorage.shared.uniqueUserID)"
@@ -99,73 +103,6 @@ class SingletonStorage {
                 }
         }
 
-    }
-    
-    func getOverQuotaStatus(completion: @escaping VoidHandler) {
-        let storageVars: StorageVars = factory.resolve()
-        
-        ///to send initial value as true
-        let showPopUp =  !storageVars.largeFullOfQuotaPopUpCheckBox
-        
-        AccountService().overQuotaStatus(with: showPopUp, success: { response in
-            guard let response = response as? OverQuotaStatusResponse, let value = response.value else {
-                completion()
-                return
-            }
-            
-            switch value {
-            case .nonOverQuota:
-                storageVars.largeFullOfQuotaPopUpShowType100 = false
-            case .overQuotaFreemium:
-                storageVars.largeFullOfQuotaPopUpShowType100 = true
-                storageVars.largeFullOfQuotaUserPremium = false
-            case .overQuotaPremium:
-                storageVars.largeFullOfQuotaPopUpShowType100 = true
-                storageVars.largeFullOfQuotaUserPremium = true
-            }
-            
-            completion()
-            
-            }, fail: { error in
-               assertionFailure("Тo data received for overQuotaStatus request \(error.localizedDescription) ")
-               completion()
-        })
-    }
-    
-    func getLifeboxUsagePersentage(usagePercentageCallback: @escaping UsagePercenatageCallback) {
-        guard quotaUsage == nil else {
-            usagePercentageCallback(quotaUsage)
-            return
-        }
-        
-        prepareLifeBoxUsage { [weak self] percentage in
-            guard let persentage = percentage else {
-                usagePercentageCallback(nil)
-                return
-            }
-            self?.quotaUsage = persentage
-            usagePercentageCallback(percentage)
-        }
-        
-    }
-    
-    private func prepareLifeBoxUsage(preparedUserField: @escaping UsagePercenatageCallback) {
-        AccountService().quotaInfo(
-            success: { [weak self] response in
-                guard let quota = response as? QuotaInfoResponse,
-                    let quotaBytes = quota.bytes, quotaBytes != 0,
-                    let usedBytes = quota.bytesUsed else {
-                        preparedUserField(0)
-                        return
-                }
-                self?.quotaInfoResponse = quota
-                let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
-                preparedUserField(Int(usagePercentage * 100))
-                
-        }, fail: { [weak self] errorResponse in
-            self?.quotaInfoResponse = nil
-            preparedUserField(nil)
-        })
     }
     
     var isTurkcellUser: Bool {

@@ -8,7 +8,6 @@
 
 import UIKit
 import FirebaseCrashlytics
-import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
@@ -123,16 +122,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppConfigurator.applicationStarted(with: options)
         
         passcodeStorage.systemCallOnScreen = false
-        
-        AppLinkUtility.fetchDeferredAppLink { url, error in
-            if let url = url {
-                UIApplication.shared.openSafely(url)
-            } else {
-                debugLog("Received error while fetching deferred app link \(String(describing: error))")
-            }
-        }
-        
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
     }
     
     private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?, completionHandler: @escaping () -> Void) {
@@ -165,11 +154,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PushNotificationService.shared.openActionScreen()
             }
         }
-        
-        if ApplicationDelegate.shared.application(app, open: url, options: options) {
-            return true
-        }
-        return false
+
+        return true // changed to true, due to apple documentation- return false if failed. What do you think, colleagues?
     }
     
     private var firstResponder: UIResponder?
@@ -282,7 +268,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidBecomeActive")
         checkPasscodeIfNeed()
-        AppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -330,8 +315,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         debugLog("AppDelegate didReceiveRemoteNotification")
-        
-        AppEvents.logPushNotificationOpen(userInfo)
     }
     
     //MARK: Adjust

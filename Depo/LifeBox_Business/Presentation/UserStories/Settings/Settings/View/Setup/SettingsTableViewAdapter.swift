@@ -22,13 +22,14 @@ final class SettingsTableViewAdapter: NSObject {
     private weak var tableView: UITableView?
     private weak var delegate: SettingsTableViewAdapterDelegate?
 
-    private let menuItems: [SettingsMenuItem] = [
-        .profile,
-        .agreements,
-        .faq,
-        .contactUs,
-        .deletedFiles
-    ]
+    private var menuItems: [SettingsMenuItem] {
+        if SingletonStorage.shared.isUserAdmin {
+           return [.profile, .agreements, .faq, .contactUs, .deletedFiles]
+        }
+        
+        return [.profile, .agreements, .faq, .deletedFiles]
+    }
+    
     private var storageUsageInfo: SettingsStorageUsageResponseItem?
 
     convenience init(with tableView: UITableView,

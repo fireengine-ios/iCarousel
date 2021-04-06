@@ -66,7 +66,14 @@ final class SegmentedChildNavBarManager {
     lazy var settingsButton: UIBarButtonItem = {
         let button = UIButton(type: .custom)
         
-        let initials = (SingletonStorage.shared.accountInfo?.name?.firstLetter ?? "") + (SingletonStorage.shared.accountInfo?.surname?.firstLetter ?? "")
+        let initials: String
+        
+        if let firstLetter = SingletonStorage.shared.accountInfo?.name?.firstLetter,
+           let secondLetter = SingletonStorage.shared.accountInfo?.surname?.firstLetter {
+            initials = firstLetter + secondLetter
+        } else {
+            initials = String((SingletonStorage.shared.accountInfo?.email ?? "").prefix(2)).uppercased()
+        }
         
         button.setTitle(initials, for: .normal)
         button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 13.5)

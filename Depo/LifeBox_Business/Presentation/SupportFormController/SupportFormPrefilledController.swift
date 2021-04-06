@@ -358,16 +358,6 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         let accountService = AccountService()
         
         group.enter()
-        accountService.quotaInfo(success: { response in
-            let quotaInfoResponse = response as? QuotaInfoResponse
-            quota = quotaInfoResponse?.bytes ?? 0
-            quotaUsed = quotaInfoResponse?.bytesUsed ?? 0
-            group.leave()
-        }, fail: { error in
-            group.leave()
-        })
-        
-        group.enter()
         accountService.feedbackEmail { response in
             switch response {
             case .success(let feedbackResponse):

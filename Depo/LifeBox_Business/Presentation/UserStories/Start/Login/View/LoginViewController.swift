@@ -369,7 +369,7 @@ extension LoginViewController: LoginCoordinatorDelegate {
     }
 
     func dgLoginToken(_ token: String) {
-        printLog("[LoginViewController] dgLoginToken FL login succeded. Passed to be")
+        printLog("[LoginViewController] FL login succeded. Passed to BE")
         output.authenticateWith(flToken: token)
     }
 
