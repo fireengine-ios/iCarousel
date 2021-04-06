@@ -117,7 +117,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupBars() {
         setDefaultTabBarState()
-//        setupCollectionViewBars()
         bottomBarManager.setup()
     }
     
@@ -392,8 +391,11 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onSettingsButton() {
-        let controller = router.settings
-        router.pushViewController(viewController: controller!)
+        guard let settings = router.settings else {
+            return
+        }
+        let controller = UINavigationController(rootViewController: settings)
+        router.presentViewController(controller: controller, animated: true, completion: nil)
     }
 
     func onTrashBinButton() {
