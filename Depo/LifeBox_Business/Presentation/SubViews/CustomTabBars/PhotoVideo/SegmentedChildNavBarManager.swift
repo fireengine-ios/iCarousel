@@ -69,7 +69,7 @@ final class SegmentedChildNavBarManager {
         let initials: String
         
         if let firstLetter = SingletonStorage.shared.accountInfo?.name?.firstLetter,
-           let secondLetter = SingletonStorage.shared.accountInfo?.surname?.firstLetter {
+           let secondLetter = SingletonStorage.shared.accountInfo?.surname?.secondLetter {
             initials = firstLetter + secondLetter
         } else {
             initials = (SingletonStorage.shared.accountInfo?.email?.firstLetter ?? "") + (SingletonStorage.shared.accountInfo?.email?.secondLetter ?? "")
