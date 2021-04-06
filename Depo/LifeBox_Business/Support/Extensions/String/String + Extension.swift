@@ -64,13 +64,6 @@ extension String {
         return ""
     }
     
-    var secondLetter: String {
-        if let character = Array(self)[safe: 1] {
-            return character.uppercased()
-        }
-        return ""
-    }
-    
     var nonEmptyString: String? {
         self.isEmpty ? nil : self
     }

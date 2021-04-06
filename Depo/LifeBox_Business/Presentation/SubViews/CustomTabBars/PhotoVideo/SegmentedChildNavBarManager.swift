@@ -72,7 +72,7 @@ final class SegmentedChildNavBarManager {
            let secondLetter = SingletonStorage.shared.accountInfo?.surname?.firstLetter {
             initials = firstLetter + secondLetter
         } else {
-            initials = (SingletonStorage.shared.accountInfo?.email?.firstLetter ?? "") + (SingletonStorage.shared.accountInfo?.email?.secondLetter ?? "")
+            initials = String((SingletonStorage.shared.accountInfo?.email ?? "").prefix(2)).uppercased()
         }
         
         button.setTitle(initials, for: .normal)
