@@ -64,7 +64,7 @@ final class ProfileCell: UITableViewCell {
             let initials: String
             
             if let firstLetter = SingletonStorage.shared.accountInfo?.name?.firstLetter,
-               let secondLetter = SingletonStorage.shared.accountInfo?.surname?.secondLetter {
+               let secondLetter = SingletonStorage.shared.accountInfo?.surname?.firstLetter {
                 initials = firstLetter + secondLetter
             } else {
                 initials = (SingletonStorage.shared.accountInfo?.email?.firstLetter ?? "") + (SingletonStorage.shared.accountInfo?.email?.secondLetter ?? "")
