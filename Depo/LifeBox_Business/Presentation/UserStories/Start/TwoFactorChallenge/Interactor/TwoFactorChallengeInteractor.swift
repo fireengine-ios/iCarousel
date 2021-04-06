@@ -177,14 +177,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             }
             AccountService().updateBrandType()
             
-            if accountReadOnly {
-                SingletonStorage.shared.getOverQuotaStatus {
-                    self.output.verificationSucces()
-                }
-                
-            } else {
-                self.output.verificationSucces()
-            }
+            self.output.verificationSucces()
             
             debugLog("TWO FACTOR: verification verified")
 

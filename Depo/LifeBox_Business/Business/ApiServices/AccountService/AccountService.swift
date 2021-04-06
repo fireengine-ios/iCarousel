@@ -50,27 +50,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseObject(handler)
     }
     
-    func quotaInfo(success: SuccessResponse?, fail:@escaping FailResponse) {
-        debugLog("AccountService quotaInfo")
-        
-        //TODO: remove it when API is ready
-        fail(.error(CustomErrors.text("waiting for new api")))
-        return
-        //
-        let param = QuotaInfo()
-        let handler = BaseResponseHandler<QuotaInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-    }
-    
-    func overQuotaStatus(with showPopUp: Bool = true, success: SuccessResponse?, fail:@escaping FailResponse) {
-        debugLog("AccountService overQuotaStatus")
-        
-        let param = OverQuotaStatus(showPopUp: showPopUp)
-        let handler = BaseResponseHandler<OverQuotaStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-        
-    }
-    
     func usage(success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService usage")
 
@@ -183,30 +162,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
 
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
-    }
-    
-    // MARK: - User Security
-    
-    func securitySettingsInfo(success: SuccessResponse?, fail: FailResponse?) {
-        debugLog("AccountService securitySettingsInfo")
-        
-        let parametres = SecuritySettingsInfoParametres()
-        let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
-        executeGetRequest(param: parametres, handler: handler)
-    }
-    
-    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool,
-                                mobileNetworkAuthEnabled: Bool,
-                                twoFactorAuthEnabled: Bool,
-                                success: SuccessResponse?,
-                                fail: FailResponse?) {
-        debugLog("AccountService securitySettingsChange")
-        
-        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled,
-                                                              mobileNetworkAuth: mobileNetworkAuthEnabled,
-                                                              twoFactorAuth: twoFactorAuthEnabled)
-        let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
-        executePostRequest(param: parametres, handler: handler)
     }
     
     // MARK: - Face Image Allowed
