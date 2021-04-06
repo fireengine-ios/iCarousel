@@ -135,8 +135,8 @@ final class ContactUsViewController: BaseViewController, NibInit {
         SingletonStorage.shared.getStorageUsageInfo(projectId: organizationUUID, userAccountId: userAccountUuid) { response in
             handler(response.email ?? "No user email",
                     response.unlimitedStorage ?? false,
-                    (response.storageInBytes?.convertBytesToGb ?? ""),
-                    response.usageInBytes.convertBytesToGb)
+                    (response.storageInBytes?.convertBytesToFormattedString ?? ""),
+                    response.usageInBytes.convertBytesToFormattedString)
         } fail: { error in
             assertionFailure(error.localizedDescription)
         }
@@ -172,9 +172,9 @@ final class ContactUsViewController: BaseViewController, NibInit {
             Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: emailSubject,
                                     emails: ["lifeboxipadpro@gmail.com"],
-                                    presentCompletion: {
-                                        RouterVC().popViewController()
-                                    }, success: nil, fail: { error in
+                                    presentCompletion: nil, success: {
+                                        self.navigationController?.popViewController(animated: true)
+                                    }, fail: { error in
                                         UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
                                     })
         }

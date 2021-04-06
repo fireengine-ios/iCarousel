@@ -841,7 +841,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: photoManager,
-                                                  asset: asset) { [weak self] avAsset, aVAudioMix, Dict in
+                                                  asset: asset, isNetworkAccessAllowed: true) { [weak self] avAsset, aVAudioMix, Dict in
                                                     
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
                                                         let file = UUID().uuidString
@@ -1116,7 +1116,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetOriginalVideoOperation(photoManager: photoManager, asset: asset) { [weak self] avAsset, aVAudioMix, dict in
+        let operation = GetOriginalVideoOperation(photoManager: photoManager,  asset: asset, isNetworkAccessAllowed: true) { [weak self] avAsset, aVAudioMix, dict in
             
             guard let self = self else {
                 assetInfo.isValid = false
@@ -1417,16 +1417,18 @@ class GetOriginalImageOperation: Operation {
 
 class GetOriginalVideoOperation: Operation {
     
-    let photoManager: PHImageManager
-    let callback: PhotoManagerOriginalVideoCallBack
-    let asset: PHAsset
+    private let photoManager: PHImageManager
+    private let callback: PhotoManagerOriginalVideoCallBack
+    private let asset: PHAsset
+    private let isNetworkAccessAllowed: Bool
     
     
-    init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalVideoCallBack) {
+    init(photoManager: PHImageManager, asset: PHAsset, isNetworkAccessAllowed: Bool, callback: @escaping PhotoManagerOriginalVideoCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback
         self.asset = asset
+        self.isNetworkAccessAllowed = isNetworkAccessAllowed
         
         super.init()
     }
@@ -1442,7 +1444,8 @@ class GetOriginalVideoOperation: Operation {
         let options = PHVideoRequestOptions()
         options.version = .original
         options.deliveryMode = .highQualityFormat
-
+        options.isNetworkAccessAllowed = isNetworkAccessAllowed
+        
         photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
     }
 }

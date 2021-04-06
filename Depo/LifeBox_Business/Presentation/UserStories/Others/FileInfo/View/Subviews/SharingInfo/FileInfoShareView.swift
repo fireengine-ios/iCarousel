@@ -52,7 +52,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     private(set) var info: SharedFileInfo?
     private var membersInfo: MembersInfo = ([], 0, 0)
     
-    private let maxDisplayMembers = 4
+    private let maxDisplayMembers = Device.isIphoneSmall ? 3 : 4
     
     //MARK: - FileInfoShareViewProtocol
     
@@ -73,9 +73,9 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
         contactsCollectionView.dataSource = self
         
         if let layout = contactsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 50, height: 59)
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 20)
-            layout.minimumInteritemSpacing = 10
+            layout.itemSize = CGSize(width: 55, height: 59)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 6)
+            layout.minimumInteritemSpacing = 5
         }
     }
     
@@ -136,17 +136,27 @@ extension FileInfoShareView: UICollectionViewDataSource {
         
         let type: FileInfoShareContactCellType
         let contact = membersInfo.displayContacts[safe: indexPath.item]
+        let occupiedIndexes = membersInfo.additionalCount > 0 ? 2 : 1
+        var additionalCount = membersInfo.additionalCount
         
-        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1,
+        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - occupiedIndexes,
+           additionalCount > 0,
            info?.permissions?.granted?.contains(.writeAcl) == true {
             type = .plusButton
-        } else if indexPath.item == membersInfo.displayContacts.count, membersInfo.additionalCount > 0 {
+        } else
+        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - occupiedIndexes,
+           additionalCount == 0,
+           info?.permissions?.granted?.contains(.writeAcl) == true {
+            type = .plusButton
+        } else
+        if indexPath.item == (membersInfo.displayContacts.count - 1), additionalCount > 0 {
+            additionalCount += 1
             type = .additionalCount
         } else {
             type = .contact
         }
         
-        cell.setup(type: type, contact: contact, count: membersInfo.additionalCount, index: indexPath.item)
+        cell.setup(type: type, contact: contact, count: additionalCount, index: indexPath.item)
         cell.delegate = self
         return cell
     }

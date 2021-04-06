@@ -368,23 +368,37 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func download(item: [BaseDataSourceItem]) {
-        if let item = item as? [Item] {
-            
-            if let firstItem = item.first {
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: item.count))
-            }
-            
-            let successAction = { [weak self] in
-                if item.allSatisfy ({ !$0.isOwner }) {
-                    self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
-                }
-                self?.successAction(elementType: .download, relatedItems: item)()
-            }
-            
-            self.fileService.download(items: item, toPath: "",
-                                      success: successAction,
-                                      fail: self.failAction(elementType: .download))
+        guard let items = item as? [Item] else {
+            return
         }
+        
+        let photosAndVideos = items.filter { $0.fileType.isContained(in: [.image, .video]) }
+        let documentsAndMusic = items.filter { !$0.fileType.isContained(in: [.image, .video]) }
+        
+        if !photosAndVideos.isEmpty {
+            download(photosAndVideos: photosAndVideos)
+        }
+        
+        if !documentsAndMusic.isEmpty {
+            downloadDocument(items: documentsAndMusic)
+        }
+    }
+    
+    private func download(photosAndVideos: [Item]) {
+        if let firstItem = photosAndVideos.first {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: photosAndVideos.count))
+        }
+        
+        let successAction = { [weak self] in
+            if photosAndVideos.allSatisfy ({ !$0.isOwner }) {
+                self?.privateShareAnalytics.sharedWithMe(action: .download, on: photosAndVideos.first)
+            }
+            self?.successAction(elementType: .download, relatedItems: photosAndVideos)()
+        }
+
+        fileService.download(items: photosAndVideos, toPath: "",
+                                  success: successAction,
+                                  fail: self.failAction(elementType: .download))
     }
     
     func addToFavorites(items: [BaseDataSourceItem]) {
