@@ -32,7 +32,15 @@ final class SettingsViewController: BaseViewController {
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
         }
     }
-
+    
+    @IBOutlet private weak var appVersionLabel: UILabel! {
+        willSet {
+            newValue.text = appVersion
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 11)
+            newValue.textColor = ColorConstants.multifileCellSubtitleText
+        }
+    }
+    
     private var settingsTableViewAdapter: SettingsTableViewAdapter!
     
     var output: SettingsViewOutput!
@@ -49,6 +57,12 @@ final class SettingsViewController: BaseViewController {
         didSet {
             tableView?.reloadData()
         }
+    }
+    
+    private var appVersion: String {
+        let fullAppVersion = "\(SettingsBundleHelper.appVersion()) (\(SettingsBundleHelper.appBuild()))"
+        let formattedAppVersion = String(format: TextConstants.appVersion, fullAppVersion)
+        return formattedAppVersion
     }
     
     // MARK: Life cycle
@@ -68,17 +82,9 @@ final class SettingsViewController: BaseViewController {
         let barStyle = NavigationBarStyles.white
         setNavigationTitle(title: TextConstants.settingsPageTitle, style: barStyle)
         setNavigationBarStyle(barStyle)
+        setupCustomButtonAsNavigationBackButton(style: barStyle, asLeftButton: true, title: "", target: self, image: nil, action: nil)
         navigationController?.changeLargeTitle(prefersLargeTitles: false, barStyle: barStyle)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // TODO change it after merge to dev_2
-        if isMovingFromParentViewController {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            setBackButtonForNavigationItem(style: .white, title: TextConstants.backTitle, target: nil, action: nil)
-        }
     }
 
     override func showSpinner() {
