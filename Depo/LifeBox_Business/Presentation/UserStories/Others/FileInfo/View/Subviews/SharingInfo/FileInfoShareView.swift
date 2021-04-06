@@ -52,7 +52,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     private(set) var info: SharedFileInfo?
     private var membersInfo: MembersInfo = ([], 0, 0)
     
-    private let maxDisplayMembers = 3
+    private let maxDisplayMembers = Device.isIphoneSmall ? 2 : 3
     
     //MARK: - FileInfoShareViewProtocol
     
