@@ -7,7 +7,6 @@
 //
 
 import Reachability
-import WidgetKit
 
 class SplashInteractor: SplashInteractorInput {
 
@@ -84,9 +83,6 @@ class SplashInteractor: SplashInteractorInput {
                     SingletonStorage.shared.isJustRegistered = false
                     self?.successLogin()
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
-                    if #available(iOS 14.0, *) {
-                        WidgetCenter.shared.reloadAllTimelines()
-                    }
                 }, fail: { [weak self] error in
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
                     /// we don't need logout here
