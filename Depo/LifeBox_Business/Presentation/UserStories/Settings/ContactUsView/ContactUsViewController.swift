@@ -135,8 +135,8 @@ final class ContactUsViewController: BaseViewController, NibInit {
         SingletonStorage.shared.getStorageUsageInfo(projectId: organizationUUID, userAccountId: userAccountUuid) { response in
             handler(response.email ?? "No user email",
                     response.unlimitedStorage ?? false,
-                    (response.storageInBytes?.convertBytesToGb ?? ""),
-                    response.usageInBytes.convertBytesToGb)
+                    (response.storageInBytes?.convertBytesToFormattedString ?? ""),
+                    response.usageInBytes.convertBytesToFormattedString)
         } fail: { error in
             assertionFailure(error.localizedDescription)
         }

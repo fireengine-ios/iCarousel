@@ -208,7 +208,7 @@ fileprivate struct InfoEntityDataSourceItem {
         if sharingInfo.isFolder {
             dataArr.append((1, TextConstants.infoPageItemItems, "\(sharingInfo.childCount ?? 0)"))
         } else {
-            dataArr.append((1, TextConstants.infoPageItemSize, String(format: "%.2f", Double(sharingInfo.bytes ?? 0) / 1000000.0) + " MB"))
+            dataArr.append((1, TextConstants.infoPageItemSize, (sharingInfo.bytes ?? 0).convertBytesToFormattedString))
         }
 
         return dataArr.compactMap { InfoEntityDataSourceItem(orderIndex: $0.0,
