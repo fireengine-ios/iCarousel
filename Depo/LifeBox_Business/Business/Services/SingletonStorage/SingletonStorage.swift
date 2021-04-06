@@ -27,11 +27,7 @@ class SingletonStorage {
     var isTwoFactorAuthEnabled: Bool?
     
     var isUserAdmin: Bool {
-        if let value = accountInfo?.parentAccountAdmin {
-            return value
-        }
-        
-        return false
+        return accountInfo?.parentAccountAdmin ?? false
     }
     
     private let resumableUploadInfoService: ResumableUploadInfoService = factory.resolve()
