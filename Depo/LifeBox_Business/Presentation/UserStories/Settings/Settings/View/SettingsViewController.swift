@@ -82,17 +82,9 @@ final class SettingsViewController: BaseViewController {
         let barStyle = NavigationBarStyles.white
         setNavigationTitle(title: TextConstants.settingsPageTitle, style: barStyle)
         setNavigationBarStyle(barStyle)
+        setupCustomButtonAsNavigationBackButton(style: barStyle, asLeftButton: true, title: "", target: self, image: nil, action: nil)
         navigationController?.changeLargeTitle(prefersLargeTitles: false, barStyle: barStyle)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // TODO change it after merge to dev_2
-        if isMovingFromParentViewController {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            setBackButtonForNavigationItem(style: .white, title: TextConstants.backTitle, target: nil, action: nil)
-        }
     }
 
     override func showSpinner() {
