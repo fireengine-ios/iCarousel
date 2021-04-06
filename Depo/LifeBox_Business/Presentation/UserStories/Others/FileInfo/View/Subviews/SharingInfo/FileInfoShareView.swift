@@ -136,14 +136,15 @@ extension FileInfoShareView: UICollectionViewDataSource {
         
         let type: FileInfoShareContactCellType
         let contact = membersInfo.displayContacts[safe: indexPath.item]
+        let occupiedIndexes = membersInfo.additionalCount > 0 ? 2 : 1
         var additionalCount = membersInfo.additionalCount
         
-        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 2,
+        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - occupiedIndexes,
            additionalCount > 0,
            info?.permissions?.granted?.contains(.writeAcl) == true {
             type = .plusButton
         } else
-        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1,
+        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - occupiedIndexes,
            additionalCount == 0,
            info?.permissions?.granted?.contains(.writeAcl) == true {
             type = .plusButton
