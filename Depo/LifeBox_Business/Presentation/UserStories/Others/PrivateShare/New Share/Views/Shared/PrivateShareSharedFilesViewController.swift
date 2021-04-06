@@ -71,7 +71,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionManager.setup()
         setupBars()
-        setupNavigationBar(editingMode: collectionManager.isSelecting)
         setupPlusButton()
         
         showSpinner()
@@ -118,7 +117,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupBars() {
         setDefaultTabBarState()
-//        setupCollectionViewBars()
         bottomBarManager.setup()
     }
     
@@ -335,6 +333,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         } else {
             switch shareType {
             case .trashBin:
+                navBarManager.setupLargetitle(isLarge: false)
                 navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
                 
             case .innerFolder(let rootType, let folderItem):
@@ -392,8 +391,11 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onSettingsButton() {
-        let controller = router.settings
-        router.pushViewController(viewController: controller!)
+        guard let settings = router.settings else {
+            return
+        }
+        let controller = UINavigationController(rootViewController: settings)
+        router.presentViewController(controller: controller, animated: true, completion: nil)
     }
 
     func onTrashBinButton() {
