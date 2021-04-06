@@ -304,8 +304,6 @@ struct RouteRequests {
         private static let baseAccountsURLString = baseShortUrlString + "api/v1/business/accounts/"
         static let myInfo = baseAccountsURLString + "me"
         static let info = baseAccountsURLString + "%@"
-        static let quota = baseAccountsURLString + "new_api_is_required"
-        static let settings = baseAccountsURLString + "new_api_is_required"
         static let storageUsageInfo = baseAccountsURLString + "%@/users/%@/disk"
     }
     

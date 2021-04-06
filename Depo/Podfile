@@ -17,9 +17,6 @@ def core_pods
   pod 'Firebase/Crashlytics', '~> 6'
   pod 'Firebase/Analytics', '~> 6'
   pod 'Firebase/RemoteConfig', '~> 6'
-  pod 'FBSDKCoreKit', '~> 8'
-  pod 'FBSDKLoginKit', '~> 8'
-  pod 'FBSDKShareKit', '~> 8'
 
   pod 'Netmera', '~> 3.8.4'
 
@@ -51,6 +48,9 @@ end
 
 def lifebox_pods
   core_pods
+  pod 'FBSDKCoreKit', '~> 8'
+  pod 'FBSDKLoginKit', '~> 8'
+  pod 'FBSDKShareKit', '~> 8'
   pod 'YYImage', '~> 1'
   pod 'SwiftyDropbox', '~> 6'
   pod 'MaterialComponents/Slider'
