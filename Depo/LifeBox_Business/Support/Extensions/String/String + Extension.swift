@@ -59,7 +59,14 @@ extension String {
     
     var firstLetter: String {
         if let character = first {
-            return String(describing: character).uppercased()
+            return character.uppercased()
+        }
+        return ""
+    }
+    
+    var secondLetter: String {
+        if let character = Array(self)[safe: 1] {
+            return character.uppercased()
         }
         return ""
     }

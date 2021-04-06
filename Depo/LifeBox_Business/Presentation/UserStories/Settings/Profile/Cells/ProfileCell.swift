@@ -61,7 +61,15 @@ final class ProfileCell: UITableViewCell {
     
     @IBOutlet private weak var userAvatarPlaceholder: UIButton! {
         willSet {
-            let initials = (SingletonStorage.shared.accountInfo?.name?.firstLetter ?? "") + (SingletonStorage.shared.accountInfo?.surname?.firstLetter ?? "")
+            let initials: String
+            
+            if let firstLetter = SingletonStorage.shared.accountInfo?.name?.firstLetter,
+               let secondLetter = SingletonStorage.shared.accountInfo?.surname?.firstLetter {
+                initials = firstLetter + secondLetter
+            } else {
+                initials = (SingletonStorage.shared.accountInfo?.email?.firstLetter ?? "") + (SingletonStorage.shared.accountInfo?.email?.secondLetter ?? "")
+            }
+            
             newValue.setTitle(initials, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 18)
             newValue.tintColor = ColorConstants.topBarSettingsIconColor
