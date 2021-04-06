@@ -172,9 +172,9 @@ final class ContactUsViewController: BaseViewController, NibInit {
             Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: emailSubject,
                                     emails: ["lifeboxipadpro@gmail.com"],
-                                    presentCompletion: {
-                                        RouterVC().popViewController()
-                                    }, success: nil, fail: { error in
+                                    presentCompletion: nil, success: {
+                                        self.navigationController?.popViewController(animated: true)
+                                    }, fail: { error in
                                         UIApplication.showErrorAlert(message: error?.description ?? TextConstants.feedbackEmailError)
                                     })
         }
