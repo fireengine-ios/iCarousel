@@ -25,16 +25,9 @@ final class NetmeraService {
         if loginStatus {
             
             let group = DispatchGroup()
-            
-            var lifeboxStorage: Int = 0
-            //TODO: uncomment this when quota API is ready
-//            group.enter()
-//            prepareLifeBoxUsage { usage in
-//                lifeboxStorage = usage
-//                group.leave()
-//            }
-            
+
             group.enter()
+            let lifeboxStorage: Int = 0
             let autoLogin = "Null"
             let turkcellPassword = "Null"
             let countryCode: String = "Null"
@@ -163,12 +156,6 @@ extension NetmeraService {
         user.userId = SingletonStorage.shared.accountInfo?.externalId ?? ""
         DispatchQueue.toMain {
             Netmera.update(user)
-        }
-    }
-    
-    private static func prepareLifeBoxUsage(preparedUserField: @escaping NetmeraIntFieldCallback) {
-        SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
-            preparedUserField(percentage ?? 0)
         }
     }
     

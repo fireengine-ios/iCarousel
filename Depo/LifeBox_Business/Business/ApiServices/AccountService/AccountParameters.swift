@@ -124,12 +124,6 @@ class LanguageListChange: BaseRequestParametrs {
     }
 }
 
-class QuotaInfo: BaseRequestParametrs {
-    override var patch: URL {
-        return URL(string: RouteRequests.BusinessAccount.quota)!
-    }
-}
-
 class OverQuotaStatus: BaseRequestParametrs {
     let showPopUp: String
     
