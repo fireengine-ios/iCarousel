@@ -40,7 +40,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
         willSet {
             newValue.text = ""
             newValue.textColor = ColorConstants.infoPageValueText
-            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .center
             newValue.adjustsFontSizeToFitWidth = true
             newValue.minimumScaleFactor = 0.7
