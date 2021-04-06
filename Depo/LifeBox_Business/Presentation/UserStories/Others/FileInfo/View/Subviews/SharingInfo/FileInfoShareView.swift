@@ -52,7 +52,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     private(set) var info: SharedFileInfo?
     private var membersInfo: MembersInfo = ([], 0, 0)
     
-    private let maxDisplayMembers = 4
+    private let maxDisplayMembers = Device.isIphoneSmall ? 3 : 4
     
     //MARK: - FileInfoShareViewProtocol
     
@@ -136,17 +136,26 @@ extension FileInfoShareView: UICollectionViewDataSource {
         
         let type: FileInfoShareContactCellType
         let contact = membersInfo.displayContacts[safe: indexPath.item]
+        var additionalCount = membersInfo.additionalCount
         
-        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1,
+        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 2,
+           additionalCount > 0,
            info?.permissions?.granted?.contains(.writeAcl) == true {
             type = .plusButton
-        } else if indexPath.item == membersInfo.displayContacts.count, membersInfo.additionalCount > 0 {
+        } else
+        if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1,
+           additionalCount == 0,
+           info?.permissions?.granted?.contains(.writeAcl) == true {
+            type = .plusButton
+        } else
+        if indexPath.item == (membersInfo.displayContacts.count - 1), additionalCount > 0 {
+            additionalCount += 1
             type = .additionalCount
         } else {
             type = .contact
         }
         
-        cell.setup(type: type, contact: contact, count: membersInfo.additionalCount, index: indexPath.item)
+        cell.setup(type: type, contact: contact, count: additionalCount, index: indexPath.item)
         cell.delegate = self
         return cell
     }
