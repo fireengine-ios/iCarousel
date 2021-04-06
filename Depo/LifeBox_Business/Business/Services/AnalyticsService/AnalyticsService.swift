@@ -7,7 +7,6 @@
 //
 
 import Adjust
-import FBSDKCoreKit
 import StoreKit
 import Firebase
 import Netmera
@@ -78,7 +77,6 @@ final class AnalyticsService: NSObject {
     
     func track(event: AnalyticsEvent) {
         logAdjustEvent(name: event.token)
-        logFacebookEvent(name: AppEvents.Name.viewedContent.rawValue, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
     }
     
     private func logAdjustEvent(name: String, price: Double? = nil, currency: String? = nil) {
@@ -88,12 +86,6 @@ final class AnalyticsService: NSObject {
             event?.setRevenue(price, currency: currency)
         }
         Adjust.trackEvent(event)
-    }
-    
-    private func logFacebookEvent(name: String, parameters: [String: Any]? = nil) {
-        if let parameters = parameters {
-            AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: parameters)
-        }
     }
 }
 
