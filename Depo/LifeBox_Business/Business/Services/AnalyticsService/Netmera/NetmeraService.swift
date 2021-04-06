@@ -35,15 +35,8 @@ final class NetmeraService {
 //            }
             
             group.enter()
-            var autoLogin = ""
-            var turkcellPassword = ""
-            prepareTurkcellLoginScurityFields { preparedAutoLogin, preparedTurkcellPassword in
-                autoLogin = preparedAutoLogin
-                turkcellPassword = preparedTurkcellPassword
-                group.leave()
-            }
-            
-            group.enter()
+            let autoLogin = "Null"
+            let turkcellPassword = "Null"
             let countryCode: String = "Null"
             let regionCode: String = "Null"
             var userName: Int = 0
@@ -187,22 +180,6 @@ extension NetmeraService {
                 case .failed(_):
                     preparedAccountInfo(nil)
             }
-        }
-    }
-    
-    private static func prepareTurkcellLoginScurityFields(preparedUserField: @escaping (_ autoLogin: String, _ turkcellPassword: String)->Void) {
-        AccountService().securitySettingsInfo(success: { response in
-            guard let unwrapedSecurityResponse = response as? SecuritySettingsInfoResponse,
-                let turkCellPasswordOn = unwrapedSecurityResponse.turkcellPasswordAuthEnabled,
-                let turkCellAutoLogin = unwrapedSecurityResponse.mobileNetworkAuthEnabled else {
-                    return
-            }
-            
-            let acceptableAutoLogin = turkCellAutoLogin ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
-            let acceptableTurkcellPassword = turkCellPasswordOn ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
-            preparedUserField(acceptableAutoLogin, acceptableTurkcellPassword)
-        }) { error in
-            preparedUserField("Null", "Null")
         }
     }
     

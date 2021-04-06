@@ -185,30 +185,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executePostRequest(param: parameters, handler: handler)
     }
     
-    // MARK: - User Security
-    
-    func securitySettingsInfo(success: SuccessResponse?, fail: FailResponse?) {
-        debugLog("AccountService securitySettingsInfo")
-        
-        let parametres = SecuritySettingsInfoParametres()
-        let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
-        executeGetRequest(param: parametres, handler: handler)
-    }
-    
-    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool,
-                                mobileNetworkAuthEnabled: Bool,
-                                twoFactorAuthEnabled: Bool,
-                                success: SuccessResponse?,
-                                fail: FailResponse?) {
-        debugLog("AccountService securitySettingsChange")
-        
-        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled,
-                                                              mobileNetworkAuth: mobileNetworkAuthEnabled,
-                                                              twoFactorAuth: twoFactorAuthEnabled)
-        let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
-        executePostRequest(param: parametres, handler: handler)
-    }
-    
     // MARK: - Face Image Allowed
     func faceImageAllowed(success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService faceImageAllowed")

@@ -13,8 +13,6 @@ protocol LoginSettingsInteractorInput: class {
     
     var isPasscodeEnabled: Bool { get }
     
-    func requestTurkcellSecurityState()
-    func changeTurkcellSecurity(passcode: Bool, autoLogin: Bool, twoFactorAuth: Bool)
     func trackScreen()
 }
 

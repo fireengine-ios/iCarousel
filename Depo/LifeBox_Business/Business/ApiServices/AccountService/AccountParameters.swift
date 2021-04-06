@@ -150,12 +150,6 @@ class UsageParameters: BaseRequestParametrs {
     }
 }
 
-class SecuritySettingsInfoParametres: BaseRequestParametrs {
-    override var patch: URL {
-        return URL(string: RouteRequests.BusinessAccount.settings)!
-    }
-}
-
 class FaceImageAllowedParameters: BaseRequestParametrs {
     var allowed: Bool?
     
@@ -174,27 +168,5 @@ class FaceImageAllowedParameters: BaseRequestParametrs {
     
     override var patch: URL {
         return URL(string: AccountPath.faceImageAllowed, relativeTo: super.patch)!
-    }
-}
-
-class SecuritySettingsChangeInfoParametres: BaseRequestParametrs {
-    let turkcellPasswordAuthEnabled: Bool
-    let mobileNetworkAuthEnabled: Bool
-    let twoFactorAuthEnabled: Bool
-
-    init(turkcellPasswordAuth: Bool, mobileNetworkAuth: Bool, twoFactorAuth: Bool) {
-        turkcellPasswordAuthEnabled = turkcellPasswordAuth
-        mobileNetworkAuthEnabled = mobileNetworkAuth
-        twoFactorAuthEnabled = twoFactorAuth
-    }
-    
-    override var requestParametrs: Any {
-        return ["turkcellPasswordAuthEnabled": turkcellPasswordAuthEnabled,
-                "mobileNetworkAuthEnabled": mobileNetworkAuthEnabled,
-                "twoFactorAuthEnabled": twoFactorAuthEnabled]
-    }
-    
-    override var patch: URL {
-        return URL(string: RouteRequests.BusinessAccount.settings)!
     }
 }
