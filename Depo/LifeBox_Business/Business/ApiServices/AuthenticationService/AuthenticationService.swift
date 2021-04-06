@@ -363,9 +363,7 @@ class AuthenticationService: BaseRequestService {
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
 
 
-                            self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
-                                success?(headers)
-                            })
+                            success?(headers)
                         }, fail: { error in
                             fail?(error)
                         })
@@ -445,9 +443,7 @@ class AuthenticationService: BaseRequestService {
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
                             
-                            self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
-                                sucess?(headers)
-                            })
+                            sucess?(headers)
                         }, fail: { error in
                             fail?(error)
                         })
@@ -470,10 +466,8 @@ class AuthenticationService: BaseRequestService {
                     self.tokenStorage.refreshToken = refreshToken
                 }
                 
-                SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                    self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
-                        sucess?()
-                    })
+                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    sucess?()
                 }, fail: { error in
                     fail?(error)
                 })
@@ -483,20 +477,6 @@ class AuthenticationService: BaseRequestService {
             }
         case .failure(let error):
             fail?(ErrorResponse.error(error))
-        }
-    }
-    
-    private func accountReadOnlyPopUpHandler(headers:[String: Any], completion: @escaping VoidHandler) {
-        guard
-            let accountStatus = headers[HeaderConstant.accountStatus] as? String,
-            accountStatus.uppercased() == ErrorResponseText.accountReadOnly
-        else {
-            completion()
-            return
-        }
-        
-        SingletonStorage.shared.getOverQuotaStatus {
-            completion()
         }
     }
     

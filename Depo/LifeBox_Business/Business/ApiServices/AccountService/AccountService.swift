@@ -50,15 +50,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseObject(handler)
     }
     
-    func overQuotaStatus(with showPopUp: Bool = true, success: SuccessResponse?, fail:@escaping FailResponse) {
-        debugLog("AccountService overQuotaStatus")
-        
-        let param = OverQuotaStatus(showPopUp: showPopUp)
-        let handler = BaseResponseHandler<OverQuotaStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-        
-    }
-    
     func usage(success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService usage")
 

@@ -82,12 +82,10 @@ class SplashInteractor: SplashInteractorInput {
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
-                    SingletonStorage.shared.getOverQuotaStatus {
-                        self?.successLogin()
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
-                        if #available(iOS 14.0, *) {
-                            WidgetCenter.shared.reloadAllTimelines()
-                        }
+                    self?.successLogin()
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
+                    if #available(iOS 14.0, *) {
+                        WidgetCenter.shared.reloadAllTimelines()
                     }
                 }, fail: { [weak self] error in
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))

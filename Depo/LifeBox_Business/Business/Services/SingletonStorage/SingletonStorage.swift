@@ -101,37 +101,6 @@ class SingletonStorage {
 
     }
     
-    func getOverQuotaStatus(completion: @escaping VoidHandler) {
-        let storageVars: StorageVars = factory.resolve()
-        
-        ///to send initial value as true
-        let showPopUp =  !storageVars.largeFullOfQuotaPopUpCheckBox
-        
-        AccountService().overQuotaStatus(with: showPopUp, success: { response in
-            guard let response = response as? OverQuotaStatusResponse, let value = response.value else {
-                completion()
-                return
-            }
-            
-            switch value {
-            case .nonOverQuota:
-                storageVars.largeFullOfQuotaPopUpShowType100 = false
-            case .overQuotaFreemium:
-                storageVars.largeFullOfQuotaPopUpShowType100 = true
-                storageVars.largeFullOfQuotaUserPremium = false
-            case .overQuotaPremium:
-                storageVars.largeFullOfQuotaPopUpShowType100 = true
-                storageVars.largeFullOfQuotaUserPremium = true
-            }
-            
-            completion()
-            
-            }, fail: { error in
-               assertionFailure("Тo data received for overQuotaStatus request \(error.localizedDescription) ")
-               completion()
-        })
-    }
-    
     var isTurkcellUser: Bool {
         return true
     }

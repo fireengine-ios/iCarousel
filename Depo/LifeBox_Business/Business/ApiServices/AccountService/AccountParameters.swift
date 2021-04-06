@@ -10,8 +10,7 @@ import Foundation
 
 struct AccountPath {
     static let accountBase = "account/"
-    
-    static let overQuotaStatus = accountBase + "overQuotaStatus?showPopup=%@"
+
     static let usages = accountBase + "usages"
     static let provision = accountBase + "provision"
     static let profilePhoto = accountBase + "profilePhoto"
@@ -121,20 +120,6 @@ class LanguageList: BaseRequestParametrs {
 class LanguageListChange: BaseRequestParametrs {
     override var patch: URL {
         return URL(string: AccountPath.updateLanguage, relativeTo: super.patch)!
-    }
-}
-
-class OverQuotaStatus: BaseRequestParametrs {
-    let showPopUp: String
-    
-    init(showPopUp: Bool) {
-        self.showPopUp = showPopUp ? "true" : "false"
-    }
-    
-    override var patch: URL {
-        let str = String(format: AccountPath.overQuotaStatus,
-                                showPopUp)
-        return URL(string: str, relativeTo: super.patch)!
     }
 }
 
