@@ -52,7 +52,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     private(set) var info: SharedFileInfo?
     private var membersInfo: MembersInfo = ([], 0, 0)
     
-    private let maxDisplayMembers = 4
+    private let maxDisplayMembers = Device.isIphoneSmall ? 2 : 3
     
     //MARK: - FileInfoShareViewProtocol
     
@@ -73,9 +73,9 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
         contactsCollectionView.dataSource = self
         
         if let layout = contactsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 50, height: 59)
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 20)
-            layout.minimumInteritemSpacing = 10
+            layout.itemSize = CGSize(width: 55, height: 59)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 6)
+            layout.minimumInteritemSpacing = 5
         }
     }
     
