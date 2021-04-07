@@ -136,6 +136,10 @@ final class GetSharedItemsOperation: Operation {
                     completion(.failed(error))
                 }
             }
+            
+        case .search(from: _):
+            task = nil
+            
         }
     }
 }

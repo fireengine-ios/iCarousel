@@ -391,6 +391,13 @@ class RouterVC: NSObject {
                 
             case .innerFolder(type: _, folderItem: let folder):
                 return folder
+                
+            case .search(from: let rootType):
+                return nil
+//                if rootType = .search(from: _) {
+//
+//                }
+//                return rootType.sharedFolderItem
         }
     }
     

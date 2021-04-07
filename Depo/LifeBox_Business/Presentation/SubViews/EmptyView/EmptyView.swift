@@ -26,6 +26,7 @@ final class EmptyView: UIView, NibInit {
         case trashBinInnerFolder
         case sharedArea
         case myDisk
+        case search(text: String)
         
         var title: String {
             switch self {
@@ -43,6 +44,8 @@ final class EmptyView: UIView, NibInit {
                     return TextConstants.sharedAreaEmptyPage
                 case .myDisk:
                     return TextConstants.myDiskEmptyPage
+                case .search(let text):
+                    return String(format: TextConstants.emptySearchDescription, text)//TextConstants.emptySearchTitle
             }
         }
         
@@ -62,6 +65,8 @@ final class EmptyView: UIView, NibInit {
                     return nil
                 case .myDisk:
                     return nil
+                case .search:
+                    return UIImage(named: "emptySearch")
             }
         }
     }

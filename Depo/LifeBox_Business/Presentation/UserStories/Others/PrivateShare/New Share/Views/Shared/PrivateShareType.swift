@@ -15,6 +15,7 @@ indirect enum PrivateShareType: Equatable {
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
     case sharedArea
     case trashBin
+    case search(from: PrivateShareType)
     
     var title: String {
         let title: String
@@ -31,6 +32,8 @@ indirect enum PrivateShareType: Equatable {
                 title = TextConstants.tabBarItemSharedArea
             case .trashBin:
                 title = TextConstants.trashBinPageTitle
+            case .search(from: let rootType):
+                title = rootType.title
         }
         return title
     }
@@ -56,6 +59,9 @@ indirect enum PrivateShareType: Equatable {
                 return .myDisk
             case .trashBin:
                 return .trashBin
+            case .search(from: let rootType):
+                //FIXME: need to find the way to pass search string
+                return .search(text: "")
         }
     }
 
@@ -69,7 +75,7 @@ indirect enum PrivateShareType: Equatable {
             return true
         case .innerFolder(let folderType, _):
             return folderType == .trashBin ? true : false
-        case .byMe, .myDisk, .sharedArea, .withMe:
+        case .byMe, .myDisk, .sharedArea, .withMe, .search:
             return false
         }
     }
@@ -94,13 +100,16 @@ indirect enum PrivateShareType: Equatable {
 
             case .trashBin:
                 return true
+                
+            case .search:
+                return  true
         }
     }
     
     //with this flag we check if we need to show search bar or not
     var isSearchAllowed: Bool {
         switch self {
-            case .myDisk, .sharedArea:
+            case .myDisk, .sharedArea, .search:
                 return true
                 
             case .byMe, .withMe, .innerFolder, .trashBin:
@@ -136,6 +145,18 @@ indirect enum PrivateShareType: Equatable {
 
             case (.trashBin, _):
                 return []
+                
+            case (.search(let rootType), _):
+                switch rootType {
+                    case .myDisk, .sharedArea:
+                        if rootPermissions?.granted?.contains(.create) == true {
+                            return [.upload(type: .regular), .uploadFiles(type: .regular),  .newFolder(type: .regular)]
+                        }
+                    default:
+                        return []
+                }
+//                floatingButtonTypes(innerFolderVeryRootType: rootType, permissions: [])
+                return []
         }
     }
     
@@ -168,6 +189,13 @@ indirect enum PrivateShareType: Equatable {
             case .innerFolder:
                 assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
                 return []
+                
+            case .search(from: let rootType):
+//                guard .search != rootType else {
+//                    assertionFailure("search should not be a root of himself")
+//                    return []
+//                }
+                return floatingButtonTypes(innerFolderVeryRootType: rootType, permissions: permissions)
         }
     }
     
@@ -177,6 +205,9 @@ indirect enum PrivateShareType: Equatable {
                 return type
                 
             case .innerFolder(type: let rootType, _):
+                return veryRootType(for: rootType)
+                
+            case .search(from: let rootType):
                 return veryRootType(for: rootType)
         }
     }

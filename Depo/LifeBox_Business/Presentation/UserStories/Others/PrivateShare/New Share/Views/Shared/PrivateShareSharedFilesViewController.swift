@@ -46,15 +46,20 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let analytics = PrivateShareAnalytics()
  
     lazy private var searchController: UISearchController = {
+//        let searchResultConntroller = PrivateShareSearchViewController.initFromNib()
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
+//        searchController.isActive = false
+//        if #available(iOS 13.0, *) {
+//            searchController.automaticallyShowsSearchResultsController = false
+//        } else {
+//            // Fallback on earlier versions
+//        }
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.delegate = self
+        searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
-//        searchController.hidesSearchBarWhenScrolling = false
-//        navigationItem.hidesSearchBarWhenScrolling = true
-//        searchController.searchBar.delegate
         return searchController
     }()
     
@@ -659,19 +664,51 @@ extension PrivateShareSharedFilesViewController: UISearchControllerDelegate {
 //    @available(iOS 8.0, *)
 //    optional func presentSearchController(_ searchController: UISearchController)
 //}
-//
-//public protocol UISearchResultsUpdating : NSObjectProtocol {
-//
-//    
-//    // Called when the search bar's text or scope has changed or when the search bar becomes first responder.
-//    @available(iOS 8.0, *)
-//    func updateSearchResults(for searchController: UISearchController)
+    func presentSearchController(_ searchController: UISearchController)  {
+        
+    }
 }
 
 extension PrivateShareSharedFilesViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        
+        debugPrint("!!! HERE WE GO S")
     }
 
+}
+
+extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("!!! search button click \(searchBar.text)")
+        
+        //если не серч шар тип то пушитть новый
+        
+        
+        setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: false)
+        changeNavbarLargeTitle(false, style: .white)
+        view.layoutSubviews()
+//        let resultConntroller = PrivateShareSearchViewController.initFromNib()
+//        router.pushViewController(viewController: resultConntroller, animated: false)
+//        fileInfoManager
+            
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.updateBars(isSelecting: false)
+        switch self.shareType {
+        case .innerFolder, .trashBin:
+            break
+        default:
+            self.changeNavbarLargeTitle(true, style: .white)
+            setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+//            if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
+//                self.setNavSearchConntroller(self.searchController)
+//            }
+        }
+//        guard router.topNavigationController?.viewControllers.last is PrivateShareSearchViewController else {
+//           return
+//        }
+//        router.popViewController()
+    }
 }

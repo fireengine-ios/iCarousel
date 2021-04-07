@@ -1528,3 +1528,9 @@ extension TextConstants {
     static let turkcellUpdaterPopupTitle = NSLocalizedString("turkcell_updater_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let turkcellUpdaterPopupDescription = NSLocalizedString("turkcell_updater_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+//MARK:- Search
+extension TextConstants {
+    static let emptySearchTitle = NSLocalizedString("business_app_search_empty_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let emptySearchDescription = NSLocalizedString("business_app_search_empty_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}

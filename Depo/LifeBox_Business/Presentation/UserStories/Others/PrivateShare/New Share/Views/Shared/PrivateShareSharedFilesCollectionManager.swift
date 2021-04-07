@@ -127,6 +127,12 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
+    func search(text: String, diskType: SearchDiskTypes) {
+        fileInfoManager.search(text: text, diskType: diskType) { [weak self] in
+            self?.reloadCollection()
+        }
+    }
+    
     //MARK: - Private
     
     private func reloadCollection() {

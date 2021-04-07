@@ -43,6 +43,8 @@ final class PrivateShareFileInfoManager {
     
     private var tempLoaded = [WrapData]()
     
+    private lazy var searchService = BusinessSearchService()
+    
     //MARK: - Life cycle
     
     private init() { }
@@ -209,6 +211,14 @@ final class PrivateShareFileInfoManager {
             }
         }
     }
+    
+    func search(text: String, diskType: SearchDiskTypes, completion: @escaping VoidHandler) {
+//        , page: Int, size: Int,  handler: @escaping ResponseVoid
+//        priva
+        
+        
+    }
+    
     
     //MARK: - Private
     
