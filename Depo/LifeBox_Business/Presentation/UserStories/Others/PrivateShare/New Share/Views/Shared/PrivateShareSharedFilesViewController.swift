@@ -585,6 +585,18 @@ extension PrivateShareSharedFilesViewController: GalleryFileUploadServiceDelegat
             self.router.presentViewController(controller: vc, animated: true, completion: nil)
         }
     }
+    
+    func assetsPreparationWillStart() {
+        if let tabBarController = router.tabBarController {
+            tabBarController.assetsPreparationWillStart()
+        }
+    }
+    
+    func assetsPreparationDidEnd() {
+        if let tabBarController = router.tabBarController {
+            tabBarController.assetsPreparationDidEnd()
+        }
+    }
 }
 
 extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonActtionDelegate {

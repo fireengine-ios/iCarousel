@@ -305,6 +305,14 @@ extension TabBarViewController: GalleryFileUploadServiceDelegate {
             self.present(vc, animated: true, completion: nil)
         }
     }
+    
+    func assetsPreparationWillStart() {
+        SnackbarManager.shared.show(type: .action, message: "Preparing items to upload")
+    }
+    
+    func assetsPreparationDidEnd() {
+        //
+    }
 }
 
 extension TabBarViewController: MediaPlayerDelegate {
