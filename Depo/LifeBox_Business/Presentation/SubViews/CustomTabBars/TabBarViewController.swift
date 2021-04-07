@@ -307,7 +307,7 @@ extension TabBarViewController: GalleryFileUploadServiceDelegate {
     }
     
     func assetsPreparationWillStart() {
-        SnackbarManager.shared.show(type: .action, message: "Preparing items to upload")
+        SnackbarManager.shared.show(type: .action, message: TextConstants.iCloudPreparationSnackbarMessage)
     }
     
     func assetsPreparationDidEnd() {
