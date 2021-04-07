@@ -90,6 +90,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         collectionManager.reload(type: .onViewAppear)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .default
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
