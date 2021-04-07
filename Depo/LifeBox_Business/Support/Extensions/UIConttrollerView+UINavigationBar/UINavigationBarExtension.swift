@@ -308,23 +308,11 @@ extension UIViewController {
         }
     }
     
-    func setNavigationTitle(title: String ,style: NavigationBarStyles, twoLinesTitle: Bool = false) {
-        if twoLinesTitle {
-            let titleView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.75, height: 44))
-            let label = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.75, height: 44))
-            label.numberOfLines = 2
-            label.textAlignment = .center
-            label.text = title
-            label.font = UIFont.GTAmericaStandardMediumFont(size: 17)
-            label.textColor = style.textTintColor
-            titleView.addSubview(label)
-            self.navigationItem.titleView = titleView
-            return
-        }
-        
+    func setNavigationTitle(title: String, style: NavigationBarStyles) {
         self.title = title
         navBar?.titleTextAttributes = style.titleAtributes
     }
+    
 }
 
 //MARK: Buttons
