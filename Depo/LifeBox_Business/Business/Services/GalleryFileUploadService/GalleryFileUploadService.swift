@@ -15,8 +15,8 @@ protocol GalleryFileUploadServiceDelegate: class {
     func cancelled()
     func failed(error: ErrorResponse?)
     func uploaded(items: [WrapData])
-    func showSpinner()
-    func hideSpinner()
+    func assetsPreparationWillStart()
+    func assetsPreparationDidEnd()
 }
 
 extension GalleryFileUploadServiceDelegate {
@@ -149,24 +149,41 @@ final class GalleryFileUploadService: NSObject {
         return nil
     }
     
+    private func findICloudItem(at assets: [PHAsset], completion: @escaping BoolHandler) {
+        DispatchQueue.toBackground {
+            let firstICloudItem = assets.first(where: { LocalMediaStorage.default.compactInfoAboutAsset(asset: $0).isValid == false })
+            completion(firstICloudItem != nil)
+        }
+    }
+    
     private func tryToUpload(assets: [PHAsset], picker: UIViewController) {
         dismiss(picker: picker) { [weak self] in
-            self?.delegate?.showSpinner()
             
-            self?.itemsToUpload(from: assets) { items in
-                DispatchQueue.main.async {
-                    self?.delegate?.hideSpinner()
-                    
-                    guard let self = self else {
-                        return
+            self?.findICloudItem(at: assets) { [weak self] hasICloudItem in
+                
+                if hasICloudItem {
+                    DispatchQueue.main.async {
+                        self?.delegate?.assetsPreparationWillStart()
                     }
-                    
-                    if let errorMessage = self.verify(items: items) {
-                        self.delegate?.failed(error: ErrorResponse.string(errorMessage))
-                        return
+                }
+                
+                self?.itemsToUpload(from: assets) { items in
+                    DispatchQueue.main.async {
+                        self?.delegate?.assetsPreparationDidEnd()
+                        
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        if let errorMessage = self.verify(items: items) {
+                            self.delegate?.failed(error: ErrorResponse.string(errorMessage))
+                            return
+                        }
+                        
+                        let nonemptyItems = items.filter { $0.fileSize != 0 }
+                        
+                        self.upload(items: nonemptyItems)
                     }
-                    
-                    self.upload(items: items)
                 }
             }
         }

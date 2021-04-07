@@ -1528,3 +1528,8 @@ extension TextConstants {
     static let turkcellUpdaterPopupTitle = NSLocalizedString("turkcell_updater_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let turkcellUpdaterPopupDescription = NSLocalizedString("turkcell_updater_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+extension TextConstants {
+    static let iCloudPreparationSnackbarMessage = NSLocalizedString("business_app_icloud_upload_spinner_tag", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
