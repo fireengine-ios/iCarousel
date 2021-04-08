@@ -87,6 +87,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupView()
+        
         collectionView.contentInsetAdjustmentBehavior = .never
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
@@ -237,6 +239,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //        } else {
 //            navigationItem.rightBarButtonItem?.customView?.isHidden = true
 //        }
+    }
+    
+    private func setupView() {
+        switch initinalBarStyle {
+        case .white:
+            view.backgroundColor = ColorConstants.tableBackground
+        default:
+            break
+        }
     }
 
     private func setupTitle() {
