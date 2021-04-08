@@ -91,15 +91,14 @@ final class UploadService: BaseRequestService {
             
             self.uploadFileList(items: filteredItems, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, success: { [weak self] in
                 self?.stopTracking()
-                self?.clearCounters(uploadType: uploadType)
-                self?.hideIfNeededUploadProgress()
+                self?.hideIfNeededUploadProgress(uploadType: uploadType)
                 ItemOperationManager.default.finishUploadFiles()
                 success()
                 
             }, fail: { [weak self] errorResponse in
                 self?.stopTracking()
                 self?.clearCounters(uploadType: uploadType)
-                self?.hideIfNeededUploadProgress()
+                self?.hideIfNeededUploadProgress(uploadType: uploadType)
                 
                 if errorResponse.isOutOfSpaceError {
                     self?.cancelUploadOperations()
@@ -135,8 +134,9 @@ final class UploadService: BaseRequestService {
         analyticsService.stopTimelyTracking()
     }
     
-    private func hideIfNeededUploadProgress() {
+    private func hideIfNeededUploadProgress(uploadType: UploadType) {
         if uploadOperations.count == 0 {
+            clearCounters(uploadType: uploadType)
             uploadProgress.cleanAll()
         }
     }
