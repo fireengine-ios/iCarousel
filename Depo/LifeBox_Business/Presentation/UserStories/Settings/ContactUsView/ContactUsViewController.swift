@@ -171,7 +171,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
             
             Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: emailSubject,
-                                    emails: ["lifeboxipadpro@gmail.com"],
+                                    emails: [TextConstants.NotLocalized.contactUsEmail],
                                     presentCompletion: nil, success: {
                                         self.navigationController?.popViewController(animated: true)
                                     }, fail: { error in

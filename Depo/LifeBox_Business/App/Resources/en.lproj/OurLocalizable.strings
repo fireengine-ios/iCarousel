@@ -1955,7 +1955,7 @@
 "business_app_info_page_item" = "Items";
 "business_app_info_page_creation_date" = "Creation Date";
 "business_app_info_page_modified_date" = "Last Modified";
-"business_app_info_page_sharing_info" = "Sharing Info";
+"business_app_info_page_sharing_info" = "Access Info";
 "business_app_info_page_shared_with" = "%d People has access";
 "business_app_info_page_role_owner" = "Owner";
 "business_app_info_page_role_editor" = "Editor";
@@ -1968,8 +1968,8 @@
 "business_app_whohasaccess_role_viewer" = "Viewer";
 "business_app_whohasaccess_role_varies" = "Custom";
 "uploadVideoToReadOnlyAlbumError" = "uploadVideoToReadOnlyAlbumError";
-"business_app_2FA_first_page_title" = "We Detected An Unusual Login Attempt";
-"business_app_2FA_first_page_description_title" = "You activated two-factor authentication on your account";
+"business_app_2FA_first_page_title" = "Security Check";
+"business_app_2FA_first_page_description_title" = "We Detected An Unusual Login Attempt";
 "business_app_2FA_first_page_description_detail" = "To secure your account and login safely, we'll send you a security code to verify your identity";
 "business_app_2FA_first_page_sendsecuritycode" = "Send the security code";
 "business_app_2FA_first_page_sendsecuritycode_to_phone" = "To my Phone:";
@@ -2128,6 +2128,4 @@ Subject: Subject_1*/
 "business_app_contact_us_subject_8" = "Suggestions (NT)";
 "business_app_access_page_role_owner" = "Owner";
 "business_app_app_version_under_settings" = "Version: %@";
-
-
 "business_app_icloud_upload_spinner_tag" = "Preparing iCloud items";
