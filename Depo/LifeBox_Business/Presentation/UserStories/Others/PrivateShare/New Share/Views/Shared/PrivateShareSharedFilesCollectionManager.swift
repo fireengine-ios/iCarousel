@@ -273,6 +273,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 
             }, completion: { (_) in
                 self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
+                self.reloadVisibleCells()
                 self.delegate?.didEndReload()
             })
         }

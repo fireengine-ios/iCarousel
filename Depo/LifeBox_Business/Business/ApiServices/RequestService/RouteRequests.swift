@@ -34,7 +34,7 @@ struct RouteRequests {
         switch currentServerEnvironment {
         case .test: return "https://tcloudstb.turkcell.com.tr/"
         case .preProduction: return "https://adepotest.turkcell.com.tr/"
-        case .production: return "https://adepo.turkcell.com.tr/"
+        case .production: return "https://lifebox.biz/"
         }
     }()
     
@@ -72,10 +72,9 @@ struct RouteRequests {
     
     //MARK: Privacy Policy
     static var privacyPolicy: String {
-        //TODO: set urls depending on environment
         switch currentServerEnvironment {
         case .production:
-            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
+            return "https://lifebox.biz/download/lifebox_business_privacy_policy_%@.html"
         case .preProduction:
             return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
         case .test:
@@ -212,17 +211,13 @@ struct RouteRequests {
     
     //MARK : Faq
     static var faqUrl: String {
-        //TODO: set urls depending on environment
         switch currentServerEnvironment {
         case .production:
-            return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
-                "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
+            return "https://lifebox.biz/download/lifebox_business_faq_%@.html"
         case .preProduction:
-            return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
-                "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
         case .test:
-            return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
         }
     }
 

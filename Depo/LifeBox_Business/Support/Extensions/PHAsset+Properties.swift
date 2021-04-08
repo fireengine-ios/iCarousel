@@ -32,6 +32,11 @@ extension PHAsset {
         /// we show IMG_XXXX.HEIC, but will be upload edited jpg photo
         let originalResource = resources.first(where: { $0.type.isContained(in: [.photo, .video]) })
         let name = originalResource?.originalFilename
+        
+        if name == nil || name?.isEmpty == true {
+            debugLog(resources.description)
+        }
+        
         return name
     }
     

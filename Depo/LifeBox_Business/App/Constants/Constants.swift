@@ -18,6 +18,7 @@ struct TextConstants {
         static let mobilePaymentPermissionLink = "mobilePaymentPermissionLink";
         static let FAQ = "frequently_asked_questions"
         static let feedbackEmail = "info@mylifebox.com"
+        static let contactUsEmail = "info@lifebox.biz"
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         static let wrongVideoData = "Wrong video data"
         static let wrongImageData = "Wrong image data"
@@ -1534,3 +1535,7 @@ extension TextConstants {
     static let emptySearchTitle = NSLocalizedString("business_app_search_empty_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let emptySearchDescription = NSLocalizedString("business_app_search_empty_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+extension TextConstants {
+    static let iCloudPreparationSnackbarMessage = NSLocalizedString("business_app_icloud_upload_spinner_tag", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+

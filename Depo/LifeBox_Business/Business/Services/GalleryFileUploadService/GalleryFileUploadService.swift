@@ -15,8 +15,8 @@ protocol GalleryFileUploadServiceDelegate: class {
     func cancelled()
     func failed(error: ErrorResponse?)
     func uploaded(items: [WrapData])
-    func showSpinner()
-    func hideSpinner()
+    func assetsPreparationWillStart()
+    func assetsPreparationDidEnd()
 }
 
 extension GalleryFileUploadServiceDelegate {
@@ -28,14 +28,47 @@ extension GalleryFileUploadServiceDelegate {
 final class GalleryFileUploadService: NSObject {
     
     private weak var delegate: GalleryFileUploadServiceDelegate?
-    private var uploadType: UploadType = .regular
+    
     private lazy var cameraService = CameraService()
+    
+    private let router = RouterVC()
+    
+    private var uploadType: UploadType = .regular
+    private var rootUuid = ""
+    private var accountUuid: String?
+    
     
     
     func upload(type: UploadType, rootViewController: UIViewController, delegate: GalleryFileUploadServiceDelegate) {
         uploadType = type
         
         self.delegate = delegate
+        
+        accountUuid = SingletonStorage.shared.accountInfo?.uuid
+
+        switch uploadType {
+            case .regular:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    rootUuid = sharedFolderInfo.uuid
+                }
+                accountUuid = SingletonStorage.shared.accountInfo?.uuid
+                
+            case .sharedWithMe:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    accountUuid = sharedFolderInfo.accountUuid
+                    rootUuid = sharedFolderInfo.uuid
+                }
+                
+            case .sharedArea:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    rootUuid = sharedFolderInfo.uuid
+                }
+                accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid
+                
+            default:
+                assertionFailure()
+                break
+        }
         
         cameraService.photoLibraryIsAvailable { [weak self] isAvailable, _ in
             guard let self = self else {
@@ -80,33 +113,6 @@ final class GalleryFileUploadService: NSObject {
         let router = RouterVC()
         let isFromAlbum = false
         
-        var accountUuid = SingletonStorage.shared.accountInfo?.uuid
-        var rootUUID: String = ""
-
-        switch uploadType {
-            case .regular:
-                if let sharedFolderInfo = router.sharedFolderItem {
-                    rootUUID = sharedFolderInfo.uuid
-                }
-                accountUuid = SingletonStorage.shared.accountInfo?.uuid
-                
-            case .sharedWithMe:
-                if let sharedFolderInfo = router.sharedFolderItem {
-                    accountUuid = sharedFolderInfo.accountUuid
-                    rootUUID = sharedFolderInfo.uuid
-                }
-                
-            case .sharedArea:
-                if let sharedFolderInfo = router.sharedFolderItem {
-                    rootUUID = sharedFolderInfo.uuid
-                }
-                accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid
-                
-            default:
-                assertionFailure()
-                break
-        }
-        
         let controller = router.uploadSelectionList(with: items) { [weak self] selectedItems in
             guard let self = self else {
                 return
@@ -115,11 +121,11 @@ final class GalleryFileUploadService: NSObject {
                                                 uploadType: self.uploadType,
                                                 uploadStategy: .WithoutConflictControl,
                                                 uploadTo: .ROOT,
-                                                folder: rootUUID,
+                                                folder: self.rootUuid,
                                                 isFavorites: false,
                                                 isFromAlbum: isFromAlbum,
                                                 isFromCamera: false,
-                                                projectId: accountUuid,
+                                                projectId: self.accountUuid,
                                                 success: { [weak self] in
                 self?.delegate?.uploaded(items: items)
                 
@@ -149,24 +155,41 @@ final class GalleryFileUploadService: NSObject {
         return nil
     }
     
+    private func findICloudItem(at assets: [PHAsset], completion: @escaping BoolHandler) {
+        DispatchQueue.toBackground {
+            let firstICloudItem = assets.first(where: { LocalMediaStorage.default.compactInfoAboutAsset(asset: $0).isValid == false })
+            completion(firstICloudItem != nil)
+        }
+    }
+    
     private func tryToUpload(assets: [PHAsset], picker: UIViewController) {
         dismiss(picker: picker) { [weak self] in
-            self?.delegate?.showSpinner()
             
-            self?.itemsToUpload(from: assets) { items in
-                DispatchQueue.main.async {
-                    self?.delegate?.hideSpinner()
-                    
-                    guard let self = self else {
-                        return
+            self?.findICloudItem(at: assets) { [weak self] hasICloudItem in
+                
+                if hasICloudItem {
+                    DispatchQueue.main.async {
+                        self?.delegate?.assetsPreparationWillStart()
                     }
-                    
-                    if let errorMessage = self.verify(items: items) {
-                        self.delegate?.failed(error: ErrorResponse.string(errorMessage))
-                        return
+                }
+                
+                self?.itemsToUpload(from: assets) { items in
+                    DispatchQueue.main.async {
+                        self?.delegate?.assetsPreparationDidEnd()
+                        
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        if let errorMessage = self.verify(items: items) {
+                            self.delegate?.failed(error: ErrorResponse.string(errorMessage))
+                            return
+                        }
+                        
+                        let nonemptyItems = items.filter { $0.fileSize != 0 }
+                        
+                        self.upload(items: nonemptyItems)
                     }
-                    
-                    self.upload(items: items)
                 }
             }
         }

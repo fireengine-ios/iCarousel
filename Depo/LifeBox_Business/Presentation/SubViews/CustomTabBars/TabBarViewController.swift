@@ -51,8 +51,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
 
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var externalFileUploadService = ExternalFileUploadService()
-    private lazy var galleryFileUploadService = GalleryFileUploadService()
+    private(set) lazy var externalFileUploadService = ExternalFileUploadService()
+    private(set) lazy var galleryFileUploadService = GalleryFileUploadService()
     private lazy var cameraService = CameraService()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var router = RouterVC()
@@ -304,6 +304,14 @@ extension TabBarViewController: GalleryFileUploadServiceDelegate {
                                           buttonTitle: TextConstants.ok)
             self.present(vc, animated: true, completion: nil)
         }
+    }
+    
+    func assetsPreparationWillStart() {
+        SnackbarManager.shared.show(type: .action, message: TextConstants.iCloudPreparationSnackbarMessage)
+    }
+    
+    func assetsPreparationDidEnd() {
+        //
     }
 }
 

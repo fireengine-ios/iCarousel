@@ -21,8 +21,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private lazy var cameraService = CameraService()
-    private lazy var galleryFileUploadService = GalleryFileUploadService()
-    private lazy var externalFileUploadService = ExternalFileUploadService()
+    private var galleryFileUploadService: GalleryFileUploadService? {
+        router.tabBarController?.galleryFileUploadService
+    }
+    private var externalFileUploadService: ExternalFileUploadService? { router.tabBarController?.externalFileUploadService
+    }
     
     private(set) var shareType: PrivateShareType = .byMe
     
@@ -95,6 +98,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .default
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -595,6 +602,18 @@ extension PrivateShareSharedFilesViewController: GalleryFileUploadServiceDelegat
             self.router.presentViewController(controller: vc, animated: true, completion: nil)
         }
     }
+    
+    func assetsPreparationWillStart() {
+        if let tabBarController = router.tabBarController {
+            tabBarController.assetsPreparationWillStart()
+        }
+    }
+    
+    func assetsPreparationDidEnd() {
+        if let tabBarController = router.tabBarController {
+            tabBarController.assetsPreparationDidEnd()
+        }
+    }
 }
 
 extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonActtionDelegate {
@@ -622,10 +641,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
             
         case .upload(type: let uploadType):
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
-            galleryFileUploadService.upload(type:uploadType, rootViewController: self, delegate: self)
+            galleryFileUploadService?.upload(type: uploadType, rootViewController: self, delegate: self)
             
         case .uploadFiles(type: let uploadType):
-            externalFileUploadService.showViewController(type: uploadType, router: router, externalFileType: .any)
+            externalFileUploadService?.showViewController(type: uploadType, router: router, externalFileType: .any)
             
         case .uploadFromApp:
             let parentFolder = router.getParentUUID()

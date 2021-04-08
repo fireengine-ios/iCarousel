@@ -83,8 +83,10 @@ enum NavigationBarStyles {
     
     var tintColor: UIColor {
         switch self {
-        case .byDefault, .white, .visible, .transparent, .hidden, .black:
+        case .transparent, .hidden, .black:
             return .clear
+        case .byDefault, .white, .visible:
+            return ColorConstants.confirmationPopupTitle
         }
     }
     
