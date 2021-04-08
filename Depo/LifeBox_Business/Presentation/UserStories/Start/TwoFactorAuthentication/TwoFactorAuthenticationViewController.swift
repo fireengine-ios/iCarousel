@@ -66,7 +66,13 @@ struct TwoFAChallengeModel {
 final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     @IBOutlet private var designer: TwoFactorAuthenticationDesigner!
-    @IBOutlet private weak var reasonOfAuthLabel: UILabel!
+    
+    @IBOutlet private weak var reasonOfAuthLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.a2FAFirstPageDescription
+        }
+    }
+    
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var errorView: ErrorBannerView!
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -124,13 +130,8 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         setupNavigationBar()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupNavigationBar()
-    }
-
     private func setupNavigationBar() {
-        title = TextConstants.a2FAFirstPageTitle
+        setNavigationTitle(title: TextConstants.a2FAFirstPageTitle, style: .white)
         setNavigationBarStyle(.white)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
@@ -139,17 +140,11 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     //MARK: Utility methods
     private func setup() {
         createAvailableTypesArray(availableTypes: twoFactorAuthResponse?.challengeTypes)
-        setReasonDescriptionLabel()
-        
         activityManager.delegate = self
     }
     
     private func trackScreen() {
         analyticsService.logScreen(screen: .securityCheck)
-    }
-    
-    private func setReasonDescriptionLabel() {
-        reasonOfAuthLabel.text = TextConstants.a2FAFirstPageDescription
     }
     
     private func createAvailableTypesArray(availableTypes: [TwoFactorAuthErrorResponseChallengeType]?) {
