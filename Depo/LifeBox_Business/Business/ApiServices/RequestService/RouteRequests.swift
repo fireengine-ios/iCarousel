@@ -32,7 +32,7 @@ struct RouteRequests {
         switch currentServerEnvironment {
         case .test: return "https://tcloudstb.turkcell.com.tr/"
         case .preProduction: return "https://adepotest.turkcell.com.tr/"
-        case .production: return "https://adepo.turkcell.com.tr/"
+        case .production: return "https://lifebox.biz/"
         }
     }()
     
