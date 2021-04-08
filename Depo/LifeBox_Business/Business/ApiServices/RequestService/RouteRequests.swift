@@ -279,7 +279,7 @@ struct RouteRequests {
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
-        return "https://lifebox.biz/download/lifebox_business_update_ios_test.json"
+        return baseShortUrlString + "download/lifebox_business_update_ios_test.json"
     }
     
     struct HomeCards {
