@@ -133,7 +133,6 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     private func setupNavigationBar() {
         setNavigationTitle(title: TextConstants.a2FAFirstPageTitle, style: .white)
         setNavigationBarStyle(.white)
-        navigationController?.navigationBar.tintColor = ColorConstants.confirmationPopupTitle
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
