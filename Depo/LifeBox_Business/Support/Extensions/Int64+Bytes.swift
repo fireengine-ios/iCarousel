@@ -19,7 +19,7 @@ extension Int64 {
     
     var convertBytesToFormattedString: String {
         let formatter: ByteCountFormatter = ByteCountFormatter()
-        formatter.countStyle = .file
+        formatter.countStyle = .binary
         
         return self == 0 ? "0 KB" : formatter.string(fromByteCount: self)
     }
