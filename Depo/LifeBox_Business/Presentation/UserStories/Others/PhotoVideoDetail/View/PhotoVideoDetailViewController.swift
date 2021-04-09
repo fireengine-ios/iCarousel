@@ -222,10 +222,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         let style: NavigationBarStyles
-        if case .application = selectedItem.fileType {
-            style = .white
+        
+        if isFullScreen {
+            style = .hidden
         } else {
-            style = .transparent
+            if case .application = selectedItem.fileType {
+                style = .white
+            } else {
+                style = .transparent
+            }
         }
         setNavigationBarStyle(style)
         navigationItem.leftBarButtonItem?.tintColor = style.textTintColor
