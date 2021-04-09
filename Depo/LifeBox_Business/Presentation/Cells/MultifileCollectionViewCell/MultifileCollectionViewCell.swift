@@ -364,14 +364,16 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Menu button actions
     
-    @objc private func onLongTap(_ sender: Any) {
+    @objc private func onLongTap(_ sender: UILongPressGestureRecognizer) {
         if #available(iOS 14.0, *) {
             //use button + UIMenu
             return
         }
         
-        onMenuTriggered()
-        actionDelegate?.onMenuPress(sender: sender, itemModel: itemModel)
+        if sender.state == .began {
+            onMenuTriggered()
+            actionDelegate?.onMenuPress(sender: sender, itemModel: itemModel)
+        }
     }
     
     @objc private func onMenuTriggered() {
