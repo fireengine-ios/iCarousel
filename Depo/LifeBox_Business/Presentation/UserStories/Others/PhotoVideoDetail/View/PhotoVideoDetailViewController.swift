@@ -154,7 +154,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //        statusBarColor = .clear
 //        setNavigationBarStyle(.visible)
         
-        
+        statusBarStyle = .default
         output.viewWillDisappear()
 //        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
@@ -228,8 +228,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         } else {
             if case .application = selectedItem.fileType {
                 style = .white
+                statusBarStyle = .default
             } else {
                 style = .transparent
+                statusBarStyle = .lightContent
             }
         }
         setNavigationBarStyle(style)
@@ -250,6 +252,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         switch initinalBarStyle {
         case .white:
             view.backgroundColor = ColorConstants.tableBackground
+            statusBarStyle = .default
         default:
             break
         }
@@ -470,6 +473,11 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         
         let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
         editingTabBar.changeBar(style: barStyle)
+        
+        if !object.fileType.isDocument {
+            setNavigationBarStyle(.transparent)
+        }
+        
         viewForBottomBar.backgroundColor = object.fileType.isDocument ? .white : .clear
         
         cell.setup(with: object, index: indexPath.row, isFullScreen: isFullScreen)
