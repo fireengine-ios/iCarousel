@@ -198,10 +198,8 @@ extension ElementTypes {
             imageName = "trash"
         case .copy:
             imageName = "copy-link"
-        case .endSharing:
+        case .endSharing, .leaveSharing:
             imageName = "end-sharing"
-        case .leaveSharing:
-            imageName = "action_leave_share"
         case .move:
             imageName = "move"
         case .share:
