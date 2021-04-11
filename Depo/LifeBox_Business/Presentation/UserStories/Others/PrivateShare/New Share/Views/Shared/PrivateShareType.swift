@@ -15,7 +15,7 @@ indirect enum PrivateShareType: Equatable {
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
     case sharedArea
     case trashBin
-    case search(from: PrivateShareType)
+    case search(from: PrivateShareType, text: String)
     
     var title: String {
         let title: String
@@ -32,7 +32,7 @@ indirect enum PrivateShareType: Equatable {
                 title = TextConstants.tabBarItemSharedArea
             case .trashBin:
                 title = TextConstants.trashBinPageTitle
-            case .search(from: let rootType):
+            case .search(from: let rootType, _):
                 title = rootType.title
         }
         return title
@@ -59,9 +59,19 @@ indirect enum PrivateShareType: Equatable {
                 return .myDisk
             case .trashBin:
                 return .trashBin
-            case .search(from: let rootType):
-                //FIXME: need to find the way to pass search string
-                return .search(text: "")
+            case .search(from: _, let searchText):
+                return .search(text: searchText)
+        }
+    }
+    
+    var searchDiskType: SearchDiskTypes? {
+        switch self {
+        case .trashBin, .innerFolder(_, _), .byMe, .withMe, .search:
+            return nil
+        case .sharedArea:
+            return .sharedArea
+        case .myDisk:
+            return .myDisk
         }
     }
 
@@ -146,7 +156,7 @@ indirect enum PrivateShareType: Equatable {
             case (.trashBin, _):
                 return []
                 
-            case (.search(let rootType), _):
+            case (.search(let rootType, let text), _):
                 switch rootType {
                     case .myDisk, .sharedArea:
                         if rootPermissions?.granted?.contains(.create) == true {
@@ -190,7 +200,7 @@ indirect enum PrivateShareType: Equatable {
                 assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
                 return []
                 
-            case .search(from: let rootType):
+            case .search(from: let rootType, _):
 //                guard .search != rootType else {
 //                    assertionFailure("search should not be a root of himself")
 //                    return []
@@ -207,7 +217,7 @@ indirect enum PrivateShareType: Equatable {
             case .innerFolder(type: let rootType, _):
                 return veryRootType(for: rootType)
                 
-            case .search(from: let rootType):
+            case .search(from: let rootType, _):
                 return veryRootType(for: rootType)
         }
     }

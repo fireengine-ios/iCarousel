@@ -127,12 +127,6 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
-    func search(text: String, diskType: SearchDiskTypes) {
-        fileInfoManager.search(text: text, diskType: diskType) { [weak self] in
-            self?.reloadCollection()
-        }
-    }
-    
     //MARK: - Private
     
     private func reloadCollection() {
@@ -350,6 +344,23 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         DispatchQueue.toMain {
             self.collectionView?.backgroundView?.isHidden = isHidden
+        }
+    }
+    
+    func search(shareType: PrivateShareType, completion: VoidHandler) {
+        fileInfoManager.search(type: shareType) { [weak self] (shouldReload, _) in
+            
+            if shouldReload {
+                DispatchQueue.toMain {
+                    self?.changeSelection(isActive: false)
+                    self?.reloadCollection()
+                }
+            } else {
+                DispatchQueue.toMain {
+                    self?.collectionView?.refreshControl?.endRefreshing()
+                }
+            }
+            
         }
     }
 }

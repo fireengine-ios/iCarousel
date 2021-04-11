@@ -34,23 +34,24 @@ class BusinessSearchService: BaseRequestService {
 ///    "Text" field should contain what user typed in search area
 ///    If you call this API on MY DISK page, set diskTypes as ME as above
 ///    If you call this API on SHARED AREA page, set diskTypes as COMPANY
-    func search(text: String, diskType: SearchDiskTypes, page: Int, size: Int, handler: @escaping ResponseVoid) {
+    @discardableResult
+    func search(text: String, diskType: SearchDiskTypes, page: Int, size: Int, handler: @escaping ResponseHandler<BusinessSearchItems>) -> URLSessionTask? {
         let url = RouteRequests.privateShareSearch
-        let params: [[String: Any]] = [[
+        let params: [String: Any] = [
             "text": text,
             "diskTypes": [diskType.requestProperty],
             "page": page,
             "size": size
-        ]]
-        let urlRequest: URLRequest? = sessionManager.request(url, method: .post).request
+        ]
         
-        if let unwrapedRequest = urlRequest,
-           let request = try? params.encode(unwrapedRequest, with: nil) {
-            sessionManager
-                .request(request)
-                .customValidate()
-                .responseVoid(handler)
-        }
+        return sessionManager
+            .request(url,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .responseObject(handler)
+            .task
     }
     
 }

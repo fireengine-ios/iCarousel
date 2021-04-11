@@ -27,6 +27,8 @@ final class GetSharedItemsOperation: Operation {
     private var rootFolder: SharedFileInfo?
     private var isRequestFinished = false
     
+//    private var searchText: String?
+    
     init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<(SharedFileInfo?, [WrapData], Bool)>) {
         self.type = type
         self.privateShareAPIService = service
@@ -36,6 +38,21 @@ final class GetSharedItemsOperation: Operation {
         self.sortBy = sortBy
         self.sortOrder = sortOrder
     }
+    
+    
+//    //Search Init
+//    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, searchText: String, completion: @escaping ValueHandler<(SharedFileInfo?, [WrapData], Bool)>) {
+//        self.type = type
+//        self.privateShareAPIService = service
+//        self.completion = completion
+//        self.page = page
+//        self.size = size
+//        self.searchText = searchText
+//        
+//        //these are unnneded for search
+//        self.sortBy = .lastModifiedDate
+//        self.sortOrder = .asc
+//    }
     
     override func cancel() {
         super.cancel()
@@ -137,8 +154,23 @@ final class GetSharedItemsOperation: Operation {
                 }
             }
             
-        case .search(from: _):
-            task = nil
+        case .search(from: let rootType, let searchText):
+            guard
+                let diskType = rootType.searchDiskType
+            else {
+                task = nil
+                completion(.failed(CustomErrors.text("unable to unwrap text")))
+                return
+            }
+            
+            task = privateShareAPIService.search(text: searchText, diskType: diskType, page: page, size: size) { searchResponnse in
+                switch searchResponnse {
+                case .success(let successSearchResponse):
+                    completion(.success(successSearchResponse.foundItems))
+                case .failed(let error):
+                    completion(.failed(error))
+                }
+            }
             
         }
     }

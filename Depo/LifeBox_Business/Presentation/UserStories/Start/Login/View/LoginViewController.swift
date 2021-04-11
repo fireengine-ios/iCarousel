@@ -212,7 +212,7 @@ final class LoginViewController: ViewController {
         output.viewIsReady()
 
         #if DEBUG
-        loginTextField.text = "gkngln1@lifeboxtest.com"
+        loginTextField.text = "emel@lifeboxtest.com"
         passwordTextField.text = "Lifebox2020"
         #endif
     }

@@ -226,8 +226,8 @@ class RouterVC: NSObject {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func popViewController() {
-        navigationController?.popViewController(animated: true)
+    func popViewController(animated: Bool = true) {
+        navigationController?.popViewController(animated: animated)
     }
     
     func popToViewController(_ vc: UIViewController) {//}, completion: VoidHandler? = nil) {

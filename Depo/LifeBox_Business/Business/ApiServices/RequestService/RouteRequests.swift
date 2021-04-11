@@ -151,7 +151,7 @@ struct RouteRequests {
     static let unifiedSearchWithoutCategory = "search/unified?text=%@&page=%@&size=%@"
     static let suggestion    = "search/unified/suggest?text=%@"
     
-    static let privateShareSearch = baseUrl +/ "v1/busines/search"
+    static let privateShareSearch = baseUrl +/ "v1/business/search"
     
     // MARK: Album
     

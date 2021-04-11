@@ -73,10 +73,14 @@ protocol PrivateShareApiService {
 
     @discardableResult
     func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask?
+    
+    @discardableResult
+    func search(text: String, diskType: SearchDiskTypes, page: Int, size: Int, handler: @escaping ResponseHandler<BusinessSearchItems>) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
     private lazy var hiddenService = HiddenService()
+    private lazy var searchService = BusinessSearchService()
     
     @discardableResult
     func getSuggestedSubjects(searchText: String, size: Int, handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask? {
@@ -372,5 +376,10 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     @discardableResult
     func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask? {
         return hiddenService.deleteAllFromTrashBin(handler: handler)
+    }
+    
+    @discardableResult
+    func search(text: String, diskType: SearchDiskTypes, page: Int, size: Int, handler: @escaping ResponseHandler<BusinessSearchItems>) -> URLSessionTask? {
+        searchService.search(text: text, diskType: diskType, page: page, size: size, handler: handler)
     }
 }

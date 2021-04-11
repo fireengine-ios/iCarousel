@@ -18,6 +18,15 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return controller
     }
 
+    private static func with(shareType: PrivateShareType, searchController: UISearchController) -> PrivateShareSharedFilesViewController {
+        let controller = PrivateShareSharedFilesViewController.initFromNib()
+        controller.title = shareType.title
+        controller.shareType = shareType
+        controller.needToShowTabBar = shareType.isTabBarNeeded
+        controller.searchController = searchController
+        return controller
+    }
+    
     @IBOutlet private weak var collectionView: UICollectionView!
     
     private lazy var cameraService = CameraService()
@@ -48,16 +57,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
  
-    lazy private var searchController: UISearchController = {
-//        let searchResultConntroller = PrivateShareSearchViewController.initFromNib()
+    lazy fileprivate var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
-//        searchController.isActive = false
-//        if #available(iOS 13.0, *) {
-//            searchController.automaticallyShowsSearchResultsController = false
-//        } else {
-//            // Fallback on earlier versions
-//        }
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.delegate = self
         searchController.searchBar.delegate = self
@@ -85,6 +87,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         collectionManager.setup()
         setupBars()
         setupPlusButton()
+        
+        if case .search(_, let searchText) = shareType {
+            searchController.searchBar.text = searchText
+            setNavSearchConntroller(searchController)
+        }
         
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
@@ -701,33 +708,42 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("!!! search button click \(searchBar.text)")
         
+        guard let text = searchBar.text else {
+            return
+        }
         //если не серч шар тип то пушитть новый
         
-        
-        setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: false)
-        changeNavbarLargeTitle(false, style: .white)
-        view.layoutSubviews()
-//        let resultConntroller = PrivateShareSearchViewController.initFromNib()
-//        router.pushViewController(viewController: resultConntroller, animated: false)
-//        fileInfoManager
+        switch shareType {
+        case .search(from: let rootType, text: _):
+            shareType = .search(from: rootType, text: text)
+            showSpinner()
+            collectionManager.search(shareType: shareType) { [weak self] in
+                self?.hideSpinner()
+            }
+        case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
             
+//            self.changeNavbarLargeTitle(false, style: .white)
+            router.pushViewController(viewController: PrivateShareSharedFilesViewController.with(shareType: .search(from: shareType, text: text), searchController: searchController), animated: false)
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.updateBars(isSelecting: false)
         switch self.shareType {
-        case .innerFolder, .trashBin:
+        case .innerFolder, .trashBin, .byMe, .withMe:
             break
-        default:
-            self.changeNavbarLargeTitle(true, style: .white)
-            setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
-//            if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
-//                self.setNavSearchConntroller(self.searchController)
-//            }
+        case .myDisk, .sharedArea:
+            //FIXME: find a better solution then downncoast, currenntly the problem is transfering state of search bar
+            if let currentViewController = router.currentContrroller() as? PrivateShareSharedFilesViewController, case .search = currentViewController.shareType {
+                hideSpinner()
+                router.popViewController(animated: false)
+            } else {
+                self.changeNavbarLargeTitle(true, style: .white)
+                setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+            }
+        case .search(from: _, text: _):
+            hideSpinner()
+            router.popViewController(animated: false)
         }
-//        guard router.topNavigationController?.viewControllers.last is PrivateShareSearchViewController else {
-//           return
-//        }
-//        router.popViewController()
     }
 }
