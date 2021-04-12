@@ -68,9 +68,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.delegate = self
         searchController.searchBar.delegate = self
-        searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
         return searchController
     }()
@@ -95,7 +93,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setupBars()
         setupPlusButton()
         
- 
+        if case .search = shareType {
+            //since we pass instance frrom parent VC we no lonnger need to set text
+//            searchController.searchBar.text = searchText
+            setNavSearchConntroller(searchController)
+        }
         
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
@@ -106,12 +108,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewWillAppear(animated)
 
         setupNavigationBar(editingMode: collectionManager.isSelecting)
-        if case .search = shareType {
-            //since we pass instance frrom parent VC we no lonnger need to set text
-//            searchController.searchBar.text = searchText
-            setNavSearchConntroller(searchController)
-//            searchController.isActive = true//false
-        }
+
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
     }
@@ -675,41 +672,9 @@ extension PrivateShareSharedFilesViewController: TopBarSortingViewDelegate {
     }
 }
 
-extension PrivateShareSharedFilesViewController: UISearchControllerDelegate {
-//    @available(iOS 8.0, *)
-//    optional func willPresentSearchController(_ searchController: UISearchController)
-//
-//    @available(iOS 8.0, *)
-//    optional func didPresentSearchController(_ searchController: UISearchController)
-//
-//    @available(iOS 8.0, *)
-//    optional func willDismissSearchController(_ searchController: UISearchController)
-//
-//    @available(iOS 8.0, *)
-//    optional func didDismissSearchController(_ searchController: UISearchController)
-//
-//    
-//    // Called after the search controller's search bar has agreed to begin editing or when 'active' is set to YES. If you choose not to present the controller yourself or do not implement this method, a default presentation is performed on your behalf.
-//    @available(iOS 8.0, *)
-//    optional func presentSearchController(_ searchController: UISearchController)
-//}
-    func presentSearchController(_ searchController: UISearchController)  {
-        
-    }
-}
-
-extension PrivateShareSharedFilesViewController: UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        debugPrint("!!! HERE WE GO S")
-    }
-
-}
-
 extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("!!! search button click \(searchBar.text)")
         
         guard let text = searchBar.text else {
             return
@@ -725,13 +690,9 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
         case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
 
             DispatchQueue.main.async {
-                let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, text: text), searchController: self.searchController)//self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folder: folder)
-//                .pushViewController(, animated: false)
-                
+                let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, text: text), searchController: self.searchController)
                 self.router.pushViewController(viewController: controller, animated: false)
             }
-//            router.navigationController?
-//                .pushViewController(PrivateShareSharedFilesViewController.with(shareType: .search(from: shareType, text: text), searchController: searchController), animated: false)
         }
     }
     
@@ -744,6 +705,7 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             //FIXME: find a better solution then downncoast, currenntly the problem is transfering state of search bar
             if let currentViewController = router.currentContrroller() as? PrivateShareSharedFilesViewController, case .search = currentViewController.shareType {
                 hideSpinner()
+                searchBar.text = ""
                 router.popViewController(animated: false)
             } else {
                 self.changeNavbarLargeTitle(true, style: .white)
