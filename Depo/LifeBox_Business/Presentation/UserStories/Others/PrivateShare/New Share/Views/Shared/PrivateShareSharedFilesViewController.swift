@@ -18,6 +18,15 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return controller
     }
 
+    private static func with(shareType: PrivateShareType, searchController: UISearchController) -> PrivateShareSharedFilesViewController {
+        let controller = PrivateShareSharedFilesViewController.initFromNib()
+        controller.title = shareType.title
+        controller.shareType = shareType
+        controller.needToShowTabBar = shareType.isTabBarNeeded
+        controller.searchController = searchController
+        return controller
+    }
+    
     @IBOutlet private weak var collectionView: UICollectionView!
     
     @IBOutlet private weak var bottomBarContainerView: UIView! {
@@ -55,11 +64,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
  
-    lazy private var searchController: UISearchController = {
+    lazy fileprivate var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
-        searchController.obscuresBackgroundDuringPresentation = true
-        //TODO: also setup delegate here
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
         return searchController
     }()
     
@@ -83,6 +93,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setupBars()
         setupPlusButton()
         
+        if case .search = shareType {
+            //since we pass instance frrom parent VC we no lonnger need to set text
+//            searchController.searchBar.text = searchText
+            setNavSearchConntroller(searchController)
+        }
+        
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
@@ -92,7 +108,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewWillAppear(animated)
 
         setupNavigationBar(editingMode: collectionManager.isSelecting)
-        
+
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
     }
@@ -229,7 +245,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 break
             default:
                 self.changeNavbarLargeTitle(false, style: .white)
-                if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
+                if self.shareType.isSearchAllowed {
                     self.setNavSearchConntroller(nil)
                 }
             }
@@ -245,7 +261,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 break
             default:
                 self.changeNavbarLargeTitle(true, style: .white)
-                if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
+                if self.shareType.isSearchAllowed {
                     self.setNavSearchConntroller(self.searchController)
                 }
             }
@@ -357,7 +373,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 } else {
                     navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
                 }
-            default:
+            case .byMe, .withMe, .myDisk, .sharedArea:
                 navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                 var newTitle = shareType.title
                 if let segmentedParent = parent as? TopBarSupportedSegmentedController {
@@ -365,6 +381,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 }
                 navBarManager.setupLargetitle(isLarge: true)
                 navBarManager.setRootMode(title: newTitle)
+            case .search(from: let rootType, text: _):
+                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+                navBarManager.setupLargetitle(isLarge: false)
+                navBarManager.setRootMode(title: rootType.title)
             }
         }
     }
@@ -385,10 +405,6 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         } else {
             threeDotsManager.showActions(for: shareType, sender: self)
         }
-    }
-    
-    func onSearchButton() {
-        showSearchScreen()
     }
     
     func onPlusButton() {
@@ -452,12 +468,6 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
                 UIApplication.showErrorAlert(message: errorMessage)
             }
         })
-    }
-    
-    //MARK: Helpers
-    private func showSearchScreen() {
-        let controller = router.searchView(navigationController: navigationController)
-        router.pushViewController(viewController: controller)
     }
 }
 
@@ -651,6 +661,52 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
+        }
+    }
+}
+
+extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        guard let text = searchBar.text else {
+            return
+        }
+        
+        switch shareType {
+        case .search(from: let rootType, text: _):
+            shareType = .search(from: rootType, text: text)
+            showSpinner()
+            collectionManager.search(shareType: shareType) { [weak self] in
+                self?.hideSpinner()
+            }
+        case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
+
+            DispatchQueue.main.async {
+                let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, text: text), searchController: self.searchController)
+                self.router.pushViewController(viewController: controller, animated: false)
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.updateBars(isSelecting: false)
+        switch self.shareType {
+        case .innerFolder, .trashBin, .byMe, .withMe:
+            break
+        case .myDisk, .sharedArea:
+            //FIXME: find a better solution then downncoast, currenntly the problem is transfering state of search bar
+            if let currentViewController = router.currentContrroller() as? PrivateShareSharedFilesViewController, case .search = currentViewController.shareType {
+                hideSpinner()
+                searchBar.text = ""
+                router.popViewController(animated: false)
+            } else {
+                self.changeNavbarLargeTitle(true, style: .white)
+                setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+            }
+        case .search(from: _, text: _):
+            hideSpinner()
+            router.popViewController(animated: false)
         }
     }
 }

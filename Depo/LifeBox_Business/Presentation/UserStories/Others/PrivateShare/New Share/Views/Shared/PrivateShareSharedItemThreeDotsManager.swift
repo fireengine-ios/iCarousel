@@ -33,7 +33,7 @@ final class PrivateShareSharedItemThreeDotsManager {
     
     private func innerFolderActionTypes(for rootType: PrivateShareType, item: WrapData) -> [ElementTypes] {
         switch rootType { 
-            case .byMe, .myDisk, .withMe, .sharedArea:
+        case .byMe, .myDisk, .withMe, .sharedArea, .search:
                 return ElementTypes.specifiedMoreActionTypes(for: item.status, item: item)
 
             case .trashBin:

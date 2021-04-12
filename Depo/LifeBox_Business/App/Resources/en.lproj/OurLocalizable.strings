@@ -2128,4 +2128,8 @@ Subject: Subject_1*/
 "business_app_contact_us_subject_8" = "Suggestions (NT)";
 "business_app_access_page_role_owner" = "Owner";
 "business_app_app_version_under_settings" = "Version: %@";
+"business_app_search_empty_page_title" = "No Results Found";
+"business_app_search_empty_page_description" = "Your search %@ did not match with any file or folder";
 "business_app_icloud_upload_spinner_tag" = "Preparing iCloud items";
+"business_app_search_number_of_result" = "Results: %d";
+"business_app_search_no_results" = "No results found for %@";
