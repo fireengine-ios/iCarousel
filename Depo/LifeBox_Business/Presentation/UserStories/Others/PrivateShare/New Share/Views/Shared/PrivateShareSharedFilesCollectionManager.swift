@@ -474,7 +474,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let height: CGFloat = 44.0
+        let height: CGFloat = MultifileCollectionViewCell.height
         return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
