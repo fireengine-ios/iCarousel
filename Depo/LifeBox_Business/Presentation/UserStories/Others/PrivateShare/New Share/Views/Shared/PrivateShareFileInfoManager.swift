@@ -59,7 +59,7 @@ final class PrivateShareFileInfoManager {
         }
         
         isNextPageLoading = true
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (_, loadedItems, searchItemsFoundInnTotal, isFinished) in
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (_, loadedItems, searchItemsFoundInTotal, isFinished) in
             
             guard let self = self else {
                 completion((false, nil))
@@ -74,7 +74,7 @@ final class PrivateShareFileInfoManager {
             
             self.pagesLoaded += 1
             
-            self.searchedItemsFound = searchItemsFoundInnTotal ?? 0
+            self.searchedItemsFound = searchItemsFoundInTotal ?? 0
             
             let combinedItems = self.items.getArray() + loadedItems
             let indexes = self.getDeltaIndexes(objects: combinedItems)
