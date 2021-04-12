@@ -8,6 +8,7 @@
 
 import Foundation
 
+typealias GetSharedItemsOperationCallBack = ValueHandler<((SharedFileInfo?, [WrapData], searchItemsTotalFounnd: Int?, Bool))>
 
 final class GetSharedItemsOperation: Operation {
     
@@ -20,16 +21,16 @@ final class GetSharedItemsOperation: Operation {
     private let size: Int
     private let sortBy: SortType
     private let sortOrder: SortOrder
-    private let completion: ValueHandler<((SharedFileInfo?, [WrapData], Bool))>
+    private let completion: GetSharedItemsOperationCallBack
     
     private var task: URLSessionTask?
     private var loadedItems = [WrapData]()
     private var rootFolder: SharedFileInfo?
     private var isRequestFinished = false
     
-//    private var searchText: String?
+    private var searchItemsFoundInTotal: Int?
     
-    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<(SharedFileInfo?, [WrapData], Bool)>) {
+    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping GetSharedItemsOperationCallBack) {
         self.type = type
         self.privateShareAPIService = service
         self.completion = completion
@@ -38,21 +39,6 @@ final class GetSharedItemsOperation: Operation {
         self.sortBy = sortBy
         self.sortOrder = sortOrder
     }
-    
-    
-//    //Search Init
-//    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, searchText: String, completion: @escaping ValueHandler<(SharedFileInfo?, [WrapData], Bool)>) {
-//        self.type = type
-//        self.privateShareAPIService = service
-//        self.completion = completion
-//        self.page = page
-//        self.size = size
-//        self.searchText = searchText
-//        
-//        //these are unnneded for search
-//        self.sortBy = .lastModifiedDate
-//        self.sortOrder = .asc
-//    }
     
     override func cancel() {
         super.cancel()
@@ -67,7 +53,7 @@ final class GetSharedItemsOperation: Operation {
         
         semaphore.wait()
         
-        completion((rootFolder, loadedItems, isRequestFinished))
+        completion((rootFolder, loadedItems, searchItemsFoundInTotal, isRequestFinished))
     }
     
     private func load() {
@@ -155,17 +141,17 @@ final class GetSharedItemsOperation: Operation {
             }
             
         case .search(from: let rootType, let searchText):
-            guard
-                let diskType = rootType.searchDiskType
-            else {
+            guard let diskType = rootType.searchDiskType else {
                 task = nil
-                completion(.failed(CustomErrors.text("unable to unwrap text")))
+                completion(.failed(CustomErrors.text("unable to get disk type")))
+                assertionFailure("disk type should be available for MyDisk and SharedArea only as of now")
                 return
             }
             
-            task = privateShareAPIService.search(text: searchText, diskType: diskType, page: page, size: size) { searchResponnse in
+            task = privateShareAPIService.search(text: searchText, diskType: diskType, page: page, size: size) { [weak self] searchResponnse in
                 switch searchResponnse {
                 case .success(let successSearchResponse):
+                    self?.searchItemsFoundInTotal = successSearchResponse.foundItemsCount.allFiles
                     completion(.success(successSearchResponse.foundItems))
                 case .failed(let error):
                     completion(.failed(error))
