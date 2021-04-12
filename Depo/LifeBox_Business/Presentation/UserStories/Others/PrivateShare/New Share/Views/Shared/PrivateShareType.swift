@@ -15,6 +15,7 @@ indirect enum PrivateShareType: Equatable {
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
     case sharedArea
     case trashBin
+    case search(from: PrivateShareType, text: String)
     
     var title: String {
         let title: String
@@ -22,15 +23,17 @@ indirect enum PrivateShareType: Equatable {
             case .myDisk:
                 title = TextConstants.tabBarItemMyDisk
             case .byMe:
-                title = TextConstants.privateShareSharedByMeTab
+                title = TextConstants.topBarSegmentSharedByMe
             case .withMe:
-                title = TextConstants.privateShareSharedWithMeTab
+                title = TextConstants.topBarSegmentSharedWithMe
             case .innerFolder(_, let folder):
                 title = folder.name
             case .sharedArea:
                 title = TextConstants.tabBarItemSharedArea
             case .trashBin:
                 title = TextConstants.trashBinPageTitle
+            case .search(from: let rootType, _):
+                title = rootType.title
         }
         return title
     }
@@ -56,6 +59,19 @@ indirect enum PrivateShareType: Equatable {
                 return .myDisk
             case .trashBin:
                 return .trashBin
+            case .search(from: _, let searchText):
+                return .search(text: searchText)
+        }
+    }
+    
+    var searchDiskType: SearchDiskTypes? {
+        switch self {
+        case .trashBin, .innerFolder(_, _), .byMe, .withMe, .search:
+            return nil
+        case .sharedArea:
+            return .sharedArea
+        case .myDisk:
+            return .myDisk
         }
     }
 
@@ -69,7 +85,7 @@ indirect enum PrivateShareType: Equatable {
             return true
         case .innerFolder(let folderType, _):
             return folderType == .trashBin ? true : false
-        case .byMe, .myDisk, .sharedArea, .withMe:
+        case .byMe, .myDisk, .sharedArea, .withMe, .search:
             return false
         }
     }
@@ -94,13 +110,16 @@ indirect enum PrivateShareType: Equatable {
 
             case .trashBin:
                 return true
+                
+            case .search:
+                return  true
         }
     }
     
     //with this flag we check if we need to show search bar or not
     var isSearchAllowed: Bool {
         switch self {
-            case .myDisk, .sharedArea:
+            case .myDisk, .sharedArea, .search:
                 return true
                 
             case .byMe, .withMe, .innerFolder, .trashBin:
@@ -136,6 +155,17 @@ indirect enum PrivateShareType: Equatable {
 
             case (.trashBin, _):
                 return []
+                
+            case (.search(let rootType, _), _):
+                switch rootType {
+                    case .myDisk, .sharedArea:
+                        if rootPermissions?.granted?.contains(.create) == true {
+                            return [.upload(type: .regular), .uploadFiles(type: .regular),  .newFolder(type: .regular)]
+                        }
+                    default:
+                        return []
+                }
+                return []
         }
     }
     
@@ -168,6 +198,13 @@ indirect enum PrivateShareType: Equatable {
             case .innerFolder:
                 assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
                 return []
+                
+            case .search(from: let rootType, _):
+                if case .search = rootType {
+                    assertionFailure("search should not be a root of himself")
+                    return []
+                }
+                return floatingButtonTypes(innerFolderVeryRootType: rootType, permissions: permissions)
         }
     }
     
@@ -177,6 +214,9 @@ indirect enum PrivateShareType: Equatable {
                 return type
                 
             case .innerFolder(type: let rootType, _):
+                return veryRootType(for: rootType)
+                
+            case .search(from: let rootType, _):
                 return veryRootType(for: rootType)
         }
     }

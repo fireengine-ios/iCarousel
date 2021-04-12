@@ -1530,6 +1530,13 @@ extension TextConstants {
     static let turkcellUpdaterPopupDescription = NSLocalizedString("turkcell_updater_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
+//MARK:- Search
+extension TextConstants {
+    static let emptySearchTitle = NSLocalizedString("business_app_search_empty_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let emptySearchDescription = NSLocalizedString("business_app_search_empty_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let emptySearchHeader = NSLocalizedString("business_app_search_no_results", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let searchItemsFoundNumber = NSLocalizedString("business_app_search_number_of_result", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
 extension TextConstants {
     static let iCloudPreparationSnackbarMessage = NSLocalizedString("business_app_icloud_upload_spinner_tag", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

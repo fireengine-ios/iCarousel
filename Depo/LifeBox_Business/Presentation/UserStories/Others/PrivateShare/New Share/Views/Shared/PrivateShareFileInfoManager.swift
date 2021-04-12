@@ -27,6 +27,8 @@ final class PrivateShareFileInfoManager {
     private let pageSize = Device.isIpad ? 64 : 32
     private var pagesLoaded = 0
     
+    private(set) var searchedItemsFound: Int = 0
+    
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
@@ -43,6 +45,7 @@ final class PrivateShareFileInfoManager {
     
     private var tempLoaded = [WrapData]()
     
+    
     //MARK: - Life cycle
     
     private init() { }
@@ -56,7 +59,7 @@ final class PrivateShareFileInfoManager {
         }
         
         isNextPageLoading = true
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (_, loadedItems, isFinished) in
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (_, loadedItems, searchItemsFoundInTotal, isFinished) in
             
             guard let self = self else {
                 completion((false, nil))
@@ -70,6 +73,8 @@ final class PrivateShareFileInfoManager {
             }
             
             self.pagesLoaded += 1
+            
+            self.searchedItemsFound = searchItemsFoundInTotal ?? 0
             
             let combinedItems = self.items.getArray() + loadedItems
             let indexes = self.getDeltaIndexes(objects: combinedItems)
@@ -91,7 +96,7 @@ final class PrivateShareFileInfoManager {
             selectedItems.removeAll()
             pagesLoaded = 0
             
-            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, isFinished in
+            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, searchItemsFoundInnTotal, isFinished in
                 
                 self?.rootFolder = rootFolder
                 
@@ -105,6 +110,8 @@ final class PrivateShareFileInfoManager {
                     completion((true, nil))
                     return
                 }
+                
+                self.searchedItemsFound = searchItemsFoundInnTotal ?? 0
                 
                 self.pagesLoaded += 1
                 
@@ -210,6 +217,11 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func search(type: PrivateShareType, completion: @escaping ReloadCompletionHandler) {
+        self.type = type
+        reload(completion: completion)
+    }
+    
     //MARK: - Private
     
     private func cleanAll() {
@@ -218,7 +230,7 @@ final class PrivateShareFileInfoManager {
     }
     
     private func loadPages(till page: Int, completion: @escaping ReloadCompletionHandler) {
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, isFinished in
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, searchItemsFoundInnTotal, isFinished in
             
             self?.rootFolder = rootFolder
             
@@ -226,6 +238,8 @@ final class PrivateShareFileInfoManager {
                 completion((false, nil))
                 return
             }
+            
+            self.searchedItemsFound = searchItemsFoundInnTotal ?? 0
             
             self.tempLoaded.append(contentsOf: loadedItems)
             self.pagesLoaded += 1

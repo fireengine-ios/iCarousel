@@ -219,6 +219,7 @@ extension UIViewController {
     }
     
     func changeSearchBar(controller: UISearchController?) {
+        navigationItem.hidesSearchBarWhenScrolling = true
         if let controller = controller, navigationItem.searchController == nil {
             navigationItem.searchController = controller
         } else if controller == nil {

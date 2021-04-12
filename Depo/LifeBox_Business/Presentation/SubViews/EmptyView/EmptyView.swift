@@ -12,8 +12,17 @@ final class EmptyView: UIView, NibInit {
 
     static func view(with type: ViewType) -> EmptyView {
         let view = EmptyView.initFromNib()
-        view.emptyLabel.text = type.title
+        view.emptyLabel.text = type.description
         view.imageView.image = type.image
+        if let titleText = type.title {
+            view.emptyTitleLabel.text = titleText
+            view.empyTitleLabelHeight.constant = 19
+        }
+        if let headerText = type.header {
+            view.searchHeaderLabel.text = headerText
+            view.searchHeaderLabel.isHidden = false
+        }
+        
         return view
     }
     
@@ -26,8 +35,9 @@ final class EmptyView: UIView, NibInit {
         case trashBinInnerFolder
         case sharedArea
         case myDisk
+        case search(text: String)
         
-        var title: String {
+        var description: String {
             switch self {
                 case .hiddenBin:
                     return TextConstants.hiddenBinEmpty
@@ -43,6 +53,26 @@ final class EmptyView: UIView, NibInit {
                     return TextConstants.sharedAreaEmptyPage
                 case .myDisk:
                     return TextConstants.myDiskEmptyPage
+                case .search(let text):
+                    return String(format: TextConstants.emptySearchDescription, text)
+            }
+        }
+        
+        var title: String? {
+            switch self {
+            case .hiddenBin, .trashBin, .trashBinInnerFolder, .sharedBy, .sharedWith, .sharedInnerFolder, .sharedArea, .myDisk:
+                    return nil
+                case .search:
+                    return TextConstants.emptySearchTitle
+            }
+        }
+        
+        var header: String? {
+            switch self {
+            case .hiddenBin, .trashBin, .trashBinInnerFolder, .sharedBy, .sharedWith, .sharedInnerFolder, .sharedArea, .myDisk:
+                    return nil
+                case .search(let text):
+                    return String(format: TextConstants.emptySearchHeader, text)
             }
         }
         
@@ -62,6 +92,8 @@ final class EmptyView: UIView, NibInit {
                     return nil
                 case .myDisk:
                     return nil
+                case .search:
+                    return UIImage(named: "emptySearch")
             }
         }
     }
@@ -72,9 +104,33 @@ final class EmptyView: UIView, NibInit {
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
             newValue.textColor = UIColor.lrBrownishGrey.withAlphaComponent(0.5)
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         }
     }
+    
+    
+    @IBOutlet private weak var emptyTitleLabel: UILabel! {
+        willSet {
+            newValue.text = ""
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
+            newValue.textColor = ColorConstants.confirmationPopupTitle
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
+        }
+    }
+    
+    @IBOutlet private weak var searchHeaderLabel: UILabel! {
+        willSet {
+            newValue.isHidden = true
+            newValue.text = ""
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
+            newValue.textColor = ColorConstants.confirmationPopupTitle
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
+        }
+    }
+    
+    @IBOutlet private weak var empyTitleLabelHeight: NSLayoutConstraint!
     
     @IBOutlet private weak var imageView: UIImageView!
     
