@@ -88,11 +88,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setupBars()
         setupPlusButton()
         
-        if case .search = shareType {
-            //since we pass instance frrom parent VC we no lonnger need to set text
-//            searchController.searchBar.text = searchText
-            setNavSearchConntroller(searchController)
-        }
+ 
         
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
@@ -103,7 +99,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewWillAppear(animated)
 
         setupNavigationBar(editingMode: collectionManager.isSelecting)
-        
+        if case .search = shareType {
+            //since we pass instance frrom parent VC we no lonnger need to set text
+//            searchController.searchBar.text = searchText
+            setNavSearchConntroller(searchController)
+//            searchController.isActive = true//false
+        }
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
     }
@@ -377,7 +378,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 navBarManager.setupLargetitle(isLarge: true)
                 navBarManager.setRootMode(title: newTitle)
             case .search(from: let rootType, text: _):
-                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: false)
+                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                 navBarManager.setupLargetitle(isLarge: false)
                 navBarManager.setRootMode(title: rootType.title)
             }
