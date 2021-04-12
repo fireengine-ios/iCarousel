@@ -33,13 +33,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var musicBar: MusicBar!
     
-    @IBOutlet weak var bottomBarView: UIView! {
-        willSet {
-            newValue.isHidden = true
-            newValue.backgroundColor = .white
-        }
-    }
-    
     @IBOutlet weak var uploadProgressView: UploadProgressView! {
         willSet {
             newValue.delegate = self
@@ -203,10 +196,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 self.musicBarHeightConstraint.constant = self.musicBar.isHidden ? 0 : self.musicBarH
                 self.setHeightConstantForUploadProgress()
                 debugLog("TabBarVC showTabBar about to layout")
-                self.view.layoutIfNeeded()
                 self.tabBar.isHidden = false
             }, completion: { _ in
-                
+                self.view.layoutIfNeeded()
             })
         }
     }
@@ -219,9 +211,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 self.musicBarHeightConstraint.constant = 0
                 self.setHeightConstantForUploadProgress()
                 debugLog("TabBarVC showTabBar about to layout")
-                self.view.layoutIfNeeded()
             }, completion: { _ in
                 self.tabBar.isHidden = true
+                self.view.layoutIfNeeded()
             })
         }
     }

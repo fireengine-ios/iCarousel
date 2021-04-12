@@ -47,23 +47,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
-    func show(animated: Bool, onView sourceView: UIView?) {
-        let router = RouterVC()
-        guard let rootVC = router.rootViewController else {
-            return
-        }
-        var shownSourceView: UIView
-        if let newSourceView = sourceView {
-            shownSourceView = newSourceView
-        } else {
-            if let tabBarViewController = rootVC as? TabBarViewController {
-                shownSourceView = tabBarViewController.bottomBarView
-            } else {
-                shownSourceView = rootVC.view
-            }
-        }
+    func show(animated: Bool, onView sourceView: UIView) {
         NotificationCenter.default.post(name: .hidePlusTabBar, object: nil)
-        view.showBar(animated: animated, onView: shownSourceView)
+        view.showBar(animated: animated, onView: sourceView)
     }
     
     
