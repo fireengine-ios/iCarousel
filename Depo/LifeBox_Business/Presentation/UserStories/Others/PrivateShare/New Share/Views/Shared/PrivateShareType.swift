@@ -156,7 +156,7 @@ indirect enum PrivateShareType: Equatable {
             case (.trashBin, _):
                 return []
                 
-            case (.search(let rootType, let text), _):
+            case (.search(let rootType, _), _):
                 switch rootType {
                     case .myDisk, .sharedArea:
                         if rootPermissions?.granted?.contains(.create) == true {
@@ -165,7 +165,6 @@ indirect enum PrivateShareType: Equatable {
                     default:
                         return []
                 }
-//                floatingButtonTypes(innerFolderVeryRootType: rootType, permissions: [])
                 return []
         }
     }
@@ -201,10 +200,10 @@ indirect enum PrivateShareType: Equatable {
                 return []
                 
             case .search(from: let rootType, _):
-//                guard .search != rootType else {
-//                    assertionFailure("search should not be a root of himself")
-//                    return []
-//                }
+                if case .search = rootType {
+                    assertionFailure("search should not be a root of himself")
+                    return []
+                }
                 return floatingButtonTypes(innerFolderVeryRootType: rootType, permissions: permissions)
         }
     }
