@@ -151,7 +151,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
         let subject = subjectView.textField.text ?? ""
         let usersDescription = textView.text ?? ""
         
-        getUserInfo { userEmail, unlimitedStorage, storageUsage, storageQuota in
+        getUserInfo { userEmail, unlimitedStorage, storageQuota, storageUsage in
             let versionString = SettingsBundleHelper.appVersion()
             let storageQuota = unlimitedStorage ? TextConstants.contactUsMailBodyUnlimitedStorage : storageQuota
             
@@ -163,8 +163,8 @@ final class ContactUsViewController: BaseViewController, NibInit {
                        UIDevice.current.systemVersion,
                        Device.locale,
                        ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
-                       storageUsage,
                        storageQuota,
+                       storageUsage,
                        subject)
             
             let emailSubject = userEmail + " - " + TextConstants.NotLocalized.appNameMailSubject + subject
