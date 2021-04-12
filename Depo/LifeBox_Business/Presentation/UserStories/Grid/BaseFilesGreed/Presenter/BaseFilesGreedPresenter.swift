@@ -551,7 +551,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func showBottomBar(animated: Bool, onView: UIView?) {
-        bottomBarPresenter?.show(animated: true, onView: onView)
+//        bottomBarPresenter?.show(animated: true, onView: onView)
     }
     
     func setupNewBottomBarConfig() {
@@ -655,9 +655,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewWillAppear() {
         interactor.trackScreen()
-        if dataSource.selectedItemsArray.count > 0 {
-            bottomBarPresenter?.show(animated: true, onView: nil)
-        }
+//        if dataSource.selectedItemsArray.count > 0 {
+//            bottomBarPresenter?.show(animated: true, onView: nil)
+//        }
     }
     
     func moreActionsPressed(sender: Any) {

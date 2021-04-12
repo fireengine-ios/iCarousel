@@ -474,7 +474,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
         editingTabBar.changeBar(style: barStyle)
         
-        if !object.fileType.isDocument {
+        if !object.fileType.isDocument, !isFullScreen {
             setNavigationBarStyle(.transparent)
         }
         

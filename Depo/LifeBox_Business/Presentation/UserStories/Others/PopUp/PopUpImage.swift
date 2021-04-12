@@ -25,11 +25,7 @@ enum PopUpImage {
             image = UIImage(named: "xmarkAlert")
         case .success:
             image = UIImage(named: "successImage")
-        case .delete:
-            image = UIImage(named: "confirmationPopupIcon")
-        case .restore:
-            image = UIImage(named: "restoreAlert")
-        case .question:
+        case .delete, .restore, .question:
             image = UIImage(named: "confirmationPopupIcon")
         case .quota:
             image = UIImage(named: "quotaAlert")

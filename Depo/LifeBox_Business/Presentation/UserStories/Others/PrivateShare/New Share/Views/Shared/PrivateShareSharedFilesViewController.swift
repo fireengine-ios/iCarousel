@@ -29,6 +29,13 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    @IBOutlet private weak var bottomBarContainerView: UIView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.backgroundColor = .white
+        }
+    }
+    
     private lazy var cameraService = CameraService()
     private var galleryFileUploadService: GalleryFileUploadService? {
         router.tabBarController?.galleryFileUploadService
@@ -271,7 +278,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         if selectedItems.isEmpty {
             bottomBarManager.hide()
         } else {
-            bottomBarManager.show()
+            bottomBarManager.show(on: bottomBarContainerView)
         }
     }
     
@@ -335,7 +342,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         if isSelecting {
             let selectedItems = self.collectionManager.selectedItems()
             self.show(selectedItemsCount: selectedItems.count)
-            self.bottomBarManager.show()
+            self.bottomBarManager.show(on: self.bottomBarContainerView)
             self.bottomBarManager.update(for: selectedItems, shareType: self.shareType)
         } else {
             self.bottomBarManager.hide()
