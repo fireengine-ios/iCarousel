@@ -162,9 +162,6 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.addSubview(emptyView!)
         emptyView?.pinToSuperviewEdges(offset: UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0))
         
-//        collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
-//        collectionView?.backgroundView?.isHidden = true
-        
         collectionView?.delegate = self
         collectionView?.dataSource = self
     }
