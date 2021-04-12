@@ -235,7 +235,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         } else {
             debugLog("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
             
-            bottomBarPresenter?.show(animated: true, onView: nil)
+//            bottomBarPresenter?.show(animated: true, onView: nil)
         }
         
         view.setNavBarRigthItem(active: canShow3DotsButton())
