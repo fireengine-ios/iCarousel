@@ -29,7 +29,7 @@ protocol BaseItemInputPassingProtocol: class {
 
 protocol BaseItemOuputPassingProtocol: class {
     func dismiss(animated: Bool)
-    func show(animated: Bool, onView sourceView: UIView?)
+    func show(animated: Bool, onView sourceView: UIView)
 }
 
 
