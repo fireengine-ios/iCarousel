@@ -77,7 +77,15 @@ final class PrivateShareFileInfoManager {
             self.searchedItemsFound = searchItemsFoundInTotal ?? 0
             
             let combinedItems = self.items.getArray() + loadedItems
-            let indexes = self.getDeltaIndexes(objects: combinedItems)
+            
+            let indexes: (inserted: [Int], deleted: [Int])
+            if case .search(from: _, text: _) = self.type {
+                let newRange = self.items.count...(combinedItems.count - 1)
+                indexes = (inserted: [Int](newRange), deleted: [])
+            } else {
+                indexes = self.getDeltaIndexes(objects: combinedItems)
+            }
+            
             self.items.replace(with: combinedItems) { [weak self] in
                 self?.queue.async {
                     self?.isNextPageLoading = false
