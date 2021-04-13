@@ -17,6 +17,9 @@ final class PrivateShareFileInfoManager {
         let service = PrivateShareFileInfoManager()
         service.type = type
         service.privateShareAPIService = privateShareAPIService
+        if case PrivateShareType.search(from: _, rootPermissions: let permissions, text: _) = type {
+            service.searchRootPermissions = permissions
+        }
         return service
     }
     
@@ -41,7 +44,13 @@ final class PrivateShareFileInfoManager {
     private(set) var items = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     
-    private(set) var rootFolder: SharedFileInfo?
+    private var rootFolder: SharedFileInfo?
+    
+    private var searchRootPermissions: SharedItemPermission?
+    
+    var rootPermissions: SharedItemPermission? {
+        return searchRootPermissions ?? rootFolder?.permissions
+    }
     
     private var tempLoaded = [WrapData]()
     
@@ -79,7 +88,7 @@ final class PrivateShareFileInfoManager {
             let combinedItems = self.items.getArray() + loadedItems
             
             let indexes: (inserted: [Int], deleted: [Int])
-            if case .search(from: _, text: _) = self.type {
+            if case .search = self.type {
                 if self.items.count < combinedItems.count  {
                     indexes = (inserted: [], deleted: [])
                     assertionFailure()

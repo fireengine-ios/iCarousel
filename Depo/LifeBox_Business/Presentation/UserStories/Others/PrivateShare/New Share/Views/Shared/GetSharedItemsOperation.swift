@@ -140,7 +140,7 @@ final class GetSharedItemsOperation: Operation {
                 }
             }
             
-        case .search(from: let rootType, let searchText):
+        case .search(from: let rootType, _, let searchText):
             guard let diskType = rootType.searchDiskType else {
                 task = nil
                 completion(.failed(CustomErrors.text("unable to get disk type")))

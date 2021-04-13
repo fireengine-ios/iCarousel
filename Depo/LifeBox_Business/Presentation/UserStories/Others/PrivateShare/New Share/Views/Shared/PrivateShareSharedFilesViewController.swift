@@ -340,7 +340,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
 
     private func setupNavigationBar(editingMode: Bool) {
-
+        
         setNavigationBarStyle(.white)
         
         /// be sure to configure navbar items after setup navigation bar
@@ -365,6 +365,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 } else {
                     navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
                 }
+                
             case .byMe, .withMe, .myDisk, .sharedArea:
                 navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                 var newTitle = shareType.title
@@ -379,7 +380,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                     searchController.searchBar.text = nil
                 }
                 
-            case .search(from: let rootType, text: let searchText):
+            case .search(from: let rootType, _, text: let searchText):
                 navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                 navBarManager.setupLargetitle(isLarge: false)
                 navBarManager.setRootMode(title: rootType.title)
@@ -625,6 +626,8 @@ extension PrivateShareSharedFilesViewController: GalleryFileUploadServiceDelegat
     }
 }
 
+//MARK: - PrivateShareSharedPlusButtonActtionDelegate
+
 extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonActtionDelegate {
     
     func subPlusActionPressed(type: TabBarViewController.Action) {
@@ -667,8 +670,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
     }
 }
 
-//MARK: - UISearchBarDelegate
 
+//MARK: - UISearchBarDelegate
 extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -678,10 +681,11 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
         }
         
         switch shareType {
+
         
-        case .search(from: let rootType, text: _):
+        case .search(from: let rootType, let rootPermissions, _):
             
-            shareType = .search(from: rootType, text: searchBarText)
+            shareType = .search(from: rootType, rootPermissions: rootPermissions, text: searchBarText)
             showSpinner()
             collectionManager.search(shareType: shareType) { [weak self] in
                 self?.hideSpinner()
@@ -689,10 +693,13 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             
         case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
             
-            let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, text: searchBarText))
-            self.router.pushViewController(viewController: controller, animated: false)
-
+            if let permissions = collectionManager.rootPermissions {
+                let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, rootPermissions: permissions, text: searchBarText))
+                self.router.pushViewController(viewController: controller, animated: false)
+            }
+        
         }
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -704,12 +711,13 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             break
             
         case .myDisk, .sharedArea:
+
             
             self.changeNavbarLargeTitle(true, style: .white)
             setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
             
-        case .search(from: _, text: _):
-            
+        case .search:
+
             hideSpinner()
             router.popViewController(animated: false)
             
