@@ -15,7 +15,7 @@ indirect enum PrivateShareType: Equatable {
     case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
     case sharedArea
     case trashBin
-    case search(from: PrivateShareType, text: String)
+    case search(from: PrivateShareType, rootPermissions: SharedItemPermission, text: String)
     
     var title: String {
         let title: String
@@ -32,7 +32,7 @@ indirect enum PrivateShareType: Equatable {
                 title = TextConstants.tabBarItemSharedArea
             case .trashBin:
                 title = TextConstants.trashBinPageTitle
-            case .search(from: let rootType, _):
+            case .search(from: let rootType, _, _):
                 title = rootType.title
         }
         return title
@@ -59,7 +59,7 @@ indirect enum PrivateShareType: Equatable {
                 return .myDisk
             case .trashBin:
                 return .trashBin
-            case .search(from: _, let searchText):
+            case .search(from: _, _, let searchText):
                 return .search(text: searchText)
         }
     }
@@ -156,7 +156,7 @@ indirect enum PrivateShareType: Equatable {
             case (.trashBin, _):
                 return []
                 
-            case (.search(let rootType, _), _):
+            case (.search(let rootType, _, _), _):
                 switch rootType {
                     case .myDisk, .sharedArea:
                         if rootPermissions?.granted?.contains(.create) == true {
@@ -199,7 +199,7 @@ indirect enum PrivateShareType: Equatable {
                 assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
                 return []
                 
-            case .search(from: let rootType, _):
+            case .search(from: let rootType, _, _):
                 if case .search = rootType {
                     assertionFailure("search should not be a root of himself")
                     return []
@@ -216,7 +216,7 @@ indirect enum PrivateShareType: Equatable {
             case .innerFolder(type: let rootType, _):
                 return veryRootType(for: rootType)
                 
-            case .search(from: let rootType, _):
+            case .search(from: let rootType, _, _):
                 return veryRootType(for: rootType)
         }
     }

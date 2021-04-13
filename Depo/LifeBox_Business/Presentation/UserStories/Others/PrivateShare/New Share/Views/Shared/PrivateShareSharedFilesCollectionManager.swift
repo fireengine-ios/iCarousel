@@ -56,9 +56,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var isSelecting = false
     
     private var sortViewRulesType: MoreActionsConfig.SortRullesType = .lastModifiedTimeNewOld
-    
+
     var rootPermissions: SharedItemPermission? {
-        return fileInfoManager.rootFolder?.permissions
+        return fileInfoManager.rootPermissions
     }
     
     //MARK: -
@@ -131,6 +131,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
             self?.reloadCollection()
         }
     }
+    
+    
     
     //MARK: - Private
     
@@ -545,7 +547,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
                 setup(sortingBar: header)
                 return header
                 
-            case .search(from: _, text: _):
+            case .search(from: _, _, _):
                 
                 let header = collectionView.dequeue(supplementaryView: TopBarSearchResultNumberView.self, kind: kind, for: indexPath)
                 header.setNewItemsFound(itemsFoundNumber: fileInfoManager.searchedItemsFound)

@@ -378,18 +378,19 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 } else {
                     navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
                 }
-            case .byMe, .withMe, .myDisk, .sharedArea:
-                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
-                var newTitle = shareType.title
-                if let segmentedParent = parent as? TopBarSupportedSegmentedController {
-                    newTitle = segmentedParent.rootTitle
-                }
-                navBarManager.setupLargetitle(isLarge: true)
-                navBarManager.setRootMode(title: newTitle)
-            case .search(from: let rootType, text: _):
-                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
-                navBarManager.setupLargetitle(isLarge: false)
-                navBarManager.setRootMode(title: rootType.title)
+                case .byMe, .withMe, .myDisk, .sharedArea:
+                    navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+                    var newTitle = shareType.title
+                    if let segmentedParent = parent as? TopBarSupportedSegmentedController {
+                        newTitle = segmentedParent.rootTitle
+                    }
+                    navBarManager.setupLargetitle(isLarge: true)
+                    navBarManager.setRootMode(title: newTitle)
+                    
+                case .search(from: let rootType, _, _):
+                    navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+                    navBarManager.setupLargetitle(isLarge: false)
+                    navBarManager.setRootMode(title: rootType.title)
             }
         }
     }
@@ -628,6 +629,8 @@ extension PrivateShareSharedFilesViewController: GalleryFileUploadServiceDelegat
     }
 }
 
+//MARK: - PrivateShareSharedPlusButtonActtionDelegate
+
 extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonActtionDelegate {
     
     func subPlusActionPressed(type: TabBarViewController.Action) {
@@ -670,8 +673,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
     }
 }
 
-//MARK: - UISearchBarDelegate
 
+//MARK: - UISearchBarDelegate
 extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -681,22 +684,23 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
         }
         
         switch shareType {
-        case .search(from: let rootType, text: _):
-            shareType = .search(from: rootType, text: text)
-            showSpinner()
-            collectionManager.search(shareType: shareType) { [weak self] in
-                self?.hideSpinner()
-            }
+            case .search(from: let rootType, let rootPermissions, text: _):
+                shareType = .search(from: rootType, rootPermissions: rootPermissions, text: text)
+                showSpinner()
+                collectionManager.search(shareType: shareType) { [weak self] in
+                    self?.hideSpinner()
+                }
         case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
 
-            if let currentViewController = router.currentController() as? PrivateShareSharedFilesViewController, case .search(let rootType, _) = currentViewController.shareType {
-                currentViewController.shareType = .search(from: rootType, text: text)
+            if let currentViewController = router.currentController() as? PrivateShareSharedFilesViewController, case .search(let rootType, let rootPermissions, _) = currentViewController.shareType {
+                currentViewController.shareType = .search(from: rootType, rootPermissions: rootPermissions, text: text)
                 currentViewController.showSpinner()
                 currentViewController.collectionManager.search(shareType: shareType) {
                     currentViewController.hideSpinner()
                 }
-            } else {
-                let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, text: text), searchController: self.searchController)
+            } else if let permissions = collectionManager.rootPermissions {
+                
+                let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, rootPermissions: permissions, text: text), searchController: self.searchController)
                 self.router.pushViewController(viewController: controller, animated: false)
 
             }
@@ -718,7 +722,7 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
                 self.changeNavbarLargeTitle(true, style: .white)
                 setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
             }
-        case .search(from: _, text: _):
+        case .search(from: _, _, _):
             hideSpinner()
             router.popViewController(animated: false)
         }
