@@ -17,6 +17,9 @@ final class PrivateShareFileInfoManager {
         let service = PrivateShareFileInfoManager()
         service.type = type
         service.privateShareAPIService = privateShareAPIService
+        if case PrivateShareType.search(from: _, rootPermissions: let permissions, text: _) = type {
+            service.searchRootPermissions = permissions
+        }
         return service
     }
     
@@ -41,7 +44,13 @@ final class PrivateShareFileInfoManager {
     private(set) var items = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     
-    private(set) var rootFolder: SharedFileInfo?
+    private var rootFolder: SharedFileInfo?
+    
+    private var searchRootPermissions: SharedItemPermission?
+    
+    var rootPermissions: SharedItemPermission? {
+        return searchRootPermissions ?? rootFolder?.permissions
+    }
     
     private var tempLoaded = [WrapData]()
     
@@ -77,7 +86,20 @@ final class PrivateShareFileInfoManager {
             self.searchedItemsFound = searchItemsFoundInTotal ?? 0
             
             let combinedItems = self.items.getArray() + loadedItems
-            let indexes = self.getDeltaIndexes(objects: combinedItems)
+            
+            let indexes: (inserted: [Int], deleted: [Int])
+            if case .search = self.type {
+                if self.items.count < combinedItems.count  {
+                    indexes = (inserted: [], deleted: [])
+                    assertionFailure()
+                } else {
+                    let newRange = self.items.count..<combinedItems.count
+                    indexes = (inserted: [Int](newRange), deleted: [])
+                }
+            } else {
+                indexes = self.getDeltaIndexes(objects: combinedItems)
+            }
+            
             self.items.replace(with: combinedItems) { [weak self] in
                 self?.queue.async {
                     self?.isNextPageLoading = false
