@@ -682,7 +682,7 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             }
         case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
 
-            if let currentViewController = router.currentContrroller() as? PrivateShareSharedFilesViewController, case .search(let rootType, _) = currentViewController.shareType {
+            if let currentViewController = router.currentController() as? PrivateShareSharedFilesViewController, case .search(let rootType, _) = currentViewController.shareType {
                 currentViewController.shareType = .search(from: rootType, text: text)
                 currentViewController.showSpinner()
                 currentViewController.collectionManager.search(shareType: shareType) {
@@ -703,7 +703,7 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             break
         case .myDisk, .sharedArea:
             //FIXME: find a better solution then downncoast, currenntly the problem is transfering state of search bar
-            if let currentViewController = router.currentContrroller() as? PrivateShareSharedFilesViewController, case .search = currentViewController.shareType {
+            if let currentViewController = router.currentController() as? PrivateShareSharedFilesViewController, case .search = currentViewController.shareType {
                 hideSpinner()
                 currentViewController.searchController.searchBar.text = ""
                 router.popViewController(animated: false)
