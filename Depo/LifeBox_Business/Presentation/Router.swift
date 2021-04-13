@@ -392,7 +392,7 @@ class RouterVC: NSObject {
             case .innerFolder(type: _, folderItem: let folder):
                 return folder
                 
-            case .search(from: let rootType, _):
+            case .search(from: let rootType, _, _):
                 if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
                     return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: rootType)
                 }
