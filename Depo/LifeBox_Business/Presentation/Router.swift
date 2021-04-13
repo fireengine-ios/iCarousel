@@ -66,7 +66,7 @@ class RouterVC: NSObject {
                currentViewController is PhoneVerificationViewController
     }
     
-    func currentContrroller() -> UIViewController? {
+    func currentController() -> UIViewController? {
         return navigationController?.viewControllers.last
     }
     
