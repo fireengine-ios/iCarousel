@@ -670,6 +670,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
     }
 }
 
+//MARK: - UISearchBarDelegate
+
 extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
