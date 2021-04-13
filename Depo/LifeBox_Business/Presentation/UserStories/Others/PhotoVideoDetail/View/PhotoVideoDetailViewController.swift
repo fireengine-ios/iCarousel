@@ -51,7 +51,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
                 editingTabBar.showBar(animated: true, onView: viewForBottomBar)
             }
             
-            navigationController?.setNavigationBarHidden(isFullScreen, animated: true)
+            setupNavigationBar()
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
@@ -234,7 +234,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         switch initinalBarStyle {
         case .white:
             view.backgroundColor = ColorConstants.tableBackground
-            statusBarStyle = .default
         default:
             break
         }
