@@ -86,13 +86,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     override func layoutSubviews() {
         /// fixed bug in iOS 11: setNavigationBarHidden calls cell layout
         if oldFrame != frame {
-            oldFrame = frame
             super.layoutSubviews()
             layoutIfNeeded()
-            webView.frame = contentView.frame
+            
             imageScrollView.updateZoom()
             imageScrollView.adjustFrameToCenter()
         }
+        
+        updateWebViewFrame()
     }
     
     override func prepareForReuse() {
@@ -198,6 +199,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     
     func didEndDisplaying() {
         playerView.stop()
+    }
+    
+    private func updateWebViewFrame() {
+        let safeAreaTop = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
+        let safeAreaBottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        let originUnderSafe = CGPoint(x: contentView.frame.origin.x, y: contentView.frame.origin.y + safeAreaTop)
+        let sizeWithoutSafe = CGSize(width: contentView.frame.width, height: contentView.frame.height - safeAreaTop - safeAreaBottom)
+        webView.frame = CGRect(origin: originUnderSafe, size: sizeWithoutSafe)
     }
     
     private func processMissingUrl(at index: Int, isFullRequired: Bool) {

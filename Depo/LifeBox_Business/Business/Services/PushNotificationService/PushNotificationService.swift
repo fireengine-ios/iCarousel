@@ -201,7 +201,7 @@ final class PushNotificationService {
     }
     
     private func selectChildVC(index: Int) {
-        if let controller = router.currentContrroller() as? TopBarSupportedSegmentedController {
+        if let controller = router.currentController() as? TopBarSupportedSegmentedController {
             controller.selectChildVC(index: index)
         }
     }

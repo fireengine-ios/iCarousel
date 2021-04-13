@@ -128,6 +128,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             bottomBarManager.update(for: selectedItems, shareType: shareType)
         }
         
+        collectionManager.bottomBarContainerViewHeight = bottomBarContainerView.bounds.height
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -682,9 +683,16 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             }
         case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
 
-            DispatchQueue.main.async {
+            if let currentViewController = router.currentController() as? PrivateShareSharedFilesViewController, case .search(let rootType, _) = currentViewController.shareType {
+                currentViewController.shareType = .search(from: rootType, text: text)
+                currentViewController.showSpinner()
+                currentViewController.collectionManager.search(shareType: shareType) {
+                    currentViewController.hideSpinner()
+                }
+            } else {
                 let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, text: text), searchController: self.searchController)
                 self.router.pushViewController(viewController: controller, animated: false)
+
             }
         }
     }
@@ -696,9 +704,9 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             break
         case .myDisk, .sharedArea:
             //FIXME: find a better solution then downncoast, currenntly the problem is transfering state of search bar
-            if let currentViewController = router.currentContrroller() as? PrivateShareSharedFilesViewController, case .search = currentViewController.shareType {
+            if let currentViewController = router.currentController() as? PrivateShareSharedFilesViewController, case .search = currentViewController.shareType {
                 hideSpinner()
-                searchBar.text = ""
+                currentViewController.searchController.searchBar.text = ""
                 router.popViewController(animated: false)
             } else {
                 self.changeNavbarLargeTitle(true, style: .white)

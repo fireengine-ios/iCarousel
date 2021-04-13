@@ -40,6 +40,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         return collectionManager
     }
     
+    var bottomBarContainerViewHeight: CGFloat?
+    
     weak var delegate: PrivateShareSharedFilesCollectionManagerDelegate?
     private weak var collectionView: UICollectionView?
     
@@ -506,8 +508,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let height: CGFloat = 44.0
-        return CGSize(width: collectionView.contentSize.width, height: height)
+        return CGSize(width: collectionView.contentSize.width, height: bottomBarContainerViewHeight ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
