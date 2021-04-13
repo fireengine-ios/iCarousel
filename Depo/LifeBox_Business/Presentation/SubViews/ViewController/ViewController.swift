@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var statusBarStyle: UIStatusBarStyle = .lightContent {
+    var statusBarStyle: UIStatusBarStyle = .default {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
         }

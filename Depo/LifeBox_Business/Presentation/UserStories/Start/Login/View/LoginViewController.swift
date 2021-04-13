@@ -267,7 +267,8 @@ final class LoginViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        setNavigationBarStyle(.hidden)
+        statusBarHidden = true
     }
 
     @objc private func showHideButtonClicked(_ button: UIButton) {
