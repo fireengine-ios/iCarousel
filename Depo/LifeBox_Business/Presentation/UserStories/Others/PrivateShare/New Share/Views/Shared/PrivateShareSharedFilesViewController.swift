@@ -128,6 +128,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             bottomBarManager.update(for: selectedItems, shareType: shareType)
         }
         
+        collectionManager.bottomBarContainerViewHeight = bottomBarContainerView.bounds.height
     }
     
     override func viewDidDisappear(_ animated: Bool) {
