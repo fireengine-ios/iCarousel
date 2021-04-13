@@ -29,6 +29,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func needToHideSpinner()
 
     func onEmptyViewUpdate(isHidden: Bool)
+    func getEmptyViewTopOffset() -> CGFloat
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -160,9 +161,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         emptyView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
         emptyView?.isHidden = true
-        emptyView?.isUserInteractionEnabled = false
-        collectionView?.addSubview(emptyView!)
-        emptyView?.pinToSuperviewEdges(offset: UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0))
+        collectionView?.backgroundView = emptyView
         
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -344,24 +343,15 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func setEmptyScreen(isHidden: Bool) {
-        DispatchQueue.toMain {
-            self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
-        }
-
         guard emptyView?.isHidden != isHidden else {
             return
         }
         
         DispatchQueue.toMain {
+            self.emptyView?.topOffset = self.delegate?.getEmptyViewTopOffset() ?? 0
             self.emptyView?.isHidden = isHidden
+            self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
         }
-//        guard collectionView?.backgroundView?.isHidden != isHidden else {
-//            return
-//        }
-        
-//        DispatchQueue.toMain {
-//            self.collectionView?.backgroundView?.isHidden = isHidden
-//        }
     }
     
     func search(shareType: PrivateShareType, completion: VoidHandler) {

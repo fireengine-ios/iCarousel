@@ -314,6 +314,14 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         }
     }
     
+    func getEmptyViewTopOffset() -> CGFloat {
+        guard let navigationBarFrame = navigationController?.navigationBar.frame else {
+            return 0
+        }
+        
+        return navigationBarFrame.origin.y + navigationBarFrame.height
+    }
+    
     //MARK: Helpers
     
     private func show(selectedItemsCount: Int) {
