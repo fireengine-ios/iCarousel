@@ -148,6 +148,8 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     
     private func setupSegmentedBar() {
         topBarCustomSegmentedBar.setup(models: prepareModels() , selectedIndex: 0)
+        //TODO: in order for that to work perfectly we need queue or array of clousures, that we can drop on any new entry
+//        topBarCustomSegmentedBar.changeSelection(to: currentIndex)
     }
     
     private func handleSegmentedAction(index: Int) {
