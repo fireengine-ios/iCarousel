@@ -354,11 +354,15 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func setEmptyScreen(isHidden: Bool) {
-        guard emptyView.isHidden != isHidden else {
-            return
-        }
-        
         DispatchQueue.toMain {
+            if case PrivateShareType.search(_, _, text: let query) = self.fileInfoManager.type {
+                self.emptyView.set(queryText: query)
+            }
+            
+            guard self.emptyView.isHidden != isHidden else {
+                return
+            }
+            
             self.emptyView.isHidden = isHidden
             self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
         }

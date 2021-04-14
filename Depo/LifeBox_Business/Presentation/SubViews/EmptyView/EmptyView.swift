@@ -41,7 +41,7 @@ final class EmptyView: UIView, NibInit {
             switch self {
                 case .hiddenBin:
                     return TextConstants.hiddenBinEmpty
-            case .trashBin, .trashBinInnerFolder:
+                case .trashBin, .trashBinInnerFolder:
                     return TextConstants.trashBinEmptyPage
                 case .sharedBy:
                     return TextConstants.sharedByMeEmptyPage
@@ -60,7 +60,7 @@ final class EmptyView: UIView, NibInit {
         
         var title: String? {
             switch self {
-            case .hiddenBin, .trashBin, .trashBinInnerFolder, .sharedBy, .sharedWith, .sharedInnerFolder, .sharedArea, .myDisk:
+                case .hiddenBin, .trashBin, .trashBinInnerFolder, .sharedBy, .sharedWith, .sharedInnerFolder, .sharedArea, .myDisk:
                     return nil
                 case .search:
                     return TextConstants.emptySearchTitle
@@ -69,7 +69,7 @@ final class EmptyView: UIView, NibInit {
         
         var header: String? {
             switch self {
-            case .hiddenBin, .trashBin, .trashBinInnerFolder, .sharedBy, .sharedWith, .sharedInnerFolder, .sharedArea, .myDisk:
+                case .hiddenBin, .trashBin, .trashBinInnerFolder, .sharedBy, .sharedWith, .sharedInnerFolder, .sharedArea, .myDisk:
                     return nil
                 case .search(let text):
                     return String(format: TextConstants.emptySearchHeader, text)
@@ -136,6 +136,11 @@ final class EmptyView: UIView, NibInit {
     
     @IBOutlet private weak var topOffsetConstraint: NSLayoutConstraint!
     @IBOutlet private weak var bottomOffsetConstraint: NSLayoutConstraint!
+
+    
+    func set(queryText: String) {
+        searchHeaderLabel.text = queryText
+    }
     
     var topOffset: CGFloat {
         get {
