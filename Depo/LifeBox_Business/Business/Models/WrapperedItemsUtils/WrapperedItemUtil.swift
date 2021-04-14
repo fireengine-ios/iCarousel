@@ -56,6 +56,7 @@ class WrapperedItemUtil: NSObject {
                 imageName = "pptFileThumbnail"
                 break
             default:
+                imageName = "unknownFileThumbnail"
                 break
             }
         default:

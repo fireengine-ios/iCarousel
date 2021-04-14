@@ -140,6 +140,7 @@ final class EmptyView: UIView, NibInit {
     
     func set(queryText: String) {
         searchHeaderLabel.text = String(format: TextConstants.emptySearchHeader, queryText)
+        emptyLabel.text = String(format: TextConstants.emptySearchDescription, queryText)
     }
     
     var topOffset: CGFloat {
