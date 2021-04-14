@@ -2099,7 +2099,7 @@
 "business_app_access_page_role_owner" = "Paylaşan";
 "business_app_app_version_under_settings" = "Versiyon: %@";
 "business_app_icloud_upload_spinner_tag" = "iCloud öğeleri hazırlanıyor";
-"business_app_search_empty_page_title" = "";
-"business_app_search_empty_page_description" = "";
-"business_app_search_number_of_result" = "";
-"business_app_search_no_results" = "";
+"business_app_search_empty_page_title" = "Sonuç Bulunamadı";
+"business_app_search_empty_page_description" = "\"%@\" aramanız bir dosya ya da klasör ile eşleşmedi.";
+"business_app_search_number_of_result" = "%d sonuç";
+"business_app_search_no_results" = "\"%@\" araması için sonuç bulanamadı";
