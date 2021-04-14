@@ -56,7 +56,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
  
-    lazy private var searchController: UISearchController = {
+    private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
         searchController.searchBar.tintColor = ColorConstants.confirmationPopupTitle
@@ -74,7 +74,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             return 0
         }
         
-        return navigationBarFrame.origin.y + navigationBarFrame.height
+        if Device.operationSystemVersionLessThen(13) {
+            return navigationBarFrame.origin.y + navigationBarFrame.height
+        } else {
+            return navigationBarFrame.origin.y + navigationBarFrame.height + searchController.searchBar.frame.height
+        }
+        
     }
     
     
@@ -120,14 +125,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let yOffset: CGFloat
-        if Device.operationSystemVersionLessThen(13) {
-            yOffset = topBarHeight
-        } else {
-            yOffset = topBarHeight + searchController.searchBar.frame.height
-        }
         
-        collectionManager.updateOnDidLayout(barInsets: UIEdgeInsets(top: yOffset, left: 0,
+        
+        collectionManager.updateOnDidLayout(barInsets: UIEdgeInsets(top: topBarHeight, left: 0,
                                                                    bottom: bottomBarHeight, right: 0))
     }
     
