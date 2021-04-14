@@ -82,13 +82,23 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     func changeSelection(to index: Int) {
         guard index < models.count
         else {
-            assertionFailure("button or tag is invalid")
+            assertionFailure("idex out of bounds")
+            return
+        }
+        
+        guard
+            !collectionView.visibleCells.isEmpty,
+            collectionView.numberOfItems(inSection: 0) > 0
+        else {
+            DispatchQueue.main.async {
+                self.changeSelection(to: index)
+            }
             return
         }
         
         selectedIndex = index
-        
         updateSelection(animated: true)
+        collectionView.selectItem(at: IndexPath(item: self.selectedIndex, section: 0), animated: false, scrollPosition: .left)
         
         models[safe: index]?.callback()
     }
@@ -124,7 +134,6 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
             collectionView.numberOfItems(inSection: 0) <= models.count,
             let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0))
         else {
-            assertionFailure()
             return
         }
 
@@ -137,6 +146,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
         highlightViewLeaningConstraint?.activate()
 
         guard animated else {
+            layoutIfNeeded()
             return
         }
 
