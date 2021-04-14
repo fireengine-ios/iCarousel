@@ -86,12 +86,11 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
             return
         }
         
-        guard
-            !collectionView.visibleCells.isEmpty,
-            collectionView.numberOfItems(inSection: 0) > 0
-        else {
-            DispatchQueue.main.async {
-                self.changeSelection(to: index)
+        guard !collectionView.visibleCells.isEmpty else {
+            if collectionView.numberOfItems(inSection: 0) > 0 {
+                DispatchQueue.main.async {
+                    self.changeSelection(to: index)
+                }
             }
             return
         }
