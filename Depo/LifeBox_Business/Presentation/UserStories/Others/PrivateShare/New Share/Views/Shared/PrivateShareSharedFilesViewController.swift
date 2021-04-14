@@ -56,7 +56,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
  
-    lazy fileprivate var searchController: UISearchController = {
+    lazy private var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
         searchController.searchBar.tintColor = ColorConstants.confirmationPopupTitle
@@ -120,7 +120,14 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        collectionManager.updateOnDidLayout(barInsets: UIEdgeInsets(top: topBarHeight, left: 0,
+        let yOffset: CGFloat
+        if Device.operationSystemVersionLessThen(13) {
+            yOffset = topBarHeight
+        } else {
+            yOffset = topBarHeight + searchController.searchBar.frame.height
+        }
+        
+        collectionManager.updateOnDidLayout(barInsets: UIEdgeInsets(top: yOffset, left: 0,
                                                                    bottom: bottomBarHeight, right: 0))
     }
     
@@ -305,6 +312,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         if !ReachabilityService.shared.isReachable {
             UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
         }
+        
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -409,11 +417,13 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                 
                 searchController.searchBar.text = searchText
-                 
                 searchController.searchBar.showsCancelButton = true
-                
                 setNavSearchConntroller(searchController)
                 
+                if Device.operationSystemVersionLessThen(13) {
+                    navigationItem.hidesSearchBarWhenScrolling = false
+                }
+
             }
         }
     }
@@ -713,7 +723,11 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             shareType = .search(from: rootType, rootPermissions: rootPermissions, text: searchBarText)
             showSpinner()
             collectionManager.search(shareType: shareType) { [weak self] in
-                self?.hideSpinner()
+                DispatchQueue.main.async {
+                    self?.setupNavigationBar(editingMode: false)
+                    self?.hideSpinner()
+                }
+                
             }
             
         case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
@@ -726,7 +740,6 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.updateBars(isSelecting: false)
         
         switch self.shareType {
         
@@ -734,7 +747,6 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             break
             
         case .myDisk, .sharedArea:
-
             
             self.changeNavbarLargeTitle(true, style: .white)
             setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
