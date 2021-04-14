@@ -855,7 +855,7 @@
 "free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik senin için sınırsız!";
 "instapick_under_construction" = "Daha iyi bir deneyim yaşaman için PhotoPick'i iyileştiriyoruz 😉";
 "instapick_unsupported_file_type" = "Seçmiş olduğun fotoğraflar desteklenmeyen bir formatta. Başka fotoğraflar seçerek PhotoPick deneyimini yaşamaya devam edebilirsin.";
-"work_will_introduced" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
+"work_will_introduced" = "Şu anda bir bakım çalışmamız var, lütfen daha sonra tekrar deneyin.";
 "facebook_remove_connection_warning_title" = "Facebook bağlantını kaldırmak üzeresin.";
 "dropbox_remove_connection_warning_title" = "Dropbox bağlantını kaldırmak üzeresin.";
 "facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin?\n\n";
@@ -864,7 +864,7 @@
 "you_are_connected" = "Bağlı";
 "insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";
 "phone_updated_needs_login" = "Başarılı biçimde telefon numaranızı güncellediniz, lütfen kullanıcı adınız ve şifren ile giriş yap";
-"server_under_maintenance" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
+"server_under_maintenance" = "Şu anda bir bakım çalışmamız var, lütfen daha sonra tekrar deneyin.";
 "unlimited_photopick_analysis" = "Sınırsız PhotoPick Hakkı!";
 "data_advantage_short" = "Ek data paketi";
 "additional_data_advantage" = "Ek data paketi";
@@ -1869,8 +1869,8 @@
 "business_app_tabbar_mydisk" = "Bana Özel";
 "business_app_tabbar_mysharings" = "Paylaşımlarım";
 "business_app_tabbar_sharedarea" = "Ortak Dizin";
-"tabbar_item_settings" = "";
-"private_share_max_number_of_item_limit_exceeded" = "";
+"tabbar_item_settings" = "Ayarlar";
+"private_share_max_number_of_item_limit_exceeded" = "Maksimum dosya paylaşım sınırı aşıldı.";
 "business_app_select_option" = "Seç";
 "business_app_download_option" = "İndir";
 "business_app_delete_option" = "Sil";
@@ -1939,8 +1939,8 @@
 "business_app_private_share_start" = "Paylaş";
 "business_app_private_share_success" = "Paylaşım başarılı";
 "business_app_private_share_shared_with_section_name" = "Paylaşılan kişiler";
-"business_app_private_share_fail_errorcode_4115" = "";
-"business_app_private_share_fail_errorcode_4116" = "";
+"business_app_private_share_fail_errorcode_4115" = "Your message is too long. Please shorten your message and try again";
+"business_app_private_share_fail_errorcode_4116" = "You have added so many users to the share";
 "business_app_private_share_fail_errorcode_4118" = "Maksimum dosya paylaşım sınırını aştınız.";
 "business_app_private_share_fail_errorcode_5101" = "Bir hata oluştu, lütfen daha sonra tekrar deneyiniz.";
 "business_app_private_share_fail_errorcode_5102" = "Bir hata oluştu, lütfen daha sonra tekrar deneyiniz.";
@@ -2008,7 +2008,7 @@
 "business_app_FL_error_not_logintologinSDK" = "Fast Login Doğrulama Hatası";
 "business_app_FL_else_error" = "FastLogin sisteminde geçici bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
 "business_app_faq_page_title" = "S.S.S";
-"Start Using" = "";
+"Start Using" = "Kullanmaya Başlayın";
 "business_app_privacy_policy_start" = "Kullanmaya Başlayın";
 "business_app_eula_checkbox" = "Kullanım Koşulları'nı okudum ve kabul ediyorum.";
 "business_app_agreement_page_title" = "Sözleşmeler";
@@ -2016,7 +2016,7 @@
 "business_app_agreement_privacy_policy" = "Aydınlatma Metni";
 "business_app_eula_privacy_policy_textbox" = "lifebox business aracılığıyla topladığımız kişisel verileriniz hakkında ayrıntılı bilgi almak için Aydınlatma Metni'mizi okuyabilirsiniz.";
 "business_app_privacy_policy_page_title" = "Aydınlatma Metni";
-"eula_title_new" = "";
+"eula_title_new" = "Kullanım Koşulları";
 "business_app_eula_page_title" = "Kullanım Koşulları";
 "business_app_settings_page_title" = "Ayarlar";
 "business_app_settings_storage_use_limited_header" = "Kota Kullanımı";
@@ -2048,7 +2048,7 @@
 "business_app_contact_us_subject_4" = "Yetki, Paylaşım";
 "business_app_contact_us_subject_5" = "Raporlama";
 "business_app_contact_us_email_body_unlimited" = "Limitsiz";
-"business_app_contact_us_email_body" = "E-posta: %@\nUygulama Versiyonu: %@\nCihaz Adı: %@\nCihaz OS: %@\nDil: %@\nŞebeke Durumu: %@\nToplam Kota: %@\nKullanılan Kota: %@\nKonu: %@";
+"business_app_contact_us_email_body" = "\nE-posta: %@\nUygulama Versiyonu: %@\nCihaz Adı: %@\nCihaz OS: %@\nDil: %@\nAğ Durumu: %@\nToplam Kota: %@\nKullanılan Kota: %@\nKonu: %@";
 
 /*empty pages or folders*/
 "business_app_my_disk_empty page" = "Henüz size özel dosya yüklemediniz.";
@@ -2098,4 +2098,8 @@
 "business_app_contact_us_subject_8" = "Öneriler (NT)";
 "business_app_access_page_role_owner" = "Paylaşan";
 "business_app_app_version_under_settings" = "Versiyon: %@";
-"business_app_icloud_upload_spinner_tag" = "";
+"business_app_icloud_upload_spinner_tag" = "iCloud öğeleri hazırlanıyor";
+"business_app_search_empty_page_title" = "";
+"business_app_search_empty_page_description" = "";
+"business_app_search_number_of_result" = "";
+"business_app_search_no_results" = "";
