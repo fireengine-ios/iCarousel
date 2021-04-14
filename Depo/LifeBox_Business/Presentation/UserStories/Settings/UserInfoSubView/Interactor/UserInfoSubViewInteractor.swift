@@ -18,7 +18,6 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
         let queue = DispatchQueue(label: DispatchQueueLabels.getUserInfo)
         
         group.enter()
-        group.enter()
         
         ///now we always ask for most recent info from backend
         SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] userInfo in
@@ -32,17 +31,18 @@ class UserInfoSubViewInteractor: UserInfoSubViewInteractorInput {
             group.leave()
         })
 
-        
-        AccountService().quotaInfo(success: { [weak self] response in
-            DispatchQueue.main.async {
-                self?.output.setQuotaInfo(quotoInfo: response as! QuotaInfoResponse)
-            }
-            group.leave()
-        }, fail: { [weak self] error in
-            self?.output.failedWith(error: error)
-            group.leave()
-        })
-        
+        //TODO: uncomment this when qouta API is ready
+//        group.enter()
+//        AccountService().quotaInfo(success: { [weak self] response in
+//            DispatchQueue.main.async {
+//                self?.output.setQuotaInfo(quotoInfo: response as! QuotaInfoResponse)
+//            }
+//            group.leave()
+//        }, fail: { [weak self] error in
+//            self?.output.failedWith(error: error)
+//            group.leave()
+//        })
+//
         group.notify(queue: queue) { [weak self] in
             self?.output.requestsFinished()
         }

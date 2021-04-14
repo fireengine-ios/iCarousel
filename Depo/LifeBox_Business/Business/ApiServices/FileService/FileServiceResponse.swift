@@ -6,21 +6,38 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+import Foundation
+
+struct TrashBinRequestResponse: Codable {
+    let parentFolderName: String
+    let parentFolderList: [ParentFolderRemoteList]
+    let fileList: [SharedFileInfo]
+}
+
+struct ParentFolderRemoteList: Codable {
+    let id: Int64?
+    let name: String?
+    let uuid: String?
+    let contentType: String?
+    let folder: Bool?
+}
+
+
 import SwiftyJSON
 
 final class FileListResponse: ObjectRequestResponse, Map {
-    
+
     var parentFolderName: String?
     var parentFolderList = [ParentFolderList]()
     var fileList = [WrapData]()
-    
+
     struct ParentFolderList {
         let id: Int64?
         let name: String?
         let uuid: String?
         let contentType: String?
         let folder: Bool?
-        
+
         init(json: JSON?) {
             id = json?[SearchJsonKey.id].int64
             name = json?[SearchJsonKey.name].string
@@ -29,14 +46,14 @@ final class FileListResponse: ObjectRequestResponse, Map {
             folder = json?[SearchJsonKey.folder].bool
         }
     }
-    
+
     override func mapping() {
         parentFolderName = json?["parentFolderName"].string
         let parentFolderListJson: [JSON]? = json?["parentFolderList"].array
         if let unwrapedParentFolderListJson = parentFolderListJson {
             parentFolderList = unwrapedParentFolderListJson.flatMap { ParentFolderList(json: $0) }
         }
-        
+
         guard let list = json?["fileList"].array else {
             return
         }
@@ -44,5 +61,4 @@ final class FileListResponse: ObjectRequestResponse, Map {
                                           parendfolderUUID: parentFolderList.first?.uuid) }
 //        CoreDataStack.shared.appendOnlyNewItems(items: fileList)
     }
-    
 }

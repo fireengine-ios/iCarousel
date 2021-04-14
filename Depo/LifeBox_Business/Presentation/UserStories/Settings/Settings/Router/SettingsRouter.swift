@@ -11,60 +11,42 @@ import UIKit
 class SettingsRouter: SettingsRouterInput {
     
     let router = RouterVC()
-    
-    func goToOnboarding() {
-        router.setNavigationController(controller: router.onboardingScreen)
-    }
-    
-    func goToPermissions() {
-        router.pushViewController(viewController: router.permissions)
+
+    func navigateToAgreements() {
+        guard let agreements = router.agreements else {
+            return
+        }
+        router.pushViewController(viewController: agreements)
     }
 
-    func goToHelpAndSupport() {
-        router.pushViewController(viewController: router.helpAndSupport)
-    }
-    
-    func goToTermsAndPolicy() {
-        router.pushViewController(viewController: router.termsAndPolicy!)
-    }
-    
-    func goToUserInfo(userInfo: AccountInfoResponse) {
-        router.pushViewController(viewController: router.userProfile(userInfo: userInfo))
-    }
-    
-    func goToActivityTimeline() {
-        router.pushViewController(viewController: router.vcActivityTimeline)
-    }
-    
-    func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool) {
-        let vc = router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)
-        if needReplaceOfCurrentController {
-            router.pushViewControllerAndRemoveCurrentOnCompletion(vc)
-        } else {
-            router.pushViewController(viewController: vc)
+    func navigateToProfile() {
+        guard let profile = router.profile else {
+            return
         }
+        router.pushViewController(viewController: profile)
     }
-    
-    func closeEnterPasscode() {
-        router.popViewController()
+
+    func navigateToFAQ() {
+        router.pushViewController(viewController: router.faq)
     }
-    
-    func openPasscode(handler: @escaping VoidHandler) {
-        let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
-        vc.success = {
-            handler()
-        }
-        
+
+    func navigateToContactUs() {
+        let controller = ContactUsViewController.initFromNib()
+        router.pushViewController(viewController: controller)
+    }
+
+    func navigateToTrashBin() {
+        let vc = router.trashBin
         router.pushViewController(viewController: vc)
     }
     
+    func goToLoginScreen() {
+        let navC = UINavigationController(rootViewController: router.loginScreen!)
+        router.setNavigationController(controller: navC)
+    }
+
     func goToConnectedToNetworkFailed() {
         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
-    }
-    
-    func goTurkcellSecurity(isTurkcell: Bool) {
-        let viewController = router.turkcellSecurity(isTurkcell: isTurkcell)
-        router.pushViewController(viewController: viewController)
     }
     
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?) {
@@ -82,5 +64,4 @@ class SettingsRouter: SettingsRouterInput {
     func presentAlertSheet(alertController: UIAlertController) {
         router.presentViewController(controller: alertController)
     }
-    
 }

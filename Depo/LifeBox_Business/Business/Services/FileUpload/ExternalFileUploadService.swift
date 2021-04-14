@@ -33,23 +33,41 @@ enum ExternalFileType {
 
 final class ExternalFileUploadService: NSObject {
     
-    private let uploadService = UploadService.default
+    private let uploadService = UploadService.shared
     private var isFavorites = false
     private var folderUUID = ""
-    private var projectId: String?
+    private var accountUuid = SingletonStorage.shared.accountInfo?.uuid
     private var isFromAlbum = false
+    private var uploadType: UploadType = .regular
+    private var router: RouterVC?
     
     
-    func showViewController(router: RouterVC, externalFileType: ExternalFileType) {
+    func showViewController(type: UploadType, router: RouterVC, externalFileType: ExternalFileType) {
+        uploadType = type
+        self.router = router
         
-        isFavorites = router.isOnFavoritesView()
-        
-        if let sharedFolderInfo = router.sharedFolderItem {
-            folderUUID = sharedFolderInfo.uuid
-            projectId = sharedFolderInfo.projectId
-        } else {
-            folderUUID = router.getParentUUID()
-            projectId = nil
+        switch type {
+            case .regular:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    folderUUID = sharedFolderInfo.uuid
+                }
+                accountUuid = SingletonStorage.shared.accountInfo?.uuid
+                
+            case .sharedWithMe:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    accountUuid = sharedFolderInfo.accountUuid
+                    folderUUID = sharedFolderInfo.uuid
+                }
+                
+            case .sharedArea:
+                if let sharedFolderInfo = router.sharedFolderItem {
+                    folderUUID = sharedFolderInfo.uuid
+                }
+                accountUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid
+                
+            default:
+                assertionFailure()
+                break
         }
         
         let utTypes = externalFileType.allowedUTITypes
@@ -77,29 +95,29 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
     }
     
     private func upload(items: [WrapData]) {
-        guard !items.isEmpty else {
+        guard !items.isEmpty, let router = router else {
             return
         }
         
-        let uploadType: UploadType
-        if projectId != nil {
-            uploadType = projectId == SingletonStorage.shared.accountInfo?.projectID ? .upload : .sharedWithMe
-        } else {
-            uploadType = .upload
+        
+        let controller = router.uploadSelectionList(with: items) { [weak self] selectedItems in
+            guard let self = self else {
+                return
+            }
+            self.uploadService.uploadFileList(items: selectedItems,
+                                         uploadType: self.uploadType,
+                                         uploadStategy: .WithoutConflictControl,
+                                         uploadTo: .ROOT,
+                                         folder: self.folderUUID,
+                                         isFavorites: self.isFavorites,
+                                         isFromAlbum: self.isFromAlbum,
+                                         isFromCamera: false,
+                                         projectId: self.accountUuid,
+                                         success: {},
+                                         fail: { _ in },
+                                         returnedUploadOperation: { _ in})
         }
         
-        
-        uploadService.uploadFileList(items: items,
-                                     uploadType: uploadType,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     folder: folderUUID,
-                                     isFavorites: isFavorites,
-                                     isFromAlbum: isFromAlbum,
-                                     isFromCamera: false,
-                                     projectId: projectId,
-                                     success: {},
-                                     fail: { _ in },
-                                     returnedUploadOperation: { _ in})
+        router.presentViewController(controller: controller)
     }
 }

@@ -69,12 +69,12 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         editingTabBar?.view.layoutIfNeeded()
         
         output.viewIsReady(view: bottomView, alert: alert)
-        hidenNavigationBarStyle()
+        setNavigationBarStyle(.hidden)
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     private func setupCarousel() {
         carouselView.type = .custom
@@ -88,13 +88,6 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
-        
-        let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"),
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(actionMoreButton(_:)))
-        moreButton.tintColor = UIColor.white
-        navigationItem.rightBarButtonItem = moreButton
     }
     
     private func updateShuffleButton() {

@@ -8,6 +8,9 @@
 
 struct EditingBarConfig {
     let elementsConfig: [ElementTypes]
-    let style: UIBarStyle
-    let tintColor: UIColor?
+    let style: BottomActionsBarStyle
+}
+
+extension EditingBarConfig {
+    static let emptyConfig = EditingBarConfig(elementsConfig: [], style: .opaque)
 }

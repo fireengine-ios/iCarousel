@@ -10,10 +10,6 @@ import Foundation
 
 final class PrivateShareSharedFilesBottomBarManager {
     
-    private let barConfig = EditingBarConfig(
-        elementsConfig:  [.share, .move, .moveToTrash],
-        style: .blackOpaque, tintColor: nil)
-    
     private var editingTabBar: BottomSelectionTabBarViewController?
     private let bottomBarPresenter = BottomSelectionTabBarPresenter()
     
@@ -26,7 +22,7 @@ final class PrivateShareSharedFilesBottomBarManager {
     func setup() {
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         bottomBarPresenter.basePassingPresenter = delegate
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: barConfig, settablePresenter: bottomBarPresenter)
+        let botvarBarVC = bottomBarVCmodule.setupModule(config: EditingBarConfig.emptyConfig, settablePresenter: bottomBarPresenter)
         self.editingTabBar = botvarBarVC
     }
     
@@ -36,12 +32,12 @@ final class PrivateShareSharedFilesBottomBarManager {
         }
     }
     
-    func update(for items: [WrapData]) {
-        bottomBarPresenter.setupTabBarWith(items: items, originalConfig: barConfig)
+    func update(for items: [WrapData], shareType: PrivateShareType) {
+        bottomBarPresenter.setupTabBarWith(items: items, shareType: shareType)
     }
     
-    func show() {
-        bottomBarPresenter.show(animated: true, onView: nil)
+    func show(on view: UIView) {
+        bottomBarPresenter.show(animated: true, onView: view)
     }
     
     func hide() {

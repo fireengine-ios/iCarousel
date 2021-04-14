@@ -44,6 +44,10 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     var phoneNumber: String {
         return dataStorage.signUpUserInfo.phone
     }
+
+    var mainTitle: String {
+        return ""
+    }
     
     var textDescription: String {
         return TextConstants.enterCodeToGetCodeOnPhone
@@ -171,7 +175,6 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     }
     
     private func onSuccessLogin() {
-        tokenStorage.isRememberMe = true
         analyticsService.track(event: .login)
         analyticsService.trackLoginEvent(loginType: .gsm)
         AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: true)

@@ -1833,3 +1833,4 @@
 "private_share_long_message" = "";
 "private_share_long_emailmsisdn" = "يتعدى البريد الإلكتروني أو رقم GSM  حد الحروف .";
 "private_share_start_max_number_of_users" = "يمكن القيام بمشاركة معd% شخص كحد أقصى.";
+"private_share_max_number_of_item_limit_exceeded" = "قد تم تجاوز الحد الأقصى لمشاركة الملفات";

@@ -11,16 +11,18 @@ import WidgetKit
 final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     
     private var otpParams: TwoFAChallengeParametersResponse
-    private let challenge: TwoFAChallengeModel
+    let challenge: TwoFAChallengeModel
     private lazy var authService = AuthenticationService()
     private var accountWarningService: AccountWarningService?
     private lazy var eulaService = EulaService()
     
     private var isFirstAppear = true
+    private let rememberMe: Bool
     
-    init(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
+    init(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel, rememberMe: Bool) {
         self.otpParams = otpParams
         self.challenge = challenge
+        self.rememberMe = rememberMe
     }
     
     override var expectedInputLength: Int? {
@@ -37,6 +39,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     
     override var phoneNumber: String {
         return challenge.userData
+    }
+
+    override var mainTitle: String {
+        guard let status = otpParams.status else {
+            return super.mainTitle
+        }
+
+        return challenge.challengeType.getMainTitle(for: status)
     }
     
     override var textDescription: String {
@@ -92,7 +102,8 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     override func verifyCode(code: String) {
         authenticationService.loginViaTwoFactorAuth(token: challenge.token,
                                                     challengeType: challenge.challengeType.rawValue,
-                                                    otpCode: code) { [weak self] response in
+                                                    otpCode: code,
+                                                    rememberMe: rememberMe) { [weak self] response in
             DispatchQueue.main.async {
                 switch response {
                 case .success(let result):
@@ -166,14 +177,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             }
             AccountService().updateBrandType()
             
-            if accountReadOnly {
-                SingletonStorage.shared.getOverQuotaStatus {
-                    self.output.verificationSucces()
-                }
-                
-            } else {
-                self.output.verificationSucces()
-            }
+            self.output.verificationSucces()
             
             debugLog("TWO FACTOR: verification verified")
 

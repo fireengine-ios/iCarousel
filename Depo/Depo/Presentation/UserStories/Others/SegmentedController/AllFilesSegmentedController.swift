@@ -24,6 +24,13 @@ final class AllFilesSegmentedController: SegmentedController {
     
     private func openSharedFiles() {
         let router = RouterVC()
-        router.pushViewController(viewController: router.sharedFiles)
+        let sharedFiles = router.sharedFiles
+        
+        if let segmentedController = sharedFiles as? SegmentedController,
+           let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PrivateShareSharedFilesViewController)?.shareType == .byMe }) {
+            segmentedController.startIndex = index
+        }
+        
+        router.pushViewController(viewController: sharedFiles)
     }
 }

@@ -46,6 +46,19 @@ extension UIApplication {
         }
     }
     
+    static func showQuotaAlert() {
+        let controller = topController()
+        if controller is PopUpController {
+            return
+        }
+        let vc = PopUpController.with(title: TextConstants.quotaFullUploadPopUpTitle, message: TextConstants.quotaFullUploadPopUpDescription, image: .quota, buttonTitle: TextConstants.quotaFullUploadPopUpButton, dismissAction: {
+            RouterVC().openTab(.myDisk)
+        })
+        DispatchQueue.toMain {
+            controller?.present(vc, animated: false, completion: nil)
+        }
+    }
+    
     static func showSuccessAlert(message: String) {
         let vc = PopUpController.with(title: TextConstants.success, message: message, image: .success, buttonTitle: TextConstants.ok)
         DispatchQueue.toMain {

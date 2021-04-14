@@ -43,15 +43,16 @@ final class Mail: NSObject, MFMailComposeViewControllerDelegate {
             failHandler?(nil) // TODO: custom error
             return
         }
-        mailController = MFMailComposeViewController()
-        mailController!.mailComposeDelegate = self
-        mailController!.setToRecipients(emails)
-        mailController!.setSubject(subject)
-        mailController!.setMessageBody(emailBody, isHTML: false)
         
+        let composeMailController = MFMailComposeViewController()
+        composeMailController.mailComposeDelegate = self
+        composeMailController.setToRecipients(emails)
+        composeMailController.setSubject(subject)
+        composeMailController.setMessageBody(emailBody, isHTML: false)
+        
+        mailController = composeMailController
 
         let logPath: String = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName).path
-        let widgetLogUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: SharedConstants.groupIdentifier)?.appendingPathComponent("home_widget.log")
         
         if FileManager.default.fileExists(atPath: logPath) {
             if let logData = NSData(contentsOfFile: logPath) {
@@ -59,23 +60,17 @@ final class Mail: NSObject, MFMailComposeViewControllerDelegate {
             }
         }
         
-        if let widgetLogPath = widgetLogUrl?.path, FileManager.default.fileExists(atPath: widgetLogPath) {
-            if let logData = NSData(contentsOfFile: widgetLogPath) {
-                mailController?.addAttachmentData(Data(referencing: logData), mimeType: "text/plain", fileName: "widget_logs.txt")
-            }
-        }
-        
-        let controller = RouterVC().rootViewController
-        guard let contr_ = controller else {
+        guard let controller = RouterVC().topNavigationController, let mailController = mailController else {
             return
         }
-        contr_.present(mailController!, animated: true, completion: presentCompletion)
+        
+        controller.present(mailController, animated: true, completion: nil)
     }
     
     // MARK: MFMailComposeViewControllerDelegate
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        mailController!.dismiss(animated: true) { [weak self] in
+        mailController?.dismiss(animated: true) { [weak self] in
             guard error == nil, !result.isContained(in: [.failed]) else {
                 self?.failHandler?(error)
                 return

@@ -25,46 +25,35 @@ final class NetmeraService {
         if loginStatus {
             
             let group = DispatchGroup()
-            
-            var lifeboxStorage: Int = 0
+
             group.enter()
-            prepareLifeBoxUsage { usage in
-                lifeboxStorage = usage
-                group.leave()
-            }
-            
-            group.enter()
-            var autoLogin = ""
-            var turkcellPassword = ""
-            prepareTurkcellLoginScurityFields { preparedAutoLogin, preparedTurkcellPassword in
-                autoLogin = preparedAutoLogin
-                turkcellPassword = preparedTurkcellPassword
-                group.leave()
-            }
-            
-            group.enter()
-            var countryCode: String = "Null"
-            var regionCode: String = "Null"
+            let lifeboxStorage: Int = 0
+            let autoLogin = "Null"
+            let turkcellPassword = "Null"
+            let countryCode: String = "Null"
+            let regionCode: String = "Null"
             var userName: Int = 0
             var userSurname: Int = 0
             var email: Int = 0
-            var phoneNumber: Int = 0
-            var address: Int = 0
-            var birthday: Int = 0
+            let phoneNumber: Int = 0
+            let address: Int = 0
+            let birthday: Int = 0
+            var externalId = ""
             prepareAccountInfo(preparedAccountInfo: { info in
                 guard let accountInfo = info else {
                     group.leave()
                     return
                 }
                 
-                regionCode = accountInfo.msisdnRegion ?? "Null"
-                countryCode = accountInfo.countryCode ?? "Null"
-                userName = (accountInfo.username ?? "").isEmpty ? 0 : 1
+//                regionCode = accountInfo.msisdnRegion ?? "Null"
+//                countryCode = accountInfo.countryCode ?? "Null"
+                userName = (accountInfo.name ?? "").isEmpty ? 0 : 1
                 userSurname = (accountInfo.surname ?? "").isEmpty ? 0 : 1
                 email = (accountInfo.email ?? "").isEmpty ? 0 : 1
-                phoneNumber = (accountInfo.phoneNumber ?? "").isEmpty ? 0 : 1
-                address = (accountInfo.address ?? "").isEmpty ? 0 : 1
-                birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
+//                phoneNumber = (accountInfo.phoneNumber ?? "").isEmpty ? 0 : 1
+//                address = (accountInfo.address ?? "").isEmpty ? 0 : 1
+//                birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
+                externalId = accountInfo.externalId ?? ""
                 group.leave()
             })
             
@@ -96,7 +85,7 @@ final class NetmeraService {
                                              isBirthDay: birthday,
                                              galleryAccessPermission: galleryAccessPermission)
                 
-                user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+                user.userId = externalId
                 DispatchQueue.toMain {
                     Netmera.update(user)
                 }
@@ -132,29 +121,19 @@ final class NetmeraService {
     }
     
     private static func getApiKey() -> String {
-        #if LIFEBOX
+        //Sinnce its business only, no need for "def LIFEBOX" flag here
         switch RouteRequests.currentServerEnvironment {
         case .production:
-            return "3PJRHrXDiqakWjtB7quX9jhybzZjSWI4tfk7QNeg9wF6ZWP9p5QxPQ"
+            return "3PJRHrXDiqYtcLEQL75khlt-cZcy-Hmi68v5aHvOY13RrL4993gmXFx3xyEY3IEA"
         case .preProduction, .test:
-            return "3PJRHrXDiqa-pwWScAq1P-7ZjPWA5mWdKHyMpdBrYMFMU4XzrPkaoQ"
+            return "3PJRHrXDiqYtcLEQL75khhE-sJMri_nBxpaFKNoTZt76h75AzELaerJ1y92ip8oN"
         }
-        #endif
-        
-        #if LIFEDRIVE
-        switch RouteRequests.currentServerEnvironment {
-        case .production:
-            return "LINA4LCdpz6st8QajRsXvZ3eUwV5ENwJTbzrhSufrxjRWv-pvzwmZw"
-        case .preProduction, .test:
-            return "6l30TJ05YenQKefUTBw81SZPwBa404aJoAhPAsmZEdyxLJVO90Q8Rw"
-        }
-        #endif
-        
-        return ""
     }
     
     static func sendEvent(event: NetmeraEvent) {
-        Netmera.send(event)
+        DispatchQueue.main.async {
+            Netmera.send(event)
+        }
     }
     
     typealias TypeToCountDictionary = [FileType: Int]
@@ -174,44 +153,20 @@ extension NetmeraService {
                                      twoFactorAuthentication: "Null", emailVerification: "Null",
                                      autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", regionCode: "Null", isUserName: 0,
                                      isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0, galleryAccessPermission: "Null")
-        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+        user.userId = SingletonStorage.shared.accountInfo?.externalId ?? ""
         DispatchQueue.toMain {
             Netmera.update(user)
         }
     }
     
-    private static func prepareLifeBoxUsage(preparedUserField: @escaping NetmeraIntFieldCallback) {
-        SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
-            preparedUserField(percentage ?? 0)
-        }
-    }
-    
     private static func prepareAccountInfo(preparedAccountInfo: @escaping NetmeraAccountInfoCallback) {
-        AccountService().info(
-            success: { response in
-                guard let info = response as? AccountInfoResponse else {
+        AccountService().info { response in
+            switch response {
+                case .success(let accountInfo):
+                    preparedAccountInfo(accountInfo)
+                case .failed(_):
                     preparedAccountInfo(nil)
-                    return
-                }
-                preparedAccountInfo(info)
-        }, fail: { errorResponse in
-            preparedAccountInfo(nil)
-        })
-    }
-    
-    private static func prepareTurkcellLoginScurityFields(preparedUserField: @escaping (_ autoLogin: String, _ turkcellPassword: String)->Void) {
-        AccountService().securitySettingsInfo(success: { response in
-            guard let unwrapedSecurityResponse = response as? SecuritySettingsInfoResponse,
-                let turkCellPasswordOn = unwrapedSecurityResponse.turkcellPasswordAuthEnabled,
-                let turkCellAutoLogin = unwrapedSecurityResponse.mobileNetworkAuthEnabled else {
-                    return
             }
-            
-            let acceptableAutoLogin = turkCellAutoLogin ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
-            let acceptableTurkcellPassword = turkCellPasswordOn ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
-            preparedUserField(acceptableAutoLogin, acceptableTurkcellPassword)
-        }) { error in
-            preparedUserField("Null", "Null")
         }
     }
     
@@ -232,11 +187,11 @@ extension NetmeraService {
     }
     
     private static func getVerifiedEmailStatus() -> String {
-        if let isMailVerified = SingletonStorage.shared.accountInfo?.emailVerified  {
-            return isMailVerified ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
-        } else {
+//        if let isMailVerified = SingletonStorage.shared.accountInfo?.emailVerified  {
+//            return isMailVerified ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
+//        } else {
             return "Null"
-        }
+//        }
     }
     
     private static func getBuildNumber() -> String {

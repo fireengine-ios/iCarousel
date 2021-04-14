@@ -75,13 +75,12 @@ final class OptInController: ViewController, NibInit {
         setupNavBar()
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     func setupTimer(withRemainingTime remainingTime: Int) {
-        timerLabel.setupTimer(withTimeInterval: 1.0,
-                              timerLimit: remainingTime)
+        timerLabel.setupTimer(timerLimit: remainingTime)
         timerLabel.delegate = self
     }
     
@@ -157,8 +156,8 @@ final class OptInController: ViewController, NibInit {
     
     // MARK: - Utility methods
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
-        backButtonForNavigationItem(title: TextConstants.backTitle)
+        setNavigationBarStyle(.byDefault)
+        setBackButtonForNavigationItem(style: .byDefault, title: TextConstants.backTitle, target: nil, action: nil)
     }
     
     private func setupInitialState() {
@@ -170,8 +169,10 @@ final class OptInController: ViewController, NibInit {
         
         setupPhoneLable(with: phone)
         
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .byDefault)
+        
         if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.enterSecurityCode)
+            setNavigationTitle(title: TextConstants.enterSecurityCode, style: .byDefault)
         }
         navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         
@@ -257,6 +258,8 @@ extension OptInController: SmartTimerLabelDelegate {
 
         timerLabel.isShowMessageWithDropTimer = true
     }
+
+    func timerDidTick(currentCycle: Int, ofTotalDuration: Int, label: SmartTimerLabel) { }
 }
 
 // MARK: - UITextFieldDelegate

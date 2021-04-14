@@ -8,7 +8,7 @@
 
 import Photos
 
-//TODO: uncomment for xcode 12
+
 extension PHPhotoLibrary {
     
     static func isAccessibleAuthorizationStatus() -> Bool {

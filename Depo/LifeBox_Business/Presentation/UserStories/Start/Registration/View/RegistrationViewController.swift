@@ -140,6 +140,7 @@ final class RegistrationViewController: ViewController {
         super.viewDidLoad()
         
         setup()
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .byDefault)
         
         output.viewIsReady()
     }
@@ -164,9 +165,9 @@ final class RegistrationViewController: ViewController {
 
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     //MARK: Utility Methods (private)
     private func setup() {
@@ -175,10 +176,10 @@ final class RegistrationViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
-        backButtonForNavigationItem(title: TextConstants.backTitle)
-        setNavigationTitle(title: TextConstants.registerTitle)
-        setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
+        setNavigationBarStyle(.byDefault)
+        setBackButtonForNavigationItem(style: .byDefault, title: TextConstants.backTitle, target: nil, action: nil)
+        setNavigationTitle(title: TextConstants.registerTitle, style: .byDefault)
+        setNavigationRightBarButton(style: .byDefault, title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     
     private func setupStackView() {

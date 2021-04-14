@@ -16,10 +16,10 @@ struct SharedConstants {
     static let groupIdentifier = "group.com.turkcell.lifebox.business"
     
     #elseif ENTERPRISE
-    static let groupIdentifier = "group.com.turkcell.akillideponew.ent"
+    static let groupIdentifier = "group.com.turkcell.lifebox.business.ent"
     
     #elseif DEBUG
-    static let groupIdentifier = "group.come.life.Lifebox"
+    static let groupIdentifier = "group.by.com.life.LifeboxBusiness.group"
     
     #else
     static let groupIdentifier = "group.com.turkcell.lifebox.business"
@@ -45,7 +45,7 @@ struct SharedConstants {
     static let wormholeOffTurkcellPassword = "wormholeOffTurkcellPassword"
     
     static let mainAppSchemeResponsivenessDateKey = "mainAppSchemeResponsivenessDateKey"
-    static let applicationQueriesSchemeShort = "akillidepo"
+    static let applicationQueriesSchemeShort = "lifeboxbusiness"
     static let applicationQueriesScheme = applicationQueriesSchemeShort + "://"
     
     static let sharedGroupDBContainerName = "SharedGroupDBContainer"

@@ -10,8 +10,6 @@ protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     
     var status: ItemStatus { get set }
     
-    var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol? { get }
-    
     func setupInitialState()
     
     func onShowSelectedItem(at index: Int, from items: [Item])
@@ -31,16 +29,6 @@ protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     func show(name: String)
     
     func showValidateNameSuccess(name: String)
-    
-    func closeDetailViewIfNeeded()
-    
-    func showBottomDetailView()
-    
-    func updateBottomDetailView()
-    
-    func deleteShareInfo()
-    
-    func updateExpiredItem(_ item: WrapData)
     
     func updateItem(_ item: WrapData)
 }

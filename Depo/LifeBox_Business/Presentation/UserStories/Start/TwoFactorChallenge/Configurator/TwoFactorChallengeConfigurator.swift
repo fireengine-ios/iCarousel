@@ -12,7 +12,8 @@ final class TwoFactorChallengeConfigurator {
     
     func configure(viewController: PhoneVerificationViewController,
                    otpParams: TwoFAChallengeParametersResponse,
-                   challenge: TwoFAChallengeModel) {
+                   challenge: TwoFAChallengeModel,
+                   rememberMe: Bool) {
         
         let router = TwoFactorChallengeRouter()
         let presenter = TwoFactorChallengePresenter()
@@ -20,7 +21,7 @@ final class TwoFactorChallengeConfigurator {
         presenter.view = viewController
         presenter.router = router
         
-        let interactor = TwoFactorChallengeInteractor(otpParams: otpParams, challenge: challenge)
+        let interactor = TwoFactorChallengeInteractor(otpParams: otpParams, challenge: challenge, rememberMe: rememberMe)
         interactor.output = presenter
         
         presenter.interactor = interactor

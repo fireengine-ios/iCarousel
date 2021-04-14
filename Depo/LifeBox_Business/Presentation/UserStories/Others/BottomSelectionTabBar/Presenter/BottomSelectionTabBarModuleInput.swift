@@ -7,15 +7,8 @@
 //
 
 protocol BottomSelectionTabBarModuleInput: BaseItemOuputPassingProtocol {
-
-//    func showAlertSheet(withTypes types: [ElementTypes], presentedBy sender: Any?, onSourceView sourceView: UIView?)
-//
-//    func showAlertSheet(withItems items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?)
-//
-//    func showSpecifiedAlertSheet(withItem item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?)
     
     func setupTabBarWith(config: EditingBarConfig)
     
-    func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig)//  Disable/Enable tabs
-    
+    func setupTabBarWith(items: [BaseDataSourceItem], shareType: PrivateShareType?)//  Disable/Enable tabs
 }

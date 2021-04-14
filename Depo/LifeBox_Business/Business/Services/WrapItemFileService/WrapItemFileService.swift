@@ -39,7 +39,7 @@ class WrapItemFileService: WrapItemFileOperations {
     
     let remoteFileService = FileService.shared
     let sharedFileService = SharedService()
-    let uploadService = UploadService.default
+    let uploadService = UploadService.shared
     private let hiddenService = HiddenService()
     private lazy var privateShareApiService = PrivateShareApiServiceImpl()
     
@@ -82,14 +82,15 @@ class WrapItemFileService: WrapItemFileOperations {
             fail?(value)
         }
         
-        let removeItems = remoteItemsUUID(files: files)
+        let removeItems = files
+            .filter { !$0.isLocalItem}
+        
         if removeItems.isEmpty {
             successOperation()
             return
         }
         
-        let files = MoveToTrashFiles(items: removeItems)
-        remoteFileService.moveToTrash(files: files, success: successOperation, fail: failOperation)
+        moveToTrashShared(files: removeItems, success: successOperation, fail: failOperation)
     }
     
     func deleteLocalFiles(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
@@ -109,12 +110,7 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func endSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let projectId = file.projectId else {
-            fail?(ErrorResponse.string("don't have projectId"))
-            return
-        }
-        
-        privateShareApiService.endShare(projectId: projectId, uuid: file.uuid) { response in
+        privateShareApiService.endShare(projectId: file.accountUuid, uuid: file.uuid) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -126,12 +122,12 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func leaveSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let projectId = file.projectId, let subjectId = SingletonStorage.shared.accountInfo?.projectID else {
+        guard let subjectId = SingletonStorage.shared.accountInfo?.uuid else {
             fail?(ErrorResponse.string("don't have projectId or subjectId"))
             return
         }
         
-        privateShareApiService.leaveShare(projectId: projectId, uuid: file.uuid, subjectId: subjectId) { response in
+        privateShareApiService.leaveShare(projectId: file.accountUuid, uuid: file.uuid, subjectId: subjectId) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -142,13 +138,9 @@ class WrapItemFileService: WrapItemFileOperations {
         }
     }
     
-    func moveToTrashShared(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        guard let projectId = file.projectId else {
-            fail?(ErrorResponse.string("don't have projectId"))
-            return
-        }
-        
-        privateShareApiService.moveToTrash(projectId: projectId, uuid: file.uuid) { response in
+    func moveToTrashShared(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let filesToRemove = files.compactMap { ($0.accountUuid, $0.uuid) }
+        privateShareApiService.moveToTrash(files: filesToRemove) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -176,59 +168,22 @@ class WrapItemFileService: WrapItemFileOperations {
     func upload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         let localFiles = localWrapedData(files: items)
         
-        uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .upload,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: success,
-                                     fail: fail, returnedUploadOperation: { _ in})
-    }
-
-    func cancellableUpload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperations: @escaping ([UploadOperation]?) -> Void) {
-        let localFiles = localWrapedData(files: items)
-        
-        uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .upload,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: success,
-                                     fail: fail,
-                                     returnedUploadOperation: returnedUploadOperations)
-    }
-    
-    func syncItemsIfNeeded(_ items: [WrapData], success: @escaping FileOperationSucces, fail: @escaping FailResponse, syncOperations: @escaping ([UploadOperation]?) -> Void) {
-        let localFiles = localWrapedData(files: items)
-        guard localFiles.count > 0 else {
-            success()
-            return
+        let router = RouterVC()
+        let controller = router.uploadSelectionList(with: localFiles) { [weak self] selectedItems in
+            self?.uploadService.uploadFileList(items: selectedItems,
+                                         uploadType: .regular,
+                                         uploadStategy: .WithoutConflictControl,
+                                         uploadTo: .ROOT,
+                                         success: success,
+                                         fail: fail, returnedUploadOperation: { _ in})
         }
-        
-        
-        uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .syncToUse,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: {
-                                        debugLog("SyncToUse - Waiting for item details")
-                                        WrapItemFileService.waitItemsDetails(for: items,
-                                                                             maxAttempts: NumericConstants.maxDetailsLoadingAttempts,
-                                                                             success: success,
-                                                                             fail: fail)
-        },
-                                     fail: { error in
-                                        if error.description == TextConstants.canceledOperationTextError {
-                                            return
-                                        }
-                                        fail(error)
-        }, returnedUploadOperation: { operations in
-            syncOperations(operations)
-        })
+        router.presentViewController(controller: controller)
     }
     
     func downloadDocuments(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
+        let itemsWithoutUrl = items.filter { $0.urlToFile == nil || !$0.isOwner }
         
         createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
             self?.remoteFileService.downloadDocument(items: downloadItems, success: success, fail: fail)
@@ -238,7 +193,7 @@ class WrapItemFileService: WrapItemFileOperations {
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
+        let itemsWithoutUrl = items.filter { $0.urlToFile == nil || !$0.isOwner }
         
         createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
             self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
@@ -251,14 +206,9 @@ class WrapItemFileService: WrapItemFileOperations {
         items.forEach { item in
             group.enter()
             
-            guard let projectId = item.projectId else {
-                group.leave()
-                return
-            }
-            
-            privateShareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { response in
+            privateShareApiService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { response in
                 if case let ResponseResult.success(urlToDownload) = response {
-                    item.tmpDownloadUrl = urlToDownload.url
+                    item.urlToFile = urlToDownload.url
                 }
                 group.leave()
             }
@@ -365,7 +315,7 @@ class WrapItemFileService: WrapItemFileOperations {
     
     private func uuidsOfItemsThatHaveRemoteURL(files: [WrapData]) -> [String] {
         return files
-            .filter { $0.tmpDownloadUrl != nil }
+            .filter { $0.urlToFile != nil }
             .compactMap { $0.uuid }
     }
     
@@ -375,11 +325,11 @@ class WrapItemFileService: WrapItemFileOperations {
             for item in updatedItems {
                 if let itemToUpdate = items.filter({ $0.uuid == item.uuid }).first {
                     itemToUpdate.metaData = item.metaData
-                    itemToUpdate.tmpDownloadUrl = item.tmpDownloadUrl
+                    itemToUpdate.urlToFile = item.urlToFile
                     itemToUpdate.status = item.status
                 }
             }
-            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status.isTranscoded })
+            let isCompleted = items.contains(where: { $0.urlToFile != nil || $0.status.isTranscoded })
             /// old logic, now we consider its ok, neither if its active or tempo url online
             //!items.contains(where: { $0.status != .active})
             if isCompleted {
@@ -404,8 +354,30 @@ class WrapItemFileService: WrapItemFileOperations {
 extension WrapItemFileService {
     
     //MARK: - Delete Items
-    
+
     func delete(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.deleteItems(items: items)
+            success?()
+        }
+
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+
+        hiddenService.delete(items: remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deletePermanently(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
             ItemOperationManager.default.deleteItems(items: items)
             success?()
@@ -417,7 +389,7 @@ extension WrapItemFileService {
             return
         }
         
-        hiddenService.delete(items: remoteItems) { response in
+        hiddenService.deletePermanently(items: remoteItems) { response in
             switch response {
             case .success(()):
                 wrappedSuccessOperation()

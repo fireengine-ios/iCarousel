@@ -7,74 +7,61 @@
 //
 
 enum TabScreenIndex: Int {
-    case documents = 0
+    case myDisk = 0
     case sharedFiles = 1
-    case sharedArea = 3
-    case setting = 4
+    case sharedArea = 2
 }
 
 enum TabBarItem: CaseIterable {
-    case allFiles
+    case myDisk
     case sharedFiles
-    case plus
     case sharedArea
-    case settings
     
     var title: String {
         switch self {
-        case .allFiles:
+        case .myDisk:
             return TextConstants.tabBarItemMyDisk
         case .sharedFiles:
             return TextConstants.tabBarItemSharedFiles
-        case .plus:
-            return ""
         case .sharedArea:
             return TextConstants.tabBarItemSharedArea
-        case .settings:
-            return TextConstants.tabBarItemSettings
         }
     }
     
     var icon: UIImage? {
         switch self {
-        case .allFiles:
-            return UIImage(named: "outlineDocs")
+        case .myDisk:
+            return UIImage(named: "disks")
         case .sharedFiles:
-            return UIImage(named: "segment_shared")
-        case .plus:
-            return UIImage(named: "")
+            return UIImage(named: "share")
         case .sharedArea:
-            return UIImage(named: "segment_shared")
-        case .settings:
-            return UIImage(named: "cog")
+            return UIImage(named: "publicSpace")
+        }
+    }
+    
+    var iconSelected: UIImage? {
+        switch self {
+        case .myDisk:
+            return UIImage(named: "disks-selected")
+        case .sharedFiles:
+            return UIImage(named: "share-selected")
+        case .sharedArea:
+            return UIImage(named: "publicSpace-selected")
         }
     }
     
     var accessibilityLabel: String {
-        switch self {
-        case .allFiles:
-            return TextConstants.homeButtonAllFiles
-        default:
-            return ""
-        }
+        return title
     }
 }
 
 final class TabBarConfigurator {
     
     static func generateControllers(router: RouterVC) -> [UINavigationController] {
-        var settings = router.settings
-        (settings as? BaseViewController)?.needToShowTabBar = true
-        (settings as? BaseViewController)?.isTabBarItem = true
-        if Device.isIpad {
-            settings = router.settingsIpad(settingsController: settings)
-        }
-        
-        let list = [router.segmentedFiles,
+        let list = [router.myDisk,
                     router.sharedFiles,
-                    router.sharedAreaController,
-                    settings]
+                    router.sharedAreaController]
         list.forEach { ($0 as? BaseViewController)?.isTabBarItem = true }
-        return list.compactMap { NavigationController(rootViewController: $0!) }
+        return list.compactMap { NavigationController(rootViewController: $0) }
     }
 }

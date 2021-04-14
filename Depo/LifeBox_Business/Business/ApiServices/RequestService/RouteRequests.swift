@@ -25,15 +25,14 @@ struct RouteRequests {
     }
     
     // MARK: Environment
-    
+
     static var currentServerEnvironment = ServerEnvironment.production
-    private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
         switch currentServerEnvironment {
         case .test: return "https://tcloudstb.turkcell.com.tr/"
         case .preProduction: return "https://adepotest.turkcell.com.tr/"
-        case .production: return "https://adepo.turkcell.com.tr/"
+        case .production: return "https://lifebox.biz/"
         }
     }()
     
@@ -47,15 +46,7 @@ struct RouteRequests {
     }()
     
     static let baseUrl = URL(string: "\(baseShortUrlString)api/")!
-    
-    static let unsecuredAuthenticationUrl: String = {
-        switch currentServerEnvironment {
-        case .test: return "http://tcloudstb.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-        case .preProduction: return "http://adepotest.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-        case .production: return "http://adepo.turkcell.com.tr/api/auth/gsm/login?rememberMe=%@"
-        }
-    }()
-    
+
     static let baseContactsUrl: URL = baseContactsUrlShort +/ "ttyapi/"
     
     static let baseContactsUrlShort: URL = {
@@ -77,14 +68,27 @@ struct RouteRequests {
         }
     }()
     
-    
-    static let privacyPolicy = baseUrl +/ "privacyPolicy/get/\(Device.locale)"
+    //MARK: Privacy Policy
+    static var privacyPolicy: String {
+        switch currentServerEnvironment {
+        case .production:
+            return "https://lifebox.biz/download/lifebox_business_privacy_policy_%@.html"
+        case .preProduction:
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
+        case .test:
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_privacy_policy_%@.html"
+        }
+    }
     
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
-    static let httpsAuthification = "auth/token?rememberMe=%@"
+    enum Login {
+        static let yaaniMail = baseShortUrlString + "api/v1/business/auth-methods/pwd/tokens%@"
+        static let flLogin = baseShortUrlString + "api/v1/business/auth-methods/fla/tokens?rememberMe=on"
+    }
+    
     static let authificationByRememberMe = "auth/rememberMe"
     static let signUp = "signup"
     static let logout = "auth/logout"
@@ -97,14 +101,12 @@ struct RouteRequests {
     static let mailUpdate = "account/email"
     
     static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
-    static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
+    static let twoFactorAuthLogin = baseUrl.absoluteString + "auth/2fa/token?rememberMe=on%@"
 
     // MARK: EULA 
-    static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
+    static let eulaGet     = "eula/get/%@?brand=LIFEBOX"
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
-    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth/v2"
-    static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
     static let socialStatus = "share/social/status"
@@ -146,6 +148,8 @@ struct RouteRequests {
     static let unifiedSearch = "search/unified?text=%@&category=%@&page=%@&size=%@"
     static let unifiedSearchWithoutCategory = "search/unified?text=%@&page=%@&size=%@"
     static let suggestion    = "search/unified/suggest?text=%@"
+    
+    static let privateShareSearch = baseUrl +/ "v1/business/search"
     
     // MARK: Album
     
@@ -204,16 +208,14 @@ struct RouteRequests {
     static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
     
     //MARK : Faq
-    static var faqContentUrl: String {
+    static var faqUrl: String {
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
-                                           "https://mylifebox.com/faq/?lang=%@"
-            
-        case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
-                                              "https://mylifebox.com/faq/?lang=%@"
-            
-        case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
-                                     "https://mylifebox.com/faq/?lang=%@"
+        case .production:
+            return "https://lifebox.biz/download/lifebox_business_faq_%@.html"
+        case .preProduction:
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
+        case .test:
+            return "https://tcloudstb.turkcell.com.tr/download/lifebox_business_faq_%@.html"
         }
     }
 
@@ -264,30 +266,22 @@ struct RouteRequests {
     //MARK: - Private Share
     
     enum PrivateShare {
-        static let suggestions = baseUrl +/ "invitees"
-        static let share = baseUrl +/ "shares"
+        
+        static let share = baseUrl +/ "v1/business/shares"
+        static let suggestionsSubjectsBase = baseUrl +/ "v1/business/suggestions/subjects"
+        static let suggestionsSubjectsSearch = suggestionsSubjectsBase.absoluteString + "?searchText=%@&size=%d"
         
         enum Shared {
             private static let baseShares = share.absoluteString
             static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
             static let byMe = baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
-            //"https://run.mocky.io/v3/8d9274fb-3149-452b-9d7f-ef8b1ea20195"//
         }
     }
     
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
-        #if LIFEBOX
-            let jsonName = "download/update_ios.json"
-        #elseif LIFEDRIVE
-            let jsonName = "download/update_lifedrive_ios.json"
-        #else
-            let jsonName = "unknown"
-            debugPrint("⚠️: unknown turkcell updater url")
-        #endif
-        
-        return baseShortUrlString + jsonName
+        return baseShortUrlString + "download/lifebox_business_update_ios_test.json"
     }
     
     struct HomeCards {
@@ -297,11 +291,14 @@ struct RouteRequests {
         }
     }
     
-    /// upload
-    static let uploadContainer = baseUrl +/ "container/baseUrl"
-    static let uploadNotify = "notification/onFileUpload?parentFolderUuid=%@&fileName=%@"
-    
     static let updateLanguage = baseUrl +/ "account/language"
+    
+    enum BusinessAccount {
+        private static let baseAccountsURLString = baseShortUrlString + "api/v1/business/accounts/"
+        static let myInfo = baseAccountsURLString + "me"
+        static let info = baseAccountsURLString + "%@"
+        static let storageUsageInfo = baseAccountsURLString + "%@/users/%@/disk"
+    }
     
     enum Account {
         static let accountApi = baseUrl +/ "account"
@@ -315,6 +312,7 @@ struct RouteRequests {
         static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         static let updateAddress = accountApi +/ "address"
         static let info = accountApi +/ "info"
+        static let quota = accountApi +/ "quotaInfo"
         
         enum Settings {
             /// without "s" at the end
@@ -351,7 +349,7 @@ struct RouteRequests {
     
     enum FileSystem {
         static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
-        static let trashedList = "filesystem/trashed?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        static let trashedList = "filesystem/trashed?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
         static let hiddenList = baseUrl.absoluteString + "filesystem/hidden?sortBy=%@&sortOrder=%@&page=%@&size=%@&category=photos_and_videos"
         
         static let filesystemBase = "filesystem/"
@@ -369,22 +367,28 @@ struct RouteRequests {
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
         
-        enum Version_2 {
-            private static let baseV2Url = baseUrl +/ "v2/files/%@"
-            static let baseV2UrlString = baseV2Url.absoluteString
-            private static let baseV2UrlBulk = baseUrl +/ "v2/files/_bulk"
+        enum Version_3 {
+            private static let baseV3Url = baseUrl +/ "v3/files/%@"
+            static let baseV3UrlString = baseV3Url.absoluteString
+            private static let baseV3General = baseUrl +/ "v3/files"
+            private static let baseV3UrlBulk = baseV3General +/ "_bulk"
             
-            static let filesFromFolder = baseV2UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
-            static let sharingInfo = baseV2UrlString + "/%@"
-            static let shareAcls = baseV2UrlString + "/%@/acls"
+            //"https://run.mocky.io/v3/d8067201-dc7d-4990-8467-b5b4de18e26a"//
+            static let filesFromFolder = baseV3UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
+            static let sharingInfo = baseV3UrlString + "/%@"
+            static let shareAcls = baseV3UrlString + "/%@/acls"
             static let shareAcl = shareAcls + "/%d"
-            static let leaveShare = baseV2UrlString + "/%@/acls?subjectType=USER&subjectId=%@"
+            static let leaveShare = baseV3UrlString + "/%@/acls?subjectType=USER&subjectId=%@"
             static let rename = sharingInfo + "/name"
             
-            static let createDownloadUrl = baseV2UrlBulk +/ "create-download-url"
-            static let move = baseV2UrlBulk +/ "move"
-            static let delete = baseV2UrlBulk +/ "delete"
-            static let trash = baseV2UrlBulk +/ "trash"
+            static let createDownloadUrl = baseV3UrlBulk +/ "create-download-url"
+            static let move = baseV3UrlBulk +/ "move"
+            static let delete = baseV3UrlBulk +/ "delete"
+            static let trash = baseV3UrlBulk +/ "trash"
+            static let recover = baseV3UrlBulk +/ "recover"
+            static let deleteAll = baseV3General +/ "trash"
+
+            static let trashedBinList = baseV3General.absoluteString + "/trash?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@"
         }
     }
 

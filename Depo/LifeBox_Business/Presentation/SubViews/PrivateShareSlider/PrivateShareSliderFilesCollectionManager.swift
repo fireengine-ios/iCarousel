@@ -19,7 +19,7 @@ final class PrivateShareSliderFilesCollectionManager {
     let sharedSliderHeight: CGFloat = 224
     
     private let shareApiService = PrivateShareApiServiceImpl()
-    private lazy var datasource = SharedFilesCollectionDataSource()
+    private lazy var datasource = SharedFilesCollectionDataSource(maxItemsForDisplay: numberOfDisplayedSharedItems)
     let sharedFilesSlider = SharedFilesCollectionSliderView.initFromNib()
     
     private let numberOfDisplayedSharedItems: Int = 20
@@ -33,7 +33,7 @@ final class PrivateShareSliderFilesCollectionManager {
     
     func checkSharedWithMe(callBack: @escaping ResponseVoid) {
 
-        shareApiService.getSharedWithMe(size: numberOfDisplayedSharedItems, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc) { [weak self] sharedFilesResult in
+        shareApiService.getSharedWithMe(size: numberOfDisplayedSharedItems + 1, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc) { [weak self] sharedFilesResult in
             guard let self = self else {
                 callBack(.failed(CustomErrors.text("no self instance")))
                 return
@@ -68,12 +68,7 @@ final class PrivateShareSliderFilesCollectionManager {
     }
     
     private func createNewUrl(for item: Item, completion: @escaping ValueHandler<URL?>) {
-        guard let projectId = item.projectId else {
-            completion(nil)
-            return
-        }
-        
-        shareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { result in
+        shareApiService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { result in
             switch result {
             case .success(let response):
                 completion(response.url)
@@ -91,7 +86,7 @@ extension PrivateShareSliderFilesCollectionManager: SharedFilesCollectionDataSou
                 delegate?.startAsyncOperation()
                 createNewUrl(for: withModel) { [weak self] newUrl in
                     if newUrl != nil {
-                        withModel.tmpDownloadUrl = newUrl
+                        withModel.urlToFile = newUrl
                         self?.delegate?.open(entity: withModel, allEnteties: [withModel])
                     }
                     self?.delegate?.completeAsyncOperation()
@@ -102,6 +97,10 @@ extension PrivateShareSliderFilesCollectionManager: SharedFilesCollectionDataSou
         } else {
             delegate?.open(entity: withModel, allEnteties: datasource.files)
         }
+    }
+    
+    func onPlusTapped() {
+        delegate?.showAll()
     }
 }
 

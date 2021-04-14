@@ -14,4 +14,5 @@ protocol SplashViewOutput {
     */
 
     func viewIsReady()
+    func securityValidation()
 }

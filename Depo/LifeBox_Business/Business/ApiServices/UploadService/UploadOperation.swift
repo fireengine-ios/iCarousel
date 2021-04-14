@@ -36,7 +36,7 @@ final class UploadOperation: Operation {
     private let uploadStategy: MetaStrategy
     private let uploadTo: MetaSpesialFolder
     private let folder: String
-    private let projectId: String?
+    private let accountUuid: String?
     private var requestObject: URLSessionTask?
     private let handler: UploadOperationHandler?
     private var isFavorites: Bool = false
@@ -68,21 +68,21 @@ final class UploadOperation: Operation {
         self.uploadTo = uploadTo
         self.uploadStategy = uploadStategy
         self.folder = folder
-        self.projectId = projectId
+        self.accountUuid = projectId
         self.handler = handler
         self.semaphore = DispatchSemaphore(value: 0)
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
         
-        if uploadType != .sharedWithMe {
-            if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
-                self.isResumable = true
-            } else {
-                self.isResumable = false
-            }
-        } else {
+//        if uploadType != .sharedWithMe {
+//            if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
+//                self.isResumable = true
+//            } else {
+//                self.isResumable = false
+//            }
+//        } else {
             self.isResumable = false
-        }
+//        }
         
         let trimmedLocalId = self.inputItem.getTrimmedLocalID()
         self.interruptedId = resumableInfoService.getInterruptedId(for: trimmedLocalId)
@@ -94,12 +94,8 @@ final class UploadOperation: Operation {
     
     private func setupQualityOfService(uploadType: UploadType) {
         switch uploadType {
-            case .syncToUse, .save, .saveAs:
-            qualityOfService = .userInteractive
-        case .upload, .sharedWithMe:
+        case .regular, .sharedWithMe, .sharedArea:
             qualityOfService = .userInitiated
-        case .autoSync:
-            qualityOfService = .background
         }
     }
     
@@ -121,9 +117,9 @@ final class UploadOperation: Operation {
         
         ItemOperationManager.default.startUploadFile(file: inputItem)
         
-        WidgetService.shared.notifyWidgetAbout(syncFileName: inputItem.name ?? "")
-        
         SingletonStorage.shared.progressDelegates.add(self)
+        
+        UploadProgressManager.shared.update(item: inputItem, status: .inProgress)
         
         attemptUpload()
         
@@ -380,10 +376,6 @@ final class UploadOperation: Operation {
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
                 
-                if self.inputItem.fileType.isContained(in: [.image, .video]) {
-                    self.storageVars.lastUnsavedFileUUID = parameters.tmpUUID
-                }
-                
                 self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
                     debugLog("simple_upload: uploaded")
                     
@@ -485,60 +477,22 @@ final class UploadOperation: Operation {
     
     private func finishUploading(parameters: UploadRequestParametrs, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         
-        guard uploadType != .sharedWithMe else {
-            storageVars.lastUnsavedFileUUID = nil
-            success()
-            return
-        }
-        
-        let uploadNotifParam = UploadNotify(parentUUID: parameters.rootFolder,
-                                            fileUUID: parameters.tmpUUID )
-        
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
         
-        uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-            self?.dispatchQueue.async { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                guard let response = baseurlResponse as? SearchItemResponse else {
-                    success()
-                    return
-                }
-                
-                self.outputItem = WrapData(remote: response)
-                self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
-                self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
-                self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
-                
-                //TODO: remove this in the future
-                if let size = (parameters as? SimpleUpload)?.fileSize,
-                    let item = self.outputItem, size != item.fileSize {
-                    Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: finishUploading -> uploadNotify sizes arent equal"))
-                    debugLog("UPLOAD: finishUploading -> uploadNotify parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
-                }
-                //--
-                
-                if self.uploadType == .save, let updatedRemote = self.outputItem {
-                    self.storageVars.lastUnsavedFileUUID = nil
-                    debugLog("_upload: item is updated \(self.inputItem.name ?? "") ")
-                    success()
-                    
-                } else {
-                    //case for upload photo from camera
-                    if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                        self.outputItem?.metaData?.mediumUrl = preview
-                    }
-                    
-                    self.storageVars.lastUnsavedFileUUID = nil
-                    success()
-                }
-                
-                debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
-            }
-        }, fail: fail)
+        outputItem = inputItem
+//        self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
+//        self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+//        self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+        
+        //TODO: remove this in the future
+        if let size = (parameters as? SimpleUpload)?.fileSize, let item = self.outputItem, size != item.fileSize {
+            Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: finishUploading -> uploadNotify sizes arent equal"))
+            debugLog("UPLOAD: finishUploading -> parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
+        }
+        //--
+        
+        success()
     }
     
     private func removeTemporaryFile(at localURL: URL?) {
@@ -553,11 +507,11 @@ final class UploadOperation: Operation {
     
     //MARK: - Requests
     
-    private func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask {
-        if uploadType == .sharedWithMe, let projectId = projectId {
+    private func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask? {
+        if let accountUuid = accountUuid {
             let requestItem = UploadFileRequestItem(uuid: inputItem.uuid, name: inputItem.name ?? "", sizeInBytes: fileSize, mimeType: inputItem.uploadContentType)
             
-            return privateShareService.getUrlToUpload(projectId: projectId, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in
+            return privateShareService.getUrlToUpload(projectId: accountUuid, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in
                 switch response {
                     case .success(let wrappedUrl):
                         success(wrappedUrl.url)
@@ -565,28 +519,22 @@ final class UploadOperation: Operation {
                     case .failed(let error):
                         fail?(ErrorResponse.error(error))
                 }
-            } ?? URLSessionTask()
+            }
             
         } else {
-            return UploadService.default.baseUrl(success: success, fail: fail)
+            fail?(ErrorResponse.string(TextConstants.commonServiceError))
+            return nil
         }
     }
     
     private func upload(uploadParam: UploadRequestParametrs, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
-        return UploadService.default.upload(uploadParam: uploadParam,
+        return UploadService.shared.upload(uploadParam: uploadParam,
                                             success: success,
                                             fail: fail)
     }
     
     private func resumableUpload(uploadParam: ResumableUpload, handler: @escaping ResumableUploadHandler) -> URLSessionTask? {
-        return UploadService.default.resumableUpload(uploadParam: uploadParam, handler: handler)
-    }
-    
-    
-    private func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail: FailResponse?) {
-        UploadService.default.uploadNotify(param: param,
-                                           success: success,
-                                           fail: fail)
+        return UploadService.shared.resumableUpload(uploadParam: uploadParam, handler: handler)
     }
 }
 
@@ -609,6 +557,7 @@ extension UploadOperation: OperationProgressServiceDelegate {
         }
         
         if requestObject?.currentRequest?.url == url, let uploadType = uploadType {
+            UploadProgressManager.shared.setUploadProgress(for: inputItem, bytesUploaded: bytes, ratio: ratio)
             CardsManager.default.setProgress(ratio: actualRatio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: inputItem)
             ItemOperationManager.default.setProgressForUploadingFile(file: inputItem, progress: actualRatio)
         }

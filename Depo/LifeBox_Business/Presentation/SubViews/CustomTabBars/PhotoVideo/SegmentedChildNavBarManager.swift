@@ -8,32 +8,86 @@
 
 import UIKit
 
-protocol SegmentedChildNavBarManagerDelegate: SegmentedChildController {
+protocol SegmentedChildNavBarManagerDelegate: SegmentedChildTopBarSupportedControllerProtocol {
     func onCancelSelectionButton()
-    func onThreeDotsButton()
-    func onSearchButton()
+    func onPlusButton()
+    func onSettingsButton()
+    func onTrashBinButton()
+    func onBackButton()
 }
 
 final class SegmentedChildNavBarManager {
+
+    private lazy var cancelSelectionForTrashBinButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(image: UIImage(named: "close_dark"), style: .plain, target: self, action: #selector(onCancelSelectionButton))
+        return barButtonItem
+    }()
     
-    private lazy var cancelSelectionButton = UIBarButtonItem(
-        title: TextConstants.cancelSelectionButtonTitle,
-        font: .TurkcellSaturaDemFont(size: 19.0),
-        target: self,
-        selector: #selector(onCancelSelectionButton))
+    private lazy var cancelSelectionButton: UIBarButtonItem = {
+        let button = UIButton(type: .custom)
+        button.addTarget(self, action: #selector(onCancelSelectionButton),
+                         for: UIControlEvents.touchUpInside)
+        button.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
+        button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 18)
+        button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
+        
+       return UIBarButtonItem(customView: button)
+    }()
     
-    /// public bcz can be disabled
-    lazy var threeDotsButton = UIBarButtonItem(
-        image: Images.threeDots,
-        style: .plain,
-        target: self,
-        action: #selector(onThreeDotsButton))
+    private(set) lazy var plusButton: UIBarButtonItem = {
+            let button = UIButton(type: .custom)
+            button.setImage(UIImage(named: "PlusButtonBusiness"),
+                            for: .normal)
+
+            button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
+
+            button.addTarget(self, action: #selector(onPlusButton),
+                             for: UIControlEvents.touchUpInside)
+            return UIBarButtonItem(customView: button)
+    }()
+
+    private(set) lazy var trashButton: UIBarButtonItem = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "trash_bin_nav_bar"),
+                        for: .normal)
+
+        button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
+
+        button.addTarget(self, action: #selector(onTrashBinButton),
+                         for: UIControlEvents.touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+
+    private(set) lazy var customBackButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(image: UIImage(named: "blackBackButton"), style: .plain, target: self, action: #selector(onBackButton))
+        return barButtonItem
+    }()
     
-    private lazy var searchButton = UIBarButtonItem(
-        image: Images.search,
-        style: .plain,
-        target: self,
-        action: #selector(onSearchButton))
+    lazy var settingsButton: UIBarButtonItem = {
+        let button = UIButton(type: .custom)
+        
+        let initials: String
+        
+        if let firstLetter = SingletonStorage.shared.accountInfo?.name?.firstLetter,
+           let secondLetter = SingletonStorage.shared.accountInfo?.surname?.firstLetter {
+            initials = firstLetter + secondLetter
+        } else {
+            initials = String((SingletonStorage.shared.accountInfo?.email ?? "").prefix(2)).uppercased()
+        }
+        
+        button.setTitle(initials, for: .normal)
+        button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 13.5)
+        button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
+        
+        button.backgroundColor = ColorConstants.topBarSettingsIconColor
+        button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
+        button.layer.cornerRadius = button.frame.height * 0.5
+        button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(onSettingsButton),
+                         for: UIControlEvents.touchUpInside)
+        
+        return UIBarButtonItem(customView: button)
+    }()
     
     private weak var delegate: SegmentedChildNavBarManagerDelegate?
     
@@ -43,31 +97,64 @@ final class SegmentedChildNavBarManager {
     
     func setSelectionMode() {
         delegate?.setLeftBarButtonItems([cancelSelectionButton], animated: true)
-        delegate?.setRightBarButtonItems([threeDotsButton], animated: false)
+        delegate?.setRightBarButtonItems([], animated: false)
+    }
+
+    func setSelectionModeForTrashBin() {
+        delegate?.setLeftBarButtonItems([cancelSelectionForTrashBinButton], animated: true)
+        delegate?.setRightBarButtonItems([], animated: false)
     }
     
-    func setDefaultMode(title: String = "") {
-        delegate?.setTitle(title)
-        delegate?.setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
-        delegate?.setLeftBarButtonItems(nil, animated: true)
-        threeDotsButton.isEnabled = true
+    func setRootMode(title: String = "") {
+        delegate?.setTitle(title, isSelectionMode: false, style: .white)
+        delegate?.setRightBarButtonItems([plusButton], animated: false)
+        delegate?.setLeftBarButtonItems([settingsButton], animated: false)
+    }
+    
+    func setupLargetitle(isLarge: Bool) {
+        delegate?.changeNavbarLargeTitle(isLarge, style: .white)
+    }
+    
+    func setNestedMode(title: String = "") {
+        delegate?.setTitle(title, isSelectionMode: false, style: .white)
+        delegate?.setRightBarButtonItems([plusButton], animated: false)
+        delegate?.setLeftBarButtonItems(nil, animated: false)
+    }
+    
+    func setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: Bool) {
+        delegate?.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: extendedLayoutIncludesOpaqueBars)
     }
     
     func setDefaultModeWithoutThreeDot(title: String = "") {
-        delegate?.setTitle(title)
-        delegate?.setRightBarButtonItems([searchButton], animated: false)
+        delegate?.setTitle(title, isSelectionMode: false, style: .white)
         delegate?.setLeftBarButtonItems(nil, animated: true)
+    }
+
+    func setTrashBinMode(title: String, innerFolder: Bool = false, emptyDataList: Bool = true) {
+        delegate?.setTitle(title, isSelectionMode: false, style: .white)
+        let rightButtons: [UIBarButtonItem]? = innerFolder || emptyDataList ? nil : [trashButton]
+        //TODO:  postpone setup after we get files list
+        delegate?.setRightBarButtonItems(rightButtons, animated: false)
+        delegate?.setLeftBarButtonItems(nil, animated: false)
     }
     
     @objc private func onCancelSelectionButton() {
         delegate?.onCancelSelectionButton()
     }
     
-    @objc private func onThreeDotsButton() {
-        delegate?.onThreeDotsButton()
+    @objc private func onPlusButton() {
+        delegate?.onPlusButton()
     }
     
-    @objc private func onSearchButton() {
-        delegate?.onSearchButton()
+    @objc private func onSettingsButton() {
+        delegate?.onSettingsButton()
+    }
+
+    @objc private func onTrashBinButton() {
+        delegate?.onTrashBinButton()
+    }
+
+    @objc private func onBackButton() {
+        delegate?.onBackButton()
     }
 }

@@ -48,7 +48,7 @@ final class PVViewerController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        blackNavigationBarStyle()
+        setNavigationBarStyle(.black)
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,9 +57,9 @@ final class PVViewerController: BaseViewController, NibInit {
         imageScrollView.adjustFrameToCenter()
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .black
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .black
+//    }
     
     override func getBackgroundColor() -> UIColor {
         return UIColor.black

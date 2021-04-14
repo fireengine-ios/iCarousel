@@ -16,25 +16,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
-    @IBOutlet private weak var bottomBlackView: UIView!
-    
-    @IBOutlet private weak var swipeUpContainerView: UIView!
-    // Bottom detail view
-    
-    private(set) var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol?
-
-    var bottomDetailView: FileInfoView?
-    private var passThroughView: PassThroughView?
-
-    private lazy var player: MediaPlayer = factory.resolve()
-    
-    private var localPlayer: AVPlayer?
-    private var playerController: FixedAVPlayerViewController?
     
     var status: ItemStatus = .active
-    var hideTreeDotButton = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
+    
+    var initinalBarStyle: NavigationBarStyles = .transparent
     
     private var isFullScreen = false {
         didSet {
@@ -58,13 +45,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //                }
 //            }
             
-            /// without animation
-
-            editingTabBar.view.isHidden = isFullScreen
-            navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
+            if isFullScreen {
+                editingTabBar.hideBar(animated: true)
+            } else {
+                editingTabBar.showBar(animated: true, onView: viewForBottomBar)
+            }
+            
+            setupNavigationBar()
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             
-            bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
         }
     }
@@ -76,9 +65,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             if let index = selectedIndex {
                 output.setSelectedItemIndex(selectedIndex: index)
-            }
-            if oldValue != selectedIndex {
-                updateFileInfo()
             }
         }
     }
@@ -92,104 +78,54 @@ final class PhotoVideoDetailViewController: BaseViewController {
         return objects[safe: index]
     }
     
-    private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        button.setImage(UIImage(named: "more"), for: .normal)
-        button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
-        return UIBarButtonItem(customView: button)
-    }()
-    
     private var waitVideoPreviewURL = false
     
     private lazy var analytics = PrivateShareAnalytics()
     
     // MARK: Life cycle
     
-    deinit {
-        NotificationCenter.default.post(name: .deinitPlayer, object: self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        collectionView.contentInsetAdjustmentBehavior = .never
         
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        collectionView.register(nibCell: PhotoVideoDetailCell.self)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isHidden = true
+        setupView()
+        setupCollection()
+        initialNavBarSetup()
         
-        navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         showSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        addTrackSwipeUpView()
-        addBottomDetailsView()
-        
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
-        ItemOperationManager.default.startUpdateView(view: self)
         
         onStopPlay()
-        rootNavController(vizible: true)
-        blackNavigationBarStyle()
+        
+        setupNavigationBar()
         editingTabBar?.view.layoutIfNeeded()
-        editingTabBar.view.backgroundColor = .black
-        viewForBottomBar.backgroundColor = .black
         setupTitle()
-        
-        if hideTreeDotButton {
-            navigationItem.rightBarButtonItem?.customView?.isHidden = true
-        }
-        
-        // TODO: EditingBarConfig is not working
-        editingTabBar.editingBar.barStyle = .blackOpaque
-        editingTabBar.editingBar.clipsToBounds = true
-        //editingTabBar.editingBar.layer.borderWidth = 0
-        
-        statusBarColor = .black
-        
-        NotificationCenter.default.post(name: .reusePlayer, object: self)
-        
+
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
-        bottomDetailViewManager?.updatePassThroughViewDelegate(passThroughView: passThroughView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
-        passThroughView?.enableGestures()
+        ItemOperationManager.default.startUpdateView(view: self)
         updateFirstVisibleCell()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        setNavigationBackgroundColor(color: UIColor.clear)
-        
-        visibleNavigationBarStyle()
-        statusBarColor = .clear
-        
-        NotificationCenter.default.post(name: .deinitPlayer, object: self)
-        
+        statusBarStyle = .default
         output.viewWillDisappear()
-        passThroughView?.disableGestures()
-        backButtonForNavigationItem(title: TextConstants.backTitle)
-        passThroughView?.removeFromSuperview()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        hideDetailViewIfChangedRotation()
         collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
             guard let `self` = self else {
                 return
@@ -201,14 +137,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
         })
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .black
-    }
-    
-    private func hideDetailViewIfChangedRotation() {
-        if UIDevice.current.orientation.isLandscape {
-            bottomDetailViewManager?.closeDetailView()
-        }
+    private func setupCollection() {
+        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.register(nibCell: PhotoVideoDetailCell.self)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isHidden = true
     }
     
     private func updateFirstVisibleCell() {
@@ -217,10 +153,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
-        cells.first?.setObject(object: objects[selectedIndex])
+        cells.first?.update(with: objects[selectedIndex], index: selectedIndex, isFullScreen: isFullScreen)
     }
     
-    func hideView() {
+    @objc func hideView() {
         customDeinit()
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         
@@ -233,11 +169,19 @@ final class PhotoVideoDetailViewController: BaseViewController {
             dismiss(animated: true)
         }
     }
+    
+    private func initialNavBarSetup() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .transparent)
+        setNavigationBarStyle(initinalBarStyle)
+        edgesForExtendedLayout = [.top, .bottom]
+        extendedLayoutIncludesOpaqueBars = true
+        setNavigationLeftBarButton(style: initinalBarStyle, title: "", target: self, image: UIImage(named: "blackBackButton"), action: #selector(hideView))
+    }
         
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
-        updateFileInfo()
 
         guard let index = selectedIndex else  {
             return
@@ -254,25 +198,59 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func setupNavigationBar() {
-        if navigationItem.rightBarButtonItem == nil && !hideTreeDotButton {
-            navigationItem.rightBarButtonItem = threeDotsBarButtonItem
+        guard let selectedItem = selectedItem else {
+            return
         }
-
-        if let selectedItem = selectedItem {
-            //hide 3 dots button for shared or local items
-            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem || !selectedItem.isOwner
+        let style: NavigationBarStyles
+        
+        if isFullScreen {
+            style = .hidden
         } else {
-            navigationItem.rightBarButtonItem?.customView?.isHidden = true
+            if case .application = selectedItem.fileType {
+                style = .white
+                statusBarStyle = .default
+            } else {
+                style = .transparent
+                statusBarStyle = .lightContent
+            }
+        }
+        setNavigationBarStyle(style)
+        edgesForExtendedLayout = [.top, .bottom]
+        extendedLayoutIncludesOpaqueBars = true
+        navigationItem.leftBarButtonItem?.tintColor = style.textTintColor
+//        if navigationItem.rightBarButtonItem == nil && !hideTreeDotButton {
+//            navigationItem.rightBarButtonItem = threeDotsBarButtonItem
+//        }
+
+//        if let selectedItem = selectedItem {
+//            //hide 3 dots button for shared or local items
+//            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem || !selectedItem.isOwner
+//        } else {
+//            navigationItem.rightBarButtonItem?.customView?.isHidden = true
+//        }
+    }
+    
+    private func setupView() {
+        switch initinalBarStyle {
+        case .white:
+            view.backgroundColor = ColorConstants.tableBackground
+        default:
+            break
         }
     }
 
     private func setupTitle() {
-        setNavigationTitle(title: selectedItem?.name ?? "")
-    }
-    
-    private func updateFileInfo() {
-        guard let selectedItem = selectedItem else { return }
-        bottomDetailView?.setObject(selectedItem) {
+        guard let selectedItem = selectedItem else {
+            return
+        }
+        let style: NavigationBarStyles
+        if case .application = selectedItem.fileType {
+            style = .white
+        } else {
+            style = .transparent
+        }
+        DispatchQueue.main.async {
+            self.setNavigationTitle(title: selectedItem.name ?? "", style: style)
         }
     }
     
@@ -308,12 +286,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.reloadData()
     }
     
+    
+    
     override func getBackgroundColor() -> UIColor {
         return UIColor.black
-    }
-    
-    @objc private func applicationDidEnterBackground(_ application: UIApplication) {
-        localPlayer?.pause()
     }
     
     private func updateAllItems(with items: [Item], updateCollection: Bool) {
@@ -325,117 +301,28 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
-    
-    private func setupBottomDetailViewManager() {
-        guard
-            let managedView = bottomDetailView,
-            let passThroughView = passThroughView,
-            let collectionView = collectionView,
-            let parentView = view
-        else {
-            assertionFailure()
-            return
-        }
-        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, parentView: parentView, delegate: self)
-    }
-    
-    func getBottomDetailViewState() -> CardState {
-        guard let bottomDetailViewManager = bottomDetailViewManager else {
-            assertionFailure()
-            return .collapsed
-        }
-        return bottomDetailViewManager.getCurrenState()
-    }
-    
-    func showBottomDetailView() {
-        bottomDetailViewManager?.showDetailView()
-    }
-    
-    func shareCurrentItem() {
-        guard let shareTabIndex = output.tabIndex(type: .share),
-              let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
-            return
-        }
-        editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
-    }
-}
-
-
-// MARK: Bottom detail view implemantation
-
-extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelegate {
-    
-    func getSelectedIindex() -> Int {
-        return selectedIndex ?? 0
-    }
-    
-    func getObjectsCount() -> Int {
-        return objects.count
-    }
-    
-    func getIsFullScreenState() -> Bool {
-        return isFullScreen
-    }
-    
-    func setIsFullScreenState(_ isFullScreen: Bool) {
-        self.isFullScreen = isFullScreen
-    }
-    
-    func setSelectedIndex(_ selectedIndex: Int) {
-        self.selectedIndex = selectedIndex
-    }
-    
-    private func addTrackSwipeUpView() {
-        
-        let window = UIApplication.shared.keyWindow
-        let view = PassThroughView(frame: UIScreen.main.bounds)
-        window?.addSubview(view)
-        passThroughView = view
-    }
-    
-    private func addBottomDetailsView() {
-        guard let topViewController = RouterVC().getViewControllerForPresent(), bottomDetailView == nil else {
-            return
-        }
-        
-        let fileInfoView = FileInfoView(frame: CGRect(origin: CGPoint(x: .zero, y: view.frame.height), size: view.frame.size))
-        output.configureFileInfo(fileInfoView)
-        topViewController.view.addSubview(fileInfoView)
-        bottomDetailView = fileInfoView
-        setupBottomDetailViewManager()
-    }
-    
-    func pullToDownEffect() {
-        //hideView()
-    }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func showValidateNameSuccess(name: String) {
-        setNavigationTitle(title: name)
-        bottomDetailView?.showValidateNameSuccess()
+//        setNavigationTitle(title: name)
+        self.title = name
     }
     
-    func show(name: String) {
-        bottomDetailView?.show(name: name)
-    }
+    func show(name: String) { }
     
     func setupInitialState() { }
     
     func onItemSelected(at index: Int, from items: [Item]) {
-        if items.isEmpty {
-            return
-        }
-        
-        if let item = items[safe: index], item.isLocalItem && item.fileType == .image {
-            setThreeDotsMenu(active: false)
-        } else {
-            setThreeDotsMenu(active: true)
-        }
-    }
-    
-    func setThreeDotsMenu(active isActive: Bool) {
-        navigationItem.rightBarButtonItem?.isEnabled = isActive
+//        if items.isEmpty {
+//            return
+//        }
+//
+//        if let item = items[safe: index], item.isLocalItem && item.fileType == .image {
+//            setThreeDotsMenu(active: false)
+//        } else {
+//            setThreeDotsMenu(active: true)
+//        }
     }
     
     func play(item: AVPlayerItem) {
@@ -443,23 +330,15 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.VideoDisplayed())
         
-        localPlayer?.replaceCurrentItem(with: item)
-        playerController = FixedAVPlayerViewController()
-        playerController?.player = localPlayer
-        ///needs to expend from everywhere
-        playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
-        debugLog("about to play video item with isEmptyController \(playerController == nil) and \(playerController?.player == nil)")
-        present(playerController!, animated: true) { [weak self] in
-            UIApplication.setIdleTimerDisabled(true)
-            self?.playerController?.player?.play()
-            self?.output.videoStarted()
-            if Device.operationSystemVersionLessThen(11) {
-                self?.statusBarHidden = true
-            }
+        guard let url = (item.asset as? AVURLAsset)?.url else {
+            return
         }
+        //TODO: player
+        //
     }
     
     func onStopPlay() {
+        //TODO: Player
         UIApplication.setIdleTimerDisabled(false)
         output.videoStoped()
         if Device.operationSystemVersionLessThen(11) {
@@ -490,27 +369,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         return navigationController
     }
     
-    func closeDetailViewIfNeeded() {
-        bottomDetailViewManager?.closeDetailView()
-    }
-    
-    func updateBottomDetailView() {
-        bottomDetailView?.updateShareInfo()
-    }
-    
-    func deleteShareInfo() {
-        bottomDetailView?.setHiddenShareInfoView(isHidden: true)
-    }
-    
-    func updateExpiredItem(_ item: WrapData) {
-        guard let indexToChange = objects.firstIndex(where: { !$0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }),
-              objects[indexToChange].hasExpiredPreviewUrl() else {
-            return
-        }
-        update(item: item, at: indexToChange)
-    }
-    
-    
     func updateItem(_ item: WrapData) {
         guard let index = objects.firstIndex(where: { $0 == item }) else {
             return
@@ -521,13 +379,9 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     private func update(item: Item, at index: Int) {
         objects[index] = item
         
-        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.item == index }),
+        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.row == index }),
            let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell {
-            cell.setObject(object: item)
-            if item.fileType == .video && waitVideoPreviewURL {
-                tapOnSelectedItem()
-                waitVideoPreviewURL = false
-            }
+            cell.setup(with: item, index: index, isFullScreen: isFullScreen)
         }
     }
 }
@@ -573,7 +427,6 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         if visibleIndexes.contains(indexToChange) {
             output.updateBars()
             setupNavigationBar()
-            updateFileInfo()
         }
     }
 }
@@ -595,9 +448,20 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         guard selectedIndex != nil else {
             return
         }
+        
         cell.delegate = self
         let object = objects[indexPath.row]
-        cell.setObject(object: object)
+        
+        let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
+        editingTabBar.changeBar(style: barStyle)
+        
+        if !object.fileType.isDocument, !isFullScreen {
+            setNavigationBarStyle(.transparent)
+        }
+        
+        viewForBottomBar.backgroundColor = object.fileType.isDocument ? .white : .clear
+        
+        cell.setup(with: object, index: indexPath.row, isFullScreen: isFullScreen)
         
         if indexPath.row == objects.count - 1 {
             output.willDisplayLastCell()
@@ -606,6 +470,14 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         if !object.isOwner {
             analytics.sharedWithMe(action: .preview, on: object)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? PhotoVideoDetailCell else {
+            return
+        }
+        
+        cell.didEndDisplaying()
     }
 }
 
@@ -620,89 +492,20 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
-    
-    func imageLoadingFinished() {
+    func loadingFinished() {
         hideSpinner()
     }
     
     func tapOnCellForFullScreen() {
         isFullScreen.toggle()
     }
-    
-    func tapOnSelectedItem() {
-        guard let index = selectedIndex else {
-            return
+   
+    func didExpireUrl(at index: Int, isFull: Bool) {
+        if isFull {
+            output.createNewUrl(at: index)
+        } else {
+            output.updateInfo(at: index)
         }
-        
-        showSpinnerIncludeNavigationBar()
-        let file = objects[index]
-        if file.fileType == .video {
-            self.prepareToPlayVideo(file: file)
-        }
-    }
-    
-    private func prepareToPlayVideo(file: Item) {
-        let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
-
-        if !waitVideoPreviewURL, preUrl == nil || preUrl?.isExpired == true {
-            waitVideoPreviewURL = true
-            output.createNewUrl()
-            return
-        }
-        
-        guard let url = preUrl else {
-            hideSpinnerIncludeNavigationBar()
-            if !file.isOwner {
-                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePreviewNotReady)
-            }
-            return
-        }
-        player.pause()
-        playerController?.player = nil
-        playerController?.removeFromParentViewController()
-        playerController = nil
-        localPlayer?.pause()
-        localPlayer = nil
-        localPlayer = AVPlayer()
-        
-        switch file.patchToPreview {
-        case let .localMediaContent(local):
-            guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-                return
-            }
-            let option = PHVideoRequestOptions()
-            
-            output.startCreatingAVAsset()
-            debugLog("about to play local video item")
-            DispatchQueue.global(qos: .default).async { [weak self] in
-                PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
-                    debugPrint("!!!! after local request")
-                    DispatchQueue.main.async {
-                        self?.output.stopCreatingAVAsset()
-                        guard let asset = asset else {
-                            return
-                        }
-                        let playerItem = AVPlayerItem(asset: asset)
-                        debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                        self?.play(item: playerItem)
-                    }
-                }
-            }
-            
-        case .remoteUrl(_):
-            debugLog("about to play remote video item")
-            DispatchQueue.global(qos: .default).async { [weak self] in
-                let playerItem = AVPlayerItem(url: url)
-                debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                DispatchQueue.main.async {
-                    self?.play(item: playerItem)
-                }
-            }
-        }
-    }
-    
-    func didExpireUrl() {
-        output.createNewUrl()
     }
 }
 
@@ -736,4 +539,3 @@ extension TabBarViewController: AVPlayerViewControllerDelegate {
         }
     }
 }
-

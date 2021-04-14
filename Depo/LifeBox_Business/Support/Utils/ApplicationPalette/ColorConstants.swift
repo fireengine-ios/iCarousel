@@ -9,6 +9,85 @@
 import UIKit
 
 struct ColorConstants {
+    //MARK: Business App specific
+    
+    static let bottomBarTint = UIColor(named: "bottomBarTint")!
+    static let buttonTintBlue = UIColor(named: "buttonTintBlue")!
+    static let multifileCellSubtitleText = UIColor(named: "multifileCellSubtitleText")!
+    static let multifileCellTitleText = UIColor(named: "multifileCellTitleText")!
+    static let multifileCellBackgroundColor = UIColor(named: "multifileCellBackgroundColor")!
+    static let multifileCellBackgroundColorSelected = UIColor(named: "multifileCellBackgroundColorSelected")!
+    static let multifileCellBackgroundColorSelectedSolid = UIColor(named: "multifileCellBackgroundColorSelectedSolid")!
+    static let multifileCellInfoView = UIColor(named: "multifileCellInfoView")!
+    static let multifileCellDeletionView = UIColor(named: "multifileCellDeletionView")!
+    static let multifileCellRenameFieldNameColor = UIColor(named: "multifileCellRenameFieldNameColor")!
+    static let multifileCellRenameFieldExtensionColor = UIColor(named: "multifileCellRenameFieldExtensionColor")!
+    
+    static let confirmationPopupTitle = UIColor(named: "confirmationPopupTitle")!
+    static let confirmationPopupMessage = UIColor(named: "confirmationPopupMessage")!
+    static let confirmationPopupButton = UIColor(named: "confirmationPopupButton")!
+    static let confirmationPopupButtonDark = UIColor(named: "confirmationPopupButtonDark")!
+    
+    static let loginTextFieldText = UIColor(named: "loginTextFieldText")!
+    static let loginErrorLabelText = UIColor(named: "loginErrorLabelText")!
+    static let loginTextFieldPlaceholder = UIColor(named: "loginTextFieldPlaceholder")!
+    static let loginDescriptionLabel = UIColor(named: "loginDescriptionLabel")!
+    static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
+
+    static let loginPopupDescription = UIColor(named: "loginPopupDescription")!
+    
+    static let textViewBackground = UIColor(named: "textViewBackground")!
+    
+    static let separator = UIColor(named: "separator")!
+    
+    struct PrivateShare {
+        static let shareButtonBackgroundEnabled = UIColor(named: "shareButtonBackgroundEnabled")!
+        static let durationLabelUnselected = UIColor(named: "durationLabel")!
+    }
+    
+    struct Text {
+        static let textFieldPlaceholder = UIColor(named: "textFieldPlaceholder")!
+        static let textFieldText = UIColor(named: "textFieldText")!
+        static let labelTitle = UIColor(named: "labelTitle")!
+        static let labelTitleBackground = UIColor(named: "labelTitleBackground")!
+    }
+    
+    struct UploadProgress {
+        static let cellBackground = UIColor(named: "uploadProgressCellBackground")!
+        static let headerBackground = UIColor(named: "confirmationPopupTitle")!
+        static let progressBackground = UIColor(named: "progressBackgroundColor")!
+    }
+
+    static let infoPageValueText = UIColor(named: "infoPageValueText")!
+    static let infoPageItemTopText = UIColor(named: "infoPageItemTopText")!
+    static let infoPageItemBottomText = UIColor(named: "infoPageItemBottomText")!
+    static let infoPageSeparator = UIColor(named: "infoPageSeparator")!
+    static let infoPageContactDarkBackground = UIColor(named: "infoContactDarkBackground")!
+    static let infoPageContactLigherBackground = UIColor(named: "infoContactLigherBackground")!
+    static let infoPagePlusButtonText = UIColor(named: "infoPagePlusButtonText")!
+    static let infoPageLigherNickname = UIColor(named: "infoPageNicknameLigher")!
+    static let infoPageDarkerNickname = UIColor(named: "infoPageNicknameDarker")!
+    static let sharedContactTitleSubtitle = UIColor(named: "sharedContactTitleSubtitle")!
+    static let sharedContactCircleBackground = UIColor(named: "sharedContactCircleBackground")!
+    static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
+    static let a2FAMethodLabel = UIColor(named: "a2FAMethodLabel")!
+    static let a2FADescriptionLabel = UIColor(named: "a2FADescriptionLabel")!
+    static let accessListItemExpireDate = UIColor(named: "accessListItemExpireDate")!
+    static let accessListItemName = UIColor(named: "accessListItemName")!
+    static let tableBackground = UIColor(named: "tableBackground")!
+    static let dimmedBackground = UIColor(named: "dimmedBackground")!
+    static let a2FABorder = UIColor(named: "a2FABorderColor")!
+    static let a2FAActiveProgress = UIColor(named: "a2FAActiveProgress")!
+    static let buttonDarkBlueBackground = UIColor(named: "loginButtonBackground")!
+    static let iconBackgroundView = UIColor(named: "iconBackgroundView")!
+    static let settingsTableBackground = UIColor(named: "settingsTableBackground")!
+    static let snackBarTrashBin = UIColor(named: "snackBarTrashBin")!
+
+    static let topBarColor = UIColor(named: "topBarBackground")!
+    static let topBarSettingsIconColor = UIColor(named: "topBarSettingsIconColor")!
+    
+    //MARK: END
+    
     static let whiteColor = UIColor.white
     static let blueColor = UIColor(red: 68 / 255, green: 204 / 255, blue: 208 / 255, alpha: 1)
     static let lightBlueColor = UIColor(red: 180 / 255, green: 241 / 255, blue: 241 / 255, alpha: 1)
@@ -120,7 +199,6 @@ struct ColorConstants {
 }
 
 extension UIColor {
-    
     class var lrTealish: UIColor {
         return UIColor(red: 51.0 / 255.0, green: 204.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
     }
@@ -207,34 +285,5 @@ extension UIColor {
 
     class var lrGreyish: UIColor {
         return UIColor(red: 178 / 255.0, green: 178 / 255.0, blue: 178 / 255.0, alpha: 1.0)
-    }
-}
-
-// Text Font
-
-extension UIFont {
-    
-    static func TurkcellSaturaDemFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaDem", size: size)!
-    }
-    
-    static func TurkcellSaturaRegFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaReg", size: size)!
-    }
-    
-    static func TurkcellSaturaBolFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaBol", size: size)!
-    }
-    
-    static func TurkcellSaturaItaFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaIta", size: size)!
-    }
-    
-    static func TurkcellSaturaMedFont(size: CGFloat = 9) -> UIFont {
-        return UIFont(name: "TurkcellSaturaMed", size: size)!
-    }
-    
-    static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "TurkcellSaturaReg", size: size)!
     }
 }

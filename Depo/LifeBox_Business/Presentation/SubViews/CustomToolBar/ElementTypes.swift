@@ -15,11 +15,9 @@ enum UniversalViewType {
 enum ElementTypes {
     case share
     case info//one for alert one for tab
-    case delete
+    case deletePermanently
     case emptyTrashBin
     case move
-    case sync
-    case syncInProgress
     case download
     case downloadDocument
     case undetermend
@@ -34,7 +32,6 @@ enum ElementTypes {
     case removeFromFavorites
     case backUp
     case addToCmeraRoll
-    case print
     //upload?
     case photos
     case iCloudDrive
@@ -52,62 +49,58 @@ enum ElementTypes {
     case shareAlbum
     case makeAlbumCover
     //private share
+    case privateShare
     case endSharing
     case leaveSharing
     case moveToTrashShared
+    //changing role
+    case editorRole
+    case viewerRole
+    case variesRole
+    case removeRole
     
-    static var trashState: [ElementTypes] = [.restore, .delete]
+    static var trashState: [ElementTypes] = [.restore, .deletePermanently]
     static var activeState: [ElementTypes] = [.moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus) -> [ElementTypes] {
         var result = [ElementTypes]()
         
-        if !item.isOwner {
-            //shared with me items
-            if let grantedPermissions = item.privateSharePermission?.granted {
-                if grantedPermissions.contains(.read) {
-                    if item.fileType.isContained(in: [.image, .video]) {
-                        result.append(.download)
-                    } else {
-                        result.append(.downloadDocument)
-                    }
-                }
-                
-                if grantedPermissions.contains(.delete) {
-                    if !item.isReadOnlyFolder {
-                        result.append(.moveToTrashShared)
-                    }
-                }
-            }
+        guard let grantedPermissions = item.privateSharePermission?.granted,
+              (grantedPermissions.contains(.read) ||
+                grantedPermissions.contains(.writeAcl) ||
+                grantedPermissions.contains(.delete))
+        else {
             return result
         }
         
-        switch status {
-        case .trashed:
-            result = ElementTypes.trashState
-        default:
-            if item.isLocalItem {
-                let inProgress = UploadService.default.isInQueue(item: item.uuid)
-                result = [.share, inProgress ? .syncInProgress : .sync, .info]
-            } else {
-                switch item.fileType {
-                case .image, .video:
-                    result = [.share, .download]
-                    
-                    if item.fileType == .image {
-//                        if Device.isTurkishLocale {
-//                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-//                        }
-                    }
-
-                default:
-                    result = [.share, .download, .moveToTrash]
-                }
-                
-                if item.fileType.isContained(in: [.video, .image]) {
-                    result.append(.moveToTrash)
+        //specific actions order
+        if status == .trashed {
+            result = item.privateSharePermission?.granted?.contains(.delete) == true ? ElementTypes.trashState : []
+            
+        } else {
+            if grantedPermissions.contains(.read) {
+                result.append(.share)
+            }
+            
+            if grantedPermissions.contains(.writeAcl) {
+                result.append(.privateShare)
+            }
+            
+            if grantedPermissions.contains(.delete) {
+                if !item.isReadOnlyFolder {
+                    result.append(.moveToTrashShared)
                 }
             }
+            
+            if grantedPermissions.contains(.read) {
+                if item.fileType.isContained(in: [.image, .video]) {
+                    result.append(.download)
+                } else {
+                    result.append(.downloadDocument)
+                }
+            }
+            
+            result.append(.info)
         }
         
         return result
@@ -117,7 +110,7 @@ enum ElementTypes {
         var result: [ElementTypes]
 
         switch status {
-        case .trashed:
+        case .trashed: // TODO check here if permissions contains DELETE and give appropriate action list for that
             if viewType == .actionSheet {
                 result = [.select] + ElementTypes.trashState
             } else {
@@ -149,95 +142,105 @@ enum ElementTypes {
 
         return result
     }
+
+    static func specifiedMoreActionTypesForTrashBin(for status: ItemStatus, item: WrapData) -> [ElementTypes] {
+        var actionsArray: [ElementTypes] = [.select]
+        if item.privateSharePermission?.granted?.contains(.delete) == true {
+            actionsArray.append(contentsOf: [.restore, .deletePermanently])
+        }
+        actionsArray.append(.info)
+        return actionsArray
+    }
     
     static func specifiedMoreActionTypes(for status: ItemStatus, item: BaseDataSourceItem) -> [ElementTypes] {
-        if status == .trashed {
-            return[.info] + ElementTypes.trashState
+        //TODO: allow move and add/remove favorites if api is ready
+        var trashBinRelated = item.privateShareType == .trashBin
+        if case .innerFolder = item.privateShareType, item.privateShareType.rootType == .trashBin {
+            trashBinRelated = true
+        }
+        
+        if trashBinRelated {
+            return (item as? WrapData)?.privateSharePermission?.granted?.contains(.delete) ?? false ? [.select] + ElementTypes.trashState + [.info] : [.select, .info]
         }
         
         guard let item = item as? Item else {
             return []
         }
         
-        var types = [ElementTypes]()
-        if !item.isOwner {
-            //shared with me items
-            types.append(.info)
-            if let grantedPermissions = item.privateSharePermission?.granted {
-                if grantedPermissions.contains(.read) {
-                    if item.fileType.isContained(in: [.image, .video]) {
-                        types.append(.download)
-                    } else {
-                        types.append(.downloadDocument)
-                    }
-                }
-                
-                if grantedPermissions.contains(.delete) {
-                    if !item.isReadOnlyFolder {
-                        types.append(.moveToTrashShared)
-                    }
+        var types: [ElementTypes] = [.select]
+
+        if let grantedPermissions = item.privateSharePermission?.granted {
+            if grantedPermissions.contains(.read) {
+                types.append(.share)
+            }
+            
+            if grantedPermissions.contains(.writeAcl) {
+                types.append(.privateShare)
+            }
+            
+            // TODO: - Add / Delete permission check  //grantedPermissions.contains(.writeAcl)
+            if item.isShared {
+                if item.privateShareType == .withMe {
+                    types.append(.leaveSharing)
+                } else if item.privateShareType == .byMe {
+                    types.append(.endSharing)
                 }
             }
-            types.append(.leaveSharing)
-            return types
+            
+            if grantedPermissions.contains(.read) {
+                if item.fileType.isContained(in: [.image, .video]) {
+                    types.append(.download)
+                } else {
+                    types.append(.downloadDocument)
+                }
+            }
+            
+            if grantedPermissions.contains(.setAttribute) {
+                types.append(.rename)
+            }
+            
+            if grantedPermissions.contains(.delete) {
+                if !item.isReadOnlyFolder {
+                    types.append(.moveToTrashShared)
+                }
+            }
         }
         
-        types = [.info, .share, .move]
-        
-        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        if !item.isReadOnlyFolder {
-            types.append(.moveToTrash)
-        }
-        
-        if item.fileType == .image || item.fileType == .video {
-            types.append(.download)
-        } else if item.fileType == .audio || item.fileType.isDocumentPageItem {
-            types.append(.downloadDocument)
-        }
-        
-        if item.isShared {
-            types.append(.endSharing)
-        }
-        
+        types.append(.info)
+
         return types
     }
     
-    func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = [], divorseItems: DivorseItems? = nil) -> String? {
-        if let divorseItems = divorseItems {
-            return divorseSuccessMessage(divorseItems: divorseItems)
-        }
-        
+    func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = []) -> String? {
         switch self {
-        case .addToFavorites:
-            return TextConstants.snackbarMessageAddedToFavorites
-        case .download:
-            let format = TextConstants.snackbarMessageDownloadedFilesFormat
-            return String(format: format, relatedItems.count)
-        case .downloadDocument:
-            let format = TextConstants.snackbarMessageDownloadedFilesFormat
-            return String(format: format, relatedItems.count)
-        case .emptyTrashBin:
-            return TextConstants.trashBinDeleteAllComplete
-        case .move:
-            return TextConstants.snackbarMessageFilesMoved
-        case .removeFromFavorites:
-            return TextConstants.snackbarMessageRemovedFromFavorites
-        case .endSharing:
-            return TextConstants.privateSharedEndSharingActionSuccess
-        case .leaveSharing:
-            return TextConstants.privateSharedLeaveSharingActionSuccess
-        case .moveToTrashShared:
-            return TextConstants.moveToTrashItemsSuccessText
-        default:
-            return nil
+            case .addToFavorites:
+                return TextConstants.snackbarMessageAddedToFavorites
+            case .download, .downloadDocument:
+                return TextConstants.downloadSuccess
+            case .emptyTrashBin:
+                return TextConstants.trashBinDeleteAllComplete
+            case .move:
+                return TextConstants.snackbarMessageFilesMoved
+            case .removeFromFavorites:
+                return TextConstants.snackbarMessageRemovedFromFavorites
+            case .endSharing:
+                return TextConstants.stopSharingSuccess
+            case .leaveSharing:
+                return TextConstants.leaveSharingSuccess
+            case .moveToTrashShared, .moveToTrash:
+                return TextConstants.deleteSuccess
+            case .rename:
+                return TextConstants.renameSuccess
+            case .deletePermanently:
+                return TextConstants.trashBinDeleteActionSucceed
+            case .restore:
+                return TextConstants.trashBinRestoreSucceed
+            default:
+                return nil
         }
     }
     
-    func alertSuccessMessage(divorseItems: DivorseItems? = nil) -> String? {
-        if let divorseItems = divorseItems {
-            return divorseSuccessMessage(divorseItems: divorseItems)
-        }
-        
+    func alertSuccessMessage() -> String? {
         switch self {
         case .download:
             return TextConstants.popUpDownloadComplete
@@ -261,14 +264,7 @@ enum ElementTypes {
                 albums: TextConstants.moveToTrashAlbumsSuccessText,
                 folders: TextConstants.moveToTrashFoldersSuccessText
             )
-            
-        case .delete:
-            triplet = SuccessLocalizationTriplet(
-                items: TextConstants.deleteItemsSuccessText,
-                albums: TextConstants.deleteAlbumsSuccessText,
-                folders: TextConstants.deleteFoldersSuccessText
-            )
-            
+             
         case .restore:
             triplet = SuccessLocalizationTriplet(
                 items: TextConstants.restoreItemsSuccessText,
@@ -288,38 +284,20 @@ enum ElementTypes {
         return triplet
     }
     
-    func divorseSuccessMessage(divorseItems: DivorseItems) -> String {
-        let localizations = localizationTriplet()
-
-        let text: String
-        switch divorseItems {
-        case .items:
-            text = localizations.items
-            
-        case .albums:
-            text = localizations.albums
-            
-        case .folders:
-            text = localizations.folders
-        }
-        
-        return text
-    }
-    
-    func actionTitle(fileType: FileType? = nil) -> String {
+    var actionTitle: String {
         switch self {
         case .info:
-            return TextConstants.actionSheetInfo
+            return TextConstants.actionInfo
         case .download, .downloadDocument:
-            return TextConstants.actionSheetDownload
-        case .moveToTrash, .moveToTrashShared, .delete:
-            return TextConstants.actionSheetDelete
+            return TextConstants.actionDownload
+        case .moveToTrash, .moveToTrashShared:
+            return TextConstants.actionDelete
         case .restore:
             return TextConstants.actionSheetRestore
         case .move:
             return TextConstants.actionSheetMove
         case .share, .shareAlbum:
-            return TextConstants.actionSheetShare
+            return TextConstants.actionShareCopy
         case .emptyTrashBin:
             return TextConstants.actionSheetEmptyTrashBin
         case .photos:
@@ -349,19 +327,21 @@ enum ElementTypes {
         case .documentDetails:
             return TextConstants.actionSheetDocumentDetails
         case .select:
-            return TextConstants.actionSheetSelect
+            return TextConstants.actionSelect
         case .selectAll:
             return TextConstants.actionSheetSelectAll
         case .deSelectAll:
             return TextConstants.actionSheetDeSelectAll
-        case .print:
-            return TextConstants.tabBarPrintLabel
         case .rename:
-            return TextConstants.actionSheetRename
+            return TextConstants.actionRename
         case .endSharing:
-            return TextConstants.privateSharedEndSharingActionTitle
+            return TextConstants.actionStopSharing
         case .leaveSharing:
-            return TextConstants.privateSharedLeaveSharingActionTitle
+            return TextConstants.actionLeaveSharing
+        case .privateShare:
+            return TextConstants.actionSharePrivately
+        case .deletePermanently:
+            return TextConstants.trashBinDeleteAction
         default:
             return ""
         }

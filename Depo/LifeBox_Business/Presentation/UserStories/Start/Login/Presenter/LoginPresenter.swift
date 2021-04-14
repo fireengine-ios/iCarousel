@@ -29,7 +29,6 @@ class LoginPresenter: BasePresenter {
     
     private func onLogin() {
         view.hideErrorMessage()
-        view.dehighlightTitles()
         startAsyncOperationDisableScreen()
     }
     
@@ -37,28 +36,20 @@ class LoginPresenter: BasePresenter {
         completeAsyncOperationEnableScreen()
         view.showErrorMessage(with: text)
     }
+
+    private func showErrorAlertHideSpinner(with title: String?, and subtitle: String?) {
+        completeAsyncOperationEnableScreen()
+        view.showErrorAlert(with: title, and: subtitle)
+    }
     
     private func openEmptyEmailIfNeedOrOpenSyncSettings() {
-        if interactor.isShowEmptyEmail {
-            completeAsyncOperationEnableScreen()
-            openEmptyEmail()
-        } else {
             interactor.updateUserLanguage()
-        }
     }
     
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
         AuthoritySingleton.shared.checkNewVersionApp()
         router.goToHomePage()
-    }
-    
-    private func openEmptyEmail() {
-        let onSuccess: VoidHandler = { [weak self] in
-            self?.interactor.updateUserLanguage()
-        }
-        
-        router.openEmptyEmail(successHandler: onSuccess)
     }
     
     private func failLogin(message: String) {
@@ -72,10 +63,6 @@ class LoginPresenter: BasePresenter {
     private func failedBlockError() {
         completeAsyncOperationEnableScreen()
         view.failedBlockError()
-    }
-    
-    private func openEmptyPhone() {
-        interactor.updateEmptyPhone(delegate: self)
     }
     
     func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler) {
@@ -116,6 +103,7 @@ class LoginPresenter: BasePresenter {
 
 //MARK: - LoginViewOutput
 extension LoginPresenter: LoginViewOutput {
+
     func viewIsReady() {
         startAsyncOperation()
 
@@ -123,35 +111,31 @@ extension LoginPresenter: LoginViewOutput {
         interactor.checkCaptchaRequerement()
     }
     
-    func prepareCaptcha(_ view: CaptchaView) {
-        view.delegate = self
-    }
-    
     func rememberMe(remember: Bool) {
         interactor.rememberMe(state: remember)
     }
-    
-    func sendLoginAndPassword(login: String, password: String) {
+
+    func authenticateWith(flToken: String) {
         onLogin()
-        interactor.authificate(login: removeBrackets(text: login), password: password, atachedCaptcha: nil)
+        interactor.authenticate(with: flToken)
     }
     
-    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String) {
+    func sendLoginAndPassword(login: String, password: String, rememberMe: Bool) {
+        onLogin()
+        interactor.authificate(login: removeBrackets(text: login),
+                               password: password,
+                               rememberMe: rememberMe,
+                               atachedCaptcha: nil)
+    }
+    
+    func sendLoginAndPasswordWithCaptcha(login: String, password: String, rememberMe: Bool, captchaID: String, captchaAnswer: String) {
         onLogin()
         
         let atachedCaptcha = CaptchaParametrAnswer(uuid: captchaID, answer: captchaAnswer)
         interactor.authificate(login: removeBrackets(text: login),
                                password: password,
+                               rememberMe: rememberMe,
                                atachedCaptcha: atachedCaptcha)
-    }
-    
-    func onForgotPasswordTap() {
-        isPresenting = true
-        router.goToForgotPassword()
-    }
-    
-    func startedEnteringPhoneNumber(withPlus: Bool) {
-        interactor.findCoutryPhoneCode(plus: withPlus)
     }
     
     func openSupport() {
@@ -174,10 +158,10 @@ extension LoginPresenter: LoginViewOutput {
 //MARK: - LoginInteractorOutput
 extension LoginPresenter: LoginInteractorOutput {
     
-    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse, rememberMe: Bool) {
         completeAsyncOperationEnableScreen()
         isPresenting = true
-        router.goToTwoFactorAuthViewController(response: response)
+        router.goToTwoFactorAuthViewController(response: response, rememberMe: rememberMe)
     }
     
     func succesLogin() {
@@ -187,7 +171,7 @@ extension LoginPresenter: LoginInteractorOutput {
 
     func processLoginError(_ loginError: LoginResponseError, errorText: String) {
         switch loginError {
-        case .block:
+        case .block, .errorCode10:
             failedBlockError()
             
         case .needCaptcha:
@@ -198,49 +182,62 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.loginScreenAuthWithTurkcellError)
             
         case .needSignUp:
-            needSignUp(message: TextConstants.loginScreenNeedSignUpError)
+            debugLog("processLoginError:  .needSignUp this error should be impossible")
+            failLogin(message: TextConstants.loginScreenServerError)
             
         case .incorrectUsernamePassword:
-            failLogin(message: TextConstants.loginScreenCredentialsError)
+            failLogin(message: TextConstants.loginPageErrorCode30)
             
         case .incorrectCaptcha:
             completeAsyncOperationEnableScreen()
             view.refreshCaptcha()
-            view.captchaFieldError(TextConstants.invalidCaptcha)
+            view.captchaFieldError(TextConstants.loginPageInvalidCaptchaFieldError)
             
         case .networkError:
             failLogin(message: errorText)
             
-        case .unauthorized:
-            failLogin(message: TextConstants.loginScreenCredentialsError)
+        case .unauthorized, .errorCode401, .errorCode0, .errorCode30:
+            failLogin(message: TextConstants.loginPageErrorCode30)
+            
+        case .errorCode4201:
+            failLogin(message: TextConstants.loginPageBlockedIpError)
+            
+        case .errorCode31:
+            failLogin(message: TextConstants.loginPageErrorCode31)
+            
+        case .errorCode32:
+            failLogin(message: TextConstants.loginPageErrorCode32)
+            
+        case .errorCode33:
+            failLogin(message: TextConstants.loginPageErrorCode33)
             
         case .noInternetConnection:
             failLogin(message: TextConstants.errorConnectedToNetwork)
             
         case .emptyPhone:
             completeAsyncOperationEnableScreen()
-            openEmptyPhone()
+            debugLog("processLoginError:  .emptyPhone this error should be impossible")
+//            openEmptyPhone()
             
         case .emptyCaptcha:
-            view.captchaFieldError(TextConstants.captchaIsEmpty)
+            view.captchaFieldError(TextConstants.loginPageEmptyCaptchaFieldError)
             
         case .serverError:
             failLogin(message: TextConstants.loginScreenServerError)
             
+        case .genericError:
+            failLogin(message: TextConstants.loginGenericError)
+            
         case .emptyEmail:
+            debugLog("processLoginError:  .emptyEmail this error should be impossible")
+            failLogin(message: TextConstants.loginPageEmptyLoginFieldError)
             completeAsyncOperationEnableScreen()
-            openEmptyEmail()
+//            openEmptyEmail()
+        case .flAuthFailure:
+            showErrorAlertHideSpinner(with: TextConstants.flLoginErrorPopupTitle, and: TextConstants.flLoginAuthFailure)
+        case .flNotInPool:
+            showErrorAlertHideSpinner(with: TextConstants.flLoginErrorPopupTitle, and: TextConstants.flLoginUserNotInPool)
         }
-        
-    }
-    
-    func needSignUp(message: String) {
-        completeAsyncOperationEnableScreen()
-        let onClose = { [weak self] in
-            self?.isPresenting = true
-            self?.router.goToRegistration()
-        }
-        router.showNeedSignUp(message: message, onClose: onClose)
     }
     
     func needShowCaptcha() {
@@ -249,30 +246,21 @@ extension LoginPresenter: LoginInteractorOutput {
         view.showCaptcha()
     }
     
-    func foundCoutryPhoneCode(code: String, plus: Bool) {
-        if plus {
-            let countryCode = code.isEmpty ? "+" : code
-            view.enterPhoneCountryCode(countryCode: countryCode)
-        } else {
-            view.insertPhoneCountryCode(countryCode: code)
-        }
-    }
-    
     func fieldError(type: LoginFieldError) {
         completeAsyncOperationEnableScreen()
         
         switch type {
         case .loginIsEmpty:
-            view.loginFieldError(TextConstants.loginEmailOrPhoneError)
+            view.loginFieldError(TextConstants.loginPageEmptyLoginFieldError)
             
         case .loginIsNotValid:
-            view.loginFieldError(TextConstants.loginUsernameNotValid)
+            view.loginFieldError(TextConstants.loginPageInvalidLoginFieldError)
             
         case .passwordIsEmpty:
-            view.passwordFieldError(TextConstants.loginPasswordError)
+            view.passwordFieldError(TextConstants.loginPageEmptyPasswordFieldError)
             
         case .captchaIsEmpty:
-            view.captchaFieldError(TextConstants.captchaIsEmpty)
+            view.captchaFieldError(TextConstants.loginPageEmptyCaptchaFieldError)
         }
     }
     
@@ -310,12 +298,6 @@ extension LoginPresenter: LoginInteractorOutput {
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
     }
     
-    func successedVerifyPhone() {        
-        router.showPhoneVerifiedPopUp { [weak self] in
-            self?.interactor.stopUpdatePhone()
-        }
-    }
-    
     func updateUserLanguageSuccess() {
         openApp()
         completeAsyncOperationEnableScreen()
@@ -342,24 +324,6 @@ extension LoginPresenter: LoginInteractorOutput {
         asyncOperationSuccess()
         view.showErrorMessage(with: message)
     }
-    
-    func showSupportView() {
-        view.showSupportView()
-    }
-    
-    func showFAQView() {
-        view.showFAQView()
-    }
-}
-
-// MARK: - CaptchaViewErrorDelegate
-
-extension LoginPresenter: CaptchaViewErrorDelegate {
-    
-    func showCaptchaError(error: Error) {
-        
-        view.showErrorMessage(with: error.description)
-    }
 }
 
 // MARK: - AccountWarningServiceDelegate
@@ -370,7 +334,8 @@ extension LoginPresenter: AccountWarningServiceDelegate {
     }
     
     func needToRelogin() {
-        interactor.tryToRelogin()
+        debugLog("needToRelogin, no silent login after phone update")
+//        interactor.tryToRelogin()
     }
     
 }

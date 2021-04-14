@@ -22,7 +22,8 @@ final class ServerMessageError {
     private enum ErrorKeys {
         static let accountNotFoundForEmail = "ACCOUNT_NOT_FOUND_FOR_EMAIL"
         static let privateShareMessageLimit = "Invalid sharing message"
-        static let privateShatePhoneOrMailLimit = "Invalid sharing subject"
+        static let privateSharePhoneOrMailLimit = "Invalid sharing subject"
+        static let privateShareNumberOfItemsLimit = "Max sharing item limit exceeded"
     }
 }
 extension ServerMessageError: LocalizedError {
@@ -31,13 +32,17 @@ extension ServerMessageError: LocalizedError {
             return TextConstants.errorServer
         }
         
+        //in case we didn't receive customErrorCode
+        //for some error codes we didn't check this mesage
         switch message {
         case ErrorKeys.accountNotFoundForEmail:
             return TextConstants.forgotPasswordErrorNotRegisteredText
         case ErrorKeys.privateShareMessageLimit:
             return TextConstants.privateShareMessageLimit
-        case ErrorKeys.privateShatePhoneOrMailLimit:
+        case ErrorKeys.privateSharePhoneOrMailLimit:
             return TextConstants.privateSharePhoneOrMailLimit
+        case ErrorKeys.privateShareNumberOfItemsLimit:
+            return TextConstants.privateShareNumberOfItemsLimit
         default:
             return message
         }
@@ -50,11 +55,17 @@ extension ServerMessageError {
         if let customErrorCode = customErrorCode {
             switch customErrorCode {
             case 4115:
-                return TextConstants.privateShareMessageLimit
+                return TextConstants.PrivateShare.fail_errorcode_4115
             case 4114:
                 return TextConstants.privateSharePhoneOrMailLimit
             case 4116:
-                return TextConstants.temporaryErrorOccurredTryAgainLater
+                return TextConstants.PrivateShare.fail_errorcode_4116
+            case 4118:
+                return TextConstants.PrivateShare.fail_errorcode_4118
+            case 5101:
+                return TextConstants.PrivateShare.fail_errorcode_5101
+            case 5102:
+                return TextConstants.PrivateShare.fail_errorcode_5102
             default:
                 return errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
             }

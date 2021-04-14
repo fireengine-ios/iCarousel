@@ -12,8 +12,17 @@ final class EmptyView: UIView, NibInit {
 
     static func view(with type: ViewType) -> EmptyView {
         let view = EmptyView.initFromNib()
-        view.emptyLabel.text = type.title
+        view.emptyLabel.text = type.description
         view.imageView.image = type.image
+        if let titleText = type.title {
+            view.emptyTitleLabel.text = titleText
+            view.empyTitleLabelHeight.constant = 19
+        }
+        if let headerText = type.header {
+            view.searchHeaderLabel.text = headerText
+            view.searchHeaderLabel.isHidden = false
+        }
+        
         return view
     }
     
@@ -23,19 +32,47 @@ final class EmptyView: UIView, NibInit {
         case sharedBy
         case sharedWith
         case sharedInnerFolder
+        case trashBinInnerFolder
+        case sharedArea
+        case myDisk
+        case search(text: String)
         
-        var title: String {
+        var description: String {
             switch self {
                 case .hiddenBin:
                     return TextConstants.hiddenBinEmpty
-                case .trashBin:
-                    return TextConstants.trashBinEmpty
+                case .trashBin, .trashBinInnerFolder:
+                    return TextConstants.trashBinEmptyPage
                 case .sharedBy:
-                    return TextConstants.privateSharedByMeEmptyText
+                    return TextConstants.sharedByMeEmptyPage
                 case .sharedWith:
-                    return TextConstants.privateSharedWithMeEmptyText
+                    return TextConstants.sharedWithMeEmptyPage
                 case .sharedInnerFolder:
-                    return TextConstants.privateSharedInnerFolderEmptyText
+                    return TextConstants.folderEmptyPage
+                case .sharedArea:
+                    return TextConstants.sharedAreaEmptyPage
+                case .myDisk:
+                    return TextConstants.myDiskEmptyPage
+                case .search(let text):
+                    return String(format: TextConstants.emptySearchDescription, text)
+            }
+        }
+        
+        var title: String? {
+            switch self {
+                case .hiddenBin, .trashBin, .trashBinInnerFolder, .sharedBy, .sharedWith, .sharedInnerFolder, .sharedArea, .myDisk:
+                    return nil
+                case .search:
+                    return TextConstants.emptySearchTitle
+            }
+        }
+        
+        var header: String? {
+            switch self {
+                case .hiddenBin, .trashBin, .trashBinInnerFolder, .sharedBy, .sharedWith, .sharedInnerFolder, .sharedArea, .myDisk:
+                    return nil
+                case .search(let text):
+                    return String(format: TextConstants.emptySearchHeader, text)
             }
         }
         
@@ -43,14 +80,20 @@ final class EmptyView: UIView, NibInit {
             switch self {
                 case .hiddenBin:
                     return UIImage(named: "hidden_big")
-                case .trashBin:
-                    return UIImage(named: "trash_big")
+                case .trashBin, .trashBinInnerFolder:
+                    return UIImage(named: "trash_bin_empty")
                 case .sharedBy:
                     return nil
                 case .sharedWith:
                     return nil
                 case .sharedInnerFolder:
                     return nil
+                case .sharedArea:
+                    return nil
+                case .myDisk:
+                    return nil
+                case .search:
+                    return UIImage(named: "emptySearch")
             }
         }
     }
@@ -61,13 +104,44 @@ final class EmptyView: UIView, NibInit {
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
             newValue.textColor = UIColor.lrBrownishGrey.withAlphaComponent(0.5)
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         }
     }
+    
+    
+    @IBOutlet private weak var emptyTitleLabel: UILabel! {
+        willSet {
+            newValue.text = ""
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
+            newValue.textColor = ColorConstants.confirmationPopupTitle
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
+        }
+    }
+    
+    @IBOutlet private weak var searchHeaderLabel: UILabel! {
+        willSet {
+            newValue.isHidden = true
+            newValue.text = ""
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
+            newValue.textColor = ColorConstants.confirmationPopupTitle
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
+        }
+    }
+    
+    @IBOutlet private weak var empyTitleLabelHeight: NSLayoutConstraint!
     
     @IBOutlet private weak var imageView: UIImageView!
     
     @IBOutlet private weak var topOffsetConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomOffsetConstraint: NSLayoutConstraint!
+
+    
+    func set(queryText: String) {
+        searchHeaderLabel.text = String(format: TextConstants.emptySearchHeader, queryText)
+        emptyLabel.text = String(format: TextConstants.emptySearchDescription, queryText)
+    }
     
     var topOffset: CGFloat {
         get {
@@ -75,6 +149,16 @@ final class EmptyView: UIView, NibInit {
         }
         set {
             topOffsetConstraint.constant = newValue
+            layoutIfNeeded()
+        }
+    }
+    
+    var bottomOffset: CGFloat {
+        get {
+            return bottomOffsetConstraint.constant
+        }
+        set {
+            bottomOffsetConstraint.constant = newValue
             layoutIfNeeded()
         }
     }

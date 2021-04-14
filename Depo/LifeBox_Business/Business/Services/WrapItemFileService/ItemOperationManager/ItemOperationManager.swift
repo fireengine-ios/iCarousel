@@ -50,6 +50,7 @@ protocol ItemOperationManagerViewProtocol: class {
     func finishUploadFiles()
     
     func didMoveToTrashItems(_ items: [Item])
+    func didMoveToTrashSharedItems(_ items: [Item])
     func putBackFromTrashItems(_ items: [Item])
     func didEmptyTrashBin()
     
@@ -62,11 +63,15 @@ protocol ItemOperationManagerViewProtocol: class {
 
 extension ItemOperationManagerViewProtocol {
     func startUploadFile(file: WrapData) {
-        UIApplication.setIdleTimerDisabled(true)
+        DispatchQueue.toMain {
+            UIApplication.setIdleTimerDisabled(true)
+        }
     }
     
     func startUploadFilesToAlbum(files: [WrapData]) {
-        UIApplication.setIdleTimerDisabled(true)
+        DispatchQueue.toMain {
+            UIApplication.setIdleTimerDisabled(true)
+        }
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
@@ -108,6 +113,7 @@ extension ItemOperationManagerViewProtocol {
     }
     
     func didMoveToTrashItems(_ items: [Item]) {}
+    func didMoveToTrashSharedItems(_ items: [Item]) {}
     func putBackFromTrashItems(_ items: [Item]) {}
     func didEmptyTrashBin() {}
     
@@ -290,7 +296,13 @@ class ItemOperationManager: NSObject {
             self.views.invoke { $0.didMoveToTrashItems(items) }
         }
     }
-            
+    
+    func didMoveToTrashSharedItems(_ items: [Item]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashSharedItems(items) }
+        }
+    }
+    
     func putBackFromTrashItems(_ items: [Item]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.putBackFromTrashItems(items) }

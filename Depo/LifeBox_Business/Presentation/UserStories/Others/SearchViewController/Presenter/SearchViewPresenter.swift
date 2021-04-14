@@ -235,7 +235,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         } else {
             debugLog("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
             
-            bottomBarPresenter?.show(animated: true, onView: nil)
+//            bottomBarPresenter?.show(animated: true, onView: nil)
         }
         
         view.setNavBarRigthItem(active: canShow3DotsButton())
@@ -247,7 +247,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             let array = dataSource.getSelectedItems() as? [Item] else {
                 return
         }
-        bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
+        // TODO: - update later without config. task should be in backlog
+        bottomBarPresenter?.setupTabBarWith(items: array, shareType: nil)
     }
     
     func onMaxSelectionExeption() {}
@@ -290,11 +291,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
                 actionTypes.remove(at: renameIndex)
             }
-            
-            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
-                actionTypes.remove(at: printIndex)
-            }
-            
+          
             alertSheetModule?.showAlertSheet(with: actionTypes,
                                              items: selectedItems,
                                              presentedBy: sender,
@@ -311,17 +308,12 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         }
     }
     
-    func didSelectAction(type: ActionType, on item: Item?, sender: Any?) {
+    func didSelectAction(type: ElementTypes, on item: Item?, sender: Any?) {
         guard let item = item else {
             return
         }
         
-        switch type {
-        case .elementType(let elementType):
-            alertSheetModule?.handleAction(type: elementType, items: [item], sender: sender)
-        case .shareType(let shareType):
-            alertSheetModule?.handleShare(type: shareType, items: [item], sender: sender)
-        }
+        alertSheetModule?.handleAction(type: type, items: [item], sender: sender)
     }
     
     // MARK: - Spinner
@@ -401,7 +393,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.setSelectionState(selectionState: false)
     }
     
-    func selectModeSelected() {
+    func selectModeSelected(with item: WrapData?) {
         debugLog("SearchViewPresenter selectModeSelected")
         
         startEditing()

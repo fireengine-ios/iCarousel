@@ -23,80 +23,19 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupConfig(withConfig config: EditingBarConfig) {
-        var itemTupple = [PreDetermendType]()
-        for type in config.elementsConfig {
-            switch type {
-            case .delete:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .download:
-                itemTupple.append(EditinglBar.PreDetermendTypes.download)
-            case .downloadDocument:
-                itemTupple.append(EditinglBar.PreDetermendTypes.downloadDocument)
-            case .info:
-                itemTupple.append(EditinglBar.PreDetermendTypes.info)
-            case .move:
-                itemTupple.append(EditinglBar.PreDetermendTypes.move)
-            case .share:
-                itemTupple.append(EditinglBar.PreDetermendTypes.share)
-            case .sync:
-                itemTupple.append(EditinglBar.PreDetermendTypes.sync)
-            case .syncInProgress:
-                itemTupple.append(EditinglBar.PreDetermendTypes.syncInProgress)
-            case .makeAlbumCover:
-                itemTupple.append(EditinglBar.PreDetermendTypes.makeCover)
-            case .print:
-                itemTupple.append(EditinglBar.PreDetermendTypes.print)
-            case .moveToTrash:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .restore:
-                itemTupple.append(EditinglBar.PreDetermendTypes.restore)
-            case .moveToTrashShared:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            default:
-                break
-            }
-        }
-
-        view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple)
+        view.setupBar(style: config.style, config: config)
     }
 
-    func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
-        let downloadIndex = originalConfig.elementsConfig.index(of: .download)
-        let syncIndex = originalConfig.elementsConfig.index(of: .sync)
-        let moveToTrashIndex = originalConfig.elementsConfig.index(of: .moveToTrash)
+    func setupTabBarWith(items: [BaseDataSourceItem], shareType: PrivateShareType? = nil) {
+        guard let wrapData = items as? [WrapData] else { return }
 
-        let validIndexes = [downloadIndex, syncIndex, moveToTrashIndex].compactMap { $0 }
-        
-        guard !validIndexes.isEmpty else {
-            return
-        }
-        
-        view.disableItems(at: validIndexes)
-        
-        guard !items.isEmpty else {
-            return
-        }
-        
-        let hasLocal = items.contains(where: { $0.isLocalItem == true })
-        let hasRemote = items.contains(where: { $0.isLocalItem != true })
+        let trashBinRelated = shareType?.isTrashBinRelated ?? false
 
-        if hasRemote {
-            view.enableItems(at: [moveToTrashIndex, downloadIndex].compactMap { $0 })
-        }
-        
-        if hasLocal {
-            view.enableItems(at: [syncIndex].compactMap { $0 })
-        }
-        
-        guard items.allSatisfy({ $0 is WrapData }) else {
-            return
-        }
-        
-        let hasReadOnlyFolders = items.first(where: { ($0 as? WrapData)?.isReadOnlyFolder == false}) == nil
-        
-        if hasReadOnlyFolders {
-            view.disableItems(at: [moveToTrashIndex].compactMap { $0 })
-        }
+        let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
+        let elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
+
+        let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque)
+        setupConfig(withConfig: config)
     }
     
     override func dismiss(animated: Bool) {
@@ -108,36 +47,122 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
-    func show(animated: Bool, onView sourceView: UIView?) {
-        let router = RouterVC()
-        guard let rootVC = router.rootViewController else {
-            return
-        }
-        var shownSourceView: UIView
-        if let newSourceView = sourceView {
-            shownSourceView = newSourceView
-        } else {
-            if let tabBarViewController = rootVC as? TabBarViewController {
-                shownSourceView = tabBarViewController.mainContentView
-            } else {
-                shownSourceView = rootVC.view
-            }
-        }
+    func show(animated: Bool, onView sourceView: UIView) {
         NotificationCenter.default.post(name: .hidePlusTabBar, object: nil)
-        view.showBar(animated: animated, onView: shownSourceView)
+        view.showBar(animated: animated, onView: sourceView)
     }
     
-    func bottomBarSelectedItem(index: Int, sender: UITabBarItem) {
+    
+    /// Returns matches  bitmask value after bitwise "and" of selection
+    private func calculateMatchesBitmasks(from selectedItems: [WrapData]) -> Int {
+        let itemsBitmasksArray = selectedItems.compactMap { $0.privateSharePermission?.bitmask }
+        guard let firstElement = itemsBitmasksArray.first else { return 0 }
+        
+        return Int(itemsBitmasksArray.reduce(firstElement, &))
+    }
+
+    /// Returns element types array calculated from bitmask
+    private func createElementTypesArray(from bitmask: Int, trashBinRelated: Bool = false) -> [ElementTypes] {
+        var bitmaskValue = bitmask
+        var permissions = [PrivateSharePermission]()
+        
+        if bitmaskValue >= 512 {
+            // Read acl
+            permissions.append(.readAcl)
+            bitmaskValue -= 512
+        }
+        
+        if bitmaskValue >= 256 {
+            // Write acl
+            permissions.append(.writeAcl)
+            bitmaskValue -= 256
+        }
+        
+        if bitmaskValue >= 128 {
+            // Comment
+            permissions.append(.comment)
+            bitmaskValue -= 128
+        }
+        
+        if bitmaskValue >= 64 {
+            // Update
+            permissions.append(.update)
+            bitmaskValue -= 64
+        }
+        
+        if bitmaskValue >= 32 {
+            // Set attribute
+            permissions.append(.setAttribute)
+            bitmaskValue -= 32
+        }
+        
+        if bitmaskValue >= 16 {
+            // Delete
+            permissions.append(.delete)
+            bitmaskValue -= 16
+        }
+        
+        if bitmaskValue >= 8 {
+            // Create
+            permissions.append(.create)
+            bitmaskValue -= 8
+        }
+        
+        if bitmaskValue >= 4 {
+            // List
+            permissions.append(.list)
+            bitmaskValue -= 4
+        }
+        
+        if bitmaskValue >= 2 {
+            // Preview
+            permissions.append(.preview)
+            bitmaskValue -= 2
+        }
+        
+        if bitmaskValue >= 1 {
+            // Read
+            permissions.append(.read)
+            bitmaskValue -= 1
+        }
+        
+        //specific actions order
+        var elementTypesArray = [ElementTypes]()
+        
+        if trashBinRelated {
+            if permissions.contains(.delete) {
+                elementTypesArray.append(.restore)
+                elementTypesArray.append(.deletePermanently)
+            }
+            
+        } else {
+            if permissions.contains(.read) {
+                elementTypesArray.append(.share)
+            }
+            
+            if permissions.contains(.writeAcl) {
+                elementTypesArray.append(.privateShare)
+            }
+            
+            if permissions.contains(.delete) {
+                elementTypesArray.append(.moveToTrash)
+            }
+            
+            if permissions.contains(.read) {
+                elementTypesArray.append(.download)
+            }
+        }
+        
+        return elementTypesArray
+    }
+    
+    func bottomBarSelected(actionType: ElementTypes) {
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
-            guard let self = self,
-                let bottomBarInteractor = self.interactor as? BottomSelectionTabBarInteractorInput,
-                let types = bottomBarInteractor.currentBarcongfig?.elementsConfig else {
+            guard let self = self else {
                     return
             }
             
-            let type = types[index]
-            
-            switch type {
+            switch actionType {
             case .moveToTrash:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -147,18 +172,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
-            case .delete:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.delete(items: selectedItems)
-                } else {
-                    let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
-                    UIApplication.showErrorAlert(message: text)
-                }
+             
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
                 self.interactor.restore(items: selectedItems)
+            case .deletePermanently:
+                self.interactor.deletePermanently(items: selectedItems)
             case .download:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -169,6 +188,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+                
             case .downloadDocument:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
@@ -185,62 +205,33 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     self.router.onInfo(object: firstSelected)
                 }
                 
-                self.view.unselectAll()
             case .move:
                 self.interactor.move(item: selectedItems, toPath: "")
+                
             case .share:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
-                self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
-            case .sync:
-                self.basePassingPresenter?.stopModeSelected()
-                self.interactor.sync(item: selectedItems)
-            case .print:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .print))
-                self.interactor.trackEvent(elementType: .print)
-                self.router.showPrint(items: selectedItems)
+                self.interactor.originalShare(item: selectedItems, sourceRect: self.middleTabBarRect)
+                
+            case .privateShare:
+                //\AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share)) // add analytics here later?
+                self.interactor.privateShare(item: selectedItems, sourceRect: self.middleTabBarRect)
+
             case .moveToTrashShared:
                 self.interactor.moveToTrashShared(items: selectedItems)
+                
             default:
                 break
             }
         }
     }
+    
+    func showMenu(actionTypes: [ElementTypes], sender: UIButton) {
+        showAlertSheet(withTypes: actionTypes, presentedBy: sender)
+    }
 
-    func showAlertSheet(withTypes types: [ElementTypes], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
+    private func showAlertSheet(withTypes types: [ElementTypes], presentedBy sender: Any?) {
         constractActions(withTypes: types, forItem: nil) { [weak self] actions in
             self?.presentAlertSheet(withActions: actions, presentedBy: sender)
-        }
-    }
-    
-    func showAlertSheet(withItems items: [BaseDataSourceItem], presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        if items.count == 0 {//TODO: FOR NOW
-            return
-        }
-        guard let items = items as? [Item] else {
-            return
-        }
-        constractActions(withTypes: adjastActionTypes(forItems: items), forItem: nil) { [weak self] actions in
-            self?.presentAlertSheet(withActions: actions, presentedBy: sender)
-        }
-    }
-    
-    func showSpecifiedAlertSheet(withItem item: BaseDataSourceItem, presentedBy sender: Any?, onSourceView sourceView: UIView?) {
-        
-        let headerAction = UIAlertAction(title: item.name ?? "file", style: .default, handler: {_ in
-            
-        })
-        headerAction.isEnabled = false
-        
-        var types: [ElementTypes] = [.info, .share, .move]
-        
-        guard let item = item as? Item else {
-            return
-        }
-        types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        types.append(.moveToTrash)
-        
-        constractActions(withTypes: types, forItem: [item]) { [weak self] actions in
-            self?.presentAlertSheet(withActions: [headerAction] + actions, presentedBy: sender)
         }
     }
     
@@ -324,22 +315,21 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 var action: UIAlertAction
                 switch $0 {
                 case .info:
-                    action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionInfo, style: .default, handler: { _ in
                         self.router.onInfo(object: currentItems.first!)
-                        self.view.unselectAll()
                     })
                     
                 case .download:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionDownload, style: .default, handler: { _ in
                         self.interactor.download(item: currentItems)
                     })
                 case .downloadDocument:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionDownload, style: .default, handler: { _ in
                         self.interactor.downloadDocument(items: currentItems)
                     })
-                case .delete:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        self.interactor.delete(items: currentItems)
+                case .deletePermanently:
+                    action = UIAlertAction(title: TextConstants.trashBinDeleteYesAction, style: .default, handler: { _ in
+                        self.interactor.deletePermanently(items: currentItems)
                     })
                 case .restore:
                     action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
@@ -349,9 +339,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
                         self.interactor.move(item: currentItems, toPath: "")
                     })
+                case .privateShare:
+                    action = UIAlertAction(title: TextConstants.actionShareCopy, style: .default, handler: { _ in
+                        self.interactor.privateShare(item: currentItems, sourceRect: self.middleTabBarRect)
+                    })
                 case .share:
-                    action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                        self.interactor.share(item: currentItems, sourceRect: self.middleTabBarRect)
+                    action = UIAlertAction(title: TextConstants.actionShareCopy, style: .default, handler: { _ in
+                        self.interactor.originalShare(item: currentItems, sourceRect: self.middleTabBarRect)
                     })
                 //Photos and albumbs
                 case .photos:
@@ -421,10 +415,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
                         //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
                     })
-                case .print:
-                    action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
-                        //TODO: will be implemented in the next package
-                    })
                     
                 default:
                     assertionFailure("👆PLEASE add your new type into switch in constractActions( method in BottomSelectionTabBarPresenter class👆")
@@ -436,18 +426,17 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
     }
     
-    private func presentAlertSheet(withActions actions: [UIAlertAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil) {
-        let routerVC = RouterVC()
-        guard let rootVC = routerVC.rootViewController else {
+    private func presentAlertSheet(withActions actions: [UIAlertAction], presentedBy sender: Any?) {
+        guard let rootVC = RouterVC().getViewControllerForPresent() else {
             return
         }
-        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: { _ in
-            
-        })
-        let actionsWithCancell: [UIAlertAction] = actions + [cancellAction]
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
+        actionSheetVC.view.tintColor = UIColor.black
+        
+        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
+        let allActions = actions + [cancellAction]
+        allActions.forEach { actionSheetVC.addAction($0) }
 
         actionSheetVC.popoverPresentationController?.sourceView = rootVC.view
 
@@ -467,10 +456,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             return
         }
         bottomBarInteractor.currentBarcongfig = config
-        
-        DispatchQueue.main.async {
-            self.setupConfig(withConfig: config)
-        }
+        setupConfig(withConfig: config)
     }
     
     
@@ -478,13 +464,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     override func operationFinished(type: ElementTypes) {
         completeAsyncOperationEnableScreen()
-        view.unselectAll()
         basePassingPresenter?.operationFinished(withType: type, response: nil)
     }
     
     override func operationFailed(type: ElementTypes, message: String) {
         completeAsyncOperationEnableScreen()
-        view.unselectAll()
         basePassingPresenter?.operationFailed(withType: type)
         UIApplication.showErrorAlert(message: message)
     }

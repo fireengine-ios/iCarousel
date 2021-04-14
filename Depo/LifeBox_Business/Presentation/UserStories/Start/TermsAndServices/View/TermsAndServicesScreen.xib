@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAndServicesViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAndServicesViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="acceptButton" destination="kkM-36-uGV" id="Ue8-fu-Mch"/>
                 <outlet property="checkboxesStack" destination="aEZ-sm-9UL" id="K6f-Po-2eV"/>
@@ -49,9 +50,9 @@
                                         </textView>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-e4-jwq">
                                             <rect key="frame" x="0.0" y="155" width="331" height="145"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" systemColor="labelColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
@@ -65,22 +66,22 @@
                                     <viewLayoutGuide key="safeArea" id="48Z-Jc-yGI"/>
                                 </stackView>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="t0s-px-gfW">
-                                    <rect key="frame" x="20" y="486" width="335" height="30"/>
+                                    <rect key="frame" x="20" y="496" width="335" height="30"/>
                                     <subviews>
-                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit  Lorem ipsum dolor sit er elit Lorem ipsum dolor sit er elit " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Khr-2R-F8m" customClass="IntrinsicTextView" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                                            <rect key="frame" x="10" y="10" width="315" height="10"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum dolor sit er elit  Lorem ipsum dolor sit er elit Lorem ipsum dolor sit er elit " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Khr-2R-F8m" customClass="IntrinsicTextView" customModule="lifeBox_Business" customModuleProvider="target">
+                                            <rect key="frame" x="15" y="5" width="305" height="20"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="textColor" systemColor="labelColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="Khr-2R-F8m" secondAttribute="trailing" constant="10" id="PRS-GY-1Jq"/>
-                                        <constraint firstItem="Khr-2R-F8m" firstAttribute="top" secondItem="t0s-px-gfW" secondAttribute="top" constant="10" id="gp2-xn-lWD"/>
-                                        <constraint firstItem="Khr-2R-F8m" firstAttribute="leading" secondItem="t0s-px-gfW" secondAttribute="leading" constant="10" id="jKR-J1-4P8"/>
-                                        <constraint firstAttribute="bottom" secondItem="Khr-2R-F8m" secondAttribute="bottom" constant="10" id="lXk-cj-k7k"/>
+                                        <constraint firstAttribute="trailing" secondItem="Khr-2R-F8m" secondAttribute="trailing" constant="15" id="PRS-GY-1Jq"/>
+                                        <constraint firstItem="Khr-2R-F8m" firstAttribute="top" secondItem="t0s-px-gfW" secondAttribute="top" constant="5" id="gp2-xn-lWD"/>
+                                        <constraint firstItem="Khr-2R-F8m" firstAttribute="leading" secondItem="t0s-px-gfW" secondAttribute="leading" constant="15" id="jKR-J1-4P8"/>
+                                        <constraint firstAttribute="bottom" secondItem="Khr-2R-F8m" secondAttribute="bottom" constant="5" id="lXk-cj-k7k"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -90,13 +91,13 @@
                                 <constraint firstAttribute="height" priority="250" constant="603" id="6if-48-mrw"/>
                                 <constraint firstItem="NGr-cm-icG" firstAttribute="leading" secondItem="heF-JQ-sC2" secondAttribute="leading" constant="22" id="IpH-nZ-8kx"/>
                                 <constraint firstAttribute="trailing" secondItem="NGr-cm-icG" secondAttribute="trailing" constant="22" id="Jht-g7-a0V"/>
-                                <constraint firstItem="t0s-px-gfW" firstAttribute="top" secondItem="aEZ-sm-9UL" secondAttribute="bottom" constant="10" id="U8v-U4-FeN"/>
+                                <constraint firstItem="t0s-px-gfW" firstAttribute="top" secondItem="aEZ-sm-9UL" secondAttribute="bottom" constant="20" id="U8v-U4-FeN"/>
                                 <constraint firstItem="aEZ-sm-9UL" firstAttribute="leading" secondItem="NGr-cm-icG" secondAttribute="leading" constant="2" id="XZ2-JO-JHt"/>
                                 <constraint firstItem="NGr-cm-icG" firstAttribute="top" secondItem="heF-JQ-sC2" secondAttribute="top" constant="16" id="caC-gw-75I">
                                     <variation key="heightClass=regular-widthClass=regular" constant="32"/>
                                 </constraint>
                                 <constraint firstItem="aEZ-sm-9UL" firstAttribute="leading" secondItem="heF-JQ-sC2" secondAttribute="leading" constant="24" id="ezp-9Q-LyK"/>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="t0s-px-gfW" secondAttribute="bottom" constant="80" id="jAv-Uk-2ZF"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="t0s-px-gfW" secondAttribute="bottom" constant="100" id="jAv-Uk-2ZF"/>
                                 <constraint firstItem="t0s-px-gfW" firstAttribute="leading" secondItem="heF-JQ-sC2" secondAttribute="leading" constant="20" symbolic="YES" id="joD-2r-tt3"/>
                                 <constraint firstItem="aEZ-sm-9UL" firstAttribute="trailing" secondItem="NGr-cm-icG" secondAttribute="trailing" constant="-2" id="qCU-BJ-xNW"/>
                                 <constraint firstAttribute="trailing" secondItem="t0s-px-gfW" secondAttribute="trailing" constant="20" symbolic="YES" id="r0V-Le-MEF"/>
@@ -123,11 +124,10 @@
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-mu-fNi">
                     <rect key="frame" x="177.5" y="378.5" width="20" height="20"/>
                 </activityIndicatorView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkM-36-uGV" customClass="BlueButtonWithWhiteText" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                    <rect key="frame" x="53.5" y="706" width="268" height="55"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkM-36-uGV">
+                    <rect key="frame" x="20" y="717" width="335" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="6qg-kG-aNA"/>
-                        <constraint firstAttribute="width" constant="268" id="qVA-Ut-Wzn"/>
+                        <constraint firstAttribute="height" constant="44" id="6qg-kG-aNA"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -135,6 +135,7 @@
                     </connections>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="xou-y7-pRa"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="wx0-Ty-pdf" firstAttribute="leading" secondItem="W6m-KL-HEi" secondAttribute="leading" id="2KZ-Xy-oel"/>
@@ -149,19 +150,26 @@
                 <constraint firstItem="xou-y7-pRa" firstAttribute="bottom" secondItem="wx0-Ty-pdf" secondAttribute="bottom" id="PaC-JR-4cz"/>
                 <constraint firstItem="heF-JQ-sC2" firstAttribute="height" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="height" id="Qya-ng-a8K"/>
                 <constraint firstItem="3Nh-mu-fNi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SCg-o8-u6q"/>
+                <constraint firstItem="kkM-36-uGV" firstAttribute="leading" secondItem="xou-y7-pRa" secondAttribute="leading" constant="20" id="TEB-mN-n4U"/>
                 <constraint firstItem="W6m-KL-HEi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nNt-FR-FcE"/>
                 <constraint firstItem="w4a-fl-80T" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="41" id="ohi-3E-wHg"/>
                 <constraint firstAttribute="trailing" secondItem="wx0-Ty-pdf" secondAttribute="trailing" id="tIc-ll-iCz"/>
                 <constraint firstItem="kkM-36-uGV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vhT-k1-Wcj"/>
+                <constraint firstItem="xou-y7-pRa" firstAttribute="trailing" secondItem="kkM-36-uGV" secondAttribute="trailing" constant="20" id="wp5-9e-raZ"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="xou-y7-pRa"/>
             <point key="canvasLocation" x="32.799999999999997" y="154.27286356821591"/>
         </view>
     </objects>
     <resources>
         <image name="NavigationBarBackground" width="520" height="88"/>
         <image name="group-2" width="53" height="53"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

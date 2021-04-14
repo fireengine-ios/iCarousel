@@ -16,7 +16,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [],
-                                               style: .default, tintColor: nil)
+                                               style: .opaque)
         
         let presenter: BaseFilesGreedPresenter = UploadFromLifeBoxPhotosPresenter()
         presenter.sortedRule = sortedRule
@@ -40,7 +40,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [],
-                                               style: .default, tintColor: nil)
+                                               style: .opaque)
         
         let presenter: BaseFilesGreedPresenter = UploadFromLifeBoxAllFilesPresenter()
         presenter.sortedRule = sortRule
@@ -79,7 +79,7 @@ class UploadFromLifeBoxModuleInitializer: NSObject {
         //viewController.floatingButtonsArray.append(contentsOf: [.floatingButtonTakeAPhoto, .floatingButtonUpload, .floatingButtonNewFolder, .floatingButtonUploadFromLifebox])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [],
-                                               style: .default, tintColor: nil)
+                                               style: .opaque)
         
         let presenter: BaseFilesGreedPresenter
         let fileService: RemoteItemsService

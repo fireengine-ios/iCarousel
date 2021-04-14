@@ -9,32 +9,14 @@
 class LoginRouter: LoginRouterInput {
     let router = RouterVC()
     
-    func goToForgotPassword() {
-        let forgotPassword = router.forgotPasswordScreen
-        router.pushViewController(viewController: forgotPassword!)
-    }
-    
     func goToHomePage() {
         let homePage = router.tabBarScreen
         router.setNavigationController(controller: homePage)
     }
     
     func goToTermsAndServices() {
-        let temsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
-        router.pushViewController(viewController: temsAndServices)
-    }
-    
-    func goToRegistration() {
-        if let registrationScreen = router.registrationScreen {
-            router.pushViewController(viewController: registrationScreen)
-        }
-    }
-    
-    func openEmptyEmail(successHandler: @escaping VoidHandler) {
-        let vc = EmailEnterController.initFromNib()
-        vc.successHandler = successHandler
-        let navVC = NavigationController(rootViewController: vc)
-        router.presentViewController(controller: navVC)
+        let termsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
+        router.setNavigationController(controller: UINavigationController(rootViewController: termsAndServices))
     }
     
     func showAccountStatePopUp(image: PopUpImage,
@@ -55,19 +37,9 @@ class LoginRouter: LoginRouterInput {
         router.presentViewController(controller: popUp, animated: false)
     }
     
-    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
-        let vc = TwoFactorAuthenticationViewController(response: response)
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse, rememberMe: Bool) {
+        let vc = TwoFactorAuthenticationViewController(response: response, rememberMe: rememberMe)
         router.pushViewController(viewController: vc)
-    }
-    
-    func showNeedSignUp(message: String, onClose: @escaping VoidHandler) {
-        let popUp = PopUpController.with(title: TextConstants.errorAlert,
-                                         message: message,
-                                         image: .error,
-                                         buttonTitle: TextConstants.ok) { controller in
-                                            controller.close(completion: onClose)
-        }
-        router.presentViewController(controller: popUp)
     }
     
     func openSupport() {
@@ -75,21 +47,8 @@ class LoginRouter: LoginRouterInput {
         router.pushViewController(viewController: controller)
     }
     
-    func showPhoneVerifiedPopUp(_ onClose: VoidHandler?) {
-        let popupVC = PopUpController.with(title: nil,
-                                           message: TextConstants.phoneUpdatedNeedsLogin,
-                                           image: .none,
-                                           buttonTitle: TextConstants.ok) { vc in
-                                            vc.close {
-                                                onClose?()
-                                            }
-        }
-        
-        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
-    }
-    
     func goToFaqSupportPage() {
-        let faqSupportController = router.helpAndSupport
+        let faqSupportController = router.faq
         router.pushViewController(viewController: faqSupportController)
     }
     

@@ -29,13 +29,12 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     func replaceUploaded(_ item: WrapData)
     
-    func updateExpiredItem(_ item: WrapData)
-    
     func appendItems(_ items: [Item])
     
     func onRename(newName: String)
     
     func onValidateName(newName: String)
     
-    func createNewUrl()
+    func createNewUrl(at index: Int)
+    func updateInfo(at index: Int)
 }

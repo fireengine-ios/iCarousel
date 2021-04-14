@@ -83,11 +83,6 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         typeOfOperation = viewType
         
         switch viewType {
-        case .sync:
-            operationLabel.text = ""
-            titleLabel.text = String(format: TextConstants.popUpSyncing, networkType)
-            imageView.image = iconImage
-            
         case .upload:
             operationLabel.text = ""
             titleLabel.text = String(format: TextConstants.popUpUploading, networkType)
@@ -114,6 +109,10 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
 }
 
 extension ProgressCard: LoadingImageViewDelegate {
+    func loadingFinished(hasData: Bool) {
+        //
+    }
+    
     func onImageLoaded(image: UIImage?) {
         privateQueue.async {
 //            WidgetService.shared.notifyWidgetAbout(currentImage: image)

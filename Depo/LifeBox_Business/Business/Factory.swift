@@ -16,7 +16,6 @@ protocol Factory: SharedFactory {
     
     func resolve() -> HomeCardsService
     func resolve() -> AnalyticsService
-    func resolve() -> PrivacyPolicyService
     func resolve() -> ResumableUploadInfoService
 }
 
@@ -43,11 +42,6 @@ extension FactoryMain {
     private static let analyticsService = AnalyticsService()
     func resolve() -> AnalyticsService {
         return FactoryMain.analyticsService
-    }
-    
-    private static let privacyPolicyService = PrivacyPolicyServiceImp()
-    func resolve() -> PrivacyPolicyService {
-        return FactoryMain.privacyPolicyService
     }
     
     private static let resumableUploadInfoService = ResumableUploadInfoServiceImpl()

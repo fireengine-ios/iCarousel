@@ -41,7 +41,7 @@ struct AnalyticsDimension {
     
     let photoEditFilterType: String?
     
-    let shareParameters: [String: Int]?
+    let shareParameters: [String: Any]?
     
     var productParametrs: [String: Any] {
         var dimesionDictionary: [String: Any] = [

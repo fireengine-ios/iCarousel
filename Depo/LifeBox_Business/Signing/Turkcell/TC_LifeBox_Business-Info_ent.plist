@@ -10,7 +10,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>lifebox</string>
+	<string>lifebox business</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -164,6 +164,8 @@
 		<string>TurkcellSaturaDem.ttf</string>
 		<string>TurkcellSaturaBol.ttf</string>
 		<string>TurkcellSaturaBolIta.ttf</string>
+		<string>GT-America-Standard-Regular-Trial.otf</string>
+		<string>GT-America-Standard-Medium-Trial.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

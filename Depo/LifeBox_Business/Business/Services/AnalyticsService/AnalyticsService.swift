@@ -7,7 +7,6 @@
 //
 
 import Adjust
-import FBSDKCoreKit
 import StoreKit
 import Firebase
 import Netmera
@@ -41,12 +40,9 @@ final class AnalyticsService: NSObject {
         #else
         let environment = ADJEnvironmentProduction
         #endif
-        
-        #if LIFEBOX
-        let adjustConfig = ADJConfig(appToken: "hlqdgtbmrdb9", environment: environment)
-        #else
-        let adjustConfig = ADJConfig(appToken: "lonks83r2gow", environment: environment)
-        #endif
+
+        let adjustConfig = ADJConfig(appToken: "bvo85upzcef4", environment: environment)
+       
         Adjust.appDidLaunch(adjustConfig)
     }
     
@@ -81,7 +77,6 @@ final class AnalyticsService: NSObject {
     
     func track(event: AnalyticsEvent) {
         logAdjustEvent(name: event.token)
-        logFacebookEvent(name: AppEvents.Name.viewedContent.rawValue, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
     }
     
     private func logAdjustEvent(name: String, price: Double? = nil, currency: String? = nil) {
@@ -92,12 +87,6 @@ final class AnalyticsService: NSObject {
         }
         Adjust.trackEvent(event)
     }
-    
-    private func logFacebookEvent(name: String, parameters: [String: Any]? = nil) {
-        if let parameters = parameters {
-            AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: parameters)
-        }
-    }    
 }
 
 protocol AnalyticsGA {///GA = GoogleAnalytics
@@ -116,9 +105,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
     func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: String)
     func trackPhotoEditEvent(category: GAEventCategory.PhotoEditCategory, eventAction: GAEventAction, eventLabel: GAEventLabel, filterType: String?)
-//    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
-    func trackStartShare(label: String, shareParameters: [String: Int])
-    func trackUploadShareWithMeItems(shareParameters: [String: Int])
+    func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any])
 }
 
 extension AnalyticsService: AnalyticsGA {
@@ -152,7 +139,7 @@ extension AnalyticsService: AnalyticsGA {
                                             connectionStatus: Bool? = nil,
                                             statusType: String? = nil,
                                             photoEditFilterType: String? = nil,
-                                            shareParameters: [String: Int]? = nil,
+                                            shareParameters: [String: Any]? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -166,35 +153,33 @@ extension AnalyticsService: AnalyticsGA {
 
         let group = DispatchGroup()
         
-///        For all of the events (not only newly added autosync events but also all GA events that we send in current client), we will also send below dimensions each time. For the events that we send before login, there is no need to send.
-///        AutoSync --> True/False
-///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
         var isTwoFactorAuthEnabled: Bool?
 
         var usagePercentage: Int?
         
         if loginStatus {
-            group.enter()
-            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
-                   guard let percentage = percentage else {
-                       group.leave()
-                       return
-                   }
-                   usagePercentage = percentage
-                   group.leave()
-               }
-            
+            //TODO: uncomment when quota API is ready
+//            group.enter()
+//            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
+//                   guard let percentage = percentage else {
+//                       group.leave()
+//                       return
+//                   }
+//                   usagePercentage = percentage
+//                   group.leave()
+//               }
+//
             isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
         }
         
         
         let screenName: Any = screen?.name ?? NSNull()
         
-        group.notify(queue: privateQueue) { 
+        group.notify(queue: privateQueue) {
             parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
                 platform: "iOS", isWifi: ReachabilityService.shared.isReachableViaWiFi,
                 service: TextConstants.NotLocalized.appNameGA, developmentVersion: version,
-                paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
+                paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.externalId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
                 countOfUploadMetric: uploadsMetrics,
                 countOfDownloadMetric: downloadsMetrics,
@@ -215,13 +200,13 @@ extension AnalyticsService: AnalyticsGA {
     }
     
     private func getGAOperatorType() -> String {
-        guard let accountType = SingletonStorage.shared.accountInfo?.accountType else {
+//        guard let accountType = SingletonStorage.shared.accountInfo?.accountType else {
             return ""
-        }
-        if accountType == "ALL_ACCESS" {
-            return "NON_TURKCELL"
-        }
-        return accountType
+//        }
+//        if accountType == "ALL_ACCESS" {
+//            return "NON_TURKCELL"
+//        }
+//        return accountType
     }
     
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {
@@ -518,23 +503,12 @@ extension AnalyticsService: AnalyticsGA {
             Analytics.logEvent(GACustomEventsType.event.key, parameters: eventParameters + dimentionParameters)
         }
     }
-    
-    func trackStartShare(label: String, shareParameters: [String: Int]) {
+
+    func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any]) {
         prepareDimentionsParametrs(screen: nil, shareParameters: shareParameters) { dimentionParametrs in
             let parametrs = self.parameters(category: .sharedFolder,
-                                            action: .share,
-                                            label: .custom(label))
-
-            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
-        }
-    }
-    
-    func trackUploadShareWithMeItems(shareParameters: [String: Int]) {
-        prepareDimentionsParametrs(screen: nil, shareParameters: shareParameters) { dimentionParametrs in
-            let parametrs = self.parameters(category: .sharedFolder,
-                                            action: .upload,
-                                            label: .empty)
-
+                                            action: eventAction,
+                                            label: eventLabel)
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }

@@ -14,4 +14,9 @@ final class TwoFactorChallengeRouter: PhoneVerificationRouter {
         let temsAndServices = router.termsAndServicesScreen(login: true, phoneNumber: nil)
         router.pushViewController(viewController: temsAndServices)
     }
+    
+    func goToHomePage() {
+        let homePage = router.tabBarScreen
+        router.setNavigationController(controller: homePage)
+    }
 }

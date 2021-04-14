@@ -240,26 +240,30 @@ final class UploadService: BaseRequestService {
         }
     }
     
-    private func showCardProgress(type: OperationType, object: WrapData? = nil, newItemsCount: Int = 0) {
+    private func showCardProgress(type: OperationType, object: WrapData? = nil, newItemsCount: Int = 0, forced: Bool = false) {
         switch type {
             case .upload:
-                showUploadCardProgress(object: object, newItemsCount: newItemsCount)
+                showUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
                 
             case .sync:
-                showSyncCardProgress(object: object, newItemsCount: newItemsCount)
+                showSyncCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
                 
             case .sharedWithMeUpload:
-                showSharedWithMeUploadCardProgress(object: object, newItemsCount: newItemsCount)
+                showSharedWithMeUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
                 
             default:
                 assertionFailure()
-                showUploadCardProgress(object: object, newItemsCount: newItemsCount)
+                showUploadCardProgress(object: object, newItemsCount: newItemsCount, forced: forced)
         }
     }
     
-    private func showUploadCardProgress(object: WrapData? = nil, newItemsCount: Int = 0) {
+    private func showUploadCardProgress(object: WrapData? = nil, newItemsCount: Int = 0, forced: Bool = false) {
         let allOperations = allSyncToUseOperationsCount + allUploadOperationsCount + newItemsCount
-        guard allOperations != 0, currentUploadOperationNumber <= allOperations else {
+        guard
+            forced ||
+            (allOperations != 0 &&
+            currentUploadOperationNumber <= allOperations)
+        else {
             return
         }
         
@@ -270,9 +274,13 @@ final class UploadService: BaseRequestService {
                                                          completedOperations: currentUploadOperationNumber)
     }
     
-    private func showSharedWithMeUploadCardProgress(object: WrapData? = nil, newItemsCount: Int = 0) {
+    private func showSharedWithMeUploadCardProgress(object: WrapData? = nil, newItemsCount: Int = 0, forced: Bool = false) {
         let allOperations = allSharedWithMeUploadOperationsCount + newItemsCount
-        guard allOperations != 0, currentSharedWithMeUploadOperationNumber <= allOperations else {
+        guard
+            forced ||
+            (allOperations != 0 &&
+            currentSharedWithMeUploadOperationNumber <= allOperations)
+        else {
             return
         }
         
@@ -283,15 +291,16 @@ final class UploadService: BaseRequestService {
                                                          completedOperations: currentSharedWithMeUploadOperationNumber)
     }
     
-    private func showSyncCardProgress(object: WrapData? = nil, newItemsCount: Int = 0) {
+    private func showSyncCardProgress(object: WrapData? = nil, newItemsCount: Int = 0, forced: Bool = false) {
         let allOperations = allSyncOperationsCount + newItemsCount
         widgetNotifySyncProgress(finishedCount: currentSyncOperationNumber, totalCount: allOperations)
         
         guard
-            allOperations != 0,
-            allOperations != finishedSyncOperationsCount,
-            autoSyncStorage.settings.isAutoSyncEnabled,
-            SyncServiceManager.shared.hasExecutingSync
+            forced ||
+            (allOperations != 0 &&
+            allOperations != finishedSyncOperationsCount &&
+            autoSyncStorage.settings.isAutoSyncEnabled &&
+            SyncServiceManager.shared.hasExecutingSync)
         else {
             clearSyncCounters()
             return
@@ -327,7 +336,7 @@ final class UploadService: BaseRequestService {
                 return
             }
             
-            self.showCardProgress(type: .upload, object: firstObject, newItemsCount: itemsToUpload.count)
+            self.showCardProgress(type: .upload, object: firstObject, newItemsCount: itemsToUpload.count, forced: true)
         
             self.widgetNotifySyncExecute(finishedCount: self.currentUploadOperationNumber,
                                          totalCount: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
@@ -426,7 +435,7 @@ final class UploadService: BaseRequestService {
         
         let cardType = UploadService.convertUploadType(uploadType: uploadType)
         
-        showCardProgress(type: cardType, object: firstObject, newItemsCount: itemsToUpload.count)
+        showCardProgress(type: cardType, object: firstObject, newItemsCount: itemsToUpload.count, forced: true)
         
         if uploadType != .sharedWithMe {
             self.widgetNotifySyncExecute(finishedCount: self.currentUploadOperationNumber,
@@ -541,7 +550,7 @@ final class UploadService: BaseRequestService {
             
             print("AUTOSYNC: trying to add \(itemsToSync.count) item(s) of \(firstObject.fileType) type")
         
-            self.showCardProgress(type: .sync, object: firstObject, newItemsCount: itemsToSync.count)
+            self.showCardProgress(type: .sync, object: firstObject, newItemsCount: itemsToSync.count, forced: true)
 
             self.widgetNotifySyncExecute(finishedCount: self.currentSyncOperationNumber,
                                          totalCount: self.allSyncOperationsCount + itemsToSync.count,

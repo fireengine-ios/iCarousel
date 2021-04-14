@@ -81,7 +81,9 @@ class LoginInteractor: LoginInteractorInput {
                 }
                 
                 if self.loginRetries >= attempts {
-                    self.output?.showSupportView()
+                    DispatchQueue.main.async {
+                        self.output?.showSupportView()
+                    }
                 }
             }
             #else

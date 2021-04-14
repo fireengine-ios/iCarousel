@@ -10,7 +10,7 @@ import UIKit
 
 protocol BasicCollectionMultiFileCellActionDelegate: class {
     func morebuttonGotPressed(sender: Any, itemModel: Item?)
-    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?)
+    func onSelectMoreAction(type: ElementTypes, itemModel: Item?, sender: Any?)
 }
 
 class BasicCollectionMultiFileCell: BaseCollectionViewCell {
@@ -29,7 +29,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var fileNameLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
     
-    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var moreView: UIView!
+    @IBOutlet weak var moreButton: ExtendedTapAreaButton!
     
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
@@ -76,6 +77,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     var filesDataSource: FilesDataSource?
     private var cellImageManager: CellImageManager?
     private var uuid: String?
+    
+    var canShowSharedIcon = true
 
     override func setImage(image: UIImage?, animated: Bool) {
         isAlreadyConfigured = true
@@ -99,6 +102,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+    
+        if #available(iOS 14.0, *) {
+            moreButton.menu = nil
+        }
         
         bigContentImageView.sd_cancelCurrentImageLoad()
         smallContentImageView.sd_cancelCurrentImageLoad()
@@ -192,7 +199,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             sharedIcon.isHidden = true
         } else {
             topFavoritesStar.isHidden = true
-            sharedIcon.isHidden = !wrappered.isShared
+            sharedIcon.isHidden = !wrappered.isShared || !canShowSharedIcon
         }
     
         
@@ -209,7 +216,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         smallCellSelectionView.isHidden = true
-        moreButton.isHidden = isSelectionActive
+        moreView.isHidden = isSelectionActive
         smallContentImageView.isHidden = false
         
         if let isFavorite = itemModel?.favorites {

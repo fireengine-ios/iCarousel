@@ -31,7 +31,7 @@ final class PhotoEditImageDownloader {
         
         debugLog("attempts left: \(attempts)")
         
-        imageDownloader.getImageByTrimming(url: url) { [weak self] image in
+        imageDownloader.getImage(patch: url) { [weak self] image in
             guard let self = self else {
                 completion(nil)
                 return

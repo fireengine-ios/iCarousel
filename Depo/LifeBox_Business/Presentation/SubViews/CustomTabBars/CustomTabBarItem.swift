@@ -22,15 +22,14 @@ class CustomTabBarItem: UITabBarItem {
 
     func setupTitle() {
         let font: UIFont
-        let langCode = Device.locale
-        ///change of font for tabbar localisation issue
-        if langCode == "uk" || langCode == "ru" {
-            font = UIFont.TurkcellSaturaMedFont(size: 10)
-        } else {
-            font = UIFont.TurkcellSaturaDemFont(size: 12)
-        }
+        font = UIFont.TurkcellSaturaMedFont(size: 10)
+        let attributes: [NSAttributedString.Key : Any] = [.font: font]
+        setTitleTextAttributes(attributes, for: .normal)
         
-        setTitleTextAttributes([.font: font], for: .normal)
     }
-
+    
+    func set(textColor: UIColor) {
+        let attributes: [NSAttributedString.Key : Any] = [.foregroundColor: textColor]
+        setTitleTextAttributes(attributes, for: .normal)
+    }
 }

@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
+import DigitalGate
 
 final class AppConfigurator {
     
@@ -38,7 +39,6 @@ final class AppConfigurator {
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
         LocalMediaStorage.default.clearTemporaryFolder()
         
-        
         AuthoritySingleton.shared.checkNewVersionApp()
     }
     
@@ -57,7 +57,8 @@ final class AppConfigurator {
         AuthenticationService().logout {
             DispatchQueue.main.async {
                 let router = RouterVC()
-                router.setNavigationController(controller: router.onboardingScreen)
+                let navC = UINavigationController(rootViewController: router.loginScreen!)
+                router.setNavigationController(controller: navC)
             }
         }
     }
@@ -65,15 +66,14 @@ final class AppConfigurator {
     private static func clearTokensIfNeed() {
         if tokenStorage.isClearTokens {
             debugLog("clearTokensIfNeed")
+            if tokenStorage.isLoggedInWithFastLogin {
+                let loginCoordinator = DGLoginCoordinator(nil)
+                FastLoginSettings.setupFastLoginCoordinator(loginCoordinator)
+                loginCoordinator.logout()
+                printLog("[AppConfigurator] FL logout")
+            }
             tokenStorage.isClearTokens = false
             tokenStorage.clearTokens()
-        }
-    }
-    
-    static func logoutIfNeed() {
-        if !tokenStorage.isRememberMe {
-            debugLog("logoutIfNeed isRememberMe false")
-            AuthenticationService().logout(async: false, success: nil)
         }
     }
     
@@ -92,7 +92,6 @@ final class AppConfigurator {
             logout()
         }
     }
-
     
     private static func configureSDWebImage() {
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb

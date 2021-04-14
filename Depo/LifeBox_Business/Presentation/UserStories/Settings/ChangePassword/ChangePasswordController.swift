@@ -164,17 +164,16 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     }
     
     private func getAccountInfo() {
-        accountService.info(success: { [weak self] (response) in
-            guard let response = response as? AccountInfoResponse else {
-                let error = CustomErrors.serverError("An error occured while getting account info")
-                self?.showError(error)
-                return
+        accountService.info { [weak self] response in
+            switch response {
+                case .success(let accountInfo):
+                    let login = accountInfo.email ?? ""
+                    self?.loginIfCan(with: login)
+                    
+                case .failed(let error):
+                    self?.showError(ErrorResponse.error(error))
             }
-            let login = response.email ?? response.fullPhoneNumber
-            self?.loginIfCan(with: login)
-        }, fail: { [weak self] error in
-            self?.showError(error)
-        })
+        }
     }
     
     private func trackProfilePasswordChange() {

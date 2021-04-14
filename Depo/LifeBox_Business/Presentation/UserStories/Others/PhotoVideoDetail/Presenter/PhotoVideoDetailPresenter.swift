@@ -39,27 +39,28 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func prepareBarConfigForFileTypes(fileTypes: [FileType], selectedIndex: Int) -> EditingBarConfig {
-        
         var barConfig = interactor.bottomBarConfig(for: selectedIndex)
+        
         var actionTypes = barConfig.elementsConfig
-          
+        
+        let style: BottomActionsBarStyle
         if !fileTypes.contains(.image) {
-            if let printIndex = actionTypes.index(of: .print) {
-                actionTypes.remove(at: printIndex)
-            }
-//            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
-//                actionTypes.remove(at: infoIndex)
-//            }
             if fileTypes.contains(where: { $0.isDocumentPageItem || $0 == .audio }) {
                 if let downloadIndex = actionTypes.index(of: .download) {
                     actionTypes.remove(at: downloadIndex)
                     actionTypes.insert(.downloadDocument, at: downloadIndex)
                 }
             }
-            barConfig = EditingBarConfig(elementsConfig: actionTypes,
-                                         style: barConfig.style,
-                                         tintColor: barConfig.tintColor)
         }
+        
+        if fileTypes.contains(where: { $0.isDocumentPageItem }) {
+            style = .opaque
+        } else {
+            style = .transparent
+        }
+        
+        barConfig = EditingBarConfig(elementsConfig: actionTypes, style: style)
+        
         return barConfig
     }
     
@@ -128,19 +129,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func onInfo(object: Item) {
-        if !UIDevice.current.orientation.isLandscape {
-            view.showBottomDetailView()
-        } else {
-            router.onInfo(object: object)
-        }
+        router.onInfo(object: object)
     }
     
     func viewWillDisappear() {
         bottomBarPresenter?.dismiss(animated: false)
-    }
-    
-    func viewFullyLoaded() {
-//        bottomBarPresenter?.show(animated: false, onView: self.view)
     }
     
     func startCreatingAVAsset() {
@@ -152,24 +145,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
 
     func moreButtonPressed(sender: Any?, inAlbumState: Bool, object: Item, selectedIndex: Int) {
-        //let currentItem = interactor.allItems[interactor.currentItemIndex]
-        var actions = [ElementTypes]()
-        
-        switch view.status {
-        case .trashed:
-            actions = ActionSheetPredetermendConfigs.trashedDetailActions
-        default:
-            switch object.fileType {
-            case .audio:
-                actions = ActionSheetPredetermendConfigs.audioDetailActions
-            case .image, .video:
-                actions = interactor.setupedMoreMenuConfig
-            case .allDocs:
-                actions = ActionSheetPredetermendConfigs.documetsDetailActions
-            default:
-                break
-            }
-        }
+        let actions = ElementTypes.specifiedMoreActionTypes(for: object.status, item: object)
         
         alertSheetModule?.showAlertSheet(with: actions,
                                          items: [object],
@@ -201,12 +177,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch type {
-        case .delete:
-            outputView()?.hideSpinner()
-            interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
-        case .moveToTrash, .restore, .moveToTrashShared:
+            case .moveToTrash, .restore, .moveToTrashShared, .deletePermanently:
             interactor.deleteSelectedItem(type: type)
         default:
             break
@@ -238,7 +211,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         goBack()
     }
     
-    func selectModeSelected() {
+    func selectModeSelected(with item: WrapData?) {
         
     }
     
@@ -319,57 +292,17 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         asyncOperationSuccess()
         view.showErrorAlert(message: error.description)
     }
-    
-    func configureFileInfo(_ view: FileInfoView) {
-        view.output = self
-    }
-}
 
-extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
-    func onRename(newName: String) {
-        startAsyncOperation()
-        interactor.onValidateName(newName: newName)
-    }
-    
-    func tapGesture(recognizer: UITapGestureRecognizer) {
-        view.closeDetailViewIfNeeded()
-    }
-    
-    func onSelectSharedContact(_ contact: SharedContact) {
-        guard let index = interactor.currentItemIndex else {
-            return
-        }
-        let currentItem = interactor.allItems[index]
-        router.openPrivateShareAccessList(projectId: currentItem.projectId ?? "",
-                                          uuid: currentItem.uuid,
-                                          contact: contact,
-                                          fileType: currentItem.fileType)
-    }
-        
-    func onAddNewShare() {
-        guard let index = interactor.currentItemIndex else {
-            return
-        }
-        let currentItem = interactor.allItems[index]
-        router.openPrivateShare(for: currentItem)
-    }
-    
-    func showWhoHasAccess(shareInfo: SharedFileInfo) {
-        router.openPrivateShareContacts(with: shareInfo)
-    }
-    
-    func didUpdateSharingInfo(_ sharingInfo: SharedFileInfo) {
-        let item = WrapData(privateShareFileInfo: sharingInfo)
-        view.updateExpiredItem(item)
-        interactor.updateExpiredItem(item)
-    }
-    
     func updateItem(_ item: WrapData) {
         view.updateItem(item)
     }
+
+    func createNewUrl(at index: Int) {
+        interactor.createNewUrl(at: index)
+    }
     
-    func createNewUrl() {
-        interactor.createNewUrl()
+    func updateInfo(at index: Int) {
+        interactor.updateInfo(at: index)
     }
 }
 
@@ -377,11 +310,5 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
 
 extension PhotoVideoDetailPresenter: PhotoVideoDetailRouterOutput {
     
-    func updateShareInfo() {
-        view.updateBottomDetailView()
-    }
-    
-    func deleteShareInfo() {
-        view.deleteShareInfo()
-    }
+    func updateShareInfo() { }
 }

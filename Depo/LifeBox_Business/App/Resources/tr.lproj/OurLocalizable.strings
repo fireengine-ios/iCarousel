@@ -20,8 +20,6 @@
 "Touch ID" = "Touch ID";
 "Face ID" = "Face ID";
 "Enable" = "Etkinleştir";
-
-/*Can bu kısım neresi bilmiyorum % işareti filan var alakası geldi yanlışlık olmasın?*/
 "Please activate %@ from your device settings to use this feature" = "Bu özelliği kullanmak için lütfen cihaz ayarlarından %@ etkin hale getir";
 "To enter passcode" = "lifebox parolanı gir";
 "Set a Passcode" = "lifebox parolası oluştur";
@@ -56,8 +54,14 @@
 "Indicates that a user with the given e-mail address already exists and login will be  allowed after e-mail address validation." = "Bu e-posta adresine sahip bir kullanıcı kayıtlı görünüyor. Girişine e-posta adres doğrulama işleminden sonra izin verilecektir.";
 "This e-mail address is already registered. Please enter another e-mail address." = "Bu e-posta adresi kullanımdadır. Lütfen farklı bir e-posta adresi dene.";
 "E-mail address is in an invalid format." = "E-mail adresin geçersiz bir formatta.";
+
+/*I can't understans this sentence. Please specify where it will be shown*/
 "Specifies that the phone number parameter is sent  blank." = "Lütfen telefon numaranı gir.";
+
+/*I can't understans this sentence. Please specify where it will be shown*/
 "Indicates that the password parameter is sent blank." = "Lütfen bir şifre belirle.";
+
+/*I can't understans this sentence. Please specify where it will be shown*/
 "Indicates that the e-mail parameter is sent blank." = "Lütfen bir e-posta adresini gir.";
 "Enter the verification code\nsent to your number %@" = "%@ telefon numarana gönderilen doğrulama kodunu gir.";
 "Resend" = "Tekrar Gönder";
@@ -126,6 +130,8 @@
 "Edit" = "Düzenle";
 "Share" = "Paylaş";
 "Wait for a Wi-Fi Connection" = "Wi-Fi bağlantısı bekleniyor";
+
+/*I cant understand*/
 "Auto Sync Preparation" = "Otomatik yedekleme hazırlanıyor";
 "Sync with data plan" = "Fotoğraf ve videoların hücresel veri kullanarak yedeklenecek";
 "Waiting for Wi-Fi connection to auto-sync" = "Otomatik yedekleme için Wi-Fi bekleniyor";
@@ -138,6 +144,8 @@
 "Free up space" = "Yer aç";
 "Your device memory is almost full" = "Cihazının hafızası dolmak üzere!";
 "There are some duplicated items both in your device and lifebox" = "Hem cihazında hem lifebox’ında olan öğelere göz at!";
+
+/*which operation??*/
 "Operation is complete" = "İşlem tamamlandı";
 "Download is complete" = "İndirme tamamlandı";
 "Deleting is complete" = "Silme işlemi tamamlandı.";
@@ -148,8 +156,6 @@
 "You need to specify your language preference so that we can serve you better." = "Sana daha iyi hizmet verebilmem için dil tercihini belirtebilir misin?";
 "Please type your message" = "Lütfen mesajını yaz";
 "Error" = "Hata";
-
-/*can??*/
 "Please configurate email client" = "Lütfen e-posta müşterisini konfigüre ediniz";
 "DESTEK-LIFEBOX@TURKCELL.COM.TR" = "DESTEK-LIFEBOX@TURKCELL.COM.TR";
 "Send" = "Gönder";
@@ -186,7 +192,9 @@
 "Need to select folder" = "Klasör seçmen gerek";
 "Back" = "Geri";
 "Fail while uploading from LifeBox" = "lifebox’tan yükleme sırasında hata oluştu";
-"Sorry, but photos not selected" = "Fotoğraflar seçili değil.";
+
+/*I don't understand*/
+"Sorry, but photos not selected" = "Lütfen, cihaz galeri erişim izninizi seçtiğiniz fotoları da içerecek şekilde güncelleyin ve tekrar yüklemeyi deneyin.";
 "Upload from lifebox" = "lifebox’tan ekle";
 "Upload failed" = "Yükleme başarısız";
 "Upload was successful" = "Başarıyla yüklendi";
@@ -210,6 +218,8 @@
 "SAVE" = "Kaydet";
 "Name" = "Isim";
 "Create a Name" = "Hikayene bir isim ver";
+
+/*???*/
 "Delete device original" = "Orijinalini cihazdan sil";
 "Add to favorites" = "Favorilere ekle";
 "Restore" = "Telefona Aktar";
@@ -239,6 +249,8 @@
 "Data is not correct" = "Veri doğru değil";
 "Done" = "Bitti";
 "I want to change my password" = "Şifremi değiştirmek istiyorum";
+
+/*?????*/
 "We promise, we won’t sent you spam." = "Sana spam göndermeyeceğimize söz veriyoruz.";
 "I’d like hear about news and promotions about lifebox occasionally." = "Zaman zaman lifebox hakkındaki haberlerden ve tanıtımlardan haberdar olmak istiyorum.";
 "GSM Number" = "Telefon Numarası";
@@ -271,8 +283,6 @@
 "Start adding your photos" = "Fotoğraflarını eklemeye başla";
 "You don’t have anything on your photo roll." = "lifebox’ında henüz hiçbir fotoğraf veya video bulunmamaktadır.";
 "View All Pictures" = "Tüm Fotoğrafları Görüntüle";
-
-/*??*/
 "View All My Stream" = "Tüm Akışımı Görüntüle";
 "%d Photos" = "%d Fotoğraflar";
 "You’ve uploaded %@ two days ago!" = "İki gün önce %@ upload ettiniz!";
@@ -335,7 +345,11 @@
 "Maybe later" = "Belki sonra";
 "Yes" = "Evet";
 "Nope" = "Hayır";
+
+/*for contact?*/
 "You have already a backup. Do you want to overwrite the existing one?" = "Zaten bir yedeğin var. Var olanın üzerine yazmak istiyor musun?";
+
+/*??*/
 "Overwrite backup?" = "Yedeğin üzerine yazılsın mı?";
 "Verification code is invalid. Please try again." = "Doğrulama kodu geçersiz. Lütfen tekrar deneyin.";
 "Type the text" = "Görselde yer alan yazıyı girin.";
@@ -343,6 +357,8 @@
 "Send password reset link" = "Şifre sıfırlama linki gönder";
 "Forgot My Password" = "Şifremi unuttum";
 "Sign Up" = "Kaydol";
+
+/*auto-sync?*/
 "Turn-on Sync" = "Kullan";
 "Syncing files using cellular data could incur data charges" = "Dosyalar yedeklenirken mobil verilerin kullanılması veri ücretlerine neden olabilir.";
 "Sync over data plan?" = "Yedekleme için mobil veri kullanılacak?";
@@ -370,6 +386,8 @@
 "Please enter a valid GSM number." = "Lütfen geçerli bir telefon numarası gir";
 "Please enter a valid email address." = "Lütfen geçerli bir e-posta adresi gir";
 "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "İşlemi %@ e-posta adresiyle sonlandırıyorsun. Bu adrese göndereceğimiz doğrulama koduyla e-posta adresini doğrulamayı unutma. Bu e-postayı şifre işlemleri ve bildirimlerin için kullanacağız.";
+
+/*???*/
 "E-mail Usage Information" = "E-Posta Kullanım Bilgisi";
 "Password fields do not match." = "Şifreler eşleşmiyor";
 "Please check the e-mail address." = "Lütfen e-posta adresini kontrol edin";
@@ -409,6 +427,8 @@
 "Your Uploads" = "Müziklerim";
 "Create a story" = "Hikaye oluştur";
 "Please Choose 20 files at most" = "Lütfen en fazla 20 fotoğraf seçin";
+
+/*???*/
 "You need to enable access to Contacts to continue" = "Devam etmek için Kişilere erişime izin vermeniz gerekli";
 "Cancel BackUp" = "Yedeklemeyi iptal et";
 "Clear BackUp" = "Yedeklemeyi temizle";
@@ -439,6 +459,8 @@
 "Backup" = "Yedekle";
 "Last update:" = "Son yedekleme tarihi:";
 "Your storage is empty!" = "Depolama alanınız boş durumda!";
+
+/*free up spce card or storage full card? which one?*/
 "You are using %f of your disk space! It’s a great time to expand your storage." = "lifebox depolama alanının %d%%’sini kullanıyorsun! Depolama alanını genişletmek için harika bir zaman.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "lifebox’ına hiçbir dosya yüklemedin. Anılarını lifebox'a yüklemeye başla!";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "Cihaz depolama alanının %d%%’ını kullanıyorsun. Cihazındaki alanı boşaltmak için harika bir zaman.";
@@ -584,8 +606,6 @@
 "error_passcode_message" = "Dosyalar uygulamasını kullanabilmek için lifebox parolasını kaldırman gerekiyor.";
 "error_passcode_title" = "lifebox parolası aktif durumda.";
 "Successfully purchased" = "Başarıyla satın alındı.";
-
-/*Can bu nerede çıkıyor ?*/
 "Cancel Analyzing" = "Analizi iptal et";
 "Delete all" = "Tümünü sil";
 "Keep" = "Sakla";
@@ -610,7 +630,7 @@
 "landingTitle6" = "Sosyal Medya";
 "landingSubTitle6" = "Sosyal medyadaki tüm arşivini kolayca lifebox’a transfer et!";
 "Add GSM Number" = "GSM Numaranı Ekle";
-"The videos larger than 4GB can not be uploaded to lifebox" = "Video 4GB'tan büyük olduğu için lifebox'a yüklenemiyor.";
+"The videos larger than 4GB can not be uploaded to lifebox" = "Bu dosya 4GB'tan büyük olduğu için yüklenemiyor.";
 "You have not enough memory in your device" = "Bu işlemi yapabilmek için cihazında yeterli alan bulunmuyor.";
 "The purchase was canceled" = "Satın alma iptal edildi.";
 "The purchase in progress" = "Satın alma işlemi devam ediyor.";
@@ -970,9 +990,6 @@
 "enter_code_get_code_on_phone" = "Lütfen bu telefon numarasına gönderdiğimiz 6 basamaklı güvenlik kodunu gir: %@";
 "time_is_up_for_code" = "Süre bitti, lütfen yeni kod talep et.";
 "resend_code" = "Kodu tekrar gönder";
-
-/*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
-"frequently_asked_questions" = "Sıkça Sorulan Sorular";
 "login_username_not_valid" = "Lütfen kullanıcı adını kontrol et.";
 "login_support_info" = "Giriş yapmakta zorluk çekiyorsan, destek için bizimle iletişime geçebilirsin.";
 "terms_and_privacy_policy" = "Kullanıcı Sözleşmesi ve Gizlilik Politikası";
@@ -1033,9 +1050,6 @@
 "contact_us_subject_10" = "Paket & Kota Sorunu";
 "contact_us_subject_11" = "Dokunmatik ID ve Şifre Sorunu";
 "contact_us_subject_12" = "Bağlantı, Yavaşlık, Donma Sorunu";
-
-/*Settings page*/
-"Permissions" = "İzinler";
 "selected_items_limit_download" = "%d'ten fazla dosya indiremezsin.";
 "selected_items_limit_delete" = "%d'ten fazla dosya silemezsin.";
 "login_settings_security_passcode_description" = "Turkcell Şifreni SIFRE yazıp 2200'a mesaj atarak alabilir ve bu butonu etkinleştirirsen, Turkcell şifreni kullanarak lifebox'a giriş yapabilirsin.";
@@ -1049,7 +1063,7 @@
 "spotify_importing" = "Listeler taşınıyor...";
 "spotify_import_from" = "Spotify'dan";
 "spotify_import_to" = "lifebox'a";
-"spotify_import_description" = "Taşıdığın listeleri buradan görebilirsin: \\n Tüm Dosyalar > Müzik";
+"spotify_import_description" = "Taşıdığın listeleri buradan görebilirsin: \\\n Tüm Dosyalar > Müzik";
 "spotify_import_in_background" = "Arkaplanda Taşı";
 "spotify_playlist_import_button" = "Seçilenleri Taşı";
 "spotify_playlist_navbar_title" = "Spotify Çalma Listeleri";
@@ -1313,8 +1327,6 @@
 "hide_success_popup_button_title" = "Gizli";
 "hide_single_album_success_popup_message" = "Seçilen albüm gizlendi.";
 "hide_albums_success_popup_message" = "Seçilen albüm(ler) gizlendi.";
-
-/*bir kerede gizleme sınırı mı? gizli albümünün total sınırı mı?*/
 "selected_items_limit_hide" = "%d adetten fazla öğe gizleyemezsin.";
 "hide_single_photo_completion_alert_message" = "Seçilen öğeye sadece \"Gizli\" albümünden erişilebilecek. lifebox listelerinde ya da hatırlatmalarında görmeyeceksin. İstediğin zaman geri yükleyebilirsin. Devam etmek istiyor musun?";
 "people_album_warning_alert_title_not_premium_and_no_image_grouping" = "Henüz Kişi Albümün Yok!";
@@ -1323,18 +1335,32 @@
 "people_album_warning_message_not_premium_and_no_image_grouping" = "Senin için fotoğraflarını işleyip otomatik olarak Kişi, Nesne ve Yer albümleri altında gruplandırmamızı ister misin? \"Yüz/Nesne Gruplama\" özelliğini Ayarlar altında açıp hemen gruplamaya başlayabilir, sınırsız gruplama hakkı için Premium abonelikleri inceleyebilirsin.";
 "people_album_warning_message_not_premium_and_image_grouping_on" = "Senin için fotoğraflarını işleyip otomatik olarak Kişi, Nesne ve Yer albümleri altında gruplandırmamızı ister misin? Sınırsız gruplama hakkı için Premium abonelikleri inceleyebilirsin.";
 "people_album_warning_message_premium_and_no_image_grouping" = "Senin için fotoğraflarını işleyip otomatik olarak Kişi, Nesne ve Yer albümleri altında gruplandırmamızı ister misin? \"Yüz/Nesne Gruplama\" özelliğini Ayarlar altında aç ve hemen gruplamaya başla.";
+
+/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
 "people_album_warning_button_not_premium_and_no_image_grouping" = "Yüz/Nesne Gruplamayı Aç!";
+
+/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
 "people_album_warning_button_not_premium_and_image_grouping_on" = "Mevcut Kişileri Görüntüle";
+
+/*deeplink nereye olacak? ona göre metin güncelleyebilirim*/
 "people_album_warning_button_premium_and_no_image_grouping" = "Yüz/Nesne Gruplamayı Aç!";
 "hide_successed_alert_title" = "Öğe(ler) gizlendi.";
+
+/*arka arkaya bu 3 key tam olarak nereyi adresliyor?*/
 "hide_successed_alert_with_people_album_title" = "Seçilen öğe(ler) gizlendi.";
+
+/*arka arkaya bu 3 key tam olarak nereyi adresliyor?*/
 "hide_successed_alert_people_album_title" = "İstenmeyen Kişi ve Anıları Gizle!";
+
+/*arka arkaya bu 3 key tam olarak nereyi adresliyor?*/
 "hide_successed_alert_people_album_description" = "Bir kişiye ait tüm anıları tek tuşla gizleyebilir ya da çöp kutusuna gönderebilirsin. Gizlediğin fotoğraflara sadece \"Gizli\" albümünde ulaşabilirsin.";
 "hide_successed_alert_do_not_show_this_message" = "Bu mesajı bir daha gösterme!";
 "hide_successed_alert_view_people_album" = "Kişiler Albümünü Görüntüle";
 "smash_successed_alert_title" = "Cihaz galerine ve lifebox'a kaydedildi.";
 "smash_successed_alert_second_title" = "Şimdi Ne Yapmak İstersin?";
 "smash_successed_alert_description" = "Düzenlediğin fotoğrafı arkadaşlarınla paylaşabilirsin.\nAyrıca artık lifebox listelerinde denk gelmek istemediğin kişi/anıları tek tıkla gizlemek ya da silmek için \"Kişiler\" Albümüne gidebilirsin.";
+
+/*smash_successed_alert_title  key'inden farkı ne?*/
 "smash_successed_simple_alert_title" = "Kaydedildi!";
 "smash_successed_simple_alert_description" = "Düzenlediğin fotoğrafı arkadaşlarınla paylaşabilirsin.\nAyrıca artık lifebox listelerinde denk gelmek istemediğin kişi/anıları tek tıkla gizlemek ya da silmek için \"Kişiler\" Albümüne gidebilirsin.";
 
@@ -1356,11 +1382,17 @@
 "trash_bin_album_slider_title" = "Çöp Kutusu";
 "trash_bin_album_slider_empty" = "Çöp Kutusunda Henüz Silinmiş Albüm Yok";
 "trash_bin_empty" = "Çöp Kutusunda Henüz Silinmiş Öğe Yok";
+
+/*Is this permanently delete or delete>move to trash bin action?*/
 "delete_confirmation_popup_title" = "Sil";
+
+/*Is this permanently delete or delete>move to trash bin action?*/
 "delete_confirmation_popup_text" = "Seçilen öğe(ler) çöp kutusuna taşınacak. 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
 "restore_confirmation_popup_title" = "Geri Yükle";
 "restore_confirmation_popup_text" = "Seçilen öğe(ler) geri yüklenecek. Devam etmek istiyor musun?";
 "delete_from_hidden_bin_popup_success_title" = "Sil";
+
+/*are we sure it's permanently delete? or is it just delete for moving items to trash bin?*/
 "delete_from_hidden_bin_popup_success_text" = "Seçilen dosya(lar) çöp kutusuna taşınacak. 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
 "unhide_popup_success_title" = "Öğe(ler) geri yüklendi.";
 "delete_popup_text" = "Seçilen dosya(lar) çöp kutusuna taşınacak. 90 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
@@ -1761,13 +1793,9 @@
 "fun_close_alert_left_button" = "Düzenlemeye devam et";
 "fun_close_alert_right_button" = "Vazgeç";
 "Upload Music" = "Dosyaları yükleyin";
-
-/*"Erişim İzni Ver" ya da "Erişime Aç" nasıl olur?*/
 "private_share_option" = "Kişiyle Paylaş";
 "private_share_start_page_name" = "Paylaş";
 "private_share_start_page_people_selection_section_name" = "Kişileri ekle";
-
-/*Çeviriler tamamlandıktan sonra türkçe çeviriden zorunlu olmadığı için ülke kodunun çıkarılacağını konuşmuştuk.*/
 "private_share_start_page_enter_user_field" = "E-Posta veya GSM Numarası Gir";
 "private_share_start_page_suggestions_section" = "Önerilenler";
 "private_share_start_page_shared_with_section" = "Paylaşılan kişiler";
@@ -1795,8 +1823,6 @@
 "private_share_shared_with_me_tab" = "Paylaşılanlar";
 "private_share_info_section_name" = "Paylaşım Bilgisi";
 "private_share_info_number_of_people" = "%d kişi ile paylaşıldı.";
-
-/*"Paylaşan" daha mı özet olur? Hangi alandaydı bu bilgi? comboboxta mı gelecek?*/
 "private_share_info_role_1" = "Paylaşan";
 "private_share_info_role_2" = "Düzenleyen";
 "private_share_info_role_3" = "Görüntüleyen";
@@ -1807,13 +1833,12 @@
 "private_share_end_sharing_confirm" = "Paylaşımı durdurmak istediğine emin misin?";
 "private_share_end_sharing_action_title" = "Paylaşımı Durdur";
 "private_share_who_has_access_page_name" = "Erişimi Olanlar";
-
-/*alternatif ne denebilir tek kelimelik? Paylaşan?*/
 "private_share_who_has_access_role_1" = "Paylaşan";
 "private_share_who_has_access_role_2" = "Düzenleyen";
 "private_share_who_has_access_role_3" = "Görüntüleyen";
 "private_share_who_has_access_end_share" = "Paylaşımı Durdur";
 "private_share_inner_folder_empty_page" = "Klasör boş";
+"private_share_shared_area_empty_page" = "";
 "private_share_info_role_4" = "Diğer";
 "private_share_non_turkish_msisdn_warning" = "Lütfen GSM numarasını (+)Ülke Kodu ile Gir";
 "private_share_leave_sharing_success" = "Paylaşımdan Ayrıldın";
@@ -1836,6 +1861,241 @@
 "private_share_plus_button_no_action" = "Bu sayfada yeni dosya yüklenemez";
 "private_share_confirm_trash_items" = "Silmek istediğinden emin misin?";
 "private_share_preview_not_ready" = "Önizleme gerçekleştirilemiyor. Lütfen daha sonra tekrar deneyiniz.";
+
+/*We can remove this tag since we will limit the text area with 500 characters*/
 "private_share_long_message" = "";
 "private_share_long_emailmsisdn" = "E-Posta veya GSM numarası karakter limitini aşıyor.";
 "private_share_start_max_number_of_users" = "Maksimum %d kişi ile paylaşım yapılabilir.";
+"business_app_tabbar_mydisk" = "Bana Özel";
+"business_app_tabbar_mysharings" = "Paylaşımlarım";
+"business_app_tabbar_sharedarea" = "Ortak Dizin";
+"tabbar_item_settings" = "";
+"private_share_max_number_of_item_limit_exceeded" = "";
+"business_app_select_option" = "Seç";
+"business_app_download_option" = "İndir";
+"business_app_delete_option" = "Sil";
+"business_app_rename_option" = "Yeniden Adlandır";
+"business_app_share_privately_option" = "Kişiyle Paylaş";
+"business_app_share_copy_option" = "Kopyasını Gönder";
+"business_app_stop_sharing_option" = "Paylaşımı Durdur";
+"business_app_leave_sharing_option" = "Paylaşımdan Ayrıl";
+"business_app_info_option" = "Bilgi";
+"business_app_download_success" = "Başarıyla indirildi";
+"business_app_delete_success" = "Başarıyla silindi";
+"business_app_rename_sucess" = "İsim Değiştirildi";
+"business_app_share_privately_success" = "Paylaşım başarılı";
+"business_app_stop_sharing_success" = "Paylaşım durduruldu";
+"business_app_leave_sharing_success" = "Paylaşımdan Ayrıldınız";
+"business_app_delete_confirm_popup_title" = "Silmek istediğinize emin misiniz?";
+"business_app_delete_confirm_popup_detail" = "Silinmiş dosyalar çöp kutusuna gönderilecek. Çöp kutusundaki tüm öğeler 30 gün sonra kalıcı olarak silinecek ve geri yükleyemeyeceksiniz.";
+"business_app_notification_permission" = "Bildirimleri ayarlar menüsünden yapılandırabilirsiniz. Bildirimler uyarıları, sesleri ve simge işaretlerini içerebilir.";
+"business_app_gallery_permission" = "Fotoğraflarınızı uygulamaya yükleyebilmek ve uygulamadan cihaz galerisine indirilebilmek için lifebox business'a erişim izni vermeniz gerekmektedir.";
+"business_app_gallery_permission_not_provided_popup_title" = "Fotoğraf Galerisi Erişim İzni";
+"business_app_gallery_permission_not_provided_popup_description" = "Bu işlemi gerçekleştirebilmemiz için galerinize erişim izni vermeniz gerekmektedir. Lütfen uygulama ayarlarınızı kontrol ediniz.";
+"business_app_gallery_permission_not_provided_popup_settings_accept" = "Ayarlar";
+"business_app_gallery_permission_not_provided_popup_settings_reject" = "Hayır";
+"business_app_new_folder" = "Klasör Yarat";
+"business_app_plus_button_upload" = "Galeriden Yükle";
+"business_app_plus_button_upload_files" = "Dosya Yükle";
+"business_app_login_title" = "lifebox business Giriş";
+"business_app_login_email_box_inside" = "E-posta Adresinizi Girin";
+"business_app_login_password_box_inside" = "Şifrenizi Girin";
+"business_app_login_rememberme_checkbox" = "Beni Hatırla";
+"business_app_login_forget_password" = "Şifrenizi mi Unuttunuz";
+
+/*kodda login tagi olarak içeri alındaığından küçük harfle yazıldı*/
+"business_app_login_forget_password_page_title" = "Şifrenizi mi unuttunuz";
+"business_app_login_forget_password_page_description" = "Lütfen şirket kimliğinizin şifresini değiştiriniz. Şifrenizi değiştirdiyseniz ve halen giriş yapamıyorsanız, şirketinizdeki lifebox business admini ile iletişime geçebilirsiniz.";
+"business_app_login_forget_password_page_close_button" = "Kapat";
+"business_app_login_pwd_login_button" = "Şirket Kimliği ile Giriş";
+"business_app_login_pwd_login_button_explanation" = "* Şirketinizin lifebox business ile kimlik entegrasyonu olması durumunda kullanılabilir";
+"business_app_login_FL_explanation" = "Şirket entegrasyonu olmadan giriş yapmak için";
+"business_app_login_captcha_box_inside" = "Kodu giriniz";
+"business_app_login_email_empty" = "E-posta adresinizi girmeniz gerekiyor";
+"business_app_login_password_empty" = "Şifrenizi girmeniz gerekiyor";
+"business_app_login_captcha_empty" = "Lütfen metni yazınız";
+"business_app_login_email_not_validated" = "Lütfen geçerli bir e-posta girin";
+"business_app_login_pwd_error_code_30" = "Doğrulama başarısız";
+"business_app_login_captcha_not_match" = "Geçersiz metin girişi";
+"business_app_login_show_password" = "Göster";
+"business_app_login_hide_password" = "Gizle";
+"business_app_private_share_close_page" = "Paylaşımdan ayrılmak istediğinize emin misiniz?";
+"business_app_private_share_close_page_no" = "İptal";
+"business_app_private_share_close_page_yes" = "Tamam";
+"business_app_private_share_page_title" = "Kişiyle Paylaş";
+"business_app_private_share_box_name" = "Paylaşılacak kişileri seç";
+"business_app_private_share_box_inside" = "E-posta Adresi Girin";
+"business_app_private_share_role_editor" = "Düzenleyen";
+"business_app_private_share_role_viewer" = "Görüntüleyen";
+"business_app_private_share_add_message" = "Mesaj Ekle";
+"business_app_private_share_add_message_inside" = "(Opsiyonel)";
+"business_app_private_share_share_duration" = "Paylaşım Süresi";
+"business_app_private_share_share_duration_no_duration" = "Süresiz";
+"business_app_private_share_share_duration_1_hour" = "1 saat";
+"business_app_private_share_share_duration_1_day" = "1 gün";
+"business_app_private_share_share_duration_1_week" = "1 hafta";
+"business_app_private_share_share_duration_1_month" = "1 ay";
+"business_app_private_share_share_duration_1_year" = "1 yıl";
+"business_app_private_share_start" = "Paylaş";
+"business_app_private_share_success" = "Paylaşım başarılı";
+"business_app_private_share_shared_with_section_name" = "Paylaşılan kişiler";
+"business_app_private_share_fail_errorcode_4115" = "";
+"business_app_private_share_fail_errorcode_4116" = "";
+"business_app_private_share_fail_errorcode_4118" = "Maksimum dosya paylaşım sınırını aştınız.";
+"business_app_private_share_fail_errorcode_5101" = "Bir hata oluştu, lütfen daha sonra tekrar deneyiniz.";
+"business_app_private_share_fail_errorcode_5102" = "Bir hata oluştu, lütfen daha sonra tekrar deneyiniz.";
+"business_app_info_page_title_for_files" = "Dosya Bilgisi";
+"business_app_info_page_title_for_folders" = "Klasör Bilgisi";
+"business_app_info_page_name" = "İsim";
+"business_app_info_page_size" = "Boyut";
+"business_app_info_page_item" = "Öğeler";
+"business_app_info_page_creation_date" = "Oluşturulma Tarihi";
+"business_app_info_page_modified_date" = "Son Düzenleme";
+"business_app_info_page_sharing_info" = "Erişim Bilgisi";
+"business_app_info_page_shared_with" = "%d Kişinin erişimi var";
+"business_app_info_page_role_owner" = "Paylaşan";
+"business_app_info_page_role_editor" = "Düzenleyen";
+"business_app_info_page_role_viewer" = "Görüntüleyen";
+"business_app_info_page_role_varies" = "Özelleşmiş";
+"business_app_upload_bar_uploading_text" = "Yükleniyor";
+"business_app_whohasaccess_page_title" = "Erişimi Olanlar";
+"business_app_whohasaccess_role_owner" = "Paylaşan";
+"business_app_whohasaccess_role_editor" = "Düzenleyebilir";
+"business_app_whohasaccess_role_viewer" = "Görüntüleyebilir";
+"business_app_whohasaccess_role_varies" = "Özelleşmiş";
+"uploadVideoToReadOnlyAlbumError" = "";
+"business_app_2FA_first_page_title" = "Güvenlik Adımı";
+"business_app_2FA_first_page_description_title" = "Olağandışı Giriş Denemesi Tespit Edildi";
+"business_app_2FA_first_page_description_detail" = "Hesabınızı güvence altına almak ve güvenli bir şekilde giriş yapabilmeniz için kimliğinizi doğrulayabilmek adına size bir güvenlik kodu göndereceğiz.";
+"business_app_2FA_first_page_sendsecuritycode" = "Güvenlik kodunu gönder";
+"business_app_2FA_first_page_sendsecuritycode_to_phone" = "Telefon numarama:";
+"business_app_2FA_first_page_sendsecuritycode_to_email" = "E-posta adresime:";
+"business_app_2FA_first_page_send_button_name" = "Gönder";
+"business_app_2FA_second_page_title" = "Güvenlik Adımı";
+"business_app_2FA_second_page_verify_number" = "Kimliğinizi Doğrulayın";
+"business_app_2FA_second_page_verify_email" = "Kimliğinizi Doğrulayın";
+"business_app_2FA_second_page_info" = "Yeni bir kod gönderdik %@";
+"business_app_2FA_second_page_code" = "Doğrulama Kodunu Giriniz";
+"business_app_access_page_title" = "Erişim";
+"business_app_access_page_role_editor" = "Düzenleyebilir";
+"business_app_access_page_role_viewer" = "Görüntüleyebilir";
+"business_app_access_page_role_varies" = "Özelleşmiş";
+"business_app_access_page_expire_date" = "Bitiş tarihi: %@";
+"business_app_access_page_from_folder" = "%@";
+"business_app_access_page_role_change_remove" = "Çıkar";
+"business_app_sortby" = "Sırala:";
+"business_app_sortby_name_a_z" = "İsim (A-Z)";
+"business_app_sortby_name_z_a" = "İsim (Z-A)";
+"business_app_sortby_newest" = "En Yeni";
+"business_app_sortby_oldest" = "En Eski";
+"business_app_sortby_largest" = "En Büyük";
+"business_app_sortby_smallest" = "En Küçük";
+"business_app_upload_select_page_title" = "Dosya Yükle";
+"business_app_upload_select_page_upload_button" = "Yükle";
+"business_app_role_delete" = "Çıkar";
+"business_app_role_update" = "Rol Değiştirildi";
+"business_app_no_permission_for_upload" = "Yeni bir dosya ekleme/oluşturma izniniz yok.";
+"business_app_mydisk_page_title" = "Bana Özel";
+"business_app_mysharings_page_title" = "Paylaşımlarım";
+"business_app_sharedarea_page_title" = "Ortak Dizin";
+"business_app_search_bar_explanation" = "Ara";
+"business_app_sharedwithme_menu" = "Paylaşılanlar";
+"business_app_sharedbyme_menu" = "Paylaştıklarım";
+"business_app_FL_error_popup_title" = "Doğrulama başarısız";
+"business_app_fast_login_pool_user_popup" = "Uygulamaya giriş yapmak için lütfen şirket admininizle iletişime geçiniz";
+"business_app_fast_login_authentication_fail_popup" = "Doğrulama başarısız";
+"business_app_FL_error_session_timeout" = "FastLogin oturumunuz sona erdi. Lütfen yeniden giriş yapınız.";
+"business_app_FL_error_not_logintologinSDK" = "Fast Login Doğrulama Hatası";
+"business_app_FL_else_error" = "FastLogin sisteminde geçici bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
+"business_app_faq_page_title" = "S.S.S";
+"Start Using" = "";
+"business_app_privacy_policy_start" = "Kullanmaya Başlayın";
+"business_app_eula_checkbox" = "Kullanım Koşulları'nı okudum ve kabul ediyorum.";
+"business_app_agreement_page_title" = "Sözleşmeler";
+"business_app_agreement_eula" = "Kullanım Koşulları";
+"business_app_agreement_privacy_policy" = "Aydınlatma Metni";
+"business_app_eula_privacy_policy_textbox" = "lifebox business aracılığıyla topladığımız kişisel verileriniz hakkında ayrıntılı bilgi almak için Aydınlatma Metni'mizi okuyabilirsiniz.";
+"business_app_privacy_policy_page_title" = "Aydınlatma Metni";
+"eula_title_new" = "";
+"business_app_eula_page_title" = "Kullanım Koşulları";
+"business_app_settings_page_title" = "Ayarlar";
+"business_app_settings_storage_use_limited_header" = "Kota Kullanımı";
+"business_app_settings_storage_used_limited_values" = "%@ / %@ Kullanılıyor";
+"business_app_settings_storage_use_unlimited_text" = "Kota Kullanımı: %@";
+"business_app_settings_profile" = "Profil Ayarları";
+"business_app_settings_agreements" = "Sözleşmeler";
+"business_app_settings_faq" = "S.S.S";
+"business_app_settings_contactus" = "Bize Ulaşın";
+"business_app_settings_deletedfiles" = "Çöp Kutusu";
+"business_app_settings_logout" = "Çıkış";
+"business_app_document_no_preview" = "Önizleme şuan yapılamıyor, lütfen daha sonra tekrar deneyiniz.";
+"business_app_photo_no_preview" = "Önizleme şuan yapılamıyor, lütfen daha sonra tekrar deneyiniz.";
+"business_app_music_no_preview" = "Önizleme şuan yapılamıyor, lütfen daha sonra tekrar deneyiniz.";
+
+/*storage limit*/
+"business_app_quota_full_upload_pop_up_title" = "lifebox business Kotanız Doldu";
+"business_app_quota_full_upload_pop_up_description" = "Yeni dosyalar yüklemeye devam etmek için mevcut dosyalarınızı yönetebilir/silebilir veya kotanızı artırması için şirket admininizle iletişime geçebilirsiniz.";
+"business_app_quota_full_upload_pop_up_button" = "Mevcut Dosyalarınızı Yönetin";
+
+/*contact us*/
+"business_app_contact_us_page_title" = "Bize Ulaşın";
+"business_app_contact_us_page_description" = "lifebox business deneyiminiz ile ilgili destek ve yardım almak istediğiniz konular için S.S.S sayfamıza bakabilirsiniz. Ayrıca aşağıdaki form aracılığıyla sorularınızı ve önerilerinizi bizimle paylaşabilirsiniz.";
+"business_app_contact_us_subject_box_name" = "Konu";
+"business_app_contact_us_message_box_name" = "Mesajınız (Opsiyonel)";
+"business_app_contact_us_subject_1" = "Ödeme (NT)";
+"business_app_contact_us_subject_2" = "Lisans, Kota";
+"business_app_contact_us_subject_3" = "Dosya Yükleme/İndirme";
+"business_app_contact_us_subject_4" = "Yetki, Paylaşım";
+"business_app_contact_us_subject_5" = "Raporlama";
+"business_app_contact_us_email_body_unlimited" = "Limitsiz";
+"business_app_contact_us_email_body" = "E-posta: %@\nUygulama Versiyonu: %@\nCihaz Adı: %@\nCihaz OS: %@\nDil: %@\nŞebeke Durumu: %@\nToplam Kota: %@\nKullanılan Kota: %@\nKonu: %@";
+
+/*empty pages or folders*/
+"business_app_my_disk_empty page" = "Henüz size özel dosya yüklemediniz.";
+"business_app_shared_with_me_empty page" = "Henüz sizinle bir dosya ya da klasör paylaşılmadı.";
+"business_app_shared_by_me_empty page" = "Henüz bir dosya ya da klasör paylaşımı yapmadınız.";
+"business_app_shared_area_empty page" = "Ortak dizinde henüz sizinle paylaşılan dosya bulunmamaktadır.";
+"business_app_folder_empty page" = "Klasör Boş";
+"business_app_trash_bin_page_title" = "Çöp Kutusu";
+"business_app_trash_bin_empty_page" = "Silinmiş dosyanız bulunmamaktadır";
+"business_app_trash_bin_restore_action_name" = "Geri Yükle";
+"business_app_trash_bin_delete_action_name" = "Kalıcı Olarak Sil";
+"business_app_trash_bin_restore_confirm_title" = "Geri Yükle";
+"business_app_trash_bin_restore_confirm_description" = "Geri yüklemek istediğinizden emin misiniz?";
+"business_app_trash_bin_restore_confirm_YES_button" = "Geri Yükle";
+"business_app_trash_bin_restore_confirm_NO_button" = "İptal";
+"business_app_trash_bin_delete_confirm_title" = "Kalıcı Olarak Sil";
+"business_app_trash_bin_delete_confirm_description" = "Kalıcı olarak silmek istediğinize emin misiniz?";
+"business_app_trash_bin_delete_confirm_YES_button" = "Sil";
+"business_app_trash_bin_delete_confirm_NO_button" = "İpta";
+"business_app_trash_bin_delete_success" = "Başarıyla silindi.";
+"business_app_trash_bin_restore_success" = "Başarıyla geri yüklendi.";
+"business_app_trash_bin_empty_trash_confirm_title" = "Kalıcı Olarak Sil";
+"business_app_trash_bin_empty_trash_confirm_description" = "Öğeleri kalıcı olarak silmek istediğinize emin misiniz?";
+"business_app_trash_bin_empty_trash_confirm_YES_button" = "Çöp Kutusunu Boşalt";
+"business_app_trash_bin_empty_trash_confirm_NO_button" = "İptal";
+"business_app_trash_bin_empty_trash_success" = "Tüm öğeler kalıcı olarak silindi";
+"business_app_login_ldap_error_code_31" = "Geçici bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
+"business_app_login_ldap_error_code_32" = "Doğrulama başarısız";
+"business_app_login_ldap_error_code_33" = "Doğrulama başarısız";
+"business_app_login_blocked_ip" = "Doğrulama başarısız";
+"business_app_login_generic_error_tag" = "Doğrulama başarısız";
+"business_app_privacy_policy_condition" = "Aydınlatma Metni";
+
+/*profile page*/
+"business_app_profile_page_title" = "Profil";
+"business_app_profile_name_surname" = "Ad Soyad";
+"business_app_profile_email" = "E-posta";
+"business_app_root_device_popup_title" = "Cihazınız root edilmiş";
+"business_app_root_device_popup_description" = "Güvenlik nedeniyle root edilmiş cihazlarla bu uygulama kullanılamaz";
+"business_app_root_device_popup_button" = "Uygulamayı kapat";
+"business_app_manual_picker_selected_counter" = "%d Seçili";
+"turkcell_updater_pop_up_title" = "Uyarı";
+"turkcell_updater_pop_up_description" = "Lütfen uygulamayı AppStore'dan güncelleyin";
+"business_app_delete_success_snackbar_trashbin_link" = "Çöp Kutusu";
+"business_app_contact_us_subject_6" = "Giriş/Kayıt";
+"business_app_contact_us_subject_7" = "Bağlantı, Hız";
+"business_app_contact_us_subject_8" = "Öneriler (NT)";
+"business_app_access_page_role_owner" = "Paylaşan";
+"business_app_app_version_under_settings" = "Versiyon: %@";
+"business_app_icloud_upload_spinner_tag" = "";

@@ -17,4 +17,10 @@ extension Int64 {
         return Int(exactly: self) ?? NSNumber(value: self).intValue
     }
     
+    var convertBytesToFormattedString: String {
+        let formatter: ByteCountFormatter = ByteCountFormatter()
+        formatter.countStyle = .binary
+        
+        return self == 0 ? "0 KB" : formatter.string(fromByteCount: self)
+    }
 }

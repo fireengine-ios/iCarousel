@@ -9,24 +9,14 @@
 import Foundation
 
 protocol LoginRouterInput {
-
-    func goToForgotPassword()
     
     func goToHomePage()
     
     func goToTermsAndServices()
     
-    func goToRegistration()
-
-    func showNeedSignUp(message: String, onClose: @escaping VoidHandler)
-    
     func openSupport()
-    
-    func openEmptyEmail(successHandler: @escaping VoidHandler)
         
-    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
-    
-    func showPhoneVerifiedPopUp(_ onClose: VoidHandler?)
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse, rememberMe: Bool)
     
     func showAccountStatePopUp(image: PopUpImage,
                                title: String,

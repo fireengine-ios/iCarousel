@@ -37,7 +37,6 @@ extension LoginSettingsPresenter: LoginSettingsViewOutput {
     func viewIsReady() {
         startAsyncOperation()
         interactor.trackScreen()
-        interactor.requestTurkcellSecurityState()
     }
     
     func updateStatus(type: SettingsTableViewSwitchCell.CellType, isOn: Bool) {
@@ -50,10 +49,7 @@ extension LoginSettingsPresenter: LoginSettingsViewOutput {
                 router.presentErrorPopup(title: TextConstants.warning,
                                          message: TextConstants.turkcellSecurityWaringPasscode,
                                          buttonTitle: TextConstants.ok,
-                                         buttonAction: { [weak self] in
-                                            self?.updateStatuses()
-
-                })
+                                         buttonAction: nil)
             } else {
                 if !passcodeStorage.isEmpty, isOn {
                     router.presentErrorPopup(title: TextConstants.warning,
@@ -61,17 +57,13 @@ extension LoginSettingsPresenter: LoginSettingsViewOutput {
                                              buttonTitle: TextConstants.ok,
                                              buttonAction: nil)
                 }
-                
-                updateStatuses()
             }
             
         case .securityAutologin:
             if interactor.isPasscodeEnabled, isOn, isOn != interactor.turkcellAutoLoginOn {
                 router.presentErrorPopup(title: TextConstants.warning,
                                          message: TextConstants.turkcellSecurityWaringAutologin,
-                                         buttonTitle: TextConstants.ok) { [weak self] in
-                                            self?.updateStatuses()
-                }
+                                         buttonTitle: TextConstants.ok, buttonAction: nil)
                 
             } else {
                 if !passcodeStorage.isEmpty, isOn {
@@ -80,20 +72,11 @@ extension LoginSettingsPresenter: LoginSettingsViewOutput {
                                              buttonTitle: TextConstants.ok,
                                              buttonAction: nil)
                 }
-                updateStatuses()
             }
             
         case .twoFactorAuth:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.TwoFactorAuthentication(action: isOn ? .on : .off))
-            updateStatuses()
         }
-    }
-    
-    private func updateStatuses() {
-        startAsyncOperation()
-        interactor.changeTurkcellSecurity(passcode: cellsData[.securityPasscode] ?? false,
-                                          autoLogin: cellsData[.securityAutologin] ?? false,
-                                          twoFactorAuth: cellsData[.twoFactorAuth] ?? false)
     }
 }
 

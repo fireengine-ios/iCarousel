@@ -12,9 +12,9 @@ final class PrivateShareDurationView: UIView, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.privateShareStartPageDurationTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.text = TextConstants.PrivateShare.share_duration
+            newValue.font = .GTAmericaStandardMediumFont(size: 14)
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     

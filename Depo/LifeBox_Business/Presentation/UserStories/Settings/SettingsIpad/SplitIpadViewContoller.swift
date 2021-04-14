@@ -26,7 +26,7 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
         
         splitViewController.viewControllers = controllersArray
         splitViewController.preferredDisplayMode = .allVisible
-        leftController?.setupNavBar()
+//        leftController?.setupNavBar() // not needed for LB, at least now
         //splitViewController.delegate = self
     }
     
@@ -40,14 +40,14 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     
     // MARK: SettingsDelegate
     
-    func goToHelpAndSupport() {
+    func goToFAQ() {
         if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().helpAndSupport])
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().faq])
         }
     }
     
-    func goToTermsAndPolicy() {
-        if let left = leftController, let controller = RouterVC().termsAndPolicy {
+    func goToAgreements() {
+        if let left = leftController, let controller = RouterVC().agreements {
             configurateWithControllers(leftViewController: left, controllers: [controller])
         }
     }
@@ -62,12 +62,6 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
     func goToPermissions() {
         if let left = leftController {
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().permissions])
-        }
-    }
-    
-    func onUpdatUserInfo(userInfo: AccountInfoResponse) {
-        if let left = leftController {
-            configurateWithControllers(leftViewController: left, controllers: [RouterVC().userProfile(userInfo: userInfo)])
         }
     }
     

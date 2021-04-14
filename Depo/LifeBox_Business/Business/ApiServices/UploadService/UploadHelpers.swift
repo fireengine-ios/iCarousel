@@ -9,18 +9,14 @@
 import Foundation
 
 enum MetaSpesialFolder: String {
-    case MOBILE_UPLOAD = "MOBILE_UPLOAD"
+    case ROOT = ""
     case CROPY = "CROPY"
-    case none = ""
 }
 
 enum UploadType {
-    case upload
-    case autoSync
-    case syncToUse
-    case save
-    case saveAs
+    case regular
     case sharedWithMe
+    case sharedArea
 }
 
 enum MetaStrategy: String {

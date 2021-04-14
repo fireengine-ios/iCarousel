@@ -10,6 +10,7 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 import WidgetKit
+import DigitalGate
 
 typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
 typealias FailResponse = (_ value: ErrorResponse) -> Void
@@ -23,19 +24,17 @@ class AuthenticationUser: BaseRequestParametrs {
     let attachedCaptcha: CaptchaParametrAnswer?
     
     override var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.username   : login,
-                                   LbRequestkeys.password   : password,
-                                   LbRequestkeys.deviceInfo : Device.deviceInfo,
-                                   LbRequestkeys.language   : Locale.current.languageCode ?? "",
-                                   LbRequestkeys.appVersion : AuthoritySingleton.shared.getAppVersion(),
-                                   LbRequestkeys.osVersion  : Device.systemVersion]
+        let dict: [String: Any] = [LbRequestKeys.username   : login,
+                                   LbRequestKeys.password   : password,
+                                   LbRequestKeys.deviceInfo : Device.deviceInfo]
         return dict
     }
     
     override var patch: URL {
-        var patch: String = RouteRequests.httpsAuthification
-        let rememberMeValue = rememberMe ? LbRequestkeys.on : LbRequestkeys.off
-        patch = String(format: patch, rememberMeValue)
+        var patch: String = RouteRequests.Login.yaaniMail
+        var rememberMeSuffix = "?rememberMe=on"
+        rememberMeSuffix.append(rememberMe ? "&extendRememberMeDuration=true" : "")
+        patch = String(format: patch, rememberMeSuffix)
         
         return URL(string: patch, relativeTo: super.patch)!
     }
@@ -57,19 +56,6 @@ class AuthenticationUser: BaseRequestParametrs {
     }
 }
 
-
-class Authentication3G: BaseRequestParametrs {
-    
-    override var requestParametrs: Any {
-        return Device.deviceInfo
-    }
-    
-    override var patch: URL {
-        let patch = String(format: RouteRequests.unsecuredAuthenticationUrl, LbRequestkeys.on)
-        return URL(string: patch,
-                   relativeTo: super.patch)!
-    }
-}
 
 class SigngOutParametes: BaseRequestParametrs {
     let authToken: String
@@ -117,13 +103,13 @@ class SignUpUser: BaseRequestParametrs {
 
     override var requestParametrs: Any {
         return [
-            LbRequestkeys.email: mail,
-            LbRequestkeys.phoneNumber: phone,
-            LbRequestkeys.password: password,
-            LbRequestkeys.language: Device.locale,
-            LbRequestkeys.sendOtp: sendOtp,
-            LbRequestkeys.brandType: brandType,
-            LbRequestkeys.passwordRuleSetVersion: NumericConstants.passwordRuleSetVersion
+            LbRequestKeys.email: mail,
+            LbRequestKeys.phoneNumber: phone,
+            LbRequestKeys.password: password,
+//            LbRequestkeys.language: Device.locale,
+            LbRequestKeys.sendOtp: sendOtp,
+            LbRequestKeys.brandType: brandType,
+            LbRequestKeys.passwordRuleSetVersion: NumericConstants.passwordRuleSetVersion
         ]
     }
 
@@ -167,8 +153,8 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     let otp: String
     
     var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
-                                   LbRequestkeys.otp                 : otp]
+        let dict: [String: Any] = [LbRequestKeys.referenceToken      : token,
+                                   LbRequestKeys.otp                 : otp]
 
         return dict
     }
@@ -238,7 +224,7 @@ class EmailVerification: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        return [LbRequestkeys.email : email]
+        return [LbRequestKeys.email : email]
     }
     
     override var patch: URL {
@@ -264,17 +250,17 @@ struct ResendVerificationSMS: RequestParametrs {
     let kvkkAuth: Bool?
     
     var requestParametrs: Any {
-        var parameters: [String : Any] = [LbRequestkeys.referenceToken : refreshToken,
-                                          LbRequestkeys.eulaId : eulaId,
-                                          LbRequestkeys.processPersonalData : processPersonalData,
-                                          LbRequestkeys.globalPermAuth: globalPermAuth]
+        var parameters: [String : Any] = [LbRequestKeys.referenceToken : refreshToken,
+                                          LbRequestKeys.eulaId : eulaId,
+                                          LbRequestKeys.processPersonalData : processPersonalData,
+                                          LbRequestKeys.globalPermAuth: globalPermAuth]
         
         if let etkAuth = etkAuth {
-            parameters[LbRequestkeys.etkAuth] = etkAuth
+            parameters[LbRequestKeys.etkAuth] = etkAuth
         }
         
         if let kvkkAuth = kvkkAuth {
-            parameters[LbRequestkeys.kvkkAuth] = kvkkAuth
+            parameters[LbRequestKeys.kvkkAuth] = kvkkAuth
         }
         
         return parameters
@@ -306,15 +292,96 @@ class AuthenticationService: BaseRequestService {
     private lazy var sessionManager: SessionManager = factory.resolve()
 
     // MARK: - Login
+
+    func login(with flToken: String, success: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
+        debugLog("AuthenticationService loginUser with fastlogin token")
+
+        let params: [String: Any] = [LbRequestKeys.flToken: flToken,
+                                     LbRequestKeys.deviceInfo: Device.deviceInfo]
+
+        let endpoint = URL(string: RouteRequests.Login.flLogin)!
+
+        SessionManager.customDefault.request(endpoint, method: .post,
+                                             parameters: params, encoding: JSONEncoding.prettyPrinted)
+                .responseString { [weak self] response in
+                    switch response.result {
+                    case .success(_):
+                        guard let headers = response.response?.allHeaderFields as? [String: Any] else {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+
+                        if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                           accountStatus.elementsEqual(LbRequestKeys.poolUser) {
+                            let error = ServerError(code: -111, data: (TextConstants.NotLocalized.flIdentifierKey + " " + TextConstants.flLoginUserNotInPool).data(using: .utf8))
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+
+                        if let statusCode = response.response?.statusCode,
+                           statusCode == 400 {
+                            let error = ServerError(code: -1111, data: (TextConstants.NotLocalized.flIdentifierKey + " " + TextConstants.flLoginAuthFailure).data(using: .utf8))
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+
+                        if let accessToken = headers[HeaderConstant.AuthToken] as? String {
+                            self?.tokenStorage.accessToken = accessToken
+                        }
+                        if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+                            self?.tokenStorage.refreshToken = refreshToken
+                        }
+
+                        /// must be after accessToken save logic
+                        if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                            accountStatus.uppercased() == ErrorResponseText.accountDeleted {
+                            success?(headers)
+                            return
+                        }
+
+                        // rememberMe is always ON so server must return refreshToken
+                        if self?.tokenStorage.refreshToken == nil {
+                            let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                            fail?(ErrorResponse.error(error))
+                            return
+                        }
+
+                        if let statusCode = response.response?.statusCode,
+                            statusCode >= 300, statusCode != 403,
+                            let data = response.data,
+                            let jsonString = String(data: data, encoding: .utf8) {
+
+                            fail?(ErrorResponse.string(jsonString))
+                            return
+                        }
+
+                        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
+                            // not sure if it's needed, theme to discuss at code review
+                            self?.storageVars.currentUserID = response.externalId
+
+                            SingletonStorage.shared.isTwoFactorAuthEnabled = false
+
+
+                            success?(headers)
+                        }, fail: { error in
+                            fail?(error)
+                        })
+
+                    case .failure(let error):
+                        fail?(ErrorResponse.error(error))
+                    }
+        }
+    }
     
     func login(user: AuthenticationUser, sucess: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
         debugLog("AuthenticationService loginUser")
         
         storageVars.currentUserID = user.login
         
-        let params: [String: Any] = ["username": user.login,
-                                     "password": user.password,
-                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
+        let params: [String: Any] = [LbRequestKeys.username: user.login,
+                                     LbRequestKeys.password: user.password,
+                                     LbRequestKeys.deviceInfo: Device.deviceInfo]
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
@@ -328,7 +395,6 @@ class AuthenticationService: BaseRequestService {
                         if let accessToken = headers[HeaderConstant.AuthToken] as? String {
                             self?.tokenStorage.accessToken = accessToken
                         }
-                        
                         if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                             self?.tokenStorage.refreshToken = refreshToken
                         }
@@ -345,7 +411,7 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        if self?.tokenStorage.refreshToken == nil {
+                        if self?.tokenStorage.refreshToken == nil && user.rememberMe {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             fail?(ErrorResponse.error(error))
                             return
@@ -377,9 +443,7 @@ class AuthenticationService: BaseRequestService {
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
                             
-                            self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
-                                sucess?(headers)
-                            })
+                            sucess?(headers)
                         }, fail: { error in
                             fail?(error)
                         })
@@ -390,27 +454,20 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
-        debugLog("AuthenticationService turkcellAutification")
-        
-        SessionManager.customDefault.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
-            .responseString { [weak self] response in
-                self?.loginHandler(response, sucess, fail)
-        }
-    }
-    
     private func loginHandler(_ response: DataResponse<String>, _ sucess: SuccessLogin?, _ fail: FailResponse?) {
         switch response.result {
         case .success(_):
-            if let headers = response.response?.allHeaderFields as? [String: Any],
-                let accessToken = headers[HeaderConstant.AuthToken] as? String,
-                let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
-                self.tokenStorage.accessToken = accessToken
-                self.tokenStorage.refreshToken = refreshToken
-                SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                    self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
-                        sucess?()
-                    })
+            if let headers = response.response?.allHeaderFields as? [String: Any] {
+                if let accessToken = headers[HeaderConstant.AuthToken] as? String {
+                    self.tokenStorage.accessToken = accessToken
+                }
+                
+                if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+                    self.tokenStorage.refreshToken = refreshToken
+                }
+                
+                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                    sucess?()
                 }, fail: { error in
                     fail?(error)
                 })
@@ -423,20 +480,6 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    private func accountReadOnlyPopUpHandler(headers:[String: Any], completion: @escaping VoidHandler) {
-        guard
-            let accountStatus = headers[HeaderConstant.accountStatus] as? String,
-            accountStatus.uppercased() == ErrorResponseText.accountReadOnly
-        else {
-            completion()
-            return
-        }
-        
-        SingletonStorage.shared.getOverQuotaStatus {
-            completion()
-        }
-    }
-    
     // MARK: - Authentication
 
     func logout(async: Bool = true, success: SuccessLogout?) {
@@ -446,13 +489,23 @@ class AuthenticationService: BaseRequestService {
             debugLog("starting logout")
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
+
+            if tokenStorage.isLoggedInWithFastLogin {
+                let loginCoordinator = DGLoginCoordinator(nil)
+                FastLoginSettings.setupFastLoginCoordinator(loginCoordinator)
+                loginCoordinator.logout()
+
+                printLog("[AuthenticationService] FL logout")
+                tokenStorage.isLoggedInWithFastLogin = false
+            }
+
             self.tokenStorage.clearTokens()
             self.cancellAllRequests()
             
             ItemOperationManager.default.clear()
             CellImageManager.clear()
             RecentSearchesService.shared.clearAll()
-            UploadService.default.cancelOperations()
+            UploadService.shared.cancelOperations()
             AuthoritySingleton.shared.clear()
             storageVars.isAutoSyncSet = false
             SingletonStorage.shared.logoutClear()
@@ -470,9 +523,8 @@ class AuthenticationService: BaseRequestService {
             self.storageVars.currentUserID = nil
             
             WormholePoster().didLogout()
-            
+
             success?()
-            
         }
         if async {
             DispatchQueue.main.async {
@@ -491,6 +543,14 @@ class AuthenticationService: BaseRequestService {
             complition(false)
         })
         executePostRequest(param: requestParametrs, handler: handler)
+
+        if tokenStorage.isLoggedInWithFastLogin {
+            let loginCoordinator = DGLoginCoordinator(nil)
+            FastLoginSettings.setupFastLoginCoordinator(loginCoordinator)
+            loginCoordinator.logout()
+            tokenStorage.isLoggedInWithFastLogin = false
+            printLog("[AuthenticationService] FL logout")
+        }
     }
     
     func cancellAllRequests() {
@@ -580,27 +640,6 @@ class AuthenticationService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: forgotPassword, handler: handler)
     }
-
-    func turkcellAuth(success: SuccessLogin?, fail: FailResponse?) {
-        let user = Authentication3G()
-        debugLog("Authentication3G")
-        self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
-            if self?.tokenStorage.refreshToken == nil {
-                let error = ErrorResponse.error(error)
-                fail?(error)
-            } else {
-                self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken, _  in
-                    if let accessToken = accessToken, isSuccess {
-                        self?.tokenStorage.accessToken = accessToken
-                        success?()
-                    } else {
-                        let error = ErrorResponse.error(error)
-                        fail?(error)
-                    }
-                }
-            }
-        })
-    }
     
     
     // MARK: - With new SessionManager
@@ -644,8 +683,8 @@ class AuthenticationService: BaseRequestService {
         sessionManagerWithoutToken
             .request(RouteRequests.silentLogin,
                      method: .post,
-                     parameters: [LbRequestkeys.token: token,
-                                  LbRequestkeys.deviceInfo: Device.deviceInfo],
+                     parameters: [LbRequestKeys.token: token,
+                                  LbRequestKeys.deviceInfo: Device.deviceInfo],
                      encoding: JSONEncoding.default)
             .responseString { [weak self] response in
                 self?.loginHandler(response, success, fail)
@@ -691,6 +730,7 @@ class AuthenticationService: BaseRequestService {
     func loginViaTwoFactorAuth(token: String,
                                challengeType: String,
                                otpCode: String,
+                               rememberMe: Bool,
                                handler: @escaping (ResponseResult<[String: Any]>) -> Void) {
         debugLog("AuthenticationService loginViaTwoFactorAuth")
         
@@ -699,9 +739,15 @@ class AuthenticationService: BaseRequestService {
             "challengeType" : challengeType,
             "otpCode"       : otpCode,
         ]
-        
+
+        let urlSuffix = rememberMe ? "&extendRememberMeDuration=true" : ""
+        guard let url = URL(string: String(format: RouteRequests.twoFactorAuthLogin, urlSuffix)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return
+        }
+
         sessionManagerWithoutToken
-            .request(RouteRequests.twoFactorAuthLogin,
+            .request(url,
                      method: .post,
                      parameters: params,
                      encoding: JSONEncoding.default)

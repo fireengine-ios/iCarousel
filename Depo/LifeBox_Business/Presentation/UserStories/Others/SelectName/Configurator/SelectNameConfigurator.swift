@@ -21,14 +21,14 @@ class SelectNameModuleConfigurator {
         }
     }
     
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, viewType: SelectNameScreenType, parameters: CreateFolderSharedWithMeParameters, moduleOutput: SelectNameModuleOutput?) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, viewType: SelectNameScreenType, parameters: CreateFolderParameters, moduleOutput: SelectNameModuleOutput?) {
         
         if let viewController = viewInput as? SelectNameViewController {
             configure(viewController: viewController,
                       moduleType: viewType,
                       rootFolderID: parameters.rootFolderUuid,
                       isPrivateSharing: true,
-                      projectId: parameters.projectId,
+                      projectId: parameters.accountUuid,
                       moduleOutput: moduleOutput)
         }
     }
@@ -48,7 +48,7 @@ class SelectNameModuleConfigurator {
         interactor.isFavorite = isFavorites
         interactor.moduleType = moduleType
         interactor.isPrivateShare = isPrivateSharing
-        interactor.projectId = projectId
+        interactor.accountUuid = projectId
         
         presenter.interactor = interactor
         viewController.output = presenter

@@ -8,85 +8,8 @@
 
 import Foundation
 
-
-indirect enum PrivateShareType: Equatable {
-    case byMe
-    case withMe
-    case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
-    
-    var rootType: PrivateShareType {
-        return veryRootType(for: self)
-    }
-    
-    var emptyViewType: EmptyView.ViewType {
-        switch self {
-            case .byMe:
-                return .sharedBy
-            case .withMe:
-                return .sharedWith
-            case .innerFolder:
-                return .sharedInnerFolder
-        }
-    }
-    
-    //isSelectionAllowed is predefined by the veryRootType only
-    var isSelectionAllowed: Bool {
-        switch self {
-            case .byMe:
-                return true
-                
-            case .withMe:
-                return false
-                
-            case .innerFolder:
-                return veryRootType(for: self).isSelectionAllowed
-        }
-    }
-    
-    //floatingButtonTypes is predefined by the veryRootType + type itself
-    var floatingButtonTypes: [FloatingButtonsType] {
-        let typeAndRoot = (self, veryRootType(for: self))
-        
-        switch typeAndRoot {
-            case (.byMe, _):
-                return []
-                
-            case (.withMe, _):
-                return []
-                
-            case (.innerFolder(_, let folder), let veryRootType):
-                return floatingButtonTypes(innerFolderVeryRootType: veryRootType, permissions: folder.permissions.granted ?? [])
-        }
-    }
-    
-    private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType, permissions: [PrivateSharePermission]) -> [FloatingButtonsType] {
-        switch innerFolderVeryRootType {
-            case .byMe:
-                return [.newFolder, .upload, .uploadFiles]
-                
-            case .withMe:
-                if permissions.contains(.create) {
-                    return [.newFolder, .upload, .uploadFiles]
-                }
-                return []
-                
-            case .innerFolder:
-                assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
-                return []
-        }
-    }
-    
-    private func veryRootType(for type: PrivateShareType) -> PrivateShareType {
-        switch type {
-            case .byMe, .withMe:
-                return type
-                
-            case .innerFolder(type: let rootType, _):
-                return veryRootType(for: rootType)
-        }
-    }
-}
-
+typealias DeltaIndexes = (inserted: [Int], deleted: [Int])
+typealias ReloadCompletionHandler = ValueHandler<(reloadRequired: Bool, deltaIndexes: DeltaIndexes?)>
 
 final class PrivateShareFileInfoManager {
     
@@ -94,13 +17,20 @@ final class PrivateShareFileInfoManager {
         let service = PrivateShareFileInfoManager()
         service.type = type
         service.privateShareAPIService = privateShareAPIService
+        if case PrivateShareType.search(from: _, rootPermissions: let permissions, text: _) = type {
+            service.searchRootPermissions = permissions
+        }
         return service
     }
     
+    private(set) var isNextPageLoading = false
+    
     private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
-    private var privateShareAPIService: PrivateShareApiService!
+    private(set) var privateShareAPIService: PrivateShareApiService!
     private let pageSize = Device.isIpad ? 64 : 32
     private var pagesLoaded = 0
+    
+    private(set) var searchedItemsFound: Int = 0
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -109,13 +39,21 @@ final class PrivateShareFileInfoManager {
         return queue
     }()
     
-    private(set) var sorting: SortedRules = .timeUp
+    private(set) var sorting: SortedRules = .lastModifiedTimeUp
     private(set) var type: PrivateShareType = .byMe
-    private(set) var sortedItems = SynchronizedArray<WrapData>()
+    private(set) var items = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
-    private(set) var splittedItems = SynchronizedArray<[WrapData]>()
+    
+    private var rootFolder: SharedFileInfo?
+    
+    private var searchRootPermissions: SharedItemPermission?
+    
+    var rootPermissions: SharedItemPermission? {
+        return searchRootPermissions ?? rootFolder?.permissions
+    }
     
     private var tempLoaded = [WrapData]()
+    
     
     //MARK: - Life cycle
     
@@ -123,63 +61,85 @@ final class PrivateShareFileInfoManager {
     
     //MARK: - Public
     
-    func loadNextPage(completion: @escaping ValueHandler<Bool>) {
+    func loadNextPage(completion: @escaping ReloadCompletionHandler) {
         guard operationQueue.operations.filter({ !$0.isCancelled }).count == 0 else {
-            completion(false)
+            completion((false, nil))
             return
         }
         
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+        isNextPageLoading = true
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (_, loadedItems, searchItemsFoundInTotal, isFinished) in
             
-            guard let self = self, isFinished, !loadedItems.isEmpty else {
-                completion(false)
+            guard let self = self else {
+                completion((false, nil))
+                return
+            }
+            
+            guard isFinished, !loadedItems.isEmpty else {
+                self.isNextPageLoading = false
+                completion((false, nil))
                 return
             }
             
             self.pagesLoaded += 1
             
-            let sorted = self.sortedItems.getArray() + self.sorted(items: loadedItems)
-            self.sortedItems.replace(with: sorted, completion: nil)
+            self.searchedItemsFound = searchItemsFoundInTotal ?? 0
             
-            let splitted = self.splitted(sortedArray: sorted)
+            let combinedItems = self.items.getArray() + loadedItems
             
-            self.splittedItems.replace(with: splitted) {
-                completion(true)
+            let indexes: (inserted: [Int], deleted: [Int])
+            if case .search = self.type {
+                if self.items.count > combinedItems.count  {
+                    indexes = (inserted: [], deleted: [])
+                    assertionFailure()
+                } else {
+                    let newRange = self.items.count..<combinedItems.count
+                    indexes = (inserted: [Int](newRange), deleted: [])
+                }
+            } else {
+                indexes = self.getDeltaIndexes(objects: combinedItems)
+            }
+            
+            self.items.replace(with: combinedItems) { [weak self] in
+                self?.queue.async {
+                    self?.isNextPageLoading = false
+                    completion((true, indexes))
+                }
             }
         }
         
         operationQueue.addOperation(operation)
     }
     
-    func reload(completion: @escaping ValueHandler<Bool>) {
+    func reload(completion: @escaping ReloadCompletionHandler) {
         queue.sync {
             operationQueue.cancelAllOperations()
             
             selectedItems.removeAll()
             pagesLoaded = 0
             
-            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, searchItemsFoundInnTotal, isFinished in
+                
+                self?.rootFolder = rootFolder
                 
                 guard let self = self, isFinished else {
-                    completion(false)
+                    completion((false, nil))
                     return
                 }
                 
                 guard !loadedItems.isEmpty else {
                     self.cleanAll()
-                    completion(true)
+                    completion((true, nil))
                     return
                 }
                 
+                self.searchedItemsFound = searchItemsFoundInnTotal ?? 0
+                
                 self.pagesLoaded += 1
                 
-                let sorted = self.sorted(items: loadedItems)
-                self.sortedItems.replace(with: sorted, completion: nil)
-                
-                let splitted = self.splitted(sortedArray: sorted)
-                
-                self.splittedItems.replace(with: splitted) {
-                    completion(true)
+                let indexes = self.getDeltaIndexes(objects: loadedItems)
+                self.items.replace(with: loadedItems) {
+                    completion((true, indexes))
                 }
             }
             
@@ -187,7 +147,7 @@ final class PrivateShareFileInfoManager {
         }
     }
     
-    func reloadCurrentPages(completion: @escaping ValueHandler<Bool>) {
+    func reloadCurrentPages(completion: @escaping ReloadCompletionHandler) {
          guard pagesLoaded > 0 else {
             reload(completion: completion)
             return
@@ -204,25 +164,18 @@ final class PrivateShareFileInfoManager {
         }
     }
     
-    func change(sortingRules: SortedRules, completion: @escaping VoidHandler) {
+    func change(sortingRules: SortedRules, completion: @escaping ReloadCompletionHandler) {
         guard sorting != sortingRules else {
             return
         }
         
         sorting = sortingRules
         
-        let changedSorted = sorted(items: sortedItems.getArray())
-        sortedItems.replace(with: changedSorted, completion: nil)
-        
-        let changedSplitted = splitted(sortedArray: changedSorted)
-        
-        splittedItems.replace(with: changedSplitted) {
-            completion()
-        }
+        reload(completion: completion)
     }
     
     func selectItem(at indexPath: IndexPath) {
-        if let item = splittedItems[indexPath.section]?[safe:indexPath.row] {
+        if let item = items[indexPath.row] {
             if let alreadySelected = selectedItems.getSet().first(where: { $0.uuid == item.uuid }) {
                 selectedItems.remove(alreadySelected)
             }
@@ -230,8 +183,15 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func selectItem(_ item: WrapData) {
+        if let alreadySelected = selectedItems.getSet().first(where: { $0.uuid == item.uuid }) {
+            selectedItems.remove(alreadySelected)
+        }
+        selectedItems.insert(item)
+    }
+    
     func deselectItem(at indexPath: IndexPath) {
-        if let item = splittedItems[indexPath.section]?[safe:indexPath.row] {
+        if let item = items[indexPath.row] {
             selectedItems.remove(item)
         }
     }
@@ -245,22 +205,13 @@ final class PrivateShareFileInfoManager {
             return
         }
         
-        let changedSorted = sortedItems.filter { !$0.uuid.isContained(in: uuids) }
+        let changedItems = items.filter { !$0.uuid.isContained(in: uuids) }
         
-        sortedItems.replace(with: changedSorted, completion: nil)
-        
-        let changedSplitted = splitted(sortedArray: changedSorted)
-        
-        splittedItems.replace(with: changedSplitted, completion: completion)
+        items.replace(with: changedItems, completion: completion)
     }
     
     func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
-        guard let projectId = item.projectId else {
-            completion(nil)
-            return
-        }
-        
-        privateShareAPIService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { response in
+        privateShareAPIService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { response in
             switch response {
                 case .success(let urlWrapper):
                     completion(urlWrapper.url)
@@ -271,153 +222,70 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func rename(item: WrapData, name: String, completion: @escaping BoolHandler) {
+        privateShareAPIService.renameItem(projectId: item.accountUuid, uuid: item.uuid, name: name) { [weak self] response in
+            
+            ItemOperationManager.default.didRenameItem(item)
+            
+            switch response {
+                case .success:
+                    SnackbarManager.shared.show(elementType: .rename, relatedItems: [item], handler: nil)
+                    completion(true)
+                    
+                case .failed(let error):
+                    SnackbarManager.shared.show(type: .critical, message: error.localizedDescription)
+                    completion(false)
+            }
+        }
+    }
+    
+    func search(type: PrivateShareType, completion: @escaping ReloadCompletionHandler) {
+        self.type = type
+        reload(completion: completion)
+    }
+    
     //MARK: - Private
     
     private func cleanAll() {
         selectedItems.removeAll()
-        sortedItems.removeAll()
-        splittedItems.removeAll()
+        items.removeAll()
     }
     
-    private func loadPages(till page: Int, completion: @escaping ValueHandler<Bool>) {
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+    private func loadPages(till page: Int, completion: @escaping ReloadCompletionHandler) {
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, searchItemsFoundInnTotal, isFinished in
+            
+            self?.rootFolder = rootFolder
             
             guard let self = self, isFinished else {
-                completion(false)
+                completion((false, nil))
                 return
             }
             
-            self.tempLoaded.append(contentsOf: self.sorted(items: loadedItems))
+            self.searchedItemsFound = searchItemsFoundInnTotal ?? 0
+            
+            self.tempLoaded.append(contentsOf: loadedItems)
             self.pagesLoaded += 1
             
             guard self.pagesLoaded < page, !loadedItems.isEmpty else {
-                self.loadPages(till: page, completion: completion)
+                let indexes = self.getDeltaIndexes(objects: self.tempLoaded)
+                self.items.replace(with: self.tempLoaded) {
+                    completion((true, indexes))
+                }
                 return
             }
             
-            let sorted = self.sorted(items: self.tempLoaded)
-            self.sortedItems.replace(with: sorted, completion: nil)
-            
-            let splitted = self.splitted(sortedArray: sorted)
-            
-            self.splittedItems.replace(with: splitted) {
-                completion(true)
-            }
-            
-            
+            self.loadPages(till: page, completion: completion)
         }
         
         operationQueue.addOperation(operation)
     }
     
-    private func sorted(items: [WrapData]) -> [WrapData] {
-        return WrapDataSorting.sort(items: items, sortType: sorting)
-    }
-    
-    private func splitted(sortedArray: [WrapData]) -> [[WrapData]]  {
-        let grouped: [String : [WrapData]]
-        switch sorting {
-        case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp, .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
-            grouped = Dictionary(grouping: sortedArray, by: { $0.creationDate?.getDateForSortingOfCollectionView() ?? Date().getDateForSortingOfCollectionView()
-            })
-            
-        case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
-            grouped = Dictionary(grouping: sortedArray, by: { $0.name?.firstLetter ?? "" })
-            
-        case .sizeAZ, .sizeZA:
-            grouped = ["plain" : sortedArray]//Dictionary(grouping: sortedArray, by: { $0.fileSize.bytesString })
-            
-        case .metaDataTimeUp, .metaDataTimeDown:
-            grouped = Dictionary(grouping: sortedArray, by: { $0.creationDate?.getDateForSortingOfCollectionView() ?? Date().getDateForSortingOfCollectionView()
-            })
-        }
+    private func getDeltaIndexes(objects: [WrapData]) -> (inserted: [Int], deleted: [Int]) {
+        let original = items.getArray()
         
-        let splitted: [[WrapData]] = grouped.sorted(by: { sorting.sortOder == .asc ? ($0.0 < $1.0) : ($0.0 > $1.0) }).compactMap { $0.value }
+        let insertions = objects.filter { !original.contains($0) }.compactMap { objects.index(of: $0) }
+        let deletions = original.filter { !objects.contains($0) }.compactMap { original.index(of: $0) }
         
-        return splitted
-    }
-}
-
-
-final class GetSharedItemsOperation: Operation {
-    
-    private let semaphore = DispatchSemaphore(value: 0)
-    
-    private let privateShareAPIService: PrivateShareApiService
-    
-    private let type: PrivateShareType
-    private let page: Int
-    private let size: Int
-    private let sortBy: SortType
-    private let sortOrder: SortOrder
-    private let completion: ValueHandler<(([WrapData], Bool))>
-    
-    private var task: URLSessionTask?
-    private var loadedItems = [WrapData]()
-    private var isRequestFinished = false
-    
-    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<([WrapData], Bool)>) {
-        self.type = type
-        self.privateShareAPIService = service
-        self.completion = completion
-        self.page = page
-        self.size = size
-        self.sortBy = sortBy
-        self.sortOrder = sortOrder
-    }
-    
-    override func cancel() {
-        super.cancel()
-        
-        task?.cancel()
-        
-        semaphore.signal()
-    }
-    
-    override func main() {
-        load()
-        
-        semaphore.wait()
-        
-        completion((loadedItems, isRequestFinished))
-    }
-    
-    private func load() {
-        loadPage { [weak self] result in
-            guard let self = self, !self.isCancelled else {
-                return
-            }
-            
-            self.isRequestFinished = true
-            
-            switch result {
-                case .success(let filesInfo):
-                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
-                    self.semaphore.signal()
-                    
-                case .failed(_):
-                    self.semaphore.signal()
-            }
-        }
-    }
-    
-    private func loadPage(completion : @escaping ResponseArrayHandler<SharedFileInfo>) {
-        switch type {
-            case .byMe:
-                task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
-                
-            case .withMe:
-                task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
-                
-            case .innerFolder(_, let folder):
-                task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
-                    switch response {
-                        case .success(let fileSystem):
-                            completion(.success(fileSystem.fileList))
-                        case .failed(let error):
-                            completion(.failed(error))
-                    }
-                }
-        }
+        return (insertions, deletions)
     }
 }

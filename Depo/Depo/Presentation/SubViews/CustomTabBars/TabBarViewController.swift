@@ -254,7 +254,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @objc private func showTabBar() {
         changeTabBarStatus(hidden: false)
-        if self.bottomTabBarConstraint.constant < 0 {
+        if self.bottomTabBarConstraint.constant <= 0 {
             if !musicBar.isHidden {
                 musicBar.alpha = 1
                 musicBar.isUserInteractionEnabled = true

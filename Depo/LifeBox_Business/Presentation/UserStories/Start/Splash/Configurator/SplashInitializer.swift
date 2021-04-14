@@ -14,7 +14,7 @@ class SplashModuleInitializer: NSObject {
     @IBOutlet weak var splashViewController: SplashViewController!
 
     class func initializeViewController(with nibName: String) -> UIViewController {
-        let viewController = SplashViewController(nibName: nibName, bundle: nil)
+        let viewController = SplashViewController.initFromNib()
         let configurator = SplashModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)
         return viewController
