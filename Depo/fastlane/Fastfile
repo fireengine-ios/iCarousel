@@ -30,6 +30,14 @@ TARGET_LIFEDRIVE = "LifeTech_Billo"
 
 BUILD_NUMBER_LIFEDRIVE = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET_LIFEDRIVE)
 
+# #Business
+# #BUNDLE_ID_BUSINESS = 'by.com.life.LifeboxBusiness'
+# APP_NAME_BUSINESS = "business_LifeTech"
+# SCHEME_BUSINESS = "lifeBox_Business"
+# TARGET_BUSINNESS = "lifeBox_Business"
+
+# BUILD_NUMBER_BUSINESS = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET_BUSINNESS)
+
 #Common
 PROJECT = "Depo.xcodeproj"
 BUILD_FOLDER_NAME = "builds"
@@ -261,6 +269,18 @@ lane :my_gym_lifedrive do # |options|
         export_format: "apple_strings",
         language: language,
         output_path: "./Depo/App/Resources/#{language}.lproj/OurLocalizable.strings"
+      )
+    end
+  end
+
+  lane :business_poeditor_download do
+    for language in ["en", "tr"]
+      poeditor_export(
+        api_token: "b91af56559195b57ea5e1bddb49d3e54",
+        project_id: "397845",
+        export_format: "apple_strings",
+        language: language,
+        output_path: "./LifeBox_Business/App/Resources/#{language}.lproj/OurLocalizable.strings"
       )
     end
   end
