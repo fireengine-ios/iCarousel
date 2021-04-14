@@ -29,7 +29,6 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func needToHideSpinner()
 
     func onEmptyViewUpdate(isHidden: Bool)
-    func getEmptyViewTopOffset() -> CGFloat
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -41,12 +40,12 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         return collectionManager
     }
     
-    var bottomBarContainerViewHeight: CGFloat?
+    private var barInsets = UIEdgeInsets.zero
     
     weak var delegate: PrivateShareSharedFilesCollectionManagerDelegate?
     private weak var collectionView: UICollectionView?
     
-    private var emptyView: EmptyView?
+    private lazy var emptyView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
     
     private let router = RouterVC()
     private var fileInfoManager: PrivateShareFileInfoManager!
@@ -70,6 +69,12 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     func setup() {
         setupCollection()
         setupTopRefresher()
+    }
+    
+    func updateOnDidLayout(barInsets: UIEdgeInsets) {
+        self.barInsets = barInsets
+        
+        updateEmptyView()
     }
 
     
@@ -161,12 +166,16 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         collectionView?.allowsSelection = false
         collectionView?.alwaysBounceVertical = true
         
-        emptyView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
-        emptyView?.isHidden = true
+        emptyView.isHidden = true
         collectionView?.backgroundView = emptyView
-        
+
         collectionView?.delegate = self
         collectionView?.dataSource = self
+    }
+    
+    private func updateEmptyView() {
+        emptyView.topOffset = barInsets.top
+        emptyView.bottomOffset = barInsets.bottom
     }
     
     private func setupTopRefresher() {
@@ -345,13 +354,12 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func setEmptyScreen(isHidden: Bool) {
-        guard emptyView?.isHidden != isHidden else {
+        guard emptyView.isHidden != isHidden else {
             return
         }
         
         DispatchQueue.toMain {
-            self.emptyView?.topOffset = self.delegate?.getEmptyViewTopOffset() ?? 0
-            self.emptyView?.isHidden = isHidden
+            self.emptyView.isHidden = isHidden
             self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
         }
     }
@@ -500,7 +508,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.contentSize.width, height: bottomBarContainerViewHeight ?? 0)
+        return CGSize(width: collectionView.contentSize.width, height: barInsets.bottom)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

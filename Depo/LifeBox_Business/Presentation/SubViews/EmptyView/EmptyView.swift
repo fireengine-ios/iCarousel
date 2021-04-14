@@ -135,6 +135,7 @@ final class EmptyView: UIView, NibInit {
     @IBOutlet private weak var imageView: UIImageView!
     
     @IBOutlet private weak var topOffsetConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomOffsetConstraint: NSLayoutConstraint!
     
     var topOffset: CGFloat {
         get {
@@ -142,6 +143,16 @@ final class EmptyView: UIView, NibInit {
         }
         set {
             topOffsetConstraint.constant = newValue
+            layoutIfNeeded()
+        }
+    }
+    
+    var bottomOffset: CGFloat {
+        get {
+            return bottomOffsetConstraint.constant
+        }
+        set {
+            bottomOffsetConstraint.constant = newValue
             layoutIfNeeded()
         }
     }
