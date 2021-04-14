@@ -75,9 +75,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         }
         
         if Device.operationSystemVersionLessThen(13) {
-            return navigationBarFrame.origin.y + navigationBarFrame.height
-        } else {
             return navigationBarFrame.origin.y + navigationBarFrame.height + searchController.searchBar.frame.height
+        } else {
+            return navigationBarFrame.origin.y + navigationBarFrame.height
         }
         
     }
