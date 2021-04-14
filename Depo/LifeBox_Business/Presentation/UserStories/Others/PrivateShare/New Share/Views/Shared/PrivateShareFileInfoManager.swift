@@ -89,7 +89,7 @@ final class PrivateShareFileInfoManager {
             
             let indexes: (inserted: [Int], deleted: [Int])
             if case .search = self.type {
-                if self.items.count < combinedItems.count  {
+                if self.items.count > combinedItems.count  {
                     indexes = (inserted: [], deleted: [])
                     assertionFailure()
                 } else {
