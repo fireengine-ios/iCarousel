@@ -226,6 +226,10 @@ extension UIViewController {
             navigationItem.searchController = controller
         }
     }
+    
+    var navigationSearchController: UISearchController? {
+        return navigationItem.searchController
+    }
 }
 
 //MARK: - Modal
