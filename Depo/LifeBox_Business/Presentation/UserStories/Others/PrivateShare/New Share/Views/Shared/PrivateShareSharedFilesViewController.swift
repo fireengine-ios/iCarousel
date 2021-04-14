@@ -63,6 +63,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
+        
+        searchController.searchBar.text = nil
+        
         return searchController
     }()
     
@@ -89,6 +92,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -378,14 +382,19 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 
                 if shareType.isSearchAllowed {
                     searchController.searchBar.text = nil
+                    searchController.isActive = false
                 }
                 
             case .search(from: let rootType, _, text: let searchText):
-                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
-                navBarManager.setupLargetitle(isLarge: false)
+                
                 navBarManager.setRootMode(title: rootType.title)
+                navBarManager.setupLargetitle(isLarge: false)
+                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                 
                 searchController.searchBar.text = searchText
+                 
+                searchController.searchBar.showsCancelButton = true
+                
                 setNavSearchConntroller(searchController)
                 
             }
@@ -723,4 +732,5 @@ extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
             
         }
     }
+
 }
