@@ -111,7 +111,7 @@ final class SegmentedChildNavBarManager {
         delegate?.setLeftBarButtonItems([settingsButton], animated: false)
     }
     
-    func setupLargetitle(isLarge: Bool) {
+    func setupLargeTitle(isLarge: Bool) {
         delegate?.changeNavbarLargeTitle(isLarge, style: .white)
     }
     
@@ -133,7 +133,6 @@ final class SegmentedChildNavBarManager {
     func setTrashBinMode(title: String, innerFolder: Bool = false, emptyDataList: Bool = true) {
         delegate?.setTitle(title, isSelectionMode: false, style: .white)
         let rightButtons: [UIBarButtonItem]? = innerFolder || emptyDataList ? nil : [trashButton]
-        //TODO:  postpone setup after we get files list
         delegate?.setRightBarButtonItems(rightButtons, animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: false)
     }
