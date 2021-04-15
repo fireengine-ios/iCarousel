@@ -31,9 +31,6 @@ class WrapperedItemUtil: NSObject {
             
         case let .application(applicationType):
             switch applicationType {
-            case .rar:
-                imageName = "fileIconRar"
-                break
             case .zip:
                 imageName = "zipFileThumbnail"
                 break
