@@ -333,9 +333,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
 
     func onEmptyViewUpdate(isHidden: Bool) {
-        if shareType == .trashBin {
-            updateTrashBinNavBarConfig(isEmptyPage: !isHidden)
-        }
+        updateTrashBinNavBarConfig(isEmptyPage: !isHidden)
     }
     
     //MARK: Helpers
@@ -368,8 +366,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
     
     private func updateTrashBinNavBarConfig(isEmptyPage: Bool) {
-        navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: isEmptyPage)
-        navBarManager.setupLargeTitle(isLarge: false)
+        if shareType == .trashBin {
+            navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: isEmptyPage)
+            navBarManager.setupLargeTitle(isLarge: false)
+        }
     }
 
     private func setupNavigationBar(editingMode: Bool) {
