@@ -507,7 +507,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func dismissBottomBar(animated: Bool) {
         bottomBarPresenter?.dismiss(animated: animated)
-        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
     func updateNoFilesView() {

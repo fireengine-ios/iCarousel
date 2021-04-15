@@ -7,8 +7,6 @@
 //
 
 extension NSNotification.Name {
-    static let hidePlusTabBar = Notification.Name(rawValue: "HideMainTabBarPlusNotification")
-    static let showPlusTabBar = Notification.Name(rawValue: "ShowMainTabBarPlusNotification")
     static let hideTabBar = Notification.Name(rawValue: "HideMainTabBarNotification")
     static let showTabBar = Notification.Name(rawValue: "ShowMainTabBarNotification")
     static let musicDrop = Notification.Name(rawValue: "MusicDrop")
