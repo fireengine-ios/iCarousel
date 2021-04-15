@@ -43,9 +43,6 @@ class WrapperedItemUtil: NSObject {
             case .txt:
                 imageName = "txtFileThumbnail"
                 break
-            case .html:
-                imageName = "fileIconUnknown"
-                break
             case .xls:
                 imageName = "xlsFileThumbnail"
                 break
