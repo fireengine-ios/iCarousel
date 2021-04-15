@@ -73,7 +73,7 @@
                         <constraint firstItem="gxz-1O-hIp" firstAttribute="leading" secondItem="ero-vK-F2b" secondAttribute="leading" id="j0G-2e-cWg"/>
                         <constraint firstItem="W0f-ko-odc" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="rlX-hu-WYO"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="uSv-rF-MBk"/>
-                        <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="gxz-1O-hIp" secondAttribute="bottom" id="yYv-UQ-NGV"/>
+                        <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="gxz-1O-hIp" secondAttribute="bottom" constant="60" id="yYv-UQ-NGV"/>
                     </constraints>
                 </view>
             </subviews>
