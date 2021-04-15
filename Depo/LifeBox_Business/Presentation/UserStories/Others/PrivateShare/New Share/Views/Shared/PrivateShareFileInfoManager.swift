@@ -164,6 +164,64 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    
+    func reloadPages(pages: [Int], completion: @escaping ReloadCompletionHandler) {
+        guard !pages.isEmpty else {
+            completion((reloadRequired: false, deltaIndexes: nil))
+            return
+        }
+        
+        var newIndexes = (inserted: [Int](), deleted: [Int]())
+        
+        for (i, currentReloadPage) in pages.enumerated() {
+            reloadPage(page: currentReloadPage) { reloadResult in
+                newIndexes.deleted.append(contentsOf: reloadResult.deltaIndexes?.deleted ?? [])
+                newIndexes.inserted.append(contentsOf: reloadResult.deltaIndexes?.inserted ?? [])
+                if i == pages.count - 1 {
+                    completion((reloadRequired: true, deltaIndexes: newIndexes))
+                }
+            }
+        }
+    }
+    
+    func reloadPage(page: Int, completion: @escaping ReloadCompletionHandler) {
+         guard page >= 0 else {
+            reload(completion: completion)
+            return
+        }
+        
+        operationQueue.cancelAllOperations()
+        
+        tempLoaded.removeAll()
+        
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: page, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, searchItemsFoundInnTotal, isFinished in
+            
+            self?.rootFolder = rootFolder
+            
+            guard let self = self, isFinished else {
+                completion((false, nil))
+                return
+            }
+            
+            self.searchedItemsFound = searchItemsFoundInnTotal ?? 0
+            
+            self.tempLoaded.append(contentsOf: loadedItems)
+            
+            
+            guard !loadedItems.isEmpty else {
+                let indexes = self.getDeltaIndexes(objects: self.tempLoaded)
+                self.items.replace(with: self.tempLoaded) {
+                    completion((true, indexes))
+                }
+                return
+            }
+            
+            completion((reloadRequired: true, deltaIndexes: self.getDeltaIndexes(objects: self.tempLoaded)))
+        }
+        
+        operationQueue.addOperation(operation)
+    }
+    
     func change(sortingRules: SortedRules, completion: @escaping ReloadCompletionHandler) {
         guard sorting != sortingRules else {
             return
@@ -207,7 +265,21 @@ final class PrivateShareFileInfoManager {
         
         let changedItems = items.filter { !$0.uuid.isContained(in: uuids) }
         
-        items.replace(with: changedItems, completion: completion)
+        if case .search = self.type {
+            DispatchQueue.global().async { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                self.reloadPages(pages: self.getRelatedItemPages(uuids: uuids)) { _ in
+                    completion()
+                }
+            }
+        } else {
+            items.replace(with: changedItems) {
+                    completion()
+            }
+        }
     }
     
     func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
@@ -287,5 +359,20 @@ final class PrivateShareFileInfoManager {
         let deletions = original.filter { !objects.contains($0) }.compactMap { original.index(of: $0) }
         
         return (insertions, deletions)
+    }
+    
+    private func getRelatedItemPages(uuids: [String]) -> [Int] {
+        var relatedToItemPages = [Int]()
+
+        uuids.forEach { uuid in
+            var relatedToItemPage: Int = 1
+            let itemIndex: Int = self.items.index(where: { $0.uuid == uuid}) ?? 0
+            while itemIndex >= relatedToItemPage * self.pageSize {
+                relatedToItemPage += 1
+            }
+            relatedToItemPages.append(relatedToItemPage - 1)
+        }
+        
+        return relatedToItemPages
     }
 }
