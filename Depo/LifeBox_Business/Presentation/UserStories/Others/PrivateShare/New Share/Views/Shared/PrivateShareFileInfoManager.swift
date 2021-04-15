@@ -208,7 +208,7 @@ final class PrivateShareFileInfoManager {
         let changedItems = items.filter { !$0.uuid.isContained(in: uuids) }
         
         if case .search = self.type, searchedItemsFound > 0 {
-            searchedItemsFound -= changedItems.count
+            searchedItemsFound = changedItems.count
         }
        
         items.replace(with: changedItems) {
