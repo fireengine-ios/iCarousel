@@ -20,7 +20,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didEndSelection()
     func didChangeSelection(selectedItems: [WrapData])
     
-    func didEndReload()
+    func didEndReload(hasItems: Bool)
     
     func showActions(for item: WrapData, sender: Any)
     func didSelectAction(type: ElementTypes, on item: Item, sender: Any?)
@@ -146,8 +146,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
             self.collectionView?.refreshControl?.endRefreshing()
             self.collectionView?.layoutIfNeeded()
             self.collectionView?.reloadData()
-            self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
-            self.delegate?.didEndReload()
+            let hasItems = !self.fileInfoManager.items.isEmpty
+            self.setEmptyScreen(isHidden: hasItems)
+            self.delegate?.didEndReload(hasItems: hasItems)
         }
     }
     
@@ -274,8 +275,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         guard !indexes.inserted.isEmpty || !indexes.deleted.isEmpty else {
             DispatchQueue.main.async {
                 self.collectionView?.refreshControl?.endRefreshing()
-                self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
-                self.delegate?.didEndReload()
+                let hasItems = !self.fileInfoManager.items.isEmpty
+                self.setEmptyScreen(isHidden: hasItems)
+                self.delegate?.didEndReload(hasItems: hasItems)
             }
             return
         }
@@ -286,9 +288,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 self.collectionView?.insertItems(at: indexes.inserted.compactMap { IndexPath(row: $0, section: 0) })
                 
             }, completion: { (_) in
-                self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
+                let hasItems = !self.fileInfoManager.items.isEmpty
+                self.setEmptyScreen(isHidden: hasItems)
                 self.reloadVisibleCells()
-                self.delegate?.didEndReload()
+                self.delegate?.didEndReload(hasItems: hasItems)
             })
         }
     }

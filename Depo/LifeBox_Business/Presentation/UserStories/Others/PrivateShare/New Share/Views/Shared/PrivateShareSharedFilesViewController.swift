@@ -299,7 +299,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         }
     }
     
-    func didEndReload() {
+    func didEndReload(hasItems: Bool) {
         hideSpinner()
         
         if shareType.isSearchAllowed {
@@ -307,6 +307,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         }
         
         setupPlusButton()
+        updateTrashBinNavBarConfig(isEmptyPage: !hasItems)
         
         view.layoutSubviews()
         
@@ -333,8 +334,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
 
     func onEmptyViewUpdate(isHidden: Bool) {
         if shareType == .trashBin {
-            navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: !isHidden)
-            navBarManager.setupLargeTitle(isLarge: false)
+            updateTrashBinNavBarConfig(isEmptyPage: !isHidden)
         }
     }
     
@@ -365,7 +365,11 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         } else {
             self.bottomBarManager.hide()
         }
-        
+    }
+    
+    private func updateTrashBinNavBarConfig(isEmptyPage: Bool) {
+        navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: isEmptyPage)
+        navBarManager.setupLargeTitle(isLarge: false)
     }
 
     private func setupNavigationBar(editingMode: Bool) {
