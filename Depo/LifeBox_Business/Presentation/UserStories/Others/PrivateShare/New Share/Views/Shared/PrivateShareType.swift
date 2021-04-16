@@ -157,19 +157,8 @@ indirect enum PrivateShareType: Equatable {
                 return []
                 
             case (.search(let rootType, _, _), _):
-                switch rootType {
-                case .myDisk:
-                    if rootPermissions?.granted?.contains(.create) == true {
-                        return [.upload(type: .regular), .uploadFiles(type: .regular),  .newFolder(type: .regular)]
-                    }
-                case .sharedArea:
-                    if rootPermissions?.granted?.contains(.create) == true {
-                        return [.upload(type: .sharedArea), .uploadFiles(type: .sharedArea),  .newFolder(type: .sharedArea)]
-                    }
-                default:
-                    return []
-                }
-                return []
+                return rootType.floatingButtonTypes(rootPermissions: rootPermissions)
+
         }
     }
     
