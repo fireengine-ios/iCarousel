@@ -207,7 +207,12 @@ final class PrivateShareFileInfoManager {
         
         let changedItems = items.filter { !$0.uuid.isContained(in: uuids) }
         
+        if case .search = type, searchedItemsFound > 0 {
+            searchedItemsFound = changedItems.count
+        }
+       
         items.replace(with: changedItems, completion: completion)
+        
     }
     
     func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
@@ -288,4 +293,5 @@ final class PrivateShareFileInfoManager {
         
         return (insertions, deletions)
     }
+    
 }

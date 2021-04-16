@@ -266,7 +266,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             default:
                 self.changeNavbarLargeTitle(false, style: .white)
                 if self.shareType.isSearchAllowed {
-                    self.setNavSearchConntroller(nil)
+                    self.setNavSearchController(nil)
                 }
             }
         }
@@ -282,7 +282,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             default:
                 self.changeNavbarLargeTitle(true, style: .white)
                 if self.shareType.isSearchAllowed {
-                    self.setNavSearchConntroller(self.searchController)
+                    self.setNavSearchController(self.searchController)
                 }
             }
         }
@@ -299,20 +299,21 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         }
     }
     
-    func didEndReload() {
+    func didEndReload(hasItems: Bool) {
         hideSpinner()
         
-        if self.shareType.isSearchAllowed {
-            self.setNavSearchConntroller(self.searchController)
+        if shareType.isSearchAllowed {
+            setNavSearchController(self.searchController)
         }
         
-        self.setupPlusButton()
-        self.view.layoutSubviews()
+        setupPlusButton()
+        updateTrashBinNavBarConfig(isEmptyPage: !hasItems)
+        
+        view.layoutSubviews()
         
         if !ReachabilityService.shared.isReachable {
             UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
         }
-        
     }
     
     func showActions(for item: WrapData, sender: Any) {
@@ -332,10 +333,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
 
     func onEmptyViewUpdate(isHidden: Bool) {
-        if shareType == .trashBin {
-            navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: !isHidden)
-            navBarManager.setupLargetitle(isLarge: false)
-        }
+        updateTrashBinNavBarConfig(isEmptyPage: !isHidden)
     }
     
     //MARK: Helpers
@@ -365,7 +363,13 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         } else {
             self.bottomBarManager.hide()
         }
-        
+    }
+    
+    private func updateTrashBinNavBarConfig(isEmptyPage: Bool) {
+        if shareType == .trashBin {
+            navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: isEmptyPage)
+            navBarManager.setupLargeTitle(isLarge: false)
+        }
     }
 
     private func setupNavigationBar(editingMode: Bool) {
@@ -384,11 +388,11 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         } else {
             switch shareType {
             case .trashBin:
-                navBarManager.setupLargetitle(isLarge: false)
+                navBarManager.setupLargeTitle(isLarge: false)
                 navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
                 
             case .innerFolder(let rootType, let folderItem):
-                navBarManager.setupLargetitle(isLarge: false)
+                navBarManager.setupLargeTitle(isLarge: false)
                 if rootType != .trashBin {
                     navBarManager.setNestedMode(title: shareType.title)
                 } else {
@@ -402,7 +406,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                     newTitle = segmentedParent.rootTitle
                 }
                 
-                navBarManager.setupLargetitle(isLarge: true)
+                navBarManager.setupLargeTitle(isLarge: true)
                 navBarManager.setRootMode(title: newTitle)
                 
                 if shareType.isSearchAllowed {
@@ -413,12 +417,12 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             case .search(from: let rootType, _, text: let searchText):
                 
                 navBarManager.setRootMode(title: rootType.title)
-                navBarManager.setupLargetitle(isLarge: false)
+                navBarManager.setupLargeTitle(isLarge: false)
                 navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                 
                 searchController.searchBar.text = searchText
                 searchController.searchBar.showsCancelButton = true
-                setNavSearchConntroller(searchController)
+                setNavSearchController(searchController)
                 
                 if Device.operationSystemVersionLessThen(13) {
                     navigationItem.hidesSearchBarWhenScrolling = false
@@ -510,6 +514,8 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
 }
 
+
+//MARK: - BaseItemInputPassingProtocol
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func selectModeSelected(with item: WrapData?) {
         collectionManager.startSelection(with: item)
@@ -575,7 +581,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
             default:
                 self.changeNavbarLargeTitle(true, style: .white)
                 if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
-                    self.setNavSearchConntroller(self.searchController)
+                    self.setNavSearchController(self.searchController)
                 }
             }
         }
@@ -589,6 +595,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
 }
 
 
+//MARK: - ItemOperationManagerViewProtocol
 extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtocol {
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         return self === object

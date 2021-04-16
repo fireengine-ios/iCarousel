@@ -44,11 +44,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     
     func dismissWithNotification() {
         dismiss(animated: true)
-        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
     func show(animated: Bool, onView sourceView: UIView) {
-        NotificationCenter.default.post(name: .hidePlusTabBar, object: nil)
         view.showBar(animated: animated, onView: sourceView)
     }
     

@@ -2067,7 +2067,7 @@
 "business_app_trash_bin_delete_confirm_title" = "Kalıcı Olarak Sil";
 "business_app_trash_bin_delete_confirm_description" = "Kalıcı olarak silmek istediğinize emin misiniz?";
 "business_app_trash_bin_delete_confirm_YES_button" = "Sil";
-"business_app_trash_bin_delete_confirm_NO_button" = "İpta";
+"business_app_trash_bin_delete_confirm_NO_button" = "İptal";
 "business_app_trash_bin_delete_success" = "Başarıyla silindi.";
 "business_app_trash_bin_restore_success" = "Başarıyla geri yüklendi.";
 "business_app_trash_bin_empty_trash_confirm_title" = "Kalıcı Olarak Sil";

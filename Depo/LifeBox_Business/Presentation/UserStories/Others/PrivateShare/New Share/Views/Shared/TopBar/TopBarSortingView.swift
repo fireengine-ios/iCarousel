@@ -71,7 +71,7 @@ final class TopBarSortingView: UICollectionReusableView, NibInit {
                                                                popOverSize: CGSize(width: floatingContainerWidth,
                                                                                    height: popUpHeight))
         
-        RouterVC().tabBarVC?.present(floatingVC, animated: true, completion: nil)
+        RouterVC().defaultTopController?.present(floatingVC, animated: true, completion: nil)
     }
     
 }
