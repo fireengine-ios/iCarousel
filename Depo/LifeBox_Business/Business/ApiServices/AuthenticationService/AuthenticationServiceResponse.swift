@@ -125,7 +125,6 @@ class BaseResponseHandler <SuceesObj: ObjectFromRequestResponse, FailObj: Object
             return
         }
         if httpResponse.statusCode == 401, let url = httpResponse.url?.absoluteString,
-                !url.contains("http://adepo.turkcell.com.tr/api/auth/gsm/login"),
                 !url.contains(RouteRequests.authificationByRememberMe) {
             return
         } else {
