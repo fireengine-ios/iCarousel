@@ -211,9 +211,7 @@ final class PrivateShareFileInfoManager {
             searchedItemsFound = changedItems.count
         }
        
-        items.replace(with: changedItems) {
-            completion()
-        }
+        items.replace(with: changedItems, completion: completion)
         
     }
     
@@ -296,18 +294,4 @@ final class PrivateShareFileInfoManager {
         return (insertions, deletions)
     }
     
-    private func getRelatedItemPages(uuids: [String]) -> [Int] {
-        var relatedToItemPages = [Int]()
-
-        uuids.forEach { uuid in
-            var relatedToItemPage: Int = 1
-            let itemIndex: Int = self.items.index(where: { $0.uuid == uuid}) ?? 0
-            while itemIndex >= relatedToItemPage * self.pageSize {
-                relatedToItemPage += 1
-            }
-            relatedToItemPages.append(relatedToItemPage - 1)
-        }
-        
-        return relatedToItemPages
-    }
 }
