@@ -133,7 +133,20 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
         
         fileInfoManager.delete(uuids: uuids) { [weak self] in
-            self?.reloadCollection()
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.reloadCollection()
+            
+            if case .search = self.fileInfoManager.type {
+                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500)) { [weak self] in
+                    self?.fileInfoManager.reloadCurrentPages() { [weak self] _ in
+                        self?.reloadCollection()
+                    }
+                }
+            }
         }
     }
     
