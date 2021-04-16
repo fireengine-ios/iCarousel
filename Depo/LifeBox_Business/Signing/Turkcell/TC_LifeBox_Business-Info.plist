@@ -38,26 +38,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>126</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>e0f104faa90cee1ef51529e825b7fed7cd31f0fe</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Answers</string>
-			</dict>
-		</array>
-	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -89,14 +69,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MenloApplicationKey</key>
-	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
-	<key>MenloPushApplicationKey</key>
-	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
-	<key>MenloPushSandboxMode</key>
-	<false/>
-	<key>MenloPushServerURL</key>
-	<string>https://turkcell.menloworks.com</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
