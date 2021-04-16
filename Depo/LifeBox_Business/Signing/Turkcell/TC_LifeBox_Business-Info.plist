@@ -78,12 +78,20 @@
 	<string>To save lifebox photos to your device</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>lifebox needs to access your bluetooth permission in order to send you push messages in specific areas</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>To offer campaigns specific to you</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To save lifebox photos to your device</string>
 	<key>NSContactsUsageDescription</key>
 	<string>To backup your contacts to lifebox</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string></string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Your location will be used for background syncing</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>To save lifebox photos to your device</string>
 	<key>NSPhotoLibraryUsageDescription</key>
