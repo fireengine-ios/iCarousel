@@ -35,7 +35,7 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
 
     @IBOutlet private weak var valueLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 12)
         }
     }

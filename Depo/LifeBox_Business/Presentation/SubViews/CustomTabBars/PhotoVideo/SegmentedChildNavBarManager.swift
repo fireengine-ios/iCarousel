@@ -29,7 +29,7 @@ final class SegmentedChildNavBarManager {
                          for: UIControlEvents.touchUpInside)
         button.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
         button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 18)
-        button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
+        button.setTitleColor(ColorConstants.Text.labelTitle, for: .normal)
         
        return UIBarButtonItem(customView: button)
     }()
@@ -70,7 +70,7 @@ final class SegmentedChildNavBarManager {
         
         button.setTitle(initials, for: .normal)
         button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 13.5)
-        button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
+        button.setTitleColor(ColorConstants.Text.labelTitle, for: .normal)
         
         button.backgroundColor = ColorConstants.topBarSettingsIconColor
         button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)

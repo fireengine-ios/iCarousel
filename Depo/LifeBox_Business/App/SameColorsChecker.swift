@@ -17,11 +17,8 @@ final class SameColorsChecker {
         "activityTimelineDraws" : ColorConstants.activityTimelineDraws.cgColor,
         "a2FAMethodLabel" : ColorConstants.a2FAMethodLabel.cgColor,
         "a2FAActiveProgress" : ColorConstants.a2FAActiveProgress.cgColor,
-        "a2FADescriptionLabel" : ColorConstants.a2FADescriptionLabel.cgColor,
         "alertBlueGradientEnd" : ColorConstants.alertBlueGradientEnd.cgColor,
         "alertBlueGradientStart" : ColorConstants.alertBlueGradientStart.cgColor,
-        "accessListItemName" : ColorConstants.accessListItemName.cgColor,
-        "accessListItemExpireDate" : ColorConstants.accessListItemExpireDate.cgColor,
         "alertOrangeAndBlueGradientEnd" : ColorConstants.alertOrangeAndBlueGradientEnd.cgColor,
         "alertOrangeAndBlueGradientStart" : ColorConstants.alertOrangeAndBlueGradientStart.cgColor,
         "blueGrey" : ColorConstants.blueGrey.cgColor,
@@ -36,18 +33,13 @@ final class SameColorsChecker {
         "buttonTintColor" : ColorConstants.buttonTintColor.cgColor,
         "backgroundViewColor" : ColorConstants.backgroundViewColor.cgColor,
         "bottomViewGrayColor" : ColorConstants.bottomViewGrayColor.cgColor,
-        "buttonDarkBlueBackground" : ColorConstants.buttonDarkBlueBackground.cgColor,
         "connectedAs" : ColorConstants.connectedAs.cgColor,
         "coolGrey" : ColorConstants.coolGrey.cgColor,
         "cloudyBlue" : ColorConstants.cloudyBlue.cgColor,
         "charcoalGrey" : ColorConstants.charcoalGrey.cgColor,
         "cardBorderOrange" : ColorConstants.cardBorderOrange.cgColor,
-        "confirmationPopupTitle" : ColorConstants.confirmationPopupTitle.cgColor,
         "confirmationPopupButton" : ColorConstants.confirmationPopupButton.cgColor,
-        "confirmationPopupMessage" : ColorConstants.confirmationPopupMessage.cgColor,
-        "closeIconButtonColor" : ColorConstants.closeIconButtonColor.cgColor,
         "choosenSelectedButtonColor" : ColorConstants.choosenSelectedButtonColor.cgColor,
-        "confirmationPopupButtonDark" : ColorConstants.confirmationPopupButtonDark.cgColor,
         "darkRed" : ColorConstants.darkRed.cgColor,
         "darkText" : ColorConstants.darkText.cgColor,
         "darkBorder" : ColorConstants.darkBorder.cgColor,
@@ -64,14 +56,9 @@ final class SameColorsChecker {
         "greenGradientEnd" : ColorConstants.greenGradientEnd.cgColor,
         "greenGradientStart" : ColorConstants.greenGradientStart.cgColor,
         "grayTabBarButtonsColor" : ColorConstants.grayTabBarButtonsColor.cgColor,
-        "infoPageSeparator" : ColorConstants.infoPageSeparator.cgColor,
         "iconBackgroundView" : ColorConstants.iconBackgroundView.cgColor,
-        "infoPageValueText" : ColorConstants.infoPageValueText.cgColor,
         "infoPageLigherNickname" : ColorConstants.infoPageLigherNickname.cgColor,
-        "infoPageDarkerNickname" : ColorConstants.infoPageDarkerNickname.cgColor,
         "infoPageItemTopText" : ColorConstants.infoPageItemTopText.cgColor,
-        "infoPageItemBottomText" : ColorConstants.infoPageItemBottomText.cgColor,
-        "infoPagePlusButtonText" : ColorConstants.infoPagePlusButtonText.cgColor,
         "infoPageContactLigherBackground" : ColorConstants.infoPageContactLigherBackground.cgColor,
         "infoPageContactDarkBackground" : ColorConstants.infoPageContactDarkBackground.cgColor,
         "linkBlack" : ColorConstants.linkBlack.cgColor,
@@ -82,23 +69,16 @@ final class SameColorsChecker {
         "lightGrayColor" : ColorConstants.lightGrayColor.cgColor,
         "lightBlueColor" : ColorConstants.lightBlueColor.cgColor,
         "lighterGray" : ColorConstants.lighterGray.cgColor,
-        "loginDescriptionLabel" : ColorConstants.loginDescriptionLabel.cgColor,
         "loginPopupDescription" : ColorConstants.loginPopupDescription.cgColor,
         "lrTiffanyBlueGradient" : ColorConstants.lrTiffanyBlueGradient.cgColor,
-        "loginTextFieldText" : ColorConstants.loginTextFieldText.cgColor,
         "loginErrorLabelText" : ColorConstants.loginErrorLabelText.cgColor,
-        "loginPopupMainTitle" : ColorConstants.loginPopupMainTitle.cgColor,
         "loginTextFieldPlaceholder" : ColorConstants.loginTextFieldPlaceholder.cgColor,
         "marineTwo" : ColorConstants.marineTwo.cgColor,
         "marineFour" : ColorConstants.marineFour.cgColor,
-        "multifileCellInfoView" : ColorConstants.multifileCellInfoView.cgColor,
-        "multifileCellTitleText" : ColorConstants.multifileCellTitleText.cgColor,
         "multifileCellSubtitleText" : ColorConstants.multifileCellSubtitleText.cgColor,
         "multifileCellDeletionView" : ColorConstants.multifileCellDeletionView.cgColor,
         "multifileCellBackgroundColor" : ColorConstants.multifileCellBackgroundColor.cgColor,
         "multifileCellBackgroundColorSelected" : ColorConstants.multifileCellBackgroundColorSelected.cgColor,
-        "multifileCellRenameFieldNameColor" : ColorConstants.multifileCellRenameFieldNameColor.cgColor,
-        "multifileCellRenameFieldExtensionColor" : ColorConstants.multifileCellRenameFieldExtensionColor.cgColor,
         "multifileCellBackgroundColorSelectedSolid" : ColorConstants.multifileCellBackgroundColorSelectedSolid.cgColor,
         "navy" : ColorConstants.navy.cgColor,
         "orangeBorder" : ColorConstants.orangeBorder.cgColor,
@@ -148,6 +128,14 @@ final class SameColorsChecker {
         "whiteColor" : ColorConstants.whiteColor.cgColor,
         "yellowColor" : ColorConstants.yellowColor.cgColor,
         "yellowButtonColor" : ColorConstants.yellowButtonColor.cgColor,
+        "PrivateShare.durationLabelUnselected": ColorConstants.PrivateShare.durationLabelUnselected.cgColor,
+        "PrivateShare.shareButtonBackgroundEnabled": ColorConstants.PrivateShare.shareButtonBackgroundEnabled.cgColor,
+        "Text.labelTitle": ColorConstants.Text.labelTitle.cgColor,
+        "Text.labelTitleBackground": ColorConstants.Text.labelTitleBackground.cgColor,
+        "Text.textFieldPlaceholder": ColorConstants.Text.textFieldPlaceholder.cgColor,
+        "Text.textFieldText": ColorConstants.Text.textFieldText.cgColor,
+        "UploadProgress.cellBackground": ColorConstants.UploadProgress.cellBackground.cgColor,
+        "UploadProgress.progressBackground": ColorConstants.UploadProgress.progressBackground.cgColor
     ]
 
     func checkColorDuplicates() -> [String: [String]] {
@@ -166,6 +154,18 @@ final class SameColorsChecker {
         for colorPairInner in allColors {
             if colorPairInner.key.elementsEqual(name) { continue }
             if desiredCGColor == colorPairInner.value {
+                duplicates.append(colorPairInner.key)
+            }
+        }
+
+        return duplicates
+    }
+
+    func searchForColors(with cgColor: CGColor) -> [String] {
+        var duplicates: [String] = []
+
+        for colorPairInner in allColors {
+            if cgColor == colorPairInner.value {
                 duplicates.append(colorPairInner.key)
             }
         }

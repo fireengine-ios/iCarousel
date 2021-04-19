@@ -14,25 +14,15 @@ struct ColorConstants {
     static let bottomBarTint = UIColor(named: "bottomBarTint")!
     static let buttonTintBlue = UIColor(named: "buttonTintBlue")!
     static let multifileCellSubtitleText = UIColor(named: "multifileCellSubtitleText")!
-    static let multifileCellTitleText = UIColor(named: "multifileCellTitleText")!
     static let multifileCellBackgroundColor = UIColor(named: "multifileCellBackgroundColor")!
     static let multifileCellBackgroundColorSelected = UIColor(named: "multifileCellBackgroundColorSelected")!
     static let multifileCellBackgroundColorSelectedSolid = UIColor(named: "multifileCellBackgroundColorSelectedSolid")!
-    static let multifileCellInfoView = UIColor(named: "multifileCellInfoView")!
     static let multifileCellDeletionView = UIColor(named: "multifileCellDeletionView")!
-    static let multifileCellRenameFieldNameColor = UIColor(named: "multifileCellRenameFieldNameColor")!
-    static let multifileCellRenameFieldExtensionColor = UIColor(named: "multifileCellRenameFieldExtensionColor")!
-    
-    static let confirmationPopupTitle = UIColor(named: "confirmationPopupTitle")!
-    static let confirmationPopupMessage = UIColor(named: "confirmationPopupMessage")!
+
     static let confirmationPopupButton = UIColor(named: "confirmationPopupButton")!
-    static let confirmationPopupButtonDark = UIColor(named: "confirmationPopupButtonDark")!
     
-    static let loginTextFieldText = UIColor(named: "loginTextFieldText")!
     static let loginErrorLabelText = UIColor(named: "loginErrorLabelText")!
     static let loginTextFieldPlaceholder = UIColor(named: "loginTextFieldPlaceholder")!
-    static let loginDescriptionLabel = UIColor(named: "loginDescriptionLabel")!
-    static let loginPopupMainTitle = UIColor(named: "loginPopupMainTitle")!
 
     static let loginPopupDescription = UIColor(named: "loginPopupDescription")!
     
@@ -54,31 +44,21 @@ struct ColorConstants {
     
     struct UploadProgress {
         static let cellBackground = UIColor(named: "uploadProgressCellBackground")!
-        static let headerBackground = UIColor(named: "confirmationPopupTitle")!
         static let progressBackground = UIColor(named: "progressBackgroundColor")!
     }
 
-    static let infoPageValueText = UIColor(named: "infoPageValueText")!
     static let infoPageItemTopText = UIColor(named: "infoPageItemTopText")!
-    static let infoPageItemBottomText = UIColor(named: "infoPageItemBottomText")!
-    static let infoPageSeparator = UIColor(named: "infoPageSeparator")!
     static let infoPageContactDarkBackground = UIColor(named: "infoContactDarkBackground")!
     static let infoPageContactLigherBackground = UIColor(named: "infoContactLigherBackground")!
-    static let infoPagePlusButtonText = UIColor(named: "infoPagePlusButtonText")!
     static let infoPageLigherNickname = UIColor(named: "infoPageNicknameLigher")!
-    static let infoPageDarkerNickname = UIColor(named: "infoPageNicknameDarker")!
     static let sharedContactTitleSubtitle = UIColor(named: "sharedContactTitleSubtitle")!
     static let sharedContactCircleBackground = UIColor(named: "sharedContactCircleBackground")!
     static let sharedContactRoleDisabled = UIColor(named: "sharedContactRoleDisabled")!
     static let a2FAMethodLabel = UIColor(named: "a2FAMethodLabel")!
-    static let a2FADescriptionLabel = UIColor(named: "a2FADescriptionLabel")!
-    static let accessListItemExpireDate = UIColor(named: "accessListItemExpireDate")!
-    static let accessListItemName = UIColor(named: "accessListItemName")!
     static let tableBackground = UIColor(named: "tableBackground")!
     static let dimmedBackground = UIColor(named: "dimmedBackground")!
     static let a2FABorder = UIColor(named: "a2FABorderColor")!
     static let a2FAActiveProgress = UIColor(named: "a2FAActiveProgress")!
-    static let buttonDarkBlueBackground = UIColor(named: "loginButtonBackground")!
     static let iconBackgroundView = UIColor(named: "iconBackgroundView")!
     static let settingsTableBackground = UIColor(named: "settingsTableBackground")!
     static let snackBarTrashBin = UIColor(named: "snackBarTrashBin")!
@@ -147,7 +127,6 @@ struct ColorConstants {
     static let subjectPickerBackgroundColor = UIColor(red: 208/255, green: 211/255, blue: 216/255, alpha: 1)
     static let toolbarTintColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
     static let buttonTintColor = UIColor(red: 73/255, green: 206/255, blue: 205/255, alpha: 1)
-    static let closeIconButtonColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
     
     static let cloudyBlue = UIColor(red: 197 / 255.0, green: 200.0 / 255.0, blue: 216 / 255.0, alpha: 1.0)
     static let blueGrey = UIColor(red: 139 / 255.0, green: 143 / 255.0, blue: 164 / 255.0, alpha: 1.0)

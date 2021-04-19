@@ -21,7 +21,7 @@ enum NavigationBarStyles {
         case .byDefault, .white, .visible:
             return [
                 .font: UIFont.GTAmericaStandardMediumFont(size: 17),
-                .foregroundColor: ColorConstants.confirmationPopupTitle
+                .foregroundColor: ColorConstants.Text.labelTitle
             ]
         case .black, .transparent, .hidden:
             return [
@@ -34,7 +34,7 @@ enum NavigationBarStyles {
     var textTintColor: UIColor  {
         switch self {
         case .byDefault, .white, .visible:
-            return ColorConstants.confirmationPopupTitle
+            return ColorConstants.Text.labelTitle
         case .black, .transparent, .hidden:
             return UIColor.white
         }
@@ -45,7 +45,7 @@ enum NavigationBarStyles {
         case .byDefault, .white, .visible:
             return [
                 .font: UIFont.GTAmericaStandardRegularFont(size: 19),
-                .foregroundColor: ColorConstants.confirmationPopupTitle
+                .foregroundColor: ColorConstants.Text.labelTitle
             ]
         case .black, .transparent, .hidden:
             return [
@@ -60,12 +60,12 @@ enum NavigationBarStyles {
         case .byDefault, .white, .visible:
             return [
                 .font: UIFont.GTAmericaStandardRegularFont(size: 24),
-                .foregroundColor: ColorConstants.confirmationPopupTitle
+                .foregroundColor: ColorConstants.Text.labelTitle
             ]
         case .black, .transparent, .hidden:
             return [
                 .font: UIFont.GTAmericaStandardMediumFont(size: 24),
-                .foregroundColor: ColorConstants.confirmationPopupTitle
+                .foregroundColor: ColorConstants.Text.labelTitle
             ]
         }
     }
@@ -278,7 +278,7 @@ extension UIViewController {
     func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
 
         navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
-        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.confirmationPopupTitle
+        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.Text.labelTitle
 
         if let subTitle = subTitle {
             navigationItem.title = nil

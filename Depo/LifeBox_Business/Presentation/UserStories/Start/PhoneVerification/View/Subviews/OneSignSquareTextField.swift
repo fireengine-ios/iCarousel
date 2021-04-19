@@ -32,7 +32,7 @@ final class OneSignSquareTextField: UITextField {
         keyboardType = .phonePad
         borderStyle = .none
         font = UIFont.GTAmericaStandardRegularFont(size: 22)
-        textColor = ColorConstants.infoPageValueText
+        textColor = ColorConstants.Text.labelTitle
         textAlignment = .center
     }
 }

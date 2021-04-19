@@ -15,7 +15,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     
     @IBOutlet private weak var separartorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.infoPageSeparator
+            newValue.backgroundColor = ColorConstants.separator
         }
     }
     
@@ -28,7 +28,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     
     private var highlightView: UIView = {
        let view = UIView()
-        view.backgroundColor = ColorConstants.multifileCellSubtitleText// this one by design ColorConstants.confirmationPopupTitle
+        view.backgroundColor = ColorConstants.multifileCellSubtitleText// this one by design ColorConstants.Text.labelTitle
         view.isHidden = true
         view.isUserInteractionEnabled = false
         return view

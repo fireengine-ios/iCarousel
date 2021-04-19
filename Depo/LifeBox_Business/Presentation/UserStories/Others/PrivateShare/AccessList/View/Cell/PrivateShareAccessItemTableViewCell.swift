@@ -20,35 +20,35 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var typeImageView: UIImageView! {
         willSet {
-            newValue.tintColor = ColorConstants.accessListItemName
+            newValue.tintColor = ColorConstants.loginPopupDescription
         }
     }
 
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.infoPageSeparator
+            newValue.backgroundColor = ColorConstants.separator
         }
     }
 
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.accessListItemName
+            newValue.textColor = ColorConstants.loginPopupDescription
         }
     }
 
     @IBOutlet private weak var dateLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 10)
-            newValue.textColor = ColorConstants.accessListItemExpireDate
+            newValue.textColor = ColorConstants.multifileCellSubtitleText
         }
     }
 
     @IBOutlet private weak var roleButton: IndexPathButton! {
         willSet {
-            newValue.setTitleColor(ColorConstants.infoPageValueText, for: .normal)
+            newValue.setTitleColor(ColorConstants.Text.labelTitle, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.tintColor = ColorConstants.infoPageValueText
+            newValue.tintColor = ColorConstants.Text.labelTitle
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -8
         }

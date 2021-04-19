@@ -17,7 +17,7 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.infoPageSeparator
+            newValue.backgroundColor = ColorConstants.separator
         }
     }
 
@@ -31,7 +31,7 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
     @IBOutlet private weak var initialsLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 15)
-            newValue.textColor = ColorConstants.infoPageItemBottomText
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
 
@@ -52,7 +52,7 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
     @IBOutlet private weak var roleLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 15)
-            newValue.textColor = ColorConstants.infoPageItemBottomText
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
 
@@ -75,7 +75,7 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
         arrowImageView.isHidden = true
         stackViewTrailingToSuperviewConstraint.priority = .defaultHigh
         stackViewTrailingToImageViewConstraint.priority = .defaultLow
-        roleLabel.textColor = ColorConstants.infoPageItemBottomText
+        roleLabel.textColor = ColorConstants.Text.labelTitle
     }
 
     func setup(with contact: SharedContact,
@@ -86,7 +86,7 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
         stackViewTrailingToImageViewConstraint.priority = hasPermissionToEditRole ? .defaultHigh : .defaultLow
 
         roleLabel.text = contact.role.infoMenuTitle
-        roleLabel.textColor = hasPermissionToEditRole ? ColorConstants.infoPageValueText : ColorConstants.sharedContactRoleDisabled
+        roleLabel.textColor = hasPermissionToEditRole ? ColorConstants.Text.labelTitle : ColorConstants.sharedContactRoleDisabled
         if !contact.initials.isEmpty {
             initialsLabel.text = contact.initials
         }

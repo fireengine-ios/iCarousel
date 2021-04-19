@@ -29,14 +29,14 @@ final class SettingsStorageTableViewCell: UITableViewCell {
     @IBOutlet private weak var mainLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle
             newValue.text = TextConstants.settingsPageStorageUseHeader
         }
     }
 
     @IBOutlet private weak var storageFullnessProgressView: LineProgressView! {
         willSet {
-            newValue.set(lineBackgroundColor: ColorConstants.infoPageSeparator)
+            newValue.set(lineBackgroundColor: ColorConstants.separator)
             newValue.set(lineColor: ColorConstants.a2FAActiveProgress)
             newValue.setContentCompressionResistancePriority(.required, for: .vertical)
             newValue.lineWidth = 6
@@ -48,7 +48,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
     @IBOutlet private weak var storageUsageLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
 
@@ -87,7 +87,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
             storageUsageLabel.text = String(format: TextConstants.settingsPageStorageUsedUnlimited, storageUsageInfo.usage ?? "")
             return
         } else {
-            let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.a2FADescriptionLabel,
+            let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.loginPopupDescription,
                               NSAttributedString.Key.font: UIFont.GTAmericaStandardRegularFont(size: 12)]
 
             let usageText = storageUsageInfo.usage ?? ""
@@ -96,7 +96,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
             let attributedString = NSMutableAttributedString(string: targetText, attributes: attributes)
             let extensionRange = NSMakeRange(0, usageText.count + 3) // 2 = ' '(1) + '/'(2)
             attributedString.addAttributes([
-                NSAttributedString.Key.foregroundColor: ColorConstants.infoPageValueText,
+                NSAttributedString.Key.foregroundColor: ColorConstants.Text.labelTitle,
                 NSAttributedString.Key.font: UIFont.GTAmericaStandardMediumFont(size: 12)
             ], range: extensionRange)
 

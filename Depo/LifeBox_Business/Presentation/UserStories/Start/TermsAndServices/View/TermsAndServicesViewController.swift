@@ -41,7 +41,7 @@ final class TermsAndServicesViewController: ViewController {
             newValue.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.backgroundColor = UIColor(named: "loginButtonBackground")
+            newValue.backgroundColor = ColorConstants.confirmationPopupButton
             newValue.isOpaque = true
         }
     }
@@ -234,10 +234,10 @@ extension TermsAndServicesViewController: UITextViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if #available(iOS 13, *) {
-            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor(named: "loginButtonBackground")
+            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = ColorConstants.confirmationPopupButton
         } else {
             if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
-                verticalIndicator.backgroundColor = UIColor(named: "loginButtonBackground")
+                verticalIndicator.backgroundColor = ColorConstants.confirmationPopupButton
             }
         }
     }

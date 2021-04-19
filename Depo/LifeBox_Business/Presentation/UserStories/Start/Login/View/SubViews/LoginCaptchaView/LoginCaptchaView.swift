@@ -46,7 +46,7 @@ final class LoginCaptchaView: UIView, FromNib {
             newValue.smartDashesType = .no
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.captchaViewTextfieldPlaceholder,
                                                                 attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder])
-            newValue.textColor = ColorConstants.loginTextFieldText
+            newValue.textColor = ColorConstants.Text.textFieldText
         }
     }
 

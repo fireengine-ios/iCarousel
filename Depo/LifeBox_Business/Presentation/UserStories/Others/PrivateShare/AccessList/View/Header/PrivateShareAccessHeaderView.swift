@@ -18,7 +18,7 @@ final class PrivateShareAccessHeaderView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-        label.textColor = ColorConstants.infoPageValueText
+        label.textColor = ColorConstants.Text.labelTitle
         return label
     }()
 

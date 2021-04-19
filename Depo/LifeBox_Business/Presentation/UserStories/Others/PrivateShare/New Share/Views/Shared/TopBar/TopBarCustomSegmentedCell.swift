@@ -12,7 +12,7 @@ final class TopBarCustomSegmentedCell: UICollectionViewCell {
     @IBOutlet private weak var label: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.confirmationPopupTitle
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     

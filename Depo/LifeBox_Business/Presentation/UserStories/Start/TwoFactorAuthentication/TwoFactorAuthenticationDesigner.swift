@@ -25,14 +25,14 @@ final class TwoFactorAuthenticationDesigner: NSObject {
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 18)
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.textColor = ColorConstants.a2FADescriptionLabel
+            newValue.textColor = ColorConstants.loginPopupDescription
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
             newValue.text = TextConstants.a2FAFirstPageDescriptionDetail
         }
@@ -43,7 +43,7 @@ final class TwoFactorAuthenticationDesigner: NSObject {
             newValue.numberOfLines = 0
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
             newValue.text = TextConstants.a2FAFirstPageSendSecurityCode
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
     

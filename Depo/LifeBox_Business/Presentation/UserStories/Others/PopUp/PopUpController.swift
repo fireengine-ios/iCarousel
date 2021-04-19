@@ -51,14 +51,14 @@ final class PopUpController: BasePopUpController {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = popUpStyle == .normal ? ColorConstants.confirmationPopupTitle : ColorConstants.loginPopupMainTitle
+            titleLabel.textColor = popUpStyle == .normal ? ColorConstants.Text.labelTitle : ColorConstants.Text.labelTitle
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
         }
     }
 
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
-            messageLabel.textColor = popUpStyle == .normal ? ColorConstants.confirmationPopupMessage : ColorConstants.loginPopupDescription
+            messageLabel.textColor = popUpStyle == .normal ? ColorConstants.Text.textFieldText : ColorConstants.loginPopupDescription
             messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         }
     }
@@ -171,10 +171,10 @@ final class PopUpController: BasePopUpController {
     private func setup(_ button: UIButton, filled: Bool) {
         guard popUpStyle == .normal else { return }
 
-        let titleColor = filled ? UIColor.white : ColorConstants.confirmationPopupButtonDark
+        let titleColor = filled ? UIColor.white : ColorConstants.Text.labelTitle
         let titleColorHigh = filled ? titleColor.lighter(by: 30) : titleColor.darker(by: 30)
         let backgroundColor = filled ? ColorConstants.confirmationPopupButton : UIColor.white
-        let borderColor = filled ? ColorConstants.confirmationPopupButton.cgColor : ColorConstants.confirmationPopupButtonDark.cgColor
+        let borderColor = filled ? ColorConstants.confirmationPopupButton.cgColor : ColorConstants.Text.labelTitle.cgColor
 
         button.isExclusiveTouch = true
         button.setTitleColor(titleColor, for: .normal)

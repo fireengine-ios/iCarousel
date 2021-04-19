@@ -76,7 +76,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var name: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14.0)
-            newValue.textColor = ColorConstants.multifileCellTitleText
+            newValue.textColor = ColorConstants.Text.textFieldText
         }
     }
     
@@ -162,7 +162,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var infoView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.multifileCellInfoView
+            newValue.backgroundColor = ColorConstants.Text.labelTitle
         }
     }
     
@@ -456,12 +456,12 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.multifileCellRenameFieldNameColor,
+        let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.Text.labelTitle,
                           NSAttributedString.Key.font: UIFont.GTAmericaStandardRegularFont(size: 14.0)]
         
         let attributedString = NSMutableAttributedString(string: name, attributes: attributes)
         let extensionRange = NSMakeRange(name.count - pathExtensionLength, pathExtensionLength)
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: ColorConstants.multifileCellRenameFieldExtensionColor, range: extensionRange)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: ColorConstants.multifileCellSubtitleText, range: extensionRange)
         textField.attributedText = attributedString
         
         let offset = pathExtensionLength > 0 ? name.count - pathExtensionLength - 1 : name.count

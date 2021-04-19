@@ -33,7 +33,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     @IBOutlet private weak var subtitleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         }
     }

@@ -26,14 +26,14 @@ final class PhoneVerificationViewController: ViewController {
     @IBOutlet private weak var mainTitle: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 18)
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
 
     @IBOutlet private weak var infoTitle: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.a2FADescriptionLabel
+            newValue.textColor = ColorConstants.loginPopupDescription
         }
     }
 
@@ -41,7 +41,7 @@ final class PhoneVerificationViewController: ViewController {
     @IBOutlet private weak var underTextfieldsLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle
         }
     }
 
@@ -64,7 +64,7 @@ final class PhoneVerificationViewController: ViewController {
             newValue.setTitle(TextConstants.resendCode, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.setBackgroundColor(ColorConstants.buttonDarkBlueBackground, for: .normal)
+            newValue.setBackgroundColor(ColorConstants.confirmationPopupButton, for: .normal)
             newValue.layer.cornerRadius = 6
             newValue.isOpaque = true
         }

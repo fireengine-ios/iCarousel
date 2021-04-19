@@ -69,7 +69,7 @@ final class UploadProgressHeader: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = ColorConstants.UploadProgress.headerBackground
+        backgroundColor = ColorConstants.Text.labelTitle
     }
     
     //MARK: - Public
