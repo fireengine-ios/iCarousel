@@ -111,7 +111,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
             circleView.layer.borderColor = ColorConstants.infoPagePlusButtonText.cgColor
             
         case .plusButton:
-            button.setImage(UIImage(named: "info_contact_add"), for: .normal)
+            button.setImage(UIImage(named: "plusFillButton"), for: .normal)
         }
     }
     

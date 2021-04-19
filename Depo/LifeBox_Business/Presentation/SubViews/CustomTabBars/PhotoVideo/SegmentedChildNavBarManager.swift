@@ -19,7 +19,7 @@ protocol SegmentedChildNavBarManagerDelegate: SegmentedChildTopBarSupportedContr
 final class SegmentedChildNavBarManager {
 
     private lazy var cancelSelectionForTrashBinButton: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(image: UIImage(named: "close_dark"), style: .plain, target: self, action: #selector(onCancelSelectionButton))
+        let barButtonItem = UIBarButtonItem(image: UIImage(named: "closeButton"), style: .plain, target: self, action: #selector(onCancelSelectionButton))
         return barButtonItem
     }()
     
@@ -36,7 +36,7 @@ final class SegmentedChildNavBarManager {
     
     private(set) lazy var plusButton: UIBarButtonItem = {
             let button = UIButton(type: .custom)
-            button.setImage(UIImage(named: "PlusButtonBusiness"),
+            button.setImage(UIImage(named: "plusFillButton"),
                             for: .normal)
 
             button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
