@@ -1447,6 +1447,7 @@ extension TextConstants {
     static let contactUsPageDescription = NSLocalizedString("business_app_contact_us_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubjectBoxName = NSLocalizedString("business_app_contact_us_subject_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsMessageBoxName = NSLocalizedString("business_app_contact_us_message_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSendButton = NSLocalizedString("Send", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let contactUsSubject1 = NSLocalizedString("business_app_contact_us_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject2 = NSLocalizedString("business_app_contact_us_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

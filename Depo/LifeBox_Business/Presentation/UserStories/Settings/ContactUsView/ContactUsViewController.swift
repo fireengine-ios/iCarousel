@@ -73,6 +73,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     @IBOutlet weak private var sendButton: UIButton! {
         willSet {
+            newValue.setTitle(TextConstants.contactUsSendButton, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
             newValue.backgroundColor = ColorConstants.confirmationPopupButton
