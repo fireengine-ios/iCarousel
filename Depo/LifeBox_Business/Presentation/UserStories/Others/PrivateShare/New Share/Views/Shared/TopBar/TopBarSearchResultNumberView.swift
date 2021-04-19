@@ -13,7 +13,7 @@ final class TopBarSearchResultNumberView: UICollectionReusableView, NibInit {
         willSet {
             newValue.text = ""
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
-            newValue.textColor = ColorConstants.confirmationPopupTitle
+            newValue.textColor = ColorConstants.Text.labelTitle
             newValue.adjustsFontSizeToFitWidth()
         }
     }

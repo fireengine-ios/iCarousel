@@ -86,7 +86,7 @@ enum NavigationBarStyles {
         case .transparent, .hidden, .black:
             return .clear
         case .byDefault, .white, .visible:
-            return ColorConstants.confirmationPopupTitle
+            return ColorConstants.Text.labelTitle
         }
     }
     
