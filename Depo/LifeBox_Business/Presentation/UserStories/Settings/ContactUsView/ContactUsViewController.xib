@@ -79,7 +79,7 @@
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="335" id="GYl-oK-zbQ"/>
                         <constraint firstAttribute="height" constant="44" id="fM3-Ep-h3X"/>
                     </constraints>
-                    <state key="normal" title="Send"/>
+                    <state key="normal" title="Button"/>
                     <connections>
                         <action selector="sendButtonPressed:" destination="-1" eventType="touchUpInside" id="Tej-nl-M1e"/>
                     </connections>
