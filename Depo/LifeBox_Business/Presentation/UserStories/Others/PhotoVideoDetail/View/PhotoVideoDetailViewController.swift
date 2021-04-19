@@ -51,7 +51,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
                 editingTabBar.showBar(animated: true, onView: viewForBottomBar)
             }
             
-            navigationController?.setNavigationBarHidden(isFullScreen, animated: true)
+            setupNavigationBar()
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
@@ -87,29 +87,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.contentInsetAdjustmentBehavior = .never
+        setupView()
+        setupCollection()
+        initialNavBarSetup()
         
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
-        collectionView.register(nibCell: PhotoVideoDetailCell.self)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isHidden = true
-        
-        changeLargeTitle(prefersLargeTitles: false, barStyle: .transparent)
-        
-        
-//        setNavigationBarStyle(.transparent)
-        
-//        navigationController.leftBarButtonItem =
-//        BackButtonItem(action: hideView)
-        setNavigationBarStyle(initinalBarStyle)
-        setNavigationLeftBarButton(style: initinalBarStyle, title: "", target: self, image: UIImage(named: "blackBackButton"), action: #selector(hideView))
-//        setupNavigationBar()
         showSpinner()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,19 +101,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         onStopPlay()
         
-        
-//        rootNavController(vizible: true)
-        
-//        setNavigationBarStyle(.transparent)
-//        setBackButtonForNavigationItem(style: .transparent, title: "BACK", target: self, action: #selector(hideView))
-        
         setupNavigationBar()
         editingTabBar?.view.layoutIfNeeded()
         setupTitle()
-        
-//        if hideTreeDotButton {
-//            navigationItem.rightBarButtonItem?.customView?.isHidden = true
-//        }
 
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
@@ -148,13 +120,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-//        setNavigationBackgroundColor(color: UIColor.clear)
-//        statusBarColor = .clear
-//        setNavigationBarStyle(.visible)
-        
-        
+        statusBarStyle = .default
         output.viewWillDisappear()
-//        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func viewDidLayoutSubviews() {
@@ -170,9 +137,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
         })
     }
     
-//    override var preferredNavigationBarStyle: NavigationBarStyle {
-//        return .black
-//    }
+    private func setupCollection() {
+        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.register(nibCell: PhotoVideoDetailCell.self)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isHidden = true
+    }
     
     private func updateFirstVisibleCell() {
         guard let selectedIndex = selectedIndex else {
@@ -195,6 +168,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }  else {
             dismiss(animated: true)
         }
+    }
+    
+    private func initialNavBarSetup() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        changeLargeTitle(prefersLargeTitles: false, barStyle: .transparent)
+        setNavigationBarStyle(initinalBarStyle)
+        edgesForExtendedLayout = [.top, .bottom]
+        extendedLayoutIncludesOpaqueBars = true
+        setNavigationLeftBarButton(style: initinalBarStyle, title: "", target: self, image: UIImage(named: "blackBackButton"), action: #selector(hideView))
     }
         
     private func scrollToSelectedIndex() {
@@ -220,12 +202,21 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         let style: NavigationBarStyles
-        if case .application = selectedItem.fileType {
-            style = .white
+        
+        if isFullScreen {
+            style = .hidden
         } else {
-            style = .transparent
+            if case .application = selectedItem.fileType {
+                style = .white
+                statusBarStyle = .default
+            } else {
+                style = .transparent
+                statusBarStyle = .lightContent
+            }
         }
         setNavigationBarStyle(style)
+        edgesForExtendedLayout = [.top, .bottom]
+        extendedLayoutIncludesOpaqueBars = true
         navigationItem.leftBarButtonItem?.tintColor = style.textTintColor
 //        if navigationItem.rightBarButtonItem == nil && !hideTreeDotButton {
 //            navigationItem.rightBarButtonItem = threeDotsBarButtonItem
@@ -237,6 +228,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
 //        } else {
 //            navigationItem.rightBarButtonItem?.customView?.isHidden = true
 //        }
+    }
+    
+    private func setupView() {
+        switch initinalBarStyle {
+        case .white:
+            view.backgroundColor = ColorConstants.tableBackground
+        default:
+            break
+        }
     }
 
     private func setupTitle() {
@@ -454,6 +454,11 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         
         let barStyle: BottomActionsBarStyle = object.fileType.isDocument ? .opaque : .transparent
         editingTabBar.changeBar(style: barStyle)
+        
+        if !object.fileType.isDocument, !isFullScreen {
+            setNavigationBarStyle(.transparent)
+        }
+        
         viewForBottomBar.backgroundColor = object.fileType.isDocument ? .white : .clear
         
         cell.setup(with: object, index: indexPath.row, isFullScreen: isFullScreen)

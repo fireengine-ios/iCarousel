@@ -26,6 +26,10 @@ class SingletonStorage {
     
     var isTwoFactorAuthEnabled: Bool?
     
+    var isUserAdmin: Bool {
+        return accountInfo?.parentAccountAdmin ?? false
+    }
+    
     private let resumableUploadInfoService: ResumableUploadInfoService = factory.resolve()
     
     private static let isEmailVerificationCodeSentKey = "isEmailVerificationCodeSentKeyFor\(SingletonStorage.shared.uniqueUserID)"

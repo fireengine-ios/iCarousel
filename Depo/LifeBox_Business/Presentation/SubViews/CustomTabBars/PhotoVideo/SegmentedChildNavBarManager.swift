@@ -66,7 +66,14 @@ final class SegmentedChildNavBarManager {
     lazy var settingsButton: UIBarButtonItem = {
         let button = UIButton(type: .custom)
         
-        let initials = (SingletonStorage.shared.accountInfo?.name?.firstLetter ?? "") + (SingletonStorage.shared.accountInfo?.surname?.firstLetter ?? "")
+        let initials: String
+        
+        if let firstLetter = SingletonStorage.shared.accountInfo?.name?.firstLetter,
+           let secondLetter = SingletonStorage.shared.accountInfo?.surname?.firstLetter {
+            initials = firstLetter + secondLetter
+        } else {
+            initials = String((SingletonStorage.shared.accountInfo?.email ?? "").prefix(2)).uppercased()
+        }
         
         button.setTitle(initials, for: .normal)
         button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 13.5)
@@ -104,7 +111,7 @@ final class SegmentedChildNavBarManager {
         delegate?.setLeftBarButtonItems([settingsButton], animated: false)
     }
     
-    func setupLargetitle(isLarge: Bool) {
+    func setupLargeTitle(isLarge: Bool) {
         delegate?.changeNavbarLargeTitle(isLarge, style: .white)
     }
     
@@ -126,7 +133,6 @@ final class SegmentedChildNavBarManager {
     func setTrashBinMode(title: String, innerFolder: Bool = false, emptyDataList: Bool = true) {
         delegate?.setTitle(title, isSelectionMode: false, style: .white)
         let rightButtons: [UIBarButtonItem]? = innerFolder || emptyDataList ? nil : [trashButton]
-        //TODO:  postpone setup after we get files list
         delegate?.setRightBarButtonItems(rightButtons, animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: false)
     }

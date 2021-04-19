@@ -10,7 +10,7 @@ protocol SegmentedChildTopBarSupportedControllerProtocol: class {
     func setNavBarStyle(_ style: NavigationBarStyles)
     func setTitle(_ title: String, isSelectionMode: Bool, style: NavigationBarStyles)
     func changeNavbarLargeTitle(_ isEnabled: Bool, style: NavigationBarStyles)
-    func setNavSearchConntroller(_ controller: UISearchController?)
+    func setNavSearchController(_ controller: UISearchController?)
     func setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: Bool)
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
     func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
@@ -43,7 +43,7 @@ extension SegmentedChildTopBarSupportedControllerProtocol where Self: UIViewCont
         currentViewController.changeLargeTitle(prefersLargeTitles: isEnabled, barStyle: style)
     }
     
-    func setNavSearchConntroller(_ controller: UISearchController?) {
+    func setNavSearchController(_ controller: UISearchController?) {
         currentViewController.changeSearchBar(controller: controller)
     }
     
@@ -148,6 +148,8 @@ final class TopBarSupportedSegmentedController: BaseViewController, NibInit {
     
     private func setupSegmentedBar() {
         topBarCustomSegmentedBar.setup(models: prepareModels() , selectedIndex: 0)
+        //TODO: in order for that to work perfectly we need queue or array of clousures, that we can drop on any new entry
+//        topBarCustomSegmentedBar.changeSelection(to: currentIndex)
     }
     
     private func handleSegmentedAction(index: Int) {

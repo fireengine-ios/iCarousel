@@ -73,6 +73,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
     
     @IBOutlet weak private var sendButton: UIButton! {
         willSet {
+            newValue.setTitle(TextConstants.contactUsSendButton, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
             newValue.backgroundColor = ColorConstants.confirmationPopupButton
@@ -151,7 +152,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
         let subject = subjectView.textField.text ?? ""
         let usersDescription = textView.text ?? ""
         
-        getUserInfo { userEmail, unlimitedStorage, storageUsage, storageQuota in
+        getUserInfo { userEmail, unlimitedStorage, storageQuota, storageUsage in
             let versionString = SettingsBundleHelper.appVersion()
             let storageQuota = unlimitedStorage ? TextConstants.contactUsMailBodyUnlimitedStorage : storageQuota
             
@@ -163,15 +164,15 @@ final class ContactUsViewController: BaseViewController, NibInit {
                        UIDevice.current.systemVersion,
                        Device.locale,
                        ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
-                       storageUsage,
                        storageQuota,
+                       storageUsage,
                        subject)
             
             let emailSubject = userEmail + " - " + TextConstants.NotLocalized.appNameMailSubject + subject
             
             Mail.shared().sendEmail(emailBody: emailBody,
                                     subject: emailSubject,
-                                    emails: ["lifeboxipadpro@gmail.com"],
+                                    emails: [TextConstants.NotLocalized.contactUsEmail],
                                     presentCompletion: nil, success: {
                                         self.navigationController?.popViewController(animated: true)
                                     }, fail: { error in

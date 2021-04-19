@@ -17,6 +17,9 @@ final class PrivateShareFileInfoManager {
         let service = PrivateShareFileInfoManager()
         service.type = type
         service.privateShareAPIService = privateShareAPIService
+        if case PrivateShareType.search(from: _, rootPermissions: let permissions, text: _) = type {
+            service.searchRootPermissions = permissions
+        }
         return service
     }
     
@@ -26,6 +29,8 @@ final class PrivateShareFileInfoManager {
     private(set) var privateShareAPIService: PrivateShareApiService!
     private let pageSize = Device.isIpad ? 64 : 32
     private var pagesLoaded = 0
+    
+    private(set) var searchedItemsFound: Int = 0
     
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -39,9 +44,16 @@ final class PrivateShareFileInfoManager {
     private(set) var items = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     
-    private(set) var rootFolder: SharedFileInfo?
+    private var rootFolder: SharedFileInfo?
+    
+    private var searchRootPermissions: SharedItemPermission?
+    
+    var rootPermissions: SharedItemPermission? {
+        return searchRootPermissions ?? rootFolder?.permissions
+    }
     
     private var tempLoaded = [WrapData]()
+    
     
     //MARK: - Life cycle
     
@@ -56,7 +68,7 @@ final class PrivateShareFileInfoManager {
         }
         
         isNextPageLoading = true
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (_, loadedItems, isFinished) in
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (_, loadedItems, searchItemsFoundInTotal, isFinished) in
             
             guard let self = self else {
                 completion((false, nil))
@@ -71,8 +83,23 @@ final class PrivateShareFileInfoManager {
             
             self.pagesLoaded += 1
             
+            self.searchedItemsFound = searchItemsFoundInTotal ?? 0
+            
             let combinedItems = self.items.getArray() + loadedItems
-            let indexes = self.getDeltaIndexes(objects: combinedItems)
+            
+            let indexes: (inserted: [Int], deleted: [Int])
+            if case .search = self.type {
+                if self.items.count > combinedItems.count  {
+                    indexes = (inserted: [], deleted: [])
+                    assertionFailure()
+                } else {
+                    let newRange = self.items.count..<combinedItems.count
+                    indexes = (inserted: [Int](newRange), deleted: [])
+                }
+            } else {
+                indexes = self.getDeltaIndexes(objects: combinedItems)
+            }
+            
             self.items.replace(with: combinedItems) { [weak self] in
                 self?.queue.async {
                     self?.isNextPageLoading = false
@@ -91,7 +118,7 @@ final class PrivateShareFileInfoManager {
             selectedItems.removeAll()
             pagesLoaded = 0
             
-            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, isFinished in
+            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, searchItemsFoundInnTotal, isFinished in
                 
                 self?.rootFolder = rootFolder
                 
@@ -105,6 +132,8 @@ final class PrivateShareFileInfoManager {
                     completion((true, nil))
                     return
                 }
+                
+                self.searchedItemsFound = searchItemsFoundInnTotal ?? 0
                 
                 self.pagesLoaded += 1
                 
@@ -178,7 +207,12 @@ final class PrivateShareFileInfoManager {
         
         let changedItems = items.filter { !$0.uuid.isContained(in: uuids) }
         
+        if case .search = type, searchedItemsFound > 0 {
+            searchedItemsFound = changedItems.count
+        }
+       
         items.replace(with: changedItems, completion: completion)
+        
     }
     
     func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
@@ -210,6 +244,11 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func search(type: PrivateShareType, completion: @escaping ReloadCompletionHandler) {
+        self.type = type
+        reload(completion: completion)
+    }
+    
     //MARK: - Private
     
     private func cleanAll() {
@@ -218,7 +257,7 @@ final class PrivateShareFileInfoManager {
     }
     
     private func loadPages(till page: Int, completion: @escaping ReloadCompletionHandler) {
-        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, isFinished in
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] rootFolder, loadedItems, searchItemsFoundInnTotal, isFinished in
             
             self?.rootFolder = rootFolder
             
@@ -226,6 +265,8 @@ final class PrivateShareFileInfoManager {
                 completion((false, nil))
                 return
             }
+            
+            self.searchedItemsFound = searchItemsFoundInnTotal ?? 0
             
             self.tempLoaded.append(contentsOf: loadedItems)
             self.pagesLoaded += 1
@@ -252,4 +293,5 @@ final class PrivateShareFileInfoManager {
         
         return (insertions, deletions)
     }
+    
 }

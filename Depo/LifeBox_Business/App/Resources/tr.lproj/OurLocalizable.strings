@@ -855,7 +855,7 @@
 "free_trial_detail_label" = "Hangi fotoğrafının daha yüksek puan alacağını keşfet, daha çok beğeni için PhotoPick ile analiz et! Üstelik senin için sınırsız!";
 "instapick_under_construction" = "Daha iyi bir deneyim yaşaman için PhotoPick'i iyileştiriyoruz 😉";
 "instapick_unsupported_file_type" = "Seçmiş olduğun fotoğraflar desteklenmeyen bir formatta. Başka fotoğraflar seçerek PhotoPick deneyimini yaşamaya devam edebilirsin.";
-"work_will_introduced" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
+"work_will_introduced" = "Şu anda bir bakım çalışmamız var, lütfen daha sonra tekrar deneyin.";
 "facebook_remove_connection_warning_title" = "Facebook bağlantını kaldırmak üzeresin.";
 "dropbox_remove_connection_warning_title" = "Dropbox bağlantını kaldırmak üzeresin.";
 "facebook_remove_connection_warning_message" = "Facebook ile olan bağlantını kaldırmak istediğine emin misin?\n\n";
@@ -864,7 +864,7 @@
 "you_are_connected" = "Bağlı";
 "insta_pick_picture_not_found" = "Fotoğraf \nbulunamadı";
 "phone_updated_needs_login" = "Başarılı biçimde telefon numaranızı güncellediniz, lütfen kullanıcı adınız ve şifren ile giriş yap";
-"server_under_maintenance" = "lifebox'ta şuan bir bakım çalışması var, lütfen daha sonra tekrar deneyin.";
+"server_under_maintenance" = "Şu anda bir bakım çalışmamız var, lütfen daha sonra tekrar deneyin.";
 "unlimited_photopick_analysis" = "Sınırsız PhotoPick Hakkı!";
 "data_advantage_short" = "Ek data paketi";
 "additional_data_advantage" = "Ek data paketi";
@@ -1869,8 +1869,8 @@
 "business_app_tabbar_mydisk" = "Bana Özel";
 "business_app_tabbar_mysharings" = "Paylaşımlarım";
 "business_app_tabbar_sharedarea" = "Ortak Dizin";
-"tabbar_item_settings" = "";
-"private_share_max_number_of_item_limit_exceeded" = "";
+"tabbar_item_settings" = "Ayarlar";
+"private_share_max_number_of_item_limit_exceeded" = "Maksimum dosya paylaşım sınırı aşıldı.";
 "business_app_select_option" = "Seç";
 "business_app_download_option" = "İndir";
 "business_app_delete_option" = "Sil";
@@ -1882,16 +1882,16 @@
 "business_app_info_option" = "Bilgi";
 "business_app_download_success" = "Başarıyla indirildi";
 "business_app_delete_success" = "Başarıyla silindi";
-"business_app_rename_sucess" = "Başarıyla yeniden adlandırıldı";
+"business_app_rename_sucess" = "İsim Değiştirildi";
 "business_app_share_privately_success" = "Paylaşım başarılı";
 "business_app_stop_sharing_success" = "Paylaşım durduruldu";
 "business_app_leave_sharing_success" = "Paylaşımdan Ayrıldınız";
 "business_app_delete_confirm_popup_title" = "Silmek istediğinize emin misiniz?";
 "business_app_delete_confirm_popup_detail" = "Silinmiş dosyalar çöp kutusuna gönderilecek. Çöp kutusundaki tüm öğeler 30 gün sonra kalıcı olarak silinecek ve geri yükleyemeyeceksiniz.";
-"business_app_notification_permission" = "";
-"business_app_gallery_permission" = "";
-"business_app_gallery_permission_not_provided_popup_title" = "";
-"business_app_gallery_permission_not_provided_popup_description" = "";
+"business_app_notification_permission" = "Bildirimleri ayarlar menüsünden yapılandırabilirsiniz. Bildirimler uyarıları, sesleri ve simge işaretlerini içerebilir.";
+"business_app_gallery_permission" = "Fotoğraflarınızı uygulamaya yükleyebilmek ve uygulamadan cihaz galerisine indirilebilmek için lifebox business'a erişim izni vermeniz gerekmektedir.";
+"business_app_gallery_permission_not_provided_popup_title" = "Fotoğraf Galerisi Erişim İzni";
+"business_app_gallery_permission_not_provided_popup_description" = "Bu işlemi gerçekleştirebilmemiz için galerinize erişim izni vermeniz gerekmektedir. Lütfen uygulama ayarlarınızı kontrol ediniz.";
 "business_app_gallery_permission_not_provided_popup_settings_accept" = "Ayarlar";
 "business_app_gallery_permission_not_provided_popup_settings_reject" = "Hayır";
 "business_app_new_folder" = "Klasör Yarat";
@@ -1901,9 +1901,11 @@
 "business_app_login_email_box_inside" = "E-posta Adresinizi Girin";
 "business_app_login_password_box_inside" = "Şifrenizi Girin";
 "business_app_login_rememberme_checkbox" = "Beni Hatırla";
-"business_app_login_forget_password" = "Şifrenizi mi unuttunuz?";
-"business_app_login_forget_password_page_title" = "Şifrenizi mi Unuttunuz?";
-"business_app_login_forget_password_page_description" = "Lütfen şirket kimlik şifrenizi değiştiriniz. Şifrenizi değiştirdiyseniz ve halen giriş yapamıyorsanız, şirketinizdeki lifebox business admini ile iletişime geçebilirsiniz.";
+"business_app_login_forget_password" = "Şifrenizi mi Unuttunuz";
+
+/*kodda login tagi olarak içeri alındaığından küçük harfle yazıldı*/
+"business_app_login_forget_password_page_title" = "Şifrenizi mi unuttunuz";
+"business_app_login_forget_password_page_description" = "Lütfen şirket kimliğinizin şifresini değiştiriniz. Şifrenizi değiştirdiyseniz ve halen giriş yapamıyorsanız, şirketinizdeki lifebox business admini ile iletişime geçebilirsiniz.";
 "business_app_login_forget_password_page_close_button" = "Kapat";
 "business_app_login_pwd_login_button" = "Şirket Kimliği ile Giriş";
 "business_app_login_pwd_login_button_explanation" = "* Şirketinizin lifebox business ile kimlik entegrasyonu olması durumunda kullanılabilir";
@@ -1937,8 +1939,8 @@
 "business_app_private_share_start" = "Paylaş";
 "business_app_private_share_success" = "Paylaşım başarılı";
 "business_app_private_share_shared_with_section_name" = "Paylaşılan kişiler";
-"business_app_private_share_fail_errorcode_4115" = "";
-"business_app_private_share_fail_errorcode_4116" = "";
+"business_app_private_share_fail_errorcode_4115" = "Your message is too long. Please shorten your message and try again";
+"business_app_private_share_fail_errorcode_4116" = "You have added so many users to the share";
 "business_app_private_share_fail_errorcode_4118" = "Maksimum dosya paylaşım sınırını aştınız.";
 "business_app_private_share_fail_errorcode_5101" = "Bir hata oluştu, lütfen daha sonra tekrar deneyiniz.";
 "business_app_private_share_fail_errorcode_5102" = "Bir hata oluştu, lütfen daha sonra tekrar deneyiniz.";
@@ -1949,8 +1951,8 @@
 "business_app_info_page_item" = "Öğeler";
 "business_app_info_page_creation_date" = "Oluşturulma Tarihi";
 "business_app_info_page_modified_date" = "Son Düzenleme";
-"business_app_info_page_sharing_info" = "Paylaşım Bilgisi";
-"business_app_info_page_shared_with" = "%d kişi ile paylaşıldı.";
+"business_app_info_page_sharing_info" = "Erişim Bilgisi";
+"business_app_info_page_shared_with" = "%d Kişinin erişimi var";
 "business_app_info_page_role_owner" = "Paylaşan";
 "business_app_info_page_role_editor" = "Düzenleyen";
 "business_app_info_page_role_viewer" = "Görüntüleyen";
@@ -1962,8 +1964,8 @@
 "business_app_whohasaccess_role_viewer" = "Görüntüleyebilir";
 "business_app_whohasaccess_role_varies" = "Özelleşmiş";
 "uploadVideoToReadOnlyAlbumError" = "";
-"business_app_2FA_first_page_title" = "Olağandışı Giriş Denemesi Tespit Edildi";
-"business_app_2FA_first_page_description_title" = "Hesabınız için iki faktörlü kimlik doğrulamasını etkinleştirdiniz.";
+"business_app_2FA_first_page_title" = "Güvenlik Adımı";
+"business_app_2FA_first_page_description_title" = "Olağandışı Giriş Denemesi Tespit Edildi";
 "business_app_2FA_first_page_description_detail" = "Hesabınızı güvence altına almak ve güvenli bir şekilde giriş yapabilmeniz için kimliğinizi doğrulayabilmek adına size bir güvenlik kodu göndereceğiz.";
 "business_app_2FA_first_page_sendsecuritycode" = "Güvenlik kodunu gönder";
 "business_app_2FA_first_page_sendsecuritycode_to_phone" = "Telefon numarama:";
@@ -1979,7 +1981,7 @@
 "business_app_access_page_role_viewer" = "Görüntüleyebilir";
 "business_app_access_page_role_varies" = "Özelleşmiş";
 "business_app_access_page_expire_date" = "Bitiş tarihi: %@";
-"business_app_access_page_from_folder" = "%@ Klasöründen";
+"business_app_access_page_from_folder" = "%@";
 "business_app_access_page_role_change_remove" = "Çıkar";
 "business_app_sortby" = "Sırala:";
 "business_app_sortby_name_a_z" = "İsim (A-Z)";
@@ -2006,22 +2008,22 @@
 "business_app_FL_error_not_logintologinSDK" = "Fast Login Doğrulama Hatası";
 "business_app_FL_else_error" = "FastLogin sisteminde geçici bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
 "business_app_faq_page_title" = "S.S.S";
-"Start Using" = "";
+"Start Using" = "Kullanmaya Başlayın";
 "business_app_privacy_policy_start" = "Kullanmaya Başlayın";
 "business_app_eula_checkbox" = "Kullanım Koşulları'nı okudum ve kabul ediyorum.";
-"business_app_agreement_page_title" = "Kullanım Koşulları ve Aydınlatma Metni";
+"business_app_agreement_page_title" = "Sözleşmeler";
 "business_app_agreement_eula" = "Kullanım Koşulları";
 "business_app_agreement_privacy_policy" = "Aydınlatma Metni";
 "business_app_eula_privacy_policy_textbox" = "lifebox business aracılığıyla topladığımız kişisel verileriniz hakkında ayrıntılı bilgi almak için Aydınlatma Metni'mizi okuyabilirsiniz.";
 "business_app_privacy_policy_page_title" = "Aydınlatma Metni";
-"eula_title_new" = "";
+"eula_title_new" = "Kullanım Koşulları";
 "business_app_eula_page_title" = "Kullanım Koşulları";
 "business_app_settings_page_title" = "Ayarlar";
 "business_app_settings_storage_use_limited_header" = "Kota Kullanımı";
 "business_app_settings_storage_used_limited_values" = "%@ / %@ Kullanılıyor";
 "business_app_settings_storage_use_unlimited_text" = "Kota Kullanımı: %@";
 "business_app_settings_profile" = "Profil Ayarları";
-"business_app_settings_agreements" = "Kullanım Koşulları ve Aydınlatma Metni";
+"business_app_settings_agreements" = "Sözleşmeler";
 "business_app_settings_faq" = "S.S.S";
 "business_app_settings_contactus" = "Bize Ulaşın";
 "business_app_settings_deletedfiles" = "Çöp Kutusu";
@@ -2046,7 +2048,7 @@
 "business_app_contact_us_subject_4" = "Yetki, Paylaşım";
 "business_app_contact_us_subject_5" = "Raporlama";
 "business_app_contact_us_email_body_unlimited" = "Limitsiz";
-"business_app_contact_us_email_body" = "E-posta: %@\nUygulama Versiyonu: %@\nCihaz Adı: %@\nCihaz OS: %@\nDil: %@\nŞebeke Durumu: %@\nToplam Kota: %@\nKullanılan Kota: %@\nKonu: %@";
+"business_app_contact_us_email_body" = "\nE-posta: %@\nUygulama Versiyonu: %@\nCihaz Adı: %@\nCihaz OS: %@\nDil: %@\nAğ Durumu: %@\nToplam Kota: %@\nKullanılan Kota: %@\nKonu: %@";
 
 /*empty pages or folders*/
 "business_app_my_disk_empty page" = "Henüz size özel dosya yüklemediniz.";
@@ -2065,7 +2067,7 @@
 "business_app_trash_bin_delete_confirm_title" = "Kalıcı Olarak Sil";
 "business_app_trash_bin_delete_confirm_description" = "Kalıcı olarak silmek istediğinize emin misiniz?";
 "business_app_trash_bin_delete_confirm_YES_button" = "Sil";
-"business_app_trash_bin_delete_confirm_NO_button" = "İpta";
+"business_app_trash_bin_delete_confirm_NO_button" = "İptal";
 "business_app_trash_bin_delete_success" = "Başarıyla silindi.";
 "business_app_trash_bin_restore_success" = "Başarıyla geri yüklendi.";
 "business_app_trash_bin_empty_trash_confirm_title" = "Kalıcı Olarak Sil";
@@ -2088,9 +2090,16 @@
 "business_app_root_device_popup_description" = "Güvenlik nedeniyle root edilmiş cihazlarla bu uygulama kullanılamaz";
 "business_app_root_device_popup_button" = "Uygulamayı kapat";
 "business_app_manual_picker_selected_counter" = "%d Seçili";
-"turkcell_updater_pop_up_title" = "";
-"turkcell_updater_pop_up_description" = "";
+"turkcell_updater_pop_up_title" = "Uyarı";
+"turkcell_updater_pop_up_description" = "Lütfen uygulamayı AppStore'dan güncelleyin";
 "business_app_delete_success_snackbar_trashbin_link" = "Çöp Kutusu";
 "business_app_contact_us_subject_6" = "Giriş/Kayıt";
 "business_app_contact_us_subject_7" = "Bağlantı, Hız";
 "business_app_contact_us_subject_8" = "Öneriler (NT)";
+"business_app_access_page_role_owner" = "Paylaşan";
+"business_app_app_version_under_settings" = "Versiyon: %@";
+"business_app_icloud_upload_spinner_tag" = "iCloud öğeleri hazırlanıyor";
+"business_app_search_empty_page_title" = "Sonuç Bulunamadı";
+"business_app_search_empty_page_description" = "\"%@\" aramanız bir dosya ya da klasör ile eşleşmedi.";
+"business_app_search_number_of_result" = "%d sonuç";
+"business_app_search_no_results" = "\"%@\" araması için sonuç bulanamadı";

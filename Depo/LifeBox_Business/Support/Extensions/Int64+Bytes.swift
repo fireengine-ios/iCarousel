@@ -21,6 +21,6 @@ extension Int64 {
         let formatter: ByteCountFormatter = ByteCountFormatter()
         formatter.countStyle = .binary
         
-        return formatter.string(fromByteCount: Int64(self))
+        return self == 0 ? "0 KB" : formatter.string(fromByteCount: self)
     }
 }

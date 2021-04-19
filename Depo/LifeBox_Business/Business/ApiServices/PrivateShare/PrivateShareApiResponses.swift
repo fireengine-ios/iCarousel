@@ -127,6 +127,17 @@ struct FileSystem: Codable {
     let fileList: [SharedFileInfo]
 }
 
+struct BusinessSearchItems: Codable {
+    
+    struct FoundItems: Codable {
+        let allFiles: Int
+    }
+    
+    let foundItems: [SharedFileInfo]
+    let foundItemsCount: FoundItems
+    
+}
+
 struct SharedItemPermission: Codable, Equatable {
     let granted: [PrivateSharePermission]?
     let bitmask: Int64?

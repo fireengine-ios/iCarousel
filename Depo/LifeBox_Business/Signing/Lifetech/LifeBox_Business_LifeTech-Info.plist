@@ -10,7 +10,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>lifebox-for-business</string>
+	<string>business</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -40,26 +40,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>74412d8a38e9c5b44ca9993298b0ec4cba26289b</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Answers</string>
-			</dict>
-		</array>
-	</dict>
 	<key>FacebookAppID</key>
 	<string>531658366898592</string>
 	<key>FacebookDisplayName</key>
@@ -79,63 +59,15 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MenloApplicationKey</key>
-	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
-	<key>MenloPushApplicationKey</key>
-	<string>TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd</string>
-	<key>MenloPushSandboxMode</key>
-	<true/>
-	<key>MenloPushServerURL</key>
-	<string>https://turkcell.menloworks.com</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>http://adepo.turkcell.com.tr/api/auth/gsm/login</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
-			<key>http://adepotest.turkcell.com.tr</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<string>YES</string>
-				<key>NSIncludesSubdomains</key>
-				<string>YES</string>
-			</dict>
-			<key>http://cropyioslifebox.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<string>YES</string>
-				<key>NSIncludesSubdomains</key>
-				<string>YES</string>
-			</dict>
-			<key>http://curio.turkcell.com.tr/api/v2</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<string>YES</string>
-				<key>NSIncludesSubdomains</key>
-				<string>YES</string>
-			</dict>
-			<key>http://tcloudstb.turkcell.com.tr</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<string>YES</string>
-				<key>NSIncludesSubdomains</key>
-				<string>YES</string>
-			</dict>
-		</dict>
+		<false/>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string></string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>lifebox needs to access your bluetooth permission in order to send you push messages in specific areas</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>To offer campaigns specific to you</string>
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSContactsUsageDescription</key>
@@ -184,7 +116,7 @@
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleLightContent</string>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

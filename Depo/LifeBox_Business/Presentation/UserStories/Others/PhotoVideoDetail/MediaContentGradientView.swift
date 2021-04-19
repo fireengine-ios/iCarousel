@@ -60,6 +60,8 @@ final class MediaContentGradientView: UIView {
         backgroundColor = .clear
         isUserInteractionEnabled = false
         
+        gradientLayer.isHidden = true
+        
         layer.addSublayer(gradientLayer)
     }
 }

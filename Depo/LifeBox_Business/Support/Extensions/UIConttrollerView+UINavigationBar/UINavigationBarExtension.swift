@@ -83,8 +83,10 @@ enum NavigationBarStyles {
     
     var tintColor: UIColor {
         switch self {
-        case .byDefault, .white, .visible, .transparent, .hidden, .black:
+        case .transparent, .hidden, .black:
             return .clear
+        case .byDefault, .white, .visible:
+            return ColorConstants.confirmationPopupTitle
         }
     }
     
@@ -217,11 +219,16 @@ extension UIViewController {
     }
     
     func changeSearchBar(controller: UISearchController?) {
+        navigationItem.hidesSearchBarWhenScrolling = true
         if let controller = controller, navigationItem.searchController == nil {
             navigationItem.searchController = controller
         } else if controller == nil {
             navigationItem.searchController = controller
         }
+    }
+    
+    var navigationSearchController: UISearchController? {
+        return navigationItem.searchController
     }
 }
 

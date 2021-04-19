@@ -930,7 +930,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
     }
     
-    private func compactInfoAboutAsset(asset: PHAsset) -> AssetInfo {
+    func compactInfoAboutAsset(asset: PHAsset) -> AssetInfo {
         
         switch asset.mediaType {
         case .image:

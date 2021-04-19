@@ -31,9 +31,6 @@ class WrapperedItemUtil: NSObject {
             
         case let .application(applicationType):
             switch applicationType {
-            case .rar:
-                imageName = "fileIconRar"
-                break
             case .zip:
                 imageName = "zipFileThumbnail"
                 break
@@ -42,9 +39,6 @@ class WrapperedItemUtil: NSObject {
                 break
             case .txt:
                 imageName = "txtFileThumbnail"
-                break
-            case .html:
-                imageName = "fileIconUnknown"
                 break
             case .xls:
                 imageName = "xlsFileThumbnail"
@@ -56,6 +50,7 @@ class WrapperedItemUtil: NSObject {
                 imageName = "pptFileThumbnail"
                 break
             default:
+                imageName = "unknownFileThumbnail"
                 break
             }
         default:

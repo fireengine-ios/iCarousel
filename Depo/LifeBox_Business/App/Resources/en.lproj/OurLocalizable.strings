@@ -855,7 +855,7 @@
 "free_trial_detail_label" = "Discover which photo will get the highest rank, analyze with PhotoPick for more likes! Unlimited just for you!";
 "instapick_under_construction" = "We are making improvement on PhotoPick for a better experience 😉";
 "instapick_unsupported_file_type" = "The photos you selected are in an unsupported format. You can continue the PhotoPick experience by selecting other photos.";
-"work_will_introduced" = "There is currently maintenance ongoing on lifebox, please try again later.\n";
+"work_will_introduced" = "There is currently an ongoing maintenance, please try again later.\n";
 "facebook_remove_connection_warning_title" = "You're about to remove your Facebook connection.";
 "dropbox_remove_connection_warning_title" = "You're about to remove your Dropbox connection.";
 "facebook_remove_connection_warning_message" = "Are you sure you want to remove your Facebook connection?\n\n";
@@ -864,7 +864,7 @@
 "you_are_connected" = "You are connected";
 "insta_pick_picture_not_found" = "Picture not found";
 "phone_updated_needs_login" = "You have successfully updated your phone number, please log in with your credentials";
-"server_under_maintenance" = "There is currently maintenance ongoing on lifebox, please try again later.";
+"server_under_maintenance" = "There is currently an ongoing maintenance, please try again later.";
 "unlimited_photopick_analysis" = "Unlimited PhotoPick analysis";
 "data_advantage_short" = "Additional Data Advantage";
 "additional_data_advantage" = "Additional Data Advantage";
@@ -1882,16 +1882,16 @@
 "business_app_info_option" = "Info";
 "business_app_download_success" = "Downloaded Successfully";
 "business_app_delete_success" = "Deleted Successfully";
-"business_app_rename_sucess" = "Renamed Successfully";
+"business_app_rename_sucess" = "Successfully Renamed";
 "business_app_share_privately_success" = "Shared Successfully";
 "business_app_stop_sharing_success" = "Sharing stopped";
 "business_app_leave_sharing_success" = "Left Successfully";
 "business_app_delete_confirm_popup_title" = "Are you sure to delete?";
 "business_app_delete_confirm_popup_detail" = "Deleted files will be sent to the trash bin. All the items in the trash bin will be deleted permanently after 30 days and you won't be able to restore them.";
-"business_app_notification_permission" = "Notifications may include alerts, sounds and icon badges. These can be configured in Settings";
-"business_app_gallery_permission" = "lifebox business needs your photo library access in order to be able to upload them to the app and download your photos in application to the device gallery";
+"business_app_notification_permission" = "You can configure the notifications in the settings menu. Notifications may include alerts, sounds, and icon badges.";
+"business_app_gallery_permission" = "lifebox business needs your permission to access your photo library in order to upload your photos to the app and download them to the device gallery.";
 "business_app_gallery_permission_not_provided_popup_title" = "Photo Library Access Permission";
-"business_app_gallery_permission_not_provided_popup_description" = "We need your photo library access permission for this action. Please check you app settings";
+"business_app_gallery_permission_not_provided_popup_description" = "We need your permission to access your photo library to complete this action. Please check your app settings.";
 "business_app_gallery_permission_not_provided_popup_settings_accept" = "Settings";
 "business_app_gallery_permission_not_provided_popup_settings_reject" = "No";
 "business_app_new_folder" = "Create Folder";
@@ -1901,8 +1901,10 @@
 "business_app_login_email_box_inside" = "Enter Your E-mail";
 "business_app_login_password_box_inside" = "Enter Your Password";
 "business_app_login_rememberme_checkbox" = "Remember me";
-"business_app_login_forget_password" = "Forget your password?";
-"business_app_login_forget_password_page_title" = "Forget Your Password?";
+
+/*kodda title tagi olarak içeri alındığından büyük harfle yazıldı*/
+"business_app_login_forget_password" = "Forgot Your Password";
+"business_app_login_forget_password_page_title" = "Forgot your password";
 "business_app_login_forget_password_page_description" = "Please change your company identity password. If you have already changed your password and you are still having problem, you can contact lifebox business admin at your company.";
 "business_app_login_forget_password_page_close_button" = "Close";
 "business_app_login_pwd_login_button" = "Login with Company Identity";
@@ -1953,8 +1955,8 @@
 "business_app_info_page_item" = "Items";
 "business_app_info_page_creation_date" = "Creation Date";
 "business_app_info_page_modified_date" = "Last Modified";
-"business_app_info_page_sharing_info" = "Sharing Info";
-"business_app_info_page_shared_with" = "Shared with %d people";
+"business_app_info_page_sharing_info" = "Access Info";
+"business_app_info_page_shared_with" = "%d People have access";
 "business_app_info_page_role_owner" = "Owner";
 "business_app_info_page_role_editor" = "Editor";
 "business_app_info_page_role_viewer" = "Viewer";
@@ -1966,8 +1968,8 @@
 "business_app_whohasaccess_role_viewer" = "Viewer";
 "business_app_whohasaccess_role_varies" = "Custom";
 "uploadVideoToReadOnlyAlbumError" = "uploadVideoToReadOnlyAlbumError";
-"business_app_2FA_first_page_title" = "We Detected An Unusual Login Attempt";
-"business_app_2FA_first_page_description_title" = "You activated two-factor authentication on your account";
+"business_app_2FA_first_page_title" = "Security Check";
+"business_app_2FA_first_page_description_title" = "We Detected An Unusual Login Attempt";
 "business_app_2FA_first_page_description_detail" = "To secure your account and login safely, we'll send you a security code to verify your identity";
 "business_app_2FA_first_page_sendsecuritycode" = "Send the security code";
 "business_app_2FA_first_page_sendsecuritycode_to_phone" = "To my Phone:";
@@ -1982,9 +1984,8 @@
 "business_app_access_page_role_editor" = "Editor";
 "business_app_access_page_role_viewer" = "Viewer";
 "business_app_access_page_role_varies" = "Custom";
-"business_app_access_page_role_owner" = "Owner";
 "business_app_access_page_expire_date" = "Expires on: %@";
-"business_app_access_page_from_folder" = "From %@ folder";
+"business_app_access_page_from_folder" = "From %@";
 "business_app_access_page_role_change_remove" = "Remove";
 "business_app_sortby" = "Sort by:";
 "business_app_sortby_name_a_z" = "Name (A-Z)";
@@ -2019,19 +2020,18 @@
 "business_app_agreement_privacy_policy" = "Privacy Notice";
 "business_app_eula_privacy_policy_textbox" = "For detailed information about your personal data that we collect through lifebox business, please read our Privacy Notice.";
 "business_app_privacy_policy_page_title" = "Privacy Notice";
-"eula_title_new" = "Welcome to Lifebox";
+"eula_title_new" = "Terms of Use";
 "business_app_eula_page_title" = "Terms of Use";
 "business_app_settings_page_title" = "Settings";
 "business_app_settings_storage_use_limited_header" = "Quota Usage";
 "business_app_settings_storage_used_limited_values" = "%@ / %@ Using";
 "business_app_settings_storage_use_unlimited_text" = "Quota Usage: %@";
 "business_app_settings_profile" = "Profile Settings";
-"business_app_settings_agreements" = "Terms of Use & Privacy Notice";
+"business_app_settings_agreements" = "Agreements";
 "business_app_settings_faq" = "FAQ";
 "business_app_settings_contactus" = "Contact Us";
 "business_app_settings_deletedfiles" = "Trash Bin";
 "business_app_settings_logout" = "Logout";
-"business_app_app_version_under_settings" = "Version: %@";
 "business_app_document_no_preview" = "Unable to preview now, please try again later.";
 "business_app_photo_no_preview" = "Unable to preview now, please try again later.";
 "business_app_music_no_preview" = "Unable to preview now, please try again later.";
@@ -2126,3 +2126,10 @@ Subject: Subject_1*/
 "business_app_contact_us_subject_6" = "Login/Signup";
 "business_app_contact_us_subject_7" = "Connection, Speed";
 "business_app_contact_us_subject_8" = "Suggestions (NT)";
+"business_app_access_page_role_owner" = "Owner";
+"business_app_app_version_under_settings" = "Version: %@";
+"business_app_icloud_upload_spinner_tag" = "Preparing iCloud items";
+"business_app_search_empty_page_title" = "No Results Found";
+"business_app_search_empty_page_description" = "Your search \"%@\" did not match with any file or folder";
+"business_app_search_number_of_result" = "%d Result(s)";
+"business_app_search_no_results" = "No results found for \"%@\"";

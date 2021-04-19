@@ -18,11 +18,22 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return controller
     }
 
+    
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    @IBOutlet private weak var bottomBarContainerView: UIView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.backgroundColor = .white
+        }
+    }
+    
     private lazy var cameraService = CameraService()
-    private lazy var galleryFileUploadService = GalleryFileUploadService()
-    private lazy var externalFileUploadService = ExternalFileUploadService()
+    private var galleryFileUploadService: GalleryFileUploadService? {
+        router.tabBarController?.galleryFileUploadService
+    }
+    private var externalFileUploadService: ExternalFileUploadService? { router.tabBarController?.externalFileUploadService
+    }
     
     private(set) var shareType: PrivateShareType = .byMe
     
@@ -45,13 +56,36 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
  
-    lazy private var searchController: UISearchController = {
+    private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
-        searchController.obscuresBackgroundDuringPresentation = true
-        //TODO: also setup delegate here
+        searchController.searchBar.tintColor = ColorConstants.confirmationPopupTitle
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        searchController.searchBar.text = nil
+        
         return searchController
     }()
+    
+    private var topBarHeight: CGFloat {
+        guard let navigationBarFrame = navigationController?.navigationBar.frame else {
+            return 0
+        }
+        
+        if Device.operationSystemVersionLessThen(13) {
+            return navigationBarFrame.origin.y + navigationBarFrame.height + searchController.searchBar.frame.height
+        } else {
+            return navigationBarFrame.origin.y + navigationBarFrame.height
+        }
+        
+    }
+    
+    
+    private var bottomBarHeight: CGFloat {
+        bottomBarContainerView.frame.height
+    }
     
     //MARK: - Override
     
@@ -76,6 +110,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
         trackScreen()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +120,15 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         bottomBarManager.updateLayout()
         collectionManager.reload(type: .onViewAppear)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        
+        
+        collectionManager.updateOnDidLayout(barInsets: UIEdgeInsets(top: topBarHeight, left: 0,
+                                                                   bottom: bottomBarHeight, right: 0))
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,7 +141,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems, shareType: shareType)
         }
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -111,6 +154,37 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         if collectionManager.isSelecting {
             stopModeSelected()
         }
+    }
+    
+    
+    //MARK: - Public
+    
+    //shall be called from segment
+    func setupSegmentedControlView(segmentedView: UIView) {
+        
+        let newOffset = segmentedView.frame.height
+
+        segmentedView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.addSubview(segmentedView)
+        
+        let collectionTopConstraint = segmentedView.topAnchor.constraint(equalTo: collectionView.topAnchor,
+                                                                         constant: -newOffset)
+        collectionTopConstraint.priority = .defaultLow
+        
+        let superTopConstraint = NSLayoutConstraint(item: segmentedView.safeAreaLayoutGuide,
+                                                    attribute: .top,
+                                                    relatedBy: .greaterThanOrEqual,
+                                                    toItem: view.safeAreaLayoutGuide,
+                                                    attribute: .top, multiplier: 1, constant: 0)
+        superTopConstraint.priority = .defaultHigh
+        
+        let leading = segmentedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
+        let trailing = segmentedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
+        
+        NSLayoutConstraint.activate([collectionTopConstraint, leading, trailing, superTopConstraint])
+        
+        collectionView.contentInset = UIEdgeInsets(top: newOffset, left: 0, bottom: 25, right: 0)
     }
  
     //MARK: - Private
@@ -159,30 +233,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private func setDefaultTabBarState() {
         needToShowTabBar = shareType.isTabBarNeeded
     }
-
-    
-    //shall be called frorm segment
-    func setupSegmentedControlView(segmentedView: UIView) {
-        
-        let newOffset = segmentedView.frame.height
-
-        segmentedView.translatesAutoresizingMaskIntoConstraints = false
-        
-        collectionView.addSubview(segmentedView)
-        
-        let collectionTopConstraint = segmentedView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: -newOffset)
-        collectionTopConstraint.priority = .defaultLow
-        
-        let superTopConstraint = NSLayoutConstraint(item: segmentedView.safeAreaLayoutGuide, attribute: .top, relatedBy: .greaterThanOrEqual, toItem: view.safeAreaLayoutGuide, attribute: .top, multiplier: 1, constant: 0)
-        superTopConstraint.priority = .defaultHigh
-        
-        let leading = segmentedView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0)
-        let trailing = segmentedView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
-        
-        NSLayoutConstraint.activate([collectionTopConstraint, leading, trailing, superTopConstraint])
-        
-        collectionView.contentInset = UIEdgeInsets(top: newOffset, left: 0, bottom: 25, right: 0)
-    }
     
     private func trackScreen() {
         switch shareType {
@@ -215,8 +265,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 break
             default:
                 self.changeNavbarLargeTitle(false, style: .white)
-                if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
-                    self.setNavSearchConntroller(nil)
+                if self.shareType.isSearchAllowed {
+                    self.setNavSearchController(nil)
                 }
             }
         }
@@ -231,8 +281,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                 break
             default:
                 self.changeNavbarLargeTitle(true, style: .white)
-                if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
-                    self.setNavSearchConntroller(self.searchController)
+                if self.shareType.isSearchAllowed {
+                    self.setNavSearchController(self.searchController)
                 }
             }
         }
@@ -245,19 +295,21 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         if selectedItems.isEmpty {
             bottomBarManager.hide()
         } else {
-            bottomBarManager.show()
+            bottomBarManager.show(on: bottomBarContainerView)
         }
     }
     
-    func didEndReload() {
+    func didEndReload(hasItems: Bool) {
         hideSpinner()
         
-        if self.shareType.isSearchAllowed {
-            self.setNavSearchConntroller(self.searchController)
+        if shareType.isSearchAllowed {
+            setNavSearchController(self.searchController)
         }
         
-        self.setupPlusButton()
-        self.view.layoutSubviews()
+        setupPlusButton()
+        updateTrashBinNavBarConfig(isEmptyPage: !hasItems)
+        
+        view.layoutSubviews()
         
         if !ReachabilityService.shared.isReachable {
             UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
@@ -281,10 +333,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     }
 
     func onEmptyViewUpdate(isHidden: Bool) {
-        if shareType == .trashBin {
-            navBarManager.setTrashBinMode(title: self.shareType.title, emptyDataList: !isHidden)
-            navBarManager.setupLargetitle(isLarge: false)
-        }
+        updateTrashBinNavBarConfig(isEmptyPage: !isHidden)
     }
     
     //MARK: Helpers
@@ -309,16 +358,22 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         if isSelecting {
             let selectedItems = self.collectionManager.selectedItems()
             self.show(selectedItemsCount: selectedItems.count)
-            self.bottomBarManager.show()
+            self.bottomBarManager.show(on: self.bottomBarContainerView)
             self.bottomBarManager.update(for: selectedItems, shareType: self.shareType)
         } else {
             self.bottomBarManager.hide()
         }
-        
+    }
+    
+    private func updateTrashBinNavBarConfig(isEmptyPage: Bool) {
+        if shareType == .trashBin {
+            navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: isEmptyPage)
+            navBarManager.setupLargeTitle(isLarge: false)
+        }
     }
 
     private func setupNavigationBar(editingMode: Bool) {
-
+        
         setNavigationBarStyle(.white)
         
         /// be sure to configure navbar items after setup navigation bar
@@ -333,24 +388,46 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         } else {
             switch shareType {
             case .trashBin:
-                navBarManager.setupLargetitle(isLarge: false)
+                navBarManager.setupLargeTitle(isLarge: false)
                 navBarManager.setTrashBinMode(title: shareType.title, emptyDataList: fileInfoManager.items.isEmpty)
                 
             case .innerFolder(let rootType, let folderItem):
-                navBarManager.setupLargetitle(isLarge: false)
+                navBarManager.setupLargeTitle(isLarge: false)
                 if rootType != .trashBin {
                     navBarManager.setNestedMode(title: shareType.title)
                 } else {
                     navBarManager.setTrashBinMode(title: folderItem.name, innerFolder: true, emptyDataList: fileInfoManager.items.isEmpty)
                 }
-            default:
+                
+            case .byMe, .withMe, .myDisk, .sharedArea:
                 navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
                 var newTitle = shareType.title
                 if let segmentedParent = parent as? TopBarSupportedSegmentedController {
                     newTitle = segmentedParent.rootTitle
                 }
-                navBarManager.setupLargetitle(isLarge: true)
+                
+                navBarManager.setupLargeTitle(isLarge: true)
                 navBarManager.setRootMode(title: newTitle)
+                
+                if shareType.isSearchAllowed {
+                    searchController.searchBar.text = nil
+                    searchController.isActive = false
+                }
+                
+            case .search(from: let rootType, _, text: let searchText):
+                
+                navBarManager.setRootMode(title: rootType.title)
+                navBarManager.setupLargeTitle(isLarge: false)
+                navBarManager.setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+                
+                searchController.searchBar.text = searchText
+                searchController.searchBar.showsCancelButton = true
+                setNavSearchController(searchController)
+                
+                if Device.operationSystemVersionLessThen(13) {
+                    navigationItem.hidesSearchBarWhenScrolling = false
+                }
+
             }
         }
     }
@@ -371,10 +448,6 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
         } else {
             threeDotsManager.showActions(for: shareType, sender: self)
         }
-    }
-    
-    func onSearchButton() {
-        showSearchScreen()
     }
     
     func onPlusButton() {
@@ -439,14 +512,10 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
             }
         })
     }
-    
-    //MARK: Helpers
-    private func showSearchScreen() {
-        let controller = router.searchView(navigationController: navigationController)
-        router.pushViewController(viewController: controller)
-    }
 }
 
+
+//MARK: - BaseItemInputPassingProtocol
 extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func selectModeSelected(with item: WrapData?) {
         collectionManager.startSelection(with: item)
@@ -512,7 +581,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
             default:
                 self.changeNavbarLargeTitle(true, style: .white)
                 if self.shareType.isSearchAllowed {//from requrements it seems that search is possible on root pages only
-                    self.setNavSearchConntroller(self.searchController)
+                    self.setNavSearchController(self.searchController)
                 }
             }
         }
@@ -526,6 +595,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
 }
 
 
+//MARK: - ItemOperationManagerViewProtocol
 extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtocol {
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         return self === object
@@ -585,7 +655,21 @@ extension PrivateShareSharedFilesViewController: GalleryFileUploadServiceDelegat
             self.router.presentViewController(controller: vc, animated: true, completion: nil)
         }
     }
+    
+    func assetsPreparationWillStart() {
+        if let tabBarController = router.tabBarController {
+            tabBarController.assetsPreparationWillStart()
+        }
+    }
+    
+    func assetsPreparationDidEnd() {
+        if let tabBarController = router.tabBarController {
+            tabBarController.assetsPreparationDidEnd()
+        }
+    }
 }
+
+//MARK: - PrivateShareSharedPlusButtonActtionDelegate
 
 extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonActtionDelegate {
     
@@ -612,10 +696,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
             
         case .upload(type: let uploadType):
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
-            galleryFileUploadService.upload(type:uploadType, rootViewController: self, delegate: self)
+            galleryFileUploadService?.upload(type: uploadType, rootViewController: self, delegate: self)
             
         case .uploadFiles(type: let uploadType):
-            externalFileUploadService.showViewController(type: uploadType, router: router, externalFileType: .any)
+            externalFileUploadService?.showViewController(type: uploadType, router: router, externalFileType: .any)
             
         case .uploadFromApp:
             let parentFolder = router.getParentUUID()
@@ -627,4 +711,59 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedPlusButtonAct
             router.presentViewController(controller: navigationController)
         }
     }
+}
+
+
+//MARK: - UISearchBarDelegate
+extension PrivateShareSharedFilesViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        guard let searchBarText = searchBar.text else {
+            return
+        }
+        
+        switch shareType {
+        
+        case .search(from: let rootType, let rootPermissions, _):
+            
+            shareType = .search(from: rootType, rootPermissions: rootPermissions, text: searchBarText)
+            showSpinner()
+            collectionManager.search(shareType: shareType) { [weak self] in
+                DispatchQueue.main.async {
+                    self?.setupNavigationBar(editingMode: false)
+                    self?.hideSpinner()
+                }
+                
+            }
+            
+        case .byMe, .myDisk, .innerFolder(type: _, folderItem: _), .sharedArea, .trashBin, .withMe:
+            
+            if let permissions = collectionManager.rootPermissions {
+                let controller = PrivateShareSharedFilesViewController.with(shareType: .search(from: self.shareType, rootPermissions: permissions, text: searchBarText))
+                self.router.pushViewController(viewController: controller, animated: false)
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        switch self.shareType {
+        
+        case .innerFolder, .trashBin, .byMe, .withMe:
+            break
+            
+        case .myDisk, .sharedArea:
+            
+            self.changeNavbarLargeTitle(true, style: .white)
+            setExtendedLayoutNavBar(extendedLayoutIncludesOpaqueBars: true)
+            
+        case .search:
+
+            hideSpinner()
+            router.popViewController(animated: false)
+            
+        }
+    }
+
 }

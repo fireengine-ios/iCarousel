@@ -66,7 +66,7 @@ class RouterVC: NSObject {
                currentViewController is PhoneVerificationViewController
     }
     
-    func currentContrroller() -> UIViewController? {
+    func currentController() -> UIViewController? {
         return navigationController?.viewControllers.last
     }
     
@@ -226,8 +226,8 @@ class RouterVC: NSObject {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func popViewController() {
-        navigationController?.popViewController(animated: true)
+    func popViewController(animated: Bool = true) {
+        navigationController?.popViewController(animated: animated)
     }
     
     func popToViewController(_ vc: UIViewController) {//}, completion: VoidHandler? = nil) {
@@ -391,6 +391,22 @@ class RouterVC: NSObject {
                 
             case .innerFolder(type: _, folderItem: let folder):
                 return folder
+                
+            case .search(from: let rootType, _, _):
+                
+                switch rootType {
+                    case .sharedArea:
+                        if let accUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid {
+                            return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: rootType)
+                        }
+                        return nil
+                        
+                    default:
+                        if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                            return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: rootType)
+                        }
+                        return nil
+                }
         }
     }
     

@@ -231,11 +231,10 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             debugLog("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
             
             bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
         } else {
             debugLog("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
             
-            bottomBarPresenter?.show(animated: true, onView: nil)
+//            bottomBarPresenter?.show(animated: true, onView: nil)
         }
         
         view.setNavBarRigthItem(active: canShow3DotsButton())
@@ -348,7 +347,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     private func stopEditing() {
         bottomBarPresenter?.dismiss(animated: true)
-        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
         dataSource.setSelectionState(selectionState: false)
         view.setNavBarRigthItem(active: true)
     }

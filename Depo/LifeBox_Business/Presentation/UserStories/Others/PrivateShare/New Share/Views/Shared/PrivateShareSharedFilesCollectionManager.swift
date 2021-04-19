@@ -20,7 +20,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didEndSelection()
     func didChangeSelection(selectedItems: [WrapData])
     
-    func didEndReload()
+    func didEndReload(hasItems: Bool)
     
     func showActions(for item: WrapData, sender: Any)
     func didSelectAction(type: ElementTypes, on item: Item, sender: Any?)
@@ -40,8 +40,12 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         return collectionManager
     }
     
+    private var barInsets = UIEdgeInsets.zero
+    
     weak var delegate: PrivateShareSharedFilesCollectionManagerDelegate?
     private weak var collectionView: UICollectionView?
+    
+    private lazy var emptyView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
     
     private let router = RouterVC()
     private var fileInfoManager: PrivateShareFileInfoManager!
@@ -51,9 +55,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var isSelecting = false
     
     private var sortViewRulesType: MoreActionsConfig.SortRullesType = .lastModifiedTimeNewOld
-    
+
     var rootPermissions: SharedItemPermission? {
-        return fileInfoManager.rootFolder?.permissions
+        return fileInfoManager.rootPermissions
     }
     
     //MARK: -
@@ -65,6 +69,12 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     func setup() {
         setupCollection()
         setupTopRefresher()
+    }
+    
+    func updateOnDidLayout(barInsets: UIEdgeInsets) {
+        self.barInsets = barInsets
+        
+        updateEmptyView()
     }
 
     
@@ -123,9 +133,24 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
         
         fileInfoManager.delete(uuids: uuids) { [weak self] in
-            self?.reloadCollection()
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.reloadCollection()
+            
+            if case .search = self.fileInfoManager.type {
+                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500)) { [weak self] in
+                    self?.fileInfoManager.reloadCurrentPages() { [weak self] _ in
+                        self?.reloadCollection()
+                    }
+                }
+            }
         }
     }
+    
+    
     
     //MARK: - Private
     
@@ -134,8 +159,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
             self.collectionView?.refreshControl?.endRefreshing()
             self.collectionView?.layoutIfNeeded()
             self.collectionView?.reloadData()
-            self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
-            self.delegate?.didEndReload()
+            let hasItems = !self.fileInfoManager.items.isEmpty
+            self.setEmptyScreen(isHidden: hasItems)
+            self.delegate?.didEndReload(hasItems: hasItems)
         }
     }
     
@@ -147,15 +173,23 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         collectionView?.register(nibSupplementaryView: TopBarSortingView.self,
                                  kind: UICollectionElementKindSectionHeader)
+        
+        collectionView?.register(nibSupplementaryView: TopBarSearchResultNumberView.self,
+                                 kind: UICollectionElementKindSectionHeader)
 
         collectionView?.allowsSelection = false
         collectionView?.alwaysBounceVertical = true
         
-        collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
-        collectionView?.backgroundView?.isHidden = true
-        
+        emptyView.isHidden = true
+        collectionView?.backgroundView = emptyView
+
         collectionView?.delegate = self
         collectionView?.dataSource = self
+    }
+    
+    private func updateEmptyView() {
+        emptyView.topOffset = barInsets.top
+        emptyView.bottomOffset = barInsets.bottom
     }
     
     private func setupTopRefresher() {
@@ -254,8 +288,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         guard !indexes.inserted.isEmpty || !indexes.deleted.isEmpty else {
             DispatchQueue.main.async {
                 self.collectionView?.refreshControl?.endRefreshing()
-                self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
-                self.delegate?.didEndReload()
+                let hasItems = !self.fileInfoManager.items.isEmpty
+                self.setEmptyScreen(isHidden: hasItems)
+                self.delegate?.didEndReload(hasItems: hasItems)
             }
             return
         }
@@ -266,8 +301,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 self.collectionView?.insertItems(at: indexes.inserted.compactMap { IndexPath(row: $0, section: 0) })
                 
             }, completion: { (_) in
-                self.setEmptyScreen(isHidden: !self.fileInfoManager.items.isEmpty)
-                self.delegate?.didEndReload()
+                let hasItems = !self.fileInfoManager.items.isEmpty
+                self.setEmptyScreen(isHidden: hasItems)
+                self.reloadVisibleCells()
+                self.delegate?.didEndReload(hasItems: hasItems)
             })
         }
     }
@@ -334,15 +371,33 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private func setEmptyScreen(isHidden: Bool) {
         DispatchQueue.toMain {
+            if case PrivateShareType.search(_, _, text: let query) = self.fileInfoManager.type {
+                self.emptyView.set(queryText: query)
+            }
+            
+            guard self.emptyView.isHidden != isHidden else {
+                return
+            }
+            
+            self.emptyView.isHidden = isHidden
             self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
         }
-
-        guard collectionView?.backgroundView?.isHidden != isHidden else {
-            return
-        }
-        
-        DispatchQueue.toMain {
-            self.collectionView?.backgroundView?.isHidden = isHidden
+    }
+    
+    func search(shareType: PrivateShareType, completion: VoidHandler) {
+        fileInfoManager.search(type: shareType) { [weak self] (shouldReload, _) in
+            
+            if shouldReload {
+                DispatchQueue.toMain {
+                    self?.changeSelection(isActive: false)
+                    self?.reloadCollection()
+                }
+            } else {
+                DispatchQueue.toMain {
+                    self?.collectionView?.refreshControl?.endRefreshing()
+                }
+            }
+            
         }
     }
 }
@@ -473,8 +528,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        let height: CGFloat = 44.0
-        return CGSize(width: collectionView.contentSize.width, height: height)
+        return CGSize(width: collectionView.contentSize.width, height: barInsets.bottom)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -500,17 +554,38 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
                 return footerSpinner
                 
             case UICollectionElementKindSectionHeader:
-                if indexPath.section == 0  {
-                    let header = collectionView.dequeue(supplementaryView: TopBarSortingView.self, kind: kind, for: indexPath)
-                    setup(sortingBar: header)
-                    return header
-                }
-                return UICollectionReusableView()
+                return getCurrentHeader(for: collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
                 
             default:
                 assertionFailure()
                 return UICollectionReusableView()
         }
+    }
+    
+    private func getCurrentHeader(for collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if indexPath.section == 0  {
+            
+            switch fileInfoManager.type {
+            
+            case .byMe, .withMe, .innerFolder(type: _, folderItem: _),
+                 .myDisk, .sharedArea, .trashBin:
+                
+                let header = collectionView.dequeue(supplementaryView: TopBarSortingView.self, kind: kind, for: indexPath)
+                setup(sortingBar: header)
+                return header
+                
+            case .search(from: _, _, _):
+                
+                let header = collectionView.dequeue(supplementaryView: TopBarSearchResultNumberView.self, kind: kind, for: indexPath)
+                header.setNewItemsFound(itemsFoundNumber: fileInfoManager.searchedItemsFound)
+                return header
+                
+            }
+            
+        }
+        
+        return UICollectionReusableView()
     }
     
     private func setup(sortingBar: TopBarSortingView) {

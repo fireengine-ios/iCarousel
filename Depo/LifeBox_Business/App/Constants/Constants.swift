@@ -18,6 +18,7 @@ struct TextConstants {
         static let mobilePaymentPermissionLink = "mobilePaymentPermissionLink";
         static let FAQ = "frequently_asked_questions"
         static let feedbackEmail = "info@mylifebox.com"
+        static let contactUsEmail = "info@lifebox.biz"
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         static let wrongVideoData = "Wrong video data"
         static let wrongImageData = "Wrong image data"
@@ -1446,6 +1447,7 @@ extension TextConstants {
     static let contactUsPageDescription = NSLocalizedString("business_app_contact_us_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubjectBoxName = NSLocalizedString("business_app_contact_us_subject_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsMessageBoxName = NSLocalizedString("business_app_contact_us_message_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSendButton = NSLocalizedString("Send", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let contactUsSubject1 = NSLocalizedString("business_app_contact_us_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject2 = NSLocalizedString("business_app_contact_us_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1528,3 +1530,15 @@ extension TextConstants {
     static let turkcellUpdaterPopupTitle = NSLocalizedString("turkcell_updater_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let turkcellUpdaterPopupDescription = NSLocalizedString("turkcell_updater_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+//MARK:- Search
+extension TextConstants {
+    static let emptySearchTitle = NSLocalizedString("business_app_search_empty_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let emptySearchDescription = NSLocalizedString("business_app_search_empty_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let emptySearchHeader = NSLocalizedString("business_app_search_no_results", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let searchItemsFoundNumber = NSLocalizedString("business_app_search_number_of_result", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+extension TextConstants {
+    static let iCloudPreparationSnackbarMessage = NSLocalizedString("business_app_icloud_upload_spinner_tag", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
