@@ -80,6 +80,11 @@ final class DetailMediaPlayerView: UIView, FromNib {
         player.playerDelegate = self
         player.playbackDelegate = self
 
+        player.playbackPausesWhenBackgrounded = true
+        player.playbackPausesWhenResigningActive = true
+        player.playbackResumesWhenBecameActive = false
+        player.playbackResumesWhenEnteringForeground = false
+
         return player
     }()
     
