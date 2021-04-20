@@ -18,6 +18,9 @@ enum UploadType {
     case upload
     case autoSync
     case syncToUse
+    case save
+    case saveAs
+    case sharedWithMe
 }
 
 enum MetaStrategy: String {

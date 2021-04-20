@@ -37,22 +37,21 @@ class CameraService {
     
     func photoLibraryIsAvailable(photoLibraryGranted: @escaping PhotoLibraryGranted) {
         debugLog("Photo Library IsAvalible")
-        let status = PHPhotoLibrary.authorizationStatus()
+        let status = PHPhotoLibrary.currentAuthorizationStatus()
         
         switch status {
-        case .authorized:            
+        //TODO: uncomment for xcode 12
+        case .authorized, .limited:
             photoLibraryGranted(true, status)
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             
-            PHPhotoLibrary.requestAuthorization { [weak self] status in
+            PHPhotoLibrary.requestAuthorizationStatus { [weak self] status in
                 self?.passcodeStorage.systemCallOnScreen = false
-                if status == .authorized {
-                    photoLibraryGranted(true, status)
-                }
+                photoLibraryGranted(status.isAccessible, status)
             }
         case .denied:            
-            showAccessAlert()
+            photoLibraryGranted(false, status)
         }
     }
     

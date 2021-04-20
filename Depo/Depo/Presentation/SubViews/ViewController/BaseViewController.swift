@@ -65,6 +65,7 @@ class BaseViewController: ViewController {
     }
     
     @objc func hideKeyboard() {
+        keyboardHeight = 0
     }
     
     func searchActiveTextField(view: UIView) -> UITextField? {
@@ -84,11 +85,9 @@ class BaseViewController: ViewController {
     
     func showTabBarIfNeeded() {
         if isNeedToShowTabBar() {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .showTabBar, object: nil)
         } else {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
     }
     

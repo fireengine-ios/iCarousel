@@ -8,18 +8,13 @@
 
 import UIKit
 
-typealias ContactBackupItem = ContactSync.SyncResponse
-
 protocol ContactBackupHistoryDataManagerProtocol: class {
-    func appendItemsForPresent(items: [ContactBackupItem])
-    func getSelectedItems() -> [ContactBackupItem]
+    func setup(with items: [ContactBackupItem])
 }
 
 protocol ContactBackupHistoryDataManagerDelegate: class {
-    func showDetailsForBuckupItem(item: ContactBackupItem)
+    func showDetailsForBackupItem(item: ContactBackupItem)
 }
-
-//TODO: Change logic/ uncomment when new logic (with cell selection mode) will be implemented
 
 final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataManagerProtocol {
     
@@ -34,61 +29,30 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
         setupTableView()
     }
     
-//    private var contactBackups = [ContactBuckupItem]() {
-//        didSet {
-//            tableView.reloadData()
-//        }
-//    }
+    private var contactBackups = [ContactBackupItem]()
+    private(set) var selectedBackup: ContactBackupItem?
     
-    private var selectedItems = [ContactBackupItem]() {
-        didSet {
-            // remove did set
-            tableView.reloadData()
-        }
-    }
-    
-    func appendItemsForPresent(items: [ContactBackupItem]) {
-      //contactBackups.append(contentsOf: items)
-        selectedItems.append(contentsOf: items)
-    }
-    
-    func getSelectedItems() -> [ContactBackupItem] {
-        return selectedItems
+    func setup(with items: [ContactBackupItem]) {
+        contactBackups = items
+        selectedBackup = items.first
+        tableView.reloadData()
     }
     
     private func setupTableView() {
         tableView.register(nibCell: ContactsBackupCell.self)
+        tableView.allowsSelection = true
         tableView.dataSource = self
         tableView.delegate = self
     }
     
-    private func manageSelectionStateForCell(_ cell: ContactsBackupCellProtocol, indexPath: IndexPath, isWillDisplayFunc: Bool) {
-        let item = selectedItems[indexPath.row] //contactBackups[indexPath.row]
-        if selectedItems.contains(item) {
-            if isWillDisplayFunc {
-                cell.manageSelectionState(isCellSelected: true)
-            } else {
-                cell.manageSelectionState(isCellSelected: false)
-                selectedItems.remove(item)
-            }
-        } else {
-            if isWillDisplayFunc {
-                cell.manageSelectionState(isCellSelected: false)
-            } else {
-                selectedItems.append(item)
-                cell.manageSelectionState(isCellSelected: true)
-            }
-        }
-    }
-    
     private func prepareInfoForCellPresenting(for item: ContactBackupItem) -> (title: String, description: String) {
-        guard let date = item.date else {
-            assertionFailure()
-            return (title: TextConstants.contactBackupHistoryCellTitle, description: "")
-        }
-        
         let title = TextConstants.contactBackupHistoryCellContactList
-        let description = "\(item.totalNumberOfContacts) \(TextConstants.contactBackupHistoryCellTitle) |  \(String(describing: date.getDateInFormat(format: "dd MMM yyyy")))"
+        let description: String
+        if let date = item.created {
+            description = "\(item.total) \(TextConstants.contactBackupHistoryCellTitle) | \(String(describing: date.getDateInFormat(format: "dd MMM yyyy '|' HH:mm")))"
+        } else {
+            description = "\(item.total) \(TextConstants.contactBackupHistoryCellTitle)"
+        }
         return (title: title, description: description)
     }
 }
@@ -97,8 +61,8 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
 
 extension ContactBackupHistoryDataManager: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {   //contactBackups.count
-        selectedItems.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        contactBackups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,17 +79,17 @@ extension ContactBackupHistoryDataManager: UITableViewDelegate {
         guard var cell = cell as? ContactsBackupCellProtocol else {
             assertionFailure()
             return
-        }                                              //contactBackups[indexPath.row]
-        let cellInfo = prepareInfoForCellPresenting(for: selectedItems[indexPath.row])
-        cell.setupCell(title: cellInfo.title, detail: cellInfo.description)
+        }
+        
+        let backup = contactBackups[indexPath.row]
+        let cellInfo = prepareInfoForCellPresenting(for: backup)
+        cell.setupCell(title: cellInfo.title, detail: cellInfo.description, isSelected: backup == selectedBackup)
         cell.delegate = self
-        manageSelectionStateForCell(cell, indexPath: indexPath, isWillDisplayFunc: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                  //contactBackups[indexPath.row]
-        let item = selectedItems[indexPath.row]
-        delegate?.showDetailsForBuckupItem(item: item)
+        let item = contactBackups[indexPath.row]
+        delegate?.showDetailsForBackupItem(item: item)
         tableView.deselectRow(at: indexPath, animated: true)
      }
 }
@@ -133,12 +97,17 @@ extension ContactBackupHistoryDataManager: UITableViewDelegate {
 extension ContactBackupHistoryDataManager: ContactsBackupCellDelegate {
     
     func selectCellButtonTapped(for cell: UITableViewCell & ContactsBackupCellProtocol) {
-//        guard let indexPath = tableView.indexPath(for: cell) else {
-//            assertionFailure()
-//            return
-//        }
+        guard let indexPath = tableView.indexPath(for: cell) else {
+            assertionFailure()
+            return
+        }
 
-//        manageSelectionStateForCell(cell, indexPath: indexPath, isWillDisplayFunc: false)
+        if let backup = selectedBackup, let index = contactBackups.index(of: backup),
+           var oldSelectedCell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? ContactsBackupCellProtocol {
+            oldSelectedCell.isCellSelected = false
+        }
+        
+        selectedBackup = contactBackups[indexPath.row]
     }
 }
 

@@ -37,4 +37,8 @@ protocol PhotoVideoDetailViewOutput {
 
     func configureFileInfo(_ view: FileInfoView)
     func getPersonsForSelectedPhoto(completion: VoidHandler?)
+    
+    func tabIndex(type: ElementTypes) -> Int?
+    
+    func createNewUrl()
 }

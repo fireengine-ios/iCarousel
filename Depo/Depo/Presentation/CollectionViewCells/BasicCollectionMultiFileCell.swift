@@ -10,6 +10,7 @@ import UIKit
 
 protocol BasicCollectionMultiFileCellActionDelegate: class {
     func morebuttonGotPressed(sender: Any, itemModel: Item?)
+    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?)
 }
 
 class BasicCollectionMultiFileCell: BaseCollectionViewCell {
@@ -28,7 +29,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var fileNameLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
     
-    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var moreView: UIView!
+    @IBOutlet weak var moreButton: ExtendedTapAreaButton!
     
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
@@ -47,6 +49,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var bigSelectionView: UIView!
     @IBOutlet weak var topFavoritesStar: UIImageView!
     @IBOutlet weak var bottomFavoritesStar: UIImageView!
+    @IBOutlet weak var sharedIcon: UIImageView!
     
     
     override weak var delegate: LBCellsDelegate? {
@@ -74,6 +77,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     var filesDataSource: FilesDataSource?
     private var cellImageManager: CellImageManager?
     private var uuid: String?
+    
+    var canShowSharedIcon = true
 
     override func setImage(image: UIImage?, animated: Bool) {
         isAlreadyConfigured = true
@@ -98,8 +103,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.bigContentImageView.sd_cancelCurrentImageLoad()
-        self.smallContentImageView.sd_cancelCurrentImageLoad()
+        bigContentImageView.sd_cancelCurrentImageLoad()
+        smallContentImageView.sd_cancelCurrentImageLoad()
+        cellImageManager?.cancelImageLoading()
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
@@ -186,8 +192,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bottomFavoritesStar.isHidden = !wrappered.favorites
         if isBigSize() {
             bottomFavoritesStar.isHidden = true
+            sharedIcon.isHidden = true
         } else {
             topFavoritesStar.isHidden = true
+            sharedIcon.isHidden = !wrappered.isShared || !canShowSharedIcon
         }
     
         
@@ -198,11 +206,13 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             }
             setSelectionSmallSelectionImageView(isSelected, isHidden: isHidden)
         }
+        
+        configureMoreActionButton()
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         smallCellSelectionView.isHidden = true
-        moreButton.isHidden = isSelectionActive
+        moreView.isHidden = isSelectionActive
         smallContentImageView.isHidden = false
         
         if let isFavorite = itemModel?.favorites {
@@ -299,6 +309,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         configureSmallSelectionImageView()
         setSelectionSmallSelectionImageView(false, isHidden: true)
+        
+        sharedIcon.isHidden = true
     }
     
     override func updating() {
@@ -374,6 +386,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
     override func setImage(with url: URL) {
+        guard let item = itemModel else {
+            return
+        }
+        
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
@@ -387,8 +403,29 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(item: item, thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
         
         isAlreadyConfigured = true
+    }
+    
+    override func cleanCell() {
+        cellImageManager?.cancelImageLoading()
+    }
+    
+    private func configureMoreActionButton() {
+        if #available(iOS 14.0, *) {
+            moreButton.showsMenuAsPrimaryAction = true
+
+            guard let item = itemModel else {
+                return
+            }
+            
+            let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
+                self?.actionDelegate?.onSelectMoreAction(type: actionType, itemModel: self?.itemModel, sender: self?.moreButton)
+            }
+            moreButton.menu = menu
+        } else {
+            moreButton.addTarget(self, action: #selector(moreButtonAction(_:)), for: .touchUpInside)
+        }
     }
 }

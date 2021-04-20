@@ -7,6 +7,8 @@
 //
 
 class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
+    weak var output: PhotoVideoDetailRouterOutput?
+    
     let router = RouterVC()
 
     func onInfo(object: Item) {
@@ -48,5 +50,23 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
     func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?) {
         let vc = router.imageFacePhotosController(album: album, item: item, status: .active, moduleOutput: moduleOutput)
         router.pushViewController(viewController: vc)
+    }
+    
+    func openPrivateShare(for item: Item) {
+        let controller = router.privateShare(items: [item])
+        router.presentViewController(controller: controller)
+    }
+    
+    func openPrivateShareContacts(with shareInfo: SharedFileInfo) {
+        let controller = router.privateShareContacts(with: shareInfo)
+        router.pushViewController(viewController: controller)
+    }
+    
+    func openPrivateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) {
+        let controller = router.privateShareAccessList(projectId: projectId,
+                                                       uuid: uuid,
+                                                       contact: contact,
+                                                       fileType: fileType)
+        router.pushViewController(viewController: controller)
     }
 }

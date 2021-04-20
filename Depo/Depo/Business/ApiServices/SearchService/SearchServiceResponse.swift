@@ -31,6 +31,7 @@ struct SearchJsonKey {
     static let location = "location"
     static let foundItems = "found_items"
     static let foundItemsCount = "found_items_count"
+    static let shared = "shared"
     
     //Album
     static let albumName = "label"
@@ -193,6 +194,24 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         aCoder.encode(specialFolderMeta, forKey: SearchJsonKey.specialFolderMeta)
 //        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
     }
+    
+    init(with sharedFileMetaData: SharedFileInfoMetaData) {
+        super.init()
+        
+        favourite = sharedFileMetaData.isFavourite
+        
+        takenDate = sharedFileMetaData.imageDateTime
+        
+        smalURl = sharedFileMetaData.thumbnailSmall
+        mediumUrl = sharedFileMetaData.thumbnailMedium
+        largeUrl = sharedFileMetaData.thumbnailLarge
+        videoPreviewURL = sharedFileMetaData.videoPreview
+        
+        height = sharedFileMetaData.imageHeight ?? 0
+        width = sharedFileMetaData.imageWidth ?? 0
+        
+        specialFolderMeta = sharedFileMetaData.specialFolderMeta
+    }
 }
 
 extension BaseMetaData {
@@ -262,6 +281,7 @@ final class SearchItemResponse: ObjectRequestResponse {
     var subordinates: Array<JSON>?
     var location: Any? // TODO Add!
     var childCount: Int64?
+    var isShared = false
     
     override func mapping() {
         // it upload date
@@ -282,6 +302,7 @@ final class SearchItemResponse: ObjectRequestResponse {
         subordinates = json?[SearchJsonKey.subordinates].array
         albums = json?[SearchJsonKey.album].array?.compactMap { $0.string }
         childCount = json?[SearchJsonKey.ChildCount].int64
+        isShared = json?[SearchJsonKey.shared].bool ?? false
     }
 }
 

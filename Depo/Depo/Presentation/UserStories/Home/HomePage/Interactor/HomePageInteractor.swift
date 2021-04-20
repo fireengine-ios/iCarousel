@@ -180,7 +180,6 @@ final class HomePageInteractor: HomePageInteractorInput {
                 })
                 
                 if self?.isShowPopupAboutPremium == true {
-                    self?.output.showPopupAboutPremiumIfNeeded()
                     self?.isShowPopupAboutPremium = false
                 }
             case .failed(let error):

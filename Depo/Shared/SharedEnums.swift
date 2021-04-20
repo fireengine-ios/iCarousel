@@ -14,7 +14,14 @@ enum AutoSyncStatus: String {
     case waitingForWifi
     case prepairing
     case executing
-    case stoped
+    case stopped
     case synced
     case failed
+}
+
+enum WidgetSyncStatus: String {
+    case undetermined
+    case executing
+    case stopped
+    case synced
 }

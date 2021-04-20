@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Crashlytics
+import FirebaseCrashlytics
 import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
@@ -15,6 +15,7 @@ import Adjust
 import Netmera
 import UserNotifications
 import KeychainSwift
+import WidgetKit
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -50,13 +51,13 @@ let log: XCGLogger = {
 
 func debugLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
-    CLSLogv("%@", getVaList([string]))
+    Crashlytics.crashlytics().log(format: "%@", arguments: getVaList([string]))
 }
 
 func printLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     print(string)
     log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
-    CLSLogv("%@", getVaList([string]))
+    Crashlytics.crashlytics().log(format: "%@", arguments: getVaList([string]))
 }
 
 func fatalLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) -> Never {
@@ -107,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.backgroundSyncService.registerLaunchHandlers()
             
         }
+        
         coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return
@@ -133,6 +135,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
+        
+        SharedGroupCoreDataStack.shared.setup {
+            debugLog("SharedGroupCoreDataStack setup is completed")
+        }
     
         setupPushNotifications(with: options)
         AppConfigurator.applicationStarted(with: options)
@@ -234,6 +240,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if tokenStorage.refreshToken != nil {
             SyncServiceManager.shared.update()
         }
+        
+        
         ContactSyncSDK.doPeriodicSync()
     }
     
@@ -273,7 +281,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         } else {
             showPasscode()
-        } 
+        }
     }
     
     private func showPasscode() {
@@ -328,7 +336,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AutoSyncDataStorage().clear()
         }
         
-        WidgetService.shared.notifyWidgetAbout(status: .stoped)
+        WidgetService.shared.notifyWidgetAbout(status: .stopped)
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         
         UserDefaults.standard.synchronize()
         
@@ -387,6 +398,11 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
+            if PushNotificationService.shared.assignUniversalLink(url: url) {
+                PushNotificationService.shared.openActionScreen()
+                return true
+            }
+            
             Adjust.appWillOpen(url)
                 
             if let oldURL = Adjust.convertUniversalLink(url, scheme: SharedConstants.applicationQueriesSchemeShort) {

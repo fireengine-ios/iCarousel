@@ -80,6 +80,7 @@ protocol ItemOperationManagerViewProtocol: class {
     func didUnhideThings(items: [ThingsItem])
     
     func didMoveToTrashItems(_ items: [Item])
+    func didMoveToTrashSharedItems(_ items: [Item])
     func didMoveToTrashAlbums(_ albums: [AlbumItem])
     func didMoveToTrashPeople(items: [PeopleItem])
     func didMoveToTrashPlaces(items: [PlacesItem])
@@ -92,6 +93,12 @@ protocol ItemOperationManagerViewProtocol: class {
     func putBackFromTrashThings(items: [ThingsItem])
     
     func didEmptyTrashBin()
+    
+    func didShare(items: [BaseDataSourceItem])
+    func didEndShareItem(uuid: String)
+    func didLeaveShareItem(uuid: String)
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String)
+    func didRemove(contact: SharedContact, fromItem uuid: String)
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -172,6 +179,7 @@ extension ItemOperationManagerViewProtocol {
     func didUnhideThings(items: [ThingsItem]) {}
     
     func didMoveToTrashItems(_ items: [Item]) {}
+    func didMoveToTrashSharedItems(_ items: [Item]) {}
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {}
     func didMoveToTrashPeople(items: [PeopleItem]) {}
     func didMoveToTrashPlaces(items: [PlacesItem]) {}
@@ -184,6 +192,12 @@ extension ItemOperationManagerViewProtocol {
     func putBackFromTrashThings(items: [ThingsItem]) {}
     
     func didEmptyTrashBin() {}
+    
+    func didShare(items: [BaseDataSourceItem]) {}
+    func didEndShareItem(uuid: String) {}
+    func didLeaveShareItem(uuid: String) {}
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {}
+    func didRemove(contact: SharedContact, fromItem uuid: String) {}
 }
 
 
@@ -475,6 +489,12 @@ class ItemOperationManager: NSObject {
         }
     }
     
+    func didMoveToTrashSharedItems(_ items: [Item]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashSharedItems(items) }
+        }
+    }
+    
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.didMoveToTrashAlbums(albums) }
@@ -532,6 +552,36 @@ class ItemOperationManager: NSObject {
     func didEmptyTrashBin() {
         DispatchQueue.main.async {
             self.views.invoke { $0.didEmptyTrashBin() }
+        }
+    }
+    
+    func didShare(items: [BaseDataSourceItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didShare(items: items) }
+        }
+    }
+    
+    func didEndShareItem(uuid: String) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didEndShareItem(uuid: uuid) }
+        }
+    }
+    
+    func didLeaveShareItem(uuid: String) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didLeaveShareItem(uuid: uuid) }
+        }
+    }
+    
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didChangeRole(role, contact: contact, uuid: uuid) }
+        }
+    }
+    
+    func didRemove(contact: SharedContact, fromItem uuid: String) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didRemove(contact: contact, fromItem: uuid) }
         }
     }
 }

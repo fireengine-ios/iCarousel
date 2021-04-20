@@ -16,6 +16,7 @@ class SingletonStorage {
     
     var isAppraterInited: Bool = false
     var accountInfo: AccountInfoResponse?
+    var featuresInfo: FeaturesResponse?
     var faceImageSettings: SettingsInfoPermissionsResponse?
     var signUpInfo: RegistrationUserInfoModel?
     var activeUserSubscription: ActiveSubscriptionResponse?
@@ -65,9 +66,10 @@ class SingletonStorage {
                 if let resp = accountInfoResponse as? AccountInfoResponse {
                     self?.accountInfo = resp
                     
-                    self?.resumableUploadInfoService.updateInfo {
+                    self?.resumableUploadInfoService.updateInfo { [weak self] featuresInfo in
+                        self?.featuresInfo = featuresInfo
                         ///remove user photo from cache on start application
-                        ImageDownloder().removeImageFromCache(url: resp.urlForPhoto, completion: {
+                        ImageDownloder.removeImageFromCache(url: resp.urlForPhoto, completion: {
                             DispatchQueue.toMain {
                                 success(resp)
                             }

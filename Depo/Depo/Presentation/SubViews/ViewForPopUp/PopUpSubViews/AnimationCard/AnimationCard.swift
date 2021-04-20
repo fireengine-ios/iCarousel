@@ -35,6 +35,14 @@ class AnimationCard: BaseCardView {
         }
     }
     
+    @IBOutlet private weak var shareButton: UIButton!  {
+        didSet {
+            shareButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            shareButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var photoImageView: LoadingImageView!
     
     private var item: WrapData?
@@ -44,8 +52,10 @@ class AnimationCard: BaseCardView {
             switch cardType {
             case .save:
                 bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
+                shareButton.isHidden = true
             case .display:
                 bottomButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+                shareButton.isHidden = false
             }
         }
     }
@@ -105,6 +115,14 @@ class AnimationCard: BaseCardView {
         case .display:
             showPhotoVideoDetail()
         }
+    }
+    
+    @IBAction private func shareButtonTapped(_ sender: UIButton) {
+        guard let item = item else {
+            assertionFailure()
+            return
+        }
+        delegate?.share(item: item, type: .origin)
     }
     
     override func layoutSubviews() {

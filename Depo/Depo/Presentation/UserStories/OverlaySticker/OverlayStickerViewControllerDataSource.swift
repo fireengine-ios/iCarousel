@@ -17,11 +17,11 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     private final class State {
         var source = [SmashStickerResponse]()
         var page: Int = 0
-        var collectionViewOffset: CGPoint = .zero
-        var isPaginatingFinished: Bool = false
+        var collectionViewOffset = CGPoint(x: Device.isIpad ? -20 : -16, y: 0)
+        var isPaginatingFinished = false
     }
     
-    @IBOutlet private weak var stickersCollectionView: UICollectionView!
+    private let stickersCollectionView: UICollectionView
     
     private let paginationPageSize = 20
     private var isPaginating = false
@@ -42,6 +42,38 @@ final class OverlayStickerViewControllerDataSource: NSObject {
         return operationQueue
     }()
     
+    required init(collectionView: UICollectionView, delegate: OverlayStickerViewControllerDataSourceDelegate?) {
+        self.stickersCollectionView = collectionView
+        self.delegate = delegate
+        super.init()
+        self.setupCollectionView()
+    }
+    
+    private func setupCollectionView() {
+        stickersCollectionView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        let inset: CGFloat = Device.isIpad ? 20 : 16
+        
+        //calculate cell side
+        //we need to show last cell partly
+        let preferredSide: CGFloat = 64
+        
+        let width = Device.winSize.width - inset
+        let count = CGFloat(Int(width/(preferredSide + inset)))
+        let cellSide = (width - inset * count)/(count + 0.5)
+        
+        stickersCollectionView.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: inset)
+        stickersCollectionView.register(nibCell: StickerCollectionViewCell.self)
+        if let layout = stickersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.itemSize = CGSize(width: cellSide, height: cellSide)
+            layout.minimumLineSpacing = inset
+        }
+        stickersCollectionView.dataSource = self
+        stickersCollectionView.delegate = self
+        stickersCollectionView.showsHorizontalScrollIndicator = false
+        stickersCollectionView.heightAnchor.constraint(equalToConstant: cellSide).activate()
+    }
+    
     private var selectedAttachmentType: AttachedEntityType = .gif {
         didSet {
             switch selectedAttachmentType {
@@ -49,14 +81,15 @@ final class OverlayStickerViewControllerDataSource: NSObject {
 
                 imageState.collectionViewOffset = stickersCollectionView.contentOffset
                 stickersCollectionView.reloadData()
-                stickersCollectionView?.contentOffset = gifState.collectionViewOffset
+                stickersCollectionView.contentOffset = gifState.collectionViewOffset
                 stickersCollectionView.layoutIfNeeded()
                 
-            case .image:
+            case .sticker:
 
                 gifState.collectionViewOffset = stickersCollectionView.contentOffset
                 
                 if currentState.source.isEmpty {
+                    stickersCollectionView.reloadData()
                     loadNext()
                     
                 } else {
@@ -118,14 +151,11 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     }
         
     func setStateForSelectedType(type: AttachedEntityType) {
-        switch type {
-        case .gif:
-            selectedAttachmentType = .gif
-        case .image:
-            selectedAttachmentType = .image
-        }
+        selectedAttachmentType = type
     }
 }
+
+//MARK: - UICollectionViewDataSource
 
 extension OverlayStickerViewControllerDataSource: UICollectionViewDataSource {
     
@@ -137,6 +167,8 @@ extension OverlayStickerViewControllerDataSource: UICollectionViewDataSource {
         return collectionView.dequeue(cell: StickerCollectionViewCell.self, for: indexPath)
     }
 }
+
+//MARK: - UICollectionViewDelegate
 
 extension OverlayStickerViewControllerDataSource: UICollectionViewDelegate {
     

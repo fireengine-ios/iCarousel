@@ -183,22 +183,25 @@ extension NetmeraEvents.Actions {
         
         @objc var method = ""
         @objc var channelType = ""
+        @objc var duration = ""
         
-        convenience init(method: NetmeraEventValues.ShareMethodType, channelType: String) {
+        convenience init(method: NetmeraEventValues.ShareMethodType, channelType: String, duration: PrivateShareDuration? = nil) {
             
-            self.init(method: method.text, channelType: channelType)
+            self.init(method: method.text, channelType: channelType, duration: duration)
         }
         
-        convenience init(method: String, channelType: String) {
+        convenience init(method: String, channelType: String, duration: PrivateShareDuration? = nil) {
             self.init()
             self.method = method
             self.channelType = channelType
+            self.duration = duration?.rawValue ?? ""
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
                 "ea" : #keyPath(method),
                 "eb" : #keyPath(channelType),
+                "ee" : #keyPath(duration)
             ]
         }
         
@@ -303,7 +306,7 @@ extension NetmeraEvents.Actions {
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
                  .application(.pdf), .application(.ppt),
-                 .application(.usdz), .allDocs:
+                 .application(.usdz), .application(.pptx) ,.allDocs:
                 accaptableType = .document
             case .audio:
                 accaptableType = .music
@@ -423,7 +426,7 @@ extension NetmeraEvents.Actions {
                 acceptableType = .video
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
+                 .application(.pdf), .application(.ppt), .application(.pptx),
                  .application(.usdz), .allDocs:
                 acceptableType = .document
             case .audio:
@@ -483,7 +486,7 @@ extension NetmeraEvents.Actions {
                 acceptableType = .video
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
+                 .application(.pdf), .application(.ppt), .application(.pptx),
                  .application(.usdz), .allDocs:
                 acceptableType = .document
             case .audio:
@@ -592,7 +595,7 @@ extension NetmeraEvents.Actions {
                 appopriateFileType = .music
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
+                 .application(.pdf), .application(.ppt), .application(.pptx),
                  .application(.usdz), .allDocs:
                 appopriateFileType = .document
             default:
@@ -608,7 +611,7 @@ extension NetmeraEvents.Actions {
                 } else {
                     appopriateUploadType = .autosync
                 }
-            case .upload, .syncToUse:
+                case .upload, .syncToUse, .save, .saveAs, .sharedWithMe:
                 appopriateUploadType = .manual
             }
             
@@ -850,7 +853,7 @@ extension NetmeraEvents.Actions {
                 acceptableType = .video
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
+                 .application(.pdf), .application(.ppt), .application(.pptx),
                  .application(.usdz), .allDocs:
                 acceptableType = .document
             case .audio:
@@ -1146,6 +1149,12 @@ extension NetmeraEvents.Actions {
                 netmeraPussButtonAction = .createStory
             case .upload:
                 netmeraPussButtonAction = .upload
+            case .uploadFiles:
+                netmeraPussButtonAction = .uploadFiles
+            case .uploadDocuments:
+                netmeraPussButtonAction = .uploadFiles
+            case .uploadMusic:
+                netmeraPussButtonAction = .uploadMusic
             case .createAlbum:
                 netmeraPussButtonAction = .createAlbum
             case .uploadFromApp:
@@ -1219,4 +1228,121 @@ extension NetmeraEvents.Actions {
             return key
         }
     }
+    
+    final class PhotoEditApplyAdjustment: NetmeraEvent {
+        private let key = "mov"
+        @objc var selection = ""
+        @objc var filterType = ""
+        @objc var action = ""
+
+        convenience init(selection: NetmeraEventValues.PhotoEditAdjustmentType, filterType: String, action: NetmeraEventValues.PhotoEditActionType) {
+            self.init()
+            self.selection = selection.text
+            self.filterType = filterType
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(selection),
+                "eb" : #keyPath(filterType),
+                "ee" : #keyPath(action)
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PhotoEditApplyFilter: NetmeraEvent {
+        private let key = "cdw"
+        @objc var filterType = ""
+        @objc var action = ""
+
+        convenience init(filterType: String, action: NetmeraEventValues.PhotoEditActionType) {
+            self.init()
+            self.filterType = filterType
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(filterType),
+                "eb" : #keyPath(action)
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PhotoEditComplete: NetmeraEvent {
+        private let key = "nsg"
+        @objc var status = ""
+        @objc var selection = ""
+
+        convenience init(status: NetmeraEventValues.GeneralStatus, selection: NetmeraEventValues.PhotoEditType) {
+            self.init()
+            self.status = status.text
+            self.selection = selection.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+                "eb" : #keyPath(selection)
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PhotoEditButtonAction: NetmeraEvent {
+        private let key = "jpj"
+        @objc var buttonName = ""
+
+        convenience init(buttonName: NetmeraEventValues.PhotoEditButton) {
+            self.init()
+            self.buttonName = buttonName.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(buttonName)
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class SeeAllSharedEvent: NetmeraEvent {
+        private let key = "wpr"
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class EndShareEvent: NetmeraEvent {
+        private let key = "xay"
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class LeaveShareEvent: NetmeraEvent {
+        private let key = "zvw"
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+
 }

@@ -51,9 +51,17 @@ final class Mail: NSObject, MFMailComposeViewControllerDelegate {
         
 
         let logPath: String = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName).path
+        let widgetLogUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: SharedConstants.groupIdentifier)?.appendingPathComponent("home_widget.log")
+        
         if FileManager.default.fileExists(atPath: logPath) {
             if let logData = NSData(contentsOfFile: logPath) {
                 mailController?.addAttachmentData(Data(referencing: logData), mimeType: "text/plain", fileName: "logs.txt")
+            }
+        }
+        
+        if let widgetLogPath = widgetLogUrl?.path, FileManager.default.fileExists(atPath: widgetLogPath) {
+            if let logData = NSData(contentsOfFile: widgetLogPath) {
+                mailController?.addAttachmentData(Data(referencing: logData), mimeType: "text/plain", fileName: "widget_logs.txt")
             }
         }
         

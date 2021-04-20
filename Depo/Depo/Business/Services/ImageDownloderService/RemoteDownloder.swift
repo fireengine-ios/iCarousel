@@ -11,6 +11,67 @@ import SDWebImage
 
 class ImageDownloder {
     
+    static func removeImagesFromCache(urls: [URL?], completion: @escaping VoidHandler) {
+        let existedUrls = urls.compactMap { $0 }
+        
+        guard !existedUrls.isEmpty else {
+            completion()
+            return
+        }
+        
+        let group = DispatchGroup()
+        existedUrls.forEach {
+            group.enter()
+            
+            removeImageFromCache(url: $0) {
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main, execute: completion)
+    }
+    
+    static func replaceImagesInCache(urls: [URL], images: [UIImage], completion: @escaping VoidHandler) {
+        guard !urls.isEmpty, urls.count == images.count else {
+            completion()
+            return
+        }
+        
+        removeImagesFromCache(urls: urls) {
+            let group = DispatchGroup()
+            
+            for i in 0..<urls.count {
+                group.enter()
+                guard let cachePath = urls[i].byTrimmingQuery?.absoluteString else {
+                    //TODO: check if it's possible that group will notify earlier
+                    group.leave()
+                    return
+                }
+                
+                let image = images[i]
+                SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: {
+                    group.leave()
+                })
+            }
+            
+            group.notify(queue: .main, execute: completion)
+        }
+    }
+    
+    static func removeImageFromCache(url: URL?, completion: @escaping VoidHandler) {
+        guard
+            let trimmedUrl = url?.byTrimmingQuery?.absoluteString,
+            let imageCache = SDWebImageManager.shared().imageCache
+        else {
+            completion()
+            return
+        }
+        
+        imageCache.removeImage(forKey: trimmedUrl, withCompletion: completion)
+    }
+    
+    
+    
     private let downloder: SDWebImageDownloader
     
     private var tokenList = SynchronizedDictionary<URL,SDWebImageOperation>()
@@ -46,6 +107,39 @@ class ImageDownloder {
                                             }
                                             
                                             completeImage(image)
+        }
+        
+        guard let downloadItem = item else {
+            return
+        }
+        
+        tokenList = tokenList + [path : downloadItem]
+    }
+    
+    func getImageData(patch: URL?, completeData: @escaping RemoteData) {
+        
+        guard let path = patch, let cachePath = path.byTrimmingQuery?.absoluteString else {
+            DispatchQueue.main.async {
+                completeData(nil)
+            }
+            return
+        }
+
+        if let imageData = SDWebImageManager.shared().imageCache?.diskImageData(forKey: cachePath) {
+            DispatchQueue.main.async {
+                completeData(imageData)
+            }
+            return
+        }
+        
+        let item = downloder.downloadImage(with: patch,
+                                           options: [.lowPriority/*,.useNSURLCache*/],
+                                           progress: nil) { image, data, error, bool in
+                                            if let data = data {
+                                                SDWebImageManager.shared().imageCache?.storeImageData(toDisk: data, forKey: cachePath)
+                                            }
+                                            
+                                            completeData(data)
         }
         
         guard let downloadItem = item else {
@@ -233,19 +327,6 @@ class ImageDownloder {
                     })
                 }
             })
-        }
-    }
-    
-    func removeImageFromCache(url: URL?, completion: @escaping () -> Void) {
-        var cachePath: String?
-        if let path = url?.absoluteString, let query = url?.query, let imageCache = SDWebImageManager.shared().imageCache {
-            cachePath = path.replacingOccurrences(of: "?"+query, with: "")
-            
-            imageCache.removeImage(forKey: cachePath, withCompletion: {
-                completion()
-            })
-        } else {
-            completion()
         }
     }
     

@@ -46,13 +46,22 @@ final class PushNotificationService {
         }
                 
         guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
-            assertionFailure("unowned push type")
+            //assertionFailure("unowned push type")
             debugLog("PushNotificationService received deepLink with unowned type \(String(describing: actionString))")
             return false
         }
         
         debugLog("PushNotificationService received deepLink with type \(actionString)")
         parse(options: options, action: notificationAction)
+        return true
+    }
+    
+    func assignUniversalLink(url: URL) -> Bool {
+        guard let path = url.absoluteString.components(separatedBy: "#!/").last, let action = UniversalLinkPath(rawValue: path)?.action else {
+            return false
+        }
+        debugLog("PushNotificationService received universal link with type \(action.rawValue)")
+        parse(options: nil, action: action)
         return true
     }
     
@@ -77,24 +86,31 @@ final class PushNotificationService {
             return
         }
         
+        trackIfNeeded(action: action)
+        
         let isLoggedIn = tokenStorage.accessToken != nil
         if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
         }
+        
+        if isLoggedIn && action.isContained(in: [.login, .widgetLogout]) {
+            clear()
+            return
+        }
                 
         switch action {
         case .main, .home: openMain()
-        case .syncSettings: openSyncSettings()
+        case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
         case .floatingMenu: openFloatingMenu()
-        case .packages: openPackages()
-        case .photos: openPhotos()
+        case .packages, .widgetQuota: openPackages()
+        case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: openPhotos()
         case .videos: openVideos()
         case .albums: openAlbums()
         case .stories: openStories()
         case .allFiles: openAllFiles()
         case .music: openMusic()
         case .documents: openDocuments()
-        case .contactSync: openContactSync()
+        case .contactSync, .widgetNoBackup, .widgetOldBackup: openContactSync()
         case .periodicContactSync: openPeriodicContactSync()
         case .favorites: openFavorites()
         case .createStory: openCreateStory()
@@ -108,16 +124,21 @@ final class PushNotificationService {
         case .faq: openFaq()
         case .passcode: openPasscode()
         case .loginSettings: openLoginSettings()
-        case .faceImageRecognition: openFaceImageRecognition()
-        case .people: openPeople()
+        case .faceImageRecognition, .widgetFIRDisabled: openFaceImageRecognition()
+        case .people, .widgetFIR: openPeople()
         case .things: openThings()
         case .places: openPlaces()
         case .http: openURL(notificationParameters)
-        case .login:
+        case .login, .widgetLogout:
             openLogin()
             clear()
         case .search: openSearch()
-        case .freeUpSpace: break
+        case .freeUpSpace, .widgetFreeUpSpace:
+            if FreeAppSpace.session.state == .finished && CacheManager.shared.isCacheActualized {
+                openFreeUpSpace()
+            } else {
+                openMain()
+            }
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
         case .changePassword: openChangePassword()
@@ -135,8 +156,10 @@ final class PushNotificationService {
                 openSupport(type: action == .supportFormSignup ? .signup : .login)
             }
         case .trashBin:
-            openTabBarItem(index: .documentsScreenIndex, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
+            openTrashBin()
         case .hiddenBin: openHiddenBin()
+        case .sharedWithMe: openSharedWithMe()
+        case .sharedByMe: openShareByMe()
         }
         
         
@@ -162,8 +185,18 @@ final class PushNotificationService {
         }
         
         DispatchQueue.main.async {
-            if self.router.topNavigationController?.presentedViewController != nil {
-                self.router.pushOnPresentedView(viewController: controller)
+            if let navigationController = self.router.topNavigationController {
+                if navigationController.presentedViewController != nil {
+                    self.router.pushOnPresentedView(viewController: controller)
+                } else if !(controller is SegmentedController), let existController = navigationController.viewControllers.first(where: { type(of: $0) == type(of: controller) }) {
+                    //TODO: add check child segments and refresh data protocol for update pages
+                    if existController == navigationController.viewControllers.last {
+                        return
+                    }
+                    navigationController.popToViewController(existController, animated: false)
+                } else {
+                    self.router.pushViewController(viewController: controller)
+                }
             } else {
                 self.router.pushViewController(viewController: controller)
             }
@@ -177,14 +210,14 @@ final class PushNotificationService {
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .homePageScreenIndex:
+            case .home:
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
                 }
                 tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue
-            case .contactsSyncScreenIndex, .documentsScreenIndex://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+            case .contactsSync, .documents://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
                 guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
                     assertionFailure("This index is non existent 😵")
                     return
@@ -197,20 +230,26 @@ final class PushNotificationService {
                     segmentedController.switchSegment(to: segmentIndex)
                 }
                 
-            case .photosScreenIndex:
+            case .gallery:
                 tabBarVC.showPhotoScreen()
             }
+        } else {
+            tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
     }
     
     //MARK: - Actions
     
     private func openLogin() {
+        if let navigationController = router.topNavigationController, navigationController.viewControllers.contains(where: { $0 is RegistrationViewController }) {
+            return
+        }
+        
         pushTo(router.loginScreen)
     }
     
     private func openMain() {
-        openTabBarItem(index: .homePageScreenIndex)
+        openTabBarItem(index: .home)
     }
     
     private func openSyncSettings() {
@@ -230,7 +269,7 @@ final class PushNotificationService {
     }
     
     private func openPhotos() {
-        openTabBarItem(index: .photosScreenIndex)
+        openTabBarItem(index: .gallery)
     }
     
     private func openVideos() {
@@ -246,27 +285,31 @@ final class PushNotificationService {
     }
     
     private func openAllFiles() {
-        pushTo(router.allFiles(moduleOutput: nil, sortType: .AlphaBetricAZ, viewType: .List))
-    }
-    
-    private func openMusic() {
-        pushTo(router.musics)
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
     }
     
     private func openDocuments() {
-        openTabBarItem(index: .documentsScreenIndex)
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.documents.rawValue)
+    }
+    
+    private func openMusic() {
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.music.rawValue)
+    }
+    
+    private func openFavorites() {
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
+    }
+
+    private func openTrashBin() {
+        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
     }
     
     private func openContactSync() {
-        openTabBarItem(index: .contactsSyncScreenIndex)
+        openTabBarItem(index: .contactsSync)
     }
     
     private func openPeriodicContactSync() {
         pushTo(router.periodicContactsSync)
-    }
-    
-    private func openFavorites() {
-        pushTo(router.favorites(moduleOutput: nil, sortType: .AlphaBetricAZ, viewType: .List))
     }
     
     private func openCreateStory() {
@@ -430,6 +473,32 @@ final class PushNotificationService {
     
     private func openHiddenBin() {
         let controller = router.hiddenPhotosViewController()
+        pushTo(controller)
+    }
+    
+    private func trackIfNeeded(action: PushNotificationAction) {
+        guard action.fromWidget else {
+            return
+        }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openWithWidget, eventLabel: .success)
+    }
+    
+    private func openSharedWithMe() {
+        openSharedController(type: .withMe)
+    }
+    
+    private func openShareByMe() {
+        openSharedController(type: .byMe)
+    }
+    
+    private func openSharedController(type: PrivateShareType) {
+        guard let controller = router.sharedFiles as? SegmentedController,
+              let index = controller.viewControllers.firstIndex(where: { ($0 as? PrivateShareSharedFilesViewController)?.shareType == type }) else {
+            return
+        }
+        controller.loadViewIfNeeded()
+        controller.switchSegment(to: index)
         pushTo(controller)
     }
 }

@@ -10,9 +10,37 @@ import UIKit
 import YYImage
 import ImageIO
 
-enum AttachedEntityType {
+enum AttachedEntityType: CaseIterable {
     case gif
-    case image
+    case sticker
+    
+    var title: String {
+        switch self {
+        case .gif:
+            return TextConstants.funGif
+        case .sticker:
+            return TextConstants.funSticker
+        }
+    }
+    
+    private var templateImage: UIImage? {
+        let imageName: String
+        switch self {
+        case .gif:
+            imageName = "gif"
+        case .sticker:
+            imageName = "sticker"
+        }
+        return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    var normalImage: UIImage? {
+        templateImage?.mask(with: .white)
+    }
+    
+    var selectedImage: UIImage? {
+        templateImage?.mask(with: .lrTealish)
+    }
 }
 
 enum CreateOverlayResultType {
@@ -34,10 +62,9 @@ struct CreateOverlayStickersSuccessResult {
     let type: CreateOverlayResultType
 }
 
-typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>
-
 protocol OverlayStickerImageViewDelegate: class {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool)
+    func didDeleteAttachments(_ attachments: [SmashStickerResponse])
 }
 
 final class OverlayStickerImageView: UIImageView {
@@ -69,6 +96,10 @@ final class OverlayStickerImageView: UIImageView {
     private let downloader = ImageDownloder()
     private lazy var impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
     private var isImpactOccurred: Bool =  false
+    
+    var hasStickers: Bool {
+        !attachments.isEmpty
+    }
     
     private let trashBinLayer: CALayer = {
         let trashBinLayer = CALayer()
@@ -239,8 +270,10 @@ final class OverlayStickerImageView: UIImageView {
                 UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn, animations: {
                     selectedSticker.alpha = 0
                 }) { [weak self] _ in
+                    let deletedAttachments = self?.attachments.filter { $0.imageView === selectedSticker }.map { $0.item } ?? []
                     self?.attachments.removeAll(where: { $0.imageView === selectedSticker })
                     selectedSticker.removeFromSuperview()
+                    self?.stickersDelegate?.didDeleteAttachments(deletedAttachments)
                 }
             }
             
@@ -345,7 +378,7 @@ final class OverlayStickerImageView: UIImageView {
             msg.append("\(items.count)")
             if key.type == .gif {
                 msg.append("G")
-            } else{
+            } else {
                 msg.append("S")
             }
             msg.append("\(key.id)")

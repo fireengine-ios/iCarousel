@@ -4,31 +4,43 @@
 
 /***** PROJECT variables  BEGIN ******/
 
-agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
+agentName = 'devops-dss-js-ios-12' // The mac mini assigned to this project
 apps = [ 
-[
-            name: 'lifebox',// name will be the base filename of the app
-            versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
+// [
+//             name: 'lifebox',// name will be the base filename of the app
+//             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
+//             ictsContainerId: '743', // ICT Store
+//             prodTeamID: '693N5K66ZJ',
+// 	          xcodeSchema: 'TC_Depo_LifeTech',
+//             xcodeTarget: 'TC_Depo_LifeTech',
+//             // xcodeSchema: 'TC_Depo_LifeTech_Bundle',
+//             // xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+//             itcTeamId: '121548574',
+//         ]
+// ,
+// [
+//            name: 'Billo',// name will be the base filename of the app
+//            versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
+//           ictsContainerId: '966', // ICT Store
+//            appleId: '1488914348',
+//            prodTeamID: '729CGH4BJD',
+//            itcTeamId: '118347642',
+// 	    //xcodeSchema: // Defaults to app name
+//            //xcodeTarget: // Defaults to app name
+//            // xcodeSchema: 'Billo_Bundle', 
+//            // xcodeTarget: 'Billo_Bundle'  
+//        ]
+//        ,
+       [
+            name: 'lifebox_business',// name will be the base filename of the app
+            versionInfoPath: 'Depo/LifeBox_Business/Signing/Turkcell/TC_LifeBox_Business-Info.plist',
             ictsContainerId: '743', // ICT Store
-            appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
             prodTeamID: '693N5K66ZJ',
-	    xcodeSchema: 'TC_Depo_LifeTech',
-            xcodeTarget: 'TC_Depo_LifeTech',
-            //xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            //xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+            xcodeSchema: 'lifeBox_Business',
+            xcodeTarget: 'lifeBox_Business',
+            // xcodeSchema: 'lifeBox_Business',
+            // xcodeTarget: 'lifeBox_Business',
             itcTeamId: '121548574',
-        ],
- [
-            name: 'lifedrive',// name will be the base filename of the app
-            versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
-            ictsContainerId: '966', // ICT Store
-            appleId: '1488914348',
-            prodTeamID: '729CGH4BJD',
-            itcTeamId: '118347642',
-	    //xcodeSchema: // Defaults to app name
-            //xcodeTarget: // Defaults to app name
-            //xcodeSchema: 'lifedrive_Bundle', 
-            //xcodeTarget: 'lifedrive_Bundle'  
         ]
 ]
 derivedDir = 'lifebox'
@@ -40,10 +52,10 @@ ictsDeployers = "EXT02D9926" // To enable, uncomment submitters in approval stag
 testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval stage code
 
 // Email notification
-devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
+devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr;Aleksandr.Pestriakov@life.com.by"
 
 xcodeParams = [
-        xcodeApp: '11.6',
+        xcodeApp: '12.0',
         workspaceFile: 'Depo/Depo'
 ]
 
@@ -65,8 +77,10 @@ def flavors = [
 artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-isDev = branchName == 'pre_release_v2'
+isDev = branchName == 'dev_friendly'
 echo "Branch Name: ${branchName}"
+
+isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName.startsWith('release_lifeBoxBusiness_')
 
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${app.versionInfoPath}"
@@ -81,6 +95,13 @@ def readVersion = { app ->
 
     echo "Building app: ${app.name} version: ${app.version}"
 }
+
+// def testBuild = {
+// 	echo "!!!!test build"
+//     //sh "rm -f '${WORKSPACE}/${app.name}-logs/*'"
+// 	sh "xcodebuild -workspace "Depo.xcworkspace" -scheme "TC_Depo_LifeTech_Bundle""
+// 	echo "target ${app.xcodeTarget}"
+// }
 
 def runXcode = { app, flavorId ->
     def flavor = flavors[flavorId]
@@ -171,7 +192,7 @@ def publishToArtifactory = { app, classifier ->
     def uploadSpec = """{
         "files": [
             {
-            "pattern": "${outputsDir}/${app.name}-*.ipa",
+            "pattern": "${outputsDir}/${app.name}*.ipa",
             "target": "${artifactPath}/${artifactName}.ipa"
             },
             {
@@ -211,7 +232,7 @@ def deployToTestflight = { app ->
 
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-        ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
+        source ~/.bash_profile; fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
     """
 }
 
@@ -253,10 +274,11 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod install;"//" --repo-update;" // gem update cocoapods;// --repo-update occasionally
                         apps.each { app ->
-                            runXcode(app, 'test')
-                            publishToArtifactory(app, 'test')
+				// testBuild()
+                            // runXcode(app, 'test')
+                            // publishToArtifactory(app, 'test')
                         }
                     }
                 }
@@ -271,6 +293,7 @@ pipeline {
         }
         stage('Approve Deploy to ICT Store') {
             options { timeout(time: 24, unit: 'HOURS') }
+            when { expression { !isSkipApproval } }
             steps {
                 script {
                     try {
@@ -289,15 +312,19 @@ pipeline {
         stage('Deploying to ICT Store') {
             when {
                 beforeAgent true
-                environment name: 'DEPLOY_TO', value: 'ICT Store'
+                anyOf{
+                    environment name: 'DEPLOY_TO', value: 'ICT Store'
+                    expression { isSkipApproval }
+                }
             }
-            agent { label 'devops-dss-js-default' }
+            agent { label agentName }
             options {
                 skipDefaultCheckout true
             }
             steps {
                 script {
-                    apps.each deployToIctStore
+                    echo "Skipping ICTStore Deploy..."
+                   // apps.each deployToIctStore
                 }
             }
 			post {
@@ -310,6 +337,7 @@ pipeline {
         }
         stage('Approve Build for Appstore') {
             options { timeout(time: 24, unit: 'HOURS') }
+            when { expression { !isSkipApproval } }
             steps {
                 script {
                     try {
@@ -328,7 +356,10 @@ pipeline {
         stage('Build for Appstore') {
             when {
                 beforeAgent true
-                environment name: 'BUILD_TARGET', value: 'Appstore'
+                anyOf{
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                    expression { isSkipApproval }
+                }
             }
             agent { label agentName }
             options {
@@ -340,6 +371,7 @@ pipeline {
             steps {
                 script {
                     apps.each { app ->
+			// testBuild()
                         runXcode(app, 'prod')
                         publishToArtifactory(app, 'prod')
                     }
@@ -357,7 +389,10 @@ pipeline {
             options { timeout(time: 24, unit: 'HOURS') }
             when {
                 beforeAgent true
-                environment name: 'BUILD_TARGET', value: 'Appstore'
+                anyOf{
+                    expression { !isSkipApproval }
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                }
             }
             steps {
                 script {
@@ -378,7 +413,10 @@ pipeline {
         stage('Deploy to Testflight') {
             when {
                 beforeAgent true
-                environment name: 'DEPLOY_TO', value: 'Testflight'
+                anyOf{
+                	environment name: 'DEPLOY_TO', value: 'Testflight'
+                    expression { isSkipApproval }
+                }
             }
             agent { label agentName }
             options {
@@ -387,20 +425,18 @@ pipeline {
             environment {
                 IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight-generic')
+                TESTFLIGHT_UPLOAD = credentials('testflight_appSpesific')
                 FASTLANE_DONT_STORE_PASSWORD = 1
+                FASTLANE_SESSION = credentials('fastlane_session')
            }
             steps {
                 script {
                     sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
                     def failReasons = [:]
                     apps.each { app ->
-                        try {
-                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {           
+                        try {         
                                 env.FASTLANE_ITC_TEAM_ID="${app.itcTeamId}"
                                 deployToTestflight app
-                            }
-
                         } catch (Exception e) {
                             failReasons[app.name] = e.message
                         }

@@ -160,8 +160,7 @@ class RouterVC: NSObject {
     
     func pushViewController(viewController: UIViewController, animated: Bool = true) {
         if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         if let navController = topNavigationController {
@@ -179,8 +178,7 @@ class RouterVC: NSObject {
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
         if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
@@ -194,8 +192,7 @@ class RouterVC: NSObject {
     
     func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
         if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
-            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
-            NotificationCenter.default.post(name: notificationName, object: nil)
+            NotificationCenter.default.post(name: .hideTabBar, object: nil)
         }
         
         var viewControllersStack = navigationController?.viewControllers ?? []
@@ -389,6 +386,23 @@ class RouterVC: NSObject {
         return false
     }
     
+    
+    var sharedFolderItem: PrivateSharedFolderItem? {
+        guard
+            let tabBarVC = tabBarController,
+            let navVC = tabBarVC.activeNavigationController,
+            let controller = navVC.topViewController as? PrivateShareSharedFilesViewController
+        else {
+            return nil
+        }
+
+        if case let PrivateShareType.innerFolder(type: _, folderItem: folder) = controller.shareType {
+            return folder
+        }
+        
+        return nil
+    }
+    
     // MARK: Splash
     
     var splash: UIViewController? {
@@ -475,7 +489,7 @@ class RouterVC: NSObject {
         return DeleteDuplicatesViewController.with(contacts: analyzeResponse)
     }
     
-    func contactList(backUpInfo: ContactSync.SyncResponse, delegate: ContactListViewDelegate?) -> UIViewController {
+    func contactList(backUpInfo: ContactBackupItem, delegate: ContactListViewDelegate?) -> UIViewController {
         return ContactListViewController.with(backUpInfo: backUpInfo, delegate: delegate)
     }
     
@@ -483,8 +497,8 @@ class RouterVC: NSObject {
         return ContactListDetailViewController.with(contact: contact)
     }
     
-    func backupHistory(backUpInfo: ContactSync.SyncResponse) -> UIViewController {
-        return ContactsBackupHistoryController(with: backUpInfo)
+    func backupHistory() -> UIViewController {
+        return ContactsBackupHistoryController()
     }
     
     // MARK: Terms
@@ -582,13 +596,35 @@ class RouterVC: NSObject {
         return controller
     }
     
+    var shareByMeSegment: UIViewController {
+        let controller = PrivateShareSharedFilesViewController.with(shareType: .byMe)
+        controller.segmentImage = .sharedByMe
+        return controller
+    }
+    
     var segmentedFiles: UIViewController? {
         guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()
         }
-        let controllers = [allFiles, documents, musics, favorites, trashBin]
-        return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
+        let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
+        return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
+    }
+    
+    var sharedFiles: UIViewController {
+        return SegmentedController.initWithControllers([sharedWithMe, sharedByMe], alignment: .center)
+    }
+    
+    var sharedWithMe: UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .withMe)
+    }
+    
+    var sharedByMe: UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .byMe)
+    }
+    
+    func sharedFolder(rootShareType: PrivateShareType, folder: PrivateSharedFolderItem) -> UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, folderItem: folder))
     }
     
     // MARK: Music Player
@@ -663,7 +699,12 @@ class RouterVC: NSObject {
     // MARK: Create Folder
     
     func createNewFolder(rootFolderID: String?, isFavorites: Bool = false) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
+        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
+        return controller
+    }
+    
+    func createNewFolderSharedWithMe(parameters: CreateFolderSharedWithMeParameters) -> UIViewController {
+        let controller = SelectNameModuleInitializer.with(parameters: parameters)
         return controller
     }
     
@@ -671,7 +712,7 @@ class RouterVC: NSObject {
     // MARK: Create Album
     
     func createNewAlbum(moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName, moduleOutput: moduleOutput)
+        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectAlbumName, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -1192,7 +1233,7 @@ class RouterVC: NSObject {
             segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
         }
         
-        let index = TabScreenIndex.documentsScreenIndex.rawValue
+        let index = TabScreenIndex.documents.rawValue
         if tabBarVC.selectedIndex == index {
             switchToTrashBin()
         } else {
@@ -1204,5 +1245,21 @@ class RouterVC: NSObject {
             tabBarVC.selectedIndex = index - 1
             switchToTrashBin()
         }
+    }
+    
+    func privateShare(items: [WrapData]) -> UIViewController {
+        let shareController = PrivateShareViewController.with(items: items)
+        let navigationController = NavigationController(rootViewController: shareController)
+        navigationController.modalTransitionStyle = .coverVertical
+        navigationController.modalPresentationStyle = .fullScreen
+        return navigationController
+    }
+    
+    func privateShareContacts(with shareInfo: SharedFileInfo) -> UIViewController {
+        PrivateShareContactsViewController.with(shareInfo: shareInfo)
+    }
+    
+    func privateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> UIViewController {
+        PrivateShateAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
     }
 }

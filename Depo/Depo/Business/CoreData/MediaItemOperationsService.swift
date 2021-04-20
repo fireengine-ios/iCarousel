@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Photos
 
 typealias WrapObjectsCallBack = (_ items: [WrapData]) -> Void
+typealias WrapObjectCallBack = (_ item: WrapData?) -> Void
 typealias BaseDataSourceItems = (_ baseDSItems: [BaseDataSourceItem]) -> Void
 typealias MediaItemsCallBack = (_ mediaItems: [MediaItem]) -> Void
 typealias MediaItemCallback = (_ mediaItem: MediaItem?) -> Void
@@ -203,6 +203,42 @@ final class MediaItemOperationsService {
         }
     }
     
+    func itemByUUID(uuid: String, context: NSManagedObjectContext? = nil, completion: @escaping WrapObjectCallBack) {
+        let context = context ?? coreDataStack.newChildBackgroundContext
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.uuid) = %@", uuid)
+        executeRequest(predicate: predicate, context: context) { items in
+            guard let item = items.first else {
+                completion(nil)
+                return
+            }
+            completion(WrapData(mediaItem: item))
+        }
+    }
+    
+    func remoteItemBy(trimmedId: String, context: NSManagedObjectContext? = nil, completion: @escaping WrapObjectCallBack) {
+        let context = context ?? coreDataStack.newChildBackgroundContext
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.trimmedLocalFileID) = %@", trimmedId)
+        executeRequest(predicate: predicate, context: context) { items in
+            guard let item = items.first else {
+                completion(nil)
+                return
+            }
+            completion(WrapData(mediaItem: item))
+        }
+    }
+    
+    func localItemBy(trimmedId: String, context: NSManagedObjectContext? = nil, completion: @escaping WrapObjectCallBack) {
+        let context = context ?? coreDataStack.newChildBackgroundContext
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.trimmedLocalFileID) = %@", trimmedId)
+        executeRequest(predicate: predicate, context: context) { items in
+            guard let item = items.first else {
+                completion(nil)
+                return
+            }
+            completion(WrapData(mediaItem: item))
+        }
+    }
+    
     // MARK: - MediaItemOperations
     
     //TODO: check the usefullness of it/or need of refactor
@@ -236,6 +272,10 @@ final class MediaItemOperationsService {
                     }
                     savedItem.objectSyncStatus = NSSet(array: array)
                     
+                    if let identifier = savedItem.localFileID {
+                        SharedGroupCoreDataStack.shared.save(isSynced: true, localIdentifiers: [identifier], completion: {/*updated somwhere else*/})
+                    }
+                    
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
                 
@@ -251,6 +291,28 @@ final class MediaItemOperationsService {
                 }
 
                 self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
+            }
+        }
+    }
+    
+    func replaceItem(uuid: String, with item: WrapData, completion: @escaping VoidHandler) {
+        coreDataStack.performBackgroundTask { [weak self] context in
+            guard let self = self else {
+                completion()
+                return
+            }
+            
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.uuid) = %@", uuid)
+            
+            self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
+                guard let self = self, let remote = mediaItems.first else {
+                    completion()
+                    return
+                }
+                
+                remote.copyInfo(item: item, context: context)
+                
+                self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
             }
         }
     }
@@ -288,8 +350,8 @@ final class MediaItemOperationsService {
     }
     
     func mediaItems(by localId: String,
-                            context: NSManagedObjectContext,
-                            mediaItemsCallBack: @escaping MediaItemsCallBack) {
+                    context: NSManagedObjectContext,
+                    mediaItemsCallBack: @escaping MediaItemsCallBack) {
         let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) = %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", localId)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
@@ -387,20 +449,20 @@ final class MediaItemOperationsService {
         let context = coreDataStack.newChildBackgroundContext
     
         let inRangePredicate = createInRangePredicate(fileType: fileType, topInfo: topInfo, bottomInfo: bottomInfo)
-        
+        debugLog("RangeAPI DB updateRemoteItems")
         executeSortedRequest(predicate: inRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
             debugPrint("--- remotes in date range count \(remoteItems.count)")
-            debugPrint("--- count of already saved in date range \(inDateRangeItems.count)")
+            debugLog("--- count of already saved in date range \(inDateRangeItems.count)")
             
             let inDateRangeItemIds = inDateRangeItems.compactMap { $0.idValue }
             let inIdRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.idValue) IN %@ AND NOT \(MediaItem.PropertyNameKey.idValue) IN %@", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItemIds)
             
             self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
-                debugPrint("--- count of already saved in id range \(inIdRangeItems.count)")
+                debugLog("--- count of already saved in id range \(inIdRangeItems.count)")
                 
                 var allSavedItems = (inDateRangeItems + inIdRangeItems).compactMap { WrapData(mediaItem: $0) }
-                debugPrint("--- count of already saved TOTAL count \(allSavedItems.count)")
+                debugLog("--- count of already saved TOTAL count \(allSavedItems.count)")
                 
                 var deletedItems = [WrapData]()
                 var newSavedItems = [WrapData]()
@@ -426,6 +488,9 @@ final class MediaItemOperationsService {
                 }
 
                 deletedItems.append(contentsOf: allSavedItems)
+                
+                debugLog("RangeAPI DB allSavedItems \(allSavedItems.count)")
+                debugLog("RangeAPI DB deletedItems \(deletedItems.count)")
                 
                 group.enter()
                 
@@ -461,8 +526,16 @@ final class MediaItemOperationsService {
     }
     
     private func createInRangePredicate(fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo) -> NSCompoundPredicate {
-        let inDateRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.sortingDate) != Nil AND (\(MediaItem.PropertyNameKey.sortingDate) <= %@ AND \(MediaItem.PropertyNameKey.sortingDate) >= %@)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate)
         
+        let filetypePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false", fileType.valueForCoreDataMapping())
+        
+        let takenDatePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.sortingDate) != Nil AND \(MediaItem.PropertyNameKey.sortingDate) <= %@ AND \(MediaItem.PropertyNameKey.sortingDate) >= %@", topInfo.date as NSDate, bottomInfo.date as NSDate)
+        //TODO: check why Can has problems after prep
+//        let cretedDatePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.creationDateValue) != Nil AND \(MediaItem.PropertyNameKey.creationDateValue) <= %@ AND \(MediaItem.PropertyNameKey.creationDateValue) >= %@", topInfo.date as NSDate, bottomInfo.date as NSDate)
+//
+//        let takenOrCreatedDatePredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [takenDatePredicate, cretedDatePredicate])
+        let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filetypePredicate, takenDatePredicate])
+
         let inIdRangePredicate: NSPredicate
         if topInfo.date != bottomInfo.date {
             inIdRangePredicate = NSPredicate(value: true)
@@ -480,7 +553,7 @@ final class MediaItemOperationsService {
             }
         }
         
-       return NSCompoundPredicate(andPredicateWithSubpredicates: [inDateRangePredicate, inIdRangePredicate])
+       return NSCompoundPredicate(andPredicateWithSubpredicates: [finalPredicate, inIdRangePredicate])
     }
     
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {
@@ -522,7 +595,8 @@ final class MediaItemOperationsService {
                 MediaItemOperationsService.shared.deleteLocalFiles(completion: { _ in
                     completion?()
                 })
-            case .authorized:
+            //TODO: uncomment for xcode 12
+            case .authorized, .limited:
                 self?.processLocalGallery(completion: completion)
             case .restricted, .notDetermined:
                 break
@@ -715,6 +789,7 @@ final class MediaItemOperationsService {
                         context.perform {
                             let invalidItems = info.filter { !$0.isValid }.map { $0.asset.localIdentifier }
                             printLog("iCloud: removing \(invalidItems.count) items")
+                            
                             self.removeLocalMediaItems(with: invalidItems, completion: {})
                         }
                     })
@@ -791,6 +866,7 @@ final class MediaItemOperationsService {
             completion()
             return
         }
+        
         coreDataStack.performBackgroundTask { [weak self] context in
             guard let `self` = self else {
                 completion()
@@ -1016,6 +1092,29 @@ final class MediaItemOperationsService {
             
             completion(AppMigrator.migrateSyncStatus(for: wrappedItems))
         })
+    }
+    
+    func allUnsyncedLocalIds(completion: @escaping ValueHandler<[String]>) {
+        debugLog("allLocalItemsForSync")
+        getUnsyncedMediaItems(video: true, image: true, completion: { items in
+            let unsyncedLocalIds = items
+                .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
+                .compactMap { $0.localFileID }
+            
+            completion(unsyncedLocalIds)
+        })
+    }
+    
+    func allLocalIds(subtractingIds: [String], completion: @escaping ValueHandler<[String]>) {
+        let filesTypesArray = [FileType.video.valueForCoreDataMapping(), FileType.image.valueForCoreDataMapping()]
+        
+        coreDataStack.performBackgroundTask { [weak self] context in
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.fileTypeValue) IN %@ AND NOT(\(MediaItem.PropertyNameKey.localFileID) IN %@)", filesTypesArray, subtractingIds)
+            
+            self?.executeRequest(predicate: predicate, context: context) { mediaItems in
+                completion(mediaItems.compactMap { $0.localFileID })
+            }
+        }
     }
     
     private func getUnsyncedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {

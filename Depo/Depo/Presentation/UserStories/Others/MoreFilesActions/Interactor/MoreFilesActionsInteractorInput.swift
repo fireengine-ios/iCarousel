@@ -14,7 +14,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool)
     
-    func edit(item: [BaseDataSourceItem], complition: VoidHandler?)
+    func edit(item: [BaseDataSourceItem], completion: VoidHandler?)
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?)
     
@@ -31,6 +31,8 @@ protocol MoreFilesActionsInteractorInput {
     func sync(item: [BaseDataSourceItem])
     
     func download(item: [BaseDataSourceItem])
+    
+    func downloadDocument(items: [WrapData]?)
     
     func restore(items: [BaseDataSourceItem])
     
@@ -85,4 +87,12 @@ protocol MoreFilesActionsInteractorInput {
     func trackEvent(elementType: ElementTypes)
     
     func emptyTrashBin()
+    
+    func endSharing(item: BaseDataSourceItem?)
+    
+    func leaveSharing(item: BaseDataSourceItem?)
+    
+    func moveToTrashShared(items: [BaseDataSourceItem])
+    
+    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
 }

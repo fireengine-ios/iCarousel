@@ -10,6 +10,7 @@ import Foundation
 import Photos
 import SDWebImage
 import SwiftyJSON
+import MobileCoreServices
 
 typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
@@ -63,6 +64,7 @@ enum ApplicationType: String {
     case xls = "xls"
     case pdf = "pdf"
     case ppt = "ppt"
+    case pptx = "pptx"
     case usdz = "usdz"
     
 //    func bigIconImage() -> UIImage? {
@@ -167,7 +169,16 @@ enum FileType: Hashable, Equatable {
         guard case let FileType.application(applicationType) = self else {
             return false
         }
-        return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .usdz])
+        return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .pptx, .usdz])
+    }
+    
+    var isDocumentPageItem: Bool {
+        switch self {
+        case .application(_):
+            return true
+        default:
+            return false
+        }
     }
     
     var  isSupportedOpenType: Bool {
@@ -321,6 +332,9 @@ enum FileType: Hashable, Equatable {
                 case "vnd.ms-powerpoint":
                     self = .application(.ppt)
                     return
+                case "vnd.openxmlformats-officedocument.presentationml.presentation":
+                    self = .application(.pptx)
+                    return
                 default:
                     self = .application(.unknown)
                 }
@@ -369,6 +383,8 @@ enum FileType: Hashable, Equatable {
             self = .application(.pdf)
         case 18:
             self = .application(.ppt)
+        case 19:
+            self = .application(.pptx)
         default:
             self = .unknown
         }
@@ -409,9 +425,10 @@ enum FileType: Hashable, Equatable {
             return 17
         case .application(.ppt):
             return 18
-        case .allDocs:
+        case .application(.pptx):
             return 19
-            
+        case .allDocs:
+            return 20
         default:
             return 0
         }
@@ -626,6 +643,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var fileData: Data?
     
+    var privateSharePermission: SharedItemPermission?
+    
     var asset: PHAsset? {
         switch patchToPreview {
         case let .localMediaContent(local):
@@ -653,6 +672,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 return mimeType(from: type) ?? "video/\(type)"
             }
             return "video/mp4"
+            
+        case .audio:
+            if let type = urlToFile?.mimeType {
+                return "audio/\(type)"
+            }
+            return "audio/mp3"
+            
+        case .application(_), .allDocs:
+            if let type = urlToFile?.mimeType {
+                return type
+            }
+            return "application/octet-stream"
+            
         default:
             return "unknown"
         }
@@ -672,6 +704,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
             return unwrapedCreatedDate
         }
         return Date()
+    }
+    
+    var hasPreviewUrl: Bool {
+        //based on func getImageData(item: Item, completeData: @escaping RemoteData) -> URL?
+        if case let PathForItem.remoteUrl(url) = patchToPreview, url != nil {
+            return true
+        }
+        
+        if case PathForItem.localMediaContent = patchToPreview {
+            return true
+        }
+        
+        return metaData?.largeUrl != nil
     }
     
     @available(*, deprecated: 1.0, message: "Use convenience init(info: AssetInfo) instead")
@@ -845,6 +890,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
         
+        projectId = SingletonStorage.shared.accountInfo?.projectID
+        
         albums = remote.albums
         
         name = remote.name
@@ -900,6 +947,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         patchToPreview = .remoteUrl(url)
         id = remote.id
+        isShared = remote.isShared
     }
     
     init(searchResponse: JSON) {
@@ -917,6 +965,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
         name = searchResponse[SearchJsonKey.name].string
         uuid = fileUUID
+        projectId = SingletonStorage.shared.accountInfo?.projectID
         
         mimeType = searchResponse[SearchJsonKey.content_type].string
         fileType = FileType(type: mimeType, fileName: name)
@@ -946,7 +995,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
             case .little : url = metaData?.smalURl
             case .medium : url = metaData?.mediumUrl
             case .large  : url = metaData?.largeUrl
-            } case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
+            }
+        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
             if let mediumUrl = metaData?.mediumUrl {
                 url = mediumUrl
             } else if let smallUrl = metaData?.smalURl {
@@ -1046,6 +1096,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init()
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
+        projectId = SingletonStorage.shared.accountInfo?.projectID
         
         if let mediaItemUuid = mediaItem.uuid {
             uuid = mediaItemUuid
@@ -1099,6 +1150,67 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let isVideoSlideshow = mediaItem.metadata?.isVideoSlideshow {
             metaData?.isVideoSlideshow = isVideoSlideshow
         }
+    }
+    
+    init(importedDocumentURL: URL) {
+        
+        let fileManager = FileManager.default
+
+        fileSize = fileManager.fileSize(at: importedDocumentURL) ?? 0
+        let creationDate = fileManager.creationDate(at: importedDocumentURL) ?? Date()
+        
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .unknown
+        tmpDownloadUrl = importedDocumentURL
+        localFileUrl = importedDocumentURL
+        
+        let fileName = importedDocumentURL.lastPathComponent
+        let type = importedDocumentURL.mimeType
+        let fileType = FileType(type: type, fileName: fileName)
+        
+        super.init(uuid: nil, name: fileName, creationDate: creationDate, lastModifiDate: creationDate, fileType: fileType, syncStatus: .notSynced, isLocalItem: true)
+        
+        mimeType = type
+        md5 = "\(fileName)\(fileSize)"
+    }
+    
+    init(privateShareFileInfo: SharedFileInfo) {
+        //TODO: status to enum in SharedFileInfo
+        
+        if let metadata = privateShareFileInfo.metadata {
+            metaData = BaseMetaData(with: metadata)
+        }
+        
+        fileSize = privateShareFileInfo.bytes ?? 0
+        favorites = privateShareFileInfo.metadata?.isFavourite ?? false
+//        let localStorage = LocalMediaStorage.default
+//        if let assetId = privateShareFileInfo.metadata.originalHash,
+//           localStorage.photoLibraryIsAvailible(),
+//           let asset = localStorage.assetsCache.assetBy(identifier: assetId) ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject {
+//
+//        } else {
+            patchToPreview = .remoteUrl(metaData?.mediumUrl)
+//        }
+        status = .active
+        
+        super.init(uuid: privateShareFileInfo.uuid,
+                   name: privateShareFileInfo.name,
+                   creationDate: privateShareFileInfo.createdDate,
+                   lastModifiDate: privateShareFileInfo.lastModifiedDate,
+                   fileType: privateShareFileInfo.fileType,
+                   syncStatus: .synced,
+                   isLocalItem: false)
+        
+        id = privateShareFileInfo.id
+        projectId = privateShareFileInfo.projectId
+        isFolder = privateShareFileInfo.folder
+        if isFolder == true {
+            fileType = .folder
+        }
+        childCount = privateShareFileInfo.childCount
+        privateSharePermission = privateShareFileInfo.permissions
+        isShared = true
     }
     
     func copyFileData(from item: WrapData) {
@@ -1173,6 +1285,35 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         
         return false
+    }
+    
+    func hasExpiredPreviewUrl() -> Bool {
+        let urlsToCheck = [tmpDownloadUrl, metaData?.largeUrl, metaData?.mediumUrl, metaData?.smalURl]
+        for url in urlsToCheck {
+            if let url = url, url.isExpired {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func imageUrl(size: ImageSize) -> URL? {
+        switch size {
+        case .small:
+            return metaData?.smalURl
+        case .medium:
+            return metaData?.mediumUrl
+        case .large:
+            return metaData?.largeUrl
+        case .original:
+            return urlToFile
+        case .preview:
+            if case PathForItem.remoteUrl(let url) = patchToPreview {
+                return url
+            } else {
+                return nil
+            }
+        }
     }
 }
 

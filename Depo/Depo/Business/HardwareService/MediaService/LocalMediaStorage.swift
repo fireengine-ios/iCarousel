@@ -9,6 +9,8 @@
 import UIKit
 import Photos
 import SwiftyGif
+import CoreServices
+import FirebaseCrashlytics
 
 typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
 
@@ -80,7 +82,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     /// with message "This application is not allowed to access Photo data"
     /// https://stackoverflow.com/a/50663778/5893286
     private lazy var photoManager: PHImageManager? = {
-        guard PHPhotoLibrary.authorizationStatus() == .authorized else {
+        guard PHPhotoLibrary.isAccessibleAuthorizationStatus() else {
             return nil
         }
         
@@ -111,6 +113,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     var assetsCache = AssetsCache()
     private(set) var localAlbumsCache = LocalAlbumsCache.shared
     
+    private(set) var galleryPermission: GalleryAuthorizationStatus = .notDetermined
+    
+    
     private override init() {
         queue.maxConcurrentOperationCount = 1
         
@@ -122,8 +127,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func photoLibraryIsAvailible() -> Bool {
-        let status = PHPhotoLibrary.authorizationStatus()
-        return status == .authorized
+        return PHPhotoLibrary.isAccessibleAuthorizationStatus()
     }
     
     func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [AssetInfo])->Void) {
@@ -181,29 +185,35 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
-        let status = PHPhotoLibrary.authorizationStatus()
+        let status = PHPhotoLibrary.currentAuthorizationStatus()
+        
+        galleryPermission = status.toGalleryAuthorizationStatus()
+        
         switch status {
-        case .authorized:
+        //TODO: uncomment for xcode 12
+        case .authorized, .limited:
             photoLibrary.register(self)
             completion(true, status)
             AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(true)
         case .notDetermined, .restricted:
             isWaitingForPhotoPermission = true
             passcodeStorage.systemCallOnScreen = true
-            PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
+            PHPhotoLibrary.requestAuthorizationStatus { [weak self] authStatus in
                 guard let self = self else {
                     return
                 }
                 
+                self.galleryPermission = authStatus.toGalleryAuthorizationStatus()
+                
                 self.passcodeStorage.systemCallOnScreen = false
-                let isAuthorized = authStatus == .authorized
+                let isAuthorized = authStatus.isAccessible
                 if isAuthorized {
                     self.photoLibrary.register(self)
                 }
                 AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(isAuthorized)
                 self.isWaitingForPhotoPermission = false
                 completion(isAuthorized, authStatus)
-            })
+            }
         case .denied:
             completion(false, status)
             if redirectToSettings {
@@ -547,7 +557,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         debugLog("LocalMediaStorage saveToGallery")
 
         guard photoLibraryIsAvailible() else {
-            handler(.failed(ErrorResponse.string("Photo libraryr is unavailable")))
+            handler(.failed(ErrorResponse.string("Photo library is unavailable")))
             return
         }
         
@@ -575,6 +585,83 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             handler(.success(assetPlaceholder))
         })
+    }
+    
+    @discardableResult
+    func replaceInGallery(asset: PHAsset, image: UIImage, adjustmentInfo: String, handler: @escaping ResponseHandler<Void>) -> PHContentEditingInputRequestID? {
+        debugLog("LocalMediaStorage replaceInGallery")
+
+        guard photoLibraryIsAvailible() else {
+            handler(.failed(ErrorResponse.string("Photo library is unavailable")))
+            debugLog("PHOTOEDIT: Photo library is unavailable")
+            return nil
+        }
+        
+        
+        let requestId = asset.requestContentEditingInput(with: nil) { [weak self] input, _ in
+            guard let input = input else {
+                handler(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+                assertionFailure("Can't create input")
+                debugLog("PHOTOEDIT: Can't create input")
+                return
+            }
+            
+            let adjustmentData = PHAdjustmentData(formatIdentifier: "lifeboxPhotoEdit", formatVersion: "1.0.0", data: adjustmentInfo.data(using: .utf8) ?? Data())
+            let output = PHContentEditingOutput(contentEditingInput: input)
+            output.adjustmentData = adjustmentData
+            
+            let isDataPrepared = self?.prepare(image: image, outputURL: output.renderedContentURL)
+            
+            guard isDataPrepared == true else {
+                handler(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+                assertionFailure("Can't prepare image data")
+                return
+            }
+            
+            self?.passcodeStorage.systemCallOnScreen = true
+            
+            PHPhotoLibrary.shared().performChanges({
+                let changeRequest = PHAssetChangeRequest(for: asset)
+                changeRequest.contentEditingOutput = output
+                
+            }, completionHandler: { [weak self] success, error in
+                self?.passcodeStorage.systemCallOnScreen = false
+                
+                if let error = error {
+                    debugLog("PHOTOEDIT: performChanges error: \(error.description)")
+                    handler(.failed(error))
+                    return
+                }
+                
+                guard success else {
+                    debugLog("PHOTOEDIT: performChanges success == false")
+                    handler(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+                    return
+                }
+                
+                handler(.success(()))
+            })
+        }
+        
+        return requestId
+    }
+    
+    private func prepare(image: UIImage, outputURL: URL) -> Bool {
+        let context = CIContext()
+        
+        guard
+            let ciImage = CIImage(image: image),
+            let cgImage = context.createCGImage(ciImage, from: ciImage.extent),
+            let cgImageDestination = CGImageDestinationCreateWithURL(outputURL as CFURL, kUTTypeJPEG, 1, nil)
+        else {
+            return false
+        }
+        
+        CGImageDestinationAddImage(cgImageDestination, cgImage,
+                                   [kCGImageDestinationLossyCompressionQuality as String: 0.99] as CFDictionary)
+        CGImageDestinationFinalize(cgImageDestination)
+        
+        return true
     }
     
     var addAssetToCollectionQueue: OperationQueue = {
@@ -618,10 +705,16 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         LocalMediaStorage.default.assetsCache.append(list: [asset])
         
         // call append to get the completion and to be sure that local item is saved in our db
-        mediaItemService.append(localMediaItems: [asset]) {
+        mediaItemService.append(localMediaItems: [asset]) { [weak self] in
+            guard let self = self else {
+                assertionFailure()
+                fail?(.failResponse(nil))
+                return
+            }
+            
             let context = self.coreDataStack.newChildBackgroundContext
-            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { items in
-                guard let savedLocalItem = items.first else {
+            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { [weak self] items in
+                guard let self = self, let savedLocalItem = items.first else {
                     assertionFailure()
                     fail?(.failResponse(nil))
                     return
@@ -637,12 +730,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 if let unwrapedSet = savedLocalItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
                     userObjectSyncStatus = unwrapedSet
                 }
-                SingletonStorage.shared.getUniqueUserID(success: {
-                    currentUserID in
+                SingletonStorage.shared.getUniqueUserID(success: {currentUserID in
                     context.perform {
                         savedLocalItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
                         userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
-                        MediaItemOperationsService.shared.updateRelationsAfterMerge(with: item.uuid, localItem: savedLocalItem, context: context, completion: {
+                        
+                        MediaItemOperationsService.shared.updateRelationsAfterMerge(with: item.uuid, localItem: savedLocalItem, context: context, completion: {  [weak self] in
+                            
+                            guard let self = self else {
+                                assertionFailure()
+                                fail?(.failResponse(nil))
+                                return
+                            }
+                            
                             self.coreDataStack.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
                                 success?()
                             })
@@ -864,13 +964,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetOriginalImageOperation(photoManager: photoManager,
                                                   asset: asset) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
+                                                    guard let data = data else {
+                                                        Crashlytics.crashlytics().record(error: CustomErrors.text("copyImageAsset: found nil data while trying to get it from asset(after GetOriginalImageOperation)"))
+                                                        debugLog("no asset's data found")
+                                                        semaphore.signal()
+                                                        return
+                                                    }
                                                     url = Device.tmpFolderUrl(withComponent: file)
                                                     do {
                                                         guard let url = url else {
                                                             semaphore.signal()
                                                             return
                                                         }
-                                                        try data?.write(to: url)
+                                                        try data.write(to: url)
                                                         semaphore.signal()
                                                     } catch {
                                                         debugLog(error.description)
@@ -882,7 +988,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         semaphore.wait()
         return url
     }
-
+    
     // MARK: Asset info
 
     
@@ -926,11 +1032,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetCompactVideoOperation(photoManager: photoManager, asset: asset) { avAsset, aVAudioMix, dict in
+        let operation = GetCompactVideoOperation(photoManager: photoManager, asset: asset) { [weak self] avAsset, aVAudioMix, dict in
+            
+            guard let self = self else {
+                assertionFailure()
+                assetInfo.isValid = false
+                semaphore.signal()
+                return
+            }
             
             self.dispatchQueue.async {
                 let failCompletion = {
-                    print("VIDEO_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
+                    printLog("VIDEO_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
                     assetInfo.isValid = false
                     semaphore.signal()
                 }
@@ -942,7 +1055,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    print(error.localizedDescription)
+                    printLog("VIDEO_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
                     failCompletion()
                     return
                 }
@@ -997,10 +1110,17 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetCompactImageOperation(photoManager: photoManager, asset: asset) { data, string, orientation, dict in
+        let operation = GetCompactImageOperation(photoManager: photoManager, asset: asset) { [weak self] data, string, orientation, dict in
+            
+            guard let self = self else {
+                assetInfo.isValid = false
+                semaphore.signal()
+                return
+            }
+            
             self.dispatchQueue.async {
                 let failCompletion = {
-                    print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
+                    printLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
                     assetInfo.isValid = false
                     semaphore.signal()
                     return
@@ -1012,14 +1132,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     return
                 }
                 
-                
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    print(error.localizedDescription)
+                    printLog("IMAGE_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
                     failCompletion()
                     return
                 }
                 
                 if let inCloud = dict[PHImageResultIsInCloudKey] as? NSNumber, inCloud.boolValue {
+                    printLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
                     failCompletion()
                     return
                 }
@@ -1074,7 +1194,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetOriginalVideoOperation(photoManager: photoManager, asset: asset) { avAsset, aVAudioMix, dict in
+        let operation = GetOriginalVideoOperation(photoManager: photoManager, asset: asset) { [weak self] avAsset, aVAudioMix, dict in
+            
+            guard let self = self else {
+                assetInfo.isValid = false
+                semaphore.signal()
+                return
+            }
             
             self.dispatchQueue.async {
                 let failCompletion = {
@@ -1090,7 +1216,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    print(error.localizedDescription)
+                    printLog("VIDEO_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
                     failCompletion()
                     return
                 }
@@ -1152,10 +1278,17 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset) { data, string, orientation, dict in
+        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset) { [weak self] data, string, orientation, dict in
+            
+            guard let self = self else {
+                assetInfo.isValid = false
+                semaphore.signal()
+                return
+            }
+            
             self.dispatchQueue.async {
                 let failCompletion = {
-                    print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
+                    printLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
                     assetInfo.isValid = false
                     semaphore.signal()
                     return
@@ -1169,12 +1302,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    print(error.localizedDescription)
+                    printLog("IMAGE_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
                     failCompletion()
                     return
                 }
                 
                 if let inCloud = dict[PHImageResultIsInCloudKey] as? NSNumber, inCloud.boolValue {
+                    printLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
                     failCompletion()
                     return
                 }
@@ -1293,17 +1427,31 @@ class GetImageOperation: Operation {
 class GetOriginalImageOperation: Operation {
     
     let photoManager: PHImageManager
-    
     let callback: PhotoManagerOriginalCallBack
-    
     let asset: PHAsset
+    
+    private let semaphore = DispatchSemaphore(value: 0)
+    private var requestId: PHImageRequestID?
+    
     
     init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback
         self.asset = asset
+        
         super.init()
+    }
+    
+    override func cancel() {
+        super.cancel()
+        
+        guard let requestId = requestId else {
+            return
+        }
+        
+        photoManager.cancelImageRequest(requestId)
+        semaphore.signal()
     }
     
     override func main() {
@@ -1311,6 +1459,7 @@ class GetOriginalImageOperation: Operation {
             callback(nil, nil, .down, nil)
             return
         }
+        
         if isCancelled {
             return
         }
@@ -1318,25 +1467,42 @@ class GetOriginalImageOperation: Operation {
         let options = PHImageRequestOptions()
         options.version = .current
         options.deliveryMode = .highQualityFormat
-//        options.isSynchronous = true
         
-        photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
+        requestId = photoManager.requestImageData(for: asset, options: options, resultHandler: { [weak self] data, string, orientation, dict in
+            if data == nil, let error = dict?[PHImageErrorKey] as? Error {
+                Crashlytics.crashlytics().record(error: error)
+                debugLog("GetOriginalImageOperation: PHImageManager requestImageData no data error \(error)")
+            }
+            guard let self = self else {
+                return
+            }
+            
+            guard !self.isCancelled else {
+                self.semaphore.signal()
+                return
+            }
+            
+            self.callback(data, string, orientation, dict)
+            self.semaphore.signal()
+        })
+        
+        semaphore.wait()
     }
 }
 
 class GetOriginalVideoOperation: Operation {
     
     let photoManager: PHImageManager
-    
     let callback: PhotoManagerOriginalVideoCallBack
-    
     let asset: PHAsset
+    
     
     init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalVideoCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback
         self.asset = asset
+        
         super.init()
     }
     
@@ -1443,10 +1609,12 @@ class AddAssetToCollectionOperation: AsyncOperation {
             markFinished()
         } else {
             mediaStorage.createAlbum(albumName, completion: { [weak self] collection in
-                if let collection = collection, let `self` = self {
-                    self.mediaStorage.add(asset: self.assetIdentifier, to: collection)
-                    self.markFinished()
+                guard let self = self, let collection = collection else {
+                    return
                 }
+                
+                self.mediaStorage.add(asset: self.assetIdentifier, to: collection)
+                self.markFinished()
             })
         }
     }

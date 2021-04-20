@@ -9,7 +9,6 @@
 import UIKit
 import AVKit
 import AVFoundation
-import Photos
 
 final class PhotoVideoDetailViewController: BaseViewController {
     
@@ -18,7 +17,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
     @IBOutlet private weak var bottomBlackView: UIView!
-    @IBOutlet weak var collapseDetailView: UIView!
     
     @IBOutlet private weak var swipeUpContainerView: UIView!
     // Bottom detail view
@@ -101,7 +99,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
         return UIBarButtonItem(customView: button)
     }()
     
+    private var waitVideoPreviewURL = false
+    
+    private lazy var analytics = PrivateShareAnalytics()
+    
     // MARK: Life cycle
+    
+    deinit {
+        NotificationCenter.default.post(name: .deinitPlayer, object: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,9 +122,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
         
-        navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
-            self?.hideView()
-        }
+        navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         showSpinner()
@@ -137,7 +141,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         rootNavController(vizible: true)
         blackNavigationBarStyle()
         editingTabBar?.view.layoutIfNeeded()
-        editingTabBar.view.backgroundColor = UIColor.black
+        editingTabBar.view.backgroundColor = .black
+        viewForBottomBar.backgroundColor = .black
         setupTitle()
         
         if hideTreeDotButton {
@@ -152,7 +157,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         statusBarColor = .black
         
         NotificationCenter.default.post(name: .reusePlayer, object: self)
-
+        
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
         bottomDetailViewManager?.updatePassThroughViewDelegate(passThroughView: passThroughView)
@@ -163,6 +168,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
         passThroughView?.enableGestures()
+        updateFirstVisibleCell()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -203,6 +209,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
         if UIDevice.current.orientation.isLandscape {
             bottomDetailViewManager?.closeDetailView()
         }
+    }
+    
+    private func updateFirstVisibleCell() {
+        guard let selectedIndex = selectedIndex else {
+            return
+        }
+        
+        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
+        cells.first?.setObject(object: objects[selectedIndex])
     }
     
     func hideView() {
@@ -248,7 +263,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         if status == .hidden {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         } else if let selectedItem = selectedItem {
-            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem
+            //hide 3 dots button for shared or local items
+            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem || !selectedItem.isOwner
         } else {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
@@ -322,13 +338,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
             let managedView = bottomDetailView,
             let passThroughView = passThroughView,
             let collectionView = collectionView,
-            let collapsedView = collapseDetailView,
             let parentView = view
         else {
             assertionFailure()
             return
         }
-        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, collapseView: collapsedView, parentView: parentView, delegate: self)
+        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, parentView: parentView, delegate: self)
     }
     
     func getBottomDetailViewState() -> CardState {
@@ -341,6 +356,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     func showBottomDetailView() {
         bottomDetailViewManager?.showDetailView()
+    }
+    
+    func shareCurrentItem() {
+        guard let shareTabIndex = output.tabIndex(type: .share),
+              let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
+            return
+        }
+        editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
     }
 }
 
@@ -387,6 +410,10 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
         topViewController.view.addSubview(fileInfoView)
         bottomDetailView = fileInfoView
         setupBottomDetailViewManager()
+    }
+    
+    func pullToDownEffect() {
+        //hideView()
     }
 }
 
@@ -485,6 +512,43 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func closeDetailViewIfNeeded() {
         bottomDetailViewManager?.closeDetailView()
     }
+    
+    func updateBottomDetailView() {
+        bottomDetailView?.updateShareInfo()
+    }
+    
+    func deleteShareInfo() {
+        bottomDetailView?.setHiddenShareInfoView(isHidden: true)
+    }
+    
+    func updateExpiredItem(_ item: WrapData) {
+        guard let indexToChange = objects.firstIndex(where: { !$0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }),
+              objects[indexToChange].hasExpiredPreviewUrl() else {
+            return
+        }
+        update(item: item, at: indexToChange)
+    }
+    
+    
+    func updateItem(_ item: WrapData) {
+        guard let index = objects.firstIndex(where: { $0 == item }) else {
+            return
+        }
+        update(item: item, at: index)
+    }
+    
+    private func update(item: Item, at index: Int) {
+        objects[index] = item
+        
+        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.item == index }),
+           let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell {
+            cell.setObject(object: item)
+            if item.fileType == .video && waitVideoPreviewURL {
+                tapOnSelectedItem()
+                waitVideoPreviewURL = false
+            }
+        }
+    }
 }
 
 extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
@@ -551,10 +615,15 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
             return
         }
         cell.delegate = self
-        cell.setObject(object: objects[indexPath.row])
+        let object = objects[indexPath.row]
+        cell.setObject(object: object)
         
         if indexPath.row == objects.count - 1 {
             output.willDisplayLastCell()
+        }
+        
+        if !object.isOwner {
+            analytics.sharedWithMe(action: .preview, on: object)
         }
     }
 }
@@ -572,7 +641,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     
     func imageLoadingFinished() {
-       hideSpinner()
+        hideSpinner()
     }
     
     func tapOnCellForFullScreen() {
@@ -593,7 +662,18 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     
     private func prepareToPlayVideo(file: Item) {
         let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+
+        if !waitVideoPreviewURL, preUrl == nil || preUrl?.isExpired == true {
+            waitVideoPreviewURL = true
+            output.createNewUrl()
+            return
+        }
+        
         guard let url = preUrl else {
+            hideSpinnerIncludeNavigationBar()
+            if !file.isOwner {
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePreviewNotReady)
+            }
             return
         }
         player.pause()
@@ -640,6 +720,9 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         }
     }
     
+    func didExpireUrl() {
+        output.createNewUrl()
+    }
 }
 
 extension PhotoVideoDetailViewController: UIScrollViewDelegate {

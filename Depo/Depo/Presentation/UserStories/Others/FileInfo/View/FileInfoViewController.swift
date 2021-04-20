@@ -26,60 +26,29 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     @IBOutlet weak var takenDateTitle: UILabel!
     @IBOutlet weak var takenDateLabel: UILabel!
     
+    @IBOutlet private weak var shareInfoContainer: UIView!
+    private lazy var sharingInfoView = FileInfoShareView.with(delegate: self)
+    
+    private lazy var saveButton = UIBarButtonItem(title: TextConstants.fileInfoSave,
+                                                  target: self,
+                                                  selector: #selector(onSave))
+    
     var output: FileInfoViewOutput!
     var interactor: FileInfoInteractor!
     private var fileType: FileType = .unknown
     
+    private let sectionFont = UIFont.TurkcellSaturaBolFont(size: 14)
+    private let sectionColor = ColorConstants.marineTwo
+    private let infoFont = UIFont.TurkcellSaturaFont(size: 18)
+    private let titleColor = UIColor.lrBrownishGrey
+    private let infoColor = ColorConstants.closeIconButtonColor
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
-        fileNameTitle.text = TextConstants.fileInfoFileNameTitle
-        fileNameTitle.textColor = ColorConstants.blueColor
-        fileNameTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        
-        fileName.textColor = ColorConstants.textGrayColor
-        fileName.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        fileInfoTitle.text = TextConstants.fileInfoFileInfoTitle
-        fileInfoTitle.textColor = ColorConstants.blueColor
-        fileInfoTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        
-        folderSizeTitle.textColor = ColorConstants.textGrayColor
-        folderSizeTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        folderSizeLabel.textColor = ColorConstants.textGrayColor
-        folderSizeLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        durationTitle.text = TextConstants.fileInfoDurationTitle
-        durationTitle.textColor = ColorConstants.textGrayColor
-        durationTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        durationLabel.textColor = ColorConstants.textGrayColor
-        durationLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        moreFileInfoLabel.textColor = ColorConstants.textGrayColor
-        moreFileInfoLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        uploadDateTitle.text = TextConstants.fileInfoUploadDateTitle
-        uploadDateTitle.textColor = ColorConstants.textGrayColor
-        uploadDateTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        uploadDateLabel.textColor = ColorConstants.textGrayColor
-        uploadDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        
-        takenDateTitle.text = TextConstants.fileInfoTakenDateTitle
-        takenDateTitle.textColor = ColorConstants.textGrayColor
-        takenDateTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        takenDateLabel.textColor = ColorConstants.textGrayColor
-        takenDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.fileInfoSave,
-                                                            target: self,
-                                                            selector: #selector(onSave))
         
         output.viewIsReady()
     }
@@ -88,6 +57,35 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyleWithoutInsets()
+    }
+    
+    private func setupUI() {
+        let sectionTitles = [fileNameTitle, fileInfoTitle]
+        sectionTitles.forEach {
+            $0?.textColor = sectionColor
+            $0?.font = sectionFont
+        }
+        
+        let infoTitles = [folderSizeTitle, durationTitle, uploadDateTitle, takenDateTitle]
+        infoTitles.forEach {
+            $0?.textColor = titleColor
+            $0?.font = infoFont
+        }
+        
+        let infoFields = [folderSizeLabel, durationLabel, moreFileInfoLabel, uploadDateLabel, takenDateLabel]
+        infoFields.forEach {
+            $0?.textColor = infoColor
+            $0?.font = infoFont
+        }
+        
+        fileName.textColor = titleColor
+        fileName.font = infoFont
+        
+        fileNameTitle.text = TextConstants.fileInfoFileNameTitle
+        fileInfoTitle.text = TextConstants.fileInfoFileInfoTitle
+        durationTitle.text = TextConstants.fileInfoDurationTitle
+        uploadDateTitle.text = TextConstants.fileInfoUploadDateTitle
+        takenDateTitle.text = TextConstants.fileInfoTakenDateTitle
     }
 
     private func addReturnIfNeed(string: inout String) {
@@ -115,11 +113,18 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         }
     }
     
-    private func checkCanEdit(item: BaseDataSourceItem) {
-        if item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
-            navigationItem.rightBarButtonItem = nil
-            fileName.isEnabled = false
+    private func checkCanEdit(item: BaseDataSourceItem, projectId: String?, permission: SharedItemPermission?) {
+        var canEdit = true
+        if projectId != SingletonStorage.shared.accountInfo?.projectID {
+            canEdit = permission?.granted?.contains(.setAttribute) == true
         }
+        
+        if item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
+            canEdit = false
+        }
+        
+        navigationItem.rightBarButtonItem = canEdit ? saveButton : nil
+        fileName.isEnabled = canEdit
     }
     
     private func hideInfoDateLabels () {
@@ -195,7 +200,6 @@ extension FileInfoViewController: FileInfoViewInput {
                 uploadDateTitle.text = TextConstants.fileInfoCreationDateTitle
             } else {
                 folderSizeTitle.text = TextConstants.fileInfoFileSizeTitle
-                checkCanEdit(item: object)
             }
             
             if let createdDate = obj.creationDate, !object.isLocalItem {
@@ -209,6 +213,7 @@ extension FileInfoViewController: FileInfoViewInput {
             } else {
                 hideInfoDateLabels()
             }
+            checkCanEdit(item: object, projectId: object.projectId, permission: nil)
             return
         }
         
@@ -226,10 +231,6 @@ extension FileInfoViewController: FileInfoViewInput {
             if album.readOnly == true {
                 fileName.isEnabled = false
             }
-            
-            if album.fileType.isFaceImageAlbum {
-                checkCanEdit(item: object)
-            }
         }
         
         if let createdDate = object.creationDate {
@@ -239,6 +240,8 @@ extension FileInfoViewController: FileInfoViewInput {
         } else {
             hideInfoDateLabels()
         }
+        
+        checkCanEdit(item: object, projectId: object.projectId, permission: nil)
         
         durationH.constant = 0
         view.layoutIfNeeded()
@@ -274,6 +277,25 @@ extension FileInfoViewController: FileInfoViewInput {
         view.subviews.forEach { $0.isHidden = false }
     }
     
+    func showSharingInfo(_ sharingInfo: SharedFileInfo) {
+        if sharingInfo.members == nil || sharingInfo.members?.isEmpty == true {
+            sharingInfoView.isHidden = true
+        } else if sharingInfoView.superview == nil {
+            shareInfoContainer.addSubview(sharingInfoView)
+            sharingInfoView.translatesAutoresizingMaskIntoConstraints = false
+            sharingInfoView.pinToSuperviewEdges()
+        }
+        
+        sharingInfoView.setup(with: sharingInfo)
+        
+        if let item = interactor.item {
+            checkCanEdit(item: item, projectId: sharingInfo.projectId, permission: sharingInfo.permissions)
+        }
+    }
+    
+    func deleteSharingInfo() {
+        sharingInfoView.removeFromSuperview()
+    }
 }
 
 // MARK: UITextFieldDelegate
@@ -301,4 +323,23 @@ extension FileInfoViewController: UITextFieldDelegate {
         return true
     }
     
+}
+
+//MARK: - FileInfoShareViewDelegate
+
+extension FileInfoViewController: FileInfoShareViewDelegate {
+    
+    func didSelect(contact: SharedContact) {
+        output.openShareAccessList(contact: contact)
+    }
+    
+    func didTappedPlusButton() {
+        output.shareItem()
+    }
+    
+    func didTappedArrowButton() {
+        if let info = sharingInfoView.info {
+            output.showWhoHasAccess(shareInfo: info)
+        }
+    }
 }

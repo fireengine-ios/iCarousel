@@ -274,7 +274,7 @@ extension PhotoVideoCell {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: smalUrl, url: mediumUrl, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: smalUrl, url: mediumUrl, isOwner: true, completionBlock: imageSetBlock)
     }
     
     private func setImage(image: UIImage, shouldBeBlurred: Bool, animated: Bool) {

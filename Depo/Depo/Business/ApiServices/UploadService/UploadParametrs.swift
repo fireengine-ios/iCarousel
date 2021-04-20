@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Crashlytics
 
 class UploadBaseURL: BaseRequestParametrs {
     override var requestParametrs: Any {
@@ -41,6 +40,8 @@ class SimpleUpload: UploadRequestParametrs {
     lazy var urlToLocalFile: URL? = {
         if let asset = self.item.asset {
             return LocalMediaStorage.default.copyAssetToDocument(asset: asset)
+        } else if let localUrl = item.localFileUrl {
+            return localUrl
         }
         
         return nil
@@ -50,9 +51,9 @@ class SimpleUpload: UploadRequestParametrs {
         return item.fileData
     }
     
-    private var fileSize: Int64 {
+    var fileSize: Int64 {
         if let url = urlToLocalFile,
-            let resources = try? url.resourceValues(forKeys:[.fileSizeKey]),
+           let resources = try? url.resourceValues(forKeys:[.fileSizeKey]),
             let fileSize = resources.fileSize {
             return Int64(fileSize)
         }
@@ -62,7 +63,11 @@ class SimpleUpload: UploadRequestParametrs {
     
     let tmpUUID: String
     
-    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
+    static func with(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) -> SimpleUpload {
+        return SimpleUpload(item: item, destitantion: destitantion, uploadStategy: uploadStategy, uploadTo: uploadTo, rootFolder: rootFolder, isFavorite: isFavorite, uploadType: uploadType)
+    }
+    
+    private init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
         
         self.item = item
         self.uploadType = uploadType
@@ -71,13 +76,21 @@ class SimpleUpload: UploadRequestParametrs {
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
         self.isFavorite = isFavorite
-
-        if item.isLocalItem {
-            self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
-        } else {
-            self.tmpUUID = UUID().uuidString
+        
+        switch uploadType {
+            case .save:
+                self.tmpUUID = item.uuid
+            case .saveAs, .sharedWithMe:
+                self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
+            default:
+                if item.isLocalItem {
+                    self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
+                } else {
+                    self.tmpUUID = UUID().uuidString
+            }
         }
     }
+    
     
     var requestParametrs: Any {
         return Data()
@@ -97,7 +110,11 @@ class SimpleUpload: UploadRequestParametrs {
         let appopriateUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionStatus = ReachabilityService.shared.uploadConnectionTypeName
-
+        
+        let name = item.name ?? tmpUUID
+        let fixed = name.precomposedStringWithCanonicalMapping
+        let encodedName = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        
         header = header + [
             HeaderConstant.connectionType        : connectionStatus,
             HeaderConstant.uploadType            : appopriateUploadType,
@@ -106,7 +123,7 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : Device.deviceId ?? "",
 //            HeaderConstant.XMetaRecentServerHash : "s",
-            HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUID,
+            HeaderConstant.XObjectMetaFileName   : encodedName,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
@@ -119,15 +136,22 @@ class SimpleUpload: UploadRequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: destitantionURL.absoluteString
-            .appending("/")
-            .appending(tmpUUID))!
+        switch uploadType {
+            case .sharedWithMe:
+                return destitantionURL
+                
+            default:
+                return URL(string: destitantionURL.absoluteString
+                    .appending("/")
+                    .appending(tmpUUID))!
+        }
     }
     
     var timeout: TimeInterval {
         return 2000.0
     }
 }
+
 
 final class ResumableUpload: UploadRequestParametrs {
     
@@ -194,6 +218,10 @@ final class ResumableUpload: UploadRequestParametrs {
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionType = ReachabilityService.shared.uploadConnectionTypeName
         
+        let name = item.name ?? tmpUUID
+        let fixed = name.precomposedStringWithCanonicalMapping
+        let encodedName = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        
         header = header + [
             HeaderConstant.connectionType : connectionType,
             HeaderConstant.uploadType : currentUploadType,
@@ -201,7 +229,7 @@ final class ResumableUpload: UploadRequestParametrs {
             HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice : Device.deviceId ?? "",
-            HeaderConstant.XObjectMetaFileName : item.name ?? tmpUUID,
+            HeaderConstant.XObjectMetaFileName : encodedName,
             HeaderConstant.XObjectMetaFavorites : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
@@ -234,10 +262,19 @@ final class ResumableUpload: UploadRequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: destitantionURL.absoluteString
-            .appending("/")
-            .appending(tmpUUID)
-            .appending("?upload-type=resumable"))!
+        switch uploadType {
+            case .sharedWithMe:
+                //Currenly is not supported by BE
+                assertionFailure()
+                return URL(string: destitantionURL.absoluteString
+                    .appending("&upload-type=resumable"))!
+                
+            default:
+                return URL(string: destitantionURL.absoluteString
+                    .appending("/")
+                    .appending(tmpUUID)
+                    .appending("?upload-type=resumable"))!
+        }
     }
     
     var timeout: TimeInterval {

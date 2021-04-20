@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import WidgetKit
+
 enum LoginFieldError {
     case loginIsNotValid
     case loginIsEmpty
@@ -39,11 +41,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private var loginRetries = 0 {
         didSet {
-            if loginRetries == NumericConstants.showFAQViewAttempts {
-                output?.showFAQView()
-            } else if loginRetries >= NumericConstants.showSupportViewAttempts {
-                output?.showSupportView()
-            }
+            showRelatedHelperView()
         }
     }
     
@@ -71,6 +69,31 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: Utility Methods(private)
+    
+    private func showRelatedHelperView() {
+        if loginRetries == NumericConstants.showFAQViewAttempts {
+            output?.showFAQView()
+        } else {
+            #if LIFEBOX
+            FirebaseRemoteConfig.shared.fetchAttemptsBeforeSupportOnLogin { [weak self] attempts in
+                guard let self = self else {
+                    return
+                }
+                
+                if self.loginRetries >= attempts {
+                    DispatchQueue.main.async {
+                        self.output?.showSupportView()
+                    }
+                }
+            }
+            #else
+            if loginRetries >= NumericConstants.showSupportViewAttempts {
+                output?.showSupportView()
+            }
+            #endif
+        }
+    }
+    
     private func hasEmptyPhone(accountWarning: String) -> Bool {
         return accountWarning == HeaderConstant.emptyMSISDN
     }
@@ -224,6 +247,10 @@ class LoginInteractor: LoginInteractorInput {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .phone))
         }
         
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        
         self.loginRetries = 0
         
         self.accountService.updateBrandType()
@@ -336,27 +363,9 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func findCoutryPhoneCode(plus: Bool) {
-        let telephonyService = CoreTelephonyService()
-        var phoneCode = telephonyService.callingCountryCode()
-        
-        let names = ["iPad Pro 12.9 Inch 2. Generation", "iPad Pro 10.5 Inch", "iPad Pro 9.7 Inch"]
-        if phoneCode == "" || names.contains(UIDevice.current.modelName) {
-            phoneCode = telephonyService.countryCodeByLang()
-        }
-        
-        phoneCode.insert("(", at: phoneCode.index(after: phoneCode.startIndex))
-        phoneCode.insert(")", at: phoneCode.endIndex)
+        let phoneCode = CoreTelephonyService().getColumnedCountryCode()
         output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
-    
-//    func approveEULA(eulaId: Int, etkAuth: Bool, globalPermAuth: Bool) {
-//        eulaService.eulaApprove(eulaId: eulaId, etkAuth: etkAuth, globalPermAuth: globalPermAuth, success: { [weak self] successResponse in
-//            //TODO:
-//        }) { [weak self] failResponse in {
-//            //TODO:
-//            }
-//        }
-//    }
     
     func checkEULA() {
         eulaService.eulaCheck(success: { [weak self] successResponse in

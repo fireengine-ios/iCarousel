@@ -292,6 +292,7 @@ enum NetmeraEventValues {
         case smallSize
         case originalSize
         case link
+        case `private`
         
         var text: String {
             switch self {
@@ -301,6 +302,8 @@ enum NetmeraEventValues {
                 return "OriginalSize"
             case .link:
                 return "Link"
+            case .private:
+                return "Private Share"
             }
         }
     }
@@ -464,6 +467,8 @@ enum NetmeraEventValues {
         case restore
         case hiddenBin
         case trashBin
+        case endSharing
+        case leaveSharing
    
         var text: String {
             switch self {
@@ -509,6 +514,10 @@ enum NetmeraEventValues {
                 return "Hidden bin"
             case .trashBin:
                 return "Trash bin"
+            case .endSharing:
+                return "End sharing"
+            case .leaveSharing:
+                return "Leave sharing"
             }
         }
     }
@@ -533,6 +542,8 @@ enum NetmeraEventValues {
     enum PlusButtonAction {
         case useCamera
         case upload
+        case uploadFiles
+        case uploadMusic
         case createStory
         case newFolder
         case createAlbum
@@ -545,6 +556,10 @@ enum NetmeraEventValues {
                 return "Use Camera"
             case .upload:
                 return "Upload"
+            case .uploadFiles:
+                return "Upload Files"
+            case .uploadMusic:
+                return "Upload Music"
             case .createStory:
                 return "Create Story"
             case .newFolder:
@@ -576,4 +591,74 @@ enum NetmeraEventValues {
         }
     }
     
+    enum PhotoEditAdjustmentType {
+        case adjust
+        case light
+        case color
+        case hsl
+        case effect
+        
+        var text: String {
+            switch self {
+            case .adjust:
+                return "Adjust"
+            case .light:
+                return "Light"
+            case .color:
+                return "Color"
+            case .hsl:
+                return "Color-HSL"
+            case .effect:
+                return "Effect"
+            }
+        }
+    }
+    
+    enum PhotoEditActionType {
+        case save
+        case saveAsCopy
+        
+        var text: String {
+            switch self {
+            case .save:
+                return "Save"
+            case .saveAsCopy:
+                return "Save as copy"
+            }
+        }
+    }
+    
+    enum PhotoEditType {
+        case filter
+        case adjustment
+        
+        var text: String {
+            switch self {
+            case .filter:
+                return "Filter"
+            case .adjustment:
+                return "Adjust"
+            }
+        }
+    }
+    
+    enum PhotoEditButton {
+        case save
+        case saveAsCopy
+        case resetToOriginal
+        case cancel
+        
+        var text: String {
+            switch self {
+            case .save:
+                return "Save"
+            case .saveAsCopy:
+                return "Save as copy"
+            case .resetToOriginal:
+                return "Reset to original"
+            case .cancel:
+                return "Cancel"
+            }
+        }
+    }
 }

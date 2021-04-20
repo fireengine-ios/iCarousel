@@ -11,7 +11,11 @@ import UIKit
 final class LBAlbumLikePreviewSliderViewController: ViewController {
     var output: LBAlbumLikePreviewSliderViewOutput!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView! {
+        willSet {
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        }
+    }
     
     class func initFromXIB() -> LBAlbumLikePreviewSliderViewController {
         return LBAlbumLikePreviewSliderViewController(nibName: "LBAlbumLikePreviewSliderViewController", bundle: nil)

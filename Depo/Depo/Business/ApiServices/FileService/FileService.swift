@@ -257,11 +257,16 @@ typealias UpdateFileOperation = (WrapData) -> Void
 class FileService: BaseRequestService {
     
     static let shared = FileService()
-    let downloadOperation = OperationQueue()
+    
+    
+    private let downloadOperation = OperationQueue()
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.download)
-    var allOperationsCount : Int = 0
-    var completedOperationsCount : Int = 0
+    private var allOperationsCount : Int = 0
+    private var completedOperationsCount : Int = 0
+    
+    private lazy var downloadDocumentService = DocumentDownloadService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     
     override init() {
         super.init()
@@ -346,6 +351,51 @@ class FileService: BaseRequestService {
         }
     }
     
+    func downloadDocument(items: [WrapData], success: FileOperation?, fail: FailResponse?) {
+        guard !items.isEmpty else {
+            return
+        }
+        
+        downloadDocumentService.saveLocaly(remoteItems: items, onEachDownload: { [weak self] in
+            guard let self = self else {
+                success?()
+                return
+            }
+            
+            self.completedOperationsCount += 1
+            CardsManager.default.setProgressForOperationWith(type: .download,
+                                                             allOperations: self.allOperationsCount,
+                                                             completedOperations: self.completedOperationsCount)
+            
+        }, onCompletion: { [weak self] isSaved, error in
+            guard let self = self else {
+                success?()
+                return
+            }
+            
+            if self.allOperationsCount == self.completedOperationsCount {
+                self.trackDownloaded(lastQueueItems: items)
+                CardsManager.default.stopOperationWith(type: .download)
+                
+                self.allOperationsCount = 0
+                self.completedOperationsCount = 0
+                
+                if isSaved {
+                    success?()
+                } else if let error = error {
+                    fail?(ErrorResponse.error(error))
+                }
+            }
+        })
+        
+        allOperationsCount += items.count
+        CardsManager.default.startOperationWith(type: .download,
+                                                allOperations: allOperationsCount,
+                                                completedOperations: completedOperationsCount)
+        
+    }
+
+    
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService download")
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
@@ -367,9 +417,16 @@ class FileService: BaseRequestService {
         allOperationsCount = allOperationsCount + supportedItemsToDownload.count
         CardsManager.default.startOperationWith(type: .download, allOperations: allOperationsCount, completedOperations: 0)
         let downloadRequests: [BaseDownloadRequestParametrs] = supportedItemsToDownload.compactMap {
-            guard let downloadUrl = $0.urlToFile?.byTrimmingQuery, let fileName = $0.name else {
+            guard let urlToFile = $0.urlToFile, let fileName = $0.name else {
                 return nil
             }
+            
+            let url = urlToFile.isExpired ? urlToFile.byTrimmingQuery : urlToFile
+            
+            guard let downloadUrl = url else {
+                return nil
+            }
+            
             return BaseDownloadRequestParametrs(urlToFile: downloadUrl, fileName: fileName, contentType: $0.fileType, albumName: album?.name, item: $0)
         }
         
@@ -388,7 +445,7 @@ class FileService: BaseRequestService {
                         self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.music))
                     case .application(let applicationType):
                         switch applicationType {
-                        case .pdf, .ppt, .xls, .txt, .doc :
+                        case .pdf, .ppt, .xls, .txt, .doc, .pptx :
                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.document))
                         default:
                             break

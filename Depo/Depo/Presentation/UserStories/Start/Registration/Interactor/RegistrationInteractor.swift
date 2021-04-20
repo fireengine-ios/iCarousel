@@ -17,11 +17,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     var captchaRequired = false
     private var retriesCount = 0 {
         didSet {
-            if retriesCount == NumericConstants.showFAQViewAttempts {
-                output?.showFAQView()
-            } else if retriesCount >= NumericConstants.showSupportViewAttempts {
-                output?.showSupportView()
-            }
+            showRelatedHelperView()
         }
     }
     
@@ -142,5 +138,29 @@ class RegistrationInteractor: RegistrationInteractorInput {
     
     func showSupportView() {
         output.showSupportView()
+    }
+    
+    private func showRelatedHelperView() {
+        if retriesCount == NumericConstants.showFAQViewAttempts {
+            output?.showFAQView()
+        } else {
+            #if LIFEBOX
+            FirebaseRemoteConfig.shared.fetchAttemptsBeforeSupportOnSignup() { [weak self] attempts in
+                guard let self = self else {
+                    return
+                }
+                
+                if self.retriesCount >= attempts {
+                    DispatchQueue.main.async {
+                        self.output?.showSupportView()
+                    }
+                }
+            }
+            #else
+            if retriesCount >= NumericConstants.showSupportViewAttempts {
+                output?.showSupportView()
+            }
+            #endif
+        }
     }
 }

@@ -81,9 +81,10 @@ enum SortedRules: Int {
     
     var sortOder: SortOrder {
         switch self {
-        case .timeUp, .timeUpWithoutSection, .lettersAZ, .sizeAZ, .albumlettersAZ, .metaDataTimeUp, .lastModifiedTimeUp:
+        case .timeUp, .timeUpWithoutSection, .lettersZA, .sizeAZ, .albumlettersZA, .metaDataTimeUp, .lastModifiedTimeUp:
             return .desc
-        case .timeDown, .timeDownWithoutSection, .lettersZA, .sizeZA, .albumlettersZA, .metaDataTimeDown, .lastModifiedTimeDown:
+            
+        case .timeDown, .timeDownWithoutSection, .lettersAZ, .sizeZA, .albumlettersAZ, .metaDataTimeDown, .lastModifiedTimeDown:
             return .asc
         }
     }
@@ -126,7 +127,7 @@ class MoreActionsConfig {
         }
     }
     
-    enum SortRullesType: CustomStringConvertible {
+    enum SortRullesType: CustomStringConvertible, CaseIterable {
         case AlphaBetricAZ
         case AlphaBetricZA
         case LettersAZ
@@ -163,9 +164,9 @@ class MoreActionsConfig {
         var sortedRulesConveted: SortedRules {
             switch self {
             case .AlphaBetricAZ, .LettersAZ:
-                return .lettersZA
-            case .AlphaBetricZA, .LettersZA:
                 return .lettersAZ
+            case .AlphaBetricZA, .LettersZA:
+                return .lettersZA
             case .TimeNewOld:
                 return .timeUp
             case .TimeOldNew:

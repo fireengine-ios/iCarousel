@@ -18,26 +18,12 @@ class RegistrationRouter: RegistrationRouterInput {
     }
     
     func termsAndServices(with delegate: RegistrationViewDelegate?, email: String, phoneNumber: String, signUpResponse: SignUpSuccessResponse? = nil, userInfo: RegistrationUserInfoModel? = nil) {
-        
-        let okHandler: VoidHandler = { [weak self] in
-            guard let termsAndServices = self?.router.termsAndServicesScreen(login: false,
-                                                                             delegate: delegate,
-                                                                             phoneNumber: phoneNumber,
-                                                                             signUpResponse: signUpResponse,
-                                                                             userInfo: userInfo) else { return }
-            self?.router.pushViewController(viewController: termsAndServices)
-        }
-        
-        let message = String(format: TextConstants.registrationEmailPopupMessage, email)
-        
-        let controller = PopUpController.with(title: TextConstants.registrationEmailPopupTitle,
-                                              message: message,
-                                              image: .error,
-                                              buttonTitle: TextConstants.ok,
-                                              action: { vc in
-                                                vc.close(completion: okHandler)
-        })
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        let termsAndServices = router.termsAndServicesScreen(login: false,
+                                                             delegate: delegate,
+                                                             phoneNumber: phoneNumber,
+                                                             signUpResponse: signUpResponse,
+                                                             userInfo: userInfo)
+        router.pushViewController(viewController: termsAndServices)
     }
     
     func openSupport() {

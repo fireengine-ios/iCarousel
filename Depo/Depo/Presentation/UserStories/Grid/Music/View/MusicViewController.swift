@@ -10,22 +10,17 @@ import UIKit
 
 final class MusicViewController: BaseFilesGreedViewController {
     
-    private enum Constants {
-        static let spotifyStatusViewHeight: CGFloat = 78
-        static let bottomInsetCollectionView: CGFloat = 25
-    }
-    
     private let spotifyStatusView = SpotifyStatusView.initFromNib()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        prepareDesign()
+        spotifyStatusView.delegate = self
     }
     
     override func showNoFilesWith(text: String, image: UIImage, createFilesButtonText: String, needHideTopBar: Bool) {
         super.showNoFilesWith(text: text, image: image, createFilesButtonText: createFilesButtonText, needHideTopBar: needHideTopBar)
-        spotifyStatusView.isHidden = true
+        refreshSpotifyStatusView(isHidden: true)
     }
     
     @objc override func loadData() {
@@ -35,36 +30,9 @@ final class MusicViewController: BaseFilesGreedViewController {
     
     // MARK: Private methods
     
-    private func prepareDesign() {
-        collectionView.addSubview(spotifyStatusView)
-        collectionView.contentInset = UIEdgeInsets(top: Constants.spotifyStatusViewHeight, left: 0, bottom: Constants.bottomInsetCollectionView, right: 0)
-
-        prepareSpotifyStatusView()
-    }
-    
-    private func prepareSpotifyStatusView() {
-        spotifyStatusView.delegate = self
-        spotifyStatusView.isHidden = true
-        spotifyStatusView.translatesAutoresizingMaskIntoConstraints = false
-        spotifyStatusView.heightAnchor.constraint(equalToConstant: Constants.spotifyStatusViewHeight).isActive = true
-        spotifyStatusView.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
-        spotifyStatusView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        spotifyStatusView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    }
-    
     private func refreshSpotifyStatusView(isHidden: Bool) {
-        guard let collectionView = collectionView else {
-            return
-        }
-        let spotifyStatusViewHeight = isHidden ? 0 : Constants.spotifyStatusViewHeight
-        collectionView.contentInset = UIEdgeInsets(top: spotifyStatusViewHeight, left: 0, bottom: Constants.bottomInsetCollectionView, right: 0)
-        /// To not update offset when new page is loading
-        if Constants.spotifyStatusViewHeight > collectionView.contentOffset.y, spotifyStatusView.isHidden != isHidden {
-            self.collectionView.setContentOffset(CGPoint(x: 0, y: -spotifyStatusViewHeight), animated: true)
-        }
-        spotifyStatusView.isHidden = isHidden
+        cardsContainerView.setFooter(view: isHidden ? nil : spotifyStatusView)
     }
-    
 }
 
 // MARK: - MusicViewInput

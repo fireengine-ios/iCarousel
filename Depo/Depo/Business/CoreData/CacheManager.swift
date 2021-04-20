@@ -13,6 +13,9 @@
  //
  */
 
+import WidgetKit
+
+
 protocol CacheManagerDelegate: class {
     func didCompleteCacheActualization()
 }
@@ -32,7 +35,11 @@ final class CacheManager {
     private(set) var processingRemoteItems = false
     private(set) var processingLocalItems = false
     private(set) var isProcessing = false
-    private(set) var isCacheActualized = false
+    private(set) var isCacheActualized: Bool = false {
+        didSet {
+            WidgetService.shared.isPreparationFinished = isCacheActualized
+        }
+    }
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
     
@@ -104,6 +111,20 @@ final class CacheManager {
                                     debugLog("CacheManager cache is actualized")
                                     self.updatePreparation(isBegun: false)
                                     SyncServiceManager.shared.updateImmediately()
+                                    
+                                    let mediaService = MediaItemOperationsService.shared
+                                    mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
+                                        mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
+                                            SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds) {
+                                                if #available(iOS 14.0, *) {
+                                                    if !SyncServiceManager.shared.hasExecutingSync {
+                                                        WidgetCenter.shared.reloadAllTimelines()
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
                                     self.delegates.invoke { $0.didCompleteCacheActualization() }
                                 }
                             })
@@ -125,6 +146,20 @@ final class CacheManager {
                                 debugLog("CacheManager cache is actualized")
                                 self.updatePreparation(isBegun: false)
                                 SyncServiceManager.shared.updateImmediately()
+                                
+                                let mediaService = MediaItemOperationsService.shared
+                                mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
+                                    mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
+                                        SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds) {
+                                            if #available(iOS 14.0, *) {
+                                                if !SyncServiceManager.shared.hasExecutingSync {
+                                                    WidgetCenter.shared.reloadAllTimelines()
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
                                 self.delegates.invoke { $0.didCompleteCacheActualization() }
                             }
                         })

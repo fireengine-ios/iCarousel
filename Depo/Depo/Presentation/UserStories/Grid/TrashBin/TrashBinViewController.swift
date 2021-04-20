@@ -42,7 +42,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         setupEmptyView()
         bottomBarManager.setup()
         navbarManager.setDefaultState(sortType: dataSource.sortedRule)
-        floatingButtonsArray.append(contentsOf: [.upload])
+        floatingButtonsArray.append(contentsOf: [])
     
         interactor.output = self
         
@@ -211,6 +211,10 @@ extension TrashBinViewController: TrashBinDataSourceDelegate {
     
     func onMoreButtonTapped(sender: Any, item: Item) {
         threeDotsManager.showActions(item: item, sender: sender)
+    }
+    
+    func didSelectActionInMenu(action: ActionType, item: Item) {
+        threeDotsManager.handleAction(type: action, item: item)
     }
 }
 

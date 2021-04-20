@@ -65,7 +65,7 @@ final class AnalyticsService: NSObject {
             filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
         #elseif APPSTORE
             filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
-        #elseif DEBUG
+        #else
             filePath = Bundle.main.path(forResource: "GoogleService-Info-debug", ofType: "plist")
         #endif
         
@@ -139,7 +139,9 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackPhotopickAnalysis(eventLabel: GAEventLabel, dailyDrawleft: Int?, totalDraw: Int?)
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
     func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: String)
+    func trackPhotoEditEvent(category: GAEventCategory.PhotoEditCategory, eventAction: GAEventAction, eventLabel: GAEventLabel, filterType: String?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
+    func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any])
 }
 
 extension AnalyticsService: AnalyticsGA {
@@ -172,6 +174,8 @@ extension AnalyticsService: AnalyticsGA {
                                             editFields: String? = nil,
                                             connectionStatus: Bool? = nil,
                                             statusType: String? = nil,
+                                            photoEditFilterType: String? = nil,
+                                            shareParameters: [String: Any]? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -265,7 +269,9 @@ extension AnalyticsService: AnalyticsGA {
                 editFields: editFields,
                 connectionStatus: connectionStatus,
                 statusType: statusType,
-                usagePercentage: usagePercentage).productParametrs)
+                usagePercentage: usagePercentage,
+                photoEditFilterType: photoEditFilterType,
+                shareParameters: shareParameters).productParametrs)
         }
     }
     
@@ -709,6 +715,22 @@ extension AnalyticsService: AnalyticsGA {
         }
     }
     
+    func trackPhotoEditEvent(category: GAEventCategory.PhotoEditCategory, eventAction: GAEventAction, eventLabel: GAEventLabel, filterType: String? = nil) {
+        prepareDimentionsParametrs(screen: nil, photoEditFilterType: filterType) { dimentionParameters in
+            let eventParameters = self.parameters(category: .photoEdit(category), action: eventAction, label: eventLabel)
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: eventParameters + dimentionParameters)
+        }
+    }
+    
+    func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any]) {
+        prepareDimentionsParametrs(screen: nil, shareParameters: shareParameters) { dimentionParametrs in
+            let parametrs = self.parameters(category: .sharedFolder,
+                                            action: eventAction,
+                                            label: eventLabel)
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
     //MARK: - Helpers
     
     private func parameters(category: GAEventCategory?, action: GAEventAction?, label: GAEventLabel?, value: String? = nil) -> [String: Any] {
@@ -745,7 +767,9 @@ extension AnalyticsService: NetmeraProtocol {
     }
     
     static func startNetmera() {
+        #if !targetEnvironment(simulator)
         NetmeraService.startNetmera()
+        #endif
     }
     
     static func updateNetmeraAPIKey() {

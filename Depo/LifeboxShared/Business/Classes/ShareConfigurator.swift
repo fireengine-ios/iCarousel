@@ -16,11 +16,7 @@ final class ShareConfigurator {
     let passcodeStorage: PasscodeStorage = factory.resolve()
     
     func setup() {
-        let urls: AuthorizationURLs = AuthorizationURLsImp()
-        let tokenStorage: TokenStorage = factory.resolve()
-        
-        let auth: AuthorizationRepository = AuthorizationRepositoryImp(urls: urls, tokenStorage: tokenStorage)
-        
+        let auth: AuthorizationRepository = factory.resolve()
         let sessionManager: SessionManager = factory.resolve()
         sessionManager.retrier = auth
         sessionManager.adapter = auth

@@ -18,10 +18,19 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     override func viewIsReady(collectionView: UICollectionView) {
         dataSource = UploadFilesSelectionDataSource()
         super.viewIsReady(collectionView: collectionView)
+        quickSelectAllow(collectionView: collectionView)
         dataSource.isHeaderless = true
         dataSource.canReselect = true
         dataSource.enableSelectionOnHeader = true
         dataSource.updateDisplayngType(type: .greed)
+    }
+    
+    private func quickSelectAllow(collectionView: UICollectionView) {
+        guard let collectionView = collectionView as? QuickSelectCollectionView else {
+            assertionFailure()
+            return
+        }
+        collectionView.isQuickSelectAllowed = true
     }
     
     override func updateThreeDotsButton() {

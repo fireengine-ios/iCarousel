@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="odV-w1-KP1" customClass="CarouselPagerReusableViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UgU-2o-uBx" userLabel="Carousel View">
+                    <rect key="frame" x="0.0" y="0.0" width="500" height="200"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" restorationIdentifier="contentView" translatesAutoresizingMaskIntoConstraints="NO" id="2g3-fW-fI8">
+                            <rect key="frame" x="10" y="5" width="480" height="190"/>
+                            <subviews>
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="scrollView" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTv-KG-DXj">
+                                    <rect key="frame" x="5" y="5" width="470" height="165"/>
+                                </scrollView>
+                                <pageControl opaque="NO" contentMode="scaleToFill" restorationIdentifier="page control" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="cbc-SD-EkJ">
+                                    <rect key="frame" x="0.0" y="170" width="480" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="6GP-xZ-ekw"/>
+                                    </constraints>
+                                </pageControl>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="cbc-SD-EkJ" firstAttribute="top" secondItem="LTv-KG-DXj" secondAttribute="bottom" id="25D-Tc-0Dd"/>
+                                <constraint firstAttribute="trailing" secondItem="LTv-KG-DXj" secondAttribute="trailing" constant="5" id="Q5O-48-Znf"/>
+                                <constraint firstAttribute="trailing" secondItem="cbc-SD-EkJ" secondAttribute="trailing" id="XAS-JC-vEp"/>
+                                <constraint firstItem="LTv-KG-DXj" firstAttribute="top" secondItem="2g3-fW-fI8" secondAttribute="top" constant="5" id="aOP-v5-fid"/>
+                                <constraint firstItem="cbc-SD-EkJ" firstAttribute="leading" secondItem="2g3-fW-fI8" secondAttribute="leading" id="cwT-1D-cxL"/>
+                                <constraint firstItem="LTv-KG-DXj" firstAttribute="leading" secondItem="2g3-fW-fI8" secondAttribute="leading" constant="5" id="eep-pc-5KM"/>
+                                <constraint firstAttribute="bottom" secondItem="cbc-SD-EkJ" secondAttribute="bottom" id="fQt-Oh-1JX"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="2g3-fW-fI8" secondAttribute="bottom" constant="5" id="Bnf-sy-jGr"/>
+                        <constraint firstItem="2g3-fW-fI8" firstAttribute="leading" secondItem="UgU-2o-uBx" secondAttribute="leading" constant="10" id="Cp4-Zq-Uht"/>
+                        <constraint firstItem="2g3-fW-fI8" firstAttribute="top" secondItem="UgU-2o-uBx" secondAttribute="top" constant="5" id="OJs-Ef-ghc"/>
+                        <constraint firstAttribute="trailing" secondItem="2g3-fW-fI8" secondAttribute="trailing" constant="10" id="zcA-Dy-qDa"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="UgU-2o-uBx" firstAttribute="top" secondItem="odV-w1-KP1" secondAttribute="top" id="K5g-Ra-ret"/>
+                <constraint firstAttribute="trailing" secondItem="UgU-2o-uBx" secondAttribute="trailing" id="MzT-Ji-qaW"/>
+                <constraint firstItem="UgU-2o-uBx" firstAttribute="leading" secondItem="odV-w1-KP1" secondAttribute="leading" id="NXw-0R-XNd"/>
+                <constraint firstAttribute="bottom" secondItem="UgU-2o-uBx" secondAttribute="bottom" id="XKy-rH-8z8"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="3PF-mN-Thc"/>
+            <connections>
+                <outlet property="contentView" destination="2g3-fW-fI8" id="kIS-nC-No9"/>
+                <outlet property="pageControl" destination="cbc-SD-EkJ" id="5aM-ax-Xs0"/>
+                <outlet property="scrollView" destination="LTv-KG-DXj" id="P0k-7S-hcn"/>
+            </connections>
+            <point key="canvasLocation" x="84" y="159"/>
+        </collectionReusableView>
+    </objects>
+</document>

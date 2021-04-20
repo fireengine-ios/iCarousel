@@ -15,10 +15,12 @@ final class AppWormholeListener {
     
     private let authtService = AuthenticationService()
     private let accountService = AccountService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     func startListen() {
         listenLogout()
         listenOffTurkcellPassword()
+        listenWidgetChangeState()
     }
     
     private(set) lazy var wormhole: MMWormhole = MMWormhole(applicationGroupIdentifier: SharedConstants.groupIdentifier, optionalDirectory: SharedConstants.wormholeDirectoryIdentifier)
@@ -53,6 +55,18 @@ final class AppWormholeListener {
                     assertionFailure("server returned wrong/updated response")
                 }
             }, fail: nil)
+        }
+    }
+    
+    private func listenWidgetChangeState() {
+        wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeNewWidgetStateIdentifier) { [weak self] value in
+            guard let stateGAName = value as? String else {
+                return
+            }
+            
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                      eventActions: .widgetOrder,
+                                                      eventLabel: .widgetOrder(stateGAName))
         }
     }
     

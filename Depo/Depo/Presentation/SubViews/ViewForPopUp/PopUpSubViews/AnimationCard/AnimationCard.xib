@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnimationCard" customModule="lifebox" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnimationCard" customModule="Billo" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="nPL-YN-sbK" customClass="AnimationCard" customModule="lifebox" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="nPL-YN-sbK" customClass="AnimationCard" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="499"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -40,7 +37,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0My-I7-oH7">
                             <rect key="frame" x="1" y="1" width="357" height="357"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q8L-Bp-NgS" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q8L-Bp-NgS" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="357" height="357"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dnp-Zi-YRh">
@@ -109,24 +106,35 @@
                         <action selector="actionCloseButton:" destination="nPL-YN-sbK" eventType="touchUpInside" id="0Aa-Gy-1hk"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlK-kk-NOo">
+                    <rect key="frame" x="258.5" y="459" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="shareButtonTapped:" destination="nPL-YN-sbK" eventType="touchUpInside" id="Frj-6K-TmY"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Y6l-AY-WpA" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="2q4-5B-3Cc"/>
                 <constraint firstItem="gsg-xT-146" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" id="4gF-eN-3GD"/>
+                <constraint firstItem="PlK-kk-NOo" firstAttribute="width" secondItem="4Zl-cS-Vds" secondAttribute="width" id="7dO-R5-RDT"/>
                 <constraint firstItem="4Zl-cS-Vds" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="7ug-GE-qVA"/>
                 <constraint firstItem="53D-mT-qdc" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="8" id="E8s-cz-aoz"/>
                 <constraint firstItem="bNu-b0-weG" firstAttribute="top" secondItem="nPL-YN-sbK" secondAttribute="top" constant="15" id="ExO-Qs-i8P"/>
                 <constraint firstItem="53D-mT-qdc" firstAttribute="top" secondItem="Y6l-AY-WpA" secondAttribute="bottom" constant="10" id="JYT-f1-WLK"/>
                 <constraint firstAttribute="trailing" secondItem="53D-mT-qdc" secondAttribute="trailing" constant="8" id="L1I-fP-LHm"/>
+                <constraint firstItem="PlK-kk-NOo" firstAttribute="centerY" secondItem="4Zl-cS-Vds" secondAttribute="centerY" id="MMq-WZ-c8r"/>
                 <constraint firstItem="SuT-ut-vPx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bNu-b0-weG" secondAttribute="trailing" constant="15" id="NdG-dW-0Qu"/>
                 <constraint firstAttribute="trailing" secondItem="Y6l-AY-WpA" secondAttribute="trailing" constant="14" id="See-BI-kfg"/>
                 <constraint firstItem="4Zl-cS-Vds" firstAttribute="top" secondItem="gsg-xT-146" secondAttribute="bottom" id="TEa-f6-9TB"/>
                 <constraint firstAttribute="trailing" secondItem="gsg-xT-146" secondAttribute="trailing" id="TWJ-KQ-saV"/>
                 <constraint firstItem="gsg-xT-146" firstAttribute="top" secondItem="53D-mT-qdc" secondAttribute="bottom" constant="10" id="X9K-im-YO4"/>
+                <constraint firstItem="PlK-kk-NOo" firstAttribute="height" secondItem="4Zl-cS-Vds" secondAttribute="height" multiplier="0.681818" id="a3q-uL-Oo2"/>
                 <constraint firstAttribute="trailing" secondItem="SuT-ut-vPx" secondAttribute="trailing" id="bNM-IR-H3m"/>
                 <constraint firstItem="Y6l-AY-WpA" firstAttribute="top" secondItem="bNu-b0-weG" secondAttribute="bottom" constant="15" id="hDf-DV-2DT"/>
                 <constraint firstItem="53D-mT-qdc" firstAttribute="centerX" secondItem="nPL-YN-sbK" secondAttribute="centerX" id="jhx-bw-mOt"/>
+                <constraint firstItem="PlK-kk-NOo" firstAttribute="centerX" secondItem="nPL-YN-sbK" secondAttribute="centerX" multiplier="1.5" id="k9d-sa-k11"/>
                 <constraint firstItem="SuT-ut-vPx" firstAttribute="top" secondItem="nPL-YN-sbK" secondAttribute="top" id="kUv-xO-9wN"/>
                 <constraint firstItem="bNu-b0-weG" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="vxc-87-xCF"/>
             </constraints>
@@ -134,6 +142,7 @@
             <connections>
                 <outlet property="bottomButton" destination="4Zl-cS-Vds" id="pTa-Sh-D9u"/>
                 <outlet property="photoImageView" destination="Q8L-Bp-NgS" id="FBL-dy-CwA"/>
+                <outlet property="shareButton" destination="PlK-kk-NOo" id="Cej-pY-Xq0"/>
                 <outlet property="subTitleLabel" destination="Y6l-AY-WpA" id="SYP-D6-jwy"/>
                 <outlet property="titleLabel" destination="bNu-b0-weG" id="SSZ-kZ-7T6"/>
             </connections>

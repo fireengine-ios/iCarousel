@@ -5,6 +5,7 @@
 //  Created by Oleg on 07/07/2017.
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
+import WidgetKit
 
 final class SettingsPresenter: BasePresenter {
     
@@ -72,6 +73,7 @@ extension SettingsPresenter: SettingsViewOutput {
                                                     self?.interactor.checkConnectedToNetwork()
                                                 }
         })
+        
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     

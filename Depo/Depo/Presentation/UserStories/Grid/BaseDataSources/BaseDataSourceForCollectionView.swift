@@ -65,6 +65,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     func newFolderCreated()
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath)
+    
+    func didSelectAction(type: ActionType, on item: Item?, sender: Any?)
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -260,7 +262,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if self.isDropedData || array.isEmpty {
                 DispatchQueue.main.async {
                     if self.needReloadData {
-                        CellImageManager.clear()
+                        self.cancelImageRequests()
                         self.collectionView?.reloadData()
                     }
                     self.isLocalFilesRequested = false
@@ -291,7 +293,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                
                 
                     collectionView.collectionViewLayout.invalidateLayout()
-                    CellImageManager.clear()
+                    self.cancelImageRequests()
                     collectionView.reloadData()
                     collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
                             guard let `self` = self else {
@@ -822,7 +824,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             guard let unwrapedObject = object else {
                 return
             }
-            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjectSelected(object: unwrapedObject))
             cell_.configureWithWrapper(wrappedObj: unwrapedObject)
             
             if let cell = cell as? BasicCollectionMultiFileCell {
@@ -894,7 +896,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             debugLog("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
             
-            CellImageManager.clear()
+            self.cancelImageRequests()
             collectionView.reloadData()
             
             if self.numberOfSections(in: collectionView) == 0 {
@@ -915,16 +917,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         debugPrint("Reload updateDisplayngType")
         DispatchQueue.toMain {
-            CellImageManager.clear()
+            self.cancelImageRequests()
             self.collectionView?.reloadData()
-            let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+            let firstVisibleIndexPath = self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
             })
 
             if let firstVisibleIndexPath = firstVisibleIndexPath {
                 if firstVisibleIndexPath.row == 0, firstVisibleIndexPath.section == 0 {
                     self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .centeredVertically, animated: false)
-                } else{
+                } else {
                     self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
                 }
             }
@@ -962,13 +964,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let object = itemForIndexPath(indexPath: path) {
             
             if !isSelectionStateActive {
-                if !isObjctSelected(object: object) {
+                if !isObjectSelected(object: object) {
                     onSelectObject(object: object)
                 }
                 
                 forwardDelegate.onLongPressInCell()
                 updateSelectionCount()
-            } else if !isObjctSelected(object: object) {
+            } else if !isObjectSelected(object: object) {
                 onSelectObject(object: object)
                 updateSelectionCount()
             }
@@ -981,12 +983,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         self.delegate?.onChangeSelectedItemsCount(selectedItemsCount: selectedItemsArray.count)
     }
     
-    func isObjctSelected(object: BaseDataSourceItem) -> Bool {
+    func isObjectSelected(object: BaseDataSourceItem) -> Bool {
         return selectedItemsArray.contains(object)
     }
     
     func onSelectObject(object: BaseDataSourceItem) {
-        if isObjctSelected(object: object) {
+        if isObjectSelected(object: object) {
             selectedItemsArray.remove(object)
         } else {
             if maxSelectionCount >= 0 {
@@ -1006,6 +1008,42 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         for header in headers{
             header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
                                     activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
+        }
+    }
+    
+    func onSelectObjectWithQuickSelect(object: BaseDataSourceItem) {
+        if isObjectSelected(object: object) {
+            if let collectionView = collectionView as? QuickSelectCollectionView {
+                if !collectionView.isQuickSelecting {
+                    selectedItemsArray.remove(object)
+                }
+            } else {
+                selectedItemsArray.remove(object)
+            }
+        } else {
+            if maxSelectionCount >= 0 {
+                if selectedItemsArray.count >= maxSelectionCount {
+                    if canReselect {
+                        selectedItemsArray.removeFirst()
+                        updateVisibleCells()
+                    } else {
+                        delegate?.onMaxSelectionExeption()
+                        return
+                    }
+                }
+            }
+            selectedItemsArray.insert(object)
+        }
+        
+        for header in headers{
+            header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
+                                    activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
+        }
+    }
+    
+    func onDeselectObject(object: BaseDataSourceItem) {
+        if isObjectSelected(object: object) {
+            selectedItemsArray.remove(object)
         }
     }
     
@@ -1048,7 +1086,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             cell_.setSelection(isSelectionActive: isSelectionStateActive,
-                               isSelected: isObjctSelected(object: object))
+                               isSelected: isObjectSelected(object: object))
             cell_.configureWithWrapper(wrappedObj: object)
             
         }
@@ -1073,7 +1111,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             guard let unwrapedObject = object else {
                 continue
             }
-            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjectSelected(object: unwrapedObject))
             cell_.set(name: unwrapedObject.name)
             ///TODO: confireWithWrapperd call may be meaningless because of isAlreadyConfigured flag inside
             cell_.configureWithWrapper(wrappedObj: unwrapedObject)
@@ -1102,6 +1140,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
         delegate?.onMoreActions(ofItem: itemModel, sender: sender)
+    }
+    
+    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
+        delegate?.didSelectAction(type: type, on: itemModel, sender: sender)
     }
     
     func isInSelectionMode() -> Bool {
@@ -1190,12 +1232,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
-        // ---------------------=======
         if cellReUseID == nil {
             debugLog("BaseDataSourceForCollectionViewDelegate cellForItemAt cellReUseID == nil")
-            cellReUseID = CollectionViewCellsIdsConstant.cellForImage// ---------------------=======
+            cellReUseID = CollectionViewCellsIdsConstant.cellForImage
         }
-        // ---------------------=======
+    
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
@@ -1216,7 +1257,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         cell_.updating()
-        cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+        cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjectSelected(object: unwrapedObject))
         cell_.configureWithWrapper(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
         
@@ -1326,7 +1367,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
             }
-            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjectSelected(object: unwrapedObject))
             if  let forwardDelegate = self.delegate {
                 forwardDelegate.onItemSelectedActiveState(item: unwrapedObject)
             }
@@ -1764,7 +1805,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             DispatchQueue.toMain {
-                CellImageManager.clear()
+                self.cancelImageRequests()
                 self.emptyMetaItems = emptyMetaItems
                 self.allItems = newArray
                 self.allMediaItems = newArray.flatMap { $0 }
@@ -1844,7 +1885,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         DispatchQueue.main.async {
-            CellImageManager.clear()
+            self.cancelImageRequests()
             self.collectionView?.reloadData()
         }
     }
@@ -2044,8 +2085,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             self.delegate?.needReloadData()
         }
     }
+    
+    private func cancelImageRequests() {
+        collectionView?.visibleCells.forEach { cell in
+            (cell as? CollectionViewCellDataProtocol)?.cleanCell()
+        }
+    }
 }
-
 
 extension BaseDataSourceForCollectionView {
     

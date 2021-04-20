@@ -10,7 +10,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     weak var output: PhotoVideoDetailInteractorOutput!
     
-    private var array = [Item]()
+    private var array = SynchronizedArray<Item>()
     
     var albumUUID: String?
     
@@ -28,6 +28,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var accountService = AccountService()
     private let authorityStorage = AuthoritySingleton.shared
+    private lazy var shareApiService = PrivateShareApiServiceImpl()
+    private lazy var privateShareAnalytics = PrivateShareAnalytics()
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -43,12 +45,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     var allItems: [Item] {
-        return array
+        return array.getArray()
     }
     
     func onSelectItem(fileObject: Item, from items: [Item]) {
         array.removeAll()
-        array.append(contentsOf: items)
+        array.append(items)
         
         if fileObject.isLocalItem {
             let localId = fileObject.getLocalID()
@@ -58,8 +60,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         } else if let index = items.firstIndex(where: { $0.uuid == fileObject.uuid }) {
             selectedIndex = index
         }
-        
-        
     }
     
     func onViewIsReady() {
@@ -67,11 +67,13 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-        output.onShowSelectedItem(at: index, from: array)
+        output.onShowSelectedItem(at: index, from: array.getArray())
     }
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
-        let selectedItem = array[selectedIndex]
+        guard let selectedItem = array[selectedIndex] else {
+            return EditingBarConfig(elementsConfig: [], style: .black, tintColor: nil)
+        }
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: viewType)
         return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
     }
@@ -81,7 +83,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-        array.remove(at: index)
+        array.safeRemove(at: index)
 
         if index >= array.count {
             selectedIndex = array.count - 1
@@ -89,7 +91,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 
         if !array.isEmpty {
             let nextIndex = index == array.count ? array.count - 1 : index
-            output.updateItems(objects: array, selectedIndex: nextIndex)
+            output.updateItems(objects: array.getArray(), selectedIndex: nextIndex)
         } else {
             output.onLastRemoved()
         }
@@ -99,6 +101,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
             item.isLocalItem = false
             array[indexToChange] = item
+        }
+    }
+    
+    func updateExpiredItem(_ item: WrapData) {
+        if let index = allItems.firstIndex(where: { $0 == item && $0.hasExpiredPreviewUrl() }) {
+            array[index] = item
         }
     }
     
@@ -119,7 +127,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     func appendItems(_ items: [Item]) {
-        array.append(contentsOf: items)
+        array.append( items)
     }
     
     func onRename(newName: String) {
@@ -138,18 +146,23 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-            let renameFile = RenameFile(uuid: item.uuid, newName: newName)
-            FileService().rename(rename: renameFile, success: { [weak self] in
-                DispatchQueue.main.async {
-                    item.name = newName
-                    self?.output.updated()
-                    ItemOperationManager.default.didRenameItem(item)
+        guard let projectId = item.projectId else {
+            return
+        }
+        
+        shareApiService.renameItem(projectId: projectId, uuid: item.uuid, name: newName) { [weak self] result in
+            switch result {
+            case .success():
+                item.name = newName
+                self?.output.updated()
+                if !item.isOwner {
+                    self?.privateShareAnalytics.sharedWithMe(action: .rename, on: item)
                 }
-                }, fail: { [weak self] error in
-                    DispatchQueue.main.async {
-                        self?.output.failedUpdate(error: error)
-                    }
-            })
+                ItemOperationManager.default.didRenameItem(item)
+            case .failed(let error):
+                self?.output.failedUpdate(error: error)
+            }
+        }
     }
     
     func onValidateName(newName: String) {
@@ -241,6 +254,33 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 self?.output.updatePeople(items: [])
                     completion?()
             }
+        }
+    }
+    
+    func createNewUrl() {
+        guard let index = currentItemIndex,
+              let item = allItems[safe: index],
+              let projectId = item.projectId else {
+            return
+        }
+        
+        shareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { [weak self] result in
+            switch result {
+            case .success(let object):
+                if let url = object.url {
+                    item.tmpDownloadUrl = url
+                    self?.updateItem(item)
+                    self?.output.updateItem(item)
+                }
+            case .failed(let error):
+                self?.output.failedUpdate(error: error)
+            }
+        }
+    }
+    
+    private func updateItem(_ item: Item) {
+        if let index = allItems.firstIndex(where: { $0 == item }) {
+            array[index] = item
         }
     }
 }

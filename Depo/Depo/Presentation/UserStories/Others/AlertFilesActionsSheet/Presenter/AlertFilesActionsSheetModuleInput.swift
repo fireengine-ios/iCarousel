@@ -22,4 +22,8 @@ protocol AlertFilesActionsSheetModuleInput: class {
     func showSpecifiedMusicAlertSheet(with item: WrapData, status: ItemStatus, presentedBy sender: Any?, onSourceView sourceView: UIView?, viewController: UIViewController?)
     
     func onlyPresentAlertSheet(with elements: [ElementTypes], for objects:[Item], sender: Any?)
+    
+    func handleAction(type: ElementTypes, items: [BaseDataSourceItem], sender: Any?)
+    
+    func handleShare(type: ShareTypes, items: [BaseDataSourceItem], sender: Any?)
 }

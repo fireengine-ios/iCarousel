@@ -31,6 +31,11 @@ final class SmashActionService: CommonDivorceActionService {
                                         self.callback?(true)
         })
     }
+    
+    override func onShare() {
+        let controller = RouterVC().getViewControllerForPresent()
+        (controller as? PhotoVideoDetailViewController)?.shareCurrentItem()
+    }
 }
 
 //MARK: - SmashActionServiceProtocol
@@ -48,7 +53,10 @@ extension SmashActionService: SmashActionServiceProtocol {
 //MARK: - DivorceActionPopUpPresentProtocol
 extension SmashActionService {
     override var state: HSCompletionPopUpsFactory.State {
-        return .smashCompleted
+        if permissions?.hasPermissionFor(.faceRecognition) == true, faceImageGrouping?.isFaceImageAllowed == true {
+            return .smashCompletedPremium
+        }
+        return .smashCompletedStandart
     }
     
     override var itemsCount: Int {

@@ -15,6 +15,7 @@ enum SyncOperationType {
     case deleteDuplicated
     case deleteBackup
     case getBackUpStatus
+    case getBackupList
     case cancel
     
     func transformToContactOperationSyncType(contactSyncResponse: ContactSync.SyncResponse? = nil) -> ContactsOperationType? {
@@ -23,7 +24,7 @@ enum SyncOperationType {
             return .backUp(contactSyncResponse)
         case .restore:
             return .restore
-        case .analyze, .getBackUpStatus, .cancel:
+        case .analyze, .getBackUpStatus, .getBackupList, .cancel:
             return nil
         case .deleteDuplicated:
             return .deleteDuplicates
@@ -38,7 +39,7 @@ enum SyncOperationType {
             return .backup
         case .restore:
             return .restore
-        case .analyze, .getBackUpStatus, .cancel, .deleteDuplicated, .deleteBackup:
+        case .analyze, .getBackUpStatus, .getBackupList, .cancel, .deleteDuplicated, .deleteBackup:
             return nil
         }
     }
@@ -93,7 +94,7 @@ class ContactsSyncService: BaseRequestService {
     
     private var lastToDeleteContactsValue: Int = 0
 
-    func executeOperation(type: SYNCMode, progress: ProgressCallback?, finishCallback: FinishCallback?, errorCallback: ErrorCallback?) {
+    func executeOperation(type: SYNCMode, backupKey: String, progress: ProgressCallback?, finishCallback: FinishCallback?, errorCallback: ErrorCallback?) {
         let typeString = type == .backup ? "Backup" : "Restore"
         debugLog("ContactsSyncService executeOperation \(typeString)")
         
@@ -120,6 +121,7 @@ class ContactsSyncService: BaseRequestService {
             /// ContactSyncSDK there is guard for running but it is not good
             /// but anyway we can call doSync everytime
             SyncSettings.shared().mode = type
+            SyncSettings.shared().backupVersion = backupKey
             ContactSyncSDK.doSync(type)
         }
     }
@@ -373,6 +375,7 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func updateAccessToken() {
+        debugLog("CONTACT SYNC: updateAccessToken")
         let tokenStorage: TokenStorage = factory.resolve()
         SyncSettings.shared().token = tokenStorage.accessToken
     }

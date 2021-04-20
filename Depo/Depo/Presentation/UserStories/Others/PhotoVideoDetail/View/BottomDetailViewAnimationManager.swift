@@ -26,6 +26,12 @@ enum CardState {
     }
 }
 
+enum PanGestureMoveDirection {
+    case undefined
+    case down
+    case up
+}
+
 protocol BottomDetailViewAnimationManagerDelegate: class {
     func getSelectedIindex() -> Int
     func getObjectsCount() -> Int
@@ -33,6 +39,7 @@ protocol BottomDetailViewAnimationManagerDelegate: class {
     
     func setIsFullScreenState(_ isFullScreen: Bool)
     func setSelectedIndex(_ selectedIndex: Int)
+    func pullToDownEffect()
 }
 
 protocol BottomDetailViewAnimationManagerProtocol {
@@ -49,7 +56,6 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     private let collectionView: UICollectionView
     private let passThrowView: PassThroughView
     private let view: UIView
-    private let collapseView: UIView
         
     private var isFullScreen: Bool {
         get {
@@ -72,19 +78,18 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     private weak var delegate: BottomDetailViewAnimationManagerDelegate?
 
     private var viewState: CardState = .collapsed
+    private var panGestureDirectionState: PanGestureMoveDirection = .undefined
     private var gestureBeginLocation: CGPoint = .zero
     private var dragViewBeginLocation: CGPoint = .zero
     private let cardHeight: CGFloat = UIScreen.main.bounds.height * 0.7
     
-    init(managedView: FileInfoView, passThrowView: PassThroughView, collectionView: UICollectionView, collapseView: UIView, parentView: UIView, delegate: BottomDetailViewAnimationManagerDelegate) {
+    init(managedView: FileInfoView, passThrowView: PassThroughView, collectionView: UICollectionView, parentView: UIView, delegate: BottomDetailViewAnimationManagerDelegate) {
         self.collectionView = collectionView
         self.managedView = managedView
         self.passThrowView = passThrowView
         self.view = parentView
-        self.collapseView = collapseView
         self.delegate = delegate
         passThrowView.delegate = self
-        collapseViewSetup()
     }
     
     private lazy var imageMaxY: CGFloat = {
@@ -103,13 +108,6 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
         passThroughView?.delegate = self
     }
     
-    private func collapseViewSetup() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(closeDetailView))
-        collapseView.addGestureRecognizer(tap)
-        collapseView.isHidden = true
-        collapseView.layer.cornerRadius = 15
-    }
-    
     func getCurrenState() -> CardState {
         return viewState
     }
@@ -120,7 +118,10 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     }
     
     private func getCellMaxY() -> CGFloat {
-        collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: .zero))?.frame.maxY ?? .zero
+        guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: 0)) as? PhotoVideoDetailCell else {
+            return .zero
+        }
+        return cell.frame.maxY
     }
     
     private func setupDetailViewAlpha(isHidden: Bool) {
@@ -148,10 +149,23 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             dragViewBeginLocation = collectionView.frame.origin
         case .changed:
             
+            switch panGestureDirectionState {
+            case .undefined:
+                if recognizer.translation(in: recognizer.view).y >= 0 {
+                    panGestureDirectionState = .down
+                } else {
+                    panGestureDirectionState = .up
+                }
+            default:
+                break
+            }
+
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
             
             if newLocation > 0 {
-                recognizer.state = .cancelled
+                if panGestureDirectionState == .down {
+                    delegate?.pullToDownEffect()
+                }
                 setCollapsedState()
                 return
             }
@@ -168,6 +182,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY
             
         case .ended:
+            panGestureDirectionState = .undefined
             dissableTouchUntillFinish(isDisabled: true)
             UIView.animate(withDuration: 0.3, animations: {
                 self.positionForView(velocityY: recognizer.velocity(in: self.managedView).y)
@@ -183,7 +198,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
                 self.dissableTouchUntillFinish(isDisabled: false)
             })
         default:
-            break
+            panGestureDirectionState = .undefined
         }
     }
     
@@ -194,6 +209,16 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
         } else {
             passThrowView.isUserInteractionEnabled = true
             passThrowView.enableGestures()
+        }
+    }
+    
+    private func pullToDownEffect(velocityY: CGFloat) {
+        guard viewState.isCollapsed else {
+            return
+        }
+        
+        if velocityY > 450 {
+            delegate?.pullToDownEffect()
         }
     }
     
@@ -236,7 +261,6 @@ extension BottomDetailViewAnimationManager {
         UIView.animate(withDuration: 0.5, animations: {
                         self.collectionView.frame.origin.y = .zero
                         self.managedView.frame.origin.y = self.collectionView.frame.maxY - self.imageMaxY
-                        self.collapseView.isHidden = true
         }, completion: { _ in
             self.setupDetailViewAlpha(isHidden: true)
             self.managedView.frame.origin.y = self.view.frame.height
@@ -252,7 +276,6 @@ extension BottomDetailViewAnimationManager {
         UIView.animate(withDuration: 0.1, animations: {
             self.collectionView.frame.origin.y = .zero
             self.managedView.frame.origin.y = self.collectionView.frame.maxY - self.imageMaxY
-            self.collapseView.isHidden = true
         }) { _ in
             self.setupDetailViewAlpha(isHidden: true)
             self.managedView.frame.origin.y = self.view.frame.height
@@ -264,7 +287,6 @@ extension BottomDetailViewAnimationManager {
         managedView.hideKeyboard()
         viewState = .collapsed
         isFullScreen = false
-        collapseView.isHidden = true
         setupDetailViewAlpha(isHidden: true)
         managedView.frame.origin.y = self.view.frame.height
     }
@@ -272,7 +294,6 @@ extension BottomDetailViewAnimationManager {
     private func setExpandedState() {
         view.layoutIfNeeded()
         isFullScreen = true
-        collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
         let yPositionForBottomView = view.frame.height - cardHeight
         let collectionViewCellMaxY = getCellMaxY()
@@ -287,7 +308,6 @@ extension BottomDetailViewAnimationManager {
         viewState = .full
         managedView.frame.origin.y = .zero
         collectionView.frame.origin.y = -collectionViewCellMaxY + imageMaxY
-        collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
         isFullScreen = true
     }
@@ -305,7 +325,6 @@ extension BottomDetailViewAnimationManager {
                             self.viewState = .expanded
                             self.collectionView.frame.origin.y = self.view.frame.minY - (self.cardHeight - self.imageMaxY)
                             self.managedView.frame.origin.y = self.collectionView.frame.maxY - self.imageMaxY
-                            self.collapseView.isHidden = false
                             self.setupDetailViewAlpha(isHidden: false)
             }, completion: nil)
         }
@@ -342,6 +361,10 @@ extension BottomDetailViewAnimationManager {
             return
         }
         
+        guard 0..<objectsCount ~= index else {
+            return
+        }
+        
         let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
         cell?.delegate = self
         let offsetY = collectionView.contentOffset.y
@@ -359,6 +382,7 @@ extension BottomDetailViewAnimationManager {
 extension BottomDetailViewAnimationManager: PhotoVideoDetailCellDelegate {
     func tapOnSelectedItem() {}
     func tapOnCellForFullScreen() {}
+    func didExpireUrl() {}
     
     func imageLoadingFinished() {
         let yPositionForBottomView = view.frame.height - cardHeight

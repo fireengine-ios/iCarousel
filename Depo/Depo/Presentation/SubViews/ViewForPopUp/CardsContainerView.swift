@@ -13,8 +13,9 @@ import UIKit
 }
 
 class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, SwipeableCardCellDelegate, CardsManagerViewProtocol {
-
+    
     var hConstraint: NSLayoutConstraint?
+    
     weak var delegate: CardsContainerViewDelegate?
     
     var tableView: UITableView = UITableView()
@@ -89,6 +90,16 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         }
     }
     
+    func setHeader(view: UIView?) {
+        tableView.tableHeaderView = view
+        updateH()
+    }
+    
+    func setFooter(view: UIView?) {
+        tableView.tableFooterView = view
+        updateH()
+    }
+    
     private func updateH() {
         if hConstraint != nil {
             let h = calulateCurrentH()
@@ -103,7 +114,9 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     }
     
     private func calulateCurrentH() -> CGFloat {
-        var h: CGFloat = 0
+        let headerHeight = tableView.tableHeaderView?.frame.height ?? 0
+        let footerHeight = tableView.tableFooterView?.frame.height ?? 0
+        var h: CGFloat = headerHeight + footerHeight
         for view in viewsArray {
             h = h + view.frame.size.height + 2 * CardsContainerView.indent
         }
@@ -208,7 +221,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
             
             let view = getViewForOperation(operation: type)
             
-            if type == .sync || type == .upload || type == .prepareToAutoSync {
+            if type.isContained(in: [.sync, .upload, .prepareToAutoSync, .sharedWithMeUpload]) {
                 view.shouldScrollToTop = true
             }
             

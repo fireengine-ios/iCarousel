@@ -14,6 +14,7 @@ protocol HomeCollectionViewDataSourceDelegate: class {
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
     func didReloadCollectionView(_ collectionView: UICollectionView)
+    func share(item: BaseDataSourceItem, type: CardShareType)
 }
 
 final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate {
@@ -100,7 +101,17 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     }
     
     func getViewForOperation(operation: OperationType) -> BaseCardView {
-        return CardsManager.cardViewForOperaion(type: operation)
+        
+        let view = CardsManager.cardViewForOperaion(type: operation)
+        
+        switch operation {
+        case .albumCard, .collage, .movieCard, .animationCard:
+            view.delegate = self
+        default:
+            break
+        }
+        
+        return view
     }
     
     func setViewByType(view: BaseCardView, operation: OperationType) {
@@ -577,5 +588,13 @@ extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
         // TODO: clean project from HomeViewTopView and collectionView delegates from it
         /// to show home buttons
         //return HomeViewTopView.getHeight()
+    }
+}
+
+
+extension HomeCollectionViewDataSource: CardsShareButtonDelegate {
+    
+    func share(item: BaseDataSourceItem, type: CardShareType) {
+        delegate?.share(item: item, type: type)
     }
 }

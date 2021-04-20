@@ -28,6 +28,7 @@ final class HomePageViewController: BaseViewController {
     let homePageDataSource = HomeCollectionViewDataSource()
     
     private var refreshControl = UIRefreshControl()
+    private lazy var shareCardContentManager = ShareCardContentManager(delegate: self)
 
     private var topView: UIView?
     
@@ -73,7 +74,7 @@ final class HomePageViewController: BaseViewController {
         
         output.viewWillAppear()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -165,6 +166,12 @@ final class HomePageViewController: BaseViewController {
 
 // MARK: - HomeCollectionViewDataSourceDelegate
 extension HomePageViewController: HomeCollectionViewDataSourceDelegate {
+    
+    //MARK: CardsShareButtonDelegate
+    
+    func share(item: BaseDataSourceItem, type: CardShareType) {
+        shareCardContentManager.presentSharingMenu(item: item, type: type)
+    }
     
     //MARK: HomeCollectionViewDataSourceDelegate
     func onCellHasBeenRemovedWith(controller: UIViewController) { }
@@ -383,4 +390,15 @@ extension HomePageViewController: SearchModuleOutput {
     
     func previewSearchResultsHide() { }
     
+}
+
+
+extension HomePageViewController: ShareCardContentManagerDelegate {
+    func shareOperationStarted() {
+        showSpinner()
+    }
+    
+    func shareOperationFinished() {
+        hideSpinner()
+    }
 }

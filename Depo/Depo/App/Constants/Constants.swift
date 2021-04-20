@@ -263,6 +263,8 @@ struct TextConstants {
     // MARK: - Home page subButtons Lables
     static let takePhoto = NSLocalizedString("Take Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let upload = NSLocalizedString("Upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadFiles = NSLocalizedString("Upload Files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadMusic = NSLocalizedString("Upload Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStory = NSLocalizedString("Create a Story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let newFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createAlbum = NSLocalizedString("Create album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -788,6 +790,7 @@ struct TextConstants {
     
     // MARK: Feedback View
     static let feedbackMailTextFormat = NSLocalizedString("Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let supportFormBilloTopText = NSLocalizedString("billo_contactus_top_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let supportFormEmailBody = NSLocalizedString("support_form_email_body", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let feedbackViewTitle = NSLocalizedString("Thanks for leaving a comment!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -849,6 +852,7 @@ struct TextConstants {
     static let actionSheetRestore = NSLocalizedString("restore_confirmation_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let actionSheetShareSmallSize = NSLocalizedString("Small Size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetSharePrivate = NSLocalizedString("private_share_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetShareOriginalSize = NSLocalizedString("Original Size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetShareShareViaLink = NSLocalizedString("Share Via Link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetShareCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1740,7 +1744,7 @@ struct TextConstants {
     static let smashSuccessedAlertTitle = NSLocalizedString("smash_successed_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let smashSuccessedAlertSecondTitle = NSLocalizedString("smash_successed_alert_second_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let smashSuccessedAlertDescription = NSLocalizedString("smash_successed_alert_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let smashSuccessedAlertShareButton = NSLocalizedString("smash_successed_alert_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let smashSuccessedSimpleAlertTitle = NSLocalizedString("smash_successed_simple_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let smashSuccessedSimpleAlertDescription = NSLocalizedString("smash_successed_simple_alert_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
@@ -1933,4 +1937,261 @@ struct TextConstants {
     static let contactDeleteBackUpResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_backup_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactDeleteDuplicatesResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_duplicates_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactDeleteAllContactsResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_all_contacts_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditNavBarSave = NSLocalizedString("photo_edit_navbar_save", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopy = NSLocalizedString("photo_edit_save_as_copy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditResetToOriginal = NSLocalizedString("photo_edit_reset_to_original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditTabBarFilters = NSLocalizedString("photo_edit_tabbar_filters", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditTabBarAdjustments = NSLocalizedString("photo_edit_tabbar_adjustments", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditCloseAlertTitle = NSLocalizedString("photo_edit_close_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditCloseAlertMessage = NSLocalizedString("photo_edit_close_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditCloseAlertLeftButton = NSLocalizedString("photo_edit_close_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditCloseAlertRightButton = NSLocalizedString("photo_edit_close_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditModifyAlertTitle = NSLocalizedString("photo_edit_modify_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditModifyAlertMessage = NSLocalizedString("photo_edit_modify_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditModifyAlertLeftButton = NSLocalizedString("photo_edit_modify_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditModifyAlertRightButton = NSLocalizedString("photo_edit_modify_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditSaveAsCopyAlertTitle = NSLocalizedString("photo_edit_save_as_copy_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopyAlertMessage = NSLocalizedString("photo_edit_save_as_copy_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopyAlertLeftButton = NSLocalizedString("photo_edit_save_as_copy_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopyAlertRightButton = NSLocalizedString("photo_edit_save_as_copy_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditModifySnackbarMessage = NSLocalizedString("photo_edit_modify_success_snackbar_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopySnackbarMessage = NSLocalizedString("photo_edit_save_as_copy_success_snackbar_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveImageErrorMessage = NSLocalizedString("photo_edit_save_image_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditFilterOriginal = NSLocalizedString("photo_edit_filter_original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterClarendon = NSLocalizedString("photo_edit_filter_clarendon", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterMetropolis = NSLocalizedString("photo_edit_filter_metropolis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterLime = NSLocalizedString("photo_edit_filter_lime", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterAdele = NSLocalizedString("photo_edit_filter_adele", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterAmazon = NSLocalizedString("photo_edit_filter_amazon", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterApril = NSLocalizedString("photo_edit_filter_april", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterAudrey = NSLocalizedString("photo_edit_filter_audrey", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterAweStruck = NSLocalizedString("photo_edit_filter_aweStruck", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterBluemess = NSLocalizedString("photo_edit_filter_bluemess", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterCruz = NSLocalizedString("photo_edit_filter_cruz", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterHaan = NSLocalizedString("photo_edit_filter_haan", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterMars = NSLocalizedString("photo_edit_filter_mars", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilteroOldMan = NSLocalizedString("photo_edit_filter_oldMan", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterRise = NSLocalizedString("photo_edit_filter_rise", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterStarlit = NSLocalizedString("photo_edit_filter_starlit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditFilterWhisper = NSLocalizedString("photo_edit_filter_whisper", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditAdjust = NSLocalizedString("photo_edit_adjust", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditLight = NSLocalizedString("photo_edit_light", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditColor = NSLocalizedString("photo_edit_color", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditEffect = NSLocalizedString("photo_edit_effect", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditHSL = NSLocalizedString("photo_edit_hsl", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let photoEditAdjustmentBrightness = NSLocalizedString("photo_edit_adjustment_brightness", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentContrast = NSLocalizedString("photo_edit_adjustment_contrast", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentExposure = NSLocalizedString("photo_edit_adjustment_exposure", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentHighlights = NSLocalizedString("photo_edit_adjustment_highlights", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentShadows = NSLocalizedString("photo_edit_adjustment_shadows", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentTemperature = NSLocalizedString("photo_edit_adjustment_temperature", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentTint = NSLocalizedString("photo_edit_adjustment_tint", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentSaturation = NSLocalizedString("photo_edit_adjustment_saturation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentGamma = NSLocalizedString("photo_edit_adjustment_gamma", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentHue = NSLocalizedString("photo_edit_adjustment_hue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentIntensity = NSLocalizedString("photo_edit_adjustment_intensity", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentAngle = NSLocalizedString("photo_edit_adjustment_angle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentSharpness = NSLocalizedString("photo_edit_adjustment_sharpness", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentBlur = NSLocalizedString("photo_edit_adjustment_blur", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditAdjustmentVignette = NSLocalizedString("photo_edit_adjustment_vignette", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditRatioFree = NSLocalizedString("photo_edit_ratio_free", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditRatioOriginal = NSLocalizedString("photo_edit_ratio_original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 0
+    static let widgetRule0SmallDetail = NSLocalizedString("widget_rule_0_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule0SmallButton = NSLocalizedString("widget_rule_0_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule0MediumDetail = NSLocalizedString("widget_rule_0_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule0MediumButton = NSLocalizedString("widget_rule_0_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 1
+    static let widgetRule1SmallTitle = NSLocalizedString("widget_rule_1_small_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule1SmallDetail = NSLocalizedString("widget_rule_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule1SmallButton = NSLocalizedString("widget_rule_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetRule1MediumTitle = NSLocalizedString("widget_rule_1_medium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule1MediumDetail = NSLocalizedString("widget_rule_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule1MediumButton = NSLocalizedString("widget_rule_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 2
+    static let widgetRule2SmallTitle = NSLocalizedString("widget_rule_2_small_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule2SmallDetail = NSLocalizedString("widget_rule_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule2SmallButton = NSLocalizedString("widget_rule_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetRule2MediumTitle = NSLocalizedString("widget_rule_2_medium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule2MediumDetail = NSLocalizedString("widget_rule_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule2MediumButton = NSLocalizedString("widget_rule_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 3.1
+    
+    static let widgetRule31SmallButton = NSLocalizedString("widget_rule_3_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule31SmallDetail = NSLocalizedString("widget_rule_3_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule31MediumButton = NSLocalizedString("widget_rule_3_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule31MediumDetail = NSLocalizedString("widget_rule_3_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 3.2
+    
+    static let widgetRule32SmallButton = NSLocalizedString("widget_rule_3_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule32SmallDetail = NSLocalizedString("widget_rule_3_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule32MediumButton = NSLocalizedString("widget_rule_3_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule32MediumDetail = NSLocalizedString("widget_rule_3_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 4.1
+    static let widgetRule41SmallButton = NSLocalizedString("widget_rule_4_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41SmallDetail = NSLocalizedString("widget_rule_4_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41MediumButton = NSLocalizedString("widget_rule_4_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41MediumDetail = NSLocalizedString("widget_rule_4_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    //HomeWidget Rule 4.2
+    static let widgetRule42SmallButton = NSLocalizedString("widget_rule_4_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42SmallDetail = NSLocalizedString("widget_rule_4_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42MediumButton = NSLocalizedString("widget_rule_4_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42MediumDetail = NSLocalizedString("widget_rule_4_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 5
+    
+    static let widgetRule5SmallDetail = NSLocalizedString("widget_rule_5_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule5SmallButton = NSLocalizedString("widget_rule_5_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetRule5MediumTitle = NSLocalizedString("widget_rule_5_medium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule5MediumDetail = NSLocalizedString("widget_rule_5_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule5MediumButton = NSLocalizedString("widget_rule_5_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 6
+    static let widgetRule6SmallDetail = NSLocalizedString("widget_rule_6_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule6SmallDetailPlural = NSLocalizedString("widget_rule_6_small_detail_plural", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule6SmallButton = NSLocalizedString("widget_rule_6_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetRule6MediumDetail = NSLocalizedString("widget_rule_6_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule6MediumDetailPlural = NSLocalizedString("widget_rule_6_medium_detail_plural", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule6MediumButton = NSLocalizedString("widget_rule_6_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 7.1
+    static let widgetRule71SmallDetail = NSLocalizedString("widget_rule_7_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule71SmallButton = NSLocalizedString("widget_rule_7_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetRule71MediumDetail = NSLocalizedString("widget_rule_7_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule71MediumButton = NSLocalizedString("widget_rule_7_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 7.2
+    static let widgetRule72SmallDetail = NSLocalizedString("widget_rule_7_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule72SmallButton = NSLocalizedString("widget_rule_7_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetRule72MediumTitle = NSLocalizedString("widget_rule_7_2_medium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule72MediumDetail = NSLocalizedString("widget_rule_7_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule72MediumButton = NSLocalizedString("widget_rule_7_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 7.3
+    static let widgetRule73SmallDetail = NSLocalizedString("widget_rule_7_3_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule73SmallButton = NSLocalizedString("widget_rule_7_3_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetRule73MediumDetail = NSLocalizedString("widget_rule_7_3_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule73MediumButton = NSLocalizedString("widget_rule_7_3_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 7.4
+    static let widgetRule74SmallDetail = NSLocalizedString("widget_rule_7_4_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule74SmallButton = NSLocalizedString("widget_rule_7_4_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetRule74MediumDetail = NSLocalizedString("widget_rule_7_4_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule74MediumButton = NSLocalizedString("widget_rule_7_4_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetDisplayName = NSLocalizedString("widget_display_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetDescription = NSLocalizedString("widget_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let funGif = NSLocalizedString("fun_gif", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funSticker = NSLocalizedString("fun_sticker", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let funCloseAlertTitle = NSLocalizedString("fun_close_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertMessage = NSLocalizedString("fun_close_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertLeftButton = NSLocalizedString("fun_close_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertRightButton = NSLocalizedString("fun_close_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateShareStartPageName = NSLocalizedString("private_share_start_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageCloseButton = NSLocalizedString("private_share_start_page_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageShareButton = NSLocalizedString("private_share_start_page_share_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPagePeopleSelectionTitle = NSLocalizedString("private_share_start_page_people_selection_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageEnterUserPlaceholder = NSLocalizedString("private_share_start_page_enter_user_field", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageSuggestionsTitle = NSLocalizedString("private_share_start_page_suggestions_section", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")    
+    static let privateShareStartPageSharedWithTitle = NSLocalizedString("private_share_start_page_shared_with_section", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageAddMessageTitle = NSLocalizedString("private_share_start_page_add_message_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageMessagePlaceholder = NSLocalizedString("private_share_start_page_add_messge_field", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageDurationTitle = NSLocalizedString("private_share_start_page_share_duration_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageDurationNo = NSLocalizedString("private_share_start_page_share_duration_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageDurationHour = NSLocalizedString("private_share_start_page_share_duration_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageDurationDay = NSLocalizedString("private_share_start_page_share_duration_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageDurationWeek = NSLocalizedString("private_share_start_page_share_duration_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageDurationMonth = NSLocalizedString("private_share_start_page_share_duration_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageDurationYear = NSLocalizedString("private_share_start_page_share_duration_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageEditorButton = NSLocalizedString("private_share_start_page_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageViewerButton = NSLocalizedString("private_share_start_page_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareDetailsPageName = NSLocalizedString("private_share_details_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareSharedByMeTab = NSLocalizedString("private_share_shared_by_me_tab", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareSharedWithMeTab = NSLocalizedString("private_share_shared_with_me_tab", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageSuccess = NSLocalizedString("private_share_start_page_share_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageClosePopupMessage = NSLocalizedString("private_share_cancel_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateShareRoleSelectionTitle = NSLocalizedString("private_share_role_selection_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareRoleSelectionEditor = NSLocalizedString("private_share_role_selection_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareRoleSelectionViewer = NSLocalizedString("private_share_role_selection_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareValidationFailPopUpText = NSLocalizedString("private_share_msisdn_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateShareInfoMenuSectionTitle = NSLocalizedString("private_share_info_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuNumberOfPeople = NSLocalizedString("private_share_info_number_of_people", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuOwner = NSLocalizedString("private_share_info_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuEditor = NSLocalizedString("private_share_info_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuViewer = NSLocalizedString("private_share_info_role_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuVarying = NSLocalizedString("private_share_info_role_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharePhoneValidationFailPopUpText = NSLocalizedString("private_share_msisdn_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareEmailValidationFailPopUpText = NSLocalizedString("private_share_email_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareNonTurkishMsisdnPopUpText = NSLocalizedString("private_share_non_turkish_msisdn_warning", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedWithMeEmptyText = NSLocalizedString("private_share_shared_with_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedByMeEmptyText = NSLocalizedString("private_share_shared_by_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedInnerFolderEmptyText = NSLocalizedString("private_share_inner_folder_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateSharedEndSharingActionSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedEndSharingActionConfirmation = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedEndSharingActionTitle = NSLocalizedString("private_share_end_sharing_action_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateSharedLeaveSharingActionSuccess = NSLocalizedString("private_share_leave_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedLeaveSharingActionConfirmation = NSLocalizedString("private_leave_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedLeaveSharingActionTitle = NSLocalizedString("private_share_leave_sharing_action_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateShareWhoHasAccessTitle = NSLocalizedString("private_share_who_has_access_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessOwner = NSLocalizedString("private_share_who_has_access_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessEditor = NSLocalizedString("private_share_who_has_access_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessViewer = NSLocalizedString("private_share_who_has_access_role_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessVarying = NSLocalizedString("private_share_who_has_access_role_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessEndShare = NSLocalizedString("private_share_who_has_access_end_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessPopupMessage = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareEndShareSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAllFilesSharedWithMe = NSLocalizedString("private_share_all_files_section_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAllFilesSeeAll = NSLocalizedString("private_share_all_files_section_1_see_all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAllFilesMyFiles = NSLocalizedString("private_share_all_files_section_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let privateShareAccessEditor = NSLocalizedString("private_share_access_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessViewer = NSLocalizedString("private_share_access_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessRemove = NSLocalizedString("private_share_access_role_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessVarying = NSLocalizedString("private_share_access_role_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessTitle = NSLocalizedString("private_share_access_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessFromFolder = NSLocalizedString("private_share_access_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessExpiresDate = NSLocalizedString("private_share_expire_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessRoleChangeSuccess = NSLocalizedString("private_share_access_role_change_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessDeleteConfirmPopupMessage = NSLocalizedString("private_share_access_remove_confirmation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessDeleteUserSuccess = NSLocalizedString("private_share_info_access_role_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharePlusButtonNoAction = NSLocalizedString("private_share_plus_button_no_action", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharePreviewNotReady = NSLocalizedString("private_share_preview_not_ready", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareMoveToTrashSharedWithMeMessage = NSLocalizedString("private_share_confirm_trash_items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareMaxNumberOfUsersMessageFormat = NSLocalizedString("private_share_start_max_number_of_users", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareMessageLimit = NSLocalizedString("private_share_long_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharePhoneOrMailLimit = NSLocalizedString("private_share_long_emailmsisdn", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareNumberOfItemsLimit = NSLocalizedString("private_share_max_number_of_item_limit_exceeded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

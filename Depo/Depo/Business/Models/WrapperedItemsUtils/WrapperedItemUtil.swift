@@ -55,7 +55,7 @@ class WrapperedItemUtil: NSObject {
             case .pdf:
                 imageName = "fileIconPdf"
                 break
-            case .ppt:
+            case .ppt, .pptx:
                 imageName = "fileIconPpt"
                 break
             default:
@@ -110,7 +110,7 @@ class WrapperedItemUtil: NSObject {
             case .pdf:
                 imageName = "fileBigIconPdf"
                 break
-            case .ppt:
+            case .ppt, .pptx:
                 imageName = "fileBigIconPpt"
                 break
             default:
@@ -167,7 +167,7 @@ class WrapperedItemUtil: NSObject {
             case .pdf:
                 imageName = "fileIconSmallPdfNotSelected"
                 break
-            case .ppt:
+            case .ppt, .pptx:
                 imageName = "fileIconSmallPptNotSelected"
                 break
             default:
@@ -177,6 +177,38 @@ class WrapperedItemUtil: NSObject {
                 break
         }
         return UIImage(named: imageName)
+    }
+    
+    static func privateSharePlaceholderImage(fileType: FileType) -> UIImage? {
+        switch fileType {
+        case .folder:
+            return UIImage(named: "AF_PS_folder")
+        case .image:
+            return UIImage(named: "AF_PS_photo")
+        case .video:
+            return UIImage(named: "AF_PS_video")
+        case .audio:
+            return UIImage(named: "AF_PS_audio")
+        case .application(let subType):
+            switch subType {
+            case .doc:
+                return UIImage(named: "AF_PS_DOC")
+            case .pdf:
+                return UIImage(named: "AF_PS_PDF")
+            case .ppt, .pptx:
+                return UIImage(named: "AF_PS_PPT")
+            case .xls:
+                return UIImage(named: "AF_PS_XLS")
+            case .zip:
+                return UIImage(named: "AF_PS_ZIP")
+            default:
+                //unknown
+                return UIImage(named: "AF_PS_Unknown")
+            }
+        default:
+            //unknown
+            return UIImage(named: "AF_PS_Unknown")
+        }
     }
     
 }
