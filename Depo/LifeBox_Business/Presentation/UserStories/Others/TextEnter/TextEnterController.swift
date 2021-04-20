@@ -83,7 +83,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
     }
     
     private func setupDelegates() {

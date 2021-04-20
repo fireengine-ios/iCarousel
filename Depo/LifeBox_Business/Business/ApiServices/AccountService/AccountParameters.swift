@@ -10,8 +10,7 @@ import Foundation
 
 struct AccountPath {
     static let accountBase = "account/"
-    
-    static let overQuotaStatus = accountBase + "overQuotaStatus?showPopup=%@"
+
     static let usages = accountBase + "usages"
     static let provision = accountBase + "provision"
     static let profilePhoto = accountBase + "profilePhoto"
@@ -30,7 +29,7 @@ struct AccountPath {
 
 class AccontInfo: BaseRequestParametrs {
     override var patch: URL {
-        let urlString = String(format: RouteRequests.BusinessAccount.info, SingletonStorage.shared.accountUuid ?? "")
+        let urlString = String(format: RouteRequests.BusinessAccount.info, SingletonStorage.shared.accountInfo?.uuid ?? "")
         return URL(string: urlString)!
     }
 }
@@ -102,7 +101,7 @@ class VerifyPhoneNumberParameter: BaseRequestParametrs {
     override var requestParametrs: Any {
         let dict: [String: String] = [AccountJSONConstants.otp: otp ?? "",
                                       AccountJSONConstants.referenceToken: referenceToken ?? "",
-                                      LbRequestkeys.processPersonalData: String(processPersonalData)]
+                                      LbRequestKeys.processPersonalData: String(processPersonalData)]
         return dict
     }
     
@@ -124,35 +123,9 @@ class LanguageListChange: BaseRequestParametrs {
     }
 }
 
-class QuotaInfo: BaseRequestParametrs {
-    override var patch: URL {
-        return URL(string: RouteRequests.BusinessAccount.quota)!
-    }
-}
-
-class OverQuotaStatus: BaseRequestParametrs {
-    let showPopUp: String
-    
-    init(showPopUp: Bool) {
-        self.showPopUp = showPopUp ? "true" : "false"
-    }
-    
-    override var patch: URL {
-        let str = String(format: AccountPath.overQuotaStatus,
-                                showPopUp)
-        return URL(string: str, relativeTo: super.patch)!
-    }
-}
-
 class UsageParameters: BaseRequestParametrs {
     override var patch: URL {
         return URL(string: AccountPath.usages, relativeTo: super.patch)!
-    }
-}
-
-class SecuritySettingsInfoParametres: BaseRequestParametrs {
-    override var patch: URL {
-        return URL(string: RouteRequests.BusinessAccount.settings)!
     }
 }
 
@@ -174,27 +147,5 @@ class FaceImageAllowedParameters: BaseRequestParametrs {
     
     override var patch: URL {
         return URL(string: AccountPath.faceImageAllowed, relativeTo: super.patch)!
-    }
-}
-
-class SecuritySettingsChangeInfoParametres: BaseRequestParametrs {
-    let turkcellPasswordAuthEnabled: Bool
-    let mobileNetworkAuthEnabled: Bool
-    let twoFactorAuthEnabled: Bool
-
-    init(turkcellPasswordAuth: Bool, mobileNetworkAuth: Bool, twoFactorAuth: Bool) {
-        turkcellPasswordAuthEnabled = turkcellPasswordAuth
-        mobileNetworkAuthEnabled = mobileNetworkAuth
-        twoFactorAuthEnabled = twoFactorAuth
-    }
-    
-    override var requestParametrs: Any {
-        return ["turkcellPasswordAuthEnabled": turkcellPasswordAuthEnabled,
-                "mobileNetworkAuthEnabled": mobileNetworkAuthEnabled,
-                "twoFactorAuthEnabled": twoFactorAuthEnabled]
-    }
-    
-    override var patch: URL {
-        return URL(string: RouteRequests.BusinessAccount.settings)!
     }
 }

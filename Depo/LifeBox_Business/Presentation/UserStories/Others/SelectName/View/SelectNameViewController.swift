@@ -21,10 +21,7 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, NibInit
         navigationItem.title = output.getTitle()
         textField.placeholder = output.getPlaceholderText()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: output.getNextButtonText(),
-                                                            font: .TurkcellSaturaRegFont(size: 19.0),
-                                                            target: self,
-                                                            selector: #selector(onNextButton))
+        setNavigationRightBarButton(style: .white, title: output.getNextButtonText(), image: nil, target: self, action: #selector(onNextButton))
         
         output.viewIsReady()
     }
@@ -32,12 +29,10 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, NibInit
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
-        
-        if navigationItem.leftBarButtonItem == nil, navigationController?.viewControllers.count == 1 {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,
-                                                               target: self,
-                                                               selector: #selector(onCancelButton))
+        setNavigationBarStyle(.white)
+
+        if isModal() {
+            setNavigationLeftBarButton(style: .white, title: TextConstants.selectFolderCancelButton, target: self, image: nil, action: #selector(onCancelButton))
         }
     }
     

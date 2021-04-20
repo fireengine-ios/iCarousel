@@ -168,11 +168,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     private func showAccessAlert() {
         debugLog("LocalMediaStorage showAccessAlert")
 
-        let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
-                                              message: TextConstants.cameraAccessAlertText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.cameraAccessAlertNo,
-                                              secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
+        let controller = PopUpController.with(title: TextConstants.galeryPermissionNotProvidedTitle,
+                                              message: TextConstants.galeryPermissionNotProvidedDescription,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.galeryPermissionNotProvidedRejectButton,
+                                              secondButtonTitle: TextConstants.galeryPermissionNotProvidedAcceptButton,
                                               secondAction: { vc in
                                                 vc.close {
                                                     UIApplication.shared.openSettings()
@@ -187,7 +187,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         galleryPermission = status.toGalleryAuthorizationStatus()
         
         switch status {
-        //TODO: uncomment for xcode 12
         case .authorized, .limited:
 //            photoLibrary.register(self)
             completion(true, status)
@@ -477,7 +476,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 data(imageData)
             }
         }
-        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset, callback: callBack)
+        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset, isNetworkAccessAllowed: true, callback: callBack)
         queue.addOperation(operation)
     }
     
@@ -770,7 +769,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let operation = GetOriginalImageOperation(photoManager: photoManager,
-                                                  asset: asset) { data, string, orientation, dict in
+                                                  asset: asset, isNetworkAccessAllowed: true) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
                                                     let tmpURL = Device.tmpFolderUrl(withComponent: file)
                                                     do {
@@ -842,7 +841,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalVideoOperation(photoManager: photoManager,
-                                                  asset: asset) { [weak self] avAsset, aVAudioMix, Dict in
+                                                  asset: asset, isNetworkAccessAllowed: true) { [weak self] avAsset, aVAudioMix, Dict in
                                                     
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
                                                         let file = UUID().uuidString
@@ -885,7 +884,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalImageOperation(photoManager: photoManager,
-                                                  asset: asset) { data, string, orientation, dict in
+                                                  asset: asset, isNetworkAccessAllowed: true) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
                                                     guard let data = data else {
                                                         Crashlytics.crashlytics().record(error: CustomErrors.text("copyImageAsset: found nil data while trying to get it from asset(after GetOriginalImageOperation)"))
@@ -931,7 +930,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
     }
     
-    private func compactInfoAboutAsset(asset: PHAsset) -> AssetInfo {
+    func compactInfoAboutAsset(asset: PHAsset) -> AssetInfo {
         
         switch asset.mediaType {
         case .image:
@@ -1117,7 +1116,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetOriginalVideoOperation(photoManager: photoManager, asset: asset) { [weak self] avAsset, aVAudioMix, dict in
+        let operation = GetOriginalVideoOperation(photoManager: photoManager,  asset: asset, isNetworkAccessAllowed: true) { [weak self] avAsset, aVAudioMix, dict in
             
             guard let self = self else {
                 assetInfo.isValid = false
@@ -1201,7 +1200,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset) { [weak self] data, string, orientation, dict in
+        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset, isNetworkAccessAllowed: true) { [weak self] data, string, orientation, dict in
             
             guard let self = self else {
                 assetInfo.isValid = false
@@ -1349,19 +1348,21 @@ class GetImageOperation: Operation {
 
 class GetOriginalImageOperation: Operation {
     
-    let photoManager: PHImageManager
-    let callback: PhotoManagerOriginalCallBack
-    let asset: PHAsset
+    private let photoManager: PHImageManager
+    private let callback: PhotoManagerOriginalCallBack
+    private let asset: PHAsset
+    private let isNetworkAccessAllowed: Bool
     
     private let semaphore = DispatchSemaphore(value: 0)
     private var requestId: PHImageRequestID?
     
     
-    init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalCallBack) {
+    init(photoManager: PHImageManager, asset: PHAsset, isNetworkAccessAllowed: Bool, callback: @escaping PhotoManagerOriginalCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback
         self.asset = asset
+        self.isNetworkAccessAllowed = isNetworkAccessAllowed
         
         super.init()
     }
@@ -1390,6 +1391,7 @@ class GetOriginalImageOperation: Operation {
         let options = PHImageRequestOptions()
         options.version = .current
         options.deliveryMode = .highQualityFormat
+        options.isNetworkAccessAllowed = isNetworkAccessAllowed
         
         requestId = photoManager.requestImageData(for: asset, options: options, resultHandler: { [weak self] data, string, orientation, dict in
             if data == nil, let error = dict?[PHImageErrorKey] as? Error {
@@ -1415,16 +1417,18 @@ class GetOriginalImageOperation: Operation {
 
 class GetOriginalVideoOperation: Operation {
     
-    let photoManager: PHImageManager
-    let callback: PhotoManagerOriginalVideoCallBack
-    let asset: PHAsset
+    private let photoManager: PHImageManager
+    private let callback: PhotoManagerOriginalVideoCallBack
+    private let asset: PHAsset
+    private let isNetworkAccessAllowed: Bool
     
     
-    init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalVideoCallBack) {
+    init(photoManager: PHImageManager, asset: PHAsset, isNetworkAccessAllowed: Bool, callback: @escaping PhotoManagerOriginalVideoCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback
         self.asset = asset
+        self.isNetworkAccessAllowed = isNetworkAccessAllowed
         
         super.init()
     }
@@ -1440,7 +1444,8 @@ class GetOriginalVideoOperation: Operation {
         let options = PHVideoRequestOptions()
         options.version = .original
         options.deliveryMode = .highQualityFormat
-
+        options.isNetworkAccessAllowed = isNetworkAccessAllowed
+        
         photoManager.requestAVAsset(forVideo: asset, options: options, resultHandler: callback)
     }
 }

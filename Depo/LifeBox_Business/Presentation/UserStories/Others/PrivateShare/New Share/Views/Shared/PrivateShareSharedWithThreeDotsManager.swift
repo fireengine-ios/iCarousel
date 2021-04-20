@@ -23,6 +23,9 @@ final class PrivateShareSharedWithThreeDotsManager {
     
     func showActions(for privateShareType: PrivateShareType, sender: Any?) {
         switch privateShareType {
+            case .myDisk:
+                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+                
             case .byMe:
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
                 
@@ -31,11 +34,24 @@ final class PrivateShareSharedWithThreeDotsManager {
                 
             case .innerFolder:
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .sharedArea:
+                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .trashBin:
+                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .search:
+                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     
     func showActions(for privateShareType: PrivateShareType, selectedItems: [WrapData], sender: Any?) {
         switch privateShareType {
+            case .myDisk:
+                let types = actionTypes(for: selectedItems)
+                alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
+                
             case .byMe:
                 let types = actionTypes(for: selectedItems)
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
@@ -44,6 +60,18 @@ final class PrivateShareSharedWithThreeDotsManager {
                 return
                 
             case .innerFolder:
+                let types = actionTypes(for: selectedItems)
+                alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .sharedArea:
+                let types = actionTypes(for: selectedItems)
+                alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .trashBin:
+                let types = actionTypes(for: selectedItems)
+                alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
+                
+            case .search:
                 let types = actionTypes(for: selectedItems)
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
         }

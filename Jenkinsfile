@@ -80,7 +80,7 @@ branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
 isDev = branchName == 'dev_friendly'
 echo "Branch Name: ${branchName}"
 
-isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName == 'release_lifeBoxBusiness_*'
+isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName.startsWith('release_lifeBoxBusiness_')
 
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${app.versionInfoPath}"
@@ -274,7 +274,7 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "source ~/.bash_profile; cd Depo; pod install;" // gem update cocoapods;// --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod install;"//" --repo-update;" // gem update cocoapods;// --repo-update occasionally
                         apps.each { app ->
 				// testBuild()
                             // runXcode(app, 'test')
@@ -317,7 +317,7 @@ pipeline {
                     expression { isSkipApproval }
                 }
             }
-            agent { label 'devops-dss-js-default' }
+            agent { label agentName }
             options {
                 skipDefaultCheckout true
             }
@@ -425,8 +425,9 @@ pipeline {
             environment {
                 IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight-generic')
+                TESTFLIGHT_UPLOAD = credentials('testflight_appSpesific')
                 FASTLANE_DONT_STORE_PASSWORD = 1
+                FASTLANE_SESSION = credentials('fastlane_session')
            }
             steps {
                 script {

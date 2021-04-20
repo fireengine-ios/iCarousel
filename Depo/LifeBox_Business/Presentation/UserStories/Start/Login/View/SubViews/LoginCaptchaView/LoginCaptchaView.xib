@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginCaptchaView" customModule="lifeBox_Business" customModuleProvider="target">
+            <connections>
+                <outlet property="captchaAnswerTextField" destination="W0V-fQ-219" id="c5Q-Mt-zex"/>
+                <outlet property="captchaErrorLabel" destination="jLc-Fz-zX8" id="RHF-Iq-S9J"/>
+                <outlet property="captchaImageView" destination="PiO-kZ-3YO" id="ref-LY-uXT"/>
+                <outlet property="noErrorTextfieldToBottomConstraint" destination="ksj-of-yWZ" id="6rz-nl-DAQ"/>
+                <outlet property="refreshCaptchaButton" destination="T2I-bl-UAn" id="mVl-Rf-fWs"/>
+                <outlet property="soundCaptchaButton" destination="BX5-uu-HVf" id="xvT-hq-ADw"/>
+                <outlet property="withErrorLabelToBottomconstraint" destination="e8p-gF-VGZ" id="Pp6-yB-cab"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Fq2-os-cXj">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="126"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4PQ-l4-ggS">
+                    <rect key="frame" x="0.0" y="0.0" width="358" height="126"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mU4-M6-cI6">
+                            <rect key="frame" x="0.0" y="0.0" width="358" height="52"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PiO-kZ-3YO">
+                                    <rect key="frame" x="0.0" y="0.0" width="154" height="52"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="154" id="sKJ-a9-OmT"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2I-bl-UAn">
+                                    <rect key="frame" x="169" y="13.5" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="Vmq-oi-JVU"/>
+                                        <constraint firstAttribute="width" constant="25" id="cIH-E0-NNJ"/>
+                                    </constraints>
+                                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" backgroundImage="login_captcha_refresh"/>
+                                    <connections>
+                                        <action selector="onRefreshCaptchaButton:" destination="-1" eventType="touchUpInside" id="eef-yb-SP7"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BX5-uu-HVf">
+                                    <rect key="frame" x="201" y="13.5" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="DGK-6J-aw0"/>
+                                        <constraint firstAttribute="width" constant="25" id="EZh-pq-pvi"/>
+                                    </constraints>
+                                    <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" backgroundImage="login_captcha_sound"/>
+                                    <connections>
+                                        <action selector="onSoundCaptchaButton:" destination="-1" eventType="touchUpInside" id="DfL-L8-xPt"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="T2I-bl-UAn" firstAttribute="leading" secondItem="PiO-kZ-3YO" secondAttribute="trailing" constant="15" id="6oT-oK-weo"/>
+                                <constraint firstItem="PiO-kZ-3YO" firstAttribute="top" secondItem="mU4-M6-cI6" secondAttribute="top" id="8RA-mU-CBT"/>
+                                <constraint firstItem="PiO-kZ-3YO" firstAttribute="leading" secondItem="mU4-M6-cI6" secondAttribute="leading" id="9MD-sP-h5B"/>
+                                <constraint firstItem="BX5-uu-HVf" firstAttribute="centerY" secondItem="T2I-bl-UAn" secondAttribute="centerY" id="CuR-K5-o0v"/>
+                                <constraint firstAttribute="height" constant="52" id="EC6-l2-feU"/>
+                                <constraint firstItem="T2I-bl-UAn" firstAttribute="centerY" secondItem="PiO-kZ-3YO" secondAttribute="centerY" id="HwI-af-KwX"/>
+                                <constraint firstItem="BX5-uu-HVf" firstAttribute="leading" secondItem="T2I-bl-UAn" secondAttribute="trailing" constant="7" id="bt2-e7-HyC"/>
+                                <constraint firstAttribute="bottom" secondItem="PiO-kZ-3YO" secondAttribute="bottom" id="ykY-E3-pxa"/>
+                            </constraints>
+                        </view>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W0V-fQ-219" customClass="BorderedWithInsetsTextField" customModule="lifeBox_Business" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="62" width="358" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="6Wn-ye-4aH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" textContentType="password"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.91764705879999997" green="0.91764705879999997" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1.5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="4"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fromLeftTextInset">
+                                    <real key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fromRightTextInset">
+                                    <real key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLc-Fz-zX8">
+                            <rect key="frame" x="20" y="112" width="318" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="TsF-l8-AnT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="jLc-Fz-zX8" firstAttribute="leading" secondItem="4PQ-l4-ggS" secondAttribute="leading" constant="20" id="NF6-r7-fR2"/>
+                        <constraint firstAttribute="trailing" secondItem="mU4-M6-cI6" secondAttribute="trailing" id="RfS-bf-Hqu"/>
+                        <constraint firstAttribute="trailing" secondItem="W0V-fQ-219" secondAttribute="trailing" id="XMd-wg-BIO"/>
+                        <constraint firstItem="W0V-fQ-219" firstAttribute="top" secondItem="mU4-M6-cI6" secondAttribute="bottom" constant="10" id="awz-dJ-UVh"/>
+                        <constraint firstAttribute="bottom" secondItem="jLc-Fz-zX8" secondAttribute="bottom" priority="250" id="e8p-gF-VGZ"/>
+                        <constraint firstItem="jLc-Fz-zX8" firstAttribute="top" secondItem="W0V-fQ-219" secondAttribute="bottom" constant="5" id="hJC-lH-zrJ"/>
+                        <constraint firstAttribute="bottom" secondItem="W0V-fQ-219" secondAttribute="bottom" priority="750" constant="5" id="ksj-of-yWZ"/>
+                        <constraint firstAttribute="trailing" secondItem="jLc-Fz-zX8" secondAttribute="trailing" constant="20" id="nOD-D5-z6d"/>
+                        <constraint firstItem="mU4-M6-cI6" firstAttribute="top" secondItem="4PQ-l4-ggS" secondAttribute="top" id="nTy-9v-jcq"/>
+                        <constraint firstItem="W0V-fQ-219" firstAttribute="leading" secondItem="4PQ-l4-ggS" secondAttribute="leading" id="nlf-O3-9un"/>
+                        <constraint firstItem="mU4-M6-cI6" firstAttribute="leading" secondItem="4PQ-l4-ggS" secondAttribute="leading" id="rlO-Hz-Yas"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="4BE-uB-mU7"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="4PQ-l4-ggS" secondAttribute="bottom" id="Q96-9H-afL"/>
+                <constraint firstAttribute="trailing" secondItem="4PQ-l4-ggS" secondAttribute="trailing" id="S9t-Qd-sQE"/>
+                <constraint firstItem="4PQ-l4-ggS" firstAttribute="top" secondItem="Fq2-os-cXj" secondAttribute="top" id="wjY-zX-Enu"/>
+                <constraint firstItem="4PQ-l4-ggS" firstAttribute="leading" secondItem="4BE-uB-mU7" secondAttribute="leading" id="xzT-yR-lOj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="150.72463768115944" y="-99.441964285714278"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="W0V-fQ-219">
+            <size key="intrinsicContentSize" width="63.5" height="16"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="login_captcha_refresh" width="25" height="25"/>
+        <image name="login_captcha_sound" width="25" height="25"/>
+    </resources>
+</document>

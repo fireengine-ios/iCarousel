@@ -8,9 +8,11 @@
 
 import Alamofire
 
+typealias FileInfoMoveToTrash = (accountUuid: String, uuid: String)
+
 protocol PrivateShareApiService {
     @discardableResult
-    func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
+    func getSuggestedSubjects(searchText: String, size: Int, handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
     
     @discardableResult
     func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
@@ -23,9 +25,12 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
-    
+
     @discardableResult
     func getSharingInfo(projectId: String, uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func getRemoteEntityInfo(projectId: String, uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
     
     @discardableResult
     func endShare(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
@@ -49,22 +54,41 @@ protocol PrivateShareApiService {
     func renameItem(projectId: String, uuid: String, name: String, handler: @escaping ResponseVoid) -> URLSessionTask?
 
     @discardableResult
-    func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
+    func moveToTrash(files: [FileInfoMoveToTrash], handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
     func createFolder(projectId: String, parentFolderUuid: String, requestItem: CreateFolderResquestItem, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
     
     @discardableResult
     func getUrlToUpload(projectId: String, parentFolderUuid: String, requestItem: UploadFileRequestItem, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask?
+
+    @discardableResult
+    func trashedList(folderUUID: String, sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping (ResponseResult<TrashBinRequestResponse>) -> Void) -> URLSessionTask?
+
+    @discardableResult
+    func recoverItems(_ items: [WrapData], handler: @escaping ResponseVoid) -> URLSessionTask?
+
+    @discardableResult
+    func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask?
+
+    @discardableResult
+    func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask?
+    
+    @discardableResult
+    func search(text: String, diskType: SearchDiskTypes, page: Int, size: Int, handler: @escaping ResponseHandler<BusinessSearchItems>) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
+    private lazy var hiddenService = HiddenService()
+    private lazy var searchService = BusinessSearchService()
     
     @discardableResult
-    func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask? {
+    func getSuggestedSubjects(searchText: String, size: Int, handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.PrivateShare.suggestionsSubjectsSearch, searchText, size)
+        
         return SessionManager
             .customDefault
-            .request(RouteRequests.PrivateShare.suggestions)
+            .request(url)
             .customValidate()
             .responseArray(handler)
             .task
@@ -96,7 +120,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func getFiles(projectId: String, folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask? {
-        let url = String(format: RouteRequests.FileSystem.Version_2.filesFromFolder, projectId, size, page, sortBy.description, sortOrder.description, folderUUID)
+        let url = String(format: RouteRequests.FileSystem.Version_3.filesFromFolder, projectId, size, page, sortBy.description, sortOrder.description, folderUUID)
         
         return SessionManager
             .customDefault
@@ -115,10 +139,27 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .responseVoid(handler)
             .task
     }
+
+    @discardableResult
+    func getRemoteEntityInfo(projectId: String,
+                             uuid: String,
+                             handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.sharingInfo, projectId, uuid)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
+
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
     
     @discardableResult
     func getSharingInfo(projectId: String, uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.sharingInfo, projectId, uuid)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.sharingInfo, projectId, uuid)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -133,7 +174,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func endShare(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcls, projectId, uuid)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.shareAcls, projectId, uuid)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -148,7 +189,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func getAccessList(projectId: String, uuid: String, subjectType: PrivateShareSubjectType = .user, subjectId: String, handler: @escaping ResponseArrayHandler<PrivateShareAccessListInfo>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcls, projectId, uuid)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.shareAcls, projectId, uuid)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -169,7 +210,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func updateAclRole(newRole: PrivateShareUserRole, projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcl, projectId, uuid, aclId)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.shareAcl, projectId, uuid, aclId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -189,7 +230,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func deleteAclUser(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcl, projectId, uuid, aclId)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.shareAcl, projectId, uuid, aclId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -204,7 +245,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func leaveShare(projectId: String, uuid: String, subjectId: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.leaveShare, projectId, uuid, subjectId)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.leaveShare, projectId, uuid, subjectId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -220,11 +261,11 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     @discardableResult
     func createDownloadUrl(projectId: String, uuid: String, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask? {
         
-        let parameters = [["projectId" : projectId, "uuid" : uuid]].asParameters()
+        let parameters = [["accountUuid" : projectId, "uuid" : uuid]].asParameters()
         
         return SessionManager
             .customDefault
-            .request(RouteRequests.FileSystem.Version_2.createDownloadUrl,
+            .request(RouteRequests.FileSystem.Version_3.createDownloadUrl,
                      method: .post,
                      parameters: parameters,
                      encoding: ArrayEncoding())
@@ -235,7 +276,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func renameItem(projectId: String, uuid: String, name: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.rename, projectId, uuid)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.rename, projectId, uuid)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -254,13 +295,13 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
         
     @discardableResult
-    func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+    func moveToTrash(files: [FileInfoMoveToTrash], handler: @escaping ResponseVoid) -> URLSessionTask? {
         
-        let parameters = [["projectId" : projectId, "uuid" : uuid]].asParameters()
+        let parameters = files.compactMap {["accountUuid" : $0.accountUuid, "uuid" : $0.uuid]}.asParameters()
         
         return SessionManager
             .customDefault
-            .request(RouteRequests.FileSystem.Version_2.trash,
+            .request(RouteRequests.FileSystem.Version_3.trash,
                      method: .post,
                      parameters: parameters,
                      encoding: ArrayEncoding())
@@ -271,12 +312,15 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func createFolder(projectId: String, parentFolderUuid: String, requestItem: CreateFolderResquestItem, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.baseV2UrlString, projectId)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.baseV3UrlString, projectId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
         
-        let parameters = ["file": requestItem.parameters] + ["parentFolderUuid": parentFolderUuid]
+        var parameters: [String: Any] = ["file": requestItem.parameters]
+        if !parentFolderUuid.isEmpty {
+            parameters = parameters + ["parentFolderUuid": parentFolderUuid]
+        }
         
         return SessionManager
             .customDefault
@@ -290,12 +334,14 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func getUrlToUpload(projectId: String, parentFolderUuid: String, requestItem: UploadFileRequestItem, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.baseV2UrlString, projectId)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.baseV3UrlString, projectId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
-        
-        let parameters = ["file": requestItem.parameters] + ["parentFolderUuid": parentFolderUuid]
+        var parameters: [String: Any] = ["file": requestItem.parameters]
+        if !parentFolderUuid.isEmpty {
+            parameters = parameters + ["parentFolderUuid": parentFolderUuid]
+        }
         
         return SessionManager
             .customDefault
@@ -305,5 +351,35 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .customValidate()
             .responseObject(handler)
             .task
+    }
+
+    @discardableResult
+    func trashedList(folderUUID: String = "", sortBy: SortType, sortOrder: SortOrder, page: Int, size: Int, handler: @escaping (ResponseResult<TrashBinRequestResponse>) -> Void) -> URLSessionTask? {
+        return hiddenService.trashedList(folderUUID: folderUUID, sortBy: sortBy, sortOrder: sortOrder, page: page, size: size, handler: handler)
+    }
+
+    @discardableResult
+    func recoverItems(_ items: [WrapData], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.recoverItems(items, handler: handler)
+    }
+
+    @discardableResult
+    func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.delete(items: items, handler: handler)
+    }
+
+    @discardableResult
+    func deletePermanently(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.deletePermanently(items: items, handler: handler)
+    }
+
+    @discardableResult
+    func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return hiddenService.deleteAllFromTrashBin(handler: handler)
+    }
+    
+    @discardableResult
+    func search(text: String, diskType: SearchDiskTypes, page: Int, size: Int, handler: @escaping ResponseHandler<BusinessSearchItems>) -> URLSessionTask? {
+        searchService.search(text: text, diskType: diskType, page: page, size: size, handler: handler)
     }
 }

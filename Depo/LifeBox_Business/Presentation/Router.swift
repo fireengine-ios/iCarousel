@@ -66,6 +66,10 @@ class RouterVC: NSObject {
                currentViewController is PhoneVerificationViewController
     }
     
+    func currentController() -> UIViewController? {
+        return navigationController?.viewControllers.last
+    }
+    
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {
@@ -222,8 +226,8 @@ class RouterVC: NSObject {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func popViewController() {
-        navigationController?.popViewController(animated: true)
+    func popViewController(animated: Bool = true) {
+        navigationController?.popViewController(animated: animated)
     }
     
     func popToViewController(_ vc: UIViewController) {//}, completion: VoidHandler? = nil) {
@@ -359,12 +363,51 @@ class RouterVC: NSObject {
         else {
             return nil
         }
-
-        if case let PrivateShareType.innerFolder(type: _, folderItem: folder) = controller.shareType {
-            return folder
-        }
         
-        return nil
+        switch controller.shareType {
+            case .byMe, .withMe:
+                if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
+                return nil
+                
+            case .myDisk:
+                if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
+                return nil
+                
+            case .sharedArea:
+                if let accUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
+                return nil
+
+            case .trashBin:
+                if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                    return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: controller.shareType)
+                }
+                return nil
+                
+            case .innerFolder(type: _, folderItem: let folder):
+                return folder
+                
+            case .search(from: let rootType, _, _):
+                
+                switch rootType {
+                    case .sharedArea:
+                        if let accUuid = SingletonStorage.shared.accountInfo?.parentAccountInfo.uuid {
+                            return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: rootType)
+                        }
+                        return nil
+                        
+                    default:
+                        if let accUuid = SingletonStorage.shared.accountInfo?.uuid {
+                            return PrivateSharedFolderItem(accountUuid: accUuid, uuid: "", name: "", permissions: SharedItemPermission(granted: nil, bitmask: nil), type: rootType)
+                        }
+                        return nil
+                }
+        }
     }
     
     // MARK: Splash
@@ -372,19 +415,6 @@ class RouterVC: NSObject {
     var splash: UIViewController? {
         let controller = SplashModuleInitializer.initializeViewController(with: "SplashViewController")
         return controller
-    }
-
-    
-    // MARK: Onboarding
-    
-    var onboardingScreen: UIViewController? {
-        let conf = IntroduceModuleInitializer()
-        let viewController = IntroduceViewController(nibName: "IntroduceViewController",
-                                                     bundle: nil)
-        conf.introduceViewController = viewController
-        conf.setupVC()
-        
-        return createRootNavigationController(controller: viewController)
     }
     
     
@@ -400,11 +430,11 @@ class RouterVC: NSObject {
     
     var loginScreen: UIViewController? {
         
-        let inicializer = LoginModuleInitializer()
+        let initializer = LoginModuleInitializer()
         let loginController = LoginViewController(nibName: "LoginViewController",
                                                   bundle: nil)
-        inicializer.loginViewController = loginController
-        inicializer.setupVC()
+        initializer.loginViewController = loginController
+        initializer.setupVC()
         return loginController
     }
     
@@ -461,32 +491,9 @@ class RouterVC: NSObject {
         let controller = TabBarViewController(nibName: "TabBarView", bundle: nil)
         return controller
     }
-    
-    // MARK: Music
-    
-    var musics: UIViewController? {
-        return BaseFilesGreedModuleInitializer.initializeMusicViewController(with: "BaseFilesGreedViewController")
-    }
-    
-    var favorites: UIViewController? {
-        let storage = ViewSortStorage.shared
-        return favorites(moduleOutput: storage,
-                         sortType: storage.favoritesSortType,
-                         viewType: storage.favoritesViewType)
-    }
-    
-    var allFiles: UIViewController? {
-        let storage = ViewSortStorage.shared
-        let controller = allFiles(moduleOutput: storage,
-                                  sortType: storage.allFilesSortType,
-                                  viewType: storage.allFilesViewType)
-        controller.title = TextConstants.homeButtonAllFiles
-        
-        return controller
-    }
-    
-    var trashBin: UIViewController? {
-        let controller = trashBinController()
+
+    var trashBin: UIViewController {
+        let controller = PrivateShareSharedFilesViewController.with(shareType: .trashBin)
         controller.segmentImage = .trashBin
         return controller
     }
@@ -497,17 +504,8 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var segmentedFiles: UIViewController? {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
-            assertionFailure()
-            return SegmentedController()
-        }
-        let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
-        return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
-    }
-    
     var sharedFiles: UIViewController {
-        return SegmentedController.initWithControllers([sharedWithMe, sharedByMe], alignment: .center)
+        return TopBarSupportedSegmentedController.initWithControllers(with: [sharedWithMe, sharedByMe], currentIndex: 0)//SegmentedController.initWithControllers([sharedWithMe, sharedByMe], alignment: .center)
     }
     
     var sharedWithMe: UIViewController {
@@ -518,6 +516,10 @@ class RouterVC: NSObject {
         return PrivateShareSharedFilesViewController.with(shareType: .byMe)
     }
     
+    var myDisk: UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .myDisk)
+    }
+    
     func sharedFolder(rootShareType: PrivateShareType, folder: PrivateSharedFolderItem) -> UIViewController {
         return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, folderItem: folder))
     }
@@ -526,28 +528,6 @@ class RouterVC: NSObject {
     
     func musicPlayer(status: ItemStatus) -> UIViewController {
         return VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController", status: status)
-    }
-    
-    
-    // MARK: All Files
-    
-    func allFiles(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
-        let controller = BaseFilesGreedModuleInitializer.initializeAllFilesViewController(with: "BaseFilesGreedViewController",
-                                                                                          moduleOutput: moduleOutput,
-                                                                                          sortType: sortType,
-                                                                                          viewType: viewType)
-        return controller
-    }
-    
-    
-    // MARK: Favorites
-    
-    func favorites(moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
-        let controller = BaseFilesGreedModuleInitializer.initializeFavoritesViewController(with: "BaseFilesGreedViewController",
-                                                                                           moduleOutput: moduleOutput,
-                                                                                           sortType: sortType,
-                                                                                           viewType: viewType)
-        return controller
     }
     
     
@@ -565,15 +545,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    
-    // MARK: User profile
-    
-    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
-        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo, isTurkcellUser: isTurkcellUser)
-        return viewController
-    }
-    
-    
     // MARK: File info
     
     func fileInfo(item: BaseDataSourceItem) -> UIViewController {
@@ -582,23 +553,9 @@ class RouterVC: NSObject {
         return viewController
     }
     
-    
-    // MARK: Documents
-    
-    var documents: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializeDocumentsViewController(with: "BaseFilesGreedViewController")
-        return controller
-    }
-    
-    
     // MARK: Create Folder
     
-    func createNewFolder(rootFolderID: String?, isFavorites: Bool = false) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
-        return controller
-    }
-
-    func createNewFolderSharedWithMe(parameters: CreateFolderSharedWithMeParameters) -> UIViewController {
+    func createNewFolder(parameters: CreateFolderParameters) -> UIViewController {
         let controller = SelectNameModuleInitializer.with(parameters: parameters)
         return controller
     }
@@ -666,26 +623,7 @@ class RouterVC: NSObject {
                                                                           status: status,
                                                                           canLoadMoreItems: canLoadMoreItems)
     }
-    
-    func filesDetailAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
-        return PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                               moduleOutput: moduleOutput,
-                                                                               selectedItem: fileObject,
-                                                                               allItems: items,
-                                                                               albumUUID: albumUUID,
-                                                                               status: status)
-    }
-    
-    func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
-        return PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                        moduleOutput: moduleOutput,
-                                                                                        selectedItem: fileObject,
-                                                                                        allItems: items,
-                                                                                        albumUUID: albumUUID,
-                                                                                        albumItem: albumItem,
-                                                                                        status: status)
-    }
-    
+
     // MARK: Free App Space
     
     func freeAppSpace() -> UIViewController {
@@ -695,40 +633,27 @@ class RouterVC: NSObject {
     
     // MARK: - SETTINGS
     
+    var profile: UIViewController? {
+        let controller = ProfileViewController.initFromNib()
+        return controller
+    }
+    
     var settings: UIViewController? {
         let controller = SettingsModuleInitializer.initializeViewController(with: "SettingsViewController")
         return controller
     }
     
-    func settingsIpad(settingsController: UIViewController?) -> UIViewController? {
-        guard let leftController = settingsController as? SettingsViewController else {
-            return nil
-        }
-
-        let rightController = vcActivityTimeline
-        
-        splitContr = SplitIpadViewContoller()
-        splitContr?.configurateWithControllers(leftViewController: leftController, controllers: [rightController])
-        
-        guard let splitVC = splitContr?.getSplitVC() else {
-            return nil
-        }
-        
-        let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitVC)
-        return containerController
-    }
-    
     // MARK: Help and support
     
-    var helpAndSupport: UIViewController {
-        let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
+    var faq: UIViewController {
+        let controller = FAQModuleInitializer.initializeViewController(with: "FAQViewController")
         return controller
     }
     
-    // MARK: Terms and policy
+    //MARK: Agreement
     
-    var termsAndPolicy: UIViewController? {
-        return TermsAndPolicyViewController.initFromNib()
+    var agreements: UIViewController? {
+        return AgreementsViewController.initFromNib()
     }
     
     // MARK: Turkcell Security
@@ -772,7 +697,6 @@ class RouterVC: NSObject {
             controller.title = TextConstants.feedbackViewTitle
             let config = SupportFormConfiguration(name: userInfo.name,
                                                   surname: userInfo.surname,
-                                                  phone: userInfo.fullPhoneNumber,
                                                   email: userInfo.email)
             controller.config = config
             self.pushViewController(viewController: controller)
@@ -812,17 +736,8 @@ class RouterVC: NSObject {
         return SupportFormPrefilledController()
     }
     
-    func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
-        return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
-    }
-    
-    var verifyEmailPopUp: VerifyEmailPopUp {
-        let controller = VerifyEmailPopUp()
-        
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        
-        return controller
+    func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel, rememberMe: Bool) -> UIViewController {
+        return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge, rememberMe: rememberMe)
     }
     
     var changeEmailPopUp: ChangeEmailPopUp {
@@ -834,54 +749,28 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func trashBinController() -> TrashBinViewController {
-        return TrashBinViewController.initFromNib()
-    }
-    
-    func showFullQuotaPopUp(_ popUpType: FullQuotaWarningPopUpType = .standard) {
-        let controller = FullQuotaWarningPopUp(popUpType)
-        DispatchQueue.main.async {
-            if
-                let topController = self.defaultTopController,
-                topController is FullQuotaWarningPopUp == false,
-                topController is LoginViewController == false {
-                topController.present(controller, animated: false)
-            }
-        }
-    }
-    
     func mobilePaymentPermissionController() -> MobilePaymentPermissionViewController {
         return MobilePaymentPermissionViewController.initFromNib()
     }
     
     func openTrashBin() {
+        pushViewController(viewController: trashBin)
+    }
+    
+    func openTab(_ tab: TabScreenIndex) {
         guard let tabBarVC = tabBarController else {
             return
         }
         
         tabBarVC.dismiss(animated: true)
         
-        func switchToTrashBin() {
-            guard let segmentedController = tabBarVC.currentViewController as? SegmentedController else {
-                return
-            }
-            
-            segmentedController.loadViewIfNeeded()
-            segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
+        let index = tab.rawValue
+        guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
+            assertionFailure("This index is non existent 😵")
+            return
         }
-        
-        let index = TabScreenIndex.documents.rawValue
-        if tabBarVC.selectedIndex == index {
-            switchToTrashBin()
-        } else {
-            guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
-                assertionFailure("This index is non existent 😵")
-                return
-            }
-            tabBarVC.tabBar.selectedItem = newSelectedItem
-            tabBarVC.selectedIndex = index - 1
-            switchToTrashBin()
-        }
+        tabBarVC.tabBar.selectedItem = newSelectedItem
+        tabBarVC.selectedIndex = index
     }
     
     func privateShare(items: [WrapData]) -> UIViewController {
@@ -897,11 +786,18 @@ class RouterVC: NSObject {
     }
     
     func privateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> UIViewController {
-        PrivateShateAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
+        PrivateShareAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
     }
     
     var sharedAreaController: UIViewController {
-        SharedAreaViewController.initFromNib()
+        PrivateShareSharedFilesViewController.with(shareType: .sharedArea)
     }
-
+    
+    func uploadSelectionList(with items: [WrapData], completion: @escaping ValueHandler<[WrapData]>) -> UIViewController {
+        let controller = UploadSelectionListViewController.with(items: items, completion: completion)
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        return controller
+    }
+    
 }

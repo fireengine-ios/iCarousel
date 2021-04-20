@@ -19,17 +19,18 @@ struct SuggestedApiContact: Codable {
 }
 
 struct SharedFileInfo: Codable {
+    let shared: Bool?
     let createdDate: Date?
     let lastModifiedDate: Date?
     let id: Int64
-    let accountUuid: String?
+    let accountUuid: String
     let hash: String?
     let name: String?
     let uuid: String
     let bytes: Int64?
     let folder: Bool?
     let childCount: Int64?
-    let status: String? // enum
+    let fileInfoStatus: ItemStatus?
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
     let contentType: String?
@@ -121,8 +122,20 @@ struct FileAlbum: Codable {
 }
 
 struct FileSystem: Codable {
+    let parentFolderName: String
     let parentFolderList: [SharedFileInfo]
     let fileList: [SharedFileInfo]
+}
+
+struct BusinessSearchItems: Codable {
+    
+    struct FoundItems: Codable {
+        let allFiles: Int
+    }
+    
+    let foundItems: [SharedFileInfo]
+    let foundItemsCount: FoundItems
+    
 }
 
 struct SharedItemPermission: Codable, Equatable {
@@ -131,7 +144,7 @@ struct SharedItemPermission: Codable, Equatable {
 }
 
 struct PrivateShareObjectItem: Encodable {
-    let projectId: String
+    let accountUuid: String
     let uuid: String
 }
 
@@ -151,20 +164,24 @@ struct PrivateShareObject: Encodable {
 struct PrivateShareContact: Equatable, Encodable {
     let displayName: String
     let username: String
+    
+    var type: PrivateShareSubjectType
     var role: PrivateShareUserRole
+    var identifier: String
     
     static func == (lhs: PrivateShareContact, rhs: PrivateShareContact) -> Bool {
-        return lhs.username == rhs.username
+        return lhs.identifier == rhs.identifier
     }
     
     enum CodingKeys: String, CodingKey {
-        case username, role
+        case username, role, identifier, type
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(username, forKey: .username)
+        try container.encode(type.rawValue, forKey: .type)
         try container.encode(role.rawValue, forKey: .role)
+        try container.encode(identifier, forKey: .identifier)
     }
 }
 
@@ -177,9 +194,9 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     var title: String {
         switch self {
         case .editor:
-            return TextConstants.privateShareStartPageEditorButton
+            return TextConstants.PrivateShare.role_editor
         case .viewer:
-            return TextConstants.privateShareStartPageViewerButton
+            return TextConstants.PrivateShare.role_viewer
         case .owner, .varying:
             return ""
         }
@@ -188,9 +205,9 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     var selectionTitle: String {
         switch self {
         case .editor:
-            return TextConstants.privateShareRoleSelectionEditor
+            return TextConstants.PrivateShare.role_editor
         case .viewer:
-            return TextConstants.privateShareRoleSelectionViewer
+            return TextConstants.PrivateShare.role_viewer
         case .owner, .varying:
             return ""
         }
@@ -199,13 +216,13 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     var infoMenuTitle: String {
         switch self {
         case .editor:
-            return TextConstants.privateShareInfoMenuEditor
+            return TextConstants.infoPageRoleEditor
         case .viewer:
-            return TextConstants.privateShareInfoMenuViewer
+            return TextConstants.infoPageRoleViewer
         case .owner:
-            return TextConstants.privateShareInfoMenuOwner
+            return TextConstants.infoPageRoleOwner
         case .varying:
-            return TextConstants.privateShareInfoMenuVarying
+            return TextConstants.infoPageRoleVaries
         }
     }
     
@@ -252,6 +269,8 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
 enum PrivateShareItemType: String, Codable {
     case file = "FILE"
     case album = "ALBUM"
+    case account = "ACCOUNT"
+    case disk = "DISK"
 }
 
 enum PrivateShareDuration: String, CaseIterable, Codable {
@@ -265,17 +284,17 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     var title: String {
         switch self {
         case .no:
-            return TextConstants.privateShareStartPageDurationNo
+            return TextConstants.PrivateShare.share_duration_no_duration
         case .hour:
-            return TextConstants.privateShareStartPageDurationHour
+            return TextConstants.PrivateShare.share_duration_1_hour
         case .day:
-            return TextConstants.privateShareStartPageDurationDay
+            return TextConstants.PrivateShare.share_duration_1_day
         case .week:
-            return TextConstants.privateShareStartPageDurationWeek
+            return TextConstants.PrivateShare.share_duration_1_week
         case .month:
-            return TextConstants.privateShareStartPageDurationMonth
+            return TextConstants.PrivateShare.share_duration_1_month
         case .year:
-            return TextConstants.privateShareStartPageDurationYear
+            return TextConstants.PrivateShare.share_duration_1_year
         }
     }
 }
@@ -369,10 +388,11 @@ struct UploadFileRequestItem: Encodable {
 }
 
 struct PrivateSharedFolderItem: Equatable {
-    let projectId: String
+    let accountUuid: String
     let uuid: String
     let name: String
     let permissions: SharedItemPermission
+    let type: PrivateShareType
 }
 
 struct PrivateShareAccessListObject: Codable {

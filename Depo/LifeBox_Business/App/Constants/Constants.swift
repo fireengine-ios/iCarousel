@@ -18,16 +18,16 @@ struct TextConstants {
         static let mobilePaymentPermissionLink = "mobilePaymentPermissionLink";
         static let FAQ = "frequently_asked_questions"
         static let feedbackEmail = "info@mylifebox.com"
+        static let contactUsEmail = "info@lifebox.biz"
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         static let wrongVideoData = "Wrong video data"
         static let wrongImageData = "Wrong image data"
+        static let flIdentifierKey = "FastLogin"
+        static let ipadFastLoginAppIdentifier: String = "59322"
+        static let iPhoneFastLoginAppIdentifier: String = "59320"
         
         static let appNameLowercased: String = {
-            #if LIFEDRIVE
-                return "billo"
-            #else
-                return "lifebox"
-            #endif
+            return "lifebox business"
         }()
         private static let appNameUppercased = appNameLowercased.uppercased()
         private static let appNameCapitalized = appNameLowercased.capitalized
@@ -103,17 +103,18 @@ struct TextConstants {
     static let signUpErrorNumberMissing = NSLocalizedString("sing_up_error_number_missing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let signUpErrorUnauthorized = NSLocalizedString("sing_up_error_unauthorized", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     // MARK: -
-    static let termsAndUsesTitle = NSLocalizedString("eula_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUsesTitle = NSLocalizedString("business_app_eula_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUsesApplyButtonText = NSLocalizedString("Accept  Terms", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseTextFormat = NSLocalizedString("<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let termsAndUseStartUsingText = NSLocalizedString("Get Started", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let termsAndUseCheckboxText = NSLocalizedString("I have read and accepted terms of use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUseStartUsingText = NSLocalizedString("business_app_privacy_policy_start", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUseCheckboxText = NSLocalizedString("business_app_eula_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkCheckbox = NSLocalizedString("terms_and_use_etk_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkCheckboxHeader = NSLocalizedString("terms_and_use_etk_checkbox_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseIntroductionCheckbox = NSLocalizedString("terms_and_use_introduction_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let privacyPolicy = NSLocalizedString("privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicy = NSLocalizedString("business_app_eula_privacy_policy_textbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkTurkcellAndGroupCompanies = NSLocalizedString("terms_and_use_etk_link_turkcell_and_group_companies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let privacyPolicyCondition = NSLocalizedString("privacy_policy_condition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyPageTitle = NSLocalizedString("business_app_privacy_policy_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyCondition = NSLocalizedString("business_app_privacy_policy_condition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privacyPolicyHeadLine = NSLocalizedString("privacy_policy_head_line", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkCommercialEmailMessages = NSLocalizedString("terms_and_use_etk_link_commercial_email_messages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxErrorText = NSLocalizedString("You need to confirm the User Agreement to continue.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -206,15 +207,6 @@ struct TextConstants {
     static let homeButtonFavorites = NSLocalizedString("Favorites", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeButtonSyncContacts = NSLocalizedString("Sync Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    // MARK: - Home page subButtons Lables
-    static let takePhoto = NSLocalizedString("Take Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let upload = NSLocalizedString("Upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let uploadFiles = NSLocalizedString("Upload Files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let uploadMusic = NSLocalizedString("Upload Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let newFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let uploadFromLifebox = NSLocalizedString("Upload from lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    
     // MARK: - Searchbar img name
     
     static let searchIcon = NSLocalizedString("searchIcon", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -254,18 +246,15 @@ struct TextConstants {
     
     static let topBarVideosFilter = NSLocalizedString("Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let topBarPhotosFilter = NSLocalizedString("Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
-    // MARK: - Camera alert
-    static let cameraAccessAlertTitle = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertText = NSLocalizedString("Error occurred while accessing your photos.\nPlease check your settings.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertGoToSettings = NSLocalizedString("Settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let cameraAccessAlertNo = NSLocalizedString("No", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Sync out of space alert
     static let syncOutOfSpaceAlertTitle = NSLocalizedString("Caution!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncOutOfSpaceAlertText = NSLocalizedString("You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let upgrade = NSLocalizedString("Upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncOutOfSpaceAlertCancel = NSLocalizedString("Cancel", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpTitle = NSLocalizedString("business_app_quota_full_upload_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpDescription = NSLocalizedString("business_app_quota_full_upload_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let quotaFullUploadPopUpButton = NSLocalizedString("business_app_quota_full_upload_pop_up_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: Home Storage card
     static let homeStorageCardCloudTitle = NSLocalizedString("Your lifebox storage is almost full!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -333,6 +322,7 @@ struct TextConstants {
     static let settingsViewCellPasscode = NSLocalizedString("Lifebox %@ and Passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellHelp = NSLocalizedString("Help & Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellPrivacyAndTerms = NSLocalizedString("terms_and_privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let agreements = NSLocalizedString("business_app_agreement_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellPermissions = NSLocalizedString("Permissions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewLogoutCheckMessage = NSLocalizedString("Are you sure you want to exit the application?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -343,10 +333,15 @@ struct TextConstants {
     // MARK: FAQ
     
     static let faqViewTitle = NSLocalizedString("Help and Support", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faqTitle = NSLocalizedString("business_app_faq_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Terms of Use and Privacy Policy
      static let termsOfUseCell = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
      static let privacyPolicyCell = NSLocalizedString("privacy_policy_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: Agreements
+    static let termsOfUseAgreement = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyAgreement = NSLocalizedString("privacy_policy_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     // MARK: Face Image
@@ -491,8 +486,9 @@ struct TextConstants {
     static let tabBarDownloadLabel = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarSyncLabel = NSLocalizedString("Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarMoveLabel = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let tabBarShareLabel = NSLocalizedString("Share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarInfoLabel = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarShareLabel = NSLocalizedString("business_app_share_copy_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarSharePrivatelyLabel = NSLocalizedString("business_app_share_privately_option", tableName: "OurLocalizable", bundle: .main, comment: "")
     
     // MARK: Select Name
     static let selectNameTitleFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -934,14 +930,6 @@ struct TextConstants {
     static let onSignupSupportFormSubject2DetailedInfoText = NSLocalizedString("signup_support_form_subject_2_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let onSignupSupportFormSubject3DetailedInfoText = NSLocalizedString("signup_support_form_subject_3_detailed_info_fulltext", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let contactUsSubject1 = NSLocalizedString("contact_us_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject2 = NSLocalizedString("contact_us_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject3 = NSLocalizedString("contact_us_subject_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject4 = NSLocalizedString("contact_us_subject_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject5 = NSLocalizedString("contact_us_subject_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject6 = NSLocalizedString("contact_us_subject_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject7 = NSLocalizedString("contact_us_subject_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactUsSubject8 = NSLocalizedString("contact_us_subject_8", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject9 = NSLocalizedString("contact_us_subject_9", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject10 = NSLocalizedString("contact_us_subject_10", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactUsSubject11 = NSLocalizedString("contact_us_subject_11", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1068,8 +1056,6 @@ struct TextConstants {
     static let trashBinDeleteAllConfirmText = NSLocalizedString("confirm_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinDeleteAllConfirmOkButton = NSLocalizedString("confirm_empty_trashbin_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinDeleteAllComplete = NSLocalizedString("success_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let turkcellUpdateRequiredTitle = NSLocalizedString("turkcell_updater_update_required_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let turkcellUpdateRequiredMessage = NSLocalizedString("turkcell_updater_update_required_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let moveToTrashItemsSuccessText = NSLocalizedString("move_to_trash_items_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let moveToTrashAlbumsSuccessText = NSLocalizedString("move_to_trash_albums_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1191,6 +1177,7 @@ struct TextConstants {
     static let privateSharedWithMeEmptyText = NSLocalizedString("private_share_shared_with_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedByMeEmptyText = NSLocalizedString("private_share_shared_by_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedInnerFolderEmptyText = NSLocalizedString("private_share_inner_folder_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareSharedAreaEmptyText = NSLocalizedString("private_share_shared_area_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let privateSharedEndSharingActionSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedEndSharingActionConfirmation = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1229,11 +1216,329 @@ struct TextConstants {
     static let privateShareMessageLimit = NSLocalizedString("private_share_long_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePhoneOrMailLimit = NSLocalizedString("private_share_long_emailmsisdn", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareNumberOfItemsLimit = NSLocalizedString("private_share_max_number_of_item_limit_exceeded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let unauthorizedUploadOperation = NSLocalizedString("business_app_upload_403", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 extension TextConstants {
-    static let tabBarItemMyDisk = NSLocalizedString("tabbar_item_my_disk", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let tabBarItemSharedFiles = NSLocalizedString("tabbar_item_shared_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let tabBarItemSharedArea = NSLocalizedString("tabbar_item_shared_area", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemMyDisk = NSLocalizedString("business_app_tabbar_mydisk", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemSharedFiles = NSLocalizedString("business_app_tabbar_mysharings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemSharedArea = NSLocalizedString("business_app_tabbar_sharedarea", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarItemSettings = NSLocalizedString("tabbar_item_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let actionSelect = NSLocalizedString("business_app_select_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionDownload = NSLocalizedString("business_app_download_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionDelete = NSLocalizedString("business_app_delete_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionRename = NSLocalizedString("business_app_rename_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSharePrivately = NSLocalizedString("business_app_share_privately_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionShareCopy = NSLocalizedString("business_app_share_copy_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionStopSharing = NSLocalizedString("business_app_stop_sharing_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionLeaveSharing = NSLocalizedString("business_app_leave_sharing_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionInfo = NSLocalizedString("business_app_info_option", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let downloadSuccess = NSLocalizedString("business_app_download_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteSuccess = NSLocalizedString("business_app_delete_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let renameSuccess = NSLocalizedString("business_app_rename_sucess", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharePrivatelySuccess = NSLocalizedString("business_app_share_privately_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let stopSharingSuccess = NSLocalizedString("business_app_stop_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let leaveSharingSuccess = NSLocalizedString("business_app_leave_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteConfirmationTitle = NSLocalizedString("business_app_delete_confirm_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteConfirmationMessage = NSLocalizedString("business_app_delete_confirm_popup_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let delete = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: - Camera alert
+    static let galeryPermissionNotProvidedTitle = NSLocalizedString("business_app_gallery_permission_not_provided_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedDescription = NSLocalizedString("business_app_gallery_permission_not_provided_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedAcceptButton = NSLocalizedString("business_app_gallery_permission_not_provided_popup_settings_accept", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galeryPermissionNotProvidedRejectButton = NSLocalizedString("business_app_gallery_permission_not_provided_popup_settings_reject", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+// MARK: - Login page
+extension TextConstants {
+    static let loginPageFLButtonExplanation = NSLocalizedString("business_app_login_FL_explanation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageLoginButtonExplanation = NSLocalizedString("business_app_login_pwd_login_button_explanation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageLoginButtonTitle = NSLocalizedString("business_app_login_pwd_login_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageForgetPasswordCloseButtonTitle = NSLocalizedString("business_app_login_forget_password_page_close_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageForgetPasswordDescriptionText = NSLocalizedString("business_app_login_forget_password_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageForgetPasswordButtonTitle = NSLocalizedString("business_app_login_forget_password_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageForgetPasswordPageTitle = NSLocalizedString("business_app_login_forget_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageRememberMeButtonTitle = NSLocalizedString("business_app_login_rememberme_checkbox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPagePasswordFieldPlaceholder = NSLocalizedString("business_app_login_password_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageEmailFieldPlaceholder = NSLocalizedString("business_app_login_email_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageMainTitle = NSLocalizedString("business_app_login_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let captchaViewTextfieldPlaceholder = NSLocalizedString("business_app_login_captcha_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageEmptyLoginFieldError = NSLocalizedString("business_app_login_email_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageInvalidLoginFieldError = NSLocalizedString("business_app_login_email_not_validated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageEmptyPasswordFieldError = NSLocalizedString("business_app_login_password_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageEmptyCaptchaFieldError = NSLocalizedString("business_app_login_captcha_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageInvalidCaptchaFieldError = NSLocalizedString("business_app_login_captcha_not_match", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageErrorCode30 = NSLocalizedString("business_app_login_pwd_error_code_30", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageErrorCode31 = NSLocalizedString("business_app_login_ldap_error_code_31", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageErrorCode32 = NSLocalizedString("business_app_login_ldap_error_code_32", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageErrorCode33 = NSLocalizedString("business_app_login_ldap_error_code_33", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageBlockedIpError = NSLocalizedString("business_app_login_blocked_ip", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginGenericError = NSLocalizedString("business_app_login_generic_error_tag", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageShowPassword = NSLocalizedString("business_app_login_show_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let loginPageHidePassword = NSLocalizedString("business_app_login_hide_password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    
+    struct PrivateShare {
+        static let close_page = NSLocalizedString("business_app_private_share_close_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let close_page_no = NSLocalizedString("business_app_private_share_close_page_no", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let close_page_yes = NSLocalizedString("business_app_private_share_close_page_yes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        
+        static let page_title = NSLocalizedString("business_app_private_share_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let box_name = NSLocalizedString("business_app_private_share_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let box_inside = NSLocalizedString("business_app_private_share_box_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let role_editor = NSLocalizedString("business_app_private_share_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let role_viewer = NSLocalizedString("business_app_private_share_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let add_message = NSLocalizedString("business_app_private_share_add_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let add_message_inside = NSLocalizedString("business_app_private_share_add_message_inside", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration = NSLocalizedString("business_app_private_share_share_duration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_no_duration = NSLocalizedString("business_app_private_share_share_duration_no_duration", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_hour = NSLocalizedString("business_app_private_share_share_duration_1_hour", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_day = NSLocalizedString("business_app_private_share_share_duration_1_day", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_week = NSLocalizedString("business_app_private_share_share_duration_1_week", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_month = NSLocalizedString("business_app_private_share_share_duration_1_month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let share_duration_1_year = NSLocalizedString("business_app_private_share_share_duration_1_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let start = NSLocalizedString("business_app_private_share_start", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let success = NSLocalizedString("business_app_private_share_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+        static let fail_errorcode_4115 = NSLocalizedString("business_app_private_share_fail_errorcode_4115", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_4116 = NSLocalizedString("business_app_private_share_fail_errorcode_4116", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_4118 = NSLocalizedString("business_app_private_share_fail_errorcode_4118", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_5101 = NSLocalizedString("business_app_private_share_fail_errorcode_5101", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let fail_errorcode_5102 = NSLocalizedString("business_app_private_share_fail_errorcode_5102", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        
+        static let shared_with_section_name = NSLocalizedString("business_app_private_share_shared_with_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+        static let uploadVideoToReadOnlyAlbumError = NSLocalizedString("uploadVideoToReadOnlyAlbumError", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    }
+    
+}
+
+// MARK: - Info
+extension TextConstants {
+    static let infoPageTitleForFile = NSLocalizedString("business_app_info_page_title_for_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageTitleForFolder = NSLocalizedString("business_app_info_page_title_for_folders", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemName = NSLocalizedString("business_app_info_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemSize = NSLocalizedString("business_app_info_page_size", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemItems = NSLocalizedString("business_app_info_page_item", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemCreationDate = NSLocalizedString("business_app_info_page_creation_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemModifiedDate = NSLocalizedString("business_app_info_page_modified_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemSharingInfo = NSLocalizedString("business_app_info_page_sharing_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageItemSharedWithNumberOfPerson = NSLocalizedString("business_app_info_page_shared_with", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageRoleOwner = NSLocalizedString("business_app_info_page_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageRoleEditor = NSLocalizedString("business_app_info_page_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageRoleViewer = NSLocalizedString("business_app_info_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let infoPageRoleVaries = NSLocalizedString("business_app_info_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - SharedContacts
+extension TextConstants {
+    static let uploadProgressHederTitle = NSLocalizedString("business_app_upload_bar_uploading_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageTitle = NSLocalizedString("business_app_whohasaccess_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleOwner = NSLocalizedString("business_app_whohasaccess_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleEditor = NSLocalizedString("business_app_whohasaccess_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleViewer = NSLocalizedString("business_app_whohasaccess_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedContactsPageRoleVaries = NSLocalizedString("business_app_whohasaccess_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
+    static let a2FAFirstPageTitle = NSLocalizedString("business_app_2FA_first_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageDescription = NSLocalizedString("business_app_2FA_first_page_description_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageDescriptionDetail = NSLocalizedString("business_app_2FA_first_page_description_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCode = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCodeToPhone = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode_to_phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageSendSecurityCodeToEmail = NSLocalizedString("business_app_2FA_first_page_sendsecuritycode_to_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FAFirstPageButtonSend = NSLocalizedString("business_app_2FA_first_page_send_button_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let a2FASecondPageTitle = NSLocalizedString("business_app_2FA_second_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageVerifyNumber = NSLocalizedString("business_app_2FA_second_page_verify_number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageVerifyEmail = NSLocalizedString("business_app_2FA_second_page_verify_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageInfo = NSLocalizedString("business_app_2FA_second_page_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let a2FASecondPageSecurityCode = NSLocalizedString("business_app_2FA_second_page_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Access page
+extension TextConstants {
+    static let accessPageTitle = NSLocalizedString("business_app_access_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleEditor = NSLocalizedString("business_app_access_page_role_editor", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleViewer = NSLocalizedString("business_app_access_page_role_viewer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleVaries = NSLocalizedString("business_app_access_page_role_varies", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleOwner = NSLocalizedString("business_app_access_page_role_owner", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageDueDateTo = NSLocalizedString("business_app_access_page_expire_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageFromFolder = NSLocalizedString("business_app_access_page_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRemoveRole = NSLocalizedString("business_app_access_page_role_change_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleUpdated = NSLocalizedString("business_app_role_update", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessPageRoleDeleted = NSLocalizedString("business_app_role_delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
+    static let uploadSelectPageTitle = NSLocalizedString("business_app_upload_select_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadSelectButtonTitle = NSLocalizedString("business_app_upload_select_page_upload_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+}
+
+//MARK: - TopBar Sorting
+
+extension TextConstants {
+    static let topBarSortSubviewSortByLabel = NSLocalizedString("business_app_sortby", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByName_a_z = NSLocalizedString("business_app_sortby_name_a_z", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByName_z_a = NSLocalizedString("business_app_sortby_name_z_a", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByNewest = NSLocalizedString("business_app_sortby_newest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByOldest = NSLocalizedString("business_app_sortby_oldest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortByLargest = NSLocalizedString("business_app_sortby_largest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSortSubviewSortBySmallest = NSLocalizedString("business_app_sortby_smallest", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - PlusButton
+
+extension TextConstants {
+    static let upload = NSLocalizedString("business_app_plus_button_upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadFiles = NSLocalizedString("business_app_plus_button_upload_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let newFolder = NSLocalizedString("business_app_new_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let noAccessSnackBarTitle = NSLocalizedString("business_app_no_permission_for_upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - NavBar Root titles
+
+extension TextConstants {
+    static let navbarRootTitleMyDisk = NSLocalizedString("business_app_mydisk_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let navbarRootTitleMySharings = NSLocalizedString("business_app_mysharings_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let navbarRootTitleSharedArea = NSLocalizedString("business_app_sharedarea_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - TopBar Segment and Search
+
+extension TextConstants {
+    static let topBarSearchSubViewDescriptionTitle = NSLocalizedString("business_app_search_bar_explanation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSegmentSharedWithMe = NSLocalizedString("business_app_sharedwithme_menu", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let topBarSegmentSharedByMe = NSLocalizedString("business_app_sharedbyme_menu", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - FastLogin
+extension TextConstants {
+    static let flLoginErrorPopupTitle = NSLocalizedString("business_app_FL_error_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginErrorTimeout = NSLocalizedString("business_app_FL_error_session_timeout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginErorNotLoginSDK = NSLocalizedString("business_app_FL_error_not_logintologinSDK", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginElseError = NSLocalizedString("business_app_FL_else_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginUserNotInPool = NSLocalizedString("business_app_fast_login_pool_user_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let flLoginAuthFailure = NSLocalizedString("business_app_fast_login_authentication_fail_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Settings general
+extension TextConstants {
+    static let settingsPageTitle = NSLocalizedString("business_app_settings_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUseHeader = NSLocalizedString("business_app_settings_storage_use_limited_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUsedLimited = NSLocalizedString("business_app_settings_storage_used_limited_values", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageStorageUsedUnlimited = NSLocalizedString("business_app_settings_storage_use_unlimited_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageProfile = NSLocalizedString("business_app_settings_profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageAgreements = NSLocalizedString("business_app_settings_agreements", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageFAQ = NSLocalizedString("business_app_settings_faq", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageContactUs = NSLocalizedString("business_app_settings_contactus", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageDeletedFiles = NSLocalizedString("business_app_settings_deletedfiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsPageLogout = NSLocalizedString("business_app_settings_logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let appVersion = NSLocalizedString("business_app_app_version_under_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Contact us
+extension TextConstants {
+    static let contactUsPageTitle = NSLocalizedString("business_app_contact_us_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsPageDescription = NSLocalizedString("business_app_contact_us_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubjectBoxName = NSLocalizedString("business_app_contact_us_subject_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsMessageBoxName = NSLocalizedString("business_app_contact_us_message_box_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSendButton = NSLocalizedString("Send", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactUsSubject1 = NSLocalizedString("business_app_contact_us_subject_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject2 = NSLocalizedString("business_app_contact_us_subject_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject3 = NSLocalizedString("business_app_contact_us_subject_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject4 = NSLocalizedString("business_app_contact_us_subject_4", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject5 = NSLocalizedString("business_app_contact_us_subject_5", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject6 = NSLocalizedString("business_app_contact_us_subject_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject7 = NSLocalizedString("business_app_contact_us_subject_7", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsSubject8 = NSLocalizedString("business_app_contact_us_subject_8", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactUsMailBodyUnlimitedStorage = NSLocalizedString("business_app_contact_us_email_body_unlimited", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactUsMailTextFormat = NSLocalizedString("business_app_contact_us_email_body", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - Detail view screen
+extension TextConstants {
+    static let documentNoPreview = NSLocalizedString("business_app_document_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoNoPreview = NSLocalizedString("business_app_photo_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let audioNoPreview = NSLocalizedString("business_app_music_no_preview", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Empty pages or folders
+extension TextConstants {
+    static let myDiskEmptyPage = NSLocalizedString("business_app_my_disk_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedWithMeEmptyPage = NSLocalizedString("business_app_shared_with_me_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedByMeEmptyPage = NSLocalizedString("business_app_shared_by_me_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let sharedAreaEmptyPage = NSLocalizedString("business_app_shared_area_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let folderEmptyPage = NSLocalizedString("business_app_folder_empty page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+// MARK: - Trash Bin
+extension TextConstants {
+    static let trashBinPageTitle = NSLocalizedString("business_app_trash_bin_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyPage = NSLocalizedString("business_app_trash_bin_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreAction = NSLocalizedString("business_app_trash_bin_restore_action_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAction = NSLocalizedString("business_app_trash_bin_delete_action_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let trashBinRestoreConfirmTitle = NSLocalizedString("business_app_trash_bin_restore_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreConfirmDescription = NSLocalizedString("business_app_trash_bin_restore_confirm_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreYesAction = NSLocalizedString("business_app_trash_bin_restore_confirm_YES_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreNoAction = NSLocalizedString("business_app_trash_bin_restore_confirm_NO_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinRestoreSucceed = NSLocalizedString("business_app_trash_bin_restore_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let trashBinDeleteConfirmTitle = NSLocalizedString("business_app_trash_bin_delete_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteConfirmDescription = NSLocalizedString("business_app_trash_bin_delete_confirm_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteYesAction = NSLocalizedString("business_app_trash_bin_delete_confirm_YES_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteNoAction = NSLocalizedString("business_app_trash_bin_delete_confirm_NO_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteActionSucceed = NSLocalizedString("business_app_trash_bin_delete_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let trashBinEmptyTrashConfirmTitle = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyTrashConfirmDescription = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyTrashYesAction = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_YES_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyTrashNoAction = NSLocalizedString("business_app_trash_bin_empty_trash_confirm_NO_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinEmptyTrashSucceed = NSLocalizedString("business_app_trash_bin_empty_trash_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+
+extension TextConstants {
+    static let rootDevicePopupTitle = NSLocalizedString("business_app_root_device_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let rootDevicePopupDescription = NSLocalizedString("business_app_root_device_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let rootDevicePopupCloseAppButton = NSLocalizedString("business_app_root_device_popup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK: - Profile page
+extension TextConstants {
+    static let profilePageTitle = NSLocalizedString("business_app_profile_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let profileNameSurname = NSLocalizedString("business_app_profile_name_surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let profileEmail = NSLocalizedString("business_app_profile_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
+    static let itemsSelectedTitle = NSLocalizedString("business_app_manual_picker_selected_counter", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
+    static let snackBarTrashBinLinkTitle = NSLocalizedString("business_app_delete_success_snackbar_trashbin_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+extension TextConstants {
+    static let turkcellUpdaterPopupTitle = NSLocalizedString("turkcell_updater_pop_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let turkcellUpdaterPopupDescription = NSLocalizedString("turkcell_updater_pop_up_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+
+//MARK:- Search
+extension TextConstants {
+    static let emptySearchTitle = NSLocalizedString("business_app_search_empty_page_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let emptySearchDescription = NSLocalizedString("business_app_search_empty_page_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let emptySearchHeader = NSLocalizedString("business_app_search_no_results", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let searchItemsFoundNumber = NSLocalizedString("business_app_search_number_of_result", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+extension TextConstants {
+    static let iCloudPreparationSnackbarMessage = NSLocalizedString("business_app_icloud_upload_spinner_tag", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+}
+

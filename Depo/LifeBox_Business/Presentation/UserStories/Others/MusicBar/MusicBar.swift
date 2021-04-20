@@ -66,14 +66,14 @@ class MusicBar: UIView {
     private func setupGradientView() {
         gradientView.setup(withFrame: bounds,
                            startColor: UIColor.lrRedOrange,
-                           endColoer: UIColor.lrYellowSun,
+                           endColor: UIColor.lrYellowSun,
                            startPoint: CGPoint(x: 0, y: 0.5),
                            endPoint: CGPoint(x: 1, y: 0.5))
 
         let progressViewRect = CGRect(x: 0, y: 0, width: Device.winSize.width, height: progressViewContainer.bounds.height)
         progressViewContainer.setup(withFrame: progressViewRect,
                                     startColor: UIColor.lrSLightPink,
-                                    endColoer: UIColor.lrLightYellow,
+                                    endColor: UIColor.lrLightYellow,
                                     startPoint: CGPoint(x: 0, y: 0.5),
                                     endPoint: CGPoint(x: 1, y: 0.5))
     }

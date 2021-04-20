@@ -60,7 +60,7 @@ class OTPViewInteractor: PhoneVerificationInteractor {
                 if let response = baseResponse as? ObjectRequestResponse,
                     let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
                     
-                    self?.userInfo?.phoneNumber = self?.phoneNumber
+//                    self?.userInfo?.phoneNumber = self?.phoneNumber
                     self?.silentLogin(token: silentToken)
                 } else {
                     self?.verificationSucces()
@@ -144,6 +144,6 @@ class OTPViewInteractor: PhoneVerificationInteractor {
     }
     
     private func savePhoneNumber() {
-        userInfo?.phoneNumber = phoneNumber
+//        userInfo?.phoneNumber = phoneNumber
     }
 }

@@ -16,7 +16,7 @@ class Device {
     
     static let applicationId = "665036334"
     
-    static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es", "sq", "fr"]
+    static private let supportedLanguages = ["tr", "en"]
     static private let defaultLocale = "en"
     
     static func documentsFolderUrl(withComponent: String) -> URL {
@@ -152,12 +152,12 @@ class Device {
     }
     
     static var deviceInfo: [String: Any] {
-        return [LbRequestkeys.DeviceInfo.uuid: Device.deviceId ?? "",
-                LbRequestkeys.DeviceInfo.appVersion : AuthoritySingleton.shared.getAppVersion(),
-                LbRequestkeys.DeviceInfo.name : UIDevice.current.name,
-                LbRequestkeys.DeviceInfo.type : Device.deviceType,
-                LbRequestkeys.DeviceInfo.language : Locale.current.languageCode ?? "",
-                LbRequestkeys.DeviceInfo.osVersion : Device.systemVersion]
+        return [LbRequestKeys.DeviceInfo.uuid: Device.deviceId ?? "",
+                LbRequestKeys.DeviceInfo.appVersion : AuthoritySingleton.shared.getAppVersion(),
+                LbRequestKeys.DeviceInfo.name : UIDevice.current.name,
+                LbRequestKeys.DeviceInfo.type : Device.deviceType,
+                LbRequestKeys.DeviceInfo.language : Locale.current.languageCode ?? "",
+                LbRequestKeys.DeviceInfo.osVersion : Device.systemVersion]
     }
     
     static var locale: String {

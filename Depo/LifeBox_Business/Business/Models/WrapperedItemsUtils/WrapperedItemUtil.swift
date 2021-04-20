@@ -11,55 +11,50 @@ import UIKit
 class WrapperedItemUtil: NSObject {
     
     class func getSmallPreviewImageForWrapperedObject(fileType: FileType) -> UIImage? {
-        var imageName = "fileIconUnknown"
+        var imageName = "unknownFileThumbnail"
         
         switch fileType {
         case .image:
-            imageName = "fileIconPhoto"
+            imageName = "photoFileThumbnail"
             
         case .video:
-            imageName = "fileIconVideo"
+            imageName = "videoFileThumbnail"
             
         case .audio:
-            imageName = "fileIconAudio"
+            imageName = "audioFileThumbnail"
             
         case .folder:
-            imageName = "fileIconFolder"
+            imageName = "folderFileThumbnail"
             
         case .musicPlayList: // TODO: Add icon
-            imageName = "fileIconUnknown"
+            imageName = "unknownFileThumbnail"
             
         case let .application(applicationType):
             switch applicationType {
-            case .rar:
-                imageName = "fileIconRar"
-                break
             case .zip:
-                imageName = "fileIconZip"
+                imageName = "zipFileThumbnail"
                 break
             case .doc:
-                imageName = "fileIconDoc"
+                imageName = "docFileThumbnail"
                 break
             case .txt:
-                imageName = "fileIconTxt"
-                break
-            case .html:
-                imageName = "fileIconUnknown"
+                imageName = "txtFileThumbnail"
                 break
             case .xls:
-                imageName = "fileIconXls"
+                imageName = "xlsFileThumbnail"
                 break
             case .pdf:
-                imageName = "fileIconPdf"
+                imageName = "pdfFileThumbnail"
                 break
             case .ppt, .pptx:
-                imageName = "fileIconPpt"
+                imageName = "pptFileThumbnail"
                 break
             default:
+                imageName = "unknownFileThumbnail"
                 break
             }
         default:
-            imageName = "fileIconUnknown"
+            imageName = "unknownFileThumbnail"
         }
         return UIImage(named: imageName)
     }
@@ -199,6 +194,40 @@ class WrapperedItemUtil: NSObject {
         default:
             //unknown
             return UIImage(named: "AF_PS_Unknown")
+        }
+    }
+    
+    static func previewPlaceholderImage(fileType: FileType) -> UIImage? {
+        switch fileType {
+            case .image:
+                return UIImage(named: "photoLoading")
+            case .video:
+                return UIImage(named: "videoLoading")
+            case .audio:
+                return UIImage(named: "audioLoading")
+            case .application(let subType):
+                switch subType {
+                    case .txt:
+                        return UIImage(named: "txtLoading")
+                    case .doc:
+                        return UIImage(named: "docLoading")
+                    case .pdf:
+                        return UIImage(named: "pdfLoading")
+                    case .ppt, .pptx:
+                        return UIImage(named: "pptLoading")
+                    case .csv:
+                        return UIImage(named: "csvLoading")
+                    case .xls:
+                        return UIImage(named: "xlsLoading")
+                    case .zip:
+                        return UIImage(named: "zipLoading")
+                    default:
+                        //unknown
+                        return UIImage(named: "unknownLoading")
+                }
+            default:
+                //unknown
+                return UIImage(named: "unknownLoading")
         }
     }
     

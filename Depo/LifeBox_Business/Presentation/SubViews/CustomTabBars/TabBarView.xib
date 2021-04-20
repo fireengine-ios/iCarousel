@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="Billo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="bottomTabBarConstraint" destination="Nv2-yE-i9E" id="iIg-GK-gy1"/>
                 <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
-                <outlet property="curtainView" destination="JJb-a8-a7O" id="m7y-HX-0jG"/>
                 <outlet property="mainContentView" destination="FJl-Cl-AGP" id="bHk-JG-24y"/>
                 <outlet property="musicBar" destination="W0f-ko-odc" id="s5m-3f-Nav"/>
                 <outlet property="musicBarHeightConstraint" destination="oLW-8y-KOm" id="Xal-XQ-eOu"/>
-                <outlet property="plusButtonHeightConstraint" destination="eNR-wi-msA" id="BjE-qO-7Pk"/>
-                <outlet property="plussButton" destination="HTg-Qb-BHM" id="xi3-JD-RNS"/>
                 <outlet property="tabBar" destination="Pdh-iF-uTx" id="M3i-be-cg9"/>
+                <outlet property="uploadProgressView" destination="gxz-1O-hIp" id="aNW-Uy-nY3"/>
+                <outlet property="uploadProgressViewHeightConstraint" destination="avF-El-1x1" id="5uQ-0c-q0C"/>
                 <outlet property="view" destination="iN0-l3-epB" id="mau-IS-hKw"/>
             </connections>
         </placeholder>
@@ -32,64 +31,49 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0i-at-wPy" userLabel="Contenst View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="802"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="813" width="414" height="0.0"/>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="lifeBox_Business" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="802" width="414" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="oLW-8y-KOm"/>
                             </constraints>
                         </view>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JJb-a8-a7O">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxz-1O-hIp" customClass="UploadProgressView" customModule="lifeBox_Business" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="802" width="414" height="0.0"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="avF-El-1x1"/>
+                            </constraints>
                         </view>
-                        <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="CustomTabBar" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="CustomTabBar" customModule="lifeBox_Business" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90461793664383561" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="49" id="nbp-Da-Kmi"/>
+                                <constraint firstAttribute="height" constant="60" id="nbp-Da-Kmi"/>
                             </constraints>
                             <items/>
                             <color key="selectedImageTintColor" red="0.2666666667" green="0.80000000000000004" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                         </tabBar>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTg-Qb-BHM">
-                            <rect key="frame" x="176.66666666666666" y="791" width="61" height="61"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="61" id="eNR-wi-msA"/>
-                                <constraint firstAttribute="width" secondItem="HTg-Qb-BHM" secondAttribute="height" multiplier="1:1" id="f7a-6k-dTO"/>
-                            </constraints>
-                            <state key="normal" image="CenterButton"/>
-                            <state key="disabled" image="CenterButton"/>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="plussBtnAction:" destination="-1" eventType="touchUpInside" id="CJy-Uz-sSH"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="ero-vK-F2b"/>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="W0f-ko-odc" secondAttribute="trailing" id="2vE-tf-F6n"/>
-                        <constraint firstItem="JJb-a8-a7O" firstAttribute="top" secondItem="FJl-Cl-AGP" secondAttribute="top" id="5rp-Iw-NgF"/>
                         <constraint firstItem="W0f-ko-odc" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="CUn-UV-qbO"/>
-                        <constraint firstItem="HTg-Qb-BHM" firstAttribute="centerX" secondItem="FJl-Cl-AGP" secondAttribute="centerX" id="FKi-fA-q2I"/>
                         <constraint firstItem="i0i-at-wPy" firstAttribute="top" secondItem="FJl-Cl-AGP" secondAttribute="top" id="GsX-8P-b56"/>
-                        <constraint firstItem="JJb-a8-a7O" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="Iwa-td-8HT"/>
                         <constraint firstItem="i0i-at-wPy" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="KUC-Ts-NXO"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="W0f-ko-odc" secondAttribute="bottom" id="N1V-LQ-PIK"/>
                         <constraint firstAttribute="trailing" secondItem="i0i-at-wPy" secondAttribute="trailing" id="NOK-Ih-oLn"/>
                         <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="Pdh-iF-uTx" secondAttribute="bottom" id="Nv2-yE-i9E"/>
-                        <constraint firstAttribute="trailing" secondItem="JJb-a8-a7O" secondAttribute="trailing" id="XYr-Mr-BUR"/>
-                        <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="HTg-Qb-BHM" secondAttribute="bottom" constant="10" id="fwk-B8-P1O"/>
+                        <constraint firstItem="ero-vK-F2b" firstAttribute="trailing" secondItem="gxz-1O-hIp" secondAttribute="trailing" id="hxk-7z-Xx9"/>
                         <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="iee-hk-ssn"/>
+                        <constraint firstItem="gxz-1O-hIp" firstAttribute="leading" secondItem="ero-vK-F2b" secondAttribute="leading" id="j0G-2e-cWg"/>
                         <constraint firstItem="W0f-ko-odc" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="rlX-hu-WYO"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="uSv-rF-MBk"/>
-                        <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="JJb-a8-a7O" secondAttribute="bottom" id="x9l-7e-uAY"/>
+                        <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="gxz-1O-hIp" secondAttribute="bottom" constant="60" id="yYv-UQ-NGV"/>
                     </constraints>
                 </view>
             </subviews>
@@ -107,7 +91,6 @@
         </view>
     </objects>
     <resources>
-        <image name="CenterButton" width="64" height="64"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

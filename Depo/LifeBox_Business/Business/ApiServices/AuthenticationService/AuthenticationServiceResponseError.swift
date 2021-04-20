@@ -18,15 +18,33 @@ enum LoginResponseError: Error {
     case incorrectCaptcha
     case networkError
     case serverError
+    case genericError
     case unauthorized
+    case errorCode401
+    case errorCode10
+    case errorCode0
+    case errorCode4201
+    case errorCode30
+    case errorCode31
+    case errorCode32
+    case errorCode33
     case noInternetConnection
     case emptyPhone
     case emptyCaptcha
     case emptyEmail
+
+    case flNotInPool
+    case flAuthFailure
     
     init(with errorResponse: ErrorResponse) {
-        if errorResponse.description.contains("LDAP account is locked") {
-            self = .block
+        if errorResponse.description.contains(TextConstants.NotLocalized.flIdentifierKey) {
+            if errorResponse.description.contains(TextConstants.flLoginAuthFailure) {
+                self = .flAuthFailure
+            } else if errorResponse.description.contains(TextConstants.flLoginUserNotInPool) {
+                self = .flNotInPool
+            } else {
+                self = .serverError
+            }
         }
         else if !ReachabilityService.shared.isReachable {
             self = .noInternetConnection
@@ -34,19 +52,11 @@ enum LoginResponseError: Error {
         else if errorResponse.description.contains("Captcha required") {
             self = .needCaptcha
         }
-        else if errorResponse.description.contains("Authentication with Turkcell Password is disabled for the account") ||
-            errorResponse.description.contains("TURKCELL_PASSWORD_DISABLED") {
-            self = .authenticationDisabledForAccount
-        }
         else if errorResponse.description.contains("Sign up required") {
             self = .needSignUp
         }
-        else if errorResponse.description.contains("Authentication failure") ||
-                    errorResponse.description.contains("LDAP system failure") || errorResponse.description.contains("LDAP Bad credentials") {
-            self = .incorrectUsernamePassword
-        }
         else if errorResponse.description.contains("Invalid captcha") ||
-            errorResponse.description.contains("Unexpected char") {
+                    errorResponse.description.contains("Unexpected char") {
             self = .incorrectCaptcha
         }
         else if errorResponse.description.contains("Internet") {
@@ -57,16 +67,36 @@ enum LoginResponseError: Error {
         }
         else if errorResponse.description.contains(HeaderConstant.emptyEmail) {
             self = .emptyEmail
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 401 {
-            self = .unauthorized
         } else if errorResponse.description.contains(ErrorResponseText.captchaIsEmpty) {
             self = .emptyCaptcha
-        }
-        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 10 {
-            self = .block
         } else {
-            self = .serverError
+            guard let data: Data = errorResponse.description.data(using: .utf8),
+                  let error: ServerErrorDescription = try? JSONDecoder().decode(ServerErrorDescription.self, from: data)
+            else {
+                self = .serverError
+                return
+            }
+            
+            switch error.errorCode {
+            case 0:
+                self = .errorCode0
+            case 10:
+                self = .errorCode10
+            case 30:
+                self = .errorCode30
+            case 31:
+                self = .errorCode31
+            case 32:
+                self = .errorCode32
+            case 33:
+                self = .errorCode33
+            case 401:
+                self = .errorCode401
+            case 4201:
+                self = .errorCode4201
+            default:
+                self = .genericError
+            }
         }
     }
     
@@ -92,8 +122,16 @@ enum LoginResponseError: Error {
             return GADementionValues.loginError.serverError.text
         case .emptyCaptcha:
             return GADementionValues.loginError.captchaIsEmpty.text
+        default:
+            // TODO: add analytics keys when appropriate task will be created
+            return ""
         }
     }
+}
+
+struct ServerErrorDescription: Codable {
+    var errorCode: Int
+    var errorMessage: String
 }
 
 final class SignUpReasonError: Map {

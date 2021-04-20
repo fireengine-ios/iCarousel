@@ -23,87 +23,21 @@ final class PrivateShareSharedItemThreeDotsManager {
     }
     
     func showActions(for privateShareType: PrivateShareType, item: WrapData, sender: Any?) {
-        switch privateShareType {
-            case .byMe:
-                let types = rootScreenActionTypes(for: privateShareType, item: item)
-                alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
-                
-            case .withMe:
-                let types = rootScreenActionTypes(for: privateShareType, item: item)
-                alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
-                
-            case .innerFolder:
-                let types = innerFolderActionTypes(for: privateShareType.rootType, item: item)
-                alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
-        }
+        let types = innerFolderActionTypes(for: privateShareType.rootType, item:  item)
+        alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
     }
     
-    func handleAction(type: ActionType, item: Item, sender: Any?) {
-        switch type {
-        case .elementType(let elementType):
-            alert.handleAction(type: elementType, items: [item], sender: sender)
-        case .shareType(let shareType):
-            alert.handleShare(type: shareType, items: [item], sender: sender)
-        }
-    }
-    
-    private func rootScreenActionTypes(for shareType: PrivateShareType, item: WrapData) -> [ElementTypes] {
-        var types = innerFolderActionTypes(for: shareType.rootType, item:  item)
-        
-        switch shareType {
-            case .byMe:
-                types.append(.endSharing)
-                
-            case .withMe:
-                types.append(.leaveSharing)
-                
-            default:
-                break
-        }
-        
-        
-        return types
+    func handleAction(type: ElementTypes, item: Item, sender: Any?) {
+        alert.handleAction(type: type, items: [item], sender: sender)
     }
     
     private func innerFolderActionTypes(for rootType: PrivateShareType, item: WrapData) -> [ElementTypes] {
-        switch rootType {
-            case .byMe:
-                var types: [ElementTypes] = [.info, .share, .move]
-                
-                types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                if !item.isReadOnlyFolder {
-                    types.append(.moveToTrash)
-                }
-                
-                if item.fileType == .image || item.fileType == .video {
-                    types.append(.download)
-                    
-                } else if item.fileType == .audio || item.fileType.isDocumentPageItem {
-                    types.append(.downloadDocument)
-                }
-                
-                return types
-                
-            case .withMe:
-                var types: [ElementTypes] = [.info]
-                
-                if let grantedPermissions = item.privateSharePermission?.granted {
-                    if grantedPermissions.contains(.read) {
-                        if item.fileType.isContained(in: [.image, .video]) {
-                            types.append(.download)
-                        } else {
-                            types.append(.downloadDocument)
-                        }
-                        
-                        if grantedPermissions.contains(.delete) {
-                            if !item.isReadOnlyFolder {
-                                types.append(.moveToTrashShared)
-                            }
-                        }
-                    }
-                }
-                    return types
+        switch rootType { 
+        case .byMe, .myDisk, .withMe, .sharedArea, .search:
+                return ElementTypes.specifiedMoreActionTypes(for: item.status, item: item)
 
+            case .trashBin:
+                return ElementTypes.specifiedMoreActionTypesForTrashBin(for: item.status, item: item)
             case .innerFolder:
                 assertionFailure("should not be the case")
                 return []

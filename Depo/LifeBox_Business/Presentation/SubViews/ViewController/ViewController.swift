@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var statusBarStyle: UIStatusBarStyle = .lightContent {
+    var statusBarStyle: UIStatusBarStyle = .default {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
         }
@@ -30,9 +30,9 @@ class ViewController: UIViewController {
         return statusBarStyle
     }
     
-    var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     var needCheckModalPresentationStyle = true
     
@@ -53,10 +53,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if preferredNavigationBarStyle == .black {
-            extendedLayoutIncludesOpaqueBars = true
-        }
+//
+//        if preferredNavigationBarStyle == .black {
+//            extendedLayoutIncludesOpaqueBars = true
+//        }
     }
 }
 

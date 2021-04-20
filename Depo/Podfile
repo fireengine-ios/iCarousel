@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '11.0'
 use_frameworks!
 inhibit_all_warnings!
@@ -17,9 +19,6 @@ def core_pods
   pod 'Firebase/Crashlytics', '~> 6'
   pod 'Firebase/Analytics', '~> 6'
   pod 'Firebase/RemoteConfig', '~> 6'
-  pod 'FBSDKCoreKit', '~> 8'
-  pod 'FBSDKLoginKit', '~> 8'
-  pod 'FBSDKShareKit', '~> 8'
 
   pod 'Netmera', '~> 3.8.4'
 
@@ -51,11 +50,20 @@ end
 
 def lifebox_pods
   core_pods
+  pod 'FBSDKCoreKit', '~> 8'
+  pod 'FBSDKLoginKit', '~> 8'
+  pod 'FBSDKShareKit', '~> 8'
   pod 'YYImage', '~> 1'
   pod 'SwiftyDropbox', '~> 6'
   pod 'MaterialComponents/Slider'
   pod 'Mantis', :git => 'https://github.com/fireengine-ios/Mantis.git', :tag => 'FE-1.3.2.5'
   pod 'MetalPetal/Swift'
+end
+
+def business_pods
+  core_pods
+  authentication_pods
+  pod 'Player', '~> 0.13.2'
 end
 
 def sharing_pods
@@ -89,6 +97,10 @@ def widget_pods
   pod 'SDWebImage', '~> 4'
   pod 'MMWormhole', '~> 2.0.0'
   pod 'XCGLogger', '~> 7'
+end
+
+def authentication_pods
+  pod 'FastLogin', :git => 'https://github.com/Turkcell/FastLogin.git', :branch => 'v2.0'
 end
 
 target 'Depo_LifeTech' do
@@ -152,23 +164,11 @@ target 'LifeboxUnitTests' do
 end
 
 target 'lifeBox_Business' do
-  core_pods
+  business_pods
 end
 
 target 'lifeBox_Business_Bundle' do
-  core_pods
-end
-
-target 'lifeBox_Business_Shared' do
-  sharing_pods
-end
-
-target 'lifeBox_Business_FileProvider' do
-  file_provider_pods
-end
-
-target 'lifeBox_Business_FileProviderUI' do
-  file_provider_ui_pods
+  business_pods
 end
 
 target "lifeBox_Business_NotificationService" do

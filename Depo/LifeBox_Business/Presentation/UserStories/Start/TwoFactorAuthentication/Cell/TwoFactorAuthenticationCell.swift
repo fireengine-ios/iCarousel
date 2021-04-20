@@ -14,13 +14,29 @@ protocol TwoFactorAuthenticationCellDelegate {
 
 final class TwoFactorAuthenticationCell: UITableViewCell {
     
-    private let selectedRadioButtonImage = UIImage(named: "selectedRectangle")
-    private let deselectedRadioButtonImage = UIImage(named: "emtyRectangle")
+    private let selectedRadioButtonImage = UIImage(named: "selected_method")
+    private let deselectedRadioButtonImage = UIImage(named: "not_selected_method")
 
-    @IBOutlet private weak var receiveMethodLabel: UILabel! {
+    @IBOutlet private weak var innerContentView: UIView! {
         willSet {
-            newValue.textColor = ColorConstants.lightGray
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 15)
+            newValue.layer.cornerRadius = 5
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = ColorConstants.a2FABorder.cgColor
+            newValue.backgroundColor = ColorConstants.tableBackground
+        }
+    }
+
+    @IBOutlet private weak var methodLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.a2FAMethodLabel
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
+        }
+    }
+
+    @IBOutlet private weak var valueLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 12)
         }
     }
     
@@ -31,23 +47,14 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
     var delegate: TwoFactorAuthenticationCellDelegate?
     
     override func awakeFromNib() {
-        
+        contentView.backgroundColor = ColorConstants.tableBackground
         selectButton.setImage(deselectedRadioButtonImage, for: .normal)
         selectButton.setImage(selectedRadioButtonImage, for: .selected)
     }
     
     func setupCell(typeDescription: String, userData: String) {
-        let receiveMethod = String(format: "%@ %@", typeDescription, userData)
-        let attributedString = NSMutableAttributedString(string: receiveMethod)
-
-        if let range = receiveMethod.range(of: userData) {
-            let nsRange = NSRange(location: range.lowerBound.encodedOffset,
-                                  length: range.upperBound.encodedOffset - range.lowerBound.encodedOffset)
-            
-            attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: nsRange)
-        }
-
-        receiveMethodLabel.attributedText = attributedString
+        methodLabel.text = typeDescription
+        valueLabel.text = userData
     }
     
     func setCellIndexPath(index: Int) {
@@ -65,5 +72,4 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
         }
         delegate?.selectButtonPressed(cell: index)
     }
-    
 }

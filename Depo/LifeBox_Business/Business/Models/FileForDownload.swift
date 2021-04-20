@@ -21,7 +21,7 @@ struct FileForDownload {
         } else if let photoPreview = wrapData.metaData?.mediumUrl {
             url = photoPreview
         } else {
-            url = wrapData.tmpDownloadUrl
+            url = wrapData.urlToFile
         }
         
         guard let name = wrapData.name, let _url = url else {

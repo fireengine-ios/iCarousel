@@ -3,7 +3,7 @@ import UIKit
 struct SupportFormConfiguration {
     let name: String?
     let surname: String?
-    let phone: String?
+//    let phone: String?
     let email: String?
 }
 
@@ -132,14 +132,14 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
     
     var config: SupportFormConfiguration?
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
         
         addTapGestureToHideKeyboard()
         setupTextFields()
@@ -165,7 +165,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         nameView.textField.text = config.name
         surnameView.textField.text = config.surname
         emailView.textField.text = config.email
-        phoneView.textField.text = config.phone
+//        phoneView.textField.text = config.phone
     }
 
     
@@ -356,16 +356,6 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         
         let group = DispatchGroup()
         let accountService = AccountService()
-        
-        group.enter()
-        accountService.quotaInfo(success: { response in
-            let quotaInfoResponse = response as? QuotaInfoResponse
-            quota = quotaInfoResponse?.bytes ?? 0
-            quotaUsed = quotaInfoResponse?.bytesUsed ?? 0
-            group.leave()
-        }, fail: { error in
-            group.leave()
-        })
         
         group.enter()
         accountService.feedbackEmail { response in

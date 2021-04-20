@@ -20,9 +20,9 @@ enum TwoFAChallengeType: String {
     var typeDescription:String {
         switch self {
         case .phone:
-            return TextConstants.twoFactorAuthenticationPhoneNumberCell
+            return TextConstants.a2FAFirstPageSendSecurityCodeToPhone
         case .email:
-            return TextConstants.twoFactorAuthenticationEmailCell
+            return TextConstants.a2FAFirstPageSendSecurityCodeToEmail
         }
     }
     
@@ -34,15 +34,24 @@ enum TwoFAChallengeType: String {
                 return .email
         }
     }
+
+    func getMainTitle(for challengeStatus: TwoFAChallengeParametersResponse.ChallengeStatus) -> String {
+        switch self {
+        case .phone:
+            return TextConstants.a2FASecondPageVerifyNumber
+        case .email:
+            return TextConstants.a2FASecondPageVerifyEmail
+        }
+    }
     
     func getOTPDescription(for challengeStatus: TwoFAChallengeParametersResponse.ChallengeStatus) -> String {
         switch self {
         case .phone:
             return challengeStatus == .new ?
-                TextConstants.twoFAPhoneNewOTPDescription : TextConstants.twoFAPhoneExistingOTPDescription
+                TextConstants.a2FASecondPageInfo : TextConstants.twoFAPhoneExistingOTPDescription
         case .email:
             return challengeStatus == .new ?
-                TextConstants.twoFAEmailNewOTPDescription : TextConstants.twoFAEmailExistingOTPDescription
+                TextConstants.a2FASecondPageInfo : TextConstants.twoFAEmailExistingOTPDescription
         }
     }
 }
@@ -57,7 +66,13 @@ struct TwoFAChallengeModel {
 final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     @IBOutlet private var designer: TwoFactorAuthenticationDesigner!
-    @IBOutlet private weak var reasonOfAuthLabel: UILabel!
+    
+    @IBOutlet private weak var reasonOfAuthLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.a2FAFirstPageDescription
+        }
+    }
+    
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var errorView: ErrorBannerView!
     @IBOutlet private weak var scrollView: UIScrollView!
@@ -82,14 +97,17 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
 
+    private var rememberMe: Bool = false
+
     //MARK: lifecycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
-    init(response: TwoFactorAuthErrorResponse) {
+    init(response: TwoFactorAuthErrorResponse, rememberMe: Bool) {
         self.twoFactorAuthResponse = response
         self.challengingReason = response.reason
+        self.rememberMe = rememberMe
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -106,40 +124,27 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         setup()
         trackScreen()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        configureNavBar()
+        setupNavigationBar()
+    }
+
+    private func setupNavigationBar() {
+        setNavigationTitle(title: TextConstants.a2FAFirstPageTitle, style: .white)
+        setNavigationBarStyle(.white)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
     
     //MARK: Utility methods
     private func setup() {
         createAvailableTypesArray(availableTypes: twoFactorAuthResponse?.challengeTypes)
-        setReasonDescriptionLabel()
-        
         activityManager.delegate = self
     }
     
     private func trackScreen() {
         analyticsService.logScreen(screen: .securityCheck)
-    }
-    
-    private func configureNavBar() {
-        setTitle(withString: TextConstants.twoFactorAuthenticationNavigationTitle)
-
-        navigationBarWithGradientStyle()
-    }
-    
-    private func setReasonDescriptionLabel() {
-        if let reason = challengingReason {
-            switch reason {
-            case .accountSetting:
-                reasonOfAuthLabel.text = TextConstants.twoFactorAuthenticationAccountSettingReason
-            case .newDevice:
-                reasonOfAuthLabel.text = TextConstants.twoFactorAuthenticationNewDeviceReason
-            }
-        }
     }
     
     private func createAvailableTypesArray(availableTypes: [TwoFactorAuthErrorResponseChallengeType]?) {
@@ -194,7 +199,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     }
     
     private func openTwoFactorChallenge(with otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) {
-        let controller = router.twoFactorChallenge(otpParams: otpParams, challenge: challenge)
+        let controller = router.twoFactorChallenge(otpParams: otpParams, challenge: challenge, rememberMe: rememberMe)
         router.pushViewController(viewController: controller)
     }
     
@@ -236,10 +241,10 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
         errorView.message = text
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.errorView.isHidden = false
-            
+
             self.view.layoutIfNeeded()
         }
-        
+
         let errorViewRect = self.view.convert(errorView.frame, to: self.view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)
     }

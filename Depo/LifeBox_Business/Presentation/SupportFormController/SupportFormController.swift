@@ -110,16 +110,16 @@ final class SupportFormController: ViewController, KeyboardHandler {
     
     // MARK: -
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
+//    override var preferredNavigationBarStyle: NavigationBarStyle {
+//        return .clear
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         subjects = screenType.subjects
         subjectView.models = subjects.map { $0.localizedSubject }
-        navigationBarWithGradientStyle()
+        setNavigationBarStyle(.byDefault)
 
         addTapGestureToHideKeyboard()
         setupTextFields()

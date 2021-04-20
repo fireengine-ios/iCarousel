@@ -68,7 +68,7 @@ extension UIViewController: Waiting {
         }
     }
     
-    func showSpinner() {
+    @objc func showSpinner() {
         DispatchQueue.main.async {
             _ = MBProgressHUD.showAdded(to: self.view, animated: true)
         }
@@ -95,7 +95,7 @@ extension UIViewController: Waiting {
         }
     }
     
-    func hideSpinner() {
+    @objc func hideSpinner() {
         DispatchQueue.main.async {
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
         }
@@ -105,18 +105,5 @@ extension UIViewController: Waiting {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: view, animated: true)
         }
-    }
-}
-
-
-// MARK: - CustomNavController
-
-protocol CurrentNavController {
-    var currentNavController: UINavigationController? { get }
-}
-
-extension UIViewController: CurrentNavController {
-    var currentNavController: UINavigationController? {
-        return navigationController
     }
 }

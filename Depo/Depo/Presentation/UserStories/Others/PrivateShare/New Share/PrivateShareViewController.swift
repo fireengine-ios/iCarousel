@@ -347,16 +347,6 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
             }
         }
         
-        if !Validator.isValid(contactsPhone: text) {
-            UIApplication.showErrorAlert(message: TextConstants.privateSharePhoneValidationFailPopUpText)
-            return false
-        }
-        
-        if !text.contains("+"), !Validator.isValid(turkcellPhone: text) {
-            UIApplication.showErrorAlert(message: TextConstants.privateShareNonTurkishMsisdnPopUpText)
-            return false
-        }
-        
         return true
     }
 

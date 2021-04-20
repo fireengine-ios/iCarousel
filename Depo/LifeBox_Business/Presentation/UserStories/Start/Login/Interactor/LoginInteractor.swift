@@ -34,15 +34,11 @@ class LoginInteractor: LoginInteractorInput {
     
     private var accountWarningService: AccountWarningService?
 
-    private var rememberMe: Bool = true
+    private var rememberMe: Bool = false
     
     private var attempts: Int = 0
     
-    private var loginRetries = 0 {
-        didSet {
-            showRelatedHelperView()
-        }
-    }
+    private var loginRetries = 0
     
     private var login: String?
     private var password: String?
@@ -64,32 +60,6 @@ class LoginInteractor: LoginInteractorInput {
         let storageVars: StorageVars = factory.resolve()
         blockedUsers = storageVars.blockedUsers
         self.storageVars = storageVars
-    }
-    
-    //MARK: Utility Methods(private)
-    
-    private func showRelatedHelperView() {
-        if loginRetries == NumericConstants.showFAQViewAttempts {
-            output?.showFAQView()
-        } else {
-            #if LIFEBOX
-            FirebaseRemoteConfig.shared.fetchAttemptsBeforeSupportOnLogin { [weak self] attempts in
-                guard let self = self else {
-                    return
-                }
-                
-                if self.loginRetries >= attempts {
-                    DispatchQueue.main.async {
-                        self.output?.showSupportView()
-                    }
-                }
-            }
-            #else
-            if loginRetries >= NumericConstants.showSupportViewAttempts {
-                output?.showSupportView()
-            }
-            #endif
-        }
     }
     
     private func hasEmptyPhone(accountWarning: String) -> Bool {
@@ -141,6 +111,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private func authificate(login: String,
                              password: String,
+                             rememberMe: Bool,
                              atachedCaptcha: CaptchaParametrAnswer?,
                              errorHandler: @escaping (LoginResponseError, String) -> Void) {
         
@@ -176,7 +147,7 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         
-        if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
+        if !Validator.isValid(email: login) {
             analyticsService.trackLoginEvent(loginType: loginType, error: .incorrectUsernamePassword)
             output?.fieldError(type: .loginIsNotValid)
             loginRetries += 1
@@ -188,7 +159,7 @@ class LoginInteractor: LoginInteractorInput {
         
         let user = AuthenticationUser(login: login,
                                       password: password,
-                                      rememberMe: true,
+                                      rememberMe: rememberMe,
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
@@ -225,14 +196,12 @@ class LoginInteractor: LoginInteractorInput {
                 return
             }
             
-            self.tokenStorage.isRememberMe = self.rememberMe
-            self.output?.showTwoFactorAuthViewController(response: response)
+            self.output?.showTwoFactorAuthViewController(response: response, rememberMe: rememberMe)
         })
     }
     
     private func processLogin(login: String, headers: [String: Any]) {
         debugLog("login isRememberMe \(self.rememberMe)")
-        self.tokenStorage.isRememberMe = self.rememberMe
         self.analyticsService.track(event: .login)
         
         if Validator.isValid(email: login) {
@@ -247,6 +216,36 @@ class LoginInteractor: LoginInteractorInput {
         
         self.accountService.updateBrandType()
         
+        DispatchQueue.main.async {
+            self.output?.succesLogin()
+        }
+    }
+
+    private func processLoginWithFastLogin(headers: [String: Any]) {
+        var handler: VoidHandler?
+
+        if self.hasAccountDeletedStatus(headers: headers) {
+            handler = { [weak self] in
+                self?.trackFLLoginSucceedAndPassNext()
+            }
+        }
+
+        if let handler = handler {
+            self.output?.loginDeletedAccount(deletedAccountHandler: handler)
+        } else {
+            self.trackFLLoginSucceedAndPassNext()
+        }
+    }
+
+    private func trackFLLoginSucceedAndPassNext() {
+        debugLog("login fastlogin isRememberMe \(self.rememberMe)")
+
+        self.loginRetries = 0
+
+        self.accountService.updateBrandType()
+
+        self.tokenStorage.isLoggedInWithFastLogin = true
+
         DispatchQueue.main.async {
             self.output?.succesLogin()
         }
@@ -274,44 +273,51 @@ class LoginInteractor: LoginInteractorInput {
         }
     }
     
-    private func silentLogin(token: String) {
-        authenticationService.silentLogin(token: token, success: { [weak self] in
-            DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                
-                self.accountService.updateBrandType()
-                
-                self.tokenStorage.isRememberMe = self.rememberMe
-                self.output?.succesLogin()
-            }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.main.async { [weak self] in
-                    self?.tryToRelogin()
-                }
-        })
-    }
-    
-    func tryToRelogin() {
-        guard let login = login, let password = password else {
-            assertionFailure()
-            return
-        }
-        
-        authificate(login: login, password: password, atachedCaptcha: nil) { _, _ in
-            DispatchQueue.main.async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                self.output?.successedVerifyPhone()
-            }
-        }
-    }
-    
     //MARK: LoginInteractorInput
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
-        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
+    func authenticate(with flToken: String) {
+
+        // due to task requirement- rememberme is always ON
+        self.rememberMe = false
+
+        authenticationService.login(with: flToken,
+                                    success: { [weak self] headers in
+                                        guard let self = self else {
+                                            return
+                                        }
+                                        self.processLoginWithFastLogin(headers: headers)
+                                        printLog("[LoginInteractor] authenticate with FL login succeded")
+                                    },
+                                    fail: { [weak self] errorResponse in
+                                        let loginError = LoginResponseError(with: errorResponse)
+
+                                        if !(loginError == .noInternetConnection) {
+                                            self?.loginRetries += 1
+                                        }
+
+                                        if loginError == .incorrectUsernamePassword {
+                                            self?.attempts += 1
+                                            self?.loginRetries += 1
+                                        }
+
+                                        DispatchQueue.main.async { [weak self] in
+                                            self?.output?.processLoginError(loginError, errorText: errorResponse.description)
+                                        }
+
+                                        printLog("[LoginInteractor] authenticate with FL login failed \(errorResponse.description)")
+                                    },
+                                    twoFactorAuth: { [weak self] response in
+                                        guard let self = self else {
+                                            return
+                                        }
+
+                                        self.output?.showTwoFactorAuthViewController(response: response, rememberMe: self.rememberMe)
+
+                                        printLog("[LoginInteractor] authenticate with FL login not completed. 2FA is expected")
+                                    })
+    }
+
+    func authificate(login: String, password: String, rememberMe: Bool, atachedCaptcha: CaptchaParametrAnswer?) {
+        authificate(login: login, password: password, rememberMe: rememberMe, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
             
             DispatchQueue.main.async { [weak self] in
                 self?.output?.processLoginError(loginError, errorText: errorText)
@@ -342,11 +348,6 @@ class LoginInteractor: LoginInteractorInput {
             blockedUsersDic[user] = Date()
             blockedUsers = blockedUsersDic
         }
-    }
-    
-    func findCoutryPhoneCode(plus: Bool) {
-        let phoneCode = CoreTelephonyService().getColumnedCountryCode()
-        output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
     
     func checkEULA() {

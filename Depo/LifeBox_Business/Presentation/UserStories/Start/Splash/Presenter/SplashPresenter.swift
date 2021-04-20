@@ -18,7 +18,14 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func viewIsReady() {
         interactor.trackScreen()
-
+    }
+    
+    func securityValidation() {
+        guard !UIDevice.current.isJailBroken else {
+            showDeviceIsJailBroken()
+            return
+        }
+        
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] shouldProceed in
             guard shouldProceed else {
                 self?.showUpdateIsRequiredPopup()
@@ -29,8 +36,20 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
     }
     
+    private func showDeviceIsJailBroken() {
+        let popup = PopUpController.with(title: TextConstants.rootDevicePopupTitle, message: TextConstants.rootDevicePopupDescription, image: .error, buttonTitle: TextConstants.rootDevicePopupCloseAppButton) { popup in
+            debugLog("Device is jailBroken. The app will be killed.")
+            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                exit(EXIT_SUCCESS)
+            })
+        }
+        UIApplication.topController()?.present(popup, animated: false, completion: nil)
+        return
+    }
+    
     private func showUpdateIsRequiredPopup() {
-        let popup = PopUpController.with(title: TextConstants.turkcellUpdateRequiredTitle, message: TextConstants.turkcellUpdateRequiredMessage, image: .error, buttonTitle: TextConstants.ok) { popup in
+        let popup = PopUpController.with(title: TextConstants.turkcellUpdaterPopupTitle, message: TextConstants.turkcellUpdaterPopupDescription, image: .error, buttonTitle: TextConstants.ok) { popup in
             debugLog("required app killing")
             UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
@@ -41,12 +60,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         return
     }
     
-    private func showLandingPagesIfNeeded() {
-        if storageVars.isShownLanding {
-            router.navigateToOnboarding()
-        } else {
-            router.navigateToLandingPages(isTurkCell: false)
-        }
+    private func showLoginScreen() {
+        router.navigateToLoginScreen()
     }
     
     private func showPasscodeIfNeed() {
@@ -92,7 +107,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func onFailLogin() {
-        showLandingPagesIfNeeded()
+        showLoginScreen()
     }
     
     func onNetworkFail() {
@@ -100,7 +115,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     func updateUserLanguageSuccess() {
-        interactor.checkEmptyEmail()
+        openApp() 
     }
     
     func updateUserLanguageFailed(error: Error) {
@@ -123,37 +138,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     private func openApp() {
         AuthoritySingleton.shared.checkNewVersionApp()
-        
-        if turkcellLogin {
-            if !Device.isIpad, !storageVars.isShownLanding {
-                storageVars.isShownLanding = true
-                router.navigateToLandingPages(isTurkCell: turkcellLogin)
-            } else {
-                router.navigateToApplication()
-                openLink()
-            }
-        } else {
-            router.navigateToApplication()
-            openLink()
-        }
-    }
-    
-    func showEmptyEmail(show: Bool) {
-        show ? openEmptyEmail() : openApp()  
-    }
-    
-    private func openEmptyEmail() {
-        /// guard for two controller due to interactor.startLoginInBackground()
-        if UIApplication.topController() is EmailEnterController {
-            return
-        }
-        
-        let vc = EmailEnterController.initFromNib()
-        vc.successHandler = { [weak self] in
-            self?.openApp()
-        }
-        let navVC = NavigationController(rootViewController: vc)
-        UIApplication.topController()?.present(navVC, animated: true, completion: nil)
+        router.navigateToApplication()
+        openLink()
     }
     
     func onFailEULA(isFirstLogin: Bool) {

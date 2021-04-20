@@ -68,12 +68,7 @@ final class PrivateShareSliderFilesCollectionManager {
     }
     
     private func createNewUrl(for item: Item, completion: @escaping ValueHandler<URL?>) {
-        guard let accountUuid = item.accountUuid else {
-            completion(nil)
-            return
-        }
-        
-        shareApiService.createDownloadUrl(projectId: accountUuid, uuid: item.uuid) { result in
+        shareApiService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { result in
             switch result {
             case .success(let response):
                 completion(response.url)
@@ -91,7 +86,7 @@ extension PrivateShareSliderFilesCollectionManager: SharedFilesCollectionDataSou
                 delegate?.startAsyncOperation()
                 createNewUrl(for: withModel) { [weak self] newUrl in
                     if newUrl != nil {
-                        withModel.tmpDownloadUrl = newUrl
+                        withModel.urlToFile = newUrl
                         self?.delegate?.open(entity: withModel, allEnteties: [withModel])
                     }
                     self?.delegate?.completeAsyncOperation()

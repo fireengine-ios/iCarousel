@@ -124,6 +124,12 @@ public extension SynchronizedArray {
         return result
     }
     
+    func compactMap<ElementOfResult>(_ transform: (Element) -> ElementOfResult?) -> [ElementOfResult] {
+        var result = [ElementOfResult]()
+        queue.sync { result = self.array.compactMap(transform) }
+        return result
+    }
+    
     /// Calls the given closure on each element in the sequence in the same order as a for-in loop.
     ///
     /// - Parameter body: A closure that takes an element of the sequence as a parameter.

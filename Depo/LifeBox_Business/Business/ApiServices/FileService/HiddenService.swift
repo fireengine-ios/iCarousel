@@ -13,19 +13,20 @@ final class HiddenService {
     // MARK: - All
     
     @discardableResult
-    func trashedList(folderUUID: String = "ROOT_FOLDER",
+    func trashedList(folderUUID: String = "",
                      sortBy: SortType,
                      sortOrder: SortOrder,
                      page: Int,
                      size: Int,
-                     folderOnly: Bool,
-                     handler: @escaping (ResponseResult<FileListResponse>) -> Void) -> URLSessionTask? {
+                     handler: @escaping (ResponseResult<TrashBinRequestResponse>) -> Void) -> URLSessionTask? {
         debugLog("trashedList")
-        
-        let folder = folderOnly ? "true" : "false"
-        let url = String(format: RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.trashedList, folderUUID,
-                         sortBy.description, sortOrder.description,
-                         page.description, size.description, folder)
+
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_3.trashedBinList, folderUUID,
+                                           sortBy.description, sortOrder.description,
+                                           page.description, size.description)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
 
         return SessionManager
             .customDefault
@@ -36,30 +37,18 @@ final class HiddenService {
     }
     
     // MARK: - Recover
-    
     @discardableResult
     func recoverItems(_ items: [WrapData],
                       handler: @escaping ResponseVoid) -> URLSessionTask? {
         debugLog("recoverItems")
-        let ids = items.compactMap { $0.uuid }
-        return recoverItemsByUuids(ids, handler: handler)
-    }
-    
-    /**
-     UUID of file(s) and/or folder(s) to recover them.
-     
-     - Important:
-     NOT for albums
-     */
-    private func recoverItemsByUuids(_ uuids: [String],
-                                     handler: @escaping ResponseVoid) -> URLSessionTask? {
-        debugLog("recoverItemsByUuids")
+
+        let parameters = items.compactMap {["accountUuid" : $0.accountUuid, "uuid" : $0.uuid]}.asParameters()
         
         return SessionManager
             .customDefault
-            .request(RouteRequests.FileSystem.recover,
+            .request(RouteRequests.FileSystem.Version_3.recover,
                      method: .post,
-                     parameters: uuids.asParameters(),
+                     parameters: parameters,
                      encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
@@ -67,33 +56,51 @@ final class HiddenService {
     }
     
     //MARK: - Delete
-    
+
     @discardableResult
-    func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        func delete(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+            debugLog("deleteItems")
+            let uuids = items.compactMap { $0.uuid }
+            return deleteItemsBy(uuids: uuids, handler: handler)
+        }
+
+        private func deleteItemsBy(uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
+            let path = RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.delete
+            return SessionManager
+            .customDefault
+            .request(path,
+                     method: .delete,
+                     parameters: uuids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+        }
+
+        private func deleteItemsBy(ids: [Int64], path: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+            return SessionManager
+            .customDefault
+            .request(path,
+                     method: .delete,
+                     parameters: ids.asParameters(),
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
+            .task
+        }
+
+    @discardableResult
+    func deletePermanently(items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+
         debugLog("deleteItems")
-        let uuids = items.compactMap { $0.uuid }
-        return deleteItemsBy(uuids: uuids, handler: handler)
-    }
-    
-    private func deleteItemsBy(uuids: [String], handler: @escaping ResponseVoid) -> URLSessionTask? {
-        let path = RouteRequests.baseUrl.absoluteString + RouteRequests.FileSystem.delete
+
+        let parameters = items.compactMap {["accountUuid" : $0.accountUuid, "uuid" : $0.uuid]}.asParameters()
+
         return SessionManager
         .customDefault
-        .request(path,
-                 method: .delete,
-                 parameters: uuids.asParameters(),
-                 encoding: ArrayEncoding())
-        .customValidate()
-        .responseVoid(handler)
-        .task
-    }
-    
-    private func deleteItemsBy(ids: [Int64], path: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        return SessionManager
-        .customDefault
-        .request(path,
-                 method: .delete,
-                 parameters: ids.asParameters(),
+        .request(RouteRequests.FileSystem.Version_3.delete,
+                 method: .post,
+                 parameters: parameters,
                  encoding: ArrayEncoding())
         .customValidate()
         .responseVoid(handler)
@@ -106,7 +113,7 @@ final class HiddenService {
     func deleteAllFromTrashBin(handler: @escaping ResponseVoid) -> URLSessionTask? {
         return SessionManager
         .customDefault
-        .request(RouteRequests.FileSystem.emptyTrash, method: .delete)
+        .request(RouteRequests.FileSystem.Version_3.deleteAll, method: .delete)
         .customValidate()
         .responseVoid(handler)
         .task

@@ -15,5 +15,6 @@ protocol BottomSelectionTabBarViewOutput {
 
     func viewIsReady()
     
-    func bottomBarSelectedItem(index: Int, sender: UITabBarItem)
+    func bottomBarSelected(actionType: ElementTypes)
+    func showMenu(actionTypes: [ElementTypes], sender: UIButton)
 }

@@ -8,15 +8,6 @@
 
 import Foundation
 
-class UploadBaseURL: BaseRequestParametrs {
-    override var requestParametrs: Any {
-        return Data()
-    }
-    
-    override var patch: URL {
-        return RouteRequests.uploadContainer
-    }
-}
 
 class SimpleUpload: UploadRequestParametrs {
     
@@ -78,9 +69,7 @@ class SimpleUpload: UploadRequestParametrs {
         self.isFavorite = isFavorite
         
         switch uploadType {
-            case .save:
-                self.tmpUUID = item.uuid
-            case .saveAs, .sharedWithMe:
+            case .sharedWithMe:
                 self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
             default:
                 if item.isLocalItem {
@@ -107,7 +96,7 @@ class SimpleUpload: UploadRequestParametrs {
             assertionFailure(errorMessage)
         }
         
-        let appopriateUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
+        let appopriateUploadType = "MANUAL"
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionStatus = ReachabilityService.shared.uploadConnectionTypeName
         
@@ -136,15 +125,7 @@ class SimpleUpload: UploadRequestParametrs {
     }
     
     var patch: URL {
-        switch uploadType {
-            case .sharedWithMe:
-                return destitantionURL
-                
-            default:
-                return URL(string: destitantionURL.absoluteString
-                    .appending("/")
-                    .appending(tmpUUID))!
-        }
+        return destitantionURL
     }
     
     var timeout: TimeInterval {
@@ -214,7 +195,7 @@ final class ResumableUpload: UploadRequestParametrs {
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
-        let currentUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
+        let currentUploadType = "MANUAL"
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionType = ReachabilityService.shared.uploadConnectionTypeName
         
@@ -285,29 +266,5 @@ final class ResumableUpload: UploadRequestParametrs {
         fileData = chunk.data
         range = chunk.range
         isEmpty = false
-    }
-}
-
-class UploadNotify: BaseRequestParametrs {
-    
-    let parentUUID: String
-    
-    let fileUUID: String
-    
-    init(parentUUID: String, fileUUID: String) {
-        if parentUUID.isEmpty {
-            self.parentUUID = "ROOT_FOLDER"
-        }else{
-            self.parentUUID = parentUUID
-        }
-        //self.parentUUID = parentUUID
-        self.fileUUID = fileUUID
-        super.init()
-    }
-    
-    override var patch: URL {
-        let str = String(format: RouteRequests.uploadNotify,
-                         parentUUID, fileUUID)
-        return URL(string: str, relativeTo: super.patch)!
     }
 }

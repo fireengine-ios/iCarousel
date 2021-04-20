@@ -15,8 +15,6 @@ protocol PhotoVideoDetailViewOutput {
     func onInfo(object: Item)
     
     func viewWillDisappear()
-    func viewFullyLoaded()
-    
 
     func startCreatingAVAsset()
     func stopCreatingAVAsset()
@@ -32,10 +30,9 @@ protocol PhotoVideoDetailViewOutput {
     func videoStoped()
     
     func willDisplayLastCell()
-
-    func configureFileInfo(_ view: FileInfoView)
     
     func tabIndex(type: ElementTypes) -> Int?
     
-    func createNewUrl()
+    func createNewUrl(at index: Int)
+    func updateInfo(at index: Int)
 }

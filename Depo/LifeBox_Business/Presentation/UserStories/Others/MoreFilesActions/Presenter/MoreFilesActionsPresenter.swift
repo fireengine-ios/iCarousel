@@ -42,6 +42,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func operationCancelled(type: ElementTypes) {
         completeAsyncOperationEnableScreen()
+        basePassingPresenter?.operationCancelled(withType: type)
     }
     
     func dismiss(animated: Bool) {} /// overriding
@@ -62,6 +63,6 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func showOutOfSpaceAlert(failedType type: ElementTypes) {
         operationFailed(with: type)
-        RouterVC().showFullQuotaPopUp()
+        UIApplication.showQuotaAlert()
     }
 }

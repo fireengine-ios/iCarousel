@@ -12,20 +12,12 @@ protocol LoginViewOutput {
 
     func viewIsReady()
     
-    func prepareCaptcha(_ view: CaptchaView)
-    
     func rememberMe(remember: Bool)
 
-    func sendLoginAndPassword(login: String, password: String)
-    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String)
-    
-    func onForgotPasswordTap()
-    
-    func startedEnteringPhoneNumber(withPlus: Bool)
-    
-    func openSupport()
-    
-    func openFaqSupport()
+    func authenticateWith(flToken: String)
+
+    func sendLoginAndPassword(login: String, password: String, rememberMe: Bool)
+    func sendLoginAndPasswordWithCaptcha(login: String, password: String, rememberMe: Bool, captchaID: String, captchaAnswer: String)
     
     func openSubjectDetails(type: SupportFormSubjectTypeProtocol)
 }

@@ -20,13 +20,15 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didEndSelection()
     func didChangeSelection(selectedItems: [WrapData])
     
-    func didEndReload()
+    func didEndReload(hasItems: Bool)
     
     func showActions(for item: WrapData, sender: Any)
-    func didSelectAction(type: ActionType, on item: Item, sender: Any?)
+    func didSelectAction(type: ElementTypes, on item: Item, sender: Any?)
     
     func needToShowSpinner()
     func needToHideSpinner()
+
+    func onEmptyViewUpdate(isHidden: Bool)
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -38,18 +40,25 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         return collectionManager
     }
     
+    private var barInsets = UIEdgeInsets.zero
+    
     weak var delegate: PrivateShareSharedFilesCollectionManagerDelegate?
     private weak var collectionView: UICollectionView?
+    
+    private lazy var emptyView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
     
     private let router = RouterVC()
     private var fileInfoManager: PrivateShareFileInfoManager!
     
     private let scrollDirectionManager = ScrollDirectionManager()
     
-    private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
     
-    private lazy var mediaPlayer: MediaPlayer = factory.resolve()
+    private var sortViewRulesType: MoreActionsConfig.SortRullesType = .lastModifiedTimeNewOld
+
+    var rootPermissions: SharedItemPermission? {
+        return fileInfoManager.rootPermissions
+    }
     
     //MARK: -
     
@@ -59,26 +68,30 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     func setup() {
         setupCollection()
-        setupRefresher()
-        reload(type: .full)
+        setupTopRefresher()
     }
     
-    func change(viewType: MoreActionsConfig.ViewType) {
-        guard viewType != currentCollectionViewType else {
-            return
-        }
+    func updateOnDidLayout(barInsets: UIEdgeInsets) {
+        self.barInsets = barInsets
         
-        currentCollectionViewType = viewType
-        updateLayout()
+        updateEmptyView()
     }
+
     
     func change(sortingRule: SortedRules) {
-        fileInfoManager.change(sortingRules: sortingRule) { [weak self] in
-            self?.reloadCollection()
+        fileInfoManager.change(sortingRules: sortingRule) { [weak self] (shouldReload, _) in
+            if shouldReload {
+                self?.changeSelection(isActive: false)
+                self?.reloadCollection()
+            }
         }
     }
     
-    func startSelection() {
+    func startSelection(with item: WrapData?) {
+        if let item = item {
+            fileInfoManager.selectItem(item)
+        }
+        
         changeSelection(isActive: true)
         reloadVisibleCells()
     }
@@ -86,6 +99,15 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     func endSelection() {
         changeSelection(isActive: false)
         reloadVisibleCells()
+    }
+    
+    func startRenaming(item: WrapData) {
+        if
+            let index = fileInfoManager.items.index(where: { $0 == item }),
+            let cell = collectionView?.cellForItem(at: IndexPath(row: index, section: 0)) as? MultifileCollectionViewCell
+        {
+            cell.startRenaming()
+        }
     }
     
     func reload(type: ReloadType) {
@@ -97,7 +119,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
                 reloadAfterOperation()
                 
             case .onViewAppear:
-                reloadAfterOperation()
+                reloadOnViewAppear()
         }
     }
     
@@ -111,37 +133,66 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
         
         fileInfoManager.delete(uuids: uuids) { [weak self] in
-            self?.reloadCollection()
-            self?.reload(type: .onOperationFinished)
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.reloadCollection()
+            
+            if case .search = self.fileInfoManager.type {
+                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500)) { [weak self] in
+                    self?.fileInfoManager.reloadCurrentPages() { [weak self] _ in
+                        self?.reloadCollection()
+                    }
+                }
+            }
         }
     }
+    
+    
     
     //MARK: - Private
     
     private func reloadCollection() {
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
+            self.collectionView?.layoutIfNeeded()
             self.collectionView?.reloadData()
-            self.setEmptyScreen(isHidden: !self.fileInfoManager.splittedItems.isEmpty)
-            self.delegate?.didEndReload()
+            let hasItems = !self.fileInfoManager.items.isEmpty
+            self.setEmptyScreen(isHidden: hasItems)
+            self.delegate?.didEndReload(hasItems: hasItems)
         }
     }
     
     private func setupCollection() {
-        collectionView?.register(nibCell: BasicCollectionMultiFileCell.self)
-        collectionView?.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self,
+        collectionView?.register(nibCell: MultifileCollectionViewCell.self)
+        
+        collectionView?.register(nibSupplementaryView: CollectionViewSpinnerFooter.self,
+                                 kind: UICollectionElementKindSectionFooter)
+        
+        collectionView?.register(nibSupplementaryView: TopBarSortingView.self,
                                  kind: UICollectionElementKindSectionHeader)
         
+        collectionView?.register(nibSupplementaryView: TopBarSearchResultNumberView.self,
+                                 kind: UICollectionElementKindSectionHeader)
+
+        collectionView?.allowsSelection = false
         collectionView?.alwaysBounceVertical = true
         
-        collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
-        collectionView?.backgroundView?.isHidden = true
-        
+        emptyView.isHidden = true
+        collectionView?.backgroundView = emptyView
+
         collectionView?.delegate = self
         collectionView?.dataSource = self
     }
     
-    private func setupRefresher() {
+    private func updateEmptyView() {
+        emptyView.topOffset = barInsets.top
+        emptyView.bottomOffset = barInsets.bottom
+    }
+    
+    private func setupTopRefresher() {
         let refresher = UIRefreshControl()
         refresher.tintColor = ColorConstants.blueColor
         refresher.addTarget(self, action: #selector(fullReload), for: .valueChanged)
@@ -150,46 +201,113 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     @objc
     private func fullReload() {
-        fileInfoManager.reload { [weak self] shouldReload in
+        fileInfoManager.reload { [weak self] (shouldReload, _) in
             if shouldReload {
-                self?.changeSelection(isActive: false)
-                self?.reloadCollection()
+                DispatchQueue.toMain {
+                    self?.changeSelection(isActive: false)
+                    self?.reloadCollection()
+                }
+            } else {
+                DispatchQueue.toMain {
+                    self?.collectionView?.refreshControl?.endRefreshing()
+                }
             }
         }
-        
     }
     
     private func reloadAfterOperation() {
-        return fileInfoManager.reloadCurrentPages { [weak self] shouldReload in
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500)) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
+                if shouldReload {
+                    if let indexes = indexes {
+                        self?.batchUpdate(indexes: indexes)
+                    } else {
+                        self?.reloadCollection()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func reloadOnViewAppear() {
+        resetVisibleCellsSwipe(animated: false)
+        fileInfoManager.reloadCurrentPages { [weak self] (shouldReload, indexes) in
             if shouldReload {
-                self?.reloadCollection()
+                if let indexes = indexes {
+                    self?.batchUpdate(indexes: indexes)
+                } else {
+                    self?.reloadCollection()
+                }
             }
         }
     }
     
     private func loadNextPage() {
-        fileInfoManager.loadNextPage(completion: { [weak self] shouldReload in
-//            self?.append(indexes: itemsLoaded)
+        showNextPageSpinner()
+        fileInfoManager.loadNextPage(completion: { [weak self] (shouldReload, indexes) in
+            self?.hideNextPageSpinner()
             if shouldReload {
-                self?.reloadCollection()
+                if let indexes = indexes {
+                    self?.batchUpdate(indexes: indexes)
+                } else {
+                    self?.reloadCollection()
+                }
             }
         })
     }
     
-    //TODO: maybe later
-//    private func append(indexes: [IndexPath]) {
-//        guard !indexes.isEmpty else {
-//            return
-//        }
-//
-//        DispatchQueue.main.async {
-//            self.collectionView?.performBatchUpdates({
-//                self.collectionView?.insertItems(at: indexes)
-//            }, completion: { (_) in
-//                //
-//            })
-//        }
-//    }
+    private func showNextPageSpinner() {
+        let lastSectionIndex = IndexPath(item: 0, section: 0)
+        DispatchQueue.toMain {
+            guard let footerView =
+                    self.collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: lastSectionIndex) as? CollectionViewSpinnerFooter else {
+                return
+            }
+            
+            footerView.startSpinner()
+        }
+    }
+    
+    private func hideNextPageSpinner() {
+        let lastSectionIndex = IndexPath(item: 0, section: 0)
+        DispatchQueue.toMain {
+            guard let footerView =
+                    self.collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: lastSectionIndex) as? CollectionViewSpinnerFooter else {
+                return
+            }
+            
+            footerView.stopSpinner()
+        }
+    }
+    
+    private func batchUpdate(indexes: DeltaIndexes) {
+        guard !indexes.inserted.isEmpty || !indexes.deleted.isEmpty else {
+            DispatchQueue.main.async {
+                self.collectionView?.refreshControl?.endRefreshing()
+                let hasItems = !self.fileInfoManager.items.isEmpty
+                self.setEmptyScreen(isHidden: hasItems)
+                self.delegate?.didEndReload(hasItems: hasItems)
+            }
+            return
+        }
+        DispatchQueue.main.async {
+            self.collectionView?.refreshControl?.endRefreshing()
+            self.collectionView?.performBatchUpdates({
+                self.collectionView?.deleteItems(at: indexes.deleted.compactMap { IndexPath(row: $0, section: 0) })
+                self.collectionView?.insertItems(at: indexes.inserted.compactMap { IndexPath(row: $0, section: 0) })
+                
+            }, completion: { (_) in
+                let hasItems = !self.fileInfoManager.items.isEmpty
+                self.setEmptyScreen(isHidden: hasItems)
+                self.reloadVisibleCells()
+                self.delegate?.didEndReload(hasItems: hasItems)
+            })
+        }
+    }
     
     private func updateLayout() {
         DispatchQueue.main.async {
@@ -237,13 +355,49 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         }
     }
     
-    private func setEmptyScreen(isHidden: Bool) {
-        guard collectionView?.backgroundView?.isHidden != isHidden else {
-            return
-        }
-        
+    private func resetVisibleCellsSwipe(exceptCell: MultifileCollectionViewCell? = nil, animated: Bool) {
         DispatchQueue.main.async {
-            self.collectionView?.backgroundView?.isHidden = isHidden
+            guard let visibleCells = self.collectionView?.visibleCells as? [MultifileCollectionViewCell] else {
+                return
+            }
+            
+            visibleCells.forEach {
+                if $0 != exceptCell {
+                    $0.resetSwipe(animated: animated)
+                }
+            }
+        }
+    }
+    
+    private func setEmptyScreen(isHidden: Bool) {
+        DispatchQueue.toMain {
+            if case PrivateShareType.search(_, _, text: let query) = self.fileInfoManager.type {
+                self.emptyView.set(queryText: query)
+            }
+            
+            guard self.emptyView.isHidden != isHidden else {
+                return
+            }
+            
+            self.emptyView.isHidden = isHidden
+            self.delegate?.onEmptyViewUpdate(isHidden: isHidden)
+        }
+    }
+    
+    func search(shareType: PrivateShareType, completion: VoidHandler) {
+        fileInfoManager.search(type: shareType) { [weak self] (shouldReload, _) in
+            
+            if shouldReload {
+                DispatchQueue.toMain {
+                    self?.changeSelection(isActive: false)
+                    self?.reloadCollection()
+                }
+            } else {
+                DispatchQueue.toMain {
+                    self?.collectionView?.refreshControl?.endRefreshing()
+                }
+            }
+            
         }
     }
 }
@@ -252,50 +406,81 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
 extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return fileInfoManager.splittedItems.count
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fileInfoManager.splittedItems[section]?.count ?? 0
+        return fileInfoManager.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: BasicCollectionMultiFileCell.self, for: indexPath)
-        cell.setDelegateObject(delegateObject: self)
+        let cell = collectionView.dequeue(cell: MultifileCollectionViewCell.self, for: indexPath)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? BasicCollectionMultiFileCell, let item = item(at: indexPath) else {
+        guard let cell = cell as? MultifileCollectionViewCell, let item = item(at: indexPath) else {
             return
         }
         
         let isSelectedCell = isSelected(item: item)
-        cell.isSelected = isSelectedCell
-        cell.updating()
-        cell.canShowSharedIcon = false
+        let isSharedIconAllowed = fileInfoManager.type.rootType.isContained(in: [.myDisk])
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
-        cell.configureWithWrapper(wrappedObj: item)
-          
-        if case PathForItem.remoteUrl(let url) = item.patchToPreview {
-            if let url = url {
-                cell.setImage(with: url)
-            } else {
-                cell.setPlaceholderImage(fileType: item.fileType)
-            }
-        }
+        cell.setup(with: item, at: indexPath, isSharedIconAllowed: isSharedIconAllowed, menuActionDelegate: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? BasicCollectionMultiFileCell else {
+        guard let cell = cell as? MultifileCollectionViewCell else {
             return
         }
         
         cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
     }
+
+    //MARK: Helpers
+    private func item(at indexPath: IndexPath) -> WrapData? {
+        return fileInfoManager.items[indexPath.row]
+    }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell, let item = item(at: indexPath) else {
+    private func isSelected(item: WrapData) -> Bool {
+        return fileInfoManager.selectedItems.getSet().contains(where: { $0.uuid == item.uuid })
+    }
+    
+    private func showDetailView(for item: WrapData) {
+        if item.isFolder == true {
+            if let name = item.name, let permissions = item.privateSharePermission  {
+                let sharedFolder = PrivateSharedFolderItem(accountUuid: item.accountUuid, uuid: item.uuid, name: name, permissions: permissions, type: fileInfoManager.type)
+                openFolder(with: sharedFolder)
+            }
+            
+        } else {
+            let items = fileInfoManager.items.getArray().filter({ !($0.isFolder ?? false) })
+            openPreview(for: item, with: items)
+        }
+    }
+    
+    private func openFolder(with folder: PrivateSharedFolderItem) {
+        DispatchQueue.main.async {
+            let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folder: folder)
+            self.router.pushViewController(viewController: controller)
+        }
+    }
+    
+    private func openPreview(for item: WrapData, with items: [WrapData]) {
+        DispatchQueue.main.async {
+            let detailModule = self.router.filesDetailModule(fileObject: item,
+                                                        items: items,
+                                                        status: item.status,
+                                                        canLoadMoreItems: true,
+                                                        moduleOutput: nil)
+
+            let nController = NavigationController(rootViewController: detailModule.controller)
+            self.router.presentViewController(controller: nController)
+        }
+    }
+    
+    private func onDidSelectItem(at indexPath: IndexPath) {
+        guard let cell = collectionView?.cellForItem(at: indexPath) as? MultifileCollectionViewCell, !cell.isRenamingInProgress, let item = item(at: indexPath) else {
             return
         }
         
@@ -310,99 +495,9 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             
             delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
             
-        } else if checkIfCanShowDetail(for: item) {
-            if item.fileType == .audio {
-                showAudioPlayer(with: item)
-            } else {
-                showDetailView(for: item)
-            }
-        }
-    }
-    
-//    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
-//            return
-//        }
-//
-//        if isSelecting {
-//            fileInfoManager.deselectItem(at: indexPath)
-//            cell.setSelection(isSelectionActive: isSelecting, isSelected: false)
-//            delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
-//        }
-//    }
-    
-    //MARK: Helpers
-    private func item(at indexPath: IndexPath) -> WrapData? {
-        return fileInfoManager.splittedItems[indexPath.section]?[safe: indexPath.row]
-    }
-    
-    private func isSelected(item: WrapData) -> Bool {
-        return fileInfoManager.selectedItems.getSet().contains(where: { $0.uuid == item.uuid })
-    }
-    
-    private func showDetailView(for item: WrapData) {
-        if item.isFolder == true {
-            if let accountUuid = item.accountUuid, let name = item.name, let permissions = item.privateSharePermission  {
-                let sharedFolder = PrivateSharedFolderItem(projectId: accountUuid, uuid: item.uuid, name: name, permissions: permissions)
-                openFolder(with: sharedFolder)
-            }
-            
         } else {
-            let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
-            openPreview(for: item, with: items)
-        }
-    }
-    
-    private func showAudioPlayer(with item: WrapData) {
-        if item.urlToFile == nil || item.urlToFile?.isExpired == true {
-            delegate?.needToShowSpinner()
-            fileInfoManager.createDownloadUrl(item: item) { [weak self] newUrl in
-                self?.delegate?.needToHideSpinner()
-                
-                guard let url = newUrl else {
-                    return
-                }
-                
-                item.tmpDownloadUrl = url
-                self?.mediaPlayer.play(list: [item], startAt: 0)
-            }
-        } else {
-            mediaPlayer.play(list: [item], startAt: 0)
-        }
-    }
-    
-    private func checkIfCanShowDetail(for item: WrapData) -> Bool {
-        guard item.isFolder == false else {
-            return true
-        }
-        
-        let isSharedWithMe = fileInfoManager.type == .withMe || fileInfoManager.type.rootType == .withMe
-        
-        if isSharedWithMe, item.fileType.isContained(in: [.image, .video]), !item.hasPreviewUrl {
-            SnackbarManager.shared.show(type: SnackbarType.action, message: TextConstants.privateSharePreviewNotReady)
-            return false
-        }
-
-        return true
-    }
-    
-    private func openFolder(with folder: PrivateSharedFolderItem) {
-        DispatchQueue.main.async {
-            let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folder: folder)
-            self.router.pushViewController(viewController: controller)
-        }
-    }
-    
-    private func openPreview(for item: WrapData, with items: [WrapData]) {
-        DispatchQueue.main.async {
-            let detailModule = self.router.filesDetailModule(fileObject: item,
-                                                        items: items,
-                                                        status: .active,
-                                                        canLoadMoreItems: true,
-                                                        moduleOutput: nil)
-
-            let nController = NavigationController(rootViewController: detailModule.controller)
-            self.router.presentViewController(controller: nController)
+            cell.setSelection(isSelectionActive: false, isSelected: false)
+            showDetailView(for: item)
         }
     }
 }
@@ -412,26 +507,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
 extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width: CGFloat
-        let height: CGFloat
-        
-        switch currentCollectionViewType {
-            case .List:
-                width = collectionView.contentSize.width
-                height = BasicCollectionMultiFileCell.bigH
-                
-            case .Grid:
-                if Device.isIpad {
-                    width = (collectionView.contentSize.width - NumericConstants.iPadGreedInset * 2 - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIpad - 1)) / NumericConstants.numerCellInDocumentLineOnIpad
-                } else {
-                    width = (collectionView.contentSize.width - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInDocumentLineOnIphone - 1)) / NumericConstants.numerCellInDocumentLineOnIphone
-                }
-                height = width
-                
-            default:
-                assertionFailure()
-                return .zero
-        }
+        let width = collectionView.contentSize.width - NumericConstants.iPhoneGreedInset - NumericConstants.iPhoneGreedInset
+        let height = MultifileCollectionViewCell.height
         
         return CGSize(width: width, height: height)
     }
@@ -450,45 +527,72 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
         return UIEdgeInsets(top: 0, left: NumericConstants.iPhoneGreedInset, bottom: 0, right: NumericConstants.iPhoneGreedInset)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.contentSize.width, height: barInsets.bottom)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let sortingRule = fileInfoManager.sorting.sortingRules
-        guard sortingRule != .size else {
-            return CGSize.zero
+        guard !fileInfoManager.items.isEmpty else {
+            return .zero
         }
         
-        let sectionIsEmpty = fileInfoManager.splittedItems[section]?.isEmpty ?? true
-        let height: CGFloat = sectionIsEmpty ? 0 : 50
+        let height: CGFloat = 44.0
         return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let sectionHeader = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
         
-        let title = headerTitle(for: indexPath.section)
-        sectionHeader.setText(text: title)
-        return sectionHeader
+        switch kind {
+            case UICollectionElementKindSectionFooter:
+                let footerSpinner = collectionView.dequeue(supplementaryView: CollectionViewSpinnerFooter.self, kind: kind, for: indexPath)
+                if fileInfoManager.isNextPageLoading {
+                    footerSpinner.startSpinner()
+                } else {
+                    footerSpinner.stopSpinner()
+                }
+                
+                return footerSpinner
+                
+            case UICollectionElementKindSectionHeader:
+                return getCurrentHeader(for: collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
+                
+            default:
+                assertionFailure()
+                return UICollectionReusableView()
+        }
     }
     
-    //MARK: Helpers
-    private func headerTitle(for section: Int) -> String {
-        let furstSectionItemIndexPath = IndexPath(row: 0, section: section)
-        guard let item = item(at: furstSectionItemIndexPath) else {
-            return ""
+    private func getCurrentHeader(for collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if indexPath.section == 0  {
+            
+            switch fileInfoManager.type {
+            
+            case .byMe, .withMe, .innerFolder(type: _, folderItem: _),
+                 .myDisk, .sharedArea, .trashBin:
+                
+                let header = collectionView.dequeue(supplementaryView: TopBarSortingView.self, kind: kind, for: indexPath)
+                setup(sortingBar: header)
+                return header
+                
+            case .search(from: _, _, _):
+                
+                let header = collectionView.dequeue(supplementaryView: TopBarSearchResultNumberView.self, kind: kind, for: indexPath)
+                header.setNewItemsFound(itemsFoundNumber: fileInfoManager.searchedItemsFound)
+                return header
+                
+            }
+            
         }
         
-        switch fileInfoManager.sorting {
-            case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp, .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
-                return (item.creationDate ?? Date()).getDateInTextForCollectionViewHeader()
-                
-            case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
-                return item.name?.firstLetter ?? ""
-                
-            case .sizeAZ, .sizeZA:
-                return ""
-                
-            case .metaDataTimeUp, .metaDataTimeDown:
-                return (item.creationDate ?? Date()).getDateInTextForCollectionViewHeader()
-        }
+        return UICollectionReusableView()
+    }
+    
+    private func setup(sortingBar: TopBarSortingView) {
+        let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
+        
+        sortingBar.setupSortingMenu(sortTypes: sortingTypes, defaultSortType: sortViewRulesType)
+        sortingBar.delegate = self
     }
 }
 
@@ -496,6 +600,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
 extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        resetVisibleCellsSwipe(animated: true)
         scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)
     }
     
@@ -525,7 +630,7 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
     
     private func isNearTheNextPage(_ scrollView: UIScrollView) -> Bool {
         let nearTheNextPageValue = scrollView.bounds.height / 2.0
-        
+        //add insett here?
         guard scrollView.contentSize.height > scrollView.bounds.height + nearTheNextPageValue else {
             //prevents intersection with refresh when content height is too small
             return false
@@ -537,19 +642,41 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
     }
 }
 
-//MARK: - LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate
-extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollectionMultiFileCellActionDelegate {
+//MARK: - LBCellsDelegate, MultifileCollectionViewCellActionDelegate
+extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellActionDelegate {
+    func onRenameStarted(at indexPath: IndexPath) {
+        self.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+    }
     
-    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
+    func rename(item: WrapData, name: String, completion: @escaping BoolHandler) {
+        fileInfoManager.rename(item: item, name: name, completion: completion)
+    }
+    
+    func onCellSelected(indexPath: IndexPath) {
+        DispatchQueue.toMain {
+            self.collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: [])
+            //collection delegate didSelectItem will not be called
+            self.onDidSelectItem(at: indexPath)
+        }
+    }
+    
+    func onSelectMenuAction(type: ElementTypes, itemModel: Item?, sender: Any?, indexPath: IndexPath?) {
         guard let item = itemModel else {
             return
+        }
+        if let indexPath = indexPath {
+            fileInfoManager.selectItem(at: indexPath)
         }
         
         delegate?.didSelectAction(type: type, on: item, sender: sender)
     }
     
-    func canLongPress() -> Bool {
-        return fileInfoManager.type.rootType == .byMe
+    func onMenuPress(sender: Any, itemModel: Item?) {
+        guard let item = itemModel else {
+            return
+        }
+        
+        delegate?.showActions(for: item, sender: sender)
     }
     
     func onLongPress(cell: UICollectionViewCell) {
@@ -572,11 +699,15 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
         }
     }
     
-    func morebuttonGotPressed(sender: Any, itemModel: Item?) {
-        guard let item = itemModel else {
-            return
-        }
-        
-        delegate?.showActions(for: item, sender: sender)
+    func willSwipe(cell: MultifileCollectionViewCell) {
+        resetVisibleCellsSwipe(exceptCell: cell, animated: true)
+    }
+}
+
+extension PrivateShareSharedFilesCollectionManager: TopBarSortingViewDelegate {
+    func sortingTypeChanged(sortType: MoreActionsConfig.SortRullesType) {
+        delegate?.needToShowSpinner()
+        sortViewRulesType = sortType
+        change(sortingRule: sortType.sortedRulesConveted)
     }
 }

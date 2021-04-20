@@ -80,55 +80,28 @@ final class PushNotificationService {
     }
     
     func openActionScreen() {
-        guard var action = notificationAction else {
+        guard let action = notificationAction else {
             return
         }
         
-        let isLoggedIn = tokenStorage.accessToken != nil
-        if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
-            action = .login
-        }
-        
-        if isLoggedIn && action.isContained(in: [.login]) {
+        if tokenStorage.accessToken == nil {
+            openLogin()
             clear()
-            return
         }
                 
         switch action {
-        case .main, .home: openMain()
-        case .floatingMenu: openFloatingMenu()
-        case .allFiles: openAllFiles()
-        case .music: openMusic()
-        case .documents: openDocuments()
-        case .favorites: openFavorites()
-        case .contactUs: openContactUs()
-        case .usageInfo: openUsageInfo()
-        case .recentActivities: openRecentActivities()
-        case .email: openEmail()
-        case .faq: openFaq()
-        case .passcode: openPasscode()
-        case .http: openURL(notificationParameters)
-        case .login:
-            openLogin()
-            clear()
-        case .search: openSearch()
+        case .myDisk: openMyDisk()
         case .settings: openSettings()
-        case .profileEdit: openProfileEdit()
-        case .changePassword: openChangePassword()
-        case .securityQuestion: openSecurityQuestion()
-        case .permissions: openPermissions()
-        case .supportFormSignup, .supportFormLogin:
-            if isLoggedIn {
-                openContactUs()
-            } else { 
-                openSupport(type: action == .supportFormSignup ? .signup : .login)
-            }
-        case .trashBin:
-            openTrashBin()
+        case .agreements: openAgreements()
+        case .faq: openFaq()
+        case .profile: openProfile()
+        case .trashBin: openTrashBin()
         case .sharedWithMe: openSharedWithMe()
         case .sharedByMe: openShareByMe()
+        case .sharedArea: openSharedArea()
+        default:
+            assertionFailure()
         }
-        
         
         if router.tabBarController != nil {
             clear()
@@ -175,35 +148,7 @@ final class PushNotificationService {
             return
         }
 
-        if tabBarVC.selectedIndex != index.rawValue {
-            switch index {
-            case .documents:
-                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
-                    assertionFailure("This index is non existent 😵")
-                    return
-                }
-                tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue
-
-                if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
-                    segmentedController.loadViewIfNeeded()
-                    segmentedController.switchSegment(to: segmentIndex)
-                }
-                
-//            case .documents://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
-//                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
-//                    assertionFailure("This index is non existent 😵")
-//                    return
-//                }
-//                tabBarVC.tabBar.selectedItem = newSelectedItem
-                tabBarVC.selectedIndex = index.rawValue - 1
-            
-            default:
-                break
-            }
-        } else {
-            tabBarVC.popToRootCurrentNavigationController(animated: true)
-        }
+        tabBarVC.popToRootCurrentNavigationController(animated: true)
     }
 
     
@@ -217,130 +162,47 @@ final class PushNotificationService {
         pushTo(router.loginScreen)
     }
     
-    private func openMain() {
-        openTabBarItem(index: .documents)
-    }
-    
-    private func openFloatingMenu() {
-        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
-            return
-        }
-        
-        tabBarVC.showRainbowIfNeed()
-    }
-    
-    private func openAllFiles() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
-    }
-    
-    private func openDocuments() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.documents.rawValue)
-    }
-    
-    private func openMusic() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.music.rawValue)
-    }
-    
-    private func openFavorites() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
-    }
-
-    private func openTrashBin() {
-        openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
-    }
-    
-    private func openContactUs() {
-        router.showFeedbackSubView()
-    }
-    
-    private func openUsageInfo() {
-        pushTo(router.usageInfo)
-    }
-    
-    private func openRecentActivities() {
-        pushTo(router.vcActivityTimeline)
-    }
-    
-    private func openEmail() {
-        if let userInfo = SingletonStorage.shared.accountInfo {
-            pushTo(router.userProfile(userInfo: userInfo))
-        }
-    }
-    
-    private func openFaq() {
-        pushTo(router.helpAndSupport)
-    }
-    
-    private func openPasscode() {
-        let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
-        pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
-    }
-      
-    private func openSearch() {
-        let output = router.getViewControllerForPresent()
-        let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
-        pushTo(controller)
-    }
-    
-    private func openURL(_ path: String?) {
-        guard let path = path, let url = URL(string: path) else {
-            return
-        }
-        
-        UIApplication.shared.openSafely(url)
+    private func openMyDisk() {
+        router.openTab(.myDisk)
     }
     
     private func openSettings() {
         pushTo(router.settings)
     }
     
-    private func openProfileEdit() {
-        SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { [weak self] response in
-            let vc = self?.router.userProfile(userInfo: response)
-            self?.pushTo(vc)
-            /// we don't need error handling here
-        }, fail: {_ in})
-        
+    private func openAgreements() {
+        pushTo(router.agreements)
     }
     
-    private func openChangePassword() {
-        pushTo(router.changePassword)
+    private func openFaq() {
+        pushTo(router.faq)
     }
     
-    private func openSecurityQuestion() {
-        debugLog("PushNotificationService try to open Security Question screen")
-
-        let controller = SetSecurityQuestionViewController.initFromNib()
-        pushTo(controller)
+    private func openProfile() {
+        pushTo(router.profile)
     }
     
-    private func openPermissions() {
-        debugLog("PushNotificationService try to open Permission screen")
-
-        let controller = router.permissions
-        pushTo(controller)
-    }
-    
-    private func openSupport(type: SupportFormScreenType) {
-        let controller = SupportFormController.with(screenType: type)
-        pushTo(controller)
+    private func openTrashBin() {
+        router.pushViewController(viewController: router.trashBin)
     }
     
     private func openSharedWithMe() {
-        openSharedController(type: .withMe)
+        router.openTab(.sharedFiles)
+        selectChildVC(index: 0)
     }
     
     private func openShareByMe() {
-        openSharedController(type: .byMe)
+        router.openTab(.sharedFiles)
+        selectChildVC(index: 1)
     }
     
-    private func openSharedController(type: PrivateShareType) {
-        guard let controller = router.sharedFiles as? SegmentedController,
-              let index = controller.viewControllers.firstIndex(where: { ($0 as? PrivateShareSharedFilesViewController)?.shareType == type }) else {
-            return
+    private func openSharedArea() {
+        router.openTab(.sharedArea)
+    }
+    
+    private func selectChildVC(index: Int) {
+        if let controller = router.currentController() as? TopBarSupportedSegmentedController {
+            controller.selectChildVC(index: index)
         }
-        controller.loadViewIfNeeded()
-        controller.switchSegment(to: index)
-        pushTo(controller)
     }
 }

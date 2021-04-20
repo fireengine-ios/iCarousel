@@ -8,17 +8,17 @@
 
 protocol MoreFilesActionsInteractorInput {
     
-    func share(item: [BaseDataSourceItem], sourceRect: CGRect?)
+    func originalShare(item: [BaseDataSourceItem], sourceRect: CGRect?)
+    
+    func privateShare(item: [BaseDataSourceItem], sourceRect: CGRect?)
     
     func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?)
     
-    func info(item: [BaseDataSourceItem], isRenameMode: Bool)
+    func info(item: [BaseDataSourceItem])
     
     func moveToTrash(items: [BaseDataSourceItem])
     
     func move(item: [BaseDataSourceItem], toPath: String)
-    
-    func sync(item: [BaseDataSourceItem])
     
     func download(item: [BaseDataSourceItem])
     
@@ -61,10 +61,8 @@ protocol MoreFilesActionsInteractorInput {
     func albumDetails(items: [BaseDataSourceItem])
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
-    
-    func delete(items: [BaseDataSourceItem])
-    
-    func trackEvent(elementType: ElementTypes)
+
+    func deletePermanently(items: [BaseDataSourceItem])
     
     func emptyTrashBin()
     
@@ -73,6 +71,4 @@ protocol MoreFilesActionsInteractorInput {
     func leaveSharing(item: BaseDataSourceItem?)
     
     func moveToTrashShared(items: [BaseDataSourceItem])
-    
-    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
 }

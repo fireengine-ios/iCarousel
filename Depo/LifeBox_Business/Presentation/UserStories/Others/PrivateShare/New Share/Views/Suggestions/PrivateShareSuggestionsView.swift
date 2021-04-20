@@ -13,36 +13,74 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
     static func with(contacts: [SuggestedContact], delegate: PrivateShareSelectSuggestionsDelegate?) -> PrivateShareSuggestionsView {
         let view = PrivateShareSuggestionsView.initFromNib()
         view.delegate = delegate
-        view.setup(with: contacts.filter { !$0.phones.isEmpty })
+        view.setup(with: contacts)
         return view
     }
     
-    @IBOutlet private weak var titleLabel: UILabel! {
+    @IBOutlet weak var scrollableContent: UIScrollView! {
         willSet {
-            newValue.text = TextConstants.privateShareStartPageSuggestionsTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.translatesAutoresizingMaskIntoConstraints = false
+            newValue.isScrollEnabled = true
+            newValue.showsVerticalScrollIndicator = true
+            newValue.showsHorizontalScrollIndicator = false
+            newValue.alwaysBounceHorizontal = false
+            newValue.alwaysBounceVertical = true
+        }
+    }
+
+    @IBOutlet private weak var suggestionsView: UIStackView! {
+        willSet {
+            newValue.translatesAutoresizingMaskIntoConstraints = false
+            newValue.axis = .vertical
+            newValue.alignment = .fill
+            newValue.distribution = .fill
+            newValue.spacing = 0
         }
     }
     
-    @IBOutlet private weak var suggestionsView: UIStackView!
-    
+    private lazy var heightConstraint = heightAnchor.constraint(equalToConstant: 0)
     private weak var delegate: PrivateShareSelectSuggestionsDelegate?
     private lazy var analytics = PrivateShareAnalytics()
+
+    private(set) var isShowingContacts = false
     
-    private func setup(with contacts: [SuggestedContact]) {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        heightConstraint.activate()
+    }
+   
+    func setup(with contacts: [SuggestedContact]) {
+        defer {
+            setNeedsLayout()
+        }
+        
+        suggestionsView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        isShowingContacts = !contacts.isEmpty
+        
         guard !contacts.isEmpty else {
+            heightConstraint.constant = 0
             return
         }
   
+        var contentHeight: CGFloat = 0
+        
         contacts.enumerated().forEach { index, contact in
             let view = PrivateShareContactSuggestionView.with(contact: contact, delegate: self)
             suggestionsView.addArrangedSubview(view)
             
-            let separator = UIView.makeSeparator(width: suggestionsView.frame.width, offset: 16)
-            suggestionsView.addArrangedSubview(separator)
-            separator.heightAnchor.constraint(equalToConstant: 1).activate()
+            contentHeight += view.bounds.size.height
         }
+        
+        updateHeightConstraint(contentHeight: contentHeight)
+    }
+    
+    private func updateHeightConstraint(contentHeight: CGFloat) {
+        let screenMaxHeight = UIScreen.main.bounds.height / 3
+        let height = min(contentHeight, screenMaxHeight)
+        heightConstraint.constant = height
     }
 }
 

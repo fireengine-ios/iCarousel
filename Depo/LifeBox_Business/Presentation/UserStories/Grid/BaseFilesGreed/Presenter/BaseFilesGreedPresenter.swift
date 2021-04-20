@@ -366,17 +366,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
     
-    func didSelectAction(type: ActionType, on item: Item?, sender: Any?) {
+    func didSelectAction(type: ElementTypes, on item: Item?, sender: Any?) {
         guard let item = item else {
             return
         }
         
-        switch type {
-        case .elementType(let elementType):
-            alertSheetModule?.handleAction(type: elementType, items: [item], sender: sender)
-        case .shareType(let shareType):
-            alertSheetModule?.handleShare(type: shareType, items: [item], sender: sender)
-        }
+        alertSheetModule?.handleAction(type: type, items: [item], sender: sender)
     }
     
     private func getSameTypeItems(fileType: FileType, items: [BaseDataSourceItem]) -> [BaseDataSourceItem] {
@@ -512,7 +507,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func dismissBottomBar(animated: Bool) {
         bottomBarPresenter?.dismiss(animated: animated)
-        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
     func updateNoFilesView() {
@@ -556,7 +550,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func showBottomBar(animated: Bool, onView: UIView?) {
-        bottomBarPresenter?.show(animated: true, onView: onView)
+//        bottomBarPresenter?.show(animated: true, onView: onView)
     }
     
     func setupNewBottomBarConfig() {
@@ -565,7 +559,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         
         let selectedItems = dataSource.getSelectedItems()
-        bottomBarPresenter?.setupTabBarWith(items: selectedItems, originalConfig: barConfig)
+        // TODO: - update later without config. task should be in backlog
+        bottomBarPresenter?.setupTabBarWith(items: selectedItems, shareType: nil)
     }
     
     func onMoreActions(ofItem: Item?, sender: Any) {
@@ -659,9 +654,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewWillAppear() {
         interactor.trackScreen()
-        if dataSource.selectedItemsArray.count > 0 {
-            bottomBarPresenter?.show(animated: true, onView: nil)
-        }
+//        if dataSource.selectedItemsArray.count > 0 {
+//            bottomBarPresenter?.show(animated: true, onView: nil)
+//        }
     }
     
     func moreActionsPressed(sender: Any) {
@@ -682,10 +677,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 actionTypes.remove(at: renameIndex)
             }
 
-            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
-                actionTypes.remove(at: printIndex)
-            }
-            
             DispatchQueue.global().async {[weak self] in
                 if let self = self {
                     self.alertSheetModule?.showAlertSheet(with: actionTypes,
@@ -767,7 +758,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         backHandler?()
     }
     
-    func selectModeSelected() {
+    func selectModeSelected(with item: WrapData?) {
         debugLog("BaseFilesGreedPresenter selectModeSelected")
 
         startEditing()

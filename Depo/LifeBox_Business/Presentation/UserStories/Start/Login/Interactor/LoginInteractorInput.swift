@@ -9,10 +9,10 @@
 protocol LoginInteractorInput {
         
     func rememberMe(state: Bool)
+
+    func authenticate(with flToken: String)
     
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?)
-    
-    func findCoutryPhoneCode(plus: Bool)
+    func authificate(login: String, password: String, rememberMe: Bool, atachedCaptcha: CaptchaParametrAnswer?)
     
     func checkEULA()
     
@@ -32,7 +32,5 @@ protocol LoginInteractorInput {
     
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate)
     
-    func tryToRelogin()
-    
-    func stopUpdatePhone()
+//    func tryToRelogin()
 }

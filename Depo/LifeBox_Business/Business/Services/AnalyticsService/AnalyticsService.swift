@@ -7,7 +7,6 @@
 //
 
 import Adjust
-import FBSDKCoreKit
 import StoreKit
 import Firebase
 import Netmera
@@ -41,12 +40,9 @@ final class AnalyticsService: NSObject {
         #else
         let environment = ADJEnvironmentProduction
         #endif
-        
-        #if LIFEBOX
-        let adjustConfig = ADJConfig(appToken: "hlqdgtbmrdb9", environment: environment)
-        #else
-        let adjustConfig = ADJConfig(appToken: "lonks83r2gow", environment: environment)
-        #endif
+
+        let adjustConfig = ADJConfig(appToken: "bvo85upzcef4", environment: environment)
+       
         Adjust.appDidLaunch(adjustConfig)
     }
     
@@ -81,7 +77,6 @@ final class AnalyticsService: NSObject {
     
     func track(event: AnalyticsEvent) {
         logAdjustEvent(name: event.token)
-        logFacebookEvent(name: AppEvents.Name.viewedContent.rawValue, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
     }
     
     private func logAdjustEvent(name: String, price: Double? = nil, currency: String? = nil) {
@@ -91,12 +86,6 @@ final class AnalyticsService: NSObject {
             event?.setRevenue(price, currency: currency)
         }
         Adjust.trackEvent(event)
-    }
-    
-    private func logFacebookEvent(name: String, parameters: [String: Any]? = nil) {
-        if let parameters = parameters {
-            AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: parameters)
-        }
     }
 }
 
@@ -169,16 +158,17 @@ extension AnalyticsService: AnalyticsGA {
         var usagePercentage: Int?
         
         if loginStatus {
-            group.enter()
-            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
-                   guard let percentage = percentage else {
-                       group.leave()
-                       return
-                   }
-                   usagePercentage = percentage
-                   group.leave()
-               }
-            
+            //TODO: uncomment when quota API is ready
+//            group.enter()
+//            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
+//                   guard let percentage = percentage else {
+//                       group.leave()
+//                       return
+//                   }
+//                   usagePercentage = percentage
+//                   group.leave()
+//               }
+//
             isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
         }
         
@@ -189,7 +179,7 @@ extension AnalyticsService: AnalyticsGA {
             parametrsCallback(AnalyticsDimension(screenName: screenName, pageType: screenName, sourceType: screenName, loginStatus: "\(loginStatus)",
                 platform: "iOS", isWifi: ReachabilityService.shared.isReachableViaWiFi,
                 service: TextConstants.NotLocalized.appNameGA, developmentVersion: version,
-                paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.gapId ?? NSNull(),
+                paymentMethod: payment, userId: SingletonStorage.shared.accountInfo?.externalId ?? NSNull(),
                 operatorSystem: CoreTelephonyService().carrierName ?? NSNull(),
                 countOfUploadMetric: uploadsMetrics,
                 countOfDownloadMetric: downloadsMetrics,
@@ -210,13 +200,13 @@ extension AnalyticsService: AnalyticsGA {
     }
     
     private func getGAOperatorType() -> String {
-        guard let accountType = SingletonStorage.shared.accountInfo?.accountType else {
+//        guard let accountType = SingletonStorage.shared.accountInfo?.accountType else {
             return ""
-        }
-        if accountType == "ALL_ACCESS" {
-            return "NON_TURKCELL"
-        }
-        return accountType
+//        }
+//        if accountType == "ALL_ACCESS" {
+//            return "NON_TURKCELL"
+//        }
+//        return accountType
     }
     
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {

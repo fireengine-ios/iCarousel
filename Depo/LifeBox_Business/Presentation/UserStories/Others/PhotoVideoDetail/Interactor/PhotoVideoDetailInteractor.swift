@@ -63,16 +63,15 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         guard let index = selectedIndex else {
             return
         }
-        
         output.onShowSelectedItem(at: index, from: array.getArray())
     }
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
         guard let selectedItem = array[selectedIndex] else {
-            return EditingBarConfig(elementsConfig: [], style: .black, tintColor: nil)
+            return EditingBarConfig(elementsConfig: [], style: .transparent)
         }
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status)
-        return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
+        return EditingBarConfig(elementsConfig: elementsConfig, style: .transparent)
     }
     
     func deleteSelectedItem(type: ElementTypes) {
@@ -98,12 +97,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
             item.isLocalItem = false
             array[indexToChange] = item
-        }
-    }
-    
-    func updateExpiredItem(_ item: WrapData) {
-        if let index = allItems.firstIndex(where: { $0 == item && $0.hasExpiredPreviewUrl() }) {
-            array[index] = item
         }
     }
     
@@ -142,12 +135,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             
             return
         }
-        
-        guard let accountUuid = item.accountUuid else {
-            return
-        }
-        
-        shareApiService.renameItem(projectId: accountUuid, uuid: item.uuid, name: newName) { [weak self] result in
+       
+        shareApiService.renameItem(projectId: item.accountUuid , uuid: item.uuid, name: newName) { [weak self] result in
             switch result {
             case .success():
                 item.name = newName
@@ -176,21 +165,37 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
     }
     
-    func createNewUrl() {
-        guard let index = currentItemIndex,
-              let item = allItems[safe: index],
-              let accountUuid = item.accountUuid else {
+    func createNewUrl(at index: Int) {
+        guard let item = allItems[safe: index] else {
             return
         }
         
-        shareApiService.createDownloadUrl(projectId: accountUuid, uuid: item.uuid) { [weak self] result in
+        shareApiService.createDownloadUrl(projectId: item.accountUuid, uuid: item.uuid) { [weak self] result in
             switch result {
             case .success(let object):
                 if let url = object.url {
-                    item.tmpDownloadUrl = url
+                    item.urlToFile = url
                     self?.updateItem(item)
                     self?.output.updateItem(item)
                 }
+            case .failed(let error):
+                self?.output.failedUpdate(error: error)
+            }
+        }
+    }
+    
+    func updateInfo(at index: Int) {
+        guard let item = allItems[safe: index] else {
+            return
+        }
+        
+        shareApiService.getSharingInfo(projectId: item.accountUuid, uuid: item.uuid) { [weak self] result in
+            switch result {
+            case .success(let updatedObject):
+                let wrapData = WrapData(privateShareFileInfo: updatedObject)
+                self?.updateItem(wrapData)
+                self?.output.updateItem(wrapData)
+                
             case .failed(let error):
                 self?.output.failedUpdate(error: error)
             }

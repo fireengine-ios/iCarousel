@@ -16,7 +16,7 @@ class NavigationController: UINavigationController {
         }
     }
 
-    var statusBarStyle: UIStatusBarStyle = .lightContent {
+    var statusBarStyle: UIStatusBarStyle = .default {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
         }
@@ -40,14 +40,14 @@ class NavigationController: UINavigationController {
     
     override func popViewController(animated: Bool) -> UIViewController? {
 
-        if viewControllers.count > 1,
-            let currentController = viewControllers[viewControllers.count - 1] as? ViewController,
-            let viewController = viewControllers[viewControllers.count - 2] as? ViewController,
-            currentController.preferredNavigationBarStyle != viewController.preferredNavigationBarStyle {
-            
-            let image = viewController.preferredNavigationBarStyle.backgroundImage
-            navigationBar.setBackgroundImage(image, for: .default)
-        }
+//        if viewControllers.count > 1,
+//            let currentController = viewControllers[viewControllers.count - 1] as? ViewController,
+//            let viewController = viewControllers[viewControllers.count - 2] as? ViewController,
+//            currentController.preferredNavigationBarStyle != viewController.preferredNavigationBarStyle {
+//
+//            let image = viewController.preferredNavigationBarStyle.backgroundImage
+//            navigationBar.setBackgroundImage(image, for: .default)
+//        }
         
         return super.popViewController(animated: animated)
     }

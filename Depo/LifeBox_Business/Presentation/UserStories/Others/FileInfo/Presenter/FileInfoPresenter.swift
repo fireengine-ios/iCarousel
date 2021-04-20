@@ -26,19 +26,9 @@ final class FileInfoPresenter: BasePresenter {
 // MARK: FileInfoViewOutput
 
 extension FileInfoPresenter: FileInfoViewOutput {
-    
     func viewIsReady() {
         interactor.viewIsReady()
         ItemOperationManager.default.startUpdateView(view: self)
-    }
-    
-    func validateName(newName: String) {
-        interactor.onValidateName(newName: newName)
-    }
-    
-    func onRename(newName: String) {
-        startAsyncOperation()
-        interactor.onRename(newName: newName)
     }
     
     func shareItem() {
@@ -52,11 +42,11 @@ extension FileInfoPresenter: FileInfoViewOutput {
     }
     
     func openShareAccessList(contact: SharedContact) {
-        guard let item = interactor.item, let accountUuid = item.accountUuid else {
+        guard let item = interactor.item else {
             return
         }
         
-        router.openPrivateShareAccessList(projectId: accountUuid,
+        router.openPrivateShareAccessList(projectId: item.accountUuid,
                                           uuid: item.uuid,
                                           contact: contact,
                                           fileType: item.fileType)
@@ -66,37 +56,20 @@ extension FileInfoPresenter: FileInfoViewOutput {
 // MARK: FileInfoInteractorOutput
 
 extension FileInfoPresenter: FileInfoInteractorOutput {
-    
+    func showProgress() {
+        view.showProgress()
+    }
+
+    func hideProgress() {
+        view.hideProgress()
+    }
+
     func setObject(object: BaseDataSourceItem) {
         view.setObject(object)
     }
     
-    func updated() {
-        asyncOperationSuccess()
-        view.goBack()
-    }
-    
-    func albumForUuidFailed(error: Error) {
-        view.stopActivityIndicator()
-        view.showErrorAlert(message: error.description)
-    }
-
-    func cancelSave(use name: String) {
-        asyncOperationSuccess()
-        view.show(name: name)
-    }
-    
-    func failedUpdate(error: Error) {
-        asyncOperationSuccess()
-        view.showErrorAlert(message: error.description)
-    }
-    
-    func didValidateNameSuccess() {
-        view.showValidateNameSuccess()
-    }
-    
-    func displayShareInfo(_ sharingInfo: SharedFileInfo) {
-        view.showSharingInfo(sharingInfo)
+    func displayEntityInfo(_ sharingInfo: SharedFileInfo) {
+        view.showEntityInfo(sharingInfo)
     }
 }
 
@@ -109,45 +82,39 @@ extension FileInfoPresenter: FileInfoModuleInput {
 //MARK: - FileInfoRouterOutput
 
 extension FileInfoPresenter: FileInfoRouterOutput {
-    
-    func updateSharingInfo() {
-        interactor.getSharingInfo()
-    }
-    
-    func deleteSharingInfo() {
-        view.deleteSharingInfo()
+    func updateEntityInfo() {
+        interactor.getEntityInfo()
     }
 }
 
 //MARK: - ItemOperationManagerViewProtocol
 
 extension FileInfoPresenter: ItemOperationManagerViewProtocol {
-    
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         object === self
     }
     
     func didShare(items: [BaseDataSourceItem]) {
         if let uuid = interactor.item?.uuid, items.first(where: { $0.uuid == uuid }) != nil {
-            updateSharingInfo()
+            updateEntityInfo()
         }
     }
     
     func didEndShareItem(uuid: String) {
         if uuid == interactor.item?.uuid {
-            updateSharingInfo()
+            updateEntityInfo()
         }
     }
     
     func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
         if uuid == interactor.item?.uuid, interactor.sharingInfo?.members?.contains(contact) == true {
-            updateSharingInfo()
+            updateEntityInfo()
         }
     }
     
     func didRemove(contact: SharedContact, fromItem uuid: String) {
         if uuid == interactor.item?.uuid, interactor.sharingInfo?.members?.contains(contact) == true {
-            updateSharingInfo()
+            updateEntityInfo()
         }
     }
 }

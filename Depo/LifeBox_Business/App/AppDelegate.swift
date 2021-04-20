@@ -8,7 +8,6 @@
 
 import UIKit
 import FirebaseCrashlytics
-import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
@@ -83,6 +82,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+//        for family in UIFont.familyNames.sorted() {
+//            let names = UIFont.fontNames(forFamilyName: family)
+//            print("Family: \(family) Font names: \(names)")
+//        }
+
         startCoreDataSafeServices(with: application, options: launchOptions)
         
         APILogger.shared.startLogging()
@@ -94,8 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = router.vcForCurrentState()
         self.window?.makeKeyAndVisible()
-        
-        AppConfigurator.logoutIfNeed()
         
         self.window?.isHidden = false
         
@@ -112,23 +115,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
         
-        setupPushNotifications(with: options)
+        setupPushNotifications(with: options) { [weak self] in
+            self?.askPhotoGalleryPermission()
+        }
+        
         AppConfigurator.applicationStarted(with: options)
         
         passcodeStorage.systemCallOnScreen = false
-        
-        AppLinkUtility.fetchDeferredAppLink { url, error in
-            if let url = url {
-                UIApplication.shared.openSafely(url)
-            } else {
-                debugLog("Received error while fetching deferred app link \(String(describing: error))")
-            }
-        }
-        
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
     }
     
-    private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+    private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?, completionHandler: @escaping () -> Void) {
         // required setup order
         // 1. subscribe to notification delegate
         // 2. Netmera SDK setup
@@ -137,10 +133,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
             Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
             AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
+            completionHandler()
         }
         UNUserNotificationCenter.current().delegate = self
         AnalyticsService.startNetmera()
         debugLog("AppDelegate setupPushNotifications setuped")
+    }
+    
+    private func askPhotoGalleryPermission() {
+        PHPhotoLibrary.requestAuthorizationStatus { _ in }
     }
     
     /// iOS 9+
@@ -153,11 +154,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PushNotificationService.shared.openActionScreen()
             }
         }
-        
-        if ApplicationDelegate.shared.application(app, open: url, options: options) {
-            return true
-        }
-        return false
+
+        return true // changed to true, due to apple documentation- return false if failed. What do you think, colleagues?
     }
     
     private var firstResponder: UIResponder?
@@ -270,7 +268,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidBecomeActive")
         checkPasscodeIfNeed()
-        AppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -318,8 +315,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         debugLog("AppDelegate didReceiveRemoteNotification")
-        
-        AppEvents.logPushNotificationOpen(userInfo)
     }
     
     //MARK: Adjust

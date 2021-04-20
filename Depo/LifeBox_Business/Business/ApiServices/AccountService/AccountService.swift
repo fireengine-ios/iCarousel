@@ -12,7 +12,8 @@ import SwiftyJSON
 
 protocol AccountServicePrl {
     func usage(success: SuccessResponse?, fail: @escaping FailResponse)
-    func info(success: SuccessResponse?, fail:@escaping FailResponse)
+    func info(handler: @escaping (ResponseResult<AccountInfoResponse>) -> Void)
+    func storageUsageInfo(projectId: String, accoundId: String, handler: @escaping (ResponseResult<SettingsStorageUsageResponseItem>) -> Void)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
@@ -24,33 +25,29 @@ class AccountService: BaseRequestService, AccountServicePrl {
         static let serverValue = "value"
     }
  
-    func info(success: SuccessResponse?, fail:@escaping FailResponse) {
+    func info(handler: @escaping (ResponseResult<AccountInfoResponse>) -> Void) {
         debugLog("AccountService info")
         
-        let param = AccontInfo()
-        let handler = BaseResponseHandler<AccountInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
+        sessionManager
+            .request(RouteRequests.BusinessAccount.myInfo)
+            .customValidate()
+            .responseObject(handler)
     }
-    
-    func quotaInfo(success: SuccessResponse?, fail:@escaping FailResponse) {
-        debugLog("AccountService quotaInfo")
 
-        //TODO: remove fail() if new business app API is ready
-        fail(ErrorResponse.string("New api is required for quotaInfo"))
-        return
-        
-        let param = QuotaInfo()
-        let handler = BaseResponseHandler<QuotaInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-    }
-    
-    func overQuotaStatus(with showPopUp: Bool = true, success: SuccessResponse?, fail:@escaping FailResponse) {
-        debugLog("AccountService overQuotaStatus")
-        
-        let param = OverQuotaStatus(showPopUp: showPopUp)
-        let handler = BaseResponseHandler<OverQuotaStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
-        executeGetRequest(param: param, handler: handler)
-        
+    func storageUsageInfo(projectId: String,
+                          accoundId: String,
+                          handler: @escaping (ResponseResult<SettingsStorageUsageResponseItem>) -> Void) {
+        debugLog("Storage usage info")
+
+        guard let url = URL(string: String(format: RouteRequests.BusinessAccount.storageUsageInfo, projectId, accoundId)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return
+        }
+
+        sessionManager
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
     }
     
     func usage(success: SuccessResponse?, fail: @escaping FailResponse) {
@@ -165,34 +162,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
 
         let handler = BaseResponseHandler<SignUpSuccessResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
-    }
-    
-    // MARK: - User Security
-    
-    func securitySettingsInfo(success: SuccessResponse?, fail: FailResponse?) {
-        debugLog("AccountService securitySettingsInfo")
-
-        //TODO: remove fail() if new business app API is ready
-        fail?(ErrorResponse.string("New api is required for securitySettingsInfo"))
-        return
-        
-        let parametres = SecuritySettingsInfoParametres()
-        let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
-        executeGetRequest(param: parametres, handler: handler)
-    }
-    
-    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool,
-                                mobileNetworkAuthEnabled: Bool,
-                                twoFactorAuthEnabled: Bool,
-                                success: SuccessResponse?,
-                                fail: FailResponse?) {
-        debugLog("AccountService securitySettingsChange")
-        
-        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled,
-                                                              mobileNetworkAuth: mobileNetworkAuthEnabled,
-                                                              twoFactorAuth: twoFactorAuthEnabled)
-        let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
-        executePostRequest(param: parametres, handler: handler)
     }
     
     // MARK: - Face Image Allowed
@@ -599,37 +568,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 case .failure(let error):
                     debugLog(error.localizedDescription)
                  }
-        }
-    }
-    
-    func faqUrl(_ handler: @escaping (String) -> Void) {
-        debugLog("AccountService faqUrl")
-        
-        func defaultURLCallback() {
-            let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
-            handler(defaultFaqUrl)
-        }
-        
-        let tokenStorage: TokenStorage = factory.resolve()
-        guard tokenStorage.accessToken != nil else {
-            defaultURLCallback()
-            return
-        }
-        
-        SessionManager.customDefault
-            .request(RouteRequests.Account.getFaqUrl)
-            .customValidate()
-            .responseJSON(queue: .global()) { response in
-                switch response.result {
-                case .success(let json):
-                    if let json = json as? [String: String], let faqUrl = json["value"] {
-                        handler(faqUrl)
-                    } else {
-                        defaultURLCallback()
-                    }
-                case .failure(_):
-                    defaultURLCallback()
-                }
         }
     }
     

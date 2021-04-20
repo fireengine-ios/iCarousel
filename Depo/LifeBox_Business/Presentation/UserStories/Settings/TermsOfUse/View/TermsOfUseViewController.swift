@@ -50,7 +50,7 @@ final class TermsOfUseViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         if !Device.isIpad {
-            navigationBarWithGradientStyle()
+            setNavigationBarStyle(.byDefault)
         }
     }
 
