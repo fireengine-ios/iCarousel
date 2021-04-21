@@ -13,7 +13,7 @@ final class ProfileTextViewEnterView: UIView {
     
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = ColorConstants.textOrange
+        newValue.textColor = ColorConstants.textOrange.color
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         newValue.backgroundColor = .white
         newValue.isOpaque = true
@@ -48,7 +48,7 @@ final class ProfileTextViewEnterView: UIView {
         return newValue
     }()
     
-    var underlineColor = ColorConstants.lightGrayColor {
+    var underlineColor = ColorConstants.lightGrayColor.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }
@@ -142,7 +142,7 @@ final class ProfileTextViewEnterView: UIView {
     // MARK: placeholder
     
     private let placeHolderText = TextConstants.explainYourProblemShortly
-    private let placeHolderColor = ColorConstants.lightGrayColor
+    private let placeHolderColor = ColorConstants.lightGrayColor.color
     private let textColor = UIColor.black
     
     /// https://stackoverflow.com/a/27652289/5893286

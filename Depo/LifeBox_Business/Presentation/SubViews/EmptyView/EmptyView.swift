@@ -114,7 +114,7 @@ final class EmptyView: UIView, NibInit {
             newValue.text = ""
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
         }
     }
@@ -125,7 +125,7 @@ final class EmptyView: UIView, NibInit {
             newValue.text = ""
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
         }
     }

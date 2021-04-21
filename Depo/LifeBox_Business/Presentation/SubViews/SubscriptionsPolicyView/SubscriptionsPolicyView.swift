@@ -18,7 +18,7 @@ final class SubscriptionsPolicyView: UIView {
         
         textView.clipsToBounds = true
         textView.layer.cornerRadius = 5
-        textView.layer.borderColor = ColorConstants.textLightGrayColor.cgColor
+        textView.layer.borderColor = ColorConstants.textLightGrayColor.color.cgColor
         textView.layer.borderWidth = 1
         textView.isScrollEnabled = false
         textView.isEditable = false

@@ -84,7 +84,7 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
     //MARK: - Setup
     
     private func setView() {
-        view.backgroundColor = ColorConstants.tableBackground
+        view.backgroundColor = ColorConstants.tableBackground.color
     }
     
     private func setWebView() {

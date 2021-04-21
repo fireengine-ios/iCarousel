@@ -71,7 +71,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
     //MARK: - Setup
     
     private func setView() {
-        view.backgroundColor = ColorConstants.tableBackground
+        view.backgroundColor = ColorConstants.tableBackground.color
     }
     
     private func setSegmentedControl() {

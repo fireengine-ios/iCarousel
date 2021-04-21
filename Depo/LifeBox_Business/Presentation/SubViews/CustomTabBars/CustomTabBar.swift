@@ -13,7 +13,7 @@ typealias ImageNameToTitleTupple = (imageName: String, title: String, accessibil
 class CustomTabBar: UITabBar {
     
     func setupItems() {
-        tintColor = ColorConstants.bottomBarTint
+        tintColor = ColorConstants.bottomBarTint.color
         
         let items: [CustomTabBarItem] = TabBarItem.allCases.map { item -> CustomTabBarItem in
             let tabBarItem = CustomTabBarItem(title: item.title, image: item.icon, selectedImage: item.iconSelected)

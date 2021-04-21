@@ -15,7 +15,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     
     @IBOutlet private weak var separartorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.separator
+            newValue.backgroundColor = ColorConstants.separator.color
         }
     }
     
@@ -28,7 +28,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     
     private var highlightView: UIView = {
        let view = UIView()
-        view.backgroundColor = ColorConstants.multifileCellSubtitleText// this one by design ColorConstants.Text.labelTitle
+        view.backgroundColor = ColorConstants.multifileCellSubtitleText.color// this one by design ColorConstants.Text.labelTitle.color
         view.isHidden = true
         view.isUserInteractionEnabled = false
         return view
@@ -43,7 +43,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = ColorConstants.topBarColor
+        backgroundColor = ColorConstants.topBarColor.color
     }
     
     func setup(models: [TopBarCustomSegmentedViewButtonModel], selectedIndex: Int) {

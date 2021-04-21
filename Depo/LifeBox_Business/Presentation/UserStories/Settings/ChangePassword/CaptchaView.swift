@@ -10,14 +10,14 @@ final class CaptchaView: UIView, FromNib {
     @IBOutlet private weak var captchaImageView: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFit
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = ColorConstants.profileGrayColor.color
         }
     }
     
     @IBOutlet private weak var soundCaptchaButton: UIButton! {
         willSet {
             newValue.isExclusiveTouch = true
-            newValue.tintColor = ColorConstants.darkText
+            newValue.tintColor = ColorConstants.darkText.color
             newValue.backgroundColor = .white
             newValue.isOpaque = true
         }
@@ -26,7 +26,7 @@ final class CaptchaView: UIView, FromNib {
     @IBOutlet private weak var refreshCaptchaButton: UIButton! {
         willSet {
             newValue.isExclusiveTouch = true
-            newValue.tintColor = ColorConstants.darkText
+            newValue.tintColor = ColorConstants.darkText.color
             newValue.backgroundColor = .white
             newValue.isOpaque = true
         }
@@ -34,7 +34,7 @@ final class CaptchaView: UIView, FromNib {
     
     @IBOutlet weak var errorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.textOrange
+            newValue.textColor = ColorConstants.textOrange.color
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
             newValue.numberOfLines = 0
             newValue.isHidden = true
@@ -68,7 +68,7 @@ final class CaptchaView: UIView, FromNib {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = ColorConstants.profileGrayColor.color
             newValue.isOpaque = true
         }
     }

@@ -26,14 +26,14 @@ final class PhoneVerificationViewController: ViewController {
     @IBOutlet private weak var mainTitle: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 18)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
 
     @IBOutlet private weak var infoTitle: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.loginPopupDescription
+            newValue.textColor = ColorConstants.loginPopupDescription.color
         }
     }
 
@@ -41,13 +41,13 @@ final class PhoneVerificationViewController: ViewController {
     @IBOutlet private weak var underTextfieldsLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
 
     @IBOutlet private weak var errorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.loginErrorLabelText
+            newValue.textColor = ColorConstants.loginErrorLabelText.color
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .center
         }
@@ -55,7 +55,7 @@ final class PhoneVerificationViewController: ViewController {
 
     @IBOutlet private weak var scrollViewContainerView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.tableBackground
+            newValue.backgroundColor = ColorConstants.tableBackground.color
         }
     }
 
@@ -64,7 +64,7 @@ final class PhoneVerificationViewController: ViewController {
             newValue.setTitle(TextConstants.resendCode, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.setBackgroundColor(ColorConstants.confirmationPopupButton, for: .normal)
+            newValue.setBackgroundColor(ColorConstants.confirmationPopupButton.color, for: .normal)
             newValue.layer.cornerRadius = 6
             newValue.isOpaque = true
         }
@@ -76,7 +76,7 @@ final class PhoneVerificationViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = ColorConstants.tableBackground
+        view.backgroundColor = ColorConstants.tableBackground.color
         
         setupKeyboard()
     
@@ -232,7 +232,7 @@ extension PhoneVerificationViewController: PhoneVerificationViewInput {
         let text = String(format: textDescription, number)
         let range = (text as NSString).range(of: number)
         let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaMedFont(size: 15),
-                                                        NSAttributedStringKey.foregroundColor: ColorConstants.textGrayColor]
+                                                        NSAttributedStringKey.foregroundColor: ColorConstants.textGrayColor.color]
 
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes(attr, range: range)

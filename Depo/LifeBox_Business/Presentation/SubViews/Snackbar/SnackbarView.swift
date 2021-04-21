@@ -23,7 +23,7 @@ final class SnackbarView: UIView, NibInit {
 
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitleColor(ColorConstants.blueColor, for: .normal)
+        button.setTitleColor(ColorConstants.blueColor.color, for: .normal)
         button.titleLabel?.font = .GTAmericaStandardMediumFont(size: 16)
         button.contentHorizontalAlignment = .right
         button.backgroundColor = .clear
@@ -38,7 +38,7 @@ final class SnackbarView: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = ColorConstants.snackbarGray
+        backgroundColor = ColorConstants.snackbarGray.color
     }
     
     static func with(type: SnackbarType, message: String, actionType: SnackbarAction?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) -> SnackbarView {
@@ -55,9 +55,9 @@ final class SnackbarView: UIView, NibInit {
 
         switch actionType {
         case .trashBin:
-            view.actionButton.setTitleColor(ColorConstants.snackBarTrashBin, for: .normal)
+            view.actionButton.setTitleColor(ColorConstants.snackBarTrashBin.color, for: .normal)
         case .ok, .some:
-            view.actionButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            view.actionButton.setTitleColor(ColorConstants.blueColor.color, for: .normal)
         case .none:
             break
         }

@@ -35,7 +35,7 @@ final class SharingInfoTableViewCell: UITableViewCell {
     }
 
     private func baseSetup() {
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
         contentView.addSubview(sharingInfoView)
         sharingInfoView.pinToSuperviewEdges()
     }

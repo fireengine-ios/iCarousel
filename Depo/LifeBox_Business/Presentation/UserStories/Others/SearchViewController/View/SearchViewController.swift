@@ -83,7 +83,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         
         let navBar = navigationController?.navigationBar
         navBar?.barTintColor = UIColor.white
-        navBar?.tintColor = ColorConstants.darkBlueColor
+        navBar?.tintColor = ColorConstants.darkBlueColor.color
         navBar?.setBackgroundImage(UIImage(color: .white), for: .default)
     }
     
@@ -182,8 +182,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.showsCancelButton = true
-        searchBar.backgroundImage = UIImage(color: ColorConstants.searchBarColor)
-        searchBar.tintColor = ColorConstants.darkBlueColor
+        searchBar.backgroundImage = UIImage(color: ColorConstants.searchBarColor.color)
+        searchBar.tintColor = ColorConstants.darkBlueColor.color
         searchBar.delegate = self
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
         searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
@@ -196,10 +196,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         let firstTextField = searchBar.firstSubview(of: UITextField.self)
         
         if let textField = firstTextField {
-            textField.backgroundColor = ColorConstants.searchBarColor
+            textField.backgroundColor = ColorConstants.searchBarColor.color
             textField.placeholder = TextConstants.search
             textField.font = UIFont.TurkcellSaturaBolFont(size: 19)
-            textField.textColor = ColorConstants.darkBlueColor
+            textField.textColor = ColorConstants.darkBlueColor.color
             textField.keyboardAppearance = .dark
             searchTextField = textField
         }
@@ -223,7 +223,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
 
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
                                                                font: .TurkcellSaturaDemFont(size: 19.0),
-                                                               tintColor: ColorConstants.darkBlueColor,
+                                                               tintColor: ColorConstants.darkBlueColor.color,
                                                                target: self,
                                                                selector: #selector(onCancelSelectionButton))
 
@@ -231,7 +231,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                                              style: .plain,
                                              target: self,
                                              action: #selector(onMoreButton(_:)))
-            moreButton.tintColor = ColorConstants.darkBlueColor
+            moreButton.tintColor = ColorConstants.darkBlueColor.color
             moreButton.accessibilityLabel = TextConstants.accessibilityMore
 
             navigationItem.rightBarButtonItem = moreButton
@@ -239,7 +239,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             if Device.isIpad {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(
                     title: TextConstants.cancel,
-                    tintColor: ColorConstants.darkBlueColor,
+                    tintColor: ColorConstants.darkBlueColor.color,
                     target: self,
                     selector: #selector(searchBarCancelButtonClicked(_:)))
             } else {

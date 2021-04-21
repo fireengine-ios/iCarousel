@@ -29,7 +29,7 @@ final class TextFieldWithPickerView: UIView {
         let textField = QuickDismissPlaceholderTextField()
         textField.borderStyle = .none
         textField.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        textField.textColor = ColorConstants.Text.textFieldText
+        textField.textColor = ColorConstants.Text.textFieldText.color
         textField.attributedPlaceholder = NSAttributedString(
             string: TextConstants.contactUsSubjectBoxName,
             attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.Text.textFieldPlaceholder]
@@ -68,14 +68,14 @@ final class TextFieldWithPickerView: UIView {
         textField.rightView = imageView
         textField.rightViewMode = .always
         
-        textField.tintColor = ColorConstants.Text.labelTitle
+        textField.tintColor = ColorConstants.Text.labelTitle.color
         
         textField.inputView = pickerView
         textField.addToolBarWithButton(title: TextConstants.userProfileDoneButton,
                                        target: self,
                                        selector: #selector(doneButtonPressed),
                                        font: UIFont.GTAmericaStandardMediumFont(size: 15),
-                                       tintColor: ColorConstants.buttonTintBlue)
+                                       tintColor: ColorConstants.buttonTintBlue.color)
         
         textField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
     }

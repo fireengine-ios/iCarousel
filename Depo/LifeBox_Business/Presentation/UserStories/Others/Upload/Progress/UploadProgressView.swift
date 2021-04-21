@@ -22,7 +22,7 @@ final class UploadProgressView: UIView, FromNib {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.UploadProgress.cellBackground
+            newValue.backgroundColor = ColorConstants.UploadProgress.cellBackground.color
             newValue.allowsSelection = false
             newValue.isScrollEnabled = true
             newValue.alwaysBounceVertical = true

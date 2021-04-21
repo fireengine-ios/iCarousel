@@ -17,7 +17,7 @@ class DropDownTableViewCell: UITableViewCell {
         // Initialization code
         
         titleTextLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        titleTextLabel.textColor = ColorConstants.darkBlueColor
+        titleTextLabel.textColor = ColorConstants.darkBlueColor.color
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

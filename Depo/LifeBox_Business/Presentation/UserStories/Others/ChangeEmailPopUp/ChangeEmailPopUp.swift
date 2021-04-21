@@ -38,7 +38,7 @@ final class ChangeEmailPopUp: UIViewController {
     
     @IBOutlet private weak var darkBackground: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.popUpBackground
+            newValue.backgroundColor = ColorConstants.popUpBackground.color
         }
     }
     
@@ -56,7 +56,7 @@ final class ChangeEmailPopUp: UIViewController {
     @IBOutlet private weak var emailEnterView: ProfileTextEnterView! {
         willSet {
             newValue.titleLabel.text = TextConstants.yourEmail
-            newValue.titleLabel.textColor = ColorConstants.coolGrey
+            newValue.titleLabel.textColor = ColorConstants.coolGrey.color
             newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
             
             newValue.textField.autocorrectionType = .no
@@ -70,7 +70,7 @@ final class ChangeEmailPopUp: UIViewController {
     @IBOutlet private weak var confirmEmailEnterView: ProfileTextEnterView! {
         willSet {
             newValue.titleLabel.text = TextConstants.confirmYourEmail
-            newValue.titleLabel.textColor = ColorConstants.coolGrey
+            newValue.titleLabel.textColor = ColorConstants.coolGrey.color
             newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
             
             newValue.textField.autocorrectionType = .no
@@ -107,7 +107,7 @@ final class ChangeEmailPopUp: UIViewController {
         willSet {
             newValue.textAlignment = .center
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
-            newValue.textColor = ColorConstants.textOrange
+            newValue.textColor = ColorConstants.textOrange.color
             newValue.numberOfLines = 0
             newValue.isHidden = true
         }

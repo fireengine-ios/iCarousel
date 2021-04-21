@@ -12,8 +12,8 @@ class CircleYellowButton: WhiteButtonWithRoundedCorner {
     
     override func configurate() {
         super.configurate()
-        backgroundColor = ColorConstants.yellowButtonColor
-        setTitleColor(ColorConstants.whiteColor, for: .normal)
+        backgroundColor = ColorConstants.yellowButtonColor.color
+        setTitleColor(ColorConstants.whiteColor.color, for: .normal)
         titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 13)
         setCornerRadius()
     }

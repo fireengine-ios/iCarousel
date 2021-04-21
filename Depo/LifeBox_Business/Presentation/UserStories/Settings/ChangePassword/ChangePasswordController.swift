@@ -303,7 +303,7 @@ extension ChangePasswordController: UITextFieldDelegate {
     
     private func updateNewPasswordView() {
         if showErrorColorInNewPasswordView {
-            newPasswordView.errorLabel.textColor = ColorConstants.textOrange
+            newPasswordView.errorLabel.textColor = ColorConstants.textOrange.color
             /// we need to show error with color just once
             showErrorColorInNewPasswordView = false
         }

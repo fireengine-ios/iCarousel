@@ -14,7 +14,7 @@ final class CarouselPageView : UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.TurkcellSaturaDemFont(size: 14)
-        label.textColor = ColorConstants.textGrayColor
+        label.textColor = ColorConstants.textGrayColor.color
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -24,7 +24,7 @@ final class CarouselPageView : UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.TurkcellSaturaFont(size: 12)
-        label.textColor = ColorConstants.textGrayColor
+        label.textColor = ColorConstants.textGrayColor.color
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

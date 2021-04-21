@@ -37,7 +37,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
     @IBOutlet weak private var descriptionLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.textColor = ColorConstants.Text.textFieldText.color
             newValue.text = TextConstants.contactUsPageDescription
         }
     }
@@ -59,7 +59,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
             newValue.delegate = self
             newValue.text = textViewPlaceholder
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants.Text.textFieldPlaceholder
+            newValue.textColor = ColorConstants.Text.textFieldPlaceholder.color
         }
     }
     
@@ -67,7 +67,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
         willSet {
             newValue.text = "\(maxCharactersCount)"
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants.Text.textFieldPlaceholder
+            newValue.textColor = ColorConstants.Text.textFieldPlaceholder.color
         }
     }
     
@@ -76,7 +76,7 @@ final class ContactUsViewController: BaseViewController, NibInit {
             newValue.setTitle(TextConstants.contactUsSendButton, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.backgroundColor = ColorConstants.confirmationPopupButton
+            newValue.backgroundColor = ColorConstants.confirmationPopupButton.color
             newValue.layer.cornerRadius = 5
             newValue.isEnabled = false
             newValue.alpha = 0.4
@@ -105,13 +105,13 @@ final class ContactUsViewController: BaseViewController, NibInit {
     //MARK: - Setup
     
     private func setView() {
-        view.backgroundColor = ColorConstants.tableBackground
+        view.backgroundColor = ColorConstants.tableBackground.color
     }
     
     private func setBorder(for view: UIView) {
         view.layer.cornerRadius = 5
         view.layer.borderWidth = 1
-        view.layer.borderColor = ColorConstants.a2FABorder.cgColor
+        view.layer.borderColor = ColorConstants.a2FABorder.color.cgColor
     }
     
     private func addSubjectView() {
@@ -198,7 +198,7 @@ extension ContactUsViewController: UITextViewDelegate {
     func textViewDidBeginEditing (_ textView: UITextView) {
         if textView.text == textViewPlaceholder {
             textView.text = ""
-            textView.textColor = ColorConstants.Text.textFieldText
+            textView.textColor = ColorConstants.Text.textFieldText.color
         }
     }
     
@@ -209,7 +209,7 @@ extension ContactUsViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = textViewPlaceholder
-            textView.textColor = ColorConstants.Text.textFieldPlaceholder
+            textView.textColor = ColorConstants.Text.textFieldPlaceholder.color
         }
     }
     

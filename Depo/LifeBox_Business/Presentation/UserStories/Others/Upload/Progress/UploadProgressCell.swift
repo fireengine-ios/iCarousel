@@ -32,7 +32,7 @@ final class UploadProgressCell: UICollectionViewCell {
         willSet {
             newValue.text = ""
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
@@ -40,7 +40,7 @@ final class UploadProgressCell: UICollectionViewCell {
         willSet {
             newValue.text = ""
             newValue.font = .GTAmericaStandardRegularFont(size: 11)
-            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.textColor = ColorConstants.Text.textFieldText.color
         }
     }
     
@@ -54,7 +54,7 @@ final class UploadProgressCell: UICollectionViewCell {
     
     @IBOutlet private weak var separator: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.separator
+            newValue.backgroundColor = ColorConstants.separator.color
         }
     }
     
@@ -64,7 +64,7 @@ final class UploadProgressCell: UICollectionViewCell {
         loader.backWidth = 2
         loader.progressRatio = 0
         loader.backColor = .white
-        loader.progressColor = ColorConstants.Text.labelTitle
+        loader.progressColor = ColorConstants.Text.labelTitle.color
         return loader
     }()
     
@@ -76,7 +76,7 @@ final class UploadProgressCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = ColorConstants.UploadProgress.cellBackground
+        backgroundColor = ColorConstants.UploadProgress.cellBackground.color
     }
     
     override func prepareForReuse() {

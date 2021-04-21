@@ -16,7 +16,7 @@ final class TopBarSortingView: UICollectionReusableView, NibInit {
         willSet {
             newValue.text = TextConstants.topBarSortSubviewSortByLabel
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.adjustsFontSizeToFitWidth()
         }
     }
@@ -29,7 +29,7 @@ final class TopBarSortingView: UICollectionReusableView, NibInit {
             newValue.adjustsFontSizeToFitWidth()
             
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.titleLabel?.textColor = ColorConstants.Text.labelTitle
+            newValue.titleLabel?.textColor = ColorConstants.Text.labelTitle.color
             
             newValue.forceImageToRightSide()
         }

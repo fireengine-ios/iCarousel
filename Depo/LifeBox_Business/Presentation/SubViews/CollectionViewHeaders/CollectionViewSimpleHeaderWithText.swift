@@ -18,13 +18,13 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         didSet {
             labelForTitle.text = ""
             labelForTitle.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            labelForTitle.textColor = ColorConstants.textGrayColor
+            labelForTitle.textColor = ColorConstants.textGrayColor.color
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = ColorConstants.bottomViewGrayColor
+        backgroundColor = ColorConstants.bottomViewGrayColor.color
     }
     
     func setText(text: String?) {

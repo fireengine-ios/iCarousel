@@ -20,35 +20,35 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var typeImageView: UIImageView! {
         willSet {
-            newValue.tintColor = ColorConstants.loginPopupDescription
+            newValue.tintColor = ColorConstants.loginPopupDescription.color
         }
     }
 
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.separator
+            newValue.backgroundColor = ColorConstants.separator.color
         }
     }
 
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.loginPopupDescription
+            newValue.textColor = ColorConstants.loginPopupDescription.color
         }
     }
 
     @IBOutlet private weak var dateLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 10)
-            newValue.textColor = ColorConstants.multifileCellSubtitleText
+            newValue.textColor = ColorConstants.multifileCellSubtitleText.color
         }
     }
 
     @IBOutlet private weak var roleButton: IndexPathButton! {
         willSet {
-            newValue.setTitleColor(ColorConstants.Text.labelTitle, for: .normal)
+            newValue.setTitleColor(ColorConstants.Text.labelTitle.color, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.tintColor = ColorConstants.Text.labelTitle
+            newValue.tintColor = ColorConstants.Text.labelTitle.color
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -8
         }
@@ -59,12 +59,12 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
     }
 
     override func prepareForReuse() {
@@ -113,7 +113,7 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
         case .disk, .account:
             roleButton.setImage(nil, for: .normal)
             roleButton.isUserInteractionEnabled = false
-            roleButton.setTitleColor(ColorConstants.sharedContactRoleDisabled, for: .normal)
+            roleButton.setTitleColor(ColorConstants.sharedContactRoleDisabled.color, for: .normal)
         case .album, .file:
             break
         }

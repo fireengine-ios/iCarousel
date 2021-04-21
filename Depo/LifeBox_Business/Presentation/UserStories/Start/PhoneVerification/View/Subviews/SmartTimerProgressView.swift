@@ -21,8 +21,8 @@ final class SmartTimerProgressView: UIView {
         lineProgressView.translatesAutoresizingMaskIntoConstraints = false
         lineProgressView.targetValue = 1
         lineProgressView.set(progress: 0)
-        lineProgressView.set(lineBackgroundColor: ColorConstants.separator)
-        lineProgressView.set(lineColor: ColorConstants.a2FAActiveProgress)
+        lineProgressView.set(lineBackgroundColor: ColorConstants.separator.color)
+        lineProgressView.set(lineColor: ColorConstants.a2FAActiveProgress.color)
         lineProgressView.setContentCompressionResistancePriority(.required, for: .vertical)
         lineProgressView.lineWidth = 8
         return lineProgressView
@@ -32,7 +32,7 @@ final class SmartTimerProgressView: UIView {
         let smartTimerLabel = SmartTimerLabel()
         smartTimerLabel.translatesAutoresizingMaskIntoConstraints = false
         smartTimerLabel.font = UIFont.GTAmericaStandardMediumFont(size: 16)
-        smartTimerLabel.textColor = ColorConstants.loginPopupDescription
+        smartTimerLabel.textColor = ColorConstants.loginPopupDescription.color
         smartTimerLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         smartTimerLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         smartTimerLabel.delegate = self

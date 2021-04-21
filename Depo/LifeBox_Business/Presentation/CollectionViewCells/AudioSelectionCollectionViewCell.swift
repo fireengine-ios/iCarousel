@@ -21,10 +21,10 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        nameLabel.textColor = ColorConstants.textGrayColor
+        nameLabel.textColor = ColorConstants.textGrayColor.color
         nameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         
-        contentView.backgroundColor = ColorConstants.whiteColor
+        contentView.backgroundColor = ColorConstants.whiteColor.color
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {

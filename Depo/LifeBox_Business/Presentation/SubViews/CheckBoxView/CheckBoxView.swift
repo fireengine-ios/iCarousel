@@ -66,7 +66,7 @@ final class CheckBoxView: UIView, NibInit {
         willSet {
             newValue.tintColor = .lrTealishTwo
             newValue.setTitle(type.title, for: .normal)
-            newValue.setTitleColor(ColorConstants.lightText, for: .normal)
+            newValue.setTitleColor(ColorConstants.lightText.color, for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaRegFont(size: Device.isIphoneSmall ? 12 : 14)
             newValue.titleLabel?.numberOfLines = 2
             newValue.titleLabel?.lineBreakMode = .byWordWrapping

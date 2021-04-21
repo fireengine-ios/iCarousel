@@ -34,7 +34,7 @@ final class UploadProgressHeader: UIView, NibInit {
     @IBOutlet private weak var progress: UIProgressView! {
         willSet {
             newValue.progressTintColor = .white
-            newValue.backgroundColor = ColorConstants.UploadProgress.progressBackground
+            newValue.backgroundColor = ColorConstants.UploadProgress.progressBackground.color
             newValue.progress = 0
         }
     }
@@ -69,7 +69,7 @@ final class UploadProgressHeader: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = ColorConstants.Text.labelTitle
+        backgroundColor = ColorConstants.Text.labelTitle.color
     }
     
     //MARK: - Public

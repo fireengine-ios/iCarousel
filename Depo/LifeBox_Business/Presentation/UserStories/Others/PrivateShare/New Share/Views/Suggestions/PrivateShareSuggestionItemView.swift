@@ -35,7 +35,7 @@ final class PrivateShareSuggestionItemView: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     

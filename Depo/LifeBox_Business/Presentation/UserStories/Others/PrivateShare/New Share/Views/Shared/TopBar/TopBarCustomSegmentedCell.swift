@@ -12,7 +12,7 @@ final class TopBarCustomSegmentedCell: UICollectionViewCell {
     @IBOutlet private weak var label: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
@@ -24,7 +24,7 @@ final class TopBarCustomSegmentedCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = ColorConstants.topBarColor
+        backgroundColor = ColorConstants.topBarColor.color
     }
     
     func setup(title: String) {

@@ -33,14 +33,14 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     @IBOutlet private weak var subtitleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         }
     }
     
     @IBOutlet private weak var contactsCollectionView: UICollectionView! {
         didSet {
-            contactsCollectionView.backgroundColor = ColorConstants.tableBackground
+            contactsCollectionView.backgroundColor = ColorConstants.tableBackground.color
             setupCollectionView()
         }
     }
@@ -57,7 +57,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     //MARK: - FileInfoShareViewProtocol
     
     func setup(with info: SharedFileInfo) {
-        backgroundColor = ColorConstants.tableBackground
+        backgroundColor = ColorConstants.tableBackground.color
         self.info = info
         
         membersInfo = getMembersInfo()

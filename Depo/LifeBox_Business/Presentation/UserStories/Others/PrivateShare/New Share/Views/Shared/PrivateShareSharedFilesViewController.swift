@@ -59,7 +59,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = TextConstants.topBarSearchSubViewDescriptionTitle
-        searchController.searchBar.tintColor = ColorConstants.Text.labelTitle
+        searchController.searchBar.tintColor = ColorConstants.Text.labelTitle.color
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false

@@ -21,7 +21,7 @@ final class WaitingForWiFiPopUp: BaseCardView {
         canSwipe = false
         titleLabel?.text = TextConstants.waitingForWiFiPopUpTitle
         titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        titleLabel?.textColor = ColorConstants.textGrayColor
+        titleLabel?.textColor = ColorConstants.textGrayColor.color
         
         settingsButton?.setTitle(TextConstants.waitingForWiFiPopUpSettingsButton, for: .normal)
         settingsButton?.setImage(UIImage(named: "CogForButtons"), for: .normal)

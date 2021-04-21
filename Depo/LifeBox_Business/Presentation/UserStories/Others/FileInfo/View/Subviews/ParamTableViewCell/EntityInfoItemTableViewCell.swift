@@ -21,7 +21,7 @@ final class EntityInfoItemTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-        label.textColor = ColorConstants.infoPageItemTopText
+        label.textColor = ColorConstants.infoPageItemTopText.color
         return label
     }()
 
@@ -29,7 +29,7 @@ final class EntityInfoItemTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-        label.textColor = ColorConstants.Text.labelTitle
+        label.textColor = ColorConstants.Text.labelTitle.color
         return label
     }()
 
@@ -44,7 +44,7 @@ final class EntityInfoItemTableViewCell: UITableViewCell {
     }
 
     private func setup() {
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
         contentView.addSubview(topLabel)
         contentView.addSubview(bottomLabel)
 

@@ -35,7 +35,7 @@ class BaseCollectionViewCell: UICollectionViewCell, CollectionViewCellDataProtoc
         lpgr.delaysTouchesBegan = true
         addGestureRecognizer(lpgr)
         
-        contentView.backgroundColor = ColorConstants.photoCell
+        contentView.backgroundColor = ColorConstants.photoCell.color
     }
     
     @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {

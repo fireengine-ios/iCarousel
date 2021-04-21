@@ -22,10 +22,10 @@ class BlueButtonWithWhiteText: WhiteButtonWithRoundedCorner {
     override func configurate() {
         super.configurate()
         
-        setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
-        setBackgroundColor(ColorConstants.darkBlueColor.lighter(by: 30.0), for: .disabled)
-        setTitleColor(ColorConstants.whiteColor, for: .normal)
-        setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
+        setBackgroundColor(ColorConstants.darkBlueColor.color, for: .normal)
+        setBackgroundColor(ColorConstants.darkBlueColor.color.lighter(by: 30.0), for: .disabled)
+        setTitleColor(ColorConstants.whiteColor.color, for: .normal)
+        setTitleColor(ColorConstants.lightGrayColor.color, for: .disabled)
     }
 }
 
@@ -43,10 +43,10 @@ final class NavyButtonWithWhiteText: WhiteButtonWithRoundedCorner {
     override func configurate() {
         super.configurate()
         
-        setBackgroundColor(ColorConstants.navy, for: .normal)
-        setBackgroundColor(ColorConstants.navy.lighter(by: 30.0), for: .disabled)
-        setTitleColor(ColorConstants.whiteColor, for: .normal)
-        setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
+        setBackgroundColor(ColorConstants.navy.color, for: .normal)
+        setBackgroundColor(ColorConstants.navy.color.lighter(by: 30.0), for: .disabled)
+        setTitleColor(ColorConstants.whiteColor.color, for: .normal)
+        setTitleColor(ColorConstants.lightGrayColor.color, for: .disabled)
         
         titleLabel?.font = ApplicationPalette.mediumDemiRoundButtonFont
         titleLabel?.textAlignment = .center

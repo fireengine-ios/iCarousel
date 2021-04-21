@@ -34,7 +34,7 @@ enum NavigationBarStyles {
     var textTintColor: UIColor  {
         switch self {
         case .byDefault, .white, .visible:
-            return ColorConstants.Text.labelTitle
+            return ColorConstants.Text.labelTitle.color
         case .black, .transparent, .hidden:
             return UIColor.white
         }
@@ -73,7 +73,7 @@ enum NavigationBarStyles {
     var barTintColor: UIColor {
         switch self {
         case .byDefault, .white, .visible:
-            return ColorConstants.topBarColor
+            return ColorConstants.topBarColor.color
         case .transparent, .hidden:
             return .clear
         case .black:
@@ -86,7 +86,7 @@ enum NavigationBarStyles {
         case .transparent, .hidden, .black:
             return .clear
         case .byDefault, .white, .visible:
-            return ColorConstants.Text.labelTitle
+            return ColorConstants.Text.labelTitle.color
         }
     }
     
@@ -285,7 +285,7 @@ extension UIViewController {
     func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
 
         navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle, style: .plain, target: nil, action: nil)
-        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.Text.labelTitle
+        navBar?.topItem?.backBarButtonItem?.tintColor = ColorConstants.Text.labelTitle.color
 
         if let subTitle = subTitle {
             navigationItem.title = nil

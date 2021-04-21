@@ -10,8 +10,8 @@ import UIKit
 
 class RingView: UIView {
     
-    @IBInspectable var mainColor: UIColor = ColorConstants.activityTimelineDraws
-    @IBInspectable var ringColor: UIColor = ColorConstants.activityTimelineDraws
+    @IBInspectable var mainColor: UIColor = ColorConstants.activityTimelineDraws.color
+    @IBInspectable var ringColor: UIColor = ColorConstants.activityTimelineDraws.color
     @IBInspectable var ringThickness: CGFloat = 4
     
     override func draw(_ rect: CGRect) {

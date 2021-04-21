@@ -181,12 +181,12 @@ final class OptInController: ViewController, NibInit {
         mainTitle.text = TextConstants.enterSecurityCode
         
         infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)
-        infoTitle.textColor = ColorConstants.blueGrey
+        infoTitle.textColor = ColorConstants.blueGrey.color
         
         timerLabel.font = UIFont.TurkcellSaturaRegFont(size: 35)
-        timerLabel.textColor = ColorConstants.cloudyBlue
+        timerLabel.textColor = ColorConstants.cloudyBlue.color
         
-        errorLabel.textColor = ColorConstants.textOrange
+        errorLabel.textColor = ColorConstants.textOrange.color
         errorLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
     }
     

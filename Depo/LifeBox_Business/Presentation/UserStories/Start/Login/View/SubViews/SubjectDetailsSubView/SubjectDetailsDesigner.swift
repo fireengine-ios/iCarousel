@@ -31,7 +31,7 @@ final class SubjectDetailsDesigner: NSObject {
     @IBOutlet private weak var cancelButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named: "closeIcon"), for: .normal)
-            newValue.tintColor = ColorConstants.grayTabBarButtonsColor
+            newValue.tintColor = ColorConstants.grayTabBarButtonsColor.color
         }
     }
 }

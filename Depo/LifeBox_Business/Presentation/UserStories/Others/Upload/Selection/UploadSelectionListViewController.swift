@@ -14,7 +14,7 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
         willSet {
             newValue.layer.masksToBounds = true
             newValue.layer.cornerRadius = 10
-            newValue.backgroundColor = ColorConstants.dimmedBackground
+            newValue.backgroundColor = ColorConstants.dimmedBackground.color
         }
     }
     
@@ -34,7 +34,7 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.font = .GTAmericaStandardMediumFont(size: 16)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.text = TextConstants.uploadSelectPageTitle
         }
     }
@@ -54,13 +54,13 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
             let titleColorHigh = titleColor.lighter(by: 30)
             
             newValue.setTitle(TextConstants.uploadSelectButtonTitle, for: .normal)
-            newValue.backgroundColor = ColorConstants.confirmationPopupButton
+            newValue.backgroundColor = ColorConstants.confirmationPopupButton.color
             newValue.setTitleColor(.white, for: .normal)
             newValue.setTitleColor(titleColorHigh, for: .highlighted)
             
             newValue.titleLabel?.font = .GTAmericaStandardMediumFont(size: 14)
             
-            newValue.layer.borderColor = ColorConstants.confirmationPopupButton.cgColor
+            newValue.layer.borderColor = ColorConstants.confirmationPopupButton.color.cgColor
             newValue.layer.borderWidth = 2
             newValue.layer.cornerRadius = 5
             newValue.adjustsFontSizeToFitWidth()

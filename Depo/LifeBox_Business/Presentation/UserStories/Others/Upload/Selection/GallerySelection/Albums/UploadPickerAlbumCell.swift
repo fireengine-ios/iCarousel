@@ -16,7 +16,7 @@ final class UploadPickerAlbumCell: UICollectionViewCell {
         willSet {
             newValue.text = ""
             newValue.font = .GTAmericaStandardRegularFont(size: 16)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.textAlignment = .left
         }
     }
@@ -25,14 +25,14 @@ final class UploadPickerAlbumCell: UICollectionViewCell {
         willSet {
             newValue.text = ""
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.textAlignment = .right
         }
     }
     
     @IBOutlet private weak var separator: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.separator
+            newValue.backgroundColor = ColorConstants.separator.color
         }
     }
     

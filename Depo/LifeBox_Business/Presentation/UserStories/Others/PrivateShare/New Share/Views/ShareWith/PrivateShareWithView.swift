@@ -26,7 +26,7 @@ final class PrivateShareWithView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.PrivateShare.shared_with_section_name
             newValue.font = .GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     

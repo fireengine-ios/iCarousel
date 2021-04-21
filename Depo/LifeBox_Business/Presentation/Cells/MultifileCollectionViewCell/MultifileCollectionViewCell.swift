@@ -76,14 +76,14 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var name: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14.0)
-            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.textColor = ColorConstants.Text.textFieldText.color
         }
     }
     
     @IBOutlet private weak var lastModifiedDate: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 10.0)
-            newValue.textColor = ColorConstants.multifileCellSubtitleText
+            newValue.textColor = ColorConstants.multifileCellSubtitleText.color
         }
     }
     
@@ -98,7 +98,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private lazy var menuButton: IndexPathButton = {
         let button = IndexPathButton(with: IndexPath(row: 0, section: 0))
-        button.setBackgroundColor(ColorConstants.multifileCellBackgroundColorSelected, for: .highlighted)
+        button.setBackgroundColor(ColorConstants.multifileCellBackgroundColorSelected.color, for: .highlighted)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -114,7 +114,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     //MARK: Name editing
     @IBOutlet private weak var nameEditView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.multifileCellBackgroundColorSelectedSolid
+            newValue.backgroundColor = ColorConstants.multifileCellBackgroundColorSelectedSolid.color
             newValue.alpha = 0
         }
     }
@@ -162,13 +162,13 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var infoView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.Text.labelTitle
+            newValue.backgroundColor = ColorConstants.Text.labelTitle.color
         }
     }
     
     @IBOutlet private weak var deletionView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.multifileCellDeletionView
+            newValue.backgroundColor = ColorConstants.multifileCellDeletionView.color
         }
     }
     //MARK: -
@@ -358,7 +358,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     private func setupBackgroundColor(isSelected: Bool) {
         UIView.animate(withDuration: NumericConstants.setImageAnimationDuration) {
-            self.defaultView.backgroundColor = isSelected ? ColorConstants.multifileCellBackgroundColorSelected : ColorConstants.multifileCellBackgroundColor
+            self.defaultView.backgroundColor = isSelected ? ColorConstants.multifileCellBackgroundColorSelected.color : ColorConstants.multifileCellBackgroundColor.color
         }
     }
     
@@ -403,7 +403,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             
             UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
                 self.nameEditView.alpha = 1
-                self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColorSelected
+                self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColorSelected.color
             } completion: { _ in
                 //
             }
@@ -415,7 +415,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
             self.nameEditView.alpha = 0
-            self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColor
+            self.defaultView.backgroundColor = ColorConstants.multifileCellBackgroundColor.color
         } completion: { _ in
             //
         }
@@ -458,7 +458,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.Text.labelTitle,
+        let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.Text.labelTitle.color,
                           NSAttributedString.Key.font: UIFont.GTAmericaStandardRegularFont(size: 14.0)]
         
         let attributedString = NSMutableAttributedString(string: name, attributes: attributes)

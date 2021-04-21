@@ -41,7 +41,7 @@ final class TermsAndServicesViewController: ViewController {
             newValue.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.backgroundColor = ColorConstants.confirmationPopupButton
+            newValue.backgroundColor = ColorConstants.confirmationPopupButton.color
             newValue.isOpaque = true
         }
     }
@@ -63,7 +63,7 @@ final class TermsAndServicesViewController: ViewController {
     @IBOutlet private weak var privacyPolicyView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 5
-            newValue.backgroundColor = ColorConstants.textViewBackground
+            newValue.backgroundColor = ColorConstants.textViewBackground.color
         }
     }
     
@@ -234,10 +234,10 @@ extension TermsAndServicesViewController: UITextViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if #available(iOS 13, *) {
-            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = ColorConstants.confirmationPopupButton
+            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = ColorConstants.confirmationPopupButton.color
         } else {
             if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
-                verticalIndicator.backgroundColor = ColorConstants.confirmationPopupButton
+                verticalIndicator.backgroundColor = ColorConstants.confirmationPopupButton.color
             }
         }
     }
@@ -250,13 +250,13 @@ private extension UITextView {
         }
         
         backgroundColor = .white
-        layer.borderColor = ColorConstants.profileGrayColor.cgColor
+        layer.borderColor = ColorConstants.profileGrayColor.color.cgColor
         layer.borderWidth = 1
         layer.masksToBounds = true
         layer.cornerRadius = 5
         
         font = UIFont.GTAmericaStandardRegularFont(size: 11)
-        textColor = ColorConstants.lightText
+        textColor = ColorConstants.lightText.color
         
         linkTextAttributes = [
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkText,

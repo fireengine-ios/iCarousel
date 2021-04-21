@@ -30,8 +30,8 @@ final class CarouselPagerReusableViewController: UICollectionReusableView, UIScr
             newValue.currentPage = 0
             newValue.hidesForSinglePage = true
             newValue.isUserInteractionEnabled = false
-            newValue.pageIndicatorTintColor = ColorConstants.profileGrayColor
-            newValue.currentPageIndicatorTintColor = ColorConstants.lightGrayColor
+            newValue.pageIndicatorTintColor = ColorConstants.profileGrayColor.color
+            newValue.currentPageIndicatorTintColor = ColorConstants.lightGrayColor.color
         }
     }
     

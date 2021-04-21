@@ -12,7 +12,7 @@ final class TwoFactorAuthenticationDesigner: NSObject {
 
     @IBOutlet private weak var errorView: ErrorBannerView! {
         willSet {
-            newValue.errorLabelTextColor = ColorConstants.loginErrorLabelText
+            newValue.errorLabelTextColor = ColorConstants.loginErrorLabelText.color
             newValue.errorLabelTextFont = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.errorTextAlignment = .center
             newValue.backgroundColor = .clear
@@ -25,14 +25,14 @@ final class TwoFactorAuthenticationDesigner: NSObject {
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 18)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.textColor = ColorConstants.loginPopupDescription
+            newValue.textColor = ColorConstants.loginPopupDescription.color
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
             newValue.text = TextConstants.a2FAFirstPageDescriptionDetail
         }
@@ -43,13 +43,13 @@ final class TwoFactorAuthenticationDesigner: NSObject {
             newValue.numberOfLines = 0
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
             newValue.text = TextConstants.a2FAFirstPageSendSecurityCode
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
     @IBOutlet weak var topTableViewSeparatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = ColorConstants.profileGrayColor.color
         }
     }
     
@@ -57,7 +57,7 @@ final class TwoFactorAuthenticationDesigner: NSObject {
         willSet {
             newValue.register(nibCell: TwoFactorAuthenticationCell.self)
             newValue.separatorColor = .clear
-            newValue.backgroundColor = ColorConstants.tableBackground
+            newValue.backgroundColor = ColorConstants.tableBackground.color
             newValue.tableFooterView = UIView()
             newValue.tableHeaderView = UIView()
             newValue.separatorStyle = .none
@@ -69,7 +69,7 @@ final class TwoFactorAuthenticationDesigner: NSObject {
             newValue.setTitle(TextConstants.a2FAFirstPageButtonSend, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.backgroundColor = ColorConstants.bottomBarTint
+            newValue.backgroundColor = ColorConstants.bottomBarTint.color
             newValue.isOpaque = true
             newValue.layer.cornerRadius = 5
         }

@@ -17,53 +17,53 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.separator
+            newValue.backgroundColor = ColorConstants.separator.color
         }
     }
 
     @IBOutlet private weak var circleContainerView: UIView! {
         willSet {
             newValue.layer.cornerRadius = newValue.bounds.size.height / 2.0
-            newValue.backgroundColor = ColorConstants.sharedContactCircleBackground
+            newValue.backgroundColor = ColorConstants.sharedContactCircleBackground.color
         }
     }
 
     @IBOutlet private weak var initialsLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 15)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
 
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
-            newValue.textColor = ColorConstants.sharedContactTitleSubtitle
+            newValue.textColor = ColorConstants.sharedContactTitleSubtitle.color
         }
     }
 
     @IBOutlet private weak var emailLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 11)
-            newValue.textColor = ColorConstants.sharedContactTitleSubtitle
+            newValue.textColor = ColorConstants.sharedContactTitleSubtitle.color
         }
     }
 
     @IBOutlet private weak var roleLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 15)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
     }
 
     override func prepareForReuse() {
@@ -75,7 +75,7 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
         arrowImageView.isHidden = true
         stackViewTrailingToSuperviewConstraint.priority = .defaultHigh
         stackViewTrailingToImageViewConstraint.priority = .defaultLow
-        roleLabel.textColor = ColorConstants.Text.labelTitle
+        roleLabel.textColor = ColorConstants.Text.labelTitle.color
     }
 
     func setup(with contact: SharedContact,
@@ -86,7 +86,7 @@ final class PrivateShareSharedContactTableViewCell: UITableViewCell {
         stackViewTrailingToImageViewConstraint.priority = hasPermissionToEditRole ? .defaultHigh : .defaultLow
 
         roleLabel.text = contact.role.infoMenuTitle
-        roleLabel.textColor = hasPermissionToEditRole ? ColorConstants.Text.labelTitle : ColorConstants.sharedContactRoleDisabled
+        roleLabel.textColor = hasPermissionToEditRole ? ColorConstants.Text.labelTitle.color : ColorConstants.sharedContactRoleDisabled.color
         if !contact.initials.isEmpty {
             initialsLabel.text = contact.initials
         }

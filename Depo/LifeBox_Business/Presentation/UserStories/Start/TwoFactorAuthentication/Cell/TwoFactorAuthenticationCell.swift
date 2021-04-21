@@ -21,21 +21,21 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
         willSet {
             newValue.layer.cornerRadius = 5
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = ColorConstants.a2FABorder.cgColor
-            newValue.backgroundColor = ColorConstants.tableBackground
+            newValue.layer.borderColor = ColorConstants.a2FABorder.color.cgColor
+            newValue.backgroundColor = ColorConstants.tableBackground.color
         }
     }
 
     @IBOutlet private weak var methodLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.a2FAMethodLabel
+            newValue.textColor = ColorConstants.a2FAMethodLabel.color
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
         }
     }
 
     @IBOutlet private weak var valueLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 12)
         }
     }
@@ -47,7 +47,7 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
     var delegate: TwoFactorAuthenticationCellDelegate?
     
     override func awakeFromNib() {
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
         selectButton.setImage(deselectedRadioButtonImage, for: .normal)
         selectButton.setImage(selectedRadioButtonImage, for: .selected)
     }

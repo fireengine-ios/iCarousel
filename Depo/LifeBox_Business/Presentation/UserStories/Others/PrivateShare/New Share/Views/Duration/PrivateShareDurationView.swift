@@ -14,7 +14,7 @@ final class PrivateShareDurationView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.PrivateShare.share_duration
             newValue.font = .GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
