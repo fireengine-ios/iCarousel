@@ -21,7 +21,7 @@ enum NavigationBarStyles {
         case .byDefault, .white, .visible:
             return [
                 .font: UIFont.GTAmericaStandardMediumFont(size: 17),
-                .foregroundColor: ColorConstants.Text.labelTitle
+                .foregroundColor: ColorConstants.Text.labelTitle.color
             ]
         case .black, .transparent, .hidden:
             return [
@@ -45,7 +45,7 @@ enum NavigationBarStyles {
         case .byDefault, .white, .visible:
             return [
                 .font: UIFont.GTAmericaStandardRegularFont(size: 19),
-                .foregroundColor: ColorConstants.Text.labelTitle
+                .foregroundColor: ColorConstants.Text.labelTitle.color
             ]
         case .black, .transparent, .hidden:
             return [
@@ -60,12 +60,12 @@ enum NavigationBarStyles {
         case .byDefault, .white, .visible:
             return [
                 .font: UIFont.GTAmericaStandardRegularFont(size: 24),
-                .foregroundColor: ColorConstants.Text.labelTitle
+                .foregroundColor: ColorConstants.Text.labelTitle.color
             ]
         case .black, .transparent, .hidden:
             return [
                 .font: UIFont.GTAmericaStandardMediumFont(size: 24),
-                .foregroundColor: ColorConstants.Text.labelTitle
+                .foregroundColor: ColorConstants.Text.labelTitle.color
             ]
         }
     }

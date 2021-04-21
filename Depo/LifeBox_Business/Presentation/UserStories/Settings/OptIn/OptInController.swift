@@ -139,7 +139,7 @@ final class OptInController: ViewController, NibInit {
         let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
         let range = (text as NSString).range(of: number)
         let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
-                                                  .foregroundColor: ColorConstants.textGrayColor]
+                                                  .foregroundColor: ColorConstants.textGrayColor.color]
         
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes(attr, range: range)

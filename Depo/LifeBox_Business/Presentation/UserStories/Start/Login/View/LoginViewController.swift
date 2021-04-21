@@ -90,7 +90,7 @@ final class LoginViewController: ViewController {
         willSet {
             
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPageEmailFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder])
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder.color])
             newValue.textColor = ColorConstants.Text.textFieldText.color
         }
     }
@@ -98,7 +98,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var passwordTextField: BorderedWithInsetsTextField! {
         willSet {
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPagePasswordFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder])
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder.color])
             newValue.textColor = ColorConstants.Text.textFieldText.color
 
             newValue.rightView = showHideButtonWithSpacingStackView

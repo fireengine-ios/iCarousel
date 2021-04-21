@@ -96,7 +96,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
             let attributedString = NSMutableAttributedString(string: targetText, attributes: attributes)
             let extensionRange = NSMakeRange(0, usageText.count + 3) // 2 = ' '(1) + '/'(2)
             attributedString.addAttributes([
-                NSAttributedString.Key.foregroundColor: ColorConstants.Text.labelTitle,
+                NSAttributedString.Key.foregroundColor: ColorConstants.Text.labelTitle.color,
                 NSAttributedString.Key.font: UIFont.GTAmericaStandardMediumFont(size: 12)
             ], range: extensionRange)
 

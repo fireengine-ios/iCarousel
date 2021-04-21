@@ -72,7 +72,7 @@ final class TermsAndServicesViewController: ViewController {
             newValue.delegate = self
             newValue.backgroundColor = .clear
             newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: ColorConstants.Text.labelTitle,
+                NSAttributedStringKey.foregroundColor.rawValue: ColorConstants.Text.labelTitle.color,
                 NSAttributedStringKey.font.rawValue: UIFont.GTAmericaStandardMediumFont(size: 12)
             ]
         }
@@ -128,7 +128,7 @@ final class TermsAndServicesViewController: ViewController {
         
         let header = NSMutableAttributedString(string: TextConstants.termsAndUseIntroductionCheckbox,
                                                attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 14),
-                                                            .foregroundColor: ColorConstants.darkText])
+                                                            .foregroundColor: ColorConstants.darkText.color])
         generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
     }
     
@@ -136,7 +136,7 @@ final class TermsAndServicesViewController: ViewController {
         
         let header = NSMutableAttributedString(string: TextConstants.privacyPolicy,
                                                attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 12),
-                                                            .foregroundColor: ColorConstants.Text.labelTitle])
+                                                            .foregroundColor: ColorConstants.Text.labelTitle.color])
         
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
         header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions,

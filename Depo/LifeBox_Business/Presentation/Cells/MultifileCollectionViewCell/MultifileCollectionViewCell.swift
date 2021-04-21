@@ -463,7 +463,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         
         let attributedString = NSMutableAttributedString(string: name, attributes: attributes)
         let extensionRange = NSMakeRange(name.count - pathExtensionLength, pathExtensionLength)
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: ColorConstants.multifileCellSubtitleText, range: extensionRange)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: ColorConstants.multifileCellSubtitleText.color, range: extensionRange)
         textField.attributedText = attributedString
         
         let offset = pathExtensionLength > 0 ? name.count - pathExtensionLength - 1 : name.count

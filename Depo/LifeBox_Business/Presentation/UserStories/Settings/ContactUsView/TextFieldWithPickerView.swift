@@ -32,7 +32,7 @@ final class TextFieldWithPickerView: UIView {
         textField.textColor = ColorConstants.Text.textFieldText.color
         textField.attributedPlaceholder = NSAttributedString(
             string: TextConstants.contactUsSubjectBoxName,
-            attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.Text.textFieldPlaceholder]
+            attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.Text.textFieldPlaceholder.color]
         )
         return textField
     }()

@@ -46,7 +46,7 @@ final class SubscriptionsPolicyView: UIView {
         
         let attributedString = NSMutableAttributedString(
             string: TextConstants.packagesPolicyHeader,
-            attributes: [ .foregroundColor: ColorConstants.textGrayColor,
+            attributes: [ .foregroundColor: ColorConstants.textGrayColor.color,
                           .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)]
         )
         
@@ -55,7 +55,7 @@ final class SubscriptionsPolicyView: UIView {
             : TextConstants.packagesPolicyText
         let policyAttributedString = NSMutableAttributedString(
             string: "\n\n" + policyText,
-            attributes: [.foregroundColor: ColorConstants.textGrayColor,
+            attributes: [.foregroundColor: ColorConstants.textGrayColor.color,
                          .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)]
         )
         attributedString.append(policyAttributedString)

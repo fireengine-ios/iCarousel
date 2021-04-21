@@ -28,7 +28,7 @@ final class TopBarCustomSegmentedView: UIView, NibInit {
     
     private var highlightView: UIView = {
        let view = UIView()
-        view.backgroundColor = ColorConstants.multifileCellSubtitleText.color// this one by design ColorConstants.Text.labelTitle.color
+        view.backgroundColor = ColorConstants.multifileCellSubtitleText.color
         view.isHidden = true
         view.isUserInteractionEnabled = false
         return view

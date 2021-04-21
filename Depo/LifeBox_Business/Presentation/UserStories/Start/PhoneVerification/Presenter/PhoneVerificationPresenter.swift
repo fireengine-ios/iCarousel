@@ -151,7 +151,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         
         let messageFullAttributes: [NSAttributedStringKey : Any] = [
             .font : UIFont.TurkcellSaturaMedFont(size: 16),
-            .foregroundColor : ColorConstants.blueGrey,
+            .foregroundColor : ColorConstants.blueGrey.color,
             .paragraphStyle : messageParagraphStyle,
             .kern : 0
         ]

@@ -46,7 +46,7 @@ class ProfileTextEnterView: UIView {
         return newValue
     }()
     
-    var underlineColor = ColorConstants.lightGrayColor.color {
+    var underlineColor: UIColor = ColorConstants.lightGrayColor.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }
