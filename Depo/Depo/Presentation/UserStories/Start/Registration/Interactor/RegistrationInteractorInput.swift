@@ -23,6 +23,8 @@ protocol RegistrationInteractorInput {
                           captchaAnswer: String?)
     
     func checkCaptchaRequerement()
+
+    func loadTermsOfUse()
     
     func signUpUser(_ userInfo: RegistrationUserInfoModel)
     

@@ -31,6 +31,16 @@ final class RegistrationTermsViewController: UIViewController {
         }
     }
 
+    var isTermsOfUseChecked: Bool {
+        get { termsCheckboxView.isChecked }
+        set { termsCheckboxView.isChecked = newValue }
+    }
+
+    var isEtkChecked: Bool {
+        get { etkCheckboxView?.isChecked ?? false }
+        set { etkCheckboxView.isChecked = newValue }
+    }
+
     // MARK: - Views
     @IBOutlet private weak var checkboxesStackView: UIStackView!
     @IBOutlet private weak var privacyPolicyView: UIView! {

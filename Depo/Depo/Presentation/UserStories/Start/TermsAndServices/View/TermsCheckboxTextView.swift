@@ -15,6 +15,11 @@ protocol TermsCheckboxTextViewDelegate: class {
 final class TermsCheckboxTextView: UIView, NibInit {
     
     weak var delegate: TermsCheckboxTextViewDelegate?
+
+    var isChecked: Bool {
+        get { checkbox.isSelected }
+        set { checkbox.isSelected = newValue }
+    }
     
     @IBOutlet private weak var checkbox: UIButton!
     

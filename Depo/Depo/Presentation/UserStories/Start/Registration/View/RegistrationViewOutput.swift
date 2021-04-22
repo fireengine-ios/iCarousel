@@ -11,6 +11,8 @@ import UIKit
 protocol RegistrationViewOutput {
     
     var isSupportFormPresenting: Bool { get set }
+
+    var eulaText: String? { get }
     
     func viewIsReady()
     

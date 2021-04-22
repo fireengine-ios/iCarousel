@@ -12,8 +12,9 @@ class RegistrationPresenter: BasePresenter {
     weak var view: RegistrationViewInput!
     var interactor: RegistrationInteractorInput!
     var router: RegistrationRouterInput!
-    
+
     var isSupportFormPresenting: Bool = false
+    var eulaText: String?
 
     private var confirmAgreements = false
     private var confirmEtk: Bool?
@@ -43,6 +44,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
         startAsyncOperation()
         interactor.checkCaptchaRequerement()
         updateNextButtonStatus()
+        interactor.loadTermsOfUse()
     }
     
     func prepareCaptcha(_ view: CaptchaView) {
@@ -176,6 +178,14 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         }
         view.setupEtk(isShowEtk: isShowEtk)
         updateNextButtonStatus()
+    }
+
+    func finishedLoadingTermsOfUse(eula: String) {
+        eulaText = eula
+    }
+
+    func failedToLoadTermsOfUse(errorString: String) {
+        view.showErrorTitle(withText: errorString)
     }
 }
 

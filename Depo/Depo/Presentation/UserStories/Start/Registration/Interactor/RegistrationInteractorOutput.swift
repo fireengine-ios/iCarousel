@@ -15,6 +15,9 @@ protocol RegistrationInteractorOutput: class {
     func captchaRequired(required: Bool)
     func captchaRequiredFailed()
     func captchaRequiredFailed(with message: String)
+
+    func finishedLoadingTermsOfUse(eula: String)
+    func failedToLoadTermsOfUse(errorString: String)
     
     func signUpFailed(errorResponse: Error)
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?)

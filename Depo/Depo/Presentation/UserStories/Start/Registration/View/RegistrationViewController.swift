@@ -370,13 +370,6 @@ extension RegistrationViewController: RegistrationViewInput {
 
     func setNextButtonEnabled(_ isEnabled: Bool) {
         nextButton.isEnabled = isEnabled
-        if isEnabled {
-            nextButton.backgroundColor = ColorConstants.marineOne
-            nextButton.setTitleColor(.white, for: .normal)
-        } else {
-            nextButton.backgroundColor = ColorConstants.lighterGray
-            nextButton.setTitleColor(ColorConstants.placeholderGrayColor, for: .normal)
-        }
     }
 }
 
@@ -461,21 +454,51 @@ extension RegistrationViewController: UITextFieldDelegate {
 // MARK: - RegistrationTermsViewControllerDelegate
 extension RegistrationViewController: RegistrationTermsViewControllerDelegate {
     func confirmTermsOfUse(_ confirm: Bool) {
-        output.confirmTermsOfUse(confirm)
+        if confirm {
+            openTermsOfUseInfo()
+            termsViewController.isTermsOfUseChecked = false
+        } else {
+            output.confirmTermsOfUse(confirm)
+        }
     }
 
     func confirmEtkTerms(_ confirm: Bool) {
-        output.confirmEtk(confirm)
+        if confirm {
+            openEtkInfo()
+            termsViewController.isEtkChecked = false
+        } else {
+            output.confirmEtk(confirm)
+        }
     }
 
     func termsOfUseTapped() {
+        openTermsOfUseInfo()
     }
 
     func etkTermsTapped() {
+        openEtkInfo()
     }
 
     func privacyPolicyTapped() {
         output.openPrivacyPolicyDescriptionController()
+    }
+
+    private func openTermsOfUseInfo() {
+        guard let eulaText = output.eulaText else { return }
+
+        let infoViewController = RegistrationTermsInfoViewController(text: eulaText) { [weak self] in
+            self?.output.confirmTermsOfUse(true)
+            self?.termsViewController.isTermsOfUseChecked = true
+        }
+        infoViewController.present(over: self)
+    }
+
+    private func openEtkInfo() {
+        let infoViewController = RegistrationTermsInfoViewController(text: TextConstants.etkHTMLText) { [weak self] in
+            self?.output.confirmEtk(true)
+            self?.termsViewController.isEtkChecked = true
+        }
+        infoViewController.present(over: self)
     }
 }
 

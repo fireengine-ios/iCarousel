@@ -98,6 +98,18 @@ class RegistrationInteractor: RegistrationInteractorInput {
 //            self?.output.captchaRequiredFailed()
 //        }
     }
+
+    func loadTermsOfUse() {
+        eulaService.eulaGet { [weak self] response in
+            switch response {
+            case .success(let eulaContent):
+                self?.output.finishedLoadingTermsOfUse(eula: eulaContent.content ?? "")
+            case .failed(let error):
+                self?.output.failedToLoadTermsOfUse(errorString: error.localizedDescription)
+                assertionFailure("Failed move to Terms Description ")
+            }
+        }
+    }
     
     func signUpUser(_ userInfo: RegistrationUserInfoModel) {
         

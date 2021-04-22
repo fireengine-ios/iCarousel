@@ -9,7 +9,7 @@
 import Foundation
 
 protocol RegistrationViewInput: RegistrationViewDelegate, Waiting {
-        
+
     func collectInputedUserInfo()
     
     func showInfoButton(forType type: UserValidationResults)
