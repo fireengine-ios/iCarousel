@@ -39,10 +39,15 @@ struct SharedFileInfo: Codable {
     //        "location": {},
     let permissions: SharedItemPermission?
     var members: [SharedContact]?
+    let groupShare: Bool?
     
     
     var fileType: FileType {
         return FileType(type: contentType, fileName: name)
+    }
+    
+    var isFileSharedForUser: Bool {
+        return groupShare == false && shared == true
     }
 }
 
