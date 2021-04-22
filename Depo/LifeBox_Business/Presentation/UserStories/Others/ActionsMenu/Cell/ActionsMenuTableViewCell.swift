@@ -17,7 +17,7 @@ class ActionsMenuTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        titleLabel.textColor = ColorConstants.textGrayColor
+        titleLabel.textColor = ColorConstants.textGrayColor.color
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
         separatorView.isHidden = !Device.isIpad
     }
@@ -27,9 +27,9 @@ class ActionsMenuTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
         if (selected) {
-            titleLabel.textColor = ColorConstants.selectedBottomBarButtonColor
+            titleLabel.textColor = ColorConstants.selectedBottomBarButtonColor.color
         } else {
-            titleLabel.textColor = ColorConstants.textGrayColor
+            titleLabel.textColor = ColorConstants.textGrayColor.color
         }
     }
     

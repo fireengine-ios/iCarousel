@@ -21,7 +21,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         willSet {
             newValue.textAlignment = .left
             newValue.font = .GTAmericaStandardMediumFont(size: 20)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.text = TextConstants.PrivateShare.page_title
         }
     }
@@ -67,7 +67,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             newValue.setTitle(TextConstants.PrivateShare.start, for: .normal)
             
             newValue.setTitleColor(.white, for: .normal)
-            newValue.setBackgroundColor(ColorConstants.PrivateShare.shareButtonBackgroundEnabled, for: .normal)
+            newValue.setBackgroundColor(ColorConstants.PrivateShare.shareButtonBackgroundEnabled.color, for: .normal)
             
             newValue.titleLabel?.font = .GTAmericaStandardMediumFont(size: 14)
             newValue.isEnabled = false

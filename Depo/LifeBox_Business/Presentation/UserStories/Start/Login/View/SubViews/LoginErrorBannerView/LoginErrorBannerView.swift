@@ -13,7 +13,7 @@ class LoginErrorBannerView: UIView {
     private lazy var messageLabel: UILabel = {
         let newValue = UILabel()
 
-        newValue.textColor = ColorConstants.loginErrorLabelText
+        newValue.textColor = ColorConstants.loginErrorLabelText.color
         newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
         newValue.textAlignment = .center
         newValue.lineBreakMode = .byWordWrapping
@@ -32,7 +32,7 @@ class LoginErrorBannerView: UIView {
     private let underlineLayer: CALayer = {
         let newValue = CALayer()
 
-        newValue.backgroundColor = ColorConstants.profileGrayColor.cgColor
+        newValue.backgroundColor = ColorConstants.profileGrayColor.color.cgColor
 
         return newValue
     }()

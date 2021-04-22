@@ -20,7 +20,7 @@ final class PasswordCell: ProtoInputTextCell {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = ColorConstants.whiteColor
+            titleLabel.textColor = ColorConstants.whiteColor.color
         }
     }
     
@@ -75,9 +75,9 @@ final class PasswordCell: ProtoInputTextCell {
         var placeholder = ""
         if heighlight {
             textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
-            titleLabel.textColor = ColorConstants.whiteColor
+            titleLabel.textColor = ColorConstants.whiteColor.color
         } else {
-            titleLabel.textColor = ColorConstants.yellowColor
+            titleLabel.textColor = ColorConstants.yellowColor.color
             if let savedPlaceholder = placeholderText {
                 if textInput.text?.count == 0 {
                     textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
@@ -86,7 +86,7 @@ final class PasswordCell: ProtoInputTextCell {
             }
         }
         
-        textInput.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
+        textInput.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor.color])
     }
     
     override func changeInfoButtonTo(hidden: Bool) {

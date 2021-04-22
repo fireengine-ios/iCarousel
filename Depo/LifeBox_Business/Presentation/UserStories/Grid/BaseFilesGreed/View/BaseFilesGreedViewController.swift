@@ -74,7 +74,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         refresher = UIRefreshControl()
         collectionView!.alwaysBounceVertical = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        refresher.tintColor = ColorConstants.whiteColor
+        refresher.tintColor = ColorConstants.whiteColor.color
         refresher.addTarget(self, action: #selector(loadData), for: .valueChanged)
         collectionView!.addSubview(refresher)
         
@@ -89,11 +89,11 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
                                                 selector: #selector(onBackButton))
         
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
-        noFilesLabel.textColor = ColorConstants.textGrayColor
+        noFilesLabel.textColor = ColorConstants.textGrayColor.color
         noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
         noFilesTopLabel?.text = TextConstants.folderEmptyText
-        noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor
+        noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor.color
         noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
         
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText, for: .normal)

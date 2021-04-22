@@ -25,7 +25,7 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
         label.font = .GTAmericaStandardMediumFont(size: 12)
-        label.textColor = ColorConstants.Text.labelTitle
+        label.textColor = ColorConstants.Text.labelTitle.color
         label.text = ""
         return label
     }()
@@ -34,7 +34,7 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
         label.font = .GTAmericaStandardRegularFont(size: 14)
-        label.textColor = ColorConstants.Text.labelTitle
+        label.textColor = ColorConstants.Text.labelTitle.color
         label.text = ""
         return label
     }()
@@ -43,7 +43,7 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
         label.font = .GTAmericaStandardRegularFont(size: 12)
-        label.textColor = ColorConstants.Text.labelTitle
+        label.textColor = ColorConstants.Text.labelTitle.color
         label.text = ""
         return label
     }()

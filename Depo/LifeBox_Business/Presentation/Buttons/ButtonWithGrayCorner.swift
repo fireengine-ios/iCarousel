@@ -11,11 +11,11 @@ import UIKit
 class ButtonWithGrayCorner: ButtonWithCorner {
 
     override func getColorForText() -> UIColor {
-        return ColorConstants.textGrayColor
+        return ColorConstants.textGrayColor.color
     }
     
     override func getColorForCorner() -> UIColor {
-        return ColorConstants.textGrayColor
+        return ColorConstants.textGrayColor.color
     }
 
 }

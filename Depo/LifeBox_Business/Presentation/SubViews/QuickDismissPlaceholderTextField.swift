@@ -18,7 +18,7 @@ final class QuickDismissPlaceholderTextField: UnderlineTextField {
         }
     }
     
-    var placeholderColor = ColorConstants.placeholderGrayColor {
+    var placeholderColor: UIColor = ColorConstants.placeholderGrayColor.color {
         didSet {
             changePlaceholderColor()
         }
@@ -50,7 +50,7 @@ final class QuickDismissPlaceholderTextField: UnderlineTextField {
             return
         }
         
-        let color = isFirstResponder ? UIColor.clear : ColorConstants.lightGrayColor
+        let color = isFirstResponder ? UIColor.clear : ColorConstants.lightGrayColor.color
         let attributes: [NSAttributedStringKey: Any] = [.foregroundColor: color]
         let attributedPlaceholder = NSMutableAttributedString(string: placeholder,
                                                               attributes: attributes)

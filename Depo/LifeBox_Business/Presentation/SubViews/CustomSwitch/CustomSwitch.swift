@@ -19,12 +19,12 @@ class CustomSwitch: UISwitch {
         configure()
     }
     func configure() {
-        onTintColor = ColorConstants.switcherGreenColor
-        tintColor = ColorConstants.switcherGrayColor
+        onTintColor = ColorConstants.switcherGreenColor.color
+        tintColor = ColorConstants.switcherGrayColor.color
         // Switch height 32 pixel
         layer.cornerRadius = 16
         layer.borderColor = UIColor.white.cgColor
         layer.borderWidth = 2
-        backgroundColor = ColorConstants.switcherGrayColor
+        backgroundColor = ColorConstants.switcherGrayColor.color
     }
 }

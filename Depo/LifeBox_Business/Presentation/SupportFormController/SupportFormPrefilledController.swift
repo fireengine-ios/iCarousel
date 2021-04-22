@@ -86,7 +86,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         newValue.textField.autocapitalizationType = .none
         
         newValue.textField.isUserInteractionEnabled = false
-        newValue.textField.textColor = ColorConstants.textDisabled
+        newValue.textField.textColor = ColorConstants.textDisabled.color
         return newValue
     }()
     
@@ -98,7 +98,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         newValue.textField.autocorrectionType = .no
         
         newValue.textField.isUserInteractionEnabled = false
-        newValue.textField.textColor = ColorConstants.textDisabled
+        newValue.textField.textColor = ColorConstants.textDisabled.color
         return newValue
     }()
     

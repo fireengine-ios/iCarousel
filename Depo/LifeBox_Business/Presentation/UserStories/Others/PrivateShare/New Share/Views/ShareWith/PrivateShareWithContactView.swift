@@ -44,9 +44,9 @@ final class PrivateShareWithContactView: UIView, NibInit {
     @IBOutlet private weak var userRoleButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named: "arrowDown"), for: .normal)
-            newValue.setTitleColor(ColorConstants.Text.labelTitle, for: .normal)
+            newValue.setTitleColor(ColorConstants.Text.labelTitle.color, for: .normal)
             newValue.titleLabel?.font = .GTAmericaStandardMediumFont(size: 14)
-            newValue.tintColor = ColorConstants.Text.labelTitle
+            newValue.tintColor = ColorConstants.Text.labelTitle.color
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -8
         }
@@ -56,7 +56,7 @@ final class PrivateShareWithContactView: UIView, NibInit {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
         label.font = .GTAmericaStandardMediumFont(size: 12)
-        label.textColor = ColorConstants.Text.labelTitle
+        label.textColor = ColorConstants.Text.labelTitle.color
         label.text = ""
         return label
     }()
@@ -65,7 +65,7 @@ final class PrivateShareWithContactView: UIView, NibInit {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
         label.font = .GTAmericaStandardRegularFont(size: 14)
-        label.textColor = ColorConstants.Text.labelTitle
+        label.textColor = ColorConstants.Text.labelTitle.color
         label.text = ""
         return label
     }()
@@ -74,7 +74,7 @@ final class PrivateShareWithContactView: UIView, NibInit {
         let label = UILabel()
         label.lineBreakMode = .byWordWrapping
         label.font = .GTAmericaStandardRegularFont(size: 12)
-        label.textColor = ColorConstants.Text.labelTitle
+        label.textColor = ColorConstants.Text.labelTitle.color
         label.text = ""
         return label
     }()

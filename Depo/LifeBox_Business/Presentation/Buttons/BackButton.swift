@@ -46,7 +46,7 @@ final class BackButton: UIButton {
     }
     
     private func setup() {
-        buttonColor = ColorConstants.whiteColor
+        buttonColor = ColorConstants.whiteColor.color
         setTitle("  " + TextConstants.backTitle, for: .normal)
         setImage(UIImage(named: "im_backButton"), for: .normal)
         titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)

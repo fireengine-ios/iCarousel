@@ -27,7 +27,7 @@ final class UploadSelectionCell: UICollectionViewCell {
         willSet {
             newValue.text = ""
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
@@ -35,7 +35,7 @@ final class UploadSelectionCell: UICollectionViewCell {
         willSet {
             newValue.text = ""
             newValue.font = .GTAmericaStandardRegularFont(size: 11)
-            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.textColor = ColorConstants.Text.textFieldText.color
         }
     }
     
@@ -55,7 +55,7 @@ final class UploadSelectionCell: UICollectionViewCell {
         
         layer.cornerRadius = 4
         layer.borderWidth = 1
-        layer.borderColor = ColorConstants.separator.cgColor
+        layer.borderColor = ColorConstants.separator.color.cgColor
     }
    
     override func prepareForReuse() {

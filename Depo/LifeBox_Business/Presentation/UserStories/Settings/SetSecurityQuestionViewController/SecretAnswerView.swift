@@ -33,7 +33,7 @@ final class SecretAnswerView: UIView, NibInit {
     
     @IBOutlet private weak var errorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.textOrange
+            newValue.textColor = ColorConstants.textOrange.color
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
             newValue.isHidden = true
             newValue.backgroundColor = .white
@@ -43,7 +43,7 @@ final class SecretAnswerView: UIView, NibInit {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.placeholderGrayColor
+            newValue.backgroundColor = ColorConstants.placeholderGrayColor.color
             newValue.isOpaque = true
         }
     }

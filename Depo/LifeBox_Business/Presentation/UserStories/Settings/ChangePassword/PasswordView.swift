@@ -35,7 +35,7 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet weak var errorLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.textOrange
+            newValue.textColor = ColorConstants.textOrange.color
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
             newValue.isHidden = true
             newValue.backgroundColor = .white
@@ -47,7 +47,7 @@ final class PasswordView: UIView, NibInit {
     @IBOutlet private weak var rulesLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaFont(size: 14)
-            newValue.textColor = ColorConstants.lightText
+            newValue.textColor = ColorConstants.lightText.color
             newValue.numberOfLines = 0
         }
     }
@@ -65,7 +65,7 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.lightText
+            newValue.backgroundColor = ColorConstants.lightText.color
             newValue.isOpaque = true
         }
     }

@@ -18,7 +18,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var contactsTableView: UITableView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.tableBackground
+            newValue.backgroundColor = ColorConstants.tableBackground.color
         }
     }
 

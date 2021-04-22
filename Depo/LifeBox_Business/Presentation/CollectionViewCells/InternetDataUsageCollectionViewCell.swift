@@ -47,7 +47,7 @@ class InternetDataUsageCollectionViewCell: UICollectionViewCell {
             renewDateLabel.text = ""
             renewDateLabel.numberOfLines = 0
             renewDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
-            renewDateLabel.textColor = ColorConstants.textGrayColor
+            renewDateLabel.textColor = ColorConstants.textGrayColor.color
         }
     }
     

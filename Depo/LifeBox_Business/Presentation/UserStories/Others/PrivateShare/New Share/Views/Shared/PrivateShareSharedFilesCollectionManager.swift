@@ -194,7 +194,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private func setupTopRefresher() {
         let refresher = UIRefreshControl()
-        refresher.tintColor = ColorConstants.blueColor
+        refresher.tintColor = ColorConstants.blueColor.color
         refresher.addTarget(self, action: #selector(fullReload), for: .valueChanged)
         collectionView?.refreshControl = refresher
     }

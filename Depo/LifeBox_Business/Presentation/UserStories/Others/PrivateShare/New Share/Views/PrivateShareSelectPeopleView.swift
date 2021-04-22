@@ -28,7 +28,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.PrivateShare.box_name
             newValue.font = .GTAmericaStandardMediumFont(size: 16)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
@@ -37,8 +37,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
             newValue.borderStyle = .roundedRect
             newValue.placeholder = TextConstants.PrivateShare.box_inside
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
-            newValue.tintColor = ColorConstants.Text.textFieldPlaceholder
-            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.tintColor = ColorConstants.Text.textFieldPlaceholder.color
+            newValue.textColor = ColorConstants.Text.textFieldText.color
             newValue.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             newValue.delegate = self
             newValue.returnKeyType = .done
@@ -56,10 +56,10 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     @IBOutlet private weak var userRoleButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.PrivateShare.role_viewer, for: .normal)
-            newValue.setTitleColor(ColorConstants.Text.labelTitle, for: .normal)
+            newValue.setTitleColor(ColorConstants.Text.labelTitle.color, for: .normal)
             newValue.setImage(UIImage(named: "arrowDown"), for: .normal)
             newValue.titleLabel?.font = .GTAmericaStandardMediumFont(size: 14)
-            newValue.tintColor = ColorConstants.Text.labelTitle
+            newValue.tintColor = ColorConstants.Text.labelTitle.color
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -8
             newValue.isHidden = false

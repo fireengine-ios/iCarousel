@@ -41,7 +41,7 @@ final class TermsAndServicesViewController: ViewController {
             newValue.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.backgroundColor = UIColor(named: "loginButtonBackground")
+            newValue.backgroundColor = ColorConstants.confirmationPopupButton.color
             newValue.isOpaque = true
         }
     }
@@ -63,7 +63,7 @@ final class TermsAndServicesViewController: ViewController {
     @IBOutlet private weak var privacyPolicyView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 5
-            newValue.backgroundColor = ColorConstants.textViewBackground
+            newValue.backgroundColor = ColorConstants.textViewBackground.color
         }
     }
     
@@ -72,7 +72,7 @@ final class TermsAndServicesViewController: ViewController {
             newValue.delegate = self
             newValue.backgroundColor = .clear
             newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: ColorConstants.Text.labelTitle,
+                NSAttributedStringKey.foregroundColor.rawValue: ColorConstants.Text.labelTitle.color,
                 NSAttributedStringKey.font.rawValue: UIFont.GTAmericaStandardMediumFont(size: 12)
             ]
         }
@@ -128,7 +128,7 @@ final class TermsAndServicesViewController: ViewController {
         
         let header = NSMutableAttributedString(string: TextConstants.termsAndUseIntroductionCheckbox,
                                                attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 14),
-                                                            .foregroundColor: ColorConstants.darkText])
+                                                            .foregroundColor: ColorConstants.darkText.color])
         generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
     }
     
@@ -136,7 +136,7 @@ final class TermsAndServicesViewController: ViewController {
         
         let header = NSMutableAttributedString(string: TextConstants.privacyPolicy,
                                                attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 12),
-                                                            .foregroundColor: ColorConstants.Text.labelTitle])
+                                                            .foregroundColor: ColorConstants.Text.labelTitle.color])
         
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
         header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions,
@@ -234,10 +234,10 @@ extension TermsAndServicesViewController: UITextViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if #available(iOS 13, *) {
-            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor(named: "loginButtonBackground")
+            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = ColorConstants.confirmationPopupButton.color
         } else {
             if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
-                verticalIndicator.backgroundColor = UIColor(named: "loginButtonBackground")
+                verticalIndicator.backgroundColor = ColorConstants.confirmationPopupButton.color
             }
         }
     }
@@ -250,13 +250,13 @@ private extension UITextView {
         }
         
         backgroundColor = .white
-        layer.borderColor = ColorConstants.profileGrayColor.cgColor
+        layer.borderColor = ColorConstants.profileGrayColor.color.cgColor
         layer.borderWidth = 1
         layer.masksToBounds = true
         layer.cornerRadius = 5
         
         font = UIFont.GTAmericaStandardRegularFont(size: 11)
-        textColor = ColorConstants.lightText
+        textColor = ColorConstants.lightText.color
         
         linkTextAttributes = [
             NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkText,

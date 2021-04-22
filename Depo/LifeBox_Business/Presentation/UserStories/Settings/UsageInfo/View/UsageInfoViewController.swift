@@ -35,7 +35,7 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet private weak var cardDividerView: UIView! {
         didSet {
-            cardDividerView.backgroundColor = ColorConstants.photoCell
+            cardDividerView.backgroundColor = ColorConstants.photoCell.color
         }
     }
 

@@ -43,7 +43,7 @@ final class ProfileTableViewAdapter: NSObject {
         tableView?.tableFooterView = UIView()
         tableView?.register(nibCell: ProfileCell.self)
         tableView?.register(nibCell: SettingsStorageTableViewCell.self)
-        tableView?.backgroundColor = ColorConstants.settingsTableBackground
+        tableView?.backgroundColor = ColorConstants.settingsTableBackground.color
         tableView?.separatorStyle = .none
         tableView?.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
         

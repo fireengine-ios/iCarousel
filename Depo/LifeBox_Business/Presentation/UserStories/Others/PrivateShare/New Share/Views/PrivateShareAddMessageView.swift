@@ -14,14 +14,14 @@ final class PrivateShareAddMessageView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.PrivateShare.add_message
             newValue.font = .GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
     @IBOutlet private weak var textView: PlaceholderTextView! {
         willSet {
-            newValue.placeholderColor = ColorConstants.Text.textFieldPlaceholder
-            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.placeholderColor = ColorConstants.Text.textFieldPlaceholder.color
+            newValue.textColor = ColorConstants.Text.textFieldText.color
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
             newValue.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 40)
             
@@ -32,7 +32,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
             newValue.inputAccessoryView = toolbar
             
             newValue.layer.borderWidth = 1.0
-            newValue.layer.borderColor = ColorConstants.separator.cgColor
+            newValue.layer.borderColor = ColorConstants.separator.color.cgColor
             newValue.layer.cornerRadius = 5
             newValue.clipsToBounds = true
             
@@ -43,7 +43,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
     @IBOutlet private weak var counterLabel: UILabel! {
         willSet {
             newValue.text = "\(messageLengthLimit)"
-            newValue.textColor = ColorConstants.Text.textFieldPlaceholder
+            newValue.textColor = ColorConstants.Text.textFieldPlaceholder.color
             newValue.font = .GTAmericaStandardRegularFont(size: 12)
         }
     }
@@ -64,7 +64,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
         let done = UIBarButtonItem(barButtonSystemItem: .done,
                                    target: self,
                                    action: #selector(hideKeyboard))
-        done.tintColor = ColorConstants.Text.labelTitle
+        done.tintColor = ColorConstants.Text.labelTitle.color
         
         toolbar.setItems([flex, done], animated: false)
         return toolbar

@@ -18,7 +18,7 @@ final class EntityInfoHeader: UIView {
 
     var needsSeparatorViewOnTop: Bool = false {
         didSet {
-            separatorView.backgroundColor = needsSeparatorViewOnTop ? ColorConstants.infoPageSeparator : .clear
+            separatorView.backgroundColor = needsSeparatorViewOnTop ? ColorConstants.separator.color : .clear
         }
     }
 
@@ -26,7 +26,7 @@ final class EntityInfoHeader: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.GTAmericaStandardRegularFont()
-        label.textColor = ColorConstants.infoPageValueText
+        label.textColor = ColorConstants.Text.labelTitle.color
         return label
     }()
 

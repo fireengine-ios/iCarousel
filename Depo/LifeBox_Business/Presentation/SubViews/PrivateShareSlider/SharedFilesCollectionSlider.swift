@@ -36,7 +36,7 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
         willSet {
             newValue.setImage(UIImage(named: "privateSharePeople"), for: .normal)
             newValue.setTitle(TextConstants.privateShareAllFilesSeeAll, for: .normal)
-            newValue.setTitleColor(ColorConstants.textGrayColor, for: .normal)
+            newValue.setTitleColor(ColorConstants.textGrayColor.color, for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaRegFont(size: 18)      
             
             newValue.forceImageToRightSide()

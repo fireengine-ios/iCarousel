@@ -260,7 +260,7 @@ final class BottomActionsBar: UIView {
     }
     
     private func createButton(type: BottomBarActionType) -> UIButton {
-        let tintColor = (style == .opaque) ? ColorConstants.Text.labelTitle : .white
+        let tintColor: UIColor = (style == .opaque) ? ColorConstants.Text.labelTitle.color : .white
         
         let button = UIButton()
         button.addTarget(self, action: #selector(onButtonTap(_:)), for: .touchUpInside)

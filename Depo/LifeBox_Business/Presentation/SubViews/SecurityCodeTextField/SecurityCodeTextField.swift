@@ -46,7 +46,7 @@ final class SecurityCodeTextField: UITextField {
     }
     
     private func addBottomBorder() {
-        bottomLine.backgroundColor = ColorConstants.coolGrey.cgColor
+        bottomLine.backgroundColor = ColorConstants.coolGrey.color.cgColor
         bottomLine.cornerRadius = 2
         
         layer.addSublayer(bottomLine)

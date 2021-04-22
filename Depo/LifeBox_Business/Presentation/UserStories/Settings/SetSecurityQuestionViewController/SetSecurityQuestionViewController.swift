@@ -266,7 +266,7 @@ extension SetSecurityQuestionViewController: SelectQuestionViewControllerDelegat
         securityQuestionView.setQuestion(question: question.text)
         secretAnswerView.answerTextField.text = ""
         secretAnswerView.answerTextField.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
-        secretAnswerView.answerTextField.placeholderColor = ColorConstants.placeholderGrayColor
+        secretAnswerView.answerTextField.placeholderColor = ColorConstants.placeholderGrayColor.color
         checkButtonStatus()
     }
     

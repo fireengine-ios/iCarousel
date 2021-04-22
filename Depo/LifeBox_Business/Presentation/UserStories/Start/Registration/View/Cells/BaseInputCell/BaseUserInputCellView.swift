@@ -21,7 +21,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
     
     weak var infoButtonDelegate: InfoButtonCellProtocol?
     
-    var defaultTitleHightlightColor = ColorConstants.whiteColor {
+    var defaultTitleHightlightColor = ColorConstants.whiteColor.color {
         didSet {
             changeTitleHeighlight(heighlight: isTitleTitleHightlight)
         }
@@ -31,7 +31,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         textInputField.delegate = self
-        titleLabel.textColor = ColorConstants.whiteColor
+        titleLabel.textColor = ColorConstants.whiteColor.color
         changeInfoButtonTo(hidden: true)
     }
     
@@ -39,7 +39,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
         titleLabel.text = title
         placeholderText = text
 //        if textInputField.attributedPlaceholder?.string != text {
-//            textInputField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName: ColorConstants.yellowColor])
+//            textInputField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName: ColorConstants.yellowColor.color])
 //        }
     }
     
@@ -50,7 +50,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
             textInputField.font = UIFont.TurkcellSaturaBolFont(size: 21)
             titleLabel.textColor = defaultTitleHightlightColor
         } else {
-            titleLabel.textColor = ColorConstants.yellowColor
+            titleLabel.textColor = ColorConstants.yellowColor.color
             if let savedPlaceholder = placeholderText {
                 if textInputField.text?.count == 0 {
                     textInputField.font = UIFont.TurkcellSaturaBolFont(size: 16)
@@ -62,7 +62,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
         
         
         textInputField.attributedPlaceholder = NSAttributedString(string: placeholder,
-                                                                  attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
+                                                                  attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor.color])
     }
     
     override func changeInfoButtonTo(hidden: Bool) {

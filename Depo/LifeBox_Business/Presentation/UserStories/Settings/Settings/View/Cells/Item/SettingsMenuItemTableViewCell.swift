@@ -23,12 +23,12 @@ final class SettingsMenuItemTableViewCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.separator
+            newValue.backgroundColor = ColorConstants.separator.color
             newValue.isHidden = true
             newValue.alpha = 0.5
         }

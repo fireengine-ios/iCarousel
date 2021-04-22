@@ -46,7 +46,7 @@ class FolderSelectionCollectionViewCell: BaseCollectionViewCell {
             smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
         }
         
-        backgroundColor = ColorConstants.whiteColor
+        backgroundColor = ColorConstants.whiteColor.color
     }
     
 }

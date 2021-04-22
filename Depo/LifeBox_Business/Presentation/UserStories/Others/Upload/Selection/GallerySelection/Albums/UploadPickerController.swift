@@ -50,7 +50,7 @@ final class UploadPickerController: BaseViewController, NibInit {
     
     private func setupTopRefresher() {
         let refresher = UIRefreshControl()
-        refresher.tintColor = ColorConstants.separator
+        refresher.tintColor = ColorConstants.separator.color
         refresher.addTarget(self, action: #selector(fullReload), for: .valueChanged)
         collectionView?.refreshControl = refresher
     }

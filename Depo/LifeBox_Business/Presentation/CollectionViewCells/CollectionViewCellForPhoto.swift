@@ -37,10 +37,10 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         selectionView.layer.borderWidth = CollectionViewCellForPhoto.borderW
-        selectionView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+        selectionView.layer.borderColor = ColorConstants.darkBlueColor.color.cgColor
         selectionView.alpha = 0
         
-        progressView.tintColor = ColorConstants.blueColor
+        progressView.tintColor = ColorConstants.blueColor.color
         imageView.backgroundColor = UIColor.clear
         
         favoriteIcon.accessibilityLabel = TextConstants.accessibilityFavorite

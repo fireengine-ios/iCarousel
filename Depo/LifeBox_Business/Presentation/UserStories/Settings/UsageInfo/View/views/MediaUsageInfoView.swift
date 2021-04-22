@@ -57,7 +57,7 @@ final class MediaUsageInfoView: UIView {
         
         countLabel.text = ""
         countLabel.textAlignment = .right
-        countLabel.textColor = ColorConstants.textGrayColor
+        countLabel.textColor = ColorConstants.textGrayColor.color
         countLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
     }
     

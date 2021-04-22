@@ -34,7 +34,7 @@ class ButtonWithCorner: InsetsButton {
     }
 
     func getColorForText() -> UIColor {
-        return ColorConstants.whiteColor
+        return ColorConstants.whiteColor.color
     }
     
     func getColorForCorner() -> UIColor {

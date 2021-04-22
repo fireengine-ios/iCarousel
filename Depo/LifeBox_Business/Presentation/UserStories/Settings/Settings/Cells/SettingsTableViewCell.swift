@@ -18,7 +18,7 @@ class SettingsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        titleLabel.textColor = ColorConstants.textGrayColor
+        titleLabel.textColor = ColorConstants.textGrayColor.color
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
     }
 
@@ -27,10 +27,10 @@ class SettingsTableViewCell: UITableViewCell {
         //let bgView = UIView()
         if (selected) {
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            backgroundColor = ColorConstants.selectedCellBlueColor
+            backgroundColor = ColorConstants.selectedCellBlueColor.color
         } else {
             titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            backgroundColor = ColorConstants.whiteColor
+            backgroundColor = ColorConstants.whiteColor.color
         }
         //backgroundView = bgView
         // Configure the view for the selected state

@@ -33,8 +33,8 @@ class WhiteButtonWithRoundedCorner: InsetsButton {
     }
     
     func configurate() {
-        backgroundColor = ColorConstants.whiteColor
-        setTitleColor(ColorConstants.blueColor, for: UIControlState.normal)
+        backgroundColor = ColorConstants.whiteColor.color
+        setTitleColor(ColorConstants.blueColor.color, for: UIControlState.normal)
         titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         layer.masksToBounds = true
 

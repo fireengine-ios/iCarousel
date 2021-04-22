@@ -52,12 +52,12 @@ final class AgreementsSegmentedControl: UIView, NibInit {
     
     private func setButtonLikePressed(_ button: UIButton?) {
         button?.titleLabel?.font =  UIFont.GTAmericaStandardMediumFont(size: 14)
-        button?.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
+        button?.setTitleColor(ColorConstants.Text.labelTitle.color, for: .normal)
     }
     
     private func setButtonLikeNotPressed(_ button: UIButton?) {
         button?.titleLabel?.font =  UIFont.GTAmericaStandardRegularFont(size: 14)
-        button?.setTitleColor(ColorConstants.multifileCellSubtitleText, for: .normal)
+        button?.setTitleColor(ColorConstants.multifileCellSubtitleText.color, for: .normal)
     }
     
     private func configStackView() {
@@ -73,13 +73,13 @@ final class AgreementsSegmentedControl: UIView, NibInit {
                                             y: self.frame.height,
                                             width: selectorWidth,
                                             height: selectorHeight))
-        selectorView.backgroundColor = ColorConstants.confirmationPopupTitle
+        selectorView.backgroundColor = ColorConstants.Text.labelTitle.color
         
         dividerView = UIView(frame: CGRect(x: 0,
                                            y: self.frame.height + selectorHeight,
                                            width: self.frame.width,
                                            height: 0.7))
-        dividerView.backgroundColor = ColorConstants.separator
+        dividerView.backgroundColor = ColorConstants.separator.color
         
         addSubview(selectorView)
         addSubview(dividerView)

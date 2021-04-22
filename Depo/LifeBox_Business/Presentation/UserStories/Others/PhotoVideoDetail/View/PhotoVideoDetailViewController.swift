@@ -233,7 +233,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func setupView() {
         switch initinalBarStyle {
         case .white:
-            view.backgroundColor = ColorConstants.tableBackground
+            view.backgroundColor = ColorConstants.tableBackground.color
         default:
             break
         }

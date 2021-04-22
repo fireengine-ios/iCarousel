@@ -15,7 +15,7 @@ final class PasscodeViewImp: UIView, FromNib {
     @IBOutlet private weak var passcodeOutputLabel: UILabel! {
         didSet {
             passcodeOutputLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            passcodeOutputLabel.textColor = ColorConstants.textGrayColor
+            passcodeOutputLabel.textColor = ColorConstants.textGrayColor.color
         }
     }
     

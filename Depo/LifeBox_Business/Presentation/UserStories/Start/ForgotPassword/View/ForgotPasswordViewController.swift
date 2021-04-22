@@ -80,7 +80,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     private func setupSubTitle() {
         subTitle.text = TextConstants.resetPasswordSubTitle
         
-        subTitle.textColor = ColorConstants.removeConnection
+        subTitle.textColor = ColorConstants.removeConnection.color
         
         if Device.isIpad {
             subTitle.font = UIFont.TurkcellSaturaRegFont(size: 24)
@@ -132,7 +132,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         }
         
         emailTextField.attributedPlaceholder = NSAttributedString(string: TextConstants.resetPasswordEmailPlaceholder,
-                                                               attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.textDisabled,
+                                                                  attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.textDisabled.color,
                                                                             NSAttributedString.Key.font: font])
         
         emailTextField.textColor = UIColor.black
@@ -143,7 +143,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     
     private func setupButton() {
         sendPasswordButton.setTitle(TextConstants.resetPasswordSendPassword, for: UIControlState.normal)
-        sendPasswordButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
+        sendPasswordButton.setTitleColor(ColorConstants.whiteColor.color, for: UIControlState.normal)
         sendPasswordButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
         sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
         sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)

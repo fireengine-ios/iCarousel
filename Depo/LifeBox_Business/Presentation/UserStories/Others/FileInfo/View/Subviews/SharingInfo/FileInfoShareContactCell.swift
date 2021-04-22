@@ -39,7 +39,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
     @IBOutlet private weak var roleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .center
             newValue.adjustsFontSizeToFitWidth = true
@@ -56,12 +56,12 @@ final class FileInfoShareContactCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        contentView.backgroundColor = ColorConstants.tableBackground
+        contentView.backgroundColor = ColorConstants.tableBackground.color
     }
     
     override func prepareForReuse() {
@@ -106,9 +106,9 @@ final class FileInfoShareContactCell: UICollectionViewCell {
                 button.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             }
             
-            button.setTitleColor(ColorConstants.infoPagePlusButtonText, for: .normal)
+            button.setTitleColor(ColorConstants.Text.labelTitle.color, for: .normal)
             circleView.layer.borderWidth = 1
-            circleView.layer.borderColor = ColorConstants.infoPagePlusButtonText.cgColor
+            circleView.layer.borderColor = ColorConstants.Text.labelTitle.color.cgColor
             
         case .plusButton:
             button.setImage(UIImage(named: "info_contact_add"), for: .normal)
@@ -133,9 +133,9 @@ extension FileInfoShareContactCell {
     private func circleBackgroundColor(for index: Int) -> UIColor? {
         switch index {
         case 0, 3:
-            return ColorConstants.infoPageContactDarkBackground
+            return ColorConstants.infoPageContactDarkBackground.color
         case 1, 2:
-            return ColorConstants.infoPageContactLigherBackground
+            return ColorConstants.infoPageContactLigherBackground.color
         default:
             return nil
         }
@@ -144,9 +144,9 @@ extension FileInfoShareContactCell {
     private func onCircleTextColor(for index: Int) -> UIColor? {
         switch index {
         case 0, 3:
-            return ColorConstants.infoPageDarkerNickname
+            return ColorConstants.Text.labelTitle.color
         case 1, 2:
-            return ColorConstants.infoPageLigherNickname
+            return ColorConstants.infoPageLigherNickname.color
         default:
             return nil
         }

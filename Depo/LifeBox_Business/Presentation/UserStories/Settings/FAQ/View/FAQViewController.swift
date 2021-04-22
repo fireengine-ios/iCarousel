@@ -28,7 +28,7 @@ final class FAQViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         changeLargeTitle(prefersLargeTitles: false, barStyle: .white)
-        view.backgroundColor = ColorConstants.tableBackground
+        view.backgroundColor = ColorConstants.tableBackground.color
         setView()
         setWebView()
         loadFAQ()
@@ -52,7 +52,7 @@ final class FAQViewController: BaseViewController {
     //MARK: - Setup
     
     private func setView() {
-        view.backgroundColor = ColorConstants.tableBackground
+        view.backgroundColor = ColorConstants.tableBackground.color
     }
     
     private func setWebView() {

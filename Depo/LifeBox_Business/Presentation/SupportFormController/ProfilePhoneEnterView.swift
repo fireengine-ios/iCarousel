@@ -28,7 +28,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var subtitleLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.textOrange
+            newValue.textColor = ColorConstants.textOrange.color
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
@@ -59,7 +59,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.rightView = imageView
             newValue.rightViewMode = .always
             
-            newValue.underlineColor = ColorConstants.profileGrayColor
+            newValue.underlineColor = ColorConstants.profileGrayColor.color
             
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
@@ -111,7 +111,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
             newValue.keyboardType = .numberPad
-            newValue.underlineColor = ColorConstants.profileGrayColor
+            newValue.underlineColor = ColorConstants.profileGrayColor.color
             
             newValue.addToolBarWithButton(title: TextConstants.nextTitle,
                                           target: self,
@@ -132,8 +132,8 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         set {
             codeTextField.isUserInteractionEnabled = newValue
             numberTextField.isUserInteractionEnabled = newValue
-            codeTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
-            numberTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
+            codeTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled.color
+            numberTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled.color
         }
     }
     
