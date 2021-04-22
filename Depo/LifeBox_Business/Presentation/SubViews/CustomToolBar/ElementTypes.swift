@@ -179,7 +179,7 @@ enum ElementTypes {
             }
             
             // TODO: - Add / Delete permission check  //grantedPermissions.contains(.writeAcl)
-            if item.isShared {
+            if item.isFileSharedWithUser {
                 if item.privateShareType == .withMe {
                     types.append(.leaveSharing)
                 } else if item.privateShareType == .byMe {
