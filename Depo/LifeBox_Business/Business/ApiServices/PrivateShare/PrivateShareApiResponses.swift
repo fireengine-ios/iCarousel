@@ -46,7 +46,7 @@ struct SharedFileInfo: Codable {
         return FileType(type: contentType, fileName: name)
     }
     
-    var isFileSharedForUser: Bool {
+    var isFileSharedWithUser: Bool {
         return groupShare == false && shared == true
     }
 }
