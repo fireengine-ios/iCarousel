@@ -38,6 +38,8 @@ class BaseDataSourceItem: NSObject {
     
     var isShared = false
     
+    var isFileSharedWithUser = false
+    
     var privateShareType: PrivateShareType = .sharedArea
     
     func getCellReUseID() -> String {

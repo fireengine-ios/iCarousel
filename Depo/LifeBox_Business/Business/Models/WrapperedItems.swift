@@ -929,8 +929,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         childCount = privateShareFileInfo.childCount
         privateSharePermission = privateShareFileInfo.permissions
+        isShared = privateShareFileInfo.shared ?? false
+        isFileSharedWithUser = privateShareFileInfo.isFileSharedWithUser
         privateShareType = shareType
-        isShared = privateShareFileInfo.isFileSharedWithUser
     }
     
     func copyFileData(from item: WrapData) {
