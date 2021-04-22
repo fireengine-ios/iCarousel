@@ -18,7 +18,7 @@ final class TermsCheckboxTextView: UIView, NibInit {
     
     @IBOutlet private weak var checkbox: UIButton!
     
-    @IBOutlet private weak var titleView: UITextView! {
+    @IBOutlet weak var titleView: UITextView! {
         willSet {
             newValue.linkTextAttributes = [
                 NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,

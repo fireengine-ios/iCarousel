@@ -25,4 +25,8 @@ protocol RegistrationViewInput: RegistrationViewDelegate, Waiting {
     func showFAQView()
     
     func showSupportView()
+
+    func setupEtk(isShowEtk: Bool)
+
+    func setNextButtonEnabled(_ isEnabled: Bool)
 }

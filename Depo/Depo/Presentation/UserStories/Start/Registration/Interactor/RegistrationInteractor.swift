@@ -13,14 +13,15 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var captchaService = CaptchaService()
-    
+    private lazy var eulaService = EulaService()
+
     var captchaRequired = false
     private var retriesCount = 0 {
         didSet {
             showRelatedHelperView()
         }
     }
-    
+
     func trackScreen() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SignupScreen())
         analyticsService.logScreen(screen: .signUpScreen)
@@ -29,6 +30,17 @@ class RegistrationInteractor: RegistrationInteractorInput {
     
     func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol) {
         analyticsService.trackSupportEvent(screenType: .signup, subject: type, isSupportForm: false)
+    }
+
+    func checkEtkAndGlobalPermissions(code: String, phone: String) {
+        // We're only checking for ETK, global permission is ignored for now.
+        if code == "+90" && phone.count == 10 {
+            checkEtk(for: code + phone) { result in
+                self.output.setupEtk(isShowEtk: result)
+            }
+        } else {
+            self.output.setupEtk(isShowEtk: false)
+        }
     }
     
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
@@ -161,6 +173,19 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 output?.showSupportView()
             }
             #endif
+        }
+    }
+
+    private func checkEtk(for phoneNumber: String?, completion: BoolHandler?) {
+        eulaService.getEtkAuth(for: phoneNumber) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let isShowEtk):
+                    completion?(isShowEtk)
+                case .failed(_):
+                    completion?(false)
+                }
+            }
         }
     }
 }

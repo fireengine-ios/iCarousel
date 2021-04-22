@@ -26,8 +26,7 @@ final class RegistrationViewController: ViewController {
     @IBOutlet private weak var nextButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.registrationNextButtonText, for: .normal)
-            newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.backgroundColor = UIColor.lrTealish
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 20)
             newValue.isOpaque = true
         }
     }
@@ -82,6 +81,7 @@ final class RegistrationViewController: ViewController {
     var output: RegistrationViewOutput!
     private let updateScrollDelay: DispatchTime = .now() + 0.3
     private var isPasswordsNotMatchError = false
+    private let termsViewController = RegistrationTermsViewController()
     
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {
@@ -134,7 +134,7 @@ final class RegistrationViewController: ViewController {
             newValue.isHidden = true
         }
     }
-    
+
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,6 +171,8 @@ final class RegistrationViewController: ViewController {
     //MARK: Utility Methods (private)
     private func setup() {
         setupStackView()
+        setupTermsViewController()
+        observePhoneInputChanges()
         configureKeyboard()
     }
     
@@ -180,7 +182,7 @@ final class RegistrationViewController: ViewController {
         setNavigationTitle(title: TextConstants.registerTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
-    
+
     private func setupStackView() {
         prepareFields()
 
@@ -200,6 +202,20 @@ final class RegistrationViewController: ViewController {
         captchaView.captchaAnswerTextField.delegate = self
         
         phoneEnterView.responderOnNext = emailEnterView.textField
+    }
+
+    private func setupTermsViewController() {
+        termsViewController.delegate = self
+        addChildViewController(termsViewController)
+        stackView.addArrangedSubview(termsViewController.view)
+        termsViewController.didMove(toParentViewController: self)
+    }
+
+    private func observePhoneInputChanges() {
+        phoneEnterView.numberTextField.addTarget(self, action: #selector(phoneInputChanged), for: .editingChanged)
+        phoneEnterView.onCodeChanged = { [weak self] in
+            self?.phoneInputChanged()
+        }
     }
     
     private func configureKeyboard() {
@@ -277,6 +293,11 @@ final class RegistrationViewController: ViewController {
     @objc private func handleFaqButtonTap() {
         output.openFaqSupport()
     }
+
+    @objc private func phoneInputChanged() {
+        output?.phoneNumberChanged(phoneEnterView.codeTextField.text ?? "",
+                                   phoneEnterView.numberTextField.text ?? "")
+    }
 }
 
 extension RegistrationViewController: RegistrationViewInput {
@@ -340,6 +361,21 @@ extension RegistrationViewController: RegistrationViewInput {
         
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             self.bannerView.isHidden = false
+        }
+    }
+
+    func setupEtk(isShowEtk: Bool) {
+        termsViewController.setupEtk(isShowEtk: isShowEtk)
+    }
+
+    func setNextButtonEnabled(_ isEnabled: Bool) {
+        nextButton.isEnabled = isEnabled
+        if isEnabled {
+            nextButton.backgroundColor = ColorConstants.marineOne
+            nextButton.setTitleColor(.white, for: .normal)
+        } else {
+            nextButton.backgroundColor = ColorConstants.lighterGray
+            nextButton.setTitleColor(ColorConstants.placeholderGrayColor, for: .normal)
         }
     }
 }
@@ -422,7 +458,28 @@ extension RegistrationViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - RegistrationTermsViewControllerDelegate
+extension RegistrationViewController: RegistrationTermsViewControllerDelegate {
+    func confirmTermsOfUse(_ confirm: Bool) {
+        output.confirmTermsOfUse(confirm)
+    }
 
+    func confirmEtkTerms(_ confirm: Bool) {
+        output.confirmEtk(confirm)
+    }
+
+    func termsOfUseTapped() {
+    }
+
+    func etkTermsTapped() {
+    }
+
+    func privacyPolicyTapped() {
+        output.openPrivacyPolicyDescriptionController()
+    }
+}
+
+// MARK: - SupportFormBannerViewDelegate
 extension RegistrationViewController: SupportFormBannerViewDelegate {
     func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView) {
         if bannerView.type == .support {

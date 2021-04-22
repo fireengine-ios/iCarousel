@@ -27,4 +27,13 @@ protocol RegistrationViewOutput {
     func openFaqSupport()
     
     func openSubjectDetails(type: SupportFormSubjectTypeProtocol)
+
+    /// Called on phone input text change event
+    func phoneNumberChanged(_ code: String, _ phone: String)
+
+    func confirmTermsOfUse(_ confirm: Bool)
+
+    func confirmEtk(_ etk: Bool)
+
+    func openPrivacyPolicyDescriptionController()
 }

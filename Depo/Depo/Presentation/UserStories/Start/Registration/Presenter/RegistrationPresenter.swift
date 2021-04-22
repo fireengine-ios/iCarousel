@@ -14,10 +14,25 @@ class RegistrationPresenter: BasePresenter {
     var router: RegistrationRouterInput!
     
     var isSupportFormPresenting: Bool = false
+
+    private var confirmAgreements = false
+    private var confirmEtk: Bool?
     
     // MARK: BasePresenter
     override func outputView() -> Waiting? {
         return view
+    }
+
+    private var allAgreementsConfirmed: Bool {
+        if let confirmEtk = confirmEtk {
+            return confirmAgreements && confirmEtk
+        }
+
+        return confirmAgreements
+    }
+
+    private func updateNextButtonStatus() {
+        view?.setNextButtonEnabled(allAgreementsConfirmed)
     }
 }
 
@@ -27,6 +42,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
         interactor.trackScreen()
         startAsyncOperation()
         interactor.checkCaptchaRequerement()
+        updateNextButtonStatus()
     }
     
     func prepareCaptcha(_ view: CaptchaView) {
@@ -59,13 +75,35 @@ extension RegistrationPresenter: RegistrationViewOutput {
         isSupportFormPresenting = true
         router.goToSubjectDetailsPage(type: type)
     }
+
+    func phoneNumberChanged(_ code: String, _ phone: String) {
+        interactor.checkEtkAndGlobalPermissions(code: code, phone: phone)
+    }
+
+    func confirmTermsOfUse(_ confirm: Bool) {
+        confirmAgreements = confirm
+        updateNextButtonStatus()
+    }
+
+    func confirmEtk(_ etk: Bool) {
+        confirmEtk = etk
+        updateNextButtonStatus()
+    }
+
+    func openPrivacyPolicyDescriptionController() {
+        router.goToPrivacyPolicyDescriptionController()
+    }
 }
 
 // MARK: - RegistrationInteractorOutput
 extension RegistrationPresenter: RegistrationInteractorOutput {
     func userValid(_ userInfo: RegistrationUserInfoModel) {
-        startAsyncOperationDisableScreen()
-        interactor.signUpUser(userInfo)
+        if allAgreementsConfirmed {
+            startAsyncOperationDisableScreen()
+            interactor.signUpUser(userInfo)
+        } else {
+            view?.showErrorTitle(withText: TextConstants.termsAndUseCheckboxErrorText)
+        }
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
@@ -100,10 +138,10 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?) {
         completeAsyncOperationEnableScreen()
-        router.termsAndServices(with: view, email: signUpUserInfo?.mail ?? "",
-                                phoneNumber: signUpUserInfo?.phone ?? "",
-                                signUpResponse: signUpResponse,
-                                userInfo: signUpUserInfo)
+//        router.termsAndServices(with: view, email: signUpUserInfo?.mail ?? "",
+//                                phoneNumber: signUpUserInfo?.phone ?? "",
+//                                signUpResponse: signUpResponse,
+//                                userInfo: signUpUserInfo)
     }
     
     func captchaRequired(required: Bool) {
@@ -128,6 +166,16 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     
     func showFAQView() {
         view.showFAQView()
+    }
+
+    func setupEtk(isShowEtk: Bool) {
+        if isShowEtk {
+            confirmEtk = false
+        } else {
+            confirmEtk = nil
+        }
+        view.setupEtk(isShowEtk: isShowEtk)
+        updateNextButtonStatus()
     }
 }
 

@@ -11,6 +11,8 @@ import Foundation
 protocol RegistrationInteractorInput {
     
     var captchaRequired: Bool { get }
+
+    func checkEtkAndGlobalPermissions(code: String, phone: String)
     
     func validateUserInfo(email: String,
                           code: String,

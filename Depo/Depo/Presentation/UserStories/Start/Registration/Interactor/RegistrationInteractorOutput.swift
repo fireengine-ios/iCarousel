@@ -7,7 +7,8 @@
 //
 
 protocol RegistrationInteractorOutput: class {
-    
+
+    func setupEtk(isShowEtk: Bool)
     func userValid(_ userInfo: RegistrationUserInfoModel)
     func userInvalid(withResult result: [UserValidationResults])
     
