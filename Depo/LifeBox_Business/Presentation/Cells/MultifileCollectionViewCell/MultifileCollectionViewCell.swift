@@ -178,7 +178,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             newValue.tintColor = .white
             newValue.setTitle(TextConstants.actionInfo, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 10)
-            newValue.setImage(UIImage(named: "info"), for: .normal)
+            newValue.setImage(UIImage(named: "infoButton"), for: .normal)
             
         }
     }
@@ -188,7 +188,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             newValue.tintColor = .white
             newValue.setTitle(TextConstants.actionDelete, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 10)
-            newValue.setImage(UIImage(named: "trash"), for: .normal)
+            newValue.setImage(UIImage(named: "trashButton"), for: .normal)
         }
     }
     

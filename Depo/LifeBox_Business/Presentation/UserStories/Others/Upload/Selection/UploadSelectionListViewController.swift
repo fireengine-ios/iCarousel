@@ -42,7 +42,7 @@ final class UploadSelectionListViewController: BaseViewController, NibInit {
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.setTitle("", for: .normal)
-            newValue.setImage(UIImage(named: "close"), for: .normal)
+            newValue.setImage(UIImage(named: "closeButton"), for: .normal)
         }
     }
     

@@ -159,7 +159,7 @@ enum CustomBackButtonType {
         case .regular:
             return UIImage(named: "blackBackButton")
         case .cross:
-            return UIImage(named: "close")
+            return UIImage(named: "closeButton")
         }
     }
 }

@@ -12,13 +12,13 @@ final class MenuItemsFabric {
     static func generateMenuForManagingRole(currentState: ElementTypes,
                                             actionHandler: @escaping ValueHandler<ElementTypes>) -> UIMenu {
         let editorItem = UIAction(title: TextConstants.accessPageRoleEditor,
-                                  image: currentState == .editorRole ? UIImage(named: "selected-checkmark") : nil,
+                                  image: currentState == .editorRole ? UIImage(named: "selectedCheckmark") : nil,
                                   attributes: []) { _  in
             actionHandler(.editorRole)
         }
 
         let viewerItem = UIAction(title: TextConstants.accessPageRoleViewer,
-                                  image: currentState == .viewerRole ? UIImage(named: "selected-checkmark") : nil,
+                                  image: currentState == .viewerRole ? UIImage(named: "selectedCheckmark") : nil,
                                   attributes: []) { _  in
             actionHandler(.viewerRole)
         }
@@ -191,29 +191,29 @@ extension ElementTypes {
         var imageName: String? = nil
         switch self {
         case .info:
-            imageName = "info"
+            imageName = "infoButton"
         case .select:
-            imageName = "select"
+            imageName = "selectButton"
         case .moveToTrash, .moveToTrashShared, .deletePermanently:
-            imageName = "trash"
+            imageName = "trashButton"
         case .copy:
-            imageName = "copy-link"
+            imageName = "copyLinkButton"
         case .endSharing, .leaveSharing:
-            imageName = "end-sharing"
+            imageName = "endSharingButton"
         case .move:
-            imageName = "move"
+            imageName = "turnDownRightArrow"
         case .share:
-            imageName = "share-copy"
+            imageName = "turnUpRightArrow"
         case .privateShare:
-            imageName = "share-private"
+            imageName = "shareButton"
         case .addToFavorites, .removeFromFavorites:
             imageName = "action_favorite"
         case .download, .downloadDocument:
-            imageName = "download"
+            imageName = "downloadButton"
         case .restore:
-            imageName = "action_restore"
+            imageName = "restoreButton"
         case .rename:
-            imageName = "rename"
+            imageName = "renameButton"
         default:
             return nil
         }
