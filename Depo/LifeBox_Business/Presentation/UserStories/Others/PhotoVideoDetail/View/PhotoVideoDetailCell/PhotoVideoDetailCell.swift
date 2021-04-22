@@ -340,8 +340,10 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
     }
     
     private func showPlaceholder() {
-        placeholderImageView.image = WrapperedItemUtil.previewPlaceholderImage(fileType: fileType)
-        placeholderImageView.isHidden = false
+        if playerView.artworkImageViewIsEmpty {
+            placeholderImageView.image = WrapperedItemUtil.previewPlaceholderImage(fileType: fileType)
+            placeholderImageView.isHidden = false
+        }
     }
     
     private func hidePreviewViews() {
