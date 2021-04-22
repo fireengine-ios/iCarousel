@@ -10,7 +10,11 @@ import Foundation
 import UIKit
 
 final class SameColorsChecker {
-    let allColors: [String: CGColor] = [:]
+    private lazy var allColors: [String: CGColor] = {
+        var allColors: [String: CGColor] = [:]
+        ColorConstants.allCases.forEach { allColors[$0.rawValue] = $0.color.cgColor }
+        return allColors
+    }()
 
     func checkColorDuplicates() -> [String: [String]] {
         var duplicates: [String: [String]] = [:]

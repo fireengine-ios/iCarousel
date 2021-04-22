@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum ColorConstants: CaseIterable {
+enum ColorConstants: String, CaseIterable {
     case a2FABorder
     case backgroundViewColor
     case buttonTintColor
