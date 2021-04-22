@@ -38,7 +38,17 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
     }
     
-    private lazy var webView = WKWebView(frame: .zero)
+    private lazy var webView: WKWebView = {
+        let view = WKWebView(frame: .zero)
+        view.scrollView.contentInsetAdjustmentBehavior = .never
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowRadius = 8
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = .zero
+        return view
+    }()
+    
+    private let webViewTopInset: CGFloat = 60 + (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0)
     
     weak var delegate: PhotoVideoDetailCellDelegate?
     
@@ -202,10 +212,9 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }
     
     private func updateWebViewFrame() {
-        let safeAreaTop = UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0
         let safeAreaBottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-        let originUnderSafe = CGPoint(x: contentView.frame.origin.x, y: contentView.frame.origin.y + safeAreaTop)
-        let sizeWithoutSafe = CGSize(width: contentView.frame.width, height: contentView.frame.height - safeAreaTop - safeAreaBottom)
+        let originUnderSafe = CGPoint(x: contentView.frame.origin.x, y: contentView.frame.origin.y + webViewTopInset)
+        let sizeWithoutSafe = CGSize(width: contentView.frame.width, height: contentView.frame.height - webViewTopInset - safeAreaBottom)
         webView.frame = CGRect(origin: originUnderSafe, size: sizeWithoutSafe)
     }
     
