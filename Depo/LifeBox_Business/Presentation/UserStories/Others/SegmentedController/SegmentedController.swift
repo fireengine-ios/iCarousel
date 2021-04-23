@@ -75,18 +75,6 @@ class SegmentedController: BaseViewController, NibInit {
     private(set) var selectedIndex = 0
     var startIndex = 0
     
-    //    weak var delegate: SegmentedControllerDelegate?
-    
-    //    private lazy var cancelSelectionButton = UIBarButtonItem(
-    //        title: TextConstants.cancelSelectionButtonTitle,
-    //        font: .TurkcellSaturaDemFont(size: 19.0),
-    //        target: self,
-    //        selector: #selector(onCancelSelectionButton))
-    
-    //    @objc private func onCancelSelectionButton() {
-    //        delegate?.segmentedControllerEndEditMode()
-    //    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="TurkcellSaturaBol.ttf">
-            <string>TurkcellSaturaBol</string>
+        <array key="GT-America-LC-Standard-Bold.otf">
+            <string>GTAmericaLC-Bd</string>
         </array>
-        <array key="TurkcellSaturaIta.ttf">
-            <string>TurkcellSaturaIta</string>
+        <array key="GT-America-LC-Standard-Regular-Italic.otf">
+            <string>GTAmericaLC-RgIt</string>
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptchaViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaptchaViewController" customModule="lifeBox_Business" customModuleProvider="target">
             <connections>
                 <outlet property="activityIndicator" destination="nHl-Sw-k61" id="CvD-Ne-MCC"/>
                 <outlet property="captchaPlaceholderLabel" destination="v6K-dc-32x" id="b9a-87-aD1"/>
@@ -49,7 +47,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type the text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="v6K-dc-32x">
                             <rect key="frame" x="30" y="80" width="217" height="23.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="16"/>
+                            <fontDescription key="fontDescription" name="GTAmericaLC-Bd" family="GT America LC" pointSize="16"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -65,7 +63,7 @@
                                 <action selector="captchaRefresh:" destination="-1" eventType="touchUpInside" id="PJn-Sw-fvU"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duo-dp-Lhi">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Duo-dp-Lhi">
                             <rect key="frame" x="221" y="108.5" width="26" height="26"/>
                             <accessibility key="accessibilityConfiguration">
                                 <accessibilityTraits key="traits" playsSound="YES"/>
@@ -102,7 +100,7 @@
                                 <constraint firstAttribute="height" constant="20" id="nlI-qo-EsX"/>
                             </constraints>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" name="TurkcellSaturaIta" family="TurkcellSaturaIta" pointSize="18"/>
+                            <fontDescription key="fontDescription" name="GTAmericaLC-RgIt" family="GT America LC" pointSize="18"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                     </subviews>

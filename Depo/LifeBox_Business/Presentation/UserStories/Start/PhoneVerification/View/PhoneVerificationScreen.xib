@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="TurkcellSaturaBol.ttf">
-            <string>TurkcellSaturaBol</string>
+        <array key="GT-America-LC-Standard-Bold.otf">
+            <string>GTAmericaLC-Bd</string>
         </array>
-        <array key="TurkcellSaturaReg.ttf">
-            <string>TurkcellSaturaReg</string>
+        <array key="GT-America-LC-Standard-Regular.otf">
+            <string>GTAmericaLC-Rg</string>
         </array>
     </customFonts>
     <objects>
@@ -46,27 +46,27 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-Ei-3RR">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="354.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="357.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="LGv-1U-f4g">
-                                    <rect key="frame" x="40" y="65" width="334" height="59"/>
+                                    <rect key="frame" x="40" y="65" width="334" height="62"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Your Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0v4-fr-f41">
-                                            <rect key="frame" x="55.5" y="0.0" width="223.5" height="22.5"/>
-                                            <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="19"/>
+                                            <rect key="frame" x="48.5" y="0.0" width="237" height="24"/>
+                                            <fontDescription key="fontDescription" name="GTAmericaLC-Bd" family="GT America LC" pointSize="19"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the verification code" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ccz-va-Sqj">
-                                            <rect key="frame" x="56" y="36.5" width="222.5" height="22.5"/>
-                                            <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="19"/>
+                                            <rect key="frame" x="56.5" y="38" width="221" height="24"/>
+                                            <fontDescription key="fontDescription" name="GTAmericaLC-Rg" family="GT America LC" pointSize="19"/>
                                             <color key="textColor" red="1" green="0.94117647059999998" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-An-V0t">
-                                    <rect key="frame" x="20" y="194.5" width="374" height="57.5"/>
+                                    <rect key="frame" x="20" y="197.5" width="374" height="57.5"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CWG-cv-wHj" customClass="OneSignSquareTextField" customModule="lifeBox_Business" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="57.5" height="57.5"/>
@@ -123,24 +123,24 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGS-6f-YoM" userLabel="barrier view">
-                                    <rect key="frame" x="20" y="194.5" width="374" height="57.5"/>
+                                    <rect key="frame" x="20" y="197.5" width="374" height="57.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFw-4W-fGh">
-                                    <rect key="frame" x="38" y="318" width="338" height="20.5"/>
+                                    <rect key="frame" x="38" y="321" width="338" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sew-Ff-K7h" customClass="SmartTimerProgressView" customModule="lifeBox_Business" customModuleProvider="target">
-                                    <rect key="frame" x="20" y="276" width="374" height="22"/>
+                                    <rect key="frame" x="20" y="279" width="374" height="22"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="Bb9-OF-UaQ"/>
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rm-Ki-hyt">
-                                    <rect key="frame" x="20" y="154" width="374" height="20.5"/>
+                                    <rect key="frame" x="20" y="157" width="374" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
