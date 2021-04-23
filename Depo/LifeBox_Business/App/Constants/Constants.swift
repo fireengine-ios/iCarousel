@@ -1016,6 +1016,8 @@ struct TextConstants {
     static let instagramNotConnected = NSLocalizedString("temporary_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let hideSinglePhotoCompletionAlertMessage = NSLocalizedString("hide_single_photo_completion_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let youDontHavePermissionAlertMessage = NSLocalizedString("business_app_403_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     //MARK: -Carousel Pager Header
     static let carouselViewFirstPageText = NSLocalizedString("carousel_view_first_page_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -154,6 +154,11 @@ extension Error {
         return false
     }
     
+    var isActionProhibited: Bool {
+        guard let error = self as? AFError else { return false }
+        return error.responseCode == 403
+    }
+    
     var isNetworkSpecialError: Bool {
         if isNetworkError {
             return true
@@ -201,6 +206,8 @@ extension Error {
             return serverMessageError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
         } else if let setSecretQuestionError = self as? SetSecretQuestionErrors {
             return setSecretQuestionError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if isActionProhibited {
+            return TextConstants.youDontHavePermissionAlertMessage
         } else if description.contains("\(_code)") {
             return TextConstants.temporaryErrorOccurredTryAgainLater
         } else {
