@@ -524,6 +524,7 @@ extension LoginViewController {
             // workaround for not changing cgColor for textfield frame's border
             loginTextField.borderColor = ColorConstants.textfieldBorder.color
             passwordTextField.borderColor = ColorConstants.textfieldBorder.color
+            captchaView.updateAppearance()
            }
        }
     }

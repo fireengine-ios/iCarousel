@@ -103,6 +103,11 @@ final class LoginCaptchaView: UIView, FromNib {
         captchaAnswerTextField.text = ""
     }
 
+    func updateAppearance() {
+        backgroundColor = ColorConstants.tableBackground.color
+        captchaAnswerTextField.borderColor = ColorConstants.textfieldBorder.color
+    }
+
     func showError(_ error: String?) {
         guard let error = error else {
             noErrorTextfieldToBottomConstraint.priority = .defaultHigh
