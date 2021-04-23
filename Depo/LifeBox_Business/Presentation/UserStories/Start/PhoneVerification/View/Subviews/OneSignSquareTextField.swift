@@ -25,7 +25,6 @@ final class OneSignSquareTextField: UITextField {
         layer.cornerRadius = 5
         layer.borderWidth = 1.3
         layer.borderColor = ColorConstants.a2FABorder.color.cgColor
-        layer.backgroundColor = UIColor.white.cgColor
     }
 
     private func baseSetup() {
@@ -34,5 +33,6 @@ final class OneSignSquareTextField: UITextField {
         font = UIFont.GTAmericaStandardRegularFont(size: 22)
         textColor = ColorConstants.Text.labelTitle.color
         textAlignment = .center
+        backgroundColor = ColorConstants.textfieldBackground.color
     }
 }

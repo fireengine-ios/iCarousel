@@ -16,7 +16,6 @@ enum ColorConstants: String, CaseIterable {
     case buttonTintBlue
     case activityTimelineDraws
     case a2FAMethodLabel
-    case a2FAActiveProgress
     case alertBlueGradientEnd
     case alertBlueGradientStart
     case alertOrangeAndBlueGradientEnd
@@ -142,7 +141,6 @@ enum ColorConstants: String, CaseIterable {
         case .a2FABorder: return UIColor(named: "a2FABorderColor")!
         case .activityTimelineDraws: return UIColor(named: "activityTimelineDraws")!
         case .a2FAMethodLabel: return UIColor(named: "a2FAMethodLabel")!
-        case .a2FAActiveProgress: return UIColor(named: "a2FAActiveProgress")!
         case .alertBlueGradientEnd: return UIColor(named: "alertBlueGradientEnd")!
         case .alertBlueGradientStart: return UIColor(named: "alertBlueGradientStart")!
         case .alertOrangeAndBlueGradientEnd: return UIColor(named: "alertOrangeAndBlueGradientEnd")!

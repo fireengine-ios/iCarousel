@@ -22,7 +22,7 @@ final class SmartTimerProgressView: UIView {
         lineProgressView.targetValue = 1
         lineProgressView.set(progress: 0)
         lineProgressView.set(lineBackgroundColor: ColorConstants.separator.color)
-        lineProgressView.set(lineColor: ColorConstants.a2FAActiveProgress.color)
+        lineProgressView.set(lineColor: ColorConstants.Text.labelTitle.color)
         lineProgressView.setContentCompressionResistancePriority(.required, for: .vertical)
         lineProgressView.lineWidth = 8
         return lineProgressView
@@ -92,6 +92,11 @@ final class SmartTimerProgressView: UIView {
         smartTimerLabel.dropTimer()
         lineProgressView.targetValue = 1
         lineProgressView.set(progress: 1)
+    }
+
+    func updateAppearance() {
+        lineProgressView.set(lineBackgroundColor: ColorConstants.separator.color)
+        lineProgressView.set(lineColor: ColorConstants.Text.labelTitle.color)
     }
 }
 
