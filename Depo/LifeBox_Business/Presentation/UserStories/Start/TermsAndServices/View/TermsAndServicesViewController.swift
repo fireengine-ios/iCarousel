@@ -24,6 +24,7 @@ final class TermsAndServicesViewController: ViewController {
         willSet {
             newValue.setupEulaStyle()
             newValue.delegate = self
+            newValue.backgroundColor = ColorConstants.textViewBackground.color
         }
     }
     
@@ -32,6 +33,7 @@ final class TermsAndServicesViewController: ViewController {
             newValue.isHidden = true
             newValue.setupEulaStyle()
             newValue.delegate = self
+            newValue.backgroundColor = ColorConstants.textViewBackground.color
         }
     }
     
@@ -70,7 +72,7 @@ final class TermsAndServicesViewController: ViewController {
     @IBOutlet weak var privacyPolicyTextView: IntrinsicTextView! {
         willSet {
             newValue.delegate = self
-            newValue.backgroundColor = .clear
+            newValue.backgroundColor = ColorConstants.textViewBackground.color
             newValue.linkTextAttributes = [
                 NSAttributedStringKey.foregroundColor.rawValue: ColorConstants.Text.labelTitle.color,
                 NSAttributedStringKey.font.rawValue: UIFont.GTAmericaStandardMediumFont(size: 12)
@@ -161,6 +163,7 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
     func showLoadedTermsAndUses(eula: String) {
         eulaTextView.attributedText = eula.attributedString
         eulaTextView.setupEulaStyle(cleaned: false)
+        eulaTextView.backgroundColor = ColorConstants.whiteColor.color
     }
     
     func hideBackButton() {
@@ -243,6 +246,21 @@ extension TermsAndServicesViewController: UITextViewDelegate {
     }
 }
 
+extension TermsAndServicesViewController {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+       if #available(iOS 13.0, *) {
+           if (traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection)) {
+            eulaTextView.layer.borderColor = ColorConstants.separator.color.cgColor
+            setupPrivacyPolicyTextView()
+            setupIntroductionTextView()
+            generalTermsCheckboxView.backgroundColor = ColorConstants.tableBackground.color
+            etkTermsCheckboxView?.backgroundColor = ColorConstants.tableBackground.color
+            globalDataPermissionTermsCheckboxView?.backgroundColor = ColorConstants.tableBackground.color
+           }
+       }
+    }
+}
+
 private extension UITextView {
     func setupEulaStyle(cleaned: Bool = true) {
         if cleaned {
@@ -259,7 +277,7 @@ private extension UITextView {
         textColor = ColorConstants.lightText.color
         
         linkTextAttributes = [
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkText,
+            NSAttributedStringKey.foregroundColor.rawValue: ColorConstants.darkText.color,
             NSAttributedStringKey.font.rawValue: UIFont.GTAmericaStandardMediumFont(size: 12)
         ]
         

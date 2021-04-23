@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -43,20 +44,21 @@
                                     <subviews>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WTC-UM-kQA">
                                             <rect key="frame" x="0.0" y="0.0" width="331" height="145"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c9R-e4-jwq">
                                             <rect key="frame" x="0.0" y="155" width="331" height="145"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                             <color key="textColor" systemColor="labelColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="300" id="Tck-f1-N5h"/>
                                     </constraints>
@@ -64,6 +66,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="326" placeholderIntrinsicHeight="149" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aEZ-sm-9UL">
                                     <rect key="frame" x="24" y="327" width="327" height="149"/>
                                     <viewLayoutGuide key="safeArea" id="48Z-Jc-yGI"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </stackView>
                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="t0s-px-gfW">
                                     <rect key="frame" x="20" y="496" width="335" height="30"/>
@@ -76,7 +79,7 @@
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" name="tableBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="Khr-2R-F8m" secondAttribute="trailing" constant="15" id="PRS-GY-1Jq"/>
                                         <constraint firstItem="Khr-2R-F8m" firstAttribute="top" secondItem="t0s-px-gfW" secondAttribute="top" constant="5" id="gp2-xn-lWD"/>
@@ -85,7 +88,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="tableBackground"/>
                             <constraints>
                                 <constraint firstItem="aEZ-sm-9UL" firstAttribute="top" secondItem="NGr-cm-icG" secondAttribute="bottom" constant="11" id="4sB-Be-abf"/>
                                 <constraint firstAttribute="height" priority="250" constant="603" id="6if-48-mrw"/>
@@ -105,6 +108,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="heF-JQ-sC2" firstAttribute="leading" secondItem="wx0-Ty-pdf" secondAttribute="leading" id="JID-eL-sxn"/>
                         <constraint firstAttribute="trailing" secondItem="heF-JQ-sC2" secondAttribute="trailing" id="dak-sR-bFd"/>
@@ -136,7 +140,7 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="xou-y7-pRa"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="tableBackground"/>
             <constraints>
                 <constraint firstItem="wx0-Ty-pdf" firstAttribute="leading" secondItem="W6m-KL-HEi" secondAttribute="leading" id="2KZ-Xy-oel"/>
                 <constraint firstItem="wx0-Ty-pdf" firstAttribute="bottom" secondItem="W6m-KL-HEi" secondAttribute="bottom" id="5Aw-l2-JZ9"/>
@@ -165,6 +169,9 @@
     <resources>
         <image name="NavigationBarBackground" width="520" height="88"/>
         <image name="group-2" width="53" height="53"/>
+        <namedColor name="tableBackground">
+            <color red="0.99215686274509807" green="0.99215686274509807" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
