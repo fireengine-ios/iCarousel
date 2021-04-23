@@ -17,13 +17,6 @@
           "value" : "dark"
         }
       ],
-      "color" : {
-        "color-space" : "extended-gray",
-        "components" : {
-          "alpha" : "1.000",
-          "white" : "0.337"
-        }
-      },
       "idiom" : "universal"
     }
   ],
