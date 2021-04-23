@@ -14,7 +14,7 @@ final class SharedFilesSliderPlusCell: UICollectionViewCell {
         willSet {
             newValue.layer.masksToBounds = true
             newValue.layer.borderWidth = 2
-            newValue.layer.borderColor = ColorConstants.marineTwo.cgColor
+            newValue.layer.borderColor = ColorConstants.marineTwo.color.cgColor
         }
     }
     
@@ -22,7 +22,7 @@ final class SharedFilesSliderPlusCell: UICollectionViewCell {
         willSet {
             newValue.text = "+"
             newValue.font = .TurkcellSaturaBolFont(size: 40)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = ColorConstants.marineTwo.color
             newValue.textAlignment = .center
         }
     }

@@ -16,7 +16,7 @@ class CollectionViewCellForVideo: CollectionViewCellForPhoto {
         super.awakeFromNib()
         // Initialization code
         
-        videoLengthLabel.textColor = ColorConstants.whiteColor
+        videoLengthLabel.textColor = ColorConstants.whiteColor.color
         videoLengthLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
     }
     

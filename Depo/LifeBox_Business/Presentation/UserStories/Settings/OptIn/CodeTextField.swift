@@ -36,7 +36,7 @@ class CodeTextField: UITextField {
         delegate = self
         
         font = UIFont.TurkcellSaturaBolFont(size: 37)
-        textColor = ColorConstants.darkText
+        textColor = ColorConstants.darkText.color
         textAlignment = .center
         
         bottomBorder.frame = CGRect(x: 0, y: frame.height - underlineWidth, width: frame.width, height: underlineWidth)

@@ -123,7 +123,7 @@ extension UIView {
         frame.origin.x = offset
         frame.size.width -= offset * 2
         let separator = UIView(frame: frame)
-        separator.backgroundColor = ColorConstants.darkBorder.withAlphaComponent(0.3)
+        separator.backgroundColor = ColorConstants.darkBorder.color.withAlphaComponent(0.3)
         view.addSubview(separator)
         separator.autoresizingMask = [.flexibleWidth]
         return view

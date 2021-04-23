@@ -340,7 +340,7 @@ struct SharedContact: Codable, Equatable {
         case 0:
             return .lrTealishTwo
         case 1:
-            return ColorConstants.marineFour
+            return ColorConstants.marineFour.color
         case 2:
             return .lrDarkSkyBlue
         case 3:

@@ -14,7 +14,7 @@ class ProfileTextEnterView: UIView {
     
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
-        newValue.textColor = ColorConstants.textOrange
+        newValue.textColor = ColorConstants.textOrange.color
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         newValue.backgroundColor = .white
         newValue.isOpaque = true
@@ -46,7 +46,7 @@ class ProfileTextEnterView: UIView {
         return newValue
     }()
     
-    var underlineColor = ColorConstants.lightGrayColor {
+    var underlineColor: UIColor = ColorConstants.lightGrayColor.color {
         didSet {
             underlineLayer.backgroundColor = underlineColor.cgColor
         }
@@ -61,7 +61,7 @@ class ProfileTextEnterView: UIView {
         }
         set {
             textField.isUserInteractionEnabled = newValue
-            textField.textColor = newValue ? UIColor.black : ColorConstants.textDisabled
+            textField.textColor = newValue ? UIColor.black : ColorConstants.textDisabled.color
         }
     }
         

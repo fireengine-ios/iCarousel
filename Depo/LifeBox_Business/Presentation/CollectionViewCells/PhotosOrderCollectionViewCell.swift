@@ -20,15 +20,15 @@ class PhotosOrderCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        backgroundColor = ColorConstants.fileGreedCellColor
+        backgroundColor = ColorConstants.fileGreedCellColor.color
         
-        selectionView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+        selectionView.layer.borderColor = ColorConstants.darkBlueColor.color.cgColor
         selectionView.layer.borderWidth = PhotosOrderCollectionViewCell.borderW
         selectionView.alpha = 0
         
-        positionLabel.backgroundColor = ColorConstants.darkBlueColor
+        positionLabel.backgroundColor = ColorConstants.darkBlueColor.color
         positionLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        positionLabel.textColor = ColorConstants.whiteColor
+        positionLabel.textColor = ColorConstants.whiteColor.color
         positionLabel.text = ""
         
     }

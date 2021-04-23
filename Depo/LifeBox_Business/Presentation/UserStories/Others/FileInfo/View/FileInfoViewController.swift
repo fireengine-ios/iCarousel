@@ -14,7 +14,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
 
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.tableBackground
+            newValue.backgroundColor = ColorConstants.tableBackground.color
         }
     }
     private var fileInfoTableViewAdapter: FileInfoTableViewAdapter!

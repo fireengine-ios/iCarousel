@@ -30,7 +30,7 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         let label = UILabel()
         label.text = TextConstants.signUpPasswordRulesLabel
         label.font = UIFont.TurkcellSaturaFont(size: 14)
-        label.textColor = ColorConstants.lightText
+        label.textColor = ColorConstants.lightText.color
         label.numberOfLines = 0
         return label
     }()

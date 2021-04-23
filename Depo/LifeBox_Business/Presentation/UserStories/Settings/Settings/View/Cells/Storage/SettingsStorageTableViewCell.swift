@@ -14,7 +14,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var iconContainerView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.iconBackgroundView
+            newValue.backgroundColor = ColorConstants.iconBackgroundView.color
             newValue.layer.cornerRadius = 5
         }
     }
@@ -29,15 +29,15 @@ final class SettingsStorageTableViewCell: UITableViewCell {
     @IBOutlet private weak var mainLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.text = TextConstants.settingsPageStorageUseHeader
         }
     }
 
     @IBOutlet private weak var storageFullnessProgressView: LineProgressView! {
         willSet {
-            newValue.set(lineBackgroundColor: ColorConstants.infoPageSeparator)
-            newValue.set(lineColor: ColorConstants.a2FAActiveProgress)
+            newValue.set(lineBackgroundColor: ColorConstants.separator.color)
+            newValue.set(lineColor: ColorConstants.a2FAActiveProgress.color)
             newValue.setContentCompressionResistancePriority(.required, for: .vertical)
             newValue.lineWidth = 6
             newValue.targetValue = 1
@@ -48,7 +48,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
     @IBOutlet private weak var storageUsageLabel: UILabel! {
         willSet {
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.infoPageValueText
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
 
@@ -87,7 +87,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
             storageUsageLabel.text = String(format: TextConstants.settingsPageStorageUsedUnlimited, storageUsageInfo.usage ?? "")
             return
         } else {
-            let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.a2FADescriptionLabel,
+            let attributes = [NSAttributedString.Key.foregroundColor: ColorConstants.loginPopupDescription.color,
                               NSAttributedString.Key.font: UIFont.GTAmericaStandardRegularFont(size: 12)]
 
             let usageText = storageUsageInfo.usage ?? ""
@@ -96,7 +96,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
             let attributedString = NSMutableAttributedString(string: targetText, attributes: attributes)
             let extensionRange = NSMakeRange(0, usageText.count + 3) // 2 = ' '(1) + '/'(2)
             attributedString.addAttributes([
-                NSAttributedString.Key.foregroundColor: ColorConstants.infoPageValueText,
+                NSAttributedString.Key.foregroundColor: ColorConstants.Text.labelTitle.color,
                 NSAttributedString.Key.font: UIFont.GTAmericaStandardMediumFont(size: 12)
             ], range: extensionRange)
 

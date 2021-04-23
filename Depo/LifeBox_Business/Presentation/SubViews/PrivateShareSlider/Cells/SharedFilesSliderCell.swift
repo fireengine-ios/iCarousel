@@ -18,7 +18,7 @@ final class SharedFilesSliderCell: UICollectionViewCell {
     @IBOutlet private weak var fileLabel: UILabel! {
         willSet {
             newValue.font = .TurkcellSaturaRegFont(size: 14)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.textColor = ColorConstants.textGrayColor.color
         }
     }
     

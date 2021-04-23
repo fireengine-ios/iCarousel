@@ -24,11 +24,11 @@ enum SupportBannerViewType {
     var gradientColors: [CGColor] {
         switch self {
         case .support:
-            return [ColorConstants.alertBlueGradientStart.cgColor,
-                    ColorConstants.alertBlueGradientEnd.cgColor]
+            return [ColorConstants.alertBlueGradientStart.color.cgColor,
+                    ColorConstants.alertBlueGradientEnd.color.cgColor]
         case .faq:
-            return [ColorConstants.alertOrangeAndBlueGradientStart.cgColor,
-                    ColorConstants.alertOrangeAndBlueGradientEnd.cgColor]
+            return [ColorConstants.alertOrangeAndBlueGradientStart.color.cgColor,
+                    ColorConstants.alertOrangeAndBlueGradientEnd.color.cgColor]
         }
     }
 }
@@ -65,19 +65,19 @@ final class SupportFormBannerView: UIView, NibInit {
         let picker = UIPickerView()
         picker.dataSource = self
         picker.delegate = self
-        picker.backgroundColor = ColorConstants.subjectPickerBackgroundColor
+        picker.backgroundColor = ColorConstants.subjectPickerBackgroundColor.color
         return picker
     }()
     
     private lazy var pickerToolbar: UIToolbar = {
         let toolbar = UIToolbar()
         toolbar.isTranslucent = true
-        toolbar.tintColor = ColorConstants.toolbarTintColor
+        toolbar.tintColor = ColorConstants.toolbarTintColor.color
         toolbar.sizeToFit()
         
         let doneButton = UIBarButtonItem.init(title: TextConstants.apply,
                                               font: UIFont.TurkcellSaturaFont(),
-                                              tintColor: ColorConstants.buttonTintColor,
+                                              tintColor: ColorConstants.buttonTintColor.color,
                                               accessibilityLabel: nil,
                                               style: .plain,
                                               target: self,
@@ -89,7 +89,7 @@ final class SupportFormBannerView: UIView, NibInit {
         
         let cancelButton = UIBarButtonItem.init(title: TextConstants.cancel,
                                                 font: UIFont.TurkcellSaturaFont(),
-                                                tintColor: ColorConstants.buttonTintColor,
+                                                tintColor: ColorConstants.buttonTintColor.color,
                                                 accessibilityLabel: nil,
                                                 style: .plain,
                                                 target: self,

@@ -85,8 +85,12 @@ enum ElementTypes {
             if grantedPermissions.contains(.writeAcl) {
                 result.append(.privateShare)
             }
-            
+        
             if grantedPermissions.contains(.delete) {
+                if item.privateShareType.rootType.isContained(in: [.myDisk, .sharedArea]) {
+                    result.append(.move)
+                }
+                
                 if !item.isReadOnlyFolder {
                     result.append(.moveToTrashShared)
                 }
@@ -185,6 +189,12 @@ enum ElementTypes {
                 } else if item.privateShareType == .byMe {
                     types.append(.endSharing)
                 }
+            }
+            
+            if grantedPermissions.contains(.delete),
+               item.privateShareType.rootType.isContained(in: [.myDisk, .sharedArea])
+            {
+                types.append(.move)
             }
             
             if grantedPermissions.contains(.read) {

@@ -52,7 +52,7 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     
     @IBOutlet private weak var accountDetailsLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.blueColor
+            newValue.textColor = ColorConstants.blueColor.color
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
             newValue.text = TextConstants.accountDetails
         }
@@ -60,14 +60,14 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     
     @IBOutlet private weak var userStorrageInformationLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.blueColor
+            newValue.textColor = ColorConstants.blueColor.color
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }
     }
     
     @IBOutlet private weak var usedAsPercentageLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.blueColor
+            newValue.textColor = ColorConstants.blueColor.color
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         }
     }
@@ -169,10 +169,10 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
             let email = userInfo.email,
             !email.isEmpty {
             userEmailLabel.text = email
-            userEmailLabel.textColor = ColorConstants.switcherGrayColor
+            userEmailLabel.textColor = ColorConstants.switcherGrayColor.color
         } else {
             userEmailLabel.text = TextConstants.settingsUserInfoEmail
-            userEmailLabel.textColor = ColorConstants.profileLightGray
+            userEmailLabel.textColor = ColorConstants.profileLightGray.color
         }
         
 //        if
@@ -182,7 +182,7 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
 //            userPhoneNumber.textColor = ColorConstants.switcherGrayColor
 //        } else {
             userPhoneNumber.text = TextConstants.settingsUserInfoPhone
-            userPhoneNumber.textColor = ColorConstants.profileLightGray
+            userPhoneNumber.textColor = ColorConstants.profileLightGray.color
 //        }
         
         if
@@ -223,10 +223,10 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
             fullName.isEmpty ? (fullName += surname) : (fullName = fullName + " " + surname)
         }
         guard !fullName.isEmpty else {
-            userNameLabel.textColor = ColorConstants.profileLightGray
+            userNameLabel.textColor = ColorConstants.profileLightGray.color
             return TextConstants.settingsUserInfoNameSurname
         }
-        userNameLabel.textColor = ColorConstants.textGrayColor
+        userNameLabel.textColor = ColorConstants.textGrayColor.color
         return fullName
     }
     

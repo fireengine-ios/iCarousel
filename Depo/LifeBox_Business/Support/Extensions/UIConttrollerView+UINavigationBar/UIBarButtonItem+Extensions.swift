@@ -13,7 +13,7 @@ extension UIBarButtonItem {
 
     convenience init(title: String,
                      font: UIFont? = nil,
-                     tintColor: UIColor = ColorConstants.whiteColor,
+                     tintColor: UIColor = ColorConstants.whiteColor.color,
                      accessibilityLabel: String? = nil,
                      style: UIBarButtonItemStyle = .plain,
                      target: Any?,

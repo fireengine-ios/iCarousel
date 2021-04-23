@@ -19,7 +19,7 @@ protocol SegmentedChildNavBarManagerDelegate: SegmentedChildTopBarSupportedContr
 final class SegmentedChildNavBarManager {
 
     private lazy var cancelSelectionForTrashBinButton: UIBarButtonItem = {
-        let barButtonItem = UIBarButtonItem(image: UIImage(named: "close_dark"), style: .plain, target: self, action: #selector(onCancelSelectionButton))
+        let barButtonItem = UIBarButtonItem(image: UIImage(named: "closeButton"), style: .plain, target: self, action: #selector(onCancelSelectionButton))
         return barButtonItem
     }()
     
@@ -29,14 +29,14 @@ final class SegmentedChildNavBarManager {
                          for: UIControlEvents.touchUpInside)
         button.setTitle(TextConstants.cancelSelectionButtonTitle, for: .normal)
         button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 18)
-        button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
+        button.setTitleColor(ColorConstants.Text.labelTitle.color, for: .normal)
         
        return UIBarButtonItem(customView: button)
     }()
     
     private(set) lazy var plusButton: UIBarButtonItem = {
             let button = UIButton(type: .custom)
-            button.setImage(UIImage(named: "PlusButtonBusiness"),
+            button.setImage(UIImage(named: "plusFillButton"),
                             for: .normal)
 
             button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
@@ -77,9 +77,9 @@ final class SegmentedChildNavBarManager {
         
         button.setTitle(initials, for: .normal)
         button.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 13.5)
-        button.setTitleColor(ColorConstants.confirmationPopupTitle, for: .normal)
+        button.setTitleColor(ColorConstants.Text.labelTitle.color, for: .normal)
         
-        button.backgroundColor = ColorConstants.topBarSettingsIconColor
+        button.backgroundColor = ColorConstants.topBarSettingsIconColor.color
         button.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
         button.layer.cornerRadius = button.frame.height * 0.5
         button.layer.masksToBounds = true

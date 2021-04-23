@@ -28,15 +28,15 @@ enum BottomBarActionType: Int {
     var image: UIImage? {
         let imageName: String
         switch self {
-            case .shareCopy: imageName = "moveBottom"
-            case .privateShare: imageName = "shareBottom"
-            case .info: imageName = "infoBottom"
-            case .delete, .deletePermanently: imageName = "trashBottom"
-            case .move: imageName = "moveBottom"
-            case .download: imageName = "downloadBottom"
-            case .downloadDocument: imageName = "downloadBottom"
-            case .restore: imageName = "RestoreButtonIcon"
-            case .more: imageName = "moreBottom"
+            case .shareCopy: imageName = "turnUpRightArrow"
+            case .privateShare: imageName = "shareButton"
+            case .info: imageName = "infoButton"
+            case .delete, .deletePermanently: imageName = "trashButton"
+            case .move: imageName = "turnDownRightArrow"
+            case .download: imageName = "downloadButton"
+            case .downloadDocument: imageName = "downloadButton"
+            case .restore: imageName = "restoreButtonIcon"
+            case .more: imageName = "moreButton"
         }
         
         return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
@@ -260,7 +260,7 @@ final class BottomActionsBar: UIView {
     }
     
     private func createButton(type: BottomBarActionType) -> UIButton {
-        let tintColor = (style == .opaque) ? ColorConstants.Text.labelTitle : .white
+        let tintColor: UIColor = (style == .opaque) ? ColorConstants.Text.labelTitle.color : .white
         
         let button = UIButton()
         button.addTarget(self, action: #selector(onButtonTap(_:)), for: .touchUpInside)

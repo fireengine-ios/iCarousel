@@ -26,10 +26,10 @@ class StorageCard: BaseCardView {
         super.configurateView()
         
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        titleLabel.textColor = ColorConstants.whiteColor
+        titleLabel.textColor = ColorConstants.whiteColor.color
         
         subTileLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        subTileLabel.textColor = ColorConstants.whiteColor
+        subTileLabel.textColor = ColorConstants.whiteColor.color
             
         backgroundView.clipsToBounds = true
         canSwipe = false
@@ -79,28 +79,28 @@ class StorageCard: BaseCardView {
         
         switch viewType {
         case .freeAppSpaceCloudWarning:
-            setGradient(colorTop: ColorConstants.orangeGradientStart, colorBottom: ColorConstants.orangeGradientEnd)
+            setGradient(colorTop: ColorConstants.orangeGradientStart.color, colorBottom: ColorConstants.orangeGradientEnd.color)
             iconView.image = UIImage(named: "CardIconLamp")
             
             titleLabel.text = TextConstants.homeStorageCardCloudTitle
             
             bottomButton.setTitle(TextConstants.homeStorageCardCloudBottomButtonTitle, for: .normal)
-            bottomButton.setTitleColor(ColorConstants.orangeGradientEnd, for: .normal)
+            bottomButton.setTitleColor(ColorConstants.orangeGradientEnd.color, for: .normal)
             
             subTileLabel.text = ""
             
         case .emptyStorage:
-            setGradient(colorTop: ColorConstants.greenGradientStart, colorBottom: ColorConstants.greenGradientEnd)
+            setGradient(colorTop: ColorConstants.greenGradientStart.color, colorBottom: ColorConstants.greenGradientEnd.color)
             iconView.image = UIImage(named: "CardIconFolder")
             
             titleLabel.text = TextConstants.homeStorageCardEmptyTitle
             subTileLabel.text = TextConstants.homeStorageCardEmptySubTitle
             
             bottomButton.setTitle(TextConstants.homeStorageCardEmptyBottomButtonTitle, for: .normal)
-            bottomButton.setTitleColor(ColorConstants.greenGradientEnd, for: .normal)
+            bottomButton.setTitleColor(ColorConstants.greenGradientEnd.color, for: .normal)
             
         case .freeAppSpaceLocalWarning:
-            setGradient(colorTop: ColorConstants.redGradientStart, colorBottom: ColorConstants.redGradientEnd)
+            setGradient(colorTop: ColorConstants.redGradientStart.color, colorBottom: ColorConstants.redGradientEnd.color)
             iconView.image = UIImage(named: "CardIconLamp")
             
             titleLabel.text = TextConstants.homeStorageCardLocalTitle
@@ -110,7 +110,7 @@ class StorageCard: BaseCardView {
             subTileLabel.text = String(format: TextConstants.homeStorageCardLocalSubTitle, percent)
             
             bottomButton.setTitle(TextConstants.homeStorageCardLocalBottomButtonTitle, for: .normal)
-            bottomButton.setTitleColor(ColorConstants.redGradientEnd, for: .normal)
+            bottomButton.setTitleColor(ColorConstants.redGradientEnd.color, for: .normal)
             
         default:
             break

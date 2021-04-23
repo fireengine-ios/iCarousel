@@ -27,7 +27,7 @@ final class PasscodeSettingsViewController: ViewController {
     @IBOutlet weak var passcodeLabel: UILabel! {
         didSet {
             passcodeLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            passcodeLabel.textColor = ColorConstants.textGrayColor
+            passcodeLabel.textColor = ColorConstants.textGrayColor.color
             passcodeLabel.text = TextConstants.passcode
         }
     }
@@ -35,21 +35,21 @@ final class PasscodeSettingsViewController: ViewController {
     @IBOutlet weak var biometricsLabel: UILabel! {
         didSet {
             biometricsLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            biometricsLabel.textColor = ColorConstants.textGrayColor
+            biometricsLabel.textColor = ColorConstants.textGrayColor.color
         }
     }
     
     @IBOutlet weak var biometricsErrorLabel: UILabel! {
         didSet {
             biometricsErrorLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
-            biometricsErrorLabel.textColor = ColorConstants.textGrayColor
+            biometricsErrorLabel.textColor = ColorConstants.textGrayColor.color
         }
     }
     
     @IBOutlet weak var changePasscodeLabel: UILabel! {
         didSet {
             changePasscodeLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            changePasscodeLabel.textColor = ColorConstants.textGrayColor
+            changePasscodeLabel.textColor = ColorConstants.textGrayColor.color
             changePasscodeLabel.text = TextConstants.passcodeSettingsChangeTitle
         }
     }
@@ -57,7 +57,7 @@ final class PasscodeSettingsViewController: ViewController {
     @IBOutlet weak var setPasscodeLabel: UILabel! {
         didSet {
             setPasscodeLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            setPasscodeLabel.textColor = ColorConstants.textGrayColor
+            setPasscodeLabel.textColor = ColorConstants.textGrayColor.color
             setPasscodeLabel.text = TextConstants.passcodeSettingsSetTitle
         }
     }

@@ -39,7 +39,7 @@ class MaskServiceOperation: Operation {
     }
     
     override func main() {
-        let filtredImage = image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor)
+        let filtredImage = image.grayScaleImage?.mask(with: ColorConstants.oldieFilterColor.color)
         sucessBlock(filtredImage)
     }
     

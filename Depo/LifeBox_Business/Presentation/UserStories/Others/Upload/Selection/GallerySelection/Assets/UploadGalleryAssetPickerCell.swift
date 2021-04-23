@@ -28,7 +28,7 @@ final class UploadGalleryAssetPickerCell: UICollectionViewCell {
     private lazy var selectionLayer: CALayer = {
         let layer = CALayer()
         layer.backgroundColor = UIColor.white.withAlphaComponent(0.5).cgColor
-        layer.borderColor = ColorConstants.separator.cgColor
+        layer.borderColor = ColorConstants.separator.color.cgColor
         layer.borderWidth = 1
         layer.masksToBounds = true
         return layer

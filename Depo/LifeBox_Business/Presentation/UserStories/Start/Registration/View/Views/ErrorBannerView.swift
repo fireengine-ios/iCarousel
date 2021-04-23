@@ -10,7 +10,7 @@ import UIKit
 
 class ErrorBannerView: UIView {
 
-    var errorLabelTextColor: UIColor = ColorConstants.textOrange {
+    var errorLabelTextColor: UIColor = ColorConstants.textOrange.color {
         didSet {
             messageLabel.textColor = errorLabelTextColor
         }
@@ -57,7 +57,7 @@ class ErrorBannerView: UIView {
     private let underlineLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = ColorConstants.profileGrayColor.cgColor
+        newValue.backgroundColor = ColorConstants.profileGrayColor.color.cgColor
         
         return newValue
     }()

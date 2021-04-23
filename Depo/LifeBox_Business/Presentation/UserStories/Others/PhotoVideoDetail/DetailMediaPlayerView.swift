@@ -80,6 +80,11 @@ final class DetailMediaPlayerView: UIView, FromNib {
         player.playerDelegate = self
         player.playbackDelegate = self
 
+        player.playbackPausesWhenBackgrounded = true
+        player.playbackPausesWhenResigningActive = true
+        player.playbackResumesWhenBecameActive = false
+        player.playbackResumesWhenEnteringForeground = false
+
         return player
     }()
     
@@ -95,6 +100,9 @@ final class DetailMediaPlayerView: UIView, FromNib {
     
     weak var delegate: DetailMediaPlayerViewDelegate?
     
+    var artworkImageViewIsEmpty: Bool {
+        return artworkImageView.image == nil
+    }
     
     //MARK: Override
     
@@ -254,7 +262,9 @@ extension DetailMediaPlayerView: PlayerDelegate {
             timeAfter.text = player.currentTimeInterval.playbackTime
             totalDuration.text = player.maximumDuration.playbackTime
             
-            getArtwork(player)
+            if artworkImageViewIsEmpty {
+                getArtwork(player)
+            }
             
             delegate?.playerHasData()
         default:

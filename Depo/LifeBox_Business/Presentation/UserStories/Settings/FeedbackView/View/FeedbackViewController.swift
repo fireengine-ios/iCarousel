@@ -89,33 +89,33 @@ final class FeedbackViewController: ViewController {
         
         titleLabel.text = TextConstants.feedbackViewTitle
         titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
-        titleLabel.textColor = ColorConstants.whiteColor
+        titleLabel.textColor = ColorConstants.whiteColor.color
         
         subTitle.text = TextConstants.feedbackViewSubTitle
         subTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        subTitle.textColor = ColorConstants.textGrayColor
+        subTitle.textColor = ColorConstants.textGrayColor.color
         
         suggestionLabel.text = TextConstants.feedbackViewSuggestion
         suggestionLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        suggestionLabel.textColor = ColorConstants.textGrayColor
+        suggestionLabel.textColor = ColorConstants.textGrayColor.color
         
         complaintLabel.text = TextConstants.feedbackViewComplaint
         complaintLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        complaintLabel.textColor = ColorConstants.textGrayColor
+        complaintLabel.textColor = ColorConstants.textGrayColor.color
         
         languageLabel.text = TextConstants.feedbackViewLanguageLabel
         languageLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         languageLabel.adjustsFontSizeToFitWidth()
-        languageLabel.textColor = ColorConstants.textGrayColor
+        languageLabel.textColor = ColorConstants.textGrayColor.color
         
         sendButton.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
         sendButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
         
         suggestionButton.setImage(getImageForCheckbox(isSelected: suggeston), for: .normal)
-        suggestionButton.tintColor = ColorConstants.blueColor
+        suggestionButton.tintColor = ColorConstants.blueColor.color
         
         complaintButton.setImage(getImageForCheckbox(isSelected: complaint), for: .normal)
-        complaintButton.tintColor = ColorConstants.blueColor
+        complaintButton.tintColor = ColorConstants.blueColor.color
         
         feedbackTextView.textAlignment = .natural
     }

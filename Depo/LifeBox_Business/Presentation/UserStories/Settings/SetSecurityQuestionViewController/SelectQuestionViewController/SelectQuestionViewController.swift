@@ -33,7 +33,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     @IBOutlet private var backgroundView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.backgroundViewColor
+            newValue.backgroundColor = ColorConstants.backgroundViewColor.color
         }
     }
     
@@ -60,7 +60,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet{
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = ColorConstants.profileGrayColor.color
             newValue.isOpaque = true
         }
     }

@@ -26,9 +26,9 @@ final class SettingsViewController: BaseViewController {
         willSet {
             newValue.layer.cornerRadius = 5
             newValue.layer.borderWidth = 2
-            newValue.layer.borderColor = ColorConstants.infoPageValueText.cgColor
+            newValue.layer.borderColor = ColorConstants.Text.labelTitle.color.cgColor
             newValue.setTitle(TextConstants.settingsPageLogout, for: .normal)
-            newValue.setTitleColor(ColorConstants.infoPageValueText, for: .normal)
+            newValue.setTitleColor(ColorConstants.Text.labelTitle.color, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
         }
     }
@@ -37,7 +37,7 @@ final class SettingsViewController: BaseViewController {
         willSet {
             newValue.text = appVersion
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 11)
-            newValue.textColor = ColorConstants.multifileCellSubtitleText
+            newValue.textColor = ColorConstants.multifileCellSubtitleText.color
         }
     }
     

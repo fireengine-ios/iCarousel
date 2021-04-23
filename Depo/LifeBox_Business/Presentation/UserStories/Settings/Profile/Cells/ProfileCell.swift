@@ -22,7 +22,7 @@ final class ProfileCell: UITableViewCell {
         willSet {
             newValue.text = TextConstants.profileNameSurname
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.textColor = ColorConstants.Text.textFieldText.color
         }
     }
     
@@ -31,7 +31,7 @@ final class ProfileCell: UITableViewCell {
             let initials = (SingletonStorage.shared.accountInfo?.name ?? "") + " " +  (SingletonStorage.shared.accountInfo?.surname ?? "")
             newValue.text = initials
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
@@ -39,7 +39,7 @@ final class ProfileCell: UITableViewCell {
         willSet {
             newValue.text = TextConstants.profileEmail
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
-            newValue.textColor = ColorConstants.Text.textFieldText
+            newValue.textColor = ColorConstants.Text.textFieldText.color
         }
     }
     
@@ -47,7 +47,7 @@ final class ProfileCell: UITableViewCell {
         willSet {
             newValue.text = SingletonStorage.shared.accountInfo?.email ?? ""
             newValue.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.textColor = ColorConstants.Text.labelTitle
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     
@@ -72,10 +72,10 @@ final class ProfileCell: UITableViewCell {
             
             newValue.setTitle(initials, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 18)
-            newValue.tintColor = ColorConstants.topBarSettingsIconColor
+            newValue.tintColor = ColorConstants.topBarSettingsIconColor.color
             newValue.isUserInteractionEnabled = false
             
-            newValue.backgroundColor = ColorConstants.Text.labelTitle
+            newValue.backgroundColor = ColorConstants.Text.labelTitle.color
             newValue.layer.cornerRadius = 5
         }
     }

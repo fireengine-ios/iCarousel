@@ -39,10 +39,10 @@ class DropDownView: UIView {
         
         layer.cornerRadius = 4
         
-        backgroundColor = ColorConstants.switcherGrayColor
+        backgroundColor = ColorConstants.switcherGrayColor.color
         cornerView = UIView(frame: CGRect(x: 1, y: 1, width: frame.size.width - 2, height: frame.size.height - 2))
         cornerView!.translatesAutoresizingMaskIntoConstraints = false
-        cornerView!.backgroundColor = ColorConstants.switcherGrayColor
+        cornerView!.backgroundColor = ColorConstants.switcherGrayColor.color
         cornerView!.layer.cornerRadius = 4
         
         addSubview(cornerView!)
@@ -56,7 +56,7 @@ class DropDownView: UIView {
         
         bgView = UIView(frame: CGRect(x: 1, y: 1, width: frame.size.width - 2, height: frame.size.height - 2))
         bgView!.translatesAutoresizingMaskIntoConstraints = false
-        bgView!.backgroundColor = ColorConstants.whiteColor
+        bgView!.backgroundColor = ColorConstants.whiteColor.color
         bgView!.layer.cornerRadius = 4
         
         cornerView!.addSubview(bgView!)
@@ -69,7 +69,7 @@ class DropDownView: UIView {
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: cornerView!.frame.size.width - 25, height: cornerView!.frame.size.height))
         titleLabel!.font = UIFont.TurkcellSaturaRegFont(size: 14)
-        titleLabel!.textColor = ColorConstants.darkBlueColor
+        titleLabel!.textColor = ColorConstants.darkBlueColor.color
         titleLabel!.textAlignment = .left
         titleLabel!.backgroundColor = UIColor.clear
         titleLabel!.translatesAutoresizingMaskIntoConstraints = false

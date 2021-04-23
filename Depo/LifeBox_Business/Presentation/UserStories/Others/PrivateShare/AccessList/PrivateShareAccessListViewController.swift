@@ -49,7 +49,7 @@ final class PrivateShareAccessListViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.tableBackground
+            newValue.backgroundColor = ColorConstants.tableBackground.color
         }
     }
     

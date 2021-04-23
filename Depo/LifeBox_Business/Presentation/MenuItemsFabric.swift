@@ -12,13 +12,13 @@ final class MenuItemsFabric {
     static func generateMenuForManagingRole(currentState: ElementTypes,
                                             actionHandler: @escaping ValueHandler<ElementTypes>) -> UIMenu {
         let editorItem = UIAction(title: TextConstants.accessPageRoleEditor,
-                                  image: currentState == .editorRole ? UIImage(named: "selected-checkmark") : nil,
+                                  image: currentState == .editorRole ? UIImage(named: "selectedCheckmark") : nil,
                                   attributes: []) { _  in
             actionHandler(.editorRole)
         }
 
         let viewerItem = UIAction(title: TextConstants.accessPageRoleViewer,
-                                  image: currentState == .viewerRole ? UIImage(named: "selected-checkmark") : nil,
+                                  image: currentState == .viewerRole ? UIImage(named: "selectedCheckmark") : nil,
                                   attributes: []) { _  in
             actionHandler(.viewerRole)
         }
@@ -190,32 +190,32 @@ extension ElementTypes {
     var menuImage: UIImage? {
         var imageName: String? = nil
         switch self {
-        case .info:
-            imageName = "info"
-        case .select:
-            imageName = "select"
-        case .moveToTrash, .moveToTrashShared, .deletePermanently:
-            imageName = "trash"
-        case .copy:
-            imageName = "copy-link"
-        case .endSharing, .leaveSharing:
-            imageName = "end-sharing"
-        case .move:
-            imageName = "move"
-        case .share:
-            imageName = "share-copy"
-        case .privateShare:
-            imageName = "share-private"
-        case .addToFavorites, .removeFromFavorites:
-            imageName = "action_favorite"
-        case .download, .downloadDocument:
-            imageName = "download"
-        case .restore:
-            imageName = "action_restore"
-        case .rename:
-            imageName = "rename"
-        default:
-            return nil
+            case .info:
+                imageName = "infoButton"
+            case .select:
+                imageName = "selectButton"
+            case .moveToTrash, .moveToTrashShared, .deletePermanently:
+                imageName = "trashButton"
+            case .copy:
+                imageName = "copyLinkButton"
+            case .endSharing, .leaveSharing:
+                imageName = "endSharingButton"
+            case .move:
+                imageName = "turnDownRightArrow"
+            case .share:
+                imageName = "turnUpRightArrow"
+            case .privateShare:
+                imageName = "shareButton"
+            case .addToFavorites, .removeFromFavorites:
+                imageName = "action_favorite"
+            case .download, .downloadDocument:
+                imageName = "downloadButton"
+            case .restore:
+                imageName = "restoreButton"
+            case .rename:
+                imageName = "renameButton"
+            default:
+                return nil
         }
         
         guard let name = imageName else {

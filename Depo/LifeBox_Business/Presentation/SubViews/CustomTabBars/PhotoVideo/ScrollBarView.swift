@@ -73,7 +73,7 @@ final class ScrollBarView: UIView {
         insetsLabel.text = "Apr 2018" /// template text
         insetsLabel.textAlignment = .center
         insetsLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
-        insetsLabel.backgroundColor = ColorConstants.activityTimelineDraws
+        insetsLabel.backgroundColor = ColorConstants.activityTimelineDraws.color
         insetsLabel.textColor = UIColor.white
         insetsLabel.center.x -= 60
         insetsLabel.textInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)

@@ -50,7 +50,7 @@ final class ProfileViewController: BaseViewController, NibInit {
     //MARK: - Private funcs
     
     private func setView() {
-        view.backgroundColor = ColorConstants.settingsTableBackground
+        view.backgroundColor = ColorConstants.settingsTableBackground.color
     }
     
     private func setActivityIndicator() {

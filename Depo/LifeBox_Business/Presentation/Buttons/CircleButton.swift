@@ -37,7 +37,7 @@ class CircleButton: UIButton {
     
     func configurate() {
         bottomTitleLabel?.textAlignment = .center
-        bottomTitleLabel?.textColor = ColorConstants.textGrayColor
+        bottomTitleLabel?.textColor = ColorConstants.textGrayColor.color
         bottomTitleLabel?.minimumScaleFactor = 0.5
         bottomTitleLabel?.adjustsFontSizeToFitWidth = true
         bottomTitleLabel?.numberOfLines = 0
