@@ -17,7 +17,7 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
     
     @IBOutlet private weak var sliderLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 18)
+            newValue.font = .GTAmericaStandardMediumFont(size: 18)
             newValue.text = TextConstants.privateShareAllFilesSharedWithMe
             newValue.adjustsFontSizeToFitWidth = true
         }
@@ -25,7 +25,7 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
 
     @IBOutlet weak var myFilesLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 18)
+            newValue.font = .GTAmericaStandardMediumFont(size: 18)
             newValue.text = TextConstants.privateShareAllFilesMyFiles
             newValue.adjustsFontSizeToFitWidth = true
         }
@@ -37,7 +37,7 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
             newValue.setImage(UIImage(named: "privateSharePeople"), for: .normal)
             newValue.setTitle(TextConstants.privateShareAllFilesSeeAll, for: .normal)
             newValue.setTitleColor(ColorConstants.textGrayColor.color, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaRegFont(size: 18)      
+            newValue.titleLabel?.font = .GTAmericaStandardRegularFont(size: 18)      
             
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -10

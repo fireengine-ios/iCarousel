@@ -5,7 +5,7 @@ final class ProfileTextViewEnterView: UIView {
     let titleLabel: UILabel = {
         let newValue = UILabel()
         newValue.textColor = UIColor.lrTealish
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
         newValue.backgroundColor = .white
         newValue.isOpaque = true
         return newValue
@@ -14,7 +14,7 @@ final class ProfileTextViewEnterView: UIView {
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
         newValue.textColor = ColorConstants.textOrange.color
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 16)
         newValue.backgroundColor = .white
         newValue.isOpaque = true
         newValue.isHidden = true
@@ -24,7 +24,7 @@ final class ProfileTextViewEnterView: UIView {
     
     let textView: IntrinsicTextView = {
         let newValue = IntrinsicTextView()
-        newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
         newValue.textColor = UIColor.black
         newValue.backgroundColor = .white
         newValue.isOpaque = true

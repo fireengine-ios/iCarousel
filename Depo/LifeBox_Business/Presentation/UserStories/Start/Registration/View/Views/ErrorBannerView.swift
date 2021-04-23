@@ -38,7 +38,7 @@ class ErrorBannerView: UIView {
 
     private lazy var messageLabel: UILabel = {
         let newValue = UILabel()
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 16)
         newValue.textColor = errorLabelTextColor
         newValue.lineBreakMode = .byWordWrapping
         newValue.numberOfLines = 0

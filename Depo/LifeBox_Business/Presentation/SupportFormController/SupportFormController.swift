@@ -51,7 +51,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
             newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
             newValue.setBackgroundColor(UIColor.lrTealish.darker(by: 30), for: .highlighted)
             
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.adjustsFontSizeToFitWidth()
         }
     }

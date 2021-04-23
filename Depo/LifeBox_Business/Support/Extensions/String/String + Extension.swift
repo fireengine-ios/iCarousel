@@ -12,7 +12,7 @@ extension String {
     
     func htmlAttributedForPrivacyPolicy(using font: UIFont) -> NSMutableAttributedString? {
         
-        let boldFontAttribute = [NSAttributedStringKey.font: UIFont.TurkcellSaturaBolFont(size: 28)]
+        let boldFontAttribute = [NSAttributedStringKey.font: UIFont.GTAmericaStandardBoldFont(size: 28)]
         
         do {
             let htmlCSSString = "<style>" +

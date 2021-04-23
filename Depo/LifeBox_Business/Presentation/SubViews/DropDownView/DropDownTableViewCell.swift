@@ -16,7 +16,7 @@ class DropDownTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        titleTextLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        titleTextLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         titleTextLabel.textColor = ColorConstants.darkBlueColor.color
     }
 

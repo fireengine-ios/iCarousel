@@ -21,7 +21,7 @@ final class SharedFilesSliderPlusCell: UICollectionViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = "+"
-            newValue.font = .TurkcellSaturaBolFont(size: 40)
+            newValue.font = .GTAmericaStandardBoldFont(size: 40)
             newValue.textColor = ColorConstants.marineTwo.color
             newValue.textAlignment = .center
         }

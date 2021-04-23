@@ -16,7 +16,7 @@ final class PasswordView: UIView, NibInit {
         willSet {
             /// in IB: UIButton(type: .custom)
             newValue.isExclusiveTouch = true
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardBoldFont(size: 16)
             newValue.setTitleColor(UIColor.lrTealish, for: .normal)
             newValue.setTitleColor(UIColor.lrTealish.lighter(by: 30), for: .highlighted)
             newValue.backgroundColor = .white
@@ -27,7 +27,7 @@ final class PasswordView: UIView, NibInit {
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
             newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardBoldFont(size: 16)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
         }
@@ -36,7 +36,7 @@ final class PasswordView: UIView, NibInit {
     @IBOutlet weak var errorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textOrange.color
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 15)
             newValue.isHidden = true
             newValue.backgroundColor = .white
             newValue.isOpaque = true
@@ -46,7 +46,7 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet private weak var rulesLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 14)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
             newValue.textColor = ColorConstants.lightText.color
             newValue.numberOfLines = 0
         }
@@ -54,7 +54,7 @@ final class PasswordView: UIView, NibInit {
     
     @IBOutlet weak var passwordTextField: UITextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             newValue.isSecureTextEntry = true
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none

@@ -25,7 +25,7 @@ final class EntityInfoHeader: UIView {
     private lazy var label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.GTAmericaStandardRegularFont()
+        label.font = UIFont.GTAmericaStandardRegularFont(size: 18)
         label.textColor = ColorConstants.Text.labelTitle.color
         return label
     }()

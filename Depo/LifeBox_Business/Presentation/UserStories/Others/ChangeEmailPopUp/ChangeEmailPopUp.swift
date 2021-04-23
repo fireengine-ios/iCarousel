@@ -17,7 +17,7 @@ final class ChangeEmailPopUp: UIViewController {
         willSet {
             let text = TextConstants.changeEmailPopUpTopTitle
             let attributes: [NSAttributedStringKey : Any] = [
-                .font : UIFont.TurkcellSaturaFont(size: 18),
+                .font : UIFont.GTAmericaStandardRegularFont(size: 18),
                 .foregroundColor : UIColor.black,
             ]
             
@@ -26,7 +26,7 @@ final class ChangeEmailPopUp: UIViewController {
             if let range = text.range(of: TextConstants.enterYourEmail) {
                 let nsRange = NSRange(range, in: text)
                 
-                let boldAttribute: [NSAttributedStringKey : Any] = [ .font : UIFont.TurkcellSaturaBolFont(size: 18) ]
+                let boldAttribute: [NSAttributedStringKey : Any] = [ .font : UIFont.GTAmericaStandardBoldFont(size: 18) ]
                 
                 attributedString.addAttributes(boldAttribute, range: nsRange)
             }
@@ -57,7 +57,7 @@ final class ChangeEmailPopUp: UIViewController {
         willSet {
             newValue.titleLabel.text = TextConstants.yourEmail
             newValue.titleLabel.textColor = ColorConstants.coolGrey.color
-            newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.titleLabel.font = UIFont.GTAmericaStandardBoldFont(size: 14)
             
             newValue.textField.autocorrectionType = .no
             newValue.textField.autocapitalizationType = .none
@@ -71,7 +71,7 @@ final class ChangeEmailPopUp: UIViewController {
         willSet {
             newValue.titleLabel.text = TextConstants.confirmYourEmail
             newValue.titleLabel.textColor = ColorConstants.coolGrey.color
-            newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.titleLabel.font = UIFont.GTAmericaStandardBoldFont(size: 14)
             
             newValue.textField.autocorrectionType = .no
             newValue.textField.autocapitalizationType = .none
@@ -85,7 +85,7 @@ final class ChangeEmailPopUp: UIViewController {
         willSet {
             newValue.setTitle(TextConstants.cancel, for: .normal)
             newValue.setTitleColor(UIColor.lrTealish, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.layer.borderColor = UIColor.lrTealish.cgColor
             newValue.layer.borderWidth = 1
             newValue.isOpaque = true
@@ -98,7 +98,7 @@ final class ChangeEmailPopUp: UIViewController {
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
             newValue.setBackgroundColor(UIColor.lrTealish.withAlphaComponent(0.5), for: .disabled)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.isOpaque = true
         }
     }
@@ -106,7 +106,7 @@ final class ChangeEmailPopUp: UIViewController {
     @IBOutlet private weak var errorLabel: UILabel! {
         willSet {
             newValue.textAlignment = .center
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 16)
             newValue.textColor = ColorConstants.textOrange.color
             newValue.numberOfLines = 0
             newValue.isHidden = true

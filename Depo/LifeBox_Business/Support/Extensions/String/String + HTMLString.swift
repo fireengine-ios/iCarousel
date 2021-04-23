@@ -15,7 +15,7 @@ extension String {
                     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
                     <style>
                         body {
-                            font-family: "GT+America";
+                            font-family: \(font.familyName);
                             font-size: \(fontSizeInPixels)px;
                         }
                     </style>

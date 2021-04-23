@@ -13,7 +13,7 @@ final class SecretAnswerView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.text = TextConstants.userProfileSecretQuestionAnswer
             newValue.backgroundColor = .white
             newValue.isOpaque = true
@@ -22,7 +22,7 @@ final class SecretAnswerView: UIView, NibInit {
     
     @IBOutlet weak var answerTextField: QuickDismissPlaceholderTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
@@ -34,7 +34,7 @@ final class SecretAnswerView: UIView, NibInit {
     @IBOutlet private weak var errorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textOrange.color
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 15)
             newValue.isHidden = true
             newValue.backgroundColor = .white
             newValue.isOpaque = true

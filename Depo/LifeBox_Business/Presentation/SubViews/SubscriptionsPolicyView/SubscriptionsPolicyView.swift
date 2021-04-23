@@ -47,7 +47,7 @@ final class SubscriptionsPolicyView: UIView {
         let attributedString = NSMutableAttributedString(
             string: TextConstants.packagesPolicyHeader,
             attributes: [ .foregroundColor: ColorConstants.textGrayColor.color,
-                          .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)]
+                          .font: UIFont.GTAmericaStandardBoldFont(size: policyHeaderSize)]
         )
         
         let policyText = RouteRequests.isBillo
@@ -56,14 +56,14 @@ final class SubscriptionsPolicyView: UIView {
         let policyAttributedString = NSMutableAttributedString(
             string: "\n\n" + policyText,
             attributes: [.foregroundColor: ColorConstants.textGrayColor.color,
-                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)]
+                         .font: UIFont.GTAmericaStandardRegularFont(size: policyTextSize)]
         )
         attributedString.append(policyAttributedString)
 
         let termsAttributedString = NSMutableAttributedString(
             string: TextConstants.termsOfUseLinkText,
             attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
-                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)]
+                         .font: UIFont.GTAmericaStandardRegularFont(size: policyTextSize)]
         )
         attributedString.append(termsAttributedString)
         

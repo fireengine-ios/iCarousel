@@ -18,7 +18,7 @@ class ActionsMenuTableViewCell: UITableViewCell {
         // Initialization code
         
         titleLabel.textColor = ColorConstants.textGrayColor.color
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        titleLabel.font = UIFont.GTAmericaStandardRegularFont(size: 19)
         separatorView.isHidden = !Device.isIpad
     }
 

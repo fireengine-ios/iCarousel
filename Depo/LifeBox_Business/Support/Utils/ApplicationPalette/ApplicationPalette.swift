@@ -15,7 +15,7 @@ class ApplicationPalette {
         if (Device.isIpad) {
             fontSize = 30.0
         }
-        return UIFont.TurkcellSaturaBolFont(size: fontSize)
+        return UIFont.GTAmericaStandardBoldFont(size: fontSize)
     }
     
     static var mediumRoundButtonFont: UIFont? {
@@ -23,7 +23,7 @@ class ApplicationPalette {
         if (Device.isIpad) {
             fontSize = 24.0
         }
-        return UIFont.TurkcellSaturaBolFont(size: fontSize)
+        return UIFont.GTAmericaStandardBoldFont(size: fontSize)
     }
     
     static var roundedCornersButtonFont: UIFont? {
@@ -31,7 +31,7 @@ class ApplicationPalette {
         if (Device.isIpad) {
             fontSize = 16.0
         }
-        return UIFont.TurkcellSaturaBolFont(size: fontSize)
+        return UIFont.GTAmericaStandardBoldFont(size: fontSize)
     }
     
     static var noFilesRoundButtonFont: UIFont? {
@@ -39,11 +39,11 @@ class ApplicationPalette {
         if (Device.isIpad) {
             fontSize = 22
         }
-        return UIFont.TurkcellSaturaBolFont(size: fontSize)
+        return UIFont.GTAmericaStandardBoldFont(size: fontSize)
     }
     
     static var mediumDemiRoundButtonFont: UIFont? {
         var fontSize: CGFloat = Device.isIpad ? 22 : 16.0
-        return UIFont.TurkcellSaturaDemFont(size: fontSize)
+        return UIFont.GTAmericaStandardDemiBoldFont(size: fontSize)
     }
 }

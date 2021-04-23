@@ -38,7 +38,7 @@ final class SecurityCodeTextField: UITextField {
     private func setupDesign() {
         keyboardType = .phonePad
         tintColor = .clear
-        font = UIFont.TurkcellSaturaBolFont(size: 36)
+        font = UIFont.GTAmericaStandardBoldFont(size: 36)
         textColor = .black
         textAlignment = .center
         

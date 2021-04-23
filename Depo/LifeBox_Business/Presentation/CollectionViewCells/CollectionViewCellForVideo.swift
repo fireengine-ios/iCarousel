@@ -17,7 +17,7 @@ class CollectionViewCellForVideo: CollectionViewCellForPhoto {
         // Initialization code
         
         videoLengthLabel.textColor = ColorConstants.whiteColor.color
-        videoLengthLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        videoLengthLabel.font = UIFont.GTAmericaStandardRegularFont(size: 16)
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {

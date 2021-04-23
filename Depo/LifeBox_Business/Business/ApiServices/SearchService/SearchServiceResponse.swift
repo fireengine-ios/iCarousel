@@ -449,7 +449,7 @@ final class SuggestionObject: ObjectRequestResponse {
             let attributedString = NSMutableAttributedString(string: highlightedText as String)
             attributedString.addAttributes([NSAttributedStringKey.foregroundColor : UIColor.white], range: NSMakeRange(0, highlightedText.length))
             attributedString.addAttributes([NSAttributedStringKey.foregroundColor : ColorConstants.blueColor.color], range: highlightedText.range(of: sub))
-            attributedString.addAttributes([NSAttributedStringKey.font : UIFont.TurkcellSaturaDemFont(size: 15)], range: NSMakeRange(0, highlightedText.length))
+            attributedString.addAttributes([NSAttributedStringKey.font : UIFont.GTAmericaStandardDemiBoldFont(size: 15)], range: NSMakeRange(0, highlightedText.length))
             return attributedString
         }
         return nil

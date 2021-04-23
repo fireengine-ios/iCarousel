@@ -64,7 +64,7 @@ final class PlusMenuItemView: UIView, NibInit {
     @IBOutlet weak var adjustedLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaDemFont(size: 14)
+            newValue.font = .GTAmericaStandardDemiBoldFont(size: 14)
         }
     }
     @IBOutlet weak var button: UIButton! {

@@ -16,7 +16,7 @@ final class FullscreenTextController: UIViewController {
     private let textView: UITextView = {
         let textView = UITextView()
         textView.isEditable = false
-        textView.font = UIFont.TurkcellSaturaRegFont(size: 15)
+        textView.font = UIFont.GTAmericaStandardRegularFont(size: 15)
         textView.textColor = .black
         
         let edgeInset: CGFloat = 16

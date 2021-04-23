@@ -13,7 +13,7 @@ final class PrepareQuickScroll: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            titleLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             titleLabel.textColor = ColorConstants.textGrayColor.color
             titleLabel.text = TextConstants.prepareQuickScroll
         }

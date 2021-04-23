@@ -26,7 +26,7 @@ final class PasswordCell: ProtoInputTextCell {
     
     @IBOutlet private weak var showBtn: UIButton! {
         didSet {
-            showBtn.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            showBtn.titleLabel?.font = UIFont.GTAmericaStandardBoldFont(size: 16)
             showBtn.setTitle(TextConstants.showPassword, for: .normal)
         }
     }
@@ -34,7 +34,7 @@ final class PasswordCell: ProtoInputTextCell {
     @IBOutlet weak var textInput: UITextField! {
         didSet {
             inputTextField = textInput
-            textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            textInput.font = UIFont.GTAmericaStandardBoldFont(size: 21)
             textInput.keyboardType = .default
         }
     }
@@ -47,7 +47,7 @@ final class PasswordCell: ProtoInputTextCell {
             /// https://stackoverflow.com/a/35295940/5893286
             textInput.isSecureTextEntry = newValue
             textInput.font = nil
-            textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            textInput.font = UIFont.GTAmericaStandardBoldFont(size: 21)
         }
     }
     
@@ -74,13 +74,13 @@ final class PasswordCell: ProtoInputTextCell {
     func changeTitleHeighlight(heighlight: Bool) {
         var placeholder = ""
         if heighlight {
-            textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            textInput.font = UIFont.GTAmericaStandardBoldFont(size: 21)
             titleLabel.textColor = ColorConstants.whiteColor.color
         } else {
             titleLabel.textColor = ColorConstants.yellowColor.color
             if let savedPlaceholder = placeholderText {
                 if textInput.text?.count == 0 {
-                    textInput.font = UIFont.TurkcellSaturaBolFont(size: 21)
+                    textInput.font = UIFont.GTAmericaStandardBoldFont(size: 21)
                 }
                 placeholder = savedPlaceholder
             }

@@ -76,7 +76,7 @@ final class SupportFormBannerView: UIView, NibInit {
         toolbar.sizeToFit()
         
         let doneButton = UIBarButtonItem.init(title: TextConstants.apply,
-                                              font: UIFont.TurkcellSaturaFont(),
+                                              font: UIFont.GTAmericaStandardRegularFont(size: 18),
                                               tintColor: ColorConstants.buttonTintColor.color,
                                               accessibilityLabel: nil,
                                               style: .plain,
@@ -88,7 +88,7 @@ final class SupportFormBannerView: UIView, NibInit {
                                                action: nil)
         
         let cancelButton = UIBarButtonItem.init(title: TextConstants.cancel,
-                                                font: UIFont.TurkcellSaturaFont(),
+                                                font: UIFont.GTAmericaStandardRegularFont(size: 18),
                                                 tintColor: ColorConstants.buttonTintColor.color,
                                                 accessibilityLabel: nil,
                                                 style: .plain,

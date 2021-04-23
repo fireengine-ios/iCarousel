@@ -68,7 +68,7 @@ class DropDownView: UIView {
         
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: cornerView!.frame.size.width - 25, height: cornerView!.frame.size.height))
-        titleLabel!.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        titleLabel!.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         titleLabel!.textColor = ColorConstants.darkBlueColor.color
         titleLabel!.textAlignment = .left
         titleLabel!.backgroundColor = UIColor.clear

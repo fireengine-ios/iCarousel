@@ -5,7 +5,7 @@ final class EmailEnterDesigner: NSObject {
         willSet {
             newValue.text = TextConstants.pleaseEnterYourMissingAccountInformation
             newValue.textColor = UIColor.black
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
         }
@@ -35,7 +35,7 @@ final class EmailEnterDesigner: NSObject {
             newValue.setBackgroundColor(UIColor.lrTealish.darker(by: 30), for: .highlighted)
             newValue.setBackgroundColor(UIColor.lrTealish.withAlphaComponent(0.5), for: .disabled)
             
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.adjustsFontSizeToFitWidth()
         }
     }

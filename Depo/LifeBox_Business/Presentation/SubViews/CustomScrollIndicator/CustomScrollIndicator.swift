@@ -57,7 +57,7 @@ final class CustomScrollIndicator: UIView {
         sectionView.layer.cornerRadius = 5
         sectionView.backgroundColor = ColorConstants.blueColor.color
         sectionLabel.textColor = .white
-        sectionLabel.font = UIFont.TurkcellSaturaMedFont(size: 12)
+        sectionLabel.font = UIFont.GTAmericaStandardMediumFont(size: 12)
         titleOffset = NumericConstants.defaultCustomScrollIndicatorOffset
         isUserInteractionEnabled = false
     }

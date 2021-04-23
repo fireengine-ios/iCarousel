@@ -31,7 +31,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.setTitle(TextConstants.fileInfoSave, for: .normal)
         }
     }

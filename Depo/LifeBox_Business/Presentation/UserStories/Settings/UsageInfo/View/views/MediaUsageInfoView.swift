@@ -53,12 +53,12 @@ final class MediaUsageInfoView: UIView {
         volumeLabel.text = ""
         volumeLabel.textAlignment = .right
         volumeLabel.textColor = UIColor.lrTealish
-        volumeLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        volumeLabel.font = UIFont.GTAmericaStandardRegularFont(size: 16)
         
         countLabel.text = ""
         countLabel.textAlignment = .right
         countLabel.textColor = ColorConstants.textGrayColor.color
-        countLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        countLabel.font = UIFont.GTAmericaStandardRegularFont(size: 16)
     }
     
     private func setupConstraints() {

@@ -172,8 +172,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             
             leftSpaceForSmallmage.constant = BasicCollectionMultiFileCell.leftSpaceBigCell
             
-            fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
-            detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
+            fileNameLabel.font = UIFont.GTAmericaStandardRegularFont(size: 10)
+            detailsLabel.font = UIFont.GTAmericaStandardRegularFont(size: 10)
             
             layoutIfNeeded()
         }
@@ -187,8 +187,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             
             leftSpaceForSmallmage.constant = BasicCollectionMultiFileCell.leftSpaceSmallCell
             
-            fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            fileNameLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
+            detailsLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             layoutIfNeeded()
         }
         
@@ -303,10 +303,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bigSelectionView.layer.borderColor = ColorConstants.darkBlueColor.color.cgColor
         bigSelectionView.alpha = 0
         
-        fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
+        fileNameLabel.font = UIFont.GTAmericaStandardRegularFont(size: 10)
         fileNameLabel.textColor = ColorConstants.textGrayColor.color
         
-        detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
+        detailsLabel.font = UIFont.GTAmericaStandardRegularFont(size: 10)
         detailsLabel.textColor = ColorConstants.textGrayColor.color.withAlphaComponent(0.6)
         
         moreButton.accessibilityLabel = TextConstants.accessibilityMore

@@ -27,7 +27,7 @@ class PhotosOrderCollectionViewCell: UICollectionViewCell {
         selectionView.alpha = 0
         
         positionLabel.backgroundColor = ColorConstants.darkBlueColor.color
-        positionLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        positionLabel.font = UIFont.GTAmericaStandardBoldFont(size: 18)
         positionLabel.textColor = ColorConstants.whiteColor.color
         positionLabel.text = ""
         

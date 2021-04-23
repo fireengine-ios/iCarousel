@@ -23,7 +23,7 @@ final class SettingFooterView: UIView, NibInit {
     @IBOutlet private weak var versionLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.lightText.color
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 16)
             
             if let version = UserDefaults.standard.string(forKey: AppConfigurator.SettingsBundleKeys.AppVersionKey),
                 let build = UserDefaults.standard.string(forKey: AppConfigurator.SettingsBundleKeys.BuildVersionKey) {

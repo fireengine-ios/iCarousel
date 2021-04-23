@@ -23,7 +23,7 @@ class TitleView: UIView {
         titleLabel?.textAlignment = .center
         titleLabel?.backgroundColor = UIColor.clear
         titleLabel?.textColor = UIColor.white
-        titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 19.0)
+        titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 19.0)
         titleLabel?.text = title
     }
     
@@ -32,7 +32,7 @@ class TitleView: UIView {
         subTitleLabel?.textAlignment = .center
         subTitleLabel?.backgroundColor = UIColor.clear
         subTitleLabel?.textColor = UIColor.white
-        subTitleLabel?.font = UIFont.TurkcellSaturaMedFont(size: 12.0)
+        subTitleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 12.0)
         subTitleLabel?.text = title
     }
 

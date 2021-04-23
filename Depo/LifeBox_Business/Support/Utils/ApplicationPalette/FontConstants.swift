@@ -8,36 +8,20 @@
 
 extension UIFont {
     
-    static func TurkcellSaturaDemFont(size: CGFloat = 9) -> UIFont {
-        return .systemFont(ofSize: size, weight: .semibold)//UIFont(name: "TurkcellSaturaDem", size: size)!
+    static func GTAmericaStandardDemiBoldFont(size: CGFloat) -> UIFont {
+        return .GTAmericaStandardMediumFont(size: size)
+    }
+   
+    static func GTAmericaStandardBoldFont(size: CGFloat) -> UIFont {
+        return UIFont(name: "GTAmericaLC-Bd", size: size)!
     }
     
-    static func TurkcellSaturaRegFont(size: CGFloat = 9) -> UIFont {
-        return .systemFont(ofSize: size, weight: .regular)//UIFont(name: "GTAmericaTrial-Rg", size: size)!
+    static func GTAmericaStandardRegularFont(size: CGFloat) -> UIFont {
+        return UIFont(name: "GTAmericaLC-Rg", size: size)!
     }
     
-    static func TurkcellSaturaBolFont(size: CGFloat = 9) -> UIFont {
-        return .systemFont(ofSize: size, weight: .bold)//UIFont(name: "TurkcellSaturaBol", size: size)!
-    }
-    
-    static func TurkcellSaturaItaFont(size: CGFloat = 9) -> UIFont {
-        return .italicSystemFont(ofSize: size)//UIFont(name: "TurkcellSaturaIta", size: size)!
-    }
-    
-    static func TurkcellSaturaMedFont(size: CGFloat = 9) -> UIFont {
-        return .systemFont(ofSize: size, weight: .medium)//UIFont(name: "GTAmericaTrial-Md", size: size)!
-    }
-    
-    static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
-        return .systemFont(ofSize: size, weight: .regular)//UIFont(name: "GTAmericaTrial-Rg", size: size)!
-    }
-    
-    static func GTAmericaStandardRegularFont(size: CGFloat = 18) -> UIFont {
-        return .systemFont(ofSize: size, weight: .regular)//UIFont(name: "GTAmericaTrial-Rg", size: size)!
-    }
-    
-    static func GTAmericaStandardMediumFont(size: CGFloat = 18) -> UIFont {
-        return .systemFont(ofSize: size, weight: .medium)//UIFont(name: "GTAmericaTrial-Md", size: size)!
+    static func GTAmericaStandardMediumFont(size: CGFloat) -> UIFont {
+        return UIFont(name: "GTAmericaLC-Md", size: size)!
     }
 }
 

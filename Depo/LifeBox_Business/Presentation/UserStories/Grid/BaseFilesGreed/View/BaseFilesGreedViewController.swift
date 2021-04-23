@@ -79,22 +79,22 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         collectionView!.addSubview(refresher)
         
         cancelSelectionButton = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
-                                                font: .TurkcellSaturaDemFont(size: 19.0),
+                                                font: .GTAmericaStandardDemiBoldFont(size: 19.0),
                                                 target: self,
                                                 selector: #selector(onCancelSelectionButton))
 
         backAsCancelBarButton = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
-                                                font: .TurkcellSaturaDemFont(size: 19.0),
+                                                font: .GTAmericaStandardDemiBoldFont(size: 19.0),
                                                 target: self,
                                                 selector: #selector(onBackButton))
         
         noFilesLabel.text = TextConstants.photosVideosViewNoPhotoTitleText
         noFilesLabel.textColor = ColorConstants.textGrayColor.color
-        noFilesLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        noFilesLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         
         noFilesTopLabel?.text = TextConstants.folderEmptyText
         noFilesTopLabel?.textColor = ColorConstants.grayTabBarButtonsColor.color
-        noFilesTopLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        noFilesTopLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 19)
         
         startCreatingFilesButton.setTitle(TextConstants.photosVideosViewNoPhotoButtonText, for: .normal)
         

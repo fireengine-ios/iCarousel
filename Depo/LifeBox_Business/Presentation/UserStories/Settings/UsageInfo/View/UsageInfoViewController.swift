@@ -28,7 +28,7 @@ final class UsageInfoViewController: ViewController {
     @IBOutlet private weak var cardTitleLabel: UILabel! {
         didSet {
             cardTitleLabel.text = TextConstants.myStorage
-            cardTitleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            cardTitleLabel.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             cardTitleLabel.textColor = UIColor.lrTealish
         }
     }
@@ -61,7 +61,7 @@ final class UsageInfoViewController: ViewController {
             usagePercentageLabel.textAlignment = .center
             usagePercentageLabel.numberOfLines = 0
             usagePercentageLabel.textColor = UIColor.lrTealish
-            usagePercentageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            usagePercentageLabel.font = UIFont.GTAmericaStandardBoldFont(size: 20)
             usagePercentageLabel.adjustsFontSizeToFitWidth()
         }
     }
@@ -72,7 +72,7 @@ final class UsageInfoViewController: ViewController {
             wholeStorageDetailLabel.text = String(format: TextConstants.usedAndLeftSpace, zero, zero)
             wholeStorageDetailLabel.numberOfLines = 0
             wholeStorageDetailLabel.textColor = UIColor.lrTealish
-            wholeStorageDetailLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            wholeStorageDetailLabel.font = UIFont.GTAmericaStandardMediumFont(size: 18)
         }
     }
     
@@ -81,7 +81,7 @@ final class UsageInfoViewController: ViewController {
             upgradeButton.backgroundColor = UIColor.lrTealish
             upgradeButton.setTitleColor(.white, for: .normal)
             upgradeButton.setTitle(TextConstants.fullQuotaSmallPopUpSecondButtonTitle, for: .normal)
-            upgradeButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 14)
+            upgradeButton.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 14)
             upgradeButton.insets = UIEdgeInsets(top: 2, left: 16, bottom: 2, right: 16 )
         }
     }
@@ -90,7 +90,7 @@ final class UsageInfoViewController: ViewController {
         didSet {
             myDataUsageLabel.text = TextConstants.myUsageStorage
             myDataUsageLabel.textColor = UIColor.lrTealish
-            myDataUsageLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            myDataUsageLabel.font = UIFont.GTAmericaStandardMediumFont(size: 18)
         }
     }
     
@@ -192,16 +192,16 @@ final class UsageInfoViewController: ViewController {
             
             let textHeight: CGFloat = 25
             let usagePercentage = String(format: TextConstants.usagePercentage, usedVolume.rounded(.toNearestOrAwayFromZero))
-            let widthForName = commonWidth - usagePercentage.width(for: textHeight, font: .TurkcellSaturaDemFont(size: 16))
+            let widthForName = commonWidth - usagePercentage.width(for: textHeight, font: .GTAmericaStandardDemiBoldFont(size: 16))
             
-            cellHeight += model.offerName?.height(for: widthForName, font: .TurkcellSaturaMedFont(size: 18)) ?? 0
+            cellHeight += model.offerName?.height(for: widthForName, font: .GTAmericaStandardMediumFont(size: 18)) ?? 0
             
             let packageSpaceDetails = String(format: TextConstants.packageSpaceDetails, model.usedString, model.totalString)
-            cellHeight += packageSpaceDetails.height(for: commonWidth, font: .TurkcellSaturaRegFont(size: 18))
+            cellHeight += packageSpaceDetails.height(for: commonWidth, font: .GTAmericaStandardRegularFont(size: 18))
 
             if let dateString = model.expiryDate?.getDateInFormat(format: "dd MMM YYYY") {
                 cellHeight += String(format: TextConstants.renewDate, dateString)
-                    .height(for: commonWidth, font: .TurkcellSaturaRegFont(size: 14))
+                    .height(for: commonWidth, font: .GTAmericaStandardRegularFont(size: 14))
             }
             
             biggerHeight = max(biggerHeight, cellHeight)

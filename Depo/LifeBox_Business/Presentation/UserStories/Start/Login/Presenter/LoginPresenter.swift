@@ -72,7 +72,7 @@ class LoginPresenter: BasePresenter {
         let title = TextConstants.accountStatusTitle
         
         let titleFullAttributes: [NSAttributedStringKey : Any] = [
-            .font : UIFont.TurkcellSaturaFont(size: 18),
+            .font : UIFont.GTAmericaStandardRegularFont(size: 18),
             .foregroundColor : UIColor.black,
             .kern : 0
         ]
@@ -84,7 +84,7 @@ class LoginPresenter: BasePresenter {
         messageParagraphStyle.alignment = .center
         
         let messageFullAttributes: [NSAttributedStringKey : Any] = [
-            .font : UIFont.TurkcellSaturaMedFont(size: 16),
+            .font : UIFont.GTAmericaStandardMediumFont(size: 16),
             .foregroundColor : ColorConstants.blueGrey.color,
             .paragraphStyle : messageParagraphStyle,
             .kern : 0

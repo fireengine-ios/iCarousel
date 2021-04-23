@@ -66,7 +66,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
         case .etk:
             title = TextConstants.etkPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.etkPermissionDescription,
-                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
+                                                        attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 16),
                                                                      .foregroundColor: UIColor.lrLightBrownishGrey])
             
             let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
@@ -77,12 +77,12 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
         case .globalPermission:
             title = TextConstants.globalPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.globalPermissionDescriptionLabel,
-                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
+                                                        attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 16),
                                                                      .foregroundColor: UIColor.lrLightBrownishGrey])
         case .mobilePayment:
             title = TextConstants.mobilePaymentPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.mobilePaymentPermissionDescriptionLabel,
-                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
+                                                        attributes: [.font: UIFont.GTAmericaStandardRegularFont(size: 16),
                                                                      .foregroundColor: UIColor.lrLightBrownishGrey])
             
             let rangeLink = descriptionText.mutableString.range(of: TextConstants.mobilePaymentPermissionLink)

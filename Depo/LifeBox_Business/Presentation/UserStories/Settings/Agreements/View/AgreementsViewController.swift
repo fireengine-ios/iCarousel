@@ -122,7 +122,7 @@ final class AgreementsViewController: BaseViewController, NibInit {
                     return
                 }
                 
-                let prepearedContent = content.setHTMLStringFont(UIFont.GTAmericaStandardRegularFont(),
+                let prepearedContent = content.setHTMLStringFont(UIFont.GTAmericaStandardRegularFont(size: 16),
                                                                  fontSizeInPixels: 16)
                 self.webView.loadHTMLString(prepearedContent, baseURL: nil)
             case .failed(_):

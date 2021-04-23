@@ -49,7 +49,7 @@ final class SubjectDetailsViewController: BasePopUpController, NibInit {
     }
     
     private func convertHtmlToAttributedString() {
-        let font = UIFont.TurkcellSaturaFont(size: 15)
+        let font = UIFont.GTAmericaStandardRegularFont(size: 15)
         
         let htmlText = "<span style=\"color:rgba(32,33,34,0.8); font-family: '\(font.familyName)'; font-size: \(font.pointSize)\">\(type?.localizedInfoHtml ?? "")</span>"
         

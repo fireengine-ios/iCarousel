@@ -16,7 +16,7 @@ final class SuggestionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        nameLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+        nameLabel.font = UIFont.GTAmericaStandardMediumFont(size: 18)
         nameLabel.textColor = .white
         backgroundColor = .clear
         contentView.backgroundColor = .clear

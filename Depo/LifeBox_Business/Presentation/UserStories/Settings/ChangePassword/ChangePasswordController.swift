@@ -94,7 +94,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         addTapGestureToHideKeyboard()
         
         let doneButton = UIBarButtonItem(title: TextConstants.accessibilityDone,
-                                         font: UIFont.TurkcellSaturaDemFont(size: 19),
+                                         font: UIFont.GTAmericaStandardDemiBoldFont(size: 19),
                                          tintColor: .white,
                                          accessibilityLabel: TextConstants.accessibilityDone,
                                          style: .plain,

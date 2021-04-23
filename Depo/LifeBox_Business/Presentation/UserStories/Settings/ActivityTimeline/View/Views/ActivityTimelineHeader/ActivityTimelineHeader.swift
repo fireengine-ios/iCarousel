@@ -13,7 +13,7 @@ class ActivityTimelineHeader: UITableViewHeaderFooterView {
     @IBOutlet weak var dayLabel: UILabel! {
         didSet {
             dayLabel.textColor = ColorConstants.darkText.color
-            dayLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            dayLabel.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
         }
     }
 }
