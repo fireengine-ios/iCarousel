@@ -123,6 +123,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var topPageErrorView: LoginErrorBannerView! {
         willSet {
             newValue.isHidden = true
+            newValue.backgroundColor = UIColor.clear
         }
     }
 
@@ -136,6 +137,7 @@ final class LoginViewController: ViewController {
     @IBOutlet private weak var loginErrorViewContainer: UIView! {
         willSet {
             newValue.isHidden = true
+            newValue.backgroundColor = UIColor.clear
         }
     }
 
