@@ -3,6 +3,16 @@
     {
       "filename" : "login_fast_login.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "login_fast_login_dark.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

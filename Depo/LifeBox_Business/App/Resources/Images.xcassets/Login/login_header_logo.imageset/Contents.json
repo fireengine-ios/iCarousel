@@ -3,6 +3,16 @@
     {
       "filename" : "login_header_logo.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "login_header_logo_dark.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
