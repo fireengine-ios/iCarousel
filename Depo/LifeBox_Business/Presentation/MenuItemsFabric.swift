@@ -190,32 +190,32 @@ extension ElementTypes {
     var menuImage: UIImage? {
         var imageName: String? = nil
         switch self {
-        case .info:
-            imageName = "infoButton"
-        case .select:
-            imageName = "selectButton"
-        case .moveToTrash, .moveToTrashShared, .deletePermanently:
-            imageName = "trashButton"
-        case .copy:
-            imageName = "copyLinkButton"
-        case .endSharing, .leaveSharing:
-            imageName = "endSharingButton"
-        case .move:
-            imageName = "turnDownRightArrow"
-        case .share:
-            imageName = "turnUpRightArrow"
-        case .privateShare:
-            imageName = "shareButton"
-        case .addToFavorites, .removeFromFavorites:
-            imageName = "action_favorite"
-        case .download, .downloadDocument:
-            imageName = "downloadButton"
-        case .restore:
-            imageName = "restoreButton"
-        case .rename:
-            imageName = "renameButton"
-        default:
-            return nil
+            case .info:
+                imageName = "infoButton"
+            case .select:
+                imageName = "selectButton"
+            case .moveToTrash, .moveToTrashShared, .deletePermanently:
+                imageName = "trashButton"
+            case .copy:
+                imageName = "copyLinkButton"
+            case .endSharing, .leaveSharing:
+                imageName = "endSharingButton"
+            case .move:
+                imageName = "turnDownRightArrow"
+            case .share:
+                imageName = "turnUpRightArrow"
+            case .privateShare:
+                imageName = "shareButton"
+            case .addToFavorites, .removeFromFavorites:
+                imageName = "action_favorite"
+            case .download, .downloadDocument:
+                imageName = "downloadButton"
+            case .restore:
+                imageName = "restoreButton"
+            case .rename:
+                imageName = "renameButton"
+            default:
+                return nil
         }
         
         guard let name = imageName else {

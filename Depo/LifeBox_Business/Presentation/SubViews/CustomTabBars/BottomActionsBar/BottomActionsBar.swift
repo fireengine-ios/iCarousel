@@ -32,7 +32,7 @@ enum BottomBarActionType: Int {
             case .privateShare: imageName = "shareButton"
             case .info: imageName = "infoButton"
             case .delete, .deletePermanently: imageName = "trashButton"
-            case .move: imageName = "turnUpRightArrow"
+            case .move: imageName = "turnDownRightArrow"
             case .download: imageName = "downloadButton"
             case .downloadDocument: imageName = "downloadButton"
             case .restore: imageName = "restoreButtonIcon"

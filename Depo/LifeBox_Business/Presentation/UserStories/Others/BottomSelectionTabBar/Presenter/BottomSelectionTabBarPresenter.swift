@@ -29,10 +29,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     func setupTabBarWith(items: [BaseDataSourceItem], shareType: PrivateShareType? = nil) {
         guard let wrapData = items as? [WrapData] else { return }
 
-        let trashBinRelated = shareType?.isTrashBinRelated ?? false
-
         let matchesBitmasks = calculateMatchesBitmasks(from: wrapData)
-        let elementsConfig = createElementTypesArray(from: matchesBitmasks, trashBinRelated: trashBinRelated)
+        let elementsConfig = createElementTypesArray(from: matchesBitmasks, shareType: shareType)
 
         let config = EditingBarConfig(elementsConfig: elementsConfig, style: .opaque)
         setupConfig(withConfig: config)
@@ -60,7 +58,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
 
     /// Returns element types array calculated from bitmask
-    private func createElementTypesArray(from bitmask: Int, trashBinRelated: Bool = false) -> [ElementTypes] {
+    private func createElementTypesArray(from bitmask: Int, shareType: PrivateShareType? = nil) -> [ElementTypes] {
         var bitmaskValue = bitmask
         var permissions = [PrivateSharePermission]()
         
@@ -127,7 +125,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         //specific actions order
         var elementTypesArray = [ElementTypes]()
         
-        if trashBinRelated {
+        if shareType?.isTrashBinRelated == true {
             if permissions.contains(.delete) {
                 elementTypesArray.append(.restore)
                 elementTypesArray.append(.deletePermanently)
@@ -143,6 +141,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             }
             
             if permissions.contains(.delete) {
+                if shareType?.rootType.isContained(in: [.myDisk, .sharedArea]) == true {
+                    elementTypesArray.append(.move)
+                }
+                
                 elementTypesArray.append(.moveToTrash)
             }
             
@@ -329,6 +331,11 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     action = UIAlertAction(title: TextConstants.trashBinDeleteYesAction, style: .default, handler: { _ in
                         self.interactor.deletePermanently(items: currentItems)
                     })
+                    case .moveToTrash, .moveToTrashShared:
+                    action = UIAlertAction(title: TextConstants.actionDelete, style: .default, handler: { _ in
+                        self.interactor.moveToTrashShared(items: currentItems)
+                    })
+                    
                 case .restore:
                     action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
                         self.interactor.restore(items: currentItems)
