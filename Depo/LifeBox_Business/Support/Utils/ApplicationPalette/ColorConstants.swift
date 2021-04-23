@@ -49,7 +49,6 @@ enum ColorConstants: String, CaseIterable {
     case loginPopupDescription
     case lrTiffanyBlueGradient
     case loginErrorLabelText
-    case loginTextFieldPlaceholder
     case marineTwo
     case marineFour
     case multifileCellSubtitleText
@@ -83,6 +82,8 @@ enum ColorConstants: String, CaseIterable {
     case selectedBottomBarButtonColor
     case selectedCellBlueColor
     case sharedContactCircleBackground
+    case textfieldBackground
+    case textfieldBorder
     case textOrange
     case textDisabled
     case tableBackground
@@ -178,7 +179,6 @@ enum ColorConstants: String, CaseIterable {
         case .loginPopupDescription: return UIColor(named: "loginPopupDescription")!
         case .lrTiffanyBlueGradient: return UIColor(named: "lrTiffanyBlueGradient")!
         case .loginErrorLabelText: return UIColor(named: "loginErrorLabelText")!
-        case .loginTextFieldPlaceholder: return UIColor(named: "loginTextFieldPlaceholder")!
         case .marineTwo: return UIColor(named: "marineTwo")!
         case .marineFour: return UIColor(named: "marineFour")!
         case .multifileCellSubtitleText: return UIColor(named: "multifileCellSubtitleText")!
@@ -212,6 +212,8 @@ enum ColorConstants: String, CaseIterable {
         case .selectedBottomBarButtonColor: return UIColor(named: "selectedBottomBarButtonColor")!
         case .selectedCellBlueColor: return UIColor(named: "selectedCellBlueColor")!
         case .sharedContactCircleBackground: return UIColor(named: "sharedContactCircleBackground")!
+        case .textfieldBackground: return UIColor(named: "textfieldBackground")!
+        case .textfieldBorder: return UIColor(named: "textfieldBorder")!
         case .textOrange: return UIColor(named: "textOrange")!
         case .textDisabled: return UIColor(named: "textDisabled")!
         case .tableBackground: return UIColor(named: "tableBackground")!

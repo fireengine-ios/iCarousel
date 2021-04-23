@@ -90,21 +90,26 @@ final class LoginViewController: ViewController {
         willSet {
             
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPageEmailFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder.color])
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.Text.textFieldPlaceholder.color])
             newValue.textColor = ColorConstants.Text.textFieldText.color
+            newValue.borderColor = ColorConstants.textfieldBorder.color
+            newValue.backgroundColor = ColorConstants.textfieldBackground.color
         }
     }
 
     @IBOutlet private weak var passwordTextField: BorderedWithInsetsTextField! {
         willSet {
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.loginPagePasswordFieldPlaceholder,
-                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.loginTextFieldPlaceholder.color])
+                                                                attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.Text.textFieldPlaceholder.color])
             newValue.textColor = ColorConstants.Text.textFieldText.color
 
             newValue.rightView = showHideButtonWithSpacingStackView
             newValue.rightViewMode = .always
             newValue.addTarget(self, action: #selector(passwordTextFieldTextDidChange(_:)), for: .editingChanged)
             newValue.fromRightTextInset = showHideButtonWithSpacingStackView.frame.width
+
+            newValue.borderColor = ColorConstants.textfieldBorder.color
+            newValue.backgroundColor = ColorConstants.textfieldBackground.color
         }
     }
     
@@ -507,5 +512,17 @@ extension LoginViewController: LoginViewInput {
 
     func failedBlockError() {
         showErrorMessage(with: TextConstants.hourBlockLoginError)
+    }
+}
+
+extension LoginViewController {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+       if #available(iOS 13.0, *) {
+           if (traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection)) {
+            // workaround for not changing cgColor for textfield frame's border
+            loginTextField.borderColor = ColorConstants.textfieldBorder.color
+            passwordTextField.borderColor = ColorConstants.textfieldBorder.color
+           }
+       }
     }
 }

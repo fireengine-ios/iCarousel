@@ -278,7 +278,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="HaE-yH-M24" firstAttribute="leading" secondItem="1LQ-nZ-JcX" secondAttribute="leading" constant="20" id="154-7I-Z2U"/>
                                         <constraint firstItem="q4u-sf-hsc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ZZ9-gW-4rJ" secondAttribute="bottom" constant="16" id="42J-AV-V7N"/>
@@ -341,6 +341,7 @@
                                     </variation>
                                 </view>
                             </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="1LQ-nZ-JcX" firstAttribute="centerX" secondItem="mkB-W0-Ecj" secondAttribute="centerX" id="CJD-SJ-nQn"/>
                                 <constraint firstAttribute="bottom" secondItem="1LQ-nZ-JcX" secondAttribute="bottom" id="LNS-oA-fHd"/>
@@ -350,7 +351,7 @@
                             </constraints>
                         </scrollView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="tableBackground"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="mkB-W0-Ecj" secondAttribute="trailing" id="Gzu-l0-xDq"/>
                         <constraint firstAttribute="bottom" secondItem="mkB-W0-Ecj" secondAttribute="bottom" id="L1n-pm-Vge"/>
@@ -362,7 +363,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="tableBackground"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZhT-GV-924" secondAttribute="bottom" id="YgY-in-Wiq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZhT-GV-924" secondAttribute="trailing" id="s7c-n6-Wnl"/>
@@ -377,10 +378,10 @@
     </objects>
     <designables>
         <designable name="SnA-9S-aeD">
-            <size key="intrinsicContentSize" width="160" height="15"/>
+            <size key="intrinsicContentSize" width="116" height="15"/>
         </designable>
         <designable name="jaY-vd-khc">
-            <size key="intrinsicContentSize" width="135.5" height="16"/>
+            <size key="intrinsicContentSize" width="91.5" height="16"/>
         </designable>
     </designables>
     <resources>
@@ -393,6 +394,9 @@
         </namedColor>
         <namedColor name="loginDescriptionLabelColor">
             <color red="0.25099998712539673" green="0.32100000977516174" blue="0.37999999523162842" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="tableBackground">
+            <color red="0.99215686274509807" green="0.99215686274509807" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
