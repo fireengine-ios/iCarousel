@@ -52,14 +52,14 @@ final class PopUpController: BasePopUpController {
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.textColor = popUpStyle == .normal ? ColorConstants.Text.labelTitle.color : ColorConstants.Text.labelTitle.color
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            titleLabel.font = UIFont.GTAmericaStandardDemiBoldFont(size: 16)
         }
     }
 
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
             messageLabel.textColor = popUpStyle == .normal ? ColorConstants.Text.textFieldText.color : ColorConstants.loginPopupDescription.color
-            messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+            messageLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         }
     }
 
@@ -180,7 +180,7 @@ final class PopUpController: BasePopUpController {
         button.setTitleColor(titleColor, for: .normal)
         button.backgroundColor = backgroundColor
         button.setTitleColor(titleColorHigh, for: .highlighted)
-        button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        button.titleLabel?.font = UIFont.GTAmericaStandardBoldFont(size: 14)
         button.layer.borderColor = borderColor
         button.layer.borderWidth = 2
         button.layer.cornerRadius = 5

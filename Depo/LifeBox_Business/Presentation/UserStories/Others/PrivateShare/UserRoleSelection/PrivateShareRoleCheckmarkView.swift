@@ -25,7 +25,7 @@ final class PrivateShareRoleCheckmarkView: UIView, NibInit {
         willSet {
             newValue.setTitle("", for: .normal)
             newValue.setTitleColor(ColorConstants.marineFour.color, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = .GTAmericaStandardDemiBoldFont(size: 18)
         }
     }
     

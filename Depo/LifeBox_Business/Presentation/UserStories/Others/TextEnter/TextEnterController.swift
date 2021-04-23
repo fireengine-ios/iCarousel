@@ -21,7 +21,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
             titleLabel.text = TextConstants.pleaseEnterYourMissingAccountInformation
-            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            titleLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
         }
     }
     
@@ -30,7 +30,7 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
             changeButton.isExclusiveTouch = true
             changeButton.setTitle(doneButtonTitle, for: .normal)
             changeButton.setTitleColor(UIColor.white, for: .normal)
-            changeButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            changeButton.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             changeButton.backgroundColor = UIColor.lrTealish
             changeButton.isOpaque = true
         }

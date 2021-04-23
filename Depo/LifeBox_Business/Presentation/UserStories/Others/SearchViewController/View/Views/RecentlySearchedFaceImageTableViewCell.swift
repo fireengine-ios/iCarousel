@@ -74,7 +74,7 @@ final class RecentlySearchedFaceImageTableViewCell: UITableViewCell {
             title.text = name
             title.textColor = .white
             title.textAlignment = .center
-            title.font = UIFont.TurkcellSaturaBolFont(size: 12)
+            title.font = UIFont.GTAmericaStandardBoldFont(size: 12)
             button.addSubview(title)
         }
         

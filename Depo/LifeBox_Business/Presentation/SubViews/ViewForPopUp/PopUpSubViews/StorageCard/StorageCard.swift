@@ -25,10 +25,10 @@ class StorageCard: BaseCardView {
     override func configurateView() {
         super.configurateView()
         
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        titleLabel.font = UIFont.GTAmericaStandardBoldFont(size: 18)
         titleLabel.textColor = ColorConstants.whiteColor.color
         
-        subTileLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        subTileLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         subTileLabel.textColor = ColorConstants.whiteColor.color
             
         backgroundView.clipsToBounds = true

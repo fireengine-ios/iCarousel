@@ -53,7 +53,7 @@ final class LoginCaptchaView: UIView, FromNib {
     @IBOutlet private weak var captchaErrorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.loginErrorLabelText.color
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 12)
             newValue.textAlignment = .left
         }
     }

@@ -49,7 +49,7 @@ final class BackButton: UIButton {
         buttonColor = ColorConstants.whiteColor.color
         setTitle("  " + TextConstants.backTitle, for: .normal)
         setImage(UIImage(named: "im_backButton"), for: .normal)
-        titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 19)
+        titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 19)
         addTarget(self, action: #selector(actionTouchUp), for: .touchUpInside)
         sizeToFit()
     }

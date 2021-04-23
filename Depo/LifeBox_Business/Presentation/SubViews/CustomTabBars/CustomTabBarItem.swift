@@ -22,7 +22,7 @@ class CustomTabBarItem: UITabBarItem {
 
     func setupTitle() {
         let font: UIFont
-        font = UIFont.TurkcellSaturaMedFont(size: 10)
+        font = UIFont.GTAmericaStandardMediumFont(size: 10)
         let attributes: [NSAttributedString.Key : Any] = [.font: font]
         setTitleTextAttributes(attributes, for: .normal)
         

@@ -45,7 +45,7 @@ final class OptInController: ViewController, NibInit {
         willSet {
             newValue.setTitle(TextConstants.resendCode, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.backgroundColor = UIColor.lrTealish
             newValue.isOpaque = true
         }
@@ -138,7 +138,7 @@ final class OptInController: ViewController, NibInit {
     func setupPhoneLable(with number: String) {
         let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
         let range = (text as NSString).range(of: number)
-        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
+        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.GTAmericaStandardMediumFont(size: 15),
                                                   .foregroundColor: ColorConstants.textGrayColor.color]
         
         let attributedString = NSMutableAttributedString(string: text)
@@ -176,18 +176,18 @@ final class OptInController: ViewController, NibInit {
         }
         navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         
-        mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
+        mainTitle.font = UIFont.GTAmericaStandardRegularFont(size: 35)
         mainTitle.textColor = .black
         mainTitle.text = TextConstants.enterSecurityCode
         
-        infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)
+        infoTitle.font = UIFont.GTAmericaStandardMediumFont(size: 15)
         infoTitle.textColor = ColorConstants.blueGrey.color
         
-        timerLabel.font = UIFont.TurkcellSaturaRegFont(size: 35)
+        timerLabel.font = UIFont.GTAmericaStandardRegularFont(size: 35)
         timerLabel.textColor = ColorConstants.cloudyBlue.color
         
         errorLabel.textColor = ColorConstants.textOrange.color
-        errorLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        errorLabel.font = UIFont.GTAmericaStandardDemiBoldFont(size: 16)
     }
     
     private func setupButtonsInitialState() {

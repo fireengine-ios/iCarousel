@@ -48,7 +48,7 @@ final class EmptyDataView: UIView, NibInit {
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textGrayColor.color
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         }
     }
     

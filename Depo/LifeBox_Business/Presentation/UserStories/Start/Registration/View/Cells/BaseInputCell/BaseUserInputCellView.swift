@@ -47,13 +47,13 @@ class BaseUserInputCellView: ProtoInputTextCell {
         isTitleTitleHightlight = heighlight
         var placeholder = ""
         if heighlight {
-            textInputField.font = UIFont.TurkcellSaturaBolFont(size: 21)
+            textInputField.font = UIFont.GTAmericaStandardBoldFont(size: 21)
             titleLabel.textColor = defaultTitleHightlightColor
         } else {
             titleLabel.textColor = ColorConstants.yellowColor.color
             if let savedPlaceholder = placeholderText {
                 if textInputField.text?.count == 0 {
-                    textInputField.font = UIFont.TurkcellSaturaBolFont(size: 16)
+                    textInputField.font = UIFont.GTAmericaStandardBoldFont(size: 16)
                 }
                 
                 placeholder = savedPlaceholder

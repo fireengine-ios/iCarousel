@@ -45,7 +45,7 @@ class CircleButton: UIButton {
         if (Device.isIpad) {
             fontSize = 16.0
         }
-        bottomTitleLabel?.font = UIFont.TurkcellSaturaRegFont(size: fontSize)
+        bottomTitleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: fontSize)
         bottomTitleLabel?.text = titleString
     }
     

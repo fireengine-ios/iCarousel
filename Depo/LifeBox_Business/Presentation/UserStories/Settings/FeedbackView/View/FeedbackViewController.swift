@@ -88,28 +88,28 @@ final class FeedbackViewController: ViewController {
         //TODO: use self.selectedLanguage
         
         titleLabel.text = TextConstants.feedbackViewTitle
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        titleLabel.font = UIFont.GTAmericaStandardRegularFont(size: 16)
         titleLabel.textColor = ColorConstants.whiteColor.color
         
         subTitle.text = TextConstants.feedbackViewSubTitle
-        subTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        subTitle.font = UIFont.GTAmericaStandardRegularFont(size: 18)
         subTitle.textColor = ColorConstants.textGrayColor.color
         
         suggestionLabel.text = TextConstants.feedbackViewSuggestion
-        suggestionLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        suggestionLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
         suggestionLabel.textColor = ColorConstants.textGrayColor.color
         
         complaintLabel.text = TextConstants.feedbackViewComplaint
-        complaintLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        complaintLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
         complaintLabel.textColor = ColorConstants.textGrayColor.color
         
         languageLabel.text = TextConstants.feedbackViewLanguageLabel
-        languageLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        languageLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         languageLabel.adjustsFontSizeToFitWidth()
         languageLabel.textColor = ColorConstants.textGrayColor.color
         
         sendButton.setTitle(TextConstants.feedbackViewSendButton, for: .normal)
-        sendButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        sendButton.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         
         suggestionButton.setImage(getImageForCheckbox(isSelected: suggeston), for: .normal)
         suggestionButton.tintColor = ColorConstants.blueColor.color

@@ -60,7 +60,7 @@ class SegmentedController: BaseViewController, NibInit {
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.tintColor = ColorConstants.darkBlueColor.color
-            newValue.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)],
+            newValue.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.GTAmericaStandardRegularFont(size: 14)],
                                             for: .normal)
         }
     }
@@ -74,18 +74,6 @@ class SegmentedController: BaseViewController, NibInit {
     
     private(set) var selectedIndex = 0
     var startIndex = 0
-    
-    //    weak var delegate: SegmentedControllerDelegate?
-    
-    //    private lazy var cancelSelectionButton = UIBarButtonItem(
-    //        title: TextConstants.cancelSelectionButtonTitle,
-    //        font: .TurkcellSaturaDemFont(size: 19.0),
-    //        target: self,
-    //        selector: #selector(onCancelSelectionButton))
-    
-    //    @objc private func onCancelSelectionButton() {
-    //        delegate?.segmentedControllerEndEditMode()
-    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

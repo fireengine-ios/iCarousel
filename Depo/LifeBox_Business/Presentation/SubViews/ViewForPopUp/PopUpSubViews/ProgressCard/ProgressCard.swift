@@ -27,7 +27,7 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         
         canSwipe = false
         
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        titleLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
         titleLabel.textColor = ColorConstants.textGrayColor.color
         titleLabel.text = ""
         
@@ -35,11 +35,11 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         progress.setProgress(0, animated: false)
         
         operationLabel.textColor = ColorConstants.blueColor.color
-        operationLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        operationLabel.font = UIFont.GTAmericaStandardBoldFont(size: 14)
         operationLabel.text = ""
         
         progressLabel.textColor = ColorConstants.textGrayColor.color
-        progressLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        progressLabel.font = UIFont.GTAmericaStandardRegularFont(size: 14)
         progressLabel.text = ""
     }
     

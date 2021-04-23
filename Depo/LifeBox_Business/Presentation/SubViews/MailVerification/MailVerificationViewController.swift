@@ -34,14 +34,14 @@ class MailVerificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        UIBlurEffect()
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
+        titleLabel.font = UIFont.GTAmericaStandardBoldFont(size: 20)
         titleLabel.textColor = ColorConstants.darkBlueColor.color
         titleLabel.text = TextConstants.registrationCellPlaceholderEmail
         
-        inputTextField.font = UIFont.TurkcellSaturaRegFont(size: 20)
+        inputTextField.font = UIFont.GTAmericaStandardRegularFont(size: 20)
         
         sendButton.setTitle(TextConstants.save, for: .normal)
-        sendButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        sendButton.titleLabel?.font = UIFont.GTAmericaStandardBoldFont(size: 18)
         sendButton.setTitleColor(ColorConstants.blueColor.color, for: .normal)
 
         contentView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))

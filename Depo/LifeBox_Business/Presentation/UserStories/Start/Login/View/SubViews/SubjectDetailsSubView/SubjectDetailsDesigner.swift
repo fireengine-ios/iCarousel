@@ -24,7 +24,7 @@ final class SubjectDetailsDesigner: NSObject {
     
     @IBOutlet private weak var subjectLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 21)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 21)
         }
     }
     

@@ -198,7 +198,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         if let textField = firstTextField {
             textField.backgroundColor = ColorConstants.searchBarColor.color
             textField.placeholder = TextConstants.search
-            textField.font = UIFont.TurkcellSaturaBolFont(size: 19)
+            textField.font = UIFont.GTAmericaStandardBoldFont(size: 19)
             textField.textColor = ColorConstants.darkBlueColor.color
             textField.keyboardAppearance = .dark
             searchTextField = textField
@@ -207,7 +207,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         let cancelButton = searchBar.firstSubview(of: UIButton.self)
         
         if let button = cancelButton {
-            button.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 17)
+            button.titleLabel?.font = UIFont.GTAmericaStandardRegularFont(size: 17)
             button.isEnabled = true
             button.adjustsFontSizeToFitWidth()
         }
@@ -222,7 +222,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             navigationItem.titleView = nil
 
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancelSelectionButtonTitle,
-                                                               font: .TurkcellSaturaDemFont(size: 19.0),
+                                                               font: .GTAmericaStandardDemiBoldFont(size: 19.0),
                                                                tintColor: ColorConstants.darkBlueColor.color,
                                                                target: self,
                                                                selector: #selector(onCancelSelectionButton))

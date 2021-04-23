@@ -13,7 +13,7 @@ class ActivityTimelineFileCell: UITableViewCell {
     @IBOutlet weak var fileNameLabel: UILabel! = UILabel() {
         didSet {
             fileNameLabel.textColor = ColorConstants.darkText.color
-            fileNameLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            fileNameLabel.font = UIFont.GTAmericaStandardDemiBoldFont(size: 15)
         }
     }
     @IBOutlet weak var fileImageView: UIImageView!

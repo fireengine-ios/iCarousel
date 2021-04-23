@@ -17,7 +17,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     @IBOutlet private weak var labelForTitle: UILabel! {
         didSet {
             labelForTitle.text = ""
-            labelForTitle.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            labelForTitle.font = UIFont.GTAmericaStandardMediumFont(size: 18)
             labelForTitle.textColor = ColorConstants.textGrayColor.color
         }
     }

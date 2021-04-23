@@ -40,7 +40,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet{
             newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.text = TextConstants.userProfileSelectQuestion
             newValue.backgroundColor = .white
             newValue.isOpaque = true

@@ -35,7 +35,7 @@ class CodeTextField: UITextField {
     private func setup() {
         delegate = self
         
-        font = UIFont.TurkcellSaturaBolFont(size: 37)
+        font = UIFont.GTAmericaStandardBoldFont(size: 37)
         textColor = ColorConstants.darkText.color
         textAlignment = .center
         

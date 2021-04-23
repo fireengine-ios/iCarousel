@@ -20,7 +20,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         willSet {
             newValue.text = TextConstants.profilePhoneNumberTitle
             newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardBoldFont(size: 18)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
         }
@@ -29,7 +29,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     @IBOutlet public weak var subtitleLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textOrange.color
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 16)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
             newValue.isHidden = true
@@ -38,7 +38,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var codeTextField: UnderlineTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             newValue.textColor = textFieldColor
             newValue.borderStyle = .none
             newValue.backgroundColor = .white
@@ -91,7 +91,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
     
     @IBOutlet public weak var numberTextField: QuickDismissPlaceholderTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             newValue.textColor = textFieldColor
             newValue.borderStyle = .none
             newValue.backgroundColor = .white

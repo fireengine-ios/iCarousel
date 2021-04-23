@@ -56,7 +56,7 @@ final class CheckBoxView: UIView, NibInit {
             newValue.tintColor = .lrTealishTwo
             newValue.setTitle(TextConstants.photosVideosAutoSyncSettings, for: .normal)
             newValue.setTitleColor(.lrTealishTwo, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaBolFont(size: Device.isIphoneSmall ? 11 : 13)
+            newValue.titleLabel?.font = .GTAmericaStandardBoldFont(size: Device.isIphoneSmall ? 11 : 13)
             newValue.titleLabel?.numberOfLines = 2
             newValue.titleLabel?.lineBreakMode = .byWordWrapping
         }
@@ -67,7 +67,7 @@ final class CheckBoxView: UIView, NibInit {
             newValue.tintColor = .lrTealishTwo
             newValue.setTitle(type.title, for: .normal)
             newValue.setTitleColor(ColorConstants.lightText.color, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaRegFont(size: Device.isIphoneSmall ? 12 : 14)
+            newValue.titleLabel?.font = .GTAmericaStandardRegularFont(size: Device.isIphoneSmall ? 12 : 14)
             newValue.titleLabel?.numberOfLines = 2
             newValue.titleLabel?.lineBreakMode = .byWordWrapping
             newValue.forceImageToRightSide()

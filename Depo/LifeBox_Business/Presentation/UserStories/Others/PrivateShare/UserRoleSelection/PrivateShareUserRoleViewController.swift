@@ -25,7 +25,7 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
         willSet {
             newValue.setTitle(TextConstants.backTitle, for: .normal)
             newValue.setTitleColor(ColorConstants.marineFour.color, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 19)
+            newValue.titleLabel?.font = .GTAmericaStandardDemiBoldFont(size: 19)
             
             if let image = UIImage(named: "arrow2")?.withRenderingMode(.alwaysTemplate) {
                 newValue.setImage(image, for: .normal)
@@ -38,21 +38,21 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.privateShareRoleSelectionTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 19)
+            newValue.font = .GTAmericaStandardBoldFont(size: 19)
             newValue.textColor = ColorConstants.marineFour.color
         }
     }
     
     @IBOutlet private weak var displayNameLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
+            newValue.font = .GTAmericaStandardMediumFont(size: 16)
             newValue.textColor = .lrBrownishGrey
         }
     }
     
     @IBOutlet private weak var userNameLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .GTAmericaStandardRegularFont(size: 18)
             newValue.textColor = .black
         }
     }

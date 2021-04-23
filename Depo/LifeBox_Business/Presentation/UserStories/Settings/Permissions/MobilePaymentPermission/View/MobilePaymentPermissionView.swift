@@ -26,7 +26,7 @@ final class MobilePaymentPermissionView: UIView, NibInit {
         willSet {
             newValue.textColor = ColorConstants.marineTwo.color
             newValue.textAlignment = .center
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            newValue.font = UIFont.GTAmericaStandardBoldFont(size: 20)
             newValue.text = TextConstants.mobilePaymentViewTitleLabel
         }
     }
@@ -35,7 +35,7 @@ final class MobilePaymentPermissionView: UIView, NibInit {
         willSet {
             newValue.textColor = ColorConstants.darkBorder.color
             newValue.textAlignment = .center
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
             newValue.text = TextConstants.mobilePaymentViewDescriptionLabel
         }
     }
@@ -64,7 +64,7 @@ final class MobilePaymentPermissionView: UIView, NibInit {
         willSet {
             newValue.textColor = ColorConstants.linkBlack.color
             newValue.textAlignment = .center
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
             newValue.attributedText = NSAttributedString(string: TextConstants.mobilePaymentViewLinkLabel, attributes: [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.linkTapped))
             newValue.isUserInteractionEnabled = true
@@ -83,7 +83,7 @@ final class MobilePaymentPermissionView: UIView, NibInit {
         willSet {
             newValue.setTitle(TextConstants.approve, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardBoldFont(size: 16)
             newValue.backgroundColor = ColorConstants.marineTwo.color
             newValue.isOpaque = true
             newValue.isEnabled = false

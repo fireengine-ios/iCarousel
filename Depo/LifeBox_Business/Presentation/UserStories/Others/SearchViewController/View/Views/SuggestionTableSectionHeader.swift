@@ -22,7 +22,7 @@ final class SuggestionTableSectionHeader: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+        titleLabel.font = UIFont.GTAmericaStandardBoldFont(size: 18)
         titleLabel.textColor = .white
         backgroundColor = .clear
         contentView.backgroundColor = .clear

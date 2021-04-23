@@ -14,14 +14,14 @@ final class PasscodeViewImp: UIView, FromNib {
     
     @IBOutlet private weak var passcodeOutputLabel: UILabel! {
         didSet {
-            passcodeOutputLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            passcodeOutputLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             passcodeOutputLabel.textColor = ColorConstants.textGrayColor.color
         }
     }
     
     @IBOutlet weak var passcodeErrorLabel: UILabel! {
         didSet {
-            passcodeErrorLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            passcodeErrorLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             passcodeErrorLabel.backgroundColor = UIColor.darkGray
             passcodeErrorLabel.textColor = UIColor.white
             passcodeErrorLabel.layer.cornerRadius = 5

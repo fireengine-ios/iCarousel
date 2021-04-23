@@ -77,7 +77,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.duplicatesGray.color
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 20)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
             newValue.textAlignment = .center
@@ -87,7 +87,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.duplicatesGray.color
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 16)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
             newValue.textAlignment = .center
@@ -103,7 +103,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
     @IBOutlet private weak var firstButton: RoundedButton! {
         willSet {
             newValue.setTitle("", for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.titleLabel?.font = .GTAmericaStandardDemiBoldFont(size: 16)
             newValue.setTitleColor(.white, for: .normal)
             newValue.backgroundColor = ColorConstants.navy.color
             newValue.adjustsFontSizeToFitWidth()
@@ -113,7 +113,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
     @IBOutlet private weak var secondButton: UIButton! {
         willSet {
             newValue.setTitle("", for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaBolFont(size: 16)
+            newValue.titleLabel?.font = .GTAmericaStandardBoldFont(size: 16)
             newValue.setTitleColor(ColorConstants.navy.color, for: .normal)
         }
     }

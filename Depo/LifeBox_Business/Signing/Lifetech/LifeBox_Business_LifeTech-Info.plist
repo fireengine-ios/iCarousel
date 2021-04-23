@@ -86,16 +86,9 @@
 	<string>Your photos will be backed up to lifebox</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>TurkcellSaturaReg.ttf</string>
-		<string>TurkcellSaturaMedIta.ttf</string>
-		<string>TurkcellSaturaMed.ttf</string>
-		<string>TurkcellSaturaIta.ttf</string>
-		<string>TurkcellSaturaDemIta.ttf</string>
-		<string>TurkcellSaturaDem.ttf</string>
-		<string>TurkcellSaturaBol.ttf</string>
-		<string>TurkcellSaturaBolIta.ttf</string>
-		<string>GT-America-Standard-Regular-Trial.otf</string>
-		<string>GT-America-Standard-Medium-Trial.otf</string>
+		<string>GT-America-LC-Standard-Regular.otf</string>
+		<string>GT-America-LC-Standard-Medium.otf</string>
+		<string>GT-America-LC-Standard-Bold.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

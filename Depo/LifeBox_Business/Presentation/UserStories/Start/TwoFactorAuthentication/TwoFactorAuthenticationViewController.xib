@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18092"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="TurkcellSaturaBol.ttf">
-            <string>TurkcellSaturaBol</string>
+        <array key="GT-America-LC-Standard-Bold.otf">
+            <string>GTAmericaLC-Bd</string>
         </array>
-        <array key="TurkcellSaturaMed.ttf">
-            <string>TurkcellSaturaMed</string>
+        <array key="GT-America-LC-Standard-Medium.otf">
+            <string>GTAmericaLC-Md</string>
         </array>
-        <array key="Turkcell_Satura_Regular.ttf">
-            <string>TurkcellSatura</string>
+        <array key="GT-America-LC-Standard-Regular.otf">
+            <string>GTAmericaLC-Rg</string>
         </array>
     </customFonts>
     <objects>
@@ -43,24 +43,24 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You actived two-factor authentication on your account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="WNf-eD-Chw">
                                     <rect key="frame" x="48" y="60" width="279" height="82"/>
-                                    <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="35"/>
+                                    <fontDescription key="fontDescription" name="GTAmericaLC-Rg" family="GT America LC" pointSize="35"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To secure your account and login safely, we’ll send you a security code to veriy your identity." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIj-7j-Nxa">
                                     <rect key="frame" x="20" y="162" width="335" height="35"/>
-                                    <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="15"/>
+                                    <fontDescription key="fontDescription" name="GTAmericaLC-Md" family="GT America LC" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send the security code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjs-RZ-630">
-                                    <rect key="frame" x="21" y="240" width="333" height="17"/>
-                                    <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="15"/>
+                                    <rect key="frame" x="21" y="240" width="333" height="17.5"/>
+                                    <fontDescription key="fontDescription" name="GTAmericaLC-Bd" family="GT America LC" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOG-Q9-eRz" userLabel="Error View" customClass="ErrorBannerView" customModule="lifeBox_Business" customModuleProvider="target">
-                                    <rect key="frame" x="16" y="405" width="343" height="31"/>
+                                    <rect key="frame" x="16" y="405.5" width="343" height="31"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="31" placeholder="YES" id="7do-eh-NeB"/>
@@ -70,7 +70,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="26" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-nx-O4M" customClass="ResizableTableView" customModule="lifeBox_Business" customModuleProvider="target">
-                                    <rect key="frame" x="15" y="257" width="345" height="128"/>
+                                    <rect key="frame" x="15" y="257.5" width="345" height="128"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="0tB-eC-E0P"/>

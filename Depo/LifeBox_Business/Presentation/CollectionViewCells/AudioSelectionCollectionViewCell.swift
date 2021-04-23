@@ -22,7 +22,7 @@ class AudioSelectionCollectionViewCell: BaseCollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         nameLabel.textColor = ColorConstants.textGrayColor.color
-        nameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        nameLabel.font = UIFont.GTAmericaStandardRegularFont(size: 18)
         
         contentView.backgroundColor = ColorConstants.whiteColor.color
     }

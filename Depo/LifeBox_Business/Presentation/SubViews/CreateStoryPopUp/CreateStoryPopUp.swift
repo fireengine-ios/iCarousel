@@ -31,7 +31,7 @@ final class CreateStoryPopUp: UIViewController, NibInit {
     
     @IBOutlet private weak var actionButton: InsetsButton! {
         willSet {
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
             newValue.setTitleColor(UIColor.lrTealish, for: .normal)
 
             newValue.layer.cornerRadius = 22

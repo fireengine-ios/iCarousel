@@ -35,7 +35,7 @@ final class CaptchaView: UIView, FromNib {
     @IBOutlet weak var errorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textOrange.color
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 15)
             newValue.numberOfLines = 0
             newValue.isHidden = true
             newValue.backgroundColor = .white
@@ -45,7 +45,7 @@ final class CaptchaView: UIView, FromNib {
     
     @IBOutlet weak var captchaAnswerTextField: QuickDismissPlaceholderTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardRegularFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
             newValue.backgroundColor = .white

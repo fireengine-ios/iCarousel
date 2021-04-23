@@ -13,7 +13,7 @@ final class PermissionsDesigner: NSObject {
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
             newValue.textColor = UIColor.lrBrownishGrey
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .GTAmericaStandardRegularFont(size: 18)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
         }
@@ -43,7 +43,7 @@ final class PermissionsDesigner: NSObject {
         willSet {
             newValue.text = TextConstants.informativeDescription
             newValue.textColor = UIColor.lrLightBrownishGrey
-            newValue.font = .TurkcellSaturaFont(size: 14)
+            newValue.font = .GTAmericaStandardRegularFont(size: 14)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
         }

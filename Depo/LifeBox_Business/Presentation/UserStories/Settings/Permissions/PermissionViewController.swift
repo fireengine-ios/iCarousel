@@ -171,7 +171,7 @@ extension PermissionViewController: PermissionViewDelegate {
         let plainMessage = TextConstants.mobilePaymentClosePopupDescriptionLabel
         let range = (plainMessage as NSString).range(of: TextConstants.mobilePaymentClosePopupDescriptionBoldRangeLabel)
         let attributeMessage = NSMutableAttributedString(string: plainMessage)
-        let attribute = [NSAttributedString.Key.font : UIFont.TurkcellSaturaDemFont(size: 16), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo.color]
+        let attribute = [NSAttributedString.Key.font : UIFont.GTAmericaStandardDemiBoldFont(size: 16), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo.color]
         attributeMessage.addAttributes(attribute, range: range)
         let popup = PopUpController.with(title: TextConstants.mobilePaymentClosePopupTitleLabel, attributedMessage: attributeMessage, image: .none, buttonTitle: TextConstants.ok)
         UIApplication.topController()?.present(popup, animated: false, completion: nil)

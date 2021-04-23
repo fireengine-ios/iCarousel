@@ -13,13 +13,13 @@ class ActivityTimelineTimeCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel! {
         didSet {
             timeLabel.textColor = ColorConstants.darkText.color
-            timeLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            timeLabel.font = UIFont.GTAmericaStandardDemiBoldFont(size: 16)
         }
     }
     @IBOutlet weak var fileTypeLabel: UILabel! {
         didSet {
             fileTypeLabel.textColor = ColorConstants.darkText.color
-            fileTypeLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            fileTypeLabel.font = UIFont.GTAmericaStandardDemiBoldFont(size: 15)
         }
     }
 }

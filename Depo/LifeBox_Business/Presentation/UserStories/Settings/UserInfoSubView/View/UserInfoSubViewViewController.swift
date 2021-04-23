@@ -20,25 +20,25 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     
     @IBOutlet private weak var userNameLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 16)
         }
     }
     
     @IBOutlet private weak var userEmailLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 15)
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 15)
         }
     }
     
     @IBOutlet private weak var userPhoneNumber: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 15)
+            newValue.font = UIFont.GTAmericaStandardMediumFont(size: 15)
         }
     }
     
     @IBOutlet private weak var statusLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 15)
+            newValue.font = UIFont.GTAmericaStandardBoldFont(size: 15)
             newValue.textColor = .black
             if output.isMiddleUser {
                 newValue.text = TextConstants.midUser
@@ -53,7 +53,7 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     @IBOutlet private weak var accountDetailsLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.blueColor.color
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 15)
             newValue.text = TextConstants.accountDetails
         }
     }
@@ -61,14 +61,14 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     @IBOutlet private weak var userStorrageInformationLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.blueColor.color
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 18)
         }
     }
     
     @IBOutlet private weak var usedAsPercentageLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.blueColor.color
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.font = UIFont.GTAmericaStandardDemiBoldFont(size: 16)
         }
     }
     
