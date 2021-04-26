@@ -58,8 +58,14 @@ class RegistrationTermsInfoViewController: UIViewController {
         }
     }
 
-    @IBOutlet private weak var confirmButton: BlueButtonWithWhiteText! {
+    @IBOutlet private weak var confirmButton: RoundedInsetsButton! {
         willSet {
+            newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
+            newValue.setBackgroundColor(ColorConstants.disabledGrayBackgroud, for: .disabled)
+            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
+            newValue.setTitleColor(ColorConstants.disabledGrayText, for: .disabled)
+            newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
+            newValue.isOpaque = true
             newValue.setTitle("Onaylıyorum", for: .normal)
             newValue.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
         }
@@ -70,6 +76,11 @@ class RegistrationTermsInfoViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         setupTextView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textView.flashScrollIndicators()
     }
 
     override func viewDidLayoutSubviews() {

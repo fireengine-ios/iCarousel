@@ -42,7 +42,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFV-pq-CRH">
                             <rect key="frame" x="0.0" y="315" width="384" height="85"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ2-y2-eJx" customClass="BlueButtonWithWhiteText" customModule="Billo" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJ2-y2-eJx" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="58" y="15" width="268" height="55"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="55" id="5n0-0R-iUM"/>

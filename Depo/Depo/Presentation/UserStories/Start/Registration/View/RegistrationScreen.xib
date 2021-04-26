@@ -106,7 +106,7 @@
                                         </view>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iei-Qg-JRc" customClass="BlueButtonWithWhiteText" customModule="Billo" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iei-Qg-JRc" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="93" y="638" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="hPb-59-wQd"/>
