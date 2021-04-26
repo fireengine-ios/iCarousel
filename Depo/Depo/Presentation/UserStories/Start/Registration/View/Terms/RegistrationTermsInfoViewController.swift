@@ -27,6 +27,7 @@ class RegistrationTermsInfoViewController: UIViewController {
     }
 
     // MARK: - Views
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var popupHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var containerView: UIView! {
         willSet {
@@ -46,15 +47,6 @@ class RegistrationTermsInfoViewController: UIViewController {
         willSet {
             newValue.setupInfoEulaStyle()
             newValue.delegate = self
-        }
-    }
-
-    @IBOutlet private weak var bottomView: UIView! {
-        willSet {
-            newValue.layer.shadowColor = UIColor.black.cgColor
-            newValue.layer.shadowOpacity = 0.1
-            newValue.layer.shadowOffset = CGSize(width: 0, height: -4)
-            newValue.layer.shadowRadius = 18
         }
     }
 
@@ -80,12 +72,12 @@ class RegistrationTermsInfoViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        textView.flashScrollIndicators()
+        scrollView.flashScrollIndicators()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        confirmButton.isEnabled = textView.contentSize.height <= containerView.frame.height
+        popupHeightConstraint.constant = scrollView.contentSize.height
     }
 
     // MARK: - Actions
@@ -116,8 +108,6 @@ class RegistrationTermsInfoViewController: UIViewController {
 
         textView.textStorage.append(htmlString)
         textView.dataDetectorTypes = [.phoneNumber, .address]
-
-        popupHeightConstraint.constant = textView.contentSize.height + bottomView.frame.height
     }
 
     private func prepareHtml(from text: String) -> NSAttributedString? {
@@ -153,13 +143,6 @@ class RegistrationTermsInfoViewController: UIViewController {
 
 // MARK: - UITextViewDelegate
 extension RegistrationTermsInfoViewController: UITextViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard scrollView == textView else { return }
-        if textView.contentOffset.y + textView.frame.height >= textView.contentSize.height {
-            confirmButton.isEnabled = true
-        }
-    }
-
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         return defaultHandle(url: URL, interaction: interaction)
     }
