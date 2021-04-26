@@ -421,3 +421,18 @@ struct PrivateShareAccessListInfo: Codable {
     let expirationDate: Date?
     let conditions: [String]? //unknown array type
 }
+
+extension PrivateShareItemType {
+    var placeholderIcon: String {
+        switch self {
+        case .file:
+            return "AF_PS_folder"
+        case .album:
+            return "AF_PS_folder"
+        case .account:
+            return "company"
+        case .disk:
+            return "shape"
+        }
+    }
+}
