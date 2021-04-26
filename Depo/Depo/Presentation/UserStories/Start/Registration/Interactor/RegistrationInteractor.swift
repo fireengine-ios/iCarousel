@@ -15,6 +15,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var captchaService = CaptchaService()
     private lazy var eulaService = EulaService()
 
+    private var eula: EULAResponse?
+
     var captchaRequired = false
     private var retriesCount = 0 {
         didSet {
@@ -103,6 +105,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         eulaService.eulaGet { [weak self] response in
             switch response {
             case .success(let eulaContent):
+                self?.eula = eulaContent
                 self?.output.finishedLoadingTermsOfUse(eula: eulaContent.content ?? "")
             case .failed(let error):
                 self?.output.failedToLoadTermsOfUse(errorString: error.localizedDescription)
@@ -111,8 +114,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
         }
     }
     
-    func signUpUser(_ userInfo: RegistrationUserInfoModel) {
-        
+    func signUpAndApplyEula(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?) {
+
         ///sentOtp = false as a task requirements (FE-1055)
         let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false)
         
@@ -131,8 +134,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.analyticsService.trackSignupEvent()
                 
                 SingletonStorage.shared.isJustRegistered = true
-                self.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
-                
+                self.applyEula(signupResponse: result, etkAuth: etkAuth, globalPermAuth: globalPermAuth)
+
             case .failure(let error):
                 
                 self.retriesCount += 1
@@ -158,6 +161,32 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.output.signUpFailed(errorResponse: error)
             }
         }
+    }
+
+    private func applyEula(signupResponse: SignUpSuccessResponse, etkAuth: Bool?, globalPermAuth: Bool?) {
+        guard let eulaID = eula?.id else {
+            assertionFailure()
+            return
+        }
+
+        eulaService.eulaApprove(
+            eulaId: eulaID,
+            etkAuth: etkAuth,
+            kvkkAuth: etkAuth,
+            globalPermAuth: globalPermAuth,
+            success: { [weak self] successResponse in
+                DispatchQueue.main.async {
+                    signupResponse.etkAuth = etkAuth
+                    signupResponse.kvkkAuth = etkAuth
+                    signupResponse.globalPermAuth = globalPermAuth
+                    self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: signupResponse)
+                }
+            },
+            fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.signUpFailed(errorResponse: errorResponse)
+                }
+        })
     }
     
     func showSupportView() {

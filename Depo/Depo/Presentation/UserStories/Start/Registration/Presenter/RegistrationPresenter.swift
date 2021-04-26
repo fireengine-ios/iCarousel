@@ -18,6 +18,7 @@ class RegistrationPresenter: BasePresenter {
 
     private var confirmAgreements = false
     private var confirmEtk: Bool?
+    private var confirmGlobalPerm: Bool?
     
     // MARK: BasePresenter
     override func outputView() -> Waiting? {
@@ -100,12 +101,13 @@ extension RegistrationPresenter: RegistrationViewOutput {
 // MARK: - RegistrationInteractorOutput
 extension RegistrationPresenter: RegistrationInteractorOutput {
     func userValid(_ userInfo: RegistrationUserInfoModel) {
-        if allAgreementsConfirmed {
-            startAsyncOperationDisableScreen()
-            interactor.signUpUser(userInfo)
-        } else {
+        guard allAgreementsConfirmed else {
             view?.showErrorTitle(withText: TextConstants.termsAndUseCheckboxErrorText)
+            return
         }
+
+        startAsyncOperationDisableScreen()
+        interactor.signUpAndApplyEula(userInfo, etkAuth: confirmEtk, globalPermAuth: confirmGlobalPerm)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
@@ -139,11 +141,13 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     }
     
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?) {
+        guard let response = signUpResponse, let info = signUpUserInfo else {
+            assertionFailure()
+            return
+        }
+
         completeAsyncOperationEnableScreen()
-//        router.termsAndServices(with: view, email: signUpUserInfo?.mail ?? "",
-//                                phoneNumber: signUpUserInfo?.phone ?? "",
-//                                signUpResponse: signUpResponse,
-//                                userInfo: signUpUserInfo)
+        router.phoneVerification(sigUpResponse: response, userInfo: info)
     }
     
     func captchaRequired(required: Bool) {
