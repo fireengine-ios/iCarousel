@@ -88,7 +88,7 @@ final class LoginCaptchaView: UIView, FromNib {
 
     private func setup() {
         setupFromNib()
-        backgroundColor = .clear
+        updateAppearance()
     }
 
     override func awakeFromNib() {
