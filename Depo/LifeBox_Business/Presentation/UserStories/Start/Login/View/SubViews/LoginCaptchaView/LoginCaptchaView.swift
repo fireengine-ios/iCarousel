@@ -47,6 +47,8 @@ final class LoginCaptchaView: UIView, FromNib {
             newValue.attributedPlaceholder = NSAttributedString(string: TextConstants.captchaViewTextfieldPlaceholder,
                                                                 attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.Text.textFieldPlaceholder.color])
             newValue.textColor = ColorConstants.Text.textFieldText.color
+            newValue.borderColor = ColorConstants.textfieldBorder.color
+            newValue.backgroundColor = ColorConstants.textfieldBackground.color
         }
     }
 
@@ -101,6 +103,11 @@ final class LoginCaptchaView: UIView, FromNib {
 
     func clearCaptchaAnswer() {
         captchaAnswerTextField.text = ""
+    }
+
+    func updateAppearance() {
+        backgroundColor = ColorConstants.tableBackground.color
+        captchaAnswerTextField.borderColor = ColorConstants.textfieldBorder.color
     }
 
     func showError(_ error: String?) {

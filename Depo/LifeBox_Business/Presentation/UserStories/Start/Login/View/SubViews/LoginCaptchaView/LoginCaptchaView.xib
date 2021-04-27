@@ -32,6 +32,7 @@
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PiO-kZ-3YO">
                                     <rect key="frame" x="0.0" y="0.0" width="154" height="52"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="154" id="sKJ-a9-OmT"/>
                                     </constraints>
@@ -61,7 +62,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="T2I-bl-UAn" firstAttribute="leading" secondItem="PiO-kZ-3YO" secondAttribute="trailing" constant="15" id="6oT-oK-weo"/>
                                 <constraint firstItem="PiO-kZ-3YO" firstAttribute="top" secondItem="mU4-M6-cI6" secondAttribute="top" id="8RA-mU-CBT"/>
@@ -108,7 +109,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="jLc-Fz-zX8" firstAttribute="leading" secondItem="4PQ-l4-ggS" secondAttribute="leading" constant="20" id="NF6-r7-fR2"/>
                         <constraint firstAttribute="trailing" secondItem="mU4-M6-cI6" secondAttribute="trailing" id="RfS-bf-Hqu"/>
@@ -125,7 +126,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="4BE-uB-mU7"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="4PQ-l4-ggS" secondAttribute="bottom" id="Q96-9H-afL"/>
                 <constraint firstAttribute="trailing" secondItem="4PQ-l4-ggS" secondAttribute="trailing" id="S9t-Qd-sQE"/>
