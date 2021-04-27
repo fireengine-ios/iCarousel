@@ -46,6 +46,8 @@ protocol MultifileCollectionViewCellActionDelegate: class {
     func onLongPress(cell: UICollectionViewCell)
     func onCellSelected(indexPath: IndexPath)
     func willSwipe(cell: MultifileCollectionViewCell)
+    func startEditingMode(at indexPath: IndexPath)
+    func endEditingMode()
 }
 
 //TODO: split in views
@@ -386,7 +388,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
     
     func startRenaming() {
         isRenamingInProgress = true
-
+        
         setupMenuAvailability()
         showRenamingView()
     }
@@ -410,7 +412,7 @@ class MultifileCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func hideRenamignView() {
+    func hideRenamignView() {
         endEditing(true)
         
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0, options: [.curveEaseInOut]) {
@@ -499,7 +501,6 @@ extension MultifileCollectionViewCell {
         guard let item = itemModel else {
             return
         }
-        
         menuButton.change(indexPath: indexPath)
         
         menuButton.addTarget(self, action: #selector(onCellTapped(_:)), for: .touchUpInside)
@@ -511,6 +512,8 @@ extension MultifileCollectionViewCell {
             let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
                 
                 if actionType == .rename {
+                    self?.actionDelegate?.endEditingMode()
+                    self?.actionDelegate?.startEditingMode(at: indexPath)
                     self?.startRenaming()
                 } else {
                     self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton, indexPath: indexPath)

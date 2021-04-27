@@ -55,6 +55,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var isSelecting = false
     
     private var sortViewRulesType: MoreActionsConfig.SortRullesType = .lastModifiedTimeNewOld
+    
+    private var editedCellIndexPath: IndexPath?
 
     var rootPermissions: SharedItemPermission? {
         return fileInfoManager.rootPermissions
@@ -73,10 +75,12 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     func updateOnDidLayout(barInsets: UIEdgeInsets) {
         self.barInsets = barInsets
-        
         updateEmptyView()
     }
 
+    func viewDidAppear() {
+        endEditingMode()
+    }
     
     func change(sortingRule: SortedRules) {
         fileInfoManager.change(sortingRules: sortingRule) { [weak self] (shouldReload, _) in
@@ -601,6 +605,7 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         resetVisibleCellsSwipe(animated: true)
+        endEditingMode()
         scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)
     }
     
@@ -644,6 +649,19 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
 
 //MARK: - LBCellsDelegate, MultifileCollectionViewCellActionDelegate
 extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellActionDelegate {
+    func startEditingMode(at indexPath: IndexPath) {
+        editedCellIndexPath = indexPath
+    }
+    
+    func endEditingMode() {
+        guard
+            let indexPath = editedCellIndexPath,
+            let cell = collectionView?.cellForItem(at: indexPath) as? MultifileCollectionViewCell else {
+            return
+        }
+        cell.hideRenamignView()
+    }
+    
     func onRenameStarted(at indexPath: IndexPath) {
         self.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
     }
@@ -656,6 +674,7 @@ extension PrivateShareSharedFilesCollectionManager: MultifileCollectionViewCellA
         DispatchQueue.toMain {
             self.collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: [])
             //collection delegate didSelectItem will not be called
+            self.endEditingMode()
             self.onDidSelectItem(at: indexPath)
         }
     }
