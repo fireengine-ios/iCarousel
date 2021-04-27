@@ -88,7 +88,7 @@ final class PrivateShareAccessItemTableViewCell: UITableViewCell {
         } else {
             nameLabel.text = String(format: TextConstants.accessPageFromFolder, info.object.name)
         }
-        typeImageView.image = WrapperedItemUtil.privateSharePlaceholderImage(fileType: fileType)
+        typeImageView.image = UIImage(named: info.object.type.placeholderIcon)
         typeImageView.image = typeImageView.image?.withRenderingMode(.alwaysTemplate)
 
         if let expirationDate = info.expirationDate {
