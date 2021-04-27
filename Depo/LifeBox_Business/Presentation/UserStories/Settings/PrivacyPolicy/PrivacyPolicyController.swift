@@ -63,6 +63,7 @@ final class PrivacyPolicyController: BaseViewController, NibInit {
         setActivityIndicator()
         startActivity()
         loadPrivacyPolicy()
+        view.backgroundColor = .white
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -24,7 +24,7 @@ final class TermsAndServicesViewController: ViewController {
         willSet {
             newValue.setupEulaStyle()
             newValue.delegate = self
-            newValue.backgroundColor = ColorConstants.textViewBackground.color
+            newValue.backgroundColor = .clear
         }
     }
     
@@ -33,7 +33,7 @@ final class TermsAndServicesViewController: ViewController {
             newValue.isHidden = true
             newValue.setupEulaStyle()
             newValue.delegate = self
-            newValue.backgroundColor = ColorConstants.textViewBackground.color
+            newValue.backgroundColor = .clear
         }
     }
     
