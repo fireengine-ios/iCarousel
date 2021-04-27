@@ -372,7 +372,15 @@ class MultifileCollectionViewCell: UICollectionViewCell {
             return
         }
         
+        guard
+            let indexPathButton = sender.view as? IndexPathButton,
+            let indexPath = indexPathButton.indexPath
+        else {
+            return
+        }
+        
         if sender.state == .began {
+            updateEditedCellMode(at: indexPath)
             onMenuTriggered()
             actionDelegate?.onMenuPress(sender: sender, itemModel: itemModel)
         }
@@ -497,6 +505,11 @@ extension MultifileCollectionViewCell {
         menuButton.pinToSuperviewEdges()
     }
     
+    private func updateEditedCellMode(at indexPath: IndexPath) {
+        actionDelegate?.endEditingMode()
+        actionDelegate?.startEditingMode(at: indexPath)
+    }
+    
     private func setupMenu(indexPath: IndexPath) {
         guard let item = itemModel else {
             return
@@ -512,8 +525,7 @@ extension MultifileCollectionViewCell {
             let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
                 
                 if actionType == .rename {
-                    self?.actionDelegate?.endEditingMode()
-                    self?.actionDelegate?.startEditingMode(at: indexPath)
+                    self?.updateEditedCellMode(at: indexPath)
                     self?.startRenaming()
                 } else {
                     self?.actionDelegate?.onSelectMenuAction(type: actionType, itemModel: self?.itemModel, sender: self?.menuButton, indexPath: indexPath)
