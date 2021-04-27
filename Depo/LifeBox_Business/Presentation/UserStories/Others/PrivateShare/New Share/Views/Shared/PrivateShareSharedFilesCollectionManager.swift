@@ -605,7 +605,7 @@ extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         resetVisibleCellsSwipe(animated: true)
-        self.endEditingMode()
+        endEditingMode()
         scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)
     }
     
