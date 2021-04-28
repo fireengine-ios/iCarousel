@@ -248,7 +248,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             debugLog("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount == 0")
             
             bottomBarPresenter?.dismiss(animated: true)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+            NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
         } else {
             debugLog("SearchViewPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
             
@@ -396,6 +396,19 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         router.openAlbum(item: album)
     }
     
+    func didSelectAction(type: ActionType, on item: Item?, sender: Any?) {
+        guard let item = item else {
+            return
+        }
+        
+        switch type {
+        case .elementType(let elementType):
+            alertSheetModule?.handleAction(type: elementType, items: [item], sender: sender)
+        case .shareType(let shareType):
+            alertSheetModule?.handleShare(type: shareType, items: [item], sender: sender)
+        }
+    }
+    
     // MARK: - Spinner
     
     private func showSpinner() {
@@ -428,7 +441,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     private func stopEditing() {
         bottomBarPresenter?.dismiss(animated: true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
         dataSource.setSelectionState(selectionState: false)
         view.setNavBarRigthItem(active: true)
     }

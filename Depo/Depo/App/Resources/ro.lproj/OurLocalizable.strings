@@ -1593,9 +1593,9 @@
 "contact_phase2_error_backup_title" = "Backup-ul nu a putut fi realizat!";
 "contact_phase2_error_restore_title" = "Transferul pe telefon nu a putut fi realizat!";
 "contact_phase2_error_delete_title" = "Operațiunea de Ștergere nu a putut fi realizată!";
-"gallery_filter_all" = "";
-"gallery_filter_synced" = "";
-"gallery_filter_unsynced" = "";
+"gallery_filter_all" = "Afișează: Tot";
+"gallery_filter_synced" = "Afișează: Elementele cu backup";
+"gallery_filter_unsynced" = "Afișează: Elementele fără backup";
 "gallery_filter_action_sheet_all" = "toate";
 "gallery_filter_action_sheet_synced" = "sincronizată";
 "gallery_filter_action_sheet_unsynced" = "nu sincronizate";
@@ -1607,8 +1607,8 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Șterge Backup-ul";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Șterge duplicatele";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Șterge Persoanele de Contact";
-"eula_title" = "";
-"photo_video_empty_no_unsync_photos_title" = "";
+"eula_title" = "Contract Utilizator";
+"photo_video_empty_no_unsync_photos_title" = "Toate fișierele au backup-ul făcut.";
 "photo_edit_navbar_save" = "Salvează";
 "photo_edit_save_as_copy" = "Salvează Copia";
 "photo_edit_reset_to_original" = "Anulați editările";
@@ -1818,3 +1818,7 @@
 "private_share_plus_button_no_action" = "Pe această pagină nu poate fi încărcat fișier nou";
 "private_share_confirm_trash_items" = "Ești sigur că vrei să ștergi?";
 "private_share_preview_not_ready" = "Fișierul nu poate fi previzualizat acum. Vă rugăm să încercați din nou mai târziu.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "E-mail sau numărul GSM depășește limita de caractere.";
+"private_share_start_max_number_of_users" = "Partajarea se poate face cu maximum %d  persoane de contact.";
+"private_share_max_number_of_item_limit_exceeded" = "Limita maximă de partajare a fișierelor a fost depășită.";

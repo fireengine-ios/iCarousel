@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FullQuotaWarningPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <connections>
+                <outlet property="closeButton" destination="utr-Zt-eZd" id="v8z-kC-yaa"/>
+                <outlet property="deleteFilesButton" destination="n3v-Eu-sfn" id="4vl-Ez-eFm"/>
+                <outlet property="descriptionLabel" destination="jx0-gi-yuj" id="cvY-rT-vUF"/>
+                <outlet property="expandQuotaButton" destination="18u-WR-RPM" id="bzO-lO-bnV"/>
+                <outlet property="imageView" destination="yqC-8m-SRw" id="xaB-uN-Crb"/>
+                <outlet property="popUpView" destination="fAt-3X-gSh" id="Iai-hA-5hT"/>
+                <outlet property="titleLable" destination="EXQ-qC-WMN" id="M7b-am-2Zn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAt-3X-gSh">
+                    <rect key="frame" x="28" y="148" width="264" height="272"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utr-Zt-eZd">
+                            <rect key="frame" x="234" y="8" width="22" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="utr-Zt-eZd" secondAttribute="height" multiplier="1:1" id="hms-Kb-ELN"/>
+                            </constraints>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="grayCloseButton"/>
+                            <connections>
+                                <action selector="onCloseTap:" destination="-1" eventType="touchUpInside" id="mmT-tU-zL9"/>
+                            </connections>
+                        </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yqC-8m-SRw">
+                            <rect key="frame" x="107" y="42" width="50" height="46"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="0sU-nU-bGk"/>
+                                <constraint firstAttribute="width" secondItem="yqC-8m-SRw" secondAttribute="height" multiplier="46:42" id="7bq-Kn-7pI"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXQ-qC-WMN">
+                            <rect key="frame" x="111" y="96" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jx0-gi-yuj">
+                            <rect key="frame" x="111" y="133" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3v-Eu-sfn">
+                            <rect key="frame" x="109" y="226" width="46" height="30"/>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="onDeleteFilesTap:" destination="-1" eventType="touchUpInside" id="inx-Tw-WNk"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18u-WR-RPM" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                            <rect key="frame" x="109" y="178" width="46" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="edD-Hj-3dd"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="onExpandQuotaTap:" destination="-1" eventType="touchUpInside" id="NUF-oq-dTh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="n3v-Eu-sfn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fAt-3X-gSh" secondAttribute="leading" constant="36" id="2Bl-vI-RZZ"/>
+                        <constraint firstItem="n3v-Eu-sfn" firstAttribute="centerX" secondItem="fAt-3X-gSh" secondAttribute="centerX" id="8UQ-lb-Tia"/>
+                        <constraint firstItem="utr-Zt-eZd" firstAttribute="top" secondItem="fAt-3X-gSh" secondAttribute="top" constant="8" id="Aie-44-VJJ"/>
+                        <constraint firstItem="yqC-8m-SRw" firstAttribute="centerX" secondItem="fAt-3X-gSh" secondAttribute="centerX" id="Ect-sP-HXd"/>
+                        <constraint firstItem="yqC-8m-SRw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fAt-3X-gSh" secondAttribute="leading" constant="16" id="LdW-yg-DIA"/>
+                        <constraint firstItem="jx0-gi-yuj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fAt-3X-gSh" secondAttribute="leading" constant="36" id="LnF-1n-6HB"/>
+                        <constraint firstItem="EXQ-qC-WMN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fAt-3X-gSh" secondAttribute="leading" constant="36" id="MEa-EQ-638"/>
+                        <constraint firstItem="18u-WR-RPM" firstAttribute="centerX" secondItem="fAt-3X-gSh" secondAttribute="centerX" id="Mgt-ac-hE2"/>
+                        <constraint firstAttribute="width" priority="750" constant="368" id="RJL-Lt-lNY"/>
+                        <constraint firstItem="n3v-Eu-sfn" firstAttribute="top" secondItem="18u-WR-RPM" secondAttribute="bottom" constant="8" id="U4k-eq-nIH"/>
+                        <constraint firstItem="jx0-gi-yuj" firstAttribute="centerX" secondItem="fAt-3X-gSh" secondAttribute="centerX" id="VtW-hY-1wc"/>
+                        <constraint firstAttribute="bottom" secondItem="n3v-Eu-sfn" secondAttribute="bottom" constant="16" id="WoM-FP-LVV"/>
+                        <constraint firstItem="jx0-gi-yuj" firstAttribute="top" secondItem="EXQ-qC-WMN" secondAttribute="bottom" constant="16" id="deD-U1-sG8"/>
+                        <constraint firstItem="yqC-8m-SRw" firstAttribute="top" secondItem="fAt-3X-gSh" secondAttribute="top" constant="42" id="gjK-kB-X0J"/>
+                        <constraint firstItem="18u-WR-RPM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fAt-3X-gSh" secondAttribute="leading" constant="36" id="hhp-V0-G4o"/>
+                        <constraint firstItem="EXQ-qC-WMN" firstAttribute="top" secondItem="yqC-8m-SRw" secondAttribute="bottom" constant="8" id="kE5-Us-1iW"/>
+                        <constraint firstItem="EXQ-qC-WMN" firstAttribute="centerX" secondItem="fAt-3X-gSh" secondAttribute="centerX" id="lGJ-Zr-veU"/>
+                        <constraint firstAttribute="trailing" secondItem="utr-Zt-eZd" secondAttribute="trailing" constant="8" id="swE-7g-t7b"/>
+                        <constraint firstItem="18u-WR-RPM" firstAttribute="top" secondItem="jx0-gi-yuj" secondAttribute="bottom" constant="24" id="tLy-sa-Z2M"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fAt-3X-gSh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="28" id="1oG-6W-H9B"/>
+                <constraint firstItem="fAt-3X-gSh" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="JE9-0x-M6b"/>
+                <constraint firstItem="fAt-3X-gSh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="lGN-HP-pGa"/>
+                <constraint firstItem="fAt-3X-gSh" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="qHF-5L-u7F"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="138.75" y="103.52112676056338"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="grayCloseButton" width="17" height="17"/>
+    </resources>
+</document>

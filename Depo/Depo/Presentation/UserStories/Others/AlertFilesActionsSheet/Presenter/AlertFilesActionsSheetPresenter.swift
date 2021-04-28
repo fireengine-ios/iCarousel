@@ -67,22 +67,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         })
         headerAction.isEnabled = false
         
-        if status == .trashed {
-            let types = [.info] + ElementTypes.trashState
-            constractActions(with: types, for: [item]) { [weak self] actions in
-                DispatchQueue.main.async { [weak self] in
-                    self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
-                }
-            }
-            return
-        }
-        
-        guard let item = item as? Item else {
-            return
-        }
+        let types = ElementTypes.specifiedMoreActionTypes(for: status, item: item)
         
         if item.fileType == .photoAlbum {
-            let types: [ElementTypes] = [.shareAlbum, .download, .moveToTrash, .removeAlbum, .albumDetails]
             let album = AlbumItem(uuid: item.uuid,
                                   name: item.name,
                                   creationDate: item.creationDate,
@@ -96,29 +83,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
                 }
             }
-        } else if item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
-            let types: [ElementTypes] = [.shareAlbum, .albumDetails, .download]
-            
+        } else if item is Item || status == .trashed {
             constractActions(with: types, for: [item]) { [weak self] actions in
-                DispatchQueue.main.async { [weak self] in
-                    self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
-                }
-            }
-        } else {
-            var types: [ElementTypes] = [.info, .share, .move]
-            
-            types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-            if !item.isReadOnlyFolder {
-                types.append(.moveToTrash)
-            }
-            
-            if item.fileType == .image || item.fileType == .video {
-                types.append(.download)
-            } else if item.fileType == .audio || item.fileType.isDocumentPageItem {
-                types.append(.downloadDocument)
-            }
-            
-            constractActions(with: types, for: [item], sender: sender) { [weak self] actions in
                 DispatchQueue.main.async { [weak self] in
                     self?.presentAlertSheet(with: [headerAction] + actions, presentedBy: sender, viewController: viewController)
                 }
@@ -283,239 +249,69 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 actionsCallback([])
                 return
             }
-            actionsCallback(filteredTypes.map {
+            actionsCallback(filteredTypes.map { type in
                 var action: UIAlertAction
-                switch $0 {
-                case .info:
-                    action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .info))
-                        self.interactor.info(item: currentItems, isRenameMode: false)
-                        //                    self.view.unselectAll()
+                switch type {
+                case .info,
+                     .edit,
+                     .download,
+                     .downloadDocument,
+                     .moveToTrash,
+                     .unhide,
+                     .restore,
+                     .move,
+                     .emptyTrashBin,
+                     .photos,
+                     .addToAlbum,
+                     .createAlbum,
+                     .albumDetails,
+                     .shareAlbum,
+                     .makeAlbumCover,
+                     .removeFromAlbum,
+                     .backUp,
+                     .copy,
+                     .createStory,
+                     .iCloudDrive,
+                     .lifeBox,
+                     .more,
+                     .musicDetails,
+                     .addToPlaylist,
+                     .addToCmeraRoll,
+                     .addToFavorites,
+                     .removeFromFavorites,
+                     .documentDetails,
+                     .select,
+                     .selectAll,
+                     .deSelectAll,
+                     .print,
+                     .rename,
+                     .delete,
+                     .removeAlbum,
+                     .changeCoverPhoto,
+                     .removeFromFaceImageAlbum,
+                     .instaPick,
+                     .endSharing,
+                     .leaveSharing,
+                     .moveToTrashShared:
+                    
+                    action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
+                        self?.handleAction(type: type, items: currentItems)
                     })
-                case .edit:
-                    action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .edit))
-                        UIApplication.topController()?.showSpinner()
-                        self.interactor.edit(item: currentItems, completion: {
-                            UIApplication.topController()?.hideSpinner()
-                        })
-                    })
-                case .download:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
-                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                        if currentItems.count <= allowedNumberLimit {
-                            self.interactor.download(item: currentItems)
-                            self.basePassingPresenter?.stopModeSelected()
-                        } else {
-                            let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
-                            UIApplication.showErrorAlert(message: text)
-                        }
-                    })
-                case .downloadDocument:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
-                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                        if currentItems.count <= allowedNumberLimit {
-                            self.interactor.downloadDocument(items: currentItems as? [WrapData])
-                            self.basePassingPresenter?.stopModeSelected()
-                        } else {
-                            let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
-                            UIApplication.showErrorAlert(message: text)
-                        }
-                    })
-                case .moveToTrash:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default) { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                        if selectedItems.count <= allowedNumberLimit {
-                            self.interactor.moveToTrash(items: currentItems)
-                        } else {
-                            let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
-                            UIApplication.showErrorAlert(message: text)
-                        }
-                    }
+
                 case .hide:
-                    
-                    var title: String
-                    
-                    if currentItems.first?.fileType == .faceImageAlbum(.things) ||
-                        currentItems.first?.fileType == .faceImageAlbum(.people) ||
-                        currentItems.first?.fileType == .faceImageAlbum(.places) ||
-                        currentItems.first?.fileType == .photoAlbum {
-                        title = TextConstants.actionSheetHideSingleAlbum
-                    } else {
-                        title = TextConstants.actionSheetHide
-                    }
-                    
-                    action = UIAlertAction(title: title, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
-                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                        if currentItems.count <= allowedNumberLimit {
-                            self.interactor.hide(items: currentItems)
-                        } else {
-                            let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
-                            UIApplication.showErrorAlert(message: text)
-                        }
+                    action = UIAlertAction(title: type.actionTitle(fileType: currentItems.first?.fileType), style: .default, handler: { [weak self] _ in
+                        self?.handleAction(type: type, items: currentItems)
                     })
-                case .unhide:
-                    action = UIAlertAction(title: TextConstants.actionSheetUnhide, style: .default) { [weak self] _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
-                        self?.interactor.unhide(items: currentItems)
-                    }
+                    
                 case .smash:
                     assertionFailure("please implement this function first")
                     action = UIAlertAction()
-                case .restore:
-                    action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { [weak self] _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
-                        self?.interactor.restore(items: currentItems)
-                    })
-                case .move:
-                    action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
-                        self.interactor.move(item: currentItems, toPath: "")
-                    })
+
                 case .share:
-                    action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
-                        self.interactor.share(item: currentItems, sourceRect: self.getSourceRect(sender: sender, controller: nil))
+                    action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
+                        self.handleAction(type: type, items: currentItems, sender: sender)
                     })
-                case .emptyTrashBin:
-                    action = UIAlertAction(title: TextConstants.actionSheetEmptyTrashBin, style: .default, handler: { _ in
-                        self.interactor.emptyTrashBin()
-                    })
-                //Photos and albumbs
-                case .photos:
-                    action = UIAlertAction(title: TextConstants.actionSheetPhotos, style: .default, handler: { _ in
-                        self.interactor.photos(items: currentItems)
-                    })
-                case .createAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetAddToAlbum, style: .default, handler: { _ in
-                        debugPrint("Can not create album for now")
-                    })
-                case .addToAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetAddToAlbum, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToAlbum))
-                        self.interactor.addToAlbum(items: currentItems)
-                    })
-                case .albumDetails:
-                    action = UIAlertAction(title: TextConstants.actionSheetAlbumDetails, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .info))
-                        self.interactor.albumDetails(items: currentItems)
-                    })
-                case .shareAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
-                        self.interactor.shareAlbum(items: currentItems)
-                    })
-                case .makeAlbumCover:
-                    action = UIAlertAction(title: TextConstants.actionSheetMakeAlbumCover, style: .default, handler: { _ in
-                        self.interactor.makeAlbumCover(items: currentItems)
-                    })
-                case .removeFromAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        self.interactor.removeFromAlbum(items: currentItems)
-                    })
-                case .backUp:
-                    action = UIAlertAction(title: TextConstants.actionSheetBackUp, style: .default, handler: { _ in
-                        
-                        self.interactor.backUp(items: currentItems)
-                    })
-                case .copy:
-                    action = UIAlertAction(title: TextConstants.actionSheetCopy, style: .default, handler: { _ in
-                        self.interactor.copy(item: currentItems, toPath: "")
-                    })
-                case .createStory:
-                    action = UIAlertAction(title: TextConstants.actionSheetCreateStory, style: .default, handler: { _ in
-                        let images = currentItems.filter({ $0.fileType == .image })
-                        if images.count <= NumericConstants.maxNumberPhotosInStory {
-                            self.interactor.createStory(items: images)
-                            self.basePassingPresenter?.stopModeSelected()
-                        } else {
-                            let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
-                            UIApplication.showErrorAlert(message: text)
-                        }
-                    })
-                case .iCloudDrive:
-                    action = UIAlertAction(title: TextConstants.actionSheetiCloudDrive, style: .default, handler: { _ in
-                        self.interactor.iCloudDrive(items: currentItems)
-                    })
-                case .lifeBox:
-                    action = UIAlertAction(title: TextConstants.actionSheetLifeBox, style: .default, handler: { _ in
-                        self.interactor.lifeBox(items: currentItems)
-                    })
-                case .more:
-                    action = UIAlertAction(title: TextConstants.actionSheetMore, style: .default, handler: { _ in
-                        self.interactor.more(items: currentItems)
-                    })
-                case .musicDetails:
-                    action = UIAlertAction(title: TextConstants.actionSheetMusicDetails, style: .default, handler: { _ in
-                        self.interactor.musicDetails(items: currentItems)
-                    })
-                case .addToPlaylist:
-                    action = UIAlertAction(title: TextConstants.actionSheetAddToPlaylist, style: .default, handler: { _ in
-                        self.interactor.addToPlaylist(items: currentItems)
-                    })
-                case .addToCmeraRoll:
-                    action = UIAlertAction(title: TextConstants.actionSheetDownloadToCameraRoll, style: .default, handler: { _ in
-                        self.interactor.downloadToCmeraRoll(items: currentItems)
-                    })
-                case .addToFavorites:
-                    action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToFavorites))
-                        self.basePassingPresenter?.stopModeSelected()
-                        self.interactor.addToFavorites(items: currentItems)
-                    })
-                case .removeFromFavorites:
-                    action = UIAlertAction(title: TextConstants.actionSheetRemoveFavorites, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .removeFromFavorites))
-                        self.interactor.removeFromFavorites(items: currentItems)
-                        self.basePassingPresenter?.stopModeSelected()
-                    })
-                case .documentDetails:
-                    action = UIAlertAction(title: TextConstants.actionSheetDocumentDetails, style: .default, handler: { _ in
-                        self.interactor.documentDetails(items: currentItems)
-                    })
-                case .select:
-                    action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { _ in
-                        self.basePassingPresenter?.selectModeSelected()
-                        //                    self.interactor.//TODO: select and select all pass to grid's presenter
-                    })
-                case .selectAll:
-                    action = UIAlertAction(title: TextConstants.actionSheetSelectAll, style: .default, handler: { _ in
-                        self.basePassingPresenter?.selectAllModeSelected()
-                        //                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
-                    })
-                case .deSelectAll:
-                    action = UIAlertAction(title: TextConstants.actionSheetDeSelectAll, style: .default, handler: { _ in
-                        self.basePassingPresenter?.deSelectAll()
-                    })
-                case .print:
-                    action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .print))
-                        self.basePassingPresenter?.printSelected()
-                    })
-                case .rename:
-                    action = UIAlertAction(title: TextConstants.actionSheetRename, style: .default, handler: { _ in
-                        self.interactor.info(item: currentItems, isRenameMode: true)
-                    })
-                case .delete:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                        if currentItems.count <= allowedNumberLimit {
-                            self.interactor.delete(items: currentItems)
-                        } else {
-                            let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
-                            UIApplication.showErrorAlert(message: text)
-                        }
-                    })
-                case .removeAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetRemove, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        self.interactor.removeAlbums(items: currentItems)
-                    })
+
                 case .deleteDeviceOriginal:
                     if let itemsArray = items as? [Item] {
                         let serverObjects = itemsArray.filter({
@@ -527,54 +323,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         })
                         
                     } else {
-                        action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
-                            self.interactor.deleteDeviceOriginal(items: currentItems)
+                        action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
+                            self.handleAction(type: .deleteDeviceOriginal, items: currentItems)
                         })
                     }
-                case .sync:
+                case .sync, .syncInProgress, .undetermend:
                     action = UIAlertAction()
-                    case .syncInProgress:
-                    action = UIAlertAction()
-                case .undetermend:
-                    action = UIAlertAction()
-                case .changeCoverPhoto:
-                    action = UIAlertAction(title: TextConstants.actionSheetChangeCover, style: .default, handler: { _ in
-                        self.basePassingPresenter?.changeCover()
-                    })
-                case .removeFromFaceImageAlbum:
-                    action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        if let item = self.basePassingPresenter?.getFIRParent() {
-                            self.interactor.deleteFromFaceImageAlbum(items: currentItems, item: item)
-                        }
-                    })
-                case .instaPick:
-                    action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in
-                        self.basePassingPresenter?.openInstaPick()
-                    })
-                case .endSharing:
-                    action = UIAlertAction(title: TextConstants.privateSharedEndSharingActionTitle, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .endSharing))
-                        //currently only for one file is supported
-                        self.interactor.endSharing(item: currentItems.first)
-                    })
-                case .leaveSharing:
-                    action = UIAlertAction(title: TextConstants.privateSharedLeaveSharingActionTitle, style: .default, handler: { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .leaveSharing))
-                        //currently only for one file is supported
-                        self.interactor.leaveSharing(item: currentItems.first)
-                    })
-                case .moveToTrashShared:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default) { _ in
-                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
-                        if selectedItems.count <= allowedNumberLimit {
-                            self.interactor.moveToTrashShared(items: currentItems)
-                        } else {
-                            let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
-                            UIApplication.showErrorAlert(message: text)
-                        }
-                    }
                 }
                 return action
             })
@@ -670,5 +424,250 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             }
         }
         return newSourceRect
+    }
+    
+    func handleAction(type: ElementTypes, items: [BaseDataSourceItem], sender: Any? = nil) {
+        trackNetmeraAction(type: type)
+        
+        switch type {
+        case .info:
+            interactor.info(item: items, isRenameMode: false)
+        case .edit:
+            UIApplication.topController()?.showSpinner()
+            interactor.edit(item: items, completion: {
+                UIApplication.topController()?.hideSpinner()
+            })
+        case .download:
+            let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+            if items.count <= allowedNumberLimit {
+                interactor.download(item: items)
+                basePassingPresenter?.stopModeSelected()
+            } else {
+                let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
+                UIApplication.showErrorAlert(message: text)
+            }
+        case .downloadDocument:
+            let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+            if items.count <= allowedNumberLimit {
+                interactor.downloadDocument(items: items as? [WrapData])
+                basePassingPresenter?.stopModeSelected()
+            } else {
+                let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
+                UIApplication.showErrorAlert(message: text)
+            }
+        case .moveToTrash:
+            let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+            if items.count <= allowedNumberLimit {
+                interactor.moveToTrash(items: items)
+            } else {
+                let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                UIApplication.showErrorAlert(message: text)
+            }
+            
+        case .hide:
+            let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+            if items.count <= allowedNumberLimit {
+                interactor.hide(items: items)
+            } else {
+                let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
+                UIApplication.showErrorAlert(message: text)
+            }
+            
+        case .unhide:
+            interactor.unhide(items: items)
+            
+        case .restore:
+            interactor.restore(items: items)
+            
+        case .move:
+            interactor.move(item: items, toPath: "")
+            
+        case .share:
+            interactor.share(item: items, sourceRect: self.getSourceRect(sender: sender, controller: nil))
+            
+        case .emptyTrashBin:
+            interactor.emptyTrashBin()
+
+        //Photos and albumbs
+        case .photos:
+            interactor.photos(items: items)
+            
+        case .createAlbum:
+            debugPrint("Can not create album for now")
+            
+        case .addToAlbum:
+            interactor.addToAlbum(items: items)
+
+        case .albumDetails:
+            interactor.albumDetails(items: items)
+
+        case .shareAlbum:
+            interactor.shareAlbum(items: items)
+            
+        case .makeAlbumCover:
+            interactor.makeAlbumCover(items: items)
+
+        case .removeFromAlbum:
+            interactor.removeFromAlbum(items: items)
+            
+        case .backUp:
+            interactor.backUp(items: items)
+            
+        case .copy:
+            interactor.copy(item: items, toPath: "")
+            
+        case .createStory:
+            let images = items.filter({ $0.fileType == .image })
+            if images.count <= NumericConstants.maxNumberPhotosInStory {
+                interactor.createStory(items: images)
+                basePassingPresenter?.stopModeSelected()
+            } else {
+                let text = String(format: TextConstants.createStoryPhotosMaxCountAllert, NumericConstants.maxNumberPhotosInStory)
+                UIApplication.showErrorAlert(message: text)
+            }
+            
+        case .iCloudDrive:
+            interactor.iCloudDrive(items: items)
+
+        case .lifeBox:
+            interactor.lifeBox(items: items)
+            
+        case .more:
+            interactor.more(items: items)
+            
+        case .musicDetails:
+            interactor.musicDetails(items: items)
+            
+        case .addToPlaylist:
+            interactor.addToPlaylist(items: items)
+            
+        case .addToCmeraRoll:
+            interactor.downloadToCmeraRoll(items: items)
+            
+        case .addToFavorites:
+            basePassingPresenter?.stopModeSelected()
+            interactor.addToFavorites(items: items)
+            
+        case .removeFromFavorites:
+            interactor.removeFromFavorites(items: items)
+            basePassingPresenter?.stopModeSelected()
+            
+        case .documentDetails:
+            interactor.documentDetails(items: items)
+            
+        case .select:
+            basePassingPresenter?.selectModeSelected()
+//                    self.interactor.//TODO: select and select all pass to grid's presenter
+            
+        case .selectAll:
+            basePassingPresenter?.selectAllModeSelected()
+//                    self.interactor.selectAll(items: <#T##[Item]#>)??? //TODO: select and select all pass to grid's presenter
+        
+        case .deSelectAll:
+            basePassingPresenter?.deSelectAll()
+            
+        case .print:
+            basePassingPresenter?.printSelected()
+            
+        case .rename:
+            interactor.info(item: items, isRenameMode: true)
+            
+        case .delete:
+            let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+            if items.count <= allowedNumberLimit {
+                interactor.delete(items: items)
+            } else {
+                let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                UIApplication.showErrorAlert(message: text)
+            }
+            
+        case .removeAlbum:
+            interactor.removeAlbums(items: items)
+            
+        case .deleteDeviceOriginal:
+            interactor.deleteDeviceOriginal(items: items)
+        
+        case .changeCoverPhoto:
+            basePassingPresenter?.changeCover()
+            
+        case .removeFromFaceImageAlbum:
+            if let item = basePassingPresenter?.getFIRParent() {
+                interactor.deleteFromFaceImageAlbum(items: items, item: item)
+            }
+
+        case .instaPick:
+            basePassingPresenter?.openInstaPick()
+            
+        case .endSharing:
+            //currently only for one file is supported
+            interactor.endSharing(item: items.first)
+            
+        case .leaveSharing:
+            //currently only for one file is supported
+            self.interactor.leaveSharing(item: items.first)
+            
+        case .moveToTrashShared:
+            let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+            if items.count <= allowedNumberLimit {
+                interactor.moveToTrashShared(items: items)
+            } else {
+                let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                UIApplication.showErrorAlert(message: text)
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    func handleShare(type: ShareTypes, items: [BaseDataSourceItem], sender: Any?) {
+        let sourceRect = getSourceRect(sender: sender, controller: nil)
+        interactor.handleShare(type: type, sourceRect: sourceRect, items: items)
+    }
+    
+    private func trackNetmeraAction(type: ElementTypes) {
+        var button: NetmeraEventValues.ButtonName?
+        
+        switch type {
+        case .info, .albumDetails:
+            button = .info
+        case .edit:
+            button = .edit
+        case .download, .downloadDocument:
+            button = .download
+        case .moveToTrash,
+             .moveToTrashShared,
+             .delete,
+             .removeAlbum,
+             .removeFromAlbum,
+             .removeFromFaceImageAlbum:
+            button = .delete
+        case .hide:
+            button = .hide
+        case .unhide:
+            button = .unhide
+        case .restore:
+            button = .restore
+        case .share, .shareAlbum:
+            button = .share
+        case .addToAlbum:
+            button = .addToAlbum
+        case .addToFavorites:
+            button = .addToFavorites
+        case .removeFromFavorites:
+            button = .removeFromFavorites
+        case .print:
+            button = .print
+        case .endSharing:
+            button = .endSharing
+        case .leaveSharing:
+            button = .leaveSharing
+        default:
+            button = nil
+        }
+        
+        if let button = button {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: button))
+        }
     }
 }

@@ -70,10 +70,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func viewIsReady(collectionView: UICollectionView) {
         debugLog("BaseFilesGreedPresenter viewIsReady")
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.updateThreeDots(_:)),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots),
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateThreeDots), name: .updateThreeDots, object: nil)
 
         interactor.viewIsReady()
         if let unwrapedFilters = interactor.originalFilesTypeFilter {
@@ -329,7 +326,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         view.stopSelection()
     }
     
-    @objc func updateThreeDots(_ sender: Any) {
+    @objc func updateThreeDots() {
         DispatchQueue.main.async {
             self.updateThreeDotsButton()
         }
@@ -378,6 +375,19 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func onItemSelectedActiveState(item: BaseDataSourceItem) { }
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
+    
+    func didSelectAction(type: ActionType, on item: Item?, sender: Any?) {
+        guard let item = item else {
+            return
+        }
+        
+        switch type {
+        case .elementType(let elementType):
+            alertSheetModule?.handleAction(type: elementType, items: [item], sender: sender)
+        case .shareType(let shareType):
+            alertSheetModule?.handleShare(type: shareType, items: [item], sender: sender)
+        }
+    }
     
     private func getSameTypeItems(fileType: FileType, items: [BaseDataSourceItem]) -> [BaseDataSourceItem] {
         if fileType.isDocument {
@@ -512,7 +522,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     private func dismissBottomBar(animated: Bool) {
         bottomBarPresenter?.dismiss(animated: animated)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationShowPlusTabBar), object: nil)
+        NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
     
     func updateNoFilesView() {
@@ -766,17 +776,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         guard let firstFilter = filters.first else {
             return
         }
-        var notificationTitle: String
         switch firstFilter {
         case .Photo:
-            notificationTitle = TabBarViewController.notificationPhotosScreen
+            NotificationCenter.default.post(name: .photosScreen, object: nil, userInfo: nil)
         case .Video:
-            notificationTitle = TabBarViewController.notificationVideoScreen
+            NotificationCenter.default.post(name: .videoScreen, object: nil, userInfo: nil)
         default:
-            notificationTitle = TabBarViewController.notificationPhotosScreen
+            NotificationCenter.default.post(name: .photosScreen, object: nil, userInfo: nil)
         }
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationTitle), object: nil, userInfo: nil)
     }
     
     

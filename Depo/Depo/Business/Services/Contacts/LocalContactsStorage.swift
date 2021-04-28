@@ -39,8 +39,16 @@ struct SuggestedContact: Equatable {
         self.source = source
         name = contact.givenName
         familyName = contact.familyName
-        phones = contact.phoneNumbers.compactMap { $0.value.stringValue }
-        emails = contact.emailAddresses.compactMap { $0.value as String }
+        phones = contact.phoneNumbers.compactMap { $0.value.stringValue }.filter {
+            if !Validator.isValid(contactsPhone: $0) {
+                return false
+            }
+            if !$0.contains("+"), !Validator.isValid(turkcellPhone: $0) {
+                return false
+            }
+            return true
+        }
+        emails = contact.emailAddresses.compactMap { $0.value as String }.filter { Validator.isValid(email: $0) }
         isLocal = true
     }
     
@@ -86,7 +94,7 @@ struct LocalContactsStorage {
         var result = [SuggestedContact]()
         let lowercasedString = stringToSearch.lowercased()
         cachedContacts.forEach { contact in
-            if contact.givenName.lowercased().contains(lowercasedString) || contact.familyName.lowercased().contains(lowercasedString)  {
+            if contact.givenName.lowercased().contains(lowercasedString) || contact.familyName.lowercased().contains(lowercasedString) {
                 result.append(SuggestedContact(with: contact, source: .name))
                 return
             }
@@ -110,10 +118,14 @@ struct LocalContactsStorage {
             }
         }
         
-        return result
+        return result.filter { !$0.phones.isEmpty || !$0.emails.isEmpty }
     }
     
     func getContactName(for phone: String, email: String) -> LocalContactNames {
+        guard !phone.isEmpty || !email.isEmpty else {
+            return ("", "")
+        }
+        
         var searchContact: CNContact?
         let lowercasedEmail = email.lowercased()
         let searchPhone = phone.digits.suffix(maxNumberOfCompareDigits)

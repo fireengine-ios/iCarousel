@@ -52,6 +52,7 @@ final class FileInfoView: UIView, FromNib {
     
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var shareApiService = PrivateShareApiServiceImpl()
+    private lazy var analytics = PrivateShareAnalytics()
     
     private var object: BaseDataSourceItem?
     
@@ -148,6 +149,11 @@ final class FileInfoView: UIView, FromNib {
         guard object?.isLocalItem == false, let projectId = object?.projectId, let uuid = object?.uuid else {
             return
         }
+        
+        if let item = object as? Item, item.status != .active {
+            return
+        }
+        
         getSharingInfo(projectId: projectId, uuid: uuid)
     }
     
@@ -213,7 +219,8 @@ final class FileInfoView: UIView, FromNib {
             case .success(let info):
                 sharingInfo = info
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                //we can't show alert here because BE always return error after manual sync photo from preview
+                debugPrint("getSharingInfo error - \(error.description)")
             }
             group.leave()
         }
@@ -231,14 +238,22 @@ final class FileInfoView: UIView, FromNib {
         if needShow {
             var info = sharingInfo
             info.members?.enumerated().forEach { index, member in
-                let localContactNames = localContactsService.getContactName(for: member.subject?.username ?? "", email: member.subject?.email ?? "")
-                info.members?[index].subject?.name = displayName(from: localContactNames)
+                if let contact = member.subject {
+                    let msisdnToSearch = contact.isUsernameUnhidden ? contact.username ?? "" : ""
+                    let emailToSearch = contact.isEmailUnhidden ? contact.email ?? "" : ""
+                    let localContactNames = localContactsService.getContactName(for: msisdnToSearch, email: emailToSearch)
+                    info.members?[index].subject?.name = displayName(from: localContactNames)
+                }
             }
             sharingInfoView.setup(with: info)
         }
         
         if let object = object {
             setupEditableState(for: object, projectId: sharingInfo.projectId, permissions: sharingInfo.permissions)
+        }
+        
+        if sharingInfoView.isHidden && needShow {
+            analytics.trackScreen(.shareInfo)
         }
         
         sharingInfoView.isHidden = !needShow

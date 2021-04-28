@@ -80,6 +80,7 @@ protocol ItemOperationManagerViewProtocol: class {
     func didUnhideThings(items: [ThingsItem])
     
     func didMoveToTrashItems(_ items: [Item])
+    func didMoveToTrashSharedItems(_ items: [Item])
     func didMoveToTrashAlbums(_ albums: [AlbumItem])
     func didMoveToTrashPeople(items: [PeopleItem])
     func didMoveToTrashPlaces(items: [PlacesItem])
@@ -95,6 +96,7 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func didShare(items: [BaseDataSourceItem])
     func didEndShareItem(uuid: String)
+    func didLeaveShareItem(uuid: String)
     func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String)
     func didRemove(contact: SharedContact, fromItem uuid: String)
 }
@@ -177,6 +179,7 @@ extension ItemOperationManagerViewProtocol {
     func didUnhideThings(items: [ThingsItem]) {}
     
     func didMoveToTrashItems(_ items: [Item]) {}
+    func didMoveToTrashSharedItems(_ items: [Item]) {}
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {}
     func didMoveToTrashPeople(items: [PeopleItem]) {}
     func didMoveToTrashPlaces(items: [PlacesItem]) {}
@@ -192,6 +195,7 @@ extension ItemOperationManagerViewProtocol {
     
     func didShare(items: [BaseDataSourceItem]) {}
     func didEndShareItem(uuid: String) {}
+    func didLeaveShareItem(uuid: String) {}
     func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {}
     func didRemove(contact: SharedContact, fromItem uuid: String) {}
 }
@@ -485,6 +489,12 @@ class ItemOperationManager: NSObject {
         }
     }
     
+    func didMoveToTrashSharedItems(_ items: [Item]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didMoveToTrashSharedItems(items) }
+        }
+    }
+    
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.didMoveToTrashAlbums(albums) }
@@ -554,6 +564,12 @@ class ItemOperationManager: NSObject {
     func didEndShareItem(uuid: String) {
         DispatchQueue.main.async {
             self.views.invoke { $0.didEndShareItem(uuid: uuid) }
+        }
+    }
+    
+    func didLeaveShareItem(uuid: String) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didLeaveShareItem(uuid: uuid) }
         }
     }
     

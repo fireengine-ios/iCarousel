@@ -29,6 +29,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     private lazy var accountService = AccountService()
     private let authorityStorage = AuthoritySingleton.shared
     private lazy var shareApiService = PrivateShareApiServiceImpl()
+    private lazy var privateShareAnalytics = PrivateShareAnalytics()
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -154,6 +155,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             case .success():
                 item.name = newName
                 self?.output.updated()
+                if !item.isOwner {
+                    self?.privateShareAnalytics.sharedWithMe(action: .rename, on: item)
+                }
                 ItemOperationManager.default.didRenameItem(item)
             case .failed(let error):
                 self?.output.failedUpdate(error: error)

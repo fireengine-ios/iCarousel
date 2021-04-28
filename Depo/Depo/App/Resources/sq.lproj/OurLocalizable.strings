@@ -1861,3 +1861,7 @@
 "private_share_plus_button_no_action" = "Skedari i ri nuk mund të ngarkohet në këtë faqe";
 "private_share_confirm_trash_items" = "Je i sigurt që dëshiron të fshish?";
 "private_share_preview_not_ready" = "Skedari nuk mund të parapamet tani. Ju lutemi provoni përsëri më vonë.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "Numri i postës elektronike ose GSM tejkalon limitin e karakterit.";
+"private_share_start_max_number_of_users" = "Ndarja mund të bëhet me %d persona maksimalisht.";
+"private_share_max_number_of_item_limit_exceeded" = "Kufiri maksimal i ndarjes së skedarit është tejkaluar.";

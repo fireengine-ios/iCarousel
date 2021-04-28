@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -44,7 +45,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-a4-zFl" customClass="BlueButtonWithWhiteText" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-a4-zFl" customClass="BlueButtonWithWhiteText" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="58.5" y="157" width="258" height="55"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="55" id="l1R-C8-9Xc"/>
@@ -83,7 +84,7 @@
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-5t-hJx">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
-                            <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                            <color key="backgroundColor" systemColor="tableCellGroupedBackgroundColor"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qk0-Cp-dYT">
                                 <size key="itemSize" width="50" height="50"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -99,7 +100,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="IaV-H5-RZf" secondAttribute="trailing" id="FqI-2X-AXW"/>
                         <constraint firstItem="4AK-oI-Kk6" firstAttribute="leading" secondItem="EG8-Nu-hat" secondAttribute="leading" id="LIN-Pa-aD5"/>
@@ -115,17 +116,25 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="ef3-ex-YfZ"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="EG8-Nu-hat" firstAttribute="bottom" secondItem="ef3-ex-YfZ" secondAttribute="bottom" id="01j-Or-ecP"/>
+                <constraint firstItem="EG8-Nu-hat" firstAttribute="bottom" secondItem="fqA-jf-sLr" secondAttribute="bottom" id="01j-Or-ecP"/>
                 <constraint firstItem="EG8-Nu-hat" firstAttribute="trailing" secondItem="ef3-ex-YfZ" secondAttribute="trailing" id="87h-bn-THB"/>
                 <constraint firstItem="EG8-Nu-hat" firstAttribute="top" secondItem="ef3-ex-YfZ" secondAttribute="top" id="Jov-Sg-OgE"/>
                 <constraint firstItem="EG8-Nu-hat" firstAttribute="leading" secondItem="ef3-ex-YfZ" secondAttribute="leading" id="kvr-e2-J6V"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <viewLayoutGuide key="safeArea" id="ef3-ex-YfZ"/>
             <point key="canvasLocation" x="24.5" y="50.5"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tableCellGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

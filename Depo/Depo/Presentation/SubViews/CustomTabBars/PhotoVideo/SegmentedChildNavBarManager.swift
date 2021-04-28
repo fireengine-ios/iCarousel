@@ -46,11 +46,11 @@ final class SegmentedChildNavBarManager {
         delegate?.setRightBarButtonItems([threeDotsButton], animated: false)
     }
     
-    func setDefaultMode(title: String = "") {
+    func setDefaultMode(title: String = "", isThreeDotsEnabled: Bool = true) {
         delegate?.setTitle(title)
         delegate?.setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: true)
-        threeDotsButton.isEnabled = true
+        threeDotsButton.isEnabled = isThreeDotsEnabled
     }
     
     func setDefaultModeWithoutThreeDot(title: String = "") {

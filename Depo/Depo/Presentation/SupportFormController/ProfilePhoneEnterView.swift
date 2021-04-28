@@ -75,8 +75,9 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             
             let phoneCodeInputView = PhoneCodeInputView()
             phoneCodeInputView.setValuePickerView(with: telephonyService.callingCountryCode())
-            phoneCodeInputView.didSelect = { [weak newValue] gsmModel in
+            phoneCodeInputView.didSelect = { [weak newValue, weak self] gsmModel in
                 newValue?.text = gsmModel.gsmCode
+                self?.onCodeChanged?()
             }
             newValue.inputView = phoneCodeInputView
             
@@ -136,6 +137,8 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             numberTextField.textColor = newValue ? textFieldColor : ColorConstants.textDisabled
         }
     }
+
+    var onCodeChanged: (() -> Void)?
     
     private let textFieldColor = UIColor.black
     

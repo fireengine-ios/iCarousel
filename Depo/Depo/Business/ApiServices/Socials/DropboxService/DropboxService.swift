@@ -34,11 +34,17 @@ final class DropboxManager {
     func handleRedirect(url: URL) -> Bool {
         debugLog("DropboxManager handleRedirect")
         
-        guard let authResult = DropboxClientsManager.handleRedirectURL(url) else {
-            return false
+        return DropboxClientsManager.handleRedirectURL(url) { [weak self] authResult in
+            self?.handle(result: authResult)
+        }
+    }
+    
+    private func handle(result: DropboxOAuthResult?) {
+        guard let result = result else {
+            return
         }
         
-        switch authResult {
+        switch result {
         case .success(let accessToken):
             handler?(.success(token: accessToken.accessToken))
             debugLog("DropboxManager User is logged into Dropbox.")
@@ -46,12 +52,11 @@ final class DropboxManager {
             handler?(.cancel)
             debugLog("DropboxManager Authorization flow was manually canceled by user!")
         case .error(_, let description):
+            let description = description ?? ""
             handler?(.failed(description))
             debugLog("DropboxManager Error: \(description)")
             print("Error: \(description)")
         }
-        
-        return true
     }
     
     private var handler: DropboxLoginHandler?
@@ -78,7 +83,7 @@ final class DropboxManager {
         }
         
         DropboxClientsManager.authorizeFromController(UIApplication.shared, controller: vc) { url in
-            UIApplication.shared.openURL(url)
+            UIApplication.shared.openSafely(url)
         }
     }
     

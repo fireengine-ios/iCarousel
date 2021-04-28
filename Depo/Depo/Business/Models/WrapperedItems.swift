@@ -1210,6 +1210,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         childCount = privateShareFileInfo.childCount
         privateSharePermission = privateShareFileInfo.permissions
+        isShared = true
     }
     
     func copyFileData(from item: WrapData) {

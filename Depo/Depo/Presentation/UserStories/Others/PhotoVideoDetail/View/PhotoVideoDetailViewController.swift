@@ -101,6 +101,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private var waitVideoPreviewURL = false
     
+    private lazy var analytics = PrivateShareAnalytics()
+    
     // MARK: Life cycle
     
     deinit {
@@ -613,10 +615,15 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
             return
         }
         cell.delegate = self
-        cell.setObject(object: objects[indexPath.row])
+        let object = objects[indexPath.row]
+        cell.setObject(object: object)
         
         if indexPath.row == objects.count - 1 {
             output.willDisplayLastCell()
+        }
+        
+        if !object.isOwner {
+            analytics.sharedWithMe(action: .preview, on: object)
         }
     }
 }

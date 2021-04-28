@@ -1534,25 +1534,25 @@ Please check I have understood the intended command here*/
 "campaign_detail_info_description" = "Notre campagne de téléphone est terminée. Les résultats de tirade au sort seront annoncés le 20 février à partir de nos comptes de médias sociaux. Vous pouvez accéder vos droits en total pour tirage au sort à partir des informations ci-dessus. Suivez nos comptes de médias sociaux pour voir les résultats!";
 "AccessibilityGiftButton" = "Bouton coffret cadeau";
 "landing_start_button" = "Commencer";
-"landing_billo_title_0" = "Stocker en toute simplicité";
-"landing_billo_subtitle_0" = "Ranger et garder vos souvenirs pour toujours ";
+"landing_billo_title_0" = "Plus d’expériences. Plus de stockage.";
+"landing_billo_subtitle_0" = "Pendant que vous vivez l'instant présent, votre téléphone n'a rien à faire.";
 "landing_billo_title_1" = "Synchronisation automatique";
 "landing_billo_subtitle_1" = "Automatiser la synchronisation de vos photos et vidéos et accédez-y de partout !";
-"landing_billo_title_2" = "Reconnaissance du visage / image";
-"landing_billo_subtitle_2" = "Trouver facilement vos souvenirs avec des albums intelligents! Recherchez par personne, objet ou lieu.";
-"landing_billo_title_3" = "Synchoniser les contacts";
-"landing_billo_subtitle_3" = "Sauvegardez vos contacts, ne les perdez jamais !";
+"landing_billo_title_2" = "Vos souvenirs préférés à portée de main";
+"landing_billo_subtitle_2" = "Recherche simplifiée par personne, lieu ou objet grâce à la reconnaissance des visages et des images.";
+"landing_billo_title_3" = "Ne perdez jamais vos contacts";
+"landing_billo_subtitle_3" = "Sauvegardez vos contacts afin de les garder en sécurité.";
 "landing_billo_title_4" = "Libérer de l'espace";
 "landing_billo_subtitle_4" = "Libérez de l'espace sur votre téléphone pour de nouveaux souvenirs !";
 "landing_billo_title_5" = "Stories automatiques";
 "landing_billo_subtitle_5" = "Vivez vos souvenirs avec des stories automatisées créées pour vous";
-"landing_billo_title_6" = "Réseaux sociaux";
-"landing_billo_subtitle_6" = "Transférer facillement toutes vos archives de réseaux sociaux vers Billo!";
+"landing_billo_title_6" = "Là où le stockage rencontre le social";
+"landing_billo_subtitle_6" = "Synchronisez vos réseaux sociaux pour une vie entière de souvenirs, partagez le meilleur de vous-même grâce à PhotoPick.";
 "landing_billo_title_7" = "Imprimer";
 "landing_billo_subtitle_7" = "Décorez votre vie avec vos souvenirs !";
 
 /*introduce billo*/
-"billo_intro_title" = "Vivre, Collecter, Se souvenir";
+"billo_intro_title" = "Vivre, collectionner, se rappeler";
 "billo_intro_subtitle" = "Sauvegardez tous vous souvenirs, vos contacts et vos fichiers en toute sécurité dans Billo. Accédez à votre contenu à tout moment depuis n’importe quel appareil.";
 "billo_intro_create_account_button" = "Créer un compte";
 "billo_intro_login_button" = "J'ai un compte, me connecter";
@@ -1708,6 +1708,8 @@ Please check I have understood the intended command here*/
 "mobile_payment_close_popup_description_bold_range" = "532";
 "mobile_payment_open_popup_title" = "Cadeau Internet hebdomadaire de 2 Go!";
 "mobile_payment_open_popup_description" = "Vous pouvez gagner 2 Go d'Internet hebdomadaire en activant l'autorisation de paiement mobile. Pour gagner un accès Internet hebdomadaire unique de 2 Go, vous pouvez confirmer votre paiement mobile en cliquant sur le bouton Continuer.\n\nVous pouvez trouver les détails de la campagne sur l’adresse internet www.turkcell.com.tr.";
+
+/*do not translate*/
 "mobile_payment_open_popup_description_bold_range" = "";
 "mobile_payment_open_popup_later_button" = "Plus Tard";
 "mobile_payment_open_popup_continue_button" = "Continuer";
@@ -2060,7 +2062,7 @@ Please check I have understood the intended command here*/
 "private_share_option" = "Partagez avec une personne";
 "private_share_start_page_name" = "Partagez";
 "private_share_start_page_people_selection_section_name" = "Ajoutez les contacts";
-"private_share_start_page_enter_user_field" = "Entrez votre e-mail ou votre numéro GSM (avec le Code du Pays)";
+"private_share_start_page_enter_user_field" = "Entrez e-mail ou numéro de GSM (avec le code du pays)";
 "private_share_start_page_suggestions_section" = "Contacts recommandés";
 "private_share_start_page_shared_with_section" = "Contacts partagés";
 "private_share_start_page_add_message_section_name" = "Ajoutez un message";
@@ -2124,3 +2126,7 @@ Please check I have understood the intended command here*/
 "private_share_plus_button_no_action" = "Le nouveau fichier ne peut pas être téléchargé sur cette page";
 "private_share_confirm_trash_items" = "Etes-vous sûr que vous voulez supprimer?";
 "private_share_preview_not_ready" = "Le fichier ne peut pas être prévisualisé maintenant. Veuillez réessayer plus tard.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "Le numéro de courrier électronique ou de GSM dépasse la limite de caractères.";
+"private_share_start_max_number_of_users" = "Le partage peut être effectué avec un maximum de %d personnes.";
+"private_share_max_number_of_item_limit_exceeded" = "Il a été dépassée la limite maximale de partage de fichier.";

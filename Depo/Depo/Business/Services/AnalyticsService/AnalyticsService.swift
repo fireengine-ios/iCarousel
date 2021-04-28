@@ -141,6 +141,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: String)
     func trackPhotoEditEvent(category: GAEventCategory.PhotoEditCategory, eventAction: GAEventAction, eventLabel: GAEventLabel, filterType: String?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
+    func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any])
 }
 
 extension AnalyticsService: AnalyticsGA {
@@ -174,6 +175,7 @@ extension AnalyticsService: AnalyticsGA {
                                             connectionStatus: Bool? = nil,
                                             statusType: String? = nil,
                                             photoEditFilterType: String? = nil,
+                                            shareParameters: [String: Any]? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -268,7 +270,8 @@ extension AnalyticsService: AnalyticsGA {
                 connectionStatus: connectionStatus,
                 statusType: statusType,
                 usagePercentage: usagePercentage,
-                photoEditFilterType: photoEditFilterType).productParametrs)
+                photoEditFilterType: photoEditFilterType,
+                shareParameters: shareParameters).productParametrs)
         }
     }
     
@@ -716,6 +719,15 @@ extension AnalyticsService: AnalyticsGA {
         prepareDimentionsParametrs(screen: nil, photoEditFilterType: filterType) { dimentionParameters in
             let eventParameters = self.parameters(category: .photoEdit(category), action: eventAction, label: eventLabel)
             Analytics.logEvent(GACustomEventsType.event.key, parameters: eventParameters + dimentionParameters)
+        }
+    }
+    
+    func trackSharedFolderEvent(eventAction: GAEventAction, eventLabel: GAEventLabel, shareParameters: [String: Any]) {
+        prepareDimentionsParametrs(screen: nil, shareParameters: shareParameters) { dimentionParametrs in
+            let parametrs = self.parameters(category: .sharedFolder,
+                                            action: eventAction,
+                                            label: eventLabel)
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
     

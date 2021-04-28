@@ -25,7 +25,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
 
     
     @IBOutlet weak var collectionViewBarContainer: UIView!
-    @IBOutlet private weak var collectionView: QuickSelectCollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     
     private let cardsContainer = CardsContainerView()
     private var contentSliderTopY: NSLayoutConstraint?
@@ -53,6 +53,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private lazy var itemThreeDotsManager = PrivateShareSharedItemThreeDotsManager(delegate: self)
     
     private let router = RouterVC()
+    private let analytics = PrivateShareAnalytics()
     
     //MARK: - Override
     
@@ -70,6 +71,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setupPlusButton()
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
+        trackScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,8 +91,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
-        } else {
-            updateBars(isSelecting: false)
         }
     }
     
@@ -98,6 +98,14 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         super.viewDidDisappear(animated)
         
         setCardsContainer(isActive: false)
+    }
+    
+    override func removeFromParentViewController() {
+        super.removeFromParentViewController()
+        
+        if collectionManager.isSelecting {
+            stopModeSelected()
+        }
     }
  
     //MARK: - Private
@@ -141,7 +149,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         cardsContainer.delegate = self
         cardsContainer.isEnable = true
         
-        cardsContainer.addPermittedPopUpViewTypes(types: [.upload, .download])
+        let permittedTypes: [OperationType] = shareType.rootType == .byMe ? [.upload, .download] : [.sharedWithMeUpload, .download]
+        cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(cardsContainer)
@@ -163,6 +172,17 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         cardsContainer.isActive = isActive
         if isActive {
             CardsManager.default.updateAllProgressesInCardsForView(view: cardsContainer)
+        }
+    }
+    
+    private func trackScreen() {
+        switch shareType {
+        case .byMe:
+            analytics.trackScreen(.sharedByMe)
+        case .withMe:
+            analytics.trackScreen(.sharedWithMe)
+        default:
+            break
         }
     }
 }
@@ -195,25 +215,27 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
-        if !collectionView.isQuickSelecting {
-            bottomBarManager.update(for: selectedItems)
-            
-            if selectedItems.isEmpty {
-                navBarManager.threeDotsButton.isEnabled = false
-                bottomBarManager.hide()
-            } else {
-                navBarManager.threeDotsButton.isEnabled = true
-                bottomBarManager.show()
-            }
+        bottomBarManager.update(for: selectedItems)
+        
+        if selectedItems.isEmpty {
+            bottomBarManager.hide()
+        } else {
+            bottomBarManager.show()
         }
     }
     
     func didEndReload() {
         hideSpinner()
+        
+        navBarManager.threeDotsButton.isEnabled = shareType.isSelectionAllowed && !collectionManager.isCollectionEmpty
     }
     
-    func showActions(for item: WrapData) {
-        itemThreeDotsManager.showActions(for: shareType, item: item, sender: self)
+    func showActions(for item: WrapData, sender: Any) {
+        itemThreeDotsManager.showActions(for: shareType, item: item, sender: sender)
+    }
+    
+    func didSelectAction(type: ActionType, on item: Item, sender: Any?) {
+        itemThreeDotsManager.handleAction(type: type, item: item, sender: sender)
     }
     
     func needToHideSpinner() {
@@ -237,11 +259,16 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             self.setupNavigationBar(editingMode: isSelecting)
             
             if self.shareType.isSelectionAllowed {
-                self.navBarManager.threeDotsButton.isEnabled = !isSelecting
+                self.navBarManager.threeDotsButton.isEnabled = !(isSelecting || self.collectionManager.isCollectionEmpty)
             }
-            
+            self.needToShowTabBar = !isSelecting
+            self.showTabBarIfNeeded()
             if isSelecting {
-                self.bottomBarManager.show()
+                let selectedItems = self.collectionManager.selectedItems()
+                self.show(selectedItemsCount: selectedItems.count)
+                if !selectedItems.isEmpty {
+                    self.bottomBarManager.show()
+                }
             } else {
                 self.bottomBarManager.hide()
             }
@@ -258,14 +285,16 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             /// be sure to configure navbar items after setup navigation bar
             let isSelectionAllowed = self.shareType.isSelectionAllowed
             
-            if editingMode, isSelectionAllowed{
+            if editingMode, isSelectionAllowed {
                 self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
                 if !isSelectionAllowed {
                     self.navBarManager.setDefaultModeWithoutThreeDot(title: self.title ?? "")
                 } else {
-                    self.navBarManager.setDefaultMode(title: self.title ?? "")
+                    //to don't change the state of the 3dots button
+                    let isThreeDotsEnabled = self.navBarManager.threeDotsButton.isEnabled
+                    self.navBarManager.setDefaultMode(title: self.title ?? "", isThreeDotsEnabled: isThreeDotsEnabled)
                 }
                 self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
             }
@@ -317,12 +346,12 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func operationFinished(withType type: ElementTypes, response: Any?) {
         switch shareType.rootType {
             case .withMe:
-                if type.isContained(in: [.leaveSharing, .moveToTrashShared, .rename, .move, .share]) {
+                if type.isContained(in: [.rename, .move, .share]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
                 
             case .byMe:
-                if type.isContained(in: [.endSharing, .moveToTrash, .rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
+                if type.isContained(in: [.rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
                     collectionManager.reload(type: .onOperationFinished)
                 }
                 
@@ -352,6 +381,28 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
     
     func syncFinished() {
         collectionManager.reload(type: .onOperationFinished)
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        collectionManager.delete(uuids: items.compactMap { $0.uuid })
+    }
+    
+    func didMoveToTrashSharedItems(_ items: [Item]) {
+        if shareType.rootType == .withMe {
+            collectionManager.delete(uuids: items.compactMap { $0.uuid })
+        }
+    }
+    
+    func didEndShareItem(uuid: String) {
+        if shareType.rootType == .byMe {
+            collectionManager.delete(uuids: [uuid])
+        }
+    }
+    
+    func didLeaveShareItem(uuid: String) {
+        if shareType.rootType == .withMe {
+            collectionManager.delete(uuids: [uuid])
+        }
     }
 }
 

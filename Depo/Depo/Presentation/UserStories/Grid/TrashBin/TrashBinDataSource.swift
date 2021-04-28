@@ -16,6 +16,7 @@ protocol TrashBinDataSourceDelegate: class {
     func onStartSelection()
     func didChangeSelectedItems(count: Int)
     func onMoreButtonTapped(sender: Any, item: Item)
+    func didSelectActionInMenu(action: ActionType, item: Item)
 }
 
 final class TrashBinDataSource: NSObject {
@@ -614,6 +615,13 @@ extension TrashBinDataSource: LBCellsDelegate, BasicCollectionMultiFileCellActio
         if let item = itemModel {
             delegate?.onMoreButtonTapped(sender: sender, item: item)
         }
+    }
+    
+    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
+        guard let item = itemModel else {
+            return
+        }
+        delegate?.didSelectActionInMenu(action: type, item: item)
     }
 }
 

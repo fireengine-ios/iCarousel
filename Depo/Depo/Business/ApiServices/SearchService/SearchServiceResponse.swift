@@ -205,6 +205,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         smalURl = sharedFileMetaData.thumbnailSmall
         mediumUrl = sharedFileMetaData.thumbnailMedium
         largeUrl = sharedFileMetaData.thumbnailLarge
+        videoPreviewURL = sharedFileMetaData.videoPreview
         
         height = sharedFileMetaData.imageHeight ?? 0
         width = sharedFileMetaData.imageWidth ?? 0

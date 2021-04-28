@@ -50,6 +50,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
     
     private lazy var privateShareApiService = PrivateShareApiServiceImpl()
     private lazy var router = RouterVC()
+    private let analytics = PrivateShareAnalytics()
     
     private var projectId = ""
     private var uuid = ""
@@ -65,6 +66,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
         setTitle(withString: TextConstants.privateShareAccessTitle)
         setupTableView()
         updateAccessList()
+        analytics.trackScreen(.sharedAccess)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,8 +78,14 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if tableView.tableHeaderView == nil, contact?.subject?.name?.isEmpty == false || contact?.subject?.username?.isEmpty == false {
-            let header = PrivateShareAccessListHeader.with(name: contact?.subject?.name, username: contact?.subject?.username)
+        guard tableView.tableHeaderView == nil, let member = contact?.subject else {
+            return
+        }
+        
+        let username = member.username ?? member.email ?? ""
+        
+        if (member.name ?? "").isEmpty == false || username.isEmpty == false {
+            let header = PrivateShareAccessListHeader.with(name: contact?.subject?.name, username: username)
             let size = header.sizeToFit(width: tableView.bounds.width)
             header.frame.size = size
             
@@ -164,7 +172,7 @@ private extension PrivateShateAccessListViewController {
         }
     }
     
-    func updateUserRole(newRole: PrivateShareUserRole, aclId: Int64, uuid: String) {
+    func updateUserRole(newRole: PrivateShareUserRole, oldRole: PrivateShareUserRole, aclId: Int64, uuid: String) {
         showSpinner()
         
         privateShareApiService.updateAclRole(newRole: newRole, projectId: projectId, uuid: uuid, aclId: aclId) { [weak self] result in
@@ -180,6 +188,12 @@ private extension PrivateShateAccessListViewController {
                 
                 if let contact = self.contact {
                     ItemOperationManager.default.didChangeRole(newRole, contact: contact, uuid: uuid)
+                }
+                
+                if newRole == .editor, oldRole == .viewer {
+                    self.analytics.changeRoleFromViewerToEditor()
+                } else if newRole == .viewer, oldRole == .editor {
+                    self.analytics.changeRoleFromEditorToViewer()
                 }
                 
                 self.updateAccessList()
@@ -205,6 +219,8 @@ private extension PrivateShateAccessListViewController {
                 if let contact = self.contact {
                     ItemOperationManager.default.didRemove(contact: contact, fromItem: uuid)
                 }
+                
+                self.analytics.removeFromShare()
                 
                 if self.objects.count == 1 {
                     self.navigationController?.popViewController(animated: true)
@@ -250,11 +266,11 @@ extension PrivateShateAccessListViewController: PrivateShareAccessListCellDelega
             switch role {
             case .editor:
                 if info.role != .editor {
-                    self?.updateUserRole(newRole: .editor, aclId: info.id, uuid: info.object.uuid)
+                    self?.updateUserRole(newRole: .editor, oldRole: info.role, aclId: info.id, uuid: info.object.uuid)
                 }
             case .viewer:
                 if info.role != .viewer {
-                    self?.updateUserRole(newRole: .viewer, aclId: info.id, uuid: info.object.uuid)
+                    self?.updateUserRole(newRole: .viewer, oldRole: info.role, aclId: info.id, uuid: info.object.uuid)
                 }
             case .delete:
                 self?.showDeleteConfirmationPopup { [weak self] isConfirm in

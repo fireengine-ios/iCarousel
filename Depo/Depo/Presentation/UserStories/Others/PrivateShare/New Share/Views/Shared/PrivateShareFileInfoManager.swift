@@ -100,8 +100,14 @@ final class PrivateShareFileInfoManager {
     private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
     private var privateShareAPIService: PrivateShareApiService!
     private let pageSize = Device.isIpad ? 64 : 32
-    private var pageLoaded = 0
-    private var isPageLoading = false
+    private var pagesLoaded = 0
+    
+    private lazy var operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        
+        return queue
+    }()
     
     private(set) var sorting: SortedRules = .timeUp
     private(set) var type: PrivateShareType = .byMe
@@ -109,74 +115,92 @@ final class PrivateShareFileInfoManager {
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     private(set) var splittedItems = SynchronizedArray<[WrapData]>()
     
+    private var tempLoaded = [WrapData]()
+    
     //MARK: - Life cycle
     
     private init() { }
     
     //MARK: - Public
     
-    func loadNext(completion: @escaping ValueHandler<Int>) {
-        guard !isPageLoading else {
+    func loadNextPage(completion: @escaping ValueHandler<Bool>) {
+        guard operationQueue.operations.filter({ !$0.isCancelled }).count == 0 else {
+            completion(false)
             return
         }
         
-        queue.async(flags: .barrier) { [weak self] in
-            self?.isPageLoading = true
-            self?.loadNextPage { result in
-                guard let self = self else {
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+            
+            guard let self = self, isFinished, !loadedItems.isEmpty else {
+                completion(false)
+                return
+            }
+            
+            self.pagesLoaded += 1
+            
+            let sorted = self.sortedItems.getArray() + self.sorted(items: loadedItems)
+            self.sortedItems.replace(with: sorted, completion: nil)
+            
+            let splitted = self.splitted(sortedArray: sorted)
+            
+            self.splittedItems.replace(with: splitted) {
+                completion(true)
+            }
+        }
+        
+        operationQueue.addOperation(operation)
+    }
+    
+    func reload(completion: @escaping ValueHandler<Bool>) {
+        queue.sync {
+            operationQueue.cancelAllOperations()
+            
+            selectedItems.removeAll()
+            pagesLoaded = 0
+            
+            let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+                
+                guard let self = self, isFinished else {
+                    completion(false)
                     return
                 }
                 
-                switch result {
-                    case .success(let filesInfo):
-                        
-                        let newItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
-                        
-                        guard !newItems.isEmpty else {
-                            self.isPageLoading = false
-                            completion(0)
-                            return
-                        }
-                        
-                        self.pageLoaded += 1
-                        
-                        let sorted = self.sortedItems.getArray() + self.sorted(items: newItems)
-                        self.sortedItems.replace(with: sorted, completion: nil)
-                        
-                        let splitted = self.splitted(sortedArray: sorted)
-                        
-                        self.splittedItems.replace(with: splitted) { [weak self] in
-                            self?.isPageLoading = false
-                            completion(newItems.count)
-                        }
-                        
-                    case .failed(_):
-                        self.isPageLoading = false
-                        completion(0)
+                guard !loadedItems.isEmpty else {
+                    self.cleanAll()
+                    completion(true)
+                    return
+                }
+                
+                self.pagesLoaded += 1
+                
+                let sorted = self.sorted(items: loadedItems)
+                self.sortedItems.replace(with: sorted, completion: nil)
+                
+                let splitted = self.splitted(sortedArray: sorted)
+                
+                self.splittedItems.replace(with: splitted) {
+                    completion(true)
                 }
             }
+            
+            operationQueue.addOperation(operation)
         }
     }
     
-    func reload(completion: @escaping ValueHandler<Int>) {
-        queue.sync {
-            selectedItems.removeAll()
-            sortedItems.removeAll()
-            splittedItems.removeAll()
-            pageLoaded = 0
-            loadNext(completion: completion)
+    func reloadCurrentPages(completion: @escaping ValueHandler<Bool>) {
+         guard pagesLoaded > 0 else {
+            reload(completion: completion)
+            return
         }
-    }
-    
-    func reloadCurrentPages(completion: @escaping ValueHandler<Int>) {
+        
         queue.sync {
-            let pagesToLoad = pageLoaded
+            operationQueue.cancelAllOperations()
+            let pagesToLoad = pagesLoaded
             
-            sortedItems.removeAll()
-            splittedItems.removeAll()
-            pageLoaded = 0
+            tempLoaded.removeAll()
+            pagesLoaded = 0
             
-            loadPages(till: pagesToLoad, alreadyLoadedItems: 0, completion: completion)
+            loadPages(till: pagesToLoad, completion: completion)
         }
     }
     
@@ -216,6 +240,20 @@ final class PrivateShareFileInfoManager {
         selectedItems.removeAll()
     }
     
+    func delete(uuids: [String], completion: @escaping VoidHandler) {
+        guard !uuids.isEmpty else {
+            return
+        }
+        
+        let changedSorted = sortedItems.filter { !$0.uuid.isContained(in: uuids) }
+        
+        sortedItems.replace(with: changedSorted, completion: nil)
+        
+        let changedSplitted = splitted(sortedArray: changedSorted)
+        
+        splittedItems.replace(with: changedSplitted, completion: completion)
+    }
+    
     func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
         guard let projectId = item.projectId else {
             completion(nil)
@@ -235,38 +273,40 @@ final class PrivateShareFileInfoManager {
     
     //MARK: - Private
     
-    private func loadNextPage(completion: @escaping ResponseArrayHandler<SharedFileInfo>) {
-        switch type {
-            case .byMe:
-                privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
-                
-            case .withMe:
-                privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
-                
-            case .innerFolder(_, let folder):
-                privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
-                    switch response {
-                        case .success(let fileSystem):
-                            completion(.success(fileSystem.fileList))
-                        case .failed(let error):
-                            completion(.failed(error))
-                    }
-                }
-        }
+    private func cleanAll() {
+        selectedItems.removeAll()
+        sortedItems.removeAll()
+        splittedItems.removeAll()
     }
     
-    private func loadPages(till page: Int, alreadyLoadedItems: Int, completion: @escaping ValueHandler<Int>) {
-        loadNext { [weak self] itemsCount in
-            guard let self = self else {
+    private func loadPages(till page: Int, completion: @escaping ValueHandler<Bool>) {
+        let operation = GetSharedItemsOperation(service: privateShareAPIService, type: type, size: pageSize, page: pagesLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { [weak self] (loadedItems, isFinished) in
+            
+            guard let self = self, isFinished else {
+                completion(false)
                 return
             }
-            let loadedItemsCount = alreadyLoadedItems + itemsCount
-            if self.pageLoaded < page, itemsCount != 0 {
-                self.loadPages(till: page, alreadyLoadedItems: loadedItemsCount, completion: completion)
-            } else {
-                completion(loadedItemsCount)
+            
+            self.tempLoaded.append(contentsOf: self.sorted(items: loadedItems))
+            self.pagesLoaded += 1
+            
+            guard self.pagesLoaded < page, !loadedItems.isEmpty else {
+                let sorted = self.sorted(items: self.tempLoaded)
+                self.sortedItems.replace(with: sorted, completion: nil)
+                
+                let splitted = self.splitted(sortedArray: sorted)
+                
+                self.splittedItems.replace(with: splitted) {
+                    completion(true)
+                }
+                
+                return
             }
+            
+            self.loadPages(till: page, completion: completion)
         }
+        
+        operationQueue.addOperation(operation)
     }
     
     private func sorted(items: [WrapData]) -> [WrapData] {
@@ -294,5 +334,89 @@ final class PrivateShareFileInfoManager {
         let splitted: [[WrapData]] = grouped.sorted(by: { sorting.sortOder == .asc ? ($0.0 < $1.0) : ($0.0 > $1.0) }).compactMap { $0.value }
         
         return splitted
+    }
+}
+
+
+final class GetSharedItemsOperation: Operation {
+    
+    private let semaphore = DispatchSemaphore(value: 0)
+    
+    private let privateShareAPIService: PrivateShareApiService
+    
+    private let type: PrivateShareType
+    private let page: Int
+    private let size: Int
+    private let sortBy: SortType
+    private let sortOrder: SortOrder
+    private let completion: ValueHandler<(([WrapData], Bool))>
+    
+    private var task: URLSessionTask?
+    private var loadedItems = [WrapData]()
+    private var isRequestFinished = false
+    
+    init(service: PrivateShareApiService, type: PrivateShareType, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, completion: @escaping ValueHandler<([WrapData], Bool)>) {
+        self.type = type
+        self.privateShareAPIService = service
+        self.completion = completion
+        self.page = page
+        self.size = size
+        self.sortBy = sortBy
+        self.sortOrder = sortOrder
+    }
+    
+    override func cancel() {
+        super.cancel()
+        
+        task?.cancel()
+        
+        semaphore.signal()
+    }
+    
+    override func main() {
+        load()
+        
+        semaphore.wait()
+        
+        completion((loadedItems, isRequestFinished))
+    }
+    
+    private func load() {
+        loadPage { [weak self] result in
+            guard let self = self, !self.isCancelled else {
+                return
+            }
+            
+            self.isRequestFinished = true
+            
+            switch result {
+                case .success(let filesInfo):
+                    self.loadedItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
+                    self.semaphore.signal()
+                    
+                case .failed(_):
+                    self.semaphore.signal()
+            }
+        }
+    }
+    
+    private func loadPage(completion : @escaping ResponseArrayHandler<SharedFileInfo>) {
+        switch type {
+            case .byMe:
+                task = privateShareAPIService.getSharedByMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+                
+            case .withMe:
+                task = privateShareAPIService.getSharedWithMe(size: size, page: page, sortBy: sortBy, sortOrder: sortOrder, handler: completion)
+                
+            case .innerFolder(_, let folder):
+                task = privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: size, page: page, sortBy: sortBy, sortOrder: sortOrder) { response in
+                    switch response {
+                        case .success(let fileSystem):
+                            completion(.success(fileSystem.fileList))
+                        case .failed(let error):
+                            completion(.failed(error))
+                    }
+                }
+        }
     }
 }

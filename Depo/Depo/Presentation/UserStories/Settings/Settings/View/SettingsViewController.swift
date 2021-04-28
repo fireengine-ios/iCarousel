@@ -41,42 +41,7 @@ final class SettingsViewController: BaseViewController {
     
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
-    enum AllSectionTypes: Int {
-        case autoUpload
-        case periodicContactSync
-        case faceImage
-        case connectAccounts
-        case permissions
-        case myActivities
-        case passcode
-        case security
-        case helpAndSupport
-        case termsAndPolicy
-        case logout
-        
-        var text: String {
-            switch self {
-            case .autoUpload: return TextConstants.settingsViewCellAutoUpload
-            case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
-            case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
-            case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
-            case .permissions: return TextConstants.settingsViewCellPermissions
-            case .myActivities: return TextConstants.settingsViewCellActivityTimline
-            case .passcode: return TextConstants.settingsViewCellPasscode
-            case .security: return TextConstants.settingsViewCellLoginSettings
-            case .helpAndSupport: return TextConstants.settingsViewCellHelp
-            case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
-            case .logout: return TextConstants.settingsViewCellLogout
-            }
-        }
-        
-        static let allSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
-        static let allSectionTwoTypes = [connectAccounts, permissions]
-        static let allSectionThreeTypes = [myActivities, passcode, security]
-        static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
-    }
-    
-    private var cellTypes = [[AllSectionTypes]]() {
+    private var cellTypes = [[SettingsTypes]]() {
         didSet {
             tableView?.reloadData()
         }
@@ -304,16 +269,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 extension SettingsViewController: SettingsViewInput {
     
     func prepareCellsData(isPermissionShown: Bool) {
-        cellTypes = []
-        var accountCells = [AllSectionTypes.connectAccounts]
-        if isPermissionShown {
-            accountCells.append(AllSectionTypes.permissions)
-        }
-        cellTypes = [
-            AllSectionTypes.allSectionOneTypes,
-            accountCells,
-            AllSectionTypes.allSectionThreeTypes,
-            AllSectionTypes.allSectionFourTypes]
+        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown)
     }
     
     func showProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool) {

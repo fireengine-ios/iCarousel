@@ -97,9 +97,9 @@ final class UploadOperation: Operation {
     
     private func setupQualityOfService(uploadType: UploadType) {
         switch uploadType {
-            case .syncToUse, .save, .saveAs, .sharedWithMe:
+            case .syncToUse, .save, .saveAs:
             qualityOfService = .userInteractive
-        case .upload:
+        case .upload, .sharedWithMe:
             qualityOfService = .userInitiated
         case .autoSync:
             qualityOfService = .background

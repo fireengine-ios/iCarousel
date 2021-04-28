@@ -498,9 +498,15 @@ struct TextConstants {
     static let dropboxLastUpdatedFiles = NSLocalizedString("dropboxLastUpdatedFiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Terms of Use and Privacy Policy
-     static let termsOfUseCell = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-     static let privacyPolicyCell = NSLocalizedString("privacy_policy_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let termsOfUseCell = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyCell = NSLocalizedString("privacy_policy_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: Signup Redesign
+    static let signupRedesignEulaCheckbox = NSLocalizedString("signup_redesign_eula_checkbox_desc", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupRedesignEulaLink = NSLocalizedString("signup_redesign_eula_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupRedesignEtkCheckbox = NSLocalizedString("signup_redesign_etk_checkbox_desc", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupRedesignEtkLink = NSLocalizedString("signup_redesign_etk_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupRedesignEulaAcceptButton = NSLocalizedString("signup_redesign_eula_accept_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Face Image
     static let faceImageGrouping = NSLocalizedString("Face image grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -2189,7 +2195,9 @@ struct TextConstants {
     static let privateShareAccessDeleteUserSuccess = NSLocalizedString("private_share_info_access_role_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePlusButtonNoAction = NSLocalizedString("private_share_plus_button_no_action", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePreviewNotReady = NSLocalizedString("private_share_preview_not_ready", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    
     static let privateShareMoveToTrashSharedWithMeMessage = NSLocalizedString("private_share_confirm_trash_items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareMaxNumberOfUsersMessageFormat = NSLocalizedString("private_share_start_max_number_of_users", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareMessageLimit = NSLocalizedString("private_share_long_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharePhoneOrMailLimit = NSLocalizedString("private_share_long_emailmsisdn", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareNumberOfItemsLimit = NSLocalizedString("private_share_max_number_of_item_limit_exceeded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

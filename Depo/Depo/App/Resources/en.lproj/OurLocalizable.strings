@@ -1256,20 +1256,20 @@
 "campaign_detail_info_description" = "PhotoPick Phone Campaign is over now. The results of the draw will be announced on February 20th from our social media accounts. You can see the total draw from above information. Don't forget to follow our social media accounts for results!";
 "AccessibilityGiftButton" = "Gift Box Button";
 "landing_start_button" = "GET STARTED";
-"landing_billo_title_0" = "Storage Made Simple";
-"landing_billo_subtitle_0" = "Store your memories and\nkeep them forever";
+"landing_billo_title_0" = "Live More. Store More.";
+"landing_billo_subtitle_0" = "While you live in the moment, your phone doesn’t have to.";
 "landing_billo_title_1" = "Auto-Sync";
 "landing_billo_subtitle_1" = "Sync your photos and videos automatically and access them wherever you are";
-"landing_billo_title_2" = "Face & Image Recognition";
-"landing_billo_subtitle_2" = "Find your memories easily with smart albums\nSearch by person, object or place";
-"landing_billo_title_3" = "Contact Sync";
-"landing_billo_subtitle_3" = "Back up your contacts, never lose them";
+"landing_billo_title_2" = "Your favourite memories at your fingertips";
+"landing_billo_subtitle_2" = "Easily search by person, place or object with Face & Image Recognition.";
+"landing_billo_title_3" = "Never Lose Your Contacts";
+"landing_billo_subtitle_3" = "Back up your contacts to keep them safe and sound.";
 "landing_billo_title_4" = "Free Up Space";
 "landing_billo_subtitle_4" = "Free up space from your device for new memories";
 "landing_billo_title_5" = "Automatic Stories";
 "landing_billo_subtitle_5" = "Relive your memories with stories, collages and animations automatically created just for you";
-"landing_billo_title_6" = "Social Media";
-"landing_billo_subtitle_6" = "Easily transfer your social media archives to Billo";
+"landing_billo_title_6" = "Where Storage Meets Social";
+"landing_billo_subtitle_6" = "Sync your socials for a lifetime of memories, share the best of you with PhotoPick.";
 "landing_billo_title_7" = "Photo Print";
 "landing_billo_subtitle_7" = "Decorate your living space with your memories";
 
@@ -1434,7 +1434,7 @@
 "delete_files" = "Delete Files";
 "LifeboxLargePopUpSubTitleBeetween80And99" = "Let's have a look at upgrade options";
 "LifeboxLargePopUpSubTitle100Premium" = "You have exceeded your lifebox storage. You can buy a new package to continue storing your memories or reduce your content to fit your available storage.";
-"LifeboxLargePopUpSubTitle100Freemium" = "You have exceeded your lifebox storage. Unless you buy a new package or reduce your contents to fit in your available storage, all of your content will be deleted.";
+"LifeboxLargePopUpSubTitle100Freemium" = "You have exceeded your lifebox storage. Please buy a new package or reduce your contents to fit in your available storage, all of your content will be deleted if you don’t take action.";
 "empty_trash_bin" = "Empty Trash Bin";
 "confirm_dialog_header_empty_trashbin" = "Empty Trash Bin";
 "confirm_empty_trashbin" = "All of the items in trash bin will be permanently deleted and you will have no access to them. Are you sure to continue?";
@@ -1851,7 +1851,7 @@
 "private_share_leave_sharing_action_title" = "Leave Sharing";
 "private_share_who_has_access_role_4" = "Other";
 "private_share_all_files_section_1" = "Shared with me";
-"private_share_all_files_section_1_see_all" = "See all";
+"private_share_all_files_section_1_see_all" = "All Shared Files";
 "private_share_all_files_section_2" = "My Files";
 "private_share_access_role_1" = "Editor";
 "private_share_access_role_2" = "Viewer";
@@ -1866,3 +1866,17 @@
 "private_share_plus_button_no_action" = "New item(s) can not be uploaded in this page";
 "private_share_confirm_trash_items" = "Are you sure to delete item(s)?";
 "private_share_preview_not_ready" = "File can not be previewed now. Please try again later.";
+
+/*We can remove this tag since we will limit the text area with 500 characters*/
+"private_share_long_message" = "private_share_long_message";
+"private_share_long_emailmsisdn" = "Your E-mail or GSM number exceeds character limitation.";
+"private_share_start_max_number_of_users" = "You can not share with more than %d people.";
+"private_share_max_number_of_item_limit_exceeded" = "Maximum number of files per share exceeded.";
+
+/*Added manually*/
+"signup_redesign_eula_checkbox_desc" = "I have read and accept %1$S";
+"signup_redesign_eula_link" = "Terms of Use";
+"signup_redesign_etk_checkbox_desc" = "I have read and accept the text of %1$S";
+"signup_redesign_etk_link" = "Commercial Electronic Message and Data Permission";
+"signup_redesign_eula_accept_button" = "I Agree";
+

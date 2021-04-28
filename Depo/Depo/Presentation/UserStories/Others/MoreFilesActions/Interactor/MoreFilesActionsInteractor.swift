@@ -18,6 +18,39 @@ enum ShareTypes {
     case original
     case link
     case `private`
+    
+    var actionTitle: String {
+        switch self {
+        case .original:
+            return TextConstants.actionSheetShareOriginalSize
+        case .link:
+            return TextConstants.actionSheetShareShareViaLink
+        case .private:
+            return TextConstants.actionSheetSharePrivate
+        }
+    }
+    
+    static func allowedTypes(for items: [BaseDataSourceItem]) -> [ShareTypes] {
+        var allowedTypes = [ShareTypes]()
+        
+        if items.contains(where: { $0.fileType == .folder}) {
+            allowedTypes = [.link, .private]
+        } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
+            allowedTypes = [.link]
+        } else {
+            allowedTypes = [.original, .link, .private]
+        }
+        
+        if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
+            allowedTypes.remove(.original)
+        }
+        
+        if items.contains(where: { $0.isLocalItem }) {
+            allowedTypes.remove(.private)
+        }
+        
+        return allowedTypes
+    }
 }
 
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
@@ -39,6 +72,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
     private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
+    private lazy var privateShareAnalytics = PrivateShareAnalytics()
     
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
@@ -57,26 +91,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func selectShareType(sourceRect: CGRect?) {
-        if sharingItems.contains(where: { $0.fileType == .folder}) {
-            showSharingMenu(types: [.link, .private], sourceRect: sourceRect)
-        } else if sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
-            shareViaLink(sourceRect: sourceRect)
-        } else {
-            showSharingMenu(types: [.original, .link, .private], sourceRect: sourceRect)
-        }
+        let sharedTypes = ShareTypes.allowedTypes(for: sharingItems)
+        showSharingMenu(types: sharedTypes, sourceRect: sourceRect)
     }
     
     private func showSharingMenu(types: [ShareTypes], sourceRect: CGRect?) {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darkBlueColor
         
-        var shareTypes = types
-        
-        if sharingItems.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
-            shareTypes.remove(.original)
-        }
-        
-        shareTypes.forEach {
+        types.forEach {
             controler.addAction(getAction(shareType: $0, sourceRect: sourceRect))
         }
         
@@ -91,36 +114,38 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func getAction(shareType: ShareTypes, sourceRect: CGRect?) -> UIAlertAction {
-        switch shareType {
+        
+        return UIAlertAction(title: shareType.actionTitle, style: .default) { [weak self] action in
+            guard let self = self else {
+                return
+            }
+            self.handleShare(type: shareType, sourceRect: sourceRect, items: self.sharingItems)
+        }
+    }
+    
+    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem]) {
+        self.sharingItems = items
+        switch type {
         case .link:
-            if self.sharingItems.contains(where: { $0.isLocalItem }) {
-                
-                return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
-                    
-                    self?.sync(items: self?.sharingItems, action: { [weak self] in
-                        self?.shareViaLink(sourceRect: sourceRect)
-                    }, fail: { errorResponse in
-                        debugLog("sync(items: \(errorResponse.description)")
-                        UIApplication.showErrorAlert(message: errorResponse.description)
-                    })
-                }
-            } else {
-                return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
+            let needSync = items.contains(where: { $0.isLocalItem })
+            if needSync {
+                sync(items: sharingItems, action: { [weak self] in
                     self?.shareViaLink(sourceRect: sourceRect)
-                }
+                }, fail: { errorResponse in
+                    debugLog("sync(items: \(errorResponse.description)")
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            } else {
+                shareViaLink(sourceRect: sourceRect)
             }
         case .original:
-            return UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
-                    self?.shareOrignalSize(sourceRect: sourceRect)
-                    }, fail: { errorResponse in
-                        UIApplication.showErrorAlert(message: errorResponse.description)
-                })
-            }
+            sync(items: sharingItems, action: { [weak self] in
+                self?.shareOrignalSize(sourceRect: sourceRect)
+                }, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+            })
         case .private:
-            return UIAlertAction(title: TextConstants.actionSheetSharePrivate, style: .default) { [weak self] _ in
-                self?.privateShare()
-            }
+            privateShare()
         }
     }
     
@@ -128,6 +153,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let items = sharingItems as? [WrapData] else {
             return
         }
+        
+        privateShareAnalytics.openPrivateShare()
         
         let controller = router.privateShare(items: items)
         router.presentViewController(controller: controller)
@@ -143,8 +170,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
-            let files: [FileForDownload] = items.compactMap { FileForDownload(forOriginalURL: $0) }
-            shareFiles(filesForDownload: files, sourceRect: sourceRect, shareType: .originalSize)
+            let filesWithoutUrl = items.filter { $0.tmpDownloadUrl == nil }
+            fileService.createDownloadUrls(for: filesWithoutUrl) { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                let files: [FileForDownload] = items.compactMap { FileForDownload(forOriginalURL: $0) }
+                self.shareFiles(filesForDownload: files, sourceRect: sourceRect, shareType: .originalSize)
+            }
         }
     }
     
@@ -255,12 +289,31 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
         debugLog("PHOTOEDIT: start")
         
-        guard let item = item.first as? Item, let originalUrl = item.tmpDownloadUrl else {
-            debugLog("PHOTOEDIT: there's no item or originalUrl")
+        guard let item = item.first as? Item else {
+            completion?()
+            debugLog("PHOTOEDIT: there's no item")
             return
         }
         
-        photoEditImageDownloader.download(url: originalUrl, attempts: 2) { [weak self] image in
+        if let originalUrl = item.tmpDownloadUrl {
+            downloadEditImage(item: item, url: originalUrl, completion: completion)
+        } else {
+            fileService.createDownloadUrls(for: [item]) { [weak self] in
+                guard
+                    let self = self,
+                    let originalUrl = item.tmpDownloadUrl
+                else {
+                    completion?()
+                    debugLog("PHOTOEDIT: there's no url for private")
+                    return
+                }
+                self.downloadEditImage(item: item, url: originalUrl, completion: completion)
+            }
+        }
+    }
+    
+    private func downloadEditImage(item: WrapData, url: URL, completion: VoidHandler?) {
+        photoEditImageDownloader.download(url: url, attempts: 2) { [weak self] image in
             guard
                 let self = self,
                 let image = image
@@ -739,7 +792,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        fileService.downloadDocuments(items: items, success: successAction(elementType: .downloadDocument), fail: failAction(elementType: .downloadDocument))
+        let successAction = { [weak self] in
+            if items.allSatisfy ({ !$0.isOwner }) {
+                self?.privateShareAnalytics.sharedWithMe(action: .download, on: items.first)
+            }
+            self?.successAction(elementType: .downloadDocument)()
+        }
+        
+        fileService.downloadDocuments(items: items, success: successAction, fail: failAction(elementType: .downloadDocument))
     }
     
     func download(item: [BaseDataSourceItem]) {
@@ -758,8 +818,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             if let item = item.first, item.fileType.isFaceImageAlbum || item.fileType.isFaceImageType {
                 downloadFaceImageAlbum(item: item)
             } else {
+                let successAction = { [weak self] in
+                    if item.allSatisfy ({ !$0.isOwner }) {
+                        self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
+                    }
+                    self?.successAction(elementType: .download, relatedItems: item)()
+                }
+                
                 fileService.download(items: item, toPath: "",
-                                     success: successAction(elementType: .download, relatedItems: item),
+                                     success: successAction,
                                      fail: failAction(elementType: .download))
             }
         } else if let albums = item as? [AlbumItem] {
@@ -968,6 +1035,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         let successAction = { [weak self] in
+            self?.privateShareAnalytics.endShare(item: item)
+            ItemOperationManager.default.didEndShareItem(uuid: item.uuid)
             self?.output?.operationFinished(type: .endSharing)
             self?.successAction(elementType: .endSharing)()
         }
@@ -1000,6 +1069,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         let successAction = { [weak self] in
+            self?.privateShareAnalytics.leaveShare(item: item)
+            ItemOperationManager.default.didLeaveShareItem(uuid: item.uuid)
             self?.output?.operationFinished(type: .leaveSharing)
             self?.successAction(elementType: .leaveSharing)()
         }
@@ -1040,6 +1111,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
+            if items.allSatisfy({ !$0.isOwner }) {
+                self?.privateShareAnalytics.sharedWithMe(action: .delete, on: items.first)
+            }
             self?.output?.operationStarted(type: .moveToTrashShared)
             vc.close { [weak self] in
                 self?.moveToTrashShared(items)
@@ -1580,6 +1654,7 @@ extension MoreFilesActionsInteractor {
         let successAction = { [weak self] in
             self?.output?.operationFinished(type: .moveToTrashShared)
             self?.removeItemsFromPlayer(items: items)
+            ItemOperationManager.default.didMoveToTrashSharedItems(items)
             self?.successAction(elementType: .moveToTrashShared)()
         }
         

@@ -21,20 +21,14 @@ final class LandingPageCollectionViewDataSource: NSObject {
     
     private weak var delegate: LandingPageCollectionViewDataSourceDelegate!
     private let titles = [TextConstants.landingBilloTitle0,
-                          TextConstants.landingBilloTitle1,
-                          TextConstants.landingBilloTitle2,
                           TextConstants.landingBilloTitle3,
-                          TextConstants.landingBilloTitle4,
-                          TextConstants.landingBilloTitle5,
-                          TextConstants.landingBilloTitle6]
+                          TextConstants.landingBilloTitle6,
+                          TextConstants.landingBilloTitle2]
     
     private let subtitles = [TextConstants.landingBilloSubTitle0,
-                             TextConstants.landingBilloSubTitle1,
-                             TextConstants.landingBilloSubTitle2,
                              TextConstants.landingBilloSubTitle3,
-                             TextConstants.landingBilloSubTitle4,
-                             TextConstants.landingBilloSubTitle5,
-                             TextConstants.landingBilloSubTitle6]
+                             TextConstants.landingBilloSubTitle6,
+                             TextConstants.landingBilloSubTitle2]
     
     // MARK: - Init
     
@@ -65,7 +59,21 @@ final class LandingPageCollectionViewDataSource: NSObject {
     }
     
     private func item(for indexPath: IndexPath) -> LandingItem {
-        return LandingItem(image: UIImage(named: "LandingImage\(indexPath.item)"),
+        var image: UIImage?
+        switch indexPath.row {
+        case 0:
+            image = UIImage(named: "LandingImage4")
+        case 1:
+            image = UIImage(named: "LandingImage3")
+        case 2:
+            image = UIImage(named: "LandingImage6")
+        case 3:
+            image = UIImage(named: "LandingImage2")
+        default:
+            image = nil
+        }
+
+        return LandingItem(image: image,
                            title: titles[indexPath.item],
                            subtitle: subtitles[indexPath.item])
     }

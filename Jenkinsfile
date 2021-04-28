@@ -4,7 +4,7 @@
 
 /***** PROJECT variables  BEGIN ******/
 
-agentName = 'devops-dss-js-ios-02' // The mac mini assigned to this project
+agentName = 'devops-dss-js-ios-12' // The mac mini assigned to this project
 apps = [ 
 [
             name: 'lifebox',// name will be the base filename of the app
@@ -30,6 +30,18 @@ apps = [
            xcodeSchema: 'Billo_Bundle', 
            xcodeTarget: 'Billo_Bundle'  
        ]
+//        ,
+       // [
+       //      name: 'lifebox_business',// name will be the base filename of the app
+       //      versionInfoPath: 'Depo/LifeBox_Business/Signing/Turkcell/TC_LifeBox_Business-Info.plist',
+       //      ictsContainerId: '743', // ICT Store
+       //      prodTeamID: '693N5K66ZJ',
+       //      xcodeSchema: 'lifeBox_Business_Bundle',
+       //      xcodeTarget: 'lifeBox_Business_Bundle',
+       //      // xcodeSchema: 'lifeBox_Business',
+       //      // xcodeTarget: 'lifeBox_Business',
+       //      itcTeamId: '121548574',
+       //  ]
 ]
 derivedDir = 'lifebox'
 
@@ -65,10 +77,12 @@ def flavors = [
 artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
+
 isDev = branchName == 'dev_friendly'
+
 echo "Branch Name: ${branchName}"
 
-isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2'
+isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName == 'release_lifeBoxBusiness_*'
 
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${app.versionInfoPath}"
@@ -262,11 +276,11 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "source ~/.bash_profile; cd Depo; pod install" // gem update cocoapods;// --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod install;" // gem update cocoapods;// --repo-update occasionally
                         apps.each { app ->
 				// testBuild()
-                            runXcode(app, 'test')
-                            publishToArtifactory(app, 'test')
+                            // runXcode(app, 'test')
+                            // publishToArtifactory(app, 'test')
                         }
                     }
                 }

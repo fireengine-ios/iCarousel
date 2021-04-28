@@ -11,6 +11,7 @@ import UIKit
 enum OperationType: String {
     case upload                     = "Upload"
     case sync                       = "Sync"
+    case sharedWithMeUpload         = "SharedWithMeUpload"
     case download                   = "Download"
     case prepareToAutoSync          = "prepareToAutoSync"
     case prepareQuickScroll         = "prepareQuickScroll"
@@ -61,7 +62,7 @@ class CardsManager: NSObject {
     private var deletedCards = Set<OperationType>()
     
     var cardsThatStartedByDevice: [OperationType] {
-        return [.upload, .sync, .download, .prepareToAutoSync, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
+        return [.upload, .sync, .download, .prepareToAutoSync, .sharedWithMeUpload, .prepareQuickScroll, .autoUploadIsOff, .waitingForWiFi, .freeAppSpace, .freeAppSpaceLocalWarning]
     }
     
     func clear() {
@@ -356,7 +357,7 @@ class CardsManager: NSObject {
             let popUp = StorageCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp
-        case .download, .sync, .upload:
+        case .download, .sync, .upload, .sharedWithMeUpload:
             let popUp = ProgressCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp

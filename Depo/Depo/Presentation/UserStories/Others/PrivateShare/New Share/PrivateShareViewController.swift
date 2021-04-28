@@ -68,6 +68,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var router = RouterVC()
+    private lazy var analytics = PrivateShareAnalytics()
     
     override var keyboardHeight: CGFloat {
         didSet {
@@ -93,6 +94,11 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyle()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        selectPeopleView.layoutSubviews()
     }
     
     private func getRemoteSuggestions() {
@@ -132,9 +138,13 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             return
         }
         
-        let suggestedContacts = remoteSuggestions.map { contact -> SuggestedContact in
+        let suggestedContacts = remoteSuggestions
+            .filter { $0.isEmailUnhidden || $0.isUsernameUnhidden }
+            .map { contact -> SuggestedContact in
             if hasAccess {
-                let names = self.localContactsService.getContactName(for: contact.username ?? "", email: contact.email ?? "")
+                let msisdnToSearch = contact.isUsernameUnhidden ? contact.username ?? "" : ""
+                let emailToSearch = contact.isEmailUnhidden ? contact.email ?? "" : ""
+                let names = self.localContactsService.getContactName(for: msisdnToSearch, email: emailToSearch)
                 return SuggestedContact(with: contact, names: names)
             } else {
                 return SuggestedContact(with: contact)
@@ -259,11 +269,13 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             case .success:
                 if let items = self?.items {
                     ItemOperationManager.default.didShare(items: items)
+                    self?.analytics.successShare(items: items, duration: shareObject.duration, message: shareObject.invitationMessage)
                 }
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareStartPageSuccess)
                 self?.dismiss(animated: true)
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                let errorMessage = (error as? ServerMessageError)?.getPrivateShareError() ?? TextConstants.temporaryErrorOccurredTryAgainLater
+                UIApplication.showErrorAlert(message: errorMessage)
             }
         }
     }
@@ -306,6 +318,12 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     }
     
     func addShareContact(_ contact: PrivateShareContact) {
+        if let maxInviteeCount = SingletonStorage.shared.featuresInfo?.maxSharingInviteeCount,
+            shareWithView.contacts.count >= maxInviteeCount {
+            UIApplication.showErrorAlert(message: String(format: TextConstants.privateShareMaxNumberOfUsersMessageFormat, maxInviteeCount))
+            return
+        }
+        
         guard isValidContact(text: contact.username) else {
             return
         }
@@ -334,16 +352,9 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
             return false
         }
         
-        if !text.contains("+") {
-            let digits = text.digits
-            if digits.count == 10, digits.first == "5" {
-                return true
-            } else if digits.count == 11, digits.prefix(2) == "05" {
-                return true
-            } else {
-                UIApplication.showErrorAlert(message: TextConstants.privateShareNonTurkishMsisdnPopUpText)
-                return false
-            }
+        if !text.contains("+"), !Validator.isValid(turkcellPhone: text) {
+            UIApplication.showErrorAlert(message: TextConstants.privateShareNonTurkishMsisdnPopUpText)
+            return false
         }
         
         return true
