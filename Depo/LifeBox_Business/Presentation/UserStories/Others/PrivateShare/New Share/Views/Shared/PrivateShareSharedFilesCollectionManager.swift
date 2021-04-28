@@ -78,7 +78,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         updateEmptyView()
     }
 
-    func viewDidAppear() {
+    func viewWillDisappear() {
         endEditingMode()
     }
     

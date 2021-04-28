@@ -133,7 +133,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        collectionManager.viewDidAppear()
         
         let isSelecting = collectionManager.isSelecting
         if isSelecting {
@@ -154,6 +153,11 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         if collectionManager.isSelecting {
             stopModeSelected()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionManager.viewWillDisappear()
     }
     
     
