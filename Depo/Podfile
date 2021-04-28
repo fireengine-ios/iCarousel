@@ -13,10 +13,10 @@ end
 
 def core_pods
   shared_pods
-  pod 'Firebase/Core', '~> 6'
-  pod 'Firebase/Crashlytics', '~> 6'
-  pod 'Firebase/Analytics', '~> 6'
-  pod 'Firebase/RemoteConfig', '~> 6'
+  pod 'Firebase/Core', '~> 7'
+  pod 'Firebase/Crashlytics', '~> 7'
+  pod 'FirebaseAnalytics', '~> 7'
+  pod 'Firebase/RemoteConfig', '~> 7'
   pod 'FBSDKCoreKit', '~> 8'
   pod 'FBSDKLoginKit', '~> 8'
   pod 'FBSDKShareKit', '~> 8'

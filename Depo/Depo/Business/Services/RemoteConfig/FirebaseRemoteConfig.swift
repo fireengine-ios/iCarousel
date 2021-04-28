@@ -34,7 +34,7 @@ final class FirebaseRemoteConfig {
     func fetchAttemptsBeforeSupportOnLogin(completion: @escaping ValueHandler<Int>) {
         let fetchKey = RemoteConfigKeys.loginSupportAttempts
         fetch(key: fetchKey) { [weak self] in
-            if let attempts = self?.remoteConfig.configValue(forKey: fetchKey).numberValue?.intValue {
+            if let attempts = self?.remoteConfig.configValue(forKey: fetchKey).numberValue.intValue {
                 debugLog("fetched \(attempts) attempts for \(fetchKey)")
                 completion(attempts)
                 return
@@ -49,7 +49,7 @@ final class FirebaseRemoteConfig {
     func fetchAttemptsBeforeSupportOnSignup(completion: @escaping ValueHandler<Int>) {
         let fetchKey = RemoteConfigKeys.signupSupportAttempts
         fetch(key: fetchKey) { [weak self] in
-            if let attempts = self?.remoteConfig.configValue(forKey: fetchKey).numberValue?.intValue {
+            if let attempts = self?.remoteConfig.configValue(forKey: fetchKey).numberValue.intValue {
                 debugLog("fetched \(attempts) attempts for \(fetchKey)")
                 completion(attempts)
                 return
