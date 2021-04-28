@@ -77,14 +77,11 @@ final class RegistrationTermsViewController: UIViewController {
     }
 
     private func setupTermsCheckbox() {
-        let header = NSMutableAttributedString(string: TextConstants.termsAndUseIntroductionCheckbox,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                            .foregroundColor: ColorConstants.darkText])
+        let string = buildCheckboxString(from: TextConstants.signupRedesignEulaCheckbox,
+                                         linkText: TextConstants.signupRedesignEulaLink,
+                                         link: TextConstants.NotLocalized.termsOfUseLink)
 
-        let rangeLink1 = header.mutableString.range(of: TextConstants.termsOfUseCell)
-        header.addAttributes([.link: TextConstants.NotLocalized.termsOfUseLink], range: rangeLink1)
-
-        termsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
+        termsCheckboxView.setup(atributedTitleText: string, atributedText: nil, delegate: self, textViewDelegate: self)
         termsCheckboxView.titleView.delegate = self
         checkboxesStackView.addArrangedSubview(termsCheckboxView)
     }
@@ -92,14 +89,11 @@ final class RegistrationTermsViewController: UIViewController {
     private func setupEtkCheckbox() {
         etkCheckboxView = TermsCheckboxTextView.initFromNib()
 
-        let header = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckboxHeader,
-                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
-                                                            .foregroundColor: ColorConstants.darkText])
+        let string = buildCheckboxString(from: TextConstants.signupRedesignEtkCheckbox,
+                                         linkText: TextConstants.signupRedesignEtkLink,
+                                         link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages)
 
-        let rangeLink1 = header.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
-        header.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink1)
-
-        etkCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
+        etkCheckboxView.setup(atributedTitleText: string, atributedText: nil, delegate: self, textViewDelegate: self)
         etkCheckboxView.titleView.delegate = self
         checkboxesStackView.addArrangedSubview(etkCheckboxView)
     }
@@ -114,6 +108,18 @@ final class RegistrationTermsViewController: UIViewController {
         header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
 
         privacyPolicyTextView.attributedText = header
+    }
+
+    private func buildCheckboxString(from text: String, linkText: String, link: String) -> NSMutableAttributedString {
+        let textFormat = text.replacingOccurrences(of: "%1$S", with: "%1$@")
+        let textWithLink = String(format: textFormat, linkText)
+        let result = NSMutableAttributedString(string: textWithLink,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+
+        let linkRange = result.mutableString.range(of: linkText)
+        result.addAttributes([.link: link], range: linkRange)
+        return result
     }
 }
 

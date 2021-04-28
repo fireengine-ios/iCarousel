@@ -58,7 +58,7 @@ class RegistrationTermsInfoViewController: UIViewController {
             newValue.setTitleColor(ColorConstants.disabledGrayText, for: .disabled)
             newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
             newValue.isOpaque = true
-            newValue.setTitle("Onaylıyorum", for: .normal)
+            newValue.setTitle(TextConstants.signupRedesignEulaAcceptButton, for: .normal)
             newValue.addTarget(self, action: #selector(confirmTapped), for: .touchUpInside)
         }
     }
