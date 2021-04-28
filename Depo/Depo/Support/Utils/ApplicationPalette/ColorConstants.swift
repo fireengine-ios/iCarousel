@@ -117,6 +117,9 @@ struct ColorConstants {
     static let tbMatikBlurColor = UIColor(red: 5 / 255.0, green: 52 / 255.0, blue: 79 / 255.0, alpha: 1)
     
     static let aquaMarineTwo = UIColor(red: 85 / 255.0, green: 223 / 255.0, blue: 223 / 255.0, alpha: 1)
+
+    static let disabledGrayBackgroud = UIColor(red: 241 / 255.0, green: 243 / 255.0, blue: 245 / 255.0, alpha: 1)
+    static let disabledGrayText = UIColor(red: 170 / 255.0, green: 183 / 255.0, blue: 191 / 255.0, alpha: 1)
 }
 
 extension UIColor {

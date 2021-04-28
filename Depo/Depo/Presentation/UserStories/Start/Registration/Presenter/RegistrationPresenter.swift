@@ -12,12 +12,29 @@ class RegistrationPresenter: BasePresenter {
     weak var view: RegistrationViewInput!
     var interactor: RegistrationInteractorInput!
     var router: RegistrationRouterInput!
-    
+
     var isSupportFormPresenting: Bool = false
+    var eulaText: String?
+
+    private var confirmAgreements = false
+    private var confirmEtk: Bool?
+    private var confirmGlobalPerm: Bool?
     
     // MARK: BasePresenter
     override func outputView() -> Waiting? {
         return view
+    }
+
+    private var allAgreementsConfirmed: Bool {
+        if let confirmEtk = confirmEtk {
+            return confirmAgreements && confirmEtk
+        }
+
+        return confirmAgreements
+    }
+
+    private func updateNextButtonStatus() {
+        view?.setNextButtonEnabled(allAgreementsConfirmed)
     }
 }
 
@@ -27,6 +44,8 @@ extension RegistrationPresenter: RegistrationViewOutput {
         interactor.trackScreen()
         startAsyncOperation()
         interactor.checkCaptchaRequerement()
+        updateNextButtonStatus()
+        interactor.loadTermsOfUse()
     }
     
     func prepareCaptcha(_ view: CaptchaView) {
@@ -59,13 +78,36 @@ extension RegistrationPresenter: RegistrationViewOutput {
         isSupportFormPresenting = true
         router.goToSubjectDetailsPage(type: type)
     }
+
+    func phoneNumberChanged(_ code: String, _ phone: String) {
+        interactor.checkEtkAndGlobalPermissions(code: code, phone: phone)
+    }
+
+    func confirmTermsOfUse(_ confirm: Bool) {
+        confirmAgreements = confirm
+        updateNextButtonStatus()
+    }
+
+    func confirmEtk(_ etk: Bool) {
+        confirmEtk = etk
+        updateNextButtonStatus()
+    }
+
+    func openPrivacyPolicyDescriptionController() {
+        router.goToPrivacyPolicyDescriptionController()
+    }
 }
 
 // MARK: - RegistrationInteractorOutput
 extension RegistrationPresenter: RegistrationInteractorOutput {
     func userValid(_ userInfo: RegistrationUserInfoModel) {
+        guard allAgreementsConfirmed else {
+            view?.showErrorTitle(withText: TextConstants.termsAndUseCheckboxErrorText)
+            return
+        }
+
         startAsyncOperationDisableScreen()
-        interactor.signUpUser(userInfo)
+        interactor.signUpAndApplyEula(userInfo, etkAuth: confirmEtk, globalPermAuth: confirmGlobalPerm)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
@@ -99,11 +141,13 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     }
     
     func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?) {
+        guard let response = signUpResponse, let info = signUpUserInfo else {
+            assertionFailure()
+            return
+        }
+
         completeAsyncOperationEnableScreen()
-        router.termsAndServices(with: view, email: signUpUserInfo?.mail ?? "",
-                                phoneNumber: signUpUserInfo?.phone ?? "",
-                                signUpResponse: signUpResponse,
-                                userInfo: signUpUserInfo)
+        router.phoneVerification(sigUpResponse: response, userInfo: info)
     }
     
     func captchaRequired(required: Bool) {
@@ -128,6 +172,24 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     
     func showFAQView() {
         view.showFAQView()
+    }
+
+    func setupEtk(isShowEtk: Bool) {
+        if isShowEtk {
+            confirmEtk = false
+        } else {
+            confirmEtk = nil
+        }
+        view.setupEtk(isShowEtk: isShowEtk)
+        updateNextButtonStatus()
+    }
+
+    func finishedLoadingTermsOfUse(eula: String) {
+        eulaText = eula
+    }
+
+    func failedToLoadTermsOfUse(errorString: String) {
+        view.showErrorTitle(withText: errorString)
     }
 }
 
