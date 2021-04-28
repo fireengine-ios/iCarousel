@@ -11,10 +11,10 @@ apps = [
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
             prodTeamID: '693N5K66ZJ',
-	          xcodeSchema: 'TC_Depo_LifeTech',
-            xcodeTarget: 'TC_Depo_LifeTech',
-            // xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            // xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+	          // xcodeSchema: 'TC_Depo_LifeTech',
+           //  xcodeTarget: 'TC_Depo_LifeTech',
+            xcodeSchema: 'TC_Depo_LifeTech_Bundle',
+            xcodeTarget: 'TC_Depo_LifeTech_Bundle',
             itcTeamId: '121548574',
         ]
 ,
@@ -27,8 +27,8 @@ apps = [
            itcTeamId: '118347642',
 	    //xcodeSchema: // Defaults to app name
            //xcodeTarget: // Defaults to app name
-           // xcodeSchema: 'Billo_Bundle', 
-           // xcodeTarget: 'Billo_Bundle'  
+           xcodeSchema: 'Billo_Bundle', 
+           xcodeTarget: 'Billo_Bundle'  
        ]
 //        ,
        // [
