@@ -1872,3 +1872,11 @@
 "private_share_long_emailmsisdn" = "Your E-mail or GSM number exceeds character limitation.";
 "private_share_start_max_number_of_users" = "You can not share with more than %d people.";
 "private_share_max_number_of_item_limit_exceeded" = "Maximum number of files per share exceeded.";
+
+/*Added manually*/
+"signup_redesign_eula_checkbox_desc" = "I have read and accept %1$S";
+"signup_redesign_eula_link" = "Terms of Use";
+"signup_redesign_etk_checkbox_desc" = "I have read and accept the text of %1$S";
+"signup_redesign_etk_link" = "Commercial Electronic Message and Data Permission";
+"signup_redesign_eula_accept_button" = "I Agree";
+

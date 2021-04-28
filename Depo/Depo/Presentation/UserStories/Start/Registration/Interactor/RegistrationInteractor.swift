@@ -13,14 +13,17 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var authenticationService = AuthenticationService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var captchaService = CaptchaService()
-    
+    private lazy var eulaService = EulaService()
+
+    private var eula: EULAResponse?
+
     var captchaRequired = false
     private var retriesCount = 0 {
         didSet {
             showRelatedHelperView()
         }
     }
-    
+
     func trackScreen() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SignupScreen())
         analyticsService.logScreen(screen: .signUpScreen)
@@ -29,6 +32,17 @@ class RegistrationInteractor: RegistrationInteractorInput {
     
     func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol) {
         analyticsService.trackSupportEvent(screenType: .signup, subject: type, isSupportForm: false)
+    }
+
+    func checkEtkAndGlobalPermissions(code: String, phone: String) {
+        // We're only checking for ETK, global permission is ignored for now.
+        if code == "+90" && phone.count == 10 {
+            checkEtk(for: code + phone) { result in
+                self.output.setupEtk(isShowEtk: result)
+            }
+        } else {
+            self.output.setupEtk(isShowEtk: false)
+        }
     }
     
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
@@ -86,9 +100,22 @@ class RegistrationInteractor: RegistrationInteractorInput {
 //            self?.output.captchaRequiredFailed()
 //        }
     }
+
+    func loadTermsOfUse() {
+        eulaService.eulaGet { [weak self] response in
+            switch response {
+            case .success(let eulaContent):
+                self?.eula = eulaContent
+                self?.output.finishedLoadingTermsOfUse(eula: eulaContent.content ?? "")
+            case .failed(let error):
+                self?.output.failedToLoadTermsOfUse(errorString: error.localizedDescription)
+                assertionFailure("Failed move to Terms Description ")
+            }
+        }
+    }
     
-    func signUpUser(_ userInfo: RegistrationUserInfoModel) {
-        
+    func signUpAndApplyEula(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?) {
+
         ///sentOtp = false as a task requirements (FE-1055)
         let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false)
         
@@ -107,8 +134,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.analyticsService.trackSignupEvent()
                 
                 SingletonStorage.shared.isJustRegistered = true
-                self.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
-                
+                self.applyEula(signupResponse: result, etkAuth: etkAuth, globalPermAuth: globalPermAuth)
+
             case .failure(let error):
                 
                 self.retriesCount += 1
@@ -134,6 +161,32 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.output.signUpFailed(errorResponse: error)
             }
         }
+    }
+
+    private func applyEula(signupResponse: SignUpSuccessResponse, etkAuth: Bool?, globalPermAuth: Bool?) {
+        guard let eulaID = eula?.id else {
+            assertionFailure()
+            return
+        }
+
+        eulaService.eulaApprove(
+            eulaId: eulaID,
+            etkAuth: etkAuth,
+            kvkkAuth: etkAuth,
+            globalPermAuth: globalPermAuth,
+            success: { [weak self] successResponse in
+                DispatchQueue.main.async {
+                    signupResponse.etkAuth = etkAuth
+                    signupResponse.kvkkAuth = etkAuth
+                    signupResponse.globalPermAuth = globalPermAuth
+                    self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: signupResponse)
+                }
+            },
+            fail: { [weak self] errorResponse in
+                DispatchQueue.main.async {
+                    self?.output.signUpFailed(errorResponse: errorResponse)
+                }
+        })
     }
     
     func showSupportView() {
@@ -161,6 +214,19 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 output?.showSupportView()
             }
             #endif
+        }
+    }
+
+    private func checkEtk(for phoneNumber: String?, completion: BoolHandler?) {
+        eulaService.getEtkAuth(for: phoneNumber) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let isShowEtk):
+                    completion?(isShowEtk)
+                case .failed(_):
+                    completion?(false)
+                }
+            }
         }
     }
 }
