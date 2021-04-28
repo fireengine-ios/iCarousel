@@ -114,6 +114,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="zbf-N2-N7N" firstAttribute="leading" secondItem="sZZ-By-E4b" secondAttribute="leading" id="LIc-T2-Ft1"/>
                         <constraint firstAttribute="bottom" secondItem="zbf-N2-N7N" secondAttribute="bottom" id="Sqv-5u-d42"/>
@@ -123,7 +124,7 @@
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="tableBackground"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sZZ-By-E4b" secondAttribute="trailing" id="1q0-jO-p5i"/>
                 <constraint firstItem="zbf-N2-N7N" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" priority="250" id="7eP-uj-k65"/>
@@ -148,7 +149,7 @@
     </objects>
     <resources>
         <namedColor name="tableBackground">
-            <color red="0.99199998378753662" green="0.99199998378753662" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.99215686274509807" green="0.99215686274509807" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

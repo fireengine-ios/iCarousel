@@ -37,7 +37,7 @@ final class SettingsStorageTableViewCell: UITableViewCell {
     @IBOutlet private weak var storageFullnessProgressView: LineProgressView! {
         willSet {
             newValue.set(lineBackgroundColor: ColorConstants.separator.color)
-            newValue.set(lineColor: ColorConstants.a2FAActiveProgress.color)
+            newValue.set(lineColor: ColorConstants.Text.labelTitle.color)
             newValue.setContentCompressionResistancePriority(.required, for: .vertical)
             newValue.lineWidth = 6
             newValue.targetValue = 1

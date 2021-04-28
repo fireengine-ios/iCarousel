@@ -70,6 +70,7 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
     @IBOutlet private weak var reasonOfAuthLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.a2FAFirstPageDescription
+            newValue.textColor = ColorConstants.Text.labelTitle.color
         }
     }
     

@@ -32,7 +32,7 @@ final class TwoFactorAuthenticationDesigner: NSObject {
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.textColor = ColorConstants.loginPopupDescription.color
+            newValue.textColor = ColorConstants.Text.labelTitle.color
             newValue.font = UIFont.GTAmericaStandardRegularFont(size: 14)
             newValue.text = TextConstants.a2FAFirstPageDescriptionDetail
         }
@@ -69,7 +69,7 @@ final class TwoFactorAuthenticationDesigner: NSObject {
             newValue.setTitle(TextConstants.a2FAFirstPageButtonSend, for: .normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.GTAmericaStandardMediumFont(size: 14)
-            newValue.backgroundColor = ColorConstants.bottomBarTint.color
+            newValue.backgroundColor = ColorConstants.confirmationPopupButton.color
             newValue.isOpaque = true
             newValue.layer.cornerRadius = 5
         }
