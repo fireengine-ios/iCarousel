@@ -195,19 +195,19 @@ extension CommonDivorceActionService: DivorceActionAnalyticsProtocol {
     }
 
     func trackPopUpClosed() {
-        trackEvents(event: .popUpClose)
+        trackEvents(analyticsEvent: .popUpClose)
     }
 
     func trackBecomePremium() {
-        trackEvents(event: .becomePremium)
+        trackEvents(analyticsEvent: .becomePremium)
     }
 
     func trackOpenFaceImageGrouping() {
-        trackEvents(event: .openFaceImageGrouping)
+        trackEvents(analyticsEvent: .openFaceImageGrouping)
     }
 
     func trackProceedWithExistingPeople() {
-        trackEvents(event: .proceedWithExistingPeople)
+        trackEvents(analyticsEvent: .proceedWithExistingPeople)
     }
 
     func trackConfirmPopUpAppear() { }
@@ -233,9 +233,9 @@ extension CommonDivorceActionService: DivorceActionAnalyticsProtocol {
         AnalyticsService.sendNetmeraEvent(event: event)
     }
 
-    private func trackEvents(event: AnalyticsEventType) {
+    private func trackEvents(analyticsEvent: AnalyticsEventType) {
         var event: GAEventLabel {
-            switch event {
+            switch analyticsEvent {
             case .openFaceImageGrouping:
                 return GAEventLabel.enableFIGrouping
             case .becomePremium:
