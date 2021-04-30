@@ -15,7 +15,7 @@ class RegistrationTermsInfoViewController: UIViewController {
     private var text: String!
     private var confirmed: VoidHandler?
 
-    convenience init(text: String, confirmed: @escaping VoidHandler) {
+    convenience init(text: String, confirmed: VoidHandler? = nil) {
         self.init(nibName: nil, bundle: nil)
         self.text = text
         self.confirmed = confirmed
@@ -50,7 +50,7 @@ class RegistrationTermsInfoViewController: UIViewController {
         }
     }
 
-    @IBOutlet private weak var confirmButton: RoundedInsetsButton! {
+    @IBOutlet weak var confirmButton: RoundedInsetsButton! {
         willSet {
             newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
             newValue.setBackgroundColor(ColorConstants.disabledGrayBackgroud, for: .disabled)
@@ -67,6 +67,7 @@ class RegistrationTermsInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        confirmButton.isHidden = confirmed == nil
         setupTextView()
     }
 
