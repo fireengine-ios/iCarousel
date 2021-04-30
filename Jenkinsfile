@@ -19,7 +19,7 @@ apps = [
         ]
 ,
 [
-           name: 'Billo',// name will be the base filename of the app
+           name: 'billo',// name will be the base filename of the app
            versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
           ictsContainerId: '966', // ICT Store
            appleId: '1488914348',
