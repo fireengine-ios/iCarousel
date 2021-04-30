@@ -26,7 +26,7 @@ protocol RegistrationInteractorInput {
 
     func loadTermsOfUse()
     
-    func signUpAndApplyEula(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?)
+    func signUpUser(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?)
     
     func trackScreen()
     func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol)

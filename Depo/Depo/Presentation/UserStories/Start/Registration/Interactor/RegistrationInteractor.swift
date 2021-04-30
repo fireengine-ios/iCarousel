@@ -114,7 +114,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         }
     }
     
-    func signUpAndApplyEula(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?) {
+    func signUpUser(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?) {
 
         ///sentOtp = false as a task requirements (FE-1055)
         let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false)
@@ -134,7 +134,13 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.analyticsService.trackSignupEvent()
                 
                 SingletonStorage.shared.isJustRegistered = true
-                self.applyEula(signupResponse: result, etkAuth: etkAuth, globalPermAuth: globalPermAuth)
+
+                // Passing etkAuth and globalPermAuth to PhoneVerification
+                result.etkAuth = etkAuth
+                result.kvkkAuth = etkAuth
+                result.globalPermAuth = globalPermAuth
+                result.eulaId = self.eula?.id
+                self.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
 
             case .failure(let error):
                 
@@ -163,32 +169,6 @@ class RegistrationInteractor: RegistrationInteractorInput {
         }
     }
 
-    private func applyEula(signupResponse: SignUpSuccessResponse, etkAuth: Bool?, globalPermAuth: Bool?) {
-        guard let eulaID = eula?.id else {
-            assertionFailure()
-            return
-        }
-
-        eulaService.eulaApprove(
-            eulaId: eulaID,
-            etkAuth: etkAuth,
-            kvkkAuth: etkAuth,
-            globalPermAuth: globalPermAuth,
-            success: { [weak self] successResponse in
-                DispatchQueue.main.async {
-                    signupResponse.etkAuth = etkAuth
-                    signupResponse.kvkkAuth = etkAuth
-                    signupResponse.globalPermAuth = globalPermAuth
-                    self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: signupResponse)
-                }
-            },
-            fail: { [weak self] errorResponse in
-                DispatchQueue.main.async {
-                    self?.output.signUpFailed(errorResponse: errorResponse)
-                }
-        })
-    }
-    
     func showSupportView() {
         output.showSupportView()
     }
