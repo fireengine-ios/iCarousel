@@ -99,7 +99,7 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         }
 
         startAsyncOperationDisableScreen()
-        interactor.signUpAndApplyEula(userInfo, etkAuth: confirmEtk, globalPermAuth: confirmGlobalPerm)
+        interactor.signUpUser(userInfo, etkAuth: confirmEtk, globalPermAuth: confirmGlobalPerm)
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
