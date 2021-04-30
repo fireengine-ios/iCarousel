@@ -25,16 +25,8 @@ class RegistrationPresenter: BasePresenter {
         return view
     }
 
-    private var allAgreementsConfirmed: Bool {
-        if let confirmEtk = confirmEtk {
-            return confirmAgreements && confirmEtk
-        }
-
-        return confirmAgreements
-    }
-
     private func updateNextButtonStatus() {
-        view?.setNextButtonEnabled(allAgreementsConfirmed)
+        view?.setNextButtonEnabled(confirmAgreements)
     }
 }
 
@@ -101,7 +93,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
 // MARK: - RegistrationInteractorOutput
 extension RegistrationPresenter: RegistrationInteractorOutput {
     func userValid(_ userInfo: RegistrationUserInfoModel) {
-        guard allAgreementsConfirmed else {
+        guard confirmAgreements else {
             view?.showErrorTitle(withText: TextConstants.termsAndUseCheckboxErrorText)
             return
         }
