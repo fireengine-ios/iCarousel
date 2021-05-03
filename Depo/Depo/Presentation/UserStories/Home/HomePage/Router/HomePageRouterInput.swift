@@ -41,5 +41,6 @@ protocol HomePageRouterInput {
     func presentMobilePaymentPermissionPopUp(url: String, isFirstAppear: Bool)
     
     func presentSuccessMobilePaymentPopUp()
-    
+
+    func moveToReferance()
 }

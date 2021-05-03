@@ -40,6 +40,7 @@ enum OperationType: String {
     case tbMatik                    = "TBMATIC"
     case campaignCard               = "CAMPAIGN"
     case divorce                    = "DIVORCE"
+    case invitation                 = "INVITATION"
     case documents                  = "THINGS_DOCUMENT"
 }
 
@@ -128,14 +129,19 @@ class CardsManager: NSObject {
 //        let q = HomeCardResponse()
 //        q.type = .launchCampaign
 //        homeCardsObjects.append(q)
-        
+
         homeCardsObjects = homeCardsObjects.filter {
             if let type = $0.getOperationType() {                
                 return !deletedCards.contains(type)
             }
             return false
         }
-        
+
+//        let card = HomeCardResponse()
+//        card.id = Int.max
+//        card.type = .invitation
+//        homeCardsObjects.append(card)
+
         showHomeCards()
     }
     
@@ -347,7 +353,6 @@ class CardsManager: NSObject {
         let serverObject = CardsManager.default.serverOperationFor(type: type)
         let cardView: BaseCardView
         debugLog("cardViewForOperaion: type is \(type.rawValue)")
-        
         switch type {
         case .freeAppSpace:
             let view = FreeUpSpacePopUp.initFromNib()
@@ -403,6 +408,8 @@ class CardsManager: NSObject {
             cardView = CampaignCard.initFromNib()
         case .divorce:
             cardView = DivorceCard.initFromNib()
+        case .invitation:
+            cardView = InvitationCard.initFromNib()
         case .documents:
             cardView = DocumentsAlbumCard.initFromNib()
         }

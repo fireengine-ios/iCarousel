@@ -165,6 +165,10 @@ final class HomePageRouter: HomePageRouterInput {
         popUpsToPresent.append(popUp)
         presentPopUps()
     }
+
+    func moveToReferance() {
+        print("moveToReferance")
+    }
     
     private func getPopUpController(url: String) -> PopUpController {
         let plainMessage = TextConstants.mobilePaymentOpenPopupDescriptionLabel

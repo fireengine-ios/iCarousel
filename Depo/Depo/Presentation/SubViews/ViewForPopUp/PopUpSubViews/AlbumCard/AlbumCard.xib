@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -61,7 +61,7 @@
                         <constraint firstAttribute="height" constant="1" id="DpY-de-oj7"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLQ-gs-aeI">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLQ-gs-aeI">
                     <rect key="frame" x="14" y="425" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="mW5-7w-KaB"/>
@@ -83,7 +83,7 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8bJ-os-ke5" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="302" height="302"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nux-hs-zyp">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nux-hs-zyp">
                                     <rect key="frame" x="0.0" y="0.0" width="302" height="302"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
@@ -114,7 +114,7 @@
                         <constraint firstAttribute="trailing" secondItem="YGs-5l-TOq" secondAttribute="trailing" constant="1" id="vzg-65-Ydr"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCC-iL-AFk">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCC-iL-AFk">
                     <rect key="frame" x="217" y="432" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -157,7 +157,7 @@
                 <outlet property="subTitleLabel" destination="sQM-Sv-G0F" id="OUZ-Gc-ZX6"/>
                 <outlet property="titleLabel" destination="z0x-Iu-F9r" id="OEv-8t-dYp"/>
             </connections>
-            <point key="canvasLocation" x="-166" y="-26.5"/>
+            <point key="canvasLocation" x="221" y="-24"/>
         </view>
     </objects>
     <resources>
