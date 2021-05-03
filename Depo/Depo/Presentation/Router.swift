@@ -882,6 +882,12 @@ class RouterVC: NSObject {
     func analyzesHistoryController() -> AnalyzeHistoryViewController {
         return AnalyzeHistoryViewController.initFromNib()
     }
+
+    // MARK: Invitation page
+
+    func invitationController() -> InvitationViewController {
+        return InvitationViewController()
+    }
     
     // MARK: Face Image Recognition Photos
     

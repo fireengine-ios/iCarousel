@@ -409,7 +409,9 @@ struct TextConstants {
     static let homeLatestUploadsCardSubTitle = NSLocalizedString("Your latest uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLatestUploadsCardRecentActivitiesButton = NSLocalizedString("View Recent Activities", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLatestUploadsCardAllPhotosButtn = NSLocalizedString("View All Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+
+    // MARK: Home Invitation card
+    static let homeInvitationCardButtn = NSLocalizedString("invitation_home_card_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Home page like filter view
     static let homeLikeFilterHeader = NSLocalizedString("Filter Card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

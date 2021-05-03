@@ -1879,4 +1879,5 @@
 "signup_redesign_etk_checkbox_desc" = "I have read and accept the text of %1$S";
 "signup_redesign_etk_link" = "Commercial Electronic Message and Data Permission";
 "signup_redesign_eula_accept_button" = "I Agree";
+"invitation_home_card_button_title" = "Invitation";
 

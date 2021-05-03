@@ -40,7 +40,7 @@ enum OperationType: String {
     case tbMatik                    = "TBMATIC"
     case campaignCard               = "CAMPAIGN"
     case divorce                    = "DIVORCE"
-    case reference                  = "REFERENCE"
+    case invitation                 = "INVITATION"
     case documents                  = "THINGS_DOCUMENT"
 }
 
@@ -137,10 +137,10 @@ class CardsManager: NSObject {
             return false
         }
 
-        let card = HomeCardResponse()
-        card.id = Int.max
-        card.type = .reference
-        homeCardsObjects.append(card)
+//        let card = HomeCardResponse()
+//        card.id = Int.max
+//        card.type = .invitation
+//        homeCardsObjects.append(card)
 
         showHomeCards()
     }
@@ -408,8 +408,8 @@ class CardsManager: NSObject {
             cardView = CampaignCard.initFromNib()
         case .divorce:
             cardView = DivorceCard.initFromNib()
-        case .reference:
-            cardView = ReferenceCard.initFromNib()
+        case .invitation:
+            cardView = InvitationCard.initFromNib()
         case .documents:
             cardView = DocumentsAlbumCard.initFromNib()
         }

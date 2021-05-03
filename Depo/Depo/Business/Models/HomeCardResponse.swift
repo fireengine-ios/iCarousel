@@ -64,8 +64,8 @@ final class HomeCardResponse : Equatable {
             return .campaignCard
         case .divorce:
             return .divorce
-        case .reference:
-            return .reference
+        case .invitation:
+            return .invitation
         case .thingsDocument:
             return .documents
         }
@@ -114,6 +114,6 @@ enum HomeCardTypes: String {
     case tbMatik = "TBMATIC"
     case campaign = "CAMPAIGN"
     case divorce = "DIVORCE"
-    case reference = "REFERENCE"
+    case invitation = "INVITATION"
     case thingsDocument = "THINGS_DOCUMENT"
 }

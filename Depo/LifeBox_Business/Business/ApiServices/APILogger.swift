@@ -20,7 +20,7 @@ final class APILogger {
     private var startDates = [URLSessionTask: Date]()
     
     // set true for logging to console
-    private let isDebugLog = false
+    private let isDebugLog = true
     
     private let excludedKeys = ["otpcode", "token"]
     private let excludedValues = ["temp_url_sig", "token", "password", "code"]
