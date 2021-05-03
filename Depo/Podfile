@@ -60,12 +60,6 @@ def lifebox_pods
   pod 'MetalPetal/Swift'
 end
 
-def business_pods
-  core_pods
-  authentication_pods
-  pod 'Player', '~> 0.13.2'
-end
-
 def sharing_pods
   shared_pods
   pod 'Netmera', '~> 3'
@@ -161,18 +155,6 @@ end
 
 target 'LifeboxUnitTests' do
   lifebox_pods
-end
-
-target 'lifeBox_Business' do
-  business_pods
-end
-
-target 'lifeBox_Business_Bundle' do
-  business_pods
-end
-
-target "lifeBox_Business_NotificationService" do
-  notification_pods
 end
 
 target 'Billo' do
