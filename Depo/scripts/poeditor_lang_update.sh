@@ -1,7 +1,7 @@
 #!/bin/bash
 
 POEDITOR_API_TOKEN="b91af56559195b57ea5e1bddb49d3e54"
-POEDITOR_PROJECT_ID="397845"
+POEDITOR_PROJECT_ID="113239"
 
 POEDITOR_LANGUAGES_VS_XCODE_FOLDERS=("en" "tr" "uk" "ru" "ro" "es" "de" "ar" "sq" "fr")
 ROOT_LOCALIZATION_FOLDER="./Depo/App/Resources/"
