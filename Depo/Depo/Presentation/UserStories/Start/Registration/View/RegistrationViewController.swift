@@ -467,12 +467,7 @@ extension RegistrationViewController: RegistrationTermsViewControllerDelegate {
     }
 
     func confirmEtkTerms(_ confirm: Bool) {
-        if confirm {
-            openEtkInfo()
-            termsViewController.isEtkChecked = false
-        } else {
-            output.confirmEtk(confirm)
-        }
+        output.confirmEtk(confirm)
     }
 
     func termsOfUseTapped() {
@@ -498,10 +493,7 @@ extension RegistrationViewController: RegistrationTermsViewControllerDelegate {
     }
 
     private func openEtkInfo() {
-        let infoViewController = RegistrationTermsInfoViewController(text: TextConstants.etkHTMLText) { [weak self] in
-            self?.output.confirmEtk(true)
-            self?.termsViewController.isEtkChecked = true
-        }
+        let infoViewController = RegistrationTermsInfoViewController(text: TextConstants.etkHTMLText)
         infoViewController.present(over: self)
     }
 }
