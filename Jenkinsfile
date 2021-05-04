@@ -6,42 +6,28 @@
 
 agentName = 'devops-dss-js-ios-12' // The mac mini assigned to this project
 apps = [ 
-[
-            name: 'lifebox',// name will be the base filename of the app
-            versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
-            ictsContainerId: '743', // ICT Store
-            prodTeamID: '693N5K66ZJ',
-	          // xcodeSchema: 'TC_Depo_LifeTech',
-           //  xcodeTarget: 'TC_Depo_LifeTech',
-            xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            xcodeTarget: 'TC_Depo_LifeTech_Bundle',
-            itcTeamId: '121548574',
-        ]
+    [
+        name: 'lifebox',// name will be the base filename of the app
+        versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
+        ictsContainerId: '743', // ICT Store
+        prodTeamID: '693N5K66ZJ',
+        xcodeSchema: 'TC_Depo_LifeTech',
+        xcodeTarget: 'TC_Depo_LifeTech',
+        // xcodeSchema: 'TC_Depo_LifeTech_Bundle',
+        // xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+        itcTeamId: '121548574',
+    ]
 ,
-[
-           name: 'billo',// name will be the base filename of the app
-           versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
-          ictsContainerId: '966', // ICT Store
-           appleId: '1488914348',
-           prodTeamID: '729CGH4BJD',
-           itcTeamId: '118347642',
-	    //xcodeSchema: // Defaults to app name
-           //xcodeTarget: // Defaults to app name
-           xcodeSchema: 'Billo_Bundle', 
-           xcodeTarget: 'Billo_Bundle'  
-       ]
-//        ,
-       // [
-       //      name: 'lifebox_business',// name will be the base filename of the app
-       //      versionInfoPath: 'Depo/LifeBox_Business/Signing/Turkcell/TC_LifeBox_Business-Info.plist',
-       //      ictsContainerId: '743', // ICT Store
-       //      prodTeamID: '693N5K66ZJ',
-       //      xcodeSchema: 'lifeBox_Business_Bundle',
-       //      xcodeTarget: 'lifeBox_Business_Bundle',
-       //      // xcodeSchema: 'lifeBox_Business',
-       //      // xcodeTarget: 'lifeBox_Business',
-       //      itcTeamId: '121548574',
-       //  ]
+    [
+        name: 'billo',// name will be the base filename of the app
+        versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
+        ictsContainerId: '966', // ICT Store
+        appleId: '1488914348',
+        prodTeamID: '729CGH4BJD',
+        itcTeamId: '118347642',
+        xcodeSchema: 'Billo_Bundle', 
+        xcodeTarget: 'Billo_Bundle'  
+    ]
 ]
 derivedDir = 'lifebox'
 
@@ -82,7 +68,7 @@ isDev = branchName == 'dev_friendly'
 
 echo "Branch Name: ${branchName}"
 
-isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName == 'release_lifeBoxBusiness_*'
+isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName.startsWith('release_lifeBox_')
 
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${app.versionInfoPath}"
@@ -276,7 +262,7 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "source ~/.bash_profile; cd Depo; pod install;" // gem update cocoapods;// --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod install;"//" --repo-update;" // gem update cocoapods;// --repo-update occasionally
                         apps.each { app ->
 				// testBuild()
                             // runXcode(app, 'test')
@@ -319,7 +305,7 @@ pipeline {
                     expression { isSkipApproval }
                 }
             }
-            agent { label 'devops-dss-js-default' }
+            agent { label agentName }
             options {
                 skipDefaultCheckout true
             }
@@ -428,6 +414,7 @@ pipeline {
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
                 TESTFLIGHT_UPLOAD = credentials('testflight_appSpesific')
                 FASTLANE_DONT_STORE_PASSWORD = 1
+                FASTLANE_SESSION = credentials('fastlane_session')
            }
             steps {
                 script {

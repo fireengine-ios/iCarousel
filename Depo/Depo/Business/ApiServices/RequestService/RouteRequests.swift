@@ -276,7 +276,7 @@ struct RouteRequests {
     }
     
     //MARK: - Turkcell Updater
-    
+
     static func updaterUrl() -> String {
         #if LIFEBOX
             let jsonName = "download/update_ios.json"
