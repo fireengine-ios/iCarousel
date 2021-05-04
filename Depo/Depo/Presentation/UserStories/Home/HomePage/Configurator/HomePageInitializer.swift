@@ -32,5 +32,4 @@ class HomePageModuleInitializer: NSObject {
         configurator.configureModuleForViewInput(viewInput: viewController)
         return viewController
     }
-    
 }

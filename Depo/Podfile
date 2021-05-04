@@ -15,10 +15,10 @@ end
 
 def core_pods
   shared_pods
-  pod 'Firebase/Core', '~> 6'
-  pod 'Firebase/Crashlytics', '~> 6'
-  pod 'Firebase/Analytics', '~> 6'
-  pod 'Firebase/RemoteConfig', '~> 6'
+  pod 'Firebase/Core', '~> 7'
+  pod 'Firebase/Crashlytics', '~> 7'
+  pod 'FirebaseAnalytics', '~> 7'
+  pod 'Firebase/RemoteConfig', '~> 7'
 
   pod 'Netmera', '~> 3.8.4'
 
@@ -57,7 +57,7 @@ def lifebox_pods
   pod 'SwiftyDropbox', '~> 6'
   pod 'MaterialComponents/Slider'
   pod 'Mantis', :git => 'https://github.com/fireengine-ios/Mantis.git', :tag => 'FE-1.3.2.5'
-  pod 'MetalPetal/Swift'
+  pod 'MetalPetal/Swift', '=1.15.0'
 end
 
 def sharing_pods

@@ -11,6 +11,8 @@ import Foundation
 protocol RegistrationInteractorInput {
     
     var captchaRequired: Bool { get }
+
+    func checkEtkAndGlobalPermissions(code: String, phone: String)
     
     func validateUserInfo(email: String,
                           code: String,
@@ -21,8 +23,10 @@ protocol RegistrationInteractorInput {
                           captchaAnswer: String?)
     
     func checkCaptchaRequerement()
+
+    func loadTermsOfUse()
     
-    func signUpUser(_ userInfo: RegistrationUserInfoModel)
+    func signUpUser(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?)
     
     func trackScreen()
     func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol)

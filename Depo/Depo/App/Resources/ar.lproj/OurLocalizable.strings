@@ -1834,3 +1834,11 @@
 "private_share_long_emailmsisdn" = "يتعدى البريد الإلكتروني أو رقم GSM  حد الحروف .";
 "private_share_start_max_number_of_users" = "يمكن القيام بمشاركة معd% شخص كحد أقصى.";
 "private_share_max_number_of_item_limit_exceeded" = "قد تم تجاوز الحد الأقصى لمشاركة الملفات";
+
+/*Added manually*/
+"signup_redesign_eula_checkbox_desc" = "";
+"signup_redesign_eula_link" = "";
+"signup_redesign_etk_checkbox_desc" = "";
+"signup_redesign_etk_link" = "";
+"signup_redesign_eula_accept_button" = "";
+"invitation_home_card_button_title" = "";

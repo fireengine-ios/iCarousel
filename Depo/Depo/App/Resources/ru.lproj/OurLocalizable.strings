@@ -1836,3 +1836,11 @@
 "private_share_long_emailmsisdn" = "В электронной почте или номере GSM превышен лимит количества символов.";
 "private_share_start_max_number_of_users" = "Публикации общего доступа могут быть совершены максимум с %d людьми.";
 "private_share_max_number_of_item_limit_exceeded" = "Превышен максимальный лимит обмена файлами.";
+
+/*Added manually*/
+"signup_redesign_eula_checkbox_desc" = "";
+"signup_redesign_eula_link" = "";
+"signup_redesign_etk_checkbox_desc" = "";
+"signup_redesign_etk_link" = "";
+"signup_redesign_eula_accept_button" = "";
+"invitation_home_card_button_title" = "";

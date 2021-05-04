@@ -2130,3 +2130,11 @@ Please check I have understood the intended command here*/
 "private_share_long_emailmsisdn" = "Le numéro de courrier électronique ou de GSM dépasse la limite de caractères.";
 "private_share_start_max_number_of_users" = "Le partage peut être effectué avec un maximum de %d personnes.";
 "private_share_max_number_of_item_limit_exceeded" = "Il a été dépassée la limite maximale de partage de fichier.";
+
+/*Added manually*/
+"signup_redesign_eula_checkbox_desc" = "";
+"signup_redesign_eula_link" = "";
+"signup_redesign_etk_checkbox_desc" = "";
+"signup_redesign_etk_link" = "";
+"signup_redesign_eula_accept_button" = "";
+"invitation_home_card_button_title" = "";

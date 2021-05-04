@@ -409,7 +409,9 @@ struct TextConstants {
     static let homeLatestUploadsCardSubTitle = NSLocalizedString("Your latest uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLatestUploadsCardRecentActivitiesButton = NSLocalizedString("View Recent Activities", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLatestUploadsCardAllPhotosButtn = NSLocalizedString("View All Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+
+    // MARK: Home Invitation card
+    static let homeInvitationCardButtn = NSLocalizedString("invitation_home_card_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Home page like filter view
     static let homeLikeFilterHeader = NSLocalizedString("Filter Card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -498,9 +500,15 @@ struct TextConstants {
     static let dropboxLastUpdatedFiles = NSLocalizedString("dropboxLastUpdatedFiles", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Terms of Use and Privacy Policy
-     static let termsOfUseCell = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-     static let privacyPolicyCell = NSLocalizedString("privacy_policy_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let termsOfUseCell = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privacyPolicyCell = NSLocalizedString("privacy_policy_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: Signup Redesign
+    static let signupRedesignEulaCheckbox = NSLocalizedString("signup_redesign_eula_checkbox_desc", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupRedesignEulaLink = NSLocalizedString("signup_redesign_eula_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupRedesignEtkCheckbox = NSLocalizedString("signup_redesign_etk_checkbox_desc", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupRedesignEtkLink = NSLocalizedString("signup_redesign_etk_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signupRedesignEulaAcceptButton = NSLocalizedString("signup_redesign_eula_accept_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Face Image
     static let faceImageGrouping = NSLocalizedString("Face image grouping", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

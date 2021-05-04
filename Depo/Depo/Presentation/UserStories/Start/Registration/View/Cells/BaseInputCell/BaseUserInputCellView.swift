@@ -21,7 +21,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
     
     weak var infoButtonDelegate: InfoButtonCellProtocol?
     
-    var defaultTitleHightlightColor = ColorConstants.whiteColor.color {
+    var defaultTitleHightlightColor = ColorConstants.whiteColor {
         didSet {
             changeTitleHeighlight(heighlight: isTitleTitleHightlight)
         }
@@ -39,7 +39,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
         titleLabel.text = title
         placeholderText = text
         if textInputField.attributedPlaceholder?.string != text {
-            textInputField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSForegroundColorAttributeName: ColorConstants.yellowColor.color])
+            textInputField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
         }
     }
     

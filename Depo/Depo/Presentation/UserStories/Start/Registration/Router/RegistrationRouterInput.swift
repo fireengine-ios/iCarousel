@@ -10,16 +10,12 @@ import UIKit
 
 protocol RegistrationRouterInput {
     func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
-    
-    func termsAndServices(with delegate: RegistrationViewDelegate?,
-                          email: String,
-                          phoneNumber: String,
-                          signUpResponse: SignUpSuccessResponse?,
-                          userInfo: RegistrationUserInfoModel?)
-    
+
     func openSupport()
     
     func goToFaqSupportPage()
     
     func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol)
+
+    func goToPrivacyPolicyDescriptionController()
 }

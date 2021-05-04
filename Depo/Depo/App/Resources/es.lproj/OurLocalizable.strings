@@ -1864,3 +1864,11 @@
 "private_share_long_emailmsisdn" = "El número de correo electrónico o GSM excede el límite de caracteres.";
 "private_share_start_max_number_of_users" = "Se puede compartir con un  máximo de %d persona.";
 "private_share_max_number_of_item_limit_exceeded" = "Maximale Grenze der Dateifreigabe überschritten.";
+
+/*Added manually*/
+"signup_redesign_eula_checkbox_desc" = "";
+"signup_redesign_eula_link" = "";
+"signup_redesign_etk_checkbox_desc" = "";
+"signup_redesign_etk_link" = "";
+"signup_redesign_eula_accept_button" = "";
+"invitation_home_card_button_title" = "";

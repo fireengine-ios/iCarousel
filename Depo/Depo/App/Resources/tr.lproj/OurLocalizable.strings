@@ -1840,3 +1840,11 @@
 "private_share_long_emailmsisdn" = "E-Posta veya GSM numarası karakter limitini aşıyor.";
 "private_share_start_max_number_of_users" = "Maksimum %d kişi ile paylaşım yapılabilir.";
 "private_share_max_number_of_item_limit_exceeded" = "Maksimum dosya paylaşım sınırı aşıldı.";
+
+/*Added manually*/
+"signup_redesign_eula_checkbox_desc" = "";
+"signup_redesign_eula_link" = "";
+"signup_redesign_etk_checkbox_desc" = "";
+"signup_redesign_etk_link" = "";
+"signup_redesign_eula_accept_button" = "";
+"invitation_home_card_button_title" = "";

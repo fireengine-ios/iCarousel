@@ -1822,3 +1822,11 @@
 "private_share_long_emailmsisdn" = "E-Mail oder Mobilnummer übersteigt die Anzahl der zulässigen Charakter.";
 "private_share_start_max_number_of_users" = "Es kann maximal mit %d Personen geteilt werden.";
 "private_share_max_number_of_item_limit_exceeded" = "Maximale Grenze der Dateifreigabe überschritten.";
+
+/*Added manually*/
+"signup_redesign_eula_checkbox_desc" = "";
+"signup_redesign_eula_link" = "";
+"signup_redesign_etk_checkbox_desc" = "";
+"signup_redesign_etk_link" = "";
+"signup_redesign_eula_accept_button" = "";
+"invitation_home_card_button_title" = "";
