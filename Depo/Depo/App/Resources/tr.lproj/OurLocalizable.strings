@@ -1842,9 +1842,9 @@
 "private_share_max_number_of_item_limit_exceeded" = "Maksimum dosya paylaşım sınırı aşıldı.";
 
 /*Added manually*/
-"signup_redesign_eula_checkbox_desc" = "%1$S okudum ve onaylıyorum.";
-"signup_redesign_eula_link" = "Kullanıcı Sözleşmesi'ni";
-"signup_redesign_etk_checkbox_desc" = "%1$S metnini okudum ve kabul ediyorum.";
-"signup_redesign_etk_link" = "Ticari Elektronik İleti ve Veri İzni";
-"signup_redesign_eula_accept_button" = "Onaylıyorum";
-"invitation_home_card_button_title" = "Davet et";
+"signup_redesign_eula_checkbox_desc" = "";
+"signup_redesign_eula_link" = "";
+"signup_redesign_etk_checkbox_desc" = "";
+"signup_redesign_etk_link" = "";
+"signup_redesign_eula_accept_button" = "";
+"invitation_home_card_button_title" = "";
