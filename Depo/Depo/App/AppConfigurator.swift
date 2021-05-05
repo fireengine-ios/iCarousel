@@ -46,6 +46,8 @@ final class AppConfigurator {
         AuthoritySingleton.shared.checkNewVersionApp()
         
         PremiumService.shared.addObserverForSyncStatusDidChange()
+
+        FirebaseRemoteConfig.shared.performInitialFetch()
     }
     
     private static func setupIAPObserver() {

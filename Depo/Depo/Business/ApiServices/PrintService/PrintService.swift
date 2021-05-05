@@ -9,17 +9,17 @@
 import UIKit
 
 class PrintService: NSObject {
-    static let path = "http://akillidepo.cellograf.com"
+    static let path = "https://www.sosyopix.com/life-box"
 
-    static func dataJSON(with data: [Item]) -> Data? {
+    static func dataJSON(with data: [Item], requestId: String) -> Data? {
         var photos: [PrintServiceData.Print.Photo] = []
         for item in data {
             let url = item.urlToFile?.absoluteString ?? ""
             photos.append(PrintServiceData.Print.Photo(original: url, thumb: url))
         }
-        
+
         let print = PrintServiceData.Print(dateCreated: Date(), dateSend: Date(),
-                                           photos: photos, requestId: UUID().uuidString,
+                                           photos: photos, requestId: requestId,
                                            totalPhotos: data.count,
                                            uid: RouteRequests.baseUrl.absoluteString)
 
@@ -29,14 +29,15 @@ class PrintService: NSObject {
         jsonEncoder.dateEncodingStrategy = .formatted(formatter)
 
         do {
-            let jsonData = try jsonEncoder.encode(PrintServiceData(data: print))
+            let jsonData = try jsonEncoder.encode(print)
             return jsonData
         } catch {
             return nil
         }
     }
-    
+
 }
+
 private struct PrintServiceData: Codable {
     let data: Print
     

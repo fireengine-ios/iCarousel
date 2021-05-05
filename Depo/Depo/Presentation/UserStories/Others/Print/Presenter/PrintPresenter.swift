@@ -26,17 +26,21 @@ extension PrintPresenter: PrintInteractorOutput {
     
     func urlDidForm(urlRequest: URLRequest) {
         view.loadUrl(urlRequest)
+        asyncOperationSuccess()
     }
-    
+
+    func failedToCreateFormData() {
+        asyncOperationFail(errorMessage: nil)
+    }
 }
 
 // MARK: - PrintViewOutput
 
 extension PrintPresenter: PrintViewOutput {
     
-    
     func viewIsReady() {
         interactor.formData()
+        startAsyncOperation()
     }
     
     func didStartLoad() {
