@@ -2,6 +2,22 @@
 
 @Library('devops-common') _
 
+/***** Branch Config BEGIN ******/
+
+artifactory = Artifactory.server 'turkcell-artifactory'
+
+branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
+
+isDev = branchName.startsWith("develop_")
+
+echo "Branch Name: ${branchName}"
+
+isSkipApproval = branchName.startsWith("release/") || branchName.startsWith("develop_")
+
+isFriendlyBuild = !branchName.startsWith("release/")
+
+/***** Branch Config END ******/
+
 /***** PROJECT variables  BEGIN ******/
 
 agentName = 'devops-dss-js-ios-12' // The mac mini assigned to this project
@@ -11,10 +27,8 @@ apps = [
         versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
         ictsContainerId: '743', // ICT Store
         prodTeamID: '693N5K66ZJ',
-        xcodeSchema: 'TC_Depo_LifeTech',
-        xcodeTarget: 'TC_Depo_LifeTech',
-        // xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-        // xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+        xcodeSchema: isFriendlyBuild ? 'TC_Depo_LifeTech_Bundle' : 'TC_Depo_LifeTech',
+        xcodeTarget: isFriendlyBuild ? 'TC_Depo_LifeTech_Bundle' : 'TC_Depo_LifeTech',
         itcTeamId: '121548574',
     ]
 ,
@@ -25,8 +39,8 @@ apps = [
         appleId: '1488914348',
         prodTeamID: '729CGH4BJD',
         itcTeamId: '118347642',
-        xcodeSchema: 'Billo_Bundle', 
-        xcodeTarget: 'Billo_Bundle'  
+        xcodeSchema: isFriendlyBuild ? 'Billo_Bundle' : 'Billo', 
+        xcodeTarget: isFriendlyBuild ? 'Billo_Bundle' : 'Billo'  
     ]
 ]
 derivedDir = 'lifebox'
@@ -38,7 +52,7 @@ ictsDeployers = "EXT02D9926" // To enable, uncomment submitters in approval stag
 testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval stage code
 
 // Email notification
-devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr;Aleksandr.Pestriakov@life.com.by"
+devTeamEmails = "gozde.kaymaz@turkcell.com.tr;burcu.atalan@turkcell.com.tr;alper.kirdok@consultant.turkcell.com.tr;hadee.hallaq@consultant.turkcell.com.tr"
 
 xcodeParams = [
         xcodeApp: '12.0',
@@ -60,15 +74,7 @@ def flavors = [
 
 /***** PROJECT variables END ******/
 
-artifactory = Artifactory.server 'turkcell-artifactory'
-
-branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-
-isDev = branchName == 'dev_friendly'
-
 echo "Branch Name: ${branchName}"
-
-isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2' || branchName.startsWith('release_lifeBox_')
 
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${app.versionInfoPath}"
