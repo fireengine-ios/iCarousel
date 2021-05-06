@@ -77,8 +77,8 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             return
         }
 
-        let vc = PrintInitializer.viewController(data: wrapperedArray)
-        router.pushViewController(viewController: vc)
+        let warningPopup = WarningPopupController.popup(type: .photoPrintRedirection(photos: wrapperedArray), closeHandler: {})
+        router.presentViewController(controller: warningPopup, animated: false)
     }
     
     func openSharedFilesController() {

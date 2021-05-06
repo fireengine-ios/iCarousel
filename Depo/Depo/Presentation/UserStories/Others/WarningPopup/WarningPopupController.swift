@@ -11,13 +11,16 @@ import UIKit
 enum WarningPopupType {
     case contactPermissionDenied
     case lifeboxStorageLimit
-    
+    case photoPrintRedirection(photos: [WrapData])
+
     fileprivate var title: String {
         switch self {
         case .contactPermissionDenied:
             return TextConstants.warningPopupContactPermissionsTitle
         case .lifeboxStorageLimit:
             return TextConstants.warningPopupStorageLimitTitle
+        case .photoPrintRedirection:
+            return TextConstants.warningPopupPrintRedirectTitle
         }
     }
     
@@ -27,6 +30,8 @@ enum WarningPopupType {
             return TextConstants.warningPopupContactPermissionsMessage
         case .lifeboxStorageLimit:
             return TextConstants.warningPopupStorageLimitMessage
+        case .photoPrintRedirection:
+            return TextConstants.warningPopupPrintRedirectMessage
         }
     }
     
@@ -36,6 +41,8 @@ enum WarningPopupType {
             return TextConstants.warningPopupContactPermissionsStorageButton
         case .lifeboxStorageLimit:
             return TextConstants.warningPopupStorageLimitSettingsButton
+        case .photoPrintRedirection:
+            return TextConstants.warningPopupPrintRedirectProceedButton
         }
     }
     
@@ -45,6 +52,8 @@ enum WarningPopupType {
             return nil
         case .lifeboxStorageLimit:
             return TextConstants.warningPopupContactPermissionsDeleteButton
+        case .photoPrintRedirection:
+            return TextConstants.warningPopupPrintRedirectCancelButton
         }
     }
 }
@@ -158,6 +167,9 @@ final class WarningPopupController: BasePopUpController, NibInit {
                 self?.openSettings()
             case .lifeboxStorageLimit:
                 self?.openStorage()
+            case .photoPrintRedirection(let photos):
+                self?.openPrintPage(photos: photos)
+                break
             }
         }
         handle(action)
@@ -201,5 +213,10 @@ private extension WarningPopupController {
     
     func openSettings() {
         UIApplication.shared.openSettings()
+    }
+
+    func openPrintPage(photos: [WrapData]) {
+        let vc = PrintInitializer.viewController(data: photos)
+        router.pushViewController(viewController: vc)
     }
 }
