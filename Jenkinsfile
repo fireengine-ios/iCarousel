@@ -8,11 +8,11 @@ artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
 
-isDev = branchName.startsWith("develop_")
+isDev = branchName == "develop"
 
 echo "Branch Name: ${branchName}"
 
-isSkipApproval = branchName.startsWith("release/") || branchName.startsWith("develop_")
+isSkipApproval = branchName.startsWith("release/") || branchName == "develop"
 
 isFriendlyBuild = !branchName.startsWith("release/")
 
