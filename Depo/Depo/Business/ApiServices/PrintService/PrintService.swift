@@ -11,7 +11,7 @@ import UIKit
 class PrintService: NSObject {
     static let path = "https://www.sosyopix.com/life-box"
 
-    static func dataJSON(with data: [Item], requestId: String) -> Data? {
+    static func dataJSON(with data: [Item], userId: String) -> Data? {
         var photos: [PrintServiceData.Print.Photo] = []
         for item in data {
             let url = item.urlToFile?.absoluteString ?? ""
@@ -19,9 +19,9 @@ class PrintService: NSObject {
         }
 
         let print = PrintServiceData.Print(dateCreated: Date(), dateSend: Date(),
-                                           photos: photos, requestId: requestId,
+                                           photos: photos, requestId: UUID().uuidString,
                                            totalPhotos: data.count,
-                                           uid: RouteRequests.baseUrl.absoluteString)
+                                           uid: userId)
 
         let jsonEncoder = JSONEncoder()
         let formatter = DateFormatter()

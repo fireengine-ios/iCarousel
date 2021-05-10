@@ -38,7 +38,7 @@ extension PrintInteractor: PrintInteractorInput {
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = PrintService.dataJSON(with: data, requestId: accountInfo.cellografId ?? "")
+        request.httpBody = PrintService.dataJSON(with: data, userId: accountInfo.cellografId ?? "")
 
         output.urlDidForm(urlRequest: request as URLRequest)
     }
