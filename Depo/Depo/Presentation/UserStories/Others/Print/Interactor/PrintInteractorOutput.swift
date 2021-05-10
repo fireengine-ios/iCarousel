@@ -11,5 +11,7 @@ import UIKit
 protocol PrintInteractorOutput: class {
     
     func urlDidForm(urlRequest: URLRequest)
+
+    func failedToCreateFormData()
     
 }

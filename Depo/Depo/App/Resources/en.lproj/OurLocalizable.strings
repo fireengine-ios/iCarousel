@@ -1880,3 +1880,9 @@
 "signup_redesign_etk_link" = "Commercial Electronic Message and Data Permission";
 "signup_redesign_eula_accept_button" = "I Agree";
 "invitation_home_card_button_title" = "Invitation";
+
+/*Print redirection warning*/
+"warning_popup_print_redirect_title" = "Warning";
+"warning_popup_print_redirect_message" = "You are being redirected to an external website...";
+"warning_popup_print_redirect_proceed_button" = "Proceed";
+"warning_popup_print_redirect_cancel_button" = "Cancel";

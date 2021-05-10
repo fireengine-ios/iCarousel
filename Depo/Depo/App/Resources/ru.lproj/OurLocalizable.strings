@@ -1844,3 +1844,9 @@
 "signup_redesign_etk_link" = "";
 "signup_redesign_eula_accept_button" = "";
 "invitation_home_card_button_title" = "";
+
+/*Print redirection warning*/
+"warning_popup_print_redirect_title" = "";
+"warning_popup_print_redirect_message" = "";
+"warning_popup_print_redirect_proceed_button" = "";
+"warning_popup_print_redirect_cancel_button" = "";

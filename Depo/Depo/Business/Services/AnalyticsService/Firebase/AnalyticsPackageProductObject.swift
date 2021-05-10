@@ -7,6 +7,7 @@
 //
 
 import Firebase
+import FirebaseAnalytics
 
 struct AnalyticsPackageProductObject {
     let itemName: String

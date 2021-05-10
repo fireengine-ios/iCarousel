@@ -13,6 +13,7 @@ import FirebaseRemoteConfig
 private struct RemoteConfigKeys {
     static let loginSupportAttempts = "login_support_form_treshold"
     static let signupSupportAttempts = "signup_support_form_treshold"
+    static let printOptionEnabled = "print_option_enabled"
 }
 
 
@@ -29,6 +30,11 @@ final class FirebaseRemoteConfig {
         #endif
         remoteConfig.configSettings = settings
         remoteConfig.setDefaults(fromPlist: "FirebaseRemoteConfigDefaults")
+    }
+
+    var printOptionEnabled: Bool {
+        let key = RemoteConfigKeys.printOptionEnabled
+        return remoteConfig.configValue(forKey: key).boolValue
     }
     
     func fetchAttemptsBeforeSupportOnLogin(completion: @escaping ValueHandler<Int>) {
@@ -60,7 +66,21 @@ final class FirebaseRemoteConfig {
             completion(attempts)
         }
     }
-    
+
+    func performInitialFetch() {
+        debugLog("performing inital fetch")
+        remoteConfig.fetchAndActivate { status, error in
+            switch status {
+            case .successFetchedFromRemote:
+                debugLog("initial fetch: fetched new values")
+            case .successUsingPreFetchedData:
+                debugLog("initial fetch: using prefetched values")
+            case .error:
+                debugLog("initial fetch error: \(error?.description ?? "unknown")")
+            }
+        }
+    }
+
     private func fetch(key: String, completion: @escaping VoidHandler) {
         debugLog("fetching value for \(key)")
         remoteConfig.fetchAndActivate { status, error in
