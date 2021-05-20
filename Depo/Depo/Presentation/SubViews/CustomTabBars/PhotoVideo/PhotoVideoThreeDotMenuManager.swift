@@ -49,7 +49,7 @@ final class PhotoVideoThreeDotMenuManager {
         if remoteItems.isEmpty {
             actionTypes = [.createStory, .addToAlbum]
 
-            if Device.isTurkishLocale, FirebaseRemoteConfig.shared.printOptionEnabled {
+            if PrintService.isEnabled {
                 actionTypes.append(.print)
             }
 
@@ -74,7 +74,7 @@ final class PhotoVideoThreeDotMenuManager {
             ///FE-2455 Removing Print Option - Print option is displayed
             actionTypes.append(contentsOf: [.addToAlbum/*, .print*/])
 
-            if Device.isTurkishLocale, FirebaseRemoteConfig.shared.printOptionEnabled {
+            if PrintService.isEnabled {
                 actionTypes.append(.print)
             }
             

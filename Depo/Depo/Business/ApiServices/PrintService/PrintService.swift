@@ -11,6 +11,14 @@ import UIKit
 class PrintService: NSObject {
     static let path = "https://www.sosyopix.com/life-box"
 
+    static var isEnabled: Bool {
+        #if LIFEBOX
+        return Device.isTurkishLocale && FirebaseRemoteConfig.shared.printOptionEnabled
+        #else
+        return false
+        #endif
+    }
+
     static func dataJSON(with data: [Item], userId: String) -> Data? {
         var photos: [PrintServiceData.Print.Photo] = []
         for item in data {
