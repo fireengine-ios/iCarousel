@@ -1836,11 +1836,11 @@
 "private_share_max_number_of_item_limit_exceeded" = "قد تم تجاوز الحد الأقصى لمشاركة الملفات";
 
 /*Added manually*/
-"signup_redesign_eula_checkbox_desc" = "";
-"signup_redesign_eula_link" = "";
-"signup_redesign_etk_checkbox_desc" = "";
-"signup_redesign_etk_link" = "";
-"signup_redesign_eula_accept_button" = "";
+"signup_redesign_eula_checkbox_desc" = "قرأت %1$S وأوافق عليها.";
+"signup_redesign_eula_link" = "شروط الاستخدام";
+"signup_redesign_etk_checkbox_desc" = "قرأت %1$S وأوافق عليها.";
+"signup_redesign_etk_link" = "نص الرسائل الإلكترونية التجارية وإذن البيانات";
+"signup_redesign_eula_accept_button" = "أوافق";
 "invitation_home_card_button_title" = "";
 
 /*Print redirection warning*/
@@ -1848,3 +1848,4 @@
 "warning_popup_print_redirect_message" = "";
 "warning_popup_print_redirect_proceed_button" = "";
 "warning_popup_print_redirect_cancel_button" = "";
+"settings_item_invitation" = "";
