@@ -11,12 +11,14 @@ import Foundation
 protocol SettingsRouterInput {
     
     func goToOnboarding()
-    
+
+    func goToInvitation()
+
     func goToConnectedAccounts()
     
     func goToPermissions()
     
-    func goToAutoApload()
+    func goToAutoUpload()
     
     func goToPeriodicContactSync()
     

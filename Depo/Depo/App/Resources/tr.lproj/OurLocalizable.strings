@@ -459,7 +459,7 @@
 "View Recent Activities" = "Son aktiviteler";
 "View All Photos" = "Tüm Fotoğrafları Görüntüle";
 "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "lifebox depolama alanın dolmak üzere!";
-"Error occurred while accessing your photos.\nPlease check your settings." = "Fotoğraflarına erişirken bir hata meydana geldi. \nLütfen ayarlarını kontrol edin.";
+"Error occurred while accessing your photos.\nPlease check your settings." = "Fotoğraflarına erişirken bir hata meydana geldi. \nLütfen ayarlarını kontrol et.";
 "localFilesBeingProcessed" = "Yerel dosyalar işleniyor.";
 "TurkcellSecurityPasscodeWarningText" = "Uyarı:  Parola ve touch id özelliklerini daha önce aktive etmiştin. lifebox'taki dosyalarını parola ve touch id ile güvenle saklayabilmen için, Turkcell şifre ile giriş özelliğini aktive etmemeni öneriyoruz.";
 "TurkcellSecurityAutologinText" = "Uyarı:  Parola ve touch id özelliklerini daha önce aktive etmiştin. lifebox'taki dosyalarını parola ve touch id ile güvenle saklayabilmen için, hücresel veride otomatik giriş özelliğini aktive etmemeni öneriyoruz.";
@@ -1842,9 +1842,22 @@
 "private_share_max_number_of_item_limit_exceeded" = "Maksimum dosya paylaşım sınırı aşıldı.";
 
 /*Added manually*/
-"signup_redesign_eula_checkbox_desc" = "";
-"signup_redesign_eula_link" = "";
-"signup_redesign_etk_checkbox_desc" = "";
-"signup_redesign_etk_link" = "";
-"signup_redesign_eula_accept_button" = "";
+"signup_redesign_eula_checkbox_desc" = "%1$S okudum ve kabul ediyorum.";
+"signup_redesign_eula_link" = "Kullanım Koşulları'nı";
+"signup_redesign_etk_checkbox_desc" = "%1$S okudum ve kabul ediyorum.";
+"signup_redesign_etk_link" = "Ticari Elektronik İleti ve Veri İzni Metni'ni";
+"signup_redesign_eula_accept_button" = "Onaylıyorum";
 "invitation_home_card_button_title" = "";
+
+/*Print redirection warning*/
+"warning_popup_print_redirect_title" = "Farklı bir siteye yönlendiriliyorsunuz";
+"warning_popup_print_redirect_message" = "Fotoğraflarınızın baskısının alınabilmesi için farklı bir siteye yönlendiriliyorsunuz";
+"warning_popup_print_redirect_proceed_button" = "Devam";
+"warning_popup_print_redirect_cancel_button" = "İptal";
+"settings_item_invitation" = "Davet Et, Kazan & Kazandır";
+"title_invitation_campaign" = "Kampanya Detayları";
+"title_invitation_link" = "Size Özel Davet Linki";
+"title_invitation_friends" = "Davetini Kabul Edenler (%d  Kişi)";
+"title_invitation_packages" = "Kazandığın Hediyeler (%d Hediye)";
+"invitation_snackbar_copy" = "Davet linkin başarıyla kopyalandı";
+"invitation_share" = "Linki Paylaş";

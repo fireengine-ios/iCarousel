@@ -388,6 +388,15 @@ struct RouteRequests {
         }
     }
 
+    // MARK:- Invitation
+
+    enum Invitation {
+        static let link = baseUrl +/ "invitation/link"
+        static let campaign = baseUrl +/ String(format: "invitation/detail/%@", Device.locale)
+        static let acceptedInvitationList = "invitation/registered?pageNumber=%d&pageSize=%d"
+        static let subscriptions = baseUrl +/ "invitation/subscriptions"
+    }
+
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
     
     static let turkcellAndGroupCompanies = "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz"

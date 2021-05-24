@@ -91,3 +91,17 @@ extension String {
         return components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     }
 }
+
+extension String {
+    var length: Int {
+        return count
+    }
+
+    func substring(fromIndex: Int) -> String {
+        return self[min(fromIndex, length) ..< length]
+    }
+
+    func substring(toIndex: Int) -> String {
+        return self[0 ..< max(0, toIndex)]
+    }
+}

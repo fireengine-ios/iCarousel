@@ -1866,9 +1866,22 @@
 "private_share_max_number_of_item_limit_exceeded" = "Maximale Grenze der Dateifreigabe überschritten.";
 
 /*Added manually*/
-"signup_redesign_eula_checkbox_desc" = "";
-"signup_redesign_eula_link" = "";
-"signup_redesign_etk_checkbox_desc" = "";
-"signup_redesign_etk_link" = "";
-"signup_redesign_eula_accept_button" = "";
+"signup_redesign_eula_checkbox_desc" = "He leído %1$S y lo acepto.";
+"signup_redesign_eula_link" = "A las Condiciones de Uso";
+"signup_redesign_etk_checkbox_desc" = "He leído %1$S y lo acepto.";
+"signup_redesign_etk_link" = "Al texto de permiso de datos y mensajes electrónicos comerciales";
+"signup_redesign_eula_accept_button" = "Confirmo";
 "invitation_home_card_button_title" = "";
+
+/*Print redirection warning*/
+"warning_popup_print_redirect_title" = "";
+"warning_popup_print_redirect_message" = "";
+"warning_popup_print_redirect_proceed_button" = "";
+"warning_popup_print_redirect_cancel_button" = "";
+"settings_item_invitation" = "";
+"title_invitation_campaign" = "";
+"title_invitation_link" = "";
+"title_invitation_friends" = "";
+"title_invitation_packages" = "";
+"invitation_snackbar_copy" = "";
+"invitation_share" = "";

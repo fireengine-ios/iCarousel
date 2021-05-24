@@ -1838,9 +1838,22 @@
 "private_share_max_number_of_item_limit_exceeded" = "Превышен максимальный лимит обмена файлами.";
 
 /*Added manually*/
-"signup_redesign_eula_checkbox_desc" = "";
-"signup_redesign_eula_link" = "";
-"signup_redesign_etk_checkbox_desc" = "";
-"signup_redesign_etk_link" = "";
-"signup_redesign_eula_accept_button" = "";
+"signup_redesign_eula_checkbox_desc" = "Я прочитал и принимаю %1$S.";
+"signup_redesign_eula_link" = "Условия Использования";
+"signup_redesign_etk_checkbox_desc" = "Я прочитал и принимаю 1$S.";
+"signup_redesign_etk_link" = "Коммерческое Электронное Сообщение и Текст Подтверждения на Передачу Данных";
+"signup_redesign_eula_accept_button" = "Подтверждаю";
 "invitation_home_card_button_title" = "";
+
+/*Print redirection warning*/
+"warning_popup_print_redirect_title" = "";
+"warning_popup_print_redirect_message" = "";
+"warning_popup_print_redirect_proceed_button" = "";
+"warning_popup_print_redirect_cancel_button" = "";
+"settings_item_invitation" = "";
+"title_invitation_campaign" = "";
+"title_invitation_link" = "";
+"title_invitation_friends" = "";
+"title_invitation_packages" = "";
+"invitation_snackbar_copy" = "";
+"invitation_share" = "";
