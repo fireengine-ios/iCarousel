@@ -230,7 +230,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                                   actionsCallback: @escaping AlertActionsCallback) {
         
         var filteredTypes = types
-        if !Device.isTurkishLocale || !FirebaseRemoteConfig.shared.printOptionEnabled {
+        if !PrintService.isEnabled {
             filteredTypes = types.filter({ $0 != .print }) //FE-2439 - Removing Print Option for Turkish (TR) language
         }
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in

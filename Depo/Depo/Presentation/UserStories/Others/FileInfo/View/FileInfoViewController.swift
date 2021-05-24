@@ -122,6 +122,10 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         if item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
             canEdit = false
         }
+
+        if let album = item as? AlbumItem {
+            canEdit = album.readOnly != true
+        }
         
         navigationItem.rightBarButtonItem = canEdit ? saveButton : nil
         fileName.isEnabled = canEdit
@@ -227,10 +231,6 @@ extension FileInfoViewController: FileInfoViewInput {
             count += album.imageCount ?? 0
             count += album.videoCount ?? 0
             folderSizeLabel.text = String(count)
-            
-            if album.readOnly == true {
-                fileName.isEnabled = false
-            }
         }
         
         if let createdDate = object.creationDate {
