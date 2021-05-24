@@ -24,7 +24,7 @@ class InvitedPeopleCollectionViewCell: UICollectionViewCell {
     func configureCell(invitationRegisteredAccount: InvitationRegisteredAccount, bgColor: UIColor) {
         profileImageView.backgroundColor = bgColor
 
-        if let name = invitationRegisteredAccount.name, name.length > 0 {
+        if let name = invitationRegisteredAccount.name, name.count > 0 {
             profileShortCutLabel.text = self.dotTextBy(name: name)
             profileNameLabel.text = name
         } else {

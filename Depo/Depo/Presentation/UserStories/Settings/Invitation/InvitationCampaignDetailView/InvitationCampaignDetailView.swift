@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InvitationCampaignDetailView: UIView {
+class InvitationCampaignDetailView: UIView, NibInit {
 
     @IBOutlet weak var campaignDetailImageView: LoadingImageView!
     @IBOutlet weak var campaignDetailTextView: UITextView!

@@ -146,7 +146,7 @@ extension InvitationViewController: InvitationReuseViewDelegate {
     }
 
     func invitationCampaignDetail() {
-        let invitationCampaignDetailView: InvitationCampaignDetailView = .fromNib()
+        let invitationCampaignDetailView: InvitationCampaignDetailView = .initFromNib()
         guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
         invitationCampaignDetailView.place(in: window)
     }
