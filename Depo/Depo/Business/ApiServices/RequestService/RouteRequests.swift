@@ -296,6 +296,13 @@ struct RouteRequests {
             return all +/ String(id)
         }
     }
+
+    // MARK: - Print
+    enum Print {
+        private static let printApi = baseUrl +/ "sosyopix"
+
+        static let log = printApi +/ "history"
+    }
     
     /// upload
     static let uploadContainer = baseUrl +/ "container/baseUrl"

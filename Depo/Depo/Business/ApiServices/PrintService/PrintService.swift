@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Alamofire
 
-class PrintService: NSObject {
+final class PrintService {
     static let path = "https://www.sosyopix.com/life-box"
 
     static var isEnabled: Bool {
@@ -42,6 +43,23 @@ class PrintService: NSObject {
         } catch {
             return nil
         }
+    }
+
+    @discardableResult
+    func sendLog(for items: [Item], handler: @escaping ResponseVoid) -> URLSessionTask? {
+        let uuids = items.map { $0.uuid }.asParameters()
+
+        return SessionManager
+            .customDefault
+            .request(
+                RouteRequests.Print.log,
+                method: .post,
+                parameters: uuids,
+                encoding: ArrayEncoding()
+            )
+            .customValidate()
+            .responseVoid(handler)
+            .task
     }
 
 }

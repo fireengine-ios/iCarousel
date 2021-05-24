@@ -13,6 +13,7 @@ class PrintInteractor {
     weak var output: PrintInteractorOutput!
 
     private let data: [Item]
+    private let printService = PrintService()
     
     init(data: [Item]) {
         self.data = data
@@ -28,6 +29,10 @@ extension PrintInteractor: PrintInteractorInput {
             self.prepareFormData(with: info)
         } error: {
             self.output.failedToCreateFormData()
+        }
+
+        printService.sendLog(for: data) { _ in
+
         }
     }
 
