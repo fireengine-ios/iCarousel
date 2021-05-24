@@ -9,6 +9,8 @@
 import UIKit
 
 protocol SettingsDelegate: class {
+    func goToInvitation()
+
     func goToConnectedAccounts()
     
     func goToAutoUpload()
@@ -168,11 +170,17 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch cellType {
+        case .invitation:
+            if let delegate = settingsDelegate {
+                delegate.goToInvitation()
+            } else {
+                output.goToInvitation()
+            }
         case .autoUpload:
             if let delegate = settingsDelegate {
                 delegate.goToAutoUpload()
             } else {
-                output.goToAutoApload()
+                output.goToAutoUpload()
             }
         case .periodicContactSync:
             if let delegate = settingsDelegate {

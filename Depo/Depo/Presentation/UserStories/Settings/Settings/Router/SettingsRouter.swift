@@ -9,13 +9,17 @@
 import UIKit
 
 class SettingsRouter: SettingsRouterInput {
-    
+
     let router = RouterVC()
     
     func goToOnboarding() {
         router.setNavigationController(controller: router.onboardingScreen)
     }
-    
+
+    func goToInvitation() {
+        router.pushViewController(viewController: router.invitation)
+    }
+
     func goToConnectedAccounts() {
         router.pushViewController(viewController: router.connectedAccounts!)
     }
@@ -24,7 +28,7 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.permissions)
     }
     
-    func goToAutoApload() {
+    func goToAutoUpload() {
         router.pushViewController(viewController: router.autoUpload)
     }
     

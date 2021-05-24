@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 extension UIView {
     var safeTopAnchor: NSLayoutYAxisAnchor {
@@ -127,5 +128,54 @@ extension UIView {
         view.addSubview(separator)
         separator.autoresizingMask = [.flexibleWidth]
         return view
+    }
+}
+
+extension UIView: Waiting {
+    func showSpinerWithCancelClosure(_ cancel: @escaping VoidHandler) {
+
+    }
+
+    func showFullscreenHUD(with text: String?, and cancelHandler: @escaping VoidHandler) {
+        
+    }
+
+    func showSpinner() {
+        DispatchQueue.main.async {
+            _ = MBProgressHUD.showAdded(to: self, animated: true)
+        }
+    }
+
+    func showSpinnerOnView(_ view: UIView) {
+        DispatchQueue.main.async {
+            _ = MBProgressHUD.showAdded(to: view, animated: true)
+        }
+    }
+
+    func showSpinnerIncludeNavigationBar() {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
+            let hud = MBProgressHUD.showAdded(to: window, animated: true)
+            window.addSubview(hud)
+        }
+    }
+
+    func hideSpinnerIncludeNavigationBar() {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
+            MBProgressHUD.hideAllHUDs(for: window, animated: true)
+        }
+    }
+
+    func hideSpinner() {
+        DispatchQueue.main.async {
+            MBProgressHUD.hideAllHUDs(for: self, animated: true)
+        }
+    }
+
+    func hideSpinerForView(_ view: UIView) {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: view, animated: true)
+        }
     }
 }

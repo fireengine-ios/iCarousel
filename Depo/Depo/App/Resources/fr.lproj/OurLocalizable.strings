@@ -2145,3 +2145,9 @@ Please check I have understood the intended command here*/
 "warning_popup_print_redirect_proceed_button" = "";
 "warning_popup_print_redirect_cancel_button" = "";
 "settings_item_invitation" = "";
+"title_invitation_campaign" = "";
+"title_invitation_link" = "";
+"title_invitation_friends" = "";
+"title_invitation_packages" = "";
+"invitation_snackbar_copy" = "";
+"invitation_share" = "";

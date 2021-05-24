@@ -1854,4 +1854,10 @@
 "warning_popup_print_redirect_message" = "Fotoğraflarınızın baskısının alınabilmesi için farklı bir siteye yönlendiriliyorsunuz";
 "warning_popup_print_redirect_proceed_button" = "Devam";
 "warning_popup_print_redirect_cancel_button" = "İptal";
-"settings_item_invitation" = "";
+"settings_item_invitation" = "Davet Et, Kazan & Kazandır";
+"title_invitation_campaign" = "Kampanya Detayları";
+"title_invitation_link" = "Size Özel Davet Linki";
+"title_invitation_friends" = "Davetini Kabul Edenler (%d  Kişi)";
+"title_invitation_packages" = "Kazandığın Hediyeler (%d Hediye)";
+"invitation_snackbar_copy" = "Davet linkin başarıyla kopyalandı";
+"invitation_share" = "Linki Paylaş";

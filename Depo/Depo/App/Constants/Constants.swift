@@ -2202,6 +2202,13 @@ struct TextConstants {
     static let privateShareMessageLimit = NSLocalizedString("private_share_long_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePhoneOrMailLimit = NSLocalizedString("private_share_long_emailmsisdn", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareNumberOfItemsLimit = NSLocalizedString("private_share_max_number_of_item_limit_exceeded", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsItemInvitation = NSLocalizedString("settings_item_invitation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let titleInvitationCampaign = NSLocalizedString("title_invitation_campaign", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let titleInvitationLink = NSLocalizedString("title_invitation_link", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let titleInvitationFriends = NSLocalizedString("title_invitation_friends", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let titleInvitationPackages = NSLocalizedString("title_invitation_packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let invitationSnackbarCopy = NSLocalizedString("invitation_snackbar_copy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let invitationShare = NSLocalizedString("invitation_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: - Print redirection warning
     static let warningPopupPrintRedirectTitle = NSLocalizedString("warning_popup_print_redirect_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -2209,3 +2216,5 @@ struct TextConstants {
     static let warningPopupPrintRedirectProceedButton = NSLocalizedString("warning_popup_print_redirect_proceed_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupPrintRedirectCancelButton = NSLocalizedString("warning_popup_print_redirect_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
+
+

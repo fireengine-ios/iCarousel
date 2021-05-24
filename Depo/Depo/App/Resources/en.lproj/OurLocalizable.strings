@@ -1886,4 +1886,10 @@
 "warning_popup_print_redirect_message" = "You are being redirected o an external site in order to print your photos";
 "warning_popup_print_redirect_proceed_button" = "Continue";
 "warning_popup_print_redirect_cancel_button" = "Cancel";
-"settings_item_invitation" = "";
+"settings_item_invitation" = "Invite, Win&Win";
+"title_invitation_campaign" = "Campaign Details";
+"title_invitation_link" = "Your invitation link";
+"title_invitation_friends" = "Friends Signup With Invitation(%d people)";
+"title_invitation_packages" = "Gifts You Earned(%d Gifts)";
+"invitation_snackbar_copy" = "Your invitation link is copied successfully";
+"invitation_share" = "Linki Paylaş";

@@ -13,10 +13,12 @@ protocol SettingsViewOutput {
     func viewWillBecomeActive()
     
     func onLogout()
-    
+
+    func goToInvitation()
+
     func goToConnectedAccounts()
 
-    func goToAutoApload()
+    func goToAutoUpload()
     
     func goToFaceImage()
     

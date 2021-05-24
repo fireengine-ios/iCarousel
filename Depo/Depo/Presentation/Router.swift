@@ -955,7 +955,10 @@ class RouterVC: NSObject {
     }
     
     // MARK: Auto Upload
-    
+    var invitation: UIViewController {
+        return InvitationViewController()
+    }
+
     var autoUpload: UIViewController {
         return AutoSyncModuleInitializer.initializeViewController(fromSettings: true)
     }

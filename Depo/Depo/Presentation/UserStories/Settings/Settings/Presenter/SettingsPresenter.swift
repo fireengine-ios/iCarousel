@@ -48,7 +48,10 @@ final class SettingsPresenter: BasePresenter {
 
 // MARK: - SettingsViewOutput
 extension SettingsPresenter: SettingsViewOutput {
-    
+    func goToInvitation() {
+        router.goToInvitation()
+    }
+
     func viewIsReady() {
         interactor.trackScreen()
         view.prepareCellsData(isPermissionShown: false)
@@ -81,8 +84,8 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToConnectedAccounts()
     }
     
-    func goToAutoApload() {
-        router.goToAutoApload()
+    func goToAutoUpload() {
+        router.goToAutoUpload()
     }
     
     func goToFaceImage() {
