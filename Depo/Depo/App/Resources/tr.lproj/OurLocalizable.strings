@@ -1861,3 +1861,7 @@
 "title_invitation_packages" = "Kazandığın Hediyeler (%d Hediye)";
 "invitation_snackbar_copy" = "Davet linkin başarıyla kopyalandı";
 "invitation_share" = "Linki Paylaş";
+"warning_popup_print_redirect_title" = "";
+"warning_popup_print_redirect_message" = "";
+"warning_popup_print_redirect_proceed_button" = "";
+"warning_popup_print_redirect_cancel_button" = "";

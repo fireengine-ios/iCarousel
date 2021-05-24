@@ -107,9 +107,9 @@ enum ElementTypes {
                     result = [.share, .download]
                     
                     if item.fileType == .image {
-//                        if Device.isTurkishLocale {
-//                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-//                        }
+                        if Device.isTurkishLocale, FirebaseRemoteConfig.shared.printOptionEnabled {
+                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
+                        }
                         
                         result.append(.edit)
 
@@ -164,9 +164,9 @@ enum ElementTypes {
                 
             case .selectionMode:
                 result = [.createStory, .addToFavorites, .removeFromFavorites]
-//                if Device.isTurkishLocale {
-//                    result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-//                }
+                if Device.isTurkishLocale, FirebaseRemoteConfig.shared.printOptionEnabled {
+                    result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
+                }
                 result.append(.removeFromAlbum)
             }
         }
@@ -216,9 +216,9 @@ enum ElementTypes {
                 
             default:
                 result = [.createStory]
-//                if Device.isTurkishLocale {
-//                    result.append(.print)  //FE-2439 - Removing Print Option for Turkish (TR) language
-//                }
+                if Device.isTurkishLocale, FirebaseRemoteConfig.shared.printOptionEnabled {
+                    result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
+                }
                 result.append(.removeFromFaceImageAlbum)
             }
         }

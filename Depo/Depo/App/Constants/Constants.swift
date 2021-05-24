@@ -2209,6 +2209,12 @@ struct TextConstants {
     static let titleInvitationPackages = NSLocalizedString("title_invitation_packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invitationSnackbarCopy = NSLocalizedString("invitation_snackbar_copy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invitationShare = NSLocalizedString("invitation_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: - Print redirection warning
+    static let warningPopupPrintRedirectTitle = NSLocalizedString("warning_popup_print_redirect_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let warningPopupPrintRedirectMessage = NSLocalizedString("warning_popup_print_redirect_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let warningPopupPrintRedirectProceedButton = NSLocalizedString("warning_popup_print_redirect_proceed_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let warningPopupPrintRedirectCancelButton = NSLocalizedString("warning_popup_print_redirect_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
 
 

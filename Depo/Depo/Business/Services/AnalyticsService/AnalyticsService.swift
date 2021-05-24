@@ -10,6 +10,7 @@ import Adjust
 import FBSDKCoreKit
 import StoreKit
 import Firebase
+import FirebaseAnalytics
 import Netmera
 
 protocol AnalyticsScreen {

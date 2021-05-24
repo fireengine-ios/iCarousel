@@ -30,8 +30,8 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
         }
 
         let imagesOnly = wrapperedArray.filter { $0.fileType == .image }
-        let vc = PrintInitializer.viewController(data: imagesOnly)
-        router.pushOnPresentedView(viewController: vc)
+        let warningPopup = WarningPopupController.popup(type: .photoPrintRedirection(photos: imagesOnly), closeHandler: {})
+        router.presentViewController(controller: warningPopup, animated: false)
     }
     
     func showSelectFolder(selectFolder: SelectFolderViewController) { }

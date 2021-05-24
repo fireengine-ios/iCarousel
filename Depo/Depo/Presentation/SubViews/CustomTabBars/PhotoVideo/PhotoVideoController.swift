@@ -619,13 +619,14 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             guard let self = self else {
                 return
             }
-            let syncPhotos = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
+            let itemsToPrint = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
             
-            if let itemsToPrint = syncPhotos as? [Item], !itemsToPrint.isEmpty {
-                let vc = PrintInitializer.viewController(data: itemsToPrint)
-                self.router.pushOnPresentedView(viewController: vc)
+            if !itemsToPrint.isEmpty {
+                let warningPopup = WarningPopupController.popup(type: .photoPrintRedirection(photos: itemsToPrint)) {
+                    self.stopEditingMode()
+                }
+                self.present(warningPopup, animated: false)
             }
-            self.stopEditingMode()
         }
         
     }

@@ -48,6 +48,11 @@ final class PhotoVideoThreeDotMenuManager {
         /// locals only
         if remoteItems.isEmpty {
             actionTypes = [.createStory, .addToAlbum]
+
+            if Device.isTurkishLocale, FirebaseRemoteConfig.shared.printOptionEnabled {
+                actionTypes.append(.print)
+            }
+
             completion(actionTypes)
             
             /// local and remotes or remotes only
@@ -68,6 +73,10 @@ final class PhotoVideoThreeDotMenuManager {
             
             ///FE-2455 Removing Print Option - Print option is displayed
             actionTypes.append(contentsOf: [.addToAlbum/*, .print*/])
+
+            if Device.isTurkishLocale, FirebaseRemoteConfig.shared.printOptionEnabled {
+                actionTypes.append(.print)
+            }
             
             /// remove .deleteDeviceOriginal if need
             MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in
@@ -111,5 +120,4 @@ final class PhotoVideoThreeDotMenuManager {
             completion(actionTypes)
         }
     }
-    
 }

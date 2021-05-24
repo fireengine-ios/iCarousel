@@ -6,5 +6,7 @@
 	<integer>1000</integer>
 	<key>signup_support_form_treshold</key>
 	<integer>1000</integer>
+	<key>print_option_enabled</key>
+	<false/>
 </dict>
 </plist>
