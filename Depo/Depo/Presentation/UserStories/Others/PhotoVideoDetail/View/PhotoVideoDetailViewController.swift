@@ -549,6 +549,16 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
             }
         }
     }
+
+    func printSelected() {
+        guard let item = selectedItem else {
+            assertionFailure()
+            return
+        }
+
+        let warningPopup = WarningPopupController.popup(type: .photoPrintRedirection(photos: [item]), closeHandler: {})
+        RouterVC().presentViewController(controller: warningPopup, animated: false)
+    }
 }
 
 extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {

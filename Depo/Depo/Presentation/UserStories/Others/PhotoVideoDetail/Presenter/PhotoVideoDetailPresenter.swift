@@ -265,7 +265,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
     }
     
-    func printSelected() { }
+    func printSelected() {
+        view.printSelected()
+    }
+
     func stopModeSelected() { }
     
     override func startAsyncOperation() {

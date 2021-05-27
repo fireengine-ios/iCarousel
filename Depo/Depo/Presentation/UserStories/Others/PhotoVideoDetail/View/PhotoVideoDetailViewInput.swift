@@ -49,4 +49,6 @@ protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     func updateExpiredItem(_ item: WrapData)
     
     func updateItem(_ item: WrapData)
+
+    func printSelected()
 }

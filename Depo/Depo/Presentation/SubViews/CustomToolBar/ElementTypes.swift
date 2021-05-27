@@ -107,9 +107,10 @@ enum ElementTypes {
                     result = [.share, .download]
                     
                     if item.fileType == .image {
-                        if PrintService.isEnabled {
-                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-                        }
+                        // Disabled in bottom bar at detail page
+//                        if PrintService.isEnabled {
+//                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
+//                        }
                         
                         result.append(.edit)
 
