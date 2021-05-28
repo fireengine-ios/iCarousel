@@ -1847,7 +1847,7 @@
 "signup_redesign_etk_checkbox_desc" = "%1$S okudum ve kabul ediyorum.";
 "signup_redesign_etk_link" = "Ticari Elektronik İleti ve Veri İzni Metni'ni";
 "signup_redesign_eula_accept_button" = "Onaylıyorum";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "Devam Et";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Farklı bir siteye yönlendiriliyorsunuz";
@@ -1861,3 +1861,4 @@
 "title_invitation_packages" = "Kazandığın Hediyeler (%d Hediye)";
 "invitation_snackbar_copy" = "Davet linkin başarıyla kopyalandı";
 "invitation_share" = "Linki Paylaş";
+"invitation_friends" = "Davetini Kabul Edenler";

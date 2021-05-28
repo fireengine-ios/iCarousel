@@ -14,8 +14,6 @@ class InvitedPeopleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var profileShortCutLabel: UILabel!
     @IBOutlet weak var profileNameLabel: UILabel!
 
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,36 +23,11 @@ class InvitedPeopleCollectionViewCell: UICollectionViewCell {
         profileImageView.backgroundColor = bgColor
 
         if let name = invitationRegisteredAccount.name, name.count > 0 {
-            profileShortCutLabel.text = self.dotTextBy(name: name)
+            profileShortCutLabel.text = AccountConstants.shared.dotTextBy(name: name)
             profileNameLabel.text = name
         } else {
-            profileShortCutLabel.text = self.dotTextBy(email: invitationRegisteredAccount.email)
+            profileShortCutLabel.text = AccountConstants.shared.dotTextBy(email: invitationRegisteredAccount.email)
             profileNameLabel.text = invitationRegisteredAccount.email
         }
     }
-
-    // Using Name
-    private func dotTextBy(name: String) -> String {
-        let fullNameArray = name.components(separatedBy: " ")
-        let firstName = fullNameArray.first
-        let lastName = fullNameArray.last
-        var firstLetterOfName = ""
-        var firstLetterOfLastname = ""
-
-        if let firstName = firstName {
-            firstLetterOfName = firstName[0]
-        }
-
-        if let lastName = lastName {
-            firstLetterOfLastname = lastName[0]
-        }
-
-        return firstLetterOfName + firstLetterOfLastname
-    }
-
-    // Using Email
-    private func dotTextBy(email: String) -> String {
-        return email[1]
-    }
-
 }

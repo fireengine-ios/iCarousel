@@ -17,8 +17,8 @@ class InvitationViewController: BaseViewController {
     private var invitationGiftList: [SubscriptionPlanBaseResponse] = []
     private var invitationSubscriptionPlanList: [SubscriptionPlan] = []
 
-
     let group = DispatchGroup()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,7 @@ class InvitationViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        self.analyticsService.logScreen(screen: .invitation)
     }
 
     private func setupCollectionView() {
@@ -152,7 +153,10 @@ extension InvitationViewController: InvitationReuseViewDelegate {
     }
 
     func invitationShareLink(shareButton: UIButton) {
-        guard let invitationLinkValue = self.invitationLink?.value, let url =  URL(string: invitationLinkValue) else { return }
+
+        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .invitationLink)
+
+        guard let invitationLinkValue = self.invitationLink?.url, let url =  URL(string: invitationLinkValue) else { return }
 
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
 

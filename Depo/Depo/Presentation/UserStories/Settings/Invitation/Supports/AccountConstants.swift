@@ -22,4 +22,29 @@ final class AccountConstants {
 
         return bgColors
     }
+
+    // Using Name
+    func dotTextBy(name: String) -> String {
+        let fullNameArray = name.components(separatedBy: " ")
+        let firstName = fullNameArray.first
+        let lastName = fullNameArray.last
+        var firstLetterOfName = ""
+        var firstLetterOfLastname = ""
+
+        if let firstName = firstName {
+            firstLetterOfName = firstName[0]
+        }
+
+        if let lastName = lastName {
+            firstLetterOfLastname = lastName[0]
+        }
+
+        return (firstLetterOfName + firstLetterOfLastname).uppercased()
+    }
+
+    // Using Email
+    func dotTextBy(email: String) -> String {
+        let emailFirstTwoLetters: String = email[0] + email[1]
+        return emailFirstTwoLetters.uppercased()
+    }
 }

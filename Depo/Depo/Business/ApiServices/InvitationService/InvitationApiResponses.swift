@@ -7,8 +7,8 @@
 //
 
 struct InvitationLink: Codable {
-    let status: String
-    let value: String
+    let url: String
+    let shareable: Bool
 }
 
 struct InvitationCampaignResponse: Codable {

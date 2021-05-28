@@ -15,10 +15,13 @@ class InvitationCampaignDetailView: UIView, NibInit {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var closeButtonBGView: UIView!
 
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     override func awakeFromNib() {
         super.awakeFromNib()
         localizable()
         fetchCampaignDetail()
+        self.analyticsService.logScreen(screen: .invitationCampaignDetail)
     }
 
     func place(in view: UIView) {

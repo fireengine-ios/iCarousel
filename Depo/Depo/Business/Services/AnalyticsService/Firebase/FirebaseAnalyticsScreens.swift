@@ -54,6 +54,8 @@ enum AnalyticsAppScreens {
     case profileEdit
     case settingsPhotoEdit
     case autoSyncSettings
+    case invitation
+    case invitationCampaignDetail
     ///contactSync
     case contactSyncDeleteDuplicates
     case contactSyncBackUp
@@ -162,6 +164,10 @@ enum AnalyticsAppScreens {
             return "First Auto Sync Screen"
         case .autoSyncSettings:
             return "Auto Sync"
+        case .invitation:
+            return "Invitation"
+        case .invitationCampaignDetail:
+            return "Invitation Campaign Detail"
         ///Main Screens
         case .homePage:
             return "Home Page"
