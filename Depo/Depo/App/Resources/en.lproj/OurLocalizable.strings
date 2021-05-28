@@ -1892,4 +1892,7 @@
 "title_invitation_friends" = "Friends Signup With Invitation(%d people)";
 "title_invitation_packages" = "Gifts You Earned(%d Gifts)";
 "invitation_snackbar_copy" = "Your invitation link is copied successfully";
-"invitation_share" = "Linki Paylaş";
+"invitation_share" = "Share Link";
+"invitation_friends" = "Friends Signup With Invitation";
+"invitation_snackbar_copy_exceed" = "";
+"invitation_snackbar_share_exceed" = "";

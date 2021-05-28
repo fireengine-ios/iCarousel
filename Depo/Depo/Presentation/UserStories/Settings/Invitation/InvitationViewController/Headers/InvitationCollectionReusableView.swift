@@ -18,6 +18,7 @@ class InvitationCollectionReusableView: UICollectionReusableView {
 
     static let reuseId = "InvitationCollectionReusableView"
     var delegate: InvitationReuseViewDelegate?
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
 
     @IBOutlet weak var campaignDetailLabel: UILabel!
 
@@ -32,6 +33,8 @@ class InvitationCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var giftsTitleLabel: UILabel!
 
     private var invitationRegisteredResponse: InvitationRegisteredResponse?
+    private var invitationLink: InvitationLink?
+
     private var acceptedCollectionViewNumberOfItem = 0
     private var accountBGColors = [UIColor]()
 
@@ -62,7 +65,8 @@ class InvitationCollectionReusableView: UICollectionReusableView {
     }
 
     func configureLinkView(invitationLink: InvitationLink) {
-        invitationLinkLabel.text = invitationLink.value
+        self.invitationLink = invitationLink
+        invitationLinkLabel.text = invitationLink.url
     }
 
     func configureInvitationRegisteredView(invitationRegisteredResponse: InvitationRegisteredResponse) {
@@ -97,11 +101,29 @@ class InvitationCollectionReusableView: UICollectionReusableView {
     }
 
     @IBAction func invitationLinkShareButtonTapped(_ sender: Any) {
+        guard let invitatonLink = self.invitationLink else { return }
+
+        guard invitatonLink.shareable else {
+            let message = TextConstants.invitationSnackbarShareExceed
+            SnackbarManager.shared.show(type: SnackbarType.action, message: message)
+            return
+        }
+
         self.delegate?.invitationShareLink(shareButton: invitationLinkShareButton)
     }
 
     @IBAction func invitationLinkCopyButtonTapped(_ sender: Any) {
-        UIPasteboard.general.string = invitationLinkLabel.text
+        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .copyInvitationLink)
+
+        guard let invitatonLink = self.invitationLink else { return }
+
+        guard invitatonLink.shareable else {
+            let message = TextConstants.invitationSnackbarCopyExceed
+            SnackbarManager.shared.show(type: SnackbarType.action, message: message)
+            return
+        }
+
+        UIPasteboard.general.string = invitatonLink.url
 
         let message = TextConstants.invitationSnackbarCopy
         SnackbarManager.shared.show(type: SnackbarType.action, message: message)
@@ -124,6 +146,7 @@ extension InvitationCollectionReusableView: UICollectionViewDelegate, UICollecti
 }
 
 extension InvitationCollectionReusableView: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return acceptedCollectionViewNumberOfItem
     }

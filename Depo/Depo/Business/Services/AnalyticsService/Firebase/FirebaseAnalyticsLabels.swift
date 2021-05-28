@@ -456,6 +456,8 @@ enum GAEventLabel {
     case restart
     case privateShare(PrivateShareEvent)
     case invitationVideoButton
+    case invitationLink
+    case copyInvitationLink
     
     var text: String {
         switch self {
@@ -687,6 +689,10 @@ enum GAEventLabel {
             return event.text
         case .invitationVideoButton:
             return "Invitation Video Button"
+        case .invitationLink:
+            return "Invitation link"
+        case .copyInvitationLink:
+            return "Copy Invitation Link"
         }
     }
     

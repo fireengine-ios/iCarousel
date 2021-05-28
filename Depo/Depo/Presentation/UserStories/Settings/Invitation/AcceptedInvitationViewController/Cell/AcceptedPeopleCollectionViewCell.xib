@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaBol.ttf">
+            <string>TurkcellSaturaBol</string>
+        </array>
+        <array key="TurkcellSaturaReg.ttf">
+            <string>TurkcellSaturaReg</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AcceptedPeopleCollectionViewCell" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VZf-pP-zZy">
+                        <rect key="frame" x="10" y="0.0" width="45" height="45"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDM-AW-VrG">
+                                <rect key="frame" x="0.0" y="11" width="45" height="23"/>
+                                <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.26666666666666666" green="0.80392156862745101" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="dDM-AW-VrG" secondAttribute="bottom" constant="11" id="BI8-7b-Drv"/>
+                            <constraint firstAttribute="width" constant="45" id="JjG-aV-kdk"/>
+                            <constraint firstAttribute="trailing" secondItem="dDM-AW-VrG" secondAttribute="trailing" id="Nzy-Of-9Iy"/>
+                            <constraint firstItem="dDM-AW-VrG" firstAttribute="top" secondItem="VZf-pP-zZy" secondAttribute="top" constant="11" id="q6s-oD-771"/>
+                            <constraint firstAttribute="height" constant="45" id="vYI-Cq-Yal"/>
+                            <constraint firstItem="dDM-AW-VrG" firstAttribute="leading" secondItem="VZf-pP-zZy" secondAttribute="leading" id="zvJ-bS-XNf"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <real key="value" value="22.5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijf-aX-HeG">
+                        <rect key="frame" x="69" y="0.0" width="241" height="45"/>
+                        <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="14"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="Ijf-aX-HeG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5ke-vd-Pwv"/>
+                <constraint firstItem="VZf-pP-zZy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ZxO-yy-TUr"/>
+                <constraint firstAttribute="trailing" secondItem="Ijf-aX-HeG" secondAttribute="trailing" constant="10" id="adI-lD-08x"/>
+                <constraint firstItem="VZf-pP-zZy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="gN3-Rp-HEM"/>
+                <constraint firstAttribute="bottom" secondItem="Ijf-aX-HeG" secondAttribute="bottom" id="jPo-5i-p4x"/>
+                <constraint firstItem="Ijf-aX-HeG" firstAttribute="leading" secondItem="VZf-pP-zZy" secondAttribute="trailing" constant="14" id="kmU-JS-f6V"/>
+            </constraints>
+            <connections>
+                <outlet property="nameLabel" destination="Ijf-aX-HeG" id="xhL-IN-S1c"/>
+                <outlet property="shortNameBGView" destination="VZf-pP-zZy" id="tqS-7s-Bgn"/>
+                <outlet property="shortNameLabel" destination="dDM-AW-VrG" id="CcJ-Fp-vtM"/>
+            </connections>
+            <point key="canvasLocation" x="-174" y="95"/>
+        </collectionViewCell>
+    </objects>
+</document>
