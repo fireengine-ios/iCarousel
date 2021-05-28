@@ -9,6 +9,10 @@
 #import "ContactUtil.h"
 #import "SyncSettings.h"
 
+@interface ContactDevice()
+@property (nonatomic, strong) NSString *valueForCompare;
+@end
+
 @implementation ContactDevice
 
 - (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactIdentifier:(NSString *)contactIdentifier
@@ -97,6 +101,13 @@
 }
 
 - (NSString *)valueForCompare {
+    if (!_valueForCompare) {
+        _valueForCompare = [self computeValueForCompare];
+    }
+    return _valueForCompare;
+}
+
+- (NSString *)computeValueForCompare {
     return nil;
 }
 
@@ -229,7 +240,7 @@
     return val;
 }
 
-- (NSString *)valueForCompare{
+- (NSString *)computeValueForCompare {
     NSString* val = self.value;
     if (val != nil) {
         NSError *error = nil;
@@ -327,12 +338,8 @@
     return [dict copy];
 }
 
-- (NSString *)valueForCompare {
-    NSString* val = self.value;
-    if (val != nil) {
-        val = [val stringByReplacingOccurrencesOfString:@" " withString:@""];
-    }
-    return val;
+- (NSString *)computeValueForCompare {
+    return [self.value stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
