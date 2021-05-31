@@ -84,7 +84,6 @@ final class RegistrationViewController: ViewController {
     private let keyboard = Typist.shared
     var output: RegistrationViewOutput!
     private let updateScrollDelay: DispatchTime = .now() + 0.3
-    private var isPasswordsNotMatchError = false
     private let termsViewController = RegistrationTermsViewController()
     
     ///Fields (in right order)
@@ -323,13 +322,28 @@ extension RegistrationViewController: RegistrationViewInput {
             emailEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderEmail)
         case .passwordIsEmpty:
             passwordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderPassword)
-        case .passwordNotValid:
-            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationPasswordError)
+        case .passwordMissingNumbers:
+            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorNumberMissing)
+        case .passwordMissingLowercase:
+            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorLowercaseMissing)
+        case .passwordMissingUppercase:
+            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorUppercaseMissing)
+        case .passwordExceedsSameCharactersLimit(let limit):
+            let message = String(format: TextConstants.signUpErrorSameCharacters, limit)
+            passwordEnterView.showSubtitleTextAnimated(text: message)
+        case .passwordExceedsSequentialCharactersLimit(let limit):
+            let message = String(format: TextConstants.signUpErrorSequentialCharacters, limit)
+            passwordEnterView.showSubtitleTextAnimated(text: message)
+        case .passwordExceedsMaximumLength(let maxLength):
+            let message = String(format: TextConstants.signUpErrorPasswordLengthExceeded, maxLength)
+            passwordEnterView.showSubtitleTextAnimated(text: message)
+        case .passwordBelowMinimumLength(let minLength):
+            let message = String(format: TextConstants.signUpErrorPasswordLengthIsBelowLimit, minLength)
+            passwordEnterView.showSubtitleTextAnimated(text: message)
         case .repasswordIsEmpty:
             rePasswordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderReFillPassword)
-        case .passwodsNotMatch:
-            isPasswordsNotMatchError = true
-            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationPasswordNotMatchError)
+        case .passwordsNotMatch:
+            rePasswordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationPasswordNotMatchError)
         case .phoneIsEmpty:
             phoneEnterView.showTextAnimated(text: TextConstants.registrationCellPlaceholderPhone)
         case .captchaIsEmpty:
@@ -398,7 +412,20 @@ extension RegistrationViewController: UITextFieldDelegate {
     var showPlaceholderColor: UIColor {
         return .yellow
     }
-    
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if passwordEnterView.textField == textField {
+            output.validatePassword(passwordEnterView.textField.text ?? "", repassword: nil)
+        }
+
+        if rePasswordEnterView.textField == textField {
+            output.validatePassword(
+                passwordEnterView.textField.text ?? "",
+                repassword: rePasswordEnterView.textField.text ?? ""
+            )
+        }
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
@@ -437,10 +464,6 @@ extension RegistrationViewController: UITextFieldDelegate {
         case passwordEnterView.textField:
             passwordEnterView.hideSubtitleAnimated()
         case rePasswordEnterView.textField:
-            if isPasswordsNotMatchError {
-                passwordEnterView.hideSubtitleAnimated()
-                isPasswordsNotMatchError = false
-            }
             rePasswordEnterView.hideSubtitleAnimated()
         case captchaView.captchaAnswerTextField:
             captchaView.hideErrorAnimated()

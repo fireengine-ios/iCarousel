@@ -13,7 +13,9 @@ protocol RegistrationInteractorInput {
     var captchaRequired: Bool { get }
 
     func checkEtkAndGlobalPermissions(code: String, phone: String)
-    
+
+    func validatePassword(_ password: String, repassword: String?)
+
     func validateUserInfo(email: String,
                           code: String,
                           phone: String,

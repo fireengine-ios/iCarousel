@@ -17,6 +17,8 @@ protocol RegistrationViewOutput {
     func viewIsReady()
     
     func prepareCaptcha(_ view: CaptchaView)
+
+    func validatePassword(_ password: String, repassword: String?)
     
     func nextButtonPressed()
     

@@ -47,6 +47,10 @@ extension RegistrationPresenter: RegistrationViewOutput {
     func nextButtonPressed() {
         view.collectInputedUserInfo()
     }
+
+    func validatePassword(_ password: String, repassword: String?) {
+        interactor.validatePassword(password, repassword: repassword)
+    }
     
     func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
         interactor.validateUserInfo(email: email.replacingOccurrences(of: " ", with: ""),
@@ -103,17 +107,7 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     }
     
     func userInvalid(withResult result: [UserValidationResults]) {
-        ///sort is needed to priorities the error(empty field is high priority error)
-        let sortedResult = result.sorted { _, rignt in
-            let mailIsEmpty = (rignt == .mailIsEmpty )
-            let phoneIsEmpty = (rignt == .phoneIsEmpty )
-            let passwordIsEmpty = (rignt == .passwordIsEmpty )
-            let repasswordIsEmpty = (rignt == .passwordIsEmpty )
-            let isNeedSwitch = mailIsEmpty || phoneIsEmpty || passwordIsEmpty || repasswordIsEmpty
-            return isNeedSwitch
-        }
-        
-        sortedResult.forEach { errorType in
+        result.forEach { errorType in
             view.showInfoButton(forType: errorType)
         }
     }
