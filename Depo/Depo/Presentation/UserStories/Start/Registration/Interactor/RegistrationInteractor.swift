@@ -44,7 +44,14 @@ class RegistrationInteractor: RegistrationInteractorInput {
             self.output.setupEtk(isShowEtk: false)
         }
     }
-    
+
+    func validatePassword(_ password: String, repassword: String? = nil) {
+        let validationResult = validationService.validatePassword(password, repassword: repassword)
+        if validationResult.count > 0 {
+            output.userInvalid(withResult: validationResult)
+        }
+    }
+
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
         
         let validationResult: [UserValidationResults]
