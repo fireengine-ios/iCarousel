@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSSmartAlbumWarningPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSSmartAlbumWarningPopUp" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="hZd-03-AMT" id="PNx-EF-ang"/>
                 <outlet property="darkView" destination="vIp-rb-4FA" id="uEW-Mr-tap"/>
@@ -56,7 +57,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="CgU-wW-STP">
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="CgU-wW-STP" customClass="AccessibleCheckBoxView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="57" y="128" width="82" height="18"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6o-AA-fsO">
@@ -76,8 +77,12 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <connections>
+                                                        <outlet property="button" destination="V6o-AA-fsO" id="aVK-eQ-L4e"/>
+                                                        <outlet property="label" destination="ZSg-6K-nsc" id="2j7-zF-4td"/>
+                                                    </connections>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ET5-LN-lx3" customClass="GradientPremiumButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ET5-LN-lx3" customClass="GradientPremiumButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="160" width="196" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="196" id="HWo-1t-9JZ"/>
@@ -87,7 +92,7 @@
                                                         <action selector="onPremiumTap:" destination="-1" eventType="touchUpInside" id="9j0-Mw-4aO"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4D-WC-vRG" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4D-WC-vRG" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="218" width="196" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="0ag-TK-0S9"/>
@@ -116,7 +121,7 @@
                                 <constraint firstAttribute="bottom" secondItem="XdM-V8-bpk" secondAttribute="bottom" id="vdh-KY-niW"/>
                             </constraints>
                         </scrollView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZd-03-AMT">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZd-03-AMT">
                             <rect key="frame" x="228" y="0.0" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="ip7-U9-iSW"/>
@@ -127,7 +132,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="hZd-03-AMT" secondAttribute="trailing" id="Cez-OP-80K"/>
                         <constraint firstAttribute="width" priority="750" constant="360" id="Hic-21-iDi"/>
@@ -141,6 +146,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Av7-kJ-lk4" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="0w8-GV-nrw"/>
@@ -152,8 +158,12 @@
                 <constraint firstAttribute="bottom" secondItem="vIp-rb-4FA" secondAttribute="bottom" id="iwT-6c-0aO"/>
                 <constraint firstItem="vIp-rb-4FA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tko-Av-ZKv"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="140" y="117.39130434782609"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

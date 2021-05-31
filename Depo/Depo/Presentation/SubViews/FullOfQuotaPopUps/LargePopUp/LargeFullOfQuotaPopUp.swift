@@ -157,7 +157,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         analyticsHandler(eventLabel: .overQuota(.expandMyStorage(doNotShowAgain)))
     }
     
-    @IBOutlet private weak var doNotShowStackView: UIStackView!
+    @IBOutlet private weak var doNotShowStackView: AccessibleCheckBoxView!
     
     @IBAction private func onCustomCheckBoxTap(_ sender: UIButton) {
         sender.isSelected.toggle()

@@ -18,7 +18,10 @@ final class TermsCheckboxTextView: UIView, NibInit {
 
     var isChecked: Bool {
         get { checkbox.isSelected }
-        set { checkbox.isSelected = newValue }
+        set {
+            checkbox.isSelected = newValue
+            updateAccessibilityInfo()
+        }
     }
     
     @IBOutlet private weak var checkbox: UIButton!
@@ -59,9 +62,14 @@ final class TermsCheckboxTextView: UIView, NibInit {
             setupDefaultTextViewState(textView: newValue)
         }
     }
-    
+
     private func setupDefaultTextViewState(textView: UITextView) {
         textView.text = ""
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        isAccessibilityElement = true
     }
     
     func setup(title: String?, text: String?, delegate: TermsCheckboxTextViewDelegate) {
@@ -72,6 +80,7 @@ final class TermsCheckboxTextView: UIView, NibInit {
         if let text = text {
             descriptionView.text = text
         }
+        updateAccessibilityInfo()
     }
   
     func setup(atributedTitleText: NSMutableAttributedString?, atributedText: NSMutableAttributedString?, delegate: TermsCheckboxTextViewDelegate, textViewDelegate: UITextViewDelegate) {
@@ -83,12 +92,24 @@ final class TermsCheckboxTextView: UIView, NibInit {
         if let atributedText = atributedText {
             descriptionView.attributedText = atributedText
         }
+        updateAccessibilityInfo()
     }
     
     @IBAction private func checkBoxAction(_ button: UIButton) {
         button.isSelected = !button.isSelected
+        updateAccessibilityInfo()
         delegate?.checkBoxPressed(isSelected: button.isSelected, sender: self)
     }
-    
+
+    override func accessibilityActivate() -> Bool {
+        checkBoxAction(checkbox)
+        return true
+    }
+
+    private func updateAccessibilityInfo() {
+        let title = titleView.text ?? titleView.attributedText?.string ?? ""
+        accessibilityLabel = title
+        accessibilityTraits = isChecked ? UIAccessibilityTraitSelected | UIAccessibilityTraitButton : UIAccessibilityTraitButton
+    }
 }
 

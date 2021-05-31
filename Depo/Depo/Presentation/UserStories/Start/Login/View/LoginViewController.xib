@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="alertsStackView" destination="IUh-15-NB0" id="suA-7h-9aB"/>
                 <outlet property="bannerView" destination="rnZ-Cc-viq" id="YSa-ig-SDB"/>
@@ -26,6 +26,7 @@
                 <outlet property="passwordEnterView" destination="Fd4-XR-iy0" id="u1c-vD-MX9"/>
                 <outlet property="rememberMeButton" destination="Nqg-tP-cJg" id="zBL-wT-c64"/>
                 <outlet property="rememberMeLabel" destination="zp4-cQ-sFI" id="e05-0F-YH9"/>
+                <outlet property="rememberMeView" destination="s8F-tB-ErQ" id="1r9-lL-c84"/>
                 <outlet property="scrollView" destination="G71-fS-dIW" id="aeb-3b-h5m"/>
                 <outlet property="view" destination="p3m-gu-hpT" id="GyQ-SO-ldG"/>
             </connections>
@@ -51,7 +52,7 @@
                                                 <constraint firstAttribute="height" id="SlY-z7-gFl"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnZ-Cc-viq" customClass="SupportFormBannerView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rnZ-Cc-viq" customClass="SupportFormBannerView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="52"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="751" text="If you are having difficulty signing up, contact us for support." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fj0-ye-wAx">
@@ -90,7 +91,7 @@
                                                 <outlet property="messageLabel" destination="fj0-ye-wAx" id="VE7-tX-RXD"/>
                                             </connections>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSC-e7-bAJ" customClass="ErrorBannerView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSC-e7-bAJ" customClass="ErrorBannerView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="52" width="382" height="178"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
@@ -103,19 +104,19 @@
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3pB-Lp-wU7">
                                     <rect key="frame" x="20" y="246" width="374" height="318"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="zR0-Yb-crR" userLabel="email" customClass="ProfileTextEnterView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="zR0-Yb-crR" userLabel="email" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="ProfilePasswordEnterView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="ProfilePasswordEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="96" width="374" height="80"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-rH-Hwu" userLabel="captcha" customClass="CaptchaView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-rH-Hwu" userLabel="captcha" customClass="CaptchaView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="192" width="374" height="80"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="s8F-tB-ErQ">
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="s8F-tB-ErQ" customClass="AccessibleCheckBoxView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="288" width="374" height="30"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nqg-tP-cJg">
@@ -137,10 +138,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <connections>
+                                                <outlet property="button" destination="Nqg-tP-cJg" id="dts-VV-Cdr"/>
+                                                <outlet property="label" destination="zp4-cQ-sFI" id="vzR-6M-NOz"/>
+                                            </connections>
                                         </stackView>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhc-pL-wnH" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhc-pL-wnH" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="93" y="614" width="228" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="G6T-7F-LuP"/>
@@ -150,7 +155,7 @@
                                         <action selector="onLoginTap:" destination="-1" eventType="touchUpInside" id="JYW-7t-4YE"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWM-PX-Ia2">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWM-PX-Ia2">
                                     <rect key="frame" x="184" y="681" width="46" height="30"/>
                                     <state key="normal" title="Button"/>
                                     <connections>
@@ -188,6 +193,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="4uw-Fd-t08"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="4uw-Fd-t08" firstAttribute="bottom" secondItem="G71-fS-dIW" secondAttribute="bottom" id="0OR-NS-KVl"/>
@@ -199,7 +205,6 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <viewLayoutGuide key="safeArea" id="4uw-Fd-t08"/>
             <point key="canvasLocation" x="-794.20289855072474" y="50.892857142857139"/>
         </view>
     </objects>

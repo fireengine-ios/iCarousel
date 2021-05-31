@@ -26,7 +26,8 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
+        isAccessibilityElement = true
         backgroundColor = .white
     }
     
@@ -41,6 +42,9 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
         titleLabel.text = model.album.name
         checkBox.setup(isSelected: model.album.isSelected,
                        isAllChecked: model.isAllChecked)
+
+        accessibilityLabel = model.album.name
+        updateAccessibilityTraits()
         
         leftOffset.constant = model.album.isMainAlbum ? 24 : 55
         
@@ -62,6 +66,28 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
         
         checkBox.setup(isSelected: model.album.isSelected,
                        isAllChecked: model.isAllChecked)
+        updateAccessibilityTraits()
+
         delegate?.didChange(model: model)
+    }
+
+    override func accessibilityActivate() -> Bool {
+        toogle()
+        return true
+    }
+
+    private func updateAccessibilityTraits() {
+        guard let model = model else { return }
+
+        var traits = UIAccessibilityTraitButton
+        if !model.isEnabled {
+            traits |= UIAccessibilityTraitNotEnabled
+        }
+        
+        if model.album.isSelected || model.isAllChecked {
+            traits |= UIAccessibilityTraitSelected
+        }
+
+        accessibilityTraits = traits
     }
 }

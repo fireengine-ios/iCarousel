@@ -36,6 +36,7 @@ final class AutoSyncSettingsOptionView: UIView {
     private var isSelected: Bool = false {
         willSet {
             setCheckmark(selected: newValue)
+            button.isSelected = newValue
         }
         didSet {
             if isSelected, isSelected != oldValue {
