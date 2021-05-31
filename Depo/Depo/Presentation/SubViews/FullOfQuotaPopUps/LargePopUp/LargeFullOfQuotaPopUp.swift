@@ -89,6 +89,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+            newValue.accessibilityLabel = TextConstants.accessibilityClose
         }
     }
     
