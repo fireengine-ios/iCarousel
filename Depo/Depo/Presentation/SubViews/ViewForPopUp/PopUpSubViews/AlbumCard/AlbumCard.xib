@@ -151,6 +151,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bottomButton" destination="aLQ-gs-aeI" id="QVq-Aq-brM"/>
+                <outlet property="closeButton" destination="H1a-JQ-4mn" id="VK7-gk-lKw"/>
                 <outlet property="descriptionLabel" destination="p3Y-Zc-uCl" id="XMV-rA-G0y"/>
                 <outlet property="previewImageView" destination="8bJ-os-ke5" id="2Or-Dz-D1R"/>
                 <outlet property="shareButton" destination="LCC-iL-AFk" id="Fpc-cX-X17"/>

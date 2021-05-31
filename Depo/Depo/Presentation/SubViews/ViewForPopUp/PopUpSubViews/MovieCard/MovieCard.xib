@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -94,7 +94,7 @@
                         <constraint firstAttribute="height" constant="1" id="IU4-ti-D0t"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlz-xc-VD9">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlz-xc-VD9">
                     <rect key="frame" x="15" y="246" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="pBu-DH-QIC"/>
@@ -107,7 +107,7 @@
                         <action selector="actionBottomButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="aoz-mp-HUO"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksf-kX-8de">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksf-kX-8de">
                     <rect key="frame" x="258.5" y="253" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
@@ -141,6 +141,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bottomButton" destination="rlz-xc-VD9" id="rHY-NK-EVH"/>
+                <outlet property="closeButton" destination="VnS-FV-3Q3" id="umH-rF-Ypc"/>
                 <outlet property="durationLabel" destination="hoW-dS-VOq" id="rTm-GO-X4e"/>
                 <outlet property="shareButton" destination="ksf-kX-8de" id="fqD-rw-jR4"/>
                 <outlet property="subTitleLabel" destination="DLi-Pt-MfC" id="KJC-1c-OZZ"/>
