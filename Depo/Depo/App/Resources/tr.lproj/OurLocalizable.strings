@@ -1594,7 +1594,7 @@
 "contact_phase2_warning_popup_contact_permissions_storage_button" = "Ayarlar";
 "contact_phase2_warning_popup_contact_permissions_delete_button" = "İçeriklerimi Sil";
 "contact_phase2_warning_popup_storage_limit_title" = "lifebox saklama alanın tamamen dolu";
-"contact_phase2_warning_popup_storage_limit_message" = "Sakalama alanında yer kalmadığı için işleme devam edemiyorsun. Saklama alanını yükseltebilir veya dosyalarını silerek saklama alanında yer açabilirsin.";
+"contact_phase2_warning_popup_storage_limit_message" = "Saklama alanında yer kalmadığı için işleme devam edemiyorsun. Saklama alanını yükseltebilir veya dosyalarını silerek saklama alanında yer açabilirsin.";
 "contact_phase2_warning_popup_storage_limit_settings_button" = "Saklama Alanımı Yükselt";
 "contact_phase2_error_iternal" = "Geçici bir hata oluştu. Lütfen tekrar deneyin.";
 "download_document_error_popup" = "Yalnızca fotoğraf, video veya albüm indirebilirsin.";
@@ -1862,3 +1862,5 @@
 "invitation_snackbar_copy" = "Davet linkin başarıyla kopyalandı";
 "invitation_share" = "Linki Paylaş";
 "invitation_friends" = "Davetini Kabul Edenler";
+"invitation_snackbar_copy_exceed" = "";
+"invitation_snackbar_share_exceed" = "";

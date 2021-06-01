@@ -38,6 +38,7 @@ class InvitationViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.InvitationScreen())
         self.analyticsService.logScreen(screen: .invitation)
     }
 
@@ -154,11 +155,19 @@ extension InvitationViewController: InvitationReuseViewDelegate {
 
     func invitationShareLink(shareButton: UIButton) {
 
-        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .invitationLink)
+        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .invitation(.invitationLink))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
 
         guard let invitationLinkValue = self.invitationLink?.url, let url =  URL(string: invitationLinkValue) else { return }
 
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
+            guard completed, let activityTypeString = activityType?.rawValue else {
+                return
+            }
+
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
+        }
 
         ///works only on iPad
         activityVC.popoverPresentationController?.sourceView = shareButton
