@@ -1900,3 +1900,8 @@
 /*Accessibility*/
 "play_captcha" = "Play captcha";
 "refresh_captcha" = "Refresh captcha";
+"container_shared_files" = "Shared";
+"container_document" = "Document";
+"container_music" = "Music";
+"container_favourite" = "Favourite";
+"container_trashed" = "Trashed";
