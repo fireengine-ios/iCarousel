@@ -22,6 +22,7 @@ class InvitationCampaignDetailView: UIView, NibInit {
         localizable()
         fetchCampaignDetail()
         self.analyticsService.logScreen(screen: .invitationCampaignDetail)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.InvitationCampaignDetailScreen())
     }
 
     func place(in view: UIView) {

@@ -160,6 +160,7 @@ final class PushNotificationService {
         case .hiddenBin: openHiddenBin()
         case .sharedWithMe: openSharedWithMe()
         case .sharedByMe: openShareByMe()
+        case .invitation : openInvitation()
         }
         
         
@@ -490,6 +491,10 @@ final class PushNotificationService {
     
     private func openShareByMe() {
         openSharedController(type: .byMe)
+    }
+
+    private func openInvitation() {
+        pushTo(router.invitation)
     }
     
     private func openSharedController(type: PrivateShareType) {

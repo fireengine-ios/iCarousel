@@ -113,7 +113,8 @@ class InvitationCollectionReusableView: UICollectionReusableView {
     }
 
     @IBAction func invitationLinkCopyButtonTapped(_ sender: Any) {
-        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .copyInvitationLink)
+        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .invitation(.copyInvitationLink))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .copyInvitationLink))
 
         guard let invitatonLink = self.invitationLink else { return }
 

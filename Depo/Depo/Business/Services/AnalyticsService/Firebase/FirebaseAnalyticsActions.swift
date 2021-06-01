@@ -120,6 +120,7 @@ enum GAEventAction {
     case changeRoleFromViewerToEditor
     case duration
     case message
+    case invitation
 
     var text: String {
         switch self {
@@ -326,6 +327,8 @@ enum GAEventAction {
             return "Duration"
         case .message:
             return "Message"
+        case .invitation:
+            return "Invitation"
         }
     }
 }

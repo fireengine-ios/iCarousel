@@ -231,6 +231,33 @@ extension NetmeraEvents.Actions {
             return kCreateStoryKey
         }
     }
+
+    final class HomepageCard: NetmeraEvent {
+
+        private let kCreateStoryKey = "etv"
+
+        @objc var cardName = ""
+        @objc var action = ""
+
+        convenience init(cardName: String, action: String) {
+            self.init()
+            self.cardName = cardName
+            self.action = action
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(cardName),
+                "eb" : #keyPath(action)
+            ]
+        }
+
+        override var eventKey : String {
+            return kCreateStoryKey
+        }
+    }
+
+
     
     final class FirstAutosync: NetmeraEvent {
         

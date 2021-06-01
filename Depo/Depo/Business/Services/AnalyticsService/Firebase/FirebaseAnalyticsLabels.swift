@@ -169,6 +169,31 @@ enum GAEventLabel {
             }
         }
     }
+
+    enum InvitationEvent {
+        case close
+        case letsSee
+        case invitationVideoButton
+        case invitationLink
+        case copyInvitationLink
+
+        var text: String {
+            switch self {
+            case .close:
+                return "Home Page Card - Cancel"
+            case .letsSee:
+                return "Home Page Card - Lets see"
+            case .invitationVideoButton:
+                return "Invitation Video Button"
+            case .invitationLink:
+                return "Invitation link"
+            case .copyInvitationLink:
+                return "Copy Invitation Link"
+            }
+        }
+    }
+
+
     
     enum SupportFormSubjectLoginEvent {
         case subject1
@@ -455,9 +480,7 @@ enum GAEventLabel {
     case widgetOrder(String)
     case restart
     case privateShare(PrivateShareEvent)
-    case invitationVideoButton
-    case invitationLink
-    case copyInvitationLink
+    case invitation(_ event: InvitationEvent)
     
     var text: String {
         switch self {
@@ -687,12 +710,8 @@ enum GAEventLabel {
             return "Restart"
         case .privateShare(let event):
             return event.text
-        case .invitationVideoButton:
-            return "Invitation Video Button"
-        case .invitationLink:
-            return "Invitation link"
-        case .copyInvitationLink:
-            return "Copy Invitation Link"
+        case .invitation(let event):
+            return event.text
         }
     }
     
