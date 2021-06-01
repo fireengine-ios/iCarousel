@@ -1896,3 +1896,7 @@
 "invitation_friends" = "Friends Signup With Invitation";
 "invitation_snackbar_copy_exceed" = "";
 "invitation_snackbar_share_exceed" = "";
+
+/*Accessibility*/
+"play_captcha" = "Play captcha";
+"refresh_captcha" = "Refresh captcha";

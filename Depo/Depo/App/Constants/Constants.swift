@@ -2218,4 +2218,7 @@ struct TextConstants {
     static let warningPopupPrintRedirectMessage = NSLocalizedString("warning_popup_print_redirect_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupPrintRedirectProceedButton = NSLocalizedString("warning_popup_print_redirect_proceed_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupPrintRedirectCancelButton = NSLocalizedString("warning_popup_print_redirect_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    static let captchaSound = NSLocalizedString("play_captcha", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let captchaRefresh = NSLocalizedString("refresh_captcha", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
