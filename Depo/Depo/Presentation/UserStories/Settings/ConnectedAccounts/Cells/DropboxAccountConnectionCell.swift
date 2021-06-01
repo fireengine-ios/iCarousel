@@ -58,7 +58,10 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
+        isAccessibilityElement = true
+        updateAccessbilityTraits(isEnabled: true)
+
         setup()
         
         rotatingImage.resumeAnimations()
@@ -88,7 +91,20 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .dropboxImport))
         presenter.startDropbox()
     }
-    
+
+    override func accessibilityActivate() -> Bool {
+        importToDropbox(importButton)
+        return true
+    }
+
+    private func updateAccessbilityTraits(isEnabled: Bool) {
+        var traits = UIAccessibilityTraitButton
+        if !isEnabled {
+            traits |= UIAccessibilityTraitNotEnabled
+        }
+
+        accessibilityTraits = traits
+    }
 }
 
 
@@ -122,6 +138,7 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
 
     func startDropboxStatus() {
         importButton.isEnabled = false
+        updateAccessbilityTraits(isEnabled: false)
         rotatingImage.isHidden = false
         rotatingImage.startInfinityRotate360Degrees(duration: 2)
         progress.text = String(format: TextConstants.importFiles, String(0))
@@ -133,6 +150,7 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
     
     func stopDropboxStatus(lastUpdateMessage: String) {
         importButton.isEnabled = true
+        updateAccessbilityTraits(isEnabled: true)
         rotatingImage.isHidden = true
         rotatingImage.stopInfinityRotate360Degrees()
         progress.text = lastUpdateMessage

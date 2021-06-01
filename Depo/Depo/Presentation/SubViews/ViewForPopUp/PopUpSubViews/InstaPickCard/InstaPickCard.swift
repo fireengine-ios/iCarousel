@@ -37,7 +37,6 @@ final class InstaPickCard: BaseCardView {
     @IBOutlet private weak var detailLabel: UILabel!
     @IBOutlet private weak var bottomButton: UIButton!
     @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var closeButton: UIButton!
     @IBOutlet private weak var dividerLineView: UIView!
     
     var analysisLeft: Int = 0

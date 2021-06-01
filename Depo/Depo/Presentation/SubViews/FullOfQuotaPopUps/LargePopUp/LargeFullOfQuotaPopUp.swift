@@ -89,6 +89,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+            newValue.accessibilityLabel = TextConstants.accessibilityClose
         }
     }
     
@@ -157,7 +158,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         analyticsHandler(eventLabel: .overQuota(.expandMyStorage(doNotShowAgain)))
     }
     
-    @IBOutlet private weak var doNotShowStackView: UIStackView!
+    @IBOutlet private weak var doNotShowStackView: AccessibleCheckBoxView!
     
     @IBAction private func onCustomCheckBoxTap(_ sender: UIButton) {
         sender.isSelected.toggle()

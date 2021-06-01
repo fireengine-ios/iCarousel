@@ -31,6 +31,8 @@ final class LoginViewController: ViewController {
         }
     }
 
+    @IBOutlet private weak var rememberMeView: AccessibleCheckBoxView!
+
     @IBOutlet private weak var rememberMeLabel: UILabel! {
         willSet {
             newValue.textColor = .black

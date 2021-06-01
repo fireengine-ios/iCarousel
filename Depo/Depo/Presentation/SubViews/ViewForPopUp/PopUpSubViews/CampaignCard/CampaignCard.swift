@@ -48,7 +48,6 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     
     @IBOutlet private weak var campaignCardDesigner: CampaignCardDesigner!
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var closeButton: UIButton!
     @IBOutlet private weak var descriptionLabel: UILabel! 
     @IBOutlet private weak var imageView: LoadingImageView!
     @IBOutlet private weak var campaignDetailButton: UIButton!

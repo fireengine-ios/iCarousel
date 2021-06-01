@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSCompletionPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSCompletionPopUp" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="bottomButtonParentView" destination="W1u-O1-5qb" id="Yu5-kW-PTB"/>
                 <outlet property="bottomOffset" destination="X3U-jv-iJB" id="IAU-QA-2kl"/>
@@ -66,7 +67,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="8P3-DQ-vmo">
                                             <rect key="frame" x="36" y="95" width="200" height="72"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mq3-Km-uo5">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mq3-Km-uo5">
                                                     <rect key="frame" x="85" y="0.0" width="30" height="0.0"/>
                                                     <connections>
                                                         <action selector="onOpenHiddenAlbumTap:" destination="-1" eventType="touchUpInside" id="Yi6-Ea-fyM"/>
@@ -90,12 +91,12 @@
                                                                 <constraint firstAttribute="height" constant="60" id="pIh-i5-WsI"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yxX-xX-V1K" customClass="TransparentGradientView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yxX-xX-V1K" customClass="TransparentGradientView" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="200" height="60"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="PMq-Eg-jgd" firstAttribute="centerX" secondItem="dnb-Sl-ArN" secondAttribute="centerX" id="Gcv-ge-1bE"/>
                                                         <constraint firstAttribute="width" secondItem="dnb-Sl-ArN" secondAttribute="height" multiplier="10:3" id="Mvj-NX-XAi"/>
@@ -130,7 +131,7 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="XM5-Dw-pwj">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="XM5-Dw-pwj" customClass="AccessibleCheckBoxView" customModule="Billo" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="132" width="82" height="18"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCl-OT-1FN">
@@ -150,10 +151,14 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
+                                                                    <connections>
+                                                                        <outlet property="button" destination="dCl-OT-1FN" id="y9M-Ol-Qbu"/>
+                                                                        <outlet property="label" destination="Kem-hz-slW" id="Pv5-TJ-snL"/>
+                                                                    </connections>
                                                                 </stackView>
                                                             </subviews>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usB-ys-fz1" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usB-ys-fz1" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="37.5" y="198" width="197" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" priority="750" constant="197" id="Lfd-EY-6e2"/>
@@ -180,12 +185,12 @@
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lOy-Ql-dzV">
                                                             <rect key="frame" x="0.0" y="24" width="272" height="1"/>
-                                                            <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" systemColor="systemBlueColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="XfC-zo-ddP"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcu-Qi-CWC">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xcu-Qi-CWC">
                                                             <rect key="frame" x="0.0" y="25" width="272" height="46"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="46" id="SIi-Vu-HSj"/>
@@ -233,7 +238,7 @@
                                 <constraint firstItem="xq8-TG-cXt" firstAttribute="leading" secondItem="mNe-Zf-GLG" secondAttribute="leading" id="tXi-64-eQl"/>
                             </constraints>
                         </scrollView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJI-ss-qUl">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJI-ss-qUl">
                             <rect key="frame" x="237" y="0.0" width="35" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="Abv-Gw-aJd"/>
@@ -244,7 +249,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="qJI-ss-qUl" secondAttribute="trailing" id="1qb-ih-iCo"/>
                         <constraint firstAttribute="width" priority="750" constant="360" id="58C-Q0-1z8"/>
@@ -258,6 +263,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="B5L-7u-dAh"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="IZG-1R-Gut" secondAttribute="bottom" id="HkT-5c-wGi"/>
@@ -269,8 +275,15 @@
                 <constraint firstItem="IZG-1R-Gut" firstAttribute="leading" secondItem="BTH-sc-E3U" secondAttribute="leading" id="jru-tE-O0S"/>
                 <constraint firstItem="IZG-1R-Gut" firstAttribute="top" secondItem="BTH-sc-E3U" secondAttribute="top" id="m0f-s8-Kib"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="B5L-7u-dAh"/>
             <point key="canvasLocation" x="493" y="580"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

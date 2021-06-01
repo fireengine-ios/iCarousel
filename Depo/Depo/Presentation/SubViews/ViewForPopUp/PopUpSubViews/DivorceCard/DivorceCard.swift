@@ -14,7 +14,6 @@ final class DivorceCard: BaseCardView {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var bottomButton: UIButton!
     @IBOutlet private weak var playButton: UIButton!
-    @IBOutlet private weak var closeButton: UIButton!
     @IBOutlet private weak var dividerLineView: UIView!
     @IBOutlet private weak var videoPreviewImageView: LoadingImageView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()

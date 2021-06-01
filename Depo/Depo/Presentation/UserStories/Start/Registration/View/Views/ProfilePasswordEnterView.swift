@@ -41,6 +41,7 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         eyeButton.setImage(showPasswordImage, for: .normal)
         eyeButton.setImage(hidePasswordImage, for: .selected)
         eyeButton.addTarget(self, action: #selector(changeVisibilityState), for: .touchUpInside)
+        updatePasswordButtonAccessibility()
         
         textField.isSecureTextEntry = true
         textField.autocorrectionType = .no
@@ -81,5 +82,10 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
     @objc private func changeVisibilityState() {
         textField.toggleTextFieldSecureType()
         eyeButton.isSelected.toggle()
+        updatePasswordButtonAccessibility()
+    }
+
+    private func updatePasswordButtonAccessibility() {
+        eyeButton.accessibilityLabel = eyeButton.isSelected ? TextConstants.hidePassword : TextConstants.showPassword
     }
 }

@@ -1158,8 +1158,14 @@ struct TextConstants {
     static let accessibilityPhotosVideos = NSLocalizedString("Photos and Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityMusic = NSLocalizedString("Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let accessibilityDocuments = NSLocalizedString("Documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let captchaSound = NSLocalizedString("play_captcha", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let captchaRefresh = NSLocalizedString("refresh_captcha", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let containerShared = NSLocalizedString("container_shared_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let containerDocument = NSLocalizedString("container_document", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let containerMusic = NSLocalizedString("container_music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let containerFavourite = NSLocalizedString("container_favourite", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let containerTrashed = NSLocalizedString("container_trashed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
-    
     static let photos = NSLocalizedString("photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let approve = NSLocalizedString("Approve", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let infomationEmptyEmail = NSLocalizedString("infomationEmptyEmail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -2218,4 +2224,5 @@ struct TextConstants {
     static let warningPopupPrintRedirectMessage = NSLocalizedString("warning_popup_print_redirect_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupPrintRedirectProceedButton = NSLocalizedString("warning_popup_print_redirect_proceed_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupPrintRedirectCancelButton = NSLocalizedString("warning_popup_print_redirect_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
 }
