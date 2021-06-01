@@ -2152,3 +2152,5 @@ Please check I have understood the intended command here*/
 "invitation_snackbar_copy" = "";
 "invitation_share" = "";
 "invitation_friends" = "";
+"invitation_snackbar_copy_exceed" = "";
+"invitation_snackbar_share_exceed" = "";

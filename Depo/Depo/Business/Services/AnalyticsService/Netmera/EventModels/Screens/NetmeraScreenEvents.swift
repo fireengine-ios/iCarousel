@@ -500,6 +500,18 @@ extension NetmeraEvents.Screens {
             return "hcv"
         }
     }
+
+    final class InvitationScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "ham"
+        }
+    }
+
+    final class InvitationCampaignDetailScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "vfa"
+        }
+    }
 }
 
 

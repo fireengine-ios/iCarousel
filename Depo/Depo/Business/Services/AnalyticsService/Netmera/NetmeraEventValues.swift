@@ -469,7 +469,8 @@ enum NetmeraEventValues {
         case trashBin
         case endSharing
         case leaveSharing
-   
+        case copyInvitationLink
+
         var text: String {
             switch self {
             case .freeUpSpace:
@@ -518,6 +519,8 @@ enum NetmeraEventValues {
                 return "End sharing"
             case .leaveSharing:
                 return "Leave sharing"
+            case .copyInvitationLink:
+                return "Copy Invitation Link"
             }
         }
     }
@@ -658,6 +661,23 @@ enum NetmeraEventValues {
                 return "Reset to original"
             case .cancel:
                 return "Cancel"
+            }
+        }
+    }
+
+    enum InvitationEventValue {
+        case invitation
+        case detail
+        case dismiss
+
+        var text: String {
+            switch self {
+            case .invitation:
+                return "Invitation"
+            case .detail:
+                return "Detail"
+            case .dismiss:
+                return "Dismiss"
             }
         }
     }

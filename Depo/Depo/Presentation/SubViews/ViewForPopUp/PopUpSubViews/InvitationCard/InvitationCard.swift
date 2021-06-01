@@ -65,6 +65,8 @@ final class InvitationCard: BaseCardView {
     override func deleteCard() {
         super.deleteCard()
         CardsManager.default.stopOperationWith(type: .invitation)
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .invitation(.close))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.InvitationEventValue.invitation.text, action: NetmeraEventValues.InvitationEventValue.dismiss.text))
     }
 
     @IBAction func playButtonTapped(_ sender: Any) {
@@ -74,7 +76,7 @@ final class InvitationCard: BaseCardView {
             return
         }
 
-        analyticsService.trackCustomGAEvent(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .invitationVideoButton)
+        analyticsService.trackCustomGAEvent(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .invitation(.invitationVideoButton))
 
         let player = AVPlayer(url: videoUrl)
 
@@ -90,6 +92,9 @@ final class InvitationCard: BaseCardView {
     }
 
     @IBAction func bottomButtonTapped(_ sender: Any) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .invitation(.letsSee))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.InvitationEventValue.invitation.text, action: NetmeraEventValues.InvitationEventValue.detail.text))
+
         let router = RouterVC()
 
         let controller = router.invitationController()
