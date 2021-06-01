@@ -112,11 +112,7 @@ final class PlusMenuItemView: UIView, NibInit {
             newValue.font = .TurkcellSaturaDemFont(size: 14)
         }
     }
-    @IBOutlet weak var button: UIButton! {
-        willSet {
-            newValue.accessibilityTraits = UIAccessibilityTraitButton
-        }
-    }
+    @IBOutlet weak var button: UIButton!
     
     private let bottomConstraintOriginalConstant = -(UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
     private let height: CGFloat = 65
@@ -133,8 +129,11 @@ final class PlusMenuItemView: UIView, NibInit {
     func setup(with type: FloatingButtonsType) {
         self.type = type
         adjustedLabel.text = type.title
-        button.accessibilityLabel = type.title
         button.setImage(type.image, for: .normal)
+
+        isAccessibilityElement = true
+        accessibilityTraits = UIAccessibilityTraitButton
+        accessibilityLabel = type.title
     }
     
     func add(to contentView: UIView) {

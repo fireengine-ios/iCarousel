@@ -427,6 +427,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews) {
             self.plusMenuItems.forEach { $0.changeVisability(toHidden: hidden) }
             self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.view.accessibilityElements = hidden ? nil : self.plusMenuItems + [self.plussButton]
         }
     }
     

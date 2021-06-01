@@ -96,6 +96,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
             let image = UIImage(named: "grayCloseButton")
             newValue.setImage(image, for: .normal)
             newValue.contentEdgeInsets = UIEdgeInsets(topBottom: 8, rightLeft: 8)
+            newValue.accessibilityLabel = TextConstants.accessibilityClose
         }
     }
     

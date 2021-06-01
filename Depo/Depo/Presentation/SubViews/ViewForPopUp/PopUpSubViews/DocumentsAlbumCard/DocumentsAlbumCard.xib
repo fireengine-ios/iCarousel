@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DocumentsAlbumCard" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DocumentsAlbumCard" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="513" height="310"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -37,7 +38,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="lSV-cD-mwa" secondAttribute="trailing" id="Enq-1U-3ZG"/>
                                 <constraint firstItem="lSV-cD-mwa" firstAttribute="centerY" secondItem="Hsa-bF-1pP" secondAttribute="centerY" id="NXZ-Zs-C44"/>
@@ -62,7 +63,7 @@
                                     <rect key="frame" x="10" y="103" width="493" height="118"/>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="hAx-hD-fSz" secondAttribute="bottom" constant="10" id="0of-XV-beZ"/>
                                 <constraint firstAttribute="trailing" secondItem="hAx-hD-fSz" secondAttribute="trailing" constant="10" id="Baj-hI-Qjg"/>
@@ -79,12 +80,12 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xkr-ef-7f0">
                                     <rect key="frame" x="0.0" y="0.0" width="513" height="1"/>
-                                    <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" systemColor="separatorColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="qd4-oS-u7A"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pb-gs-x8j">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pb-gs-x8j">
                                     <rect key="frame" x="16" y="1" width="162" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="KZw-Oa-Wtl"/>
@@ -94,7 +95,7 @@
                                         <action selector="hideDocumentsButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="tLP-P4-GKt"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDo-Fb-uE2">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDo-Fb-uE2">
                                     <rect key="frame" x="333" y="1" width="164" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="Adv-XQ-kHo"/>
@@ -105,7 +106,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Xkr-ef-7f0" secondAttribute="trailing" id="4gS-RJ-416"/>
                                 <constraint firstAttribute="bottom" secondItem="eDo-Fb-uE2" secondAttribute="bottom" id="Cah-mt-UJJ"/>
@@ -122,7 +123,7 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="4jB-aY-t9d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="94f-Ua-gJu"/>
                 <constraint firstAttribute="trailing" secondItem="4jB-aY-t9d" secondAttribute="trailing" id="ODp-hl-Rqj"/>
@@ -130,6 +131,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="closeButton" destination="lSV-cD-mwa" id="map-Ub-Gvx"/>
                 <outlet property="contentStackView" destination="4jB-aY-t9d" id="WgW-fc-rhq"/>
                 <outlet property="descriptionLabel" destination="klL-6H-gq2" id="Tyb-Py-de6"/>
                 <outlet property="imagesStackView" destination="hAx-hD-fSz" id="g9j-fo-CAV"/>
@@ -137,7 +139,7 @@
             </connections>
             <point key="canvasLocation" x="90.579710144927546" y="-97.098214285714278"/>
         </view>
-        <customObject id="NUj-XS-hEG" customClass="DocumentAlbumCardDesigner" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <customObject id="NUj-XS-hEG" customClass="DocumentAlbumCardDesigner" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="klL-6H-gq2" id="bZK-Uj-JPn"/>
                 <outlet property="hideDocumentsButton" destination="6pb-gs-x8j" id="9PB-x4-t2g"/>
@@ -150,5 +152,11 @@
     </objects>
     <resources>
         <image name="CloseCardIcon" width="14" height="14"/>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

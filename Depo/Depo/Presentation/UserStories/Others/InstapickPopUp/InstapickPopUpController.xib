@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstapickPopUpController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstapickPopUpController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="checkBoxButton" destination="IAc-BU-Ecf" id="hVk-wK-FCb"/>
                 <outlet property="checkBoxLabel" destination="r7t-dR-V1D" id="EBh-nr-Bw7"/>
@@ -57,7 +57,7 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pe-el-hgF">
-                                                    <rect key="frame" x="147.5" y="78" width="42" height="20.5"/>
+                                                    <rect key="frame" x="148" y="78" width="41.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -74,10 +74,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="U2v-jM-rIt">
-                                                    <rect key="frame" x="131.5" y="480" width="74" height="18"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="U2v-jM-rIt" customClass="AccessibleCheckBoxView" customModule="Billo" customModuleProvider="target">
+                                                    <rect key="frame" x="132" y="480" width="73.5" height="18"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAc-BU-Ecf" customClass="InsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAc-BU-Ecf" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="2dM-TK-u1Q"/>
@@ -105,21 +105,25 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7t-dR-V1D">
-                                                            <rect key="frame" x="32" y="0.0" width="42" height="18"/>
+                                                            <rect key="frame" x="32" y="0.0" width="41.5" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <connections>
+                                                        <outlet property="button" destination="IAc-BU-Ecf" id="6ju-2o-gKM"/>
+                                                        <outlet property="label" destination="r7t-dR-V1D" id="d7b-jY-Wbo"/>
+                                                    </connections>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffJ-80-hMh">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ffJ-80-hMh">
                                                     <rect key="frame" x="145.5" y="275" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="onWithoutConnectingTap:" destination="-1" eventType="touchUpInside" id="bYP-Cm-EmO"/>
                                                     </connections>
                                                 </button>
-                                                <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="46" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-Ek-QyG" customClass="ConnectWithInstaView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="46" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-Ek-QyG" customClass="ConnectWithInstaView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="118.5" y="203" width="100" height="46"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -224,6 +228,7 @@
                     </variation>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="twf-bo-xdc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1Fd-GQ-euD"/>
@@ -231,7 +236,6 @@
                 <constraint firstItem="twf-bo-xdc" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="lo8-2a-JJD"/>
                 <constraint firstItem="twf-bo-xdc" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="scw-E3-OBP"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138" y="155"/>
         </view>
     </objects>

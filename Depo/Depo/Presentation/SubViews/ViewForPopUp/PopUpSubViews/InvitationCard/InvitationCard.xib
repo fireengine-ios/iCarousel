@@ -102,6 +102,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bottomButton" destination="Sqg-MR-dJa" id="b6Q-Vn-hfQ"/>
+                <outlet property="closeButton" destination="eaR-zG-3fQ" id="cIv-sm-P1z"/>
                 <outlet property="containerStackView" destination="bvM-Xr-vqS" id="sty-3D-a0U"/>
                 <outlet property="invitationImageView" destination="Zad-oz-xgP" id="fPY-Hu-sNg"/>
                 <outlet property="playButton" destination="xU4-Pq-0Qe" id="1uZ-iz-5gv"/>

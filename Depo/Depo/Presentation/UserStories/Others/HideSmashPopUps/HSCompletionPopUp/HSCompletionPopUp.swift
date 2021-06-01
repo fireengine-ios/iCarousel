@@ -41,6 +41,7 @@ final class HSCompletionPopUp: BasePopUpController {
         willSet {
             newValue.setImage(UIImage(named: "CloseCardIcon"), for: .normal)
             newValue.tintColor = ColorConstants.closeIconButtonColor
+            newValue.accessibilityLabel = TextConstants.accessibilityClose
         }
     }
 

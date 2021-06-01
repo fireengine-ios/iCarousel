@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FreeUpSpacePopUp" customModule="lifebox" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FreeUpSpacePopUp" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="84"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -33,7 +31,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUc-YC-YuZ" customClass="CircleYellowButton" customModule="lifebox" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pUc-YC-YuZ" customClass="CircleYellowButton" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="292" y="49" width="76" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="14n-e9-zGc"/>
@@ -80,6 +78,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="bigTitleLabel" destination="5bF-UL-a8f" id="ioR-bq-Gou"/>
+                <outlet property="closeButton" destination="dyj-bv-ETM" id="TLd-si-X0i"/>
                 <outlet property="freeAppSpaceButton" destination="pUc-YC-YuZ" id="3Qh-rK-2La"/>
                 <outlet property="imageView" destination="15l-Sg-8pX" id="VfM-4e-NhC"/>
                 <outlet property="titleLabel" destination="eNd-Lf-Xnb" id="4XK-lV-EN1"/>

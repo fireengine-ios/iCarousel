@@ -61,6 +61,13 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     override func awakeFromNib() {
         super.awakeFromNib()
         service.delegates.add(self)
+        isAccessibilityElement = true
+        updateAccessbilityTraits(isEnabled: true)
+    }
+
+    override func accessibilityActivate() -> Bool {
+        connectedButtonTapped(connectButton)
+        return true
     }
     
     deinit {
@@ -71,9 +78,11 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .connectedAccounts, eventLabel: .importSpotify)
         connectButton.isEnabled = false
+        updateAccessbilityTraits(isEnabled: false)
         service.connectToSpotify(isSettingCell: true, completion: {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: .spotify))
             self.connectButton.isEnabled = true
+            self.updateAccessbilityTraits(isEnabled: true)
         })
     }
     
@@ -148,6 +157,15 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     
     private func hideJobStatusLabel() {
         jobStatusLabel.text = ""
+    }
+
+    private func updateAccessbilityTraits(isEnabled: Bool) {
+        var traits = UIAccessibilityTraitButton
+        if !isEnabled {
+            traits |= UIAccessibilityTraitNotEnabled
+        }
+
+        accessibilityTraits = traits
     }
 }
 

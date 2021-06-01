@@ -11,6 +11,11 @@ import UIKit
 class BaseCardView: UIView, NibInit {
     
     @IBOutlet weak var whiteView: UIView?
+    @IBOutlet weak var closeButton: UIButton! {
+        willSet {
+            newValue.accessibilityLabel = TextConstants.accessibilityClose
+        }
+    }
     
     var canSwipe: Bool = true
     static let baseViewCornerRadius: CGFloat = 5

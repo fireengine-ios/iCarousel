@@ -30,6 +30,21 @@ enum SegmentedImage {
             return UIImage(named: "segment_shared")
         }
     }
+
+    var accessibilityLabel: String? {
+        switch self {
+        case .documents:
+            return TextConstants.containerDocument
+        case .favorites:
+            return TextConstants.containerFavourite
+        case .music:
+            return TextConstants.containerMusic
+        case .trashBin:
+            return TextConstants.containerTrashed
+        case .sharedByMe:
+            return TextConstants.containerShared
+        }
+    }
 }
 
 final class SegmentedControl: UISegmentedControl {

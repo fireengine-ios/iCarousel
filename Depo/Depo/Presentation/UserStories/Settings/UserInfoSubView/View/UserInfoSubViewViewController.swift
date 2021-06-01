@@ -113,6 +113,7 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        accountDetailsButton.accessibilityLabel = accountDetailsLabel.text
     }
     
     override func viewWillAppear(_ animated: Bool) {

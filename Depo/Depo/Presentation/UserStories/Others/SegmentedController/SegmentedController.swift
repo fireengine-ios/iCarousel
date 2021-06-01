@@ -105,6 +105,7 @@ class SegmentedController: BaseViewController, NibInit {
         
         for (index, controller) in viewControllers.enumerated() {
             if let image = controller.segmentImage?.image {
+                image.accessibilityLabel = controller.segmentImage!.accessibilityLabel
                 segmentedControl.insertSegment(with: image, at: index, animated: false)
             } else {
                 segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)

@@ -48,6 +48,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.accessibilityViewIsModal = true
         view.isOpaque = false
         view.backgroundColor = .clear
         collectionView.isHidden = true

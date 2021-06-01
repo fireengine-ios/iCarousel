@@ -20,6 +20,7 @@ final class CaptchaView: UIView, FromNib {
             newValue.tintColor = ColorConstants.darkText
             newValue.backgroundColor = .white
             newValue.isOpaque = true
+            newValue.accessibilityLabel = TextConstants.captchaSound
         }
     }
     
@@ -29,6 +30,7 @@ final class CaptchaView: UIView, FromNib {
             newValue.tintColor = ColorConstants.darkText
             newValue.backgroundColor = .white
             newValue.isOpaque = true
+            newValue.accessibilityLabel = TextConstants.captchaRefresh
         }
     }
     
