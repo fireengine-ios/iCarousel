@@ -1872,20 +1872,29 @@
 "signup_redesign_etk_checkbox_desc" = "%1$S Kam lexuar dhe e pranoj.";
 "signup_redesign_etk_link" = "Tekstin e Mesazhit Elektronik Komercial dhe Lejen e të Dhënave";
 "signup_redesign_eula_accept_button" = "Unë aprovoj";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "Vazhdo";
 
 /*Print redirection warning*/
-"warning_popup_print_redirect_title" = "";
-"warning_popup_print_redirect_message" = "";
-"warning_popup_print_redirect_proceed_button" = "";
-"warning_popup_print_redirect_cancel_button" = "";
+"warning_popup_print_redirect_title" = "Ju jeni duke u ridrejtuar në një faqe ueb tjetër";
+"warning_popup_print_redirect_message" = "Ju jeni duke u ridrejtuar në një faqe ueb tjetër, në mënyrë që fotot tuaja të shtypen";
+"warning_popup_print_redirect_proceed_button" = "Vazhdo";
+"warning_popup_print_redirect_cancel_button" = "Anulo";
 "settings_item_invitation" = "";
-"title_invitation_campaign" = "";
-"title_invitation_link" = "";
-"title_invitation_friends" = "";
-"title_invitation_packages" = "";
-"invitation_snackbar_copy" = "";
-"invitation_share" = "";
-"invitation_friends" = "";
+"title_invitation_campaign" = "Detajet e Fushatës";
+"title_invitation_link" = "Link Ftesës Vetëm për Ju";
+"title_invitation_friends" = "Ata që e Pranuan Ftesën Tuaj (%d Persona)";
+"title_invitation_packages" = "Dhuratat që keni Fituar (%d Dhurata)";
+"invitation_snackbar_copy" = "Linku juaj i ftesës është kopjuar me sukses";
+"invitation_share" = "Shpërnda Linkun";
+"invitation_friends" = "Ata që e Pranuan Ftesën Tuaj";
 "invitation_snackbar_copy_exceed" = "";
 "invitation_snackbar_share_exceed" = "";
+
+/*Accessibility*/
+"play_captcha" = "";
+"refresh_captcha" = "";
+"container_shared_files" = "";
+"container_document" = "";
+"container_music" = "";
+"container_favourite" = "";
+"container_trashed" = "";

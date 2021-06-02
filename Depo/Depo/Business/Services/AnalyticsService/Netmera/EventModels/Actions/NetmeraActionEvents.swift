@@ -234,7 +234,7 @@ extension NetmeraEvents.Actions {
 
     final class HomepageCard: NetmeraEvent {
 
-        private let kCreateStoryKey = "etv"
+        private let kHomepageCardKey = "etv"
 
         @objc var cardName = ""
         @objc var action = ""
@@ -253,12 +253,10 @@ extension NetmeraEvents.Actions {
         }
 
         override var eventKey : String {
-            return kCreateStoryKey
+            return kHomepageCardKey
         }
     }
 
-
-    
     final class FirstAutosync: NetmeraEvent {
         
         private let kFirstAutosyncKey = "ekh"

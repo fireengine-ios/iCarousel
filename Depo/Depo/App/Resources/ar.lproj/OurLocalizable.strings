@@ -1841,20 +1841,29 @@
 "signup_redesign_etk_checkbox_desc" = "قرأت %1$S وأوافق عليها.";
 "signup_redesign_etk_link" = "نص الرسائل الإلكترونية التجارية وإذن البيانات";
 "signup_redesign_eula_accept_button" = "أوافق";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "واصل";
 
 /*Print redirection warning*/
-"warning_popup_print_redirect_title" = "";
-"warning_popup_print_redirect_message" = "";
-"warning_popup_print_redirect_proceed_button" = "";
-"warning_popup_print_redirect_cancel_button" = "";
+"warning_popup_print_redirect_title" = "تتم إعادة توجيهك إلى موقع مختلف.";
+"warning_popup_print_redirect_message" = "تتم إعادة توجيهك إلى موقع مختلف من أجل الحصول على طباعة صورك.";
+"warning_popup_print_redirect_proceed_button" = "واصل";
+"warning_popup_print_redirect_cancel_button" = "إلغاء";
 "settings_item_invitation" = "";
-"title_invitation_campaign" = "";
-"title_invitation_link" = "";
-"title_invitation_friends" = "";
-"title_invitation_packages" = "";
-"invitation_snackbar_copy" = "";
-"invitation_share" = "";
-"invitation_friends" = "";
+"title_invitation_campaign" = "تفاصيل الحملة";
+"title_invitation_link" = "رابط دعوة خاص بك";
+"title_invitation_friends" = "الموفقون على دعوتك (%d  شخصا)";
+"title_invitation_packages" = "الهدايا التي فزت بها (%d  هدية)";
+"invitation_snackbar_copy" = "تم نسخ رابط الدعوة الخاص بك بنجاح.";
+"invitation_share" = "قم بمشاركة الرابط";
+"invitation_friends" = "الموفقون على دعوتك";
 "invitation_snackbar_copy_exceed" = "";
 "invitation_snackbar_share_exceed" = "";
+
+/*Accessibility*/
+"play_captcha" = "";
+"refresh_captcha" = "";
+"container_shared_files" = "";
+"container_document" = "";
+"container_music" = "";
+"container_favourite" = "";
+"container_trashed" = "";

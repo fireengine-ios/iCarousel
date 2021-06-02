@@ -1879,23 +1879,23 @@
 "signup_redesign_etk_checkbox_desc" = "I have read and accepted the %1$S.";
 "signup_redesign_etk_link" = "Commercial Electronic Message and Data Permission";
 "signup_redesign_eula_accept_button" = "I Agree";
-"invitation_home_card_button_title" = "Invitation";
+"invitation_home_card_button_title" = "Invite";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "You are being redirected to an external website";
 "warning_popup_print_redirect_message" = "You are being redirected o an external site in order to print your photos";
 "warning_popup_print_redirect_proceed_button" = "Continue";
 "warning_popup_print_redirect_cancel_button" = "Cancel";
-"settings_item_invitation" = "Invite, Win&Win";
+"settings_item_invitation" = "Invite Your Friends";
 "title_invitation_campaign" = "Campaign Details";
-"title_invitation_link" = "Your invitation link";
+"title_invitation_link" = "Your Invitation Link";
 "title_invitation_friends" = "Friends Signup With Invitation(%d people)";
 "title_invitation_packages" = "Gifts You Earned(%d Gifts)";
 "invitation_snackbar_copy" = "Your invitation link is copied successfully";
 "invitation_share" = "Share Link";
 "invitation_friends" = "Friends Signup With Invitation";
-"invitation_snackbar_copy_exceed" = "";
-"invitation_snackbar_share_exceed" = "";
+"invitation_snackbar_copy_exceed" = "Sorry, your invitation link limit is exceeded";
+"invitation_snackbar_share_exceed" = "Sorry, your invitation link limit is exceeded";
 
 /*Accessibility*/
 "play_captcha" = "Play captcha";
