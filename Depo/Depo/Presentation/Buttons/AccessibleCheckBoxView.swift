@@ -21,6 +21,7 @@ class AccessibleCheckBoxView: UIStackView {
         updateTraits()
 
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        accessibilityLabel = label.text
         textObservation = label.observe(\.text) { [weak self] label, _ in
             self?.accessibilityLabel = label.text
         }

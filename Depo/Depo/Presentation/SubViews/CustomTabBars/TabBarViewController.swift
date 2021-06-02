@@ -429,6 +429,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             self.view.layoutIfNeeded()
         } completion: { _ in
             self.view.accessibilityElements = hidden ? nil : self.plusMenuItems + [self.plussButton]
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.view)
         }
     }
     
