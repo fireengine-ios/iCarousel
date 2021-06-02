@@ -62,21 +62,25 @@ extension UIViewController: Waiting {
                     cancel()
                     self?.hideSpinnerIncludeNavigationBar()
                     self?.statusBarColor = oldColor
+                    self?.postAccessibilityScreenChanged(view: self!.view)
                 }
             })
             hud.backgroundView.addGestureRecognizer(gestureRecognizer)
+            self.postAccessibilityScreenChanged(view: hud)
         }
     }
     
     func showSpinner() {
         DispatchQueue.main.async {
-            _ = MBProgressHUD.showAdded(to: self.view, animated: true)
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.postAccessibilityScreenChanged(view: hud)
         }
     }
     
     func showSpinnerOnView(_ view: UIView) {
         DispatchQueue.main.async {
-            _ = MBProgressHUD.showAdded(to: view, animated: true)
+            let hud = MBProgressHUD.showAdded(to: view, animated: true)
+            self.postAccessibilityScreenChanged(view: hud)
         }
     }
     
@@ -85,6 +89,7 @@ extension UIViewController: Waiting {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             window.addSubview(hud)
+            self.postAccessibilityScreenChanged(view: hud)
         }
     }
     
@@ -92,19 +97,26 @@ extension UIViewController: Waiting {
         DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             MBProgressHUD.hideAllHUDs(for: window, animated: true)
+            self.postAccessibilityScreenChanged(view: self.view)
         }
     }
     
     func hideSpinner() {
         DispatchQueue.main.async {
             MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+            self.postAccessibilityScreenChanged(view: self.view)
         }
     }
     
     func hideSpinerForView(_ view: UIView) {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: view, animated: true)
+            self.postAccessibilityScreenChanged(view: self.view)
         }
+    }
+
+    private func postAccessibilityScreenChanged(view: UIView) {
+        UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, view)
     }
 }
 
