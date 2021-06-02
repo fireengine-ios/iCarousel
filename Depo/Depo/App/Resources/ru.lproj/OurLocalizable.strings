@@ -1860,3 +1860,12 @@
 "invitation_friends" = "Принявшие Ваше Приглашение";
 "invitation_snackbar_copy_exceed" = "";
 "invitation_snackbar_share_exceed" = "";
+
+/*Accessibility*/
+"play_captcha" = "";
+"refresh_captcha" = "";
+"container_shared_files" = "";
+"container_document" = "";
+"container_music" = "";
+"container_favourite" = "";
+"container_trashed" = "";
