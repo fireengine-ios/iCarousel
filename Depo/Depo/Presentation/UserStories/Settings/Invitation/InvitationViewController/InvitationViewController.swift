@@ -166,7 +166,7 @@ extension InvitationViewController: InvitationReuseViewDelegate {
                 return
             }
 
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .invitationLink, channelType: activityTypeString.knownAppName()))
         }
 
         ///works only on iPad
