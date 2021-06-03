@@ -48,8 +48,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     let musicBarH : CGFloat = 70
     
-    var customNavigationControllers: [UINavigationController] = []
-    
+    lazy var customNavigationControllers = TabBarConfigurator.generateControllers(router: router)
+
     var selectedViewController: UIViewController? {
         if customNavigationControllers.count > 0 {
             return customNavigationControllers[selectedIndex]
@@ -120,7 +120,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         setupCurtainView()
         mainContentView.bringSubview(toFront: plussButton)
-        setupCustomNavControllers()
         
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
@@ -312,10 +311,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
         
         changeViewState(state: !plussButton.isSelected)
-    }
-    
-    func setupCustomNavControllers() {
-        customNavigationControllers = TabBarConfigurator.generateControllers(router: router)
     }
     
     @objc func gearButtonAction(sender: Any) {
