@@ -20,7 +20,7 @@ protocol HomeCardsService {
 
 final class HomeCardsServiceImp {
     
-    var delegate: HomeCardsServiceImpDelegte?
+    weak var delegate: HomeCardsServiceImpDelegte?
     let sessionManager: SessionManager
     private lazy var fileService = FileService.shared
     
@@ -29,7 +29,7 @@ final class HomeCardsServiceImp {
     }
 }
 
-protocol HomeCardsServiceImpDelegte {
+protocol HomeCardsServiceImpDelegte: AnyObject {
     func needUpdateHomeScreen()
     func albumHiddenSuccessfully(_ successfully: Bool)
     func showSpinner()
