@@ -293,6 +293,7 @@ enum NetmeraEventValues {
         case originalSize
         case link
         case `private`
+        case invitationLink
         
         var text: String {
             switch self {
@@ -304,6 +305,8 @@ enum NetmeraEventValues {
                 return "Link"
             case .private:
                 return "Private Share"
+            case .invitationLink:
+                return "InvitationLink"
             }
         }
     }
