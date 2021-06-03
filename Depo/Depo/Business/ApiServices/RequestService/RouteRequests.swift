@@ -78,8 +78,8 @@ struct RouteRequests {
     }()
     
     private static let privacyPolicySubDomain = "privacyPolicy/get/\(Device.locale)?brand=" + applicationTarget
-    static let privacyPolicy = baseUrl +/ privacyPolicySubDomain
-    
+    static let privacyPolicy = URL(string: privacyPolicySubDomain, relativeTo: baseUrl)!
+
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
