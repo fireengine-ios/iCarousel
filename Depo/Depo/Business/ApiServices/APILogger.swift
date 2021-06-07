@@ -116,11 +116,11 @@ final class APILogger {
                         self.log(string: "The network connection was lost")
                     }
                     
-                    if let data = data {
+                    /*if let data = data {
                         let json = JSON(data: data)
                         let string = try? self.filteredRawString(from: json) ?? ""
                         print("Response Console Logs = \(string ?? "")")
-                    }
+                    }*/
                 } else if let data = data {
                     let json = JSON(data: data)
                     let string = try? self.filteredRawString(from: json) ?? ""
