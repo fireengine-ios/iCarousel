@@ -1831,7 +1831,7 @@
 "signup_redesign_etk_checkbox_desc" = "Прочитав і приймаю %1$S.";
 "signup_redesign_etk_link" = "Комерційне Електронне Повідомлення Та Текст Дозволу Обробки Даних";
 "signup_redesign_eula_accept_button" = "Погоджую";
-"invitation_home_card_button_title" = "Продовжуй";
+"invitation_home_card_button_title" = "";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Вас перенаправляють на інший сайт";

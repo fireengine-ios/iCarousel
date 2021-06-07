@@ -42,17 +42,25 @@ enum SettingsTypes: Int {
     static let allSectionThreeTypes = [myActivities, passcode, security]
     static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
 
-    static func prepareTypes(hasPermissions: Bool) -> [[SettingsTypes]] {
-        let invitationTypes = [SettingsTypes.invitation]
+    static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool) -> [[SettingsTypes]] {
+        var result = [[SettingsTypes]]()
+        if isInvitationShown {
+            result.append([SettingsTypes.invitation])
+        }
+
+        result.append(SettingsTypes.allSectionOneTypes)
+
         var accountTypes = [SettingsTypes.connectAccounts]
         if hasPermissions {
             accountTypes.append(SettingsTypes.permissions)
         }
-        return [invitationTypes,
-                SettingsTypes.allSectionOneTypes,
-                accountTypes,
-                SettingsTypes.allSectionThreeTypes,
-                SettingsTypes.allSectionFourTypes]
+
+        result.append(accountTypes)
+
+        result.append(SettingsTypes.allSectionThreeTypes)
+        result.append(SettingsTypes.allSectionFourTypes)
+
+        return result
     }
 
 }

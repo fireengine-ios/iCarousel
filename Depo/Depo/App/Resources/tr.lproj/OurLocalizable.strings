@@ -1856,7 +1856,7 @@
 "warning_popup_print_redirect_cancel_button" = "İptal";
 "settings_item_invitation" = "Arkadaşını Davet Et";
 "title_invitation_campaign" = "Kampanya Detayları";
-"title_invitation_link" = "Size Özel Davet Linki";
+"title_invitation_link" = "Sana Özel Davet Linki";
 "title_invitation_friends" = "Davetini Kabul Edenler (%d Kişi)";
 "title_invitation_packages" = "Kazandığın Hediyeler (%d Hediye)";
 "invitation_snackbar_copy" = "Davet linkin başarıyla kopyalandı";

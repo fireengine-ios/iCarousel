@@ -48,6 +48,7 @@ struct AccountJSONConstants {
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
     static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
     static let msisdnRegion = "msisdnRegion"
+    static let showInvitation = "showInvitation"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -76,7 +77,8 @@ class AccountInfoResponse: ObjectRequestResponse {
     var emailVerificationRemainingDays: Int?
     var isUpdateMobilePaymentPermissionRequired: Bool?
     var msisdnRegion: String?
-    
+    var showInvitation: Bool?
+
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
             return number.contains("+") ? number : "+\(code)\(number)"
@@ -117,6 +119,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         address = json?[AccountJSONConstants.address].string
         isUpdateMobilePaymentPermissionRequired = json?[AccountJSONConstants.isUpdateMobilePaymentPermissionRequired].bool
         msisdnRegion = json?[AccountJSONConstants.msisdnRegion].string
+        showInvitation = json?[AccountJSONConstants.showInvitation].bool
     }
 }
 

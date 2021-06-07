@@ -1843,14 +1843,14 @@
 "signup_redesign_etk_checkbox_desc" = "Я прочитал и принимаю 1$S.";
 "signup_redesign_etk_link" = "Коммерческое Электронное Сообщение и Текст Подтверждения на Передачу Данных";
 "signup_redesign_eula_accept_button" = "Подтверждаю";
-"invitation_home_card_button_title" = "Продолжить";
+"invitation_home_card_button_title" = "";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Вы перенаправляетесь на другой сайт";
 "warning_popup_print_redirect_message" = "Вы перенаправляетесь на другой сайт для возможности распечатывания ваших фотографий";
 "warning_popup_print_redirect_proceed_button" = "Продолжить";
 "warning_popup_print_redirect_cancel_button" = "Отмена";
-"settings_item_invitation" = "Пригласи, Заработай & Зарабатывай";
+"settings_item_invitation" = "";
 "title_invitation_campaign" = "Подробности Кампании";
 "title_invitation_link" = "Специальная для Вас Ссылка-Приглашение";
 "title_invitation_friends" = "Принявшие Ваше Приглашение (%d человек)";
@@ -1858,8 +1858,8 @@
 "invitation_snackbar_copy" = "Пригласительная ссылка успешно скопирована";
 "invitation_share" = "Поделиться Ссылкой";
 "invitation_friends" = "Принявшие Ваше Приглашение";
-"invitation_snackbar_copy_exceed" = "";
-"invitation_snackbar_share_exceed" = "";
+"invitation_snackbar_copy_exceed" = "К сожалению, лимит подарков ссылки-приглашения истек";
+"invitation_snackbar_share_exceed" = "К сожалению, лимит подарков ссылки-приглашения истек";
 
 /*Accessibility*/
 "play_captcha" = "";

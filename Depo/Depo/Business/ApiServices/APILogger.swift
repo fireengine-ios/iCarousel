@@ -115,8 +115,8 @@ final class APILogger {
                     if let error = task.error as? URLError, error.code == .networkConnectionLost {
                         self.log(string: "The network connection was lost")
                     }
-                    /*
-                    if let data = data {
+                    
+                    /*if let data = data {
                         let json = JSON(data: data)
                         let string = try? self.filteredRawString(from: json) ?? ""
                         print("Response Console Logs = \(string ?? "")")
