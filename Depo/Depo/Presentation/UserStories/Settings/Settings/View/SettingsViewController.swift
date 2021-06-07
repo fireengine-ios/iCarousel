@@ -276,8 +276,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - SettingsViewInput
 extension SettingsViewController: SettingsViewInput {
     
-    func prepareCellsData(isPermissionShown: Bool) {
-        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown)
+    func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool) {
+        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown, isInvitationShown: isInvitationShown)
     }
     
     func showProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool) {

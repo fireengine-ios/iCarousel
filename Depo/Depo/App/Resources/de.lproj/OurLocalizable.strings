@@ -1829,7 +1829,7 @@
 "signup_redesign_etk_checkbox_desc" = "%1$S habe ich gelesen und angenommen.";
 "signup_redesign_etk_link" = "Kommerziell- elektronischer Nachrichten- und Datenerlaubnistext";
 "signup_redesign_eula_accept_button" = "Ich bestätige";
-"invitation_home_card_button_title" = "Weiter";
+"invitation_home_card_button_title" = "";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Sie werden auf eine andere Seite weitergeleitet";

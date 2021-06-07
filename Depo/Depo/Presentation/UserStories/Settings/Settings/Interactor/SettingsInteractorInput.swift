@@ -26,4 +26,5 @@ protocol SettingsInteractorInput {
     func trackPhotoEdit()
     
     func getUserInfo()
+    func populateDataForCells()
 }

@@ -54,7 +54,7 @@ extension SettingsPresenter: SettingsViewOutput {
 
     func viewIsReady() {
         interactor.trackScreen()
-        view.prepareCellsData(isPermissionShown: false)
+        interactor.populateDataForCells()
     }
     
     func viewWillBecomeActive() {
@@ -169,8 +169,8 @@ extension SettingsPresenter: SettingsViewOutput {
 // MARK: - SettingsInteractorOutput
 extension SettingsPresenter: SettingsInteractorOutput {
     
-    func cellsDataForSettings(isPermissionShown: Bool) {
-        view.prepareCellsData(isPermissionShown: isPermissionShown)
+    func cellsDataForSettings(isPermissionShown: Bool, isInvitationShown: Bool) {
+        view.prepareCellsData(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown)
     }
     
     func goToOnboarding() {

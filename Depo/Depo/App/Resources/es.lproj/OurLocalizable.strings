@@ -1871,7 +1871,7 @@
 "signup_redesign_etk_checkbox_desc" = "He leído %1$S y lo acepto.";
 "signup_redesign_etk_link" = "Al texto de permiso de datos y mensajes electrónicos comerciales";
 "signup_redesign_eula_accept_button" = "Confirmo";
-"invitation_home_card_button_title" = "Continua";
+"invitation_home_card_button_title" = "";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Se le dirigirá a un sitio diferente";

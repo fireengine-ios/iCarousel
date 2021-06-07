@@ -10,7 +10,7 @@ import Foundation
 
 protocol SettingsInteractorOutput: class {
     
-    func cellsDataForSettings(isPermissionShown: Bool)
+    func cellsDataForSettings(isPermissionShown: Bool, isInvitationShown:Bool)
     
     func goToOnboarding()
         

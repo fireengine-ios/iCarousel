@@ -98,7 +98,7 @@ final class SettingsInteractor: SettingsInteractorInput {
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
             self?.userInfoResponse = accountInfo
             self?.getUserStatus()
-            
+            self?.populateDataForCells()
         }, fail: { [weak self] errorResponse in
             self?.output.didFailToObtainUserStatus(errorMessage: errorResponse.errorDescription ?? TextConstants.errorServer)
             
@@ -123,7 +123,7 @@ final class SettingsInteractor: SettingsInteractorInput {
     
     private func checkNeedShowPermissions() {
         guard isNeedShowPermissions == nil else {
-            didRecieveDataForCells()
+            populateDataForCells()
             return
         }
         
@@ -134,7 +134,7 @@ final class SettingsInteractor: SettingsInteractorInput {
                 case .success(let permissions):
                     
                     self?.isNeedShowPermissions = permissions.contains(where: { $0.isAllowed == true })
-                    self?.didRecieveDataForCells()
+                    self?.populateDataForCells()
 
                 case .failed(let error):
                     debugPrint("get Permissions error \(error.localizedDescription)")
@@ -145,10 +145,10 @@ final class SettingsInteractor: SettingsInteractorInput {
         }
     }
     
-    private func didRecieveDataForCells() {
-        guard let isPermissionShown = isNeedShowPermissions else {
-            return
-        }
-        output.cellsDataForSettings(isPermissionShown: isPermissionShown)
+    func populateDataForCells() {
+        let isPermissionShown = self.isNeedShowPermissions ?? false
+        let isInvitationShown = self.userInfoResponse?.showInvitation ?? false
+
+        output.cellsDataForSettings(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown)
     }
 }

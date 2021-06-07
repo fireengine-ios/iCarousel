@@ -46,7 +46,7 @@ final class InvitationApiService: BaseRequestService {
     }
 
     func getInvitationSubscriptions(success: SuccessResponse?, fail: @escaping FailResponse) {
-        let param = ActiveSubscriptionParameters()
+        let param = InvitationParameters()
         let handler = BaseResponseHandler<ActiveSubscriptionResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }

@@ -130,7 +130,7 @@ extension InvitationViewController: UICollectionViewDelegate, UICollectionViewDe
 
 extension InvitationViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.invitationGiftList.count
+        return self.invitationSubscriptionPlanList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
