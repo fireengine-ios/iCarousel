@@ -303,8 +303,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                     
                 case .smash:
-                    assertionFailure("please implement this function first")
-                    action = UIAlertAction()
+                    action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
+                        self.handleAction(type: type, items: currentItems, sender: sender)
+                    })
 
                 case .share:
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { _ in
@@ -567,7 +568,15 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
         case .print:
             basePassingPresenter?.printSelected()
-            
+
+        case .smash:
+            let controller = RouterVC().getViewControllerForPresent()
+            controller?.showSpinner()
+            self.interactor.smash(item: items) {
+                controller?.hideSpinner()
+            }
+            self.basePassingPresenter?.stopModeSelected()
+
         case .rename:
             interactor.info(item: items, isRenameMode: true)
             
