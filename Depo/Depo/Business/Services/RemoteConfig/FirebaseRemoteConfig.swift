@@ -15,6 +15,7 @@ private struct RemoteConfigKeys {
     static let signupSupportAttempts = "signup_support_form_treshold"
     static let printOptionEnabled = "print_option_enabled"
     static let chatbotMenuEnabled = "chatbot_menu_enabled"
+    static let printOptionEnabledLanguages = "print_option_enabled_languages"
 }
 
 final class FirebaseRemoteConfig {
@@ -35,6 +36,15 @@ final class FirebaseRemoteConfig {
     var printOptionEnabled: Bool {
         let key = RemoteConfigKeys.printOptionEnabled
         return remoteConfig.configValue(forKey: key).boolValue
+    }
+
+    var printOptionEnabledLanguages: [String] {
+        let key = RemoteConfigKeys.printOptionEnabledLanguages
+        let value = remoteConfig.configValue(forKey: key).stringValue ?? ""
+        return value
+            .components(separatedBy: ",")
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+            .map { $0.lowercased() }
     }
     
     func fetchAttemptsBeforeSupportOnLogin(completion: @escaping ValueHandler<Int>) {

@@ -107,16 +107,16 @@ enum ElementTypes {
                     result = [.share, .download]
                     
                     if item.fileType == .image {
-                        // Disabled in bottom bar at detail page
-//                        if PrintService.isEnabled {
-//                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
-//                        }
-                        
+
                         result.append(.edit)
 
-                        if item.name?.isPathExtensionGif() == false {
-                            result.append(.smash)
+                        if PrintService.isEnabled {
+                            result.append(.print) //FE-2439 - Removing Print Option for Turkish (TR) language
                         }
+                        // moved to three dots menu
+//                        if item.name?.isPathExtensionGif() == false {
+//                            result.append(.smash)
+//                        }
                     }
 
                 default:
@@ -525,6 +525,8 @@ enum ElementTypes {
             return TextConstants.actionSheetDeSelectAll
         case .print:
             return TextConstants.tabBarPrintLabel
+        case .smash:
+            return TextConstants.tabBarSmashLabel
         case .rename:
             return TextConstants.actionSheetRename
         case .removeAlbum:
