@@ -115,5 +115,9 @@ class SettingsRouter: SettingsRouterInput {
     func presentAlertSheet(alertController: UIAlertController) {
         router.presentViewController(controller: alertController)
     }
+
+    func goToChatbot() {
+        router.pushViewController(viewController: router.chatbot)
+    }
     
 }

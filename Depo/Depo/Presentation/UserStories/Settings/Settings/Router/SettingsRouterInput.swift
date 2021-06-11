@@ -51,5 +51,6 @@ protocol SettingsRouterInput {
     func showError(errorMessage: String)
     
     func presentAlertSheet(alertController: UIAlertController)
-    
+
+    func goToChatbot()
 }

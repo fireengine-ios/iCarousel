@@ -76,12 +76,28 @@ struct RouteRequests {
             return URL(string: "https://www.turkcell.com.tr/kampanyalar/diger-kampanyalarimiz/lifebox-cekilis-kampanyasi")
         }
     }()
-    
+
+    static let chatbotCookieDomain: String = {
+        switch currentServerEnvironment {
+        case .test: return "chatbottest.turkcell.com.tr"
+        case .preProduction: return "dsschatbot.turkcell.com.tr"
+        case .production: return "dsschatbot.turkcell.com.tr"
+        }
+    }()
+
+    static let chatbotBaseDomain: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://chatbottest.turkcell.com.tr/index.html?"
+        case .preProduction: return "https://dsschatbot.turkcell.com.tr/index.html?"
+        case .production: return "https://dsschatbot.turkcell.com.tr/index.html?"
+        }
+    }()
+
     private static let privacyPolicySubDomain = "privacyPolicy/get/\(Device.locale)?brand=" + applicationTarget
     static let privacyPolicy = URL(string: privacyPolicySubDomain, relativeTo: baseUrl)!
 
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
-    
+
     // MARK: Authentication
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
@@ -322,7 +338,8 @@ struct RouteRequests {
         static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         static let updateAddress = accountApi +/ "address"
         static let info = accountApi +/ "info"
-        
+        static let ticket = accountApi +/ "ticket"
+
         enum Settings {
             /// without "s" at the end
             static let settingsApi = Account.accountApi +/ "setting" 

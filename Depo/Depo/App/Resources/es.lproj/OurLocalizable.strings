@@ -6,7 +6,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "Este archivo se eliminará solamente su álbum. Puede acceder a este archivo desde la pestaña Fotos";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Al eliminar este este álbum no eliminará los archivos de Lifebox. Puede acceder a estos archivos desde la pestaña Fotos. ¿Está seguro que quiere borrarlo?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Al eliminar este archivo, se eliminarán de Lifebox también. No podrá acceder a ellos una vez eliminados. ¿Está seguro que quiere borrarlo?";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "La carpeta/ las carpetas seleccionadas se moverán a la papelera. Podrás restaurar los contenidos dentro de 90 días. Si hace falta liberar la memoria de tu lifebox primero asegurarte de vaciar la papelera.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "El o los archivos seleccionados se moverán a la papelera. Podrás restaurarlos en los próximos 90 días. Si necesitas liberar espacio en tu memoria, puedes vaciar la papelera.";
 "Purchase" = "Comprar";
 "Packages" = "Paquetes";
 "Verification code is blocked.\nPlease request a new code" = "El código de verificación está bloqueado. Por favor, solicite un nuevo código.";
@@ -121,8 +121,8 @@
 "Add to Favorites" = "Agregar a favoritos";
 "Copy" = "Copiar";
 "Create a Story" = "Crear una historia";
-"Share Via Link" = "Copia la conexión";
-"Original Size" = "Envia la copia";
+"Share Via Link" = "Copiar enlace";
+"Original Size" = "Enviar copia";
 "Small Size" = "Tamaño Pequeño";
 "Download" = "Descargar";
 "Sync" = "Sincronizar";
@@ -132,7 +132,7 @@
 "Wait for a Wi-Fi Connection" = "Esperando una conexión Wi-Fi";
 "Auto Sync Preparation" = "Preparar sincronización automática";
 "Sync with data plan" = "Sincronizar con plan de datos";
-"Waiting for Wi-Fi connection to auto-sync" = "Esperando a que la conexión Wi-Fi se auto sincronice";
+"Waiting for Wi-Fi connection to auto-sync" = "Esperando la conexión Wi-Fi para comenzar auto-sincronización";
 "Auto Upload is off.\nGo to setting to auto sync." = "La sincronización automática está desactivada.\nVaya al menú configuración para autosincronizar.";
 "LTE" = "LTE";
 "4G" = "Datos Móviles";
@@ -269,7 +269,7 @@
 "Start adding your documents" = "Comience a agregar sus documentos";
 "You don’t have any documents on your Lifebox yet." = "Aún no tiene ningún documento en su lifebox.";
 "Start adding your music" = "Comience a agregar su música";
-"You don’t have any music on your Lifebox yet." = "Aún no tiene ninguna canción en su lifebox.";
+"You don’t have any music on your Lifebox yet." = "Aún no tienes canciones en lifebox.";
 "info" = "Información";
 "Enable photo permissions in settings" = "Habilitar permisos de fotos en la configuración";
 "Start adding your photos" = "Comience a agregar sus fotos";
@@ -306,7 +306,7 @@
 "Largest" = "Más grande";
 "Size" = "Tamaño";
 "Newest" = "Más reciente";
-"Oldest" = "Más Antigua";
+"Oldest" = "Más antigua";
 "Name (Z-A)" = "Nombre (A-Z)";
 "Name (A-Z)" = "Nombre (Z-A)";
 "Grid" = "Cuadrícula";
@@ -418,7 +418,7 @@
 "My Stories" = "Mis historias";
 
 /*Personas*/
-"People" = "Gente";
+"People" = "Personas";
 "Things" = "Cosas";
 "Places" = "Lugares";
 "Musics" = "Música";
@@ -441,8 +441,8 @@
 "Upgrade" = "Actualizar";
 "Creation date" = "Fecha de creación";
 "Folder Info" = "Información de la carpeta";
-"Face image grouping" = "Agrupamiento de imagen & cara";
-"Face & Image Grouping" = "Agrupamiento de imagen & cara";
+"Face image grouping" = "Agrupamiento de caras y objetos";
+"Face & Image Grouping" = "Agrupamiento de caras y objetos";
 "Turkcell Password" = "Contraseña de Turkcell";
 "Login Settings" = "Configuración de acceso";
 "Folder is Empty" = "La carpeta está vacía";
@@ -470,7 +470,7 @@
 "Movie" = "Película";
 "Did you like this story that we created for you?" = "¿Le gustó esta historia que creamos para usted?";
 "Save This Story" = "Guardar esta historia";
-"Latest Uploads" = "Últimas cargar";
+"Latest Uploads" = "Últimas cargas";
 "Your latest uploads" = "Sus últimas cargas";
 "View Recent Activities" = "Ver actividades recientes";
 "View All Photos" = "Ver todas las fotos";
@@ -532,18 +532,18 @@
 "Video album is automatically created, therefore cannot be deleted" = "El álbum de video se crea automáticamente, por lo tanto no se puede eliminar";
 "You cannot upload any video to auto generated video album" = "No puede cargar ningún video al álbum de video generado automáticamente";
 "You have no any files" = "No tiene ningún archivo";
-"You don’t have any albums on your Lifebox yet." = "Aún no tiene ningún álbum en su lifebox.";
-"Start creating albums" = "Comience a crear álbumes";
+"You don’t have any albums on your Lifebox yet." = "Aún no tienes álbumes en lifebox.";
+"Start creating albums" = "Comienza a crear álbumes";
 "You don’t have any stories  on your Lifebox yet." = "Aún no tiene ninguna historia en su lifebox.";
-"Start creating stories" = "Comience a crear historias";
+"Start creating stories" = "Comienza a crear historias";
 "Help and Support" = "Ayuda y Soporte Técnico";
 "Album is Empty" = "El álbum está vacío";
 "You don’t have any files on your Lifebox yet." = "Aún no tiene ningún archivo en su lifebox.";
-"You don’t have any favorited files on your Lifebox yet." = "Aún no tiene ningún archivo de favoritos en su lifebox.";
+"You don’t have any favorited files on your Lifebox yet." = "Aún no tienes archivos favoritos en lifebox.";
 "Start adding your files" = "Comience a agregar sus archivos";
 "Suggestions" = "Sugerencias";
 "Recent Searches" = "Búsquedas Recientes";
-"Lifebox can sync your files automatically." = "Lifebox puede sincronizar sus archivos automáticamente.\nPara habilitar la sincronización en segundo plano de sus fotos y videos, asegúrese de que su permiso de ubicación esté establecido en \"SIEMPRE\" en el menú \"configuración del dispositivo-lifebox-ubicación\".";
+"Lifebox can sync your files automatically." = "lifebox puede sincronizar tus archivos automáticamente. Para activar la sincronización automática de segundo plano asegúrate de que el permiso de ubicación esté activado para lifebox.";
 "Get Started" = "Iniciar";
 "I have read and accepted terms of use" = "He leído y acepto los términos de uso";
 "Welcome to Lifebox!" = "¡Bienvenido a Lifebox!";
@@ -673,9 +673,9 @@
 "Please enter a valid login." = "Inicio de sesión denegado Por favor revise sus credenciales";
 "Please enter the text below" = "Por favor ingrese el texto a continuación";
 "facebook_photo_tags" = "Etiquetas de fotos de Facebook";
-"facebook_tags_on" = "Obtendrá sus etiquetas de Facebook en Lifebox cuando habilite esta opción";
-"facebook_tags_off" = "Obtendrá sus etiquetas de Facebook en Lifebox cuando habilite esta opción";
-"facebook_tags_import" = "Habilita la opción \"Importar desde Facebook\" para usar la función \"Transferencia de etiquetas de Facebook\"";
+"facebook_tags_on" = "Se importarán tus etiquetas de Facebook al activar esta opción.";
+"facebook_tags_off" = "Se importarán tus etiquetas de Facebook al activar esta opción.";
+"facebook_tags_import" = "Habilita la opción “Importar de Facebok” para usar la función “Transferencia de etiquetas de Facebook”.";
 "TermsOfUseLinkText" = "clic";
 "launch_campaign_card_detail" = "Detalles";
 "launch_campaign_card_title" = "Campaña de Praga";
@@ -767,7 +767,7 @@
 "face_image_footer_view_message" = "Conviértete en miembro Premium para ver todo el  “%@” en tu galería y para poder desbloquear muchas más funciones.";
 
 /*Personas*/
-"face_image_face_recognition" = "Gente";
+"face_image_face_recognition" = "Personas";
 "face_image_place_recognition" = "Lugares";
 "face_image_thing_recognition" = "Cosas";
 
@@ -796,7 +796,7 @@
 "analyze_history_empty_subtitle" = "Ahora empieze realizar el análisis para averiguar las cuales fotos se pueden obtener el rango más alto y compartalas en las redes sociales.";
 "analyze_history_analyze_left" = "Análisis que se han quedado.";
 "analyze_history_analyze_count" = "%1$d / %2$d";
-"analyze_with_instapick" = "Análisis con PhotoPick.";
+"analyze_with_instapick" = "Analizar con PhotoPick";
 "analyze_history_photos_count" = "%d  fotos. ";
 "analyze_history_start_here" = "¡Empieza por aqui!";
 "analyze_confirm_delete_title" = "¿Estas seguro que te desea borrarlo?";
@@ -809,7 +809,7 @@
 
 /*InstaPickCard*/
 "used_before_title_label" = "PhotoPick para obtener un montón de “gustos”!";
-"no_used_before_title_label" = "Analizar con PhotoPick!";
+"no_used_before_title_label" = "¡Analizar con PhotoPick!";
 "no_analysis_title_label" = "¡Consigue más PhotoPick!";
 "used_before_detail_label" = "¡Descubre cual foto obtendrá el rango más alto, analiza con PhotoPick para conseguir más “me gusta”(likes)! Tienes más análisis esperando tus fotos😉";
 "no_used_before_detail_label" = "¡Descubre cual foto obtendrá el rango más alto, analiza con PhotoPick para conseguir más “me gusta”(likes)! ¿Aún no lo has probado?";
@@ -819,9 +819,9 @@
 /*InstaPickDetailViewController*/
 "you_are_ready_to_share" = "Estás listo para compartir!";
 "instaPick_analysis_left" = "Análisis que se han quedado: %1$d / %2$d";
-"engage_with_more_hastags" = "Engranar con más #hashtags.";
+"engage_with_more_hastags" = "Escoge más #hashtags .";
 "copy_hashtags_to_clipboard" = "Copiar #hashtags al portapapeles.";
-"share_on_social_media" = "Compartir en las redes sociales!";
+"share_on_social_media" = "Compartir en redes sociales";
 "picked" = "¡ESCOGIDO!";
 "insta_pick_analyzing_bottom" = "¡Disfruta tu tiempo mientras nosotros analizamos tus fotos! 😊";
 "insta_pick_analyzing_0" = "Estamos buscando la foto que conseguiras la maxima cantidad de “gustos”. ";
@@ -831,10 +831,10 @@
 "insta_pick_analyzing_4" = "Tienes un gran álbum de fotos.";
 
 /*InstaPickPopUp*/
-"dont_show_this_again" = "No muestres esto de nuevo.";
-"instapick_analyze" = "Analizar con PhotoPick!";
-"connected_account" = "¡Puedes analizar cuál de tus fotos puede obtener más Me gusta en Instagram usando PhotoPick!";
-"instapick_description" = "Si te gustaria conectarse con tu cuenta de Instagram; podremos proporcionarte una experiencia mejor y personalizada realizando un análisis personalizado en cada uno de análisis de PhotoPick nuevo.";
+"dont_show_this_again" = "No mostrar esto de nuevo.";
+"instapick_analyze" = "¡Analizar con PhotoPick!";
+"connected_account" = "¡Puedes analizar cuál de tus fotos puede obtener más Me Gusta en Instagram usando PhotoPick!";
+"instapick_description" = "Si te conectas a tu cuenta de Instagram, podremos brindarte una mejor experiencia realizando análisis personalizados cada vez que uses PhotoPick.";
 "connected_with_instagram" = "Conéctate con Instagram";
 "connected_with_instagram_name" = "Conéctate con Instagram";
 "continue_without_connecting" = "Continuar sin conectar.";
@@ -859,7 +859,7 @@
 "there_are_no_photos" = "No hay fotos.";
 "there_are_no_albums" = "No hay álbum.";
 "instapick_selection_analyzes_left_max" = "Has seleccionado %d de fotos\n(la maxima cantidad que puedes seleccionar)";
-"free_trial_title_label" = "Analizar con PhotoPick";
+"free_trial_title_label" = "¡Analizar con PhotoPick!";
 "free_trial_detail_label" = "¡Descubre qué foto obtendrá el rango más alto, analiza con PhotoPick para más Me gusta! Ilimitado solo para ti!";
 "instapick_under_construction" = "Estamos mejorando en PhotoPick para una mejor experiencia 😉";
 "instapick_unsupported_file_type" = "Las fotos que ha seleccionado están en formato no compatible. Puedes continuar la experiencia de PhotoPick seleccionando otras fotos.";
@@ -1011,10 +1011,10 @@
 "login_support_info" = "Si tiene dificultades para registrarse, contáctenos para obtener ayuda.";
 "terms_and_privacy_policy" = "Condiciones de Uso y Política de Privacidad";
 "Temporary error occurred. Please try again later." = "Se ha ocurrido un error temporal. Por favor, intente de nuevo más tarde.";
-"face_tags_description_premium" = "Cuando active el Reconocimiento de Rostro e Imagen, las fotos que sube se agrupan por caras y objetos. Si la opción del servicio de ubicación está activada, las fotos también se agrupan por información de ubicación. En la base de esta agrupación, podremos crear historias automáticas para usted.";
+"face_tags_description_premium" = "Cuando actives el reconocimiento de rostro e imagen, las fotos que subas se agruparán por caras y objetos. Si la opción de ubicación está activada, las fotos también se agruparán por ubicación. En base a esta agrupación podremos crear historias automáticamente para ti.";
 "terms_of_use" = "Condiciones de Uso";
 "privacy_policy" = "Puedes leer el Política de Privacidad para tener más información detallada sobre los datos personales que colectamos por medio de lifebox.";
-"face_tags_description_standart" = "Cuando active el Reconocimiento de Rostro e Imagen, las fotos que sube se agrupan por caras y objetos. Si la opción del servicio de ubicación está activada, las fotos también se agrupan por información de ubicación. En la base de esta agrupación, podremos crear historias automáticas para usted.";
+"face_tags_description_standart" = "Cuando actives el reconocimiento de rostro e imagen, las fotos que subas se agruparán por caras y objetos. Si la opción de ubicación está activada, las fotos también se agruparán por ubicación. En base a esta agrupación podremos crear historias automáticamente para ti.";
 "terms_and_use_introduction_checkbox" = "He leído y apruebo el Contrato de Usuario.";
 "privacy_policy_condition" = "Política de Privacidad";
 "photo_pick_description" = "Si activa el botón y conecta su cuenta de Instagram, podemos brindarle una experiencia avanzada y personalizada al realizar análisis privados en cada nuevo análisis de PhotoPick.";
@@ -1348,7 +1348,7 @@
 "hide_single_album_success_popup_message" = "Se ha ocultado el álbum seleccionado.";
 "hide_albums_success_popup_message" = "Se han ocultado los álbums seleccionados.";
 "selected_items_limit_hide" = "No puedes ocultar más de %d elementos.";
-"hide_single_photo_completion_alert_message" = "La foto seleccionada se accederá sólo por medio del álbum de \"Oculto\".  Puedes restaurar los ocultados cuando desees. ";
+"hide_single_photo_completion_alert_message" = "La foto seleccionada solo estará disponible en el álbum “Oculto”. Puedes restaurar los elementos ocultados cuando lo desees.";
 "people_album_warning_alert_title_not_premium_and_no_image_grouping" = "Todavía no tienes un álbum de contactos !";
 "people_album_warning_alert_title_not_premium_and_image_grouping_on" = "No has podido encontrar el contacto que buscas ?";
 "people_album_warning_alert_title_premium_and_no_image_grouping" = "Todavía no tienes un álbum de contactos !";
@@ -1371,15 +1371,15 @@
 "smash_successed_simple_alert_description" = "Puedes compartir con tus amigos la foto que has editado. También puedes ir al Álbum \"Contactos\" para ocultar o eliminar personas / recuerdos que ya no desea encontrar en las listas de lifebox con un solo clic.";
 
 /*carousel pager*/
-"carousel_view_first_page_title" = "Gestionar los grupos de Contactos !";
-"carousel_view_first_page_text" = "Puedes elegir un contacto y agregar un nuevo nombre al álbum de contactos con el botón de Agregar nombre, o puedes unir los contactos en el mismo álbum seleccionando uno de los nombres existentes.";
-"carousel_view_second_page_title" = "Ocultar los Contactos no Deseados !";
-"carousel_view_second_page_text" = "Si hay contactos que ya no deseas que aparezcan en tu lista de fotos y sugerencias de página de inicio, simplemente ingresar en el álbum de contactos y decir \"Ocultar\". Los contactos no deseados se llevan automáticamente al álbum \"Oculto “con un sólo clic. Puedes restaurarlo cuando quieras.";
-"carousel_view_third_page_title" = "Eliminar los contactos no deseados !";
-"carousel_view_third_page_text" = "Si no crees que valga la pena mantener una persona y sus recuerdos, puedes tirarlos a la papelera de inmediato seleccionando la acción \"Eliminar\" en el álbum de contacto. Puedes utilizar la función de restauración dentro de los 90 días de la papelera por sí arrepientas. Si dices que no puedes dejar por siempre tus recuerdos y también quieres que no aparezcan cada momento, entonces puedes ver la acción de oculta justo encima de la eliminación.";
+"carousel_view_first_page_title" = "Administra tus grupos de personas";
+"carousel_view_first_page_text" = "Puedes seleccionar una persona y presionar “+ Agregar un nombre”. Puedes ingresar un nombre nuevo o uno que ya exista.";
+"carousel_view_second_page_title" = "Oculta personas no deseadas";
+"carousel_view_second_page_text" = "Si hay personas que ya no deseas tener en tus fotos ni en las sugerencias en la página de inicio, selecciona a la persona y presiona “Ocultar”. Las fotos de las personas no deseadas se llevarán automáticamente al álbum “Oculto”. Puedes restaurarlos cuando quieras.";
+"carousel_view_third_page_title" = "Elimina a las personas no deseadas";
+"carousel_view_third_page_text" = "Si tienes recuerdos que no valen la pena guardar, libera espacio en tu memoria seleccionando las fotos que deseas borrar y presiona “Eliminar”. Si cambias de parecer, puedes recuperarlos de la papelera en los próximos 90 días. Si no deseas borrarlos, únicamente presiona “Ocultar” y puedes recuperarlos cuando quieras.";
 "hidden_bin_album_slider_title" = "Ocultado";
-"hidden_bin_album_slider_empty" = "Todavía no tienes un álbum de contacto, objeto, lugar etc. ocultado. Puedes ocultar sólo en una vez seleccionando cualquier álbum.";
-"hidden_bin_empty" = "Todavía no tienes una foto ocultada. Simplemente seleccionar una foto y \"dices\"  Ocultar.";
+"hidden_bin_album_slider_empty" = "Todavía no tienes fotos o vídeos ocultos.";
+"hidden_bin_empty" = "Todavía no tienes fotos o vídeos ocultos. Para ocultar, simplemente selecciona una foto y presiona “ocultar”.";
 "hidden_bin_navbar_title" = "Oculto";
 "unhide_popup_text" = "El/los elemento(s) se moverán a las carpetas antiguas y se podrá ver en las listas de lifebox. Deseas continuar ?";
 
@@ -1387,7 +1387,7 @@
 "divorce_card_title" = "Los amores que se eliminarán de los recuerdos !";
 "trash_bin_album_slider_title" = "Papelera de reciclaje";
 "trash_bin_album_slider_empty" = "Todavía no hay un álbum eliminado en la papelera.";
-"trash_bin_empty" = "Todavía no hay un elemento eliminado en la papelera";
+"trash_bin_empty" = "Aún no hay elementos eliminados en la papelera.";
 "delete_confirmation_popup_title" = "Mover a la papelera";
 "delete_confirmation_popup_text" = "El/Los elementos seleccionados se moverá a la papelera. Podrás restaurar los contenidos dentro de 90 días. Si hace falta liberar la memoria  primero asegurarte de vaciar la papelera.";
 "restore_confirmation_popup_title" = "Restaurar";
@@ -1491,10 +1491,10 @@
 "my_packages_description" = "Si no puedes ver las suscripciones actuales, puedes restaurar con Renovar mis suscripciones";
 "photo_video_auto_sync_settings" = "Copia de seguridad automática";
 "ubsent_contacts_in_lifebox" = "No hay contactos registrados en lifebox.";
-"auto_sync_albums_description" = "Puedes seleccionar sus álbumes que deseas hacer copia de seguridad automática.";
+"auto_sync_albums_description" = "Puedes seleccionar los álbumes que quieres sincronizar y subir automáticamente.";
 "tabbar_item_home_label" = "Página Principal";
 "tabbar_item_gallery_label" = "Galería";
-"tabbar_item_contacts_label" = "Guía";
+"tabbar_item_contacts_label" = "Contactos";
 "tabbar_item_all_files_label" = "Todos los archivos";
 "see_features" = "Mostrar las funciones";
 "middle_user_package_description" = "+ Análisis de 15 PhotoPick";
@@ -1542,8 +1542,8 @@
 "free_up_space_in_progress" = "Todavía no está preparado tu lista de archivos repetitivos, por favor volver a probarlo más tarde.";
 "all_people_become_premium_text" = "Ser miembro Premium para ver todos los contactos!";
 "no_people_become_premium_text" = "No se pudo identificar ningún contacto. Ser miembro Premium para ver los contactos y poder acceder a más funciones!";
-"face_image_enable" = "Activar la agrupación de Cara & Objeto";
-"face_image_enable_message_text" = "Se agrupan de acuerdo con la cara y objetos las fotos que cargas cuando se active la función de identificación de Cara & Objeto.";
+"face_image_enable" = "Activar agrupación de caras y objetos";
+"face_image_enable_message_text" = "Al activarlo, las fotos se agruparán según caras, objetos y otras características similares en ellas.";
 "face_image_enable_snack_text" = "Se están agrupando tus fotos con la identificación de Cara & Objeto, por favor volver a controlarlo más tarde.";
 "file_info_people" = "Activar la función de identificación de cara & objetivo para ver los contactos en las fotos.";
 "removed_from_album_success" = "El objetivo (los objetivos) se removió/ removieron con éxito.";
@@ -1563,7 +1563,7 @@
 "contact_phase2_delete_duplicates_progress_title" = "Eliminar entradas repetidas en su teléfono";
 "contact_phase2_delete_duplicates_progress_message" = "¡Las entradas repetidas se eliminarán de su teléfono!";
 "contact_phase2_back_up_contacts_confirm_title" = "¿Quieres hacer una copia de seguridad de tu guía telefónica?";
-"contact_phase2_back_up_contacts_confirm_message" = "Ya tienes una copia de seguridad. ¿Quieres sobrescribirlas sobre la existente?";
+"contact_phase2_back_up_contacts_confirm_message" = "Ya tienes una copia de seguridad. ¿Quieres sobrescribir sobre la existente?";
 "contact_phase2_contact_list_navbar_title" = "Lista de Contactos";
 "contact_phase2_contact_list_title" = "Lista de Contactos";
 "contact_phase2_contact_list_info" = "Se hicieron copias de seguridad de %1$d entradas durante la copia de seguridad realizada el %2$@";
@@ -1592,9 +1592,9 @@
 "contact_phase2_backup_contacts_button" = "Copia Ahora";
 "contact_phase2_small_card_backup_message" = "Fecha en la que la copia de seguridad se actualizó por última vez ";
 "contact_phase2_small_card_backup_button" = "Ver copias de seguridad";
-"contact_phase2_small_card_duplicates_message" = "Puede editar la guía telefónica borrando las entradas repetidas en su teléfono.";
+"contact_phase2_small_card_duplicates_message" = "Puedes editar la guía telefónica borrando las entradas repetidas en tu teléfono.";
 "contact_phase2_small_card_duplicates_button" = "Eliminar entradas repetidas en su teléfono";
-"contact_phase2_big_card_backup_message" = "¡Almacene de forma segura sus entradas de la guía telefónica en lifebox!";
+"contact_phase2_big_card_backup_message" = "¡Almacena de forma segura tus contactos en lifebox!";
 "contact_phase2_big_card_contacts" = "Contactos";
 "contact_phase2_big_card_see_contacts_button" = "Ver tus Contactos";
 "contact_phase2_big_card_autobackup_format" = "Copia de seguridad automática: %@";
@@ -1686,7 +1686,7 @@
 "photo_edit_filter_rise" = "Paris";
 "photo_edit_filter_starlit" = "Amsterdam";
 "photo_edit_filter_whisper" = "Bangkok";
-"photo_edit_adjust" = "Editar";
+"photo_edit_adjust" = "Cortar";
 "photo_edit_light" = "Ligero";
 "photo_edit_color" = "Color";
 "photo_edit_effect" = "Efecto";
@@ -1707,8 +1707,8 @@
 "photo_edit_adjustment_blur" = "Difuminar";
 "photo_edit_adjustment_vignette" = "Viñeta";
 "photo_edit_tabbar_filters" = "Filtrar";
-"photo_edit_tabbar_adjustments" = "Editar";
-"photo_edit_ratio_free" = "Independiente";
+"photo_edit_tabbar_adjustments" = "Cortar";
+"photo_edit_ratio_free" = "Libre";
 "photo_edit_ratio_original" = "Original";
 "digicel_quota_cancel_FJ" = "Puede cancelar o gestionar su membresía de Lifebox por medio de la aplicación My Digicel.";
 "digicel_quota_cancel_WS" = "Puede cancelar o gestionar su membresía de Lifebox por medio de la aplicación My Digicel.";
@@ -1793,10 +1793,10 @@
 "fun_close_alert_left_button" = "Continua editando";
 "fun_close_alert_right_button" = "Abandona";
 "Upload Music" = "Cargar archivos";
-"private_share_option" = "Comparte con la persona";
-"private_share_start_page_name" = "Comparte";
-"private_share_start_page_people_selection_section_name" = "Añade a los  contactos";
-"private_share_start_page_enter_user_field" = "Introduce el número de correo electrónico o GSM (con código de país)";
+"private_share_option" = "Compartir con otra persona";
+"private_share_start_page_name" = "Compartir";
+"private_share_start_page_people_selection_section_name" = "Agregar contacto";
+"private_share_start_page_enter_user_field" = "Introducir la dirección de correo electrónico, nombre del contacto o número de teléfono (con código de país)";
 "private_share_start_page_suggestions_section" = "Recomendaciones";
 "private_share_start_page_shared_with_section" = "Contactos compartidos";
 "private_share_start_page_add_message_section_name" = "Añade un mensaje";
@@ -1808,34 +1808,34 @@
 "private_share_start_page_share_duration_4" = "1 semana";
 "private_share_start_page_share_duration_5" = "1 mes";
 "private_share_start_page_share_duration_6" = "1 año";
-"private_share_start_page_share_button" = "Comparte";
-"private_share_start_page_cancel_button" = "Cancela";
-"private_share_start_page_role_1" = "Editor";
-"private_share_start_page_role_2" = "Personas que han visto";
+"private_share_start_page_share_button" = "Compartir";
+"private_share_start_page_cancel_button" = "Cancelar";
+"private_share_start_page_role_1" = "Puede editar";
+"private_share_start_page_role_2" = "Puede ver";
 "private_share_role_selection_page_name" = "Acceso";
-"private_share_role_selection_role_1" = "Editor";
-"private_share_role_selection_role_2" = "Personas que han visto";
+"private_share_role_selection_role_1" = "Puede editar";
+"private_share_role_selection_role_2" = "Puede ver";
 "private_share_msisdn_format" = "Por favor, introduce un número de GSM válido!";
 "private_share_start_page_share_success" = "La compartición lograda.";
 "private_share_cancel_confirm" = "¿Estás seguro de que quieres salir?";
 "private_share_details_page_name" = "Artículos compartidos";
-"private_share_shared_by_me_tab" = "lo que comparto";
-"private_share_shared_with_me_tab" = "Compartidos";
+"private_share_shared_by_me_tab" = "Lo que he compartido";
+"private_share_shared_with_me_tab" = "Compartidos conmigo";
 "private_share_info_section_name" = "Datos de compartición";
 "private_share_info_number_of_people" = "Se compartió con la persona %d .";
 "private_share_info_role_1" = "Dueño de compartición";
-"private_share_info_role_2" = "Editor";
-"private_share_info_role_3" = "Personas que han visto";
+"private_share_info_role_2" = "Puede editar";
+"private_share_info_role_3" = "Puede ver";
 "private_share_email_format" = "Por favor, introduce un correo electrónico válido!";
 "private_share_shared_with_me_empty_page" = "Todavía no hay archivos compartidos contigo.";
-"private_share_shared_by_me_empty_page" = "Todavía no tienes un archivo que has compartido.";
+"private_share_shared_by_me_empty_page" = "Todavía no has compartido archivos.";
 "private_share_end_sharing_success" = "Se paro la compartición.";
 "private_share_end_sharing_confirm" = "¿Estás seguro de que quieres parar compartir?";
 "private_share_end_sharing_action_title" = "Para la compartición";
 "private_share_who_has_access_page_name" = "Los que tienen el acceso";
 "private_share_who_has_access_role_1" = "El que comparte";
-"private_share_who_has_access_role_2" = "Editor";
-"private_share_who_has_access_role_3" = "Personas que han visto";
+"private_share_who_has_access_role_2" = "Puede editar";
+"private_share_who_has_access_role_3" = "Puede ver";
 "private_share_who_has_access_end_share" = "Para la compartición";
 "private_share_inner_folder_empty_page" = "Carpeta vacía";
 "private_share_info_role_4" = "Otra";
@@ -1844,11 +1844,11 @@
 "private_leave_sharing_confirm" = "¿Estás seguro de que quieres salir de la compartición?";
 "private_share_leave_sharing_action_title" = "Deja de la compartición";
 "private_share_who_has_access_role_4" = "Otra";
-"private_share_all_files_section_1" = "Compartidos";
+"private_share_all_files_section_1" = "Compartidos conmigo";
 "private_share_all_files_section_1_see_all" = "Ver todo";
 "private_share_all_files_section_2" = "Mis archivos";
-"private_share_access_role_1" = "Editor";
-"private_share_access_role_2" = "Personas que han visto";
+"private_share_access_role_1" = "Puede editar";
+"private_share_access_role_2" = "Puede ver";
 "private_share_access_role_3" = "Quita";
 "private_share_access_role_4" = "Otra";
 "private_share_access_page_name" = "Acceso";
@@ -1871,14 +1871,14 @@
 "signup_redesign_etk_checkbox_desc" = "He leído %1$S y lo acepto.";
 "signup_redesign_etk_link" = "Al texto de permiso de datos y mensajes electrónicos comerciales";
 "signup_redesign_eula_accept_button" = "Confirmo";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "Invitar";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Se le dirigirá a un sitio diferente";
 "warning_popup_print_redirect_message" = "Se le dirige a un sitio diferente para que se impriman sus fotos";
 "warning_popup_print_redirect_proceed_button" = "Seguir";
 "warning_popup_print_redirect_cancel_button" = "Cancelar";
-"settings_item_invitation" = "";
+"settings_item_invitation" = "Invitar a un amigo";
 "title_invitation_campaign" = "Detalles de la Campaña";
 "title_invitation_link" = "Enlace de Invitación especial para usted";
 "title_invitation_friends" = "Aquellos que aceptan tu invitación (%d Contacto)";
@@ -1886,8 +1886,8 @@
 "invitation_snackbar_copy" = "El enlace de tu invitación se ha copiado correctamente";
 "invitation_share" = "Compartir Enlace";
 "invitation_friends" = "Aquellos que lo aceptan";
-"invitation_snackbar_copy_exceed" = "";
-"invitation_snackbar_share_exceed" = "";
+"invitation_snackbar_copy_exceed" = "Lo sentimos, el límite de regalos del enlace de invitación ha expirado";
+"invitation_snackbar_share_exceed" = "Lo sentimos, el límite de regalos del enlace de invitación ha expirado";
 
 /*Accessibility*/
 "play_captcha" = "";
@@ -1897,3 +1897,6 @@
 "container_music" = "";
 "container_favourite" = "";
 "container_trashed" = "";
+
+/*Chatbot*/
+"chatbot_menu_title" = "";

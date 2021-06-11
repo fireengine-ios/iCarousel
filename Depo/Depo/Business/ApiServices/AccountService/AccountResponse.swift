@@ -559,6 +559,10 @@ final class TwoFAChallengeParametersResponse: ObjectRequestResponse {
     }
 }
 
+struct AccountTicket: Codable {
+    let ticket: String
+}
+
 /// MAYBE WILL BE USED
 //class InternetDataUsageResponse: ObjectRequestResponse {
 //

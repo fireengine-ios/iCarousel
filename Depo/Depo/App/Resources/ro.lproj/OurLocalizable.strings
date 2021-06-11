@@ -1829,14 +1829,14 @@
 "signup_redesign_etk_checkbox_desc" = "Am citit și accept %1$S.";
 "signup_redesign_etk_link" = "Mesaj Electronic Comercial și Text De Autorizare A Datelor";
 "signup_redesign_eula_accept_button" = "Confirm";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "Invită";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Sunteți redirecționat către un alt site";
 "warning_popup_print_redirect_message" = "Pentru ca fotografiile dvs. să poată fi tipărite sunteți redirecționat către un alt site";
 "warning_popup_print_redirect_proceed_button" = "Continuă";
 "warning_popup_print_redirect_cancel_button" = "Anulare";
-"settings_item_invitation" = "";
+"settings_item_invitation" = "Invită-ţi Prietenul";
 "title_invitation_campaign" = "Detalii Campanie";
 "title_invitation_link" = "Link de invitație special pentru dvs.";
 "title_invitation_friends" = "Persoanele care au acceptat invitația ta  (%d Persoane De Contact)";
@@ -1844,8 +1844,8 @@
 "invitation_snackbar_copy" = "Linkul tău de invitație a fost copiat cu succes";
 "invitation_share" = "Partajează Link-ul";
 "invitation_friends" = "Persoanele care au acceptat invitația ta";
-"invitation_snackbar_copy_exceed" = "";
-"invitation_snackbar_share_exceed" = "";
+"invitation_snackbar_copy_exceed" = "Ne pare rău, limita de cadou a linkului de invitație a expirat.";
+"invitation_snackbar_share_exceed" = "Ne pare rău, limita de cadou a linkului de invitație a expirat.";
 
 /*Accessibility*/
 "play_captcha" = "";
@@ -1855,3 +1855,6 @@
 "container_music" = "";
 "container_favourite" = "";
 "container_trashed" = "";
+
+/*Chatbot*/
+"chatbot_menu_title" = "";

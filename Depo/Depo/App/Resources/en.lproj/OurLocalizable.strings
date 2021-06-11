@@ -178,7 +178,7 @@
 "New PlayList" = "New PlayList";
 "New Album" = "New Album";
 "New Folder" = "New Folder";
-"Print" = "Print";
+"Print" = "Foto Baskı";
 "Make album cover" = "Make album cover";
 "Add To Album" = "Add To Album";
 "Remove From Album" = "Remove From Album";
@@ -1905,3 +1905,6 @@
 "container_music" = "Music";
 "container_favourite" = "Favourite";
 "container_trashed" = "Trashed";
+
+/*Chatbot*/
+"chatbot_menu_title" = "Lifebox Support";

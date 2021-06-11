@@ -14,8 +14,8 @@ private struct RemoteConfigKeys {
     static let loginSupportAttempts = "login_support_form_treshold"
     static let signupSupportAttempts = "signup_support_form_treshold"
     static let printOptionEnabled = "print_option_enabled"
+    static let chatbotMenuEnabled = "chatbot_menu_enabled"
 }
-
 
 final class FirebaseRemoteConfig {
     static var shared = FirebaseRemoteConfig()
@@ -64,6 +64,15 @@ final class FirebaseRemoteConfig {
             let attempts = NumericConstants.showSupportViewAttempts
             debugLog("return constant = \(attempts) attempts for \(fetchKey)")
             completion(attempts)
+        }
+    }
+
+    func fetchChatbotMenuEnable(completion: @escaping ValueHandler<Bool>) {
+        let fetchKey = RemoteConfigKeys.chatbotMenuEnabled
+        fetch(key: fetchKey) {
+            let chatMenuEnable = self.remoteConfig.configValue(forKey: fetchKey).boolValue
+            debugLog("fetched \(chatMenuEnable) attempts for \(fetchKey)")
+            completion(chatMenuEnable)
         }
     }
 

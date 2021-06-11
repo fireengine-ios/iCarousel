@@ -1843,14 +1843,14 @@
 "signup_redesign_etk_checkbox_desc" = "Я прочитал и принимаю 1$S.";
 "signup_redesign_etk_link" = "Коммерческое Электронное Сообщение и Текст Подтверждения на Передачу Данных";
 "signup_redesign_eula_accept_button" = "Подтверждаю";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "Пригласить";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Вы перенаправляетесь на другой сайт";
 "warning_popup_print_redirect_message" = "Вы перенаправляетесь на другой сайт для возможности распечатывания ваших фотографий";
 "warning_popup_print_redirect_proceed_button" = "Продолжить";
 "warning_popup_print_redirect_cancel_button" = "Отмена";
-"settings_item_invitation" = "";
+"settings_item_invitation" = "Пригласить Друзей";
 "title_invitation_campaign" = "Подробности Кампании";
 "title_invitation_link" = "Специальная для Вас Ссылка-Приглашение";
 "title_invitation_friends" = "Принявшие Ваше Приглашение (%d человек)";
@@ -1869,3 +1869,6 @@
 "container_music" = "";
 "container_favourite" = "";
 "container_trashed" = "";
+
+/*Chatbot*/
+"chatbot_menu_title" = "";

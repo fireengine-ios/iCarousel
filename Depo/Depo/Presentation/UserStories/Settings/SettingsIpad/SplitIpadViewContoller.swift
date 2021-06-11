@@ -115,4 +115,10 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: inNeedOfMail)])
         }
     }
+
+    func goToChatbot() {
+        if let left = leftController {
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().chatbot])
+        }
+    }
 }
