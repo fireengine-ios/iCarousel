@@ -8,5 +8,7 @@
 	<integer>1000</integer>
 	<key>print_option_enabled</key>
 	<false/>
+	<key>print_option_enabled_languages</key>
+	<string>tr</string>
 </dict>
 </plist>
