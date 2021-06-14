@@ -172,7 +172,7 @@
 "New PlayList" = "Yeni Çalma Listesi";
 "New Album" = "Yeni Albüm";
 "New Folder" = "Yeni Klasör";
-"Print" = "Yazdır";
+"Print" = "Foto Baskı";
 "Make album cover" = "Album kapağı yap";
 "Add To Album" = "Albüme Ekle";
 "Remove From Album" = "Albümden Kaldır";
@@ -1873,3 +1873,7 @@
 "container_music" = "";
 "container_favourite" = "";
 "container_trashed" = "";
+
+/*Chatbot*/
+"chatbot_menu_title" = "Lifebox Destek";
+"print_photo_home_card_button_title" = "";
