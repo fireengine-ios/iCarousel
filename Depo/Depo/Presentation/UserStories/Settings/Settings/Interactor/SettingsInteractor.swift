@@ -107,10 +107,12 @@ final class SettingsInteractor: SettingsInteractorInput {
     }
 
     func fetchChatbotRemoteConfig() {
+        #if LIFEBOX
         FirebaseRemoteConfig.shared.fetchChatbotMenuEnable { [weak self] in
             self?.isChatMenuEnabled = $0
             self?.populateDataForCells()
         }
+        #endif
     }
 
     private func getUserStatus() {

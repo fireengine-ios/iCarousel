@@ -58,10 +58,7 @@ extension SettingsPresenter: SettingsViewOutput {
     }
     
     func viewWillBecomeActive() {
-        #if LIFEBOX
         interactor.fetchChatbotRemoteConfig()
-        #endif
-
         interactor.getCellsData()
         
         startAsyncOperation()
