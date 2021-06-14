@@ -1831,14 +1831,14 @@
 "signup_redesign_etk_checkbox_desc" = "Прочитав і приймаю %1$S.";
 "signup_redesign_etk_link" = "Комерційне Електронне Повідомлення Та Текст Дозволу Обробки Даних";
 "signup_redesign_eula_accept_button" = "Погоджую";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "Запроси";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Вас перенаправляють на інший сайт";
 "warning_popup_print_redirect_message" = "Ви будете перенаправлені на інший сайт для друку ваших фотографій";
 "warning_popup_print_redirect_proceed_button" = "Продовження";
 "warning_popup_print_redirect_cancel_button" = "Скасування";
-"settings_item_invitation" = "";
+"settings_item_invitation" = "Запроси Друга";
 "title_invitation_campaign" = "Деталі Кампанії";
 "title_invitation_link" = "Спеціальна Запрошувальна Посилання Для Вас";
 "title_invitation_friends" = "Прийняли запрошення (%d Контакта)";
@@ -1846,8 +1846,8 @@
 "invitation_snackbar_copy" = "Ваша запрошувальна посилання була успішно скопійована";
 "invitation_share" = "Поділися Посиланням";
 "invitation_friends" = "Прийняли Твоє Запрошення";
-"invitation_snackbar_copy_exceed" = "";
-"invitation_snackbar_share_exceed" = "";
+"invitation_snackbar_copy_exceed" = "На жаль, термін дії посилання для запрошення закінчився.";
+"invitation_snackbar_share_exceed" = "На жаль, термін дії посилання для запрошення закінчився.";
 
 /*Accessibility*/
 "play_captcha" = "";
@@ -1857,3 +1857,7 @@
 "container_music" = "";
 "container_favourite" = "";
 "container_trashed" = "";
+
+/*Chatbot*/
+"chatbot_menu_title" = "";
+"print_photo_home_card_button_title" = "";

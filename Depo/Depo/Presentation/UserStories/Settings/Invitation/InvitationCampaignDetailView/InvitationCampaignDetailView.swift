@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import WebKit
 
 class InvitationCampaignDetailView: UIView, NibInit {
 
     @IBOutlet weak var campaignDetailImageView: LoadingImageView!
-    @IBOutlet weak var campaignDetailTextView: UITextView!
+    @IBOutlet weak var campaignDetailWebView: WKWebView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var closeButtonBGView: UIView!
 
@@ -71,10 +72,27 @@ class InvitationCampaignDetailView: UIView, NibInit {
         campaignDetailImageView.setLogs(enabled: true)
         let imageUrl = URL(string: campaign.value.image)
         campaignDetailImageView.loadImageData(with: imageUrl)
-        self.campaignDetailTextView.text = campaign.value.content
+        campaignDetailWebView.loadHTMLString(campaign.value.content, baseURL: nil)
     }
 
     @IBAction func closeButtonTapped(_ sender: Any) {
         removeFromSuperview()
+    }
+}
+
+extension InvitationCampaignDetailView: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+
+        if navigationAction.navigationType == .linkActivated {
+            if let url = navigationAction.request.url {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
+            decisionHandler(.cancel)
+            return
+        }
+
+        decisionHandler(.allow)
     }
 }
