@@ -14,7 +14,9 @@ final class PrintService {
 
     static var isEnabled: Bool {
         #if LIFEBOX
-        return Device.isTurkishLocale && FirebaseRemoteConfig.shared.printOptionEnabled
+        let remoteConfig = FirebaseRemoteConfig.shared
+        let deviceLocale = Device.locale.lowercased()
+        return remoteConfig.printOptionEnabled && remoteConfig.printOptionEnabledLanguages.contains(deviceLocale)
         #else
         return false
         #endif
