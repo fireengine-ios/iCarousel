@@ -65,8 +65,8 @@ final class InvitationCard: BaseCardView {
     override func deleteCard() {
         super.deleteCard()
         CardsManager.default.stopOperationWith(type: .invitation)
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .invitation(.close))
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.InvitationEventValue.invitation.text, action: NetmeraEventValues.InvitationEventValue.dismiss.text))
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .homePageCard(.close))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.HomePageCardEventValue.invitation.text, action: NetmeraEventValues.HomePageCardEventValue.dismiss.text))
     }
 
     @IBAction func playButtonTapped(_ sender: Any) {
@@ -92,8 +92,8 @@ final class InvitationCard: BaseCardView {
     }
 
     @IBAction func bottomButtonTapped(_ sender: Any) {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .invitation(.letsSee))
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.InvitationEventValue.invitation.text, action: NetmeraEventValues.InvitationEventValue.detail.text))
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .invitation, eventLabel: .homePageCard(.letsSee))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.HomepageCard(cardName: NetmeraEventValues.HomePageCardEventValue.invitation.text, action: NetmeraEventValues.HomePageCardEventValue.detail.text))
 
         let router = RouterVC()
 

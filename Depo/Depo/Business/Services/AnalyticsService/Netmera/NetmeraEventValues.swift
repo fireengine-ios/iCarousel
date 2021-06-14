@@ -668,8 +668,9 @@ enum NetmeraEventValues {
         }
     }
 
-    enum InvitationEventValue {
+    enum HomePageCardEventValue {
         case invitation
+        case photoPrint
         case detail
         case dismiss
 
@@ -677,6 +678,8 @@ enum NetmeraEventValues {
             switch self {
             case .invitation:
                 return "Invitation"
+            case .photoPrint:
+                return "PhotoPrint"
             case .detail:
                 return "Detail"
             case .dismiss:
@@ -684,4 +687,5 @@ enum NetmeraEventValues {
             }
         }
     }
+
 }

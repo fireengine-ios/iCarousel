@@ -412,7 +412,10 @@ struct TextConstants {
 
     // MARK: Home Invitation card
     static let homeInvitationCardButtn = NSLocalizedString("invitation_home_card_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+
+    // MARK: Home PhotoPrint card
+    static let homePhotoPrintCardButton = NSLocalizedString("print_photo_home_card_button_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     // MARK: Home page like filter view
     static let homeLikeFilterHeader = NSLocalizedString("Filter Card", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let homeLikeFilterTitle = NSLocalizedString("Did you like this filter?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
