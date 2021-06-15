@@ -25,6 +25,8 @@ class ChatbotViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ChatbotScreen())
+        AnalyticsService().logScreen(screen: .chatbot)
     }
 
     private func getTicket() {

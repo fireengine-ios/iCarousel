@@ -37,7 +37,6 @@ struct RouteRequests {
         }
     }()
     
-    
     static let paycellShortUrlString: String = {
         switch currentServerEnvironment {
         case .test: return "https://tcloudstb.turkcell.com.tr/"
