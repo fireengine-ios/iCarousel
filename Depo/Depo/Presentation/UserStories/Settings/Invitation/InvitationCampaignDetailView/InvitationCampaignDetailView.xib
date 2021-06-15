@@ -12,9 +12,6 @@
         <array key="TurkcellSaturaBol.ttf">
             <string>TurkcellSaturaBol</string>
         </array>
-        <array key="TurkcellSaturaMed.ttf">
-            <string>TurkcellSaturaMed</string>
-        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -45,13 +42,6 @@
                                 <constraint firstAttribute="trailing" secondItem="giN-7V-UVh" secondAttribute="trailing" id="xQY-IY-nii"/>
                             </constraints>
                         </view>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="LRJ-yk-Avq">
-                            <rect key="frame" x="9" y="149" width="296" height="332"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <color key="textColor" red="0.37254901960784315" green="0.37254901960784315" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="12"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HRe-eH-6H8">
                             <rect key="frame" x="0.0" y="480" width="313" height="77"/>
                             <subviews>
@@ -81,6 +71,14 @@
                                 <constraint firstAttribute="bottom" secondItem="RvJ-mw-LaC" secondAttribute="bottom" constant="15" id="rc0-S8-QCB"/>
                             </constraints>
                         </view>
+                        <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLB-Gx-tmk">
+                            <rect key="frame" x="8" y="152" width="297" height="328"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <wkWebViewConfiguration key="configuration">
+                                <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                <wkPreferences key="preferences"/>
+                            </wkWebViewConfiguration>
+                        </wkWebView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -91,15 +89,15 @@
                         <constraint firstAttribute="height" constant="557" id="D0l-gv-7yx">
                             <variation key="heightClass=regular-widthClass=regular" constant="696"/>
                         </constraint>
+                        <constraint firstItem="HRe-eH-6H8" firstAttribute="top" secondItem="kLB-Gx-tmk" secondAttribute="bottom" id="GPR-tc-Dcn"/>
                         <constraint firstItem="dcy-2d-1Rg" firstAttribute="leading" secondItem="bGj-pN-5Vb" secondAttribute="leading" id="IkZ-M0-Vsf"/>
-                        <constraint firstAttribute="bottom" secondItem="LRJ-yk-Avq" secondAttribute="bottom" constant="76" id="Num-aU-8Zs"/>
                         <constraint firstAttribute="bottom" secondItem="HRe-eH-6H8" secondAttribute="bottom" id="Q8G-EF-ANk"/>
+                        <constraint firstItem="kLB-Gx-tmk" firstAttribute="top" secondItem="dcy-2d-1Rg" secondAttribute="bottom" constant="7" id="UAb-f2-wLF"/>
                         <constraint firstItem="HRe-eH-6H8" firstAttribute="leading" secondItem="bGj-pN-5Vb" secondAttribute="leading" id="YxR-ou-e3p"/>
+                        <constraint firstAttribute="trailing" secondItem="kLB-Gx-tmk" secondAttribute="trailing" constant="8" id="aZN-bp-ztT"/>
                         <constraint firstAttribute="trailing" secondItem="HRe-eH-6H8" secondAttribute="trailing" id="de9-MW-FI7"/>
-                        <constraint firstAttribute="trailing" secondItem="LRJ-yk-Avq" secondAttribute="trailing" constant="8" id="dhv-GN-hsj"/>
                         <constraint firstAttribute="trailing" secondItem="dcy-2d-1Rg" secondAttribute="trailing" id="tnw-9o-fSe"/>
-                        <constraint firstItem="LRJ-yk-Avq" firstAttribute="leading" secondItem="bGj-pN-5Vb" secondAttribute="leading" constant="9" id="xHP-aA-Zc9"/>
-                        <constraint firstItem="LRJ-yk-Avq" firstAttribute="top" secondItem="dcy-2d-1Rg" secondAttribute="bottom" constant="4" id="xdq-CO-18A"/>
+                        <constraint firstItem="kLB-Gx-tmk" firstAttribute="leading" secondItem="bGj-pN-5Vb" secondAttribute="leading" constant="8" id="ype-1d-gzJ"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -120,11 +118,11 @@
             </constraints>
             <connections>
                 <outlet property="campaignDetailImageView" destination="giN-7V-UVh" id="iCm-NS-aLX"/>
-                <outlet property="campaignDetailTextView" destination="LRJ-yk-Avq" id="rSX-Y8-2CN"/>
+                <outlet property="campaignDetailWebView" destination="kLB-Gx-tmk" id="c97-an-cvE"/>
                 <outlet property="closeButton" destination="RvJ-mw-LaC" id="ARu-YE-FJc"/>
                 <outlet property="closeButtonBGView" destination="HRe-eH-6H8" id="9On-87-wCa"/>
             </connections>
-            <point key="canvasLocation" x="-1415.2" y="-125.4872563718141"/>
+            <point key="canvasLocation" x="-2079" y="-196"/>
         </view>
     </objects>
     <resources>
