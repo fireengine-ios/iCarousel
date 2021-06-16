@@ -61,15 +61,16 @@ enum SettingsTypes: Int {
 
         result.append(SettingsTypes.allSectionThreeTypes)
 
-        if isChatbotShown && !allSectionFourTypes.contains(chatbot) {
-            SettingsTypes.allSectionFourTypes.insert(chatbot, at: 1)
-        } else if !isChatbotShown && allSectionFourTypes.contains(chatbot){
-            SettingsTypes.allSectionFourTypes.remove(chatbot)
+        if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
+            if isChatbotShown && !allSectionFourTypes.contains(chatbot) {
+                SettingsTypes.allSectionFourTypes.insert(chatbot, at: 1)
+            } else if !isChatbotShown && allSectionFourTypes.contains(chatbot){
+                SettingsTypes.allSectionFourTypes.remove(chatbot)
+            }
         }
 
         result.append(SettingsTypes.allSectionFourTypes)
 
         return result
     }
-
 }
