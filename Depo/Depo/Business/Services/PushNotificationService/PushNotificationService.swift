@@ -499,13 +499,15 @@ final class PushNotificationService {
     }
 
     private func openChatbot() {
-        #if LIFEBOX
-        FirebaseRemoteConfig.shared.fetchChatbotMenuEnable { [weak self] in
-            if $0 {
-                self?.pushTo(self?.router.chatbot)
+        if Device.locale == "tr" || Device.locale == "en" {
+            #if LIFEBOX
+            FirebaseRemoteConfig.shared.fetchChatbotMenuEnable { [weak self] in
+                if $0 {
+                    self?.pushTo(self?.router.chatbot)
+                }
             }
+            #endif
         }
-        #endif
     }
     
     private func openSharedController(type: PrivateShareType) {
