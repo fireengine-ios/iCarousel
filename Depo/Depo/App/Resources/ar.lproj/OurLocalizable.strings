@@ -1841,14 +1841,14 @@
 "signup_redesign_etk_checkbox_desc" = "قرأت %1$S وأوافق عليها.";
 "signup_redesign_etk_link" = "نص الرسائل الإلكترونية التجارية وإذن البيانات";
 "signup_redesign_eula_accept_button" = "أوافق";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "أدع";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "تتم إعادة توجيهك إلى موقع مختلف.";
 "warning_popup_print_redirect_message" = "تتم إعادة توجيهك إلى موقع مختلف من أجل الحصول على طباعة صورك.";
 "warning_popup_print_redirect_proceed_button" = "واصل";
 "warning_popup_print_redirect_cancel_button" = "إلغاء";
-"settings_item_invitation" = "";
+"settings_item_invitation" = "أدع صديقك";
 "title_invitation_campaign" = "تفاصيل الحملة";
 "title_invitation_link" = "رابط دعوة خاص بك";
 "title_invitation_friends" = "الموفقون على دعوتك (%d  شخصا)";
@@ -1856,8 +1856,8 @@
 "invitation_snackbar_copy" = "تم نسخ رابط الدعوة الخاص بك بنجاح.";
 "invitation_share" = "قم بمشاركة الرابط";
 "invitation_friends" = "الموفقون على دعوتك";
-"invitation_snackbar_copy_exceed" = "";
-"invitation_snackbar_share_exceed" = "";
+"invitation_snackbar_copy_exceed" = "عذرًا، لقد انتهت صلاحية حد هدية رابط الدعوة.";
+"invitation_snackbar_share_exceed" = "عذرًا، لقد انتهت صلاحية حد هدية رابط الدعوة.";
 
 /*Accessibility*/
 "play_captcha" = "";
@@ -1867,3 +1867,7 @@
 "container_music" = "";
 "container_favourite" = "";
 "container_trashed" = "";
+
+/*Chatbot*/
+"chatbot_menu_title" = "";
+"print_photo_home_card_button_title" = "";

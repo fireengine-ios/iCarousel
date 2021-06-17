@@ -2137,14 +2137,14 @@ Please check I have understood the intended command here*/
 "signup_redesign_etk_checkbox_desc" = "J'ai lu %1$S et je l'accepte.";
 "signup_redesign_etk_link" = "Le message électronique commercial et texte d'autorisation de données";
 "signup_redesign_eula_accept_button" = "Je confirme";
-"invitation_home_card_button_title" = "";
+"invitation_home_card_button_title" = "Invitez";
 
 /*Print redirection warning*/
 "warning_popup_print_redirect_title" = "Vous êtes dirigé vers un autre site";
 "warning_popup_print_redirect_message" = "Vous êtes dirigé vers un autre site pour imprimer vos photos";
 "warning_popup_print_redirect_proceed_button" = "Continuation";
 "warning_popup_print_redirect_cancel_button" = "Annulation";
-"settings_item_invitation" = "";
+"settings_item_invitation" = "Invitez un ami";
 "title_invitation_campaign" = "Détails de la Campagne";
 "title_invitation_link" = "Lien d'Invitation Spéciale Pour Vous";
 "title_invitation_friends" = "Ceux qui ont accepté son invitation (%d Personnes)";
@@ -2152,8 +2152,8 @@ Please check I have understood the intended command here*/
 "invitation_snackbar_copy" = "Votre lien d'invitation a été copié avec succès";
 "invitation_share" = "Partagez le lien";
 "invitation_friends" = "Ceux qui ont accepté son invitation";
-"invitation_snackbar_copy_exceed" = "";
-"invitation_snackbar_share_exceed" = "";
+"invitation_snackbar_copy_exceed" = "Désolé, la limite de cadeaux du lien d'invitation a expiré.";
+"invitation_snackbar_share_exceed" = "Désolé, la limite de cadeaux du lien d'invitation a expiré.";
 
 /*Accessibility*/
 "play_captcha" = "";
@@ -2163,3 +2163,7 @@ Please check I have understood the intended command here*/
 "container_music" = "";
 "container_favourite" = "";
 "container_trashed" = "";
+
+/*Chatbot*/
+"chatbot_menu_title" = "";
+"print_photo_home_card_button_title" = "";
