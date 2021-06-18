@@ -1165,6 +1165,8 @@ struct TextConstants {
     static let containerMusic = NSLocalizedString("container_music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let containerFavourite = NSLocalizedString("container_favourite", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let containerTrashed = NSLocalizedString("container_trashed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityPlay = NSLocalizedString("accessibility_play", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let accessibilityPause = NSLocalizedString("accessibility_pause", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let photos = NSLocalizedString("photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let approve = NSLocalizedString("Approve", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

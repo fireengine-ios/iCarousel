@@ -22,7 +22,12 @@ final class CreateStoryAudioItemCell: UITableViewCell {
         }
     }
     
-    @IBOutlet private weak var playButton: UIButton!
+    @IBOutlet private weak var playButton: UIButton! {
+        willSet {
+            playButton.accessibilityLabel = TextConstants.accessibilityPlus
+        }
+    }
+
     @IBOutlet private weak var selectButton: UIButton! {
         willSet {
             newValue.titleLabel?.adjustsFontSizeToFitWidth()
@@ -32,6 +37,11 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     private var cellIndexPathRow: Int?
     
     var createStoryAudioItemCellDelegate: CreateStoryAudioItemCellDelegate?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setPlaying(playing: false)
+    }
     
     func setTextForLabel(titleText: String) {
         titleLabel.text = titleText
@@ -71,10 +81,14 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     
     func setPlaying(playing: Bool) {
         if playing {
-            playButton.setImage(UIImage(named: "creationStoryItemPause"), for: .normal)
+            let image = UIImage(named: "creationStoryItemPause")
+            image?.accessibilityLabel = TextConstants.accessibilityPause
+            playButton.setImage(image, for: .normal)
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
         } else {
-            playButton.setImage(UIImage(named: "creationStroryItemPlay"), for: .normal)
+            let image = UIImage(named: "creationStroryItemPlay")
+            image?.accessibilityLabel = TextConstants.accessibilityPlay
+            playButton.setImage(image, for: .normal)
             titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         }
     }
