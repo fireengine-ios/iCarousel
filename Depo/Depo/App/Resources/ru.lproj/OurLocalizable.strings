@@ -1873,3 +1873,5 @@
 /*Chatbot*/
 "chatbot_menu_title" = "";
 "print_photo_home_card_button_title" = "";
+"accessibility_play" = "";
+"accessibility_pause" = "";
