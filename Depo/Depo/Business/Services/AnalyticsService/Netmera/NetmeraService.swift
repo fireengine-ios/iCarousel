@@ -72,6 +72,7 @@ final class NetmeraService {
             var phoneNumber: Int = 0
             var address: Int = 0
             var birthday: Int = 0
+            var hasSecurityQuestionInfo = false
             prepareAccountInfo(preparedAccountInfo: { info in
                 guard let accountInfo = info else {
                     group.leave()
@@ -86,6 +87,7 @@ final class NetmeraService {
                 phoneNumber = (accountInfo.phoneNumber ?? "").isEmpty ? 0 : 1
                 address = (accountInfo.address ?? "").isEmpty ? 0 : 1
                 birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
+                hasSecurityQuestionInfo = accountInfo.hasSecurityQuestionInfo ?? false
                 group.leave()
             })
             
@@ -103,29 +105,32 @@ final class NetmeraService {
             
             
             group.notify(queue: DispatchQueue.global()) {
-                let user = NetmeraCustomUser(deviceStorage: Int(deviceUsedStorage*100),
-                                             photopickLeftAnalysis: nemeraAnalysisLeft,
-                                             lifeboxStorage: lifeboxStorage,
-                                             faceImageGrouping: firGrouping,
-                                             accountType: accountType,
-                                             twoFactorAuthentication: twoFactorNetmeraStatus,
-                                             autosync: autoSyncState,
-                                             emailVerification: verifiedEmailStatus,
-                                             autosyncPhotos: netmeraAutoSyncStatusPhoto,
-                                             autosyncVideos: netmeraAutoSyncStatusVideo,
-                                             packages: activeSubscriptionNames,
-                                             autoLogin: autoLogin,
-                                             turkcellPassword: turkcellPassword,
-                                             buildNumber: buildNumber,
-                                             countryCode: countryCode,
-                                             regionCode: regionCode,
-                                             isUserName: userName,
-                                             isUserSurname: userSurname,
-                                             isEmail: email,
-                                             isPhoneNumber: phoneNumber,
-                                             isAddress: address,
-                                             isBirthDay: birthday,
-                                             galleryAccessPermission: galleryAccessPermission)
+                let user = NetmeraCustomUser(
+                    deviceStorage: Int(deviceUsedStorage*100),
+                    photopickLeftAnalysis: nemeraAnalysisLeft,
+                    lifeboxStorage: lifeboxStorage,
+                    faceImageGrouping: firGrouping,
+                    accountType: accountType,
+                    twoFactorAuthentication: twoFactorNetmeraStatus,
+                    autosync: autoSyncState,
+                    emailVerification: verifiedEmailStatus,
+                    autosyncPhotos: netmeraAutoSyncStatusPhoto,
+                    autosyncVideos: netmeraAutoSyncStatusVideo,
+                    packages: activeSubscriptionNames,
+                    autoLogin: autoLogin,
+                    turkcellPassword: turkcellPassword,
+                    buildNumber: buildNumber,
+                    countryCode: countryCode,
+                    regionCode: regionCode,
+                    isUserName: userName,
+                    isUserSurname: userSurname,
+                    isEmail: email,
+                    isPhoneNumber: phoneNumber,
+                    isAddress: address,
+                    isBirthDay: birthday,
+                    galleryAccessPermission: galleryAccessPermission,
+                    hasSecurityQuestionInfo: hasSecurityQuestionInfo
+                )
                 
                 user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
                 DispatchQueue.toMain {
