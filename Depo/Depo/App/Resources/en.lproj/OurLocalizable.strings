@@ -1905,9 +1905,9 @@
 "container_music" = "Music";
 "container_favourite" = "Favourite";
 "container_trashed" = "Trashed";
-"accessibility_play" = "Play";
-"accessibility_pause" = "Pause";
 
 /*Chatbot*/
 "chatbot_menu_title" = "Lifebox Support";
 "print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "Play";
+"accessibility_pause" = "Pause";

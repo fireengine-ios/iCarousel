@@ -24,7 +24,7 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     
     @IBOutlet private weak var playButton: UIButton! {
         willSet {
-            playButton.accessibilityLabel = TextConstants.accessibilityPlus
+            newValue.accessibilityLabel = TextConstants.accessibilityPlus
         }
     }
 
@@ -82,13 +82,13 @@ final class CreateStoryAudioItemCell: UITableViewCell {
     func setPlaying(playing: Bool) {
         if playing {
             let image = UIImage(named: "creationStoryItemPause")
-            image?.accessibilityLabel = TextConstants.accessibilityPause
             playButton.setImage(image, for: .normal)
+            playButton.accessibilityLabel = TextConstants.accessibilityPause
             titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
         } else {
             let image = UIImage(named: "creationStroryItemPlay")
-            image?.accessibilityLabel = TextConstants.accessibilityPlay
             playButton.setImage(image, for: .normal)
+            playButton.accessibilityLabel = TextConstants.accessibilityPlay
             titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
         }
     }
