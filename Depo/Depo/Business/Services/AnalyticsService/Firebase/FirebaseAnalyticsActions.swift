@@ -121,6 +121,7 @@ enum GAEventAction {
     case duration
     case message
     case invitation
+    case photoPrint
 
     var text: String {
         switch self {
@@ -329,6 +330,8 @@ enum GAEventAction {
             return "Message"
         case .invitation:
             return "Invitation"
+        case .photoPrint:
+            return "PhotoPrint"
         }
     }
 }
