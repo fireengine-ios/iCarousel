@@ -2156,16 +2156,16 @@ Please check I have understood the intended command here*/
 "invitation_snackbar_share_exceed" = "Désolé, la limite de cadeaux du lien d'invitation a expiré.";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "Texte Vocal";
+"refresh_captcha" = "Actualisez le Texte";
+"container_shared_files" = "Ce que j'ai partagé";
+"container_document" = "Document";
+"container_music" = "Musique";
+"container_favourite" = "Favoris";
+"container_trashed" = "Poubelle";
 
 /*Chatbot*/
-"chatbot_menu_title" = "";
-"print_photo_home_card_button_title" = "";
-"accessibility_play" = "";
-"accessibility_pause" = "";
+"chatbot_menu_title" = "Assistance Lifebox";
+"print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "Jouez";
+"accessibility_pause" = "Arrêtez";
