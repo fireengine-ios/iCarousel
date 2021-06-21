@@ -44,7 +44,8 @@ final class CollageCard: BaseCardView {
     }
     
     @IBOutlet private weak var photoImageView: LoadingImageView!
-    
+    @IBOutlet private weak var photoButton: UIButton!
+
     private var item: WrapData?
     private let routerVC = RouterVC()
     
@@ -98,6 +99,7 @@ final class CollageCard: BaseCardView {
         debugLog("Collage Card - start load image")
         photoImageView.setLogs(enabled: true)
         photoImageView.loadImage(with: item)
+        photoButton.accessibilityLabel = item?.name
     }
     
     override func viewDidEndShow() {

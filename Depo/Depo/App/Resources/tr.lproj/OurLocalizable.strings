@@ -484,7 +484,7 @@
 "E-mail is already exist" = "Bu e-posta adresi çoktan kayıtlı durumda";
 "Please enter your GSM number" = "Lütfen GSM numaranı gir";
 "GSM number" = "GSM Numarası";
-"Plus" = "Plus";
+"Plus" = "Artı";
 "Close" = "Kapat";
 "Photos and videos" = "Fotoğraflar ve Videolar";
 "Favorite" = "Sık Kullanılan";
@@ -1866,14 +1866,16 @@
 "invitation_snackbar_share_exceed" = "Üzgünüz, davet linkinin hediye limiti doldu";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "Sesli Metin";
+"refresh_captcha" = "Metni Yenile";
+"container_shared_files" = "Paylaştıklarım";
+"container_document" = "Belge";
+"container_music" = "Müzik";
+"container_favourite" = "Favoriler";
+"container_trashed" = "Çöp Kutusu";
 
 /*Chatbot*/
 "chatbot_menu_title" = "Lifebox Destek";
 "print_photo_home_card_button_title" = "";
+"accessibility_play" = "Oynat";
+"accessibility_pause" = "Durdur";
