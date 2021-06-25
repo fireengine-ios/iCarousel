@@ -10,19 +10,14 @@ import UIKit
 
 final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildController, NibInit {
 
-    var isMainFolder = true
-    static var globalShareType: PrivateShareType?
 
     static func with(shareType: PrivateShareType) -> PrivateShareSharedFilesViewController {
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         let title: String
-        globalShareType = shareType
         switch shareType {
             case .byMe: title = TextConstants.privateShareSharedByMeTab
             case .withMe: title = TextConstants.privateShareSharedWithMeTab
-            case .innerFolder(_, let folder):
-                title = folder.name
-                //isMainFolder = folder.isMainFolder
+            case .innerFolder(_, let folder): title = folder.name
         }
         controller.title = title
         controller.shareType = shareType

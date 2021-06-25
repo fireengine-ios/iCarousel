@@ -311,8 +311,6 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             return
         }
 
-        //item.isMainFolder = false
-        
         if isSelecting {
             if isSelected(item: item) {
                 fileInfoManager.deselectItem(at: indexPath)
