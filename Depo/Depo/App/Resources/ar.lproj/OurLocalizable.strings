@@ -1860,14 +1860,16 @@
 "invitation_snackbar_share_exceed" = "عذرًا، لقد انتهت صلاحية حد هدية رابط الدعوة.";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "نص صوتي";
+"refresh_captcha" = "تحديث النص";
+"container_shared_files" = "ما شاركتها";
+"container_document" = "مستند";
+"container_music" = "موسيقي";
+"container_favourite" = "مفضلات";
+"container_trashed" = "سلة المهملات";
 
 /*Chatbot*/
-"chatbot_menu_title" = "";
-"print_photo_home_card_button_title" = "";
+"chatbot_menu_title" = "دعم ليف بوكس";
+"print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "تشغيل";
+"accessibility_pause" = "إيقاف مؤقت";

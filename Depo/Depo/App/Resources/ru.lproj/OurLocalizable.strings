@@ -1840,7 +1840,7 @@
 /*Added manually*/
 "signup_redesign_eula_checkbox_desc" = "Я прочитал и принимаю %1$S.";
 "signup_redesign_eula_link" = "Условия Использования";
-"signup_redesign_etk_checkbox_desc" = "Я прочитал и принимаю 1$S.";
+"signup_redesign_etk_checkbox_desc" = "Я прочитал и принимаю %1$S.";
 "signup_redesign_etk_link" = "Коммерческое Электронное Сообщение и Текст Подтверждения на Передачу Данных";
 "signup_redesign_eula_accept_button" = "Подтверждаю";
 "invitation_home_card_button_title" = "Пригласить";
@@ -1862,14 +1862,16 @@
 "invitation_snackbar_share_exceed" = "К сожалению, лимит подарков ссылки-приглашения истек";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "Звуковой Текст";
+"refresh_captcha" = "Обновить Текст";
+"container_shared_files" = "Мои Публикации";
+"container_document" = "Документ";
+"container_music" = "Музыка";
+"container_favourite" = "Избранное";
+"container_trashed" = "Корзина";
 
 /*Chatbot*/
-"chatbot_menu_title" = "";
-"print_photo_home_card_button_title" = "";
+"chatbot_menu_title" = "Поддержка Lifebox";
+"print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "Воспроизвести";
+"accessibility_pause" = "Остановить";

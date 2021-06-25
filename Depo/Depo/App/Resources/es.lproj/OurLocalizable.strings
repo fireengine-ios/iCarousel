@@ -1890,14 +1890,16 @@
 "invitation_snackbar_share_exceed" = "Lo sentimos, el límite de regalos del enlace de invitación ha expirado";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "Texto de Voz";
+"refresh_captcha" = "Actualizar Texto";
+"container_shared_files" = "Lo que he compartido";
+"container_document" = "Documento";
+"container_music" = "Música";
+"container_favourite" = "Favoritos";
+"container_trashed" = "Basura";
 
 /*Chatbot*/
-"chatbot_menu_title" = "";
-"print_photo_home_card_button_title" = "";
+"chatbot_menu_title" = "Soporte Lifebox";
+"print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "Reproducir";
+"accessibility_pause" = "Pausar";

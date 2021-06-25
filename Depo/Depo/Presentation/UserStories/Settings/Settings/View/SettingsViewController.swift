@@ -114,13 +114,15 @@ final class SettingsViewController: BaseViewController {
     }
 
     private func setupTableViewFooter() {
+        var footerHeight: CGFloat = 110
         let footer = SettingFooterView.initFromNib()
         if ((Device.locale == "tr" || Device.locale == "en") && self.isChatbotShown && !RouteRequests.isBillo) {
             footer.leaveFeedbackButton.isHidden = true
+            footerHeight = 65
         }
         footer.delegate = self
         tableView.tableFooterView = footer
-        footer.heightAnchor.constraint(equalToConstant: 110).activate()
+        footer.heightAnchor.constraint(equalToConstant: footerHeight).activate()
     }
 }
 

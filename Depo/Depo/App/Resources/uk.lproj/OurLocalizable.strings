@@ -1850,14 +1850,16 @@
 "invitation_snackbar_share_exceed" = "На жаль, термін дії посилання для запрошення закінчився.";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "Голосовий Текст";
+"refresh_captcha" = "Оновити Текст";
+"container_shared_files" = "Мої Пости";
+"container_document" = "Документ";
+"container_music" = "Музика";
+"container_favourite" = "Обрані";
+"container_trashed" = "Корзина";
 
 /*Chatbot*/
-"chatbot_menu_title" = "";
-"print_photo_home_card_button_title" = "";
+"chatbot_menu_title" = "Lifebox Підтримка";
+"print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "Відтворити";
+"accessibility_pause" = "Зупинити";
