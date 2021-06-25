@@ -1891,16 +1891,16 @@
 "invitation_snackbar_share_exceed" = "Na vjen keq, limiti i dhuratës së linkut të ftesës ka skaduar.";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "Tekst Zanor";
+"refresh_captcha" = "Rifresko Tekstin";
+"container_shared_files" = "Çfarë kam ndarë";
+"container_document" = "Dokumente";
+"container_music" = "Muzikë";
+"container_favourite" = "Të preferuarat";
+"container_trashed" = "Koshi i Plehrave";
 
 /*Chatbot*/
-"chatbot_menu_title" = "";
-"print_photo_home_card_button_title" = "";
-"accessibility_play" = "";
-"accessibility_pause" = "";
+"chatbot_menu_title" = "Mbështetje për Lifebox";
+"print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "Luaj";
+"accessibility_pause" = "Ndalo";

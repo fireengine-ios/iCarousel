@@ -1848,16 +1848,16 @@
 "invitation_snackbar_share_exceed" = "Ne pare rău, limita de cadou a linkului de invitație a expirat.";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "Text Vocal";
+"refresh_captcha" = "Actualizează Textul";
+"container_shared_files" = "Partajate de Mine";
+"container_document" = "Document";
+"container_music" = "Muzică";
+"container_favourite" = "Favorite";
+"container_trashed" = "Coş de Gunoi";
 
 /*Chatbot*/
-"chatbot_menu_title" = "";
-"print_photo_home_card_button_title" = "";
-"accessibility_play" = "";
-"accessibility_pause" = "";
+"chatbot_menu_title" = "Suport Lifebox";
+"print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "Redare";
+"accessibility_pause" = "Opreşte";

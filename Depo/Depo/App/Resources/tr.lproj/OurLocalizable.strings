@@ -1250,7 +1250,7 @@
 "landing_billo_subtitle_5" = "Sana özel yarattığımız hikayeler, albümler ve kolajlarla anılarını tekrar yaşa!";
 "landing_billo_title_6" = "Sosyal Medya";
 "landing_billo_subtitle_6" = "Sosyal medyadaki tüm arşivini kolayca Billo'ya transfer et!";
-"landing_billo_title_7" = "Baskı Al";
+"landing_billo_title_7" = "Foto Baskı";
 "landing_billo_subtitle_7" = "Yaşam alanını anılarınla süsle!";
 
 /*introduce billo*/
@@ -1876,6 +1876,6 @@
 
 /*Chatbot*/
 "chatbot_menu_title" = "Lifebox Destek";
-"print_photo_home_card_button_title" = "";
+"print_photo_home_card_button_title" = "Fotoğraflara Git";
 "accessibility_play" = "Oynat";
 "accessibility_pause" = "Durdur";

@@ -9,14 +9,20 @@
 import UIKit
 
 final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildController, NibInit {
-    
+
+    var isMainFolder = true
+    static var globalShareType: PrivateShareType?
+
     static func with(shareType: PrivateShareType) -> PrivateShareSharedFilesViewController {
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         let title: String
+        globalShareType = shareType
         switch shareType {
             case .byMe: title = TextConstants.privateShareSharedByMeTab
             case .withMe: title = TextConstants.privateShareSharedWithMeTab
-            case .innerFolder(_, let folder): title = folder.name
+            case .innerFolder(_, let folder):
+                title = folder.name
+                //isMainFolder = folder.isMainFolder
         }
         controller.title = title
         controller.shareType = shareType
@@ -30,7 +36,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let cardsContainer = CardsContainerView()
     private var contentSliderTopY: NSLayoutConstraint?
     private var contentSliderH: NSLayoutConstraint?
-    
+
     private lazy var gridListBar: GridListTopBar = {
         let bar = GridListTopBar.initFromXib()
         bar.delegate = self
@@ -54,7 +60,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
-    
+
     //MARK: - Override
     
     deinit {
@@ -64,8 +70,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionManager.setup()
+
+        collectionManager.setup(shareType: self.shareType)
         setupBars()
         setupCardsContainer()
         setupPlusButton()
