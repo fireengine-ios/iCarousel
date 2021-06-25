@@ -142,6 +142,7 @@
             <connections>
                 <outlet property="bottomButton" destination="BtN-La-yOR" id="WkX-tl-i5h"/>
                 <outlet property="closeButton" destination="3zB-Fq-XrF" id="ld3-p3-Ook"/>
+                <outlet property="photoButton" destination="zgU-kh-xnk" id="2S4-wz-FeM"/>
                 <outlet property="photoImageView" destination="t6A-N4-vMD" id="Cmh-rO-uBC"/>
                 <outlet property="shareButton" destination="j0a-up-wkh" id="Twp-gS-Snf"/>
                 <outlet property="subTitleLabel" destination="eZq-QK-VUa" id="Ruy-mj-fVD"/>

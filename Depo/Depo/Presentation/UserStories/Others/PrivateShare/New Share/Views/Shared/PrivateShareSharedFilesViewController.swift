@@ -9,7 +9,8 @@
 import UIKit
 
 final class PrivateShareSharedFilesViewController: BaseViewController, SegmentedChildController, NibInit {
-    
+
+
     static func with(shareType: PrivateShareType) -> PrivateShareSharedFilesViewController {
         let controller = PrivateShareSharedFilesViewController.initFromNib()
         let title: String
@@ -30,7 +31,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private let cardsContainer = CardsContainerView()
     private var contentSliderTopY: NSLayoutConstraint?
     private var contentSliderH: NSLayoutConstraint?
-    
+
     private lazy var gridListBar: GridListTopBar = {
         let bar = GridListTopBar.initFromXib()
         bar.delegate = self
@@ -54,7 +55,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private let router = RouterVC()
     private let analytics = PrivateShareAnalytics()
-    
+
     //MARK: - Override
     
     deinit {
@@ -64,8 +65,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionManager.setup()
+
+        collectionManager.setup(shareType: self.shareType)
         setupBars()
         setupCardsContainer()
         setupPlusButton()

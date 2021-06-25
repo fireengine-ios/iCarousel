@@ -28,6 +28,8 @@ final class FirebaseRemoteConfig {
         let settings = RemoteConfigSettings()
         #if DEBUG
         settings.minimumFetchInterval = 10
+        #else
+        settings.minimumFetchInterval = 60 * 10 // 10 minutes
         #endif
         remoteConfig.configSettings = settings
         remoteConfig.setDefaults(fromPlist: "FirebaseRemoteConfigDefaults")

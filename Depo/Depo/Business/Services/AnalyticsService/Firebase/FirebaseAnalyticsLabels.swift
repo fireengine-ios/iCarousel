@@ -170,12 +170,10 @@ enum GAEventLabel {
         }
     }
 
-    enum InvitationEvent {
+    enum HomePageCardEvent {
         case close
         case letsSee
-        case invitationVideoButton
-        case invitationLink
-        case copyInvitationLink
+        case photoPrintVideoButton
 
         var text: String {
             switch self {
@@ -183,6 +181,19 @@ enum GAEventLabel {
                 return "Home Page Card - Cancel"
             case .letsSee:
                 return "Home Page Card - Lets see"
+            case .photoPrintVideoButton:
+                return "Photo Print Video Button"
+            }
+        }
+    }
+
+    enum InvitationEvent {
+        case invitationVideoButton
+        case invitationLink
+        case copyInvitationLink
+
+        var text: String {
+            switch self {
             case .invitationVideoButton:
                 return "Invitation Video Button"
             case .invitationLink:
@@ -480,8 +491,9 @@ enum GAEventLabel {
     case widgetOrder(String)
     case restart
     case privateShare(PrivateShareEvent)
+    case homePageCard(_ event: HomePageCardEvent)
     case invitation(_ event: InvitationEvent)
-    
+
     var text: String {
         switch self {
         case .empty:
@@ -711,6 +723,8 @@ enum GAEventLabel {
         case .privateShare(let event):
             return event.text
         case .invitation(let event):
+            return event.text
+        case .homePageCard(let event):
             return event.text
         }
     }
