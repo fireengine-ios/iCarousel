@@ -178,7 +178,7 @@
 "New PlayList" = "New PlayList";
 "New Album" = "New Album";
 "New Folder" = "New Folder";
-"Print" = "Foto Baskı";
+"Print" = "Photo Print";
 "Make album cover" = "Make album cover";
 "Add To Album" = "Add To Album";
 "Remove From Album" = "Remove From Album";
@@ -1900,11 +1900,11 @@
 /*Accessibility*/
 "play_captcha" = "Play captcha";
 "refresh_captcha" = "Refresh captcha";
-"container_shared_files" = "Shared";
+"container_shared_files" = "Shared by me";
 "container_document" = "Document";
 "container_music" = "Music";
 "container_favourite" = "Favourite";
-"container_trashed" = "Trashed";
+"container_trashed" = "Trash Bin";
 
 /*Chatbot*/
 "chatbot_menu_title" = "Lifebox Support";

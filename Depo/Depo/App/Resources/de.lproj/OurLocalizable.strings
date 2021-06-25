@@ -1848,16 +1848,16 @@
 "invitation_snackbar_share_exceed" = "Das Geschenklimit des Einladungslinks ist leider abgelaufen.";
 
 /*Accessibility*/
-"play_captcha" = "";
-"refresh_captcha" = "";
-"container_shared_files" = "";
-"container_document" = "";
-"container_music" = "";
-"container_favourite" = "";
-"container_trashed" = "";
+"play_captcha" = "Sprachtext";
+"refresh_captcha" = "Text Aktualisieren";
+"container_shared_files" = "Shares";
+"container_document" = "Dokument";
+"container_music" = "Musik";
+"container_favourite" = "Favoriten";
+"container_trashed" = "Mülleimer";
 
 /*Chatbot*/
-"chatbot_menu_title" = "";
-"print_photo_home_card_button_title" = "";
-"accessibility_play" = "";
-"accessibility_pause" = "";
+"chatbot_menu_title" = "Lifebox Unterstützung";
+"print_photo_home_card_button_title" = "Go to photos";
+"accessibility_play" = "Abspielen";
+"accessibility_pause" = "Stoppen";
