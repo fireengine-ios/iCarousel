@@ -14,7 +14,7 @@ protocol SettingFooterViewDelegate: class {
 
 final class SettingFooterView: UIView, NibInit {
 
-    @IBOutlet private weak var leaveFeedbackButton: ButtonWithGrayCorner! {
+    @IBOutlet weak var leaveFeedbackButton: ButtonWithGrayCorner! {
         willSet {
             newValue.setTitle(TextConstants.settingsViewLeaveFeedback, for: .normal)
         }

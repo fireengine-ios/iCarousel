@@ -850,5 +850,15 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .customValidate()
             .responseVoid(handler)
     }
+
+    @discardableResult
+    func getAccountTicket(handler: @escaping ResponseHandler<AccountTicket>) -> URLSessionTask? {
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.Account.ticket)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
     
 }

@@ -27,4 +27,5 @@ protocol SettingsInteractorInput {
     
     func getUserInfo()
     func populateDataForCells()
+    func fetchChatbotRemoteConfig()
 }

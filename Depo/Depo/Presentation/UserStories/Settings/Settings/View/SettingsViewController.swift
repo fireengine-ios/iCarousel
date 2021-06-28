@@ -28,6 +28,8 @@ protocol SettingsDelegate: class {
     func goToPermissions()
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needPopPasscodeEnterVC: Bool)
+
+    func goToChatbot()
 }
 
 final class SettingsViewController: BaseViewController {
@@ -40,7 +42,8 @@ final class SettingsViewController: BaseViewController {
     weak var settingsDelegate: SettingsDelegate?
     
     private var isFromPhotoPicker = false
-    
+    private var isChatbotShown = false
+
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     private var cellTypes = [[SettingsTypes]]() {
@@ -103,16 +106,24 @@ final class SettingsViewController: BaseViewController {
             tableView.tableHeaderView = header
             header?.heightAnchor.constraint(equalToConstant: 201).activate()
             
-            let footer = SettingFooterView.initFromNib()
-            footer.delegate = self
-            tableView.tableFooterView = footer
-            footer.heightAnchor.constraint(equalToConstant: 110).activate()
+            setupTableViewFooter()
             return
         }
         headerView.frame.size.height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         tableView.tableHeaderView = headerView
     }
-    
+
+    private func setupTableViewFooter() {
+        var footerHeight: CGFloat = 110
+        let footer = SettingFooterView.initFromNib()
+        if ((Device.locale == "tr" || Device.locale == "en") && self.isChatbotShown && !RouteRequests.isBillo) {
+            footer.leaveFeedbackButton.isHidden = true
+            footerHeight = 65
+        }
+        footer.delegate = self
+        tableView.tableFooterView = footer
+        footer.heightAnchor.constraint(equalToConstant: footerHeight).activate()
+    }
 }
 
 // MARK: - UITableViewDelegate & UITableViewDataSource
@@ -230,8 +241,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case .logout:
             output.onLogout()
+        case .chatbot:
+            if let delegate = settingsDelegate {
+                delegate.goToChatbot()
+            } else {
+                output.goToChatbot()
+            }
         }
-        
     }
     
     // MARK: - UITableViewDelegate & UITableViewDataSource Private Utility Methods
@@ -275,9 +291,11 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - SettingsViewInput
 extension SettingsViewController: SettingsViewInput {
-    
-    func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool) {
-        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown, isInvitationShown: isInvitationShown)
+
+    func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool) {
+        self.isChatbotShown = isChatbotShown
+        cellTypes = SettingsTypes.prepareTypes(hasPermissions: isPermissionShown, isInvitationShown: isInvitationShown, isChatbotShown: isChatbotShown)
+        self.setupTableViewFooter()
     }
     
     func showProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool) {

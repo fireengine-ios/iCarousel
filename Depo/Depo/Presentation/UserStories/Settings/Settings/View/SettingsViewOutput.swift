@@ -54,6 +54,8 @@ protocol SettingsViewOutput {
     func presentErrorMessage(errorMessage: String)
     
     func presentActionSheet(alertController: UIAlertController)
+
+    func goToChatbot()
     
     var isPasscodeEmpty: Bool { get }
     

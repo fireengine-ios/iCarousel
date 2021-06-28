@@ -953,11 +953,20 @@ class RouterVC: NSObject {
     func turkcellSecurity(isTurkcell: Bool) -> UIViewController {
         return LoginSettingsModuleInitializer.viewController(isTurkcell: isTurkcell)
     }
-    
-    // MARK: Auto Upload
+
+    // MARK: Invitation
+
     var invitation: UIViewController {
         return InvitationViewController()
     }
+
+    // MARK: Chatbot
+
+    var chatbot: UIViewController {
+        return ChatbotViewController()
+    }
+
+    // MARK: Auto Upload
 
     var autoUpload: UIViewController {
         return AutoSyncModuleInitializer.initializeViewController(fromSettings: true)

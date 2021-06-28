@@ -55,6 +55,7 @@ enum AnalyticsAppScreens {
     case settingsPhotoEdit
     case autoSyncSettings
     case invitation
+    case chatbot
     case invitationCampaignDetail
     ///contactSync
     case contactSyncDeleteDuplicates
@@ -168,6 +169,8 @@ enum AnalyticsAppScreens {
             return "Invitation"
         case .invitationCampaignDetail:
             return "Invitation Campaign Detail"
+        case .chatbot:
+            return "Chatbot"
         ///Main Screens
         case .homePage:
             return "Home Page"
