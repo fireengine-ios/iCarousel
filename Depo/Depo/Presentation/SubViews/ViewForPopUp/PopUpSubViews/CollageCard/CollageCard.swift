@@ -148,7 +148,11 @@ final class CollageCard: BaseCardView {
                 
                 switch result {
                 case .success(_):
-                    self?.cardType = .display
+                    self?.refreshCardInfo { [weak self] refreshed in
+                        if refreshed {
+                            self?.cardType = .display
+                        }
+                    }
                 case .failed(let error):
                     if error.isOutOfSpaceError {
                         self?.routerVC.showFullQuotaPopUp()
@@ -156,6 +160,22 @@ final class CollageCard: BaseCardView {
                         UIApplication.showErrorAlert(message: error.description)
                     }
                 }
+            }
+        }
+    }
+
+    private func refreshCardInfo(completion: @escaping BoolHandler) {
+        homeCardsService.all { [weak self] result in
+            switch result {
+            case .success(let cards):
+                let card = cards.first { $0.type == self?.cardObject?.type }
+                if let card = card {
+                    self?.set(object: card)
+                    completion(true)
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+                completion(false)
             }
         }
     }
