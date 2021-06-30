@@ -23,6 +23,8 @@ class SingletonStorage {
     var referenceToken: String?
     var quotaInfoResponse: QuotaInfoResponse?
     var quotaUsage: Int?
+    private var quotaRequestInFlight = false
+    private var quotaPendingCallbacks: [UsagePercenatageCallback] = []
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
     var isTwoFactorAuthEnabled: Bool?
@@ -124,8 +126,20 @@ class SingletonStorage {
             usagePercentageCallback(quotaUsage)
             return
         }
-        
+
+        guard !quotaRequestInFlight else {
+            quotaPendingCallbacks.append(usagePercentageCallback)
+            return
+        }
+
+        quotaRequestInFlight = true
         prepareLifeBoxUsage { [weak self] percentage in
+            defer {
+                self?.quotaPendingCallbacks.forEach { $0(percentage) }
+                self?.quotaPendingCallbacks = []
+                self?.quotaRequestInFlight = false
+            }
+
             guard let persentage = percentage else {
                 usagePercentageCallback(nil)
                 return
@@ -133,7 +147,6 @@ class SingletonStorage {
             self?.quotaUsage = persentage
             usagePercentageCallback(percentage)
         }
-        
     }
     
     private func prepareLifeBoxUsage(preparedUserField: @escaping UsagePercenatageCallback) {
@@ -148,7 +161,7 @@ class SingletonStorage {
                 self?.quotaInfoResponse = quota
                 let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
                 preparedUserField(Int(usagePercentage * 100))
-                
+
         }, fail: { [weak self] errorResponse in
             self?.quotaInfoResponse = nil
             preparedUserField(nil)
