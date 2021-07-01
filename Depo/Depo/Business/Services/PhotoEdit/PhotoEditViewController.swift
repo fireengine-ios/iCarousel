@@ -266,13 +266,8 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
         let popup = PhotoEditViewFactory.alert(for: .saveAsCopy, leftButtonHandler: { [weak self] in
             self?.uiManager.setHiddenBottomViews(false)
         }, rightButtonHandler: { [weak self] in
-
-            self?.prepareOriginalImage { [weak self] image in
-                guard let self = self else {
-                    return
-                }
-                self.finishedEditing?(self, .savedAsWithStickers(imageView: self.uiManager.imageScrollView.imageView))
-            }
+            guard let self = self else { return }
+            self.finishedEditing?(self, .savedAsWithStickers(imageView: self.uiManager.imageScrollView.imageView))
         })
         present(popup, animated: true)
 
