@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,17 +26,24 @@
                     </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="cGN-A1-rQb">
-                    <rect key="frame" x="298" y="0.0" width="108" height="44"/>
+                    <rect key="frame" x="201" y="0.0" width="205" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sax-Kz-BKe">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sax-Kz-BKe">
                             <rect key="frame" x="0.0" y="0.0" width="34" height="44"/>
                             <state key="normal" title="Save"/>
                             <connections>
                                 <action selector="onSave:" destination="k01-WW-6iS" eventType="touchUpInside" id="AnW-71-hAa"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNA-NR-CBi">
+                            <rect key="frame" x="41" y="0.0" width="90" height="44"/>
+                            <state key="normal" title="Save as copy"/>
+                            <connections>
+                                <action selector="onSaveAsCopy:" destination="k01-WW-6iS" eventType="touchUpInside" id="GEs-vY-mVg"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2NB-A1-Cpi">
-                            <rect key="frame" x="41" y="0.0" width="30" height="44"/>
+                            <rect key="frame" x="138" y="0.0" width="30" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="2B3-Vu-ahf"/>
                             </constraints>
@@ -46,7 +53,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WHT-k4-iNz">
-                            <rect key="frame" x="78" y="0.0" width="30" height="44"/>
+                            <rect key="frame" x="175" y="0.0" width="30" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="KJb-eu-Vks"/>
                             </constraints>
@@ -58,6 +65,7 @@
                     </subviews>
                 </stackView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Pwn-Zo-TZD"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="cGN-A1-rQb" secondAttribute="trailing" constant="8" id="6k4-LD-W2W"/>
@@ -68,11 +76,11 @@
                 <constraint firstItem="7X9-5e-0ll" firstAttribute="leading" secondItem="k01-WW-6iS" secondAttribute="leading" id="wll-2X-cJ4"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="Pwn-Zo-TZD"/>
             <connections>
                 <outlet property="closeButton" destination="7X9-5e-0ll" id="TU2-qO-ZWB"/>
                 <outlet property="moreButton" destination="WHT-k4-iNz" id="0DX-Kv-jQd"/>
                 <outlet property="rightButtonsContainer" destination="cGN-A1-rQb" id="HLq-gM-lnd"/>
+                <outlet property="saveAsCopyButton" destination="fNA-NR-CBi" id="HYm-iJ-aX0"/>
                 <outlet property="saveButton" destination="sax-Kz-BKe" id="Nbg-cu-Dym"/>
                 <outlet property="shareButton" destination="2NB-A1-Cpi" id="bJ6-6f-xZe"/>
             </connections>
@@ -80,7 +88,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ShareButtonIcon" width="24" height="27"/>
+        <image name="ShareButtonIcon" width="22" height="22"/>
         <image name="photo_edit_3dots" width="20" height="20"/>
         <image name="photo_edit_cancel" width="20" height="20"/>
     </resources>

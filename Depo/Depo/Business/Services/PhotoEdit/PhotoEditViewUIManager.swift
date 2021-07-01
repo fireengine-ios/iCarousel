@@ -11,15 +11,23 @@ import UIKit
 protocol PhotoEditViewUIManagerDelegate: class {
     func needShowAdjustmentView(for type: AdjustmentViewType)
     func filtersView() -> UIView
+    func gifSelectorView() -> UIView
+    func stickerSelectorView() -> UIView
     func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType)
+    func didRemoveAttachment()
 }
 
 final class PhotoEditViewUIManager: NSObject {
     
     @IBOutlet private weak var navBarContainer: UIView!
     @IBOutlet private weak var contentView: UIView!
-    @IBOutlet private weak var imageScrollView: PhotoEditImageScrollView!
+    @IBOutlet weak var imageScrollView: PhotoEditImageScrollView! {
+        willSet {
+            newValue.imageView.stickersDelegate = self
+        }
+    }
     
+    @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
             newValue.superview?.backgroundColor = ColorConstants.photoEditBackgroundColor
@@ -37,7 +45,7 @@ final class PhotoEditViewUIManager: NSObject {
     
     private(set) lazy var tabbar: PhotoEditTabbar = {
         let tabbar = PhotoEditTabbar.initFromNib()
-        tabbar.setup(with: [.filters, .adjustments])
+        tabbar.setup(with: [.filters, .adjustments, .gif, .sticker])
         tabbar.delegate = self
         return tabbar
     }()
@@ -59,6 +67,12 @@ final class PhotoEditViewUIManager: NSObject {
             }
         }
     }
+
+    private var isFullScreen = false
+
+    var hasStickers: Bool {
+        return imageScrollView.imageView.hasStickers
+    }
     
     //MARK: -
     
@@ -67,10 +81,13 @@ final class PhotoEditViewUIManager: NSObject {
         imageScrollView.imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1).activate()
         imageScrollView.imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 1).activate()
         
-        contentView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        contentView.backgroundColor = .black
         filtersScrollView.backgroundColor = ColorConstants.photoEditBackgroundColor
         bottomSafeAreaView.backgroundColor = ColorConstants.photoEditBackgroundColor
         bottomBarContainer.backgroundColor = ColorConstants.photoEditBackgroundColor
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        imageScrollView.imageView.addGestureRecognizer(tapGesture)
     }
     
     func showInitialState() {
@@ -87,6 +104,14 @@ final class PhotoEditViewUIManager: NSObject {
             self?.filtersContainerView.alpha = isHidden ? 0 : 1
         }
     }
+
+    func addAttachment(item: SmashStickerResponse, attachmentType: AttachedEntityType, completion: @escaping VoidHandler) {
+        imageScrollView.imageView.addAttachment(item: item, attachmentType: attachmentType, completion: completion)
+    }
+
+    func removeAllAttachments() {
+        imageScrollView.imageView.removeAll()
+    }
     
     private func showTabBarItemView(_ item: PhotoEditTabbarItemType) {
         switch item {
@@ -96,6 +121,16 @@ final class PhotoEditViewUIManager: NSObject {
             }
         case .adjustments:
             animator.showTransition(to: adjustmentCategoriesView, on: filtersContainerView, animated: true)
+
+        case .gif:
+            if let gifView = delegate?.gifSelectorView() {
+                animator.showTransition(to: gifView, on: filtersContainerView, animated: true)
+            }
+
+        case .sticker:
+            if let stickerView = delegate?.stickerSelectorView() {
+                animator.showTransition(to: stickerView, on: filtersContainerView, animated: true)
+            }
         }
     }
     
@@ -114,6 +149,21 @@ final class PhotoEditViewUIManager: NSObject {
     
     private func hideAdjustView() {
         adjustView?.isHidden = true
+    }
+
+    @objc private func imageTapped() {
+        isFullScreen = !isFullScreen
+        setTopAndBottomBarsHidden(isFullScreen)
+    }
+
+    private func setTopAndBottomBarsHidden(_ isHidden: Bool, animated: Bool = true) {
+        UIView.animate(withDuration: NumericConstants.fastAnimationDuration) {
+            let alpha: CGFloat = isHidden ? 0 : 1
+            self.navBarContainer.alpha = alpha
+            self.containerView.alpha = alpha
+            self.bottomBarContainer.alpha = alpha
+            self.bottomSafeAreaView.alpha = alpha
+        }
     }
 }
 
@@ -160,6 +210,17 @@ extension PhotoEditViewUIManager: AdjustmentCategoriesViewDelegate {
 
         animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
         navBarView.state = .empty
+    }
+}
+
+extension PhotoEditViewUIManager: OverlayStickerImageViewDelegate {
+    func makeTopAndBottomBarsIsHidden(isHidden: Bool) {
+        guard !isFullScreen else { return }
+        setTopAndBottomBarsHidden(isHidden)
+    }
+
+    func didDeleteAttachments(_ attachments: [SmashStickerResponse]) {
+        delegate?.didRemoveAttachment()
     }
 }
 

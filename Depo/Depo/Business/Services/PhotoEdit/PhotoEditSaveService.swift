@@ -6,6 +6,7 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
+import YYImage
 
 final class PhotoEditSaveService {
     
@@ -17,6 +18,15 @@ final class PhotoEditSaveService {
     private let mediaItemService = MediaItemOperationsService.shared
     private let localMediaStorage = LocalMediaStorage.default
     private let cameraService = CameraService()
+
+    private var _overlayAnimationService: OverlayAnimationService?
+    private var overlayAnimationService: OverlayAnimationService {
+        if _overlayAnimationService == nil {
+            _overlayAnimationService = OverlayAnimationService()
+        }
+        return _overlayAnimationService!
+    }
+
     
     //MARK: - Public
     
@@ -43,13 +53,36 @@ final class PhotoEditSaveService {
             }
         }
     }
+
+    func saveWithStickers(originalImage: UIImage, attachments: [UIImageView], stickerImageView: UIView,
+                          item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
+        checkLibraryAccessStatus { [weak self] isAvaliable in
+            guard isAvaliable else {
+                self?.showAccessAlert()
+                debugLog("PHOTOEDIT: PH is not allowed")
+                completion(.failed(ErrorResponse.string(TextConstants.cameraAccessAlertText)))
+                return
+            }
+
+            self?.overlayStickers(resultName: item.name ?? UUID().uuidString, originalImage: originalImage,
+                                  attachments: attachments, stickerImageView: stickerImageView) { [weak self] result in
+                do {
+                    let media = try result.get()
+                    self?.saveAsCopy(mediaURL: media.url, type: media.type.toPHMediaType, item: item) { [weak self] result in
+                        self?.removeImage(at: media.url)
+                        completion(result)
+                    }
+                } catch {
+                    completion(.failed(error))
+                }
+            }
+        }
+    }
     
     
     //MARK: - Save/Save as flows
     
     private func saveAsCopy(imageData: Data, item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
-        let type = PHAssetMediaType.image
-        
         let tmpLocation = prepareTmpDirectoy(name: item.name ?? UUID().uuidString)
         
         do {
@@ -58,38 +91,41 @@ final class PhotoEditSaveService {
             completion(.failed(ErrorResponse.string("Can't write data to the tmp directoy")))
             return
         }
-        
-        createLocalItem(url: tmpLocation, type: type, completion: { [weak self] saveResult in
+
+        saveAsCopy(mediaURL: tmpLocation, type: .image, item: item, completion: completion)
+    }
+
+    private func saveAsCopy(mediaURL: URL, type: PHAssetMediaType, item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
+        createLocalItem(url: mediaURL, type: type, completion: { [weak self] saveResult in
             switch saveResult {
-                case .success(let localItem):
-                    self?.uploadItem(item: localItem, asCopy: true, completion: { uploadResult in
-                        switch uploadResult {
-                            case .success():
-                                self?.mediaItemService.remoteItemBy(trimmedId: localItem.getTrimmedLocalID()) { [weak self] remote in
-                                    guard let savedRemote = remote else {
-                                        completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
-                                        assertionFailure("Can't find updated remote in the DB")
-                                        return
-                                    }
-                                    //to show photo immediaately
-                                    savedRemote.patchToPreview = localItem.patchToPreview
-                                    
-                                    completion(.success(savedRemote))
-                            }
-                            
-                            case .failed(let error):
-                                completion(.failed(error))
+            case .success(let localItem):
+                self?.uploadItem(item: localItem, asCopy: true, completion: { uploadResult in
+                    switch uploadResult {
+                    case .success():
+                        self?.mediaItemService.remoteItemBy(trimmedId: localItem.getTrimmedLocalID()) { remote in
+                            guard let savedRemote = remote else {
+                                completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+                                assertionFailure("Can't find updated remote in the DB")
                                 return
+                            }
+                            //to show photo immediaately
+                            savedRemote.patchToPreview = localItem.patchToPreview
+
+                            completion(.success(savedRemote))
                         }
-                    })
-                
-                case .failed(let error):
-                    completion(.failed(error))
-                    return
+
+                    case .failed(let error):
+                        completion(.failed(error))
+                        return
+                    }
+                })
+
+            case .failed(let error):
+                completion(.failed(error))
+                return
             }
         })
     }
-    
     
     private func save(image: UIImage, item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
         
@@ -111,7 +147,7 @@ final class PhotoEditSaveService {
                     case .success():
                         self?.removeImage(at: tmpLocation)
                         
-                        self?.mediaItemService.itemByUUID(uuid: item.uuid) { [weak self] remote in
+                        self?.mediaItemService.itemByUUID(uuid: item.uuid) { remote in
                             guard let updatedRemote = remote else {
                                 debugLog("PHOTOEDIT: Can't find updated remote in the DB")
                                 completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
@@ -163,7 +199,7 @@ final class PhotoEditSaveService {
     //MARK: - PH Library access
     
     private func checkLibraryAccessStatus(completion: @escaping BoolHandler) {
-        cameraService.photoLibraryIsAvailable { [weak self] isAvailable, _ in
+        cameraService.photoLibraryIsAvailable { isAvailable, _ in
             completion(isAvailable)
         }
     }
@@ -297,6 +333,43 @@ final class PhotoEditSaveService {
             })
         }
     }
+
+    // MARK: - Stickers & Gifs
+    private func overlayStickers(resultName: String, originalImage: UIImage, attachments: [UIImageView],
+                                 stickerImageView: UIView, completion: @escaping (CreateOverlayStickersResult) -> Void) {
+        let hasGifs = attachments.contains(where: { $0 is YYAnimatedImageView})
+
+        if hasGifs {
+            overlayAnimationService.combine(attachments: attachments, resultName: resultName, originalImage: originalImage) { [weak self] in
+                // Important to free up memory when done with gif handling
+                self?._overlayAnimationService = nil
+                completion($0)
+            }
+        } else {
+            guard let image = UIImage.imageWithView(view: stickerImageView) else {
+                completion(.failure(.unknown))
+                return
+            }
+
+            guard let imageData = image.jpeg(.higher) ?? UIImagePNGRepresentation(image) else {
+                debugLog("PHOTOEDIT: can't create UIImage Representation")
+                completion(.failure(.unknown))
+                return
+            }
+
+            let tmpLocation = prepareTmpDirectoy(name: resultName)
+            do {
+                try imageData.write(to: tmpLocation)
+            } catch {
+                debugLog("PHOTOEDIT: Can't write image data to the tmp directoy")
+                completion(.failure(.unknown))
+                return
+            }
+
+            completion(.success(CreateOverlayStickersSuccessResult(url: tmpLocation, type: .image)))
+        }
+    }
+
     
     
     //MARK: - Utils

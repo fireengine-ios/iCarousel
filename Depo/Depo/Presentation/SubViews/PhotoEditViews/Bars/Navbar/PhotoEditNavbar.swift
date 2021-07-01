@@ -20,19 +20,22 @@ final class PhotoEditNavbar: UIView, NibInit {
     enum State {
         case initial
         case edit
+        case editContainsStickers
         case share
         case empty
         
-        var buttonsHiddenValues: (close: Bool, save: Bool, share: Bool, more: Bool) {
+        var buttonsHiddenValues: (close: Bool, save: Bool, saveAsCopy: Bool, share: Bool, more: Bool) {
             switch self {
             case .initial:
-                return (close: false, save: true, share: true, more: true)
+                return (close: false, save: true, saveAsCopy: true, share: true, more: true)
             case .edit:
-                return (close: false, save: false, share: true, more: false)
+                return (close: false, save: false, saveAsCopy: true, share: true, more: false)
+            case .editContainsStickers:
+                return (close: false, save: true, saveAsCopy: false, share: true, more: false)
             case .share:
-                return (close: false, save: true, share: false, more: true)
+                return (close: false, save: true, saveAsCopy: true, share: false, more: true)
             case .empty:
-                return (close: true, save: true, share: true, more: true)
+                return (close: true, save: true, saveAsCopy: true, share: true, more: true)
             }
         }
     }
@@ -45,7 +48,14 @@ final class PhotoEditNavbar: UIView, NibInit {
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 16)
         }
     }
-    
+    @IBOutlet weak var saveAsCopyButton: UIButton! {
+        willSet {
+            newValue.setTitle(TextConstants.photoEditSaveAsCopy, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: Device.isIpad ? 20 : 16)
+        }
+    }
+
     @IBOutlet private(set) weak var moreButton: UIButton!
     @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var rightButtonsContainer: UIStackView!
@@ -57,6 +67,7 @@ final class PhotoEditNavbar: UIView, NibInit {
             let values = state.buttonsHiddenValues
             closeButton.isHidden = values.close
             saveButton.isHidden = values.save
+            saveAsCopyButton.isHidden = values.saveAsCopy
             shareButton.isHidden = values.share
             moreButton.isHidden = values.more
         }
@@ -71,7 +82,11 @@ final class PhotoEditNavbar: UIView, NibInit {
     @IBAction private func onSave(_ sender: UIButton) {
         delegate?.onSavePhoto()
     }
-    
+
+    @IBAction private func onSaveAsCopy(_ sender: UIButton) {
+        delegate?.onSavePhoto()
+    }
+
     @IBAction private func onMore(_ sender: UIButton) {
         delegate?.onMoreActions()
     }

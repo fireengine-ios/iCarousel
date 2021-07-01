@@ -27,14 +27,14 @@ enum PhotoEditSaveMenu: Int, CaseIterable {
 
 final class SelectionMenuController: UIViewController, NibInit {
     
-    static func photoEditMenu(onSelect: @escaping ValueHandler<PhotoEditSaveMenu?>) -> SelectionMenuController {
-        let items = PhotoEditSaveMenu.allCases.compactMap { $0.title }
-        return SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { selectedIndex in
-            guard let index = selectedIndex, let option = PhotoEditSaveMenu(rawValue: index) else {
+    static func photoEditMenu(items: [PhotoEditSaveMenu], onSelect: @escaping ValueHandler<PhotoEditSaveMenu?>) -> SelectionMenuController {
+        let titles = items.map { $0.title }
+        return SelectionMenuController.with(style: .simple, items: titles, selectedIndex: nil) { selectedIndex in
+            guard let index = selectedIndex else {
                 onSelect(nil)
                 return
             }
-            onSelect(option)
+            onSelect(items[index])
         }
     }
     

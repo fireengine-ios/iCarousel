@@ -13,6 +13,7 @@ enum PhotoEditCompletion {
     case canceled
     case saved(image: UIImage)
     case savedAs(image: UIImage)
+    case savedAsWithStickers(imageView: OverlayStickerImageView)
 }
 
 private enum PhotoEditChangesType {
@@ -47,6 +48,8 @@ final class PhotoEditViewController: ViewController, NibInit {
     private let analytics = PhotoEditAnalytics()
     
     private lazy var filterView = self.prepareFilterView()
+
+    private lazy var overlaySelector = OverlayStickerSelectorViewController()
     
     private lazy var adjustmentManager: AdjustmentManager = {
         let types = AdjustmentViewType.allCases.flatMap { $0.adjustmentTypes }
@@ -73,7 +76,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     private var sourceImage = UIImage()
     private var tempOriginalImage = UIImage()
     private var hasChanges: Bool {
-        originalPreviewImage != sourceImage
+        originalPreviewImage != sourceImage || uiManager.hasStickers
     }
     
     var presentedCallback: VoidHandler?
@@ -103,7 +106,16 @@ final class PhotoEditViewController: ViewController, NibInit {
     private func setInitialState() {
         uiManager.image = sourceImage
         uiManager.showInitialState()
-        uiManager.navBarView.state = hasChanges ? .edit : .initial
+        updateNavBarState()
+    }
+
+    private func updateNavBarState() {
+        if hasChanges {
+            let hasStickers = uiManager.hasStickers
+            uiManager.navBarView.state = hasStickers ? .editContainsStickers : .edit
+        } else {
+            uiManager.navBarView.state = .initial
+        }
     }
     
     private func prepareFilterView() -> PreparedFiltersView {
@@ -162,7 +174,11 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
     }
     
     func onSavePhoto() {
-        saveWithModifyOriginal()
+        if uiManager.hasStickers {
+            saveAsCopyWithStickers()
+        } else {
+            saveWithModifyOriginal()
+        }
     }
     
     func onMoreActions() {
@@ -172,7 +188,8 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
     func onSharePhoto() {}
     
     private func showMoreActionsMenu() {
-        let controller = SelectionMenuController.photoEditMenu { [weak self] selectedOption in
+        let items = !uiManager.hasStickers ? PhotoEditSaveMenu.allCases : [.resetToOriginal]
+        let controller = SelectionMenuController.photoEditMenu(items: items) { [weak self] selectedOption in
             guard let self = self else {
                 return
             }
@@ -202,6 +219,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
         sourceImage = originalPreviewImage
         tempOriginalImage = originalPreviewImage
         tempAdjustmentValues.removeAll()
+        uiManager.removeAllAttachments()
         setInitialState()
         filterView.resetToOriginal()
         filterManager.resetToOriginal()
@@ -239,6 +257,25 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
             }
         }
         present(popup, animated: true)
+    }
+
+    private func saveAsCopyWithStickers() {
+        analytics.trackClickEvent(.saveAsCopy)
+        analytics.trackClickNetmeraEvent(.saveAsCopy)
+
+        let popup = PhotoEditViewFactory.alert(for: .saveAsCopy, leftButtonHandler: { [weak self] in
+            self?.uiManager.setHiddenBottomViews(false)
+        }, rightButtonHandler: { [weak self] in
+
+            self?.prepareOriginalImage { [weak self] image in
+                guard let self = self else {
+                    return
+                }
+                self.finishedEditing?(self, .savedAsWithStickers(imageView: self.uiManager.imageScrollView.imageView))
+            }
+        })
+        present(popup, animated: true)
+
     }
     
     private func prepareOriginalImage(completion: @escaping ValueHandler<UIImage>) {
@@ -310,6 +347,18 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     func filtersView() -> UIView {
         return filterView
     }
+
+    func gifSelectorView() -> UIView {
+        overlaySelector.overlayType = .gif
+        overlaySelector.delegate = self
+        return overlaySelector.view
+    }
+
+    func stickerSelectorView() -> UIView {
+        overlaySelector.overlayType = .sticker
+        overlaySelector.delegate = self
+        return overlaySelector.view
+    }
     
     func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) {
         switch item {
@@ -320,12 +369,19 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
 //            filterManager.saveHisory()
 //            filterManager.resetLastApplied()
             analytics.trackAdjustmentScreen()
+
+        case .gif, .sticker:
+            break
         }
         
         prepareTabImage(item) { [weak self] result in
             self?.tempOriginalImage = result.tempOriginalImage
             self?.sourceImage = result.sourceImage
         }
+    }
+
+    func didRemoveAttachment() {
+        updateNavBarState()
     }
     
     private func prepareTabImage(_ item: PhotoEditTabbarItemType, onFinished: @escaping ValueHandler<(tempOriginalImage: UIImage, sourceImage: UIImage)>) {
@@ -351,6 +407,10 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             adjustmentManager.applyAll(sourceImage: filteredImage) { image in
                 onFinished((tempOriginalImage: filteredImage, sourceImage: image))
             }
+
+        case .gif, .sticker:
+            //no-op
+            break
         }
     }
 }
@@ -483,6 +543,16 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
 
 }
 
+extension PhotoEditViewController: OverlayStickerSelectorDelegate {
+    func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType) {
+        showSpinner()
+        uiManager.addAttachment(item: item, attachmentType: attachmentType) { [weak self] in
+            self?.hideSpinner()
+            self?.updateNavBarState()
+        }
+    }
+}
+
 //MARK: - PreparedFiltersViewDelegate
 
 extension PhotoEditViewController: PreparedFiltersViewDelegate {
@@ -506,7 +576,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
             self?.uiManager.image = image
             self?.applyChanges()
         }
-        uiManager.navBarView.state = .edit
+        updateNavBarState()
         
         if firstChanges == .none {
             firstChanges = .filter
