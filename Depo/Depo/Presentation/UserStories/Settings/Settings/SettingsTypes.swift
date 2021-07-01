@@ -19,6 +19,7 @@ enum SettingsTypes: Int {
     case helpAndSupport
     case termsAndPolicy
     case logout
+    case chatbot
     
     var text: String {
         switch self {
@@ -34,15 +35,16 @@ enum SettingsTypes: Int {
         case .helpAndSupport: return TextConstants.settingsViewCellHelp
         case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
         case .logout: return TextConstants.settingsViewCellLogout
+        case .chatbot: return TextConstants.chatbotMenuTitle
         }
     }
 
     static let allSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
     static let allSectionTwoTypes = [connectAccounts, permissions]
     static let allSectionThreeTypes = [myActivities, passcode, security]
-    static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
+    static var allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
 
-    static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool) -> [[SettingsTypes]] {
+    static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
         if isInvitationShown {
             result.append([SettingsTypes.invitation])
@@ -58,9 +60,17 @@ enum SettingsTypes: Int {
         result.append(accountTypes)
 
         result.append(SettingsTypes.allSectionThreeTypes)
+
+        if ((Device.locale == "tr" || Device.locale == "en") && !RouteRequests.isBillo) {
+            if isChatbotShown && !allSectionFourTypes.contains(chatbot) {
+                SettingsTypes.allSectionFourTypes.insert(chatbot, at: 1)
+            } else if !isChatbotShown && allSectionFourTypes.contains(chatbot){
+                SettingsTypes.allSectionFourTypes.remove(chatbot)
+            }
+        }
+
         result.append(SettingsTypes.allSectionFourTypes)
 
         return result
     }
-
 }

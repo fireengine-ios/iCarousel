@@ -27,6 +27,7 @@ final class SettingsInteractor: SettingsInteractorInput {
     }
     
     private(set) var userInfoResponse: AccountInfoResponse?
+    private var isChatMenuEnabled = false
     
     var isTurkcellUser: Bool {
         return (userInfoResponse?.accountType == "TURKCELL")
@@ -104,7 +105,16 @@ final class SettingsInteractor: SettingsInteractorInput {
             
         })
     }
-    
+
+    func fetchChatbotRemoteConfig() {
+        #if LIFEBOX
+        FirebaseRemoteConfig.shared.fetchChatbotMenuEnable { [weak self] in
+            self?.isChatMenuEnabled = $0
+            self?.populateDataForCells()
+        }
+        #endif
+    }
+
     private func getUserStatus() {
         accountService.permissions { [weak self] response in
             switch response {
@@ -148,7 +158,8 @@ final class SettingsInteractor: SettingsInteractorInput {
     func populateDataForCells() {
         let isPermissionShown = self.isNeedShowPermissions ?? false
         let isInvitationShown = self.userInfoResponse?.showInvitation ?? false
+        let isChatMenuEnabled = self.isChatMenuEnabled
 
-        output.cellsDataForSettings(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown)
+        output.cellsDataForSettings(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown, isChatbotShown: isChatMenuEnabled)
     }
 }

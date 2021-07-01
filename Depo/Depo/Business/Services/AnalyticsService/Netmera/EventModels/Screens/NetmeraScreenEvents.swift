@@ -512,6 +512,12 @@ extension NetmeraEvents.Screens {
             return "vfa"
         }
     }
+
+    final class ChatbotScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "feq"
+        }
+    }
 }
 
 

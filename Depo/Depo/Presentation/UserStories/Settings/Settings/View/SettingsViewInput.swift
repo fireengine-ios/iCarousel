@@ -7,7 +7,7 @@
 //
 
 protocol SettingsViewInput: class {
-    func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool)
+    func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool)
     func showProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool)
     func updatePhoto(image: UIImage)
     func profileInfoChanged()

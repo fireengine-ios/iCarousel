@@ -51,24 +51,27 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var isCollectionEmpty = true
     
     private lazy var mediaPlayer: MediaPlayer = factory.resolve()
-    
+
+    var shareType: PrivateShareType = .byMe
+
     //MARK: -
     
     private override init() { }
     
     //MARK: - Public
     
-    func setup() {
+    func setup(shareType: PrivateShareType) {
         setupCollection()
         setupRefresher()
         reload(type: .full)
+        self.shareType = shareType
     }
     
     func change(viewType: MoreActionsConfig.ViewType) {
         guard viewType != currentCollectionViewType else {
             return
         }
-        
+
         currentCollectionViewType = viewType
         updateLayout()
     }
@@ -272,7 +275,13 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         guard let cell = cell as? BasicCollectionMultiFileCell, let item = item(at: indexPath) else {
             return
         }
-        
+
+        if shareType == .byMe || shareType == .withMe {
+            item.isMainFolder = true
+        } else {
+            item.isMainFolder = false
+        }
+
         let isSelectedCell = isSelected(item: item)
         cell.isSelected = isSelectedCell
         cell.updating()
@@ -301,7 +310,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell, let item = item(at: indexPath) else {
             return
         }
-        
+
         if isSelecting {
             if isSelected(item: item) {
                 fileInfoManager.deselectItem(at: indexPath)

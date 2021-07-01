@@ -37,6 +37,8 @@ class BaseDataSourceItem: NSObject {
     var parent: String?
     
     var isShared = false
+
+    var isMainFolder = true
     
     func getCellReUseID() -> String {
         return CollectionViewCellsIdsConstant.cellForImage

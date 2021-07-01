@@ -276,7 +276,7 @@ enum ElementTypes {
         guard let item = item as? Item else {
             return []
         }
-        
+
         var types = [ElementTypes]()
         if !item.isOwner {
             //shared with me items
@@ -296,7 +296,11 @@ enum ElementTypes {
                     }
                 }
             }
-            types.append(.leaveSharing)
+
+            if item.isMainFolder {
+                types.append(.leaveSharing)
+            }
+
             return types
         }
         
@@ -318,8 +322,8 @@ enum ElementTypes {
                 types.append(.downloadDocument)
             }
         }
-        
-        if item.isShared {
+
+        if item.isShared && item.isMainFolder {
             types.append(.endSharing)
         }
         

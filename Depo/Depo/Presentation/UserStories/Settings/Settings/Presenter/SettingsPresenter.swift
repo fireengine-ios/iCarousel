@@ -58,6 +58,7 @@ extension SettingsPresenter: SettingsViewOutput {
     }
     
     func viewWillBecomeActive() {
+        interactor.fetchChatbotRemoteConfig()
         interactor.getCellsData()
         
         startAsyncOperation()
@@ -169,8 +170,8 @@ extension SettingsPresenter: SettingsViewOutput {
 // MARK: - SettingsInteractorOutput
 extension SettingsPresenter: SettingsInteractorOutput {
     
-    func cellsDataForSettings(isPermissionShown: Bool, isInvitationShown: Bool) {
-        view.prepareCellsData(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown)
+    func cellsDataForSettings(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool) {
+        view.prepareCellsData(isPermissionShown: isPermissionShown, isInvitationShown: isInvitationShown, isChatbotShown: isChatbotShown)
     }
     
     func goToOnboarding() {
@@ -210,6 +211,10 @@ extension SettingsPresenter: SettingsInteractorOutput {
     func didFailToObtainUserStatus(errorMessage: String) {
         asyncOperationSuccess()
         router.showError(errorMessage: errorMessage)
+    }
+
+    func goToChatbot() {
+        router.goToChatbot()
     }
     
 }

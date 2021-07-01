@@ -72,7 +72,8 @@ enum PushNotificationAction: String {
     case sharedWithMe = "shared_with_me"
     case sharedByMe = "shared_by_me"
     case invitation = "invitation"
-    
+    case chatbot = "chatbot"
+
     var fromWidget: Bool {
         isContained(in: [.widgetLogout,
                          .widgetQuota,
