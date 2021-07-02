@@ -20,6 +20,15 @@ typealias SelfReturningHandler<T> = (T) -> Void
 enum ResponseResult <T> {
     case success(T)
     case failed(Error)
+
+    func asSwiftResult() -> Result<T, Error> {
+        switch self {
+        case let .success(value):
+            return .success(value)
+        case let .failed(error):
+            return .failure(error)
+        }
+    }
 }
 
 enum ErrorResult<Success, Failure> where Failure: Error {

@@ -98,15 +98,15 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             if needShowSpinner {
                 self.hideSpinner()
             }
-            
+
             switch result {
-            case .success(let details):
+            case let .success(details):
                 self.updateUI(details: details)
-            case .failure(let errorResult):
-                switch errorResult {
+            case let .failure(error):
+                switch error {
                 case .empty:
                     break
-                case .error(let error):
+                case .other(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
             }
@@ -119,8 +119,8 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
         analyzeView.isHidden = true
     }
     
-    private func updateUI(details: CampaignCardResponse) {
-        if (details.startDate...details.endDate).contains(Date()) {
+    private func updateUI(details: PhotopickCampaign) {
+        if (details.dates.startDate...details.dates.endDate).contains(Date()) {
             analyzeView.isHidden = false
             campaignIntroView.isHidden = false
             campaignInfoView.isHidden = true
@@ -136,10 +136,12 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             trackScreen(.campaignDetailAfter)
         }
         
-        loadImage(with: details.imageUrl)
+        loadImage(with: URL(string: details.imageURL))
         contestInfoView.setup(with: details)
+        campaignInfoView.setup(with: details)
+        campaignIntroView.setup(with: details)
         
-        moreInfoUrl = URL(string: details.detailsUrl)
+        moreInfoUrl = URL(string: details.detailsURL)
         moreInfoButton.setTitle(TextConstants.campaignDetailMoreInfoButton, for: .normal)
         
         contentStackView.isHidden = false

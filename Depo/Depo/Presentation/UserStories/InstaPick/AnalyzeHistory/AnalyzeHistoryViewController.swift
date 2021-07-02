@@ -293,24 +293,24 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 success?()
                 return
             }
-            
+
             switch result {
-            case .success(let campaignCard):
-                let isDateAvailable = (campaignCard.startDate...campaignCard.endDate).contains(Date())
-                
+            case let .success(response):
+                let isDateAvailable = (response.dates.startDate...response.dates.endDate).contains(Date())
+
                 if SingletonStorage.shared.isUserFromTurkey, isDateAvailable {
-                    self.dataSource.showCampaignCard(with: campaignCard)
+                    self.dataSource.showCampaignCard(with: response)
                 }
-                
-            case .failure(let errorResult):
-                switch errorResult {
+
+            case .failure(let error):
+                switch error {
                 case .empty:
                     break
-                case .error(let error):
+                case .other(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
             }
-            
+
             success?()
         }
     }

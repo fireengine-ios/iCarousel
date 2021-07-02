@@ -88,7 +88,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     private(set) var selectedItems = [InstapickAnalyze]()
     
     private(set) var analysisCount: InstapickAnalyzesCount?
-    private var campaignCard: CampaignCardResponse?
+    private var campaignCard: PhotopickCampaign?
     
     private(set) var isSelectionStateActive = false
     
@@ -139,7 +139,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         }
     }
     
-    func showCampaignCard(with campaignCard: CampaignCardResponse) {
+    func showCampaignCard(with campaignCard: PhotopickCampaign) {
         self.campaignCard = campaignCard
         if !cards.contains(.campaign) {
             cards.append(.campaign)
@@ -286,8 +286,8 @@ extension AnalyzeHistoryDataSourceForCollectionView: UICollectionViewDataSource 
                 break
             case .campaign:
                 if let cell = cell as? InstapickCampaignCell,
-                    let campaignCardResponse = campaignCard {
-                    cell.setup(with: campaignCardResponse)
+                    let response = campaignCard {
+                    cell.setup(with: response)
                 }
             }
         case .photos:

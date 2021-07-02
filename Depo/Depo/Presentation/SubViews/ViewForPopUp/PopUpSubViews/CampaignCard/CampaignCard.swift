@@ -16,12 +16,12 @@ private enum CampaignUserStatus {
     case daylyLimitReached
     case another
     
-    init(response: CampaignCardResponse) {
-        if response.totalUsed == 0 {
+    init(response: PhotopickCampaign) {
+        if response.usage.totalUsed == 0 {
             self = .newUser
-        } else if response.dailyUsed == 0 && response.totalUsed > 0 {
+        } else if response.usage.dailyUsed == 0 && response.usage.totalUsed > 0 {
             self = .experiencedUser
-        } else if response.dailyRemaining == 0 {
+        } else if response.usage.dailyRemaining == 0 {
             self = .daylyLimitReached
         } else {
             self = .another
@@ -60,6 +60,7 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     private var userStatus: CampaignUserStatus?
     private lazy var router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var campaignService = CampaignServiceImpl()
 
     /// This is set true for the new card that
     /// sets the title from responses below at `setupCardView(campaignCardResponse:)`
@@ -68,13 +69,13 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         guard
-            let details = object?.details,
-            let model = CampaignCardResponse.init(json: details)
+            case let data?? = try? object?.details?.rawData(),
+            let model = try? campaignService.getPhotopickDetails(from: data)
         else {
             assertionFailure()
             return
         }
-        setupCardView(campaignCardResponse: model)
+        setupCardView(campaign: model)
     }
     
     override func layoutSubviews() {
@@ -87,28 +88,30 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
           }
       }
     
-    private func setupCardView(campaignCardResponse: CampaignCardResponse) {
+    private func setupCardView(campaign: PhotopickCampaign) {
         
-        switch campaignCardResponse.messageType {
+        switch campaign.content.messageType {
         case .backend:
             userStatus = .backendMode
             analyzeDetailButton.isHidden = true
-            titleLabel.text = campaignCardResponse.title
-            descriptionLabel.text = campaignCardResponse.message
-            campaignDetailButton.setTitle(campaignCardResponse.detailsText, for: .normal)
+            titleLabel.text = campaign.content.title
+            descriptionLabel.text = campaign.content.message
+            campaignDetailButton.setTitle(campaign.content.detailsText, for: .normal)
         case .client:
-            titleLabel.text = isPromotion ? campaignCardResponse.title : TextConstants.campaignCardTitle
-            userStatus = CampaignUserStatus(response: campaignCardResponse)
-            setDescriptionLabelForClientMode(dailyLimit: campaignCardResponse.maxDailyLimit,
-                                             totalUsed: campaignCardResponse.totalUsed)
+            titleLabel.text = isPromotion ? campaign.content.title : TextConstants.campaignCardTitle
+            userStatus = CampaignUserStatus(response: campaign)
+            setDescriptionLabelForClientMode(dailyLimit: campaign.usage.maxDailyLimit,
+                                             totalUsed: campaign.usage.totalUsed)
             campaignDetailButton.setTitle(TextConstants.campaignDetailButtonTitle, for: .normal)
+        case .unknown:
+            break
         }
         
-        detailUrl = campaignCardResponse.detailsUrl
+        detailUrl = campaign.detailsURL
 
         debugLog("Campaign Card - start load image")
         imageView.setLogs(enabled: true)
-        imageView.loadImageData(with: campaignCardResponse.imageUrl)
+        imageView.loadImageData(with: URL(string: campaign.imageURL))
         
         //TODO: uncomment when BE wil be ready
 //        if let videoUrl = campaignCardResponse.videoUrl {

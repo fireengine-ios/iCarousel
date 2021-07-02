@@ -14,7 +14,7 @@ final class InstaPickCampaignService {
     private lazy var instapickService = InstapickServiceImpl()
     private let storageVars: StorageVars = factory.resolve()
     
-    private var campaignResponse: CampaignCardResponse?
+    private var campaign: PhotopickCampaign?
     private var instaPickCampaignServiceCompletion: ((UINavigationController?) -> Void)?
 
     func getController(completion: @escaping ((UINavigationController?) -> Void)) {
@@ -37,7 +37,7 @@ final class InstaPickCampaignService {
 
             switch result {
             case .success(let response):
-                self.campaignResponse = response
+                self.campaign = response
                 self.checkDateIsValidForCampaign(response: response)
             case .failure(_):
                 self.continueWithCommonFlow()
@@ -45,9 +45,9 @@ final class InstaPickCampaignService {
         }
     }
     
-    private func checkDateIsValidForCampaign(response: CampaignCardResponse) {
+    private func checkDateIsValidForCampaign(response: PhotopickCampaign) {
         let currentDate = Date()
-        if response.startDate <= currentDate && currentDate <= response.endDate {
+        if response.dates.startDate <= currentDate && currentDate <= response.dates.endDate {
             continueWithCampaignFlow()
         } else {
             continueWithCommonFlow()
@@ -79,15 +79,15 @@ final class InstaPickCampaignService {
         }
     }
     
-    private func getCampaignStatus(completion: @escaping (CampaignCardResponse?) -> ()) {
-        if let response = campaignResponse  {
+    private func getCampaignStatus(completion: @escaping (PhotopickCampaign?) -> ()) {
+        if let response = campaign  {
             completion(response)
         } else {
             campaingService.getPhotopickDetails { result in
                 switch result {
                 case .success(let success):
                     completion(success)
-                case .failure(_):
+                case .failure:
                     completion(nil)
                 }
             }
@@ -95,8 +95,8 @@ final class InstaPickCampaignService {
     }
     
     private func prepareInstaPickCampaignViewControllerForPresent(with mode: InstaPickCampaignViewControllerMode) {
-        getCampaignStatus { [weak self] campaignCardResponse in
-            guard let response = campaignCardResponse else {
+        getCampaignStatus { [weak self] response in
+            guard let response = response else {
                 self?.continueWithCommonFlow()
                 assertionFailure()
                 return
@@ -111,9 +111,9 @@ final class InstaPickCampaignService {
         }
     }
     
-    private func handleWithoutLeftPhotoPick(mode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse) {
+    private func handleWithoutLeftPhotoPick(mode: InstaPickCampaignViewControllerMode, with data: PhotopickCampaign) {
         
-        switch data.dailyRemaining {
+        switch data.usage.dailyRemaining {
         case 0:
             let calendar =  Calendar.current
             if let date = storageVars.shownCampaignInstaPickWithoutDaysLeft, calendar.isDateInToday(date) {
@@ -136,7 +136,7 @@ final class InstaPickCampaignService {
         }
     }
     
-    private func returnInstaPickCampaignViewController(mode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse) {
+    private func returnInstaPickCampaignViewController(mode: InstaPickCampaignViewControllerMode, with data: PhotopickCampaign) {
         
         let router = RouterVC()
         let controller = InstaPickCampaignViewController.createController(controllerMode: mode,
