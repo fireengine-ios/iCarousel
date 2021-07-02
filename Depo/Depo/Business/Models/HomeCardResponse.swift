@@ -62,6 +62,8 @@ final class HomeCardResponse : Equatable {
             return .tbMatik
         case .campaign:
             return .campaignCard
+        case .promotion:
+            return .promotion
         case .divorce:
             return .divorce
         case .invitation:
@@ -115,6 +117,7 @@ enum HomeCardTypes: String {
     case instaPick = "INSTAGRAM_LIKE"
     case tbMatik = "TBMATIC"
     case campaign = "CAMPAIGN"
+    case promotion = "PROMOTION"
     case divorce = "DIVORCE"
     case invitation = "INVITATION"
     case thingsDocument = "THINGS_DOCUMENT"

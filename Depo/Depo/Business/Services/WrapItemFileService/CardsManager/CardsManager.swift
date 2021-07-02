@@ -39,6 +39,7 @@ enum OperationType: String {
     case instaPick                  = "instaPick"
     case tbMatik                    = "TBMATIC"
     case campaignCard               = "CAMPAIGN"
+    case promotion                  = "PROMOTION"
     case divorce                    = "DIVORCE"
     case invitation                 = "INVITATION"
     case documents                  = "THINGS_DOCUMENT"
@@ -407,6 +408,10 @@ class CardsManager: NSObject {
             cardView = TBMatikCard.initFromNib()
         case .campaignCard:
             cardView = CampaignCard.initFromNib()
+        case .promotion:
+            let card = CampaignCard.initFromNib()
+            card.isPromotion = true
+            cardView = card
         case .divorce:
             cardView = DivorceCard.initFromNib()
         case .invitation:

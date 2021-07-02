@@ -60,6 +60,10 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     private var userStatus: CampaignUserStatus?
     private lazy var router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+
+    /// This is set true for the new card that
+    /// sets the title from responses below at `setupCardView(campaignCardResponse:)`
+    var isPromotion: Bool = false
     
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
@@ -93,8 +97,8 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
             descriptionLabel.text = campaignCardResponse.message
             campaignDetailButton.setTitle(campaignCardResponse.detailsText, for: .normal)
         case .client:
+            titleLabel.text = isPromotion ? campaignCardResponse.title : TextConstants.campaignCardTitle
             userStatus = CampaignUserStatus(response: campaignCardResponse)
-            titleLabel.text = TextConstants.campaignCardTitle
             setDescriptionLabelForClientMode(dailyLimit: campaignCardResponse.maxDailyLimit,
                                              totalUsed: campaignCardResponse.totalUsed)
             campaignDetailButton.setTitle(TextConstants.campaignDetailButtonTitle, for: .normal)
