@@ -144,7 +144,8 @@ final class PhotoEditViewUIManager: NSObject {
         view.frame = contentView.bounds
         contentView.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.pinToSuperviewEdges()
+        let bottomSpacing = UIEdgeInsets(top: 0, left: 0, bottom: bottomBarContainer.bounds.height, right: 0)
+        view.pinToSuperviewEdges(offset: bottomSpacing)
     }
     
     private func hideAdjustView() {
