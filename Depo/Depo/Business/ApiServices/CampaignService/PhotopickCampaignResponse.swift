@@ -39,7 +39,8 @@ struct PhotopickCampaign: Codable {
         // Below logic moved from FE-2366
         // for messageType == .client usage fields are required
         if content.messageType == .client && usage.allNils {
-            throw CampaignServiceError.empty
+            let message = "Usage fields are required when content.messageType == .client"
+            throw DecodingError.dataCorruptedError(forKey: CodingKeys.usage, in: container, debugDescription: message)
         }
     }
 }

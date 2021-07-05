@@ -38,8 +38,6 @@ final class CampaignServiceImpl: CampaignService {
                 do {
                     let response = try result.asSwiftResult().get()
                     completion(.success(response.value))
-                } catch CampaignServiceError.empty {
-                    completion(.failure(.empty))
                 } catch is DecodingError {
                     completion(.failure(.empty))
                 } catch {
