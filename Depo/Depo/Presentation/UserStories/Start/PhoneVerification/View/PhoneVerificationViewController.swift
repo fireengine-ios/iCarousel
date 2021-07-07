@@ -70,7 +70,7 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         navigationBarWithGradientStyle()
     }
     
-    @IBAction func ResendCode(_ sender: Any) {
+    @IBAction func resendCode(_ sender: Any) {
         hiddenError()
         output.resendButtonPressed()
     }
