@@ -26,8 +26,8 @@ apps = [
         versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
         ictsContainerId: '743', // ICT Store
         prodTeamID: '693N5K66ZJ',
-        xcodeSchema: isFriendlyBuild ? 'TC_Depo_LifeTech_Bundle' : 'TC_Depo_LifeTech',
-        xcodeTarget: isFriendlyBuild ? 'TC_Depo_LifeTech_Bundle' : 'TC_Depo_LifeTech',
+        xcodeSchema: isFriendlyBuild ? 'Lifebox_Bundle' : 'Lifebox',
+        xcodeTarget: isFriendlyBuild ? 'Lifebox_Bundle' : 'Lifebox',
         itcTeamId: '121548574',
     ]
 ,
@@ -51,7 +51,7 @@ ictsDeployers = "EXT02D9926" // To enable, uncomment submitters in approval stag
 testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval stage code
 
 // Email notification
-devTeamEmails = "gozde.kaymaz@turkcell.com.tr;burcu.atalan@turkcell.com.tr;alper.kirdok@consultant.turkcell.com.tr;hadee.hallaq@consultant.turkcell.com.tr"
+devTeamEmails = "gozde.kaymaz@turkcell.com.tr;burcu.atalan@turkcell.com.tr;burak.donat@consultant.turkcell.com.tr;hadee.hallaq@consultant.turkcell.com.tr"
 
 xcodeParams = [
         xcodeApp: '12.0',
