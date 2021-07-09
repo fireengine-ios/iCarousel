@@ -10,37 +10,83 @@ import Alamofire
 import XCGLogger
 
 final class SilentPushApiService: BaseRequestService {
-    @discardableResult
-    func uploadLog() {
 
-        let logPath = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName)
-        //TODO Check nil
-        let widgetLogUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: SharedConstants.groupIdentifier)!.appendingPathComponent("home_widget.log")
+    //MARK: -Properties
+    private var logData: Data?
+    private var widgetLogData: Data?
+    private let logPath = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName)
+    private let widgetLogUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: SharedConstants.groupIdentifier)!
+                                                                .appendingPathComponent("home_widget.log")
+
+    func uploadLog() {
+        var bgTask = UIBackgroundTaskInvalid
+        bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+            UIApplication.shared.endBackgroundTask(bgTask)
+        })
 
         do {
-            let logData = try Data(contentsOf: logPath)
-            let widgetLogData = try Data(contentsOf: widgetLogUrl)
+            let parameters = createInfoParameters()
+            logPath.checkFileExist() ? (logData = try Data(contentsOf: logPath)) : (logData = nil)
+            widgetLogUrl.checkFileExist() ? (widgetLogData = try Data(contentsOf: widgetLogUrl)) : (widgetLogData = nil)
 
-            SessionManager.customDefault.upload(
-                multipartFormData: {
-                    $0.append(logData, withName: "logs", fileName: "logs.txt", mimeType: "text/plain")
-                    $0.append(widgetLogData, withName: "widget_logs", fileName: "widget_logs.txt", mimeType: "text/plain")
+            let formData: (MultipartFormData) -> Void = {
+                if let logData = self.logData {
+                    $0.append(logData, withName: "files", fileName: "logs.txt", mimeType: "text/plain")
+                }
 
-                },
-                to: RouteRequests.Invitation.link) { encodingResult in
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseJSON { response in
-                        debugPrint(response)
-                    }
-                case .failure(let encodingError):
-                    print(encodingError)
+                if let widgetLogData = self.widgetLogData {
+                    $0.append(widgetLogData, withName: "files", fileName: "widget_logs.txt", mimeType: "text/plain")
+                }
+
+                for (key, value) in parameters {
+                    $0.append(value.data(using: String.Encoding.utf8)!, withName: key)
                 }
             }
+            SessionManager
+                .customDefault
+                .upload(multipartFormData: formData, to: RouteRequests.feedbackLog) { encodingResult in
+                    switch encodingResult {
+                    case .success(let upload, _, _):
+                        upload
+                            .customValidate()
+                            .responseData { response in
+                                print(response)
+                            }
+                    case .failure(let encodingError):
+                        debugLog("Silent push is failed: \(encodingError)")
+                    }
+                    if bgTask != UIBackgroundTaskInvalid {
+                        UIApplication.shared.endBackgroundTask(bgTask)
+                    }
+                }
         } catch {
+            if bgTask != UIBackgroundTaskInvalid {
+                UIApplication.shared.endBackgroundTask(bgTask)
+            }
             fatalLog("Unable to get log file data: \(error)")
         }
 
+    }
+
+    private func createInfoParameters() -> [String:String] {
+        let appVersion = Device.deviceInfo["appVersion"] as? String
+        let carrier = Device.carrier
+        let model = Device.deviceInfo["name"] as? String
+        let manufacturer = Device.manufacturer
+        let device = Device.modelName
+        let deviceOs = Device.systemVersion
+        let language = Device.deviceInfo["language"] as? String
+        let networkStatus = ReachabilityService.shared.connectionType
+
+        var infoText = "Application Version: \(appVersion ?? "") \n"
+        infoText.append("Carrier: \(carrier ?? "") \n")
+        infoText.append("Model: \(model ?? "") \n")
+        infoText.append("Manufacturer: \(manufacturer) \n")
+        infoText.append("Device: \(device) \n")
+        infoText.append("DeviceOs: \(deviceOs) \n")
+        infoText.append("Language: \(language ?? "") \n")
+        infoText.append("NetworkStatus: \(networkStatus) \n")
+        return ["client_info": infoText]
     }
 
 /*

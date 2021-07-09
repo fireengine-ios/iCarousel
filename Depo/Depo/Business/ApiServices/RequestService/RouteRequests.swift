@@ -217,6 +217,7 @@ struct RouteRequests {
     
     //MARK: Feedback
     static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
+    static let feedbackLog = baseUrl +/ "feedback/log"
     
     //MARK : Faq
     static var faqContentUrl: String {

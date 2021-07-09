@@ -162,6 +162,7 @@ final class PushNotificationService {
         case .sharedByMe: openShareByMe()
         case .invitation : openInvitation()
         case .chatbot: openChatbot()
+        case .silent: openSilentPushService()
         }
         
         
@@ -518,5 +519,9 @@ final class PushNotificationService {
         controller.loadViewIfNeeded()
         controller.switchSegment(to: index)
         pushTo(controller)
+    }
+
+    private func openSilentPushService() {
+        SilentPushApiService().uploadLog()
     }
 }
