@@ -23,14 +23,3 @@ extension URL {
         return result
     }
 }
-
-extension URL    {
-    func checkFileExist() -> Bool {
-        let path = self.path
-        if (FileManager.default.fileExists(atPath: path))   {
-            return true
-        } else {
-            return false
-        }
-    }
-}

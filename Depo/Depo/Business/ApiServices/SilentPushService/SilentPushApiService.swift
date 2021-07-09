@@ -24,48 +24,44 @@ final class SilentPushApiService: BaseRequestService {
             UIApplication.shared.endBackgroundTask(bgTask)
         })
 
-        do {
-            let parameters = createInfoParameters()
-            logPath.checkFileExist() ? (logData = try Data(contentsOf: logPath)) : (logData = nil)
-            widgetLogUrl.checkFileExist() ? (widgetLogData = try Data(contentsOf: widgetLogUrl)) : (widgetLogData = nil)
-
-            let formData: (MultipartFormData) -> Void = {
-                if let logData = self.logData {
-                    $0.append(logData, withName: "files", fileName: "logs.txt", mimeType: "text/plain")
-                }
-
-                if let widgetLogData = self.widgetLogData {
-                    $0.append(widgetLogData, withName: "files", fileName: "widget_logs.txt", mimeType: "text/plain")
-                }
-
-                for (key, value) in parameters {
-                    $0.append(value.data(using: String.Encoding.utf8)!, withName: key)
-                }
-            }
-            SessionManager
-                .customDefault
-                .upload(multipartFormData: formData, to: RouteRequests.feedbackLog) { encodingResult in
-                    switch encodingResult {
-                    case .success(let upload, _, _):
-                        upload
-                            .customValidate()
-                            .responseData { response in
-                                print(response)
-                            }
-                    case .failure(let encodingError):
-                        debugLog("Silent push is failed: \(encodingError)")
-                    }
-                    if bgTask != UIBackgroundTaskInvalid {
-                        UIApplication.shared.endBackgroundTask(bgTask)
-                    }
-                }
-        } catch {
+        let endTask = {
             if bgTask != UIBackgroundTaskInvalid {
                 UIApplication.shared.endBackgroundTask(bgTask)
             }
-            fatalLog("Unable to get log file data: \(error)")
         }
+        let parameters = createInfoParameters()
+        logData = try? Data(contentsOf: logPath)
+        widgetLogData = try? Data(contentsOf: widgetLogUrl)
 
+        let formData: (MultipartFormData) -> Void = {
+            if let logData = self.logData {
+                $0.append(logData, withName: "files", fileName: "logs.txt", mimeType: "text/plain")
+            }
+
+            if let widgetLogData = self.widgetLogData {
+                $0.append(widgetLogData, withName: "files", fileName: "widget_logs.txt", mimeType: "text/plain")
+            }
+
+            for (key, value) in parameters {
+                $0.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+        }
+        SessionManager
+            .customDefault
+            .upload(multipartFormData: formData, to: RouteRequests.feedbackLog) { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload
+                        .customValidate()
+                        .responseData { response in
+                            print(response)
+                            endTask()
+                        }
+                case .failure(let encodingError):
+                    debugLog("Silent push is failed: \(encodingError)")
+                    endTask()
+                }
+            }
     }
 
     private func createInfoParameters() -> [String:String] {
@@ -88,23 +84,4 @@ final class SilentPushApiService: BaseRequestService {
         infoText.append("NetworkStatus: \(networkStatus) \n")
         return ["client_info": infoText]
     }
-
-/*
-    http.session.upload(
-        multipartFormData: {
-            $0.append(data, withName: "fileName", fileName: "test.log", mimeType: "text/log")
-        },
-        to: url(forPath: "help/uploadLog/" + logId),
-        method: .post,
-        interceptor: Interceptor(interceptors: http.interceptors)
-    ).responseJSONDictionary(completion: completion)
-*/
-//    func getInvitationLink(handler: @escaping ResponseHandler<InvitationLink>) -> URLSessionTask? {
-//        return SessionManager
-//            .customDefault
-//            .request(RouteRequests.Invitation.link)
-//            .customValidate()
-//            .responseObject(handler)
-//            .task
-//    }
 }
