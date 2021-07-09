@@ -185,7 +185,7 @@ private final class APIReachabilityService {
     func checkAPI(_ completion: BoolHandler? = nil) {
         SessionManager
             .sessionWithoutAuth
-            .request(RouteRequests.baseUrl)
+            .request(RouteRequests.healthCheck)
             .responseVoid { [weak self] result in
                 let isReachable: Bool
                 switch result {

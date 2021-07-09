@@ -137,7 +137,7 @@ final class APILogger {
     
     private func canLogRequest(_ url: URL, httpMethod: String) -> Bool {
         // ReachabilityService.checkAPI
-        if url == RouteRequests.baseUrl {
+        if url == RouteRequests.healthCheck {
             return false
         }
         
