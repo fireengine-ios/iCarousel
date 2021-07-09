@@ -876,7 +876,7 @@ final class UploadService: BaseRequestService {
                 
             case 400:
                 if let data = data {
-                    let json = JSON(data: data)
+                    let json = JSON(data)
                     let errorCode = json["error_code"].stringValue
                     debugLog("resumable_upload: error_code is \(errorCode)")
                     switch errorCode {

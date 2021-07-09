@@ -231,7 +231,7 @@ final class OverlayStickerImageView: UIImageView {
             startPositionSelectedView = subview.center
             selectedSticker = subview
             if subview != mainSticker {
-                bringSubview(toFront: subview)
+                bringSubviewToFront(subview)
             }
             
         case .changed:

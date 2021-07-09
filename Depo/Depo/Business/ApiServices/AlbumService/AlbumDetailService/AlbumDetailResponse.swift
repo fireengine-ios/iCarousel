@@ -20,7 +20,7 @@ class AlbumDetailResponse: ObjectRequestResponse {
     override func mapping() {
         coverPhoto = SearchItemResponse(withJSON: json?[AlbumJsonKey.coverPhoto])
         let  tmpList = json?[AlbumDetailJsonKey.albumDetailFiles].array
-        if let result = tmpList?.flatMap({ SearchItemResponse(withJSON: $0) }) {
+        if let result = tmpList?.compactMap({ SearchItemResponse(withJSON: $0) }) {
             list = result
 //            let wrapedItems: [WrapData] = result.map {
 //               return WrapData(remote: $0)

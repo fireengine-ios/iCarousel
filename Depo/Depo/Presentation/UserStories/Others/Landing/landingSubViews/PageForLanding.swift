@@ -52,7 +52,7 @@ class PageForLanding: UIViewController {
         } else {
             bgImage.image = nil
             bgImageSmall.image = UIImage(named: bgImageName)
-            bgImageSmall.contentMode = UIViewContentMode.scaleAspectFill
+            bgImageSmall.contentMode = .scaleAspectFill
             titleLabel.textColor = ColorConstants.blackForLanding
             subTitleLabel.textColor = ColorConstants.blackForLanding
         }

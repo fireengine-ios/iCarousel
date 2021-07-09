@@ -28,7 +28,7 @@ final class DeleteDuplicatesMainView: UIView, NibInit {
             let gradientView = TransparentGradientView(style: .vertical, mainColor: ColorConstants.lighterGray)
             gradientView.frame = newValue.bounds
             newValue.addSubview(gradientView)
-            newValue.sendSubview(toBack: gradientView)
+            newValue.sendSubviewToBack(gradientView)
             gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
     }

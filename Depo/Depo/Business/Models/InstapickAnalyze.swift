@@ -26,7 +26,7 @@ final class InstapickAnalyze {
             let requestIdentifier = json["requestIdentifier"].string,
             let rank = json["rank"].float,
             let score = json["score"].float,
-            let hashTags = json["hashTags"].array?.flatMap({ $0.string })
+            let hashTags = json["hashTags"].array?.compactMap({ $0.string })
             else {
                 assertionFailure()
                 return nil

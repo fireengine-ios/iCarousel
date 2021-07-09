@@ -31,7 +31,7 @@ final class PremiumInfoCard: BaseCardView {
         messageLabel.textColor = ColorConstants.textGrayColor
 
         becomePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-        becomePremiumButton.titleEdgeInsets = UIEdgeInsetsMake(6, 17, 6, 17)
+        becomePremiumButton.titleEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 17)
         becomePremiumButton.setTitle(TextConstants.becomePremiumMember, for: .normal)
 
         crownImage.image = UIImage(named: "crownSmall")

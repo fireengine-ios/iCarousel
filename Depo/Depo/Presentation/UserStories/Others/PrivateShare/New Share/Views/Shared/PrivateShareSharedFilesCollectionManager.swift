@@ -136,7 +136,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private func setupCollection() {
         collectionView?.register(nibCell: BasicCollectionMultiFileCell.self)
         collectionView?.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self,
-                                 kind: UICollectionElementKindSectionHeader)
+                                 kind: UICollectionView.elementKindSectionHeader)
         
         collectionView?.alwaysBounceVertical = true
         

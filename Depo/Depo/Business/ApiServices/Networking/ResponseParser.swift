@@ -27,12 +27,12 @@ enum ResponseParser {
         guard let data = data, let statusCode = response?.statusCode else {
             return nil
         }
-        if let value = JSON(data: data)["value"].string {
+        if let value = JSON(data)["value"].string {
             return ServerValueError(value: value, code: statusCode)
-        } else if let status = JSON(data: data)["status"].string {
+        } else if let status = JSON(data)["status"].string {
             return ServerStatusError(status: status, code: statusCode)
-        } else if let message = JSON(data: data)["errorMsg"].string {
-            return ServerMessageError(message: message, code: statusCode, customErrorCode: JSON(data: data)["errorCode"].int)
+        } else if let message = JSON(data)["errorMsg"].string {
+            return ServerMessageError(message: message, code: statusCode, customErrorCode: JSON(data)["errorCode"].int)
         } else {
             return nil
         }

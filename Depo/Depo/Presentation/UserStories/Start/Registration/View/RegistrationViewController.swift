@@ -209,9 +209,9 @@ final class RegistrationViewController: ViewController {
 
     private func setupTermsViewController() {
         termsViewController.delegate = self
-        addChildViewController(termsViewController)
+        addChild(termsViewController)
         stackView.addArrangedSubview(termsViewController.view)
-        termsViewController.didMove(toParentViewController: self)
+        termsViewController.didMove(toParent: self)
     }
 
     private func observePhoneInputChanges() {

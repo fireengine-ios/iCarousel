@@ -536,7 +536,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getIndexPathsForItems(_ items: [Item]) -> [IndexPath] {
-        return items.flatMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
+        return items.compactMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
     }
     
     func transformedLeftOvers() -> [WrapData] {
@@ -768,13 +768,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID,
                               bundle: nil)
         collectionView?.register(headerNib,
-                                forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
         
         let headerCarousel = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader,
                               bundle: nil)
         collectionView?.register(headerCarousel,
-                                forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader)
         
     }
@@ -783,13 +783,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         let footerView = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewPremiumFooter,
                                bundle: nil)
         collectionView?.register(footerView,
-                                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter)
         
         let headerNib = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter,
                               bundle: nil)
         collectionView?.register(headerNib,
-                                 forSupplementaryViewOfKind: UICollectionElementKindSectionFooter  ,
+                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter  ,
                                  withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter)
     }
     
@@ -1190,7 +1190,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
     /// https://stackoverflow.com/a/46930410/5893286
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        if elementKind == UICollectionElementKindSectionHeader {
+        if elementKind == UICollectionView.elementKindSectionHeader {
             view.layer.zPosition = 0
         }
     }
@@ -1314,7 +1314,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if let photoCell = cell_ as? CollectionViewCellForPhoto {
             let file = itemForIndexPath(indexPath: indexPath)
-            if let `file` = file, uploadedObjectID.index(of: file.uuid) != nil {
+            if let `file` = file, uploadedObjectID.firstIndex(of: file.uuid) != nil {
                 photoCell.finishedUploadForObject()
             }
         }
@@ -1329,7 +1329,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func hideLoadingFooter() {
         guard let footerView =
-            collectionView?.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: allItems.count - 1)) as? CollectionViewSpinnerFooter else {
+            collectionView?.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter, at: IndexPath(item: 0, section: allItems.count - 1)) as? CollectionViewSpinnerFooter else {
             return
         }
         
@@ -1429,8 +1429,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-        case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID, for: indexPath)
             
             guard let textHeader = headerView as? CollectionViewSimpleHeaderWithText else {
                 return headerView
@@ -1450,15 +1450,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             headers.insert(textHeader)
             return headerView
-        case UICollectionElementKindSectionFooter:
+        case UICollectionView.elementKindSectionFooter:
             if indexPath.section == allItems.count - 1, !isPaginationDidEnd,
-                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath) as? CollectionViewSpinnerFooter
+                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath) as? CollectionViewSpinnerFooter
                 {
                 footerView.startSpinner()
                 return footerView
                 
             } else {
-                return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath)
+                return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewSpinnerFooter, for: indexPath)
             }
         default:
             assert(false, "Unexpected element kind")
@@ -1573,7 +1573,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 
                 let uuid = file.getTrimmedLocalID()
                 
-                if self.uploadedObjectID.index(of: file.uuid) == nil {
+                if self.uploadedObjectID.firstIndex(of: file.uuid) == nil {
                     self.uploadedObjectID.append(uuid)
                 }
                 
@@ -1615,7 +1615,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                         let cell = self.getCellForFile(objectUUID: file.uuid)
                         cell?.resetCloudImage()
                         
-                        if let index = self.uploadedObjectID.index(of: uuid){
+                        if let index = self.uploadedObjectID.firstIndex(of: uuid){
                             self.uploadedObjectID.remove(at: index)
                         }
                     }
@@ -1751,7 +1751,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             for object in serverObjects {
                 let trimmedID = object.getTrimmedLocalID()
                 if foundedLocalID.contains(trimmedID) {
-                    if let index = allItemsIDs.index(of: trimmedID){
+                    if let index = allItemsIDs.firstIndex(of: trimmedID){
                         allItemsIDs.remove(at: index)
                         if allItemsIDs.contains(trimmedID) {
                             idsForRemove.append(object.uuid)
@@ -1859,7 +1859,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             for array in allItems {
                 var newSectionArray = [Item]()
                 for arraysObject in array {
-                    if let index = trimmedLocalIDs.index(of: arraysObject.getTrimmedLocalID()) {
+                    if let index = trimmedLocalIDs.firstIndex(of: arraysObject.getTrimmedLocalID()) {
                         trimmedLocalIDs.remove(at: index)
                     } else {
                         newSectionArray.append(arraysObject)
@@ -1934,7 +1934,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             isAlbumDetail(filters: unwrapedFilters) else {
                 return
         }
-        if let index = uploadToAlbumItems.index(of: item.uuid) {
+        if let index = uploadToAlbumItems.firstIndex(of: item.uuid) {
             uploadToAlbumItems.remove(at: index)
         }
         if uploadToAlbumItems.isEmpty {

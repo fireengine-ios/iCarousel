@@ -60,7 +60,7 @@ class SegmentedController: BaseViewController, NibInit {
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.tintColor = ColorConstants.darkBlueColor
-            newValue.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)],
+            newValue.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.TurkcellSaturaRegFont(size: 14)],
                                             for: .normal)
         }
     }
@@ -158,7 +158,7 @@ class SegmentedController: BaseViewController, NibInit {
         
         selectedIndex = sender.selectedSegmentIndex
         
-        childViewControllers.forEach { $0.removeFromParentVC() }
+        children.forEach { $0.removeFromParentVC() }
         setupSelectedController(viewControllers[selectedIndex])
     }
     
@@ -172,11 +172,11 @@ class SegmentedController: BaseViewController, NibInit {
     }
     
     private func add(childController: UIViewController) {
-        addChildViewController(childController)
+        addChild(childController)
         childController.view.frame = containerView.bounds
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         containerView.addSubview(childController.view)
-        childController.didMove(toParentViewController: self)
+        childController.didMove(toParent: self)
     }
 }
 
@@ -194,9 +194,9 @@ class SegmentedController: BaseViewController, NibInit {
 extension UIViewController {
     
     func removeFromParentVC() {
-        willMove(toParentViewController: nil)
+        willMove(toParent: nil)
         view.removeFromSuperview()
-        removeFromParentViewController()
+        removeFromParent()
     }
 }
 

@@ -134,7 +134,7 @@ class EulaService: BaseRequestService {
                 switch response.result {
                 case .success(let data):
                     
-                    guard let content = EULAResponse(json: JSON(data: data)) else {
+                    guard let content = EULAResponse(json: JSON(data)) else {
                         assertionFailure()
                         let error = CustomErrors.serverError("failed parsing EULAResponse")
                         handler(.failed(error))

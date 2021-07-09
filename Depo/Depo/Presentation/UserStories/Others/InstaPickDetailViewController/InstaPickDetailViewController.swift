@@ -218,7 +218,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
             String(format: TextConstants.instaPickLeftCountLabel, analyzesCount.left, analyzesCount.total)
         
         ///if left count is 0 we seek ":"(not 0 because of RTL language) and draw in red
-        if analyzesCount.left == 0, let location = text.index(of: ":"), !analyzesCount.isFree {
+        if analyzesCount.left == 0, let location = text.firstIndex(of: ":"), !analyzesCount.isFree {
             let attributedString = NSMutableAttributedString(string: text, attributes: [
                 .font : UIFont.TurkcellSaturaDemFont(size: Device.isIpad ? 24 : 18),
                 .foregroundColor : ColorConstants.textGrayColor,
@@ -259,7 +259,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     }
     
     private func setNewSelectedPhoto(with model: InstapickAnalyze) {
-        guard let newSelectedPhotoIndex = analyzes.index(of: model) else {
+        guard let newSelectedPhotoIndex = analyzes.firstIndex(of: model) else {
             let error = CustomErrors.serverError("An error occured while changing selected photo. Photo in nil.")
             showErrorWith(message: error.localizedDescription)
             return

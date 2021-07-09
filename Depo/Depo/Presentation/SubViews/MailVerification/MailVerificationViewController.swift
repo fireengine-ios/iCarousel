@@ -109,7 +109,7 @@ class MailVerificationViewController: BaseViewController {
         let y = alertLikeView.frame.size.height + getMainYForView(view: alertLikeView)
         if (view.frame.size.height - y) < keyboardHeight {
             let dy = keyboardHeight - (view.frame.size.height - y)
-            scrollView.contentInset = UIEdgeInsetsMake(0, 0, dy + 10, 0)
+            scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: dy + 10, right: 0)
 
             //let yText = storyNameTextField.frame.size.height + getMainYForView(view: storyNameTextField)
             let dyText = keyboardHeight - (view.frame.size.height - y) + 10

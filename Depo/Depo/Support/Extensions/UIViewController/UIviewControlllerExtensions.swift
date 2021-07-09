@@ -116,7 +116,7 @@ extension UIViewController: Waiting {
     }
 
     private func postAccessibilityScreenChanged(view: UIView) {
-        UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, view)
+        UIAccessibility.post(notification: .screenChanged, argument: view)
     }
 }
 

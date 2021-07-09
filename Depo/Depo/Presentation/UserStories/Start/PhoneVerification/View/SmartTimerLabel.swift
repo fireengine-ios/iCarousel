@@ -53,7 +53,7 @@ class SmartTimerLabel: UILabel {
     private var notificationToken: NSObjectProtocol?
     
     private func setupObserver() {
-         notificationToken = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+         notificationToken = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             guard let `self` = self, let startDateUnwraped = self.startDate else {
                 return
             }

@@ -138,7 +138,7 @@ class GridListTopBar: ViewController {
         if (selectedIndex != -1) {
             selectedSort = selectedIndex
         } else {
-            selectedSort = currentConfig?.availableSortTypes.index(of: unwrapedConfig.defaultSortType) ?? 0
+            selectedSort = currentConfig?.availableSortTypes.firstIndex(of: unwrapedConfig.defaultSortType) ?? 0
         }
         sortingTable.setup(withTitles: titles, selectedIndex: selectedSort)
        

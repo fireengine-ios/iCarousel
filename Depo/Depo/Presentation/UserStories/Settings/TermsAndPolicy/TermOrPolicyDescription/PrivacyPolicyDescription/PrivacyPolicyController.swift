@@ -26,12 +26,12 @@ final class PrivacyPolicyController: UIViewController {
         
         /// there is a bug for iOS 9
         /// https://stackoverflow.com/a/32843700/5893286
-        webView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
+        webView.scrollView.decelerationRate = .normal
         return webView
     }()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicator.hidesWhenStopped = true
         activityIndicator.frame = view.bounds
         activityIndicator.autoresizingMask = [.flexibleWidth, .flexibleHeight]

@@ -41,7 +41,7 @@ final class PrivateShareLocalSuggestionsViewController: UIViewController, NibIni
             newValue.register(nibCell: PrivateShareLocalContactCell.self)
             
             newValue.estimatedRowHeight = 64
-            newValue.rowHeight = UITableViewAutomaticDimension
+            newValue.rowHeight = UITableView.automaticDimension
             newValue.tableFooterView = UIView()
             
             newValue.allowsSelection = false

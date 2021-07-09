@@ -69,7 +69,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(nibCell: SpotifyPlaylistCollectionViewCell.self)
-        collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
+        collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionView.elementKindSectionHeader)
         collectionView.allowsMultipleSelection = true
         collectionView.alwaysBounceVertical = true
         
@@ -168,7 +168,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
         /// https://stackoverflow.com/a/46930410/5893286
-        if elementKind == UICollectionElementKindSectionHeader {
+        if elementKind == UICollectionView.elementKindSectionHeader {
             view.layer.zPosition = 0
         }
         guard let view = view as? CollectionViewSimpleHeaderWithText else {

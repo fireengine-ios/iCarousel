@@ -49,7 +49,7 @@ final class ImageScrollView: UIScrollView {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         bouncesZoom = true
-        decelerationRate = UIScrollViewDecelerationRateFast
+        decelerationRate = .fast
         delegate = self
         
         imageView.frame = bounds

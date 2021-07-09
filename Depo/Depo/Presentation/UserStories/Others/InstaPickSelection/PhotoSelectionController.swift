@@ -58,7 +58,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         collectionView.delegate = self
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(CollectionSpinnerFooter.self,
-                                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                                 withReuseIdentifier: footerId)
         collectionView.backgroundColor = .white
         collectionView.alwaysBounceVertical = true
@@ -76,7 +76,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
     }()
     
     private lazy var loadingMoreFooterView: CollectionSpinnerFooter? = {
-        return collectionView.supplementaryView(forElementKind: UICollectionElementKindSectionFooter, at: IndexPath(item: 0, section: photosSectionIndex)) as? CollectionSpinnerFooter
+        return collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionFooter, at: IndexPath(item: 0, section: photosSectionIndex)) as? CollectionSpinnerFooter
     }()
     
     init(title: String, selectingLimit: Int, delegate: PhotoSelectionControllerDelegate?, dataSource: PhotoSelectionDataSourceProtocol) {
@@ -292,8 +292,8 @@ extension PhotoSelectionController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if kind == UICollectionElementKindSectionFooter {
-            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerId, for: indexPath)
+        if kind == UICollectionView.elementKindSectionFooter {
+            return collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerId, for: indexPath)
         } else {
             assertionFailure("Unexpected element kind")
             return UICollectionReusableView()

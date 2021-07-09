@@ -37,9 +37,9 @@ class AccessibleCheckBoxView: UIStackView {
     }
 
     private func updateTraits() {
-        var traits = UIAccessibilityTraitButton
+        var traits: UIAccessibilityTraits = .button
         if button.isSelected {
-            traits |= UIAccessibilityTraitSelected
+            traits.insert(.selected)
         }
 
         accessibilityTraits = traits

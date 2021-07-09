@@ -25,10 +25,10 @@ class RemoteSearchService: RemoteItemsService {
                 return
             }
             
-            var list = response.itemsList.flatMap { WrapData(remote: $0) }
-            list.append(contentsOf: response.peopleList.flatMap { PeopleItem(response: $0) })
-            list.append(contentsOf: response.thingsList.flatMap { ThingsItem(response: $0) })
-            list.append(contentsOf: response.placesList.flatMap { PlacesItem(response: $0) })
+            var list = response.itemsList.compactMap { WrapData(remote: $0) }
+            list.append(contentsOf: response.peopleList.compactMap { PeopleItem(response: $0) })
+            list.append(contentsOf: response.thingsList.compactMap { ThingsItem(response: $0) })
+            list.append(contentsOf: response.placesList.compactMap { PlacesItem(response: $0) })
 
             self?.currentPage += 1
             success(list)

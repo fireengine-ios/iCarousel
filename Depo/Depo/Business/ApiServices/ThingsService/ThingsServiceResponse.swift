@@ -55,7 +55,7 @@ final class ThingsPageResponse: ObjectRequestResponse, Map {
     var list: [ThingsItemResponse] = []
     
     override func mapping() {
-        if let result = json?[ThingsJsonKey.objectInfos].array?.flatMap({ ThingsItemResponse(withJSON: $0) }) {
+        if let result = json?[ThingsJsonKey.objectInfos].array?.compactMap({ ThingsItemResponse(withJSON: $0) }) {
             list = result
         }
     }

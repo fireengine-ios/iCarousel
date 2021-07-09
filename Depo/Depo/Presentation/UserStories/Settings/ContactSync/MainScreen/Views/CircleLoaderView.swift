@@ -35,7 +35,7 @@ final class CircleLoaderView: UIView {
         circleShape.fillColor = UIColor.clear.cgColor
         circleShape.strokeColor = lineBackgroundColor
         circleShape.lineWidth = lineWidth
-        circleShape.lineCap = kCALineCapButt
+        circleShape.lineCap = .butt
 
         circleShape.strokeEnd = 1.0
         
@@ -48,7 +48,7 @@ final class CircleLoaderView: UIView {
         progressShape.fillColor = UIColor.clear.cgColor
         progressShape.strokeColor = lineColor
         progressShape.lineWidth = lineWidth
-        progressShape.lineCap = kCALineCapRound
+        progressShape.lineCap = .round
         progressShape.shadowColor = UIColor.black.cgColor
         progressShape.shadowOffset = CGSize(width: 0.5, height: 0.5)
         progressShape.shadowRadius = 2.0

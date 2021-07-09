@@ -63,7 +63,7 @@ final class GradientPremiumButton: UIButton {
     }
     
     private func setDefaultTitleEdgeInsets() {
-        titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
+        titleEdgeInsets = UIEdgeInsets(top: 6, left: 14, bottom: 6, right: 14)
     }
     
     private func addGradient() {

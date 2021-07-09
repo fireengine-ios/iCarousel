@@ -50,11 +50,11 @@ final class SharedImage: SharedData {
         self.image = image
         let baseName = UUID().uuidString
         
-        if let jpgData = UIImageJPEGRepresentation(image, 1) {
+        if let jpgData = image.jpegData(compressionQuality: 1) {
             data = jpgData
             contentType = "image/jpg"
             name = "\(baseName).jpg"
-        } else if let pngData = UIImagePNGRepresentation(image) {
+        } else if let pngData = image.pngData() {
             data = pngData
             contentType = "image/png"
             name = "\(baseName).png"

@@ -458,7 +458,7 @@ private extension UIImage {
             return nil
         }
         UIGraphicsEndImageContext()
-        image = image.resizableImage(withCapInsets: UIEdgeInsetsMake(radius, radius, radius, radius), resizingMode: .stretch)
+        image = image.resizableImage(withCapInsets: UIEdgeInsets(top: radius, left: radius, bottom: radius, right: radius), resizingMode: .stretch)
         image = image.withRenderingMode(.alwaysTemplate)
         return image
     }

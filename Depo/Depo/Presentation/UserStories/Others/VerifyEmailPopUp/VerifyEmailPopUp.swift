@@ -42,9 +42,9 @@ final class VerifyEmailPopUp: BasePopUpController {
     
     @IBOutlet private weak var changeEmailButton: UIButton! {
         willSet {
-            let attributes: [NSAttributedStringKey : Any] = [
+            let attributes: [NSAttributedString.Key : Any] = [
                 .foregroundColor : UIColor.lrTealishTwo,
-                .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
+                .underlineStyle : NSUnderlineStyle.single.rawValue,
                 .font : UIFont.TurkcellSaturaMedFont(size: 15),
             ]
             
@@ -57,9 +57,9 @@ final class VerifyEmailPopUp: BasePopUpController {
     
     @IBOutlet private weak var resendCodeButton: UIButton! {
         willSet {
-            let attributes: [NSAttributedStringKey : Any] = [
+            let attributes: [NSAttributedString.Key : Any] = [
                 .foregroundColor : UIColor.lrTealishTwo,
-                .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
+                .underlineStyle : NSUnderlineStyle.single.rawValue,
                 .font : UIFont.TurkcellSaturaMedFont(size: 15),
             ]
             
@@ -158,7 +158,7 @@ final class VerifyEmailPopUp: BasePopUpController {
         
         let topText = String(format: TextConstants.verifyEmailTopTitle, TextConstants.enterTheSecurityCode, email)
         
-        let attributes: [NSAttributedStringKey : Any] = [
+        let attributes: [NSAttributedString.Key : Any] = [
             .font : UIFont.TurkcellSaturaMedFont(size: 15),
             .foregroundColor : ColorConstants.blueGrey,
             .kern : 0.0
@@ -167,7 +167,7 @@ final class VerifyEmailPopUp: BasePopUpController {
         let attributedText = NSMutableAttributedString(string: topText, attributes: attributes)
         
         if let range = topText.range(of: TextConstants.enterTheSecurityCode) {
-            let rangeAttributes: [NSAttributedStringKey : Any] = [
+            let rangeAttributes: [NSAttributedString.Key : Any] = [
                 .foregroundColor : UIColor.black
             ]
             let nsRange = NSRange(location: range.lowerBound.encodedOffset,

@@ -106,7 +106,7 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     
     private func setupGradientBackground() {
         view.addSubview(gradientView)
-        view.sendSubview(toBack: gradientView)
+        view.sendSubviewToBack(gradientView)
     }
 
     // MARK: - Action

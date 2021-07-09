@@ -145,9 +145,9 @@ final class InstapickPopUpController: UIViewController {
         
         let paragraphStyle = getParagraphStyle()
         subtitleLabel.attributedText = NSAttributedString(string: TextConstants.instaPickConnectedAccount,
-                                                             attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
+                                                             attributes: [.paragraphStyle: paragraphStyle])
         descriptionLabel.attributedText = NSAttributedString(string: TextConstants.instaPickDescription,
-                                                             attributes: [NSAttributedStringKey.paragraphStyle: paragraphStyle])
+                                                             attributes: [.paragraphStyle: paragraphStyle])
         descriptionLabel.text = TextConstants.instaPickDescription
         checkBoxLabel.text = TextConstants.instaPickDontShowThisAgain
     }
@@ -174,9 +174,9 @@ final class InstapickPopUpController: UIViewController {
     }
     
     private func setupWithoutConnectingButton() {
-        let attributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.font : UIFont.TurkcellSaturaBolFont(size: 16),
-                                          NSAttributedStringKey.foregroundColor : UIColor.lrTealishTwo,
-                                          NSAttributedStringKey.underlineStyle : NSUnderlineStyle.styleSingle.rawValue]
+        let attributes: [NSAttributedString.Key : Any] = [.font : UIFont.TurkcellSaturaBolFont(size: 16),
+                                          .foregroundColor : UIColor.lrTealishTwo,
+                                          .underlineStyle : NSUnderlineStyle.single.rawValue]
         let attributeString = NSMutableAttributedString(string: TextConstants.instaPickConnectedWithoutInstagram,
                                                         attributes: attributes)
         withoutConnectingButton.setAttributedTitle(attributeString, for: .normal)

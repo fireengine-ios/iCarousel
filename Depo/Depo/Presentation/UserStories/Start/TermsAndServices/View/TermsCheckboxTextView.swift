@@ -29,9 +29,9 @@ final class TermsCheckboxTextView: UIView, NibInit {
     @IBOutlet weak var titleView: UITextView! {
         willSet {
             newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+                .foregroundColor: UIColor.lrTealishTwo,
+                .underlineColor: UIColor.lrTealishTwo,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
             
             newValue.isEditable = false
@@ -48,9 +48,9 @@ final class TermsCheckboxTextView: UIView, NibInit {
     @IBOutlet private weak var descriptionView: UITextView! {
         willSet {
             newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+                .foregroundColor: UIColor.lrTealishTwo,
+                .underlineColor: UIColor.lrTealishTwo,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
             newValue.isEditable = false
             
@@ -109,7 +109,7 @@ final class TermsCheckboxTextView: UIView, NibInit {
     private func updateAccessibilityInfo() {
         let title = titleView.text ?? titleView.attributedText?.string ?? ""
         accessibilityLabel = title
-        accessibilityTraits = isChecked ? UIAccessibilityTraitSelected | UIAccessibilityTraitButton : UIAccessibilityTraitButton
+        accessibilityTraits = isChecked ? [.selected, .button] : .button
     }
 }
 

@@ -11,7 +11,7 @@ final class InstaPickSelectionSegmentedView: UIView {
     let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
         segmentedControl.tintColor = ColorConstants.darkBlueColor
-        segmentedControl.setTitleTextAttributes([NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)], for: .normal)
+        segmentedControl.setTitleTextAttributes([.font: UIFont.TurkcellSaturaRegFont(size: 14)], for: .normal)
         return segmentedControl
     }()
     

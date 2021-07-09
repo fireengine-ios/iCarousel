@@ -86,7 +86,7 @@ extension UIImage {
     public func applyBlur(radius blurRadius: CGFloat, tintColor: UIColor?, saturationDeltaFactor: CGFloat, maskImage: UIImage? = nil) -> UIImage? {
         func preconditionsValid() -> Bool {
             if size.width < 1 || size.height < 1 {
-                assertionFailure("error: invalid image size: (\(size.width, size.height). Both width and height must >= 1)")
+                assertionFailure("error: invalid image size: (\(size). Both width and height must >= 1)")
                 return false
             }
             if cgImage == nil {

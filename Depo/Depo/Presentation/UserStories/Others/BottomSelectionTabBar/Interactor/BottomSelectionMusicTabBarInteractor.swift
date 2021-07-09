@@ -29,7 +29,7 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
         guard let item = item as? [Item] else {
             return
         }
-        let itemsFolders = item.flatMap { $0.parent }
+        let itemsFolders = item.compactMap { $0.parent }
         let folderSelector = router.selectFolder(folder: nil)
         folderSelector.selectFolderBlock = { [weak self] folder in
             if itemsFolders.contains(folder) {

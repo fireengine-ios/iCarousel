@@ -152,7 +152,7 @@ class ActiveSubscriptionResponse: ObjectRequestResponse {
     var list: [SubscriptionPlanBaseResponse] = []
     
     override func mapping() {
-        guard let tmpList = json?.array?.flatMap({ SubscriptionPlanBaseResponse(withJSON: $0) }) else { return }
+        guard let tmpList = json?.array?.compactMap({ SubscriptionPlanBaseResponse(withJSON: $0) }) else { return }
         list = tmpList
     }
 }

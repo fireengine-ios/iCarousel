@@ -975,7 +975,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = searchResponse[SearchJsonKey.tempDownloadURL].url
         
 //        subordinates = searchResponse[SearchJsonKey.subordinates].array
-        albums = searchResponse[SearchJsonKey.album].array?.flatMap { $0.string }
+        albums = searchResponse[SearchJsonKey.album].array?.compactMap { $0.string }
         childCount = searchResponse[SearchJsonKey.ChildCount].int64
         
         

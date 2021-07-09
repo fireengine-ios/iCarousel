@@ -41,7 +41,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         photoStory = story
         super.init(nibName: nil, bundle: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: .UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActive), name: UIApplication.willResignActiveNotification, object: nil)
     }
     
     @available(*, unavailable)

@@ -46,7 +46,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         
         tableView.tableFooterView = UIView()
         tableView.estimatedRowHeight = 124.0
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         tableView.separatorStyle = .none
         

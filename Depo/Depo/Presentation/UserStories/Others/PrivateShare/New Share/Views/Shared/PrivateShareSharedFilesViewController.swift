@@ -101,8 +101,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setCardsContainer(isActive: false)
     }
     
-    override func removeFromParentViewController() {
-        super.removeFromParentViewController()
+    override func removeFromParent() {
+        super.removeFromParent()
         
         if collectionManager.isSelecting {
             stopModeSelected()

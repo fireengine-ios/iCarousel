@@ -287,7 +287,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard let jsonArray = JSON(data: data).array else {
+                    guard let jsonArray = JSON(data).array else {
                         let error = CustomErrors.serverError("\(url) not array in response")
                         assertionFailure(error.localizedDescription)
                         handler(.failed(error))
@@ -313,7 +313,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 switch response.result {
                 case .success(let data):
                     guard
-                        let jsonArray = JSON(data: data).array,
+                        let jsonArray = JSON(data).array,
                         let json = jsonArray.first
                     else {
                         let error = CustomErrors.serverError("\(request) not array in response")
@@ -474,7 +474,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .response { response in
                 if response.response?.statusCode == 200 {
                     handler(.success(()))
-                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
                     let errorText: String
                     
                     if statusJSON == "ACCOUNT_NOT_FOUND" {
@@ -536,7 +536,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .response { response in
                 if response.response?.statusCode == 200 {
                     handler(.success(()))
-                } else if let data = response.data, let status = JSON(data: data)["status"].string {
+                } else if let data = response.data, let status = JSON(data)["status"].string {
                     
                     let backendError: SetSecretQuestionErrors
                     switch status {
@@ -591,7 +591,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         return
                     }
                     
-                    guard let data = response.data, let value = JSON(data: data)["value"].string else {
+                    guard let data = response.data, let value = JSON(data)["value"].string else {
                         handler(.failure(.unknown))
                         return
                     }
@@ -620,7 +620,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         return
                     }
                     
-                    let errorResponse = UpdatePasswordErrorResponse(json: JSON(data: data))
+                    let errorResponse = UpdatePasswordErrorResponse(json: JSON(data))
                     
                     
                     if errorResponse.status == .invalidCaptcha {
@@ -748,7 +748,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .response(queue: .global(), completionHandler: { response in
                 if response.response?.statusCode == 200 {
                     handler(.success(()))
-                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
                     let errorText: String
                     
                     if statusJSON == "INVALID_OTP" {
@@ -792,7 +792,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .response(queue: .global(), completionHandler: { response in
                 if response.response?.statusCode == 200 {
                     handler(.success(()))
-                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
                     let errorText: String
                     
                     if statusJSON == "ACCOUNT_NOT_FOUND" {
@@ -824,7 +824,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
         .response(queue: .global(), completionHandler: { response in
             if response.response?.statusCode == 200 {
                 handler(.success(()))
-            } else if let data = response.data, let status = JSON(data: data)["status"].string {
+            } else if let data = response.data, let status = JSON(data)["status"].string {
                 let errorText: String
                 
                 if status == "ACCOUNT_ADDRESS_LENGTH_IS_INVALID" {

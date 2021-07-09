@@ -192,7 +192,7 @@ final class UploadService {
             case 400:
                 
                 if let data = response.data {
-                    let json = JSON(data: data)
+                    let json = JSON(data)
                     let errorCode = json["error_code"].stringValue
                     
                     switch errorCode {

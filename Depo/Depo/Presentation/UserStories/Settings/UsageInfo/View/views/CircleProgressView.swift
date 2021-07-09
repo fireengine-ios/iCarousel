@@ -112,7 +112,7 @@ class CircleProgressView: UIView {
         let startAngle = -CGFloat.pi * 0.5 ///top point
         let endAngle = 2 * CGFloat.pi + startAngle
         let path = UIBezierPath(arcCenter: arcCenter, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
-        foregroundCircleLayer.lineCap = kCALineCapRound
+        foregroundCircleLayer.lineCap = .round
         foregroundCircleLayer.path = path.cgPath
         foregroundCircleLayer.lineWidth = progressWidth
         foregroundCircleLayer.fillColor = UIColor.clear.cgColor

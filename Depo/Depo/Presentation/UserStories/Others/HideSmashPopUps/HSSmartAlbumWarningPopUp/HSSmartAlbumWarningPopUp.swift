@@ -93,7 +93,7 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
 
     @IBOutlet private weak var functionButton: RoundedInsetsButton! {
         willSet {
-            newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
+            newValue.titleEdgeInsets = UIEdgeInsets(top: 6, left: 14, bottom: 6, right: 14)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.backgroundColor = UIColor.lrTealishTwo
 

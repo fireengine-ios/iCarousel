@@ -38,7 +38,7 @@ class IntroduceDataSource: NSObject, UIScrollViewDelegate {
         pageControll.numberOfPages = models.count
         pageControll.currentPage = 0
         
-        pageControll.addTarget(self, action: #selector(valueChanged), for: UIControlEvents.valueChanged)
+        pageControll.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         
         if (models.count <= 1) {
             pageControll.isHidden = true

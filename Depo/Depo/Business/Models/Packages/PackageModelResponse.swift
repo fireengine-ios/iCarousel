@@ -351,7 +351,7 @@ extension PackageModelResponse: Map {
         }
         
         let authoritiesJsonArray = json[ResponseKeys.authorities].array
-        if let authoritiesList = authoritiesJsonArray?.flatMap({ PackagePackAuthoritiesResponse(withJSON: $0) }) {
+        if let authoritiesList = authoritiesJsonArray?.compactMap({ PackagePackAuthoritiesResponse(withJSON: $0) }) {
             authorities = authoritiesList
         }
     }

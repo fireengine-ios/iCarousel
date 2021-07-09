@@ -65,7 +65,7 @@ final class MediaPlayer: NSObject {
     /// Add Capabilities - Background modes - Audio...
     private func enableBackground() {
         if !enabledBackground {
-            try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try? AVAudioSession.sharedInstance().setCategory(.playback)
             try? AVAudioSession.sharedInstance().setActive(true)
             UIApplication.shared.beginReceivingRemoteControlEvents()
             enabledBackground = true
@@ -73,8 +73,8 @@ final class MediaPlayer: NSObject {
     }
     
     private func guardAudioSession() {
-        if AVAudioSession.sharedInstance().category != AVAudioSessionCategoryPlayback {
-            try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        if AVAudioSession.sharedInstance().category != .playback {
+            try? AVAudioSession.sharedInstance().setCategory(.playback)
         }
     }
     
@@ -162,14 +162,14 @@ final class MediaPlayer: NSObject {
     private func setupHeadphoneObserver() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(headphoneRemoved),
-                                               name: Notification.Name.AVAudioSessionRouteChange,
+                                               name: AVAudioSession.routeChangeNotification,
                                                object: nil)
     }
     
     @objc private func headphoneRemoved(_ notification: Notification) {
         guard
             let audioRouteChangeReasonRaw = notification.userInfo?[AVAudioSessionRouteChangeReasonKey] as? UInt,
-            let changeReason = AVAudioSessionRouteChangeReason(rawValue: audioRouteChangeReasonRaw)
+            let changeReason = AVAudioSession.RouteChangeReason(rawValue: audioRouteChangeReasonRaw)
         else {
             return
         }
@@ -444,7 +444,7 @@ final class MediaPlayer: NSObject {
     }
     
     func seek(to time: Float) {
-        let showingTime = CMTimeMake(Int64(time) * 1000, 1000)
+        let showingTime = CMTimeMake(value: Int64(time) * 1000, timescale: 1000)
         isSeekInProgress = true
         
         player.seek(to: showingTime, completionHandler: { [weak self] _ in
@@ -453,14 +453,14 @@ final class MediaPlayer: NSObject {
     }
     
     func resetTime() {
-        player.seek(to: kCMTimeZero)
+        player.seek(to: .zero)
     }
     
     var playMode: MediaPlayerPlayMode = .normal {
         didSet {
             switch playMode {
             case .normal:
-                if let item = currentItem, let index = list.index(of: item) {
+                if let item = currentItem, let index = list.firstIndex(of: item) {
                     currentIndex = index
                 } else {
                     currentIndex = 0

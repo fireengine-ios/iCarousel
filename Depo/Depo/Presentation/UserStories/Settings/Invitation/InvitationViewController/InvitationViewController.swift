@@ -44,7 +44,7 @@ class InvitationViewController: BaseViewController {
 
     private func setupCollectionView() {
         invitationCollectionView.register(UINib(nibName: InvitationCollectionReusableView.reuseId, bundle: nil),
-                                forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: InvitationCollectionReusableView.reuseId)
         invitationCollectionView.register(nibCell: InvitationGiftCollectionViewCell.self)
     }
@@ -108,8 +108,8 @@ extension InvitationViewController: UICollectionViewDelegate, UICollectionViewDe
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: InvitationCollectionReusableView.reuseId, for: indexPath) as! InvitationCollectionReusableView
+        if kind == UICollectionView.elementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: InvitationCollectionReusableView.reuseId, for: indexPath) as! InvitationCollectionReusableView
             headerView.delegate = self
             if let invitationLink = self.invitationLink {
                 headerView.configureLinkView(invitationLink: invitationLink)

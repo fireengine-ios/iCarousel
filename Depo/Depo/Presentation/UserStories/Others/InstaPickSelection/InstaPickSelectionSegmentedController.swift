@@ -42,7 +42,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()
     
     private lazy var albumsTabIndex: Int = {
-        if let index = segmentedViewControllers.index(of: albumsVC) {
+        if let index = segmentedViewControllers.firstIndex(of: albumsVC) {
             return index
         }
         assertionFailure("there is no albumsVC in segmentedViewControllers. check func setupScreenWithSelectingLimit. It was: index = 1")
@@ -213,7 +213,7 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
             return
         }
         
-        childViewControllers.forEach { $0.removeFromParentVC() }
+        children.forEach { $0.removeFromParentVC() }
         add(childController: segmentedViewControllers[selectedIndex])
         updateLeftBarButtonItem(selectedIndex: selectedIndex)
     }
@@ -231,11 +231,11 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     }
     
     private func add(childController: UIViewController) {
-        addChildViewController(childController)
+        addChild(childController)
         childController.view.frame = vcView.containerView.bounds
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         vcView.containerView.addSubview(childController.view)
-        childController.didMove(toParentViewController: self)
+        childController.didMove(toParent: self)
     }
     
     

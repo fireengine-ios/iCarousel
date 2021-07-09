@@ -104,7 +104,7 @@ final class QuickScrollService {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    handler(ResponseResult.success(QuickScrollRangeListItem(json: JSON(data: data))))
+                    handler(ResponseResult.success(QuickScrollRangeListItem(json: JSON(data))))
                 case .failure(let error):
                     handler(ResponseResult.failed(error))
                 }

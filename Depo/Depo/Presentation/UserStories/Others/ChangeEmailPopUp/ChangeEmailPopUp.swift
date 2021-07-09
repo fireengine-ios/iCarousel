@@ -16,7 +16,7 @@ final class ChangeEmailPopUp: UIViewController {
     @IBOutlet private weak var mainLabel: UILabel! {
         willSet {
             let text = TextConstants.changeEmailPopUpTopTitle
-            let attributes: [NSAttributedStringKey : Any] = [
+            let attributes: [NSAttributedString.Key : Any] = [
                 .font : UIFont.TurkcellSaturaFont(size: 18),
                 .foregroundColor : UIColor.black,
             ]
@@ -26,7 +26,7 @@ final class ChangeEmailPopUp: UIViewController {
             if let range = text.range(of: TextConstants.enterYourEmail) {
                 let nsRange = NSRange(range, in: text)
                 
-                let boldAttribute: [NSAttributedStringKey : Any] = [ .font : UIFont.TurkcellSaturaBolFont(size: 18) ]
+                let boldAttribute: [NSAttributedString.Key : Any] = [ .font : UIFont.TurkcellSaturaBolFont(size: 18) ]
                 
                 attributedString.addAttributes(boldAttribute, range: nsRange)
             }

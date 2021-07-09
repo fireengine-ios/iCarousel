@@ -44,7 +44,7 @@ class BaseCollectionViewCell: UICollectionViewCell, CollectionViewCellDataProtoc
             return
         }
         
-        if (gestureRecognizer.state == UIGestureRecognizerState.began) {
+        if gestureRecognizer.state == .began {
             setSelection(isSelectionActive: true, isSelected: true)
             d.onLongPress(cell: self)
         }

@@ -7,5 +7,5 @@
 //
 
 protocol TermsAndServicesModuleInput: class {
-    weak var delegate: RegistrationViewDelegate? { get }
+    var delegate: RegistrationViewDelegate? { get }
 }

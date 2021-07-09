@@ -132,7 +132,7 @@ final class PlusMenuItemView: UIView, NibInit {
         button.setImage(type.image, for: .normal)
 
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitButton
+        accessibilityTraits = .button
         accessibilityLabel = type.title
     }
     

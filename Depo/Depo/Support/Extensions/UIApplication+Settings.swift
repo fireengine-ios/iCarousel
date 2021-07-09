@@ -10,7 +10,7 @@ import UIKit
 
 extension UIApplication {
     func openSettings() {
-        UIApplication.shared.openSafely(URL(string: UIApplicationOpenSettingsURLString))
+        UIApplication.shared.openSafely(URL(string: UIApplication.openSettingsURLString))
     }
     func openAppstore() {
         UIApplication.shared.openSafely(URL(string: "itms-apps://itunes.apple.com/app/id\(Device.applicationId)"))

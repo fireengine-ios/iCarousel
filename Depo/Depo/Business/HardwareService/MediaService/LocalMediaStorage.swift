@@ -1369,7 +1369,7 @@ typealias PhotoManagerCallBack = (UIImage?, [AnyHashable: Any]?) -> Void
 
 typealias PhotoManagerOriginalVideoCallBack = (AVAsset?, AVAudioMix?, [AnyHashable: Any]?) -> Void
 
-typealias PhotoManagerOriginalCallBack = (Data?, String?, UIImageOrientation, [AnyHashable: Any]?) -> Void
+typealias PhotoManagerOriginalCallBack = (Data?, String?, UIImage.Orientation, [AnyHashable: Any]?) -> Void
 
 
 class GetImageOperation: Operation {

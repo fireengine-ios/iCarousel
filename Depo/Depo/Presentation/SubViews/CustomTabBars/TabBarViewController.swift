@@ -77,19 +77,19 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     var selectedIndex: NSInteger = 0 {
         willSet {
             // will get crash
-            selectedViewController?.willMove(toParentViewController: nil)
+            selectedViewController?.willMove(toParent: nil)
             selectedViewController?.view.removeFromSuperview()
-            selectedViewController?.removeFromParentViewController()
+            selectedViewController?.removeFromParent()
         }
         
         didSet {
             guard tabBar.items?.count != 0 else {
                 return
             }
-            addChildViewController(selectedViewController!)
+            addChild(selectedViewController!)
             selectedViewController?.view.frame = contentView.bounds
             contentView.addSubview(selectedViewController!.view)
-            selectedViewController?.didMove(toParentViewController: self)
+            selectedViewController?.didMove(toParent: self)
             popToRootCurrentNavigationController(animated: true)
         }
     }
@@ -102,11 +102,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return result
     }
     
-    override var childViewControllerForStatusBarStyle: UIViewController? {
+    override var childForStatusBarStyle: UIViewController? {
         return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
     }
     
-    override var childViewControllerForStatusBarHidden: UIViewController? {
+    override var childForStatusBarHidden: UIViewController? {
         return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
     }
     
@@ -119,7 +119,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         tabBar.setupItems()
         
         setupCurtainView()
-        mainContentView.bringSubview(toFront: plussButton)
+        mainContentView.bringSubviewToFront(plussButton)
         
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
@@ -423,8 +423,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             self.plusMenuItems.forEach { $0.changeVisability(toHidden: hidden) }
             self.view.layoutIfNeeded()
         } completion: { _ in
-            self.view.accessibilityElements = hidden ? nil : self.plusMenuItems + [self.plussButton]
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.view)
+            self.view.accessibilityElements = hidden ? nil : self.plusMenuItems + [self.plussButton!]
+            UIAccessibility.post(notification: .screenChanged, argument: self.view)
         }
     }
     
@@ -432,7 +432,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         debugLog("TabBarVC frameForTabAtIndex about to layout")
         view.layoutIfNeeded()
         
-        var frames = tabBar.subviews.flatMap { view -> CGRect? in
+        var frames = tabBar.subviews.compactMap { view -> CGRect? in
             if let view = view as? UIControl {
                 return view.frame
             }
@@ -450,7 +450,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         changeViewState(state: false)
         
-        if var tabbarSelectedIndex = (tabBar.items?.index(of: item)) {
+        if var tabbarSelectedIndex = (tabBar.items?.firstIndex(of: item)) {
             
             if tabbarSelectedIndex == TabScreenIndex.gallery.rawValue,
                 lastPhotoVideoIndex == TabScreenIndex.gallery.rawValue
@@ -521,9 +521,10 @@ extension TabBarViewController: UIImagePickerControllerDelegate, UINavigationCon
         return nil
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage,
-            let data = UIImageJPEGRepresentation(image.imageWithFixedOrientation, 0.9)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
+        guard let image = info[.originalImage] as? UIImage,
+            let data = image.imageWithFixedOrientation.jpegData(compressionQuality: 0.9)
             else { return }
         
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)

@@ -40,7 +40,7 @@ final class AnimatedCircularLoader: UIView {
         circleShape.fillColor = UIColor.clear.cgColor
         circleShape.strokeColor = lineBackgroundColor
         circleShape.lineWidth = lineWidth
-        circleShape.lineCap = kCALineCapButt
+        circleShape.lineCap = .butt
 
         circleShape.strokeEnd = 1.0
         
@@ -53,7 +53,7 @@ final class AnimatedCircularLoader: UIView {
         progressShape.fillColor = UIColor.clear.cgColor
         progressShape.strokeColor = lineColor
         progressShape.lineWidth = lineWidth
-        progressShape.lineCap = kCALineCapRound
+        progressShape.lineCap = .round
         progressShape.shadowColor = UIColor.black.cgColor
         progressShape.shadowOffset = CGSize(width: 0.5, height: 0.5)
         progressShape.shadowRadius = lineWidth / 8.0
@@ -141,8 +141,8 @@ final class AnimatedCircularLoader: UIView {
     }
     
     private func setupObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     @objc private func didBecomeActive() {

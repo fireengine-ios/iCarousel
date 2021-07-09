@@ -104,7 +104,7 @@ class ActivityTimelineSectionsBuider {
     }
     
     private func isMinutesSection(for indexPath: IndexPath) -> Int? {
-        return minutesSectionsIndexPaths[indexPath.section].index(of: indexPath.row)
+        return minutesSectionsIndexPaths[indexPath.section].firstIndex(of: indexPath.row)
     }
     
     private func activityForRow(at indexPath: IndexPath) -> ActivityTimelineServiceResponse? {

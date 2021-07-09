@@ -136,7 +136,7 @@ private extension ContactListViewController {
         isLoadingData = true
         
         if currentPage > 1 {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            let indicator = UIActivityIndicatorView(style: .gray)
             indicator.startAnimating()
             tableView.tableFooterView = indicator
         }

@@ -54,14 +54,14 @@ extension UIViewController {
         return view
     }
     
-    private var backButtonTitleAttributes: [NSAttributedStringKey : Any]? {
+    private var backButtonTitleAttributes: [NSAttributedString.Key : Any]? {
         return [
             .font: UIFont.TurkcellSaturaRegFont(size: 19),
             .foregroundColor: UIColor.white
         ]
     }
     
-    private var titleAttributes: [NSAttributedStringKey : Any]? {
+    private var titleAttributes: [NSAttributedString.Key : Any]? {
         return [
             .font: UIFont.TurkcellSaturaDemFont(size: 19),
             .foregroundColor: UIColor.white

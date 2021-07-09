@@ -72,7 +72,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
         
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitImage
+        accessibilityTraits = .image
         accessibilityLabel = wrappered.name
     }
     

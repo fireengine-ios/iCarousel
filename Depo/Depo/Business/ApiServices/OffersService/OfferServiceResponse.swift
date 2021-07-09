@@ -91,7 +91,7 @@ final class OfferAllAppleServiceResponse: ObjectRequestResponse {
     var list: [String] = []
     
     override func mapping() {
-        guard let tmpList = json?.array?.flatMap({ $0.string }) else { return }
+        guard let tmpList = json?.array?.compactMap({ $0.string }) else { return }
         list = tmpList
     }
 }
@@ -101,7 +101,7 @@ final class OfferAllResponse: ObjectRequestResponse {
     var list: [OfferServiceResponse] = []
     
     override func mapping() {
-        guard let tmpList = json?.array?.flatMap({ OfferServiceResponse(withJSON: $0) }) else { return }
+        guard let tmpList = json?.array?.compactMap({ OfferServiceResponse(withJSON: $0) }) else { return }
         list = tmpList
     }
 }

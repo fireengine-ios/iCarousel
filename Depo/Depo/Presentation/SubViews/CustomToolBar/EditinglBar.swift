@@ -142,7 +142,7 @@ class EditinglBar: CustomTabBar {
                 }
                 
                 sourceView.addSubview(self)
-                sourceView.bringSubview(toFront: self)
+                sourceView.bringSubviewToFront(self)
                 let sourceViewSize = sourceView.frame.size
                 self.frame = CGRect(x: self.originalX, y: sourceViewSize.height - self.originalY, width: sourceViewSize.width, height: self.tabBarHeight)
                 let newY = sourceViewSize.height - self.tabBarHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)

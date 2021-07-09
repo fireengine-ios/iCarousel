@@ -24,7 +24,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
                 return
             }
             playerController?.player = nil
-            playerController?.removeFromParentViewController()
+            playerController?.removeFromParent()
             playerController = nil
             player?.pause()
             player = nil
@@ -34,7 +34,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
             player = AVPlayer(playerItem: plauerItem)
             
             let imageGenerator = AVAssetImageGenerator(asset: plauerItem.asset)
-            let time = CMTimeMake(1, 1)
+            let time = CMTimeMake(value: 1, timescale: 1)
             if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
                 let thumbnail = UIImage(cgImage: imageRef)
                 previewImageView.image = thumbnail
@@ -65,7 +65,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didEnterBackground),
-                                               name: .UIApplicationDidEnterBackground,
+                                               name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
         
         navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,

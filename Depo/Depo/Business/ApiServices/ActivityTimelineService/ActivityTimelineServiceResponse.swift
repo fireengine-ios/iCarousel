@@ -81,7 +81,7 @@ class ActivityTimelineResponse: ObjectRequestResponse {
     var list: [ActivityTimelineServiceResponse] = []
     
     override func mapping() {
-        guard let tmpList = json?.array?.flatMap({ ActivityTimelineServiceResponse(withJSON: $0) }) else { return }
+        guard let tmpList = json?.array?.compactMap({ ActivityTimelineServiceResponse(withJSON: $0) }) else { return }
         list = tmpList
     }
 }

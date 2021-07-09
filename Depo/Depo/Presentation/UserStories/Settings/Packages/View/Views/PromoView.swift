@@ -38,8 +38,10 @@ final class PromoView: UIView {
             
             codeTextField.font = UIFont.TurkcellSaturaRegFont(size: 14)
             
-            let attributes = [NSAttributedStringKey.foregroundColor: ColorConstants.grayTabBarButtonsColor,
-                              NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)]
+            let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: ColorConstants.grayTabBarButtonsColor,
+                .font: UIFont.TurkcellSaturaRegFont(size: 14)
+            ]
             codeTextField.attributedPlaceholder = NSAttributedString(string: TextConstants.promocodePlaceholder, attributes: attributes)
         }
     }

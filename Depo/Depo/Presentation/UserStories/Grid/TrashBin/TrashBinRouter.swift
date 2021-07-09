@@ -30,7 +30,7 @@ final class TrashBinRouter {
             router.pushViewControllertoTableViewNavBar(viewController: controller)
             
         case .audio:
-            player.play(list: sameTypeItems, startAt: sameTypeItems.index(of: item) ?? 0)
+            player.play(list: sameTypeItems, startAt: sameTypeItems.firstIndex(of: item) ?? 0)
             
         case .application(.usdz):
             let controller = router.augumentRealityDetailViewController(fileObject: item)

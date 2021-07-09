@@ -23,7 +23,7 @@ extension LoadingImageViewDelegate {
 
 final class LoadingImageView: UIImageView {
 
-    private let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    private let activity = UIActivityIndicatorView(style: .white)
     private var url: URL?
     private var path: PathForItem?
     private let filesDataSource = FilesDataSource()

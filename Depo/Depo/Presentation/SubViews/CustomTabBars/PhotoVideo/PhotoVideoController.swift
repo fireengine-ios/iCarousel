@@ -132,8 +132,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionViewManager.setScrolliblePopUpView(isActive: false)
     }
 
-    override func didMove(toParentViewController parent: UIViewController?) {
-        super.didMove(toParentViewController: parent)
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
         
         //FE-1373 reset top content offset when user switch segment if needed
         if collectionView.contentOffset.y < -collectionView.contentInset.top {
@@ -563,7 +563,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
         /// https://stackoverflow.com/a/46930410/5893286
-        if elementKind == UICollectionElementKindSectionHeader {
+        if elementKind == UICollectionView.elementKindSectionHeader {
             view.layer.zPosition = 0
         }
         guard let view = view as? CollectionViewSimpleHeaderWithText else {

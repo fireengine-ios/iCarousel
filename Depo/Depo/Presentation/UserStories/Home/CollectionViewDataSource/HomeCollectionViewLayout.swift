@@ -57,7 +57,7 @@ class HomeCollectionViewLayout: UICollectionViewLayout {
         if cache.isEmpty, let collectionView = collectionView, let delegate = delegate {
             //To Do add sections
             let headerH = delegate.collectionView(collectionView: collectionView, heightForHeaderinSection: 0)
-            let headerAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            let headerAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                                                     with: IndexPath(row: 0, section: 0))
             headerAttributes.frame = CGRect(x: 0.0,
                                             y: 0.0,
@@ -169,7 +169,7 @@ class HomeCollectionViewLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: indexPath)
+        let headerAttribute = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: indexPath)
         let headerH = delegate?.collectionView(collectionView: collectionView!, heightForHeaderinSection: indexPath.section)
         
         headerAttribute.frame = CGRect(x: 0.0, y: 0.0, width: contentWidth, height: headerH ?? 0)

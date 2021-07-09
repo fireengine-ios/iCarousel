@@ -47,8 +47,8 @@ final class RotatingImageView: UIImageView, InfinityRotater, AnimationFlowManage
     }
     
     private func setup() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: .UIApplicationWillEnterForeground, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: .UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActive), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     deinit {

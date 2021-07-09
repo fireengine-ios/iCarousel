@@ -41,7 +41,7 @@ class AdjustsFontSizeInsetsButton: UIButton {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        titleLabel?.frame = UIEdgeInsetsInsetRect(bounds, insets)
+        titleLabel?.frame = bounds.inset(by: insets)
     }
 }
 

@@ -124,7 +124,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: UIApplication.didEnterBackgroundNotification, object: nil)
         showSpinner()
     }
     
@@ -588,7 +588,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     }
     
     private func replaceUploaded(_ item: WrapData) {
-        guard let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) else {
+        guard let indexToChange = objects.firstIndex(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) else {
             return
         }
         
@@ -688,7 +688,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         }
         player.pause()
         playerController?.player = nil
-        playerController?.removeFromParentViewController()
+        playerController?.removeFromParent()
         playerController = nil
         localPlayer?.pause()
         localPlayer = nil

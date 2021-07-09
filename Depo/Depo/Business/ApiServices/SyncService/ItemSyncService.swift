@@ -11,8 +11,9 @@ import WidgetKit
 
 protocol ItemSyncService: class {
     var status: AutoSyncStatus { get }
-    weak var delegate: ItemSyncServiceDelegate? { get set }
-    
+
+    var delegate: ItemSyncServiceDelegate? { get set }
+
     func start(newItems: Bool)
     func stop()
     func fail()
