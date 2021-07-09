@@ -719,7 +719,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return metaData?.largeUrl != nil
     }
     
-    @available(*, deprecated: 1.0, message: "Use convenience init(info: AssetInfo) instead")
+    @available(*, deprecated, message: "Use convenience init(info: AssetInfo) instead")
     convenience init(asset: PHAsset) {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
         self.init(baseModel: BaseMediaContent(curentAsset: asset, generalInfo: info))

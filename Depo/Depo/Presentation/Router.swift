@@ -269,7 +269,7 @@ class RouterVC: NSObject {
         }
         
         if let navigation = getNavigation(from: navigationController) {
-            let pop = {
+            let pop: () -> Void = {
                 navigation.popToViewController(vc, animated: true)
             }
             

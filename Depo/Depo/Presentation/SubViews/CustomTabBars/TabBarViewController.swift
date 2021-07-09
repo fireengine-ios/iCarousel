@@ -296,7 +296,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     func showRainbowIfNeed() {
         if !plussButton.isSelected {
-            plussBtnAction(plussButton)
+            plussBtnAction(plussButton!)
         }
     }
     

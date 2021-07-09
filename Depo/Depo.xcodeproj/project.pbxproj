@@ -201,6 +201,10 @@
 		0786E1882660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18A2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18B2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
+		0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
+		0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
+		0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */; };
+		0798D5CE26981CBB00F5EDE0 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CD26981CBB00F5EDE0 /* Contacts.framework */; };
 		156D03709A81A8D9E2CBFD26 /* Pods_BilloNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CBA114AEF409086996359 /* Pods_BilloNotificationService.framework */; };
 		17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
@@ -1465,7 +1469,6 @@
 		8C0E8FDE1FDEBDFF00789C91 /* OptInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE75A1FCC3ECF00C23CBD /* OptInController.swift */; };
 		8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9019CAC9FE00FD1E03 /* Security.framework */; };
-		8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05224A9619DC345B00214767 /* AssetsLibrary.framework */; };
 		8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CDB43311F865B0B00789FA6 /* CoreLocation.framework */; };
 		8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CFE92F01F5EC666008A3B72 /* MessageUI.framework */; };
 		8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3AA9AE1F4D686D000157AF /* CoreData.framework */; };
@@ -1479,12 +1482,10 @@
 		8C0E8FEF1FDEBDFF00789C91 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F931871C160E2F00858223 /* Accelerate.framework */; };
 		8C0E8FF11FDEBDFF00789C91 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056107211C0D8E210014D550 /* WebKit.framework */; };
 		8C0E8FF21FDEBDFF00789C91 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2443E1531B6BB0C5001C274D /* AudioToolbox.framework */; };
-		8C0E8FF31FDEBDFF00789C91 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 053685FE1AA990DF007EBB23 /* MobileCoreServices.framework */; };
 		8C0E8FF41FDEBDFF00789C91 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C2A0481A7989CD00EE4D78 /* CoreTelephony.framework */; };
 		8C0E8FF51FDEBDFF00789C91 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BBE71519E07DA600805215 /* MediaPlayer.framework */; };
 		8C0E8FF61FDEBDFF00789C91 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9619CACA4E00FD1E03 /* QuartzCore.framework */; };
 		8C0E8FF71FDEBDFF00789C91 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9419CACA2D00FD1E03 /* libsqlite3.dylib */; };
-		8C0E8FF81FDEBDFF00789C91 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E9219CACA0900FD1E03 /* AddressBook.framework */; };
 		8C0E8FF91FDEBDFF00789C91 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E8E19CAC9F400FD1E03 /* libz.dylib */; };
 		8C0E8FFA1FDEBDFF00789C91 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF819CAC2F900FD1E03 /* CoreGraphics.framework */; };
 		8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FD51EFD500B00A405B2 /* HomeViewTopView.xib */; };
@@ -8727,6 +8728,8 @@
 		0755683C2666453F00AAA047 /* FileInfoThumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoThumbView.swift; sourceTree = "<group>"; };
 		07595510264131FA00C088B1 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
+		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewOutput.swift; sourceTree = "<group>"; };
 		08BC2716CA43EB44D104F6F6 /* BaseFilesGreedViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewOutput.swift; sourceTree = "<group>"; };
 		094E8EB45148F901AC01702F /* FeedbackViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInitializer.swift; sourceTree = "<group>"; };
@@ -11045,31 +11048,32 @@
 				CE39615120C29B5E00D145E0 /* Social.framework in Frameworks */,
 				8C0E8FE61FDEBDFF00789C91 /* MessageUI.framework in Frameworks */,
 				8C0E8FE11FDEBDFF00789C91 /* CoreBluetooth.framework in Frameworks */,
-				8C0E8FE41FDEBDFF00789C91 /* AssetsLibrary.framework in Frameworks */,
 				8C0E8FE21FDEBDFF00789C91 /* Security.framework in Frameworks */,
 				8C0E8FE51FDEBDFF00789C91 /* CoreLocation.framework in Frameworks */,
+				0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */,
 				8C0E8FE71FDEBDFF00789C91 /* CoreData.framework in Frameworks */,
 				98B047CB259314740011DAEB /* MPush.framework in Frameworks */,
 				8C0E8FE81FDEBDFF00789C91 /* AVKit.framework in Frameworks */,
 				8C0E8FE91FDEBDFF00789C91 /* Photos.framework in Frameworks */,
+				0798D5CE26981CBB00F5EDE0 /* Contacts.framework in Frameworks */,
 				8C0E8FEC1FDEBDFF00789C91 /* CFNetwork.framework in Frameworks */,
 				8C0E8FEB1FDEBDFF00789C91 /* iAd.framework in Frameworks */,
 				8C0E8FED1FDEBDFF00789C91 /* Foundation.framework in Frameworks */,
 				8C0E8FEE1FDEBDFF00789C91 /* UIKit.framework in Frameworks */,
 				B56E0DD820B414580082044D /* StoreKit.framework in Frameworks */,
 				8C0E8FEF1FDEBDFF00789C91 /* Accelerate.framework in Frameworks */,
+				0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */,
 				8C0E8FF11FDEBDFF00789C91 /* WebKit.framework in Frameworks */,
 				8C0E8FF21FDEBDFF00789C91 /* AudioToolbox.framework in Frameworks */,
-				8C0E8FF31FDEBDFF00789C91 /* MobileCoreServices.framework in Frameworks */,
 				8C0E8FF41FDEBDFF00789C91 /* CoreTelephony.framework in Frameworks */,
 				8C0E8FF51FDEBDFF00789C91 /* MediaPlayer.framework in Frameworks */,
 				8C0E8FF61FDEBDFF00789C91 /* QuartzCore.framework in Frameworks */,
 				8C0E8FF71FDEBDFF00789C91 /* libsqlite3.dylib in Frameworks */,
-				8C0E8FF81FDEBDFF00789C91 /* AddressBook.framework in Frameworks */,
 				8C0E8FF91FDEBDFF00789C91 /* libz.dylib in Frameworks */,
 				8C0E8FFA1FDEBDFF00789C91 /* CoreGraphics.framework in Frameworks */,
 				98B047D3259314750011DAEB /* SpotifyiOS.framework in Frameworks */,
 				7BC0EA88605ACD34738F90D5 /* Pods_Lifebox.framework in Frameworks */,
+				0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -11368,6 +11372,8 @@
 		051E1DF519CAC2F900FD1E03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0798D5CD26981CBB00F5EDE0 /* Contacts.framework */,
+				0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */,
 				C3C2356B20B6DA1B00F3FB6D /* MPush.framework */,
 				B56E0DD620B414510082044D /* StoreKit.framework */,
 				CE16C0471FF22FA500BE5906 /* Social.framework */,
@@ -19864,8 +19870,6 @@
 				8C0E8C631FDEBDFF00789C91 /* Sources */,
 				8C0E8FE01FDEBDFF00789C91 /* Frameworks */,
 				8C0E8FFC1FDEBDFF00789C91 /* Resources */,
-				8C0E90741FDEBDFF00789C91 /* ShellScript */,
-				8C0E90771FDEBDFF00789C91 /* ShellScript */,
 				8C0E90781FDEBDFF00789C91 /* Embed App Extensions */,
 				B549B6B324CF07BB00D39C44 /* Copy Files GPUImage */,
 				7326F88E24F64FA70067B6F8 /* ShellScript */,
@@ -20088,8 +20092,6 @@
 				CF8B637723CBC9D70021B021 /* Sources */,
 				CF8B688923CBC9D70021B021 /* Frameworks */,
 				CF8B68A823CBC9D70021B021 /* Resources */,
-				CF8B6B1F23CBC9D70021B021 /* ShellScript */,
-				CF8B6B2123CBC9D70021B021 /* ShellScript */,
 				CF8B6B2223CBC9D70021B021 /* Embed App Extensions */,
 				B549B6B824CF07DF00D39C44 /* Copy Files GPUImage */,
 				7326F88F24F64FBA0067B6F8 /* ShellScript */,
@@ -22597,32 +22599,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8C0E90741FDEBDFF00789C91 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
-		};
-		8C0E90771FDEBDFF00789C91 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
-		};
 		984F1AA6400231AE64CD723C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -22788,32 +22764,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Billo_Bundle/Pods-Billo_Bundle-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		CF8B6B1F23CBC9D70021B021 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
-		};
-		CF8B6B2123CBC9D70021B021 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
 		};
 		EC466AC2B78AFB876488FF22 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
