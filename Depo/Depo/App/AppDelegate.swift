@@ -94,8 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         startCoreDataSafeServices(with: application, options: launchOptions)
         
         APILogger.shared.startLogging()
-        SilentPushApiService().uploadLog()
-        
+
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         
@@ -402,7 +401,6 @@ extension AppDelegate {
         if let pushType = Netmera.recentPushObject()?.customDictionary[PushNotificationParameter.pushType.rawValue] as? String,
             pushType == PushNotificationAction.silent.rawValue {
             SilentPushApiService().uploadLog()
-            debugLog("Silent push handling service is called")
         }
     }
     
