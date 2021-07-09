@@ -48,11 +48,6 @@ final class PhotoVideoThreeDotMenuManager {
         /// locals only
         if remoteItems.isEmpty {
             actionTypes = [.createStory, .addToAlbum]
-
-            if PrintService.isEnabled {
-                actionTypes.append(.print)
-            }
-
             completion(actionTypes)
             
             /// local and remotes or remotes only

@@ -148,6 +148,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             DispatchQueue.main.async {
                 self?.fetchAndReload()
                 self?.collectionViewManager.reloadAlbumsSlider()
+
+                // The very first viewWillAppear will return zero for collectionView.indexPathsForVisibleItems
+                // We need to call updateDB() after the initial db fetch
+                self?.collectionView.layoutIfNeeded()
+                self?.updateDB()
             }
         }
     }
