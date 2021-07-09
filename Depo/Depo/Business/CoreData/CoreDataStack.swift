@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol CoreDataStackDelegate: class {
+protocol CoreDataStackDelegate: AnyObject {
     func onCoreDataStackSetupCompleted()
 }
 
 
-protocol CoreDataStack: class {
+protocol CoreDataStack: AnyObject {
     static var shared: CoreDataStack { get }
     
     var delegates: MulticastDelegate<CoreDataStackDelegate> { get }

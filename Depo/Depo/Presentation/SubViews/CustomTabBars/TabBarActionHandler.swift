@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol TabBarActionHandler: class {
+protocol TabBarActionHandler: AnyObject {
     func canHandleTabBarAction(_ action: TabBarViewController.Action) -> Bool
     func handleAction(_ action: TabBarViewController.Action)
 }
 
-protocol TabBarActionHandlerContainer: class {
+protocol TabBarActionHandlerContainer: AnyObject {
     var tabBarActionHandler: TabBarActionHandler? { get }
 }
 

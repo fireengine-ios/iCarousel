@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BackgroundTaskServiceDelegate: class {
+protocol BackgroundTaskServiceDelegate: AnyObject {
     func backgroundTaskWillExpire()
 }
 

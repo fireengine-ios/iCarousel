@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ConnectWithInstaViewDelegate: class {
+protocol ConnectWithInstaViewDelegate: AnyObject {
     func onConnectWithLoginInstaTap()
     func onConnectTap()
 }

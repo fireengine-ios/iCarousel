@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TrashBinSortingManagerDelegate: class {
+protocol TrashBinSortingManagerDelegate: AnyObject {
     func sortingRuleChanged(rule: SortedRules)
     func viewTypeChanged(viewType: MoreActionsConfig.ViewType)
 }

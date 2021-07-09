@@ -9,7 +9,7 @@
 import UIKit
 import Typist
 
-protocol RegistrationViewDelegate: class {
+protocol RegistrationViewDelegate: AnyObject {
     func show(errorString: String)
     func showCaptcha()
 }

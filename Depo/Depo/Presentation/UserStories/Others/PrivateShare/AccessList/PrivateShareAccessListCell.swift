@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareAccessListCellDelegate: class {
+protocol PrivateShareAccessListCellDelegate: AnyObject {
     func onRoleTapped(sender: UIButton, info: PrivateShareAccessListInfo)
 }
 

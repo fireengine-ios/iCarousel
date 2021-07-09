@@ -9,7 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol SmashService: class {
+protocol SmashService: AnyObject {
     
     func getStickers(type: StickerType, page: Int, size: Int, handler: @escaping (ResponseResult<(stickers: [SmashStickerResponse], type: StickerType)>) -> Void)
 }

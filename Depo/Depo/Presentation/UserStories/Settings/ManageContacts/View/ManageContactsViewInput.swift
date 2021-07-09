@@ -6,6 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol ManageContactsViewInput: class {
+protocol ManageContactsViewInput: AnyObject {
     func showContacts(_ contactGroups: [ManageContacts.Group])
 }

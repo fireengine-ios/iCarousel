@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SettingsInteractorOutput: class {
+protocol SettingsInteractorOutput: AnyObject {
     
     func cellsDataForSettings(isPermissionShown: Bool, isInvitationShown:Bool, isChatbotShown: Bool)
     

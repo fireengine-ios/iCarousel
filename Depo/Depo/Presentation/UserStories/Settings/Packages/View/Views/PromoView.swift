@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PromoViewDelegate: class {
+protocol PromoViewDelegate: AnyObject {
     func promoView(_ promoView: PromoView, didPressApplyWithPromocode promocode: String)
 }
 

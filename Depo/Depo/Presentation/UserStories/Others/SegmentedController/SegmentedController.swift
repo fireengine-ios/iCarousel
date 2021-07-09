@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SegmentedChildController: class {
+protocol SegmentedChildController: AnyObject {
     func setTitle(_ title: String)
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
     func setRightBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool)
@@ -37,7 +37,7 @@ extension SegmentedChildController where Self: UIViewController {
     }
 }
 
-//protocol SegmentedControllerDelegate: class {
+//protocol SegmentedControllerDelegate: AnyObject {
 //    func segmentedControllerEndEditMode()
 //}
 

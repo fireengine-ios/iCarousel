@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol IntroduceDataSourceEventsDelegate: class {
+protocol IntroduceDataSourceEventsDelegate: AnyObject {
     func pageChanged(page: Int)
 }
 

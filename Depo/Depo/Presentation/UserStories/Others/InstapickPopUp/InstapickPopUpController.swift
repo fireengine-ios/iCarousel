@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InstapickPopUpControllerDelegate: class {
+protocol InstapickPopUpControllerDelegate: AnyObject {
     func onConnectWithInsta()
     func onConnectWithoutInsta()
 }

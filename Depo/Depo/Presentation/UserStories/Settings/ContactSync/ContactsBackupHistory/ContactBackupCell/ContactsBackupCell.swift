@@ -15,7 +15,7 @@ protocol ContactsBackupCellProtocol {
     func setupCell(title: String, detail: String, isSelected: Bool)
 }
 
-protocol ContactsBackupCellDelegate: class {
+protocol ContactsBackupCellDelegate: AnyObject {
     func selectCellButtonTapped(for cell: UITableViewCell & ContactsBackupCellProtocol)
 }
 

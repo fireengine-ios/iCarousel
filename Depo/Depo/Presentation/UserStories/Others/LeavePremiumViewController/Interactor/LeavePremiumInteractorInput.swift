@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LeavePremiumInteractorInput: class {
+protocol LeavePremiumInteractorInput: AnyObject {
     func getAccountType(with accountType: String, offers: [Any]) -> AccountType?
     
     func trackScreen(screenType: LeavePremiumType)

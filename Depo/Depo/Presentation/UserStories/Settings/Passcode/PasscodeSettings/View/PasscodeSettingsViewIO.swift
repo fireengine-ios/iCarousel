@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol PasscodeSettingsViewInput: class {
+protocol PasscodeSettingsViewInput: AnyObject {
     func setup(state: PasscodeSettingsViewState, animated: Bool)
     func presentMailVerification()
 }
 
-protocol PasscodeSettingsViewOutput: class {
+protocol PasscodeSettingsViewOutput: AnyObject {
     func viewIsReady()
     func changePasscode()
     func setTouchId(enable: Bool)

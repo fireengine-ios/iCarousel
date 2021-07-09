@@ -6,6 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol TermsAndServicesModuleInput: class {
+protocol TermsAndServicesModuleInput: AnyObject {
     var delegate: RegistrationViewDelegate? { get }
 }

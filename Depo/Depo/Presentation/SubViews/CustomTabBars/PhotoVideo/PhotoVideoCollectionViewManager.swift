@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoVideoCollectionViewManagerDelegate: class {
+protocol PhotoVideoCollectionViewManagerDelegate: AnyObject {
     func refreshData(refresher: UIRefreshControl)
     func openAutoSyncSettings()
     func openViewTypeMenu(sender: UIButton)

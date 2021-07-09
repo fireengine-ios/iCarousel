@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AlbumDetailModuleOutput: class {
+protocol AlbumDetailModuleOutput: AnyObject {
     func onAlbumDeleted()
     func onAlbumRemoved()
 }

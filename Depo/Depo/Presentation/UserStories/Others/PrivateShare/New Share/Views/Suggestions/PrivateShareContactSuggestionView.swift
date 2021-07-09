@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareContactSuggestionViewDelegate: class {
+protocol PrivateShareContactSuggestionViewDelegate: AnyObject {
     func selectContact(info: ContactInfo)
 }
 

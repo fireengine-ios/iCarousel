@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HiddenPhotosThreeDotMenuManagerDelegate: class {
+protocol HiddenPhotosThreeDotMenuManagerDelegate: AnyObject {
     func onThreeDotsManagerUnhide()
     func onThreeDotsManagerSelect()
     func onThreeDotsManagerMoveToTrash()

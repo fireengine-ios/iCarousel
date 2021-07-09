@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SpotifyPlaylistsViewControllerDelegate: class {
+protocol SpotifyPlaylistsViewControllerDelegate: AnyObject {
     func onOpenPlaylist(_ playlist: SpotifyPlaylist)
     func onImport(playlists: [SpotifyPlaylist])
     func onShowImported()

@@ -6,6 +6,6 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol InfoButtonCellProtocol: class {
+protocol InfoButtonCellProtocol: AnyObject {
     func infoButtonGotPressed(with sender: Any?, andType type: UserValidationResults)
 }

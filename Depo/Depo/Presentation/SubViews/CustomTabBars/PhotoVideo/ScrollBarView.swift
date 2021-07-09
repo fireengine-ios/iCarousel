@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ScrollBarViewDelegate: class {
+protocol ScrollBarViewDelegate: AnyObject {
     func scrollBarViewBeganDragging()
     func scrollBarViewDidEndDragging()
 }

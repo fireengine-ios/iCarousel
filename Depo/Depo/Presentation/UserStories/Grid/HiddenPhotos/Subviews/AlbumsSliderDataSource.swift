@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AlbumsSliderDataSourceDelegate: class {
+protocol AlbumsSliderDataSourceDelegate: AnyObject {
     func didSelect(item: BaseDataSourceItem)
     func didChangeSelectionCount(_ count: Int)
     func needLoadNextPage()

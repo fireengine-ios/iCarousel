@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HomePageInteractorOutput: class {
+protocol HomePageInteractorOutput: AnyObject {
         
     func stopRefresh()
     

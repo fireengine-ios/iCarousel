@@ -9,7 +9,7 @@
 import Foundation
 import WidgetKit
 
-protocol ItemSyncService: class {
+protocol ItemSyncService: AnyObject {
     var status: AutoSyncStatus { get }
 
     var delegate: ItemSyncServiceDelegate? { get set }
@@ -21,7 +21,7 @@ protocol ItemSyncService: class {
 }
 
 
-protocol ItemSyncServiceDelegate: class {
+protocol ItemSyncServiceDelegate: AnyObject {
     func didReceiveOutOfSpaceError()
     func didReceiveError()
 }

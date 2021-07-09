@@ -92,7 +92,7 @@ enum FloatingButtonsType {
     }
 }
 
-protocol PlusMenuItemViewDelegate: class {
+protocol PlusMenuItemViewDelegate: AnyObject {
     func selectPlusMenuItem(action: TabBarViewController.Action)
 }
 

@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol HomePageModuleInput: class {
+protocol HomePageModuleInput: AnyObject {
     
 
 }

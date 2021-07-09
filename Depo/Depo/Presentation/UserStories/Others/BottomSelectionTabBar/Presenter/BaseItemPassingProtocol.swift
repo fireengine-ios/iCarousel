@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol BaseItemInputPassingProtocol: class {
+protocol BaseItemInputPassingProtocol: AnyObject {
     
     func operationFinished(withType type: ElementTypes, response: Any?)
     func operationFailed(withType type: ElementTypes)
@@ -30,7 +30,7 @@ protocol BaseItemInputPassingProtocol: class {
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems)
 }
 
-protocol BaseItemOuputPassingProtocol: class {
+protocol BaseItemOuputPassingProtocol: AnyObject {
     func dismiss(animated: Bool)
     func show(animated: Bool, onView sourceView: UIView?)
 }

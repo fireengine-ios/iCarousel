@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PremiumViewDelegate: class {
+protocol PremiumViewDelegate: AnyObject {
     func onBecomePremiumTap()
     func showTermsOfUse()
     func openLink(with url: URL)

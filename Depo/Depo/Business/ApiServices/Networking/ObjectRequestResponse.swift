@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-protocol ObjectFromRequestResponse: class {
+protocol ObjectFromRequestResponse: AnyObject {
     init(json: Data?, headerResponse: HTTPURLResponse?)
     func mapping()
 }

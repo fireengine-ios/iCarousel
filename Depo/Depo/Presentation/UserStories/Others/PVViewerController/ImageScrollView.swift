@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ImageScrollViewDelegate: class {
+protocol ImageScrollViewDelegate: AnyObject {
     func imageViewFinishedLoading()
     func onImageLoaded(image: UIImage?)
 }

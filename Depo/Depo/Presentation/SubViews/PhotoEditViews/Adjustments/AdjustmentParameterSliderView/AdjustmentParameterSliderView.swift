@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AdjustmentParameterSliderViewDelegate: class {
+protocol AdjustmentParameterSliderViewDelegate: AnyObject {
     func sliderValueChanged(newValue: Float, type: AdjustmentParameterType)
 }
 

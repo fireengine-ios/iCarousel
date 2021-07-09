@@ -20,7 +20,7 @@ protocol FileInfoPeopleViewProtocol: UIView {
     func setHiddenPremiumStackView(isHidden: Bool)
 }
 
-protocol FileInfoPeopleViewDelegate: class {
+protocol FileInfoPeopleViewDelegate: AnyObject {
     func onPeopleAlbumDidTap(item: PeopleOnPhotoItemResponse)
     func onEnableFaceRecognitionDidTap()
     func onBecomePremiumDidTap()

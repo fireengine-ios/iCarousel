@@ -9,7 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol SpotifyService: class {    
+protocol SpotifyService: AnyObject {    
     func socialStatus(success: SuccessResponse?, fail: FailResponse?)
     func connect(code: String, handler: @escaping ResponseVoid)
     func disconnect(handler: @escaping ResponseVoid)

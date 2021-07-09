@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DeleteDuplicatesMainViewDelegate: class {
+protocol DeleteDuplicatesMainViewDelegate: AnyObject {
     func onDeleteAllTapped()
 }
 

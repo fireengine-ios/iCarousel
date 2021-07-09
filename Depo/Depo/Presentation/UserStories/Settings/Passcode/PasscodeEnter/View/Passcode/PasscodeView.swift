@@ -22,7 +22,7 @@ extension PasscodeView {
 }
 
 
-protocol PasscodeInput: class {
+protocol PasscodeInput: AnyObject {
     var passcode: Passcode { get set }
     func clearPasscode()
     func animateError()
@@ -30,7 +30,7 @@ protocol PasscodeInput: class {
     func animatePasscodeFullEnter()
 }
 
-protocol PasscodeOutput: class {
+protocol PasscodeOutput: AnyObject {
     var text: String? { get set }
     func animateError(with text: String)
     func animateError(with numberOfTries: Int)

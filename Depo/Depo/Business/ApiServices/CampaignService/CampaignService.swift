@@ -9,7 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol CampaignService: class {
+protocol CampaignService: AnyObject {
     func getPhotopickDetails(handler: @escaping (ErrorResult<CampaignCardResponse, CampaignPhotopickError>) -> Void)
 }
     

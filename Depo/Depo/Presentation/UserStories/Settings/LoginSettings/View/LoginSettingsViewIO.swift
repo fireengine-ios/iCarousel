@@ -6,11 +6,11 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol LoginSettingsViewInput: class {
+protocol LoginSettingsViewInput: AnyObject {
     func updateTableView()
 }
 
-protocol LoginSettingsViewOutput: class {    
+protocol LoginSettingsViewOutput: AnyObject {    
     var cellsData: [SettingsTableViewSwitchCell.CellType: Bool] { get }
     var cellTypes: [SettingsTableViewSwitchCell.CellType] { get }
     

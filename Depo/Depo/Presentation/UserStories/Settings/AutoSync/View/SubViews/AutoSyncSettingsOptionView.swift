@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AutoSyncSettingsOptionViewDelegate: class {
+protocol AutoSyncSettingsOptionViewDelegate: AnyObject {
     func didSelect(option: AutoSyncOption)
 }
 

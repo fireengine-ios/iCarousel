@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PremiumFooterCollectionReusableViewDelegate: class {
+protocol PremiumFooterCollectionReusableViewDelegate: AnyObject {
     func onBecomePremiumTap()
 }
 

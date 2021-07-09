@@ -9,7 +9,7 @@
 import UIKit
 import MobileCoreServices
 
-protocol ShareController: class {
+protocol ShareController: AnyObject {
     func getSharedItems(handler: @escaping ([SharedItemSource]) -> Void)
 }
 extension ShareController where Self: UIViewController {

@@ -15,7 +15,7 @@ enum ReloadType {
     case onViewAppear
 }
  
-protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
+protocol PrivateShareSharedFilesCollectionManagerDelegate: AnyObject {
     func didStartSelection(selected: Int)
     func didEndSelection()
     func didChangeSelection(selectedItems: [WrapData])

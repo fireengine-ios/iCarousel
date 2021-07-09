@@ -9,6 +9,6 @@
 import Foundation
 
 
-protocol TermsOfUseModuleInput: class {
+protocol TermsOfUseModuleInput: AnyObject {
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol PasscodeManager: class {
+protocol PasscodeManager: AnyObject {
     var view: PasscodeView { get }
     var storage: PasscodeStorage { get }
     func changeState(to state: PasscodeState)
@@ -21,7 +21,7 @@ protocol PasscodeManager: class {
     var userCancelledBiometrics: Bool { get }
 }
 
-protocol PasscodeManagerDelegate: class {
+protocol PasscodeManagerDelegate: AnyObject {
     func passcodeLockDidSucceed(_ lock: PasscodeManager)
     func passcodeLockDidFail(_ lock: PasscodeManager)
     func passcodeLockDidFailNumberOfTries(_ lock: PasscodeManager)

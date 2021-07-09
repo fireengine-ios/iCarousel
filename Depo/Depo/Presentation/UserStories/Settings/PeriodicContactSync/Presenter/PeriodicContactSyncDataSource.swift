@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol PeriodicContactSyncDataSourceDelegate: class {
+protocol PeriodicContactSyncDataSourceDelegate: AnyObject {
     func onValueChanged()
 }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol HomeCollectionViewDataSourceDelegate: class {
+protocol HomeCollectionViewDataSourceDelegate: AnyObject {
     func onCellHasBeenRemovedWith(controller: UIViewController)
     func numberOfColumns() -> Int
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat

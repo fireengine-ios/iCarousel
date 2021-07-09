@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PhoneVerificationInteractorOutput: class {
+protocol PhoneVerificationInteractorOutput: AnyObject {
     
     func verificationSucces()
     func verificationFailed(with error: String)

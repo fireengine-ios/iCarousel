@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol MailVerificationViewControllerDelegate: class {
+protocol MailVerificationViewControllerDelegate: AnyObject {
     func mailVerified(mail: String)
     func mailVerificationFailed()
 }

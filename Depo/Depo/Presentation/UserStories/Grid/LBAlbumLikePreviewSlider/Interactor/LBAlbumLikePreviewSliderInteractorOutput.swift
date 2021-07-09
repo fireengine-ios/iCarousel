@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LBAlbumLikePreviewSliderInteractorOutput: class {
+protocol LBAlbumLikePreviewSliderInteractorOutput: AnyObject {
 
     func operationSuccessed(withItems items: [SliderItem])
     func operationFailed()

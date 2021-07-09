@@ -62,7 +62,7 @@ struct CreateOverlayStickersSuccessResult {
     let type: CreateOverlayResultType
 }
 
-protocol OverlayStickerImageViewDelegate: class {
+protocol OverlayStickerImageViewDelegate: AnyObject {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool)
     func didDeleteAttachments(_ attachments: [SmashStickerResponse])
 }

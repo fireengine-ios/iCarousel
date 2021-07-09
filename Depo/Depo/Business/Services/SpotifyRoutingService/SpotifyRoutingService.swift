@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SpotifyRoutingServiceDelegate: class {
+protocol SpotifyRoutingServiceDelegate: AnyObject {
     func importDidComplete()
     func importDidCanceled()
     func importSendToBackground()

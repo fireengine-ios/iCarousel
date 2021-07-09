@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import SwiftyGif
 
-protocol LoadingImageViewDelegate: class {
+protocol LoadingImageViewDelegate: AnyObject {
     func onImageLoaded(image: UIImage?)
     func onLoadingImageCanceled()
     func loadingFinished()

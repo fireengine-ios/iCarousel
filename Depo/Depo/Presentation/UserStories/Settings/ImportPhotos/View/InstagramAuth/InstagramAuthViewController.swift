@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-protocol InstagramAuthViewControllerDelegate: class {
+protocol InstagramAuthViewControllerDelegate: AnyObject {
     func instagramAuthSuccess()
     func instagramAuthCancel()
 }

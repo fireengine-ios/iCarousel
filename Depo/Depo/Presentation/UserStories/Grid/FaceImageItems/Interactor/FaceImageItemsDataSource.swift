@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol FaceImageItemsDataSourceDelegate: class {
+protocol FaceImageItemsDataSourceDelegate: AnyObject {
     func onBecomePremiumTap()
 }
 

@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol PrivateShareLocalContactCellDelegate: class {
+protocol PrivateShareLocalContactCellDelegate: AnyObject {
     func didSelect(contactInfo: ContactInfo)
 }
 

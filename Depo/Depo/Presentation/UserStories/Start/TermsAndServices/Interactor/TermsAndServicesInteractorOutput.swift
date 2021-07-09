@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TermsAndServicesInteractorOutput: class {
+protocol TermsAndServicesInteractorOutput: AnyObject {
     func showLoadedTermsAndUses(eula: String)
     func failLoadTermsAndUses(errorString: String)
     func popUpPressed()

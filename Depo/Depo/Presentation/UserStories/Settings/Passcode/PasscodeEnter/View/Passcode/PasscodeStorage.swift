@@ -10,7 +10,7 @@ import Foundation
 
 public typealias Passcode = String
 
-protocol PasscodeStorage: class {
+protocol PasscodeStorage: AnyObject {
     var isEmpty: Bool { get }
     var systemCallOnScreen: Bool { get set }
     func isEqual(to passcode: Passcode) -> Bool

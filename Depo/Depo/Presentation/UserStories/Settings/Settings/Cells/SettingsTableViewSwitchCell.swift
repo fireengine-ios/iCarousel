@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol SettingsTableViewSwitchCellDelegate: class {
+protocol SettingsTableViewSwitchCellDelegate: AnyObject {
     func switchToggled(cell: SettingsTableViewSwitchCell)
 }
 

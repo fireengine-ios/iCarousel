@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SettingsDelegate: class {
+protocol SettingsDelegate: AnyObject {
     func goToInvitation()
 
     func goToConnectedAccounts()

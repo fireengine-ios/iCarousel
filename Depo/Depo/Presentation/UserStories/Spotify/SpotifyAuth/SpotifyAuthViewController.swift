@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-protocol SpotifyAuthViewControllerDelegate: class {
+protocol SpotifyAuthViewControllerDelegate: AnyObject {
     func spotifyAuthSuccess(with code: String)
     func spotifyAuthCancel()
 }

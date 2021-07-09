@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FunNavBarDelegate: class {
+protocol FunNavBarDelegate: AnyObject {
     func funNavBarDidCloseTapped()
     func funNavBarDidSaveTapped()
     func funNavBarDidUndoTapped()

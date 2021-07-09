@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InstaPickHashtagCellDelegate: class {
+protocol InstaPickHashtagCellDelegate: AnyObject {
     func dismiss(cell: InstaPickHashtagCell)
 }
 

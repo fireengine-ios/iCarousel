@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ContactsBackupHistoryViewDelegate: class {
+protocol ContactsBackupHistoryViewDelegate: AnyObject {
     func restoreBackupTapped()
     func deleteBackupTapped()
 }

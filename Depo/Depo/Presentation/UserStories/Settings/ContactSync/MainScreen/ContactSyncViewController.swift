@@ -10,7 +10,7 @@ import UIKit
 import Contacts
 
 
-protocol ContactsBackupActionProviderProtocol: class {
+protocol ContactsBackupActionProviderProtocol: AnyObject {
     func backUp(isConfirmed: Bool)
 }
 

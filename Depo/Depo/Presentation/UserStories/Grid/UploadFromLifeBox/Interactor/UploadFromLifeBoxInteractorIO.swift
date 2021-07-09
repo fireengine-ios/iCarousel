@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol UploadFromLifeBoxInteractorInput: class {
+protocol UploadFromLifeBoxInteractorInput: AnyObject {
     
     func onUploadItems(items: [Item])
     
 }
 
-protocol UploadFromLifeBoxInteractorOutput: class {
+protocol UploadFromLifeBoxInteractorOutput: AnyObject {
     func uploadOperationSuccess()
     func asyncOperationFail(errorResponse: ErrorResponse)
 }

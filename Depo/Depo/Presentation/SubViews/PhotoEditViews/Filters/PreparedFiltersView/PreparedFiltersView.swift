@@ -28,7 +28,7 @@ struct PreparedFilter {
     let category: PreparedFilterCategory
 }
 
-protocol PreparedFiltersViewDelegate: class {
+protocol PreparedFiltersViewDelegate: AnyObject {
     func didSelectOriginal()
     func didSelectFilter(_ type: FilterType)
     func needOpenFilterSlider(for type: FilterType)

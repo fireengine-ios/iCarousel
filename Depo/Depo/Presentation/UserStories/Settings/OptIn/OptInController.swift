@@ -9,7 +9,7 @@
 import UIKit
 import Typist
 
-protocol OptInControllerDelegate: class {
+protocol OptInControllerDelegate: AnyObject {
     func optInNavigationTitle() -> String
     func optInResendPressed(_ optInVC: OptInController)
     func optIn(_ optInVC: OptInController, didEnterCode code: String)

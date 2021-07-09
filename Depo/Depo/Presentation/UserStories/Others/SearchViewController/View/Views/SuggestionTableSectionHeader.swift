@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SuggestionTableSectionHeaderDelegate: class {
+protocol SuggestionTableSectionHeaderDelegate: AnyObject {
     func onClearRecentSearchesTapped()
 }
 

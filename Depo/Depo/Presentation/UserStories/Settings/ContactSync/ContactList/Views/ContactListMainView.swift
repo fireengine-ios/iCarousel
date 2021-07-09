@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ContactListMainViewDelegate: class {
+protocol ContactListMainViewDelegate: AnyObject {
     func onRestoreTapped()
     func onReloadData()
     func search(query: String?)

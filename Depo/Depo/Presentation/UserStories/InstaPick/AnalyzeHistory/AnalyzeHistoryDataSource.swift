@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AnalyzeHistoryDataSourceDelegate: class {
+protocol AnalyzeHistoryDataSourceDelegate: AnyObject {
     func needLoadNextHistoryPage()
     func onLongPressInCell()
     func onPurchase()

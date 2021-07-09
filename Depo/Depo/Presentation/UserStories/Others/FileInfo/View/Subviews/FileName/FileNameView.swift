@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FileNameViewDelegate: class {
+protocol FileNameViewDelegate: AnyObject {
     func onRename(newName: String)
 }
 

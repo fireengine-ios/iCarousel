@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ContactListViewDelegate: class {
+protocol ContactListViewDelegate: AnyObject {
     func didDeleteContacts(for backup: ContactSync.SyncResponse)
     func didCreateNewBackup(_ backup: ContactSync.SyncResponse)
 }

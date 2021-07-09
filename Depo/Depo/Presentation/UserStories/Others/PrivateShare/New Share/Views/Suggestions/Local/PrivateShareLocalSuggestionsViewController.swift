@@ -15,7 +15,7 @@ struct ContactInfo {
 }
 
 
-protocol PrivateShareSelectSuggestionsDelegate: class {
+protocol PrivateShareSelectSuggestionsDelegate: AnyObject {
     func didSelect(contactInfo: ContactInfo)
     func contactListDidUpdate(isEmpty: Bool)
 }

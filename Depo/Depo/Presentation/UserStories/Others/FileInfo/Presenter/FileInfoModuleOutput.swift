@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol FileInfoModuleOutput: class {
+protocol FileInfoModuleOutput: AnyObject {
     func didRenameItem(_ item: BaseDataSourceItem)
 }

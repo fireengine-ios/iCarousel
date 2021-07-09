@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ActivityTimelineInteractorOutput: class {
+protocol ActivityTimelineInteractorOutput: AnyObject {
     func successedTimelineActivities(with array: [ActivityTimelineServiceResponse])
     func refreshTimelineActivities(with array: [ActivityTimelineServiceResponse])
     func failedTimelineActivities(with error: ErrorResponse)

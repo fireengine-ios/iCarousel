@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TermsCheckboxTextViewDelegate: class {
+protocol TermsCheckboxTextViewDelegate: AnyObject {
     func checkBoxPressed(isSelected: Bool, sender: TermsCheckboxTextView)
 }
 

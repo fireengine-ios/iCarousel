@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UsageInfoInteractorOutput: class {
+protocol UsageInfoInteractorOutput: AnyObject {
     func successed(usage: UsageResponse)
     func failedUsage(with error: ErrorResponse)
 }

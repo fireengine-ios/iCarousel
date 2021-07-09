@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseCollectionViewCellWithSwipeDelegate: class {
+protocol BaseCollectionViewCellWithSwipeDelegate: AnyObject {
     func onCellDeleted(cell: UICollectionViewCell)
 }
 

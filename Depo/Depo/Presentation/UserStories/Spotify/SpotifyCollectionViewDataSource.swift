@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SpotifyCollectionDataSourceDelegate: class {
+protocol SpotifyCollectionDataSourceDelegate: AnyObject {
     func needLoadNextPage()
     func onSelect(item: SpotifyObject)
     func didChangeSelectionCount(newCount: Int)

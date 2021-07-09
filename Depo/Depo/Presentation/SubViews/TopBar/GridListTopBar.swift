@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol GridListTopBarDelegate: class {
+protocol GridListTopBarDelegate: AnyObject {
     
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType)
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType)

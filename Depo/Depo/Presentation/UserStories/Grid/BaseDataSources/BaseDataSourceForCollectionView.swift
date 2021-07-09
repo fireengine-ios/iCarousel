@@ -14,7 +14,7 @@ enum BaseDataSourceDisplayingType{
     case list
 }
 
-protocol BaseDataSourceForCollectionViewDelegate: class {
+protocol BaseDataSourceForCollectionViewDelegate: AnyObject {
     
     func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]])
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FaceImageItemsViewInput: class {
+protocol FaceImageItemsViewInput: AnyObject {
     func configurateUgglaView(hidden: Bool)
     func updateUgglaViewPosition()
     func showUgglaView()

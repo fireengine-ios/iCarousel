@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialRemoveConnectionCell: class {
+protocol SocialRemoveConnectionCell: AnyObject {
     func setup(with section: Section?)
     func set(username: String?)
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TrashBinDataSourceDelegate: class {
+protocol TrashBinDataSourceDelegate: AnyObject {
     func needLoadNextItemsPage()
     func needLoadNextAlbumPage()
     func didSelect(item: Item)

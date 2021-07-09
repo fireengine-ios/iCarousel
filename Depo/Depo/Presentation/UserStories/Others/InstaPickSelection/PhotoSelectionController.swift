@@ -1,7 +1,7 @@
 import UIKit
 import Reachability
 
-protocol PhotoSelectionControllerDelegate: class {
+protocol PhotoSelectionControllerDelegate: AnyObject {
     var selectionState: PhotoSelectionState { get }
     var selectedItems: [SearchItemResponse] { get set }
     func selectionController(_ controller: PhotoSelectionController, didSelectItem item: SearchItemResponse)

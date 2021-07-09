@@ -1,7 +1,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol InstaPickServiceDelegate: class {
+protocol InstaPickServiceDelegate: AnyObject {
     func didRemoveAnalysis()
     func didFinishAnalysis(_ analyses: [InstapickAnalyze])
 }
@@ -12,7 +12,7 @@ struct AnalyzeResult {
 }
 
 /// https://wiki.life.com.by/x/IjAWBQ
-protocol InstapickService: class {
+protocol InstapickService: AnyObject {
     var delegates: MulticastDelegate<InstaPickServiceDelegate> { get }
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)

@@ -6,6 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol IntroduceModuleInput: class {
+protocol IntroduceModuleInput: AnyObject {
 
 }

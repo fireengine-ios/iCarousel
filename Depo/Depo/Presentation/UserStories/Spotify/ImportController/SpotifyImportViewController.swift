@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SpotifyImportControllerDelegate: class {
+protocol SpotifyImportControllerDelegate: AnyObject {
     func importDidCancel(_ controller: SpotifyImportViewController)
     func importSendToBackground(_ controller: SpotifyImportViewController)
 }

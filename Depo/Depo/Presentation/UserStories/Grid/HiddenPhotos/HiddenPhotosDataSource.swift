@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HiddenPhotosDataSourceDelegate: class {
+protocol HiddenPhotosDataSourceDelegate: AnyObject {
     func needLoadNextPhotoPage()
     func needLoadNextAlbumPage()
     func didSelectPhoto(item: Item)

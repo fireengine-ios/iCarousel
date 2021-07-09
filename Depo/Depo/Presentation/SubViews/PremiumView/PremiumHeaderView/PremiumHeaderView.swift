@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PremiumHeaderViewDelegate: class {
+protocol PremiumHeaderViewDelegate: AnyObject {
     func onBecomePremiumTap()
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol NavbarManagerDelegate: class {
+protocol NavbarManagerDelegate: AnyObject {
     func onCancel()
 }
 

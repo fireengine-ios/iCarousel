@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LBCellsDelegate: class {
+protocol LBCellsDelegate: AnyObject {
     func canLongPress() -> Bool
     func onLongPress(cell: UICollectionViewCell)
 }

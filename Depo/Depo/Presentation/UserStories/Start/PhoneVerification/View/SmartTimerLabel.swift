@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SmartTimerLabelDelegate: class {
+protocol SmartTimerLabelDelegate: AnyObject {
     func timerDidFinishRunning()
 }
 

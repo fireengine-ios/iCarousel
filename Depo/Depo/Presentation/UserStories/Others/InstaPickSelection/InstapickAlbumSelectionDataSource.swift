@@ -1,6 +1,6 @@
 import UIKit
 
-protocol InstapickAlbumSelectionDataSourceDelegate: class {
+protocol InstapickAlbumSelectionDataSourceDelegate: AnyObject {
     func onSelectAlbum(_ album: AlbumItem)
 }
 

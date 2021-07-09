@@ -9,7 +9,7 @@
 
 import UIKit
 
-protocol FaceImagePhotosViewInput: class {
+protocol FaceImagePhotosViewInput: AnyObject {
     var contentView: UIView! { get }
     func setHeaderImage(with path: PathForItem)
     func setupHeader(with item: Item, status: ItemStatus?)

@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol ContactBackupHistoryDataManagerProtocol: class {
+protocol ContactBackupHistoryDataManagerProtocol: AnyObject {
     func setup(with items: [ContactBackupItem])
 }
 
-protocol ContactBackupHistoryDataManagerDelegate: class {
+protocol ContactBackupHistoryDataManagerDelegate: AnyObject {
     func showDetailsForBackupItem(item: ContactBackupItem)
 }
 
