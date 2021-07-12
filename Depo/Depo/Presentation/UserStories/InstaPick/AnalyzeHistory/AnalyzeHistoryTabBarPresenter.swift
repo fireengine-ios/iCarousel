@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AnalyzeHistoryTabBarPresenterDelegate: class {
+protocol AnalyzeHistoryTabBarPresenterDelegate: AnyObject {
     func bottomBarSelectedItem(_ item: ElementTypes)
 }
 

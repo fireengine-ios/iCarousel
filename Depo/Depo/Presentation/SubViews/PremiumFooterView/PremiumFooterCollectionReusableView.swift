@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol PremiumFooterCollectionReusableViewDelegate: class {
+protocol PremiumFooterCollectionReusableViewDelegate: AnyObject {
     func onBecomePremiumTap()
 }
 
 final class PremiumFooterCollectionReusableView: UICollectionReusableView {
 
-    private let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
+    private let titleEdgeInsets = UIEdgeInsets(top: 13, left: 18, bottom: 13, right: 18)
     
     @IBOutlet private weak var premiumView: PremiumView!
     

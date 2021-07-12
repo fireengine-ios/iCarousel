@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol SocialConnectionCellDelegate: class, ActivityIndicator {
+protocol SocialConnectionCellDelegate: AnyObject, ActivityIndicator {
     func didConnectSuccessfully(section: Section)
     func didDisconnectSuccessfully(section: Section)
     func showError(message: String)
 }
 
-protocol SocialConnectionCell: class, ActivityIndicator {
+protocol SocialConnectionCell: AnyObject, ActivityIndicator {
     var section: Section? { get }
     var delegate: SocialConnectionCellDelegate? { get set }
     

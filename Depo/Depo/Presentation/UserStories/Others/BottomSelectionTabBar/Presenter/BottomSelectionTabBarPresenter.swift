@@ -77,10 +77,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
-        let downloadIndex = originalConfig.elementsConfig.index(of: .download)
-        let syncIndex = originalConfig.elementsConfig.index(of: .sync)
-        let moveToTrashIndex = originalConfig.elementsConfig.index(of: .moveToTrash)
-        let hideIndex = originalConfig.elementsConfig.index(of: .hide)
+        let downloadIndex = originalConfig.elementsConfig.firstIndex(of: .download)
+        let syncIndex = originalConfig.elementsConfig.firstIndex(of: .sync)
+        let moveToTrashIndex = originalConfig.elementsConfig.firstIndex(of: .moveToTrash)
+        let hideIndex = originalConfig.elementsConfig.firstIndex(of: .hide)
         
         let validIndexes = [downloadIndex, syncIndex, hideIndex, moveToTrashIndex].compactMap { $0 }
         

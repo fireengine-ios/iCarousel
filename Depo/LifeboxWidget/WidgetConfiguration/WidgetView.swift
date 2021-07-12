@@ -665,7 +665,7 @@ struct CirclePercentageViewSmall: View {
                 .offset(x: -300, y: 0)
                 .animation(.linear)
                 .onReceive(timer) { _ in
-                    self.offset(x: -200, y: 0)
+                    _ = self.offset(x: -200, y: 0)
                 }
 
         }

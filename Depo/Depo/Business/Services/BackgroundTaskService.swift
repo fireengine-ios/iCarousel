@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BackgroundTaskServiceDelegate: class {
+protocol BackgroundTaskServiceDelegate: AnyObject {
     func backgroundTaskWillExpire()
 }
 
@@ -19,14 +19,14 @@ final class BackgroundTaskService {
     
     var expirationDelegates = MulticastDelegate<BackgroundTaskServiceDelegate>()
     
-    private var backgroundTaskId = UIBackgroundTaskInvalid
+    private var backgroundTaskId: UIBackgroundTaskIdentifier = .invalid
     private (set) var appWasSuspended = false
     
     func beginBackgroundTask() {
         appWasSuspended = false
         
         guard
-            backgroundTaskId == UIBackgroundTaskInvalid
+            backgroundTaskId == .invalid
         else {
             return
         }
@@ -45,10 +45,10 @@ final class BackgroundTaskService {
     }
     
     private func endBackgroundTask() {
-        if self.backgroundTaskId != UIBackgroundTaskInvalid {
+        if self.backgroundTaskId != .invalid {
             UIApplication.shared.endBackgroundTask(backgroundTaskId)
             debugLog("endBackgroundTask \(backgroundTaskId)")
-            backgroundTaskId = UIBackgroundTaskInvalid
+            backgroundTaskId = .invalid
         }
     }
 }

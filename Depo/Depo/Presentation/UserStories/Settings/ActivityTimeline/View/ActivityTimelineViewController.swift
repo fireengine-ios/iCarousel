@@ -51,7 +51,7 @@ class ActivityTimelineViewController: BaseViewController {
     }
     
     private func getInfinityView() -> UIView {
-        let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activity = UIActivityIndicatorView(style: .gray)
         activity.startAnimating()
         return activity
     }

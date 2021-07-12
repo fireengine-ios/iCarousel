@@ -84,7 +84,7 @@ class PredicateRules {
                     [.fileType(.application(.doc)), .fileType(.application(.txt)),
                      .fileType(.application(.pdf)), .fileType(.application(.xls)),
                      .fileType(.application(.html)), .fileType(.application(.ppt)), .fileType(.application(.pptx))]
-                let predicates = allDocsTypes.flatMap { predicateFromGeneralFilterType(type: $0) }
+                let predicates = allDocsTypes.compactMap { predicateFromGeneralFilterType(type: $0) }
                 return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
             default:
                 return NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) = %d", specificType.valueForCoreDataMapping())

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ContactListMainViewDelegate: class {
+protocol ContactListMainViewDelegate: AnyObject {
     func onRestoreTapped()
     func onReloadData()
     func search(query: String?)
@@ -31,7 +31,7 @@ final class ContactListMainView: UIView, NibInit {
             let gradientView = TransparentGradientView(style: .vertical, mainColor: ColorConstants.lighterGray)
             gradientView.frame = newValue.bounds
             newValue.addSubview(gradientView)
-            newValue.sendSubview(toBack: gradientView)
+            newValue.sendSubviewToBack(gradientView)
             gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
     }

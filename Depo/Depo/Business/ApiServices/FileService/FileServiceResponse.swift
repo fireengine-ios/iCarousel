@@ -34,13 +34,13 @@ final class FileListResponse: ObjectRequestResponse, Map {
         parentFolderName = json?["parentFolderName"].string
         let parentFolderListJson: [JSON]? = json?["parentFolderList"].array
         if let unwrapedParentFolderListJson = parentFolderListJson {
-            parentFolderList = unwrapedParentFolderListJson.flatMap { ParentFolderList(json: $0) }
+            parentFolderList = unwrapedParentFolderListJson.compactMap { ParentFolderList(json: $0) }
         }
         
         guard let list = json?["fileList"].array else {
             return
         }
-        fileList = list.flatMap { WrapData(remote: SearchItemResponse(withJSON: $0),
+        fileList = list.compactMap { WrapData(remote: SearchItemResponse(withJSON: $0),
                                           parendfolderUUID: parentFolderList.first?.uuid) }
 //        CoreDataStack.shared.appendOnlyNewItems(items: fileList)
     }

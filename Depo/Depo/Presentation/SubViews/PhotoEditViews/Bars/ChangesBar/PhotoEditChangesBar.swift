@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoEditChangesBarDelegate: class {
+protocol PhotoEditChangesBarDelegate: AnyObject {
     func cancelChanges()
     func applyChanges()
 }

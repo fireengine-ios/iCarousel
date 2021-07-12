@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SearchViewInteractorOutput: class {
+protocol SearchViewInteractorOutput: AnyObject {
     func endSearchRequestWith(text: String)
     func getContentWithSuccess(items: [Item])
     func successWithSuggestList(list: [SuggestionObject])

@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol MyStorageInteractorOutput: class {
+protocol MyStorageInteractorOutput: AnyObject {
     func successed(accountInfo: AccountInfoResponse)
     func successed(allOffers: [SubscriptionPlanBaseResponse])
 

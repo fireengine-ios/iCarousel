@@ -306,7 +306,7 @@ class ContactsSyncService: BaseRequestService {
     func deleteRemoteContacts(_ contacts: [RemoteContact], success: SuccessResponse?, fail: FailResponse?) {
         debugLog("ContactsSyncService deleteRemoteContacts")
         
-        let param = DeleteContacts(contactIDs: contacts.flatMap{ $0.id })
+        let param = DeleteContacts(contactIDs: contacts.compactMap{ $0.id })
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeDeleteRequest(param: param, handler: handler)
     }
@@ -358,7 +358,7 @@ class ContactsSyncService: BaseRequestService {
         for contact in firstContacts {
             let name = contact.name
             var numberOfErrors = contact.numberOfErrors
-            if let index = secondContacts.index(where: { $0.name == name }) {
+            if let index = secondContacts.firstIndex(where: { $0.name == name }) {
                 numberOfErrors += secondContacts[index].numberOfErrors
             }
             let finalContact = ContactSync.AnalyzedContact(name: name, numberOfErrors: numberOfErrors)

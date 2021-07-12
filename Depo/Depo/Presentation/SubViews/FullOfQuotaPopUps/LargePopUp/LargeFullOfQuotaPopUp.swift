@@ -15,7 +15,7 @@ enum LargeFullOfQuotaPopUpType{
 }
 
 //MARK: - LargeFullOfQuotaPopUpDelegate
-protocol LargeFullOfQuotaPopUpDelegate: class {
+protocol LargeFullOfQuotaPopUpDelegate: AnyObject {
     func onOpenExpandTap()
     func onDeleteFilesTap()
 }

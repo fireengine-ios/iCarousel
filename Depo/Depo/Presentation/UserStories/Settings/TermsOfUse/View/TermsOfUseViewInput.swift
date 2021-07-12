@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol TermsOfUseViewInput: class, Waiting {
+protocol TermsOfUseViewInput: AnyObject, Waiting {
     func showLoaded(eulaHTML: String)
     func showAlert(with errorString: String)
 }

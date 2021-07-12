@@ -110,7 +110,7 @@ extension UIView {
         bounds.size.width = width
         layoutIfNeeded()
         
-        let fittingSize = CGSize(width: width, height: UILayoutFittingCompressedSize.height)
+        let fittingSize = CGSize(width: width, height: UIView.layoutFittingCompressedSize.height)
         return systemLayoutSizeFitting(fittingSize,
                                        withHorizontalFittingPriority: .required,
                                        verticalFittingPriority: .defaultLow)

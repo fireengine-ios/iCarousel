@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PreparedFilterSliderViewDelegate: class {
+protocol PreparedFilterSliderViewDelegate: AnyObject {
     func didChangeFilter(_ filterType: FilterType, newValue: Float)
 }
 

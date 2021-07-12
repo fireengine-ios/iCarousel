@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LandingPageCollectionViewDataSourceDelegate: class {
+protocol LandingPageCollectionViewDataSourceDelegate: AnyObject {
     func pageIndexDidChange(_ newIndex: Int)
 }
 

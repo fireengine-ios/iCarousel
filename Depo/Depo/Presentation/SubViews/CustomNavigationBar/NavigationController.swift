@@ -30,11 +30,11 @@ class NavigationController: UINavigationController {
         return statusBarStyle
     }
     
-    override var childViewControllerForStatusBarStyle: UIViewController? {
+    override var childForStatusBarStyle: UIViewController? {
         return presentedViewController ?? viewControllers.last
     }
     
-    override var childViewControllerForStatusBarHidden: UIViewController? {
+    override var childForStatusBarHidden: UIViewController? {
         return presentedViewController ?? viewControllers.last
     }
     

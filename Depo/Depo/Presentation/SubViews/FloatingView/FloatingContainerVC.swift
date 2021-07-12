@@ -15,7 +15,7 @@ class FloatingContainerVC: UIViewController, UIPopoverPresentationControllerDele
                                   popOverSize: CGSize) -> FloatingContainerVC {
         let floatingContainerVC = FloatingContainerVC(nibName: nil, bundle: nil)
         
-        floatingContainerVC.addChildViewController(contentView)
+        floatingContainerVC.addChild(contentView)
         floatingContainerVC.view.addSubview(contentView.view)
         floatingContainerVC.preferredContentSize = popOverSize
         
@@ -41,7 +41,7 @@ class FloatingContainerVC: UIViewController, UIPopoverPresentationControllerDele
     }
     
     func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
-        childViewControllers.forEach({ $0.removeFromParentViewController() })
+        children.forEach { $0.removeFromParent() }
         return true
     }
     

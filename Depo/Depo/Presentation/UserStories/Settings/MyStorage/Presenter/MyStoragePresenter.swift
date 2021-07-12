@@ -50,7 +50,7 @@ final class MyStoragePresenter {
     private func displayOffers() {
         displayableOffers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers,
                                                                   accountType: accountType)
-        if let index = displayableOffers.index(where: { $0.type == .free }) {
+        if let index = displayableOffers.firstIndex(where: { $0.type == .free }) {
             displayableOffers.swapAt(0, index)
         }
         

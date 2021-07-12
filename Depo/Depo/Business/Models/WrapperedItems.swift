@@ -719,7 +719,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return metaData?.largeUrl != nil
     }
     
-    @available(*, deprecated: 1.0, message: "Use convenience init(info: AssetInfo) instead")
+    @available(*, deprecated, message: "Use convenience init(info: AssetInfo) instead")
     convenience init(asset: PHAsset) {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
         self.init(baseModel: BaseMediaContent(curentAsset: asset, generalInfo: info))
@@ -975,7 +975,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = searchResponse[SearchJsonKey.tempDownloadURL].url
         
 //        subordinates = searchResponse[SearchJsonKey.subordinates].array
-        albums = searchResponse[SearchJsonKey.album].array?.flatMap { $0.string }
+        albums = searchResponse[SearchJsonKey.album].array?.compactMap { $0.string }
         childCount = searchResponse[SearchJsonKey.ChildCount].int64
         
         

@@ -57,7 +57,7 @@ enum SpotlightType: Int {
     }
 }
 
-protocol SpotlightManagerDelegate: class {
+protocol SpotlightManagerDelegate: AnyObject {
     func needShowSpotlight(type: SpotlightType)
 }
 

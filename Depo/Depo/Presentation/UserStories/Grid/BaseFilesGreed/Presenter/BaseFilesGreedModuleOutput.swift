@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol BaseFilesGreedModuleOutput: class {
+protocol BaseFilesGreedModuleOutput: AnyObject {
     
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue)
 

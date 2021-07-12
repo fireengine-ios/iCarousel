@@ -101,7 +101,7 @@ class ManageContactsInteractor: ManageContactsInteractorInput {
             
             self.output.asyncOperationStarted()
             self.contactsSyncService.deleteRemoteContacts([contact], success: { [weak self] _ in
-                guard let `self` = self, let index = self.contacts.index(where: { $0.id == contact.id }) else {
+                guard let `self` = self, let index = self.contacts.firstIndex(where: { $0.id == contact.id }) else {
                     return
                 }
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .contact, eventLabel: .contactDelete)

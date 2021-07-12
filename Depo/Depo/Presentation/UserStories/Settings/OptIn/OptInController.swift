@@ -9,7 +9,7 @@
 import UIKit
 import Typist
 
-protocol OptInControllerDelegate: class {
+protocol OptInControllerDelegate: AnyObject {
     func optInNavigationTitle() -> String
     func optInResendPressed(_ optInVC: OptInController)
     func optIn(_ optInVC: OptInController, didEnterCode code: String)
@@ -139,7 +139,7 @@ final class OptInController: ViewController, NibInit {
     func setupPhoneLable(with number: String) {
         let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
         let range = (text as NSString).range(of: number)
-        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
+        let attr: [NSAttributedString.Key: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
                                                   .foregroundColor: ColorConstants.textGrayColor]
         
         let attributedString = NSMutableAttributedString(string: text)

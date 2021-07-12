@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PremiumInteractorOutput: class {
+protocol PremiumInteractorOutput: AnyObject {
     
     func successed(allFeatures: [PackageModelResponse])
     func successed(accountType: String)

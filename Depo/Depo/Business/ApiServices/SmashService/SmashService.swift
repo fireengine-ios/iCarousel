@@ -9,7 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol SmashService: class {
+protocol SmashService: AnyObject {
     
     func getStickers(type: StickerType, page: Int, size: Int, handler: @escaping (ResponseResult<(stickers: [SmashStickerResponse], type: StickerType)>) -> Void)
 }
@@ -36,7 +36,7 @@ final class SmashServiceImpl: BaseRequestService, SmashService {
                 switch response.result {
                 case .success(let data):
 
-                    guard let stickersData = JSON(data: data).array else {
+                    guard let stickersData = JSON(data).array else {
                         return
                     }
                     

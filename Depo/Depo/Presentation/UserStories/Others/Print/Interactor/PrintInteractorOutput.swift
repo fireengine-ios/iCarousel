@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrintInteractorOutput: class {
+protocol PrintInteractorOutput: AnyObject {
     
     func urlDidForm(urlRequest: URLRequest)
 

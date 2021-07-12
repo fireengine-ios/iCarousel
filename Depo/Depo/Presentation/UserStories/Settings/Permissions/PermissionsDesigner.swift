@@ -25,9 +25,9 @@ final class PermissionsDesigner: NSObject {
             newValue.isOpaque = true
             
             newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+                .foregroundColor: UIColor.lrTealishTwo,
+                .underlineColor: UIColor.lrTealishTwo,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
             
             /// to remove insets
@@ -49,5 +49,3 @@ final class PermissionsDesigner: NSObject {
         }
     }
 }
-
-

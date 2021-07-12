@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol UsageInfoViewInput: class, Waiting {
+protocol UsageInfoViewInput: AnyObject, Waiting {
     func display(usage: UsageResponse)
     func display(error: ErrorResponse)
 }

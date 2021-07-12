@@ -9,7 +9,7 @@
 import Mantis
 import UIKit
 
-protocol PhotoEditAdjustManagerDelegate: class {
+protocol PhotoEditAdjustManagerDelegate: AnyObject {
     func didCropImage(_ cropped: UIImage, croppedSourceImage: UIImage)
     func needPresentRatioSelection(_ controller: SelectionMenuController)
 }

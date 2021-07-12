@@ -104,6 +104,6 @@ class SmartAlbumCell: SimpleSliderCell {
     
     private func setupAccessibility() {
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitNone
+        accessibilityTraits = .none
     }
 }

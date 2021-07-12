@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LBCellsDelegate: class {
+protocol LBCellsDelegate: AnyObject {
     func canLongPress() -> Bool
     func onLongPress(cell: UICollectionViewCell)
 }
@@ -44,7 +44,7 @@ class BaseCollectionViewCell: UICollectionViewCell, CollectionViewCellDataProtoc
             return
         }
         
-        if (gestureRecognizer.state == UIGestureRecognizerState.began) {
+        if gestureRecognizer.state == .began {
             setSelection(isSelectionActive: true, isSelected: true)
             d.onLongPress(cell: self)
         }

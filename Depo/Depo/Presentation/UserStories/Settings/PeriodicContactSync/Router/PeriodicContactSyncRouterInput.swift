@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol PeriodicContactSyncRouterInput: class {
+protocol PeriodicContactSyncRouterInput: AnyObject {
     func showContactsSettingsPopUp()
 }

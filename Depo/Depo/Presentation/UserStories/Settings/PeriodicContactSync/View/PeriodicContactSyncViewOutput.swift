@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PeriodicContactSyncViewOutput: class {
+protocol PeriodicContactSyncViewOutput: AnyObject {
     func viewIsReady(tableView: UITableView)
     func saveSettings()
 }

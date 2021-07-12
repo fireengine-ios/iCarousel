@@ -48,7 +48,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             let gradientView = TransparentGradientView(style: .vertical, mainColor: .white)
             gradientView.frame = newValue.bounds
             newValue.addSubview(gradientView)
-            newValue.sendSubview(toBack: gradientView)
+            newValue.sendSubviewToBack(gradientView)
             gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
     }

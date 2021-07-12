@@ -43,7 +43,7 @@ enum AttachedEntityType: CaseIterable {
     }
 }
 
-protocol OverlayStickerImageViewDelegate: class {
+protocol OverlayStickerImageViewDelegate: AnyObject {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool)
     func didDeleteAttachments(_ attachments: [SmashStickerResponse])
 }
@@ -219,7 +219,7 @@ final class OverlayStickerImageView: UIImageView {
             startPositionSelectedView = subview.center
             selectedSticker = subview
             if subview != mainSticker {
-                bringSubview(toFront: subview)
+                bringSubviewToFront(subview)
             }
             
         case .changed:

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareContactCellDelegate: class {
+protocol PrivateShareContactCellDelegate: AnyObject {
     func onRoleTapped(index: Int)
 }
 

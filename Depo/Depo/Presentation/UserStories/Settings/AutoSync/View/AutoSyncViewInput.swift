@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol AutoSyncViewInput: class {
+protocol AutoSyncViewInput: AnyObject {
 
     func setupInitialState()
     func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum])

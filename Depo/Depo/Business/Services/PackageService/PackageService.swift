@@ -28,7 +28,7 @@ final class PackageService {
                 } else if role.contains(AccountType.jamaica.rawValue) {
                     return .jamaica
                 }
-            } else if let index = role.index(of: "-"), let accountType = AccountType(rawValue: String(role[..<index])) {
+            } else if let index = role.firstIndex(of: "-"), let accountType = AccountType(rawValue: String(role[..<index])) {
                 return accountType
             }
         }

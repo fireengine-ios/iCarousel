@@ -105,7 +105,7 @@ final class RecentSearchesService {
     private func add(item: SuggestionObject, toCategory category: SearchCategory) {
         var objects = searches[category] ?? [SuggestionObject]()
         
-        if let existingIndex = objects.index(where: { $0.info?.id == item.info?.id && $0.text == item.text }) {
+        if let existingIndex = objects.firstIndex(where: { $0.info?.id == item.info?.id && $0.text == item.text }) {
             objects.remove(at: existingIndex)
         } else if objects.count >= category.maxSearches {
             objects.removeLast(1)
@@ -116,7 +116,7 @@ final class RecentSearchesService {
     }
     
     private func save(searches: [SuggestionObject], category: SearchCategory) {
-        let data = NSKeyedArchiver.archivedData(withRootObject: searches.flatMap { $0.json?.object })
+        let data = NSKeyedArchiver.archivedData(withRootObject: searches.compactMap { $0.json?.object })
         UserDefaults.standard.set(data, forKey: category.searchKey)
         UserDefaults.standard.synchronize()
     }

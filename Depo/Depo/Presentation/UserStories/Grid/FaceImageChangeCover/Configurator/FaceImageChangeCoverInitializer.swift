@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FaceImageChangeCoverModuleOutput: class {
+protocol FaceImageChangeCoverModuleOutput: AnyObject {
     func onAlbumCoverSelected(item: WrapData)
 }
 

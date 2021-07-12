@@ -759,7 +759,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
         }
-        let itemsFolders = item.flatMap { $0.parent }
+        let itemsFolders = item.compactMap { $0.parent }
         let folderSelector = selectFolderController()
         
         folderSelector.selectFolder(select: { [weak self] folder in

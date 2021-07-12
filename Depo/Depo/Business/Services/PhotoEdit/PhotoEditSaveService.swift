@@ -40,7 +40,7 @@ final class PhotoEditSaveService {
             }
             
             if asCopy {
-                guard let imageData = image.jpeg(.higher) ?? UIImagePNGRepresentation(image) else {
+                guard let imageData = image.jpeg(.higher) ?? image.pngData() else {
                     debugLog("PHOTOEDIT: can't create UIImage Representation")
                     completion(.failed(ErrorResponse.string(TextConstants.cameraAccessAlertText)))
                     return
@@ -185,7 +185,7 @@ final class PhotoEditSaveService {
             } else {
                 debugLog("PHOTOEDIT: localItem doesn't exist or asset can't be edited")
                 
-                let data = image.jpeg(.higher) ?? UIImagePNGRepresentation(image)
+                let data = image.jpeg(.higher) ?? image.pngData()
                 
                 //saving data to upload updated remote
                 item.fileData = data
@@ -351,7 +351,7 @@ final class PhotoEditSaveService {
                 return
             }
 
-            guard let imageData = image.jpeg(.higher) ?? UIImagePNGRepresentation(image) else {
+            guard let imageData = image.jpeg(.higher) ?? image.pngData() else {
                 debugLog("PHOTOEDIT: can't create UIImage Representation")
                 completion(.failure(.unknown))
                 return

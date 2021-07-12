@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SubscriptionOfferViewDelegate: class {
+protocol SubscriptionOfferViewDelegate: AnyObject {
     func didPressSubscriptionPlanButton(planIndex: Int)
 }
 

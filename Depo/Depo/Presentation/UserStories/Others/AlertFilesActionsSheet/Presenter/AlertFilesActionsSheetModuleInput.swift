@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol AlertFilesActionsSheetModuleInput: class {
+protocol AlertFilesActionsSheetModuleInput: AnyObject {
 
     func showSelectionsAlertSheet()
     

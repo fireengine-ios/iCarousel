@@ -304,7 +304,7 @@ class ImageDownloder {
                     url = URL(fileURLWithPath: (NSTemporaryDirectory() + imageName))
                 }
                 if let im = image, let url_ = url {
-                    let data = UIImagePNGRepresentation(im) as NSData?
+                    let data = im.pngData() as NSData?
                     data?.write(to: url_, atomically: false)
                     urlsArray.append(url_)
                 } else {

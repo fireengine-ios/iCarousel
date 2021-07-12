@@ -36,7 +36,7 @@ final class WidgetPhotoLibraryObserver {
         }
         
         let allLocalIdentifiers = PHAsset.getAllAssets().compactMap { $0.localIdentifier }
-        coreDataStack.unsynced(from: allLocalIdentifiers) { [weak self] unsynced in
+        coreDataStack.unsynced(from: allLocalIdentifiers) { unsynced in
             completion(!unsynced.isEmpty)
         }
     }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FunTabBarDelegate: class {
+protocol FunTabBarDelegate: AnyObject {
     func didSelectItem(_ type: AttachedEntityType)
 }
 

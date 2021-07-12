@@ -142,8 +142,8 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     private func setupButton() {
-        sendPasswordButton.setTitle(TextConstants.resetPasswordSendPassword, for: UIControlState.normal)
-        sendPasswordButton.setTitleColor(ColorConstants.whiteColor, for: UIControlState.normal)
+        sendPasswordButton.setTitle(TextConstants.resetPasswordSendPassword, for: .normal)
+        sendPasswordButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         sendPasswordButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
         sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
         sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)

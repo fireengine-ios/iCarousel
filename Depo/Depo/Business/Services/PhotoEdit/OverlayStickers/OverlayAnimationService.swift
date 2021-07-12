@@ -154,7 +154,7 @@ final class OverlayAnimationService {
     
     private func saveImage(image: UIImage, fileName: String) -> URL? {
     
-        guard let data = image.jpeg(.highest) ?? UIImagePNGRepresentation(image)  else {
+        guard let data = image.jpeg(.highest) ?? image.pngData()  else {
             return nil
         }
         

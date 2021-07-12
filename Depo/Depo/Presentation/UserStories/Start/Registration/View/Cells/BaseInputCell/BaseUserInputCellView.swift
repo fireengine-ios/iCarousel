@@ -39,7 +39,8 @@ class BaseUserInputCellView: ProtoInputTextCell {
         titleLabel.text = title
         placeholderText = text
         if textInputField.attributedPlaceholder?.string != text {
-            textInputField.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
+            textInputField.attributedPlaceholder = NSAttributedString(string: text,
+                                                                      attributes: [.foregroundColor: ColorConstants.yellowColor])
         }
     }
     
@@ -62,7 +63,7 @@ class BaseUserInputCellView: ProtoInputTextCell {
         
         
         textInputField.attributedPlaceholder = NSAttributedString(string: placeholder,
-                                                                  attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
+                                                                  attributes: [.foregroundColor: ColorConstants.yellowColor])
     }
     
     override func changeInfoButtonTo(hidden: Bool) {

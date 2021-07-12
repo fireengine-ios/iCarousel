@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
+protocol FileInfoViewInput: AnyObject, ActivityIndicator, ErrorPresenter {
     func startRenaming()
     func setObject(_ object: BaseDataSourceItem)
     func goBack()

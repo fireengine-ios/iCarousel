@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InstaPickPhotoViewDelegate: class {
+protocol InstaPickPhotoViewDelegate: AnyObject {
     func didTapOnImage(_ model: InstapickAnalyze?)
 }
 

@@ -14,7 +14,7 @@ protocol FileInfoShareViewProtocol: UIView {
     var info: SharedFileInfo? { get }
 }
 
-protocol FileInfoShareViewDelegate: class {
+protocol FileInfoShareViewDelegate: AnyObject {
     func didSelect(contact: SharedContact)
     func didTappedPlusButton()
     func didTappedArrowButton()

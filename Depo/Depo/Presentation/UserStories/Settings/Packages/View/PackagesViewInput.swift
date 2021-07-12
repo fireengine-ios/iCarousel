@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol PackagesViewInput: class, ActivityIndicator {
+protocol PackagesViewInput: AnyObject, ActivityIndicator {
     func display(error: ErrorResponse)
     func display(errorMessage: String)
     func show(promocodeError: String)

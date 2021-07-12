@@ -66,7 +66,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         }
         
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitImage
+        accessibilityTraits = .image
         accessibilityLabel = item.name
     }
     

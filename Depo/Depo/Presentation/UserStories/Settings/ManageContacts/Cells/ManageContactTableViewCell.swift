@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ManageContactTableViewCellDelegate: class {
+protocol ManageContactTableViewCellDelegate: AnyObject {
     func cell(_ cell: ManageContactTableViewCell, deleteContact: RemoteContact)
 }
 

@@ -16,7 +16,7 @@
 import WidgetKit
 
 
-protocol CacheManagerDelegate: class {
+protocol CacheManagerDelegate: AnyObject {
     func didCompleteCacheActualization()
 }
 

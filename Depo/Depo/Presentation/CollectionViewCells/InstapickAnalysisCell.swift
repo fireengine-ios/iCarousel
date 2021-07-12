@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol InstapickAnalysisCellDelegate: class {
+protocol InstapickAnalysisCellDelegate: AnyObject {
     func onPurchase()
     func onSeeDetails(cell: UICollectionViewCell)
 }

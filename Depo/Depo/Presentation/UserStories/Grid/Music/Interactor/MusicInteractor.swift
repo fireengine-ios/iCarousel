@@ -36,7 +36,7 @@ final class MusicInteractor: BaseFilesGreedInteractor {
             case .success(let status):
                 self?.spotifyStatus = status
                 (self?.output as? MusicInteractorOutput)?.didSpotifyStatus(status)
-            case .failed(let error):
+            case .failed:
                 (self?.output as? MusicInteractorOutput)?.failedObtainSpotifyStatus()
             }
         }

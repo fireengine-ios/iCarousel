@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol GridListTopBarSortingTableViewDelegate: class {
+protocol GridListTopBarSortingTableViewDelegate: AnyObject {
     func gridListTopBarSortingTableView(_ gridListTopBarSortingTableView: GridListTopBarSortingTableView, didSelectItemAtIndex index: IndexPath)
 }
 

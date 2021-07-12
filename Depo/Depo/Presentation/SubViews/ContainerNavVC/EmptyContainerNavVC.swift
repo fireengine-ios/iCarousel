@@ -29,7 +29,7 @@ class EmptyContainerNavVC: ViewController {
     
     private func configurate(_ subVC: UIViewController) {
 
-        addChildViewController(subVC)
+        addChild(subVC)
         subVC.view.frame = view.bounds
         view.addSubview(subVC.view)
     }

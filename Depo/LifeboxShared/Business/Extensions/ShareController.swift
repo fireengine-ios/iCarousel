@@ -9,7 +9,7 @@
 import UIKit
 import MobileCoreServices
 
-protocol ShareController: class {
+protocol ShareController: AnyObject {
     func getSharedItems(handler: @escaping ([SharedItemSource]) -> Void)
 }
 extension ShareController where Self: UIViewController {
@@ -17,7 +17,7 @@ extension ShareController where Self: UIViewController {
         
         guard
             let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
-            let attachments = inputItem.attachments as? [NSItemProvider]
+            let attachments = inputItem.attachments
         else {
             return
         }

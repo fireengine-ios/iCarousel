@@ -6,6 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol CreateStoryPreviewModuleInput: class {
+protocol CreateStoryPreviewModuleInput: AnyObject {
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrintViewInput: class {
+protocol PrintViewInput: AnyObject {
 
     func loadUrl(_ urlRequest: URLRequest)
     

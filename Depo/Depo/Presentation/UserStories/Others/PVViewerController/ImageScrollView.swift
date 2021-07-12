@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ImageScrollViewDelegate: class {
+protocol ImageScrollViewDelegate: AnyObject {
     func imageViewFinishedLoading()
     func onImageLoaded(image: UIImage?)
 }
@@ -49,7 +49,7 @@ final class ImageScrollView: UIScrollView {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         bouncesZoom = true
-        decelerationRate = UIScrollViewDecelerationRateFast
+        decelerationRate = .fast
         delegate = self
         
         imageView.frame = bounds

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SharedFilesCollectionDataSourceDelegate: class {
+protocol SharedFilesCollectionDataSourceDelegate: AnyObject {
     func cellTouched(withModel: WrapData)
     func onPlusTapped()
 }

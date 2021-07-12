@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SpotifyThreeDotMenuManagerDelegate: class {
+protocol SpotifyThreeDotMenuManagerDelegate: AnyObject {
     func onThreeDotsManagerSelect()
     func onThreeDotsManagerDelete()
 }

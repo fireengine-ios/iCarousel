@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-protocol ObjectFromRequestResponse: class {
+protocol ObjectFromRequestResponse: AnyObject {
     init(json: Data?, headerResponse: HTTPURLResponse?)
     func mapping()
 }
@@ -21,7 +21,7 @@ class ObjectRequestResponse: NSObject, ObjectFromRequestResponse {
     
     required init(json: Data?, headerResponse: HTTPURLResponse?) {
         if let data = json {
-            let jsonFromData: JSON = JSON(data: data)
+            let jsonFromData = JSON(data)
             self.json = jsonFromData
             
             /// JSON(data: data) can not correct string

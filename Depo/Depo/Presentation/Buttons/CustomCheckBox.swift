@@ -17,16 +17,16 @@ class CustomCheckBox: UIButton {
     var isChecked: Bool = false {
         didSet{
             if isChecked{
-                self.setImage(checkedImage, for: UIControlState.normal)
+                self.setImage(checkedImage, for: .normal)
             } else {
-                self.setImage(uncheckedImage, for: UIControlState.normal)
+                self.setImage(uncheckedImage, for: .normal)
             }
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        addTarget(self, action:#selector(buttonClicked(sender:)), for: UIControlEvents.touchUpInside)
+        addTarget(self, action:#selector(buttonClicked(sender:)), for: .touchUpInside)
         isChecked = false
     }
     

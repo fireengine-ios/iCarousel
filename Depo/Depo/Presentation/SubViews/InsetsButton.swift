@@ -33,7 +33,7 @@ class InsetsButton: UIButton {
     }
     
     override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
-        return super.titleRect(forContentRect: UIEdgeInsetsInsetRect(contentRect, insets))
+        return super.titleRect(forContentRect: contentRect.inset(by: insets))
     }
     
     /// can be used

@@ -585,7 +585,7 @@ final class UploadOperation: Operation {
         if uploadType == .sharedWithMe, let projectId = projectId {
             let requestItem = UploadFileRequestItem(uuid: inputItem.uuid, name: inputItem.name ?? "", sizeInBytes: fileSize, mimeType: inputItem.uploadContentType)
             
-            return privateShareService.getUrlToUpload(projectId: projectId, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in
+            return privateShareService.getUrlToUpload(projectId: projectId, parentFolderUuid: folder, requestItem: requestItem) { response in
                 switch response {
                     case .success(let wrappedUrl):
                         success(wrappedUrl.url)

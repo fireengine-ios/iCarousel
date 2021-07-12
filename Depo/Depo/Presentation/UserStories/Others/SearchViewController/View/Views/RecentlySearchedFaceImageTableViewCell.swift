@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RecentlySearchedFaceImageCellDelegate: class {
+protocol RecentlySearchedFaceImageCellDelegate: AnyObject {
     func select(item: SuggestionObject)
     func tapArrow(category: SearchCategory)
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-protocol MobilePaymentPermissionProtocol: class {
+protocol MobilePaymentPermissionProtocol: AnyObject {
     func approveTapped()
     func backTapped(url: String)
 }

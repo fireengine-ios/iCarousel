@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol LBAlbumLikePreviewSliderModuleInput: class {
+protocol LBAlbumLikePreviewSliderModuleInput: AnyObject {
 
     func reloadAll()
     func reload(types: [MyStreamType])

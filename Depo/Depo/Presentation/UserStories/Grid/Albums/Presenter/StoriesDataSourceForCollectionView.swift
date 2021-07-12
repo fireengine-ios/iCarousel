@@ -50,7 +50,7 @@ class StoriesDataSourceForCollectionView: ArrayDataSourceForCollectionView {
                 return
             }
             
-            let changedItemsIndexPaths = items.flatMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
+            let changedItemsIndexPaths = items.compactMap { self.getIndexPathForObject(itemUUID: $0.uuid) }
             
             if !changedItemsIndexPaths.isEmpty {
                 let uuids = items.map { $0.uuid }

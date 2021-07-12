@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OverlayStickerSelectorDelegate: class {
+protocol OverlayStickerSelectorDelegate: AnyObject {
     func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType)
 }
 

@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol HelpAndSupportViewInput: class {
+protocol HelpAndSupportViewInput: AnyObject {
 
     /**
         @author Oleg

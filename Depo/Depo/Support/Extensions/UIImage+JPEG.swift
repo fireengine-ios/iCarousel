@@ -24,7 +24,7 @@ extension UIImage {
     /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
     /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
     func jpeg(_ quality: JPEGQuality) -> Data? {
-        return UIImageJPEGRepresentation(self, quality.rawValue)
+        return self.jpegData(compressionQuality: quality.rawValue)
     }
 }
 

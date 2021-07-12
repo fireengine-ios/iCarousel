@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareSuggestionItemViewDelegate: class {
+protocol PrivateShareSuggestionItemViewDelegate: AnyObject {
     func addItem(string: String)
 }
 

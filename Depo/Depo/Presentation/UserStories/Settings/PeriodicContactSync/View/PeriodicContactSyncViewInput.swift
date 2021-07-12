@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol PeriodicContactSyncViewInput: class, ActivityIndicator {
+protocol PeriodicContactSyncViewInput: AnyObject, ActivityIndicator {
     func startActivityIndicator()
     func stopActivityIndicator()
 }

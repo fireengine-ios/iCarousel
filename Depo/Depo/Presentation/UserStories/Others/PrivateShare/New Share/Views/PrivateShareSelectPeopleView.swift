@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareSelectPeopleViewDelegate: class {
+protocol PrivateShareSelectPeopleViewDelegate: AnyObject {
     func startEditing(text: String)
     func searchTextDidChange(text: String)
     func hideKeyboard(text: String)

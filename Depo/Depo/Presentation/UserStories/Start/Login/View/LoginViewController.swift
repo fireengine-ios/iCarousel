@@ -72,9 +72,9 @@ final class LoginViewController: ViewController {
     
     @IBOutlet private weak var forgotPasswordButton: UIButton! {
         willSet {
-            let attributes: [NSAttributedStringKey : Any] = [
+            let attributes: [NSAttributedString.Key : Any] = [
                 .foregroundColor : UIColor.lrTealish,
-                .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
+                .underlineStyle : NSUnderlineStyle.single.rawValue,
                 .font : UIFont.TurkcellSaturaDemFont(size: 16)
             ]
             

@@ -85,7 +85,7 @@ final class InstagramAccountConnectionCell: UITableViewCell, SocialConnectionCel
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 1.8
             
-            let attributes: [NSAttributedStringKey : Any] = [
+            let attributes: [NSAttributedString.Key : Any] = [
                 .foregroundColor : ColorConstants.darkBorder,
                 .font : UIFont.TurkcellSaturaRegFont(size: 16),
                 .paragraphStyle : paragraphStyle

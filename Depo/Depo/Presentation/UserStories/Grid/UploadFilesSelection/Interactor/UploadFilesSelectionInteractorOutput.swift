@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UploadFilesSelectionInteractorOutput: class {
+protocol UploadFilesSelectionInteractorOutput: AnyObject {
 
     func networkOperationStopped()
     

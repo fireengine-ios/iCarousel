@@ -76,7 +76,7 @@ class FeedbackViewInteractor: FeedbackViewInteractorInput {
             var packages = ""
             if subscriptions.count > 0 {
                 packages = subscriptions
-                .flatMap { $0.subscriptionPlanDisplayName }
+                .compactMap { $0.subscriptionPlanDisplayName }
                 .joined(separator: ", ")
             }
             let userInfoString = String(format: TextConstants.feedbackMailTextFormat, versionString, phoneString, CoreTelephonyService().operatorName() ?? "", UIDevice.current.modelName, UIDevice.current.systemVersion, Device.locale, languageName, ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN", quota, quotaUsed, packages)

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
+protocol LoginInteractorOutput: BaseAsyncOperationInteractorOutput {
     
     func succesLogin()
     

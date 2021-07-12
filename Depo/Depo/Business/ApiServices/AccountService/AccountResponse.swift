@@ -310,7 +310,7 @@ class UsageResponse: ObjectRequestResponse {
     var internetDataUsage: [InternetDataUsage] = []
     
     override func mapping() {
-        let storageUsage = json?[UsageResponseKeys.base]
+        let storageUsage: JSON? = json?[UsageResponseKeys.base]
         
         totalUsage = storageUsage?[UsageResponseKeys.totalUsage].int64
         imageUsage = storageUsage?[UsageResponseKeys.imageUsage].int64
@@ -329,7 +329,7 @@ class UsageResponse: ObjectRequestResponse {
         objectCount = storageUsage?[UsageResponseKeys.objectCount].string?.int
         
         let internetDataUsageJsonArray = json?[UsageResponseKeys.internetDataUsage].array
-        if let tmpList = internetDataUsageJsonArray?.flatMap({ InternetDataUsage(withJSON: $0) }) {
+        if let tmpList = internetDataUsageJsonArray?.compactMap({ InternetDataUsage(withJSON: $0) }) {
             internetDataUsage = tmpList
         }
     }
@@ -346,7 +346,7 @@ final class PermissionsResponse: ObjectRequestResponse {
 
     override func mapping() {
         let permissionsJsonArray = json?.array
-        if let permissionList = permissionsJsonArray?.flatMap({ PermissionResponse(withJSON: $0) }) {
+        if let permissionList = permissionsJsonArray?.compactMap({ PermissionResponse(withJSON: $0) }) {
             permissions = permissionList
         }
     }

@@ -6,6 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol ActivityTimelineModuleInput: class {
+protocol ActivityTimelineModuleInput: AnyObject {
 
 }

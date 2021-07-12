@@ -81,7 +81,7 @@ extension PremiumRouter: PremiumRouterInput {
     }
     
     func openLink(with url: URL) {
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url, options: [:])
     }
     
     func showTermsOfUse() {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoEditViewUIManagerDelegate: class {
+protocol PhotoEditViewUIManagerDelegate: AnyObject {
     func needShowAdjustmentView(for type: AdjustmentViewType)
     func filtersView() -> UIView
     func gifSelectorView() -> UIView

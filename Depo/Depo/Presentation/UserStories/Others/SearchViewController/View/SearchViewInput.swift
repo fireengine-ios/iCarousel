@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SearchViewInput: class {
+protocol SearchViewInput: AnyObject {
     func endSearchRequestWith(text: String)
     func successWithSuggestList(list: [SuggestionObject])
     func setRecentSearches(_ recentSearches: [SearchCategory: [SuggestionObject]])

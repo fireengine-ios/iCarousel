@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PackagesInteractorOutput: class {
+protocol PackagesInteractorOutput: AnyObject {
     func successed(allOffers: [PackageModelResponse])
  
     func successed(tokenForOffer: String)

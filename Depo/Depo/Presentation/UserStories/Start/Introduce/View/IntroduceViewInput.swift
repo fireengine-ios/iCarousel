@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol IntroduceViewInput: class {
+protocol IntroduceViewInput: AnyObject {
 
     /**
         @author Oleg

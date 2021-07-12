@@ -143,8 +143,8 @@ final class PremiumFeaturesView: UIView {
     }
     
     @objc func changeFrame() {
-        descriptionLabel.layer.add(transition, forKey: kCATransitionFade)
-        imageView.layer.add(transition, forKey: kCATransitionFade)
+        descriptionLabel.layer.add(transition, forKey: CATransitionType.fade.rawValue)
+        imageView.layer.add(transition, forKey: CATransitionType.fade.rawValue)
         
         descriptionLabel.text = features.all[currentFeatureIndex].title
         imageView.image = features.all[currentFeatureIndex].image
@@ -154,7 +154,7 @@ final class PremiumFeaturesView: UIView {
     
     private func setupAnimation() {
         transition.duration = NumericConstants.transitionDurationForPremiumFeaturesView
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.type = kCATransitionFade
+        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        transition.type = .fade
     }
 }

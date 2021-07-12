@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ContactSyncAnalyzeProgressViewDelegate: class {
+protocol ContactSyncAnalyzeProgressViewDelegate: AnyObject {
     func cancelAnalyze()
 }
 

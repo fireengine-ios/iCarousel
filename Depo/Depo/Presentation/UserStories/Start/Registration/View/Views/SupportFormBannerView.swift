@@ -33,7 +33,7 @@ enum SupportBannerViewType {
     }
 }
 
-protocol SupportFormBannerViewDelegate: class {
+protocol SupportFormBannerViewDelegate: AnyObject {
     func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView)
     func supportFormBannerView(_ bannerView: SupportFormBannerView, didSelect type: SupportFormSubjectTypeProtocol)
     func supportFormBannerViewDidCancel(_ bannerView: SupportFormBannerView)

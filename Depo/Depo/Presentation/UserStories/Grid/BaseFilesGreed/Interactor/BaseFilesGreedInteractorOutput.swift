@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BaseFilesGreedInteractorOutput: class, BaseAsyncOperationInteractorOutput {
+protocol BaseFilesGreedInteractorOutput: BaseAsyncOperationInteractorOutput {
     
     func getContentWithSuccess(items: [WrapData])
     

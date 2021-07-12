@@ -54,9 +54,9 @@ final class RegistrationTermsViewController: UIViewController {
             newValue.delegate = self
             newValue.backgroundColor = .clear
             newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+                .foregroundColor: UIColor.lrTealishTwo,
+                .underlineColor: UIColor.lrTealishTwo,
+                .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
         }
     }

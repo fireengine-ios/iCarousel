@@ -20,7 +20,7 @@ protocol ReachabilityProtocol {
     var isReachable: Bool { get }
 }
 
-protocol ReachabilityServiceDelegate: class {
+protocol ReachabilityServiceDelegate: AnyObject {
     func reachabilityDidChanged(_ service: ReachabilityService)
 }
 

@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol FaceImagePhotosModuleOutput: class {
+protocol FaceImagePhotosModuleOutput: AnyObject {
     func didChangeName(item: WrapData)
     func didMergePeople()
     func didMergeAfterSearch(item: Item)

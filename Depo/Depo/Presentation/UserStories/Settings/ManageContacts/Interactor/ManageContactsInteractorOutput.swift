@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ManageContactsInteractorOutput: class {
+protocol ManageContactsInteractorOutput: AnyObject {
     func didLoadContacts(_ contacts: [RemoteContact])
     func deleteContact(_ completion: @escaping VoidHandler)
     func didDeleteContact()

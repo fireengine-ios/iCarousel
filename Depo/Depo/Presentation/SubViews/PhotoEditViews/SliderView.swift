@@ -69,7 +69,7 @@ final class SliderView: UIView {
                            endPoint: CGPoint(x: 1, y: 0))
         
         addSubview(gradientView)
-        sendSubview(toBack: gradientView)
+        sendSubviewToBack(gradientView)
         
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         gradientView.heightAnchor.constraint(equalToConstant: 2).activate()

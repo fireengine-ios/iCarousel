@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AnalyzeHistoryDataSourceDelegate: class {
+protocol AnalyzeHistoryDataSourceDelegate: AnyObject {
     func needLoadNextHistoryPage()
     func onLongPressInCell()
     func onPurchase()
@@ -80,7 +80,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     private let sections: [AnalyzeHistorySectionType] = [.cards, .photos]
     
     private lazy var indexOfPhotoSection: Int? = {
-        return sections.index(of: .photos)
+        return sections.firstIndex(of: .photos)
     }()
     
     private var cards = [AnalyzeHistoryCardType]()
@@ -153,7 +153,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
     }
     
     private func reloadSection(_ type: AnalyzeHistorySectionType) {
-        guard let index = sections.index(of: type) else {
+        guard let index = sections.firstIndex(of: type) else {
             return
         }
         
@@ -207,7 +207,7 @@ final class AnalyzeHistoryDataSourceForCollectionView: NSObject {
         
         var deleteIndexPaths = [IndexPath]()
         selectedItems.forEach { item in
-            if let index = self.items.index(of: item) {
+            if let index = self.items.firstIndex(of: item) {
                 deleteIndexPaths.append(IndexPath(item: index, section: section))
             }
         }

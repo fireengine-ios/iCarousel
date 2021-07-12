@@ -26,7 +26,7 @@ class SeacrhViewRouter: SearchViewRouterInput {
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
             let player: MediaPlayer = factory.resolve()
-            player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
+            player.play(list: wrapperedArray, startAt: wrapperedArray.firstIndex(of: wrapperedItem) ?? 0)
         default:
             let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
                                                         items: wrapperedArray,

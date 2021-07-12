@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol PeriodicContactsSyncSettingsOptionViewDelegate: class {
+protocol PeriodicContactsSyncSettingsOptionViewDelegate: AnyObject {
     func didSelect(option: PeriodicContactsSyncOption)
 }
 

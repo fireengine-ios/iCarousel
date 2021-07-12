@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-protocol PhotoVideoDetailCellDelegate: class {
+protocol PhotoVideoDetailCellDelegate: AnyObject {
     func tapOnSelectedItem()
     func tapOnCellForFullScreen()
     func imageLoadingFinished()

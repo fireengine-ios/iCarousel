@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PhotoVideoDetailInteractorInput: class {
+protocol PhotoVideoDetailInteractorInput: AnyObject {
     
     func onSelectItem(fileObject: Item, from items: [Item])
     

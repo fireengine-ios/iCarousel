@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Facebook
 
-protocol ImportFromFBViewInput: class, ActivityIndicator {
+protocol ImportFromFBViewInput: AnyObject, ActivityIndicator {
     func connectionStatusSuccess(_ isOn: Bool)
     func connectionStatusFailure(errorMessage: String)
     
@@ -29,7 +29,7 @@ protocol ImportFromFBViewInput: class, ActivityIndicator {
 
 // MARK: - Dropbox
 
-protocol ImportFromDropboxViewInput: class, ActivityIndicator {
+protocol ImportFromDropboxViewInput: AnyObject, ActivityIndicator {
     
     func connectionStatusSuccess(_ isOn: Bool)
     func connectionStatusFailure(errorMessage: String)
@@ -47,7 +47,7 @@ protocol ImportFromDropboxViewInput: class, ActivityIndicator {
 
 // MARK: - Instagram
 
-protocol ImportFromInstagramViewInput: class, ActivityIndicator {
+protocol ImportFromInstagramViewInput: AnyObject, ActivityIndicator {
     
     func connectionStatusSuccess(_ isOn: Bool, username: String?)
     func connectionStatusFailure(errorMessage: String)

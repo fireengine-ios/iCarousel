@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol UserProfileViewInput: class {
+protocol UserProfileViewInput: AnyObject {
     func setupEditState(_ isEdit: Bool)
     func configurateUserInfo(userInfo: AccountInfoResponse)
     func getNavigationController() -> UINavigationController?

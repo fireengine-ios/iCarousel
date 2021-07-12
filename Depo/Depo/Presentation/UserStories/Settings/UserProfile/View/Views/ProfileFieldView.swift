@@ -182,9 +182,9 @@ class ProfileFieldView: UIView {
         if let range = alertText.range(of: TextConstants.myProfileFAQ) {
             let nsRange = NSRange(range, in: alertText)
             
-            let attributes: [NSAttributedStringKey : Any] = [
+            let attributes: [NSAttributedString.Key : Any] = [
                 .link : TextConstants.NotLocalized.FAQ,
-                .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
+                .underlineStyle : NSUnderlineStyle.single.rawValue,
                 .foregroundColor : ColorConstants.orangeGradient
             ]
             
