@@ -25,15 +25,6 @@ class ProfilePasswordEnterView: ProfileTextEnterView {
         
         return newValue
     }()
-
-//    private let passwordRulesLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = TextConstants.signUpPasswordRulesLabel
-//        label.font = UIFont.TurkcellSaturaFont(size: 14)
-//        label.textColor = ColorConstants.lightText
-//        label.numberOfLines = 0
-//        return label
-//    }()
     
     override func initialSetup() {
         super.initialSetup()

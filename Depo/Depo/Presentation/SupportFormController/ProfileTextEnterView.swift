@@ -142,22 +142,4 @@ class ProfileTextEnterView: UIView {
         subtitleLabel.text = text
         showSubtitleAnimated()
     }
-
-    func addPasswordRulesView(with view: UIView) {
-
-        guard let index = stackView.arrangedSubviews.firstIndex(of: textField) else {
-            assertionFailure()
-            return
-        }
-        stackView.addArrangedSubview(view)
-
-//        addSubview(view)
-//
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        let edgeInset: CGFloat = 0
-//        view.topAnchor.constraint(equalTo: topAnchor, constant: 50).isActive = true
-//        view.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgeInset).isActive = true
-//        view.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
-//        view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
-    }
 }

@@ -34,15 +34,21 @@ final class PasswordRulesView: UIView {
 
     let imageView: UIImageView = {
         let newValue = UIImageView()
-        newValue.image = UIImage(named: "approved_rule")
         newValue.contentMode = .scaleAspectFit
+        if #available(iOS 13.0, *) {
+            newValue.image = UIImage(systemName: "dot.circle.fill") //TODO: change it with the real asset
+            newValue.image = newValue.image?.resizeImage(rect: CGSize(width: 7, height: 7))
+            newValue.image = newValue.image?.withTintColor(ColorConstants.lightGrayColor)
+        } else {
+            // Fallback on earlier versions
+        }
         return newValue
     }()
 
     let titleLabel: UILabel = {
         let newValue = UILabel()
         newValue.textColor = ColorConstants.lightText
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        newValue.font = UIFont.TurkcellSaturaFont(size: 16)
         newValue.backgroundColor = .white
         newValue.isOpaque = true
         newValue.numberOfLines = 0
@@ -63,13 +69,13 @@ final class PasswordRulesView: UIView {
         setupStackView()
     }
 
-    func setupStackView() {
+    private func setupStackView() {
         addSubview(stackView)
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         let edgeInset: CGFloat = 0
         stackView.topAnchor.constraint(equalTo: topAnchor, constant: edgeInset).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgeInset).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 4).isActive = true
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
 
@@ -82,19 +88,30 @@ final class PasswordRulesView: UIView {
         stackView.addArrangedSubview(titleLabel)
     }
 
-    func configureRuleStatus(with status: PasswordRuleStatus) {
+    private func configureRuleStatus(with status: PasswordRuleStatus) {
         switch status {
         case .invalid:
             titleLabel.textColor = ColorConstants.invalidPasswordRule
-            imageView.image = UIImage(named: "spotify_cross")
-            imageView.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
+            if #available(iOS 13.0, *) {
+                imageView.image = UIImage(systemName: "xmark") //TODO: change it with the real asset
+                imageView.image = imageView.image?.resizeImage(rect: CGSize(width: 10, height: 10))
+                imageView.image = imageView.image?.withTintColor(ColorConstants.invalidPasswordRule)
+            } else {
+                // Fallback on earlier versions
+            }
         case .valid:
             titleLabel.textColor = ColorConstants.switcherGreenColor
+            imageView.image = imageView.image?.resizeImage(rect: CGSize(width: 11, height: 8))
             imageView.image = UIImage(named: "approved_rule")
-            imageView.frame = CGRect(x: 0, y: 0, width: 8, height: 11)
         case .unedited:
             titleLabel.textColor = ColorConstants.lightText
-            imageView.image = UIImage(named: "")
+            if #available(iOS 13.0, *) {
+                imageView.image = UIImage(systemName: "dot.circle.fill") //TODO: change it with the real asset
+                imageView.image = imageView.image?.resizeImage(rect: CGSize(width: 7, height: 7))
+                imageView.image = imageView.image?.withTintColor(ColorConstants.lightGrayColor)
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 }
