@@ -6,7 +6,7 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-enum UserValidationResults {
+enum UserValidationResults: Equatable {
     ///Unused (see UserValidator)
 //    case allValid
     case mailNotValid
@@ -18,10 +18,10 @@ enum UserValidationResults {
     case passwordMissingNumbers
     case passwordMissingLowercase
     case passwordMissingUppercase
-    case passwordExceedsSameCharactersLimit(limit: Int)
-    case passwordExceedsSequentialCharactersLimit(limit: Int)
-    case passwordExceedsMaximumLength(maxLength: Int)
-    case passwordBelowMinimumLength(minLength: Int)
+    case passwordExceedsSameCharactersLimit
+    case passwordExceedsSequentialCharactersLimit
+    case passwordExceedsMaximumLength
+    case passwordBelowMinimumLength
     case repasswordIsEmpty
     case passwordsNotMatch
     case captchaIsEmpty

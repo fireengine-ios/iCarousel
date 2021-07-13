@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProfilePasswordEnterView: ProfileTextEnterView {
+class ProfilePasswordEnterView: ProfileTextEnterView {
     
     private let showPasswordImage = UIImage(named: "ic_eye_show")
     private let hidePasswordImage = UIImage(named: "ic_eye_hide")
@@ -25,19 +25,19 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         
         return newValue
     }()
-    
-    private let passwordRulesLabel: UILabel = {
-        let label = UILabel()
-        label.text = TextConstants.signUpPasswordRulesLabel
-        label.font = UIFont.TurkcellSaturaFont(size: 14)
-        label.textColor = ColorConstants.lightText
-        label.numberOfLines = 0
-        return label
-    }()
+
+//    private let passwordRulesLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = TextConstants.signUpPasswordRulesLabel
+//        label.font = UIFont.TurkcellSaturaFont(size: 14)
+//        label.textColor = ColorConstants.lightText
+//        label.numberOfLines = 0
+//        return label
+//    }()
     
     override func initialSetup() {
         super.initialSetup()
-        
+
         eyeButton.setImage(showPasswordImage, for: .normal)
         eyeButton.setImage(hidePasswordImage, for: .selected)
         eyeButton.addTarget(self, action: #selector(changeVisibilityState), for: .touchUpInside)
@@ -68,17 +68,7 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         stackView.addArrangedSubview(subtitleLabel)
         stackView.addArrangedSubview(textField)
     }
-    
-    func addPasswordRulesLabel() {
-        
-        guard let index = stackView.arrangedSubviews.firstIndex(of: textField) else {
-            assertionFailure()
-            return
-        }
-        
-        stackView.insertArrangedSubview(passwordRulesLabel, at: index)
-    }
-    
+
     @objc private func changeVisibilityState() {
         textField.toggleTextFieldSecureType()
         eyeButton.isSelected.toggle()

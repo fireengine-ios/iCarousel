@@ -114,7 +114,9 @@ final class RegistrationViewController: ViewController {
         let newValue = ProfilePasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
-        newValue.addPasswordRulesLabel()
+        newValue.textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
+//        newValue.addPasswordRulesLabel()
         
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         
@@ -129,6 +131,37 @@ final class RegistrationViewController: ViewController {
         
         newValue.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
         
+        return newValue
+    }()
+
+    private let validationStackView: UIStackView = {
+        let newValue = UIStackView()
+        newValue.spacing = 11
+        newValue.axis = .vertical
+        newValue.alignment = .fill
+        newValue.distribution = .fillEqually
+
+        return newValue
+    }()
+
+    private let characterRuleView: PasswordRulesView = {
+        let newValue = PasswordRulesView()
+        newValue.titleLabel.text = "Min. 6 - Max. 16 karakter"
+
+        return newValue
+    }()
+
+    private let capitalizationRuleView: PasswordRulesView = {
+        let newValue = PasswordRulesView()
+        newValue.titleLabel.text = "1 Büyük harf & 1 rakam"
+
+        return newValue
+    }()
+
+    private let sequentialRuleView: PasswordRulesView = {
+        let newValue = PasswordRulesView()
+        newValue.titleLabel.text = "Ardışık olmayan harfler"
+
         return newValue
     }()
 
@@ -174,6 +207,7 @@ final class RegistrationViewController: ViewController {
     //MARK: Utility Methods (private)
     private func setup() {
         setupStackView()
+        setupValidationStackView()
         setupTermsViewController()
         observePhoneInputChanges()
         configureKeyboard()
@@ -193,6 +227,15 @@ final class RegistrationViewController: ViewController {
         stackView.addArrangedSubview(emailEnterView)
         stackView.addArrangedSubview(passwordEnterView)
         stackView.addArrangedSubview(rePasswordEnterView)
+    }
+
+    private func setupValidationStackView() {
+        validationStackView.addArrangedSubview(characterRuleView)
+        validationStackView.addArrangedSubview(capitalizationRuleView)
+        validationStackView.addArrangedSubview(sequentialRuleView)
+
+        passwordEnterView.addPasswordRulesView(with: validationStackView)
+        validationStackView.isHidden = true
     }
     
     private func prepareFields() {
@@ -289,6 +332,19 @@ final class RegistrationViewController: ViewController {
     }
     
     //MARK: Actions
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if passwordEnterView.textField == textField {
+            output.validatePassword(passwordEnterView.textField.text ?? "", repassword: nil)
+        }
+
+        if rePasswordEnterView.textField == textField {
+            output.validatePassword(
+                passwordEnterView.textField.text ?? "",
+                repassword: rePasswordEnterView.textField.text ?? ""
+            )
+        }
+    }
+
     @objc private func stopEditing() {
         self.view.endEditing(true)
     }
@@ -304,6 +360,17 @@ final class RegistrationViewController: ViewController {
 }
 
 extension RegistrationViewController: RegistrationViewInput {
+    func validatePasswordRules(forType rules: ValidationRules) {
+        switch rules {
+        case .capitalizationAndNumberRule:
+            capitalizationRuleView.status = .valid
+        case .characterLimitRule:
+            characterRuleView.status = .valid
+        case .sequentialRule:
+            sequentialRuleView.status = .valid
+        }
+    }
+
     func collectInputedUserInfo() {
         output.collectedUserInfo(email: emailEnterView.textField.text ?? "",
                                  code: phoneEnterView.codeTextField.text ?? "",
@@ -321,25 +388,35 @@ extension RegistrationViewController: RegistrationViewInput {
         case .mailIsEmpty:
             emailEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderEmail)
         case .passwordIsEmpty:
-            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderPassword)
+            //passwordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderPassword)
+            capitalizationRuleView.status = .unedited
+            characterRuleView.status = .unedited
+            sequentialRuleView.status = .unedited
         case .passwordMissingNumbers:
-            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorNumberMissing)
+            //passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorNumberMissing)
+            if capitalizationRuleView.status != .invalid { capitalizationRuleView.status = .unedited}
         case .passwordMissingLowercase:
-            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorLowercaseMissing)
+            //passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorLowercaseMissing)
+            if capitalizationRuleView.status != .invalid { capitalizationRuleView.status = .unedited}
         case .passwordMissingUppercase:
-            passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorUppercaseMissing)
-        case .passwordExceedsSameCharactersLimit(let limit):
-            let message = String(format: TextConstants.signUpErrorSameCharacters, limit)
-            passwordEnterView.showSubtitleTextAnimated(text: message)
-        case .passwordExceedsSequentialCharactersLimit(let limit):
-            let message = String(format: TextConstants.signUpErrorSequentialCharacters, limit)
-            passwordEnterView.showSubtitleTextAnimated(text: message)
-        case .passwordExceedsMaximumLength(let maxLength):
-            let message = String(format: TextConstants.signUpErrorPasswordLengthExceeded, maxLength)
-            passwordEnterView.showSubtitleTextAnimated(text: message)
-        case .passwordBelowMinimumLength(let minLength):
-            let message = String(format: TextConstants.signUpErrorPasswordLengthIsBelowLimit, minLength)
-            passwordEnterView.showSubtitleTextAnimated(text: message)
+            //passwordEnterView.showSubtitleTextAnimated(text: TextConstants.signUpErrorUppercaseMissing)
+            if capitalizationRuleView.status != .invalid { capitalizationRuleView.status = .unedited}
+        case .passwordExceedsSameCharactersLimit:
+            //let message = String(format: TextConstants.signUpErrorSameCharacters, limit)
+            //passwordEnterView.showSubtitleTextAnimated(text: message)
+            if sequentialRuleView.status != .invalid { sequentialRuleView.status = .unedited}
+        case .passwordExceedsSequentialCharactersLimit:
+            //let message = String(format: TextConstants.signUpErrorSequentialCharacters, limit)
+            //passwordEnterView.showSubtitleTextAnimated(text: message)
+            if sequentialRuleView.status != .invalid { sequentialRuleView.status = .unedited}
+        case .passwordExceedsMaximumLength:
+            //let message = String(format: TextConstants.signUpErrorPasswordLengthExceeded, maxLength)
+            //passwordEnterView.showSubtitleTextAnimated(text: message)
+            if characterRuleView.status != .invalid { characterRuleView.status = .unedited}
+        case .passwordBelowMinimumLength:
+            //let message = String(format: TextConstants.signUpErrorPasswordLengthIsBelowLimit, minLength)
+            //passwordEnterView.showSubtitleTextAnimated(text: message)
+            if characterRuleView.status != .invalid { characterRuleView.status = .unedited}
         case .repasswordIsEmpty:
             rePasswordEnterView.showSubtitleTextAnimated(text: TextConstants.registrationCellPlaceholderReFillPassword)
         case .passwordsNotMatch:
@@ -414,16 +491,21 @@ extension RegistrationViewController: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if passwordEnterView.textField == textField {
-            output.validatePassword(passwordEnterView.textField.text ?? "", repassword: nil)
+        if textField == passwordEnterView.textField {
+            if characterRuleView.status != .valid { characterRuleView.status = .invalid}
+            if capitalizationRuleView.status != .valid { capitalizationRuleView.status = .invalid}
+            if sequentialRuleView.status != .valid { sequentialRuleView.status = .invalid}
         }
-
-        if rePasswordEnterView.textField == textField {
-            output.validatePassword(
-                passwordEnterView.textField.text ?? "",
-                repassword: rePasswordEnterView.textField.text ?? ""
-            )
-        }
+//        if passwordEnterView.textField == textField {
+//            output.validatePassword(passwordEnterView.textField.text ?? "", repassword: nil)
+//        }
+//
+//        if rePasswordEnterView.textField == textField {
+//            output.validatePassword(
+//                passwordEnterView.textField.text ?? "",
+//                repassword: rePasswordEnterView.textField.text ?? ""
+//            )
+//        }
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -462,7 +544,11 @@ extension RegistrationViewController: UITextFieldDelegate {
         case emailEnterView.textField:
             emailEnterView.hideSubtitleAnimated()
         case passwordEnterView.textField:
-            passwordEnterView.hideSubtitleAnimated()
+//            passwordEnterView.hideSubtitleAnimated()
+            if characterRuleView.status == .invalid { characterRuleView.status = .unedited}
+            if capitalizationRuleView.status == .invalid { capitalizationRuleView.status = .unedited}
+            if sequentialRuleView.status == .invalid { sequentialRuleView.status = .unedited}
+            validationStackView.isHidden = false
         case rePasswordEnterView.textField:
             rePasswordEnterView.hideSubtitleAnimated()
         case captchaView.captchaAnswerTextField:

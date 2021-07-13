@@ -15,6 +15,8 @@ protocol RegistrationViewInput: RegistrationViewDelegate, Waiting {
     func showInfoButton(forType type: UserValidationResults)
     
     func showErrorTitle(withText: String)
+
+    func validatePasswordRules(forType type: ValidationRules)
     
     func showCaptchaError(_ text: String)
     
