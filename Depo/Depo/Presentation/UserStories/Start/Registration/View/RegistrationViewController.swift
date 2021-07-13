@@ -143,21 +143,21 @@ final class RegistrationViewController: ViewController {
 
     private let characterRuleView: PasswordRulesView = {
         let newValue = PasswordRulesView()
-        newValue.titleLabel.text = "Min. 6 - Max. 16 karakter"
+        newValue.titleLabel.text = TextConstants.passwordCharacterLimitRule
 
         return newValue
     }()
 
     private let capitalizationRuleView: PasswordRulesView = {
         let newValue = PasswordRulesView()
-        newValue.titleLabel.text = "1 Büyük harf & 1 rakam"
+        newValue.titleLabel.text = TextConstants.passwordCapitalizationAndNumberRule
 
         return newValue
     }()
 
     private let sequentialRuleView: PasswordRulesView = {
         let newValue = PasswordRulesView()
-        newValue.titleLabel.text = "Ardışık olmayan harfler"
+        newValue.titleLabel.text = TextConstants.passwordSequentialRule
 
         return newValue
     }()
