@@ -35,13 +35,7 @@ final class PasswordRulesView: UIView {
     let imageView: UIImageView = {
         let newValue = UIImageView()
         newValue.contentMode = .scaleAspectFit
-        if #available(iOS 13.0, *) {
-            newValue.image = UIImage(systemName: "dot.circle.fill") //TODO: change it with the real asset
-            newValue.image = newValue.image?.resizeImage(rect: CGSize(width: 7, height: 7))
-            newValue.image = newValue.image?.withTintColor(ColorConstants.lightGrayColor)
-        } else {
-            // Fallback on earlier versions
-        }
+        newValue.image = UIImage(named: "unedited_dot")
         return newValue
     }()
 
@@ -92,26 +86,13 @@ final class PasswordRulesView: UIView {
         switch status {
         case .invalid:
             titleLabel.textColor = ColorConstants.invalidPasswordRule
-            if #available(iOS 13.0, *) {
-                imageView.image = UIImage(systemName: "xmark") //TODO: change it with the real asset
-                imageView.image = imageView.image?.resizeImage(rect: CGSize(width: 10, height: 10))
-                imageView.image = imageView.image?.withTintColor(ColorConstants.invalidPasswordRule)
-            } else {
-                // Fallback on earlier versions
-            }
+            imageView.image = UIImage(named: "unapproved_rule")
         case .valid:
             titleLabel.textColor = ColorConstants.switcherGreenColor
-            imageView.image = imageView.image?.resizeImage(rect: CGSize(width: 11, height: 8))
             imageView.image = UIImage(named: "approved_rule")
         case .unedited:
             titleLabel.textColor = ColorConstants.lightText
-            if #available(iOS 13.0, *) {
-                imageView.image = UIImage(systemName: "dot.circle.fill") //TODO: change it with the real asset
-                imageView.image = imageView.image?.resizeImage(rect: CGSize(width: 7, height: 7))
-                imageView.image = imageView.image?.withTintColor(ColorConstants.lightGrayColor)
-            } else {
-                // Fallback on earlier versions
-            }
+            imageView.image = UIImage(named: "unedited_dot")
         }
     }
 }
