@@ -7,7 +7,6 @@
 //
 
 import Alamofire
-import SwiftyJSON
 
 protocol CampaignService: AnyObject {
     typealias ResponseHandler = (Swift.Result<PhotopickCampaign, CampaignServiceError>) -> Void
