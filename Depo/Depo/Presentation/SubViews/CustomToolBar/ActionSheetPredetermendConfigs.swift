@@ -8,7 +8,7 @@
 
 enum ActionSheetPredetermendConfigs {
     static let photoVideoDetailActions: [ElementTypes] = [
-        .info, .addToFavorites, .removeFromFavorites, .addToAlbum, .smash, .hide
+        .info, .addToFavorites, .removeFromFavorites, .addToAlbum, .hide
     ]
     static let audioDetailActions: [ElementTypes] = [.info, .addToAlbum]
     static let documetsDetailActions: [ElementTypes] = []
