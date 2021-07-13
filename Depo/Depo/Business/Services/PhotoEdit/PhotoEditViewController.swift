@@ -45,7 +45,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         }
     }
     
-    private let analytics = PhotoEditAnalytics()
+    private let analytics = PhotoEditViewController.Analytics()
     
     private lazy var filterView = self.prepareFilterView()
 
@@ -75,9 +75,9 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     private var sourceImage = UIImage()
     private var tempOriginalImage = UIImage()
-    private var hasChanges: Bool {
-        originalPreviewImage != sourceImage || uiManager.hasStickers
-    }
+    /// True when image is cropped, or effects/filters applied
+    private var isImageEdited: Bool { originalPreviewImage != sourceImage }
+    private var hasChanges: Bool { isImageEdited || uiManager.hasStickers }
     
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
@@ -124,6 +124,9 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func trackChanges(saveAsCopy: Bool, success: Bool) {
+        // Don't send below events for sticker-only images
+        guard isImageEdited else { return }
+
         let action: GAEventAction = saveAsCopy ? .saveAsCopy : .save
         let netmeraAction: NetmeraEventValues.PhotoEditActionType = saveAsCopy ? .saveAsCopy : .save
         
@@ -146,6 +149,15 @@ final class PhotoEditViewController: ViewController, NibInit {
         if !parameters.isEmpty || adjustManager.transformation != nil {
             analytics.trackEditPhoto(success: success, type: .adjustment)
         }
+    }
+
+    private func trackSmashSave() {
+        let imageView = uiManager.imageScrollView.imageView
+        let label = imageView.getAttachmentInfoForAnalytics()
+        let gifsToStickersIds = imageView.getAttachmentGifStickersIDs()
+        analytics.trackSmashSave(attachmentsLabel: label,
+                                 stickerIds: gifsToStickersIds.stickersIDs,
+                                 gifIds: gifsToStickersIds.gifsIDs)
     }
 }
 
@@ -260,8 +272,11 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
     }
 
     private func saveAsCopyWithStickers() {
-        analytics.trackClickEvent(.saveAsCopy)
-        analytics.trackClickNetmeraEvent(.saveAsCopy)
+        trackSmashSave()
+        if isImageEdited {
+            analytics.trackClickEvent(.saveAsCopy)
+            analytics.trackClickNetmeraEvent(.saveAsCopy)
+        }
 
         let popup = PhotoEditViewFactory.alert(for: .saveAsCopy, leftButtonHandler: { [weak self] in
             self?.uiManager.setHiddenBottomViews(false)
@@ -270,7 +285,6 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
             self.finishedEditing?(self, .savedAsWithStickers(imageView: self.uiManager.imageScrollView.imageView))
         })
         present(popup, animated: true)
-
     }
     
     private func prepareOriginalImage(completion: @escaping ValueHandler<UIImage>) {
@@ -365,8 +379,11 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
 //            filterManager.resetLastApplied()
             analytics.trackAdjustmentScreen()
 
-        case .gif, .sticker:
-            break
+        case .gif:
+            analytics.trackGifScreen()
+
+        case .sticker:
+            analytics.trackStickerScreen()
         }
         
         prepareTabImage(item) { [weak self] result in
@@ -629,132 +646,5 @@ extension PhotoEditViewController: PhotoEditAdjustManagerDelegate {
     
     func needPresentRatioSelection(_ controller: SelectionMenuController) {
         present(controller, animated: false)
-    }
-}
-
-private class PhotoEditAnalytics {
-    
-    private let analyticsService: AnalyticsService = factory.resolve()
-    
-    func trackClickEvent(_ event: GAEventLabel.PhotoEditEvent) {
-        switch event {
-        case .save, .saveAsCopy, .cancel:
-            analyticsService.trackPhotoEditEvent(category: .main, eventAction: .click, eventLabel: .photoEdit(event))
-        case .discard, .keepEditing:
-            analyticsService.trackPhotoEditEvent(category: .popup, eventAction: .discardChanges, eventLabel: .photoEdit(event))
-        default:
-            return
-        }
-    }
-    
-    func trackClickNetmeraEvent(_ button: NetmeraEventValues.PhotoEditButton) {
-        let event = NetmeraEvents.Actions.PhotoEditButtonAction(buttonName: button)
-        AnalyticsService.sendNetmeraEvent(event: event)
-    }
-    
-    func trackFilterScreen() {
-        trackScreen(.photoEditFilters)
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoEditFiltersScreen())
-    }
-    
-    func trackAdjustmentScreen() {
-        trackScreen(.photoEditAdjustments)
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoEditAdjustmentScreen())
-    }
-    
-    private func trackScreen(_ screen: AnalyticsAppScreens) {
-        analyticsService.logScreen(screen: screen)
-        analyticsService.trackDimentionsEveryClickGA(screen: screen)
-    }
-    
-    func trackFilter(_ type: FilterType, action: GAEventAction, netmeraAction: NetmeraEventValues.PhotoEditActionType) {
-        analyticsService.trackPhotoEditEvent(category: .filters, eventAction: action, eventLabel: .photoEdit(.saveFilter(type.title)))
-        
-        let event = NetmeraEvents.Actions.PhotoEditApplyFilter(filterType: type.title, action: netmeraAction)
-        AnalyticsService.sendNetmeraEvent(event: event)
-    }
-    
-    func trackAdjustments(_ parameters: [AdjustmentParameterType], action: GAEventAction, netmeraAction: NetmeraEventValues.PhotoEditActionType) {
-        guard !parameters.isEmpty else {
-            return
-        }
-        
-        parameters.forEach { parameterType in
-            if let adjustment = adjustmentType(for: parameterType) {
-                analyticsService.trackPhotoEditEvent(category: .adjustments,
-                                                     eventAction: action,
-                                                     eventLabel: .photoEdit(.saveAdjustment(adjustment)),
-                                                     filterType: parameterType.title)
-            }
-            
-            if let adjustment = adjustmentNetmeraType(for: parameterType) {
-                let event = NetmeraEvents.Actions.PhotoEditApplyAdjustment(selection: adjustment,
-                                                                           filterType: parameterType.title,
-                                                                           action: netmeraAction)
-                AnalyticsService.sendNetmeraEvent(event: event)
-            }
-        }
-    }
-    
-    private func adjustmentType(for type: AdjustmentParameterType) -> GAEventLabel.PhotoEditAdjustmentType? {
-        switch type {
-        case .brightness, .contrast, .exposure, .highlights, .shadows:
-            return .light
-        case .gamma, .temperature, .tint, .saturation:
-            return .color
-        case .hslHue, .hslLuminosity, .hslSaturation:
-            return .hsl
-        case .sharpness, .blurRadius, .vignetteRatio:
-            return .effect
-        default:
-            return nil
-        }
-    }
-    
-    private func adjustmentNetmeraType(for type: AdjustmentParameterType) -> NetmeraEventValues.PhotoEditAdjustmentType? {
-        switch type {
-        case .brightness, .contrast, .exposure, .highlights, .shadows:
-            return .light
-        case .gamma, .temperature, .tint, .saturation:
-            return .color
-        case .hslHue, .hslLuminosity, .hslSaturation:
-            return .hsl
-        case .sharpness, .blurRadius, .vignetteRatio:
-            return .effect
-        default:
-            return nil
-        }
-    }
-    
-    func trackAdjustChanges(_ transformation: Transformation, action: GAEventAction, netmeraAction: NetmeraEventValues.PhotoEditActionType) {
-        var changedParameters = [String]()
-        if transformation.rotation != 0 {
-            changedParameters.append("Rotate")
-        }
-        if transformation.manualZoomed || transformation.offset != .zero || transformation.scale != 0 {
-            changedParameters.append("Resize")
-        }
-        
-        guard !changedParameters.isEmpty else {
-            return
-        }
-        
-        changedParameters.forEach { parameter in
-            analyticsService.trackPhotoEditEvent(category: .adjustments,
-                                                 eventAction: action,
-                                                 eventLabel: .photoEdit(.saveAdjustment(.adjust)),
-                                                 filterType: parameter)
-            
-            let event = NetmeraEvents.Actions.PhotoEditApplyAdjustment(selection: .adjust,
-                                                                       filterType: parameter,
-                                                                       action: netmeraAction)
-            AnalyticsService.sendNetmeraEvent(event: event)
-        }
-    }
-    
-    func trackEditPhoto(success: Bool, type: NetmeraEventValues.PhotoEditType) {
-        let netmeraStatus: NetmeraEventValues.GeneralStatus = success ? .success : .failure
-        let event = NetmeraEvents.Actions.PhotoEditComplete(status: netmeraStatus, selection: type)
-        AnalyticsService.sendNetmeraEvent(event: event)
     }
 }

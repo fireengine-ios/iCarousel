@@ -470,7 +470,19 @@ extension NetmeraEvents.Screens {
             return "cqg"
         }
     }
-    
+
+    final class PhotoEditGifScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "TODO"
+        }
+    }
+
+    final class PhotoEditStickerScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "TODO"
+        }
+    }
+
     final class SharedByMeScreen: NetmeraScreenEventTemplate {
         override var key: String {
             return "ruk"
