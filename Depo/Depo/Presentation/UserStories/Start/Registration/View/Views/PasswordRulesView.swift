@@ -73,11 +73,6 @@ final class PasswordRulesView: UIView {
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
 
-        /// why it is not working instead of constraints???
-        //stackView.frame = bounds
-        //stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //stackView.translatesAutoresizingMaskIntoConstraints = true
-
         stackView.addArrangedSubview(imageView)
         stackView.addArrangedSubview(titleLabel)
     }
