@@ -162,6 +162,7 @@ final class PushNotificationService {
         case .sharedByMe: openShareByMe()
         case .invitation : openInvitation()
         case .chatbot: openChatbot()
+        case .silent: break
         }
         
         
