@@ -11,6 +11,7 @@ protocol RegistrationInteractorOutput: AnyObject {
     func setupEtk(isShowEtk: Bool)
     func userValid(_ userInfo: RegistrationUserInfoModel)
     func userInvalid(withResult result: [UserValidationResults])
+    func checkPasswordRuleValid(for result: [UserValidationResults])
     
     func captchaRequired(required: Bool)
     func captchaRequiredFailed()

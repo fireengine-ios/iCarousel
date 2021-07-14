@@ -1911,3 +1911,8 @@
 "print_photo_home_card_button_title" = "Go to photos";
 "accessibility_play" = "Play";
 "accessibility_pause" = "Pause";
+
+/*Password Rules*/
+"signup_password_rule_character_limit" = "Min 6 - max 16 characters";
+"signup_password_rule_upper_lower_numeric" = "1 Uppercase/lowercase letter & 1 number";
+"signup_password_rule_sequential_characters" = "Non-consecutive characters";

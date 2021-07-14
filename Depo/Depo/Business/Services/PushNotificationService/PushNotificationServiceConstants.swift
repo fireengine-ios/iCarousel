@@ -55,6 +55,7 @@ enum PushNotificationAction: String {
     case supportFormSignup = "support_form_signup"
     case trashBin = "trash_bin"
     case hiddenBin = "hidden_bin"
+    case silent = "silent"
     
     case widgetLogout = "widget_logout"
     case widgetQuota = "widget_quota"

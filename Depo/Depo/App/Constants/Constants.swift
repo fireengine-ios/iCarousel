@@ -2230,4 +2230,9 @@ struct TextConstants {
     static let warningPopupPrintRedirectMessage = NSLocalizedString("warning_popup_print_redirect_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupPrintRedirectProceedButton = NSLocalizedString("warning_popup_print_redirect_proceed_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupPrintRedirectCancelButton = NSLocalizedString("warning_popup_print_redirect_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: - Password validation rules
+    static let passwordCharacterLimitRule = NSLocalizedString("signup_password_rule_character_limit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let passwordCapitalizationAndNumberRule = NSLocalizedString("signup_password_rule_upper_lower_numeric", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let passwordSequentialRule = NSLocalizedString("signup_password_rule_sequential_characters", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

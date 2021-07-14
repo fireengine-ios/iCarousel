@@ -120,6 +120,8 @@ struct ColorConstants {
 
     static let disabledGrayBackgroud = UIColor(red: 241 / 255.0, green: 243 / 255.0, blue: 245 / 255.0, alpha: 1)
     static let disabledGrayText = UIColor(red: 170 / 255.0, green: 183 / 255.0, blue: 191 / 255.0, alpha: 1)
+
+    static let invalidPasswordRule = UIColor(red: 255 / 255.0, green: 61 / 255.0, blue: 61 / 255.0, alpha: 1)
 }
 
 extension UIColor {
