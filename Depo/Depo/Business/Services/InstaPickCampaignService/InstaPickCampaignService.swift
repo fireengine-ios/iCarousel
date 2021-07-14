@@ -15,9 +15,9 @@ final class InstaPickCampaignService {
     private let storageVars: StorageVars = factory.resolve()
     
     private var campaign: PhotopickCampaign?
-    private var instaPickCampaignServiceCompletion: ((UINavigationController?) -> Void)?
+    private var instaPickCampaignServiceCompletion: ((UINavigationController?, PhotopickCampaign?) -> Void)?
 
-    func getController(completion: @escaping ((UINavigationController?) -> Void)) {
+    func getController(completion: @escaping ((UINavigationController?, PhotopickCampaign?) -> Void)) {
         self.instaPickCampaignServiceCompletion = completion
         checkCampaignParticipation()
     }
@@ -142,10 +142,10 @@ final class InstaPickCampaignService {
         let controller = InstaPickCampaignViewController.createController(controllerMode: mode,
                                                                           with: data)
         let navController = router.createRootNavigationControllerWithModalStyle(controller: controller)
-        instaPickCampaignServiceCompletion?(navController)
+        instaPickCampaignServiceCompletion?(navController, data)
     }
     
     private func continueWithCommonFlow() {
-        instaPickCampaignServiceCompletion?(nil)
+        instaPickCampaignServiceCompletion?(nil, campaign)
     }
 }

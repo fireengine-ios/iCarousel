@@ -44,6 +44,7 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     
     private let instapickRoutingService = InstaPickRoutingService()
     private let router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     // MARK: - Life cycle
     
@@ -525,8 +526,9 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
         dataSource.insertNewItems([insertAnalyse])
     }
     
-    private func handleAnalyzeResultAfterProgressPopUp(analyzesResult: AnalyzeResult) {
-        instaPickCampaignService.getController { [weak self] navController in
+    private func handleAnalyzeResultAfterProgressPopUp(analyzesResult: AnalyzeResult, infoCallback: @escaping (PhotopickCampaign?) -> Void) {
+        instaPickCampaignService.getController { [weak self] navController, campaignInfo in
+            infoCallback(campaignInfo)
             DispatchQueue.toMain {
                 if let navController = navController,
                     let controller = navController.topViewController as? InstaPickCampaignViewController
@@ -564,7 +566,11 @@ extension AnalyzeHistoryViewController: InstaPickServiceDelegate {
 extension AnalyzeHistoryViewController: InstaPickProgressPopupDelegate {
     func analyzeDidComplete(analyzeResult: AnalyzeResult) {
         startActivityIndicator()
-        handleAnalyzeResultAfterProgressPopUp(analyzesResult: analyzeResult)
+        handleAnalyzeResultAfterProgressPopUp(analyzesResult: analyzeResult) { [analyticsService] in
+            analyticsService.trackPhotopickAnalysis(eventLabel: .success,
+                                                    dailyDrawleft: $0?.usage.dailyRemaining,
+                                                    totalDraw: $0?.usage.totalUsed)
+        }
         
         let analysisLeftUserDependent: NetmeraEventValues.PhotopickUserAnalysisLeft
         if analyzeResult.analyzesCount.isFree {
@@ -576,7 +582,8 @@ extension AnalyzeHistoryViewController: InstaPickProgressPopupDelegate {
     }
     
     func analyzeDidFail() {
-        
+        analyticsService.trackPhotopickAnalysis(eventLabel: .failure, dailyDrawleft: nil, totalDraw: nil)
+
         let analysisLeftUserDependent: NetmeraEventValues.PhotopickUserAnalysisLeft
         if dataSource.analysisCount?.isFree == true {
             analysisLeftUserDependent = .premium
