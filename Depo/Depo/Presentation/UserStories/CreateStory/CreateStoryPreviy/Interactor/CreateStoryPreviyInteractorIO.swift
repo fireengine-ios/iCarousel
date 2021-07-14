@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol CreateStoryPreviewInteractorInput: class {
+protocol CreateStoryPreviewInteractorInput: AnyObject {
     var story: PhotoStory? { get }
     
     func viewIsReady()
     func onSaveStory()
 }
 
-protocol CreateStoryPreviewInteractorOutput: class {
+protocol CreateStoryPreviewInteractorOutput: AnyObject {
     func startShowVideoFromResponse(response: CreateStoryResponse)
     func storyCreated()
     func storyCreatedWithError()

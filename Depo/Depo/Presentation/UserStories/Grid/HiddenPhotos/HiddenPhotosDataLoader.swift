@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HiddenPhotosDataLoaderDelegate: class {
+protocol HiddenPhotosDataLoaderDelegate: AnyObject {
     func didLoadPhoto(items: [Item])
     func didLoadAlbum(items: [BaseDataSourceItem])
     func didFinishLoadAlbums()

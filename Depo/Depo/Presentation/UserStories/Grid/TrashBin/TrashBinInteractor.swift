@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TrashBinInteractorDelegate: class {
+protocol TrashBinInteractorDelegate: AnyObject {
     func didLoad(items: [Item])
     func didLoad(albums: [BaseDataSourceItem])
     func didFinishLoadAlbums()

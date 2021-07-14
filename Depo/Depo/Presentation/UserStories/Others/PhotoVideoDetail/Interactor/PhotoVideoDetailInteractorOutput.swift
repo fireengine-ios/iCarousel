@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PhotoVideoDetailInteractorOutput: class {
+protocol PhotoVideoDetailInteractorOutput: AnyObject {
     
     func onShowSelectedItem(at index: Int, from items: [Item])
     

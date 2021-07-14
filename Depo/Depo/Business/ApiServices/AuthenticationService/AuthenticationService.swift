@@ -552,9 +552,9 @@ class AuthenticationService: BaseRequestService {
                         return
                     }
                     
-                    let result = SignUpSuccessResponse(withJSON: JSON(data: data))
+                    let result = SignUpSuccessResponse(withJSON: JSON(data))
                     handler(.success(result))
-                } else if let data = response.data, let error = SignupResponseError(json: JSON(data: data)) {
+                } else if let data = response.data, let error = SignupResponseError(json: JSON(data)) {
                     handler(.failure(error))
                 } else if httpResponse.statusCode == 503 {
                     handler(.failure(SignupResponseError(status: .serverErrorUnderMaintenance)))
@@ -726,7 +726,7 @@ class AuthenticationService: BaseRequestService {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    let json = JSON(data: data)
+                    let json = JSON(data)
                     if let errorType = json["errorType"].string {
                         handler(.failed(ErrorResponse.string(errorType)))
                     } else {

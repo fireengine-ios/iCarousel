@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AutoSyncDataSourceDelegate: class {
+protocol AutoSyncDataSourceDelegate: AnyObject {
     func checkForEnableAutoSync()
     func didChangeSettingsOption(settings: AutoSyncSetting)
 }

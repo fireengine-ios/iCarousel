@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol CreateStoryPreviewViewInput: class {
+protocol CreateStoryPreviewViewInput: AnyObject {
     func startShowVideoFromResponse(response: CreateStoryResponse)
     func prepareToDismiss()
 }
 
-protocol CreateStoryPreviewViewOutput: class {
+protocol CreateStoryPreviewViewOutput: AnyObject {
     func viewIsReady()
     func onSaveStory()
 }

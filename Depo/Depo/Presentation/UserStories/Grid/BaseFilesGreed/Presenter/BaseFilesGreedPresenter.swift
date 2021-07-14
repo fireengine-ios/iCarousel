@@ -689,24 +689,24 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
             if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image }) {
-                let index = actionTypes.index(where: { return $0 == .createStory })!
+                let index = actionTypes.firstIndex(where: { return $0 == .createStory })!
                 actionTypes.remove(at: index)
             }
             
-            if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
+            if selectedItems.count != 1, let renameIndex = actionTypes.firstIndex(of: .rename) {
                 actionTypes.remove(at: renameIndex)
             }
 
-            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
+            if let printIndex = actionTypes.firstIndex(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: printIndex)
             }
             
-            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: { $0.fileType == .image }) {
+            if let editIndex = actionTypes.firstIndex(of: .edit), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: editIndex)
             }
             
             DispatchQueue.global().async {[weak self] in
-                if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
+                if let deleteOriginalIndex = actionTypes.firstIndex(of: .deleteDeviceOriginal) {
                     let serverObjects = selectedItems.filter({ !$0.isLocalItem })
                     if serverObjects.isEmpty {
                         actionTypes.remove(at: deleteOriginalIndex)
@@ -736,15 +736,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
             
             if dataSource.allObjectIsEmpty() {
-                if let downloadIdex = actionTypes.index(of: .download) {
+                if let downloadIdex = actionTypes.firstIndex(of: .download) {
                     actionTypes.remove(at: downloadIdex)
                 }
                 
-                if let selectIndex = actionTypes.index(of: .select) {
+                if let selectIndex = actionTypes.firstIndex(of: .select) {
                     actionTypes.remove(at: selectIndex)
                 }
                 
-                if let shareAlbumIndex = actionTypes.index(of: .shareAlbum) {
+                if let shareAlbumIndex = actionTypes.firstIndex(of: .shareAlbum) {
                     actionTypes.remove(at: shareAlbumIndex)
                 }
             }

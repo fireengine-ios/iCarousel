@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ContactListDataSourceDelegate: class {
+protocol ContactListDataSourceDelegate: AnyObject {
     func needLoadNextItemsPage()
     func didSelectContact(_ contact: RemoteContact)
 }

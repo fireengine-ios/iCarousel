@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareSliderFilesCollectionManagerDelegate: class {
+protocol PrivateShareSliderFilesCollectionManagerDelegate: AnyObject {
     func showAll()
     func open(entity: WrapData, allEnteties: [WrapData])
     func startAsyncOperation()

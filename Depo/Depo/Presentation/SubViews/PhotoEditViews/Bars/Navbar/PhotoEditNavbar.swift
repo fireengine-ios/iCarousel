@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoEditNavbarDelegate: class {
+protocol PhotoEditNavbarDelegate: AnyObject {
     func onClose()
     func onSavePhoto()
     func onMoreActions()

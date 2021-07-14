@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol LoginSettingsInteractorInput: class {
+protocol LoginSettingsInteractorInput: AnyObject {
     var turkcellPasswordOn: Bool { get }
     var turkcellAutoLoginOn: Bool { get }
     var twoFactorAuth: Bool { get }
@@ -18,7 +18,7 @@ protocol LoginSettingsInteractorInput: class {
     func trackScreen()
 }
 
-protocol LoginSettingsInteractorOutput: class {
+protocol LoginSettingsInteractorOutput: AnyObject {
     func acquiredTurkcellSecurityState(passcode: Bool, autoLogin: Bool, twoFactorAuth: Bool)
     func failedToAcquireTurkcellSecurityState()
     func changeTurkcellSecurityFailed(error: ErrorResponse)

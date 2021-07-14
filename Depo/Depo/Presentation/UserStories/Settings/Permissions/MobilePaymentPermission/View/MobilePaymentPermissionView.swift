@@ -65,7 +65,7 @@ final class MobilePaymentPermissionView: UIView, NibInit {
             newValue.textColor = ColorConstants.linkBlack
             newValue.textAlignment = .center
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
-            newValue.attributedText = NSAttributedString(string: TextConstants.mobilePaymentViewLinkLabel, attributes: [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+            newValue.attributedText = NSAttributedString(string: TextConstants.mobilePaymentViewLinkLabel, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.linkTapped))
             newValue.isUserInteractionEnabled = true
             newValue.addGestureRecognizer(tap)

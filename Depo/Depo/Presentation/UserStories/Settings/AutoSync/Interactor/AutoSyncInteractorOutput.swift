@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol AutoSyncInteractorOutput: class {
+protocol AutoSyncInteractorOutput: AnyObject {
     
     func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum])
     

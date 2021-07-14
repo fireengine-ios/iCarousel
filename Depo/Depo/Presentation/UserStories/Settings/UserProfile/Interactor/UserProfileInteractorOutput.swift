@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UserProfileInteractorOutput: class {
+protocol UserProfileInteractorOutput: AnyObject {
     func configurateUserInfo(userInfo: AccountInfoResponse)
     func startNetworkOperation()
     func stopNetworkOperation()

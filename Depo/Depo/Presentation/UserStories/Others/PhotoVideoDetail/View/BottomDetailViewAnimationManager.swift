@@ -32,7 +32,7 @@ enum PanGestureMoveDirection {
     case up
 }
 
-protocol BottomDetailViewAnimationManagerDelegate: class {
+protocol BottomDetailViewAnimationManagerDelegate: AnyObject {
     func getSelectedIindex() -> Int
     func getObjectsCount() -> Int
     func getIsFullScreenState() -> Bool

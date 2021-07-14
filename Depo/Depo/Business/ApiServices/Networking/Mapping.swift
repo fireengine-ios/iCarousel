@@ -24,7 +24,7 @@ protocol DataMap {
 }
 extension DataMap where Self: JsonMap {
     init?(data: Data) {
-        self.init(json: JSON(data: data))
+        self.init(json: JSON(data))
     }
 }
 
@@ -35,8 +35,8 @@ protocol DataMapArray {
 }
 extension DataMapArray where Self: JsonMap {
     static func array(from data: Data) -> [Self] {
-        let jsonArray = JSON(data: data)
-        return jsonArray.array?.flatMap { json in
+        let jsonArray = JSON(data)
+        return jsonArray.array?.compactMap { json in
             self.init(json: json)
         } ?? []
     }

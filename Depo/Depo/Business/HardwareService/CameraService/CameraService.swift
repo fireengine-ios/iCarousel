@@ -89,7 +89,7 @@ class CameraService {
         }
     }
     
-    private func showPickerController(type: UIImagePickerControllerSourceType,
+    private func showPickerController(type: UIImagePickerController.SourceType,
                                       onViewController sourceViewViewController: UIViewController) {
         debugLog("CameraService showPickerController")
 

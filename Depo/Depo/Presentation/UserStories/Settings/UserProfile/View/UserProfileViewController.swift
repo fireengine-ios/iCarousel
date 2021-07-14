@@ -154,7 +154,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if self.isMovingFromParentViewController {
+        if self.isMovingFromParent {
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .myProfile, eventLabel: .back)
         }
     }
@@ -287,7 +287,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                                                   attributes: [
                                                     .font: UIFont.TurkcellSaturaDemFont(size: 18),
                                                     .foregroundColor: UIColor.lrTealish,
-                                                    .underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
+                                                    .underlineStyle: NSUnderlineStyle.single.rawValue])
         button.setAttributedTitle(attributedString, for: .normal)
     }
     

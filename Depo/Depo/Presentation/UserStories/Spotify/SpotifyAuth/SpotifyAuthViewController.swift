@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-protocol SpotifyAuthViewControllerDelegate: class {
+protocol SpotifyAuthViewControllerDelegate: AnyObject {
     func spotifyAuthSuccess(with code: String)
     func spotifyAuthCancel()
 }
@@ -52,7 +52,7 @@ final class SpotifyAuthViewController: BaseViewController {
     
     private func handleBackButton() {
         hideSpinner()
-        if isMovingFromParentViewController {
+        if isMovingFromParent {
             delegate?.spotifyAuthCancel()
         }
     }
@@ -100,7 +100,7 @@ extension SpotifyAuthViewController: WKNavigationDelegate {
         }
         if let startIndex = currentUrl.range(of: "code=")?.upperBound {
             var spotifyCode = String(currentUrl.suffix(from: startIndex))
-            if let facebookCode = spotifyCode.index(of: "&") {
+            if let facebookCode = spotifyCode.firstIndex(of: "&") {
                 spotifyCode = String(spotifyCode[..<facebookCode])
             }
             delegate?.spotifyAuthSuccess(with: spotifyCode)

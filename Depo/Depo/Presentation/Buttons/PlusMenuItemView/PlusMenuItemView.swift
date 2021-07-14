@@ -92,7 +92,7 @@ enum FloatingButtonsType {
     }
 }
 
-protocol PlusMenuItemViewDelegate: class {
+protocol PlusMenuItemViewDelegate: AnyObject {
     func selectPlusMenuItem(action: TabBarViewController.Action)
 }
 
@@ -132,7 +132,7 @@ final class PlusMenuItemView: UIView, NibInit {
         button.setImage(type.image, for: .normal)
 
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitButton
+        accessibilityTraits = .button
         accessibilityLabel = type.title
     }
     

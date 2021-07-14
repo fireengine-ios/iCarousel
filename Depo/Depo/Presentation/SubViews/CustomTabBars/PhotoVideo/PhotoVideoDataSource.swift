@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoVideoDataSourceDelegate: class {
+protocol PhotoVideoDataSourceDelegate: AnyObject {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
     func contentDidChange(_ fetchedObjects: [MediaItem])

@@ -207,7 +207,7 @@ final class FileProviderExtension: NSFileProviderExtension {
         guard 
             let itemIdentifier = persistentIdentifierForItem(at: url),
             let item = try? self.item(for: itemIdentifier) as? FileProviderItem,
-            let downloadURL = item?.tempDownloadURL
+            let downloadURL = item.tempDownloadURL
         else {
             completionHandler(unknownError)
             return

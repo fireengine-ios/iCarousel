@@ -95,7 +95,7 @@ class CreateStoryMusicListResponse: ObjectRequestResponse {
     var list: [CreateStoryMusicItem]?
     
     override func mapping() {
-        let item = json?.array?.flatMap { CreateStoryMusicItem(withJSON: $0) }
+        let item = json?.array?.compactMap { CreateStoryMusicItem(withJSON: $0) }
         list = item
     }
 }

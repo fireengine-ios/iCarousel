@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-protocol InstagramAuthViewControllerDelegate: class {
+protocol InstagramAuthViewControllerDelegate: AnyObject {
     func instagramAuthSuccess()
     func instagramAuthCancel()
 }
@@ -73,7 +73,7 @@ class InstagramAuthViewController: ViewController {
     
     private func handleBackButton() {
         hideSpinner()
-        if isMovingFromParentViewController, !isLoginStarted, !isLoginCanceled {
+        if isMovingFromParent, !isLoginStarted, !isLoginCanceled {
             delegate?.instagramAuthCancel()
         }
     }

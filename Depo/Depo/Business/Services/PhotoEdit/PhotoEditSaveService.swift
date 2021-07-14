@@ -30,7 +30,7 @@ final class PhotoEditSaveService {
             }
             
             if asCopy {
-                guard let imageData = image.jpeg(.higher) ?? UIImagePNGRepresentation(image) else {
+                guard let imageData = image.jpeg(.higher) ?? image.pngData() else {
                     debugLog("PHOTOEDIT: can't create UIImage Representation")
                     completion(.failed(ErrorResponse.string(TextConstants.cameraAccessAlertText)))
                     return
@@ -65,7 +65,7 @@ final class PhotoEditSaveService {
                     self?.uploadItem(item: localItem, asCopy: true, completion: { uploadResult in
                         switch uploadResult {
                             case .success():
-                                self?.mediaItemService.remoteItemBy(trimmedId: localItem.getTrimmedLocalID()) { [weak self] remote in
+                                self?.mediaItemService.remoteItemBy(trimmedId: localItem.getTrimmedLocalID()) { remote in
                                     guard let savedRemote = remote else {
                                         completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
                                         assertionFailure("Can't find updated remote in the DB")
@@ -111,7 +111,7 @@ final class PhotoEditSaveService {
                     case .success():
                         self?.removeImage(at: tmpLocation)
                         
-                        self?.mediaItemService.itemByUUID(uuid: item.uuid) { [weak self] remote in
+                        self?.mediaItemService.itemByUUID(uuid: item.uuid) { remote in
                             guard let updatedRemote = remote else {
                                 debugLog("PHOTOEDIT: Can't find updated remote in the DB")
                                 completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
@@ -149,7 +149,7 @@ final class PhotoEditSaveService {
             } else {
                 debugLog("PHOTOEDIT: localItem doesn't exist or asset can't be edited")
                 
-                let data = image.jpeg(.higher) ?? UIImagePNGRepresentation(image)
+                let data = image.jpeg(.higher) ?? image.pngData()
                 
                 //saving data to upload updated remote
                 item.fileData = data
@@ -163,7 +163,7 @@ final class PhotoEditSaveService {
     //MARK: - PH Library access
     
     private func checkLibraryAccessStatus(completion: @escaping BoolHandler) {
-        cameraService.photoLibraryIsAvailable { [weak self] isAvailable, _ in
+        cameraService.photoLibraryIsAvailable { isAvailable, _ in
             completion(isAvailable)
         }
     }

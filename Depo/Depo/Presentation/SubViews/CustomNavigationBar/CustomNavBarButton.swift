@@ -17,7 +17,7 @@ class CustomNavBarButton: UIButton {
         }
     }
     
-    override func setImage(_ image: UIImage?, for state: UIControlState) {
+    override func setImage(_ image: UIImage?, for state: UIControl.State) {
         super.setImage(image, for: state)
     }
     

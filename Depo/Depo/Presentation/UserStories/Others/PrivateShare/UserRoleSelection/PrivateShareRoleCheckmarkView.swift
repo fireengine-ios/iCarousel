@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareRoleCheckmarkViewDelegate: class {
+protocol PrivateShareRoleCheckmarkViewDelegate: AnyObject {
     func didSelect(role: PrivateShareUserRole)
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SelectNameInteractorOutput: class {
+protocol SelectNameInteractorOutput: AnyObject {
     func startProgress()
     func operationSuccess(operation: SelectNameScreenType, item: Item?, isSubFolder: Bool)
     func createAlbumOperationSuccess(item: AlbumItem?)

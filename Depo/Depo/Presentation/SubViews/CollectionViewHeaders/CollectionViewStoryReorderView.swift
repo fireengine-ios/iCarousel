@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CollectionViewStoryReorderViewDelegate: class {
+protocol CollectionViewStoryReorderViewDelegate: AnyObject {
     func goToSelectionMusick()
 }
 

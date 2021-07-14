@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol HelpAndSupportInteractorOutput: class {
+protocol HelpAndSupportInteractorOutput: AnyObject {
 
 }

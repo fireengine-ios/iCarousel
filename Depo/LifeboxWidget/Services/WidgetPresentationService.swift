@@ -29,7 +29,7 @@ class SyncInfo {
     var lastSyncedDate: Date?
 }
 
-protocol WidgetPresentationServiceDelegate: class {
+protocol WidgetPresentationServiceDelegate: AnyObject {
     func didLogout()
 }
 

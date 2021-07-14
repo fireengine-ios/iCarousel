@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AlbumsSliderCellDelegate: class {
+protocol AlbumsSliderCellDelegate: AnyObject {
     func didSelect(item: BaseDataSourceItem)
     func didChangeSelectionAlbumsCount(_ count: Int)
     func needLoadNextAlbumPage()

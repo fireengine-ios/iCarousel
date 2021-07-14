@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol FeedbackViewInput: class {
+protocol FeedbackViewInput: AnyObject {
     func languagesUploaded(languages: [LanguageModel])
     func fail(text: String)
     func languageRequestSended(email: String, text: String)

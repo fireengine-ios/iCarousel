@@ -13,7 +13,7 @@ class FileInfoThumbView: UIView {
         super.awakeFromNib()
         isAccessibilityElement = true
         accessibilityLabel = TextConstants.accessibilityClose
-        accessibilityTraits = UIAccessibilityTraitButton
+        accessibilityTraits = .button
     }
 
     override func accessibilityActivate() -> Bool {

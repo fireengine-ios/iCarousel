@@ -9,7 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol CampaignService: class {
+protocol CampaignService: AnyObject {
     func getPhotopickDetails(handler: @escaping (ErrorResult<CampaignCardResponse, CampaignPhotopickError>) -> Void)
 }
     
@@ -32,7 +32,7 @@ final class CampaignServiceImpl: BaseRequestService, CampaignService {
         .responseData { response in
             switch response.result {
             case .success(let data):
-                let json = JSON(data: data)[Keys.serverValue]
+                let json = JSON(data)[Keys.serverValue]
                 guard let details = CampaignCardResponse(json: json) else {
                     handler(.failure(.empty))
                     return

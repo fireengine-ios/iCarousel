@@ -293,7 +293,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     private func createStory() {
         let items: [BaseDataSourceItem]
         if dataSource.isInSelectionMode() {
-            items = dataSource.selectedItemsArray.flatMap { $0 }.filter { $0.fileType == .image }
+            items = dataSource.selectedItemsArray.compactMap { $0 }.filter { $0.fileType == .image }
         } else {
             items = dataSource.allItems.flatMap { $0 }.filter { $0.fileType == .image }
         }
@@ -320,23 +320,23 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             //let remoteItems = selectedItems.filter {$0.isLocalItem == false}
             
             if actionTypes.contains(.createStory) && !selectedItems.contains(where: { return $0.fileType == .image }) {
-                let index = actionTypes.index(where: { return $0 == .createStory })!
+                let index = actionTypes.firstIndex(where: { return $0 == .createStory })!
                 actionTypes.remove(at: index)
             }
             
-            if selectedItems.count != 1, let renameIndex = actionTypes.index(of: .rename) {
+            if selectedItems.count != 1, let renameIndex = actionTypes.firstIndex(of: .rename) {
                 actionTypes.remove(at: renameIndex)
             }
             
-            if let printIndex = actionTypes.index(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
+            if let printIndex = actionTypes.firstIndex(of: .print), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: printIndex)
             }
             
-            if let editIndex = actionTypes.index(of: .edit), !selectedItems.contains(where: { $0.fileType == .image }) {
+            if let editIndex = actionTypes.firstIndex(of: .edit), !selectedItems.contains(where: { $0.fileType == .image }) {
                 actionTypes.remove(at: editIndex)
             }
             
-            if let deleteOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
+            if let deleteOriginalIndex = actionTypes.firstIndex(of: .deleteDeviceOriginal) {
                 let serverObjects = selectedItems.filter({ !$0.isLocalItem })
                 if serverObjects.isEmpty {
                     actionTypes.remove(at: deleteOriginalIndex)
@@ -362,7 +362,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
                                              excludeTypes: alertSheetExcludeTypes)
         } else {
             actionTypes = (interactor.alerSheetMoreActionsConfig?.initialTypes ?? [])
-            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.index(of: .download) {
+            if dataSource.allMediaItems.count == 0, let downloadIdex = actionTypes.firstIndex(of: .download) {
                 actionTypes.remove(at: downloadIdex)
             }
             alertSheetModule?.showAlertSheet(with: actionTypes,

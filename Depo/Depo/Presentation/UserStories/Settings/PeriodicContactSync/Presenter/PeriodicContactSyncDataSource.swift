@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol PeriodicContactSyncDataSourceDelegate: class {
+protocol PeriodicContactSyncDataSourceDelegate: AnyObject {
     func onValueChanged()
 }
 
@@ -25,7 +25,7 @@ final class PeriodicContactSyncDataSource: NSObject {
         tableView = table
         tableView?.dataSource = self
         tableView?.backgroundColor = UIColor.clear
-        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.rowHeight = UITableView.automaticDimension
         tableView?.estimatedRowHeight = estimatedRowHeight
         tableView?.separatorStyle = .none
         

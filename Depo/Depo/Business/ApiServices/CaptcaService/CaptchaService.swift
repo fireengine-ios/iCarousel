@@ -58,7 +58,7 @@ final class CaptchaSignUpRequrementService {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    let captchaSignUp = CaptchaSignUpRequirementResponse(withJSON: JSON(data: data))
+                    let captchaSignUp = CaptchaSignUpRequirementResponse(withJSON: JSON(data))
                     handler(ResponseResult.success(captchaSignUp.captchaRequired))
                 case .failure(let error):
                     

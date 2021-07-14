@@ -616,7 +616,7 @@ class FileService: BaseRequestService {
                 return
             }
             
-            let list = resultResponse.flatMap { WrapData(remote: $0) }
+            let list = resultResponse.compactMap { WrapData(remote: $0) }
 //            CoreDataStack.shared.appendOnlyNewItems(items: list)
             success?(list)
         }, fail: fail)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol HomeViewTopViewActions: class {
+protocol HomeViewTopViewActions: AnyObject {
     func allFilesButtonGotPressed()
     func createAStoryButtonGotPressed()
     func favoritesButtonGotPressed()

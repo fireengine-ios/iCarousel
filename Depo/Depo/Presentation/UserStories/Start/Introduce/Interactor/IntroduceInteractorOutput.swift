@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol IntroduceInteractorOutput: class {
+protocol IntroduceInteractorOutput: AnyObject {
     func models(models: [IntroduceModel])
 }

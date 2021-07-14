@@ -11,11 +11,12 @@ import Foundation
 
 extension UIApplication {
     @discardableResult
-    func openSafely(_ url: URL?, options: [String: Any] = [:], completion: ((Bool) -> Void)? = nil) -> Bool {
+    func openSafely(_ url: URL?,
+                    options: [UIApplication.OpenExternalURLOptionsKey: Any] = [:],
+                    completion: ((Bool) -> Void)? = nil) -> Bool {
         guard let url = url, self.canOpenURL(url) else {
             return false
         }
-        
         UIApplication.shared.open(url, options: options, completionHandler: completion)
         return true
     }

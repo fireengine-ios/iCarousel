@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ContactListViewDelegate: class {
+protocol ContactListViewDelegate: AnyObject {
     func didDeleteContacts(for backup: ContactSync.SyncResponse)
     func didCreateNewBackup(_ backup: ContactSync.SyncResponse)
 }
@@ -136,7 +136,7 @@ private extension ContactListViewController {
         isLoadingData = true
         
         if currentPage > 1 {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            let indicator = UIActivityIndicatorView(style: .gray)
             indicator.startAnimating()
             tableView.tableFooterView = indicator
         }

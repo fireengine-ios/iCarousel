@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol HomeCollectionViewDataSourceDelegate: class {
+protocol HomeCollectionViewDataSourceDelegate: AnyObject {
     func onCellHasBeenRemovedWith(controller: UIViewController)
     func numberOfColumns() -> Int
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
@@ -55,7 +55,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
         }
         
         let headerNib = UINib(nibName: "HomeViewTopView", bundle: nil)
-        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
+        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
     }

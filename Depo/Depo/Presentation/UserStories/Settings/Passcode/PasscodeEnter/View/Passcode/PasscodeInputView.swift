@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol PasscodeInputViewDelegate: class {
+public protocol PasscodeInputViewDelegate: AnyObject {
     func finish(with passcode: Passcode)
     func finishErrorAnimation()
 }

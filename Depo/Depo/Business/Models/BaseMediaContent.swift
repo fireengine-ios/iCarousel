@@ -50,11 +50,7 @@ class BaseMediaContent: Equatable, Hashable {
     var lastModifiedDate: Date? {
         return asset.modificationDate
     }
-    
-    var hashValue: Int {
-        return (urlToFile).hashValue
-    }
-    
+
     init(curentAsset: PHAsset, generalInfo: AssetInfo) {
         self.asset = curentAsset
         self.urlToFile = generalInfo.url
@@ -78,6 +74,10 @@ class BaseMediaContent: Equatable, Hashable {
         default:
             return CollectionViewCellsIdsConstant.cellForImage
         }
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(urlToFile)
     }
 }
 

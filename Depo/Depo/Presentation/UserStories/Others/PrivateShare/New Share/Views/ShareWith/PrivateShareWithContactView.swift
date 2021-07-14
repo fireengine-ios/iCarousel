@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareWithContactViewDelegate: class {
+protocol PrivateShareWithContactViewDelegate: AnyObject {
     func onDeleteTapped(contact: PrivateShareContact)
     func onUserRoleTapped(contact: PrivateShareContact)
 }

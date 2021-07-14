@@ -10,7 +10,7 @@ import UIKit
 
 /// https://stackoverflow.com/questions/2306870/is-there-a-way-to-pause-a-cabasicanimation/40400230#40400230
 /// https://stackoverflow.com/a/43934404/5893286
-protocol AnimationFlowManager: class {
+protocol AnimationFlowManager: AnyObject {
     var persistentAnimations: [String: CAAnimation] { get set }
     var persistentSpeed: Float { get set }
     func pauseAnimations()

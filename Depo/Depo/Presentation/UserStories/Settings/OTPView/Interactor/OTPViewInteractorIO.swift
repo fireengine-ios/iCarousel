@@ -8,10 +8,10 @@
 
 //import Foundation
 //
-//protocol OTPViewInteractorInput: class {
+//protocol OTPViewInteractorInput: AnyObject {
 //    func viewIsRady()
 //}
 //
-//protocol OTPViewInteractorOutput: class {
+//protocol OTPViewInteractorOutput: AnyObject {
 //    func configurateWithResponse(response: SignUpSuccessResponse)
 //}

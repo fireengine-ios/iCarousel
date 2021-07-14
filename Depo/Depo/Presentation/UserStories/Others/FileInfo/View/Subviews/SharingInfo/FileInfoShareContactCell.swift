@@ -14,7 +14,7 @@ enum FileInfoShareContactCellType {
     case plusButton
 }
 
-protocol FileInfoShareContactCellDelegate: class {
+protocol FileInfoShareContactCellDelegate: AnyObject {
     func didSelect(contact: SharedContact)
     func didTappedPlusButton()
     func didTappedOnShowAllContacts()

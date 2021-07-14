@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol RegistrationInteractorOutput: class {
+protocol RegistrationInteractorOutput: AnyObject {
 
     func setupEtk(isShowEtk: Bool)
     func userValid(_ userInfo: RegistrationUserInfoModel)

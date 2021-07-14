@@ -6,6 +6,6 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol MoreFilesActionsModuleInput: class {
+protocol MoreFilesActionsModuleInput: AnyObject {
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 import Mantis
 
-protocol AdjustViewDelegate: class {
+protocol AdjustViewDelegate: AnyObject {
     func didShowRatioMenu(_ view: AdjustView, selectedRatio: AdjustRatio)
     func didChangeAngle(_ value: Float)
 }

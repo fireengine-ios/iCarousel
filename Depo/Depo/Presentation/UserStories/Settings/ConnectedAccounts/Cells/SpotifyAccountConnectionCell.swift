@@ -160,9 +160,9 @@ final class SpotifyAccountConnectionCell: UITableViewCell  {
     }
 
     private func updateAccessbilityTraits(isEnabled: Bool) {
-        var traits = UIAccessibilityTraitButton
+        var traits: UIAccessibilityTraits = .button
         if !isEnabled {
-            traits |= UIAccessibilityTraitNotEnabled
+            traits.insert(.notEnabled)
         }
 
         accessibilityTraits = traits

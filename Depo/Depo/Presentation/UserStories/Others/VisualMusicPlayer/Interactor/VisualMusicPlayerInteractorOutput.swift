@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol VisualMusicPlayerInteractorOutput: class {
+protocol VisualMusicPlayerInteractorOutput: AnyObject {
 
 }

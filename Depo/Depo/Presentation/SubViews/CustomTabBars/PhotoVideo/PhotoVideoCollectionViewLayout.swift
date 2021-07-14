@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoVideoCollectionViewLayoutDelegate: class {
+protocol PhotoVideoCollectionViewLayoutDelegate: AnyObject {
     func targetContentOffset() -> CGPoint?
 }
 

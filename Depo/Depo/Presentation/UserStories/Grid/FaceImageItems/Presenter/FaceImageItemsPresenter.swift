@@ -411,7 +411,7 @@ extension FaceImageItemsPresenter: FaceImageItemsViewOutput {
             if let interactor = self.interactor as? FaceImageItemsInteractor,
                 !selectedItems.isEmpty {
                 
-                let peopleItems = selectedItems.flatMap { $0 as? PeopleItem }
+                let peopleItems = selectedItems.compactMap { $0 as? PeopleItem }
                 interactor.onSaveVisibilityChanges(peopleItems)
                 
             } else {

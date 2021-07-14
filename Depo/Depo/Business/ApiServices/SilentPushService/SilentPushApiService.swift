@@ -19,13 +19,13 @@ final class SilentPushApiService: BaseRequestService {
                                                                 .appendingPathComponent("home_widget.log")
 
     func uploadLog() {
-        var bgTask = UIBackgroundTaskInvalid
-        bgTask = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+        var bgTask = UIBackgroundTaskIdentifier.invalid
+        bgTask = UIApplication.shared.beginBackgroundTask {
             UIApplication.shared.endBackgroundTask(bgTask)
-        })
+        }
 
         let endTask = {
-            if bgTask != UIBackgroundTaskInvalid {
+            if bgTask != .invalid {
                 UIApplication.shared.endBackgroundTask(bgTask)
             }
         }

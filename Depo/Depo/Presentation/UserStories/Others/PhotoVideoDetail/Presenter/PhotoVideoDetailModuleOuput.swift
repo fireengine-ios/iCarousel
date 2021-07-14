@@ -6,6 +6,6 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
-protocol PhotoVideoDetailModuleOutput: class {
+protocol PhotoVideoDetailModuleOutput: AnyObject {
     func needLoadNextPage()
 }

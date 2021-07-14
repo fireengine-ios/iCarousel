@@ -53,7 +53,7 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             }
             
         case .audio:
-            player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
+            player.play(list: wrapperedArray, startAt: wrapperedArray.firstIndex(of: wrapperedItem) ?? 0)
             
         case .application(.usdz):
             let controller = router.augumentRealityDetailViewController(fileObject: wrapperedItem)

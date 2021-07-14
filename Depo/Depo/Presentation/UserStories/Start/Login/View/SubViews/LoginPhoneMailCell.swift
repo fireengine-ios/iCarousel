@@ -7,7 +7,7 @@
 //
 
 
-protocol LoginPhoneMailCellActionProtocol: class {
+protocol LoginPhoneMailCellActionProtocol: AnyObject {
     func firstCharacterIsPlus(fromCell cell: LoginPhoneMailCell, string: String)
     func firstCharacterIsNum(fromCell cell: LoginPhoneMailCell, string: String)
 }

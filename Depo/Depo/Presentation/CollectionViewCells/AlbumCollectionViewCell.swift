@@ -49,7 +49,7 @@ final class AlbumCellView: UIView {
         imageView.loadImage(with: album.preview, smooth: false)
         
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitNone
+        accessibilityTraits = .none
         accessibilityLabel = album.name
         
         layoutIfNeeded()

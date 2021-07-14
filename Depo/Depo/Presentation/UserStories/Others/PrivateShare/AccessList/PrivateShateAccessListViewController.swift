@@ -35,7 +35,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
             }
         }
         
-        var actionStyle: UIAlertActionStyle {
+        var actionStyle: UIAlertAction.Style {
             switch self {
             case .editor, .viewer:
                 return .default

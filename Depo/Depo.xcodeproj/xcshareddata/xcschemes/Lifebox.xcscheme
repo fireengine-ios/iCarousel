@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1100"
+   LastUpgradeVersion = "1250"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,37 +15,30 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "CF8B636A23CBC9D70021B021"
-                     BuildableName = "lifebox_friendly.app"
-                     BlueprintName = "TC_Depo_LifeTech_Bundle"
+                     BlueprintIdentifier = "8C0E8C611FDEBDFF00789C91"
+                     BuildableName = "lifebox.app"
+                     BlueprintName = "Lifebox"
                      ReferencedContainer = "container:Depo.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>
          </ExecutionAction>
       </PreActions>
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CF8B636A23CBC9D70021B021"
-               BuildableName = "lifebox_friendly.app"
-               BlueprintName = "TC_Depo_LifeTech_Bundle"
-               ReferencedContainer = "container:Depo.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8C0E8C611FDEBDFF00789C91"
+            BuildableName = "lifebox.app"
+            BlueprintName = "Lifebox"
+            ReferencedContainer = "container:Depo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
       </Testables>
    </TestAction>
@@ -63,9 +56,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CF8B636A23CBC9D70021B021"
-            BuildableName = "lifebox_friendly.app"
-            BlueprintName = "TC_Depo_LifeTech_Bundle"
+            BlueprintIdentifier = "8C0E8C611FDEBDFF00789C91"
+            BuildableName = "lifebox.app"
+            BlueprintName = "Lifebox"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -76,16 +69,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CF8B636A23CBC9D70021B021"
-            BuildableName = "lifebox_friendly.app"
-            BlueprintName = "TC_Depo_LifeTech_Bundle"
-            ReferencedContainer = "container:Depo.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

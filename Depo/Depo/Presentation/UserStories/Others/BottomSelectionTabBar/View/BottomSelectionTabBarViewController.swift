@@ -84,7 +84,7 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
 extension BottomSelectionTabBarViewController: UITabBarDelegate {
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        guard let selectedItemIndex = tabBar.items?.index(of: item) else {
+        guard let selectedItemIndex = tabBar.items?.firstIndex(of: item) else {
             return
         }
         

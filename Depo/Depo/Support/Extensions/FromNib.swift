@@ -11,7 +11,7 @@ import UIKit
 /// for embedded views from nib
 /// use file owner to setup outlets instead of view
 /// https://stackoverflow.com/a/34524346/5893286
-protocol FromNib: class {
+protocol FromNib: AnyObject {
     func setupFromNib()
 }
 

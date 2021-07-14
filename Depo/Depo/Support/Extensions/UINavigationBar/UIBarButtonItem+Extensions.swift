@@ -15,7 +15,7 @@ extension UIBarButtonItem {
                      font: UIFont? = nil,
                      tintColor: UIColor = ColorConstants.whiteColor,
                      accessibilityLabel: String? = nil,
-                     style: UIBarButtonItemStyle = .plain,
+                     style: UIBarButtonItem.Style = .plain,
                      target: Any?,
                      selector: Selector?) {
 

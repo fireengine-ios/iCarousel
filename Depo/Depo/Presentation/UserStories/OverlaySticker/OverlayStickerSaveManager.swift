@@ -123,7 +123,7 @@ final class OverlayStickerSaveManager {
     }
     
     private func saveImage(image: UIImage, fileName: String, completion: (CreateOverlayStickersResult) -> ()) {
-        guard let data = image.jpeg(.highest) ?? UIImagePNGRepresentation(image) else {
+        guard let data = image.jpeg(.highest) ?? image.pngData() else {
             completion(.failure(.unknown))
             return
         }

@@ -15,7 +15,7 @@ final class LoginSettingsViewController: ViewController {
             newValue.register(nibCell: SettingsTableViewSwitchCell.self)
             newValue.dataSource = self
             
-            newValue.rowHeight = UITableViewAutomaticDimension
+            newValue.rowHeight = UITableView.automaticDimension
             newValue.estimatedRowHeight = 160
             
             newValue.isHidden = true

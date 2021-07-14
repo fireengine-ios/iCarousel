@@ -66,7 +66,7 @@ final class CarouselPagerReusableViewController: UICollectionReusableView, UIScr
         
         scrollView.contentSize = CGSize(width: x, height: maxHeight)
         pageControl.numberOfPages = carouselPageModels.count
-        pageControl.addTarget(self, action: #selector(valueChanged), for: UIControlEvents.valueChanged)
+        pageControl.addTarget(self, action: #selector(valueChanged), for: .valueChanged)
         
         pageControl.isHidden = (carouselPageModels.count <= 1)
         

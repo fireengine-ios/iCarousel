@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SettingsDelegate: class {
+protocol SettingsDelegate: AnyObject {
     func goToInvitation()
 
     func goToConnectedAccounts()
@@ -109,7 +109,7 @@ final class SettingsViewController: BaseViewController {
             setupTableViewFooter()
             return
         }
-        headerView.frame.size.height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        headerView.frame.size.height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         tableView.tableHeaderView = headerView
     }
 
@@ -400,18 +400,19 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
 // MARK: - photo picker delegatess
 extension SettingsViewController: UIImagePickerControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
         var photoData: Data?
-        if let imageURL = info[UIImagePickerControllerMediaURL] as? URL,
+        if let imageURL = info[.mediaURL] as? URL,
             let imageData = try? Data(contentsOf: imageURL) {
             
             photoData = imageData
             
-        } else if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
-            photoData = UIImageJPEGRepresentation(image, 0.9)
-        } else if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            photoData = UIImageJPEGRepresentation(image, 0.9)
+        } else if let image = info[.editedImage] as? UIImage {
+            photoData = image.jpegData(compressionQuality: 0.9)
+        } else if let image = info[.originalImage] as? UIImage {
+            photoData = image.jpegData(compressionQuality: 0.9)
         }
         if let unwrapedPhotoData = photoData {
             output.photoCaptured(data: unwrapedPhotoData)

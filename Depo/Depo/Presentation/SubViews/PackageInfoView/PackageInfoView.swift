@@ -43,7 +43,7 @@ enum ControlPackageType {
     }
 }
 
-protocol PackageInfoViewDelegate: class {
+protocol PackageInfoViewDelegate: AnyObject {
     func onSeeDetailsTap(with type: ControlPackageType)
 }
 

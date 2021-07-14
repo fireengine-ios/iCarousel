@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol StorageVars: class {
+protocol StorageVars: AnyObject {
     var isAppFirstLaunch: Bool { get set }
     var currentUserID: String? { get set }
     var isAutoSyncSet: Bool { get set }

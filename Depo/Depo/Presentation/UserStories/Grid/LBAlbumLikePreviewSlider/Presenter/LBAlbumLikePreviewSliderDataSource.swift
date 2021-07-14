@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LBAlbumLikePreviewSliderDataSourceDelegate: class {
+protocol LBAlbumLikePreviewSliderDataSourceDelegate: AnyObject {
     func onItemSelected(item: SliderItem)
 }
 

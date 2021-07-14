@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TrashBinThreeDotMenuManagerDelegate: class {
+protocol TrashBinThreeDotMenuManagerDelegate: AnyObject {
     func onThreeDotsManagerSelect()
     func onThreeDotsManagerRestore(item: Item?)
     func onThreeDotsManagerDelete(item: Item?)

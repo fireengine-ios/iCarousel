@@ -9,7 +9,7 @@
 import Foundation
 import WidgetKit
 
-protocol ContactSyncHelperDelegate: class {
+protocol ContactSyncHelperDelegate: AnyObject {
     func didUpdateBackupList()
     func didAnalyze(contacts: [ContactSync.AnalyzedContact])
     func didBackup(result: ContactSync.SyncResponse)

@@ -72,7 +72,7 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 16)
             newValue.setTitle(TextConstants.campaignViewControllerBecomePremium, for: .normal)
-            newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 17, 6, 17)
+            newValue.titleEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 17)
         }
     }
     

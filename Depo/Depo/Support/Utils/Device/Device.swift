@@ -65,7 +65,7 @@ class Device {
     }
     
     static var isIpad: Bool {
-        return UI_USER_INTERFACE_IDIOM() == .pad
+        return UIDevice.current.userInterfaceIdiom == .pad
     }
     
     static var deviceType: String {
@@ -175,7 +175,9 @@ class Device {
         guard let preferedLanguage = Locale.preferredLanguages.first else {
             return defaultLocale
         }
-        return String(preferedLanguage[..<String.Index(encodedOffset: 2)])
+
+        let range = ..<String.Index(utf16Offset: 2, in: preferedLanguage)
+        return String(preferedLanguage[range])
     }
     
     static var isTurkishLocale: Bool {
