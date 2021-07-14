@@ -17,7 +17,7 @@ enum CardShareType {
     }
 }
 
-protocol CardsShareButtonDelegate: class {
+protocol CardsShareButtonDelegate: AnyObject {
     func share(item: BaseDataSourceItem, type: CardShareType)
 }
 

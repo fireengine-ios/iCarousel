@@ -83,7 +83,7 @@ class SwipeableCardCell: UITableViewCell {
     private func getXforTouch(_ touches: Set<UITouch>) -> CGFloat {
         let touch = touches.first
         let location = touch!.location(in: self)
-        superview?.bringSubview(toFront: self)
+        superview?.bringSubviewToFront(self)
         return location.x
     }
     

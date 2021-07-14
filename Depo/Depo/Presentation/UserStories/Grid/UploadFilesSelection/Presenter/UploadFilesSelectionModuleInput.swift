@@ -6,6 +6,6 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol UploadFilesSelectionModuleInput: class {
+protocol UploadFilesSelectionModuleInput: AnyObject {
 
 }

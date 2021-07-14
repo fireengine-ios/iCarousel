@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UserInfoSubViewInteractorOutput: class {
+protocol UserInfoSubViewInteractorOutput: AnyObject {
     func requestsFinished()
     func setUserInfo(userInfo: AccountInfoResponse)
     func setQuotaInfo(quotoInfo: QuotaInfoResponse)

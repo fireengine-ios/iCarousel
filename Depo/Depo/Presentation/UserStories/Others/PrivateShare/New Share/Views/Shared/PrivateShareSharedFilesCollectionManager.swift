@@ -15,7 +15,7 @@ enum ReloadType {
     case onViewAppear
 }
  
-protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
+protocol PrivateShareSharedFilesCollectionManagerDelegate: AnyObject {
     func didStartSelection(selected: Int)
     func didEndSelection()
     func didChangeSelection(selectedItems: [WrapData])
@@ -136,7 +136,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private func setupCollection() {
         collectionView?.register(nibCell: BasicCollectionMultiFileCell.self)
         collectionView?.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self,
-                                 kind: UICollectionElementKindSectionHeader)
+                                 kind: UICollectionView.elementKindSectionHeader)
         
         collectionView?.alwaysBounceVertical = true
         

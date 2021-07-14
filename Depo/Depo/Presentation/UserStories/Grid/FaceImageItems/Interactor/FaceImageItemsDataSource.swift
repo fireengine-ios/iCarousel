@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol FaceImageItemsDataSourceDelegate: class {
+protocol FaceImageItemsDataSourceDelegate: AnyObject {
     func onBecomePremiumTap()
 }
 
@@ -30,7 +30,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if AuthoritySingleton.shared.faceRecognition {
-            if faceImageType == .people && kind == UICollectionElementKindSectionHeader {
+            if faceImageType == .people && kind == UICollectionView.elementKindSectionHeader {
                 let carouselView = collectionView.dequeue(supplementaryView: CarouselPagerReusableViewController.self, kind: kind, for: indexPath)
                 carouselView.maxHeight = carouselViewHeight
                 carouselView.setup()
@@ -83,7 +83,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     
     // MARK: Utility methods
     func didAnimationForPremiumButton(with indexPath: IndexPath) {
-        if let footerView = collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter, for: indexPath) as? PremiumFooterCollectionReusableView {
+        if let footerView = collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter, for: indexPath) as? PremiumFooterCollectionReusableView {
             footerView.configureWithoutDetails(type: faceImageType, isSelectedAnimation: true)
             footerView.delegate = self
         }

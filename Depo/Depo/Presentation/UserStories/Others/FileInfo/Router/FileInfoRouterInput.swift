@@ -14,7 +14,7 @@ protocol FileInfoRouterInput {
     func openPrivateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType)
 }
 
-protocol FileInfoRouterOutput: class {
+protocol FileInfoRouterOutput: AnyObject {
     func updateSharingInfo()
     func deleteSharingInfo()
 }

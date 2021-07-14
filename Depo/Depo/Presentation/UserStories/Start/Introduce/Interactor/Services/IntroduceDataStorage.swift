@@ -35,8 +35,8 @@ class IntroduceDataStorage: NSObject {
             let font2 = UIFont.TurkcellSaturaBolFont(size: font2Size)
             let r1 = NSRange(location: 0, length: range.location)
             let r2 = NSRange(location: range.location + range.length, length: string.length - range.location - range.length)
-            attributedText.addAttribute(NSAttributedStringKey.font, value: font1, range: r1)
-            attributedText.addAttribute(NSAttributedStringKey.font, value: font2, range: r2)
+            attributedText.addAttribute(.font, value: font1, range: r1)
+            attributedText.addAttribute(.font, value: font2, range: r2)
             model.text = attributedText
             
             introModels.append(model)

@@ -96,14 +96,14 @@ class SliderItem {
     
     init(withAlbumItems items: [AlbumItem]?) {
         if let items = items {
-            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).flatMap { $0.preview?.patchToPreview })
+            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).compactMap { $0.preview?.patchToPreview })
         }
         setType(.albums)
     }
     
     init(withStoriesItems items: [Item]?) {
         if let items = items {
-            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).flatMap { $0.patchToPreview })
+            previewItems = Array(items.prefix(NumericConstants.myStreamSliderThumbnailsCount).compactMap { $0.patchToPreview })
         }
         setType(.story)
     }
@@ -122,7 +122,7 @@ class SliderItem {
     }
     
     init(withThumbnails items: [URL?], type: MyStreamType) {
-        previewItems = items.flatMap { PathForItem.remoteUrl($0) }
+        previewItems = items.compactMap { PathForItem.remoteUrl($0) }
         setType(type)
     }
     
@@ -144,7 +144,7 @@ final class SmartAlbumsDataStorage {
     
     func addNew(item: SliderItem) {
         if let type = item.type, type.isMyStreamSliderType(),
-           let index = currentItems.index(where: { $0.type == item.type }) {
+           let index = currentItems.firstIndex(where: { $0.type == item.type }) {
             currentItems[index] = item
         } else {
             currentItems.append(item)

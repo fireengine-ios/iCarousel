@@ -205,7 +205,7 @@ extension VisualMusicPlayerViewController: iCarouselDataSource, iCarouselDelegat
     }
     
     func carousel(_ carousel: iCarousel, itemTransformForOffset offset: CGFloat, baseTransform transform: CATransform3D) -> CATransform3D {
-        let z = -CGFloat(fmin(1.0, fabs(offset))) * 130
+        let z = -CGFloat(fmin(1.0, abs(offset))) * 130
         return CATransform3DTranslate(transform, offset * carousel.itemWidth, 0, z)
     }
     

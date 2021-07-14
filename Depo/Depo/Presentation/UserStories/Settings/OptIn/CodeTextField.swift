@@ -57,8 +57,8 @@ extension CodeTextField: UITextFieldDelegate {
             let newString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string),
             newString.count <= inputTextLimit
             else { return false }
-        
-        typingAttributes?[NSAttributedStringKey.kern.rawValue] = fontKern
+
+        typingAttributes?[.kern] = fontKern
         
         return true
     }

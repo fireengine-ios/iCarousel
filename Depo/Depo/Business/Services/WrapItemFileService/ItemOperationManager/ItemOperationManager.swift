@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ItemOperationManagerViewProtocol: class {
+protocol ItemOperationManagerViewProtocol: AnyObject {
     
     func startUploadFile(file: WrapData)
     

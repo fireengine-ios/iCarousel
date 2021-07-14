@@ -33,7 +33,7 @@ class InsetsLabel: UILabel {
     }
     
     override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+        super.drawText(in: rect.inset(by: insets))
     }
     
     override var intrinsicContentSize: CGSize {

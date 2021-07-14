@@ -77,7 +77,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     
     func deletePopUpSubView(popUp: BaseCardView) {
         DispatchQueue.main.async {
-            if let index = self.viewsArray.index(of: popUp) {
+            if let index = self.viewsArray.firstIndex(of: popUp) {
                 self.lock.lock()
                 let path = IndexPath(row: index, section: 0)
                 self.viewsArray.remove(at: path.row)

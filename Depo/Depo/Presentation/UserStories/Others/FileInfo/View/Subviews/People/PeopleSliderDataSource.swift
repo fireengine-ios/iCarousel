@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PeopleSliderDataSourceDelegate: class {
+protocol PeopleSliderDataSourceDelegate: AnyObject {
     func didSelect(item: PeopleOnPhotoItemResponse)
 }
 

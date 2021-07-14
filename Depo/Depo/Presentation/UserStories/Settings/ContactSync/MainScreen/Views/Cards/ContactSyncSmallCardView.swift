@@ -55,7 +55,7 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     }()
     
     private let attributedLastBackupMessage: NSAttributedString = {
-        let attributesStatic: [NSAttributedStringKey : Any] = [
+        let attributesStatic: [NSAttributedString.Key : Any] = [
             .font: UIFont.TurkcellSaturaMedFont(size: 16.0),
             .foregroundColor: ColorConstants.charcoalGrey
         ]
@@ -99,7 +99,7 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     //MARK:- Private
     
     private func attributedString(dateString: String) -> NSMutableAttributedString{
-        let attributesDate: [NSAttributedStringKey : Any] = [
+        let attributesDate: [NSAttributedString.Key : Any] = [
             .font: UIFont.TurkcellSaturaBolFont(size: 16.0),
             .foregroundColor: ColorConstants.charcoalGrey
         ]

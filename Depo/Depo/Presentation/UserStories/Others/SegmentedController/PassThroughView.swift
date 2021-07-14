@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PassThroughViewDelegate: class {
+protocol PassThroughViewDelegate: AnyObject {
     func handlePan(recognizer: UIPanGestureRecognizer)
     func handleSwipe(recognizer: UISwipeGestureRecognizer)
     func tapGesture(recognizer: UITapGestureRecognizer)

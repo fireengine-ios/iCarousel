@@ -6,6 +6,6 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol ManageContactsModuleOutput: class {
+protocol ManageContactsModuleOutput: AnyObject {
     func didDeleteContact()
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PeriodicContactSyncInteractorOutput: class {
+protocol PeriodicContactSyncInteractorOutput: AnyObject {
     func operationFinished()
     func showError(error: String)
     

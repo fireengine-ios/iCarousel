@@ -63,7 +63,7 @@ final class PhotoCell: UICollectionViewCell {
         // TODO: setup accessibility
         //favoriteImageView.accessibilityLabel = TextConstants.accessibilityFavorite
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitImage
+        accessibilityTraits = .image
         //accessibilityLabel = wrappered.name
     }
     
@@ -204,7 +204,7 @@ final class PhotoCell: UICollectionViewCell {
 final class CollectionSpinnerFooter: UICollectionReusableView {
     
     private let activityIndicator: UIActivityIndicatorView = {
-        let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activity = UIActivityIndicatorView(style: .gray)
         activity.hidesWhenStopped = true
         activity.startAnimating()
         return activity

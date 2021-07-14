@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareUserRoleViewControllerDelegate: class {
+protocol PrivateShareUserRoleViewControllerDelegate: AnyObject {
     func contactRoleDidChange(_ contact: PrivateShareContact)
 }
 

@@ -80,7 +80,7 @@ class FreeAppSpacePresenter: BaseFilesGreedPresenter {
             var actionTypes = interactor.alerSheetMoreActionsConfig?.selectionModeTypes ?? []
                 
             if dataSource.allMediaItems.count == dataSource.selectedItemsArray.count {
-                if let index = actionTypes.index(of: .selectAll) {
+                if let index = actionTypes.firstIndex(of: .selectAll) {
                     actionTypes.remove(at: index)
                     actionTypes.insert(.deSelectAll, at: index)
                 }

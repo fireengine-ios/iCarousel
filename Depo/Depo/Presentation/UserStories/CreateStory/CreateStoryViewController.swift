@@ -41,7 +41,7 @@ final class CreateStoryViewController: BaseViewController {
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             let text = String(format: TextConstants.createStoryPressAndHoldDescription, TextConstants.createStoryPressAndHold)
-            let attributes: [NSAttributedStringKey : Any] = [
+            let attributes: [NSAttributedString.Key : Any] = [
                 .font : UIFont.TurkcellSaturaMedFont(size: 18),
                 .foregroundColor : ColorConstants.blueGrey
             ]
@@ -49,7 +49,7 @@ final class CreateStoryViewController: BaseViewController {
             let attributedString = NSMutableAttributedString(string: text, attributes:  attributes)
             
             if let range = text.range(of: TextConstants.createStoryPressAndHold) {
-                let rangeAttributes: [NSAttributedStringKey : Any] = [
+                let rangeAttributes: [NSAttributedString.Key : Any] = [
                     .font : UIFont.TurkcellSaturaBolFont(size: 18),
                     .foregroundColor : ColorConstants.darkBlueColor
                 ]

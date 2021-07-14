@@ -56,35 +56,36 @@ class UserValidator {
     }
 
     func validatePassword(_ password: String, repassword: String? = nil) -> [UserValidationResults] {
+        var userValidationRules: [UserValidationResults] = []
         if password.isEmpty {
-            return [.passwordIsEmpty]
+            userValidationRules.append(.passwordIsEmpty)
         }
 
         let minimumLength = Self.passwordMinLength
         if password.count < minimumLength {
-            return [.passwordBelowMinimumLength(minLength: minimumLength)]
+            userValidationRules.append(.passwordBelowMinimumLength)
         }
 
         let maximumLength = Self.passwordMaxLength
         if password.count > maximumLength {
-            return [.passwordExceedsMaximumLength(maxLength: maximumLength)]
+            userValidationRules.append(.passwordExceedsMaximumLength)
         }
 
         if !password.contains(where: { $0.isUppercase }) {
-            return [.passwordMissingUppercase]
+            userValidationRules.append(.passwordMissingUppercase)
         }
 
         if !password.contains(where: { $0.isLowercase }) {
-            return [.passwordMissingLowercase]
+            userValidationRules.append(.passwordMissingLowercase)
         }
 
         if !password.contains(where: { $0.isNumber }) {
-            return [.passwordMissingNumbers]
+            userValidationRules.append(.passwordMissingNumbers)
         }
 
         let sameOrSequentialErrors = checkForSameOrSequentialChar(in: password)
         if !sameOrSequentialErrors.isEmpty {
-            return sameOrSequentialErrors
+            userValidationRules.append(contentsOf: sameOrSequentialErrors)
         }
 
         // Validate repassword as well (if passed)
@@ -98,52 +99,56 @@ class UserValidator {
             }
         }
 
-        return []
+        return userValidationRules
     }
 
     private func checkForSameOrSequentialChar(in password: String) -> [UserValidationResults] {
+        var userValidationRules: [UserValidationResults] = []
         var sequence = 1, same = 1, revSequence = 1
 
         let passwordArray = Array(password)
-        for i in 0 ..< passwordArray.count - 1 {
-            let current = passwordArray[i]
-            let after = passwordArray[i + 1]
 
-            if after == current {
-                same += 1
-                sequence = 1
-                revSequence = 1
-            } else if areBothCharsFromTheSameSet(current, after) {
-                if after == current.next() {
-                    sequence += 1
-                    same = 1
-                    revSequence = 1
-                } else if after == current.previous() {
-                    revSequence += 1
-                    same = 1
+        if !passwordArray.isEmpty {
+            for i in 0 ..< passwordArray.count - 1 {
+                let current = passwordArray[i]
+                let after = passwordArray[i + 1]
+
+                if after == current {
+                    same += 1
                     sequence = 1
+                    revSequence = 1
+                } else if areBothCharsFromTheSameSet(current, after) {
+                    if after == current.next() {
+                        sequence += 1
+                        same = 1
+                        revSequence = 1
+                    } else if after == current.previous() {
+                        revSequence += 1
+                        same = 1
+                        sequence = 1
+                    } else {
+                        sequence = 1
+                        revSequence = 1
+                        same = 1
+                    }
                 } else {
                     sequence = 1
                     revSequence = 1
                     same = 1
                 }
-            } else {
-                sequence = 1
-                revSequence = 1
-                same = 1
+
+                let sequentialLimit = Self.passwordSequentialCharacterLimit
+                if sequence > sequentialLimit || revSequence > sequentialLimit {
+                    userValidationRules.append(.passwordExceedsSequentialCharactersLimit)
+                }
+                let sameLimit = Self.passwordSameCharacterLimit
+                if same > sameLimit {
+                    userValidationRules.append(.passwordExceedsSameCharactersLimit)
+                }
             }
 
-            let sequentialLimit = Self.passwordSequentialCharacterLimit
-            if sequence > sequentialLimit || revSequence > sequentialLimit {
-                return [.passwordExceedsSequentialCharactersLimit(limit: sequentialLimit)]
-            }
-            let sameLimit = Self.passwordSameCharacterLimit
-            if same > sameLimit {
-                return [.passwordExceedsSameCharactersLimit(limit: sameLimit)]
-            }
         }
-
-        return []
+        return userValidationRules
     }
 
 

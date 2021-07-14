@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol UserInfoSubViewViewInput: class {
+protocol UserInfoSubViewViewInput: AnyObject {
 
     func setupInitialState()
     

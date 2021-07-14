@@ -20,7 +20,7 @@ final class AppConfigurator {
     static let tokenStorage: TokenStorage = factory.resolve()
     static let analyticsService: AnalyticsService = factory.resolve()
 
-    static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+    static func applicationStarted(with launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
@@ -126,7 +126,7 @@ final class AppConfigurator {
         static let AppVersionKey = "version_preference"
     }
     
-    private static func startUpdateLocation(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+    private static func startUpdateLocation(with launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         if let isLocationUpdate = launchOptions?[.location] as? NSNumber, isLocationUpdate.boolValue {
             LocationManager.shared.startUpdateLocation()
         }

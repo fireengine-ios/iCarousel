@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol SettingsViewInput: class {
+protocol SettingsViewInput: AnyObject {
     func prepareCellsData(isPermissionShown: Bool, isInvitationShown: Bool, isChatbotShown: Bool)
     func showProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool)
     func updatePhoto(image: UIImage)

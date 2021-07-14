@@ -182,7 +182,7 @@ final class ShareViewController: UIViewController, ShareController {
     }
     
     private func updateCurrentUploadInCollectionView(with sharedItem: SharedItemSource) {
-        guard let index = sharedItems.index(of: sharedItem) else {
+        guard let index = sharedItems.firstIndex(of: sharedItem) else {
             return
         }
         

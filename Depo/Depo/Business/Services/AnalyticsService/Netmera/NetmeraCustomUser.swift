@@ -33,6 +33,7 @@ final class NetmeraCustomUser: NetmeraUser {
     @objc var isAddress: Int = 0
     @objc var isBirthDay: Int = 0
     @objc var galleryAccessPermission: String = ""
+    @objc var hasSecurityQuestionInfo: Bool = false
     
     
     convenience init(deviceStorage: Int, photopickLeftAnalysis: NetmeraEventValues.PhotopickUserAnalysisLeft,
@@ -43,7 +44,7 @@ final class NetmeraCustomUser: NetmeraUser {
                      packages: [String], autoLogin: NetmeraEventValues.OnOffSettings,
                      turkcellPassword: NetmeraEventValues.OnOffSettings, buildNumber: String, countryCode: String, regionCode: String,
                      isUserName: Int, isUserSurname: Int, isEmail: Int, isPhoneNumber: Int, isAddress: Int,
-                     isBirthDay: Int, galleryAccessPermission: String) {
+                     isBirthDay: Int, galleryAccessPermission: String, hasSecurityQuestionInfo: Bool = false) {
         self.init()
         self.deviceStorage = deviceStorage
         self.photopickLeftAnalysis = photopickLeftAnalysis.text
@@ -68,6 +69,7 @@ final class NetmeraCustomUser: NetmeraUser {
         self.isAddress = isAddress
         self.isBirthDay = isBirthDay
         self.galleryAccessPermission = galleryAccessPermission
+        self.hasSecurityQuestionInfo = hasSecurityQuestionInfo
     }
     
     convenience init(deviceStorage: Int, photopickLeftAnalysis: String,
@@ -81,7 +83,8 @@ final class NetmeraCustomUser: NetmeraUser {
                      isUserName: Int, isUserSurname: Int,
                      isEmail: Int, isPhoneNumber: Int,
                      isAddress: Int, isBirthDay: Int,
-                     galleryAccessPermission: String) {
+                     galleryAccessPermission: String,
+                     hasSecurityQuestionInfo: Bool = false) {
         self.init()
         self.deviceStorage = deviceStorage
         self.photopickLeftAnalysis = photopickLeftAnalysis
@@ -106,6 +109,7 @@ final class NetmeraCustomUser: NetmeraUser {
         self.isAddress = isAddress
         self.isBirthDay = isBirthDay
         self.galleryAccessPermission = galleryAccessPermission
+        self.hasSecurityQuestionInfo = hasSecurityQuestionInfo
     }
 
     override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -132,7 +136,8 @@ final class NetmeraCustomUser: NetmeraUser {
             "pee" : #keyPath(isPhoneNumber),
             "pcf" : #keyPath(isAddress),
             "pcg" : #keyPath(isBirthDay),
-            "bd"  : #keyPath(galleryAccessPermission)
+            "bd"  : #keyPath(galleryAccessPermission),
+            "ql"  : #keyPath(hasSecurityQuestionInfo)
         ]
     }
 }

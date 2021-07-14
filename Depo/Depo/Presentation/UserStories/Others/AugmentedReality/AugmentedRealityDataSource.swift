@@ -9,7 +9,7 @@
 import QuickLook
 
 
-protocol AugmentedRealityDataSourceDelegate: class {
+protocol AugmentedRealityDataSourceDelegate: AnyObject {
     func didUpdateARItem()
     func didFailToUpdateARItem(with errorMessage: String?)
 }

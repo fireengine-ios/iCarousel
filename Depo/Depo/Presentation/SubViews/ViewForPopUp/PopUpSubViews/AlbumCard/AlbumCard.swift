@@ -137,13 +137,13 @@ final class AlbumCard: BaseCardView {
     
     private func setupAlbumDescriptionWith(albumName: String, photosCount: Int) {
         let countString = "- \(photosCount) " + TextConstants.photos
-        let countAttributes = [NSAttributedStringKey.foregroundColor: ColorConstants.darkBorder,
-                               NSAttributedStringKey.font: UIFont.TurkcellSaturaRegFont(size: 14)]
+        let countAttributes = [NSAttributedString.Key.foregroundColor: ColorConstants.darkBorder,
+                               NSAttributedString.Key.font: UIFont.TurkcellSaturaRegFont(size: 14)]
         let attributedCount = NSAttributedString(string: countString, attributes: countAttributes)
         
         let fullName = "\"\(albumName)\""
-        let nameAttributes = [NSAttributedStringKey.foregroundColor: ColorConstants.textGrayColor,
-                              NSAttributedStringKey.font: UIFont.TurkcellSaturaDemFont(size: 14)]
+        let nameAttributes = [NSAttributedString.Key.foregroundColor: ColorConstants.textGrayColor,
+                              NSAttributedString.Key.font: UIFont.TurkcellSaturaDemFont(size: 14)]
         
         let attributedName = NSMutableAttributedString(string: fullName, attributes: nameAttributes)
         attributedName.append(attributedCount)

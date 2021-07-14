@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SpotifyStatusViewDelegate: class {
+protocol SpotifyStatusViewDelegate: AnyObject {
     
     func onViewTap()
     

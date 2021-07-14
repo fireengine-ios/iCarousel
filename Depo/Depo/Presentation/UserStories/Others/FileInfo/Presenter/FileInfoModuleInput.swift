@@ -6,5 +6,5 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol FileInfoModuleInput: class {
+protocol FileInfoModuleInput: AnyObject {
 }

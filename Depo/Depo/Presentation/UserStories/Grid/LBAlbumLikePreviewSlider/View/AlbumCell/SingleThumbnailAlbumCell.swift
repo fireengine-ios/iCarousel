@@ -84,7 +84,7 @@ final class SingleThumbnailAlbumCell: SimpleSliderCell {
     
     private func setupAccessibility() {
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitNone
+        accessibilityTraits = .none
     }
 }
 

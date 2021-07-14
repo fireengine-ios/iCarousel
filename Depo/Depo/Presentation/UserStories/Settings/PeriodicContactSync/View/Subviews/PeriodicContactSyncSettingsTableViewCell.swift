@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PeriodicContactSyncSettingsTableViewCellDelegate: class {
+protocol PeriodicContactSyncSettingsTableViewCellDelegate: AnyObject {
     func didChangeTime(setting: PeriodicContactsSyncSetting)
     func onValueChanged(cell: PeriodicContactSyncSettingsTableViewCell)
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SelectNameModuleOutput: class {
+protocol SelectNameModuleOutput: AnyObject {
     
     func didCreateAlbum(item: AlbumItem)
     

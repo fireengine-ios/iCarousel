@@ -139,7 +139,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         let image = UIImage(named: "Path")
         let title = TextConstants.accountStatusTitle
         
-        let titleFullAttributes: [NSAttributedStringKey : Any] = [
+        let titleFullAttributes: [NSAttributedString.Key : Any] = [
             .font : UIFont.TurkcellSaturaFont(size: 18),
             .foregroundColor : UIColor.black,
             .kern : 0
@@ -151,7 +151,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         messageParagraphStyle.paragraphSpacing = 8
         messageParagraphStyle.alignment = .center
         
-        let messageFullAttributes: [NSAttributedStringKey : Any] = [
+        let messageFullAttributes: [NSAttributedString.Key : Any] = [
             .font : UIFont.TurkcellSaturaMedFont(size: 16),
             .foregroundColor : ColorConstants.blueGrey,
             .paragraphStyle : messageParagraphStyle,

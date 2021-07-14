@@ -116,13 +116,8 @@ final class APILogger {
                         self.log(string: "The network connection was lost")
                     }
                     
-                    /*if let data = data {
-                        let json = JSON(data: data)
-                        let string = try? self.filteredRawString(from: json) ?? ""
-                        print("Response Console Logs = \(string ?? "")")
-                    }*/
                 } else if let data = data {
-                    let json = JSON(data: data)
+                    let json = JSON(data)
                     let string = try? self.filteredRawString(from: json) ?? ""
                     self.log(body: string ?? "")
                 } else if let error = task.error {
@@ -142,7 +137,7 @@ final class APILogger {
     
     private func canLogRequest(_ url: URL, httpMethod: String) -> Bool {
         // ReachabilityService.checkAPI
-        if url == RouteRequests.baseUrl {
+        if url == RouteRequests.healthCheck {
             return false
         }
         
@@ -236,7 +231,7 @@ final class APILogger {
 
                     let nestedValue = JSON(unwrappedValue)
                     guard let nestedString = try filteredRawString(from: nestedValue, maxObjectDepth: maxObjectDepth - 1) else {
-                        throw NSError(domain: ErrorDomain, code: ErrorInvalidJSON, userInfo: [NSLocalizedDescriptionKey: "Could not serialize nested JSON"])
+                        throw SwiftyJSONError.invalidJSON
                     }
                     if nestedValue.type == .string {
                         let isContainsExcludedValue = excludedValues.first(where: { nestedString.lowercased().contains($0) }) != nil
@@ -265,7 +260,7 @@ final class APILogger {
 
                     let nestedValue = JSON(unwrappedValue)
                     guard let nestedString = try filteredRawString(from: nestedValue, maxObjectDepth: maxObjectDepth - 1) else {
-                        throw NSError(domain: ErrorDomain, code: ErrorInvalidJSON, userInfo: [NSLocalizedDescriptionKey: "Could not serialize nested JSON"])
+                        throw SwiftyJSONError.invalidJSON
                     }
                     if nestedValue.type == .string {
                         return "\"\(nestedString.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\""))\""

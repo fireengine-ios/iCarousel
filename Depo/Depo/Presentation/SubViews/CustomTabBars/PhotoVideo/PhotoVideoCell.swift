@@ -101,7 +101,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         backgroundColor = ColorConstants.fileGreedCellColor
         
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitImage
+        accessibilityTraits = .image
     }
 
     deinit {

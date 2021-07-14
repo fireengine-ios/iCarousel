@@ -10,7 +10,7 @@ import UIKit
 import Contacts
 
 
-protocol ContactsBackupActionProviderProtocol: class {
+protocol ContactsBackupActionProviderProtocol: AnyObject {
     func backUp(isConfirmed: Bool)
 }
 
@@ -70,7 +70,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
             needToShowTabBar = true
         }
         
-        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+        NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateBackupStatus()
         }
     }

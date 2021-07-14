@@ -75,7 +75,7 @@ final class SharedGroupCoreDataStack {
 extension SharedGroupCoreDataStack {
     func unsynced(from assetLocalIdentifier: [String], completion: @escaping (Set<String>) -> ()) {
         let predicate = NSPredicate(format: "isValidForSync == false")
-        executeRequest(predicate: predicate, context: mainContext) { [weak self] invalidItems in
+        executeRequest(predicate: predicate, context: mainContext) { invalidItems in
             let invalidIdentifiers = invalidItems.compactMap { $0.localIdentifier }
             
             #if MAIN_APP

@@ -36,7 +36,7 @@ final class ActivityIndicatorManager {
     }
 }
 
-protocol ActivityIndicatorManagerDelegate: class {
+protocol ActivityIndicatorManagerDelegate: AnyObject {
     func showIndicator()
     func hideIndicator()
 }

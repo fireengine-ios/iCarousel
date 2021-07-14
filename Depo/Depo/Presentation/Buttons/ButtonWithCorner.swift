@@ -26,7 +26,7 @@ class ButtonWithCorner: InsetsButton {
         
         layer.cornerRadius = 3.0
         layer.masksToBounds = true
-        setTitleColor(getColorForText(), for: UIControlState.normal)
+        setTitleColor(getColorForText(), for: .normal)
         titleLabel?.font = ApplicationPalette.roundedCornersButtonFont
         
         let inset: CGFloat = 5

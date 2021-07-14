@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol LBAlbumLikePreviewSliderViewInput: class {
+protocol LBAlbumLikePreviewSliderViewInput: AnyObject {
 
     func setupInitialState()
 

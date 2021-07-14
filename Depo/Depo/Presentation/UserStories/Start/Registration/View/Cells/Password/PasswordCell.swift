@@ -86,7 +86,7 @@ final class PasswordCell: ProtoInputTextCell {
             }
         }
         
-        textInput.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedStringKey.foregroundColor: ColorConstants.yellowColor])
+        textInput.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: ColorConstants.yellowColor])
     }
     
     override func changeInfoButtonTo(hidden: Bool) {

@@ -1,7 +1,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol InstaPickServiceDelegate: class {
+protocol InstaPickServiceDelegate: AnyObject {
     func didRemoveAnalysis()
     func didFinishAnalysis(_ analyses: [InstapickAnalyze])
 }
@@ -12,7 +12,7 @@ struct AnalyzeResult {
 }
 
 /// https://wiki.life.com.by/x/IjAWBQ
-protocol InstapickService: class {
+protocol InstapickService: AnyObject {
     var delegates: MulticastDelegate<InstaPickServiceDelegate> { get }
     
     func getThumbnails(handler: @escaping (ResponseResult<[URL]>) -> Void)
@@ -39,7 +39,7 @@ final class InstapickServiceImpl {
     }
     
     private func handleBackendErrorIfCan(data: Data?) -> Error? {
-        guard let data = data, let status = JSON(data: data)["status"].string else {
+        guard let data = data, let status = JSON(data)["status"].string else {
             return nil
         }
         
@@ -71,7 +71,7 @@ extension InstapickServiceImpl: InstapickService {
             .responseData { [weak self] response in
                 switch response.result {
                 case .success(let data):
-                    guard let jsonArray = JSON(data: data).array else {
+                    guard let jsonArray = JSON(data).array else {
                         let error = CustomErrors.serverError("\(RouteRequests.Instapick.thumbnails) not array in response")
                         assertionFailure(error.localizedDescription)
                         handler(.failed(error))
@@ -100,7 +100,7 @@ extension InstapickServiceImpl: InstapickService {
             .responseData { [weak self] response in
                 switch response.result {
                 case .success(let data):
-                    let json = JSON(data: data)[Keys.serverValue]
+                    let json = JSON(data)[Keys.serverValue]
                     guard let results = json.array?.compactMap({ InstapickAnalyze(json: $0) }) else {
                         let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyze) not [InstapickAnalyze] in response")
                         assertionFailure(error.localizedDescription)
@@ -144,7 +144,7 @@ extension InstapickServiceImpl: InstapickService {
             .responseData { [weak self] response in
                 switch response.result {
                 case .success(let data):
-                    let json = JSON(data: data)[Keys.serverValue]
+                    let json = JSON(data)[Keys.serverValue]
                 
                     guard let results = InstapickAnalyzesCount(json: json) else {
                         let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyzesCount) not AnalysisCount in response")
@@ -172,7 +172,7 @@ extension InstapickServiceImpl: InstapickService {
                 
                 switch response.result {
                 case .success(let data):
-                    let json = JSON(data: data)[Keys.serverValue]
+                    let json = JSON(data)[Keys.serverValue]
                 
                     guard let results = json.array?.compactMap({ InstapickAnalyze(json: $0) }) else {
                         let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyze) not [InstapickAnalyze] in response")
@@ -198,7 +198,7 @@ extension InstapickServiceImpl: InstapickService {
             .responseData { [weak self] response in
                 switch response.result {
                 case .success(let data):
-                    let json = JSON(data: data)[Keys.serverValue]
+                    let json = JSON(data)[Keys.serverValue]
                 
                     guard let results = json.array?.compactMap({ InstapickAnalyze(json: $0) }) else {
                         let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyzeHistory) not [InstapickAnalyze] in response")

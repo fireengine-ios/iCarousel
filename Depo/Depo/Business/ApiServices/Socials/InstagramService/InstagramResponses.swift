@@ -32,8 +32,8 @@ final class SocialStatusResponse: ObjectRequestResponse {
         twitter = json?[SocialStatusKeys.twitter].bool
         instagram = json?[SocialStatusKeys.instagram].bool
         instagramUsername = json?[SocialStatusKeys.instagramUsername].string
-        
-        if let statusJson = json?[SocialStatusKeys.spotifyStatus] {
+
+        if let statusJson: JSON = json?[SocialStatusKeys.spotifyStatus] {
             spotifyStatus = SpotifyStatus(json: statusJson)
         }
         //dropbox = json?[SocialStatusKeys.dropbox].bool

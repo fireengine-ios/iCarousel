@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol VisualMusicPlayerViewInput: class {
+protocol VisualMusicPlayerViewInput: AnyObject {
 
     /**
         @author AlexanderP

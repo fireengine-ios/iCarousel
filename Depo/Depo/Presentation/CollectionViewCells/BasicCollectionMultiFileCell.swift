@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BasicCollectionMultiFileCellActionDelegate: class {
+protocol BasicCollectionMultiFileCellActionDelegate: AnyObject {
     func morebuttonGotPressed(sender: Any, itemModel: Item?)
     func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?)
 }

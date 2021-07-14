@@ -9,8 +9,8 @@
 import UIKit
 
 enum DesignText {
-    case full(attributes: [NSAttributedStringKey : Any])
-    case partly(parts: [String : [NSAttributedStringKey : Any]])
+    case full(attributes: [NSAttributedString.Key : Any])
+    case partly(parts: [String : [NSAttributedString.Key : Any]])
 }
 
 final class CreateStoryPopUp: UIViewController, NibInit {

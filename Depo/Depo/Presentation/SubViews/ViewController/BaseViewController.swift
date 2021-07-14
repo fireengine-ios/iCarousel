@@ -20,11 +20,11 @@ class BaseViewController: ViewController {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showKeyBoard),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               name: UIResponder.keyboardWillShowNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(hideKeyboard),
-                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
     }
     
@@ -59,7 +59,7 @@ class BaseViewController: ViewController {
     
     @objc func showKeyBoard(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
     }
@@ -122,7 +122,7 @@ extension BaseViewController: UIViewControllerTransitioningDelegate {
 // MARK: - UINavigationControllerDelegate
 
 extension BaseViewController: UINavigationControllerDelegate  {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return pushPopAnimatorForPresentation(presenting: operation == .push)
     }
 }

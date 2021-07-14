@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ShareCardContentManagerDelegate: class {
+protocol ShareCardContentManagerDelegate: AnyObject {
     func shareOperationStarted()
     func shareOperationFinished()
 }

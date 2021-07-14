@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PrivateShareWithViewDelegate: class {
+protocol PrivateShareWithViewDelegate: AnyObject {
     func shareListDidEmpty()
     func onUserRoleTapped(contact: PrivateShareContact, sender: Any)
 }

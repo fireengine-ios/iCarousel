@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FileInfoInteractorOutput: class {
+protocol FileInfoInteractorOutput: AnyObject {
     func setObject(object: BaseDataSourceItem)
     func updated()
     func albumForUuidSuccessed(album: AlbumServiceResponse)

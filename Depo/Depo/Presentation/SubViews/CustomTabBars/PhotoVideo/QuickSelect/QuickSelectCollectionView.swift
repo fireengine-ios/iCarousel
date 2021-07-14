@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-protocol QuickSelectCollectionViewDelegate: class {
+protocol QuickSelectCollectionViewDelegate: AnyObject {
     func didLongPress(at indexPath: IndexPath?)
     func didEndLongPress(at indexPath: IndexPath?)
 }

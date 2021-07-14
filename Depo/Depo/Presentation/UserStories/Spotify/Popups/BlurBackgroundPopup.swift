@@ -80,7 +80,7 @@ class BlurBackgroundPopup: BaseViewController, NibInit {
     private func setupBlurView() {
         blurBackgroundView = UIVisualEffectView(effect: nil)
         view.addSubview(blurBackgroundView)
-        view.sendSubview(toBack: blurBackgroundView)
+        view.sendSubviewToBack(blurBackgroundView)
         blurBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         blurBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor).activate()
         blurBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor).activate()

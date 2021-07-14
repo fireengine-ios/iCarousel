@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SettingFooterViewDelegate: class {
+protocol SettingFooterViewDelegate: AnyObject {
     func didTappedLeaveFeedback()
 }
 

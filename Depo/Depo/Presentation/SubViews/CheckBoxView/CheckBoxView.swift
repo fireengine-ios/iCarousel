@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CheckBoxViewDelegate: class {
+protocol CheckBoxViewDelegate: AnyObject {
     func openAutoSyncSettings()
     func openViewTypeMenu(sender: UIButton)
 }

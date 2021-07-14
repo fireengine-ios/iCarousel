@@ -41,7 +41,7 @@ enum AdjustmentCategory: CaseIterable {
     }
 }
 
-protocol AdjustmentCategoriesViewDelegate: class {
+protocol AdjustmentCategoriesViewDelegate: AnyObject {
     func didSelectCategory(_ category:AdjustmentCategory)
 }
 

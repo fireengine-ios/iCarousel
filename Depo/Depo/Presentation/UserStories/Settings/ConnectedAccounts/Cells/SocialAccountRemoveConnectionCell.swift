@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SocialRemoveConnectionCell: class {
+protocol SocialRemoveConnectionCell: AnyObject {
     func setup(with section: Section?)
     func set(username: String?)
 }
@@ -27,7 +27,7 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     
     @IBOutlet private weak var removeConnectionButton: UIButton! {
         didSet {
-            let attributes: [NSAttributedStringKey : Any] = [
+            let attributes: [NSAttributedString.Key : Any] = [
                 .font               : UIFont.TurkcellSaturaBolFont(size: 16),
                 .foregroundColor    : UIColor.lrTealishTwo
             ]
@@ -65,7 +65,7 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     @IBAction func removeConnection(_ sender: Any) {
         let localizedTexts = warningTexts()
         
-        let attributedText = NSMutableAttributedString(string: localizedTexts.message, attributes: [NSAttributedStringKey.foregroundColor: UIColor.lightGray])
+        let attributedText = NSMutableAttributedString(string: localizedTexts.message, attributes: [.foregroundColor: UIColor.lightGray])
         if let connectedAsText = connectedAs.attributedText {
             attributedText.append(connectedAsText)
         }

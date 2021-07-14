@@ -18,7 +18,7 @@ struct ActionMenyItem {
     }
 }
 
-protocol ActionsMenuViewInput: class {
+protocol ActionsMenuViewInput: AnyObject {
 
     func showActions(actions: [ActionMenyItem])
 }

@@ -28,7 +28,7 @@ final class PrivacyPolicyServiceImp: BaseRequestService, PrivacyPolicyService {
                 switch response.result {
                 case .success(let data):
                     
-                    guard let response = PrivacyPolicyResponse(json: JSON(data: data)) else {
+                    guard let response = PrivacyPolicyResponse(json: JSON(data)) else {
                         assertionFailure()
                         return
                     }

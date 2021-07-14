@@ -44,17 +44,17 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         var actionTypes = barConfig.elementsConfig
           
         if !fileTypes.contains(.image) {
-            if let editIndex = actionTypes.index(of: .edit) {
+            if let editIndex = actionTypes.firstIndex(of: .edit) {
                 actionTypes.remove(at: editIndex)
             }
-            if let printIndex = actionTypes.index(of: .print) {
+            if let printIndex = actionTypes.firstIndex(of: .print) {
                 actionTypes.remove(at: printIndex)
             }
 //            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
 //                actionTypes.remove(at: infoIndex)
 //            }
             if fileTypes.contains(where: { $0.isDocumentPageItem || $0 == .audio }) {
-                if let downloadIndex = actionTypes.index(of: .download) {
+                if let downloadIndex = actionTypes.firstIndex(of: .download) {
                     actionTypes.remove(at: downloadIndex)
                     actionTypes.insert(.downloadDocument, at: downloadIndex)
                 }

@@ -30,7 +30,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
         nameLabel.text = item.name
         
         isAccessibilityElement = true
-        accessibilityTraits = UIAccessibilityTraitImage
+        accessibilityTraits = .image
         accessibilityLabel = item.name
     }
     

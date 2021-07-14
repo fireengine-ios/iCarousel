@@ -12,20 +12,12 @@ import Foundation
 struct SharedConstants {
     private init() {}
     
-    #if APPSTORE
-    static let groupIdentifier = "group.com.turkcell.akillidepo"
-    
-    #elseif ENTERPRISE
+    #if ENTERPRISE
     static let groupIdentifier = "group.com.turkcell.akillideponew.ent"
-    
-    #elseif DEBUG
-    static let groupIdentifier = "group.come.life.Lifebox"
-    
     #else
-    static let groupIdentifier = "group.come.life.Lifebox"
+    static let groupIdentifier = "group.com.turkcell.akillidepo"
     #endif
-    
-    
+
     static let wormholeDirectoryIdentifier = "wormhole"
     static let wormholeMessageIdentifier = "wormholeMessageIdentifier"
     static let wormholeCurrentImageIdentifier = "wormholeCurrentImageIdentifier"

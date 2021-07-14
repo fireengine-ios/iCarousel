@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SpotifySortingManagerDelegate: class {
+protocol SpotifySortingManagerDelegate: AnyObject {
     func sortingRuleChanged(rule: SortedRules)
 }
 

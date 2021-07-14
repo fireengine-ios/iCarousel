@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HiddenPhotosSortingManagerDelegate: class {
+protocol HiddenPhotosSortingManagerDelegate: AnyObject {
     func sortingRuleChanged(rule: SortedRules)
 }
 

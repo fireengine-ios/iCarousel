@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol BaseCollectionViewCellWithSwipeDelegate: class {
+protocol BaseCollectionViewCellWithSwipeDelegate: AnyObject {
     func onCellDeleted(cell: UICollectionViewCell)
 }
 
@@ -42,7 +42,7 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
     private func getXforTouch(_ touches: Set<UITouch>) -> CGFloat {
         let touch = touches.first
         let location = touch!.location(in: self)
-        superview?.bringSubview(toFront: self)
+        superview?.bringSubviewToFront(self)
         return location.x
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SearchModuleOutput: class {
+protocol SearchModuleOutput: AnyObject {
     func cancelSearch()
     func previewSearchResultsHide()
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol UploadFilesSelectionViewInput: class {
+protocol UploadFilesSelectionViewInput: AnyObject {
 
     /**
         @author Oleg

@@ -51,11 +51,11 @@ final class FeedbackViewController: ViewController {
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showKeyBoard),
-                                               name: NSNotification.Name.UIKeyboardWillShow,
+                                               name: UIResponder.keyboardWillShowNotification,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(hideKeyboard),
-                                               name: NSNotification.Name.UIKeyboardWillHide,
+                                               name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
         
         let tap = UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:)))
@@ -154,14 +154,14 @@ final class FeedbackViewController: ViewController {
     
     @objc func showKeyBoard(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame: NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         let y = alertView.frame.size.height + getMainYForView(view: alertView)
         
         if (view.frame.size.height - y) < keyboardHeight {
             let dy = keyboardHeight - (view.frame.size.height - y)
-            self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, dy + 10, 0)
+            self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: dy + 10, right: 0)
             let yText = alertView.frame.size.height + getMainYForView(view: alertView)
             let dyText = keyboardHeight - (view.frame.size.height - yText) + 10
             if (dyText > 0) {

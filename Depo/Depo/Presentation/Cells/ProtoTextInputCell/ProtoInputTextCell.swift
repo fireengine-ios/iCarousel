@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ProtoInputCellProtocol: class {
+protocol ProtoInputCellProtocol: AnyObject {
     
     func textFinishedEditing(withCell cell: ProtoInputTextCell)
     

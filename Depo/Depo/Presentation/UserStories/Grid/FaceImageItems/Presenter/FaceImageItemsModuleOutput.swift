@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol FaceImageItemsModuleOutput: class {
+protocol FaceImageItemsModuleOutput: AnyObject {
     func didChangeName(item: WrapData)
     func didReloadData()
     func delete(item: Item)

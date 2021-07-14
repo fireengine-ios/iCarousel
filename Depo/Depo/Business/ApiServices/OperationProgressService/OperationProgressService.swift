@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol OperationProgressServiceDelegate: class {
+protocol OperationProgressServiceDelegate: AnyObject {
     func didSend(ratio: Float, bytes: Int, for url: URL)
 }

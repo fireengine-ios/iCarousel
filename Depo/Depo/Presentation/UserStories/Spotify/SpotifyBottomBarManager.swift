@@ -8,7 +8,7 @@
 
 import Foundation
 
-private protocol SpotifyTabBarPresenterDelegate: class {
+private protocol SpotifyTabBarPresenterDelegate: AnyObject {
     func bottomBarSelectedItem(_ item: ElementTypes)
 }
 
@@ -28,7 +28,7 @@ private final class SpotifyBottomTabBarPresenter: BottomSelectionTabBarPresenter
     }
 }
 
-protocol SpotifyBottomBarManagerDelegate: class {
+protocol SpotifyBottomBarManagerDelegate: AnyObject {
     func onBottomBarManagerDelete()
 }
 

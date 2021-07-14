@@ -36,12 +36,12 @@ final class TextInsetsLabel: UILabel {
     }
     
     override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
-        let insetRect = UIEdgeInsetsInsetRect(bounds, textInsets)
+        let insetRect = bounds.inset(by: textInsets)
         let textRect = super.textRect(forBounds: insetRect, limitedToNumberOfLines: numberOfLines)
         let invertedInsets = UIEdgeInsets(top: -textInsets.top,
                                           left: -textInsets.left,
                                           bottom: -textInsets.bottom,
                                           right: -textInsets.right)
-        return UIEdgeInsetsInsetRect(textRect, invertedInsets)
+        return textRect.inset(by: invertedInsets)
     }
 }

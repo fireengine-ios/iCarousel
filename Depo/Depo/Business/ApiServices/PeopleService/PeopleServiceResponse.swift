@@ -68,7 +68,7 @@ final class PeopleServiceResponse: ObjectRequestResponse {
     var list: Array<PeopleItemResponse> = []
     
     override func mapping() {
-        if let result = json?.array?.flatMap({ PeopleItemResponse(withJSON: $0) }) {
+        if let result = json?.array?.compactMap({ PeopleItemResponse(withJSON: $0) }) {
             list = result
         }
     }
@@ -79,7 +79,7 @@ final class PeoplePageResponse: ObjectRequestResponse, Map {
     var list: [PeopleItemResponse] = []
     
     override func mapping() {
-        if let result = json?[PeopleJsonKey.personInfos].array?.flatMap({ PeopleItemResponse(withJSON: $0) }) {
+        if let result = json?[PeopleJsonKey.personInfos].array?.compactMap({ PeopleItemResponse(withJSON: $0) }) {
             list = result
         }
     }

@@ -154,8 +154,8 @@ extension FileProviderItem: NSCoding {
 /// : DataMapArray
 extension FileProviderItem {
     static func array(from data: Data) -> [FileProviderItem] {
-        let jsonArray = JSON(data: data)["fileList"]
-        return jsonArray.array?.flatMap { json in
+        let jsonArray = JSON(data)["fileList"]
+        return jsonArray.array?.compactMap { json in
             self.init(json: json)
         } ?? []
     }

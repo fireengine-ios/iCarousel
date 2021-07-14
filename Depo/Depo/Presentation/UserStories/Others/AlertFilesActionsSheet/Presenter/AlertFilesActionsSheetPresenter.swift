@@ -178,7 +178,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     if !filteredActionTypes.contains(.addToFavorites) {
                         filteredActionTypes.append(.addToFavorites)
                     }
-                } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
+                } else if let addToFavoritesIndex = filteredActionTypes.firstIndex(of: .addToFavorites) {
                     filteredActionTypes.remove(at: addToFavoritesIndex)
                 }
                 
@@ -192,7 +192,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     if !filteredActionTypes.contains(.removeFromFavorites) {
                         filteredActionTypes.append(.removeFromFavorites)
                     }
-                } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
+                } else if let removeFromFavorites = filteredActionTypes.firstIndex(of: .removeFromFavorites) {
                     filteredActionTypes.remove(at: removeFromFavorites)
                 }
                 
@@ -200,7 +200,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     filteredActionTypes.remove(.moveToTrash)
                 }
                 
-                if let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
+                if let index = filteredActionTypes.firstIndex(of: .deleteDeviceOriginal) {
                     MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
                         let localDuplicates = items
                         if localDuplicates.isEmpty {
@@ -211,7 +211,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     self?.semaphore.wait()
                 }
             } else {
-                if let printIndex = filteredActionTypes.index(of: .print) {
+                if let printIndex = filteredActionTypes.firstIndex(of: .print) {
                     filteredActionTypes.remove(at: printIndex)
                 }
             }

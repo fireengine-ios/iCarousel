@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TokenStorage: class {
+protocol TokenStorage: AnyObject {
     var savedAccessToken: String? { get }
     var accessToken: String? { get set }
     var refreshToken: String? { get set }

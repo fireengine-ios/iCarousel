@@ -9,7 +9,7 @@
 import Foundation
 
 
-protocol TermsOfUseInteractorOutput: class {
+protocol TermsOfUseInteractorOutput: AnyObject {
     func showLoaded(eulaHTML: String)
     func failLoadEula(errorString: String)
 }

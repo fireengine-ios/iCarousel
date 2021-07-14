@@ -88,13 +88,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var watchdog: Watchdog?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let coreDataStack: CoreDataStack = factory.resolve()
         
         startCoreDataSafeServices(with: application, options: launchOptions)
         
         APILogger.shared.startLogging()
-        
+
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         
@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    private func startCoreDataSafeServices(with application: UIApplication, options: [UIApplicationLaunchOptionsKey: Any]?) {
+    private func startCoreDataSafeServices(with application: UIApplication, options: [UIApplication.LaunchOptionsKey: Any]?) {
         DispatchQueue.setupMainQueue()
     
         #if DEBUG
@@ -158,7 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: options)
     }
     
-    private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+    private func setupPushNotifications(with launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         // required setup order
         // 1. subscribe to notification delegate
         // 2. Netmera SDK setup
@@ -174,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /// iOS 9+
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         Adjust.appWillOpen(url)
         
@@ -396,11 +396,17 @@ extension AppDelegate {
             analyticsService.logScreen(screen: .tbmatikPushNotification)
             analyticsService.trackDimentionsEveryClickGA(screen: .tbmatikPushNotification)
         }
+
+        // Handling Silent Push notifications
+        if let pushType = Netmera.recentPushObject()?.customDictionary[PushNotificationParameter.pushType.rawValue] as? String,
+            pushType == PushNotificationAction.silent.rawValue {
+            SilentPushApiService().uploadLog()
+        }
     }
     
     //MARK: Adjust
     
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
             if PushNotificationService.shared.assignUniversalLink(url: url) {
                 PushNotificationService.shared.openActionScreen()

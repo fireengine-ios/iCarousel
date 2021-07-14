@@ -79,7 +79,7 @@ class CardsManager: NSObject {
     
     func addViewForNotification(view: CardsManagerViewProtocol) {
         
-        if foloversArray.index(where: { $0.isEqual(object: view) }) == nil {
+        if foloversArray.firstIndex(where: { $0.isEqual(object: view) }) == nil {
             foloversArray.append(view)
         }
         
@@ -91,7 +91,7 @@ class CardsManager: NSObject {
     }
     
     func removeViewForNotification(view: CardsManagerViewProtocol) {
-        if let index = foloversArray.index(where: { $0.isEqual(object: view) }) {
+        if let index = foloversArray.firstIndex(where: { $0.isEqual(object: view) }) {
             foloversArray.remove(at: index)
         }
         

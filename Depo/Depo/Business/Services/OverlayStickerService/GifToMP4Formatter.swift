@@ -74,7 +74,7 @@ final class GIF2MP4 {
         
         pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: videoWriterInput, sourcePixelBufferAttributes: sourcePixelBufferAttributesDictionary)
         videoWriter.startWriting()
-        videoWriter.startSession(atSourceTime: kCMTimeZero)
+        videoWriter.startSession(atSourceTime: .zero)
     }
     
     func convertAndExport(images: [UIImage], fileName: String , completion: @escaping (URL?) -> Void ) {

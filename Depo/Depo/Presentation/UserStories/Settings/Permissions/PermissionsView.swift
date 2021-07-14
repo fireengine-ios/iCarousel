@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol PermissionViewDelegate: class {
+protocol PermissionViewDelegate: AnyObject {
     func permissionsView(_ view: PermissionsView, didChangeValue isOn: Bool)
 }
 
-protocol PermissionViewTextViewDelegate: class {
+protocol PermissionViewTextViewDelegate: AnyObject {
     func tappedOnURL(url: URL) -> Bool
 }
 
-protocol PermissionsViewProtocol: class {
+protocol PermissionsViewProtocol: AnyObject {
     var delegate: PermissionViewDelegate? { get set }
     var textviewDelegate: PermissionViewTextViewDelegate? { get set }
     var type: PermissionType? { get set }

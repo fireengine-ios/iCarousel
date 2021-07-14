@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LeavePremiumInteractorOutput: class {
+protocol LeavePremiumInteractorOutput: AnyObject {
     
     func didErrorMessage(with text: String)
 }

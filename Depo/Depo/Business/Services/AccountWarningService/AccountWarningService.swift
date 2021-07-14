@@ -6,7 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-protocol AccountWarningServiceDelegate: class {
+protocol AccountWarningServiceDelegate: AnyObject {
     
     func successedSilentLogin()
     

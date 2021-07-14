@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LeavePremiumViewDelegate: class {
+protocol LeavePremiumViewDelegate: AnyObject {
     func onLeavePremiumTap()
 }
 

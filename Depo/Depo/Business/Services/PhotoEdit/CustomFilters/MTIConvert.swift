@@ -41,7 +41,7 @@ final class MTIConvert {
         return try? mpContext.makeCGImage(from: input)
     }
     
-    func uiImage(from mtiImage: MTIImage?, scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
+    func uiImage(from mtiImage: MTIImage?, scale: CGFloat, orientation: UIImage.Orientation) -> UIImage? {
         guard let cgImage = cgImage(from: mtiImage) else {
             return nil
         }

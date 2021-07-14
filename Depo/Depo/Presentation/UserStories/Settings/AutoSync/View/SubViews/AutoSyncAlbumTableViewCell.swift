@@ -79,13 +79,13 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
     private func updateAccessibilityTraits() {
         guard let model = model else { return }
 
-        var traits = UIAccessibilityTraitButton
+        var traits: UIAccessibilityTraits = .button
         if !model.isEnabled {
-            traits |= UIAccessibilityTraitNotEnabled
+            traits.insert(.notEnabled)
         }
         
         if model.album.isSelected || model.isAllChecked {
-            traits |= UIAccessibilityTraitSelected
+            traits.insert(.selected)
         }
 
         accessibilityTraits = traits

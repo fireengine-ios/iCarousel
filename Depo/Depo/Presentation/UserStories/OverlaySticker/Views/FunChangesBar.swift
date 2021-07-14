@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FunChangesBarDelegate: class {
+protocol FunChangesBarDelegate: AnyObject {
     func cancelChanges()
     func applyChanges()
 }

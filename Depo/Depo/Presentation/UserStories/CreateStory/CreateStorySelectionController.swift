@@ -91,11 +91,11 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
                                                        delegate: self,
                                                        dataSource: dataSource)
         selectionDelegate = childController
-        addChildViewController(childController)
+        addChild(childController)
         containerView?.containerView.addSubview(childController.view)
         childController.view.frame = containerView?.containerView.bounds ?? .zero
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        childController.didMove(toParentViewController: self)
+        childController.didMove(toParent: self)
     }
     
     private func updateScreen() {

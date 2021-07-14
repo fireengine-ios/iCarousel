@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PasscodeSettingsInteractorInput: class {
+protocol PasscodeSettingsInteractorInput: AnyObject {
     func clearPasscode()
     func trackScreen()
     var isPasscodeEmpty: Bool { get }
@@ -19,6 +19,6 @@ protocol PasscodeSettingsInteractorInput: class {
     var isTurkcellUserFlag: Bool { get }
 }
 
-protocol PasscodeSettingsInteractorOutput: class {
+protocol PasscodeSettingsInteractorOutput: AnyObject {
 
 }

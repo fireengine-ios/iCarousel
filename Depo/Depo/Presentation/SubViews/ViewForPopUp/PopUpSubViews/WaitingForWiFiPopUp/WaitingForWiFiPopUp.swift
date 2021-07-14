@@ -25,7 +25,7 @@ final class WaitingForWiFiPopUp: BaseCardView {
         
         settingsButton?.setTitle(TextConstants.waitingForWiFiPopUpSettingsButton, for: .normal)
         settingsButton?.setImage(UIImage(named: "CogForButtons"), for: .normal)
-        settingsButton?.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing)
+        settingsButton?.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
     }
     
     @IBAction private func onSettingsButton() {

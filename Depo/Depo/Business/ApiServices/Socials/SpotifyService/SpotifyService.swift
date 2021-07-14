@@ -9,7 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-protocol SpotifyService: class {    
+protocol SpotifyService: AnyObject {    
     func socialStatus(success: SuccessResponse?, fail: FailResponse?)
     func connect(code: String, handler: @escaping ResponseVoid)
     func disconnect(handler: @escaping ResponseVoid)
@@ -126,7 +126,7 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    let json = JSON(data: data)[Keys.serverValue]
+                    let json = JSON(data)[Keys.serverValue]
                     guard let status = SpotifyStatus(json: json) else {
                         let error = CustomErrors.serverError("\(RouteRequests.Spotify.status) not Spotify Status in response")
                         assertionFailure(error.localizedDescription)
@@ -226,7 +226,7 @@ final class SpotifyServiceImpl: BaseRequestService, SpotifyService {
     private func parse<T: SpotifyObject>(_ response: DataResponse<Data>, path: URL, handler: @escaping ResponseHandler<[T]>) {
         switch response.result {
         case .success(let data):
-            let json = JSON(data: data)[Keys.serverValue]
+            let json = JSON(data)[Keys.serverValue]
             guard let playlists = json.array?.compactMap({ T(json: $0) }) else {
                 let error = CustomErrors.serverError("\(RouteRequests.Spotify.playlists) not [\(String(describing: T.self))] in response")
                 assertionFailure(error.localizedDescription)

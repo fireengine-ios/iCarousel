@@ -1,6 +1,6 @@
 import UIKit
 
-protocol CaptchaViewErrorDelegate: class {
+protocol CaptchaViewErrorDelegate: AnyObject {
     
     func showCaptchaError(error: Error)
 }

@@ -96,6 +96,27 @@ extension RegistrationPresenter: RegistrationViewOutput {
 
 // MARK: - RegistrationInteractorOutput
 extension RegistrationPresenter: RegistrationInteractorOutput {
+    func checkPasswordRuleValid(for result: [UserValidationResults]) {
+        if !result.contains(where: [.passwordBelowMinimumLength,
+                                   .passwordExceedsMaximumLength,
+                                   .passwordIsEmpty].contains) {
+            view.validatePasswordRules(forType: .characterLimitRule)
+        }
+
+        if !result.contains(where: [.passwordMissingUppercase,
+                                   .passwordMissingLowercase,
+                                   .passwordMissingNumbers,
+                                   .passwordIsEmpty].contains) {
+            view.validatePasswordRules(forType: .capitalizationAndNumberRule)
+        }
+
+        if !result.contains(where: [.passwordExceedsSequentialCharactersLimit,
+                                   .passwordExceedsSameCharactersLimit,
+                                   .passwordIsEmpty].contains) {
+            view.validatePasswordRules(forType: .sequentialRule)
+        }
+    }
+
     func userValid(_ userInfo: RegistrationUserInfoModel) {
         guard confirmAgreements else {
             view?.showErrorTitle(withText: TextConstants.termsAndUseCheckboxErrorText)

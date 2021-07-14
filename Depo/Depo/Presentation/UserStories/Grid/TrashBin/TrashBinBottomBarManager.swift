@@ -8,7 +8,7 @@
 
 import Foundation
 
-private protocol TrashBinTabBarPresenterDelegate: class {
+private protocol TrashBinTabBarPresenterDelegate: AnyObject {
     func bottomBarSelectedItem(_ item: ElementTypes)
 }
 
@@ -28,7 +28,7 @@ private final class TrashBinBottomTabBarPresenter: BottomSelectionTabBarPresente
     }
 }
 
-protocol TrashBinBottomBarManagerDelegate: class {
+protocol TrashBinBottomBarManagerDelegate: AnyObject {
     func onBottomBarDelete()
     func onBottomBarRestore()
 }

@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol SmartAlbumsManagerDelegate: class {
+protocol SmartAlbumsManagerDelegate: AnyObject {
     func loadItemsComplete(items: [SliderItem])
     func loadItemsFailed()
 }
 
-protocol SmartAlbumsManager: class {
+protocol SmartAlbumsManager: AnyObject {
     var currentItems: [SliderItem] { get set }
     var delegates: MulticastDelegate<SmartAlbumsManagerDelegate> { get }
     func requestAllItems()

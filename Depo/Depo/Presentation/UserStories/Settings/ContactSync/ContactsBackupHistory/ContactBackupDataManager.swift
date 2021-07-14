@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol ContactBackupHistoryDataManagerProtocol: class {
+protocol ContactBackupHistoryDataManagerProtocol: AnyObject {
     func setup(with items: [ContactBackupItem])
 }
 
-protocol ContactBackupHistoryDataManagerDelegate: class {
+protocol ContactBackupHistoryDataManagerDelegate: AnyObject {
     func showDetailsForBackupItem(item: ContactBackupItem)
 }
 
@@ -102,7 +102,7 @@ extension ContactBackupHistoryDataManager: ContactsBackupCellDelegate {
             return
         }
 
-        if let backup = selectedBackup, let index = contactBackups.index(of: backup),
+        if let backup = selectedBackup, let index = contactBackups.firstIndex(of: backup),
            var oldSelectedCell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? ContactsBackupCellProtocol {
             oldSelectedCell.isCellSelected = false
         }

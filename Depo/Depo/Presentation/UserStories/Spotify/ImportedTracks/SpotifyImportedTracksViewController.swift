@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SpotifyImportedTracksViewControllerDelegate: class {
+protocol SpotifyImportedTracksViewControllerDelegate: AnyObject {
     func didDeleteTracks(playlist: SpotifyPlaylist)
 }
 

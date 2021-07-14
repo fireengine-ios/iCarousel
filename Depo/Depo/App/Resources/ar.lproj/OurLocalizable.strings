@@ -1873,3 +1873,8 @@
 "print_photo_home_card_button_title" = "Go to photos";
 "accessibility_play" = "تشغيل";
 "accessibility_pause" = "إيقاف مؤقت";
+
+/*Password Rules*/
+"signup_password_rule_character_limit" = "";
+"signup_password_rule_upper_lower_numeric" = "";
+"signup_password_rule_sequential_characters" = "";

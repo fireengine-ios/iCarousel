@@ -23,7 +23,7 @@ class CounrtiesGSMCodeCompositor {
         let isoCodes = NSLocale.isoCountryCodes
         let locale = NSLocale(localeIdentifier: Device.supportedLocale)
         
-        resultArray = isoCodes.flatMap {
+        resultArray = isoCodes.compactMap {
             
             let countryCode: String = $0
             let contryName = locale.displayName(forKey: NSLocale.Key.countryCode, value: countryCode)
@@ -48,7 +48,7 @@ class CounrtiesGSMCodeCompositor {
             ///put 'life' countries at the top of the result array
             var gsmModels = [GSMCodeModel]()
             for countryCode in lifeCountryCodes {
-                if let index = resultArray.index(where: { $0.countryCode == countryCode }) {
+                if let index = resultArray.firstIndex(where: { $0.countryCode == countryCode }) {
                     let model = resultArray.remove(at: index)
                     gsmModels.append(model)
                 }

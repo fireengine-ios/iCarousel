@@ -193,7 +193,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         let view = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 44))
         view.backgroundColor = .white
         searchBar.addSubview(view)
-        searchBar.sendSubview(toBack: view)
+        searchBar.sendSubviewToBack(view)
         
         let firstTextField = searchBar.firstSubview(of: UITextField.self)
         
@@ -492,12 +492,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let category = SearchCategory(rawValue: indexPath.section) else {
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         }
         
         switch category {
         case .suggestion, .recent:
-            return UITableViewAutomaticDimension
+            return UITableView.automaticDimension
         case .people, .things:
             if !isEmptyItemsCategory(category) {
                 return RecentlySearchedFaceImageTableViewCell.height()

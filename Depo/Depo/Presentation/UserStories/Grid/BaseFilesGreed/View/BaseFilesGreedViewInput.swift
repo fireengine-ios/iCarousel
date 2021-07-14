@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol BaseFilesGreedViewInput: class {
+protocol BaseFilesGreedViewInput: AnyObject {
 
     var status: ItemStatus { get set }
     

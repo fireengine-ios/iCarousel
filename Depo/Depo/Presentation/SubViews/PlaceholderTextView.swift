@@ -77,7 +77,7 @@ open class PlaceholderTextView: UITextView {
     }
     
     private func commonInit() {
-        let notificationName = NSNotification.Name.UITextViewTextDidChange
+        let notificationName = UITextView.textDidChangeNotification
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(textDidChange),

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol HiddenPhotosDataSourceDelegate: class {
+protocol HiddenPhotosDataSourceDelegate: AnyObject {
     func needLoadNextPhotoPage()
     func needLoadNextAlbumPage()
     func didSelectPhoto(item: Item)
@@ -87,7 +87,7 @@ final class HiddenPhotosDataSource: NSObject {
         collectionView.register(nibCell: CollectionViewCellForPhoto.self)
         collectionView.register(nibCell: CollectionViewCellForVideo.self)
         collectionView.register(nibCell: AlbumsSliderCell.self)
-        collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
+        collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionView.elementKindSectionHeader)
         collectionView.allowsMultipleSelection = true
         collectionView.alwaysBounceVertical = true
         
@@ -482,7 +482,7 @@ extension HiddenPhotosDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
         /// https://stackoverflow.com/a/46930410/5893286
-        if elementKind == UICollectionElementKindSectionHeader {
+        if elementKind == UICollectionView.elementKindSectionHeader {
             view.layer.zPosition = 0
         }
         guard indexPath.section > 0, let view = view as? CollectionViewSimpleHeaderWithText else {

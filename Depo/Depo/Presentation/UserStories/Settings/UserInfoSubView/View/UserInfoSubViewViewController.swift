@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-protocol UserInfoSubViewViewControllerActionsDelegate: class {
+protocol UserInfoSubViewViewControllerActionsDelegate: AnyObject {
     func changePhotoPressed(quotaInfo: QuotaInfoResponse?)
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
     func premiumButtonPressed()

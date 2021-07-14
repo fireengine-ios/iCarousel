@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ContactListHeaderDelegate: class {
+protocol ContactListHeaderDelegate: AnyObject {
     func search(query: String?)
     func cancelSearch()
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PeriodicContactSyncInteractorInput: class {
+protocol PeriodicContactSyncInteractorInput: AnyObject {
     func prepareCellModels()
     func onSave(settings: PeriodicContactsSyncSettings)
     func checkPermission()

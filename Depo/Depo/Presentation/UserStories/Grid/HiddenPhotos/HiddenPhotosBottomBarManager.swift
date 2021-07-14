@@ -8,7 +8,7 @@
 
 import Foundation
 
-private protocol HiddenPhotosTabBarPresenterDelegate: class {
+private protocol HiddenPhotosTabBarPresenterDelegate: AnyObject {
     func bottomBarSelectedItem(_ item: ElementTypes)
 }
 
@@ -28,7 +28,7 @@ private final class HiddenPhotosBottomTabBarPresenter: BottomSelectionTabBarPres
     }
 }
 
-protocol HiddenPhotosBottomBarManagerDelegate: class {
+protocol HiddenPhotosBottomBarManagerDelegate: AnyObject {
     func onBottomBarMoveToTrash()
     func onBottomBarUnhide()
 }

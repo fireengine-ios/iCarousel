@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LeavePremiumRouterInput: class {
+protocol LeavePremiumRouterInput: AnyObject {
     func goToBack()
     func showAlert(with text: String)
     func showError(with text: String)

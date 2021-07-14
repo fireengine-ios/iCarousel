@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PhotoEditTabbarDelegate: class {
+protocol PhotoEditTabbarDelegate: AnyObject {
     func didSelectItem(_ item: PhotoEditTabbarItemType)
 }
 
