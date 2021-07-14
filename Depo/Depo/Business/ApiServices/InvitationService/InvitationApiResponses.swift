@@ -11,10 +11,7 @@ struct InvitationLink: Codable {
     let shareable: Bool
 }
 
-struct InvitationCampaignResponse: Codable {
-    let status: String
-    let value: InvitationCampaign
-}
+typealias InvitationCampaignResponse = APIResponse<InvitationCampaign>
 
 struct InvitationCampaign: Codable {
     let locale: String

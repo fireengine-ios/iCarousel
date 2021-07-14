@@ -274,7 +274,7 @@ struct RouteRequests {
     // MARK: - Campaign
     
     static let campaignApi = baseUrl +/ "campaign"
-    static let campaignPhotopick = campaignApi +/ "photopick"
+    static let campaignPhotopick = campaignApi +/ "photopick/v2"
     
     
     //MARK: - Private Share
