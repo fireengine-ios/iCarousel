@@ -333,13 +333,6 @@ final class RegistrationViewController: ViewController {
         if passwordEnterView.textField == textField {
             output.validatePassword(passwordEnterView.textField.text ?? "", repassword: nil)
         }
-
-        if rePasswordEnterView.textField == textField {
-            output.validatePassword(
-                passwordEnterView.textField.text ?? "",
-                repassword: rePasswordEnterView.textField.text ?? ""
-            )
-        }
     }
 
     @objc private func stopEditing() {
@@ -480,6 +473,13 @@ extension RegistrationViewController: UITextFieldDelegate {
             if characterRuleView.status != .valid { characterRuleView.status = .invalid}
             if capitalizationRuleView.status != .valid { capitalizationRuleView.status = .invalid}
             if sequentialRuleView.status != .valid { sequentialRuleView.status = .invalid}
+        }
+
+        if rePasswordEnterView.textField == textField {
+            output.validatePassword(
+                passwordEnterView.textField.text ?? "",
+                repassword: rePasswordEnterView.textField.text ?? ""
+            )
         }
     }
 
