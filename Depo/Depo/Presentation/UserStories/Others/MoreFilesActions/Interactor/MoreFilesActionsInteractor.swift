@@ -348,83 +348,120 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
 
                 switch completionType {
-                    case .canceled:
-                        controller.dismiss(animated: true)
+                case .canceled:
+                    controller.dismiss(animated: true)
                     
-                    case .savedAs(image: let newImage):
-                        controller.showSpinner()
-                        
-                        PhotoEditSaveService.shared.save(asCopy: true, image: newImage, item: item) { [weak self] result in
-                            switch result {
-                                case .success(let remote):
-                                    DispatchQueue.main.async {
-                                        controller.saveImageComplete(saveAsCopy: true)
-                                        controller.dismiss(animated: false) {
-                                            self?.showPhotoVideoPreview(item: remote) {
-                                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
-                                            }
-                                        }
-                                }
-                                
-                                case .failed(_):
-                                    DispatchQueue.main.async {
-                                        controller.saveImageFailure(saveAsCopy: true)
-                                        controller.hideSpinner()
-                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
-                                    }
-                            }
-                    }
-                    
-                    case .saved(image: let newImage):
-                        controller.showSpinner()
-                        
-                        var newThumbnails = [UIImage]()
-                        var urlsToReplace = [URL]()
-                        
-                        if let smallUrl = item.metaData?.smalURl {
-                            urlsToReplace.append(smallUrl)
-                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 64, height: 64)))
-                        }
-                        if let mediumUrl = item.metaData?.mediumUrl {
-                            urlsToReplace.append(mediumUrl)
-                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 128, height: 128)))
-                        }
-                        if let largeUrl = item.metaData?.largeUrl {
-                            urlsToReplace.append(largeUrl)
-                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 1024, height: 1024)))
-                        }
-                        if case .remoteUrl(let pathUrl) = item.patchToPreview, pathUrl != nil {
-                            urlsToReplace.append(pathUrl)
-                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 1024, height: 1024)))
-                        }
-                        
-                        
-                        PhotoEditSaveService.shared.save(asCopy: false, image: newImage, item: item) { [weak self] result in
-                            switch result {
-                                case .success(let updatedItem):
-                                    
-                                    item.copyFileData(from: updatedItem)
-                                    item.patchToPreview = updatedItem.patchToPreview
-                                    
-                                    let closeScreen = {
-                                        DispatchQueue.main.async {
-                                            controller.saveImageComplete(saveAsCopy: false)
-                                            controller.dismiss(animated: true)
-                                            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
-                                        }
-                                    }
-                                    
-                                    ImageDownloder.removeImageFromCache(url: updatedItem.tmpDownloadUrl, completion: {
-                                        ImageDownloder.replaceImagesInCache(urls: urlsToReplace, images: newThumbnails, completion: closeScreen)
-                                    })
+                case .savedAs(image: let newImage):
+                    controller.showSpinner()
 
-                                case .failed(_):
-                                    DispatchQueue.main.async {
-                                        controller.saveImageFailure(saveAsCopy: false)
-                                        controller.hideSpinner()
-                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
+                    PhotoEditSaveService.shared.save(asCopy: true, image: newImage, item: item) { [weak self] result in
+                        switch result {
+                        case .success(let remote):
+                            DispatchQueue.main.async {
+                                controller.saveImageComplete(saveAsCopy: true)
+                                controller.dismiss(animated: false) {
+                                    self?.showPhotoVideoPreview(item: remote) {
+                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
+                                    }
                                 }
                             }
+
+                        case .failed(_):
+                            DispatchQueue.main.async {
+                                controller.saveImageFailure(saveAsCopy: true)
+                                controller.hideSpinner()
+                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
+                            }
+                        }
+                    }
+
+                case .savedAsWithStickers(let stickerImageView):
+                    guard let (originalImage, attachments) = stickerImageView.getCondition() else {
+                        assertionFailure()
+                        return
+                    }
+
+                    controller.showSpinner()
+                    PhotoEditSaveService.shared.saveWithStickers(
+                        originalImage: originalImage,
+                        attachments: attachments,
+                        stickerImageView: stickerImageView,
+                        item: item) { [weak self] result in
+
+                        switch result {
+                        case .success(let remote):
+                            DispatchQueue.main.async {
+                                controller.saveImageComplete(saveAsCopy: true)
+                                controller.dismiss(animated: false) {
+                                    self?.showPhotoVideoPreview(item: remote) {
+                                        SnackbarManager.shared.show(
+                                            type: .nonCritical,
+                                            message: TextConstants.photoEditSaveAsCopySnackbarMessage
+                                        )
+                                    }
+                                }
+                            }
+                        case .failed:
+                            DispatchQueue.main.async {
+                                controller.saveImageFailure(saveAsCopy: true)
+                                controller.hideSpinner()
+                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
+                            }
+                        }
+                    }
+
+                    break
+
+                case .saved(image: let newImage):
+                    controller.showSpinner()
+
+                    var newThumbnails = [UIImage]()
+                    var urlsToReplace = [URL]()
+
+                    if let smallUrl = item.metaData?.smalURl {
+                        urlsToReplace.append(smallUrl)
+                        newThumbnails.append(newImage.resizedImage(to: CGSize(width: 64, height: 64)))
+                    }
+                    if let mediumUrl = item.metaData?.mediumUrl {
+                        urlsToReplace.append(mediumUrl)
+                        newThumbnails.append(newImage.resizedImage(to: CGSize(width: 128, height: 128)))
+                    }
+                    if let largeUrl = item.metaData?.largeUrl {
+                        urlsToReplace.append(largeUrl)
+                        newThumbnails.append(newImage.resizedImage(to: CGSize(width: 1024, height: 1024)))
+                    }
+                    if case .remoteUrl(let pathUrl) = item.patchToPreview, pathUrl != nil {
+                        urlsToReplace.append(pathUrl)
+                        newThumbnails.append(newImage.resizedImage(to: CGSize(width: 1024, height: 1024)))
+                    }
+
+
+                    PhotoEditSaveService.shared.save(asCopy: false, image: newImage, item: item) { [weak self] result in
+                        switch result {
+                        case .success(let updatedItem):
+
+                            item.copyFileData(from: updatedItem)
+                            item.patchToPreview = updatedItem.patchToPreview
+
+                            let closeScreen = {
+                                DispatchQueue.main.async {
+                                    controller.saveImageComplete(saveAsCopy: false)
+                                    controller.dismiss(animated: true)
+                                    SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
+                                }
+                            }
+
+                            ImageDownloder.removeImageFromCache(url: updatedItem.tmpDownloadUrl, completion: {
+                                ImageDownloder.replaceImagesInCache(urls: urlsToReplace, images: newThumbnails, completion: closeScreen)
+                            })
+
+                        case .failed(_):
+                            DispatchQueue.main.async {
+                                controller.saveImageFailure(saveAsCopy: false)
+                                controller.hideSpinner()
+                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
+                            }
+                        }
                     }
                 }
             }

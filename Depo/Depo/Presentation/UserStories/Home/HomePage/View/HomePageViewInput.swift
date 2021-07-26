@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol HomePageViewInput: class, CurrentNavController {
+protocol HomePageViewInput: AnyObject, CurrentNavController {
 
     func stopRefresh()
     

@@ -10,8 +10,8 @@ import UIKit
 
 final class PhotoEditImageScrollView: UIScrollView {
 
-    let imageView = UIImageView()
-    
+    let imageView = OverlayStickerImageView(frame: .zero)
+
     private let zoomFactorFromMinWhenDoubleTap: CGFloat = 2
     
     lazy var doubleTapGesture: UITapGestureRecognizer = {
@@ -37,10 +37,7 @@ final class PhotoEditImageScrollView: UIScrollView {
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.pinToSuperviewEdges()
-        
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognizer))
-        gesture.numberOfTapsRequired = 2
-        
+
         imageView.addGestureRecognizer(doubleTapGesture)
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true

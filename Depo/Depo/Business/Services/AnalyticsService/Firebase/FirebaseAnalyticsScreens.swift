@@ -135,6 +135,8 @@ enum AnalyticsAppScreens {
     
     case photoEditFilters
     case photoEditAdjustments
+    case photoEditGif
+    case photoEditSticker
     
     case sharedWithMe
     case sharedByMe
@@ -372,6 +374,10 @@ enum AnalyticsAppScreens {
             return "Filter Main Screen"
         case .photoEditAdjustments:
             return "Adjust Main Screen"
+        case .photoEditGif:
+            return "Gif Main Screen"
+        case .photoEditSticker:
+            return "Sticker Main Screen"
         case .sharedWithMe:
             return "Shared with Me"
         case .sharedByMe:

@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol LeavePremiumViewInput: class, ActivityIndicator {
+protocol LeavePremiumViewInput: AnyObject, ActivityIndicator {
     func display(price: String, hideLeaveButton: Bool)
 }

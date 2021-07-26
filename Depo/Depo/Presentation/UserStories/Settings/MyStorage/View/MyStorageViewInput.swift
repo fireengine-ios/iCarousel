@@ -6,7 +6,7 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
-protocol MyStorageViewInput: class, ActivityIndicator {
+protocol MyStorageViewInput: AnyObject, ActivityIndicator {
     func reloadPackages()
     func showRestoreButton()
 }

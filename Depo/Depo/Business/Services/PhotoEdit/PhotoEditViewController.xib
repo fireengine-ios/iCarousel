@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,13 +21,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZv-Tg-bz2">
-                    <rect key="frame" x="0.0" y="88" width="414" height="730"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SgF-7J-zsa" customClass="PhotoEditImageScrollView" customModule="Billo" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="730"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                         </scrollView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="SgF-7J-zsa" firstAttribute="leading" secondItem="eZv-Tg-bz2" secondAttribute="leading" id="4vR-Fm-Wc0"/>
                         <constraint firstItem="SgF-7J-zsa" firstAttribute="top" secondItem="eZv-Tg-bz2" secondAttribute="top" id="J1d-eE-ZPT"/>
@@ -36,16 +37,16 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8f-ha-09S" userLabel="Bottom Safe Area View">
                     <rect key="frame" x="0.0" y="862" width="414" height="34"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eJ-04-lW6" userLabel="Navbar Container">
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="qKh-nr-Azi"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFk-JH-Rpa" customClass="ContainerView" customModule="Billo" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFk-JH-Rpa">
                     <rect key="frame" x="0.0" y="818" width="414" height="0.0"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBm-Ct-o7t">
@@ -53,7 +54,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiM-mg-5MO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
                             </subviews>
                             <constraints>
@@ -64,7 +65,7 @@
                             </constraints>
                         </scrollView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="bBm-Ct-o7t" firstAttribute="leading" secondItem="nFk-JH-Rpa" secondAttribute="leading" id="8pb-Fw-LLZ"/>
                         <constraint firstItem="PiM-mg-5MO" firstAttribute="width" secondItem="nFk-JH-Rpa" secondAttribute="width" multiplier="1:1" id="Pri-tH-A3c"/>
@@ -77,13 +78,14 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BUf-nW-9bz" userLabel="Bottom Bar Container">
                     <rect key="frame" x="0.0" y="818" width="414" height="44"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" priority="250" constant="44" id="a5u-Sl-b88"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="U8f-ha-09S" secondAttribute="trailing" id="2kb-Pw-X7w"/>
                 <constraint firstItem="BUf-nW-9bz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="3lh-Ta-LMJ"/>
@@ -92,25 +94,25 @@
                 <constraint firstItem="U8f-ha-09S" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="ODD-4j-njp"/>
                 <constraint firstItem="BUf-nW-9bz" firstAttribute="top" secondItem="nFk-JH-Rpa" secondAttribute="bottom" id="Taf-h1-9XD"/>
                 <constraint firstItem="nFk-JH-Rpa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="VlH-gV-alA"/>
-                <constraint firstItem="BUf-nW-9bz" firstAttribute="top" secondItem="eZv-Tg-bz2" secondAttribute="bottom" id="aIe-8h-7mY"/>
+                <constraint firstItem="U8f-ha-09S" firstAttribute="top" secondItem="eZv-Tg-bz2" secondAttribute="bottom" id="aIe-8h-7mY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6eJ-04-lW6" secondAttribute="trailing" id="ajg-OA-4V3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="BUf-nW-9bz" secondAttribute="bottom" id="avk-7L-lpu"/>
                 <constraint firstItem="U8f-ha-09S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eY9-EN-LaD"/>
                 <constraint firstItem="nFk-JH-Rpa" firstAttribute="height" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="jIy-A0-pIH"/>
                 <constraint firstItem="eZv-Tg-bz2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="jhB-64-t1b"/>
                 <constraint firstItem="eZv-Tg-bz2" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="kjS-E1-uyw"/>
-                <constraint firstItem="eZv-Tg-bz2" firstAttribute="top" secondItem="6eJ-04-lW6" secondAttribute="bottom" id="s9f-fM-fi5"/>
+                <constraint firstItem="eZv-Tg-bz2" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="s9f-fM-fi5"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BUf-nW-9bz" secondAttribute="trailing" id="uCb-zo-rfO"/>
                 <constraint firstItem="6eJ-04-lW6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vQ0-oZ-1Xk"/>
                 <constraint firstItem="6eJ-04-lW6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="yBR-aj-pFZ"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </view>
         <customObject id="Lja-hd-hHM" customClass="PhotoEditViewUIManager" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="bottomBarContainer" destination="BUf-nW-9bz" id="x13-xc-CMW"/>
                 <outlet property="bottomSafeAreaView" destination="U8f-ha-09S" id="JBh-z0-ZEf"/>
+                <outlet property="containerView" destination="nFk-JH-Rpa" id="oxc-P0-icj"/>
                 <outlet property="contentView" destination="eZv-Tg-bz2" id="UtV-WJ-yth"/>
                 <outlet property="filtersContainerView" destination="PiM-mg-5MO" id="bZE-P4-vmk"/>
                 <outlet property="filtersScrollView" destination="bBm-Ct-o7t" id="Fgr-d7-MNR"/>
@@ -119,4 +121,9 @@
             </connections>
         </customObject>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

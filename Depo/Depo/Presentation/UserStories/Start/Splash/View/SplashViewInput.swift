@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol SplashViewInput: class, Waiting, ErrorPresenter {
+protocol SplashViewInput: AnyObject, Waiting, ErrorPresenter {
 
     func setupInitialState()
 }

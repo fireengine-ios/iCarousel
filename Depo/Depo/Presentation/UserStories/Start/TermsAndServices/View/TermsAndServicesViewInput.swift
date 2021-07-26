@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol TermsAndServicesViewInput: class, Waiting {
+protocol TermsAndServicesViewInput: AnyObject, Waiting {
 
     func setupInitialState()
     

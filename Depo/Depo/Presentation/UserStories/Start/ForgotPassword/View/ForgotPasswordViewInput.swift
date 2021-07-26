@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol ForgotPasswordViewInput: class, Waiting {
+protocol ForgotPasswordViewInput: AnyObject, Waiting {
     
     func setupInitialState()
     

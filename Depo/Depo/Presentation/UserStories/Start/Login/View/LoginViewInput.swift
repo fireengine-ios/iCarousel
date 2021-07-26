@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol LoginViewInput: class, Waiting {
+protocol LoginViewInput: AnyObject, Waiting {
         
     func showCaptcha()
     func refreshCaptcha()

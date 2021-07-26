@@ -9,8 +9,6 @@
 import Foundation
 import YYImage
 
-typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>
-
 final class OverlayStickerSaveManager {
     
     private lazy var coreDataStack: CoreDataStack = factory.resolve()

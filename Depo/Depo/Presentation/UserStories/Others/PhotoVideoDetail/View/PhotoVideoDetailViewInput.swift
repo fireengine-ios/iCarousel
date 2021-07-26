@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
+protocol PhotoVideoDetailViewInput: AnyObject, ActivityIndicator, ErrorPresenter {
     
     var status: ItemStatus { get set }
     

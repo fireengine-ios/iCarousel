@@ -43,25 +43,6 @@ enum AttachedEntityType: CaseIterable {
     }
 }
 
-enum CreateOverlayResultType {
-    case image
-    case video
-    
-    var toPHMediaType: PHAssetMediaType {
-        switch self {
-        case .image:
-            return .image
-        case .video:
-            return .video
-        }
-    }
-}
-
-struct CreateOverlayStickersSuccessResult {
-    let url: URL
-    let type: CreateOverlayResultType
-}
-
 protocol OverlayStickerImageViewDelegate: AnyObject {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool)
     func didDeleteAttachments(_ attachments: [SmashStickerResponse])
@@ -142,6 +123,13 @@ final class OverlayStickerImageView: UIImageView {
         
         let subview = attachments.removeLast()
         subview.imageView.removeFromSuperview()
+    }
+
+    func removeAll() {
+        attachments.forEach {
+            $0.imageView.removeFromSuperview()
+        }
+        attachments = []
     }
     
     func getCondition() -> (originalImage: UIImage, attachments: [UIImageView])? {
@@ -388,7 +376,7 @@ final class OverlayStickerImageView: UIImageView {
             }
             message.append(msg)
         })
-        
+
         if message.last == "|" {
             message.removeLast()
         }
@@ -416,8 +404,46 @@ final class OverlayStickerImageView: UIImageView {
 }
 
 extension OverlayStickerImageView: UIGestureRecognizerDelegate {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let scrollView = superview as? PhotoEditImageScrollView else { return true }
+
+        switch gestureRecognizer {
+        case scrollView.doubleTapGesture:
+            return true
+
+        // ScrollView's pan and pinch gestures should not be detected when paning/pinching an attachment
+        case scrollView.panGestureRecognizer,
+             scrollView.pinchGestureRecognizer:
+            return !gestureRecognizerIsOnAttachment(gestureRecognizer)
+
+        // Attachment related gestures should only be detected when made over an attachment
+        case panGesture,
+             pinchGesture,
+             rotationGesture:
+            return gestureRecognizerIsOnAttachment(gestureRecognizer)
+
+        default:
+            return true
+        }
+    }
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        guard let scrollView = superview as? PhotoEditImageScrollView else { return true }
+
+        // Prevent simultaneous scrollView and attachment pinch/pan
+        switch (gestureRecognizer, otherGestureRecognizer) {
+        case (pinchGesture, scrollView.panGestureRecognizer),
+             (panGesture, scrollView.pinchGestureRecognizer):
+            return false
+
+        default:
+            return true
+        }
+    }
+
+    private func gestureRecognizerIsOnAttachment(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let point = gestureRecognizer.location(in: self)
+        return subviews.contains { $0.frame.contains(point) }
     }
 }
 

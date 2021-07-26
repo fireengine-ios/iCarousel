@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PremiumViewInput: class, ActivityIndicator {
+protocol PremiumViewInput: AnyObject, ActivityIndicator {
     func showPaycellProcess(with cpcmOfferId: Int)
     func displayOffers(_ packages: [PackageOffer])
 }

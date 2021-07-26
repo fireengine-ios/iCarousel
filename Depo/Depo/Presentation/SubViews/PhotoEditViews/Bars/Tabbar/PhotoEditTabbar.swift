@@ -15,7 +15,9 @@ protocol PhotoEditTabbarDelegate: AnyObject {
 enum PhotoEditTabbarItemType {
     case filters
     case adjustments
-    
+    case gif
+    case sticker
+
     var title: String {
         guard Device.isIpad else {
             return ""
@@ -26,6 +28,10 @@ enum PhotoEditTabbarItemType {
             return TextConstants.photoEditTabBarFilters
         case .adjustments:
             return TextConstants.photoEditTabBarAdjustments
+        case .gif:
+            return TextConstants.funGif
+        case .sticker:
+            return TextConstants.funSticker
         }
     }
     
@@ -36,6 +42,10 @@ enum PhotoEditTabbarItemType {
             imageName = "photo_edit_tabbar_filters"
         case .adjustments:
             imageName = "photo_edit_tabbar_adjustments"
+        case .gif:
+            imageName = "gif"
+        case .sticker:
+            imageName = "sticker"
         }
         return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
     }
