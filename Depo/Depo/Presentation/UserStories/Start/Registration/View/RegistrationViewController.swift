@@ -85,6 +85,7 @@ final class RegistrationViewController: ViewController {
     var output: RegistrationViewOutput!
     private let updateScrollDelay: DispatchTime = .now() + 0.3
     private let termsViewController = RegistrationTermsViewController()
+    private var textObserver: NSObjectProtocol?
     
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {
@@ -240,6 +241,9 @@ final class RegistrationViewController: ViewController {
         
         emailEnterView.textField.delegate = self
         passwordEnterView.textField.delegate = self
+        textObserver = passwordEnterView.textField.observe(\.text, options: .new, changeHandler: { [output] textField, change in
+            output?.validatePassword(textField.text ?? "", repassword: nil)
+        })
         rePasswordEnterView.textField.delegate = self
         phoneEnterView.numberTextField.delegate = self
         captchaView.captchaAnswerTextField.delegate = self
