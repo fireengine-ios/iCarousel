@@ -473,13 +473,13 @@ extension NetmeraEvents.Screens {
 
     final class PhotoEditGifScreen: NetmeraScreenEventTemplate {
         override var key: String {
-            return "TODO"
+            return "cpd"
         }
     }
 
     final class PhotoEditStickerScreen: NetmeraScreenEventTemplate {
         override var key: String {
-            return "TODO"
+            return "mmy"
         }
     }
 
