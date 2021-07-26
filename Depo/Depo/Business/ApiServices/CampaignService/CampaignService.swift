@@ -7,43 +7,51 @@
 //
 
 import Alamofire
-import SwiftyJSON
 
 protocol CampaignService: AnyObject {
-    func getPhotopickDetails(handler: @escaping (ErrorResult<CampaignCardResponse, CampaignPhotopickError>) -> Void)
-}
-    
-final class CampaignServiceImpl: BaseRequestService, CampaignService {
+    typealias ResponseHandler = (Swift.Result<PhotopickCampaign, CampaignServiceError>) -> Void
 
-    private enum Keys {
-        static let serverValue = "value"
-    }
-    
+    @discardableResult
+    func getPhotopickDetails(completion: @escaping ResponseHandler) -> URLSessionTask?
+}
+
+enum CampaignServiceError: Error {
+    case empty
+    case other(error: Error)
+}
+
+final class CampaignServiceImpl: CampaignService {
+
     private let sessionManager: SessionManager
     
     required init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
-    
-    func getPhotopickDetails(handler: @escaping (ErrorResult<CampaignCardResponse, CampaignPhotopickError>) -> Void) {
+
+    @discardableResult
+    func getPhotopickDetails(completion: @escaping CampaignService.ResponseHandler) -> URLSessionTask? {
         sessionManager
-        .request(RouteRequests.campaignPhotopick)
-        .customValidate()
-        .responseData { response in
-            switch response.result {
-            case .success(let data):
-                let json = JSON(data)[Keys.serverValue]
-                guard let details = CampaignCardResponse(json: json) else {
-                    handler(.failure(.empty))
-                    return
+            .request(RouteRequests.campaignPhotopick)
+            .customValidate()
+            .responseObject { (result: ResponseResult<PhotopickCampaignResponse>) in
+                do {
+                    let response = try result.asSwiftResult().get()
+                    completion(.success(response.value))
+                } catch is DecodingError {
+                    completion(.failure(.empty))
+                } catch {
+                    completion(.failure(.other(error: error)))
                 }
-                
-                handler(.success(details))
-            case .failure(let error):
-                let backendError = ResponseParser.getBackendError(data: response.data,
-                                                                  response: response.response)
-                handler(.failure(.error(backendError ?? error)))
             }
+            .task
+    }
+
+    func getPhotopickDetails(from data: Data) throws -> PhotopickCampaign {
+        do {
+            let decoder = JSONDecoder.withMillisecondsDate()
+            return try decoder.decode(PhotopickCampaign.self, from: data)
+        } catch {
+            throw CampaignServiceError.empty
         }
     }
 }

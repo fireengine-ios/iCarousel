@@ -11,6 +11,7 @@ import Foundation
 final class PhotoVideoSegmentedController: SegmentedController {
     
     private let instaPickCampaignService = InstaPickCampaignService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     static func initPhotoVideoSegmentedControllerWith(_ controllers: [UIViewController]) -> PhotoVideoSegmentedController {
         let controller = PhotoVideoSegmentedController(nibName: "SegmentedController", bundle: nil)
@@ -18,8 +19,9 @@ final class PhotoVideoSegmentedController: SegmentedController {
         return controller
     }
     
-    private func handleAnalyzeResultAfterProgressPopUp(analyzesResult: AnalyzeResult) {
-        instaPickCampaignService.getController { [weak self] navController in
+    private func handleAnalyzeResultAfterProgressPopUp(analyzesResult: AnalyzeResult, infoCallback: @escaping (PhotopickCampaign?) -> Void) {
+        instaPickCampaignService.getController { [weak self] navController, campaignInfo in
+            infoCallback(campaignInfo)
             DispatchQueue.toMain {
                 if let navController = navController,
                     let controller = navController.topViewController as? InstaPickCampaignViewController
@@ -57,7 +59,11 @@ final class PhotoVideoSegmentedController: SegmentedController {
 extension PhotoVideoSegmentedController: InstaPickProgressPopupDelegate {
     func analyzeDidComplete(analyzeResult: AnalyzeResult) {
         showSpinner()
-        handleAnalyzeResultAfterProgressPopUp(analyzesResult: analyzeResult)
+        handleAnalyzeResultAfterProgressPopUp(analyzesResult: analyzeResult) { [analyticsService] in
+            analyticsService.trackPhotopickAnalysis(eventLabel: .success,
+                                                    dailyDrawleft: $0?.usage.dailyRemaining,
+                                                    totalDraw: $0?.usage.totalUsed)
+        }
         
         let analysisLeftUserDependent: NetmeraEventValues.PhotopickUserAnalysisLeft
         if analyzeResult.analyzesCount.isFree {

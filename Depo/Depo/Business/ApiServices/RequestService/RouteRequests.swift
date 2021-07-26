@@ -217,6 +217,7 @@ struct RouteRequests {
     
     //MARK: Feedback
     static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
+    static let feedbackLog = baseUrl +/ "feedback/log"
     
     //MARK : Faq
     static var faqContentUrl: String {
@@ -273,7 +274,7 @@ struct RouteRequests {
     // MARK: - Campaign
     
     static let campaignApi = baseUrl +/ "campaign"
-    static let campaignPhotopick = campaignApi +/ "photopick"
+    static let campaignPhotopick = campaignApi +/ "photopick/v2"
     
     
     //MARK: - Private Share
@@ -438,6 +439,8 @@ struct RouteRequests {
     
     static let verifyEmail = baseUrl +/ "verify/emailAddress"
     static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
+
+    static let healthCheck = baseUrl +/ "health/check"
     
     static let paycellWebUrl = paycellShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=https://google.com"
 }

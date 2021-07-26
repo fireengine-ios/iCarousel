@@ -50,6 +50,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
         if validationResult.count > 0 {
             output.userInvalid(withResult: validationResult)
         }
+
+        if repassword == nil {
+            output.checkPasswordRuleValid(for: validationResult)
+        }
     }
 
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {

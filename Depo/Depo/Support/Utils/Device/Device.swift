@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import KeychainSwift
+import CoreTelephony
 
 class Device {
     
@@ -222,5 +223,19 @@ class Device {
                 return nil
             }
         }
+    }
+
+    static var carrier: String? {
+        let networkInfo = CTTelephonyNetworkInfo()
+        let carrier = networkInfo.subscriberCellularProvider
+        return carrier?.carrierName
+    }
+
+    static var manufacturer: String {
+        return "Apple"
+    }
+
+    static var modelName: String {
+        return UIDevice.current.modelName
     }
 }

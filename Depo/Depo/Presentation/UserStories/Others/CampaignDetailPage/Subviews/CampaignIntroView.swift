@@ -67,4 +67,10 @@ final class CampaignIntroView: UIView {
         
         contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
     }
+
+    func setup(with details: PhotopickCampaign) {
+        giftLabel.text = details.text.steps.first
+        celebrationLabel.text = details.text.steps[safe: 1]
+        nounCelebrationLabel.text = details.text.steps[safe: 2]
+    }
 }

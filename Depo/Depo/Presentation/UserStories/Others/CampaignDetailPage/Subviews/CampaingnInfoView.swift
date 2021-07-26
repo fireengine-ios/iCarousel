@@ -64,4 +64,8 @@ final class CampaingnInfoView: UIView {
         
         contentView.layer.shadowPath = UIBezierPath(rect: contentView.bounds).cgPath
     }
+
+    func setup(with details: PhotopickCampaign) {
+        descriptionLabel.text = details.text.description
+    }
 }

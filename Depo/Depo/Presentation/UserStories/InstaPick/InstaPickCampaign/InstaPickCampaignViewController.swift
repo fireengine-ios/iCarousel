@@ -33,13 +33,13 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
     private var showAnimatedAgain = true
     
     private var controllerMode: InstaPickCampaignViewControllerMode?
-    private var controllerContent: CampaignCardResponse?
+    private var controllerContent: PhotopickCampaign?
     private lazy var router = RouterVC()
     var didClosed: VoidHandler?
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    static func createController(controllerMode: InstaPickCampaignViewControllerMode, with data: CampaignCardResponse) -> InstaPickCampaignViewController {
+    static func createController(controllerMode: InstaPickCampaignViewControllerMode, with data: PhotopickCampaign) -> InstaPickCampaignViewController {
         let controller = InstaPickCampaignViewController()
         controller.controllerMode = controllerMode
         controller.controllerContent = data
@@ -59,7 +59,7 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         }
     }
     
-    private func setupView(mode: InstaPickCampaignViewControllerMode?, data: CampaignCardResponse?) {
+    private func setupView(mode: InstaPickCampaignViewControllerMode?, data: PhotopickCampaign?) {
         
         guard let mode = controllerMode, let content = controllerContent else {
             assertionFailure()
@@ -70,7 +70,7 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
         case .withLeftPhotoPick:
             premiumButtonView.isHidden = true
             topViewBackgroundImage.image = UIImage(named: "campaignBackgroundImage")
-            setupTopView(dailyRemaining: content.dailyRemaining, dailyUsed: content.dailyUsed)
+            setupTopView(dailyRemaining: content.usage.dailyRemaining, dailyUsed: content.usage.dailyUsed)
         case .withoutLeftPhotoPick:
             topViewTitileLabel.text = TextConstants.campaignTopViewTitleWithoutPhotoPick
             topViewDescriptionLabel.text = TextConstants.campaignTopViewDescriptionWithoutPhotoPick
@@ -78,9 +78,9 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
             trackScreen(.campaignSamsungPopupBecomePremium)
         }
         
-        bottomViewTitleLabel.text = TextConstants.campaignViewControllerBottomViewTitle
-        bottomViewDescriptionLabel.text = TextConstants.campaignViewControllerBottomViewDescription
-        bottomViewImage.loadImageData(with: content.imageUrl)
+        bottomViewTitleLabel.text = data?.content.title
+        bottomViewDescriptionLabel.text = data?.text.inform
+        bottomViewImage.loadImageData(with: URL(string: content.imageURL))
     }
     
     private func setupTopView(dailyRemaining: Int, dailyUsed: Int) {

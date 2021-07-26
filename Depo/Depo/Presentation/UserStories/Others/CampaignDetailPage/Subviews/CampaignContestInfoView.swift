@@ -54,11 +54,11 @@ final class CampaignContestInfoView: UIView {
     
     @IBOutlet private weak var remainingView: UIStackView!
     
-    func setup(with details: CampaignCardResponse) {
-        totalCountLabel.text = "\(details.totalUsed)"
-        remainingCountLabel.text = "\(details.dailyRemaining)"
+    func setup(with details: PhotopickCampaign) {
+        totalCountLabel.text = "\(details.usage.totalUsed)"
+        remainingCountLabel.text = "\(details.usage.dailyRemaining)"
         
-        let isDateAvailable = (details.startDate...details.endDate).contains(Date())
+        let isDateAvailable = (details.dates.startDate...details.dates.endDate).contains(Date())
         remainingView.isHidden = !isDateAvailable
     }
 

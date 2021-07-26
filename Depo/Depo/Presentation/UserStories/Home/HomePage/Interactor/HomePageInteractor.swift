@@ -109,18 +109,23 @@ final class HomePageInteractor: HomePageInteractorInput {
     private func getCampaignStatus() {
         campaignService.getPhotopickDetails { [weak self] result in
             switch result {
-            case .success(let status):
-                if SingletonStorage.shared.isUserFromTurkey,
-                    (status.startDate...status.launchDate).contains(Date()) {
+            case let .success(response):
+                let dates = response.dates
+                let isActive = (dates.startDate...dates.launchDate).contains(Date())
+
+                if isActive && SingletonStorage.shared.isUserFromTurkey {
                     DispatchQueue.toMain {
                         self?.output.showGiftBox()
                     }
                 }
-            case .failure(let errorResult):
-                if errorResult.isEmpty() {
+            case let .failure(error):
+                switch error {
+                case .empty:
                     DispatchQueue.toMain {
                         self?.output.hideGiftBox()
                     }
+                default:
+                    break
                 }
             }
         }
