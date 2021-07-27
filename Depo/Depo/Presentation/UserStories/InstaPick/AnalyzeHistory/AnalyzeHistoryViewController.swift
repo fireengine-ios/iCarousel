@@ -297,7 +297,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
 
             switch result {
             case let .success(response):
-                let isDateAvailable = (response.dates.startDate...response.dates.endDate).contains(Date())
+                let dates = response.dates
+                let isDateAvailable = Date().isInRange(start: dates.startDate, end: dates.endDate)
 
                 if SingletonStorage.shared.isUserFromTurkey, isDateAvailable {
                     self.dataSource.showCampaignCard(with: response)

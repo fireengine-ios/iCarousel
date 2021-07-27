@@ -56,6 +56,11 @@ extension Date: Components {
     func getMonthsBetweenDateAndCurrentDate() -> Int {
         return Calendar.current.dateComponents([.month], from: self, to: Date()).month ?? 0
     }
+
+    func isInRange(start: Date, end: Date) -> Bool {
+        guard end >= start else { return false }
+        return (start...end).contains(self)
+    }
     
     var withoutSeconds: Date {
         let time = floor(timeIntervalSinceReferenceDate / 60.0) * 60.0
