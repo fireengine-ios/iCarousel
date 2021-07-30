@@ -94,6 +94,15 @@ class ContactsSyncService: BaseRequestService {
     
     private var lastToDeleteContactsValue: Int = 0
 
+    func getValidProgressFromSDK() -> Int? {
+        guard let sdkProgress = SyncStatus.shared().progress else { return nil }
+
+        // SyncStatus.shared().progress might be bigger than 100
+        // This is a workaround to prevent showing wrong progress to the UI
+        let value = Int(truncating: sdkProgress)
+        return min(100, max(0, value))
+    }
+
     func executeOperation(type: SYNCMode, backupKey: String, progress: ProgressCallback?, finishCallback: FinishCallback?, errorCallback: ErrorCallback?) {
         let typeString = type == .backup ? "Backup" : "Restore"
         debugLog("ContactsSyncService executeOperation \(typeString)")
@@ -105,18 +114,18 @@ class ContactsSyncService: BaseRequestService {
         }
         
         SyncSettings.shared().progressCallback = { [weak self] in
-            guard let status = self?.getCurrentOperationType() else {
+            guard let aSelf = self else {
                 return
             }
-            
-            let progressPerecentage = SyncStatus.shared().progress ?? 0
-            progress?(Int(truncating: progressPerecentage), 0, status)
+            let status = aSelf.getCurrentOperationType()
+            let percentage = aSelf.getValidProgressFromSDK() ?? 0
+            progress?(percentage, 0, status)
         }
         
         if ContactSyncSDK.isRunning() {
             let status = getCurrentOperationType()
-            let progressPerecentage = SyncStatus.shared().progress ?? 0
-            progress?(Int(truncating: progressPerecentage), 0, status)
+            let percentage = getValidProgressFromSDK() ?? 0
+            progress?(percentage, 0, status)
         } else {
             /// ContactSyncSDK there is guard for running but it is not good
             /// but anyway we can call doSync everytime
@@ -393,5 +402,5 @@ class ContactsSyncService: BaseRequestService {
             SyncSettings.shared().environment = .testEnvironment
         }
     }
-    
+
 }
