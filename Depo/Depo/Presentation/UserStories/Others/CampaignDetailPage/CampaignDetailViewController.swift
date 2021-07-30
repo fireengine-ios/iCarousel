@@ -120,7 +120,8 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     }
     
     private func updateUI(details: PhotopickCampaign) {
-        if (details.dates.startDate...details.dates.endDate).contains(Date()) {
+        let isActive = Date().isInRange(start: details.dates.startDate, end: details.dates.endDate)
+        if isActive {
             analyzeView.isHidden = false
             campaignIntroView.isHidden = false
             campaignInfoView.isHidden = true

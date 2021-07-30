@@ -57,8 +57,9 @@ final class CampaignContestInfoView: UIView {
     func setup(with details: PhotopickCampaign) {
         totalCountLabel.text = "\(details.usage.totalUsed)"
         remainingCountLabel.text = "\(details.usage.dailyRemaining)"
-        
-        let isDateAvailable = (details.dates.startDate...details.dates.endDate).contains(Date())
+
+        let dates = details.dates
+        let isDateAvailable = Date().isInRange(start: dates.startDate, end: dates.endDate)
         remainingView.isHidden = !isDateAvailable
     }
 

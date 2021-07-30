@@ -111,7 +111,7 @@ final class HomePageInteractor: HomePageInteractorInput {
             switch result {
             case let .success(response):
                 let dates = response.dates
-                let isActive = (dates.startDate...dates.launchDate).contains(Date())
+                let isActive = Date().isInRange(start: dates.startDate, end: dates.launchDate)
 
                 if isActive && SingletonStorage.shared.isUserFromTurkey {
                     DispatchQueue.toMain {
