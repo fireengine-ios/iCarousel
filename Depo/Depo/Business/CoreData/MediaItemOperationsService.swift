@@ -1093,9 +1093,44 @@ final class MediaItemOperationsService {
             completion(AppMigrator.migrateSyncStatus(for: wrappedItems))
         })
     }
+
+    func logItemsForSyncCounts(completion: @escaping () -> Void) {
+        debugLog("logItemsForSyncCounts")
+
+        let group = DispatchGroup()
+
+        group.enter()
+        getUnsyncedMediaItems(video: true, image: true) { items in
+            let filtered = items.filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
+            let md5Values = filtered.map { $0.md5Value ?? "" }
+            debugLog("logItemsForSyncCounts got \(filtered.count) unsynced items with the current query. \(md5Values)")
+            group.leave()
+        }
+
+        group.enter()
+        coreDataStack.performBackgroundTask { context in
+            let fileTypes = [FileType.video, .image].map { $0.valueForCoreDataMapping() }
+            let isAvailable = NSPredicate(format: "\(MediaItem.PropertyNameKey.isAvailable) = true")
+            let isLocalItem = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true")
+            let isPhotoOrVideo = NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) IN %@", fileTypes)
+            let unSynced = NSCompoundPredicate(type: .or, subpredicates: [
+                NSPredicate(format: "\(MediaItem.PropertyNameKey.relatedRemotes).@count = 0"),
+                NSPredicate(format: "\(MediaItem.PropertyNameKey.syncStatusValue) != %i", SyncWrapperedStatus.synced.valueForCoreDataMapping())
+            ])
+            let predicate = NSCompoundPredicate(type: .and, subpredicates: [isAvailable, isPhotoOrVideo, isLocalItem, unSynced])
+            self.executeRequest(predicate: predicate, context: context) { items in
+                let filtered = items.filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
+                let md5Values = filtered.map { $0.md5Value ?? "" }
+                debugLog("logItemsForSyncCounts got \(filtered.count) unsynced items with the updated query. \(md5Values)")
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main, execute: completion)
+    }
     
     func allUnsyncedLocalIds(completion: @escaping ValueHandler<[String]>) {
-        debugLog("allLocalItemsForSync")
+        debugLog("allUnsyncedLocalIds")
         getUnsyncedMediaItems(video: true, image: true, completion: { items in
             let unsyncedLocalIds = items
                 .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }

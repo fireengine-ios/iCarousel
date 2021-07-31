@@ -36,9 +36,17 @@ final class Mail: NSObject, MFMailComposeViewControllerDelegate {
     }
     
     func sendEmail(emailBody: String, subject: String, emails: [String], presentCompletion: VoidHandler? = nil, success: MailSuccessHandler?, fail: MailFailHandler?) {
+        MediaItemOperationsService.shared.logItemsForSyncCounts {
+            self.performSendEmail(emailBody: emailBody, subject: subject, emails: emails, success: success, fail: fail)
+        }
+    }
+
+    private func performSendEmail(emailBody: String, subject: String, emails: [String],
+                                  presentCompletion: VoidHandler? = nil,
+                                  success: MailSuccessHandler?, fail: MailFailHandler?) {
         successHandler = success
         failHandler = fail
-        
+
         if (!Mail.canSendEmail()) {
             failHandler?(nil) // TODO: custom error
             return
@@ -48,23 +56,23 @@ final class Mail: NSObject, MFMailComposeViewControllerDelegate {
         mailController!.setToRecipients(emails)
         mailController!.setSubject(subject)
         mailController!.setMessageBody(emailBody, isHTML: false)
-        
+
 
         let logPath: String = Device.documentsFolderUrl(withComponent: XCGLogger.lifeboxLogFileName).path
         let widgetLogUrl = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: SharedConstants.groupIdentifier)?.appendingPathComponent("home_widget.log")
-        
+
         if FileManager.default.fileExists(atPath: logPath) {
             if let logData = NSData(contentsOfFile: logPath) {
                 mailController?.addAttachmentData(Data(referencing: logData), mimeType: "text/plain", fileName: "logs.txt")
             }
         }
-        
+
         if let widgetLogPath = widgetLogUrl?.path, FileManager.default.fileExists(atPath: widgetLogPath) {
             if let logData = NSData(contentsOfFile: widgetLogPath) {
                 mailController?.addAttachmentData(Data(referencing: logData), mimeType: "text/plain", fileName: "widget_logs.txt")
             }
         }
-        
+
         let controller = RouterVC().rootViewController
         guard let contr_ = controller else {
             return

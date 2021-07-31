@@ -118,10 +118,12 @@ extension ImageDownloadOperation {
             return
         }
         
-        guard let code = response.response?.statusCode, let error = response.error else {
+        guard let code = response.response?.statusCode,
+              let url = response.response?.url,
+              let error = response.error else {
             return
         }
     
-        debugLog("Load image error - \(code): \(error.description)")
+        debugLog("Load image error [\(url.absoluteString)] - \(code): \(error.description)")
     }
 }
