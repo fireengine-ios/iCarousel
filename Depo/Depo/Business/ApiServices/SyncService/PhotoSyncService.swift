@@ -21,7 +21,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
         debugLog("PhotoSyncService itemsSortedToUpload")
         mediaItemOperationsService.allLocalItemsForSync(video: false, image: true) { items in
-            debugLog("PhotoSyncService itemsSortedToUpload completion")
+            debugLog("PhotoSyncService itemsSortedToUpload completion, count: \(items.count)")
             completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.metaDate > $1.metaDate }))
         }
     }
