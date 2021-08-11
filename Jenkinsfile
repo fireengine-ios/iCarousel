@@ -36,7 +36,7 @@ apps = [
          versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
          ictsContainerId: '966', // ICT Store
          appleId: '1488914348',
-         prodTeamID: '729CGH4BJD',
+         prodTeamID: 'S3UWW9HSX5',
          itcTeamId: '118347642',
          xcodeSchema: isFriendlyBuild ? 'Billo_Bundle' : 'Billo', 
          xcodeTarget: isFriendlyBuild ? 'Billo_Bundle' : 'Billo'  
