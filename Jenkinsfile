@@ -37,7 +37,7 @@ apps = [
          ictsContainerId: '966', // ICT Store
          appleId: '1488914348',
          prodTeamID: 'S3UWW9HSX5',
-         itcTeamId: '118347642',
+         itcTeamId: '122764420',
          xcodeSchema: isFriendlyBuild ? 'Billo_Bundle' : 'Billo', 
          xcodeTarget: isFriendlyBuild ? 'Billo_Bundle' : 'Billo'  
      ]
