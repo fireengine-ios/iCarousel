@@ -11,7 +11,7 @@ import Foundation
 enum AccountType: String {
     case turkcell   = "TURKCELL"
     case all        = "ALL_ACCESS"
-    case ukranian   = "LIFEBOX"
+    case ukranian   = "LIFECELL"
     case cyprus     = "KKTCELL"
     case moldovian  = "MOLDCELL"
     case life       = "LIFE"

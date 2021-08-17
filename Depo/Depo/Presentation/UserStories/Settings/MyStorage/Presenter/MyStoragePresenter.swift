@@ -92,12 +92,41 @@ extension MyStoragePresenter: MyStorageViewOutput {
             let cancelText: String
             if let key = model.subscriptionPlanLanguageKey {
                 cancelText = TextConstants.digicelCancelText(for: key)
+            } else if modelType.isSameAs(FeaturePackageType.allAccessFeature) {
+                guard let accountType = self?.interactor.getAccountType(with: self?.accountType.rawValue ?? "", offers: [model]) else {
+                    if let key = model.subscriptionPlanLanguageKey {
+                        cancelText = TextConstants.digicelCancelText(for: key)
+                    } else {
+                        cancelText = TextConstants.offersAllCancel
+                    }
+                    self?.router?.showCancelOfferAlert(with: cancelText)
+                    return
+                }
+
+                switch accountType {
+                case .all:
+                    cancelText = TextConstants.offersAllCancel
+                case .cyprus:
+                    cancelText = TextConstants.featureKKTCellCancelText
+                case .ukranian:
+                    cancelText = TextConstants.featureLifeCellCancelText
+                case .life:
+                    cancelText = TextConstants.featureLifeCancelText
+                case .moldovian:
+                    cancelText = TextConstants.featureMoldCellCancelText
+                case .albanian:
+                    cancelText = TextConstants.featureAlbanianCancelText
+                case .turkcell:
+                    cancelText = String(format: TextConstants.offersCancelTurkcell, model.subscriptionPlanName ?? "")
+                case .FWI:
+                    cancelText = TextConstants.featureDigicellCancelText
+                case .jamaica:
+                    cancelText = TextConstants.featureDigicellCancelText
+                }
             } else {
-                /// maybe needs "cancelText = TextConstants.offersAllCancel"
                 cancelText = String(format: type.cancelText, plan.name)
             }
             self?.router?.showCancelOfferAlert(with: cancelText)
-
         })
     }
     
