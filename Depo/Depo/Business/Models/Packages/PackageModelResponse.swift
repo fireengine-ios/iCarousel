@@ -201,6 +201,7 @@ enum QuotaPackageType: String, PackageTypeProtocol {
     case albanian                   = "ALBTELECOM"
     case FWI                        = "DIGICELL_FWI"
     case jamaica                    = "DIGICELL_JAMAICA"
+    case foreign                    = "FOREIGN_OPERATOR"
 
     var cancelText: String {
         switch self {
@@ -232,6 +233,8 @@ enum QuotaPackageType: String, PackageTypeProtocol {
             return TextConstants.packageFWICancelText
         case .jamaica:
             return TextConstants.packageJamaicaCancelText
+        case .foreign:
+            return TextConstants.packageDefaultCancelText
         }
     }
     
