@@ -349,6 +349,12 @@ enum PrivateSharePermission: String, Codable, Equatable {
     case comment = "COMMENT"
     case writeAcl = "WRITE_ACL"
     case readAcl = "READ_ACL"
+    case unknown
+
+    init(from decoder: Decoder) throws {
+        let rawValue = try decoder.singleValueContainer().decode(String.self)
+        self = PrivateSharePermission(rawValue: rawValue) ?? .unknown
+    }
 }
 
 struct CreateFolderResquestItem: Encodable {
