@@ -1209,10 +1209,10 @@
 "tbmatic_home_card_years_ago" = "Vor %d Jahren";
 "tbmatic_home_card_this_year" = "Dieses Jahr";
 "campaign_card_title" = "PhotoPick-Telefonkampagne";
-"campaign_description_label_new_user" = "Wie wäre es mit dem Gewinn der ersten Auslosung für das Samsung Galaxy Note 10? Analysieren Sie Ihre Fotos mit PhotoPick und werden Sie einer der 20 Gewinner einer Note 10!";
-"campaign_description_label_experienced_user" = "Sie haben die heutigen Lotterierechte noch nicht verdient. Analysieren Sie Ihre Fotos mit PhotoPick und erhöhen Sie Ihre Gewinnchancen für Galaxy Note 10. Ihre Gesamtverlosung:% d";
-"campaign_description_label_limit_reached" = "Du hast 10 Draws pro Tag. Mache morgen wieder einen PhotoPick und erhöhe deine Auslosung. Ihre Gesamtverlosung: %d";
-"campaign_description_label_another" = " Analysieren Sie Ihre Fotos mit PhotoPick, steigern Sie Ihre Auslosung und holen Sie sich einen der 20 Gewinner des Samsung Galaxy Note 10! Ihre Gesamtverlosung beträgt% d!";
+"campaign_description_label_new_user" = "You have not participated in the campaign yet. Start analyzing your photos with PhotoPick and get the chance to be winner!";
+"campaign_description_label_experienced_user" = "You have not started today. Analyze your photos with PhotoPick and get more chance. Your total draw: %d";
+"campaign_description_label_limit_reached" = "You have already completed daily draw for today. Keep analyzing tomorrow! Your total draw: %d";
+"campaign_description_label_another" = "Your total raffle is %d! Keep analyzing your photos with PhotoPick, increase your chances of winning!";
 "campaign_campaign_detail_button" = "Kampagnendetails";
 "analyze_photo_pic_detail_button" = "Analysieren Sie mit PhotoPick!";
 "campaign_detail_title" = "Kampagnendetails";
@@ -1256,11 +1256,11 @@
 "campaign_vc_bottom_title" = "PhotoPick-Telefonkampagne";
 "campaign_vc_bottom_description" = "Alle Informationen in Ihrem Profil müssen vollständig sein, um an der Kampagne teilnehmen und im Rahmen der Lotterie ausgewertet werden zu können. Sie können Ihre Informationen aktualisieren, indem Sie auf die Schaltfläche Profil bearbeiten klicken.";
 "campaign_vc_top_without_title" = "SIE HABEN KEINE RECHTE MHER :(";
-"campaign_vc_top_without_description" = "PhotoPick hat keine Analyse mehr. Sie können unbegrenzt PhotoPck als Premium haben. Analysieren Sie Ihre Fotos mit PhotoPick und erhöhen Sie Ihre Chancen, einer der 20 Gewinner des Samsung Galaxy Note 10 zu werden!";
+"campaign_vc_top_without_description" = "No PhotoPick Analysis left. Become Premium, get unlimited PhotoPick and increase your chance of winning!";
 "campaign_vc_top_title_zero" = "IHR TAGESLIMIT IST ÜBERSCHRITTEN!";
-"campaign_vc_top_description_zero" = "Sie haben die tägliche Auslosung in der Kampagne abgeschlossen. Analysieren Sie Ihre Fotos mit PhotoPick und erhöhen Sie Ihre Chancen, einer der 20 Gewinner des Samsung Galaxy Note 10 zu werden!";
+"campaign_vc_top_description_zero" = "You have just completed total daily raffle. Keep analyzing your photos with PhotoPick tomorrow, increase your chances of winning!";
 "campaign_vc_top_title_non_zero" = "WEITER ANALYSIEREN!";
-"campaign_vc_top_description_non_zero" = "Kampagne %d pro Tag. Sie haben die Auslosung abgeschlossen. Analysieren Sie Ihre Fotos mit PhotoPick und erhöhen Sie Ihre Chancen, einer der 20 Gewinner des Samsung Galaxy Note 10 zu werden!";
+"campaign_vc_top_description_non_zero" = "Congrats! You have completed %d PhotoPick for today. Keep analyzing your photos with PhotoPick and increase your chances of winning!";
 "create_story_empty_name_error" = "Name der Geschichte ist leer";
 "photopick_history_campaign_contest_total_draw" = "Meine gesamten Verlosungsrechte";
 "photopick_history_campaign_contest_remaining_draw" = "Meine verbleibenden Rechte";
@@ -1863,6 +1863,6 @@
 "accessibility_pause" = "Stoppen";
 
 /*Password Rules*/
-"signup_password_rule_character_limit" = "";
-"signup_password_rule_upper_lower_numeric" = "";
-"signup_password_rule_sequential_characters" = "";
+"signup_password_rule_character_limit" = "Mindestens 6, maximal 16 alphabetische Zeichen";
+"signup_password_rule_upper_lower_numeric" = "Mindestens 1 Großbuchstabe, 1 Kleinbuchstabe und 1 Zahl";
+"signup_password_rule_sequential_characters" = "nicht aufeinanderfolgende alphabetische Zeichen";

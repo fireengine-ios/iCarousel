@@ -1217,10 +1217,10 @@
 "tbmatic_home_card_years_ago" = "%d Yıl Önce";
 "tbmatic_home_card_this_year" = "Bu Yıl";
 "campaign_card_title" = "PhotoPick Telefon Kampanyası";
-"campaign_description_label_new_user" = "Samsung Galaxy Note 10 için ilk çekiliş hakkını kazanmaya ne dersin? Fotoğraflarını PhotoPick ile analiz et ve Note 10 kazanacak 20 kişiden biri olma şansı yakala!";
-"campaign_description_label_experienced_user" = "Bugünün çekiliş haklarını kazanmaya henüz başlamadın. Fotoğraflarını PhotoPick ile analiz et ve Samsung Galaxy Note 10 kazanmak için şansını artır. Toplam çekiliş hakkın:% d";
-"campaign_description_label_limit_reached" = "Günlük çekiliş haklarını tamamladın. Yarın tekrar PhotoPick yap, çekiliş hakkını artır. Toplam çekiliş hakkın: % d";
-"campaign_description_label_another" = "Fotoğraflarını PhotoPick ile analiz et, çekiliş hakkını artır ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansı yakala! Toplam çekiliş hakkın %d! ";
+"campaign_description_label_new_user" = "Büyük ödül için ilk çekiliş hakkını kazanmaya ne dersin? Fotoğraflarını PhotoPick ile hemen analiz et, kazanma şansını yakala!";
+"campaign_description_label_experienced_user" = "Bugünün çekiliş haklarını kazanmaya henüz başlamadın. Fotoğraflarını PhotoPick ile hemen analiz et, kazanma şansını yakala! Toplam çekiliş hakkın: %d";
+"campaign_description_label_limit_reached" = "Günlük çekiliş haklarını tamamladın. Yarın tekrar PhotoPick yap, çekiliş hakkını artır. Toplam çekiliş hakkın: %d";
+"campaign_description_label_another" = "Fotoğraflarını PhotoPick ile analiz etmeye devam et, çekiliş hakkınla birlikte kazanma şansını artır! Toplam çekiliş hakkın %d!";
 "campaign_campaign_detail_button" = "Görmek için Tıkla";
 "analyze_photo_pic_detail_button" = "PhotoPick ile Analiz Et!";
 "campaign_detail_title" = "Kampanya Detayları";
@@ -1264,11 +1264,11 @@
 "campaign_vc_bottom_title" = "PhotoPick Telefon Kampanyası";
 "campaign_vc_bottom_description" = "Kampanyaya katılabilmen ve çekiliş kapsamında değerlendirilmen için profilindeki bilgilerin eksiksiz olması gerekiyor. Profilini Düzenle butonuna tıklayarak bilgilerini güncelleyebilirsin.";
 "campaign_vc_top_without_title" = "HAKKIN KALMADI:(";
-"campaign_vc_top_without_description" = "PhotoPick analiz hakkın tükendi. Premium olarak sınırsız PhotoPck hakkına sahip olabilirsin. Fotoğraflarını PhotoPick ile analiz etmeye devam et ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansını artır!";
+"campaign_vc_top_without_description" = "PhotoPick analiz hakkın tükendi. Premium olarak sınırsız PhotoPick hakkına sahip olabilirsin. Fotoğraflarını PhotoPick ile analiz etmeye devam et, büyük ödülü kazanma şansını artır!";
 "campaign_vc_top_title_zero" = "GÜNLÜK LİMİTİN DOLDU!";
-"campaign_vc_top_description_zero" = "Kampanyadaki günlük çekiliş hakkını tamamladın. Fotoğraflarını PhotoPick ile analiz etmeye devam et ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansını artır!";
+"campaign_vc_top_description_zero" = "Kampanyadaki günlük çekiliş hakkını tamamladın. Yarın da fotoğraflarını PhotoPick ile analiz etmeye devam et, büyük ödülü kazanma şansını artır!";
 "campaign_vc_top_title_non_zero" = "ANALİZE DEVAM!";
-"campaign_vc_top_description_non_zero" = "Kampanya kapsamında günlük %d çekiliş hakkını tamamladın. Fotoğraflarını PhotoPick ile analiz etmeye devam et ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansını artır!";
+"campaign_vc_top_description_non_zero" = "Tebrikler! Kampanya kapsamında günlük %d çekiliş hakkının tamamını kazandın. Yarın da fotoğraflarını PhotoPick ile analiz etmeye devam et, büyük ödülü kazanma şansını artır!";
 "create_story_empty_name_error" = "Hikaye ismi boş";
 "photopick_history_campaign_contest_total_draw" = "Toplam Çekiliş Hakkım";
 "photopick_history_campaign_contest_remaining_draw" = "Günlük Kalan Hakkım";
@@ -1881,6 +1881,6 @@
 "accessibility_pause" = "Durdur";
 
 /*Password Rules*/
-"signup_password_rule_character_limit" = "En az 6 - en çok 16 karakter";
-"signup_password_rule_upper_lower_numeric" = "1 Büyük/küçük harf & 1 rakam";
+"signup_password_rule_character_limit" = "En az 6, en çok 16 karakter";
+"signup_password_rule_upper_lower_numeric" = "En az 1 büyük, 1 küçük harf ve 1 rakam";
 "signup_password_rule_sequential_characters" = "Ardışık olmayan karakterler";

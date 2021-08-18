@@ -88,7 +88,7 @@ enum FeaturePackageType: String, PackageTypeProtocol {
 enum PackageContentType: Equatable {
     case feature(_ type: FeaturePackageType)
     case quota(_ type: QuotaPackageType)
-    
+
     init?(rawValue: String) {
         if let feature = FeaturePackageType(rawValue: rawValue) {
             self = .feature(feature)

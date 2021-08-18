@@ -21,7 +21,7 @@ final class PackageService {
 
         let roles = offers.map { getOfferRole(for: $0) }
         for role in roles {
-            if role.starts(with: "DIGICELL-") {
+            if role.starts(with: "DIGICELL") {
                 ///FeaturePackageType need for leave premium
                 if role.contains(AccountType.FWI.rawValue) {
                     return .FWI
@@ -403,7 +403,6 @@ final class PackageService {
         }
         
         guard let type = contentType else {
-            assertionFailure()
             return ""
         }
         

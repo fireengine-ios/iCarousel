@@ -1515,10 +1515,10 @@ Please check I have understood the intended command here*/
 "tbmatic_home_card_years_ago" = "Il y a %d  d’année";
 "tbmatic_home_card_this_year" = "Cette année";
 "campaign_card_title" = "Campagne PhotoPick";
-"campaign_description_label_new_user" = "Vous n'avez pas encore participé à la campagne. Commencez à analyser vos photos avec PhotoPick et tentez votre chance pour être l'un des 20 gagnants d'un Note 10 !";
-"campaign_description_label_experienced_user" = "Vous n'avez pas joué aujourd'hui. Analysez vos photos avec PhotoPick et multipliez vos chance. Votre total de participation : %d";
-"campaign_description_label_limit_reached" = "Vous avez épuisé vos droits de participation au tirage au sort d'aujourd'hui. Continuez d'analyser demain ! Votre total de participation : %d ";
-"campaign_description_label_another" = "Votre droit de tirage au sort total est  %d ! Analysez vos photos avec PhotoPick et augmentez vos droits de tirage au sort et augmentez vos chances de devenir l’une des 20 personnes à gagner un Note 10 !";
+"campaign_description_label_new_user" = "You have not participated in the campaign yet. Start analyzing your photos with PhotoPick and get the chance to be winner!";
+"campaign_description_label_experienced_user" = "You have not started today. Analyze your photos with PhotoPick and get more chance. Your total draw: %d";
+"campaign_description_label_limit_reached" = "You have already completed daily draw for today. Keep analyzing tomorrow! Your total draw: %d";
+"campaign_description_label_another" = "Your total raffle is %d! Keep analyzing your photos with PhotoPick, increase your chances of winning!";
 "campaign_campaign_detail_button" = "Détails de la campagne";
 "analyze_photo_pic_detail_button" = "Analyser avec PhotoPick !";
 "campaign_detail_title" = "Détails de la campagne";
@@ -1562,11 +1562,11 @@ Please check I have understood the intended command here*/
 "campaign_vc_bottom_title" = "Campagne PhotoPick";
 "campaign_vc_bottom_description" = "Toutes les informations de votre profil doivent être complètes pour pouvoir participer à la campagne et au tirage au sort. Vous pouvez mettre à jour vos informations en cliquant sur le bouton Modifier le profil.";
 "campaign_vc_top_without_title" = "OUPS DESOLE :(";
-"campaign_vc_top_without_description" = "Votre droit d’analyse PhotoPick est épuisé. Vous pouvez avoir un nombre illimité de PhotoPick en passant Premium. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10!";
+"campaign_vc_top_without_description" = "No PhotoPick Analysis left. Become Premium, get unlimited PhotoPick and increase your chance of winning!";
 "campaign_vc_top_title_zero" = "VOTRE LIMITE QUOTIDIENNE EST ATTEINTE !";
-"campaign_vc_top_description_zero" = "Vous avez épuisé votre droit de participation au tirage au sort quotidien. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10 !";
+"campaign_vc_top_description_zero" = "You have just completed total daily raffle. Keep analyzing your photos with PhotoPick tomorrow, increase your chances of winning!";
 "campaign_vc_top_title_non_zero" = "CONTINUER L'ANALYSE !";
-"campaign_vc_top_description_non_zero" = "Vous avez épuisé votre droit de participation au tirage au sort quotidien %d dans la campagne. Continuez à analyser vos photos avec PhotoPick et augmentez vos chances de devenir l’un des 20 gagnants du Samsung Galaxy Note 10 !";
+"campaign_vc_top_description_non_zero" = "Congrats! You have completed %d PhotoPick for today. Keep analyzing your photos with PhotoPick and increase your chances of winning!";
 "create_story_empty_name_error" = "Le nom de la Story ne peut pas être vide";
 "photopick_history_campaign_contest_total_draw" = "Mes droits pour le tirage au sort";
 "photopick_history_campaign_contest_remaining_draw" = "Mes droits restants du jour";
@@ -2171,6 +2171,6 @@ Please check I have understood the intended command here*/
 "accessibility_pause" = "Arrêtez";
 
 /*Password Rules*/
-"signup_password_rule_character_limit" = "";
-"signup_password_rule_upper_lower_numeric" = "";
-"signup_password_rule_sequential_characters" = "";
+"signup_password_rule_character_limit" = "Minimum 6, maximum 16 caractères";
+"signup_password_rule_upper_lower_numeric" = "Au moins 1 lettre majuscule, 1 lettre minuscule et 1 chiffre";
+"signup_password_rule_sequential_characters" = "caractères non consécutifs";
