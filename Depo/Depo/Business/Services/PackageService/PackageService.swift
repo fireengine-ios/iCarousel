@@ -403,7 +403,6 @@ final class PackageService {
         }
         
         guard let type = contentType else {
-            assertionFailure()
             return ""
         }
         
