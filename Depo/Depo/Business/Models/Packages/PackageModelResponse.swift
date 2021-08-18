@@ -88,14 +88,14 @@ enum FeaturePackageType: String, PackageTypeProtocol {
 enum PackageContentType: Equatable {
     case feature(_ type: FeaturePackageType)
     case quota(_ type: QuotaPackageType)
-    
+
     init?(rawValue: String) {
         if let feature = FeaturePackageType(rawValue: rawValue) {
             self = .feature(feature)
         } else if let quota = QuotaPackageType(rawValue: rawValue) {
             self = .quota(quota)
         } else {
-            return nil
+            self = .quota(.others)
         }
     }
     
@@ -201,7 +201,7 @@ enum QuotaPackageType: String, PackageTypeProtocol {
     case albanian                   = "ALBTELECOM"
     case FWI                        = "DIGICELL_FWI"
     case jamaica                    = "DIGICELL_JAMAICA"
-    case foreign                    = "FOREIGN_OPERATOR"
+    case others
 
     var cancelText: String {
         switch self {
@@ -233,7 +233,7 @@ enum QuotaPackageType: String, PackageTypeProtocol {
             return TextConstants.packageFWICancelText
         case .jamaica:
             return TextConstants.packageJamaicaCancelText
-        case .foreign:
+        case .others:
             return TextConstants.packageDefaultCancelText
         }
     }
