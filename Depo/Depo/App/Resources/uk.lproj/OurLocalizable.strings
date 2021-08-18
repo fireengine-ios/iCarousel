@@ -1211,10 +1211,10 @@
 "tbmatic_home_card_years_ago" = "% d Років Тому";
 "tbmatic_home_card_this_year" = "Цього Року";
 "campaign_card_title" = "Телефонна Акція PhotoPick";
-"campaign_description_label_new_user" = "Хочеш отримати участь на право у розіграші, для отримати  Samsung Galaxy Note 10? Проаналізуйте свої фотографії за допомогою PhotoPick та скористайтеся  можливістю стати одним із 20 переможців, які можуть стати власниками Note 10!";
-"campaign_description_label_experienced_user" = "Ви ще не почали заробляти сьогоднішні права на виграш у розіграші. Проаналізуйте свої фотографії за допомогою PhotoPick та підвищіть свої шанси виграти Galaxy Note 10. Ваше загальне право на розіграш складає:% d ";
-"campaign_description_label_limit_reached" = "Ваше одноденне право на участь у розіграші складає 10 разів і ви його використали. Зроби PhotoPick, та збільшуй свій шанс на право участі у розіграші. Ваше загальне право на розіграш складає:% d";
-"campaign_description_label_another" = "Ваш загальне право на розіграш складає:% d. Проаналізуйте свої фотографії за допомогою PhotoPick та скористайтеся  можливістю стати одним із 20 переможців, які можуть стати власниками Note 10!";
+"campaign_description_label_new_user" = "You have not participated in the campaign yet. Start analyzing your photos with PhotoPick and get the chance to be winner!";
+"campaign_description_label_experienced_user" = "You have not started today. Analyze your photos with PhotoPick and get more chance. Your total draw: %d";
+"campaign_description_label_limit_reached" = "You have already completed daily draw for today. Keep analyzing tomorrow! Your total draw: %d";
+"campaign_description_label_another" = "Your total raffle is %d! Keep analyzing your photos with PhotoPick, increase your chances of winning!";
 "campaign_campaign_detail_button" = "Деталі Акції";
 "analyze_photo_pic_detail_button" = "Проаналізуйте  за допомогою PhotoPick!";
 "campaign_detail_title" = "Деталі акції";
@@ -1258,11 +1258,11 @@
 "campaign_vc_bottom_title" = "Телефонна Акція Photopick";
 "campaign_vc_bottom_description" = "Для того, щоб взяти участь у акції та мати можливість бути оціненим, вся інформація у вашому профілі повинна бути повною. Ви можете оновити свою інформацію, натиснувши кнопку Редагувати профіль.";
 "campaign_vc_top_without_title" = "НАЖАЛЬ В ТЕБЕ НЕ ЗАЛИШИЛОСЬ ПРАВА:(";
-"campaign_vc_top_without_description" = "Ваше право аналізувати на PhotoPick закінчилось. Придбавши преміум ви можете мати необмежений аналіз своїх фото PhotoPіck  Продовжуйте аналізувати свої фотографії за допомогою PhotoPick та збільшуйте свої шанси стати одним із 20 переможців у виграші Samsung Galaxy Note 10!";
+"campaign_vc_top_without_description" = "No PhotoPick Analysis left. Become Premium, get unlimited PhotoPick and increase your chance of winning!";
 "campaign_vc_top_title_zero" = "ВАШ ОДНОДЕННИЙ ЛІМІТ ЗАКІНЧИВСЯ!";
-"campaign_vc_top_description_zero" = "Ваше одноденне право у участі в розіграші закінчилось. Продовжуйте аналізувати свої фотографії за допомогою PhotoPick та збільшуйте свої шанси стати одним із 20 переможців, які можуть виграти Samsung Galaxy Note 10! ";
+"campaign_vc_top_description_zero" = "You have just completed total daily raffle. Keep analyzing your photos with PhotoPick tomorrow, increase your chances of winning!";
 "campaign_vc_top_title_non_zero" = "ПРОДОВЖУЙЬЕ АНАЛІЗУВАТИ! ";
-"campaign_vc_top_description_non_zero" = "Ви викорастали % d свої денні  права, які надаються в межах акції на участь у розіграші.  Продовжуйте аналізувати свої фотографії за допомогою PhotoPick та збільшуйте свої шанси стати одним із 20 переможців, які можуть отримати Samsung Galaxy Note 10!";
+"campaign_vc_top_description_non_zero" = "Congrats! You have completed %d PhotoPick for today. Keep analyzing your photos with PhotoPick and increase your chances of winning!";
 "create_story_empty_name_error" = "Назва історії порожня";
 "photopick_history_campaign_contest_total_draw" = "Моє Загальне Право на Участь у Розіграші";
 "photopick_history_campaign_contest_remaining_draw" = "Моє Денне Право на Участь у Розіграші";
@@ -1865,6 +1865,6 @@
 "accessibility_pause" = "Зупинити";
 
 /*Password Rules*/
-"signup_password_rule_character_limit" = "";
-"signup_password_rule_upper_lower_numeric" = "";
-"signup_password_rule_sequential_characters" = "";
+"signup_password_rule_character_limit" = "Мінімум 6, максимум 16 символів";
+"signup_password_rule_upper_lower_numeric" = "Мінімум 1 прописна буква, 1 мала літера і 1 цифра";
+"signup_password_rule_sequential_characters" = "Непослідовні символи";

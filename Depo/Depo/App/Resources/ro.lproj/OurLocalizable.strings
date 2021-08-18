@@ -1209,10 +1209,10 @@
 "tbmatic_home_card_years_ago" = "%d ani în urmă";
 "tbmatic_home_card_this_year" = "In acest an";
 "campaign_card_title" = "Campania telefonică PhotoPick";
-"campaign_description_label_new_user" = "Nu ați participat încă la campanie. Începeți să analizați fotografiile cu PhotoPick și aveți șansa de a fi unul dintre cei 20 de câștigători a unui Samsung Galaxy Note 10!";
-"campaign_description_label_experienced_user" = "Nu ați început astăzi. Analizați-vă fotografiile cu PhotoPick și aveți mai multe șanse. Remiza ta totală:%d";
-"campaign_description_label_limit_reached" = "Limita ta de extragere zilnică s-a încheiat de când ai finalizat deja 10 analize PhotoPick astăzi. Continuați să analizați mâine! Remiza ta totală:%d";
-"campaign_description_label_another" = "Remiza ta totală este de %d! Analizați-vă fotografiile cu PhotoPick și creșteți șansa de a fi unul dintre cei 20 de câștigători pentru Samsung Galaxy Note 10!";
+"campaign_description_label_new_user" = "You have not participated in the campaign yet. Start analyzing your photos with PhotoPick and get the chance to be winner!";
+"campaign_description_label_experienced_user" = "You have not started today. Analyze your photos with PhotoPick and get more chance. Your total draw: %d";
+"campaign_description_label_limit_reached" = "You have already completed daily draw for today. Keep analyzing tomorrow! Your total draw: %d";
+"campaign_description_label_another" = "Your total raffle is %d! Keep analyzing your photos with PhotoPick, increase your chances of winning!";
 "campaign_campaign_detail_button" = "Detalii despre campanie";
 "analyze_photo_pic_detail_button" = "Analizați cu PhotoPick";
 "campaign_detail_title" = "Detalii despre campanie";
@@ -1256,11 +1256,11 @@
 "campaign_vc_bottom_title" = "Campania telefonică PhotoPick";
 "campaign_vc_bottom_description" = "Informațiile dvs. de profil trebuie să fie complete pentru a participa la campanie și pentru a fi evaluate în cadrul extragerii. Puteți actualiza informațiile dvs. făcând clic pe butonul Editați profilul";
 "campaign_vc_top_without_title" = "UPS SORRY :(";
-"campaign_vc_top_without_description" = "Nu a mai rămas nici o analiză PhotoPick. Deveniți Premium, obțineți PhotoPick nelimitat și creșteți șansa de a deveni unul dintre cei 20 de câștigători pentru Samsung Galaxy Note 10!";
+"campaign_vc_top_without_description" = "No PhotoPick Analysis left. Become Premium, get unlimited PhotoPick and increase your chance of winning!";
 "campaign_vc_top_title_zero" = "LIMITA ZILNICĂ ESTE EPUIZATĂ!";
-"campaign_vc_top_description_zero" = "Tocmai ați finalizat extragerea zilnică totală. Puteți încerca mâine din nou și creșteți șansa de a deveni unul dintre cei 20 de câștigători pentru Samsung Galaxy Note 10!";
+"campaign_vc_top_description_zero" = "You have just completed total daily raffle. Keep analyzing your photos with PhotoPick tomorrow, increase your chances of winning!";
 "campaign_vc_top_title_non_zero" = "CONTINUĂ!";
-"campaign_vc_top_description_non_zero" = "Felicitări! Ați finalizat astăzi %d PhotoPick. Analizați-vă fotografiile cu PhotoPick și creșteți șansa de a deveni unul dintre cei 20 de câștigători pentru Samsung Galaxy Note 10!";
+"campaign_vc_top_description_non_zero" = "Congrats! You have completed %d PhotoPick for today. Keep analyzing your photos with PhotoPick and increase your chances of winning!";
 "create_story_empty_name_error" = "Numele poveștii nu poate fi gol";
 "photopick_history_campaign_contest_total_draw" = "Remiza Totală";
 "photopick_history_campaign_contest_remaining_draw" = "Remiza zilnică rămasă";
@@ -1863,6 +1863,6 @@
 "accessibility_pause" = "Opreşte";
 
 /*Password Rules*/
-"signup_password_rule_character_limit" = "";
-"signup_password_rule_upper_lower_numeric" = "";
-"signup_password_rule_sequential_characters" = "";
+"signup_password_rule_character_limit" = "Minim 6, maxim 16 caractere";
+"signup_password_rule_upper_lower_numeric" = "Minim 1 majusculă, 1 litere mică și 1 număr";
+"signup_password_rule_sequential_characters" = "Caractere non-consecutive";

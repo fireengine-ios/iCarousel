@@ -1221,10 +1221,10 @@
 "tbmatic_home_card_years_ago" = "%d قبل سنة";
 "tbmatic_home_card_this_year" = "هذا العام";
 "campaign_card_title" = "عرض الهاتف من فوتوبيك";
-"campaign_description_label_new_user" = "ما رأيك في أن تربح أول حق للسحب من أجل هاتف سامسونج جلاكسي نوت 10؟ استمر في تحليل صورك باستخدام فوتو بيك وزود فرصتك من أن تكون شخصا من ضمن 20 شخصا سوف يربحون النوت !";
-"campaign_description_label_experienced_user" = "لم تبدأ اليوم بعد من استخدام حقك في السحب من أجل الربح. استمر في تحليل صورك باستخدام فوتو بيك وزود فرصتك في ربح سامسونج جلاكسي نوت 10.مجموع فرصك للسحب::%d";
-"campaign_description_label_limit_reached" = "انتهت العشر فرص المحددة لك للسحب اليومي.غدا استخدم فوتوبيك مرة أخرى.وزود فرص سحبك. مجموع %d فرصك للسحب:";
-"campaign_description_label_another" = ". !%d مجموع فرصك للسحب\nاستمر في تحليل صورك باستخدام فوتو بيك وزود فرصتك من أن تكون شخصا من ضمن 20 شخصا سوف يربحون سامسونج كلاكسي نوت 10!";
+"campaign_description_label_new_user" = "You have not participated in the campaign yet. Start analyzing your photos with PhotoPick and get the chance to be winner!";
+"campaign_description_label_experienced_user" = "You have not started today. Analyze your photos with PhotoPick and get more chance. Your total draw: %d";
+"campaign_description_label_limit_reached" = "You have already completed daily draw for today. Keep analyzing tomorrow! Your total draw: %d";
+"campaign_description_label_another" = "Your total raffle is %d! Keep analyzing your photos with PhotoPick, increase your chances of winning!";
 "campaign_campaign_detail_button" = "تفاصيل العرض";
 "analyze_photo_pic_detail_button" = "حلل مع فوتوبيك!";
 "campaign_detail_title" = "تفاصيل العرض";
@@ -1268,11 +1268,11 @@
 "campaign_vc_bottom_title" = "عرض الهاتف من فوتوبيك";
 "campaign_vc_bottom_description" = "من أجل أن تستطيع أن تشترك بالعرض ويتم تقييمك ضمن السحب يلزم أن تكون جميع معلوماتك التي في صفحتك الشخصية كاملة .وبالضغط على زر التعديل يمكنك تحديث معلوماتك الشخصية.";
 "campaign_vc_top_without_title" = "انتهت فرصك:(";
-"campaign_vc_top_without_description" = "لقد انتهى حق تحليل فوتوبيك.يمكنكم أن تكونوا أصحاب حق لفوتوبيك بدون حدود كبريميوم.استمر في تحليل صورك باستخدام فوتو بيك وزود فرصتك من أن تكون شخصا من ضمن 20 شخصا سوف يربحون سامسونج جلاكسي نوت!";
+"campaign_vc_top_without_description" = "No PhotoPick Analysis left. Become Premium, get unlimited PhotoPick and increase your chance of winning!";
 "campaign_vc_top_title_zero" = "امتلأ حدك اليومي!";
-"campaign_vc_top_description_zero" = "قد انتهت فرصك في السحب اليومي الذي في العرض.استمر في تحليل صورك باستخدام فوتو بيك وزود فرصتك من أن تكون شخصا من ضمن 20 شخصا سوف يربحون سامسونج جلاكسي نوت !";
+"campaign_vc_top_description_zero" = "You have just completed total daily raffle. Keep analyzing your photos with PhotoPick tomorrow, increase your chances of winning!";
 "campaign_vc_top_title_non_zero" = "التحليل مستمر!";
-"campaign_vc_top_description_non_zero" = "%d قد انتهت فرصك في السحب اليومي\n الذي في العرض.استمر في تحليل صورك باستخدام فوتو بيك وزود فرصتك من أن تكون شخصا من ضمن 20 شخصا سوف يربحون سامسونج جلاكسي نوت10 !";
+"campaign_vc_top_description_non_zero" = "Congrats! You have completed %d PhotoPick for today. Keep analyzing your photos with PhotoPick and increase your chances of winning!";
 "create_story_empty_name_error" = "اسم الحكاية فارغ";
 "photopick_history_campaign_contest_total_draw" = "مجموع فرصي للسحب";
 "photopick_history_campaign_contest_remaining_draw" = "فرصي اليومية المتبقية";
@@ -1875,6 +1875,6 @@
 "accessibility_pause" = "إيقاف مؤقت";
 
 /*Password Rules*/
-"signup_password_rule_character_limit" = "";
-"signup_password_rule_upper_lower_numeric" = "";
-"signup_password_rule_sequential_characters" = "";
+"signup_password_rule_character_limit" = "الحد الأدنى 6 أحرف، الحد الأقصى 16 حرفا";
+"signup_password_rule_upper_lower_numeric" = "على الأقل حرف كبير 1 وحرف صغير 1 ورقم 1";
+"signup_password_rule_sequential_characters" = "أحرف غير متتالية";
