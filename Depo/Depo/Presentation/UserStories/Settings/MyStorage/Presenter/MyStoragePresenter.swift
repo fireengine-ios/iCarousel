@@ -76,9 +76,19 @@ extension MyStoragePresenter: MyStorageViewOutput {
         interactor.trackNetmeraPackageCancelClick(type: subscriptionModel?.subscriptionPlanType?.type.rawValue ?? "",
                                                   packageName: subscriptionModel?.subscriptionPlanDisplayName ?? "")
         
-        guard let model = subscriptionModel, let modelType = model.subscriptionPlanType else {
+        guard let model = subscriptionModel else {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
             return
+        }
+
+        guard let modelType = model.subscriptionPlanType else {
+            if let key = model.subscriptionPlanLanguageKey {
+                router?.showCancelOfferAlert(with: TextConstants.digicelCancelText(for: key))
+                return
+            } else {
+                router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
+                return
+            }
         }
         
         modelType.cancellActions(slcm: { [weak self] type in
