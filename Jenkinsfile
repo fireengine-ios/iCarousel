@@ -21,7 +21,7 @@ isFriendlyBuild = !branchName.startsWith("release/")
 
 agentName = 'devops-dss-js-ios-12' // The mac mini assigned to this project
 apps = [ 
-/*     [
+     [
         name: 'lifebox',// name will be the base filename of the app
         versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
         ictsContainerId: '743', // ICT Store
@@ -30,7 +30,7 @@ apps = [
         xcodeTarget: isFriendlyBuild ? 'Lifebox_Bundle' : 'Lifebox',
         itcTeamId: '121548574',
     ]
- , */
+ ,
      [
          name: 'billo',// name will be the base filename of the app
          versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
