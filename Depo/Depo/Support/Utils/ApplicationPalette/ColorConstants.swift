@@ -109,94 +109,28 @@ struct ColorConstants {
     static let invalidPasswordRule = UIColor(named: "invalidPasswordRule")!}
 
 extension UIColor {
-    
-    class var lrTealish: UIColor {
-        return UIColor(red: 51.0 / 255.0, green: 204.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrTiffanyBlue: UIColor {
-        return UIColor(red: 96.0 / 255.0, green: 229.0 / 255.0, blue: 229.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrMango: UIColor {
-        return UIColor(red: 255.0 / 255.0, green: 177.0 / 255.0, blue: 33.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrApricot: UIColor {
-        return UIColor(red: 255.0 / 255.0, green: 183.0 / 255.0, blue: 116.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrTealishTwo: UIColor {
-        return UIColor(red: 68.0 / 255.0, green: 205.0 / 255.0, blue: 208.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrTealishFour: UIColor {
-        return UIColor(red: 64.0 / 255.0, green: 204.0 / 255.0, blue: 208.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrMintGreen: UIColor {
-        return UIColor(red: 41.0 / 255.0, green: 240.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrCryonBlue: UIColor {
-        return UIColor(red: 2.0 / 255.0, green: 203.0 / 255.0, blue: 210.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrRedOrange: UIColor {
-        return UIColor(red: 239.0 / 255.0, green: 70.0 / 255.0, blue: 84.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrYellowSun: UIColor {
-        return UIColor(red: 255.0 / 255.0, green: 197.0 / 255.0, blue: 73.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrSkinTone: UIColor {
-        return UIColor(red: 254.0 / 255.0, green: 247.0 / 255.0, blue: 240.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrLightYellow: UIColor {
-        return UIColor(red: 254.0 / 255.0, green: 233.0 / 255.0, blue: 188.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrSLightPink: UIColor {
-        return UIColor(red: 248.0 / 255.0, green: 194.0 / 255.0, blue: 190.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrBrownishGrey: UIColor {
-        return UIColor(red: 95 / 255.0, green: 95 / 255.0, blue: 95 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrLightBrownishGrey: UIColor {
-        return UIColor(red: 151 / 255.0, green: 151 / 255.0, blue: 151 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrPeach: UIColor {
-        return UIColor(red: 254.0 / 255.0, green: 171.0 / 255.0, blue: 143.0 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrDarkSkyBlue: UIColor {
-        return UIColor(red: 65 / 255.0, green: 180 / 255.0, blue: 224 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrOrange: UIColor {
-        return UIColor(red: 245 / 255.0, green: 115 / 255.0, blue: 14 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrButterScotch: UIColor {
-        return UIColor(red: 255 / 255.0, green: 198 / 255.0, blue: 75 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrFadedRed: UIColor {
-        return UIColor(red: 217 / 255.0, green: 58 / 255.0, blue: 71 / 255.0, alpha: 1.0)
-    }
-    
-    class var lrGreyishBrownThree: UIColor {
-        return UIColor(red: 74 / 255.0, green: 74 / 255.0, blue: 74 / 255.0, alpha: 1.0)
-    }
-
-    class var lrGreyish: UIColor {
-        return UIColor(red: 178 / 255.0, green: 178 / 255.0, blue: 178 / 255.0, alpha: 1.0)
-    }
+    static var lrTealish: UIColor { UIColor(named: "lrTealish")! }
+    static var lrTiffanyBlue: UIColor { UIColor(named: "lrTiffanyBlue")! }
+    static var lrMango: UIColor { UIColor(named: "lrMango")! }
+    static var lrApricot: UIColor { UIColor(named: "lrApricot")! }
+    static var lrTealishTwo: UIColor { UIColor(named: "lrTealishTwo")! }
+    static var lrTealishFour: UIColor { UIColor(named: "lrTealishFour")! }
+    static var lrMintGreen: UIColor { UIColor(named: "lrMintGreen")! }
+    static var lrCryonBlue: UIColor { UIColor(named: "lrCryonBlue")! }
+    static var lrRedOrange: UIColor { UIColor(named: "lrRedOrange")! }
+    static var lrYellowSun: UIColor { UIColor(named: "lrYellowSun")! }
+    static var lrSkinTone: UIColor { UIColor(named: "lrSkinTone")! }
+    static var lrLightYellow: UIColor { UIColor(named: "lrLightYellow")! }
+    static var lrSLightPink: UIColor { UIColor(named: "lrSLightPink")! }
+    static var lrBrownishGrey: UIColor { UIColor(named: "lrBrownishGrey")! }
+    static var lrLightBrownishGrey: UIColor { UIColor(named: "lrLightBrownishGrey")! }
+    static var lrPeach: UIColor { UIColor(named: "lrPeach")! }
+    static var lrDarkSkyBlue: UIColor { UIColor(named: "lrDarkSkyBlue")! }
+    static var lrOrange: UIColor { UIColor(named: "lrOrange")! }
+    static var lrButterScotch: UIColor { UIColor(named: "lrButterScotch")! }
+    static var lrFadedRed: UIColor { UIColor(named: "lrFadedRed")! }
+    static var lrGreyishBrownThree: UIColor { UIColor(named: "lrGreyishBrownThree")! }
+    static var lrGreyish: UIColor { UIColor(named: "lrGreyish")! }
 }
 
 // Text Font
