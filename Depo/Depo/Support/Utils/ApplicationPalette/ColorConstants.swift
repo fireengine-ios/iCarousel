@@ -8,121 +8,105 @@
 
 import UIKit
 
-struct ColorConstants {
-    static let whiteColor = UIColor.white
-    static let blueColor = UIColor(red: 68 / 255, green: 204 / 255, blue: 208 / 255, alpha: 1)
-    static let lightBlueColor = UIColor(red: 180 / 255, green: 241 / 255, blue: 241 / 255, alpha: 1)
-    static let yellowColor = UIColor(red: 1, green: 240 / 255, blue: 149 / 255, alpha: 1)
-    static let switcherGrayColor = UIColor(red: 114 / 255, green: 114 / 255, blue: 114 / 255, alpha: 1)
-    static let switcherGreenColor = UIColor(red: 68 / 255, green: 219 / 255, blue: 94 / 255, alpha: 1)
-    static let textGrayColor = UIColor(red: 95 / 255, green: 95 / 255, blue: 95 / 255, alpha: 1)
-    static let textLightGrayColor = UIColor(red: 95 / 255, green: 95 / 255, blue: 95 / 255, alpha: 0.5)
-    static let greenColor = UIColor(red: 80 / 255, green: 227 / 255, blue: 119 / 255, alpha: 1)
-    static let lightGrayColor = UIColor(red: 216 / 255, green: 216 / 255, blue: 216 / 255, alpha: 1)
-    static let profileGrayColor = UIColor(red: 234 / 255, green: 234 / 255, blue: 234 / 255, alpha: 1)
-    static let selectedCellBlueColor = UIColor(red: 80 / 255, green: 220 / 255, blue: 220 / 255, alpha: 0.2)
-    static let selectedBottomBarButtonColor = UIColor(red: 255 / 255, green: 171 / 255, blue: 141 / 255, alpha: 1)
-    static let fileGreedCellColor = UIColor(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1)
-    static let darkBlueColor = UIColor(red: 5 / 255, green: 45 / 255, blue: 67 / 255, alpha: 1)
-    static let searchBarColor = UIColor(red: 3 / 255, green: 3 / 255, blue: 3 / 255, alpha: 0.09)
-    static let searchShadowColor = UIColor(red: 29 / 255, green: 29 / 255, blue: 29 / 255, alpha: 1)
-    static let darkText = UIColor(red: 77 / 255, green: 77 / 255, blue: 77 / 255, alpha: 1)
-    static let lightText = UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 1)
-    static let placeholderGrayColor = UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 0.5)
-    static let activityTimelineDraws = UIColor(red: 6 / 255, green: 44 / 255, blue: 66 / 255, alpha: 1)
-    static let lightPeach = UIColor(red: 255 / 255, green: 226 / 255, blue: 198 / 255, alpha: 1)
-    static let yellowButtonColor = UIColor(red: 1, green: 199 / 255, blue: 77 / 255, alpha: 1)
-    static let grayTabBarButtonsColor = UIColor(red: 155 / 255, green: 155 / 255, blue: 155 / 255, alpha: 1)
-    static let textOrange = UIColor(red: 255 / 255, green: 160 / 255, blue: 10 / 255, alpha: 1)
-    static let darkBorder = UIColor(red: 151 / 255, green: 151 / 255, blue: 151 / 255, alpha: 1)
-    static let orangeBorder = UIColor(red: 249 / 255, green: 206 / 255, blue: 107 / 255, alpha: 1)
-    static let oldieFilterColor = UIColor(red: 1, green: 230.0 / 255.0, blue: 0, alpha: 0.4)
-    static let bottomViewGrayColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1)
-    static let blackForLanding = UIColor(red: 12 / 255, green: 6 / 255, blue: 42 / 255, alpha: 1)
-    static let darkGrayTransperentColor = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.54)
-    static let lightGray = UIColor(red: 104.0 / 255.0, green: 108.0 / 255.0, blue: 128.0 / 255.0, alpha: 1.0)
-    
-    static let orangeGradientStart = UIColor(red: 255 / 255, green: 177 / 255, blue: 33 / 255, alpha: 1)
-    static let orangeGradientEnd = UIColor(red: 255 / 255, green: 183 / 255, blue: 116 / 255, alpha: 1)
-    static let greenGradientStart = UIColor(red: 92 / 255, green: 195 / 255, blue: 195 / 255, alpha: 1)
-    static let greenGradientEnd = UIColor(red: 77 / 255, green: 218 / 255, blue: 218 / 255, alpha: 1)
-    static let redGradientStart = UIColor(red: 159 / 255, green: 4 / 255, blue: 27 / 255, alpha: 1)
-    static let redGradientEnd = UIColor(red: 245 / 255, green: 81 / 255, blue: 95 / 255, alpha: 1)
-    static let darkRed = UIColor(red: 208 / 255, green: 2 / 255, blue: 27 / 255, alpha: 1)
-    static let photoCell = UIColor(red: 222 / 255, green: 222 / 255, blue: 222 / 255, alpha: 1)
-    
-    static let lrTiffanyBlueGradient = UIColor(red: 244 / 255, green: 71 / 255, blue: 87 / 255, alpha: NumericConstants.alphaForColorsPremiumButton)
-    static let orangeGradient = UIColor(red: 255 / 255, green: 159 / 255, blue: 8 / 255, alpha: NumericConstants.alphaForColorsPremiumButton)
-    static let removeConnection = UIColor(red: 130 / 255, green: 150 / 255, blue: 161 / 255, alpha: 1.0)
-    static let connectedAs = UIColor(red: 10 / 255, green: 50 / 255, blue: 71 / 255, alpha: 1.0)
-    
-    static let errorOrangeGradientStart = UIColor(red: 255 / 255, green: 163 / 255, blue:  0, alpha: 1.0)
-    static let errorOrangeGradientEnd = UIColor(red: 255 / 255, green: 98 / 255, blue: 0, alpha: 1.0)
-    
-    static let alertBlueGradientStart = UIColor(red: 82 / 255, green: 120 / 255, blue:  243 / 255, alpha: 1.0)
-    static let alertBlueGradientEnd = UIColor(red: 41 / 255, green: 201 / 255, blue: 236 / 255, alpha: 1.0)
-    
-    static let alertOrangeAndBlueGradientStart = UIColor(red: 255 / 255, green: 168 / 255, blue:  16 / 255, alpha: 1.0)
-    static let alertOrangeAndBlueGradientEnd = UIColor(red: 67 / 255, green: 204 / 255, blue: 208 / 255, alpha: 1.0)
-    
-    static let subjectPickerBackgroundColor = UIColor(red: 208/255, green: 211/255, blue: 216/255, alpha: 1)
-    static let toolbarTintColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
-    static let buttonTintColor = UIColor(red: 73/255, green: 206/255, blue: 205/255, alpha: 1)
-    static let closeIconButtonColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
-    
-    static let cloudyBlue = UIColor(red: 197 / 255.0, green: 200.0 / 255.0, blue: 216 / 255.0, alpha: 1.0)
-    static let blueGrey = UIColor(red: 139 / 255.0, green: 143 / 255.0, blue: 164 / 255.0, alpha: 1.0)
-    static let coolGrey = UIColor(red: 179 / 255.0, green: 181 / 255.0, blue: 191 / 255.0, alpha: 1.0)
-    static let choosenSelectedButtonColor = UIColor(red: 250/255, green: 155/255, blue: 77/255, alpha: 1)
-    static let lighterGray = UIColor(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0)
-    static let darkTintGray = UIColor(red: 225 / 255.0, green: 225 / 255.0, blue: 225 / 255.0, alpha: 1.0)
-    static let textDisabled = UIColor.black.withAlphaComponent(0.25)
-    
-    static let charcoalGrey = UIColor(red: 56 / 255.0, green: 59 / 255.0, blue: 65 / 255.0, alpha: 1.0)
-    static let marineTwo = UIColor(red: 6 / 255.0, green: 44 / 255.0, blue: 67 / 255.0, alpha: 1.0)
-    static let marineFour = UIColor(red: 6 / 255.0, green: 63 / 255.0, blue: 98 / 255.0, alpha: 1.0)
-    static let tealishThree = UIColor(red: 40 / 255.0, green: 169 / 255.0, blue: 173 / 255.0, alpha: 1.0)
-    
-    static let popUpBackground = UIColor(red: 0, green: 0, blue: 0, alpha: 0.33)
-    
-    static let tealBlue = UIColor(red: 0, green: 124 / 255.0, blue: 171 / 255.0, alpha: 1.0)
-    static let seaweed = UIColor(red: 30 / 255.0, green: 215 / 255.0, blue: 128 / 255.0, alpha: 1.0)
-    static let blueGreen = UIColor(red: 13 / 255.0, green: 164 / 255.0, blue: 152 / 255.0, alpha: 1.0)
-    
-    static let lightTeal = UIColor(red: 142 / 255.0, green: 221 / 255.0, blue: 221 / 255.0, alpha: 1.0)
-    static let apricotTwo = UIColor(red: 251 / 255.0, green: 188 / 255.0, blue: 104 / 255.0, alpha: 1.0)
-    static let rosePink = UIColor(red: 249 / 255.0, green: 140 / 255.0, blue: 148 / 255.0, alpha: 1.0)
-    static let backgroundViewColor = UIColor.black.withAlphaComponent(0.5)
-    
-    static let billoBlue = UIColor(red: 0, green: 174 / 255.0, blue: 233 / 255.0, alpha: 1.0)
-    static let billoDarkBlue = UIColor(red: 0, green: 153 / 255.0, blue: 219 / 255.0, alpha: 1.0)
-    static let billoGray = UIColor(red: 109 / 255.0, green: 109 / 255.0, blue: 109 / 255.0, alpha: 1.0)
-    static let stickerBorderColor = UIColor(red: 59 / 255.0, green: 80 / 255.0, blue: 90 / 255.0, alpha: 1)
+enum AppColor {
+    case background
+    case secondaryBackground
+    case text
 
-    static let profileLightGray = UIColor(red: 186 / 255.0, green: 186 / 255.0, blue: 186 / 255.0, alpha: 1)
-    static let cardBorderOrange = UIColor(red: 231 / 255.0, green: 133 / 255.0, blue: 36 / 255.0, alpha: 1)
-
-    static let linkBlack = UIColor(red: 51 / 255.0, green: 51 / 255.0, blue: 51 / 255.0, alpha: 1)
-    
-    static let snackbarGray = UIColor(white: 65/255, alpha: 1)
-    
-    static let duplicatesGray = UIColor(white: 86/255, alpha: 1)
-
-    static let navy = UIColor(red: 4 / 255.0, green: 37 / 255.0, blue: 56 / 255.0, alpha: 1)
-    
-    static let photoEditBackgroundColor = UIColor(white: 20 / 255, alpha: 1)
-    static let photoEditSliderColor = UIColor(white: 48 / 255, alpha: 1)
-    
-    static let greenyBlue = UIColor(red: 65 / 255.0, green: 196 / 255.0, blue: 199 / 255.0, alpha: 1)
-    static let tbMatikBlurColor = UIColor(red: 5 / 255.0, green: 52 / 255.0, blue: 79 / 255.0, alpha: 1)
-    
-    static let aquaMarineTwo = UIColor(red: 85 / 255.0, green: 223 / 255.0, blue: 223 / 255.0, alpha: 1)
-
-    static let disabledGrayBackgroud = UIColor(red: 241 / 255.0, green: 243 / 255.0, blue: 245 / 255.0, alpha: 1)
-    static let disabledGrayText = UIColor(red: 170 / 255.0, green: 183 / 255.0, blue: 191 / 255.0, alpha: 1)
-
-    static let invalidPasswordRule = UIColor(red: 255 / 255.0, green: 61 / 255.0, blue: 61 / 255.0, alpha: 1)
 }
+
+struct ColorConstants {
+    static let whiteColor = UIColor(named: "whiteColor")!
+    static let blueColor = UIColor(named: "blueColor")!
+    static let lightBlueColor = UIColor(named: "lightBlueColor")!
+    static let yellowColor = UIColor(named: "yellowColor")!
+    static let switcherGrayColor = UIColor(named: "switcherGrayColor")!
+    static let switcherGreenColor = UIColor(named: "switcherGreenColor")!
+    static let textGrayColor = UIColor(named: "textGrayColor")!
+    static let textLightGrayColor = UIColor(named: "textLightGrayColor")!
+    static let greenColor = UIColor(named: "greenColor")!
+    static let lightGrayColor = UIColor(named: "lightGrayColor")!
+    static let profileGrayColor = UIColor(named: "profileGrayColor")!
+    static let selectedCellBlueColor = UIColor(named: "selectedCellBlueColor")!
+    static let selectedBottomBarButtonColor = UIColor(named: "selectedBottomBarButtonColor")!
+    static let fileGreedCellColor = UIColor(named: "fileGreedCellColor")!
+    static let darkBlueColor = UIColor(named: "darkBlueColor")!
+    static let searchBarColor = UIColor(named: "searchBarColor")!
+    static let searchShadowColor = UIColor(named: "searchShadowColor")!
+    static let darkText = UIColor(named: "darkText")!
+    static let lightText = UIColor(named: "lightText")!
+    static let placeholderGrayColor = UIColor(named: "placeholderGrayColor")!
+    static let activityTimelineDraws = UIColor(named: "activityTimelineDraws")!
+    static let lightPeach = UIColor(named: "lightPeach")!
+    static let yellowButtonColor = UIColor(named: "yellowButtonColor")!
+    static let grayTabBarButtonsColor = UIColor(named: "grayTabBarButtonsColor")!
+    static let textOrange = UIColor(named: "textOrange")!
+    static let darkBorder = UIColor(named: "darkBorder")!
+    static let orangeBorder = UIColor(named: "orangeBorder")!
+    static let oldieFilterColor = UIColor(named: "oldieFilterColor")!
+    static let bottomViewGrayColor = UIColor(named: "bottomViewGrayColor")!
+    static let blackForLanding = UIColor(named: "blackForLanding")!
+    static let darkGrayTransperentColor = UIColor(named: "darkGrayTransperentColor")!
+    static let lightGray = UIColor(named: "lightGray")!
+    static let orangeGradientStart = UIColor(named: "orangeGradientStart")!
+    static let orangeGradientEnd = UIColor(named: "orangeGradientEnd")!
+    static let greenGradientStart = UIColor(named: "greenGradientStart")!
+    static let greenGradientEnd = UIColor(named: "greenGradientEnd")!
+    static let redGradientStart = UIColor(named: "redGradientStart")!
+    static let redGradientEnd = UIColor(named: "redGradientEnd")!
+    static let darkRed = UIColor(named: "darkRed")!
+    static let photoCell = UIColor(named: "photoCell")!
+    static let lrTiffanyBlueGradient = UIColor(named: "lrTiffanyBlueGradient")!
+    static let orangeGradient = UIColor(named: "orangeGradient")!
+    static let removeConnection = UIColor(named: "removeConnection")!
+    static let connectedAs = UIColor(named: "connectedAs")!
+    static let errorOrangeGradientStart = UIColor(named: "errorOrangeGradientStart")!
+    static let errorOrangeGradientEnd = UIColor(named: "errorOrangeGradientEnd")!
+    static let alertBlueGradientStart = UIColor(named: "alertBlueGradientStart")!
+    static let alertBlueGradientEnd = UIColor(named: "alertBlueGradientEnd")!
+    static let alertOrangeAndBlueGradientStart = UIColor(named: "alertOrangeAndBlueGradientStart")!
+    static let alertOrangeAndBlueGradientEnd = UIColor(named: "alertOrangeAndBlueGradientEnd")!
+    static let subjectPickerBackgroundColor = UIColor(named: "subjectPickerBackgroundColor")!
+    static let toolbarTintColor = UIColor(named: "toolbarTintColor")!
+    static let buttonTintColor = UIColor(named: "buttonTintColor")!
+    static let closeIconButtonColor = UIColor(named: "closeIconButtonColor")!
+    static let cloudyBlue = UIColor(named: "cloudyBlue")!
+    static let blueGrey = UIColor(named: "blueGrey")!
+    static let coolGrey = UIColor(named: "coolGrey")!
+    static let choosenSelectedButtonColor = UIColor(named: "choosenSelectedButtonColor")!
+    static let lighterGray = UIColor(named: "lighterGray")!
+    static let darkTintGray = UIColor(named: "darkTintGray")!
+    static let textDisabled = UIColor(named: "textDisabled")!
+    static let charcoalGrey = UIColor(named: "charcoalGrey")!
+    static let marineTwo = UIColor(named: "marineTwo")!
+    static let marineFour = UIColor(named: "marineFour")!
+    static let tealishThree = UIColor(named: "tealishThree")!
+    static let popUpBackground = UIColor(named: "popUpBackground")!
+    static let tealBlue = UIColor(named: "tealBlue")!
+    static let seaweed = UIColor(named: "seaweed")!
+    static let blueGreen = UIColor(named: "blueGreen")!
+    static let lightTeal = UIColor(named: "lightTeal")!
+    static let apricotTwo = UIColor(named: "apricotTwo")!
+    static let rosePink = UIColor(named: "rosePink")!
+    static let backgroundViewColor = UIColor(named: "backgroundViewColor")!
+    static let billoBlue = UIColor(named: "billoBlue")!
+    static let billoDarkBlue = UIColor(named: "billoDarkBlue")!
+    static let billoGray = UIColor(named: "billoGray")!
+    static let stickerBorderColor = UIColor(named: "stickerBorderColor")!
+    static let profileLightGray = UIColor(named: "profileLightGray")!
+    static let cardBorderOrange = UIColor(named: "cardBorderOrange")!
+    static let linkBlack = UIColor(named: "linkBlack")!
+    static let snackbarGray = UIColor(named: "snackbarGray")!
+    static let duplicatesGray = UIColor(named: "duplicatesGray")!
+    static let navy = UIColor(named: "navy")!
+    static let photoEditBackgroundColor = UIColor(named: "photoEditBackgroundColor")!
+    static let photoEditSliderColor = UIColor(named: "photoEditSliderColor")!
+    static let greenyBlue = UIColor(named: "greenyBlue")!
+    static let tbMatikBlurColor = UIColor(named: "tbMatikBlurColor")!
+    static let aquaMarineTwo = UIColor(named: "aquaMarineTwo")!
+    static let disabledGrayBackgroud = UIColor(named: "disabledGrayBackgroud")!
+    static let disabledGrayText = UIColor(named: "disabledGrayText")!
+    static let invalidPasswordRule = UIColor(named: "invalidPasswordRule")!}
 
 extension UIColor {
     
