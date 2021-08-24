@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="AutoUploadIsOffPopUp" customModule="lifebox" customModuleProvider="target">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="AutoUploadIsOffPopUp" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="300" height="94"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -35,7 +34,7 @@
                         <constraint firstAttribute="height" constant="1" id="NjN-LN-bU9"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4F-J3-y81" customClass="CircleYellowButton" customModule="lifebox" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4F-J3-y81" customClass="CircleYellowButton" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="209" y="64" width="76" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="YSM-cm-PUm"/>
@@ -55,7 +54,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Eea-6V-l1X" secondAttribute="trailing" constant="16" id="1jc-iL-teg"/>
                 <constraint firstItem="Nap-ZB-xd9" firstAttribute="top" secondItem="Eea-6V-l1X" secondAttribute="bottom" constant="7.5" id="4Zl-L4-Kln"/>
@@ -83,5 +82,8 @@
     <resources>
         <image name="CogForButtons" width="22" height="22"/>
         <image name="SyncingPopUpImage" width="23" height="20"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

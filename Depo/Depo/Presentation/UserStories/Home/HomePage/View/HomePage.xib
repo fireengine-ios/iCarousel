@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomePageViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomePageViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="WcF-Of-xye" id="PWo-vz-8aG"/>
                 <outlet property="contentView" destination="Eex-Nt-jqn" id="0iD-sZ-Kg1"/>
@@ -15,23 +18,23 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eex-Nt-jqn" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="WcF-Of-xye">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <collectionViewLayout key="collectionViewLayout" id="3d4-vG-XEF" customClass="HomeCollectionViewLayout" customModule="lifebox" customModuleProvider="target"/>
+                            <collectionViewLayout key="collectionViewLayout" id="3d4-vG-XEF" customClass="HomeCollectionViewLayout" customModule="Billo" customModuleProvider="target"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="FFZ-ww-PgF"/>
                                 <outlet property="delegate" destination="-1" id="a4n-aC-19q"/>
                             </connections>
                         </collectionView>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="WcF-Of-xye" secondAttribute="trailing" id="A8G-X1-GGz"/>
                         <constraint firstAttribute="bottom" secondItem="WcF-Of-xye" secondAttribute="bottom" id="dSB-zK-ukd"/>
@@ -40,6 +43,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="uPY-kk-8gx"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Eex-Nt-jqn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Re1-Zc-uZt"/>
@@ -48,8 +52,12 @@
                 <constraint firstItem="Eex-Nt-jqn" firstAttribute="top" secondItem="uPY-kk-8gx" secondAttribute="top" id="lgl-yi-0gO"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <viewLayoutGuide key="safeArea" id="uPY-kk-8gx"/>
             <point key="canvasLocation" x="32.5" y="70.5"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

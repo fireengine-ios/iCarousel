@@ -9,10 +9,13 @@
 import UIKit
 
 enum AppColor {
-    case background
+    case primaryBackground
     case secondaryBackground
-    case text
+    case cellShadow
 
+    var color: UIColor? {
+        return UIColor(named: String(describing: self))
+    }
 }
 
 struct ColorConstants {

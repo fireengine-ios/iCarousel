@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -100,7 +101,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstItem="mKd-gU-Tzr" firstAttribute="leading" secondItem="xZH-RR-F4x" secondAttribute="leading" constant="14" id="6zK-Aw-SG7"/>
                                 <constraint firstItem="mKd-gU-Tzr" firstAttribute="top" secondItem="xZH-RR-F4x" secondAttribute="top" id="Qxd-d8-RTn"/>
@@ -126,7 +127,7 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Fhy-Rz-zex"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="17H-S8-FI5" firstAttribute="top" secondItem="976-Lr-wiL" secondAttribute="top" id="F2C-4y-q5u"/>
                 <constraint firstItem="Fhy-Rz-zex" firstAttribute="trailing" secondItem="aLx-bk-6LK" secondAttribute="trailing" id="LW6-pB-svR"/>
@@ -150,5 +151,8 @@
     </objects>
     <resources>
         <image name="CloseCardIconWhite" width="14" height="14"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

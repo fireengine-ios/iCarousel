@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -60,7 +61,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="5bF-UL-a8f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="4mO-MG-hDs"/>
                 <constraint firstItem="15l-Sg-8pX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="644-ZL-I0W"/>
@@ -89,5 +90,8 @@
     <resources>
         <image name="CloseCardIcon" width="14" height="14"/>
         <image name="DeletingImagesPopUpImage" width="24" height="22"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

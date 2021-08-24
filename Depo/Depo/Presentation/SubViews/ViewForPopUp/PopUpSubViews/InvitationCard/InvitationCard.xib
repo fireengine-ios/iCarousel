@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -36,7 +36,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="xU4-Pq-0Qe" secondAttribute="trailing" id="4fB-O5-JWR"/>
                                 <constraint firstItem="Zad-oz-xgP" firstAttribute="top" secondItem="VtS-We-40h" secondAttribute="top" id="6Vw-Y5-fvG"/>
@@ -61,7 +61,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Sqg-MR-dJa" secondAttribute="trailing" constant="14" id="1hd-lT-J56"/>
                                 <constraint firstAttribute="height" constant="44" id="6gV-2r-rrt"/>
@@ -91,7 +91,7 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="bvM-Xr-vqS" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="7zy-zm-nPO"/>
                 <constraint firstItem="eaR-zG-3fQ" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="DFF-nD-jbd"/>
@@ -113,8 +113,8 @@
     <resources>
         <image name="CloseCardIcon" width="14" height="14"/>
         <image name="PlayVideoCardIcon" width="30" height="30"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
