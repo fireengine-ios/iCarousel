@@ -84,7 +84,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = AppColor.primaryBackground.color
         selectionImageWidth.constant = Device.isIpad ? 22 : 15
         rankViewWidth.constant = Device.isIpad ? 26 : 24
     }
