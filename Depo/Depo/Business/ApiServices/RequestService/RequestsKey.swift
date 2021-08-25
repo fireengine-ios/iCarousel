@@ -14,6 +14,7 @@ struct LbRequestkeys {
     static let password = "password"
     static let phoneNumber = "phoneNumber"
     static let email = "email"
+    static let msisdn = "msisdn"
     static let deviceInfo = "deviceInfo"
     static let on = "on"
     static let off = "off"

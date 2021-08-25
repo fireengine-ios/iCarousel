@@ -9,7 +9,7 @@
 import UIKit
 import Typist
 
-class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
+final class ForgotPasswordViewController: ViewController {
 
     var output: ForgotPasswordViewOutput!
     
@@ -18,9 +18,8 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     @IBOutlet weak var subTitle: UILabel!
     @IBOutlet weak var infoTitle: UILabel!
    
-    @IBOutlet weak var emailTitle: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    
+    @IBOutlet weak var loginEnterView: ProfileTextEnterView!
+
     @IBOutlet private weak var captchaView: CaptchaView!
     
     @IBOutlet weak var sendPasswordButton: WhiteButtonWithRoundedCorner!
@@ -36,7 +35,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         super.viewDidLoad()
         
         if !Device.isIpad {
-            setTitle(withString: TextConstants.resetPasswordTitle)
+            setTitle(withString: localized(.resetPasswordTitle))
         }
         
         scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
@@ -52,8 +51,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        emailTextField.becomeFirstResponder()
+        loginEnterView.textField.becomeFirstResponder()
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -64,21 +62,8 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         view.endEditing(true)
     }
     
-    func setupVisableSubTitle() {
-        updateSubTitleForTurkcell()
-    }
-    
-    func setupVisableTexts() {
-        setupInfoTitle()
-        setupSubTitle()
-        setupEmailTitle()
-        setupEmailField()
-        setupButton()
-        setupCaptchaView()
-    }
-    
     private func setupSubTitle() {
-        subTitle.text = TextConstants.resetPasswordSubTitle
+        subTitle.text = localized(.resetPasswordInstructionsOther)
         
         subTitle.textColor = ColorConstants.removeConnection
         
@@ -91,13 +76,13 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         }
     }
     
-    private func updateSubTitleForTurkcell() {        
-        subTitle.text = TextConstants.forgotPasswordSubTitle
+    private func updateSubTitleForTurkcell() {
+        subTitle.text = localized(.resetPasswordInfoTurkcell)
     }
     
     private func setupInfoTitle() {
         
-        infoTitle.text = TextConstants.resetPasswordInfo
+        infoTitle.text = localized(.resetPasswordInstructions)
         
         infoTitle.textColor = UIColor.black
         if Device.isIpad {
@@ -109,40 +94,46 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         }
     }
     
-    private func setupEmailTitle() {
-        
-        emailTitle.text = TextConstants.resetPasswordEmailTitle
-        
-        emailTitle.textColor = UIColor.lrTealishTwo
+    private func setupInputTitle() {
+        let titleLabel = loginEnterView.titleLabel
+        titleLabel.text = localized(.resetPasswordYourAccountEmail)
+        titleLabel.textColor = .lrTealishTwo
+
         if Device.isIpad {
-            emailTitle.font = UIFont.TurkcellSaturaDemFont(size: 24)
-            emailTitle.textAlignment = .center
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 24)
+            titleLabel.textAlignment = .center
         } else {
-            emailTitle.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            emailTitle.textAlignment = .left
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            titleLabel.textAlignment = .left
         }
     }
     
-    private func setupEmailField() {
-        
+    private func setupInputField() {
+        let textField = loginEnterView.textField
+
         var font = UIFont.TurkcellSaturaRegFont(size: 18)
         
         if Device.isIpad {
             font = UIFont.TurkcellSaturaRegFont(size: 24)
         }
+
+        textField.attributedPlaceholder = NSAttributedString(
+            string: localized(.resetPasswordEnterYourAccountEmail),
+            attributes: [.foregroundColor: ColorConstants.textDisabled, .font: font]
+        )
         
-        emailTextField.attributedPlaceholder = NSAttributedString(string: TextConstants.resetPasswordEmailPlaceholder,
-                                                               attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.textDisabled,
-                                                                            NSAttributedString.Key.font: font])
-        
-        emailTextField.textColor = UIColor.black
-        emailTextField.font = font
-        emailTextField.delegate = self
-        emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.textColor = UIColor.black
+        textField.font = font
+        textField.enablesReturnKeyAutomatically = true
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
+
+        textField.delegate = self
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
     
     private func setupButton() {
-        sendPasswordButton.setTitle(TextConstants.resetPasswordSendPassword, for: .normal)
+        sendPasswordButton.setTitle(localized(.resetPasswordButtonTitle), for: .normal)
         sendPasswordButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         sendPasswordButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
         sendPasswordButton.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
@@ -152,7 +143,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     private func setupCaptchaView() {
-        captchaView.captchaAnswerTextField.placeholder = TextConstants.resetPasswordCaptchaPlaceholder
+        captchaView.captchaAnswerTextField.placeholder = localized(.resetPasswordCaptchaPlaceholder)
         captchaView.captchaAnswerTextField.delegate = self
         captchaView.captchaAnswerTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
     }
@@ -162,7 +153,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
     }
     
     private func updateButtonState() {
-        guard !(emailTextField.text?.isEmpty ?? true),
+        guard !(loginEnterView.textField.text?.isEmpty ?? true),
               !(captchaView.captchaAnswerTextField.text?.isEmpty ?? true) else {
                 sendPasswordButton.isEnabled = false
                 return
@@ -225,41 +216,102 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         scrollView.scrollRectToVisible(frameOnWindowWithInset, animated: animated)
     }
 
-    // MARK: IN
-    func setupInitialState() {
-        
-    }
-    
-    func showCapcha() {
-        captchaView.updateCaptcha()
-        updateButtonState()
-    }
-    
     // MARK: Buttons actions 
     
     @IBAction func onSendPasswordButton() {
         endEditing()
-        
+
+        let login = loginEnterView.textField.text ?? ""
         let captchaUdid = captchaView.currentCaptchaUUID
-        let captchaEntered = captchaView.captchaAnswerTextField.text
-        
-        output.onSendPassword(withEmail: emailTextField.text ?? "", enteredCaptcha: captchaEntered ?? "", captchaUDID: captchaUdid)
+        let captchaEntered = captchaView.captchaAnswerTextField.text ?? ""
+
+        output.resetPassword(withLogin: login, enteredCaptcha: captchaEntered, captchaUDID: captchaUdid)
     }
 }
 
-// MARK: UITextFieldDelegate
+// MARK: - UITextFieldDelegate
 
 extension ForgotPasswordViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
-        if emailTextField == textField {
+        if loginEnterView.textField == textField {
             captchaView.captchaAnswerTextField.becomeFirstResponder()
             scrollToFirstResponderIfNeeded(animated: true)
         } else {
             onSendPasswordButton()
         }
         return true
+    }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField {
+        case loginEnterView.textField:
+            if string == " " {
+                return false
+            } else if textField.text?.count == 0 {
+                if string == "+" {
+                    output.startedEnteringPhoneNumber(withPlus: true)
+                    return false
+                } else if string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil {
+                    output.startedEnteringPhoneNumber(withPlus: false)
+                }
+            }
+
+        case captchaView.captchaAnswerTextField:
+            break
+
+        default:
+            assertionFailure()
+        }
+
+        return true
+    }
+}
+
+// MARK: - ForgotPasswordViewInput
+
+extension ForgotPasswordViewController: ForgotPasswordViewInput {
+    func setupInitialState() {
+
+    }
+
+    func showCapcha() {
+        captchaView.updateCaptcha()
+        updateButtonState()
+    }
+
+    func setupVisableSubTitle() {
+        updateSubTitleForTurkcell()
+    }
+
+    func setupVisableTexts() {
+        setupInfoTitle()
+        setupSubTitle()
+        setupInputTitle()
+        setupInputField()
+        setupButton()
+        setupCaptchaView()
+    }
+
+    func enterPhoneCountryCode(countryCode: String) {
+        var loginText = ""
+
+        if let text = loginEnterView.textField.text {
+            loginText = text
+        }
+
+        loginText = loginText + countryCode
+        loginEnterView.textField.text = loginText
+    }
+
+    func insertPhoneCountryCode(countryCode: String) {
+        var loginText = countryCode
+
+        if let text = loginEnterView.textField.text {
+            loginText = loginText + text
+        }
+
+        loginEnterView.textField.text = loginText
     }
 }

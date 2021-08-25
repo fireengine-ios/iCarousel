@@ -6,13 +6,30 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotPasswordViewOutput, ForgotPasswordInteractorOutput {
-
+final class ForgotPasswordPresenter: BasePresenter {
     weak var view: ForgotPasswordViewInput!
     var interactor: ForgotPasswordInteractorInput!
     var router: ForgotPasswordRouterInput!
 
-    // MARK: input
+    override func outputView() -> Waiting? {
+        return view
+    }
+
+    private func checkLanguage() {
+        let langCode = Device.locale
+
+        if langCode == "en" || langCode == "tr" {
+            view.setupVisableSubTitle()
+        }
+    }
+
+    private func removeBrackets(text: String) -> String {
+        return text.filter { $0 != ")" && $0 != "(" }
+    }
+}
+
+// MARK: - ForgotPasswordViewOutput
+extension ForgotPasswordPresenter: ForgotPasswordViewOutput {
     func viewIsReady() {
         interactor.trackScreen()
         view.setupVisableTexts()
@@ -20,38 +37,40 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
             checkLanguage()
         #endif
     }
-    
-    private func checkLanguage() {
-        let langCode = Device.locale
-        
-        if langCode == "en" || langCode == "tr" {
-            view.setupVisableSubTitle()
+
+    func startedEnteringPhoneNumber(withPlus: Bool) {
+        interactor.findCoutryPhoneCode(plus: withPlus)
+    }
+
+    func resetPassword(withLogin login: String, enteredCaptcha: String, captchaUDID: String) {
+        startAsyncOperationDisableScreen()
+        interactor.sendForgotPasswordRequest(withLogin: removeBrackets(text: login),
+                                             enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
+    }
+}
+
+// MARK: - ForgotPasswordModuleInput
+extension ForgotPasswordPresenter: ForgotPasswordModuleInput {}
+
+
+// MARK: - ForgotPasswordInteractorOutput
+extension ForgotPasswordPresenter: ForgotPasswordInteractorOutput {
+    func foundCoutryPhoneCode(code: String, plus: Bool) {
+        if plus {
+            let countryCode = code.isEmpty ? "+" : code
+            view.enterPhoneCountryCode(countryCode: countryCode)
+        } else {
+            view.insertPhoneCountryCode(countryCode: code)
         }
     }
-    
-    func onSendPassword(withEmail email: String, enteredCaptcha: String, captchaUDID: String) {
-        startAsyncOperationDisableScreen()
-        interactor.sendForgotPasswordRequest(with: email, enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
-    }
-    
+
     func requestSucceed() {
         completeAsyncOperationEnableScreen()
         router.goToResetPassword()
-        //pop back
-//        router.popBack()
     }
-    
+
     func requestFailed(withError error: String) {
-        
         completeAsyncOperationEnableScreen(errorMessage: error)
         view.showCapcha()
-        //TODO: PEstyakov request new captcha here
     }
-    
-    //MARK : BasePresenter
-    
-    override func outputView() -> Waiting? {
-        return view
-    }
-    
 }

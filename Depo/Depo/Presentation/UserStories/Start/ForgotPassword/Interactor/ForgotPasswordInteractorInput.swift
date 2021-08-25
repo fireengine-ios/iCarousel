@@ -9,6 +9,9 @@
 import Foundation
 
 protocol ForgotPasswordInteractorInput {
-    func sendForgotPasswordRequest(with mail: String, enteredCaptcha: String, captchaUDID: String)
     func trackScreen()
+
+    func findCoutryPhoneCode(plus: Bool)
+
+    func sendForgotPasswordRequest(withLogin login: String, enteredCaptcha: String, captchaUDID: String)
 }

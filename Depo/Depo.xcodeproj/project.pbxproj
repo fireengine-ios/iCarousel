@@ -245,6 +245,18 @@
 		0786E1882660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18A2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18B2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
+		0791814526F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814626F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814726F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814826F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814926F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814A26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814B26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814C26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814D26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814E26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791814F26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791815026F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
 		0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */; };
@@ -8818,6 +8830,7 @@
 		077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyRecoveryEmailPopUp.swift; sourceTree = "<group>"; };
 		077FDB99268C730D00F21317 /* OverlayStickerSelectorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorDataSource.swift; sourceTree = "<group>"; };
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
+		0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+ResetPassword.swift"; sourceTree = "<group>"; };
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmailFieldView.swift; sourceTree = "<group>"; };
@@ -11623,6 +11636,7 @@
 			children = (
 				07FBA20726E0BBB100ED4132 /* Localizable.swift */,
 				07FBA20426E0BBA800ED4132 /* Strings.swift */,
+				0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -23169,6 +23183,7 @@
 				8C0E8CBA1FDEBDFF00789C91 /* ActivityIndicatorManager.swift in Sources */,
 				8C0E8CBB1FDEBDFF00789C91 /* FeedbackService.swift in Sources */,
 				CF38A7EA2575314C0000994F /* PrivateShareWithContactView.swift in Sources */,
+				0791814526F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				8C0E8CBC1FDEBDFF00789C91 /* LoginModuleInput.swift in Sources */,
 				8C7E1F66207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
 				8C0E8CBD1FDEBDFF00789C91 /* HomeCollectionViewLayout.swift in Sources */,
@@ -24606,6 +24621,7 @@
 				8C3BA2F722B3CC45006D901E /* BiometricsManager.swift in Sources */,
 				8C3BA2F822B3CC45006D901E /* PasscodeManager.swift in Sources */,
 				8C3BA2F922B3CC45006D901E /* Dictionary.swift in Sources */,
+				0791814D26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				8C3BA2FB22B3CC45006D901E /* Error+Network.swift in Sources */,
 				8C3BA2FC22B3CC45006D901E /* UIImage+Size.swift in Sources */,
 				8C3BA2FD22B3CC45006D901E /* TokenKeychainStorage.swift in Sources */,
@@ -24672,6 +24688,7 @@
 				8C3BA34522B3CC49006D901E /* RequestHeader.swift in Sources */,
 				8C3BA34622B3CC49006D901E /* SwiftyJSONExtension.swift in Sources */,
 				8C3BA34722B3CC49006D901E /* FileProviderExtension.swift in Sources */,
+				0791814E26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				8C3BA34822B3CC49006D901E /* AuthorizationRepository.swift in Sources */,
 				8C3BA34922B3CC49006D901E /* Constants.swift in Sources */,
 				8C3BA34A22B3CC49006D901E /* ErrorIdentificators.swift in Sources */,
@@ -24729,6 +24746,7 @@
 				8C3BA37F22B3CC53006D901E /* NumericConstants.swift in Sources */,
 				8C3BA38022B3CC53006D901E /* InsetsLabel.swift in Sources */,
 				8C3BA38122B3CC53006D901E /* DocumentActionViewController.swift in Sources */,
+				0791814F26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				8C3BA38222B3CC53006D901E /* Device.swift in Sources */,
 				8C3BA38322B3CC53006D901E /* ColorConstants.swift in Sources */,
 				8C3BA38422B3CC53006D901E /* DocumentActionCustomizator.swift in Sources */,
@@ -24782,6 +24800,7 @@
 				8CCA070C20C455DC00558AB0 /* Keys.swift in Sources */,
 				CE98F6DB204E71E300433915 /* String+UTType.swift in Sources */,
 				CE1BE95120492CCE0074BDDC /* Dictionary.swift in Sources */,
+				0791814826F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				CE4ECA722088976200AB91C6 /* InsetsLabel.swift in Sources */,
 				CE4D281C207E0A73003AE4FB /* ColorConstants.swift in Sources */,
 				CE4D2816207E0A25003AE4FB /* FromNib.swift in Sources */,
@@ -24828,6 +24847,7 @@
 				CE4D2807207E086D003AE4FB /* NumericConstants.swift in Sources */,
 				CE4ECA732088976300AB91C6 /* InsetsLabel.swift in Sources */,
 				CE1BE933204831CE0074BDDC /* DocumentActionViewController.swift in Sources */,
+				0791814926F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				CE4D281B207E0A5B003AE4FB /* Device.swift in Sources */,
 				CE125176204E83DC00886F8D /* ColorConstants.swift in Sources */,
 				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
@@ -24878,6 +24898,7 @@
 				CE1B7627204D349C00B5E12A /* Error+Alamofire.swift in Sources */,
 				CE4D280F207E0996003AE4FB /* BiometricsManager.swift in Sources */,
 				CE4D2815207E0997003AE4FB /* PasscodeManager.swift in Sources */,
+				0791814726F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */,
@@ -25180,6 +25201,7 @@
 				CE7848A822A685FB00662219 /* ManageContactsViewOutput.swift in Sources */,
 				3AA3D4ED268C454B00B7B1EF /* SilentPushApiService.swift in Sources */,
 				CE7848AA22A685FB00662219 /* AppDelegate.swift in Sources */,
+				0791814B26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				07AC65FB26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				CE7848AB22A685FB00662219 /* CollectionViewCellForController.swift in Sources */,
@@ -27225,6 +27247,7 @@
 				CF8B659F23CBC9D70021B021 /* PermissionsDesigner.swift in Sources */,
 				CF8B65A023CBC9D70021B021 /* IntroduceRouter.swift in Sources */,
 				CF8B65A123CBC9D70021B021 /* SettingsTableViewSwitchCell.swift in Sources */,
+				0791814626F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				CF8B65A223CBC9D70021B021 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				98231A8324F3A23500FD16E2 /* OldManFilter.swift in Sources */,
 				CF8B65A323CBC9D70021B021 /* MusicViewController.swift in Sources */,
@@ -28381,6 +28404,7 @@
 				3AA3D4EE268C454B00B7B1EF /* SilentPushApiService.swift in Sources */,
 				CF8B6BFF23CBCA280021B021 /* CollectionViewCellForController.swift in Sources */,
 				CF8B6C0123CBCA280021B021 /* AccountResponse.swift in Sources */,
+				0791814C26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				07AC65FC26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				CF8B6C0223CBCA280021B021 /* CollectionViewCellForAudio.swift in Sources */,
 				CF8B6C0323CBCA280021B021 /* KeyboardLayoutConstraint.swift in Sources */,
@@ -29770,6 +29794,7 @@
 				CFE4E6CE252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6CF252D9F2300F165AD /* SharedEnums.swift in Sources */,
 				CFE4E6D0252D9F2300F165AD /* (null) in Sources */,
+				0791814A26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				CFE4E6D1252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6D2252D9F2300F165AD /* (null) in Sources */,
 				CFEB1FE025304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
@@ -29883,6 +29908,7 @@
 				CFE4E762252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E763252D9F3B00F165AD /* SharedEnums.swift in Sources */,
 				CFE4E764252D9F3B00F165AD /* (null) in Sources */,
+				0791815026F889E00067FB75 /* Strings+ResetPassword.swift in Sources */,
 				CFE4E765252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E766252D9F3B00F165AD /* (null) in Sources */,
 				CFEB1FE225304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,

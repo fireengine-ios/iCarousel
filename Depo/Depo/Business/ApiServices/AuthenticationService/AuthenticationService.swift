@@ -183,17 +183,20 @@ struct SignUpUserPhoveVerification: RequestParametrs {
 }
 
 
-struct  ForgotPassword: RequestParametrs {
+struct ForgotPassword: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }
     
-    let email: String
+    let email: String?
+    let msisdn: String?
     let attachedCaptcha: CaptchaParametrAnswer?
-    
-    
+
     var requestParametrs: Any {
-        return  email.data(using: .utf8) ?? Data()
+        return [
+            LbRequestkeys.email: email,
+            LbRequestkeys.msisdn: msisdn
+        ]
     }
     
     var patch: URL {

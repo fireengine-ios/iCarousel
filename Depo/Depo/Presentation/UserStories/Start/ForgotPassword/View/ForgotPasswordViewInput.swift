@@ -15,4 +15,7 @@ protocol ForgotPasswordViewInput: AnyObject, Waiting {
     func setupVisableSubTitle()
     
     func setupVisableTexts()
+
+    func enterPhoneCountryCode(countryCode: String)
+    func insertPhoneCountryCode(countryCode: String) //at the begining of the field
 }
