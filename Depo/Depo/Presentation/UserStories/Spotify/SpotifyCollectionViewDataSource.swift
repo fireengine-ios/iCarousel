@@ -65,7 +65,7 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     }
     
     private func setupCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = AppColor.primaryBackground.color
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(nibCell: SpotifyPlaylistCollectionViewCell.self)

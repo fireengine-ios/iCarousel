@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Yva-BG-lfk" customClass="SpotifyPlaylistCollectionViewCell" customModule="lifebox" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Yva-BG-lfk" customClass="SpotifyPlaylistCollectionViewCell" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -50,7 +49,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="primaryBackground"/>
                         <constraints>
                             <constraint firstItem="aHV-vx-EI4" firstAttribute="top" secondItem="sDh-4A-jk1" secondAttribute="top" constant="1" id="5YD-Sh-tOH"/>
                             <constraint firstItem="1PT-2s-u8d" firstAttribute="bottom" secondItem="sDh-4A-jk1" secondAttribute="bottom" constant="-1" id="CFp-29-bBK"/>
@@ -71,14 +70,15 @@
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zcR-rh-0OZ" userLabel="line">
                         <rect key="frame" x="50" y="69" width="325" height="1"/>
-                        <color key="backgroundColor" red="0.85098039215686272" green="0.85490196078431369" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="itemSeperator"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="NGf-Xm-Di1"/>
                         </constraints>
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="lIp-ex-Tgn"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="pgb-mv-jpJ" firstAttribute="centerY" secondItem="Yva-BG-lfk" secondAttribute="centerY" id="5is-3u-hJl"/>
                 <constraint firstItem="djo-fS-4bR" firstAttribute="leading" secondItem="Yva-BG-lfk" secondAttribute="leading" constant="50" id="IUE-tP-qkH"/>
@@ -92,7 +92,6 @@
                 <constraint firstItem="e7P-hk-sA7" firstAttribute="leading" secondItem="Yva-BG-lfk" secondAttribute="leading" constant="5" id="kv0-25-HpN"/>
                 <constraint firstItem="e7P-hk-sA7" firstAttribute="centerY" secondItem="Yva-BG-lfk" secondAttribute="centerY" id="tb8-oV-Iyz"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="lIp-ex-Tgn"/>
             <size key="customSize" width="375" height="70"/>
             <connections>
                 <outlet property="arrowImageView" destination="pgb-mv-jpJ" id="mdo-Ry-zb2"/>
@@ -108,5 +107,11 @@
     <resources>
         <image name="arrow_create_story" width="24" height="24"/>
         <image name="notSelected" width="24" height="24"/>
+        <namedColor name="itemSeperator">
+            <color red="0.91700000000000004" green="0.91700000000000004" blue="0.91700000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

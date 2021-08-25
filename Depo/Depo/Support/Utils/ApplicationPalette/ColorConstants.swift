@@ -12,6 +12,7 @@ enum AppColor {
     case primaryBackground
     case secondaryBackground
     case cellShadow
+    case itemSeperator
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))

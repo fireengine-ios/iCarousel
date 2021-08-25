@@ -157,7 +157,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bigContentImageView.contentMode = .scaleAspectFill
         
         separatorView.isHidden = isBigSize()
-        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColor : UIColor.white
+        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColor : AppColor.primaryBackground.color ?? .white
         
         //Big size (Grid)
         if isBigSize() && bottomViewH.constant != BasicCollectionMultiFileCell.smallH {
@@ -266,7 +266,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 if !smallContentImageView.configured {
                     smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
                 }
-                bgColor = ColorConstants.whiteColor
+                bgColor = AppColor.primaryBackground.color ?? .white
             }
             smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
             setSelectionSmallSelectionImageView(false, isHidden: true)

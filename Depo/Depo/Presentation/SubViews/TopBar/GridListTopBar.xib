@@ -60,7 +60,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" name="secondaryBackground"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="2hB-ca-1KW" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="CG9-nI-DEH"/>
                 <constraint firstItem="R7m-go-R4c" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="5" id="ZD4-gp-yMM"/>
@@ -81,7 +81,7 @@
         <image name="TopBarGrid" width="14" height="14"/>
         <image name="TopBarList" width="14" height="14"/>
         <image name="TriangleCopy3" width="7" height="5"/>
-        <namedColor name="secondaryBackground">
+        <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
