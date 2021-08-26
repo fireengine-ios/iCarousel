@@ -257,6 +257,30 @@
 		0791814E26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
 		0791814F26F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
 		0791815026F889E00067FB75 /* Strings+ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */; };
+		0791815626F88A820067FB75 /* ResetPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815226F88A820067FB75 /* ResetPasswordResponse.swift */; };
+		0791815726F88A820067FB75 /* ResetPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815226F88A820067FB75 /* ResetPasswordResponse.swift */; };
+		0791815826F88A820067FB75 /* ResetPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815226F88A820067FB75 /* ResetPasswordResponse.swift */; };
+		0791815926F88A820067FB75 /* ResetPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815226F88A820067FB75 /* ResetPasswordResponse.swift */; };
+		0791816026F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815B26F88AB10067FB75 /* IdentityVerificationViewController.swift */; };
+		0791816126F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815B26F88AB10067FB75 /* IdentityVerificationViewController.swift */; };
+		0791816226F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815B26F88AB10067FB75 /* IdentityVerificationViewController.swift */; };
+		0791816326F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815B26F88AB10067FB75 /* IdentityVerificationViewController.swift */; };
+		0791816426F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791815C26F88AB10067FB75 /* IdentityVerificationViewController.xib */; };
+		0791816526F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791815C26F88AB10067FB75 /* IdentityVerificationViewController.xib */; };
+		0791816626F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791815C26F88AB10067FB75 /* IdentityVerificationViewController.xib */; };
+		0791816726F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791815C26F88AB10067FB75 /* IdentityVerificationViewController.xib */; };
+		0791816826F88AB20067FB75 /* VerificationMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815D26F88AB10067FB75 /* VerificationMethodTableViewCell.swift */; };
+		0791816926F88AB20067FB75 /* VerificationMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815D26F88AB10067FB75 /* VerificationMethodTableViewCell.swift */; };
+		0791816A26F88AB20067FB75 /* VerificationMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815D26F88AB10067FB75 /* VerificationMethodTableViewCell.swift */; };
+		0791816B26F88AB20067FB75 /* VerificationMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815D26F88AB10067FB75 /* VerificationMethodTableViewCell.swift */; };
+		0791816C26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791815E26F88AB10067FB75 /* VerificationMethodTableViewCell.xib */; };
+		0791816D26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791815E26F88AB10067FB75 /* VerificationMethodTableViewCell.xib */; };
+		0791816E26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791815E26F88AB10067FB75 /* VerificationMethodTableViewCell.xib */; };
+		0791816F26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0791815E26F88AB10067FB75 /* VerificationMethodTableViewCell.xib */; };
+		0791817026F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */; };
+		0791817126F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */; };
+		0791817226F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */; };
+		0791817326F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */; };
 		0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */; };
@@ -8831,6 +8855,12 @@
 		077FDB99268C730D00F21317 /* OverlayStickerSelectorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorDataSource.swift; sourceTree = "<group>"; };
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
 		0791814126F889DF0067FB75 /* Strings+ResetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Strings+ResetPassword.swift"; sourceTree = "<group>"; };
+		0791815226F88A820067FB75 /* ResetPasswordResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordResponse.swift; sourceTree = "<group>"; };
+		0791815B26F88AB10067FB75 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
+		0791815C26F88AB10067FB75 /* IdentityVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityVerificationViewController.xib; sourceTree = "<group>"; };
+		0791815D26F88AB10067FB75 /* VerificationMethodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationMethodTableViewCell.swift; sourceTree = "<group>"; };
+		0791815E26F88AB10067FB75 /* VerificationMethodTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerificationMethodTableViewCell.xib; sourceTree = "<group>"; };
+		0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityVerificationDataSource.swift; sourceTree = "<group>"; };
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmailFieldView.swift; sourceTree = "<group>"; };
@@ -11629,6 +11659,18 @@
 				76464C9E441C036AD8B15D78 /* TermsAndServicesPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0791815A26F88AB10067FB75 /* IdentityVerification */ = {
+			isa = PBXGroup;
+			children = (
+				0791815B26F88AB10067FB75 /* IdentityVerificationViewController.swift */,
+				0791815C26F88AB10067FB75 /* IdentityVerificationViewController.xib */,
+				0791815D26F88AB10067FB75 /* VerificationMethodTableViewCell.swift */,
+				0791815E26F88AB10067FB75 /* VerificationMethodTableViewCell.xib */,
+				0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */,
+			);
+			path = IdentityVerification;
 			sourceTree = "<group>";
 		};
 		07FBA20026E0BB9900ED4132 /* Strings */ = {
@@ -18261,6 +18303,7 @@
 				CB47E015BFEA75771011D20E /* ForgotPassword */,
 				730A996E22D71D120037ABA9 /* TwoFactorAuthentication */,
 				8918540622DDEFB900AAB818 /* TwoFactorChallenge */,
+				0791815A26F88AB10067FB75 /* IdentityVerification */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -18447,6 +18490,7 @@
 				CE51A0C81EF8ED38005DCEE0 /* AuthenticationService.swift */,
 				CE3471861F02F38400B97AC3 /* AuthenticationServiceResponse.swift */,
 				98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */,
+				0791815226F88A820067FB75 /* ResetPasswordResponse.swift */,
 			);
 			path = AuthenticationService;
 			sourceTree = "<group>";
@@ -20663,6 +20707,7 @@
 				0731E80B263165DA00883566 /* RegistrationTermsViewController.xib in Resources */,
 				8C0E901F1FDEBDFF00789C91 /* PrintViewController.xib in Resources */,
 				89EA4F80240902C400A2C543 /* PackagesTableViewCell.xib in Resources */,
+				0791816426F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */,
 				4BF3A68E22B2690A0082130F /* PermissionsView.xib in Resources */,
 				8C0E90201FDEBDFF00789C91 /* CaptchaViewController.xib in Resources */,
 				7C4F60A62019D0440033C58F /* CollageCard.xib in Resources */,
@@ -20832,6 +20877,7 @@
 				98B04B20259316FF0011DAEB /* PlusMenuItemView.xib in Resources */,
 				737A2EC82338F44E0014258A /* QuestionCell.xib in Resources */,
 				8C0E905F1FDEBDFF00789C91 /* PasscodeViewImp.xib in Resources */,
+				0791816C26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				3A9C283F26529C3900EFADE9 /* InvitationCampaignDetailView.xib in Resources */,
 				CE634AFC230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				89CC89F823AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */,
@@ -21032,6 +21078,7 @@
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
 				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
+				0791816E26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD622A685FB00662219 /* AnimationCard.xib in Resources */,
 				CE784CDB22A685FB00662219 /* PasswordView.xib in Resources */,
@@ -21244,6 +21291,7 @@
 				89DAB3DD23AB513700D4337D /* HSCompletionPopUp.xib in Resources */,
 				CE784E4A22A685FB00662219 /* LatestUpladsCard.xib in Resources */,
 				989BDE5D22F47B1E001DDEB2 /* SpotifyPlaylistViewController.xib in Resources */,
+				0791816626F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */,
 				CE784E4F22A685FB00662219 /* FaceImageAddNameViewController.xib in Resources */,
 				CF71460124B597A800D83E60 /* ContactDetailCell.xib in Resources */,
 				9842FB902563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
@@ -21476,6 +21524,7 @@
 				CF8B698523CBC9D70021B021 /* SecretAnswerView.xib in Resources */,
 				CF8B698623CBC9D70021B021 /* LatestUpladsCard.xib in Resources */,
 				CF8B698723CBC9D70021B021 /* InstagramAuthViewController.xib in Resources */,
+				0791816526F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */,
 				CF8B698923CBC9D70021B021 /* ProfilePhoneEnterView.xib in Resources */,
 				734CA11B244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				CF8B698C23CBC9D70021B021 /* SingleThumbnailAlbumCell.xib in Resources */,
@@ -21643,6 +21692,7 @@
 				98B04B21259316FF0011DAEB /* PlusMenuItemView.xib in Resources */,
 				9808B7C22567EB10001DEF2E /* PrivateShateAccessListViewController.xib in Resources */,
 				98BE78AA24517E4300B8864F /* SnackbarView.xib in Resources */,
+				0791816D26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				CF8B6AC623CBC9D70021B021 /* InitializingViewController.xib in Resources */,
 				985FFB04255C1EE0001AA845 /* FileNameView.xib in Resources */,
 				3A6D27CA26400ACB00A7BBE2 /* InvitationViewController.xib in Resources */,
@@ -21730,6 +21780,7 @@
 				CF8B708723CBCA280021B021 /* OptInController.xib in Resources */,
 				CF8B708823CBCA280021B021 /* FaceImageChangeCoverViewController.xib in Resources */,
 				CF8B708923CBCA280021B021 /* SpotifyCancelImportPopup.xib in Resources */,
+				0791816F26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				CF8B708A23CBCA280021B021 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CF8B708C23CBCA280021B021 /* AnimationCard.xib in Resources */,
 				CF8B709123CBCA280021B021 /* PasswordView.xib in Resources */,
@@ -21942,6 +21993,7 @@
 				CF71460224B597A800D83E60 /* ContactDetailCell.xib in Resources */,
 				CF8B722123CBCA280021B021 /* ChangeEmailPopUp.xib in Resources */,
 				CF8B722423CBCA280021B021 /* FolderSelectionCollectionViewCell.xib in Resources */,
+				0791816726F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */,
 				CF8B722523CBCA280021B021 /* SpotifyAuthViewController.xib in Resources */,
 				9808B3B92553EE59002B0032 /* PrivateShareSelectPeopleView.xib in Resources */,
 				9823198B24F3A1E700FD16E2 /* ColorView.xib in Resources */,
@@ -23013,6 +23065,7 @@
 				CF7D63D325A42FE4005C22F5 /* SharedFilesSliderPlusCell.swift in Sources */,
 				CF048321256C9335007DAA79 /* SharedFilesCollectionDataSource.swift in Sources */,
 				98A86D4A23A2200100438225 /* HiddenPhotosViewController.swift in Sources */,
+				0791816826F88AB20067FB75 /* VerificationMethodTableViewCell.swift in Sources */,
 				CE9F540622045A36003E76D4 /* PhotoService.swift in Sources */,
 				CE9F540722045A36003E76D4 /* PremiumService.swift in Sources */,
 				CE292C1621BE5DE9004FC745 /* PremiumViewInput.swift in Sources */,
@@ -23059,6 +23112,7 @@
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				98B0486B259314750011DAEB /* SyncSettings.m in Sources */,
 				8C0E8C681FDEBDFF00789C91 /* FileServiceResponse.swift in Sources */,
+				0791816026F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */,
 				B5C7C583211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */,
 				988EE4F625820B6500CEB348 /* MenuItemsFabric.swift in Sources */,
 				89E51D3D22CA10FC007A7DBC /* CreateStoryPreviewInitializer.swift in Sources */,
@@ -23439,6 +23493,7 @@
 				981691A923C860C7005A768E /* TrashBinRouter.swift in Sources */,
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
 				981617692578BA1D009F1C31 /* FirebaseAnalyticsActions.swift in Sources */,
+				0791817026F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */,
 				8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */,
 				8C0E8D591FDEBDFF00789C91 /* BaseMediaContent.swift in Sources */,
 				8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */,
@@ -23805,6 +23860,7 @@
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
 				73EA16FD22EB26EB00BAD2D3 /* SpotifyService.swift in Sources */,
+				0791815626F88A820067FB75 /* ResetPasswordResponse.swift in Sources */,
 				98E4BA0123C72181003A4631 /* TrashBinInteractor.swift in Sources */,
 				7CEE271C209B537500EF6C79 /* LandingPageViewController.swift in Sources */,
 				98A86D5B23A239B900438225 /* AlbumsSliderDataSource.swift in Sources */,
@@ -25627,6 +25683,7 @@
 				8C1E5BEA22CB8CEB008FDA02 /* LifeBoxModel.xcdatamodeld in Sources */,
 				CF71469724B597A900D83E60 /* ContactsBackupHistoryController.swift in Sources */,
 				CE7849E522A685FB00662219 /* Validator.swift in Sources */,
+				0791816226F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */,
 				CE7849E622A685FB00662219 /* AssetsCache.swift in Sources */,
 				988BA1AA255924800086E4BE /* PrivateShareDurationView.swift in Sources */,
 				CE7849E722A685FB00662219 /* TermsAndServicesRouter.swift in Sources */,
@@ -26055,6 +26112,7 @@
 				CE784B2922A685FB00662219 /* UsageInfoViewController.swift in Sources */,
 				CE784B2A22A685FB00662219 /* PhotoVideoDetailViewInput.swift in Sources */,
 				CE784B2B22A685FB00662219 /* PhotoVideoDetailViewOutput.swift in Sources */,
+				0791815826F88A820067FB75 /* ResetPasswordResponse.swift in Sources */,
 				890DDC592316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */,
 				3A54C6EC264968DF00C2C8BD /* InvitationApiResponses.swift in Sources */,
 				CE784B2C22A685FB00662219 /* PhotoVideoDetailViewController.swift in Sources */,
@@ -26085,6 +26143,7 @@
 				CE784B4322A685FB00662219 /* IAPManager.swift in Sources */,
 				73E6715F23EBFE53000C4AF7 /* PrivacyPolicyResponse.swift in Sources */,
 				CE784B4422A685FB00662219 /* UserInfoSubViewViewController.swift in Sources */,
+				0791817226F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */,
 				CE784B4522A685FB00662219 /* UserInfoSubViewModuleInput.swift in Sources */,
 				CE784B4622A685FB00662219 /* MoreFilesActionsInteractor.swift in Sources */,
 				CE784B4722A685FB00662219 /* BaseDataSourceItem.swift in Sources */,
@@ -26158,6 +26217,7 @@
 				49E952A22400013E00E2ABCD /* MobilePaymentPermissionViewController.swift in Sources */,
 				CE784B8322A685FB00662219 /* SettingsInteractorInput.swift in Sources */,
 				98231A7324F3A23500FD16E2 /* CruzFilter.swift in Sources */,
+				0791816A26F88AB20067FB75 /* VerificationMethodTableViewCell.swift in Sources */,
 				B5DD3D7D250FA9EC00AFF934 /* VignetteShader.metal in Sources */,
 				CE784B8522A685FB00662219 /* SettingsInteractorOutput.swift in Sources */,
 				3A9C281F265285A200EFADE9 /* AcceptedInvitationViewController.swift in Sources */,
@@ -27086,6 +27146,7 @@
 				CF8B651D23CBC9D70021B021 /* MyStorageRouter.swift in Sources */,
 				CF8B651E23CBC9D70021B021 /* UserProfileInteractorInput.swift in Sources */,
 				CF8B651F23CBC9D70021B021 /* UIViewController+NavBar.swift in Sources */,
+				0791816926F88AB20067FB75 /* VerificationMethodTableViewCell.swift in Sources */,
 				CF8B652023CBC9D70021B021 /* EULAService.swift in Sources */,
 				CF8B652123CBC9D70021B021 /* SpotifyRoutingService.swift in Sources */,
 				CF8B652223CBC9D70021B021 /* RangeAPIInfo.swift in Sources */,
@@ -27305,6 +27366,7 @@
 				CF71463B24B597A800D83E60 /* LineProgressView.swift in Sources */,
 				CF8B65D123CBC9D70021B021 /* AnalyticsPackageProductObject.swift in Sources */,
 				0305A2FC23D5C231004D1EC7 /* OverlayStickerImageView.swift in Sources */,
+				0791816126F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */,
 				CF8B65D223CBC9D70021B021 /* TurkcellUpdaterService.swift in Sources */,
 				CF8B65D323CBC9D70021B021 /* MyStorageModuleInitializer.swift in Sources */,
 				B558279224FE91600039DD11 /* ObjectRequestResponse.swift in Sources */,
@@ -27878,6 +27940,7 @@
 				CF8B67A923CBC9D70021B021 /* PhotoVideoCell.swift in Sources */,
 				CF8B67AA23CBC9D70021B021 /* SynchronizedArray.swift in Sources */,
 				CF8B67AB23CBC9D70021B021 /* PageForLanding.swift in Sources */,
+				0791815726F88A820067FB75 /* ResetPasswordResponse.swift in Sources */,
 				CF8B67AC23CBC9D70021B021 /* PhotoVideoDetailCell.swift in Sources */,
 				CF8B67AD23CBC9D70021B021 /* MaskService.swift in Sources */,
 				CF8B67AF23CBC9D70021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
@@ -27889,6 +27952,7 @@
 				CF8B67B423CBC9D70021B021 /* String+Subscript.swift in Sources */,
 				CF8B67B523CBC9D70021B021 /* UploadFilesSelectionModuleInput.swift in Sources */,
 				CF8B67B623CBC9D70021B021 /* LeavePremiumViewController.swift in Sources */,
+				0791817126F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */,
 				CF8B67B723CBC9D70021B021 /* TextEnterController.swift in Sources */,
 				CF8B67B823CBC9D70021B021 /* UploadFilesSelectionPresenter.swift in Sources */,
 				CF8B67B923CBC9D70021B021 /* InsetsLabel.swift in Sources */,
@@ -28830,6 +28894,7 @@
 				CF8B6D5A23CBCA280021B021 /* AssetsCache.swift in Sources */,
 				CF71469824B597A900D83E60 /* ContactsBackupHistoryController.swift in Sources */,
 				CF8B6D5B23CBCA280021B021 /* TermsAndServicesRouter.swift in Sources */,
+				0791816326F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */,
 				CF8B6D5C23CBCA280021B021 /* TermsAndServicesConfigurator.swift in Sources */,
 				988BA1AB255924800086E4BE /* PrivateShareDurationView.swift in Sources */,
 				CF8B6D5D23CBCA280021B021 /* FaceImageItemsViewInput.swift in Sources */,
@@ -29258,6 +29323,7 @@
 				CF8B6EB223CBCA280021B021 /* PhotoVideoDetailViewController.swift in Sources */,
 				CF8B6EB323CBCA280021B021 /* PhotoVideoDetailModuleInput.swift in Sources */,
 				CF8B6EB423CBCA280021B021 /* PhotoVideoDetailPresenter.swift in Sources */,
+				0791815926F88A820067FB75 /* ResetPasswordResponse.swift in Sources */,
 				CF8B6EB523CBCA280021B021 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				3A54C6ED264968DF00C2C8BD /* InvitationApiResponses.swift in Sources */,
 				CF8B6EB623CBCA280021B021 /* MediaItem+CoreDataClass.swift in Sources */,
@@ -29288,6 +29354,7 @@
 				CF8B6ECC23CBCA280021B021 /* BaseDataSourceItem.swift in Sources */,
 				CF8B6ECD23CBCA280021B021 /* ChangeEmailPopUp.swift in Sources */,
 				CF8B6ECE23CBCA280021B021 /* UserInfoSubViewPresenter.swift in Sources */,
+				0791817326F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */,
 				CF8B6ECF23CBCA280021B021 /* UserInfoSubViewInteractorInput.swift in Sources */,
 				CF8B6ED123CBCA280021B021 /* ManageContactsInitializer.swift in Sources */,
 				CF8B6ED223CBCA280021B021 /* UserInfoSubViewInteractorOutput.swift in Sources */,
@@ -29361,6 +29428,7 @@
 				CF8B6F0E23CBCA280021B021 /* SettingsInteractorInput.swift in Sources */,
 				49E952A32400013E00E2ABCD /* MobilePaymentPermissionViewController.swift in Sources */,
 				CF8B6F0F23CBCA280021B021 /* SettingsInteractorOutput.swift in Sources */,
+				0791816B26F88AB20067FB75 /* VerificationMethodTableViewCell.swift in Sources */,
 				98231A7424F3A23500FD16E2 /* CruzFilter.swift in Sources */,
 				B5DD3D7E250FA9EC00AFF934 /* VignetteShader.metal in Sources */,
 				3A9C2820265285A200EFADE9 /* AcceptedInvitationViewController.swift in Sources */,
