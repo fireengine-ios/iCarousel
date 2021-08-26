@@ -39,11 +39,11 @@ private extension IdentityVerificationViewController {
     func setupHeader() {
         titleLabel.textColor = .lrTealishTwo
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        titleLabel.text = "Doğrulama Yöntemini Seçiniz"
+        titleLabel.text = localized(.resetPasswordChallenge1Header)
 
         descriptionLabel.textColor = ColorConstants.textGrayColor
         descriptionLabel.font = UIFont.TurkcellSaturaFont(size: 18)
-        descriptionLabel.text = "Lorem ipsum dolor sit amet, golr kilmre skoll dop seter terrier ruseell lorem ipsum dolor."
+        descriptionLabel.text = localized(.resetPasswordChallenge1Body)
 
         tableHeaderView.frame.size = tableHeaderView.systemLayoutSizeFitting(
             CGSize(width: view.frame.width, height: 0),
@@ -54,7 +54,7 @@ private extension IdentityVerificationViewController {
     }
 
     func setupContinueButton() {
-//        continueButton.setTitle(localized(.), for: .normal)
+        continueButton.setTitle(localized(.resetPasswordContinueButton), for: .normal)
         continueButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
         continueButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
         continueButton.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)

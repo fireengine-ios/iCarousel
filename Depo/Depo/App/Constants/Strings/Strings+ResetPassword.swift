@@ -17,31 +17,19 @@ extension Strings {
         case resetPasswordErrorCaptchaText       = "This text doesn't match. Please try again"
 
         // keys with prefix
-        case resetPasswordYourAccountEmail       = "your_account_email"
-        case resetPasswordEnterYourAccountEmail  = "enter_your_account_email"
-        case resetPasswordInstructions           = "instructions"
-        case resetPasswordEnterValidEmail        = "enter_valid_email"
-        case resetPasswordInstructionsOther      = "instructions_other"
-        case resetPasswordButtonTitle            = "reset_button"
-
-        var localizationKey: String {
-            switch self {
-            case .resetPasswordTitle,
-                 .resetPasswordInfoTurkcell,
-                 .resetPasswordCaptchaPlaceholder,
-                 .resetPasswordErrorCaptchaFormatText,
-                 .resetPasswordErrorCaptchaText:
-                return rawValue
-
-            case .resetPasswordYourAccountEmail,
-                 .resetPasswordEnterYourAccountEmail,
-                 .resetPasswordInstructions,
-                 .resetPasswordEnterValidEmail,
-                 .resetPasswordInstructionsOther,
-                 .resetPasswordButtonTitle:
-                return "forgotMyPassword_" + rawValue
-            }
-        }
+        case resetPasswordYourAccountEmail       = "forgotMyPassword_your_account_email"
+        case resetPasswordEnterYourAccountEmail  = "forgotMyPassword_enter_your_account_email"
+        case resetPasswordInstructions           = "forgotMyPassword_instructions"
+        case resetPasswordEnterValidEmail        = "forgotMyPassword_enter_valid_email"
+        case resetPasswordInstructionsOther      = "forgotMyPassword_instructions_other"
+        case resetPasswordButtonTitle            = "forgotMyPassword_reset_button"
+        case resetPasswordChallenge1Header       = "forgotMyPassword_challange1_header"
+        case resetPasswordChallenge1Body         = "forgotMyPassword_challange1_body"
+        case resetPasswordPhoneNumber            = "forgotMyPassword_phone_number"
+        case resetPasswordMail                   = "forgotMyPassword_mail"
+        case resetPasswordRecoveryMail           = "forgotMyPassword_recovery_mail"
+        case resetPasswordSecurityQuestion       = "forgotMyPassword_security_question"
+        case resetPasswordContinueButton         = "forgotMyPassword_continue"
     }
 }
 

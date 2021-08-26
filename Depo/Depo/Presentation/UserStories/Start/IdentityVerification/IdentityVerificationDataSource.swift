@@ -10,7 +10,7 @@ import Foundation
 
 final class IdentityVerificationDataSource: NSObject {
     weak var tableView: UITableView?
-    var availableMethods: [ResetPassword.Method] = [] {
+    var availableMethods: [IdentityVerificationMethod] = [] {
         didSet {
             tableView?.reloadData()
         }
@@ -45,19 +45,19 @@ extension IdentityVerificationDataSource: UITableViewDataSource {
         let cell = tableView.dequeue(reusable: VerificationMethodTableViewCell.self, for: indexPath)
         switch method {
         case let .email(email):
-            cell.methodNameLabel.text = "E-posta"
+            cell.methodNameLabel.text = localized(.resetPasswordMail)
             cell.contentLabel.text = email
 
         case let .recoveryEmail(email):
-            cell.methodNameLabel.text = "Kurtarma E- posta"
+            cell.methodNameLabel.text = localized(.resetPasswordRecoveryMail)
             cell.contentLabel.text = email
 
         case let .sms(phone):
-            cell.methodNameLabel.text = "Telefon Numarası"
+            cell.methodNameLabel.text = localized(.resetPasswordPhoneNumber)
             cell.contentLabel.text = phone
 
         case .securityQuestion:
-            cell.methodNameLabel.text = "Güvenlik Sorusu"
+            cell.methodNameLabel.text = localized(.resetPasswordSecurityQuestion)
             cell.contentLabel.text = ""
 
         case .unknown:

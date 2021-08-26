@@ -281,6 +281,10 @@
 		0791817126F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */; };
 		0791817226F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */; };
 		0791817326F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */; };
+		0791817926F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */; };
+		0791817A26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */; };
+		0791817B26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */; };
+		0791817C26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */; };
 		0798D5C626981BC600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */; };
@@ -8861,6 +8865,7 @@
 		0791815D26F88AB10067FB75 /* VerificationMethodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationMethodTableViewCell.swift; sourceTree = "<group>"; };
 		0791815E26F88AB10067FB75 /* VerificationMethodTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerificationMethodTableViewCell.xib; sourceTree = "<group>"; };
 		0791815F26F88AB10067FB75 /* IdentityVerificationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityVerificationDataSource.swift; sourceTree = "<group>"; };
+		0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityVerificationMethod.swift; sourceTree = "<group>"; };
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmailFieldView.swift; sourceTree = "<group>"; };
@@ -18490,6 +18495,7 @@
 				CE51A0C81EF8ED38005DCEE0 /* AuthenticationService.swift */,
 				CE3471861F02F38400B97AC3 /* AuthenticationServiceResponse.swift */,
 				98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */,
+				0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */,
 				0791815226F88A820067FB75 /* ResetPasswordResponse.swift */,
 			);
 			path = AuthenticationService;
@@ -24244,6 +24250,7 @@
 				8C4780A4228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */,
 				8C0E8F241FDEBDFF00789C91 /* SettingsInteractorInput.swift in Sources */,
 				73A1833E235855AA0095719F /* CampaignCard.swift in Sources */,
+				0791817926F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,
 				8C0E8F281FDEBDFF00789C91 /* SettingsInteractorOutput.swift in Sources */,
 				7CD7C2A420189C6C009F6D3D /* StorageCard.swift in Sources */,
 				8C0E8F291FDEBDFF00789C91 /* SettingsInteractor.swift in Sources */,
@@ -26597,6 +26604,7 @@
 				CF71467F24B597A900D83E60 /* ContactSyncMainView.swift in Sources */,
 				CE784C9722A685FB00662219 /* OTPViewRouter.swift in Sources */,
 				98B047F0259314750011DAEB /* AnalyzeStatus.m in Sources */,
+				0791817B26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,
 				CE784C9822A685FB00662219 /* OTPViewRouterInput.swift in Sources */,
 				98B04858259314750011DAEB /* AbstractHelper.m in Sources */,
 				CE784C9922A685FB00662219 /* OTPViewConfigurator.swift in Sources */,
@@ -26637,6 +26645,7 @@
 				CF8B637D23CBC9D70021B021 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CF8B637E23CBC9D70021B021 /* PassThroughView.swift in Sources */,
 				CF8B637F23CBC9D70021B021 /* (null) in Sources */,
+				0791817A26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,
 				CF8B638023CBC9D70021B021 /* AnalyzeHistoryDataSource.swift in Sources */,
 				CF8B638123CBC9D70021B021 /* InstapickService.swift in Sources */,
 				CF8B638223CBC9D70021B021 /* PhotoService.swift in Sources */,
@@ -29808,6 +29817,7 @@
 				CF71468024B597A900D83E60 /* ContactSyncMainView.swift in Sources */,
 				CF8B704423CBCA280021B021 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				98B047F1259314750011DAEB /* AnalyzeStatus.m in Sources */,
+				0791817C26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,
 				CF8B704523CBCA280021B021 /* OTPViewRouter.swift in Sources */,
 				98B04859259314750011DAEB /* AbstractHelper.m in Sources */,
 				CF8B704623CBCA280021B021 /* OTPViewRouterInput.swift in Sources */,
