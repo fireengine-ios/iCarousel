@@ -233,6 +233,30 @@
 		0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */; };
 		0798D5CE26981CBB00F5EDE0 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CD26981CBB00F5EDE0 /* Contacts.framework */; };
+		07FBA20526E0BBA800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA20626E0BBA800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA20826E0BBB100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA20926E0BBB100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA20E26E0BD5100ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA20F26E0BD5100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21326E0BD5100ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21426E0BD5100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21526E0BD5200ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21626E0BD5200ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21726E0BD5300ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21826E0BD5300ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21926E0BD5400ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21A26E0BD5400ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21B26E0BD5400ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21C26E0BD5400ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21D26E0BD5500ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21E26E0BD5500ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21F26E0BD5600ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA22026E0BD5600ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA22126E0BD5600ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA22226E0BD5600ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA22326E0BD5800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA22426E0BD5800ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
 		156D03709A81A8D9E2CBFD26 /* Pods_BilloNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CBA114AEF409086996359 /* Pods_BilloNotificationService.framework */; };
 		17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
@@ -8765,6 +8789,8 @@
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewOutput.swift; sourceTree = "<group>"; };
+		07FBA20426E0BBA800ED4132 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		07FBA20726E0BBB100ED4132 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
 		08BC2716CA43EB44D104F6F6 /* BaseFilesGreedViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewOutput.swift; sourceTree = "<group>"; };
 		094E8EB45148F901AC01702F /* FeedbackViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInitializer.swift; sourceTree = "<group>"; };
 		097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsConfigurator.swift; sourceTree = "<group>"; };
@@ -11557,6 +11583,15 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		07FBA20026E0BB9900ED4132 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				07FBA20726E0BBB100ED4132 /* Localizable.swift */,
+				07FBA20426E0BBA800ED4132 /* Strings.swift */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
 		09A3B180603B22CC0C77295C /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -13433,6 +13468,7 @@
 				8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */,
 				CEDA44D8207CA9E600E653DD /* NumericConstants.swift */,
 				3A134C412645476500CFC736 /* ScreenConstants.swift */,
+				07FBA20026E0BB9900ED4132 /* Strings */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -23702,6 +23738,7 @@
 				7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
 				730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				989BDE4722F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
+				07FBA20526E0BBA800ED4132 /* Strings.swift in Sources */,
 				CF71463A24B597A800D83E60 /* LineProgressView.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
@@ -24240,6 +24277,7 @@
 				8C0E8F691FDEBDFF00789C91 /* PasscodeSettingsRouterInput.swift in Sources */,
 				8CF6A9C6207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
 				7C379F42202C37CF0050C055 /* UIView+Utils.swift in Sources */,
+				07FBA20826E0BBB100ED4132 /* Localizable.swift in Sources */,
 				B5BF438B2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				8E1E080F2423B0260054BF86 /* KeychainCleaner.swift in Sources */,
 				8C0E8F6A1FDEBDFF00789C91 /* PasscodeSettingsConfigurator.swift in Sources */,
@@ -24522,6 +24560,7 @@
 				8C3BA2FB22B3CC45006D901E /* Error+Network.swift in Sources */,
 				8C3BA2FC22B3CC45006D901E /* UIImage+Size.swift in Sources */,
 				8C3BA2FD22B3CC45006D901E /* TokenKeychainStorage.swift in Sources */,
+				07FBA21D26E0BD5500ED4132 /* Strings.swift in Sources */,
 				8C3BA2FE22B3CC45006D901E /* UploadService.swift in Sources */,
 				8C3BA2FF22B3CC45006D901E /* Error+Localization.swift in Sources */,
 				8C3BA30022B3CC45006D901E /* SpringLabel.swift in Sources */,
@@ -24542,6 +24581,7 @@
 				8C3BA30F22B3CC45006D901E /* ViewController.swift in Sources */,
 				8C3BA31022B3CC45006D901E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C3BA31122B3CC45006D901E /* NumericConstants.swift in Sources */,
+				07FBA21E26E0BD5500ED4132 /* Localizable.swift in Sources */,
 				CFACAC8B247C62D800645B40 /* NetmeraEvents.swift in Sources */,
 				CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */,
 				8C3BA31222B3CC45006D901E /* PasscodeViewImp.swift in Sources */,
@@ -24605,10 +24645,12 @@
 				8C1E5BCE22CB8935008FDA02 /* FileProviderWormholeListener.swift in Sources */,
 				8C3BA35822B3CC49006D901E /* Device.swift in Sources */,
 				8C3BA35922B3CC49006D901E /* BiometricsManager.swift in Sources */,
+				07FBA21F26E0BD5600ED4132 /* Strings.swift in Sources */,
 				8C3BA35A22B3CC49006D901E /* TokenStorage.swift in Sources */,
 				8C3BA35B22B3CC49006D901E /* String+Subscript.swift in Sources */,
 				8C2386B222E9AA0C004992C4 /* URL+TrimmedQuery.swift in Sources */,
 				8C3BA35C22B3CC49006D901E /* FileProviderItem.swift in Sources */,
+				07FBA22026E0BD5600ED4132 /* Localizable.swift in Sources */,
 				8C3BA35D22B3CC49006D901E /* Mapping.swift in Sources */,
 				8C3BA35E22B3CC49006D901E /* NumericConstants.swift in Sources */,
 				8C2386B522E9AA22004992C4 /* DateExtension.swift in Sources */,
@@ -24643,8 +24685,10 @@
 				8C3BA38422B3CC53006D901E /* DocumentActionCustomizator.swift in Sources */,
 				8C3BA38522B3CC53006D901E /* UIViewController+NavBar.swift in Sources */,
 				8C3BA38622B3CC53006D901E /* DeviceExtension.swift in Sources */,
+				07FBA22126E0BD5600ED4132 /* Strings.swift in Sources */,
 				8C3BA38722B3CC53006D901E /* MD5.swift in Sources */,
 				8C3BA38822B3CC53006D901E /* FromNib.swift in Sources */,
+				07FBA22226E0BD5600ED4132 /* Localizable.swift in Sources */,
 				8C3BA38922B3CC53006D901E /* ErrorIdentificators.swift in Sources */,
 				8CC301E822C0E9B9005EA404 /* SharedConstants.swift in Sources */,
 				8C3BA38A22B3CC53006D901E /* TitleView.swift in Sources */,
@@ -24682,6 +24726,7 @@
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
 				CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */,
 				CE4D27F7207E024A003AE4FB /* Constants.swift in Sources */,
+				07FBA21426E0BD5100ED4132 /* Localizable.swift in Sources */,
 				CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */,
 				CEF3719D20873B11007AD36E /* TitleView.swift in Sources */,
 				8CCA071620C46CDB00558AB0 /* SessionServiceExtension.swift in Sources */,
@@ -24708,6 +24753,7 @@
 				CE4D2806207E086C003AE4FB /* NumericConstants.swift in Sources */,
 				CE1BE95520492DE40074BDDC /* Alamofire+Validate.swift in Sources */,
 				CE1BE95420492D040074BDDC /* FileService.swift in Sources */,
+				07FBA21326E0BD5100ED4132 /* Strings.swift in Sources */,
 				7C121F03208742BD00AA585F /* TokenKeychainStorage.swift in Sources */,
 				CE4ECA7820889B6600AB91C6 /* KeychainSwift+Optional.swift in Sources */,
 				CE1BE95220492CD50074BDDC /* URL+Path.swift in Sources */,
@@ -24738,8 +24784,10 @@
 				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
 				CEF371A120873B42007AD36E /* UIViewController+NavBar.swift in Sources */,
 				8CCA071020C4639700558AB0 /* DeviceExtension.swift in Sources */,
+				07FBA21526E0BD5200ED4132 /* Strings.swift in Sources */,
 				CEF371B020887DAC007AD36E /* MD5.swift in Sources */,
 				CE4D2817207E0A2B003AE4FB /* FromNib.swift in Sources */,
+				07FBA21626E0BD5200ED4132 /* Localizable.swift in Sources */,
 				CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */,
 				8CC301E922C0E9C1005EA404 /* SharedConstants.swift in Sources */,
 				CEF3719E20873B12007AD36E /* TitleView.swift in Sources */,
@@ -24784,6 +24832,7 @@
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */,
+				07FBA20E26E0BD5100ED4132 /* Strings.swift in Sources */,
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
 				7C121F02208742BC00AA585F /* TokenKeychainStorage.swift in Sources */,
 				CE61D1C32046873A001D01DC /* UploadService.swift in Sources */,
@@ -24804,6 +24853,7 @@
 				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
 				CE61D1BF2046872A001D01DC /* URL+ContentType.swift in Sources */,
 				CE4D2821207E244A003AE4FB /* ViewController.swift in Sources */,
+				07FBA20F26E0BD5100ED4132 /* Localizable.swift in Sources */,
 				CE5FE969208B2C2F0065AC7E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				CFACACAB247CF8A800645B40 /* NetmeraExtensionService.swift in Sources */,
 				CE4D2805207E086A003AE4FB /* NumericConstants.swift in Sources */,
@@ -25126,6 +25176,7 @@
 				CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				B571FC8F23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				CE7848CF22A685FB00662219 /* LocalAlbumInteractor.swift in Sources */,
+				07FBA21A26E0BD5400ED4132 /* Localizable.swift in Sources */,
 				CE7848D022A685FB00662219 /* ImportPhotosPresenter.swift in Sources */,
 				B59E1F9025921F0000640DD1 /* ItemSyncService.swift in Sources */,
 				89DAB3E123AB513700D4337D /* HSCompletionPopUp.swift in Sources */,
@@ -25649,6 +25700,7 @@
 				98E4BA1223C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				CE784A5422A685FB00662219 /* VisualMusicPlayerConfigurator.swift in Sources */,
 				CE784A5522A685FB00662219 /* ForgotPasswordViewInput.swift in Sources */,
+				07FBA21926E0BD5400ED4132 /* Strings.swift in Sources */,
 				CE784A5622A685FB00662219 /* ActivityTimelineTableBackView.swift in Sources */,
 				98231A6124F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
 				B551D0D524614C5900B21970 /* LogoutDBCleaner.swift in Sources */,
@@ -27439,6 +27491,7 @@
 				98231A5924F3A23500FD16E2 /* AprilFilter.swift in Sources */,
 				CF8B66AA23CBC9D70021B021 /* AlbumItem.swift in Sources */,
 				CF8B66AB23CBC9D70021B021 /* UserProfileRouter.swift in Sources */,
+				07FBA20626E0BBA800ED4132 /* Strings.swift in Sources */,
 				CF8B66AC23CBC9D70021B021 /* SelectionImageView.swift in Sources */,
 				CF8B66AD23CBC9D70021B021 /* InternetDataUsageCollectionViewCell.swift in Sources */,
 				CF8B66AE23CBC9D70021B021 /* UIImage+Size.swift in Sources */,
@@ -27529,6 +27582,7 @@
 				B560CCFB255D316C00199EA2 /* WrapDataSorting.swift in Sources */,
 				CF8B66F523CBC9D70021B021 /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				982319DC24F3A1E700FD16E2 /* AdjustmentCategoriesView.swift in Sources */,
+				07FBA20926E0BBB100ED4132 /* Localizable.swift in Sources */,
 				CF8B66F623CBC9D70021B021 /* UserInfoSubViewInteractor.swift in Sources */,
 				CF8B66F723CBC9D70021B021 /* UserInfoSubViewRouterInput.swift in Sources */,
 				CF8B66F923CBC9D70021B021 /* UserInfoSubViewRouter.swift in Sources */,
@@ -28309,6 +28363,7 @@
 				CF8B6C2523CBCA280021B021 /* ImportPhotosPresenter.swift in Sources */,
 				CF8B6C2623CBCA280021B021 /* LoginSettingsRouter.swift in Sources */,
 				CF8B6C2723CBCA280021B021 /* PopUpController.swift in Sources */,
+				07FBA21C26E0BD5400ED4132 /* Localizable.swift in Sources */,
 				B59E1F9125921F0000640DD1 /* ItemSyncService.swift in Sources */,
 				CF8B6C2823CBCA280021B021 /* CreateStoryPreviewInteractor.swift in Sources */,
 				CF8B6C2923CBCA280021B021 /* ErrorResponse.swift in Sources */,
@@ -28832,6 +28887,7 @@
 				CF8B6DD223CBCA280021B021 /* ForgotPasswordViewOutput.swift in Sources */,
 				CF8B6DD323CBCA280021B021 /* FaceImageAddNameInteractor.swift in Sources */,
 				030207AB23D1D32300BF8006 /* NetmeraScreenEventTemplate.swift in Sources */,
+				07FBA21B26E0BD5400ED4132 /* Strings.swift in Sources */,
 				0305A36723D5C66C004D1EC7 /* CarouselPagerDataSource.swift in Sources */,
 				98231A6224F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
 				B551D0D624614C5900B21970 /* LogoutDBCleaner.swift in Sources */,
@@ -29624,6 +29680,7 @@
 				CFE4E6C2252D9F2300F165AD /* CellsConstant.swift in Sources */,
 				CFE4E6C3252D9F2300F165AD /* Dictionary.swift in Sources */,
 				CFEB1FA7252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
+				07FBA21826E0BD5300ED4132 /* Localizable.swift in Sources */,
 				CFE4E6C4252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6C5252D9F2300F165AD /* NumericConstants.swift in Sources */,
 				CFE4E6C6252D9F2300F165AD /* Error+Network.swift in Sources */,
@@ -29709,6 +29766,7 @@
 				CFE4E705252D9F2300F165AD /* Mapping.swift in Sources */,
 				CFE4E706252D9F2300F165AD /* (null) in Sources */,
 				98B04CF125931DD90011DAEB /* SyncAdapter.m in Sources */,
+				07FBA21726E0BD5300ED4132 /* Strings.swift in Sources */,
 				CFE4E707252D9F2300F165AD /* (null) in Sources */,
 				CFE4E709252D9F2300F165AD /* ButtonStyle.swift in Sources */,
 				98B04CE425931DD90011DAEB /* ContactDevice.m in Sources */,
@@ -29735,6 +29793,7 @@
 				CFE4E756252D9F3B00F165AD /* CellsConstant.swift in Sources */,
 				CFE4E757252D9F3B00F165AD /* Dictionary.swift in Sources */,
 				CFEB1FA9252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
+				07FBA22426E0BD5800ED4132 /* Localizable.swift in Sources */,
 				CFE4E758252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E759252D9F3B00F165AD /* NumericConstants.swift in Sources */,
 				CFE4E75A252D9F3B00F165AD /* Error+Network.swift in Sources */,
@@ -29820,6 +29879,7 @@
 				CFE4E799252D9F3B00F165AD /* Mapping.swift in Sources */,
 				CFE4E79A252D9F3B00F165AD /* (null) in Sources */,
 				98B04D1925931DDC0011DAEB /* SyncAdapter.m in Sources */,
+				07FBA22326E0BD5800ED4132 /* Strings.swift in Sources */,
 				CFE4E79B252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E79D252D9F3B00F165AD /* ButtonStyle.swift in Sources */,
 				98B04D0C25931DDC0011DAEB /* ContactDevice.m in Sources */,
