@@ -34,6 +34,7 @@ enum FeaturePackageType: String, PackageTypeProtocol {
     case paycellSLCMFeature         = "FEATURE_PAYCELL_SLCM"
     case allAccessPaycellFeature    = "FEATURE_ALL_ACCESS_PAYCELL"
     case digicellFeature            = "DIGICELL-FEATURE"
+    case masterpassFeature          = "FEATURE_MASTERPASS"
 
     var cancelText: String {
         switch self {
@@ -67,6 +68,9 @@ enum FeaturePackageType: String, PackageTypeProtocol {
             return TextConstants.featureAllAccessPaycellCancelText
         case .digicellFeature:
             return TextConstants.featureDigicellCancelText
+        case .masterpassFeature:
+            //TODO: CHECK IT AGAIN
+            return TextConstants.featureDefaultCancelText
         }
     }
     
@@ -76,7 +80,7 @@ enum FeaturePackageType: String, PackageTypeProtocol {
             return .appStore
         case .SLCMFeature:
             return .slcm
-        case .SLCMPaycellFeature, .allAccessPaycellFeature:
+        case .SLCMPaycellFeature, .allAccessPaycellFeature, .masterpassFeature:
             return .paycell
         default:
             assertionFailure()
@@ -145,7 +149,8 @@ enum PackageContentType: Equatable {
         case .feature(.appleFeature), .quota(.apple):
             apple()
         case .quota(.paycellSLCM), .quota(.paycellAllAccess),
-             .feature(.SLCMPaycellFeature), .feature(.allAccessPaycellFeature):
+             .feature(.SLCMPaycellFeature), .feature(.allAccessPaycellFeature),
+             .feature(.masterpassFeature), .quota(.masterpass):
             paycell()
         default:
             notPaymentType()
@@ -171,7 +176,8 @@ enum PackageContentType: Equatable {
             FeaturePackageType.appleFeature, FeaturePackageType.SLCMFeature,
             FeaturePackageType.SLCMPaycellFeature, FeaturePackageType.allAccessPaycellFeature,
             QuotaPackageType.apple, QuotaPackageType.SLCM,
-            QuotaPackageType.paycellSLCM, QuotaPackageType.paycellAllAccess
+            QuotaPackageType.paycellSLCM, QuotaPackageType.paycellAllAccess,
+            FeaturePackageType.masterpassFeature, QuotaPackageType.masterpass
         ]
     }
 }
@@ -201,6 +207,7 @@ enum QuotaPackageType: String, PackageTypeProtocol {
     case albanian                   = "ALBTELECOM"
     case FWI                        = "DIGICELL_FWI"
     case jamaica                    = "DIGICELL_JAMAICA"
+    case masterpass                 = "MASTERPASS"
 
     var cancelText: String {
         switch self {
@@ -232,6 +239,9 @@ enum QuotaPackageType: String, PackageTypeProtocol {
             return TextConstants.packageFWICancelText
         case .jamaica:
             return TextConstants.packageJamaicaCancelText
+        case .masterpass:
+            //TODO: CHECK IT AGAIN
+            return TextConstants.packageDefaultCancelText
         }
     }
     
@@ -243,7 +253,7 @@ enum QuotaPackageType: String, PackageTypeProtocol {
                 return .slcm
             case .paycellSLCM:
                 return .paycell
-            case .paycellAllAccess:
+            case .paycellAllAccess, .masterpass:
                 return .paycell
             default:
                 return .appStore

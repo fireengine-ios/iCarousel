@@ -97,12 +97,12 @@ final class PremiumPresenter {
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {
-        guard let name = model.name, let type = model.type else {
+        guard let name = model.name, let type = model.type, let price = model.price else {
             return nil
         }
         
         let paymentType = type.paymentType
-        return PaymentMethod(name: name, priceLabel: priceString, type: paymentType, action: { [weak self] in
+        return PaymentMethod(name: name, price: price, priceLabel: priceString, type: paymentType, action: { [weak self] in
             guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, type: type) else {
                 assertionFailure()
                 return

@@ -193,19 +193,34 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
         }
         
         let titles = createTitlesForPopUp(offer: offer)
-        
-        let paymentModel = PaymentModel(name: titles.title, subtitle: titles.subtitle, types: paymentMethods)
+        let showableMethods = prepareShowableMethods(with: paymentMethods)
+
+        let paymentModel = PaymentModel(name: titles.title, subtitle: titles.subtitle, types: showableMethods)
         let popup = PaymentPopUpController.controllerWith(paymentModel)
         present(popup, animated: false, completion: nil)
     }
+
+    private func prepareShowableMethods(with methods: [PaymentMethod]) -> [PaymentMethod] {
+        var showableMethods: [PaymentMethod] = []
+
+        let paycellMethods = methods.filter {$0.type == .paycell}.min { $0.price < $1.price }
+        let appStoreMethods = methods.filter {$0.type == .appStore}.min { $0.price < $1.price }
+        let slcmMethods = methods.filter {$0.type == .slcm}.min { $0.price < $1.price }
+
+        showableMethods.append(paycellMethods)
+        showableMethods.append(appStoreMethods)
+        showableMethods.append(slcmMethods)
+
+        return showableMethods
+    }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
-        guard let name = model.name, let type = model.type else {
+        guard let name = model.name, let type = model.type, let price = model.price else {
             return nil
         }
         
         let paymentType = type.paymentType
-        return PaymentMethod(name: name, priceLabel: priceString, type: paymentType, action: { [weak self] in
+        return PaymentMethod(name: name, price: price, priceLabel: priceString, type: paymentType, action: { [weak self] in
             guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, packageType: type) else {
                 assertionFailure()
                 return
