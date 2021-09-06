@@ -233,6 +233,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 }
                 self.output.dataWasUpdated()
                 self.output.stopNetworkOperation()
+                self.output.configurateUserInfo(userInfo: response)
                 
                 self.trackProfileChanges()
             }
