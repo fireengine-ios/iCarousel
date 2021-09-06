@@ -91,9 +91,24 @@ final class PremiumPresenter {
                 return nil
             }
         }
-        
+
+        let showableMethods = prepareShowableMethods(with: paymentMethods)
         let subtitle = TextConstants.feature
-        return PaymentModel(name: TextConstants.standardBannerTitle, subtitle: subtitle, types: paymentMethods)
+        return PaymentModel(name: TextConstants.standardBannerTitle, subtitle: subtitle, types: showableMethods)
+    }
+
+    private func prepareShowableMethods(with methods: [PaymentMethod]) -> [PaymentMethod] {
+        var showableMethods: [PaymentMethod] = []
+
+        let paycellMethods = methods.filter {$0.type == .paycell}.min { $0.price < $1.price }
+        let appStoreMethods = methods.filter {$0.type == .appStore}.min { $0.price < $1.price }
+        let slcmMethods = methods.filter {$0.type == .slcm}.min { $0.price < $1.price }
+
+        showableMethods.append(paycellMethods)
+        showableMethods.append(appStoreMethods)
+        showableMethods.append(slcmMethods)
+
+        return showableMethods
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {
