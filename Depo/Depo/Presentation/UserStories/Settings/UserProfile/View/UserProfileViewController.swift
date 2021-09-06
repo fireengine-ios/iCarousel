@@ -26,14 +26,18 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             fullnameStackView.distribution = .fillEqually
             fullnameStackView.backgroundColor = .white
             fullnameStackView.isOpaque = true
-            
-            newValue.addArrangedSubview(fullnameStackView)
-            newValue.addArrangedSubview(emailView)
-            newValue.addArrangedSubview(phoneView)
-            newValue.addArrangedSubview(birthdayDetailView)
-            newValue.addArrangedSubview(addressView)
-            newValue.addArrangedSubview(changePasswordButton)
-            newValue.addArrangedSubview(changeSecurityQuestionButton)
+
+            let arrangedSubviews = [
+                fullnameStackView,
+                emailView,
+                phoneView,
+                recoveryEmailView,
+                birthdayDetailView,
+                addressView,
+                changePasswordButton,
+                changeSecurityQuestionButton,
+            ]
+            arrangedSubviews.forEach(newValue.addArrangedSubview(_:))
         }
     }
     
@@ -66,6 +70,17 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }()
     
     let phoneView = ProfilePhoneEnterView()
+
+    let recoveryEmailView: ProfileTextEnterView = {
+        let newValue = ProfileTextEnterView()
+        newValue.titleLabel.text = localized(.profileRecoveryMail)
+        newValue.subtitleLabel.text = localized(.profileRecoveryMailDescription)
+        newValue.textField.quickDismissPlaceholder = localized(.profileRecoveryMailHint)
+        newValue.textField.keyboardType = .emailAddress
+        newValue.textField.autocorrectionType = .no
+        newValue.textField.autocapitalizationType = .none
+        return newValue
+    }()
     
     private let birthdayDetailView: ProfileBirthdayFieldView = {
         let newValue = ProfileBirthdayFieldView()
@@ -120,6 +135,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var surname: String?
     private var email: String?
     private var phoneCode: String?
+    private var recoveryEmail: String?
     private var phoneNumber: String?
     private var birthday: String?
     private var address: String?
@@ -167,6 +183,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         nameView.isEditState = isEdit
         surnameView.isEditState = isEdit
         emailView.isEditState = isEdit
+        recoveryEmailView.isEditState = isEdit
         birthdayDetailView.isEditState = isEdit
         addressView.isEditState = isEdit
         
@@ -178,6 +195,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         }
         
         isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
+        isEdit ? recoveryEmailView.showSubtitleAnimated() : recoveryEmailView.hideSubtitleAnimated()
     }
     
     @objc private func onChangePassword() {
@@ -203,6 +221,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         surname = surnameView.textField.text
         email = emailView.textField.text
         phoneCode = phoneView.codeTextField.text
+        recoveryEmail = recoveryEmailView.textField.text
         phoneNumber = phoneView.numberTextField.text
         birthday = birthdayDetailView.editableText
         address = addressView.textField.text
@@ -214,6 +233,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             let surname = surnameView.textField.text,
             let email = emailView.textField.text,
             let phoneCode = phoneView.codeTextField.text,
+            let recoveryEmail = recoveryEmailView.textField.text,
             let phoneNumber = phoneView.numberTextField.text,
             let birthday = birthdayDetailView.editableText,
             let address = addressView.textField.text,
@@ -223,6 +243,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             self.surname != surname ||
             self.email != email ||
             self.phoneCode != phoneCode ||
+            self.recoveryEmail != recoveryEmail ||
             self.phoneNumber != phoneNumber ||
             self.birthday != birthday ||
             self.address != address)
@@ -261,6 +282,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                         self.output.tapReadyButton(name: name,
                                                     surname: surname,
                                                     email: email,
+                                                    recoveryEmail: recoveryEmail,
                                                     number: sendingPhoneNumber,
                                                     birthday: birthday,
                                                     address: address,
@@ -275,6 +297,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             output.tapReadyButton(name: name,
                                   surname: surname,
                                   email: email,
+                                  recoveryEmail: recoveryEmail,
                                   number: sendingPhoneNumber,
                                   birthday: birthday,
                                   address: address,
@@ -357,7 +380,10 @@ extension UserProfileViewController: UITextFieldDelegate  {
         /// only for simulator.
         /// setup by responderOnNext:
         case phoneView.numberTextField:
-            birthdayDetailView.textField.becomeFirstResponder()
+            recoveryEmailView.textField.becomeFirstResponder()
+
+        case recoveryEmailView.textField:
+            addressView.textField.becomeFirstResponder()
 
         /// only for simulator.
         /// setup by responderOnNext:
@@ -382,6 +408,7 @@ extension UserProfileViewController: UserProfileViewInput {
         nameView.textField.text = userInfo.name
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
+        recoveryEmailView.textField.text = userInfo.recoveryEmail
         addressView.textField.text = userInfo.address
         isTurkcellUser = userInfo.isTurkcellUser
         

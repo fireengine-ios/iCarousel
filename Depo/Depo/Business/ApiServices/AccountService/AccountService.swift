@@ -181,6 +181,14 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
     }
+
+    func updateUserRecoveryEmail(parameters: UserRecoveryEmailParameters, success: SuccessResponse?,
+                                 fail: @escaping FailResponse) {
+        debugLog("AccountService updateUserRecoveryEmail")
+
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
     
     func updateUserPhone(parameters: UserPhoneNumberParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService updateUserPhone")

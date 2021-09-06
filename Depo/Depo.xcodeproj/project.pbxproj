@@ -257,6 +257,10 @@
 		07FBA22226E0BD5600ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
 		07FBA22326E0BD5800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
 		07FBA22426E0BD5800ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA22E26E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
+		07FBA22F26E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
+		07FBA23026E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
+		07FBA23126E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
 		156D03709A81A8D9E2CBFD26 /* Pods_BilloNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CBA114AEF409086996359 /* Pods_BilloNotificationService.framework */; };
 		17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
@@ -8791,6 +8795,7 @@
 		07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewOutput.swift; sourceTree = "<group>"; };
 		07FBA20426E0BBA800ED4132 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		07FBA20726E0BBB100ED4132 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Profile.swift"; sourceTree = "<group>"; };
 		08BC2716CA43EB44D104F6F6 /* BaseFilesGreedViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewOutput.swift; sourceTree = "<group>"; };
 		094E8EB45148F901AC01702F /* FeedbackViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInitializer.swift; sourceTree = "<group>"; };
 		097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsConfigurator.swift; sourceTree = "<group>"; };
@@ -14280,6 +14285,7 @@
 		7CDABCF21F1E3A6300C8CC16 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */,
 				7CDABCF31F1E3A6300C8CC16 /* Configurator */,
 				7CDABCF61F1E3A6300C8CC16 /* Interactor */,
 				7CDABCFA1F1E3A6300C8CC16 /* Presenter */,
@@ -23275,6 +23281,7 @@
 				8C0E8D171FDEBDFF00789C91 /* IntroduceDataStorage.swift in Sources */,
 				CE634AF4230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				89E51D5F22CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
+				07FBA22E26E0EDD000ED4132 /* Strings+Profile.swift in Sources */,
 				CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */,
 				8C0E8D181FDEBDFF00789C91 /* AccountType.swift in Sources */,
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
@@ -25768,6 +25775,7 @@
 				98B04DD025931FD50011DAEB /* SettingsTypes.swift in Sources */,
 				CE784A8522A685FB00662219 /* FBParametrs.swift in Sources */,
 				CE784A8622A685FB00662219 /* PeriodicContactSyncConfigurator.swift in Sources */,
+				07FBA23026E0EDD000ED4132 /* Strings+Profile.swift in Sources */,
 				CE784A8722A685FB00662219 /* ForgotPasswordRouter.swift in Sources */,
 				CE784A8822A685FB00662219 /* ProgressCard.swift in Sources */,
 				CE784A8922A685FB00662219 /* ForgotPasswordConfigurator.swift in Sources */,
@@ -28026,6 +28034,7 @@
 				CF8B686323CBC9D70021B021 /* ActivityTimelineViewOutput.swift in Sources */,
 				CF8B686423CBC9D70021B021 /* MappingError.swift in Sources */,
 				CF8B686523CBC9D70021B021 /* ActivityTimelineViewController.swift in Sources */,
+				07FBA22F26E0EDD000ED4132 /* Strings+Profile.swift in Sources */,
 				CF8B686623CBC9D70021B021 /* ActivityTimelineModuleInput.swift in Sources */,
 				CF8B686723CBC9D70021B021 /* ActivityTimelinePresenter.swift in Sources */,
 				CF8B686823CBC9D70021B021 /* ActivityTimelineInteractorInput.swift in Sources */,
@@ -28955,6 +28964,7 @@
 				98B04DD125931FD50011DAEB /* SettingsTypes.swift in Sources */,
 				CF8B6E0723CBCA280021B021 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CF8B6E0823CBCA280021B021 /* ForgotPasswordRouter.swift in Sources */,
+				07FBA23126E0EDD000ED4132 /* Strings+Profile.swift in Sources */,
 				CF8B6E0923CBCA280021B021 /* ProgressCard.swift in Sources */,
 				CF8B6E0A23CBCA280021B021 /* ForgotPasswordConfigurator.swift in Sources */,
 				CF8B6E0B23CBCA280021B021 /* ForgotPasswordInitializer.swift in Sources */,

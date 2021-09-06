@@ -43,6 +43,10 @@ class UserProfileInteractor: UserProfileInteractorInput {
     private func isEmailChanged(email: String) -> Bool {
         return (email != userInfo?.email)
     }
+
+    private func isRecoveryEmailChanged(newValue: String) -> Bool {
+        return newValue != userInfo?.recoveryEmail
+    }
     
     func updateUserInfo() {
         accountService.info(success: { response in
@@ -83,7 +87,8 @@ class UserProfileInteractor: UserProfileInteractorInput {
         return (phone != userInfo?.phoneNumber)
     }
     
-    func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String, changes: String) {
+    func changeTo(name: String, surname: String, email: String, recoveryEmail: String,
+                  number: String, birthday: String, address: String, changes: String) {
         profileChanges = changes
         if !Validator.isValid(email: email) {
             output.showError(error: TextConstants.errorInvalidEmail)
@@ -99,10 +104,12 @@ class UserProfileInteractor: UserProfileInteractorInput {
             return
         }
         
-        updateNameIfNeed(name: name, surname: surname, email: email, number: number, birthday: birthday, address: address)
+        updateNameIfNeed(name: name, surname: surname, email: email, recoveryEmail: recoveryEmail,
+                         number: number, birthday: birthday, address: address)
     }
     
-    private func updateNameIfNeed(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
+    private func updateNameIfNeed(name: String, surname: String, email: String, recoveryEmail: String,
+                                  number: String, birthday: String, address: String) {
         if name != userInfo?.name || surname != userInfo?.surname {
 ///changed due difficulties with complicated names(such as names that contain more than 2 words). Now we are using same behaviour as android client
             let parameters = UserNameParameters(userName: name, userSurName: surname)
@@ -111,21 +118,36 @@ class UserProfileInteractor: UserProfileInteractorInput {
                 let nameIsEmpty = name.isEmpty
                 self?.userInfo?.name = name
                 self?.userInfo?.surname = surname
-                                                self?.updateEmailIfNeed(email: email, number: number, birthday: birthday, address: address)
+                self?.updateEmailIfNeed(email: email, recoveryEmail: recoveryEmail, number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in
                 self?.fail(error: error.description)
             })
         } else {
-            updateEmailIfNeed(email: email, number: number, birthday: birthday, address: address)
+            updateEmailIfNeed(email: email, recoveryEmail: recoveryEmail, number: number, birthday: birthday, address: address)
         }
     }
     
-    private func updateEmailIfNeed(email: String, number: String, birthday: String, address: String) {
+    private func updateEmailIfNeed(email: String, recoveryEmail: String, number: String, birthday: String, address: String) {
         if (isEmailChanged(email: email)) {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
                                              success: { [weak self] response in
                 self?.userInfo?.email = email
+                self?.updateRecoveryEmailIfNeed(recoveryEmail: recoveryEmail, number: number, birthday: birthday, address: address)
+            }, fail: { [weak self] error in
+                self?.fail(error: error.description)
+            })
+        } else {
+            updateRecoveryEmailIfNeed(recoveryEmail: recoveryEmail, number: number, birthday: birthday, address: address)
+        }
+    }
+
+    private func updateRecoveryEmailIfNeed(recoveryEmail: String, number: String, birthday: String, address: String) {
+        if (isRecoveryEmailChanged(newValue: recoveryEmail)) {
+            let parameters = UserRecoveryEmailParameters(email: recoveryEmail)
+            AccountService().updateUserRecoveryEmail(parameters: parameters,
+                                                     success: { [weak self] response in
+                self?.userInfo?.recoveryEmail = recoveryEmail
                 self?.updatePhoneIfNeed(number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in
                 self?.fail(error: error.description)
@@ -134,7 +156,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
             updatePhoneIfNeed(number: number, birthday: birthday, address: address)
         }
     }
-    
+
     private func updatePhoneIfNeed(number: String, birthday: String, address: String) {
         if (isPhoneChanged(phone: number)) {
             let parameters = UserPhoneNumberParameters(phoneNumber: number)
