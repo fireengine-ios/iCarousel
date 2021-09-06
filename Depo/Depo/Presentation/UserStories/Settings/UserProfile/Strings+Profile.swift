@@ -13,6 +13,8 @@ extension Strings {
         case profileRecoveryMail            = "profile_recovery_mail"
         case profileRecoveryMailDescription = "profile_recovery_mail_desc"
         case profileRecoveryMailHint        = "profile_recovery_mail_hint"
+        case profileMailVerified            = "profile_mail_verified"
+        case profileVerifyButtonTitle       = "profile_verify"
     }
 }
 

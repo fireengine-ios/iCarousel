@@ -59,26 +59,20 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         return newValue
     }()
     
-    let emailView: ProfileTextEnterView = {
-        let newValue = ProfileTextEnterView()
+    let emailView: ProfileEmailFieldView = {
+        let newValue = ProfileEmailFieldView()
         newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
-        newValue.textField.keyboardType = .emailAddress
-        newValue.textField.autocorrectionType = .no
-        newValue.textField.autocapitalizationType = .none
         return newValue
     }()
     
     let phoneView = ProfilePhoneEnterView()
 
-    let recoveryEmailView: ProfileTextEnterView = {
-        let newValue = ProfileTextEnterView()
+    let recoveryEmailView: ProfileEmailFieldView = {
+        let newValue = ProfileEmailFieldView()
         newValue.titleLabel.text = localized(.profileRecoveryMail)
         newValue.subtitleLabel.text = localized(.profileRecoveryMailDescription)
         newValue.textField.quickDismissPlaceholder = localized(.profileRecoveryMailHint)
-        newValue.textField.keyboardType = .emailAddress
-        newValue.textField.autocorrectionType = .no
-        newValue.textField.autocapitalizationType = .none
         return newValue
     }()
     
@@ -153,7 +147,11 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         surnameView.textField.delegate = self
         emailView.textField.delegate = self
         phoneView.responderOnNext = birthdayDetailView
+        recoveryEmailView.textField.delegate = self
         addressView.textField.delegate = self
+
+        emailView.delegate = self
+        recoveryEmailView.delegate = self
         
         // TODO: responderOnNext for birthdayDetailView
         //birthdayDetailView.textField.delegate = self
@@ -328,6 +326,25 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
 }
 
+extension UserProfileViewController: ProfileEmailFieldViewDelegate {
+    func profileEmailFieldViewVerifyTapped(_ fieldView: ProfileEmailFieldView) {
+        let router = RouterVC()
+
+        switch fieldView {
+        case emailView:
+            let popup = router.verifyEmailPopUp
+            present(popup, animated: true)
+            break
+
+        case recoveryEmailView:
+            break
+
+        default:
+            break
+        }
+    }
+}
+
 extension UserProfileViewController: UITextFieldDelegate  {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -408,7 +425,11 @@ extension UserProfileViewController: UserProfileViewInput {
         nameView.textField.text = userInfo.name
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
+        emailView.showsVerificationStatus = userInfo.emailVerified != nil
+        emailView.isVerified = userInfo.emailVerified ?? false
         recoveryEmailView.textField.text = userInfo.recoveryEmail
+        recoveryEmailView.showsVerificationStatus = userInfo.recoveryEmailVerified != nil
+        recoveryEmailView.isVerified = userInfo.recoveryEmailVerified ?? false
         addressView.textField.text = userInfo.address
         isTurkcellUser = userInfo.isTurkcellUser
         

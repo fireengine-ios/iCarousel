@@ -233,6 +233,10 @@
 		0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */; };
 		0798D5CE26981CBB00F5EDE0 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CD26981CBB00F5EDE0 /* Contacts.framework */; };
+		07A6C48A26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */; };
+		07A6C48B26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */; };
+		07A6C48C26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */; };
+		07A6C48D26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */; };
 		07FBA20526E0BBA800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
 		07FBA20626E0BBA800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
 		07FBA20826E0BBB100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
@@ -8792,6 +8796,7 @@
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmailFieldView.swift; sourceTree = "<group>"; };
 		07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewOutput.swift; sourceTree = "<group>"; };
 		07FBA20426E0BBA800ED4132 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		07FBA20726E0BBB100ED4132 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -11640,6 +11645,7 @@
 			children = (
 				17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */,
 				17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */,
+				07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -23946,6 +23952,7 @@
 				8C20866F228D4C6A000BEDAD /* TextInsetsLabel.swift in Sources */,
 				8C0E8EC31FDEBDFF00789C91 /* ActionsMenuTableViewCell.swift in Sources */,
 				8C0E8EC41FDEBDFF00789C91 /* BaseFilesGreedInitializer.swift in Sources */,
+				07A6C48A26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				8C0E8EC61FDEBDFF00789C91 /* SearchViewPresenter.swift in Sources */,
 				8C0E8EC91FDEBDFF00789C91 /* UIviewControlllerExtensions.swift in Sources */,
 				8C0E8ECA1FDEBDFF00789C91 /* Dictionary.swift in Sources */,
@@ -26313,6 +26320,7 @@
 				CE784C2522A685FB00662219 /* FaceImageItemsViewController.swift in Sources */,
 				CE784C2622A685FB00662219 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				B5450209255A863C004DBD41 /* PrivateShareSharedFilesViewController.swift in Sources */,
+				07A6C48C26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				98B047C0259314740011DAEB /* AppRater.m in Sources */,
 				CE784C2722A685FB00662219 /* ManageContactsRouter.swift in Sources */,
 				98231AA924F3A23500FD16E2 /* MetropolisFilter.swift in Sources */,
@@ -27715,6 +27723,7 @@
 				9816176A2578BA1D009F1C31 /* FirebaseAnalyticsActions.swift in Sources */,
 				CF8B676723CBC9D70021B021 /* TermsCheckboxTextView.swift in Sources */,
 				B5BF43F82514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				07A6C48B26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				0302079523D1D2D100BF8006 /* NetmeraService.swift in Sources */,
 				B59E1F7C25921F0000640DD1 /* ItemSyncOperation.swift in Sources */,
 				CF8B676823CBC9D70021B021 /* ControlTabBarProtocol.swift in Sources */,
@@ -29502,6 +29511,7 @@
 				CF8B6FC823CBCA280021B021 /* PHAsset+Properties.swift in Sources */,
 				B545020A255A863C004DBD41 /* PrivateShareSharedFilesViewController.swift in Sources */,
 				98B047C1259314740011DAEB /* AppRater.m in Sources */,
+				07A6C48D26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				CF8B6FC923CBCA280021B021 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				CF8B6FCA23CBCA280021B021 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				98231AAA24F3A23500FD16E2 /* MetropolisFilter.swift in Sources */,
