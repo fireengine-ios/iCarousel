@@ -22,6 +22,7 @@ struct AccountPath {
     static let activateOffer = accountBase + "activateOffer"
     static let updateUserName = accountBase + "nameSurname"
     static let updateUserEmail = accountBase + "email"
+    static let updateUserRecoveryEmail = accountBase + "updateRecoveryEmail"
     static let updatePhoneNumber = accountBase + "updatePhoneNumber"
     static let verifyPhoneNumber = accountBase + "verifyPhoneNumberToUpdate"
     static let securitySettings = "auth/settings"
@@ -71,6 +72,24 @@ class UserEmailParameters: BaseRequestParametrs {
     
     override var patch: URL {
         return URL(string: AccountPath.updateUserEmail, relativeTo: super.patch)!
+    }
+}
+
+class UserRecoveryEmailParameters: BaseRequestParametrs {
+    let email: String?
+
+    init(email: String? = nil) {
+        self.email = email
+    }
+
+    override var requestParametrs: Any {
+        let string = email ?? ""
+        let data = string.data(using: .utf8)
+        return data ?? Data()
+    }
+
+    override var patch: URL {
+        return URL(string: AccountPath.updateUserRecoveryEmail, relativeTo: super.patch)!
     }
 }
 

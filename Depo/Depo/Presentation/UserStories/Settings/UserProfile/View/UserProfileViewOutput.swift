@@ -16,11 +16,14 @@ protocol UserProfileViewOutput {
     func viewIsReady()
     
     func tapEditButton()
-    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String, address: String, changes: String)
+    func tapReadyButton(name: String, surname: String, email: String, recoveryEmail: String,
+                        number: String, birthday: String, address: String, changes: String)
     func tapChangePasswordButton()
     func tapChangeSecretQuestionButton()
     
     func isTurkcellUser() -> Bool
-    
+
+    func emailVerificationCompleted()
+
     func showError(error: String)
 }

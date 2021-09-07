@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VerifyEmailPopUp" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaseEmailVerificationPopUp" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="changeEmailButton" destination="YE2-Jv-9Nd" id="yAB-FH-1IH"/>
                 <outlet property="confirmButton" destination="ojI-F4-K95" id="7Ow-4Y-OKt"/>
@@ -45,7 +43,7 @@
                                     <rect key="frame" x="41.333333333333343" y="244.66666666666669" width="331.33333333333326" height="246.66666666666669"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyk-b9-hZJ">
-                                            <rect key="frame" x="145" y="16.000000000000028" width="41.666666666666657" height="20.333333333333329"/>
+                                            <rect key="frame" x="145" y="16.000000000000028" width="41.333333333333343" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -62,39 +60,33 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="AOo-NQ-ezn">
                                                     <rect key="frame" x="0.0" y="20.333333333333314" width="264.66666666666669" height="50"/>
                                                     <subviews>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Pr-ZS-qi0" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Pr-ZS-qi0" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="34" height="50"/>
-                                                            <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0s-n7-h8c" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
+                                                        <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0s-n7-h8c" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="46" y="0.0" width="34.333333333333343" height="50"/>
-                                                            <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2YI-Hn-Vnl" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
+                                                        <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2YI-Hn-Vnl" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="92.333333333333329" y="0.0" width="34" height="50"/>
-                                                            <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ha-kR-yHK" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
+                                                        <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2ha-kR-yHK" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="138.33333333333331" y="0.0" width="34" height="50"/>
-                                                            <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g4b-xm-Lpe" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
+                                                        <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g4b-xm-Lpe" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="184.33333333333331" y="0.0" width="34.333333333333343" height="50"/>
-                                                            <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
-                                                        <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YUz-Ry-NPQ" customClass="SecurityCodeTextField" customModule="lifebox" customModuleProvider="target">
+                                                        <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YUz-Ry-NPQ" customClass="SecurityCodeTextField" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="230.66666666666663" y="0.0" width="34" height="50"/>
-                                                            <nil key="textColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
@@ -105,7 +97,7 @@
                                                 </stackView>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62b-ig-381">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62b-ig-381">
                                             <rect key="frame" x="33.333333333333343" y="78.666666666666657" width="264.66666666666663" height="50"/>
                                             <connections>
                                                 <action selector="startEnteringCode:" destination="-1" eventType="touchUpInside" id="1vU-K6-8Lb"/>
@@ -114,14 +106,14 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Fec-bp-GF4">
                                             <rect key="frame" x="16.666666666666657" y="144.66666666666666" width="298" height="30"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YE2-Jv-9Nd">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YE2-Jv-9Nd">
                                                     <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="onChangeEmailTap:" destination="-1" eventType="touchUpInside" id="EX3-u3-G8b"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCh-yF-1Lu">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CCh-yF-1Lu">
                                                     <rect key="frame" x="153" y="0.0" width="145" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
@@ -133,14 +125,14 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KEs-3b-UsZ">
                                             <rect key="frame" x="24" y="186.66666666666666" width="283.33333333333331" height="44"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUL-yI-b2C" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUL-yI-b2C" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="137.66666666666666" height="44"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="onLaterTap:" destination="-1" eventType="touchUpInside" id="YnI-bx-dOj"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ojI-F4-K95" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ojI-F4-K95" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="145.66666666666669" y="0.0" width="137.66666666666669" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" priority="750" constant="180" id="ELF-yb-36z"/>
@@ -195,6 +187,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="52C-UY-H58"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="EUx-di-qvh" secondAttribute="bottom" id="4E5-PK-I0J"/>
@@ -204,7 +197,6 @@
                 <constraint firstAttribute="trailing" secondItem="EUx-di-qvh" secondAttribute="trailing" id="P2n-FR-mGQ"/>
                 <constraint firstItem="EUx-di-qvh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aeu-sC-qZJ"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="52C-UY-H58"/>
             <point key="canvasLocation" x="137.68115942028987" y="114.94565217391305"/>
         </view>
     </objects>

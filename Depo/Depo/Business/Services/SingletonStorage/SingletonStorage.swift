@@ -37,6 +37,12 @@ class SingletonStorage {
         get { return UserDefaults.standard.value(forKey: SingletonStorage.isEmailVerificationCodeSentKey) as? Bool ?? false }
     }
 
+    private static let isRecoveryEmailVerificationCodeSentKey = "isRecoveryEmailVerificationCodeSentKey\(SingletonStorage.shared.uniqueUserID)"
+    var isRecoveryEmailVerificationCodeSent: Bool {
+        set { UserDefaults.standard.set(newValue, forKey: SingletonStorage.isRecoveryEmailVerificationCodeSentKey) }
+        get { return UserDefaults.standard.value(forKey: SingletonStorage.isRecoveryEmailVerificationCodeSentKey) as? Bool ?? false }
+    }
+
     var isJustRegistered: Bool?
 
     var isNeedToSentEmailVerificationCode: Bool {
