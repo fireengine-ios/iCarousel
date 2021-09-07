@@ -8,6 +8,8 @@
 
 final class VerifyEmailPopUp: BaseEmailVerificationPopUp {
 
+    var alwaysShowsLaterButton = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +24,7 @@ final class VerifyEmailPopUp: BaseEmailVerificationPopUp {
         laterButton.isHidden = false
         #else
         let allowSkip = (SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0) > 0
-        laterButton.isHidden = !allowSkip
+        laterButton.isHidden = !allowSkip && !alwaysShowsLaterButton
         #endif
         
         ///don't send code if just registered(code already sent)

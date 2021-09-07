@@ -333,6 +333,7 @@ extension UserProfileViewController: ProfileEmailFieldViewDelegate {
         switch fieldView {
         case emailView:
             let popup = router.verifyEmailPopUp
+            popup.alwaysShowsLaterButton = true
             popup.delegate = self
             present(popup, animated: true)
 
