@@ -108,7 +108,7 @@ final class PremiumPresenter {
         showableMethods.append(appStoreMethods)
         showableMethods.append(slcmMethods)
 
-        return showableMethods
+        return showableMethods.sorted { $0.price < $1.price }
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {
@@ -213,8 +213,9 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     func successed(allFeatures: [PackageModelResponse]) {
         features = allFeatures.filter { $0.isFeaturePack == true && $0.type?.isPaymentType == true }
-        features.append(allFeatures.first(where: { $0.isRecommendedPremium }))
-        
+        let recommendedPackages = allFeatures.filter({$0.isRecommendedPremium == true})
+        features.append(contentsOf: recommendedPackages)
+
         guard features.hasItems else {
             switchToTextWithoutPrice(isError: false)
             /// maybe will be need. clear if all tests will be done by QA

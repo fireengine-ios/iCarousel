@@ -211,7 +211,7 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
         showableMethods.append(appStoreMethods)
         showableMethods.append(slcmMethods)
 
-        return showableMethods
+        return showableMethods.sorted { $0.price < $1.price }
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
