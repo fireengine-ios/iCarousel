@@ -42,6 +42,8 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
 
+        verifyButton.addTarget(self, action: #selector(verifyTapped), for: .touchUpInside)
+
         configureVerificationContainer()
         updateVerificationStatus()
         updateVerificationVisibility()
@@ -83,7 +85,6 @@ final class ProfileEmailFieldView: ProfileTextEnterView {
         button.contentEdgeInsets = UIEdgeInsets(topBottom: 0, rightLeft: 10)
         button.backgroundColor = ColorConstants.errorOrangeGradientStart
         button.layer.cornerRadius = ProfileEmailFieldView.verificationViewHeight / 2
-        button.addTarget(self, action: #selector(verifyTapped), for: .touchUpInside)
         return button
     }()
 
