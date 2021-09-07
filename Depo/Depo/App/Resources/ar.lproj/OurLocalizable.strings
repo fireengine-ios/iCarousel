@@ -1878,3 +1878,9 @@
 "signup_password_rule_character_limit" = "الحد الأدنى 6 أحرف، الحد الأقصى 16 حرفا";
 "signup_password_rule_upper_lower_numeric" = "على الأقل حرف كبير 1 وحرف صغير 1 ورقم 1";
 "signup_password_rule_sequential_characters" = "أحرف غير متتالية";
+"profile_recovery_mail" = "";
+"profile_recovery_mail_desc" = "";
+"profile_recovery_mail_hint" = "";
+"profile_mail_verified" = "";
+"profile_verify" = "";
+"masterpass_quota_package_cancel" = "";

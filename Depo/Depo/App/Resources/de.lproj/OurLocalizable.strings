@@ -1866,3 +1866,9 @@
 "signup_password_rule_character_limit" = "Mindestens 6, maximal 16 alphabetische Zeichen";
 "signup_password_rule_upper_lower_numeric" = "Mindestens 1 Großbuchstabe, 1 Kleinbuchstabe und 1 Zahl";
 "signup_password_rule_sequential_characters" = "nicht aufeinanderfolgende alphabetische Zeichen";
+"profile_recovery_mail" = "";
+"profile_recovery_mail_desc" = "";
+"profile_recovery_mail_hint" = "";
+"profile_mail_verified" = "";
+"profile_verify" = "";
+"masterpass_quota_package_cancel" = "";
