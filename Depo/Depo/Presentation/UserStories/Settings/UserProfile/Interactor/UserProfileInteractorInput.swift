@@ -18,4 +18,5 @@ protocol UserProfileInteractorInput {
     func trackSetSequrityQuestion()
     var secretQuestionsResponse: SecretQuestionsResponse? { get }
     func updateSecretQuestionsResponse(with secretQuestionWithAnswer: SecretQuestionWithAnswer)
+    func forceRefreshUserInfo()
 }

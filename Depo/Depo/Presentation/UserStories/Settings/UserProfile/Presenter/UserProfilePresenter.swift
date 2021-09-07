@@ -88,6 +88,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         router.goToSetSecretQuestion(selectedQuestion: interactor.secretQuestionsResponse,
                                      delegate: self)
     }
+
+    func emailVerificationCompleted() {
+        interactor.forceRefreshUserInfo()
+    }
     
     //MARK : BasePresenter
     

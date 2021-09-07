@@ -225,6 +225,14 @@
 		0765B82F269EE7430030429C /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0765B82C269EE7430030429C /* APIResponse.swift */; };
 		0765B830269EE7430030429C /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0765B82C269EE7430030429C /* APIResponse.swift */; };
 		07701F872642698A0020C304 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */; };
+		077EEF9D26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */; };
+		077EEF9E26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */; };
+		077EEF9F26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */; };
+		077EEFA026E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */; };
+		077EEFAA26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
+		077EEFAB26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
+		077EEFAC26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
+		077EEFAD26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
 		0786E1872660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E1882660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18A2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
@@ -718,8 +726,8 @@
 		890DDC592316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
 		890F737122EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
-		890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
-		890F737422EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		890F737322EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
+		890F737422EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
 		890F737922EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */; };
 		890F737A22EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */; };
 		890F737C22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */; };
@@ -6644,7 +6652,7 @@
 		CF8B6A6223CBC9D70021B021 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		CF8B6A6323CBC9D70021B021 /* SpotifyImportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989BDE3422F47B1E001DDEB2 /* SpotifyImportViewController.xib */; };
 		CF8B6A6423CBC9D70021B021 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
-		CF8B6A6723CBC9D70021B021 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		CF8B6A6723CBC9D70021B021 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
 		CF8B6A6A23CBC9D70021B021 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
 		CF8B6A6B23CBC9D70021B021 /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
 		CF8B6A7223CBC9D70021B021 /* SupportFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17589F6E2276336700A5DB37 /* SupportFormController.xib */; };
@@ -8169,7 +8177,7 @@
 		CF8B726923CBCA280021B021 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8C6A1DCB2317EAEB00D792B9 /* container */; };
 		CF8B726A23CBCA280021B021 /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
 		CF8B726D23CBCA280021B021 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
-		CF8B727023CBCA280021B021 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		CF8B727023CBCA280021B021 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
 		CF8B727623CBCA280021B021 /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */; };
 		CF8B727823CBCA280021B021 /* BaseCollectionViewCellWithSwipe.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FCD1EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.xib */; };
 		CF8B727923CBCA280021B021 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EC32338F44E0014258A /* QuestionCell.xib */; };
@@ -8792,6 +8800,8 @@
 		07595510264131FA00C088B1 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		0765B824269EE6F40030429C /* PhotopickCampaignResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotopickCampaignResponse.swift; sourceTree = "<group>"; };
 		0765B82C269EE7430030429C /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEmailVerificationPopUp.swift; sourceTree = "<group>"; };
+		077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyRecoveryEmailPopUp.swift; sourceTree = "<group>"; };
 		077FDB99268C730D00F21317 /* OverlayStickerSelectorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorDataSource.swift; sourceTree = "<group>"; };
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
@@ -9461,7 +9471,7 @@
 		88F2BB2471220C9297301750 /* Pods-LifeboxUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.release.xcconfig"; path = "Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwoFactorChallengeRouter.swift; path = Depo/Presentation/UserStories/Start/TwoFactorChallenge/Router/TwoFactorChallengeRouter.swift; sourceTree = SOURCE_ROOT; };
 		890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyEmailPopUp.swift; sourceTree = "<group>"; };
-		890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerifyEmailPopUp.xib; sourceTree = "<group>"; };
+		890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseEmailVerificationPopUp.xib; sourceTree = "<group>"; };
 		890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeEmailPopUp.xib; sourceTree = "<group>"; };
 		890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmailPopUp.swift; sourceTree = "<group>"; };
 		8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifiedPopUp.swift; sourceTree = "<group>"; };
@@ -14516,7 +14526,9 @@
 			isa = PBXGroup;
 			children = (
 				890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */,
-				890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */,
+				077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */,
+				077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */,
+				890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */,
 				8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */,
 				8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */,
 			);
@@ -20749,7 +20761,7 @@
 				9823198724F3A1E700FD16E2 /* ColorView.xib in Resources */,
 				989BDE5622F47B1E001DDEB2 /* SpotifyImportViewController.xib in Resources */,
 				9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
-				890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
+				890F737322EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */,
 				8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
 				9842FB8D2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
@@ -21246,7 +21258,7 @@
 				982319E424F3A1E700FD16E2 /* PhotoEditNavbar.xib in Resources */,
 				CE784E9922A685FB00662219 /* WaitingForWiFiPopUp.xib in Resources */,
 				CE784E9C22A685FB00662219 /* ConnectWithInstaView.xib in Resources */,
-				890F737422EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
+				890F737422EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */,
 				CE784EA422A685FB00662219 /* PasswordCell.xib in Resources */,
 				CE784EA622A685FB00662219 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				9823197224F3A1E600FD16E2 /* PreparedFilterCell.xib in Resources */,
@@ -21544,7 +21556,7 @@
 				CF8B6A6223CBC9D70021B021 /* TwoFactorAuthenticationCell.xib in Resources */,
 				CF8B6A6323CBC9D70021B021 /* SpotifyImportViewController.xib in Resources */,
 				CF8B6A6423CBC9D70021B021 /* CustomScrollIndicator.xib in Resources */,
-				CF8B6A6723CBC9D70021B021 /* VerifyEmailPopUp.xib in Resources */,
+				CF8B6A6723CBC9D70021B021 /* BaseEmailVerificationPopUp.xib in Resources */,
 				9823195824F3A1E600FD16E2 /* PreparedFilterSliderView.xib in Resources */,
 				98231A1824F3A1E700FD16E2 /* SelectionMenuController.xib in Resources */,
 				9823198824F3A1E700FD16E2 /* ColorView.xib in Resources */,
@@ -21939,7 +21951,7 @@
 				CF8B726923CBCA280021B021 /* container in Resources */,
 				CF8B726A23CBCA280021B021 /* WaitingForWiFiPopUp.xib in Resources */,
 				CF8B726D23CBCA280021B021 /* ConnectWithInstaView.xib in Resources */,
-				CF8B727023CBCA280021B021 /* VerifyEmailPopUp.xib in Resources */,
+				CF8B727023CBCA280021B021 /* BaseEmailVerificationPopUp.xib in Resources */,
 				0305A30D23D5C300004D1EC7 /* DivorceCard.xib in Resources */,
 				CF8B727623CBCA280021B021 /* PasswordCell.xib in Resources */,
 				CF8B727823CBCA280021B021 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
@@ -23212,6 +23224,7 @@
 				98A86D7323A76D0400438225 /* HiddenPhotosBottomBarManager.swift in Sources */,
 				4A6DBE8421A6F8DC0003D1B4 /* PackageInfoView.swift in Sources */,
 				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
+				077EEFAA26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				98625F292580FAAB008627F0 /* MBProgressHud+Extensions.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
 				98495F59255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
@@ -24271,6 +24284,7 @@
 				8C0E8F611FDEBDFF00789C91 /* UploadFilesSelectionModuleInput.swift in Sources */,
 				A217E42C21A5B00B0084AA37 /* LeavePremiumViewController.swift in Sources */,
 				8C06AC222008AAF1003D8E05 /* TextEnterController.swift in Sources */,
+				077EEF9D26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				8C0E8F621FDEBDFF00789C91 /* UploadFilesSelectionPresenter.swift in Sources */,
 				8C0E8F631FDEBDFF00789C91 /* InsetsLabel.swift in Sources */,
 				8C0E8F641FDEBDFF00789C91 /* UploadFilesSelectionInteractorInput.swift in Sources */,
@@ -25945,6 +25959,7 @@
 				CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */,
 				CF01729823D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
 				98A86D8A23A7C8BC00438225 /* EmptyView.swift in Sources */,
+				077EEFAC26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				CE784B0222A685FB00662219 /* CircleButton.swift in Sources */,
 				0762029D269B842E00D4FB2C /* OverlayStickerSelectorViewController.swift in Sources */,
 				CE784B0322A685FB00662219 /* DateExtension.swift in Sources */,
@@ -26481,6 +26496,7 @@
 				CE784C9922A685FB00662219 /* OTPViewConfigurator.swift in Sources */,
 				CE784C9A22A685FB00662219 /* OTPViewInitializer.swift in Sources */,
 				CE784C9B22A685FB00662219 /* FileManager+Size.swift in Sources */,
+				077EEF9F26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				CE784C9C22A685FB00662219 /* AuthorizationRepository.swift in Sources */,
 				CE784C9D22A685FB00662219 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				CE784C9E22A685FB00662219 /* AutoSyncRouterInput.swift in Sources */,
@@ -26619,6 +26635,7 @@
 				89EA4F7B240902C400A2C543 /* PackagesTableViewCell.swift in Sources */,
 				49C978352403047E00943F67 /* MobilePaymentPermissionView.swift in Sources */,
 				CF8B63D723CBC9D70021B021 /* ActivityTimelineTimeCell.swift in Sources */,
+				077EEFAB26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				CF8B63D823CBC9D70021B021 /* PaycellViewController.swift in Sources */,
 				CF8B63D923CBC9D70021B021 /* FaceImageAddNamePresenter.swift in Sources */,
 				CF8B63DA23CBC9D70021B021 /* ItemOperationManager.swift in Sources */,
@@ -27722,6 +27739,7 @@
 				CF8B676623CBC9D70021B021 /* GeneralFilesFiltration.swift in Sources */,
 				9816176A2578BA1D009F1C31 /* FirebaseAnalyticsActions.swift in Sources */,
 				CF8B676723CBC9D70021B021 /* TermsCheckboxTextView.swift in Sources */,
+				077EEF9E26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				B5BF43F82514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				07A6C48B26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				0302079523D1D2D100BF8006 /* NetmeraService.swift in Sources */,
@@ -29136,6 +29154,7 @@
 				CF8B6E8B23CBCA280021B021 /* DateExtension.swift in Sources */,
 				0305A32F23D5C447004D1EC7 /* HSCompetionPopUpsFactory.swift in Sources */,
 				CF8B6E8C23CBCA280021B021 /* BaseFilesGreedRouter.swift in Sources */,
+				077EEFAD26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				CF8B6E8D23CBCA280021B021 /* BaseFilesGreedConfigurator.swift in Sources */,
 				0762029F269B842F00D4FB2C /* OverlayStickerSelectorViewController.swift in Sources */,
 				CF8B6E8E23CBCA280021B021 /* ActionsMenuTableViewCell.swift in Sources */,
@@ -29672,6 +29691,7 @@
 				CF8B704623CBCA280021B021 /* OTPViewRouterInput.swift in Sources */,
 				CF8B704723CBCA280021B021 /* OTPViewConfigurator.swift in Sources */,
 				CF8B704823CBCA280021B021 /* OTPViewInitializer.swift in Sources */,
+				077EEFA026E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				CF8B704923CBCA280021B021 /* FileManager+Size.swift in Sources */,
 				CF8B704A23CBCA280021B021 /* AuthorizationRepository.swift in Sources */,
 				CF8B704B23CBCA280021B021 /* UploadFromLifeBoxModuleInput.swift in Sources */,

@@ -821,6 +821,82 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 }
             })
     }
+
+    func verifyRecoveryEmail(otpCode: String, handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.verifyRecoveryEmail,
+                     method: .post,
+                     parameters: ["otp" : otpCode],
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                    let errorText: String
+
+                    if statusJSON == "INVALID_OTP" {
+                        errorText = TextConstants.invalidOTP
+
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+
+                    } else if statusJSON == "EXPIRED_OTP" {
+                        errorText = TextConstants.expiredOTP
+
+                    } else if statusJSON == "REFERENCE_TOKEN_IS_EMPTY" {
+                        errorText = TextConstants.tokenIsMissing
+
+                    } else if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.noAccountFound
+
+                    } else if statusJSON == "INVALID_EMAIL" {
+                        errorText = TextConstants.invalidEmail
+
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
+
+    func sendRecoveryEmailVerificationCode(handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.sendRecoveryEmailVerificationCode,
+                     method: .post,
+                     parameters: nil,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                    let errorText: String
+
+                    if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.invalidOTP
+
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
     
     func updateAddress(with address: String, handler: @escaping ResponseVoid) {
         sessionManager

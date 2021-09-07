@@ -22,6 +22,8 @@ protocol UserProfileViewOutput {
     func tapChangeSecretQuestionButton()
     
     func isTurkcellUser() -> Bool
-    
+
+    func emailVerificationCompleted()
+
     func showError(error: String)
 }

@@ -1142,6 +1142,15 @@ class RouterVC: NSObject {
         
         return controller
     }
+
+    var verifyRecoveryEmailPopUp: VerifyRecoveryEmailPopUp {
+        let controller = VerifyRecoveryEmailPopUp()
+
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+
+        return controller
+    }
     
     var changeEmailPopUp: ChangeEmailPopUp {
         let controller = ChangeEmailPopUp()

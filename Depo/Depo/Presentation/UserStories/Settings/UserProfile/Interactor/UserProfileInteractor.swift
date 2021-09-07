@@ -292,4 +292,18 @@ class UserProfileInteractor: UserProfileInteractorInput {
         }
         secretQuestionsResponse = SecretQuestionsResponse(id: questionId, text: question)
     }
+
+    func forceRefreshUserInfo() {
+        SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] response in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.output.configurateUserInfo(userInfo: response)
+            }
+
+        }, fail: { [weak self] error in
+            self?.fail(error: error.localizedDescription)
+        })
+    }
 }

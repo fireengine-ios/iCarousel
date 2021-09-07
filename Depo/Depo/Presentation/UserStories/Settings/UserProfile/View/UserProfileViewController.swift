@@ -333,15 +333,24 @@ extension UserProfileViewController: ProfileEmailFieldViewDelegate {
         switch fieldView {
         case emailView:
             let popup = router.verifyEmailPopUp
+            popup.delegate = self
             present(popup, animated: true)
-            break
 
         case recoveryEmailView:
-            break
+            let popup = router.verifyRecoveryEmailPopUp
+            popup.delegate = self
+            present(popup, animated: true)
 
         default:
             break
         }
+    }
+}
+
+extension UserProfileViewController: BaseEmailVerificationPopUpDelegate {
+    func emailVerificationPopUpCompleted(_ popup: BaseEmailVerificationPopUp) {
+        // applies to both email & recovery email
+        output.emailVerificationCompleted()
     }
 }
 

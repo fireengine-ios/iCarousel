@@ -439,6 +439,8 @@ struct RouteRequests {
     
     static let verifyEmail = baseUrl +/ "verify/emailAddress"
     static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
+    static let verifyRecoveryEmail = baseUrl +/ "verify/recoveryEmailAddress"
+    static let sendRecoveryEmailVerificationCode = baseUrl +/ "verify/sendVerificationRecoveryEmail"
 
     static let healthCheck = baseUrl +/ "health/check"
     
