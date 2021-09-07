@@ -103,6 +103,18 @@ class UserProfileInteractor: UserProfileInteractorInput {
             trackState(.save(isSuccess: false), errorType: .phoneInvalidFormat)
             return
         }
+
+        let hadRecoveryEmail = userInfo?.recoveryEmail != nil && !userInfo!.recoveryEmail!.isEmpty
+        if hadRecoveryEmail && recoveryEmail.isEmpty {
+            output.showError(error: localized(.profileRecoveryEmailIsEmpty))
+            return
+        }
+
+        if !recoveryEmail.isEmpty && !Validator.isValid(email: recoveryEmail) {
+            output.showError(error: localized(.profileRecoveryEmailIsInvalid))
+            return
+        }
+
         
         updateNameIfNeed(name: name, surname: surname, email: email, recoveryEmail: recoveryEmail,
                          number: number, birthday: birthday, address: address)
