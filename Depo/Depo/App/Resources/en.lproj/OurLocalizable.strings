@@ -1917,8 +1917,10 @@
 "signup_password_rule_upper_lower_numeric" = "At least 1 uppercase, 1 lowercase letter and 1 number";
 "signup_password_rule_sequential_characters" = "Non-consecutive characters";
 "profile_recovery_mail" = "Recovery E-mail";
-"profile_recovery_mail_desc" = "Kurtarma e-postası şifreni unuttuğunda doğrulama için kullanılır";
-"profile_recovery_mail_hint" = "Henüz kurtarma e-postası girmemişsiniz";
+"profile_recovery_mail_desc" = "Recovery e-mail is used  when you forget your password to verify your account";
+"profile_recovery_mail_hint" = "You haven't added a recovery email to your account yet";
 "profile_mail_verified" = "Verified";
 "profile_verify" = "Verify";
 "masterpass_quota_package_cancel" = "To cancel your package, please visit www.mylifebox.com";
+"profile_recovery_email_empty" = "Recovery e-mail is empty";
+"profile_recovery_email_invalid" = "Recovery e-mail field is invalid";

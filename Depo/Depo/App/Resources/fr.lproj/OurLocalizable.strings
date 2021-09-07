@@ -2180,3 +2180,5 @@ Please check I have understood the intended command here*/
 "profile_mail_verified" = "";
 "profile_verify" = "";
 "masterpass_quota_package_cancel" = "";
+"profile_recovery_email_empty" = "";
+"profile_recovery_email_invalid" = "";
