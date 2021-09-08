@@ -172,6 +172,11 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .myProfile, eventLabel: .back)
         }
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        output.viewDidAppear()
+    }
     
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
@@ -328,19 +333,12 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
 
 extension UserProfileViewController: ProfileEmailFieldViewDelegate {
     func profileEmailFieldViewVerifyTapped(_ fieldView: ProfileEmailFieldView) {
-        let router = RouterVC()
-
         switch fieldView {
         case emailView:
-            let popup = router.verifyEmailPopUp
-            popup.alwaysShowsLaterButton = true
-            popup.delegate = self
-            present(popup, animated: true)
+            presentEmailVerificationPopUp()
 
         case recoveryEmailView:
-            let popup = router.verifyRecoveryEmailPopUp
-            popup.delegate = self
-            present(popup, animated: true)
+            presentRecoveryEmailVerificationPopUp()
 
         default:
             break
@@ -485,5 +483,17 @@ extension UserProfileViewController: UserProfileViewInput {
         /// can be added any check for title or userInfo.
         set(title: TextConstants.userProfileEditSecretQuestion, for: changeSecurityQuestionButton)
     }
-    
+
+    func presentEmailVerificationPopUp() {
+        let popup = RouterVC().verifyEmailPopUp
+        popup.alwaysShowsLaterButton = true
+        popup.delegate = self
+        present(popup, animated: true)
+    }
+
+    func presentRecoveryEmailVerificationPopUp() {
+        let popup = RouterVC().verifyRecoveryEmailPopUp
+        popup.delegate = self
+        present(popup, animated: true)
+    }
 }

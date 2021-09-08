@@ -8,15 +8,17 @@
 
 import UIKit
 
-class UserProfileModuleConfigurator {
+final class UserProfileModuleConfigurator {
 
-    func configure(viewController: UserProfileViewController, userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
+    func configure(viewController: UserProfileViewController, userInfo: AccountInfoResponse,
+                   isTurkcellUser: Bool, appearAction: UserProfileAppearAction?) {
 
         let router = UserProfileRouter()
 
         let presenter = UserProfilePresenter()
         presenter.view = viewController
         presenter.router = router
+        presenter.appearAction = appearAction
 
         let interactor = UserProfileInteractor()
         interactor.output = presenter

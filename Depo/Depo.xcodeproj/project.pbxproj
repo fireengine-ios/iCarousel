@@ -166,6 +166,10 @@
 		0708C78A2677261100680ED6 /* PhotoPrintCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0708C7812677261100680ED6 /* PhotoPrintCard.xib */; };
 		0708C78C2677261100680ED6 /* PhotoPrintCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0708C7812677261100680ED6 /* PhotoPrintCard.xib */; };
 		0708C78D2677261100680ED6 /* PhotoPrintCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0708C7812677261100680ED6 /* PhotoPrintCard.xib */; };
+		07111F2526E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
+		07111F2626E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
+		07111F2726E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
+		07111F2826E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
 		0731E7D0263164BC00883566 /* RegistrationTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */; };
 		0731E80B263165DA00883566 /* RegistrationTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0731E809263165DA00883566 /* RegistrationTermsViewController.xib */; };
 		0731E87C263181EA00883566 /* RegistrationTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */; };
@@ -8790,6 +8794,7 @@
 		0708C7802677261000680ED6 /* PhotoPrintCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPrintCard.swift; sourceTree = "<group>"; };
 		0708C7812677261100680ED6 /* PhotoPrintCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPrintCard.xib; sourceTree = "<group>"; };
 		0710A4E3268A416E0096B76A /* OverlayStickerSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorViewController.swift; sourceTree = "<group>"; };
+		07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAppearAction.swift; sourceTree = "<group>"; };
 		07182042268E3CDE0043730B /* OverlayStickersModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickersModels.swift; sourceTree = "<group>"; };
 		0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTermsViewController.swift; sourceTree = "<group>"; };
 		0731E809263165DA00883566 /* RegistrationTermsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationTermsViewController.xib; sourceTree = "<group>"; };
@@ -14335,6 +14340,7 @@
 			children = (
 				7CDABCFB1F1E3A6300C8CC16 /* UserProfileModuleInput.swift */,
 				7CDABCFC1F1E3A6300C8CC16 /* UserProfilePresenter.swift */,
+				07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -23653,6 +23659,7 @@
 				4BF3A69522B3822E0082130F /* PermissionsDesigner.swift in Sources */,
 				8C0E8DED1FDEBDFF00789C91 /* IntroduceRouter.swift in Sources */,
 				8C0E8DEE1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.swift in Sources */,
+				07111F2526E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				98B04D9225931F320011DAEB /* TabBarConfigurator.swift in Sources */,
 				921FF09B21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				8E26D97D2306999400D08123 /* MusicViewController.swift in Sources */,
@@ -25630,6 +25637,7 @@
 				8C86110E22BCF27500108958 /* SelectNameModuleOutput.swift in Sources */,
 				8E1E081A2423B03E0054BF86 /* KeychainCleaner.swift in Sources */,
 				CE784A0822A685FB00662219 /* AlertFilesActionsSheetInteractor.swift in Sources */,
+				07111F2726E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				4B88BB70233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */,
 				9823196024F3A1E600FD16E2 /* PreparedFilterSliderView.swift in Sources */,
 				98B047B0259314740011DAEB /* Configuration.m in Sources */,
@@ -26714,6 +26722,7 @@
 				CF8B641623CBC9D70021B021 /* HelpAndSupportPresenter.swift in Sources */,
 				CF8B641723CBC9D70021B021 /* ThingsService.swift in Sources */,
 				CF8B641823CBC9D70021B021 /* IntroduceDataSource.swift in Sources */,
+				07111F2626E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				CF8B641923CBC9D70021B021 /* CreateStoryResponse.swift in Sources */,
 				985E9BFE2493AFD6004D70BA /* UITextView+Extensions.swift in Sources */,
 				CF8B641A23CBC9D70021B021 /* UserProfileInteractor.swift in Sources */,
@@ -28825,6 +28834,7 @@
 				CF8B6D8223CBCA280021B021 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				8E1E081F2423B0420054BF86 /* KeychainCleaner.swift in Sources */,
 				CF8B6D8323CBCA280021B021 /* ActivityTimelineHeader.swift in Sources */,
+				07111F2826E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				CF8B6D8423CBCA280021B021 /* PrintViewInput.swift in Sources */,
 				9823196124F3A1E600FD16E2 /* PreparedFilterSliderView.swift in Sources */,
 				98B047B1259314740011DAEB /* Configuration.m in Sources */,

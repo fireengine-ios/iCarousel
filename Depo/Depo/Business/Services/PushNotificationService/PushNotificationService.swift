@@ -162,6 +162,8 @@ final class PushNotificationService {
         case .sharedByMe: openShareByMe()
         case .invitation : openInvitation()
         case .chatbot: openChatbot()
+        case .verifyEmail: openVerifyEmail()
+        case .verifyRecoveryEmail: openVerifyRecoveryEmail()
         case .silent: break
         }
         
@@ -508,6 +510,20 @@ final class PushNotificationService {
                 }
             }
             #endif
+        }
+    }
+
+    private func openVerifyEmail() {
+        if let userInfo = SingletonStorage.shared.accountInfo {
+            let profile = router.userProfile(userInfo: userInfo, appearAction: .presentVerifyEmail)
+            pushTo(profile)
+        }
+    }
+
+    private func openVerifyRecoveryEmail() {
+        if let userInfo = SingletonStorage.shared.accountInfo {
+            let profile = router.userProfile(userInfo: userInfo, appearAction: .presentVerifyRecoveryEmail)
+            pushTo(profile)
         }
     }
     
