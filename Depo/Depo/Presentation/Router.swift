@@ -673,8 +673,14 @@ class RouterVC: NSObject {
     
     // MARK: User profile
     
-    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
-        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo, isTurkcellUser: isTurkcellUser)
+    func userProfile(userInfo: AccountInfoResponse,
+                     isTurkcellUser: Bool = false,
+                     appearAction: UserProfileAppearAction? = nil) -> UIViewController {
+        let viewController = UserProfileModuleInitializer.initializeViewController(
+            userInfo: userInfo,
+            isTurkcellUser: isTurkcellUser,
+            appearAction: appearAction
+        )
         return viewController
     }
     

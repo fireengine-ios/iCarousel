@@ -14,7 +14,8 @@ protocol UserProfileViewOutput {
     */
 
     func viewIsReady()
-    
+    func viewDidAppear()
+
     func tapEditButton()
     func tapReadyButton(name: String, surname: String, email: String, recoveryEmail: String,
                         number: String, birthday: String, address: String, changes: String)

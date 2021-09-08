@@ -10,6 +10,7 @@ import Foundation
 
 protocol UserProfileInteractorInput {
     var statusTurkcellUser: Bool { get }
+    var userInfo: AccountInfoResponse? { get }
     func viewIsReady()
     func changeTo(name: String, surname: String, email: String, recoveryEmail: String,
                   number: String, birthday: String, address: String, changes: String)

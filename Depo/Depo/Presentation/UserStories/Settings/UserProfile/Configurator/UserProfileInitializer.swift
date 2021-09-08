@@ -8,13 +8,15 @@
 
 import UIKit
 
-class UserProfileModuleInitializer: NSObject {
+final class UserProfileModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName: String, userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
-//        let viewController = UserProfileViewController(nibName: nibName, bundle: nil)
+    class func initializeViewController(userInfo: AccountInfoResponse,
+                                        isTurkcellUser: Bool = false,
+                                        appearAction: UserProfileAppearAction? = nil) -> UIViewController {
         let viewController = UserProfileViewController()
         let configurator = UserProfileModuleConfigurator()
-        configurator.configure(viewController: viewController, userInfo: userInfo, isTurkcellUser: isTurkcellUser)
+        configurator.configure(viewController: viewController, userInfo: userInfo,
+                               isTurkcellUser: isTurkcellUser, appearAction: appearAction)
         return viewController
     }
 
