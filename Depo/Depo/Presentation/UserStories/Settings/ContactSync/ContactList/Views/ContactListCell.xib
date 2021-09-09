@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,7 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Ndj-yc-Ibl" customClass="ContactListCell" customModule="lifebox" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Ndj-yc-Ibl" customClass="ContactListCell" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="387" height="53"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ndj-yc-Ibl" id="xqX-BQ-y3R">
@@ -35,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ugW-Nj-hPr" firstAttribute="leading" secondItem="lto-W7-wqM" secondAttribute="leading" id="0mL-r8-lbt"/>
                             <constraint firstItem="ugW-Nj-hPr" firstAttribute="top" secondItem="lto-W7-wqM" secondAttribute="top" id="UiI-aL-EyV"/>
@@ -46,16 +48,16 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mGZ-5S-1pm">
-                        <rect key="frame" x="72" y="7" width="299" height="39.5"/>
+                        <rect key="frame" x="72" y="5.5" width="299" height="42"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLv-hS-Ndp">
-                                <rect key="frame" x="0.0" y="0.0" width="299" height="18.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="299" height="19"/>
                                 <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="16"/>
                                 <color key="textColor" red="0.37065416569999998" green="0.37095898389999998" blue="0.37070131299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mot-de-7Fh">
-                                <rect key="frame" x="0.0" y="22.5" width="299" height="17"/>
+                                <rect key="frame" x="0.0" y="23" width="299" height="19"/>
                                 <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="16"/>
                                 <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -64,12 +66,13 @@
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gy-08-W6M">
                         <rect key="frame" x="16" y="52" width="355" height="1"/>
-                        <color key="backgroundColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="itemSeperator"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="xk4-iU-78M"/>
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" name="primaryBackground"/>
                 <constraints>
                     <constraint firstItem="mGZ-5S-1pm" firstAttribute="centerY" secondItem="xqX-BQ-y3R" secondAttribute="centerY" id="09A-dt-owP"/>
                     <constraint firstAttribute="bottom" secondItem="lto-W7-wqM" secondAttribute="bottom" constant="5" id="0ef-Ig-Pjt"/>
@@ -83,6 +86,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="41C-s6-Rwo"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="letterLabel" destination="ugW-Nj-hPr" id="LQU-s0-yF4"/>
@@ -93,4 +97,15 @@
             <point key="canvasLocation" x="-0.80000000000000004" y="61.169415292353825"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="itemSeperator">
+            <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

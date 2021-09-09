@@ -29,7 +29,7 @@ class ContactSyncBaseCardView: UIView {
         
         clipsToBounds = false
         
-        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowColor = AppColor.cellShadow.color?.cgColor
         layer.shadowOpacity = NumericConstants.contactSyncSmallCardShadowOpacity
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = NumericConstants.contactSyncSmallCardShadowRadius

@@ -18,7 +18,7 @@ final class ContactListSectionHeader: UIView {
     }()
     
     func setup(with text: String) {
-        backgroundColor = .white
+        backgroundColor = AppColor.secondaryBackground.color
         
         label.text = text
         label.translatesAutoresizingMaskIntoConstraints = false

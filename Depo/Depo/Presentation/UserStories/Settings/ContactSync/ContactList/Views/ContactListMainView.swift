@@ -28,7 +28,7 @@ final class ContactListMainView: UIView, NibInit {
     
     @IBOutlet private weak var shadowView: UIView! {
         willSet {
-            let gradientView = TransparentGradientView(style: .vertical, mainColor: ColorConstants.lighterGray)
+            let gradientView = TransparentGradientView(style: .vertical, mainColor: AppColor.primaryBackground.color ?? ColorConstants.lighterGray)
             gradientView.frame = newValue.bounds
             newValue.addSubview(gradientView)
             newValue.sendSubviewToBack(gradientView)

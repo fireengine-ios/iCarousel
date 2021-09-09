@@ -35,7 +35,7 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var dividerView: UIView! {
         willSet {
             newValue.translatesAutoresizingMaskIntoConstraints = false
-            newValue.backgroundColor = ColorConstants.lighterGray
+            newValue.backgroundColor = AppColor.itemSeperator.color
         }
     }
     

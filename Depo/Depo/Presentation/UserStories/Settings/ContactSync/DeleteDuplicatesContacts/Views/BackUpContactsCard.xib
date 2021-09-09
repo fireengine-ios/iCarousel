@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BackUpContactsCard" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BackUpContactsCard" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="118"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -29,7 +30,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYs-7h-SgZ">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYs-7h-SgZ">
                             <rect key="frame" x="16" y="82" width="46" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="1ds-hj-GZG"/>
@@ -40,7 +41,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstItem="k5E-h8-knD" firstAttribute="top" secondItem="CCW-Xh-32N" secondAttribute="top" constant="16" id="0ZG-pG-Fuf"/>
                         <constraint firstItem="DYs-7h-SgZ" firstAttribute="leading" secondItem="CCW-Xh-32N" secondAttribute="leading" constant="16" id="5wZ-7n-XWl"/>
@@ -54,7 +55,8 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="CCW-Xh-32N" secondAttribute="trailing" id="7ty-Bc-t3e"/>
                 <constraint firstItem="CCW-Xh-32N" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="IMG-tt-d2r"/>
@@ -62,7 +64,6 @@
                 <constraint firstItem="CCW-Xh-32N" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pxx-bD-gd8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="backupButton" destination="DYs-7h-SgZ" id="xtG-Ic-AnI"/>
                 <outlet property="messageLabel" destination="0Fl-7M-tPa" id="fib-ol-mG8"/>
@@ -71,4 +72,9 @@
             <point key="canvasLocation" x="137.68115942028987" y="161.38392857142856"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
