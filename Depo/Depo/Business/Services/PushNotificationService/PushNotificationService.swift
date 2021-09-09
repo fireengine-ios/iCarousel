@@ -16,6 +16,7 @@ final class PushNotificationService {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var utilityAPIService = UtilityAPIService()
 
     private var notificationAction: PushNotificationAction?
     private var notificationParameters: String?
@@ -24,35 +25,31 @@ final class PushNotificationService {
     
     func assignNotificationActionBy(launchOptions: [AnyHashable: Any]?) -> Bool {
         let action = launchOptions?[PushNotificationParameter.action.rawValue] as? String ?? launchOptions?[PushNotificationParameter.pushType.rawValue] as? String
-        
+
         guard let actionString = action else {
             return false
         }
-        
-        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
-            assertionFailure("unowned push type")
-            debugLog("PushNotificationService received notification with unowned type \(String(describing: action))")
+
+        guard let resolvedAction = resolve(actionString: actionString) else {
             return false
         }
-        
-        debugLog("PushNotificationService received notification with type \(actionString)")
-        parse(options: launchOptions, action: notificationAction)
+
+        debugLog("received notification with type \(actionString) resolved to \(resolvedAction)")
+        parse(options: launchOptions, action: resolvedAction)
         return true
     }
     
     func assignDeepLink(innerLink: String?, options: [AnyHashable: Any]?) -> Bool {
-        guard let actionString = innerLink as String? else {
+        guard let actionString = innerLink else {
             return false
         }
-                
-        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
-            //assertionFailure("unowned push type")
-            debugLog("PushNotificationService received deepLink with unowned type \(String(describing: actionString))")
+
+        guard let resolvedAction = resolve(actionString: actionString) else {
             return false
         }
-        
-        debugLog("PushNotificationService received deepLink with type \(actionString)")
-        parse(options: options, action: notificationAction)
+
+        debugLog("received deepLink with type \(actionString) resolved to \(resolvedAction)")
+        parse(options: options, action: resolvedAction)
         return true
     }
     
@@ -64,7 +61,34 @@ final class PushNotificationService {
         parse(options: nil, action: action)
         return true
     }
-    
+
+    private func resolve(actionString: String, tryResolveIfUnknown: Bool = true) -> PushNotificationAction? {
+        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            debugLog("received unknown notification/deeplink with type \(actionString)")
+            if tryResolveIfUnknown {
+                resolveUnknownAction(actionString: actionString)
+            }
+            return nil
+        }
+
+        return notificationAction
+    }
+
+    private func resolveUnknownAction(actionString: String) {
+        utilityAPIService.resolveDeepLink(actionString: actionString) { url in
+            guard let resolvedURL = url, let host = resolvedURL.host else { return }
+
+            guard let action = self.resolve(actionString: host, tryResolveIfUnknown: false) else {
+                debugLog("unable to resolve unknown action \(actionString) - resolved to \(resolvedURL)")
+                return
+            }
+
+            debugLog("resolved unknown action \(actionString) to \(action)")
+            self.parse(options: resolvedURL.queryParameters, action: action)
+            self.openActionScreen()
+        }
+    }
+
     private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
         self.notificationAction = action
         
