@@ -115,7 +115,7 @@ final class SmallFullOfQuotaPopUp: BasePopUpController {
         saveCheckBoxState()
         close(isFinalStep: false) {
             let router = RouterVC()
-            let viewController = router.packages
+            let viewController = router.packages()
             router.pushViewController(viewController: viewController)
         }
     }

@@ -47,7 +47,7 @@ class StorageCard: BaseCardView {
             let router = RouterVC()
             switch operationType {
             case .freeAppSpaceCloudWarning:
-                let controller = router.packages
+                let controller = router.packages()
                 router.pushViewController(viewController: controller)
                 break
             case .emptyStorage:

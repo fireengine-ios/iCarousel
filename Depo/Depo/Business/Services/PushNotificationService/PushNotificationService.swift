@@ -270,7 +270,9 @@ final class PushNotificationService {
     }
     
     private func openPackages() {
-        pushTo(router.packages)
+        let campaignId = storageVars.value(forDeepLinkParameter: .campaign) as? String
+        let viewController = router.packages(campaignId: campaignId)
+        pushTo(viewController)
     }
     
     private func openPhotos() {

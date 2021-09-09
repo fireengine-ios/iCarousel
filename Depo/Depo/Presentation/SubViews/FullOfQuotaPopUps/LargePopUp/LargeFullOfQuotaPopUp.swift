@@ -151,7 +151,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             self?.delegate?.onOpenExpandTap()
 
             let router = RouterVC()
-            let viewController = router.packages
+            let viewController = router.packages()
             viewController.needToShowTabBar = false
             router.pushViewController(viewController: viewController)
         }

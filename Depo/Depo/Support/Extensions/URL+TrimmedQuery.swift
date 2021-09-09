@@ -32,7 +32,7 @@ extension URL {
         return Date() >= expirationDate
     }
     
-    private var queryParameters: [String: String]? {
+    var queryParameters: [String: String]? {
         guard
             let components = URLComponents(url: self, resolvingAgainstBaseURL: true),
             let queryItems = components.queryItems
