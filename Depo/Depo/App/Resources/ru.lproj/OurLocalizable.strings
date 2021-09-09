@@ -1880,3 +1880,11 @@
 "signup_password_rule_character_limit" = "Минимум 6, максимум 16 символов";
 "signup_password_rule_upper_lower_numeric" = "Минимум 1 заглавная буква, 1 строчная буква и 1 цифра";
 "signup_password_rule_sequential_characters" = "Непоследовательные символы";
+"profile_recovery_mail" = "";
+"profile_recovery_mail_desc" = "";
+"profile_recovery_mail_hint" = "";
+"profile_mail_verified" = "";
+"profile_verify" = "";
+"masterpass_quota_package_cancel" = "";
+"profile_recovery_email_empty" = "";
+"profile_recovery_email_invalid" = "";

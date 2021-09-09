@@ -1908,3 +1908,11 @@
 "signup_password_rule_character_limit" = "Mínimo 6, máximo 16 caracteres";
 "signup_password_rule_upper_lower_numeric" = "Al menos 1 letra mayúscula, 1 letra minúscula y 1 número";
 "signup_password_rule_sequential_characters" = "caracteres no consecutivos";
+"profile_recovery_mail" = "";
+"profile_recovery_mail_desc" = "";
+"profile_recovery_mail_hint" = "";
+"profile_mail_verified" = "";
+"profile_verify" = "";
+"masterpass_quota_package_cancel" = "";
+"profile_recovery_email_empty" = "";
+"profile_recovery_email_invalid" = "";

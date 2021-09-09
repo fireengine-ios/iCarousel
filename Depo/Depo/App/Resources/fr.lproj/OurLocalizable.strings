@@ -2174,3 +2174,11 @@ Please check I have understood the intended command here*/
 "signup_password_rule_character_limit" = "Minimum 6, maximum 16 caractères";
 "signup_password_rule_upper_lower_numeric" = "Au moins 1 lettre majuscule, 1 lettre minuscule et 1 chiffre";
 "signup_password_rule_sequential_characters" = "caractères non consécutifs";
+"profile_recovery_mail" = "";
+"profile_recovery_mail_desc" = "";
+"profile_recovery_mail_hint" = "";
+"profile_mail_verified" = "";
+"profile_verify" = "";
+"masterpass_quota_package_cancel" = "";
+"profile_recovery_email_empty" = "";
+"profile_recovery_email_invalid" = "";
