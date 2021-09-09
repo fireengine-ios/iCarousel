@@ -16,7 +16,7 @@ protocol AccountServicePrl {
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
-    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
+    func availableOffers(campaignId: String?, handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
@@ -113,11 +113,14 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
 
-    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
-        debugLog("AccountService featurePacks")
+    func availableOffers(campaignId: String?, handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
+        var params: Parameters = [:]
+        if let campaignId = campaignId {
+            params["affiliate"] = campaignId
+        }
 
         sessionManager
-            .request(RouteRequests.Account.Permissions.availableOffers)
+            .request(RouteRequests.Account.Permissions.availableOffers, parameters: params)
             .customValidate()
             .responseData { response in
                 switch response.result {
@@ -128,6 +131,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     handler(.failed(error))
                 }
         }
+
     }
     
     func provision() {

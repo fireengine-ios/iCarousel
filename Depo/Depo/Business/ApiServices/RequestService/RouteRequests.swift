@@ -445,4 +445,6 @@ struct RouteRequests {
     static let healthCheck = baseUrl +/ "health/check"
     
     static let paycellWebUrl = paycellShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=https://google.com"
+
+    static let resolveDeepLink = baseUrl +/ "deeplink"
 }

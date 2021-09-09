@@ -1066,20 +1066,10 @@ class RouterVC: NSObject {
     }
     // MARK: - Packages
     
-    func packagesWith(quotoInfo: QuotaInfoResponse?) -> PackagesViewController{
-        
-        let nibName = String(describing: PackagesViewController.self)
-        let viewController = PackagesViewController(nibName: nibName, bundle: nil)
-        let configurator = PackagesModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController, quotoInfo: quotoInfo)
-        
-        return viewController
+    func packages(quotaInfo: QuotaInfoResponse? = nil, campaignId: String? = nil) -> PackagesViewController {
+        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo, campaignId: campaignId)
     }
-    
-    var packages: PackagesViewController {
-        return PackagesModuleInitializer.viewController
-    }
-    
+
     // MARK: - Passcode
     
     func passcodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) -> UIViewController {
