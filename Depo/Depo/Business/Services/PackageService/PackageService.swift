@@ -121,6 +121,15 @@ final class PackageService {
             }
             return name
         }
+
+        func isSixMonthOffer(_ offer: Any) -> Bool {
+            if let offer = offer as? PackageModelResponse {
+                return offer.period == PackageModelResponse.Period.sixMonth.rawValue
+            } else if let offer = offer as? SKProduct, #available(iOS 11.2, *) {
+                return offer.subscriptionPeriod?.unit == .month && offer.subscriptionPeriod?.numberOfUnits == 6
+            }
+            return false
+        }
         
         var event: AnalyticsEvent?
         
@@ -135,6 +144,13 @@ final class PackageService {
             } else if name.contains("100") {
                 event = isTurkcellOffer ? .purchaseTurkcell100 : .purchaseNonTurkcell100
                 
+            } else if name.contains("250") {
+                if isSixMonthOffer(offer) {
+                    event = isTurkcellOffer ? .purchaseTurkcell250_SixMonth : .purchaseNonTurkcell250_SixMonth
+                } else {
+                    event = isTurkcellOffer ? .purchaseTurkcell250 : .purchaseNonTurkcell250
+                }
+
             } else if name.contains("50") {
                 event = isTurkcellOffer ? .purchaseTurkcell50 : .purchaseNonTurkcell50
                 
