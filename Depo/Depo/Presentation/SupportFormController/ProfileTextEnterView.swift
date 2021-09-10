@@ -6,7 +6,7 @@ class ProfileTextEnterView: UIView {
         let newValue = UILabel()
         newValue.textColor = UIColor.lrTealish
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         newValue.numberOfLines = 0
         return newValue
@@ -16,7 +16,7 @@ class ProfileTextEnterView: UIView {
         let newValue = UILabel()
         newValue.textColor = ColorConstants.textOrange
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         newValue.isHidden = true
         newValue.numberOfLines = 0
@@ -28,7 +28,7 @@ class ProfileTextEnterView: UIView {
         newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
         newValue.textColor = UIColor.black
         newValue.borderStyle = .none
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         newValue.returnKeyType = .next
         newValue.underlineColor = .clear
@@ -41,7 +41,7 @@ class ProfileTextEnterView: UIView {
         newValue.axis = .vertical
         newValue.alignment = .fill
         newValue.distribution = .fill
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         return newValue
     }()

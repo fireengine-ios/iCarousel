@@ -60,7 +60,7 @@ final class PhotoSelectionController: UIViewController, ErrorPresenter {
         collectionView.register(CollectionSpinnerFooter.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                                 withReuseIdentifier: footerId)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = AppColor.primaryBackground.color
         collectionView.alwaysBounceVertical = true
         collectionView.allowsMultipleSelection = true
         

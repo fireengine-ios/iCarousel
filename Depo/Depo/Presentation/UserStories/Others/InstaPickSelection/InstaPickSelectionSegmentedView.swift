@@ -6,7 +6,8 @@ final class InstaPickSelectionSegmentedView: UIView {
     
     private let topView = UIView()
     let containerView = UIView()
-    private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
+    private let transparentGradientView = TransparentGradientView(style: .vertical,
+                                                                  mainColor: AppColor.primaryBackground.color ?? .white)
     
     let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
