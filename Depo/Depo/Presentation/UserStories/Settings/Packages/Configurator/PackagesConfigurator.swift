@@ -11,7 +11,7 @@ import UIKit
 class PackagesModuleConfigurator {
     func configure(viewController: PackagesViewController,
                    quotaInfo: QuotaInfoResponse? = nil,
-                   campaignId: String? = nil) {
+                   affiliate: String? = nil) {
         let router = PackagesRouter()
 
         let presenter = PackagesPresenter()
@@ -21,7 +21,7 @@ class PackagesModuleConfigurator {
 
         let interactor = PackagesInteractor()
         interactor.output = presenter
-        interactor.campaignId = campaignId
+        interactor.affiliate = affiliate
 
         presenter.interactor = interactor
         viewController.output = presenter

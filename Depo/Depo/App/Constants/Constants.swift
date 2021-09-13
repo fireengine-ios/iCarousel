@@ -1111,6 +1111,7 @@ struct TextConstants {
     
     static let packagePeriodDay = NSLocalizedString("package_period_day", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packagePeriodWeek = NSLocalizedString("package_period_week", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagePeriodXMonth = NSLocalizedString("package_period_x_months", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packagePeriodMonth = NSLocalizedString("package_period_month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packagePeriodYear = NSLocalizedString("package_period_year", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 

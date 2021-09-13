@@ -270,6 +270,11 @@ final class PackageModelResponse: Equatable {
         case enabled    = "ENABLED"
         case disabled   = "DISABLED"
     }
+
+    enum Period: String {
+        case month = "MONTH"
+        case sixMonth = "SIXMONTH"
+    }
     
     private enum ResponseKeys {
         static let name = "name"
