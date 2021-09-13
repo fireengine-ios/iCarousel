@@ -9,10 +9,10 @@
 import UIKit
 
 final class PackagesModuleInitializer: NSObject {
-    static func viewController(quotaInfo: QuotaInfoResponse? = nil, campaignId: String? = nil) -> PackagesViewController {
+    static func viewController(quotaInfo: QuotaInfoResponse? = nil, affiliate: String? = nil) -> PackagesViewController {
         let viewController = PackagesViewController()
         let configurator = PackagesModuleConfigurator()
-        configurator.configure(viewController: viewController, quotaInfo: quotaInfo, campaignId: campaignId)
+        configurator.configure(viewController: viewController, quotaInfo: quotaInfo, affiliate: affiliate)
         return viewController
     }
 }

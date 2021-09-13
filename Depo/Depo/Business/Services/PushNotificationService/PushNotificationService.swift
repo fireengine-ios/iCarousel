@@ -294,8 +294,8 @@ final class PushNotificationService {
     }
     
     private func openPackages() {
-        let campaignId = storageVars.value(forDeepLinkParameter: .campaign) as? String
-        let viewController = router.packages(campaignId: campaignId)
+        let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
+        let viewController = router.packages(affiliate: affiliate)
         pushTo(viewController)
     }
     

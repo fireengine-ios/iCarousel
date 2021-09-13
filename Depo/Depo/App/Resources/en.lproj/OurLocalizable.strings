@@ -718,6 +718,7 @@
 "package_period_day" = "day";
 "package_period_week" = "week";
 "package_period_month" = "Month";
+"package_period_x_months" = "%d months";
 "package_period_year" = "year";
 "face_image_apple_price" = "%@/%@";
 "package_apple_price" = "%@ / %@";

@@ -117,5 +117,5 @@ enum UniversalLinkPath: String {
 }
 
 enum DeepLinkParameter: String {
-    case campaign = "campaign" // packages?campaign=x
+    case affiliate = "affiliate" // ex: packages?affiliate=campaign1
 }
