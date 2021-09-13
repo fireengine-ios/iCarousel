@@ -34,6 +34,8 @@ protocol StorageVars: AnyObject {
     var isResumableUploadEnabled: Bool? { get set }
     var resumableUploadChunkSize: Int? { get set }
     var lastUnsavedFileUUID: String? { get set }
+
+    func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -237,5 +239,9 @@ final class UserDefaultsVars: StorageVars {
     var resumableUploadChunkSize: Int? {
         get { return userDefaults.value(forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) as? Int }
         set { userDefaults.set(newValue, forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) }
+    }
+
+    func value(forDeepLinkParameter key: DeepLinkParameter) -> Any? {
+        return deepLinkParameters?[key.rawValue]
     }
 }

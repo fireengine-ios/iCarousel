@@ -26,14 +26,18 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             fullnameStackView.distribution = .fillEqually
             fullnameStackView.backgroundColor = .white
             fullnameStackView.isOpaque = true
-            
-            newValue.addArrangedSubview(fullnameStackView)
-            newValue.addArrangedSubview(emailView)
-            newValue.addArrangedSubview(phoneView)
-            newValue.addArrangedSubview(birthdayDetailView)
-            newValue.addArrangedSubview(addressView)
-            newValue.addArrangedSubview(changePasswordButton)
-            newValue.addArrangedSubview(changeSecurityQuestionButton)
+
+            let arrangedSubviews = [
+                fullnameStackView,
+                emailView,
+                phoneView,
+                recoveryEmailView,
+                birthdayDetailView,
+                addressView,
+                changePasswordButton,
+                changeSecurityQuestionButton,
+            ]
+            arrangedSubviews.forEach(newValue.addArrangedSubview(_:))
         }
     }
     
@@ -55,17 +59,22 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         return newValue
     }()
     
-    let emailView: ProfileTextEnterView = {
-        let newValue = ProfileTextEnterView()
+    let emailView: ProfileEmailFieldView = {
+        let newValue = ProfileEmailFieldView()
         newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
-        newValue.textField.keyboardType = .emailAddress
-        newValue.textField.autocorrectionType = .no
-        newValue.textField.autocapitalizationType = .none
         return newValue
     }()
     
     let phoneView = ProfilePhoneEnterView()
+
+    let recoveryEmailView: ProfileEmailFieldView = {
+        let newValue = ProfileEmailFieldView()
+        newValue.titleLabel.text = localized(.profileRecoveryMail)
+        newValue.subtitleLabel.text = localized(.profileRecoveryMailDescription)
+        newValue.textField.quickDismissPlaceholder = localized(.profileRecoveryMailHint)
+        return newValue
+    }()
     
     private let birthdayDetailView: ProfileBirthdayFieldView = {
         let newValue = ProfileBirthdayFieldView()
@@ -120,6 +129,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var surname: String?
     private var email: String?
     private var phoneCode: String?
+    private var recoveryEmail: String?
     private var phoneNumber: String?
     private var birthday: String?
     private var address: String?
@@ -137,7 +147,11 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         surnameView.textField.delegate = self
         emailView.textField.delegate = self
         phoneView.responderOnNext = birthdayDetailView
+        recoveryEmailView.textField.delegate = self
         addressView.textField.delegate = self
+
+        emailView.delegate = self
+        recoveryEmailView.delegate = self
         
         // TODO: responderOnNext for birthdayDetailView
         //birthdayDetailView.textField.delegate = self
@@ -158,6 +172,11 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .myProfile, eventLabel: .back)
         }
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        output.viewDidAppear()
+    }
     
     func setupEditState(_ isEdit: Bool) {
         let button = isEdit ? readyButton : editButton
@@ -167,6 +186,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         nameView.isEditState = isEdit
         surnameView.isEditState = isEdit
         emailView.isEditState = isEdit
+        recoveryEmailView.isEditState = isEdit
         birthdayDetailView.isEditState = isEdit
         addressView.isEditState = isEdit
         
@@ -178,6 +198,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         }
         
         isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
+        isEdit ? recoveryEmailView.showSubtitleAnimated() : recoveryEmailView.hideSubtitleAnimated()
     }
     
     @objc private func onChangePassword() {
@@ -203,6 +224,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         surname = surnameView.textField.text
         email = emailView.textField.text
         phoneCode = phoneView.codeTextField.text
+        recoveryEmail = recoveryEmailView.textField.text
         phoneNumber = phoneView.numberTextField.text
         birthday = birthdayDetailView.editableText
         address = addressView.textField.text
@@ -214,6 +236,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             let surname = surnameView.textField.text,
             let email = emailView.textField.text,
             let phoneCode = phoneView.codeTextField.text,
+            let recoveryEmail = recoveryEmailView.textField.text,
             let phoneNumber = phoneView.numberTextField.text,
             let birthday = birthdayDetailView.editableText,
             let address = addressView.textField.text,
@@ -223,6 +246,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             self.surname != surname ||
             self.email != email ||
             self.phoneCode != phoneCode ||
+            self.recoveryEmail != recoveryEmail ||
             self.phoneNumber != phoneNumber ||
             self.birthday != birthday ||
             self.address != address)
@@ -261,6 +285,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                         self.output.tapReadyButton(name: name,
                                                     surname: surname,
                                                     email: email,
+                                                    recoveryEmail: recoveryEmail,
                                                     number: sendingPhoneNumber,
                                                     birthday: birthday,
                                                     address: address,
@@ -275,6 +300,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             output.tapReadyButton(name: name,
                                   surname: surname,
                                   email: email,
+                                  recoveryEmail: recoveryEmail,
                                   number: sendingPhoneNumber,
                                   birthday: birthday,
                                   address: address,
@@ -303,6 +329,28 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         return changes.joined(separator: "|")
     }
     
+}
+
+extension UserProfileViewController: ProfileEmailFieldViewDelegate {
+    func profileEmailFieldViewVerifyTapped(_ fieldView: ProfileEmailFieldView) {
+        switch fieldView {
+        case emailView:
+            presentEmailVerificationPopUp()
+
+        case recoveryEmailView:
+            presentRecoveryEmailVerificationPopUp()
+
+        default:
+            break
+        }
+    }
+}
+
+extension UserProfileViewController: BaseEmailVerificationPopUpDelegate {
+    func emailVerificationPopUpCompleted(_ popup: BaseEmailVerificationPopUp) {
+        // applies to both email & recovery email
+        output.emailVerificationCompleted()
+    }
 }
 
 extension UserProfileViewController: UITextFieldDelegate  {
@@ -357,7 +405,10 @@ extension UserProfileViewController: UITextFieldDelegate  {
         /// only for simulator.
         /// setup by responderOnNext:
         case phoneView.numberTextField:
-            birthdayDetailView.textField.becomeFirstResponder()
+            recoveryEmailView.textField.becomeFirstResponder()
+
+        case recoveryEmailView.textField:
+            addressView.textField.becomeFirstResponder()
 
         /// only for simulator.
         /// setup by responderOnNext:
@@ -382,6 +433,11 @@ extension UserProfileViewController: UserProfileViewInput {
         nameView.textField.text = userInfo.name
         surnameView.textField.text = userInfo.surname
         emailView.textField.text = userInfo.email
+        emailView.showsVerificationStatus = userInfo.emailVerified != nil
+        emailView.isVerified = userInfo.emailVerified ?? false
+        recoveryEmailView.textField.text = userInfo.recoveryEmail
+        recoveryEmailView.showsVerificationStatus = userInfo.recoveryEmailVerified != nil
+        recoveryEmailView.isVerified = userInfo.recoveryEmailVerified ?? false
         addressView.textField.text = userInfo.address
         isTurkcellUser = userInfo.isTurkcellUser
         
@@ -427,5 +483,17 @@ extension UserProfileViewController: UserProfileViewInput {
         /// can be added any check for title or userInfo.
         set(title: TextConstants.userProfileEditSecretQuestion, for: changeSecurityQuestionButton)
     }
-    
+
+    func presentEmailVerificationPopUp() {
+        let popup = RouterVC().verifyEmailPopUp
+        popup.alwaysShowsLaterButton = true
+        popup.delegate = self
+        present(popup, animated: true)
+    }
+
+    func presentRecoveryEmailVerificationPopUp() {
+        let popup = RouterVC().verifyRecoveryEmailPopUp
+        popup.delegate = self
+        present(popup, animated: true)
+    }
 }

@@ -57,12 +57,12 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPackagesWith(quotaInfo: QuotaInfoResponse?) {
-        let vc = router.packagesWith(quotoInfo: quotaInfo)
+        let vc = router.packages(quotaInfo: quotaInfo)
         router.pushViewController(viewController: vc)
     }
     
     func goToPackages() {
-        router.pushViewController(viewController: router.packages)
+        router.pushViewController(viewController: router.packages())
     }
     
     func goToPremium() {

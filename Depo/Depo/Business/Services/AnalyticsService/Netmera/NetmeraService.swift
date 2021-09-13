@@ -73,6 +73,7 @@ final class NetmeraService {
             var address: Int = 0
             var birthday: Int = 0
             var hasSecurityQuestionInfo = false
+            var hasRecoveryEmail = false
             prepareAccountInfo(preparedAccountInfo: { info in
                 guard let accountInfo = info else {
                     group.leave()
@@ -88,6 +89,7 @@ final class NetmeraService {
                 address = (accountInfo.address ?? "").isEmpty ? 0 : 1
                 birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
                 hasSecurityQuestionInfo = accountInfo.hasSecurityQuestionInfo ?? false
+                hasRecoveryEmail = accountInfo.hasRecoveryMail ?? false
                 group.leave()
             })
             
@@ -129,7 +131,8 @@ final class NetmeraService {
                     isAddress: address,
                     isBirthDay: birthday,
                     galleryAccessPermission: galleryAccessPermission,
-                    hasSecurityQuestionInfo: hasSecurityQuestionInfo
+                    hasSecurityQuestionInfo: hasSecurityQuestionInfo,
+                    hasRecoveryEmail: hasRecoveryEmail
                 )
                 
                 user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
@@ -175,18 +178,18 @@ final class NetmeraService {
         case .preProduction, .test:
             return "3PJRHrXDiqa-pwWScAq1P-7ZjPWA5mWdKHyMpdBrYMFMU4XzrPkaoQ"
         }
-        #endif
-        
-        #if LIFEDRIVE
+
+        #elseif LIFEDRIVE
         switch RouteRequests.currentServerEnvironment {
         case .production:
             return "LINA4LCdpz6st8QajRsXvZ3eUwV5ENwJTbzrhSufrxjRWv-pvzwmZw"
         case .preProduction, .test:
             return "6l30TJ05YenQKefUTBw81SZPwBa404aJoAhPAsmZEdyxLJVO90Q8Rw"
         }
-        #endif
-        
+
+        #else
         return ""
+        #endif
     }
     
     static func sendEvent(event: NetmeraEvent) {

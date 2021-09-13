@@ -27,6 +27,8 @@ struct AccountJSONConstants {
     static let phoneNumber = "phoneNumber"
     static let email = "email"
     static let emailVerified = "emailVerified"
+    static let recoveryEmail = "recoveryEmail"
+    static let recoveryEmailVerified = "isRecoveryEmailVerified"
     static let username = "username"
     static let url = "url"
     static let otp = "otp"
@@ -49,6 +51,7 @@ struct AccountJSONConstants {
     static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
     static let msisdnRegion = "msisdnRegion"
     static let showInvitation = "showInvitation"
+    static let hasRecoveryMail = "hasRecoveryMailInfo"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -68,6 +71,8 @@ class AccountInfoResponse: ObjectRequestResponse {
     var phoneNumber: String?
     var email: String?
     var emailVerified: Bool?
+    var recoveryEmail: String?
+    var recoveryEmailVerified: Bool?
     var username: String?
     var dob: String?
     var urlForPhoto: URL?
@@ -78,6 +83,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var isUpdateMobilePaymentPermissionRequired: Bool?
     var msisdnRegion: String?
     var showInvitation: Bool?
+    var hasRecoveryMail: Bool?
 
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -113,6 +119,8 @@ class AccountInfoResponse: ObjectRequestResponse {
         phoneNumber = json?[AccountJSONConstants.phoneNumber].string
         email = json?[AccountJSONConstants.email].string
         emailVerified = json?[AccountJSONConstants.emailVerified].bool
+        recoveryEmail = json?[AccountJSONConstants.recoveryEmail].string
+        recoveryEmailVerified = json?[AccountJSONConstants.recoveryEmailVerified].bool
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
         emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
@@ -120,6 +128,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         isUpdateMobilePaymentPermissionRequired = json?[AccountJSONConstants.isUpdateMobilePaymentPermissionRequired].bool
         msisdnRegion = json?[AccountJSONConstants.msisdnRegion].string
         showInvitation = json?[AccountJSONConstants.showInvitation].bool
+        hasRecoveryMail = json?[AccountJSONConstants.hasRecoveryMail].bool
     }
 }
 

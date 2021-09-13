@@ -179,7 +179,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Adjust.appWillOpen(url)
         
         if let urlHost = url.host {
-            if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: options) {
+            if PushNotificationService.shared.assignDeepLink(innerLink: urlHost, options: url.queryParameters) {
                 PushNotificationService.shared.openActionScreen()
             }
         }

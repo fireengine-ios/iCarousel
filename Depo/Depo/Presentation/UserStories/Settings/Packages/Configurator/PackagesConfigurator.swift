@@ -9,23 +9,19 @@
 import UIKit
 
 class PackagesModuleConfigurator {
-
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, quotoInfo: QuotaInfoResponse? = nil) {
-        if let viewController = viewInput as? PackagesViewController {
-            configure(viewController: viewController, quotoInfo: quotoInfo)
-        }
-    }
-
-    private func configure(viewController: PackagesViewController, quotoInfo: QuotaInfoResponse? = nil) {
+    func configure(viewController: PackagesViewController,
+                   quotaInfo: QuotaInfoResponse? = nil,
+                   campaignId: String? = nil) {
         let router = PackagesRouter()
 
         let presenter = PackagesPresenter()
         presenter.view = viewController
         presenter.router = router
-        presenter.tuneUpQuota(quotaInfo: quotoInfo)
+        presenter.tuneUpQuota(quotaInfo: quotaInfo)
 
         let interactor = PackagesInteractor()
         interactor.output = presenter
+        interactor.campaignId = campaignId
 
         presenter.interactor = interactor
         viewController.output = presenter

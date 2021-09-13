@@ -17,7 +17,6 @@
 #import "BackupHelper.h"
 #import "RestoreHelper.h"
 #import "DepoAdapter.h"
-#import "BackupVersion.h"
 
 @interface ContactSyncSDK : NSObject
 

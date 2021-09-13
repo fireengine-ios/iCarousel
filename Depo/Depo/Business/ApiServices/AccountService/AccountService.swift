@@ -16,7 +16,7 @@ protocol AccountServicePrl {
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
-    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
+    func availableOffers(campaignId: String?, handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
@@ -113,11 +113,14 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
 
-    func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
-        debugLog("AccountService featurePacks")
+    func availableOffers(campaignId: String?, handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
+        var params: Parameters = [:]
+        if let campaignId = campaignId {
+            params["affiliate"] = campaignId
+        }
 
         sessionManager
-            .request(RouteRequests.Account.Permissions.availableOffers)
+            .request(RouteRequests.Account.Permissions.availableOffers, parameters: params)
             .customValidate()
             .responseData { response in
                 switch response.result {
@@ -128,6 +131,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     handler(.failed(error))
                 }
         }
+
     }
     
     func provision() {
@@ -177,6 +181,14 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     func updateUserEmail(parameters: UserEmailParameters, success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService updateUserEmail")
+
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
+
+    func updateUserRecoveryEmail(parameters: UserRecoveryEmailParameters, success: SuccessResponse?,
+                                 fail: @escaping FailResponse) {
+        debugLog("AccountService updateUserRecoveryEmail")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: parameters, handler: handler)
@@ -805,6 +817,82 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         errorText = TextConstants.errorServer
                     }
                     
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
+
+    func verifyRecoveryEmail(otpCode: String, handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.verifyRecoveryEmail,
+                     method: .post,
+                     parameters: ["otp" : otpCode],
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                    let errorText: String
+
+                    if statusJSON == "INVALID_OTP" {
+                        errorText = TextConstants.invalidOTP
+
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+
+                    } else if statusJSON == "EXPIRED_OTP" {
+                        errorText = TextConstants.expiredOTP
+
+                    } else if statusJSON == "REFERENCE_TOKEN_IS_EMPTY" {
+                        errorText = TextConstants.tokenIsMissing
+
+                    } else if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.noAccountFound
+
+                    } else if statusJSON == "INVALID_EMAIL" {
+                        errorText = TextConstants.invalidEmail
+
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
+
+    func sendRecoveryEmailVerificationCode(handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.sendRecoveryEmailVerificationCode,
+                     method: .post,
+                     parameters: nil,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                    let errorText: String
+
+                    if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.invalidOTP
+
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+
                     let error = CustomErrors.text(errorText)
                     handler(.failed(error))
                 } else {

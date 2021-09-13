@@ -166,6 +166,10 @@
 		0708C78A2677261100680ED6 /* PhotoPrintCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0708C7812677261100680ED6 /* PhotoPrintCard.xib */; };
 		0708C78C2677261100680ED6 /* PhotoPrintCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0708C7812677261100680ED6 /* PhotoPrintCard.xib */; };
 		0708C78D2677261100680ED6 /* PhotoPrintCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0708C7812677261100680ED6 /* PhotoPrintCard.xib */; };
+		07111F2526E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
+		07111F2626E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
+		07111F2726E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
+		07111F2826E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
 		0731E7D0263164BC00883566 /* RegistrationTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */; };
 		0731E80B263165DA00883566 /* RegistrationTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0731E809263165DA00883566 /* RegistrationTermsViewController.xib */; };
 		0731E87C263181EA00883566 /* RegistrationTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */; };
@@ -225,6 +229,14 @@
 		0765B82F269EE7430030429C /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0765B82C269EE7430030429C /* APIResponse.swift */; };
 		0765B830269EE7430030429C /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0765B82C269EE7430030429C /* APIResponse.swift */; };
 		07701F872642698A0020C304 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */; };
+		077EEF9D26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */; };
+		077EEF9E26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */; };
+		077EEF9F26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */; };
+		077EEFA026E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */; };
+		077EEFAA26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
+		077EEFAB26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
+		077EEFAC26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
+		077EEFAD26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
 		0786E1872660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E1882660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18A2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
@@ -233,6 +245,42 @@
 		0798D5CA26981BF600F5EDE0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE3318DA1EFBDE0100E25989 /* Photos.framework */; };
 		0798D5CC26981C9F00F5EDE0 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */; };
 		0798D5CE26981CBB00F5EDE0 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0798D5CD26981CBB00F5EDE0 /* Contacts.framework */; };
+		07A6C48A26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */; };
+		07A6C48B26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */; };
+		07A6C48C26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */; };
+		07A6C48D26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */; };
+		07AC65F926EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
+		07AC65FA26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
+		07AC65FB26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
+		07AC65FC26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
+		07FBA20526E0BBA800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA20626E0BBA800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA20826E0BBB100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA20926E0BBB100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA20E26E0BD5100ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA20F26E0BD5100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21326E0BD5100ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21426E0BD5100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21526E0BD5200ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21626E0BD5200ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21726E0BD5300ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21826E0BD5300ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21926E0BD5400ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21A26E0BD5400ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21B26E0BD5400ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21C26E0BD5400ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21D26E0BD5500ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA21E26E0BD5500ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA21F26E0BD5600ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA22026E0BD5600ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA22126E0BD5600ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA22226E0BD5600ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA22326E0BD5800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
+		07FBA22426E0BD5800ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
+		07FBA22E26E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
+		07FBA22F26E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
+		07FBA23026E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
+		07FBA23126E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
 		156D03709A81A8D9E2CBFD26 /* Pods_BilloNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CBA114AEF409086996359 /* Pods_BilloNotificationService.framework */; };
 		17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
@@ -686,8 +734,8 @@
 		890DDC592316B0D80022F7D2 /* TwoFactorChallengeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */; };
 		890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
 		890F737122EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */; };
-		890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
-		890F737422EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		890F737322EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
+		890F737422EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
 		890F737922EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */; };
 		890F737A22EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */; };
 		890F737C22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */; };
@@ -6612,7 +6660,7 @@
 		CF8B6A6223CBC9D70021B021 /* TwoFactorAuthenticationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 730A998122D740130037ABA9 /* TwoFactorAuthenticationCell.xib */; };
 		CF8B6A6323CBC9D70021B021 /* SpotifyImportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989BDE3422F47B1E001DDEB2 /* SpotifyImportViewController.xib */; };
 		CF8B6A6423CBC9D70021B021 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
-		CF8B6A6723CBC9D70021B021 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		CF8B6A6723CBC9D70021B021 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
 		CF8B6A6A23CBC9D70021B021 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
 		CF8B6A6B23CBC9D70021B021 /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
 		CF8B6A7223CBC9D70021B021 /* SupportFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17589F6E2276336700A5DB37 /* SupportFormController.xib */; };
@@ -8137,7 +8185,7 @@
 		CF8B726923CBCA280021B021 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8C6A1DCB2317EAEB00D792B9 /* container */; };
 		CF8B726A23CBCA280021B021 /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
 		CF8B726D23CBCA280021B021 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
-		CF8B727023CBCA280021B021 /* VerifyEmailPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */; };
+		CF8B727023CBCA280021B021 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
 		CF8B727623CBCA280021B021 /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C0572DA1EF1BE4E005C69DA /* PasswordCell.xib */; };
 		CF8B727823CBCA280021B021 /* BaseCollectionViewCellWithSwipe.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FCD1EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.xib */; };
 		CF8B727923CBCA280021B021 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2EC32338F44E0014258A /* QuestionCell.xib */; };
@@ -8750,6 +8798,7 @@
 		0708C7802677261000680ED6 /* PhotoPrintCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPrintCard.swift; sourceTree = "<group>"; };
 		0708C7812677261100680ED6 /* PhotoPrintCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPrintCard.xib; sourceTree = "<group>"; };
 		0710A4E3268A416E0096B76A /* OverlayStickerSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorViewController.swift; sourceTree = "<group>"; };
+		07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAppearAction.swift; sourceTree = "<group>"; };
 		07182042268E3CDE0043730B /* OverlayStickersModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickersModels.swift; sourceTree = "<group>"; };
 		0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTermsViewController.swift; sourceTree = "<group>"; };
 		0731E809263165DA00883566 /* RegistrationTermsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationTermsViewController.xib; sourceTree = "<group>"; };
@@ -8760,11 +8809,18 @@
 		07595510264131FA00C088B1 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		0765B824269EE6F40030429C /* PhotopickCampaignResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotopickCampaignResponse.swift; sourceTree = "<group>"; };
 		0765B82C269EE7430030429C /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
+		077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEmailVerificationPopUp.swift; sourceTree = "<group>"; };
+		077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyRecoveryEmailPopUp.swift; sourceTree = "<group>"; };
 		077FDB99268C730D00F21317 /* OverlayStickerSelectorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorDataSource.swift; sourceTree = "<group>"; };
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmailFieldView.swift; sourceTree = "<group>"; };
+		07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityAPIService.swift; sourceTree = "<group>"; };
 		07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewOutput.swift; sourceTree = "<group>"; };
+		07FBA20426E0BBA800ED4132 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		07FBA20726E0BBB100ED4132 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Profile.swift"; sourceTree = "<group>"; };
 		08BC2716CA43EB44D104F6F6 /* BaseFilesGreedViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedViewOutput.swift; sourceTree = "<group>"; };
 		094E8EB45148F901AC01702F /* FeedbackViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInitializer.swift; sourceTree = "<group>"; };
 		097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsConfigurator.swift; sourceTree = "<group>"; };
@@ -9425,7 +9481,7 @@
 		88F2BB2471220C9297301750 /* Pods-LifeboxUnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.release.xcconfig"; path = "Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.release.xcconfig"; sourceTree = "<group>"; };
 		890DDC562316B0D70022F7D2 /* TwoFactorChallengeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TwoFactorChallengeRouter.swift; path = Depo/Presentation/UserStories/Start/TwoFactorChallenge/Router/TwoFactorChallengeRouter.swift; sourceTree = SOURCE_ROOT; };
 		890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyEmailPopUp.swift; sourceTree = "<group>"; };
-		890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VerifyEmailPopUp.xib; sourceTree = "<group>"; };
+		890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseEmailVerificationPopUp.xib; sourceTree = "<group>"; };
 		890F737622EEFAFF00BA0020 /* ChangeEmailPopUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeEmailPopUp.xib; sourceTree = "<group>"; };
 		890F737722EEFAFF00BA0020 /* ChangeEmailPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeEmailPopUp.swift; sourceTree = "<group>"; };
 		8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerifiedPopUp.swift; sourceTree = "<group>"; };
@@ -11557,6 +11613,15 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		07FBA20026E0BB9900ED4132 /* Strings */ = {
+			isa = PBXGroup;
+			children = (
+				07FBA20726E0BBB100ED4132 /* Localizable.swift */,
+				07FBA20426E0BBA800ED4132 /* Strings.swift */,
+			);
+			path = Strings;
+			sourceTree = "<group>";
+		};
 		09A3B180603B22CC0C77295C /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -11600,6 +11665,7 @@
 			children = (
 				17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */,
 				17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */,
+				07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -13433,6 +13499,7 @@
 				8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */,
 				CEDA44D8207CA9E600E653DD /* NumericConstants.swift */,
 				3A134C412645476500CFC736 /* ScreenConstants.swift */,
+				07FBA20026E0BB9900ED4132 /* Strings */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -14244,6 +14311,7 @@
 		7CDABCF21F1E3A6300C8CC16 /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */,
 				7CDABCF31F1E3A6300C8CC16 /* Configurator */,
 				7CDABCF61F1E3A6300C8CC16 /* Interactor */,
 				7CDABCFA1F1E3A6300C8CC16 /* Presenter */,
@@ -14277,6 +14345,7 @@
 			children = (
 				7CDABCFB1F1E3A6300C8CC16 /* UserProfileModuleInput.swift */,
 				7CDABCFC1F1E3A6300C8CC16 /* UserProfilePresenter.swift */,
+				07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -14468,7 +14537,9 @@
 			isa = PBXGroup;
 			children = (
 				890F736D22EEFA3E00BA0020 /* VerifyEmailPopUp.swift */,
-				890F736E22EEFA3E00BA0020 /* VerifyEmailPopUp.xib */,
+				077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */,
+				077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */,
+				890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */,
 				8921222D2303FFA400396ED0 /* EmailVerifiedPopUp.swift */,
 				8934DD6C23069599006B0998 /* EmailVerifiedPopUp.xib */,
 			);
@@ -18344,6 +18415,7 @@
 				CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */,
 				CE170F6921E76DFD00BE352D /* InstapickService.swift */,
 				CE00B2762204248000A5A696 /* PhotoService.swift */,
+				07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */,
 				98732B592461459200E9D5D2 /* APILogger.swift */,
 			);
 			path = ApiServices;
@@ -20701,7 +20773,7 @@
 				9823198724F3A1E700FD16E2 /* ColorView.xib in Resources */,
 				989BDE5622F47B1E001DDEB2 /* SpotifyImportViewController.xib in Resources */,
 				9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
-				890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
+				890F737322EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */,
 				8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
 				9842FB8D2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
@@ -21198,7 +21270,7 @@
 				982319E424F3A1E700FD16E2 /* PhotoEditNavbar.xib in Resources */,
 				CE784E9922A685FB00662219 /* WaitingForWiFiPopUp.xib in Resources */,
 				CE784E9C22A685FB00662219 /* ConnectWithInstaView.xib in Resources */,
-				890F737422EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
+				890F737422EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */,
 				CE784EA422A685FB00662219 /* PasswordCell.xib in Resources */,
 				CE784EA622A685FB00662219 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				9823197224F3A1E600FD16E2 /* PreparedFilterCell.xib in Resources */,
@@ -21496,7 +21568,7 @@
 				CF8B6A6223CBC9D70021B021 /* TwoFactorAuthenticationCell.xib in Resources */,
 				CF8B6A6323CBC9D70021B021 /* SpotifyImportViewController.xib in Resources */,
 				CF8B6A6423CBC9D70021B021 /* CustomScrollIndicator.xib in Resources */,
-				CF8B6A6723CBC9D70021B021 /* VerifyEmailPopUp.xib in Resources */,
+				CF8B6A6723CBC9D70021B021 /* BaseEmailVerificationPopUp.xib in Resources */,
 				9823195824F3A1E600FD16E2 /* PreparedFilterSliderView.xib in Resources */,
 				98231A1824F3A1E700FD16E2 /* SelectionMenuController.xib in Resources */,
 				9823198824F3A1E700FD16E2 /* ColorView.xib in Resources */,
@@ -21891,7 +21963,7 @@
 				CF8B726923CBCA280021B021 /* container in Resources */,
 				CF8B726A23CBCA280021B021 /* WaitingForWiFiPopUp.xib in Resources */,
 				CF8B726D23CBCA280021B021 /* ConnectWithInstaView.xib in Resources */,
-				CF8B727023CBCA280021B021 /* VerifyEmailPopUp.xib in Resources */,
+				CF8B727023CBCA280021B021 /* BaseEmailVerificationPopUp.xib in Resources */,
 				0305A30D23D5C300004D1EC7 /* DivorceCard.xib in Resources */,
 				CF8B727623CBCA280021B021 /* PasswordCell.xib in Resources */,
 				CF8B727823CBCA280021B021 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
@@ -23164,6 +23236,7 @@
 				98A86D7323A76D0400438225 /* HiddenPhotosBottomBarManager.swift in Sources */,
 				4A6DBE8421A6F8DC0003D1B4 /* PackageInfoView.swift in Sources */,
 				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
+				077EEFAA26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				98625F292580FAAB008627F0 /* MBProgressHud+Extensions.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
 				98495F59255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
@@ -23239,6 +23312,7 @@
 				8C0E8D171FDEBDFF00789C91 /* IntroduceDataStorage.swift in Sources */,
 				CE634AF4230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				89E51D5F22CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
+				07FBA22E26E0EDD000ED4132 /* Strings+Profile.swift in Sources */,
 				CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */,
 				8C0E8D181FDEBDFF00789C91 /* AccountType.swift in Sources */,
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
@@ -23591,9 +23665,11 @@
 				4BF3A69522B3822E0082130F /* PermissionsDesigner.swift in Sources */,
 				8C0E8DED1FDEBDFF00789C91 /* IntroduceRouter.swift in Sources */,
 				8C0E8DEE1FDEBDFF00789C91 /* SettingsTableViewSwitchCell.swift in Sources */,
+				07111F2526E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				98B04D9225931F320011DAEB /* TabBarConfigurator.swift in Sources */,
 				921FF09B21EDB550007EA5E6 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				8E26D97D2306999400D08123 /* MusicViewController.swift in Sources */,
+				07AC65F926EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				8C0E8DEF1FDEBDFF00789C91 /* PhotoStory.swift in Sources */,
 				8C0E8DF01FDEBDFF00789C91 /* IntroduceConfigurator.swift in Sources */,
 				8C0E8DF11FDEBDFF00789C91 /* PasscodeStorage.swift in Sources */,
@@ -23702,6 +23778,7 @@
 				7C203554201F4F8F00D84727 /* LatestUploadCardCell.swift in Sources */,
 				730A997222D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				989BDE4722F47B1E001DDEB2 /* SpotifyAuthViewController.swift in Sources */,
+				07FBA20526E0BBA800ED4132 /* Strings.swift in Sources */,
 				CF71463A24B597A800D83E60 /* LineProgressView.swift in Sources */,
 				8C0E8E211FDEBDFF00789C91 /* PackagesViewController.swift in Sources */,
 				8C0E8E221FDEBDFF00789C91 /* PasscodeSettingsModuleInput.swift in Sources */,
@@ -23902,6 +23979,7 @@
 				8C20866F228D4C6A000BEDAD /* TextInsetsLabel.swift in Sources */,
 				8C0E8EC31FDEBDFF00789C91 /* ActionsMenuTableViewCell.swift in Sources */,
 				8C0E8EC41FDEBDFF00789C91 /* BaseFilesGreedInitializer.swift in Sources */,
+				07A6C48A26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				8C0E8EC61FDEBDFF00789C91 /* SearchViewPresenter.swift in Sources */,
 				8C0E8EC91FDEBDFF00789C91 /* UIviewControlllerExtensions.swift in Sources */,
 				8C0E8ECA1FDEBDFF00789C91 /* Dictionary.swift in Sources */,
@@ -24220,6 +24298,7 @@
 				8C0E8F611FDEBDFF00789C91 /* UploadFilesSelectionModuleInput.swift in Sources */,
 				A217E42C21A5B00B0084AA37 /* LeavePremiumViewController.swift in Sources */,
 				8C06AC222008AAF1003D8E05 /* TextEnterController.swift in Sources */,
+				077EEF9D26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				8C0E8F621FDEBDFF00789C91 /* UploadFilesSelectionPresenter.swift in Sources */,
 				8C0E8F631FDEBDFF00789C91 /* InsetsLabel.swift in Sources */,
 				8C0E8F641FDEBDFF00789C91 /* UploadFilesSelectionInteractorInput.swift in Sources */,
@@ -24240,6 +24319,7 @@
 				8C0E8F691FDEBDFF00789C91 /* PasscodeSettingsRouterInput.swift in Sources */,
 				8CF6A9C6207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
 				7C379F42202C37CF0050C055 /* UIView+Utils.swift in Sources */,
+				07FBA20826E0BBB100ED4132 /* Localizable.swift in Sources */,
 				B5BF438B2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				8E1E080F2423B0260054BF86 /* KeychainCleaner.swift in Sources */,
 				8C0E8F6A1FDEBDFF00789C91 /* PasscodeSettingsConfigurator.swift in Sources */,
@@ -24522,6 +24602,7 @@
 				8C3BA2FB22B3CC45006D901E /* Error+Network.swift in Sources */,
 				8C3BA2FC22B3CC45006D901E /* UIImage+Size.swift in Sources */,
 				8C3BA2FD22B3CC45006D901E /* TokenKeychainStorage.swift in Sources */,
+				07FBA21D26E0BD5500ED4132 /* Strings.swift in Sources */,
 				8C3BA2FE22B3CC45006D901E /* UploadService.swift in Sources */,
 				8C3BA2FF22B3CC45006D901E /* Error+Localization.swift in Sources */,
 				8C3BA30022B3CC45006D901E /* SpringLabel.swift in Sources */,
@@ -24542,6 +24623,7 @@
 				8C3BA30F22B3CC45006D901E /* ViewController.swift in Sources */,
 				8C3BA31022B3CC45006D901E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C3BA31122B3CC45006D901E /* NumericConstants.swift in Sources */,
+				07FBA21E26E0BD5500ED4132 /* Localizable.swift in Sources */,
 				CFACAC8B247C62D800645B40 /* NetmeraEvents.swift in Sources */,
 				CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */,
 				8C3BA31222B3CC45006D901E /* PasscodeViewImp.swift in Sources */,
@@ -24605,10 +24687,12 @@
 				8C1E5BCE22CB8935008FDA02 /* FileProviderWormholeListener.swift in Sources */,
 				8C3BA35822B3CC49006D901E /* Device.swift in Sources */,
 				8C3BA35922B3CC49006D901E /* BiometricsManager.swift in Sources */,
+				07FBA21F26E0BD5600ED4132 /* Strings.swift in Sources */,
 				8C3BA35A22B3CC49006D901E /* TokenStorage.swift in Sources */,
 				8C3BA35B22B3CC49006D901E /* String+Subscript.swift in Sources */,
 				8C2386B222E9AA0C004992C4 /* URL+TrimmedQuery.swift in Sources */,
 				8C3BA35C22B3CC49006D901E /* FileProviderItem.swift in Sources */,
+				07FBA22026E0BD5600ED4132 /* Localizable.swift in Sources */,
 				8C3BA35D22B3CC49006D901E /* Mapping.swift in Sources */,
 				8C3BA35E22B3CC49006D901E /* NumericConstants.swift in Sources */,
 				8C2386B522E9AA22004992C4 /* DateExtension.swift in Sources */,
@@ -24643,8 +24727,10 @@
 				8C3BA38422B3CC53006D901E /* DocumentActionCustomizator.swift in Sources */,
 				8C3BA38522B3CC53006D901E /* UIViewController+NavBar.swift in Sources */,
 				8C3BA38622B3CC53006D901E /* DeviceExtension.swift in Sources */,
+				07FBA22126E0BD5600ED4132 /* Strings.swift in Sources */,
 				8C3BA38722B3CC53006D901E /* MD5.swift in Sources */,
 				8C3BA38822B3CC53006D901E /* FromNib.swift in Sources */,
+				07FBA22226E0BD5600ED4132 /* Localizable.swift in Sources */,
 				8C3BA38922B3CC53006D901E /* ErrorIdentificators.swift in Sources */,
 				8CC301E822C0E9B9005EA404 /* SharedConstants.swift in Sources */,
 				8C3BA38A22B3CC53006D901E /* TitleView.swift in Sources */,
@@ -24682,6 +24768,7 @@
 				CE1BE925204831CE0074BDDC /* FileProviderExtension.swift in Sources */,
 				CE1BE94D20492C8B0074BDDC /* AuthorizationRepository.swift in Sources */,
 				CE4D27F7207E024A003AE4FB /* Constants.swift in Sources */,
+				07FBA21426E0BD5100ED4132 /* Localizable.swift in Sources */,
 				CE18CC93204E895D00FA3F44 /* ErrorIdentificators.swift in Sources */,
 				CEF3719D20873B11007AD36E /* TitleView.swift in Sources */,
 				8CCA071620C46CDB00558AB0 /* SessionServiceExtension.swift in Sources */,
@@ -24708,6 +24795,7 @@
 				CE4D2806207E086C003AE4FB /* NumericConstants.swift in Sources */,
 				CE1BE95520492DE40074BDDC /* Alamofire+Validate.swift in Sources */,
 				CE1BE95420492D040074BDDC /* FileService.swift in Sources */,
+				07FBA21326E0BD5100ED4132 /* Strings.swift in Sources */,
 				7C121F03208742BD00AA585F /* TokenKeychainStorage.swift in Sources */,
 				CE4ECA7820889B6600AB91C6 /* KeychainSwift+Optional.swift in Sources */,
 				CE1BE95220492CD50074BDDC /* URL+Path.swift in Sources */,
@@ -24738,8 +24826,10 @@
 				CE18CC7D204E84DE00FA3F44 /* DocumentActionCustomizator.swift in Sources */,
 				CEF371A120873B42007AD36E /* UIViewController+NavBar.swift in Sources */,
 				8CCA071020C4639700558AB0 /* DeviceExtension.swift in Sources */,
+				07FBA21526E0BD5200ED4132 /* Strings.swift in Sources */,
 				CEF371B020887DAC007AD36E /* MD5.swift in Sources */,
 				CE4D2817207E0A2B003AE4FB /* FromNib.swift in Sources */,
+				07FBA21626E0BD5200ED4132 /* Localizable.swift in Sources */,
 				CE18CC92204E894100FA3F44 /* ErrorIdentificators.swift in Sources */,
 				8CC301E922C0E9C1005EA404 /* SharedConstants.swift in Sources */,
 				CEF3719E20873B12007AD36E /* TitleView.swift in Sources */,
@@ -24784,6 +24874,7 @@
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */,
+				07FBA20E26E0BD5100ED4132 /* Strings.swift in Sources */,
 				CE654FB320454B2500232025 /* UIImage+Size.swift in Sources */,
 				7C121F02208742BC00AA585F /* TokenKeychainStorage.swift in Sources */,
 				CE61D1C32046873A001D01DC /* UploadService.swift in Sources */,
@@ -24804,6 +24895,7 @@
 				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
 				CE61D1BF2046872A001D01DC /* URL+ContentType.swift in Sources */,
 				CE4D2821207E244A003AE4FB /* ViewController.swift in Sources */,
+				07FBA20F26E0BD5100ED4132 /* Localizable.swift in Sources */,
 				CE5FE969208B2C2F0065AC7E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				CFACACAB247CF8A800645B40 /* NetmeraExtensionService.swift in Sources */,
 				CE4D2805207E086A003AE4FB /* NumericConstants.swift in Sources */,
@@ -25081,6 +25173,7 @@
 				CE7848A822A685FB00662219 /* ManageContactsViewOutput.swift in Sources */,
 				3AA3D4ED268C454B00B7B1EF /* SilentPushApiService.swift in Sources */,
 				CE7848AA22A685FB00662219 /* AppDelegate.swift in Sources */,
+				07AC65FB26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				CE7848AB22A685FB00662219 /* CollectionViewCellForController.swift in Sources */,
 				CE7848AD22A685FB00662219 /* AccountResponse.swift in Sources */,
@@ -25126,6 +25219,7 @@
 				CE7848CE22A685FB00662219 /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
 				B571FC8F23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				CE7848CF22A685FB00662219 /* LocalAlbumInteractor.swift in Sources */,
+				07FBA21A26E0BD5400ED4132 /* Localizable.swift in Sources */,
 				CE7848D022A685FB00662219 /* ImportPhotosPresenter.swift in Sources */,
 				B59E1F9025921F0000640DD1 /* ItemSyncService.swift in Sources */,
 				89DAB3E123AB513700D4337D /* HSCompletionPopUp.swift in Sources */,
@@ -25551,6 +25645,7 @@
 				8C86110E22BCF27500108958 /* SelectNameModuleOutput.swift in Sources */,
 				8E1E081A2423B03E0054BF86 /* KeychainCleaner.swift in Sources */,
 				CE784A0822A685FB00662219 /* AlertFilesActionsSheetInteractor.swift in Sources */,
+				07111F2726E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				4B88BB70233A352C001350F8 /* SubjectDetailsDesigner.swift in Sources */,
 				9823196024F3A1E600FD16E2 /* PreparedFilterSliderView.swift in Sources */,
 				98B047B0259314740011DAEB /* Configuration.m in Sources */,
@@ -25649,6 +25744,7 @@
 				98E4BA1223C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				CE784A5422A685FB00662219 /* VisualMusicPlayerConfigurator.swift in Sources */,
 				CE784A5522A685FB00662219 /* ForgotPasswordViewInput.swift in Sources */,
+				07FBA21926E0BD5400ED4132 /* Strings.swift in Sources */,
 				CE784A5622A685FB00662219 /* ActivityTimelineTableBackView.swift in Sources */,
 				98231A6124F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
 				B551D0D524614C5900B21970 /* LogoutDBCleaner.swift in Sources */,
@@ -25716,6 +25812,7 @@
 				98B04DD025931FD50011DAEB /* SettingsTypes.swift in Sources */,
 				CE784A8522A685FB00662219 /* FBParametrs.swift in Sources */,
 				CE784A8622A685FB00662219 /* PeriodicContactSyncConfigurator.swift in Sources */,
+				07FBA23026E0EDD000ED4132 /* Strings+Profile.swift in Sources */,
 				CE784A8722A685FB00662219 /* ForgotPasswordRouter.swift in Sources */,
 				CE784A8822A685FB00662219 /* ProgressCard.swift in Sources */,
 				CE784A8922A685FB00662219 /* ForgotPasswordConfigurator.swift in Sources */,
@@ -25878,6 +25975,7 @@
 				CE784B0122A685FB00662219 /* LeavePremiumRouter.swift in Sources */,
 				CF01729823D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */,
 				98A86D8A23A7C8BC00438225 /* EmptyView.swift in Sources */,
+				077EEFAC26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				CE784B0222A685FB00662219 /* CircleButton.swift in Sources */,
 				0762029D269B842E00D4FB2C /* OverlayStickerSelectorViewController.swift in Sources */,
 				CE784B0322A685FB00662219 /* DateExtension.swift in Sources */,
@@ -26253,6 +26351,7 @@
 				CE784C2522A685FB00662219 /* FaceImageItemsViewController.swift in Sources */,
 				CE784C2622A685FB00662219 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				B5450209255A863C004DBD41 /* PrivateShareSharedFilesViewController.swift in Sources */,
+				07A6C48C26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				98B047C0259314740011DAEB /* AppRater.m in Sources */,
 				CE784C2722A685FB00662219 /* ManageContactsRouter.swift in Sources */,
 				98231AA924F3A23500FD16E2 /* MetropolisFilter.swift in Sources */,
@@ -26413,6 +26512,7 @@
 				CE784C9922A685FB00662219 /* OTPViewConfigurator.swift in Sources */,
 				CE784C9A22A685FB00662219 /* OTPViewInitializer.swift in Sources */,
 				CE784C9B22A685FB00662219 /* FileManager+Size.swift in Sources */,
+				077EEF9F26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				CE784C9C22A685FB00662219 /* AuthorizationRepository.swift in Sources */,
 				CE784C9D22A685FB00662219 /* UploadFromLifeBoxModuleInput.swift in Sources */,
 				CE784C9E22A685FB00662219 /* AutoSyncRouterInput.swift in Sources */,
@@ -26551,6 +26651,7 @@
 				89EA4F7B240902C400A2C543 /* PackagesTableViewCell.swift in Sources */,
 				49C978352403047E00943F67 /* MobilePaymentPermissionView.swift in Sources */,
 				CF8B63D723CBC9D70021B021 /* ActivityTimelineTimeCell.swift in Sources */,
+				077EEFAB26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				CF8B63D823CBC9D70021B021 /* PaycellViewController.swift in Sources */,
 				CF8B63D923CBC9D70021B021 /* FaceImageAddNamePresenter.swift in Sources */,
 				CF8B63DA23CBC9D70021B021 /* ItemOperationManager.swift in Sources */,
@@ -26629,6 +26730,7 @@
 				CF8B641623CBC9D70021B021 /* HelpAndSupportPresenter.swift in Sources */,
 				CF8B641723CBC9D70021B021 /* ThingsService.swift in Sources */,
 				CF8B641823CBC9D70021B021 /* IntroduceDataSource.swift in Sources */,
+				07111F2626E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				CF8B641923CBC9D70021B021 /* CreateStoryResponse.swift in Sources */,
 				985E9BFE2493AFD6004D70BA /* UITextView+Extensions.swift in Sources */,
 				CF8B641A23CBC9D70021B021 /* UserProfileInteractor.swift in Sources */,
@@ -27439,6 +27541,7 @@
 				98231A5924F3A23500FD16E2 /* AprilFilter.swift in Sources */,
 				CF8B66AA23CBC9D70021B021 /* AlbumItem.swift in Sources */,
 				CF8B66AB23CBC9D70021B021 /* UserProfileRouter.swift in Sources */,
+				07FBA20626E0BBA800ED4132 /* Strings.swift in Sources */,
 				CF8B66AC23CBC9D70021B021 /* SelectionImageView.swift in Sources */,
 				CF8B66AD23CBC9D70021B021 /* InternetDataUsageCollectionViewCell.swift in Sources */,
 				CF8B66AE23CBC9D70021B021 /* UIImage+Size.swift in Sources */,
@@ -27529,6 +27632,7 @@
 				B560CCFB255D316C00199EA2 /* WrapDataSorting.swift in Sources */,
 				CF8B66F523CBC9D70021B021 /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				982319DC24F3A1E700FD16E2 /* AdjustmentCategoriesView.swift in Sources */,
+				07FBA20926E0BBB100ED4132 /* Localizable.swift in Sources */,
 				CF8B66F623CBC9D70021B021 /* UserInfoSubViewInteractor.swift in Sources */,
 				CF8B66F723CBC9D70021B021 /* UserInfoSubViewRouterInput.swift in Sources */,
 				CF8B66F923CBC9D70021B021 /* UserInfoSubViewRouter.swift in Sources */,
@@ -27577,6 +27681,7 @@
 				CF8B672423CBC9D70021B021 /* PeriodicContactSyncRouterInput.swift in Sources */,
 				CF8B672523CBC9D70021B021 /* LoginSettingsInteractorIO.swift in Sources */,
 				CF8B672823CBC9D70021B021 /* ResponseParser.swift in Sources */,
+				07AC65FA26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				CF8B672923CBC9D70021B021 /* SearchViewConfigurator.swift in Sources */,
 				CF8B672A23CBC9D70021B021 /* MusicInteractorOutput.swift in Sources */,
 				CF8B672B23CBC9D70021B021 /* RecentSearchesService.swift in Sources */,
@@ -27652,7 +27757,9 @@
 				CF8B676623CBC9D70021B021 /* GeneralFilesFiltration.swift in Sources */,
 				9816176A2578BA1D009F1C31 /* FirebaseAnalyticsActions.swift in Sources */,
 				CF8B676723CBC9D70021B021 /* TermsCheckboxTextView.swift in Sources */,
+				077EEF9E26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				B5BF43F82514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				07A6C48B26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				0302079523D1D2D100BF8006 /* NetmeraService.swift in Sources */,
 				B59E1F7C25921F0000640DD1 /* ItemSyncOperation.swift in Sources */,
 				CF8B676823CBC9D70021B021 /* ControlTabBarProtocol.swift in Sources */,
@@ -27972,6 +28079,7 @@
 				CF8B686323CBC9D70021B021 /* ActivityTimelineViewOutput.swift in Sources */,
 				CF8B686423CBC9D70021B021 /* MappingError.swift in Sources */,
 				CF8B686523CBC9D70021B021 /* ActivityTimelineViewController.swift in Sources */,
+				07FBA22F26E0EDD000ED4132 /* Strings+Profile.swift in Sources */,
 				CF8B686623CBC9D70021B021 /* ActivityTimelineModuleInput.swift in Sources */,
 				CF8B686723CBC9D70021B021 /* ActivityTimelinePresenter.swift in Sources */,
 				CF8B686823CBC9D70021B021 /* ActivityTimelineInteractorInput.swift in Sources */,
@@ -28264,6 +28372,7 @@
 				3AA3D4EE268C454B00B7B1EF /* SilentPushApiService.swift in Sources */,
 				CF8B6BFF23CBCA280021B021 /* CollectionViewCellForController.swift in Sources */,
 				CF8B6C0123CBCA280021B021 /* AccountResponse.swift in Sources */,
+				07AC65FC26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				CF8B6C0223CBCA280021B021 /* CollectionViewCellForAudio.swift in Sources */,
 				CF8B6C0323CBCA280021B021 /* KeyboardLayoutConstraint.swift in Sources */,
 				CF8B6C0423CBCA280021B021 /* InstaPickSelectionSegmentedController.swift in Sources */,
@@ -28309,6 +28418,7 @@
 				CF8B6C2523CBCA280021B021 /* ImportPhotosPresenter.swift in Sources */,
 				CF8B6C2623CBCA280021B021 /* LoginSettingsRouter.swift in Sources */,
 				CF8B6C2723CBCA280021B021 /* PopUpController.swift in Sources */,
+				07FBA21C26E0BD5400ED4132 /* Localizable.swift in Sources */,
 				B59E1F9125921F0000640DD1 /* ItemSyncService.swift in Sources */,
 				CF8B6C2823CBCA280021B021 /* CreateStoryPreviewInteractor.swift in Sources */,
 				CF8B6C2923CBCA280021B021 /* ErrorResponse.swift in Sources */,
@@ -28734,6 +28844,7 @@
 				CF8B6D8223CBCA280021B021 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				8E1E081F2423B0420054BF86 /* KeychainCleaner.swift in Sources */,
 				CF8B6D8323CBCA280021B021 /* ActivityTimelineHeader.swift in Sources */,
+				07111F2826E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */,
 				CF8B6D8423CBCA280021B021 /* PrintViewInput.swift in Sources */,
 				9823196124F3A1E600FD16E2 /* PreparedFilterSliderView.swift in Sources */,
 				98B047B1259314740011DAEB /* Configuration.m in Sources */,
@@ -28832,6 +28943,7 @@
 				CF8B6DD223CBCA280021B021 /* ForgotPasswordViewOutput.swift in Sources */,
 				CF8B6DD323CBCA280021B021 /* FaceImageAddNameInteractor.swift in Sources */,
 				030207AB23D1D32300BF8006 /* NetmeraScreenEventTemplate.swift in Sources */,
+				07FBA21B26E0BD5400ED4132 /* Strings.swift in Sources */,
 				0305A36723D5C66C004D1EC7 /* CarouselPagerDataSource.swift in Sources */,
 				98231A6224F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
 				B551D0D624614C5900B21970 /* LogoutDBCleaner.swift in Sources */,
@@ -28899,6 +29011,7 @@
 				98B04DD125931FD50011DAEB /* SettingsTypes.swift in Sources */,
 				CF8B6E0723CBCA280021B021 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CF8B6E0823CBCA280021B021 /* ForgotPasswordRouter.swift in Sources */,
+				07FBA23126E0EDD000ED4132 /* Strings+Profile.swift in Sources */,
 				CF8B6E0923CBCA280021B021 /* ProgressCard.swift in Sources */,
 				CF8B6E0A23CBCA280021B021 /* ForgotPasswordConfigurator.swift in Sources */,
 				CF8B6E0B23CBCA280021B021 /* ForgotPasswordInitializer.swift in Sources */,
@@ -29061,6 +29174,7 @@
 				CF8B6E8B23CBCA280021B021 /* DateExtension.swift in Sources */,
 				0305A32F23D5C447004D1EC7 /* HSCompetionPopUpsFactory.swift in Sources */,
 				CF8B6E8C23CBCA280021B021 /* BaseFilesGreedRouter.swift in Sources */,
+				077EEFAD26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
 				CF8B6E8D23CBCA280021B021 /* BaseFilesGreedConfigurator.swift in Sources */,
 				0762029F269B842F00D4FB2C /* OverlayStickerSelectorViewController.swift in Sources */,
 				CF8B6E8E23CBCA280021B021 /* ActionsMenuTableViewCell.swift in Sources */,
@@ -29436,6 +29550,7 @@
 				CF8B6FC823CBCA280021B021 /* PHAsset+Properties.swift in Sources */,
 				B545020A255A863C004DBD41 /* PrivateShareSharedFilesViewController.swift in Sources */,
 				98B047C1259314740011DAEB /* AppRater.m in Sources */,
+				07A6C48D26E5EC8300B5442B /* ProfileEmailFieldView.swift in Sources */,
 				CF8B6FC923CBCA280021B021 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
 				CF8B6FCA23CBCA280021B021 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				98231AAA24F3A23500FD16E2 /* MetropolisFilter.swift in Sources */,
@@ -29596,6 +29711,7 @@
 				CF8B704623CBCA280021B021 /* OTPViewRouterInput.swift in Sources */,
 				CF8B704723CBCA280021B021 /* OTPViewConfigurator.swift in Sources */,
 				CF8B704823CBCA280021B021 /* OTPViewInitializer.swift in Sources */,
+				077EEFA026E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				CF8B704923CBCA280021B021 /* FileManager+Size.swift in Sources */,
 				CF8B704A23CBCA280021B021 /* AuthorizationRepository.swift in Sources */,
 				CF8B704B23CBCA280021B021 /* UploadFromLifeBoxModuleInput.swift in Sources */,
@@ -29624,6 +29740,7 @@
 				CFE4E6C2252D9F2300F165AD /* CellsConstant.swift in Sources */,
 				CFE4E6C3252D9F2300F165AD /* Dictionary.swift in Sources */,
 				CFEB1FA7252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
+				07FBA21826E0BD5300ED4132 /* Localizable.swift in Sources */,
 				CFE4E6C4252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6C5252D9F2300F165AD /* NumericConstants.swift in Sources */,
 				CFE4E6C6252D9F2300F165AD /* Error+Network.swift in Sources */,
@@ -29709,6 +29826,7 @@
 				CFE4E705252D9F2300F165AD /* Mapping.swift in Sources */,
 				CFE4E706252D9F2300F165AD /* (null) in Sources */,
 				98B04CF125931DD90011DAEB /* SyncAdapter.m in Sources */,
+				07FBA21726E0BD5300ED4132 /* Strings.swift in Sources */,
 				CFE4E707252D9F2300F165AD /* (null) in Sources */,
 				CFE4E709252D9F2300F165AD /* ButtonStyle.swift in Sources */,
 				98B04CE425931DD90011DAEB /* ContactDevice.m in Sources */,
@@ -29735,6 +29853,7 @@
 				CFE4E756252D9F3B00F165AD /* CellsConstant.swift in Sources */,
 				CFE4E757252D9F3B00F165AD /* Dictionary.swift in Sources */,
 				CFEB1FA9252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
+				07FBA22426E0BD5800ED4132 /* Localizable.swift in Sources */,
 				CFE4E758252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E759252D9F3B00F165AD /* NumericConstants.swift in Sources */,
 				CFE4E75A252D9F3B00F165AD /* Error+Network.swift in Sources */,
@@ -29820,6 +29939,7 @@
 				CFE4E799252D9F3B00F165AD /* Mapping.swift in Sources */,
 				CFE4E79A252D9F3B00F165AD /* (null) in Sources */,
 				98B04D1925931DDC0011DAEB /* SyncAdapter.m in Sources */,
+				07FBA22326E0BD5800ED4132 /* Strings.swift in Sources */,
 				CFE4E79B252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E79D252D9F3B00F165AD /* ButtonStyle.swift in Sources */,
 				98B04D0C25931DDC0011DAEB /* ContactDevice.m in Sources */,

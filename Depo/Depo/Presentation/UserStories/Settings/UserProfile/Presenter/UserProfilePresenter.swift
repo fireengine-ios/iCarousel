@@ -11,6 +11,9 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     weak var view: UserProfileViewInput!
     var interactor: UserProfileInteractorInput!
     var router: UserProfileRouterInput!
+    var appearAction: UserProfileAppearAction?
+
+    private var viewAppearedBefore = false
     
     // MARK: Utility methods
     private func getPhoneWithAddedCodeIfNeeded() -> String {
@@ -59,14 +62,36 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         interactor.viewIsReady()
         view.setupEditState(false)
     }
+
+    func viewDidAppear() {
+        guard viewAppearedBefore == false else { return }
+        viewAppearedBefore = true
+
+        switch appearAction {
+        case .none:
+            break
+
+        case .presentVerifyEmail:
+            if interactor.userInfo?.emailVerified == false {
+                view?.presentEmailVerificationPopUp()
+            }
+
+        case .presentVerifyRecoveryEmail:
+            if interactor.userInfo?.recoveryEmailVerified == false {
+                view?.presentRecoveryEmailVerificationPopUp()
+            }
+        }
+    }
     
     func tapEditButton() {
         view.setupEditState(true)
         interactor.trackState(.edit, errorType: nil)
     }
     
-    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String, address: String, changes: String) {
-        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday, address: address, changes: changes)
+    func tapReadyButton(name: String, surname: String, email: String, recoveryEmail: String,
+                        number: String, birthday: String, address: String, changes: String) {
+        interactor.changeTo(name: name, surname: surname, email: email, recoveryEmail: recoveryEmail,
+                            number: number, birthday: birthday, address: address, changes: changes)
     }
     
     func dataWasUpdated() {
@@ -85,6 +110,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         interactor.trackSetSequrityQuestion()
         router.goToSetSecretQuestion(selectedQuestion: interactor.secretQuestionsResponse,
                                      delegate: self)
+    }
+
+    func emailVerificationCompleted() {
+        interactor.forceRefreshUserInfo()
     }
     
     //MARK : BasePresenter
