@@ -69,7 +69,6 @@ enum FeaturePackageType: String, PackageTypeProtocol {
         case .digicellFeature:
             return TextConstants.featureDigicellCancelText
         case .masterpassFeature:
-            //TODO: CHECK IT AGAIN
             return TextConstants.featureDefaultCancelText
         }
     }
@@ -240,7 +239,6 @@ enum QuotaPackageType: String, PackageTypeProtocol {
         case .jamaica:
             return TextConstants.packageJamaicaCancelText
         case .masterpass:
-            //TODO: CHECK IT AGAIN
             return TextConstants.packageDefaultCancelText
         }
     }
