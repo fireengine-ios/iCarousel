@@ -1884,3 +1884,11 @@
 "signup_password_rule_character_limit" = "En az 6, en çok 16 karakter";
 "signup_password_rule_upper_lower_numeric" = "En az 1 büyük, 1 küçük harf ve 1 rakam";
 "signup_password_rule_sequential_characters" = "Ardışık olmayan karakterler";
+"profile_recovery_mail" = "Kurtarma E-postası";
+"profile_recovery_mail_desc" = "Kurtarma e-postası şifreni unuttuğunda doğrulaman için kullanılır";
+"profile_recovery_mail_hint" = "Henüz kurtarma e-postası girilmemiş";
+"profile_mail_verified" = "Doğrulanmış";
+"profile_verify" = "Doğrula";
+"masterpass_quota_package_cancel" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
+"profile_recovery_email_empty" = "Kurtarma e-postası boş";
+"profile_recovery_email_invalid" = "Kurtarma e-postası geçersiz";

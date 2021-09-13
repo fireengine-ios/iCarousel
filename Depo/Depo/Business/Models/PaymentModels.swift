@@ -16,6 +16,7 @@ struct PaymentModel {
 
 struct PaymentMethod {
     let name: String
+    let price: Float
     let priceLabel: String
     let type: PaymentType
     let action: VoidHandler

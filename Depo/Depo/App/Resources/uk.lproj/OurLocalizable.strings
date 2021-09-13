@@ -1868,3 +1868,11 @@
 "signup_password_rule_character_limit" = "Мінімум 6, максимум 16 символів";
 "signup_password_rule_upper_lower_numeric" = "Мінімум 1 прописна буква, 1 мала літера і 1 цифра";
 "signup_password_rule_sequential_characters" = "Непослідовні символи";
+"profile_recovery_mail" = "";
+"profile_recovery_mail_desc" = "";
+"profile_recovery_mail_hint" = "";
+"profile_mail_verified" = "";
+"profile_verify" = "";
+"masterpass_quota_package_cancel" = "";
+"profile_recovery_email_empty" = "";
+"profile_recovery_email_invalid" = "";

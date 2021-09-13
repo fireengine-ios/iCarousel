@@ -91,18 +91,33 @@ final class PremiumPresenter {
                 return nil
             }
         }
-        
+
+        let showableMethods = prepareShowableMethods(with: paymentMethods)
         let subtitle = TextConstants.feature
-        return PaymentModel(name: TextConstants.standardBannerTitle, subtitle: subtitle, types: paymentMethods)
+        return PaymentModel(name: TextConstants.standardBannerTitle, subtitle: subtitle, types: showableMethods)
+    }
+
+    private func prepareShowableMethods(with methods: [PaymentMethod]) -> [PaymentMethod] {
+        var showableMethods: [PaymentMethod] = []
+
+        let paycellMethods = methods.filter {$0.type == .paycell}.min { $0.price < $1.price }
+        let appStoreMethods = methods.filter {$0.type == .appStore}.min { $0.price < $1.price }
+        let slcmMethods = methods.filter {$0.type == .slcm}.min { $0.price < $1.price }
+
+        showableMethods.append(paycellMethods)
+        showableMethods.append(appStoreMethods)
+        showableMethods.append(slcmMethods)
+
+        return showableMethods.sorted { $0.price < $1.price }
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {
-        guard let name = model.name, let type = model.type else {
+        guard let name = model.name, let type = model.type, let price = model.price else {
             return nil
         }
         
         let paymentType = type.paymentType
-        return PaymentMethod(name: name, priceLabel: priceString, type: paymentType, action: { [weak self] in
+        return PaymentMethod(name: name, price: price, priceLabel: priceString, type: paymentType, action: { [weak self] in
             guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, type: type) else {
                 assertionFailure()
                 return
@@ -198,8 +213,9 @@ extension PremiumPresenter: PremiumInteractorOutput {
     
     func successed(allFeatures: [PackageModelResponse]) {
         features = allFeatures.filter { $0.isFeaturePack == true && $0.type?.isPaymentType == true }
-        features.append(allFeatures.first(where: { $0.isRecommendedPremium }))
-        
+        let recommendedPackages = allFeatures.filter({$0.isRecommendedPremium == true})
+        features.append(contentsOf: recommendedPackages)
+
         guard features.hasItems else {
             switchToTextWithoutPrice(isError: false)
             /// maybe will be need. clear if all tests will be done by QA
