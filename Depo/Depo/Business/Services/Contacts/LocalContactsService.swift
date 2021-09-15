@@ -31,13 +31,13 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     }
     
     func fetchAllContacts(completion: BoolHandler?) {
-        checkAuthorization { [weak self] result in
+        checkAuthorization { [weak self] isAllowed in
             guard let self = self else {
                 completion?(false)
                 return
             }
             
-            guard result.isAllowed else {
+            guard isAllowed else {
                 printLog("Local Contacts. Access denied.")
                 completion?(false)
                 return
@@ -79,20 +79,16 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     }
     
     //MARK - Private
-    private func checkAuthorization(completion: @escaping ValueHandler<(isAllowed: Bool, askedPermissions: Bool)>) {
+    private func checkAuthorization(completion: @escaping (Bool) -> Void) {
         let currentStatus = CNContactStore.authorizationStatus(for: .contacts)
-        if currentStatus.isContained(in: [.authorized, .denied]) {
-            completion((currentStatus == .authorized, false))
-            return
-        }
-        
+        debugLog("currentAuthorizationStatus = \(currentStatus.rawValue)")
+
         contactStore.requestAccess(for: .contacts) { isAllowed, error in
             if let error = error {
-                assertionFailure()
-                printLog("Contacts auth error: \(error)")
+                printLog("requestAccess(for:) completed with \(error)")
             }
             
-            completion((isAllowed, true))
+            completion(isAllowed)
         }
     }
     

@@ -155,7 +155,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     }
 
     private func updateRecoveryEmailIfNeed(recoveryEmail: String, number: String, birthday: String, address: String) {
-        if (isRecoveryEmailChanged(newValue: recoveryEmail)) {
+        if isRecoveryEmailChanged(newValue: recoveryEmail) && !recoveryEmail.isEmpty {
             let parameters = UserRecoveryEmailParameters(email: recoveryEmail)
             AccountService().updateUserRecoveryEmail(parameters: parameters,
                                                      success: { [weak self] response in

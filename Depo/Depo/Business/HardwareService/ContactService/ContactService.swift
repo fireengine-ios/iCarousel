@@ -32,29 +32,25 @@ final class ContactService {
     }
     
     func askPermissionForContactsFramework(redirectToSettings: Bool, completion: @escaping ContactsLibraryGranted) {
-        debugLog("ContactService showAccessAlert")
-        
         let store = CNContactStore()
-        switch CNContactStore.authorizationStatus(for: .contacts) {
-        case .authorized:
-            completion(true)
-            
-        case .denied:
-            completion(false)
-            
-        case .restricted, .notDetermined:
-            passcodeStorage.systemCallOnScreen = true
-            
-            store.requestAccess(for: .contacts) { [weak self] granted, error in
-                self?.passcodeStorage.systemCallOnScreen = false
-                
-                if granted {
-                    completion(true)
-                } else if redirectToSettings {
-                    self?.showSettingsAlert(completionHandler: completion)
-                } else {
-                    completion(false)
-                }
+
+        let currentStatus = CNContactStore.authorizationStatus(for: .contacts)
+        debugLog("currentAuthorizationStatus = \(currentStatus.rawValue)")
+
+        passcodeStorage.systemCallOnScreen = true
+        store.requestAccess(for: .contacts) { [weak self] granted, error in
+            self?.passcodeStorage.systemCallOnScreen = false
+
+            if let error = error {
+                printLog("requestAccess(for:) completed with \(error)")
+            }
+
+            if granted {
+                completion(true)
+            } else if redirectToSettings {
+                self?.showSettingsAlert(completionHandler: completion)
+            } else {
+                completion(false)
             }
         }
     }
