@@ -1924,3 +1924,4 @@
 "masterpass_quota_package_cancel" = "To cancel your package, please visit www.mylifebox.com";
 "profile_recovery_email_empty" = "Recovery e-mail is empty";
 "profile_recovery_email_invalid" = "Recovery e-mail field is invalid";
+"package_period_x_months" = "%d months";

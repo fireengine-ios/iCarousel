@@ -1892,3 +1892,4 @@
 "masterpass_quota_package_cancel" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
 "profile_recovery_email_empty" = "Kurtarma e-postası boş";
 "profile_recovery_email_invalid" = "Kurtarma e-postası geçersiz";
+"package_period_x_months" = "%d ay";
