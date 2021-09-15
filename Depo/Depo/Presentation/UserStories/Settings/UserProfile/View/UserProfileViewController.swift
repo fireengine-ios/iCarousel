@@ -179,10 +179,8 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }
     
     func setupEditState(_ isEdit: Bool) {
-        let button = isEdit ? readyButton : editButton
-        button.fixEnabledState()
-        navigationItem.setRightBarButton(button, animated: true)
-        
+        setRightBarButton(isEdit: isEdit)
+
         nameView.isEditState = isEdit
         surnameView.isEditState = isEdit
         emailView.isEditState = isEdit
@@ -200,7 +198,24 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         isEdit ? addressView.showSubtitleAnimated() : addressView.hideSubtitleAnimated()
         isEdit ? recoveryEmailView.showSubtitleAnimated() : recoveryEmailView.hideSubtitleAnimated()
     }
-    
+
+    private func setRightBarButton(isEdit: Bool) {
+        let button = isEdit ? readyButton : editButton
+        button.fixEnabledState()
+        navigationItem.setRightBarButton(button, animated: true)
+    }
+
+    private func setIsLoading(_ isLoading: Bool) {
+        if isLoading {
+            let activityIndicator = UIActivityIndicatorView()
+            activityIndicator.color = ColorConstants.whiteColor
+            activityIndicator.startAnimating()
+            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+        } else {
+            setRightBarButton(isEdit: nameView.isEditState)
+        }
+    }
+
     @objc private func onChangePassword() {
         output.tapChangePasswordButton()
     }
@@ -257,10 +272,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         
         let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
 
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.color = ColorConstants.whiteColor
-        activityIndicator.startAnimating()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+        setIsLoading(true)
 
         if self.email != email {
             guard !email.isEmpty else {
@@ -475,9 +487,9 @@ extension UserProfileViewController: UserProfileViewInput {
     func getPhoneNumber() -> String {
         return (phoneView.codeTextField.text ?? "") + (phoneView.numberTextField.text ?? "")
     }
-    
+
     func endSaving() {
-        navigationItem.rightBarButtonItem?.fixEnabledState()
+        setIsLoading(false)
     }
     
     func securityQuestionWasSet() {
