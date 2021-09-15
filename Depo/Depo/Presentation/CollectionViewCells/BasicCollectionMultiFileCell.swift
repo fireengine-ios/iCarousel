@@ -154,8 +154,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             smallContentImageView.contentMode = .center
         }
         
-        bigContentImageView.contentMode = .scaleAspectFill
-        
+        bigContentImageView.contentMode = .center
+
         separatorView.isHidden = isBigSize()
         barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColor : AppColor.primaryBackground.color ?? .white
         
