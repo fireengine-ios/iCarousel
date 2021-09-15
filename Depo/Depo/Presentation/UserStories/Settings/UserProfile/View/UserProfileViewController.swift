@@ -256,9 +256,12 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         }
         
         let sendingPhoneNumber = isShortPhoneNumber ? phoneNumber : "\(phoneCode)\(phoneNumber)"
-        
-        readyButton.isEnabled = false
-        
+
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = ColorConstants.whiteColor
+        activityIndicator.startAnimating()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityIndicator)
+
         if self.email != email {
             guard !email.isEmpty else {
                 output.showError(error: TextConstants.emptyEmail)
@@ -290,7 +293,6 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                                                     birthday: birthday,
                                                     address: address,
                                                     changes: self.getChanges())
-                        self.readyButton.fixEnabledState()
                     }
                 })
             
