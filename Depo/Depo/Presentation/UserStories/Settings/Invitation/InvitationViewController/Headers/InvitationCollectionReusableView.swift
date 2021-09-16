@@ -29,6 +29,7 @@ class InvitationCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet weak var acceptedInvitationTitleLabel: UILabel!
     @IBOutlet weak var acceptedInvitationListCollectionView: UICollectionView!
+    @IBOutlet weak var invitationListButton: UIButton!
 
     @IBOutlet weak var giftsTitleLabel: UILabel!
 
@@ -75,6 +76,7 @@ class InvitationCollectionReusableView: UICollectionReusableView {
         self.accountBGColors = AccountConstants.shared.generateBGColors(numberOfItems: maxShownNumberOfItem)
         acceptedInvitationTitleLabel.text = String(format: TextConstants.titleInvitationFriends, self.invitationRegisteredResponse?.totalAccount ?? 0)
         acceptedInvitationListCollectionView.reloadData()
+        invitationListButton.isHidden = invitationRegisteredResponse.accounts.count == 0
     }
 
     func configureGiftList(invitationGiftList: [SubscriptionPlanBaseResponse]) {
