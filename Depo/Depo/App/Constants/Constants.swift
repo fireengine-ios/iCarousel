@@ -2221,6 +2221,7 @@ struct TextConstants {
     static let titleInvitationPackages = NSLocalizedString("title_invitation_packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invitationSnackbarCopy = NSLocalizedString("invitation_snackbar_copy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invitationShare = NSLocalizedString("invitation_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let invitationShareMessage = NSLocalizedString("invitation_share_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invitationFriends = NSLocalizedString("invitation_friends", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invitationSnackbarCopyExceed = NSLocalizedString("invitation_snackbar_copy_exceed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let invitationSnackbarShareExceed = NSLocalizedString("invitation_snackbar_share_exceed", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
