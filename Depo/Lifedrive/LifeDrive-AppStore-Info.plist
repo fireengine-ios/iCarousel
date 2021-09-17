@@ -152,7 +152,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>To save lifebox photos to your device</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your photos will be backed up to lifebox</string>
+	<string>Your photos will be backed up to Billo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>
