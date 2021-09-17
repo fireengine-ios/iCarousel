@@ -39,7 +39,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>16</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -152,7 +152,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>To save lifebox photos to your device</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your photos will be backed up to lifebox</string>
+	<string>Your photos will be backed up to Billo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>
