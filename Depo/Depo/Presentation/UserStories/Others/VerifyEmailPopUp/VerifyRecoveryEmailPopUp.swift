@@ -8,6 +8,13 @@
 
 final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        analyticsService.logScreen(screen: .verifyRecoveryEmailPopUp)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.VerifyRecoveryEmailPopUp())
+    }
+
     override func setup() {
         super.setup()
         // No need for change email button for recovery email
@@ -19,6 +26,20 @@ final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
         if !SingletonStorage.shared.isRecoveryEmailVerificationCodeSent {
             resendCode(isAutomaticaly: true)
         }
+    }
+
+    override func showPopUp() {
+        super.showPopUp()
+
+        analyticsService.logScreen(screen: .verifyRecoveryEmailPopUp)
+    }
+
+    override func onLaterTap(_ sender: Any) {
+        super.onLaterTap(sender)
+
+        analyticsService.trackCustomGAEvent(eventCategory: .recoveryEmailVerification,
+                                            eventActions: .otp,
+                                            eventLabel: .later)
     }
 
     override var email: String {
@@ -38,6 +59,11 @@ final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
 
             switch response {
             case .success:
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .recoveryEmailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .confirmStatus(isSuccess: true))
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.RecoveryEmailVerification(action: .success))
+
                 DispatchQueue.main.async { [weak self] in
                     self?.hidePopUp {
                         self?.showCompletedAndClose()
@@ -45,6 +71,12 @@ final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
                 }
 
             case .failed(let error):
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.RecoveryEmailVerification(action: .failure))
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .recoveryEmailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .confirmStatus(isSuccess: false),
+                                                          errorType: GADementionValues.errorType(with: error.localizedDescription))
+
                 DispatchQueue.main.async { [weak self] in
                     self?.showError(text: error.localizedDescription)
                     self?.clearCode()
@@ -64,9 +96,18 @@ final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
             case .success:
                 if isAutomaticaly {
                     SingletonStorage.shared.isRecoveryEmailVerificationCodeSent = true
+                } else {
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .recoveryEmailVerification,
+                                                              eventActions: .otp,
+                                                              eventLabel: .codeResent(isSuccessed: true))
                 }
 
             case .failed(let error):
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .recoveryEmailVerification,
+                                                          eventActions: .otp,
+                                                          eventLabel: .codeResent(isSuccessed: false),
+                                                          errorType: GADementionValues.errorType(with: error.localizedDescription))
+
                 DispatchQueue.main.async { [weak self] in
                     self?.clearCode()
                     self?.enableConfirmButtonIfNeeded()

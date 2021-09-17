@@ -37,6 +37,7 @@ final class ServerStatusError {
         static let invalidCaptcha = "Invalid captcha."
         static let captchaRequired = "Captcha required."
         static let tooManyInvalidAttepts = "TOO_MANY_INVALID_ATTEMPTS"
+        static let recoveryEmailIsSameWithAccountEmail = "RECOVERY_EMAIL_IS_SAME_WITH_ACCOUNT_EMAIL"
     }
 }
 extension ServerStatusError: LocalizedError {
@@ -98,7 +99,10 @@ extension ServerStatusError: LocalizedError {
             
         case ErrorKeys.tooManyInvalidAttepts:
             return TextConstants.tooManyInvalidAttempt
-            
+
+        case ErrorKeys.recoveryEmailIsSameWithAccountEmail:
+            return localized(.profileRecoveryEmailIsSameWithAccountEmail)
+
         default:
             return status
         }

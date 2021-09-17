@@ -121,6 +121,29 @@ extension NetmeraEvents.Actions {
             return kEmailVerificationKey
         }
     }
+
+    final class RecoveryEmailVerification: NetmeraEvent {
+
+        private let kRecoveryEmailVerificationKey = "dvn"
+
+        @objc var action = ""
+
+        convenience init(action: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.action = action.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(action),
+            ]
+        }
+
+        override var eventKey : String {
+            return kRecoveryEmailVerificationKey
+        }
+    }
+
     
     final class PackageChannelClick: NetmeraEvent {
         
