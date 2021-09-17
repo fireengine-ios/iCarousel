@@ -97,6 +97,7 @@ enum AnalyticsAppScreens {
     case enterSecurityCodeResend
     ///EmailVerification
     case verifyEmailPopUp
+    case verifyRecoveryEmailPopUp
     case changeEmailPopUp
     ///CredsUpdateCheckPopUp
     case periodicInfoScreen
@@ -300,6 +301,8 @@ enum AnalyticsAppScreens {
         ///
         case .verifyEmailPopUp:
             return "Email verification - Popup"
+        case .verifyRecoveryEmailPopUp:
+            return "Recovery Email verification - Popup"
         case .changeEmailPopUp:
             return "Email verification - Change Email"
         ///

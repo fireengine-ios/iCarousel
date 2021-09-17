@@ -14,6 +14,7 @@ enum GAEventCategory {
     case popUp
     case twoFactorAuthentication
     case emailVerification
+    case recoveryEmailVerification
     case securityQuestion
     case campaign
     case photoEdit(PhotoEditCategory)
@@ -55,6 +56,8 @@ enum GAEventCategory {
             return "Two Factor Authentication"
         case .emailVerification:
             return "E-mail verification"
+        case .recoveryEmailVerification:
+            return "Recovery E-mail verification"
         case .securityQuestion:
             return "Security Question"
         case .campaign:
