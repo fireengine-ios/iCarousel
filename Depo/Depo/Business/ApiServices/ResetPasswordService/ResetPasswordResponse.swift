@@ -16,6 +16,15 @@ struct ResetPassword: Codable {
     let remainingTimeInMinutes: Int?
     let expectedInputLength: Int?
     let methods: [IdentityVerificationMethod]
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        action = try? container.decodeIfPresent(ContinuationAction.self, forKey: .action)
+        referenceToken = try container.decodeIfPresent(String.self, forKey: .referenceToken)
+        remainingTimeInMinutes = try container.decodeIfPresent(Int.self, forKey: .remainingTimeInMinutes)
+        expectedInputLength = try container.decodeIfPresent(Int.self, forKey: .expectedInputLength)
+        methods = try container.decodeIfPresent([IdentityVerificationMethod].self, forKey: .methods) ?? []
+    }
 }
 
 extension ResetPassword {

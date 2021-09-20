@@ -21,6 +21,13 @@ class ForgotPasswordRouter: ForgotPasswordRouterInput {
         
         RouterVC().presentViewController(controller: vc)
     }
+
+    func proceedToIdentityVerification(service: ResetPasswordService,
+                                       availableMethods: [IdentityVerificationMethod]) {
+        let viewController = IdentityVerificationViewController(resetPasswordService: service,
+                                                                availableMethods: availableMethods)
+        RouterVC().replaceTopViewControllerWithViewController(viewController)
+    }
     
     func popBack() {//Goes to Login
         let router = RouterVC()

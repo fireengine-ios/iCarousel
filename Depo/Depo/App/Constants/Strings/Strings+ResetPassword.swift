@@ -30,6 +30,7 @@ extension Strings {
         case resetPasswordRecoveryMail           = "forgotMyPassword_recovery_mail"
         case resetPasswordSecurityQuestion       = "forgotMyPassword_security_question"
         case resetPasswordContinueButton         = "forgotMyPassword_continue"
+        case resetPasswordEmailPopupMessage      = "forgotMyPassword_email_popup_message"
     }
 }
 

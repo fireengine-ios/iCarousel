@@ -64,9 +64,10 @@ extension ForgotPasswordPresenter: ForgotPasswordInteractorOutput {
         }
     }
 
-    func requestSucceed() {
+    func receivedVerificationMethods(_ methods: [IdentityVerificationMethod]) {
         completeAsyncOperationEnableScreen()
-        router.goToResetPassword()
+        router.proceedToIdentityVerification(service: interactor.resetPasswordService,
+                                             availableMethods: methods)
     }
 
     func requestFailed(withError error: String) {

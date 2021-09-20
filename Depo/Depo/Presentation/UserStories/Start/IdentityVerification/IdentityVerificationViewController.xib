@@ -65,6 +65,9 @@
                         <constraint firstAttribute="height" constant="44" id="mrA-Ic-aSo"/>
                     </constraints>
                     <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="continueButtonTapped" destination="-1" eventType="touchUpInside" id="ZBZ-xk-ZEB"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Xk6-Zy-poz"/>

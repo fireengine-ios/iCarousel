@@ -8,7 +8,20 @@
 
 import UIKit
 
-final class IdentityVerificationViewController: UIViewController {
+final class IdentityVerificationViewController: BaseViewController {
+    private let resetPasswordService: ResetPasswordService
+    let availableMethods: [IdentityVerificationMethod]
+
+    init(resetPasswordService: ResetPasswordService, availableMethods: [IdentityVerificationMethod]) {
+        self.resetPasswordService = resetPasswordService
+        self.availableMethods = availableMethods
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     @IBOutlet private var tableHeaderView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
@@ -25,13 +38,51 @@ final class IdentityVerificationViewController: UIViewController {
         setupTableView()
 
         dataSource = IdentityVerificationDataSource(tableView: tableView)
-        dataSource.availableMethods = [
-            .sms(phone: "053******92"),
-            .email(email: "lor*****m@******.com"),
-            .recoveryEmail(email: "lor*****m@******.com"),
-            .securityQuestion(id: 0)
-        ]
-        tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+        dataSource.availableMethods = availableMethods
+    }
+
+    @IBAction private func continueButtonTapped() {
+        guard let selectedMethod = dataSource.selectedMethod else { return }
+
+        resetPasswordService.delegate = self
+        resetPasswordService.proceedVerification(with: selectedMethod)
+        showSpinner()
+    }
+
+    private func showLinkSentToEmailPopupAndExit(email: String) {
+        let message = String(format: localized(.resetPasswordEmailPopupMessage), email)
+        let buttonTitle = TextConstants.ok
+
+        let popup = PopUpController.with(title: nil, message: message,
+                                         image: .success, buttonTitle: buttonTitle) { [weak self] popup in
+            popup.close()
+            self?.navigationController?.popViewController(animated: true)
+        }
+
+        present(popup, animated: true)
+    }
+}
+
+extension IdentityVerificationViewController: ResetPasswordServiceDelegate {
+    func resetPasswordService(_ service: ResetPasswordService, verifiedWithMethod method: IdentityVerificationMethod) {
+        hideSpinner()
+        switch method {
+        case let .email(email):
+            showLinkSentToEmailPopupAndExit(email: email)
+        case let .recoveryEmail(email):
+            showLinkSentToEmailPopupAndExit(email: email)
+        case .sms:
+            break
+        case .securityQuestion:
+            break
+        case .unknown:
+            break
+        }
+    }
+
+    func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
+        hideSpinner()
+        UIApplication.showErrorAlert(message: error.localizedDescription)
     }
 }
 
@@ -63,6 +114,5 @@ private extension IdentityVerificationViewController {
 
     func setupTableView() {
         tableView.alwaysBounceVertical = false
-//        tableView.delegate = self
     }
 }

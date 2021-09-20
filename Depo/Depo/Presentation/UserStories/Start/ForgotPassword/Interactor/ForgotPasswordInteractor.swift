@@ -9,7 +9,7 @@
 final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
 
     weak var output: ForgotPasswordInteractorOutput!
-    private let authenticationService = AuthenticationService()
+    private(set) lazy var resetPasswordService = ResetPasswordService()
     
     func trackScreen() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ForgetPasswordScreen())
@@ -45,16 +45,8 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
             params = ForgotPassword(email: nil, msisdn: login, attachedCaptcha: captcha)
         }
 
-        authenticationService.fogotPassword(forgotPassword: params, success: { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.output.requestSucceed()
-            }
-        }, fail: { [weak self] response in
-            DispatchQueue.main.async {
-                let errorMessage = self?.checkErrorService(withErrorResponse: response.description) ?? response.description
-                self?.output.requestFailed(withError: errorMessage)
-            }
-        })
+        resetPasswordService.delegate = self
+        resetPasswordService.beginResetFlow(with: params)
     }
     
     func checkErrorService(withErrorResponse response: String) -> String? {
@@ -62,5 +54,15 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
             return localized(.resetPasswordErrorCaptchaText)
         }
         return nil
+    }
+}
+
+extension ForgotPasswordInteractor: ResetPasswordServiceDelegate {
+    func resetPasswordService(_ service: ResetPasswordService, receivedVerificationMethods methods: [IdentityVerificationMethod]) {
+        output.receivedVerificationMethods(methods)
+    }
+
+    func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
+        output.requestFailed(withError: error.localizedDescription)
     }
 }

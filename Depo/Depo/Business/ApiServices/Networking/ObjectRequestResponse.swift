@@ -18,8 +18,11 @@ class ObjectRequestResponse: NSObject, ObjectFromRequestResponse {
     var json: JSON?
     var response: HTTPURLResponse?
     var jsonString: String?
+    private var data: Data?
     
     required init(json: Data?, headerResponse: HTTPURLResponse?) {
+        self.data = json
+
         if let data = json {
             let jsonFromData = JSON(data)
             self.json = jsonFromData
@@ -69,10 +72,33 @@ class ObjectRequestResponse: NSObject, ObjectFromRequestResponse {
     var responseHeader: [AnyHashable: Any]? {
         return response?.allHeaderFields
     }
+
+    func decodedResponse<T: Decodable>(_ type: T.Type) throws -> T {
+        guard let data = self.data else {
+            throw DecodingError.noData()
+        }
+        return try JSONDecoder().decode(type, from: data)
+    }
 }
 
 extension JsonMap where Self: ObjectRequestResponse {
     init?(json: JSON) {
         self.init(withJSON: json)
+    }
+}
+
+extension Optional where Wrapped == ObjectFromRequestResponse {
+    func decodedResponse<T: Decodable>(_ type: T.Type) throws -> T {
+        guard let instance = self as? ObjectRequestResponse else {
+            throw DecodingError.noData()
+        }
+
+        return try instance.decodedResponse(type)
+    }
+}
+
+extension DecodingError {
+    static func noData() -> DecodingError {
+        DecodingError.dataCorrupted(.init(codingPath: [], debugDescription: ""))
     }
 }

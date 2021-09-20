@@ -13,7 +13,16 @@ final class IdentityVerificationDataSource: NSObject {
     var availableMethods: [IdentityVerificationMethod] = [] {
         didSet {
             tableView?.reloadData()
+            tableView?.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
         }
+    }
+
+    var selectedMethod: IdentityVerificationMethod? {
+        guard let index = tableView?.indexPathForSelectedRow?.item else {
+            return nil
+        }
+
+        return availableMethods[index]
     }
 
     private override init() {
