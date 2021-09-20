@@ -39,7 +39,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     @IBOutlet private weak var dropDownArrow: UIImageView!
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = AppColor.itemSeperator.color
         }
     }
     
@@ -55,7 +55,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .white
+        backgroundColor = AppColor.primaryBackground.color
     }
     
     func setup(with model: AutoSyncModel, delegate: AutoSyncCellDelegate?) {

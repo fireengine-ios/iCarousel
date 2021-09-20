@@ -28,7 +28,7 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
         super.awakeFromNib()
 
         isAccessibilityElement = true
-        backgroundColor = .white
+        backgroundColor = AppColor.primaryBackground.color
     }
     
     func setup(with model: AutoSyncModel, delegate: AutoSyncCellDelegate?) {

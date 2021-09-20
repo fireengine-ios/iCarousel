@@ -32,7 +32,7 @@ class ErrorBannerView: UIView {
     private let underlineLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = ColorConstants.profileGrayColor.cgColor
+        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
         
         return newValue
     }()

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectQuestionViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectQuestionViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundView" destination="i5M-Pr-FkT" id="Hs7-O9-Dj5"/>
                 <outlet property="contentView" destination="Y0Z-rU-Ldu" id="QJj-uU-5lT"/>
@@ -26,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y0Z-rU-Ldu">
-                    <rect key="frame" x="14" y="108" width="347" height="471"/>
+                    <rect key="frame" x="14" y="88" width="347" height="491"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LcT-Yx-5r9">
                             <rect key="frame" x="0.0" y="0.0" width="347" height="61"/>
@@ -50,13 +49,13 @@
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uha-fL-WBr">
                                     <rect key="frame" x="0.0" y="60" width="347" height="1"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="BY0-zP-VNT"/>
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="wCW-BU-nvH" secondAttribute="trailing" constant="16" id="83t-is-dkj"/>
                                 <constraint firstItem="wCW-BU-nvH" firstAttribute="centerY" secondItem="4uK-kE-HdF" secondAttribute="centerY" id="PZT-MU-yMk"/>
@@ -70,7 +69,7 @@
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nJP-mf-itX">
-                            <rect key="frame" x="0.0" y="61" width="347" height="410"/>
+                            <rect key="frame" x="0.0" y="61" width="347" height="430"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                     </subviews>
@@ -86,6 +85,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="hWg-ok-0ZM"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="hWg-ok-0ZM" firstAttribute="trailing" secondItem="Y0Z-rU-Ldu" secondAttribute="trailing" constant="14" id="9MU-RR-bGc"/>
@@ -93,11 +93,13 @@
                 <constraint firstItem="Y0Z-rU-Ldu" firstAttribute="top" secondItem="hWg-ok-0ZM" secondAttribute="top" constant="88" id="Sos-hC-T88"/>
                 <constraint firstItem="hWg-ok-0ZM" firstAttribute="bottom" secondItem="Y0Z-rU-Ldu" secondAttribute="bottom" constant="88" id="Woo-1f-Y37"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="hWg-ok-0ZM"/>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
     </objects>
     <resources>
         <image name="grayCloseButton" width="17" height="17"/>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

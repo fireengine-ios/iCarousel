@@ -19,7 +19,7 @@ final class PasswordView: UIView, NibInit {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
             newValue.setTitleColor(UIColor.lrTealish, for: .normal)
             newValue.setTitleColor(UIColor.lrTealish.lighter(by: 30), for: .highlighted)
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
@@ -28,7 +28,7 @@ final class PasswordView: UIView, NibInit {
         willSet {
             newValue.textColor = UIColor.lrTealish
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
@@ -38,7 +38,7 @@ final class PasswordView: UIView, NibInit {
             newValue.textColor = ColorConstants.textOrange
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
             newValue.isHidden = true
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.numberOfLines = 0
         }
@@ -58,7 +58,7 @@ final class PasswordView: UIView, NibInit {
             newValue.isSecureTextEntry = true
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }

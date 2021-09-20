@@ -18,7 +18,7 @@ final class CaptchaView: UIView, FromNib {
         willSet {
             newValue.isExclusiveTouch = true
             newValue.tintColor = ColorConstants.darkText
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.accessibilityLabel = TextConstants.captchaSound
         }
@@ -28,7 +28,7 @@ final class CaptchaView: UIView, FromNib {
         willSet {
             newValue.isExclusiveTouch = true
             newValue.tintColor = ColorConstants.darkText
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.accessibilityLabel = TextConstants.captchaRefresh
         }
@@ -40,7 +40,7 @@ final class CaptchaView: UIView, FromNib {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
             newValue.numberOfLines = 0
             newValue.isHidden = true
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
@@ -50,7 +50,7 @@ final class CaptchaView: UIView, FromNib {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = UIColor.black
             newValue.borderStyle = .none
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.quickDismissPlaceholder = TextConstants.captchaAnswerPlaceholder
             
@@ -70,7 +70,7 @@ final class CaptchaView: UIView, FromNib {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = AppColor.itemSeperator.color
             newValue.isOpaque = true
         }
     }

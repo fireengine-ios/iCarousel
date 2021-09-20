@@ -46,9 +46,9 @@ class ProfileTextEnterView: UIView {
         return newValue
     }()
     
-    var underlineColor = ColorConstants.lightGrayColor {
+    var underlineColor = AppColor.itemSeperator.color {
         didSet {
-            underlineLayer.backgroundColor = underlineColor.cgColor
+            underlineLayer.backgroundColor = underlineColor?.cgColor
         }
     }
     
@@ -102,7 +102,7 @@ class ProfileTextEnterView: UIView {
     
     private func setupUnderline() {
         layer.addSublayer(underlineLayer)
-        underlineLayer.backgroundColor = underlineColor.cgColor
+        underlineLayer.backgroundColor = underlineColor?.cgColor
     }
     
     override func layoutSubviews() {
