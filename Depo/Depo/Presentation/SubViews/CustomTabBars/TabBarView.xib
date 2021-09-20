@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,6 @@
                 <outlet property="mainContentView" destination="FJl-Cl-AGP" id="bHk-JG-24y"/>
                 <outlet property="musicBar" destination="W0f-ko-odc" id="s5m-3f-Nav"/>
                 <outlet property="musicBarHeightConstraint" destination="oLW-8y-KOm" id="Xal-XQ-eOu"/>
-                <outlet property="plusButtonHeightConstraint" destination="eNR-wi-msA" id="BjE-qO-7Pk"/>
                 <outlet property="plussButton" destination="HTg-Qb-BHM" id="xi3-JD-RNS"/>
                 <outlet property="tabBar" destination="Pdh-iF-uTx" id="M3i-be-cg9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="mau-IS-hKw"/>
@@ -56,10 +55,9 @@
                             <color key="selectedImageTintColor" red="0.2666666667" green="0.80000000000000004" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
                         </tabBar>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTg-Qb-BHM">
-                            <rect key="frame" x="176.66666666666666" y="791" width="61" height="61"/>
+                            <rect key="frame" x="175" y="789.66666666666663" width="64" height="64"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="61" id="eNR-wi-msA"/>
-                                <constraint firstAttribute="width" secondItem="HTg-Qb-BHM" secondAttribute="height" multiplier="1:1" id="f7a-6k-dTO"/>
+                                <constraint firstAttribute="width" secondItem="HTg-Qb-BHM" secondAttribute="height" multiplier="1:1" id="bBY-Vf-F58"/>
                             </constraints>
                             <state key="normal" image="CenterButton"/>
                             <state key="disabled" image="CenterButton"/>
@@ -85,9 +83,9 @@
                         <constraint firstAttribute="trailing" secondItem="i0i-at-wPy" secondAttribute="trailing" id="NOK-Ih-oLn"/>
                         <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="Pdh-iF-uTx" secondAttribute="bottom" id="Nv2-yE-i9E"/>
                         <constraint firstAttribute="trailing" secondItem="JJb-a8-a7O" secondAttribute="trailing" id="XYr-Mr-BUR"/>
-                        <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="HTg-Qb-BHM" secondAttribute="bottom" constant="10" id="fwk-B8-P1O"/>
                         <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="iee-hk-ssn"/>
                         <constraint firstItem="W0f-ko-odc" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="rlX-hu-WYO"/>
+                        <constraint firstItem="HTg-Qb-BHM" firstAttribute="centerY" secondItem="Pdh-iF-uTx" secondAttribute="centerY" constant="-16" id="svs-xm-Ams"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="uSv-rF-MBk"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="JJb-a8-a7O" secondAttribute="bottom" id="x9l-7e-uAY"/>
                     </constraints>
