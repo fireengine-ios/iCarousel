@@ -40,7 +40,7 @@ final class TermsDescriptionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.primaryBackground.color
         setupLayout()
         textView.attributedText = textToPresent.htmlAttributedForPrivacyPolicy(using: UIFont.TurkcellSaturaFont(size: 15))
         setTitle(withString: TextConstants.termsOfUseCell)

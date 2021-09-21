@@ -49,6 +49,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <connections>
                 <outlet property="connectedAs" destination="G0y-K7-T3w" id="xxh-N2-HSn"/>
                 <outlet property="removeConnectionButton" destination="zRE-7X-zPX" id="ypk-S4-yQj"/>

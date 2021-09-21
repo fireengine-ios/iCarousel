@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="View" customClass="PermissionsView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="View" customClass="PermissionsView" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="362" height="130"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -30,20 +31,20 @@
                     <rect key="frame" x="13" y="22" width="331" height="87"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-pQ-DLc" userLabel="Title Label">
-                            <rect key="frame" x="0.0" y="0.0" width="331" height="19"/>
+                            <rect key="frame" x="0.0" y="0.0" width="331" height="21"/>
                             <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOm-67-OGW" userLabel="In Progress Label">
-                            <rect key="frame" x="0.0" y="36" width="331" height="17"/>
+                            <rect key="frame" x="0.0" y="38" width="331" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0l-s5-sKr" userLabel="Description View" customClass="IntrinsicEmptiableTextView" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="70" width="331" height="17"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0l-s5-sKr" userLabel="Description View" customClass="IntrinsicEmptiableTextView" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="72" width="331" height="15"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
@@ -56,7 +57,8 @@
                     </connections>
                 </switch>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="3sh-JM-h47" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="22" id="7H3-ZZ-hhG"/>
                 <constraint firstItem="3sh-JM-h47" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="Hno-nb-LLo"/>
@@ -69,7 +71,6 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZWH-sE-qE0" secondAttribute="bottom" constant="5" id="zYD-Mg-7cO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="descriptionView" destination="q0l-s5-sKr" id="dn9-ue-qhe"/>
                 <outlet property="inProgressLabel" destination="YOm-67-OGW" id="SNL-og-av6"/>
@@ -78,7 +79,7 @@
             </connections>
             <point key="canvasLocation" x="118" y="-35"/>
         </view>
-        <customObject id="2Cb-Ii-y0R" customClass="PermissionsDesigner" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <customObject id="2Cb-Ii-y0R" customClass="PermissionsDesigner" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionView" destination="q0l-s5-sKr" id="Utn-Ue-a50"/>
                 <outlet property="informativeLabel" destination="YOm-67-OGW" id="g9j-Rd-qAt"/>
@@ -86,4 +87,9 @@
             </connections>
         </customObject>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
