@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "ara-paket.png",
       "idiom" : "universal",
-      "filename" : "additionalDataIcon.png",
       "scale" : "1x"
     },
     {
+      "filename" : "ara-paket@2x.png",
       "idiom" : "universal",
-      "filename" : "additionalDataIcon@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "ara-paket@3x.png",
       "idiom" : "universal",
-      "filename" : "additionalDataIcon@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

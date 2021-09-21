@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UsageInfoViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UsageInfoViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="cardDividerView" destination="Hoh-lq-JJ0" id="22K-gK-WWe"/>
                 <outlet property="cardTitleLabel" destination="zCd-tG-iD6" id="Ilq-sE-FkQ"/>
@@ -43,7 +44,7 @@
                                     <rect key="frame" x="20" y="20" width="280" height="292.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCd-tG-iD6">
-                                            <rect key="frame" x="119" y="15.5" width="42" height="20.5"/>
+                                            <rect key="frame" x="119.5" y="15.5" width="41.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -58,46 +59,46 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="w5g-F2-lD5">
                                             <rect key="frame" x="184" y="60.5" width="80" height="224"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSU-TI-g9H" customClass="MediaUsageInfoView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FSU-TI-g9H" customClass="MediaUsageInfoView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" constant="40" id="9Lz-Th-sNu"/>
                                                         <constraint firstAttribute="width" priority="750" constant="80" id="cca-cB-1fw"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjV-2A-Z1m" customClass="MediaUsageInfoView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjV-2A-Z1m" customClass="MediaUsageInfoView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="58" width="80" height="50"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="au8-zM-4sd" customClass="MediaUsageInfoView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="au8-zM-4sd" customClass="MediaUsageInfoView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="116" width="80" height="50"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bH7-o8-65T" customClass="MediaUsageInfoView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bH7-o8-65T" customClass="MediaUsageInfoView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="174" width="80" height="50"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
                                             </subviews>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJO-yh-PZ4" userLabel="anchorView">
                                             <rect key="frame" x="0.0" y="146.5" width="184" height="0.0"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="secondaryBackground"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" id="9aU-dB-sPJ"/>
                                             </constraints>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="233-zS-mG1" customClass="CircleProgressView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="233-zS-mG1" customClass="CircleProgressView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="42.5" y="76" width="99" height="99.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MM4-r5-G8O">
-                                                    <rect key="frame" x="28.5" y="39.5" width="42" height="20.5"/>
+                                                    <rect key="frame" x="29" y="39.5" width="41.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="secondaryBackground"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="120" id="5iT-qD-Xmj"/>
                                                 <constraint firstItem="MM4-r5-G8O" firstAttribute="top" relation="greaterThanOrEqual" secondItem="233-zS-mG1" secondAttribute="top" constant="10" id="JFD-ax-hlT"/>
@@ -113,12 +114,12 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAY-h1-IHk">
-                                            <rect key="frame" x="71" y="191.5" width="42" height="20.5"/>
+                                            <rect key="frame" x="71.5" y="191.5" width="41.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4Z-ml-26Z" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g4Z-ml-26Z" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="69" y="226" width="46" height="42.5"/>
                                             <state key="normal" title="Button"/>
                                             <connections>
@@ -126,7 +127,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                    <color key="backgroundColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                     <constraints>
                                         <constraint firstItem="Hoh-lq-JJ0" firstAttribute="leading" secondItem="86a-vy-LJt" secondAttribute="leading" id="36C-nk-fuu"/>
                                         <constraint firstItem="HAY-h1-IHk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="86a-vy-LJt" secondAttribute="leading" constant="8" id="4Le-35-dJo"/>
@@ -155,14 +156,14 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ch-Rq-Ujd">
-                                    <rect key="frame" x="139" y="336.5" width="42" height="20.5"/>
+                                    <rect key="frame" x="139.5" y="336.5" width="41.5" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yOR-rn-7FZ">
                                     <rect key="frame" x="20" y="381" width="280" height="120"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="120" id="dfX-9x-QIo"/>
                                     </constraints>
@@ -174,13 +175,13 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="UtI-JC-Ius">
-                                    <rect key="frame" x="140.5" y="519" width="39" height="10"/>
+                                    <rect key="frame" x="99.5" y="519" width="121.5" height="10"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="10" id="k0T-xl-QZJ"/>
                                     </constraints>
                                 </pageControl>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstItem="7ch-Rq-Ujd" firstAttribute="top" secondItem="86a-vy-LJt" secondAttribute="bottom" constant="24" id="5mF-Am-mLs"/>
                                 <constraint firstItem="yOR-rn-7FZ" firstAttribute="centerX" secondItem="jfO-Wo-Vhr" secondAttribute="centerX" id="6PJ-9c-Yqe"/>
@@ -205,7 +206,8 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="AWx-Un-Krj"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="QwK-nW-tTy" firstAttribute="leading" secondItem="KVi-YJ-nHo" secondAttribute="leading" id="9lm-6B-dF4"/>
                 <constraint firstAttribute="trailing" secondItem="QwK-nW-tTy" secondAttribute="trailing" id="HjW-D6-uGl"/>
@@ -215,8 +217,18 @@
                 <constraint firstItem="AWx-Un-Krj" firstAttribute="bottom" secondItem="QwK-nW-tTy" secondAttribute="bottom" id="kog-95-4Xk"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-            <viewLayoutGuide key="safeArea" id="AWx-Un-Krj"/>
             <point key="canvasLocation" x="-705" y="171.25"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="scrollViewTexturedBackgroundColor">
+            <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

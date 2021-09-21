@@ -42,7 +42,7 @@ final class SubscriptionFeaturesView: UIView {
     
     private lazy var dividerLineView: UIView = {
         let newValue = UIView()
-        newValue.backgroundColor = ColorConstants.lightGrayColor
+        newValue.backgroundColor = AppColor.itemSeperator.color
         return  newValue
     }()
     

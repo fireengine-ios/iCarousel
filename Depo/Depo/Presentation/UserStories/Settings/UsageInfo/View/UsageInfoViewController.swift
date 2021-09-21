@@ -14,7 +14,7 @@ final class UsageInfoViewController: ViewController {
     //MARK: IBOutlet
     @IBOutlet private weak var cardView: UIView! {
         didSet {
-            cardView.backgroundColor = .white
+            cardView.backgroundColor = AppColor.secondaryBackground.color
             cardView.layer.cornerRadius = NumericConstants.usageInfoCardCornerRadius
             cardView.layer.shadowRadius = NumericConstants.usageInfoCardShadowRadius
             cardView.layer.shadowOpacity = NumericConstants.usageInfoCardShadowOpacity
@@ -35,7 +35,7 @@ final class UsageInfoViewController: ViewController {
     
     @IBOutlet private weak var cardDividerView: UIView! {
         didSet {
-            cardDividerView.backgroundColor = ColorConstants.photoCell
+            cardDividerView.backgroundColor = AppColor.itemSeperator.color
         }
     }
 

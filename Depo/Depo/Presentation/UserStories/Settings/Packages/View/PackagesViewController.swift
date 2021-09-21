@@ -69,7 +69,7 @@ final class PackagesViewController: BaseViewController {
         activityManager.delegate = self
         cardsTableView.delegate = self
         cardsTableView.dataSource = self
-        self.view.backgroundColor = ColorConstants.fileGreedCellColor
+        self.view.backgroundColor = ColorConstants.fileGreedCellColorSecondary
         output.viewIsReady()
         
     }

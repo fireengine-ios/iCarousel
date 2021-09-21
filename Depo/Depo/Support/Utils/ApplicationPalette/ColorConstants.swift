@@ -34,6 +34,7 @@ struct ColorConstants {
     static let selectedCellBlueColor = UIColor(named: "selectedCellBlueColor")!
     static let selectedBottomBarButtonColor = UIColor(named: "selectedBottomBarButtonColor")!
     static let fileGreedCellColor = UIColor(named: "fileGreedCellColor")!
+    static let fileGreedCellColorSecondary = UIColor(named: "fileGreedCellColorSecondary")!
     static let darkBlueColor = UIColor(named: "darkBlueColor")!
     static let searchBarColor = UIColor(named: "searchBarColor")!
     static let searchShadowColor = UIColor(named: "searchShadowColor")!
