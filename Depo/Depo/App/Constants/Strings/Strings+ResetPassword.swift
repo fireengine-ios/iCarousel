@@ -25,6 +25,8 @@ extension Strings {
         case resetPasswordButtonTitle            = "forgotMyPassword_reset_button"
         case resetPasswordChallenge1Header       = "forgotMyPassword_challange1_header"
         case resetPasswordChallenge1Body         = "forgotMyPassword_challange1_body"
+        case resetPasswordChallenge2Header       = "forgotMyPassword_challange2_header"
+        case resetPasswordChallenge2Body         = "forgotMyPassword_challange2_body"
         case resetPasswordPhoneNumber            = "forgotMyPassword_phone_number"
         case resetPasswordMail                   = "forgotMyPassword_mail"
         case resetPasswordRecoveryMail           = "forgotMyPassword_recovery_mail"

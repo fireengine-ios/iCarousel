@@ -10,14 +10,18 @@ import Foundation
 
 protocol ResetPasswordServiceDelegate: AnyObject {
     func resetPasswordService(_ service: ResetPasswordService,
-                              receivedVerificationMethods methods: [IdentityVerificationMethod])
-    func resetPasswordService(_ service: ResetPasswordService, verifiedWithMethod method: IdentityVerificationMethod)
+                              resetBeganWithMethods methods: [IdentityVerificationMethod])
+    func resetPasswordService(_ service: ResetPasswordService, readyToProceedWithMethod method: IdentityVerificationMethod)
+    func resetPasswordService(_ service: ResetPasswordService, receivedOTPResponse response: ResetPasswordResponse)
+    func resetPasswordService(_ service: ResetPasswordService, phoneVerified newMethods: [IdentityVerificationMethod])
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error)
 }
 
 extension ResetPasswordServiceDelegate {
     func resetPasswordService(_ service: ResetPasswordService,
-                              receivedVerificationMethods methods: [IdentityVerificationMethod]) {}
-    func resetPasswordService(_ service: ResetPasswordService, verifiedWithMethod method: IdentityVerificationMethod) {}
+                              resetBeganWithMethods methods: [IdentityVerificationMethod]) {}
+    func resetPasswordService(_ service: ResetPasswordService, readyToProceedWithMethod method: IdentityVerificationMethod) {}
+    func resetPasswordService(_ service: ResetPasswordService, receivedOTPResponse response: ResetPasswordResponse) {}
+    func resetPasswordService(_ service: ResetPasswordService, phoneVerified newMethods: [IdentityVerificationMethod]) {}
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {}
 }

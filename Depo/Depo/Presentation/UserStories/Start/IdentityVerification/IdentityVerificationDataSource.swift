@@ -18,7 +18,7 @@ final class IdentityVerificationDataSource: NSObject {
     }
 
     var selectedMethod: IdentityVerificationMethod? {
-        guard let index = tableView?.indexPathForSelectedRow?.item else {
+        guard let index = tableView?.indexPathForSelectedRow?.item, index < availableMethods.count else {
             return nil
         }
 

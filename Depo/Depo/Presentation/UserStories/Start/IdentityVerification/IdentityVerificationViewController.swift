@@ -44,9 +44,9 @@ final class IdentityVerificationViewController: BaseViewController {
     @IBAction private func continueButtonTapped() {
         guard let selectedMethod = dataSource.selectedMethod else { return }
 
+        showSpinner()
         resetPasswordService.delegate = self
         resetPasswordService.proceedVerification(with: selectedMethod)
-        showSpinner()
     }
 
     private func showLinkSentToEmailPopupAndExit(email: String) {
@@ -61,18 +61,25 @@ final class IdentityVerificationViewController: BaseViewController {
 
         present(popup, animated: true)
     }
+
+    private func navigateToOTP(phoneNumber: String) {
+        let viewController = ResetPasswordOTPModuleInitializer.viewController(
+            resetPasswordService: resetPasswordService, phoneNumber: phoneNumber
+        )
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 extension IdentityVerificationViewController: ResetPasswordServiceDelegate {
-    func resetPasswordService(_ service: ResetPasswordService, verifiedWithMethod method: IdentityVerificationMethod) {
+    func resetPasswordService(_ service: ResetPasswordService, readyToProceedWithMethod method: IdentityVerificationMethod) {
         hideSpinner()
         switch method {
         case let .email(email):
             showLinkSentToEmailPopupAndExit(email: email)
         case let .recoveryEmail(email):
             showLinkSentToEmailPopupAndExit(email: email)
-        case .sms:
-            break
+        case let .sms(phoneNumber):
+            navigateToOTP(phoneNumber: phoneNumber)
         case .securityQuestion:
             break
         case .unknown:
@@ -90,11 +97,11 @@ private extension IdentityVerificationViewController {
     func setupHeader() {
         titleLabel.textColor = .lrTealishTwo
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        titleLabel.text = localized(.resetPasswordChallenge1Header)
 
         descriptionLabel.textColor = ColorConstants.textGrayColor
         descriptionLabel.font = UIFont.TurkcellSaturaFont(size: 18)
-        descriptionLabel.text = localized(.resetPasswordChallenge1Body)
+
+        setupTitleAndDescription()
 
         tableHeaderView.frame.size = tableHeaderView.systemLayoutSizeFitting(
             CGSize(width: view.frame.width, height: 0),
@@ -102,6 +109,16 @@ private extension IdentityVerificationViewController {
             verticalFittingPriority: .defaultLow
         )
         tableView.tableHeaderView = tableHeaderView
+    }
+
+    func setupTitleAndDescription() {
+        if resetPasswordService.isInSecondChallenge {
+            titleLabel.text = localized(.resetPasswordChallenge2Header)
+            descriptionLabel.text = localized(.resetPasswordChallenge2Body)
+        } else {
+            titleLabel.text = localized(.resetPasswordChallenge1Header)
+            descriptionLabel.text = localized(.resetPasswordChallenge1Body)
+        }
     }
 
     func setupContinueButton() {

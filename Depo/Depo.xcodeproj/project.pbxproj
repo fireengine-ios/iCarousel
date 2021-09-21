@@ -305,6 +305,22 @@
 		07AC65FA26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
 		07AC65FB26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
 		07AC65FC26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
+		07D0592E26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */; };
+		07D0592F26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */; };
+		07D0593026F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */; };
+		07D0593126F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */; };
+		07D0593A26F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0593926F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift */; };
+		07D0593B26F9BE4D005315E2 /* ResetPasswordOTPInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0593926F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift */; };
+		07D0593C26F9BE4D005315E2 /* ResetPasswordOTPInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0593926F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift */; };
+		07D0593D26F9BE4D005315E2 /* ResetPasswordOTPInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0593926F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift */; };
+		07D0593F26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0593E26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift */; };
+		07D0594026F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0593E26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift */; };
+		07D0594126F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0593E26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift */; };
+		07D0594226F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0593E26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift */; };
+		07D0594426F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0594326F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift */; };
+		07D0594526F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0594326F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift */; };
+		07D0594626F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0594326F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift */; };
+		07D0594726F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D0594326F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift */; };
 		07FBA20526E0BBA800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
 		07FBA20626E0BBA800ED4132 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20426E0BBA800ED4132 /* Strings.swift */; };
 		07FBA20826E0BBB100ED4132 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA20726E0BBB100ED4132 /* Localizable.swift */; };
@@ -1763,7 +1779,7 @@
 		8C23F2952286EF5200C5BF9E /* SimpleSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C23F2932286EF5200C5BF9E /* SimpleSliderCell.swift */; };
 		8C26008822919AAD0063E913 /* SecurityCodeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C26008622919AAC0063E913 /* SecurityCodeTextField.swift */; };
 		8C26009F22919DCC0063E913 /* ProfileTextViewEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C26009022919DCB0063E913 /* ProfileTextViewEnterView.swift */; };
-		8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
+		8C2600A42291E2320063E913 /* PhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationViewController.xib */; };
 		8C286C4A232134080061EA20 /* SpotifyAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */; };
 		8C286C4B232134090061EA20 /* SpotifyAccountConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73B4076F22E9BEDB0033D317 /* SpotifyAccountConnectionCell.swift */; };
 		8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECD4E4B1FDFD69400978BE7 /* PopUpController.xib */; };
@@ -1923,7 +1939,7 @@
 		8C4780A4228D7BD5003EE471 /* LifeBoxModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */; };
 		8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */; };
 		8C49817523165B16007015CF /* TermsCheckboxTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077422E9C0E10033D317 /* TermsCheckboxTextView.xib */; };
-		8C49817623165B5E007015CF /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
+		8C49817623165B5E007015CF /* PhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationViewController.xib */; };
 		8C49817723165B5E007015CF /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208662228D4B60000BEDAD /* EmptyDataView.xib */; };
 		8C6A1DCC2317EAEC00D792B9 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8C6A1DCB2317EAEB00D792B9 /* container */; };
 		8C73CFD6208265D200B66E64 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
@@ -6713,7 +6729,7 @@
 		CF8B6A6323CBC9D70021B021 /* SpotifyImportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 989BDE3422F47B1E001DDEB2 /* SpotifyImportViewController.xib */; };
 		CF8B6A6423CBC9D70021B021 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
 		CF8B6A6723CBC9D70021B021 /* BaseEmailVerificationPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 890F736E22EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib */; };
-		CF8B6A6A23CBC9D70021B021 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
+		CF8B6A6A23CBC9D70021B021 /* PhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationViewController.xib */; };
 		CF8B6A6B23CBC9D70021B021 /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
 		CF8B6A7223CBC9D70021B021 /* SupportFormController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17589F6E2276336700A5DB37 /* SupportFormController.xib */; };
 		CF8B6A7323CBC9D70021B021 /* PasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5921D722564465005882CE /* PasswordView.xib */; };
@@ -8053,7 +8069,7 @@
 		CF8B706E23CBCA280021B021 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1E8E19CAC9F400FD1E03 /* libz.dylib */; };
 		CF8B706F23CBCA280021B021 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56E0DD620B414510082044D /* StoreKit.framework */; };
 		CF8B707023CBCA280021B021 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051E1DF819CAC2F900FD1E03 /* CoreGraphics.framework */; };
-		CF8B707423CBCA280021B021 /* PhoneVerificationScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */; };
+		CF8B707423CBCA280021B021 /* PhoneVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2600A22291E2310063E913 /* PhoneVerificationViewController.xib */; };
 		CF8B707523CBCA280021B021 /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208662228D4B60000BEDAD /* EmptyDataView.xib */; };
 		CF8B707623CBCA280021B021 /* PremiumListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20CDBA4219D634600CA9A67 /* PremiumListView.xib */; };
 		CF8B707B23CBCA280021B021 /* InstapickAnalysisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984A515C21E88D64004525F5 /* InstapickAnalysisCell.xib */; };
@@ -8880,6 +8896,10 @@
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmailFieldView.swift; sourceTree = "<group>"; };
 		07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityAPIService.swift; sourceTree = "<group>"; };
+		07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPInteractor.swift; sourceTree = "<group>"; };
+		07D0593926F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPInitializer.swift; sourceTree = "<group>"; };
+		07D0593E26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPConfigurator.swift; sourceTree = "<group>"; };
+		07D0594326F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPPresenter.swift; sourceTree = "<group>"; };
 		07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewOutput.swift; sourceTree = "<group>"; };
 		07FBA20426E0BBA800ED4132 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		07FBA20726E0BBB100ED4132 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -9660,7 +9680,7 @@
 		8C23F2932286EF5200C5BF9E /* SimpleSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSliderCell.swift; sourceTree = "<group>"; };
 		8C26008622919AAC0063E913 /* SecurityCodeTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityCodeTextField.swift; sourceTree = "<group>"; };
 		8C26009022919DCB0063E913 /* ProfileTextViewEnterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTextViewEnterView.swift; sourceTree = "<group>"; };
-		8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneVerificationScreen.xib; sourceTree = "<group>"; };
+		8C2600A22291E2310063E913 /* PhoneVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhoneVerificationViewController.xib; sourceTree = "<group>"; };
 		8C32AFD51F1367E60098083A /* LoginPhoneMailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginPhoneMailCell.xib; sourceTree = "<group>"; };
 		8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-ent.plist"; sourceTree = "<group>"; };
 		8C3930EE2100668300C1D82D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -11697,6 +11717,41 @@
 				0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */,
 			);
 			path = ResetPasswordService;
+			sourceTree = "<group>";
+		};
+		07D0593526F9BD65005315E2 /* ResetPasswordOTP */ = {
+			isa = PBXGroup;
+			children = (
+				07D0593826F9BDE4005315E2 /* Presenter */,
+				07D0593726F9BD9B005315E2 /* Interactor */,
+				07D0593626F9BD93005315E2 /* Configurator */,
+			);
+			path = ResetPasswordOTP;
+			sourceTree = "<group>";
+		};
+		07D0593626F9BD93005315E2 /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				07D0593926F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift */,
+				07D0593E26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		07D0593726F9BD9B005315E2 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		07D0593826F9BDE4005315E2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				07D0594326F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		07FBA20026E0BB9900ED4132 /* Strings */ = {
@@ -18330,6 +18385,7 @@
 				730A996E22D71D120037ABA9 /* TwoFactorAuthentication */,
 				8918540622DDEFB900AAB818 /* TwoFactorChallenge */,
 				0791815A26F88AB10067FB75 /* IdentityVerification */,
+				07D0593526F9BD65005315E2 /* ResetPasswordOTP */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -19845,11 +19901,11 @@
 		DB8AB1D5D0B50391175D8FE3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8C2600A22291E2310063E913 /* PhoneVerificationScreen.xib */,
 				8CFA9DC41EF42635004B0FD9 /* SmartTimerLabel.swift */,
 				8D1A269DABB161276D407E88 /* PhoneVerificationViewInput.swift */,
 				F39582799B29F58A62C1236E /* PhoneVerificationViewOutput.swift */,
 				D9A02B1046915E8086459A15 /* PhoneVerificationViewController.swift */,
+				8C2600A22291E2310063E913 /* PhoneVerificationViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -20865,7 +20921,7 @@
 				989BDE5622F47B1E001DDEB2 /* SpotifyImportViewController.xib in Resources */,
 				9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
 				890F737322EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */,
-				8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */,
+				8C2600A42291E2320063E913 /* PhoneVerificationViewController.xib in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
 				9842FB8D2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				17589F792276336800A5DB37 /* SupportFormController.xib in Resources */,
@@ -21085,7 +21141,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C49817623165B5E007015CF /* PhoneVerificationScreen.xib in Resources */,
+				8C49817623165B5E007015CF /* PhoneVerificationViewController.xib in Resources */,
 				8C49817723165B5E007015CF /* EmptyDataView.xib in Resources */,
 				CE784CC422A685FB00662219 /* PremiumListView.xib in Resources */,
 				CE784CC922A685FB00662219 /* InstapickAnalysisCell.xib in Resources */,
@@ -21668,7 +21724,7 @@
 				98231A1824F3A1E700FD16E2 /* SelectionMenuController.xib in Resources */,
 				9823198824F3A1E700FD16E2 /* ColorView.xib in Resources */,
 				9862BC30255E6BF300D7945E /* FileInfoPeopleView.xib in Resources */,
-				CF8B6A6A23CBC9D70021B021 /* PhoneVerificationScreen.xib in Resources */,
+				CF8B6A6A23CBC9D70021B021 /* PhoneVerificationViewController.xib in Resources */,
 				CF8B6A6B23CBC9D70021B021 /* AutoUploadIsOffPopUp.xib in Resources */,
 				3A134C672645535700CFC736 /* InvitedPeopleCollectionViewCell.xib in Resources */,
 				CF8B6A7223CBC9D70021B021 /* SupportFormController.xib in Resources */,
@@ -21787,7 +21843,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF8B707423CBCA280021B021 /* PhoneVerificationScreen.xib in Resources */,
+				CF8B707423CBCA280021B021 /* PhoneVerificationViewController.xib in Resources */,
 				CF8B707523CBCA280021B021 /* EmptyDataView.xib in Resources */,
 				9862BC6D255E895600D7945E /* FileInfoShareView.xib in Resources */,
 				CF8B707623CBCA280021B021 /* PremiumListView.xib in Resources */,
@@ -23521,6 +23577,7 @@
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
 				981617692578BA1D009F1C31 /* FirebaseAnalyticsActions.swift in Sources */,
 				0791817026F88AB20067FB75 /* IdentityVerificationDataSource.swift in Sources */,
+				07D0593A26F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift in Sources */,
 				8C0E8D571FDEBDFF00789C91 /* PackagesInitializer.swift in Sources */,
 				8C0E8D591FDEBDFF00789C91 /* BaseMediaContent.swift in Sources */,
 				8C0E8D5A1FDEBDFF00789C91 /* IntroduceSubView.swift in Sources */,
@@ -23813,6 +23870,7 @@
 				8C0E8DFD1FDEBDFF00789C91 /* HomePageInteractor.swift in Sources */,
 				8C20868C228D5386000BEDAD /* QuickScrollItems.swift in Sources */,
 				CE61D1C420468759001D01DC /* URL+Video.swift in Sources */,
+				07D0593F26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */,
 				8C0E8DFE1FDEBDFF00789C91 /* PhoneVerificationViewInput.swift in Sources */,
 				8C0E8DFF1FDEBDFF00789C91 /* SplitIpadViewContoller.swift in Sources */,
 				8C0E8E001FDEBDFF00789C91 /* InstagramService.swift in Sources */,
@@ -23965,6 +24023,7 @@
 				8C0E8E521FDEBDFF00789C91 /* OfferApple.swift in Sources */,
 				FA793D89201872E200A02B46 /* PlacesServiceResponse.swift in Sources */,
 				8C0E8E541FDEBDFF00789C91 /* ActivityTimelineSectionsBuider.swift in Sources */,
+				07D0592E26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				7326801524855248007E2CDF /* ExtandedTapAreaButton.swift in Sources */,
 				8C0E8E5B1FDEBDFF00789C91 /* PasscodeState.swift in Sources */,
 				8C0E8E5D1FDEBDFF00789C91 /* UserProfileConfigurator.swift in Sources */,
@@ -24614,6 +24673,7 @@
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
 				8C0E8FBB1FDEBDFF00789C91 /* FeedbackViewRouter.swift in Sources */,
 				92004B5B21AD136400582C45 /* MyStorageViewInput.swift in Sources */,
+				07D0594426F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
 				B51B8196254AECEB0072C6FA /* DocumentDownloadService.swift in Sources */,
 				98B047FB259314750011DAEB /* SyncRecord.m in Sources */,
 				A74ADA4C23A38360007DD192 /* CarouselPageModel.swift in Sources */,
@@ -25297,6 +25357,7 @@
 				8C1E5BDF22CB8C1D008FDA02 /* PhotoVideoBottomBarManager.swift in Sources */,
 				98625F2C2580FAAB008627F0 /* MBProgressHud+Extensions.swift in Sources */,
 				CE7848B122A685FB00662219 /* AutoSyncInitializer.swift in Sources */,
+				07D0594626F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
 				CE7848B222A685FB00662219 /* ManageContactsPresenter.swift in Sources */,
 				CE7848B422A685FB00662219 /* ResizableCollectionView.swift in Sources */,
 				CE7848B522A685FB00662219 /* HomePageRouter.swift in Sources */,
@@ -25324,6 +25385,7 @@
 				CE7848C522A685FB00662219 /* InstapickAlbumSelectionViewController.swift in Sources */,
 				F02F6AA2269C16C000A64ED8 /* PasswordRulesView.swift in Sources */,
 				CE7848C622A685FB00662219 /* LeavePremiumPresenter.swift in Sources */,
+				07D0593026F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				CE7848C722A685FB00662219 /* AutoSyncDataStorage.swift in Sources */,
 				CE7848C822A685FB00662219 /* PrintInitializer.swift in Sources */,
 				CE7848C922A685FB00662219 /* UserProfileInitializer.swift in Sources */,
@@ -25460,6 +25522,7 @@
 				CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */,
 				CE78492B22A685FB00662219 /* FaceImageAddNameRouter.swift in Sources */,
 				982E17C72417A67200B07707 /* AutoSyncCheckBox.swift in Sources */,
+				07D0593C26F9BE4D005315E2 /* ResetPasswordOTPInitializer.swift in Sources */,
 				CE78492C22A685FB00662219 /* BaseUserInputCellView.swift in Sources */,
 				8E7659862333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */,
 				CE78492D22A685FB00662219 /* PremiumRouterInput.swift in Sources */,
@@ -25644,6 +25707,7 @@
 				CE7849AE22A685FB00662219 /* GradientLoadingIndicator.swift in Sources */,
 				98231A9D24F3A23500FD16E2 /* ClarendonFilter.swift in Sources */,
 				CE7849AF22A685FB00662219 /* VisualMusicPlayerPresenter.swift in Sources */,
+				07D0594126F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */,
 				CFA9D42F2559EB3900C8F25D /* PrivateShareApiService.swift in Sources */,
 				CE7849B022A685FB00662219 /* IntrinsicTextView.swift in Sources */,
 				9845489C22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */,
@@ -27047,6 +27111,7 @@
 				0762029C269B842D00D4FB2C /* OverlayStickerSelectorDataSource.swift in Sources */,
 				CF8B64B523CBC9D70021B021 /* ManageContactsConfigurator.swift in Sources */,
 				CF8B64B623CBC9D70021B021 /* SuggestionTableSectionHeader.swift in Sources */,
+				07D0592F26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				CF8B64B723CBC9D70021B021 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				CF8B64B823CBC9D70021B021 /* ProtoInputTextCell.swift in Sources */,
 				CF8B64B923CBC9D70021B021 /* RemoteSearchService.swift in Sources */,
@@ -27737,6 +27802,7 @@
 				CF8B66E123CBC9D70021B021 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				CF8B66E223CBC9D70021B021 /* PhotoVideoDetailRouter.swift in Sources */,
 				CF8B66E323CBC9D70021B021 /* PhotoVideoDetailConfigurator.swift in Sources */,
+				07D0593B26F9BE4D005315E2 /* ResetPasswordOTPInitializer.swift in Sources */,
 				CF8B66E423CBC9D70021B021 /* SpotifyImportedTracksViewController.swift in Sources */,
 				CF71462924B597A800D83E60 /* ContactSyncViewController.swift in Sources */,
 				CF8B66E523CBC9D70021B021 /* TwoFactorChallengeInitializer.swift in Sources */,
@@ -27810,6 +27876,7 @@
 				CF8B672523CBC9D70021B021 /* LoginSettingsInteractorIO.swift in Sources */,
 				CF8B672823CBC9D70021B021 /* ResponseParser.swift in Sources */,
 				07AC65FA26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
+				07D0594026F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */,
 				CF8B672923CBC9D70021B021 /* SearchViewConfigurator.swift in Sources */,
 				CF8B672A23CBC9D70021B021 /* MusicInteractorOutput.swift in Sources */,
 				CF8B672B23CBC9D70021B021 /* RecentSearchesService.swift in Sources */,
@@ -28187,6 +28254,7 @@
 				CF8B685023CBC9D70021B021 /* AppWormholeListener.swift in Sources */,
 				CF8B685123CBC9D70021B021 /* PeopleService.swift in Sources */,
 				CF8B685223CBC9D70021B021 /* UploadFromLifeBoxRouter.swift in Sources */,
+				07D0594526F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
 				CF8B685323CBC9D70021B021 /* BaseViewController.swift in Sources */,
 				CF8B685423CBC9D70021B021 /* FreeAppSpacePresenter.swift in Sources */,
 				98231A5F24F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
@@ -28514,6 +28582,7 @@
 				98625F2D2580FAAB008627F0 /* MBProgressHud+Extensions.swift in Sources */,
 				CF8B6C0823CBCA280021B021 /* ResizableCollectionView.swift in Sources */,
 				CF8B6C0923CBCA280021B021 /* HomePageRouter.swift in Sources */,
+				07D0594726F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
 				CF8B6C0A23CBCA280021B021 /* CollectionViewCellForFaceImage.swift in Sources */,
 				CF8B6C0B23CBCA280021B021 /* CustomNavBarView.swift in Sources */,
 				CF8B6C0C23CBCA280021B021 /* CollectionViewCellForPhoto.swift in Sources */,
@@ -28541,6 +28610,7 @@
 				F02F6AA3269C16C000A64ED8 /* PasswordRulesView.swift in Sources */,
 				CF8B6C1D23CBCA280021B021 /* PrintInitializer.swift in Sources */,
 				CF8B6C1E23CBCA280021B021 /* UserProfileInitializer.swift in Sources */,
+				07D0593126F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				CF8B6C2023CBCA280021B021 /* BaseCellModel.swift in Sources */,
 				CF8B6C2123CBCA280021B021 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				0305A31D23D5C375004D1EC7 /* AlbumsSliderDataSource.swift in Sources */,
@@ -28677,6 +28747,7 @@
 				CF8B6C9223CBCA280021B021 /* SpotifyPlaylistViewController.swift in Sources */,
 				CF8B6C9323CBCA280021B021 /* LoginConfigurator.swift in Sources */,
 				CF8B6C9423CBCA280021B021 /* RouteRequests.swift in Sources */,
+				07D0593D26F9BE4D005315E2 /* ResetPasswordOTPInitializer.swift in Sources */,
 				982E17C82417A67200B07707 /* AutoSyncCheckBox.swift in Sources */,
 				CF8B6C9523CBCA280021B021 /* PackagesInitializer.swift in Sources */,
 				CF8B6C9623CBCA280021B021 /* UINavigationController+Push.swift in Sources */,
@@ -28861,6 +28932,7 @@
 				CF8B6D2423CBCA280021B021 /* SpotifyStatusView.swift in Sources */,
 				CF8B6D2523CBCA280021B021 /* AuthenticationServiceResponse.swift in Sources */,
 				98231A9E24F3A23500FD16E2 /* ClarendonFilter.swift in Sources */,
+				07D0594226F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift in Sources */,
 				CF8B6D2623CBCA280021B021 /* FullscreenTextController.swift in Sources */,
 				CFA9D4302559EB3A00C8F25D /* PrivateShareApiService.swift in Sources */,
 				CF8B6D2723CBCA280021B021 /* RegistrationInteractor.swift in Sources */,

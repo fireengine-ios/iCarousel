@@ -10,15 +10,23 @@ import Foundation
 import Alamofire
 
 protocol ResetPasswordServiceProtocol {
+    var isInSecondChallenge: Bool { get }
+
     func beginResetFlow(with params: ForgotPassword)
     func proceedVerification(with method: IdentityVerificationMethod)
+    func sendOTP()
+    func verifyOTP(code: String)
 }
 
 final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtocol {
+    typealias ResponseCompletion<R> = (Swift.Result<R, Error>) -> Void
+
     weak var delegate: ResetPasswordServiceDelegate?
 
     private let sessionManager = SessionManager.customDefault
     private var referenceToken: String?
+    private var latestReferenceToken: String?
+    private(set) var isInSecondChallenge: Bool = false
 
     func beginResetFlow(with params: ForgotPassword) {
         callForgotMyPassword(params: params) { result in
@@ -42,7 +50,7 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
             callSendEmail(referenceToken: referenceToken) { result in
                 switch result {
                 case .success:
-                    self.delegate?.resetPasswordService(self, verifiedWithMethod: method)
+                    self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
                 case let .failure(error):
                     self.delegate?.resetPasswordService(self, receivedError: error)
                 }
@@ -52,14 +60,14 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
             callSendRecoveryEmail(referenceToken: referenceToken) { result in
                 switch result {
                 case .success:
-                    self.delegate?.resetPasswordService(self, verifiedWithMethod: method)
+                    self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
                 case let .failure(error):
                     self.delegate?.resetPasswordService(self, receivedError: error)
                 }
             }
 
-        case let .sms(phoneNumber):
-            break
+        case .sms:
+            delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
 
         case let .securityQuestion(questionId):
             break
@@ -69,21 +77,61 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
         }
     }
 
+    func sendOTP() {
+        guard let referenceToken = self.latestReferenceToken else { return }
+        callSendSMS(referenceToken: referenceToken) { result in
+            switch result {
+            case let .success(response):
+                self.latestReferenceToken = response.referenceToken
+                self.delegate?.resetPasswordService(self, receivedOTPResponse: response)
+            case let .failure(error):
+                self.delegate?.resetPasswordService(self, receivedError: error)
+            }
+        }
+    }
+
+    func verifyOTP(code: String) {
+        guard let referenceToken = self.latestReferenceToken else { return }
+        callValidatePhoneNumber(referenceToken: referenceToken, otp: code) { result in
+            switch result {
+            case let .success(response):
+                self.isInSecondChallenge = true
+                self.latestReferenceToken = response.referenceToken
+                self.delegate?.resetPasswordService(self, phoneVerified: response.methods)
+            case let .failure(error):
+                self.delegate?.resetPasswordService(self, receivedError: error)
+            }
+        }
+    }
+
     private func handleFirstResponse(_ response: ResetPasswordResponse) {
         referenceToken = response.referenceToken
-        delegate?.resetPasswordService(self, receivedVerificationMethods: response.methods)
+        latestReferenceToken = response.referenceToken
+        delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
+    }
+
+    private func checkStatusAfterPhoneVerification(referenceToken: String) {
+        callCheckStatus(referenceToken: referenceToken) { result in
+            switch result {
+            case let .success(response):
+                self.isInSecondChallenge = true
+                self.latestReferenceToken = response.referenceToken
+                self.delegate?.resetPasswordService(self, phoneVerified: response.methods)
+            case let .failure(error):
+                self.delegate?.resetPasswordService(self, receivedError: error)
+            }
+        }
     }
 }
 
 // MARK: - API Calls
 private extension ResetPasswordService {
-    typealias ResponseCompletion<R> = (Swift.Result<R, Error>) -> Void
-
     func callForgotMyPassword(params: ForgotPassword,
                               completion: @escaping ResponseCompletion<ResetPasswordResponse>) {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
                 let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                print("referenceToken111", response.referenceToken)
                 completion(.success(response))
             } catch {
                 completion(.failure(error))
@@ -96,7 +144,7 @@ private extension ResetPasswordService {
     }
     
     func callSendEmail(referenceToken: String, completion: @escaping ResponseCompletion<Void>) {
-        let param = SendEmail(referenceToken: referenceToken)
+        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendEmail)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
             completion(.success(Void()))
         } fail: { error in
@@ -106,9 +154,57 @@ private extension ResetPasswordService {
     }
 
     func callSendRecoveryEmail(referenceToken: String, completion: @escaping ResponseCompletion<Void>) {
-        let param = SendRecoveryEmail(referenceToken: referenceToken)
+        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendRecoveryEmail)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
             completion(.success(Void()))
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
+    }
+
+    func callSendSMS(referenceToken: String, completion: @escaping ResponseCompletion<ResetPasswordResponse>) {
+        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendSMS)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
+            do {
+                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                print("referenceToken111", response.referenceToken)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
+    }
+
+    func callValidatePhoneNumber(referenceToken: String, otp: String, completion: @escaping ResponseCompletion<ResetPasswordResponse>) {
+        let param = ValidatePhoneNumber(token: referenceToken, otp: otp)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
+            do {
+                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                print("referenceToken111", response.referenceToken)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
+    }
+
+    func callCheckStatus(referenceToken: String, completion: @escaping ResponseCompletion<ResetPasswordResponse>) {
+        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.checkStatus)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
+            do {
+                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                print("referenceToken111", response.referenceToken)
+                completion(.success(response))
+            } catch {
+                completion(.failure(error))
+            }
         } fail: { error in
             completion(.failure(error))
         }
@@ -147,19 +243,20 @@ struct ForgotPassword: RequestParametrs {
     }
 }
 
-private struct SendEmail: RequestParametrs {
+private struct TokenInBody: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }
 
-    let referenceToken: String
+    let token: String
+    let url: URL
 
     var requestParametrs: Any {
-        return referenceToken
+        return token
     }
 
     var patch: URL {
-        return RouteRequests.ForgotMyPassword.sendEmail
+        return url
     }
 
     var header: RequestHeaderParametrs {
@@ -167,24 +264,28 @@ private struct SendEmail: RequestParametrs {
     }
 }
 
-private struct SendRecoveryEmail: RequestParametrs {
+private struct ValidatePhoneNumber: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }
 
-    let referenceToken: String
+    let token: String
+    let otp: String
 
     var requestParametrs: Any {
-        return referenceToken
+        let dict: [String: Any] = [
+            LbRequestkeys.referenceToken: token,
+            LbRequestkeys.otp: otp
+        ]
+
+        return dict
     }
 
     var patch: URL {
-        return RouteRequests.ForgotMyPassword.sendRecoveryEmail
+        return RouteRequests.ForgotMyPassword.validatePhoneNumber
     }
 
     var header: RequestHeaderParametrs {
         return RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
     }
 }
-
-

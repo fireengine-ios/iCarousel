@@ -58,7 +58,7 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
 }
 
 extension ForgotPasswordInteractor: ResetPasswordServiceDelegate {
-    func resetPasswordService(_ service: ResetPasswordService, receivedVerificationMethods methods: [IdentityVerificationMethod]) {
+    func resetPasswordService(_ service: ResetPasswordService, resetBeganWithMethods methods: [IdentityVerificationMethod]) {
         output.receivedVerificationMethods(methods)
     }
 

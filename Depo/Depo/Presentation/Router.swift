@@ -453,14 +453,11 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func phoneVerificationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
-        
-        let inicializer = PhoneVerificationModuleInitializer()
-        let controller = PhoneVerificationViewController(nibName: "PhoneVerificationScreen",
-                                                         bundle: nil)
-        inicializer.phoneverificationViewController = controller
-        inicializer.setupConfig(with: withSignUpSuccessResponse, userInfo: userInfo)
-        return controller
+    func phoneVerificationScreen(withSignUpSuccessResponse signupResponse: SignUpSuccessResponse,
+                                 userInfo: RegistrationUserInfoModel) -> UIViewController {
+
+        return PhoneVerificationModuleInitializer.viewController(signupResponse: signupResponse,
+                                                                 userInfo: userInfo)
     }
     
     // MARK: SyncContacts

@@ -117,6 +117,9 @@ struct RouteRequests {
         static let link = baseUrl +/ "account/forgotMyPassword"
         static let sendEmail = baseUrl +/ "forgotMyPassword/sendEmail"
         static let sendRecoveryEmail = baseUrl +/ "forgotMyPassword/sendRecoveryEmail"
+        static let sendSMS = baseUrl +/ "forgotMyPassword/sendSms"
+        static let validatePhoneNumber = baseUrl +/ "forgotMyPassword/validatePhoneNumber"
+        static let checkStatus = baseUrl +/ "forgotMyPassword/checkStatus"
     }
 
     // MARK: EULA 
