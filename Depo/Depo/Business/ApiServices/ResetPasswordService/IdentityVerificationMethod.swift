@@ -25,13 +25,13 @@ enum IdentityVerificationMethod: Codable {
         let method = try container.decode(String.self, forKey: .method)
         switch method {
         case "EMAIL":
-            let content = try container.decode(String.self, forKey: .method)
+            let content = try container.decode(String.self, forKey: .content)
             self = .email(email: content)
         case "RECOVERY_EMAIL":
-            let content = try container.decode(String.self, forKey: .method)
+            let content = try container.decode(String.self, forKey: .content)
             self = .recoveryEmail(email: content)
         case "SECURITY_QUESTION":
-            let content = try container.decode(Int.self, forKey: .method)
+            let content = try container.decode(Int.self, forKey: .content)
             self = .securityQuestion(id: content)
         case "MSISDN":
             let content = try container.decode(String.self, forKey: .content)
