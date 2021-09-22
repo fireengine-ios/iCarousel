@@ -71,7 +71,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" name="secondaryBackground"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstItem="123-jy-SZM" firstAttribute="leading" secondItem="TUv-BK-Opi" secondAttribute="leading" constant="16" id="8Zf-Pq-sRL"/>
                         <constraint firstItem="m10-qi-RS5" firstAttribute="centerY" secondItem="4km-Pn-fa4" secondAttribute="centerY" id="EIs-9W-rgQ"/>
@@ -88,7 +88,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" name="secondaryBackground"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="Qdn-zp-NC8" firstAttribute="trailing" secondItem="nWV-SG-vJL" secondAttribute="trailing" id="29t-2f-cVs"/>
                 <constraint firstItem="TUv-BK-Opi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gjW-Cx-S66" secondAttribute="bottom" constant="8" id="7HX-Ca-cgv"/>
@@ -124,7 +124,7 @@
     </objects>
     <resources>
         <image name="ic_arrow_down" width="24" height="24"/>
-        <namedColor name="secondaryBackground">
+        <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

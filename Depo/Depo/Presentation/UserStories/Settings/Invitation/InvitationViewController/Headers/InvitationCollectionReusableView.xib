@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -63,7 +63,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstItem="j1V-TZ-dmW" firstAttribute="leading" secondItem="Fop-Ds-zxt" secondAttribute="leading" id="1Ji-hl-HpZ"/>
                         <constraint firstAttribute="height" constant="55" id="7KO-ig-l2d"/>
@@ -133,7 +133,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstItem="9Mc-KV-aBE" firstAttribute="leading" secondItem="6o9-nY-LTr" secondAttribute="leading" constant="14" id="0Im-bV-Cxr"/>
                                 <constraint firstItem="txp-vE-2Ab" firstAttribute="leading" secondItem="9Mc-KV-aBE" secondAttribute="trailing" constant="2" id="0fW-PX-bSp"/>
@@ -169,7 +169,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="YZ6-eX-AOX" secondAttribute="bottom" id="AnP-96-Gcd"/>
                         <constraint firstAttribute="trailing" secondItem="mLh-FB-7nA" secondAttribute="trailing" constant="9" id="BMJ-vZ-mfX"/>
@@ -202,7 +202,7 @@
                         </label>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1no-pg-IUn">
                             <rect key="frame" x="8" y="53" width="329" height="71"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="71" id="xb2-2o-9ur"/>
                             </constraints>
@@ -236,7 +236,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="MPg-ef-BaO" secondAttribute="bottom" constant="14" id="0oM-pI-vBd"/>
                         <constraint firstItem="1no-pg-IUn" firstAttribute="top" secondItem="Sbg-c2-3IT" secondAttribute="bottom" constant="18" id="4Rh-kg-HbP"/>
@@ -266,7 +266,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="hjP-bf-eX3" secondAttribute="trailing" constant="9" id="23h-Pq-XBi"/>
                         <constraint firstItem="hjP-bf-eX3" firstAttribute="top" secondItem="0VB-21-iXY" secondAttribute="top" constant="14" id="DvB-GE-h0a"/>
@@ -307,8 +307,8 @@
     <resources>
         <image name="Arrow" width="8" height="12"/>
         <image name="copy-link" width="20" height="24"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

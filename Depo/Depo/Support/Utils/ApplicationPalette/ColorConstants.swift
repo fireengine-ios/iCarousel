@@ -13,6 +13,9 @@ enum AppColor {
     case secondaryBackground
     case cellShadow
     case itemSeperator
+    case contactsBorderColor
+    case lrTealishToWhite ///light mode tealish, dark mode white
+    case whiteToLrTealish ///light mode white, dark mode tealish
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))

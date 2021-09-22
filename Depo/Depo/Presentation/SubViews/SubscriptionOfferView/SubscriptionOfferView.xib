@@ -153,7 +153,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" name="primaryBackground"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Wmi-Ef-5Mf" secondAttribute="trailing" id="S54-HT-AaD"/>
                 <constraint firstAttribute="bottom" secondItem="Wmi-Ef-5Mf" secondAttribute="bottom" id="Zot-Yk-E7w"/>

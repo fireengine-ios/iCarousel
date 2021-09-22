@@ -47,10 +47,10 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var backUpButton: RoundedInsetsButton! {
         willSet {
-            newValue.setBackgroundColor(.white, for: .normal)
+            newValue.setBackgroundColor(AppColor.whiteToLrTealish.color ?? .white, for: .normal)
             
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
-            newValue.setTitleColor(.lrTealishTwo, for: .normal)
+            newValue.setTitleColor(AppColor.lrTealishToWhite.color ?? .lrTealishTwo, for: .normal)
             
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16.0)
             newValue.adjustsFontSizeToFitWidth()
@@ -108,7 +108,9 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .lrTealishTwo
+        backgroundColor = AppColor.lrTealishToWhite.color
+        backUpButton.setTitleColor(AppColor.lrTealishToWhite.color ?? .lrTealishTwo, for: .normal)
+        backUpButton.setBackgroundColor(AppColor.whiteToLrTealish.color ?? .white, for: .normal)
     }
     
     //MARK: - Public
