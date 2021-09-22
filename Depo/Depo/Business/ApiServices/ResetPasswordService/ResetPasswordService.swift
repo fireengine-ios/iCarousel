@@ -47,24 +47,10 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
 
         switch method {
         case .email:
-            callSendEmail(referenceToken: referenceToken) { result in
-                switch result {
-                case .success:
-                    self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
-                case let .failure(error):
-                    self.delegate?.resetPasswordService(self, receivedError: error)
-                }
-            }
+            proceedWithEmail(referenceToken: referenceToken, method: method)
 
         case .recoveryEmail:
-            callSendRecoveryEmail(referenceToken: referenceToken) { result in
-                switch result {
-                case .success:
-                    self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
-                case let .failure(error):
-                    self.delegate?.resetPasswordService(self, receivedError: error)
-                }
-            }
+            proceedWithRecoveryEmail(referenceToken: referenceToken, method: method)
 
         case .sms:
             delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
@@ -110,6 +96,40 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
         delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
     }
 
+    private func proceedWithEmail(referenceToken: String, method: IdentityVerificationMethod) {
+        let completion: ResponseCompletion<Void> = { result in
+            switch result {
+            case .success:
+                self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
+            case let .failure(error):
+                self.delegate?.resetPasswordService(self, receivedError: error)
+            }
+        }
+
+        if isInSecondChallenge {
+            callContinueWithEmail(referenceToken: referenceToken, completion: completion)
+        } else {
+            callSendEmail(referenceToken: referenceToken, completion: completion)
+        }
+    }
+
+    private func proceedWithRecoveryEmail(referenceToken: String, method: IdentityVerificationMethod) {
+        let completion: ResponseCompletion<Void> = { result in
+            switch result {
+            case .success:
+                self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
+            case let .failure(error):
+                self.delegate?.resetPasswordService(self, receivedError: error)
+            }
+        }
+
+        if isInSecondChallenge {
+            callContinueWithRecoveryEmail(referenceToken: referenceToken, completion: completion)
+        } else {
+            callSendRecoveryEmail(referenceToken: referenceToken, completion: completion)
+        }
+    }
+
     private func checkStatusAfterPhoneVerification(referenceToken: String) {
         callCheckStatus(referenceToken: referenceToken) { result in
             switch result {
@@ -146,7 +166,7 @@ private extension ResetPasswordService {
     func callSendEmail(referenceToken: String, completion: @escaping ResponseCompletion<Void>) {
         let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendEmail)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
-            completion(.success(Void()))
+            completion(.success(()))
         } fail: { error in
             completion(.failure(error))
         }
@@ -156,7 +176,7 @@ private extension ResetPasswordService {
     func callSendRecoveryEmail(referenceToken: String, completion: @escaping ResponseCompletion<Void>) {
         let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.sendRecoveryEmail)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
-            completion(.success(Void()))
+            completion(.success(()))
         } fail: { error in
             completion(.failure(error))
         }
@@ -205,6 +225,26 @@ private extension ResetPasswordService {
             } catch {
                 completion(.failure(error))
             }
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
+    }
+
+    func callContinueWithEmail(referenceToken: String, completion: @escaping ResponseCompletion<Void>) {
+        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.continueWithEmail)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
+            completion(.success(()))
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
+    }
+
+    func callContinueWithRecoveryEmail(referenceToken: String, completion: @escaping ResponseCompletion<Void>) {
+        let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.continueWithRecoveryEmail)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
+            completion(.success(()))
         } fail: { error in
             completion(.failure(error))
         }
