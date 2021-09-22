@@ -41,7 +41,7 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
     }
 
     func proceedVerification(with method: IdentityVerificationMethod) {
-        guard let referenceToken = self.referenceToken else {
+        guard let referenceToken = self.latestReferenceToken else {
             return
         }
 
@@ -83,7 +83,8 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
             case let .success(response):
                 self.isInSecondChallenge = true
                 self.latestReferenceToken = response.referenceToken
-                self.delegate?.resetPasswordService(self, phoneVerified: response.methods)
+                self.checkStatusAfterPhoneVerification(referenceToken: response.referenceToken ?? referenceToken)
+
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
             }
@@ -219,9 +220,9 @@ private extension ResetPasswordService {
         let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.checkStatus)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
-                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                let response = try legacyResponse.decodedResponse(APIResponse<ResetPasswordResponse>.self)
                 print("referenceToken111", response.referenceToken)
-                completion(.success(response))
+                completion(.success(response.value))
             } catch {
                 completion(.failure(error))
             }
