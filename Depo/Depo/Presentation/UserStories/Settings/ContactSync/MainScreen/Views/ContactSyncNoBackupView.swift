@@ -17,7 +17,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     @IBOutlet private weak var title: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 24.0)
-            newValue.textColor = ColorConstants.darkBlueColor
+            newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupTitle
             newValue.numberOfLines = 0

@@ -24,7 +24,7 @@ final class PrivateShareRoleCheckmarkView: UIView, NibInit {
     @IBOutlet private weak var button: UIButton! {
         willSet {
             newValue.setTitle("", for: .normal)
-            newValue.setTitleColor(ColorConstants.marineFour, for: .normal)
+            newValue.setTitleColor(AppColor.marineFourAndWhite.color, for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
         }
     }
@@ -32,7 +32,7 @@ final class PrivateShareRoleCheckmarkView: UIView, NibInit {
     @IBOutlet private weak var checkmarkImageView: UIImageView! {
         willSet {
             if let image = UIImage(named: "checkmark")?.withRenderingMode(.alwaysTemplate) {
-                newValue.image = image.mask(with: ColorConstants.marineFour)
+                newValue.image = image.mask(with: AppColor.marineFourAndWhite.color ?? ColorConstants.marineFour)
             }
         }
     }

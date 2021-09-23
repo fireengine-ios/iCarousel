@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -104,7 +105,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstItem="gkh-ne-Jdf" firstAttribute="top" secondItem="EZJ-Xd-a00" secondAttribute="top" id="Bwr-3T-PAQ"/>
                                 <constraint firstAttribute="trailing" secondItem="gkh-ne-Jdf" secondAttribute="trailing" id="D0R-7K-Dac"/>
@@ -118,7 +119,7 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="C7o-qz-x6b" firstAttribute="trailing" secondItem="cuw-6n-2qo" secondAttribute="trailing" id="L2U-u4-pU1"/>
                 <constraint firstItem="C7o-qz-x6b" firstAttribute="leading" secondItem="cuw-6n-2qo" secondAttribute="leading" id="LR6-Mr-OXr"/>
@@ -140,5 +141,8 @@
     <resources>
         <image name="CloseCardIcon" width="14" height="14"/>
         <image name="PlayVideoCardIcon" width="30" height="30"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

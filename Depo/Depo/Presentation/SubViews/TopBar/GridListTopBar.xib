@@ -30,7 +30,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                     <state key="normal" title="Sort By" image="TriangleCopy3">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" name="charcoalGrey"/>
                     </state>
                     <connections>
                         <action selector="sortAction:" destination="-1" eventType="touchUpInside" id="otH-6y-DZr"/>
@@ -81,6 +81,9 @@
         <image name="TopBarGrid" width="14" height="14"/>
         <image name="TopBarList" width="14" height="14"/>
         <image name="TriangleCopy3" width="7" height="5"/>
+        <namedColor name="charcoalGrey">
+            <color red="0.2199999988079071" green="0.23100000619888306" blue="0.25499999523162842" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

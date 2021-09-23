@@ -40,7 +40,7 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     @IBOutlet private weak var statusLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 15)
-            newValue.textColor = .black
+            newValue.textColor = AppColor.blackColor.color
             if output.isPremiumUser {
                 newValue.text = TextConstants.premiumUser
             } else if output.isMiddleUser {

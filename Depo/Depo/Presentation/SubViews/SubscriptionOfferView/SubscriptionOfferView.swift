@@ -46,7 +46,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 24)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.adjustsFontSizeToFitWidth = true
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -135,13 +135,13 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         let priceAttributes: [NSAttributedString.Key: AnyObject] = [
             .font: UIFont.TurkcellSaturaBolFont(size: 16),
-            .foregroundColor: ColorConstants.marineTwo,
+            .foregroundColor: AppColor.marineTwoAndWhite.color ?? ColorConstants.marineTwo,
             .paragraphStyle: paragraphStyle
         ]
         
         let currencyAttributes: [NSAttributedString.Key: AnyObject] = [
             .font: UIFont.TurkcellSaturaFont(size: 16),
-            .foregroundColor: ColorConstants.marineTwo,
+            .foregroundColor: AppColor.marineTwoAndWhite.color ?? ColorConstants.marineTwo,
             .paragraphStyle: paragraphStyle
         ]
         
@@ -166,7 +166,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         if plan.addonType == .storageOnly {
             font = UIFont.TurkcellSaturaFont(size: 14)
-            textColor = ColorConstants.marineTwo
+            textColor = AppColor.marineTwoAndWhite.color ?? ColorConstants.marineTwo
         } else {
             font = UIFont.TurkcellSaturaBolFont(size: 14)
             textColor = ColorConstants.cardBorderOrange

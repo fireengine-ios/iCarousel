@@ -44,7 +44,7 @@ final class SettingsTableViewSwitchCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = UIColor.black
+            newValue.textColor = AppColor.blackColor.color
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
             newValue.numberOfLines = 0
         }

@@ -48,16 +48,16 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mGZ-5S-1pm">
-                        <rect key="frame" x="72" y="5.5" width="299" height="42"/>
+                        <rect key="frame" x="72" y="6" width="299" height="41.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLv-hS-Ndp">
-                                <rect key="frame" x="0.0" y="0.0" width="299" height="19"/>
+                                <rect key="frame" x="0.0" y="0.0" width="299" height="18.5"/>
                                 <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="16"/>
                                 <color key="textColor" red="0.37065416569999998" green="0.37095898389999998" blue="0.37070131299999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mot-de-7Fh">
-                                <rect key="frame" x="0.0" y="23" width="299" height="19"/>
+                                <rect key="frame" x="0.0" y="22.5" width="299" height="19"/>
                                 <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="16"/>
                                 <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

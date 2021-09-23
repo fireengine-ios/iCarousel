@@ -13,7 +13,7 @@ class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.text = TextConstants.contactSyncBackupSuccessCardTitle
             newValue.font = .TurkcellSaturaDemFont(size: 18.0)
-            newValue.textColor = ColorConstants.navy
+            newValue.textColor = AppColor.navyAndWhite.color
             newValue.textAlignment = .left
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping

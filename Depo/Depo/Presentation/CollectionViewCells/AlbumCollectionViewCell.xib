@@ -56,7 +56,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" name="secondaryBackground"/>
+                        <color key="backgroundColor" name="primaryBackground"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="DC5-OY-h7U" secondAttribute="trailing" constant="20" id="47x-iM-0al"/>
                             <constraint firstItem="DC5-OY-h7U" firstAttribute="centerY" secondItem="cMf-gs-8lG" secondAttribute="centerY" id="8RG-Qi-r7s"/>
@@ -90,11 +90,11 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-qh-3Jq">
                                 <rect key="frame" x="3" y="3" width="335" height="86"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="primaryBackground"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6F-Wn-fos">
                                 <rect key="frame" x="3" y="3" width="335" height="86"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="primaryBackground"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LNQ-WG-hXG" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
                                 <rect key="frame" x="5" y="5" width="331" height="82"/>
@@ -116,7 +116,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" name="secondaryBackground"/>
+                        <color key="backgroundColor" name="primaryBackground"/>
                         <constraints>
                             <constraint firstItem="LNQ-WG-hXG" firstAttribute="bottom" secondItem="3H5-qh-3Jq" secondAttribute="bottom" constant="-2" id="1GJ-b8-fdo"/>
                             <constraint firstItem="P6F-Wn-fos" firstAttribute="leading" secondItem="3H5-qh-3Jq" secondAttribute="leading" id="7Lp-Ao-Cj7"/>
@@ -161,11 +161,11 @@
                 <outlet property="greedView" destination="6J8-Vs-50W" id="HQr-et-sHU"/>
                 <outlet property="listView" destination="cMf-gs-8lG" id="DQW-ac-o5T"/>
             </connections>
-            <point key="canvasLocation" x="170.5" y="77.5"/>
+            <point key="canvasLocation" x="170.40000000000001" y="76.911544227886068"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="secondaryBackground">
+        <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

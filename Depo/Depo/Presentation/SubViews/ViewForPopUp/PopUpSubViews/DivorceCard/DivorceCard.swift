@@ -22,7 +22,7 @@ final class DivorceCard: BaseCardView {
     
     override func configurateView() {
         super.configurateView()
-        backgroundColor = .white
+        backgroundColor = AppColor.secondaryBackground.color
         canSwipe = false
         
         titleLabel.font = UIFont.TurkcellSaturaFont(size: 18)

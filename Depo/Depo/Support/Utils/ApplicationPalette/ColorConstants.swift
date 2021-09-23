@@ -14,8 +14,12 @@ enum AppColor {
     case cellShadow
     case itemSeperator
     case contactsBorderColor
-    case lrTealishToWhite ///light mode tealish, dark mode white
-    case whiteToLrTealish ///light mode white, dark mode tealish
+    case lrTealishAndWhite
+    case whiteAndLrTealish
+    case marineTwoAndWhite
+    case blackColor
+    case navyAndWhite
+    case marineFourAndWhite
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))

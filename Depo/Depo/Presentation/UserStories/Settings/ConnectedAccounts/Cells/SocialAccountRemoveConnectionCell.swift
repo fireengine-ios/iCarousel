@@ -20,7 +20,7 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
     @IBOutlet private weak var connectedAs: UILabel! {
         didSet {
             connectedAs.font = UIFont.TurkcellSaturaMedFont(size: 16.0)
-            connectedAs.textColor = ColorConstants.connectedAs
+            connectedAs.textColor = AppColor.marineTwoAndWhite.color
             connectedAs.text = TextConstants.youAreConnected
         }
     }

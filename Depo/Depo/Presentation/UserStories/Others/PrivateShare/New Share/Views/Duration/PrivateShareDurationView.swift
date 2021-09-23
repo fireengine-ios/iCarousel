@@ -14,7 +14,7 @@ final class PrivateShareDurationView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.privateShareStartPageDurationTitle
             newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndWhite.color
         }
     }
     

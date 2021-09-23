@@ -26,7 +26,7 @@ final class PrivateShareWithView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.privateShareStartPageSharedWithTitle
             newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndWhite.color
         }
     }
     

@@ -26,7 +26,7 @@ final class TermsDescriptionController: UIViewController {
         let textView = UITextView()
         textView.isEditable = false
         textView.font = UIFont.TurkcellSaturaRegFont(size: 15)
-        textView.textColor = .black
+        textView.textColor = AppColor.blackColor.color
         textView.backgroundColor = AppColor.primaryBackground.color
         
         let edgeInset: CGFloat = 16

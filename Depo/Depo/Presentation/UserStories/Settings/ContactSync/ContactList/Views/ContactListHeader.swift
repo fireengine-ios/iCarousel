@@ -19,7 +19,7 @@ final class ContactListHeader: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.contactListTitle
             newValue.font = .TurkcellSaturaDemFont(size: 24)
-            newValue.textColor = ColorConstants.navy
+            newValue.textColor = AppColor.navyAndWhite.color
         }
     }
     
@@ -34,7 +34,7 @@ final class ContactListHeader: UIView, NibInit {
     @IBOutlet weak var searchBar: UISearchBar!  {
         willSet {
             newValue.backgroundColor = ColorConstants.toolbarTintColor
-            newValue.tintColor = ColorConstants.darkBlueColor
+            newValue.tintColor = AppColor.navyAndWhite.color
             newValue.delegate = self
             newValue.searchBarStyle = .minimal
             newValue.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
@@ -44,7 +44,7 @@ final class ContactListHeader: UIView, NibInit {
                 textField.placeholder = TextConstants.search
                 textField.placeholderLabel?.textColor = ColorConstants.lightText
                 textField.font = .TurkcellSaturaDemFont(size: 16)
-                textField.textColor = ColorConstants.darkBlueColor
+                textField.textColor = AppColor.navyAndWhite.color
                 textField.keyboardAppearance = .dark
             }
             
