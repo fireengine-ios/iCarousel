@@ -33,12 +33,16 @@ final class IdentityVerificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = localized(.resetPasswordTitle)
-        setupHeader()
         setupContinueButton()
         setupTableView()
 
         dataSource = IdentityVerificationDataSource(tableView: tableView)
         dataSource.availableMethods = availableMethods
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setupHeader()
     }
 
     @IBAction private func continueButtonTapped() {
