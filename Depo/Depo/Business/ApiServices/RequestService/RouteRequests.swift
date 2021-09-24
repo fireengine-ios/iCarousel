@@ -122,6 +122,7 @@ struct RouteRequests {
         static let checkStatus = baseUrl +/ "forgotMyPassword/checkStatus"
         static let continueWithEmail = baseUrl +/ "forgotMyPassword/continueWithEmail"
         static let continueWithRecoveryEmail = baseUrl +/ "forgotMyPassword/continueWithRecoveryEmail"
+        static let validateSecurityQuestion = baseUrl +/ "forgotMyPassword/validateSecurityQuestion"
     }
 
     // MARK: EULA 

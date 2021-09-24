@@ -16,6 +16,7 @@ protocol ResetPasswordServiceProtocol {
     func proceedVerification(with method: IdentityVerificationMethod)
     func sendOTP()
     func verifyOTP(code: String)
+    func validateSecurityQuestion(id: Int, answer: String)
 }
 
 final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtocol {
@@ -47,18 +48,31 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
 
         switch method {
         case .email:
-            proceedWithEmail(referenceToken: referenceToken, method: method)
+            proceedWithEmail(referenceToken: referenceToken) { result in
+                switch result {
+                case .success:
+                    self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
+                case let .failure(error):
+                    self.delegate?.resetPasswordService(self, receivedError: error)
+                }
+            }
 
         case .recoveryEmail:
-            proceedWithRecoveryEmail(referenceToken: referenceToken, method: method)
+            proceedWithRecoveryEmail(referenceToken: referenceToken) { result in
+                switch result {
+                case .success:
+                    self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
+                case let .failure(error):
+                    self.delegate?.resetPasswordService(self, receivedError: error)
+                }
+            }
 
-        case .sms:
+        case .sms,
+             .securityQuestion:
             delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
 
-        case let .securityQuestion(questionId):
-            break
-
         case .unknown:
+            assertionFailure()
             break
         }
     }
@@ -91,22 +105,25 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
         }
     }
 
+    func validateSecurityQuestion(id: Int, answer: String) {
+        guard let referenceToken = self.latestReferenceToken else { return }
+        callValidateSecurityQuestion(referenceToken: referenceToken, questionId: id, answer: answer) { result in
+            switch result {
+            case .success:
+                self.delegate?.resetPasswordServiceVerifiedSecurityQuestion(self)
+            case let .failure(error):
+                self.delegate?.resetPasswordService(self, receivedError: error)
+            }
+        }
+    }
+
     private func handleFirstResponse(_ response: ResetPasswordResponse) {
         referenceToken = response.referenceToken
         latestReferenceToken = response.referenceToken
         delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
     }
 
-    private func proceedWithEmail(referenceToken: String, method: IdentityVerificationMethod) {
-        let completion: ResponseCompletion<Void> = { result in
-            switch result {
-            case .success:
-                self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
-            case let .failure(error):
-                self.delegate?.resetPasswordService(self, receivedError: error)
-            }
-        }
-
+    private func proceedWithEmail(referenceToken: String, completion: @escaping ResponseCompletion<Void>) {
         if isInSecondChallenge {
             callContinueWithEmail(referenceToken: referenceToken, completion: completion)
         } else {
@@ -114,16 +131,7 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
         }
     }
 
-    private func proceedWithRecoveryEmail(referenceToken: String, method: IdentityVerificationMethod) {
-        let completion: ResponseCompletion<Void> = { result in
-            switch result {
-            case .success:
-                self.delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
-            case let .failure(error):
-                self.delegate?.resetPasswordService(self, receivedError: error)
-            }
-        }
-
+    private func proceedWithRecoveryEmail(referenceToken: String, completion: @escaping ResponseCompletion<Void>) {
         if isInSecondChallenge {
             callContinueWithRecoveryEmail(referenceToken: referenceToken, completion: completion)
         } else {
@@ -251,6 +259,17 @@ private extension ResetPasswordService {
         }
         executePostRequest(param: param, handler: handler)
     }
+
+    func callValidateSecurityQuestion(referenceToken: String, questionId: Int, answer: String,
+                                      completion: @escaping ResponseCompletion<Void>) {
+        let param = ValidateSecurityQuestion(referenceToken: referenceToken, questionId: questionId, answer: answer)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
+            completion(.success(()))
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
+    }
 }
 
 // MARK: - Endpoint Param Definitions
@@ -324,6 +343,34 @@ private struct ValidatePhoneNumber: RequestParametrs {
 
     var patch: URL {
         return RouteRequests.ForgotMyPassword.validatePhoneNumber
+    }
+
+    var header: RequestHeaderParametrs {
+        return RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+    }
+}
+
+private struct ValidateSecurityQuestion: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+
+    let referenceToken: String
+    let questionId: Int
+    let answer: String
+
+    var requestParametrs: Any {
+        let dict: [String: Any] = [
+            LbRequestkeys.referenceToken: referenceToken,
+            LbRequestkeys.securityQuestionId: questionId,
+            LbRequestkeys.securityQuestionAnswer: answer
+        ]
+
+        return dict
+    }
+
+    var patch: URL {
+        return RouteRequests.ForgotMyPassword.validateSecurityQuestion
     }
 
     var header: RequestHeaderParametrs {

@@ -25,16 +25,27 @@ final class IdentityVerificationViewController: BaseViewController {
     @IBOutlet private var tableHeaderView: UIView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var descriptionLabel: UILabel!
-    @IBOutlet private weak var tableView: ResizableTableView!
-    @IBOutlet private weak var continueButton: WhiteButtonWithRoundedCorner!
+    @IBOutlet private weak var tableView: ResizableTableView! {
+        willSet {
+            newValue.alwaysBounceVertical = false
+        }
+    }
+
+    @IBOutlet private weak var continueButton: WhiteButtonWithRoundedCorner! {
+        willSet {
+            newValue.setTitle(localized(.resetPasswordContinueButton), for: .normal)
+            newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
+            newValue.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
+        }
+    }
 
     private var dataSource: IdentityVerificationDataSource!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = localized(.resetPasswordTitle)
-        setupContinueButton()
-        setupTableView()
 
         dataSource = IdentityVerificationDataSource(tableView: tableView)
         dataSource.availableMethods = availableMethods
@@ -72,6 +83,13 @@ final class IdentityVerificationViewController: BaseViewController {
         )
         navigationController?.pushViewController(viewController, animated: true)
     }
+
+    private func navigateToSecurityQuestion(questionId: Int) {
+        let viewController = ValidateSecurityQuestionViewController(
+            resetPasswordService: resetPasswordService, questionId: questionId
+        )
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 extension IdentityVerificationViewController: ResetPasswordServiceDelegate {
@@ -84,8 +102,8 @@ extension IdentityVerificationViewController: ResetPasswordServiceDelegate {
             showLinkSentToEmailPopupAndExit(email: email)
         case let .sms(phoneNumber):
             navigateToOTP(phoneNumber: phoneNumber)
-        case .securityQuestion:
-            break
+        case let .securityQuestion(id):
+            navigateToSecurityQuestion(questionId: id)
         case .unknown:
             break
         }
@@ -123,17 +141,5 @@ private extension IdentityVerificationViewController {
             titleLabel.text = localized(.resetPasswordChallenge1Header)
             descriptionLabel.text = localized(.resetPasswordChallenge1Body)
         }
-    }
-
-    func setupContinueButton() {
-        continueButton.setTitle(localized(.resetPasswordContinueButton), for: .normal)
-        continueButton.setTitleColor(ColorConstants.whiteColor, for: .normal)
-        continueButton.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        continueButton.setBackgroundColor(UIColor.lrTealishTwo.withAlphaComponent(0.5), for: .disabled)
-        continueButton.setBackgroundColor(UIColor.lrTealishTwo, for: .normal)
-    }
-
-    func setupTableView() {
-        tableView.alwaysBounceVertical = false
     }
 }
