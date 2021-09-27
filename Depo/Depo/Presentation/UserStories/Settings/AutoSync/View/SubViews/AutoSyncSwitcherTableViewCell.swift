@@ -12,7 +12,7 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = .black
+            newValue.textColor = AppColor.blackColor.color
             newValue.font = .TurkcellSaturaDemFont(size: 18)
         }
     }

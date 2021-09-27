@@ -16,7 +16,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uSa-kr-lsc">
                     <rect key="frame" x="118" y="0.0" width="2" height="329"/>
-                    <color key="backgroundColor" red="0.82349180588450455" green="0.82349180588450455" blue="0.82349180588450455" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="activityTimelineGray"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="2" id="gIw-PQ-M6N"/>
                     </constraints>
@@ -33,6 +33,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="activityTimelineGray">
+            <color red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

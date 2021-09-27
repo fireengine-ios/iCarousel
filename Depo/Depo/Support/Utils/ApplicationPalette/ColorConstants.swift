@@ -20,6 +20,10 @@ enum AppColor {
     case blackColor
     case navyAndWhite
     case marineFourAndWhite
+    case marineTwoAndTealish
+    case whiteAndMarineTwo
+    case activityTimelineGray
+    case darkBlueAndTealish
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))

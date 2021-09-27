@@ -69,7 +69,7 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var facebookImportButton: UIButton! {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.backgroundColor = ColorConstants.darkBlueColor
+            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.layer.cornerRadius = 25
             newValue.setTitle(TextConstants.importFromFB, for: .normal)

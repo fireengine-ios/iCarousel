@@ -303,7 +303,6 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         fileNameLabel.textColor = ColorConstants.textGrayColor
         
         detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
-        detailsLabel.textColor = ColorConstants.textGrayColor.withAlphaComponent(0.6)
         
         moreButton.accessibilityLabel = TextConstants.accessibilityMore
         

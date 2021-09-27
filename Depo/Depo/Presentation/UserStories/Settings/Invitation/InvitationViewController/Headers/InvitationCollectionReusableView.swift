@@ -48,7 +48,7 @@ class InvitationCollectionReusableView: UICollectionReusableView {
 
     private func setupView() {
         copyLinkBGView.layer.borderWidth = 1
-        copyLinkBGView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+        copyLinkBGView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
 
         acceptedInvitationListCollectionView.delegate = self
         acceptedInvitationListCollectionView.dataSource = self
