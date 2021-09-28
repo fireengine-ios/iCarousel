@@ -50,7 +50,7 @@
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="atA-6a-PCN" userLabel="Line View">
                     <rect key="frame" x="0.0" y="428.5" width="340" height="1"/>
-                    <color key="backgroundColor" white="0.80306919639999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="itemSeperator"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="L0T-us-6YB"/>
                     </constraints>
@@ -103,6 +103,9 @@
     </objects>
     <resources>
         <image name="im_present" width="28" height="25"/>
+        <namedColor name="itemSeperator">
+            <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -27,7 +27,7 @@ final class LaunchCampaignCard: BaseCardView {
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 16)
-            newValue.textColor = ColorConstants.darkBlueColor
+            newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.text = TextConstants.launchCampaignCardMessage
         }
     }
