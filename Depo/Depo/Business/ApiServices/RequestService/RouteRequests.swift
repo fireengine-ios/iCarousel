@@ -107,6 +107,8 @@ struct RouteRequests {
     static let phoneVerification = "verify/phoneNumber"
     static let resendVerificationSMS = "verify/sendVerificationSMS"
 
+    static let forgotPassword = "account/forgotPassword"
+
     static let mailVerification = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     

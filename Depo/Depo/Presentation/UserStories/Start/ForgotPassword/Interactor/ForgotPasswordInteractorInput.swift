@@ -11,6 +11,8 @@ import Foundation
 protocol ForgotPasswordInteractorInput {
     var resetPasswordService: ResetPasswordService { get }
 
+    var isV2Enabled: Bool { get }
+
     func trackScreen()
 
     func findCoutryPhoneCode(plus: Bool)

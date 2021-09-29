@@ -39,7 +39,8 @@ final class ForgotPasswordViewController: ViewController {
         }
         
         scrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
-        
+
+        setupViews()
         output.viewIsReady()
         configureKeyboard()
     }
@@ -61,10 +62,17 @@ final class ForgotPasswordViewController: ViewController {
     func endEditing() {
         view.endEditing(true)
     }
-    
+
+    func setupViews() {
+        setupInfoTitle()
+        setupSubTitle()
+        setupInputTitle()
+        setupInputField()
+        setupButton()
+        setupCaptchaView()
+    }
+
     private func setupSubTitle() {
-        subTitle.text = localized(.resetPasswordInstructionsOther)
-        
         subTitle.textColor = ColorConstants.removeConnection
         
         if Device.isIpad {
@@ -75,15 +83,8 @@ final class ForgotPasswordViewController: ViewController {
             subTitle.textAlignment = .left
         }
     }
-    
-    private func updateSubTitleForTurkcell() {
-        subTitle.text = localized(.resetPasswordInfoTurkcell)
-    }
-    
+
     private func setupInfoTitle() {
-        
-        infoTitle.text = localized(.resetPasswordInstructions)
-        
         infoTitle.textColor = UIColor.black
         if Device.isIpad {
             infoTitle.font = UIFont.TurkcellSaturaBolFont(size: 20)
@@ -96,7 +97,6 @@ final class ForgotPasswordViewController: ViewController {
     
     private func setupInputTitle() {
         let titleLabel = loginEnterView.titleLabel
-        titleLabel.text = localized(.resetPasswordYourAccountEmail)
         titleLabel.textColor = .lrTealishTwo
 
         if Device.isIpad {
@@ -117,16 +117,13 @@ final class ForgotPasswordViewController: ViewController {
             font = UIFont.TurkcellSaturaRegFont(size: 24)
         }
 
-        textField.attributedPlaceholder = NSAttributedString(
-            string: localized(.resetPasswordEnterYourAccountEmail),
-            attributes: [.foregroundColor: ColorConstants.textDisabled, .font: font]
-        )
-        
         textField.textColor = UIColor.black
         textField.font = font
         textField.enablesReturnKeyAutomatically = true
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
+        textField.keyboardType = .emailAddress
+        textField.textContentType = .emailAddress
 
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
@@ -281,17 +278,16 @@ extension ForgotPasswordViewController: ForgotPasswordViewInput {
         updateButtonState()
     }
 
-    func setupVisableSubTitle() {
-        updateSubTitleForTurkcell()
-    }
+    func setTexts(_ texts: ForgotPasswordTexts) {
+        infoTitle.text = texts.instructions
+        subTitle.text = texts.instructionsOther
+        loginEnterView.titleLabel.text = texts.emailInputTitle
 
-    func setupVisableTexts() {
-        setupInfoTitle()
-        setupSubTitle()
-        setupInputTitle()
-        setupInputField()
-        setupButton()
-        setupCaptchaView()
+        let font = loginEnterView.textField.font ?? UIFont()
+        loginEnterView.textField.attributedPlaceholder = NSAttributedString(
+            string: texts.emailPlaceholder,
+            attributes: [.foregroundColor: ColorConstants.textDisabled, .font: font]
+        )
     }
 
     func enterPhoneCountryCode(countryCode: String) {

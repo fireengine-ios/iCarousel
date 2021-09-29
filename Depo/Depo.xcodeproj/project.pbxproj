@@ -170,6 +170,10 @@
 		07111F2626E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
 		07111F2726E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
 		07111F2826E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
+		071AD45B27045CD8003A24B0 /* FirebaseRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F8E042587978400799405 /* FirebaseRemoteConfig.swift */; };
+		071AD45F27045CD9003A24B0 /* FirebaseRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F8E042587978400799405 /* FirebaseRemoteConfig.swift */; };
+		071AD46027045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B57F8F312587A73600799405 /* FirebaseRemoteConfigDefaults.plist */; };
+		071AD46127045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B57F8F312587A73600799405 /* FirebaseRemoteConfigDefaults.plist */; };
 		0731E7D0263164BC00883566 /* RegistrationTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */; };
 		0731E80B263165DA00883566 /* RegistrationTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0731E809263165DA00883566 /* RegistrationTermsViewController.xib */; };
 		0731E87C263181EA00883566 /* RegistrationTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */; };
@@ -21379,6 +21383,7 @@
 				CE784E1F22A685FB00662219 /* ManageContactTableViewCell.xib in Resources */,
 				CE784E2022A685FB00662219 /* AlbumCollectionViewCell.xib in Resources */,
 				CE784E2122A685FB00662219 /* ContactBackupOld.xib in Resources */,
+				071AD46027045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */,
 				CE784E2422A685FB00662219 /* PremiumViewController.xib in Resources */,
 				4815689322BCF2E400376DFC /* GoogleService-Info.plist in Resources */,
 				CF8B72FC23CBD1D90021B021 /* SettingsTC.bundle in Resources */,
@@ -22083,6 +22088,7 @@
 				CF8B71FD23CBCA280021B021 /* SegmentedController.xib in Resources */,
 				CF8B720123CBCA280021B021 /* PopUpController.xib in Resources */,
 				CF8B720623CBCA280021B021 /* FileInfoViewController.xib in Resources */,
+				071AD46127045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */,
 				985FFB07255C1EE0001AA845 /* FileNameView.xib in Resources */,
 				CF7145FC24B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
 				3A0B422D266F7D8D00FD8F3C /* ChatbotViewController.xib in Resources */,
@@ -25571,6 +25577,7 @@
 				CE78493822A685FB00662219 /* LoginInteractorOutput.swift in Sources */,
 				CE78493922A685FB00662219 /* ImageFormat.swift in Sources */,
 				9842FB8A2563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
+				071AD45B27045CD8003A24B0 /* FirebaseRemoteConfig.swift in Sources */,
 				CE78493A22A685FB00662219 /* PremiumView.swift in Sources */,
 				98C298462302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */,
 				CE78493B22A685FB00662219 /* UsageInfoInitializer.swift in Sources */,
@@ -28798,6 +28805,7 @@
 				98BBF0DA25024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				CF8B6CA523CBCA280021B021 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				FA016FB823D30750008713ED /* FileInfoModuleOutput.swift in Sources */,
+				071AD45F27045CD9003A24B0 /* FirebaseRemoteConfig.swift in Sources */,
 				9842FB8B2563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
 				CF8B6CA623CBCA280021B021 /* PreventCollectionView.swift in Sources */,
 				CF8B6CA723CBCA280021B021 /* BottomSelectionTabBarViewController.swift in Sources */,

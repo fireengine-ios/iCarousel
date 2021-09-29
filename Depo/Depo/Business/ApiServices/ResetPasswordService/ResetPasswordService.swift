@@ -12,7 +12,7 @@ import Alamofire
 protocol ResetPasswordServiceProtocol {
     var isInSecondChallenge: Bool { get }
 
-    func beginResetFlow(with params: ForgotPassword)
+    func beginResetFlow(with params: ForgotPasswordV2)
     func proceedVerification(with method: IdentityVerificationMethod)
     func sendOTP()
     func verifyOTP(code: String)
@@ -29,7 +29,7 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
     private var latestReferenceToken: String?
     private(set) var isInSecondChallenge: Bool = false
 
-    func beginResetFlow(with params: ForgotPassword) {
+    func beginResetFlow(with params: ForgotPasswordV2) {
         callForgotMyPassword(params: params) { result in
             switch result {
             case let .success(response):
@@ -73,7 +73,6 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
 
         case .unknown:
             assertionFailure()
-            break
         }
     }
 
@@ -155,7 +154,7 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
 
 // MARK: - API Calls
 private extension ResetPasswordService {
-    func callForgotMyPassword(params: ForgotPassword,
+    func callForgotMyPassword(params: ForgotPasswordV2,
                               completion: @escaping ResponseCompletion<ResetPasswordResponse>) {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
@@ -274,7 +273,7 @@ private extension ResetPasswordService {
 
 // MARK: - Endpoint Param Definitions
 
-struct ForgotPassword: RequestParametrs {
+struct ForgotPasswordV2: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }

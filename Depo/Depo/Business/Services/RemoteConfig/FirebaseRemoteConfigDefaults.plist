@@ -12,5 +12,7 @@
 	<false/>
 	<key>print_option_enabled_languages</key>
 	<string>tr</string>
+	<key>forgot_password_v2_enabled</key>
+	<false/>
 </dict>
 </plist>

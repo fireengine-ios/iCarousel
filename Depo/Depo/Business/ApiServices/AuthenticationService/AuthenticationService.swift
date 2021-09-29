@@ -182,6 +182,31 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     }
 }
 
+struct ForgotPassword: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+
+    let email: String
+    let attachedCaptcha: CaptchaParametrAnswer?
+
+    var requestParametrs: Any {
+        return email.data(using: .utf8) ?? Data()
+    }
+
+    var patch: URL {
+        return URL(string: RouteRequests.forgotPassword, relativeTo: RouteRequests.baseUrl)!
+    }
+
+    var header: RequestHeaderParametrs {
+        let headers = RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+        if let captcha = attachedCaptcha {
+            return headers + captcha.header
+        }
+        return headers
+    }
+}
+
 class EmailUpdate: BaseRequestParametrs {
     let email: String
     
@@ -563,6 +588,13 @@ class AuthenticationService: BaseRequestService {
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailVerification, handler: handler)
+    }
+
+    func forgotPassword(forgotPassword: ForgotPassword, success: SuccessResponse?, fail: FailResponse?) {
+        debugLog("AuthenticationService fogotPassword")
+
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: forgotPassword, handler: handler)
     }
 
     func turkcellAuth(success: SuccessLogin?, fail: FailResponse?) {

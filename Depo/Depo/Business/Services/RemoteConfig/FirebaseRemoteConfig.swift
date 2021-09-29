@@ -16,6 +16,7 @@ private struct RemoteConfigKeys {
     static let printOptionEnabled = "print_option_enabled"
     static let chatbotMenuEnabled = "chatbot_menu_enabled"
     static let printOptionEnabledLanguages = "print_option_enabled_languages"
+    static let forgotPasswordV2Enabled = "forgot_password_v2_enabled"
 }
 
 final class FirebaseRemoteConfig {
@@ -47,6 +48,11 @@ final class FirebaseRemoteConfig {
             .components(separatedBy: ",")
             .map { $0.trimmingCharacters(in: .whitespaces) }
             .map { $0.lowercased() }
+    }
+
+    var forgotPasswordV2Enabled: Bool {
+        let key = RemoteConfigKeys.forgotPasswordV2Enabled
+        return remoteConfig.configValue(forKey: key).boolValue
     }
     
     func fetchAttemptsBeforeSupportOnLogin(completion: @escaping ValueHandler<Int>) {
