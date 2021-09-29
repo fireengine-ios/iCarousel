@@ -99,7 +99,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
         
         infoTitle.text = TextConstants.resetPasswordInfo
         
-        infoTitle.textColor = UIColor.black
+        infoTitle.textColor = AppColor.blackColor.color
         if Device.isIpad {
             infoTitle.font = UIFont.TurkcellSaturaBolFont(size: 20)
             infoTitle.textAlignment = .center
@@ -135,7 +135,7 @@ class ForgotPasswordViewController: ViewController, ForgotPasswordViewInput {
                                                                attributes: [NSAttributedString.Key.foregroundColor: ColorConstants.textDisabled,
                                                                             NSAttributedString.Key.font: font])
         
-        emailTextField.textColor = UIColor.black
+        emailTextField.textColor = AppColor.blackColor.color
         emailTextField.font = font
         emailTextField.delegate = self
         emailTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)

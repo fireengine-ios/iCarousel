@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubjectDetailsViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubjectDetailsViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="detailsView" destination="xxs-xw-uBB" id="nle-eD-L0U"/>
                 <outlet property="subjectLabel" destination="owF-2Y-MVL" id="CgO-T3-KaW"/>
@@ -34,13 +33,13 @@
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hz3-Q6-tdF">
                             <rect key="frame" x="21" y="65" width="305" height="420"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             <dataDetectorType key="dataDetectorTypes" link="YES"/>
                         </textView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6O-LE-TDp">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6O-LE-TDp">
                             <rect key="frame" x="311" y="14" width="18" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="18" id="dCC-fp-mWt"/>
@@ -53,7 +52,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstItem="owF-2Y-MVL" firstAttribute="leading" secondItem="xxs-xw-uBB" secondAttribute="leading" constant="21" id="6HO-sH-jxP"/>
                         <constraint firstAttribute="trailing" secondItem="Hz3-Q6-tdF" secondAttribute="trailing" constant="21" id="C7S-jH-fac"/>
@@ -67,17 +66,17 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xxs-xw-uBB" secondAttribute="trailing" constant="14" id="3EL-cJ-Ytm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="xxs-xw-uBB" secondAttribute="bottom" constant="75" id="JCa-Hl-D8G"/>
                 <constraint firstItem="xxs-xw-uBB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="99" id="WaQ-uy-Vhv"/>
                 <constraint firstItem="xxs-xw-uBB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="14" id="gKG-xV-MFs"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
         </view>
-        <customObject id="IVY-Kz-tlq" customClass="SubjectDetailsDesigner" customModule="lifebox" customModuleProvider="target">
+        <customObject id="IVY-Kz-tlq" customClass="SubjectDetailsDesigner" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="d6O-LE-TDp" id="Mmc-UO-Niw"/>
                 <outlet property="detailsView" destination="xxs-xw-uBB" id="1Sq-Kp-vQU"/>
@@ -86,4 +85,9 @@
             </connections>
         </customObject>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

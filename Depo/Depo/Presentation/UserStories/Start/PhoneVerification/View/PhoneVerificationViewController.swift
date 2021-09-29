@@ -181,7 +181,7 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         
         mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
-        mainTitle.textColor = .black
+        mainTitle.textColor = AppColor.blackAndLrTealish.color
         mainTitle.text = TextConstants.enterSecurityCode
         infoTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
         infoTitle.text = TextConstants.phoneVerificationInfoTitleText

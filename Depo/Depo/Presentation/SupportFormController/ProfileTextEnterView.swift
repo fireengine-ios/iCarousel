@@ -26,7 +26,7 @@ class ProfileTextEnterView: UIView {
     let textField: QuickDismissPlaceholderTextField = {
         let newValue = QuickDismissPlaceholderTextField()
         newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        newValue.textColor = UIColor.black
+        newValue.textColor = AppColor.blackColor.color
         newValue.borderStyle = .none
         newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
@@ -61,7 +61,7 @@ class ProfileTextEnterView: UIView {
         }
         set {
             textField.isUserInteractionEnabled = newValue
-            textField.textColor = newValue ? UIColor.black : ColorConstants.textDisabled
+            textField.textColor = newValue ? AppColor.blackColor.color : ColorConstants.textDisabled
         }
     }
         

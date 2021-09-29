@@ -68,7 +68,7 @@ final class SecurityQuestionView: UIView, NibInit {
     func setQuestion(question: String) {
         DispatchQueue.toMain {
             self.descriptionLabel.text = question
-            self.descriptionLabel.textColor = UIColor.black
+            self.descriptionLabel.textColor = AppColor.blackColor.color
         }
     }
     

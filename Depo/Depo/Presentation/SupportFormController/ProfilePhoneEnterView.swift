@@ -140,7 +140,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
 
     var onCodeChanged: (() -> Void)?
     
-    private let textFieldColor = UIColor.black
+    private let textFieldColor = AppColor.blackColor.color
     
     /// awakeFromNib will not be called bcz of File Owner.
     /// it will be called only for "init?(coder".

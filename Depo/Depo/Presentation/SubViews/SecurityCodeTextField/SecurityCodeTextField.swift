@@ -39,14 +39,14 @@ final class SecurityCodeTextField: UITextField {
         keyboardType = .phonePad
         tintColor = .clear
         font = UIFont.TurkcellSaturaBolFont(size: 36)
-        textColor = .black
+        textColor = AppColor.blackAndOrange.color
         textAlignment = .center
         
         addBottomBorder()
     }
     
     private func addBottomBorder() {
-        bottomLine.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        bottomLine.backgroundColor = ColorConstants.coolGrey.cgColor
         bottomLine.cornerRadius = 2
         
         layer.addSublayer(bottomLine)

@@ -48,7 +48,7 @@ final class CaptchaView: UIView, FromNib {
     @IBOutlet weak var captchaAnswerTextField: QuickDismissPlaceholderTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = UIColor.black
+            newValue.textColor = AppColor.blackColor.color
             newValue.borderStyle = .none
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
