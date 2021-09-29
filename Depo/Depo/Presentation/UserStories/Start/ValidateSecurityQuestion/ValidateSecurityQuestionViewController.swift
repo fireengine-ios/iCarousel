@@ -58,6 +58,8 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
 
     private let answerView: SecretAnswerView = {
         let view = SecretAnswerView.initFromNib()
+        view.answerTextField.returnKeyType = .done
+        view.answerTextField.enablesReturnKeyAutomatically = true
         return view
     }()
 
@@ -91,6 +93,13 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
 extension ValidateSecurityQuestionViewController: ResetPasswordServiceDelegate {
     func resetPasswordServiceVerifiedSecurityQuestion(_ service: ResetPasswordService) {
         hideSpinnerIncludeNavigationBar()
+
+        guard let navigationController = self.navigationController else { return }
+        var viewControllers = navigationController.viewControllers
+        viewControllers.removeLast() // Self
+        viewControllers.removeLast() // IdentityVerificationViewController
+        viewControllers.append(ResetPasswordViewController(resetPasswordService: resetPasswordService))
+        navigationController.setViewControllers(viewControllers, animated: true)
     }
 
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
@@ -102,6 +111,7 @@ extension ValidateSecurityQuestionViewController: ResetPasswordServiceDelegate {
 extension ValidateSecurityQuestionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        continueTapped()
         return true
     }
 }

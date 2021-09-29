@@ -31,6 +31,7 @@ struct LbRequestkeys {
     static let passwordRuleSetVersion = "passwordRuleSetVersion"
     static let securityQuestionId = "securityQuestionId"
     static let securityQuestionAnswer = "securityQuestionAnswer"
+    static let repeatPassword = "repeatPassword"
     //
     static let fileName = "Folder-Name"
     static let etkAuth = "etkAuth"

@@ -17,6 +17,7 @@ protocol ResetPasswordServiceProtocol {
     func sendOTP()
     func verifyOTP(code: String)
     func validateSecurityQuestion(id: Int, answer: String)
+    func reset(newPassword: String)
 }
 
 final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtocol {
@@ -26,7 +27,6 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
 
     private let sessionManager = SessionManager.customDefault
     private var referenceToken: String?
-    private var latestReferenceToken: String?
     private(set) var isInSecondChallenge: Bool = false
 
     func beginResetFlow(with params: ForgotPasswordV2) {
@@ -42,7 +42,7 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
     }
 
     func proceedVerification(with method: IdentityVerificationMethod) {
-        guard let referenceToken = self.latestReferenceToken else {
+        guard let referenceToken = self.referenceToken else {
             return
         }
 
@@ -72,16 +72,16 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
             delegate?.resetPasswordService(self, readyToProceedWithMethod: method)
 
         case .unknown:
-            assertionFailure()
+            debugLog("unknown method \(method)")
         }
     }
 
     func sendOTP() {
-        guard let referenceToken = self.latestReferenceToken else { return }
+        guard let referenceToken = self.referenceToken else { return }
         callSendSMS(referenceToken: referenceToken) { result in
             switch result {
             case let .success(response):
-                self.latestReferenceToken = response.referenceToken
+                self.referenceToken = response.referenceToken
                 self.delegate?.resetPasswordService(self, receivedOTPResponse: response)
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
@@ -90,12 +90,12 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
     }
 
     func verifyOTP(code: String) {
-        guard let referenceToken = self.latestReferenceToken else { return }
+        guard let referenceToken = self.referenceToken else { return }
         callValidatePhoneNumber(referenceToken: referenceToken, otp: code) { result in
             switch result {
             case let .success(response):
                 self.isInSecondChallenge = true
-                self.latestReferenceToken = response.referenceToken
+                self.referenceToken = response.referenceToken
                 self.checkStatusAfterPhoneVerification(referenceToken: response.referenceToken ?? referenceToken)
 
             case let .failure(error):
@@ -105,7 +105,7 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
     }
 
     func validateSecurityQuestion(id: Int, answer: String) {
-        guard let referenceToken = self.latestReferenceToken else { return }
+        guard let referenceToken = self.referenceToken else { return }
         callValidateSecurityQuestion(referenceToken: referenceToken, questionId: id, answer: answer) { result in
             switch result {
             case .success:
@@ -116,9 +116,20 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
         }
     }
 
+    func reset(newPassword: String) {
+        guard let referenceToken = self.referenceToken else { return }
+        callChangePassword(referenceToken: referenceToken, newPassword: newPassword) { result in
+            switch result {
+            case .success:
+                self.delegate?.resetPasswordServiceChangedPasswordSuccessfully(self)
+            case let .failure(error):
+                self.delegate?.resetPasswordService(self, receivedError: error)
+            }
+        }
+    }
+
     private func handleFirstResponse(_ response: ResetPasswordResponse) {
         referenceToken = response.referenceToken
-        latestReferenceToken = response.referenceToken
         delegate?.resetPasswordService(self, resetBeganWithMethods: response.methods)
     }
 
@@ -143,7 +154,7 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
             switch result {
             case let .success(response):
                 self.isInSecondChallenge = true
-                self.latestReferenceToken = response.referenceToken
+                self.referenceToken = response.referenceToken
                 self.delegate?.resetPasswordService(self, phoneVerified: response.methods)
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
@@ -159,7 +170,6 @@ private extension ResetPasswordService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
                 let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
-                print("referenceToken111", response.referenceToken)
                 completion(.success(response))
             } catch {
                 completion(.failure(error))
@@ -196,7 +206,6 @@ private extension ResetPasswordService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
                 let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
-                print("referenceToken111", response.referenceToken)
                 completion(.success(response))
             } catch {
                 completion(.failure(error))
@@ -212,7 +221,6 @@ private extension ResetPasswordService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
                 let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
-                print("referenceToken111", response.referenceToken)
                 completion(.success(response))
             } catch {
                 completion(.failure(error))
@@ -228,7 +236,6 @@ private extension ResetPasswordService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
                 let response = try legacyResponse.decodedResponse(APIResponse<ResetPasswordResponse>.self)
-                print("referenceToken111", response.referenceToken)
                 completion(.success(response.value))
             } catch {
                 completion(.failure(error))
@@ -262,6 +269,16 @@ private extension ResetPasswordService {
     func callValidateSecurityQuestion(referenceToken: String, questionId: Int, answer: String,
                                       completion: @escaping ResponseCompletion<Void>) {
         let param = ValidateSecurityQuestion(referenceToken: referenceToken, questionId: questionId, answer: answer)
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
+            completion(.success(()))
+        } fail: { error in
+            completion(.failure(error))
+        }
+        executePostRequest(param: param, handler: handler)
+    }
+
+    func callChangePassword(referenceToken: String, newPassword: String, completion: @escaping ResponseCompletion<Void>) {
+        let param = ChangePassword(referenceToken: referenceToken, password: newPassword)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
             completion(.success(()))
         } fail: { error in
@@ -370,6 +387,33 @@ private struct ValidateSecurityQuestion: RequestParametrs {
 
     var patch: URL {
         return RouteRequests.ForgotMyPassword.validateSecurityQuestion
+    }
+
+    var header: RequestHeaderParametrs {
+        return RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
+    }
+}
+
+private struct ChangePassword: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+
+    let referenceToken: String
+    let password: String
+
+    var requestParametrs: Any {
+        let dict: [String: Any] = [
+            LbRequestkeys.token: referenceToken,
+            LbRequestkeys.password: password,
+            LbRequestkeys.repeatPassword: password
+        ]
+
+        return dict
+    }
+
+    var patch: URL {
+        return RouteRequests.ForgotMyPassword.change
     }
 
     var header: RequestHeaderParametrs {

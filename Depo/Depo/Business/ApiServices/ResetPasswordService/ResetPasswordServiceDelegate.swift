@@ -14,6 +14,7 @@ protocol ResetPasswordServiceDelegate: AnyObject {
     func resetPasswordService(_ service: ResetPasswordService, receivedOTPResponse response: ResetPasswordResponse)
     func resetPasswordService(_ service: ResetPasswordService, phoneVerified newMethods: [IdentityVerificationMethod])
     func resetPasswordServiceVerifiedSecurityQuestion(_ service: ResetPasswordService)
+    func resetPasswordServiceChangedPasswordSuccessfully(_ service: ResetPasswordService)
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error)
 }
 
@@ -23,5 +24,5 @@ extension ResetPasswordServiceDelegate {
     func resetPasswordService(_ service: ResetPasswordService, receivedOTPResponse response: ResetPasswordResponse) {}
     func resetPasswordService(_ service: ResetPasswordService, phoneVerified newMethods: [IdentityVerificationMethod]) {}
     func resetPasswordServiceVerifiedSecurityQuestion(_ service: ResetPasswordService) {}
-    func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {}
+    func resetPasswordServiceChangedPasswordSuccessfully(_ service: ResetPasswordService) {}
 }

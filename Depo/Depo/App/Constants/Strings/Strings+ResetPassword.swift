@@ -33,6 +33,8 @@ extension Strings {
         case resetPasswordSecurityQuestion       = "forgotMyPassword_security_question"
         case resetPasswordContinueButton         = "forgotMyPassword_continue"
         case resetPasswordEmailPopupMessage      = "forgotMyPassword_email_popup_message"
+        case resetPasswordCompleteButton         = "forgotMyPassword_password_complete"
+        case resetPasswordSuccessMessage         = "forgotMyPassword_reset_success_message"
     }
 }
 
