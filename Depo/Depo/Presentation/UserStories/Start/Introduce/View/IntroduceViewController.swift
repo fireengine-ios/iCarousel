@@ -39,7 +39,7 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
         hidenNavigationBarStyle()
         startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
         startUsingLifeBoxButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-        startUsingLifeBoxButton.backgroundColor = ColorConstants.marineTwo
+        startUsingLifeBoxButton.backgroundColor = AppColor.marineTwoAndTealish.color
         startUsingLifeBoxButton.setTitleColor(.white, for: .normal)
         startUsingLifeBoxButton.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
         startUsingLifeBoxButton.adjustsFontSizeToFitWidth()
