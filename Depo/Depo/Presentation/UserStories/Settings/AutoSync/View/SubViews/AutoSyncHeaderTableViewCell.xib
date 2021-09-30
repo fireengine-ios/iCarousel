@@ -46,7 +46,6 @@
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="I9V-oc-mqR">
                                         <rect key="frame" x="267" y="18" width="13" height="8"/>
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="primaryBackground"/>

@@ -44,7 +44,7 @@ final class TwoFactorAuthenticationCell: UITableViewCell {
             let nsRange = NSRange(location: range.lowerBound.encodedOffset,
                                   length: range.upperBound.encodedOffset - range.lowerBound.encodedOffset)
             
-            attributedString.addAttribute(.foregroundColor, value: UIColor.black, range: nsRange)
+            attributedString.addAttribute(.foregroundColor, value: AppColor.blackColor.color, range: nsRange)
         }
 
         receiveMethodLabel.attributedText = attributedString

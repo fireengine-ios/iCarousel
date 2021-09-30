@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +20,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TwoFactorAuthenticationViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TwoFactorAuthenticationViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="designer" destination="Ebc-xL-lds" id="Abh-rv-RO8"/>
                 <outlet property="errorView" destination="xIn-C9-vNP" id="mpt-o9-N9a"/>
@@ -37,14 +36,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZZ-By-E4b">
-                    <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbf-N2-N7N">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIn-C9-vNP" userLabel="Error View" customClass="ErrorBannerView" customModule="lifebox" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xIn-C9-vNP" userLabel="Error View" customClass="ErrorBannerView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="16" y="5" width="343" height="31"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="31" placeholder="YES" id="SDN-wS-nNZ"/>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="31" id="ptf-7b-PUy"/>
@@ -60,35 +59,35 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To secure your account and login safely, we’ll send you a security code to veriy your identity." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIj-7j-Nxa">
-                                    <rect key="frame" x="33" y="156" width="309" height="52.5"/>
+                                    <rect key="frame" x="33" y="156" width="309" height="30"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send the security code:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjs-RZ-630">
-                                    <rect key="frame" x="21" y="249.5" width="333" height="17"/>
+                                    <rect key="frame" x="21" y="227" width="333" height="17"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEW-bl-lO2">
-                                    <rect key="frame" x="16" y="269.5" width="359" height="1"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <rect key="frame" x="16" y="247" width="359" height="1"/>
+                                    <viewLayoutGuide key="safeArea" id="4kF-SL-6Px"/>
+                                    <color key="backgroundColor" name="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="jhN-6Z-XVa"/>
                                     </constraints>
-                                    <viewLayoutGuide key="safeArea" id="4kF-SL-6Px"/>
                                 </view>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="26" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-nx-O4M" customClass="ResizableTableView" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="270.5" width="375" height="128"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="128" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="26" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-nx-O4M" customClass="ResizableTableView" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="248" width="375" height="128"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="0tB-eC-E0P"/>
                                         <outlet property="delegate" destination="-1" id="shh-Mx-GFP"/>
                                     </connections>
                                 </tableView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5f-k5-CES" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="84.5" y="417.5" width="206" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5f-k5-CES" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="84.5" y="395" width="206" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="ikw-qu-pBx"/>
                                         <constraint firstAttribute="width" constant="206" id="o93-dd-Alj"/>
@@ -99,7 +98,8 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <viewLayoutGuide key="safeArea" id="BTt-iN-5Wh"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstItem="m5f-k5-CES" firstAttribute="top" secondItem="Yra-nx-O4M" secondAttribute="bottom" constant="19" id="1No-lo-z6B"/>
                                 <constraint firstAttribute="trailing" secondItem="WNf-eD-Chw" secondAttribute="trailing" constant="33" id="1TB-1Q-xE5"/>
@@ -123,7 +123,6 @@
                                 <constraint firstItem="xIn-C9-vNP" firstAttribute="top" secondItem="BTt-iN-5Wh" secondAttribute="top" constant="5" id="pzm-DM-wIT"/>
                                 <constraint firstItem="WNf-eD-Chw" firstAttribute="leading" secondItem="zbf-N2-N7N" secondAttribute="leading" constant="33" id="r0V-YJ-BPj"/>
                             </constraints>
-                            <viewLayoutGuide key="safeArea" id="BTt-iN-5Wh"/>
                         </view>
                     </subviews>
                     <constraints>
@@ -134,7 +133,8 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sZZ-By-E4b" secondAttribute="trailing" id="1q0-jO-p5i"/>
                 <constraint firstItem="zbf-N2-N7N" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" priority="250" id="7eP-uj-k65"/>
@@ -143,10 +143,9 @@
                 <constraint firstItem="zbf-N2-N7N" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="er4-5z-X5t"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="sZZ-By-E4b" secondAttribute="bottom" id="u6d-Gw-8rX"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="132.68365817091455"/>
         </view>
-        <customObject id="Ebc-xL-lds" customClass="TwoFactorAuthenticationDesigner" customModule="lifebox" customModuleProvider="target">
+        <customObject id="Ebc-xL-lds" customClass="TwoFactorAuthenticationDesigner" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="yIj-7j-Nxa" id="GzO-o4-jJm"/>
                 <outlet property="errorView" destination="xIn-C9-vNP" id="h5x-SD-LE9"/>
@@ -158,4 +157,12 @@
             </connections>
         </customObject>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="whiteColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

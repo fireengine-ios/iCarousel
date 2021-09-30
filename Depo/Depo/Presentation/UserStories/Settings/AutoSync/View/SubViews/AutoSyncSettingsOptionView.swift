@@ -27,7 +27,7 @@ final class AutoSyncSettingsOptionView: UIView {
         }
     }
     
-    private let checkMarkImage = UIImage(named: "checkmark")
+    private let checkMarkImage = UIImage(named: "backupCheckmark")
     
     private var option: AutoSyncOption = .wifiOnly {
         willSet { button.setTitle(newValue.localizedText, for: .normal) }
@@ -64,7 +64,6 @@ final class AutoSyncSettingsOptionView: UIView {
     private func setColors() {
         let textColor = UIColor.darkGray
         button.setTitleColor(textColor, for: .normal)
-        checkboxImageView.tintColor = UIColor.darkGray
     }
     
     private func setCheckmark(selected: Bool) {
