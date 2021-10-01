@@ -36,7 +36,7 @@ final class AlbumCellView: UIView {
     func setupStyle(with displayType: BaseDataSourceDisplayingType) {
         switch displayType {
         case .greed:
-            titleLabel.textColor = .black
+            titleLabel.textColor = AppColor.blackColor.color
             titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 14)
         case .list:
             titleLabel.textColor = ColorConstants.textGrayColor

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +17,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstaPickProgressPopup" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InstaPickProgressPopup" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="bottomCaption" destination="vB8-dd-TD0" id="BVe-TK-LtL"/>
                 <outlet property="bottomConstraint" destination="r6p-JE-ARS" id="Kyb-z7-fq8"/>
@@ -36,18 +35,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gOh-bg-eJT">
-                    <rect key="frame" x="16" y="36" width="343" height="607"/>
+                    <rect key="frame" x="16" y="16" width="343" height="627"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make sure to pick your best photos and reach more people!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="KtI-Qi-HYB">
-                            <rect key="frame" x="32" y="32" width="279" height="95"/>
+                            <rect key="frame" x="32" y="32" width="279" height="98"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaBol" family="TurkcellSaturaBol" pointSize="28"/>
-                            <color key="textColor" red="0.039215686274509803" green="0.19607843137254902" blue="0.27843137254901962" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" name="marineTwoAndWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enjoy your time while we analyze your photos!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vB8-dd-TD0">
-                            <rect key="frame" x="32" y="471" width="279" height="36"/>
+                            <rect key="frame" x="32" y="481" width="279" height="42"/>
                             <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                            <color key="textColor" red="0.036609407514333725" green="0.19467014074325562" blue="0.27790236473083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" name="marineTwoAndWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u1J-iq-dUr">
@@ -57,15 +56,15 @@
                                 <action selector="close:" destination="-1" eventType="touchUpInside" id="7Rd-wE-C34"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="255" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="SIH-wk-0Wm" customClass="InstaPickCircularLoader" customModule="lifebox" customModuleProvider="target">
-                            <rect key="frame" x="44" y="176" width="255" height="255"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="255" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="SIH-wk-0Wm" customClass="InstaPickCircularLoader" customModule="Billo" customModuleProvider="target">
+                            <rect key="frame" x="44" y="186" width="255" height="255"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="SIH-wk-0Wm" secondAttribute="height" multiplier="1:1" id="Di9-gE-vyT"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vB8-dd-TD0" secondAttribute="bottom" constant="16" id="7uK-PF-6bq"/>
                         <constraint firstItem="KtI-Qi-HYB" firstAttribute="leading" secondItem="gOh-bg-eJT" secondAttribute="leading" constant="32" id="DRY-aH-x7r"/>
@@ -84,6 +83,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="gOh-bg-eJT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Ste-GB-OYL"/>
@@ -91,11 +91,16 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gOh-bg-eJT" secondAttribute="bottom" constant="24" id="r6p-JE-ARS"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gOh-bg-eJT" secondAttribute="trailing" constant="16" id="z6E-VL-Wlh"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="294.53125" y="226.17187499999997"/>
         </view>
     </objects>
     <resources>
         <image name="grayCloseButton" width="17" height="17"/>
+        <namedColor name="marineTwoAndWhite">
+            <color red="0.024000000208616257" green="0.17299999296665192" blue="0.2630000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

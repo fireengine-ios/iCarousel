@@ -41,7 +41,7 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
         willSet {
             newValue.layer.cornerRadius = cornerRadiusForViews
             newValue.layer.masksToBounds = true
-            newValue.backgroundColor = UIColor.white
+            newValue.backgroundColor = AppColor.secondaryBackground.color
         }
     }
         
@@ -82,7 +82,7 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
         willSet {
             newValue.layer.cornerRadius = cornerRadiusForViews
             newValue.layer.masksToBounds = true
-            newValue.backgroundColor = UIColor.white
+            newValue.backgroundColor = AppColor.secondaryBackground.color
         }
     }
     
@@ -103,7 +103,7 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
     @IBOutlet private weak var bottomViewEditProfileButton: RoundedButton! {
         willSet {
             newValue.setTitle(TextConstants.campaignViewControllerEditProfileButton, for: .normal)
-            newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
+            newValue.setTitleColor(AppColor.lrTealishAndWhite.color, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.layer.borderColor = ColorConstants.blueColor.cgColor
             newValue.layer.borderWidth = 1
@@ -115,6 +115,7 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
     @IBOutlet private weak var showResultButton: BlueButtonWithMediumWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.campaignViewControllerShowResultButton, for: .normal)
+            newValue.setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
         }
     }
 }

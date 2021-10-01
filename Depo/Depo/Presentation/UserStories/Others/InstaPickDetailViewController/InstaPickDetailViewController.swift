@@ -125,6 +125,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     private func setup() {
         activityManager.delegate = self
         containerView.layer.cornerRadius = NumericConstants.instaPickDetailsPopUpCornerRadius
+        collectionView.layer.cornerRadius = NumericConstants.instaPickHashtagCellShadowRadius
         
         prepareToAppear()
         setupPhotoViews()
@@ -169,13 +170,13 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
         let isIPad = Device.isIpad
         
         topLabel.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 38 : 28)
-        topLabel.textColor = ColorConstants.darkBlueColor
+        topLabel.textColor = AppColor.marineTwoAndWhite.color
         
         analysisLeftLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
         analysisLeftLabel.textColor = ColorConstants.textGrayColor
         
         hashTagsLabel.font = UIFont.TurkcellSaturaDemFont(size: isIPad ? 24 : 18)
-        hashTagsLabel.textColor = ColorConstants.darkBlueColor
+        hashTagsLabel.textColor = AppColor.marineTwoAndWhite.color
         
         copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
         copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)

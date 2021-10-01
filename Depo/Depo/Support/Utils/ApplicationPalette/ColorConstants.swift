@@ -27,6 +27,7 @@ enum AppColor {
     case textPlaceholderColor
     case blackAndLrTealish
     case blackAndOrange
+    case hashtagBackground
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,7 +52,7 @@
                                                         <constraint firstAttribute="width" constant="50" id="4Fq-uK-Ivt"/>
                                                         <constraint firstAttribute="height" constant="50" id="gWa-1B-6Gr"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button" image="grayCloseButton"/>
+                                                    <state key="normal" image="grayCloseButton"/>
                                                     <connections>
                                                         <action selector="onCloseTap:" destination="-1" eventType="touchUpInside" id="blF-zg-0gi"/>
                                                     </connections>
@@ -125,13 +126,13 @@
                                                 </button>
                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="46" translatesAutoresizingMaskIntoConstraints="NO" id="WqY-Ek-QyG" customClass="ConnectWithInstaView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="118.5" y="203" width="100" height="46"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="46" id="Qqu-I4-Hdd"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="secondaryBackground"/>
                                             <constraints>
                                                 <constraint firstItem="d8G-Cm-3SK" firstAttribute="centerX" secondItem="5qA-Nd-7C5" secondAttribute="centerX" id="2RN-l0-fpr"/>
                                                 <constraint firstItem="8Pe-el-hgF" firstAttribute="top" secondItem="acp-lU-iDZ" secondAttribute="bottom" constant="8" id="3Qj-8s-79s"/>
@@ -195,7 +196,7 @@
                                     </constraints>
                                 </scrollView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstItem="WdP-tg-LbS" firstAttribute="top" secondItem="Gdu-Wa-FF6" secondAttribute="top" id="4UG-4G-kJG"/>
                                 <constraint firstAttribute="trailing" secondItem="WdP-tg-LbS" secondAttribute="trailing" id="9Bs-wA-YLX"/>
@@ -242,5 +243,8 @@
     <resources>
         <image name="checkMarkDarkBlueIcon" width="14" height="11"/>
         <image name="grayCloseButton" width="17" height="17"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

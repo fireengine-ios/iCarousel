@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CampaignDetailViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CampaignDetailViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="analyzeButton" destination="oSf-pP-mKY" id="sZI-ID-4Yf"/>
                 <outlet property="analyzeButtonShadowView" destination="UU3-wZ-riM" id="6nc-li-dKs"/>
@@ -38,14 +40,14 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yU0-BL-ZEk">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="133"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lZT-bn-AYd" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lZT-bn-AYd" customClass="LoadingImageView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="35" y="0.0" width="344" height="133"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="133" id="882-Hz-hNo"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstItem="lZT-bn-AYd" firstAttribute="leading" secondItem="yU0-BL-ZEk" secondAttribute="leading" constant="35" id="423-hc-9HE"/>
                                         <constraint firstAttribute="bottom" secondItem="lZT-bn-AYd" secondAttribute="bottom" id="CPh-0Z-tp5"/>
@@ -53,7 +55,7 @@
                                         <constraint firstItem="lZT-bn-AYd" firstAttribute="top" secondItem="yU0-BL-ZEk" secondAttribute="top" id="Owc-EM-Y9z"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="yYV-Ba-1qc" customClass="CampaignContestInfoView" customModule="lifebox" customModuleProvider="target">
+                                <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="yYV-Ba-1qc" customClass="CampaignContestInfoView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="171" width="414" height="85"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yFI-nP-35k">
@@ -114,7 +116,7 @@
                                             </constraints>
                                         </stackView>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="yFI-nP-35k" secondAttribute="bottom" id="9Lx-t5-id6"/>
                                         <constraint firstItem="yFI-nP-35k" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yYV-Ba-1qc" secondAttribute="leading" constant="30" id="BwH-FU-nFL"/>
@@ -132,14 +134,14 @@
                                         <outlet property="totalDrawLabel" destination="HaH-tY-n6L" id="jKQ-Tc-dj2"/>
                                     </connections>
                                 </view>
-                                <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBn-Rv-7w9" customClass="CampaignIntroView" customModule="lifebox" customModuleProvider="target">
+                                <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBn-Rv-7w9" customClass="CampaignIntroView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="294" width="414" height="250"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" verticalCompressionResistancePriority="749" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IsL-KR-EeI">
                                             <rect key="frame" x="14" y="0.0" width="386" height="250"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiK-ts-QMz">
-                                                    <rect key="frame" x="172" y="14" width="42" height="19"/>
+                                                    <rect key="frame" x="172.5" y="14" width="41.5" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="mQU-Wj-3fc"/>
                                                     </constraints>
@@ -187,7 +189,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" name="secondaryBackground"/>
                                             <constraints>
                                                 <constraint firstItem="GiK-ts-QMz" firstAttribute="top" secondItem="IsL-KR-EeI" secondAttribute="top" constant="14" id="0R5-Sw-5kx"/>
                                                 <constraint firstAttribute="trailing" secondItem="bWz-RJ-otj" secondAttribute="trailing" constant="36" id="8Wt-4n-4Iy"/>
@@ -215,7 +217,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstItem="IsL-KR-EeI" firstAttribute="leading" secondItem="fBn-Rv-7w9" secondAttribute="leading" constant="14" id="eYV-pO-aAf"/>
                                         <constraint firstItem="IsL-KR-EeI" firstAttribute="top" secondItem="fBn-Rv-7w9" secondAttribute="top" id="iBh-lz-DdG"/>
@@ -230,12 +232,12 @@
                                         <outlet property="titleLabel" destination="GiK-ts-QMz" id="mqC-c7-G3F"/>
                                     </connections>
                                 </view>
-                                <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jm6-WL-gtC" customClass="CampaingnInfoView" customModule="lifebox" customModuleProvider="target">
+                                <view contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jm6-WL-gtC" customClass="CampaingnInfoView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="582" width="414" height="142"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aUU-rS-wpQ">
                                             <rect key="frame" x="187" y="0.0" width="40" height="40"/>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="T67-42-IUg"/>
                                                 <constraint firstAttribute="height" constant="40" id="jez-Rc-TQu"/>
@@ -245,7 +247,7 @@
                                             <rect key="frame" x="14" y="19" width="386" height="123"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cir-WI-vOS">
-                                                    <rect key="frame" x="172" y="36" width="42" height="20"/>
+                                                    <rect key="frame" x="172.5" y="36" width="41.5" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="V0S-Lg-PZa"/>
                                                     </constraints>
@@ -260,7 +262,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="uAu-9m-pNE" firstAttribute="leading" secondItem="Nxs-cM-b6q" secondAttribute="leading" constant="30" id="6IJ-qt-T1o"/>
                                                 <constraint firstItem="Cir-WI-vOS" firstAttribute="centerX" secondItem="Nxs-cM-b6q" secondAttribute="centerX" id="JuR-6e-13O"/>
@@ -277,7 +279,7 @@
                                                     <rect key="frame" x="2" y="2" width="36" height="36"/>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="1b5-pu-ORy"/>
                                                 <constraint firstAttribute="trailing" secondItem="eYW-PI-lhh" secondAttribute="trailing" constant="2" id="O8W-0f-nSq"/>
@@ -288,7 +290,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstItem="Nxs-cM-b6q" firstAttribute="leading" secondItem="Jm6-WL-gtC" secondAttribute="leading" constant="14" id="1Fn-cA-7N0"/>
                                         <constraint firstAttribute="trailing" secondItem="Nxs-cM-b6q" secondAttribute="trailing" constant="14" id="1Tw-ZG-iIc"/>
@@ -308,7 +310,7 @@
                                         <outlet property="titleLabel" destination="Cir-WI-vOS" id="blf-Ge-iSf"/>
                                     </connections>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIp-Bu-RGm">
+                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIp-Bu-RGm">
                                     <rect key="frame" x="0.0" y="762" width="414" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="kEi-IN-AVg"/>
@@ -336,9 +338,9 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UU3-wZ-riM">
                             <rect key="frame" x="104" y="35" width="206" height="44"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSf-pP-mKY" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oSf-pP-mKY" customClass="BlueButtonWithMediumWhiteText" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="104" y="35" width="206" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Kfz-L8-Xwk"/>
@@ -362,7 +364,8 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="2YX-e2-OEb" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="1pC-JH-N9U"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="xng-zh-ap7" secondAttribute="trailing" id="1yd-0i-JXT"/>
@@ -373,7 +376,6 @@
                 <constraint firstItem="xng-zh-ap7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="fBD-Ek-zvK"/>
                 <constraint firstItem="ZAM-ad-FTR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="jZC-pf-xXg"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="135.9375"/>
         </view>
     </objects>
@@ -382,5 +384,14 @@
         <image name="gift" width="24" height="24"/>
         <image name="infoCircle" width="36" height="36"/>
         <image name="nounCelebration" width="24" height="24"/>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
