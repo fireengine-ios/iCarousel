@@ -28,9 +28,8 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     }
 
     func sendForgotPasswordRequest(withLogin login: String, enteredCaptcha: String, captchaUDID: String) {
-        trackForgotAction()
-
         if isV2Enabled {
+            trackForgotAction()
             callV2(login: login, enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
         } else {
             callV1(email: login, enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
