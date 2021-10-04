@@ -12,6 +12,7 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
     private let resetPasswordService: ResetPasswordService
     private let accountService: AccountService
     private let questionId: Int
+    private let analyticsService = AnalyticsService()
 
     init(resetPasswordService: ResetPasswordService,
          accountService: AccountService = AccountService(),
@@ -76,6 +77,11 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
         addTapGestureToHideKeyboard()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        trackScreen()
+    }
+
     @objc private func answerTextChanged() {
         let isEmpty = answerView.answerTextField.text?.isEmpty ?? true
         continueButton.isEnabled = !isEmpty
@@ -100,11 +106,15 @@ extension ValidateSecurityQuestionViewController: ResetPasswordServiceDelegate {
         viewControllers.removeLast() // IdentityVerificationViewController
         viewControllers.append(ResetPasswordViewController(resetPasswordService: resetPasswordService))
         navigationController.setViewControllers(viewControllers, animated: true)
+
+        trackContinueEvent(error: nil)
     }
 
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
         hideSpinnerIncludeNavigationBar()
         UIApplication.showErrorAlert(message: error.localizedDescription)
+
+        trackContinueEvent(error: error)
     }
 }
 
@@ -140,5 +150,19 @@ private extension ValidateSecurityQuestionViewController {
                 completion(nil)
             }
         }
+    }
+}
+
+private extension ValidateSecurityQuestionViewController {
+    func trackScreen() {
+        analyticsService.logScreen(screen: .validateSecurityQuestion)
+    }
+
+    func trackContinueEvent(error: Error?) {
+        analyticsService.trackCustomGAEvent(
+            eventCategory: .functions,
+            eventActions: .securityQuestion,
+            eventLabel: .result(error)
+        )
     }
 }

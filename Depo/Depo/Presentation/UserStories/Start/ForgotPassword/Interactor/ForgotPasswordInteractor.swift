@@ -11,12 +11,14 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     weak var output: ForgotPasswordInteractorOutput!
     private lazy var authenticationService = AuthenticationService()
     private(set) lazy var resetPasswordService = ResetPasswordService()
+    private let analyticsService = AnalyticsService()
 
     var isV2Enabled: Bool {
         return FirebaseRemoteConfig.shared.forgotPasswordV2Enabled
     }
     
     func trackScreen() {
+        analyticsService.logScreen(screen: .forgotPassword)
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ForgetPasswordScreen())
     }
 
@@ -26,6 +28,8 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     }
 
     func sendForgotPasswordRequest(withLogin login: String, enteredCaptcha: String, captchaUDID: String) {
+        trackForgotAction()
+
         if isV2Enabled {
             callV2(login: login, enteredCaptcha: enteredCaptcha, captchaUDID: captchaUDID)
         } else {
@@ -103,6 +107,14 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
             return localized(.resetPasswordErrorCaptchaText)
         }
         return nil
+    }
+
+    private func trackForgotAction() {
+        analyticsService.trackCustomGAEvent(
+            eventCategory: .functions,
+            eventActions: .click,
+            eventLabel: .forgotPassword
+        )
     }
 }
 

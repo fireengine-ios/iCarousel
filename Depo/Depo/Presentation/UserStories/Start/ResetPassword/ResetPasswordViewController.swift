@@ -9,6 +9,7 @@
 import UIKit
 
 final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
+    private let analyticsService = AnalyticsService()
     private let resetPasswordService: ResetPasswordService
     private let validator: UserValidator
 
@@ -228,10 +229,28 @@ extension ResetPasswordViewController: ResetPasswordServiceDelegate {
         UIApplication.showSuccessAlert(message: localized(.resetPasswordSuccessMessage)) { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
+
+        trackResetEvent(error: nil)
     }
 
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
         hideSpinnerIncludeNavigationBar()
         UIApplication.showErrorAlert(message: error.localizedDescription)
+
+        trackResetEvent(error: error)
+    }
+}
+
+private extension ResetPasswordViewController {
+    func trackScreen() {
+        analyticsService.logScreen(screen: .resetPassword)
+    }
+
+    func trackResetEvent(error: Error?) {
+        analyticsService.trackCustomGAEvent(
+            eventCategory: .functions,
+            eventActions: .resetPassword,
+            eventLabel: .result(error)
+        )
     }
 }

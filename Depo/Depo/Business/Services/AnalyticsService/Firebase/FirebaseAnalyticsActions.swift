@@ -123,6 +123,14 @@ enum GAEventAction {
     case invitation
     case photoPrint
 
+    case verificationMethod
+    case verificationMethod2Challenge
+    case forgotPassword
+    case forgotPassword2
+    case securityQuestion
+    case otpSignup
+    case resetPassword
+
     var text: String {
         switch self {
         case .purchase:
@@ -332,6 +340,20 @@ enum GAEventAction {
             return "Invitation"
         case .photoPrint:
             return "PhotoPrint"
+        case .verificationMethod:
+            return "Verification Method"
+        case .verificationMethod2Challenge:
+            return "Verification Method Step 2"
+        case .forgotPassword:
+            return "Forgot Password"
+        case .forgotPassword2:
+            return "Forgot Password 2"
+        case .securityQuestion:
+            return "Security Question"
+        case .otpSignup:
+            return "OTP - Signup"
+        case .resetPassword:
+            return "Reset Password"
         }
     }
 }

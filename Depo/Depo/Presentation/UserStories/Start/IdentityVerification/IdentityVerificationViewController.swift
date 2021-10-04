@@ -9,6 +9,7 @@
 import UIKit
 
 final class IdentityVerificationViewController: BaseViewController {
+    private let analyticsService = AnalyticsService()
     private let resetPasswordService: ResetPasswordService
     let availableMethods: [IdentityVerificationMethod]
 
@@ -51,6 +52,11 @@ final class IdentityVerificationViewController: BaseViewController {
         dataSource.availableMethods = availableMethods
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        trackScreen()
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         setupHeader()
@@ -64,13 +70,14 @@ final class IdentityVerificationViewController: BaseViewController {
         resetPasswordService.proceedVerification(with: selectedMethod)
     }
 
-    private func showLinkSentToEmailPopupAndExit(email: String) {
+    private func showLinkSentToEmailPopupAndExit(email: String, isRecoveryEmail: Bool = false) {
         let message = String(format: localized(.resetPasswordEmailPopupMessage), email)
         let buttonTitle = TextConstants.ok
 
         let popup = PopUpController.with(title: nil, message: message,
                                          image: .success, buttonTitle: buttonTitle) { [weak self] popup in
             popup.close()
+            self?.trackEmailSentEvent(isRecoveryEmail: isRecoveryEmail)
             self?.navigationController?.popViewController(animated: true)
         }
 
@@ -99,7 +106,7 @@ extension IdentityVerificationViewController: ResetPasswordServiceDelegate {
         case let .email(email):
             showLinkSentToEmailPopupAndExit(email: email)
         case let .recoveryEmail(email):
-            showLinkSentToEmailPopupAndExit(email: email)
+            showLinkSentToEmailPopupAndExit(email: email, isRecoveryEmail: true)
         case let .sms(phoneNumber):
             navigateToOTP(phoneNumber: phoneNumber)
         case let .securityQuestion(id):
@@ -140,6 +147,49 @@ private extension IdentityVerificationViewController {
         } else {
             titleLabel.text = localized(.resetPasswordChallenge1Header)
             descriptionLabel.text = localized(.resetPasswordChallenge1Body)
+        }
+    }
+}
+
+// MARK: Analytics
+private extension IdentityVerificationViewController {
+    private var isInSecondChallenge: Bool { resetPasswordService.isInSecondChallenge }
+
+    func trackScreen() {
+        analyticsService.logScreen(screen: isInSecondChallenge ? .identityVerification2Challenge : .identityVerification)
+    }
+
+    func trackContinueEvent(method: IdentityVerificationMethod) {
+        guard let label = analyticsLabel(for: method) else { return }
+
+        let action: GAEventAction = isInSecondChallenge ? .verificationMethod2Challenge : .verificationMethod
+        analyticsService.trackCustomGAEvent(
+            eventCategory: .functions,
+            eventActions: action,
+            eventLabel: label
+        )
+    }
+
+    func trackEmailSentEvent(isRecoveryEmail: Bool) {
+        analyticsService.trackCustomGAEvent(
+            eventCategory: .popUp,
+            eventActions: isInSecondChallenge ? .forgotPassword2 : .forgotPassword,
+            eventLabel: .resetPasswordMethod(isRecoveryEmail ? .recoveryEmail : .email)
+        )
+    }
+
+    private func analyticsLabel(for method: IdentityVerificationMethod) -> GAEventLabel? {
+        switch method {
+        case .email:
+            return .resetPasswordMethod(.email)
+        case .recoveryEmail:
+            return .resetPasswordMethod(.recoveryEmail)
+        case .sms:
+            return .resetPasswordMethod(.phoneNumber)
+        case .securityQuestion:
+            return .resetPasswordMethod(.securityQuestion)
+        case .unknown:
+            return nil
         }
     }
 }

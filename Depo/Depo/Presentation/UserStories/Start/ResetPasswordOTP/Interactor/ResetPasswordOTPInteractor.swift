@@ -13,6 +13,7 @@ protocol ResetPasswordOTPInteractorOutput: PhoneVerificationInteractorOutput {
 }
 
 final class ResetPasswordOTPInteractor {
+    private let analyticsService = AnalyticsService()
     private let resetPasswordService: ResetPasswordService
     let phoneNumber: String
 
@@ -82,21 +83,41 @@ extension ResetPasswordOTPInteractor: ResetPasswordServiceDelegate {
     func resetPasswordService(_ service: ResetPasswordService,
                               phoneVerified newMethods: [IdentityVerificationMethod]) {
         output.verified(with: resetPasswordService, newMethods: newMethods)
+
+        trackContinueEvent(error: nil)
     }
 
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
         if isVerifying {
             verifyCodeFailed(with: error)
+
+            trackContinueEvent(error: nil)
         } else {
             resendCodeFailed(with: error)
         }
     }
 }
 
+extension ResetPasswordOTPInteractor {
+    func trackScreen(isTimerExpired: Bool) {
+        // TODO: check if sending these is needed too
+//        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.OTPSignupScreen())
+        analyticsService.logScreen(screen: .signUpOTP)
+//        analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
+    }
+
+    private func trackContinueEvent(error: Error?) {
+        analyticsService.trackCustomGAEvent(
+            eventCategory: .functions,
+            eventActions: .otpSignup,
+            eventLabel: .result(error)
+        )
+    }
+}
+
 extension ResetPasswordOTPInteractor: PhoneVerificationInteractorInput {
     func showPopUp(with text: String) {}
     func authificate(atachedCaptcha: CaptchaParametrAnswer?) {}
-    func trackScreen(isTimerExpired: Bool) {}
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {}
     func updateEmptyEmail() {}
     func stopUpdatePhone() {}

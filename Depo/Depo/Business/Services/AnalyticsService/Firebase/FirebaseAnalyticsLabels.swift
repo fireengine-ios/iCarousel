@@ -388,6 +388,26 @@ enum GAEventLabel {
             }
         }
     }
+
+    enum ResetPasswordMethod {
+        case email
+        case recoveryEmail
+        case phoneNumber
+        case securityQuestion
+
+        var text: String {
+            switch self {
+            case .email:
+                return "E-posta"
+            case .recoveryEmail:
+                return "Kurtarma E-posta"
+            case .phoneNumber:
+                return "Telefon Numarası"
+            case .securityQuestion:
+                return "Güvenlik Sorusu"
+            }
+        }
+    }
     
     case empty
     case custom(String)
@@ -493,6 +513,9 @@ enum GAEventLabel {
     case privateShare(PrivateShareEvent)
     case homePageCard(_ event: HomePageCardEvent)
     case invitation(_ event: InvitationEvent)
+
+    case forgotPassword
+    case resetPasswordMethod(_ method: ResetPasswordMethod)
 
     var text: String {
         switch self {
@@ -726,6 +749,11 @@ enum GAEventLabel {
             return event.text
         case .homePageCard(let event):
             return event.text
+        //
+        case .forgotPassword:
+            return "Şifreyi Sıfırla"
+        case .resetPasswordMethod(let method):
+            return method.text
         }
     }
     
