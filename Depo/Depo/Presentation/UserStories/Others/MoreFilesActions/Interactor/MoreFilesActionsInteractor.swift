@@ -97,7 +97,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     private func showSharingMenu(types: [ShareTypes], sourceRect: CGRect?) {
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        controler.view.tintColor = ColorConstants.darkBlueColor
+        controler.view.tintColor = AppColor.marineTwoAndWhite.color
         
         types.forEach {
             controler.addAction(getAction(shareType: $0, sourceRect: sourceRect))

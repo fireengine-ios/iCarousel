@@ -178,6 +178,7 @@ private extension ContactListViewController {
     
     func showMoreActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.view.tintColor = AppColor.blackColor.color
         
         let deleteAllAction = UIAlertAction(title: TextConstants.contactListDeleteAll, style: .default) { [weak self] _ in
             self?.showPopup(type: .deleteAllContacts, backup: self?.backUpInfo)

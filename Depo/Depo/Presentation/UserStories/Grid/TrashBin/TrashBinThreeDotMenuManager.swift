@@ -74,7 +74,7 @@ final class TrashBinThreeDotMenuManager {
         let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel)
         actionSheetVC.addAction(cancelAction)
         
-        actionSheetVC.view.tintColor = UIColor.black
+        actionSheetVC.view.tintColor = AppColor.blackColor.color
         actionSheetVC.popoverPresentationController?.sourceView = view
         
         if let barButtonItem = sender as? UIBarButtonItem {

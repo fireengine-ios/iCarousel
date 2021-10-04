@@ -678,6 +678,7 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
 
     func openViewTypeMenu(sender: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.view.tintColor = AppColor.blackColor.color
         
         let actions = GalleryViewType.createAlertActions { [weak self] type in
             self?.changeViewType(to: type)

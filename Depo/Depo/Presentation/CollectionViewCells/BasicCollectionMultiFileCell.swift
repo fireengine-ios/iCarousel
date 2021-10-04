@@ -231,7 +231,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         isCellSelected = isSelected
         isCellSelectionEnabled = isSelectionActive
         selectionImageView.isHidden = !isSelectionActive
-        var bgColor: UIColor = ColorConstants.whiteColor
+        var bgColor: UIColor = AppColor.secondaryBackground.color ?? ColorConstants.whiteColor
         if isSelectionActive {
             selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
             
@@ -244,7 +244,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 setSelectionSmallSelectionImageView(false, isHidden: true)
             } else {
                 bigSelectionView.alpha = 0
-                bgColor = ColorConstants.whiteColor
+                bgColor = AppColor.secondaryBackground.color ?? ColorConstants.whiteColor
                 if !smallContentImageView.configured {
                     smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
                     smallCellSelectionView.isHidden = !isSelected

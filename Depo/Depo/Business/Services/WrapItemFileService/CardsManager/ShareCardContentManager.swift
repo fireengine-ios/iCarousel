@@ -26,7 +26,7 @@ final class ShareCardContentManager {
     func presentSharingMenu(item: BaseDataSourceItem, type: CardShareType) {
         
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        controler.view.tintColor = ColorConstants.darkBlueColor
+        controler.view.tintColor = AppColor.marineTwoAndWhite.color
         
         if type.isOrigin {
             

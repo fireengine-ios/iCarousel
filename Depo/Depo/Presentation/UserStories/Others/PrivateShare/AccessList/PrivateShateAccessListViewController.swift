@@ -103,6 +103,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
     
     private func showRoleSelectionMenu(sender: UIButton, handler: @escaping ValueHandler<SelectionRole>) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheet.view.tintColor = AppColor.blackColor.color
         
         SelectionRole.allCases.forEach { role in
             let action = UIAlertAction(title: role.title, style: role.actionStyle) { _ in

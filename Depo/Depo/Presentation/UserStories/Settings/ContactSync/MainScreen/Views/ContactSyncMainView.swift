@@ -81,7 +81,7 @@ final class ContactSyncMainView: UIView, NibInit {
         let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel)
         actionSheetVC.addAction(cancelAction)
         
-        actionSheetVC.view.tintColor = UIColor.black
+        actionSheetVC.view.tintColor = AppColor.blackColor.color
         actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
         
         return actionSheetVC
