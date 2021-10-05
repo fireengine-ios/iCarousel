@@ -90,6 +90,7 @@ final class FirebaseRemoteConfig {
 
     func performInitialFetch() {
         debugLog("performing inital fetch")
+        logLastFetchInfo()
         remoteConfig.fetchAndActivate { status, error in
             switch status {
             case .successFetchedFromRemote:
@@ -104,6 +105,7 @@ final class FirebaseRemoteConfig {
 
     private func fetch(key: String, completion: @escaping VoidHandler) {
         debugLog("fetching value for \(key)")
+        logLastFetchInfo()
         remoteConfig.fetchAndActivate { status, error in
             switch status {
                 case .successFetchedFromRemote:
@@ -115,6 +117,30 @@ final class FirebaseRemoteConfig {
             }
             
             completion()
+        }
+    }
+
+    private func logLastFetchInfo() {
+        if let time = remoteConfig.lastFetchTime {
+            debugLog("last fetch time: \(time)")
+        }
+        debugLog("last fetch status: \(remoteConfig.lastFetchStatus.text)")
+    }
+}
+
+private extension RemoteConfigFetchStatus {
+    var text: String {
+        switch self {
+        case .noFetchYet:
+            return "FIRRemoteConfigFetchStatusNoFetchYet"
+        case .success:
+            return "FIRRemoteConfigFetchStatusSuccess"
+        case .failure:
+            return "FIRRemoteConfigFetchStatusFailure"
+        case .throttled:
+            return "FIRRemoteConfigFetchStatusThrottled"
+        @unknown default:
+            return "??"
         }
     }
 }
