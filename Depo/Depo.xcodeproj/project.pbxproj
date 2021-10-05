@@ -8375,6 +8375,8 @@
 		CFEB1FFD25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */; };
 		D0A9A44EC3C58B0D7CBF8A1A /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD15AE640AD597AB4E12CDEE /* Pods_LifeboxFileProviderUI.framework */; };
 		D910F773C4C0ED4D155C904A /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194FFE25625A80F2C0B29404 /* Pods_LifeboxShared.framework */; };
+		F02E456F270B3BA700C84374 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
+		F02E4573270B3BA900C84374 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F02F6A9F269C16C000A64ED8 /* PasswordRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */; };
 		F02F6AA0269C16C000A64ED8 /* PasswordRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */; };
 		F02F6AA2269C16C000A64ED8 /* PasswordRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */; };
@@ -21201,6 +21203,7 @@
 				8C6A1DCC2317EAEC00D792B9 /* container in Resources */,
 				988BA18D255924670086E4BE /* PrivateShareAddMessageView.xib in Resources */,
 				982319E424F3A1E700FD16E2 /* PhotoEditNavbar.xib in Resources */,
+				F02E456F270B3BA700C84374 /* Colors.xcassets in Resources */,
 				CE784E9922A685FB00662219 /* WaitingForWiFiPopUp.xib in Resources */,
 				CE784E9C22A685FB00662219 /* ConnectWithInstaView.xib in Resources */,
 				890F737422EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
@@ -21900,6 +21903,7 @@
 				CF8B727023CBCA280021B021 /* VerifyEmailPopUp.xib in Resources */,
 				0305A30D23D5C300004D1EC7 /* DivorceCard.xib in Resources */,
 				CF8B727623CBCA280021B021 /* PasswordCell.xib in Resources */,
+				F02E4573270B3BA900C84374 /* Colors.xcassets in Resources */,
 				CF8B727823CBCA280021B021 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				CF8B727923CBCA280021B021 /* QuestionCell.xib in Resources */,
 				9823199D24F3A1E700FD16E2 /* LightView.xib in Resources */,
