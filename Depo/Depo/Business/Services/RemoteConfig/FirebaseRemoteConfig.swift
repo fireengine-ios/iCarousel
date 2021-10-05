@@ -99,6 +99,8 @@ final class FirebaseRemoteConfig {
                 debugLog("initial fetch: using prefetched values")
             case .error:
                 debugLog("initial fetch error: \(error?.description ?? "unknown")")
+            @unknown default:
+                debugLog("unknown status \(status)")
             }
         }
     }
@@ -108,12 +110,14 @@ final class FirebaseRemoteConfig {
         logLastFetchInfo()
         remoteConfig.fetchAndActivate { status, error in
             switch status {
-                case .successFetchedFromRemote:
-                    debugLog("fetched new value for \(key)")
-                case .successUsingPreFetchedData:
-                    debugLog("using prefetched value for \(key)")
-                case .error:
-                    debugLog("error: \(error?.description ?? "unknown")")
+            case .successFetchedFromRemote:
+                debugLog("fetched new value for \(key)")
+            case .successUsingPreFetchedData:
+                debugLog("using prefetched value for \(key)")
+            case .error:
+                debugLog("error: \(error?.description ?? "unknown")")
+            @unknown default:
+                debugLog("unknown status \(status)")
             }
             
             completion()
