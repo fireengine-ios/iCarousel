@@ -48,6 +48,8 @@ final class AnalyticsService: NSObject {
         #else
         let adjustConfig = ADJConfig(appToken: "lonks83r2gow", environment: environment)
         #endif
+
+        adjustConfig?.delegate = self
         Adjust.appDidLaunch(adjustConfig)
     }
     
@@ -121,6 +123,13 @@ final class AnalyticsService: NSObject {
             AppEvents.logEvent(AppEvents.Name(rawValue: name), parameters: parameters)
         }
     }    
+}
+
+extension AnalyticsService: AdjustDelegate {
+    func adjustDeeplinkResponse(_ deeplink: URL?) -> Bool {
+        debugLog("got deferred deeplink \(deeplink?.absoluteString ?? "--")")
+        return true
+    }
 }
 
 protocol AnalyticsGA {///GA = GoogleAnalytics
