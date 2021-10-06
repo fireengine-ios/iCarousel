@@ -69,7 +69,7 @@ final class HSCompletionPopUp: BasePopUpController {
 
     @IBOutlet private weak var gradientView: TransparentGradientView! {
         willSet {
-            newValue.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+            newValue.backgroundColor = AppColor.secondaryBackground.color?.withAlphaComponent(0.8)
             newValue.isFlipedColors = true
             newValue.style = .horizontal
         }
@@ -95,7 +95,7 @@ final class HSCompletionPopUp: BasePopUpController {
         willSet {
             newValue.text = TextConstants.hideSuccessedAlertPeopleAlbumDescription
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.darkText
+            newValue.textColor = AppColor.darkTextAndLightGray.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }

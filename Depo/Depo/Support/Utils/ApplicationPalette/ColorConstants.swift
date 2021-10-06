@@ -30,6 +30,9 @@ enum AppColor {
     case hashtagBackground
     case billoGrayAndWhite
     case darkBlueAndBilloBlue
+    case popupGray
+    case blueAndGray
+    case darkTextAndLightGray
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))

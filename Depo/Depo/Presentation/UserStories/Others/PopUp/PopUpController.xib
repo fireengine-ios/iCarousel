@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopUpController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopUpController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="buttonsView" destination="XTn-VC-Atd" id="OG0-4R-TQc"/>
                 <outlet property="containerView" destination="8qh-Pd-GkY" id="hdX-LD-sND"/>
@@ -79,7 +80,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="secondaryBackground"/>
                                             <constraints>
                                                 <constraint firstItem="XKY-VJ-kva" firstAttribute="top" secondItem="faa-BU-RXd" secondAttribute="bottom" constant="12" id="3bZ-7K-bt1"/>
                                                 <constraint firstItem="XKY-VJ-kva" firstAttribute="leading" secondItem="RH9-1C-TFf" secondAttribute="leading" id="4Re-rv-VK8"/>
@@ -93,7 +94,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTn-VC-Atd" userLabel="Buttons View">
                                             <rect key="frame" x="0.0" y="158" width="300" height="46"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOr-8G-xaM" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="-1" y="5" width="151.5" height="42"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -105,7 +106,7 @@
                                                         <action selector="actionFirstButton:" destination="-1" eventType="touchUpInside" id="IZp-kj-ddd"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-a4-N9J" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="149.5" y="5" width="151.5" height="42"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -117,7 +118,7 @@
                                                         <action selector="actionSecondButton:" destination="-1" eventType="touchUpInside" id="YsY-0M-0gM"/>
                                                     </connections>
                                                 </button>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E35-PW-HUa" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E35-PW-HUa" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="-1" y="5" width="302" height="42"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -130,7 +131,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="secondaryBackground"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="E35-PW-HUa" secondAttribute="trailing" constant="-1" id="CMb-SU-8Iq"/>
                                                 <constraint firstAttribute="bottom" secondItem="fg5-a4-N9J" secondAttribute="bottom" constant="-1" id="DQj-tW-j9I"/>
@@ -148,7 +149,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="secondaryBackground"/>
                                     <constraints>
                                         <constraint firstItem="XTn-VC-Atd" firstAttribute="leading" secondItem="8qh-Pd-GkY" secondAttribute="leading" id="4AL-GN-wJj"/>
                                         <constraint firstAttribute="trailing" secondItem="XTn-VC-Atd" secondAttribute="trailing" id="609-w8-hy8"/>
@@ -221,4 +222,9 @@
             <point key="canvasLocation" x="140" y="155"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
