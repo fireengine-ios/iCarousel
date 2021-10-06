@@ -93,10 +93,8 @@ final class ResetPasswordService: BaseRequestService, ResetPasswordServiceProtoc
         guard let referenceToken = self.referenceToken else { return }
         callValidatePhoneNumber(referenceToken: referenceToken, otp: code) { result in
             switch result {
-            case let .success(response):
-                self.isInSecondChallenge = true
-                self.referenceToken = response.referenceToken
-                self.checkStatusAfterPhoneVerification(referenceToken: response.referenceToken ?? referenceToken)
+            case .success:
+                self.checkStatusAfterPhoneVerification(referenceToken: referenceToken)
 
             case let .failure(error):
                 self.delegate?.resetPasswordService(self, receivedError: error)
@@ -216,15 +214,10 @@ private extension ResetPasswordService {
         executePostRequest(param: param, handler: handler)
     }
 
-    func callValidatePhoneNumber(referenceToken: String, otp: String, completion: @escaping ResponseCompletion<ResetPasswordResponse>) {
+    func callValidatePhoneNumber(referenceToken: String, otp: String, completion: @escaping ResponseCompletion<Void>) {
         let param = ValidatePhoneNumber(token: referenceToken, otp: otp)
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
-            do {
-                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
-                completion(.success(response))
-            } catch {
-                completion(.failure(error))
-            }
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { _ in
+            completion(.success(()))
         } fail: { error in
             completion(.failure(error))
         }
@@ -235,8 +228,8 @@ private extension ResetPasswordService {
         let param = TokenInBody(token: referenceToken, url: RouteRequests.ForgotMyPassword.checkStatus)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse> { legacyResponse in
             do {
-                let response = try legacyResponse.decodedResponse(APIResponse<ResetPasswordResponse>.self)
-                completion(.success(response.value))
+                let response = try legacyResponse.decodedResponse(ResetPasswordResponse.self)
+                completion(.success(response))
             } catch {
                 completion(.failure(error))
             }
