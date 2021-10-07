@@ -51,7 +51,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     @IBOutlet private weak var selectionStateView: UIView! {
         willSet {
             newValue.layer.borderWidth = 3
-            newValue.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+            newValue.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
             newValue.alpha = 0
         }
     }

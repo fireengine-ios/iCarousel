@@ -56,7 +56,7 @@ final class PasswordView: UIView, NibInit {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.isSecureTextEntry = true
-            newValue.textColor = UIColor.black
+            newValue.textColor = AppColor.blackColor.color
             newValue.borderStyle = .none
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true

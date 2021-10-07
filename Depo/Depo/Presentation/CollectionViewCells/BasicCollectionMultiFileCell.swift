@@ -292,11 +292,11 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         smallCellSelectionView.contentMode = .center
         
         smallSelectonView.layer.borderWidth = 3
-        smallSelectonView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+        smallSelectonView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
         smallSelectonView.alpha = 0
         
         bigSelectionView.layer.borderWidth = 3
-        bigSelectionView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+        bigSelectionView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
         bigSelectionView.alpha = 0
         
         fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)

@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -48,6 +49,7 @@
                         </connections>
                     </button>
                 </subviews>
+                <color key="backgroundColor" name="primaryBackground"/>
                 <constraints>
                     <constraint firstItem="zTv-Cx-9Ar" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9PJ-x6-XdP"/>
                     <constraint firstAttribute="trailing" secondItem="kzy-5N-7Kx" secondAttribute="trailing" constant="13" id="DoO-YQ-3Vj"/>
@@ -70,5 +72,8 @@
     </objects>
     <resources>
         <image name="creationStroryItemPlay" width="28" height="28"/>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

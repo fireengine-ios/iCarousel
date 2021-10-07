@@ -19,7 +19,7 @@ class SelectionImageView: UIImageView {
         super.awakeFromNib()
         
         cornerView.backgroundColor = UIColor.clear
-        cornerView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+        cornerView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
         cornerView.layer.borderWidth = 2
         cornerView.alpha = 0
         addSubview(cornerView)

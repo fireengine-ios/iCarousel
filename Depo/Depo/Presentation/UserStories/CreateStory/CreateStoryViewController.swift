@@ -51,7 +51,7 @@ final class CreateStoryViewController: BaseViewController {
             if let range = text.range(of: TextConstants.createStoryPressAndHold) {
                 let rangeAttributes: [NSAttributedString.Key : Any] = [
                     .font : UIFont.TurkcellSaturaBolFont(size: 18),
-                    .foregroundColor : ColorConstants.darkBlueColor
+                    .foregroundColor : AppColor.darkBlueAndTealish.color ?? ColorConstants.darkBlueColor
                 ]
                 let nsRange = NSRange(location: range.lowerBound.encodedOffset,
                                       length: range.upperBound.encodedOffset - range.lowerBound.encodedOffset)
@@ -79,7 +79,7 @@ final class CreateStoryViewController: BaseViewController {
         willSet {
             newValue.setTitle(TextConstants.createStoryPhotosOrderNextButton, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
+            newValue.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.darkBlueColor, for: .normal)
             newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
             
             newValue.layer.shadowOffset = .zero

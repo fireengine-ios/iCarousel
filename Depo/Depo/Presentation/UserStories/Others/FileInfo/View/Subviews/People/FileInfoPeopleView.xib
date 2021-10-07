@@ -99,7 +99,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstItem="rUn-ie-n85" firstAttribute="top" secondItem="U23-Nu-3GD" secondAttribute="top" id="J5I-1D-cEZ"/>
                                         <constraint firstItem="rUn-ie-n85" firstAttribute="leading" secondItem="U23-Nu-3GD" secondAttribute="leading" id="MeJ-i3-O6z"/>
@@ -118,7 +118,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="Jng-aN-req" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0I1-M3-amk"/>
                 <constraint firstAttribute="bottom" secondItem="Jng-aN-req" secondAttribute="bottom" id="9pQ-kL-kcY"/>
@@ -146,6 +146,9 @@
     <resources>
         <namedColor name="itemSeperator">
             <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

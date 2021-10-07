@@ -96,7 +96,7 @@ class BaseViewController: ViewController {
     }
     
     func getBackgroundColor() -> UIColor {
-        return UIColor.white
+        return AppColor.primaryBackground.color ?? .white
     }
 }
 

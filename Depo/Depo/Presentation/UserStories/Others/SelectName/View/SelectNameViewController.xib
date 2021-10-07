@@ -33,7 +33,7 @@
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="06S-0p-4hq">
                     <rect key="frame" x="7" y="92" width="361" height="1"/>
-                    <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" name="itemSeperator"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="TNH-GZ-ZTf"/>
                     </constraints>
@@ -54,6 +54,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="itemSeperator">
+            <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

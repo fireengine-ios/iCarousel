@@ -67,7 +67,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                 
         defaultNavBarStyle()
 
-        statusBarColor = .white
+        statusBarColor = AppColor.primaryBackground.color
         
         if let topBarVc = UIApplication.topController() as? TabBarViewController {
             topBarVc.statusBarStyle = .default
@@ -86,7 +86,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         let navBar = navigationController?.navigationBar
         navBar?.barTintColor = UIColor.white
         navBar?.tintColor = ColorConstants.darkBlueColor
-        navBar?.setBackgroundImage(UIImage(color: .white), for: .default)
+        navBar?.setBackgroundImage(UIImage(color: AppColor.primaryBackground.color ?? .white), for: .default)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -185,13 +185,13 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.sizeToFit()
         searchBar.showsCancelButton = true
         searchBar.backgroundImage = UIImage(color: ColorConstants.searchBarColor)
-        searchBar.tintColor = ColorConstants.darkBlueColor
+        searchBar.tintColor = AppColor.marineTwoAndWhite.color
         searchBar.delegate = self
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
         searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 44))
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.primaryBackground.color
         searchBar.addSubview(view)
         searchBar.sendSubviewToBack(view)
         
@@ -201,7 +201,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             textField.backgroundColor = ColorConstants.searchBarColor
             textField.placeholder = TextConstants.search
             textField.font = UIFont.TurkcellSaturaBolFont(size: 19)
-            textField.textColor = ColorConstants.darkBlueColor
+            textField.textColor = AppColor.marineTwoAndWhite.color
             textField.keyboardAppearance = .dark
             searchTextField = textField
         }

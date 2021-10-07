@@ -40,7 +40,7 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
         willSet {
             newValue.text = TextConstants.myStreamPeopleTitle
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndTealish.color
         }
     }
 
