@@ -54,6 +54,12 @@ final class IdentityVerificationViewController: BaseViewController {
         trackScreen()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // hidden by LoginViewController on swipe back and forth
+        self.navigationController?.isNavigationBarHidden = false
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
