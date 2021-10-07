@@ -50,11 +50,17 @@ final class IdentityVerificationViewController: BaseViewController {
 
         dataSource = IdentityVerificationDataSource(tableView: tableView)
         dataSource.availableMethods = availableMethods
+
+        trackScreen()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        trackScreen()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // back navigation (swiped / back tapped)
+        if parent == nil {
+            trackBackEvent()
+        }
     }
 
     override func viewWillLayoutSubviews() {
@@ -153,10 +159,16 @@ private extension IdentityVerificationViewController {
 
 // MARK: Analytics
 private extension IdentityVerificationViewController {
-    private var isInSecondChallenge: Bool { resetPasswordService.isInSecondChallenge }
+    var isInSecondChallenge: Bool { resetPasswordService.isInSecondChallenge }
 
     func trackScreen() {
         analyticsService.logScreen(screen: isInSecondChallenge ? .identityVerification2Challenge : .identityVerification)
+
+        AnalyticsService.sendNetmeraEvent(
+            event: isInSecondChallenge
+                ? NetmeraEvents.Screens.FPVerificationMethod2Screen()
+                : NetmeraEvents.Screens.FPVerificationMethodScreen()
+        )
     }
 
     func trackContinueEvent(method: IdentityVerificationMethod) {
@@ -168,6 +180,22 @@ private extension IdentityVerificationViewController {
             eventActions: action,
             eventLabel: label
         )
+
+        guard let netmeraMethod = netmeraMethod(for: method) else { return }
+
+        AnalyticsService.sendNetmeraEvent(
+            event: isInSecondChallenge
+                ? NetmeraEvents.Actions.FPVerificationMethod2(method: netmeraMethod)
+                : NetmeraEvents.Actions.FPVerificationMethod(method: netmeraMethod)
+        )
+    }
+
+    func trackBackEvent() {
+        AnalyticsService.sendNetmeraEvent(
+            event: isInSecondChallenge
+                ? NetmeraEvents.Actions.FPVerificationMethod2Back()
+                : NetmeraEvents.Actions.FPVerificationMethodBack()
+        )
     }
 
     func trackEmailSentEvent(isRecoveryEmail: Bool) {
@@ -176,9 +204,17 @@ private extension IdentityVerificationViewController {
             eventActions: isInSecondChallenge ? .forgotPassword2 : .forgotPassword,
             eventLabel: .resetPasswordMethod(isRecoveryEmail ? .recoveryEmail : .email)
         )
+
+        let netmeraMailType: NetmeraEventValues.FPMailType = isRecoveryEmail ? .recoveryEmail : .email
+        AnalyticsService.sendNetmeraEvent(
+            event: isInSecondChallenge
+                ? NetmeraEvents.Actions.FPSentMail2(mailType: netmeraMailType)
+                : NetmeraEvents.Actions.FPSentMail(mailType: netmeraMailType)
+        )
     }
 
-    private func analyticsLabel(for method: IdentityVerificationMethod) -> GAEventLabel? {
+    // helpers
+    func analyticsLabel(for method: IdentityVerificationMethod) -> GAEventLabel? {
         switch method {
         case .email:
             return .resetPasswordMethod(.email)
@@ -188,6 +224,21 @@ private extension IdentityVerificationViewController {
             return .resetPasswordMethod(.phoneNumber)
         case .securityQuestion:
             return .resetPasswordMethod(.securityQuestion)
+        case .unknown:
+            return nil
+        }
+    }
+
+    func netmeraMethod(for method: IdentityVerificationMethod) -> NetmeraEventValues.FPVerificationMethod? {
+        switch method {
+        case .email:
+            return .email
+        case .recoveryEmail:
+            return .recoveryEmail
+        case .sms:
+            return .phone
+        case .securityQuestion:
+            return .securityQuestion
         case .unknown:
             return nil
         }

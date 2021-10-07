@@ -75,11 +75,17 @@ final class ValidateSecurityQuestionViewController: BaseViewController, Keyboard
         answerView.answerTextField.delegate = self
 
         addTapGestureToHideKeyboard()
+
+        trackScreen()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        trackScreen()
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // back navigation (swiped / back tapped)
+        if parent == nil {
+            trackBackEvent()
+        }
     }
 
     @objc private func answerTextChanged() {
@@ -156,6 +162,7 @@ private extension ValidateSecurityQuestionViewController {
 private extension ValidateSecurityQuestionViewController {
     func trackScreen() {
         analyticsService.logScreen(screen: .validateSecurityQuestion)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FPSecurityQuestionScreen())
     }
 
     func trackContinueEvent(error: Error?) {
@@ -164,5 +171,14 @@ private extension ValidateSecurityQuestionViewController {
             eventActions: .securityQuestion,
             eventLabel: .result(error)
         )
+
+        let status: NetmeraEventValues.GeneralStatus = error == nil ? .success : .failure
+        AnalyticsService.sendNetmeraEvent(
+            event: NetmeraEvents.Actions.FPSecurityQuestion(status: status)
+        )
+    }
+
+    func trackBackEvent() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FPSecurityQuestionBack())
     }
 }

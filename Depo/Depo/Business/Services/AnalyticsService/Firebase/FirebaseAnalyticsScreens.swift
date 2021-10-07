@@ -11,6 +11,7 @@ enum AnalyticsAppScreens {
     case loginScreen
     case signUpScreen
     case forgotPassword
+    case forgotPasswordV2
     case termsAndServices
     case signUpOTP
     case doubleOTP
@@ -162,6 +163,8 @@ enum AnalyticsAppScreens {
         case .liveCollectRemember:
             return "Live Collect Remember"
         case .forgotPassword:
+            return "Forget Password"
+        case .forgotPasswordV2:
             return "Şifre Sıfırlama"
         case .termsAndServices:
             return "Eula"

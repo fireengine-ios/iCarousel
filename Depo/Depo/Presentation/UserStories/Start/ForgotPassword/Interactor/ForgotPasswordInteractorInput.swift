@@ -15,6 +15,8 @@ protocol ForgotPasswordInteractorInput {
 
     func trackScreen()
 
+    func trackBackEvent()
+
     func findCoutryPhoneCode(plus: Bool)
 
     func sendForgotPasswordRequest(withLogin login: String, enteredCaptcha: String, captchaUDID: String)

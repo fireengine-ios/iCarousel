@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol ResetPasswordOTPInteractorInput: PhoneVerificationInteractorInput {
+    func trackBackEvent()
+}
+
 protocol ResetPasswordOTPInteractorOutput: PhoneVerificationInteractorOutput {
     func verified(with resetPasswordService: ResetPasswordService, newMethods: [IdentityVerificationMethod])
 }
@@ -100,10 +104,12 @@ extension ResetPasswordOTPInteractor: ResetPasswordServiceDelegate {
 
 extension ResetPasswordOTPInteractor {
     func trackScreen(isTimerExpired: Bool) {
-        // TODO: check if sending these is needed too
-//        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.OTPSignupScreen())
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FPOtpScreen())
         analyticsService.logScreen(screen: .resetPasswordOTP)
-//        analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
+    }
+
+    func trackBackEvent() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FPOtpBack())
     }
 
     private func trackContinueEvent(error: Error?) {
@@ -112,10 +118,15 @@ extension ResetPasswordOTPInteractor {
             eventActions: .otpResetPassword,
             eventLabel: .result(error)
         )
+
+        let status: NetmeraEventValues.GeneralStatus = error == nil ? .success : .failure
+        AnalyticsService.sendNetmeraEvent(
+            event: NetmeraEvents.Actions.FPOtp(status: status)
+        )
     }
 }
 
-extension ResetPasswordOTPInteractor: PhoneVerificationInteractorInput {
+extension ResetPasswordOTPInteractor: ResetPasswordOTPInteractorInput {
     func showPopUp(with text: String) {}
     func authificate(atachedCaptcha: CaptchaParametrAnswer?) {}
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {}

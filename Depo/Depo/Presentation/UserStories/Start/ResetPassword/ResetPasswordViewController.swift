@@ -106,6 +106,17 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         rePasswordEnterView.textField.delegate = self
 
         addTapGestureToHideKeyboard()
+
+        trackScreen()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // back navigation (swiped / back tapped)
+        if parent == nil {
+            trackBackEvent()
+        }
     }
 
     @IBAction private func doneButtonTapped() {
@@ -244,6 +255,7 @@ extension ResetPasswordViewController: ResetPasswordServiceDelegate {
 private extension ResetPasswordViewController {
     func trackScreen() {
         analyticsService.logScreen(screen: .resetPassword)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FPResetPasswordScreen())
     }
 
     func trackResetEvent(error: Error?) {
@@ -252,5 +264,14 @@ private extension ResetPasswordViewController {
             eventActions: .resetPassword,
             eventLabel: .result(error)
         )
+
+        let status: NetmeraEventValues.GeneralStatus = error == nil ? .success : .failure
+        AnalyticsService.sendNetmeraEvent(
+            event: NetmeraEvents.Actions.FPResetPassword(status: status)
+        )
+    }
+
+    func trackBackEvent() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FPResetPasswordBack())
     }
 }

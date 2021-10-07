@@ -10,6 +10,8 @@ protocol ForgotPasswordViewOutput {
 
     func viewIsReady()
 
+    func userNavigatedBack()
+
     func startedEnteringPhoneNumber(withPlus: Bool)
 
     func resetPassword(withLogin login: String, enteredCaptcha: String, captchaUDID: String)

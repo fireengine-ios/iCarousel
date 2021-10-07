@@ -9,6 +9,11 @@
 import Foundation
 
 final class ResetPasswordOTPPresenter: PhoneVerificationPresenter, ResetPasswordOTPInteractorOutput {
+
+    override func userNavigatedBack() {
+        (interactor as! ResetPasswordOTPInteractorInput).trackBackEvent()
+    }
+
     func verified(with resetPasswordService: ResetPasswordService, newMethods: [IdentityVerificationMethod]) {
         completeAsyncOperationEnableScreen()
 

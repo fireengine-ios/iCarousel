@@ -18,8 +18,19 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     }
     
     func trackScreen() {
-        analyticsService.logScreen(screen: .forgotPassword)
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ForgetPasswordScreen())
+        if isV2Enabled {
+            analyticsService.logScreen(screen: .forgotPasswordV2)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FPStartScreen())
+        } else {
+            analyticsService.logScreen(screen: .forgotPassword)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ForgetPasswordScreen())
+        }
+    }
+
+    func trackBackEvent() {
+        if isV2Enabled {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FPStartBack())
+        }
     }
 
     func findCoutryPhoneCode(plus: Bool) {
@@ -114,6 +125,7 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
             eventActions: .click,
             eventLabel: .forgotPassword
         )
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FPStart())
     }
 }
 

@@ -69,6 +69,15 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         
         navigationBarWithGradientStyle()
     }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // back navigation (swiped / back tapped)
+        if parent == nil {
+            output.userNavigatedBack()
+        }
+    }
     
     @IBAction func resendCode(_ sender: Any) {
         hiddenError()

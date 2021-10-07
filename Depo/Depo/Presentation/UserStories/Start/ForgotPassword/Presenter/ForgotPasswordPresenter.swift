@@ -42,6 +42,10 @@ extension ForgotPasswordPresenter: ForgotPasswordViewOutput {
         }
     }
 
+    func userNavigatedBack() {
+        interactor.trackBackEvent()
+    }
+
     func startedEnteringPhoneNumber(withPlus: Bool) {
         if interactor.isV2Enabled {
             interactor.findCoutryPhoneCode(plus: withPlus)
