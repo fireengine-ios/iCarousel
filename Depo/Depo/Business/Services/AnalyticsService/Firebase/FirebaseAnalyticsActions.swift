@@ -130,6 +130,7 @@ enum GAEventAction {
     case securityQuestion
     case otpSignup
     case resetPassword
+    case otpResetPassword
 
     var text: String {
         switch self {
@@ -354,6 +355,8 @@ enum GAEventAction {
             return "OTP - Signup"
         case .resetPassword:
             return "Reset Password"
+        case .otpResetPassword:
+            return "OTP – Reset Password"
         }
     }
 }

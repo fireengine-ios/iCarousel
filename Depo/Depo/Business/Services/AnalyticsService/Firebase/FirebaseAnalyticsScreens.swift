@@ -19,6 +19,7 @@ enum AnalyticsAppScreens {
     case identityVerification
     case identityVerification2Challenge
     case resetPassword
+    case resetPasswordOTP
     ///Main Screens
     case homePage
     case photos
@@ -404,6 +405,8 @@ enum AnalyticsAppScreens {
             return "Doğrulama Yöntemi II"
         case .resetPassword:
             return "Reset Password"
+        case .resetPasswordOTP:
+            return "OTP – Reset Password"
         }
     }
 }

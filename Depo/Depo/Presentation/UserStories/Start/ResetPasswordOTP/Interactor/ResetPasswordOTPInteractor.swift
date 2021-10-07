@@ -102,14 +102,14 @@ extension ResetPasswordOTPInteractor {
     func trackScreen(isTimerExpired: Bool) {
         // TODO: check if sending these is needed too
 //        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.OTPSignupScreen())
-        analyticsService.logScreen(screen: .signUpOTP)
+        analyticsService.logScreen(screen: .resetPasswordOTP)
 //        analyticsService.trackDimentionsEveryClickGA(screen: .signUpOTP)
     }
 
     private func trackContinueEvent(error: Error?) {
         analyticsService.trackCustomGAEvent(
             eventCategory: .functions,
-            eventActions: .otpSignup,
+            eventActions: .otpResetPassword,
             eventLabel: .result(error)
         )
     }
