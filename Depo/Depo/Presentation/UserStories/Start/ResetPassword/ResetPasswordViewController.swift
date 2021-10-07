@@ -110,11 +110,10 @@ final class ResetPasswordViewController: BaseViewController, KeyboardHandler {
         trackScreen()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
 
-        // back navigation (swiped / back tapped)
-        if parent == nil {
+        if isMovingFromParent {
             trackBackEvent()
         }
     }

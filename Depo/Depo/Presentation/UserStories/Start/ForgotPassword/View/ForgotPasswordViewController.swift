@@ -55,15 +55,14 @@ final class ForgotPasswordViewController: ViewController {
         loginEnterView.textField.becomeFirstResponder()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
 
-        // back navigation (swiped / back tapped)
-        if parent == nil {
+        if isMovingFromParent {
             output.userNavigatedBack()
         }
     }
-    
+
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         endEditing()
     }
