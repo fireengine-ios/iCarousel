@@ -94,8 +94,8 @@ extension ResetPasswordOTPInteractor: ResetPasswordServiceDelegate {
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
         if isVerifying {
             verifyCodeFailed(with: error)
-
-            trackContinueEvent(error: nil)
+            
+            trackContinueEvent(error: error)
         } else {
             resendCodeFailed(with: error)
         }
