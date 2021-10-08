@@ -398,13 +398,13 @@ enum GAEventLabel {
         var text: String {
             switch self {
             case .email:
-                return "E-posta"
+                return "E-mail"
             case .recoveryEmail:
-                return "Kurtarma E-posta"
+                return "Recovery E-mail"
             case .phoneNumber:
-                return "Telefon Numarası"
+                return "Phone Number"
             case .securityQuestion:
-                return "Güvenlik Sorusu"
+                return "Security Question"
             }
         }
     }
@@ -514,7 +514,7 @@ enum GAEventLabel {
     case homePageCard(_ event: HomePageCardEvent)
     case invitation(_ event: InvitationEvent)
 
-    case forgotPassword
+    case resetPasswordStart
     case resetPasswordMethod(_ method: ResetPasswordMethod)
 
     var text: String {
@@ -750,8 +750,8 @@ enum GAEventLabel {
         case .homePageCard(let event):
             return event.text
         //
-        case .forgotPassword:
-            return "Şifreyi Sıfırla"
+        case .resetPasswordStart:
+            return "Reset Password Start"
         case .resetPasswordMethod(let method):
             return method.text
         }

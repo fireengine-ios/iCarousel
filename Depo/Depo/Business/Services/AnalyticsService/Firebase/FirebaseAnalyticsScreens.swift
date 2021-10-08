@@ -165,7 +165,7 @@ enum AnalyticsAppScreens {
         case .forgotPassword:
             return "Forget Password"
         case .forgotPasswordV2:
-            return "Şifre Sıfırlama"
+            return "Reset Password Start"
         case .termsAndServices:
             return "Eula"
         case .signUpOTP:
@@ -346,7 +346,7 @@ enum AnalyticsAppScreens {
         case .securityQuestionSelect:
             return "Security Question - Select"
         case .validateSecurityQuestion:
-            return "Güvenlik Sorusu"
+            return "Security Question - Validate"
         case .campaignSamsungPopupFirst:
             return "Campaign - Samsung POP-UP First"
         case .campaignSamsungPopupLast:
@@ -403,9 +403,9 @@ enum AnalyticsAppScreens {
             return "Private Share Info"
 
         case .identityVerification:
-            return "Doğrulama Yöntemi I"
+            return "Verification Method I"
         case .identityVerification2Challenge:
-            return "Doğrulama Yöntemi II"
+            return "Verification Method Step 2"
         case .resetPassword:
             return "Reset Password"
         case .resetPasswordOTP:

@@ -123,7 +123,7 @@ final class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
         analyticsService.trackCustomGAEvent(
             eventCategory: .functions,
             eventActions: .click,
-            eventLabel: .forgotPassword
+            eventLabel: .resetPasswordStart
         )
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FPStart())
     }
