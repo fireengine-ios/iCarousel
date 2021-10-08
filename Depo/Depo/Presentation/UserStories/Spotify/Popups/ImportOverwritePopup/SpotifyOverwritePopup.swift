@@ -24,7 +24,7 @@ final class SpotifyOverwritePopup: BlurBackgroundPopup {
         
         let attributedString = NSMutableAttributedString(string: message,
                                                          attributes: [.font: UIFont.TurkcellSaturaFont(size: 18),
-                                                                      .foregroundColor: UIColor.black,
+                                                                      .foregroundColor: AppColor.blackColor.color,
                                                                       .paragraphStyle: paragraphStyle])
         
         let range = (message as NSString).range(of: TextConstants.Spotify.OverwritePopup.messageBoldFontText)

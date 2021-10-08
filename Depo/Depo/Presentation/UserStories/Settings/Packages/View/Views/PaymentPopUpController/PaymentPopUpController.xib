@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina3_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentPopUpController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentPopUpController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="E7q-ZJ-beb" id="hHM-x8-dab"/>
                 <outlet property="darkView" destination="i5M-Pr-FkT" id="4fL-ip-QCy"/>
@@ -40,7 +39,7 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HE-B3-5Zf">
                                     <rect key="frame" x="48" y="135.5" width="224" height="209"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="secondaryBackground"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="E7q-ZJ-beb">
                                     <rect key="frame" x="48" y="135.5" width="224" height="209"/>
@@ -72,7 +71,7 @@
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="secondaryBackground"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="cpq-gd-aR1" secondAttribute="trailing" constant="8" id="20l-IB-NO8"/>
                                                 <constraint firstItem="cpq-gd-aR1" firstAttribute="top" secondItem="RDV-nd-RlP" secondAttribute="top" constant="46" id="9kL-Ly-2p9"/>
@@ -143,6 +142,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="dtd-Bi-HPn" secondAttribute="trailing" id="Eay-Hs-Re7"/>
@@ -150,10 +150,13 @@
                 <constraint firstItem="dtd-Bi-HPn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="f8D-1V-Mw6"/>
                 <constraint firstItem="dtd-Bi-HPn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xhW-xZ-9qB"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="139" y="155"/>
         </view>
     </objects>
     <resources>
         <image name="grayCloseButton" width="17" height="17"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

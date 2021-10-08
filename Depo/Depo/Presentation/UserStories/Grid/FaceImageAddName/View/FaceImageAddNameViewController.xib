@@ -101,7 +101,7 @@
                             </connections>
                         </textField>
                     </subviews>
-                    <color key="backgroundColor" red="0.99607843137254903" green="0.96967405080795288" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="lightPeachBackground"/>
                     <constraints>
                         <constraint firstItem="sSz-PO-qCR" firstAttribute="leading" secondItem="MJp-Dc-fL1" secondAttribute="leading" constant="20" id="9hf-Nw-XHO"/>
                         <constraint firstAttribute="trailing" secondItem="sSz-PO-qCR" secondAttribute="trailing" constant="20" id="Iwn-WS-nSK"/>
@@ -148,6 +148,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="lightPeachBackground">
+            <color red="0.996" green="0.96999999999999997" blue="0.94099999999999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

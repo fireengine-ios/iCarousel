@@ -18,7 +18,7 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
             let text = TextConstants.credUpdateCheckTitle
             let attributes: [NSAttributedString.Key : Any] = [
                 .font : UIFont.TurkcellSaturaDemFont(size: 20),
-                .foregroundColor : UIColor.black,
+                .foregroundColor : AppColor.blackColor.color ?? .black,
             ]
             
             let attributedString = NSMutableAttributedString(string: text, attributes: attributes)

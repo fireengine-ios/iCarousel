@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyCancelImportPopup" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyCancelImportPopup" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="actionButton" destination="BIB-7R-Ouw" id="6K0-Mz-g8W"/>
                 <outlet property="contentView" destination="DQH-e7-wG1" id="pVh-1G-1SP"/>
@@ -65,11 +66,11 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UF6-13-SCe" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UF6-13-SCe" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="26" y="151" width="242" height="44"/>
                             <state key="normal" title="Continue"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIB-7R-Ouw" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIB-7R-Ouw" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="26" y="203" width="242" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="XYc-fV-D6r"/>
@@ -77,7 +78,7 @@
                             <state key="normal" title="Cancel"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstItem="8lc-LV-CpB" firstAttribute="centerX" secondItem="DQH-e7-wG1" secondAttribute="centerX" id="0m8-Ke-01r"/>
                         <constraint firstItem="Psd-bb-7SK" firstAttribute="top" secondItem="6M1-k0-dg9" secondAttribute="bottom" constant="8" id="1OI-oV-jw1"/>
@@ -106,12 +107,12 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="dC2-04-Acm"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="DQH-e7-wG1" firstAttribute="centerY" secondItem="MUh-YN-RwH" secondAttribute="centerY" id="W32-8o-Ax0"/>
                 <constraint firstItem="DQH-e7-wG1" firstAttribute="centerX" secondItem="MUh-YN-RwH" secondAttribute="centerX" id="fSL-uZ-S5g"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="dC2-04-Acm"/>
             <point key="canvasLocation" x="-31.199999999999999" y="149.77511244377811"/>
         </view>
     </objects>
@@ -120,5 +121,8 @@
         <image name="spotify_cross" width="16" height="16"/>
         <image name="spotify_dots" width="50" height="4"/>
         <image name="spotify_logo" width="1024" height="1024"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

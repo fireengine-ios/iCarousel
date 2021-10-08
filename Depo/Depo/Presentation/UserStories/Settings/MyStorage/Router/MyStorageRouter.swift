@@ -22,7 +22,7 @@ extension MyStorageRouter: MyStorageRouterInput {
     func showCancelOfferApple() {
         let alertVC = UIAlertController(title: TextConstants.offersInfo, message: TextConstants.offersAllCancel, preferredStyle: .alert)
         alertVC.view.tintColor = UIColor.lrTealish
-        
+
         let okAction = UIAlertAction(title: TextConstants.offersOk, style: .cancel, handler: nil)
         let settingsAction = UIAlertAction(title: TextConstants.offersSettings, style: .default) { _ in
             UIApplication.shared.openSettings()

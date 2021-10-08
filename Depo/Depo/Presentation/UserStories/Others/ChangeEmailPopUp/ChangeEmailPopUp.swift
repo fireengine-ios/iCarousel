@@ -18,7 +18,7 @@ final class ChangeEmailPopUp: UIViewController {
             let text = TextConstants.changeEmailPopUpTopTitle
             let attributes: [NSAttributedString.Key : Any] = [
                 .font : UIFont.TurkcellSaturaFont(size: 18),
-                .foregroundColor : UIColor.black,
+                .foregroundColor : AppColor.blackColor.color,
             ]
             
             let attributedString = NSMutableAttributedString(string: text, attributes: attributes)
@@ -58,7 +58,10 @@ final class ChangeEmailPopUp: UIViewController {
             newValue.titleLabel.text = TextConstants.yourEmail
             newValue.titleLabel.textColor = ColorConstants.coolGrey
             newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            
+            newValue.titleLabel.backgroundColor = AppColor.secondaryBackground.color
+            newValue.textField.backgroundColor = AppColor.secondaryBackground.color
+            newValue.stackView.backgroundColor = AppColor.secondaryBackground.color
+
             newValue.textField.autocorrectionType = .no
             newValue.textField.autocapitalizationType = .none
             
@@ -72,6 +75,9 @@ final class ChangeEmailPopUp: UIViewController {
             newValue.titleLabel.text = TextConstants.confirmYourEmail
             newValue.titleLabel.textColor = ColorConstants.coolGrey
             newValue.titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.titleLabel.backgroundColor = AppColor.secondaryBackground.color
+            newValue.textField.backgroundColor = AppColor.secondaryBackground.color
+            newValue.stackView.backgroundColor = AppColor.secondaryBackground.color
             
             newValue.textField.autocorrectionType = .no
             newValue.textField.autocapitalizationType = .none

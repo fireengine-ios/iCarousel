@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FullQuotaWarningPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FullQuotaWarningPopUp" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="utr-Zt-eZd" id="v8z-kC-yaa"/>
                 <outlet property="deleteFilesButton" destination="n3v-Eu-sfn" id="4vl-Ez-eFm"/>
@@ -58,14 +59,14 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3v-Eu-sfn">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3v-Eu-sfn">
                             <rect key="frame" x="109" y="226" width="46" height="30"/>
                             <state key="normal" title="Button"/>
                             <connections>
                                 <action selector="onDeleteFilesTap:" destination="-1" eventType="touchUpInside" id="inx-Tw-WNk"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18u-WR-RPM" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18u-WR-RPM" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="109" y="178" width="46" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="edD-Hj-3dd"/>
@@ -76,7 +77,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstItem="n3v-Eu-sfn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fAt-3X-gSh" secondAttribute="leading" constant="36" id="2Bl-vI-RZZ"/>
                         <constraint firstItem="n3v-Eu-sfn" firstAttribute="centerX" secondItem="fAt-3X-gSh" secondAttribute="centerX" id="8UQ-lb-Tia"/>
@@ -100,6 +101,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fAt-3X-gSh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="28" id="1oG-6W-H9B"/>
@@ -107,11 +109,13 @@
                 <constraint firstItem="fAt-3X-gSh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="32" id="lGN-HP-pGa"/>
                 <constraint firstItem="fAt-3X-gSh" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="qHF-5L-u7F"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.75" y="103.52112676056338"/>
         </view>
     </objects>
     <resources>
         <image name="grayCloseButton" width="17" height="17"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

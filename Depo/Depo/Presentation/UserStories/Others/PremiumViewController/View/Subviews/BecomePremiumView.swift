@@ -33,7 +33,7 @@ final class BecomePremiumView: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndTealish.color
             newValue.textAlignment = .center
         }
     }

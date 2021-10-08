@@ -33,6 +33,7 @@ enum AppColor {
     case popupGray
     case blueAndGray
     case darkTextAndLightGray
+    case lightPeachBackground
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))
