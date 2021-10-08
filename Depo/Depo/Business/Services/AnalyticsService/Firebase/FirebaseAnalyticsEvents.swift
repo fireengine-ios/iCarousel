@@ -19,12 +19,16 @@ enum AnalyticsEvent {
     case purchaseTurkcell50
     case purchaseTurkcell100
     case purchaseTurkcell500
+    case purchaseTurkcell250
+    case purchaseTurkcell250_SixMonth
     case purchaseTurkcell2500
     case purchaseTurkcellPremium
 
     case purchaseNonTurkcell50
     case purchaseNonTurkcell100
     case purchaseNonTurkcell500
+    case purchaseNonTurkcell250
+    case purchaseNonTurkcell250_SixMonth
     case purchaseNonTurkcell2500
     case purchaseNonTurkcellPremium
 
@@ -53,12 +57,16 @@ enum AnalyticsEvent {
                 
             case .purchaseTurkcell50: return "8oapnp"
             case .purchaseTurkcell100: return "oziuyb"
+            case .purchaseTurkcell250: return "48kuya"
+            case .purchaseTurkcell250_SixMonth: return "a6uav1"
             case .purchaseTurkcell500: return "hmuea4"
             case .purchaseTurkcell2500: return "br8bqi"
             case .purchaseTurkcellPremium: return "48qsxv"
                 
             case .purchaseNonTurkcell50: return "pdouoa"
             case .purchaseNonTurkcell100: return "qsa0yw"
+            case .purchaseNonTurkcell250: return "48kuya"
+            case .purchaseNonTurkcell250_SixMonth: return "a6uav1"
             case .purchaseNonTurkcell500: return "alvhrn"
             case .purchaseNonTurkcell2500: return "lr6i1j"
             case .purchaseNonTurkcellPremium: return "cxf2hr"
@@ -86,12 +94,16 @@ enum AnalyticsEvent {
                 
             case .purchaseTurkcell50: return "trie85"
             case .purchaseTurkcell100: return "62s83p"
+            case .purchaseTurkcell250: return "zdgrdx"
+            case .purchaseTurkcell250_SixMonth: return "gmnxmu"
             case .purchaseTurkcell500: return "wdqlvk"
             case .purchaseTurkcell2500: return "7bf7gu"
             case .purchaseTurkcellPremium: return "qexub9"
                 
             case .purchaseNonTurkcell50: return "q3ivog"
             case .purchaseNonTurkcell100: return "lbrusf"
+            case .purchaseNonTurkcell250: return "zdgrdx"
+            case .purchaseNonTurkcell250_SixMonth: return "gmnxmu"
             case .purchaseNonTurkcell500: return "x6zaly"
             case .purchaseNonTurkcell2500: return "zab8u6"
             case .purchaseNonTurkcellPremium: return "9pyt2d"
@@ -122,12 +134,16 @@ enum AnalyticsEvent {
 
         case .purchaseTurkcell50: return "PURCHASE_50_GB_TURKCELL"
         case .purchaseTurkcell100: return "PURCHASE_100_GB_TURKCELL"
+        case .purchaseTurkcell250: return "PURCHASE_250_GB_TURKCELL"
+        case .purchaseTurkcell250_SixMonth: return "PURCHASE_250_GB_SIXMONTH_TURKCELL"
         case .purchaseTurkcell500: return "PURCHASE_500_GB_TURKCELL"
         case .purchaseTurkcell2500: return "PRUCHASE_25_TB_TURKCELL"
         case .purchaseTurkcellPremium: return "PURCHASE_PREMIUM_TURKCELL"
 
         case .purchaseNonTurkcell50: return "PURCHASE_50_GB_NONTURKCELL"
         case .purchaseNonTurkcell100: return "PURCHASE_100_GB_NONTURKCELL"
+        case .purchaseNonTurkcell250: return "PURCHASE_250_GB_NONTURKCELL"
+        case .purchaseNonTurkcell250_SixMonth: return "PURCHASE_250_GB_SIXMONTH_NONTURKCELL"
         case .purchaseNonTurkcell500: return "PURCHASE_500_GB_NONTURKCELL"
         case .purchaseNonTurkcell2500: return "PRUCHASE_25_TB_NONTURKCELL"
         case .purchaseNonTurkcellPremium: return "PURCHASE_PREMIUM_NONTURKCELL"

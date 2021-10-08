@@ -18,6 +18,9 @@ class PackagesInteractor {
     private let accountService: AccountServicePrl
     private let packageService = PackageService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+
+    /// When set, available-offers/IOS will be called with a query param
+    var affiliate: String?
     
     init(offersService: OffersService = OffersServiceIml(),
          subscriptionsService: SubscriptionsService = SubscriptionsServiceIml(),
@@ -39,7 +42,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func getAvailableOffers(with accountType: AccountType) {
-        accountService.availableOffers { [weak self] (result) in
+        accountService.availableOffers(affiliate: self.affiliate) { [weak self] (result) in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {

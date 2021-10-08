@@ -300,6 +300,7 @@
                 <outlet property="invitationLinkLabel" destination="9Mc-KV-aBE" id="jaQ-Pf-P3S"/>
                 <outlet property="invitationLinkShareButton" destination="mLh-FB-7nA" id="cqK-dA-GiF"/>
                 <outlet property="invitationLinkTitleLabel" destination="Pjv-iN-llf" id="v9Q-1Y-v7q"/>
+                <outlet property="invitationListButton" destination="MPg-ef-BaO" id="0mg-8I-Qav"/>
             </connections>
             <point key="canvasLocation" x="-928.26086956521749" y="-216.29464285714286"/>
         </collectionReusableView>

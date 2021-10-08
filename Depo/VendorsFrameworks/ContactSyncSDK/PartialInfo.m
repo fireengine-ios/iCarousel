@@ -22,20 +22,25 @@
     } else {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *prevContactCount = [defaults objectForKey:SYNC_KEY_CURRENT_CONTACT_COUNT];
-        if (SYNC_STRING_IS_NULL_OR_EMPTY(prevContactCount) || [prevContactCount integerValue] == _contactCount) {
-            NSString *current = [defaults objectForKey:SYNC_KEY_CURRENT_STEP];
+        NSString *prevBulkCount = [defaults objectForKey:SYNC_KEY_CURRENT_BULK_COUNT];
+        NSString *current = [defaults objectForKey:SYNC_KEY_CURRENT_STEP];
+        _bulkCount = [self calculateBulkCount:_contactCount];
+        _totalStep = ceil((float) _contactCount / (float) _bulkCount);
+        [defaults setObject:[@(_contactCount) stringValue] forKey:SYNC_KEY_CURRENT_CONTACT_COUNT];
+        [defaults setObject:[@(_bulkCount) stringValue] forKey:SYNC_KEY_CURRENT_BULK_COUNT];
+        
+        if ((SYNC_STRING_IS_NULL_OR_EMPTY(prevContactCount) || [prevContactCount integerValue] == _contactCount)
+            && (SYNC_STRING_IS_NULL_OR_EMPTY(prevBulkCount) || [prevBulkCount integerValue] == _bulkCount) && ([current integerValue] <= self.totalStep )) {
             if(!SYNC_IS_NULL(current)){
                 _currentStep = [current integerValue];
             } else {
                 _currentStep = 1;
             }
         } else {
-            NSLog(@"Partial info resetting. Current contact count: %ld Previous contact count: %@", (long)_contactCount, prevContactCount);
+            NSLog(@"Partial info resetting. Current contact count: %ld Previous contact count: %@ Current step: %@ Total step : %ld", (long)_contactCount, prevContactCount, current, (long)self.totalStep);
             _currentStep = 1;
         }
         [defaults setObject:[@(_contactCount) stringValue] forKey:SYNC_KEY_CURRENT_CONTACT_COUNT];
-        _bulkCount = [self calculateBulkCount:_contactCount];
-        _totalStep = ceil((float) _contactCount / (float) _bulkCount);
         if (_totalStep <= 0) {
             _totalStep = 1;
         }
@@ -46,7 +51,7 @@
 
 -(NSInteger)calculateBulkCount:(NSInteger)count{
     if (SyncSettings.shared.bulk > 0) {
-        NSLog(@"Custom bulk: ");
+        NSLog(@"Custom bulk:  %ld",(long)SyncSettings.shared.bulk);
         return SyncSettings.shared.bulk;
     }
 //    if (true) {

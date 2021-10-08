@@ -673,8 +673,14 @@ class RouterVC: NSObject {
     
     // MARK: User profile
     
-    func userProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool = false) -> UIViewController {
-        let viewController = UserProfileModuleInitializer.initializeViewController(with: "UserProfileViewController", userInfo: userInfo, isTurkcellUser: isTurkcellUser)
+    func userProfile(userInfo: AccountInfoResponse,
+                     isTurkcellUser: Bool = false,
+                     appearAction: UserProfileAppearAction? = nil) -> UIViewController {
+        let viewController = UserProfileModuleInitializer.initializeViewController(
+            userInfo: userInfo,
+            isTurkcellUser: isTurkcellUser,
+            appearAction: appearAction
+        )
         return viewController
     }
     
@@ -1060,20 +1066,10 @@ class RouterVC: NSObject {
     }
     // MARK: - Packages
     
-    func packagesWith(quotoInfo: QuotaInfoResponse?) -> PackagesViewController{
-        
-        let nibName = String(describing: PackagesViewController.self)
-        let viewController = PackagesViewController(nibName: nibName, bundle: nil)
-        let configurator = PackagesModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController, quotoInfo: quotoInfo)
-        
-        return viewController
+    func packages(quotaInfo: QuotaInfoResponse? = nil, affiliate: String? = nil) -> PackagesViewController {
+        return PackagesModuleInitializer.viewController(quotaInfo: quotaInfo, affiliate: affiliate)
     }
-    
-    var packages: PackagesViewController {
-        return PackagesModuleInitializer.viewController
-    }
-    
+
     // MARK: - Passcode
     
     func passcodeSettings(isTurkcell: Bool, inNeedOfMail: Bool) -> UIViewController {
@@ -1140,6 +1136,15 @@ class RouterVC: NSObject {
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
         
+        return controller
+    }
+
+    var verifyRecoveryEmailPopUp: VerifyRecoveryEmailPopUp {
+        let controller = VerifyRecoveryEmailPopUp()
+
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+
         return controller
     }
     

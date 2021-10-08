@@ -144,7 +144,7 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Need access to save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Your photos will be backed up to lifebox</string>
+	<string>Your photos will be backed up to Billo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>

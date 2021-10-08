@@ -12,6 +12,9 @@ import StoreKit
 final class PackageService {
     
     private let iapManager = IAPManager.shared
+
+    @available(iOS 11.2, *)
+    private lazy var iapSubscriptionPeriodFormatter = ProductSubscriptionPeriodFormatter()
     
     //MARK: Utility Methods(public)
     func getAccountType(for accountType: String, offers: [Any] = []) -> AccountType? {
@@ -54,23 +57,14 @@ final class PackageService {
         if let iapProductId = getAppleIds(for: [offer]).first, let product = iapManager.product(for: iapProductId), !product.isFree {
             
             let price = product.localizedPrice.replacingOccurrences(of: " ", with: "\n")
+
             if #available(iOS 11.2, *) {
-                guard let subscriptionPeriod = product.subscriptionPeriod else {
-                    fullPrice = String(format: TextConstants.packageApplePrice, price, TextConstants.packagePeriodMonth)
-                    return fullPrice
+                guard let subscriptionPeriod = product.subscriptionPeriod,
+                      let period = iapSubscriptionPeriodFormatter.string(from: subscriptionPeriod) else {
+                    return String(format: TextConstants.packageApplePrice, price, TextConstants.packagePeriodMonth)
                 }
-                let period: String
-                switch subscriptionPeriod.unit {
-                case .day:
-                    period = TextConstants.packagePeriodDay
-                case .week:
-                    period = TextConstants.packagePeriodWeek
-                case .month:
-                    period = TextConstants.packagePeriodMonth
-                case .year:
-                    period = TextConstants.packagePeriodYear
-                }
-                fullPrice = String(format: TextConstants.packageApplePrice, price, period)
+
+                return String(format: TextConstants.packageApplePrice, price, period)
             } else {
                 if let period = getOfferPeriod(for: offer) {
                     fullPrice = String(format: TextConstants.packageApplePrice, price, period)
@@ -121,6 +115,15 @@ final class PackageService {
             }
             return name
         }
+
+        func isSixMonthOffer(_ offer: Any) -> Bool {
+            if let offer = offer as? PackageModelResponse {
+                return offer.period == PackageModelResponse.Period.sixMonth.rawValue
+            } else if let offer = offer as? SKProduct, #available(iOS 11.2, *) {
+                return offer.subscriptionPeriod?.unit == .month && offer.subscriptionPeriod?.numberOfUnits == 6
+            }
+            return false
+        }
         
         var event: AnalyticsEvent?
         
@@ -135,6 +138,13 @@ final class PackageService {
             } else if name.contains("100") {
                 event = isTurkcellOffer ? .purchaseTurkcell100 : .purchaseNonTurkcell100
                 
+            } else if name.contains("250") {
+                if isSixMonthOffer(offer) {
+                    event = isTurkcellOffer ? .purchaseTurkcell250_SixMonth : .purchaseNonTurkcell250_SixMonth
+                } else {
+                    event = isTurkcellOffer ? .purchaseTurkcell250 : .purchaseNonTurkcell250
+                }
+
             } else if name.contains("50") {
                 event = isTurkcellOffer ? .purchaseTurkcell50 : .purchaseNonTurkcell50
                 
@@ -174,6 +184,8 @@ final class PackageService {
     private func localized(offerPeriod: String) -> String {
         if offerPeriod.contains("year") {
             return TextConstants.packagePeriodYear
+        } else if offerPeriod.contains("sixmonth") {
+            return String(format: TextConstants.packagePeriodXMonth, 6)
         } else if offerPeriod.contains("month") {
             return TextConstants.packagePeriodMonth
         } else if offerPeriod.contains("week") {

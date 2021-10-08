@@ -236,6 +236,9 @@
     if ([_progress doubleValue] != 0 && [_progress doubleValue] > result) {
         SYNC_Log(@"Something went wrong. PROGRESS: %f - %f Step: %@", result, [_progress doubleValue], @(step));
     }
+    if (result > 100) {
+        result = 100;
+    }
     _progress = [[NSNumber alloc] initWithDouble:result];
     
     SYNC_Log(@"PROGRESS: %f Step: %@", result, @(step));
@@ -315,6 +318,9 @@
         }
     } else {
         result += (90 * ((partialInfo.currentStep - 1) * 100) / partialInfo.totalStep) / 100;
+    }
+    if (result > 100) {
+        result = 100;
     }
 
     return result;

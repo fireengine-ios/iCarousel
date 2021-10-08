@@ -8,13 +8,11 @@
 
 import UIKit
 
-class PackagesModuleInitializer: NSObject {
-
-    static var viewController: PackagesViewController {
-        let nibName = String(describing: PackagesViewController.self)
-        let viewController = PackagesViewController(nibName: nibName, bundle: nil)
+final class PackagesModuleInitializer: NSObject {
+    static func viewController(quotaInfo: QuotaInfoResponse? = nil, affiliate: String? = nil) -> PackagesViewController {
+        let viewController = PackagesViewController()
         let configurator = PackagesModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: viewController)
+        configurator.configure(viewController: viewController, quotaInfo: quotaInfo, affiliate: affiliate)
         return viewController
     }
 }

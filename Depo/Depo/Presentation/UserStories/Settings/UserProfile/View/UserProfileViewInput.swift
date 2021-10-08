@@ -13,4 +13,6 @@ protocol UserProfileViewInput: AnyObject {
     func getPhoneNumber() -> String
     func endSaving()
     func securityQuestionWasSet()
+    func presentEmailVerificationPopUp()
+    func presentRecoveryEmailVerificationPopUp()
 }

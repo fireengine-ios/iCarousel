@@ -160,7 +160,9 @@ extension InvitationViewController: InvitationReuseViewDelegate {
 
         guard let invitationLinkValue = self.invitationLink?.url, let url =  URL(string: invitationLinkValue) else { return }
 
-        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        let message = TextConstants.invitationShareMessage
+
+        let activityVC = UIActivityViewController(activityItems: [message, url], applicationActivities: nil)
         activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
             guard completed, let activityTypeString = activityType?.rawValue else {
                 return

@@ -446,7 +446,13 @@ extension NetmeraEvents.Screens {
             return "ncs"
         }
     }
-    
+
+    final class VerifyRecoveryEmailPopUp: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "kwn"
+        }
+    }
+
     final class ContactListScreen: NetmeraScreenEventTemplate {
         override var key: String {
             return "eoa"
