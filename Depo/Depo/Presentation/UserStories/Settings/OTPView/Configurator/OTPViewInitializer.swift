@@ -11,8 +11,7 @@ import UIKit
 class OTPViewModuleInitializer: NSObject {
         
     class func viewController(response: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
-        let nibName = "PhoneVerificationScreen"
-        let viewController = PhoneVerificationViewController(nibName: nibName, bundle: nil)
+        let viewController = PhoneVerificationViewController()
         let configurator = OTPViewModuleConfigurator()
         configurator.configure(viewController: viewController, response: response, userInfo: userInfo, phoneNumber: phoneNumber)
         return viewController

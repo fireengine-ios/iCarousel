@@ -182,24 +182,22 @@ struct SignUpUserPhoveVerification: RequestParametrs {
     }
 }
 
-
-struct  ForgotPassword: RequestParametrs {
+struct ForgotPassword: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
     }
-    
+
     let email: String
     let attachedCaptcha: CaptchaParametrAnswer?
-    
-    
+
     var requestParametrs: Any {
-        return  email.data(using: .utf8) ?? Data()
+        return email.data(using: .utf8) ?? Data()
     }
-    
+
     var patch: URL {
         return URL(string: RouteRequests.forgotPassword, relativeTo: RouteRequests.baseUrl)!
     }
-    
+
     var header: RequestHeaderParametrs {
         let headers = RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
         if let captcha = attachedCaptcha {
@@ -591,10 +589,10 @@ class AuthenticationService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
         executePostRequest(param: emailVerification, handler: handler)
     }
-    
-    func fogotPassword(forgotPassword: ForgotPassword, success: SuccessResponse?, fail: FailResponse?) {
+
+    func forgotPassword(forgotPassword: ForgotPassword, success: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService fogotPassword")
-        
+
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: forgotPassword, handler: handler)
     }

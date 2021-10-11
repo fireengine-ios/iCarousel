@@ -8,14 +8,13 @@
 
 import UIKit
 
-class PhoneVerificationModuleInitializer: NSObject {
-
-    //Connect with object on storyboard
-    @IBOutlet weak var phoneverificationViewController: PhoneVerificationViewController!
-    
-    func setupConfig(with: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel ) {
+final class PhoneVerificationModuleInitializer: NSObject {
+    static func viewController(signupResponse: SignUpSuccessResponse,
+                               userInfo: RegistrationUserInfoModel) -> PhoneVerificationViewController {
         let configurator = PhoneVerificationModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: phoneverificationViewController, withResponse: with, userInfo: userInfo)
+
+        let viewController = PhoneVerificationViewController()
+        configurator.configure(viewController: viewController, withResponse: signupResponse, userInfo: userInfo)
+        return viewController
     }
-    
 }

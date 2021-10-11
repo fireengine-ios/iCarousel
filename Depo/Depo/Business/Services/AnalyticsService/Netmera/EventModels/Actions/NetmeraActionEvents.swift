@@ -1393,4 +1393,181 @@ extension NetmeraEvents.Actions {
         }
     }
 
+    /* ---------- FORGOT PASSWORD ACTIONS ---------- */
+    final class FPStart: NetmeraEvent {
+        override var eventKey : String {
+            return "tom"
+        }
+    }
+
+    final class FPStartBack: NetmeraEvent {
+        override var eventKey : String {
+            return "fue"
+        }
+    }
+
+    final class FPVerificationMethod: NetmeraEvent {
+        @objc var method = ""
+
+        convenience init(method: NetmeraEventValues.FPVerificationMethod) {
+            self.init()
+            self.method = method.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(method)
+            ]
+        }
+
+        override var eventKey : String {
+            return "cac"
+        }
+    }
+
+    final class FPVerificationMethodBack: NetmeraEvent {
+        override var eventKey : String {
+            return "vao"
+        }
+    }
+
+    final class FPSentMail: NetmeraEvent {
+        @objc var mailType = ""
+
+        convenience init(mailType: NetmeraEventValues.FPMailType) {
+            self.init()
+            self.mailType = mailType.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(mailType)
+            ]
+        }
+
+        override var eventKey: String {
+            return "nxb"
+        }
+    }
+
+    final class FPSentMail2: NetmeraEvent {
+        @objc var mailType = ""
+
+        convenience init(mailType: NetmeraEventValues.FPMailType) {
+            self.init()
+            self.mailType = mailType.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(mailType)
+            ]
+        }
+
+        override var eventKey: String {
+            return "otj"
+        }
+    }
+
+    final class FPOtp: NetmeraEvent {
+        @objc var status = ""
+
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable : Any] {
+            return [
+                "ea" : #keyPath(status)
+            ]
+        }
+
+        override var eventKey: String {
+            return "ynu"
+        }
+    }
+
+    final class FPOtpBack: NetmeraEvent {
+        override var eventKey : String {
+            return "jgh"
+        }
+    }
+
+    final class FPVerificationMethod2: NetmeraEvent {
+        @objc var method = ""
+
+        convenience init(method: NetmeraEventValues.FPVerificationMethod) {
+            self.init()
+            self.method = method.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(method)
+            ]
+        }
+
+        override var eventKey : String {
+            return "htv"
+        }
+    }
+
+    final class FPVerificationMethod2Back: NetmeraEvent {
+        override var eventKey : String {
+            return "vme"
+        }
+    }
+
+    final class FPSecurityQuestion: NetmeraEvent {
+        @objc var status = ""
+
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status)
+            ]
+        }
+
+        override var eventKey : String {
+            return "uys"
+        }
+    }
+
+    final class FPSecurityQuestionBack: NetmeraEvent {
+        override var eventKey : String {
+            return "cmd"
+        }
+    }
+
+    final class FPResetPassword: NetmeraEvent {
+        @objc var status = ""
+
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable : Any] {
+            return [
+                "ea" : #keyPath(status)
+            ]
+        }
+
+        override var eventKey: String {
+            return "cua"
+        }
+    }
+
+    final class FPResetPasswordBack: NetmeraEvent {
+        override var eventKey : String {
+            return "ryw"
+        }
+    }
+
+    /* -------------------- */
 }

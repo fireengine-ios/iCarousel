@@ -688,4 +688,37 @@ enum NetmeraEventValues {
         }
     }
 
+    enum FPVerificationMethod {
+        case phone
+        case email
+        case recoveryEmail
+        case securityQuestion
+
+        var text: String {
+            switch self {
+            case .phone:
+                return "Telefon Numarası"
+            case .email:
+                return "E-posta"
+            case .recoveryEmail:
+                return "Kurtarma E-posta"
+            case .securityQuestion:
+                return "Guvenlik Sorusu"
+            }
+        }
+    }
+
+    enum FPMailType {
+        case email
+        case recoveryEmail
+
+        var text: String {
+            switch self {
+            case .email:
+                return "E-posta"
+            case .recoveryEmail:
+                return "Kurtarma E-posta"
+            }
+        }
+    }
 }

@@ -244,9 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ContactSyncSDK.doPeriodicSync()
         
-        #if LIFEBOX
         FirebaseRemoteConfig.shared.performInitialFetch()
-        #endif
     }
     
     func showPasscodeIfNeedInBackground() {

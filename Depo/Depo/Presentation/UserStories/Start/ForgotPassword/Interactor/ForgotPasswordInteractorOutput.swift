@@ -9,8 +9,10 @@
 import Foundation
 
 protocol ForgotPasswordInteractorOutput: AnyObject {
-    
-    func requestSucceed()
-    func requestFailed(withError error: String)
+    func foundCoutryPhoneCode(code: String, plus: Bool)
 
+    func linkSentToEmailSuccessfully()
+
+    func receivedVerificationMethods(_ methods: [IdentityVerificationMethod])
+    func requestFailed(withError error: String)
 }

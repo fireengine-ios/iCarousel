@@ -21,6 +21,7 @@ final class ServerMessageError {
     
     private enum ErrorKeys {
         static let accountNotFoundForEmail = "ACCOUNT_NOT_FOUND_FOR_EMAIL"
+        static let accountNotFoundForMSISDN = "ACCOUNT_NOT_FOUND_FOR_MSISDN"
         static let privateShareMessageLimit = "Invalid sharing message"
         static let privateSharePhoneOrMailLimit = "Invalid sharing subject"
         static let privateShareNumberOfItemsLimit = "Max sharing item limit exceeded"
@@ -35,6 +36,8 @@ extension ServerMessageError: LocalizedError {
         switch message {
         case ErrorKeys.accountNotFoundForEmail:
             return TextConstants.forgotPasswordErrorNotRegisteredText
+        case ErrorKeys.accountNotFoundForMSISDN:
+            return localized(.resetPasswordAccountNotFound)
         case ErrorKeys.privateShareMessageLimit:
             return TextConstants.privateShareMessageLimit
         case ErrorKeys.privateSharePhoneOrMailLimit:

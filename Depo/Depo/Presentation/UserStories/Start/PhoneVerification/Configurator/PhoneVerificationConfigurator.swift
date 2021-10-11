@@ -8,16 +8,9 @@
 
 import UIKit
 
-class PhoneVerificationModuleConfigurator {
-
-    func configureModuleForViewInput(viewInput: UIViewController, withResponse response: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
-
-        if let viewController = viewInput as? PhoneVerificationViewController {
-            configure(viewController: viewController, withResponse: response, userInfo: userInfo)
-        }
-    }
-
-    private func configure(viewController: PhoneVerificationViewController, withResponse response: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+final class PhoneVerificationModuleConfigurator {
+    func configure(viewController: PhoneVerificationViewController,
+                   withResponse response: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
 
         let router = PhoneVerificationRouter()
 
@@ -32,5 +25,4 @@ class PhoneVerificationModuleConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
     }
-
 }

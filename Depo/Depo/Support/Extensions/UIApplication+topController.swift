@@ -46,8 +46,12 @@ extension UIApplication {
         }
     }
     
-    static func showSuccessAlert(message: String) {
-        let vc = PopUpController.with(title: TextConstants.success, message: message, image: .success, buttonTitle: TextConstants.ok)
+    static func showSuccessAlert(message: String, closed: (() -> Void)? = nil) {
+        let vc = PopUpController.with(title: TextConstants.success, message: message, image: .success, buttonTitle: TextConstants.ok) { vc in
+            vc.close {
+                closed?()
+            }
+        }
         DispatchQueue.toMain {
             topController()?.present(vc, animated: false, completion: nil)
         }

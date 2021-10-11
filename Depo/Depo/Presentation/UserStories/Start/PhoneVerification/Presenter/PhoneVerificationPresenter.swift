@@ -24,6 +24,8 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         view.setupButtonsInitialState()
         interactor.resendCode()
     }
+
+    func userNavigatedBack() {}
     
     func configure() {
         view.setupTextLengh(lenght: interactor.expectedInputLength ?? 6 )

@@ -13,7 +13,13 @@ protocol SecurityQuestionViewDelegate {
 }
 
 final class SecurityQuestionView: UIView, NibInit {
-    
+
+    var showsArrowButton: Bool = true {
+        didSet {
+            arrowButton.isHidden = !showsArrowButton
+        }
+    }
+
     var delegate: SecurityQuestionViewDelegate?
    
     override init(frame: CGRect) {

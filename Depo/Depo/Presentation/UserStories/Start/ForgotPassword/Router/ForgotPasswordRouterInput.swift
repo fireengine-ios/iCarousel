@@ -9,6 +9,8 @@
 import Foundation
 
 protocol ForgotPasswordRouterInput {
-    func goToResetPassword()
+    func showSentToEmailPopupAndClose()
+    func proceedToIdentityVerification(service: ResetPasswordService,
+                                       availableMethods: [IdentityVerificationMethod])
     func popBack()
 }

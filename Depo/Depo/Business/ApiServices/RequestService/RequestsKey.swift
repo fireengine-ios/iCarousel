@@ -14,6 +14,7 @@ struct LbRequestkeys {
     static let password = "password"
     static let phoneNumber = "phoneNumber"
     static let email = "email"
+    static let msisdn = "msisdn"
     static let deviceInfo = "deviceInfo"
     static let on = "on"
     static let off = "off"
@@ -28,6 +29,9 @@ struct LbRequestkeys {
     static let osVersion = "osVersion"
     static let brandType = "brandType"
     static let passwordRuleSetVersion = "passwordRuleSetVersion"
+    static let securityQuestionId = "securityQuestionId"
+    static let securityQuestionAnswer = "securityQuestionAnswer"
+    static let repeatPassword = "repeatPassword"
     //
     static let fileName = "Folder-Name"
     static let etkAuth = "etkAuth"

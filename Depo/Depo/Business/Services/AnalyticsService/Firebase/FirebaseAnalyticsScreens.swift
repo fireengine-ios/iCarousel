@@ -11,11 +11,16 @@ enum AnalyticsAppScreens {
     case loginScreen
     case signUpScreen
     case forgotPassword
+    case forgotPasswordV2
     case termsAndServices
     case signUpOTP
     case doubleOTP
     case autosyncSettingsFirst
     case liveCollectRemember
+    case identityVerification
+    case identityVerification2Challenge
+    case resetPassword
+    case resetPasswordOTP
     ///Main Screens
     case homePage
     case photos
@@ -110,6 +115,7 @@ enum AnalyticsAppScreens {
     
     case securityQuestion
     case securityQuestionSelect
+    case validateSecurityQuestion
     
     case campaignSamsungPopupFirst
     case campaignSamsungPopupLast
@@ -158,6 +164,8 @@ enum AnalyticsAppScreens {
             return "Live Collect Remember"
         case .forgotPassword:
             return "Forget Password"
+        case .forgotPasswordV2:
+            return "Reset Password Start"
         case .termsAndServices:
             return "Eula"
         case .signUpOTP:
@@ -337,6 +345,8 @@ enum AnalyticsAppScreens {
             return "Security Question"
         case .securityQuestionSelect:
             return "Security Question - Select"
+        case .validateSecurityQuestion:
+            return "Security Question - Validate"
         case .campaignSamsungPopupFirst:
             return "Campaign - Samsung POP-UP First"
         case .campaignSamsungPopupLast:
@@ -391,6 +401,15 @@ enum AnalyticsAppScreens {
             return "Access"
         case .shareInfo:
             return "Private Share Info"
+
+        case .identityVerification:
+            return "Verification Method I"
+        case .identityVerification2Challenge:
+            return "Verification Method 2"
+        case .resetPassword:
+            return "Reset Password"
+        case .resetPasswordOTP:
+            return "OTP – Reset Password"
         }
     }
 }
