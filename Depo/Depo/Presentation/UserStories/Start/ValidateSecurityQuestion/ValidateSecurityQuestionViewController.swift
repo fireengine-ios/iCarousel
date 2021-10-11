@@ -117,9 +117,19 @@ extension ValidateSecurityQuestionViewController: ResetPasswordServiceDelegate {
 
     func resetPasswordService(_ service: ResetPasswordService, receivedError error: Error) {
         hideSpinnerIncludeNavigationBar()
-        UIApplication.showErrorAlert(message: error.localizedDescription)
+        showAlert(for: error)
 
         trackContinueEvent(error: error)
+    }
+
+    private func showAlert(for error: Error) {
+        var message = error.localizedDescription
+
+        if message == "SEQURITY_QUESTION_ANSWER_IS_INVALID" {
+            message = localized(.resetPasswordInvalidQuestionAnswer)
+        }
+
+        UIApplication.showErrorAlert(message: message)
     }
 }
 

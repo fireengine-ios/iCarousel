@@ -36,6 +36,7 @@ extension Strings {
         case resetPasswordCompleteButton         = "forgotMyPassword_password_complete"
         case resetPasswordSuccessMessage         = "forgotMyPassword_reset_success_message"
         case resetPasswordAccountNotFound        = "forgotMyPassword_account_not_found"
+        case resetPasswordInvalidQuestionAnswer  = "forgotMyPassword_SQ_invalid_answer"
     }
 }
 
