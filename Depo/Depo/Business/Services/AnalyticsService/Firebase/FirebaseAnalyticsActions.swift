@@ -344,7 +344,7 @@ enum GAEventAction {
         case .verificationMethod:
             return "Verification Method"
         case .verificationMethod2Challenge:
-            return "Verification Method Step 2"
+            return "Verification Method 2"
         case .forgotPassword:
             return "Forgot Password"
         case .forgotPassword2:

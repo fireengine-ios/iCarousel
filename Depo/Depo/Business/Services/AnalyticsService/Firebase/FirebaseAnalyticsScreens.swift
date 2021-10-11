@@ -405,7 +405,7 @@ enum AnalyticsAppScreens {
         case .identityVerification:
             return "Verification Method I"
         case .identityVerification2Challenge:
-            return "Verification Method Step 2"
+            return "Verification Method 2"
         case .resetPassword:
             return "Reset Password"
         case .resetPasswordOTP:
