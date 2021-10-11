@@ -79,6 +79,8 @@ final class IdentityVerificationViewController: BaseViewController {
         showSpinner()
         resetPasswordService.delegate = self
         resetPasswordService.proceedVerification(with: selectedMethod)
+
+        trackContinueEvent(method: selectedMethod)
     }
 
     private func showLinkSentToEmailPopupAndExit(email: String, isRecoveryEmail: Bool = false) {
