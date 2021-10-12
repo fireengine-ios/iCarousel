@@ -536,6 +536,44 @@ extension NetmeraEvents.Screens {
             return "feq"
         }
     }
+
+    /* ---------- FORGOT PASSWORD SCREENS ---------- */
+    final class FPStartScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "woe"
+        }
+    }
+
+    final class FPVerificationMethodScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "bfz"
+        }
+    }
+
+    final class FPVerificationMethod2Screen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "oxo"
+        }
+    }
+
+    final class FPSecurityQuestionScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "qpz"
+        }
+    }
+
+    final class FPOtpScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "ywn"
+        }
+    }
+
+    final class FPResetPasswordScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "aub"
+        }
+    }
+    /* -------------------- */
 }
 
 

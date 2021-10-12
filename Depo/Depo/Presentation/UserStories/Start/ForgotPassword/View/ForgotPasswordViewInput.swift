@@ -11,8 +11,16 @@ protocol ForgotPasswordViewInput: AnyObject, Waiting {
     func setupInitialState()
     
     func showCapcha()
-    
-    func setupVisableSubTitle()
-    
-    func setupVisableTexts()
+
+    func setTexts(_ texts: ForgotPasswordTexts)
+
+    func enterPhoneCountryCode(countryCode: String)
+    func insertPhoneCountryCode(countryCode: String) //at the begining of the field
+}
+
+struct ForgotPasswordTexts {
+    let instructions: String
+    let instructionsOther: String
+    let emailInputTitle: String
+    let emailPlaceholder: String
 }

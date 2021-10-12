@@ -8,18 +8,24 @@
 
 class ForgotPasswordRouter: ForgotPasswordRouterInput {
    
-    func goToResetPassword() {
-        let vc = PopUpController.with(title: TextConstants.success,
-                                      message: TextConstants.forgotPasswordSentEmailAddres,
-                                      image: .error,
-                                      buttonTitle: TextConstants.ok,
-                                      action: { vc in
-                                        vc.close(completion: { [weak self] in
-                                            self?.popBack()
-                                        })
-        })
-        
+    func showSentToEmailPopupAndClose() {
+        let vc = PopUpController.with(
+            title: TextConstants.success, message: TextConstants.forgotPasswordSentEmailAddres,
+            image: .error, buttonTitle: TextConstants.ok) { vc in
+
+            vc.close { [weak self] in
+                self?.popBack()
+            }
+        }
+
         RouterVC().presentViewController(controller: vc)
+    }
+
+    func proceedToIdentityVerification(service: ResetPasswordService,
+                                       availableMethods: [IdentityVerificationMethod]) {
+        let viewController = IdentityVerificationViewController(resetPasswordService: service,
+                                                                availableMethods: availableMethods)
+        RouterVC().replaceTopViewControllerWithViewController(viewController)
     }
     
     func popBack() {//Goes to Login

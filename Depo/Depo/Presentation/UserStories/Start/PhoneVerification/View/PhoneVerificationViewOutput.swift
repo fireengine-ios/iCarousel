@@ -9,6 +9,7 @@
 protocol PhoneVerificationViewOutput {
     var currentSecurityCode: String { get }
     func viewIsReady()
+    func userNavigatedBack()
     func timerFinishedRunning(with isShowMessageWithDropTimer: Bool)
     func resendButtonPressed()
     func verificationCodeEntered()

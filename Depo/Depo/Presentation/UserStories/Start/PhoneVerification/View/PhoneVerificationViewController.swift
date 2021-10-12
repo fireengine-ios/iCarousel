@@ -69,6 +69,14 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         
         navigationBarWithGradientStyle()
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if isMovingFromParent {
+            output.userNavigatedBack()
+        }
+    }
     
     @IBAction func resendCode(_ sender: Any) {
         hiddenError()

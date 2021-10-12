@@ -106,13 +106,27 @@ struct RouteRequests {
     
     static let phoneVerification = "verify/phoneNumber"
     static let resendVerificationSMS = "verify/sendVerificationSMS"
-    
+
     static let forgotPassword = "account/forgotPassword"
+
     static let mailVerification = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
     static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
     static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
+
+    enum ForgotMyPassword {
+        static let link = baseUrl +/ "account/forgotMyPassword"
+        static let sendEmail = baseUrl +/ "forgotMyPassword/sendEmail"
+        static let sendRecoveryEmail = baseUrl +/ "forgotMyPassword/sendRecoveryEmail"
+        static let sendSMS = baseUrl +/ "forgotMyPassword/sendSms"
+        static let validatePhoneNumber = baseUrl +/ "forgotMyPassword/validatePhoneNumber"
+        static let checkStatus = baseUrl +/ "forgotMyPassword/checkStatus"
+        static let continueWithEmail = baseUrl +/ "forgotMyPassword/continueWithEmail"
+        static let continueWithRecoveryEmail = baseUrl +/ "forgotMyPassword/continueWithRecoveryEmail"
+        static let validateSecurityQuestion = baseUrl +/ "forgotMyPassword/validateSecurityQuestion"
+        static let change = baseUrl +/ "forgotMyPassword/change"
+    }
 
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget

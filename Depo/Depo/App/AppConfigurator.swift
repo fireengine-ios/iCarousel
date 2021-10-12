@@ -47,9 +47,7 @@ final class AppConfigurator {
         
         PremiumService.shared.addObserverForSyncStatusDidChange()
 
-        #if LIFEBOX
         FirebaseRemoteConfig.shared.performInitialFetch()
-        #endif
     }
     
     private static func setupIAPObserver() {
