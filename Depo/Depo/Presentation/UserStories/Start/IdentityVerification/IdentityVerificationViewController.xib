@@ -4,8 +4,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -37,7 +37,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="cbb-kx-UJJ" secondAttribute="trailing" constant="16" id="Dyh-2L-Oly"/>
                 <constraint firstAttribute="bottom" secondItem="lNj-qc-gec" secondAttribute="bottom" constant="20" id="L05-DH-oWB"/>
@@ -56,7 +56,7 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="400" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G33-ef-bQU" customClass="ResizableTableView" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zW9-db-KC7" customClass="WhiteButtonWithRoundedCorner" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="104" y="416" width="206" height="44"/>
@@ -71,7 +71,7 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Xk6-Zy-poz"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="G33-ef-bQU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="LOP-vE-zeX"/>
                 <constraint firstItem="zW9-db-KC7" firstAttribute="top" secondItem="G33-ef-bQU" secondAttribute="bottom" constant="16" id="M8c-CW-es4"/>
@@ -86,8 +86,8 @@
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

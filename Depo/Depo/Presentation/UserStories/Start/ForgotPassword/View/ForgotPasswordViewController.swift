@@ -93,7 +93,7 @@ final class ForgotPasswordViewController: ViewController {
     }
 
     private func setupInfoTitle() {
-        infoTitle.textColor = UIColor.black
+        infoTitle.textColor = AppColor.blackColor.color
         if Device.isIpad {
             infoTitle.font = UIFont.TurkcellSaturaBolFont(size: 20)
             infoTitle.textAlignment = .center
@@ -125,7 +125,7 @@ final class ForgotPasswordViewController: ViewController {
             font = UIFont.TurkcellSaturaRegFont(size: 24)
         }
 
-        textField.textColor = UIColor.black
+        textField.textColor = AppColor.blackColor.color
         textField.font = font
         textField.enablesReturnKeyAutomatically = true
         textField.autocapitalizationType = .none
