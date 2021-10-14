@@ -220,6 +220,7 @@
                     </imageView>
                 </subviews>
             </view>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9Vz-cE-Lvw" secondAttribute="trailing" id="1cp-gV-DCq"/>
                 <constraint firstAttribute="bottom" secondItem="9Vz-cE-Lvw" secondAttribute="bottom" id="1xw-MO-FRW"/>

@@ -89,6 +89,7 @@ final class ChangeEmailPopUp: UIViewController {
     
     @IBOutlet private weak var cancelButton: WhiteButtonWithRoundedCorner! {
         willSet {
+            newValue.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .normal)
             newValue.setTitle(TextConstants.cancel, for: .normal)
             newValue.setTitleColor(UIColor.lrTealish, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)

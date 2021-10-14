@@ -38,7 +38,7 @@ class RegistrationTermsInfoViewController: UIViewController {
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named: "CloseCardIcon"), for: .normal)
-            newValue.tintColor = .black
+            newValue.tintColor = AppColor.blackColor.color
             newValue.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
         }
     }
@@ -130,10 +130,13 @@ class RegistrationTermsInfoViewController: UIViewController {
         /// fixed black screen
         /// and error "AttributedString called within transaction"
         do {
-            let attributedString = try NSAttributedString(data: data,
+            let attributedString = try NSMutableAttributedString(data: data,
                                                           options: [.documentType: NSAttributedString.DocumentType.html,
                                                                     .characterEncoding: String.Encoding.utf8.rawValue],
                                                           documentAttributes: nil)
+
+            attributedString.addAttribute(.foregroundColor, value: AppColor.blackColor.color ?? .black,
+                                          range: NSRange(location: 0, length: attributedString.length))
             return attributedString
         } catch {
             assertionFailure()
@@ -153,7 +156,7 @@ extension RegistrationTermsInfoViewController: UITextViewDelegate {
 private extension UITextView {
     func setupInfoEulaStyle() {
         text = ""
-        backgroundColor = .white
+        backgroundColor = AppColor.secondaryBackground.color
         layer.masksToBounds = true
         layer.cornerRadius = 10
 

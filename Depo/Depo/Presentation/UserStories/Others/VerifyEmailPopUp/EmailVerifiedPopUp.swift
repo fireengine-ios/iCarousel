@@ -43,8 +43,8 @@ final class EmailVerifiedPopUp: BasePopUpController {
             newValue.layer.borderColor = UIColor.lrTealish.cgColor
             newValue.layer.borderWidth = 1
             
-            newValue.setBackgroundColor(.white, for: .normal)
-            newValue.setBackgroundColor(.white, for: .selected)
+            newValue.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .normal)
+            newValue.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .selected)
             newValue.setTitleColor(UIColor.lrTealish, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }

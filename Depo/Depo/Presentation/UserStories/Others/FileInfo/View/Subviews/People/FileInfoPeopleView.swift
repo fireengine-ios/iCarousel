@@ -60,7 +60,7 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
             newValue.setTitleColor(.white, for: UIControl.State())
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = ColorConstants.marineTwo
+            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
             newValue.setTitle(TextConstants.passcodeEnable, for: UIControl.State())
             newValue.adjustsFontSizeToFitWidth()
         }

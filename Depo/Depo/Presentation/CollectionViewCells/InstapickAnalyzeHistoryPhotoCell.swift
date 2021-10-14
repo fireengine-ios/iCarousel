@@ -59,6 +59,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
     @IBOutlet weak var pictureNotFoundImageView: UIImageView! {
         willSet {
             newValue.image = UIImage(named: "instaPickPicture")
+            newValue.tintColor = AppColor.marineTwoAndWhite.color
             newValue.contentMode = .scaleAspectFit
         }
     }
@@ -67,7 +68,7 @@ final class InstapickAnalyzeHistoryPhotoCell: BaseCollectionViewCell {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 10)
             newValue.text = TextConstants.instaPickPictureNotFoundLabel
-            newValue.textColor = ColorConstants.darkBlueColor
+            newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 2
             

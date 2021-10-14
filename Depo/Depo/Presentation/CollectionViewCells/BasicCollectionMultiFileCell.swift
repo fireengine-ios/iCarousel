@@ -157,7 +157,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bigContentImageView.contentMode = .center
 
         separatorView.isHidden = isBigSize()
-        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColor : AppColor.primaryBackground.color ?? .white
+        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColorSecondary : AppColor.primaryBackground.color ?? .white
         
         //Big size (Grid)
         if isBigSize() && bottomViewH.constant != BasicCollectionMultiFileCell.smallH {
@@ -213,6 +213,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         smallCellSelectionView.isHidden = true
         moreView.isHidden = isSelectionActive
+        moreView.backgroundColor = isBigSize() ? AppColor.secondaryBackground.color : AppColor.primaryBackground.color ?? .white
         smallContentImageView.isHidden = false
         
         if let isFavorite = itemModel?.favorites {
@@ -256,7 +257,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             }
         } else {
             if isBigSize() {
-                bgColor = ColorConstants.fileGreedCellColor
+                bgColor = ColorConstants.fileGreedCellColorSecondary
                 if self.bigSelectionView.alpha != 0 {
                     UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                         self.bigSelectionView.alpha = 0
