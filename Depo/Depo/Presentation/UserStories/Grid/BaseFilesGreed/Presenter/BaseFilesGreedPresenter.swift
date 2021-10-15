@@ -11,6 +11,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     lazy var player: MediaPlayer = factory.resolve()
     
     private lazy var instaPickRoutingService = InstaPickRoutingService()
+
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var dataSource: BaseDataSourceForCollectionView
     
@@ -876,6 +878,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func openInstaPick() {
+        analyticsService.track(event: .photopickClick)
+
         startAsyncOperation()
         instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
             self?.asyncOperationSuccess()

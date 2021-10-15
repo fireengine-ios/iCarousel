@@ -12,7 +12,7 @@ isDev = branchName == "develop"
 
 echo "Branch Name: ${branchName}"
 
-isSkipApproval = true //branchName.startsWith("release/") || branchName == "develop"
+isSkipApproval = branchName.startsWith("release/") || branchName == "develop"
 isFriendlyBuild = !branchName.startsWith("release/")
 
 /***** Branch Config END ******/

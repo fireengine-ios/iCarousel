@@ -583,6 +583,8 @@ extension PhotoVideoController: UICollectionViewDelegate {
 extension PhotoVideoController: BaseItemInputPassingProtocol {
 
     func openInstaPick() {
+        analyticsManager.track(event: .photopickClick)
+
         showSpinner()
         instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
             guard let self = self else {

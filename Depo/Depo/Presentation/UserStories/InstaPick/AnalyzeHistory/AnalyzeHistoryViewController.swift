@@ -161,6 +161,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
     // MARK: - Actions
     
     @IBAction private func newAnalysisAction(_ sender: Any) {
+        analyticsService.track(event: .photopickClick)
+
         if let count = dataSource.analysisCount?.left, count > 0 {
             startActivityIndicator()
             instapickRoutingService.getViewController(success: { [weak self] controller in

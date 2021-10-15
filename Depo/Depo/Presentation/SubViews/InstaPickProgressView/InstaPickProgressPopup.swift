@@ -22,6 +22,8 @@ final class InstaPickProgressPopup: ViewController, NibInit {
     @IBOutlet private weak var trailingConstraint: NSLayoutConstraint!
     
     private let instapickService: InstapickService = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     var delegate: InstaPickProgressPopupDelegate?
 
     @IBOutlet private weak var topCaption: UILabel! {
@@ -132,6 +134,7 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         instapickService.startAnalyze(ids: ids) { [weak self] analyzeResult in
             switch analyzeResult {
             case .success(let result):
+                self?.analyticsService.track(event: .photopick)
                 self?.dismiss(animated: true, completion: {
                     self?.delegate?.analyzeDidComplete(analyzeResult: result)
                 })

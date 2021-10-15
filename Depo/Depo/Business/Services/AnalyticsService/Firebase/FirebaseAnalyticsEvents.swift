@@ -41,6 +41,8 @@ enum AnalyticsEvent {
     case freeUpSpace
     case setPasscode
     case createStory
+    case photopickClick
+    case photopick
     
     
     var token: String {
@@ -80,6 +82,8 @@ enum AnalyticsEvent {
             case .freeUpSpace: return "3cccmx"
             case .setPasscode: return "kj4blr"
             case .createStory: return "x35cgx"
+            case .photopickClick: return "nodn1h"
+            case .photopick: return "v5uyyi"
             }
         #else
             switch self {
@@ -117,6 +121,8 @@ enum AnalyticsEvent {
             case .freeUpSpace: return "w9vvtl"
             case .setPasscode: return "ojquhk"
             case .createStory: return "afp233"
+            case .photopickClick: return "rijrgk"
+            case .photopick: return "ew0s45"
             }
         #endif
     }
@@ -157,6 +163,8 @@ enum AnalyticsEvent {
         case .freeUpSpace: return "FREE_UP_SPACE"
         case .setPasscode: return "PASSCODE_SET"
         case .createStory: return "CREATE_STORY"
+        case .photopickClick: return "PHOTOPICK_CLICK"
+        case .photopick: return "PHOTOPICK"
         }
     }
 }
