@@ -38,7 +38,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     private var fileType: FileType = .unknown
     
     private let sectionFont = UIFont.TurkcellSaturaBolFont(size: 14)
-    private let sectionColor = ColorConstants.marineTwo
+    private let sectionColor = AppColor.marineTwoAndTealish.color
     private let infoFont = UIFont.TurkcellSaturaFont(size: 18)
     private let titleColor = UIColor.lrBrownishGrey
     private let infoColor = ColorConstants.closeIconButtonColor

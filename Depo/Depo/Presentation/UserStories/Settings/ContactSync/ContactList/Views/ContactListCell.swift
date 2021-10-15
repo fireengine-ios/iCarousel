@@ -30,7 +30,7 @@ final class ContactListCell: UITableViewCell {
         willSet {
             newValue.text = ""
             newValue.font = .TurkcellSaturaMedFont(size: 16)
-            newValue.textColor = ColorConstants.duplicatesGray
+            newValue.textColor = .lrBrownishGrey
         }
     }
     

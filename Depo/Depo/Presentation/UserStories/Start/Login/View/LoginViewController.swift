@@ -35,7 +35,7 @@ final class LoginViewController: ViewController {
 
     @IBOutlet private weak var rememberMeLabel: UILabel! {
         willSet {
-            newValue.textColor = .black
+            newValue.textColor = AppColor.blackColor.color
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 15)
             newValue.text = TextConstants.loginRememberMyCredential
         }

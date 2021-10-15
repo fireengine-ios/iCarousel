@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoSyncViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AutoSyncViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="startButton" destination="GuY-4m-Vk6" id="GXd-AE-HXr"/>
                 <outlet property="tableView" destination="AjX-a0-H7G" id="JJr-s5-nR9"/>
@@ -24,7 +25,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-4m-Vk6" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-4m-Vk6" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="59" y="597" width="257" height="54"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="N31-4K-tau">
@@ -40,7 +41,8 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <viewLayoutGuide key="safeArea" id="0B0-De-1Rs"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="AjX-a0-H7G" secondAttribute="bottom" id="8BU-rK-Vg4"/>
                 <constraint firstItem="AjX-a0-H7G" firstAttribute="trailing" secondItem="0B0-De-1Rs" secondAttribute="trailing" id="Lte-ag-1eP"/>
@@ -51,8 +53,12 @@
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <viewLayoutGuide key="safeArea" id="0B0-De-1Rs"/>
             <point key="canvasLocation" x="479.19999999999999" y="61.619190404797607"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

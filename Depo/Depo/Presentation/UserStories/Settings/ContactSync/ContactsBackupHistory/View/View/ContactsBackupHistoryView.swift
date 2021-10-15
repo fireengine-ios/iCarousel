@@ -31,7 +31,7 @@ final class ContactsBackupHistoryView: UIView, NibInit {
         willSet {
             newValue.setTitle(TextConstants.contactBackupHistoryRestoreButton, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.backgroundColor = ColorConstants.navy
+            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
         }
     }

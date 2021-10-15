@@ -176,7 +176,7 @@ final class OptInController: ViewController, NibInit {
         navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         
         mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
-        mainTitle.textColor = .black
+        mainTitle.textColor = AppColor.blackAndLrTealish.color
         mainTitle.text = TextConstants.enterSecurityCode
         
         infoTitle.font = UIFont.TurkcellSaturaMedFont(size: 15)

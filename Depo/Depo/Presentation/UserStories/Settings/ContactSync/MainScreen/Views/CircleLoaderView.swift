@@ -73,7 +73,7 @@ final class CircleLoaderView: UIView {
     private let attributedPercentageValue: NSMutableAttributedString = {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.TurkcellSaturaMedFont(size: 60.0),
-            .foregroundColor: ColorConstants.navy]
+            .foregroundColor: AppColor.navyAndWhite.color ?? ColorConstants.navy]
         
         let attributed = NSMutableAttributedString(string: "0", attributes: attributes)
         
@@ -89,7 +89,7 @@ final class CircleLoaderView: UIView {
         
         let attributes: [NSAttributedString.Key: Any] = [
             .font: smallFont,
-            .foregroundColor: ColorConstants.navy,
+            .foregroundColor: AppColor.navyAndWhite.color ?? ColorConstants.navy,
             .baselineOffset : offset]
         
         let attributed = NSMutableAttributedString(string: "%", attributes: attributes)

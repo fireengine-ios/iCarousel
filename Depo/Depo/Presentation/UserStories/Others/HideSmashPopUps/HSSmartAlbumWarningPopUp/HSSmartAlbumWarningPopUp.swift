@@ -43,7 +43,7 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.textColor = ColorConstants.darkBlueColor
+            newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }
@@ -52,7 +52,7 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.darkText
+            newValue.textColor = AppColor.darkTextAndLightGray.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
         }

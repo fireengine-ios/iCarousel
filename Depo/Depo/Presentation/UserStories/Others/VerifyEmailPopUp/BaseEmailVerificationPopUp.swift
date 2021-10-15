@@ -177,7 +177,7 @@ class BaseEmailVerificationPopUp: BasePopUpController {
 
         if let range = topText.range(of: TextConstants.enterTheSecurityCode) {
             let rangeAttributes: [NSAttributedString.Key : Any] = [
-                .foregroundColor : UIColor.black
+                .foregroundColor : AppColor.blackColor.color ?? .black
             ]
             let nsRange = NSRange(location: range.lowerBound.encodedOffset,
                                   length: range.upperBound.encodedOffset - range.lowerBound.encodedOffset)

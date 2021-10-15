@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WarningPopupController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WarningPopupController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="buttonsStackView" destination="jBC-O6-wEv" id="D2x-Sa-GCc"/>
                 <outlet property="containerView" destination="mLL-lV-btu" id="TaI-hh-sir"/>
@@ -49,7 +50,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jBC-O6-wEv">
                             <rect key="frame" x="79" y="127" width="200" height="64"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeI-Gh-dBI" customClass="RoundedButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeI-Gh-dBI" customClass="RoundedButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="hl4-dK-wzp"/>
@@ -59,7 +60,7 @@
                                         <action selector="onFirstButtonTapped:" destination="-1" eventType="touchUpInside" id="Xh6-qt-Pw2"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2q-Nk-Ce0">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2q-Nk-Ce0">
                                     <rect key="frame" x="0.0" y="32" width="200" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="K8h-NR-b0R"/>
@@ -75,7 +76,7 @@
                             </constraints>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstItem="mGr-Gt-VEY" firstAttribute="leading" secondItem="mLL-lV-btu" secondAttribute="leading" constant="16" id="1Lx-d6-xqO"/>
                         <constraint firstItem="jBC-O6-wEv" firstAttribute="top" secondItem="MJT-Kl-EFs" secondAttribute="bottom" constant="16" id="43O-3T-bPO"/>
@@ -93,17 +94,20 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.19635783450704225" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="mLL-lV-btu" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="4om-lW-aM1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mLL-lV-btu" secondAttribute="trailing" constant="28" id="W1j-Ew-i79"/>
                 <constraint firstItem="mLL-lV-btu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="28" id="mkE-0q-Xrh"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="142"/>
         </view>
     </objects>
     <resources>
         <image name="warningAlert" width="30" height="30"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

@@ -326,6 +326,7 @@ extension SettingsViewController: SettingsViewInput {
     private func getProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool) -> UIAlertController {
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
+        actionSheetVC.view.tintColor = AppColor.blackColor.color
         
         if isProfileAlert {
             actionSheetVC.addActions(cancelAction,

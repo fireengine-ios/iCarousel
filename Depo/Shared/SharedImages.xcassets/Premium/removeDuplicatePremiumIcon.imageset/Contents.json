@@ -1,23 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "tekrar.png",
       "idiom" : "universal",
-      "filename" : "removeDuplicatePremiumIcon.png",
       "scale" : "1x"
     },
     {
+      "filename" : "tekrar@2x.png",
       "idiom" : "universal",
-      "filename" : "removeDuplicatePremiumIcon@2x.png",
       "scale" : "2x"
     },
     {
+      "filename" : "tekrar@3x.png",
       "idiom" : "universal",
-      "filename" : "removeDuplicatePremiumIcon@3x.png",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

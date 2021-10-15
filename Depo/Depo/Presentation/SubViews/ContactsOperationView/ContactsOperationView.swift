@@ -112,7 +112,7 @@ final class ContactsOperationView: UIView, NibInit {
             newValue.text = ""
             newValue.font = .TurkcellSaturaDemFont(size: 24)
             newValue.textAlignment = .center
-            newValue.textColor = ColorConstants.navy
+            newValue.textColor = AppColor.navyAndWhite.color
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -198,7 +198,7 @@ final class BackupContactsOperationView: UIView {
         let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel)
         actionSheetVC.addAction(cancelAction)
         
-        actionSheetVC.view.tintColor = UIColor.black
+        actionSheetVC.view.tintColor = AppColor.blackColor.color
         actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
         
         return actionSheetVC

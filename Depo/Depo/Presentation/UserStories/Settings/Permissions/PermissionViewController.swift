@@ -67,7 +67,7 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
     
     private func setupScreen() {
         view.clipsToBounds = true
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.primaryBackground.color
         
         setTitle(withString: TextConstants.settingsViewCellPermissions)
         navigationController?.navigationItem.title = TextConstants.backTitle

@@ -14,7 +14,7 @@ final class EmailVerifiedPopUp: BasePopUpController {
     @IBOutlet private weak var popUpView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 4
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.secondaryBackground.color
             
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowOpacity = 0.5
@@ -33,6 +33,7 @@ final class EmailVerifiedPopUp: BasePopUpController {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.textAlignment = .center
+            newValue.textColor = AppColor.blackColor.color
             newValue.numberOfLines = 0
         }
     }
@@ -42,8 +43,8 @@ final class EmailVerifiedPopUp: BasePopUpController {
             newValue.layer.borderColor = UIColor.lrTealish.cgColor
             newValue.layer.borderWidth = 1
             
-            newValue.setBackgroundColor(.white, for: .normal)
-            newValue.setBackgroundColor(.white, for: .selected)
+            newValue.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .normal)
+            newValue.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .selected)
             newValue.setTitleColor(UIColor.lrTealish, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }

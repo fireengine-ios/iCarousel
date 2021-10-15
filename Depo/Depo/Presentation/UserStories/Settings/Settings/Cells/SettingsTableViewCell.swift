@@ -30,7 +30,7 @@ class SettingsTableViewCell: UITableViewCell {
             backgroundColor = ColorConstants.selectedCellBlueColor
         } else {
             titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            backgroundColor = ColorConstants.whiteColor
+            backgroundColor = AppColor.primaryBackground.color
         }
         //backgroundView = bgView
         // Configure the view for the selected state

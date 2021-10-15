@@ -370,7 +370,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         actionsWithCancell.forEach({ actionSheetVC.addAction($0) })
-        actionSheetVC.view.tintColor = UIColor.black
+        actionSheetVC.view.tintColor = AppColor.blackColor.color
         
         actionSheetVC.popoverPresentationController?.sourceView = vc.view
         

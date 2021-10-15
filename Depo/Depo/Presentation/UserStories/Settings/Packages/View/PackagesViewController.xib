@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -62,7 +62,7 @@
                                 </stackView>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="153" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="51" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MZ8-Y2-pSD" customClass="ResizableTableView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" name="secondaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="height" id="EmF-B8-Kil"/>
                                     </constraints>
@@ -78,7 +78,7 @@
                                     </variation>
                                 </tableView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Packages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LS1-hD-FRu">
-                                    <rect key="frame" x="20" y="177" width="60" height="21"/>
+                                    <rect key="frame" x="20" y="177" width="79.5" height="21"/>
                                     <fontDescription key="fontDescription" name="TurkcellSaturaReg" family="TurkcellSaturaReg" pointSize="18"/>
                                     <color key="textColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -113,7 +113,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="ewx-h7-cJF" secondAttribute="trailing" id="3Xr-0L-wNX"/>
                                                 <constraint firstItem="5Nw-n6-UYP" firstAttribute="top" secondItem="ewx-h7-cJF" secondAttribute="bottom" constant="8" id="EBf-Et-h84"/>
@@ -139,7 +139,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="UMR-3l-Xbr" secondAttribute="trailing" id="2Cd-lj-WfL"/>
                                         <constraint firstAttribute="bottom" secondItem="HQv-5f-b5d" secondAttribute="bottom" id="2U3-gG-Htw"/>
@@ -158,6 +158,7 @@
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jVE-l8-8A6">
                                     <rect key="frame" x="16" y="615" width="343" height="0.0"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="height" priority="250" id="vL1-UH-bEa"/>
                                     </constraints>
@@ -238,7 +239,7 @@
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="nPs-St-HNE"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="TRR-B7-lJ8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="G6U-5T-7Rs"/>
                 <constraint firstItem="TRR-B7-lJ8" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="J6b-Os-RiH"/>
@@ -270,8 +271,11 @@
         </customObject>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

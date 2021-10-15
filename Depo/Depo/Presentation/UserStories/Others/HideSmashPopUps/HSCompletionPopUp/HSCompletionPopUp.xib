@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -96,7 +97,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                     <constraints>
                                                         <constraint firstItem="PMq-Eg-jgd" firstAttribute="centerX" secondItem="dnb-Sl-ArN" secondAttribute="centerX" id="Gcv-ge-1bE"/>
                                                         <constraint firstAttribute="width" secondItem="dnb-Sl-ArN" secondAttribute="height" multiplier="10:3" id="Mvj-NX-XAi"/>
@@ -249,7 +250,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="qJI-ss-qUl" secondAttribute="trailing" id="1qb-ih-iCo"/>
                         <constraint firstAttribute="width" priority="750" constant="360" id="58C-Q0-1z8"/>
@@ -279,9 +280,9 @@
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

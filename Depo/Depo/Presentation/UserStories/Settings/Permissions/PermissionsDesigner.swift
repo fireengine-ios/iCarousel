@@ -14,14 +14,14 @@ final class PermissionsDesigner: NSObject {
         willSet {
             newValue.textColor = UIColor.lrBrownishGrey
             newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
     
     @IBOutlet weak var descriptionView: UITextView! {
         willSet {
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             
             newValue.linkTextAttributes = [
@@ -44,7 +44,7 @@ final class PermissionsDesigner: NSObject {
             newValue.text = TextConstants.informativeDescription
             newValue.textColor = UIColor.lrLightBrownishGrey
             newValue.font = .TurkcellSaturaFont(size: 14)
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }

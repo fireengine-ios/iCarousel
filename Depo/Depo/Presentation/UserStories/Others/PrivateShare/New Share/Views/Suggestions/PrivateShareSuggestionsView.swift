@@ -21,7 +21,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.privateShareStartPageSuggestionsTitle
             newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndWhite.color
         }
     }
     

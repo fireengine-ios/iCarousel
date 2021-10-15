@@ -21,7 +21,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             
             let fullnameStackView = UIStackView(arrangedSubviews: [nameView, surnameView])
@@ -29,7 +29,7 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             fullnameStackView.axis = .horizontal
             fullnameStackView.alignment = .fill
             fullnameStackView.distribution = .fillEqually
-            fullnameStackView.backgroundColor = .white
+            fullnameStackView.backgroundColor = AppColor.primaryBackground.color
             fullnameStackView.isOpaque = true
             
             newValue.addArrangedSubview(fullnameStackView)

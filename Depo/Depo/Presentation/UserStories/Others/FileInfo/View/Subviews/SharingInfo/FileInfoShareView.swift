@@ -33,7 +33,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.privateShareInfoMenuSectionTitle
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndTealish.color
             newValue.font = .TurkcellSaturaBolFont(size: 14)
         }
     }

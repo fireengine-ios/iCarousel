@@ -26,7 +26,7 @@ final class FileMetaInfoView: UIView, NibInit, FileMetaInfoViewProtocol {
         willSet {
             newValue.text = TextConstants.fileInfoFileInfoTitle
             newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndTealish.color
         }
     }
     

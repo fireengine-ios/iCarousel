@@ -19,7 +19,7 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.text = TextConstants.contactSyncBigCardBackupMessage
             newValue.font = .TurkcellSaturaMedFont(size: 24.0)
-            newValue.textColor =  .white
+            newValue.textColor =  AppColor.primaryBackground.color
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -29,7 +29,7 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.text = "0"
             newValue.font = .TurkcellSaturaDemFont(size: 60.0)
-            newValue.textColor =  .white
+            newValue.textColor =  AppColor.primaryBackground.color
             newValue.numberOfLines = 1
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -39,7 +39,7 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.text = TextConstants.contactSyncBigCardContacts
             newValue.font = .TurkcellSaturaDemFont(size: 20.0)
-            newValue.textColor =  .white
+            newValue.textColor =  AppColor.primaryBackground.color
             newValue.numberOfLines = 1
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -47,10 +47,10 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var backUpButton: RoundedInsetsButton! {
         willSet {
-            newValue.setBackgroundColor(.white, for: .normal)
+            newValue.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
             
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
-            newValue.setTitleColor(.lrTealishTwo, for: .normal)
+            newValue.setTitleColor(AppColor.lrTealishAndWhite.color ?? .lrTealishTwo, for: .normal)
             
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16.0)
             newValue.adjustsFontSizeToFitWidth()
@@ -108,7 +108,9 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .lrTealishTwo
+        backgroundColor = AppColor.lrTealishAndWhite.color
+        backUpButton.setTitleColor(AppColor.lrTealishAndWhite.color ?? .lrTealishTwo, for: .normal)
+        backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
     }
     
     //MARK: - Public

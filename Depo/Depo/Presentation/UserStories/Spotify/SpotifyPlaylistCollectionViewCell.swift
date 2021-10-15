@@ -81,7 +81,7 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = AppColor.primaryBackground.color
     }
     
     override func prepareForReuse() {

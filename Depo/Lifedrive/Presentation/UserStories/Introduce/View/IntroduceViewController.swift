@@ -29,7 +29,7 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
     @IBOutlet private weak var subtitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.introSubTitle
-            newValue.textColor = ColorConstants.darkBlueColor
+            newValue.textColor = AppColor.marineTwoAndWhite.color
             if Device.isIpad {
                 newValue.font = UIFont.TurkcellSaturaRegFont(size: 22)
             } else {
@@ -45,7 +45,7 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
     @IBOutlet private weak var createAccountButton: RoundedInsetsButton! {
         willSet {
 
-            newValue.backgroundColor = ColorConstants.darkBlueColor
+            newValue.backgroundColor = AppColor.darkBlueAndBilloBlue.color
             newValue.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             newValue.setTitleColor(.white, for: .normal)
@@ -58,7 +58,7 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
         willSet {
             newValue.text = TextConstants.alreadyHaveAccountTitle
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 12)
-            newValue.textColor = ColorConstants.billoGray
+            newValue.textColor = AppColor.billoGrayAndWhite.color
         }
     }
     
@@ -66,11 +66,11 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
         willSet {
             newValue.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
-            newValue.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+            newValue.layer.borderColor = AppColor.darkBlueAndBilloBlue.color?.cgColor
             newValue.layer.borderWidth = 1
-            newValue.setTitleColor(ColorConstants.marineTwo, for: .normal)
+            newValue.setTitleColor(AppColor.darkBlueAndBilloBlue.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
         }
     }

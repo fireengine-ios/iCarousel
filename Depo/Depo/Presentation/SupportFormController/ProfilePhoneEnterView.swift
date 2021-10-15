@@ -11,7 +11,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
@@ -21,7 +21,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.text = TextConstants.profilePhoneNumberTitle
             newValue.textColor = UIColor.lrTealish
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
@@ -30,7 +30,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
         willSet {
             newValue.textColor = ColorConstants.textOrange
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.isHidden = true
         }
@@ -41,7 +41,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = textFieldColor
             newValue.borderStyle = .none
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             
             /// removes suggestions bar above keyboard
@@ -59,7 +59,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.rightView = imageView
             newValue.rightViewMode = .always
             
-            newValue.underlineColor = ColorConstants.profileGrayColor
+            newValue.underlineColor = AppColor.itemSeperator.color ?? ColorConstants.profileGrayColor
             
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
@@ -95,7 +95,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
             newValue.textColor = textFieldColor
             newValue.borderStyle = .none
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.quickDismissPlaceholder = TextConstants.profilePhoneNumberPlaceholder
             
@@ -112,7 +112,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
             newValue.keyboardType = .numberPad
-            newValue.underlineColor = ColorConstants.profileGrayColor
+            newValue.underlineColor = AppColor.itemSeperator.color ?? ColorConstants.profileGrayColor
             
             newValue.addToolBarWithButton(title: TextConstants.nextTitle,
                                           target: self,
@@ -140,7 +140,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
 
     var onCodeChanged: (() -> Void)?
     
-    private let textFieldColor = UIColor.black
+    private let textFieldColor = AppColor.blackColor.color
     
     /// awakeFromNib will not be called bcz of File Owner.
     /// it will be called only for "init?(coder".

@@ -43,7 +43,7 @@ final class PasswordRulesView: UIView {
         let newValue = UILabel()
         newValue.textColor = ColorConstants.lightText
         newValue.font = UIFont.TurkcellSaturaFont(size: 16)
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         newValue.numberOfLines = 0
         return newValue

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,26 +54,26 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="577.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDk-eY-3Lm">
-                                                            <rect key="frame" x="150.5" y="55" width="42" height="20.5"/>
+                                                            <rect key="frame" x="151" y="55" width="41.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIy-Xf-bKH">
-                                                            <rect key="frame" x="150.5" y="81.5" width="42" height="20.5"/>
+                                                            <rect key="frame" x="151" y="81.5" width="41.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EU4-bu-mbr">
-                                                            <rect key="frame" x="150.5" y="356" width="42" height="20.5"/>
+                                                            <rect key="frame" x="151" y="356" width="41.5" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="NV2-v7-EJx">
                                                             <rect key="frame" x="24" y="382.5" width="295" height="75"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" name="primaryBackground"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="75" id="DBQ-ot-amH">
                                                                     <variation key="heightClass=regular-widthClass=regular" constant="100"/>
@@ -98,7 +97,7 @@
                                                                 <action selector="onCloseTap:" destination="-1" eventType="touchUpInside" id="Fhq-QH-mVR"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GN-cn-ujP">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GN-cn-ujP">
                                                             <rect key="frame" x="148.5" y="471.5" width="46" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="KHs-xd-XGe">
@@ -110,7 +109,7 @@
                                                                 <action selector="onCopyToClipboardTap:" destination="-1" eventType="touchUpInside" id="vt7-8I-8s1"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-kD-Nrz" customClass="BlueButtonWithMediumWhiteText" customModule="lifebox" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6o-kD-Nrz" customClass="BlueButtonWithMediumWhiteText" customModule="Billo" customModuleProvider="target">
                                                             <rect key="frame" x="63" y="501.5" width="217" height="46"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="217" id="A9i-uP-amv"/>
@@ -126,9 +125,9 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="33" translatesAutoresizingMaskIntoConstraints="NO" id="qu6-0Y-2aS">
                                                             <rect key="frame" x="42" y="122" width="273" height="200"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="bigView" translatesAutoresizingMaskIntoConstraints="NO" id="Ynk-f5-yeT" customClass="InstaPickBigPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" restorationIdentifier="bigView" translatesAutoresizingMaskIntoConstraints="NO" id="Ynk-f5-yeT" customClass="InstaPickBigPhotoView" customModule="Billo" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="Ynk-f5-yeT" secondAttribute="height" id="qGc-be-xNI"/>
                                                                     </constraints>
@@ -139,24 +138,24 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jtO-kl-uZE">
                                                                             <rect key="frame" x="0.0" y="6.5" width="40" height="187"/>
                                                                             <subviews>
-                                                                                <view contentMode="scaleToFill" restorationIdentifier="smallOne" translatesAutoresizingMaskIntoConstraints="NO" id="6H1-i6-G1u" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                <view contentMode="scaleToFill" restorationIdentifier="smallOne" translatesAutoresizingMaskIntoConstraints="NO" id="6H1-i6-G1u" customClass="InstaPickSmallPhotoView" customModule="Billo" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="43"/>
-                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="6H1-i6-G1u" secondAttribute="height" multiplier="40:43" id="udp-DH-BUc"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <view contentMode="scaleToFill" restorationIdentifier="smallTwo" translatesAutoresizingMaskIntoConstraints="NO" id="xHE-Hs-2sD" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                <view contentMode="scaleToFill" restorationIdentifier="smallTwo" translatesAutoresizingMaskIntoConstraints="NO" id="xHE-Hs-2sD" customClass="InstaPickSmallPhotoView" customModule="Billo" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="48" width="40" height="43"/>
-                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                                                 </view>
-                                                                                <view contentMode="scaleToFill" restorationIdentifier="smallThree" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-Gc-Iaq" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                <view contentMode="scaleToFill" restorationIdentifier="smallThree" translatesAutoresizingMaskIntoConstraints="NO" id="QD4-Gc-Iaq" customClass="InstaPickSmallPhotoView" customModule="Billo" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="96" width="40" height="43"/>
-                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                                                 </view>
-                                                                                <view contentMode="scaleToFill" restorationIdentifier="smallFour" translatesAutoresizingMaskIntoConstraints="NO" id="iax-U1-9TV" customClass="InstaPickSmallPhotoView" customModule="lifebox" customModuleProvider="target">
+                                                                                <view contentMode="scaleToFill" restorationIdentifier="smallFour" translatesAutoresizingMaskIntoConstraints="NO" id="iax-U1-9TV" customClass="InstaPickSmallPhotoView" customModule="Billo" customModuleProvider="target">
                                                                                     <rect key="frame" x="0.0" y="144" width="40" height="43"/>
-                                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                                                 </view>
                                                                             </subviews>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -255,7 +254,8 @@
                                                     </variation>
                                                 </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <viewLayoutGuide key="safeArea" id="igo-fO-ZAb"/>
+                                            <color key="backgroundColor" name="secondaryBackground"/>
                                             <constraints>
                                                 <constraint firstItem="RC4-0c-Xb9" firstAttribute="top" secondItem="Nfo-vd-geH" secondAttribute="top" id="6Fa-8S-tvS"/>
                                                 <constraint firstAttribute="trailing" secondItem="RC4-0c-Xb9" secondAttribute="trailing" id="Ap2-ij-YgG"/>
@@ -264,7 +264,6 @@
                                                 <constraint firstItem="RC4-0c-Xb9" firstAttribute="leading" secondItem="Nfo-vd-geH" secondAttribute="leading" id="qxe-99-Itn"/>
                                                 <constraint firstItem="igo-fO-ZAb" firstAttribute="bottom" secondItem="h6o-kD-Nrz" secondAttribute="bottom" constant="30" id="wGf-Bv-jkY"/>
                                             </constraints>
-                                            <viewLayoutGuide key="safeArea" id="igo-fO-ZAb"/>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="ddW-FX-uYh"/>
@@ -316,6 +315,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="1xO-RL-kub" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gwf-lf-V9a"/>
@@ -328,11 +328,16 @@
                 <constraint firstAttribute="bottom" secondItem="1xO-RL-kub" secondAttribute="bottom" id="zjv-aK-7fM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="136.875" y="141.5492957746479"/>
         </view>
     </objects>
     <resources>
         <image name="grayCloseButton" width="17" height="17"/>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

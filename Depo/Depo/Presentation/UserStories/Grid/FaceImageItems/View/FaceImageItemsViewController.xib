@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad12_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FaceImageItemPhotosViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FaceImageItemPhotosViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="8sd-5t-hJx" id="mXG-B4-SR6"/>
             </connections>
@@ -34,7 +33,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-a4-zFl" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-a4-zFl" customClass="BlueButtonWithWhiteText" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="383" y="157" width="258" height="55"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="55" id="l1R-C8-9Xc"/>
@@ -51,7 +50,7 @@
                                     </constraints>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="212" id="3DC-g9-hwZ"/>
                                 <constraint firstItem="ej3-a4-zFl" firstAttribute="centerX" secondItem="FDk-Zz-hF7" secondAttribute="centerX" id="5nc-5L-oTq"/>
@@ -64,7 +63,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstItem="FDk-Zz-hF7" firstAttribute="leading" secondItem="4AK-oI-Kk6" secondAttribute="leading" id="FkA-jo-rnX"/>
                         <constraint firstItem="FDk-Zz-hF7" firstAttribute="centerY" secondItem="4AK-oI-Kk6" secondAttribute="centerY" id="Va7-Vd-oRZ"/>
@@ -73,7 +72,7 @@
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8sd-5t-hJx">
                     <rect key="frame" x="0.0" y="64" width="1024" height="1302"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qk0-Cp-dYT">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -82,7 +81,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="8sd-5t-hJx" secondAttribute="trailing" id="C5d-eV-R4X">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -102,4 +101,9 @@
             <point key="canvasLocation" x="24.5" y="50.5"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

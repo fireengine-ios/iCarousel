@@ -61,7 +61,7 @@ final class SpotifyThreeDotMenuManager {
         let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel)
         actionSheetVC.addAction(cancelAction)
         
-        actionSheetVC.view.tintColor = UIColor.black
+        actionSheetVC.view.tintColor = AppColor.blackColor.color
         actionSheetVC.popoverPresentationController?.sourceView = view
         actionSheetVC.popoverPresentationController?.barButtonItem = sender
         actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up

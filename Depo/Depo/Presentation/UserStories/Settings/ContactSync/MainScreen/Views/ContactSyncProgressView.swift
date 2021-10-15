@@ -65,7 +65,7 @@ final class ContactSyncProgressView: UIView, NibInit, ContactOperationProgressVi
         willSet {
             newValue.textAlignment = .center
             newValue.font = .TurkcellSaturaDemFont(size: 24.0)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }

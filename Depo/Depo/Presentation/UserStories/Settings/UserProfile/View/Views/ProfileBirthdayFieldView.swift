@@ -13,7 +13,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let dayLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = ColorConstants.lightGrayColor.cgColor
+        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
         
         return newValue
     }()
@@ -21,7 +21,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = ColorConstants.lightGrayColor.cgColor
+        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
         
         return newValue
     }()
@@ -29,7 +29,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = ColorConstants.lightGrayColor.cgColor
+        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
         
         return newValue
     }()
@@ -37,7 +37,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthTextField: UITextField = {
         let newValue = UITextField()
         
-        newValue.textColor = UIColor.black
+        newValue.textColor = AppColor.blackColor.color
         newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
         newValue.tintColor = UIColor.clear
         newValue.isUserInteractionEnabled = false
@@ -48,7 +48,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearTextField: UITextField = {
         let newValue = UITextField()
         
-        newValue.textColor = UIColor.black
+        newValue.textColor = AppColor.blackColor.color
         newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
         newValue.tintColor = UIColor.clear
         newValue.isUserInteractionEnabled = false
@@ -90,7 +90,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         }
     }
     
-    private let textFieldColor = UIColor.black
+    private let textFieldColor = AppColor.blackColor.color
     
     private lazy var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina3_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmailEnterController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmailEnterController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="continueButton" destination="Xol-oj-OkH" id="yEr-L9-5xw"/>
                 <outlet property="designer" destination="SQ8-sN-NXW" id="Lya-p8-PV3"/>
@@ -39,13 +38,13 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="55" translatesAutoresizingMaskIntoConstraints="NO" id="PJ5-aa-XUX" customClass="ProfileTextEnterView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="55" translatesAutoresizingMaskIntoConstraints="NO" id="PJ5-aa-XUX" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="40.5" width="280" height="55"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xol-oj-OkH" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xol-oj-OkH" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="72" y="135.5" width="176" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="4CH-bJ-iCx"/>
@@ -58,7 +57,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstItem="F2d-Zk-vOa" firstAttribute="leading" secondItem="9JX-NF-yV3" secondAttribute="leading" constant="20" id="4LG-ph-nh6"/>
                                 <constraint firstItem="Xol-oj-OkH" firstAttribute="width" secondItem="9JX-NF-yV3" secondAttribute="width" multiplier="0.55" id="5fY-qb-yly"/>
@@ -80,17 +79,17 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="7Lp-MB-hvl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Zrp-Ap-GZk"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7Lp-MB-hvl" secondAttribute="bottom" id="lHy-x1-Q3I" customClass="KeyboardLayoutConstraint" customModule="lifebox" customModuleProvider="target"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7Lp-MB-hvl" secondAttribute="bottom" id="lHy-x1-Q3I" customClass="KeyboardLayoutConstraint" customModule="Billo" customModuleProvider="target"/>
                 <constraint firstAttribute="trailing" secondItem="7Lp-MB-hvl" secondAttribute="trailing" id="lUW-gA-Acb"/>
                 <constraint firstItem="7Lp-MB-hvl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rF6-Tn-mog"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.75" y="155"/>
         </view>
-        <customObject id="SQ8-sN-NXW" customClass="EmailEnterDesigner" customModule="lifebox" customModuleProvider="target">
+        <customObject id="SQ8-sN-NXW" customClass="EmailEnterDesigner" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="continueButton" destination="Xol-oj-OkH" id="8Yu-NV-JKw"/>
                 <outlet property="emailView" destination="PJ5-aa-XUX" id="YAn-fh-DcW"/>
@@ -98,4 +97,9 @@
             </connections>
         </customObject>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

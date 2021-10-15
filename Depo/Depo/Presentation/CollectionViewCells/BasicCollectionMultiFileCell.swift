@@ -154,10 +154,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             smallContentImageView.contentMode = .center
         }
         
-        bigContentImageView.contentMode = .scaleAspectFill
-        
+        bigContentImageView.contentMode = .center
+
         separatorView.isHidden = isBigSize()
-        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColor : UIColor.white
+        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColorSecondary : AppColor.primaryBackground.color ?? .white
         
         //Big size (Grid)
         if isBigSize() && bottomViewH.constant != BasicCollectionMultiFileCell.smallH {
@@ -213,6 +213,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         smallCellSelectionView.isHidden = true
         moreView.isHidden = isSelectionActive
+        moreView.backgroundColor = isBigSize() ? AppColor.secondaryBackground.color : AppColor.primaryBackground.color ?? .white
         smallContentImageView.isHidden = false
         
         if let isFavorite = itemModel?.favorites {
@@ -231,7 +232,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         isCellSelected = isSelected
         isCellSelectionEnabled = isSelectionActive
         selectionImageView.isHidden = !isSelectionActive
-        var bgColor: UIColor = ColorConstants.whiteColor
+        var bgColor: UIColor = AppColor.secondaryBackground.color ?? ColorConstants.whiteColor
         if isSelectionActive {
             selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
             
@@ -244,7 +245,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 setSelectionSmallSelectionImageView(false, isHidden: true)
             } else {
                 bigSelectionView.alpha = 0
-                bgColor = ColorConstants.whiteColor
+                bgColor = AppColor.secondaryBackground.color ?? ColorConstants.whiteColor
                 if !smallContentImageView.configured {
                     smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
                     smallCellSelectionView.isHidden = !isSelected
@@ -256,7 +257,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             }
         } else {
             if isBigSize() {
-                bgColor = ColorConstants.fileGreedCellColor
+                bgColor = ColorConstants.fileGreedCellColorSecondary
                 if self.bigSelectionView.alpha != 0 {
                     UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                         self.bigSelectionView.alpha = 0
@@ -266,7 +267,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 if !smallContentImageView.configured {
                     smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
                 }
-                bgColor = ColorConstants.whiteColor
+                bgColor = AppColor.primaryBackground.color ?? .white
             }
             smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
             setSelectionSmallSelectionImageView(false, isHidden: true)
@@ -292,18 +293,17 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         smallCellSelectionView.contentMode = .center
         
         smallSelectonView.layer.borderWidth = 3
-        smallSelectonView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+        smallSelectonView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
         smallSelectonView.alpha = 0
         
         bigSelectionView.layer.borderWidth = 3
-        bigSelectionView.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+        bigSelectionView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
         bigSelectionView.alpha = 0
         
         fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
         fileNameLabel.textColor = ColorConstants.textGrayColor
         
         detailsLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)
-        detailsLabel.textColor = ColorConstants.textGrayColor.withAlphaComponent(0.6)
         
         moreButton.accessibilityLabel = TextConstants.accessibilityMore
         

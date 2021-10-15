@@ -6,11 +6,12 @@ final class InstaPickSelectionSegmentedView: UIView {
     
     private let topView = UIView()
     let containerView = UIView()
-    private let transparentGradientView = TransparentGradientView(style: .vertical, mainColor: .white)
+    private let transparentGradientView = TransparentGradientView(style: .vertical,
+                                                                  mainColor: AppColor.primaryBackground.color ?? .white)
     
     let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
-        segmentedControl.tintColor = ColorConstants.darkBlueColor
+        segmentedControl.tintColor = AppColor.marineTwoAndWhite.color
         segmentedControl.setTitleTextAttributes([.font: UIFont.TurkcellSaturaRegFont(size: 14)], for: .normal)
         return segmentedControl
     }()
@@ -23,8 +24,9 @@ final class InstaPickSelectionSegmentedView: UIView {
         
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
-        button.setBackgroundColor(ColorConstants.darkBlueColor.darker(by: 30), for: .highlighted)
+        button.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.darkBlueColor, for: .normal)
+        button.setBackgroundColor(AppColor.darkBlueAndTealish.color?.darker(by: 30) ??
+                                    ColorConstants.darkBlueColor.darker(by: 30), for: .highlighted)
         
         button.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         button.adjustsFontSizeToFitWidth()
@@ -37,7 +39,7 @@ final class InstaPickSelectionSegmentedView: UIView {
         label.textAlignment = .center
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        label.textColor = ColorConstants.darkBlueColor
+        label.textColor = AppColor.marineTwoAndWhite.color
         label.font = UIFont.TurkcellSaturaBolFont(size: 16)
         label.backgroundColor = ColorConstants.fileGreedCellColor.withAlphaComponent(0.9)
         let edgeInset: CGFloat = Device.isIpad ? 90 : 15
@@ -72,8 +74,8 @@ final class InstaPickSelectionSegmentedView: UIView {
     }
     
     private func setup() {
-        topView.backgroundColor = .white
-        containerView.backgroundColor = .white
+        topView.backgroundColor = AppColor.primaryBackground.color
+        containerView.backgroundColor = AppColor.primaryBackground.color
         setupLayout()
         
         analyzeButton.setTitle(buttonText, for: .normal)

@@ -30,8 +30,8 @@ final class AutoSyncSettingsTableViewCell: AutoSyncTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .white
-        optionSeparators.forEach { $0.backgroundColor = ColorConstants.profileGrayColor }
+        backgroundColor = AppColor.primaryBackground.color
+        optionSeparators.forEach { $0.backgroundColor = AppColor.itemSeperator.color }
     }
     
     func setup(with model: AutoSyncModel, delegate: AutoSyncCellDelegate?) {

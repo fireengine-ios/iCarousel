@@ -67,7 +67,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             title = TextConstants.etkPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.etkPermissionDescription,
                                                         attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
-                                                                     .foregroundColor: UIColor.lrLightBrownishGrey])
+                                                                     .foregroundColor: ColorConstants.lightText])
             
             let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
             descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
@@ -78,12 +78,12 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             title = TextConstants.globalPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.globalPermissionDescriptionLabel,
                                                         attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
-                                                                     .foregroundColor: UIColor.lrLightBrownishGrey])
+                                                                     .foregroundColor: ColorConstants.lightText])
         case .mobilePayment:
             title = TextConstants.mobilePaymentPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.mobilePaymentPermissionDescriptionLabel,
                                                         attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
-                                                                     .foregroundColor: UIColor.lrLightBrownishGrey])
+                                                                     .foregroundColor: ColorConstants.lightText])
             
             let rangeLink = descriptionText.mutableString.range(of: TextConstants.mobilePaymentPermissionLink)
             descriptionText.addAttributes([.link: TextConstants.NotLocalized.mobilePaymentPermissionLink], range: rangeLink)

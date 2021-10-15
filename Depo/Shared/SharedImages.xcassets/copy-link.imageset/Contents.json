@@ -3,6 +3,16 @@
     {
       "filename" : "copy-link.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "copy.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

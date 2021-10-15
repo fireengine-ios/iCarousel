@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PremiumView" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PremiumView" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="policyTextView" destination="PRX-oj-6gS" id="FOv-Vw-EeC"/>
                 <outlet property="premiumHeaderView" destination="8rI-MV-uQT" id="yVr-wA-7gj"/>
@@ -34,46 +35,46 @@
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="377" translatesAutoresizingMaskIntoConstraints="NO" id="yMx-AY-vjW">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="1069"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rI-MV-uQT" customClass="PremiumHeaderView" customModule="lifebox" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rI-MV-uQT" customClass="PremiumHeaderView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="819" placeholderIntrinsicHeight="370" axis="vertical" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="9Te-f5-hf4">
                                     <rect key="frame" x="0.0" y="24" width="375" height="980"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSu-B3-S6i" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSu-B3-S6i" customClass="PremiumListView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3M4-BB-X0a" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3M4-BB-X0a" customClass="PremiumListView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="142" width="375" height="128"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QG4-xl-MnX" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QG4-xl-MnX" customClass="PremiumListView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="284" width="375" height="128"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JFl-w6-mC9" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JFl-w6-mC9" customClass="PremiumListView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="426" width="375" height="128"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfO-EM-SHo" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfO-EM-SHo" customClass="PremiumListView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="568" width="375" height="128"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tww-PZ-QS0" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tww-PZ-QS0" customClass="PremiumListView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="710" width="375" height="128"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmf-JW-f0f" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmf-JW-f0f" customClass="PremiumListView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="852" width="375" height="128"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                     </subviews>
                                 </stackView>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRX-oj-6gS" customClass="IntrinsicTextView" customModule="lifebox" customModuleProvider="target">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRX-oj-6gS" customClass="IntrinsicTextView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="16" y="1028" width="343" height="33"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -122,7 +123,8 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="PgH-Xc-JLe" secondAttribute="bottom" id="d5b-fO-yxW"/>
                 <constraint firstItem="yMx-AY-vjW" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="e2c-SY-V8E"/>
@@ -130,8 +132,12 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="PgH-Xc-JLe" secondAttribute="trailing" id="w2S-An-pdY"/>
                 <constraint firstItem="PgH-Xc-JLe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="zsN-Jx-Cv2"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="-127.2" y="38.23088455772114"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -32,6 +32,7 @@ extension String {
                                                      documentAttributes: nil)
             
             let range: NSRange = text.mutableString.range(of: TextConstants.privacyPolicyHeadLine, options: .caseInsensitive)
+            text.addAttribute(.foregroundColor, value: AppColor.blackColor.color ?? .black, range: NSRange(location: 0, length: text.length))
             text.addAttributes(boldFontAttribute, range: range)
             return text
         } catch {

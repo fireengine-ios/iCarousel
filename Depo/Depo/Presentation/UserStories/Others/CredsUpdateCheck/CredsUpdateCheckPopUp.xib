@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CredsUpdateCheckPopUp" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CredsUpdateCheckPopUp" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="darkBackground" destination="8Wf-wq-XMu" id="HWB-vc-itG"/>
                 <outlet property="mainLabel" destination="yqr-1t-46Y" id="Qi9-XT-xlD"/>
@@ -31,7 +32,7 @@
                             <rect key="frame" x="41.5" y="251.5" width="331" height="403.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Pop Up Main Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqr-1t-46Y">
-                                    <rect key="frame" x="94" y="21" width="143.5" height="263"/>
+                                    <rect key="frame" x="94" y="21" width="143" height="263"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -45,14 +46,14 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="r39-Jc-55m">
                                     <rect key="frame" x="32.5" y="343.5" width="266" height="44"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8L-di-Ha0" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8L-di-Ha0" customClass="WhiteButtonWithRoundedCorner" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="130" height="44"/>
                                             <state key="normal" title="Button"/>
                                             <connections>
                                                 <action selector="updateButtonPressed:" destination="-1" eventType="touchUpInside" id="cz8-eD-TuY"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egp-oc-z9C" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egp-oc-z9C" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="136" y="0.0" width="130" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" priority="750" constant="130" id="WiY-dJ-Cpf"/>
@@ -68,7 +69,7 @@
                                     </constraints>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstItem="l7R-5t-wQT" firstAttribute="leading" secondItem="5tU-ab-3jo" secondAttribute="leading" constant="43" id="1ct-Zj-8Io"/>
                                 <constraint firstItem="l7R-5t-wQT" firstAttribute="top" secondItem="yqr-1t-46Y" secondAttribute="bottom" constant="17" id="9JB-U9-IXa"/>
@@ -83,14 +84,15 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <viewLayoutGuide key="safeArea" id="A0I-qG-p7V"/>
                     <constraints>
                         <constraint firstItem="5tU-ab-3jo" firstAttribute="centerY" secondItem="A0I-qG-p7V" secondAttribute="centerY" id="1m7-Pr-0Fk"/>
                         <constraint firstItem="5tU-ab-3jo" firstAttribute="centerX" secondItem="A0I-qG-p7V" secondAttribute="centerX" id="deB-Wh-ekC"/>
                         <constraint firstItem="5tU-ab-3jo" firstAttribute="width" secondItem="8Wf-wq-XMu" secondAttribute="width" multiplier="0.8" id="hdL-nb-QAu"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="A0I-qG-p7V"/>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <constraints>
                 <constraint firstItem="8Wf-wq-XMu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="87i-Vt-LrE"/>
                 <constraint firstItem="8Wf-wq-XMu" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="8Ln-zU-FiP"/>
@@ -98,8 +100,12 @@
                 <constraint firstItem="8Wf-wq-XMu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="WhH-2h-Qte"/>
                 <constraint firstAttribute="bottom" secondItem="8Wf-wq-XMu" secondAttribute="bottom" id="rFI-1t-efQ"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="124.55357142857142"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

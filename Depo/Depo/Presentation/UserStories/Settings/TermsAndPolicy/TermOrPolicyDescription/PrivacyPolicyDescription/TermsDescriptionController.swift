@@ -26,7 +26,8 @@ final class TermsDescriptionController: UIViewController {
         let textView = UITextView()
         textView.isEditable = false
         textView.font = UIFont.TurkcellSaturaRegFont(size: 15)
-        textView.textColor = .black
+        textView.textColor = AppColor.blackColor.color
+        textView.backgroundColor = AppColor.primaryBackground.color
         
         let edgeInset: CGFloat = 16
         textView.contentInset = UIEdgeInsets(top: edgeInset, left: 0, bottom: edgeInset, right: 0)
@@ -40,7 +41,7 @@ final class TermsDescriptionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.primaryBackground.color
         setupLayout()
         textView.attributedText = textToPresent.htmlAttributedForPrivacyPolicy(using: UIFont.TurkcellSaturaFont(size: 15))
         setTitle(withString: TextConstants.termsOfUseCell)

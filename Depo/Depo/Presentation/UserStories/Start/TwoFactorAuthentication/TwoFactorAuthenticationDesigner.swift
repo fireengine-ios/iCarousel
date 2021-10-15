@@ -42,7 +42,7 @@ final class TwoFactorAuthenticationDesigner: NSObject {
     
     @IBOutlet weak var topTableViewSeparatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = AppColor.itemSeperator.color
         }
     }
     

@@ -45,7 +45,7 @@ final class AutoSyncDataSource: NSObject {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = AppColor.primaryBackground.color
         tableView.separatorStyle = .none
         tableView.allowsMultipleSelection = true
         
@@ -53,15 +53,15 @@ final class AutoSyncDataSource: NSObject {
         
         //need for correct hide animation bottom cells
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 150))
-        footer.backgroundColor = .white
+        footer.backgroundColor = AppColor.primaryBackground.color
         let line = UIView(frame: CGRect(x: 16, y: 0, width: Device.winSize.width - 32, height: 1))
-        line.backgroundColor = ColorConstants.profileGrayColor
+        line.backgroundColor = AppColor.itemSeperator.color
         footer.addSubview(line)
         footer.isUserInteractionEnabled = false
         tableView.tableFooterView = footer
         
         let back = UIView(frame: tableView.bounds)
-        back.backgroundColor = .white
+        back.backgroundColor = AppColor.primaryBackground.color
         tableView.backgroundView = back
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(collapseCells))

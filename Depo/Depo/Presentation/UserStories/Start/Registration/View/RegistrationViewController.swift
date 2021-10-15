@@ -26,9 +26,9 @@ final class RegistrationViewController: ViewController {
     @IBOutlet private weak var nextButton: RoundedInsetsButton! {
         willSet {
             newValue.setBackgroundColor(UIColor.lrTealish, for: .normal)
-            newValue.setBackgroundColor(ColorConstants.lighterGray, for: .disabled)
+            newValue.setBackgroundColor(AppColor.inactiveButtonColor.color ?? ColorConstants.lighterGray, for: .disabled)
             newValue.setTitleColor(ColorConstants.whiteColor, for: .normal)
-            newValue.setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
+            newValue.setTitleColor(AppColor.textPlaceholderColor.color ?? ColorConstants.lightGrayColor, for: .disabled)
             newValue.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
             newValue.setTitle(TextConstants.registrationNextButtonText, for: .normal)
             newValue.isOpaque = true

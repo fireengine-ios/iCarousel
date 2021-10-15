@@ -17,7 +17,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             newValue.axis = .vertical
             newValue.alignment = .fill
             newValue.distribution = .fill
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             
             newValue.addArrangedSubview(oldPasswordView)

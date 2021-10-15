@@ -28,7 +28,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.privateShareStartPagePeopleSelectionTitle
             newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndWhite.color
         }
     }
     

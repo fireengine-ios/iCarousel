@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrashBinViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TrashBinViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="xTR-q8-L7x" id="cMb-Nv-k0k"/>
                 <outlet property="sortPanelContainer" destination="JTJ-D6-NuD" id="oKm-Kz-hLq"/>
@@ -22,14 +24,14 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTJ-D6-NuD">
                     <rect key="frame" x="0.0" y="44" width="414" height="40"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Oij-WM-XaE"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xTR-q8-L7x">
                     <rect key="frame" x="0.0" y="92" width="414" height="770"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YHD-yH-pdZ">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -38,7 +40,8 @@
                     </collectionViewFlowLayout>
                 </collectionView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="wSL-CD-iq8"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="wSL-CD-iq8" firstAttribute="trailing" secondItem="JTJ-D6-NuD" secondAttribute="trailing" id="5v3-wZ-zPh"/>
                 <constraint firstItem="JTJ-D6-NuD" firstAttribute="leading" secondItem="wSL-CD-iq8" secondAttribute="leading" id="9ef-RY-KXU"/>
@@ -48,8 +51,15 @@
                 <constraint firstItem="xTR-q8-L7x" firstAttribute="leading" secondItem="wSL-CD-iq8" secondAttribute="leading" id="ibL-Eq-Zvn"/>
                 <constraint firstItem="xTR-q8-L7x" firstAttribute="top" secondItem="JTJ-D6-NuD" secondAttribute="bottom" constant="8" symbolic="YES" id="uoU-BL-qkP"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="wSL-CD-iq8"/>
             <point key="canvasLocation" x="139" y="134"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

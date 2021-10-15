@@ -42,7 +42,7 @@ final class SecurityQuestionView: UIView, NibInit {
             newValue.textColor = UIColor.lrTealish
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.text = TextConstants.userProfileSecretQuestion
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
@@ -51,7 +51,7 @@ final class SecurityQuestionView: UIView, NibInit {
         willSet {
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
             newValue.textColor = ColorConstants.placeholderGrayColor
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.numberOfLines = 0
         }
@@ -74,7 +74,7 @@ final class SecurityQuestionView: UIView, NibInit {
     func setQuestion(question: String) {
         DispatchQueue.toMain {
             self.descriptionLabel.text = question
-            self.descriptionLabel.textColor = UIColor.black
+            self.descriptionLabel.textColor = AppColor.blackColor.color
         }
     }
     

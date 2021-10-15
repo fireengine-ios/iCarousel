@@ -81,7 +81,7 @@ final class HiddenPhotosDataSource: NSObject {
     }
     
     private func setupCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = AppColor.primaryBackground.color
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(nibCell: CollectionViewCellForPhoto.self)

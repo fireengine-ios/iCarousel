@@ -42,7 +42,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
             newValue.textColor = UIColor.lrTealish
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.text = TextConstants.userProfileSelectQuestion
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
@@ -60,7 +60,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet{
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = AppColor.itemSeperator.color
             newValue.isOpaque = true
         }
     }

@@ -85,7 +85,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.duplicatesGray
+            newValue.textColor = AppColor.darkTextAndLightGray.color
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -114,7 +114,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
             newValue.setTitle("", for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.backgroundColor = ColorConstants.navy
+            newValue.backgroundColor = AppColor.darkBlueAndTealish.color
             newValue.adjustsFontSizeToFitWidth()
         }
     }

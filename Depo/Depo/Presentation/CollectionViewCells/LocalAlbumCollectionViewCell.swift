@@ -17,7 +17,7 @@ class LocalAlbumCollectionViewCell: BaseCollectionViewCell {
         // Initialization code
         nameLabel.textColor = ColorConstants.textGrayColor
         nameLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        contentView.backgroundColor = UIColor.white
+        contentView.backgroundColor = AppColor.primaryBackground.color
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {

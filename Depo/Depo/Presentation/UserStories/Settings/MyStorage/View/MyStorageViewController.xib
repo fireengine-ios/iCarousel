@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStorageViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStorageViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="cardStackView" destination="a7S-hr-xxl" id="dN0-IS-KHL"/>
                 <outlet property="descriptionLabel" destination="lz6-qd-uEC" id="WZ8-LG-ID9"/>
@@ -25,15 +26,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R22-lb-Fq7" customClass="ControlContainableScrollView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R22-lb-Fq7" customClass="ControlContainableScrollView" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ybg-yo-WWN">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="613.5"/>
                             <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="128" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dyO-SR-wwv" customClass="ResizableTableView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="128" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dyO-SR-wwv" customClass="ResizableTableView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" id="Nd5-OH-61A"/>
                                     </constraints>
@@ -73,7 +74,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35h-M2-DXI" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="35h-M2-DXI" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="158" y="0.0" width="146" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="146" id="bad-gO-Cd1"/>
@@ -116,18 +117,18 @@
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
+                                    <exclude reference="VQx-Y9-hRC"/>
                                     <exclude reference="Eb1-MQ-rlB"/>
                                     <exclude reference="cU3-FD-u9F"/>
-                                    <exclude reference="VQx-Y9-hRC"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=regular">
                                 <mask key="constraints">
+                                    <include reference="VQx-Y9-hRC"/>
                                     <include reference="Eb1-MQ-rlB"/>
                                     <include reference="cU3-FD-u9F"/>
                                     <exclude reference="kQf-4g-zEx"/>
                                     <exclude reference="lvG-mb-rue"/>
-                                    <include reference="VQx-Y9-hRC"/>
                                 </mask>
                             </variation>
                         </view>
@@ -140,6 +141,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="pRB-cn-WJI"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="pRB-cn-WJI" firstAttribute="top" secondItem="R22-lb-Fq7" secondAttribute="top" id="3QP-H1-OTy"/>
@@ -150,8 +152,12 @@
                 <constraint firstItem="pRB-cn-WJI" firstAttribute="bottom" secondItem="R22-lb-Fq7" secondAttribute="bottom" id="et4-3i-zlj"/>
                 <constraint firstItem="R22-lb-Fq7" firstAttribute="trailing" secondItem="pRB-cn-WJI" secondAttribute="trailing" id="ya2-m1-Xki"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="pRB-cn-WJI"/>
             <point key="canvasLocation" x="800.625" y="151.05633802816902"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

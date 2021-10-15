@@ -89,7 +89,7 @@ final class TrashBinDataSource: NSObject {
     }
     
     private func setupCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = AppColor.primaryBackground.color
         collectionView.delegate = self
         collectionView.dataSource = self
         registerCells()

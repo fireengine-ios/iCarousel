@@ -4,7 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,7 +35,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstItem="oX3-1e-3qp" firstAttribute="top" secondItem="PbB-FE-kg4" secondAttribute="top" constant="20" id="1cz-5t-hxz"/>
                         <constraint firstItem="oX3-1e-3qp" firstAttribute="centerX" secondItem="PbB-FE-kg4" secondAttribute="centerX" id="Nbp-qb-8ZB"/>
@@ -44,7 +44,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="PbB-FE-kg4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0lM-mc-FKG"/>
                 <constraint firstAttribute="trailing" secondItem="PbB-FE-kg4" secondAttribute="trailing" id="fMR-41-CjY"/>
@@ -60,8 +60,8 @@
         </view>
     </objects>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

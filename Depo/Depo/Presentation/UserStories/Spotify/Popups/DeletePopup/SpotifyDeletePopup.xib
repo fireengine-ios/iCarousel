@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyDeletePopup" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpotifyDeletePopup" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="actionButton" destination="HFT-fc-jgj" id="3uu-Ud-MaQ"/>
                 <outlet property="contentView" destination="0Xw-p8-Cik" id="p4M-xz-oth"/>
@@ -36,7 +37,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gt4-4J-mcg">
                             <rect key="frame" x="26" y="226" width="242" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsp-dS-fZG" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsp-dS-fZG" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="118" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="118" id="APj-wB-8st"/>
@@ -44,7 +45,7 @@
                                     </constraints>
                                     <state key="normal" title="Button"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFT-fc-jgj" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFT-fc-jgj" customClass="InsetsButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="124" y="0.0" width="118" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="TBV-6T-v3f"/>
@@ -53,7 +54,7 @@
                                     <state key="normal" title="Button"/>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstItem="gsp-dS-fZG" firstAttribute="leading" secondItem="Gt4-4J-mcg" secondAttribute="leading" id="ATa-z8-FxW"/>
                                 <constraint firstItem="HFT-fc-jgj" firstAttribute="top" secondItem="Gt4-4J-mcg" secondAttribute="top" id="C3d-Lg-xsa"/>
@@ -84,7 +85,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstItem="Gt4-4J-mcg" firstAttribute="top" secondItem="6ai-6Q-nb5" secondAttribute="bottom" constant="20" id="4wv-Y4-bUf"/>
                         <constraint firstItem="vZO-cQ-IIe" firstAttribute="top" secondItem="0Xw-p8-Cik" secondAttribute="top" constant="24" id="6Zl-ry-Rpw"/>
@@ -102,16 +103,19 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="GVf-dN-Q31"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="0Xw-p8-Cik" firstAttribute="centerX" secondItem="G91-vT-LUF" secondAttribute="centerX" id="dYV-OQ-9go"/>
                 <constraint firstItem="0Xw-p8-Cik" firstAttribute="centerY" secondItem="G91-vT-LUF" secondAttribute="centerY" id="mTK-xi-xIQ"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="GVf-dN-Q31"/>
             <point key="canvasLocation" x="138" y="155"/>
         </view>
     </objects>
     <resources>
         <image name="delete_icon" width="40" height="44"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

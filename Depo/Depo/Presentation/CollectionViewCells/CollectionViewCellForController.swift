@@ -21,7 +21,7 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
         let layer = CALayer()
         layer.frame = contentView.layer.frame
         
-        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowColor = AppColor.cellShadow.color?.cgColor
         layer.shadowOpacity = 1
         layer.shadowOffset = CGSize.zero
         layer.shadowRadius = 3

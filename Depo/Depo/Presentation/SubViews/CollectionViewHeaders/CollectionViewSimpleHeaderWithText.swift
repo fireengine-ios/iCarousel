@@ -18,7 +18,6 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         didSet {
             labelForTitle.text = ""
             labelForTitle.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            labelForTitle.textColor = ColorConstants.textGrayColor
         }
     }
     

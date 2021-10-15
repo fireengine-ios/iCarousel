@@ -19,7 +19,7 @@ final class InstapickAlbumSelectionDataSource: NSObject {
         collectionView.register(nibCell: AlbumCollectionViewCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = AppColor.primaryBackground.color
         
         let transparentGradientViewHeight = NumericConstants.instaPickSelectionSegmentedTransparentGradientViewHeight
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: transparentGradientViewHeight, right: 0)

@@ -6,7 +6,7 @@ final class ProfileTextViewEnterView: UIView {
         let newValue = UILabel()
         newValue.textColor = UIColor.lrTealish
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         return newValue
     }()
@@ -15,7 +15,7 @@ final class ProfileTextViewEnterView: UIView {
         let newValue = UILabel()
         newValue.textColor = ColorConstants.textOrange
         newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         newValue.isHidden = true
         newValue.numberOfLines = 0
@@ -25,8 +25,8 @@ final class ProfileTextViewEnterView: UIView {
     let textView: IntrinsicTextView = {
         let newValue = IntrinsicTextView()
         newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        newValue.textColor = UIColor.black
-        newValue.backgroundColor = .white
+        newValue.textColor = AppColor.blackColor.color
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         
         /// to remove insets
@@ -43,7 +43,7 @@ final class ProfileTextViewEnterView: UIView {
         newValue.axis = .vertical
         newValue.alignment = .fill
         newValue.distribution = .fill
-        newValue.backgroundColor = .white
+        newValue.backgroundColor = AppColor.primaryBackground.color
         newValue.isOpaque = true
         return newValue
     }()
@@ -142,8 +142,8 @@ final class ProfileTextViewEnterView: UIView {
     // MARK: placeholder
     
     private let placeHolderText = TextConstants.explainYourProblemShortly
-    private let placeHolderColor = ColorConstants.lightGrayColor
-    private let textColor = UIColor.black
+    private let placeHolderColor = AppColor.textPlaceholderColor.color
+    private let textColor = AppColor.blackColor.color
     
     /// https://stackoverflow.com/a/27652289/5893286
     private func setupTextPlaceholder() {

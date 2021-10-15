@@ -13,7 +13,7 @@ final class BackUpContactsCard: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.deleteDuplicatesBackUpTitle
-            newValue.textColor = ColorConstants.navy
+            newValue.textColor = AppColor.navyAndWhite.color
             newValue.font = .TurkcellSaturaDemFont(size: 18)
             newValue.adjustsFontSizeToFitWidth()
         }

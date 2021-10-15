@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,14 +37,14 @@
                 </visualEffectView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDt-9i-CGy">
                     <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstAttribute="height" id="pMc-9l-rlR"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="35" sectionFooterHeight="32" translatesAutoresizingMaskIntoConstraints="NO" id="Xpp-j0-kcB">
                     <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <color key="separatorColor" red="0.8168148398399353" green="0.81743925809860229" blue="0.81691151857376099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <connections>
@@ -71,7 +72,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
                                 <constraint firstItem="tpr-ro-tFS" firstAttribute="centerY" secondItem="cgl-0D-wIj" secondAttribute="centerY" id="IXG-eR-PD5"/>
                                 <constraint firstAttribute="trailing" secondItem="tpr-ro-tFS" secondAttribute="trailing" constant="8" id="JQs-Di-2wc"/>
@@ -80,7 +81,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <constraints>
                         <constraint firstItem="cgl-0D-wIj" firstAttribute="centerY" secondItem="ve5-7k-qJd" secondAttribute="centerY" id="9F6-b0-lqH"/>
                         <constraint firstItem="cgl-0D-wIj" firstAttribute="leading" secondItem="ve5-7k-qJd" secondAttribute="leading" id="Yvl-mO-gNW"/>
@@ -89,7 +90,7 @@
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1hH-31-UT2">
                     <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" name="primaryBackground"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1It-GS-cYE">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -103,7 +104,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="AnL-pq-9wJ"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="Xpp-j0-kcB" firstAttribute="leading" secondItem="AnL-pq-9wJ" secondAttribute="leading" id="4SK-YP-BE6"/>
                 <constraint firstAttribute="trailing" secondItem="XDt-9i-CGy" secondAttribute="trailing" id="DTz-09-CJw"/>
@@ -136,4 +137,9 @@
             <point key="canvasLocation" x="42.5" y="89.5"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

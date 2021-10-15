@@ -44,7 +44,7 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     }
     @IBOutlet private weak var gradientView: TransparentGradientView! {
         willSet {
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.style = .vertical
         }
     }

@@ -4,9 +4,9 @@ final class EmailEnterDesigner: NSObject {
     @IBOutlet private weak var infoLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.pleaseEnterYourMissingAccountInformation
-            newValue.textColor = UIColor.black
+            newValue.textColor = AppColor.blackColor.color
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }

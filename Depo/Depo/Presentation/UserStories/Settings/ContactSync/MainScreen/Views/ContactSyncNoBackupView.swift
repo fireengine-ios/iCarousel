@@ -17,7 +17,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     @IBOutlet private weak var title: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 24.0)
-            newValue.textColor = ColorConstants.darkBlueColor
+            newValue.textColor = AppColor.marineTwoAndWhite.color
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupTitle
             newValue.numberOfLines = 0
@@ -38,7 +38,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     @IBOutlet private weak var actionButton: RoundedInsetsButton! {
         willSet {
             newValue.insets = UIEdgeInsets(topBottom: 2.0, rightLeft: 48.0)
-            newValue.backgroundColor = ColorConstants.darkBlueColor
+            newValue.backgroundColor = AppColor.darkBlueAndTealish.color
             newValue.setTitleColor(.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 16)
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)

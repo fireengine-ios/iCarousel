@@ -14,7 +14,7 @@ final class PrivateShareAddMessageView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.privateShareStartPageAddMessageTitle
             newValue.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndWhite.color
         }
     }
     

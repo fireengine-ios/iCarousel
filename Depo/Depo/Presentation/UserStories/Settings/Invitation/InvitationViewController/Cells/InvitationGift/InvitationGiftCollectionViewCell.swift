@@ -23,7 +23,7 @@ class InvitationGiftCollectionViewCell: UICollectionViewCell {
 
     private func setupView() {
         giftBGView.layer.borderWidth = 1.0
-        giftBGView.layer.borderColor = UIColor.lrLightBrownishGrey.cgColor
+        giftBGView.layer.borderColor = ColorConstants.snackbarGray.cgColor
     }
 
     func configureCell(subscriptionPlan: SubscriptionPlan) {

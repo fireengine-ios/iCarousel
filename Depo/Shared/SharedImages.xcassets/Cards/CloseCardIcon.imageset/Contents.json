@@ -1,12 +1,22 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "page1Copy5.pdf"
+      "filename" : "page1Copy5.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "page1.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

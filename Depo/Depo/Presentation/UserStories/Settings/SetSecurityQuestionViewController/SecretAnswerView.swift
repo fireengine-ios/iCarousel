@@ -15,7 +15,7 @@ final class SecretAnswerView: UIView, NibInit {
             newValue.textColor = UIColor.lrTealish
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.text = TextConstants.userProfileSecretQuestionAnswer
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }
@@ -23,9 +23,9 @@ final class SecretAnswerView: UIView, NibInit {
     @IBOutlet weak var answerTextField: QuickDismissPlaceholderTextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = UIColor.black
+            newValue.textColor = AppColor.blackColor.color
             newValue.borderStyle = .none
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.quickDismissPlaceholder = TextConstants.userProfileSecretQuestionAnswerPlaseholder
         }
@@ -36,7 +36,7 @@ final class SecretAnswerView: UIView, NibInit {
             newValue.textColor = ColorConstants.textOrange
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
             newValue.isHidden = true
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
     }

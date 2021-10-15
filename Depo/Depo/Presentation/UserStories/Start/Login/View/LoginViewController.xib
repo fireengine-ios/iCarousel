@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -93,28 +94,28 @@
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSC-e7-bAJ" customClass="ErrorBannerView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="52" width="382" height="178"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEG-SY-yH4">
                                     <rect key="frame" x="0.0" y="246" width="414" height="318"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                 </view>
                                 <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3pB-Lp-wU7">
                                     <rect key="frame" x="20" y="246" width="374" height="318"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="zR0-Yb-crR" userLabel="email" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="Fd4-XR-iy0" userLabel="password" customClass="ProfilePasswordEnterView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="96" width="374" height="80"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="335" placeholderIntrinsicHeight="80" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-rH-Hwu" userLabel="captcha" customClass="CaptchaView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="192" width="374" height="80"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" name="primaryBackground"/>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="s8F-tB-ErQ" customClass="AccessibleCheckBoxView" customModule="Billo" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="288" width="374" height="30"/>
@@ -194,7 +195,7 @@
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="4uw-Fd-t08"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="4uw-Fd-t08" firstAttribute="bottom" secondItem="G71-fS-dIW" secondAttribute="bottom" id="0OR-NS-KVl"/>
                 <constraint firstAttribute="trailing" secondItem="G71-fS-dIW" secondAttribute="trailing" id="17G-sZ-dUC"/>
@@ -213,5 +214,8 @@
         <image name="checkboxSelected" width="26" height="26"/>
         <image name="chevronLeft" width="16" height="9"/>
         <image name="question_symbol" width="31" height="55"/>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

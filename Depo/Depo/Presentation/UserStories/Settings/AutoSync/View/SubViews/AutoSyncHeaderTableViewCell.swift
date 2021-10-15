@@ -13,7 +13,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = .black
+            newValue.textColor = AppColor.blackColor.color
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
         }
     }
@@ -29,7 +29,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.textColor = ColorConstants.billoGray
             newValue.font = UIFont.TurkcellSaturaFont(size: 15)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -39,7 +39,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     @IBOutlet private weak var dropDownArrow: UIImageView!
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.profileGrayColor
+            newValue.backgroundColor = AppColor.itemSeperator.color
         }
     }
     
@@ -55,7 +55,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = .white
+        backgroundColor = AppColor.primaryBackground.color
     }
     
     func setup(with model: AutoSyncModel, delegate: AutoSyncCellDelegate?) {

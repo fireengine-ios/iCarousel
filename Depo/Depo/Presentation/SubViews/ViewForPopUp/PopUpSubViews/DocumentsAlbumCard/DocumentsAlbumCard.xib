@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,7 +39,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="lSV-cD-mwa" secondAttribute="trailing" id="Enq-1U-3ZG"/>
                                 <constraint firstItem="lSV-cD-mwa" firstAttribute="centerY" secondItem="Hsa-bF-1pP" secondAttribute="centerY" id="NXZ-Zs-C44"/>
@@ -63,7 +64,7 @@
                                     <rect key="frame" x="10" y="103" width="493" height="118"/>
                                 </stackView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="hAx-hD-fSz" secondAttribute="bottom" constant="10" id="0of-XV-beZ"/>
                                 <constraint firstAttribute="trailing" secondItem="hAx-hD-fSz" secondAttribute="trailing" constant="10" id="Baj-hI-Qjg"/>
@@ -106,7 +107,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Xkr-ef-7f0" secondAttribute="trailing" id="4gS-RJ-416"/>
                                 <constraint firstAttribute="bottom" secondItem="eDo-Fb-uE2" secondAttribute="bottom" id="Cah-mt-UJJ"/>
@@ -123,7 +124,7 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="4jB-aY-t9d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="94f-Ua-gJu"/>
                 <constraint firstAttribute="trailing" secondItem="4jB-aY-t9d" secondAttribute="trailing" id="ODp-hl-Rqj"/>
@@ -152,11 +153,11 @@
     </objects>
     <resources>
         <image name="CloseCardIcon" width="14" height="14"/>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="separatorColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

@@ -40,14 +40,14 @@ final class PopUpController: BasePopUpController {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = ColorConstants.darkBlueColor
+            titleLabel.textColor = AppColor.marineTwoAndWhite.color
             titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
         }
     }
     
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
-            messageLabel.textColor = ColorConstants.lightText
+            messageLabel.textColor = AppColor.popupGray.color
             messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
         }
     }
@@ -158,7 +158,7 @@ final class PopUpController: BasePopUpController {
         button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
         button.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
         button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        button.layer.borderColor = ColorConstants.blueColor.cgColor
+        button.layer.borderColor = AppColor.blueAndGray.color?.cgColor
         button.layer.borderWidth = 1
         button.adjustsFontSizeToFitWidth()
         

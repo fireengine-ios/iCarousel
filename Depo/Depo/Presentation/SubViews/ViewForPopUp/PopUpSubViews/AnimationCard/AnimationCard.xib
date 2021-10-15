@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -50,7 +51,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" name="secondaryBackground"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="Q8L-Bp-NgS" secondAttribute="bottom" id="6US-QN-yIi"/>
                                 <constraint firstItem="Q8L-Bp-NgS" firstAttribute="top" secondItem="0My-I7-oH7" secondAttribute="top" id="BZA-B1-UtH"/>
@@ -74,7 +75,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gsg-xT-146">
                     <rect key="frame" x="0.0" y="451" width="375" height="1"/>
-                    <color key="backgroundColor" white="0.80080837670000005" alpha="0.5038527397" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="itemSeperator"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="eQH-cZ-Fcr"/>
                     </constraints>
@@ -114,7 +115,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="secondaryBackground"/>
             <constraints>
                 <constraint firstItem="Y6l-AY-WpA" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" constant="14" id="2q4-5B-3Cc"/>
                 <constraint firstItem="gsg-xT-146" firstAttribute="leading" secondItem="nPL-YN-sbK" secondAttribute="leading" id="4gF-eN-3GD"/>
@@ -152,5 +153,11 @@
     </objects>
     <resources>
         <image name="CloseCardIcon" width="14" height="14"/>
+        <namedColor name="itemSeperator">
+            <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

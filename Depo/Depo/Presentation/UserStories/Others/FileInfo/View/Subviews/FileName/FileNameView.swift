@@ -35,7 +35,7 @@ final class FileNameView: UIView, NibInit, FileNameViewProtocol {
         willSet {
             newValue.text = TextConstants.fileInfoFileNameTitle
             newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndTealish.color
         }
     }
     

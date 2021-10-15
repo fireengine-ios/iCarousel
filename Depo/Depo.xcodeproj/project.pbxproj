@@ -369,6 +369,8 @@
 		07FBA22F26E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
 		07FBA23026E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
 		07FBA23126E0EDD000ED4132 /* Strings+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FBA22D26E0EDD000ED4132 /* Strings+Profile.swift */; };
+		07A8779B26D392A000D7BC03 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
+		07A8779C26D392A000D7BC03 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		156D03709A81A8D9E2CBFD26 /* Pods_BilloNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 555CBA114AEF409086996359 /* Pods_BilloNotificationService.framework */; };
 		17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17035BAA226DABDE00FE7362 /* ProfileFieldView.swift */; };
 		17052DEF2270B44700674D62 /* ProfileBirthdayFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17052DED2270B44700674D62 /* ProfileBirthdayFieldView.swift */; };
@@ -8509,6 +8511,8 @@
 		CFEB1FFD25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */; };
 		D0A9A44EC3C58B0D7CBF8A1A /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD15AE640AD597AB4E12CDEE /* Pods_LifeboxFileProviderUI.framework */; };
 		D910F773C4C0ED4D155C904A /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194FFE25625A80F2C0B29404 /* Pods_LifeboxShared.framework */; };
+		F02E456F270B3BA700C84374 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
+		F02E4573270B3BA900C84374 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F02F6A9F269C16C000A64ED8 /* PasswordRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */; };
 		F02F6AA0269C16C000A64ED8 /* PasswordRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */; };
 		F02F6AA2269C16C000A64ED8 /* PasswordRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */; };
@@ -8924,6 +8928,7 @@
 		07D0593926F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPInitializer.swift; sourceTree = "<group>"; };
 		07D0593E26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPConfigurator.swift; sourceTree = "<group>"; };
 		07D0594326F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPPresenter.swift; sourceTree = "<group>"; };
+		07A8779726D3929F00D7BC03 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewOutput.swift; sourceTree = "<group>"; };
 		07FBA20426E0BBA800ED4132 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		07FBA20726E0BBB100ED4132 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -19140,6 +19145,7 @@
 			children = (
 				8C7B9F3D2253F8970050DABE /* SettingsTC.bundle */,
 				CE2BA7CD1FC70B1000AA3EBE /* Images.xcassets */,
+				07A8779726D3929F00D7BC03 /* Colors.xcassets */,
 				CEBBDDDA1F01E4CF00CDF527 /* Fonts */,
 				8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */,
 				7C73CDF3200356B6000824AA /* OurLocalizable.strings */,
@@ -20974,6 +20980,7 @@
 				CF38A839257532550000994F /* PrivateShareDurationCell.xib in Resources */,
 				CEE3B7D1225791D900B99FE7 /* PasswordView.xib in Resources */,
 				9823197B24F3A1E600FD16E2 /* AdjustView.xib in Resources */,
+				07A8779B26D392A000D7BC03 /* Colors.xcassets in Resources */,
 				7C4F60AD2019E2BC0033C58F /* AlbumCard.xib in Resources */,
 				982319FF24F3A1E700FD16E2 /* PhotoEditChangesBar.xib in Resources */,
 				8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */,
@@ -21467,6 +21474,7 @@
 				8C6A1DCC2317EAEC00D792B9 /* container in Resources */,
 				988BA18D255924670086E4BE /* PrivateShareAddMessageView.xib in Resources */,
 				982319E424F3A1E700FD16E2 /* PhotoEditNavbar.xib in Resources */,
+				F02E456F270B3BA700C84374 /* Colors.xcassets in Resources */,
 				CE784E9922A685FB00662219 /* WaitingForWiFiPopUp.xib in Resources */,
 				CE784E9C22A685FB00662219 /* ConnectWithInstaView.xib in Resources */,
 				890F737422EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */,
@@ -21641,6 +21649,7 @@
 				CF8B697223CBC9D70021B021 /* TurkcellSaturaBol.ttf in Resources */,
 				B55C970D2559353800623C5C /* PrivateShareLocalSuggestionsViewController.xib in Resources */,
 				CF71469B24B597A900D83E60 /* ContactsBackupHistoryView.xib in Resources */,
+				07A8779C26D392A000D7BC03 /* Colors.xcassets in Resources */,
 				CF8B697423CBC9D70021B021 /* FreeUpSpacePopUp.xib in Resources */,
 				CF8B697523CBC9D70021B021 /* SelectNameViewController.xib in Resources */,
 				9862BC6A255E895600D7945E /* FileInfoShareView.xib in Resources */,
@@ -22174,6 +22183,7 @@
 				CF8B727023CBCA280021B021 /* BaseEmailVerificationPopUp.xib in Resources */,
 				0305A30D23D5C300004D1EC7 /* DivorceCard.xib in Resources */,
 				CF8B727623CBCA280021B021 /* PasswordCell.xib in Resources */,
+				F02E4573270B3BA900C84374 /* Colors.xcassets in Resources */,
 				CF8B727823CBCA280021B021 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				CF8B727923CBCA280021B021 /* QuestionCell.xib in Resources */,
 				9823199D24F3A1E700FD16E2 /* LightView.xib in Resources */,

@@ -40,7 +40,7 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
     @IBOutlet private weak var statusLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 15)
-            newValue.textColor = .black
+            newValue.textColor = AppColor.blackColor.color
             if output.isPremiumUser {
                 newValue.text = TextConstants.premiumUser
             } else if output.isMiddleUser {
@@ -185,7 +185,7 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
             let email = userInfo.email,
             !email.isEmpty {
             userEmailLabel.text = email
-            userEmailLabel.textColor = ColorConstants.switcherGrayColor
+            userEmailLabel.textColor = .lrBrownishGrey
         } else {
             userEmailLabel.text = TextConstants.settingsUserInfoEmail
             userEmailLabel.textColor = ColorConstants.profileLightGray
@@ -195,7 +195,7 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
             let phoneNumber = userInfo.phoneNumber,
             !phoneNumber.isEmpty {
             userPhoneNumber.text = phoneNumber
-            userPhoneNumber.textColor = ColorConstants.switcherGrayColor
+            userPhoneNumber.textColor = .lrBrownishGrey
         } else {
             userPhoneNumber.text = TextConstants.settingsUserInfoPhone
             userPhoneNumber.textColor = ColorConstants.profileLightGray

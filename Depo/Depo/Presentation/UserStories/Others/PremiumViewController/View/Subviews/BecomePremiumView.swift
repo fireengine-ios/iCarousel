@@ -17,7 +17,7 @@ final class BecomePremiumView: UIView, NibInit {
     
     @IBOutlet private weak var scrollView: ControlContainableScrollView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.lighterGray
+            newValue.backgroundColor = ColorConstants.fileGreedCellColorSecondary
             newValue.delaysContentTouches = false
         }
     }
@@ -33,7 +33,7 @@ final class BecomePremiumView: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
-            newValue.textColor = ColorConstants.marineTwo
+            newValue.textColor = AppColor.marineTwoAndTealish.color
             newValue.textAlignment = .center
         }
     }
@@ -133,7 +133,6 @@ final class BecomePremiumView: UIView, NibInit {
             
             let view = SubscriptionOfferView.initFromNib()
             view.configure(with: offer, delegate: self, index: index, style: .short)
-            view.backgroundColor = ColorConstants.lighterGray
             contentView.addArrangedSubview(view)
             
             view.translatesAutoresizingMaskIntoConstraints = false

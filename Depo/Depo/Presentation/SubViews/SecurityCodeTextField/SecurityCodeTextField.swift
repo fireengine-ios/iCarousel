@@ -39,7 +39,7 @@ final class SecurityCodeTextField: UITextField {
         keyboardType = .phonePad
         tintColor = .clear
         font = UIFont.TurkcellSaturaBolFont(size: 36)
-        textColor = .black
+        textColor = AppColor.blackAndOrange.color
         textAlignment = .center
         
         addBottomBorder()

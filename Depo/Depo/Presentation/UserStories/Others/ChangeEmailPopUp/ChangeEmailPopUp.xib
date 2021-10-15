@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeEmailPopUp" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeEmailPopUp" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="cancelButton" destination="x8L-di-Ha0" id="nWA-9V-bLf"/>
                 <outlet property="changeButton" destination="egp-oc-z9C" id="dAg-Du-BCo"/>
@@ -39,7 +38,7 @@
                                     <rect key="frame" x="41.5" y="227.5" width="331" height="451"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Pop Up Main Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yqr-1t-46Y">
-                                            <rect key="frame" x="94" y="18" width="143.5" height="20.5"/>
+                                            <rect key="frame" x="94" y="18" width="143" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -53,13 +52,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1V-mH-Rls" customClass="ProfileTextEnterView" customModule="lifebox" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1V-mH-Rls" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="28.5" width="283" height="136"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVm-Er-Zl9" customClass="ProfileTextEnterView" customModule="lifebox" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVm-Er-Zl9" customClass="ProfileTextEnterView" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="172.5" width="283" height="136"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" name="secondaryBackground"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
@@ -69,14 +68,14 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="r39-Jc-55m">
                                             <rect key="frame" x="57.5" y="391" width="216" height="44"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8L-di-Ha0" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x8L-di-Ha0" customClass="WhiteButtonWithRoundedCorner" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="44"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
                                                         <action selector="cancelButtonPressed:" destination="-1" eventType="touchUpInside" id="cz8-eD-TuY"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egp-oc-z9C" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egp-oc-z9C" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                                                     <rect key="frame" x="111" y="0.0" width="105" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="105" id="WiY-dJ-Cpf"/>
@@ -92,7 +91,7 @@
                                             </constraints>
                                         </stackView>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="secondaryBackground"/>
                                     <constraints>
                                         <constraint firstItem="YxJ-Ko-5Xv" firstAttribute="leading" secondItem="5tU-ab-3jo" secondAttribute="leading" constant="24" id="0Xi-4h-Za3"/>
                                         <constraint firstItem="yqr-1t-46Y" firstAttribute="centerX" secondItem="5tU-ab-3jo" secondAttribute="centerX" id="9t9-1v-A8T"/>
@@ -106,12 +105,12 @@
                                     </constraints>
                                 </view>
                             </subviews>
+                            <viewLayoutGuide key="safeArea" id="A0I-qG-p7V"/>
                             <constraints>
                                 <constraint firstItem="5tU-ab-3jo" firstAttribute="centerY" secondItem="A0I-qG-p7V" secondAttribute="centerY" id="1m7-Pr-0Fk"/>
                                 <constraint firstItem="5tU-ab-3jo" firstAttribute="centerX" secondItem="A0I-qG-p7V" secondAttribute="centerX" id="deB-Wh-ekC"/>
                                 <constraint firstItem="5tU-ab-3jo" firstAttribute="width" secondItem="8Wf-wq-XMu" secondAttribute="width" multiplier="0.8" id="hdL-nb-QAu"/>
                             </constraints>
-                            <viewLayoutGuide key="safeArea" id="A0I-qG-p7V"/>
                         </view>
                     </subviews>
                     <constraints>
@@ -122,6 +121,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="v2R-2c-RDl" secondAttribute="bottom" id="D3P-Il-zLi"/>
                 <constraint firstItem="8Wf-wq-XMu" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="H2S-LT-RmH"/>
@@ -130,8 +130,12 @@
                 <constraint firstItem="8Wf-wq-XMu" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" priority="250" id="WUQ-5l-EaQ"/>
                 <constraint firstItem="v2R-2c-RDl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dND-bq-2OH"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="124.55357142857142"/>
         </view>
     </objects>
+    <resources>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
