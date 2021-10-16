@@ -164,6 +164,27 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         }
     }
+
+    func onEditDescription(newDescription: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+
+        guard let projectId = item.projectId else {
+            return
+        }
+
+        shareApiService.editDescription(projectId: projectId, uuid: item.uuid, description: newDescription) { [weak self] result in
+            switch result {
+            case .success():
+//                item.metaData = newDescription
+            print("SUCCESS")
+            case .failed(let error):
+                self?.output.failedUpdate(error: error)
+            }
+        }
+    }
     
     func onValidateName(newName: String) {
         guard let index = currentItemIndex,

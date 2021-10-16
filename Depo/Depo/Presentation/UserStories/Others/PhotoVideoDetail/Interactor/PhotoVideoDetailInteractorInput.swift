@@ -34,6 +34,8 @@ protocol PhotoVideoDetailInteractorInput: AnyObject {
     func appendItems(_ items: [Item])
     
     func onRename(newName: String)
+
+    func onEditDescription(newDescription: String)
     
     func onValidateName(newName: String)
     

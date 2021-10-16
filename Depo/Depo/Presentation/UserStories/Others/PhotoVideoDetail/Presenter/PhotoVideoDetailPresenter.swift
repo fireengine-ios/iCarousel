@@ -385,7 +385,12 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
         startAsyncOperation()
         interactor.onValidateName(newName: newName)
     }
-    
+
+    func onEditDescription(newDescription: String) {
+        startAsyncOperation()
+        interactor.onEditDescription(newDescription: newDescription)
+    }
+
     func onEnableFaceRecognitionDidTap() {
         router.showConfirmationPopup { [weak self] in
             self?.interactor.enableFIR() { [weak self] in
