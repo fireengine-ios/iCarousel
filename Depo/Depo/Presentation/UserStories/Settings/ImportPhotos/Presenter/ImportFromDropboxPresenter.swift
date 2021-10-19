@@ -140,9 +140,9 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     
     // MARK: login, Token
     
-    func loginSuccess(token: String) {
+    func loginSuccess(accessToken: String, refreshToken: String) {
         interactor.trackConnectionStatusDropBox(isConnected: true)
-        interactor.connect(withToken: token)
+        interactor.connect(withToken: accessToken, refreshToken: refreshToken)
     }
     
     func loginFailure(errorMessage: String) {
