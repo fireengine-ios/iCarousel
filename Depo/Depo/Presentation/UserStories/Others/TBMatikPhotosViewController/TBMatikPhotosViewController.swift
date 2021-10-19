@@ -74,13 +74,13 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     @IBOutlet private weak var shareButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.tbMaticPhotosShare, for: .normal)
-            newValue.setTitleColor(ColorConstants.blueGreen, for: .normal)
-            newValue.setTitleColor(ColorConstants.blueGreen.withAlphaComponent(0.5), for: .disabled)
+            newValue.setTitleColor(AppColor.blueGreenAndWhite.color, for: .normal)
+            newValue.setTitleColor((AppColor.blueGreenAndWhite.color ?? ColorConstants.blueGreen).withAlphaComponent(0.5), for: .disabled)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 18)
             
-            newValue.setBackgroundColor(UIColor.white, for: .normal)
-            newValue.setBackgroundColor(UIColor.white.withAlphaComponent(0.5), for: .disabled)
-            newValue.setBackgroundColor(UIColor.white.darker(by: 30), for: .highlighted)
+            newValue.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
+            newValue.setBackgroundColor((AppColor.whiteAndLrTealish.color ?? .white).withAlphaComponent(0.5), for: .disabled)
+            newValue.setBackgroundColor((AppColor.whiteAndLrTealish.color ?? .white).darker(by: 30), for: .highlighted)
             
             newValue.isEnabled = false
         }

@@ -44,7 +44,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="uPY-kk-8gx"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="Eex-Nt-jqn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Re1-Zc-uZt"/>
                 <constraint firstAttribute="trailing" secondItem="Eex-Nt-jqn" secondAttribute="trailing" id="TKf-qw-eby"/>

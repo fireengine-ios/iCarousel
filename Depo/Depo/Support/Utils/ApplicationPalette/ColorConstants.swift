@@ -35,6 +35,8 @@ enum AppColor {
     case darkTextAndLightGray
     case lightPeachBackground
     case inactiveButtonColor
+    case lrTealishAndDarkBlue
+    case blueGreenAndWhite
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))
