@@ -38,6 +38,8 @@ protocol PhotoVideoDetailInteractorInput: AnyObject {
     func onEditDescription(newDescription: String)
     
     func onValidateName(newName: String)
+
+    func onValidateDescription(newDescription: String) 
     
     func getPersonsOnPhoto(uuid: String, completion: VoidHandler?)
     

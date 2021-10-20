@@ -65,7 +65,7 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
         }
         
         thingsItem =  ThingsItem(response: model.thingsItem)
-        albumItem = AlbumItem(uuid: model.albumUuid, name: thingsItem?.name, creationDate: model.creationDate, lastModifiDate: nil, fileType: .photoAlbum, syncStatus: .notSynced, isLocalItem: false)
+        albumItem = AlbumItem(uuid: model.albumUuid, name: thingsItem?.name, fileDescription: nil, creationDate: model.creationDate, lastModifiDate: nil, fileType: .photoAlbum, syncStatus: .notSynced, isLocalItem: false)
         setupCardView(documentsAlbumResponse: model, fileList: fileList)
     }
     

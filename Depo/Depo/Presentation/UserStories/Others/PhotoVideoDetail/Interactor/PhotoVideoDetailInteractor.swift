@@ -171,6 +171,16 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 return
         }
 
+        guard !newDescription.isEmpty else {
+            if let name = item.name {
+                output.cancelSaveDescription(use: name)
+            } else {
+                output.updated()
+            }
+
+            return
+        }
+
         guard let projectId = item.projectId else {
             return
         }
@@ -178,7 +188,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         shareApiService.editDescription(projectId: projectId, uuid: item.uuid, description: newDescription) { [weak self] result in
             switch result {
             case .success():
-//                item.metaData = newDescription
+//          item.metaData = newDescription
+            self?.output.updated()
             print("SUCCESS")
             case .failed(let error):
                 self?.output.failedUpdate(error: error)
@@ -197,6 +208,20 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         } else {
             output.didValidateNameSuccess(name: newName)
+        }
+    }
+
+    func onValidateDescription(newDescription: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+        if newDescription.isEmpty {
+            if let description = item.name {
+                output.cancelSaveDescription(use: description)
+            }
+        } else {
+            output.didValidateDescriptionSuccess(description: newDescription)
         }
     }
     

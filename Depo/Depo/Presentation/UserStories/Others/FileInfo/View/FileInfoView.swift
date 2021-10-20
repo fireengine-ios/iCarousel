@@ -82,7 +82,7 @@ final class FileInfoView: UIView, FromNib {
         self.object = object
         resetUI()
         fileNameView.name = object.name
-        fileDescriptionView.fileDescription = object.name
+        fileDescriptionView.fileDescription = object.fileDescription
         peopleView.fileType = object.fileType
         
         if let obj = object as? WrapData {
@@ -112,6 +112,14 @@ final class FileInfoView: UIView, FromNib {
     
     func showValidateNameSuccess() {
         fileNameView.showValidateNameSuccess()
+    }
+
+    func show(description: String) {
+        fileDescriptionView.fileDescription = description
+    }
+
+    func showValidateDescriptionSuccess() {
+        fileDescriptionView.showValidateDescriptionSuccess()
     }
     
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
@@ -146,6 +154,7 @@ final class FileInfoView: UIView, FromNib {
     
     func hideKeyboard() {
         fileNameView.hideKeyboard()
+        fileDescriptionView.hideKeyboard()
     }
     
     func updateShareInfo() {

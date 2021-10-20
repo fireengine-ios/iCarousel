@@ -15,6 +15,7 @@ protocol FileDescriptionViewDelegate: AnyObject {
 protocol FileDescriptionViewProtocol: UIView {
     static func with(delegate: FileDescriptionViewDelegate?) -> FileDescriptionViewProtocol
     func hideKeyboard()
+    func showValidateDescriptionSuccess()
 
     var isEditing: Bool { get set }
     var isEditable: Bool { get set }
@@ -76,7 +77,7 @@ final class FileDescriptionView: UIView, NibInit {
 
     //MARK: - Helpers
     private func initialSetup() {
-        isEditable = false
+        isEditable = true
     }
 
     private func set(description: String?) {
@@ -108,11 +109,6 @@ final class FileDescriptionView: UIView, NibInit {
         fileDescriptionTextView.isUserInteractionEnabled = false
         fileDescriptionTextView.text = oldDescription
     }
-
-    private func changeEditButtonsVisibility(isHidden: Bool) {
-        fileDescriptionTextView.isUserInteractionEnabled = !isHidden
-        editDescriptionButton.isHidden = isHidden
-    }
 }
 
 extension FileDescriptionView: FileDescriptionViewProtocol {
@@ -131,7 +127,13 @@ extension FileDescriptionView: FileDescriptionViewProtocol {
             oldDescription = nil
         }
 
-        changeEditButtonsVisibility(isHidden: !isEditable)
+        showValidateDescriptionSuccess()
+    }
+
+    func showValidateDescriptionSuccess() {
+        fileDescriptionTextView.resignFirstResponder()
+        guard let text = fileDescriptionTextView.text?.nonEmptyString else { return }
+        fileDescriptionTextView.text = text
     }
 }
 

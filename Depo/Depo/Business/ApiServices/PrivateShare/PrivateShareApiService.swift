@@ -263,7 +263,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             return nil
         }
 
-        let parameters = ["Description": description]
+        let parameters = ["key": "Description", "value": description]
 
         return SessionManager
             .customDefault

@@ -29,8 +29,12 @@ protocol PhotoVideoDetailViewInput: AnyObject, ActivityIndicator, ErrorPresenter
     func hideView()
     
     func show(name: String)
+
+    func showDescription(description: String)
     
     func showValidateNameSuccess(name: String)
+
+    func showValidateDescriptionSuccess(description: String)
     
     func updatePeople(items: [PeopleOnPhotoItemResponse])
     

@@ -19,6 +19,8 @@ class BaseDataSourceItem: NSObject {
     }
     
     var name: String?
+
+    var fileDescription: String?
     
     var creationDate: Date?
     
@@ -46,6 +48,7 @@ class BaseDataSourceItem: NSObject {
     
     init(uuid: String? = nil,
          name: String? = nil,
+         fileDescription: String? = nil,
          creationDate: Date? = nil,
          lastModifiDate: Date? = nil,
          fileType: FileType = .application(.unknown),
@@ -54,6 +57,7 @@ class BaseDataSourceItem: NSObject {
         
         self.uuid = uuid ?? UUID().uuidString
         self.name = name
+        self.fileDescription = fileDescription
         self.creationDate = creationDate
         self.lastModifiDate = lastModifiDate
         self.fileType = fileType
