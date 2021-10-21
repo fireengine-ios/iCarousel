@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 protocol FileDescriptionViewDelegate: AnyObject {
     func onEditDescription(newDescription: String)
@@ -146,9 +147,18 @@ extension FileDescriptionView: FileDescriptionViewProtocol {
 
 extension FileDescriptionView: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText = textView.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
-        return updatedText.count <= 255
+        if range.length >= 250 && text.isEmpty {
+            return false
+        }
+
+        let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
+        if newText.count > 250 {
+            textView.text = String(newText.prefix(250))
+        }
+        return newText.count <= 250
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        IQKeyboardManager.shared.reloadLayoutIfNeeded()
     }
 }
