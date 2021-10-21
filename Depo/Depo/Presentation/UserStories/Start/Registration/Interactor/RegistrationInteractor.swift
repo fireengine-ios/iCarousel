@@ -34,6 +34,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
         analyticsService.trackSupportEvent(screenType: .signup, subject: type, isSupportForm: false)
     }
 
+    func trackEULAConfirmed() {
+        analyticsService.logScreen(screen: .eula)
+    }
+
     func checkEtkAndGlobalPermissions(code: String, phone: String) {
         // We're only checking for ETK, global permission is ignored for now.
         if code == "+90" && phone.count == 10 {
@@ -140,10 +144,9 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.retriesCount = 0
                 
                 SingletonStorage.shared.referenceToken = result.referenceToken
-                
+
                 self.analyticsService.track(event: .signUp)
-                self.analyticsService.trackSignupEvent()
-                
+
                 SingletonStorage.shared.isJustRegistered = true
 
                 // Passing etkAuth and globalPermAuth to PhoneVerification
@@ -158,8 +161,6 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.retriesCount += 1
                 
                 if let signUpError = error as? SignupResponseError {
-
-                    self.analyticsService.trackSignupEvent(error: signUpError)
                     
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SignUp(status: .failure, errorType: signUpError.dimensionValue))
                     
@@ -168,13 +169,13 @@ class RegistrationInteractor: RegistrationInteractorInput {
                         self.captchaRequired = true
                         self.output.captchaRequired(required: true)
                     }
-                } else {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .errors,
-                                                             eventActions: .serviceError,
-                                                             eventLabel: .serverError,
-                                                             eventValue: error.description)
                 }
-                
+
+                self.analyticsService.trackCustomGAEvent(eventCategory: .errors,
+                                                         eventActions: .serviceError,
+                                                         eventLabel: .serverError,
+                                                         eventValue: error.description)
+
                 self.output.signUpFailed(errorResponse: error)
             }
         }

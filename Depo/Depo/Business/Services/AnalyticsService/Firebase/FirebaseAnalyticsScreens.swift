@@ -10,6 +10,7 @@ enum AnalyticsAppScreens {
     ///authorization
     case loginScreen
     case signUpScreen
+    case eula
     case forgotPassword
     case forgotPasswordV2
     case termsAndServices
@@ -160,6 +161,8 @@ enum AnalyticsAppScreens {
             return "Login"
         case .signUpScreen:
             return "Signup"
+        case .eula:
+            return "EULA"
         case .liveCollectRemember:
             return "Live Collect Remember"
         case .forgotPassword:

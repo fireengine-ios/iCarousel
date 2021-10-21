@@ -32,4 +32,5 @@ protocol RegistrationInteractorInput {
     
     func trackScreen()
     func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol)
+    func trackEULAConfirmed()
 }

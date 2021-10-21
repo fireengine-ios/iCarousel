@@ -141,6 +141,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
             let loginError = LoginResponseError(with: errorResponse)
             
             self.analyticsService.trackLoginEvent(loginType: .rememberLogin, error: loginError)
+            self.analyticsService.trackSignupEvent(error: errorResponse)
             
             let incorrectCredentioal = true
             if (incorrectCredentioal) {
@@ -173,11 +174,14 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     
     private func onSuccessLogin() {
         tokenStorage.isRememberMe = true
+        analyticsService.trackSignupEvent()
+
         analyticsService.track(event: .login)
         analyticsService.trackLoginEvent(loginType: .gsm)
+
         AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: true)
         AuthoritySingleton.shared.setShowPopupAboutPremiumAfterSync(isShow: true)
-        
+
         DispatchQueue.main.async { [weak self] in
             self?.output.succesLogin()
         }
