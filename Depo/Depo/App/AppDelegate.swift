@@ -16,7 +16,6 @@ import Netmera
 import UserNotifications
 import KeychainSwift
 import WidgetKit
-import IQKeyboardManagerSwift
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -91,10 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let coreDataStack: CoreDataStack = factory.resolve()
-
-        IQKeyboardManager.shared.enable = false
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.enabledDistanceHandlingClasses.append(PhotoVideoDetailViewController.self)
 
         startCoreDataSafeServices(with: application, options: launchOptions)
         

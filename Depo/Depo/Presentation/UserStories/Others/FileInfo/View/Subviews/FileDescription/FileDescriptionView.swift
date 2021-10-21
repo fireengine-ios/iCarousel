@@ -91,7 +91,6 @@ final class FileDescriptionView: UIView, NibInit {
     }
 
     private func changeEditButtonsVisibility(isHidden: Bool) {
-        fileDescriptionTextView.isUserInteractionEnabled = !isHidden
         editDescriptionButton.isHidden = isHidden
     }
 
