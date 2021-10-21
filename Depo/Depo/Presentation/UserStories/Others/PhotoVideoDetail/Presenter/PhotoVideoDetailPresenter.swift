@@ -322,6 +322,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         asyncOperationSuccess()
         view.show(name: name)
     }
+
+    func cancelSaveDescription(use description: String) {
+        asyncOperationSuccess()
+        view.showDescription(description: description)
+    }
     
     func failedUpdate(error: Error) {
         asyncOperationSuccess()
@@ -332,7 +337,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.showValidateNameSuccess(name: name)
         interactor.onRename(newName: name)
     }
-    
+
+    func didValidateDescriptionSuccess(description: String) {
+        view.showValidateDescriptionSuccess(description: description)
+        interactor.onEditDescription(newDescription: description)
+    }
+
     func updatePeople(items: [PeopleOnPhotoItemResponse]) {
         asyncOperationSuccess()
         view.updatePeople(items: items)
@@ -385,7 +395,12 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
         startAsyncOperation()
         interactor.onValidateName(newName: newName)
     }
-    
+
+    func onEditDescription(newDescription: String) {
+        startAsyncOperation()
+        interactor.onEditDescription(newDescription: newDescription)
+    }
+
     func onEnableFaceRecognitionDidTap() {
         router.showConfirmationPopup { [weak self] in
             self?.interactor.enableFIR() { [weak self] in

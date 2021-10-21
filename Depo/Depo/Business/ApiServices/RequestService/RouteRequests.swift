@@ -402,6 +402,7 @@ struct RouteRequests {
         static let details = filesystemBase + "details?minified=true"
         static let detail = filesystemBase + "detail/%@"
         static let metaData = filesystemBase + "metadata"
+        static let description = (baseUrl +/ metaData).absoluteString + "/%@"
         static let trash = filesystemBase + "trash"
         static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")

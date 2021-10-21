@@ -164,6 +164,38 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         }
     }
+
+    func onEditDescription(newDescription: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+
+        guard !newDescription.isEmpty else {
+            if let name = item.name {
+                output.cancelSaveDescription(use: name)
+            } else {
+                output.updated()
+            }
+
+            return
+        }
+
+        guard let projectId = item.projectId else {
+            return
+        }
+
+        shareApiService.editDescription(projectId: projectId, uuid: item.uuid, description: newDescription) { [weak self] result in
+            switch result {
+            case .success():
+                item.fileDescription = newDescription
+                item.metaData?.fileDescription = newDescription
+                self?.output.updated()
+            case .failed(let error):
+                self?.output.failedUpdate(error: error)
+            }
+        }
+    }
     
     func onValidateName(newName: String) {
         guard let index = currentItemIndex,
@@ -176,6 +208,20 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         } else {
             output.didValidateNameSuccess(name: newName)
+        }
+    }
+
+    func onValidateDescription(newDescription: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+        if newDescription.isEmpty {
+            if let description = item.name {
+                output.cancelSaveDescription(use: description)
+            }
+        } else {
+            output.didValidateDescriptionSuccess(description: newDescription)
         }
     }
     
