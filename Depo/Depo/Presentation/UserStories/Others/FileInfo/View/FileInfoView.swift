@@ -82,10 +82,10 @@ final class FileInfoView: UIView, FromNib {
         self.object = object
         resetUI()
         fileNameView.name = object.name
-        fileDescriptionView.fileDescription = object.fileDescription
         peopleView.fileType = object.fileType
         
         if let obj = object as? WrapData {
+            fileDescriptionView.fileDescription = obj.metaData?.fileDescription
             peopleView.status = obj.status
             setWith(wrapData: obj)
         }
@@ -198,6 +198,7 @@ final class FileInfoView: UIView, FromNib {
             canEdit = false
         }
 
+        fileDescriptionView.isEditable = canEdit
         fileNameView.isEditable = canEdit
     }
     

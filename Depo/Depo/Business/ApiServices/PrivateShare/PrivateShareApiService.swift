@@ -263,14 +263,14 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             return nil
         }
 
-        let parameters = ["key": "Description", "value": description]
+        let parameters = [["key": "Description", "value": description]].asParameters()
 
         return SessionManager
             .customDefault
             .request(url,
                      method: .put,
                      parameters: parameters,
-                     encoding: JSONEncoding.default)
+                     encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
             .task

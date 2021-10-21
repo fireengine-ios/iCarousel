@@ -30,5 +30,6 @@ extension MediaItemsMetaData {
     @NSManaged public var item: MediaItem?
     @NSManaged public var takenDate: NSDate?
     @NSManaged public var isVideoSlideshow: Bool
+    @NSManaged public var fileDescription: String?
 
 }

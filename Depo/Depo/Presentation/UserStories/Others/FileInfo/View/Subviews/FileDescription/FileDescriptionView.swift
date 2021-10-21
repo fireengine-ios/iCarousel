@@ -39,6 +39,7 @@ final class FileDescriptionView: UIView, NibInit {
     var isEditable: Bool = false {
         didSet {
             isEditing = false
+            changeEditButtonsVisibility(isHidden: !isEditable)
         }
     }
 
@@ -54,7 +55,7 @@ final class FileDescriptionView: UIView, NibInit {
 
     @IBOutlet weak var fileDescriptionTitleLabel: UILabel! {
         willSet {
-            newValue.text = "File Description"
+            newValue.text = TextConstants.photosVideosFileDescriptionTitle
             newValue.font = .TurkcellSaturaBolFont(size: 14)
             newValue.textColor = AppColor.marineTwoAndTealish.color
         }
@@ -77,7 +78,7 @@ final class FileDescriptionView: UIView, NibInit {
 
     //MARK: - Helpers
     private func initialSetup() {
-        isEditable = true
+        isEditable = false
     }
 
     private func set(description: String?) {
@@ -86,6 +87,11 @@ final class FileDescriptionView: UIView, NibInit {
             return
         }
         fileDescriptionTextView.text = description
+    }
+
+    private func changeEditButtonsVisibility(isHidden: Bool) {
+        fileDescriptionTextView.isUserInteractionEnabled = !isHidden
+        editDescriptionButton.isHidden = isHidden
     }
 
     //MARK: - IBActions
@@ -128,6 +134,7 @@ extension FileDescriptionView: FileDescriptionViewProtocol {
         }
 
         showValidateDescriptionSuccess()
+        changeEditButtonsVisibility(isHidden: !isEditable)
     }
 
     func showValidateDescriptionSuccess() {
