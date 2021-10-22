@@ -20,4 +20,5 @@ protocol UserProfileInteractorInput {
     var secretQuestionsResponse: SecretQuestionsResponse? { get }
     func updateSecretQuestionsResponse(with secretQuestionWithAnswer: SecretQuestionWithAnswer)
     func forceRefreshUserInfo()
+    func deleteMyAccount()
 }

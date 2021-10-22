@@ -354,6 +354,8 @@ struct RouteRequests {
         static let info = accountApi +/ "info"
         static let ticket = accountApi +/ "ticket"
 
+        static let delete = accountApi +/ "delete"
+
         enum Settings {
             /// without "s" at the end
             static let settingsApi = Account.accountApi +/ "setting" 

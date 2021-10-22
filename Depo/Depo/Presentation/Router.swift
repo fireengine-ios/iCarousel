@@ -1282,4 +1282,9 @@ class RouterVC: NSObject {
     func privateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> UIViewController {
         PrivateShateAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
     }
+
+    func showAccountDeletedPopUp() {
+        let popup = DeleteAccountPopUp.with(type: .success)
+        defaultTopController?.present(popup, animated: true)
+    }
 }

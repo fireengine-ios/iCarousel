@@ -948,5 +948,11 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .responseObject(handler)
             .task
     }
-    
+
+    func deleteMyAccount(handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.Account.delete, method: .delete)
+            .customValidate()
+            .responseVoid(handler)
+    }
 }

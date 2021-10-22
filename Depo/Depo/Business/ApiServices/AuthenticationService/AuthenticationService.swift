@@ -391,7 +391,56 @@ class AuthenticationService: BaseRequestService {
                     }
         }
     }
-    
+
+    enum ValidateLoginPasswordResult {
+        case valid
+        case invalidPassword
+        case invalidCaptcha
+    }
+
+    func validateLoginPassword(password: String,
+                               captchaAnswer: CaptchaParametrAnswer? = nil,
+                               completion: @escaping (ValidateLoginPasswordResult) -> Void) {
+
+        guard let phone = SingletonStorage.shared.accountInfo?.fullPhoneNumber else {
+            assertionFailure()
+            completion(.invalidPassword)
+            return
+        }
+
+        let user = AuthenticationUser(login: phone, password: password, rememberMe: true, attachedCaptcha: captchaAnswer)
+
+        let params: [String: Any] = ["username": user.login,
+                                     "password": user.password,
+                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
+
+        SessionManager.customDefault
+            .request(user.patch, method: .post, parameters: params,
+                     encoding: JSONEncoding.prettyPrinted,
+                     headers: user.attachedCaptcha?.header)
+            .responseString { response in
+                switch response.result {
+                case .success:
+
+                    if let statusCode = response.response?.statusCode, statusCode >= 300, statusCode != 403 {
+                        if statusCode == 412 {
+                            completion(.invalidCaptcha)
+                        } else {
+                            completion(.invalidPassword)
+                        }
+
+                        return
+                    }
+
+                    completion(.valid)
+
+                case .failure:
+                    completion(.invalidPassword)
+                }
+            }
+    }
+
+
     func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
         debugLog("AuthenticationService turkcellAutification")
         

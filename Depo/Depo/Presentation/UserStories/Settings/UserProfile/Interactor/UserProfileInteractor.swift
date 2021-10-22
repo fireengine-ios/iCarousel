@@ -318,4 +318,22 @@ class UserProfileInteractor: UserProfileInteractorInput {
             self?.fail(error: error.localizedDescription)
         })
     }
+
+    func deleteMyAccount() {
+        output.startNetworkOperation()
+        accountService.deleteMyAccount { result in
+            switch result {
+            case .success:
+                AuthenticationService().serverLogout { _ in
+                    AppConfigurator.logout {
+                        RouterVC().showAccountDeletedPopUp()
+                    }
+                }
+
+            case .failed(let error):
+                self.output.stopNetworkOperation()
+                self.output.showError(error: error.localizedDescription)
+            }
+        }
+    }
 }

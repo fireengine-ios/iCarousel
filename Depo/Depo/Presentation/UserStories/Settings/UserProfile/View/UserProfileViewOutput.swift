@@ -26,5 +26,7 @@ protocol UserProfileViewOutput {
 
     func emailVerificationCompleted()
 
+    func deleteMyAccountValidatedAndConfirmed()
+
     func showError(error: String)
 }

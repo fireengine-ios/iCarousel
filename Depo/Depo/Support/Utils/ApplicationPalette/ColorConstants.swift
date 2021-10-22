@@ -37,6 +37,7 @@ enum AppColor {
     case inactiveButtonColor
     case lrTealishAndDarkBlue
     case blueGreenAndWhite
+    case popUpBackground
 
     var color: UIColor? {
         return UIColor(named: String(describing: self))
