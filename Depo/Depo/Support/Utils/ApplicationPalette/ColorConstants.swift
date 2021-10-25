@@ -111,7 +111,6 @@ struct ColorConstants {
     static let marineTwo = UIColor(named: "marineTwo")!
     static let marineFour = UIColor(named: "marineFour")!
     static let tealishThree = UIColor(named: "tealishThree")!
-    static let popUpBackground = UIColor(named: "popUpBackground")!
     static let tealBlue = UIColor(named: "tealBlue")!
     static let seaweed = UIColor(named: "seaweed")!
     static let blueGreen = UIColor(named: "blueGreen")!

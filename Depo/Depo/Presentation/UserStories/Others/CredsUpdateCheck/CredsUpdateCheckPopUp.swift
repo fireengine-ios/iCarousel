@@ -38,7 +38,7 @@ final class CredsUpdateCheckPopUp: BasePopUpController {
     
     @IBOutlet private weak var darkBackground: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.popUpBackground
+            newValue.backgroundColor = AppColor.popUpBackground.color
         }
     }
     
