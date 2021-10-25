@@ -36,7 +36,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     var items = [SearchCategory: [SuggestionObject]]()
     
     var tabBarActionHandler: TabBarActionHandler? { return output.tabBarActionHandler }
-    
+
+    var searchBarContainer: UIView!
     var searchBar: UISearchBar!
     var searchTextField: UITextField?
     var navBarConfigurator = NavigationBarConfigurator()
@@ -180,7 +181,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     private func configureNavigationBar() {
         navigationItem.hidesBackButton = true
         navigationItem.rightBarButtonItems = []
-        
+
         searchBar = UISearchBar()
         searchBar.sizeToFit()
         searchBar.showsCancelButton = true
@@ -188,12 +189,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.tintColor = AppColor.marineTwoAndWhite.color
         searchBar.delegate = self
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
-        searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 44))
-        view.backgroundColor = AppColor.primaryBackground.color
-        searchBar.addSubview(view)
-        searchBar.sendSubviewToBack(view)
+
+        searchBarContainer = SearchTitleView(searchBar: searchBar)
         
         let firstTextField = searchBar.firstSubview(of: UITextField.self)
         
@@ -248,13 +245,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
                 navigationItem.rightBarButtonItem = nil
             }
             
-            DispatchQueue.main.async {
-                self.navigationItem.title = ""
-                self.navigationItem.titleView = self.searchBar
-                self.navigationItem.leftBarButtonItem = nil
-                self.navigationItem.titleView?.setNeedsLayout()
-                self.navigationItem.titleView?.layoutIfNeeded()
-            }
+            navigationItem.title = ""
+            navigationItem.titleView = self.searchBarContainer
+            navigationItem.leftBarButtonItem = nil
         }
     }
     
@@ -604,4 +597,24 @@ extension SearchViewController: RecentlySearchedFaceImageCellDelegate {
         output.openFaceImageItems(category: category)
     }
     
+}
+
+private class SearchTitleView: UIView {
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: .max, height: .max)
+    }
+
+    convenience init(searchBar: UISearchBar) {
+        self.init()
+        translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor),
+            searchBar.topAnchor.constraint(equalTo: topAnchor),
+            searchBar.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
 }
