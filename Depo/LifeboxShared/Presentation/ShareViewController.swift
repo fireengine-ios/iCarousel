@@ -170,7 +170,7 @@ final class ShareViewController: UIViewController, ShareController {
                         case .failed(_):
                             self.currentPhotoImageView.image = Images.noDocuments
                         }
-                        self.currentPhotoImageView.backgroundColor = UIColor.white
+                        self.currentPhotoImageView.backgroundColor = AppColor.secondaryBackground.color
                     }
                 }
             }
