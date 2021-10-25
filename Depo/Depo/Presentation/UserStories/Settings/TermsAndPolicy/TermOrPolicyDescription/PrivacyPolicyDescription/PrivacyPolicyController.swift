@@ -22,7 +22,7 @@ final class PrivacyPolicyController: UIViewController {
         
         let webView = WKWebView(frame: .zero, configuration: webConfig)
         webView.isOpaque = false
-        webView.backgroundColor = UIColor.white
+        webView.backgroundColor = AppColor.primaryBackground.color
         
         /// there is a bug for iOS 9
         /// https://stackoverflow.com/a/32843700/5893286
@@ -82,7 +82,15 @@ final class PrivacyPolicyController: UIViewController {
         privacyPolicyService.getPrivacyPolicy { [weak self] response in
             switch response {
             case .success(let privacyPolicy):
-                self?.webView.loadHTMLString(privacyPolicy.content, baseURL: nil)
+                var htmlString = privacyPolicy.content
+                if let hexColor = AppColor.blackColor.color?.toHexString() {
+                    htmlString = "<style>" +
+                        "html *" +
+                        "{" +
+                        "color: \(hexColor)"  +
+                        "}</style> \(privacyPolicy.content)"
+                }
+                self?.webView.loadHTMLString(htmlString, baseURL: nil)
             case .failed(_):
                 self?.stopActivity()
             }
@@ -119,5 +127,17 @@ extension PrivacyPolicyController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         stopActivity()
+    }
+}
+
+extension UIColor {
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return String(format:"#%06x", rgb)
     }
 }
