@@ -282,7 +282,7 @@ final class YearsView: UIView {
         label.textAlignment = .center
         label.font = UIFont.TurkcellSaturaDemFont(size: 12)
         label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-        label.textColor = UIColor.lrTealishTwo
+        label.textColor = AppColor.lrTealishAndDarkBlue.color
         label.textInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
         label.sizeToFit()
         label.layer.cornerRadius = label.frame.height * 0.5

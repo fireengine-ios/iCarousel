@@ -68,7 +68,7 @@
         </view>
     </objects>
     <resources>
-        <image name="checkBoxNotSelected" width="26" height="26"/>
+        <image name="checkBoxNotSelected" width="18" height="18"/>
         <image name="checkboxSelected" width="26" height="26"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

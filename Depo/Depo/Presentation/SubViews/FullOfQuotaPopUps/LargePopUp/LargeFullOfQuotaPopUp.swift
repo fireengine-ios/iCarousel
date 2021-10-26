@@ -106,7 +106,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         willSet {
             newValue.setTitle(TextConstants.lifeboxLargePopUpSkipButtonTitle, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
-            newValue.setTitleColor(ColorConstants.grayTabBarButtonsColor, for: .normal)
+            newValue.setTitleColor(ColorConstants.lightText, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
         }
     }

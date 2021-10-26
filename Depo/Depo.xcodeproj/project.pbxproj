@@ -8529,6 +8529,12 @@
 		F0F5E1BE272162A2003AC6AF /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F0F5E1BF272162A7003AC6AF /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
 		F0F5E1C0272162A7003AC6AF /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
+		F0C202342726EF810086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
+		F0C202382726F0230086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
+		F0C202392726F0240086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
+		F0C2023B2726F0260086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
+		F0C2023C2726F0270086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
+		F0C2023D2726F0280086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		FA016FB423D30750008713ED /* FileInfoModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA016FB223D30750008713ED /* FileInfoModuleOutput.swift */; };
 		FA016FB523D30750008713ED /* FileInfoModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA016FB223D30750008713ED /* FileInfoModuleOutput.swift */; };
 		FA016FB723D30750008713ED /* FileInfoModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA016FB223D30750008713ED /* FileInfoModuleOutput.swift */; };
@@ -21121,6 +21127,7 @@
 				8C3BA33622B3CC45006D901E /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C3BA33722B3CC45006D901E /* TurkcellSaturaReg.ttf in Resources */,
 				8C3BA33822B3CC45006D901E /* MainInterface.storyboard in Resources */,
+				F0C202342726EF810086233E /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -21129,6 +21136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3BA37022B3CC49006D901E /* OurLocalizable.strings in Resources */,
+				F0C2023C2726F0270086233E /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -21145,6 +21153,7 @@
 				8C3BA39722B3CC53006D901E /* TurkcellSaturaIta.ttf in Resources */,
 				8C3BA39822B3CC53006D901E /* TurkcellSaturaMed.ttf in Resources */,
 				8C3BA39922B3CC53006D901E /* TurkcellSaturaMedIta.ttf in Resources */,
+				F0C2023D2726F0280086233E /* Colors.xcassets in Resources */,
 				8C3BA39A22B3CC53006D901E /* TurkcellSaturaReg.ttf in Resources */,
 				8C3BA39C22B3CC53006D901E /* MainInterface.storyboard in Resources */,
 			);
@@ -21168,6 +21177,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0C202392726F0240086233E /* Colors.xcassets in Resources */,
 				CE4D27F1207E00D2003AE4FB /* OurLocalizable.strings in Resources */,
 				7AFAB3782073AE1500C54C9B /* InfoAppStore.plist in Resources */,
 			);
@@ -21186,6 +21196,7 @@
 				CE18CC83204E85DC00FA3F44 /* TurkcellSaturaIta.ttf in Resources */,
 				CE18CC84204E85DC00FA3F44 /* TurkcellSaturaMed.ttf in Resources */,
 				CE18CC85204E85DC00FA3F44 /* TurkcellSaturaMedIta.ttf in Resources */,
+				F0C2023B2726F0260086233E /* Colors.xcassets in Resources */,
 				CE18CC86204E85DC00FA3F44 /* TurkcellSaturaReg.ttf in Resources */,
 				CE1BE936204831CE0074BDDC /* MainInterface.storyboard in Resources */,
 			);
@@ -21208,6 +21219,7 @@
 				CEBDB1E220444E50007EE1AE /* TurkcellSaturaMedIta.ttf in Resources */,
 				CEBDB1E320444E50007EE1AE /* TurkcellSaturaReg.ttf in Resources */,
 				CE58FAF520444493007F3F54 /* MainInterface.storyboard in Resources */,
+				F0C202382726F0230086233E /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
