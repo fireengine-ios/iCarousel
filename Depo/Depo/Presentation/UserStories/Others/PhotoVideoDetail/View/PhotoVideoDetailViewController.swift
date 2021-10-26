@@ -418,6 +418,14 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
+    func showValidateDescriptionSuccess(description: String) {
+        bottomDetailView?.showValidateDescriptionSuccess()
+    }
+
+    func showDescription(description: String) {
+        bottomDetailView?.show(description: description)
+    }
+
     func showValidateNameSuccess(name: String) {
         setNavigationTitle(title: name)
         bottomDetailView?.showValidateNameSuccess()

@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let coreDataStack: CoreDataStack = factory.resolve()
-        
+
         startCoreDataSafeServices(with: application, options: launchOptions)
         
         APILogger.shared.startLogging()

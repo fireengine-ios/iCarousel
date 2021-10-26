@@ -40,6 +40,10 @@ extension FileInfoPresenter: FileInfoViewOutput {
         startAsyncOperation()
         interactor.onRename(newName: newName)
     }
+
+    func onEditDescription(newDescription: String) {
+        return
+    }
     
     func shareItem() {
         if let item = interactor.item as? WrapData {

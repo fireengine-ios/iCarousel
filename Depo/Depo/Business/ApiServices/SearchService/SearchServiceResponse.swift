@@ -53,6 +53,7 @@ struct SearchJsonKey {
     static let ImageDateTime = "Image-DateTime"
     static let VideoPreview = "Video-Preview"
     static let DocumentPreview = "Document-Preview"
+    static let Description = "Description"
     
     // music metadata
     
@@ -94,6 +95,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     var smalURl: URL?
     var videoPreviewURL: URL?
     var documentPreviewURL: URL?
+    var fileDescription: String?
     
     // music
     var artist: String?
@@ -133,6 +135,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         smalURl = json?[SearchJsonKey.ThumbnailSmall].url
         videoPreviewURL = json?[SearchJsonKey.VideoPreview].url
         documentPreviewURL = json?[SearchJsonKey.DocumentPreview].url
+        fileDescription = json?[SearchJsonKey.Description].string
         
         artist = json?[SearchJsonKey.Artist].string
         album = json?[SearchJsonKey.Album].string
@@ -172,6 +175,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         genre = aDecoder.decodeObject(forKey:SearchJsonKey.Genre) as? [String] ?? []
         isVideoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool ?? false
         specialFolderMeta = aDecoder.decodeObject(forKey: SearchJsonKey.specialFolderMeta) as? String
+        fileDescription = aDecoder.decodeObject(forKey: SearchJsonKey.Description) as? String
 //        videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
     }
     
@@ -192,6 +196,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         aCoder.encode(genre, forKey: SearchJsonKey.Genre)
         aCoder.encode(isVideoSlideshow, forKey: SearchJsonKey.VideoSlideshow)
         aCoder.encode(specialFolderMeta, forKey: SearchJsonKey.specialFolderMeta)
+        aCoder.encode(fileDescription, forKey:  SearchJsonKey.Description)
 //        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
     }
     
@@ -206,6 +211,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         mediumUrl = sharedFileMetaData.thumbnailMedium
         largeUrl = sharedFileMetaData.thumbnailLarge
         videoPreviewURL = sharedFileMetaData.videoPreview
+        fileDescription = sharedFileMetaData.fileDescription
         
         height = sharedFileMetaData.imageHeight ?? 0
         width = sharedFileMetaData.imageWidth ?? 0
@@ -234,7 +240,8 @@ extension BaseMetaData {
             favourite == metaData.favourite &&
             height == metaData.height &&
             width == metaData.width &&
-            isVideoSlideshow == metaData.isVideoSlideshow
+            isVideoSlideshow == metaData.isVideoSlideshow &&
+            fileDescription == metaData.fileDescription
     }
     
     func copy(metaData: BaseMetaData?) {
@@ -256,6 +263,7 @@ extension BaseMetaData {
         favourite = metaData.favourite
         height = metaData.height
         width = metaData.width
+        fileDescription = metaData.fileDescription
     }
 }
 
@@ -282,6 +290,7 @@ final class SearchItemResponse: ObjectRequestResponse {
     var location: Any? // TODO Add!
     var childCount: Int64?
     var isShared = false
+    var fileDescription: String?
     
     override func mapping() {
         // it upload date
@@ -303,6 +312,7 @@ final class SearchItemResponse: ObjectRequestResponse {
         albums = json?[SearchJsonKey.album].array?.compactMap { $0.string }
         childCount = json?[SearchJsonKey.ChildCount].int64
         isShared = json?[SearchJsonKey.shared].bool ?? false
+        fileDescription = json?[SearchJsonKey.Description].string
     }
 }
 

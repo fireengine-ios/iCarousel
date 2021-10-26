@@ -72,6 +72,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         if item.fileType == .photoAlbum {
             let album = AlbumItem(uuid: item.uuid,
                                   name: item.name,
+                                  fileDescription: item.fileDescription,
                                   creationDate: item.creationDate,
                                   lastModifiDate: item.lastModifiDate,
                                   fileType: item.fileType,

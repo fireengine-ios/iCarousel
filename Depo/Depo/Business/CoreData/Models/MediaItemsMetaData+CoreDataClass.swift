@@ -39,5 +39,6 @@ public class MediaItemsMetaData: NSManagedObject {
         self.smalURl = metaData.smalURl?.absoluteString
         self.videoPreviewUrl = metaData.videoPreviewURL?.absoluteString
         self.isVideoSlideshow = metaData.isVideoSlideshow
+        self.fileDescription = metaData.fileDescription
     }
 }

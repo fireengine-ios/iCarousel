@@ -8511,6 +8511,10 @@
 		CFEB1FFD25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */; };
 		D0A9A44EC3C58B0D7CBF8A1A /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD15AE640AD597AB4E12CDEE /* Pods_LifeboxFileProviderUI.framework */; };
 		D910F773C4C0ED4D155C904A /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194FFE25625A80F2C0B29404 /* Pods_LifeboxShared.framework */; };
+		F00DE586272196C3002F9A64 /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
+		F00DE58A272196C6002F9A64 /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
+		F028D79A2719C0F000FF204D /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
+		F028D79C2719C0FD00FF204D /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
 		F02E456F270B3BA700C84374 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F02E4573270B3BA900C84374 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F02F6A9F269C16C000A64ED8 /* PasswordRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */; };
@@ -8521,6 +8525,10 @@
 		F02F6AAA269C56FC00A64ED8 /* ValidationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */; };
 		F02F6AAC269C56FC00A64ED8 /* ValidationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */; };
 		F02F6AAD269C56FC00A64ED8 /* ValidationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */; };
+		F0F5E1BA272162A2003AC6AF /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
+		F0F5E1BE272162A2003AC6AF /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
+		F0F5E1BF272162A7003AC6AF /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
+		F0F5E1C0272162A7003AC6AF /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
 		F0C202342726EF810086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F0C202382726F0230086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F0C202392726F0240086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
@@ -11208,6 +11216,8 @@
 		EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractorOutput.swift; sourceTree = "<group>"; };
 		EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractor.swift; sourceTree = "<group>"; };
 		EFE9E4488118296DCE476A71 /* Pods-LifeTech_BilloShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloShared.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloShared/Pods-LifeTech_BilloShared.appstore.xcconfig"; sourceTree = "<group>"; };
+		F028D7992719C0F000FF204D /* FileDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDescriptionView.swift; sourceTree = "<group>"; };
+		F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileDescriptionView.xib; sourceTree = "<group>"; };
 		F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRulesView.swift; sourceTree = "<group>"; };
 		F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRules.swift; sourceTree = "<group>"; };
 		F233973492D247406E39E96E /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
@@ -15645,6 +15655,7 @@
 		8E256DA7246D31FC00175489 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				F028D7932719C07800FF204D /* FileDescription */,
 				985FFAC7255C1CDF001AA845 /* FileName */,
 				985FFACB255C1DD1001AA845 /* FileInfo */,
 				985FFACC255C1DDD001AA845 /* People */,
@@ -20105,6 +20116,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		F028D7932719C07800FF204D /* FileDescription */ = {
+			isa = PBXGroup;
+			children = (
+				F028D7992719C0F000FF204D /* FileDescriptionView.swift */,
+				F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */,
+			);
+			path = FileDescription;
+			sourceTree = "<group>";
+		};
 		F1F379D7533680E1193EA393 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -20945,6 +20965,7 @@
 				B55C970C2559353800623C5C /* PrivateShareLocalSuggestionsViewController.xib in Resources */,
 				98570AFD208F7558002CCEBA /* SpotlightViewController.xib in Resources */,
 				0708C7892677261100680ED6 /* PhotoPrintCard.xib in Resources */,
+				F028D79C2719C0FD00FF204D /* FileDescriptionView.xib in Resources */,
 				CF71471224B597AA00D83E60 /* ContactListMainView.xib in Resources */,
 				B5AB5B6721F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
@@ -21405,6 +21426,7 @@
 				CE784E0B22A685FB00662219 /* DarkPopUpController.xib in Resources */,
 				9823198A24F3A1E700FD16E2 /* ColorView.xib in Resources */,
 				CE784E1222A685FB00662219 /* ActivityTimelineFileCell.xib in Resources */,
+				F0F5E1BF272162A7003AC6AF /* FileDescriptionView.xib in Resources */,
 				CF7146FD24B597A900D83E60 /* ContactListCell.xib in Resources */,
 				CE784E1722A685FB00662219 /* PremiumView.xib in Resources */,
 				CF71471524B597AA00D83E60 /* ContactListMainView.xib in Resources */,
@@ -21898,6 +21920,7 @@
 				CF8B6B0F23CBC9D70021B021 /* ContactBackupEmpty.xib in Resources */,
 				CF8B6B1023CBC9D70021B021 /* PasscodeSettingsViewController.xib in Resources */,
 				9808B44F25540E88002B0032 /* PrivateShareSuggestionItemView.xib in Resources */,
+				F00DE58A272196C6002F9A64 /* FileDescriptionView.xib in Resources */,
 				CF8B6B1123CBC9D70021B021 /* CollectionViewSimpleHeaderWithText.xib in Resources */,
 				490222BA2403AA5E00B120BA /* MobilePaymentPermissionView.xib in Resources */,
 				9808B7D42567EB10001DEF2E /* PrivateShareAccessListCell.xib in Resources */,
@@ -22114,6 +22137,7 @@
 				CF38A853257532590000994F /* PrivateShareDurationCell.xib in Resources */,
 				CF7146FE24B597A900D83E60 /* ContactListCell.xib in Resources */,
 				CF8B71DF23CBCA280021B021 /* PremiumView.xib in Resources */,
+				F0F5E1C0272162A7003AC6AF /* FileDescriptionView.xib in Resources */,
 				CF8B71E123CBCA280021B021 /* LoginSettingsViewController.xib in Resources */,
 				98725F10258B2C0B0061E7F6 /* AllFilesSegmentedController.xib in Resources */,
 				CF71471624B597AA00D83E60 /* ContactListMainView.xib in Resources */,
@@ -22321,6 +22345,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
@@ -22359,6 +22384,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
@@ -22429,6 +22455,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
@@ -22467,6 +22494,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
@@ -22581,6 +22609,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
@@ -22619,6 +22648,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
@@ -22711,6 +22741,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
@@ -22749,6 +22780,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
@@ -22971,6 +23003,7 @@
 				"${BUILT_PRODUCTS_DIR}/FirebaseRemoteConfig/FirebaseRemoteConfig.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
@@ -23009,6 +23042,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseRemoteConfig.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
@@ -24425,6 +24459,7 @@
 				92004B5E21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				8C0E8F2D1FDEBDFF00789C91 /* SettingsConfigurator.swift in Sources */,
 				921E7C352201CB9F00341F75 /* InstaPickPhotoView.swift in Sources */,
+				F028D79A2719C0F000FF204D /* FileDescriptionView.swift in Sources */,
 				8C0E8F2E1FDEBDFF00789C91 /* SettingsInitializer.swift in Sources */,
 				8C0E8F2F1FDEBDFF00789C91 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				8C0E8F301FDEBDFF00789C91 /* SplashViewInput.swift in Sources */,
@@ -25840,6 +25875,7 @@
 				CE7849DB22A685FB00662219 /* TermsAndServicesInteractorOutput.swift in Sources */,
 				8C1E5BED22CB8D22008FDA02 /* QuickScrollItems.swift in Sources */,
 				985FFAE9255C1ED2001AA845 /* FileNameView.swift in Sources */,
+				F0F5E1BA272162A2003AC6AF /* FileDescriptionView.swift in Sources */,
 				981616DE2578B803009F1C31 /* PrivateShareAnalytics.swift in Sources */,
 				8C1E5BD822CB8BD1008FDA02 /* TextInsetsLabel.swift in Sources */,
 				CE7849DC22A685FB00662219 /* TermsAndServicesInteractor.swift in Sources */,
@@ -26947,6 +26983,7 @@
 				CF8B63F023CBC9D70021B021 /* ValidationService.swift in Sources */,
 				CF71472524B597AA00D83E60 /* ContactSyncOperationResultController.swift in Sources */,
 				CF8B63F123CBC9D70021B021 /* PhotoVideoBottomBarManager.swift in Sources */,
+				F00DE586272196C3002F9A64 /* FileDescriptionView.swift in Sources */,
 				0305A2F623D5C198004D1EC7 /* FaceImagePhotosDataSource.swift in Sources */,
 				CF8B63F223CBC9D70021B021 /* SearchViewInteractorInput.swift in Sources */,
 				98231A8F24F3A23500FD16E2 /* AdeleFilter.swift in Sources */,
@@ -29070,6 +29107,7 @@
 				CF8B6D4F23CBCA280021B021 /* TermsAndServicesInteractor.swift in Sources */,
 				CF8B6D5023CBCA280021B021 /* UploadFromLifeBoxViewIO.swift in Sources */,
 				985FFAEA255C1ED2001AA845 /* FileNameView.swift in Sources */,
+				F0F5E1BE272162A2003AC6AF /* FileDescriptionView.swift in Sources */,
 				981616DF2578B803009F1C31 /* PrivateShareAnalytics.swift in Sources */,
 				CF8B6D5123CBCA280021B021 /* TermsAndServicesDataStorage.swift in Sources */,
 				0305A31623D5C363004D1EC7 /* AlbumCell.swift in Sources */,

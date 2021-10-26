@@ -10,6 +10,7 @@ import UIKit
 
 protocol PhotoInfoViewControllerOutput {
     func onRename(newName: String)
+    func onEditDescription(newDescription: String)
     func onEnableFaceRecognitionDidTap()
     func onBecomePremiumDidTap()
     func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse)
@@ -46,6 +47,7 @@ final class FileInfoView: UIView, FromNib {
     // MARK: Private Properties
     
     private lazy var fileNameView = FileNameView.with(delegate: self)
+    private lazy var fileDescriptionView = FileDescriptionView.with(delegate: self)
     private lazy var fileInfoView = FileMetaInfoView.view()
     private lazy var peopleView = FileInfoPeopleView.with(delegate: self)
     private lazy var sharingInfoView = FileInfoShareView.with(delegate: self)
@@ -83,6 +85,7 @@ final class FileInfoView: UIView, FromNib {
         peopleView.fileType = object.fileType
         
         if let obj = object as? WrapData {
+            fileDescriptionView.fileDescription = obj.metaData?.fileDescription
             peopleView.status = obj.status
             setWith(wrapData: obj)
         }
@@ -109,6 +112,14 @@ final class FileInfoView: UIView, FromNib {
     
     func showValidateNameSuccess() {
         fileNameView.showValidateNameSuccess()
+    }
+
+    func show(description: String) {
+        fileDescriptionView.fileDescription = description
+    }
+
+    func showValidateDescriptionSuccess() {
+        fileDescriptionView.showValidateDescriptionSuccess()
     }
     
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
@@ -143,6 +154,7 @@ final class FileInfoView: UIView, FromNib {
     
     func hideKeyboard() {
         fileNameView.hideKeyboard()
+        fileDescriptionView.hideKeyboard()
     }
     
     func updateShareInfo() {
@@ -165,7 +177,7 @@ final class FileInfoView: UIView, FromNib {
     
     private func setup() {
         layer.masksToBounds = true
-        let views: [UIView] = [fileNameView, fileInfoView, sharingInfoView, peopleView]
+        let views: [UIView] = [fileNameView, fileDescriptionView, fileInfoView, sharingInfoView, peopleView]
         
         sharingInfoView.isHidden = true
         
@@ -186,6 +198,7 @@ final class FileInfoView: UIView, FromNib {
             canEdit = false
         }
 
+        fileDescriptionView.isEditable = canEdit
         fileNameView.isEditable = canEdit
     }
     
@@ -299,6 +312,14 @@ extension FileInfoView: FileNameViewDelegate {
     
     func onRename(newName: String) {
         output.onRename(newName: newName)
+    }
+}
+
+//MARK: - FileDescriptionViewDelegate
+
+extension FileInfoView: FileDescriptionViewDelegate {
+    func onEditDescription(newDescription: String) {
+        output.onEditDescription(newDescription: newDescription)
     }
 }
 
