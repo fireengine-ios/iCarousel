@@ -2240,4 +2240,8 @@ struct TextConstants {
 
     // MARK: - Photo/Video File Description
     static let photosVideosFileDescriptionTitle = NSLocalizedString("photo_video_detail_file_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: - Change album cover photo
+    static let changeAlbumCoverSuccess = NSLocalizedString("change_album_cover_snackbar_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let changeAlbumCoverFail = NSLocalizedString("change_album_cover_error_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
