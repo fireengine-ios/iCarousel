@@ -986,7 +986,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func makeAlbumCover(items: [BaseDataSourceItem]) {
-        
+        guard let item = items.first as? Item else { return }
+        let album = self.router.getParentUUID()
+        let params = ChangeCoverPhoto(albumUUID: album,
+                                      photoUUID: item.uuid)
+
+        albumService.changeCoverPhoto(parameters: params, success: { [weak self] in
+            self?.output?.operationFinished(type: .makeAlbumCover)
+            ItemOperationManager.default.updatedAlbumCoverPhoto(item: item)
+            }, fail: { [weak self] error in
+                self?.output?.operationFailed(type: .makeAlbumCover, message: TextConstants.changeAlbumCoverFail)
+        })
     }
     
     func albumDetails(items: [BaseDataSourceItem]) {

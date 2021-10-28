@@ -213,6 +213,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             interactor.onViewIsReady()
         case .hide, .unhide, .moveToTrash, .restore, .moveToTrashShared:
             interactor.deleteSelectedItem(type: type)
+        case .makeAlbumCover:
+            changeCover()
         default:
             break
         }
@@ -252,7 +254,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func changeCover() { 
-    
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.changeAlbumCoverSuccess)
     }
     
     func getFIRParent() -> Item? {
