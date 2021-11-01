@@ -2230,3 +2230,4 @@ Please check I have understood the intended command here*/
 /*Change album cover photo*/
 "change_album_cover_snackbar_text" = "";
 "change_album_cover_error_text" = "";
+"change_album_cover_set_photo" = "";
