@@ -33,7 +33,7 @@ final class DeleteAccountValidationPopUp: UIViewController {
         willSet {
             newValue.numberOfLines = 0
             newValue.textAlignment = .center
-            newValue.textColor = AppColor.popupGray.color
+            newValue.textColor = ColorConstants.darkText
             newValue.font = UIFont.TurkcellSaturaFont(size: 18)
 
             newValue.text = localized(.deleteAccountSecondPopupMessage)
