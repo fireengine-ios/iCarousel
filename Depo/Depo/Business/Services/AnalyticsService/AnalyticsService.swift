@@ -414,7 +414,7 @@ extension AnalyticsService: AnalyticsGA {
         }
     }
     
-    func trackSignupEvent(error: Error? = nil) {
+    func trackSignupEvent(error: SignupResponseError? = nil) {
         prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in
             let parametrs = self.parameters(category: .functions,
                                             action: .register,

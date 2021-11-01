@@ -141,7 +141,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
             let loginError = LoginResponseError(with: errorResponse)
             
             self.analyticsService.trackLoginEvent(loginType: .rememberLogin, error: loginError)
-            self.analyticsService.trackSignupEvent(error: errorResponse)
+            self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .serverError))
             
             let incorrectCredentioal = true
             if (incorrectCredentioal) {
