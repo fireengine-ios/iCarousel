@@ -20,7 +20,11 @@ final class PushNotificationService {
 
     private var notificationAction: PushNotificationAction?
     private var notificationParameters: String?
-    
+
+    /// A pending action that requires login
+    private var pendingAction: String?
+    private var pendingActionOptions: [AnyHashable: Any]?
+
     //MARK: -
     
     func assignNotificationActionBy(launchOptions: [AnyHashable: Any]?) -> Bool {
@@ -62,6 +66,18 @@ final class PushNotificationService {
         return true
     }
 
+    func assignAndOpenPendingActionIfAny() {
+        guard let pendingAction = self.pendingAction else { return }
+
+        debugLog("handling pending action '\(pendingAction)'. Params \(pendingActionOptions ?? [:])")
+
+        let resolved = assignDeepLink(innerLink: pendingAction, options: pendingActionOptions)
+        if resolved {
+            openActionScreen()
+            clearPendingAction()
+        }
+    }
+
     private func resolve(actionString: String, tryResolveIfUnknown: Bool = true) -> PushNotificationAction? {
         guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
             debugLog("received unknown notification/deeplink with type \(actionString)")
@@ -75,6 +91,13 @@ final class PushNotificationService {
     }
 
     private func resolveUnknownAction(actionString: String) {
+        // can't resolve without a token
+        guard tokenStorage.accessToken != nil else {
+            pendingAction = actionString
+            return
+        }
+
+        debugLog("trying to resolve unknown action '\(actionString)'")
         utilityAPIService.resolveDeepLink(actionString: actionString) { url in
             guard let resolvedURL = url, let host = resolvedURL.host else { return }
 
@@ -86,10 +109,19 @@ final class PushNotificationService {
             debugLog("resolved unknown action \(actionString) to \(action)")
             self.parse(options: resolvedURL.queryParameters, action: action)
             self.openActionScreen()
+            self.clearPendingAction()
         }
     }
 
     private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
+        let isLoggedIn = tokenStorage.accessToken != nil
+        let actionRequiresLogin = !action.isContained(in: [.login, .supportFormLogin, .supportFormSignup])
+        if !isLoggedIn && actionRequiresLogin {
+            pendingAction = action.rawValue
+            pendingActionOptions = options
+            return
+        }
+
         self.notificationAction = action
         
         switch notificationAction {
@@ -205,6 +237,11 @@ final class PushNotificationService {
         storageVars.deepLink = nil
         storageVars.deepLinkParameters = nil
     }
+
+    private func clearPendingAction() {
+        pendingAction = nil
+        pendingActionOptions = nil
+    }
     
     //MARK: -
     
@@ -266,199 +303,201 @@ final class PushNotificationService {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
     }
-    
-    //MARK: - Actions
-    
-    private func openLogin() {
+}
+
+//MARK: - Actions
+
+private extension PushNotificationService {
+    func openLogin() {
         if let navigationController = router.topNavigationController, navigationController.viewControllers.contains(where: { $0 is RegistrationViewController }) {
             return
         }
-        
+
         pushTo(router.loginScreen)
     }
-    
-    private func openMain() {
+
+    func openMain() {
         openTabBarItem(index: .home)
     }
-    
-    private func openSyncSettings() {
+
+    func openSyncSettings() {
         pushTo(router.autoUpload)
     }
-    
-    private func openFloatingMenu() {
+
+    func openFloatingMenu() {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
-        
+
         tabBarVC.showRainbowIfNeed()
     }
-    
-    private func openPackages() {
+
+    func openPackages() {
         let affiliate = storageVars.value(forDeepLinkParameter: .affiliate) as? String
         let viewController = router.packages(affiliate: affiliate)
         pushTo(viewController)
     }
-    
-    private func openPhotos() {
+
+    func openPhotos() {
         openTabBarItem(index: .gallery)
     }
-    
-    private func openVideos() {
+
+    func openVideos() {
 //        openTabBarItem(index: .videosScreenIndex)
     }
-    
-    private func openAlbums() {
+
+    func openAlbums() {
         pushTo(router.albumsListController())
     }
-    
-    private func openStories() {
+
+    func openStories() {
         pushTo(router.storiesListController())
     }
-    
-    private func openAllFiles() {
+
+    func openAllFiles() {
         openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.allFiles.rawValue)
     }
-    
-    private func openDocuments() {
+
+    func openDocuments() {
         openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.documents.rawValue)
     }
-    
-    private func openMusic() {
+
+    func openMusic() {
         openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.music.rawValue)
     }
-    
-    private func openFavorites() {
+
+    func openFavorites() {
         openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.favorites.rawValue)
     }
 
-    private func openTrashBin() {
+    func openTrashBin() {
         openTabBarItem(index: .documents, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
     }
-    
-    private func openContactSync() {
+
+    func openContactSync() {
         openTabBarItem(index: .contactsSync)
     }
-    
-    private func openPeriodicContactSync() {
+
+    func openPeriodicContactSync() {
         pushTo(router.periodicContactsSync)
     }
-    
-    private func openCreateStory() {
+
+    func openCreateStory() {
         let controller = router.createStory(navTitle: TextConstants.createStory)
         router.pushViewController(viewController: controller)
     }
-    
-    private func openContactUs() {
+
+    func openContactUs() {
         router.showFeedbackSubView()
     }
-    
-    private func openUsageInfo() {
+
+    func openUsageInfo() {
         pushTo(router.usageInfo)
     }
-    
-    private func openAutoUpload() {
+
+    func openAutoUpload() {
         pushTo(router.autoUpload)
     }
-    
-    private func openRecentActivities() {
+
+    func openRecentActivities() {
         pushTo(router.vcActivityTimeline)
     }
-    
-    private func openEmail() {
+
+    func openEmail() {
         if let userInfo = SingletonStorage.shared.accountInfo {
             pushTo(router.userProfile(userInfo: userInfo))
         }
     }
-    
-    private func openImportDropbox() {
+
+    func openImportDropbox() {
         pushTo(router.connectedAccounts)
     }
-    
-    private func openSocialMedia() {
+
+    func openSocialMedia() {
         pushTo(router.connectedAccounts)
     }
-    
-    private func openFaq() {
+
+    func openFaq() {
         pushTo(router.helpAndSupport)
     }
-    
-    private func openPasscode() {
+
+    func openPasscode() {
         let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
         pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
     }
-    
-    private func openLoginSettings() {
+
+    func openLoginSettings() {
         let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
         let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
         pushTo(controller)
     }
-    
-    private func openFaceImageRecognition() {
+
+    func openFaceImageRecognition() {
         pushTo(router.faceImage)
     }
-    
-    private func openPeople() {
+
+    func openPeople() {
         pushTo(router.peopleListController())
     }
-    
-    private func openThings() {
+
+    func openThings() {
         pushTo(router.thingsListController())
     }
-    
-    private func openPlaces() {
+
+    func openPlaces() {
         pushTo(router.placesListController())
     }
-    
-    private func openSearch() {
+
+    func openSearch() {
         let output = router.getViewControllerForPresent()
         let controller = router.searchView(navigationController: output?.navigationController, output: output as? SearchModuleOutput)
         pushTo(controller)
     }
-    
-    private func openFreeUpSpace() {
+
+    func openFreeUpSpace() {
         pushTo(router.freeAppSpace())
     }
-    
-    private func openURL(_ path: String?) {
+
+    func openURL(_ path: String?) {
         guard let path = path, let url = URL(string: path) else {
             return
         }
-        
+
         UIApplication.shared.openSafely(url)
     }
-    
-    private func openSettings() {
+
+    func openSettings() {
         pushTo(router.settings)
     }
-    
-    private func openProfileEdit() {
+
+    func openProfileEdit() {
         SingletonStorage.shared.getAccountInfoForUser(forceReload: false, success: { [weak self] response in
             let vc = self?.router.userProfile(userInfo: response)
             self?.pushTo(vc)
             /// we don't need error handling here
         }, fail: {_ in})
-        
+
     }
-    
-    private func openChangePassword() {
+
+    func openChangePassword() {
         pushTo(router.changePassword)
     }
-    
-    private func openPhotoPickHistory() {
+
+    func openPhotoPickHistory() {
         pushTo(router.analyzesHistoryController())
     }
-    
-    private func openMyStorage() {
+
+    func openMyStorage() {
         pushTo(router.myStorage(usageStorage: nil))
     }
-    
-    private func openBecomePremium() {
+
+    func openBecomePremium() {
         pushTo(router.premium())
     }
-    
-    private func openTBMaticPhotos(_ uuidsByString: String?) {
+
+    func openTBMaticPhotos(_ uuidsByString: String?) {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.notification))
-        
+
         debugLog("PushNotificationService try to open TBMatic screen")
         // handle list of uuids with two variants for separators "," and ", "
         guard let uuids = uuidsByString?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
@@ -466,68 +505,68 @@ final class PushNotificationService {
             debugLog("PushNotificationService uuids is empty")
             return
         }
-        
+
         // check for cold start from push - present on home page
         guard router.tabBarController != nil else {
             return
         }
-        
+
         let controller = router.tbmaticPhotosContoller(uuids: uuids)
         DispatchQueue.main.async {
             self.router.presentViewController(controller: controller)
         }
     }
-    
-    private func openSecurityQuestion() {
+
+    func openSecurityQuestion() {
         debugLog("PushNotificationService try to open Security Question screen")
 
         let controller = SetSecurityQuestionViewController.initFromNib()
         pushTo(controller)
     }
-    
-    private func openPermissions() {
+
+    func openPermissions() {
         debugLog("PushNotificationService try to open Permission screen")
 
         let controller = router.permissions
         pushTo(controller)
     }
-    
-    private func openCampaignDetails() {
+
+    func openCampaignDetails() {
         let controller = router.campaignDetailViewController()
         pushTo(controller)
     }
-    
-    private func openSupport(type: SupportFormScreenType) {
+
+    func openSupport(type: SupportFormScreenType) {
         let controller = SupportFormController.with(screenType: type)
         pushTo(controller)
     }
-    
-    private func openHiddenBin() {
+
+    func openHiddenBin() {
         let controller = router.hiddenPhotosViewController()
         pushTo(controller)
     }
-    
-    private func trackIfNeeded(action: PushNotificationAction) {
+
+    func trackIfNeeded(action: PushNotificationAction) {
         guard action.fromWidget else {
             return
         }
-        
+
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openWithWidget, eventLabel: .success)
     }
-    
-    private func openSharedWithMe() {
+
+    func openSharedWithMe() {
         openSharedController(type: .withMe)
     }
-    
-    private func openShareByMe() {
+
+    func openShareByMe() {
         openSharedController(type: .byMe)
     }
 
-    private func openInvitation() {
+    func openInvitation() {
         pushTo(router.invitation)
     }
 
-    private func openChatbot() {
+    func openChatbot() {
         if Device.locale == "tr" || Device.locale == "en" {
             #if LIFEBOX
             FirebaseRemoteConfig.shared.fetchChatbotMenuEnable { [weak self] in
@@ -539,21 +578,21 @@ final class PushNotificationService {
         }
     }
 
-    private func openVerifyEmail() {
+    func openVerifyEmail() {
         if let userInfo = SingletonStorage.shared.accountInfo {
             let profile = router.userProfile(userInfo: userInfo, appearAction: .presentVerifyEmail)
             pushTo(profile)
         }
     }
 
-    private func openVerifyRecoveryEmail() {
+    func openVerifyRecoveryEmail() {
         if let userInfo = SingletonStorage.shared.accountInfo {
             let profile = router.userProfile(userInfo: userInfo, appearAction: .presentVerifyRecoveryEmail)
             pushTo(profile)
         }
     }
-    
-    private func openSharedController(type: PrivateShareType) {
+
+    func openSharedController(type: PrivateShareType) {
         guard let controller = router.sharedFiles as? SegmentedController,
               let index = controller.viewControllers.firstIndex(where: { ($0 as? PrivateShareSharedFilesViewController)?.shareType == type }) else {
             return
