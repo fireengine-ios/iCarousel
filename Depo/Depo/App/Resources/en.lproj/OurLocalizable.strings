@@ -1970,5 +1970,6 @@
 "DELETE_ACC_POP_UP_BTN_CLOSE" = "Kapat";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
+"change_album_cover_snackbar_text" = "Album cover changed successfully.";
+"change_album_cover_error_text" = "Error occurred while changing cover photo.";
+"change_album_cover_set_photo" = "Use as album cover";
