@@ -24,8 +24,23 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             fullnameStackView.axis = .horizontal
             fullnameStackView.alignment = .fill
             fullnameStackView.distribution = .fillEqually
-            fullnameStackView.backgroundColor = AppColor.primaryBackground.color
-            fullnameStackView.isOpaque = true
+
+            let deleteAccountRow = UIStackView(arrangedSubviews: [
+                deleteAccountButton,
+                deleteAccountInfoButton
+            ])
+            deleteAccountRow.spacing = 18
+            deleteAccountRow.axis = .horizontal
+
+            let buttonsStackView = UIStackView(arrangedSubviews: [
+                changePasswordButton,
+                changeSecurityQuestionButton,
+                deleteAccountRow
+            ])
+            buttonsStackView.axis = .vertical
+            buttonsStackView.alignment = .leading
+            buttonsStackView.distribution = .fill
+            buttonsStackView.spacing = newValue.spacing
 
             let arrangedSubviews = [
                 fullnameStackView,
@@ -34,10 +49,11 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                 recoveryEmailView,
                 birthdayDetailView,
                 addressView,
-                changePasswordButton,
-                changeSecurityQuestionButton,
+                buttonsStackView,
             ]
-            arrangedSubviews.forEach(newValue.addArrangedSubview(_:))
+            arrangedSubviews.forEach { newValue.addArrangedSubview($0) }
+
+            buttonsStackView.setCustomSpacing(buttonsStackView.spacing * 2, after: changeSecurityQuestionButton)
         }
     }
     
@@ -105,6 +121,23 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         set(title: TextConstants.userProfileEditSecretQuestion, for: newValue)
         newValue.addTarget(self, action: #selector(onChangeSecurityQuestion), for: .touchUpInside)
         newValue.contentHorizontalAlignment = .left
+        return newValue
+    }()
+
+    lazy var deleteAccountButton: UIButton = {
+        let newValue = UIButton(type: .custom)
+        set(title: localized(.deleteAccountButton), for: newValue)
+        newValue.contentHorizontalAlignment = .left
+        newValue.addTarget(self, action: #selector(deleteAccountTapped), for: .touchUpInside)
+        return newValue
+    }()
+
+    lazy var deleteAccountInfoButton: UIButton = {
+        let newValue = UIButton(type: .custom)
+        let infoIcon = UIImage(named: "action_info")?.withRenderingMode(.alwaysTemplate)
+        newValue.setImage(infoIcon, for: .normal)
+        newValue.tintColor = UIColor.lrTealish
+        newValue.addTarget(self, action: #selector(deleteAccountInfoTapped), for: .touchUpInside)
         return newValue
     }()
     
@@ -223,7 +256,25 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     @objc private func onChangeSecurityQuestion() {
         output.tapChangeSecretQuestionButton()
     }
-    
+
+    @objc private func deleteAccountInfoTapped() {
+        let tooltip = TooltipViewController(message: localized(.deleteAccountDescription))
+        tooltip.present(over: self, sourceView: deleteAccountInfoButton,
+                        permittedArrowDirections: [.up, .down])
+    }
+
+    @objc private func deleteAccountTapped() {
+        let popup = DeleteAccountPopUp.with(type: .firstConfirmation) { popup in
+            popup.dismiss(animated: true) {
+                let deletionPopup = DeleteAccountValidationPopUp.instance()
+                deletionPopup.delegate = self
+                self.present(deletionPopup, animated: true)
+            }
+        }
+
+        present(popup, animated: true)
+    }
+
     @objc private func onEditButtonAction() {
         setupEditState(true)
         output.tapEditButton()
@@ -364,6 +415,23 @@ extension UserProfileViewController: BaseEmailVerificationPopUpDelegate {
     func emailVerificationPopUpCompleted(_ popup: BaseEmailVerificationPopUp) {
         // applies to both email & recovery email
         output.emailVerificationCompleted()
+    }
+}
+
+extension UserProfileViewController: DeleteAccountValidationPopUpDelegate {
+    func deleteAccountValidationPopUpSucceeded(_ popup: DeleteAccountValidationPopUp) {
+        popup.dismiss(animated: true) {
+            self.showDeleteAccountConfirmation()
+        }
+    }
+
+    private func showDeleteAccountConfirmation() {
+        let popup = DeleteAccountPopUp.with(type: .secondConfirmation) { popup in
+            popup.dismiss(animated: true)
+            self.output.deleteMyAccountValidatedAndConfirmed()
+        }
+
+        present(popup, animated: true)
     }
 }
 

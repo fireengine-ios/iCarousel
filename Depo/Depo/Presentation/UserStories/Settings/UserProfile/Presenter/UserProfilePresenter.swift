@@ -115,6 +115,10 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     func emailVerificationCompleted() {
         interactor.forceRefreshUserInfo()
     }
+
+    func deleteMyAccountValidatedAndConfirmed() {
+        interactor.deleteMyAccount()
+    }
     
     //MARK : BasePresenter
     

@@ -68,13 +68,14 @@ final class AppConfigurator {
             AppMigrator.migrateAll()
         }
     }
-    
-    static func logout() {
+
+    static func logout(completed: VoidHandler? = nil) {
         /// there is no retain circle bcz of singleton
         AuthenticationService().logout {
             DispatchQueue.main.async {
                 let router = RouterVC()
                 router.setNavigationController(controller: router.onboardingScreen)
+                completed?()
             }
         }
     }
