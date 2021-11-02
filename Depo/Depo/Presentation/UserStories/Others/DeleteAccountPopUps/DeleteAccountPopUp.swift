@@ -105,7 +105,7 @@ class DeleteAccountPopUp: UIViewController {
         switch type {
         case .firstConfirmation:
             titleLabel.text = localized(.deleteAccountFirstPopupTitle)
-            messageLabel.text = localized(.deleteAccountSecondPopupMessage)
+            messageLabel.text = localized(.deleteAccountFirstPopupMessage)
             firstButton.setTitle(localized(.deleteAccountDeleteButton), for: .normal)
             secondButton.setTitle(localized(.deleteAccountCancelButton), for: .normal)
 
@@ -122,7 +122,7 @@ class DeleteAccountPopUp: UIViewController {
                 boldFont: .TurkcellSaturaDemFont(size: 18)
             )
             messageLabel.attributedText = localizedAttributed(.deleteAccountFinalPopupMessage, withOptions: options)
-            firstButton.setTitle(localized(.deleteAccountCancelButton), for: .normal)
+            firstButton.setTitle(localized(.deleteAccountCloseButton), for: .normal)
             secondButton.isHidden = true
         }
     }
