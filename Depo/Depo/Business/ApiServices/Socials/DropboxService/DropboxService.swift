@@ -27,7 +27,7 @@ final class DropboxManager {
         #if LIFEBOX
         DropboxClientsManager.setupWithAppKey("ld8xzj3w9fsnvxd")
         #else
-        DropboxClientsManager.setupWithAppKey("mij832wzxlbyeiq")
+        DropboxClientsManager.setupWithAppKey("ld8xzj3w9fsnvxd")
         #endif
     }
     
