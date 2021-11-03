@@ -545,7 +545,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         if item.info?.id != nil, let type = item.type, type.isFaceImageType() {
             output.openFaceImage(item: item)
-        } else if let searchBar = navigationItem.titleView as? UISearchBar {
+        } else if let searchBar = self.searchBar {
             searchBar.text = item.text?.removingPercentEncoding ?? item.text
             search(text: searchBar.text, forItem: item)
         }
