@@ -228,10 +228,12 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
         /// fixed black screen
         /// and error "AttributedString called within transaction"
         do {
-            let attributedString = try NSAttributedString(data: data,
+            let attributedString = try NSMutableAttributedString(data: data,
                                                           options: [.documentType: NSAttributedString.DocumentType.html,
                                                                     .characterEncoding: String.Encoding.utf8.rawValue],
                                                           documentAttributes: nil)
+
+            attributedString.addAttribute(.foregroundColor, value: AppColor.blackColor.color ?? .black, range: NSRange(location: 0, length: attributedString.length))
             return attributedString
         } catch {
             assertionFailure()
@@ -312,7 +314,7 @@ extension TermsAndServicesViewController: UITextViewDelegate {
 private extension UITextView {
     func setupEulaStyle() {
         text = ""
-        backgroundColor = ColorConstants.lighterGray
+        backgroundColor = AppColor.inactiveButtonColor.color
         layer.borderColor = ColorConstants.darkTintGray.cgColor
         layer.borderWidth = 1
         layer.masksToBounds = true

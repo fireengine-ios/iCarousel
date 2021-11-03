@@ -1558,7 +1558,7 @@
 "contact_phase2_backup_contacts_title" = "Kişilerini Yedekle";
 "contact_phase2_backup_contacts_message" = "Telefon rehberin de lifebox'ta güvende! Rehberindeki kişilerine dilediğin yerden, dilediğin cihazdan ulaşabilirsin.";
 "contact_phase2_backup_contacts_button" = "Şimdi Yedekle";
-"contact_phase2_small_card_backup_message" = "Yedeklemenin son güncellenediği tarih ";
+"contact_phase2_small_card_backup_message" = "Yedeklemenin son güncellendiği tarih";
 "contact_phase2_small_card_backup_button" = "Yedeklemeleri gör";
 "contact_phase2_small_card_duplicates_message" = "Telefonundaki tekrarlı kayıtları temizleyerek telefon rehberini düzenleyebilirsin.";
 "contact_phase2_small_card_duplicates_button" = "Telefonundaki tekrarlı kayıtları sil";
@@ -1889,7 +1889,7 @@
 "profile_recovery_mail_hint" = "Henüz kurtarma e-postası girilmemiş";
 "profile_mail_verified" = "Doğrulanmış";
 "profile_verify" = "Doğrula";
-"masterpass_quota_package_cancel" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
+"masterpass_quota_package_cancel" = "Paketini iptal etmek için www.mylifebox.com adresini ziyaret edebilirsin.";
 "profile_recovery_email_empty" = "Kurtarma e-postası boş";
 "profile_recovery_email_invalid" = "Kurtarma e-postası geçersiz";
 "package_period_x_months" = "%d ay";
@@ -1911,4 +1911,33 @@
 "forgotMyPassword_email_popup_message" = "Şifreni sıfırlaman için %@ e-posta adresine şifre sıfırlama linki gönderdik.";
 "forgotMyPassword_challange2_header" = "Doğrulama Yöntemini Seçin";
 "forgotMyPassword_challange2_body" = "Şifre yenileme akışına aşağıdaki doğrulama yöntemlerinden hangisi ile devam etmek istersin?";
-"masterpass_feature_package_cancel" = "Paketini iptal etmek için lütfen www.mylifebox.com'u ziyaret et";
+"masterpass_feature_package_cancel" = "Paketini iptal etmek için www.mylifebox.com adresini ziyaret edebilirsin.";
+"forgotMyPassword_password_complete" = "Tamam";
+"forgotMyPassword_reset_success_message" = "Şifre yenileme işleminiz başarıyla tamamlandı.";
+"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_SQ_invalid_answer" = "Güvenlik sorusu cevabın hatalı, lütfen tekrar dene.";
+
+/*Photo/Video File Description*/
+"photo_video_detail_file_description" = "Dosya Açıklaması";
+"DELETE_ACC_BTN" = "";
+"DELETE_ACC_DESC" = "";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
+"DELETE_ACC_INPUT_GSM" = "";
+"DELETE_ACC_INPUT_PASS" = "";
+"DELETE_ACC_PASS_ERROR" = "";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+
+/*Change album cover photo*/
+"change_album_cover_snackbar_text" = "Kapak fotoğrafı başarıyla güncellendi.";
+"change_album_cover_error_text" = "Kapak fotoğrafı değişimi sırasında bir hata oluştu.";
+"change_album_cover_set_photo" = "Albüm kapağı olarak kullan";

@@ -26,6 +26,7 @@ final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
             newValue.setImage(UIImage(named: "notSelected"), for: .normal)
             newValue.setImage(UIImage(named: "selected_by_point"), for: .highlighted)
             newValue.setImage(UIImage(named: "selected_by_point"), for: .selected)
+            newValue.tintColor = AppColor.darkBlueAndTealish.color
         }
     }
     @IBOutlet private weak var titleLabel: UILabel!

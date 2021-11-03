@@ -67,7 +67,7 @@ final class EmailVerifiedPopUp: BasePopUpController {
     
     //MARK: Utility Method
     private func setup() {
-        view.backgroundColor = ColorConstants.popUpBackground
+        view.backgroundColor = AppColor.popUpBackground.color
         
         contentView = popUpView
         

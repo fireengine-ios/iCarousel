@@ -25,6 +25,11 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         
         NotificationCenter.default.post(name: .showPlusTabBar, object: nil)
     }
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        reloadData()
+    }
     
     override func viewWillDisappear() {
         super.viewWillDisappear()

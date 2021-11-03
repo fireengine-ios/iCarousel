@@ -2237,4 +2237,11 @@ struct TextConstants {
     static let passwordCharacterLimitRule = NSLocalizedString("signup_password_rule_character_limit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passwordCapitalizationAndNumberRule = NSLocalizedString("signup_password_rule_upper_lower_numeric", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let passwordSequentialRule = NSLocalizedString("signup_password_rule_sequential_characters", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: - Photo/Video File Description
+    static let photosVideosFileDescriptionTitle = NSLocalizedString("photo_video_detail_file_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
+    // MARK: - Change album cover photo
+    static let changeAlbumCoverSuccess = NSLocalizedString("change_album_cover_snackbar_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let changeAlbumCoverFail = NSLocalizedString("change_album_cover_error_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

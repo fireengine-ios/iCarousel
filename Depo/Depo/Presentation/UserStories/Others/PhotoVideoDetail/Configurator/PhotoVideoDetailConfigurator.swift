@@ -48,7 +48,7 @@ class PhotoVideoDetailModuleConfigurator {
                       moduleOutput: moduleOutput,
                       bottomBarConfig: bottomBarConfig,
                       interactor: interactor,
-                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.moveToTrash],
+                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.makeAlbumCover] + [.moveToTrash],
                       selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem,
                       status: status, viewType: .insideAlbum,
                       canLoadMoreItems: true)

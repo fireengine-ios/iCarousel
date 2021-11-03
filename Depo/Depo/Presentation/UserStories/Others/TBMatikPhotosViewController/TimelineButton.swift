@@ -16,7 +16,7 @@ final class TimelineButton: UIButton {
         case photosPreparation
     }
     
-    private let borderColor = UIColor.white
+    private let borderColor = AppColor.whiteAndLrTealish.color ?? .white
     var visibleState = State.enabled {
         didSet {
             switch visibleState {

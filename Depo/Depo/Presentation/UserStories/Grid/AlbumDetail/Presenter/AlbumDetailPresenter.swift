@@ -110,4 +110,17 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.deletePhoto))
         }
     }
+
+    override func changeCover() {
+        if let album = (interactor as? AlbumDetailInteractor)?.album,
+           let router = router as? AlbumDetailRouter {
+            router.openChangeCoverWith(album.uuid, moduleOutput: self)
+        }
+    }
+}
+
+extension AlbumDetailPresenter: FaceImageChangeCoverModuleOutput {
+    func onAlbumCoverSelected(item: WrapData) {
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.changeAlbumCoverSuccess)
+    }
 }

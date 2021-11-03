@@ -1921,7 +1921,7 @@
 "profile_recovery_mail_hint" = "You haven't added a recovery email to your account yet";
 "profile_mail_verified" = "Verified";
 "profile_verify" = "Verify";
-"masterpass_quota_package_cancel" = "To cancel your package, please visit www.mylifebox.com";
+"masterpass_quota_package_cancel" = "You can visit www.mylifebox.com to cancel your package.";
 "profile_recovery_email_empty" = "Recovery e-mail is empty";
 "profile_recovery_email_invalid" = "Recovery e-mail field is invalid";
 "package_period_x_months" = "%d months";
@@ -1930,7 +1930,7 @@
 "forgotMyPassword_your_account_email" = "Your e-mail or phone number associated with your account";
 "forgotMyPassword_enter_your_account_email" = "Enter your e-mail or phone number associated with your account";
 "forgotMyPassword_instructions" = "To reset your password we will send a link to your e-mail associated with your account:";
-"forgotMyPassword_enter_valid_email" = "Please enter a valid email or phone number";
+"forgotMyPassword_enter_valid_email" = "Please enter a valid e-mail or phone number";
 "forgotMyPassword_instructions_other" = "To reset your password you can click the link that will be sent to your e-mail associated with your account.";
 "forgotMyPassword_reset_button" = "Reset Password";
 "forgotMyPassword_challange1_header" = "Please Select a Verification Method";
@@ -1943,4 +1943,33 @@
 "forgotMyPassword_email_popup_message" = "We have sent a link to your %@ e-mail to reset your password.";
 "forgotMyPassword_challange2_header" = "Please Select a Verification Method";
 "forgotMyPassword_challange2_body" = "To reset your password, which verification method would you like to continue with?";
-"masterpass_feature_package_cancel" = "To cancel your package, please visit www.mylifebox.com";
+"masterpass_feature_package_cancel" = "You can visit www.mylifebox.com to cancel your package.";
+"forgotMyPassword_password_complete" = "OK";
+"forgotMyPassword_reset_success_message" = "Şifre yenileme işleminiz başarıyla tamamlandı.";
+"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_SQ_invalid_answer" = "Your security question answer is wrong, please try again.";
+
+/*Photo/Video File Description*/
+"photo_video_detail_file_description" = "File Description";
+"DELETE_ACC_BTN" = "Hesabımı Sil";
+"DELETE_ACC_DESC" = "Hesap silme işlemi yaparsan; fotoğrafların, videoların, rehberin, tüm içerik ve bilgilerin 30 gün sonrasında kalıcı olarak silinir. Bu süreden sonra içeriklerini geri getiremezsin. Silme işleminden sonraki 30 gün içinde hesabına giriş yaparsan, hesap silme talebini otomatik olarak iptal edeceğiz ve hesabını kullanmaya devam edebileceksin. Hesabını silmeden önce lifebox hesabında kayıtlı bir içeriğin varsa, hesap silme işleminden önce içeriklerini indirmeni öneririz.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Hesabını silmek istediğine emin misin?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Hesabını silmeden önce, önemli verilerini kaybetmemek için fotoğraflarını, videolarını ve hesabında sakladığın tüm içeriklerini indirdiğinden emin ol!";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "Şifreni girerek hesabını doğruladıktan sonra hesabın kalıcı olarak silinecektir.\n\nLifebox hesabını tekrar aktive etmek istersen, silme işleminden sonra 30 gün içinde hesap bilgilerinle giriş yapabilirsin. Giriş yapmadığın durumda hesabın ve içeriklerin bu süreden sonra silinir.";
+"DELETE_ACC_INPUT_GSM" = "Telefon Numarası";
+"DELETE_ACC_INPUT_PASS" = "Şifre";
+"DELETE_ACC_PASS_ERROR" = "Hatalı şifre girdiniz.";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Hesabın kalıcı olarak silinecektir.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Lifebox hesabını tekrar aktive etmek istersen, silme işleminden sonra 30 gün içinde hesap bilgilerinle giriş yapabilirsin. Giriş yapmadığın durumda hesabın ve içeriklerin bu süreden sonra silinir.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Hesabını başarılı olarak sildin.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Gittiğin için üzgünüz :(**\n\nLütfen şunu bil, içeriklerini 30 gün saklamaya devam edeceğiz. Bu süre içerisinde hesap bilgilerinle giriş yaparsan, hesabın aktive olacaktır. Herhangi bir değişiklik yapmadan hesabını kullanmaya devam edebilirsin.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Hesabımı Sil";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "İptal";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Devam Et";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Onayla";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Kapat";
+
+/*Change album cover photo*/
+"change_album_cover_snackbar_text" = "Album cover changed successfully.";
+"change_album_cover_error_text" = "Error occurred while changing cover photo.";
+"change_album_cover_set_photo" = "Use as album cover";

@@ -161,7 +161,7 @@ enum ElementTypes {
                 result = [.share, .download, .addToAlbum]  + ElementTypes.activeState
                 
             case .actionSheet:
-                result = [.select, .shareAlbum, .download, .removeAlbum, .albumDetails]  + ElementTypes.activeState
+                result = [.select, .changeCoverPhoto, .shareAlbum, .download, .removeAlbum, .albumDetails]  + ElementTypes.activeState
                 
             case .selectionMode:
                 result = [.createStory, .addToFavorites, .removeFromFavorites]

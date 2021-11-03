@@ -82,6 +82,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
     func confirmTermsOfUse(_ confirm: Bool) {
         confirmAgreements = confirm
         updateNextButtonStatus()
+        interactor.trackEULAConfirmed()
     }
 
     func confirmEtk(_ etk: Bool) {

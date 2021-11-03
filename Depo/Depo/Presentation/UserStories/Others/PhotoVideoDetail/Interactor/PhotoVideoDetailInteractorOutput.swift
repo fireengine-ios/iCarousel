@@ -21,12 +21,16 @@ protocol PhotoVideoDetailInteractorOutput: AnyObject {
     func startAsyncOperation()
     
     func cancelSave(use name: String)
+
+    func cancelSaveDescription(use description: String)
     
     func updated()
     
     func failedUpdate(error: Error)
     
     func didValidateNameSuccess(name: String)
+
+    func didValidateDescriptionSuccess(description: String)
     
     func updatePeople(items: [PeopleOnPhotoItemResponse])
     

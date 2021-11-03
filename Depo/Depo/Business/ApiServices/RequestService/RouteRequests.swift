@@ -355,6 +355,8 @@ struct RouteRequests {
         static let info = accountApi +/ "info"
         static let ticket = accountApi +/ "ticket"
 
+        static let delete = accountApi +/ "delete"
+
         enum Settings {
             /// without "s" at the end
             static let settingsApi = Account.accountApi +/ "setting" 
@@ -403,6 +405,7 @@ struct RouteRequests {
         static let details = filesystemBase + "details?minified=true"
         static let detail = filesystemBase + "detail/%@"
         static let metaData = filesystemBase + "metadata"
+        static let description = (baseUrl +/ metaData).absoluteString + "/%@"
         static let trash = filesystemBase + "trash"
         static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")

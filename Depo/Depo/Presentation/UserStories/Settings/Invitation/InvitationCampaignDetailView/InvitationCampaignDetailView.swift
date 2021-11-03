@@ -72,7 +72,20 @@ class InvitationCampaignDetailView: UIView, NibInit {
         campaignDetailImageView.setLogs(enabled: true)
         let imageUrl = URL(string: campaign.value.image)
         campaignDetailImageView.loadImageData(with: imageUrl)
-        campaignDetailWebView.loadHTMLString(campaign.value.content, baseURL: nil)
+        let htmlString = prepareHtmlString(with: campaign.value.content)
+        campaignDetailWebView.loadHTMLString(htmlString, baseURL: nil)
+    }
+
+    private func prepareHtmlString(with content: String) -> String {
+        var htmlString = content
+        if let hexColor = AppColor.blackColor.color?.toHexString() {
+            htmlString = "<style>" +
+                "html *" +
+                "{" +
+                "color: \(hexColor)"  +
+                "}</style> \(content)"
+        }
+        return htmlString
     }
 
     @IBAction func closeButtonTapped(_ sender: Any) {

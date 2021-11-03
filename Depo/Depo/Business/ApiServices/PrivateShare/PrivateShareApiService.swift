@@ -49,6 +49,9 @@ protocol PrivateShareApiService {
     func renameItem(projectId: String, uuid: String, name: String, handler: @escaping ResponseVoid) -> URLSessionTask?
 
     @discardableResult
+    func editDescription(projectId: String, uuid: String, description: String, handler: @escaping ResponseVoid) -> URLSessionTask?
+
+    @discardableResult
     func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
@@ -248,6 +251,26 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
                      method: .post,
                      parameters: parameters,
                      encoding: JSONEncoding.default)
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+
+    @discardableResult
+    func editDescription(projectId: String, uuid: String, description: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.description, uuid)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
+
+        let parameters = [["key": "Description", "value": description]].asParameters()
+
+        return SessionManager
+            .customDefault
+            .request(url,
+                     method: .put,
+                     parameters: parameters,
+                     encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
             .task

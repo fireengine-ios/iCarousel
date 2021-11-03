@@ -54,6 +54,7 @@ struct SharedFileInfo: Codable {
 
 struct SharedFileInfoMetaData: Codable {
     let isFavourite: Bool?
+    let fileDescription: String?
     
     let thumbnailLarge: URL?
     let thumbnailMedium: URL?
@@ -74,6 +75,7 @@ struct SharedFileInfoMetaData: Codable {
     let specialFolderMeta: String?
     
     private enum CodingKeys: String, CodingKey {
+        case fileDescription = "Description"
         case isFavourite = "X-Object-Meta-Favourite"
         case thumbnailLarge = "Thumbnail-Large"
         case thumbnailMedium = "Thumbnail-Medium"
@@ -99,7 +101,8 @@ struct SharedFileInfoMetaData: Codable {
 
         originalBytes = JSON(try container.decodeIfPresent(String.self, forKey: .originalBytes) ?? "").int64
         isFavourite = JSON(try container.decodeIfPresent(String.self, forKey: .isFavourite) ?? "").boolFromString
-        
+        fileDescription = JSON(try container.decodeIfPresent(String.self, forKey: .fileDescription) ?? "").string
+
         thumbnailLarge = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailLarge) ?? "").url
         thumbnailMedium = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailMedium) ?? "").url
         thumbnailSmall = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailSmall) ?? "").url
