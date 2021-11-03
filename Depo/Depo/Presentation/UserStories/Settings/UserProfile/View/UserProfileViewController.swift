@@ -506,7 +506,23 @@ extension UserProfileViewController: UITextFieldDelegate  {
         
         return true
     }
-    
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == addressView.textField {
+            let characterLimit = NumericConstants.addressCharacterLimit
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return false }
+
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+            if updatedText.count > characterLimit {
+                textField.text = String(updatedText.prefix(characterLimit))
+            }
+
+            return updatedText.count <= characterLimit
+        } else {
+            return true
+        }
+    }
 }
 
 extension UserProfileViewController: UserProfileViewInput {

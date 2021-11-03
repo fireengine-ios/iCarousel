@@ -99,6 +99,10 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         datePicker.maximumDate = Date()
         datePicker.datePickerMode = .date
         datePicker.isOpaque = true
+
+        if let minDate = dateFormatter.date(from: "01 01 1900") {
+            datePicker.minimumDate = minDate
+        }
         
         if #available(iOS 13.4, *) {
             datePicker.preferredDatePickerStyle = .wheels
