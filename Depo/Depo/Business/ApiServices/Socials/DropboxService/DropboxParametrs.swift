@@ -36,7 +36,7 @@ class DropboxConnect: BaseRequestParametrs {
     private let refreshToken: String
     
     override var patch: URL {
-        let patch_ = String(format: RouteRequests.dropboxConnect, accessToken, refreshToken)
+        let patch_ = String(format: RouteRequests.dropboxConnectV2, accessToken, refreshToken)
         return  URL(string: patch_, relativeTo: RouteRequests.baseUrl)!
     }
     
