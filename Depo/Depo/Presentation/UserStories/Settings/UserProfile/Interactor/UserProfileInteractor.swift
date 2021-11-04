@@ -319,6 +319,12 @@ class UserProfileInteractor: UserProfileInteractorInput {
         })
     }
 
+    func trackDeleteMyAccount() {
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .delete,
+                                            eventLabel: .deleteMyAccount)
+    }
+
     func deleteMyAccount() {
         output.startNetworkOperation()
         accountService.deleteMyAccount { result in

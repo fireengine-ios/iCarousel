@@ -25,4 +25,20 @@ class UserProfileRouter: UserProfileRouterInput {
         controller.configureWith(selectedQuestion: selectedQuestion, delegate: delegate)
         router.pushViewController(viewController: controller)
     }
+
+    func presentDeleteAccountFirstPopUp(confirmed: @escaping DeleteAccountPopUp.ProceedTappedHandler) {
+        let popup = DeleteAccountPopUp.with(type: .firstConfirmation, onProceedTapped: confirmed)
+        router.presentViewController(controller: popup)
+    }
+
+    func presentDeleteAccountValidationPopUp(delegate: DeleteAccountValidationPopUpDelegate) {
+        let popup = DeleteAccountValidationPopUp.instance()
+        popup.delegate = delegate
+        router.presentViewController(controller: popup)
+    }
+
+    func presentDeleteAccountFinalPopUp(confirmed: @escaping DeleteAccountPopUp.ProceedTappedHandler) {
+        let popup = DeleteAccountPopUp.with(type: .finalConfirmation, onProceedTapped: confirmed)
+        router.presentViewController(controller: popup)
+    }
 }

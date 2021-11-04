@@ -14,6 +14,8 @@ class DeleteAccountPopUp: UIViewController {
     private var type: Type?
     private var onProceedTapped: ProceedTappedHandler?
 
+    private let analyticsService: AnalyticsService = factory.resolve()
+
     // MARK: - Outlets
     @IBOutlet weak var popUpView: UIView! {
         willSet {
@@ -73,11 +75,12 @@ class DeleteAccountPopUp: UIViewController {
     @IBAction private func firstButtonTapped() {
         guard let type = self.type else { return }
 
+        trackFirstButton()
         switch type {
         case .firstConfirmation:
             onProceedTapped?(self)
 
-        case .secondConfirmation,
+        case .finalConfirmation,
              .success:
             dismiss(animated: true)
         }
@@ -86,8 +89,9 @@ class DeleteAccountPopUp: UIViewController {
     @IBAction private func secondButtonTapped() {
         guard let type = self.type else { return }
 
+        trackSecondButton()
         switch type {
-        case .secondConfirmation:
+        case .finalConfirmation:
             onProceedTapped?(self)
 
         case .firstConfirmation,
@@ -109,7 +113,7 @@ class DeleteAccountPopUp: UIViewController {
             firstButton.setTitle(localized(.deleteAccountDeleteButton), for: .normal)
             secondButton.setTitle(localized(.deleteAccountCancelButton), for: .normal)
 
-        case .secondConfirmation:
+        case .finalConfirmation:
             titleLabel.text = localized(.deleteAccountThirdPopupTitle)
             messageLabel.text = localized(.deleteAccountThirdPopupMessage)
             firstButton.setTitle(localized(.deleteAccountCancelButton), for: .normal)
@@ -130,7 +134,7 @@ class DeleteAccountPopUp: UIViewController {
     private func setIconAndTitleStyle(for type: Type) {
         switch type {
         case .firstConfirmation,
-             .secondConfirmation:
+             .finalConfirmation:
             iconView.image = UIImage(named: "customPopUpInfo")?.withRenderingMode(.alwaysTemplate)
             iconView.tintColor = ColorConstants.textOrange
             titleLabel.textColor = ColorConstants.textOrange
@@ -143,10 +147,50 @@ class DeleteAccountPopUp: UIViewController {
     }
 }
 
+// MARK: - Analytics
+extension DeleteAccountPopUp {
+    func trackFirstButton() {
+        guard let type = type else { return }
+        switch type {
+        case .firstConfirmation:
+            analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                eventActions: .deleteMyAccountStep1,
+                                                eventLabel: .deleteAccount)
+
+        case .finalConfirmation:
+            analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                eventActions: .deleteMyAccountStep3,
+                                                eventLabel: .cancel)
+
+        case .success:
+            break
+        }
+    }
+
+    func trackSecondButton() {
+        guard let type = type else { return }
+        switch type {
+        case .firstConfirmation:
+            analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                eventActions: .deleteMyAccountStep1,
+                                                eventLabel: .cancel)
+
+        case .finalConfirmation:
+            analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                eventActions: .deleteMyAccountStep3,
+                                                eventLabel: .confirm)
+
+        case .success:
+            break
+        }
+    }
+}
+
+// MARK: - Initializer
 extension DeleteAccountPopUp {
     enum `Type` {
         case firstConfirmation
-        case secondConfirmation
+        case finalConfirmation
         case success
     }
 
