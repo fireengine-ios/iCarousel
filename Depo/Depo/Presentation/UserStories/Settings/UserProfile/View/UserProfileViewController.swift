@@ -264,15 +264,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }
 
     @objc private func deleteAccountTapped() {
-        let popup = DeleteAccountPopUp.with(type: .firstConfirmation) { popup in
-            popup.dismiss(animated: true) {
-                let deletionPopup = DeleteAccountValidationPopUp.instance()
-                deletionPopup.delegate = self
-                self.present(deletionPopup, animated: true)
-            }
-        }
-
-        present(popup, animated: true)
+        output.tapDeleteMyAccount()
     }
 
     @objc private func onEditButtonAction() {
@@ -415,23 +407,6 @@ extension UserProfileViewController: BaseEmailVerificationPopUpDelegate {
     func emailVerificationPopUpCompleted(_ popup: BaseEmailVerificationPopUp) {
         // applies to both email & recovery email
         output.emailVerificationCompleted()
-    }
-}
-
-extension UserProfileViewController: DeleteAccountValidationPopUpDelegate {
-    func deleteAccountValidationPopUpSucceeded(_ popup: DeleteAccountValidationPopUp) {
-        popup.dismiss(animated: true) {
-            self.showDeleteAccountConfirmation()
-        }
-    }
-
-    private func showDeleteAccountConfirmation() {
-        let popup = DeleteAccountPopUp.with(type: .secondConfirmation) { popup in
-            popup.dismiss(animated: true)
-            self.output.deleteMyAccountValidatedAndConfirmed()
-        }
-
-        present(popup, animated: true)
     }
 }
 

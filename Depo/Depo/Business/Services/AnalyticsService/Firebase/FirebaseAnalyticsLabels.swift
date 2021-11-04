@@ -478,6 +478,7 @@ enum GAEventLabel {
     case send
     case confirm
     case confirmStatus(isSuccess: Bool)
+    case `continue`
     case resendCode
     case codeResent(isSuccessed: Bool)
     case changeEmail
@@ -516,6 +517,9 @@ enum GAEventLabel {
 
     case resetPasswordStart
     case resetPasswordMethod(_ method: ResetPasswordMethod)
+
+    case deleteMyAccount
+    case deleteAccount
 
     var text: String {
         switch self {
@@ -679,6 +683,8 @@ enum GAEventLabel {
             return "Confirm"
         case .confirmStatus(isSuccess: let isSuccess):
             return "Confirm " + (isSuccess ? "Success" : "Failure")
+        case .continue:
+            return "Continue"
         case .resendCode:
             return "Resend Code"
         case .codeResent(isSuccessed: let isSuccessed):
@@ -754,6 +760,11 @@ enum GAEventLabel {
             return "Reset Password Start"
         case .resetPasswordMethod(let method):
             return method.text
+        //
+        case .deleteMyAccount:
+            return "Delete My Account"
+        case .deleteAccount:
+            return "Delete Account"
         }
     }
     

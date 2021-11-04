@@ -95,6 +95,7 @@ final class DeleteAccountValidationPopUp: UIViewController {
     private let keyboard = Typist()
     private let captchaRequirementService = CaptchaSignUpRequrementService()
     private let authenticationService = AuthenticationService()
+    private let analyticsService: AnalyticsService = factory.resolve()
     weak var delegate: DeleteAccountValidationPopUpDelegate?
 
 
@@ -114,10 +115,12 @@ final class DeleteAccountValidationPopUp: UIViewController {
 
     // MARK: - Actions
     @IBAction private func cancelButtonTapped() {
+        trackCancelButton()
         dismiss(animated: true)
     }
 
     @IBAction private func confirmButtonTapped() {
+        trackConfirmButton()
         validatePassword()
     }
 
@@ -256,6 +259,20 @@ extension DeleteAccountValidationPopUp: UITextFieldDelegate {
         default:
             break
         }
+    }
+}
+
+extension DeleteAccountValidationPopUp {
+    func trackCancelButton() {
+        analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                            eventActions: .deleteMyAccountStep2,
+                                            eventLabel: .cancel)
+    }
+
+    func trackConfirmButton() {
+        analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                            eventActions: .deleteMyAccountStep2,
+                                            eventLabel: .continue)
     }
 }
 

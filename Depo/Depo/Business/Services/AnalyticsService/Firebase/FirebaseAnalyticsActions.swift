@@ -132,6 +132,10 @@ enum GAEventAction {
     case resetPassword
     case otpResetPassword
 
+    case deleteMyAccountStep1
+    case deleteMyAccountStep2
+    case deleteMyAccountStep3
+
     var text: String {
         switch self {
         case .purchase:
@@ -357,6 +361,12 @@ enum GAEventAction {
             return "Reset Password"
         case .otpResetPassword:
             return "OTP – Reset Password"
+        case .deleteMyAccountStep1:
+            return "Delete My Account Step1"
+        case .deleteMyAccountStep2:
+            return "Delete My Account Step2"
+        case .deleteMyAccountStep3:
+            return "Delete My Account Step3"
         }
     }
 }

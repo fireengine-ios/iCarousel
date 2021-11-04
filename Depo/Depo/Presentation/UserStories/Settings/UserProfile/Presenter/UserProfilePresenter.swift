@@ -112,6 +112,15 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
                                      delegate: self)
     }
 
+    func tapDeleteMyAccount() {
+        interactor.trackDeleteMyAccount()
+        router.presentDeleteAccountFirstPopUp { [weak self] popup in
+            popup.dismiss(animated: true) {
+                self?.router.presentDeleteAccountValidationPopUp(delegate: self!)
+            }
+        }
+    }
+
     func emailVerificationCompleted() {
         interactor.forceRefreshUserInfo()
     }
@@ -135,3 +144,15 @@ extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
         view.securityQuestionWasSet()
     }
 }
+
+extension UserProfilePresenter: DeleteAccountValidationPopUpDelegate {
+    func deleteAccountValidationPopUpSucceeded(_ popup: DeleteAccountValidationPopUp) {
+        popup.dismiss(animated: true) {
+            self.router.presentDeleteAccountFinalPopUp { [weak self] popup in
+                popup.dismiss(animated: true)
+                self?.interactor.deleteMyAccount()
+            }
+        }
+    }
+}
+
