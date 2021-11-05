@@ -190,15 +190,18 @@ final class FileInfoView: UIView, FromNib {
     
     private func setupEditableState(for item: BaseDataSourceItem, projectId: String?, permissions: SharedItemPermission?) {
         var canEdit = true
-        if projectId != SingletonStorage.shared.accountInfo?.projectID {
-            canEdit = permissions?.granted?.contains(.setAttribute) == true
-        }
-        
+
         if (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced {
             canEdit = false
         }
 
-        fileDescriptionView.isEditable = canEdit
+        if projectId != SingletonStorage.shared.accountInfo?.projectID {
+            fileDescriptionView.isEditable = false
+            canEdit = permissions?.granted?.contains(.setAttribute) == true
+        } else {
+            fileDescriptionView.isEditable = canEdit
+        }
+
         fileNameView.isEditable = canEdit
     }
     
