@@ -89,9 +89,9 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
         switch rule {
         case .AlphaBetricAZ:
-            sortRule = .albumlettersZA
-        case .AlphaBetricZA:
             sortRule = .albumlettersAZ
+        case .AlphaBetricZA:
+            sortRule = .albumlettersZA
         default:
             sortRule = rule.sortedRulesConveted
         }
