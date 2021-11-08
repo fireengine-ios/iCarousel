@@ -1901,25 +1901,25 @@
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "Descrierea Fișierului";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "Sterge contul meu";
+"DELETE_ACC_DESC" = "Dacă vă ștergeți contul, fișierele și fotografiile dvs. vor fi șterse definitiv și nu le puteți recupera înapoi. Contactele, istoriile și toate fișierele încărcate vor fi, de asemenea, șterse.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Sunteți sigur că doriți să ștergeți contul?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Înainte de a șterge contul, puteți descărca fișierele și fotografiile într-un folder local din computer pentru a nu pierde date importante.";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "După introducerea e-mailului și a parolei, contul dvs. va fi șters definitiv.\n\nVă puteți autentifica cu e-mail și parolă timp de 1 lună, pentru a vă activa din nou contul de lifebox.";
+"DELETE_ACC_INPUT_GSM" = "Număr GSM";
+"DELETE_ACC_INPUT_PASS" = "Parola contului";
+"DELETE_ACC_PASS_ERROR" = "Parolă Invalidă";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Contul dvs. va fi șters definitiv.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Dacă doriți să vă activați din nou contul lifebox, vă puteți autentifica cu datele de autentificare ale contului dvs. în 30 de zile. Dacă nu vă autentificați, contul și conținutul vor fi șterse după această perioadă.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Ați șters contul cu succes.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "** Ne pare rău să vă vedem plecând :( **\nVă rugăm să știți că, vom păstra datele și fișierele dvs. timp de 1 lună. Dacă vă autentificați cu detaliile contului dvs. în această perioadă de timp, puteți continua să utilizați contul dvs. fără orice modificare.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Șterge";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "Abbrechen";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Continuă";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Confirmă";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Închide";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
-"change_album_cover_set_photo" = "";
+"change_album_cover_snackbar_text" = "Coperta albumului s-a schimbat cu succes.";
+"change_album_cover_error_text" = "A apărut o eroare la schimbarea fotografiei de copertă.";
+"change_album_cover_set_photo" = "Utilizați ca coperta de album";

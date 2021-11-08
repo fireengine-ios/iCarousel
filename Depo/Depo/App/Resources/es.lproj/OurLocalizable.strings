@@ -1943,25 +1943,25 @@
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "Inscripción de Folio";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "Borrar mi cuenta";
+"DELETE_ACC_DESC" = "Si eliminas la cuenta; se eliminarán permanentemente después de 30 días tus fotos, videos, la guía, todo el contenido y tus datos. No puedes recuperar el contenido a partir de este momento. Si entras en tu cuenta dentro de los 30 días vamos a cancelar automáticamente tu solicitud de eliminación de cuenta y podrás continuar utilizando tu cuenta. Si tienes un contenido registrado en la cuenta lifebox antes de eliminar tu cuenta, te recomendamos que descargues los contenidos antes de eliminar la cuenta.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "¿Estás seguro de que deseas eliminar tu cuenta?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Antes de eliminar tu cuenta, asegúrate de descargar tus fotos, videos y todo el contenido que hayas almacenado en tu cuenta para evitar la pérdida de datos importantes.";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "Después de verificar tu cuenta al insertar tu contraseña, se eliminará permanentemente tu cuenta.\nSi deseas activar de nuevo tu cuenta, podrás acceder a tus datos de cuenta dentro de los 30 días después de eliminar. En caso de no entrar se eliminará tu cuenta y los contenidos después de este momento.";
+"DELETE_ACC_INPUT_GSM" = "Número de Teléfono";
+"DELETE_ACC_INPUT_PASS" = "Contraseña";
+"DELETE_ACC_PASS_ERROR" = "Contraseña invalida.";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Tu cuenta se eliminará permanentemente.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Si deseas activar de nuevo tu cuenta Lifebox, podrás acceder a tus datos de cuenta dentro de los 30 días después de eliminar. En caso de no entrar se eliminará tu cuenta y los contenidos después de este momento.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Has eliminado con éxito tu cuenta.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Estamos tristes por tu ida :( **\n\nPor favor debes saber una cosa que continuaremos almacenando los contenidos durante los 30 días. Si dentro de este periodo entras con tus datos de cuenta, se reactiva tu cuenta. Sin hacer cualquier cambio, puedes seguir utilizar tu cuenta.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Eliminar";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "Cancelar";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Continuar";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Confirmar";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Cerrar";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
-"change_album_cover_set_photo" = "";
+"change_album_cover_snackbar_text" = "La portada del álbum se cambió correctamente.";
+"change_album_cover_error_text" = "Ocurrió un error al cambiar la foto de portada.";
+"change_album_cover_set_photo" = "Usar como portada del álbum";

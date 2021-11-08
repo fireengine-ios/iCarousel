@@ -565,7 +565,7 @@
 "dropboxLastUpdatedFile" = "Last updated on %@ - %d file";
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
-"PackagesPolicyText" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTerms of Use:";
+"PackagesPolicyText" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Notice: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTerms of Use:";
 "Missing Dates" = "Missing Dates";
 "You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials.";
 "Animation" = "Animation";
@@ -995,14 +995,14 @@
 "frequently_asked_questions" = "FAQ";
 "login_username_not_valid" = "Please check your username";
 "login_support_info" = "If you are having difficulty during login, contact us for support.";
-"terms_and_privacy_policy" = "Terms of Use and Privacy Policy";
+"terms_and_privacy_policy" = "Terms of Use and Privacy Notice";
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "face_tags_description_premium" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
 "terms_of_use" = "Terms of Use";
-"privacy_policy" = "For detailed information about your personal data that we collect through lifebox, please read our Privacy Policy";
+"privacy_policy" = "For detailed information about your personal data that we collect through lifebox, please read our Privacy Notice";
 "face_tags_description_standart" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
 "terms_and_use_introduction_checkbox" = "I have read and accepted Terms of Use.";
-"privacy_policy_condition" = "Privacy Policy";
+"privacy_policy_condition" = "Privacy Notice";
 "photo_pick_description" = "If you enable the button and connect your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick analysis.";
 
 /*Permission screen in Settings*/
@@ -1012,7 +1012,7 @@
 "restore_purchases" = "Restore Purchases";
 "restore_purchases_info" = "If you want to restore your existing purchases, click on the button.";
 "attributed_restore_word" = "restore";
-"privacy_policy_head_line" = "Privacy Policy";
+"privacy_policy_head_line" = "Privacy Notice";
 "create_story_photos_selected" = "%d Selected";
 "create_story_press_and_hold" = "Press and hold";
 "create_story_press_and_hold_description" = "%@ on the image to rearrange the order of your story.";
@@ -1402,7 +1402,7 @@
 "delete_from_hidden_bin_popup_success_text" = "The selected files will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
 "unhide_popup_success_title" = "Item(s) unhidden successfully.";
 "delete_popup_text" = "The selected file(s) will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
-"PackagesPolicyTextBillo" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://mybilloapp.com/policy/?lang=en\nTerms of Use:";
+"PackagesPolicyTextBillo" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Notice: https://mybilloapp.com/policy/?lang=en\nTerms of Use:";
 "unhide_items_popup_text" = "Selected item(s) will be unhidden and moved back to previous folders.";
 "unhide_albums_popup_text" = "Selected album(s) will be unhidden and moved back to previous folders.";
 "move_to_trash_hidden_albums_confirmation_popup_text" = "The selected album(s) will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
@@ -1427,7 +1427,7 @@
 "LifeboxLargePopUpTitleBetween80And99" = "%.0f%% of your storage is full!";
 "LifeboxLargePopUpDeleteFilesButtonTitle" = "Delete Files";
 "dialog_contact_sync_vcf_file_upload_error" = "Before restoring your contacts, we back up the contacts in your device to secure your data. Since your lifebox storage is full, you cannot proceed backing up nor restoring your contacts. You can expand your storage or delete any files in lifebox.";
-"privacy_policy_cell" = "Privacy Policy";
+"privacy_policy_cell" = "Privacy Notice";
 "full_quota_warning_popup_title" = "You have reached your lifebox storage limit!";
 "full_quota_warning_popup_description" = "Since your lifebox storage is full, you cannot upload new contents. You can buy a new package or delete files.";
 "expand_my_storage" = "Expand My Storage";
@@ -1951,23 +1951,23 @@
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "File Description";
-"DELETE_ACC_BTN" = "Hesabımı Sil";
-"DELETE_ACC_DESC" = "Hesap silme işlemi yaparsan; fotoğrafların, videoların, rehberin, tüm içerik ve bilgilerin 30 gün sonrasında kalıcı olarak silinir. Bu süreden sonra içeriklerini geri getiremezsin. Silme işleminden sonraki 30 gün içinde hesabına giriş yaparsan, hesap silme talebini otomatik olarak iptal edeceğiz ve hesabını kullanmaya devam edebileceksin. Hesabını silmeden önce lifebox hesabında kayıtlı bir içeriğin varsa, hesap silme işleminden önce içeriklerini indirmeni öneririz.";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "Hesabını silmek istediğine emin misin?";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Hesabını silmeden önce, önemli verilerini kaybetmemek için fotoğraflarını, videolarını ve hesabında sakladığın tüm içeriklerini indirdiğinden emin ol!";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "Şifreni girerek hesabını doğruladıktan sonra hesabın kalıcı olarak silinecektir.\n\nLifebox hesabını tekrar aktive etmek istersen, silme işleminden sonra 30 gün içinde hesap bilgilerinle giriş yapabilirsin. Giriş yapmadığın durumda hesabın ve içeriklerin bu süreden sonra silinir.";
-"DELETE_ACC_INPUT_GSM" = "Telefon Numarası";
-"DELETE_ACC_INPUT_PASS" = "Şifre";
-"DELETE_ACC_PASS_ERROR" = "Hatalı şifre girdiniz.";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "Hesabın kalıcı olarak silinecektir.";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Lifebox hesabını tekrar aktive etmek istersen, silme işleminden sonra 30 gün içinde hesap bilgilerinle giriş yapabilirsin. Giriş yapmadığın durumda hesabın ve içeriklerin bu süreden sonra silinir.";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "Hesabını başarılı olarak sildin.";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Gittiğin için üzgünüz :(**\n\nLütfen şunu bil, içeriklerini 30 gün saklamaya devam edeceğiz. Bu süre içerisinde hesap bilgilerinle giriş yaparsan, hesabın aktive olacaktır. Herhangi bir değişiklik yapmadan hesabını kullanmaya devam edebilirsin.";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "Hesabımı Sil";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "İptal";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Devam Et";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Onayla";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "Kapat";
+"DELETE_ACC_BTN" = "Delete My Account";
+"DELETE_ACC_DESC" = "If you delete your account, your photos, videos, contacts and all of your contents and information will be deleted permanently unless you log in to your account in 30 days. You cannot get your files back after this period. If you log in to your account in 30 days after deletion, we will automatically cancel your request and you will be able to use your account. If you have contents before account deletion, we recommend you to download them before delete your account.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Are you sure you want to delete your account?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Before deleting your account, please make sure to download your photos, videos and all of your contents in order not to lose any important data.";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "After verifiying your account with your password, your account will be  deleted permanently.\n\nIf you want to activate your lifebox account again, you can log in with your account credentials in 30 days. If you do not login, your account and contents will be deleted after this period.";
+"DELETE_ACC_INPUT_GSM" = "Phone Number";
+"DELETE_ACC_INPUT_PASS" = "Account Password";
+"DELETE_ACC_PASS_ERROR" = "Invalid Password";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Your account will be deleted permanently.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "If you want to activate your lifebox account again, you can log in with your account credentials in 30 days. If you do not login, your account and contents will be deleted after this period.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "You successfully deleted your account.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**We are sorry to see you go :(**\n\nPlease know that, we're going to keep your contents for 30 days. If you log in with your account credentials during this period, your account will be activated again. You can continue using your account wtihout any change.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Delete";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "Cancel";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Continue";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Confirm";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Close";
 
 /*Change album cover photo*/
 "change_album_cover_snackbar_text" = "Album cover changed successfully.";

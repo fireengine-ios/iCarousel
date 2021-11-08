@@ -1903,25 +1903,25 @@
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "Опис Файлу";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "Видалити мій профіль";
+"DELETE_ACC_DESC" = "Якщо ви видалите свій обліковий запис, ваші файли та фотографії буде видалено назавжди, і ви не зможете їх отримати пізніше. Ваші контакти, історії та всі завантажені файли також будуть видалені.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Ви впевнені, що хочете видалити свій аккаунт?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Перш ніж видалити свій обліковий запис, ви можете завантажити свої файли та фотографії в локальну папку на комп’ютері, щоб не втратити важливих даних.";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "Після підтвердження облікового запису своїм паролем ваш рахунок буде видалено назавжди.\n\nЯкщо ви хочете знову активувати свій обліковий запис lifebox, ви можете увійти за допомогою облікових даних свого облікового запису через 30 днів. Якщо ви не ввійдете в систему, ваш обліковий запис і вміст буде видалено після цього періоду.";
+"DELETE_ACC_INPUT_GSM" = "Номер телефону";
+"DELETE_ACC_INPUT_PASS" = "Пароль облікового запису";
+"DELETE_ACC_PASS_ERROR" = "Недійсний пароль.";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Ваш обліковий запис буде видалено назавжди";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Якщо ви хочете знову активувати свій обліковий запис lifebox, ви можете увійти за допомогою облікових даних свого облікового запису через 30 днів. Якщо ви не ввійдете в систему, ваш обліковий запис і вміст буде видалено після цього періоду.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Ви успішно видалили свій рахунок.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Ми шкодуємо, що ви йдете :(**\n\nБудь ласка, знайте, що ми збираємось зберігати ваш вміст протягом 30 днів. Якщо увійти в систему з обліковими даними облікового запису протягом цього періоду, ваш аккаунт буде активований знову. Ви можете продовжувати використовувати свій рахунок без будь-яких змін.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Видалити";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "Скасувати";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Продовжити";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Підтвердити";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Закрити";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
-"change_album_cover_set_photo" = "";
+"change_album_cover_snackbar_text" = "Обкладинку альбому успішно змінено.";
+"change_album_cover_error_text" = "Під час зміни фотографії обкладинки сталася помилка.";
+"change_album_cover_set_photo" = "Використовувати як обкладинку альбому";

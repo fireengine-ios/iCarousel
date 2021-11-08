@@ -975,14 +975,14 @@
 "frequently_asked_questions" = "Sıkça Sorulan Sorular";
 "login_username_not_valid" = "Lütfen kullanıcı adını kontrol et.";
 "login_support_info" = "Giriş yapmakta zorluk çekiyorsan, destek için bizimle iletişime geçebilirsin.";
-"terms_and_privacy_policy" = "Kullanıcı Sözleşmesi ve Gizlilik Politikası";
+"terms_and_privacy_policy" = "Kullanıcı Sözleşmesi ve Aydınlatma Metni";
 "Temporary error occurred. Please try again later." = "Geçici bir hata oluştu, lütfen daha sonra tekrar dene.";
 "face_tags_description_premium" = "Yüz ve Nesne Tanıma özelliğini aktiflediğinde, yüklemiş olduğun fotoğraflar yüz ve objelere göre ve konum servisi özelliği açıksa lokasyon bilgilerine göre gruplandırılabilecek ve yüklediğin içeriklere özel hikayeler oluşturulabilecektir.";
 "terms_of_use" = "Kullanıcı Sözleşmesi";
-"privacy_policy" = "lifebox aracılığıyla topladığımız kişisel verilerin hakkında ayrıntılı bilgi almak için Gizlilik Politikası'nı okuyabilirsin.";
+"privacy_policy" = "lifebox aracılığıyla topladığımız kişisel verilerin hakkında ayrıntılı bilgi almak için Aydınlatma Metni'ni okuyabilirsin.";
 "face_tags_description_standart" = "Yüz ve Nesne Tanıma özelliğini aktiflediğinde, yüklemiş olduğun fotoğraflar yüz ve objelere göre ve konum servisi özelliği açıksa lokasyon bilgilerine göre gruplandırılabilecek ve yüklediğin içeriklere özel hikayeler oluşturulabilecektir.";
 "terms_and_use_introduction_checkbox" = "Kullanıcı Sözleşmesi'ni okudum ve onaylıyorum.";
-"privacy_policy_condition" = "Gizlilik Politikası";
+"privacy_policy_condition" = "Aydınlatma Metni";
 "photo_pick_description" = "Instagram hesabını bağlama özelliğini aktiflediğinde, her yeni PhotoPick sorgunda hesabına özel analiz yaparak kişiselleştirilmiş, çok daha iyi bir deneyim sunabileceğiz.";
 
 /*Permission screen in Settings*/
@@ -992,7 +992,7 @@
 "restore_purchases" = "Aboneliklerimi Yenile";
 "restore_purchases_info" = "Mevcut aboneliklerini aşağıdaki alanda göremiyorsan, aboneliklerini yenilemek için butona basabilirsin.";
 "attributed_restore_word" = "yenilemek";
-"privacy_policy_head_line" = "Gizlilik Politikası";
+"privacy_policy_head_line" = "Aydınlatma Metni";
 "create_story_photos_selected" = "%d Seçili";
 "create_story_press_and_hold" = "Üzerine basılı tutarak";
 "create_story_press_and_hold_description" = "%@ fotoğrafların sırasını değiştirebilirsin.";
@@ -1389,7 +1389,7 @@
 "LifeboxLargePopUpTitleBetween80And99" = "Saklama alanın %.0f%% dolu!";
 "LifeboxLargePopUpDeleteFilesButtonTitle" = "İçeriklerimi sil";
 "dialog_contact_sync_vcf_file_upload_error" = "Kişilerinizi geri yüklemeden önce, verilerinizi korumak için cihazınızdaki kişileri yedekleriz. Lifebox depolama alanınız dolu olduğundan, kişilerinizi yedeklemeye veya geri yüklemeye devam edemezsiniz. Depolama alanınızı genişletebilir veya lifebox'taki tüm dosyaları silebilirsiniz.";
-"privacy_policy_cell" = "Gizlilik Politikası";
+"privacy_policy_cell" = "Aydınlatma Metni";
 "full_quota_warning_popup_title" = "lifebox saklama alanı limitine ulaştın!";
 "full_quota_warning_popup_description" = "lifebox saklama alanın dolu olduğu için yeni içerik yükleyemiyorsun. Anılarını saklamaya devam etmek için paket satın alabilir veya mevcut içeriklerini silebilirsin.";
 "expand_my_storage" = "Saklama alanımı yükselt";
@@ -1919,23 +1919,23 @@
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "Dosya Açıklaması";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "Hesabımı Sil";
+"DELETE_ACC_DESC" = "Hesap silme işlemi yaparsan; fotoğrafların, videoların, rehberin, tüm içerik ve bilgilerin 30 gün sonrasında kalıcı olarak silinir. Bu süreden sonra içeriklerini geri getiremezsin. Silme işleminden sonraki 30 gün içinde hesabına giriş yaparsan, hesap silme talebini otomatik olarak iptal edeceğiz ve hesabını kullanmaya devam edebileceksin. Hesabını silmeden önce lifebox hesabında kayıtlı bir içeriğin varsa, hesap silme işleminden önce içeriklerini indirmeni öneririz.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Hesabını silmek istediğine emin misin?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Hesabını silmeden önce, önemli verilerini kaybetmemek için fotoğraflarını, videolarını ve hesabında sakladığın tüm içeriklerini indirdiğinden emin ol!";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "Şifreni girerek hesabını doğruladıktan sonra hesabın kalıcı olarak silinecektir.\n\nLifebox hesabını tekrar aktive etmek istersen, silme işleminden sonra 30 gün içinde hesap bilgilerinle giriş yapabilirsin. Giriş yapmadığın durumda hesabın ve içeriklerin bu süreden sonra silinir.";
+"DELETE_ACC_INPUT_GSM" = "Telefon Numarası";
+"DELETE_ACC_INPUT_PASS" = "Şifre";
+"DELETE_ACC_PASS_ERROR" = "Hatalı şifre girdiniz.";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Hesabın kalıcı olarak silinecektir.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Lifebox hesabını tekrar aktive etmek istersen, silme işleminden sonra 30 gün içinde hesap bilgilerinle giriş yapabilirsin. Giriş yapmadığın durumda hesabın ve içeriklerin bu süreden sonra silinir.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Hesabını başarılı olarak sildin.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Gittiğin için üzgünüz :(**\n\nLütfen şunu bil, içeriklerini 30 gün saklamaya devam edeceğiz. Bu süre içerisinde hesap bilgilerinle giriş yaparsan, hesabın aktive olacaktır. Herhangi bir değişiklik yapmadan hesabını kullanmaya devam edebilirsin.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Hesabımı Sil";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "İptal";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Devam Et";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Onayla";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Kapat";
 
 /*Change album cover photo*/
 "change_album_cover_snackbar_text" = "Kapak fotoğrafı başarıyla güncellendi.";
