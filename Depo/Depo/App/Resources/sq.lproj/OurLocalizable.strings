@@ -1944,25 +1944,25 @@
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "Shpjegimi i Skedarit";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "Fshini llogarinë time";
+"DELETE_ACC_DESC" = "Nëse fshini llogarinë tuaj, fotot, videot, kontaktet dhe të gjitha përmbajtjet dhe informacionet tuaja do të fshihen përgjithmonë, përveç nëse hyni në llogarinë tuaj brenda 30 ditësh. Ju nuk mund t'i merrni skedarët tuaj pas kësaj periudhe. Nëse hyni në llogarinë tuaj në 30 ditë pas fshirjes, ne automatikisht do të anulojmë kërkesën tuaj dhe ju do të jeni në gjendje të përdorni llogarinë tuaj. Nëse keni përmbajtje përpara fshirjes së llogarisë, ju rekomandojmë t'i shkarkoni ato përpara se të fshini llogarinë tuaj.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Jeni i sigurt që doni ta fshini llogarinë tuaj?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Para se të fshini llogarinë tuaj, mund të shkarkoni dosjet dhe fotot tuaja në një skedar lokal në kompjuterin tuaj në mënyrë që të mos humbni asnjë të dhënë të rëndësishme. Vestibulum suscipit luctus odio convallis pellentesque. Suspendisse consequat purus sed lectus cursus cursus.";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "Pas vendosjes së emailit dhe fjalëkalimit tuaj, llogaria juaj do të fshihet përgjithmonë.\n\nJu mund të hyni me e-mail dhe fjalëkalimin tuaj për 1 muaj, në mënyrë që të aktivizoni përsëri llogarinë tuaj të Lifebox.";
+"DELETE_ACC_INPUT_GSM" = "Numri i Telefonit";
+"DELETE_ACC_INPUT_PASS" = "Fjalëkalimi";
+"DELETE_ACC_PASS_ERROR" = "Fjalëkalim i pavlefshëm.";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Llogaria juaj do të fshihet përgjithmonë.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Nam porta nisi ut lacus condimentum semper at sed sem. Curabitur mi odio, tincidunt non vestibulum eget.\n\nVestibulum lacinia, sem a interdum viverra, nunc est imperdiet dui, a molestie ante erat quis quam.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Ju e fshitë llogarinë tuaj me sukses.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Na vjen keq që po largoheni :( **\n\nJu lutemi mësoni se ne do të mbajmë të dhënat dhe dosjet tuaja për 1 muaj. Nëse hyni sërish me detajet e llogarisë suaj gjatë kësaj periudhe kohore, ju mund të vazhdoni të përdorni llogarinë tuaj pa ndonjë ndryshim.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Fshini";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "Anuloni";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Vazhdoni";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Konfirmoni";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Mbyllni";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
-"change_album_cover_set_photo" = "";
+"change_album_cover_snackbar_text" = "Kopertina e albumit u ndryshua me sukses.";
+"change_album_cover_error_text" = "Ndodhi një gabim gjatë ndryshimit të fotografisë së kopertinës.";
+"change_album_cover_set_photo" = "Përdoret si kopertinë e albumit";

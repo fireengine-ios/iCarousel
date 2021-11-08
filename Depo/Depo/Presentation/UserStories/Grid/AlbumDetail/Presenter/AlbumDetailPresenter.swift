@@ -121,6 +121,6 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
 
 extension AlbumDetailPresenter: FaceImageChangeCoverModuleOutput {
     func onAlbumCoverSelected(item: WrapData) {
-        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.changeAlbumCoverSuccess)
+        SnackbarManager.shared.show(type: .nonCritical, message: localized(.changeAlbumCoverSuccess))
     }
 }

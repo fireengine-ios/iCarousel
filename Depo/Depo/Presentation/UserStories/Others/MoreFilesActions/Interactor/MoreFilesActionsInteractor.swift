@@ -995,7 +995,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationFinished(type: .makeAlbumCover)
             ItemOperationManager.default.updatedAlbumCoverPhoto(item: item)
             }, fail: { [weak self] error in
-                self?.output?.operationFailed(type: .makeAlbumCover, message: TextConstants.changeAlbumCoverFail)
+                self?.output?.operationFailed(type: .makeAlbumCover, message: localized(.changeAlbumCoverFail))
         })
     }
     

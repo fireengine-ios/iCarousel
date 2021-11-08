@@ -1901,25 +1901,25 @@
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "Dateibeschreibung";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "Lösche mein Konto";
+"DELETE_ACC_DESC" = "Falls Du Dein Konto löschst, werden Deine Fotos, Videos, Kontakte und alle weiteren Informationen nach 30 Tagen endgültig gelöscht. Nach dieser Zeit kannst Du die Daten nicht mehr zurückholen. Falls Du innert 30 Tagen wieder auf Dein Konto zugreifst, werden wir Deinen Antrag auf Löschung des Kontos automatisch annullieren und Du kannst Dein Konto weiter benutzen. Falls Du vor dem Löschen Deines Kontos auf Deinem Lifebox-Konto gespeicherte Daten hast, empfehlen wir Dir, diese Daten vorab herunterzuladen.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Bist Du sicher das Du Dein Konto löschen willst?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Stelle bitte vor dem Löschen Deines Kontos sicher, dass Du Deine Fotos, Videos und den gesamten Inhalt, den Du auf Deinem Konto gespeichert hast, herunterlädst, um den Verlust wichtiger Daten zu vermeiden!";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "Nachdem Du Dein Passwort eingegeben und dein Konto authentifiziert hast, wird Dein Konto für immer gelöscht.\nWenn Du Dein Lifeboxkonto erneut aktivieren willst, kannst Du Dich innert 30 Tagen mit deinen Daten wieder anmelden. Wenn Du Dich nicht mehr anmeldest, werden Dein Konto und Deine Daten nach dieser Frist gelöscht.";
+"DELETE_ACC_INPUT_GSM" = "Telefonnummer";
+"DELETE_ACC_INPUT_PASS" = "Passwort";
+"DELETE_ACC_PASS_ERROR" = "Ungültiges Passwort";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Dein Konto wird für immer gelöscht.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Wenn Du Dein Lifeboxkonto erneut aktivieren willst, kannst Du Dich innert 30 Tagen mit deinen Daten wieder anmelden. Wenn Du Dich nicht mehr anmeldest, werden Dein Konto und Deine Daten nach dieser Frist gelöscht.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Dein Konto wurde erfolgreich gelöscht.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Wir bedauern Dein ausscheiden. :( **\n\nDu sollst wissen, dass wir Deine Daten für 30 Tage speichern. Falls Du Dich innert dieser Frist mit Deinen Daten anmeldest, wird Dein Konto aktiviert. Du kannst Dein Konto ohne Einschränkungen weiterverwenden.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Löschen";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "Abbrechen";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Fortsetzen";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Bestätigen";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Schließe";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
-"change_album_cover_set_photo" = "";
+"change_album_cover_snackbar_text" = "Albumcover erfolgreich geändert.";
+"change_album_cover_error_text" = "Beim Ändern des Titelbilds ist ein Fehler aufgetreten.";
+"change_album_cover_set_photo" = "Als Albumcover verwenden";

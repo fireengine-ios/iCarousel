@@ -71,4 +71,9 @@ enum Strings: String, Localizable {
     case deleteAccountContinueButton     = "DELETE_ACC_POP_UP_BTN_CONTINUE"
     case deleteAccountConfirmButton      = "DELETE_ACC_POP_UP_BTN_CONFIRM"
     case deleteAccountCloseButton        = "DELETE_ACC_POP_UP_BTN_CLOSE"
+
+    // MARK: - Change Album Cover
+    case changeAlbumCoverSuccess  = "change_album_cover_snackbar_text"
+    case changeAlbumCoverFail     = "change_album_cover_error_text"
+    case changeAlbumCoverSetPhoto = "change_album_cover_set_photo"
 }

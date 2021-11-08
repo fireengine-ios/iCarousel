@@ -32,7 +32,7 @@ extension FaceImageChangeCoverInteractor: FaceImageChangeCoverInteractorInput {
             }
             ItemOperationManager.default.updatedAlbumCoverPhoto(item: item)
             }, fail: { [weak self] error in
-                self?.output.asyncOperationFail(errorMessage: error.description)
+                self?.output.asyncOperationFail(errorMessage: localized(.changeAlbumCoverFail))
         })
     }
     
