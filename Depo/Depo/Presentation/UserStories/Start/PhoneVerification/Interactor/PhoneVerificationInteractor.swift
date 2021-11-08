@@ -99,13 +99,16 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
                 guard let `self` = self else {
                     return
                 }
+
                 self.attempts += 1
                 if self.attempts >= 3 {
                     self.attempts = 0
                     self.output.reachedMaxAttempts()
                     self.output.verificationFailed(with: TextConstants.promocodeBlocked)
+                    self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .tooManyInvalidOtpAttempts))
                 } else {
                     self.output.verificationFailed(with: TextConstants.phoneVerificationNonValidCodeErrorText)
+                    self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .invalidOtp))
                 }
             }
         })
