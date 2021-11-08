@@ -254,7 +254,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func changeCover() { 
-        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.changeAlbumCoverSuccess)
+        SnackbarManager.shared.show(type: .nonCritical, message: localized(.changeAlbumCoverSuccess))
     }
     
     func getFIRParent() -> Item? {
