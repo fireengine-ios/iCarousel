@@ -40,7 +40,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             buttonsStackView.axis = .vertical
             buttonsStackView.alignment = .leading
             buttonsStackView.distribution = .fill
-            buttonsStackView.spacing = newValue.spacing
+            buttonsStackView.spacing = 12
 
             let arrangedSubviews = [
                 fullnameStackView,
@@ -53,7 +53,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             ]
             arrangedSubviews.forEach { newValue.addArrangedSubview($0) }
 
-            buttonsStackView.setCustomSpacing(buttonsStackView.spacing * 2, after: changeSecurityQuestionButton)
+            buttonsStackView.setCustomSpacing(50, after: changeSecurityQuestionButton)
         }
     }
     
