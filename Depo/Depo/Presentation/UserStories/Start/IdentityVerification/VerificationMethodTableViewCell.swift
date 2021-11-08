@@ -28,6 +28,9 @@ private extension VerificationMethodTableViewCell {
     func setupButton() {
         radioButton.setImage(UIImage(named: "emtyRectangle"), for: .normal)
         radioButton.setImage(UIImage(named: "selectedRectangle"), for: .selected)
+
+        // selection is handled by tableView
+        radioButton.isUserInteractionEnabled = false
     }
 
     func setupLabels() {
