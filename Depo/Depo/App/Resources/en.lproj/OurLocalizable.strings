@@ -1946,7 +1946,7 @@
 "masterpass_feature_package_cancel" = "You can visit www.mylifebox.com to cancel your package.";
 "forgotMyPassword_password_complete" = "OK";
 "forgotMyPassword_reset_success_message" = "Şifre yenileme işleminiz başarıyla tamamlandı.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Your account is not found";
 "forgotMyPassword_SQ_invalid_answer" = "Your security question answer is wrong, please try again.";
 
 /*Photo/Video File Description*/

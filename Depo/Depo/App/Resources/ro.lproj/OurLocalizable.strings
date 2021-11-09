@@ -1896,7 +1896,7 @@
 "masterpass_feature_package_cancel" = "Pentru a-ţi anula pachetul, te rugăm să vizitezi www.mylifebox.com";
 "forgotMyPassword_password_complete" = "Ok";
 "forgotMyPassword_reset_success_message" = "Operațiunea de resetare a parolei dvs. a fost finalizată cu succes.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Contul nu este găsit.";
 "forgotMyPassword_SQ_invalid_answer" = "Răspunsul tău la întrebarea de securitate este incorect, te rugăm să încerci din nou.";
 
 /*Photo/Video File Description*/

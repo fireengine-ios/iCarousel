@@ -1939,7 +1939,7 @@
 "masterpass_feature_package_cancel" = "Për të anuluar paketën tuaj, ju lutemi, vizitoni www.mylifebox.com -in";
 "forgotMyPassword_password_complete" = "Ne rregull";
 "forgotMyPassword_reset_success_message" = "Rivendosja e fjalëkalimit tuaj u krye  me sukses.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Llogaria juaj nuk u gjend.";
 "forgotMyPassword_SQ_invalid_answer" = "Përgjigjia juaj e pyetjes së sigurisë është e gabuar,ju lutemi provojeni përsëri.";
 
 /*Photo/Video File Description*/

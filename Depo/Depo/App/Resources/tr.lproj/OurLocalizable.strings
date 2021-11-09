@@ -1268,7 +1268,7 @@
 "campaign_vc_top_title_zero" = "GÜNLÜK LİMİTİN DOLDU!";
 "campaign_vc_top_description_zero" = "Kampanyadaki günlük çekiliş hakkını tamamladın. Yarın da fotoğraflarını PhotoPick ile analiz etmeye devam et, büyük ödülü kazanma şansını artır!";
 "campaign_vc_top_title_non_zero" = "ANALİZE DEVAM!";
-"campaign_vc_top_description_non_zero" = "Tebrikler! Kampanya kapsamında günlük %d çekiliş hakkının tamamını kazandın. Yarın da fotoğraflarını PhotoPick ile analiz etmeye devam et, büyük ödülü kazanma şansını artır!";
+"campaign_vc_top_description_non_zero" = "Tebrikler! Kampanya kapsamında günlük %d çekiliş hakkı kazandın. Kampanya süresince her gün fotoğraflarını PhotoPick ile analiz etmeye devam et, büyük ödülü kazanma şansını arttır!";
 "create_story_empty_name_error" = "Hikaye ismi boş";
 "photopick_history_campaign_contest_total_draw" = "Toplam Çekiliş Hakkım";
 "photopick_history_campaign_contest_remaining_draw" = "Günlük Kalan Hakkım";
@@ -1914,7 +1914,7 @@
 "masterpass_feature_package_cancel" = "Paketini iptal etmek için www.mylifebox.com adresini ziyaret edebilirsin.";
 "forgotMyPassword_password_complete" = "Tamam";
 "forgotMyPassword_reset_success_message" = "Şifre yenileme işleminiz başarıyla tamamlandı.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Hesap bulunamadı";
 "forgotMyPassword_SQ_invalid_answer" = "Güvenlik sorusu cevabın hatalı, lütfen tekrar dene.";
 
 /*Photo/Video File Description*/
