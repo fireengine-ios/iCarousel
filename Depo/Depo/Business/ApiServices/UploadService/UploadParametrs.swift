@@ -138,7 +138,7 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.Expect                : "100-continue",
             HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
             HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
-            HeaderConstant.XObjectMetaTakenDate : takenDateValue,
+            HeaderConstant.XObjectMetaTakenDate  : takenDateValue,
             HeaderConstant.ContentLength         : "\(fileSize)"
         ]
         return header
