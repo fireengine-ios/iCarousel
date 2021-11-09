@@ -32,6 +32,7 @@ struct HeaderConstant {
     static let ContentLength = "Content-Length"
     static let XObjectMetaIosMetadataHash = "X-Object-Meta-Ios-Metadata-Hash"
     static let XObjectMetaDeviceType = "X-Object-Meta-Device-Type"
+    static let XObjectMetaTakenDate = "X-Object-Meta-Taken-Date"
 //    static let XObjectMetaAlbumLabel = "X-Object-Meta-Album-Label"
 //    static let XObjectMetaFolderLabel = "X-Object-Meta-Folder-Label"
 //    static let Etag = "ETag"
