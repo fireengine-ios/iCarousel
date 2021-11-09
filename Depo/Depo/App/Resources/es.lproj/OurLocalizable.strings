@@ -1108,7 +1108,7 @@
 "confirm_your_email" = "Verificar tu correo electrónico";
 "enter_your_email" = "Ingresar tu correo electrónico";
 "change_email_pop_up_top_title" = "Por favor ingresar tu correo electrónico para cambiar la información de tu cuenta y el código de seguridad.";
-"no_account_found" = "No se pudo encontrar la cuenta. ";
+"no_account_found" = "No se pudo encontrar la cuenta.";
 "too_many_requests" = "Se han hecho numerosas pruebas. Por favor volver a intentarlo más tarde";
 "invalid_otp" = "Es invalido el código de verificación. Por favor reintentarlo.";
 "expired_otp" = "No es válido el código de seguridad. Por favor reintentarlo.";
@@ -1938,7 +1938,7 @@
 "masterpass_feature_package_cancel" = "Para cancelar su paquete, visite www.mylifebox.com";
 "forgotMyPassword_password_complete" = "OK";
 "forgotMyPassword_reset_success_message" = "Su restablecimiento de contraseña se ha completado con éxito.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "No se pudo encontrar la cuenta.";
 "forgotMyPassword_SQ_invalid_answer" = "Tu respuesta a la pregunta de seguridad es incorrecta, por favor vuelva a intentarlo.";
 
 /*Photo/Video File Description*/

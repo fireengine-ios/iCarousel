@@ -1908,7 +1908,7 @@
 "masterpass_feature_package_cancel" = "لإلغاء الباقة الخاصة بك، يرجى زيارة موقع\nwww.mylifebox.com";
 "forgotMyPassword_password_complete" = "تمام";
 "forgotMyPassword_reset_success_message" = "لقد تمت عملية إعادة تعيين كلمة المرور الخاصة بك بنجاح.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "لم يتم العثور على الحساب";
 "forgotMyPassword_SQ_invalid_answer" = "إجابة السؤال السري غير صحيحة ، يرجى المحاولة مرة أخرى";
 
 /*Photo/Video File Description*/
@@ -1924,7 +1924,7 @@
 "DELETE_ACC_THIRD_POP_UP_TITLE" = "سيُحذف حسابك نهائيّا.";
 "DELETE_ACC_POP_UP_CONTENT_THIRD" = "إذا كنت ترغب في إعادة تنشيط حسابك ليف بوكس، يمكنك تسجيل الدخول بمعلومات حسابك في غضون 30 يومًا من الحذف. وإذا لم تقم بتسجيل الدخول، يُحذف حسابك ومحتواه بعد نهاية هذه المدة.";
 "DELETE_ACC_FINAL_POP_UP_TITLE" = "لقد حذفت حسابك بنجاح";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "نحن آسفون على مغادرتك: واعلم أننا سنواصل على محافظة محتوياتك لمدة 30 يومًا. فإذا قمت بتسجيل الدخول باستخدام معلومات حسابك خلال هذه المدة، فسيتم تنشيط حسابك من جديد. ويمكنك الاستمرار في استخدام حسابك دون إجراء أي تغييرات.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**نحن آسفون على مغادرتك:**\n\n واعلم أننا سنواصل على محافظة محتوياتك لمدة 30 يومًا. فإذا قمت بتسجيل الدخول باستخدام معلومات حسابك خلال هذه المدة، فسيتم تنشيط حسابك من جديد. ويمكنك الاستمرار في استخدام حسابك دون إجراء أي تغييرات.";
 "DELETE_ACC_POP_UP_BTN_DELETE" = "حذف";
 "DELETE_ACC_POP_UP_BTN_CANCEL" = "إلغاء الأمر";
 "DELETE_ACC_POP_UP_BTN_CONTINUE" = "متابعة";

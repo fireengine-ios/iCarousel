@@ -1896,7 +1896,7 @@
 "masterpass_feature_package_cancel" = "Um Ihr Paket zu stornieren, besuchen Sie bitte www.mylifebox.com";
 "forgotMyPassword_password_complete" = "OK";
 "forgotMyPassword_reset_success_message" = "Ihr Passwort-Reset wurde erfolgreich abgeschlossen.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Konto wurde nicht gefunden";
 "forgotMyPassword_SQ_invalid_answer" = "Ihre Antwort auf die Sicherheitsfrage ist falsch. Bitte versuchen Sie es erneut.";
 
 /*Photo/Video File Description*/

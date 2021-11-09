@@ -1910,7 +1910,7 @@
 "masterpass_feature_package_cancel" = "Чтобы отменить пакет, посетите сайт www.mylifebox.com";
 "forgotMyPassword_password_complete" = "Хорошо";
 "forgotMyPassword_reset_success_message" = "Смена пароля завершена успешно.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Ваш аккаунт не найден";
 "forgotMyPassword_SQ_invalid_answer" = "Неверный ответ на контрольный вопрос, пожалуйста, попробуйте еще раз.";
 
 /*Photo/Video File Description*/

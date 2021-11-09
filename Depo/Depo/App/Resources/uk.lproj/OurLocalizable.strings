@@ -1898,7 +1898,7 @@
 "masterpass_feature_package_cancel" = "Щоб скасувати пакет, відвідайте www.mylifebox.com";
 "forgotMyPassword_password_complete" = "Ок";
 "forgotMyPassword_reset_success_message" = "Скидання вашого пароля був успішно завершений.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Ваш обліковий запис не знайдено.";
 "forgotMyPassword_SQ_invalid_answer" = "Ваша відповідь на таємне запитання неправильна. Спробуйте ще раз.";
 
 /*Photo/Video File Description*/

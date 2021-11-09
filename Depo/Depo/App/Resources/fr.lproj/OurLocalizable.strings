@@ -2204,7 +2204,7 @@ Please check I have understood the intended command here*/
 "masterpass_feature_package_cancel" = "Pour annuler votre paquet, veuillez visiter www.mylifebox.com";
 "forgotMyPassword_password_complete" = "D'accord";
 "forgotMyPassword_reset_success_message" = "La réinitialisation de votre mot de passe a été effectuée avec succès.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Compte non trouvé";
 "forgotMyPassword_SQ_invalid_answer" = "La réponse à votre question de sécurité est incorrecte, veuillez réessayer.";
 
 /*Photo/Video File Description*/
