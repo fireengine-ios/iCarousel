@@ -79,4 +79,7 @@ enum Strings: String, Localizable {
     case changeAlbumCoverSuccess  = "change_album_cover_snackbar_text"
     case changeAlbumCoverFail     = "change_album_cover_error_text"
     case changeAlbumCoverSetPhoto = "change_album_cover_set_photo"
+
+    // MARK: - File Info
+    case fileInfoLocation = "location_file_info"
 }

@@ -54,6 +54,8 @@ struct SearchJsonKey {
     static let VideoPreview = "Video-Preview"
     static let DocumentPreview = "Document-Preview"
     static let Description = "Description"
+    static let Latitude = "Latitude"
+    static let Longitude = "Longitude"
     
     // music metadata
     
@@ -96,7 +98,9 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     var videoPreviewURL: URL?
     var documentPreviewURL: URL?
     var fileDescription: String?
-    
+    var latitude: Double?
+    var longitude: Double?
+
     // music
     var artist: String?
     
@@ -136,7 +140,9 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         videoPreviewURL = json?[SearchJsonKey.VideoPreview].url
         documentPreviewURL = json?[SearchJsonKey.DocumentPreview].url
         fileDescription = json?[SearchJsonKey.Description].string
-        
+        latitude = Double(json?[SearchJsonKey.Latitude].string ?? "")
+        longitude = Double(json?[SearchJsonKey.Longitude].string ?? "")
+
         artist = json?[SearchJsonKey.Artist].string
         album = json?[SearchJsonKey.Album].string
         title = json?[SearchJsonKey.Title].string
@@ -176,6 +182,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         isVideoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool ?? false
         specialFolderMeta = aDecoder.decodeObject(forKey: SearchJsonKey.specialFolderMeta) as? String
         fileDescription = aDecoder.decodeObject(forKey: SearchJsonKey.Description) as? String
+        latitude = aDecoder.decodeDouble(forKey: SearchJsonKey.Latitude)
+        longitude = aDecoder.decodeDouble(forKey: SearchJsonKey.Longitude)
 //        videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
     }
     
@@ -197,6 +205,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         aCoder.encode(isVideoSlideshow, forKey: SearchJsonKey.VideoSlideshow)
         aCoder.encode(specialFolderMeta, forKey: SearchJsonKey.specialFolderMeta)
         aCoder.encode(fileDescription, forKey:  SearchJsonKey.Description)
+        aCoder.encode(latitude, forKey: SearchJsonKey.Latitude)
+        aCoder.encode(longitude, forKey: SearchJsonKey.Longitude)
 //        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
     }
     
@@ -212,6 +222,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         largeUrl = sharedFileMetaData.thumbnailLarge
         videoPreviewURL = sharedFileMetaData.videoPreview
         fileDescription = sharedFileMetaData.fileDescription
+        latitude = sharedFileMetaData.latitude
+        longitude = sharedFileMetaData.longitude
         
         height = sharedFileMetaData.imageHeight ?? 0
         width = sharedFileMetaData.imageWidth ?? 0
@@ -241,7 +253,9 @@ extension BaseMetaData {
             height == metaData.height &&
             width == metaData.width &&
             isVideoSlideshow == metaData.isVideoSlideshow &&
-            fileDescription == metaData.fileDescription
+            fileDescription == metaData.fileDescription &&
+            latitude == metaData.latitude &&
+            longitude == metaData.longitude
     }
     
     func copy(metaData: BaseMetaData?) {
@@ -264,6 +278,8 @@ extension BaseMetaData {
         height = metaData.height
         width = metaData.width
         fileDescription = metaData.fileDescription
+        latitude = metaData.latitude
+        longitude = metaData.longitude
     }
 }
 

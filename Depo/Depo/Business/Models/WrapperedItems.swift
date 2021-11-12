@@ -840,6 +840,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
 //        metaData?.artist = mediaItem.metadata?.artist
     
         metaData?.duration = baseModel.asset.duration
+        metaData?.latitude = baseModel.asset.location?.coordinate.latitude
+        metaData?.longitude = baseModel.asset.location?.coordinate.longitude
         
 //        metaData?.genre = mediaItem.metadata?.genre ?? []
 //        metaData?.height = Int(mediaItem.metadata?.height ?? 0)
@@ -1128,7 +1130,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
         metaData?.artist = mediaItem.metadata?.artist
         metaData?.fileDescription = mediaItem.metadata?.fileDescription
-
+        metaData?.latitude = mediaItem.metadata?.latitude?.doubleValue
+        metaData?.longitude = mediaItem.metadata?.longitude?.doubleValue
         
         metaData?.duration = ((assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration) ?? Double(0.0)
         
