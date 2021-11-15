@@ -63,7 +63,7 @@ final class PhotoEditViewUIManager: NSObject {
     var image: UIImage? {
         didSet {
             DispatchQueue.main.async {
-                self.imageScrollView.imageView.image = self.image
+                self.imageScrollView?.imageView.image = self.image
             }
         }
     }
