@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UniformTypeIdentifiers
 
 class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
@@ -32,7 +33,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     private let authorityStorage = AuthoritySingleton.shared
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
+    private lazy var fileService = WrapItemFileService()
     private var userActivity: NSUserActivity?
+    private var publicShareURLForCurrentItem: URL?
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -44,7 +47,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
         set {
             selectedIndex = newValue
-            updateUserActivity()
+            if #available(iOS 15.0, *) {
+                updateUserActivity()
+            }
         }
     }
     
@@ -72,7 +77,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
         
         output.onShowSelectedItem(at: index, from: array.getArray())
-        updateUserActivity()
+        if #available(iOS 15.0, *) {
+            updateUserActivity()
+        }
     }
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
@@ -92,7 +99,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
 
         if index >= array.count {
             selectedIndex = array.count - 1
-            updateUserActivity()
+            if #available(iOS 15.0, *) {
+                updateUserActivity()
+            }
         }
                 
         if !array.isEmpty {
@@ -107,14 +116,18 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
             item.isLocalItem = false
             array[indexToChange] = item
-            updateUserActivity()
+            if #available(iOS 15.0, *) {
+                updateUserActivity()
+            }
         }
     }
     
     func updateExpiredItem(_ item: WrapData) {
         if let index = allItems.firstIndex(where: { $0 == item && $0.hasExpiredPreviewUrl() }) {
             array[index] = item
-            updateUserActivity()
+            if #available(iOS 15.0, *) {
+                updateUserActivity()
+            }
         }
     }
     
@@ -342,6 +355,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
     }
 
+    @available(iOS 15.0, *)
     private func updateUserActivity() {
         guard let currentItemIndex = currentItemIndex,
               let item = array[currentItemIndex],
@@ -352,10 +366,36 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
 
         createUserActivityIfNeeded()
-        userActivity?.webpageURL = item.tmpDownloadUrl
+        userActivity?.webpageURL = nil
         userActivity?.becomeCurrent()
+
+        // sharing the image/video itself doesn't work in iOS 15.1, Siri is falling back to NSUserActivity's webpageURL
+        // so for now, we'll use below block to create a shareable link and assign it to userActivity.webpageURL
+        // TODO: check this again when iOS 15.2 comes out
+        publicShareURLForCurrentItem = nil
+        let imageProvider = NSItemProvider()
+        imageProvider.registerItem(forTypeIdentifier: UTType.image.identifier) { [weak self] completion, _, _ in
+            // this load handler gets called multiple times while siri is listening
+            // below guard is to prevent creating more than one link for the current item
+            guard self?.publicShareURLForCurrentItem == nil else {
+                completion?(nil, nil)
+                return
+            }
+
+            self?.fileService.share(sharedFiles: [item], success: { urlString in
+                let url = URL(string: urlString)
+                self?.publicShareURLForCurrentItem = url
+                self?.userActivity?.webpageURL = url
+                completion?(nil, nil)
+            }, fail: { error in
+                completion?(nil, error)
+            })
+        }
+
+        output.setCurrentActivityItemsConfiguration(UIActivityItemsConfiguration(itemProviders: [imageProvider]))
     }
 
+    @available(iOS 15.0, *)
     private func createUserActivityIfNeeded() {
         guard self.userActivity == nil else { return }
 
@@ -368,9 +408,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         activity.isEligibleForHandoff = false
         activity.isEligibleForPublicIndexing = false
         activity.isEligibleForSearch = false
-        if #available(iOS 12.0, *) {
-            activity.isEligibleForPrediction = false
-        }
+        activity.isEligibleForPrediction = false
 
         self.userActivity = activity
     }
