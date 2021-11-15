@@ -68,11 +68,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="addressLabel" destination="bVO-F0-TfG" id="wFo-FL-TmX"/>
                 <outlet property="mapTapView" destination="0hA-oD-zEW" id="7UZ-sR-4Cq"/>
                 <outlet property="mapView" destination="o6T-we-rSs" id="DOS-mO-ySd"/>
                 <outlet property="stackView" destination="Qli-9q-zKY" id="qya-Dc-1fZ"/>
                 <outlet property="titleLabel" destination="1tz-tC-rEv" id="9yt-ab-7hp"/>
-                <outlet property="valueLabel" destination="bVO-F0-TfG" id="wFo-FL-TmX"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="121.20535714285714"/>
         </view>

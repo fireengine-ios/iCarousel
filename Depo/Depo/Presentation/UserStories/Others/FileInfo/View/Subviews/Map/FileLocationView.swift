@@ -38,7 +38,7 @@ final class FileLocationView: UIView, NibInit, FileLocationViewProtocol {
         }
     }
 
-    @IBOutlet private weak var valueLabel: UILabel! {
+    @IBOutlet private weak var addressLabel: UILabel! {
         willSet {
             newValue.font = .TurkcellSaturaFont(size: 14)
             newValue.textColor = .lrBrownishGrey
@@ -75,7 +75,7 @@ final class FileLocationView: UIView, NibInit, FileLocationViewProtocol {
 
     private func configureStackViewSpacing() {
         stackView.spacing = 8
-        stackView.setCustomSpacing(18, after: valueLabel)
+        stackView.setCustomSpacing(18, after: addressLabel)
     }
 
     @objc private func mapTapped() {
@@ -96,9 +96,10 @@ final class FileLocationView: UIView, NibInit, FileLocationViewProtocol {
 
         setAnnotationAndUpdateRegion(coordinate: coordinate, item: item)
 
+        addressLabel.text = " "
         getAddress(latitude: latitude, longitude: longitude) { [weak self] address in
-            self?.valueLabel.text = address
-            self?.valueLabel.isHidden = address == nil || address?.isEmpty == true
+            self?.addressLabel.text = address
+            self?.addressLabel.isHidden = address == nil || address?.isEmpty == true
         }
     }
 
@@ -121,8 +122,8 @@ final class FileLocationView: UIView, NibInit, FileLocationViewProtocol {
         let location = CLLocation(latitude: latitude, longitude: longitude)
         geoCoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
             // ignore delayed responses
-            guard self?.currentCoordinate?.latitude != latitude,
-                  self?.currentCoordinate?.longitude != longitude
+            guard self?.currentCoordinate?.latitude == latitude,
+                  self?.currentCoordinate?.longitude == longitude
             else {
                 return
             }
