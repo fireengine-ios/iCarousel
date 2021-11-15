@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import Foundation
+
 class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     weak var output: PhotoVideoDetailInteractorOutput!
@@ -30,6 +32,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     private let authorityStorage = AuthoritySingleton.shared
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
+    private var userActivity: NSUserActivity?
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -41,6 +44,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
         set {
             selectedIndex = newValue
+            updateUserActivity()
         }
     }
     
@@ -68,6 +72,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
         
         output.onShowSelectedItem(at: index, from: array.getArray())
+        updateUserActivity()
     }
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
@@ -87,6 +92,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
 
         if index >= array.count {
             selectedIndex = array.count - 1
+            updateUserActivity()
         }
                 
         if !array.isEmpty {
@@ -101,12 +107,14 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
             item.isLocalItem = false
             array[indexToChange] = item
+            updateUserActivity()
         }
     }
     
     func updateExpiredItem(_ item: WrapData) {
         if let index = allItems.firstIndex(where: { $0 == item && $0.hasExpiredPreviewUrl() }) {
             array[index] = item
+            updateUserActivity()
         }
     }
     
@@ -323,10 +331,47 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         }
     }
+
+    func resignUserActivity() {
+        userActivity?.resignCurrent()
+    }
     
     private func updateItem(_ item: Item) {
         if let index = allItems.firstIndex(where: { $0 == item }) {
             array[index] = item
         }
+    }
+
+    private func updateUserActivity() {
+        guard let currentItemIndex = currentItemIndex,
+              let item = array[currentItemIndex],
+              !item.isLocalItem
+        else {
+            resignUserActivity()
+            return
+        }
+
+        createUserActivityIfNeeded()
+        userActivity?.webpageURL = item.tmpDownloadUrl
+        userActivity?.becomeCurrent()
+    }
+
+    private func createUserActivityIfNeeded() {
+        guard self.userActivity == nil else { return }
+
+        guard let bundleId = Bundle.main.bundleIdentifier else {
+            assertionFailure()
+            return
+        }
+
+        let activity = NSUserActivity(activityType: bundleId.appending(".file-detail"))
+        activity.isEligibleForHandoff = false
+        activity.isEligibleForPublicIndexing = false
+        activity.isEligibleForSearch = false
+        if #available(iOS 12.0, *) {
+            activity.isEligibleForPrediction = false
+        }
+
+        self.userActivity = activity
     }
 }

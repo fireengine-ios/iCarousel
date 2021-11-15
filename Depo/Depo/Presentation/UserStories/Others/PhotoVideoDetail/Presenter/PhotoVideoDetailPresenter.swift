@@ -140,6 +140,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func viewWillDisappear() {
         bottomBarPresenter?.dismiss(animated: false)
+        interactor.resignUserActivity()
     }
     
     func viewFullyLoaded() {
