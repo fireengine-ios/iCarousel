@@ -767,9 +767,11 @@ extension TabBarViewController: AVPlayerViewControllerDelegate {
 
     func playerViewController(_ playerViewController: AVPlayerViewController,
                               restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-        RouterVC().presentViewController(controller: playerViewController) {
-            playerViewController.allowsPictureInPicturePlayback = true
-            completionHandler(true)
+        if playerViewController.presentingViewController == nil {
+            RouterVC().presentViewController(controller: playerViewController) {
+                playerViewController.allowsPictureInPicturePlayback = true
+                completionHandler(true)
+            }
         }
     }
 }
