@@ -49,7 +49,7 @@ class AlbumItem: BaseDataSourceItem {
         isLocalItem = false
     }
     
-    override init(uuid: String?, name: String?, fileDescription: String?, creationDate: Date?, lastModifiDate: Date?, fileType: FileType, syncStatus: SyncWrapperedStatus, isLocalItem: Bool) {
+    override init(uuid: String?, name: String?, creationDate: Date?, lastModifiDate: Date?, fileType: FileType, syncStatus: SyncWrapperedStatus, isLocalItem: Bool) {
         imageCount = 0
         videoCount = 0
         audioCount = 0
