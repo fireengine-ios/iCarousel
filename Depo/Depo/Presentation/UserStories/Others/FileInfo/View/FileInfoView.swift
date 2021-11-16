@@ -273,6 +273,9 @@ final class FileInfoView: UIView, FromNib {
         }
         
         sharingInfoView.isHidden = !needShow
+
+        fileDescriptionView.fileDescription = sharingInfo.metadata?.fileDescription
+
         output.didUpdateSharingInfo(sharingInfo)
     }
     

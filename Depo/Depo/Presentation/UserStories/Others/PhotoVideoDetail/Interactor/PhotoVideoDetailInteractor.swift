@@ -188,7 +188,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         shareApiService.editDescription(projectId: projectId, uuid: item.uuid, description: newDescription) { [weak self] result in
             switch result {
             case .success():
-                item.fileDescription = newDescription
                 item.metaData?.fileDescription = newDescription
                 self?.output.updated()
             case .failed(let error):
