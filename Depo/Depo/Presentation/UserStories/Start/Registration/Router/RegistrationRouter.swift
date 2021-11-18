@@ -10,7 +10,24 @@ import UIKit
 
 class RegistrationRouter: RegistrationRouterInput {
     let router = RouterVC()
-    
+
+    func presentEmailUsagePopUp(email: String, onClosed: @escaping () -> Void) {
+        let message = String(format: TextConstants.registrationEmailPopupMessage, email)
+
+        let controller = PopUpController.with(
+            title: TextConstants.registrationEmailPopupTitle,
+            message: message,
+            image: .error,
+            buttonTitle: TextConstants.ok,
+            action: { vc in
+                vc.close {
+                    onClosed()
+                }
+            })
+
+        router.presentViewController(controller: controller)
+    }
+
     func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
         let phoneVerification = router.phoneVerificationScreen(withSignUpSuccessResponse: sigUpResponse, userInfo: userInfo)
         router.pushViewController(viewController: phoneVerification)

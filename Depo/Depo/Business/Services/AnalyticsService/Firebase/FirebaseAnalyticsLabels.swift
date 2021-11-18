@@ -521,6 +521,8 @@ enum GAEventLabel {
     case deleteMyAccount
     case deleteAccount
 
+    case impression
+
     var text: String {
         switch self {
         case .empty:
@@ -765,6 +767,10 @@ enum GAEventLabel {
             return "Delete My Account"
         case .deleteAccount:
             return "Delete Account"
+
+        //
+        case .impression:
+            return "Impression"
         }
     }
     
