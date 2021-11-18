@@ -140,6 +140,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func viewWillDisappear() {
         bottomBarPresenter?.dismiss(animated: false)
+        interactor.resignUserActivity()
     }
     
     func viewFullyLoaded() {
@@ -379,6 +380,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool) {
         view.setHiddenPremiumStackView(isHidden: isPermitted)
+    }
+
+    @available(iOS 13.0, *)
+    func setCurrentActivityItemsConfiguration(_ config: UIActivityItemsConfiguration?) {
+        view.activityItemsConfiguration = config
     }
     
     func configureFileInfo(_ view: FileInfoView) {

@@ -52,4 +52,6 @@ protocol PhotoVideoDetailInteractorInput: AnyObject {
     func getAuthority()
     
     func createNewUrl()
+
+    func resignUserActivity()
 }
