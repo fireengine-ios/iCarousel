@@ -307,7 +307,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                             if itemsCount > 0 {
                                 let item = AlbumItem(uuid: object.localIdentifier,
                                                      name: object.localizedTitle,
-                                                     fileDescription: nil,
                                                      creationDate: nil,
                                                      lastModifiDate: nil,
                                                      fileType: .photoAlbum,

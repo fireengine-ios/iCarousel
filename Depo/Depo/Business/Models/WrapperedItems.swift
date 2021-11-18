@@ -887,7 +887,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileSize = remote.bytes ?? 0
         status = ItemStatus(string: remote.status)
         
-        super.init(uuid: remote.uuid, fileDescription: metaData?.fileDescription)
+        super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
         
         projectId = SingletonStorage.shared.accountInfo?.projectID
@@ -895,7 +895,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         albums = remote.albums
         
         name = remote.name
-        fileDescription = remote.metadata?.fileDescription
         isLocalItem = false
         creationDate = remote.createdDate
         lastModifiDate = remote.lastModifiedDate
@@ -965,7 +964,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         id = searchResponse[SearchJsonKey.id].int64
         md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
         name = searchResponse[SearchJsonKey.name].string
-        fileDescription = searchResponse[SearchJsonKey.Description].string
         uuid = fileUUID
         projectId = SingletonStorage.shared.accountInfo?.projectID
         
@@ -1110,7 +1108,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
-        fileDescription = metaData?.fileDescription
         creationDate = mediaItem.creationDateValue as Date?
         lastModifiDate = mediaItem.lastModifiDateValue as Date?
         syncStatus = SyncWrapperedStatus(value: mediaItem.syncStatusValue)
@@ -1200,7 +1197,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         super.init(uuid: privateShareFileInfo.uuid,
                    name: privateShareFileInfo.name,
-                   fileDescription: privateShareFileInfo.metadata?.fileDescription,
                    creationDate: privateShareFileInfo.createdDate,
                    lastModifiDate: privateShareFileInfo.lastModifiedDate,
                    fileType: privateShareFileInfo.fileType,
