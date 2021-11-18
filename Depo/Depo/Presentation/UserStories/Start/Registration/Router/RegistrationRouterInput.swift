@@ -9,6 +9,8 @@
 import UIKit
 
 protocol RegistrationRouterInput {
+    func presentEmailUsagePopUp(email: String, onClosed: @escaping () -> Void)
+
     func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel)
 
     func openSupport()

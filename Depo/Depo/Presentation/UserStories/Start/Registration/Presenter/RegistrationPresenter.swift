@@ -155,7 +155,11 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         }
 
         completeAsyncOperationEnableScreen()
-        router.phoneVerification(sigUpResponse: response, userInfo: info)
+
+        interactor.trackEmailUsagePopUp()
+        router.presentEmailUsagePopUp(email: info.mail) { [weak self] in
+            self?.router.phoneVerification(sigUpResponse: response, userInfo: info)
+        }
     }
     
     func captchaRequired(required: Bool) {

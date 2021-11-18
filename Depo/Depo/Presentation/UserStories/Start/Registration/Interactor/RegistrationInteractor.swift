@@ -38,6 +38,12 @@ class RegistrationInteractor: RegistrationInteractorInput {
         analyticsService.logScreen(screen: .eula)
     }
 
+    func trackEmailUsagePopUp() {
+        analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                            eventActions: .emailVerification,
+                                            eventLabel: .impression)
+    }
+
     func checkEtkAndGlobalPermissions(code: String, phone: String) {
         // We're only checking for ETK, global permission is ignored for now.
         if code == "+90" && phone.count == 10 {

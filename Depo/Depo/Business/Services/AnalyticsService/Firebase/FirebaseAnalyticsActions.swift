@@ -68,6 +68,7 @@ enum GAEventAction {
     case myProfile
     case msisdn
     case email
+    case emailVerification
     case otp
     case changeEmail
     case clickQuotaPurchase
@@ -241,6 +242,8 @@ enum GAEventAction {
             return "msisdn"
         case .email:
             return "E-mail"
+        case .emailVerification:
+            return "Email Verification"
         case .otp:
             return "OTP-1"
         case .changeEmail:
