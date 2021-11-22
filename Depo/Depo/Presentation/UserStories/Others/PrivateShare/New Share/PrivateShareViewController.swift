@@ -223,7 +223,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func endSearchContacts() {
-        view.endEditing(true)
         removeRemoteSuggestionsView()
         removeLocalSuggestionsView()
     }
