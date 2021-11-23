@@ -17,7 +17,7 @@ struct AlbumsPatch {
     static let changeCoverPhoto = "album/coverPhoto/%@?coverPhotoUuid=%@"
     
     static let trashAlbums = "album/trash"
-    static let getAlbumItemCount = "/api/album/count/%@"
+    static let getAlbumItemCount = "album/count/%@"
 }
 
 class CreatesAlbum: BaseRequestParametrs {
