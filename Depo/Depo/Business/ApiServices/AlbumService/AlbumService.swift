@@ -17,6 +17,7 @@ struct AlbumsPatch {
     static let changeCoverPhoto = "album/coverPhoto/%@?coverPhotoUuid=%@"
     
     static let trashAlbums = "album/trash"
+    static let getAlbumItemCount = "/api/album/count/%@"
 }
 
 class CreatesAlbum: BaseRequestParametrs {
@@ -170,6 +171,19 @@ class AlbumService: RemoteItemsService {
     
 }
 
+class GetAlbumItemCount: BaseRequestParametrs {
+    let albumUUID: String
+
+    init (albumUUID: String) {
+        self.albumUUID = albumUUID
+    }
+
+    override var patch: URL {
+        let path: String = String(format: AlbumsPatch.getAlbumItemCount, albumUUID)
+        return URL(string: path, relativeTo: super.patch)!
+    }
+}
+
 typealias AlbumCreatedOperation = (AlbumItem?) -> Void
 typealias AlbumsSuccess = ([AlbumItem]) -> Void
 typealias AlbumOperationResponse = (_ album: AlbumServiceResponse) -> Void
@@ -177,6 +191,7 @@ typealias PhotosAlbumOperation = () -> Void
 typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Void
 typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Void
 typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Void
+typealias AlbumItemCountResponse = (_ itemCount: AlbumCountResponse) -> Void
 
 class PhotosAlbumService: BaseRequestService {
     
@@ -364,6 +379,17 @@ class PhotosAlbumService: BaseRequestService {
             success?(moveToTrashAlbums)
         }, fail: fail)
         executeDeleteRequest(param: params, handler: handler)
+    }
+
+    func getAlbumItemCount(parameters: GetAlbumItemCount, success: AlbumItemCountResponse?, fail: FailResponse?) {
+        debugLog("PhotosAlbumService getAlbumItemCount")
+
+        let handler = BaseResponseHandler<AlbumCountResponse, ObjectRequestResponse>(success: { response  in
+            if let response = response as? AlbumCountResponse {
+                success?(response)
+            }
+        }, fail: fail)
+        executeGetRequest(param: parameters, handler: handler)
     }
 }
 
