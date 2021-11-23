@@ -129,9 +129,14 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        delegate?.hideKeyboard(text: textField.text ?? "")
-        return true
+        if textField.text?.isEmpty == false {
+            onAddTapped(addButton)
+            return false
+        } else {
+            textField.resignFirstResponder()
+            delegate?.hideKeyboard(text: textField.text ?? "")
+            return true
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
