@@ -10,4 +10,5 @@ protocol FaceImagePhotosInteractorInput {
     func loadItem(_ item: BaseDataSourceItem)
     func updateCurrentItem(_ item: BaseDataSourceItem)
     func hideAlbum()
+    func getAlbumItemCount()
 }

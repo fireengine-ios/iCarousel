@@ -8539,6 +8539,10 @@
 		F02F6AAA269C56FC00A64ED8 /* ValidationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */; };
 		F02F6AAC269C56FC00A64ED8 /* ValidationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */; };
 		F02F6AAD269C56FC00A64ED8 /* ValidationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */; };
+		F034DF27274A544200E5C015 /* AlbumCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034DF26274A544200E5C015 /* AlbumCountResponse.swift */; };
+		F034DF28274A544200E5C015 /* AlbumCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034DF26274A544200E5C015 /* AlbumCountResponse.swift */; };
+		F034DF29274A544200E5C015 /* AlbumCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034DF26274A544200E5C015 /* AlbumCountResponse.swift */; };
+		F034DF2A274A544200E5C015 /* AlbumCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034DF26274A544200E5C015 /* AlbumCountResponse.swift */; };
 		F0C202342726EF810086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F0C202382726F0230086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F0C202392726F0240086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
@@ -11239,6 +11243,7 @@
 		F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileDescriptionView.xib; sourceTree = "<group>"; };
 		F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRulesView.swift; sourceTree = "<group>"; };
 		F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRules.swift; sourceTree = "<group>"; };
+		F034DF26274A544200E5C015 /* AlbumCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCountResponse.swift; sourceTree = "<group>"; };
 		F233973492D247406E39E96E /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
 		F2C8ED61D6F265F87FC23FBA /* FileInfoInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractor.swift; sourceTree = "<group>"; };
 		F39582799B29F58A62C1236E /* PhoneVerificationViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationViewOutput.swift; sourceTree = "<group>"; };
@@ -14620,6 +14625,7 @@
 				7C0435091F4EF3A600193C75 /* AlbumDetailService */,
 				7CBF50231F44723D00D67BF3 /* AlbumService.swift */,
 				7CFF0C8B1F4C0E6F00E72E6A /* AlbumServiceResponse.swift */,
+				F034DF26274A544200E5C015 /* AlbumCountResponse.swift */,
 			);
 			path = AlbumService;
 			sourceTree = "<group>";
@@ -24237,6 +24243,7 @@
 				B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */,
 				4BEC1143233E1BBD0020A578 /* SupportFormSubjectType.swift in Sources */,
 				FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */,
+				F034DF27274A544200E5C015 /* AlbumCountResponse.swift in Sources */,
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */,
 				8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */,
@@ -25379,6 +25386,7 @@
 				981EA2F0247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
 				CE78484C22A685FB00662219 /* ErrorPresenter.swift in Sources */,
 				CE78484D22A685FB00662219 /* LoginPresenter.swift in Sources */,
+				F034DF29274A544200E5C015 /* AlbumCountResponse.swift in Sources */,
 				CE78484E22A685FB00662219 /* FreeAppSpaceConfigurator.swift in Sources */,
 				CF7146CD24B597A900D83E60 /* BackUpContactsCard.swift in Sources */,
 				CE78484F22A685FB00662219 /* (null) in Sources */,
@@ -27385,6 +27393,7 @@
 				CF8B650823CBC9D70021B021 /* HomePagePopUpOperation.swift in Sources */,
 				0305A32723D5C3BB004D1EC7 /* HiddenPhotosNavbarManager.swift in Sources */,
 				CF8B650923CBC9D70021B021 /* BackButton.swift in Sources */,
+				F034DF28274A544200E5C015 /* AlbumCountResponse.swift in Sources */,
 				CF8B650A23CBC9D70021B021 /* InsetsButton.swift in Sources */,
 				CF8B650B23CBC9D70021B021 /* SearchService.swift in Sources */,
 				98B047A4259314740011DAEB /* Filter.m in Sources */,
@@ -28615,6 +28624,7 @@
 				CF8B6B9723CBCA280021B021 /* SwipeableCardCell.swift in Sources */,
 				CF8B6B9823CBCA280021B021 /* FaceImageItemsViewOutput.swift in Sources */,
 				CF8B6B9923CBCA280021B021 /* MusicInteractorInput.swift in Sources */,
+				F034DF2A274A544200E5C015 /* AlbumCountResponse.swift in Sources */,
 				CF7146CE24B597A900D83E60 /* BackUpContactsCard.swift in Sources */,
 				CF8B6B9A23CBCA280021B021 /* ErrorPresenter.swift in Sources */,
 				CF8B6B9B23CBCA280021B021 /* LoginPresenter.swift in Sources */,

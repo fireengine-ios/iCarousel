@@ -14,6 +14,7 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
+    private let photosAlbumService = PhotosAlbumService()
     
     private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
 
@@ -21,10 +22,6 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     var status: ItemStatus = .active
     
     override func viewIsReady() {
-        if let output = output as? FaceImagePhotosInteractorOutput,
-            let album = album {
-            output.didCountImage(album.imageCount ?? 0)
-        }
     }
     
     func updateCoverPhotoIfNeeded() {
@@ -59,19 +56,34 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
 // MARK: - FaceImagePhotosInteractorInput
 
 extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
-    
-    func loadItem(_ item: BaseDataSourceItem) {
-        guard let item = item as? Item, item.fileType.isFaceImageType, let id = item.id else {
-            return
-        }
-        
-        let successHandler: AlbumOperationResponse = { [weak self] album in
+    func getAlbumItemCount() {
+        guard let album = album else { return }
+
+        let successHandler: AlbumItemCountResponse = { [weak self] album in
             DispatchQueue.main.async {
                 if let output = self?.output as? FaceImagePhotosInteractorOutput,
                     let count = album.imageCount{
                     output.didCountImage(count)
                 }
-                
+            }
+        }
+
+        let failHandler: FailResponse = { error in
+            debugLog("getAlbumItemCount operation has failed")
+        }
+
+        photosAlbumService.getAlbumItemCount(parameters: GetAlbumItemCount(albumUUID: album.uuid), success: successHandler, fail: failHandler)
+    }
+    
+    func loadItem(_ item: BaseDataSourceItem) {
+        guard let item = item as? Item, item.fileType.isFaceImageType, let id = item.id else {
+            return
+        }
+
+        getAlbumItemCount()
+        
+        let successHandler: AlbumOperationResponse = { [weak self] album in
+            DispatchQueue.main.async {
                 self?.output.asyncOperationSuccess()
             }
         }
