@@ -286,6 +286,14 @@ final class FileInfoView: UIView, FromNib {
         sharingInfoView.isHidden = !needShow
 
         fileDescriptionView.fileDescription = sharingInfo.metadata?.fileDescription
+        if let latitude = sharingInfo.metadata?.latitude,
+           let longitude = sharingInfo.metadata?.longitude {
+            let item = WrapData(privateShareFileInfo: sharingInfo)
+            locationView.setLocation(latitude: latitude, longitude: longitude, item: item)
+            locationView.isHidden = false
+        } else {
+            locationView.isHidden = true
+        }
 
         output.didUpdateSharingInfo(sharingInfo)
     }
