@@ -8967,6 +8967,7 @@
 		07D0593926F9BE4C005315E2 /* ResetPasswordOTPInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPInitializer.swift; sourceTree = "<group>"; };
 		07D0593E26F9BE83005315E2 /* ResetPasswordOTPConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPConfigurator.swift; sourceTree = "<group>"; };
 		07D0594326F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPPresenter.swift; sourceTree = "<group>"; };
+		07D42101274E487600061EA2 /* LifeBoxModel 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 7.xcdatamodel"; sourceTree = "<group>"; };
 		07F148DB3DB2A1D9676FE239 /* SelectNameViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameViewOutput.swift; sourceTree = "<group>"; };
 		07FBA20426E0BBA800ED4132 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		07FBA20726E0BBB100ED4132 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
@@ -33648,6 +33649,7 @@
 		8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				07D42101274E487600061EA2 /* LifeBoxModel 7.xcdatamodel */,
 				070E96452742993A00CFED55 /* LifeBoxModel 6.xcdatamodel */,
 				989FDC152419091100F2F7D2 /* LifeBoxModel 5.xcdatamodel */,
 				030480DC23AA0475006DC316 /* LifeBoxModel 4.xcdatamodel */,
@@ -33655,7 +33657,7 @@
 				8C4780A1228D7BD4003EE471 /* LifeBoxModel.xcdatamodel */,
 				8C4780A2228D7BD4003EE471 /* LifeBoxModel 3.xcdatamodel */,
 			);
-			currentVersion = 070E96452742993A00CFED55 /* LifeBoxModel 6.xcdatamodel */;
+			currentVersion = 07D42101274E487600061EA2 /* LifeBoxModel 7.xcdatamodel */;
 			path = LifeBoxModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -182,8 +182,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         isVideoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool ?? false
         specialFolderMeta = aDecoder.decodeObject(forKey: SearchJsonKey.specialFolderMeta) as? String
         fileDescription = aDecoder.decodeObject(forKey: SearchJsonKey.Description) as? String
-        latitude = aDecoder.decodeDouble(forKey: SearchJsonKey.Latitude)
-        longitude = aDecoder.decodeDouble(forKey: SearchJsonKey.Longitude)
+        latitude = (aDecoder.decodeObject(forKey: SearchJsonKey.Latitude) as? NSNumber)?.doubleValue
+        longitude = (aDecoder.decodeObject(forKey: SearchJsonKey.Longitude) as? NSNumber)?.doubleValue
 //        videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
     }
     
@@ -205,8 +205,13 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         aCoder.encode(isVideoSlideshow, forKey: SearchJsonKey.VideoSlideshow)
         aCoder.encode(specialFolderMeta, forKey: SearchJsonKey.specialFolderMeta)
         aCoder.encode(fileDescription, forKey:  SearchJsonKey.Description)
-        aCoder.encode(latitude, forKey: SearchJsonKey.Latitude)
-        aCoder.encode(longitude, forKey: SearchJsonKey.Longitude)
+        if let latitude = latitude {
+            aCoder.encode(NSNumber(value: latitude), forKey: SearchJsonKey.Latitude)
+        }
+        if let longitude = longitude {
+            aCoder.encode(NSNumber(value: longitude), forKey: SearchJsonKey.Longitude)
+        }
+
 //        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
     }
     
