@@ -101,8 +101,10 @@ class LatestUpladsCard: BaseCardView {
     
     override func viewWillShow() {
         super.viewWillShow()
-        
-        collectionView.reloadData()
+
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     @IBAction func onViewRecentActivitiesButton() {
