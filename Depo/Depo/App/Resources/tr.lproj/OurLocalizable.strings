@@ -1887,7 +1887,7 @@
 "profile_recovery_mail" = "Kurtarma E-postası";
 "profile_recovery_mail_desc" = "Kurtarma e-postası şifreni unuttuğunda doğrulaman için kullanılır";
 "profile_recovery_mail_hint" = "Henüz kurtarma e-postası girilmemiş";
-"profile_mail_verified" = "Doğrulanmış";
+"profile_mail_verified" = "Doğrulandı";
 "profile_verify" = "Doğrula";
 "masterpass_quota_package_cancel" = "Paketini iptal etmek için www.mylifebox.com adresini ziyaret edebilirsin.";
 "profile_recovery_email_empty" = "Kurtarma e-postası boş";
@@ -1914,7 +1914,7 @@
 "masterpass_feature_package_cancel" = "Paketini iptal etmek için www.mylifebox.com adresini ziyaret edebilirsin.";
 "forgotMyPassword_password_complete" = "Tamam";
 "forgotMyPassword_reset_success_message" = "Şifre yenileme işleminiz başarıyla tamamlandı.";
-"forgotMyPassword_account_not_found" = "Hesap bulunamadı";
+"forgotMyPassword_account_not_found" = "Hesap bulunamadı.";
 "forgotMyPassword_SQ_invalid_answer" = "Güvenlik sorusu cevabın hatalı, lütfen tekrar dene.";
 
 /*Photo/Video File Description*/
@@ -1941,3 +1941,5 @@
 "change_album_cover_snackbar_text" = "Kapak fotoğrafı başarıyla güncellendi.";
 "change_album_cover_error_text" = "Kapak fotoğrafı değişimi sırasında bir hata oluştu.";
 "change_album_cover_set_photo" = "Albüm kapağı olarak kullan";
+"location_file_info" = "Konum";
+"private_share_empty_list_error" = "Kullanıcı listesi boş olamaz veya kendi hesabınızla paylaşım yapılamaz.";

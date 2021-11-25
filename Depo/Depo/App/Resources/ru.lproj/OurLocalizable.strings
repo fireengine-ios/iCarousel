@@ -1910,7 +1910,7 @@
 "masterpass_feature_package_cancel" = "Чтобы отменить пакет, посетите сайт www.mylifebox.com";
 "forgotMyPassword_password_complete" = "Хорошо";
 "forgotMyPassword_reset_success_message" = "Смена пароля завершена успешно.";
-"forgotMyPassword_account_not_found" = "Ваш аккаунт не найден";
+"forgotMyPassword_account_not_found" = "Ваш аккаунт не найден.";
 "forgotMyPassword_SQ_invalid_answer" = "Неверный ответ на контрольный вопрос, пожалуйста, попробуйте еще раз.";
 
 /*Photo/Video File Description*/
@@ -1937,3 +1937,5 @@
 "change_album_cover_snackbar_text" = "Обложка альбома успешно изменена.";
 "change_album_cover_error_text" = "Произошла ошибка при смене обложки.";
 "change_album_cover_set_photo" = "Использовать как обложку альбома";
+"location_file_info" = "положение";
+"private_share_empty_list_error" = "";

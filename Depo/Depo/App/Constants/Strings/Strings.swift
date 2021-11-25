@@ -14,6 +14,9 @@ func localized(_ key: Strings) -> String {
 
 enum Strings: String, Localizable {
 
+    // MARK: - Private Share
+    case privateShareEmptyListError = "private_share_empty_list_error"
+
     // MARK: - Profile
     case profileRecoveryMail                        = "profile_recovery_mail"
     case profileRecoveryMailDescription             = "profile_recovery_mail_desc"
