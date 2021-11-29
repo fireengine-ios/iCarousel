@@ -224,6 +224,7 @@ final class FileInfoView: UIView, FromNib {
     }
     
     private func resetUI() {
+        scrollView.setContentOffset(.zero, animated: false)
         fileNameView.title = TextConstants.fileInfoFileNameTitle
         fileInfoView.reset()
         peopleView.reset()
