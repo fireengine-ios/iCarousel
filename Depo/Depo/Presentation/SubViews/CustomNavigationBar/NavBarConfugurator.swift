@@ -27,6 +27,8 @@ class NavigationBarList {
     
     let gift: UIBarButtonItem
 
+    let newAlbum: UIBarButtonItem
+
     init() {
         settings = UIBarButtonItem(image: UIImage(named: TextConstants.cogBtnImgName),
                                    style: .plain,
@@ -72,6 +74,13 @@ class NavigationBarList {
         gift.setBackgroundImage(UIImage(named: TextConstants.giftButtonName), for: .normal, barMetrics: .default)
         gift.setBackgroundImage(UIImage(named: TextConstants.giftButtonName)?.mask(with: .gray), for: .selected, barMetrics: .default)
         gift.accessibilityLabel = TextConstants.accessibilityGift
+
+        newAlbum = UIBarButtonItem(image: UIImage(),
+                               style: .plain,
+                               target: nil,
+                               action: nil)
+        newAlbum.setBackgroundImage(UIImage(named: TextConstants.newAlbumBtnImgName), for: .normal, barMetrics: .default)
+        newAlbum.accessibilityLabel = TextConstants.createAlbum
         
         
         // upload 

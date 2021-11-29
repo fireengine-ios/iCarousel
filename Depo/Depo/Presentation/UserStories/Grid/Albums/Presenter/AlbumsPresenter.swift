@@ -114,12 +114,8 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
 extension AlbumsPresenter: SelectNameModuleOutput {
     func didCreateAlbum(item: AlbumItem) {
-        if let interact = interactor as? AlbumsInteractor {
-            if item.readOnly == true {
-                UIApplication.showErrorAlert(message: TextConstants.uploadVideoToReadOnlyAlbumError)
-            } else {
-                interact.onAddPhotosToAlbum(selectedAlbumUUID: item.uuid)
-            }
+        if item.readOnly == true {
+            UIApplication.showErrorAlert(message: TextConstants.uploadVideoToReadOnlyAlbumError)
         }
     }
 }
