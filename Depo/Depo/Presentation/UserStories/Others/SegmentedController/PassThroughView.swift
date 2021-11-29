@@ -9,6 +9,7 @@
 import UIKit
 
 protocol PassThroughViewDelegate: AnyObject {
+    var sheetScrollView: UIScrollView? { get }
     func handlePan(recognizer: UIPanGestureRecognizer)
     func handleSwipe(recognizer: UISwipeGestureRecognizer)
     func tapGesture(recognizer: UITapGestureRecognizer)
@@ -132,5 +133,27 @@ extension PassThroughView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         /// handle right-left swipes first
         return otherGestureRecognizer is UISwipeGestureRecognizer && gestureRecognizer is UIPanGestureRecognizer
+    }
+
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let scrollView = delegate?.sheetScrollView else {
+            return super.gestureRecognizerShouldBegin(gestureRecognizer)
+        }
+
+        if gestureRecognizer == scrollView.panGestureRecognizer {
+            let sheetState = getTopViewController()?.getBottomDetailViewState()
+            if sheetState == .full {
+                let velocity = scrollView.panGestureRecognizer.velocity(in: scrollView)
+                let isScrollingUp = velocity.y > 0
+                if isScrollingUp && scrollView.contentOffset.y <= 0 {
+                    return false
+                }
+                return true
+            }
+
+            return false
+        }
+
+        return super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
 }
