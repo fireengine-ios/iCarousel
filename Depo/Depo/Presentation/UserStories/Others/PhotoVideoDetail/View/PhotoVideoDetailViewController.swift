@@ -35,7 +35,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var hideTreeDotButton = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
-    
+
     private var isFullScreen = false {
         didSet {
             ///  ANIMATION
@@ -62,9 +62,16 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
+            setStatusBarHiddenForLandscapeIfNeed(isFullScreen && !isBottomViewOpen)
             
             bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
+        }
+    }
+
+    private var isBottomViewOpen = false {
+        didSet {
+            setStatusBarHiddenForLandscapeIfNeed(isFullScreen && !isBottomViewOpen)
         }
     }
     
@@ -385,6 +392,7 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
     
     func setIsFullScreenState(_ isFullScreen: Bool) {
         self.isFullScreen = isFullScreen
+        self.isBottomViewOpen = isFullScreen
     }
     
     func setSelectedIndex(_ selectedIndex: Int) {
