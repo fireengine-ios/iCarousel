@@ -50,6 +50,7 @@ final class FileInfoView: UIView, FromNib {
     private lazy var fileDescriptionView = FileDescriptionView.with(delegate: self)
     private lazy var fileInfoView = FileMetaInfoView.view()
     private lazy var peopleView = FileInfoPeopleView.with(delegate: self)
+    private lazy var locationView = FileLocationView.view()
     private lazy var sharingInfoView = FileInfoShareView.with(delegate: self)
     
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
@@ -83,7 +84,7 @@ final class FileInfoView: UIView, FromNib {
         resetUI()
         fileNameView.name = object.name
         peopleView.fileType = object.fileType
-        
+
         if let obj = object as? WrapData {
             fileDescriptionView.fileDescription = obj.metaData?.fileDescription
             peopleView.status = obj.status
@@ -97,7 +98,7 @@ final class FileInfoView: UIView, FromNib {
         if let createdDate = object.creationDate, !object.isLocalItem {
             fileInfoView.set(createdDate: createdDate)
         }
-        
+
         updateShareInfo()
         
         setupEditableState(for: object, projectId: object.projectId, permissions: nil)
@@ -144,6 +145,14 @@ final class FileInfoView: UIView, FromNib {
         if wrapData.fileType == .video {
             peopleView.isHidden = true
         }
+
+        if let latitude = wrapData.metaData?.latitude,
+           let longitude = wrapData.metaData?.longitude {
+            locationView.setLocation(latitude: latitude, longitude: longitude, item: wrapData)
+            locationView.isHidden = false
+        } else {
+            locationView.isHidden = true
+        }
     }
         
     func setWith(albumItem: AlbumItem) {
@@ -177,9 +186,10 @@ final class FileInfoView: UIView, FromNib {
     
     private func setup() {
         layer.masksToBounds = true
-        let views: [UIView] = [fileNameView, fileDescriptionView, fileInfoView, sharingInfoView, peopleView]
+        let views: [UIView] = [fileNameView, fileDescriptionView, fileInfoView, sharingInfoView, peopleView, locationView]
         
         sharingInfoView.isHidden = true
+        locationView.isHidden = true
         
         views.forEach { contentView.addArrangedSubview($0) }
         
@@ -210,6 +220,7 @@ final class FileInfoView: UIView, FromNib {
         fileInfoView.reset()
         peopleView.reset()
         sharingInfoView.isHidden = true
+        locationView.isHidden = true
     }
     
     @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {
@@ -271,10 +282,18 @@ final class FileInfoView: UIView, FromNib {
         if sharingInfoView.isHidden && needShow {
             analytics.trackScreen(.shareInfo)
         }
-        
+
         sharingInfoView.isHidden = !needShow
 
         fileDescriptionView.fileDescription = sharingInfo.metadata?.fileDescription
+        if let latitude = sharingInfo.metadata?.latitude,
+           let longitude = sharingInfo.metadata?.longitude {
+            let item = WrapData(privateShareFileInfo: sharingInfo)
+            locationView.setLocation(latitude: latitude, longitude: longitude, item: item)
+            locationView.isHidden = false
+        } else {
+            locationView.isHidden = true
+        }
 
         output.didUpdateSharingInfo(sharingInfo)
     }
