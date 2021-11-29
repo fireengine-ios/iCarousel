@@ -1908,7 +1908,7 @@
 "signup_password_rule_character_limit" = "Mínimo 6, máximo 16 caracteres";
 "signup_password_rule_upper_lower_numeric" = "Al menos 1 letra mayúscula, 1 letra minúscula y 1 número";
 "signup_password_rule_sequential_characters" = "caracteres no consecutivos";
-"profile_recovery_mail" = "Correo electrónico de recuperación";
+"profile_recovery_mail" = "Correo Electrónico de Recuperación";
 "profile_recovery_mail_desc" = "El correo electrónico de recuperación se usa para verificar cuándo olvidas tu contraseña";
 "profile_recovery_mail_hint" = "Aún no ingresaste una dirección de correo electrónico alternativa";
 "profile_mail_verified" = "Verificado";
@@ -1965,3 +1965,5 @@
 "change_album_cover_snackbar_text" = "La portada del álbum se cambió correctamente.";
 "change_album_cover_error_text" = "Ocurrió un error al cambiar la foto de portada.";
 "change_album_cover_set_photo" = "Usar como portada del álbum";
+"location_file_info" = "Ubicación";
+"private_share_empty_list_error" = "";

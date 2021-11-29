@@ -2174,7 +2174,7 @@ Please check I have understood the intended command here*/
 "signup_password_rule_character_limit" = "Minimum 6, maximum 16 caractères";
 "signup_password_rule_upper_lower_numeric" = "Au moins 1 lettre majuscule, 1 lettre minuscule et 1 chiffre";
 "signup_password_rule_sequential_characters" = "caractères non consécutifs";
-"profile_recovery_mail" = "E-mail de récupération";
+"profile_recovery_mail" = "E-mail de Récupération";
 "profile_recovery_mail_desc" = "E-mail de récupération est utilisé pour vérifier lorsque vous oubliez votre mot de passe";
 "profile_recovery_mail_hint" = "Aucun e-mail de récupération saisi pour le moment";
 "profile_mail_verified" = "Vérifié";
@@ -2204,7 +2204,7 @@ Please check I have understood the intended command here*/
 "masterpass_feature_package_cancel" = "Pour annuler votre paquet, veuillez visiter www.mylifebox.com";
 "forgotMyPassword_password_complete" = "D'accord";
 "forgotMyPassword_reset_success_message" = "La réinitialisation de votre mot de passe a été effectuée avec succès.";
-"forgotMyPassword_account_not_found" = "Compte non trouvé";
+"forgotMyPassword_account_not_found" = "Compte non trouvé.";
 "forgotMyPassword_SQ_invalid_answer" = "La réponse à votre question de sécurité est incorrecte, veuillez réessayer.";
 
 /*Photo/Video File Description*/
@@ -2231,3 +2231,5 @@ Please check I have understood the intended command here*/
 "change_album_cover_snackbar_text" = "La couverture de l'album a été modifiée avec succès.";
 "change_album_cover_error_text" = "Une erreur s'est produite lors du changement de la photo de couverture.";
 "change_album_cover_set_photo" = "Utiliser comme couverture d'album";
+"location_file_info" = "Emplacement";
+"private_share_empty_list_error" = "";

@@ -1925,3 +1925,5 @@
 "change_album_cover_snackbar_text" = "Обкладинку альбому успішно змінено.";
 "change_album_cover_error_text" = "Під час зміни фотографії обкладинки сталася помилка.";
 "change_album_cover_set_photo" = "Використовувати як обкладинку альбому";
+"location_file_info" = "Розташування";
+"private_share_empty_list_error" = "";

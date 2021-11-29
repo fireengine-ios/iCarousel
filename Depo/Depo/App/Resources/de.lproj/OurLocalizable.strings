@@ -1896,7 +1896,7 @@
 "masterpass_feature_package_cancel" = "Um Ihr Paket zu stornieren, besuchen Sie bitte www.mylifebox.com";
 "forgotMyPassword_password_complete" = "OK";
 "forgotMyPassword_reset_success_message" = "Ihr Passwort-Reset wurde erfolgreich abgeschlossen.";
-"forgotMyPassword_account_not_found" = "Konto wurde nicht gefunden";
+"forgotMyPassword_account_not_found" = "Konto wurde nicht gefunden.";
 "forgotMyPassword_SQ_invalid_answer" = "Ihre Antwort auf die Sicherheitsfrage ist falsch. Bitte versuchen Sie es erneut.";
 
 /*Photo/Video File Description*/
@@ -1923,3 +1923,5 @@
 "change_album_cover_snackbar_text" = "Albumcover erfolgreich geändert.";
 "change_album_cover_error_text" = "Beim Ändern des Titelbilds ist ein Fehler aufgetreten.";
 "change_album_cover_set_photo" = "Als Albumcover verwenden";
+"location_file_info" = "Ort";
+"private_share_empty_list_error" = "";

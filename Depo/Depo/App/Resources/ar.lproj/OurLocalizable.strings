@@ -1935,3 +1935,5 @@
 "change_album_cover_snackbar_text" = "تم تغيير غلاف الألبوم بنجاح.";
 "change_album_cover_error_text" = "حدث خطأ أثناء تغيير صورة الغلاف.";
 "change_album_cover_set_photo" = "استخدم كغلاف للألبوم";
+"location_file_info" = "موقعك";
+"private_share_empty_list_error" = "";
