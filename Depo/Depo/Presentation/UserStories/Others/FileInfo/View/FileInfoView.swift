@@ -27,6 +27,10 @@ final class FileInfoView: UIView, FromNib {
 
     var output: PhotoInfoViewControllerOutput!
 
+    @IBOutlet weak var scrollView: UIScrollView! {
+        willSet { newValue?.delegate = self }
+    }
+
     // MARK: IBOutlet
     
     @IBOutlet private weak var view: UIView!
@@ -39,6 +43,8 @@ final class FileInfoView: UIView, FromNib {
     
     @IBOutlet private weak var contentView: UIStackView!
     
+    @IBOutlet private weak var topSeparatorView: UIView!
+
     private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerHandler))
         return gesture
@@ -154,7 +160,7 @@ final class FileInfoView: UIView, FromNib {
             locationView.isHidden = true
         }
     }
-        
+
     func setWith(albumItem: AlbumItem) {
         fileNameView.title = TextConstants.fileInfoAlbumNameTitle
         fileNameView.isEditable = albumItem.readOnly ?? false
@@ -192,6 +198,8 @@ final class FileInfoView: UIView, FromNib {
         locationView.isHidden = true
         
         views.forEach { contentView.addArrangedSubview($0) }
+
+        topSeparatorView.isHidden = true
         
         tapGestureRecognizer.delegate = self
         addGestureRecognizer(tapGestureRecognizer)
@@ -309,6 +317,13 @@ final class FileInfoView: UIView, FromNib {
     }
 }
 
+extension FileInfoView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == self.scrollView else { return }
+        topSeparatorView.isHidden = scrollView.contentOffset.y <= 0
+    }
+}
+
 extension FileInfoView: UIGestureRecognizerDelegate {
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let gestureView = gestureRecognizer.view {
@@ -414,5 +429,16 @@ extension FileInfoView: ItemOperationManagerViewProtocol {
         if uuid == object?.uuid, sharingInfoView.info?.members?.contains(contact) == true {
             updateShareInfo()
         }
+    }
+}
+
+class FileInfoScrollView: UIScrollView {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panGestureRecognizer,
+           let passthroughView = window?.subviews.first(where: { $0 is PassThroughView }) {
+            return passthroughView.gestureRecognizerShouldBegin(gestureRecognizer)
+        }
+
+        return super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
 }

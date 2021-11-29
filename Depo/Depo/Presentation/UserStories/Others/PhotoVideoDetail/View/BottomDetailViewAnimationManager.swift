@@ -132,7 +132,11 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
 }
 
 extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
-    
+
+    var sheetScrollView: UIScrollView? {
+        return managedView.scrollView
+    }
+
     func tapGesture(recognizer: UITapGestureRecognizer) {
         closeDetailView()
     }
@@ -179,7 +183,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
                 return
             }
             
-            managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY
+            managedView.frame.origin.y = max(0, collectionView.frame.maxY - imageMaxY)
             
         case .ended:
             panGestureDirectionState = .undefined
@@ -235,6 +239,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             setExpandedState()
         } else if managedView.frame.origin.y < detailViewExpandedPositionY {
             setFullState()
+            managedView.scrollView.flashScrollIndicators()
         } else if expandedRange.contains(managedView.frame.origin.y) {
             setExpandedState()
         } else if managedView.frame.origin.y > view.frame.height {
