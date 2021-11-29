@@ -95,6 +95,10 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     private lazy var imageMaxY: CGFloat = {
         return UIScreen.main.bounds.height - getCellMaxY()
     }()
+
+    private var statusBarHeight: CGFloat {
+        collectionView.window?.safeAreaInsets.top ?? 0
+    }
     
     private var detailViewIsHidden = true {
         didSet {
@@ -183,7 +187,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
                 return
             }
             
-            managedView.frame.origin.y = max(0, collectionView.frame.maxY - imageMaxY)
+            managedView.frame.origin.y = max(statusBarHeight, collectionView.frame.maxY - imageMaxY)
             
         case .ended:
             panGestureDirectionState = .undefined
@@ -311,7 +315,7 @@ extension BottomDetailViewAnimationManager {
         view.layoutIfNeeded()
         let collectionViewCellMaxY = getCellMaxY()
         viewState = .full
-        managedView.frame.origin.y = .zero
+        managedView.frame.origin.y = statusBarHeight
         collectionView.frame.origin.y = -collectionViewCellMaxY + imageMaxY
         setupDetailViewAlpha(isHidden: false)
         isFullScreen = true

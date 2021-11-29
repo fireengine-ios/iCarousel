@@ -62,7 +62,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
-            setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
             
             bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
@@ -404,12 +403,21 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
         guard let topViewController = RouterVC().getViewControllerForPresent(), bottomDetailView == nil else {
             return
         }
-        
+
         let fileInfoView = FileInfoView(frame: CGRect(origin: CGPoint(x: .zero, y: view.frame.height), size: view.frame.size))
         output.configureFileInfo(fileInfoView)
         topViewController.view.addSubview(fileInfoView)
         bottomDetailView = fileInfoView
         setupBottomDetailViewManager()
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        guard let fileInfoView = bottomDetailView else { return }
+
+        var frame = fileInfoView.frame
+        frame.size.height = view.frame.size.height - view.safeAreaInsets.top
+        fileInfoView.frame = frame
     }
     
     func pullToDownEffect() {
