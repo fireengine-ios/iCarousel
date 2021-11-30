@@ -116,9 +116,9 @@ struct SharedFileInfoMetaData: Codable {
         imageOrientation = JSON(try container.decodeIfPresent(String.self, forKey: .imageOrientation) ?? "").int
         
         imageDateTime = JSON(try container.decodeIfPresent(String.self, forKey: .imageDateTime) ?? "").date
-        
-        latitude = JSON(try container.decodeIfPresent(String.self, forKey: .latitude) ?? "").double
-        longitude = JSON(try container.decodeIfPresent(String.self, forKey: .longitude) ?? "").double
+
+        latitude = Double(try container.decodeIfPresent(String.self, forKey: .latitude) ?? "")
+        longitude = Double(try container.decodeIfPresent(String.self, forKey: .longitude) ?? "")
     }
 }
 

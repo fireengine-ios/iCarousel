@@ -1945,8 +1945,8 @@
 "forgotMyPassword_challange2_body" = "To reset your password, which verification method would you like to continue with?";
 "masterpass_feature_package_cancel" = "You can visit www.mylifebox.com to cancel your package.";
 "forgotMyPassword_password_complete" = "OK";
-"forgotMyPassword_reset_success_message" = "Şifre yenileme işleminiz başarıyla tamamlandı.";
-"forgotMyPassword_account_not_found" = "Your account is not found";
+"forgotMyPassword_reset_success_message" = "Password changed successfully";
+"forgotMyPassword_account_not_found" = "Your account is not found.";
 "forgotMyPassword_SQ_invalid_answer" = "Your security question answer is wrong, please try again.";
 
 /*Photo/Video File Description*/
@@ -1973,3 +1973,5 @@
 "change_album_cover_snackbar_text" = "Album cover changed successfully.";
 "change_album_cover_error_text" = "Error occurred while changing cover photo.";
 "change_album_cover_set_photo" = "Use as album cover";
+"location_file_info" = "Location";
+"private_share_empty_list_error" = "Kullanıcı listesi boş olamaz veya kendi hesabınızla paylaşım yapılamaz.";

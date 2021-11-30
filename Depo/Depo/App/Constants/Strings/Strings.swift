@@ -14,6 +14,9 @@ func localized(_ key: Strings) -> String {
 
 enum Strings: String, Localizable {
 
+    // MARK: - Private Share
+    case privateShareEmptyListError = "private_share_empty_list_error"
+
     // MARK: - Profile
     case profileRecoveryMail                        = "profile_recovery_mail"
     case profileRecoveryMailDescription             = "profile_recovery_mail_desc"
@@ -76,4 +79,7 @@ enum Strings: String, Localizable {
     case changeAlbumCoverSuccess  = "change_album_cover_snackbar_text"
     case changeAlbumCoverFail     = "change_album_cover_error_text"
     case changeAlbumCoverSetPhoto = "change_album_cover_set_photo"
+
+    // MARK: - File Info
+    case fileInfoLocation = "location_file_info"
 }

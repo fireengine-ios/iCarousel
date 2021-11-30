@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="backgroundView" destination="IrY-vW-8ll" id="94H-Ti-uwl"/>
                 <outlet property="contentView" destination="lOt-sR-o8f" id="gko-AA-pFc"/>
+                <outlet property="scrollView" destination="F6w-4k-VEj" id="cb2-rZ-RIr"/>
+                <outlet property="topSeparatorView" destination="fNR-ob-dMl" id="2ig-84-BsR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="4Iw-YI-xRo"/>
             </connections>
         </placeholder>
@@ -35,29 +37,40 @@
                                         <constraint firstAttribute="height" constant="3" id="MR2-CY-nTP"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="752" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="220.5" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="lOt-sR-o8f">
-                                    <rect key="frame" x="0.0" y="30" width="414" height="220.5"/>
-                                </stackView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1X-Yn-1g6">
-                                    <rect key="frame" x="0.0" y="250.5" width="414" height="645.5"/>
-                                    <color key="backgroundColor" name="primaryBackground"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNR-ob-dMl">
+                                    <rect key="frame" x="0.0" y="38" width="414" height="1"/>
+                                    <color key="backgroundColor" name="itemSeperator"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" id="TtL-yU-TLa"/>
+                                        <constraint firstAttribute="height" constant="1" id="gj5-yf-R7J"/>
                                     </constraints>
                                 </view>
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6w-4k-VEj" customClass="FileInfoScrollView" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="39" width="414" height="857"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="752" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="220.5" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="lOt-sR-o8f">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="220.5"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="lOt-sR-o8f" firstAttribute="top" secondItem="F6w-4k-VEj" secondAttribute="top" id="5QW-SJ-JhW"/>
+                                        <constraint firstItem="lOt-sR-o8f" firstAttribute="width" secondItem="F6w-4k-VEj" secondAttribute="width" id="G3Z-pS-WtC"/>
+                                        <constraint firstItem="lOt-sR-o8f" firstAttribute="leading" secondItem="F6w-4k-VEj" secondAttribute="leading" id="XG5-4A-ogS"/>
+                                        <constraint firstAttribute="bottom" secondItem="lOt-sR-o8f" secondAttribute="bottom" id="ZA3-Ku-9Ja"/>
+                                        <constraint firstAttribute="trailing" secondItem="lOt-sR-o8f" secondAttribute="trailing" id="xqu-at-ljD"/>
+                                    </constraints>
+                                </scrollView>
                             </subviews>
                             <color key="backgroundColor" name="primaryBackground"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="fNR-ob-dMl" secondAttribute="trailing" id="6ki-58-sdp"/>
                                 <constraint firstItem="goP-up-qjq" firstAttribute="top" secondItem="IrY-vW-8ll" secondAttribute="top" constant="16" id="831-86-U6w"/>
-                                <constraint firstAttribute="trailing" secondItem="lOt-sR-o8f" secondAttribute="trailing" id="Dv1-WN-AcT"/>
-                                <constraint firstAttribute="trailing" secondItem="J1X-Yn-1g6" secondAttribute="trailing" id="HkB-IA-0T9"/>
-                                <constraint firstItem="J1X-Yn-1g6" firstAttribute="leading" secondItem="IrY-vW-8ll" secondAttribute="leading" id="IMv-Dr-E8G"/>
-                                <constraint firstItem="lOt-sR-o8f" firstAttribute="leading" secondItem="IrY-vW-8ll" secondAttribute="leading" id="JVK-s0-bRy"/>
-                                <constraint firstItem="lOt-sR-o8f" firstAttribute="top" secondItem="IrY-vW-8ll" secondAttribute="top" constant="30" id="Wmk-nQ-yby"/>
+                                <constraint firstItem="F6w-4k-VEj" firstAttribute="top" secondItem="fNR-ob-dMl" secondAttribute="bottom" id="9Zq-iu-HQ3"/>
+                                <constraint firstAttribute="bottom" secondItem="F6w-4k-VEj" secondAttribute="bottom" id="Ade-e3-1yD"/>
+                                <constraint firstItem="F6w-4k-VEj" firstAttribute="top" secondItem="goP-up-qjq" secondAttribute="bottom" constant="20" id="QhI-KY-eiA"/>
+                                <constraint firstItem="fNR-ob-dMl" firstAttribute="leading" secondItem="IrY-vW-8ll" secondAttribute="leading" id="ZhF-ou-7iR"/>
+                                <constraint firstAttribute="trailing" secondItem="F6w-4k-VEj" secondAttribute="trailing" id="cer-Mg-Kgw"/>
                                 <constraint firstItem="goP-up-qjq" firstAttribute="centerX" secondItem="IrY-vW-8ll" secondAttribute="centerX" id="dkX-iX-ps1"/>
-                                <constraint firstItem="lOt-sR-o8f" firstAttribute="bottom" secondItem="J1X-Yn-1g6" secondAttribute="top" id="gXK-3C-K9i"/>
-                                <constraint firstAttribute="height" priority="250" constant="450" id="x6K-dc-pJp"/>
-                                <constraint firstAttribute="bottom" secondItem="J1X-Yn-1g6" secondAttribute="bottom" id="y0p-yi-Mqi"/>
+                                <constraint firstItem="F6w-4k-VEj" firstAttribute="leading" secondItem="IrY-vW-8ll" secondAttribute="leading" id="re0-Ng-5hm"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -82,6 +95,9 @@
         </view>
     </objects>
     <resources>
+        <namedColor name="itemSeperator">
+            <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

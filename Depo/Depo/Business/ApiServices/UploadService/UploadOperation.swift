@@ -516,6 +516,12 @@ final class UploadOperation: Operation {
                 self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
                 self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
                 self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+                // set location info to PHAsset's location if if no info were returned from uploadNotify
+                if self.outputItem?.metaData?.latitude == nil {
+                    self.outputItem?.metaData?.latitude = self.inputItem.metaData?.latitude
+                    self.outputItem?.metaData?.longitude = self.inputItem.metaData?.longitude
+                }
+
                 
                 //TODO: remove this in the future
                 if let size = (parameters as? SimpleUpload)?.fileSize,

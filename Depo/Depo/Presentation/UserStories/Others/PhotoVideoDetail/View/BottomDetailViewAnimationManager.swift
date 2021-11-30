@@ -95,6 +95,10 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     private lazy var imageMaxY: CGFloat = {
         return UIScreen.main.bounds.height - getCellMaxY()
     }()
+
+    private var statusBarHeight: CGFloat {
+        collectionView.window?.safeAreaInsets.top ?? 0
+    }
     
     private var detailViewIsHidden = true {
         didSet {
@@ -132,7 +136,11 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
 }
 
 extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
-    
+
+    var sheetScrollView: UIScrollView? {
+        return managedView.scrollView
+    }
+
     func tapGesture(recognizer: UITapGestureRecognizer) {
         closeDetailView()
     }
@@ -179,7 +187,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
                 return
             }
             
-            managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY
+            managedView.frame.origin.y = max(statusBarHeight, collectionView.frame.maxY - imageMaxY)
             
         case .ended:
             panGestureDirectionState = .undefined
@@ -235,6 +243,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             setExpandedState()
         } else if managedView.frame.origin.y < detailViewExpandedPositionY {
             setFullState()
+            managedView.scrollView.flashScrollIndicators()
         } else if expandedRange.contains(managedView.frame.origin.y) {
             setExpandedState()
         } else if managedView.frame.origin.y > view.frame.height {
@@ -306,7 +315,7 @@ extension BottomDetailViewAnimationManager {
         view.layoutIfNeeded()
         let collectionViewCellMaxY = getCellMaxY()
         viewState = .full
-        managedView.frame.origin.y = .zero
+        managedView.frame.origin.y = statusBarHeight
         collectionView.frame.origin.y = -collectionViewCellMaxY + imageMaxY
         setupDetailViewAlpha(isHidden: false)
         isFullScreen = true
