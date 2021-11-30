@@ -25,7 +25,6 @@ def core_pods
   pod 'SDWebImage', '~> 4'
   pod 'GoogleConversionTracking', '~> 3'
   pod 'GoogleTagManager', '~> 7'
-  pod 'Adjust', '~> 4'
   #pod 'ActiveLabel'
 
   #Keyboard
