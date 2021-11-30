@@ -1139,6 +1139,7 @@ struct TextConstants {
     static let searchBtnImgName = "search"
     static let deleteBtnImgName = "DeleteShareButton"
     static let giftButtonName = "campaignButton"
+    static let newAlbumBtnImgName = "newFolderButton"
     
     // MARK: - Navigation bar title names
     
