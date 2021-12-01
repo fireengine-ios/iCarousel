@@ -123,7 +123,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
         willSet {
             newValue.setTitle("", for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaBolFont(size: 16)
-            newValue.setTitleColor(ColorConstants.navy, for: .normal)
+            newValue.setTitleColor(AppColor.navyAndWhite.color, for: .normal)
         }
     }
     
