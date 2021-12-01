@@ -17,7 +17,7 @@ class CollectionViewCellForFaceImageAddName: BaseCollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         nameLabel.font = UIFont.TurkcellSaturaMedFont(size: 14)
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = AppColor.primaryBackground.color
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
