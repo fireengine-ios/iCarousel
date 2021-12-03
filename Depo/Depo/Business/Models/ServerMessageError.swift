@@ -63,6 +63,8 @@ extension ServerMessageError {
                 return TextConstants.temporaryErrorOccurredTryAgainLater
             case 4118:
                 return TextConstants.privateShareNumberOfItemsLimit
+            case 4109:
+                return localized(.privateShareEmptyListError)
             default:
                 return errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
             }

@@ -1908,30 +1908,32 @@
 "masterpass_feature_package_cancel" = "لإلغاء الباقة الخاصة بك، يرجى زيارة موقع\nwww.mylifebox.com";
 "forgotMyPassword_password_complete" = "تمام";
 "forgotMyPassword_reset_success_message" = "لقد تمت عملية إعادة تعيين كلمة المرور الخاصة بك بنجاح.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "لم يتم العثور على الحساب";
 "forgotMyPassword_SQ_invalid_answer" = "إجابة السؤال السري غير صحيحة ، يرجى المحاولة مرة أخرى";
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "وصف الملف";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "اِحذف حسابي";
+"DELETE_ACC_DESC" = "إذا قمت بحذف حساب؛ سوف يتم حذف الصور ومقاطع الفيديو وجهات الاتصال وجميع المحتويات والمعلومات بشكل دائم نهائيًا بعد 30 يومًا. لا يمكنك إعادة محتوياتك بعد هذه المدة. أما إذا قمت بتسجيل الدخول إلى حسابك في غضون 30 يومًا من الحذف نحن سوف نقوم تلقائيًا بإلغاء طلب حذف الحساب وأنت ستظل قادرًا على استخدام حسابك. وإذا كان هناك محتوى مخزن في حساب ليف بوكس الخاص بك قبل عملية حذف حسابك، نوصي لك بتحميل المحتوى الخاص بك قبل حذف حساب.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "هل أنت متأكد مِن أنك تريد حذف حسابك؟";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "من أجل عدم ضياع البيانات المهمة؛ تأكد من تحميل الصور ومقاطع الفيديو وجميع المحتويات التي قمت بتخزينها في حسابك قبل حذف حسابك!";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "بعد التصديق على حسابك عن طريق إدخال كلمة المرور الخاصة بك سوف يتم حذف حسابك نهائيًا. إذا كنت ترغب في إعادة تنشيط حساب ليف بوكس، يمكنك تسجيل الدخول باستخدام معلومات حسابك في غضون 30 يومًا من الحذف. وفي حالة لم تقم بتسجيل الدخول، يُحذف حسابك ومحتوياتك بعد نهاية هذه المدة.";
+"DELETE_ACC_INPUT_GSM" = "رقم الهاتف";
+"DELETE_ACC_INPUT_PASS" = "كلمة المرور";
+"DELETE_ACC_PASS_ERROR" = "رمز مرور خاطئ.";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "سيُحذف حسابك نهائيّا.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "إذا كنت ترغب في إعادة تنشيط حسابك ليف بوكس، يمكنك تسجيل الدخول بمعلومات حسابك في غضون 30 يومًا من الحذف. وإذا لم تقم بتسجيل الدخول، يُحذف حسابك ومحتواه بعد نهاية هذه المدة.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "لقد حذفت حسابك بنجاح";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**نحن آسفون على مغادرتك:**\n\n واعلم أننا سنواصل على محافظة محتوياتك لمدة 30 يومًا. فإذا قمت بتسجيل الدخول باستخدام معلومات حسابك خلال هذه المدة، فسيتم تنشيط حسابك من جديد. ويمكنك الاستمرار في استخدام حسابك دون إجراء أي تغييرات.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "حذف";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "إلغاء الأمر";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "متابعة";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "تأكيد";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "إغلاق";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
-"change_album_cover_set_photo" = "";
+"change_album_cover_snackbar_text" = "تم تغيير غلاف الألبوم بنجاح.";
+"change_album_cover_error_text" = "حدث خطأ أثناء تغيير صورة الغلاف.";
+"change_album_cover_set_photo" = "استخدم كغلاف للألبوم";
+"location_file_info" = "موقعك";
+"private_share_empty_list_error" = "";

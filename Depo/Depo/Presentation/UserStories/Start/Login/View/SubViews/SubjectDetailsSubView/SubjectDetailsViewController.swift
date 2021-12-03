@@ -50,8 +50,8 @@ final class SubjectDetailsViewController: BasePopUpController, NibInit {
     
     private func convertHtmlToAttributedString() {
         let font = UIFont.TurkcellSaturaFont(size: 15)
-        
-        let htmlText = "<span style=\"color:rgba(32,33,34,0.8); font-family: '\(font.familyName)'; font-size: \(font.pointSize)\">\(type?.localizedInfoHtml ?? "")</span>"
+        let htmlColor = AppColor.blackColor.color?.withAlphaComponent(0.8).toHexString()
+        let htmlText = "<span style=\"color:\(htmlColor ?? "rgba(32,33,34,0.8)"); font-family: '\(font.familyName)'; font-size: \(font.pointSize)\">\(type?.localizedInfoHtml ?? "")</span>"
         
         guard let htmlTextData = htmlText.data(using: .unicode, allowLossyConversion: false) else {
             assertionFailure()

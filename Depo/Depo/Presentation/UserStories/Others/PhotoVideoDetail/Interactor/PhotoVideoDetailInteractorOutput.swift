@@ -41,4 +41,7 @@ protocol PhotoVideoDetailInteractorOutput: AnyObject {
     func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool)
     
     func updateItem(_ item: WrapData)
+
+    @available(iOS 13.0, *)
+    func setCurrentActivityItemsConfiguration(_ config: UIActivityItemsConfiguration?)
 }

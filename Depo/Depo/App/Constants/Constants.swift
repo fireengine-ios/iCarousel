@@ -1139,6 +1139,7 @@ struct TextConstants {
     static let searchBtnImgName = "search"
     static let deleteBtnImgName = "DeleteShareButton"
     static let giftButtonName = "campaignButton"
+    static let newAlbumBtnImgName = "newFolderButton"
     
     // MARK: - Navigation bar title names
     
@@ -2240,8 +2241,4 @@ struct TextConstants {
 
     // MARK: - Photo/Video File Description
     static let photosVideosFileDescriptionTitle = NSLocalizedString("photo_video_detail_file_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
-    // MARK: - Change album cover photo
-    static let changeAlbumCoverSuccess = NSLocalizedString("change_album_cover_snackbar_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let changeAlbumCoverFail = NSLocalizedString("change_album_cover_error_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

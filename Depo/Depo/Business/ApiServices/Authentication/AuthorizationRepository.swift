@@ -96,8 +96,7 @@ extension AuthorizationRepositoryImp: RequestRetrier {
 //            return
 //        }
         
-        /// if accessToken is valid
-        guard response.statusCode == 401 else {
+        guard responseIsUnauthorized(response) else {
             completion(false, 0.0)
             return
         }
@@ -139,7 +138,22 @@ extension AuthorizationRepositoryImp: RequestRetrier {
             strongSelf.requestsToRetry.removeAll()
         }
     }
-    
+
+    private func responseIsUnauthorized(_ response: HTTPURLResponse) -> Bool {
+        // In several places, the app loads images from temporary URLs by removing
+        // the temp part (query params) and calling the URL with X-Auth-Token.
+        // In an expired token scenario, these URLs are responding with HTTP 403 instead of 401.
+        // Example URL:
+        // https://adeposw.turkcell.com.tr/v1/AUTH_.../CONTAINER_EXTENDED/...jpg
+
+        // This check will handle the case in question
+        if response.url?.absoluteString.contains("CONTAINER_EXTENDED") == true {
+            return response.statusCode == 403 || response.statusCode == 401
+        }
+
+        // Behave normally for other URLs
+        return response.statusCode == 401
+    }
     
     // MARK: - Refresh Tokens
     

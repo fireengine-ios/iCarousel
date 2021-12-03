@@ -40,5 +40,11 @@ public class MediaItemsMetaData: NSManagedObject {
         self.videoPreviewUrl = metaData.videoPreviewURL?.absoluteString
         self.isVideoSlideshow = metaData.isVideoSlideshow
         self.fileDescription = metaData.fileDescription
+        if let latitude = metaData.latitude {
+            self.latitude = NSNumber(value: latitude)
+        }
+        if let longitude = metaData.longitude {
+            self.longitude = NSNumber(value: longitude)
+        }
     }
 }

@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 protocol PhotoVideoDetailViewInput: AnyObject, ActivityIndicator, ErrorPresenter {
     
     var status: ItemStatus { get set }
@@ -55,4 +57,7 @@ protocol PhotoVideoDetailViewInput: AnyObject, ActivityIndicator, ErrorPresenter
     func updateItem(_ item: WrapData)
 
     func printSelected()
+
+    @available(iOS 13.0, *)
+    var activityItemsConfiguration: UIActivityItemsConfigurationReading? { get set }
 }

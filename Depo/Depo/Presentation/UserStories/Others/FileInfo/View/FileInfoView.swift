@@ -27,6 +27,10 @@ final class FileInfoView: UIView, FromNib {
 
     var output: PhotoInfoViewControllerOutput!
 
+    @IBOutlet weak var scrollView: UIScrollView! {
+        willSet { newValue?.delegate = self }
+    }
+
     // MARK: IBOutlet
     
     @IBOutlet private weak var view: UIView!
@@ -39,6 +43,8 @@ final class FileInfoView: UIView, FromNib {
     
     @IBOutlet private weak var contentView: UIStackView!
     
+    @IBOutlet private weak var topSeparatorView: UIView!
+
     private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerHandler))
         return gesture
@@ -50,6 +56,7 @@ final class FileInfoView: UIView, FromNib {
     private lazy var fileDescriptionView = FileDescriptionView.with(delegate: self)
     private lazy var fileInfoView = FileMetaInfoView.view()
     private lazy var peopleView = FileInfoPeopleView.with(delegate: self)
+    private lazy var locationView = FileLocationView.view()
     private lazy var sharingInfoView = FileInfoShareView.with(delegate: self)
     
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
@@ -83,7 +90,7 @@ final class FileInfoView: UIView, FromNib {
         resetUI()
         fileNameView.name = object.name
         peopleView.fileType = object.fileType
-        
+
         if let obj = object as? WrapData {
             fileDescriptionView.fileDescription = obj.metaData?.fileDescription
             peopleView.status = obj.status
@@ -97,7 +104,7 @@ final class FileInfoView: UIView, FromNib {
         if let createdDate = object.creationDate, !object.isLocalItem {
             fileInfoView.set(createdDate: createdDate)
         }
-        
+
         updateShareInfo()
         
         setupEditableState(for: object, projectId: object.projectId, permissions: nil)
@@ -144,8 +151,16 @@ final class FileInfoView: UIView, FromNib {
         if wrapData.fileType == .video {
             peopleView.isHidden = true
         }
+
+        if let latitude = wrapData.metaData?.latitude,
+           let longitude = wrapData.metaData?.longitude {
+            locationView.setLocation(latitude: latitude, longitude: longitude, item: wrapData)
+            locationView.isHidden = false
+        } else {
+            locationView.isHidden = true
+        }
     }
-        
+
     func setWith(albumItem: AlbumItem) {
         fileNameView.title = TextConstants.fileInfoAlbumNameTitle
         fileNameView.isEditable = albumItem.readOnly ?? false
@@ -177,11 +192,14 @@ final class FileInfoView: UIView, FromNib {
     
     private func setup() {
         layer.masksToBounds = true
-        let views: [UIView] = [fileNameView, fileDescriptionView, fileInfoView, sharingInfoView, peopleView]
+        let views: [UIView] = [fileNameView, fileDescriptionView, fileInfoView, sharingInfoView, peopleView, locationView]
         
         sharingInfoView.isHidden = true
+        locationView.isHidden = true
         
         views.forEach { contentView.addArrangedSubview($0) }
+
+        topSeparatorView.isHidden = true
         
         tapGestureRecognizer.delegate = self
         addGestureRecognizer(tapGestureRecognizer)
@@ -190,23 +208,28 @@ final class FileInfoView: UIView, FromNib {
     
     private func setupEditableState(for item: BaseDataSourceItem, projectId: String?, permissions: SharedItemPermission?) {
         var canEdit = true
-        if projectId != SingletonStorage.shared.accountInfo?.projectID {
-            canEdit = permissions?.granted?.contains(.setAttribute) == true
-        }
-        
+
         if (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced {
             canEdit = false
         }
 
-        fileDescriptionView.isEditable = canEdit
+        if projectId != SingletonStorage.shared.accountInfo?.projectID {
+            fileDescriptionView.isEditable = false
+            canEdit = permissions?.granted?.contains(.setAttribute) == true
+        } else {
+            fileDescriptionView.isEditable = canEdit
+        }
+
         fileNameView.isEditable = canEdit
     }
     
     private func resetUI() {
+        scrollView.setContentOffset(.zero, animated: false)
         fileNameView.title = TextConstants.fileInfoFileNameTitle
         fileInfoView.reset()
         peopleView.reset()
         sharingInfoView.isHidden = true
+        locationView.isHidden = true
     }
     
     @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {
@@ -268,8 +291,19 @@ final class FileInfoView: UIView, FromNib {
         if sharingInfoView.isHidden && needShow {
             analytics.trackScreen(.shareInfo)
         }
-        
+
         sharingInfoView.isHidden = !needShow
+
+        fileDescriptionView.fileDescription = sharingInfo.metadata?.fileDescription
+        if let latitude = sharingInfo.metadata?.latitude,
+           let longitude = sharingInfo.metadata?.longitude {
+            let item = WrapData(privateShareFileInfo: sharingInfo)
+            locationView.setLocation(latitude: latitude, longitude: longitude, item: item)
+            locationView.isHidden = false
+        } else {
+            locationView.isHidden = true
+        }
+
         output.didUpdateSharingInfo(sharingInfo)
     }
     
@@ -281,6 +315,13 @@ final class FileInfoView: UIView, FromNib {
         } else {
             return localNames.familyName
         }
+    }
+}
+
+extension FileInfoView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == self.scrollView else { return }
+        topSeparatorView.isHidden = scrollView.contentOffset.y <= 0
     }
 }
 
@@ -389,5 +430,16 @@ extension FileInfoView: ItemOperationManagerViewProtocol {
         if uuid == object?.uuid, sharingInfoView.info?.members?.contains(contact) == true {
             updateShareInfo()
         }
+    }
+}
+
+class FileInfoScrollView: UIScrollView {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == panGestureRecognizer,
+           let passthroughView = window?.subviews.first(where: { $0 is PassThroughView }) {
+            return passthroughView.gestureRecognizerShouldBegin(gestureRecognizer)
+        }
+
+        return super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
 }

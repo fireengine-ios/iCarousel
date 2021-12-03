@@ -2174,7 +2174,7 @@ Please check I have understood the intended command here*/
 "signup_password_rule_character_limit" = "Minimum 6, maximum 16 caractères";
 "signup_password_rule_upper_lower_numeric" = "Au moins 1 lettre majuscule, 1 lettre minuscule et 1 chiffre";
 "signup_password_rule_sequential_characters" = "caractères non consécutifs";
-"profile_recovery_mail" = "E-mail de récupération";
+"profile_recovery_mail" = "E-mail de Récupération";
 "profile_recovery_mail_desc" = "E-mail de récupération est utilisé pour vérifier lorsque vous oubliez votre mot de passe";
 "profile_recovery_mail_hint" = "Aucun e-mail de récupération saisi pour le moment";
 "profile_mail_verified" = "Vérifié";
@@ -2204,30 +2204,32 @@ Please check I have understood the intended command here*/
 "masterpass_feature_package_cancel" = "Pour annuler votre paquet, veuillez visiter www.mylifebox.com";
 "forgotMyPassword_password_complete" = "D'accord";
 "forgotMyPassword_reset_success_message" = "La réinitialisation de votre mot de passe a été effectuée avec succès.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Compte non trouvé.";
 "forgotMyPassword_SQ_invalid_answer" = "La réponse à votre question de sécurité est incorrecte, veuillez réessayer.";
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "Description du Dossier";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "Supprimer mon compte";
+"DELETE_ACC_DESC" = "Si vous supprimez un compte; les photos, vidéos, contacts, tout le contenu et toutes les informations seront définitivement supprimées après 30 jours. Vous ne pourrez plus accéder à votre contenu après ce délai. Si vous vous connectez à votre compte dans les 30 jours suivant sa suppression, nous annulerons automatiquement la demande de suppression et vous pourrez continuer à utiliser votre compte. Si vous avez déjà du contenu stocké dans votre compte, nous vous recommandons de télécharger le contenu avant de supprimer le compte.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Êtes-vous sûr de vouloir supprimer votre compte ?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Avant de supprimer votre compte, assurez-vous de télécharger vos photos, vidéos et tout le contenu que vous avez stocké dans votre compte pour éviter de perdre des données importantes !";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "Une fois que vous avez vérifié votre compte en entrant votre mot de passe, le compte sera définitivement supprimé.\nSi vous souhaitez réactiver votre compte lifebox, vous pouvez vous connecter avec les informations de votre compte dans les 30 jours suivant sa suppression. Si vous ne vous connectez pas, votre compte et son contenu seront supprimés après cette période.";
+"DELETE_ACC_INPUT_GSM" = "Numéro de Téléphone";
+"DELETE_ACC_INPUT_PASS" = "Mot de passe";
+"DELETE_ACC_PASS_ERROR" = "Mot de passe incorrect.";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Votre compte sera supprimé définitivement.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Si vous souhaitez réactiver votre compte lifebox, vous pouvez vous connecter avec les informations de votre compte dans les 30 jours suivant sa suppression. Si vous ne vous connectez pas, votre compte et son contenu seront supprimés après cette période.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Vous avez supprimé votre compte avec succès.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Nous sommes désolés que vous soyez parti :( ** \n\nSachez que nous garderons votre contenu pendant 30 jours. Si vous vous connectez avec les informations de votre compte pendant ce temps, votre compte sera activé. Vous pouvez continuer à utiliser votre compte sans apporter de modifications.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Supprimer";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "Annuler";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Continuer";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Confirmer";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Fermer";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
-"change_album_cover_set_photo" = "";
+"change_album_cover_snackbar_text" = "La couverture de l'album a été modifiée avec succès.";
+"change_album_cover_error_text" = "Une erreur s'est produite lors du changement de la photo de couverture.";
+"change_album_cover_set_photo" = "Utiliser comme couverture d'album";
+"location_file_info" = "Emplacement";
+"private_share_empty_list_error" = "";

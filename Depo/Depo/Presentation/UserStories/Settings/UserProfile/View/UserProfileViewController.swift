@@ -40,7 +40,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             buttonsStackView.axis = .vertical
             buttonsStackView.alignment = .leading
             buttonsStackView.distribution = .fill
-            buttonsStackView.spacing = newValue.spacing
+            buttonsStackView.spacing = 12
 
             let arrangedSubviews = [
                 fullnameStackView,
@@ -53,7 +53,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
             ]
             arrangedSubviews.forEach { newValue.addArrangedSubview($0) }
 
-            buttonsStackView.setCustomSpacing(buttonsStackView.spacing * 2, after: changeSecurityQuestionButton)
+            buttonsStackView.setCustomSpacing(50, after: changeSecurityQuestionButton)
         }
     }
     
@@ -264,15 +264,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }
 
     @objc private func deleteAccountTapped() {
-        let popup = DeleteAccountPopUp.with(type: .firstConfirmation) { popup in
-            popup.dismiss(animated: true) {
-                let deletionPopup = DeleteAccountValidationPopUp.instance()
-                deletionPopup.delegate = self
-                self.present(deletionPopup, animated: true)
-            }
-        }
-
-        present(popup, animated: true)
+        output.tapDeleteMyAccount()
     }
 
     @objc private func onEditButtonAction() {
@@ -418,23 +410,6 @@ extension UserProfileViewController: BaseEmailVerificationPopUpDelegate {
     }
 }
 
-extension UserProfileViewController: DeleteAccountValidationPopUpDelegate {
-    func deleteAccountValidationPopUpSucceeded(_ popup: DeleteAccountValidationPopUp) {
-        popup.dismiss(animated: true) {
-            self.showDeleteAccountConfirmation()
-        }
-    }
-
-    private func showDeleteAccountConfirmation() {
-        let popup = DeleteAccountPopUp.with(type: .secondConfirmation) { popup in
-            popup.dismiss(animated: true)
-            self.output.deleteMyAccountValidatedAndConfirmed()
-        }
-
-        present(popup, animated: true)
-    }
-}
-
 extension UserProfileViewController: UITextFieldDelegate  {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -506,7 +481,23 @@ extension UserProfileViewController: UITextFieldDelegate  {
         
         return true
     }
-    
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == addressView.textField {
+            let characterLimit = NumericConstants.addressCharacterLimit
+            let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else { return false }
+
+            let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+            if updatedText.count > characterLimit {
+                textField.text = String(updatedText.prefix(characterLimit))
+            }
+
+            return updatedText.count <= characterLimit
+        } else {
+            return true
+        }
+    }
 }
 
 extension UserProfileViewController: UserProfileViewInput {

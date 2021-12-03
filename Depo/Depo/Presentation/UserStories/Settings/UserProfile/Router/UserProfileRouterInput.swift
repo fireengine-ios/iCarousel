@@ -12,4 +12,7 @@ protocol UserProfileRouterInput {
     func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse, navigationController: UINavigationController, phoneNumber: String)
     func goToChangePassword()
     func goToSetSecretQuestion(selectedQuestion: SecretQuestionsResponse?, delegate: SetSecurityQuestionViewControllerDelegate)
+    func presentDeleteAccountFirstPopUp(confirmed: @escaping DeleteAccountPopUp.ProceedTappedHandler)
+    func presentDeleteAccountValidationPopUp(delegate: DeleteAccountValidationPopUpDelegate)
+    func presentDeleteAccountFinalPopUp(confirmed: @escaping DeleteAccountPopUp.ProceedTappedHandler)
 }

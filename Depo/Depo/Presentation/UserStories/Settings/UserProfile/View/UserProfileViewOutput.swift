@@ -21,12 +21,11 @@ protocol UserProfileViewOutput {
                         number: String, birthday: String, address: String, changes: String)
     func tapChangePasswordButton()
     func tapChangeSecretQuestionButton()
+    func tapDeleteMyAccount()
     
     func isTurkcellUser() -> Bool
 
     func emailVerificationCompleted()
-
-    func deleteMyAccountValidatedAndConfirmed()
 
     func showError(error: String)
 }

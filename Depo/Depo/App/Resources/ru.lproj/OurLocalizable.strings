@@ -1910,30 +1910,32 @@
 "masterpass_feature_package_cancel" = "Чтобы отменить пакет, посетите сайт www.mylifebox.com";
 "forgotMyPassword_password_complete" = "Хорошо";
 "forgotMyPassword_reset_success_message" = "Смена пароля завершена успешно.";
-"forgotMyPassword_account_not_found" = "";
+"forgotMyPassword_account_not_found" = "Ваш аккаунт не найден.";
 "forgotMyPassword_SQ_invalid_answer" = "Неверный ответ на контрольный вопрос, пожалуйста, попробуйте еще раз.";
 
 /*Photo/Video File Description*/
 "photo_video_detail_file_description" = "Описание Файла";
-"DELETE_ACC_BTN" = "";
-"DELETE_ACC_DESC" = "";
-"DELETE_ACC_FIRST_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FIRST" = "";
-"DELETE_ACC_POP_UP_CONTENT_SECOND" = "";
-"DELETE_ACC_INPUT_GSM" = "";
-"DELETE_ACC_INPUT_PASS" = "";
-"DELETE_ACC_PASS_ERROR" = "";
-"DELETE_ACC_THIRD_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_THIRD" = "";
-"DELETE_ACC_FINAL_POP_UP_TITLE" = "";
-"DELETE_ACC_POP_UP_CONTENT_FINAL" = "";
-"DELETE_ACC_POP_UP_BTN_DELETE" = "";
-"DELETE_ACC_POP_UP_BTN_CANCEL" = "";
-"DELETE_ACC_POP_UP_BTN_CONTINUE" = "";
-"DELETE_ACC_POP_UP_BTN_CONFIRM" = "";
-"DELETE_ACC_POP_UP_BTN_CLOSE" = "";
+"DELETE_ACC_BTN" = "Удалить мой аккаунт";
+"DELETE_ACC_DESC" = "Если вы удалите свой аккаунт, ваши файлы и фотографии будут удалены навсегда, и вы не можете получить их позже. Ваши контакты, истории и все загруженные файлы также будут удалены.";
+"DELETE_ACC_FIRST_POP_UP_TITLE" = "Вы уверены, что хотите удалить свой аккаунт?";
+"DELETE_ACC_POP_UP_CONTENT_FIRST" = "Перед удалением аккаунта, вы можете загрузить свои файлы и фотографии в локальную папку на вашем компьютере, чтобы не потерять важные данные.";
+"DELETE_ACC_POP_UP_CONTENT_SECOND" = "После ввода адреса электронной почты и пароля ваша учетная запись будет удалена без возможности восстановления.\n\nВы можете войти под своим адресом электронной почты и паролем в течение 1 месяца, чтобы снова активировать свою учетную запись lifebox.";
+"DELETE_ACC_INPUT_GSM" = "Номер телефона";
+"DELETE_ACC_INPUT_PASS" = "Пароль учетной записи";
+"DELETE_ACC_PASS_ERROR" = "Вы ввели неверный пароль.";
+"DELETE_ACC_THIRD_POP_UP_TITLE" = "Ваша учетная запись будет удалена навсегда.";
+"DELETE_ACC_POP_UP_CONTENT_THIRD" = "Если вы хотите снова активировать свою учетную запись lifebox, вы можете войти с вашими учетными данными в течение 30 дней. Если вы не авторизуетесь, ваша учетная запись и ее содержимое будут удалены после этого периода.";
+"DELETE_ACC_FINAL_POP_UP_TITLE" = "Вы успешно удалили свой аккаунт.";
+"DELETE_ACC_POP_UP_CONTENT_FINAL" = "**Сожалеем, что вы ушли :(**\n\nПожалуйста, знайте, что мы будем хранить ваши данные в течение 30 дней. Если в течение этого периода вы войдете под своими учетными данными, ваша учетная запись будет активирована снова. Вы можете продолжить использовать свой аккаунт без каких-либо изменений.";
+"DELETE_ACC_POP_UP_BTN_DELETE" = "Удалить";
+"DELETE_ACC_POP_UP_BTN_CANCEL" = "Отмена";
+"DELETE_ACC_POP_UP_BTN_CONTINUE" = "Продолжить";
+"DELETE_ACC_POP_UP_BTN_CONFIRM" = "Подтвердить";
+"DELETE_ACC_POP_UP_BTN_CLOSE" = "Закрыть";
 
 /*Change album cover photo*/
-"change_album_cover_snackbar_text" = "";
-"change_album_cover_error_text" = "";
-"change_album_cover_set_photo" = "";
+"change_album_cover_snackbar_text" = "Обложка альбома успешно изменена.";
+"change_album_cover_error_text" = "Произошла ошибка при смене обложки.";
+"change_album_cover_set_photo" = "Использовать как обложку альбома";
+"location_file_info" = "положение";
+"private_share_empty_list_error" = "";

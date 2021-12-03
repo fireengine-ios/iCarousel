@@ -840,6 +840,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
 //        metaData?.artist = mediaItem.metadata?.artist
     
         metaData?.duration = baseModel.asset.duration
+        metaData?.latitude = baseModel.asset.location?.coordinate.latitude
+        metaData?.longitude = baseModel.asset.location?.coordinate.longitude
         
 //        metaData?.genre = mediaItem.metadata?.genre ?? []
 //        metaData?.height = Int(mediaItem.metadata?.height ?? 0)
@@ -887,7 +889,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         fileSize = remote.bytes ?? 0
         status = ItemStatus(string: remote.status)
         
-        super.init(uuid: remote.uuid, fileDescription: metaData?.fileDescription)
+        super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
         
         projectId = SingletonStorage.shared.accountInfo?.projectID
@@ -895,7 +897,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         albums = remote.albums
         
         name = remote.name
-        fileDescription = remote.metadata?.fileDescription
         isLocalItem = false
         creationDate = remote.createdDate
         lastModifiDate = remote.lastModifiedDate
@@ -965,7 +966,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         id = searchResponse[SearchJsonKey.id].int64
         md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
         name = searchResponse[SearchJsonKey.name].string
-        fileDescription = searchResponse[SearchJsonKey.Description].string
         uuid = fileUUID
         projectId = SingletonStorage.shared.accountInfo?.projectID
         
@@ -1110,7 +1110,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         isLocalItem = mediaItem.isLocalItemValue
         name = mediaItem.nameValue
-        fileDescription = metaData?.fileDescription
         creationDate = mediaItem.creationDateValue as Date?
         lastModifiDate = mediaItem.lastModifiDateValue as Date?
         syncStatus = SyncWrapperedStatus(value: mediaItem.syncStatusValue)
@@ -1131,7 +1130,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         //        metaData?.album = mediaItem.metadata?.album //FIXME: currently disabled
         metaData?.artist = mediaItem.metadata?.artist
         metaData?.fileDescription = mediaItem.metadata?.fileDescription
-
+        metaData?.latitude = mediaItem.metadata?.latitude?.doubleValue
+        metaData?.longitude = mediaItem.metadata?.longitude?.doubleValue
         
         metaData?.duration = ((assetDuration == nil) ? mediaItem.metadata?.duration : assetDuration) ?? Double(0.0)
         
@@ -1200,7 +1200,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         super.init(uuid: privateShareFileInfo.uuid,
                    name: privateShareFileInfo.name,
-                   fileDescription: privateShareFileInfo.metadata?.fileDescription,
                    creationDate: privateShareFileInfo.createdDate,
                    lastModifiDate: privateShareFileInfo.lastModifiedDate,
                    fileType: privateShareFileInfo.fileType,

@@ -494,7 +494,7 @@ enum ElementTypes {
         case .albumDetails:
             return TextConstants.actionSheetAlbumDetails
         case .makeAlbumCover:
-            return TextConstants.actionSheetMakeAlbumCover
+            return localized(.changeAlbumCoverSetPhoto)
         case .removeFromAlbum, .removeFromFaceImageAlbum:
             return TextConstants.actionSheetRemoveFromAlbum
         case .backUp:

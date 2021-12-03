@@ -89,9 +89,9 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
         switch rule {
         case .AlphaBetricAZ:
-            sortRule = .albumlettersZA
-        case .AlphaBetricZA:
             sortRule = .albumlettersAZ
+        case .AlphaBetricZA:
+            sortRule = .albumlettersZA
         default:
             sortRule = rule.sortedRulesConveted
         }
@@ -114,12 +114,8 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
 
 extension AlbumsPresenter: SelectNameModuleOutput {
     func didCreateAlbum(item: AlbumItem) {
-        if let interact = interactor as? AlbumsInteractor {
-            if item.readOnly == true {
-                UIApplication.showErrorAlert(message: TextConstants.uploadVideoToReadOnlyAlbumError)
-            } else {
-                interact.onAddPhotosToAlbum(selectedAlbumUUID: item.uuid)
-            }
+        if item.readOnly == true {
+            UIApplication.showErrorAlert(message: TextConstants.uploadVideoToReadOnlyAlbumError)
         }
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import IQKeyboardManagerSwift
 
 protocol FileDescriptionViewDelegate: AnyObject {
     func onEditDescription(newDescription: String)
@@ -155,9 +154,5 @@ extension FileDescriptionView: UITextViewDelegate {
             textView.text = String(newText.prefix(250))
         }
         return newText.count <= 250
-    }
-
-    func textViewDidChange(_ textView: UITextView) {
-        IQKeyboardManager.shared.reloadLayoutIfNeeded()
     }
 }
