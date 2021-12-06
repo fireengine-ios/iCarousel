@@ -115,14 +115,6 @@ class SimpleUpload: UploadRequestParametrs {
         let fixed = name.precomposedStringWithCanonicalMapping
         let encodedName = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
 
-        let takenDateValue: String
-        if let creationDate = item.asset?.creationDate {
-            let milliseconds = Int64(creationDate.timeIntervalSince1970) * 1000
-            takenDateValue = String(milliseconds)
-        } else {
-            takenDateValue = ""
-        }
-        
         header = header + [
             HeaderConstant.connectionType        : connectionStatus,
             HeaderConstant.uploadType            : appopriateUploadType,
@@ -138,9 +130,16 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.Expect                : "100-continue",
             HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
             HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
-            HeaderConstant.XObjectMetaTakenDate  : takenDateValue,
             HeaderConstant.ContentLength         : "\(fileSize)"
         ]
+
+        if let creationDate = item.asset?.creationDate {
+            let milliseconds = Int64(creationDate.timeIntervalSince1970) * 1000
+            header = header + [
+                HeaderConstant.XObjectMetaTakenDate: String(milliseconds)
+            ]
+        }
+
         return header
     }
     
@@ -231,14 +230,6 @@ final class ResumableUpload: UploadRequestParametrs {
         let fixed = name.precomposedStringWithCanonicalMapping
         let encodedName = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
 
-        let takenDateValue: String
-        if let creationDate = item.asset?.creationDate {
-            let milliseconds = Int64(creationDate.timeIntervalSince1970) * 1000
-            takenDateValue = String(milliseconds)
-        } else {
-            takenDateValue = ""
-        }
-
         header = header + [
             HeaderConstant.connectionType : connectionType,
             HeaderConstant.uploadType : currentUploadType,
@@ -253,9 +244,15 @@ final class ResumableUpload: UploadRequestParametrs {
             HeaderConstant.Expect : "100-continue",
             HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
             HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
-            HeaderConstant.XObjectMetaTakenDate  : takenDateValue,
             HeaderConstant.ContentLength : "0"
         ]
+
+        if let creationDate = item.asset?.creationDate {
+            let milliseconds = Int64(creationDate.timeIntervalSince1970) * 1000
+            header = header + [
+                HeaderConstant.XObjectMetaTakenDate: String(milliseconds)
+            ]
+        }
         
         guard !isEmpty else {
             return header
