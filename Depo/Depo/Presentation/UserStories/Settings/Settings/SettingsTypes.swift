@@ -18,6 +18,7 @@ enum SettingsTypes: Int {
     case security
     case helpAndSupport
     case termsAndPolicy
+    case darkMode
     case logout
     case chatbot
     
@@ -33,6 +34,7 @@ enum SettingsTypes: Int {
         case .passcode: return TextConstants.settingsViewCellPasscode
         case .security: return TextConstants.settingsViewCellLoginSettings
         case .helpAndSupport: return TextConstants.settingsViewCellHelp
+        case .darkMode: return "Karanlık Mod"
         case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
         case .logout: return TextConstants.settingsViewCellLogout
         case .chatbot: return TextConstants.chatbotMenuTitle
@@ -42,7 +44,7 @@ enum SettingsTypes: Int {
     static let allSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
     static let allSectionTwoTypes = [connectAccounts, permissions]
     static let allSectionThreeTypes = [myActivities, passcode, security]
-    static var allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
+    static var allSectionFourTypes = [helpAndSupport, termsAndPolicy, .darkMode, logout]
 
     static func prepareTypes(hasPermissions: Bool, isInvitationShown: Bool, isChatbotShown: Bool) -> [[SettingsTypes]] {
         var result = [[SettingsTypes]]()
@@ -67,6 +69,10 @@ enum SettingsTypes: Int {
             } else if !isChatbotShown && allSectionFourTypes.contains(chatbot){
                 SettingsTypes.allSectionFourTypes.remove(chatbot)
             }
+        }
+
+        if #available(iOS 13.0, *) {} else {
+            SettingsTypes.allSectionFourTypes.remove(darkMode)
         }
 
         result.append(SettingsTypes.allSectionFourTypes)

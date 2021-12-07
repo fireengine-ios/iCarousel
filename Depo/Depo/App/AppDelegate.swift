@@ -83,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     @available(iOS 13.0, *)
     private lazy var backgroundSyncService = BackgroundSyncService.shared
+    static let shared = AppDelegate()
     
     var window: UIWindow?
     var watchdog: Watchdog?
@@ -328,6 +329,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         debugLog("AppDelegate applicationDidBecomeActive")
         checkPasscodeIfNeed()
         AppEvents.activateApp()
+        overrideApplicationThemeStyle()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -399,6 +401,21 @@ extension AppDelegate {
         if let pushType = Netmera.recentPushObject()?.customDictionary[PushNotificationParameter.pushType.rawValue] as? String,
             pushType == PushNotificationAction.silent.rawValue {
             SilentPushApiService().uploadLog()
+        }
+    }
+
+    func overrideApplicationThemeStyle() {
+        if #available(iOS 13.0, *) {
+            let storageVars: StorageVars = factory.resolve()
+            if let isDarkModeEnabled = storageVars.isDarkModeEnabled {
+                if isDarkModeEnabled {
+                    UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .dark
+                } else {
+                    UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .light
+                }
+            } else {
+                UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .unspecified
+            }
         }
     }
     

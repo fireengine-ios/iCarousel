@@ -29,6 +29,8 @@ protocol SettingsViewOutput {
     func goToTermsAndPolicy()
         
     func goToPermissions()
+
+    func goToDarkMode()
     //Photo related methods - below
     func onChangeUserPhoto(quotaInfo: QuotaInfoResponse?)
         

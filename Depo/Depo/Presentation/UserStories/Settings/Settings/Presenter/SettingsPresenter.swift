@@ -164,6 +164,10 @@ extension SettingsPresenter: SettingsViewOutput {
     func presentActionSheet(alertController: UIAlertController) {
         router.presentAlertSheet(alertController: alertController)
     }
+
+    func goToDarkMode() {
+        router.goToDarkMode()
+    }
     
 }
 
