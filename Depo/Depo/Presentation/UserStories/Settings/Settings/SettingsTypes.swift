@@ -34,7 +34,7 @@ enum SettingsTypes: Int {
         case .passcode: return TextConstants.settingsViewCellPasscode
         case .security: return TextConstants.settingsViewCellLoginSettings
         case .helpAndSupport: return TextConstants.settingsViewCellHelp
-        case .darkMode: return "Karanlık Mod"
+        case .darkMode: return localized(.darkModePageTitle)
         case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
         case .logout: return TextConstants.settingsViewCellLogout
         case .chatbot: return TextConstants.chatbotMenuTitle

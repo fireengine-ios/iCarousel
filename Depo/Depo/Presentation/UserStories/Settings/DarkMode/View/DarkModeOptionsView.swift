@@ -23,7 +23,7 @@ class DarkModeOptionsView: UIView, NibInit {
 
     weak var delegate: DarkModeOptionsViewDelegate?
     lazy var storageVars: StorageVars = factory.resolve()
-    private let checkmarkImage = UIImage(named: "backupCheckmark")
+    private var checkmarkImage: UIImage? { UIImage(named: "backupCheckmark")?.withRenderingMode(.alwaysOriginal) }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,15 +32,15 @@ class DarkModeOptionsView: UIView, NibInit {
 
     @IBOutlet weak private var titleLabel: UILabel! {
         willSet {
-            newValue.text = "Mod"
-            newValue.font = .TurkcellSaturaBolFont(size: 22)
-            newValue.textColor = ColorConstants.textGrayColor
+            newValue.text = localized(.darkModeTitleText)
+            newValue.font = .TurkcellSaturaBolFont(size: 24)
+            newValue.textColor = AppColor.darkTextAndLightGray.color
         }
     }
 
     @IBOutlet weak private var darkModeLabel: UILabel! {
         willSet {
-            newValue.text = "Dark"
+            newValue.text = localized(.darkModeDarkText)
             newValue.font = .TurkcellSaturaFont(size: 18)
             newValue.textColor = ColorConstants.textGrayColor
         }
@@ -48,7 +48,7 @@ class DarkModeOptionsView: UIView, NibInit {
 
     @IBOutlet weak private var lightModeLabel: UILabel! {
         willSet {
-            newValue.text = "Light"
+            newValue.text = localized(.darkModeLightText)
             newValue.font = .TurkcellSaturaFont(size: 18)
             newValue.textColor = ColorConstants.textGrayColor
         }
@@ -56,7 +56,7 @@ class DarkModeOptionsView: UIView, NibInit {
 
     @IBOutlet weak private var defaultModeLabel: UILabel! {
         willSet {
-            newValue.text = "Default"
+            newValue.text = localized(.darkModeDefaultText)
             newValue.font = .TurkcellSaturaFont(size: 18)
             newValue.textColor = ColorConstants.textGrayColor
         }
@@ -83,13 +83,11 @@ class DarkModeOptionsView: UIView, NibInit {
     @IBOutlet var selectionButtons: [UIButton]!
 
     @IBAction func selectionButtonTapped(_ sender: UIButton) {
-        configureOptions(with: sender.tag)
-
-        for option in DarkModeOption.allCases {
-            if option.rawValue == sender.tag {
-                delegate?.appearanceDidSelected(with: option)
-            }
+        for option in DarkModeOption.allCases where option.rawValue == sender.tag {
+            delegate?.appearanceDidSelected(with: option)
         }
+
+        configureOptions(with: sender.tag)
     }
 
     private func setup() {

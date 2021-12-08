@@ -25,13 +25,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Wyb-ed-6VF">
-                            <rect key="frame" x="39" y="62.5" width="245" height="158"/>
+                            <rect key="frame" x="30" y="62.5" width="254" height="158"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCE-x6-YUu">
-                                    <rect key="frame" x="0.0" y="0.0" width="245" height="52"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="254" height="52"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiF-Pj-XY3">
-                                            <rect key="frame" x="0.0" y="0.0" width="245" height="52"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiF-Pj-XY3">
+                                            <rect key="frame" x="0.0" y="0.0" width="254" height="52"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title=" "/>
                                             <connections>
@@ -45,7 +45,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="CiF-Pj-XY3" secondAttribute="trailing" id="2It-4B-Ev7"/>
                                         <constraint firstAttribute="height" constant="52" id="7Cr-oc-kJA"/>
@@ -57,17 +57,17 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eTH-dh-Qrr">
-                                    <rect key="frame" x="0.0" y="52" width="245" height="1"/>
+                                    <rect key="frame" x="0.0" y="52" width="254" height="1"/>
                                     <color key="backgroundColor" name="itemSeperator"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="IG2-rO-ZBo"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arL-mc-92O">
-                                    <rect key="frame" x="0.0" y="53" width="245" height="52"/>
+                                    <rect key="frame" x="0.0" y="53" width="254" height="52"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ift-qf-bjA">
-                                            <rect key="frame" x="0.0" y="0.0" width="245" height="52"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ift-qf-bjA">
+                                            <rect key="frame" x="0.0" y="0.0" width="254" height="52"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title=" "/>
                                             <connections>
@@ -81,7 +81,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstItem="Ift-qf-bjA" firstAttribute="top" secondItem="arL-mc-92O" secondAttribute="top" id="3zN-No-cue"/>
                                         <constraint firstAttribute="trailing" secondItem="Ift-qf-bjA" secondAttribute="trailing" id="6Fc-zQ-HVc"/>
@@ -93,17 +93,17 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mT1-Dh-18B">
-                                    <rect key="frame" x="0.0" y="105" width="245" height="1"/>
+                                    <rect key="frame" x="0.0" y="105" width="254" height="1"/>
                                     <color key="backgroundColor" name="itemSeperator"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="AXC-DA-L0A"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xeb-Fm-cr2">
-                                    <rect key="frame" x="0.0" y="106" width="245" height="52"/>
+                                    <rect key="frame" x="0.0" y="106" width="254" height="52"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHa-z7-si3">
-                                            <rect key="frame" x="0.0" y="0.0" width="245" height="52"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHa-z7-si3">
+                                            <rect key="frame" x="0.0" y="0.0" width="254" height="52"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title=" "/>
                                             <connections>
@@ -117,7 +117,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="2Qs-bl-cF3"/>
                                         <constraint firstItem="aCu-NF-Bjh" firstAttribute="centerY" secondItem="GHa-z7-si3" secondAttribute="centerY" id="73l-SA-qEL"/>
@@ -135,7 +135,7 @@
                     <constraints>
                         <constraint firstItem="gSo-XT-cXe" firstAttribute="top" secondItem="MI2-qz-MWh" secondAttribute="top" constant="26" id="2sH-yu-ww3"/>
                         <constraint firstItem="Wyb-ed-6VF" firstAttribute="top" secondItem="gSo-XT-cXe" secondAttribute="bottom" constant="16" id="DvC-As-Mgt"/>
-                        <constraint firstItem="Wyb-ed-6VF" firstAttribute="leading" secondItem="MI2-qz-MWh" secondAttribute="leading" constant="39" id="EYd-0Y-8GJ"/>
+                        <constraint firstItem="Wyb-ed-6VF" firstAttribute="leading" secondItem="MI2-qz-MWh" secondAttribute="leading" constant="30" id="EYd-0Y-8GJ"/>
                         <constraint firstAttribute="trailing" secondItem="gSo-XT-cXe" secondAttribute="trailing" constant="16" id="LQT-4K-xxz"/>
                         <constraint firstAttribute="trailing" secondItem="Wyb-ed-6VF" secondAttribute="trailing" constant="36" id="aPQ-2O-a6f"/>
                         <constraint firstItem="gSo-XT-cXe" firstAttribute="leading" secondItem="MI2-qz-MWh" secondAttribute="leading" constant="32" id="sqj-VD-xTw"/>

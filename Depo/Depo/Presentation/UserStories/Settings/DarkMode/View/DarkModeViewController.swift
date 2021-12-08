@@ -20,7 +20,7 @@ class DarkModeViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setTitle(withString: "Karanlık Mod")
+        setTitle(withString: localized(.darkModePageTitle))
     }
 
     //MARK: -View
@@ -61,7 +61,8 @@ extension DarkModeViewController: DarkModeOptionsViewDelegate {
             case .defaultOption:
                 storageVars.isDarkModeEnabled = nil
             }
-            AppDelegate.shared.overrideApplicationThemeStyle()
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            appDelegate?.overrideApplicationThemeStyle()
         }
     }
 }

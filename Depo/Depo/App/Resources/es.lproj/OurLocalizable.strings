@@ -1966,4 +1966,12 @@
 "change_album_cover_error_text" = "Ocurrió un error al cambiar la foto de portada.";
 "change_album_cover_set_photo" = "Usar como portada del álbum";
 "location_file_info" = "Ubicación";
-"private_share_empty_list_error" = "";
+"private_share_empty_list_error" = "La lista de usuarios no puede estar vacía o compartir con su propia cuenta no está permitido.";
+
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "";
+"dark_mode_title_text" = "";
+"dark_mode_dark_text" = "";
+"dark_mode_light_text" = "";
+"dark_mode_default_text" = "";

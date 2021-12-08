@@ -1924,4 +1924,12 @@
 "change_album_cover_error_text" = "Beim Ändern des Titelbilds ist ein Fehler aufgetreten.";
 "change_album_cover_set_photo" = "Als Albumcover verwenden";
 "location_file_info" = "Ort";
-"private_share_empty_list_error" = "";
+"private_share_empty_list_error" = "Benutzerliste darf nicht leer sein oder das Teilen mit Ihrem eigenen Konto ist nicht erlaubt.";
+
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "";
+"dark_mode_title_text" = "";
+"dark_mode_dark_text" = "";
+"dark_mode_light_text" = "";
+"dark_mode_default_text" = "";

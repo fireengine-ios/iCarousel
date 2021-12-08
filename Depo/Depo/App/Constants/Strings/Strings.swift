@@ -82,4 +82,11 @@ enum Strings: String, Localizable {
 
     // MARK: - File Info
     case fileInfoLocation = "location_file_info"
+
+    // MARK: - In-App Dark Mode
+    case darkModePageTitle = "dark_mode_page_title_text"
+    case darkModeTitleText = "dark_mode_title_text"
+    case darkModeDarkText = "dark_mode_dark_text"
+    case darkModeLightText = "dark_mode_light_text"
+    case darkModeDefaultText = "dark_mode_default_text"
 }

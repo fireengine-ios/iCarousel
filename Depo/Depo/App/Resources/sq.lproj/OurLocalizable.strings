@@ -1967,4 +1967,12 @@
 "change_album_cover_error_text" = "Ndodhi një gabim gjatë ndryshimit të fotografisë së kopertinës.";
 "change_album_cover_set_photo" = "Përdoret si kopertinë e albumit";
 "location_file_info" = "vendndodhja";
-"private_share_empty_list_error" = "";
+"private_share_empty_list_error" = "Lista e përdoruesve nuk mund të jetë bosh ose nuk mund ta ndani me llogarinë tuaj.";
+
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "";
+"dark_mode_title_text" = "";
+"dark_mode_dark_text" = "";
+"dark_mode_light_text" = "";
+"dark_mode_default_text" = "";

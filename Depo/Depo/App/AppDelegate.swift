@@ -83,8 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     @available(iOS 13.0, *)
     private lazy var backgroundSyncService = BackgroundSyncService.shared
-    static let shared = AppDelegate()
-    
+
     var window: UIWindow?
     var watchdog: Watchdog?
 
@@ -409,12 +408,12 @@ extension AppDelegate {
             let storageVars: StorageVars = factory.resolve()
             if let isDarkModeEnabled = storageVars.isDarkModeEnabled {
                 if isDarkModeEnabled {
-                    UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .dark
+                    window?.overrideUserInterfaceStyle = .dark
                 } else {
-                    UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .light
+                    window?.overrideUserInterfaceStyle = .light
                 }
             } else {
-                UIApplication.shared.keyWindow?.overrideUserInterfaceStyle = .unspecified
+                window?.overrideUserInterfaceStyle = .unspecified
             }
         }
     }
