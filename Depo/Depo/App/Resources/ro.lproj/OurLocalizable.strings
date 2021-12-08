@@ -1924,4 +1924,12 @@
 "change_album_cover_error_text" = "A apărut o eroare la schimbarea fotografiei de copertă.";
 "change_album_cover_set_photo" = "Utilizați ca coperta de album";
 "location_file_info" = "Locație";
-"private_share_empty_list_error" = "";
+"private_share_empty_list_error" = "Lista de utilizatori nu poate fi goală sau nu puteți partaja cu propriul cont.";
+
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "";
+"dark_mode_title_text" = "";
+"dark_mode_dark_text" = "";
+"dark_mode_light_text" = "";
+"dark_mode_default_text" = "";

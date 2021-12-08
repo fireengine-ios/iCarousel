@@ -121,4 +121,10 @@ class SplitIpadViewContoller: NSObject, UISplitViewControllerDelegate, SettingsD
             configurateWithControllers(leftViewController: left, controllers: [RouterVC().chatbot])
         }
     }
+
+    func goToDarkMode() {
+        if let left = leftController {
+            configurateWithControllers(leftViewController: left, controllers: [RouterVC().darkMode])
+        }
+    }
 }

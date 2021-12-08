@@ -2232,4 +2232,12 @@ Please check I have understood the intended command here*/
 "change_album_cover_error_text" = "Une erreur s'est produite lors du changement de la photo de couverture.";
 "change_album_cover_set_photo" = "Utiliser comme couverture d'album";
 "location_file_info" = "Emplacement";
-"private_share_empty_list_error" = "";
+"private_share_empty_list_error" = "La liste des utilisateurs ne peut pas être vide ou le partage avec votre propre compte n'est pas autorisé.";
+
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "";
+"dark_mode_title_text" = "";
+"dark_mode_dark_text" = "";
+"dark_mode_light_text" = "";
+"dark_mode_default_text" = "";

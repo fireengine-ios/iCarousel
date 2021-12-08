@@ -1936,4 +1936,12 @@
 "change_album_cover_error_text" = "حدث خطأ أثناء تغيير صورة الغلاف.";
 "change_album_cover_set_photo" = "استخدم كغلاف للألبوم";
 "location_file_info" = "موقعك";
-"private_share_empty_list_error" = "";
+"private_share_empty_list_error" = "لا يمكن أن تكون قائمة المستخدمين فارغة أو لا يمكنك مشاركتها مع حسابك الخاص.";
+
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "";
+"dark_mode_title_text" = "";
+"dark_mode_dark_text" = "";
+"dark_mode_light_text" = "";
+"dark_mode_default_text" = "";
