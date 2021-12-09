@@ -65,18 +65,21 @@ class DarkModeOptionsView: UIView, NibInit {
     @IBOutlet weak private var selectDarkModeButton: UIButton! {
         willSet {
             newValue.tag = DarkModeOption.dark.rawValue
+            newValue.setTitle("", for: .normal)
         }
     }
 
     @IBOutlet weak private var selectLightModeButton: UIButton! {
         willSet {
             newValue.tag = DarkModeOption.light.rawValue
+            newValue.setTitle("", for: .normal)
         }
     }
 
     @IBOutlet weak private var selectDefaultModeButton: UIButton! {
         willSet {
             newValue.tag = DarkModeOption.defaultOption.rawValue
+            newValue.setTitle("", for: .normal)
         }
     }
 

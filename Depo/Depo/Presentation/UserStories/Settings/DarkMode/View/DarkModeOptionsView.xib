@@ -30,10 +30,11 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCE-x6-YUu">
                                     <rect key="frame" x="0.0" y="0.0" width="254" height="52"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiF-Pj-XY3">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CiF-Pj-XY3">
                                             <rect key="frame" x="0.0" y="0.0" width="254" height="52"/>
+                                            <color key="tintColor" name="primaryBackground"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title=" "/>
+                                            <buttonConfiguration key="configuration" style="plain"/>
                                             <connections>
                                                 <action selector="selectionButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="w8e-CR-Kua"/>
                                             </connections>
@@ -66,10 +67,11 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arL-mc-92O">
                                     <rect key="frame" x="0.0" y="53" width="254" height="52"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ift-qf-bjA">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ift-qf-bjA">
                                             <rect key="frame" x="0.0" y="0.0" width="254" height="52"/>
+                                            <color key="tintColor" name="primaryBackground"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title=" "/>
+                                            <buttonConfiguration key="configuration" style="plain"/>
                                             <connections>
                                                 <action selector="selectionButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="I6D-e7-eBq"/>
                                             </connections>
@@ -102,10 +104,11 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xeb-Fm-cr2">
                                     <rect key="frame" x="0.0" y="106" width="254" height="52"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHa-z7-si3">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHa-z7-si3">
                                             <rect key="frame" x="0.0" y="0.0" width="254" height="52"/>
+                                            <color key="tintColor" name="primaryBackground"/>
                                             <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title=" "/>
+                                            <buttonConfiguration key="configuration" style="plain"/>
                                             <connections>
                                                 <action selector="selectionButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="oSn-fb-O8J"/>
                                             </connections>
