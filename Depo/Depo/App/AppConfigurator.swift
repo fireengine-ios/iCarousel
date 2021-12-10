@@ -11,7 +11,6 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
-import IQKeyboardManagerSwift
 
 final class AppConfigurator {
     
@@ -34,7 +33,6 @@ final class AppConfigurator {
         clearTokensIfNeed()
         prepareSessionManager()
         configureSDWebImage()
-        configureIQKeyboardManager()
         setupIAPObserver()
         dropboxManager.start()
         analyticsManager.start()
@@ -116,14 +114,7 @@ final class AppConfigurator {
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb
         SDImageCache.shared().config.maxCacheAge = 7 * 24 * 60 * 60     // 7 days
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
-    }
-
-    private static func configureIQKeyboardManager() {
-        IQKeyboardManager.shared.enable = false
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.enabledDistanceHandlingClasses.append(PhotoVideoDetailViewController.self)
-    }
-    
+    }    
     
     // MARK: - settings bundle
     //Check original post here: https://medium.com/@abhimuralidharan/adding-settings-to-your-ios-app-cecef8c5497

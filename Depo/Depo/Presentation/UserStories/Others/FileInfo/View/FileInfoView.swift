@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Typist
 
 protocol PhotoInfoViewControllerOutput {
     func onRename(newName: String)
@@ -27,8 +28,10 @@ final class FileInfoView: UIView, FromNib {
 
     var output: PhotoInfoViewControllerOutput!
 
-    @IBOutlet weak var scrollView: UIScrollView! {
-        willSet { newValue?.delegate = self }
+    @IBOutlet weak var scrollView: FileInfoScrollView! {
+        willSet {
+            newValue.delegate = self
+        }
     }
 
     // MARK: IBOutlet
@@ -45,6 +48,7 @@ final class FileInfoView: UIView, FromNib {
     
     @IBOutlet private weak var topSeparatorView: UIView!
 
+    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerHandler))
         return gesture
@@ -64,7 +68,8 @@ final class FileInfoView: UIView, FromNib {
     private lazy var analytics = PrivateShareAnalytics()
     
     private var object: BaseDataSourceItem?
-    
+    private let keyboard = Typist()
+
     // MARK: Life cycle
     
     deinit {
@@ -204,6 +209,28 @@ final class FileInfoView: UIView, FromNib {
         tapGestureRecognizer.delegate = self
         addGestureRecognizer(tapGestureRecognizer)
         ItemOperationManager.default.startUpdateView(view: self)
+
+        listenForKeyboard()
+    }
+
+    private var invisibleBottomSpace: CGFloat {
+        guard let superview = superview else { return .zero }
+        return frame.maxY - superview.bounds.maxY
+    }
+
+    private func listenForKeyboard() {
+        keyboard
+            .on(event: .willShow) { [weak self] options in
+                self?.scrollView.isEditing = true
+                self?.scrollViewBottomConstraint.constant = options.endFrame.height + self!.invisibleBottomSpace
+                self?.view.layoutIfNeeded()
+            }
+            .on(event: .willHide) { [weak self] options in
+                self?.scrollView.isEditing = false
+                self?.scrollViewBottomConstraint.constant = 0
+                self?.view.layoutIfNeeded()
+            }
+            .start()
     }
     
     private func setupEditableState(for item: BaseDataSourceItem, projectId: String?, permissions: SharedItemPermission?) {
@@ -434,8 +461,11 @@ extension FileInfoView: ItemOperationManagerViewProtocol {
 }
 
 class FileInfoScrollView: UIScrollView {
+    var isEditing: Bool = false
+
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer == panGestureRecognizer,
+        if !isEditing,
+           gestureRecognizer == panGestureRecognizer,
            let passthroughView = window?.subviews.first(where: { $0 is PassThroughView }) {
             return passthroughView.gestureRecognizerShouldBegin(gestureRecognizer)
         }
