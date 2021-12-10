@@ -45,7 +45,7 @@
                                         <constraint firstAttribute="height" constant="1" id="gj5-yf-R7J"/>
                                     </constraints>
                                 </view>
-                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6w-4k-VEj" customClass="FileInfoScrollView" customModule="Billo" customModuleProvider="target">
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" translatesAutoresizingMaskIntoConstraints="NO" id="F6w-4k-VEj" customClass="FileInfoScrollView" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="39" width="414" height="857"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="752" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="220.5" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="lOt-sR-o8f">
