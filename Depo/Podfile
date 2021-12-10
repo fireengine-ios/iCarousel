@@ -30,7 +30,6 @@ def core_pods
   #Keyboard
   pod 'Typist', '~> 1'
   pod 'iCarousel', '~> 1'
-  pod 'IQKeyboardManagerSwift'
 
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1'

@@ -119,7 +119,6 @@ PODS:
   - GoogleUtilitiesLegacy (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
   - iCarousel (1.8.3)
-  - IQKeyboardManagerSwift (6.5.6)
   - KeychainSwift (19.0.0)
   - Mantis (1.3.2)
   - MaterialComponents/AnimationTiming (124.1.1)
@@ -224,7 +223,6 @@ DEPENDENCIES:
   - GoogleConversionTracking (~> 3)
   - GoogleTagManager (~> 7)
   - iCarousel (~> 1)
-  - IQKeyboardManagerSwift
   - KeychainSwift (~> 19)
   - Mantis (from `https://github.com/fireengine-ios/Mantis.git`, tag `FE-1.3.2.5`)
   - MaterialComponents/Slider
@@ -246,7 +244,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
-    - IQKeyboardManagerSwift
     - MetalPetal
     - SQLite.swift
     - SwiftyJSON
@@ -323,7 +320,6 @@ SPEC CHECKSUMS:
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
   GoogleUtilitiesLegacy: 5501bedec1646bd284286eb5fc9453f7e23a12f4
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
-  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Mantis: 0212289bb98e94ed6c2db941ed7072d06fba306f
   MaterialComponents: b9f58f24bf74588a83b2dce05802a11aaed5257d
@@ -347,6 +343,6 @@ SPEC CHECKSUMS:
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 52bce3a887b2737b721922ae4a813d0fe6b6a489
+PODFILE CHECKSUM: b6507283fa20bb008a941b0e5f19cc76235591ad
 
 COCOAPODS: 1.10.1

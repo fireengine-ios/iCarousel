@@ -14,6 +14,7 @@
                 <outlet property="backgroundView" destination="IrY-vW-8ll" id="94H-Ti-uwl"/>
                 <outlet property="contentView" destination="lOt-sR-o8f" id="gko-AA-pFc"/>
                 <outlet property="scrollView" destination="F6w-4k-VEj" id="cb2-rZ-RIr"/>
+                <outlet property="scrollViewBottomConstraint" destination="Ade-e3-1yD" id="Yvt-XU-bBa"/>
                 <outlet property="topSeparatorView" destination="fNR-ob-dMl" id="2ig-84-BsR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="4Iw-YI-xRo"/>
             </connections>
