@@ -114,7 +114,7 @@ final class AppConfigurator {
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb
         SDImageCache.shared().config.maxCacheAge = 7 * 24 * 60 * 60     // 7 days
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
-    }    
+    }
     
     // MARK: - settings bundle
     //Check original post here: https://medium.com/@abhimuralidharan/adding-settings-to-your-ios-app-cecef8c5497
