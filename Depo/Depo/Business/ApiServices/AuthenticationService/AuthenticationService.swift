@@ -531,7 +531,7 @@ class AuthenticationService: BaseRequestService {
             self.storageVars.currentUserID = nil
             
             if #available(iOS 14.0, *) {
-                SpotlightSearchHelper.shared.deindexItem(identifier: SharedConstants.spotlightAlbumsDomainID)
+                SpotlightSearchHelper.shared.deindexItem(identifier: SpotlightIndexIdentifiers.album.rawValue)
             }
             
             CacheManager.shared.logout {
