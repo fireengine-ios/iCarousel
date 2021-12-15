@@ -11,6 +11,10 @@ import CoreData
 import CoreSpotlight
 import UIKit
 
+enum SpotlightIndexIdentifiers: String {
+    case album = "com.turkcell.spotlightAlbum"
+}
+
 @available(iOS 14.0, *)
 class SpotlightSearchHelper {
 
@@ -26,7 +30,7 @@ class SpotlightSearchHelper {
     }
 
     func doIndexing(with albums: [AlbumItem] ) {
-        let domainIdentifier = SharedConstants.spotlightAlbumsDomainID
+        let domainIdentifier = SpotlightIndexIdentifiers.album.rawValue
         deindexItem(identifier: domainIdentifier)
 
         let myGroup = DispatchGroup()
