@@ -65,6 +65,7 @@ final class AppConfigurator {
             }
             AppMigrator.migrateAll()
         }
+        storageVars.indexedAlbumUUIDs = []
     }
 
     static func logout(completed: VoidHandler? = nil) {

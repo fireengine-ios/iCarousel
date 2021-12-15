@@ -35,6 +35,7 @@ protocol StorageVars: AnyObject {
     var resumableUploadChunkSize: Int? { get set }
     var lastUnsavedFileUUID: String? { get set }
     var isDarkModeEnabled: Bool? { get set }
+    var indexedAlbumUUIDs: [String]? { get set }
 
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
@@ -250,5 +251,11 @@ final class UserDefaultsVars: StorageVars {
     var isDarkModeEnabled: Bool? {
         get { return userDefaults.value(forKey: isDarkModeEnabledKey) as? Bool }
         set { userDefaults.set(newValue, forKey: isDarkModeEnabledKey) }
+    }
+
+    private let indexedAlbumUUIDsKey = "indexedAlbumUUIDs"
+    var indexedAlbumUUIDs: [String]? {
+        get { return userDefaults.value(forKey: indexedAlbumUUIDsKey) as? [String]}
+        set { userDefaults.set(newValue, forKey: indexedAlbumUUIDsKey) }
     }
 }
