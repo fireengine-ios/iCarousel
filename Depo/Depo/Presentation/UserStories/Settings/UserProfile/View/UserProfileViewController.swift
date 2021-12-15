@@ -518,12 +518,13 @@ extension UserProfileViewController: UserProfileViewInput {
         set(title: securityQuestionButtonTitle, for: changeSecurityQuestionButton)
         
         if let countryCode = userInfo.countryCode, let phoneNumber = userInfo.phoneNumber {
-            phoneView.codeTextField.text = "+\(countryCode)"
+            let fullCountryCode = !countryCode.starts(with: "+") ? "+\(countryCode)" : countryCode
+
+            phoneView.codeTextField.text = fullCountryCode
             
             /// there is no countryCode in phoneNumber for turkcell accounts
-            if phoneNumber.contains(countryCode) {
-                let plusLength = 1 /// "+".count
-                let start = countryCode.count + plusLength
+            if phoneNumber.starts(with: fullCountryCode) {
+                let start = fullCountryCode.count
                 let end = phoneNumber.count
                 phoneView.numberTextField.text = phoneNumber[start..<end]
                 isShortPhoneNumber = false
