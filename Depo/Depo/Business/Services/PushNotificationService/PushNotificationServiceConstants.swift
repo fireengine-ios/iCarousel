@@ -15,6 +15,7 @@ enum PushNotificationAction: String {
     case videos = "videos"
     case stories = "stories"
     case albums = "photos_albums"
+    case albumDetail = "photos_album_detail"
     case allFiles = "all_files"
     case music = "music"
     case documents = "documents"
@@ -118,4 +119,5 @@ enum UniversalLinkPath: String {
 
 enum DeepLinkParameter: String {
     case affiliate = "affiliate" // ex: packages?affiliate=campaign1
+    case albumUUID = "albumUUID"
 }

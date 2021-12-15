@@ -17,6 +17,7 @@ final class FileInfoInteractor {
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var analytics = PrivateShareAnalytics()
+    private let storageVars: StorageVars = factory.resolve()
 }
 
 // MARK: FileInfoInteractorInput
@@ -73,6 +74,8 @@ extension FileInfoInteractor: FileInfoInteractorInput {
                     }
             })
         }
+
+        storageVars.indexedAlbumUUIDs = []
     }
     
     func getAlbum(for item: BaseDataSourceItem) {

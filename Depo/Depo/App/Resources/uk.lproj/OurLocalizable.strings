@@ -1926,4 +1926,12 @@
 "change_album_cover_error_text" = "Під час зміни фотографії обкладинки сталася помилка.";
 "change_album_cover_set_photo" = "Використовувати як обкладинку альбому";
 "location_file_info" = "Розташування";
-"private_share_empty_list_error" = "";
+"private_share_empty_list_error" = "Список користувачів не може бути порожнім або ви не можете надати доступ до свого облікового запису.";
+
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "";
+"dark_mode_title_text" = "";
+"dark_mode_dark_text" = "";
+"dark_mode_light_text" = "";
+"dark_mode_default_text" = "";

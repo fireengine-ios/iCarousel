@@ -1943,3 +1943,10 @@
 "change_album_cover_set_photo" = "Albüm kapağı olarak kullan";
 "location_file_info" = "Konum";
 "private_share_empty_list_error" = "Kullanıcı listesi boş olamaz veya kendi hesabınızla paylaşım yapılamaz.";
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "Karanlık Mod";
+"dark_mode_title_text" = "Mod";
+"dark_mode_dark_text" = "Karanlık";
+"dark_mode_light_text" = "Aydınlık";
+"dark_mode_default_text" = "Varsayılan";

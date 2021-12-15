@@ -1938,4 +1938,12 @@
 "change_album_cover_error_text" = "Произошла ошибка при смене обложки.";
 "change_album_cover_set_photo" = "Использовать как обложку альбома";
 "location_file_info" = "положение";
-"private_share_empty_list_error" = "";
+"private_share_empty_list_error" = "Список пользователей не может быть пустым, или же совместное использование с вашей учетной записью невозможно.";
+
+
+/*Change album cover photo*/
+"dark_mode_page_title_text" = "";
+"dark_mode_title_text" = "";
+"dark_mode_dark_text" = "";
+"dark_mode_light_text" = "";
+"dark_mode_default_text" = "";

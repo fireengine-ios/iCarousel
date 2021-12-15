@@ -30,6 +30,8 @@ protocol SettingsDelegate: AnyObject {
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needPopPasscodeEnterVC: Bool)
 
     func goToChatbot()
+
+    func goToDarkMode()
 }
 
 final class SettingsViewController: BaseViewController {
@@ -246,6 +248,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 delegate.goToChatbot()
             } else {
                 output.goToChatbot()
+            }
+        case .darkMode:
+            if let delegate = settingsDelegate {
+                delegate.goToDarkMode()
+            } else {
+                output.goToDarkMode()
             }
         }
     }

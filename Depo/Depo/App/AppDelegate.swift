@@ -16,6 +16,7 @@ import Netmera
 import UserNotifications
 import KeychainSwift
 import WidgetKit
+import CoreSpotlight
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -83,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     @available(iOS 13.0, *)
     private lazy var backgroundSyncService = BackgroundSyncService.shared
-    
+
     var window: UIWindow?
     var watchdog: Watchdog?
 
@@ -328,6 +329,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         debugLog("AppDelegate applicationDidBecomeActive")
         checkPasscodeIfNeed()
         AppEvents.activateApp()
+        overrideApplicationThemeStyle()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -401,10 +403,38 @@ extension AppDelegate {
             SilentPushApiService().uploadLog()
         }
     }
+
+    func overrideApplicationThemeStyle() {
+        if #available(iOS 13.0, *) {
+            let storageVars: StorageVars = factory.resolve()
+            if let isDarkModeEnabled = storageVars.isDarkModeEnabled {
+                if isDarkModeEnabled {
+                    window?.overrideUserInterfaceStyle = .dark
+                } else {
+                    window?.overrideUserInterfaceStyle = .light
+                }
+            } else {
+                window?.overrideUserInterfaceStyle = .unspecified
+            }
+        }
+    }
     
     //MARK: Adjust
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+
+        if userActivity.activityType == CSSearchableItemActionType {
+            guard let albumUUID = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+                  tokenStorage.accessToken != nil else {
+                return true
+            }
+            if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.albumDetail.rawValue,
+                                                             options: [DeepLinkParameter.albumUUID.rawValue: albumUUID]) {
+                debugLog("Should open Action Screen")
+                PushNotificationService.shared.openActionScreen()
+            }
+        }
+
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
             if PushNotificationService.shared.assignUniversalLink(url: url) {
                 PushNotificationService.shared.openActionScreen()
