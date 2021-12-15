@@ -221,6 +221,8 @@ final class PushNotificationService {
         case .verifyEmail: openVerifyEmail()
         case .verifyRecoveryEmail: openVerifyRecoveryEmail()
         case .silent: break
+        case .albumDetail: openAlbumDetail()
+
         }
         
         
@@ -600,5 +602,18 @@ private extension PushNotificationService {
         controller.loadViewIfNeeded()
         controller.switchSegment(to: index)
         pushTo(controller)
+    }
+
+    func openAlbumDetail() {
+        guard let albumUUID = storageVars.value(forDeepLinkParameter: .albumUUID) as? String else { return }
+        PhotosAlbumService().getAlbum(for: albumUUID) { response in
+            switch response {
+            case .success(let data):
+                let viewController = self.router.albumDetailController(album: AlbumItem(remote: data), type: .List, status: .active, moduleOutput: nil)
+                self.pushTo(viewController)
+            case .failed(let _):
+                UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+            }
+        }
     }
 }

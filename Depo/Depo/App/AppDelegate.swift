@@ -16,6 +16,7 @@ import Netmera
 import UserNotifications
 import KeychainSwift
 import WidgetKit
+import CoreSpotlight
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -421,6 +422,19 @@ extension AppDelegate {
     //MARK: Adjust
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+
+        if userActivity.activityType == CSSearchableItemActionType {
+            guard let albumUUID = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String,
+                  tokenStorage.accessToken != nil else {
+                return true
+            }
+            if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.albumDetail.rawValue,
+                                                             options: [DeepLinkParameter.albumUUID.rawValue: albumUUID]) {
+                debugLog("Should open Action Screen")
+                PushNotificationService.shared.openActionScreen()
+            }
+        }
+
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
             if PushNotificationService.shared.assignUniversalLink(url: url) {
                 PushNotificationService.shared.openActionScreen()

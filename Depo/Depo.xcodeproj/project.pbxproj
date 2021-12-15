@@ -8559,6 +8559,10 @@
 		F034DF28274A544200E5C015 /* AlbumCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034DF26274A544200E5C015 /* AlbumCountResponse.swift */; };
 		F034DF29274A544200E5C015 /* AlbumCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034DF26274A544200E5C015 /* AlbumCountResponse.swift */; };
 		F034DF2A274A544200E5C015 /* AlbumCountResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F034DF26274A544200E5C015 /* AlbumCountResponse.swift */; };
+		F036B15827623119005A2D7E /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
+		F03718262768E44900DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
+		F037182A2768E44A00DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
+		F037182B2768E44A00DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
 		F0B64C212754D79900002F66 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = F0B64C202754D79900002F66 /* Adjust */; };
 		F0B64C262754DDE500002F66 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = F0B64C252754DDE500002F66 /* Adjust */; };
 		F0B64C2A2754DDFD00002F66 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = F0B64C292754DDFD00002F66 /* Adjust */; };
@@ -11293,6 +11297,7 @@
 		F02F6A9D269C16C000A64ED8 /* PasswordRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRulesView.swift; sourceTree = "<group>"; };
 		F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRules.swift; sourceTree = "<group>"; };
 		F034DF26274A544200E5C015 /* AlbumCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCountResponse.swift; sourceTree = "<group>"; };
+		F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightSearchHelper.swift; sourceTree = "<group>"; };
 		F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewController.swift; sourceTree = "<group>"; };
 		F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeViewController.xib; sourceTree = "<group>"; };
 		F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeConfigurator.swift; sourceTree = "<group>"; };
@@ -13289,6 +13294,7 @@
 			children = (
 				0AEEA430A2A4A92D35185388 /* AlbumsInitializer.swift */,
 				984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */,
+				F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -24979,6 +24985,7 @@
 				8C0E8FBF1FDEBDFF00789C91 /* ActivityTimelineViewOutput.swift in Sources */,
 				CED4B0272017505300D06CA9 /* MappingError.swift in Sources */,
 				8C0E8FC01FDEBDFF00789C91 /* ActivityTimelineViewController.swift in Sources */,
+				F036B15827623119005A2D7E /* SpotlightSearchHelper.swift in Sources */,
 				8C0E8FC11FDEBDFF00789C91 /* ActivityTimelineModuleInput.swift in Sources */,
 				8C0E8FC21FDEBDFF00789C91 /* ActivityTimelinePresenter.swift in Sources */,
 				8C0E8FC31FDEBDFF00789C91 /* ActivityTimelineInteractorInput.swift in Sources */,
@@ -25477,6 +25484,7 @@
 				CE78483222A685FB00662219 /* HomePageViewOutput.swift in Sources */,
 				CE78483322A685FB00662219 /* UIScrollView+Refresh.swift in Sources */,
 				CE78483422A685FB00662219 /* ContactSyncModels.swift in Sources */,
+				F037182A2768E44A00DA9CF0 /* SpotlightSearchHelper.swift in Sources */,
 				CE78483522A685FB00662219 /* LeavePremiumViewController.swift in Sources */,
 				171090EC23FC8EC50036A033 /* HideActionService.swift in Sources */,
 				CE78483822A685FB00662219 /* CollectionViewCellDataProtocol.swift in Sources */,
@@ -27595,6 +27603,7 @@
 				CF8B653C23CBC9D70021B021 /* DropDownView.swift in Sources */,
 				CF8B653D23CBC9D70021B021 /* TermsOfUseViewOutput.swift in Sources */,
 				CF8B653E23CBC9D70021B021 /* BackButtonActions.swift in Sources */,
+				F03718262768E44900DA9CF0 /* SpotlightSearchHelper.swift in Sources */,
 				CF71471924B597AA00D83E60 /* ContactListSectionHeader.swift in Sources */,
 				CF8B653F23CBC9D70021B021 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				CF8B654023CBC9D70021B021 /* InstaPickCard.swift in Sources */,
@@ -28729,6 +28738,7 @@
 				CF8B6B7D23CBCA280021B021 /* UIScrollView+Refresh.swift in Sources */,
 				CF8B6B7E23CBCA280021B021 /* ContactSyncModels.swift in Sources */,
 				CF8B6B7F23CBCA280021B021 /* LeavePremiumViewController.swift in Sources */,
+				F037182B2768E44A00DA9CF0 /* SpotlightSearchHelper.swift in Sources */,
 				0305A31323D5C356004D1EC7 /* HiddenPhotosDataSource.swift in Sources */,
 				171090ED23FC8EC50036A033 /* HideActionService.swift in Sources */,
 				CF8B6B8223CBCA280021B021 /* CollectionViewCellDataProtocol.swift in Sources */,

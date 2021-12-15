@@ -9,6 +9,8 @@
 import UIKit
 
 class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeBoxInteractorOutput {
+
+    private let storageVars: StorageVars = factory.resolve()
     
     override func viewIsReady(collectionView: UICollectionView) {
         //dataSource = PhotoSelectionDataSource()
@@ -63,6 +65,7 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
     func uploadOperationSuccess() {
         debugLog("UploadFromLifeBoxPhotosPresenter uploadOperationSuccess")
         dataSource.setSelectionState(selectionState: false)
+        self.storageVars.indexedAlbumUUIDs = []
         stopModeSelected()
         guard let uploadView = view as? UploadFromLifeBoxViewInput else {
             return

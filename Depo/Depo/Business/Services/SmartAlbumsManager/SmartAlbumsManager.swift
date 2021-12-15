@@ -28,6 +28,7 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
     private let dataStorage = SmartAlbumsDataStorage()
     private let faceImageService = FaceImageService()
     private let instaPickService: InstapickService = factory.resolve()
+    private let storageVars: StorageVars = factory.resolve()
     
     var currentItems: [SliderItem] {
         set {
@@ -168,6 +169,15 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
         albumService.allAlbums(sortBy: .date, sortOrder: .desc, success: { [weak self] albums in
             self?.dataStorage.addNew(item: SliderItem(withAlbumItems: albums))
             group.leave()
+
+            if #available(iOS 14.0, *) {
+                let albumUUIDs = albums.map { $0.uuid }.sorted()
+                if self?.storageVars.indexedAlbumUUIDs?.sorted() != albumUUIDs {
+                    SpotlightSearchHelper.shared.indexItemsInStore(with: albums)
+                    self?.storageVars.indexedAlbumUUIDs = albumUUIDs
+                }
+            }
+
         }, fail: { [weak self] in
             self?.operationFailed()
             group.leave()

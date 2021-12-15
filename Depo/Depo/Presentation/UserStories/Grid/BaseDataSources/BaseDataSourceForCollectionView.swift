@@ -179,6 +179,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private var assetFilesCacheManager = AssetFileCacheManager()
     
     private var isDeleteFromMoved = false
+
+    private let storageVars: StorageVars = factory.resolve()
     
     
     init(sortingRules: SortedRules = .timeUp) {
@@ -1822,6 +1824,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                 }
                     
                 self.updateCoverPhoto()
+                self.storageVars.indexedAlbumUUIDs = []
                 
                 /// Controller will be closed and we don't need update
                 if self.allItems.isEmpty {

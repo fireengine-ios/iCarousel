@@ -50,4 +50,5 @@ struct SharedConstants {
     static let entryChangedKey = "entryChangedKey"
     
     static let isAppFirstLaunchKey = "isAppFirstLaunchKey"
+    static let spotlightAlbumsDomainID = "com.turkcell.spotlightAlbum"
 }
