@@ -123,6 +123,12 @@ final class HomePageRouter: HomePageRouterInput {
         
         popUpsToPresent.append(popUp)
     }
+
+    func presentRecoveryEmailVerificationPopUp() {
+        let popUp = router.verifyRecoveryEmailPopUp
+
+        popUpsToPresent.append(popUp)
+    }
     
     func presentCredsUpdateCkeckPopUp(message: String, userInfo: AccountInfoResponse?) {
         let popUp = CredsUpdateCheckPopUp.with(message: message, userInfo: userInfo)

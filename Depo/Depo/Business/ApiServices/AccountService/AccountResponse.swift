@@ -44,6 +44,7 @@ struct AccountJSONConstants {
     static let projectID = "projectId"
     
     static let emailVerificationRemainingDays = "emailVerificationRemainingDays"
+    static let recoveryEmailVerificationRemainingDays = "recoveryEmailVerificationRemainingDays"
     static let address = "address"
     
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
@@ -80,6 +81,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var gapId: String?
     var address: String?
     var emailVerificationRemainingDays: Int?
+    var recoveryEmailVerificationRemainingDays: Int?
     var isUpdateMobilePaymentPermissionRequired: Bool?
     var msisdnRegion: String?
     var showInvitation: Bool?
@@ -124,6 +126,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
         emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
+        recoveryEmailVerificationRemainingDays = json?[AccountJSONConstants.recoveryEmailVerificationRemainingDays].int
         address = json?[AccountJSONConstants.address].string
         isUpdateMobilePaymentPermissionRequired = json?[AccountJSONConstants.isUpdateMobilePaymentPermissionRequired].bool
         msisdnRegion = json?[AccountJSONConstants.msisdnRegion].string

@@ -123,6 +123,7 @@ class BaseEmailVerificationPopUp: BasePopUpController {
     var isRemoveLetter: Bool = false
     var currentSecurityCode = ""
     var inputTextLimit = 6
+    var alwaysShowsLaterButton = false
 
     weak var delegate: BaseEmailVerificationPopUpDelegate?
 
@@ -131,6 +132,11 @@ class BaseEmailVerificationPopUp: BasePopUpController {
     var email: String {
         assertionFailure("Implement in concrete class")
         return ""
+    }
+
+    var verificationRemainingDays: Int {
+        assertionFailure("Implement in concrete class")
+        return 0
     }
 
     func verificationCodeEntered() {
@@ -162,6 +168,13 @@ class BaseEmailVerificationPopUp: BasePopUpController {
         })
 
         updateEmail()
+
+        #if DEBUG
+        laterButton.isHidden = false
+        #else
+        let allowSkip = verificationRemainingDays > 0
+        laterButton.isHidden = !allowSkip && !alwaysShowsLaterButton
+        #endif
     }
 
     private func updateEmail() {

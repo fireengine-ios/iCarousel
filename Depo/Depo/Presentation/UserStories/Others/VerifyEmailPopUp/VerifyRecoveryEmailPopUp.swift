@@ -51,6 +51,10 @@ final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
         return email
     }
 
+    override var verificationRemainingDays: Int {
+        return SingletonStorage.shared.accountInfo?.recoveryEmailVerificationRemainingDays ?? 0
+    }
+
     override func verificationCodeEntered() {
         startActivityIndicator()
 

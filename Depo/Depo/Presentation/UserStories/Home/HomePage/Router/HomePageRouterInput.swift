@@ -31,7 +31,9 @@ protocol HomePageRouterInput {
     func presentFullOfQuotaPopUp(with type: LargeFullOfQuotaPopUpType)
         
     func presentEmailVerificationPopUp()
-    
+
+    func presentRecoveryEmailVerificationPopUp()
+
     func presentCredsUpdateCkeckPopUp(message: String, userInfo: AccountInfoResponse?)
     
     func presentPopUps()

@@ -18,6 +18,7 @@ final class NetmeraCustomUser: NetmeraUser {
     @objc var twoFactorAuthentication = ""
     @objc var autosync = ""
     @objc var emailVerification = ""
+    @objc var recoveryEmailVerification = ""
     @objc var autosyncPhotos = ""
     @objc var packages = [String]()
     @objc var autoLogin = ""
@@ -35,12 +36,13 @@ final class NetmeraCustomUser: NetmeraUser {
     @objc var galleryAccessPermission: String = ""
     @objc var hasSecurityQuestionInfo: Bool = false
     @objc var hasRecoveryEmail: Bool = false
-    
+
     
     convenience init(deviceStorage: Int, photopickLeftAnalysis: NetmeraEventValues.PhotopickUserAnalysisLeft,
                      lifeboxStorage: Int, faceImageGrouping: NetmeraEventValues.OnOffSettings,
                      accountType: String, twoFactorAuthentication: NetmeraEventValues.OnOffSettings,
                      autosync: NetmeraEventValues.OnOffSettings, emailVerification: NetmeraEventValues.OnOffSettings,
+                     recoveryEmailVerification: NetmeraEventValues.OnOffSettings,
                      autosyncPhotos: NetmeraEventValues.AutoSyncState, autosyncVideos: NetmeraEventValues.AutoSyncState,
                      packages: [String], autoLogin: NetmeraEventValues.OnOffSettings,
                      turkcellPassword: NetmeraEventValues.OnOffSettings, buildNumber: String, countryCode: String, regionCode: String,
@@ -56,6 +58,7 @@ final class NetmeraCustomUser: NetmeraUser {
         self.twoFactorAuthentication = twoFactorAuthentication.text
         self.autosync = autosync.text
         self.emailVerification = emailVerification.text
+        self.recoveryEmailVerification = recoveryEmailVerification.text
         self.autosyncPhotos = autosyncPhotos.text
         self.autosyncVideos = autosyncVideos.text
         self.packages = packages
@@ -79,6 +82,7 @@ final class NetmeraCustomUser: NetmeraUser {
                      lifeboxStorage: Int, faceImageGrouping: String,
                      accountType: String, twoFactorAuthentication: String,
                      autosync: String, emailVerification: String,
+                     recoveryEmailVerification: String,
                      autosyncPhotos: String, autosyncVideos: String,
                      packages: [String], autoLogin: String,
                      turkcellPassword: String, buildNumber: String,
@@ -98,6 +102,7 @@ final class NetmeraCustomUser: NetmeraUser {
         self.twoFactorAuthentication = twoFactorAuthentication
         self.autosync = autosync
         self.emailVerification = emailVerification
+        self.recoveryEmailVerification = recoveryEmailVerification
         self.autosyncPhotos = autosyncPhotos
         self.autosyncVideos = autosyncVideos
         self.packages = packages
@@ -127,6 +132,7 @@ final class NetmeraCustomUser: NetmeraUser {
             "pdb" : #keyPath(twoFactorAuthentication),
             "pcd" : #keyPath(autosync),
             "pde" : #keyPath(emailVerification),
+            "aa"  : #keyPath(recoveryEmailVerification),
             "pcc" : #keyPath(autosyncPhotos),
             "pdd" : #keyPath(packages),
             "pdg" : #keyPath(autoLogin),
