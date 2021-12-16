@@ -32,8 +32,8 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
         }
     }
     
-    func connect(withToken token: String) {
-        dbService.requestConnect(withToken: token, success: { [weak self] _ in
+    func connect(withToken accessToken: String, refreshToken: String) {
+        dbService.requestConnect(withToken: accessToken, refreshToken: refreshToken, success: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.output?.connectWithTokenSuccess()
             }
@@ -89,7 +89,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let token):
-                    self?.output?.loginSuccess(token: token)
+                    self?.output?.loginSuccess(accessToken: token.accessToken, refreshToken: token.refreshToken)
                 case .cancel:
                     self?.output?.loginCanceled()
                 case .failed(let errorString):

@@ -33,7 +33,7 @@ protocol ImportFromDropboxInteractorInput {
 
     func login()
     func requestStatusForStart()
-    func connect(withToken token: String)
+    func connect(withToken accessToken: String, refreshToken: String)
     func requestStart()
     func requestStatusForCompletion()
     func trackConnectionStatusDropBox(isConnected: Bool)

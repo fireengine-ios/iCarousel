@@ -41,7 +41,7 @@ protocol ImportFromFBInteractorOutput: AnyObject {
 
 protocol ImportFromDropboxInteractorOutput: AnyObject {
     
-    func loginSuccess(token: String)
+    func loginSuccess(accessToken: String, refreshToken: String)
     func loginFailure(errorMessage: String)
     func loginCanceled()
     

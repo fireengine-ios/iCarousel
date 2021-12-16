@@ -13,7 +13,7 @@ import SwiftyDropbox
 
 enum DropboxManagerResult {
     /// User is logged into Dropbox
-    case success(token: String)
+    case success(accessToken: String, refreshToken: String)
     /// Authorization flow was manually canceled by user!
     case cancel
     /// some error from sdk
@@ -25,9 +25,9 @@ final class DropboxManager {
     
     func start() {
         #if LIFEBOX
-        DropboxClientsManager.setupWithAppKey("422fptod5dlxrn8")
+        DropboxClientsManager.setupWithAppKey("ld8xzj3w9fsnvxd")
         #else
-        DropboxClientsManager.setupWithAppKey("mij832wzxlbyeiq")
+        DropboxClientsManager.setupWithAppKey("ld8xzj3w9fsnvxd")
         #endif
     }
     
@@ -45,8 +45,8 @@ final class DropboxManager {
         }
         
         switch result {
-        case .success(let accessToken):
-            handler?(.success(token: accessToken.accessToken))
+        case .success(let token):
+            handler?(.success(accessToken: token.accessToken, refreshToken: token.refreshToken ?? ""))
             debugLog("DropboxManager User is logged into Dropbox.")
         case .cancel:
             handler?(.cancel)
@@ -61,14 +61,18 @@ final class DropboxManager {
     
     private var handler: DropboxLoginHandler?
     
-    private var token: String? {
+    private var accessToken: String? {
         return DropboxOAuthManager.sharedOAuthManager.getFirstAccessToken()?.accessToken
+    }
+
+    private var refreshToken: String? {
+        return DropboxOAuthManager.sharedOAuthManager.getFirstAccessToken()?.refreshToken
     }
     
     func loginIfNeed(handler: @escaping DropboxLoginHandler) {
         debugLog("DropboxManager login")
-        if let token = token {
-            handler(.success(token: token))
+        if let token = accessToken, let refreshToken = refreshToken {
+            handler(.success(accessToken: token, refreshToken: refreshToken))
             return
         }
         login(handler: handler)
@@ -82,9 +86,14 @@ final class DropboxManager {
             return
         }
         
-        DropboxClientsManager.authorizeFromController(UIApplication.shared, controller: vc) { url in
-            UIApplication.shared.openSafely(url)
-        }
+        let scopeRequest = ScopeRequest(scopeType: .user, scopes: [], includeGrantedScopes: false)
+        DropboxClientsManager.authorizeFromControllerV2(
+            UIApplication.shared,
+            controller: vc,
+            loadingStatusDelegate: nil,
+            openURL: { (url: URL) -> Void in UIApplication.shared.open(url, options: [:], completionHandler: nil) },
+            scopeRequest: scopeRequest
+        )
     }
     
     func logout() {
@@ -120,10 +129,10 @@ class DropboxService: BaseRequestService {
         executePostRequest(param: dropbox, handler: handler)
     }
     
-    func requestConnect(withToken token: String, success: SuccessResponse?, fail: FailResponse?) {
+    func requestConnect(withToken accessToken: String, refreshToken: String, success: SuccessResponse?, fail: FailResponse?) {
         debugLog("DropboxService requestConnect")
 
-        let dropbox = DropboxConnect(withToken: token)
+        let dropbox = DropboxConnect(withToken: accessToken, refreshToken: refreshToken)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: dropbox, handler: handler)
     }
