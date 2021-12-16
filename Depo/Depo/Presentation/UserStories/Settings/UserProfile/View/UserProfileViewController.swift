@@ -567,6 +567,7 @@ extension UserProfileViewController: UserProfileViewInput {
 
     func presentRecoveryEmailVerificationPopUp() {
         let popup = RouterVC().verifyRecoveryEmailPopUp
+        popup.alwaysShowsLaterButton = true
         popup.delegate = self
         present(popup, animated: true)
     }

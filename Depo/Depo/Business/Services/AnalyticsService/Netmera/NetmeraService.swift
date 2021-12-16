@@ -101,6 +101,7 @@ final class NetmeraService {
             let netmeraAutoSyncStatusPhoto = photoVideoAutosyncStatus.photo
             let netmeraAutoSyncStatusVideo = photoVideoAutosyncStatus.video
             let verifiedEmailStatus = getVerifiedEmailStatus()
+            let verifiedRecoveryEmailStatus = getVerifiedRecoveryEmailStatus()
             let buildNumber = getBuildNumber()
             let galleryAccessPermission = LocalMediaStorage.default.galleryPermission.analyticsValue
             
@@ -116,6 +117,7 @@ final class NetmeraService {
                     twoFactorAuthentication: twoFactorNetmeraStatus,
                     autosync: autoSyncState,
                     emailVerification: verifiedEmailStatus,
+                    recoveryEmailVerification: verifiedRecoveryEmailStatus,
                     autosyncPhotos: netmeraAutoSyncStatusPhoto,
                     autosyncVideos: netmeraAutoSyncStatusVideo,
                     packages: activeSubscriptionNames,
@@ -211,6 +213,7 @@ extension NetmeraService {
     private static func logEmptyUser() {
         let user = NetmeraCustomUser(deviceStorage: 0, photopickLeftAnalysis: "Null", lifeboxStorage: 0, faceImageGrouping: "Null", accountType: "Null",
                                      twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
+                                     recoveryEmailVerification: "Null",
                                      autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
                                      autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", regionCode: "Null", isUserName: 0,
                                      isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0, galleryAccessPermission: "Null")
@@ -333,6 +336,15 @@ extension NetmeraService {
             return "Null"
         }
     }
+
+    private static func getVerifiedRecoveryEmailStatus() -> String {
+        if let isVerified = SingletonStorage.shared.accountInfo?.recoveryEmailVerified  {
+            return isVerified ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
+        } else {
+            return "Null"
+        }
+    }
+
     
     private static func getBuildNumber() -> String {
         return (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "Null"
