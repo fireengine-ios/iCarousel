@@ -148,6 +148,7 @@ extension HomePagePresenter: HomePageInteractorOutput {
     
     func didObtainAccountInfo(accountInfo: AccountInfoResponse) {
         verifyEmailIfNeeded(with: accountInfo)
+        verifyRecoveryEmailIfNeeded(with: accountInfo)
         credsCheckUpdateIfNeeded(with: accountInfo)
         checkMobilePaymentPermission(with: accountInfo)
         decreaseDispatchGroupValue(for: .waitAccountInfoResponse)
@@ -204,6 +205,14 @@ extension HomePagePresenter: HomePageInteractorOutput {
         }
         
         router.presentEmailVerificationPopUp()
+    }
+
+    private func verifyRecoveryEmailIfNeeded(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.recoveryEmail != nil, accountInfo.recoveryEmailVerified == false else {
+            return
+        }
+
+        router.presentRecoveryEmailVerificationPopUp()
     }
     
     private func credsCheckUpdateIfNeeded(with accountInfo: AccountInfoResponse) {
