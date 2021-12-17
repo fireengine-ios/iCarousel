@@ -328,6 +328,11 @@ extension SmartAlbumsManagerImpl: ItemOperationManagerViewProtocol {
     func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
         requestAllItems()
     }
+
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
+        storageVars.indexedAlbumUUIDs = []
+        requestAllItems()
+    }
     
     //MARK: - Hide events
     
