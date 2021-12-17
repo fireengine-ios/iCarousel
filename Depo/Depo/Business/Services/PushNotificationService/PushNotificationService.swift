@@ -244,7 +244,20 @@ final class PushNotificationService {
         pendingAction = nil
         pendingActionOptions = nil
     }
-    
+
+    private func isExistingViewController(controller: ViewController) -> Bool {
+        if let navigationController = self.router.topNavigationController {
+            let existingController = navigationController.viewControllers.first(where: { type(of: $0) == type(of: controller) })
+            if existingController == navigationController.viewControllers.last {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+
     //MARK: -
     
     private func pushTo(_ controller: UIViewController?) {
@@ -610,8 +623,15 @@ private extension PushNotificationService {
             switch response {
             case .success(let data):
                 let viewController = self.router.albumDetailController(album: AlbumItem(remote: data), type: .List, status: .active, moduleOutput: nil)
-                self.pushTo(viewController)
-            case .failed(let _):
+                if self.isExistingViewController(controller: viewController) {
+                    self.router.popViewController()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.pushTo(viewController)
+                    }
+                } else {
+                    self.pushTo(viewController)
+                }
+            case .failed( _):
                 UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
             }
         }

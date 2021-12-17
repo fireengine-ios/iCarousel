@@ -49,12 +49,15 @@ class SpotlightSearchHelper {
                 guard let name = album.name else { return nil}
                 let attributeSet = CSSearchableItemAttributeSet(contentType: .item)
                 attributeSet.displayName = name
-                attributeSet.contentDescription = "\(album.imageCount ?? 0) \(TextConstants.autoSyncCellPhotos)"
+                attributeSet.contentDescription = "\(album.allContentCount) \(TextConstants.fileInfoAlbumSizeTitle)"
                 attributeSet.keywords = [name]
                 attributeSet.thumbnailData = self.thumbnails[album.uuid]?.jpegData(compressionQuality: 0.5)
-                return CSSearchableItem(uniqueIdentifier: album.uuid,
-                                        domainIdentifier: domainIdentifier,
-                                        attributeSet: attributeSet)
+
+                let item = CSSearchableItem(uniqueIdentifier: album.uuid,
+                                            domainIdentifier: domainIdentifier,
+                                            attributeSet: attributeSet)
+                item.expirationDate = Date.distantFuture
+                return item
             }
 
             CSSearchableIndex.default().indexSearchableItems(album) { error in

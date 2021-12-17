@@ -81,8 +81,8 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
         service.albumCoverPhoto(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { coverPhoto in
             if album.preview?.uuid != coverPhoto.uuid {
                 album.preview = coverPhoto
-                ItemOperationManager.default.updatedAlbumCoverPhoto(item: album)
             }
+            ItemOperationManager.default.updatedAlbumCoverPhoto(item: album)
         }) {
             
         }
