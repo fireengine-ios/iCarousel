@@ -14,7 +14,7 @@ final class FaceImagePhotosConfigurator {
         return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
-    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool) {
+    func configure(viewController: FaceImagePhotosViewController, album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool, faceImageType: FaceImageType?) {
         let router = FaceImagePhotosRouter()
         router.view = viewController
         router.item = item
@@ -47,7 +47,7 @@ final class FaceImagePhotosConfigurator {
         interactor.status = status
         interactor.parent = album
         
-        let initialTypes = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .actionSheet)
+        let initialTypes = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .actionSheet, faceImageType: faceImageType)
         let selectionModeTypes = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .selectionMode)
         let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: initialTypes,
                                                                    selectionModeTypes: selectionModeTypes)

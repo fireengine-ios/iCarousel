@@ -38,6 +38,7 @@ enum ElementTypes {
     case removeFromFaceImageAlbum
     case print
     case changeCoverPhoto
+    case changePeopleThumbnail
     case hide
     case unhide
     case smash
@@ -175,7 +176,7 @@ enum ElementTypes {
         return result
     }
     
-    static func faceImagePhotosElementsConfig(for item: Item, status: ItemStatus, viewType: UniversalViewType) -> [ElementTypes] {
+    static func faceImagePhotosElementsConfig(for item: Item, status: ItemStatus, viewType: UniversalViewType, faceImageType: FaceImageType? = nil) -> [ElementTypes] {
         var result: [ElementTypes]
 
         switch viewType {
@@ -203,6 +204,9 @@ enum ElementTypes {
                     result.append(contentsOf: ElementTypes.trashState)
                     
                 default:
+                    if faceImageType == .people {
+                        result.append(.changePeopleThumbnail)
+                    }
                     result.append(contentsOf: [.changeCoverPhoto, .share] + ElementTypes.activeState)
                 }
             }
@@ -539,6 +543,8 @@ enum ElementTypes {
             return TextConstants.actionSheetDeleteDeviceOriginal
         case .changeCoverPhoto:
             return TextConstants.actionSheetChangeCover
+        case .changePeopleThumbnail:
+            return "Change Person Photo"
         case .instaPick:
             return TextConstants.newInstaPick
         case .endSharing:

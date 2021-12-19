@@ -894,13 +894,14 @@ class RouterVC: NSObject {
     
     // MARK: Face Image Recognition Photos
     
-    func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
+    func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false, faceImageType: FaceImageType? = nil) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
                                                                          album: album,
                                                                          item: item,
                                                                          status: status,
                                                                          moduleOutput: moduleOutput,
-                                                                         isSearchItem: isSearchItem)
+                                                                         isSearchItem: isSearchItem,
+                                                                         faceImageType: faceImageType)
         return controller as! BaseFilesGreedChildrenViewController
     }
     

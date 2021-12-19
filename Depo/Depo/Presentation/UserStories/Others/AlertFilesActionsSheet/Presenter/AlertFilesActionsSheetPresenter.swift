@@ -287,6 +287,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .delete,
                      .removeAlbum,
                      .changeCoverPhoto,
+                     .changePeopleThumbnail,
                      .removeFromFaceImageAlbum,
                      .instaPick,
                      .endSharing,
@@ -597,6 +598,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         case .changeCoverPhoto:
             basePassingPresenter?.changeCover()
+
+        case .changePeopleThumbnail:
+            return
             
         case .removeFromFaceImageAlbum:
             if let item = basePassingPresenter?.getFIRParent() {
