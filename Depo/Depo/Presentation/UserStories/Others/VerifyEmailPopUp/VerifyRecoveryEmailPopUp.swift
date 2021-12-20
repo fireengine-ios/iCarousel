@@ -20,8 +20,6 @@ final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
         // No need for change email button for recovery email
         changeEmailButton.isHidden = true
 
-        laterButton.isHidden = false
-
         /// Send code once
         if !SingletonStorage.shared.isRecoveryEmailVerificationCodeSent {
             resendCode(isAutomaticaly: true)
