@@ -292,7 +292,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .instaPick,
                      .endSharing,
                      .leaveSharing,
-                     .moveToTrashShared:
+                     .moveToTrashShared,
+                     .makePersonThumbnail:
                     
                     action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
                         self?.handleAction(type: type, items: currentItems)
@@ -600,8 +601,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             basePassingPresenter?.changeCover()
 
         case .changePeopleThumbnail:
-            return
+            basePassingPresenter?.changePeopleThumbnail()
             
+        case .makePersonThumbnail:
+            if let item = basePassingPresenter?.getFIRParent() {
+                interactor.makePersonThumbnail(items: items, item: item)
+            }
         case .removeFromFaceImageAlbum:
             if let item = basePassingPresenter?.getFIRParent() {
                 interactor.deleteFromFaceImageAlbum(items: items, item: item)

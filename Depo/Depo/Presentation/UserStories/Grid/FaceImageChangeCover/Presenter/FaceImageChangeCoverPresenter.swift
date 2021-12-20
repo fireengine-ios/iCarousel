@@ -8,9 +8,15 @@
 
 import Foundation
 
+enum CoverType {
+    case albumCover
+    case thumbnail
+}
+
 final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
     
     weak var customModuleOutput: FaceImageChangeCoverModuleOutput?
+    var coverType: CoverType?
     
     override func viewIsReady(collectionView: UICollectionView) {
         super.viewIsReady(collectionView: collectionView)
@@ -21,7 +27,11 @@ final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
     
     override func onItemSelected(item: BaseDataSourceItem, from data: [[BaseDataSourceItem]]) {
         if let interactor = interactor as? FaceImageChangeCoverInteractor {
-            interactor.setAlbumCoverWithItem(item)
+            if coverType == .thumbnail {
+                interactor.setPersonThumbnailWith(item: item)
+            } else {
+                interactor.setAlbumCoverWithItem(item)
+            }
         }
     }
     
@@ -39,6 +49,12 @@ final class FaceImageChangeCoverPresenter: BaseFilesGreedPresenter {
 // MARK: - FaceImageChangeCoverInteractorOutput
 
 extension FaceImageChangeCoverPresenter: FaceImageChangeCoverInteractorOutput {
+    func didSetPersonThumbnail(item: BaseDataSourceItem) {
+        SnackbarManager.shared.show(type: .nonCritical, message: localized(.changePersonThumbnailSuccess))
+        if let router = router as? FaceImageChangeCoverRouterInput {
+            router.back()
+        }
+    }
     
     func didSetCover(item: BaseDataSourceItem) {
         if let router = router as? FaceImageChangeCoverRouterInput {

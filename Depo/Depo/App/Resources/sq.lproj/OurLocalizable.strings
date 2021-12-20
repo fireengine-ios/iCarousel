@@ -1971,8 +1971,14 @@
 
 
 /*Change album cover photo*/
-"dark_mode_page_title_text" = "";
-"dark_mode_title_text" = "";
-"dark_mode_dark_text" = "";
-"dark_mode_light_text" = "";
-"dark_mode_default_text" = "";
+"dark_mode_page_title_text" = "Modaliteti i Errët";
+"dark_mode_title_text" = "Modaliteti";
+"dark_mode_dark_text" = "E Errët";
+"dark_mode_light_text" = "E Ndritshme";
+"dark_mode_default_text" = "E Paracaktuar";
+
+/*Change person thumbnail*/
+"change_album_person_snackbar_text" = "";
+"change_album_person_error_text" = "";
+"change_person_photo" = "";
+"change_album_person_set_photo" = "";

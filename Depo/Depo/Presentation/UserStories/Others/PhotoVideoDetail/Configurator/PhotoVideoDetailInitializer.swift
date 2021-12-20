@@ -61,7 +61,7 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         return (viewController, presenter)
     }
     
-    class func initializeFaceImageAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, status: ItemStatus) -> PhotoVideoDetailModule {
+    class func initializeFaceImageAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, status: ItemStatus, faceImageType: FaceImageType?) -> PhotoVideoDetailModule {
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideFIRAlbum)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
@@ -80,7 +80,8 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                                    allItems: allItems,
                                                                    albumUUID: albumUUID,
                                                                    albumItem: albumItem,
-                                                                   status: status)
+                                                                   status: status,
+                                                                   faceImageType: faceImageType)
         return (viewController, presenter)
     }
 }

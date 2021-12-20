@@ -58,6 +58,7 @@ enum ElementTypes {
     case musicDetails
     case shareAlbum
     case makeAlbumCover
+    case makePersonThumbnail
     case albumDetails
     //instaPick
     case instaPick
@@ -544,7 +545,9 @@ enum ElementTypes {
         case .changeCoverPhoto:
             return TextConstants.actionSheetChangeCover
         case .changePeopleThumbnail:
-            return "Change Person Photo"
+            return localized(.changePersonThumbnail)
+        case .makePersonThumbnail:
+            return "Kişi fotoğrafı olarak ata"
         case .instaPick:
             return TextConstants.newInstaPick
         case .endSharing:

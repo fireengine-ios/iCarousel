@@ -372,6 +372,8 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func changeCover() {}
     
     func openInstaPick() {}
+    
+    func changePeopleThumbnail() {}
 }
 
 

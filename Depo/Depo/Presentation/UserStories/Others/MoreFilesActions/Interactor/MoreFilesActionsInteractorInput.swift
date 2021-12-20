@@ -76,6 +76,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func makeAlbumCover(items: [BaseDataSourceItem])
     
+    func makePersonThumbnail(items: [BaseDataSourceItem], item: Item)
+    
     func albumDetails(items: [BaseDataSourceItem])
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem])

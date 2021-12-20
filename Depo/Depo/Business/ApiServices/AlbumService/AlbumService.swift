@@ -305,6 +305,15 @@ class PhotosAlbumService: BaseRequestService {
         executePutRequest(param: parameters, handler: handler)
     }
     
+    func changePeopleThumbnail(parameters: PeopleChangeThumbnailParameters, success: PhotosAlbumOperation?, fail: FailResponse?) {
+        debugLog("PhotosAlbumService changePeopleThumbnail")
+        
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response  in
+            success?()
+        }, fail: fail)
+        executePostRequest(param: parameters, handler: handler)
+    }
+    
     func renameAlbum(parameters: RenameAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService renameAlbum")
 

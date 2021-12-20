@@ -18,6 +18,7 @@ final class FaceImagePhotosConfigurator {
         let router = FaceImagePhotosRouter()
         router.view = viewController
         router.item = item
+        router.faceImageType = faceImageType
 
         viewController.mainTitle = item.name ?? ""
         viewController.status = status

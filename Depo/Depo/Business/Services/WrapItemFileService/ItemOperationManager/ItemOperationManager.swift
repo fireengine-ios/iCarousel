@@ -47,6 +47,8 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem)
     
+    func updatedPersonThumbnail(item: BaseDataSourceItem)
+    
     func albumsDeleted(albums: [AlbumItem])
     
     func fileAddedToAlbum(item: WrapData, error: Bool)
@@ -143,6 +145,8 @@ extension ItemOperationManagerViewProtocol {
     func newStoryCreated() {}
     
     func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {}
+    
+    func updatedPersonThumbnail(item: BaseDataSourceItem) {}
     
     func albumsDeleted(albums: [AlbumItem]) {}
     
@@ -582,6 +586,12 @@ class ItemOperationManager: NSObject {
     func didRemove(contact: SharedContact, fromItem uuid: String) {
         DispatchQueue.main.async {
             self.views.invoke { $0.didRemove(contact: contact, fromItem: uuid) }
+        }
+    }
+    
+    func updatedPersonThumbnail(item: BaseDataSourceItem) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.updatedPersonThumbnail(item: item) }
         }
     }
 }

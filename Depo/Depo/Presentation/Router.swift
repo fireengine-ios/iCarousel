@@ -821,14 +821,15 @@ class RouterVC: NSObject {
                                                                                status: status)
     }
     
-    func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+    func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?, faceImageType: FaceImageType?) -> PhotoVideoDetailModule {
         return PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                         moduleOutput: moduleOutput,
                                                                                         selectedItem: fileObject,
                                                                                         allItems: items,
                                                                                         albumUUID: albumUUID,
                                                                                         albumItem: albumItem,
-                                                                                        status: status)
+                                                                                        status: status,
+                                                                                        faceImageType: faceImageType)
     }
 
     // MARK: Albums list
@@ -905,8 +906,8 @@ class RouterVC: NSObject {
         return controller as! BaseFilesGreedChildrenViewController
     }
     
-    func faceImageChangeCoverController(albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?) -> BaseFilesGreedChildrenViewController {
-        let controller = FaceImageChangeCoverInitializer.initializeController(with: "BaseFilesGreedViewController", albumUUID: albumUUID, moduleOutput: moduleOutput)
+    func faceImageChangeCoverController(albumUUID: String, personItem: Item? = nil, coverType: CoverType? = nil, moduleOutput: FaceImageChangeCoverModuleOutput?) -> BaseFilesGreedChildrenViewController {
+        let controller = FaceImageChangeCoverInitializer.initializeController(with: "BaseFilesGreedViewController", albumUUID: albumUUID, personItem: personItem, coverType: coverType, moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
     

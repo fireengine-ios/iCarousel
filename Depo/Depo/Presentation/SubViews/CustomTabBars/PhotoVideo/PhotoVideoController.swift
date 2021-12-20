@@ -638,6 +638,7 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
         
     }
     func changeCover() {}
+    func changePeopleThumbnail() {}
 }
 
 // MARK: - SegmentedChildNavBarManagerDelegate

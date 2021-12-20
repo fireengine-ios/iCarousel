@@ -999,6 +999,19 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         })
     }
     
+    func makePersonThumbnail(items: [BaseDataSourceItem], item: Item) {
+        guard let item = items.first as? Item, let personId = item.id else{ return }
+        
+        let params = PeopleChangeThumbnailParameters(personId: personId, item: item)
+        
+        albumService.changePeopleThumbnail(parameters: params, success: { [weak self] in
+            self?.output?.operationFinished(type: .makePersonThumbnail)
+            ItemOperationManager.default.updatedPersonThumbnail(item: item)
+            }, fail: { [weak self] error in
+                self?.output?.operationFailed(type: .makePersonThumbnail, message: localized(.changePersonThumbnailError))
+        })
+    }
+
     func albumDetails(items: [BaseDataSourceItem]) {
         guard let album = items.first, let albumDetailVC = router.fileInfo(item: album) as? FileInfoViewController else {
             return

@@ -89,4 +89,10 @@ enum Strings: String, Localizable {
     case darkModeDarkText = "dark_mode_dark_text"
     case darkModeLightText = "dark_mode_light_text"
     case darkModeDefaultText = "dark_mode_default_text"
+    
+    // MARK: - Change person thumbnail
+    case changePersonThumbnailSuccess = "change_album_person_snackbar_text"
+    case changePersonThumbnailError = "change_album_person_error_text"
+    case changePersonThumbnail = "change_person_photo"
+
 }

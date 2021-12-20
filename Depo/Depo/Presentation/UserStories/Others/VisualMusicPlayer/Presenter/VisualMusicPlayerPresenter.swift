@@ -17,6 +17,7 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func stopModeSelected() {}
     func printSelected() {}
     func openInstaPick() { }
+    func changePeopleThumbnail() {}
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
         guard let currentItem = view.player.currentItem else {
             selectedItemsCallback([])

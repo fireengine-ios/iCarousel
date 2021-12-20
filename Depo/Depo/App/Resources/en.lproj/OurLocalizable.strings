@@ -416,7 +416,7 @@
 "This GSM Number is already registered. Please enter another GSM Number." = "This phone number is already registered. Please enter another phone number.";
 "Albums with %@" = "Albums with %@";
 "Deselect All" = "Unselect all";
-"Change cover photo" = "Change cover photo";
+"Change cover photo" = "Change Cover Photo";
 "Photo uploaded" = "Photo uploaded";
 "Please select a language option" = "Please select a language option";
 "My Stories" = "My Stories";
@@ -1982,3 +1982,9 @@
 "dark_mode_dark_text" = "Dark";
 "dark_mode_light_text" = "Light";
 "dark_mode_default_text" = "Default";
+
+/*Change person thumbnail*/
+"change_album_person_snackbar_text" = "Person photo changed successfully";
+"change_album_person_error_text" = "Error occurred while changing person photo";
+"change_person_photo" = "Change Person Photo";
+"change_album_person_set_photo" = "Use as person photo";

@@ -398,7 +398,7 @@
 "This GSM Number is already registered. Please enter another GSM Number." = "Bu telefon numarası ile kayıtlı bir hesap zaten var. Lütfen başka bir telefon numarası dene.";
 "Albums with %@" = "%@ albümleri";
 "Deselect All" = "Tüm seçimi kaldır";
-"Change cover photo" = "Kapak fotoğrafını değiştir";
+"Change cover photo" = "Kapak Fotoğrafını Değiştir";
 "Photo uploaded" = "Fotoğraf yüklendi";
 "Please select a language option" = "Lütfen bir dil seçeneği belirtin.";
 "My Stories" = "Hikayeler";
@@ -1950,3 +1950,9 @@
 "dark_mode_dark_text" = "Karanlık";
 "dark_mode_light_text" = "Aydınlık";
 "dark_mode_default_text" = "Varsayılan";
+
+/*Change person thumbnail*/
+"change_album_person_snackbar_text" = "Kişi fotoğrafı başarıyla güncellendi";
+"change_album_person_error_text" = "Kişi fotoğrafı değişimi sırasında bir hata oluştu";
+"change_person_photo" = "Kişi Fotoğrafını Değiştir";
+"change_album_person_set_photo" = "Kişi fotoğrafı olarak kullan";
