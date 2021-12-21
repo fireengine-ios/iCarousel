@@ -30,7 +30,6 @@ enum Strings: String, Localizable {
 
     // MARK: - Reset Password
     case resetPasswordTitle                  = "reset_password"
-    case resetPasswordInfoTurkcell           = "If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222."
     case resetPasswordCaptchaPlaceholder     = "enter_the_text_shown_in_the_image"
     case resetPasswordErrorCaptchaFormatText = "Please type the text"
     case resetPasswordErrorCaptchaText       = "This text doesn't match. Please try again"
@@ -38,7 +37,6 @@ enum Strings: String, Localizable {
     case resetPasswordEnterYourAccountEmail  = "forgotMyPassword_enter_your_account_email"
     case resetPasswordInstructions           = "forgotMyPassword_instructions"
     case resetPasswordEnterValidEmail        = "forgotMyPassword_enter_valid_email"
-    case resetPasswordInstructionsOther      = "forgotMyPassword_instructions_other"
     case resetPasswordButtonTitle            = "forgotMyPassword_reset_button"
     case resetPasswordChallenge1Header       = "forgotMyPassword_challange1_header"
     case resetPasswordChallenge1Body         = "forgotMyPassword_challange1_body"
@@ -89,4 +87,11 @@ enum Strings: String, Localizable {
     case darkModeDarkText = "dark_mode_dark_text"
     case darkModeLightText = "dark_mode_light_text"
     case darkModeDefaultText = "dark_mode_default_text"
+    
+    // MARK: - Change person thumbnail
+    case changePersonThumbnailSuccess = "change_album_person_snackbar_text"
+    case changePersonThumbnailError = "change_album_person_error_text"
+    case changePersonThumbnail = "change_person_photo"
+    case changePersonThumbnailSetPhoto = "change_album_person_set_photo"
+
 }

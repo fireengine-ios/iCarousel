@@ -7,7 +7,7 @@
 //
 
 protocol FaceImageItemsRouterInput {
-    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?)
+    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?, faceImageType: FaceImageType?)
     func showPopUp()
     func showNoDetailsAlert(with message: String)
     func openPremium(source: BecomePremiumViewSourceType, module: FaceImageItemsModuleOutput)

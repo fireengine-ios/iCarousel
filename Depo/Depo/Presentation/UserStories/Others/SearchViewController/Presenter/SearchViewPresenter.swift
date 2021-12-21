@@ -506,6 +506,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func changeCover() { }
     
+    func changePeopleThumbnail() {}
+    
     func openInstaPick() { }
     
     func didDelete(items: [BaseDataSourceItem]) {

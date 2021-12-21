@@ -334,6 +334,12 @@ extension SmartAlbumsManagerImpl: ItemOperationManagerViewProtocol {
         requestAllItems()
     }
     
+    func updatedPersonThumbnail(item: BaseDataSourceItem) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.reload(types: [.people])
+        }
+    }
+    
     //MARK: - Hide events
     
     func didHideAlbums(_ albums: [AlbumItem]) {

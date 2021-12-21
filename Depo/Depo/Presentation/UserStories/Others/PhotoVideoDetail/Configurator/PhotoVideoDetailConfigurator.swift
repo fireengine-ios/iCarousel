@@ -63,8 +63,13 @@ class PhotoVideoDetailModuleConfigurator {
                                                                          allItems: [Item],
                                                                          albumUUID: String,
                                                                          albumItem: Item? = nil,
-                                                                         status: ItemStatus) {
+                                                                         status: ItemStatus,
+                                                                         faceImageType: FaceImageType?) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
+            var photoDetailMoreMenu = ActionSheetPredetermendConfigs.photoVideoDetailActions
+            if faceImageType == .people {
+                photoDetailMoreMenu.append(.makePersonThumbnail)
+            }
             let interactor = PhotoVideoDetailInteractor()
             interactor.albumUUID = albumUUID
             configure(viewController: viewController,
@@ -72,7 +77,7 @@ class PhotoVideoDetailModuleConfigurator {
                       moduleOutput: moduleOutput,
                       bottomBarConfig: bottomBarConfig,
                       interactor: interactor,
-                      photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.moveToTrash],
+                      photoDetailMoreMenu: photoDetailMoreMenu + [.moveToTrash],
                       selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem,
                       status: status, viewType: .insideFIRAlbum,
                       canLoadMoreItems: true)

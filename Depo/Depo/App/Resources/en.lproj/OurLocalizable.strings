@@ -416,7 +416,7 @@
 "This GSM Number is already registered. Please enter another GSM Number." = "This phone number is already registered. Please enter another phone number.";
 "Albums with %@" = "Albums with %@";
 "Deselect All" = "Unselect all";
-"Change cover photo" = "Change cover photo";
+"Change cover photo" = "Change Cover Photo";
 "Photo uploaded" = "Photo uploaded";
 "Please select a language option" = "Please select a language option";
 "My Stories" = "My Stories";
@@ -492,7 +492,6 @@
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
 "An error is occurred!" = "An error occurred!";
 "Please check the e-mail address" = "Please check the e-mail address";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "If you are already a Turkcell subscriber, you can obtain your password by sending a free SMS containing SIFRE to 2200.";
 "Your password is sent to your e-mail address" = "Your password was sent to your e-mail address.";
 "Please enter a valid email adress" = "Please enter a valid email address.";
 "Please type the text" = "Please type the text";
@@ -1931,7 +1930,6 @@
 "forgotMyPassword_enter_your_account_email" = "Enter your e-mail or phone number associated with your account";
 "forgotMyPassword_instructions" = "To reset your password we will send a link to your e-mail associated with your account:";
 "forgotMyPassword_enter_valid_email" = "Please enter a valid e-mail or phone number";
-"forgotMyPassword_instructions_other" = "To reset your password you can click the link that will be sent to your e-mail associated with your account.";
 "forgotMyPassword_reset_button" = "Reset Password";
 "forgotMyPassword_challange1_header" = "Please Select a Verification Method";
 "forgotMyPassword_challange1_body" = "To reset your password, which verification method would you like to continue with?";
@@ -1982,3 +1980,9 @@
 "dark_mode_dark_text" = "Dark";
 "dark_mode_light_text" = "Light";
 "dark_mode_default_text" = "Default";
+
+/*Change person thumbnail*/
+"change_album_person_snackbar_text" = "Person photo changed successfully";
+"change_album_person_error_text" = "Error occurred while changing person photo";
+"change_person_photo" = "Change Person Photo";
+"change_album_person_set_photo" = "Use as person photo";

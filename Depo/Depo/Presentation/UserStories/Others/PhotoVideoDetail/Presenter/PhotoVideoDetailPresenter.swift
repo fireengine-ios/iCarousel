@@ -216,6 +216,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             interactor.deleteSelectedItem(type: type)
         case .makeAlbumCover:
             changeCover()
+        case .makePersonThumbnail:
+            changePeopleThumbnail()
         default:
             break
         }
@@ -256,6 +258,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func changeCover() { 
         SnackbarManager.shared.show(type: .nonCritical, message: localized(.changeAlbumCoverSuccess))
+    }
+    
+    func changePeopleThumbnail() {
+        SnackbarManager.shared.show(type: .nonCritical, message: localized(.changePersonThumbnailSuccess))
     }
     
     func getFIRParent() -> Item? {

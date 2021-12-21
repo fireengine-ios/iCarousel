@@ -912,6 +912,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func changeCover() { }
     
+    func changePeopleThumbnail() {}
+    
     func getFIRParent() -> Item? {
         return nil
     }

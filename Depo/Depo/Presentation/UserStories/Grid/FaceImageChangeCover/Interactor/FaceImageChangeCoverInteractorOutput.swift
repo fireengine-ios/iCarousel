@@ -8,4 +8,5 @@
 
 protocol FaceImageChangeCoverInteractorOutput {
     func didSetCover(item: BaseDataSourceItem)
+    func didSetPersonThumbnail(item: BaseDataSourceItem)
 }

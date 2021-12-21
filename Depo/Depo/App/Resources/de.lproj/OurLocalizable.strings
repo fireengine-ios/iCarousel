@@ -464,7 +464,6 @@
 "This text doesn't match. Please try again" = "Dieser Text stimmt nicht überein. Bitte versuche es erneut";
 "An error is occurred!" = "Ein Fehler ist aufgetreten!";
 "Please check the e-mail address" = "Bitte überprüfen Sie die E-Mail-Adresse";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Wenn Sie bereits ein Turkcell-Abonnent sind, können Sie Ihr Passwort erhalten, indem Sie eine kostenlose SMS mit SIFRE an 2200 senden.";
 "Your password is sent to your e-mail address" = "Ihr Passwort wird an Ihre E-Mail-Adresse gesendet";
 "Please enter a valid email adress" = "Bitte geben Sie eine gültige E-Mail-Adresse ein";
 "Please type the text" = "Bitte geben Sie den Text ein";
@@ -1881,7 +1880,6 @@
 "forgotMyPassword_enter_your_account_email" = "Geben Sie die E-Mail-Adresse oder Telefonnummer Ihres Kontos ein";
 "forgotMyPassword_instructions" = "Um Ihr Passwort zurückzusetzen, senden wir Ihnen einen Link zum Zurücksetzen des Passworts an die E-Mail-Adresse oder Telefonnummer Ihres Kontos:";
 "forgotMyPassword_enter_valid_email" = "Bitte geben Sie eine gültige E-Mail-Adresse oder Telefonnummer ein";
-"forgotMyPassword_instructions_other" = "Sie können Ihr Passwort zurücksetzen, indem Sie auf den Link klicken, den wir an die E-Mail-Adresse oder Telefonnummer Ihres Kontos senden.";
 "forgotMyPassword_reset_button" = "Passwort Zurücksetzen";
 "forgotMyPassword_challange1_header" = "Verifizierungsmethode Wählen";
 "forgotMyPassword_challange1_body" = "Welche der folgenden Verifizierungsmethoden möchten Sie bei der Erneuerung des Passworts verwenden?";
@@ -1926,10 +1924,15 @@
 "location_file_info" = "Ort";
 "private_share_empty_list_error" = "Benutzerliste darf nicht leer sein oder das Teilen mit Ihrem eigenen Konto ist nicht erlaubt.";
 
-
 /*Change album cover photo*/
-"dark_mode_page_title_text" = "";
-"dark_mode_title_text" = "";
-"dark_mode_dark_text" = "";
-"dark_mode_light_text" = "";
-"dark_mode_default_text" = "";
+"dark_mode_page_title_text" = "Dunkler Modus";
+"dark_mode_title_text" = "Modus";
+"dark_mode_dark_text" = "Dunkel";
+"dark_mode_light_text" = "Hell";
+"dark_mode_default_text" = "Standard";
+
+/*Change person thumbnail*/
+"change_album_person_snackbar_text" = "";
+"change_album_person_error_text" = "";
+"change_person_photo" = "";
+"change_album_person_set_photo" = "";

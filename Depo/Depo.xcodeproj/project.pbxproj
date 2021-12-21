@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1956,7 +1956,7 @@
 		8C3BA36822B3CC49006D901E /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		8C3BA36922B3CC49006D901E /* FileProviderEnumerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1BE928204831CE0074BDDC /* FileProviderEnumerator.swift */; };
 		8C3BA36A22B3CC49006D901E /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
-		8C3BA36B22B3CC49006D901E /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8C3BA36B22B3CC49006D901E /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		8C3BA36C22B3CC49006D901E /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		8C3BA37022B3CC49006D901E /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		8C3BA37D22B3CC53006D901E /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC8F204E87CE00FA3F44 /* L10n.swift */; };
@@ -3739,7 +3739,7 @@
 		CE78480622A685FB00662219 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
 		CE78480722A685FB00662219 /* HomePageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift */; };
 		CE78480822A685FB00662219 /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
-		CE78480922A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE78480922A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE78480A22A685FB00662219 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		CE78480B22A685FB00662219 /* ApplicationPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */; };
 		CE78480C22A685FB00662219 /* ContactBackupOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C257B3620174D2500CB56F8 /* ContactBackupOld.swift */; };
@@ -3799,8 +3799,8 @@
 		CE78484C22A685FB00662219 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23A0F1205FF4E00048267D /* ErrorPresenter.swift */; };
 		CE78484D22A685FB00662219 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
 		CE78484E22A685FB00662219 /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945DE20039F4A00152344 /* FreeAppSpaceConfigurator.swift */; };
-		CE78484F22A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CE78485022A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE78484F22A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CE78485022A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE78485122A685FB00662219 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
 		CE78485222A685FB00662219 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
 		CE78485322A685FB00662219 /* AutoSyncViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814661EF7A93E001DFCF0 /* AutoSyncViewInput.swift */; };
@@ -3857,7 +3857,7 @@
 		CE78488A22A685FB00662219 /* SearchViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21661F3C7CBF00BAFE1E /* SearchViewInitializer.swift */; };
 		CE78488B22A685FB00662219 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
 		CE78488C22A685FB00662219 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
-		CE78488D22A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE78488D22A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE78488E22A685FB00662219 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		CE78488F22A685FB00662219 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
 		CE78489122A685FB00662219 /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
@@ -3948,7 +3948,7 @@
 		CE7848F222A685FB00662219 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
 		CE7848F322A685FB00662219 /* PageCompounder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */; };
 		CE7848F422A685FB00662219 /* FilesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74431F05371B00124DF5 /* FilesDataSource.swift */; };
-		CE7848F522A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE7848F522A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE7848F622A685FB00662219 /* UploadFromLifeBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */; };
 		CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		CE7848F822A685FB00662219 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
@@ -3991,7 +3991,7 @@
 		CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
 		CE78492722A685FB00662219 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
-		CE78492822A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE78492822A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE78492922A685FB00662219 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
 		CE78492B22A685FB00662219 /* FaceImageAddNameRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B1202AF529003A4624 /* FaceImageAddNameRouter.swift */; };
@@ -4042,7 +4042,7 @@
 		CE78495E22A685FB00662219 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0C81EF8ED38005DCEE0 /* AuthenticationService.swift */; };
 		CE78495F22A685FB00662219 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */; };
 		CE78496022A685FB00662219 /* AutoNextEditingRowPasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */; };
-		CE78496122A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE78496122A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE78496222A685FB00662219 /* FloatingContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */; };
 		CE78496322A685FB00662219 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
 		CE78496422A685FB00662219 /* AutoSyncRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814601EF7A93E001DFCF0 /* AutoSyncRouter.swift */; };
@@ -4442,7 +4442,7 @@
 		CE784B1822A685FB00662219 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
 		CE784B1922A685FB00662219 /* PeriodContactsSyncModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1A81D208A2F2100930112 /* PeriodContactsSyncModel.swift */; };
 		CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86C1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift */; };
-		CE784B1C22A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE784B1C22A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */; };
 		CE784B1E22A685FB00662219 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
 		CE784B1F22A685FB00662219 /* LoginSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */; };
@@ -4584,7 +4584,7 @@
 		CE784BBD22A685FB00662219 /* FileInfoInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C6583C7BEFBA369D630046 /* FileInfoInteractorInput.swift */; };
 		CE784BBE22A685FB00662219 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */; };
 		CE784BBF22A685FB00662219 /* SuggestionTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */; };
-		CE784BC022A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CE784BC022A685FB00662219 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CE784BC122A685FB00662219 /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40133A1FCFE4AF006F28FD /* PromoView.swift */; };
 		CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		CE784BC322A685FB00662219 /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
@@ -4878,7 +4878,7 @@
 		CE784D7D22A685FB00662219 /* ActivityTimelineHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44F21F6AC1660062C2E0 /* ActivityTimelineHeader.xib */; };
 		CE784D7E22A685FB00662219 /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		CE784D7F22A685FB00662219 /* LatestUploadCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */; };
-		CE784D8322A685FB00662219 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CE784D8322A685FB00662219 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		CE784D8422A685FB00662219 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
 		CE784D8522A685FB00662219 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
 		CE784D8922A685FB00662219 /* TermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B56FBB192122C23D004F4A59 /* TermsOfUseViewController.xib */; };
@@ -5096,14 +5096,14 @@
 		CF38A86B2575325F0000994F /* PrivateShareDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980481BF25592BE500BD8D9F /* PrivateShareDurationCell.swift */; };
 		CF38A86D257532620000994F /* PrivateShareDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980481BF25592BE500BD8D9F /* PrivateShareDurationCell.swift */; };
 		CF38A86E257532620000994F /* PrivateShareDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980481BF25592BE500BD8D9F /* PrivateShareDurationCell.swift */; };
-		CF703F4524E3CC49005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CF703F4624E3CC4A005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CF703F4824E3CC4D005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CF703F4924E3CC4E005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CF703F4A24E3CC57005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF703F4B24E3CC58005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF703F4D24E3CC5B005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF703F4E24E3CC5C005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF703F4524E3CC49005EFFFD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CF703F4624E3CC4A005EFFFD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CF703F4824E3CC4D005EFFFD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CF703F4924E3CC4E005EFFFD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CF703F4A24E3CC57005EFFFD /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF703F4B24E3CC58005EFFFD /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF703F4D24E3CC5B005EFFFD /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF703F4E24E3CC5C005EFFFD /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		CF71458E24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */; };
 		CF71459024B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */; };
 		CF71459124B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */; };
@@ -5376,7 +5376,7 @@
 		CF8B637C23CBC9D70021B021 /* DebugAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58533182397DD6000867B5B /* DebugAnalyticsService.swift */; };
 		CF8B637D23CBC9D70021B021 /* InstapickAlbumSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2502202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift */; };
 		CF8B637E23CBC9D70021B021 /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE292C2F21C2419C004FC745 /* PassThroughView.swift */; };
-		CF8B637F23CBC9D70021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B637F23CBC9D70021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B638023CBC9D70021B021 /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
 		CF8B638123CBC9D70021B021 /* InstapickService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE170F6921E76DFD00BE352D /* InstapickService.swift */; };
 		CF8B638223CBC9D70021B021 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2762204248000A5A696 /* PhotoService.swift */; };
@@ -5561,7 +5561,7 @@
 		CF8B643E23CBC9D70021B021 /* SmallFullOfQuotaPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA4A16F207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift */; };
 		CF8B643F23CBC9D70021B021 /* LoginViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C7F1EEE8E7F0086DA84 /* LoginViewOutput.swift */; };
 		CF8B644023CBC9D70021B021 /* UIApplication+OpenURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5781BCF210F50A800AF2DA5 /* UIApplication+OpenURL.swift */; };
-		CF8B644123CBC9D70021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B644123CBC9D70021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B644223CBC9D70021B021 /* TabBarActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */; };
 		CF8B644323CBC9D70021B021 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C634FA81F0F936700B5B93D /* SettingsTableViewCell.swift */; };
 		CF8B644423CBC9D70021B021 /* UIEdgeInsets+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50B4A6D220C29470056FC86 /* UIEdgeInsets+Extensions.swift */; };
@@ -6837,15 +6837,15 @@
 		CF8B6AF423CBC9D70021B021 /* UsageInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47863EE1F3F18FA00EFDC6D /* UsageInfoViewController.xib */; };
 		CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
 		CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
-		CF8B6AFD23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6AFE23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6AFF23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6B0023CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFD23CBC9D70021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFE23CBC9D70021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFF23CBC9D70021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0023CBC9D70021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0123CBC9D70021B021 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
-		CF8B6B0223CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6B0323CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6B0423CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6B0523CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0223CBC9D70021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0323CBC9D70021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0423CBC9D70021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0523CBC9D70021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */; };
 		CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
@@ -6876,7 +6876,7 @@
 		CF8B6B4C23CBCA280021B021 /* UIButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3E4D0C201B696500173045 /* UIButton+Properties.swift */; };
 		CF8B6B4D23CBCA280021B021 /* HomePageInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA41EFD4F0D00A405B2 /* HomePageInteractorOutput.swift */; };
 		CF8B6B4E23CBCA280021B021 /* PackagesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56091F7552A900F49DA1 /* PackagesPresenter.swift */; };
-		CF8B6B4F23CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B6B4F23CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B6B5023CBCA280021B021 /* StoriesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984F8E7E200CE10100D9D595 /* StoriesInitializer.swift */; };
 		CF8B6B5123CBCA280021B021 /* ApplicationPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */; };
 		CF8B6B5223CBCA280021B021 /* ContactBackupOld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C257B3620174D2500CB56F8 /* ContactBackupOld.swift */; };
@@ -6950,8 +6950,8 @@
 		CF8B6B9A23CBCA280021B021 /* ErrorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE23A0F1205FF4E00048267D /* ErrorPresenter.swift */; };
 		CF8B6B9B23CBCA280021B021 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C771EEE8E7F0086DA84 /* LoginPresenter.swift */; };
 		CF8B6B9C23CBCA280021B021 /* FreeAppSpaceConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6945DE20039F4A00152344 /* FreeAppSpaceConfigurator.swift */; };
-		CF8B6B9D23CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CF8B6B9E23CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B6B9D23CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CF8B6B9E23CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B6B9F23CBCA280021B021 /* CreateStoryMusicEnterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8930DDB322C8F666003CE856 /* CreateStoryMusicEnterView.swift */; };
 		CF8B6BA023CBCA280021B021 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
 		CF8B6BA123CBCA280021B021 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
@@ -7020,7 +7020,7 @@
 		CF8B6BE023CBCA280021B021 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
 		CF8B6BE123CBCA280021B021 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CF8B6BE223CBCA280021B021 /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
-		CF8B6BE323CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B6BE323CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B6BE423CBCA280021B021 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		CF8B6BE523CBCA280021B021 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
 		CF8B6BE623CBCA280021B021 /* PhotoSelectionDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B2782204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift */; };
@@ -7123,7 +7123,7 @@
 		CF8B6C4D23CBCA280021B021 /* AutoSyncInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814591EF7A93E001DFCF0 /* AutoSyncInteractor.swift */; };
 		CF8B6C4E23CBCA280021B021 /* PageCompounder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF6A9BD207C8C32007DEF71 /* PageCompounder.swift */; };
 		CF8B6C4F23CBCA280021B021 /* FilesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74431F05371B00124DF5 /* FilesDataSource.swift */; };
-		CF8B6C5023CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B6C5023CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B6C5123CBCA280021B021 /* UploadFromLifeBoxInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CCA1FD51E290013CCA0 /* UploadFromLifeBoxInteractor.swift */; };
 		CF8B6C5223CBCA280021B021 /* UIApplication+topController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFDF0C1FBEE5F9006BFCAE /* UIApplication+topController.swift */; };
 		CF8B6C5323CBCA280021B021 /* VisualMusicPlayerViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869C1F3F38EF005CB432 /* VisualMusicPlayerViewOutput.swift */; };
@@ -7174,7 +7174,7 @@
 		CF8B6C8723CBCA280021B021 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		CF8B6C8823CBCA280021B021 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
 		CF8B6C8923CBCA280021B021 /* UploadFromLifeBoxInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C233CC21FD51E280013CCA0 /* UploadFromLifeBoxInitializer.swift */; };
-		CF8B6C8A23CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B6C8A23CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B6C8B23CBCA280021B021 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC94E3F238FA6F4000BBB80 /* UserProfileViewController.swift */; };
 		CF8B6C8C23CBCA280021B021 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C601EED63BC0086DA84 /* DataStorage.swift */; };
 		CF8B6C8D23CBCA280021B021 /* CALayer+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */; };
@@ -7233,7 +7233,7 @@
 		CF8B6CC623CBCA280021B021 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0C81EF8ED38005DCEE0 /* AuthenticationService.swift */; };
 		CF8B6CC723CBCA280021B021 /* ReachabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3AF7731F01D9D7002AD17C /* ReachabilityService.swift */; };
 		CF8B6CC823CBCA280021B021 /* AutoNextEditingRowPasser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B2F271EF3AF8800706DC0 /* AutoNextEditingRowPasser.swift */; };
-		CF8B6CC923CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B6CC923CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B6CCA23CBCA280021B021 /* FloatingContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C54084B1F62C77200D4717A /* FloatingContainerVC.swift */; };
 		CF8B6CCB23CBCA280021B021 /* Array+Safe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE394B611F6FFA8200128324 /* Array+Safe.swift */; };
 		CF8B6CCC23CBCA280021B021 /* AutoSyncRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814601EF7A93E001DFCF0 /* AutoSyncRouter.swift */; };
@@ -7692,7 +7692,7 @@
 		CF8B6E9F23CBCA280021B021 /* InstaPickCampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CB8E3F2361758A00585625 /* InstaPickCampaignService.swift */; };
 		CF8B6EA023CBCA280021B021 /* PhotoVideoSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 737685E123704BF300ED6BD6 /* PhotoVideoSegmentedController.swift */; };
 		CF8B6EA223CBCA280021B021 /* BottomSelectionTabBarModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF86C1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift */; };
-		CF8B6EA323CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B6EA323CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B6EA423CBCA280021B021 /* ContactsSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFF86961F0FA84A00520D18 /* ContactsSyncService.swift */; };
 		CF8B6EA523CBCA280021B021 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
 		CF8B6EA623CBCA280021B021 /* LoginSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C06AC0520066640003D8E05 /* LoginSettingsViewController.swift */; };
@@ -7851,7 +7851,7 @@
 		CF8B6F5023CBCA280021B021 /* FileInfoInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C6583C7BEFBA369D630046 /* FileInfoInteractorInput.swift */; };
 		CF8B6F5123CBCA280021B021 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */; };
 		CF8B6F5223CBCA280021B021 /* SuggestionTableSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780400F71FE7E6FB00560EEF /* SuggestionTableSectionHeader.swift */; };
-		CF8B6F5323CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF8B6F5323CBCA280021B021 /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CF8B6F5423CBCA280021B021 /* PromoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE40133A1FCFE4AF006F28FD /* PromoView.swift */; };
 		CF8B6F5523CBCA280021B021 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		CF8B6F5623CBCA280021B021 /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
@@ -8202,7 +8202,7 @@
 		CF8B713D23CBCA280021B021 /* ActivityTimelineHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44F21F6AC1660062C2E0 /* ActivityTimelineHeader.xib */; };
 		CF8B713E23CBCA280021B021 /* InstaPickProgressPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = B573B93F21ECD0280085148A /* InstaPickProgressPopup.xib */; };
 		CF8B713F23CBCA280021B021 /* LatestUploadCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C203552201F4F8F00D84727 /* LatestUploadCardCell.xib */; };
-		CF8B714223CBCA280021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B714223CBCA280021B021 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		CF8B714323CBCA280021B021 /* InstagramAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF0C2891FC594E300105C31 /* InstagramAuthViewController.xib */; };
 		CF8B714423CBCA280021B021 /* CollectionViewCellForFaceImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9B38F3201F2D99009FC572 /* CollectionViewCellForFaceImage.xib */; };
 		CF8B714523CBCA280021B021 /* CampaignCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73A18340235855BD0095719F /* CampaignCard.xib */; };
@@ -8391,60 +8391,60 @@
 		CFE4E6C1252D9F2300F165AD /* WidgetPresentationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */; };
 		CFE4E6C2252D9F2300F165AD /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
 		CFE4E6C3252D9F2300F165AD /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
-		CFE4E6C4252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6C4252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6C5252D9F2300F165AD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CFE4E6C6252D9F2300F165AD /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
 		CFE4E6C7252D9F2300F165AD /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
-		CFE4E6C8252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6C8252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6C9252D9F2300F165AD /* WidgetServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278B24FE90C40039DD11 /* WidgetServerService.swift */; };
 		CFE4E6CA252D9F2300F165AD /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
-		CFE4E6CB252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6CB252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6CC252D9F2300F165AD /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
 		CFE4E6CD252D9F2300F165AD /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
-		CFE4E6CE252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6CE252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6CF252D9F2300F165AD /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
-		CFE4E6D0252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E6D1252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E6D2252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6D0252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6D1252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6D2252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6D6252D9F2300F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
-		CFE4E6D7252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6D7252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6D8252D9F2300F165AD /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
 		CFE4E6D9252D9F2300F165AD /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
 		CFE4E6DA252D9F2300F165AD /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
-		CFE4E6DB252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E6DE252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6DB252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6DE252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6E0252D9F2300F165AD /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
 		CFE4E6E1252D9F2300F165AD /* WidgetPhotoLibraryObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */; };
 		CFE4E6E2252D9F2300F165AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		CFE4E6E3252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6E3252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6E4252D9F2300F165AD /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
 		CFE4E6E6252D9F2300F165AD /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		CFE4E6E7252D9F2300F165AD /* WidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558276D24FE259B0039DD11 /* WidgetProvider.swift */; };
 		CFE4E6E8252D9F2300F165AD /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
 		CFE4E6E9252D9F2300F165AD /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		CFE4E6EA252D9F2300F165AD /* LifeboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */; };
-		CFE4E6EB252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E6ED252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6EB252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6ED252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6EE252D9F2300F165AD /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
-		CFE4E6F1252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6F1252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6F2252D9F2300F165AD /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
-		CFE4E6F3252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E6F5252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E6F6252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6F3252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6F5252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6F6252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6F8252D9F2300F165AD /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		CFE4E6F9252D9F2300F165AD /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
 		CFE4E6FA252D9F2300F165AD /* WidgetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */; };
 		CFE4E6FD252D9F2300F165AD /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
 		CFE4E6FE252D9F2300F165AD /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
-		CFE4E6FF252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E700252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6FF252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E700252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E701252D9F2300F165AD /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
 		CFE4E702252D9F2300F165AD /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
 		CFE4E703252D9F2300F165AD /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		CFE4E704252D9F2300F165AD /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558277024FE25CE0039DD11 /* WidgetView.swift */; };
 		CFE4E705252D9F2300F165AD /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
-		CFE4E706252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E707252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E706252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E707252D9F2300F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E709252D9F2300F165AD /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278424FE725E0039DD11 /* ButtonStyle.swift */; };
 		CFE4E70C252D9F2300F165AD /* PHPhotoLibrary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989686CA24C969FF00171375 /* PHPhotoLibrary+Extensions.swift */; };
 		CFE4E70D252D9F2300F165AD /* ObjectRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278F24FE91600039DD11 /* ObjectRequestResponse.swift */; };
@@ -8461,59 +8461,59 @@
 		CFE4E755252D9F3B00F165AD /* WidgetPresentationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */; };
 		CFE4E756252D9F3B00F165AD /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
 		CFE4E757252D9F3B00F165AD /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
-		CFE4E758252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E758252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E759252D9F3B00F165AD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CFE4E75A252D9F3B00F165AD /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
 		CFE4E75B252D9F3B00F165AD /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
-		CFE4E75C252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E75C252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E75D252D9F3B00F165AD /* WidgetServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278B24FE90C40039DD11 /* WidgetServerService.swift */; };
 		CFE4E75E252D9F3B00F165AD /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
-		CFE4E75F252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E75F252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E760252D9F3B00F165AD /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
 		CFE4E761252D9F3B00F165AD /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
-		CFE4E762252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E762252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E763252D9F3B00F165AD /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
-		CFE4E764252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E765252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E766252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E764252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E765252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E766252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E76A252D9F3B00F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
-		CFE4E76B252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E76B252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E76C252D9F3B00F165AD /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
 		CFE4E76D252D9F3B00F165AD /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
 		CFE4E76E252D9F3B00F165AD /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
-		CFE4E76F252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E772252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E76F252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E772252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E774252D9F3B00F165AD /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
 		CFE4E775252D9F3B00F165AD /* WidgetPhotoLibraryObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */; };
 		CFE4E776252D9F3B00F165AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		CFE4E777252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E777252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E778252D9F3B00F165AD /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
 		CFE4E77A252D9F3B00F165AD /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		CFE4E77B252D9F3B00F165AD /* WidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558276D24FE259B0039DD11 /* WidgetProvider.swift */; };
 		CFE4E77C252D9F3B00F165AD /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
 		CFE4E77D252D9F3B00F165AD /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		CFE4E77E252D9F3B00F165AD /* LifeboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */; };
-		CFE4E77F252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E781252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E77F252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E781252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E782252D9F3B00F165AD /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
-		CFE4E785252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E785252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E786252D9F3B00F165AD /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
-		CFE4E787252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E789252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E78A252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E787252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E789252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E78A252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E78D252D9F3B00F165AD /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
 		CFE4E78E252D9F3B00F165AD /* WidgetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */; };
 		CFE4E791252D9F3B00F165AD /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
 		CFE4E792252D9F3B00F165AD /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
-		CFE4E793252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E794252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E793252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E794252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E795252D9F3B00F165AD /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
 		CFE4E796252D9F3B00F165AD /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
 		CFE4E797252D9F3B00F165AD /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		CFE4E798252D9F3B00F165AD /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558277024FE25CE0039DD11 /* WidgetView.swift */; };
 		CFE4E799252D9F3B00F165AD /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
-		CFE4E79A252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E79B252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E79A252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
+		CFE4E79B252D9F3B00F165AD /* BuildFile in Sources */ = {isa = PBXBuildFile; };
 		CFE4E79D252D9F3B00F165AD /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278424FE725E0039DD11 /* ButtonStyle.swift */; };
 		CFE4E7A0252D9F3B00F165AD /* PHPhotoLibrary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989686CA24C969FF00171375 /* PHPhotoLibrary+Extensions.swift */; };
 		CFE4E7A1252D9F3B00F165AD /* ObjectRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278F24FE91600039DD11 /* ObjectRequestResponse.swift */; };
@@ -8563,10 +8563,6 @@
 		F03718262768E44900DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
 		F037182A2768E44A00DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
 		F037182B2768E44A00DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
-		F0B64C212754D79900002F66 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = F0B64C202754D79900002F66 /* Adjust */; };
-		F0B64C262754DDE500002F66 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = F0B64C252754DDE500002F66 /* Adjust */; };
-		F0B64C2A2754DDFD00002F66 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = F0B64C292754DDFD00002F66 /* Adjust */; };
-		F0B64C2C2754F71F00002F66 /* Adjust in Frameworks */ = {isa = PBXBuildFile; productRef = F0B64C2B2754F71F00002F66 /* Adjust */; };
 		F0B64C65275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
 		F0B64C66275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
 		F0B64C67275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
@@ -11370,7 +11366,6 @@
 				8C0E8FF21FDEBDFF00789C91 /* AudioToolbox.framework in Frameworks */,
 				8C0E8FF41FDEBDFF00789C91 /* CoreTelephony.framework in Frameworks */,
 				8C0E8FF51FDEBDFF00789C91 /* MediaPlayer.framework in Frameworks */,
-				F0B64C212754D79900002F66 /* Adjust in Frameworks */,
 				8C0E8FF61FDEBDFF00789C91 /* QuartzCore.framework in Frameworks */,
 				8C0E8FF71FDEBDFF00789C91 /* libsqlite3.dylib in Frameworks */,
 				8C0E8FF91FDEBDFF00789C91 /* libz.dylib in Frameworks */,
@@ -11466,7 +11461,6 @@
 				CE784CB222A685FB00662219 /* iAd.framework in Frameworks */,
 				CE784CB322A685FB00662219 /* CFNetwork.framework in Frameworks */,
 				CE784CB422A685FB00662219 /* Foundation.framework in Frameworks */,
-				F0B64C2C2754F71F00002F66 /* Adjust in Frameworks */,
 				CE784CB522A685FB00662219 /* UIKit.framework in Frameworks */,
 				CE784CB622A685FB00662219 /* Accelerate.framework in Frameworks */,
 				CE784CB722A685FB00662219 /* WebKit.framework in Frameworks */,
@@ -11513,7 +11507,6 @@
 				CF8B689623CBC9D70021B021 /* iAd.framework in Frameworks */,
 				CF8B689723CBC9D70021B021 /* Foundation.framework in Frameworks */,
 				CF8B689823CBC9D70021B021 /* UIKit.framework in Frameworks */,
-				F0B64C262754DDE500002F66 /* Adjust in Frameworks */,
 				CF8B689923CBC9D70021B021 /* StoreKit.framework in Frameworks */,
 				CF8B689A23CBC9D70021B021 /* Accelerate.framework in Frameworks */,
 				CF8B689C23CBC9D70021B021 /* WebKit.framework in Frameworks */,
@@ -11552,7 +11545,6 @@
 				CF8B706023CBCA280021B021 /* iAd.framework in Frameworks */,
 				CF8B706123CBCA280021B021 /* CFNetwork.framework in Frameworks */,
 				CF8B706223CBCA280021B021 /* Foundation.framework in Frameworks */,
-				F0B64C2A2754DDFD00002F66 /* Adjust in Frameworks */,
 				CF8B706323CBCA280021B021 /* UIKit.framework in Frameworks */,
 				CF8B706423CBCA280021B021 /* Accelerate.framework in Frameworks */,
 				CF8B706523CBCA280021B021 /* WebKit.framework in Frameworks */,
@@ -20383,9 +20375,6 @@
 				7A3E0C0D206273CE00F79A1C /* PBXTargetDependency */,
 			);
 			name = Lifebox;
-			packageProductDependencies = (
-				F0B64C202754D79900002F66 /* Adjust */,
-			);
 			productName = Depo;
 			productReference = 8C0E907E1FDEBE0000789C91 /* lifebox.app */;
 			productType = "com.apple.product-type.application";
@@ -20559,9 +20548,6 @@
 				8C3BA3A722B3CDBE006D901E /* PBXTargetDependency */,
 			);
 			name = Billo;
-			packageProductDependencies = (
-				F0B64C2B2754F71F00002F66 /* Adjust */,
-			);
 			productName = Depo;
 			productReference = CE784F1C22A685FB00662219 /* Billo.app */;
 			productType = "com.apple.product-type.application";
@@ -20611,9 +20597,6 @@
 				CF8B637323CBC9D70021B021 /* PBXTargetDependency */,
 			);
 			name = Lifebox_Bundle;
-			packageProductDependencies = (
-				F0B64C252754DDE500002F66 /* Adjust */,
-			);
 			productName = Depo;
 			productReference = CF8B6B2E23CBC9D70021B021 /* lifebox_friendly.app */;
 			productType = "com.apple.product-type.application";
@@ -20643,9 +20626,6 @@
 				CF8B6B3923CBCA280021B021 /* PBXTargetDependency */,
 			);
 			name = Billo_Bundle;
-			packageProductDependencies = (
-				F0B64C292754DDFD00002F66 /* Adjust */,
-			);
 			productName = Depo;
 			productReference = CF8B72F823CBCA280021B021 /* Billo_Bundle.app */;
 			productType = "com.apple.product-type.application";
@@ -20865,9 +20845,6 @@
 				"pt-PT",
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
-			packageReferences = (
-				F0B64C1F2754D79900002F66 /* XCRemoteSwiftPackageReference "ios_sdk" */,
-			);
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
@@ -21192,7 +21169,7 @@
 				735766E923AE1B34008589E9 /* StickerCollectionViewCell.xib in Resources */,
 				B5B6B1542170A01E00463260 /* PrepareQuickScroll.xib in Resources */,
 				B5AB5B6D21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
-				CF703F4A24E3CC57005EFFFD /* (null) in Resources */,
+				CF703F4A24E3CC57005EFFFD /* BuildFile in Resources */,
 				98DBC04D2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
 				8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */,
 				8CF6A9C4207C8CF9007DEF71 /* CollectionViewSpinnerFooter.xib in Resources */,
@@ -21516,7 +21493,7 @@
 				CF71469D24B597A900D83E60 /* ContactsBackupHistoryView.xib in Resources */,
 				89CC89FA23AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */,
 				CE784D7F22A685FB00662219 /* LatestUploadCardCell.xib in Resources */,
-				CE784D8322A685FB00662219 /* (null) in Resources */,
+				CE784D8322A685FB00662219 /* BuildFile in Resources */,
 				CE784D8422A685FB00662219 /* InstagramAuthViewController.xib in Resources */,
 				CE784D8522A685FB00662219 /* CollectionViewCellForFaceImage.xib in Resources */,
 				73A18343235855BD0095719F /* CampaignCard.xib in Resources */,
@@ -21674,7 +21651,7 @@
 				CE784E8222A685FB00662219 /* GridListTopBarSortingTableCell.xib in Resources */,
 				CE784E8422A685FB00662219 /* TurkcellSaturaIta.ttf in Resources */,
 				CE784E8822A685FB00662219 /* PasscodeViewImp.xib in Resources */,
-				CF703F4D24E3CC5B005EFFFD /* (null) in Resources */,
+				CF703F4D24E3CC5B005EFFFD /* BuildFile in Resources */,
 				CE784E8B22A685FB00662219 /* SearchView.xib in Resources */,
 				CE784E8C22A685FB00662219 /* ManageContactsViewController.xib in Resources */,
 				98DBC0502410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
@@ -22014,7 +21991,7 @@
 				CF8B6A8423CBC9D70021B021 /* PrepareQuickScroll.xib in Resources */,
 				CF8B6A8C23CBC9D70021B021 /* FacebookAccountConnectionCell.xib in Resources */,
 				07AA668026FDED36009D4FB1 /* ResetPasswordViewController.xib in Resources */,
-				CF703F4B24E3CC58005EFFFD /* (null) in Resources */,
+				CF703F4B24E3CC58005EFFFD /* BuildFile in Resources */,
 				98DBC04E2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
 				CF8B6A9323CBC9D70021B021 /* SwipeableCardCell.xib in Resources */,
 				077A4E5D271FF707008B78E7 /* DeleteAccountValidationPopUp.xib in Resources */,
@@ -22085,14 +22062,14 @@
 				CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */,
 				CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */,
 				CF8B6B0123CBC9D70021B021 /* PhotoVideoDetailCell.xib in Resources */,
-				CF8B6AFD23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6AFE23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6AFF23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0023CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0223CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0323CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0423CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0523CBC9D70021B021 /* (null) in Resources */,
+				CF8B6AFD23CBC9D70021B021 /* BuildFile in Resources */,
+				CF8B6AFE23CBC9D70021B021 /* BuildFile in Resources */,
+				CF8B6AFF23CBC9D70021B021 /* BuildFile in Resources */,
+				CF8B6B0023CBC9D70021B021 /* BuildFile in Resources */,
+				CF8B6B0223CBC9D70021B021 /* BuildFile in Resources */,
+				CF8B6B0323CBC9D70021B021 /* BuildFile in Resources */,
+				CF8B6B0423CBC9D70021B021 /* BuildFile in Resources */,
+				CF8B6B0523CBC9D70021B021 /* BuildFile in Resources */,
 				CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */,
 				CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */,
 				98725F0D258B2C0B0061E7F6 /* AllFilesSegmentedController.xib in Resources */,
@@ -22235,7 +22212,7 @@
 				CF8B713E23CBCA280021B021 /* InstaPickProgressPopup.xib in Resources */,
 				07D42130274E4D0800061EA2 /* FileLocationView.xib in Resources */,
 				CF8B713F23CBCA280021B021 /* LatestUploadCardCell.xib in Resources */,
-				CF8B714223CBCA280021B021 /* (null) in Resources */,
+				CF8B714223CBCA280021B021 /* BuildFile in Resources */,
 				CF8B714323CBCA280021B021 /* InstagramAuthViewController.xib in Resources */,
 				CF8B714423CBCA280021B021 /* CollectionViewCellForFaceImage.xib in Resources */,
 				CF8B714523CBCA280021B021 /* CampaignCard.xib in Resources */,
@@ -22392,7 +22369,7 @@
 				CF8B725423CBCA280021B021 /* TurkcellSaturaIta.ttf in Resources */,
 				CF8B725823CBCA280021B021 /* PasscodeViewImp.xib in Resources */,
 				0305A35023D5C5A9004D1EC7 /* HSCompletionPopUp.xib in Resources */,
-				CF703F4E24E3CC5C005EFFFD /* (null) in Resources */,
+				CF703F4E24E3CC5C005EFFFD /* BuildFile in Resources */,
 				98231A1B24F3A1E700FD16E2 /* SelectionMenuController.xib in Resources */,
 				CF8B725B23CBCA280021B021 /* SearchView.xib in Resources */,
 				CF8B725C23CBCA280021B021 /* ManageContactsViewController.xib in Resources */,
@@ -22519,6 +22496,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox/Pods-Lifebox-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -22556,6 +22534,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -22625,6 +22604,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox_Bundle/Pods-Lifebox_Bundle-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -22662,6 +22642,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -22775,6 +22756,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -22812,6 +22794,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -22903,6 +22886,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Billo_Bundle/Pods-Billo_Bundle-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -22940,6 +22924,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -23161,6 +23146,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Billo/Pods-Billo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Adjust/Adjust.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
@@ -23198,6 +23184,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Adjust.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
@@ -24944,7 +24931,7 @@
 				8C06AC242008AB17003D8E05 /* AsyncOperation.swift in Sources */,
 				FA793D88201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CE4D282B207E3D51003AE4FB /* AppWormholeListener.swift in Sources */,
-				CF703F4524E3CC49005EFFFD /* (null) in Sources */,
+				CF703F4524E3CC49005EFFFD /* BuildFile in Sources */,
 				FA793D8B201872E600A02B46 /* PeopleService.swift in Sources */,
 				8C0E8FB41FDEBDFF00789C91 /* UploadFromLifeBoxRouter.swift in Sources */,
 				98231A6A24F3A23500FD16E2 /* FilterManager.swift in Sources */,
@@ -25167,7 +25154,7 @@
 				8C3BA36822B3CC49006D901E /* ResponseResult.swift in Sources */,
 				8C3BA36922B3CC49006D901E /* FileProviderEnumerator.swift in Sources */,
 				8C3BA36A22B3CC49006D901E /* Error+Network.swift in Sources */,
-				8C3BA36B22B3CC49006D901E /* (null) in Sources */,
+				8C3BA36B22B3CC49006D901E /* BuildFile in Sources */,
 				8C3BA36C22B3CC49006D901E /* PasscodeStorage.swift in Sources */,
 				CFACAC8C247C62D900645B40 /* NetmeraEvents.swift in Sources */,
 			);
@@ -25418,7 +25405,7 @@
 				CE78480622A685FB00662219 /* UIButton+Properties.swift in Sources */,
 				CE78480722A685FB00662219 /* HomePageInteractorOutput.swift in Sources */,
 				CE78480822A685FB00662219 /* PackagesPresenter.swift in Sources */,
-				CE78480922A685FB00662219 /* (null) in Sources */,
+				CE78480922A685FB00662219 /* BuildFile in Sources */,
 				98DBC05F2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift in Sources */,
 				CE78480A22A685FB00662219 /* StoriesInitializer.swift in Sources */,
 				CE78480B22A685FB00662219 /* ApplicationPalette.swift in Sources */,
@@ -25513,8 +25500,8 @@
 				F034DF29274A544200E5C015 /* AlbumCountResponse.swift in Sources */,
 				CE78484E22A685FB00662219 /* FreeAppSpaceConfigurator.swift in Sources */,
 				CF7146CD24B597A900D83E60 /* BackUpContactsCard.swift in Sources */,
-				CE78484F22A685FB00662219 /* (null) in Sources */,
-				CE78485022A685FB00662219 /* (null) in Sources */,
+				CE78484F22A685FB00662219 /* BuildFile in Sources */,
+				CE78485022A685FB00662219 /* BuildFile in Sources */,
 				8930DDB622C8F666003CE856 /* CreateStoryMusicEnterView.swift in Sources */,
 				982319D224F3A1E700FD16E2 /* AdjustmentCategoryCell.swift in Sources */,
 				CE78485122A685FB00662219 /* UIColor+Adjust.swift in Sources */,
@@ -25585,7 +25572,7 @@
 				9853CD472361BDCE00E19BF7 /* IntroduceViewController.swift in Sources */,
 				8C86111922BCFDA700108958 /* PermissionType.swift in Sources */,
 				CE78488122A685FB00662219 /* MoreActionsConfig.swift in Sources */,
-				CF703F4824E3CC4D005EFFFD /* (null) in Sources */,
+				CF703F4824E3CC4D005EFFFD /* BuildFile in Sources */,
 				9808B7D02567EB10001DEF2E /* PrivateShareAccessListCell.swift in Sources */,
 				CE78488222A685FB00662219 /* ServerValueError.swift in Sources */,
 				CE78488422A685FB00662219 /* HomePageModuleInput.swift in Sources */,
@@ -25607,7 +25594,7 @@
 				7373EC2B235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				982319B424F3A1E700FD16E2 /* HSLView.swift in Sources */,
 				98231A1424F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
-				CE78488D22A685FB00662219 /* (null) in Sources */,
+				CE78488D22A685FB00662219 /* BuildFile in Sources */,
 				CE78488E22A685FB00662219 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE78488F22A685FB00662219 /* AutoSyncModuleInput.swift in Sources */,
 				CE78489122A685FB00662219 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
@@ -25740,7 +25727,7 @@
 				CE7848F422A685FB00662219 /* FilesDataSource.swift in Sources */,
 				07620292269B83F600D4FB2C /* GifToMP4Formatter.swift in Sources */,
 				89DCC5DD2403AC3F00488F1F /* SubscriptionFeaturesView.swift in Sources */,
-				CE7848F522A685FB00662219 /* (null) in Sources */,
+				CE7848F522A685FB00662219 /* BuildFile in Sources */,
 				CE7848F622A685FB00662219 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */,
 				CF38A86B2575325F0000994F /* PrivateShareDurationCell.swift in Sources */,
@@ -25810,7 +25797,7 @@
 				CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */,
 				3A0CCF212642CA87002E811D /* InvitationCollectionReusableView.swift in Sources */,
 				CE78492722A685FB00662219 /* UploadFromLifeBoxInitializer.swift in Sources */,
-				CE78492822A685FB00662219 /* (null) in Sources */,
+				CE78492822A685FB00662219 /* BuildFile in Sources */,
 				CEC94E43238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
 				CE78492922A685FB00662219 /* DataStorage.swift in Sources */,
 				CE78492A22A685FB00662219 /* CALayer+Animation.swift in Sources */,
@@ -25892,7 +25879,7 @@
 				CE78495E22A685FB00662219 /* AuthenticationService.swift in Sources */,
 				CE78495F22A685FB00662219 /* ReachabilityService.swift in Sources */,
 				CE78496022A685FB00662219 /* AutoNextEditingRowPasser.swift in Sources */,
-				CE78496122A685FB00662219 /* (null) in Sources */,
+				CE78496122A685FB00662219 /* BuildFile in Sources */,
 				98E4B9EF23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				CE78496222A685FB00662219 /* FloatingContainerVC.swift in Sources */,
 				CE78496322A685FB00662219 /* Array+Safe.swift in Sources */,
@@ -26490,7 +26477,7 @@
 				98A86D5C23A239B900438225 /* AlbumsSliderDataSource.swift in Sources */,
 				737685E423704BF300ED6BD6 /* PhotoVideoSegmentedController.swift in Sources */,
 				CE784B1B22A685FB00662219 /* BottomSelectionTabBarModuleInput.swift in Sources */,
-				CE784B1C22A685FB00662219 /* (null) in Sources */,
+				CE784B1C22A685FB00662219 /* BuildFile in Sources */,
 				03135F4C23F3E0900088E8BB /* ApplicationStateHelper.swift in Sources */,
 				CE784B1D22A685FB00662219 /* ContactsSyncService.swift in Sources */,
 				98B04818259314750011DAEB /* SyncStatus.m in Sources */,
@@ -26700,7 +26687,7 @@
 				CE784BBD22A685FB00662219 /* FileInfoInteractorInput.swift in Sources */,
 				CE784BBE22A685FB00662219 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				CE784BBF22A685FB00662219 /* SuggestionTableSectionHeader.swift in Sources */,
-				CE784BC022A685FB00662219 /* (null) in Sources */,
+				CE784BC022A685FB00662219 /* BuildFile in Sources */,
 				98231A0E24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CE784BC122A685FB00662219 /* PromoView.swift in Sources */,
 				CE784BC222A685FB00662219 /* InstapickAnalyze.swift in Sources */,
@@ -27038,7 +27025,7 @@
 				98B04884259314750011DAEB /* SyncAdapter.m in Sources */,
 				CF8B637D23CBC9D70021B021 /* InstapickAlbumSelectionDataSource.swift in Sources */,
 				CF8B637E23CBC9D70021B021 /* PassThroughView.swift in Sources */,
-				CF8B637F23CBC9D70021B021 /* (null) in Sources */,
+				CF8B637F23CBC9D70021B021 /* BuildFile in Sources */,
 				0791817A26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,
 				CF8B638023CBC9D70021B021 /* AnalyzeHistoryDataSource.swift in Sources */,
 				CF8B638123CBC9D70021B021 /* InstapickService.swift in Sources */,
@@ -27239,7 +27226,7 @@
 				CF8B642023CBC9D70021B021 /* AlbumSelectionPresenter.swift in Sources */,
 				CF8B642123CBC9D70021B021 /* PrintInteractorOutput.swift in Sources */,
 				CF8B642223CBC9D70021B021 /* MoreActionsConfig.swift in Sources */,
-				CF703F4624E3CC4A005EFFFD /* (null) in Sources */,
+				CF703F4624E3CC4A005EFFFD /* BuildFile in Sources */,
 				CF8B642323CBC9D70021B021 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				98B04774259314740011DAEB /* UpdateServerIntegration.m in Sources */,
 				CF71470D24B597AA00D83E60 /* ContactListHeader.swift in Sources */,
@@ -27273,7 +27260,7 @@
 				CF8B643E23CBC9D70021B021 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				CF8B643F23CBC9D70021B021 /* LoginViewOutput.swift in Sources */,
 				CF8B644023CBC9D70021B021 /* UIApplication+OpenURL.swift in Sources */,
-				CF8B644123CBC9D70021B021 /* (null) in Sources */,
+				CF8B644123CBC9D70021B021 /* BuildFile in Sources */,
 				CF8B644223CBC9D70021B021 /* TabBarActionHandler.swift in Sources */,
 				98231A0C24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CF8B644323CBC9D70021B021 /* SettingsTableViewCell.swift in Sources */,
@@ -28669,7 +28656,7 @@
 				CF8B6B4C23CBCA280021B021 /* UIButton+Properties.swift in Sources */,
 				CF8B6B4D23CBCA280021B021 /* HomePageInteractorOutput.swift in Sources */,
 				CF8B6B4E23CBCA280021B021 /* PackagesPresenter.swift in Sources */,
-				CF8B6B4F23CBCA280021B021 /* (null) in Sources */,
+				CF8B6B4F23CBCA280021B021 /* BuildFile in Sources */,
 				CF8B6B5023CBCA280021B021 /* StoriesInitializer.swift in Sources */,
 				CF8B6B5123CBCA280021B021 /* ApplicationPalette.swift in Sources */,
 				CF8B6B5223CBCA280021B021 /* ContactBackupOld.swift in Sources */,
@@ -28770,9 +28757,9 @@
 				CF8B6B9B23CBCA280021B021 /* LoginPresenter.swift in Sources */,
 				CF8B6B9C23CBCA280021B021 /* FreeAppSpaceConfigurator.swift in Sources */,
 				982319D324F3A1E700FD16E2 /* AdjustmentCategoryCell.swift in Sources */,
-				CF8B6B9D23CBCA280021B021 /* (null) in Sources */,
+				CF8B6B9D23CBCA280021B021 /* BuildFile in Sources */,
 				B59E1F8B25921F0000640DD1 /* VideoSyncService.swift in Sources */,
-				CF8B6B9E23CBCA280021B021 /* (null) in Sources */,
+				CF8B6B9E23CBCA280021B021 /* BuildFile in Sources */,
 				CF8B6B9F23CBCA280021B021 /* CreateStoryMusicEnterView.swift in Sources */,
 				CF8B6BA023CBCA280021B021 /* UIColor+Adjust.swift in Sources */,
 				98B04809259314750011DAEB /* SyncDB.m in Sources */,
@@ -28838,7 +28825,7 @@
 				CF8B6BD323CBCA280021B021 /* PrintInteractorOutput.swift in Sources */,
 				CF8B6BD423CBCA280021B021 /* IntroduceViewController.swift in Sources */,
 				CF8B6BD523CBCA280021B021 /* PermissionType.swift in Sources */,
-				CF703F4924E3CC4E005EFFFD /* (null) in Sources */,
+				CF703F4924E3CC4E005EFFFD /* BuildFile in Sources */,
 				9808B7D12567EB10001DEF2E /* PrivateShareAccessListCell.swift in Sources */,
 				CF8B6BD623CBCA280021B021 /* MoreActionsConfig.swift in Sources */,
 				CF8B6BD723CBCA280021B021 /* ServerValueError.swift in Sources */,
@@ -28860,7 +28847,7 @@
 				CF8B6BE223CBCA280021B021 /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				982319B524F3A1E700FD16E2 /* HSLView.swift in Sources */,
 				98231A1524F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
-				CF8B6BE323CBCA280021B021 /* (null) in Sources */,
+				CF8B6BE323CBCA280021B021 /* BuildFile in Sources */,
 				CF8B6BE423CBCA280021B021 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CF8B6BE523CBCA280021B021 /* AutoSyncModuleInput.swift in Sources */,
 				CF8B6BE623CBCA280021B021 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
@@ -28989,7 +28976,7 @@
 				CF8B6C4E23CBCA280021B021 /* PageCompounder.swift in Sources */,
 				CF8B6C4F23CBCA280021B021 /* FilesDataSource.swift in Sources */,
 				B560CC41255BB6DA00199EA2 /* PrivateShareSharedFilesCollectionManager.swift in Sources */,
-				CF8B6C5023CBCA280021B021 /* (null) in Sources */,
+				CF8B6C5023CBCA280021B021 /* BuildFile in Sources */,
 				CF8B6C5123CBCA280021B021 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CF8B6C5223CBCA280021B021 /* UIApplication+topController.swift in Sources */,
 				07620294269B83F700D4FB2C /* GifToMP4Formatter.swift in Sources */,
@@ -29058,7 +29045,7 @@
 				0305A32823D5C3BC004D1EC7 /* HiddenPhotosNavbarManager.swift in Sources */,
 				CF8B6C8923CBCA280021B021 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				98BB909F24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
-				CF8B6C8A23CBCA280021B021 /* (null) in Sources */,
+				CF8B6C8A23CBCA280021B021 /* BuildFile in Sources */,
 				CF8B6C8B23CBCA280021B021 /* UserProfileViewController.swift in Sources */,
 				CF8B6C8C23CBCA280021B021 /* DataStorage.swift in Sources */,
 				CF8B6C8D23CBCA280021B021 /* CALayer+Animation.swift in Sources */,
@@ -29141,7 +29128,7 @@
 				CF8B6CC723CBCA280021B021 /* ReachabilityService.swift in Sources */,
 				CF8B6CC823CBCA280021B021 /* AutoNextEditingRowPasser.swift in Sources */,
 				98B04891259314750011DAEB /* PartialInfo.m in Sources */,
-				CF8B6CC923CBCA280021B021 /* (null) in Sources */,
+				CF8B6CC923CBCA280021B021 /* BuildFile in Sources */,
 				CF8B6CCA23CBCA280021B021 /* FloatingContainerVC.swift in Sources */,
 				89E3409224747CB900EB68C3 /* PeopleCollectionViewCell.swift in Sources */,
 				CF8B6CCB23CBCA280021B021 /* Array+Safe.swift in Sources */,
@@ -29741,7 +29728,7 @@
 				CF8B6EA023CBCA280021B021 /* PhotoVideoSegmentedController.swift in Sources */,
 				CF71461A24B597A800D83E60 /* ContactDetailHeader.swift in Sources */,
 				CF8B6EA223CBCA280021B021 /* BottomSelectionTabBarModuleInput.swift in Sources */,
-				CF8B6EA323CBCA280021B021 /* (null) in Sources */,
+				CF8B6EA323CBCA280021B021 /* BuildFile in Sources */,
 				CF8B6EA423CBCA280021B021 /* ContactsSyncService.swift in Sources */,
 				CF8B6EA523CBCA280021B021 /* Mapping.swift in Sources */,
 				CF8B6EA623CBCA280021B021 /* LoginSettingsViewController.swift in Sources */,
@@ -29953,7 +29940,7 @@
 				CF8B6F5023CBCA280021B021 /* FileInfoInteractorInput.swift in Sources */,
 				CF8B6F5123CBCA280021B021 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				CF8B6F5223CBCA280021B021 /* SuggestionTableSectionHeader.swift in Sources */,
-				CF8B6F5323CBCA280021B021 /* (null) in Sources */,
+				CF8B6F5323CBCA280021B021 /* BuildFile in Sources */,
 				CF8B6F5423CBCA280021B021 /* PromoView.swift in Sources */,
 				98231A0F24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CF8B6F5523CBCA280021B021 /* InstapickAnalyze.swift in Sources */,
@@ -30288,48 +30275,48 @@
 				CFE4E6C3252D9F2300F165AD /* Dictionary.swift in Sources */,
 				CFEB1FA7252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
 				07FBA21826E0BD5300ED4132 /* Localizable.swift in Sources */,
-				CFE4E6C4252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6C4252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E6C5252D9F2300F165AD /* NumericConstants.swift in Sources */,
 				CFE4E6C6252D9F2300F165AD /* Error+Network.swift in Sources */,
 				98B04CF025931DD90011DAEB /* SyncLogger.m in Sources */,
 				CFE4E6C7252D9F2300F165AD /* ResponseResult.swift in Sources */,
-				CFE4E6C8252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6C8252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E6C9252D9F2300F165AD /* WidgetServerService.swift in Sources */,
 				CFEB1FFB25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
 				98B04CEE25931DD90011DAEB /* ContactUtil.m in Sources */,
 				98876D7525342AC5000B440D /* RequestHeader.swift in Sources */,
 				CFE4E6CA252D9F2300F165AD /* SessionServiceExtension.swift in Sources */,
-				CFE4E6CB252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6CB252D9F2300F165AD /* BuildFile in Sources */,
 				98876DA425342ADF000B440D /* URL+TrimmedQuery.swift in Sources */,
 				CFE4E6CC252D9F2300F165AD /* Equatable+Contains.swift in Sources */,
 				CFEB1D7D252F4C230008A2A9 /* AppResponsivenessService.swift in Sources */,
 				CFE4E6CD252D9F2300F165AD /* DispatchQueue+Main.swift in Sources */,
-				CFE4E6CE252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6CE252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E6CF252D9F2300F165AD /* SharedEnums.swift in Sources */,
-				CFE4E6D0252D9F2300F165AD /* (null) in Sources */,
-				CFE4E6D1252D9F2300F165AD /* (null) in Sources */,
-				CFE4E6D2252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6D0252D9F2300F165AD /* BuildFile in Sources */,
+				CFE4E6D1252D9F2300F165AD /* BuildFile in Sources */,
+				CFE4E6D2252D9F2300F165AD /* BuildFile in Sources */,
 				CFEB1FE025304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
 				98876D4625342A59000B440D /* AuthorizationURLs.swift in Sources */,
 				CFE4E6D6252D9F2300F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				CFEB1FC5252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */,
-				CFE4E6D7252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6D7252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E6D8252D9F2300F165AD /* RequestsKey.swift in Sources */,
 				CFE4E6D9252D9F2300F165AD /* BiometricsManager.swift in Sources */,
 				CFE4E6DA252D9F2300F165AD /* TokenStorage.swift in Sources */,
 				98B04CEF25931DD90011DAEB /* BackupVersion.m in Sources */,
 				98B04CE225931DD90011DAEB /* PartialInfo.m in Sources */,
-				CFE4E6DB252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6DB252D9F2300F165AD /* BuildFile in Sources */,
 				CFEB1E4A252F63630008A2A9 /* DebugLogsService.swift in Sources */,
 				98876CE525342A05000B440D /* ShareConfigurator.swift in Sources */,
-				CFE4E6DE252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6DE252D9F2300F165AD /* BuildFile in Sources */,
 				98B04D3725931E1C0011DAEB /* RestoreHelper.m in Sources */,
 				CFE4E6E0252D9F2300F165AD /* Alamofire+Validate.swift in Sources */,
 				CFE4E6E1252D9F2300F165AD /* WidgetPhotoLibraryObserver.swift in Sources */,
 				98B04CE725931DD90011DAEB /* Utils.m in Sources */,
 				98876DD525342B20000B440D /* SharedFactory.swift in Sources */,
 				CFE4E6E2252D9F2300F165AD /* Constants.swift in Sources */,
-				CFE4E6E3252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6E3252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E6E4252D9F2300F165AD /* URL+Path.swift in Sources */,
 				CFE4E6E6252D9F2300F165AD /* DeviceExtension.swift in Sources */,
 				98B04CE325931DD90011DAEB /* SyncRecord.m in Sources */,
@@ -30340,17 +30327,17 @@
 				98B04CF225931DD90011DAEB /* SyncSettings.m in Sources */,
 				CFE4E6E9252D9F2300F165AD /* PushNotificationServiceConstants.swift in Sources */,
 				CFE4E6EA252D9F2300F165AD /* LifeboxWidget.swift in Sources */,
-				CFE4E6EB252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6EB252D9F2300F165AD /* BuildFile in Sources */,
 				98B04CE625931DD90011DAEB /* SyncStatus.m in Sources */,
 				98B04CE925931DD90011DAEB /* ContactSyncSDK.m in Sources */,
-				CFE4E6ED252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6ED252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E6EE252D9F2300F165AD /* SharedGroupCoreDataStack.swift in Sources */,
-				CFE4E6F1252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6F1252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E6F2252D9F2300F165AD /* String+Subscript.swift in Sources */,
-				CFE4E6F3252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6F3252D9F2300F165AD /* BuildFile in Sources */,
 				98B04CE825931DD90011DAEB /* BackupStats.m in Sources */,
-				CFE4E6F5252D9F2300F165AD /* (null) in Sources */,
-				CFE4E6F6252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6F5252D9F2300F165AD /* BuildFile in Sources */,
+				CFE4E6F6252D9F2300F165AD /* BuildFile in Sources */,
 				98B04CEC25931DD90011DAEB /* AnalyzeStatus.m in Sources */,
 				98B04CE025931DD90011DAEB /* CNContactUnified.m in Sources */,
 				CFE4E6F8252D9F2300F165AD /* SharedConstants.swift in Sources */,
@@ -30360,9 +30347,9 @@
 				CFE4E6FD252D9F2300F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CFE4E6FE252D9F2300F165AD /* Device.swift in Sources */,
 				98B04CE125931DD90011DAEB /* DepoAdapter.m in Sources */,
-				CFE4E6FF252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6FF252D9F2300F165AD /* BuildFile in Sources */,
 				CFBD008B25370D220055726C /* CustomErrors.swift in Sources */,
-				CFE4E700252D9F2300F165AD /* (null) in Sources */,
+				CFE4E700252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E701252D9F2300F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E702252D9F2300F165AD /* AuthorityType.swift in Sources */,
 				98B04D7425931EA70011DAEB /* AbstractHelper.m in Sources */,
@@ -30371,10 +30358,10 @@
 				CFE4E704252D9F2300F165AD /* WidgetView.swift in Sources */,
 				98B04CF325931DD90011DAEB /* ContactAddress.m in Sources */,
 				CFE4E705252D9F2300F165AD /* Mapping.swift in Sources */,
-				CFE4E706252D9F2300F165AD /* (null) in Sources */,
+				CFE4E706252D9F2300F165AD /* BuildFile in Sources */,
 				98B04CF125931DD90011DAEB /* SyncAdapter.m in Sources */,
 				07FBA21726E0BD5300ED4132 /* Strings.swift in Sources */,
-				CFE4E707252D9F2300F165AD /* (null) in Sources */,
+				CFE4E707252D9F2300F165AD /* BuildFile in Sources */,
 				CFE4E709252D9F2300F165AD /* ButtonStyle.swift in Sources */,
 				98B04CE425931DD90011DAEB /* ContactDevice.m in Sources */,
 				98B04CEA25931DD90011DAEB /* Contact.m in Sources */,
@@ -30401,48 +30388,48 @@
 				CFE4E757252D9F3B00F165AD /* Dictionary.swift in Sources */,
 				CFEB1FA9252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
 				07FBA22426E0BD5800ED4132 /* Localizable.swift in Sources */,
-				CFE4E758252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E758252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E759252D9F3B00F165AD /* NumericConstants.swift in Sources */,
 				CFE4E75A252D9F3B00F165AD /* Error+Network.swift in Sources */,
 				98B04D1825931DDC0011DAEB /* SyncLogger.m in Sources */,
 				CFE4E75B252D9F3B00F165AD /* ResponseResult.swift in Sources */,
-				CFE4E75C252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E75C252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E75D252D9F3B00F165AD /* WidgetServerService.swift in Sources */,
 				CFEB1FFD25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
 				98B04D1625931DDC0011DAEB /* ContactUtil.m in Sources */,
 				98876D5D25342AC2000B440D /* RequestHeader.swift in Sources */,
 				CFE4E75E252D9F3B00F165AD /* SessionServiceExtension.swift in Sources */,
-				CFE4E75F252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E75F252D9F3B00F165AD /* BuildFile in Sources */,
 				98876DA625342AE1000B440D /* URL+TrimmedQuery.swift in Sources */,
 				CFE4E760252D9F3B00F165AD /* Equatable+Contains.swift in Sources */,
 				CFEB1D82252F4C270008A2A9 /* AppResponsivenessService.swift in Sources */,
 				CFE4E761252D9F3B00F165AD /* DispatchQueue+Main.swift in Sources */,
-				CFE4E762252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E762252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E763252D9F3B00F165AD /* SharedEnums.swift in Sources */,
-				CFE4E764252D9F3B00F165AD /* (null) in Sources */,
-				CFE4E765252D9F3B00F165AD /* (null) in Sources */,
-				CFE4E766252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E764252D9F3B00F165AD /* BuildFile in Sources */,
+				CFE4E765252D9F3B00F165AD /* BuildFile in Sources */,
+				CFE4E766252D9F3B00F165AD /* BuildFile in Sources */,
 				CFEB1FE225304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
 				98876D4425342A56000B440D /* AuthorizationURLs.swift in Sources */,
 				CFE4E76A252D9F3B00F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				CFEB1FC7252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */,
-				CFE4E76B252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E76B252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E76C252D9F3B00F165AD /* RequestsKey.swift in Sources */,
 				CFE4E76D252D9F3B00F165AD /* BiometricsManager.swift in Sources */,
 				CFE4E76E252D9F3B00F165AD /* TokenStorage.swift in Sources */,
 				98B04D1725931DDC0011DAEB /* BackupVersion.m in Sources */,
 				98B04D0A25931DDC0011DAEB /* PartialInfo.m in Sources */,
-				CFE4E76F252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E76F252D9F3B00F165AD /* BuildFile in Sources */,
 				CFEB1E4F252F63660008A2A9 /* DebugLogsService.swift in Sources */,
 				98876CE425342A03000B440D /* ShareConfigurator.swift in Sources */,
-				CFE4E772252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E772252D9F3B00F165AD /* BuildFile in Sources */,
 				98B04D3925931E200011DAEB /* RestoreHelper.m in Sources */,
 				CFE4E774252D9F3B00F165AD /* Alamofire+Validate.swift in Sources */,
 				CFE4E775252D9F3B00F165AD /* WidgetPhotoLibraryObserver.swift in Sources */,
 				98B04D0F25931DDC0011DAEB /* Utils.m in Sources */,
 				98876DBD25342B1D000B440D /* SharedFactory.swift in Sources */,
 				CFE4E776252D9F3B00F165AD /* Constants.swift in Sources */,
-				CFE4E777252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E777252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E778252D9F3B00F165AD /* URL+Path.swift in Sources */,
 				CFEB1C37252E9F250008A2A9 /* SharedConstants.swift in Sources */,
 				98B04D0B25931DDC0011DAEB /* SyncRecord.m in Sources */,
@@ -30456,26 +30443,26 @@
 				CFE4E77E252D9F3B00F165AD /* LifeboxWidget.swift in Sources */,
 				98B04D0E25931DDC0011DAEB /* SyncStatus.m in Sources */,
 				98B04D1125931DDC0011DAEB /* ContactSyncSDK.m in Sources */,
-				CFE4E77F252D9F3B00F165AD /* (null) in Sources */,
-				CFE4E781252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E77F252D9F3B00F165AD /* BuildFile in Sources */,
+				CFE4E781252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E782252D9F3B00F165AD /* SharedGroupCoreDataStack.swift in Sources */,
-				CFE4E785252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E785252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E786252D9F3B00F165AD /* String+Subscript.swift in Sources */,
 				98B04D1025931DDC0011DAEB /* BackupStats.m in Sources */,
-				CFE4E787252D9F3B00F165AD /* (null) in Sources */,
-				CFE4E789252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E787252D9F3B00F165AD /* BuildFile in Sources */,
+				CFE4E789252D9F3B00F165AD /* BuildFile in Sources */,
 				98B04D1425931DDC0011DAEB /* AnalyzeStatus.m in Sources */,
 				98B04D0825931DDC0011DAEB /* CNContactUnified.m in Sources */,
-				CFE4E78A252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E78A252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E78D252D9F3B00F165AD /* TokenKeychainStorage.swift in Sources */,
 				98876E1D25342B61000B440D /* Double+Extensions.swift in Sources */,
 				CFE4E78E252D9F3B00F165AD /* WidgetImageLoader.swift in Sources */,
 				CFE4E791252D9F3B00F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CFE4E792252D9F3B00F165AD /* Device.swift in Sources */,
 				98B04D0925931DDC0011DAEB /* DepoAdapter.m in Sources */,
-				CFE4E793252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E793252D9F3B00F165AD /* BuildFile in Sources */,
 				CFBD008C25370D240055726C /* CustomErrors.swift in Sources */,
-				CFE4E794252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E794252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E795252D9F3B00F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E796252D9F3B00F165AD /* AuthorityType.swift in Sources */,
 				98B04D5625931EA40011DAEB /* AbstractHelper.m in Sources */,
@@ -30484,10 +30471,10 @@
 				CFE4E798252D9F3B00F165AD /* WidgetView.swift in Sources */,
 				98B04D1B25931DDC0011DAEB /* ContactAddress.m in Sources */,
 				CFE4E799252D9F3B00F165AD /* Mapping.swift in Sources */,
-				CFE4E79A252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E79A252D9F3B00F165AD /* BuildFile in Sources */,
 				98B04D1925931DDC0011DAEB /* SyncAdapter.m in Sources */,
 				07FBA22326E0BD5800ED4132 /* Strings.swift in Sources */,
-				CFE4E79B252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E79B252D9F3B00F165AD /* BuildFile in Sources */,
 				CFE4E79D252D9F3B00F165AD /* ButtonStyle.swift in Sources */,
 				98B04D0C25931DDC0011DAEB /* ContactDevice.m in Sources */,
 				98B04D1225931DDC0011DAEB /* Contact.m in Sources */,
@@ -30798,9 +30785,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_INCLUDE_PATHS = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -30942,10 +30928,7 @@
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -31006,10 +30989,7 @@
 				);
 				INFOPLIST_FILE = "Depo_LifeTech copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -31068,10 +31048,7 @@
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -31131,10 +31108,7 @@
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -31189,11 +31163,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.shareextension;
@@ -31237,11 +31207,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.Share;
@@ -31284,11 +31250,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.shareextension;
@@ -31331,11 +31293,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxShared/LifeDrive/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.shareextension;
@@ -31378,11 +31336,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31425,11 +31379,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31471,11 +31421,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31517,11 +31463,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProvider/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31562,11 +31504,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.filesui;
@@ -31609,11 +31547,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.FileProviderUI;
@@ -31655,11 +31589,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoAppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.filesui;
@@ -31701,11 +31631,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxFileProviderUI/LifeDrive/InfoEnterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS \"-DLIFEDRIVE\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.filesui;
@@ -31740,11 +31666,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/Lifebox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31779,11 +31701,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/Lifebox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31816,11 +31734,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/Lifebox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31853,11 +31767,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/Lifebox/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31889,11 +31799,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/LifeDrive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31928,11 +31834,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/LifeDrive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.NotificationService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -31965,11 +31867,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/LifeDrive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32002,11 +31900,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/LifeDrive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32047,11 +31941,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/InfoAppstore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32095,11 +31985,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProvider;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32142,11 +32028,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/InfoAppstore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32189,11 +32071,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProvider/InfoEnterprise.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32235,11 +32113,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/InfoAppStore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
@@ -32283,11 +32157,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxFileProviderUI;
@@ -32330,11 +32200,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/InfoAppStore.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
@@ -32377,11 +32243,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxFileProviderUI/InfoEnterprise.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DLIFEBOX";
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.filesui;
@@ -32425,11 +32287,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32473,11 +32331,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxShared;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32520,11 +32374,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32567,11 +32417,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxShared/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32620,10 +32466,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -32682,10 +32525,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/lifedrive.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -32743,10 +32583,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -32804,10 +32641,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -32851,11 +32685,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.LifeboxUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32887,11 +32717,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.LifeboxUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32921,11 +32747,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.LifeboxUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -32955,11 +32777,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = LifeboxUnitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.LifeboxUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -33003,10 +32821,7 @@
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -33066,10 +32881,7 @@
 				);
 				INFOPLIST_FILE = "Depo_LifeTech copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -33127,10 +32939,7 @@
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -33189,10 +32998,7 @@
 				);
 				INFOPLIST_FILE = "Depo/App/Depo-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -33253,10 +33059,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -33314,10 +33117,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/lifedrive.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -33374,10 +33174,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-AppStore-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -33434,10 +33231,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Lifedrive/LifeDrive-Enterprise-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Depo/**",
@@ -33488,11 +33282,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -33535,11 +33325,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -33581,11 +33367,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -33627,11 +33409,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -33672,11 +33450,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -33720,11 +33494,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -33767,11 +33537,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -33814,11 +33580,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -34014,40 +33776,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		F0B64C1F2754D79900002F66 /* XCRemoteSwiftPackageReference "ios_sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/adjust/ios_sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		F0B64C202754D79900002F66 /* Adjust */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F0B64C1F2754D79900002F66 /* XCRemoteSwiftPackageReference "ios_sdk" */;
-			productName = Adjust;
-		};
-		F0B64C252754DDE500002F66 /* Adjust */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F0B64C1F2754D79900002F66 /* XCRemoteSwiftPackageReference "ios_sdk" */;
-			productName = Adjust;
-		};
-		F0B64C292754DDFD00002F66 /* Adjust */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F0B64C1F2754D79900002F66 /* XCRemoteSwiftPackageReference "ios_sdk" */;
-			productName = Adjust;
-		};
-		F0B64C2B2754F71F00002F66 /* Adjust */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F0B64C1F2754D79900002F66 /* XCRemoteSwiftPackageReference "ios_sdk" */;
-			productName = Adjust;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8C47809F228D7BD4003EE471 /* LifeBoxModel.xcdatamodeld */ = {
