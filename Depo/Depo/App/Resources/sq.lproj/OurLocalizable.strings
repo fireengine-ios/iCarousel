@@ -470,7 +470,6 @@
 "This text doesn't match. Please try again" = "Ky tekst nuk përputhet. Ju lutem, provoni përsëri.";
 "An error is occurred!" = "Ka ndodhur një gabim!";
 "Please check the e-mail address" = "Ju lutem kontrolloni adresën e e-mail.";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Në rast se jeni abonent i Turkcell, ju mund ta përftoni fjalëkalimin tuaj duke dërguar falas SMS me tekst SIFRE në numrin 2200.";
 "Your password is sent to your e-mail address" = "Fjalëkalimi juaj është dërguar në adresën tuaj të e-mail.";
 "Please enter a valid email adress" = "Ju lutem, vendosni një adrese të vlefshme e-maili. ";
 "Please type the text" = "Ju lutem, shkruani tekstin";
@@ -1924,7 +1923,6 @@
 "forgotMyPassword_enter_your_account_email" = "Vendosni email -in ose numrin e telefonit të llogarisë tuaj";
 "forgotMyPassword_instructions" = "Për të rivendosur fjalëkalimin tuaj, ne do të dërgojmë një lidhje për rivendosjen e fjalëkalimit në adresën e emailit ose numrin e telefonit të llogarisë tuaj:";
 "forgotMyPassword_enter_valid_email" = "Ju lutemi shkruani një email ose numër telefoni të vlefshëm";
-"forgotMyPassword_instructions_other" = "Ju mund të rivendosni fjalëkalimin tuaj duke klikuar lidhjen që do të dërgojmë në adresën tuaj të postës elektronike ose numrin e telefonit të llogarisë tuaj.";
 "forgotMyPassword_reset_button" = "Risetoni Fjalëkalimin";
 "forgotMyPassword_challange1_header" = "Zgjidhni Metodën e Verifikimit";
 "forgotMyPassword_challange1_body" = "Cilën nga metodat e mëposhtme të verifikimit dëshironi të përdorni gjatë rrjedhës së rinovimit të fjalëkalimit?";
@@ -1969,10 +1967,15 @@
 "location_file_info" = "vendndodhja";
 "private_share_empty_list_error" = "Lista e përdoruesve nuk mund të jetë bosh ose nuk mund ta ndani me llogarinë tuaj.";
 
-
 /*Change album cover photo*/
-"dark_mode_page_title_text" = "";
-"dark_mode_title_text" = "";
-"dark_mode_dark_text" = "";
-"dark_mode_light_text" = "";
-"dark_mode_default_text" = "";
+"dark_mode_page_title_text" = "Modaliteti i Errët";
+"dark_mode_title_text" = "Modaliteti";
+"dark_mode_dark_text" = "E Errët";
+"dark_mode_light_text" = "E Ndritshme";
+"dark_mode_default_text" = "E Paracaktuar";
+
+/*Change person thumbnail*/
+"change_album_person_snackbar_text" = "";
+"change_album_person_error_text" = "";
+"change_person_photo" = "";
+"change_album_person_set_photo" = "";

@@ -575,10 +575,6 @@ Note: English is correct. GSM may be confusing to the customer*/
 "An error is occurred!" = "Une erreur est survenue!";
 "Please check the e-mail address" = "Veuillez vérifier cette adresse mail.";
 
-/*Suggested: "If you are already a Turkcell subscriber, you can obtain your password by sending a free SMS containing SIFRE to 2200."*/
-/*Fuzzy*/
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Si vous êtes déjà abonné à Turkcell, vous pouvez obtenir votre mot de passe en envoyant un SMS gratuit avec la mention SIFRE au numéro 2200.";
-
 /*Suggested: "Your password was sent to your e-mail address"*/
 "Your password is sent to your e-mail address" = "Votre mot de passe vous a été envoyé par email.";
 "Please enter a valid email adress" = "Veuillez saisir une adresse email valide.";
@@ -2189,7 +2185,6 @@ Please check I have understood the intended command here*/
 "forgotMyPassword_enter_your_account_email" = "Entrez votre e-mail ou votre numéro de téléphone";
 "forgotMyPassword_instructions" = "Nous enverrons un lien de réinitialisation de mot de passe à l'adresse e-mail ou au numéro de téléphone de votre compte pour réinitialiser votre mot de passe:";
 "forgotMyPassword_enter_valid_email" = "Veuillez entrer un email ou un numéro de téléphone valide";
-"forgotMyPassword_instructions_other" = "Vous pouvez réinitialiser votre mot de passe en cliquant sur le lien que nous vous enverrons à votre adresse e-mail ou au numéro de téléphone de votre compte.";
 "forgotMyPassword_reset_button" = "Réinitialisez le Mot de Passe";
 "forgotMyPassword_challange1_header" = "Choisissez la Méthode de Vérification";
 "forgotMyPassword_challange1_body" = "Laquelle des méthodes de vérification suivantes souhaitez-vous poursuivre avec le processus de renouvellement de mot de passe?";
@@ -2234,10 +2229,15 @@ Please check I have understood the intended command here*/
 "location_file_info" = "Emplacement";
 "private_share_empty_list_error" = "La liste des utilisateurs ne peut pas être vide ou le partage avec votre propre compte n'est pas autorisé.";
 
-
 /*Change album cover photo*/
-"dark_mode_page_title_text" = "";
-"dark_mode_title_text" = "";
-"dark_mode_dark_text" = "";
-"dark_mode_light_text" = "";
-"dark_mode_default_text" = "";
+"dark_mode_page_title_text" = "Mode Sombre";
+"dark_mode_title_text" = "Mode";
+"dark_mode_dark_text" = "Foncé";
+"dark_mode_light_text" = "Brillant";
+"dark_mode_default_text" = "Défaut";
+
+/*Change person thumbnail*/
+"change_album_person_snackbar_text" = "";
+"change_album_person_error_text" = "";
+"change_person_photo" = "";
+"change_album_person_set_photo" = "";

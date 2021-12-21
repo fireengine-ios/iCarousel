@@ -474,7 +474,6 @@
 "This text doesn't match. Please try again" = "النصّان غير متطابقين. يرجى المحاولة مرة أخرى.";
 "An error is occurred!" = "حدث خطأ!";
 "Please check the e-mail address" = "يرجى التحقق من عنوان البريد الإلكتروني.";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "إن كنت مشتركاً في تركسل، يمكنك الحصول على كلمة المرور بإرسال كلمة SIFRE إلى الرقم 2200.";
 "Your password is sent to your e-mail address" = "تم إرسال كلمة المرور إلى عنوان البريد الإلكتروني";
 "Please enter a valid email adress" = "يرجى إدخال عنوان بريد إلكتروني صالح";
 "Please type the text" = "يرجى كتابة النص";
@@ -1893,7 +1892,6 @@
 "forgotMyPassword_enter_your_account_email" = "قم بإدخال البريد الإلكتروني أو رقم الهاتف  الخاص بحسابك";
 "forgotMyPassword_instructions" = "لإعادة تعيين كلمة المرور الخاصة بك ، سنرسل رابط إعادة تعيين كلمة المرور إلى عنوان البريد الإلكتروني أو رقم الهاتف الخاص بحسابك:";
 "forgotMyPassword_enter_valid_email" = "الرجاء إدخال بريد إلكتروني أو رقم هاتف صالح";
-"forgotMyPassword_instructions_other" = "يمكنك إعادة تعيين كلمة المرور الخاصة بك عن طريق النقر فوق الارتباط الذي سنرسله إلى عنوان البريد الإلكتروني أو رقم الهاتف الخاص بحسابك.";
 "forgotMyPassword_reset_button" = "إعادة تعيين كلمة المرور";
 "forgotMyPassword_challange1_header" = "اختر طريقة التحقق";
 "forgotMyPassword_challange1_body" = "أي من طرق التحقق التالية ترغب في متابعة سريان تجديد كلمة المرور؟";
@@ -1938,10 +1936,15 @@
 "location_file_info" = "موقعك";
 "private_share_empty_list_error" = "لا يمكن أن تكون قائمة المستخدمين فارغة أو لا يمكنك مشاركتها مع حسابك الخاص.";
 
-
 /*Change album cover photo*/
-"dark_mode_page_title_text" = "";
-"dark_mode_title_text" = "";
-"dark_mode_dark_text" = "";
-"dark_mode_light_text" = "";
-"dark_mode_default_text" = "";
+"dark_mode_page_title_text" = "الوضع الداكن";
+"dark_mode_title_text" = "الوضع";
+"dark_mode_dark_text" = "داكن";
+"dark_mode_light_text" = "مشرق";
+"dark_mode_default_text" = "تقصير";
+
+/*Change person thumbnail*/
+"change_album_person_snackbar_text" = "";
+"change_album_person_error_text" = "";
+"change_person_photo" = "";
+"change_album_person_set_photo" = "";
