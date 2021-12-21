@@ -493,6 +493,7 @@ extension FaceImageItemsPresenter: ItemOperationManagerViewProtocol {
     
     func updatedPersonThumbnail(item: BaseDataSourceItem) {
         if faceImageType == .people {
+            ///since the face detection and processing job may take a few seconds to complete, we put some delay before calling relevant api's
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.reloadData()
             }
