@@ -470,7 +470,6 @@
 "This text doesn't match. Please try again" = "Bu yazı eşleşmiyor. Lütfen tekrar deneyin.";
 "An error is occurred!" = "Bir hata oluştu!";
 "Please check the e-mail address" = "Lütfen e-posta adresini tekrar kontrol edin.";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Turkcell abonesi isen, SIFRE yazıp 2200’a SMS göndererek şifre alabilirsin.";
 "Your password is sent to your e-mail address" = "Şifren e-posta adresine gönderilmiştir";
 "Please enter a valid email adress" = "Lütfen geçerli bir e-posta adresi girin.";
 "Please type the text" = "Lütfen yazıyı girin";
@@ -1899,7 +1898,6 @@
 "forgotMyPassword_enter_your_account_email" = "Hesabına ait e-postanı veya telefon numaranı gir";
 "forgotMyPassword_instructions" = "Şifreni sıfırlamak için hesabına ait e-posta adresine veya telefon numarasına şifre sıfırlama linki göndereceğiz:";
 "forgotMyPassword_enter_valid_email" = "Lütfen geçerli bir e-posta veya telefon numarası gir";
-"forgotMyPassword_instructions_other" = "Hesabına ait e-posta adresine veya telefon numarana göndereceğimiz linke tıklayarak şifreni sıfırlayabilirsin.";
 "forgotMyPassword_reset_button" = "Şifre Sıfırla";
 "forgotMyPassword_challange1_header" = "Doğrulama Yöntemini Seçin";
 "forgotMyPassword_challange1_body" = "Şifre yenileme akışına aşağıdaki doğrulama yöntemlerinden hangisi ile devam etmek istersin?";

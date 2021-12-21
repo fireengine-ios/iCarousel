@@ -492,7 +492,6 @@
 "This text doesn't match. Please try again" = "This text doesn't match. Please try again";
 "An error is occurred!" = "An error occurred!";
 "Please check the e-mail address" = "Please check the e-mail address";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "If you are already a Turkcell subscriber, you can obtain your password by sending a free SMS containing SIFRE to 2200.";
 "Your password is sent to your e-mail address" = "Your password was sent to your e-mail address.";
 "Please enter a valid email adress" = "Please enter a valid email address.";
 "Please type the text" = "Please type the text";
@@ -1931,7 +1930,6 @@
 "forgotMyPassword_enter_your_account_email" = "Enter your e-mail or phone number associated with your account";
 "forgotMyPassword_instructions" = "To reset your password we will send a link to your e-mail associated with your account:";
 "forgotMyPassword_enter_valid_email" = "Please enter a valid e-mail or phone number";
-"forgotMyPassword_instructions_other" = "To reset your password you can click the link that will be sent to your e-mail associated with your account.";
 "forgotMyPassword_reset_button" = "Reset Password";
 "forgotMyPassword_challange1_header" = "Please Select a Verification Method";
 "forgotMyPassword_challange1_body" = "To reset your password, which verification method would you like to continue with?";

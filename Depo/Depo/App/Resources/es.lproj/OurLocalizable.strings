@@ -486,7 +486,6 @@
 "This text doesn't match. Please try again" = "Este texto no coincide. Inténtelo de nuevo";
 "An error is occurred!" = "¡Ha ocurrido un error!";
 "Please check the e-mail address" = "Por favor verifique la dirección de correo electrónico";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Si ya es suscriptor de Turkcell, puede obtener su contraseña enviando SMS gratuitos con SIFRE al 2200.";
 "Your password is sent to your e-mail address" = "Su contraseña es enviada a su dirección de correo electrónico";
 "Please enter a valid email adress" = "Por favor ingrese una dirección de correo electrónico válida";
 "Please type the text" = "Por favor escriba el texto";
@@ -1923,7 +1922,6 @@
 "forgotMyPassword_enter_your_account_email" = "Ingrese el correo electrónico o número de teléfono de su cuenta";
 "forgotMyPassword_instructions" = "Para restablecer su contraseña, le enviaremos un enlace de restablecimiento de contraseña a la dirección de correo electrónico o al número de teléfono de su cuenta:";
 "forgotMyPassword_enter_valid_email" = "Ingrese un correo electrónico o número de teléfono válido";
-"forgotMyPassword_instructions_other" = "Puede restablecer su contraseña haciendo clic en el enlace que le enviaremos a su dirección de correo electrónico o número de teléfono de su cuenta.";
 "forgotMyPassword_reset_button" = "Restablecer la Contraseña";
 "forgotMyPassword_challange1_header" = "Elija el Método de Verificación";
 "forgotMyPassword_challange1_body" = "¿Cuál de los siguientes métodos de verificación le gustaría utilizar durante el flujo de renovación de contraseña?";
@@ -1967,7 +1965,6 @@
 "change_album_cover_set_photo" = "Usar como portada del álbum";
 "location_file_info" = "Ubicación";
 "private_share_empty_list_error" = "La lista de usuarios no puede estar vacía o compartir con su propia cuenta no está permitido.";
-
 
 /*Change album cover photo*/
 "dark_mode_page_title_text" = "Modo Oscuro";

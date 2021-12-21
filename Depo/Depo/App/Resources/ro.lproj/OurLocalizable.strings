@@ -464,7 +464,6 @@
 "This text doesn't match. Please try again" = "Acest text nu coincide. Încearcă din nou.";
 "An error is occurred!" = "A apărut o eroare!";
 "Please check the e-mail address" = "Te rugăm să verifici această adresă e-mail";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Dacă ești deja abonat Turkcell, poți obține parola transmițând un SMS gratuit cu textul SIFRE la 2200.";
 "Your password is sent to your e-mail address" = "Parola ta a fost transmisă la adresa ta e-mail";
 "Please enter a valid email adress" = "Introdu o adresă e-mail validă";
 "Please type the text" = "Introdu textul";
@@ -1881,7 +1880,6 @@
 "forgotMyPassword_enter_your_account_email" = "Introduce adresa  e-mail sau număr de telefon aferent contului tău";
 "forgotMyPassword_instructions" = "Pentru a vă reseta parola, vă vom trimite un link de resetare a parolei la adresa de e-mail sau la numărul de telefon aferent contului:";
 "forgotMyPassword_enter_valid_email" = "Te rugăm să introduci un e-mail sau un număr de telefon valid";
-"forgotMyPassword_instructions_other" = "Îți poţi reseta parola dând clic pe linkul pe care îl vom trimite la adresa de e-mail sau la numărul de telefon aferent contului tău.";
 "forgotMyPassword_reset_button" = "Resetează Parola";
 "forgotMyPassword_challange1_header" = "Alegeți Metoda de Confirmare";
 "forgotMyPassword_challange1_body" = "Cu care dintre următoarele metode de confirmare dorești să continui fluxul de reînnoire a parolei?";
@@ -1925,7 +1923,6 @@
 "change_album_cover_set_photo" = "Utilizați ca coperta de album";
 "location_file_info" = "Locație";
 "private_share_empty_list_error" = "Lista de utilizatori nu poate fi goală sau nu puteți partaja cu propriul cont.";
-
 
 /*Change album cover photo*/
 "dark_mode_page_title_text" = "Mod Întunecat";

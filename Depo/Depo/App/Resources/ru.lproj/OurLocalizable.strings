@@ -466,7 +466,6 @@
 "This text doesn't match. Please try again" = "Текст не соответствует. Пожалуйста, попробуйте снова.";
 "An error is occurred!" = "Возникла ошибка!";
 "Please check the e-mail address" = "Пожалуйста, проверьте адрес электронной почты";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Если вы являетесь абонентом Туркселл, вы можете получить пароль, отправив SMS с текстом SIFRE на короткий номер 2222.";
 "Your password is sent to your e-mail address" = "Пароль отправлен вам на почту.";
 "Please enter a valid email adress" = "Пожалуйста, введите существующий адрес электронной почты.";
 "Please type the text" = "Пожалуйста, введите текст";
@@ -1895,7 +1894,6 @@
 "forgotMyPassword_enter_your_account_email" = "Введите адрес электронной почты или номер телефона вашей учетной записи";
 "forgotMyPassword_instructions" = "Для сброса пароля мы отправим ссылку сброса пароля на адрес электронной почты или номер телефона вашей учетной записи:";
 "forgotMyPassword_enter_valid_email" = "Пожалуйста, введите действующий адрес электронной почты или номер телефона";
-"forgotMyPassword_instructions_other" = "Вы можете сбросить пароль, щелкнув по ссылке, которую мы отправим на ваш адрес электронной почты или номер телефона вашей учетной записи.";
 "forgotMyPassword_reset_button" = "Сброс Пароля";
 "forgotMyPassword_challange1_header" = "Выбрать Метод Подтверждения";
 "forgotMyPassword_challange1_body" = "С каким из следующих методов подтверждения вы хотите продолжить, для обновления пароля?";
@@ -1939,7 +1937,6 @@
 "change_album_cover_set_photo" = "Использовать как обложку альбома";
 "location_file_info" = "положение";
 "private_share_empty_list_error" = "Список пользователей не может быть пустым, или же совместное использование с вашей учетной записью невозможно.";
-
 
 /*Change album cover photo*/
 "dark_mode_page_title_text" = "Темный Режим";

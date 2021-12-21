@@ -464,7 +464,6 @@
 "This text doesn't match. Please try again" = "Цей текст не збігається. Будь ласка спробуйте ще раз";
 "An error is occurred!" = "Виникла помилка!";
 "Please check the e-mail address" = "Будь-ласка, перевірте адресу електронної пошти";
-"If you are already a Turkcell subscriber, you can obtain your password by sending free SMS containing SIFRE to 2222." = "Якщо ви вже є абонентом Turkcell, ви можете отримати свій пароль, відправивши безкоштовне SMS-повідомлення, що містить SIFRE, до 2200.";
 "Your password is sent to your e-mail address" = "Ваш пароль надсилається на вашу адресу електронної пошти";
 "Please enter a valid email adress" = "Будь ласка, введіть дійсну адресу електронної пошти";
 "Please type the text" = "Будь ласка, введіть текст";
@@ -1883,7 +1882,6 @@
 "forgotMyPassword_enter_your_account_email" = "Введіть адресу електронної пошти або номер телефону свого облікового запису";
 "forgotMyPassword_instructions" = "Щоб скинути пароль, ми відправимо посилання для скидання пароля на адресу електронної пошти або номер телефону вашого облікового запису:";
 "forgotMyPassword_enter_valid_email" = "Будь ласка, введіть дійсну адресу електронної пошти або номер телефону";
-"forgotMyPassword_instructions_other" = "Ви можете скинути пароль, клацнувши посилання, яке ми відправимо на Вашу електронну адресу електронної пошти або номер телефону вашого профілю.";
 "forgotMyPassword_reset_button" = "Скинути Пароль";
 "forgotMyPassword_challange1_header" = "Виберіть Метод Перевірки";
 "forgotMyPassword_challange1_body" = "Який із наведених нижче способів перевірки ви хотіли б продовжити у процесі оновлення пароля?";
@@ -1927,7 +1925,6 @@
 "change_album_cover_set_photo" = "Використовувати як обкладинку альбому";
 "location_file_info" = "Розташування";
 "private_share_empty_list_error" = "Список користувачів не може бути порожнім або ви не можете надати доступ до свого облікового запису.";
-
 
 /*Change album cover photo*/
 "dark_mode_page_title_text" = "Темний Режим";
