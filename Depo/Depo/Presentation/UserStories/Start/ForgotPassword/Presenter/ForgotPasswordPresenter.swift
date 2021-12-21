@@ -85,7 +85,7 @@ private extension ForgotPasswordTexts {
     static func old() -> ForgotPasswordTexts {
         return ForgotPasswordTexts(
             instructions: TextConstants.resetPasswordInfo,
-            instructionsOther: TextConstants.resetPasswordSubTitle,
+            instructionsOther: "",
             emailInputTitle: TextConstants.resetPasswordEmailTitle,
             emailPlaceholder: TextConstants.resetPasswordEmailPlaceholder
         )
