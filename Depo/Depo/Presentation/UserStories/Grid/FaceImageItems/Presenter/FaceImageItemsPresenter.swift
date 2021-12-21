@@ -490,4 +490,12 @@ extension FaceImageItemsPresenter: ItemOperationManagerViewProtocol {
             reloadData()
         }
     }
+    
+    func updatedPersonThumbnail(item: BaseDataSourceItem) {
+        if faceImageType == .people {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.reloadData()
+            }
+        }
+    }
 }

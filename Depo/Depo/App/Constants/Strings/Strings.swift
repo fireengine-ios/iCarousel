@@ -94,5 +94,6 @@ enum Strings: String, Localizable {
     case changePersonThumbnailSuccess = "change_album_person_snackbar_text"
     case changePersonThumbnailError = "change_album_person_error_text"
     case changePersonThumbnail = "change_person_photo"
+    case changePersonThumbnailSetPhoto = "change_album_person_set_photo"
 
 }

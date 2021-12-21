@@ -605,7 +605,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
         case .makePersonThumbnail:
             if let item = basePassingPresenter?.getFIRParent() {
-                interactor.makePersonThumbnail(items: items, item: item)
+                interactor.makePersonThumbnail(items: items, personItem: item)
             }
         case .removeFromFaceImageAlbum:
             if let item = basePassingPresenter?.getFIRParent() {

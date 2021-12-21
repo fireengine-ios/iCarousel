@@ -76,7 +76,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func makeAlbumCover(items: [BaseDataSourceItem])
     
-    func makePersonThumbnail(items: [BaseDataSourceItem], item: Item)
+    func makePersonThumbnail(items: [BaseDataSourceItem], personItem: Item)
     
     func albumDetails(items: [BaseDataSourceItem])
     

@@ -547,7 +547,7 @@ enum ElementTypes {
         case .changePeopleThumbnail:
             return localized(.changePersonThumbnail)
         case .makePersonThumbnail:
-            return "Kişi fotoğrafı olarak ata"
+            return localized(.changePersonThumbnailSetPhoto)
         case .instaPick:
             return TextConstants.newInstaPick
         case .endSharing:

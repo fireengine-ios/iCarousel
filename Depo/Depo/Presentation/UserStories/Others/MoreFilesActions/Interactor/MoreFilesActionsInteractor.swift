@@ -999,8 +999,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         })
     }
     
-    func makePersonThumbnail(items: [BaseDataSourceItem], item: Item) {
-        guard let item = items.first as? Item, let personId = item.id else{ return }
+    func makePersonThumbnail(items: [BaseDataSourceItem], personItem: Item) {
+        guard let item = items.first as? Item, let personId = personItem.id else{ return }
         
         let params = PeopleChangeThumbnailParameters(personId: personId, item: item)
         
