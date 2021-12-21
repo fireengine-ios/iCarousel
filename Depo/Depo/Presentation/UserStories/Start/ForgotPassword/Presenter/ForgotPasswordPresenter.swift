@@ -15,15 +15,6 @@ final class ForgotPasswordPresenter: BasePresenter {
         return view
     }
 
-    private func showsTurkcellInstructions() -> Bool {
-        #if LIFEBOX
-        let langCode = Device.locale
-        return langCode == "en" || langCode == "tr"
-        #else
-        return false
-        #endif
-    }
-
     private func removeBrackets(text: String) -> String {
         return text.filter { $0 != ")" && $0 != "(" }
     }
@@ -34,11 +25,10 @@ extension ForgotPasswordPresenter: ForgotPasswordViewOutput {
     func viewIsReady() {
         interactor.trackScreen()
 
-        let isTurkcell = showsTurkcellInstructions()
         if interactor.isV2Enabled {
-            view.setTexts(.new(isTurkcell: isTurkcell))
+            view.setTexts(.new())
         } else {
-            view.setTexts(.old(isTurkcell: isTurkcell))
+            view.setTexts(.old())
         }
     }
 
@@ -92,23 +82,19 @@ extension ForgotPasswordPresenter: ForgotPasswordInteractorOutput {
 }
 
 private extension ForgotPasswordTexts {
-    static func old(isTurkcell: Bool) -> ForgotPasswordTexts {
-        let turkcellInstructions = TextConstants.forgotPasswordSubTitle
-        let instructionsOther = isTurkcell ? turkcellInstructions : TextConstants.resetPasswordSubTitle
+    static func old() -> ForgotPasswordTexts {
         return ForgotPasswordTexts(
             instructions: TextConstants.resetPasswordInfo,
-            instructionsOther: instructionsOther,
+            instructionsOther: TextConstants.resetPasswordSubTitle,
             emailInputTitle: TextConstants.resetPasswordEmailTitle,
             emailPlaceholder: TextConstants.resetPasswordEmailPlaceholder
         )
     }
 
-    static func new(isTurkcell: Bool) -> ForgotPasswordTexts {
-        let turkcellInstructions = TextConstants.forgotPasswordSubTitle
-        let instructionsOther = isTurkcell ? turkcellInstructions : localized(.resetPasswordInstructionsOther)
+    static func new() -> ForgotPasswordTexts {
         return ForgotPasswordTexts(
             instructions: localized(.resetPasswordInstructions),
-            instructionsOther: instructionsOther,
+            instructionsOther: "",
             emailInputTitle: localized(.resetPasswordYourAccountEmail),
             emailPlaceholder: localized(.resetPasswordEnterYourAccountEmail)
         )
