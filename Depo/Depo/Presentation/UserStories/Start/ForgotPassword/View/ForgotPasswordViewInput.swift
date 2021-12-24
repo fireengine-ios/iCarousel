@@ -20,7 +20,6 @@ protocol ForgotPasswordViewInput: AnyObject, Waiting {
 
 struct ForgotPasswordTexts {
     let instructions: String
-    let instructionsOther: String
     let emailInputTitle: String
     let emailPlaceholder: String
 }
