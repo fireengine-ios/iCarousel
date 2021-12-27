@@ -10,7 +10,15 @@ import UIKit
 
 extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {
-        let image = UIImage(color: color)
-        setBackgroundImage(image, for: state)
+        if #available(iOS 13.0, *) {
+            let traitCollection = (UIApplication.shared.delegate as? AppDelegate)?.window?.traitCollection ?? self.traitCollection
+            traitCollection.performAsCurrent {
+                let image = UIImage(color: color)
+                setBackgroundImage(image, for: state)
+            }
+        } else {
+            let image = UIImage(color: color)
+            setBackgroundImage(image, for: state)
+        }
     }
 }

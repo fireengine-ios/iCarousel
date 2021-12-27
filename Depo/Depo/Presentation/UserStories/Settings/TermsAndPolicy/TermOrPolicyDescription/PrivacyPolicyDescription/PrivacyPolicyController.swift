@@ -78,6 +78,11 @@ final class PrivacyPolicyController: UIViewController {
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setupWebView()
+    }
+    
     private func setupWebView() {
         let hexColor = AppColor.blackColor.color?.toHexString() ?? "#000000"
         privacyPolicyService.getPrivacyPolicy { [weak self] response in

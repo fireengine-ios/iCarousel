@@ -86,6 +86,11 @@ class InvitationCampaignDetailView: UIView, NibInit {
                 "}</style> \(content)"
         return htmlString
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        fetchCampaignDetail()
+    }
 
     @IBAction func closeButtonTapped(_ sender: Any) {
         removeFromSuperview()

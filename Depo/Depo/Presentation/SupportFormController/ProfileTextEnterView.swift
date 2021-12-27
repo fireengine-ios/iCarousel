@@ -48,6 +48,11 @@ class ProfileTextEnterView: UIView {
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        underlineLayer.backgroundColor = underlineColor?.cgColor
+    }
+    
     private let underlineWidth: CGFloat = 0.5
     private let underlineLayer = CALayer()
     

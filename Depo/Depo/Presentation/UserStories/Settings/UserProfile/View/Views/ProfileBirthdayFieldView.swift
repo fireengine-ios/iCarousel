@@ -68,6 +68,13 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         return newValue
     }()
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        dayLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        monthLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        yearLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
+    }
+    
     override var editableText: String? {
         get {
             return String(format: "%@ %@ %@",
