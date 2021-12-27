@@ -174,6 +174,10 @@
 		071AD45F27045CD9003A24B0 /* FirebaseRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F8E042587978400799405 /* FirebaseRemoteConfig.swift */; };
 		071AD46027045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B57F8F312587A73600799405 /* FirebaseRemoteConfigDefaults.plist */; };
 		071AD46127045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B57F8F312587A73600799405 /* FirebaseRemoteConfigDefaults.plist */; };
+		071ED284277881F4000A7F9B /* RecognizeTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ED283277881F4000A7F9B /* RecognizeTextButton.swift */; };
+		071ED285277881F4000A7F9B /* RecognizeTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ED283277881F4000A7F9B /* RecognizeTextButton.swift */; };
+		071ED286277881F4000A7F9B /* RecognizeTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ED283277881F4000A7F9B /* RecognizeTextButton.swift */; };
+		071ED287277881F4000A7F9B /* RecognizeTextButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071ED283277881F4000A7F9B /* RecognizeTextButton.swift */; };
 		0731E7D0263164BC00883566 /* RegistrationTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */; };
 		0731E80B263165DA00883566 /* RegistrationTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0731E809263165DA00883566 /* RegistrationTermsViewController.xib */; };
 		0731E87C263181EA00883566 /* RegistrationTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */; };
@@ -9191,6 +9195,7 @@
 		0710A4E3268A416E0096B76A /* OverlayStickerSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorViewController.swift; sourceTree = "<group>"; };
 		07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAppearAction.swift; sourceTree = "<group>"; };
 		07182042268E3CDE0043730B /* OverlayStickersModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickersModels.swift; sourceTree = "<group>"; };
+		071ED283277881F4000A7F9B /* RecognizeTextButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeTextButton.swift; sourceTree = "<group>"; };
 		0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTermsViewController.swift; sourceTree = "<group>"; };
 		0731E809263165DA00883566 /* RegistrationTermsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationTermsViewController.xib; sourceTree = "<group>"; };
 		0731E8BC263182A800883566 /* RegistrationTermsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTermsInfoViewController.swift; sourceTree = "<group>"; };
@@ -19999,6 +20004,7 @@
 			children = (
 				CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */,
 				CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */,
+				071ED283277881F4000A7F9B /* RecognizeTextButton.swift */,
 			);
 			path = PhotoVideoDetailCell;
 			sourceTree = "<group>";
@@ -24905,6 +24911,7 @@
 				8C0E8E521FDEBDFF00789C91 /* OfferApple.swift in Sources */,
 				FA793D89201872E200A02B46 /* PlacesServiceResponse.swift in Sources */,
 				076BD19D27BBBDE3004609E3 /* MapSearchInteractor.swift in Sources */,
+				071ED284277881F4000A7F9B /* RecognizeTextButton.swift in Sources */,
 				8C0E8E541FDEBDFF00789C91 /* ActivityTimelineSectionsBuider.swift in Sources */,
 				07D0592E26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				7326801524855248007E2CDF /* ExtandedTapAreaButton.swift in Sources */,
@@ -27685,6 +27692,7 @@
 				A74ADA7B23A9F0FD007DD192 /* CarouselPagerDataSource.swift in Sources */,
 				CF83CF33243F1630009DF60F /* BackgroundSyncOperation.swift in Sources */,
 				CE784CA322A685FB00662219 /* FaceImageChangeCoverInteractor.swift in Sources */,
+				071ED286277881F4000A7F9B /* RecognizeTextButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -29020,6 +29028,7 @@
 				73E6715D23EBFE53000C4AF7 /* PrivacyPolicyResponse.swift in Sources */,
 				CF8B678523CBC9D70021B021 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
 				CF8B678623CBC9D70021B021 /* ActionsMenuViewInput.swift in Sources */,
+				071ED285277881F4000A7F9B /* RecognizeTextButton.swift in Sources */,
 				CF8B678723CBC9D70021B021 /* ActionsMenuView.swift in Sources */,
 				CF8B678823CBC9D70021B021 /* PackageOffer.swift in Sources */,
 				CF8B678923CBC9D70021B021 /* FileInfoViewInput.swift in Sources */,
@@ -31037,6 +31046,7 @@
 				CF8B704F23CBCA280021B021 /* iOSDevCenters+GIF.swift in Sources */,
 				CF83CF34243F1630009DF60F /* BackgroundSyncOperation.swift in Sources */,
 				CF8B705123CBCA280021B021 /* FaceImageChangeCoverInteractor.swift in Sources */,
+				071ED287277881F4000A7F9B /* RecognizeTextButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

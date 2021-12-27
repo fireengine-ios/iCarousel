@@ -61,6 +61,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             /// without animation
 
+            //TODO: possible regression?
+            viewForBottomBar.isHidden = isFullScreen
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen && !isBottomViewOpen)
@@ -193,7 +195,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         backButtonForNavigationItem(title: TextConstants.backTitle)
         passThroughView?.removeFromSuperview()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         hideDetailViewIfChangedRotation()
@@ -206,6 +208,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
                 self.scrollToSelectedIndex()
             }
         })
+
+        adjustBottomSpacingForRecognizeTextButton()
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -376,6 +380,21 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
+    }
+
+    private func adjustBottomSpacingForRecognizeTextButton() {
+        for cell in collectionView.visibleCells {
+            guard let detailCell = cell as? PhotoVideoDetailCell else { continue }
+            let spacing: CGFloat
+            if isFullScreen {
+                spacing = view.safeAreaInsets.bottom + 16
+            } else {
+                let minY = viewForBottomBar.convert(editingTabBar.view.frame, to: view).minY
+                spacing = (view.frame.maxY - minY) + 16
+            }
+
+            detailCell.setRecognizeTextButtonBottomSpacing(spacing)
+        }
     }
 }
 
@@ -765,6 +784,17 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     
     func didExpireUrl() {
         output.createNewUrl()
+    }
+
+    func recognizeTextButtonTapped() {
+        guard let selectedIndex = self.selectedIndex,
+              let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0)) as? PhotoVideoDetailCell
+        else {
+            return
+        }
+
+        // TODO: call api
+        cell.recognizeTextButton.isSelected = !cell.recognizeTextButton.isSelected
     }
 }
 

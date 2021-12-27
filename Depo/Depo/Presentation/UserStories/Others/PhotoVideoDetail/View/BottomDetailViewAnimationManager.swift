@@ -393,6 +393,7 @@ extension BottomDetailViewAnimationManager: PhotoVideoDetailCellDelegate {
     func tapOnSelectedItem() {}
     func tapOnCellForFullScreen() {}
     func didExpireUrl() {}
+    func recognizeTextButtonTapped() {}
     
     func imageLoadingFinished() {
         let yPositionForBottomView = view.frame.height - cardHeight
