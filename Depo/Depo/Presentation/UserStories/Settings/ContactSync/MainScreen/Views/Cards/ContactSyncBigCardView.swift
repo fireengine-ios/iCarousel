@@ -113,6 +113,12 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
         backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
+        backUpButton.setTitleColor(AppColor.lrTealishAndWhite.color ?? .lrTealishTwo, for: .normal)
+    }
+    
     //MARK: - Public
     
     @discardableResult
