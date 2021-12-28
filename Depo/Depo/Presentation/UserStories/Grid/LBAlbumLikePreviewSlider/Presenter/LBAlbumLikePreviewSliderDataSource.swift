@@ -12,16 +12,19 @@ protocol LBAlbumLikePreviewSliderDataSourceDelegate: AnyObject {
     func onItemSelected(item: SliderItem)
 }
 
-class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDropDelegate {
+    
     internal weak var collectionView: UICollectionView?
     var allItems: [SliderItem] = []
     weak var delegate: LBAlbumLikePreviewSliderDataSourceDelegate?
+    var timer: Timer?
     
     func setupCollectionView(collectionView: UICollectionView) {
         self.collectionView = collectionView
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.dropDelegate = self
+        collectionView.isSpringLoaded = true
         collectionView.register(nibCell: SmartAlbumCell.self)
         collectionView.register(nibCell: InstaPickSmartAlbumCell.self)
         collectionView.register(nibCell: SingleThumbnailAlbumCell.self)
@@ -70,6 +73,14 @@ class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.onItemSelected(item: allItems[indexPath.item])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        return
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
+        return true
     }
     
 }

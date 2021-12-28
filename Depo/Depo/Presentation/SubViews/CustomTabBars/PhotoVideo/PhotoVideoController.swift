@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 // TODO: todos in file
 // TODO: clear code -
@@ -53,6 +54,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = ScrollDirectionManager()
     private lazy var instaPickRoutingService = InstaPickRoutingService()
+    private lazy var dragAndDropHelper = DragAndDropHelper.shared
 
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
     
@@ -83,6 +85,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         scrollBarManager.addScrollBar(to: collectionView, delegate: self)
         performFetch()
+        collectionView.addInteraction(UIDropInteraction(delegate: self))
     }
     
     deinit {
@@ -977,3 +980,42 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
         showSpinner()
     }
 }
+
+
+extension PhotoVideoController: UIDropInteractionDelegate {
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: DragAndDropMediaType.self)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        var items: [WrapData] = []
+        let myGroup = DispatchGroup()
+        
+        for dragItem in session.items {
+            myGroup.enter()
+            dragItem.itemProvider.loadObject(ofClass: DragAndDropMediaType.self, completionHandler: { object, error in
+                guard error == nil else { return print("Failed to load our dragged item") }
+                guard let item = object as? DragAndDropMediaType else { return }
+                
+                if let data = item.fileData, let fileExtension = item.fileExtension, let fileType = self.dragAndDropHelper.getFileType(with: fileExtension) {
+                    let wrapData = WrapData(mediaData: data, isLocal: false, fileType: fileType)
+                    if let wrapDataName = wrapData.name, let dataExtension = item.fileExtension {
+                        wrapData.name = wrapDataName + "." + dataExtension
+                        items.append(wrapData)
+                        myGroup.leave()
+                    }
+                }
+            })
+        }
+        
+        let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.dragAndDropUploadQueue)
+        myGroup.notify(queue: dispatchQueue) {
+            DragAndDropHelper.shared.uploadItems(with: items)
+        }
+    }
+}
+

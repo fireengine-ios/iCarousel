@@ -50,4 +50,5 @@ struct DispatchQueueLabels {
     static let localContactsServiceQueue = "com.lifebox.localContactsServiceQueue"
     static let privateShareFileInfoManagerQueue = "com.lifebox.PrivateShareFileInfoManager"
     static let spotlightManagerQueue = "com.lifebox.spotlightIndexingQueue"
+    static let dragAndDropUploadQueue = "com.lifebox.dragAndDropUploadQueue"
 }

@@ -17,6 +17,8 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     func configurateWithArray(array: [[BaseDataSourceItem]]) {
         tableDataMArray.removeAll()
         tableDataMArray.append(contentsOf: array)
+        collectionView?.isSpringLoaded = true
+        collectionView?.dropDelegate = self
         collectionView?.reloadData()
 //        allItems.append(array.first! as [WrapData])
     }
@@ -155,5 +157,15 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
     override func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
         albumsDeleted(albums: albums)
+    }
+}
+
+extension ArrayDataSourceForCollectionView: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        return
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
+        return true
     }
 }
