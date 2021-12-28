@@ -10,4 +10,5 @@ import UIKit
 
 protocol FaceImageChangeCoverInteractorInput {
     func setAlbumCoverWithItem(_ item: BaseDataSourceItem)
+    func setPersonThumbnailWith(item: BaseDataSourceItem)
 }

@@ -14,12 +14,12 @@ protocol FaceImageChangeCoverModuleOutput: AnyObject {
 
 final class FaceImageChangeCoverInitializer: NSObject {
 
-    class func initializeController(with nibName: String, albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput?) -> UIViewController {
+    class func initializeController(with nibName: String, albumUUID: String, personItem: Item?, coverType: CoverType?, moduleOutput: FaceImageChangeCoverModuleOutput?) -> UIViewController {
         let viewController = FaceImageChangeCoverViewController(nibName: nibName, bundle: nil)
     
         let configurator = FaceImageChangeCoverConfigurator()
         let itemsService = FaceImageDetailService(albumUUID: albumUUID, requestSize: 100)
-        configurator.configure(viewController: viewController, itemsService: itemsService, moduleOutput: moduleOutput)
+        configurator.configure(viewController: viewController, itemsService: itemsService, personItem: personItem, coverType: coverType, moduleOutput: moduleOutput)
         
         return viewController
     }

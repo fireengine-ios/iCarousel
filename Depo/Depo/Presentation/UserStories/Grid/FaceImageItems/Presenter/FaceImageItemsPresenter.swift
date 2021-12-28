@@ -294,7 +294,7 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
         if let router = router as? FaceImageItemsRouter {
             let albumItem = AlbumItem(remote: album)
-            router.openFaceImageItemPhotosWith(item, album: albumItem, moduleOutput: self)
+            router.openFaceImageItemPhotosWith(item, album: albumItem, moduleOutput: self, faceImageType: self.faceImageType)
         }
     }
     
@@ -488,6 +488,15 @@ extension FaceImageItemsPresenter: ItemOperationManagerViewProtocol {
     func didUnhideThings(items: [ThingsItem]) {
         if faceImageType == .things {
             reloadData()
+        }
+    }
+    
+    func updatedPersonThumbnail(item: BaseDataSourceItem) {
+        if faceImageType == .people {
+            ///since the face detection and processing job may take a few seconds to complete, we put some delay before calling relevant api's
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.reloadData()
+            }
         }
     }
 }

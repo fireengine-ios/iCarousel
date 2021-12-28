@@ -11,6 +11,7 @@ import UIKit
 final class FaceImagePhotosRouter: BaseFilesGreedRouter {
     
     var item: Item?
+    var faceImageType: FaceImageType?
     private lazy var router = RouterVC()
     
     override func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
@@ -24,8 +25,9 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
                                                                   albumUUID: albumUUID,
                                                                   albumItem: item,
                                                                   status: view.status,
-                                                                  moduleOutput: moduleOutput as? PhotoVideoDetailModuleOutput)
-            
+                                                                  moduleOutput: moduleOutput as? PhotoVideoDetailModuleOutput,
+                                                                  faceImageType: faceImageType)
+        
         presenter.photoVideoDetailModule = detailModule.moduleInput
         let nController = NavigationController(rootViewController: detailModule.controller)
         router.presentViewController(controller: nController)
@@ -39,6 +41,10 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
 // MARK: FaceImagePhotosRouterInput
 
 extension FaceImagePhotosRouter: FaceImagePhotosRouterInput {
+    func openChangeThumbnailWith(_ albumUUID: String, personItem: Item, moduleOutput: FaceImageChangeCoverModuleOutput) {
+        let vc = router.faceImageChangeCoverController(albumUUID: albumUUID, personItem: personItem, coverType: .thumbnail, moduleOutput: moduleOutput)
+        router.pushViewController(viewController: vc)
+    }
     
     func openChangeCoverWith(_ albumUUID: String, moduleOutput: FaceImageChangeCoverModuleOutput) {
         let vc = router.faceImageChangeCoverController(albumUUID: albumUUID, moduleOutput: moduleOutput)

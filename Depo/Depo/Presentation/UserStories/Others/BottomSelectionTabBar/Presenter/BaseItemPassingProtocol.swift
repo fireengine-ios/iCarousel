@@ -22,7 +22,8 @@ protocol BaseItemInputPassingProtocol: AnyObject {
 
     func printSelected()
     func changeCover()
-    
+    func changePeopleThumbnail()
+        
     func getFIRParent() -> Item?
     
     func openInstaPick()

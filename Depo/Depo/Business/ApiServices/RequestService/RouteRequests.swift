@@ -204,6 +204,7 @@ struct RouteRequests {
     static let peopleTrash = baseUrl.absoluteString + people + "trash"
     static let peopleDelete = baseUrl.absoluteString + people + "delete"
     static let peoplePhotoWithMedia = people + "media?fileUuid=%@"
+    static let peopleChangeThumbnail = people + "thumbnail/%d"
 //    static let peopleDeletePhoto = "/person/photo/%d/%d"
     static let things = "object/"
     static let thingsThumbnails = "object/thumbnails"

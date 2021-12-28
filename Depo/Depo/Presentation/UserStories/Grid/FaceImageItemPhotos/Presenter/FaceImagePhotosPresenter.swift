@@ -50,6 +50,14 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
+    override func changePeopleThumbnail() {
+        if let itemsService = interactor.remoteItems as? FaceImageDetailService,
+           let router = router as? FaceImagePhotosRouter,
+           let personItem = getFIRParent() {
+            router.openChangeThumbnailWith(itemsService.albumUUID, personItem: personItem, moduleOutput: self)
+        }
+    }
+    
     override func getFIRParent() -> Item? {
         return item
     }

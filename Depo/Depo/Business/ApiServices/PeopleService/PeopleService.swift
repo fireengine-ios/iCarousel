@@ -424,3 +424,22 @@ final class PeopleItem: Item {
         return nil
     }
 }
+
+final class PeopleChangeThumbnailParameters: BaseRequestParametrs {
+    private let personId: Int64
+    private let item: Item
+
+    init(personId: Int64, item: Item) {
+        self.personId = personId
+        self.item = item
+    }
+    
+    override var requestParametrs: Any {
+        return ["uuid": item.uuid ]
+    }
+
+    override var patch: URL {
+        let path = String(format: RouteRequests.peopleChangeThumbnail, personId)
+        return URL(string: path, relativeTo: RouteRequests.baseUrl)!
+    }
+}
