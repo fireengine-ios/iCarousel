@@ -1944,7 +1944,8 @@
 "dark_mode_default_text" = "تقصير";
 
 /*Change person thumbnail*/
-"change_album_person_snackbar_text" = "";
-"change_album_person_error_text" = "";
-"change_person_photo" = "";
-"change_album_person_set_photo" = "";
+"change_album_person_snackbar_text" = "تم تحديث صورة جهة الاتصال بنجاح";
+"change_album_person_error_text" = "حدث خطأ أثناء تغيير صورة جهة الاتصال";
+"change_person_photo" = "تغيير صورة جهة الاتصال";
+"change_album_person_set_photo" = "استخدم كصورة جهة اتصال";
+"profile_recovery_mail_info" = "";
