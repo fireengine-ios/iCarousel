@@ -1986,3 +1986,4 @@
 "change_album_person_error_text" = "Error occurred while changing person photo";
 "change_person_photo" = "Change Person Photo";
 "change_album_person_set_photo" = "Use as person photo";
+"profile_recovery_mail_info" = "Şifrenizi unuttuğunuzda şifre kurtarma adımlarında kullanılacaktır.";

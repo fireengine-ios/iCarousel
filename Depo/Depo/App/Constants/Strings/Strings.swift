@@ -21,6 +21,7 @@ enum Strings: String, Localizable {
     case profileRecoveryMail                        = "profile_recovery_mail"
     case profileRecoveryMailDescription             = "profile_recovery_mail_desc"
     case profileRecoveryMailHint                    = "profile_recovery_mail_hint"
+    case profileRecoveryMailInfo                    = "profile_recovery_mail_info"
     case profileMailVerified                        = "profile_mail_verified"
     case profileVerifyButtonTitle                   = "profile_verify"
     case profileRecoveryEmailIsEmpty                = "profile_recovery_email_empty"

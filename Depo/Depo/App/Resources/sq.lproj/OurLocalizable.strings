@@ -1975,7 +1975,8 @@
 "dark_mode_default_text" = "E Paracaktuar";
 
 /*Change person thumbnail*/
-"change_album_person_snackbar_text" = "";
-"change_album_person_error_text" = "";
-"change_person_photo" = "";
-"change_album_person_set_photo" = "";
+"change_album_person_snackbar_text" = "Fotografia e kontaktit u përditësua me sukses";
+"change_album_person_error_text" = "Ndodhi një gabim gjatë ndryshimit të fotografisë së kontaktit";
+"change_person_photo" = "Ndrysho Foton e Kontaktit";
+"change_album_person_set_photo" = "Përdorni si foto kontakti";
+"profile_recovery_mail_info" = "";

@@ -10,7 +10,16 @@ class ProfileTextEnterView: UIView {
         newValue.numberOfLines = 0
         return newValue
     }()
-    
+
+    let infoButton: UIButton = {
+        let newValue = UIButton(type: .custom)
+        let infoIcon = UIImage(named: "action_info")?.withRenderingMode(.alwaysTemplate)
+        newValue.setImage(infoIcon, for: .normal)
+        newValue.tintColor = UIColor.lrTealish
+        newValue.isHidden = true
+        return newValue
+    }()
+
     let subtitleLabel: UILabel = {
         let newValue = UILabel()
         newValue.textColor = ColorConstants.textOrange
@@ -90,15 +99,28 @@ class ProfileTextEnterView: UIView {
         stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: edgeInset).isActive = true
         stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -edgeInset).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
-        
-        /// why it is not working instead of constraints???
-        //stackView.frame = bounds
-        //stackView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //stackView.translatesAutoresizingMaskIntoConstraints = true
-        
-        stackView.addArrangedSubview(titleLabel)
+
+        stackView.addArrangedSubview(createTitleView())
         stackView.addArrangedSubview(subtitleLabel)
         stackView.addArrangedSubview(textField)
+    }
+
+    private func createTitleView() -> UIView {
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, infoButton])
+        stackView.spacing = 16
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+
+        let titleView = UIView()
+        titleView.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: titleView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: titleView.leadingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: titleView.bottomAnchor),
+            stackView.trailingAnchor.constraint(lessThanOrEqualTo: titleView.trailingAnchor)
+        ])
+
+        return titleView
     }
     
     private func setupUnderline() {

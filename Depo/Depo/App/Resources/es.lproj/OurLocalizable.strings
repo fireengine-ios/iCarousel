@@ -1974,7 +1974,8 @@
 "dark_mode_default_text" = "Predeterminado";
 
 /*Change person thumbnail*/
-"change_album_person_snackbar_text" = "";
-"change_album_person_error_text" = "";
-"change_person_photo" = "";
-"change_album_person_set_photo" = "";
+"change_album_person_snackbar_text" = "Foto de contacto actualizada correctamente";
+"change_album_person_error_text" = "Ocurrió un error al cambiar la foto del contacto";
+"change_person_photo" = "Cambiar Foto de Contacto";
+"change_album_person_set_photo" = "Usar como foto de contacto";
+"profile_recovery_mail_info" = "";

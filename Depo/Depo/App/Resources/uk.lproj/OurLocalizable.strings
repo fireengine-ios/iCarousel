@@ -1934,7 +1934,8 @@
 "dark_mode_default_text" = "За замовчуванням";
 
 /*Change person thumbnail*/
-"change_album_person_snackbar_text" = "";
-"change_album_person_error_text" = "";
-"change_person_photo" = "";
-"change_album_person_set_photo" = "";
+"change_album_person_snackbar_text" = "Фото контакту успішно оновлено";
+"change_album_person_error_text" = "Під час зміни фотографії контакту сталася помилка";
+"change_person_photo" = "Змінити Фотографію Контакту";
+"change_album_person_set_photo" = "Використовувати як фотографію контакту";
+"profile_recovery_mail_info" = "";

@@ -1932,7 +1932,8 @@
 "dark_mode_default_text" = "Standard";
 
 /*Change person thumbnail*/
-"change_album_person_snackbar_text" = "";
-"change_album_person_error_text" = "";
-"change_person_photo" = "";
-"change_album_person_set_photo" = "";
+"change_album_person_snackbar_text" = "Kontaktfoto erfolgreich aktualisiert";
+"change_album_person_error_text" = "Beim Ändern des Kontaktfotos ist ein Fehler aufgetreten";
+"change_person_photo" = "Kontaktfoto Ändern";
+"change_album_person_set_photo" = "Als Kontaktfoto verwenden";
+"profile_recovery_mail_info" = "";

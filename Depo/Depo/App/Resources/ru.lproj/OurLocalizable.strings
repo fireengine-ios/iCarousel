@@ -1946,7 +1946,8 @@
 "dark_mode_default_text" = "По умолчанию";
 
 /*Change person thumbnail*/
-"change_album_person_snackbar_text" = "";
-"change_album_person_error_text" = "";
-"change_person_photo" = "";
-"change_album_person_set_photo" = "";
+"change_album_person_snackbar_text" = "Фото контакта успешно обновлено";
+"change_album_person_error_text" = "Произошла ошибка при изменении фото контакта";
+"change_person_photo" = "Изменить Фото Контакта";
+"change_album_person_set_photo" = "Использовать как фото контакта";
+"profile_recovery_mail_info" = "";

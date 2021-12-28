@@ -84,11 +84,13 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     
     let phoneView = ProfilePhoneEnterView()
 
-    let recoveryEmailView: ProfileEmailFieldView = {
+    private lazy var recoveryEmailView: ProfileEmailFieldView = {
         let newValue = ProfileEmailFieldView()
         newValue.titleLabel.text = localized(.profileRecoveryMail)
         newValue.subtitleLabel.text = localized(.profileRecoveryMailDescription)
         newValue.textField.quickDismissPlaceholder = localized(.profileRecoveryMailHint)
+        newValue.infoButton.isHidden = false
+        newValue.infoButton.addTarget(self, action: #selector(recoveryEmailInfoButtonTapped), for: .primaryActionTriggered)
         return newValue
     }()
     
@@ -259,12 +261,20 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
 
     @objc private func deleteAccountInfoTapped() {
         let tooltip = TooltipViewController(message: localized(.deleteAccountDescription))
-        tooltip.present(over: self, sourceView: deleteAccountInfoButton,
+        tooltip.present(over: self,
+                        sourceView: deleteAccountInfoButton,
                         permittedArrowDirections: [.up, .down])
     }
 
     @objc private func deleteAccountTapped() {
         output.tapDeleteMyAccount()
+    }
+
+    @objc private func recoveryEmailInfoButtonTapped() {
+        let tooltip = TooltipViewController(message: localized(.profileRecoveryMailInfo))
+        tooltip.present(over: self,
+                        sourceView: recoveryEmailView.infoButton,
+                        permittedArrowDirections: [.up, .down])
     }
 
     @objc private func onEditButtonAction() {

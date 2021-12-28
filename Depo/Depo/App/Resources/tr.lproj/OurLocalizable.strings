@@ -1857,7 +1857,7 @@
 "title_invitation_campaign" = "Kampanya Detayları";
 "title_invitation_link" = "Sana Özel Davet Linki";
 "title_invitation_friends" = "Davetini Kabul Edenler (%d Kişi)";
-"title_invitation_packages" = "Kazandığın Hediyeler (%d Hediye)";
+"title_invitation_packages" = "Kazandığın Hediyeler ({numOfPackages} Hediye)";
 "invitation_snackbar_copy" = "Davet linkin başarıyla kopyalandı";
 "invitation_share" = "Linki Paylaş";
 "invitation_friends" = "Davetini Kabul Edenler";
@@ -1954,3 +1954,4 @@
 "change_album_person_error_text" = "Kişi fotoğrafı değişimi sırasında bir hata oluştu";
 "change_person_photo" = "Kişi Fotoğrafını Değiştir";
 "change_album_person_set_photo" = "Kişi fotoğrafı olarak kullan";
+"profile_recovery_mail_info" = "";
