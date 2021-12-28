@@ -78,18 +78,22 @@ final class PrivacyPolicyController: UIViewController {
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        setupWebView()
+    }
+    
     private func setupWebView() {
+        let hexColor = AppColor.blackColor.color?.toHexString() ?? "#000000"
         privacyPolicyService.getPrivacyPolicy { [weak self] response in
             switch response {
             case .success(let privacyPolicy):
                 var htmlString = privacyPolicy.content
-                if let hexColor = AppColor.blackColor.color?.toHexString() {
-                    htmlString = "<style>" +
-                        "html *" +
-                        "{" +
-                        "color: \(hexColor)"  +
-                        "}</style> \(privacyPolicy.content)"
-                }
+                htmlString = "<style>" +
+                    "html *" +
+                    "{" +
+                    "color: \(hexColor)"  +
+                    "}</style> \(privacyPolicy.content)"
                 self?.webView.loadHTMLString(htmlString, baseURL: nil)
             case .failed(_):
                 self?.stopActivity()

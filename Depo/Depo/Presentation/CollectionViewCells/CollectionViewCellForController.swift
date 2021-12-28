@@ -74,4 +74,9 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        contentView.layer.sublayers?.first?.shadowColor = AppColor.cellShadow.color?.cgColor
+    }
+    
 }

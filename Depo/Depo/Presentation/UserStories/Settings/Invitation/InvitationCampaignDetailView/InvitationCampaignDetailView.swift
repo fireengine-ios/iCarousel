@@ -56,36 +56,40 @@ class InvitationCampaignDetailView: UIView, NibInit {
     }
 
     func fetchCampaignDetail() {
+        let hexColor = AppColor.blackColor.color?.toHexString() ?? "#000000"
         self.showSpinner()
         InvitationApiService().getInvitationCampaign { result in
             self.hideSpinner()
             switch result {
             case .success(let response):
-                self.setupViewWithObject(campaign: response)
+                self.setupViewWithObject(campaign: response, hexColor: hexColor)
             case .failed(let error):
                 print("invitation campaign response error = \(error.description)")
             }
         }
     }
 
-    private func setupViewWithObject(campaign: InvitationCampaignResponse) {
+    private func setupViewWithObject(campaign: InvitationCampaignResponse, hexColor: String) {
         campaignDetailImageView.setLogs(enabled: true)
         let imageUrl = URL(string: campaign.value.image)
         campaignDetailImageView.loadImageData(with: imageUrl)
-        let htmlString = prepareHtmlString(with: campaign.value.content)
+        let htmlString = prepareHtmlString(with: campaign.value.content, hexColor: hexColor)
         campaignDetailWebView.loadHTMLString(htmlString, baseURL: nil)
     }
 
-    private func prepareHtmlString(with content: String) -> String {
+    private func prepareHtmlString(with content: String, hexColor: String) -> String {
         var htmlString = content
-        if let hexColor = AppColor.blackColor.color?.toHexString() {
-            htmlString = "<style>" +
+        htmlString = "<style>" +
                 "html *" +
                 "{" +
                 "color: \(hexColor)"  +
                 "}</style> \(content)"
-        }
         return htmlString
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        fetchCampaignDetail()
     }
 
     @IBAction func closeButtonTapped(_ sender: Any) {

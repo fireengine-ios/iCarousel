@@ -108,6 +108,11 @@ final class PhotoVideoCell: UICollectionViewCell {
         cancelImageLoading()
         cancelLocalRequest()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        selectionStateView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+    }
 
     // MARK: Utility Methods(Public)
 

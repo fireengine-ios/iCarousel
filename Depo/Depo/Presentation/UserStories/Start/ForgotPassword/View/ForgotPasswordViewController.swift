@@ -15,7 +15,6 @@ final class ForgotPasswordViewController: ViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var subTitle: UILabel!
     @IBOutlet weak var infoTitle: UILabel!
    
     @IBOutlet weak var loginEnterView: ProfileTextEnterView!
@@ -73,23 +72,10 @@ final class ForgotPasswordViewController: ViewController {
 
     func setupViews() {
         setupInfoTitle()
-        setupSubTitle()
         setupInputTitle()
         setupInputField()
         setupButton()
         setupCaptchaView()
-    }
-
-    private func setupSubTitle() {
-        subTitle.textColor = ColorConstants.removeConnection
-        
-        if Device.isIpad {
-            subTitle.font = UIFont.TurkcellSaturaRegFont(size: 24)
-            subTitle.textAlignment = .center
-        } else {
-            subTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            subTitle.textAlignment = .left
-        }
     }
 
     private func setupInfoTitle() {
@@ -288,7 +274,6 @@ extension ForgotPasswordViewController: ForgotPasswordViewInput {
 
     func setTexts(_ texts: ForgotPasswordTexts) {
         infoTitle.text = texts.instructions
-        subTitle.text = texts.instructionsOther
         loginEnterView.titleLabel.text = texts.emailInputTitle
 
         let font = loginEnterView.textField.font ?? UIFont()

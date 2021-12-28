@@ -137,6 +137,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         #endif
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        plussButton.setImage(UIImage(named: "CenterButton"), for: .normal)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
         player.delegates.remove(self)

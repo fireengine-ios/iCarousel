@@ -20,6 +20,11 @@ class UnderlineTextField: UITextField {
         }
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        underlineLayer.backgroundColor = underlineColor.cgColor
+    }
+    
     private let underlineLayer = CALayer()
     
     override init(frame: CGRect) {
