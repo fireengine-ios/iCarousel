@@ -1948,4 +1948,4 @@
 "change_album_person_error_text" = "حدث خطأ أثناء تغيير صورة جهة الاتصال";
 "change_person_photo" = "تغيير صورة جهة الاتصال";
 "change_album_person_set_photo" = "استخدم كصورة جهة اتصال";
-"profile_recovery_mail_info" = "";
+"profile_recovery_mail_info" = "لن يتم استخدام البريد الإلكتروني الخاص بالاسترداد إلا لخطوة استعادة الحساب إذا نسيت كلمة المرور الخاصة بك.";

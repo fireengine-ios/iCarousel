@@ -1978,4 +1978,4 @@
 "change_album_person_error_text" = "Ocurrió un error al cambiar la foto del contacto";
 "change_person_photo" = "Cambiar Foto de Contacto";
 "change_album_person_set_photo" = "Usar como foto de contacto";
-"profile_recovery_mail_info" = "";
+"profile_recovery_mail_info" = "El correo electrónico de recuperación solo se utilizará para el paso de recuperación de la cuenta si olvida su contraseña.";

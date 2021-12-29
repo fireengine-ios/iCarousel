@@ -1950,4 +1950,4 @@
 "change_album_person_error_text" = "Произошла ошибка при изменении фото контакта";
 "change_person_photo" = "Изменить Фото Контакта";
 "change_album_person_set_photo" = "Использовать как фото контакта";
-"profile_recovery_mail_info" = "";
+"profile_recovery_mail_info" = "Это адрес электронный почты для использования только в случае восстановления пароля, если вы забудете свой пароль.";
