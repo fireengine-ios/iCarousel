@@ -57,20 +57,6 @@ class AuthenticationUser: BaseRequestParametrs {
     }
 }
 
-
-class Authentication3G: BaseRequestParametrs {
-    
-    override var requestParametrs: Any {
-        return Device.deviceInfo
-    }
-    
-    override var patch: URL {
-        let patch = String(format: RouteRequests.unsecuredAuthenticationUrl, LbRequestkeys.on)
-        return URL(string: patch,
-                   relativeTo: super.patch)!
-    }
-}
-
 class SigngOutParametes: BaseRequestParametrs {
     let authToken: String
     let rememberMeToken: String
@@ -440,15 +426,6 @@ class AuthenticationService: BaseRequestService {
             }
     }
 
-
-    func turkcellAutification(user: Authentication3G, sucess: SuccessLogin?, fail: FailResponse?) {
-        debugLog("AuthenticationService turkcellAutification")
-        
-        SessionManager.customDefault.request(user.patch, method: .post, parameters: Device.deviceInfo, encoding: JSONEncoding.prettyPrinted)
-            .responseString { [weak self] response in
-                self?.loginHandler(response, sucess, fail)
-        }
-    }
     
     private func loginHandler(_ response: DataResponse<String>, _ sucess: SuccessLogin?, _ fail: FailResponse?) {
         switch response.result {
@@ -650,28 +627,6 @@ class AuthenticationService: BaseRequestService {
         executePostRequest(param: forgotPassword, handler: handler)
     }
 
-    func turkcellAuth(success: SuccessLogin?, fail: FailResponse?) {
-        let user = Authentication3G()
-        debugLog("Authentication3G")
-        self.turkcellAutification(user: user, sucess: success, fail: { [weak self] error in
-            if self?.tokenStorage.refreshToken == nil {
-                let error = ErrorResponse.error(error)
-                fail?(error)
-            } else {
-                self?.authorizationSevice.refreshTokens { [weak self] isSuccess, accessToken, _  in
-                    if let accessToken = accessToken, isSuccess {
-                        self?.tokenStorage.accessToken = accessToken
-                        success?()
-                    } else {
-                        let error = ErrorResponse.error(error)
-                        fail?(error)
-                    }
-                }
-            }
-        })
-    }
-    
-    
     // MARK: - With new SessionManager
     
     private let sessionManagerWithoutToken: SessionManager = {

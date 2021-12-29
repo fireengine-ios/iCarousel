@@ -1954,4 +1954,4 @@
 "change_album_person_error_text" = "Kişi fotoğrafı değişimi sırasında bir hata oluştu";
 "change_person_photo" = "Kişi Fotoğrafını Değiştir";
 "change_album_person_set_photo" = "Kişi fotoğrafı olarak kullan";
-"profile_recovery_mail_info" = "";
+"profile_recovery_mail_info" = "Şifreni unutman halinde sadece şifre kurtarma adımında kullanılacak e-posta adresidir.";

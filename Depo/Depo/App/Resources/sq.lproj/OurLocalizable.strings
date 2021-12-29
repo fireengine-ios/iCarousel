@@ -1979,4 +1979,4 @@
 "change_album_person_error_text" = "Ndodhi një gabim gjatë ndryshimit të fotografisë së kontaktit";
 "change_person_photo" = "Ndrysho Foton e Kontaktit";
 "change_album_person_set_photo" = "Përdorni si foto kontakti";
-"profile_recovery_mail_info" = "";
+"profile_recovery_mail_info" = "E-mail-i i rikuperimit do të përdoret vetëm për hapin e rikuperimit të llogarisë nëse harroni fjalëkalimin tuaj.";

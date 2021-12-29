@@ -1936,4 +1936,4 @@
 "change_album_person_error_text" = "A apărut o eroare la modificarea fotografiei de contact";
 "change_person_photo" = "Schimbați Fotografia De Contact";
 "change_album_person_set_photo" = "Utilizați ca fotografie de contact";
-"profile_recovery_mail_info" = "";
+"profile_recovery_mail_info" = "E-mailul de recuperare va fi folosit doar pentru pasul de recuperare a contului dacă uitați parola.";

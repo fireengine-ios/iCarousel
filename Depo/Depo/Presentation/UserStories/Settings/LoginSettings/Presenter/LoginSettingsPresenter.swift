@@ -18,7 +18,8 @@ final class LoginSettingsPresenter: BasePresenter {
     
     init(isTurkcell: Bool) {
         if isTurkcell {
-            cellTypes = [.securityPasscode, .securityAutologin, .twoFactorAuth]
+            // https://jira.turkcell.com.tr/browse/DE-12172
+            cellTypes = [/*.securityPasscode, .securityAutologin, */.twoFactorAuth]
         } else {
             cellTypes = [.twoFactorAuth]
         }
