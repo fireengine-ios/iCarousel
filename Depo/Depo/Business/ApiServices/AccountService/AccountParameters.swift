@@ -210,9 +210,12 @@ class SecuritySettingsChangeInfoParametres: BaseRequestParametrs {
     }
     
     override var requestParametrs: Any {
-        return ["turkcellPasswordAuthEnabled": turkcellPasswordAuthEnabled,
-                "mobileNetworkAuthEnabled": mobileNetworkAuthEnabled,
-                "twoFactorAuthEnabled": twoFactorAuthEnabled]
+        return [
+            // https://jira.turkcell.com.tr/browse/DE-12172
+            /*"turkcellPasswordAuthEnabled": turkcellPasswordAuthEnabled,
+            "mobileNetworkAuthEnabled": mobileNetworkAuthEnabled,*/
+            "twoFactorAuthEnabled": twoFactorAuthEnabled
+        ]
     }
     
     override var patch: URL {
