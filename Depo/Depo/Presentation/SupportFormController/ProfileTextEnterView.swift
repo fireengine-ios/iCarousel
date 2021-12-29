@@ -106,18 +106,23 @@ class ProfileTextEnterView: UIView {
     }
 
     private func createTitleView() -> UIView {
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, infoButton])
-        stackView.spacing = 16
-        stackView.axis = .horizontal
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-
         let titleView = UIView()
-        titleView.addSubview(stackView)
+
+        titleView.addSubview(titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: titleView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: titleView.leadingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: titleView.bottomAnchor),
-            stackView.trailingAnchor.constraint(lessThanOrEqualTo: titleView.trailingAnchor)
+            titleLabel.topAnchor.constraint(equalTo: titleView.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor)
+        ])
+
+        titleView.addSubview(infoButton)
+        infoButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            infoButton.topAnchor.constraint(equalTo: titleView.topAnchor),
+            infoButton.bottomAnchor.constraint(equalTo: titleView.bottomAnchor),
+            infoButton.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 16),
+            infoButton.trailingAnchor.constraint(lessThanOrEqualTo: titleView.trailingAnchor)
         ])
 
         return titleView

@@ -274,7 +274,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         let tooltip = TooltipViewController(message: localized(.profileRecoveryMailInfo))
         tooltip.present(over: self,
                         sourceView: recoveryEmailView.infoButton,
-                        permittedArrowDirections: [.up, .down])
+                        permittedArrowDirections: .up)
     }
 
     @objc private func onEditButtonAction() {
