@@ -992,7 +992,7 @@ extension PhotoVideoController: UIDropInteractionDelegate {
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-        DragAndDropHelper.shared.performDrop(with: session)
+        DragAndDropHelper.shared.performDrop(with: session, itemType: DragAndDropMediaType.self)
     }
 }
 

@@ -1057,7 +1057,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    init(mediaData: Data, isLocal: Bool, fileType: FileType) {
+    init(mediaData: Data, fileExtension: String) {
         fileData = mediaData
         fileSize = Int64(mediaData.count)
         favorites = false
@@ -1066,8 +1066,12 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = nil
 
         let creationDate = Date()
-        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: fileType, syncStatus: .notSynced, isLocalItem: isLocal)
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .unknown, syncStatus: .notSynced, isLocalItem: false)
         
+        mimeType = mimeType(from: fileExtension)
+        name = (name ?? "") + "." + fileExtension
+        self.fileType = FileType(type: mimeType, fileName: name)
+
         if let fileName = name {
             md5 = "\(fileName)\(fileSize)"
         }

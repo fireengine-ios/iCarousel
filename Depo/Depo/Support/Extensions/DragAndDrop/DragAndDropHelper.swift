@@ -8,32 +8,25 @@
 
 import Foundation
 import UIKit
+import MobileCoreServices
 
 class DragAndDropHelper {
     static let shared = DragAndDropHelper()
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.dragAndDropUploadQueue)
 
-    func performDrop(with session: UIDropSession, albumUUID: String? = nil) {
-        session.loadObjects(ofClass: DragAndDropMediaType.self) { objects in
+    func performDrop<T: DragAndDropItemType>(with session: UIDropSession, itemType: T.Type, albumUUID: String? = nil) {
+        session.loadObjects(ofClass: itemType) { objects in
             self.dispatchQueue.async {
-                self.uploadDroppedItems(objects.compactMap { $0 as? DragAndDropMediaType })
+                self.uploadDroppedItems(objects.compactMap { $0 as? DragAndDropItemType })
             }
         }
     }
 
-    private func uploadDroppedItems(_ objects: [DragAndDropMediaType], albumUUID: String? = nil) {
+    private func uploadDroppedItems(_ objects: [DragAndDropItemType], albumUUID: String? = nil) {
         let items: [WrapData] = objects.compactMap { object in
-            if let data = object.fileData,
-               let fileExtension = object.fileExtension,
-               let fileType = getFileType(with: fileExtension) {
-                let wrapData = WrapData(mediaData: data, isLocal: false, fileType: fileType)
-                if let wrapDataName = wrapData.name, let dataExtension = object.fileExtension {
-                    wrapData.name = wrapDataName + "." + dataExtension
-                    return wrapData
-                }
-
-                // skipping items with no name?
-                return nil
+            if let data = object.fileData, let fileExtension = object.fileExtension {
+                let wrapData = WrapData(mediaData: data, fileExtension: fileExtension)
+                return wrapData
             }
 
             return nil
@@ -50,16 +43,5 @@ class DragAndDropHelper {
             isFromAlbum: albumUUID != nil, isFromCamera: false, projectId: nil,
             success: {}, fail: { _ in }, returnedUploadOperation: { _ in}
         )
-    }
-
-    private func getFileType(with ext: String) -> FileType? {
-        guard let name = DragAndDropFileExtensions(rawValue: ext) else { return .unknown}
-        if name.isImageType {
-            return .image
-        } else if name.isVideoType {
-            return .video
-        } else {
-            return .unknown
-        }
     }
 }

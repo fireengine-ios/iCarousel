@@ -10,25 +10,33 @@ import Foundation
 import MobileCoreServices
 
 enum DragAndDropFileExtensions: String, CaseIterable {
+    ///images
     case png = "png"
     case jpeg = "jpeg"
     case heic = "heic"
     case gif = "gif"
+    
+    ///videos
     case mp4 = "mp4"
     case mov = "mov"
     
-    var isImageType: Bool {
-        switch self {
-        case .png, .jpeg, .heic , .gif:
-            return true
-        default:
-            return false
-        }
-    }
+    ///documents
+    case rar = "rar"
+    case zip = "zip"
+    case unknown = "unknown"
+    case doc = "doc"
+    case txt = "txt"
+    case html = "html"
+    case xls = "xls"
+    case pdf = "pdf"
+    case ppt = "ppt"
+    case pptx = "pptx"
+    case usdz = "usdz"
+    case docx = "docx"
     
-    var isVideoType: Bool {
+    var isPhotoVideoType: Bool? {
         switch self {
-        case .mp4, .mov:
+        case .png, .jpeg, .heic, .gif, .mp4, .mov:
             return true
         default:
             return false

@@ -37,6 +37,6 @@ extension AlbumDetailViewController: UIDropInteractionDelegate {
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-        DragAndDropHelper.shared.performDrop(with: session, albumUUID: self.album?.uuid)
+        DragAndDropHelper.shared.performDrop(with: session, itemType: DragAndDropMediaType.self, albumUUID: self.album?.uuid)
     }
 }
