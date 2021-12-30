@@ -37,29 +37,6 @@ extension AlbumDetailViewController: UIDropInteractionDelegate {
     }
     
     func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
-        var items: [WrapData] = []
-        let myGroup = DispatchGroup()
-        
-        for dragItem in session.items {
-            myGroup.enter()
-            dragItem.itemProvider.loadObject(ofClass: DragAndDropMediaType.self, completionHandler: { object, error in
-                guard error == nil else { return debugLog("Failed to load our dragged item") }
-                guard let item = object as? DragAndDropMediaType else { return }
-                
-                if let data = item.fileData, let fileExtension = item.fileExtension, let fileType = self.dragAndDropHelper.getFileType(with: fileExtension) {
-                    let wrapData = WrapData(mediaData: data, isLocal: false, fileType: fileType)
-                    if let wrapDataName = wrapData.name, let dataExtension = item.fileExtension {
-                        wrapData.name = wrapDataName + "." + dataExtension
-                        items.append(wrapData)
-                        myGroup.leave()
-                    }
-                }
-            })
-        }
-        
-        let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.dragAndDropUploadQueue)
-        myGroup.notify(queue: dispatchQueue) {
-            DragAndDropHelper.shared.uploadItems(with: items, isCustomAlbum: true, albumUUID: self.album?.uuid)
-        }
+        DragAndDropHelper.shared.performDrop(with: session, albumUUID: self.album?.uuid)
     }
 }
