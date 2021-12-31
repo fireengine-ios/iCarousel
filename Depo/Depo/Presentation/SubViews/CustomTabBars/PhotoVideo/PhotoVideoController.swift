@@ -54,7 +54,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
     private lazy var scrollDirectionManager = ScrollDirectionManager()
     private lazy var instaPickRoutingService = InstaPickRoutingService()
-    private lazy var dragAndDropHelper = DragAndDropHelper.shared
 
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
     

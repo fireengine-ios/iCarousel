@@ -11,7 +11,6 @@ import UIKit
 class AlbumDetailViewController: BaseFilesGreedChildrenViewController {
 
     var album: AlbumItem?
-    private lazy var dragAndDropHelper = DragAndDropHelper.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

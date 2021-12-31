@@ -11,28 +11,31 @@ import MobileCoreServices
 
 enum DragAndDropFileExtensions: String, CaseIterable {
     ///images
-    case png = "png"
+    case png  = "png"
     case jpeg = "jpeg"
     case heic = "heic"
-    case gif = "gif"
+    case gif  = "gif"
+    
+    ///music
+    case mp3 = "mp3"
     
     ///videos
     case mp4 = "mp4"
     case mov = "mov"
     
     ///documents
-    case rar = "rar"
-    case zip = "zip"
+    case rar     = "rar"
+    case zip     = "zip"
     case unknown = "unknown"
-    case doc = "doc"
-    case txt = "txt"
-    case html = "html"
-    case xls = "xls"
-    case pdf = "pdf"
-    case ppt = "ppt"
-    case pptx = "pptx"
-    case usdz = "usdz"
-    case docx = "docx"
+    case doc     = "doc"
+    case txt     = "txt"
+    case html    = "html"
+    case xls     = "xls"
+    case pdf     = "pdf"
+    case ppt     = "ppt"
+    case pptx    = "pptx"
+    case usdz    = "usdz"
+    case docx    = "docx"
     
     var isPhotoVideoType: Bool? {
         switch self {

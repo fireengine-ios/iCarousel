@@ -17,7 +17,7 @@ class DragAndDropHelper {
     func performDrop<T: DragAndDropItemType>(with session: UIDropSession, itemType: T.Type, albumUUID: String? = nil) {
         session.loadObjects(ofClass: itemType) { objects in
             self.dispatchQueue.async {
-                self.uploadDroppedItems(objects.compactMap { $0 as? DragAndDropItemType })
+                self.uploadDroppedItems(objects.compactMap { $0 as? DragAndDropItemType }, albumUUID: albumUUID)
             }
         }
     }

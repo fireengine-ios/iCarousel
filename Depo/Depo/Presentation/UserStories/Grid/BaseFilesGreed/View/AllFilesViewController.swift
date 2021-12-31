@@ -14,7 +14,6 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     
     private var lastCardContainerHeight: CGFloat = 0
     private let sortAreaHeight: CGFloat = 36
-    private lazy var dragAndDropHelper = DragAndDropHelper.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()

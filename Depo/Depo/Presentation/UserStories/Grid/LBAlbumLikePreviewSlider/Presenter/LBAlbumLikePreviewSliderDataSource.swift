@@ -17,7 +17,6 @@ class LBAlbumLikePreviewSliderDataSource: NSObject, UICollectionViewDataSource, 
     internal weak var collectionView: UICollectionView?
     var allItems: [SliderItem] = []
     weak var delegate: LBAlbumLikePreviewSliderDataSourceDelegate?
-    var timer: Timer?
     
     func setupCollectionView(collectionView: UICollectionView) {
         self.collectionView = collectionView
