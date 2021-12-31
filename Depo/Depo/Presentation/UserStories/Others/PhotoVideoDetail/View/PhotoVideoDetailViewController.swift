@@ -786,7 +786,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         output.createNewUrl()
     }
 
-    func recognizeTextButtonTapped() {
+    func recognizeTextButtonTapped(image: UIImage) {
         guard let selectedIndex = self.selectedIndex,
               let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0)) as? PhotoVideoDetailCell
         else {
@@ -794,7 +794,16 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         }
 
         // TODO: call api
-        cell.recognizeTextButton.isSelected = !cell.recognizeTextButton.isSelected
+        if cell.recognizeTextButton.isSelected {
+            cell.recognizeTextButton.isSelected = false
+            cell.removeCurrentTextSelectionInteraction()
+        } else {
+            cell.recognizeTextButton.isSelected = true
+            cell.recognizeTextButton.status = .activated
+            output.recognizeTextForCurrentItem(image: image) { [weak cell] words in
+                cell?.addTextSelectionInteraction(words)
+            }
+        }
     }
 }
 

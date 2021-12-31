@@ -34,6 +34,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
     private lazy var fileService = WrapItemFileService()
+    private lazy var textRecognitionService = TextRecognitionService()
     private var userActivity: NSUserActivity?
     private var publicShareURLForCurrentItem: URL?
     
@@ -346,6 +347,16 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
 
     func resignUserActivity() {
         userActivity?.resignCurrent()
+    }
+
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping ([RecognizedText]) -> Void) {
+        guard let currentItemIndex = currentItemIndex,
+              let item = array[currentItemIndex]
+        else {
+            return
+        }
+
+        textRecognitionService.process(fileUUID: item.uuid, image: image, completion: completion)
     }
     
     private func updateItem(_ item: Item) {

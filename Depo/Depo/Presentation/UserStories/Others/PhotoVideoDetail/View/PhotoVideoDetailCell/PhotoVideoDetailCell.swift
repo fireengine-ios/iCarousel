@@ -15,7 +15,7 @@ protocol PhotoVideoDetailCellDelegate: AnyObject {
     func imageLoadingFinished()
     func didExpireUrl()
     func itemPlaceholderFinished()
-    func recognizeTextButtonTapped()
+    func recognizeTextButtonTapped(image: UIImage)
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -45,6 +45,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     private var fileType: FileType = .unknown
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
+
+    private var currentTextSelectionInteraction: ImageTextSelectionInteraction?
 
     var isRecognizeTextEnabled: Bool {
 //        if #available(iOS 13, *) {
@@ -134,14 +136,18 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     private func setupRecognizeTextButton() {
         addSubview(recognizeTextButton)
         recognizeTextButton.translatesAutoresizingMaskIntoConstraints = false
-        recognizeTextButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
         recognizeTextButtonBottomConstraint = recognizeTextButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
-        recognizeTextButtonBottomConstraint?.isActive = true
+        NSLayoutConstraint.activate([
+            recognizeTextButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            recognizeTextButtonBottomConstraint!
+        ])
 
         recognizeTextButton.addTarget(self, action: #selector(recognizeTextButtonTapped), for: .touchUpInside)
     }
     
     func setObject(object: Item) {
+        removeCurrentTextSelectionInteraction()
+
         if isNeedToUpdateWebView, object.uuid == currentItemId {
             return
         }
@@ -191,6 +197,21 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             self.layoutIfNeeded()
         }
     }
+
+    func addTextSelectionInteraction(_ words: [RecognizedText]) {
+        removeCurrentTextSelectionInteraction()
+
+        let interaction = ImageTextSelectionInteraction(recognizedWords: words)
+        imageScrollView.imageView.addInteraction(interaction)
+
+        currentTextSelectionInteraction = interaction
+    }
+
+    func removeCurrentTextSelectionInteraction() {
+        if let currentTextSelectionInteraction = currentTextSelectionInteraction {
+            imageScrollView.imageView.removeInteraction(currentTextSelectionInteraction)
+        }
+    }
     
     @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
         delegate?.tapOnCellForFullScreen()
@@ -201,7 +222,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }
 
     @objc private func recognizeTextButtonTapped() {
-        delegate?.recognizeTextButtonTapped()
+        // TODO: require a uiimage
+        delegate?.recognizeTextButtonTapped(image: imageScrollView.imageView.image ?? UIImage())
     }
 }
 

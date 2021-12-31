@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, PhotoVideoDetailViewOutput, PhotoVideoDetailInteractorOutput {
     
     weak var view: PhotoVideoDetailViewInput!
@@ -490,6 +492,10 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     
     func createNewUrl() {
         interactor.createNewUrl()
+    }
+
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping ([RecognizedText]) -> Void) {
+        interactor.recognizeTextForCurrentItem(image: image, completion: completion)
     }
 }
 

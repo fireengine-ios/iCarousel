@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 protocol PhotoVideoDetailViewOutput {
     
     func viewIsReady(view: UIView)
@@ -41,4 +43,6 @@ protocol PhotoVideoDetailViewOutput {
     func tabIndex(type: ElementTypes) -> Int?
     
     func createNewUrl()
+
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping ([RecognizedText]) -> Void)
 }
