@@ -1057,6 +1057,26 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
+    init(mediaData: Data, fileExtension: String) {
+        fileData = mediaData
+        fileSize = Int64(mediaData.count)
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .unknown
+        tmpDownloadUrl = nil
+
+        let creationDate = Date()
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .unknown, syncStatus: .notSynced, isLocalItem: false)
+        
+        mimeType = mimeType(from: fileExtension)
+        name = (name ?? "") + "." + fileExtension
+        self.fileType = FileType(type: mimeType, fileName: name)
+
+        if let fileName = name {
+            md5 = "\(fileName)\(fileSize)"
+        }
+    }
+    
     init(mediaItem: MediaItem, asset: PHAsset? = nil) {
         coreDataObjectId = mediaItem.objectID
         fileSize = mediaItem.fileSizeValue

@@ -15,6 +15,11 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     private var lastCardContainerHeight: CGFloat = 0
     private let sortAreaHeight: CGFloat = 36
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.addInteraction(UIDropInteraction(delegate: self))
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         handleShareSliderReload()
@@ -151,5 +156,19 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
                 self.refreshSharedSliderPosition()
             }
         }
+    }
+}
+
+extension AllFilesViewController: UIDropInteractionDelegate {
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: DragAndDropAllFilesType.self)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        DragAndDropHelper.shared.performDrop(with: session, itemType: DragAndDropAllFilesType.self)
     }
 }

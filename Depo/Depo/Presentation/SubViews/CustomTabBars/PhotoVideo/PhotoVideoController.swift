@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 // TODO: todos in file
 // TODO: clear code -
@@ -83,6 +84,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         scrollBarManager.addScrollBar(to: collectionView, delegate: self)
         performFetch()
+        collectionView.addInteraction(UIDropInteraction(delegate: self))
     }
     
     deinit {
@@ -977,3 +979,19 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
         showSpinner()
     }
 }
+
+
+extension PhotoVideoController: UIDropInteractionDelegate {
+    func dropInteraction(_ interaction: UIDropInteraction, sessionDidUpdate session: UIDropSession) -> UIDropProposal {
+        return UIDropProposal(operation: .copy)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: DragAndDropMediaType.self)
+    }
+    
+    func dropInteraction(_ interaction: UIDropInteraction, performDrop session: UIDropSession) {
+        DragAndDropHelper.shared.performDrop(with: session, itemType: DragAndDropMediaType.self)
+    }
+}
+
