@@ -276,10 +276,10 @@ final class ImageTextSelectionView: UIView {
 //        context.setLineWidth(1)
 //        for word in data {
 //            let path = CGMutablePath()
-//            let topLeft = createScaledPoint(featurePoint: word.bounds.topLeft, imageSize: image.size, viewSize: bounds.size)
-//            let topRight = createScaledPoint(featurePoint: word.bounds.topRight, imageSize: image.size, viewSize: bounds.size)
-//            let bottomRight = createScaledPoint(featurePoint: word.bounds.bottomRight, imageSize: image.size, viewSize: bounds.size)
-//            let bottomLeft = createScaledPoint(featurePoint: word.bounds.bottomLeft, imageSize: image.size, viewSize: bounds.size)
+//            let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
+//            let topRight = layout.imageViewPoint(for: word.bounds.topRight)
+//            let bottomRight = layout.imageViewPoint(for: word.bounds.bottomRight)
+//            let bottomLeft = layout.imageViewPoint(for: word.bounds.bottomLeft)
 //
 //            path.move(to: topLeft)
 //            path.addLine(to: topRight)
@@ -288,8 +288,8 @@ final class ImageTextSelectionView: UIView {
 //            path.addLine(to: topLeft)
 //            context.addPath(path)
 //        }
-//
-//        context.drawPath(using: .stroke)
+
+        context.drawPath(using: .stroke)
     }
 
     // MARK: - MenuController
@@ -344,7 +344,7 @@ final class ImageTextSelectionView: UIView {
 
         let selectedWords = data[selectedRange]
 
-        let text = selectedWords.map { $0.text }.joined(separator: " ")
+        let text = selectedWords.map({ $0.text }).joined(separator: " ")
         UIPasteboard.general.string = text
     }
 

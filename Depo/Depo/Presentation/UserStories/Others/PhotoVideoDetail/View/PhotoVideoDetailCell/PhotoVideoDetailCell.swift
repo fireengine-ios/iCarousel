@@ -15,7 +15,7 @@ protocol PhotoVideoDetailCellDelegate: AnyObject {
     func imageLoadingFinished()
     func didExpireUrl()
     func itemPlaceholderFinished()
-    func recognizeTextButtonTapped(image: UIImage)
+    func recognizeTextButtonTapped(image: UIImage, isActive: Bool)
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -129,8 +129,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         playVideoButton.isHidden = true
         imageScrollView.isHidden = true
         placeholderImageView.isHidden = true
-
-        recognizeTextButton.status = .disabled
+        recognizeTextButton.isHidden = true
     }
 
     private func setupRecognizeTextButton() {
@@ -157,7 +156,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         currentItemId = object.uuid
         fileType = object.fileType
         placeholderImageView.isHidden = true
-        recognizeTextButton.status = fileType == .image ? .enabled : .disabled
+        recognizeTextButton.isHidden = true
         
         if fileType == .video || fileType == .image {
             imageScrollView.isHidden = false
@@ -204,12 +203,15 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         let interaction = ImageTextSelectionInteraction(recognizedWords: words)
         imageScrollView.imageView.addInteraction(interaction)
 
+        recognizeTextButton.isSelected = true
+
         currentTextSelectionInteraction = interaction
     }
 
     func removeCurrentTextSelectionInteraction() {
         if let currentTextSelectionInteraction = currentTextSelectionInteraction {
             imageScrollView.imageView.removeInteraction(currentTextSelectionInteraction)
+            recognizeTextButton.isSelected = false
         }
     }
     
@@ -222,8 +224,12 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }
 
     @objc private func recognizeTextButtonTapped() {
-        // TODO: require a uiimage
-        delegate?.recognizeTextButtonTapped(image: imageScrollView.imageView.image ?? UIImage())
+        guard let image = imageScrollView.imageView.image else {
+            assertionFailure("image should be loaded")
+            return
+        }
+
+        delegate?.recognizeTextButtonTapped(image: image, isActive: recognizeTextButton.isSelected)
     }
 }
 
@@ -261,10 +267,12 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
     
     func onImageLoaded(image: UIImage?) {
         if image == nil, fileType != .video {
+            recognizeTextButton.isHidden = true
             setPlaceholder()
         } else {
             placeholderImageView.isHidden = true
             imageScrollView.isHidden = !(fileType == .video || fileType == .image)
+            recognizeTextButton.isHidden = fileType != .image
         }
     }
     

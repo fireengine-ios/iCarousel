@@ -24,8 +24,8 @@ struct RemoteTextRecognitionModel: Codable {
         var textWithPositions = try optikResponse.nestedUnkeyedContainer(forKey: .textWithPositions)
         let wordList = try? textWithPositions.nestedContainer(keyedBy: CodingKeys.self)
 
-        width = try shape.decode(Double.self, forKey: .width)
-        height = try shape.decode(Double.self, forKey: .height)
+        width = CGFloat(try shape.decode(Double.self, forKey: .width))
+        height = CGFloat(try shape.decode(Double.self, forKey: .height))
         words = (try wordList?.decode([RemoteRecognizedWord].self, forKey: .wordList)) ?? []
     }
 
