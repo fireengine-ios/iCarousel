@@ -17,6 +17,12 @@ final class RecognizeTextButton: UIButton {
         setup()
     }
 
+    override var isSelected: Bool {
+        didSet {
+            updateTintColor()
+        }
+    }
+
     override var intrinsicContentSize: CGSize {
         let size = super.intrinsicContentSize
         let squareSize = max(Self.size, max(size.width, size.height))
@@ -45,14 +51,18 @@ final class RecognizeTextButton: UIButton {
 
     private func setupPreiOS15() {
         if #available(iOS 13.0, *) {
-            let image = UIImage(systemName: "text.viewfinder")
-            setImage(image?.withTintColor(.lrTealish), for: .normal)
-            setImage(image?.withTintColor(.white), for: .selected)
+            setImage(UIImage(systemName: "text.viewfinder"), for: .normal)
         }
         setBackgroundColor(UIColor.systemGray.withAlphaComponent(0.6), for: .normal)
         setBackgroundColor(UIColor.lrTealish, for: .selected)
 
+        updateTintColor()
+
         layer.cornerRadius = intrinsicContentSize.height / 2
         layer.masksToBounds = true
+    }
+
+    private func updateTintColor() {
+        tintColor = isSelected ? .white : .lrTealish
     }
 }
