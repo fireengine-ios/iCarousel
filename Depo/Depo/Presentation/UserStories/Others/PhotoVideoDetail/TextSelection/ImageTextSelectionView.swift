@@ -75,14 +75,12 @@ final class ImageTextSelectionView: UIView {
         let location = tapGesture.location(in: self)
         let scaled = layout.imagePoint(for: location)
 
-        let selectedWordIndex = data.firstIndex { text in
+        guard let selectedWordIndex = data.firstIndex(where: { text in
             let minY = min(text.bounds.topLeft.y, text.bounds.topRight.y)
             let maxY = max(text.bounds.bottomLeft.y, text.bounds.bottomRight.y)
             return scaled.x >= text.bounds.topLeft.x && scaled.x <= text.bounds.topRight.x &&
             scaled.y >= minY && scaled.y <= maxY
-        }
-
-        guard let selectedWordIndex = selectedWordIndex else {
+        }) else {
             selectedRange = nil
             selectionChanged()
             hideMenuController()
@@ -112,7 +110,7 @@ final class ImageTextSelectionView: UIView {
 //        SESelectionGrabber *endGrabber = self.textSelectionView.endGrabber;
 //
 
-        guard let selectedRange = selectedRange else {
+        guard let selectedRange = self.selectedRange else {
             return
         }
 
@@ -123,16 +121,13 @@ final class ImageTextSelectionView: UIView {
             print(#function, location, scaled)
 
             if panGesture == startGrabberPanGesture {
-                let firstSelectedIndex = data.firstIndex { text in
+                guard let firstSelectedIndex = data.firstIndex(where: { text in
                     let maxX = max(text.bounds.topRight.x, text.bounds.bottomRight.x)
                     let maxY = min(text.bounds.bottomLeft.y, text.bounds.bottomRight.y)
                     return scaled.x <= maxX && scaled.y <= maxY
-                }
-
-                guard let firstSelectedIndex = firstSelectedIndex else {
+                }) else {
                     return
                 }
-
 
                 guard firstSelectedIndex <= selectedRange.last! else {
                     return
@@ -145,13 +140,11 @@ final class ImageTextSelectionView: UIView {
 
             } else if panGesture == endGrabberPanGesture {
 
-                let lastSelectedIndex = data.lastIndex { text in
+                guard let lastSelectedIndex = data.lastIndex(where: { text in
                     let minX = min(text.bounds.topLeft.x, text.bounds.bottomLeft.x)
                     let minY = min(text.bounds.topLeft.y, text.bounds.topRight.y)
                     return scaled.x >= minX && scaled.y >= minY
-                }
-
-                guard let lastSelectedIndex = lastSelectedIndex else {
+                }) else {
                     return
                 }
 
