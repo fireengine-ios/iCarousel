@@ -13,11 +13,7 @@ final class ImageTextSelectionView: UIView {
     private let startGrabber = SelectionGrabberView(dotPosition: .top)
     private let endGrabber = SelectionGrabberView(dotPosition: .bottom)
 
-    //TODO: REMOVE
-    private var selectedRange: ClosedRange<Int>?
-    private var data: [RecognizedText] {
-        return layout.sortedWords
-    }
+    private var selection: ClosedRange<ImageTextSelectionIndex>?
 
     // MARK: - Setup
 
@@ -72,23 +68,23 @@ final class ImageTextSelectionView: UIView {
     }
 
     @objc private func tapped(_ tapGesture: UITapGestureRecognizer) {
-        let location = tapGesture.location(in: self)
-        let scaled = layout.imagePoint(for: location)
+        let point = layout.imagePoint(for: tapGesture.location(in: self))
 
-        guard let selectedWordIndex = data.firstIndex(where: { text in
-            let minY = min(text.bounds.topLeft.y, text.bounds.topRight.y)
-            let maxY = max(text.bounds.bottomLeft.y, text.bounds.bottomRight.y)
-            return scaled.x >= text.bounds.topLeft.x && scaled.x <= text.bounds.topRight.x &&
-            scaled.y >= minY && scaled.y <= maxY
+        guard let tappedWordIndex = layout.findFirstIndex(predicate: { word in
+            let minX = word.bounds.topLeft.x
+            let maxX = word.bounds.topRight.x
+            let minY = min(word.bounds.topLeft.y, word.bounds.topRight.y)
+            let maxY = max(word.bounds.bottomLeft.y, word.bounds.bottomRight.y)
+            return point.x >= minX && point.x <= maxX && point.y >= minY && point.y <= maxY
         }) else {
-            selectedRange = nil
+            selection = nil
             selectionChanged()
             hideMenuController()
             return
         }
 
-        let isAlreadySelected = selectedRange?.contains(selectedWordIndex) ?? false
-        guard selectedRange == nil || !isAlreadySelected else {
+        let isAlreadySelected = selection?.contains(tappedWordIndex) ?? false
+        guard selection == nil || !isAlreadySelected else {
             if UIMenuController.shared.isMenuVisible {
                 hideMenuController()
             } else {
@@ -97,64 +93,53 @@ final class ImageTextSelectionView: UIView {
             return
         }
 
-        selectedRange = selectedWordIndex...selectedWordIndex
+        selection = tappedWordIndex...tappedWordIndex
         selectionChanged()
         showMenuControllerIfNeeded()
     }
 
     @objc private func grabberMoved(_ panGesture: UIPanGestureRecognizer) {
-//        self.touchPhase = SETouchPhaseNone;
-//        self.mouseLocation = [gestureRecognizer locationInView:self];
-//
-//        SESelectionGrabber *startGrabber = self.textSelectionView.startGrabber;
-//        SESelectionGrabber *endGrabber = self.textSelectionView.endGrabber;
-//
-
-        guard let selectedRange = self.selectedRange else {
+        guard let selection = self.selection else {
             return
         }
 
         if panGesture.state == .began || panGesture.state == .changed {
             hideMenuController()
             let location = panGesture.location(in: self)
-            let scaled = layout.imagePoint(for: location)
-            print(#function, location, scaled)
+            let point = layout.imagePoint(for: location)
 
             if panGesture == startGrabberPanGesture {
-                guard let firstSelectedIndex = data.firstIndex(where: { text in
-                    let maxX = max(text.bounds.topRight.x, text.bounds.bottomRight.x)
-                    let maxY = min(text.bounds.bottomLeft.y, text.bounds.bottomRight.y)
-                    return scaled.x <= maxX && scaled.y <= maxY
+                guard let firstSelectedIndex = layout.findFirstIndex(predicate: { word in
+                    let maxX = max(word.bounds.topRight.x, word.bounds.bottomRight.x)
+                    let maxY = min(word.bounds.bottomLeft.y, word.bounds.bottomRight.y)
+                    return point.x <= maxX && point.y <= maxY
                 }) else {
                     return
                 }
 
-                guard firstSelectedIndex <= selectedRange.last! else {
+                guard firstSelectedIndex <= selection.upperBound else {
                     return
                 }
 
 
-                self.selectedRange = firstSelectedIndex...selectedRange.last!
-                print(#function, self.selectedRange)
+                self.selection = firstSelectedIndex...selection.upperBound
                 selectionChanged()
 
             } else if panGesture == endGrabberPanGesture {
 
-                guard let lastSelectedIndex = data.lastIndex(where: { text in
-                    let minX = min(text.bounds.topLeft.x, text.bounds.bottomLeft.x)
-                    let minY = min(text.bounds.topLeft.y, text.bounds.topRight.y)
-                    return scaled.x >= minX && scaled.y >= minY
+                guard let lastSelectedIndex = layout.findLastIndex(predicate: { word in
+                    let minX = min(word.bounds.topLeft.x, word.bounds.bottomLeft.x)
+                    let minY = min(word.bounds.topLeft.y, word.bounds.topRight.y)
+                    return point.x >= minX && point.y >= minY
                 }) else {
                     return
                 }
 
-
-                guard lastSelectedIndex >= selectedRange.first! else {
+                guard lastSelectedIndex >= selection.lowerBound else {
                     return
                 }
 
-                self.selectedRange = selectedRange.first!...lastSelectedIndex
-                print(#function, self.selectedRange)
+                self.selection = selection.lowerBound...lastSelectedIndex
                 selectionChanged()
             }
 
@@ -171,19 +156,21 @@ final class ImageTextSelectionView: UIView {
     }
 
     private var firstSelectedWord: RecognizedText? {
-        if let selectedRange = selectedRange {
-            return data[selectedRange.first!]
+        guard let selection = self.selection else {
+            return nil
         }
 
-        return nil
+        let index = selection.lowerBound
+        return layout.sortedLines[index.line].words[index.word]
     }
 
     private var lastSelectedWord: RecognizedText? {
-        if let selectedRange = selectedRange {
-            return data[selectedRange.last!]
+        guard let selection = self.selection else {
+            return nil
         }
 
-        return nil
+        let index = selection.upperBound
+        return layout.sortedLines[index.line].words[index.word]
     }
 
     override func layoutSubviews() {
@@ -243,15 +230,17 @@ final class ImageTextSelectionView: UIView {
 
         context.setFillColor(UIColor.systemBlue.withAlphaComponent(0.5).cgColor)
 
-        if let selectedRange = selectedRange {
-            for i in selectedRange {
-                let word = data[i]
+        if let selection = self.selection {
+            let ranges = layout.rangesOfLinesBetween(first: selection.lowerBound, last: selection.upperBound)
+            for lineRange in ranges {
+                let firstWord = layout.word(at: lineRange.lowerBound)
+                let lastWord = layout.word(at: lineRange.upperBound)
 
                 let path = CGMutablePath()
-                let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
-                let topRight = layout.imageViewPoint(for: word.bounds.topRight)
-                let bottomRight = layout.imageViewPoint(for: word.bounds.bottomRight)
-                let bottomLeft = layout.imageViewPoint(for: word.bounds.bottomLeft)
+                let topLeft = layout.imageViewPoint(for: firstWord.bounds.topLeft)
+                let topRight = layout.imageViewPoint(for: lastWord.bounds.topRight)
+                let bottomRight = layout.imageViewPoint(for: lastWord.bounds.bottomRight)
+                let bottomLeft = layout.imageViewPoint(for: firstWord.bounds.bottomLeft)
 
                 path.move(to: topLeft)
                 path.addLine(to: topRight)
@@ -282,7 +271,7 @@ final class ImageTextSelectionView: UIView {
 //            context.addPath(path)
 //        }
 
-        context.drawPath(using: .stroke)
+//        context.drawPath(using: .stroke)
     }
 
     // MARK: - MenuController
@@ -294,21 +283,31 @@ final class ImageTextSelectionView: UIView {
     }
 
     private func showMenuControllerIfNeeded() {
-        // TODO: move to layout
-        guard let selectedRange = self.selectedRange else { return }
+        guard let selection = self.selection else {
+            return
+        }
 
         becomeFirstResponder()
         let menuController = UIMenuController.shared
         var selectionBoundingRect: CGRect!
-        for index in selectedRange {
-            var wordRect = data[index].bounds.boundingBox
-            wordRect.origin = layout.imageViewPoint(for: wordRect.origin)
-            wordRect.size.width = layout.imageViewDimension(for: wordRect.size.width)
-            wordRect.size.height = layout.imageViewDimension(for: wordRect.size.height)
-            if selectionBoundingRect == nil {
-                selectionBoundingRect = wordRect
-            } else {
-                selectionBoundingRect = selectionBoundingRect.union(wordRect)
+
+        let ranges = layout.rangesOfLinesBetween(first: selection.lowerBound, last: selection.upperBound)
+        for lineRange in ranges {
+            let startIndex = lineRange.lowerBound
+            let endIndex = lineRange.upperBound
+            let currentLine = startIndex.line
+
+            let selectedWords = layout.getWords(inLine: currentLine, startIndex: startIndex.word, endIndex: endIndex.word)
+            for word in selectedWords {
+                var wordRect = word.bounds.boundingBox
+                wordRect.origin = layout.imageViewPoint(for: wordRect.origin)
+                wordRect.size.width = layout.imageViewDimension(for: wordRect.size.width)
+                wordRect.size.height = layout.imageViewDimension(for: wordRect.size.height)
+                if selectionBoundingRect == nil {
+                    selectionBoundingRect = wordRect
+                } else {
+                    selectionBoundingRect = selectionBoundingRect.union(wordRect)
+                }
             }
         }
 
@@ -331,18 +330,33 @@ final class ImageTextSelectionView: UIView {
 
     // actions
     override func copy(_ sender: Any?) {
-        guard let selectedRange = selectedRange else {
+        guard let selection = self.selection else {
             return
         }
 
-        let selectedWords = data[selectedRange]
+        var lines: [String] = []
 
-        let text = selectedWords.map({ $0.text }).joined(separator: " ")
+        let ranges = layout.rangesOfLinesBetween(first: selection.lowerBound, last: selection.upperBound)
+        for lineRange in ranges {
+            let startIndex = lineRange.lowerBound
+            let endIndex = lineRange.upperBound
+            let currentLine = startIndex.line
+
+            let selectedWords = layout.getWords(inLine: currentLine, startIndex: startIndex.word, endIndex: endIndex.word)
+            let combined = selectedWords.map({ $0.text }).joined(separator: " ")
+            lines.append(combined)
+        }
+
+        let text = lines.joined(separator: "\n")
         UIPasteboard.general.string = text
     }
 
     override func selectAll(_ sender: Any?) {
-        selectedRange = 0...data.count-1
+        guard let startIndex = layout.startIndex, let endIndex = layout.endIndex else {
+            return
+        }
+
+        selection = startIndex...endIndex
         selectionChanged()
     }
 }

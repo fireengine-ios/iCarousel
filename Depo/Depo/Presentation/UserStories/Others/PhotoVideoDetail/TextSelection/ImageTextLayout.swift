@@ -25,6 +25,75 @@ final class ImageTextLayout {
         prepareRecognizedWords { }
     }
 
+    // MARK: - Hit Test & Indices
+    
+    func findFirstIndex(predicate: (RecognizedText) -> Bool) -> ImageTextSelectionIndex? {
+        for (lineIndex, line) in sortedLines.enumerated() {
+            for (wordIndex, word) in line.words.enumerated() {
+                if predicate(word) {
+                    return ImageTextSelectionIndex(line: lineIndex, word: wordIndex)
+                }
+            }
+        }
+
+        return nil
+    }
+
+    func findLastIndex(predicate: (RecognizedText) -> Bool) -> ImageTextSelectionIndex? {
+        var result: ImageTextSelectionIndex?
+
+        for (lineIndex, line) in sortedLines.enumerated() {
+            for (wordIndex, word) in line.words.enumerated() {
+                if predicate(word) {
+                    result = ImageTextSelectionIndex(line: lineIndex, word: wordIndex)
+                }
+            }
+        }
+
+        return result
+    }
+
+    func rangesOfLinesBetween(first: ImageTextSelectionIndex,
+                              last: ImageTextSelectionIndex) -> [ClosedRange<ImageTextSelectionIndex>] {
+        var result: [ClosedRange<ImageTextSelectionIndex>] = []
+
+        var lowerBound = first
+        while lowerBound.line <= last.line {
+            let line = lowerBound.line
+            let upperBound: ImageTextSelectionIndex
+            if line == last.line {
+                upperBound = last
+            } else {
+                let lastWordIndex = sortedLines[line].words.count - 1
+                upperBound = ImageTextSelectionIndex(line: line, word: lastWordIndex)
+            }
+
+            result.append(lowerBound...upperBound)
+            lowerBound = ImageTextSelectionIndex(line: line + 1, word: 0)
+        }
+
+        return result
+    }
+
+    func getWords(inLine line: Int, startIndex: Int, endIndex: Int) -> ArraySlice<RecognizedText> {
+        return sortedLines[line].words[startIndex...endIndex]
+    }
+
+    func word(at index: ImageTextSelectionIndex) -> RecognizedText {
+        return sortedLines[index.line].words[index.word]
+    }
+
+    var startIndex: ImageTextSelectionIndex? {
+        guard sortedLines.count > 0 else { return nil }
+        return ImageTextSelectionIndex(line: 0, word: 0)
+    }
+
+    var endIndex: ImageTextSelectionIndex? {
+        guard sortedLines.count > 0 else { return nil }
+        let lastWordIndex = sortedLines.last!.words.count - 1
+        return ImageTextSelectionIndex(line: sortedLines.count - 1, word: lastWordIndex)
+    }
+
     // MARK: - Size & Position Conversion
 
     func imagePoint(for viewPoint: CGPoint) -> CGPoint {

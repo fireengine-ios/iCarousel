@@ -36,7 +36,7 @@ final class ImageTextHighlightView: UIView {
     }
 
     private func updateLayerMask() {
-        let path = UIBezierPath(rect: bounds)
+        let path = UIBezierPath()
 
         // TODO: Round corners
 //        for block in layout.sortedBlocks {
@@ -75,10 +75,8 @@ final class ImageTextHighlightView: UIView {
             path.close()
         }
 
-
         let maskLayer = CAShapeLayer()
         maskLayer.path = path.cgPath
-        maskLayer.fillRule = .evenOdd
 
         layer.mask = maskLayer
     }
