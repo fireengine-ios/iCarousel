@@ -12,6 +12,9 @@ public class ImageTextSelectionInteraction: NSObject, UIInteraction {
     /// The list of recognized words. Must be set before adding the interaction to a view.
     public var recognizedWords: [RecognizedText]?
 
+    /// An array of gestures that should fail when taping selectable content.
+    public var gesturesToIgnore: [UIGestureRecognizer]?
+
     /// The UIImageView instance associated with the interaction.
     private(set) public weak var view: UIView?
 
@@ -54,6 +57,7 @@ Set an image to your UIImageView before adding the interaction.
         newView.isUserInteractionEnabled = true
 
         let selectionView = ImageTextSelectionView(image: image, recognizedWords: recognizedWords)
+        selectionView.gesturesToIgnore = gesturesToIgnore
         selectionView.isUserInteractionEnabled = true
         selectionView.translatesAutoresizingMaskIntoConstraints = false
         newView.addSubview(selectionView)

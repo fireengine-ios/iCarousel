@@ -203,6 +203,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         removeCurrentTextSelectionInteraction()
 
         let interaction = ImageTextSelectionInteraction(recognizedWords: words)
+        interaction.gesturesToIgnore = [tapGesture, imageScrollView.doubleTapGesture]
         imageScrollView.imageView.addInteraction(interaction)
 
         recognizeTextButton.isSelected = true

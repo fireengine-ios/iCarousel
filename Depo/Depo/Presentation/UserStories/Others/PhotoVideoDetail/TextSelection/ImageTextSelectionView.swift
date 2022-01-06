@@ -36,6 +36,7 @@ final class ImageTextSelectionView: UIView {
 
     private var image: UIImage!
     private var layout: ImageTextLayout!
+    var gesturesToIgnore: [UIGestureRecognizer]?
 
     convenience init(image: UIImage, recognizedWords: [RecognizedText]) {
         self.init(frame: .zero)
@@ -358,5 +359,34 @@ final class ImageTextSelectionView: UIView {
 
         selection = startIndex...endIndex
         selectionChanged()
+    }
+
+    // MARK: - Gestures
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard gesturesToIgnore?.contains(gestureRecognizer) == true else {
+            return super.gestureRecognizerShouldBegin(gestureRecognizer)
+        }
+
+        // ignore when unselecting / tapping selection
+        guard selection == nil else {
+            return false
+        }
+
+        // TODO: move to a separate func
+        let point = layout.imagePoint(for: tapGesture.location(in: self))
+        let tappedWord = layout.findFirstIndex(predicate: { word in
+            let minX = word.bounds.topLeft.x
+            let maxX = word.bounds.topRight.x
+            let minY = min(word.bounds.topLeft.y, word.bounds.topRight.y)
+            let maxY = max(word.bounds.bottomLeft.y, word.bounds.bottomRight.y)
+            return point.x >= minX && point.x <= maxX && point.y >= minY && point.y <= maxY
+        })
+
+        // ignore when selecting a word
+        if tappedWord != nil {
+            return false
+        }
+
+        return super.gestureRecognizerShouldBegin(gestureRecognizer)
     }
 }
