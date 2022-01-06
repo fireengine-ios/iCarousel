@@ -29,6 +29,14 @@ public extension RecognizedText {
                           width: maxX - minX,
                           height: maxY - minY)
         }
+
+        var midLeft: CGPoint {
+            CGPoint(x: (topLeft.x + bottomLeft.x) / 2, y: (topLeft.y + bottomLeft.y) / 2)
+        }
+
+        var midRight: CGPoint {
+            CGPoint(x: (topRight.x + topRight.x) / 2, y: (topRight.y + bottomRight.y) / 2)
+        }
     }
 }
 

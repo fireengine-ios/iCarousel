@@ -26,7 +26,7 @@ final class ImageTextLayout {
     }
 
     // MARK: - Hit Test & Indices
-    
+
     func findFirstIndex(predicate: (RecognizedText) -> Bool) -> ImageTextSelectionIndex? {
         for (lineIndex, line) in sortedLines.enumerated() {
             for (wordIndex, word) in line.words.enumerated() {
@@ -207,18 +207,18 @@ final class ImageTextLayout {
 
             var wordsInCurrentLine = [word]
 
-            var nextWord = getNextWord(after: word)
+            var nextWord = nearestWord(after: word)
             while let next = nextWord, processed[next] != true {
                 wordsInCurrentLine.append(next)
                 processed[next] = true
-                nextWord = getNextWord(after: next)
+                nextWord = nearestWord(after: next)
             }
 
-            var previousWord = getPreviousWord(before: word)
+            var previousWord = nearestWord(before: word)
             while let previous = previousWord, processed[previous] != true {
                 wordsInCurrentLine.insert(previous, at: 0)
                 processed[previous] = true
-                previousWord = getPreviousWord(before: previous)
+                previousWord = nearestWord(before: previous)
             }
 
             let line = RecognizedLine(words: wordsInCurrentLine)
@@ -232,16 +232,71 @@ final class ImageTextLayout {
 
     }
 
-    private func getNextWord(after word: RecognizedText) -> RecognizedText? {
-        return recognizedWords.first {
-            return $0 != word && isWord($0, continuationTo: word)
+//    private func getNextWord(after word: RecognizedText) -> RecognizedText? {
+//        return recognizedWords.first {
+//            return $0 != word && isWord($0, continuationTo: word)
+//        }
+//    }
+//
+//    private func getPreviousWord(before word: RecognizedText) -> RecognizedText? {
+//        return recognizedWords.first {
+//            return $0 != word && isWord(word, continuationTo: $0)
+//        }
+//    }
+
+    private func nearestWord(after word: RecognizedText) -> RecognizedText? {
+        var result: RecognizedText?
+        var leastTopDistance: CGFloat!
+        var leastBottomDistance: CGFloat!
+        for aWord in recognizedWords {
+            guard isOnSameLine(first: word, second: aWord) else { continue }
+
+            let topDistance = CGPointDistance(from: word.bounds.topRight, to: aWord.bounds.topLeft)
+            let bottomDistance = CGPointDistance(from: word.bounds.bottomRight, to: aWord.bounds.bottomLeft)
+            if leastTopDistance == nil {
+                leastTopDistance = topDistance
+                leastBottomDistance = bottomDistance
+                result = aWord
+            } else if topDistance < leastTopDistance || bottomDistance < leastBottomDistance {
+                leastTopDistance = topDistance
+                leastBottomDistance = bottomDistance
+                result = aWord
+            }
         }
+
+        return result
     }
 
-    private func getPreviousWord(before word: RecognizedText) -> RecognizedText? {
-        return recognizedWords.first {
-            return $0 != word && isWord(word, continuationTo: $0)
+    private func nearestWord(before word: RecognizedText) -> RecognizedText? {
+        var result: RecognizedText?
+        var leastTopDistance: CGFloat!
+        var leastBottomDistance: CGFloat!
+        for aWord in recognizedWords {
+            guard isOnSameLine(first: aWord, second: word) else { continue }
+
+            let topDistance = CGPointDistance(from: word.bounds.topLeft, to: aWord.bounds.topRight)
+            let bottomDistance = CGPointDistance(from: word.bounds.bottomLeft, to: aWord.bounds.bottomRight)
+            if leastTopDistance == nil {
+                leastTopDistance = topDistance
+                leastBottomDistance = bottomDistance
+                result = aWord
+            } else if topDistance < leastTopDistance || bottomDistance < leastBottomDistance {
+                leastTopDistance = topDistance
+                leastBottomDistance = bottomDistance
+                result = aWord
+            }
         }
+
+        return result
+    }
+
+    private func isOnSameLine(first: RecognizedText, second: RecognizedText) -> Bool {
+        let wordHeight = CGPointDistance(from: first.bounds.topRight, to: first.bounds.bottomRight)
+
+        let minY = first.bounds.topRight.y - wordHeight / 2
+        let maxY = first.bounds.bottomRight.y + wordHeight / 2
+        let horizontalSpacing = CGPointDistance(from: first.bounds.midRight, to: second.bounds.midLeft)
+        return second.bounds.topLeft.y >= minY && second.bounds.bottomLeft.y <= maxY && horizontalSpacing <= wordHeight / 1.5
     }
 
     private func isWord(_ word: RecognizedText, continuationTo other: RecognizedText) -> Bool {
