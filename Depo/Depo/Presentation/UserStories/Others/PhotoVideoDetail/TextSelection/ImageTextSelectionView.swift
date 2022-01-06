@@ -15,6 +15,8 @@ final class ImageTextSelectionView: UIView {
 
     private var selection: ClosedRange<ImageTextSelectionIndex>?
 
+    private var debugModeEnabled = false
+
     // MARK: - Setup
 
     private lazy var tapGesture: UITapGestureRecognizer = {
@@ -31,6 +33,11 @@ final class ImageTextSelectionView: UIView {
 
     private lazy var endGrabberPanGesture: UIPanGestureRecognizer = {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(grabberMoved))
+        return gesture
+    }()
+
+    private lazy var debugLongPressGesture: UILongPressGestureRecognizer = {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(toggleDebugMode))
         return gesture
     }()
 
@@ -56,6 +63,7 @@ final class ImageTextSelectionView: UIView {
 
         // tap gesture
         addGestureRecognizer(tapGesture)
+        addGestureRecognizer(debugLongPressGesture)
 
         // selection grabbers
         addSubview(startGrabber)
@@ -147,6 +155,13 @@ final class ImageTextSelectionView: UIView {
         } else if (panGesture.state == .ended || panGesture.state == .cancelled || panGesture.state == .failed) {
             showMenuControllerIfNeeded()
         }
+    }
+
+    @objc func toggleDebugMode() {
+        guard debugLongPressGesture.state == .began else { return }
+
+        debugModeEnabled.toggle()
+        setNeedsDisplay()
     }
 
     private func selectionChanged() {
@@ -255,24 +270,25 @@ final class ImageTextSelectionView: UIView {
         context.drawPath(using: .fill)
 
 
-//        context.setStrokeColor(UIColor.red.cgColor)
-//        context.setLineWidth(1)
-//        for word in data {
-//            let path = CGMutablePath()
-//            let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
-//            let topRight = layout.imageViewPoint(for: word.bounds.topRight)
-//            let bottomRight = layout.imageViewPoint(for: word.bounds.bottomRight)
-//            let bottomLeft = layout.imageViewPoint(for: word.bounds.bottomLeft)
-//
-//            path.move(to: topLeft)
-//            path.addLine(to: topRight)
-//            path.addLine(to: bottomRight)
-//            path.addLine(to: bottomLeft)
-//            path.addLine(to: topLeft)
-//            context.addPath(path)
-//        }
+        guard debugModeEnabled else { return }
+        context.setStrokeColor(UIColor.red.cgColor)
+        context.setLineWidth(1)
+        for word in layout.sortedWords {
+            let path = CGMutablePath()
+            let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
+            let topRight = layout.imageViewPoint(for: word.bounds.topRight)
+            let bottomRight = layout.imageViewPoint(for: word.bounds.bottomRight)
+            let bottomLeft = layout.imageViewPoint(for: word.bounds.bottomLeft)
 
-//        context.drawPath(using: .stroke)
+            path.move(to: topLeft)
+            path.addLine(to: topRight)
+            path.addLine(to: bottomRight)
+            path.addLine(to: bottomLeft)
+            path.addLine(to: topLeft)
+            context.addPath(path)
+        }
+
+        context.drawPath(using: .stroke)
     }
 
     // MARK: - MenuController
