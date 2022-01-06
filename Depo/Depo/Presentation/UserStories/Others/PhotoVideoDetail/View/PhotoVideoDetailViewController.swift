@@ -194,6 +194,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         passThroughView?.disableGestures()
         backButtonForNavigationItem(title: TextConstants.backTitle)
         passThroughView?.removeFromSuperview()
+
+        removeTextSelectionInteractionFromCurrentCell()
     }
 
     override func viewDidLayoutSubviews() {
@@ -821,6 +823,13 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
             currentPage = objects.count - 1
         }
         selectedIndex = currentPage
+    }
+
+    private func removeTextSelectionInteractionFromCurrentCell() {
+        for cell in collectionView.visibleCells {
+            let detailCell = cell as? PhotoVideoDetailCell
+            detailCell?.removeCurrentTextSelectionInteraction()
+        }
     }
 }
 
