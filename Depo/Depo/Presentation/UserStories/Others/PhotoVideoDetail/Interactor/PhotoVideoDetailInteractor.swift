@@ -402,7 +402,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             })
         }
 
-        output.setCurrentActivityItemsConfiguration(UIActivityItemsConfiguration(itemProviders: [imageProvider]))
+        let activityItemsConfig = UIActivityItemsConfiguration(itemProviders: [imageProvider])
+        // remove the share button from UIMenuController used in text selection 
+        activityItemsConfig.supportedInteractions = []
+        output.setCurrentActivityItemsConfiguration(activityItemsConfig)
     }
 
     @available(iOS 15.0, *)
