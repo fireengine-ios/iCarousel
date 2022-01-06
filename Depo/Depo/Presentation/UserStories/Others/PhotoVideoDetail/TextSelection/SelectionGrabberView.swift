@@ -32,7 +32,12 @@ final class SelectionGrabberView: UIView {
             setAnchorPoint(CGPoint(x: 0.5, y: 0))
         }
 
-        transform = CGAffineTransform(rotationAngle: angle)
+        if !angle.isNaN {
+            transform = CGAffineTransform(rotationAngle: angle)
+        } else {
+            transform = .identity
+        }
+
         setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
     }
 
@@ -41,11 +46,11 @@ final class SelectionGrabberView: UIView {
 
     private func setup() {
         caretView.frame = CGRect(x: 0, y: 0, width: caretWidth, height: 0)
-        caretView.backgroundColor = .blue
+        caretView.backgroundColor = tintColor
         addSubview(caretView)
 
         dotView.frame = CGRect(x: 0, y: 0, width: dotSize, height: dotSize)
-        dotView.backgroundColor = .blue
+        dotView.backgroundColor = tintColor
         dotView.clipsToBounds = false
         dotView.layer.cornerRadius = dotSize / 2
         dotView.layer.masksToBounds = false

@@ -229,7 +229,7 @@ final class ImageTextSelectionView: UIView {
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
 
-        context.setFillColor(UIColor.systemBlue.withAlphaComponent(0.5).cgColor)
+        context.setFillColor(tintColor.withAlphaComponent(0.5).cgColor)
 
         if let selection = self.selection {
             let ranges = layout.rangesOfLinesBetween(first: selection.lowerBound, last: selection.upperBound)
