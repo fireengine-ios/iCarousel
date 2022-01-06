@@ -43,6 +43,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     private var oldFrame = CGRect.zero
     private var currentItemId = ""
     private var fileType: FileType = .unknown
+    private var isLocalItem = false
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
 
@@ -155,6 +156,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         currentItemId = object.uuid
         fileType = object.fileType
+        isLocalItem = object.isLocalItem
         placeholderImageView.isHidden = true
         recognizeTextButton.isHidden = true
         
@@ -272,7 +274,7 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
         } else {
             placeholderImageView.isHidden = true
             imageScrollView.isHidden = !(fileType == .video || fileType == .image)
-            recognizeTextButton.isHidden = fileType != .image
+            recognizeTextButton.isHidden = fileType != .image || isLocalItem
         }
     }
     
