@@ -69,6 +69,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
+
+            adjustBottomSpacingForRecognizeTextButton()
         }
     }
 
