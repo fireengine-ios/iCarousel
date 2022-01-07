@@ -28,6 +28,7 @@ public class ImageTextSelectionInteraction: NSObject, UIInteraction {
 
     public func willMove(to view: UIView?) {
         selectionView?.removeFromSuperview()
+        selectionView?.hideMenuController()
         selectionView = nil
     }
 

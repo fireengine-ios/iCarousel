@@ -812,6 +812,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
 extension PhotoVideoDetailViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         updateSelectedIndex()
+        removeTextSelectionInteractionFromInvisibleCells()
     }
     
     // MARK: - Helper
@@ -828,10 +829,28 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
     }
 
     private func removeTextSelectionInteractionFromCurrentCell() {
-        for cell in collectionView.visibleCells {
-            let detailCell = cell as? PhotoVideoDetailCell
-            detailCell?.removeCurrentTextSelectionInteraction()
+        guard let selectedIndex = self.selectedIndex else { return }
+        removeTextSelectionInteractionFromCell(at: selectedIndex)
+    }
+
+    private func removeTextSelectionInteractionFromInvisibleCells() {
+        guard let selectedIndex = self.selectedIndex else { return }
+        let rangeToTraverse = (selectedIndex - 2)...(selectedIndex + 2)
+        for i in rangeToTraverse {
+            guard i != selectedIndex, i >= 0, i < objects.count else {
+                continue
+            }
+
+            removeTextSelectionInteractionFromCell(at: i)
         }
+    }
+
+    private func removeTextSelectionInteractionFromCell(at index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell else {
+            return
+        }
+        cell.removeCurrentTextSelectionInteraction()
     }
 }
 

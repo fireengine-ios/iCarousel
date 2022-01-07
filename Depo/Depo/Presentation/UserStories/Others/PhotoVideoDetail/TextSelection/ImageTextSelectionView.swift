@@ -336,7 +336,7 @@ final class ImageTextSelectionView: UIView {
         }
     }
 
-    private func hideMenuController() {
+    func hideMenuController() {
         let menuController = UIMenuController.shared
         if #available(iOS 13.0, *) {
             menuController.hideMenu(from: self)
