@@ -656,6 +656,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
             output.updateBars()
             setupNavigationBar()
             updateFileInfo()
+            collectionView.reloadItems(at: [IndexPath(item: indexToChange, section: 0)])
         }
     }
 }
