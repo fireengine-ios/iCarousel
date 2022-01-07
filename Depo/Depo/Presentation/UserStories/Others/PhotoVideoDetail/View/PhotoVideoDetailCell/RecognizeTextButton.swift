@@ -17,52 +17,23 @@ final class RecognizeTextButton: UIButton {
         setup()
     }
 
-    override var isSelected: Bool {
-        didSet {
-            updateTintColor()
-        }
-    }
-
     override var intrinsicContentSize: CGSize {
-        let size = super.intrinsicContentSize
-        let squareSize = max(Self.size, max(size.width, size.height))
-        return CGSize(width: squareSize, height: squareSize)
+        return CGSize(width: Self.size, height: Self.size)
     }
 
     private func setup() {
-//        if #available(iOS 15.0, *) {
-//            setupiOS15()
-//        } else {
-        setupPreiOS15()
-//        }
-    }
+        setImage(UIImage(named: "icon-recognize-text"), for: .normal)
+        imageEdgeInsets = UIEdgeInsets(topBottom: 10, rightLeft: 10)
+        tintColor = .white
+        setBackgroundColor(.gray, for: .normal)
+        setBackgroundColor(.lrTealish, for: .selected)
 
-//    @available(iOS 15.0, *)
-//    private func setupiOS15() {
-//        tintColor = .lrTealish
-//        configurationUpdateHandler = { button in
-//            var config: UIButton.Configuration = button.isSelected ? .filled() : .gray()
-//            config.image = UIImage(systemName: "text.viewfinder")
-//            config.cornerStyle = .capsule
-//            button.configuration = config
-//        }
-//        setNeedsUpdateConfiguration()
-//    }
-
-    private func setupPreiOS15() {
-        if #available(iOS 13.0, *) {
-            setImage(UIImage(systemName: "text.viewfinder"), for: .normal)
-        }
-        setBackgroundColor(UIColor.systemGray.withAlphaComponent(0.6), for: .normal)
-        setBackgroundColor(UIColor.lrTealish, for: .selected)
-
-        updateTintColor()
-
-        layer.cornerRadius = intrinsicContentSize.height / 2
+        layer.cornerRadius = Self.size / 2
         layer.masksToBounds = true
     }
 
-    private func updateTintColor() {
-        tintColor = isSelected ? .white : .lrTealish
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView?.contentMode = .scaleAspectFit
     }
 }
