@@ -829,7 +829,7 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
         selectedIndex = currentPage
     }
 
-    private func removeTextSelectionInteractionFromCurrentCell() {
+    func removeTextSelectionInteractionFromCurrentCell() {
         guard let selectedIndex = self.selectedIndex else { return }
         removeTextSelectionInteractionFromCell(at: selectedIndex)
     }

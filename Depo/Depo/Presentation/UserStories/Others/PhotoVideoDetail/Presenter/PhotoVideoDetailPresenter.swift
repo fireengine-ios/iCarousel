@@ -204,6 +204,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
         let currentItem = interactor.allItems[index]
         selectedItemsCallback([currentItem])
+
+        // The code here is called when bottom bar buttons or 3 dot barButtonItem tapped.
+        // On any of these actions the text selection interaction should be removed from UI
+        DispatchQueue.main.async {
+            self.view.removeTextSelectionInteractionFromCurrentCell()
+        }
     }
     
 
