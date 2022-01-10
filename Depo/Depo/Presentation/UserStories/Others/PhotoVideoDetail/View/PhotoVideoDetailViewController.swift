@@ -168,7 +168,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         statusBarColor = .black
         
         NotificationCenter.default.post(name: .reusePlayer, object: self)
-        
+
+        output.viewIsReady(view: viewForBottomBar)
+
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
         bottomDetailViewManager?.updatePassThroughViewDelegate(passThroughView: passThroughView)
@@ -177,10 +179,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
-        output.viewIsReady(view: viewForBottomBar)
         passThroughView?.enableGestures()
         updateFirstVisibleCell()
-        adjustBottomSpacingForRecognizeTextButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
