@@ -180,6 +180,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         output.viewIsReady(view: viewForBottomBar)
         passThroughView?.enableGestures()
         updateFirstVisibleCell()
+        adjustBottomSpacingForRecognizeTextButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
