@@ -63,7 +63,7 @@ final class ImageTextSelectionView: UIView {
 
         // tap gesture
         addGestureRecognizer(tapGesture)
-        addGestureRecognizer(debugLongPressGesture)
+//        addGestureRecognizer(debugLongPressGesture)
 
         // selection grabbers
         addSubview(startGrabber)
