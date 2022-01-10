@@ -667,6 +667,18 @@ class RouterVC: NSObject {
         return controller
     }
     
+    // MARK: Save to my lifebox
+    
+    func saveToMyLifebox(with publicToken: String) -> UIViewController {
+        let controller = SaveToMyLifeboxInitializer.initializeSaveToMyLifeboxViewController(with: "SaveToMyLifeboxViewController", publicToken: publicToken)
+        return controller
+    }
+    
+    func saveToMyLifeboxInnerFolder(with item: WrapData) -> UIViewController {
+        let controller = SaveToMyLifeboxInitializer.initializeSaveToMyLifeboxViewController(with: "SaveToMyLifeboxViewController", item: item)
+        return controller
+    }
+
     
     // MARK: User profile
     

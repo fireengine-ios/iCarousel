@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import Foundation
+
 final class PushNotificationService {
     
     private init() { }
@@ -222,6 +224,7 @@ final class PushNotificationService {
         case .verifyRecoveryEmail: openVerifyRecoveryEmail()
         case .silent: break
         case .albumDetail: openAlbumDetail()
+        case .saveToMyLifebox: openSaveToMyLifebox()
 
         }
         
@@ -635,5 +638,10 @@ private extension PushNotificationService {
                 UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
             }
         }
+    }
+    
+    func openSaveToMyLifebox() {
+        guard let publicToken = storageVars.value(forDeepLinkParameter: .publicToken) as? String else { return }
+        pushTo(router.saveToMyLifebox(with: publicToken))
     }
 }

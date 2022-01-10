@@ -19,6 +19,8 @@ def core_pods
   pod 'Firebase/Crashlytics', '~> 7'
   pod 'FirebaseAnalytics', '~> 7'
   pod 'Firebase/RemoteConfig', '~> 7'
+  pod 'Firebase/DynamicLinks', '~> 7'
+  
 
   pod 'Netmera', '~> 3.8.4'
 

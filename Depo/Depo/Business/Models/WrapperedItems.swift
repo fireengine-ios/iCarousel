@@ -643,6 +643,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var fileData: Data?
     
+    var tempListingURL: String?
+    
     var privateSharePermission: SharedItemPermission?
     
     var asset: PHAsset? {
@@ -1235,6 +1237,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         childCount = privateShareFileInfo.childCount
         privateSharePermission = privateShareFileInfo.permissions
         isShared = true
+        tempListingURL = privateShareFileInfo.tempListingURL?.absoluteString
     }
     
     func copyFileData(from item: WrapData) {

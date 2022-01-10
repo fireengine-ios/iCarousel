@@ -69,7 +69,7 @@ final class AnalyticsService: NSObject {
         #elseif APPSTORE
             filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
         #else
-            filePath = Bundle.main.path(forResource: "GoogleService-Info-debug", ofType: "plist")
+            filePath = Bundle.main.path(forResource: "GoogleService-Info-test", ofType: "plist")
         #endif
         
         guard let filePathUnwraped = filePath,
