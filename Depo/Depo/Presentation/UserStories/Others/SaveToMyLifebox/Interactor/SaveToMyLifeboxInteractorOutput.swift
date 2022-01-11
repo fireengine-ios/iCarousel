@@ -10,6 +10,7 @@ import Foundation
 
 protocol SaveToMyLifeboxInteractorOutput: AnyObject {
     func operationSuccess(with items: [SharedFileInfo])
+    func operationSuccessFinish()
     func startProgress()
     func operationFailedWithError(errorMessage: String)
     func saveOperationSuccess()

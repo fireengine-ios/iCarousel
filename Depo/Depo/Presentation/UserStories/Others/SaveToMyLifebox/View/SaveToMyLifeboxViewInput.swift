@@ -9,6 +9,6 @@
 import Foundation
 
 protocol SaveToMyLifeboxViewInput: AnyObject, Waiting {
-
-    func sharedItemsDidGet(items: [SharedFileInfo])
+    func didGetSharedItems(items: [SharedFileInfo])
+    func operationDidFinish()
 }

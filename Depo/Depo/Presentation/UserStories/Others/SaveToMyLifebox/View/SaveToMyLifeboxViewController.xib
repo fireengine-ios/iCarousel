@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lgI-SE-h6p">
-                    <rect key="frame" x="8" y="60" width="406" height="682"/>
+                    <rect key="frame" x="8" y="60" width="406" height="802"/>
                     <color key="backgroundColor" name="primaryBackground"/>
                 </tableView>
             </subviews>
@@ -31,7 +31,7 @@
                 <constraint firstItem="lgI-SE-h6p" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="AtK-Ak-aGt"/>
                 <constraint firstItem="lgI-SE-h6p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="DoV-iA-HI5"/>
                 <constraint firstAttribute="trailing" secondItem="lgI-SE-h6p" secondAttribute="trailing" id="Yvb-nI-Khx"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lgI-SE-h6p" secondAttribute="bottom" constant="120" id="eQl-bh-tnr"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lgI-SE-h6p" secondAttribute="bottom" id="eQl-bh-tnr"/>
             </constraints>
             <point key="canvasLocation" x="139" y="123"/>
         </view>

@@ -179,6 +179,9 @@ struct NumericConstants {
     static let contactSyncSmallCardShadowRadius: CGFloat = 3
 
     static let addressCharacterLimit: Int = 1024
+    
+    static let saveToMyLifeboxCellHeight: CGFloat = 62
+    static let saveToMyLifeboxActionViewHeight: CGFloat = 120
 }
 
 struct RequestSizeConstant {

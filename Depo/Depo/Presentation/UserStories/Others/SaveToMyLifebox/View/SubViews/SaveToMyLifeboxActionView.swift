@@ -17,7 +17,6 @@ protocol SaveToMyLifeboxActionViewDelegate: AnyObject {
 class SaveToMyLifeboxActionView: UIView, NibInit {
     
     weak var delegate: SaveToMyLifeboxActionViewDelegate?
-    private var tokenStorage: TokenStorage = factory.resolve()
  
     @IBOutlet weak private var stackView: UIStackView! {
         willSet {
@@ -30,35 +29,27 @@ class SaveToMyLifeboxActionView: UIView, NibInit {
         willSet {
             newValue.setTitle("Save To My Lifebox",for:.normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.setTitleColor(.white, for: .highlighted)
-            newValue.layer.cornerRadius = 24
+            newValue.setTitleColor(.white.darker(by: 30), for: .highlighted)
+            newValue.layer.cornerRadius = 20
             newValue.backgroundColor = AppColor.darkBlueAndTealish.color
             newValue.adjustsFontSizeToFitWidth()
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         }
     }
     
     @IBOutlet weak var downloadButton: UIButton! {
         willSet {
-            newValue.setTitle("Download",for:.normal)
+            newValue.setTitle("Download", for:.normal)
             newValue.setTitleColor(ColorConstants.darkBlueColor, for: .normal)
-            newValue.setTitleColor(ColorConstants.darkBlueColor, for: .highlighted)
-            newValue.layer.cornerRadius = 24
+            newValue.setTitleColor(ColorConstants.darkBlueColor.darker(by: 30), for: .highlighted)
+            newValue.layer.cornerRadius = 20
             newValue.layer.borderColor = ColorConstants.navy.cgColor
             newValue.layer.borderWidth = 1
             newValue.backgroundColor = .white
             newValue.adjustsFontSizeToFitWidth()
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-//        if tokenStorage.accessToken != nil {
-//            downloadButton.removeFromSuperview()
-//        }
-    }
-    
     
     @IBAction func saveToMyLifeboxButtonTapped(_ sender: UIButton) {
         delegate?.saveToMyLifeboxButtonDidTapped()

@@ -9,6 +9,6 @@
 import Foundation
 
 protocol SaveToMyLifeboxInteractorInput {
-    func getData()
+    func fetchData(at page: Int)
     func saveToMyLifeboxSaveRoot()
 }

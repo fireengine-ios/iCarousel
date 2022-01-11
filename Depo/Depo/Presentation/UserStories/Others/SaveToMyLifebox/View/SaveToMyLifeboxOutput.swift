@@ -7,7 +7,7 @@
 //
 
 protocol SaveToMyLifeboxViewOutput: AnyObject {
-    func viewIsReady()
+    func viewIsReady(at page: Int)
     func onSelect(item: WrapData)
     func saveToMyLifeboxSaveRoot()
 }

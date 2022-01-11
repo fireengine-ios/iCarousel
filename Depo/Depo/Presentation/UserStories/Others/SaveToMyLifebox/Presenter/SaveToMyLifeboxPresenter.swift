@@ -24,8 +24,8 @@ extension SaveToMyLifeboxPresenter: SaveToMyLifeboxViewOutput {
         router.onSelect(item: item)
     }
     
-    func viewIsReady() {
-        interactor.getData()
+    func viewIsReady(at page: Int) {
+        interactor.fetchData(at: page)
     }
     
     func startProgress() {
@@ -48,7 +48,12 @@ extension SaveToMyLifeboxPresenter: SaveToMyLifeboxInteractorOutput {
     }
     
     func operationSuccess(with items: [SharedFileInfo]) {
-        view.sharedItemsDidGet(items: items)
+        view.didGetSharedItems(items: items)
+        asyncOperationSuccess()
+    }
+    
+    func operationSuccessFinish() {
+        view.operationDidFinish()
         asyncOperationSuccess()
     }
 }

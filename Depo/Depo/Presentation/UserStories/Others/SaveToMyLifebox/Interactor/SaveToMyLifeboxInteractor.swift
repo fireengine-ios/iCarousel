@@ -10,34 +10,42 @@ import Foundation
 
 class SaveToMyLifeboxInteractor: SaveToMyLifeboxInteractorInput {
     var output: SaveToMyLifeboxInteractorOutput!
-    var publicToken: String? = nil
+    var publicToken: String?
     var item: WrapData?
     var isInnerFolder = false
     
-    func getData() {
-        isInnerFolder ? getSaveToMyLifeboxInnerFolder() : getSaveToMyLifebox()
+    func fetchData(at page: Int) {
+        isInnerFolder ? getSaveToMyLifeboxInnerFolder(for: page) : getSaveToMyLifebox(for: page)
     }
     
-    private func getSaveToMyLifebox() {
+    private func getSaveToMyLifebox(for page: Int) {
         output.startProgress()
-        SaveToMyLifeboxApiService().getSaveToMyLifebox(publicToken: publicToken ?? "", size: 100, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
+        SaveToMyLifeboxApiService().getSaveToMyLifebox(publicToken: publicToken ?? "", size: 20, page: page, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
             switch result {
             case .success(let items):
-                self.output.operationSuccess(with: items)
+                if items.isEmpty {
+                    self.output.operationSuccessFinish()
+                } else {
+                    self.output.operationSuccess(with: items)
+                }
             case .failed(let error):
                 self.output.operationFailedWithError(errorMessage: error.description)
             }
         }
     }
     
-    private func getSaveToMyLifeboxInnerFolder() {
+    private func getSaveToMyLifeboxInnerFolder(for page: Int) {
         guard let item = item, let tempListingURL = item.tempListingURL else { return }
         output.startProgress()
         
-        SaveToMyLifeboxApiService().getSaveToMyLifeboxInnerFolder(tempListingURL: tempListingURL, size: 100, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
+        SaveToMyLifeboxApiService().getSaveToMyLifeboxInnerFolder(tempListingURL: tempListingURL, size: 20, page: page, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
             switch result {
             case .success(let items):
-                self.output.operationSuccess(with: items)
+                if items.isEmpty {
+                    self.output.operationSuccessFinish()
+                } else {
+                    self.output.operationSuccess(with: items)
+                }
             case .failed(let error):
                 self.output.operationFailedWithError(errorMessage: error.description)
             }
@@ -45,10 +53,9 @@ class SaveToMyLifeboxInteractor: SaveToMyLifeboxInteractorInput {
     }
     
     func saveToMyLifeboxSaveRoot() {
-        guard let publicToken = publicToken else { return }
         output.startProgress()
         
-        SaveToMyLifeboxApiService().saveToMyLifeboxSaveRoot(publicToken: publicToken) { result in
+        SaveToMyLifeboxApiService().saveToMyLifeboxSaveRoot(publicToken: publicToken ?? "") { result in
             switch result {
             case .success():
                 self.output.saveOperationSuccess()
