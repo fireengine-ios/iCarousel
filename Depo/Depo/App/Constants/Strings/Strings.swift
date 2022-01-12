@@ -53,6 +53,7 @@ enum Strings: String, Localizable {
     case resetPasswordSuccessMessage         = "forgotMyPassword_reset_success_message"
     case resetPasswordAccountNotFound        = "forgotMyPassword_account_not_found"
     case resetPasswordInvalidQuestionAnswer  = "forgotMyPassword_SQ_invalid_answer"
+    case resetPasswordCantChangePassword     = "account_can_not_change_password"
 
 
     // MARK: - Delete Account
