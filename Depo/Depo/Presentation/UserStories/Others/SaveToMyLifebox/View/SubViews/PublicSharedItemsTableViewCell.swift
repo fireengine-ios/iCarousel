@@ -1,5 +1,5 @@
 //
-//  SaveToMyLifeboxTableViewCell.swift
+//  PublicSharedItemsTableViewCell.swift
 //  Lifebox
 //
 //  Created by Burak Donat on 9.01.2022.
@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class SaveToMyLifeboxTableViewCell: UITableViewCell {
+class PublicSharedItemsTableViewCell: UITableViewCell {
     
     @IBOutlet weak private var nameLabel: UILabel! {
         willSet {

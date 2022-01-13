@@ -1,5 +1,5 @@
 //
-//  SaveToMyLifeboxInteractorOutput.swift
+//  PublicShareInteractorOutput.swift
 //  Depo
 //
 //  Created by Burak Donat on 8.01.2022.
@@ -8,10 +8,9 @@
 
 import Foundation
 
-protocol SaveToMyLifeboxInteractorOutput: AnyObject {
+protocol PublicShareInteractorOutput: AnyObject {
     func operationSuccess(with items: [SharedFileInfo])
-    func operationSuccessFinish()
     func startProgress()
-    func operationFailedWithError(errorMessage: String)
+    func operationFailedWithError(errorMessage: String, needReturn: Bool)
     func saveOperationSuccess()
 }

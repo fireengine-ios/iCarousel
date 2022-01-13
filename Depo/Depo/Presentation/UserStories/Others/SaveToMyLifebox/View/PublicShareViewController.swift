@@ -1,5 +1,5 @@
 //
-//  SaveToMyLifeboxViewController.swift
+//  PublicShareViewController.swift
 //  Depo
 //
 //  Created by Burak Donat on 8.01.2022.
@@ -8,17 +8,15 @@
 
 import UIKit
 
-class SaveToMyLifeboxViewController: ViewController, ControlTabBarProtocol {
+class PublicShareViewController: ViewController, ControlTabBarProtocol {
     
     //MARK: -IBOutlets
     @IBOutlet private weak var tableView: UITableView!
     
     //MARK: -Properties
-    var output: SaveToMyLifeboxViewOutput!
+    var output: PublicShareViewOutput!
     var mainTitle: String?
-    private let actionView = SaveToMyLifeboxActionView.initFromNib()
-    private var page: Int = 0
-    private var isLastPage: Bool = false
+    private let actionView = PublicSharedItemsActionView.initFromNib()
     private var isLoading: Bool = false
 
     private var dataSource: [WrapData] = [] {
@@ -32,7 +30,7 @@ class SaveToMyLifeboxViewController: ViewController, ControlTabBarProtocol {
         super.viewDidLoad()
         setupTableView()
         configureUI()
-        output.viewIsReady(at: page)
+        output.viewIsReady()
         isLoading = true
         actionView.delegate = self
     }
@@ -40,15 +38,12 @@ class SaveToMyLifeboxViewController: ViewController, ControlTabBarProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideTabBar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        navigationBarWithGradientStyle()
     }
     
     //MARK: -Helpers
     private func setupTableView() {
-        tableView.register(nibCell: SaveToMyLifeboxTableViewCell.self)
+        tableView.register(nibCell: PublicSharedItemsTableViewCell.self)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.contentInset.bottom = actionView.frame.size.height
@@ -68,7 +63,11 @@ class SaveToMyLifeboxViewController: ViewController, ControlTabBarProtocol {
 }
 
 //MARK: -SaveToMyLifeboxViewInput
-extension SaveToMyLifeboxViewController: SaveToMyLifeboxViewInput {
+extension PublicShareViewController: PublicShareViewInput {
+    func saveOperationSuccess() {
+        SnackbarManager.shared.show(type: .nonCritical, message: "Kaydetme işlemi başarılı oldu")
+    }
+    
     func didGetSharedItems(items: [SharedFileInfo]) {
         isLoading = false
         for item in items {
@@ -76,20 +75,16 @@ extension SaveToMyLifeboxViewController: SaveToMyLifeboxViewInput {
             dataSource.append(wrapData)
         }
     }
-    
-    func operationDidFinish() {
-        isLastPage = true
-    }
 }
 
 //MARK: -UITableViewDataSource
-extension SaveToMyLifeboxViewController: UITableViewDataSource {
+extension PublicShareViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(reusable: SaveToMyLifeboxTableViewCell.self, for: indexPath)
+        let cell = tableView.dequeue(reusable: PublicSharedItemsTableViewCell.self, for: indexPath)
         let item = dataSource[indexPath.row]
         cell.configure(With: item)
         return cell
@@ -97,7 +92,7 @@ extension SaveToMyLifeboxViewController: UITableViewDataSource {
 }
 
 //MARK: -UITableViewDelegate
-extension SaveToMyLifeboxViewController: UITableViewDelegate {
+extension PublicShareViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return NumericConstants.saveToMyLifeboxCellHeight
     }
@@ -113,9 +108,8 @@ extension SaveToMyLifeboxViewController: UITableViewDelegate {
         guard let tableView = tableView else { return }
         guard scrollView.contentOffset.y > 0 else { return }
         if scrollView.contentOffset.y > (tableView.contentSize.height - tableView.frame.size.height) {
-            if !isLoading && !isLastPage {
-                page += 1
-                output.viewIsReady(at: page)
+            if !isLoading {
+                output.fetchMoreIfNeeded()
                 isLoading = true
             }
         }
@@ -123,12 +117,12 @@ extension SaveToMyLifeboxViewController: UITableViewDelegate {
 }
 
 //MARK: -SaveToMyLifeboxActionViewDelegate
-extension SaveToMyLifeboxViewController: SaveToMyLifeboxActionViewDelegate {
+extension PublicShareViewController: PublicSharedItemsActionViewDelegate {
     func downloadButtonDidTapped() {
         return
     }
     
     func saveToMyLifeboxButtonDidTapped() {
-        output.saveToMyLifeboxSaveRoot()
+        output.savePublicSharedItems()
     }
 }

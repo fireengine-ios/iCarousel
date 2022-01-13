@@ -669,13 +669,13 @@ class RouterVC: NSObject {
     
     // MARK: Save to my lifebox
     
-    func saveToMyLifebox(with publicToken: String) -> UIViewController {
-        let controller = SaveToMyLifeboxInitializer.initializeSaveToMyLifeboxViewController(with: "SaveToMyLifeboxViewController", publicToken: publicToken)
+    func publicSharedItems(with publicToken: String) -> UIViewController {
+        let controller = PublicShareInitializer.initializeSaveToMyLifeboxViewController(with: publicToken)
         return controller
     }
     
-    func saveToMyLifeboxInnerFolder(with item: WrapData) -> UIViewController {
-        let controller = SaveToMyLifeboxInitializer.initializeSaveToMyLifeboxViewController(with: "SaveToMyLifeboxViewController", item: item)
+    func publicSharedItemsInnerFolder(with item: WrapData) -> UIViewController {
+        let controller = PublicShareInitializer.initializeSaveToMyLifeboxViewController(with: item)
         return controller
     }
 

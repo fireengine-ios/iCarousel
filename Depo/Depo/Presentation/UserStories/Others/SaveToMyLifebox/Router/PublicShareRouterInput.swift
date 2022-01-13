@@ -1,5 +1,5 @@
 //
-//  SaveToMyLifeboxModuleInput.swift
+//  PublicShareRouterInput.swift
 //  Depo
 //
 //  Created by Burak Donat on 8.01.2022.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SaveToMyLifeboxModuleInput {
-    
+protocol PublicShareRouterInput: AnyObject {
+    func onSelect(item: WrapData)
+    func popToRoot()
 }
-

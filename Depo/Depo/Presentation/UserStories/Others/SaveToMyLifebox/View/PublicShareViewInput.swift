@@ -1,5 +1,5 @@
 //
-//  SaveToMyLifeboxViewInput.swift
+//  PublicShareViewInput.swift
 //  Depo
 //
 //  Created by Burak Donat on 8.01.2022.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SaveToMyLifeboxViewInput: AnyObject, Waiting {
+protocol PublicShareViewInput: AnyObject, Waiting {
     func didGetSharedItems(items: [SharedFileInfo])
-    func operationDidFinish()
+    func saveOperationSuccess()
 }

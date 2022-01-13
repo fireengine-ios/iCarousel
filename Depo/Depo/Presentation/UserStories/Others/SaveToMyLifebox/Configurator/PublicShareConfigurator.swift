@@ -1,5 +1,5 @@
 //
-//  SaveToMyLifeboxConfigurator.swift
+//  PublicShareConfigurator.swift
 //  Depo
 //
 //  Created by Burak Donat on 8.01.2022.
@@ -8,27 +8,27 @@
 
 import Foundation
 
-class SaveToMyLifeboxConfigurator {
+class PublicShareConfigurator {
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, publicToken: String) {
-        if let viewController = viewInput as? SaveToMyLifeboxViewController {
+        if let viewController = viewInput as? PublicShareViewController {
             configure(viewController: viewController, publicToken: publicToken)
         }
     }
         
     func configureModuleForInnerFolder<UIViewController>(viewInput: UIViewController, item: WrapData) {
-        if let viewController = viewInput as? SaveToMyLifeboxViewController {
+        if let viewController = viewInput as? PublicShareViewController {
             configureInnerFolder(viewController: viewController, item: item)
         }
     }
     
-    private func configure(viewController: SaveToMyLifeboxViewController, publicToken: String) {
-        let router = SaveToMyLifeboxRouter()
+    private func configure(viewController: PublicShareViewController, publicToken: String) {
+        let router = PublicShareRouter()
 
-        let presenter = SaveToMyLifeboxPresenter()
+        let presenter = PublicSharePresenter()
         presenter.view = viewController
         presenter.router = router
 
-        let interactor = SaveToMyLifeboxInteractor()
+        let interactor = PublicShareInteractor()
         interactor.output = presenter
         interactor.publicToken = publicToken
 
@@ -36,17 +36,23 @@ class SaveToMyLifeboxConfigurator {
         viewController.output = presenter
     }
     
-    private func configureInnerFolder(viewController: SaveToMyLifeboxViewController, item: WrapData) {
-        let router = SaveToMyLifeboxRouter()
+    private func configureInnerFolder(viewController: PublicShareViewController, item: WrapData) {
+        let router = PublicShareRouter()
 
-        let presenter = SaveToMyLifeboxPresenter()
+        let presenter = PublicSharePresenter()
         presenter.view = viewController
         presenter.router = router
 
-        let interactor = SaveToMyLifeboxInteractor()
+        let interactor = PublicShareInteractor()
         interactor.output = presenter
         interactor.isInnerFolder = true
         interactor.item = item
+        
+        if let tmpListingUrl = item.tempListingURL {
+            let queryItems = URLComponents(string: tmpListingUrl)?.queryItems
+            let publicToken = queryItems?.filter({$0.name == "publicToken"}).first
+            interactor.publicToken = publicToken?.value
+        }
 
         presenter.interactor = interactor
         viewController.output = presenter

@@ -642,6 +642,6 @@ private extension PushNotificationService {
     
     func openSaveToMyLifebox() {
         guard let publicToken = storageVars.value(forDeepLinkParameter: .publicToken) as? String else { return }
-        pushTo(router.saveToMyLifebox(with: publicToken))
+        pushTo(router.publicSharedItems(with: publicToken))
     }
 }

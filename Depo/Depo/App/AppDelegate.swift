@@ -332,7 +332,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return
         }
         
-        if let publicToken = url.path.split(separator: "/").last?.split(separator: "&").first {
+        if let publicToken = url.lastPathComponent.split(separator: "&").first {
             if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.saveToMyLifebox.rawValue,
                                                              options: [DeepLinkParameter.publicToken.rawValue: publicToken]) {
                 debugLog("Should open Action Screen")

@@ -1,5 +1,5 @@
 //
-//  SaveToMyLifeboxRouter.swift
+//  PublicShareRouter.swift
 //  Depo
 //
 //  Created by Burak Donat on 8.01.2022.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-class SaveToMyLifeboxRouter: SaveToMyLifeboxRouterInput {
+class PublicShareRouter: PublicShareRouterInput {
     
     private let router = RouterVC()
     
     func onSelect(item: WrapData) {
-        let controller = router.saveToMyLifeboxInnerFolder(with: item)
+        let controller = router.publicSharedItemsInnerFolder(with: item)
         router.pushViewController(viewController: controller, animated: true)
     }
     

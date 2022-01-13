@@ -1,5 +1,5 @@
 //
-//  SaveToMyLifeboxActionView.swift
+//  PublicSharedItemsActionView.swift
 //  Lifebox
 //
 //  Created by Burak Donat on 10.01.2022.
@@ -9,14 +9,14 @@
 import Foundation
 import UIKit
 
-protocol SaveToMyLifeboxActionViewDelegate: AnyObject {
+protocol PublicSharedItemsActionViewDelegate: AnyObject {
     func downloadButtonDidTapped()
     func saveToMyLifeboxButtonDidTapped()
 }
 
-class SaveToMyLifeboxActionView: UIView, NibInit {
+class PublicSharedItemsActionView: UIView, NibInit {
     
-    weak var delegate: SaveToMyLifeboxActionViewDelegate?
+    weak var delegate: PublicSharedItemsActionViewDelegate?
  
     @IBOutlet weak private var stackView: UIStackView! {
         willSet {
@@ -39,7 +39,8 @@ class SaveToMyLifeboxActionView: UIView, NibInit {
     
     @IBOutlet weak var downloadButton: UIButton! {
         willSet {
-            newValue.setTitle("Download", for:.normal)
+            newValue.setTitle("   Download", for:.normal)
+            newValue.setImage(UIImage(named: "download"), for: .normal)
             newValue.setTitleColor(ColorConstants.darkBlueColor, for: .normal)
             newValue.setTitleColor(ColorConstants.darkBlueColor.darker(by: 30), for: .highlighted)
             newValue.layer.cornerRadius = 20
