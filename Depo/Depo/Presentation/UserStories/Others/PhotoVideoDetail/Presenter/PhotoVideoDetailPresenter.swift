@@ -500,7 +500,7 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
         interactor.createNewUrl()
     }
 
-    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping ([RecognizedText]) -> Void) {
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping (ImageTextSelectionData) -> Void) {
         interactor.recognizeTextForCurrentItem(image: image, completion: completion)
     }
 }

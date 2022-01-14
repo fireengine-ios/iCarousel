@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 public class ImageTextSelectionInteraction: NSObject, UIInteraction {
-    /// The list of recognized words. Must be set before adding the interaction to a view.
-    public var recognizedWords: [RecognizedText]?
+    /// The list of lines and words.
+    public var data: ImageTextSelectionData?
 
     /// An array of gestures that should fail when taping selectable content.
     public var gesturesToIgnore: [UIGestureRecognizer]?
@@ -21,9 +21,9 @@ public class ImageTextSelectionInteraction: NSObject, UIInteraction {
     /// The view responsible for higlight & selection.
     private var selectionView: ImageTextSelectionView?
 
-    public convenience init(recognizedWords: [RecognizedText]) {
+    public convenience init(data: ImageTextSelectionData) {
         self.init()
-        self.recognizedWords = recognizedWords
+        self.data = data
     }
 
     public func willMove(to view: UIView?) {
@@ -50,14 +50,14 @@ Set an image to your UIImageView before adding the interaction.
             return
         }
 
-        guard let recognizedWords = recognizedWords else {
-            assertionFailure("Set recognizedWords before adding the interaction.")
+        guard let data = data else {
+            assertionFailure("Set lines & words before adding the interaction.")
             return
         }
 
         newView.isUserInteractionEnabled = true
 
-        let selectionView = ImageTextSelectionView(image: image, recognizedWords: recognizedWords)
+        let selectionView = ImageTextSelectionView(image: image, lines: data.lines, words: data.words)
         selectionView.gesturesToIgnore = gesturesToIgnore
         selectionView.isUserInteractionEnabled = true
         selectionView.translatesAutoresizingMaskIntoConstraints = false

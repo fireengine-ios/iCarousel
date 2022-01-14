@@ -349,14 +349,17 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         userActivity?.resignCurrent()
     }
 
-    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping ([RecognizedText]) -> Void) {
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping (ImageTextSelectionData) -> Void) {
         guard let currentItemIndex = currentItemIndex,
               let item = array[currentItemIndex]
         else {
             return
         }
 
-        textRecognitionService.process(fileUUID: item.uuid, image: image, completion: completion)
+        textRecognitionService.process(fileUUID: item.uuid, image: image) { [weak self] data in
+            guard currentItemIndex == self?.currentItemIndex else { return }
+            completion(data)
+        }
     }
     
     private func updateItem(_ item: Item) {

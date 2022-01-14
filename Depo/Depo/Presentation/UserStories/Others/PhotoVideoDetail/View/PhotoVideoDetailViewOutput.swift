@@ -44,5 +44,5 @@ protocol PhotoVideoDetailViewOutput {
     
     func createNewUrl()
 
-    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping ([RecognizedText]) -> Void)
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping (ImageTextSelectionData) -> Void)
 }

@@ -9,6 +9,7 @@ import Foundation
 
 struct RecognizedBlock {
     let lines: [RecognizedLine]
+    let bounds: TextBounds
 
     var firstLine: RecognizedLine {
         return lines.first!

@@ -803,9 +803,9 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
             cell.removeCurrentTextSelectionInteraction()
         } else {
             showSpinnerIncludeNavigationBar()
-            output.recognizeTextForCurrentItem(image: image) { [weak cell, weak self] words in
+            output.recognizeTextForCurrentItem(image: image) { [weak cell, weak self] data in
                 self?.hideSpinnerIncludeNavigationBar()
-                cell?.addTextSelectionInteraction(words)
+                cell?.addTextSelectionInteraction(data)
             }
         }
     }

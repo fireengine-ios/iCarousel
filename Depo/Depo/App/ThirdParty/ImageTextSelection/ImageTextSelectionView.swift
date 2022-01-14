@@ -45,10 +45,10 @@ final class ImageTextSelectionView: UIView {
     private var layout: ImageTextLayout!
     var gesturesToIgnore: [UIGestureRecognizer]?
 
-    convenience init(image: UIImage, recognizedWords: [RecognizedText]) {
+    convenience init(image: UIImage, lines: [RecognizedLine], words: [RecognizedText]) {
         self.init(frame: .zero)
         self.image = image
-        self.layout = ImageTextLayout(image: image, recognizedWords: recognizedWords)
+        self.layout = ImageTextLayout(image: image, lines: lines, words: words)
         setup()
     }
 
@@ -63,7 +63,7 @@ final class ImageTextSelectionView: UIView {
 
         // tap gesture
         addGestureRecognizer(tapGesture)
-//        addGestureRecognizer(debugLongPressGesture)
+        addGestureRecognizer(debugLongPressGesture)
 
         // selection grabbers
         addSubview(startGrabber)
@@ -177,7 +177,7 @@ final class ImageTextSelectionView: UIView {
         }
 
         let index = selection.lowerBound
-        return layout.sortedLines[index.line].words[index.word]
+        return layout.lines[index.line].words[index.word]
     }
 
     private var lastSelectedWord: RecognizedText? {
@@ -186,7 +186,7 @@ final class ImageTextSelectionView: UIView {
         }
 
         let index = selection.upperBound
-        return layout.sortedLines[index.line].words[index.word]
+        return layout.lines[index.line].words[index.word]
     }
 
     override func layoutSubviews() {
@@ -271,14 +271,33 @@ final class ImageTextSelectionView: UIView {
 
 
         guard debugModeEnabled else { return }
+//        context.setStrokeColor(UIColor.red.cgColor)
+//        context.setLineWidth(1)
+//        for word in layout.words {
+//            let path = CGMutablePath()
+//            let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
+//            let topRight = layout.imageViewPoint(for: word.bounds.topRight)
+//            let bottomRight = layout.imageViewPoint(for: word.bounds.bottomRight)
+//            let bottomLeft = layout.imageViewPoint(for: word.bounds.bottomLeft)
+//
+//            path.move(to: topLeft)
+//            path.addLine(to: topRight)
+//            path.addLine(to: bottomRight)
+//            path.addLine(to: bottomLeft)
+//            path.addLine(to: topLeft)
+//            context.addPath(path)
+//        }
+//        context.drawPath(using: .stroke)
+
+
         context.setStrokeColor(UIColor.red.cgColor)
         context.setLineWidth(1)
-        for word in layout.sortedWords {
+        for line in layout.lines {
             let path = CGMutablePath()
-            let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
-            let topRight = layout.imageViewPoint(for: word.bounds.topRight)
-            let bottomRight = layout.imageViewPoint(for: word.bounds.bottomRight)
-            let bottomLeft = layout.imageViewPoint(for: word.bounds.bottomLeft)
+            let topLeft = layout.imageViewPoint(for: line.bounds.topLeft)
+            let topRight = layout.imageViewPoint(for: line.bounds.topRight)
+            let bottomRight = layout.imageViewPoint(for: line.bounds.bottomRight)
+            let bottomLeft = layout.imageViewPoint(for: line.bounds.bottomLeft)
 
             path.move(to: topLeft)
             path.addLine(to: topRight)
@@ -287,7 +306,6 @@ final class ImageTextSelectionView: UIView {
             path.addLine(to: topLeft)
             context.addPath(path)
         }
-
         context.drawPath(using: .stroke)
     }
 
@@ -351,7 +369,7 @@ final class ImageTextSelectionView: UIView {
             return
         }
 
-        var lines: [String] = []
+        var linesToCopy: [String] = []
 
         let ranges = layout.rangesOfLinesBetween(first: selection.lowerBound, last: selection.upperBound)
         for lineRange in ranges {
@@ -361,10 +379,10 @@ final class ImageTextSelectionView: UIView {
 
             let selectedWords = layout.getWords(inLine: currentLine, startIndex: startIndex.word, endIndex: endIndex.word)
             let combined = selectedWords.map({ $0.text }).joined(separator: " ")
-            lines.append(combined)
+            linesToCopy.append(combined)
         }
 
-        let text = lines.joined(separator: "\n")
+        let text = linesToCopy.joined(separator: " ")
         UIPasteboard.general.string = text
     }
 

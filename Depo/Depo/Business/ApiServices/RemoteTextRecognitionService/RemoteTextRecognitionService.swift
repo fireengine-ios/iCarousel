@@ -23,10 +23,6 @@ final class RemoteTextRecognitionService: RemoteTextRecognitionServiceProtocol {
 
     @discardableResult
     func process(fileUUID: String, completion: @escaping (RemoteTextRecognitionModel?) -> Void) -> URLSessionTask? {
-//        let url = Bundle.main.url(forResource: "ocr", withExtension: "json")!
-//        let data = try! Data(contentsOf: url)
-//        completion(try! JSONDecoder().decode(RemoteTextRecognitionModel.self, from: data))
-//        return nil
         let parameters = [fileUUID].asParameters()
         return sessionManager
             .request(RouteRequests.ocrProcess, method: .post,

@@ -199,10 +199,10 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
     }
 
-    func addTextSelectionInteraction(_ words: [RecognizedText]) {
+    func addTextSelectionInteraction(_ data: ImageTextSelectionData) {
         removeCurrentTextSelectionInteraction()
 
-        let interaction = ImageTextSelectionInteraction(recognizedWords: words)
+        let interaction = ImageTextSelectionInteraction(data: data)
         interaction.gesturesToIgnore = [tapGesture, imageScrollView.doubleTapGesture]
         imageScrollView.imageView.addInteraction(interaction)
 

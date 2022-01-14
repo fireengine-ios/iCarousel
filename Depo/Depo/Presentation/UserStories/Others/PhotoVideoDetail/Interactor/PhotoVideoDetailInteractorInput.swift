@@ -56,5 +56,5 @@ protocol PhotoVideoDetailInteractorInput: AnyObject {
 
     func resignUserActivity()
 
-    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping ([RecognizedText]) -> Void)
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping (ImageTextSelectionData) -> Void)
 }

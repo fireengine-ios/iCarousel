@@ -62,7 +62,7 @@ final class ImageTextHighlightView: UIView {
 //                path.addLine(to: topLeft)
 //            }
 //        }
-        for line in layout.sortedLines {
+        for line in layout.lines {
             let topLeft = layout.imageViewPoint(for: line.bounds.topLeft)
             let topRight = layout.imageViewPoint(for: line.bounds.topRight)
             let bottomRight = layout.imageViewPoint(for: line.bounds.bottomRight)
