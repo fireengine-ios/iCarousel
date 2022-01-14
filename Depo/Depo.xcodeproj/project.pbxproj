@@ -379,6 +379,74 @@
 		077EEFAB26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
 		077EEFAC26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
 		077EEFAD26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */; };
+		0780AB1D2791681F000760D9 /* TextBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0E2791681E000760D9 /* TextBounds.swift */; };
+		0780AB1E2791681F000760D9 /* TextBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0E2791681E000760D9 /* TextBounds.swift */; };
+		0780AB1F2791681F000760D9 /* TextBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0E2791681E000760D9 /* TextBounds.swift */; };
+		0780AB202791681F000760D9 /* TextBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0E2791681E000760D9 /* TextBounds.swift */; };
+		0780AB212791681F000760D9 /* RecognizedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0F2791681E000760D9 /* RecognizedLine.swift */; };
+		0780AB222791681F000760D9 /* RecognizedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0F2791681E000760D9 /* RecognizedLine.swift */; };
+		0780AB232791681F000760D9 /* RecognizedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0F2791681E000760D9 /* RecognizedLine.swift */; };
+		0780AB242791681F000760D9 /* RecognizedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0F2791681E000760D9 /* RecognizedLine.swift */; };
+		0780AB252791681F000760D9 /* RecognizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB102791681E000760D9 /* RecognizedText.swift */; };
+		0780AB262791681F000760D9 /* RecognizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB102791681E000760D9 /* RecognizedText.swift */; };
+		0780AB272791681F000760D9 /* RecognizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB102791681E000760D9 /* RecognizedText.swift */; };
+		0780AB282791681F000760D9 /* RecognizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB102791681E000760D9 /* RecognizedText.swift */; };
+		0780AB2927916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */; };
+		0780AB2A27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */; };
+		0780AB2B27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */; };
+		0780AB2C27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */; };
+		0780AB2D27916820000760D9 /* RecognizedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB122791681E000760D9 /* RecognizedBlock.swift */; };
+		0780AB2E27916820000760D9 /* RecognizedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB122791681E000760D9 /* RecognizedBlock.swift */; };
+		0780AB2F27916820000760D9 /* RecognizedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB122791681E000760D9 /* RecognizedBlock.swift */; };
+		0780AB3027916820000760D9 /* RecognizedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB122791681E000760D9 /* RecognizedBlock.swift */; };
+		0780AB3127916820000760D9 /* CGPointDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB132791681E000760D9 /* CGPointDistance.swift */; };
+		0780AB3227916820000760D9 /* CGPointDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB132791681E000760D9 /* CGPointDistance.swift */; };
+		0780AB3327916820000760D9 /* CGPointDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB132791681E000760D9 /* CGPointDistance.swift */; };
+		0780AB3427916820000760D9 /* CGPointDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB132791681E000760D9 /* CGPointDistance.swift */; };
+		0780AB3527916820000760D9 /* SelectionGrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB142791681E000760D9 /* SelectionGrabberView.swift */; };
+		0780AB3627916820000760D9 /* SelectionGrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB142791681E000760D9 /* SelectionGrabberView.swift */; };
+		0780AB3727916820000760D9 /* SelectionGrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB142791681E000760D9 /* SelectionGrabberView.swift */; };
+		0780AB3827916820000760D9 /* SelectionGrabberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB142791681E000760D9 /* SelectionGrabberView.swift */; };
+		0780AB3927916820000760D9 /* ImageTextHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB152791681E000760D9 /* ImageTextHighlightView.swift */; };
+		0780AB3A27916820000760D9 /* ImageTextHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB152791681E000760D9 /* ImageTextHighlightView.swift */; };
+		0780AB3B27916820000760D9 /* ImageTextHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB152791681E000760D9 /* ImageTextHighlightView.swift */; };
+		0780AB3C27916820000760D9 /* ImageTextHighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB152791681E000760D9 /* ImageTextHighlightView.swift */; };
+		0780AB3D27916820000760D9 /* ImageTextLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB162791681E000760D9 /* ImageTextLayout.swift */; };
+		0780AB3E27916820000760D9 /* ImageTextLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB162791681E000760D9 /* ImageTextLayout.swift */; };
+		0780AB3F27916820000760D9 /* ImageTextLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB162791681E000760D9 /* ImageTextLayout.swift */; };
+		0780AB4027916820000760D9 /* ImageTextLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB162791681E000760D9 /* ImageTextLayout.swift */; };
+		0780AB4127916820000760D9 /* ImageTextSelectionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB172791681E000760D9 /* ImageTextSelectionIndex.swift */; };
+		0780AB4227916820000760D9 /* ImageTextSelectionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB172791681E000760D9 /* ImageTextSelectionIndex.swift */; };
+		0780AB4327916820000760D9 /* ImageTextSelectionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB172791681E000760D9 /* ImageTextSelectionIndex.swift */; };
+		0780AB4427916820000760D9 /* ImageTextSelectionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB172791681E000760D9 /* ImageTextSelectionIndex.swift */; };
+		0780AB4527916820000760D9 /* ImageTextSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB182791681E000760D9 /* ImageTextSelectionView.swift */; };
+		0780AB4627916820000760D9 /* ImageTextSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB182791681E000760D9 /* ImageTextSelectionView.swift */; };
+		0780AB4727916820000760D9 /* ImageTextSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB182791681E000760D9 /* ImageTextSelectionView.swift */; };
+		0780AB4827916820000760D9 /* ImageTextSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB182791681E000760D9 /* ImageTextSelectionView.swift */; };
+		0780AB4927916820000760D9 /* ImageTextSelectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB192791681E000760D9 /* ImageTextSelectionData.swift */; };
+		0780AB4A27916820000760D9 /* ImageTextSelectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB192791681E000760D9 /* ImageTextSelectionData.swift */; };
+		0780AB4B27916820000760D9 /* ImageTextSelectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB192791681E000760D9 /* ImageTextSelectionData.swift */; };
+		0780AB4C27916820000760D9 /* ImageTextSelectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB192791681E000760D9 /* ImageTextSelectionData.swift */; };
+		0780AB5027916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4E27916833000760D9 /* RemoteTextRecognitionModels.swift */; };
+		0780AB5127916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4E27916833000760D9 /* RemoteTextRecognitionModels.swift */; };
+		0780AB5227916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4E27916833000760D9 /* RemoteTextRecognitionModels.swift */; };
+		0780AB5327916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4E27916833000760D9 /* RemoteTextRecognitionModels.swift */; };
+		0780AB5427916834000760D9 /* RemoteTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */; };
+		0780AB5527916834000760D9 /* RemoteTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */; };
+		0780AB5627916834000760D9 /* RemoteTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */; };
+		0780AB5727916834000760D9 /* RemoteTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */; };
+		0780AB5C27916846000760D9 /* LocalTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */; };
+		0780AB5D27916846000760D9 /* LocalTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */; };
+		0780AB5E27916846000760D9 /* LocalTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */; };
+		0780AB5F27916846000760D9 /* LocalTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */; };
+		0780AB6027916846000760D9 /* TextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5A27916845000760D9 /* TextRecognitionService.swift */; };
+		0780AB6127916846000760D9 /* TextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5A27916845000760D9 /* TextRecognitionService.swift */; };
+		0780AB6227916846000760D9 /* TextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5A27916845000760D9 /* TextRecognitionService.swift */; };
+		0780AB6327916846000760D9 /* TextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5A27916845000760D9 /* TextRecognitionService.swift */; };
+		0780AB6427916846000760D9 /* TextRecognitionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5B27916845000760D9 /* TextRecognitionProcessor.swift */; };
+		0780AB6527916846000760D9 /* TextRecognitionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5B27916845000760D9 /* TextRecognitionProcessor.swift */; };
+		0780AB6627916846000760D9 /* TextRecognitionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5B27916845000760D9 /* TextRecognitionProcessor.swift */; };
+		0780AB6727916846000760D9 /* TextRecognitionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5B27916845000760D9 /* TextRecognitionProcessor.swift */; };
 		0786E1872660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E1882660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18A2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
@@ -9240,6 +9308,23 @@
 		077EEF9C26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEmailVerificationPopUp.swift; sourceTree = "<group>"; };
 		077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyRecoveryEmailPopUp.swift; sourceTree = "<group>"; };
 		077FDB99268C730D00F21317 /* OverlayStickerSelectorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorDataSource.swift; sourceTree = "<group>"; };
+		0780AB0E2791681E000760D9 /* TextBounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBounds.swift; sourceTree = "<group>"; };
+		0780AB0F2791681E000760D9 /* RecognizedLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognizedLine.swift; sourceTree = "<group>"; };
+		0780AB102791681E000760D9 /* RecognizedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognizedText.swift; sourceTree = "<group>"; };
+		0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextSelectionInteraction.swift; sourceTree = "<group>"; };
+		0780AB122791681E000760D9 /* RecognizedBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognizedBlock.swift; sourceTree = "<group>"; };
+		0780AB132791681E000760D9 /* CGPointDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointDistance.swift; sourceTree = "<group>"; };
+		0780AB142791681E000760D9 /* SelectionGrabberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionGrabberView.swift; sourceTree = "<group>"; };
+		0780AB152791681E000760D9 /* ImageTextHighlightView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextHighlightView.swift; sourceTree = "<group>"; };
+		0780AB162791681E000760D9 /* ImageTextLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextLayout.swift; sourceTree = "<group>"; };
+		0780AB172791681E000760D9 /* ImageTextSelectionIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextSelectionIndex.swift; sourceTree = "<group>"; };
+		0780AB182791681E000760D9 /* ImageTextSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextSelectionView.swift; sourceTree = "<group>"; };
+		0780AB192791681E000760D9 /* ImageTextSelectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextSelectionData.swift; sourceTree = "<group>"; };
+		0780AB4E27916833000760D9 /* RemoteTextRecognitionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteTextRecognitionModels.swift; sourceTree = "<group>"; };
+		0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteTextRecognitionService.swift; sourceTree = "<group>"; };
+		0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTextRecognitionService.swift; sourceTree = "<group>"; };
+		0780AB5A27916845000760D9 /* TextRecognitionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRecognitionService.swift; sourceTree = "<group>"; };
+		0780AB5B27916845000760D9 /* TextRecognitionProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRecognitionProcessor.swift; sourceTree = "<group>"; };
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
 		0791815226F88A820067FB75 /* ResetPasswordResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordResponse.swift; sourceTree = "<group>"; };
 		0791815B26F88AB10067FB75 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
@@ -12274,6 +12359,44 @@
 			path = DeleteAccountPopUps;
 			sourceTree = "<group>";
 		};
+		0780AB0D2791681E000760D9 /* ImageTextSelection */ = {
+			isa = PBXGroup;
+			children = (
+				0780AB0E2791681E000760D9 /* TextBounds.swift */,
+				0780AB0F2791681E000760D9 /* RecognizedLine.swift */,
+				0780AB102791681E000760D9 /* RecognizedText.swift */,
+				0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */,
+				0780AB122791681E000760D9 /* RecognizedBlock.swift */,
+				0780AB132791681E000760D9 /* CGPointDistance.swift */,
+				0780AB142791681E000760D9 /* SelectionGrabberView.swift */,
+				0780AB152791681E000760D9 /* ImageTextHighlightView.swift */,
+				0780AB162791681E000760D9 /* ImageTextLayout.swift */,
+				0780AB172791681E000760D9 /* ImageTextSelectionIndex.swift */,
+				0780AB182791681E000760D9 /* ImageTextSelectionView.swift */,
+				0780AB192791681E000760D9 /* ImageTextSelectionData.swift */,
+			);
+			path = ImageTextSelection;
+			sourceTree = "<group>";
+		};
+		0780AB4D27916833000760D9 /* RemoteTextRecognitionService */ = {
+			isa = PBXGroup;
+			children = (
+				0780AB4E27916833000760D9 /* RemoteTextRecognitionModels.swift */,
+				0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */,
+			);
+			path = RemoteTextRecognitionService;
+			sourceTree = "<group>";
+		};
+		0780AB5827916845000760D9 /* TextRecognitionService */ = {
+			isa = PBXGroup;
+			children = (
+				0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */,
+				0780AB5A27916845000760D9 /* TextRecognitionService.swift */,
+				0780AB5B27916845000760D9 /* TextRecognitionProcessor.swift */,
+			);
+			path = TextRecognitionService;
+			sourceTree = "<group>";
+		};
 		0791815A26F88AB10067FB75 /* IdentityVerification */ = {
 			isa = PBXGroup;
 			children = (
@@ -14854,6 +14977,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0780AB5827916845000760D9 /* TextRecognitionService */,
 				B57F8E002587975000799405 /* RemoteConfig */,
 				B528DF7F2552CEB0002D9718 /* Contacts */,
 				B51B818F254AECB20072C6FA /* FileDownload */,
@@ -17914,6 +18038,7 @@
 		B549AA5124CF037900D39C44 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				0780AB0D2791681E000760D9 /* ImageTextSelection */,
 				B549AA7924CF05B000D39C44 /* GPUImage */,
 			);
 			path = ThirdParty;
@@ -19150,6 +19275,7 @@
 			isa = PBXGroup;
 			children = (
 				076BD1DD27BC3249004609E3 /* MapSearchService */,
+				0780AB4D27916833000760D9 /* RemoteTextRecognitionService */,
 				F064FB25278A338100B461D0 /* SaveToMyLifeboxService */,
 				3AA3D4E4268C452600B7B1EF /* SilentPushService */,
 				3A54C6DC264968A600C2C8BD /* InvitationService */,
@@ -24122,6 +24248,7 @@
 				7C6B30021FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
 				8C0E8C8D1FDEBDFF00789C91 /* MusicBar.swift in Sources */,
 				B569563324D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
+				0780AB5427916834000760D9 /* RemoteTextRecognitionService.swift in Sources */,
 				8C0E8C8E1FDEBDFF00789C91 /* CustomTabBarItem.swift in Sources */,
 				B560CC3D255BB6DA00199EA2 /* PrivateShareSharedFilesCollectionManager.swift in Sources */,
 				8C0E8C8F1FDEBDFF00789C91 /* EditinglBar.swift in Sources */,
@@ -24139,6 +24266,7 @@
 				8C0E8C931FDEBDFF00789C91 /* PasscodeSettingsViewController.swift in Sources */,
 				8C0E8C941FDEBDFF00789C91 /* HomePageViewOutput.swift in Sources */,
 				8C0E8C961FDEBDFF00789C91 /* ContactSyncModels.swift in Sources */,
+				0780AB3D27916820000760D9 /* ImageTextLayout.swift in Sources */,
 				8C0E8C991FDEBDFF00789C91 /* CollectionViewCellDataProtocol.swift in Sources */,
 				985E9BFD2493AFD6004D70BA /* UITextView+Extensions.swift in Sources */,
 				8C0E8C9A1FDEBDFF00789C91 /* HomePageInitializer.swift in Sources */,
@@ -24194,6 +24322,7 @@
 				98B0477B259314740011DAEB /* UpdaterController.m in Sources */,
 				8C0E8CC51FDEBDFF00789C91 /* InstagramResponses.swift in Sources */,
 				4A9B3909201F3533009FC572 /* FaceImageItemsRouter.swift in Sources */,
+				0780AB2927916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */,
 				B50B4A75220C598C0056FC86 /* ConnectedAccountsDataSource.swift in Sources */,
 				8C0E8CC61FDEBDFF00789C91 /* HelpAndSupportPresenter.swift in Sources */,
 				FA793D8D201872EA00A02B46 /* ThingsService.swift in Sources */,
@@ -24227,6 +24356,7 @@
 				8C0E8CD91FDEBDFF00789C91 /* SearchViewInitializer.swift in Sources */,
 				8C0E8CDC1FDEBDFF00789C91 /* VisualMusicPlayerViewInput.swift in Sources */,
 				8CF6A9C9207C8DD3007DEF71 /* AssetsCache.swift in Sources */,
+				0780AB5027916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */,
 				8C0B91BA2017104500A5BA81 /* AuthorizationRepository.swift in Sources */,
 				98B047F3259314750011DAEB /* ContactAddress.m in Sources */,
 				8C0E8CDD1FDEBDFF00789C91 /* AutoSyncModuleInput.swift in Sources */,
@@ -24398,6 +24528,7 @@
 				8C0E8D381FDEBDFF00789C91 /* CellsConstant.swift in Sources */,
 				8C0E8D391FDEBDFF00789C91 /* GradientView.swift in Sources */,
 				8C0E8D3A1FDEBDFF00789C91 /* ImportPhotosRouterInput.swift in Sources */,
+				0780AB4927916820000760D9 /* ImageTextSelectionData.swift in Sources */,
 				8C0B91B020170ECF00A5BA81 /* ManageContactsConfigurator.swift in Sources */,
 				8C06AC202008AAD5003D8E05 /* SuggestionTableSectionHeader.swift in Sources */,
 				CE00B254220332FF00A5A696 /* NSLayoutConstraint+Extensions.swift in Sources */,
@@ -24444,6 +24575,7 @@
 				7373EC23235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */,
 				07FA029927DD39F10006E56D /* ChangeRecoveryEmailPopUp.swift in Sources */,
 				3A6D27C726400ACA00A7BBE2 /* InvitationViewController.swift in Sources */,
+				0780AB2D27916820000760D9 /* RecognizedBlock.swift in Sources */,
 				981EA2ED247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
 				981691A923C860C7005A768E /* TrashBinRouter.swift in Sources */,
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
@@ -24540,6 +24672,7 @@
 				73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
 				8C208652228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
 				9886113A240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */,
+				0780AB252791681F000760D9 /* RecognizedText.swift in Sources */,
 				8C0E8DA01FDEBDFF00789C91 /* RegistrationUserInfoModel.swift in Sources */,
 				F02833B92779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */,
 				89DCC5CC2403A99900488F1F /* SubscriptionOfferView.swift in Sources */,
@@ -24647,6 +24780,7 @@
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				8C0E8DD41FDEBDFF00789C91 /* TermsAndServicesPresenter.swift in Sources */,
 				CE39D3E7216B756E004AB6D7 /* YearsView.swift in Sources */,
+				0780AB3127916820000760D9 /* CGPointDistance.swift in Sources */,
 				9807261D203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
 				7373EC2A235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				8C0E8DD51FDEBDFF00789C91 /* TermsAndServicesInteractorInput.swift in Sources */,
@@ -24665,6 +24799,7 @@
 				B57FE7FE212D73990060BD6E /* AugmentedRealityInitializer.swift in Sources */,
 				8C0E8DDE1FDEBDFF00789C91 /* TermsAndServicesInitializer.swift in Sources */,
 				98B04813259314750011DAEB /* SyncStatus.m in Sources */,
+				0780AB3927916820000760D9 /* ImageTextHighlightView.swift in Sources */,
 				CEF41E9C2035B2DB0008FCD5 /* PreventCollectionView.swift in Sources */,
 				984A8B0A252F05A8002FB400 /* OverlayStickerSaveManager.swift in Sources */,
 				9823198124F3A1E700FD16E2 /* AdjustView.swift in Sources */,
@@ -25187,6 +25322,7 @@
 				8C86110D22BCF27300108958 /* SelectNameModuleOutput.swift in Sources */,
 				CE292C1521BE5C54004FC745 /* Text+Size.swift in Sources */,
 				8C86111322BCF2D100108958 /* PrivacyPolicyController.swift in Sources */,
+				0780AB1D2791681F000760D9 /* TextBounds.swift in Sources */,
 				98B04843259314750011DAEB /* SyncLogger.m in Sources */,
 				98231AA624F3A23500FD16E2 /* MetropolisFilter.swift in Sources */,
 				17589F772276336800A5DB37 /* ProfileTextPickerView.swift in Sources */,
@@ -25287,6 +25423,7 @@
 				73E41D9522DDAFD100B036F4 /* TwoFactorAuthErrorResponse.swift in Sources */,
 				07D42135274E4D0800061EA2 /* ItemAnnotation.swift in Sources */,
 				8C208640228D4B2E000BEDAD /* PhotoVideoScrollBarManager.swift in Sources */,
+				0780AB212791681F000760D9 /* RecognizedLine.swift in Sources */,
 				B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				89E3408D24747CB500EB68C3 /* PeopleCollectionViewCell.swift in Sources */,
 				B5390D83216605F600A02002 /* CellImageManager.swift in Sources */,
@@ -25308,6 +25445,7 @@
 				89E51D4B22CA1115007A7DBC /* CreateStoryPreviewRouter.swift in Sources */,
 				CF71470024B597A900D83E60 /* ContactListCell.swift in Sources */,
 				8C0E8F441FDEBDFF00789C91 /* SplashInitializer.swift in Sources */,
+				0780AB6027916846000760D9 /* TextRecognitionService.swift in Sources */,
 				A217E43521A5B03A0084AA37 /* LeavePremiumRouter.swift in Sources */,
 				73B623DC23BF625D00839C47 /* SmashStickerResponse.swift in Sources */,
 				4A56D5C9202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
@@ -25433,6 +25571,7 @@
 				B519A674253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				98A86D6923A246A700438225 /* HiddenPhotosDataSource.swift in Sources */,
+				0780AB6427916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
 				8C208658228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
 				737A2EAA2338AF410014258A /* SecretAnswerView.swift in Sources */,
@@ -25523,6 +25662,7 @@
 				8C0E8F9D1FDEBDFF00789C91 /* GridListTopBar.swift in Sources */,
 				8C0E8F9E1FDEBDFF00789C91 /* AlbumsRouter.swift in Sources */,
 				8C0E8F9F1FDEBDFF00789C91 /* UICollectionView+Extensions.swift in Sources */,
+				0780AB4527916820000760D9 /* ImageTextSelectionView.swift in Sources */,
 				171090E223FC8E350036A033 /* SmashActionService.swift in Sources */,
 				486F7B58208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				076BD1AC27BBBE2A004609E3 /* MapSearchViewController.swift in Sources */,
@@ -25545,6 +25685,7 @@
 				98570AFB208F7558002CCEBA /* SpotlightViewController.swift in Sources */,
 				B549B6CC24CF099500D39C44 /* Adjustment.swift in Sources */,
 				98B0479B259314740011DAEB /* UIAlertViewCustom.m in Sources */,
+				0780AB3527916820000760D9 /* SelectionGrabberView.swift in Sources */,
 				F081F9C62779138F0064D25C /* DragAndDropItemType.swift in Sources */,
 				B59E1F8D25921F0000640DD1 /* ItemSyncService.swift in Sources */,
 				8C0E8FA61FDEBDFF00789C91 /* AlbumDetailInteractor.swift in Sources */,
@@ -25615,6 +25756,7 @@
 				735766E523AE1B34008589E9 /* StickerCollectionViewCell.swift in Sources */,
 				B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */,
 				CF71466424B597A900D83E60 /* ContactSyncAnalyzeProgressView.swift in Sources */,
+				0780AB5C27916846000760D9 /* LocalTextRecognitionService.swift in Sources */,
 				98C878272074E1C100374177 /* NavigationController.swift in Sources */,
 				98570AFF208F7558002CCEBA /* Spotlight.swift in Sources */,
 				8C0E8FC71FDEBDFF00789C91 /* ActivityTimelineRouter.swift in Sources */,
@@ -25643,6 +25785,7 @@
 				8C0E8FD51FDEBDFF00789C91 /* OTPViewRouterInput.swift in Sources */,
 				8C0E8FD61FDEBDFF00789C91 /* OTPViewConfigurator.swift in Sources */,
 				4A2039C82087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */,
+				0780AB4127916820000760D9 /* ImageTextSelectionIndex.swift in Sources */,
 				982E17C42417A67200B07707 /* AutoSyncCheckBox.swift in Sources */,
 				985B0C572412A0C400C0342C /* AutoSyncDataSource.swift in Sources */,
 				8C0E8FD71FDEBDFF00789C91 /* OTPViewInitializer.swift in Sources */,
@@ -26187,6 +26330,7 @@
 				89CC89F623AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */,
 				CE78486722A685FB00662219 /* LoginModuleInput.swift in Sources */,
 				CE78486822A685FB00662219 /* HomeCollectionViewLayout.swift in Sources */,
+				0780AB2F27916820000760D9 /* RecognizedBlock.swift in Sources */,
 				CE78486922A685FB00662219 /* LoginViewInput.swift in Sources */,
 				989BDE5A22F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				CE78486A22A685FB00662219 /* Device.swift in Sources */,
@@ -26230,6 +26374,7 @@
 				B51B8199254AECEC0072C6FA /* DocumentDownloadService.swift in Sources */,
 				CE78488722A685FB00662219 /* GSMCodeModel.swift in Sources */,
 				CE78488822A685FB00662219 /* FaceImagePhotosModuleOutput.swift in Sources */,
+				0780AB4B27916820000760D9 /* ImageTextSelectionData.swift in Sources */,
 				CE78488922A685FB00662219 /* PlanType.swift in Sources */,
 				CE78488A22A685FB00662219 /* SearchViewInitializer.swift in Sources */,
 				892B015322DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
@@ -26405,6 +26550,7 @@
 				CE78490522A685FB00662219 /* PremiumInteractorInput.swift in Sources */,
 				CE78490622A685FB00662219 /* SharedService.swift in Sources */,
 				98231A4F24F3A23500FD16E2 /* LimeFilter.swift in Sources */,
+				0780AB3327916820000760D9 /* CGPointDistance.swift in Sources */,
 				8C1E5BE822CB8CD4008FDA02 /* SecurityCodeTextField.swift in Sources */,
 				98792DE022FD4D11000A77E5 /* SpotifySortingManager.swift in Sources */,
 				CE78490722A685FB00662219 /* CellsConstant.swift in Sources */,
@@ -26514,6 +26660,7 @@
 				CF71470924B597AA00D83E60 /* ContactListMainView.swift in Sources */,
 				B549B6D624CF09D000D39C44 /* AdjustmentParameter.swift in Sources */,
 				98E4B9F923C71EF0003A4631 /* TrashBinSortingManager.swift in Sources */,
+				0780AB4327916820000760D9 /* ImageTextSelectionIndex.swift in Sources */,
 				98A86D7A23A76F1800438225 /* HiddenPhotosNavbarManager.swift in Sources */,
 				CE78495022A685FB00662219 /* PremiumViewOutput.swift in Sources */,
 				CE78495322A685FB00662219 /* LoginInitializer.swift in Sources */,
@@ -26554,6 +26701,7 @@
 				98C19F532485097900527D76 /* ContactSyncApiService.swift in Sources */,
 				CE78497122A685FB00662219 /* FileForDownload.swift in Sources */,
 				4BE126912304351900BFE06F /* ServerErrors.swift in Sources */,
+				0780AB5627916834000760D9 /* RemoteTextRecognitionService.swift in Sources */,
 				CE78497322A685FB00662219 /* SearchService.swift in Sources */,
 				CE78497422A685FB00662219 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
 				89104BCA22CBA1B4005B3F58 /* PackagePremiumView.swift in Sources */,
@@ -26656,6 +26804,7 @@
 				98B04D9525931F330011DAEB /* TabBarConfigurator.swift in Sources */,
 				CE7849B322A685FB00662219 /* RegistrationInteractor.swift in Sources */,
 				CE7849B422A685FB00662219 /* BottomSelectionTabBarInteractor.swift in Sources */,
+				0780AB232791681F000760D9 /* RecognizedLine.swift in Sources */,
 				CE7849B522A685FB00662219 /* RegistrationRouterInput.swift in Sources */,
 				CE7849B622A685FB00662219 /* StorageVars.swift in Sources */,
 				98435B7C23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */,
@@ -27038,12 +27187,14 @@
 				CE784AC822A685FB00662219 /* DropboxParametrs.swift in Sources */,
 				CF71470324B597A900D83E60 /* ContactListCell.swift in Sources */,
 				CE784ACA22A685FB00662219 /* SingleThumbnailAlbumCell.swift in Sources */,
+				0780AB3727916820000760D9 /* SelectionGrabberView.swift in Sources */,
 				CE784ACB22A685FB00662219 /* CustomErrors.swift in Sources */,
 				CE784ACC22A685FB00662219 /* CircleYellowButton.swift in Sources */,
 				CE784ACD22A685FB00662219 /* PushPopAnimator.swift in Sources */,
 				9816176C2578BA1D009F1C31 /* FirebaseAnalyticsActions.swift in Sources */,
 				B519A677253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				CE784ACE22A685FB00662219 /* HomeCardResponse.swift in Sources */,
+				0780AB3F27916820000760D9 /* ImageTextLayout.swift in Sources */,
 				CE784ACF22A685FB00662219 /* Alamofire+Request.swift in Sources */,
 				CE784AD022A685FB00662219 /* AugmentedRealityDataSource.swift in Sources */,
 				73B623E323C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */,
@@ -27075,6 +27226,7 @@
 				CE784AE422A685FB00662219 /* FaceImagePhotosInitializer.swift in Sources */,
 				0334575523C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */,
 				CE784AE522A685FB00662219 /* BaseFilesGreedViewInput.swift in Sources */,
+				0780AB6227916846000760D9 /* TextRecognitionService.swift in Sources */,
 				CE784AE622A685FB00662219 /* InstaPickSelectionSegmentedView.swift in Sources */,
 				CE784AE822A685FB00662219 /* BaseFilesGreedViewOutput.swift in Sources */,
 				CE784AE922A685FB00662219 /* ImageManager.swift in Sources */,
@@ -27104,6 +27256,7 @@
 				9853CD492361BDD200E19BF7 /* LandingPageViewController.swift in Sources */,
 				CE784AFA22A685FB00662219 /* FaceImageItemsPresenter.swift in Sources */,
 				989BDE4E22F47B1E001DDEB2 /* SpotifyOverwritePopup.swift in Sources */,
+				0780AB2B27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */,
 				CE784AFB22A685FB00662219 /* CheckBoxView.swift in Sources */,
 				CE784AFC22A685FB00662219 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				CE784AFD22A685FB00662219 /* BaseFilesGreedInteractor.swift in Sources */,
@@ -27235,6 +27388,7 @@
 				CE784B5F22A685FB00662219 /* URL+Path.swift in Sources */,
 				F028C1162789F342005CE6AF /* PublicShareModuleInput.swift in Sources */,
 				98231A5524F3A23500FD16E2 /* AweStruckFilter.swift in Sources */,
+				0780AB6627916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
 				3A58C4962636A73500570811 /* InvitationCard.swift in Sources */,
 				CE784B6022A685FB00662219 /* TitleView.swift in Sources */,
 				CE784B6422A685FB00662219 /* PackagesInteractorInput.swift in Sources */,
@@ -27260,6 +27414,7 @@
 				9823196C24F3A1E600FD16E2 /* PreparedFilterCell.swift in Sources */,
 				CE784B7522A685FB00662219 /* ManageContactsViewInput.swift in Sources */,
 				CE784B7722A685FB00662219 /* PremiumConfigurator.swift in Sources */,
+				0780AB272791681F000760D9 /* RecognizedText.swift in Sources */,
 				CE784B7822A685FB00662219 /* SettingsViewInput.swift in Sources */,
 				CE784B7A22A685FB00662219 /* DropboxService.swift in Sources */,
 				CE784B7B22A685FB00662219 /* BaseItemPassingProtocol.swift in Sources */,
@@ -27345,7 +27500,9 @@
 				CE784BB222A685FB00662219 /* LoginSettingsViewIO.swift in Sources */,
 				985E697A255A61FB006F6CD7 /* PrivateShareRoleCheckmarkView.swift in Sources */,
 				98792DE422FD5CD9000A77E5 /* SpotifyImportedPlaylistsNavbarManager.swift in Sources */,
+				0780AB3B27916820000760D9 /* ImageTextHighlightView.swift in Sources */,
 				CE784BB322A685FB00662219 /* FileInfoViewInput.swift in Sources */,
+				0780AB1F2791681F000760D9 /* TextBounds.swift in Sources */,
 				CE784BB422A685FB00662219 /* FileInfoViewOutput.swift in Sources */,
 				CE784BB522A685FB00662219 /* PeopleServiceResponse.swift in Sources */,
 				CE7040B222EB193300124073 /* SupportFormPrefilledController.swift in Sources */,
@@ -27399,6 +27556,7 @@
 				CE784BD522A685FB00662219 /* FaceImageItemsRouterInput.swift in Sources */,
 				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
 				CF7146BB24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
+				0780AB5E27916846000760D9 /* LocalTextRecognitionService.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
 				982706F52548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				A74ADA4E23A38362007DD192 /* CarouselPageModel.swift in Sources */,
@@ -27651,6 +27809,7 @@
 				CE784C8422A685FB00662219 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CE784C8522A685FB00662219 /* ActivityTimelineRouter.swift in Sources */,
 				CE784C8622A685FB00662219 /* ManageContactsModuleOutput.swift in Sources */,
+				0780AB4727916820000760D9 /* ImageTextSelectionView.swift in Sources */,
 				CE784C8722A685FB00662219 /* ActivityTimelineConfigurator.swift in Sources */,
 				B55C97092559353800623C5C /* PrivateShareLocalSuggestionsViewController.swift in Sources */,
 				CE784C8822A685FB00662219 /* ActivityTimelineInitializer.swift in Sources */,
@@ -27678,6 +27837,7 @@
 				0791817B26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,
 				CE784C9822A685FB00662219 /* OTPViewRouterInput.swift in Sources */,
 				98B04858259314750011DAEB /* AbstractHelper.m in Sources */,
+				0780AB5227916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */,
 				CE784C9922A685FB00662219 /* OTPViewConfigurator.swift in Sources */,
 				CE784C9A22A685FB00662219 /* OTPViewInitializer.swift in Sources */,
 				CE784C9B22A685FB00662219 /* FileManager+Size.swift in Sources */,
@@ -27938,6 +28098,7 @@
 				CF8B642723CBC9D70021B021 /* TermsAndPolicyViewController.swift in Sources */,
 				CF8B642823CBC9D70021B021 /* HomePageModuleInput.swift in Sources */,
 				CF8B642923CBC9D70021B021 /* GSMCodeModel.swift in Sources */,
+				0780AB3227916820000760D9 /* CGPointDistance.swift in Sources */,
 				CF8B642A23CBC9D70021B021 /* PlanType.swift in Sources */,
 				CF8B642C23CBC9D70021B021 /* WormholePoster.swift in Sources */,
 				CF8B642D23CBC9D70021B021 /* UIScrollView+Scroll.swift in Sources */,
@@ -28200,6 +28361,7 @@
 				CF8B64F823CBC9D70021B021 /* AuthenticationService.swift in Sources */,
 				CF8B64F923CBC9D70021B021 /* ReachabilityService.swift in Sources */,
 				CF8B64FB23CBC9D70021B021 /* SupportFormPrefilledController.swift in Sources */,
+				0780AB5527916834000760D9 /* RemoteTextRecognitionService.swift in Sources */,
 				CF8B64FC23CBC9D70021B021 /* LoginSettingsRouter.swift in Sources */,
 				CF7146CB24B597A900D83E60 /* BackUpContactsCard.swift in Sources */,
 				CF8B64FE23CBC9D70021B021 /* AutoNextEditingRowPasser.swift in Sources */,
@@ -28244,6 +28406,7 @@
 				98625F2A2580FAAB008627F0 /* MBProgressHud+Extensions.swift in Sources */,
 				CF8B651A23CBC9D70021B021 /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
 				982319B224F3A1E700FD16E2 /* HSLView.swift in Sources */,
+				0780AB4A27916820000760D9 /* ImageTextSelectionData.swift in Sources */,
 				CF8B651B23CBC9D70021B021 /* BaseCollectionViewCell.swift in Sources */,
 				CF8B651C23CBC9D70021B021 /* LoginSettingsInitializer.swift in Sources */,
 				CF8B651D23CBC9D70021B021 /* MyStorageRouter.swift in Sources */,
@@ -28417,6 +28580,7 @@
 				CF8B659F23CBC9D70021B021 /* PermissionsDesigner.swift in Sources */,
 				CF8B65A023CBC9D70021B021 /* IntroduceRouter.swift in Sources */,
 				CF8B65A123CBC9D70021B021 /* SettingsTableViewSwitchCell.swift in Sources */,
+				0780AB3627916820000760D9 /* SelectionGrabberView.swift in Sources */,
 				CF8B65A223CBC9D70021B021 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
 				98231A8324F3A23500FD16E2 /* OldManFilter.swift in Sources */,
 				CF8B65A323CBC9D70021B021 /* MusicViewController.swift in Sources */,
@@ -28428,6 +28592,7 @@
 				CF8B65A923CBC9D70021B021 /* AlertFilesActionsSheetInteractor.swift in Sources */,
 				0305A33323D5C478004D1EC7 /* SmashService.swift in Sources */,
 				CF8B65AA23CBC9D70021B021 /* PeriodicContactSyncViewInput.swift in Sources */,
+				0780AB262791681F000760D9 /* RecognizedText.swift in Sources */,
 				CF8B65AB23CBC9D70021B021 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				CF8B65AC23CBC9D70021B021 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				CF8B65AD23CBC9D70021B021 /* InstapickFreeCell.swift in Sources */,
@@ -28452,6 +28617,7 @@
 				CF8B65BC23CBC9D70021B021 /* ImportPhotosViewOutput.swift in Sources */,
 				CF8B65BD23CBC9D70021B021 /* AccountService.swift in Sources */,
 				CF8B65BE23CBC9D70021B021 /* GridListTopBarSortingTableView.swift in Sources */,
+				0780AB3A27916820000760D9 /* ImageTextHighlightView.swift in Sources */,
 				CF8B65BF23CBC9D70021B021 /* TermsOfUseViewInput.swift in Sources */,
 				CF8B65C023CBC9D70021B021 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				98231A7124F3A23500FD16E2 /* CruzFilter.swift in Sources */,
@@ -28618,6 +28784,7 @@
 				730F8ABB23CDD58900798B61 /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				CF8B663C23CBC9D70021B021 /* TwoFactorChallengeInteractor.swift in Sources */,
 				98231A4724F3A23500FD16E2 /* WhisperFilter.swift in Sources */,
+				0780AB5D27916846000760D9 /* LocalTextRecognitionService.swift in Sources */,
 				CF8B663D23CBC9D70021B021 /* Alamofire+Response.swift in Sources */,
 				CF8B663E23CBC9D70021B021 /* UpdatePasswordErrors.swift in Sources */,
 				CF7145ED24B597A800D83E60 /* ContactListDetailViewController.swift in Sources */,
@@ -28639,6 +28806,7 @@
 				CF8B664A23CBC9D70021B021 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				98231A9524F3A23500FD16E2 /* AmazonFilter.swift in Sources */,
 				B58D36AB2509FF3A00FFF101 /* MTIConvert.swift in Sources */,
+				0780AB1E2791681F000760D9 /* TextBounds.swift in Sources */,
 				CF8B664C23CBC9D70021B021 /* PeriodicContactSyncInteractor.swift in Sources */,
 				CF8B664D23CBC9D70021B021 /* LoginSettingsConfigurator.swift in Sources */,
 				CF8B664E23CBC9D70021B021 /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
@@ -28729,6 +28897,7 @@
 				CF8B669723CBC9D70021B021 /* CardsManagerViewProtocol.swift in Sources */,
 				CF8B669823CBC9D70021B021 /* BaseFilesGreedRouterInput.swift in Sources */,
 				CF8B669923CBC9D70021B021 /* CircleButton.swift in Sources */,
+				0780AB4227916820000760D9 /* ImageTextSelectionIndex.swift in Sources */,
 				985D87F324D0237D004BCDFF /* PhotoEditViewFactory.swift in Sources */,
 				CF8B669A23CBC9D70021B021 /* SecurityCodeTextField.swift in Sources */,
 				CF8B669B23CBC9D70021B021 /* DateExtension.swift in Sources */,
@@ -28740,6 +28909,7 @@
 				CF8B669F23CBC9D70021B021 /* FaceImageAddNameInteractor.swift in Sources */,
 				CF8B66A023CBC9D70021B021 /* FreeAppSpaceInteractor.swift in Sources */,
 				CF8B66A123CBC9D70021B021 /* AppResponsivenessService.swift in Sources */,
+				0780AB2A27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */,
 				CF8B66A223CBC9D70021B021 /* TextInsetsLabel.swift in Sources */,
 				CF8B66A323CBC9D70021B021 /* ActionsMenuTableViewCell.swift in Sources */,
 				CF8B66A423CBC9D70021B021 /* BaseFilesGreedInitializer.swift in Sources */,
@@ -28797,6 +28967,7 @@
 				B589FC5123F1388D00DD528D /* DataChunkProvider.swift in Sources */,
 				CF8B66CA23CBC9D70021B021 /* MusicInitializer.swift in Sources */,
 				CF8B66CB23CBC9D70021B021 /* PhotoVideoDetailViewInput.swift in Sources */,
+				0780AB2E27916820000760D9 /* RecognizedBlock.swift in Sources */,
 				CF8B66CC23CBC9D70021B021 /* PhotoVideoDetailViewOutput.swift in Sources */,
 				CF8B66CD23CBC9D70021B021 /* PhotoVideoDetailViewController.swift in Sources */,
 				CF7146F524B597A900D83E60 /* ContactListViewController.swift in Sources */,
@@ -28846,6 +29017,7 @@
 				CF8B66F023CBC9D70021B021 /* UserInfoSubViewModuleInput.swift in Sources */,
 				981617872578BA3D009F1C31 /* FirebaseAnalyticsLabels.swift in Sources */,
 				CF8B66F123CBC9D70021B021 /* MoreFilesActionsInteractor.swift in Sources */,
+				0780AB4627916820000760D9 /* ImageTextSelectionView.swift in Sources */,
 				CF8B66F223CBC9D70021B021 /* BaseDataSourceItem.swift in Sources */,
 				CF8B66F323CBC9D70021B021 /* UserInfoSubViewPresenter.swift in Sources */,
 				CF8B66F423CBC9D70021B021 /* UserInfoSubViewInteractorInput.swift in Sources */,
@@ -28963,6 +29135,7 @@
 				CF8B675623CBC9D70021B021 /* MyStorageRouterInput.swift in Sources */,
 				CF8B675723CBC9D70021B021 /* SettingsConfigurator.swift in Sources */,
 				B51D959024D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */,
+				0780AB6127916846000760D9 /* TextRecognitionService.swift in Sources */,
 				CF8B675823CBC9D70021B021 /* InstaPickPhotoView.swift in Sources */,
 				985E6978255A61FB006F6CD7 /* PrivateShareRoleCheckmarkView.swift in Sources */,
 				CF8B675923CBC9D70021B021 /* SettingsInitializer.swift in Sources */,
@@ -29021,6 +29194,7 @@
 				98435B7A23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */,
 				CF8B678023CBC9D70021B021 /* SplashConfigurator.swift in Sources */,
 				CF8B678123CBC9D70021B021 /* UsageInfoRouterInput.swift in Sources */,
+				0780AB6527916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
 				CF8B678223CBC9D70021B021 /* CreateStoryPreviewRouter.swift in Sources */,
 				CF8B678323CBC9D70021B021 /* SplashInitializer.swift in Sources */,
 				CF8B678423CBC9D70021B021 /* LeavePremiumRouter.swift in Sources */,
@@ -29125,6 +29299,7 @@
 				CF8B67CD23CBC9D70021B021 /* UIColor+Adjust.swift in Sources */,
 				CF8B67CE23CBC9D70021B021 /* UIBarButtonItem+Extensions.swift in Sources */,
 				CF8B67CF23CBC9D70021B021 /* SelectFolderViewController.swift in Sources */,
+				0780AB3E27916820000760D9 /* ImageTextLayout.swift in Sources */,
 				CF8B67D023CBC9D70021B021 /* SelectFolderPresenter.swift in Sources */,
 				CF8B67D123CBC9D70021B021 /* AlbumCollectionViewCell.swift in Sources */,
 				CF8B67D223CBC9D70021B021 /* SelectFolderInitializer.swift in Sources */,
@@ -29304,6 +29479,7 @@
 				CF8B685223CBC9D70021B021 /* UploadFromLifeBoxRouter.swift in Sources */,
 				07D0594526F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
 				CF8B685323CBC9D70021B021 /* BaseViewController.swift in Sources */,
+				0780AB5127916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */,
 				CF8B685423CBC9D70021B021 /* FreeAppSpacePresenter.swift in Sources */,
 				98231A5F24F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
 				CF8B685523CBC9D70021B021 /* FeedbackViewInteractorInput.swift in Sources */,
@@ -29354,6 +29530,7 @@
 				CF8B687823CBC9D70021B021 /* OTPViewPresenter.swift in Sources */,
 				CF8B687923CBC9D70021B021 /* OTPViewModuleInput.swift in Sources */,
 				CF8B687A23CBC9D70021B021 /* CampaignContestInfoView.swift in Sources */,
+				0780AB222791681F000760D9 /* RecognizedLine.swift in Sources */,
 				CF8B687B23CBC9D70021B021 /* CollectionViewHeaderWithText.swift in Sources */,
 				CF8B687C23CBC9D70021B021 /* OTPViewInteractor.swift in Sources */,
 				98231A0624F3A1E700FD16E2 /* SliderView.swift in Sources */,
@@ -29541,6 +29718,7 @@
 				CF8B6BB923CBCA280021B021 /* LoginModuleInput.swift in Sources */,
 				CF8B6BBA23CBCA280021B021 /* HomeCollectionViewLayout.swift in Sources */,
 				CF8B6BBB23CBCA280021B021 /* LoginViewInput.swift in Sources */,
+				0780AB3027916820000760D9 /* RecognizedBlock.swift in Sources */,
 				CF8B6BBC23CBCA280021B021 /* SpotifyImportViewController.swift in Sources */,
 				0305A33923D5C4D9004D1EC7 /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				CF8B6BBD23CBCA280021B021 /* Device.swift in Sources */,
@@ -29584,6 +29762,7 @@
 				CF8B6BDB23CBCA280021B021 /* GSMCodeModel.swift in Sources */,
 				CF8B6BDC23CBCA280021B021 /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CF8B6BDD23CBCA280021B021 /* PlanType.swift in Sources */,
+				0780AB4C27916820000760D9 /* ImageTextSelectionData.swift in Sources */,
 				CF8B6BDE23CBCA280021B021 /* SearchViewInitializer.swift in Sources */,
 				CF8B6BDF23CBCA280021B021 /* TwoFactorChallengePresenter.swift in Sources */,
 				CF8B6BE023CBCA280021B021 /* OperationProgressService.swift in Sources */,
@@ -29759,6 +29938,7 @@
 				CF8B6C6723CBCA280021B021 /* GradientView.swift in Sources */,
 				CF8B6C6823CBCA280021B021 /* FaceImagePhotosViewInput.swift in Sources */,
 				98231A5024F3A23500FD16E2 /* LimeFilter.swift in Sources */,
+				0780AB3427916820000760D9 /* CGPointDistance.swift in Sources */,
 				CF8B6C6923CBCA280021B021 /* ImportPhotosRouterInput.swift in Sources */,
 				CF8B6C6A23CBCA280021B021 /* ProtoInputTextCell.swift in Sources */,
 				CF8B6C6B23CBCA280021B021 /* RemoteSearchService.swift in Sources */,
@@ -29868,6 +30048,7 @@
 				CF71470A24B597AA00D83E60 /* ContactListMainView.swift in Sources */,
 				B549B6D724CF09D000D39C44 /* AdjustmentParameter.swift in Sources */,
 				CF8B6CBB23CBCA280021B021 /* FaceImageItemsRouter.swift in Sources */,
+				0780AB4427916820000760D9 /* ImageTextSelectionIndex.swift in Sources */,
 				CF8B6CBC23CBCA280021B021 /* SupportFormSubjectType.swift in Sources */,
 				CF8B6CBD23CBCA280021B021 /* QuickSelectGestureRecognizer.swift in Sources */,
 				CF8B6CBE23CBCA280021B021 /* Factory.swift in Sources */,
@@ -29908,6 +30089,7 @@
 				0305A34323D5C562004D1EC7 /* TrashBinRouter.swift in Sources */,
 				98C19F542485097900527D76 /* ContactSyncApiService.swift in Sources */,
 				CF8B6CDB23CBCA280021B021 /* AutoSyncInteractorInput.swift in Sources */,
+				0780AB5727916834000760D9 /* RemoteTextRecognitionService.swift in Sources */,
 				CF8B6CDC23CBCA280021B021 /* CustomNavBarButton.swift in Sources */,
 				CF8B6CDD23CBCA280021B021 /* LeavePremiumConfigurator.swift in Sources */,
 				CF8B6CDE23CBCA280021B021 /* UserProfileViewOutput.swift in Sources */,
@@ -30010,6 +30192,7 @@
 				CF8B6D2A23CBCA280021B021 /* StorageVars.swift in Sources */,
 				98B04D9625931F330011DAEB /* TabBarConfigurator.swift in Sources */,
 				CF8B6D2B23CBCA280021B021 /* RegistrationRouter.swift in Sources */,
+				0780AB242791681F000760D9 /* RecognizedLine.swift in Sources */,
 				CF8B6D2C23CBCA280021B021 /* CampaignIntroView.swift in Sources */,
 				CF8B6D2D23CBCA280021B021 /* ArrayExtension.swift in Sources */,
 				CF8B6D2E23CBCA280021B021 /* SpringLabel.swift in Sources */,
@@ -30392,12 +30575,14 @@
 				CF8B6E4D23CBCA280021B021 /* SingleThumbnailAlbumCell.swift in Sources */,
 				CF71470424B597A900D83E60 /* ContactListCell.swift in Sources */,
 				CF8B6E4E23CBCA280021B021 /* CustomErrors.swift in Sources */,
+				0780AB3827916820000760D9 /* SelectionGrabberView.swift in Sources */,
 				CF8B6E4F23CBCA280021B021 /* CircleYellowButton.swift in Sources */,
 				CF8B6E5023CBCA280021B021 /* PushPopAnimator.swift in Sources */,
 				CF8B6E5123CBCA280021B021 /* HomeCardResponse.swift in Sources */,
 				9816176D2578BA1D009F1C31 /* FirebaseAnalyticsActions.swift in Sources */,
 				B519A678253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				985786F623E01F8800D35DDA /* SettingFooterView.swift in Sources */,
+				0780AB4027916820000760D9 /* ImageTextLayout.swift in Sources */,
 				CF8B6E5223CBCA280021B021 /* Alamofire+Request.swift in Sources */,
 				CF8B6E5323CBCA280021B021 /* AugmentedRealityDataSource.swift in Sources */,
 				CF8B6E5423CBCA280021B021 /* AuthorizationURLs.swift in Sources */,
@@ -30429,6 +30614,7 @@
 				CF8B6E6923CBCA280021B021 /* FaceImagePhotosInitializer.swift in Sources */,
 				CF8B6E6A23CBCA280021B021 /* BaseFilesGreedViewInput.swift in Sources */,
 				CF8B6E6B23CBCA280021B021 /* InstaPickSelectionSegmentedView.swift in Sources */,
+				0780AB6327916846000760D9 /* TextRecognitionService.swift in Sources */,
 				CF8B6E6D23CBCA280021B021 /* BaseFilesGreedViewOutput.swift in Sources */,
 				CF8B6E6E23CBCA280021B021 /* ImageManager.swift in Sources */,
 				CF8B6E6F23CBCA280021B021 /* SubscriptionPlan.swift in Sources */,
@@ -30458,6 +30644,7 @@
 				CF8B6E8023CBCA280021B021 /* FaceImageItemsPresenter.swift in Sources */,
 				CF8B6E8123CBCA280021B021 /* SpotifyOverwritePopup.swift in Sources */,
 				CF8B6E8223CBCA280021B021 /* CheckBoxView.swift in Sources */,
+				0780AB2C27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */,
 				CF8B6E8323CBCA280021B021 /* AlertFilesActionsSheetPresenterModuleInitialiser.swift in Sources */,
 				CF8B6E8423CBCA280021B021 /* BaseFilesGreedInteractor.swift in Sources */,
 				CF8B6E8523CBCA280021B021 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
@@ -30589,6 +30776,7 @@
 				CF8B6EEE23CBCA280021B021 /* ConnectedAccountsViewController.swift in Sources */,
 				F028C1172789F342005CE6AF /* PublicShareModuleInput.swift in Sources */,
 				0305A32923D5C3BF004D1EC7 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
+				0780AB6727916846000760D9 /* TextRecognitionProcessor.swift in Sources */,
 				3A58C4CF2636A74900570811 /* InvitationCard.swift in Sources */,
 				98231A5624F3A23500FD16E2 /* AweStruckFilter.swift in Sources */,
 				CF8B6EEF23CBCA280021B021 /* SearchViewConfigurator.swift in Sources */,
@@ -30614,6 +30802,7 @@
 				CF8B6F0223CBCA280021B021 /* PremiumConfigurator.swift in Sources */,
 				9823196D24F3A1E600FD16E2 /* PreparedFilterCell.swift in Sources */,
 				CF8B6F0323CBCA280021B021 /* SettingsViewInput.swift in Sources */,
+				0780AB282791681F000760D9 /* RecognizedText.swift in Sources */,
 				0305A2FB23D5C230004D1EC7 /* OverlayStickerImageView.swift in Sources */,
 				CF8B6F0523CBCA280021B021 /* DropboxService.swift in Sources */,
 				CF8B6F0623CBCA280021B021 /* BaseItemPassingProtocol.swift in Sources */,
@@ -30699,7 +30888,9 @@
 				985E697B255A61FB006F6CD7 /* PrivateShareRoleCheckmarkView.swift in Sources */,
 				CF8B6F4123CBCA280021B021 /* LoginSettingsViewIO.swift in Sources */,
 				CF8B6F4223CBCA280021B021 /* SpotifyImportedPlaylistsNavbarManager.swift in Sources */,
+				0780AB3C27916820000760D9 /* ImageTextHighlightView.swift in Sources */,
 				CF8B6F4323CBCA280021B021 /* FileInfoViewInput.swift in Sources */,
+				0780AB202791681F000760D9 /* TextBounds.swift in Sources */,
 				CF8B6F4423CBCA280021B021 /* FileInfoViewOutput.swift in Sources */,
 				CF8B6F4523CBCA280021B021 /* PeopleServiceResponse.swift in Sources */,
 				CF8B6F4623CBCA280021B021 /* SupportFormPrefilledController.swift in Sources */,
@@ -30753,6 +30944,7 @@
 				CF8B6F7023CBCA280021B021 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				CF8B6F7123CBCA280021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				CF7146BC24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
+				0780AB5F27916846000760D9 /* LocalTextRecognitionService.swift in Sources */,
 				CF8B6F7223CBCA280021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
 				982706F62548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				CF8B6F7323CBCA280021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
@@ -31005,6 +31197,7 @@
 				CF8B703323CBCA280021B021 /* ActivityTimelineRouter.swift in Sources */,
 				0305A2F423D5C18C004D1EC7 /* HiddenService.swift in Sources */,
 				CF8B703423CBCA280021B021 /* ManageContactsModuleOutput.swift in Sources */,
+				0780AB4827916820000760D9 /* ImageTextSelectionView.swift in Sources */,
 				B55C970A2559353800623C5C /* PrivateShareLocalSuggestionsViewController.swift in Sources */,
 				CF8B703523CBCA280021B021 /* ActivityTimelineConfigurator.swift in Sources */,
 				03135F4223F1964B0088E8BB /* AnalyticsPermissionNetmeraEvent.swift in Sources */,
@@ -31032,6 +31225,7 @@
 				CF8B704523CBCA280021B021 /* OTPViewRouter.swift in Sources */,
 				98B04859259314750011DAEB /* AbstractHelper.m in Sources */,
 				CF8B704623CBCA280021B021 /* OTPViewRouterInput.swift in Sources */,
+				0780AB5327916834000760D9 /* RemoteTextRecognitionModels.swift in Sources */,
 				CF8B704723CBCA280021B021 /* OTPViewConfigurator.swift in Sources */,
 				F0CDA6AB277605F50026C1C4 /* DarkModeViewController.swift in Sources */,
 				CF8B704823CBCA280021B021 /* OTPViewInitializer.swift in Sources */,

@@ -476,4 +476,6 @@ struct RouteRequests {
     // MARK: - Map
     static let map = "map/%f,%f/%f,%f/%d"
     static let mapList = "map/list/%@?page=%d&size=%d"
+
+    static let ocrProcess = baseUrl +/ "ocr/process"
 }
