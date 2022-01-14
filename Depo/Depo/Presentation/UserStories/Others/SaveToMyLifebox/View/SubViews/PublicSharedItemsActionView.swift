@@ -28,8 +28,8 @@ class PublicSharedItemsActionView: UIView, NibInit {
     @IBOutlet weak var saveToMyLifeboxButton: UIButton! {
         willSet {
             newValue.setTitle("Save To My Lifebox",for:.normal)
-            newValue.setTitleColor(.white, for: .normal)
-            newValue.setTitleColor(.white.darker(by: 30), for: .highlighted)
+            newValue.setTitleColor(UIColor.white, for: .normal)
+            newValue.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
             newValue.layer.cornerRadius = 20
             newValue.backgroundColor = AppColor.darkBlueAndTealish.color
             newValue.adjustsFontSizeToFitWidth()
@@ -46,7 +46,7 @@ class PublicSharedItemsActionView: UIView, NibInit {
             newValue.layer.cornerRadius = 20
             newValue.layer.borderColor = ColorConstants.navy.cgColor
             newValue.layer.borderWidth = 1
-            newValue.backgroundColor = .white
+            newValue.backgroundColor = UIColor.white
             newValue.adjustsFontSizeToFitWidth()
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         }
