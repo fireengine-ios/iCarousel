@@ -39,4 +39,8 @@ protocol HomePageInteractorOutput: AnyObject {
     func hideSpinner()
     
     func showSnackBarWith(message: String)
-}
+    
+    func publicShareSaveSuccess()
+    
+    func publicShareSaveFail(message: String)
+    }

@@ -45,4 +45,6 @@ protocol HomePageRouterInput {
     func presentSuccessMobilePaymentPopUp()
 
     func moveToReferance()
+    
+    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int?)
 }

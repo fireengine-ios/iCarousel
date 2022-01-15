@@ -85,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     @available(iOS 13.0, *)
     private lazy var backgroundSyncService = BackgroundSyncService.shared
+    private lazy var storageVars: StorageVars = factory.resolve()
 
     var window: UIWindow?
     var watchdog: Watchdog?
@@ -364,6 +365,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AutoSyncDataStorage().clear()
         }
         
+        storageVars.publicSharedItemsToken = nil
         WidgetService.shared.notifyWidgetAbout(status: .stopped)
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
@@ -430,7 +432,6 @@ extension AppDelegate {
 
     func overrideApplicationThemeStyle() {
         if #available(iOS 13.0, *) {
-            let storageVars: StorageVars = factory.resolve()
             if let isDarkModeEnabled = storageVars.isDarkModeEnabled {
                 if isDarkModeEnabled {
                     window?.overrideUserInterfaceStyle = .dark

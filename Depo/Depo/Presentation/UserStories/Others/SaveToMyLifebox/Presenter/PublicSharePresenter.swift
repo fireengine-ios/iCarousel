@@ -20,6 +20,10 @@ class PublicSharePresenter: BasePresenter, PublicShareModuleInput {
 }
 
 extension PublicSharePresenter: PublicShareViewOutput {
+    func popViewController() {
+        router.popToRoot()
+    }
+    
     func fetchMoreIfNeeded() {
         interactor.fetchMoreIfNeeded()
     }
@@ -32,15 +36,26 @@ extension PublicSharePresenter: PublicShareViewOutput {
         interactor.fetchData()
     }
     
-    func savePublicSharedItems() {
-        interactor.savePublicSharedItems()
+    func onSaveButton(isLoggedIn: Bool) {
+        if isLoggedIn {
+            interactor.savePublicSharedItems()
+        } else {
+            router.navigateToOnboarding()
+        }
     }
 }
 
 extension PublicSharePresenter: PublicShareInteractorOutput {
+    func saveOperationFail(errorMessage: String) {
+        router.popToRoot()
+        view.saveOpertionFail(errorMessage: errorMessage)
+        router.navigateToAllFiles()
+    }
+    
     func saveOperationSuccess() {
         router.popToRoot()
         view.saveOperationSuccess()
+        router.navigateToAllFiles()
         asyncOperationSuccess()
     }
     
@@ -49,12 +64,9 @@ extension PublicSharePresenter: PublicShareInteractorOutput {
         asyncOperationSuccess()
     }
     
-    func operationFailedWithError(errorMessage: String, needReturn: Bool) {
-        if needReturn {
-            router.popToRoot()
-        }
+    func operationFailedWithError(errorMessage: String) {
+        router.popToRoot()
         asyncOperationFail(errorMessage: errorMessage)
-        UIApplication.showErrorAlert(message: errorMessage)
     }
     
     func startProgress() {

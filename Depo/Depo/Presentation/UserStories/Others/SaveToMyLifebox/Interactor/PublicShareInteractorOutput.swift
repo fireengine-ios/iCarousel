@@ -11,6 +11,7 @@ import Foundation
 protocol PublicShareInteractorOutput: AnyObject {
     func operationSuccess(with items: [SharedFileInfo])
     func startProgress()
-    func operationFailedWithError(errorMessage: String, needReturn: Bool)
+    func operationFailedWithError(errorMessage: String)
     func saveOperationSuccess()
+    func saveOperationFail(errorMessage: String)
 }

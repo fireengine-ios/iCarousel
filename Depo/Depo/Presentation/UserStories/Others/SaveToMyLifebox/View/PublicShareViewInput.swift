@@ -11,4 +11,5 @@ import Foundation
 protocol PublicShareViewInput: AnyObject, Waiting {
     func didGetSharedItems(items: [SharedFileInfo])
     func saveOperationSuccess()
+    func saveOpertionFail(errorMessage: String)
 }

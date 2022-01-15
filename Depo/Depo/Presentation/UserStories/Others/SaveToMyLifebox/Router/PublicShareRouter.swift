@@ -20,4 +20,13 @@ class PublicShareRouter: PublicShareRouterInput {
     func popToRoot() {
         router.popToRootViewController()
     }
+    
+    func navigateToOnboarding() {
+        let onboarding = router.onboardingScreen
+        router.setNavigationController(controller: onboarding)
+    }
+    
+    func navigateToAllFiles() {
+        router.openTabBarItem(index: .documents, segmentIndex: 0)
+    }
 }

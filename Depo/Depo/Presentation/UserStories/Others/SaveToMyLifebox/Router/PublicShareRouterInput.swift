@@ -11,4 +11,6 @@ import Foundation
 protocol PublicShareRouterInput: AnyObject {
     func onSelect(item: WrapData)
     func popToRoot()
+    func navigateToOnboarding()
+    func navigateToAllFiles()
 }

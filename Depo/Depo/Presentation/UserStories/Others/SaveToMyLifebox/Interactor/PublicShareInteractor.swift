@@ -38,7 +38,7 @@ class PublicShareInteractor: PublicShareInteractorInput {
                 }
                 self.output.operationSuccess(with: items)
             case .failed(let error):
-                self.output.operationFailedWithError(errorMessage: error.description, needReturn: true)
+                self.output.operationFailedWithError(errorMessage: error.description)
             }
         }
     }
@@ -55,7 +55,7 @@ class PublicShareInteractor: PublicShareInteractorInput {
                 }
                 self.output.operationSuccess(with: items)
             case .failed(let error):
-                self.output.operationFailedWithError(errorMessage: error.description, needReturn: true)
+                self.output.operationFailedWithError(errorMessage: error.description)
             }
         }
     }
@@ -65,8 +65,13 @@ class PublicShareInteractor: PublicShareInteractorInput {
 
         PublicSharedItemsService().savePublicSharedItems(publicToken: publicToken ?? "") { value in
             self.output.saveOperationSuccess()
+            ItemOperationManager.default.publicShareItemsAdded()
         } fail: { error in
-            self.output.operationFailedWithError(errorMessage: error.description, needReturn: false)
+            if error.errorCode == 400 {
+                self.output.saveOperationFail(errorMessage: "Kendi hesabınıza save yapamazsınız")
+            } else {
+                self.output.saveOperationFail(errorMessage: error.errorDescription ?? "")
+            }
         }
     }
 }

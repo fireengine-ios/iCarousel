@@ -2094,6 +2094,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             (cell as? CollectionViewCellDataProtocol)?.cleanCell()
         }
     }
+    
+    func publicSharedItemsAdded() {
+        delegate?.needReloadData()
+    }
 }
 
 extension BaseDataSourceForCollectionView {

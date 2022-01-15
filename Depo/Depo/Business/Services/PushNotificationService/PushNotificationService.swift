@@ -117,7 +117,16 @@ final class PushNotificationService {
 
     private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
         let isLoggedIn = tokenStorage.accessToken != nil
-        let actionRequiresLogin = !action.isContained(in: [.login, .supportFormLogin, .supportFormSignup])
+        
+        var loginRequiresActions: [PushNotificationAction] = [.login, .supportFormLogin, .supportFormSignup]
+        
+        if storageVars.isAppFirstLaunchForPublicSharedItems != true {
+            loginRequiresActions.append(.saveToMyLifebox)
+        }
+        storageVars.isAppFirstLaunchForPublicSharedItems = false
+        
+        let actionRequiresLogin = !action.isContained(in: loginRequiresActions)
+        
         if !isLoggedIn && actionRequiresLogin {
             pendingAction = action.rawValue
             pendingActionOptions = options
@@ -147,7 +156,10 @@ final class PushNotificationService {
         trackIfNeeded(action: action)
         
         let isLoggedIn = tokenStorage.accessToken != nil
-        if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
+        
+        if !isLoggedIn && action.isContained(in: [.saveToMyLifebox]) {
+            action = .saveToMyLifebox
+        } else if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
         }
         
@@ -642,6 +654,19 @@ private extension PushNotificationService {
     
     func openSaveToMyLifebox() {
         guard let publicToken = storageVars.value(forDeepLinkParameter: .publicToken) as? String else { return }
-        pushTo(router.publicSharedItems(with: publicToken))
+        let vc = router.publicSharedItems(with: publicToken)
+        
+        if isExistingViewController(controller: vc as! ViewController) {
+            router.popViewController()
+            pushTo(vc)
+        } else {
+            pushTo(vc)
+        }
+        
+        //to handle public shared items save operation after login
+        if tokenStorage.accessToken == nil {
+            storageVars.publicSharedItemsToken = publicToken
+            clear()
+        }
     }
 }

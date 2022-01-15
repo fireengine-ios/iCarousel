@@ -10,5 +10,6 @@ protocol PublicShareViewOutput: AnyObject {
     func viewIsReady()
     func fetchMoreIfNeeded()
     func onSelect(item: WrapData)
-    func savePublicSharedItems()
+    func onSaveButton(isLoggedIn: Bool)
+    func popViewController()
 }

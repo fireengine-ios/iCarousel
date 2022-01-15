@@ -14,10 +14,12 @@ class PublicShareViewController: ViewController, ControlTabBarProtocol {
     @IBOutlet private weak var tableView: UITableView!
     
     //MARK: -Properties
+    private let actionView = PublicSharedItemsActionView.initFromNib()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private var isLoading: Bool = false
     var output: PublicShareViewOutput!
     var mainTitle: String?
-    private let actionView = PublicSharedItemsActionView.initFromNib()
-    private var isLoading: Bool = false
+    var isMainFolder: Bool?
 
     private var dataSource: [WrapData] = [] {
         didSet {
@@ -47,11 +49,17 @@ class PublicShareViewController: ViewController, ControlTabBarProtocol {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.contentInset.bottom = actionView.frame.size.height
+        tableView.tableFooterView = UIView()
     }
     
     private func configureUI() {
         self.setTitle(withString: self.mainTitle ?? "")
         navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
+        if isMainFolder == true {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancel,
+                                                               target: self,
+                                                               selector: #selector(onCancelTapped))
+        }
 
         view.addSubview(actionView)
         actionView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +67,13 @@ class PublicShareViewController: ViewController, ControlTabBarProtocol {
         actionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
         actionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
         actionView.heightAnchor.constraint(equalToConstant: NumericConstants.saveToMyLifeboxActionViewHeight).activate()
+    }
+    
+    @objc private func onCancelTapped() {
+        if tokenStorage.accessToken == nil {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+        output.popViewController()
     }
 }
 
@@ -74,6 +89,10 @@ extension PublicShareViewController: PublicShareViewInput {
             let wrapData = WrapData(privateShareFileInfo: item)
             dataSource.append(wrapData)
         }
+    }
+    
+    func saveOpertionFail(errorMessage: String) {
+        SnackbarManager.shared.show(type: .nonCritical, message: errorMessage)
     }
 }
 
@@ -123,6 +142,6 @@ extension PublicShareViewController: PublicSharedItemsActionViewDelegate {
     }
     
     func saveToMyLifeboxButtonDidTapped() {
-        output.savePublicSharedItems()
+        output.onSaveButton(isLoggedIn: tokenStorage.accessToken != nil)
     }
 }

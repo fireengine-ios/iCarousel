@@ -217,6 +217,11 @@ final class HomePageRouter: HomePageRouterInput {
         analyticsService.logScreen(screen: .mobilePaymentPermission)
     }
     
+    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
+        router.openTabBarItem(index: index, segmentIndex: segmentIndex)
+    }
+
+    
     private func trackGAEvent(eventLabel: GAEventLabel) {
         self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .mobilePaymentPermission, eventLabel: eventLabel)
     }
