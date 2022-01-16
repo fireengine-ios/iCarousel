@@ -63,7 +63,7 @@ class PublicShareViewController: ViewController, ControlTabBarProtocol {
 
         view.addSubview(actionView)
         actionView.translatesAutoresizingMaskIntoConstraints = false
-        actionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        actionView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).activate()
         actionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
         actionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
         actionView.heightAnchor.constraint(equalToConstant: NumericConstants.saveToMyLifeboxActionViewHeight).activate()

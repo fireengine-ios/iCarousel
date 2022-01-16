@@ -658,10 +658,8 @@ private extension PushNotificationService {
         
         if isExistingViewController(controller: vc as! ViewController) {
             router.popViewController()
-            pushTo(vc)
-        } else {
-            pushTo(vc)
         }
+        pushTo(vc)
         
         //to handle public shared items save operation after login
         if tokenStorage.accessToken == nil {

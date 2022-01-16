@@ -298,7 +298,7 @@ final class HomePageInteractor: HomePageInteractorInput {
             self.output.publicShareSaveSuccess()
             ItemOperationManager.default.publicShareItemsAdded()
         } fail: { error in
-            self.output.publicShareSaveFail(message: error.localizedDescription ?? "")
+            self.output.publicShareSaveFail(message: error.errorDescription ?? "")
         }
     }
 }

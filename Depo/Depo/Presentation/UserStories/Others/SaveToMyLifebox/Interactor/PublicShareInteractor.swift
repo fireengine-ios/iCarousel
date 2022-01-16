@@ -67,11 +67,7 @@ class PublicShareInteractor: PublicShareInteractorInput {
             self.output.saveOperationSuccess()
             ItemOperationManager.default.publicShareItemsAdded()
         } fail: { error in
-            if error.errorCode == 400 {
-                self.output.saveOperationFail(errorMessage: "Kendi hesabınıza save yapamazsınız")
-            } else {
-                self.output.saveOperationFail(errorMessage: error.errorDescription ?? "")
-            }
+            self.output.saveOperationFail(errorMessage: error.errorDescription ?? "")
         }
     }
 }

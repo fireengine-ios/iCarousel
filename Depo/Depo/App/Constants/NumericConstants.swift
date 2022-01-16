@@ -181,7 +181,7 @@ struct NumericConstants {
     static let addressCharacterLimit: Int = 1024
     
     static let saveToMyLifeboxCellHeight: CGFloat = 62
-    static let saveToMyLifeboxActionViewHeight: CGFloat = 120
+    static let saveToMyLifeboxActionViewHeight: CGFloat = 140
 }
 
 struct RequestSizeConstant {
