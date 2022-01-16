@@ -16,6 +16,7 @@ class PublicShareViewController: ViewController, ControlTabBarProtocol {
     //MARK: -Properties
     private let actionView = PublicSharedItemsActionView.initFromNib()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private lazy var storageVars: StorageVars = factory.resolve()
     private var isLoading: Bool = false
     var output: PublicShareViewOutput!
     var mainTitle: String?
@@ -73,6 +74,7 @@ class PublicShareViewController: ViewController, ControlTabBarProtocol {
         if tokenStorage.accessToken == nil {
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
+        storageVars.publicSharedItemsToken = nil
         output.popViewController()
     }
 }
