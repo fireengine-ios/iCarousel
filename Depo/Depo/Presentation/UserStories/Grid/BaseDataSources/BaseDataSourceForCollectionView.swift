@@ -182,6 +182,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
 
     private let storageVars: StorageVars = factory.resolve()
     
+    private var isDragAndDropUpload: Bool?
     
     init(sortingRules: SortedRules = .timeUp) {
         self.sortingRules = sortingRules
@@ -1933,6 +1934,10 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func fileAddedToAlbum(item: WrapData, error: Bool) {
+        if isDragAndDropUpload == true {
+            return
+        }
+        
         guard let unwrapedFilters = originalFilters,
             isAlbumDetail(filters: unwrapedFilters) else {
                 return
@@ -1943,6 +1948,17 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if uploadToAlbumItems.isEmpty {
             delegate?.needReloadData()
             updateCoverPhoto()
+        }
+    }
+    
+    func startUploadDragAndDrop() {
+        isDragAndDropUpload = true
+    }
+    
+    func dragAndDropItemUploaded() {
+        /// we need delay for server update
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.delegate?.needReloadData()
         }
     }
     

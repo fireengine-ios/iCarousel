@@ -101,6 +101,10 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     func didLeaveShareItem(uuid: String)
     func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String)
     func didRemove(contact: SharedContact, fromItem uuid: String)
+    
+    func startUploadDragAndDrop()
+    func dragAndDropItemUploaded()
+    
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -202,6 +206,9 @@ extension ItemOperationManagerViewProtocol {
     func didLeaveShareItem(uuid: String) {}
     func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {}
     func didRemove(contact: SharedContact, fromItem uuid: String) {}
+    
+    func startUploadDragAndDrop() {}
+    func dragAndDropItemUploaded() {}
 }
 
 
@@ -592,6 +599,18 @@ class ItemOperationManager: NSObject {
     func updatedPersonThumbnail(item: BaseDataSourceItem) {
         DispatchQueue.main.async {
             self.views.invoke { $0.updatedPersonThumbnail(item: item) }
+        }
+    }
+    
+    func startUploadDragAndDrop() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.startUploadDragAndDrop() }
+        }
+    }
+    
+    func didUploadDragAndDropItem() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.dragAndDropItemUploaded() }
         }
     }
 }

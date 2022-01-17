@@ -926,6 +926,13 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     func didUnhideItems(_ items: [WrapData]) {
         stopEditingMode()
     }
+    
+    func dragAndDropItemUploaded() {
+        ///delay for getting items from server
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.updateDB()
+        }
+    }
 }
 
 extension PhotoVideoController {
