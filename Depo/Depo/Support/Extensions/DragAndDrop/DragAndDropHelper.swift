@@ -36,12 +36,18 @@ class DragAndDropHelper {
             debugLog("No items to drop")
             return
         }
+        
+        ItemOperationManager.default.startUploadDragAndDrop()
 
         UploadService.default.uploadFileList(
             items: items, uploadType: .upload, uploadStategy: .WithoutConflictControl,
             uploadTo: .MOBILE_UPLOAD, folder: albumUUID ?? "", isFavorites: false,
             isFromAlbum: albumUUID != nil, isFromCamera: false, projectId: nil,
-            success: {}, fail: { _ in }, returnedUploadOperation: { _ in}
+            success: {
+                ItemOperationManager.default.didUploadDragAndDropItem()
+            }, fail: { _ in
+                debugLog("Drag and drop item upload operation failed")
+            }, returnedUploadOperation: { _ in }
         )
     }
 }
