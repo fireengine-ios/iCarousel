@@ -38,6 +38,24 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         return (viewController, presenter)
     }
     
+    class func initializePublicSharedItem(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], status: ItemStatus, canLoadMoreItems: Bool) -> PhotoVideoDetailModule {
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [],
+                                               style: .blackOpaque, tintColor: nil)
+        
+        let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
+        let configurator = PhotoVideoDetailModuleConfigurator()
+        let presenter = PhotoVideoDetailPresenter()
+        configurator.configureModulePublicSharedItem(viewInput: viewController,
+                                                 presenter: presenter,
+                                                 moduleOutput: moduleOutput,
+                                                 bottomBarConfig: bottomBarConfig,
+                                                 selecetedItem: selectedItem,
+                                                 allItems: allItems,
+                                                 status: status,
+                                                 canLoadMoreItems: canLoadMoreItems)
+        return (viewController, presenter)
+    }
+    
     class func initializeAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, status: ItemStatus) -> PhotoVideoDetailModule {
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideAlbum)
         

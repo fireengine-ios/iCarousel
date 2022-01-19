@@ -12,4 +12,5 @@ protocol PublicShareViewOutput: AnyObject {
     func onSelect(item: WrapData)
     func onSaveButton(isLoggedIn: Bool)
     func popViewController()
+    func onSelect(item: WrapData, items: [WrapData])
 }

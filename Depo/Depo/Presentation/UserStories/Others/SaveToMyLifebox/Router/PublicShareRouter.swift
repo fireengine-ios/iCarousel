@@ -17,6 +17,17 @@ class PublicShareRouter: PublicShareRouterInput {
         router.pushViewController(viewController: controller, animated: true)
     }
     
+    func onSelect(item: WrapData, items: [WrapData]) {
+        let detailModule = self.router.filesDetailPublicSharedItemModule(fileObject: item,
+                                                                         items: items,
+                                                                         status: item.status,
+                                                                         canLoadMoreItems: true,
+                                                                         moduleOutput: nil)
+        
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        self.router.presentViewController(controller: nController)
+    }
+    
     func popToRoot() {
         router.popToRootViewController()
     }

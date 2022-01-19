@@ -164,6 +164,11 @@ final class FileInfoView: UIView, FromNib {
         } else {
             locationView.isHidden = true
         }
+        
+        if wrapData.isPublicSharedItem == true {
+            peopleView.isHidden = true
+            sharingInfoView.isHidden = true
+        }
     }
 
     func setWith(albumItem: AlbumItem) {

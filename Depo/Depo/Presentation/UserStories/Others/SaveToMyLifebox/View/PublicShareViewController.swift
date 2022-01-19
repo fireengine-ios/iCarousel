@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PublicShareViewController: ViewController, ControlTabBarProtocol {
+class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     
     //MARK: -IBOutlets
     @IBOutlet private weak var tableView: UITableView!
@@ -88,7 +88,7 @@ extension PublicShareViewController: PublicShareViewInput {
     func didGetSharedItems(items: [SharedFileInfo]) {
         isLoading = false
         for item in items {
-            let wrapData = WrapData(privateShareFileInfo: item)
+            let wrapData = WrapData(publicSharedFileInfo: item)
             dataSource.append(wrapData)
         }
     }
@@ -122,6 +122,9 @@ extension PublicShareViewController: UITableViewDelegate {
         let item = dataSource[indexPath.row]
         if item.fileType == .folder {
             output.onSelect(item: item)
+        } else {
+            let items = dataSource.filter { $0.isFolder == false }
+            output.onSelect(item: item, items: items)
         }
     }
     

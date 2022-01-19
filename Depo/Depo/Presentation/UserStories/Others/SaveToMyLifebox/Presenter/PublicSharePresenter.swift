@@ -32,6 +32,10 @@ extension PublicSharePresenter: PublicShareViewOutput {
         router.onSelect(item: item)
     }
     
+    func onSelect(item: WrapData, items: [WrapData]) {
+        router.onSelect(item: item, items: items)
+    }
+    
     func viewIsReady() {
         interactor.fetchData()
     }

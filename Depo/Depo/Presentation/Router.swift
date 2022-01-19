@@ -833,6 +833,15 @@ class RouterVC: NSObject {
                                                                                status: status)
     }
     
+    func filesDetailPublicSharedItemModule(fileObject: WrapData, items: [WrapData], status: ItemStatus, canLoadMoreItems: Bool, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        return PhotoVideoDetailModuleInitializer.initializePublicSharedItem(with: "PhotoVideoDetailViewController",
+                                                                            moduleOutput: moduleOutput,
+                                                                            selectedItem: fileObject,
+                                                                            allItems: items,
+                                                                            status: status,
+                                                                            canLoadMoreItems: canLoadMoreItems)
+    }
+    
     func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?, faceImageType: FaceImageType?) -> PhotoVideoDetailModule {
         return PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                         moduleOutput: moduleOutput,
