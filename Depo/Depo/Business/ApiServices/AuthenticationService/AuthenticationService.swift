@@ -655,11 +655,15 @@ class AuthenticationService: BaseRequestService {
     }
 
     func sendVerification(request: SignUpSendVerification, success: SuccessResponse?, fail: FailResponse?) {
+        debugLog("AuthenticationService sendVerification")
+
         let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: request, handler: handler)
     }
 
     func validateOTP(request: SignUpValidateOTP, success: SuccessResponse?, fail: FailResponse?) {
+        debugLog("AuthenticationService validateOTP")
+
         let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: request, handler: handler)
     }
