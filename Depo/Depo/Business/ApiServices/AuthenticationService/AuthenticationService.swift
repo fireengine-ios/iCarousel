@@ -122,7 +122,7 @@ class SignUpUser: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        return URL(string: RouteRequests.signUp, relativeTo: super.patch)!
+        return RouteRequests.signUp
     }
 
     init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil) {
@@ -144,6 +144,71 @@ class SignUpUser: BaseRequestParametrs {
     }
 }
 
+struct SignUpSendVerification: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+
+    let referenceToken: String
+    let processPersonalData: Bool
+    let eulaId: Int
+    let kvkkAuth: Bool?
+    let etkAuth: Bool?
+    let globalPermAuth: Bool
+
+    var requestParametrs: Any {
+        var parameters: [String : Any] = [
+            LbRequestkeys.referenceToken: referenceToken,
+            LbRequestkeys.eulaId: eulaId,
+            LbRequestkeys.processPersonalData: processPersonalData,
+            LbRequestkeys.globalPermAuth: globalPermAuth
+        ]
+
+        if let etkAuth = etkAuth {
+            parameters[LbRequestkeys.etkAuth] = etkAuth
+        }
+
+        if let kvkkAuth = kvkkAuth {
+            parameters[LbRequestkeys.kvkkAuth] = kvkkAuth
+        }
+
+        return parameters
+    }
+
+    var patch: URL {
+        return RouteRequests.signUpSendVerification
+    }
+
+    var header: RequestHeaderParametrs {
+        return RequestHeaders.base()
+    }
+}
+
+struct SignUpValidateOTP: RequestParametrs {
+    var timeout: TimeInterval {
+        return NumericConstants.defaultTimeout
+    }
+
+    let referenceToken: String
+    let otp: String
+
+    var requestParametrs: Any {
+        return [
+            LbRequestkeys.referenceToken: referenceToken,
+            LbRequestkeys.otp: otp
+        ]
+    }
+
+    var patch: URL {
+        return RouteRequests.signUpValidateOTP
+    }
+
+    var header: RequestHeaderParametrs {
+        return RequestHeaders.base()
+    }
+}
+
+// TODO: HADY REMOVE
 struct SignUpUserPhoveVerification: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
@@ -235,6 +300,7 @@ class EmailVerification: BaseRequestParametrs {
 }
 
 
+// TODO: HADY REMOVE
 struct ResendVerificationSMS: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
@@ -552,10 +618,8 @@ class AuthenticationService: BaseRequestService {
             return
         }
 
-        let signUpUrl = RouteRequests.baseUrl +/ RouteRequests.signUp
-
         sessionManagerWithoutToken
-            .request(signUpUrl,
+            .request(RouteRequests.signUp,
                  method: .post,
                  parameters: params,
                  encoding: JSONEncoding.default,
@@ -591,7 +655,18 @@ class AuthenticationService: BaseRequestService {
                 }
             }
     }
+
+    func sendVerification(request: SignUpSendVerification, success: SuccessResponse?, fail: FailResponse?) {
+        let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: request, handler: handler)
+    }
+
+    func validateOTP(request: SignUpValidateOTP, success: SuccessResponse?, fail: FailResponse?) {
+        let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executePostRequest(param: request, handler: handler)
+    }
     
+    // TODO: HADY REMOVE
     func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService verificationPhoneNumber")
         
@@ -599,6 +674,7 @@ class AuthenticationService: BaseRequestService {
         executePostRequest(param: phoveVerification, handler: handler)
     }
     
+    // TODO: HADY REMOVE
     func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService resendVerificationSMS")
         

@@ -14,6 +14,9 @@ func localized(_ key: Strings) -> String {
 
 enum Strings: String, Localizable {
 
+    // MARK: - SignUp
+    case signUpEnterVerificationCodeEmail = "signup_enter_verification_code_email"
+
     // MARK: - Private Share
     case privateShareEmptyListError = "private_share_empty_list_error"
 

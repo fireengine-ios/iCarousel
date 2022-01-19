@@ -49,6 +49,8 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     private let keyboard = Typist()
     
     private var isRemoveLetter: Bool = false
+
+    private var timerEnabled: Bool = true
     
     // MARK: Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -176,7 +178,7 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     }
     
     // MARK: PhoneVerificationViewInput
-    func setupInitialState() {
+    func setupInitialState(timerEnabled: Bool) {
         codeTextFields.forEach({
             $0.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         })
@@ -204,6 +206,8 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
       
         errorLabel.textColor = ColorConstants.textOrange
         errorLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+
+        self.timerEnabled = timerEnabled
     }
     
     func setupButtonsInitialState() {
@@ -252,7 +256,7 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
             $0.text = ""
         })
         
-        timerLabel.isHidden = !resendCodeButton.isHidden        
+        timerLabel.isHidden = !resendCodeButton.isHidden || !timerEnabled
         
         output.clearCurrentSecurityCode()
         
@@ -305,8 +309,7 @@ extension PhoneVerificationViewController: UITextFieldDelegate, SmartTimerLabelD
         
         let currentStr = output.currentSecurityCode + string
         
-        if currentStr.count == inputTextLimit,
-                !timerLabel.isDead {
+        if currentStr.count == inputTextLimit, (!timerLabel.isDead || !timerEnabled) {
             output.currentSecurityCodeChanged(with: string)
             output.verificationCodeEntered()
             return true

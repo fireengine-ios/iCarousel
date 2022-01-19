@@ -13,7 +13,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    private let dataStorage: PhoneVerificationDataStorage = PhoneVerificationDataStorage()    
+    let dataStorage: PhoneVerificationDataStorage = PhoneVerificationDataStorage()    
     lazy var authenticationService = AuthenticationService()
     private let cacheManager = CacheManager.shared
     
@@ -79,21 +79,20 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     }
     
     func verifyCode(code: String) {
-        let signUpProperties = SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "",
-                                                           otp: code)
-        
-        authenticationService.verificationPhoneNumber(phoveVerification: signUpProperties, sucess: { [weak self] baseResponse in
-            
+        let request = SignUpValidateOTP(referenceToken: dataStorage.signUpResponse.referenceToken ?? "",
+                                        otp: code)
+        authenticationService.validateOTP(request: request, success: { [weak self] baseResponse in
+
             if let response = baseResponse as? ObjectRequestResponse,
                 let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
-                
+
                 self?.silentLogin(token: silentToken)
             } else {
                 DispatchQueue.main.async {
                     self?.output.verificationSucces()
                 }
             }
-            
+
         }, fail: { [weak self] errorRespose in
             DispatchQueue.main.async {
                 guard let `self` = self else {

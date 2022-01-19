@@ -453,10 +453,17 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func phoneVerificationScreen(withSignUpSuccessResponse signupResponse: SignUpSuccessResponse,
+    func phoneVerificationScreen(signUpResponse: SignUpSuccessResponse,
                                  userInfo: RegistrationUserInfoModel) -> UIViewController {
 
-        return PhoneVerificationModuleInitializer.viewController(signupResponse: signupResponse,
+        return PhoneVerificationModuleInitializer.viewController(signupResponse: signUpResponse,
+                                                                 userInfo: userInfo)
+    }
+
+    func emailVerificationScreen(signUpResponse: SignUpSuccessResponse,
+                                 userInfo: RegistrationUserInfoModel) -> UIViewController {
+
+        return EmailVerificationModuleInitializer.viewController(signupResponse: signUpResponse,
                                                                  userInfo: userInfo)
     }
     
