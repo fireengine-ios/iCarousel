@@ -98,7 +98,6 @@ struct RouteRequests {
     static let signUpValidateOTP = baseUrl +/ "v2/signup/validate"
     static let logout = "auth/logout"
 
-    // TODO: HADY REMOVE
     static let phoneVerification = "verify/phoneNumber"
     static let resendVerificationSMS = "verify/sendVerificationSMS"
 

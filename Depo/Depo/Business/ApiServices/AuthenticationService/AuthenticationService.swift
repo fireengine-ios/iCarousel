@@ -208,7 +208,6 @@ struct SignUpValidateOTP: RequestParametrs {
     }
 }
 
-// TODO: HADY REMOVE
 struct SignUpUserPhoveVerification: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
@@ -300,7 +299,6 @@ class EmailVerification: BaseRequestParametrs {
 }
 
 
-// TODO: HADY REMOVE
 struct ResendVerificationSMS: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
@@ -666,7 +664,6 @@ class AuthenticationService: BaseRequestService {
         executePostRequest(param: request, handler: handler)
     }
     
-    // TODO: HADY REMOVE
     func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService verificationPhoneNumber")
         
@@ -674,7 +671,6 @@ class AuthenticationService: BaseRequestService {
         executePostRequest(param: phoveVerification, handler: handler)
     }
     
-    // TODO: HADY REMOVE
     func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService resendVerificationSMS")
         
