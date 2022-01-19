@@ -15,6 +15,6 @@ protocol EmailVerificationRouterInput: PhoneVerificationRouterInput {
 final class EmailVerificationRouter: PhoneVerificationRouter, EmailVerificationRouterInput {
     func phoneVerification(signUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
         let phoneVerification = router.phoneVerificationScreen(signUpResponse: signUpResponse, userInfo: userInfo)
-        router.pushViewController(viewController: phoneVerification)
+        router.replaceTopViewControllerWithViewController(phoneVerification)
     }
 }
