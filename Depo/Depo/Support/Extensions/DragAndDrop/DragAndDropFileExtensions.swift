@@ -24,7 +24,6 @@ enum DragAndDropFileExtensions: String, CaseIterable {
     case mov = "mov"
     
     ///documents
-    case rar     = "rar"
     case zip     = "zip"
     case unknown = "unknown"
     case doc     = "doc"
@@ -36,6 +35,7 @@ enum DragAndDropFileExtensions: String, CaseIterable {
     case pptx    = "pptx"
     case usdz    = "usdz"
     case docx    = "docx"
+    case xlsx    = "xlsx"
     
     var isPhotoVideoType: Bool? {
         switch self {
