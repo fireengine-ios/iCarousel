@@ -201,6 +201,7 @@ class PhotoVideoDetailModuleConfigurator {
         viewController.editingTabBar = botvarBarVC
         viewController.status = status
         viewController.hideTreeDotButton = true
+        viewController.isPublicSharedItem = true
         
         presenter.bottomBarPresenter = bottomBarVCmodule.presenter
         bottomBarVCmodule.presenter?.basePassingPresenter = presenter

@@ -244,6 +244,10 @@ final class FileInfoView: UIView, FromNib {
         if (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced {
             canEdit = false
         }
+        
+        if let item = item as? WrapData, item.isPublicSharedItem == true {
+            canEdit = false
+        }
 
         if projectId != SingletonStorage.shared.accountInfo?.projectID {
             fileDescriptionView.isEditable = false

@@ -126,7 +126,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             
         case let .remoteUrl(url):
             let loadUrl = item.metaData?.largeUrl != nil ? item.metaData!.largeUrl : url
-            if item.isOwner {
+            if item.isOwner && item.isPublicSharedItem != true {
                 getImageServise.getImageDataByTrimming(url: loadUrl, completeImage: completeData)
             } else {
                 getImageServise.getImageData(patch: loadUrl, completeData: completeData)

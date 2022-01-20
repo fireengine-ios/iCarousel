@@ -73,7 +73,7 @@ final class ItemAnnotationView: MKAnnotationView {
         if let asset = annotation.item?.asset {
             setImage(asset: asset)
         } else if let item = annotation.item, let mediumURL = item.metaData?.mediumUrl {
-            setImage(thumbnailURL: mediumURL, isOwner: item.isOwner)
+            setImage(thumbnailURL: mediumURL, isOwner: item.isOwner, isPublicSharedItem: item.isPublicSharedItem)
         }
     }
 
@@ -98,7 +98,7 @@ final class ItemAnnotationView: MKAnnotationView {
         }
     }
 
-    private func setImage(thumbnailURL: URL, isOwner: Bool) {
+    private func setImage(thumbnailURL: URL, isOwner: Bool, isPublicSharedItem: Bool? = false) {
         cellImageManager?.cancelImageLoading()
 
         let cacheKey = thumbnailURL.byTrimmingQuery
@@ -115,7 +115,8 @@ final class ItemAnnotationView: MKAnnotationView {
         }
 
         cellImageManager?.loadImage(thumbnailUrl: thumbnailURL, url: nil,
-                                    isOwner: isOwner, completionBlock: imageSetBlock)
+                                    isOwner: isOwner && isPublicSharedItem != true,
+                                    completionBlock: imageSetBlock)
     }
 
     private func cancelCurrentImageLoad() {
