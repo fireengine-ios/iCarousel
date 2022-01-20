@@ -45,6 +45,8 @@ struct SharedFileInfo: Codable {
     //        "location": {},
     let permissions: SharedItemPermission?
     var members: [SharedContact]?
+    let tempListingURL: URL?
+    let tempDownloadURL: URL?
     
     
     var fileType: FileType {

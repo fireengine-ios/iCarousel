@@ -7,6 +7,7 @@
 //
 
 import WidgetKit
+import FirebaseDynamicLinks
 
 enum DivorseItems {
     case items
@@ -247,7 +248,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
                 output.operationFinished(type: .share)
                 
-                let objectsToShare = [url]
+                let dynamicLinkUrl = self.createDynamicLink(with: url)
+                let objectsToShare = [dynamicLinkUrl?.absoluteString ?? url]
                 let activityVC = UIActivityViewController(activityItems: objectsToShare,
                                                           applicationActivities: nil)
                 activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
@@ -266,6 +268,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
             
             }, fail: failAction(elementType: .share))
+    }
+    
+    func createDynamicLink(with url: String) -> URL? {
+        guard let link = URL(string: url) else { return nil}
+        let dynamicLinksDomainURIPrefix = "https://testlifebox.page.link"
+        let linkBuilder = DynamicLinkComponents(link: link, domainURIPrefix: dynamicLinksDomainURIPrefix)
+        
+        if let bundleID = Bundle.main.bundleIdentifier {
+            linkBuilder?.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
+        }
+        linkBuilder?.iOSParameters?.appStoreID = "665036334"
+        linkBuilder?.androidParameters = DynamicLinkAndroidParameters(packageName: "tr.com.turkcell.akillidepo")
+
+        guard let longDynamicLink = linkBuilder?.url else { return nil}
+        return longDynamicLink
     }
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool) {

@@ -74,6 +74,10 @@ enum ElementTypes {
     static func detailsElementsConfig(for item: Item, status: ItemStatus, viewType: DetailViewType) -> [ElementTypes] {
         var result = [ElementTypes]()
         
+        if item.isPublicSharedItem == true {
+            return []
+        }
+        
         if !item.isOwner {
             //shared with me items
             if let grantedPermissions = item.privateSharePermission?.granted {

@@ -667,6 +667,18 @@ class RouterVC: NSObject {
         return controller
     }
     
+    // MARK: Save to my lifebox
+    
+    func publicSharedItems(with publicToken: String) -> UIViewController {
+        let controller = PublicShareInitializer.initializeSaveToMyLifeboxViewController(with: publicToken)
+        return controller
+    }
+    
+    func publicSharedItemsInnerFolder(with item: WrapData) -> UIViewController {
+        let controller = PublicShareInitializer.initializeSaveToMyLifeboxViewController(with: item)
+        return controller
+    }
+
     
     // MARK: User profile
     
@@ -819,6 +831,15 @@ class RouterVC: NSObject {
                                                                                allItems: items,
                                                                                albumUUID: albumUUID,
                                                                                status: status)
+    }
+    
+    func filesDetailPublicSharedItemModule(fileObject: WrapData, items: [WrapData], status: ItemStatus, canLoadMoreItems: Bool, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        return PhotoVideoDetailModuleInitializer.initializePublicSharedItem(with: "PhotoVideoDetailViewController",
+                                                                            moduleOutput: moduleOutput,
+                                                                            selectedItem: fileObject,
+                                                                            allItems: items,
+                                                                            status: status,
+                                                                            canLoadMoreItems: canLoadMoreItems)
     }
     
     func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?, faceImageType: FaceImageType?) -> PhotoVideoDetailModule {
@@ -1294,5 +1315,40 @@ class RouterVC: NSObject {
     func showAccountDeletedPopUp() {
         let popup = DeleteAccountPopUp.with(type: .success)
         defaultTopController?.present(popup, animated: true)
+    }
+    
+    func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
+        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
+            return
+        }
+        
+        if tabBarVC.selectedIndex != index.rawValue {
+            switch index {
+            case .home:
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
+                tabBarVC.selectedIndex = index.rawValue
+            case .contactsSync, .documents://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
+                tabBarVC.selectedIndex = index.rawValue - 1
+            
+                if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
+                    segmentedController.loadViewIfNeeded()
+                    segmentedController.switchSegment(to: segmentIndex)
+                }
+                
+            case .gallery:
+                tabBarVC.showPhotoScreen()
+            }
+        } else {
+            tabBarVC.popToRootCurrentNavigationController(animated: true)
+        }
     }
 }

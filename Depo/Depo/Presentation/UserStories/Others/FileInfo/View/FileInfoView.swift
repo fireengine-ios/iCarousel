@@ -164,6 +164,11 @@ final class FileInfoView: UIView, FromNib {
         } else {
             locationView.isHidden = true
         }
+        
+        if wrapData.isPublicSharedItem == true {
+            peopleView.isHidden = true
+            sharingInfoView.isHidden = true
+        }
     }
 
     func setWith(albumItem: AlbumItem) {
@@ -237,6 +242,10 @@ final class FileInfoView: UIView, FromNib {
         var canEdit = true
 
         if (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced {
+            canEdit = false
+        }
+        
+        if let item = item as? WrapData, item.isPublicSharedItem == true {
             canEdit = false
         }
 

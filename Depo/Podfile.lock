@@ -25,6 +25,9 @@ PODS:
   - Firebase/Crashlytics (7.11.0):
     - Firebase/CoreOnly
     - FirebaseCrashlytics (~> 7.11.0)
+  - Firebase/DynamicLinks (7.11.0):
+    - Firebase/CoreOnly
+    - FirebaseDynamicLinks (~> 7.11.0)
   - Firebase/RemoteConfig (7.11.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 7.11.0)
@@ -72,6 +75,8 @@ PODS:
     - GoogleDataTransport (~> 8.4)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (~> 1.2)
+  - FirebaseDynamicLinks (7.11.0):
+    - FirebaseCore (~> 7.0)
   - FirebaseInstallations (7.11.0):
     - FirebaseCore (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
@@ -222,6 +227,7 @@ DEPENDENCIES:
   - FBSDKShareKit (~> 8)
   - Firebase/Core (~> 7)
   - Firebase/Crashlytics (~> 7)
+  - Firebase/DynamicLinks (~> 7)
   - Firebase/RemoteConfig (~> 7)
   - FirebaseAnalytics (~> 7)
   - GoogleConversionTracking (~> 3)
@@ -249,6 +255,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Adjust
+    - FirebaseDynamicLinks
     - MetalPetal
     - SQLite.swift
     - SwiftyJSON
@@ -315,6 +322,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 907447d8917a4d3eb0cce2829c5a0ad21d90b432
   FirebaseCoreDiagnostics: 68ad972f99206cef818230f3f3179d52ccfb7f8c
   FirebaseCrashlytics: 272b675aa9d1e9bae1f9e1449fcc1f2cf6042806
+  FirebaseDynamicLinks: 07f101c20bb40fd39f6b3e5278a64a5f2f660dc1
   FirebaseInstallations: a58d4f72ec5861840b84df489f2668d970df558a
   FirebaseRemoteConfig: 0ea30de5fb0231df8c1bdcdf3b6c23bdc5066131
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
@@ -349,6 +357,6 @@ SPEC CHECKSUMS:
   XCGLogger: 1943831ef907df55108b0b18657953f868de973b
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 5b53fc12f267ba9a284688ee30cf22b071f20416
+PODFILE CHECKSUM: 8e8e4d68932cb09477b440b3273132cc782b2517
 
 COCOAPODS: 1.10.1

@@ -20,6 +20,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var instapickService: InstapickService = factory.resolve()
     private lazy var accountService = AccountService()
+    private lazy var storageVars: StorageVars = factory.resolve()
 
     private let smartAlbumsManager: SmartAlbumsManager = factory.resolve()
     private let campaignService = CampaignServiceImpl()
@@ -51,6 +52,12 @@ final class HomePageInteractor: HomePageInteractorInput {
         getCampaignStatus()
         
         smartAlbumsManager.requestAllItems()
+        
+        //handle public shared items save operation after login
+        if let publicTokenToSave = storageVars.publicSharedItemsToken {
+            savePublicSharedItems(with: publicTokenToSave)
+            storageVars.publicSharedItemsToken = nil
+        }
     }
     
     func needRefresh() {
@@ -283,6 +290,15 @@ final class HomePageInteractor: HomePageInteractorInput {
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
+        }
+    }
+    
+    private func savePublicSharedItems(with publicTokenToSave: String) {
+        PublicSharedItemsService().savePublicSharedItems(publicToken: publicTokenToSave) { value in
+            self.output.publicShareSaveSuccess()
+            ItemOperationManager.default.publicShareItemsAdded()
+        } fail: { error in
+            self.output.publicShareSaveFail(message: error.errorDescription ?? "")
         }
     }
 }

@@ -34,6 +34,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     var status: ItemStatus = .active
     var hideTreeDotButton = false
     var editingTabBar: BottomSelectionTabBarViewController!
+    var isPublicSharedItem = false
     private var needToScrollAfterRotation = true
 
     private var isFullScreen = false {
@@ -243,10 +244,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
-        output.getFIRStatus { [weak self] in
-            self?.updateFileInfo()
+        
+        if isPublicSharedItem {
+            updateFileInfo()
+        } else {
+            output.getFIRStatus { [weak self] in
+                self?.updateFileInfo()
+            }
         }
-
+        
         guard let index = selectedIndex else  {
             return
         }

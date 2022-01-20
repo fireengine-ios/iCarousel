@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import Foundation
+
 final class PushNotificationService {
     
     private init() { }
@@ -115,7 +117,16 @@ final class PushNotificationService {
 
     private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
         let isLoggedIn = tokenStorage.accessToken != nil
-        let actionRequiresLogin = !action.isContained(in: [.login, .supportFormLogin, .supportFormSignup])
+        
+        var loginRequiresActions: [PushNotificationAction] = [.login, .supportFormLogin, .supportFormSignup]
+        
+        if storageVars.isAppFirstLaunchForPublicSharedItems != true {
+            loginRequiresActions.append(.saveToMyLifebox)
+        }
+        storageVars.isAppFirstLaunchForPublicSharedItems = false
+        
+        let actionRequiresLogin = !action.isContained(in: loginRequiresActions)
+        
         if !isLoggedIn && actionRequiresLogin {
             pendingAction = action.rawValue
             pendingActionOptions = options
@@ -145,7 +156,10 @@ final class PushNotificationService {
         trackIfNeeded(action: action)
         
         let isLoggedIn = tokenStorage.accessToken != nil
-        if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
+        
+        if !isLoggedIn && action.isContained(in: [.saveToMyLifebox]) {
+            action = .saveToMyLifebox
+        } else if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
         }
         
@@ -222,6 +236,7 @@ final class PushNotificationService {
         case .verifyRecoveryEmail: openVerifyRecoveryEmail()
         case .silent: break
         case .albumDetail: openAlbumDetail()
+        case .saveToMyLifebox: openSaveToMyLifebox()
 
         }
         
@@ -634,6 +649,22 @@ private extension PushNotificationService {
             case .failed( _):
                 UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
             }
+        }
+    }
+    
+    func openSaveToMyLifebox() {
+        guard let publicToken = storageVars.value(forDeepLinkParameter: .publicToken) as? String else { return }
+        let vc = router.publicSharedItems(with: publicToken)
+        
+        if isExistingViewController(controller: vc as! ViewController) {
+            router.popViewController()
+        }
+        pushTo(vc)
+        
+        //to handle public shared items save operation after login
+        if tokenStorage.accessToken == nil {
+            storageVars.publicSharedItemsToken = publicToken
+            clear()
         }
     }
 }

@@ -643,6 +643,10 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var fileData: Data?
     
+    var tempListingURL: String?
+    
+    var isPublicSharedItem: Bool?
+    
     var privateSharePermission: SharedItemPermission?
     
     var asset: PHAsset? {
@@ -1235,6 +1239,38 @@ class WrapData: BaseDataSourceItem, Wrappered {
         childCount = privateShareFileInfo.childCount
         privateSharePermission = privateShareFileInfo.permissions
         isShared = true
+    }
+    
+    init(publicSharedFileInfo: SharedFileInfo) {
+        if let metadata = publicSharedFileInfo.metadata {
+            metaData = BaseMetaData(with: metadata)
+        }
+        
+        fileSize = publicSharedFileInfo.bytes ?? 0
+        favorites = publicSharedFileInfo.metadata?.isFavourite ?? false
+        patchToPreview = .remoteUrl(metaData?.mediumUrl)
+        status = .active
+        
+        super.init(uuid: publicSharedFileInfo.uuid,
+                   name: publicSharedFileInfo.name,
+                   creationDate: publicSharedFileInfo.createdDate,
+                   lastModifiDate: publicSharedFileInfo.lastModifiedDate,
+                   fileType: publicSharedFileInfo.fileType,
+                   syncStatus: .synced,
+                   isLocalItem: false)
+        
+        id = publicSharedFileInfo.id
+        projectId = publicSharedFileInfo.projectId
+        isFolder = publicSharedFileInfo.folder
+        if isFolder == true {
+            fileType = .folder
+        }
+        childCount = publicSharedFileInfo.childCount
+        privateSharePermission = publicSharedFileInfo.permissions
+        isShared = true
+        tmpDownloadUrl = publicSharedFileInfo.tempDownloadURL
+        tempListingURL = publicSharedFileInfo.tempListingURL?.absoluteString
+        isPublicSharedItem = true
     }
     
     func copyFileData(from item: WrapData) {

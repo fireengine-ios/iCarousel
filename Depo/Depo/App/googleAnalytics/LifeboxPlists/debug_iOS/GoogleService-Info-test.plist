@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>685338462870-f3pq553m2rp2tffdob3ehnfpvlne7ag7.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.685338462870-f3pq553m2rp2tffdob3ehnfpvlne7ag7</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA0D0nQ88H-GJWnyu3-d3vbxVBIkAQ0fAE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>685338462870</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.turkcell.akillidepo</string>
+	<key>PROJECT_ID</key>
+	<string>lifebox-test-32066</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lifebox-test-32066.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:685338462870:ios:f883a91e0c9638610d50b7</string>
+	<key>DATABASE_URL</key>
+	<string>https://lifebox-test-32066.firebaseio.com</string>
+</dict>
+</plist>

@@ -105,6 +105,7 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     func startUploadDragAndDrop()
     func dragAndDropItemUploaded()
     
+    func publicSharedItemsAdded()
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -209,6 +210,7 @@ extension ItemOperationManagerViewProtocol {
     
     func startUploadDragAndDrop() {}
     func dragAndDropItemUploaded() {}
+    func publicSharedItemsAdded() {}
 }
 
 
@@ -611,6 +613,12 @@ class ItemOperationManager: NSObject {
     func didUploadDragAndDropItem() {
         DispatchQueue.main.async {
             self.views.invoke { $0.dragAndDropItemUploaded() }
+        }
+    }
+    
+    func publicShareItemsAdded() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.publicSharedItemsAdded() }
         }
     }
 }

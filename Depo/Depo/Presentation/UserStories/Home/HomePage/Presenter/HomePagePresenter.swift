@@ -64,6 +64,15 @@ extension HomePagePresenter: BaseFilesGreedModuleOutput {
 
 // MARK: - HomePageInteractorOutput
 extension HomePagePresenter: HomePageInteractorOutput {
+    func publicShareSaveFail(message: String) {
+        view.showSnackBarWithMessage(message: message)
+        router.openTabBarItem(index: .documents, segmentIndex: 0)
+    }
+    
+    func publicShareSaveSuccess() {
+        view.showSnackBarWithMessage(message: "Save işlemi başarılı!")
+        router.openTabBarItem(index: .documents, segmentIndex: 0)
+    }
     
     func showSnackBarWith(message: String) {
         view.showSnackBarWithMessage(message: message)

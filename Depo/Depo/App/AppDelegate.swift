@@ -17,6 +17,7 @@ import UserNotifications
 import KeychainSwift
 import WidgetKit
 import CoreSpotlight
+import FirebaseDynamicLinks
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -84,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     @available(iOS 13.0, *)
     private lazy var backgroundSyncService = BackgroundSyncService.shared
+    private lazy var storageVars: StorageVars = factory.resolve()
 
     var window: UIWindow?
     var watchdog: Watchdog?
@@ -176,6 +178,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// iOS 9+
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        print("I have received a URL through a custom sceme! \(url.absoluteString)")
+        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+            self.handleIncomingDynamicLink(dynamicLink)
+            return true
+        }
         
         Adjust.appWillOpen(url)
         
@@ -319,6 +327,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    private func handleIncomingDynamicLink(_ dynamicLink: DynamicLink) {
+        guard let url = dynamicLink.url else {
+            debugLog("Dynamic link object has no url")
+            return
+        }
+        
+        if let publicToken = url.lastPathComponent.split(separator: "&").first {
+            if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.saveToMyLifebox.rawValue,
+                                                             options: [DeepLinkParameter.publicToken.rawValue: publicToken]) {
+                debugLog("Should open Action Screen")
+                PushNotificationService.shared.openActionScreen()
+            }
+            debugLog("Your incoming link parameter is \(url.absoluteString)")
+        }
+        
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillResignActive")
         
@@ -340,6 +365,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AutoSyncDataStorage().clear()
         }
         
+        storageVars.publicSharedItemsToken = nil
         WidgetService.shared.notifyWidgetAbout(status: .stopped)
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
@@ -406,7 +432,6 @@ extension AppDelegate {
 
     func overrideApplicationThemeStyle() {
         if #available(iOS 13.0, *) {
-            let storageVars: StorageVars = factory.resolve()
             if let isDarkModeEnabled = storageVars.isDarkModeEnabled {
                 if isDarkModeEnabled {
                     window?.overrideUserInterfaceStyle = .dark
@@ -454,6 +479,21 @@ extension AppDelegate {
                 }
             }
         }
+        
+        if let incomingUrl = userActivity.webpageURL {
+            let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingUrl) { (dynamicLink, error) in
+                guard error == nil else { return }
+                if let dynamicLink = dynamicLink {
+                    self.handleIncomingDynamicLink(dynamicLink)
+                }
+            }
+            if linkHandled {
+                return true
+            } else {
+                return false
+            }
+        }
+        
         return true
     }
 }
