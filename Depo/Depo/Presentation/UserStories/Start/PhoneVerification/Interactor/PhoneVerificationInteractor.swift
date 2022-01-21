@@ -55,15 +55,17 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     }
     
     func resendCode() {
-        let verificationProperties = ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken ?? "",
-                                                          eulaId: dataStorage.signUpResponse.eulaId ?? 0,
-                                                          processPersonalData: true,
-                                                          etkAuth: dataStorage.signUpResponse.etkAuth,
-                                                          globalPermAuth: dataStorage.signUpResponse.globalPermAuth ?? false,
-                                                          kvkkAuth: dataStorage.signUpResponse.kvkkAuth)
+        let request = SignUpSendVerification(
+            referenceToken: dataStorage.signUpResponse.referenceToken ?? "",
+            processPersonalData: true,
+            eulaId: dataStorage.signUpResponse.eulaId ?? 0,
+            kvkkAuth: dataStorage.signUpResponse.kvkkAuth,
+            etkAuth: dataStorage.signUpResponse.etkAuth,
+            globalPermAuth: dataStorage.signUpResponse.globalPermAuth ?? false
+        )
+
         attempts = 0
-        authenticationService.resendVerificationSMS(resendVerification: verificationProperties,
-                                                    sucess: { [weak self] response in
+        authenticationService.sendVerification(request: request, success: { [weak self] response in
             DispatchQueue.main.async {
                 if let response = response as? SignUpSuccessResponse {
                     self?.dataStorage.signUpResponse.remainingTimeInMinutes = response.remainingTimeInMinutes
