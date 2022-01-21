@@ -114,7 +114,8 @@ class CameraService {
             items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl,
             uploadTo: .MOBILE_UPLOAD, folder: folderUUID ?? "", isFavorites: false,
             isFromAlbum: isFromAlbum, isFromCamera: true, success: success,
-            fail: failure, returnedUploadOperation: { _ in })
+            fail: failure, returnedUploadOperation: { _ in }
+        )
     }
 
     private func writeMetadata(_ metadata: [AnyHashable: Any], into imageData: Data) -> Data {
