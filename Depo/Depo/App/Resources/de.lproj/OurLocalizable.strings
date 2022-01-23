@@ -1937,4 +1937,12 @@
 "change_person_photo" = "Kontaktfoto Ändern";
 "change_album_person_set_photo" = "Als Kontaktfoto verwenden";
 "profile_recovery_mail_info" = "Die Wiederherstellungs-E-Mail wird nur für den Schritt zur Kontowiederherstellung verwendet, wenn Sie Ihr Passwort vergessen.";
-"account_can_not_change_password" = "";
+"account_can_not_change_password" = "Sie können Ihr Passwort aufgrund fehlender Informationen in Ihrem Konto nicht zurücksetzen";
+"signup_enter_verification_code_email" = "Bitte geben Sie den 6-stelligen Sicherheitscode ein, den wir an diese E-Mail-Adresse gesendet haben: %@";
+"grace_banner_text" = "Wir möchten Sie daran erinnern, dass Ihr lifebox-paket nicht verlängert werden kann, da die Kreditkartenzahlung nicht empfangen werden konnte. Um weiterhin einen ununterbrochenen lifebox-dienst zu erhalten, überprüfen Sie Ihre Zahlungsinformationen über den AppStore und aktualisieren Sie sie bei Bedarf.";
+"save_to_my_lifebox_success" = "";
+"save_to_my_lifebox_error" = "";
+"save_to_my_lifebox_multiprocess" = "";
+"save_to_my_lifebox_same_account" = "";
+"save_to_my_lifebox_file_not_found" = "";
+"save_to_my_lifebox_folder_not_found" = "";

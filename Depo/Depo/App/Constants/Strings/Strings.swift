@@ -95,5 +95,8 @@ enum Strings: String, Localizable {
     case changePersonThumbnailError = "change_album_person_error_text"
     case changePersonThumbnail = "change_person_photo"
     case changePersonThumbnailSetPhoto = "change_album_person_set_photo"
+    
+    // MARK: - Grace Period Banner
+    case graceBannerText = "grace_banner_text"
 
 }

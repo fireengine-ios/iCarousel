@@ -1939,4 +1939,12 @@
 "change_person_photo" = "Змінити Фотографію Контакту";
 "change_album_person_set_photo" = "Використовувати як фотографію контакту";
 "profile_recovery_mail_info" = "Електронна адреса для відновлення використовуватиметься лише для етапу відновлення облікового запису, якщо ви забудете свій пароль.";
-"account_can_not_change_password" = "";
+"account_can_not_change_password" = "Ви не можете змінити пароль через відсутність інформації у вашому обліковому записі";
+"signup_enter_verification_code_email" = "Будь ласка, введіть 6-значний код безпеки, який ми надіслали на цю адресу електронної пошти: %@";
+"grace_banner_text" = "Нагадуємо, що ваш пакет lifebox не може бути продовжений, тому що не вдалося отримати оплату з кредитної картки. Щоб і надалі отримувати безперебійне обслуговування lifebox, перевірте свою платіжну інформацію через AppStore та оновіть її, якщо це необхідно.";
+"save_to_my_lifebox_success" = "";
+"save_to_my_lifebox_error" = "";
+"save_to_my_lifebox_multiprocess" = "";
+"save_to_my_lifebox_same_account" = "";
+"save_to_my_lifebox_file_not_found" = "";
+"save_to_my_lifebox_folder_not_found" = "";

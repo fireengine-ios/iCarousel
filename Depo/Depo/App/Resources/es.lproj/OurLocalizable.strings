@@ -1979,4 +1979,12 @@
 "change_person_photo" = "Cambiar Foto de Contacto";
 "change_album_person_set_photo" = "Usar como foto de contacto";
 "profile_recovery_mail_info" = "El correo electrónico de recuperación solo se utilizará para el paso de recuperación de la cuenta si olvida su contraseña.";
-"account_can_not_change_password" = "";
+"account_can_not_change_password" = "No puedes cambiar tu contraseña por falta de información";
+"signup_enter_verification_code_email" = "Ingrese el código de seguridad de 6 dígitos que le enviamos a esta dirección de correo electrónico: %@";
+"grace_banner_text" = "Le recordamos que su paquete lifebox no se puede renovar porque no se pudo recibir el pago de la tarjeta de crédito. Para continuar recibiendo el servicio lifebox ininterrumpido, verifique su información de pago a través de la AppStore y actualícela si es necesario.";
+"save_to_my_lifebox_success" = "";
+"save_to_my_lifebox_error" = "";
+"save_to_my_lifebox_multiprocess" = "";
+"save_to_my_lifebox_same_account" = "";
+"save_to_my_lifebox_file_not_found" = "";
+"save_to_my_lifebox_folder_not_found" = "";
