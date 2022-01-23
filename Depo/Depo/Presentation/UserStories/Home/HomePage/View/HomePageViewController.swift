@@ -405,6 +405,6 @@ extension HomePageViewController: ShareCardContentManagerDelegate {
 extension HomePageViewController: GraceBannerViewDelegate {
     func closeButtonTapped() {
         homePageDataSource.shouldHideGraceBanner = true
-        reloadData()
+        collectionView.reloadData()
     }
 }
