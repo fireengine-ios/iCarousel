@@ -88,6 +88,55 @@ class CameraService {
             }
         }
     }
+
+    func saveCapturedImage(info: [UIImagePickerController.InfoKey: Any], isFromAlbum: Bool, folderUUID: String?,
+                           success: @escaping () -> Void, failure: @escaping (Error) -> Void) {
+        guard let image = info[.originalImage] as? UIImage,
+              var imageData = image.jpegData(compressionQuality: 0.9)
+        else {
+            return
+        }
+
+        if let metadata = info[.mediaMetadata] as? [AnyHashable: Any] {
+            imageData = writeMetadata(metadata, into: imageData)
+        }
+
+        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
+        let wrapData = WrapData(imageData: imageData, isLocal: true)
+        /// usedUIImageJPEGRepresentation
+        if let wrapDataName = wrapData.name {
+            wrapData.name = wrapDataName + ".JPG"
+        }
+
+        wrapData.patchToPreview = PathForItem.remoteUrl(url)
+
+        UploadService.default.uploadFileList(
+            items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl,
+            uploadTo: .MOBILE_UPLOAD, folder: folderUUID ?? "", isFavorites: false,
+            isFromAlbum: isFromAlbum, isFromCamera: true, success: success,
+            fail: failure, returnedUploadOperation: { _ in }
+        )
+    }
+
+    private func writeMetadata(_ metadata: [AnyHashable: Any], into imageData: Data) -> Data {
+        guard let source = CGImageSourceCreateWithData(imageData as CFData, nil),
+              let UTI = CGImageSourceGetType(source)
+        else {
+            return imageData
+        }
+
+        let newImageData = NSMutableData()
+        if let destination = CGImageDestinationCreateWithData(newImageData, UTI, 1, nil) {
+            CGImageDestinationAddImageFromSource(destination, source, 0, metadata as CFDictionary)
+            if CGImageDestinationFinalize(destination) {
+                return newImageData as Data
+            } else {
+                return imageData
+            }
+        } else {
+            return imageData
+        }
+    }
     
     private func showPickerController(type: UIImagePickerController.SourceType,
                                       onViewController sourceViewViewController: UIViewController) {

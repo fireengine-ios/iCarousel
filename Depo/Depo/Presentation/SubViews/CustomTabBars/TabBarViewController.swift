@@ -527,44 +527,27 @@ extension TabBarViewController: UIImagePickerControllerDelegate, UINavigationCon
         return nil
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-
-        guard let image = info[.originalImage] as? UIImage,
-            let data = image.imageWithFixedOrientation.jpegData(compressionQuality: 0.9)
-            else { return }
-        
-        let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
-        SDWebImageManager.shared().saveImage(toCache: image, for: url)
-        
-        let wrapData = WrapData(imageData: data, isLocal: true)
-        /// usedUIImageJPEGRepresentation
-        if let wrapDataName = wrapData.name {
-            wrapData.name = wrapDataName + ".JPG"
-        }
-        
-        wrapData.patchToPreview = PathForItem.remoteUrl(url)
-        
-        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail()
-        
-        picker.dismiss(animated: true, completion: { [weak self] in
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true) { [weak self] in
             self?.statusBarHidden = false
-            
-            UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: self?.getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
-            }, fail: { [weak self] error in
-                guard !error.isOutOfSpaceError else {
-                    //showing special popup for this error
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                                  message: error.description,
-                                                  image: .error,
-                                                  buttonTitle: TextConstants.ok)
-                    self?.present(vc, animated: true, completion: nil)
-                }
-            }, returnedUploadOperation: { _ in })
-        })
+        }
+
+        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail()
+        cameraService.saveCapturedImage(info: info, isFromAlbum: isFromAlbum, folderUUID: getFolderUUID(), success: {}) { [weak self] error in
+            guard !error.isOutOfSpaceError else {
+                //showing special popup for this error
+                return
+            }
+
+            DispatchQueue.main.async {
+                let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                              message: error.description,
+                                              image: .error,
+                                              buttonTitle: TextConstants.ok)
+                self?.present(vc, animated: true)
+            }
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
