@@ -64,6 +64,7 @@ class SingletonStorage {
         isJustRegistered = nil
         quotaInfoResponse = nil
         quotaUsage = nil
+        activeUserSubscription = nil
     }
     
     func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping FailResponse ) {
