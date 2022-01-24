@@ -8619,6 +8619,14 @@
 		F03718262768E44900DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
 		F037182A2768E44A00DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
 		F037182B2768E44A00DA9CF0 /* SpotlightSearchHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */; };
+		F039B5F5279A7F4D000EBAA7 /* GraceBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039B5F3279A7F4D000EBAA7 /* GraceBannerView.swift */; };
+		F039B5F6279A7F4D000EBAA7 /* GraceBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */; };
+		F039B5F7279DE499000EBAA7 /* GraceBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039B5F3279A7F4D000EBAA7 /* GraceBannerView.swift */; };
+		F039B5F8279DE49A000EBAA7 /* GraceBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039B5F3279A7F4D000EBAA7 /* GraceBannerView.swift */; };
+		F039B5F9279DE49B000EBAA7 /* GraceBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F039B5F3279A7F4D000EBAA7 /* GraceBannerView.swift */; };
+		F039B5FA279DE4A0000EBAA7 /* GraceBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */; };
+		F039B5FB279DE4A1000EBAA7 /* GraceBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */; };
+		F039B5FC279DE4A1000EBAA7 /* GraceBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */; };
 		F04BC07D2786C2B4009401C5 /* GoogleService-Info-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = F04BC07C2786C2B3009401C5 /* GoogleService-Info-test.plist */; };
 		F04BC07E2786C2B4009401C5 /* GoogleService-Info-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = F04BC07C2786C2B3009401C5 /* GoogleService-Info-test.plist */; };
 		F05866D7279157A0004AF69E /* PublicSharedItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064FB29278A33AB00B461D0 /* PublicSharedItemsService.swift */; };
@@ -11394,6 +11402,8 @@
 		F02F6AA7269C56FC00A64ED8 /* ValidationRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationRules.swift; sourceTree = "<group>"; };
 		F034DF26274A544200E5C015 /* AlbumCountResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCountResponse.swift; sourceTree = "<group>"; };
 		F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightSearchHelper.swift; sourceTree = "<group>"; };
+		F039B5F3279A7F4D000EBAA7 /* GraceBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceBannerView.swift; sourceTree = "<group>"; };
+		F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GraceBannerView.xib; sourceTree = "<group>"; };
 		F04BC07C2786C2B3009401C5 /* GoogleService-Info-test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-test.plist"; sourceTree = "<group>"; };
 		F064FB29278A33AB00B461D0 /* PublicSharedItemsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsService.swift; sourceTree = "<group>"; };
 		F064FB2C278B209500B461D0 /* PublicSharedItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsTableViewCell.swift; sourceTree = "<group>"; };
@@ -13931,6 +13941,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				F039B5F2279A7ECE000EBAA7 /* GraceBannerView */,
 				CF048308256C8DA5007DAA79 /* PrivateShareSlider */,
 				9823192324F3A1E600FD16E2 /* PhotoEditViews */,
 				B585740F24BDD8E300A71EAD /* InfiniteSpinner */,
@@ -20413,6 +20424,15 @@
 			path = FileDescription;
 			sourceTree = "<group>";
 		};
+		F039B5F2279A7ECE000EBAA7 /* GraceBannerView */ = {
+			isa = PBXGroup;
+			children = (
+				F039B5F3279A7F4D000EBAA7 /* GraceBannerView.swift */,
+				F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */,
+			);
+			path = GraceBannerView;
+			sourceTree = "<group>";
+		};
 		F064FB25278A338100B461D0 /* SaveToMyLifeboxService */ = {
 			isa = PBXGroup;
 			children = (
@@ -21216,6 +21236,7 @@
 				89EA4F80240902C400A2C543 /* PackagesTableViewCell.xib in Resources */,
 				0791816426F88AB20067FB75 /* IdentityVerificationViewController.xib in Resources */,
 				4BF3A68E22B2690A0082130F /* PermissionsView.xib in Resources */,
+				F039B5F6279A7F4D000EBAA7 /* GraceBannerView.xib in Resources */,
 				8C0E90201FDEBDFF00789C91 /* CaptchaViewController.xib in Resources */,
 				7C4F60A62019D0440033C58F /* CollageCard.xib in Resources */,
 				8C0E90211FDEBDFF00789C91 /* AutoSyncViewController.xib in Resources */,
@@ -21809,6 +21830,7 @@
 				CE784E2022A685FB00662219 /* AlbumCollectionViewCell.xib in Resources */,
 				CE784E2122A685FB00662219 /* ContactBackupOld.xib in Resources */,
 				071AD46027045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */,
+				F039B5FB279DE4A1000EBAA7 /* GraceBannerView.xib in Resources */,
 				F028C0FD2789E022005CE6AF /* PublicShareViewController.xib in Resources */,
 				CE784E2422A685FB00662219 /* PremiumViewController.xib in Resources */,
 				4815689322BCF2E400376DFC /* GoogleService-Info.plist in Resources */,
@@ -22261,6 +22283,7 @@
 				CF8B6ADB23CBC9D70021B021 /* IntroduceSubView.xib in Resources */,
 				CF8B6ADD23CBC9D70021B021 /* PasswordCell.xib in Resources */,
 				CF8B6AE123CBC9D70021B021 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
+				F039B5FA279DE4A0000EBAA7 /* GraceBannerView.xib in Resources */,
 				CF8B6AE223CBC9D70021B021 /* SecurityQuestionView.xib in Resources */,
 				CF8B6AE423CBC9D70021B021 /* ForgotPasswordViewController.xib in Resources */,
 				CF8B6AE523CBC9D70021B021 /* TBMatikCard.xib in Resources */,
@@ -22537,6 +22560,7 @@
 				CF8B720123CBCA280021B021 /* PopUpController.xib in Resources */,
 				CF8B720623CBCA280021B021 /* FileInfoViewController.xib in Resources */,
 				071AD46127045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */,
+				F039B5FC279DE4A1000EBAA7 /* GraceBannerView.xib in Resources */,
 				F028C0FE2789E022005CE6AF /* PublicShareViewController.xib in Resources */,
 				985FFB07255C1EE0001AA845 /* FileNameView.xib in Resources */,
 				CF7145FC24B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
@@ -25171,6 +25195,7 @@
 				8C0E8FB11FDEBDFF00789C91 /* FeedbackViewController.swift in Sources */,
 				8C0E8FB21FDEBDFF00789C91 /* FeedbackViewModuleInput.swift in Sources */,
 				8C0E8FB31FDEBDFF00789C91 /* FeedbackViewPresenter.swift in Sources */,
+				F039B5F5279A7F4D000EBAA7 /* GraceBannerView.swift in Sources */,
 				8C06AC242008AB17003D8E05 /* AsyncOperation.swift in Sources */,
 				FA793D88201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CE4D282B207E3D51003AE4FB /* AppWormholeListener.swift in Sources */,
@@ -26773,6 +26798,7 @@
 				CE784B3A22A685FB00662219 /* CaptchaView.swift in Sources */,
 				CE784B3B22A685FB00662219 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				CE784B3C22A685FB00662219 /* PhotoVideoDetailRouter.swift in Sources */,
+				F039B5F8279DE49A000EBAA7 /* GraceBannerView.swift in Sources */,
 				CE784B3D22A685FB00662219 /* PhotoVideoDetailConfigurator.swift in Sources */,
 				CE784B3E22A685FB00662219 /* LeavePremiumInteractorOutput.swift in Sources */,
 				98B04828259314750011DAEB /* BackupVersion.m in Sources */,
@@ -28308,6 +28334,7 @@
 				98231A5924F3A23500FD16E2 /* AprilFilter.swift in Sources */,
 				CF8B66AA23CBC9D70021B021 /* AlbumItem.swift in Sources */,
 				CF8B66AB23CBC9D70021B021 /* UserProfileRouter.swift in Sources */,
+				F039B5F7279DE499000EBAA7 /* GraceBannerView.swift in Sources */,
 				07FBA20626E0BBA800ED4132 /* Strings.swift in Sources */,
 				CF8B66AC23CBC9D70021B021 /* SelectionImageView.swift in Sources */,
 				CF8B66AD23CBC9D70021B021 /* InternetDataUsageCollectionViewCell.swift in Sources */,
@@ -30063,6 +30090,7 @@
 				CF8B6EC323CBCA280021B021 /* LeavePremiumInteractorOutput.swift in Sources */,
 				CF8B6EC423CBCA280021B021 /* PhotoVideoDetailInitializer.swift in Sources */,
 				CF8B6EC623CBCA280021B021 /* UserInfoSubViewViewInput.swift in Sources */,
+				F039B5F9279DE49B000EBAA7 /* GraceBannerView.swift in Sources */,
 				CF8B6EC723CBCA280021B021 /* UserInfoSubViewViewOutput.swift in Sources */,
 				CF8B6EC823CBCA280021B021 /* IAPManager.swift in Sources */,
 				98B04829259314750011DAEB /* BackupVersion.m in Sources */,

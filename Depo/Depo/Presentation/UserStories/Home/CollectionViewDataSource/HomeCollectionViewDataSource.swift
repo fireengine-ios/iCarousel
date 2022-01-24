@@ -28,6 +28,7 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     
     private var notPermittedCardsViewTypes = Set<String>()
     
+    var shouldHideGraceBanner: Bool?
     var isEnable = true
     var isViewActive = false
     
@@ -54,8 +55,8 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
             layout.delegate = self
         }
         
-        let headerNib = UINib(nibName: "HomeViewTopView", bundle: nil)
-        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeViewTopView")
+        let headerNib = UINib(nibName: "GraceBannerView", bundle: nil)
+        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "GraceBannerView")
         let nibName = UINib(nibName: CollectionViewCellsIdsConstant.cellForController, bundle: nil)
         collectionView.register(nibName, forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForController)
     }
@@ -584,10 +585,14 @@ extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return 0.1
-        // TODO: clean project from HomeViewTopView and collectionView delegates from it
-        /// to show home buttons
-        //return HomeViewTopView.getHeight()
+        let subscriptions = SingletonStorage.shared.activeUserSubscription
+        let containsGracePeriod = subscriptions?.list.contains(where: {$0.status == "GRACE_PERIOD"})
+        
+        if (containsGracePeriod == true) && (shouldHideGraceBanner != true) {
+            return GraceBannerView.getHeight()
+        } else {
+            return 0.1
+        }
     }
 }
 

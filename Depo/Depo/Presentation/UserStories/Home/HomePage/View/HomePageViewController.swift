@@ -181,18 +181,17 @@ extension HomePageViewController: HomeCollectionViewDataSourceDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return HomeViewTopView.getHeight()
+        return GraceBannerView.getHeight()
     }
     
     // MARK: UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HomeViewTopView", for: indexPath)
-            if let headerView = headerView as? HomeViewTopView {
-                headerView.actionsDelegate = self
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "GraceBannerView", for: indexPath)
+            if let headerView = headerView as? GraceBannerView {
+                headerView.delegate = self
             }
-            topView = headerView
             return headerView
         default:
             assert(false, "Unexpected element kind")
@@ -400,5 +399,12 @@ extension HomePageViewController: ShareCardContentManagerDelegate {
     
     func shareOperationFinished() {
         hideSpinner()
+    }
+}
+
+extension HomePageViewController: GraceBannerViewDelegate {
+    func closeButtonTapped() {
+        homePageDataSource.shouldHideGraceBanner = true
+        collectionView.reloadData()
     }
 }

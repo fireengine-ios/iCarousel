@@ -1956,3 +1956,11 @@
 "change_album_person_set_photo" = "Kişi fotoğrafı olarak kullan";
 "profile_recovery_mail_info" = "Şifreni unutman halinde sadece şifre kurtarma adımında kullanılacak e-posta adresidir.";
 "account_can_not_change_password" = "Hesabındaki bilgi eksiği nedeniyle şifre yenileyemiyorsun";
+"signup_enter_verification_code_email" = "Lütfen bu mail adresine gönderdiğimiz 6 basamaklı güvenlik kodunu gir: %@";
+"grace_banner_text" = "Kredi kartından ödeme alınamadığı için lifebox paketin yenilenememiştir. Kesintisiz lifebox hizmeti almaya devam etmen için ödeme bilgilerini AppStore’dan kontrol edebilir ve güncelleyebilirsin.";
+"save_to_my_lifebox_success" = "Dosyalar hesabına kaydedilmeye başladı, kısa süre sonra “Tüm Dosyalar” menüsünde görüntüleyebilirsin.";
+"save_to_my_lifebox_error" = "Dosyalar hesabına kaydedilemedi. Lütfen daha sonra tekrar dene.";
+"save_to_my_lifebox_multiprocess" = "Devam eden işlemin var. Lütfen daha sonra tekrar dene.";
+"save_to_my_lifebox_same_account" = "Dosyalar zaten hesabında kayıtlı. “Tüm Dosyalar” menüsü altında görüntüleyebilirsin. ";
+"save_to_my_lifebox_file_not_found" = "Paylaşımda dosya bulunamadı. Paylaşım süresinin dolması veya silinmesi durumuna karşı paylaşımın sahibiyle iletişime geçebilirsin.";
+"save_to_my_lifebox_folder_not_found" = "Klasörde dosya yok.";

@@ -1980,4 +1980,12 @@
 "change_person_photo" = "Ndrysho Foton e Kontaktit";
 "change_album_person_set_photo" = "Përdorni si foto kontakti";
 "profile_recovery_mail_info" = "E-mail-i i rikuperimit do të përdoret vetëm për hapin e rikuperimit të llogarisë nëse harroni fjalëkalimin tuaj.";
-"account_can_not_change_password" = "";
+"account_can_not_change_password" = "Për shkak të mungesës e të dhënave në llogarinë tuaj , ju nuk mund të rinovoni fjalëkalimin tuaj";
+"signup_enter_verification_code_email" = "Ju lutemi shkruani kodin 6 shifror të sigurisë që kemi dërguar në këtë adresë emaili: %@";
+"grace_banner_text" = "Dëshirojmë t'ju kujtojmë se paketa juaj lifebox nuk mund të rinovohet sepse pagesa me kartë krediti nuk mund të merrej. Për të vazhduar të merrni shërbimin e pandërprerë të lifebox, kontrolloni informacionin tuaj të pagesës përmes AppStore dhe përditësoni nëse është e nevojshme.";
+"save_to_my_lifebox_success" = "";
+"save_to_my_lifebox_error" = "";
+"save_to_my_lifebox_multiprocess" = "";
+"save_to_my_lifebox_same_account" = "";
+"save_to_my_lifebox_file_not_found" = "";
+"save_to_my_lifebox_folder_not_found" = "";
