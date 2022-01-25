@@ -168,6 +168,8 @@ final class FileInfoView: UIView, FromNib {
         if wrapData.isPublicSharedItem == true {
             peopleView.isHidden = true
             sharingInfoView.isHidden = true
+            fileDescriptionView.isHidden = true
+            locationView.isHidden = true
         }
     }
 
