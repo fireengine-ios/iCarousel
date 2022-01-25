@@ -30,7 +30,7 @@ class PublicShareInteractor: PublicShareInteractorInput {
     
     private func getPublicSharedItemsList() {
         output.startProgress()
-        PublicSharedItemsService().getPublicSharedItemsList(publicToken: publicToken ?? "", size: 20, page: page, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
+        PublicSharedItemsService().getPublicSharedItemsList(publicToken: publicToken ?? "", size: 40, page: page, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
             switch result {
             case .success(let items):
                 if items.isEmpty {
@@ -47,7 +47,7 @@ class PublicShareInteractor: PublicShareInteractorInput {
         guard let item = item, let tempListingURL = item.tempListingURL else { return }
         output.startProgress()
         
-        PublicSharedItemsService().getPublicSharedItemsInnerFolder(tempListingURL: tempListingURL, size: 20, page: page, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
+        PublicSharedItemsService().getPublicSharedItemsInnerFolder(tempListingURL: tempListingURL, size: 40, page: page, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
             switch result {
             case .success(let items):
                 if items.isEmpty {
