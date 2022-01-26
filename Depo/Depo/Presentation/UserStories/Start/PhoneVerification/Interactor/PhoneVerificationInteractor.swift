@@ -70,6 +70,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
                 if let response = response as? SignUpSuccessResponse {
                     self?.dataStorage.signUpResponse.remainingTimeInMinutes = response.remainingTimeInMinutes
                     self?.dataStorage.signUpResponse.expectedInputLength = response.expectedInputLength
+                    self?.dataStorage.signUpResponse.referenceToken = response.referenceToken
                 }
                 self?.output.resendCodeRequestSucceeded()
             }
