@@ -14,7 +14,7 @@ final class EmailVerificationPresenter: PhoneVerificationPresenter, EmailVerific
     }
 
     override var timerEnabled: Bool {
-        return false
+        return true
     }
 
     override func configure() {
