@@ -208,30 +208,6 @@ struct SignUpValidateOTP: RequestParametrs {
     }
 }
 
-struct SignUpUserPhoveVerification: RequestParametrs {
-    var timeout: TimeInterval {
-        return NumericConstants.defaultTimeout
-    }
-    
-    let token: String
-    let otp: String
-    
-    var requestParametrs: Any {
-        let dict: [String: Any] = [LbRequestkeys.referenceToken      : token,
-                                   LbRequestkeys.otp                 : otp]
-
-        return dict
-    }
-    
-    var patch: URL {
-        return URL(string: RouteRequests.phoneVerification, relativeTo: RouteRequests.baseUrl)!
-    }
-    
-    var header: RequestHeaderParametrs {
-        return RequestHeaders.base()
-    }
-}
-
 struct ForgotPassword: RequestParametrs {
     var timeout: TimeInterval {
         return NumericConstants.defaultTimeout
@@ -297,46 +273,6 @@ class EmailVerification: BaseRequestParametrs {
         return RequestHeaders.base()
     }
 }
-
-
-struct ResendVerificationSMS: RequestParametrs {
-    var timeout: TimeInterval {
-        return NumericConstants.defaultTimeout
-    }
-    
-    let refreshToken: String
-    let eulaId: Int
-    let processPersonalData: Bool
-    let etkAuth: Bool?
-    let globalPermAuth: Bool
-    let kvkkAuth: Bool?
-    
-    var requestParametrs: Any {
-        var parameters: [String : Any] = [LbRequestkeys.referenceToken : refreshToken,
-                                          LbRequestkeys.eulaId : eulaId,
-                                          LbRequestkeys.processPersonalData : processPersonalData,
-                                          LbRequestkeys.globalPermAuth: globalPermAuth]
-        
-        if let etkAuth = etkAuth {
-            parameters[LbRequestkeys.etkAuth] = etkAuth
-        }
-        
-        if let kvkkAuth = kvkkAuth {
-            parameters[LbRequestkeys.kvkkAuth] = kvkkAuth
-        }
-        
-        return parameters
-    }
-    
-    var patch: URL {
-        return URL(string: RouteRequests.resendVerificationSMS, relativeTo: RouteRequests.baseUrl)!
-    }
-    
-    var header: RequestHeaderParametrs {
-        return RequestHeaders.base()
-    }
-}
-
 
 typealias  SuccessLogin = () -> Void
 typealias  SuccessLogout = () -> Void
@@ -667,21 +603,7 @@ class AuthenticationService: BaseRequestService {
         let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: request, handler: handler)
     }
-    
-    func verificationPhoneNumber(phoveVerification: SignUpUserPhoveVerification, sucess: SuccessResponse?, fail: FailResponse?) {
-        debugLog("AuthenticationService verificationPhoneNumber")
-        
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: sucess, fail: fail)
-        executePostRequest(param: phoveVerification, handler: handler)
-    }
-    
-    func resendVerificationSMS(resendVerification: ResendVerificationSMS, sucess: SuccessResponse?, fail: FailResponse?) {
-        debugLog("AuthenticationService resendVerificationSMS")
-        
-        let handler = BaseResponseHandler<SignUpSuccessResponse, ObjectRequestResponse>(success: sucess, fail: fail)
-        executePostRequest(param: resendVerification, handler: handler)
-    }
-    
+
     func updateEmail(emailUpdateParameters: EmailUpdate, sucess: SuccessResponse?, fail: FailResponse?) {
         debugLog("AuthenticationService updateEmail")
 

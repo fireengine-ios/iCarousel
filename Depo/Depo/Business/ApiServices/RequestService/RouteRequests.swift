@@ -98,9 +98,6 @@ struct RouteRequests {
     static let signUpValidateOTP = baseUrl +/ "v2/signup/validate"
     static let logout = "auth/logout"
 
-    static let phoneVerification = "verify/phoneNumber"
-    static let resendVerificationSMS = "verify/sendVerificationSMS"
-
     static let forgotPassword = "account/forgotPassword"
 
     static let mailVerification = "verify/sendVerificationEmail"
