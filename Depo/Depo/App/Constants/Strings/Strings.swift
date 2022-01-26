@@ -98,5 +98,7 @@ enum Strings: String, Localizable {
     
     // MARK: - Grace Period Banner
     case graceBannerText = "grace_banner_text"
-
+    case gracePackageTitle = "grace_banner_title"
+    case gracePackageDescription = "grace_banner_desc"
+    case gracePackageExpirationDateTitle = "grace_expire_date"
 }

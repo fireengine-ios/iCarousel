@@ -58,6 +58,8 @@ final class SubscriptionPlan {
     let addonType: AddonType?
     let date: String
     let store: String
+    let packageStatus: String?
+    let gracePeriodEndDate: String
 
     init(name: String,
          price: String,
@@ -69,7 +71,9 @@ final class SubscriptionPlan {
          features: [AuthorityType],
          addonType: AddonType?,
          date: String,
-         store: String) {
+         store: String,
+         packageStatus: String?,
+         gracePeriodEndDate: String) {
         self.name = name
         self.price = price
         self.type = type
@@ -81,6 +85,8 @@ final class SubscriptionPlan {
         self.addonType = addonType
         self.date = date
         self.store = store
+        self.packageStatus = packageStatus
+        self.gracePeriodEndDate = gracePeriodEndDate
     }
     
     ///FE-990 2.5TB SLCM (Turkcell) quota package cancel text

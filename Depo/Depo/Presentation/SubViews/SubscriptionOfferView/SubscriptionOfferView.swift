@@ -92,6 +92,31 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
     
+    @IBOutlet private weak var gracePeriodStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 20
+            newValue.layoutMargins = UIEdgeInsets(top: 8, left: 12, bottom: 16, right: 20)
+            newValue.isLayoutMarginsRelativeArrangement = true
+        }
+    }
+    
+    @IBOutlet private weak var graceDateLabel: UILabel! {
+        willSet {
+            newValue.numberOfLines = 0
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 14)
+            newValue.textColor = ColorConstants.darkText
+        }
+    }
+    
+    @IBOutlet private weak var graceDescriptionLabel: UILabel! {
+        willSet {
+            newValue.numberOfLines = 0
+            newValue.font = UIFont.TurkcellSaturaFont(size: 15)
+            newValue.textColor = ColorConstants.switcherGrayColor
+            newValue.text = localized(.gracePackageDescription)
+        }
+    }
+    
     @IBOutlet private weak var featureView: SubscriptionFeaturesView!
     
     private weak var delegate: SubscriptionOfferViewDelegate?
@@ -211,6 +236,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         updateDetails(plan: plan)
         updateFeaturesView(features: makeFeatures(plan: plan), style: style)
         updateBorderView(isRecommended: plan.isRecommended)
+        updateGracePeriodView(plan: plan)
     }
     
     private func updateButton(plan: SubscriptionPlan, style: Style) {
@@ -271,6 +297,21 @@ final class SubscriptionOfferView: UIView, NibInit {
         borderView.backgroundColor = color
     }
     
+    private func updateGracePeriodView(plan: SubscriptionPlan) {
+        if plan.packageStatus != SubscribedPackageStatus.gracePeriod.rawValue {
+            return
+        }
+
+        gracePeriodStackView.isHidden = false
+        detailsStackView.isHidden = true
+        featureView.isHidden = true
+        recommendationLabel.isHidden = false
+        purchaseButton.isHidden = true
+        borderView.backgroundColor = .lrButterScotch
+        recommendationLabel.text = localized(.gracePackageTitle)
+        graceDateLabel.text = "\(localized(.gracePackageExpirationDateTitle)) \(plan.gracePeriodEndDate)"
+    }
+
     @IBAction private func onPurchaseTap(_ sender: UIButton) {
         guard let index = index else {
             return

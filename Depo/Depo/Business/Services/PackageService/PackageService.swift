@@ -100,7 +100,9 @@ final class PackageService {
                                         features: getOfferAvailableFeatures(offer: offer),
                                         addonType: .make(model: offer),
                                         date: getOfferDate(for: offer),
-                                        store: getOfferStore(for: offer))
+                                        store: getOfferStore(for: offer),
+                                        packageStatus: getPackageStatus(for: offer),
+                                        gracePeriodEndDate: getGracePeriodEndDate(for: offer))
         }
     }
     
@@ -167,7 +169,9 @@ final class PackageService {
                                       features: [AuthorityType],
                                       addonType: SubscriptionPlan.AddonType?,
                                       date: String = "",
-                                      store: String = "") -> SubscriptionPlan {
+                                      store: String = "",
+                                      packageStatus: String? = nil,
+                                      gracePeriodEndDate: String = "") -> SubscriptionPlan {
         return SubscriptionPlan(name: name,
                                 price: price,
                                 type: type,
@@ -178,7 +182,9 @@ final class PackageService {
                                 features: features,
                                 addonType: addonType,
                                 date: date,
-                                store: store)
+                                store: store,
+                                packageStatus: packageStatus,
+                                gracePeriodEndDate: gracePeriodEndDate)
     }
     
     private func localized(offerPeriod: String) -> String {
@@ -374,13 +380,13 @@ final class PackageService {
         return isPremiumPurchase
     }
     
+    private func dateString(from dateInterval: NSNumber) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yy"
+        return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(dateInterval.doubleValue / 1000)))
+    }
+    
     private func getOfferDate(for offer: Any) -> String {
-        func dateString(from dateInterval: NSNumber) -> String {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd MMM yy"
-            return formatter.string(from: Date(timeIntervalSince1970: TimeInterval(dateInterval.doubleValue / 1000)))
-        }
-        
         guard let model = offer as? SubscriptionPlanBaseResponse else {
             return ""
         }
@@ -444,5 +450,26 @@ final class PackageService {
         }
         
         return store
+    }
+    
+    private func getPackageStatus(for offer: Any) -> String? {
+        if let offer = offer as? SubscriptionPlanBaseResponse {
+            return offer.status
+        } else {
+            return nil
+        }
+    }
+    
+    private func getGracePeriodEndDate(for offer: Any) -> String {
+        if let offer = offer as? SubscriptionPlanBaseResponse {
+            if let gracePeriodEndDate = offer.gracePeriodEndDate {
+                let date = dateString(from: gracePeriodEndDate)
+                return date
+            } else {
+                return ""
+            }
+        } else {
+            return ""
+        }
     }
 }

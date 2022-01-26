@@ -586,7 +586,7 @@ extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
     
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
         let subscriptions = SingletonStorage.shared.activeUserSubscription
-        let containsGracePeriod = subscriptions?.list.contains(where: {$0.status == "GRACE_PERIOD"})
+        let containsGracePeriod = subscriptions?.list.contains(where: {$0.status == SubscribedPackageStatus.gracePeriod.rawValue})
         
         if (containsGracePeriod == true) && (shouldHideGraceBanner != true) {
             return GraceBannerView.getHeight()

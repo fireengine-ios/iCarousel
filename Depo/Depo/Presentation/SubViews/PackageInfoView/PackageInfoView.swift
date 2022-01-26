@@ -55,7 +55,8 @@ final class PackageInfoView: UIView, NibInit {
     @IBOutlet private weak var bottomView: UIView!
     @IBOutlet private weak var detailLabel: UILabel!
     @IBOutlet private weak var shadowView: UIView!
-
+    @IBOutlet private weak var infoImageView: UIImageView!
+    
     //MARK: vars
     private var packagePremiumView: PackagePremiumView?
     private var viewType: ControlPackageType!
@@ -97,6 +98,10 @@ final class PackageInfoView: UIView, NibInit {
         case .myStorage(let accountType):
             titleLabel.text = TextConstants.myPackages
             detailLabel.text = accountType?.text
+            
+            let subscriptions = SingletonStorage.shared.activeUserSubscription
+            let isGracedPeriod = subscriptions?.list.contains(where: {$0.status == SubscribedPackageStatus.gracePeriod.rawValue})
+            infoImageView.isHidden = !(isGracedPeriod ?? false)
 
         case .accountType(let type):
             titleLabel.text = type.text
