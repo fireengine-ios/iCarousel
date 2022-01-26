@@ -8,7 +8,7 @@
 
 protocol PhoneVerificationViewInput: AnyObject, Waiting {
 
-    func setupInitialState()
+    func setupInitialState(timerEnabled: Bool)
     
     func resendButtonShow(show: Bool)
     

@@ -19,7 +19,9 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
     }
     
     func goToPhoneVerification(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
-        routerVC.pushViewController(viewController: routerVC.phoneVerificationScreen(withSignUpSuccessResponse: withSignUpSuccessResponse, userInfo: userInfo))
+        let viewController = routerVC.phoneVerificationScreen(signUpResponse: withSignUpSuccessResponse,
+                                                              userInfo: userInfo)
+        routerVC.pushViewController(viewController: viewController)
     }
     
     func closeModule() {

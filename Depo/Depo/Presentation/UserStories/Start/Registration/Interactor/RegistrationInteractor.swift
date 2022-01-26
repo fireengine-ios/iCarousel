@@ -160,7 +160,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 result.kvkkAuth = etkAuth
                 result.globalPermAuth = globalPermAuth
                 result.eulaId = self.eula?.id
-                self.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
+                self.output.signUpSucceeded(userInfo: userInfo) { [weak self] in
+                    // proceed
+                    self?.callSendVerification(userInfo: userInfo, signUpResponse: result)
+                }
 
             case .failure(let error):
                 
@@ -185,6 +188,30 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.output.signUpFailed(errorResponse: error)
             }
         }
+    }
+
+    private func callSendVerification(userInfo: RegistrationUserInfoModel, signUpResponse: SignUpSuccessResponse) {
+        let request = SignUpSendVerification(
+            referenceToken: signUpResponse.referenceToken ?? "",
+            processPersonalData: true,
+            eulaId: signUpResponse.eulaId ?? 0,
+            kvkkAuth: signUpResponse.kvkkAuth,
+            etkAuth: signUpResponse.etkAuth,
+            globalPermAuth: signUpResponse.globalPermAuth ?? false
+        )
+        authenticationService.sendVerification(request: request, success: { [weak self] response in
+            DispatchQueue.main.async {
+                guard let response = response as? SignUpSuccessResponse else {
+                    assertionFailure()
+                    return
+                }
+                self?.output.verificationCodeSent(userInfo: userInfo, response: response)
+            }
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.main.async {
+                self?.output.signUpFailed(errorResponse: errorResponse)
+            }
+        })
     }
 
     func showSupportView() {

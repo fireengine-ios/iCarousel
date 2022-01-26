@@ -16,13 +16,19 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
 
     private lazy var customProgressHUD = CustomProgressHUD()
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
+
+    var timerEnabled: Bool {
+        // overriden in subclass to disable timer (EmailVerificationPresenter)
+        return true
+    }
     
     func viewIsReady() {
         interactor.trackScreen(isTimerExpired: false)
-        view.setupInitialState()
+        view.setupInitialState(timerEnabled: timerEnabled)
         configure()
         view.setupButtonsInitialState()
-        interactor.resendCode()
+        // Code sending is already done in signup/previous verification step
+        resendCodeRequestSucceeded()
     }
 
     func userNavigatedBack() {}
@@ -95,7 +101,9 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         completeAsyncOperationEnableScreen()
         asyncOperationSuccess()
         view.setupButtonsInitialState()
-        view.setupTimer(withRemainingTime: interactor.remainingTimeInSeconds)
+        if timerEnabled {
+            view.setupTimer(withRemainingTime: interactor.remainingTimeInSeconds)
+        }
     }
     
     func succesLogin() {
