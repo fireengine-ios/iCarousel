@@ -47,10 +47,7 @@ class PackagesTableViewCell: UITableViewCell {
         case .myStorage(let type):
             titleLabel.text = TextConstants.myPackages
             descriptionLabel.text = type?.text
-            
-            let subscriptions = SingletonStorage.shared.activeUserSubscription
-            let isGracedPeriod = subscriptions?.list.contains(where: {$0.status == SubscribedPackageStatus.gracePeriod.rawValue})
-            infoImageView.isHidden = !(isGracedPeriod ?? false)
+            infoImageView.isHidden = !(SingletonStorage.shared.subscriptionsContainGracePeriod)
             
         case .usage(percentage: let percentage):
             titleLabel.text = TextConstants.usage

@@ -98,10 +98,7 @@ final class PackageInfoView: UIView, NibInit {
         case .myStorage(let accountType):
             titleLabel.text = TextConstants.myPackages
             detailLabel.text = accountType?.text
-            
-            let subscriptions = SingletonStorage.shared.activeUserSubscription
-            let isGracedPeriod = subscriptions?.list.contains(where: {$0.status == SubscribedPackageStatus.gracePeriod.rawValue})
-            infoImageView.isHidden = !(isGracedPeriod ?? false)
+            infoImageView.isHidden = !(SingletonStorage.shared.subscriptionsContainGracePeriod)
 
         case .accountType(let type):
             titleLabel.text = type.text
