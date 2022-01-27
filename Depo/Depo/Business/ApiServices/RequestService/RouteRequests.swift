@@ -93,11 +93,10 @@ struct RouteRequests {
     
     static let httpsAuthification = "auth/token?rememberMe=%@"
     static let authificationByRememberMe = "auth/rememberMe"
-    static let signUp = "signup"
+    static let signUp = baseUrl +/ "v2/signup"
+    static let signUpSendVerification = baseUrl +/ "v2/signup/sendVerification"
+    static let signUpValidateOTP = baseUrl +/ "v2/signup/validate"
     static let logout = "auth/logout"
-    
-    static let phoneVerification = "verify/phoneNumber"
-    static let resendVerificationSMS = "verify/sendVerificationSMS"
 
     static let forgotPassword = "account/forgotPassword"
 

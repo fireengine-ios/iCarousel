@@ -28,9 +28,14 @@ class RegistrationRouter: RegistrationRouterInput {
         router.presentViewController(controller: controller)
     }
 
-    func phoneVerification(sigUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
-        let phoneVerification = router.phoneVerificationScreen(withSignUpSuccessResponse: sigUpResponse, userInfo: userInfo)
+    func phoneVerification(signUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+        let phoneVerification = router.phoneVerificationScreen(signUpResponse: signUpResponse, userInfo: userInfo)
         router.pushViewController(viewController: phoneVerification)
+    }
+
+    func emailVerification(signUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+        let emailVerification = router.emailVerificationScreen(signUpResponse: signUpResponse, userInfo: userInfo)
+        router.pushViewController(viewController: emailVerification)
     }
 
     func openSupport() {

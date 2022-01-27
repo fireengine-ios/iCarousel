@@ -12,7 +12,7 @@ final class TwoFactorChallengePresenter: PhoneVerificationPresenter {
     
     override func viewIsReady() {
         view.setupButtonsInitialState()
-        view.setupInitialState()
+        view.setupInitialState(timerEnabled: true)
         configure()
         resendCodeRequestSucceeded()
         

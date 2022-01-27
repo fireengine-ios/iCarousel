@@ -13,7 +13,7 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    private let dataStorage: PhoneVerificationDataStorage = PhoneVerificationDataStorage()    
+    let dataStorage: PhoneVerificationDataStorage = PhoneVerificationDataStorage()    
     lazy var authenticationService = AuthenticationService()
     private let cacheManager = CacheManager.shared
     
@@ -55,19 +55,22 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     }
     
     func resendCode() {
-        let verificationProperties = ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken ?? "",
-                                                          eulaId: dataStorage.signUpResponse.eulaId ?? 0,
-                                                          processPersonalData: true,
-                                                          etkAuth: dataStorage.signUpResponse.etkAuth,
-                                                          globalPermAuth: dataStorage.signUpResponse.globalPermAuth ?? false,
-                                                          kvkkAuth: dataStorage.signUpResponse.kvkkAuth)
+        let request = SignUpSendVerification(
+            referenceToken: dataStorage.signUpResponse.referenceToken ?? "",
+            processPersonalData: true,
+            eulaId: dataStorage.signUpResponse.eulaId ?? 0,
+            kvkkAuth: dataStorage.signUpResponse.kvkkAuth,
+            etkAuth: dataStorage.signUpResponse.etkAuth,
+            globalPermAuth: dataStorage.signUpResponse.globalPermAuth ?? false
+        )
+
         attempts = 0
-        authenticationService.resendVerificationSMS(resendVerification: verificationProperties,
-                                                    sucess: { [weak self] response in
+        authenticationService.sendVerification(request: request, success: { [weak self] response in
             DispatchQueue.main.async {
                 if let response = response as? SignUpSuccessResponse {
                     self?.dataStorage.signUpResponse.remainingTimeInMinutes = response.remainingTimeInMinutes
                     self?.dataStorage.signUpResponse.expectedInputLength = response.expectedInputLength
+                    self?.dataStorage.signUpResponse.referenceToken = response.referenceToken
                 }
                 self?.output.resendCodeRequestSucceeded()
             }
@@ -79,21 +82,20 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     }
     
     func verifyCode(code: String) {
-        let signUpProperties = SignUpUserPhoveVerification(token: dataStorage.signUpResponse.referenceToken ?? "",
-                                                           otp: code)
-        
-        authenticationService.verificationPhoneNumber(phoveVerification: signUpProperties, sucess: { [weak self] baseResponse in
-            
+        let request = SignUpValidateOTP(referenceToken: dataStorage.signUpResponse.referenceToken ?? "",
+                                        otp: code)
+        authenticationService.validateOTP(request: request, success: { [weak self] baseResponse in
+
             if let response = baseResponse as? ObjectRequestResponse,
                 let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
-                
+
                 self?.silentLogin(token: silentToken)
             } else {
                 DispatchQueue.main.async {
                     self?.output.verificationSucces()
                 }
             }
-            
+
         }, fail: { [weak self] errorRespose in
             DispatchQueue.main.async {
                 guard let `self` = self else {

@@ -148,20 +148,28 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         }
     }
     
-    func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?) {
-        guard let response = signUpResponse, let info = signUpUserInfo else {
-            assertionFailure()
-            return
-        }
-
+    func signUpSucceeded(userInfo: RegistrationUserInfoModel, proceed: @escaping () -> Void) {
         completeAsyncOperationEnableScreen()
 
         interactor.trackEmailUsagePopUp()
-        router.presentEmailUsagePopUp(email: info.mail) { [weak self] in
-            self?.router.phoneVerification(sigUpResponse: response, userInfo: info)
+        router.presentEmailUsagePopUp(email: userInfo.mail) { [weak self] in
+            self?.startAsyncOperationDisableScreen()
+            proceed()
         }
     }
-    
+
+    func verificationCodeSent(userInfo: RegistrationUserInfoModel, response: SignUpSuccessResponse) {
+        completeAsyncOperationEnableScreen()
+        if response.actionIs(.continueWithEmailVerification) {
+            router.emailVerification(signUpResponse: response, userInfo: userInfo)
+        } else {
+            if !response.actionIs(.continueWithOTPVerification) {
+                debugLog("WARNING: signup received unrecognized action \(response.action ?? "")")
+            }
+            router.phoneVerification(signUpResponse: response, userInfo: userInfo)
+        }
+    }
+
     func captchaRequired(required: Bool) {
         if required {
             view.setupCaptcha()

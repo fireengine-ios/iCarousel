@@ -190,6 +190,26 @@
 		0731E91A26318A9600883566 /* RegistrationTermsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0731E8BD263182A800883566 /* RegistrationTermsInfoViewController.xib */; };
 		0731E93826318A9900883566 /* RegistrationTermsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0731E8BD263182A800883566 /* RegistrationTermsInfoViewController.xib */; };
 		0731E93926318A9900883566 /* RegistrationTermsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0731E8BD263182A800883566 /* RegistrationTermsInfoViewController.xib */; };
+		07407D512796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D502796C5BD0082FF8D /* EmailVerificationInitializer.swift */; };
+		07407D522796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D502796C5BD0082FF8D /* EmailVerificationInitializer.swift */; };
+		07407D532796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D502796C5BD0082FF8D /* EmailVerificationInitializer.swift */; };
+		07407D542796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D502796C5BD0082FF8D /* EmailVerificationInitializer.swift */; };
+		07407D562796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D552796CB570082FF8D /* EmailVerificationConfigurator.swift */; };
+		07407D572796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D552796CB570082FF8D /* EmailVerificationConfigurator.swift */; };
+		07407D582796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D552796CB570082FF8D /* EmailVerificationConfigurator.swift */; };
+		07407D592796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D552796CB570082FF8D /* EmailVerificationConfigurator.swift */; };
+		07407D5C2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D5B2796CD4A0082FF8D /* EmailVerificationInteractor.swift */; };
+		07407D5D2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D5B2796CD4A0082FF8D /* EmailVerificationInteractor.swift */; };
+		07407D5E2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D5B2796CD4A0082FF8D /* EmailVerificationInteractor.swift */; };
+		07407D5F2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D5B2796CD4A0082FF8D /* EmailVerificationInteractor.swift */; };
+		07407D612796CF750082FF8D /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D602796CF750082FF8D /* EmailVerificationPresenter.swift */; };
+		07407D622796CF760082FF8D /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D602796CF750082FF8D /* EmailVerificationPresenter.swift */; };
+		07407D632796CF760082FF8D /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D602796CF750082FF8D /* EmailVerificationPresenter.swift */; };
+		07407D642796CF760082FF8D /* EmailVerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D602796CF750082FF8D /* EmailVerificationPresenter.swift */; };
+		07407D682796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D672796DC6F0082FF8D /* EmailVerificationRouter.swift */; };
+		07407D692796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D672796DC6F0082FF8D /* EmailVerificationRouter.swift */; };
+		07407D6A2796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D672796DC6F0082FF8D /* EmailVerificationRouter.swift */; };
+		07407D6B2796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07407D672796DC6F0082FF8D /* EmailVerificationRouter.swift */; };
 		074B23F3269CC4AE007529DB /* PhotoEditAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074B23F2269CC4AE007529DB /* PhotoEditAnalytics.swift */; };
 		074B23F4269CC4AE007529DB /* PhotoEditAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074B23F2269CC4AE007529DB /* PhotoEditAnalytics.swift */; };
 		074B23F5269CC4AE007529DB /* PhotoEditAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074B23F2269CC4AE007529DB /* PhotoEditAnalytics.swift */; };
@@ -9067,6 +9087,11 @@
 		0731E809263165DA00883566 /* RegistrationTermsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationTermsViewController.xib; sourceTree = "<group>"; };
 		0731E8BC263182A800883566 /* RegistrationTermsInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTermsInfoViewController.swift; sourceTree = "<group>"; };
 		0731E8BD263182A800883566 /* RegistrationTermsInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationTermsInfoViewController.xib; sourceTree = "<group>"; };
+		07407D502796C5BD0082FF8D /* EmailVerificationInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationInitializer.swift; sourceTree = "<group>"; };
+		07407D552796CB570082FF8D /* EmailVerificationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationConfigurator.swift; sourceTree = "<group>"; };
+		07407D5B2796CD4A0082FF8D /* EmailVerificationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationInteractor.swift; sourceTree = "<group>"; };
+		07407D602796CF750082FF8D /* EmailVerificationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationPresenter.swift; sourceTree = "<group>"; };
+		07407D672796DC6F0082FF8D /* EmailVerificationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationRouter.swift; sourceTree = "<group>"; };
 		074B23F2269CC4AE007529DB /* PhotoEditAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditAnalytics.swift; sourceTree = "<group>"; };
 		0755683C2666453F00AAA047 /* FileInfoThumbView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfoThumbView.swift; sourceTree = "<group>"; };
 		07567D912721D39900557BCF /* Strings+Attributed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Attributed.swift"; sourceTree = "<group>"; };
@@ -11937,6 +11962,50 @@
 				76464C9E441C036AD8B15D78 /* TermsAndServicesPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		07407D4B2796C5700082FF8D /* EmailVerification */ = {
+			isa = PBXGroup;
+			children = (
+				07407D652796CF7A0082FF8D /* Presenter */,
+				07407D5A2796CD3B0082FF8D /* Interactor */,
+				07407D662796DC5C0082FF8D /* Router */,
+				07407D4F2796C59A0082FF8D /* Configurator */,
+			);
+			path = EmailVerification;
+			sourceTree = "<group>";
+		};
+		07407D4F2796C59A0082FF8D /* Configurator */ = {
+			isa = PBXGroup;
+			children = (
+				07407D552796CB570082FF8D /* EmailVerificationConfigurator.swift */,
+				07407D502796C5BD0082FF8D /* EmailVerificationInitializer.swift */,
+			);
+			path = Configurator;
+			sourceTree = "<group>";
+		};
+		07407D5A2796CD3B0082FF8D /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				07407D5B2796CD4A0082FF8D /* EmailVerificationInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		07407D652796CF7A0082FF8D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				07407D602796CF750082FF8D /* EmailVerificationPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		07407D662796DC5C0082FF8D /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				07407D672796DC6F0082FF8D /* EmailVerificationRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 		07688808271D947700833F43 /* Tooltip */ = {
@@ -18680,6 +18749,7 @@
 				2B39FB04635CDE7B54750A4C /* Registration */,
 				762FCEFD487BFE9A7ACC832D /* TermsAndServices */,
 				E3F92B477C3B581616EAD04C /* PhoneVerification */,
+				07407D4B2796C5700082FF8D /* EmailVerification */,
 				17589F6A2276336700A5DB37 /* SupportFormController */,
 				CB47E015BFEA75771011D20E /* ForgotPassword */,
 				730A996E22D71D120037ABA9 /* TwoFactorAuthentication */,
@@ -23724,6 +23794,7 @@
 				8C20867C228D5012000BEDAD /* CacheManager.swift in Sources */,
 				3A134C602645535700CFC736 /* InvitedPeopleCollectionViewCell.swift in Sources */,
 				8C0E8C701FDEBDFF00789C91 /* ValidationResults.swift in Sources */,
+				07407D5C2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */,
 				8C23F2952286EF5200C5BF9E /* SimpleSliderCell.swift in Sources */,
 				3A54C6E9264968DF00C2C8BD /* InvitationApiResponses.swift in Sources */,
 				CF71473624B597AA00D83E60 /* ContactSyncScheduleCard.swift in Sources */,
@@ -23977,6 +24048,7 @@
 				98B04793259314740011DAEB /* UpdateCheck.m in Sources */,
 				8C0E8D141FDEBDFF00789C91 /* ErrorResponse.swift in Sources */,
 				4A0AC1452087374300032CC7 /* PeriodicContactSyncInitializer.swift in Sources */,
+				07407D612796CF750082FF8D /* EmailVerificationPresenter.swift in Sources */,
 				CE4F6190206CBC8600B179DA /* CALayer+Animation.swift in Sources */,
 				73B623E123C07D7A00839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				8C0E8D151FDEBDFF00789C91 /* ButtonWithCorner.swift in Sources */,
@@ -24438,6 +24510,7 @@
 				8C0E8E111FDEBDFF00789C91 /* PhoneVerificationInteractor.swift in Sources */,
 				8C0E8E121FDEBDFF00789C91 /* RoundedProgressView.swift in Sources */,
 				8C0E8E131FDEBDFF00789C91 /* PrintInteractor.swift in Sources */,
+				07407D512796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */,
 				98B0483B259314750011DAEB /* ContactUtil.m in Sources */,
 				8C0E8E141FDEBDFF00789C91 /* PhoneVerificationRouterInput.swift in Sources */,
 				98B04853259314750011DAEB /* AbstractHelper.m in Sources */,
@@ -24478,6 +24551,7 @@
 				98A86D5B23A239B900438225 /* AlbumsSliderDataSource.swift in Sources */,
 				8C0E8E241FDEBDFF00789C91 /* ForgotPasswordPresenter.swift in Sources */,
 				8C0E8E251FDEBDFF00789C91 /* ActivityTimelineFileCell.swift in Sources */,
+				07407D562796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */,
 				8C9EA14020B593E600FED3A2 /* DeviceExtension.swift in Sources */,
 				8C0E8E271FDEBDFF00789C91 /* ForgotPasswordInteractorInput.swift in Sources */,
 				8C0E8E281FDEBDFF00789C91 /* ForgotPasswordInteractorOutput.swift in Sources */,
@@ -24637,6 +24711,7 @@
 				985E6950255A6045006F6CD7 /* PrivateShareUserRoleViewController.swift in Sources */,
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
 				9864296922F834F10039811C /* SpotifyResponse.swift in Sources */,
+				07407D682796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */,
 				CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */,
 				98B04B17259316E40011DAEB /* Notifications.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
@@ -25795,6 +25870,7 @@
 				98922296240D0C0E004155A5 /* BecomePremiumView.swift in Sources */,
 				CE78485C22A685FB00662219 /* WidgetService.swift in Sources */,
 				CE78485D22A685FB00662219 /* TabBarViewController.swift in Sources */,
+				07407D6A2796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */,
 				B569563624D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				CE78485E22A685FB00662219 /* LeavePremiumInteractorInput.swift in Sources */,
 				8C1E5BDE22CB8C1A008FDA02 /* RangeAPIInfo.swift in Sources */,
@@ -26743,6 +26819,7 @@
 				CE784B0B22A685FB00662219 /* SearchViewPresenter.swift in Sources */,
 				CE784B0C22A685FB00662219 /* TermsOfUseModuleInput.swift in Sources */,
 				CE784B0D22A685FB00662219 /* UIviewControlllerExtensions.swift in Sources */,
+				07407D632796CF760082FF8D /* EmailVerificationPresenter.swift in Sources */,
 				CE784B0F22A685FB00662219 /* Dictionary.swift in Sources */,
 				CE784B1022A685FB00662219 /* UsageInfoInteractor.swift in Sources */,
 				CE784B1122A685FB00662219 /* WormholePoster.swift in Sources */,
@@ -26815,6 +26892,7 @@
 				890F737D22EEFB0000BA0020 /* ChangeEmailPopUp.swift in Sources */,
 				CE784B4822A685FB00662219 /* UserInfoSubViewPresenter.swift in Sources */,
 				CE784B4922A685FB00662219 /* UserInfoSubViewInteractorInput.swift in Sources */,
+				07407D5E2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */,
 				CE784B4B22A685FB00662219 /* ManageContactsInitializer.swift in Sources */,
 				CE784B4C22A685FB00662219 /* UserInfoSubViewInteractorOutput.swift in Sources */,
 				CE784B4D22A685FB00662219 /* UserInfoSubViewInteractor.swift in Sources */,
@@ -27023,6 +27101,7 @@
 				CE784BE322A685FB00662219 /* UploadFilesSelectionPresenter.swift in Sources */,
 				CE784BE422A685FB00662219 /* InsetsLabel.swift in Sources */,
 				0762029E269B842E00D4FB2C /* OverlayStickerSelectorDataSource.swift in Sources */,
+				07407D532796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */,
 				8C1E5BD622CB8BBF008FDA02 /* Double+Extensions.swift in Sources */,
 				CE784BE622A685FB00662219 /* UploadFilesSelectionInteractorInput.swift in Sources */,
 				CE784BE722A685FB00662219 /* UploadFilesSelectionInteractorOutput.swift in Sources */,
@@ -27269,6 +27348,7 @@
 				CE784C9422A685FB00662219 /* XCGLogger+Extension.swift in Sources */,
 				CE784C9522A685FB00662219 /* OTPViewInteractorIO.swift in Sources */,
 				CE784C9622A685FB00662219 /* LargeFullOfQuotaPopUp.swift in Sources */,
+				07407D582796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */,
 				CF71467F24B597A900D83E60 /* ContactSyncMainView.swift in Sources */,
 				CE784C9722A685FB00662219 /* OTPViewRouter.swift in Sources */,
 				98B047F0259314750011DAEB /* AnalyzeStatus.m in Sources */,
@@ -27512,6 +27592,7 @@
 				CF8B641D23CBC9D70021B021 /* CaptchaService.swift in Sources */,
 				9823196A24F3A1E600FD16E2 /* PreparedFilterCell.swift in Sources */,
 				CF8B641E23CBC9D70021B021 /* PhotoVideoDataSource.swift in Sources */,
+				07407D692796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */,
 				98B04824259314750011DAEB /* BackupVersion.m in Sources */,
 				0786E1882660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */,
 				CF8B641F23CBC9D70021B021 /* ImportPhotosInteractorInput.swift in Sources */,
@@ -28072,6 +28153,7 @@
 				CF71460524B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				0765B829269EE6F50030429C /* PhotopickCampaignResponse.swift in Sources */,
 				CF8B65D523CBC9D70021B021 /* WrapperedItemUtil.swift in Sources */,
+				07407D522796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */,
 				CF8B65D623CBC9D70021B021 /* LoginSettingsViewController.swift in Sources */,
 				CF8B65D723CBC9D70021B021 /* PhoneVerificationViewOutput.swift in Sources */,
 				CF8B65D823CBC9D70021B021 /* PhoneVerificationViewController.swift in Sources */,
@@ -28148,6 +28230,7 @@
 				CF7146EF24B597A900D83E60 /* ContactListDataSource.swift in Sources */,
 				CF8B661423CBC9D70021B021 /* PaymentTypeView.swift in Sources */,
 				CF8B661523CBC9D70021B021 /* ProfileFieldView.swift in Sources */,
+				07407D622796CF760082FF8D /* EmailVerificationPresenter.swift in Sources */,
 				CF8B661623CBC9D70021B021 /* OffersService.swift in Sources */,
 				B55C97072559353800623C5C /* PrivateShareLocalSuggestionsViewController.swift in Sources */,
 				98B047E4259314750011DAEB /* BackupStats.m in Sources */,
@@ -28286,6 +28369,7 @@
 				CF8B668023CBC9D70021B021 /* AlbumDetailModuleOutput.swift in Sources */,
 				CF8B668123CBC9D70021B021 /* BaseFilesGreedViewOutput.swift in Sources */,
 				CF8B668223CBC9D70021B021 /* SubscriptionPlan.swift in Sources */,
+				07407D572796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */,
 				CF8B668323CBC9D70021B021 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				CF8B668423CBC9D70021B021 /* PhotoVideoCollectionViewLayout.swift in Sources */,
 				B519A675253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
@@ -28451,6 +28535,7 @@
 				CF8B670723CBC9D70021B021 /* PhotoVideoController.swift in Sources */,
 				CF8B670923CBC9D70021B021 /* PushPopAnimator.swift in Sources */,
 				CF8B670B23CBC9D70021B021 /* PeriodContactsSyncModel.swift in Sources */,
+				07407D5D2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */,
 				CF8B670D23CBC9D70021B021 /* InstaPickHashtagCell.swift in Sources */,
 				CF8B670E23CBC9D70021B021 /* InstapickAnalyzesCount.swift in Sources */,
 				CF8B670F23CBC9D70021B021 /* FaceImageChangeCoverRouter.swift in Sources */,
@@ -29087,6 +29172,7 @@
 				CF8B6BAB23CBCA280021B021 /* ButtonWithGrayCorner.swift in Sources */,
 				CF8B6BAC23CBCA280021B021 /* SubscriptionParameters.swift in Sources */,
 				B569563724D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
+				07407D6B2796DC6F0082FF8D /* EmailVerificationRouter.swift in Sources */,
 				CF8B6BAD23CBCA280021B021 /* ContactSyncResponse.swift in Sources */,
 				CF8B6BAE23CBCA280021B021 /* WidgetService.swift in Sources */,
 				CF8B6BAF23CBCA280021B021 /* TabBarViewController.swift in Sources */,
@@ -30035,6 +30121,7 @@
 				CF8B6E9523CBCA280021B021 /* Dictionary.swift in Sources */,
 				CF8B6E9623CBCA280021B021 /* UsageInfoInteractor.swift in Sources */,
 				730F8ABA23CDD55300798B61 /* MigrationPolicy_1_3.swift in Sources */,
+				07407D642796CF760082FF8D /* EmailVerificationPresenter.swift in Sources */,
 				CF8B6E9723CBCA280021B021 /* WormholePoster.swift in Sources */,
 				CF8B6E9823CBCA280021B021 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				CF8B6E9923CBCA280021B021 /* AlbumItem.swift in Sources */,
@@ -30107,6 +30194,7 @@
 				CF8B6ED323CBCA280021B021 /* UserInfoSubViewInteractor.swift in Sources */,
 				CF8B6ED423CBCA280021B021 /* UserInfoSubViewRouterInput.swift in Sources */,
 				CF8B6ED523CBCA280021B021 /* SecretAnswerView.swift in Sources */,
+				07407D5F2796CD4A0082FF8D /* EmailVerificationInteractor.swift in Sources */,
 				CF8B6ED623CBCA280021B021 /* UserInfoSubViewRouter.swift in Sources */,
 				CF8B6ED723CBCA280021B021 /* UserInfoSubViewConfigurator.swift in Sources */,
 				CF8B6ED823CBCA280021B021 /* UserInfoSubViewInitializer.swift in Sources */,
@@ -30315,6 +30403,7 @@
 				CF8B6F7F23CBCA280021B021 /* LatestUploadCardCell.swift in Sources */,
 				CF8B6F8023CBCA280021B021 /* LandingPageCollectionViewDataSource.swift in Sources */,
 				076202A0269B842F00D4FB2C /* OverlayStickerSelectorDataSource.swift in Sources */,
+				07407D542796C5BD0082FF8D /* EmailVerificationInitializer.swift in Sources */,
 				CF8B6F8223CBCA280021B021 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				CF8B6F8323CBCA280021B021 /* ResizableTableView.swift in Sources */,
 				CF8B6F8423CBCA280021B021 /* UploadFilesSelectionInteractor.swift in Sources */,
@@ -30561,6 +30650,7 @@
 				CF8B704223CBCA280021B021 /* XCGLogger+Extension.swift in Sources */,
 				CF8B704323CBCA280021B021 /* OTPViewInteractorIO.swift in Sources */,
 				CF71468024B597A900D83E60 /* ContactSyncMainView.swift in Sources */,
+				07407D592796CB570082FF8D /* EmailVerificationConfigurator.swift in Sources */,
 				CF8B704423CBCA280021B021 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				98B047F1259314750011DAEB /* AnalyzeStatus.m in Sources */,
 				0791817C26F88B7B0067FB75 /* IdentityVerificationMethod.swift in Sources */,

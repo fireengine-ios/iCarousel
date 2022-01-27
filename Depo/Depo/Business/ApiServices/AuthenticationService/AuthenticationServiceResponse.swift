@@ -9,6 +9,11 @@
 import Foundation
 import SwiftyJSON
 
+enum SignUpAction: String {
+    case continueWithEmailVerification = "CONTINUE_WITH_EMAIL_VERIFICATION"
+    case continueWithOTPVerification = "CONTINUE_WITH_OTP_VERIFICATION"
+}
+
 class SignUpSuccessResponse: ObjectRequestResponse {
     
     var action: String?
@@ -29,6 +34,10 @@ class SignUpSuccessResponse: ObjectRequestResponse {
             remainingTimeInMinutes = valueDict![LbResponseKey.remainingTimeInMinutes]?.int
             expectedInputLength = valueDict![LbResponseKey.expectedInputLength]?.int
         }
+    }
+
+    func actionIs(_ action: SignUpAction) -> Bool {
+        self.action == action.rawValue
     }
 }
 

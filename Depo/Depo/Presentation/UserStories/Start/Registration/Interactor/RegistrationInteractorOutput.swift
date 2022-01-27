@@ -21,8 +21,9 @@ protocol RegistrationInteractorOutput: AnyObject {
     func failedToLoadTermsOfUse(errorString: String)
     
     func signUpFailed(errorResponse: Error)
-    func signUpSuccessed(signUpUserInfo: RegistrationUserInfoModel?, signUpResponse: SignUpSuccessResponse?)
-    
+    func signUpSucceeded(userInfo: RegistrationUserInfoModel, proceed: @escaping () -> Void)
+    func verificationCodeSent(userInfo: RegistrationUserInfoModel, response: SignUpSuccessResponse)
+
     func showFAQView()
     func showSupportView()
 }

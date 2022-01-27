@@ -83,7 +83,7 @@ extension ServerStatusError: LocalizedError {
             return TextConstants.errorInvalidPasswordBelowLimit
             
         case ErrorKeys.TOO_MANY_REQUESTS:
-            return TextConstants.TOO_MANY_REQUESTS
+            return TextConstants.twoFATooManyRequestsErrorMessage
             
         case ErrorKeys.EMAIL_IS_INVALID:
             return TextConstants.EMAIL_IS_INVALID
