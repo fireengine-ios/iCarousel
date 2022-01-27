@@ -1964,3 +1964,10 @@
 "save_to_my_lifebox_same_account" = "Dosyalar zaten hesabında kayıtlı. “Tüm Dosyalar” menüsü altında görüntüleyebilirsin. ";
 "save_to_my_lifebox_file_not_found" = "Paylaşımda dosya bulunamadı. Paylaşım süresinin dolması veya silinmesi durumuna karşı paylaşımın sahibiyle iletişime geçebilirsin.";
 "save_to_my_lifebox_folder_not_found" = "Klasörde dosya yok.";
+
+/*Fuzzy*/
+"grace_banner_title" = "Ödeme Alınamadı!";
+"grace_banner_desc" = "Debit/Kredi kartı bakiyen yetersiz olabilir veya kart bilgilerin değişmiş olabilir.";
+
+/*Fuzzy*/
+"grace_expire_date" = "Hesabın Askıya Alınacağı Tarih:";

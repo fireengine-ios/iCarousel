@@ -29,6 +29,8 @@ class PackagesTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet private weak var infoImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         accessoryType = .disclosureIndicator
@@ -36,6 +38,8 @@ class PackagesTableViewCell: UITableViewCell {
     }
     
     func configure(type: ControlPackageType) {
+        infoImageView.isHidden = true
+
         switch type {
         case .myProfile:
             titleLabel.text = TextConstants.myProfile
@@ -43,7 +47,8 @@ class PackagesTableViewCell: UITableViewCell {
         case .myStorage(let type):
             titleLabel.text = TextConstants.myPackages
             descriptionLabel.text = type?.text
-
+            infoImageView.isHidden = !(SingletonStorage.shared.subscriptionsContainGracePeriod)
+            
         case .usage(percentage: let percentage):
             titleLabel.text = TextConstants.usage
             let percentageString = percentage.rounded(.toNearestOrAwayFromZero)

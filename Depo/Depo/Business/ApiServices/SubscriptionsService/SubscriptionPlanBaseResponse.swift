@@ -23,6 +23,11 @@ enum SubscriptionType: String {
     }
 }
 
+enum SubscribedPackageStatus: String {
+    case gracePeriod = "GRACE_PERIOD"
+    case active = "ACTIVE"
+}
+
 class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     
     struct SubscriptionConstants {
@@ -35,6 +40,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         static let nextRenewalDate = "nextRenewalDate"
         static let subscriptionEndDate = "subscriptionEndDate"
         static let renewalStatus = "renewalStatus"
+        static let gracePeriodEndDate = "gracePeriodEndDate"
         
         static let subscriptionPlan = "subscriptionPlan"
         
@@ -67,6 +73,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     var nextRenewalDate: NSNumber?
     var subscriptionEndDate: NSNumber?
     var renewalStatus: String?
+    var gracePeriodEndDate: NSNumber?
     
     var subscriptionPlan: [AnyHashable: Any]?
     
@@ -99,6 +106,7 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         nextRenewalDate = json?[SubscriptionConstants.nextRenewalDate].number
         subscriptionEndDate = json?[SubscriptionConstants.subscriptionEndDate].number
         renewalStatus = json?[SubscriptionConstants.renewalStatus].string
+        gracePeriodEndDate = json?[SubscriptionConstants.gracePeriodEndDate].number
         
         let tempoSubscriptionPlan = json?[SubscriptionConstants.subscriptionPlan].dictionary
         

@@ -1996,3 +1996,6 @@
 "save_to_my_lifebox_same_account" = "Files are already backed up on your account. You can view them under “All Files” menu.";
 "save_to_my_lifebox_file_not_found" = "Files not found in the sharing link. Please contact the owner of the sharing in case of link expiration or deletion.";
 "save_to_my_lifebox_folder_not_found" = "No files in the folder.";
+"grace_banner_title" = "Payment Failed!";
+"grace_banner_desc" = "Your Debit/Credit card balance may be insufficient or your card information may have changed.";
+"grace_expire_date" = "Account Suspension Date:";

@@ -14,7 +14,7 @@ final class PackagesViewController: BaseViewController {
     @IBOutlet weak private var cardsTableView: UITableView! {
         willSet {
             newValue.delaysContentTouches = true
-            newValue.rowHeight = UITableView.automaticDimension
+            newValue.rowHeight = 51
             newValue.register(nibCell: PackagesTableViewCell.self)
             newValue.tableFooterView = UIView()
             newValue.isScrollEnabled = false

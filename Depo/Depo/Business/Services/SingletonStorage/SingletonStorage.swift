@@ -264,4 +264,9 @@ class SingletonStorage {
     var activeUserSubscriptionList: [SubscriptionPlanBaseResponse] {
         return activeUserSubscription?.list ?? []
     }
+    
+    var subscriptionsContainGracePeriod: Bool {
+        let containsGracePeriod = activeUserSubscription?.list.contains(where: {$0.status == SubscribedPackageStatus.gracePeriod.rawValue})
+        return containsGracePeriod ?? false
+    }
 }
