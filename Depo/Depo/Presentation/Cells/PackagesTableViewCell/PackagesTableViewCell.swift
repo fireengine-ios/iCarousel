@@ -30,6 +30,7 @@ class PackagesTableViewCell: UITableViewCell {
     }
     
     @IBOutlet private weak var infoImageView: UIImageView!
+    @IBOutlet private weak var titleLabelLeadingConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,5 +60,8 @@ class PackagesTableViewCell: UITableViewCell {
             titleLabel.text = type.text
             descriptionLabel.isHidden = true
         }
+        
+        let titleLeadingConstraint: CGFloat = infoImageView.isHidden ? 16 : 48
+        titleLabelLeadingConstraint.constant = titleLeadingConstraint
     }
 }
