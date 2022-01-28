@@ -17,25 +17,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xEF-No-SGf">
-                        <rect key="frame" x="16" y="12" width="50" height="27"/>
-                        <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="customPopUpInfo" translatesAutoresizingMaskIntoConstraints="NO" id="3VD-7V-DDz">
-                                <rect key="frame" x="-23" y="0.0" width="23" height="27"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="23" id="tEd-QB-7WG"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6e-T2-bNs">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5G-Jp-2dC">
                         <rect key="frame" x="409" y="16" width="0.0" height="19"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="customPopUpInfo" translatesAutoresizingMaskIntoConstraints="NO" id="gPg-ND-Hoq">
+                        <rect key="frame" x="16" y="14" width="22" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="F5L-ri-NWR"/>
+                            <constraint firstAttribute="width" constant="22" id="khl-P9-Zv2"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6e-T2-bNs">
+                        <rect key="frame" x="16" y="16" width="0.0" height="19"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -44,19 +40,22 @@
                 <color key="backgroundColor" name="primaryBackground"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="S5G-Jp-2dC" secondAttribute="bottom" constant="16" id="1xY-vN-bkp"/>
-                    <constraint firstItem="xEF-No-SGf" firstAttribute="top" secondItem="noX-YT-ASg" secondAttribute="top" constant="12" id="5wU-5X-8iV"/>
                     <constraint firstAttribute="trailing" secondItem="S5G-Jp-2dC" secondAttribute="trailing" constant="5" id="75G-2C-64m"/>
                     <constraint firstItem="S5G-Jp-2dC" firstAttribute="top" secondItem="noX-YT-ASg" secondAttribute="top" constant="16" id="CHV-27-AMD"/>
-                    <constraint firstItem="xEF-No-SGf" firstAttribute="leading" secondItem="noX-YT-ASg" secondAttribute="leading" constant="16" id="V2x-Zh-tiN"/>
-                    <constraint firstAttribute="bottom" secondItem="xEF-No-SGf" secondAttribute="bottom" constant="12" id="XCu-PK-PzX"/>
-                    <constraint firstItem="S5G-Jp-2dC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xEF-No-SGf" secondAttribute="trailing" constant="16" id="j7X-tw-j9m"/>
+                    <constraint firstItem="S5G-Jp-2dC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b6e-T2-bNs" secondAttribute="trailing" constant="16" id="F1N-62-ejf"/>
+                    <constraint firstItem="b6e-T2-bNs" firstAttribute="top" secondItem="noX-YT-ASg" secondAttribute="top" constant="16" id="X4h-fT-e3E"/>
+                    <constraint firstItem="gPg-ND-Hoq" firstAttribute="leading" secondItem="noX-YT-ASg" secondAttribute="leading" constant="16" id="rF4-0V-LT1"/>
+                    <constraint firstItem="gPg-ND-Hoq" firstAttribute="centerY" secondItem="noX-YT-ASg" secondAttribute="centerY" id="rv8-ZW-maV"/>
+                    <constraint firstAttribute="bottom" secondItem="b6e-T2-bNs" secondAttribute="bottom" constant="16" id="xp4-sG-hoY"/>
+                    <constraint firstItem="b6e-T2-bNs" firstAttribute="leading" secondItem="noX-YT-ASg" secondAttribute="leading" constant="16" id="zOV-PC-oMu"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" name="primaryBackground"/>
             <connections>
                 <outlet property="descriptionLabel" destination="S5G-Jp-2dC" id="ghf-Ff-g4k"/>
-                <outlet property="infoImageView" destination="3VD-7V-DDz" id="bwn-bM-9Wp"/>
+                <outlet property="infoImageView" destination="gPg-ND-Hoq" id="O27-Xf-0hG"/>
                 <outlet property="titleLabel" destination="b6e-T2-bNs" id="088-vD-1ln"/>
+                <outlet property="titleLabelLeadingConstraint" destination="zOV-PC-oMu" id="xWQ-76-YUh"/>
             </connections>
             <point key="canvasLocation" x="400.00000000000006" y="73.995535714285708"/>
         </tableViewCell>
