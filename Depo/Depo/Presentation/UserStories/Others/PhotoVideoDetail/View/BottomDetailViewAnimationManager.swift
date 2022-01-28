@@ -389,6 +389,7 @@ extension BottomDetailViewAnimationManager {
 
 
 extension BottomDetailViewAnimationManager: PhotoVideoDetailCellDelegate {
+    func itemPlaceholderFinished() {}
     func tapOnSelectedItem() {}
     func tapOnCellForFullScreen() {}
     func didExpireUrl() {}

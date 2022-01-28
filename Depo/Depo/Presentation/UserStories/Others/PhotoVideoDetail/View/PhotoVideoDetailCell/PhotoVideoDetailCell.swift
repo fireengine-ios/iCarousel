@@ -14,6 +14,7 @@ protocol PhotoVideoDetailCellDelegate: AnyObject {
     func tapOnCellForFullScreen()
     func imageLoadingFinished()
     func didExpireUrl()
+    func itemPlaceholderFinished()
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -211,5 +212,6 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
         imageScrollView.isHidden = true
         webView.isHidden = true
         placeholderImageView.isHidden = false
+        delegate?.itemPlaceholderFinished()
     }
 }
