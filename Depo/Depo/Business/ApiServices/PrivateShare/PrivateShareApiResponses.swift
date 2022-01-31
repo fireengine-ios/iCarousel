@@ -76,6 +76,8 @@ struct SharedFileInfoMetaData: Codable {
     
     let specialFolderMeta: String?
     
+    var duration: Double = Double(0.0)
+    
     private enum CodingKeys: String, CodingKey {
         case fileDescription = "Description"
         case isFavourite = "X-Object-Meta-Favourite"
@@ -95,6 +97,7 @@ struct SharedFileInfoMetaData: Codable {
         case latitude = "Latitude"
         case longitude = "Longitude"
         case specialFolderMeta = "X-Object-Meta-Special-Folder"
+        case duration = "Duration"
 
     }
     
@@ -121,6 +124,10 @@ struct SharedFileInfoMetaData: Codable {
 
         latitude = Double(try container.decodeIfPresent(String.self, forKey: .latitude) ?? "")
         longitude = Double(try container.decodeIfPresent(String.self, forKey: .longitude) ?? "")
+        
+        if let durStr = JSON(try container.decodeIfPresent(String.self, forKey: .duration) ?? "").string, durStr.count > 0, let duration = Double(durStr) {
+            self.duration = Double(duration / 1000.0)
+        }
     }
 }
 

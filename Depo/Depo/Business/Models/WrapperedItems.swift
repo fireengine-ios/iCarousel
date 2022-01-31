@@ -1239,6 +1239,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         childCount = privateShareFileInfo.childCount
         privateSharePermission = privateShareFileInfo.permissions
         isShared = true
+        duration = WrapData.getDuration(duration: privateShareFileInfo.metadata?.duration)
     }
     
     init(publicSharedFileInfo: SharedFileInfo) {
@@ -1271,6 +1272,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = publicSharedFileInfo.tempDownloadURL
         tempListingURL = publicSharedFileInfo.tempListingURL?.absoluteString
         isPublicSharedItem = true
+        duration = WrapData.getDuration(duration: publicSharedFileInfo.metadata?.duration)
     }
     
     func copyFileData(from item: WrapData) {
