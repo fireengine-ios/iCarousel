@@ -16,6 +16,8 @@ enum Strings: String, Localizable {
 
     // MARK: - SignUp
     case signUpEnterVerificationCodeEmail = "signup_enter_verification_code_email"
+    case signUpTooManyRequestsEmail = "signup_too_many_requests_email"
+    case signUpTooManyRequestsMSISDN = "signup_too_many_requests_msisdn"
 
     // MARK: - Private Share
     case privateShareEmptyListError = "private_share_empty_list_error"

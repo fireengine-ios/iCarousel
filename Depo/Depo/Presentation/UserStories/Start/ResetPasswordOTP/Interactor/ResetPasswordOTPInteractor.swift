@@ -127,6 +127,7 @@ extension ResetPasswordOTPInteractor {
 }
 
 extension ResetPasswordOTPInteractor: ResetPasswordOTPInteractorInput {
+    var initialError: Error? { nil }
     func showPopUp(with text: String) {}
     func authificate(atachedCaptcha: CaptchaParametrAnswer?) {}
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {}

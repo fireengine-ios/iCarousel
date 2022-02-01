@@ -2006,3 +2006,5 @@
 "signup_email_verification_subtitle" = "Enter Security Code";
 "signup_phone_verification_title" = "Phone Verification";
 "signup_phone_verification_subtitle" = "Enter Security Code";
+"signup_too_many_requests_email" = "Too many verification code requested for this email, please try again later";
+"signup_too_many_requests_msisdn" = "Too many verification code requested for this phone number, please try again later";

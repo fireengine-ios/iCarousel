@@ -10,6 +10,7 @@ import Foundation
 
 protocol EmailVerificationInteractorOutput: PhoneVerificationInteractorOutput {
     func emailVerified(signUpResponse: SignUpSuccessResponse)
+    func tooManyRequestsErrorReceievedForMSISDN(error: ServerValueError, signUpResponse: SignUpSuccessResponse)
 }
 
 final class EmailVerificationInteractor: PhoneVerificationInteractor {
@@ -46,10 +47,21 @@ final class EmailVerificationInteractor: PhoneVerificationInteractor {
                 if case let .error(underlyingError) = error,
                    let serverStatusError = underlyingError as? ServerStatusError,
                    serverStatusError.status == ServerStatusError.ErrorKeys.tooManyInvalidAttempts {
+
                     self.output.reachedMaxAttempts()
                     self.output.verificationFailed(with: TextConstants.promocodeBlocked)
                     self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .tooManyInvalidOtpAttempts))
-                } else {
+                }
+                else if case let .error(underlyingError) = error,
+                   let serverValueError = underlyingError as? ServerValueError,
+                   serverValueError.value == ServerValueError.ErrorKeys.TOO_MANY_REQUESTS_MSISDN {
+
+                    self.castedOutput.tooManyRequestsErrorReceievedForMSISDN(
+                        error: serverValueError,
+                        signUpResponse: self.dataStorage.signUpResponse
+                    )
+                }
+                else {
                     self.output.verificationFailed(with: error.localizedDescription)
                     self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .invalidOtp))
                 }

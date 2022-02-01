@@ -19,6 +19,8 @@ protocol PhoneVerificationInteractorInput {
     var expectedInputLength: Int? { get }
     
     var remainingTimeInSeconds: Int { get }
+
+    var initialError: Error? { get }
     
     func verifyCode(code: String)
     

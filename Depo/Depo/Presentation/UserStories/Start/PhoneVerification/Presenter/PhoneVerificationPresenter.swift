@@ -29,6 +29,10 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         view.setupButtonsInitialState()
         // Code sending is already done in signup/previous verification step
         resendCodeRequestSucceeded()
+
+        if let error = interactor.initialError {
+            resendCodeRequestFailed(with: .error(error))
+        }
     }
 
     func userNavigatedBack() {}
@@ -85,7 +89,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
         if case ErrorResponse.error(let containedError) = error {
             if let serverError = containedError as? ServerError, serverError.code == 401 {
                 router.popToLoginWithPopUp(title: TextConstants.errorAlert, message: TextConstants.twoFAInvalidSessionErrorMessage, image: .error, onClose: nil)
-            } else if containedError is ServerStatusError {
+            } else if containedError is ServerStatusError || containedError is ServerValueError {
                 view.showError(containedError.description)
             } else {
                 view.showError(TextConstants.phoneVerificationResendRequestFailedErrorText)

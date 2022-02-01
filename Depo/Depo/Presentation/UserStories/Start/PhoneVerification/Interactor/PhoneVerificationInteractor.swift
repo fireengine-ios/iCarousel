@@ -18,6 +18,8 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     private let cacheManager = CacheManager.shared
     
     weak var output: PhoneVerificationInteractorOutput!
+
+    var initialError: Error?
     
     var attempts: Int = 0
     
