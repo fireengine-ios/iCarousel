@@ -96,20 +96,20 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
                 }
             }
 
-        }, fail: { [weak self] errorRespose in
+        }, fail: { [weak self] error in
             DispatchQueue.main.async {
                 guard let `self` = self else {
                     return
                 }
 
-                self.attempts += 1
-                if self.attempts >= 3 {
-                    self.attempts = 0
+                if case let .error(underlyingError) = error,
+                   let serverStatusError = underlyingError as? ServerStatusError,
+                   serverStatusError.status == ServerStatusError.ErrorKeys.tooManyInvalidAttempts {
                     self.output.reachedMaxAttempts()
                     self.output.verificationFailed(with: TextConstants.promocodeBlocked)
                     self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .tooManyInvalidOtpAttempts))
                 } else {
-                    self.output.verificationFailed(with: TextConstants.phoneVerificationNonValidCodeErrorText)
+                    self.output.verificationFailed(with: error.localizedDescription)
                     self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .invalidOtp))
                 }
             }

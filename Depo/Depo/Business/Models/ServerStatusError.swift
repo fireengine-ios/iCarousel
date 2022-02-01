@@ -17,7 +17,7 @@ final class ServerStatusError {
         self.code = code
     }
     
-    private struct ErrorKeys {
+    struct ErrorKeys {
         static let emptyEmail = "EMAIL_FIELD_IS_EMPTY"
         static let emptyPassword = "PASSWORD_FIELD_IS_EMPTY"
         static let emptyPhone = "PHONE_NUMBER_FIELD_IS_EMPTY"
@@ -36,8 +36,9 @@ final class ServerStatusError {
         static let EMAIL_IS_ALREADY_EXIST = "EMAIL_IS_ALREADY_EXIST"
         static let invalidCaptcha = "Invalid captcha."
         static let captchaRequired = "Captcha required."
-        static let tooManyInvalidAttepts = "TOO_MANY_INVALID_ATTEMPTS"
+        static let tooManyInvalidAttempts = "TOO_MANY_INVALID_ATTEMPTS"
         static let recoveryEmailIsSameWithAccountEmail = "RECOVERY_EMAIL_IS_SAME_WITH_ACCOUNT_EMAIL"
+        static let invalidOTP = "INVALID_OTP"
     }
 }
 extension ServerStatusError: LocalizedError {
@@ -97,11 +98,14 @@ extension ServerStatusError: LocalizedError {
         case ErrorKeys.captchaRequired:
             return TextConstants.captchaRequired
             
-        case ErrorKeys.tooManyInvalidAttepts:
+        case ErrorKeys.tooManyInvalidAttempts:
             return TextConstants.tooManyInvalidAttempt
 
         case ErrorKeys.recoveryEmailIsSameWithAccountEmail:
             return localized(.profileRecoveryEmailIsSameWithAccountEmail)
+
+        case ErrorKeys.invalidOTP:
+            return TextConstants.phoneVerificationNonValidCodeErrorText
 
         default:
             return status

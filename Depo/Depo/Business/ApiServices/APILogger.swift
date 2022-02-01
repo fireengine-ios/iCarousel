@@ -203,7 +203,7 @@ final class APILogger {
     
     private func log(string: String) {
         if isDebugLog {
-            printLog(string)
+            printLog("[APILogger] \(string)")
         } else {
             debugLog(string)
         }
