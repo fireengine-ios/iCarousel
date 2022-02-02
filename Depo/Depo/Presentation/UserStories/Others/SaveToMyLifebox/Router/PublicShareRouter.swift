@@ -42,6 +42,10 @@ class PublicShareRouter: PublicShareRouterInput {
         router.popToRootViewController()
     }
     
+    func popViewController() {
+        router.popViewController()
+    }
+    
     func navigateToOnboarding() {
         let onboarding = router.onboardingScreen
         router.setNavigationController(controller: onboarding)
@@ -49,5 +53,13 @@ class PublicShareRouter: PublicShareRouterInput {
     
     func navigateToAllFiles() {
         router.openTabBarItem(index: .documents, segmentIndex: 0)
+    }
+    
+    func navigateToHomeScreen() {
+        router.openTabBarItem(index: .home)
+    }
+    
+    func presentFullQuotaPopup() {
+        router.showFullQuotaPopUp()
     }
 }

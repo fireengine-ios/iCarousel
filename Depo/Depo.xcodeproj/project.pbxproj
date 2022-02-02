@@ -8696,6 +8696,10 @@
 		F0B64C84275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */; };
 		F0B64C85275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */; };
 		F0B64C86275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */; };
+		F0BF840A27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
+		F0BF840B27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
+		F0BF840C27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
+		F0BF840D27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */; };
 		F0C202342726EF810086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F0C202382726F0230086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
 		F0C202392726F0240086233E /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07A8779726D3929F00D7BC03 /* Colors.xcassets */; };
@@ -11442,6 +11446,7 @@
 		F0B64C73275DDFA700002F66 /* DarkModeInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeInitializer.swift; sourceTree = "<group>"; };
 		F0B64C7D275DEBD000002F66 /* DarkModeOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeOptionsView.swift; sourceTree = "<group>"; };
 		F0B64C82275DEBEA00002F66 /* DarkModeOptionsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeOptionsView.xib; sourceTree = "<group>"; };
+		F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareSaveErrorStatus.swift; sourceTree = "<group>"; };
 		F0CDA6932775187F0026C1C4 /* DragAndDropHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropHelper.swift; sourceTree = "<group>"; };
 		F233973492D247406E39E96E /* ForgotPasswordRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouter.swift; sourceTree = "<group>"; };
 		F2C8ED61D6F265F87FC23FBA /* FileInfoInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractor.swift; sourceTree = "<group>"; };
@@ -20507,6 +20512,7 @@
 			isa = PBXGroup;
 			children = (
 				F064FB29278A33AB00B461D0 /* PublicSharedItemsService.swift */,
+				F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */,
 			);
 			path = SaveToMyLifeboxService;
 			sourceTree = "<group>";
@@ -24274,6 +24280,7 @@
 				98B04833259314750011DAEB /* GZIP.m in Sources */,
 				8C0E8DA51FDEBDFF00789C91 /* BottomSelectionTabBarRouter.swift in Sources */,
 				8C0E8DA61FDEBDFF00789C91 /* PasswordCell.swift in Sources */,
+				F0BF840A27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */,
 				98B01C77206BCD7300DD78C7 /* AnalyticsService.swift in Sources */,
 				8C0E8DA71FDEBDFF00789C91 /* RegistrationViewInput.swift in Sources */,
 				9808B3982553EE4D002B0032 /* PrivateShareSelectPeopleView.swift in Sources */,
@@ -26687,6 +26694,7 @@
 				CE784AAF22A685FB00662219 /* PushNotificationService.swift in Sources */,
 				CE784AB022A685FB00662219 /* EmailEnterDesigner.swift in Sources */,
 				CE784AB122A685FB00662219 /* ContactService.swift in Sources */,
+				F0BF840C27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */,
 				CE784AB222A685FB00662219 /* PopUpImage.swift in Sources */,
 				984A8B0D252F05A8002FB400 /* OverlayStickerSaveManager.swift in Sources */,
 				CE784AB322A685FB00662219 /* PrintViewController.swift in Sources */,
@@ -28837,6 +28845,7 @@
 				CF8B67F823CBC9D70021B021 /* FaceImageItemsDataSource.swift in Sources */,
 				CF8B67F923CBC9D70021B021 /* SelectNameConfigurator.swift in Sources */,
 				CF8B67FA23CBC9D70021B021 /* SelectNameInitializer.swift in Sources */,
+				F0BF840B27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */,
 				9823195E24F3A1E600FD16E2 /* PreparedFilterSliderView.swift in Sources */,
 				CF8B67FB23CBC9D70021B021 /* FaceImageItemsInteractorInput.swift in Sources */,
 				CF8B67FC23CBC9D70021B021 /* FacebookAccountConnectionCell.swift in Sources */,
@@ -29989,6 +29998,7 @@
 				CF8B6E3123CBCA280021B021 /* PushNotificationService.swift in Sources */,
 				0305A33023D5C44E004D1EC7 /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
 				CF8B6E3223CBCA280021B021 /* EmailEnterDesigner.swift in Sources */,
+				F0BF840D27A7E802000F7F4E /* PublicShareSaveErrorStatus.swift in Sources */,
 				CF8B6E3323CBCA280021B021 /* ContactService.swift in Sources */,
 				984A8B0E252F05A8002FB400 /* OverlayStickerSaveManager.swift in Sources */,
 				CF8B6E3423CBCA280021B021 /* PopUpImage.swift in Sources */,

@@ -9,9 +9,10 @@
 import Foundation
 
 protocol PublicShareInteractorOutput: AnyObject {
-    func operationSuccess(with items: [SharedFileInfo])
+    func listOperationSuccess(with items: [SharedFileInfo])
     func startProgress()
-    func operationFailedWithError(errorMessage: String)
+    func listOperationFail(errorMessage: String, isInnerFolder: Bool)
     func saveOperationSuccess()
     func saveOperationFail(errorMessage: String)
+    func saveOperationStorageFail()
 }

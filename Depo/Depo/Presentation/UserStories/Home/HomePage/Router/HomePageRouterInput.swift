@@ -47,4 +47,6 @@ protocol HomePageRouterInput {
     func moveToReferance()
     
     func openTabBarItem(index: TabScreenIndex, segmentIndex: Int?)
+    
+    func presentFullQuotaPopup()
 }

@@ -298,7 +298,12 @@ final class HomePageInteractor: HomePageInteractorInput {
             self.output.publicShareSaveSuccess()
             ItemOperationManager.default.publicShareItemsAdded()
         } fail: { error in
-            self.output.publicShareSaveFail(message: error.errorDescription ?? "")
+            if error.errorDescription == PublicShareSaveErrorStatus.notRequiredSpace.rawValue {
+                self.output.publicShareSaveStorageFail()
+                return
+            }
+            let message = PublicShareSaveErrorStatus.allCases.first(where: {$0.rawValue == error.errorDescription})?.description
+            self.output.publicShareSaveFail(message: message ?? localized(.publicShareSaveError))
         }
     }
 }

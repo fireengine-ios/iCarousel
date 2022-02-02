@@ -12,15 +12,22 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     
     //MARK: -IBOutlets
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var noContentLabel: UILabel! {
+        willSet {
+            newValue.numberOfLines = 0
+            newValue?.textColor = ColorConstants.grayTabBarButtonsColor
+            newValue?.font = UIFont.TurkcellSaturaRegFont(size: 20)
+        }
+    }
     
     //MARK: -Properties
     private let actionView = PublicSharedItemsActionView.initFromNib()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
     private var isLoading: Bool = false
+    var isMainFolder: Bool = true
     var output: PublicShareViewOutput!
     var mainTitle: String?
-    var isMainFolder: Bool?
 
     private var dataSource: [WrapData] = [] {
         didSet {
@@ -54,7 +61,7 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     }
     
     private func configureUI() {
-        self.setTitle(withString: self.mainTitle ?? "")
+        setTitle(withString: mainTitle ?? "")
         navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
         if isMainFolder == true {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancel,
@@ -77,12 +84,27 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
         storageVars.publicSharedItemsToken = nil
         output.popViewController()
     }
+    
+    private func displayErrorUI() {
+        tableView.isHidden = true
+        noContentLabel.isHidden = false
+    }
 }
 
 //MARK: -SaveToMyLifeboxViewInput
 extension PublicShareViewController: PublicShareViewInput {
+    func listOperationFail(with message: String, isInnerFolder: Bool) {
+        displayErrorUI()
+      
+        if !isInnerFolder {
+            noContentLabel.text = localized(.publicShareNotFoundPlaceholder)
+        } else {
+            SnackbarManager.shared.show(type: .action, message: localized(.publicShareFileNotFoundError))
+        }
+    }
+    
     func saveOperationSuccess() {
-        SnackbarManager.shared.show(type: .nonCritical, message: "Kaydetme işlemi başarılı oldu")
+        SnackbarManager.shared.show(type: .nonCritical, message: localized(.publicShareSaveSuccess))
     }
     
     func didGetSharedItems(items: [SharedFileInfo]) {
@@ -90,6 +112,12 @@ extension PublicShareViewController: PublicShareViewInput {
         for item in items {
             let wrapData = WrapData(publicSharedFileInfo: item)
             dataSource.append(wrapData)
+        }
+        
+        if dataSource.isEmpty {
+            displayErrorUI()
+            let message = isMainFolder ? localized(.publicShareNotFoundPlaceholder) : localized(.publicShareNoItemInFolder)
+            noContentLabel.text = message
         }
     }
     

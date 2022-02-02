@@ -57,6 +57,7 @@ class PublicShareConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
+        viewController.isMainFolder = false
         
         viewController.mainTitle = item.name
     }
