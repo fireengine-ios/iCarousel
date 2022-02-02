@@ -55,6 +55,14 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     var email: String {
         return dataStorage.signUpUserInfo.mail
     }
+
+    var title: String {
+        return localized(.signUpPhoneVerificationTitle)
+    }
+
+    var subTitle: String {
+        return localized(.signUpPhoneVerificationSubTitle)
+    }
     
     func resendCode() {
         let request = SignUpSendVerification(

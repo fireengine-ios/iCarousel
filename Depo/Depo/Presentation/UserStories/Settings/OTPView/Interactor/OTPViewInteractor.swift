@@ -46,6 +46,14 @@ class OTPViewInteractor: PhoneVerificationInteractor {
     override var email: String {
         return userInfo?.email ?? ""
     }
+
+    override var title: String {
+        return TextConstants.enterSecurityCode
+    }
+
+    override var subTitle: String {
+        return TextConstants.enterSecurityCode
+    }
     
     override func verifyCode(code: String) {
         guard let response = response else {

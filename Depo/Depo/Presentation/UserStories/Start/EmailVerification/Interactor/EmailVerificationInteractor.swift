@@ -15,6 +15,14 @@ protocol EmailVerificationInteractorOutput: PhoneVerificationInteractorOutput {
 
 final class EmailVerificationInteractor: PhoneVerificationInteractor {
 
+    override var title: String {
+        return localized(.signUpEmailVerificationTitle)
+    }
+
+    override var subTitle: String {
+        return localized(.signUpEmailVerificationSubTitle)
+    }
+
     var castedOutput: EmailVerificationInteractorOutput {
         return output as! EmailVerificationInteractorOutput
     }

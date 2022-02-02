@@ -34,6 +34,10 @@ final class ResetPasswordOTPInteractor {
 
     var textDescription: String { TextConstants.enterCodeToGetCodeOnPhone }
 
+    var title: String { TextConstants.enterSecurityCode }
+
+    var subTitle: String { TextConstants.enterSecurityCode }
+
     var expectedInputLength: Int?
 
     var remainingTimeInSeconds: Int = 60

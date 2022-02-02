@@ -185,14 +185,10 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         
         firstSecurityCodeTextField.becomeFirstResponder()
 
-        if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.enterSecurityCode)
-        }
         navigationItem.backBarButtonItem?.title = TextConstants.backTitle
         
         mainTitle.font = UIFont.TurkcellSaturaRegFont(size: 35)
         mainTitle.textColor = AppColor.blackAndLrTealish.color
-        mainTitle.text = TextConstants.enterSecurityCode
         infoTitle.font = UIFont.TurkcellSaturaRegFont(size: 18)
         infoTitle.text = TextConstants.phoneVerificationInfoTitleText
         timerLabel.isHidden = true
@@ -245,6 +241,14 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
         let attributedString = NSMutableAttributedString(string: text)
         attributedString.addAttributes(attr, range: range)
         infoTitle.attributedText = attributedString
+    }
+
+    func setupTitleText(title: String, subTitle: String) {
+        if !Device.isIpad {
+            setNavigationTitle(title: title)
+        }
+
+        mainTitle.text = subTitle
     }
     
     func getNavigationController() -> UINavigationController? {

@@ -46,6 +46,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         
         return challenge.challengeType.getOTPDescription(for: status)
     }
+
+    override var title: String {
+        return TextConstants.enterSecurityCode
+    }
+
+    override var subTitle: String {
+        return TextConstants.enterSecurityCode
+    }
     
     override func trackScreen(isTimerExpired: Bool) {
         let screen: AnalyticsAppScreens = isTimerExpired ? .enterSecurityCodeResend : .enterSecurityCode

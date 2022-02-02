@@ -40,6 +40,7 @@ class PhoneVerificationPresenter: BasePresenter, PhoneVerificationModuleInput, P
     func configure() {
         view.setupTextLengh(lenght: interactor.expectedInputLength ?? 6 )
         view.setupPhoneLable(with: interactor.textDescription, number: interactor.phoneNumber)
+        view.setupTitleText(title: interactor.title, subTitle: interactor.subTitle)
     }
     
     func timerFinishedRunning(with isShowMessageWithDropTimer: Bool) {
