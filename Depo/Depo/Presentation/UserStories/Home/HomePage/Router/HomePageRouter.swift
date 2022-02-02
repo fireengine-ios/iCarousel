@@ -226,6 +226,10 @@ final class HomePageRouter: HomePageRouterInput {
         self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .mobilePaymentPermission, eventLabel: eventLabel)
     }
     
+    func presentFullQuotaPopup() {
+        router.showFullQuotaPopUp()
+    }
+    
 }
 
 // MARK: Mobile Payment Permission Delegate

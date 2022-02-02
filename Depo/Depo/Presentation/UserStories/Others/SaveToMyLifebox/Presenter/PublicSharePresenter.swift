@@ -50,6 +50,11 @@ extension PublicSharePresenter: PublicShareViewOutput {
 }
 
 extension PublicSharePresenter: PublicShareInteractorOutput {
+    func saveOperationStorageFail() {
+        router.navigateToHomeScreen()
+        router.presentFullQuotaPopup()
+    }
+    
     func saveOperationFail(errorMessage: String) {
         router.popToRoot()
         view.saveOpertionFail(errorMessage: errorMessage)
@@ -63,14 +68,18 @@ extension PublicSharePresenter: PublicShareInteractorOutput {
         asyncOperationSuccess()
     }
     
-    func operationSuccess(with items: [SharedFileInfo]) {
+    func listOperationSuccess(with items: [SharedFileInfo]) {
         view.didGetSharedItems(items: items)
         asyncOperationSuccess()
     }
     
-    func operationFailedWithError(errorMessage: String) {
-        router.popToRoot()
-        asyncOperationFail(errorMessage: errorMessage)
+    func listOperationFail(errorMessage: String, isInnerFolder: Bool) {
+        if isInnerFolder {
+            router.popViewController()
+        }
+    
+        asyncOperationFail()
+        view.listOperationFail(with: errorMessage, isInnerFolder: isInnerFolder)
     }
     
     func startProgress() {

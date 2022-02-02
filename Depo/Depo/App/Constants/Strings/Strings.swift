@@ -104,4 +104,13 @@ enum Strings: String, Localizable {
     case gracePackageTitle = "grace_banner_title"
     case gracePackageDescription = "grace_banner_desc"
     case gracePackageExpirationDateTitle = "grace_expire_date"
+    
+    // MARK: - Public Share & Save
+    case publicShareSaveSuccess = "save_to_my_lifebox_success"
+    case publicShareSaveError = "save_to_my_lifebox_error"
+    case publicShareMultiprocessError = "save_to_my_lifebox_multiprocess"
+    case publicShareSameAccountError = "save_to_my_lifebox_same_account"
+    case publicShareFileNotFoundError = "save_to_my_lifebox_file_not_found"
+    case publicShareNotFoundPlaceholder = "save_to_my_lifebox_not_found_placeholder"
+    case publicShareNoItemInFolder = "save_to_my_lifebox_folder_not_found"
 }

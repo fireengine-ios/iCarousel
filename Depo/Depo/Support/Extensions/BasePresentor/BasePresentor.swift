@@ -80,6 +80,10 @@ class BasePresenter: BaseAsyncOperationInteractorOutput {
         showMessage(errorMessage: errorMessage)
     }
     
+    func asyncOperationFail() {
+        outputView()?.hideSpinner()
+    }
+    
     private func showMessage(errorMessage: String?) {
         if let message = errorMessage {
             UIApplication.showErrorAlert(message: message)

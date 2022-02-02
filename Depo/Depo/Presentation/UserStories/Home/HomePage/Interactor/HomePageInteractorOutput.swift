@@ -43,4 +43,6 @@ protocol HomePageInteractorOutput: AnyObject {
     func publicShareSaveSuccess()
     
     func publicShareSaveFail(message: String)
+    
+    func publicShareSaveStorageFail()
     }

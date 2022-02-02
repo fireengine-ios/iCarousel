@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PublicShareViewController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="noContentLabel" destination="RJH-Qh-CwU" id="nVz-bj-wWF"/>
                 <outlet property="tableView" destination="lgI-SE-h6p" id="dKO-oh-Bqr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,14 +25,23 @@
                     <rect key="frame" x="8" y="60" width="406" height="802"/>
                     <color key="backgroundColor" name="primaryBackground"/>
                 </tableView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJH-Qh-CwU" userLabel="noContentLabel">
+                    <rect key="frame" x="16" y="373" width="382" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="lgI-SE-h6p" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="AtK-Ak-aGt"/>
                 <constraint firstItem="lgI-SE-h6p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="DoV-iA-HI5"/>
+                <constraint firstItem="RJH-Qh-CwU" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="-80" id="OAZ-w2-ChQ"/>
                 <constraint firstAttribute="trailing" secondItem="lgI-SE-h6p" secondAttribute="trailing" id="Yvb-nI-Khx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RJH-Qh-CwU" secondAttribute="trailing" constant="16" id="YyC-8h-3gw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lgI-SE-h6p" secondAttribute="bottom" id="eQl-bh-tnr"/>
+                <constraint firstItem="RJH-Qh-CwU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="mNX-4n-7T0"/>
             </constraints>
             <point key="canvasLocation" x="139" y="123"/>
         </view>

@@ -10,6 +10,7 @@ import Foundation
 
 protocol PublicShareViewInput: AnyObject, Waiting {
     func didGetSharedItems(items: [SharedFileInfo])
+    func listOperationFail(with message: String, isInnerFolder: Bool)
     func saveOperationSuccess()
     func saveOpertionFail(errorMessage: String)
 }

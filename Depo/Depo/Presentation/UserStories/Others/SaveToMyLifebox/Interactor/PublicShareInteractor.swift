@@ -36,9 +36,9 @@ class PublicShareInteractor: PublicShareInteractorInput {
                 if items.isEmpty {
                     self.isLastPage = true
                 }
-                self.output.operationSuccess(with: items)
+                self.output.listOperationSuccess(with: items)
             case .failed(let error):
-                self.output.operationFailedWithError(errorMessage: error.description)
+                self.output.listOperationFail(errorMessage: error.description, isInnerFolder: false)
             }
         }
     }
@@ -53,9 +53,9 @@ class PublicShareInteractor: PublicShareInteractorInput {
                 if items.isEmpty {
                     self.isLastPage = true
                 }
-                self.output.operationSuccess(with: items)
+                self.output.listOperationSuccess(with: items)
             case .failed(let error):
-                self.output.operationFailedWithError(errorMessage: error.description)
+                self.output.listOperationFail(errorMessage: error.description, isInnerFolder: true)
             }
         }
     }
@@ -67,7 +67,12 @@ class PublicShareInteractor: PublicShareInteractorInput {
             self.output.saveOperationSuccess()
             ItemOperationManager.default.publicShareItemsAdded()
         } fail: { error in
-            self.output.saveOperationFail(errorMessage: error.errorDescription ?? "")
+            if error.errorDescription == SharingSaveResponseType.notRequiredSpace.rawValue {
+                self.output.saveOperationStorageFail()
+                return
+            }
+            let message = SharingSaveResponseType.allCases.first(where: {$0.rawValue == error.errorDescription})?.description
+            self.output.saveOperationFail(errorMessage: message ?? localized(.publicShareSaveError))
         }
     }
 }

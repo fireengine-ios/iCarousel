@@ -64,13 +64,17 @@ extension HomePagePresenter: BaseFilesGreedModuleOutput {
 
 // MARK: - HomePageInteractorOutput
 extension HomePagePresenter: HomePageInteractorOutput {
+    func publicShareSaveStorageFail() {
+        router.presentFullQuotaPopup()
+    }
+    
     func publicShareSaveFail(message: String) {
         view.showSnackBarWithMessage(message: message)
         router.openTabBarItem(index: .documents, segmentIndex: 0)
     }
     
     func publicShareSaveSuccess() {
-        view.showSnackBarWithMessage(message: "Save işlemi başarılı!")
+        view.showSnackBarWithMessage(message: localized(.publicShareSaveSuccess))
         router.openTabBarItem(index: .documents, segmentIndex: 0)
     }
     
