@@ -10,7 +10,9 @@ import UIKit
 
 final class PhoneVerificationModuleConfigurator {
     func configure(viewController: PhoneVerificationViewController,
-                   withResponse response: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+                   withResponse response: SignUpSuccessResponse,
+                   userInfo: RegistrationUserInfoModel,
+                   tooManyRequestsError: ServerValueError? = nil) {
 
         let router = PhoneVerificationRouter()
 
@@ -20,6 +22,9 @@ final class PhoneVerificationModuleConfigurator {
 
         let interactor = PhoneVerificationInteractor()
         interactor.saveSignUpResponse(withResponse: response, andUserInfo: userInfo)
+        if let tooManyRequestsError = tooManyRequestsError {
+            interactor.initialError = tooManyRequestsError
+        }
         interactor.output = presenter
 
         presenter.interactor = interactor

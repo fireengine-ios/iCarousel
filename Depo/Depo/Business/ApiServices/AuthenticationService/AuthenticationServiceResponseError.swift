@@ -152,6 +152,10 @@ final class SignupResponseError: Map {
         case incorrectCaptcha
         case captchaRequired
         case unauthorized
+
+        // local
+        case invalidMailOtp
+        case tooManyInvalidMailOtpAttempts
         
         init?(with stringValue: String) {
             switch stringValue {
@@ -248,6 +252,10 @@ final class SignupResponseError: Map {
             return GADementionValues.signUpError.captchaRequired.text
         case .unauthorized:
             return GADementionValues.signUpError.unauthorized.text
+        case .invalidMailOtp:
+            return GADementionValues.signUpError.invalidMailOtp.text
+        case .tooManyInvalidMailOtpAttempts:
+            return GADementionValues.signUpError.tooManyInvalidMailOtpAttempts.text
         default:
             return GADementionValues.signUpError.serverError.text
         }

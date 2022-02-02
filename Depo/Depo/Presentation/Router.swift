@@ -454,10 +454,14 @@ class RouterVC: NSObject {
     }
     
     func phoneVerificationScreen(signUpResponse: SignUpSuccessResponse,
-                                 userInfo: RegistrationUserInfoModel) -> UIViewController {
+                                 userInfo: RegistrationUserInfoModel,
+                                 tooManyRequestsError: ServerValueError? = nil) -> UIViewController {
 
-        return PhoneVerificationModuleInitializer.viewController(signupResponse: signUpResponse,
-                                                                 userInfo: userInfo)
+        return PhoneVerificationModuleInitializer.viewController(
+            signupResponse: signUpResponse,
+            userInfo: userInfo,
+            tooManyRequestsError: tooManyRequestsError
+        )
     }
 
     func emailVerificationScreen(signUpResponse: SignUpSuccessResponse,

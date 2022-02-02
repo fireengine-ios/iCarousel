@@ -16,8 +16,8 @@ final class ServerValueError {
         self.value = value
         self.code = code
     }
-    
-    private struct ErrorKeys {
+
+    struct ErrorKeys {
         static let ACCOUNT_NOT_FOUND = "ACCOUNT_NOT_FOUND"
         static let INVALID_PROMOCODE = "INVALID_PROMOCODE"
         static let PROMO_CODE_HAS_BEEN_ALREADY_ACTIVATED = "PROMO_CODE_HAS_BEEN_ALREADY_ACTIVATED"
@@ -31,6 +31,8 @@ final class ServerValueError {
         static let PROMO_IS_INACTIVE = "PROMO_IS_INACTIVE"
         static let invalidCaptcha = "Invalid captcha."
         static let captchaRequired = "Captcha required."
+        static let TOO_MANY_REQUESTS_EMAIL = "TOO_MANY_REQUESTS_EMAIL"
+        static let TOO_MANY_REQUESTS_MSISDN = "TOO_MANY_REQUESTS_MSISDN"
     }
 }
 extension ServerValueError: LocalizedError {
@@ -74,6 +76,12 @@ extension ServerValueError: LocalizedError {
             
         case ErrorKeys.captchaRequired:
             return TextConstants.captchaRequired
+
+        case ErrorKeys.TOO_MANY_REQUESTS_EMAIL:
+            return localized(.signUpTooManyRequestsEmail)
+
+        case ErrorKeys.TOO_MANY_REQUESTS_MSISDN:
+            return localized(.signUpTooManyRequestsMSISDN)
             
         default:
             /// maybe will be need

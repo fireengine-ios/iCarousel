@@ -27,5 +27,7 @@ protocol PhoneVerificationViewInput: AnyObject, Waiting {
     func updateEditingState() 
         
     func showError(_ error: String)
+
+    func setupTitleText(title: String, subTitle: String)
     
 }

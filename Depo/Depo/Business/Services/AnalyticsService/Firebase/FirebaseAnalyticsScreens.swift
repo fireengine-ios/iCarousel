@@ -15,6 +15,7 @@ enum AnalyticsAppScreens {
     case forgotPasswordV2
     case termsAndServices
     case signUpOTP
+    case signUpMailOTP
     case doubleOTP
     case autosyncSettingsFirst
     case liveCollectRemember
@@ -173,6 +174,8 @@ enum AnalyticsAppScreens {
             return "Eula"
         case .signUpOTP:
             return "OTP - Signup"
+        case .signUpMailOTP:
+            return "MailOTP - Signup"
         case .doubleOTP:
             return "OTP - DoubleOptIn"
         case .autosyncSettingsFirst:

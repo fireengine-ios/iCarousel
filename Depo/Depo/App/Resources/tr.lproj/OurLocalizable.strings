@@ -1972,9 +1972,9 @@
 /*Fuzzy*/
 "grace_expire_date" = "Hesabın Askıya Alınacağı Tarih:";
 "save_to_my_lifebox_not_found_placeholder" = "Dosya bulunamadı.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
+"signup_too_many_requests_email" = "Bu e-posta için çok fazla doğrulama kodu istendi, lütfen daha sonra tekrar dene.";
+"signup_too_many_requests_msisdn" = "Bu telefon numarası için çok fazla doğrulama kodu istendi, lütfen daha sonra tekrar dene.";
+"signup_email_verification_title" = "E-posta Doğrulama";
+"signup_email_verification_subtitle" = "E-posta Güvenlik Kodunu Gir";
+"signup_phone_verification_title" = "Telefon Doğrulama";
+"signup_phone_verification_subtitle" = "Telefon Güvenlik Kodunu Gir";

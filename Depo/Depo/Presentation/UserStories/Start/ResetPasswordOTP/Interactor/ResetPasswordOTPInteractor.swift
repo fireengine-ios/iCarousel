@@ -34,6 +34,10 @@ final class ResetPasswordOTPInteractor {
 
     var textDescription: String { TextConstants.enterCodeToGetCodeOnPhone }
 
+    var title: String { TextConstants.enterSecurityCode }
+
+    var subTitle: String { TextConstants.enterSecurityCode }
+
     var expectedInputLength: Int?
 
     var remainingTimeInSeconds: Int = 60
@@ -127,6 +131,7 @@ extension ResetPasswordOTPInteractor {
 }
 
 extension ResetPasswordOTPInteractor: ResetPasswordOTPInteractorInput {
+    var initialError: Error? { nil }
     func showPopUp(with text: String) {}
     func authificate(atachedCaptcha: CaptchaParametrAnswer?) {}
     func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {}

@@ -2000,9 +2000,9 @@
 "grace_banner_desc" = "Your Debit/Credit card balance may be insufficient or your card information may have changed.";
 "grace_expire_date" = "Account Suspension Date:";
 "save_to_my_lifebox_not_found_placeholder" = "File not found.";
-"signup_too_many_requests_email" = "Too many verification code requested for this email, please try again later";
-"signup_too_many_requests_msisdn" = "Too many verification code requested for this phone number, please try again later";
+"signup_too_many_requests_email" = "Too many verification code requested for this email, please try again later.";
+"signup_too_many_requests_msisdn" = "Too many verification code requested for this phone number, please try again later.";
 "signup_email_verification_title" = "Email Verification";
-"signup_email_verification_subtitle" = "Enter Security Code";
+"signup_email_verification_subtitle" = "Enter Email Security Code";
 "signup_phone_verification_title" = "Phone Verification";
-"signup_phone_verification_subtitle" = "Enter Security Code";
+"signup_phone_verification_subtitle" = "Enter Phone Security Code";

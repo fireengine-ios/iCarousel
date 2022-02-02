@@ -10,16 +10,27 @@ import Foundation
 
 protocol EmailVerificationInteractorOutput: PhoneVerificationInteractorOutput {
     func emailVerified(signUpResponse: SignUpSuccessResponse)
+    func tooManyRequestsErrorReceievedForMSISDN(error: ServerValueError, signUpResponse: SignUpSuccessResponse)
 }
 
 final class EmailVerificationInteractor: PhoneVerificationInteractor {
+
+    override var title: String {
+        return localized(.signUpEmailVerificationTitle)
+    }
+
+    override var subTitle: String {
+        return localized(.signUpEmailVerificationSubTitle)
+    }
 
     var castedOutput: EmailVerificationInteractorOutput {
         return output as! EmailVerificationInteractorOutput
     }
 
     override func trackScreen(isTimerExpired: Bool) {
-
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.MailOTPSignupScreen())
+        analyticsService.logScreen(screen: .signUpMailOTP)
+        analyticsService.trackDimentionsEveryClickGA(screen: .signUpMailOTP)
     }
 
     override var textDescription: String {
@@ -44,14 +55,26 @@ final class EmailVerificationInteractor: PhoneVerificationInteractor {
                 }
 
                 if case let .error(underlyingError) = error,
+                   let serverValueError = underlyingError as? ServerValueError,
+                   serverValueError.value == ServerValueError.ErrorKeys.TOO_MANY_REQUESTS_MSISDN {
+
+                    self.castedOutput.tooManyRequestsErrorReceievedForMSISDN(
+                        error: serverValueError,
+                        signUpResponse: self.dataStorage.signUpResponse
+                    )
+                    self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .tooManyOtpRequests))
+                }
+                else if case let .error(underlyingError) = error,
                    let serverStatusError = underlyingError as? ServerStatusError,
                    serverStatusError.status == ServerStatusError.ErrorKeys.tooManyInvalidAttempts {
+
                     self.output.reachedMaxAttempts()
                     self.output.verificationFailed(with: TextConstants.promocodeBlocked)
-                    self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .tooManyInvalidOtpAttempts))
-                } else {
+                    self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .tooManyInvalidMailOtpAttempts))
+                }
+                else {
                     self.output.verificationFailed(with: error.localizedDescription)
-                    self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .invalidOtp))
+                    self.analyticsService.trackSignupEvent(error: SignupResponseError(status: .invalidMailOtp))
                 }
             }
         })

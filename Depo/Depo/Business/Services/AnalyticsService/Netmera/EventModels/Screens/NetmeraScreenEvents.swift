@@ -151,7 +151,13 @@ extension NetmeraEvents.Screens {
             return  "zkx"
         }
     }
-    
+
+    final class MailOTPSignupScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return  "pii"
+        }
+    }
+
     final class ContactUsScreen: NetmeraScreenEventTemplate {
         override var key: String {
             return "dpv"

@@ -30,4 +30,15 @@ final class EmailVerificationPresenter: PhoneVerificationPresenter, EmailVerific
 
         castedRouter.phoneVerification(signUpResponse: signUpResponse, userInfo: userInfo)
     }
+
+    func tooManyRequestsErrorReceievedForMSISDN(error: ServerValueError, signUpResponse: SignUpSuccessResponse) {
+        guard let userInfo = SingletonStorage.shared.signUpInfo else {
+            assertionFailure()
+            return
+        }
+
+        castedRouter.phoneVerification(
+            signUpResponse: signUpResponse, userInfo: userInfo, tooManyRequestsError: error
+        )
+    }
 }
