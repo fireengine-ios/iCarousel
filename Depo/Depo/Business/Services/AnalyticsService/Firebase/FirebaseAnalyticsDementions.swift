@@ -203,7 +203,9 @@ enum GADementionValues {
         case incorrectCaptcha
         case captchaRequired
         case unauthorized
-        
+        case invalidMailOtp
+        case tooManyInvalidMailOtpAttempts
+
         var text: String {
             switch self {
             case .invalidEmail:
@@ -232,6 +234,10 @@ enum GADementionValues {
                 return "CAPTCHA_REQUIRED"
             case .unauthorized:
                 return "UNAUTHORIZED"
+            case .invalidMailOtp:
+                return "INVALID_MAIL_OTP"
+            case .tooManyInvalidMailOtpAttempts:
+                return "TOO_MANY_INVALID_MAIL_OTP_ATTEMPTS"
             }
         }
     }
