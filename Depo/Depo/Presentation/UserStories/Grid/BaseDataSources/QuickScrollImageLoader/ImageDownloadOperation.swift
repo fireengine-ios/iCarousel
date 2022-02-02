@@ -48,6 +48,9 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     }
     
     override func main() {
+        // Potential crash-fix (DE-12449)
+        defer { outputBlock = nil }
+
         guard !isCancelled else {
             return
         }
