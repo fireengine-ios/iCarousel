@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SharingSaveResponseType: String, CaseIterable {
+enum PublicShareSaveErrorStatus: String, CaseIterable {
     case invalidToken        = "INVALID_PUBLIC_TOKEN"
     case sameAccount         = "SAME_ACCOUNT"
     case anotherSaving       = "ANOTHER_SAVING_IN_PROGESS"

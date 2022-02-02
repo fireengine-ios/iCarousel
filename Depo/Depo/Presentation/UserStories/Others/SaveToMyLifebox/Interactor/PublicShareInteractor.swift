@@ -67,11 +67,11 @@ class PublicShareInteractor: PublicShareInteractorInput {
             self.output.saveOperationSuccess()
             ItemOperationManager.default.publicShareItemsAdded()
         } fail: { error in
-            if error.errorDescription == SharingSaveResponseType.notRequiredSpace.rawValue {
+            if error.errorDescription == PublicShareSaveErrorStatus.notRequiredSpace.rawValue {
                 self.output.saveOperationStorageFail()
                 return
             }
-            let message = SharingSaveResponseType.allCases.first(where: {$0.rawValue == error.errorDescription})?.description
+            let message = PublicShareSaveErrorStatus.allCases.first(where: {$0.rawValue == error.errorDescription})?.description
             self.output.saveOperationFail(errorMessage: message ?? localized(.publicShareSaveError))
         }
     }
