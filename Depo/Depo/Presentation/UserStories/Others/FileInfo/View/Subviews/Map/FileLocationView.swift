@@ -91,6 +91,8 @@ final class FileLocationView: UIView, NibInit, FileLocationViewProtocol {
 
     // MARK: - Public
     func setLocation(latitude: Double, longitude: Double, item: Item) {
+        guard latitude.isNaN == false, longitude.isNaN == false else { return }
+
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         currentCoordinate = coordinate
 
