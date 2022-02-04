@@ -258,6 +258,18 @@ final class PackageService {
         }
         return price
     }
+
+    func getOfferPriceAsNumber(for offer: Any) -> NSNumber? {
+        if let offer = offer as? PackageModelResponse, let priceFloat = offer.price, priceFloat > 0 {
+            return NSNumber(value: priceFloat)
+        } else if let offer = offer as? SubscriptionPlanBaseResponse, let priceFloat = offer.subscriptionPlanPrice, priceFloat > 0 {
+            return NSNumber(value: priceFloat)
+        } else if let offer = offer as? SKProduct {
+            return offer.price
+        }
+
+        return nil
+    }
     
     func getOfferCurrency(for offer: Any) -> String? {
         var currency: String?

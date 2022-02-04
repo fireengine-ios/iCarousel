@@ -91,22 +91,24 @@ final class AnalyticsService: NSObject {
         let packageService = PackageService()
         guard
             let event = packageService.getPurchaseEvent(for: offer),
-            let price = packageService.getOfferPrice(for: offer)
+            let price = packageService.getOfferPriceAsNumber(for: offer)
         else {
             return
         }
         
         ///only turkcell offer may has missing currency
         let currency = packageService.getOfferCurrency(for: offer) ?? "TRY"
-        logPurchase(event: event, price: price, currency: currency)
+        logPurchase(event: event, price: price.doubleValue, currency: currency)
     }
 
-    private func logPurchase(event: AnalyticsEvent, price: String, currency: String) {
-        logAdjustEvent(name: event.token, price: Double(price), currency: currency)
+    private func logPurchase(event: AnalyticsEvent, price: Double, currency: String) {
+        logAdjustEvent(name: event.token, price: price, currency: currency)
         //Facebook has automatic tracking in-app purchases. If this function is enabled in the web settings, then there will be duplicates
-        if let price = Double(price) {
-            AppEvents.logPurchase(price, currency: currency, parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName])
-        }
+        AppEvents.logPurchase(
+            price,
+            currency: currency,
+            parameters: [AppEvents.ParameterName.content.rawValue: event.facebookEventName]
+        )
     }
     
     private func logAdjustEvent(name: String, price: Double? = nil, currency: String? = nil) {
