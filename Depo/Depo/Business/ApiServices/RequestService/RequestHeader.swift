@@ -73,7 +73,7 @@ class RequestHeaders {
     }
     
     static func deviceUuidHeader() -> RequestHeaderParametrs {
-        return [HeaderConstant.deviceUuid : UIDevice.current.identifierForVendor?.uuidString ?? ""]
+        return [HeaderConstant.deviceUuid : Device.deviceId ?? ""]
     }
     
     static func base() -> RequestHeaderParametrs {
