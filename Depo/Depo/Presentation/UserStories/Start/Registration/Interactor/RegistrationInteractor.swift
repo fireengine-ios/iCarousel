@@ -48,7 +48,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         // We're only checking for ETK, global permission is ignored for now.
         if code == "+90" && phone.count == 10 {
             checkEtk(for: code + phone) { result in
-                self.output.setupEtk(isShowEtk: result)
+                self.output?.setupEtk(isShowEtk: result)
             }
         } else {
             self.output.setupEtk(isShowEtk: false)
