@@ -61,7 +61,7 @@ final class PublicSharedItemsService: BaseRequestService {
             .sessionWithoutAuth
             .request(url, method: .get)
             .customValidate()
-            .responseVoidString(handler)
+            .responsePlainString(handler)
             .task
     }
     
@@ -74,7 +74,7 @@ final class PublicSharedItemsService: BaseRequestService {
             .sessionWithoutAuth
             .request(url, method: .post, parameters: params, encoding: ArrayEncoding())
             .customValidate()
-            .responseVoidString(handler)
+            .responsePlainString(handler)
             .task
     }
     

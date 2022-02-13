@@ -53,7 +53,7 @@ extension Alamofire.DataRequest {
     }
     
     @discardableResult
-    func responseVoidString(_ handler: @escaping ResponseHandler<String>) -> Self {
+    func responsePlainString(_ handler: @escaping ResponseHandler<String>) -> Self {
         return responseString { response in
             switch response.result {
             case .success(let data):
