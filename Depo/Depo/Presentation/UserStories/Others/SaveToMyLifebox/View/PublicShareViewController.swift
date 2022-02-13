@@ -24,10 +24,13 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     private let actionView = PublicSharedItemsActionView.initFromNib()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
+    private var publicDownloader = PublicShareDownloader.shared
     private var isLoading: Bool = false
-    var isMainFolder: Bool = true
+    
+    var isRootFolder: Bool = true
     var output: PublicShareViewOutput!
     var mainTitle: String?
+    var alert: UIAlertController?
 
     private var dataSource: [WrapData] = [] {
         didSet {
@@ -43,6 +46,8 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
         output.viewIsReady()
         isLoading = true
         actionView.delegate = self
+        
+        if isRootFolder { output.getPublicSharedItemsCount() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +68,7 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     private func configureUI() {
         setTitle(withString: mainTitle ?? "")
         navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
-        if isMainFolder == true {
+        if isRootFolder == true {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancel,
                                                                target: self,
                                                                selector: #selector(onCancelTapped))
@@ -82,21 +87,46 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
         storageVars.publicSharedItemsToken = nil
-        output.popViewController()
+        navigationController?.popToRootViewController(animated: true)
     }
     
     private func displayErrorUI() {
         tableView.isHidden = true
         noContentLabel.isHidden = false
     }
+    
+    private func dismissDownloadAlert() {
+        DispatchQueue.main.async {
+            self.alert?.dismiss(animated: false, completion: nil)
+            self.alert = nil
+        }
+    }
+    
+    private func createDownloadFileName() -> String {
+        let date = Date().createDownloadDate()
+        return "lifebox-\(date).zip"
+    }
+    
+    private func showDownloadAlert() {
+        let fileName = createDownloadFileName()
+        let message = "\(createDownloadFileName()) dosyasını indirmek mi istiyorsunuz?"
+        
+        let alert = createAlert(title: nil, message: message) { action in
+            if action != .cancel {
+                self.output.onSaveDownloadButton(with: fileName)
+            }
+        }
+        present(alert, animated: true)
+    }
 }
 
-//MARK: -SaveToMyLifeboxViewInput
+//MARK: -PublicShareViewInput
 extension PublicShareViewController: PublicShareViewInput {
-    func listOperationFail(with message: String, isInnerFolder: Bool) {
+    
+    func listOperationFail(with message: String, isToastMessage: Bool) {
         displayErrorUI()
       
-        if !isInnerFolder {
+        if !isToastMessage {
             noContentLabel.text = localized(.publicShareNotFoundPlaceholder)
         } else {
             SnackbarManager.shared.show(type: .action, message: localized(.publicShareFileNotFoundError))
@@ -107,6 +137,18 @@ extension PublicShareViewController: PublicShareViewInput {
         SnackbarManager.shared.show(type: .nonCritical, message: localized(.publicShareSaveSuccess))
     }
     
+    func saveOpertionFail(errorMessage: String) {
+        SnackbarManager.shared.show(type: .nonCritical, message: errorMessage)
+    }
+    
+    func downloadOperationSuccess() {
+        dismissDownloadAlert()
+    }
+    
+    func downloadOperationFailed() {
+         dismissDownloadAlert()
+     }
+    
     func didGetSharedItems(items: [SharedFileInfo]) {
         isLoading = false
         for item in items {
@@ -116,13 +158,28 @@ extension PublicShareViewController: PublicShareViewInput {
         
         if dataSource.isEmpty {
             displayErrorUI()
-            let message = isMainFolder ? localized(.publicShareNotFoundPlaceholder) : localized(.publicShareNoItemInFolder)
+            let message = isRootFolder ? localized(.publicShareNotFoundPlaceholder) : localized(.publicShareNoItemInFolder)
             noContentLabel.text = message
         }
     }
     
-    func saveOpertionFail(errorMessage: String) {
-        SnackbarManager.shared.show(type: .nonCritical, message: errorMessage)
+    func downloadOperationContinue(downloadedByte: String) {
+        DispatchQueue.main.async {
+            if self.alert != nil {
+                self.alert?.message = downloadedByte
+                return
+            }
+            
+            self.alert = self.createAlert(title: "Dosya indiriliyor..", message: downloadedByte, cancelOnly: true, handler: { action in
+                if action == .cancel {
+                    self.publicDownloader.stopDownload()
+                    self.alert = nil
+                }
+            })
+            
+            guard let alert = self.alert else { return }
+            self.present(alert, animated: true)
+        }
     }
 }
 
@@ -168,10 +225,10 @@ extension PublicShareViewController: UITableViewDelegate {
     }
 }
 
-//MARK: -SaveToMyLifeboxActionViewDelegate
+//MARK: -PublicSharedItemsActionViewDelegate
 extension PublicShareViewController: PublicSharedItemsActionViewDelegate {
     func downloadButtonDidTapped() {
-        return
+        showDownloadAlert()
     }
     
     func saveToMyLifeboxButtonDidTapped() {

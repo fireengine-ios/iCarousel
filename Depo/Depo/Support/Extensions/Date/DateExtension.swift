@@ -82,4 +82,8 @@ extension Date: Components {
         return Date(timeIntervalSince1970: millisecondsSince1970 / 1000.0)
     }
     
+    func createDownloadDate() -> String {
+        return getDateInFormat(format: "yyyy-MM-dd-HHmm")
+    }
+    
 }

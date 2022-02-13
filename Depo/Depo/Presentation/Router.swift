@@ -685,8 +685,8 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func publicSharedItemsInnerFolder(with item: WrapData) -> UIViewController {
-        let controller = PublicShareInitializer.initializeSaveToMyLifeboxViewController(with: item)
+    func publicSharedItemsInnerFolder(with item: WrapData, itemCount: Int) -> UIViewController {
+        let controller = PublicShareInitializer.initializeSaveToMyLifeboxViewController(with: item, itemCount: itemCount)
         return controller
     }
 

@@ -27,7 +27,7 @@ class PublicSharedItemsActionView: UIView, NibInit {
     
     @IBOutlet weak var saveToMyLifeboxButton: UIButton! {
         willSet {
-            newValue.setTitle("Save To My Lifebox",for:.normal)
+            newValue.setTitle(localized(.publicShareSaveTitle), for:.normal)
             newValue.setTitleColor(UIColor.white, for: .normal)
             newValue.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
             newValue.layer.cornerRadius = 24
@@ -39,7 +39,7 @@ class PublicSharedItemsActionView: UIView, NibInit {
     
     @IBOutlet weak var downloadButton: UIButton! {
         willSet {
-            newValue.setTitle("   Download", for:.normal)
+            newValue.setTitle("   \(localized(.publicShareDownloadTitle))", for:.normal)
             newValue.setImage(UIImage(named: "download"), for: .normal)
             newValue.setTitleColor(ColorConstants.darkBlueColor, for: .normal)
             newValue.setTitleColor(ColorConstants.darkBlueColor.darker(by: 30), for: .highlighted)

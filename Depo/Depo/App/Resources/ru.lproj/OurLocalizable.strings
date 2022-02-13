@@ -1964,9 +1964,10 @@
 "grace_banner_desc" = "Баланс вашей Дебетовой/Кредитной карты может быть недостаточным или данные вашей карты могут быть изменены.";
 "grace_expire_date" = "Дата Приостановки Действия Учетной Записи:";
 "save_to_my_lifebox_not_found_placeholder" = "Файл не найден.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
+"signup_too_many_requests_email" = "Для этой электронной почты запрошено слишком много кода подтверждения, пожалуйста, повторите попытку позже.";
+"signup_too_many_requests_msisdn" = "Для этого номера телефона запрошено слишком много кода подтверждения, пожалуйста, повторите попытку позже.";
+"signup_email_verification_title" = "Подтверждение Электронной Почты";
+"signup_email_verification_subtitle" = "Введите Код Безопасности Электронной Почты";
+"signup_phone_verification_title" = "Проверка Телефона";
+"signup_phone_verification_subtitle" = "Введите Код Безопасности Телефона";
+"save_to_my_lifebox" = "Сохранить в lifebox";

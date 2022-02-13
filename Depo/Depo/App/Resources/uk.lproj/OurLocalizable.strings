@@ -1952,9 +1952,10 @@
 "grace_banner_desc" = "Баланс вашої Дебетової/Кредитної картки може бути недостатнім або дані вашої картки змінилися.";
 "grace_expire_date" = "Дата Призупинення Облікового Запису:";
 "save_to_my_lifebox_not_found_placeholder" = "Файл не знайдено.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
+"signup_too_many_requests_email" = "Для цього електронного листа запитано забагато коду підтвердження. Будь ласка, спробуйте ще раз.";
+"signup_too_many_requests_msisdn" = "Для цього номера телефону запитано забагато кодів підтвердження. Будь ласка, спробуйте ще раз.";
+"signup_email_verification_title" = "Перевірка Електронної Пошти";
+"signup_email_verification_subtitle" = "Введіть Код Безпеки Електронної Пошти";
+"signup_phone_verification_title" = "Перевірка Телефону";
+"signup_phone_verification_subtitle" = "Введіть Код Безпеки Телефону";
+"save_to_my_lifebox" = "Зберегти у lifebox";

@@ -16,10 +16,10 @@ class PublicShareInitializer: NSObject {
         return viewController
     }
     
-    class func initializeSaveToMyLifeboxViewController(with item: WrapData) -> PublicShareViewController {
+    class func initializeSaveToMyLifeboxViewController(with item: WrapData, itemCount: Int) -> PublicShareViewController {
         let viewController = PublicShareViewController(nibName: "PublicShareViewController", bundle: nil)
         let configurator = PublicShareConfigurator()
-        configurator.configureModuleForInnerFolder(viewInput: viewController, item: item)
+        configurator.configureModuleForInnerFolder(viewInput: viewController, item: item, itemCount: itemCount)
         return viewController
     }
 }

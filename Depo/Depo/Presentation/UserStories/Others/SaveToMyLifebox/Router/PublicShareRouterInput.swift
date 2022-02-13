@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PublicShareRouterInput: AnyObject {
-    func onSelect(item: WrapData)
+    func onSelect(item: WrapData, itemCount: Int)
     func onSelect(item: WrapData, items: [WrapData])
     func popToRoot()
     func popViewController()
@@ -17,4 +17,6 @@ protocol PublicShareRouterInput: AnyObject {
     func navigateToAllFiles()
     func navigateToHomeScreen()
     func presentFullQuotaPopup()
+    func openFilesToSave(with url: URL)
+    func showDownloadCompletePopup(isSuccess: Bool, message: String)
 }

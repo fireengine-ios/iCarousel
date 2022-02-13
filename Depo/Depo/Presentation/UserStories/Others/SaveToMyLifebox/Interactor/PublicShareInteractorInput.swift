@@ -12,4 +12,8 @@ protocol PublicShareInteractorInput {
     func fetchData()
     func fetchMoreIfNeeded()
     func savePublicSharedItems()
+    func getPublicSharedItemsCount()
+    func getAllPublicSharedItems(with itemCount: Int, fileName: String)
+    func createPublicShareDownloadLink(with uuid: [String])
+    func downloadPublicSharedItems(with url: String)
 }

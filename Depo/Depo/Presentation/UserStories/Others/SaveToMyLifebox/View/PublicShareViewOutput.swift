@@ -8,9 +8,10 @@
 
 protocol PublicShareViewOutput: AnyObject {
     func viewIsReady()
+    func getPublicSharedItemsCount()
     func fetchMoreIfNeeded()
     func onSelect(item: WrapData)
-    func onSaveButton(isLoggedIn: Bool)
-    func popViewController()
     func onSelect(item: WrapData, items: [WrapData])
+    func onSaveButton(isLoggedIn: Bool)
+    func onSaveDownloadButton(with fileName: String)
 }

@@ -15,9 +15,9 @@ class PublicShareConfigurator {
         }
     }
         
-    func configureModuleForInnerFolder<UIViewController>(viewInput: UIViewController, item: WrapData) {
+    func configureModuleForInnerFolder<UIViewController>(viewInput: UIViewController, item: WrapData, itemCount: Int) {
         if let viewController = viewInput as? PublicShareViewController {
-            configureInnerFolder(viewController: viewController, item: item)
+            configureInnerFolder(viewController: viewController, item: item, itemCount: itemCount)
         }
     }
     
@@ -34,15 +34,16 @@ class PublicShareConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
-        viewController.isMainFolder = true
+        viewController.isRootFolder = true
     }
     
-    private func configureInnerFolder(viewController: PublicShareViewController, item: WrapData) {
+    private func configureInnerFolder(viewController: PublicShareViewController, item: WrapData, itemCount: Int) {
         let router = PublicShareRouter()
 
         let presenter = PublicSharePresenter()
         presenter.view = viewController
         presenter.router = router
+        presenter.itemCount = itemCount
 
         let interactor = PublicShareInteractor()
         interactor.output = presenter
@@ -57,7 +58,7 @@ class PublicShareConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
-        viewController.isMainFolder = false
+        viewController.isRootFolder = false
         
         viewController.mainTitle = item.name
     }

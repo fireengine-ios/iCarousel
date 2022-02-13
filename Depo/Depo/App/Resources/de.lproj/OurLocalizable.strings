@@ -1950,9 +1950,10 @@
 "grace_banner_desc" = "Ihr Debit-/Kreditkartenguthaben ist möglicherweise nicht ausreichend oder Ihre Karteninformationen haben sich möglicherweise geändert.";
 "grace_expire_date" = "Datum der Kontosperrung:";
 "save_to_my_lifebox_not_found_placeholder" = "Datei nicht gefunden.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
+"signup_too_many_requests_email" = "Für diese E-Mail wurden zu viele Bestätigungscodes angefordert. Bitte versuchen Sie es später erneut.";
+"signup_too_many_requests_msisdn" = "Für diese Telefonnummer wurden zu viele Bestätigungscodes angefordert. Bitte versuchen Sie es später erneut.";
+"signup_email_verification_title" = "E-Mail-Verifizierung";
+"signup_email_verification_subtitle" = "Geben Sie den E-Mail-Sicherheitscode ein";
+"signup_phone_verification_title" = "Telefonische Bestätigung";
+"signup_phone_verification_subtitle" = "Geben Sie den Telefonsicherheitscode ein";
+"save_to_my_lifebox" = "In Der lifebox Speichern";

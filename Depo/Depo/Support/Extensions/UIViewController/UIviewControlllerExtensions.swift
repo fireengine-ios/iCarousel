@@ -120,6 +120,24 @@ extension UIViewController: Waiting {
     }
 }
 
+extension UIViewController {
+    func createAlert(title: String?, message: String, cancelOnly: Bool? = false,
+                     handler: @escaping (UIAlertAction.Style) -> Void) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: { _ in
+            handler(.cancel)
+        }))
+        
+        if cancelOnly == false {
+            alert.addAction(UIAlertAction(title: TextConstants.ok, style: .default, handler: { _ in
+                handler(.default)
+            }))
+        }
+        return alert
+    }
+}
+
 
 // MARK: - CustomNavController
 

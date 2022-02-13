@@ -1962,9 +1962,10 @@
 "grace_banner_desc" = "قد يكون رصيد بطاقة الخصم / الائتمان الخاصة بك غير كافٍ أو قد تكون معلومات بطاقتك قد تغيرت.";
 "grace_expire_date" = "تاريخ تعليق الحساب:";
 "save_to_my_lifebox_not_found_placeholder" = "لم يتم العثور على الملف.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
+"signup_too_many_requests_email" = "تم طلب عدد كبير جدًا من رمز التحقق لهذا البريد الإلكتروني ، يرجى المحاولة مرة أخرى في وقت لاحق.";
+"signup_too_many_requests_msisdn" = "تم طلب عدد كبير جدًا من رمز التحقق لرقم الهاتف هذا ، يرجى المحاولة مرة أخرى في وقت لاحق.";
+"signup_email_verification_title" = "تأكيد بواسطة البريد الالكتروني";
+"signup_email_verification_subtitle" = "أدخل رمز أمان البريد الإلكتروني";
+"signup_phone_verification_title" = "التحقق من الهاتف";
+"signup_phone_verification_subtitle" = "أدخل رمز أمان الهاتف";
+"save_to_my_lifebox" = "حفظ في lifebox";

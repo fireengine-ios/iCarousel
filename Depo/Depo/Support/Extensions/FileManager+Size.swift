@@ -24,3 +24,17 @@ extension FileManager {
         return attributes?[.type] as? String
     }
 }
+
+extension FileManager {
+    static func secureCopyItem(at srcURL: URL, to dstURL: URL, isSuccess: (Bool) -> Void) {
+        do {
+            if FileManager.default.fileExists(atPath: dstURL.path) {
+                try FileManager.default.removeItem(at: dstURL)
+            }
+            try FileManager.default.copyItem(at: srcURL, to: dstURL)
+        } catch (_) {
+            isSuccess(false)
+        }
+        isSuccess(true)
+    }
+}

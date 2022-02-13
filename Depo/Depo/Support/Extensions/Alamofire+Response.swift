@@ -53,6 +53,20 @@ extension Alamofire.DataRequest {
     }
     
     @discardableResult
+    func responseVoidString(_ handler: @escaping ResponseHandler<String>) -> Self {
+        return responseString { response in
+            switch response.result {
+            case .success(let data):
+                handler(ResponseResult.success((data)))
+            case .failure(let error):
+                let backendError = ResponseParser.getBackendError(data: response.data,
+                                                                  response: response.response)
+                handler(ResponseResult.failed(backendError ?? error))
+            }
+        }
+    }
+    
+    @discardableResult
     func responseObject<T: Codable>(_ handler: @escaping ResponseHandler<T>) -> Self {
         return responseData { response in
             switch response.result {
