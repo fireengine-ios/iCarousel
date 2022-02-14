@@ -1994,7 +1994,7 @@
 "save_to_my_lifebox_error" = "Failed to save files to your account. Please try again later.";
 "save_to_my_lifebox_multiprocess" = "You have an ongoing transaction. Please try again later.";
 "save_to_my_lifebox_same_account" = "Files are already backed up on your account. You can view them under “All Files” menu.";
-"save_to_my_lifebox_file_not_found" = "Files not found in the sharing link. Please contact the owner of the sharing in case of link expiration or deletion.";
+"save_to_my_lifebox_file_not_found" = "Files not found in the sharing link. Please contact the owner of the sharing.";
 "save_to_my_lifebox_folder_not_found" = "No files in the folder.";
 "grace_banner_title" = "Payment Failed!";
 "grace_banner_desc" = "Your Debit/Credit card balance may be insufficient or your card information may have changed.";
@@ -2006,3 +2006,4 @@
 "signup_email_verification_subtitle" = "Enter Email Security Code";
 "signup_phone_verification_title" = "Phone Verification";
 "signup_phone_verification_subtitle" = "Enter Phone Security Code";
+"save_to_my_lifebox" = "Save to My lifebox";

@@ -8647,6 +8647,7 @@
 		F039B5FA279DE4A0000EBAA7 /* GraceBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */; };
 		F039B5FB279DE4A1000EBAA7 /* GraceBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */; };
 		F039B5FC279DE4A1000EBAA7 /* GraceBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */; };
+		F0441F3827B5147E000E94EB /* PublicShareDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */; };
 		F04BC07D2786C2B4009401C5 /* GoogleService-Info-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = F04BC07C2786C2B3009401C5 /* GoogleService-Info-test.plist */; };
 		F04BC07E2786C2B4009401C5 /* GoogleService-Info-test.plist in Resources */ = {isa = PBXBuildFile; fileRef = F04BC07C2786C2B3009401C5 /* GoogleService-Info-test.plist */; };
 		F05866D7279157A0004AF69E /* PublicSharedItemsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F064FB29278A33AB00B461D0 /* PublicSharedItemsService.swift */; };
@@ -8711,6 +8712,9 @@
 		F0CDA6962775187F0026C1C4 /* DragAndDropHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CDA6932775187F0026C1C4 /* DragAndDropHelper.swift */; };
 		F0CDA6972775187F0026C1C4 /* DragAndDropHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CDA6932775187F0026C1C4 /* DragAndDropHelper.swift */; };
 		F0CDA6AB277605F50026C1C4 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
+		F0CF433D27B67A2E0061DC79 /* PublicShareDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */; };
+		F0CF434127B67A2F0061DC79 /* PublicShareDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */; };
+		F0CF434327B67A310061DC79 /* PublicShareDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */; };
 		F0F5E1BA272162A2003AC6AF /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F0F5E1BE272162A2003AC6AF /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F0F5E1BF272162A7003AC6AF /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
@@ -11433,6 +11437,7 @@
 		F036B15727623119005A2D7E /* SpotlightSearchHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightSearchHelper.swift; sourceTree = "<group>"; };
 		F039B5F3279A7F4D000EBAA7 /* GraceBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraceBannerView.swift; sourceTree = "<group>"; };
 		F039B5F4279A7F4D000EBAA7 /* GraceBannerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GraceBannerView.xib; sourceTree = "<group>"; };
+		F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareDownloader.swift; sourceTree = "<group>"; };
 		F04BC07C2786C2B3009401C5 /* GoogleService-Info-test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-test.plist"; sourceTree = "<group>"; };
 		F064FB29278A33AB00B461D0 /* PublicSharedItemsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsService.swift; sourceTree = "<group>"; };
 		F064FB2C278B209500B461D0 /* PublicSharedItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsTableViewCell.swift; sourceTree = "<group>"; };
@@ -20511,6 +20516,7 @@
 		F064FB25278A338100B461D0 /* SaveToMyLifeboxService */ = {
 			isa = PBXGroup;
 			children = (
+				F0441F3727B5147E000E94EB /* PublicShareDownloader.swift */,
 				F064FB29278A33AB00B461D0 /* PublicSharedItemsService.swift */,
 				F0BF840927A7E802000F7F4E /* PublicShareSaveErrorStatus.swift */,
 			);
@@ -23730,6 +23736,7 @@
 				3A54C6E2264968C800C2C8BD /* InvitationApiService.swift in Sources */,
 				B585331A2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */,
 				CE9F540222045A36003E76D4 /* InstapickAlbumSelectionDataSource.swift in Sources */,
+				F0441F3827B5147E000E94EB /* PublicShareDownloader.swift in Sources */,
 				CE9F540322045A36003E76D4 /* PassThroughView.swift in Sources */,
 				CE9F540422045A36003E76D4 /* AnalyzeHistoryDataSource.swift in Sources */,
 				9823199324F3A1E700FD16E2 /* AdjustmentsView.swift in Sources */,
@@ -26573,6 +26580,7 @@
 				CE784A5522A685FB00662219 /* ForgotPasswordViewInput.swift in Sources */,
 				07FBA21926E0BD5400ED4132 /* Strings.swift in Sources */,
 				CE784A5622A685FB00662219 /* ActivityTimelineTableBackView.swift in Sources */,
+				F0CF434127B67A2F0061DC79 /* PublicShareDownloader.swift in Sources */,
 				98231A6124F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
 				B551D0D524614C5900B21970 /* LogoutDBCleaner.swift in Sources */,
 				CE784A5722A685FB00662219 /* ForgotPasswordViewOutput.swift in Sources */,
@@ -28799,6 +28807,7 @@
 				CF8B67D523CBC9D70021B021 /* VisualMusicPlayerInteractor.swift in Sources */,
 				3A0CCF2E2642D20E002E811D /* InvitationGiftCollectionViewCell.swift in Sources */,
 				CF8B67D623CBC9D70021B021 /* SelectNameViewInput.swift in Sources */,
+				F0CF433D27B67A2E0061DC79 /* PublicShareDownloader.swift in Sources */,
 				F064FB34278CF28100B461D0 /* PublicSharedItemsTableViewCell.swift in Sources */,
 				CF8B67D723CBC9D70021B021 /* FreeAppSpaceInitializer.swift in Sources */,
 				CF8B67D823CBC9D70021B021 /* UILabel+Font.swift in Sources */,
@@ -29877,6 +29886,7 @@
 				030207AB23D1D32300BF8006 /* NetmeraScreenEventTemplate.swift in Sources */,
 				07FBA21B26E0BD5400ED4132 /* Strings.swift in Sources */,
 				0305A36723D5C66C004D1EC7 /* CarouselPagerDataSource.swift in Sources */,
+				F0CF434327B67A310061DC79 /* PublicShareDownloader.swift in Sources */,
 				98231A6224F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
 				B551D0D624614C5900B21970 /* LogoutDBCleaner.swift in Sources */,
 				CF8B6DD423CBCA280021B021 /* FaceImageItemsModuleOutput.swift in Sources */,

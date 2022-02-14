@@ -12,6 +12,8 @@ class PublicSharePresenter: BasePresenter, PublicShareModuleInput {
     var view: PublicShareViewInput!
     var interactor: PublicShareInteractorInput!
     var router: PublicShareRouterInput!
+    var itemCount: Int?
+    var fileName: String?
     
     override func outputView() -> Waiting? {
         return view
@@ -19,17 +21,13 @@ class PublicSharePresenter: BasePresenter, PublicShareModuleInput {
     
 }
 
-extension PublicSharePresenter: PublicShareViewOutput {
-    func popViewController() {
-        router.popToRoot()
-    }
-    
+extension PublicSharePresenter: PublicShareViewOutput {    
     func fetchMoreIfNeeded() {
         interactor.fetchMoreIfNeeded()
     }
     
     func onSelect(item: WrapData) {
-        router.onSelect(item: item)
+        router.onSelect(item: item, itemCount: itemCount ?? 0)
     }
     
     func onSelect(item: WrapData, items: [WrapData]) {
@@ -40,6 +38,10 @@ extension PublicSharePresenter: PublicShareViewOutput {
         interactor.fetchData()
     }
     
+    func getPublicSharedItemsCount() {
+        interactor.getPublicSharedItemsCount()
+    }
+    
     func onSaveButton(isLoggedIn: Bool) {
         if isLoggedIn {
             interactor.savePublicSharedItems()
@@ -47,9 +49,58 @@ extension PublicSharePresenter: PublicShareViewOutput {
             router.navigateToOnboarding()
         }
     }
+    
+    func onSaveDownloadButton(with fileName: String) {
+        interactor.getAllPublicSharedItems(with: itemCount ?? 0, fileName: fileName)
+    }
 }
 
 extension PublicSharePresenter: PublicShareInteractorOutput {
+    func downloadOperationFailed() {
+        view.downloadOperationFailed()
+        router.showDownloadCompletePopup(isSuccess: false, message: "İndirme tamamlanamadı")
+    }
+    
+    func downloadOperationContinue(downloadedByte: String) {
+        view.downloadOperationContinue(downloadedByte: downloadedByte)
+    }
+    
+    func downloadOperationSuccess(with url: URL) {
+        view.downloadOperationSuccess()
+        router.openFilesToSave(with: url)
+    }
+    
+    func createDownloadLinkSuccess(with url: String) {
+        asyncOperationSuccess()
+        interactor.downloadPublicSharedItems(with: url)
+    }
+    
+    func createDownloadLinkFail() {
+        asyncOperationFail()
+        view.listOperationFail(with: "", isToastMessage: true)
+        router.popViewController()
+    }
+    
+    func countOperationSuccess(with itemCount: Int) {
+        asyncOperationSuccess()
+        self.itemCount = itemCount
+    }
+    
+    func countOperationFail() {
+        asyncOperationFail(errorMessage: TextConstants.temporaryErrorOccurredTryAgainLater)
+    }
+    
+    func listAllItemsSuccess(with items: [SharedFileInfo]) {
+        asyncOperationSuccess()
+        let uuidList = items.compactMap {$0.uuid}
+        interactor.createPublicShareDownloadLink(with: uuidList)
+    }
+    
+    func listAllItemsFail(errorMessage: String, isToastMessage: Bool) {
+        asyncOperationFail()
+        view.listOperationFail(with: errorMessage, isToastMessage: isToastMessage)
+    }
+    
     func saveOperationStorageFail() {
         router.navigateToHomeScreen()
         router.presentFullQuotaPopup()
@@ -73,13 +124,13 @@ extension PublicSharePresenter: PublicShareInteractorOutput {
         asyncOperationSuccess()
     }
     
-    func listOperationFail(errorMessage: String, isInnerFolder: Bool) {
-        if isInnerFolder {
+    func listOperationFail(errorMessage: String, isToastMessage: Bool) {
+        if isToastMessage {
             router.popViewController()
         }
     
         asyncOperationFail()
-        view.listOperationFail(with: errorMessage, isInnerFolder: isInnerFolder)
+        view.listOperationFail(with: errorMessage, isToastMessage: isToastMessage)
     }
     
     func startProgress() {

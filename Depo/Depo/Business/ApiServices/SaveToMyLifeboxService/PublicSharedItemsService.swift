@@ -7,6 +7,7 @@
 //
 
 import Alamofire
+import Foundation
 
 class PublicSharedItemsSaveParameters: BaseRequestParametrs {
     let uuids: [String]
@@ -22,7 +23,7 @@ class PublicSharedItemsSaveParameters: BaseRequestParametrs {
     }
     
     override var patch: URL {
-        let path = String(format: RouteRequests.saveToMyLifeboxSave, publicToken)
+        let path = String(format: RouteRequests.publicShareSave, publicToken)
         return URL(string: path, relativeTo: RouteRequests.baseUrl)!
     }
 }
@@ -30,7 +31,7 @@ class PublicSharedItemsSaveParameters: BaseRequestParametrs {
 final class PublicSharedItemsService: BaseRequestService {
     @discardableResult
     func getPublicSharedItemsList(publicToken: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
-        let url = String(format: RouteRequests.saveToMyLifeboxList, publicToken, sortBy.description, sortOrder.description, page, size)
+        let url = String(format: RouteRequests.publicShareItemList, publicToken, sortBy.description, sortOrder.description, page, size)
         
         return SessionManager
             .sessionWithoutAuth
@@ -42,7 +43,7 @@ final class PublicSharedItemsService: BaseRequestService {
     
     @discardableResult
     func getPublicSharedItemsInnerFolder(tempListingURL: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
-        let url = String(format: RouteRequests.saveToMyLifeboxInnerFolder, tempListingURL, sortBy.description, sortOrder.description, page, size)
+        let url = String(format: RouteRequests.publicShareInnerFolder, tempListingURL, sortBy.description, sortOrder.description, page, size)
         
         return SessionManager
             .sessionWithoutAuth
@@ -52,9 +53,33 @@ final class PublicSharedItemsService: BaseRequestService {
             .task
     }
     
+    @discardableResult
+    func getPublicSharedItemsCount(publicToken: String, handler: @escaping ResponseHandler<String>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.publicSharedItemsCount, publicToken)
+        
+        return SessionManager
+            .sessionWithoutAuth
+            .request(url, method: .get)
+            .customValidate()
+            .responsePlainString(handler)
+            .task
+    }
+    
+    @discardableResult
+    func createPublicShareDownloadLink(publicToken: String, uuid: [String], handler: @escaping ResponseHandler<String>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.publicShareDownloadLink, publicToken)
+        let params = uuid.asParameters()
+        
+        return SessionManager
+            .sessionWithoutAuth
+            .request(url, method: .post, parameters: params, encoding: ArrayEncoding())
+            .customValidate()
+            .responsePlainString(handler)
+            .task
+    }
     
     func savePublicSharedItems(publicToken: String, success: SuccessResponse?, fail: @escaping FailResponse) {
-        debugLog("PublicShare saveToMyLifeboxSaveRoot")
+        debugLog("PublicShareItems saveRoot")
         
         let param = PublicSharedItemsSaveParameters(uuids: [], publicToken: publicToken)
         

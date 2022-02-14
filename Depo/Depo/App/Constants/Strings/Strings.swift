@@ -112,6 +112,8 @@ enum Strings: String, Localizable {
     case gracePackageExpirationDateTitle = "grace_expire_date"
     
     // MARK: - Public Share & Save
+    case publicShareSaveTitle = "save_to_my_lifebox"
+    case publicShareDownloadTitle = "Download"
     case publicShareSaveSuccess = "save_to_my_lifebox_success"
     case publicShareSaveError = "save_to_my_lifebox_error"
     case publicShareMultiprocessError = "save_to_my_lifebox_multiprocess"

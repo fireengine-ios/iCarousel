@@ -299,9 +299,11 @@ struct RouteRequests {
     }
     
     //MARK: - Save To My Lifebox
-    static let saveToMyLifeboxList = baseUrl.absoluteString + "share/public/list?publicToken=%@&language=tr&sortBy=%@&sortOrder=%@&page=%d&size=%d"
-    static let saveToMyLifeboxInnerFolder = "%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
-    static let saveToMyLifeboxSave = baseUrl.absoluteString + "share/save?publicToken=%@"
+    static let publicShareItemList = baseUrl.absoluteString + "share/public/list?publicToken=%@&language=tr&sortBy=%@&sortOrder=%@&page=%d&size=%d"
+    static let publicShareInnerFolder = "%@&sortBy=%@&sortOrder=%@&page=%d&size=%d"
+    static let publicShareSave = baseUrl.absoluteString + "share/save?publicToken=%@"
+    static let publicShareDownloadLink = baseUrl.absoluteString + "share/public/downloadFilesAsZip?publicToken=%@"
+    static let publicSharedItemsCount = baseUrl.absoluteString + "share/public/count?publicToken=%@"
     
     //MARK: - Turkcell Updater
 

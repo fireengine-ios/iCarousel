@@ -1992,9 +1992,10 @@
 "grace_banner_desc" = "El saldo de su tarjeta de Débito/Crédito puede ser insuficiente o la información de su tarjeta puede haber cambiado.";
 "grace_expire_date" = "Fecha de suspensión de la cuenta:";
 "save_to_my_lifebox_not_found_placeholder" = "Archivo no encontrado.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
+"signup_too_many_requests_email" = "Se ha solicitado demasiado código de verificación para este correo electrónico. Vuelva a intentarlo más tarde.";
+"signup_too_many_requests_msisdn" = "Se ha solicitado demasiado código de verificación para este número de teléfono. Vuelva a intentarlo más tarde.";
+"signup_email_verification_title" = "Verificacion de Email";
+"signup_email_verification_subtitle" = "Ingrese el Código de Seguridad del Correo Electrónico";
+"signup_phone_verification_title" = "Verificación de Teléfono";
+"signup_phone_verification_subtitle" = "Ingrese el Código de Seguridad del Teléfono";
+"save_to_my_lifebox" = "Guardar en lifebox";

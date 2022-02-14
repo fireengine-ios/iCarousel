@@ -1962,7 +1962,7 @@
 "save_to_my_lifebox_error" = "Dosyalar hesabına kaydedilemedi. Lütfen daha sonra tekrar dene.";
 "save_to_my_lifebox_multiprocess" = "Devam eden işlemin var. Lütfen daha sonra tekrar dene.";
 "save_to_my_lifebox_same_account" = "Dosyalar zaten hesabında kayıtlı. “Tüm Dosyalar” menüsü altında görüntüleyebilirsin.";
-"save_to_my_lifebox_file_not_found" = "Paylaşımda dosya bulunamadı. Paylaşım süresinin dolması veya silinmesi durumuna karşı paylaşımın sahibiyle iletişime geçebilirsin.";
+"save_to_my_lifebox_file_not_found" = "Paylaşımda dosya bulunamadı. Paylaşım sahibi ile iletişime geçebilirsin.";
 "save_to_my_lifebox_folder_not_found" = "Klasörde dosya bulunamadı.";
 
 /*Fuzzy*/
@@ -1978,3 +1978,4 @@
 "signup_email_verification_subtitle" = "E-posta Güvenlik Kodunu Gir";
 "signup_phone_verification_title" = "Telefon Doğrulama";
 "signup_phone_verification_subtitle" = "Telefon Güvenlik Kodunu Gir";
+"save_to_my_lifebox" = "lifebox'a Kaydet";

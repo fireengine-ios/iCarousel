@@ -8,14 +8,14 @@
 
 import Foundation
 
-class PublicShareRouter: PublicShareRouterInput {
+class PublicShareRouter: NSObject, PublicShareRouterInput {
     
     private let player: MediaPlayer = factory.resolve()
     private let tokenStorage: TokenStorage = factory.resolve()
     private let router = RouterVC()
     
-    func onSelect(item: WrapData) {
-        let controller = router.publicSharedItemsInnerFolder(with: item)
+    func onSelect(item: WrapData, itemCount: Int) {
+        let controller = router.publicSharedItemsInnerFolder(with: item, itemCount: itemCount)
         router.pushViewController(viewController: controller, animated: true)
     }
     
@@ -62,4 +62,22 @@ class PublicShareRouter: PublicShareRouterInput {
     func presentFullQuotaPopup() {
         router.showFullQuotaPopUp()
     }
+    
+    func openFilesToSave(with url: URL) {
+        DispatchQueue.main.async {
+            let documentController = UIDocumentPickerViewController(url: url, in: .exportToService)
+            documentController.delegate = self
+            self.router.presentViewController(controller: documentController)
+        }
+    }
+    
+    func showDownloadCompletePopup(isSuccess: Bool, message: String) {
+        isSuccess ? UIApplication.showSuccessAlert(message: message, closed: nil) : UIApplication.showErrorAlert(message: message)
+    }
+}
+
+extension PublicShareRouter: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        showDownloadCompletePopup(isSuccess: true, message: TextConstants.popUpDownloadComplete)
+     }
 }

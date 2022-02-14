@@ -2255,9 +2255,10 @@ Please check I have understood the intended command here*/
 "grace_banner_desc" = "Le solde de la carte de débit/crédit peut être insuffisant ou les informations de votre carte peuvent avoir changé.";
 "grace_expire_date" = "Date de suspension du compte :";
 "save_to_my_lifebox_not_found_placeholder" = "Fichier introuvable.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
+"signup_too_many_requests_email" = "Trop de codes de vérification demandés pour cet e-mail, veuillez réessayer plus tard.";
+"signup_too_many_requests_msisdn" = "Trop de code de vérification demandé pour ce numéro de téléphone, veuillez réessayer plus tard.";
+"signup_email_verification_title" = "Vérification de l'E-mail";
+"signup_email_verification_subtitle" = "Entrez le Code de Sécurité de l'E-mail";
+"signup_phone_verification_title" = "Vérification Par Téléphone";
+"signup_phone_verification_subtitle" = "Entrez le Code de Sécurité du Téléphone";
+"save_to_my_lifebox" = "Enregistrer dans lifebox";

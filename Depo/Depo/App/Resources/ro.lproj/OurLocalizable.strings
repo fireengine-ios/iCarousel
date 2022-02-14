@@ -1950,9 +1950,10 @@
 "grace_banner_desc" = "Este posibil ca soldul cardului dvs. de Debit/Credit să fie insuficient sau este posibil ca datele cardului dvs. să se fi modificat.";
 "grace_expire_date" = "Data Suspendării Contului:";
 "save_to_my_lifebox_not_found_placeholder" = "Fișierul nu a fost găsit.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
+"signup_too_many_requests_email" = "Au fost solicitate prea multe coduri de verificare pentru acest e-mail, vă rugăm să încercați din nou mai târziu.";
+"signup_too_many_requests_msisdn" = "Prea multe coduri de verificare solicitate pentru acest număr de telefon, încercați din nou mai târziu.";
+"signup_email_verification_title" = "Verificare A Email-Ului";
+"signup_email_verification_subtitle" = "Introduceți Codul De Securitate E-Mail";
+"signup_phone_verification_title" = "Verificare La Telefon";
+"signup_phone_verification_subtitle" = "Introduceți Codul De Securitate Al Telefonului";
+"save_to_my_lifebox" = "Salvați în lifebox";
