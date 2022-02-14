@@ -13,6 +13,14 @@ class OTPViewPresenter: PhoneVerificationPresenter {
         tokenStorage.isClearTokens = true
         successedVerification()
     }
+
+    override func viewIsReady() {
+        interactor.trackScreen(isTimerExpired: false)
+        view.setupInitialState(timerEnabled: timerEnabled)
+        configure()
+        view.setupButtonsInitialState()
+        interactor.resendCode()
+    }
     
     override func verificationSilentSuccess() {
         successedVerification()
