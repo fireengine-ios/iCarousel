@@ -96,7 +96,7 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     }
     
     private func dismissDownloadAlert() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.alert?.dismiss(animated: false, completion: nil)
             self.alert = nil
         }
@@ -111,7 +111,8 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
         let fileName = createDownloadFileName()
         let message = "\(createDownloadFileName()) dosyasını indirmek mi istiyorsunuz?"
         
-        let alert = createAlert(title: nil, message: message) { action in
+        let alert = createAlert(title: nil, message: message, firstTitle: localized(.publicShareCancelTitle),
+                                secondTitle: localized(.publicShareDownloadTitle)) { action in
             if action != .cancel {
                 self.output.onSaveDownloadButton(with: fileName)
             }
@@ -170,11 +171,10 @@ extension PublicShareViewController: PublicShareViewInput {
                 return
             }
             
-            self.alert = self.createAlert(title: "Dosya indiriliyor..", message: downloadedByte, cancelOnly: true, handler: { action in
-                if action == .cancel {
-                    self.publicDownloader.stopDownload()
-                    self.alert = nil
-                }
+            self.alert = self.createAlert(title: "Dosya indiriliyor..", message: downloadedByte,
+                                          firstTitle: localized(.publicShareCancelTitle), cancelOnly: true, handler: { action in
+                self.publicDownloader.stopDownload()
+                self.dismissDownloadAlert()
             })
             
             guard let alert = self.alert else { return }

@@ -68,7 +68,7 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
         self.fileName = fileName
         output.startProgress()
         
-        publicShareService.getPublicSharedItemsList(publicToken: publicToken ?? "", size: itemCount, page: page, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
+        publicShareService.getPublicSharedItemsList(publicToken: publicToken ?? "", size: itemCount, page: 0, sortBy: .lastModifiedDate, sortOrder: .asc) { result in
             switch result {
             case .success(let items):
                 self.output.listAllItemsSuccess(with: items)

@@ -56,6 +56,9 @@ extension PublicShareDownloader: URLSessionDelegate, URLSessionDownloadDelegate 
 
     func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if error != nil {
+            if let error = error as NSError?, error.localizedDescription == "cancelled" {
+                return
+            }
             delegate?.publicShareDownloadCompleted(isSuccess: false, url: nil)
             task.cancel()
         }
