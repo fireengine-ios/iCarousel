@@ -1991,7 +1991,7 @@
 "save_to_my_lifebox_folder_not_found" = "Nuk ka skedarë në dosje.";
 "grace_banner_title" = "Pagesa  nuk është marrë!";
 "grace_banner_desc" = "Bilanci i kartës suaj të Debitit/Kreditit mund të jetë i pamjaftueshëm ose informacioni i kartës tuaj mund të ketë ndryshuar.";
-"grace_expire_date" = "Data e pezullimit të llogarisë:";
+"grace_expire_date" = "Data E Anulimit Të Paketës: %@";
 "save_to_my_lifebox_not_found_placeholder" = "Skedari nuk u gjet.";
 "signup_too_many_requests_email" = "Për këtë email janë kërkuar shumë kode verifikimi, ju lutemi provoni sërish më vonë.";
 "signup_too_many_requests_msisdn" = "Për këtë numër telefoni janë kërkuar shumë kode verifikimi, ju lutemi provoni sërish më vonë.";
@@ -2000,3 +2000,4 @@
 "signup_phone_verification_title" = "Verifikimi i Telefonit";
 "signup_phone_verification_subtitle" = "Futni Kodin E Sigurisë Së Telefonit";
 "save_to_my_lifebox" = "Ruaje në lifebox";
+"save_to_my_lifebox_download" = "";

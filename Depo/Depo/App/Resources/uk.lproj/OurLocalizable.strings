@@ -1950,7 +1950,7 @@
 "save_to_my_lifebox_folder_not_found" = "Немає файлів у папці.";
 "grace_banner_title" = "Помилка Оплати!";
 "grace_banner_desc" = "Баланс вашої Дебетової/Кредитної картки може бути недостатнім або дані вашої картки змінилися.";
-"grace_expire_date" = "Дата Призупинення Облікового Запису:";
+"grace_expire_date" = "Дата Скасування Пакету: %@";
 "save_to_my_lifebox_not_found_placeholder" = "Файл не знайдено.";
 "signup_too_many_requests_email" = "Для цього електронного листа запитано забагато коду підтвердження. Будь ласка, спробуйте ще раз.";
 "signup_too_many_requests_msisdn" = "Для цього номера телефону запитано забагато кодів підтвердження. Будь ласка, спробуйте ще раз.";
@@ -1959,3 +1959,4 @@
 "signup_phone_verification_title" = "Перевірка Телефону";
 "signup_phone_verification_subtitle" = "Введіть Код Безпеки Телефону";
 "save_to_my_lifebox" = "Зберегти у lifebox";
+"save_to_my_lifebox_download" = "";
