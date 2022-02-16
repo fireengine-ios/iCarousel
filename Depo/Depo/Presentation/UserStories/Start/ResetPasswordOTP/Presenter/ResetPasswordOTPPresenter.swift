@@ -14,6 +14,14 @@ final class ResetPasswordOTPPresenter: PhoneVerificationPresenter, ResetPassword
         (interactor as! ResetPasswordOTPInteractorInput).trackBackEvent()
     }
 
+    override func viewIsReady() {
+        interactor.trackScreen(isTimerExpired: false)
+        view.setupInitialState(timerEnabled: timerEnabled)
+        configure()
+        view.setupButtonsInitialState()
+        interactor.resendCode()
+    }
+
     func verified(with resetPasswordService: ResetPasswordService, newMethods: [IdentityVerificationMethod]) {
         completeAsyncOperationEnableScreen()
 
