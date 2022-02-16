@@ -77,8 +77,7 @@ extension PublicSharePresenter: PublicShareInteractorOutput {
     
     func createDownloadLinkFail() {
         asyncOperationFail()
-        view.listOperationFail(with: "", isToastMessage: true)
-        router.popViewController()
+        view.createDownloadLinkFail()
     }
     
     func countOperationSuccess(with itemCount: Int) {

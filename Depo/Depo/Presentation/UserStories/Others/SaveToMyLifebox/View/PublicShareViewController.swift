@@ -103,13 +103,13 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     }
     
     private func createDownloadFileName() -> String {
-        let date = Date().createDownloadDate()
+        let date = Date().createCurrentDate() + "-" + Date().createCurrentHour()
         return "lifebox-\(date).zip"
     }
     
     private func showDownloadAlert() {
         let fileName = createDownloadFileName()
-        let message = "\(createDownloadFileName()) dosyasını indirmek mi istiyorsunuz?"
+        let message = String(format: localized(.publicShareDownloadMessage), Date().createCurrentDate(), Date().createCurrentHour())
         
         let alert = createAlert(title: nil, message: message, firstTitle: localized(.publicShareCancelTitle),
                                 secondTitle: localized(.publicShareDownloadTitle)) { action in
@@ -140,6 +140,10 @@ extension PublicShareViewController: PublicShareViewInput {
     
     func saveOpertionFail(errorMessage: String) {
         SnackbarManager.shared.show(type: .nonCritical, message: errorMessage)
+    }
+    
+    func createDownloadLinkFail() {
+        SnackbarManager.shared.show(type: .action, message: localized(.publicShareFileNotFoundError))
     }
     
     func downloadOperationSuccess() {

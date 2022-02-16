@@ -13,6 +13,7 @@ protocol PublicShareViewInput: AnyObject, Waiting {
     func listOperationFail(with message: String, isToastMessage: Bool)
     func saveOperationSuccess()
     func saveOpertionFail(errorMessage: String)
+    func createDownloadLinkFail()
     func downloadOperationSuccess()
     func downloadOperationContinue(downloadedByte: String)
     func downloadOperationFailed()

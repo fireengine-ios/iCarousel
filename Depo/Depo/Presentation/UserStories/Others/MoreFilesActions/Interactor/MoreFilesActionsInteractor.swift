@@ -248,41 +248,53 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
                 output.operationFinished(type: .share)
                 
-                let dynamicLinkUrl = self.createDynamicLink(with: url)
-                let objectsToShare = [dynamicLinkUrl?.absoluteString ?? url]
-                let activityVC = UIActivityViewController(activityItems: objectsToShare,
-                                                          applicationActivities: nil)
-                activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
-                    guard completed, let activityTypeString = activityType?.rawValue else {
-                        return
+                self.createDynamicLink(with: url) { dynamicLinkUrl in
+                    let objectsToShare = [dynamicLinkUrl?.absoluteString ?? url]
+                    let activityVC = UIActivityViewController(activityItems: objectsToShare,
+                                                              applicationActivities: nil)
+                    activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
+                        guard completed, let activityTypeString = activityType?.rawValue else {
+                            return
+                        }
+                        output.stopSelectionMode()
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
                     }
-                    output.stopSelectionMode()
-                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
+                    if let tempoRect = sourceRect {//if ipad
+                        activityVC.popoverPresentationController?.sourceRect = tempoRect
+                    }
+                    
+                    debugLog("presentViewController activityVC")
+                    self.router.presentViewController(controller: activityVC)
                 }
-                if let tempoRect = sourceRect {//if ipad
-                    activityVC.popoverPresentationController?.sourceRect = tempoRect
-                }
-                
-                debugLog("presentViewController activityVC")
-                self.router.presentViewController(controller: activityVC)
             }
             
-            }, fail: failAction(elementType: .share))
+        }, fail: failAction(elementType: .share))
     }
     
-    func createDynamicLink(with url: String) -> URL? {
-        guard let link = URL(string: url) else { return nil}
+    func createDynamicLink(with url: String, completion: @escaping (URL?) -> ()) {
+        guard let link = URL(string: url) else {
+            completion(nil)
+            return
+        }
+        
         let dynamicLinksDomainURIPrefix = "https://testlifebox.page.link"
         let linkBuilder = DynamicLinkComponents(link: link, domainURIPrefix: dynamicLinksDomainURIPrefix)
         
         if let bundleID = Bundle.main.bundleIdentifier {
             linkBuilder?.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
         }
-        linkBuilder?.iOSParameters?.appStoreID = "665036334"
+        linkBuilder?.iOSParameters?.appStoreID = Device.applicationId
         linkBuilder?.androidParameters = DynamicLinkAndroidParameters(packageName: "tr.com.turkcell.akillidepo")
 
-        guard let longDynamicLink = linkBuilder?.url else { return nil}
-        return longDynamicLink
+        linkBuilder?.shorten(completion: { url, warnings, error in
+            if error != nil {
+                debugLog("Error occured while shorting dynamic link")
+                completion(nil)
+            }
+            
+            guard let url = url else { return }
+            completion(url)
+        })
     }
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool) {

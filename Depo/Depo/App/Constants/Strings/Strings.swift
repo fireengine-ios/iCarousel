@@ -122,4 +122,5 @@ enum Strings: String, Localizable {
     case publicShareFileNotFoundError = "save_to_my_lifebox_file_not_found"
     case publicShareNotFoundPlaceholder = "save_to_my_lifebox_not_found_placeholder"
     case publicShareNoItemInFolder = "save_to_my_lifebox_folder_not_found"
+    case publicShareDownloadMessage = "save_to_my_lifebox_download"
 }
