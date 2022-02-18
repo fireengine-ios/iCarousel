@@ -36,9 +36,7 @@ final class Mail: NSObject, MFMailComposeViewControllerDelegate {
     }
     
     func sendEmail(emailBody: String, subject: String, emails: [String], presentCompletion: VoidHandler? = nil, success: MailSuccessHandler?, fail: MailFailHandler?) {
-        MediaItemOperationsService.shared.logItemsForSyncCounts {
-            self.performSendEmail(emailBody: emailBody, subject: subject, emails: emails, success: success, fail: fail)
-        }
+        performSendEmail(emailBody: emailBody, subject: subject, emails: emails, success: success, fail: fail)
     }
 
     private func performSendEmail(emailBody: String, subject: String, emails: [String],
