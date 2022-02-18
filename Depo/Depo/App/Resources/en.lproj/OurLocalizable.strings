@@ -1449,7 +1449,7 @@
 "mobile_payment_close_popup_description_bold_range" = "532";
 "mobile_payment_open_popup_title" = "Earn Weekly 2GB Internet!";
 "mobile_payment_open_popup_description" = "You can earn 2GB Internet by activating the Mobile Payment Permission. Click Continue and gain weekly 2GB internet that will be offered only once.\n\nYou can find more information about campaign at www.turkcell.com.tr";
-"mobile_payment_open_popup_description_bold_range" = "";
+"mobile_payment_open_popup_description_bold_range" = "532 532";
 "mobile_payment_open_popup_later_button" = "Later";
 "mobile_payment_open_popup_continue_button" = "Continue";
 "we_recommend" = "Recommended for You";
@@ -1998,7 +1998,7 @@
 "save_to_my_lifebox_folder_not_found" = "No files in the folder.";
 "grace_banner_title" = "Payment Failed!";
 "grace_banner_desc" = "Your Debit/Credit card balance may be insufficient or your card information may have changed.";
-"grace_expire_date" = "Account Suspension Date:";
+"grace_expire_date" = "Package Cancellation Date: %@";
 "save_to_my_lifebox_not_found_placeholder" = "File not found.";
 "signup_too_many_requests_email" = "Too many verification code requested for this email, please try again later.";
 "signup_too_many_requests_msisdn" = "Too many verification code requested for this phone number, please try again later.";
@@ -2007,3 +2007,4 @@
 "signup_phone_verification_title" = "Phone Verification";
 "signup_phone_verification_subtitle" = "Enter Phone Security Code";
 "save_to_my_lifebox" = "Save to My lifebox";
+"save_to_my_lifebox_download" = "Do you want to download lifebox - %@ - %@.zip file?";

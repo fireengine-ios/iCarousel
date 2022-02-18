@@ -309,7 +309,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         purchaseButton.isHidden = true
         borderView.backgroundColor = .lrButterScotch
         recommendationLabel.text = localized(.gracePackageTitle)
-        graceDateLabel.text = "\(localized(.gracePackageExpirationDateTitle)) \(plan.gracePeriodEndDate)"
+        graceDateLabel.text = String(format: localized(.gracePackageExpirationDateTitle), "\(plan.gracePeriodEndDate)")
     }
 
     @IBAction private func onPurchaseTap(_ sender: UIButton) {

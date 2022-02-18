@@ -64,7 +64,7 @@ class PublicShareRouter: NSObject, PublicShareRouterInput {
     }
     
     func openFilesToSave(with url: URL) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { ///waited for popups in main thread to dismiss
             let documentController = UIDocumentPickerViewController(url: url, in: .exportToService)
             documentController.delegate = self
             self.router.presentViewController(controller: documentController)

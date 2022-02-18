@@ -114,6 +114,7 @@ enum Strings: String, Localizable {
     // MARK: - Public Share & Save
     case publicShareSaveTitle = "save_to_my_lifebox"
     case publicShareDownloadTitle = "Download"
+    case publicShareCancelTitle = "Cancel"
     case publicShareSaveSuccess = "save_to_my_lifebox_success"
     case publicShareSaveError = "save_to_my_lifebox_error"
     case publicShareMultiprocessError = "save_to_my_lifebox_multiprocess"
@@ -121,4 +122,5 @@ enum Strings: String, Localizable {
     case publicShareFileNotFoundError = "save_to_my_lifebox_file_not_found"
     case publicShareNotFoundPlaceholder = "save_to_my_lifebox_not_found_placeholder"
     case publicShareNoItemInFolder = "save_to_my_lifebox_folder_not_found"
+    case publicShareDownloadMessage = "save_to_my_lifebox_download"
 }

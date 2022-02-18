@@ -1970,7 +1970,7 @@
 "grace_banner_desc" = "Debit/Kredi kartı bakiyen yetersiz olabilir veya kart bilgilerin değişmiş olabilir.";
 
 /*Fuzzy*/
-"grace_expire_date" = "Hesabın Askıya Alınacağı Tarih:";
+"grace_expire_date" = "Paketin İptal Edileceği Tarih: %@";
 "save_to_my_lifebox_not_found_placeholder" = "Dosya bulunamadı.";
 "signup_too_many_requests_email" = "Bu e-posta için çok fazla doğrulama kodu istendi, lütfen daha sonra tekrar dene.";
 "signup_too_many_requests_msisdn" = "Bu telefon numarası için çok fazla doğrulama kodu istendi, lütfen daha sonra tekrar dene.";
@@ -1979,3 +1979,4 @@
 "signup_phone_verification_title" = "Telefon Doğrulama";
 "signup_phone_verification_subtitle" = "Telefon Güvenlik Kodunu Gir";
 "save_to_my_lifebox" = "lifebox'a Kaydet";
+"save_to_my_lifebox_download" = "lifebox - %@ - %@.zip dosyasını indirmek mi istiyorsunuz?";

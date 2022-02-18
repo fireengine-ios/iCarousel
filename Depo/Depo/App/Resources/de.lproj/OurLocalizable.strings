@@ -1948,7 +1948,7 @@
 "save_to_my_lifebox_folder_not_found" = "Der Ordner enthält keine Dateien.";
 "grace_banner_title" = "Bezahlung fehlgeschlagen!";
 "grace_banner_desc" = "Ihr Debit-/Kreditkartenguthaben ist möglicherweise nicht ausreichend oder Ihre Karteninformationen haben sich möglicherweise geändert.";
-"grace_expire_date" = "Datum der Kontosperrung:";
+"grace_expire_date" = "Stornierungsdatum des Pakets: %@";
 "save_to_my_lifebox_not_found_placeholder" = "Datei nicht gefunden.";
 "signup_too_many_requests_email" = "Für diese E-Mail wurden zu viele Bestätigungscodes angefordert. Bitte versuchen Sie es später erneut.";
 "signup_too_many_requests_msisdn" = "Für diese Telefonnummer wurden zu viele Bestätigungscodes angefordert. Bitte versuchen Sie es später erneut.";
@@ -1957,3 +1957,4 @@
 "signup_phone_verification_title" = "Telefonische Bestätigung";
 "signup_phone_verification_subtitle" = "Geben Sie den Telefonsicherheitscode ein";
 "save_to_my_lifebox" = "In Der lifebox Speichern";
+"save_to_my_lifebox_download" = "";

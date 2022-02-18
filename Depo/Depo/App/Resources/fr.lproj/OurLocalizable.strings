@@ -2253,7 +2253,7 @@ Please check I have understood the intended command here*/
 "save_to_my_lifebox_folder_not_found" = "Il n'y a aucun fichier dans le dossier.";
 "grace_banner_title" = "Paiement échoué!";
 "grace_banner_desc" = "Le solde de la carte de débit/crédit peut être insuffisant ou les informations de votre carte peuvent avoir changé.";
-"grace_expire_date" = "Date de suspension du compte :";
+"grace_expire_date" = "Date d'annulation du forfait: %@";
 "save_to_my_lifebox_not_found_placeholder" = "Fichier introuvable.";
 "signup_too_many_requests_email" = "Trop de codes de vérification demandés pour cet e-mail, veuillez réessayer plus tard.";
 "signup_too_many_requests_msisdn" = "Trop de code de vérification demandé pour ce numéro de téléphone, veuillez réessayer plus tard.";
@@ -2262,3 +2262,4 @@ Please check I have understood the intended command here*/
 "signup_phone_verification_title" = "Vérification Par Téléphone";
 "signup_phone_verification_subtitle" = "Entrez le Code de Sécurité du Téléphone";
 "save_to_my_lifebox" = "Enregistrer dans lifebox";
+"save_to_my_lifebox_download" = "";

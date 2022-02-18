@@ -82,8 +82,13 @@ extension Date: Components {
         return Date(timeIntervalSince1970: millisecondsSince1970 / 1000.0)
     }
     
-    func createDownloadDate() -> String {
-        return getDateInFormat(format: "yyyy-MM-dd-HHmm")
+    func createCurrentDate() -> String {
+        let date = getDateInFormat(format: "yyyy-MM-dd")
+        return date
     }
     
+    func createCurrentHour() -> String {
+        let hour = getDateInFormat(format: "HHmm")
+        return hour
+    }
 }

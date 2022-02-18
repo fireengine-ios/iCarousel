@@ -1990,7 +1990,7 @@
 "save_to_my_lifebox_folder_not_found" = "No hay archivos en la carpeta.";
 "grace_banner_title" = "¡No se pudo recibir el pago!";
 "grace_banner_desc" = "El saldo de su tarjeta de Débito/Crédito puede ser insuficiente o la información de su tarjeta puede haber cambiado.";
-"grace_expire_date" = "Fecha de suspensión de la cuenta:";
+"grace_expire_date" = "Fecha De Cancelación Del Paquete: %@";
 "save_to_my_lifebox_not_found_placeholder" = "Archivo no encontrado.";
 "signup_too_many_requests_email" = "Se ha solicitado demasiado código de verificación para este correo electrónico. Vuelva a intentarlo más tarde.";
 "signup_too_many_requests_msisdn" = "Se ha solicitado demasiado código de verificación para este número de teléfono. Vuelva a intentarlo más tarde.";
@@ -1999,3 +1999,4 @@
 "signup_phone_verification_title" = "Verificación de Teléfono";
 "signup_phone_verification_subtitle" = "Ingrese el Código de Seguridad del Teléfono";
 "save_to_my_lifebox" = "Guardar en lifebox";
+"save_to_my_lifebox_download" = "";
