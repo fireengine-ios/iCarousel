@@ -24,22 +24,10 @@ final class SilentPushApiService: BaseRequestService {
             UIApplication.shared.endBackgroundTask(bgTask)
         }
 
-        let upload = {
-            self.performUpload {
-                if bgTask != .invalid {
-                    UIApplication.shared.endBackgroundTask(bgTask)
-                }
+        performUpload {
+            if bgTask != .invalid {
+                UIApplication.shared.endBackgroundTask(bgTask)
             }
-        }
-
-        let coreData: CoreDataStack = factory.resolve()
-        if coreData.isReady {
-            MediaItemOperationsService.shared.logItemsForSyncCounts {
-                upload()
-            }
-        } else {
-            debugLog("CoreData isn't ready.. performing upload without logItemsForSyncCounts")
-            upload()
         }
     }
 

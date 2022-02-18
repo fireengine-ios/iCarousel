@@ -242,11 +242,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
-        if BackgroundTaskService.shared.appWasSuspended {
+        let isLoggedIn = tokenStorage.refreshToken != nil
+        if isLoggedIn && BackgroundTaskService.shared.appWasSuspended {
             debugLog("App was suspended")
             CacheManager.shared.stopRemotesActualizeCache()
             CacheManager.shared.actualizeCache()
-        } else if tokenStorage.refreshToken != nil {
+        } else if isLoggedIn {
             SyncServiceManager.shared.update()
         }
         
