@@ -11,6 +11,7 @@
 		<string>applinks:adepotest.turkcell.com.tr</string>
 		<string>applinks:mylifebox.com</string>
 		<string>applinks:testlifebox.page.link</string>
+		<string>applinks:mylifebox.page.link</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>

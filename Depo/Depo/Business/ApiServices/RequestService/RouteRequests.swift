@@ -83,6 +83,14 @@ struct RouteRequests {
         case .production: return "https://dsschatbot.turkcell.com.tr/index.html?"
         }
     }()
+    
+    static let dynamicLinkDomain: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://testlifebox.page.link"
+        case .preProduction: return "https://testlifebox.page.link"
+        case .production: return "https://mylifebox.page.link"
+        }
+    }()
 
     private static let privacyPolicySubDomain = "privacyPolicy/get/\(Device.locale)?brand=" + applicationTarget
     static let privacyPolicy = URL(string: privacyPolicySubDomain, relativeTo: baseUrl)!

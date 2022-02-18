@@ -277,7 +277,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        let dynamicLinksDomainURIPrefix = "https://testlifebox.page.link"
+        let dynamicLinksDomainURIPrefix = RouteRequests.dynamicLinkDomain
         let linkBuilder = DynamicLinkComponents(link: link, domainURIPrefix: dynamicLinksDomainURIPrefix)
         
         if let bundleID = Bundle.main.bundleIdentifier {
@@ -296,7 +296,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         linkBuilder?.shorten(completion: { url, warnings, error in
             if error != nil {
                 debugLog("Error occured while shorting dynamic link")
-                completion(nil)
+                completion(linkBuilder?.url)
             }
             
             guard let url = url else { return }
