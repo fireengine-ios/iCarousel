@@ -284,7 +284,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             linkBuilder?.iOSParameters = DynamicLinkIOSParameters(bundleID: bundleID)
         }
         linkBuilder?.iOSParameters?.appStoreID = Device.applicationId
+        linkBuilder?.iOSParameters?.fallbackURL = link
+
         linkBuilder?.androidParameters = DynamicLinkAndroidParameters(packageName: "tr.com.turkcell.akillidepo")
+        linkBuilder?.androidParameters?.fallbackURL = link
+        
+        linkBuilder?.navigationInfoParameters = DynamicLinkNavigationInfoParameters()
+        linkBuilder?.navigationInfoParameters?.isForcedRedirectEnabled = true
+        linkBuilder?.otherPlatformParameters?.fallbackUrl = link
 
         linkBuilder?.shorten(completion: { url, warnings, error in
             if error != nil {
