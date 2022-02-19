@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import MBProgressHUD
 
 
 protocol ContactsBackupActionProviderProtocol: AnyObject {
@@ -245,7 +246,9 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
 final class ContentViewAnimator {
     
     func showTransition(to newView: UIView, on contentView: UIView, animated: Bool) {
-        let currentView = contentView.subviews.first
+        let currentView = contentView.subviews.first { subView in
+            subView is MBProgressHUD == false
+        }
         
         guard newView != currentView else {
             return
