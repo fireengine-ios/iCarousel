@@ -11,6 +11,7 @@ typealias ContactsOperation = (ContactsResponse) -> Void
 enum SyncOperationType {
     case backup
     case restore
+    case restoreWithoutUploadVCF
     case analyze
     case deleteDuplicated
     case deleteBackup
@@ -22,7 +23,7 @@ enum SyncOperationType {
         switch self {
         case .backup:
             return .backUp(contactSyncResponse)
-        case .restore:
+        case .restore, .restoreWithoutUploadVCF:
             return .restore
         case .analyze, .getBackUpStatus, .getBackupList, .cancel:
             return nil
@@ -37,7 +38,7 @@ enum SyncOperationType {
         switch self {
         case .backup:
             return .backup
-        case .restore:
+        case .restore, .restoreWithoutUploadVCF:
             return .restore
         case .analyze, .getBackUpStatus, .getBackupList, .cancel, .deleteDuplicated, .deleteBackup:
             return nil
@@ -103,7 +104,8 @@ class ContactsSyncService: BaseRequestService {
         return min(100, max(0, value))
     }
 
-    func executeOperation(type: SYNCMode, backupKey: String, progress: ProgressCallback?, finishCallback: FinishCallback?, errorCallback: ErrorCallback?) {
+    func executeOperation(type: SYNCMode, backupKey: String, skipUploadVCF: Bool,
+                          progress: ProgressCallback?, finishCallback: FinishCallback?, errorCallback: ErrorCallback?) {
         let typeString = type == .backup ? "Backup" : "Restore"
         debugLog("ContactsSyncService executeOperation \(typeString)")
         
@@ -131,6 +133,7 @@ class ContactsSyncService: BaseRequestService {
             /// but anyway we can call doSync everytime
             SyncSettings.shared().mode = type
             SyncSettings.shared().backupVersion = backupKey
+            SyncSettings.shared().skipUploadVCF = skipUploadVCF
             ContactSyncSDK.doSync(type)
         }
     }

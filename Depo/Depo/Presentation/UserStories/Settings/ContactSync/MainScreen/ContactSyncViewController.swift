@@ -16,10 +16,15 @@ protocol ContactsBackupActionProviderProtocol: AnyObject {
 
 protocol ContactSyncControllerProtocol: ViewController {
     var progressView: ContactOperationProgressView? { get set }
+    var selectedBackupForRestore: ContactBackupItem? { get }
     func show(view: UIView, animated: Bool)
     func showRelatedView()
     func showResultView(view: UIView, title: String)
     func didFinishOperation(operationType: ContactsOperationType)
+}
+
+extension ContactSyncControllerProtocol {
+    var selectedBackupForRestore: ContactBackupItem? { nil }
 }
 
 final class ContactSyncViewController: BaseViewController, NibInit {

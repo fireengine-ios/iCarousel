@@ -10,6 +10,7 @@ import UIKit
 
 enum WarningPopupType {
     case contactPermissionDenied
+    case contactRestoreStorageLimit(proceed: () -> Void)
     case lifeboxStorageLimit
     case photoPrintRedirection(photos: [WrapData])
 
@@ -17,6 +18,8 @@ enum WarningPopupType {
         switch self {
         case .contactPermissionDenied:
             return TextConstants.warningPopupContactPermissionsTitle
+        case .contactRestoreStorageLimit:
+            return TextConstants.warningPopupStorageLimitTitle
         case .lifeboxStorageLimit:
             return TextConstants.warningPopupStorageLimitTitle
         case .photoPrintRedirection:
@@ -28,6 +31,8 @@ enum WarningPopupType {
         switch self {
         case .contactPermissionDenied:
             return TextConstants.warningPopupContactPermissionsMessage
+        case .contactRestoreStorageLimit:
+            return localized(.contactSyncStorageFailDescription)
         case .lifeboxStorageLimit:
             return TextConstants.warningPopupStorageLimitMessage
         case .photoPrintRedirection:
@@ -39,6 +44,8 @@ enum WarningPopupType {
         switch self {
         case .contactPermissionDenied:
             return TextConstants.warningPopupContactPermissionsStorageButton
+        case .contactRestoreStorageLimit:
+            return TextConstants.warningPopupStorageLimitSettingsButton
         case .lifeboxStorageLimit:
             return TextConstants.warningPopupStorageLimitSettingsButton
         case .photoPrintRedirection:
@@ -50,10 +57,23 @@ enum WarningPopupType {
         switch self {
         case .contactPermissionDenied:
             return nil
+        case .contactRestoreStorageLimit:
+            return localized(.contactSyncStorageFailContinueButton)
         case .lifeboxStorageLimit:
             return TextConstants.warningPopupContactPermissionsDeleteButton
         case .photoPrintRedirection:
             return TextConstants.warningPopupPrintRedirectCancelButton
+        }
+    }
+
+    fileprivate var showsCloseButton: Bool {
+        switch self {
+        case .contactPermissionDenied,
+                .lifeboxStorageLimit,
+                .photoPrintRedirection:
+            return false
+        case .contactRestoreStorageLimit:
+            return true
         }
     }
 }
@@ -127,6 +147,8 @@ final class WarningPopupController: BasePopUpController, NibInit {
         }
     }
     
+    @IBOutlet private weak var closeButton: UIButton!
+
     private var router = RouterVC()
     private var popupType: WarningPopupType?
     
@@ -153,6 +175,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
         
         firstButton.isHidden = type.firstButtonTitle == nil
         secondButton.isHidden = type.secondButtonTitle == nil
+        closeButton.isHidden = type.showsCloseButton == false
     }
     
     @IBAction private func onFirstButtonTapped(_ sender: UIButton) {
@@ -165,6 +188,8 @@ final class WarningPopupController: BasePopUpController, NibInit {
             switch type {
             case .contactPermissionDenied:
                 self?.openSettings()
+            case .contactRestoreStorageLimit:
+                self?.openStorage()
             case .lifeboxStorageLimit:
                 self?.openStorage()
             case .photoPrintRedirection(let photos):
@@ -183,6 +208,8 @@ final class WarningPopupController: BasePopUpController, NibInit {
         
         let action = { [weak self] in
             switch type {
+            case .contactRestoreStorageLimit(let proceed):
+                proceed()
             case .lifeboxStorageLimit:
                 self?.openPhotoPage()
             default:
@@ -191,7 +218,11 @@ final class WarningPopupController: BasePopUpController, NibInit {
         }
         handle(action)
     }
-    
+
+    @IBAction private func onCloseButtonTapped(_ sender: UIButton) {
+        close()
+    }
+
     private func handle(_ action: @escaping VoidHandler) {
         close {
             action()
