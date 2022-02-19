@@ -552,7 +552,9 @@ static bool syncing = false;
         [self resolveMsisdn];
         return;
     } else {
-        if ([SyncSettings shared].environment != SYNCDevelopmentEnvironment) {
+        BOOL isDebugEnv = [SyncSettings shared].environment == SYNCDevelopmentEnvironment;
+        BOOL skipUploadVCF = [[SyncSettings shared] skipUploadVCF];
+        if (!isDebugEnv && !skipUploadVCF) {
             [DepoAdapter getUploadURL:^(id response, BOOL isSuccess) {
                 if (isSuccess) {
                     [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_INITIAL progress: 65];
