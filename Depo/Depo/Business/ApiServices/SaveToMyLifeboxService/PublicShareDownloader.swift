@@ -11,6 +11,7 @@ import Foundation
 protocol PublicShareDownloaderDelegate: AnyObject {
     func publicShareDownloadCompleted(isSuccess: Bool, url: URL?)
     func publicShareDownloadContinue(downloadedByte: String)
+    func publicShareDownloadCancelled()
 }
 
 class PublicShareDownloader: NSObject {
@@ -57,6 +58,7 @@ extension PublicShareDownloader: URLSessionDelegate, URLSessionDownloadDelegate 
     func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if error != nil {
             if let error = error as NSError?, error.localizedDescription == "cancelled" {
+                delegate?.publicShareDownloadCancelled()
                 return
             }
             delegate?.publicShareDownloadCompleted(isSuccess: false, url: nil)

@@ -16,4 +16,6 @@ protocol PublicShareInteractorInput {
     func getAllPublicSharedItems(with itemCount: Int, fileName: String)
     func createPublicShareDownloadLink(with uuid: [String])
     func downloadPublicSharedItems(with url: String)
+    func trackPublicShareScreen()
+    func trackSaveToMyLifeboxClick()
 }

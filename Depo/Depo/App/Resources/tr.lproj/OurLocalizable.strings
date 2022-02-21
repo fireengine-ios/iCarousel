@@ -1857,7 +1857,7 @@
 "title_invitation_campaign" = "Kampanya Detayları";
 "title_invitation_link" = "Sana Özel Davet Linki";
 "title_invitation_friends" = "Davetini Kabul Edenler (%d Kişi)";
-"title_invitation_packages" = "Kazandığın Hediyeler ({numOfPackages} Hediye)";
+"title_invitation_packages" = "Kazandığın Hediyeler (%d Hediye)";
 "invitation_snackbar_copy" = "Davet linkin başarıyla kopyalandı";
 "invitation_share" = "Linki Paylaş";
 "invitation_friends" = "Davetini Kabul Edenler";
@@ -1980,3 +1980,5 @@
 "signup_phone_verification_subtitle" = "Telefon Güvenlik Kodunu Gir";
 "save_to_my_lifebox" = "lifebox'a Kaydet";
 "save_to_my_lifebox_download" = "lifebox - %@ - %@.zip dosyasını indirmek mi istiyorsunuz?";
+"contact_sync_storage_fail_desc" = "Saklama alanın dolu olduğu için “Telefon’a Aktar” işlemin sonrası lifebox’a rehber yedekleme işlemini gerçekleştiremeyeceğim. Yine de devam etmek istiyor musun?";
+"contact_sync_storage_fail_cont_button" = "Devam Et";

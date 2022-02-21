@@ -542,6 +542,12 @@ extension NetmeraEvents.Screens {
             return "feq"
         }
     }
+    
+    final class STLSavetomylifeboxScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "tmv"
+        }
+    }
 
     /* ---------- FORGOT PASSWORD SCREENS ---------- */
     final class FPStartScreen: NetmeraScreenEventTemplate {

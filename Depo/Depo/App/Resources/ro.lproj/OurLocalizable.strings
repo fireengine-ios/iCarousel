@@ -1957,4 +1957,6 @@
 "signup_phone_verification_title" = "Verificare La Telefon";
 "signup_phone_verification_subtitle" = "Introduceți Codul De Securitate Al Telefonului";
 "save_to_my_lifebox" = "Salvați în lifebox";
-"save_to_my_lifebox_download" = "";
+"save_to_my_lifebox_download" = "Doriți să descărcați fișierul lifebox - %@ - %@.zip?";
+"contact_sync_storage_fail_desc" = "Deoarece spațiul de stocare lifebox este plin, copierea de rezervă a contactelor nu va fi efectuată după operațiunea „Exportare Pe Telefon”. Mai vrei să continui?";
+"contact_sync_storage_fail_cont_button" = "";

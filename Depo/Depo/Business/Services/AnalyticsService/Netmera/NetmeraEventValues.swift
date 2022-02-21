@@ -11,6 +11,7 @@ enum NetmeraEventValues {
     enum GeneralStatus {
         case success
         case failure
+        case cancel
 
         var text: String {
             switch self {
@@ -18,6 +19,8 @@ enum NetmeraEventValues {
                 return "Success"
             case .failure:
                 return "Failure"
+            case .cancel:
+                return "Cancel"
             }
         }
     }
