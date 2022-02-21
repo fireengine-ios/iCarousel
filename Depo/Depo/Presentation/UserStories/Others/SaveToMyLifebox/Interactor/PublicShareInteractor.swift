@@ -19,7 +19,8 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
     private var isLastPage: Bool = false
     private let publicShareService = PublicSharedItemsService()
     private let downloader = PublicShareDownloader.shared
-        
+    private let analyticsService: AnalyticsService = factory.resolve()
+    
     func fetchData() {
         isInnerFolder ? getPublicSharedItemsInnerFolder() : getPublicSharedItemsList()
     }
@@ -72,10 +73,33 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
             switch result {
             case .success(let items):
                 self.output.listAllItemsSuccess(with: items)
+                let fileTypes = self.createDownloadGAEventLabel(with: items)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .custom(fileTypes))
             case .failed(_):
                 self.output.listAllItemsFail(errorMessage: localized(.publicShareFileNotFoundError), isToastMessage: true)
             }
         }
+    }
+    
+    private func createDownloadGAEventLabel(with items: [SharedFileInfo]) -> String {
+        let types: [String] = items.map {
+            switch $0.fileType {
+            case .image, .photoAlbum, .faceImage, .faceImageAlbum, .imageAndVideo:
+                return "Photo"
+            case .video:
+                return "Video"
+            case .audio:
+                return "Audio"
+            case .allDocs, .application:
+                return "Document"
+            case .musicPlayList:
+                return "Music"
+            case .folder, .unknown:
+                return "File"
+            }
+        }
+        
+        return Set(types).joined(separator: "-")
     }
     
     func getPublicSharedItemsCount() {
@@ -99,7 +123,12 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
         publicShareService.savePublicSharedItems(publicToken: publicToken ?? "") { value in
             self.output.saveOperationSuccess()
             ItemOperationManager.default.publicShareItemsAdded()
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .saveToMyLifebox, eventLabel: .success)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLSavetomylifebox1(status: .success))
         } fail: { error in
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .saveToMyLifebox, eventLabel: .failure)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLSavetomylifebox1(status: .failure))
+            
             if error.errorDescription == PublicShareSaveErrorStatus.notRequiredSpace.rawValue {
                 self.output.saveOperationStorageFail()
                 return
@@ -128,18 +157,34 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
         downloader.delegate = self
         downloader.startDownload(url: url, fileName: fileName)
     }
+    
+    func trackPublicShareScreen() {
+        analyticsService.logScreen(screen: .saveToMyLifebox)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.STLSavetomylifeboxScreen())
+    }
+    
+    func trackSaveToMyLifeboxClick() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .saveToMyLifebox)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLSavetomylifebox())
+    }
 }
 
 extension PublicShareInteractor: PublicShareDownloaderDelegate {
     func publicShareDownloadCompleted(isSuccess: Bool, url: URL?) {
         if isSuccess, let url = url {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .success))
             output.downloadOperationSuccess(with: url)
         } else {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .failure))
             output.downloadOperationFailed()
         }
     }
     
     func publicShareDownloadContinue(downloadedByte: String) {
         output.downloadOperationContinue(downloadedByte: downloadedByte)
+    }
+    
+    func publicShareDownloadCancelled() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .cancel))
     }
 }

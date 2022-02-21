@@ -1568,6 +1568,50 @@ extension NetmeraEvents.Actions {
             return "ryw"
         }
     }
+    
+    final class STLSavetomylifebox: NetmeraEvent {
+        override var eventKey : String {
+            return "uzm"
+        }
+    }
+    
+    final class STLSavetomylifebox1: NetmeraEvent {
+        @objc var status = ""
+
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status)
+            ]
+        }
+
+        override var eventKey : String {
+            return "uuz"
+        }
+    }
+    
+    final class STLDownload: NetmeraEvent {
+        @objc var status = ""
+
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status)
+            ]
+        }
+
+        override var eventKey : String {
+            return "ffg"
+        }
+    }
 
     /* -------------------- */
 }

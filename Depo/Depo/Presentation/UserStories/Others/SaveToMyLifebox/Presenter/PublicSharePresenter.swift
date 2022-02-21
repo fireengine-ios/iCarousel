@@ -35,6 +35,7 @@ extension PublicSharePresenter: PublicShareViewOutput {
     }
     
     func viewIsReady() {
+        interactor.trackPublicShareScreen()
         interactor.fetchData()
     }
     
@@ -43,11 +44,8 @@ extension PublicSharePresenter: PublicShareViewOutput {
     }
     
     func onSaveButton(isLoggedIn: Bool) {
-        if isLoggedIn {
-            interactor.savePublicSharedItems()
-        } else {
-            router.navigateToOnboarding()
-        }
+        interactor.trackSaveToMyLifeboxClick()
+        isLoggedIn ? interactor.savePublicSharedItems() : router.navigateToOnboarding()
     }
     
     func onSaveDownloadButton(with fileName: String) {

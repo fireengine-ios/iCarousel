@@ -1959,4 +1959,6 @@
 "signup_phone_verification_title" = "Перевірка Телефону";
 "signup_phone_verification_subtitle" = "Введіть Код Безпеки Телефону";
 "save_to_my_lifebox" = "Зберегти у lifebox";
-"save_to_my_lifebox_download" = "";
+"save_to_my_lifebox_download" = "Бажаєте завантажити файл lifebox - %@ - %@.zip?";
+"contact_sync_storage_fail_desc" = "Оскільки ваша пам’ять lifebox заповнена, резервне копіювання контактів не буде виконано після операції «Експорт на телефон». Все ще хочете продовжити?";
+"contact_sync_storage_fail_cont_button" = "";

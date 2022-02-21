@@ -2008,3 +2008,5 @@
 "signup_phone_verification_subtitle" = "Enter Phone Security Code";
 "save_to_my_lifebox" = "Save to My lifebox";
 "save_to_my_lifebox_download" = "Do you want to download lifebox - %@ - %@.zip file?";
+"contact_sync_storage_fail_desc" = "Since your lifebox storage is full, contacts backup will not be performed after the \"Export Contacts\" operation. Do you still want to continue?";
+"contact_sync_storage_fail_cont_button" = "";

@@ -1957,4 +1957,6 @@
 "signup_phone_verification_title" = "Telefonische Bestätigung";
 "signup_phone_verification_subtitle" = "Geben Sie den Telefonsicherheitscode ein";
 "save_to_my_lifebox" = "In Der lifebox Speichern";
-"save_to_my_lifebox_download" = "";
+"save_to_my_lifebox_download" = "Möchten Sie die Datei lifebox - %@ - %@.zip herunterladen?";
+"contact_sync_storage_fail_desc" = "Da Ihr Lifebox-Speicher voll ist, wird nach dem Vorgang „Auf Telefon exportieren“ keine Kontaktsicherung durchgeführt. Möchten Sie trotzdem fortfahren?";
+"contact_sync_storage_fail_cont_button" = "";
