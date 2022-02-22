@@ -17,4 +17,5 @@ protocol PublicShareViewInput: AnyObject, Waiting {
     func downloadOperationSuccess()
     func downloadOperationContinue(downloadedByte: String)
     func downloadOperationFailed()
+    func downloadOperationStorageFail()
 }

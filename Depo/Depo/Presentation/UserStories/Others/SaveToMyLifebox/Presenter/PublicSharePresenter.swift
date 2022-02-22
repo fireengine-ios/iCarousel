@@ -54,9 +54,13 @@ extension PublicSharePresenter: PublicShareViewOutput {
 }
 
 extension PublicSharePresenter: PublicShareInteractorOutput {
+    func downloadOperationStorageFail() {
+        view.downloadOperationStorageFail()
+    }
+    
     func downloadOperationFailed() {
         view.downloadOperationFailed()
-        router.showDownloadCompletePopup(isSuccess: false, message: "İndirme tamamlanamadı")
+        router.showDownloadCompletePopup(isSuccess: false, message: localized(.publicShareDownloadErrorMessage))
     }
     
     func downloadOperationContinue(downloadedByte: String) {

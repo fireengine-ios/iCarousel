@@ -2003,3 +2003,5 @@
 "save_to_my_lifebox_download" = "Dëshiron të shkarkosh skedarin lifebox - %@ - %@.zip?";
 "contact_sync_storage_fail_desc" = "Meqenëse ruajtja e lifebox është plot, rezervimi i kontakteve nuk do të kryhet pas operacionit \"Eksport Në Telefon\". Dëshironi të vazhdoni akoma?";
 "contact_sync_storage_fail_cont_button" = "";
+"save_to_my_lifebox_full_storage_title" = "";
+"save_to_my_lifebox_full_storage_body" = "";

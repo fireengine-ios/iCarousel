@@ -154,6 +154,16 @@ extension PublicShareViewController: PublicShareViewInput {
          dismissDownloadAlert()
      }
     
+    func downloadOperationStorageFail() {
+        dismissDownloadAlert()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let alert = self.createAlert(title: localized(.publicShareDownloadStorageErrorTitle),
+                                         message: localized(.publicShareDownloadStorageErrorDescription),
+                                         firstTitle: TextConstants.ok, cancelOnly: true) { _ in }
+            self.present(alert, animated: true)
+        }
+    }
+    
     func didGetSharedItems(items: [SharedFileInfo]) {
         isLoading = false
         for item in items {
@@ -175,8 +185,8 @@ extension PublicShareViewController: PublicShareViewInput {
                 return
             }
             
-            self.alert = self.createAlert(title: "Dosya indiriliyor..", message: downloadedByte,
-                                          firstTitle: localized(.publicShareCancelTitle), cancelOnly: true, handler: { action in
+            self.alert = self.createAlert(title: TextConstants.popUpDownload, message: downloadedByte,
+                                          firstTitle: localized(.publicShareCancelTitle), cancelOnly: true, handler: { _ in
                 self.publicDownloader.stopDownload()
                 self.dismissDownloadAlert()
             })

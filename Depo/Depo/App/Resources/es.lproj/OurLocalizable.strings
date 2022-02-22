@@ -2002,3 +2002,5 @@
 "save_to_my_lifebox_download" = "¿Desea descargar el archivo lifebox - %@ - %@.zip?";
 "contact_sync_storage_fail_desc" = "Dado que el almacenamiento de su lifebox está lleno, la copia de seguridad de los contactos no se realizará después de la operación \"Exportar Al Teléfono\". ¿Todavía quieres continuar?";
 "contact_sync_storage_fail_cont_button" = "";
+"save_to_my_lifebox_full_storage_title" = "";
+"save_to_my_lifebox_full_storage_body" = "";

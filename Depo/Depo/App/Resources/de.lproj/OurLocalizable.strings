@@ -1960,3 +1960,5 @@
 "save_to_my_lifebox_download" = "Möchten Sie die Datei lifebox - %@ - %@.zip herunterladen?";
 "contact_sync_storage_fail_desc" = "Da Ihr Lifebox-Speicher voll ist, wird nach dem Vorgang „Auf Telefon exportieren“ keine Kontaktsicherung durchgeführt. Möchten Sie trotzdem fortfahren?";
 "contact_sync_storage_fail_cont_button" = "";
+"save_to_my_lifebox_full_storage_title" = "";
+"save_to_my_lifebox_full_storage_body" = "";
