@@ -347,17 +347,11 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let url = RouteRequests.Account.Permissions.permissionsUpdate
         let params: [[String: Any]] = [["type": type.rawValue,
                                         "approved": isApproved]]
-        
-        let urlRequest = sessionManager.request(url, method: .post).request
-        
-        if var request = urlRequest {
-            request = try! params.encode(request, with: nil)
-            
-            sessionManager
-                .request(request)
-                .customValidate()
-                .responseVoid(handler)
-        }
+
+        sessionManager
+            .request(url, method: .post, parameters: params.asParameters(), encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
     }
     
     func changeInstapickAllowed(isInstapickAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
