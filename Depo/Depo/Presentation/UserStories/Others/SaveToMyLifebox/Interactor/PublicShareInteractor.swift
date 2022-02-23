@@ -187,4 +187,9 @@ extension PublicShareInteractor: PublicShareDownloaderDelegate {
     func publicShareDownloadCancelled() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .cancel))
     }
+    
+    func publicShareDownloadNotEnoughSpace() {
+        output.downloadOperationStorageFail()
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .failure))
+    }
 }

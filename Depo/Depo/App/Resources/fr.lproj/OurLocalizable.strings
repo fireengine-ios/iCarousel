@@ -2265,3 +2265,5 @@ Please check I have understood the intended command here*/
 "save_to_my_lifebox_download" = "Voulez-vous télécharger le fichier lifebox - %@ - %@.zip?";
 "contact_sync_storage_fail_desc" = "Étant donné que le stockage de votre lifebox est plein, la sauvegarde des contacts ne sera pas effectuée après l'opération \"Exporter Vers Le Téléphone\". Souhaitez-vous toujours continuer?";
 "contact_sync_storage_fail_cont_button" = "";
+"save_to_my_lifebox_full_storage_title" = "";
+"save_to_my_lifebox_full_storage_body" = "";

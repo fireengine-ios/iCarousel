@@ -24,4 +24,5 @@ protocol PublicShareInteractorOutput: AnyObject {
     func downloadOperationSuccess(with url: URL)
     func downloadOperationFailed()
     func downloadOperationContinue(downloadedByte: String)
+    func downloadOperationStorageFail()
 }

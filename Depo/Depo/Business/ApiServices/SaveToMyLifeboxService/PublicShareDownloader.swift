@@ -12,6 +12,7 @@ protocol PublicShareDownloaderDelegate: AnyObject {
     func publicShareDownloadCompleted(isSuccess: Bool, url: URL?)
     func publicShareDownloadContinue(downloadedByte: String)
     func publicShareDownloadCancelled()
+    func publicShareDownloadNotEnoughSpace()
 }
 
 class PublicShareDownloader: NSObject {
@@ -57,13 +58,19 @@ extension PublicShareDownloader: URLSessionDelegate, URLSessionDownloadDelegate 
 
     func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if error != nil {
-            if let error = error as NSError?, error.localizedDescription == "cancelled" {
-                delegate?.publicShareDownloadCancelled()
-                return
+            if let nsError = error as NSError? {
+                if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorCancelled {
+                    delegate?.publicShareDownloadCancelled()
+                    return
+                } else if (nsError.domain == NSPOSIXErrorDomain && nsError.code == POSIXErrorCode.ENOSPC.rawValue) {
+                    delegate?.publicShareDownloadNotEnoughSpace()
+                    return
+                }
             }
-            delegate?.publicShareDownloadCompleted(isSuccess: false, url: nil)
-            task.cancel()
         }
+        
+        delegate?.publicShareDownloadCompleted(isSuccess: false, url: nil)
+        task.cancel()
     }
 }
 

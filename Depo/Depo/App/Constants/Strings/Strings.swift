@@ -111,7 +111,7 @@ enum Strings: String, Localizable {
     case gracePackageDescription = "grace_banner_desc"
     case gracePackageExpirationDateTitle = "grace_expire_date"
     
-    // MARK: - Public Share & Save
+    // MARK: - Public Share & Save & Download
     case publicShareSaveTitle = "save_to_my_lifebox"
     case publicShareDownloadTitle = "Download"
     case publicShareCancelTitle = "Cancel"
@@ -123,4 +123,7 @@ enum Strings: String, Localizable {
     case publicShareNotFoundPlaceholder = "save_to_my_lifebox_not_found_placeholder"
     case publicShareNoItemInFolder = "save_to_my_lifebox_folder_not_found"
     case publicShareDownloadMessage = "save_to_my_lifebox_download"
+    case publicShareDownloadStorageErrorTitle =  "save_to_my_lifebox_full_storage_title"
+    case publicShareDownloadStorageErrorDescription = "save_to_my_lifebox_full_storage_body"
+    case publicShareDownloadErrorMessage = "An error is occurred!"
 }
