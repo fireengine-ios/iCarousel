@@ -63,21 +63,11 @@ class PublicShareRouter: NSObject, PublicShareRouterInput {
         router.showFullQuotaPopUp()
     }
     
-    func openFilesToSave(with url: URL) {
+    func openFilesToSave(with url: URL, documentControllerDelegate: UIDocumentPickerDelegate) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { ///waited for popups in main thread to dismiss
             let documentController = UIDocumentPickerViewController(url: url, in: .exportToService)
-            documentController.delegate = self
+            documentController.delegate = documentControllerDelegate
             self.router.presentViewController(controller: documentController)
         }
     }
-    
-    func showDownloadCompletePopup(isSuccess: Bool, message: String) {
-        isSuccess ? UIApplication.showSuccessAlert(message: message, closed: nil) : UIApplication.showErrorAlert(message: message)
-    }
-}
-
-extension PublicShareRouter: UIDocumentPickerDelegate {
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        showDownloadCompletePopup(isSuccess: true, message: TextConstants.popUpDownloadComplete)
-     }
 }

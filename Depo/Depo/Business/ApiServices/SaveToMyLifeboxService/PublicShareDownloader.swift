@@ -21,6 +21,8 @@ class PublicShareDownloader: NSObject {
     private var urlSession: URLSession?
     private var task: URLSessionDownloadTask?
     private var fileName: String = ""
+    private let reachabilityService = ReachabilityService.shared
+    private var isReachable = true
     weak var delegate: PublicShareDownloaderDelegate?
 
     override private init() {
@@ -28,6 +30,7 @@ class PublicShareDownloader: NSObject {
 
         let config = URLSessionConfiguration.background(withIdentifier: "\(Bundle.main.bundleIdentifier!).background")
         urlSession = URLSession(configuration: config, delegate: self, delegateQueue: OperationQueue())
+        reachabilityService.delegates.add(self)
     }
 
     func startDownload(url: URL, fileName: String) {
@@ -57,21 +60,36 @@ extension PublicShareDownloader: URLSessionDelegate, URLSessionDownloadDelegate 
     }
 
     func urlSession(_: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        if error != nil {
+        guard error == nil else {
             if let nsError = error as NSError? {
                 if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorCancelled {
-                    delegate?.publicShareDownloadCancelled()
+                    isReachable == false ? delegate?.publicShareDownloadCompleted(isSuccess: false, url: nil) : delegate?.publicShareDownloadCancelled()
                     return
                 } else if (nsError.domain == NSPOSIXErrorDomain && nsError.code == POSIXErrorCode.ENOSPC.rawValue) {
                     delegate?.publicShareDownloadNotEnoughSpace()
                     return
                 }
             }
+            
+            delegate?.publicShareDownloadCompleted(isSuccess: false, url: nil)
+            return
         }
         
-        delegate?.publicShareDownloadCompleted(isSuccess: false, url: nil)
-        task.cancel()
+        if let httpResponse = task.response as? HTTPURLResponse {
+            if !(200...299).contains(httpResponse.statusCode) {
+                delegate?.publicShareDownloadCompleted(isSuccess: false, url: nil)
+            }
+        }
     }
 }
 
-
+extension PublicShareDownloader: ReachabilityServiceDelegate {
+    func reachabilityDidChanged(_ service: ReachabilityService) {
+        if !service.isReachableViaWWAN && !service.isReachableViaWiFi {
+            isReachable = false
+            task?.cancel()
+        } else {
+            isReachable = true
+        }
+    }
+}

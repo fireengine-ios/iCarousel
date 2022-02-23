@@ -14,4 +14,5 @@ protocol PublicShareViewOutput: AnyObject {
     func onSelect(item: WrapData, items: [WrapData])
     func onSaveButton(isLoggedIn: Bool)
     func onSaveDownloadButton(with fileName: String)
+    func trackScreen()
 }

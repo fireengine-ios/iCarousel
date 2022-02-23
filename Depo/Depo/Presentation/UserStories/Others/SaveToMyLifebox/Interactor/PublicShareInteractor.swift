@@ -146,6 +146,7 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
             case .success(let url):
                 self.output.createDownloadLinkSuccess(with: url)
             case .failed(_):
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .failure))
                 self.output.createDownloadLinkFail()
             }
         }
@@ -167,12 +168,19 @@ class PublicShareInteractor: NSObject, PublicShareInteractorInput {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: .saveToMyLifebox)
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLSavetomylifebox())
     }
+    
+    func trackDownloadSuccess() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .success))
+    }
+    
+    func trackDownloadCancel() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .cancel))
+    }
 }
 
 extension PublicShareInteractor: PublicShareDownloaderDelegate {
     func publicShareDownloadCompleted(isSuccess: Bool, url: URL?) {
         if isSuccess, let url = url {
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .success))
             output.downloadOperationSuccess(with: url)
         } else {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.STLDownload(status: .failure))

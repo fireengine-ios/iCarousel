@@ -21,7 +21,11 @@ class PublicSharePresenter: BasePresenter, PublicShareModuleInput {
     
 }
 
-extension PublicSharePresenter: PublicShareViewOutput {    
+extension PublicSharePresenter: PublicShareViewOutput {
+    func trackScreen() {
+        interactor.trackPublicShareScreen()
+    }
+    
     func fetchMoreIfNeeded() {
         interactor.fetchMoreIfNeeded()
     }
@@ -35,7 +39,6 @@ extension PublicSharePresenter: PublicShareViewOutput {
     }
     
     func viewIsReady() {
-        interactor.trackPublicShareScreen()
         interactor.fetchData()
     }
     
@@ -60,7 +63,6 @@ extension PublicSharePresenter: PublicShareInteractorOutput {
     
     func downloadOperationFailed() {
         view.downloadOperationFailed()
-        router.showDownloadCompletePopup(isSuccess: false, message: localized(.publicShareDownloadErrorMessage))
     }
     
     func downloadOperationContinue(downloadedByte: String) {
@@ -69,7 +71,7 @@ extension PublicSharePresenter: PublicShareInteractorOutput {
     
     func downloadOperationSuccess(with url: URL) {
         view.downloadOperationSuccess()
-        router.openFilesToSave(with: url)
+        router.openFilesToSave(with: url, documentControllerDelegate: self)
     }
     
     func createDownloadLinkSuccess(with url: String) {
@@ -136,5 +138,16 @@ extension PublicSharePresenter: PublicShareInteractorOutput {
     
     func startProgress() {
         startAsyncOperation()
+    }
+}
+
+extension PublicSharePresenter: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        interactor.trackDownloadSuccess()
+        view.downloadOperationSuccess()
+     }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        interactor.trackDownloadCancel()
     }
 }

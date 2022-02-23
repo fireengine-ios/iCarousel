@@ -17,6 +17,5 @@ protocol PublicShareRouterInput: AnyObject {
     func navigateToAllFiles()
     func navigateToHomeScreen()
     func presentFullQuotaPopup()
-    func openFilesToSave(with url: URL)
-    func showDownloadCompletePopup(isSuccess: Bool, message: String)
+    func openFilesToSave(with url: URL, documentControllerDelegate: UIDocumentPickerDelegate)
 }
