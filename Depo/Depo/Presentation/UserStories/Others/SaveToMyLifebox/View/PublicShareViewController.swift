@@ -95,10 +95,11 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
         noContentLabel.isHidden = false
     }
     
-    private func dismissDownloadAlert() {
+    private func dismissDownloadAlert(handler: @escaping () -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.alert?.dismiss(animated: false, completion: nil)
             self.alert = nil
+            handler()
         }
     }
     
@@ -147,20 +148,21 @@ extension PublicShareViewController: PublicShareViewInput {
     }
     
     func downloadOperationSuccess() {
-        dismissDownloadAlert()
+        dismissDownloadAlert {}
     }
     
     func downloadOperationFailed() {
-         dismissDownloadAlert()
+        dismissDownloadAlert {}
      }
     
     func downloadOperationStorageFail() {
-        dismissDownloadAlert()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let alert = self.createAlert(title: localized(.publicShareDownloadStorageErrorTitle),
-                                         message: localized(.publicShareDownloadStorageErrorDescription),
-                                         firstTitle: TextConstants.ok, cancelOnly: true) { _ in }
-            self.present(alert, animated: true)
+        dismissDownloadAlert {
+            DispatchQueue.main.async {
+                let alert = self.createAlert(title: localized(.publicShareDownloadStorageErrorTitle),
+                                             message: localized(.publicShareDownloadStorageErrorDescription),
+                                             firstTitle: TextConstants.ok, cancelOnly: true) { _ in }
+                self.present(alert, animated: true)
+            }
         }
     }
     
@@ -188,7 +190,7 @@ extension PublicShareViewController: PublicShareViewInput {
             self.alert = self.createAlert(title: TextConstants.popUpDownload, message: downloadedByte,
                                           firstTitle: localized(.publicShareCancelTitle), cancelOnly: true, handler: { _ in
                 self.publicDownloader.stopDownload()
-                self.dismissDownloadAlert()
+                self.dismissDownloadAlert {}
             })
             
             guard let alert = self.alert else { return }
