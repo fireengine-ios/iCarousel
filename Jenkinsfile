@@ -242,7 +242,7 @@ pipeline {
             agent { label agentName }
             environment {
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                IOS_PASS = credentials('iosLoginPass')
+                IOS_PASS = credentials('iosLoginPass2')
             }
             steps {
                 script {
@@ -358,7 +358,7 @@ pipeline {
                 skipDefaultCheckout true
             }
             environment {
-                IOS_PASS = credentials('iosLoginPass')
+                IOS_PASS = credentials('iosLoginPass2')
            }
             steps {
                 script {
@@ -415,9 +415,9 @@ pipeline {
                 skipDefaultCheckout true
             }
             environment {
-                IOS_PASS = credentials('iosLoginPass')
+                IOS_PASS = credentials('iosLoginPass2')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight_appSpesific')
+                TESTFLIGHT_UPLOAD = credentials('testflight_appSpesific3')
                 FASTLANE_DONT_STORE_PASSWORD = 1
                 FASTLANE_SESSION = credentials('fastlane_session')
            }
