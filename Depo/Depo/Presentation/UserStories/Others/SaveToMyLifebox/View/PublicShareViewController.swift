@@ -47,7 +47,10 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
         isLoading = true
         actionView.delegate = self
         
-        if isRootFolder { output.getPublicSharedItemsCount() }
+        if isRootFolder {
+            output.getPublicSharedItemsCount()
+            output.trackScreen()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -148,12 +151,22 @@ extension PublicShareViewController: PublicShareViewInput {
     }
     
     func downloadOperationSuccess() {
-        dismissDownloadAlert {}
+        dismissDownloadAlert {
+            let vc = PopUpController.with(title: TextConstants.success, message: TextConstants.popUpDownloadComplete, image: .success, buttonTitle: TextConstants.ok)
+            DispatchQueue.main.async {
+                self.present(vc, animated: false, completion: nil)
+            }
+        }
     }
     
     func downloadOperationFailed() {
-        dismissDownloadAlert {}
-     }
+        dismissDownloadAlert {
+            let vc = PopUpController.with(title: TextConstants.errorAlert, message: localized(.publicShareDownloadErrorMessage), image: .error, buttonTitle: TextConstants.ok)
+            DispatchQueue.main.async {
+                self.present(vc, animated: false, completion: nil)
+            }
+        }
+    }
     
     func downloadOperationStorageFail() {
         dismissDownloadAlert {

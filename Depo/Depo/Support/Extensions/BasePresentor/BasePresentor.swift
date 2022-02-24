@@ -34,7 +34,7 @@ extension BaseAsyncOperationInteractorOutput {
     func confirmationPopUpCancelTapped() {}
 }
 
-class BasePresenter: BaseAsyncOperationInteractorOutput {
+class BasePresenter: NSObject, BaseAsyncOperationInteractorOutput {
     
     func startCancelableAsync(cancel: @escaping VoidHandler) {
         DispatchQueue.toMain {

@@ -18,4 +18,6 @@ protocol PublicShareInteractorInput {
     func downloadPublicSharedItems(with url: String)
     func trackPublicShareScreen()
     func trackSaveToMyLifeboxClick()
+    func trackDownloadCancel()
+    func trackDownloadSuccess()
 }
