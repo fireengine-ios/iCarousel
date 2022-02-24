@@ -32,7 +32,10 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
 
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
         var items = items
-        if pageNum == Self.firstPage, items.count > 0, AuthoritySingleton.shared.faceRecognition {
+
+        let isPlaces = faceImageType == .places
+        let isFirstPage = pageNum == Self.firstPage
+        if isPlaces, isFirstPage, items.count > 0, AuthoritySingleton.shared.faceRecognition {
             items.insert(PlacesItem.mapPlaceholderItem(), at: 0)
         }
 
