@@ -912,6 +912,12 @@ class RouterVC: NSObject {
         let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
+
+    // MARK: Map
+
+    func mapSearchController() -> MapSearchViewController {
+        return MapSearchInitializer.initialize()
+    }
     
     // MARK: Analyses History page
     

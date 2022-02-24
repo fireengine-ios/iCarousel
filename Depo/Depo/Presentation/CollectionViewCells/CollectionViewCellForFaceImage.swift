@@ -20,7 +20,6 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        nameLabel.textColor = ColorConstants.whiteColor
         nameLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
     }
     
@@ -39,7 +38,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         guard let item = wrappedObj as? Item else {
             return
         }
-        
+
         if (isAlreadyConfigured) {
             return
         }
@@ -64,10 +63,20 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             visibleImageView.isHidden = isCellSelected || isDemo
             transperentView.alpha = !isCellSelected && !isDemo ? NumericConstants.faceImageCellTransperentAlpha : 0
         }
-        
+
+        nameLabel.textColor = ColorConstants.whiteColor
+
         isAccessibilityElement = true
-        accessibilityTraits = .image
-        accessibilityLabel = item.name
+        accessibilityTraits = .button
+
+        if let placeItem = item as? PlacesItem, placeItem.isMapItemPlaceholder {
+            setImage(image: UIImage(named: "map-grid-icon"), animated: true)
+            nameLabel.text = localized(.placesMapTitle)
+            nameLabel.textColor = ColorConstants.linkBlack
+            accessibilityLabel = localized(.placesMapTitle)
+        } else {
+            accessibilityLabel = item.name
+        }
     }
     
     override func prepareForReuse() {

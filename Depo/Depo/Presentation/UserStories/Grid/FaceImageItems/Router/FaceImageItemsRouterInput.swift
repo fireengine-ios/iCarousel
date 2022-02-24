@@ -7,6 +7,7 @@
 //
 
 protocol FaceImageItemsRouterInput {
+    func openMapSearch()
     func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?, faceImageType: FaceImageType?)
     func showPopUp()
     func showNoDetailsAlert(with message: String)
