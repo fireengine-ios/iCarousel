@@ -1959,6 +1959,7 @@
 "save_to_my_lifebox" = "Salvați în lifebox";
 "save_to_my_lifebox_download" = "Doriți să descărcați fișierul lifebox - %@ - %@.zip?";
 "contact_sync_storage_fail_desc" = "Deoarece spațiul de stocare lifebox este plin, copierea de rezervă a contactelor nu va fi efectuată după operațiunea „Exportare Pe Telefon”. Mai vrei să continui?";
-"contact_sync_storage_fail_cont_button" = "";
-"save_to_my_lifebox_full_storage_title" = "";
-"save_to_my_lifebox_full_storage_body" = "";
+"contact_sync_storage_fail_cont_button" = "Continuă";
+"save_to_my_lifebox_full_storage_title" = "Stocare iPhone Plină";
+"save_to_my_lifebox_full_storage_body" = "Puteți elibera spațiu pe acest iPhone gestionând zona de stocare în Setări.";
+"places_map_title" = "";

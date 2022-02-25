@@ -1971,6 +1971,7 @@
 "save_to_my_lifebox" = "حفظ في lifebox";
 "save_to_my_lifebox_download" = "هل تريد تنزيل ملف lifebox - %@ - %@.zip؟";
 "contact_sync_storage_fail_desc" = "نظرًا لأن تخزين lifebox الخاص بك ممتلئ ، فلن يتم إجراء النسخ الاحتياطي لجهات الاتصال بعد عملية \"التصدير إلى الهاتف\". هل مازلت تريد الاستمرار؟";
-"contact_sync_storage_fail_cont_button" = "";
-"save_to_my_lifebox_full_storage_title" = "";
-"save_to_my_lifebox_full_storage_body" = "";
+"contact_sync_storage_fail_cont_button" = "متابعة";
+"save_to_my_lifebox_full_storage_title" = "مساحة تخزين iPhone ممتلئة";
+"save_to_my_lifebox_full_storage_body" = "يمكنك تفريغ مساحة على جهاز iPhone هذا عن طريق إدارة مساحة التخزين الخاصة بك في الإعدادات.";
+"places_map_title" = "";

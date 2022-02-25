@@ -2002,6 +2002,7 @@
 "save_to_my_lifebox" = "Ruaje në lifebox";
 "save_to_my_lifebox_download" = "Dëshiron të shkarkosh skedarin lifebox - %@ - %@.zip?";
 "contact_sync_storage_fail_desc" = "Meqenëse ruajtja e lifebox është plot, rezervimi i kontakteve nuk do të kryhet pas operacionit \"Eksport Në Telefon\". Dëshironi të vazhdoni akoma?";
-"contact_sync_storage_fail_cont_button" = "";
-"save_to_my_lifebox_full_storage_title" = "";
-"save_to_my_lifebox_full_storage_body" = "";
+"contact_sync_storage_fail_cont_button" = "Vazhdoni";
+"save_to_my_lifebox_full_storage_title" = "Hapësira Ruajtëse e iPhone Është e Plotë";
+"save_to_my_lifebox_full_storage_body" = "Mund të lironi hapësirë në këtë iPhone duke menaxhuar zonën tuaj të ruajtjes te Cilësimet.";
+"places_map_title" = "";

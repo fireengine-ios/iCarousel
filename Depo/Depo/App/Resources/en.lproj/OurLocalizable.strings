@@ -2009,6 +2009,7 @@
 "save_to_my_lifebox" = "Save to My lifebox";
 "save_to_my_lifebox_download" = "Do you want to download lifebox - %@ - %@.zip file?";
 "contact_sync_storage_fail_desc" = "Since your lifebox storage is full, contacts backup will not be performed after the \"Export Contacts\" operation. Do you still want to continue?";
-"contact_sync_storage_fail_cont_button" = "";
+"contact_sync_storage_fail_cont_button" = "Continue";
 "save_to_my_lifebox_full_storage_title" = "iPhone Storage Full";
 "save_to_my_lifebox_full_storage_body" = "You can free up space on this iPhone by managing your storage in Settings.";
+"places_map_title" = "Map";
