@@ -1973,6 +1973,7 @@
 "save_to_my_lifebox" = "Сохранить в lifebox";
 "save_to_my_lifebox_download" = "Хотите скачать файл lifebox - %@ - %@.zip?";
 "contact_sync_storage_fail_desc" = "Поскольку место для хранения заполнено, невозможно сделать резервную копию контактов в lifebox после операции «Экспорт в Телефон». Все еще хотите продолжить?";
-"contact_sync_storage_fail_cont_button" = "";
-"save_to_my_lifebox_full_storage_title" = "";
-"save_to_my_lifebox_full_storage_body" = "";
+"contact_sync_storage_fail_cont_button" = "Далее";
+"save_to_my_lifebox_full_storage_title" = "Область Хранения iPhone Заполнена";
+"save_to_my_lifebox_full_storage_body" = "Вы можете освободить место на этом iPhone, управляя областью хранения в Настройках.";
+"places_map_title" = "";
