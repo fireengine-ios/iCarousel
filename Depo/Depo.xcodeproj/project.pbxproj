@@ -9125,6 +9125,7 @@
 		0791817526F88B7B0067FB75 /* IdentityVerificationMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityVerificationMethod.swift; sourceTree = "<group>"; };
 		0791817E26F89FAF0067FB75 /* ResetPasswordService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordService.swift; sourceTree = "<group>"; };
 		0791818326F8B3B10067FB75 /* ResetPasswordServiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordServiceDelegate.swift; sourceTree = "<group>"; };
+		0795903527CCAF9700E1FB2F /* ka */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ka; path = ka.lproj/OurLocalizable.strings; sourceTree = "<group>"; };
 		0798D5CB26981C9F00F5EDE0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		0798D5CD26981CBB00F5EDE0 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
 		07A6C48926E5EC8300B5442B /* ProfileEmailFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEmailFieldView.swift; sourceTree = "<group>"; };
@@ -21147,6 +21148,7 @@
 				ko,
 				"zh-Hant",
 				"pt-PT",
+				ka,
 			);
 			mainGroup = 051E1DEA19CAC2F900FD1E03;
 			productRefGroup = 051E1DF419CAC2F900FD1E03 /* Products */;
@@ -31059,6 +31061,7 @@
 				8C0971BB209F91EC003C5609 /* uk */,
 				8CF541EF22030F35001BB03F /* sq */,
 				8CCAC9CC224B5329006310EB /* fr */,
+				0795903527CCAF9700E1FB2F /* ka */,
 			);
 			name = OurLocalizable.strings;
 			path = .;
