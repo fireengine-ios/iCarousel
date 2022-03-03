@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-final class MapGroupDetailService: RemoteItemsService {
+final class MapLocationDetailService: RemoteItemsService {
     private static let pageSize = 100
     private let coordinate: CLLocationCoordinate2D
     private lazy var mapSearchService = MapSearchService()

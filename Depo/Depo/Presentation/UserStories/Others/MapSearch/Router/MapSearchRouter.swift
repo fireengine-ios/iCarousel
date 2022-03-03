@@ -11,8 +11,8 @@ import Foundation
 final class MapSearchRouter: MapSearchRouterInput {
     private lazy var router = RouterVC()
 
-    func openMapGroupDetail(coordinate: CLLocationCoordinate2D) {
-        let viewController = router.mapGroupDetail(coordinate: coordinate)
+    func openMapLocationDetail(coordinate: CLLocationCoordinate2D) {
+        let viewController = router.mapLocationDetail(coordinate: coordinate)
         router.pushViewController(viewController: viewController)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  MapGroupDetailInitializer.swift
+//  MapLocationDetailInitializer.swift
 //  Depo
 //
 //  Created by Hady on 3/1/22.
@@ -9,11 +9,11 @@
 import Foundation
 import CoreLocation
 
-final class MapGroupDetailInitializer {
+final class MapLocationDetailInitializer {
     static let bottomElements: [ElementTypes] = [.share, .download, .addToAlbum, .hide, .delete]
 
-    class func initialize(nibName: String, coordinate: CLLocationCoordinate2D) -> MapGroupDetailViewController {
-        let viewController = MapGroupDetailViewController(nibName: nibName, bundle: nil)
+    class func initialize(nibName: String, coordinate: CLLocationCoordinate2D) -> MapLocationDetailViewController {
+        let viewController = MapLocationDetailViewController(nibName: nibName, bundle: nil)
 
         viewController.status = .active
         viewController.needToShowTabBar = false

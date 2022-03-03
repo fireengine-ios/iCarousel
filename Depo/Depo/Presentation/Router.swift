@@ -920,8 +920,8 @@ class RouterVC: NSObject {
         return MapSearchInitializer.initialize()
     }
 
-    func mapGroupDetail(coordinate: CLLocationCoordinate2D) -> MapGroupDetailViewController {
-        return MapGroupDetailInitializer.initialize(nibName: "BaseFilesGreedViewController", coordinate: coordinate)
+    func mapLocationDetail(coordinate: CLLocationCoordinate2D) -> MapLocationDetailViewController {
+        return MapLocationDetailInitializer.initialize(nibName: "BaseFilesGreedViewController", coordinate: coordinate)
     }
     
     // MARK: Analyses History page

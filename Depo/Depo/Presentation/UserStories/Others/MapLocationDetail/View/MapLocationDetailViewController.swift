@@ -1,5 +1,5 @@
 //
-//  MapGroupDetailViewController.swift
+//  MapLocationDetailViewController.swift
 //  Depo
 //
 //  Created by Hady on 3/1/22.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class MapGroupDetailViewController: BaseFilesGreedChildrenViewController {
+final class MapLocationDetailViewController: BaseFilesGreedChildrenViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // don't show subtitle

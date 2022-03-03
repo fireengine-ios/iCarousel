@@ -28,7 +28,7 @@ extension MapSearchPresenter: MapSearchViewOutput {
     }
 
     func didSelectGroup(at coordinate: CLLocationCoordinate2D) {
-        router.openMapGroupDetail(coordinate: coordinate)
+        router.openMapLocationDetail(coordinate: coordinate)
     }
 }
 

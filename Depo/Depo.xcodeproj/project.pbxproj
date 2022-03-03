@@ -274,18 +274,18 @@
 		0765B82E269EE7430030429C /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0765B82C269EE7430030429C /* APIResponse.swift */; };
 		0765B82F269EE7430030429C /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0765B82C269EE7430030429C /* APIResponse.swift */; };
 		0765B830269EE7430030429C /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0765B82C269EE7430030429C /* APIResponse.swift */; };
-		0766314E27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766314D27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift */; };
-		0766314F27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766314D27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift */; };
-		0766315027CE8F0000AB4BC2 /* MapGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766314D27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift */; };
-		0766315127CE8F0000AB4BC2 /* MapGroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766314D27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift */; };
-		0766316227CE913F00AB4BC2 /* MapGroupDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316127CE913F00AB4BC2 /* MapGroupDetailInitializer.swift */; };
-		0766316327CE913F00AB4BC2 /* MapGroupDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316127CE913F00AB4BC2 /* MapGroupDetailInitializer.swift */; };
-		0766316427CE913F00AB4BC2 /* MapGroupDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316127CE913F00AB4BC2 /* MapGroupDetailInitializer.swift */; };
-		0766316527CE913F00AB4BC2 /* MapGroupDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316127CE913F00AB4BC2 /* MapGroupDetailInitializer.swift */; };
-		0766316727CE951500AB4BC2 /* MapGroupDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316627CE951500AB4BC2 /* MapGroupDetailService.swift */; };
-		0766316827CE951500AB4BC2 /* MapGroupDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316627CE951500AB4BC2 /* MapGroupDetailService.swift */; };
-		0766316927CE951500AB4BC2 /* MapGroupDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316627CE951500AB4BC2 /* MapGroupDetailService.swift */; };
-		0766316A27CE951500AB4BC2 /* MapGroupDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316627CE951500AB4BC2 /* MapGroupDetailService.swift */; };
+		0766314E27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766314D27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift */; };
+		0766314F27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766314D27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift */; };
+		0766315027CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766314D27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift */; };
+		0766315127CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766314D27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift */; };
+		0766316227CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316127CE913F00AB4BC2 /* MapLocationDetailInitializer.swift */; };
+		0766316327CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316127CE913F00AB4BC2 /* MapLocationDetailInitializer.swift */; };
+		0766316427CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316127CE913F00AB4BC2 /* MapLocationDetailInitializer.swift */; };
+		0766316527CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316127CE913F00AB4BC2 /* MapLocationDetailInitializer.swift */; };
+		0766316727CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316627CE951500AB4BC2 /* MapLocationDetailService.swift */; };
+		0766316827CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316627CE951500AB4BC2 /* MapLocationDetailService.swift */; };
+		0766316927CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316627CE951500AB4BC2 /* MapLocationDetailService.swift */; };
+		0766316A27CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0766316627CE951500AB4BC2 /* MapLocationDetailService.swift */; };
 		0768880D271D948F00833F43 /* TooltipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768880C271D948F00833F43 /* TooltipViewController.swift */; };
 		0768880E271D948F00833F43 /* TooltipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768880C271D948F00833F43 /* TooltipViewController.swift */; };
 		0768880F271D948F00833F43 /* TooltipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0768880C271D948F00833F43 /* TooltipViewController.swift */; };
@@ -9193,9 +9193,9 @@
 		07595510264131FA00C088B1 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		0765B824269EE6F40030429C /* PhotopickCampaignResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotopickCampaignResponse.swift; sourceTree = "<group>"; };
 		0765B82C269EE7430030429C /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
-		0766314D27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGroupDetailViewController.swift; sourceTree = "<group>"; };
-		0766316127CE913F00AB4BC2 /* MapGroupDetailInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGroupDetailInitializer.swift; sourceTree = "<group>"; };
-		0766316627CE951500AB4BC2 /* MapGroupDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapGroupDetailService.swift; sourceTree = "<group>"; };
+		0766314D27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationDetailViewController.swift; sourceTree = "<group>"; };
+		0766316127CE913F00AB4BC2 /* MapLocationDetailInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationDetailInitializer.swift; sourceTree = "<group>"; };
+		0766316627CE951500AB4BC2 /* MapLocationDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLocationDetailService.swift; sourceTree = "<group>"; };
 		0768880C271D948F00833F43 /* TooltipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TooltipViewController.swift; sourceTree = "<group>"; };
 		076BD19227BBBD30004609E3 /* MapSearchInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchInitializer.swift; sourceTree = "<group>"; };
 		076BD19727BBBD3A004609E3 /* MapSearchConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSearchConfigurator.swift; sourceTree = "<group>"; };
@@ -12134,19 +12134,19 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
-		0766314427CE8E8700AB4BC2 /* MapGroupDetail */ = {
+		0766314427CE8E8700AB4BC2 /* MapLocationDetail */ = {
 			isa = PBXGroup;
 			children = (
 				0766314927CE8EA900AB4BC2 /* View */,
 				0766314C27CE8EC900AB4BC2 /* Configurator */,
 			);
-			path = MapGroupDetail;
+			path = MapLocationDetail;
 			sourceTree = "<group>";
 		};
 		0766314927CE8EA900AB4BC2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0766314D27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift */,
+				0766314D27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -12154,7 +12154,7 @@
 		0766314C27CE8EC900AB4BC2 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
-				0766316127CE913F00AB4BC2 /* MapGroupDetailInitializer.swift */,
+				0766316127CE913F00AB4BC2 /* MapLocationDetailInitializer.swift */,
 			);
 			path = Configurator;
 			sourceTree = "<group>";
@@ -12233,7 +12233,7 @@
 			children = (
 				076BD1DE27BC325E004609E3 /* MapSearchService.swift */,
 				076BD1E327BC332A004609E3 /* MapMediaGroup.swift */,
-				0766316627CE951500AB4BC2 /* MapGroupDetailService.swift */,
+				0766316627CE951500AB4BC2 /* MapLocationDetailService.swift */,
 			);
 			path = MapSearchService;
 			sourceTree = "<group>";
@@ -18266,7 +18266,7 @@
 			isa = PBXGroup;
 			children = (
 				076BD13327BBBCC1004609E3 /* MapSearch */,
-				0766314427CE8E8700AB4BC2 /* MapGroupDetail */,
+				0766314427CE8E8700AB4BC2 /* MapLocationDetail */,
 				F028C0D82789DD3E005CE6AF /* SaveToMyLifebox */,
 				9808B3082553DE94002B0032 /* PrivateShare */,
 				98185B9D248A707C0013929C /* WarningPopup */,
@@ -24052,7 +24052,7 @@
 				8C0E8C7F1FDEBDFF00789C91 /* SKProduct+Localized.swift in Sources */,
 				8CD2B3AB1FE7B23E00280547 /* PopUpController.swift in Sources */,
 				8C0E8C801FDEBDFF00789C91 /* PasscodeSettingsInteractorIO.swift in Sources */,
-				0766316727CE951500AB4BC2 /* MapGroupDetailService.swift in Sources */,
+				0766316727CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */,
 				8C0E8C811FDEBDFF00789C91 /* UsageInfoPresenter.swift in Sources */,
 				8C0E8C841FDEBDFF00789C91 /* PasscodeEnterViewController.swift in Sources */,
 				C62239B32049738F0043ED44 /* FaceImageItemsRouterInput.swift in Sources */,
@@ -24646,7 +24646,7 @@
 				B55EFD3E2565427800E11D9C /* PrivateShareSharedItemThreeDotsManager.swift in Sources */,
 				CE23A0F7205FF5320048267D /* EmailEnterController.swift in Sources */,
 				C62239AA204973200043ED44 /* FaceImageChangeCoverInteractorOutput.swift in Sources */,
-				0766316227CE913F00AB4BC2 /* MapGroupDetailInitializer.swift in Sources */,
+				0766316227CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */,
 				89E51D5422CA1125007A7DBC /* CreateStoryPreviewPresenter.swift in Sources */,
 				8C0E8DE71FDEBDFF00789C91 /* IntroduceInteractorInput.swift in Sources */,
 				8C0E8DE81FDEBDFF00789C91 /* AlbumServiceResponse.swift in Sources */,
@@ -25322,7 +25322,7 @@
 				8C0E8F5C1FDEBDFF00789C91 /* UploadFilesSelectionViewInput.swift in Sources */,
 				8C0E8F5D1FDEBDFF00789C91 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				8CD2B3B31FE7B41E00280547 /* PrepareToAutoSync.swift in Sources */,
-				0766314E27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift in Sources */,
+				0766314E27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */,
 				8C0E8F5E1FDEBDFF00789C91 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				8C0E8F5F1FDEBDFF00789C91 /* UploadFilesSelectionViewController.swift in Sources */,
 				8C0E8F601FDEBDFF00789C91 /* String+Subscript.swift in Sources */,
@@ -26195,7 +26195,7 @@
 				98231A1424F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
 				CE78488D22A685FB00662219 /* (null) in Sources */,
 				CE78488E22A685FB00662219 /* VisualMusicPlayerViewInput.swift in Sources */,
-				0766315027CE8F0000AB4BC2 /* MapGroupDetailViewController.swift in Sources */,
+				0766315027CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */,
 				CE78488F22A685FB00662219 /* AutoSyncModuleInput.swift in Sources */,
 				CE78489122A685FB00662219 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				98B04888259314750011DAEB /* SyncAdapter.m in Sources */,
@@ -26231,7 +26231,7 @@
 				CE7848AA22A685FB00662219 /* AppDelegate.swift in Sources */,
 				07AC65FB26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
-				0766316427CE913F00AB4BC2 /* MapGroupDetailInitializer.swift in Sources */,
+				0766316427CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */,
 				CE7848AB22A685FB00662219 /* CollectionViewCellForController.swift in Sources */,
 				CE7848AD22A685FB00662219 /* AccountResponse.swift in Sources */,
 				CE7848AE22A685FB00662219 /* CollectionViewCellForAudio.swift in Sources */,
@@ -26907,7 +26907,7 @@
 				CE784A8A22A685FB00662219 /* ForgotPasswordInitializer.swift in Sources */,
 				CE784A8B22A685FB00662219 /* PasscodeView.swift in Sources */,
 				CE784A8C22A685FB00662219 /* BiometricsManager.swift in Sources */,
-				0766316927CE951500AB4BC2 /* MapGroupDetailService.swift in Sources */,
+				0766316927CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */,
 				CE784A8D22A685FB00662219 /* PhotoService.swift in Sources */,
 				CE784A8F22A685FB00662219 /* LocalAlbumRouter.swift in Sources */,
 				CE784A9022A685FB00662219 /* SearchViewOutput.swift in Sources */,
@@ -27832,7 +27832,7 @@
 				CF8B640323CBC9D70021B021 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				CF8B640423CBC9D70021B021 /* ThresholdBlockService.swift in Sources */,
 				CF8B640523CBC9D70021B021 /* AlbumsDataSourceForCollectionView.swift in Sources */,
-				0766316327CE913F00AB4BC2 /* MapGroupDetailInitializer.swift in Sources */,
+				0766316327CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */,
 				F028C11A2789F3B4005CE6AF /* PublicShareInteractorInput.swift in Sources */,
 				CF8B640623CBC9D70021B021 /* QuestionCell.swift in Sources */,
 				CF8B640723CBC9D70021B021 /* PhotoSelectionNoFilesView.swift in Sources */,
@@ -27976,7 +27976,7 @@
 				CF8B647223CBC9D70021B021 /* SmartAlbumCell.swift in Sources */,
 				CF8B647323CBC9D70021B021 /* DarkPopUpController.swift in Sources */,
 				CF8B647423CBC9D70021B021 /* AutoSyncDataStorage.swift in Sources */,
-				0766316827CE951500AB4BC2 /* MapGroupDetailService.swift in Sources */,
+				0766316827CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */,
 				B569578324DD72D900B7B336 /* HSVMultiband.swift in Sources */,
 				B51B8197254AECEB0072C6FA /* DocumentDownloadService.swift in Sources */,
 				CF8B647523CBC9D70021B021 /* PrintInitializer.swift in Sources */,
@@ -28658,7 +28658,7 @@
 				B519A675253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				CF8B668523CBC9D70021B021 /* TermsOfUseConfigurator.swift in Sources */,
 				CF8B668623CBC9D70021B021 /* BaseFilesGreedViewController.swift in Sources */,
-				0766314F27CE8F0000AB4BC2 /* MapGroupDetailViewController.swift in Sources */,
+				0766314F27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */,
 				CF8B668723CBC9D70021B021 /* FaceImageDisplayManager.swift in Sources */,
 				CF8B668823CBC9D70021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				98C19F512485097900527D76 /* ContactSyncApiService.swift in Sources */,
@@ -29541,7 +29541,7 @@
 				CF8B6BE323CBCA280021B021 /* (null) in Sources */,
 				CF8B6BE423CBCA280021B021 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CF8B6BE523CBCA280021B021 /* AutoSyncModuleInput.swift in Sources */,
-				0766315127CE8F0000AB4BC2 /* MapGroupDetailViewController.swift in Sources */,
+				0766315127CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */,
 				CF8B6BE623CBCA280021B021 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				98B04889259314750011DAEB /* SyncAdapter.m in Sources */,
 				CF8B6BE723CBCA280021B021 /* SelectQuestionViewController.swift in Sources */,
@@ -29577,7 +29577,7 @@
 				CF8B6C0123CBCA280021B021 /* AccountResponse.swift in Sources */,
 				07AC65FC26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */,
 				CF8B6C0223CBCA280021B021 /* CollectionViewCellForAudio.swift in Sources */,
-				0766316527CE913F00AB4BC2 /* MapGroupDetailInitializer.swift in Sources */,
+				0766316527CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */,
 				CF8B6C0323CBCA280021B021 /* KeyboardLayoutConstraint.swift in Sources */,
 				CF8B6C0423CBCA280021B021 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				CF8B6C0523CBCA280021B021 /* PhotoVideoBottomBarManager.swift in Sources */,
@@ -30253,7 +30253,7 @@
 				CF8B6E0C23CBCA280021B021 /* PasscodeView.swift in Sources */,
 				CF8B6E0D23CBCA280021B021 /* BiometricsManager.swift in Sources */,
 				CF8B6E0E23CBCA280021B021 /* PhotoService.swift in Sources */,
-				0766316A27CE951500AB4BC2 /* MapGroupDetailService.swift in Sources */,
+				0766316A27CE951500AB4BC2 /* MapLocationDetailService.swift in Sources */,
 				0305A30723D5C2D5004D1EC7 /* StickerCollectionViewCell.swift in Sources */,
 				CF8B6E0F23CBCA280021B021 /* LocalAlbumRouter.swift in Sources */,
 				CF8B6E1023CBCA280021B021 /* SearchViewOutput.swift in Sources */,
