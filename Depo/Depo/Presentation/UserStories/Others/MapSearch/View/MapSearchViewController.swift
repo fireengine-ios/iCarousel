@@ -11,7 +11,6 @@ import MapKit
 
 final class MapSearchViewController: BaseViewController {
     var output: MapSearchViewOutput!
-    private var currentGroups: [MapMediaGroup] = []
 
     @IBOutlet private weak var progressView: UIProgressView! {
         willSet {
@@ -71,10 +70,7 @@ extension MapSearchViewController: MapSearchViewInput {
     }
 
     func setCurrentGroups(_ groups: [MapMediaGroup]) {
-        // TODO: handle blinks?
         mapView.removeAnnotations(mapView.annotations)
-        // TODO: maybe move these to presenter
-        currentGroups = groups
 
         let annotations = groups.map { group -> MKAnnotation in
             let annotation = ItemGroupAnnotation()
