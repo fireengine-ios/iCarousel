@@ -475,4 +475,5 @@ struct RouteRequests {
 
     // MARK: - Map
     static let map = "map/%f,%f/%f,%f/%d"
+    static let mapList = "map/list/%f,%f?page=%d&size=%d"
 }

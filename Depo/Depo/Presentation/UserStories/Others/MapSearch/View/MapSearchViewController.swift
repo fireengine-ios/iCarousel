@@ -94,4 +94,15 @@ extension MapSearchViewController: MKMapViewDelegate {
                                      zoomLevel: Int(mapView.zoomLevel.rounded(.down)))
         output.mapRegionChanged(params: params)
     }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let annotation = view.annotation as? ItemGroupAnnotation else {
+            return
+        }
+
+        output.didSelectGroup(at: annotation.coordinate)
+
+        mapView.deselectAnnotation(annotation, animated: false)
+    }
 }
+

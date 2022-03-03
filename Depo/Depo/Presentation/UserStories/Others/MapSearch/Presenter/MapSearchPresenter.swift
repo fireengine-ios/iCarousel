@@ -26,6 +26,10 @@ extension MapSearchPresenter: MapSearchViewOutput {
         view.showLoading()
         interactor.fetchMediaGroups(params: params)
     }
+
+    func didSelectGroup(at coordinate: CLLocationCoordinate2D) {
+        router.openMapGroupDetail(coordinate: coordinate)
+    }
 }
 
 extension MapSearchPresenter: MapSearchInteractorOutput {

@@ -25,4 +25,22 @@ final class MapSearchService: BaseRequestService {
             .responseArray(handler)
             .task
     }
+
+    @discardableResult
+    func getMediaItems(near coordinate: CLLocationCoordinate2D, page: Int, size: Int,
+                       handler: @escaping ResponseHandler<SearchResponse>) -> URLSessionTask? {
+
+        let path = String(format: RouteRequests.mapList,
+                          coordinate.latitude, coordinate.longitude, page, size)
+
+        let url = URL(string: path, relativeTo: RouteRequests.baseUrl)!
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObjectRequestResponse(handler)
+            .task
+    }
 }
+
+

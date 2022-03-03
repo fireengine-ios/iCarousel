@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class RouterVC: NSObject {
     
@@ -917,6 +918,10 @@ class RouterVC: NSObject {
 
     func mapSearchController() -> MapSearchViewController {
         return MapSearchInitializer.initialize()
+    }
+
+    func mapGroupDetail(coordinate: CLLocationCoordinate2D) -> MapGroupDetailViewController {
+        return MapGroupDetailInitializer.initialize(nibName: "BaseFilesGreedViewController", coordinate: coordinate)
     }
     
     // MARK: Analyses History page
