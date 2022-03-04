@@ -11,6 +11,7 @@ import MapKit
 
 final class MapSearchViewController: BaseViewController {
     var output: MapSearchViewOutput!
+    private var mapDataNeedsRefresh = false
 
     @IBOutlet private weak var progressView: UIProgressView! {
         willSet {
@@ -31,6 +32,14 @@ final class MapSearchViewController: BaseViewController {
         super.viewDidLoad()
         output.viewIsReady()
         mapView.delegate = self
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if mapDataNeedsRefresh {
+            mapDataNeedsRefresh = false
+            self.mapView(mapView, regionDidChangeAnimated: false)
+        }
     }
 }
 
@@ -80,6 +89,10 @@ extension MapSearchViewController: MapSearchViewInput {
             return annotation
         }
         mapView.addAnnotations(annotations)
+    }
+
+    func setMapDataNeedsRefresh() {
+        mapDataNeedsRefresh = true
     }
 }
 

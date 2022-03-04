@@ -19,6 +19,9 @@ final class MapLocationDetailViewController: BaseFilesGreedChildrenViewControlle
         super.stopSelection()
         // don't show subtitle
         setTitle(withString: mainTitle)
+
+        // mark the data in the previous page as outdated upon actions like (delete, hide)
+        setMapDataNeedsRefresh()
     }
 
     override func configureNavBarActions(isSelecting: Bool = false) {
@@ -28,5 +31,21 @@ final class MapLocationDetailViewController: BaseFilesGreedChildrenViewControlle
     override func hideNoFiles() {
         // hide the top bar containing sort button
         topBarContainer.isHidden = true
+    }
+
+    private func setMapDataNeedsRefresh() {
+        guard let mapSearchViewController = getPreviousViewController() as? MapSearchViewInput else {
+            return
+        }
+
+        mapSearchViewController.setMapDataNeedsRefresh()
+    }
+
+    private func getPreviousViewController() -> UIViewController? {
+        if let navigationStack = navigationController?.viewControllers, navigationStack.count > 1 {
+            return navigationStack[navigationStack.count - 2]
+        }
+
+        return nil
     }
 }

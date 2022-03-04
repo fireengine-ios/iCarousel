@@ -13,4 +13,5 @@ protocol MapSearchViewInput: AnyObject {
     func hideLoading()
     func setZoomRange(minimumZoomLevel: Int, maximumZoomLevel: Int)
     func setCurrentGroups(_ groups: [MapMediaGroup])
+    func setMapDataNeedsRefresh()
 }
