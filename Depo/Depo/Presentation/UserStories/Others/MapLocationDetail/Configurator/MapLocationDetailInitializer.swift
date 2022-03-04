@@ -22,7 +22,7 @@ final class MapLocationDetailInitializer {
         viewController.mainTitle = localized(.mapLocationDetailHeader)
 
         let presenter = BaseFilesGreedPresenter()
-        let interactor = BaseFilesGreedInteractor(remoteItems: MapGroupDetailService(coordinate: coordinate))
+        let interactor = BaseFilesGreedInteractor(remoteItems: MapLocationDetailService(coordinate: coordinate))
 
 
         let bottomBarConfig = EditingBarConfig(elementsConfig: Self.bottomElements, style: .default, tintColor: nil)
