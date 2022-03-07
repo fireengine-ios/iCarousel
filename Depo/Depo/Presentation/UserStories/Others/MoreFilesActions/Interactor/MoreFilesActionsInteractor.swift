@@ -286,7 +286,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         linkBuilder?.iOSParameters?.appStoreID = Device.applicationId
         linkBuilder?.iOSParameters?.fallbackURL = link
 
-        linkBuilder?.androidParameters = DynamicLinkAndroidParameters(packageName: "tr.com.turkcell.akillidepo")
+        linkBuilder?.androidParameters = DynamicLinkAndroidParameters(packageName: Device.androidPackageName)
         linkBuilder?.androidParameters?.fallbackURL = link
         
         linkBuilder?.navigationInfoParameters = DynamicLinkNavigationInfoParameters()
