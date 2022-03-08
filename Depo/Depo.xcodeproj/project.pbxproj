@@ -11446,6 +11446,7 @@
 		F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicSharedItemsActionView.xib; sourceTree = "<group>"; };
 		F064FB32278C168300B461D0 /* PublicSharedItemsActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsActionView.swift; sourceTree = "<group>"; };
 		F081F9C52779138F0064D25C /* DragAndDropItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropItemType.swift; sourceTree = "<group>"; };
+		F0AF20DF27D63F950014C84D /* ka */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ka; path = ka.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewController.swift; sourceTree = "<group>"; };
 		F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeViewController.xib; sourceTree = "<group>"; };
 		F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeConfigurator.swift; sourceTree = "<group>"; };
@@ -31113,6 +31114,7 @@
 				CEEB7AA420A5BC6A0070FDC2 /* ro */,
 				8CF541F022030F36001BB03F /* sq */,
 				8CCAC9CD224B5329006310EB /* fr */,
+				F0AF20DF27D63F950014C84D /* ka */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
