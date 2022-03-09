@@ -12,6 +12,8 @@ protocol FaceImageItemsDataSourceDelegate: AnyObject {
 
 
 final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
+    private static let firstPage = 1
+
     var price: String?
     var detailMessage: String = ""
     var faceImageType: FaceImageType
@@ -26,6 +28,18 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     init(faceImageType: FaceImageType, delegate: FaceImageItemsDataSourceDelegate) {
         self.faceImageType = faceImageType
         premiumDelegate = delegate
+    }
+
+    override func appendCollectionView(items: [WrapData], pageNum: Int) {
+        var items = items
+
+        let isPlaces = faceImageType == .places
+        let isFirstPage = pageNum == Self.firstPage
+        if isPlaces, isFirstPage, items.count > 0, AuthoritySingleton.shared.faceRecognition {
+            items.insert(PlacesItem.mapPlaceholderItem(), at: 0)
+        }
+
+        super.appendCollectionView(items: items, pageNum: pageNum)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -76,6 +90,8 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             delegate?.onSelectedFaceImageDemoCell(with: indexPath)
         } else if let smartItem = unwrapedObject as? PlacesItem, smartItem.responseObject.isDemo == true  {
             delegate?.onSelectedFaceImageDemoCell(with: indexPath)
+        } else if let smartItem = unwrapedObject as? PlacesItem, smartItem.isMapItemPlaceholder == true  {
+            delegate?.onSelectedMapPlaceholderItem()
         } else {
             super.collectionView(collectionView, didSelectItemAt: indexPath)
         }

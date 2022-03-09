@@ -472,4 +472,8 @@ struct RouteRequests {
     static let paycellWebUrl = paycellShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=https://google.com"
 
     static let resolveDeepLink = baseUrl +/ "deeplink"
+
+    // MARK: - Map
+    static let map = "map/%f,%f/%f,%f/%d"
+    static let mapList = "map/list/%f,%f?page=%d&size=%d"
 }

@@ -14,6 +14,10 @@ func localized(_ key: Strings) -> String {
 
 enum Strings: String, Localizable {
 
+    // MARK: - Map
+    case placesMapTitle = "places_map_title"
+    case mapLocationDetailHeader = "map_location_detail_header"
+
     // MARK: - SignUp
     case signUpEnterVerificationCodeEmail = "signup_enter_verification_code_email"
     case signUpTooManyRequestsEmail = "signup_too_many_requests_email"

@@ -103,6 +103,21 @@ extension Alamofire.DataRequest {
             }
         }
     }
+
+    @discardableResult
+    func responseObjectRequestResponse<T: ObjectRequestResponse>(_ handler: @escaping ResponseHandler<T>) -> Self {
+        return responseData { response in
+            switch response.result {
+            case .success(let data):
+                let result = T(json: data, headerResponse: response.response)
+                handler(.success(result))
+            case .failure(let error):
+                let backendError = ResponseParser.getBackendError(data: response.data,
+                                                                  response: response.response)
+                handler(ResponseResult.failed(backendError ?? error))
+            }
+        }
+    }
 }
 
 

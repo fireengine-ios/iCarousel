@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class RouterVC: NSObject {
     
@@ -911,6 +912,16 @@ class RouterVC: NSObject {
     func placesListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
+    }
+
+    // MARK: Map
+
+    func mapSearchController() -> MapSearchViewController {
+        return MapSearchInitializer.initialize()
+    }
+
+    func mapLocationDetail(coordinate: CLLocationCoordinate2D) -> MapLocationDetailViewController {
+        return MapLocationDetailInitializer.initialize(nibName: "BaseFilesGreedViewController", coordinate: coordinate)
     }
     
     // MARK: Analyses History page

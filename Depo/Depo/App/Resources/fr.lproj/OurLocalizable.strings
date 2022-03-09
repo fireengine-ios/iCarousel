@@ -2268,3 +2268,4 @@ Please check I have understood the intended command here*/
 "save_to_my_lifebox_full_storage_title" = "Stockage Complet de l'iPhone";
 "save_to_my_lifebox_full_storage_body" = "Vous pouvez libérer de l'espace sur cet iPhone en gérant votre espace de stockage dans Paramètres.";
 "places_map_title" = "";
+"map_location_detail_header" = "";
