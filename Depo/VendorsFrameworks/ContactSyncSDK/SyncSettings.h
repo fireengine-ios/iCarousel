@@ -51,6 +51,10 @@ typedef NS_ENUM(NSUInteger, SYNCType) {
  */
 @property (nonatomic) SYNCMode mode;
 /**
+ * A boolean to skip uploading VCF when performing SYNCRestore. Default is false.
+ */
+@property (nonatomic) BOOL skipUploadVCF;
+/**
  * Sync type. It has possible two value: REQUESTED and PERIODIC
  */
 @property (nonatomic) SYNCType type;

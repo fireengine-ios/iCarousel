@@ -211,7 +211,11 @@ extension ContactListViewController: ContactListDataSourceDelegate {
 //MARK: - ContactSyncControllerProtocol
 
 extension ContactListViewController: ContactSyncControllerProtocol, ContactSyncHelperDelegate {
-    
+
+    var selectedBackupForRestore: ContactBackupItem? {
+        return backUpInfo
+    }
+
     func show(view: UIView, animated: Bool) {
         animator.showTransition(to: view, on: self.view, animated: true)
     }

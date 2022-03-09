@@ -126,4 +126,8 @@ enum Strings: String, Localizable {
     case publicShareDownloadStorageErrorTitle =  "save_to_my_lifebox_full_storage_title"
     case publicShareDownloadStorageErrorDescription = "save_to_my_lifebox_full_storage_body"
     case publicShareDownloadErrorMessage = "An error is occurred!"
+
+    // MARK: - Contact Restore
+    case contactSyncStorageFailDescription = "contact_sync_storage_fail_desc"
+    case contactSyncStorageFailContinueButton = "contact_sync_storage_fail_cont_button"
 }

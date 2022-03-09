@@ -131,6 +131,10 @@ final class ContactSyncHelper {
     func restore(backup: ContactBackupItem, onStart: @escaping VoidHandler) {
         startOperation(operationType: .restore, backup: backup, onStart: onStart)
     }
+
+    func restoreWithoutUploadVCF(backup: ContactBackupItem, onStart: @escaping VoidHandler) {
+        startOperation(operationType: .restoreWithoutUploadVCF, backup: backup, onStart: onStart)
+    }
     
     func cancelAnalyze() {
         start(operationType: .cancel)
@@ -183,7 +187,7 @@ final class ContactSyncHelper {
     }
     
     private func start(operationType: SyncOperationType, backup: ContactBackupItem? = nil) {
-    debugLog("CONTACT SYNC: start")
+        debugLog("CONTACT SYNC: start")
         updateAccessToken { [weak self] result in
             debugLog("CONTACT SYNC: start updateAccessToken")
             guard let self = self else {
@@ -203,6 +207,10 @@ final class ContactSyncHelper {
                 case .restore:
                     self.contactSyncService.cancelAnalyze()
                     self.performOperation(forType: .restore, backup: backup)
+
+                case .restoreWithoutUploadVCF:
+                    self.contactSyncService.cancelAnalyze()
+                    self.performOperation(forType: .restore, backup: backup, skipUploadVCF: true)
                     
                 case .cancel:
                     self.contactSyncService.cancelAnalyze()
@@ -267,10 +275,11 @@ final class ContactSyncHelper {
         }
     }
     
-    private func performOperation(forType type: SYNCMode, backup: ContactBackupItem? = nil) {
+    private func performOperation(forType type: SYNCMode, backup: ContactBackupItem? = nil, skipUploadVCF: Bool = false) {
         UIApplication.setIdleTimerDisabled(true)
 
-        contactSyncService.executeOperation(type: type, backupKey: backup?.key ?? "", progress: { [weak self] progressPercentage, count, opertionType in
+        contactSyncService.executeOperation(type: type, backupKey: backup?.key ?? "", skipUploadVCF: skipUploadVCF,
+                                            progress: { [weak self] progressPercentage, count, opertionType in
             DispatchQueue.main.async {
                 //progress may be later than the end of the operation
                 if self?.isRunning == true {
@@ -518,7 +527,15 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             showRelatedView()
             
         case .depoError:
-            let warningPopUp = ContactSyncPopupFactory.createWarningPopup(type: .lifeboxStorageLimit) { }
+            let proceed = { [weak self] in
+                guard let backup = self?.selectedBackupForRestore else {
+                    return
+                }
+
+                self?.restore(backup: backup, skipUploadVCF: true)
+            }
+
+            let warningPopUp = ContactSyncPopupFactory.createWarningPopup(type: .contactRestoreStorageLimit(proceed: proceed)) { }
             self.present(warningPopUp, animated: false)
             showRelatedView()
             
@@ -596,7 +613,7 @@ extension ContactSyncControllerProtocol {
                 self.deleteDuplicates()
             case .restoreBackup, .restoreContacts:
                 if let backup = backup {
-                    self.restore(backup: backup)
+                    self.restore(backup: backup, skipUploadVCF: false)
                 }
             case .premium:
                 let router = RouterVC()
@@ -687,11 +704,15 @@ extension ContactSyncControllerProtocol {
         }
     }
     
-    private func restore(backup: ContactBackupItem) {
+    fileprivate func restore(backup: ContactBackupItem, skipUploadVCF: Bool) {
         navigationItem.rightBarButtonItem = nil
         showSpinner()
         
         progressView?.reset()
-        ContactSyncHelper.shared.restore(backup: backup, onStart: {})
+        if skipUploadVCF {
+            ContactSyncHelper.shared.restoreWithoutUploadVCF(backup: backup, onStart: {})
+        } else {
+            ContactSyncHelper.shared.restore(backup: backup, onStart: {})
+        }
     }
 }
