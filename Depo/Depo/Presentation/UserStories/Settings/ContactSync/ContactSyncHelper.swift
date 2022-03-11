@@ -527,18 +527,8 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             showRelatedView()
             
         case .depoError:
-            let proceed = { [weak self] in
-                guard let backup = self?.selectedBackupForRestore else {
-                    return
-                }
+            handleDepoError()
 
-                self?.restore(backup: backup, skipUploadVCF: true)
-            }
-
-            let warningPopUp = ContactSyncPopupFactory.createWarningPopup(type: .contactRestoreStorageLimit(proceed: proceed)) { }
-            self.present(warningPopUp, animated: false)
-            showRelatedView()
-            
         case .internalError, .failed:
             let type = operationType.transformToContactOperationSyncType()
             let errorTitle = type?.title(result: .failed) ?? TextConstants.errorUnknown
@@ -574,6 +564,28 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         
         let errorView = ContactsOperationView.with(title: convertedOperationType.title(result: .failed), message: message, operationResult: .failed)
         showResultView(view: errorView, title: convertedOperationType.navBarTitle)
+    }
+
+    private func handleDepoError() {
+        var proceedCalled = false
+
+        let proceed = { [weak self] in
+            guard let backup = self?.selectedBackupForRestore else {
+                return
+            }
+
+            proceedCalled = true
+            self?.restore(backup: backup, skipUploadVCF: true)
+        }
+
+        let popupType = WarningPopupType.contactRestoreStorageLimit(proceed: proceed)
+        let warningPopUp = ContactSyncPopupFactory.createWarningPopup(type: popupType) { [weak self] in
+            if !proceedCalled {
+                self?.showRelatedView()
+            }
+        }
+
+        self.present(warningPopUp, animated: false)
     }
     
     func showWarningPopup(type: WarningPopupType) {
