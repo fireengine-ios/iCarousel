@@ -7,15 +7,14 @@
 //
 
 import Foundation
-import CoreLocation
 
 final class MapLocationDetailService: RemoteItemsService {
     private static let pageSize = 100
-    private let coordinate: CLLocationCoordinate2D
+    private let group: MapMediaGroup
     private lazy var mapSearchService = MapSearchService()
 
-    init(coordinate: CLLocationCoordinate2D) {
-        self.coordinate = coordinate
+    init(group: MapMediaGroup) {
+        self.group = group
         super.init(requestSize: Self.pageSize, fieldValue: .all) // fieldValue has no meaning here
     }
 
@@ -26,7 +25,7 @@ final class MapLocationDetailService: RemoteItemsService {
         fail: FailRemoteItems?,
         newFieldValue _: FieldValue? = nil
     ) {
-        mapSearchService.getMediaItems(near: coordinate, page: currentPage, size: requestSize) { response in
+        mapSearchService.getMediaItems(in: group, page: currentPage, size: requestSize) { response in
             switch response {
             case .success(let response):
                 success?(response.list.map { WrapData(remote: $0) })

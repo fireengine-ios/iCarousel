@@ -81,13 +81,16 @@ extension MapSearchViewController: MapSearchViewInput {
     func setCurrentGroups(_ groups: [MapMediaGroup]) {
         mapView.removeAnnotations(mapView.annotations)
 
-        let annotations = groups.map { group -> MKAnnotation in
-            let annotation = ItemGroupAnnotation()
-            annotation.coordinate = group.point.locationCoorindate2D
-            annotation.item = WrapData(privateShareFileInfo: group.sample)
-            annotation.itemCount = group.count
-            return annotation
-        }
+        let annotations = groups
+            .enumerated()
+            .map { index, group -> MKAnnotation in
+                let annotation = ItemGroupAnnotation()
+                annotation.coordinate = group.point.locationCoorindate2D
+                annotation.item = WrapData(privateShareFileInfo: group.sample)
+                annotation.itemCount = group.count
+                annotation.tag = index
+                return annotation
+            }
         mapView.addAnnotations(annotations)
     }
 
@@ -109,7 +112,7 @@ extension MapSearchViewController: MKMapViewDelegate {
             return
         }
 
-        output.didSelectGroup(at: annotation.coordinate)
+        output.didSelectGroup(at: annotation.tag)
 
         mapView.deselectAnnotation(annotation, animated: false)
     }

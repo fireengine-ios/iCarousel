@@ -10,4 +10,5 @@ import MapKit
 
 final class ItemGroupAnnotation: ItemAnnotation {
     var itemCount = 0
+    var tag = 0
 }

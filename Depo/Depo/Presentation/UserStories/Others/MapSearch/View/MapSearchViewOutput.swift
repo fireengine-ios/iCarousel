@@ -12,5 +12,5 @@ import CoreLocation
 protocol MapSearchViewOutput {
     func viewIsReady()
     func mapRegionChanged(params: MapSearchParams)
-    func didSelectGroup(at coordinate: CLLocationCoordinate2D)
+    func didSelectGroup(at index: Int)
 }
