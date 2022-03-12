@@ -33,10 +33,19 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     override func appendCollectionView(items: [WrapData], pageNum: Int) {
         var items = items
 
-        let isPlaces = faceImageType == .places
-        let isFirstPage = pageNum == Self.firstPage
-        if isPlaces, isFirstPage, items.count > 0, AuthoritySingleton.shared.faceRecognition {
-            items.insert(PlacesItem.mapPlaceholderItem(), at: 0)
+        // add the map cell for places grid
+        if faceImageType == .places {
+            let isFirstPage = pageNum == Self.firstPage
+            let hasActualPlaceItems = items.contains { ($0 as? PlacesItem)?.responseObject.isDemo == false }
+            if isFirstPage && hasActualPlaceItems {
+                items.insert(PlacesItem.mapPlaceholderItem(), at: 0)
+
+                // remove a demo item (if any) in order for the grid to look even
+                let aDemoItemIndex = items.firstIndex { ($0 as? PlacesItem)?.responseObject.isDemo == true }
+                if let indexToRemove = aDemoItemIndex {
+                    items.remove(at: indexToRemove)
+                }
+            }
         }
 
         super.appendCollectionView(items: items, pageNum: pageNum)
