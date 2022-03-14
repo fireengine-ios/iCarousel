@@ -134,4 +134,8 @@ enum Strings: String, Localizable {
     // MARK: - Contact Restore
     case contactSyncStorageFailDescription = "contact_sync_storage_fail_desc"
     case contactSyncStorageFailContinueButton = "contact_sync_storage_fail_cont_button"
+    
+    // MARK: - Security Popup
+    case securityPopupHeader = "security_popup_header"
+    case securityPopupBody = "security_popup_body"
 }

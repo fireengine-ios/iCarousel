@@ -1383,4 +1383,13 @@ class RouterVC: NSObject {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
     }
+    
+    var securityInfoPopup: SecurityInfoPopup {
+        let controller = SecurityInfoPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
 }

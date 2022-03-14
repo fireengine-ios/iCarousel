@@ -8766,6 +8766,14 @@
 		F081F9C72779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
 		F081F9C82779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
 		F081F9C92779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
+		F092578827DCF78C0001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
+		F092578A27DCF7E60001737C /* SecurityInfoPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F092578927DCF7E60001737C /* SecurityInfoPopup.xib */; };
+		F092578B27DCF7E60001737C /* SecurityInfoPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F092578927DCF7E60001737C /* SecurityInfoPopup.xib */; };
+		F092578C27DCF7E70001737C /* SecurityInfoPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F092578927DCF7E60001737C /* SecurityInfoPopup.xib */; };
+		F092578D27DCF7E70001737C /* SecurityInfoPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F092578927DCF7E60001737C /* SecurityInfoPopup.xib */; };
+		F092578E27DE7B1F0001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
+		F092578F27DE7B200001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
+		F092579027DE7B200001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
 		F0B64C65275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
 		F0B64C66275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
 		F0B64C67275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
@@ -11560,6 +11568,8 @@
 		F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicSharedItemsActionView.xib; sourceTree = "<group>"; };
 		F064FB32278C168300B461D0 /* PublicSharedItemsActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsActionView.swift; sourceTree = "<group>"; };
 		F081F9C52779138F0064D25C /* DragAndDropItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropItemType.swift; sourceTree = "<group>"; };
+		F092578727DCF78C0001737C /* SecurityInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityInfoPopup.swift; sourceTree = "<group>"; };
+		F092578927DCF7E60001737C /* SecurityInfoPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityInfoPopup.xib; sourceTree = "<group>"; };
 		F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewController.swift; sourceTree = "<group>"; };
 		F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeViewController.xib; sourceTree = "<group>"; };
 		F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeConfigurator.swift; sourceTree = "<group>"; };
@@ -18277,6 +18287,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				F092578327DCF7040001737C /* SecurityInfoPopup */,
 				076BD13327BBBCC1004609E3 /* MapSearch */,
 				0766314427CE8E8700AB4BC2 /* MapLocationDetail */,
 				F028C0D82789DD3E005CE6AF /* SaveToMyLifebox */,
@@ -20770,6 +20781,15 @@
 			path = DragAndDrop;
 			sourceTree = "<group>";
 		};
+		F092578327DCF7040001737C /* SecurityInfoPopup */ = {
+			isa = PBXGroup;
+			children = (
+				F092578727DCF78C0001737C /* SecurityInfoPopup.swift */,
+				F092578927DCF7E60001737C /* SecurityInfoPopup.xib */,
+			);
+			path = SecurityInfoPopup;
+			sourceTree = "<group>";
+		};
 		F0B64C5E275D4E3000002F66 /* DarkMode */ = {
 			isa = PBXGroup;
 			children = (
@@ -21442,6 +21462,7 @@
 			files = (
 				A705E3C723A217E1005E8274 /* CarouselPagerReusableViewController.xib in Resources */,
 				3A0B4229266F7D8D00FD8F3C /* ChatbotViewController.xib in Resources */,
+				F092578A27DCF7E60001737C /* SecurityInfoPopup.xib in Resources */,
 				CE5B5E4220C293B800D91112 /* InfoPlist.strings in Resources */,
 				07567DA92721DFBC00557BCF /* DeleteAccountPopUp.xib in Resources */,
 				8C0E8FFD1FDEBDFF00789C91 /* HomeViewTopView.xib in Resources */,
@@ -22029,6 +22050,7 @@
 				07D4212F274E4D0800061EA2 /* FileLocationView.xib in Resources */,
 				CF71469D24B597A900D83E60 /* ContactsBackupHistoryView.xib in Resources */,
 				89CC89FA23AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */,
+				F092578C27DCF7E70001737C /* SecurityInfoPopup.xib in Resources */,
 				CE784D7F22A685FB00662219 /* LatestUploadCardCell.xib in Resources */,
 				CE784D8322A685FB00662219 /* (null) in Resources */,
 				CE784D8422A685FB00662219 /* InstagramAuthViewController.xib in Resources */,
@@ -22496,6 +22518,7 @@
 				0305A30423D5C2C4004D1EC7 /* OverlayStickerViewController.xib in Resources */,
 				CF8B6A3C23CBC9D70021B021 /* TurkcellSaturaDem.ttf in Resources */,
 				CF8B6A4623CBC9D70021B021 /* CampaignDetailViewController.xib in Resources */,
+				F092578B27DCF7E60001737C /* SecurityInfoPopup.xib in Resources */,
 				988BA18B255924670086E4BE /* PrivateShareAddMessageView.xib in Resources */,
 				CF8B6A4F23CBC9D70021B021 /* FolderSelectionCollectionViewCell.xib in Resources */,
 				9842FC172563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
@@ -22761,6 +22784,7 @@
 				07D42130274E4D0800061EA2 /* FileLocationView.xib in Resources */,
 				CF8B713F23CBCA280021B021 /* LatestUploadCardCell.xib in Resources */,
 				CF8B714223CBCA280021B021 /* (null) in Resources */,
+				F092578D27DCF7E70001737C /* SecurityInfoPopup.xib in Resources */,
 				CF8B714323CBCA280021B021 /* InstagramAuthViewController.xib in Resources */,
 				CF8B714423CBCA280021B021 /* CollectionViewCellForFaceImage.xib in Resources */,
 				CF8B714523CBCA280021B021 /* CampaignCard.xib in Resources */,
@@ -25342,6 +25366,7 @@
 				8C0E8F601FDEBDFF00789C91 /* String+Subscript.swift in Sources */,
 				8C0E8F611FDEBDFF00789C91 /* UploadFilesSelectionModuleInput.swift in Sources */,
 				A217E42C21A5B00B0084AA37 /* LeavePremiumViewController.swift in Sources */,
+				F092578827DCF78C0001737C /* SecurityInfoPopup.swift in Sources */,
 				8C06AC222008AAF1003D8E05 /* TextEnterController.swift in Sources */,
 				077EEF9D26E759CC004D0D74 /* BaseEmailVerificationPopUp.swift in Sources */,
 				8C0E8F621FDEBDFF00789C91 /* UploadFilesSelectionPresenter.swift in Sources */,
@@ -27329,6 +27354,7 @@
 				989BDE6322F47B1E001DDEB2 /* SpotifyCollectionViewDataSource.swift in Sources */,
 				8C1E5BD422CB8B9F008FDA02 /* CacheManager.swift in Sources */,
 				CE784BBC22A685FB00662219 /* FileInfoPresenter.swift in Sources */,
+				F092578F27DE7B200001737C /* SecurityInfoPopup.swift in Sources */,
 				CE784BBD22A685FB00662219 /* FileInfoInteractorInput.swift in Sources */,
 				CE784BBE22A685FB00662219 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				CE784BBF22A685FB00662219 /* SuggestionTableSectionHeader.swift in Sources */,
@@ -28079,6 +28105,7 @@
 				0762029C269B842D00D4FB2C /* OverlayStickerSelectorDataSource.swift in Sources */,
 				CF8B64B523CBC9D70021B021 /* ManageContactsConfigurator.swift in Sources */,
 				CF8B64B623CBC9D70021B021 /* SuggestionTableSectionHeader.swift in Sources */,
+				F092578E27DE7B1F0001737C /* SecurityInfoPopup.swift in Sources */,
 				07D0592F26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift in Sources */,
 				CF8B64B723CBC9D70021B021 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				CF8B64B823CBC9D70021B021 /* ProtoInputTextCell.swift in Sources */,
@@ -30679,6 +30706,7 @@
 				CF8B6F4E23CBCA280021B021 /* CacheManager.swift in Sources */,
 				CF8B6F4F23CBCA280021B021 /* FileInfoPresenter.swift in Sources */,
 				CF8B6F5023CBCA280021B021 /* FileInfoInteractorInput.swift in Sources */,
+				F092579027DE7B200001737C /* SecurityInfoPopup.swift in Sources */,
 				CF8B6F5123CBCA280021B021 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
 				CF8B6F5223CBCA280021B021 /* SuggestionTableSectionHeader.swift in Sources */,
 				CF8B6F5323CBCA280021B021 /* (null) in Sources */,
