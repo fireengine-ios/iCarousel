@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 final class MapSearchPresenter {
     private static let minimumZoomLevel = 3
@@ -15,6 +16,8 @@ final class MapSearchPresenter {
     weak var view: MapSearchViewInput!
     var interactor: MapSearchInteractorInput!
     var router: MapSearchRouterInput!
+
+    private var groups: [MapMediaGroup] = []
 }
 
 extension MapSearchPresenter: MapSearchViewOutput {
@@ -27,13 +30,15 @@ extension MapSearchPresenter: MapSearchViewOutput {
         interactor.fetchMediaGroups(params: params)
     }
 
-    func didSelectGroup(at coordinate: CLLocationCoordinate2D) {
-        router.openMapLocationDetail(coordinate: coordinate)
+    func didSelectGroup(at index: Int) {
+        guard index >= 0 && index < groups.count else { return }
+        router.openMapLocationDetail(for: groups[index])
     }
 }
 
 extension MapSearchPresenter: MapSearchInteractorOutput {
     func receivedMediaGroups(_ groups: [MapMediaGroup]) {
+        self.groups = groups
         view.hideLoading()
         view.setCurrentGroups(groups)
     }

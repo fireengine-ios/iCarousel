@@ -12,7 +12,7 @@ import CoreLocation
 final class MapLocationDetailInitializer {
     static let bottomElements: [ElementTypes] = [.share, .download, .addToAlbum, .hide, .delete]
 
-    class func initialize(nibName: String, coordinate: CLLocationCoordinate2D) -> MapLocationDetailViewController {
+    class func initialize(nibName: String, group: MapMediaGroup) -> MapLocationDetailViewController {
         let viewController = MapLocationDetailViewController(nibName: nibName, bundle: nil)
 
         viewController.status = .active
@@ -22,7 +22,7 @@ final class MapLocationDetailInitializer {
         viewController.mainTitle = localized(.mapLocationDetailHeader)
 
         let presenter = BaseFilesGreedPresenter()
-        let interactor = BaseFilesGreedInteractor(remoteItems: MapLocationDetailService(coordinate: coordinate))
+        let interactor = BaseFilesGreedInteractor(remoteItems: MapLocationDetailService(group: group))
 
 
         let bottomBarConfig = EditingBarConfig(elementsConfig: Self.bottomElements, style: .default, tintColor: nil)
@@ -30,7 +30,7 @@ final class MapLocationDetailInitializer {
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .List,
             availableSortTypes: [],
-            defaultSortType: .None,
+            defaultSortType: .metaDataTimeNewOld,
             availableFilter: false,
             showGridListButton: false
         )

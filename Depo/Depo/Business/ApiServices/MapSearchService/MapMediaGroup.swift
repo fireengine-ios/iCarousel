@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import CoreLocation
 
 // MARK: - MapMediaGroup
 struct MapMediaGroup: Codable {
     let count: Int
     let point: Point
+    let tile: String
     let sample: SharedFileInfo
 }
 

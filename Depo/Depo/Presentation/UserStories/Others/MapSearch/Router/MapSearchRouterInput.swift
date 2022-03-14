@@ -9,5 +9,5 @@
 import Foundation
 
 protocol MapSearchRouterInput {
-    func openMapLocationDetail(coordinate: CLLocationCoordinate2D)
+    func openMapLocationDetail(for group: MapMediaGroup)
 }
