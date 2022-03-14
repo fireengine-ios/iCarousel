@@ -1204,7 +1204,17 @@ class RouterVC: NSObject {
         
         return controller
     }
-    
+
+    var changeRecoveryEmailPopUp: ChangeRecoveryEmailPopUp {
+        let controller = ChangeRecoveryEmailPopUp()
+
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+
+        return controller
+    }
+
+
     // MARK: - Spotify
     
     func spotifyPlaylistsController(delegate: SpotifyPlaylistsViewControllerDelegate?) -> UIViewController {
