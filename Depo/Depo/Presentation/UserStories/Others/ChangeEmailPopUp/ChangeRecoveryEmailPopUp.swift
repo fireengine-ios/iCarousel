@@ -1,5 +1,5 @@
 //
-//  ChangeEmailPopUp.swift
+//  ChangeRecoveryEmailPopUp.swift
 //  Depo
 //
 //  Created by Hady on 3/12/22.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-final class ChangeEmailPopUp: BaseChangeEmailPopUp {
+final class ChangeRecoveryEmailPopUp: BaseChangeEmailPopUp {
     private let analyticsService: AnalyticsService = factory.resolve()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        analyticsService.logScreen(screen: .changeEmailPopUp)
+        analyticsService.logScreen(screen: .changeRecoveryEmailPopUp)
     }
 
     override func cancelButtonPressed(_ sender: Any) {
         super.cancelButtonPressed(sender)
-        analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+        analyticsService.trackCustomGAEvent(eventCategory: .recoveryEmailVerification,
                                             eventActions: .changeEmail,
                                             eventLabel: .cancel)
     }
@@ -26,8 +26,8 @@ final class ChangeEmailPopUp: BaseChangeEmailPopUp {
     override func updateEmail(email: String) {
         startActivityIndicator()
 
-        let parameters = UserEmailParameters(userEmail: email)
-        AccountService().updateUserEmail(parameters: parameters, success: { [weak self] response in
+        let parameters = UserRecoveryEmailParameters(email: email)
+        AccountService().updateUserRecoveryEmail(parameters: parameters, success: { [weak self] response in
 
             SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: {_ in
                 DispatchQueue.main.async {
@@ -35,7 +35,7 @@ final class ChangeEmailPopUp: BaseChangeEmailPopUp {
                     self?.backToVerificationPopup()
                 }
 
-                self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .recoveryEmailVerification,
                                                           eventActions: .otp,
                                                           eventLabel: .emailChanged(isSuccessed: true))
 
@@ -46,7 +46,7 @@ final class ChangeEmailPopUp: BaseChangeEmailPopUp {
                 }
             })
         }, fail: { [weak self] error in
-            self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .recoveryEmailVerification,
                                                       eventActions: .otp,
                                                       eventLabel: .emailChanged(isSuccessed: false),
                                                       errorType: GADementionValues.errorType(with: error.localizedDescription))
