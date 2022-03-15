@@ -12,7 +12,7 @@ final class PremiumInteractor {
     
     weak var output: PremiumInteractorOutput!
     
-    private let iapManager = IAPManager.shared
+    private unowned let iapManager = IAPManager.shared
     private let accountService: AccountServicePrl = AccountService()
     private let offersService: OffersService = OffersServiceIml()
     private let packageService: PackageService = PackageService()
@@ -104,32 +104,32 @@ extension PremiumInteractor: PremiumInteractorInput {
             return
         }
         
-        iapManager.purchase(product: product) { [weak self] result in
+        iapManager.purchase(product: product) { result in
             switch result {
             case .success(let identifier):
-                self?.analyticsService.trackPurchase(offer: product)
-                self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: 0)
-                self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
-                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
+                self.analyticsService.trackPurchase(offer: product)
+                self.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: 0)
+                self.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success, channelType: .appStore, packageName: offer.displayName ?? ""))
-                self?.validatePurchase(productId: identifier)
+                self.validatePurchase(productId: identifier)
             case .canceled:
-                self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
-                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
+                self.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .appStore, packageName: offer.displayName ?? ""))
                 DispatchQueue.main.async {
-                    self?.output.purchaseCancelled()
+                    self.output?.purchaseCancelled()
                 }
             case .error(let error):
-                self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
-                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                self.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
+                self.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .appStore, packageName: offer.displayName ?? ""))
                 DispatchQueue.main.async {
-                    self?.output.failed(with: .error(error))
+                    self.output?.failed(with: .error(error))
                 }
             case .inProgress:
                 DispatchQueue.main.async {
-                    self?.output.failed(with: ErrorResponse.string(TextConstants.inProgressPurchase))
+                    self.output?.failed(with: ErrorResponse.string(TextConstants.inProgressPurchase))
                 }
             }
         }
@@ -138,7 +138,7 @@ extension PremiumInteractor: PremiumInteractorInput {
     private func validatePurchase(productId: String) {
         guard let receipt = iapManager.receipt else {
             DispatchQueue.toMain {
-                self.output.stopLoading()
+                self.output?.stopLoading()
             }
             assertionFailure("An error occured while getting receipt from Apple Store.")
             return
