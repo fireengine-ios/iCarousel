@@ -18,7 +18,7 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
     @IBOutlet private weak var topLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
-            newValue.numberOfLines = 2
+            newValue.numberOfLines = 0
             newValue.textColor = ColorConstants.textGrayColor
             newValue.text = localized(.securityPopupHeader)
         }
@@ -29,6 +29,7 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 15)
             newValue.textColor = ColorConstants.textGrayColor
             newValue.text = localized(.securityPopupBody)
+            newValue.numberOfLines = 0
         }
     }
     
