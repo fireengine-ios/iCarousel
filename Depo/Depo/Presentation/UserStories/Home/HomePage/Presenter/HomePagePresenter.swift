@@ -165,6 +165,7 @@ extension HomePagePresenter: HomePageInteractorOutput {
         credsCheckUpdateIfNeeded(with: accountInfo)
         checkMobilePaymentPermission(with: accountInfo)
         decreaseDispatchGroupValue(for: .waitAccountInfoResponse)
+        addSecurityInfoIfNeeded(with: accountInfo)
     }
     
     func didObtainAccountInfoError(with text: String) {
@@ -259,6 +260,15 @@ extension HomePagePresenter: HomePageInteractorOutput {
             return false
         }
         return true
+    }
+    
+    private func addSecurityInfoIfNeeded(with accountInfo: AccountInfoResponse) {
+        if accountInfo.hasRecoveryMail != true && accountInfo.hasSecurityQuestionInfo != true {
+            let storageVars: StorageVars = factory.resolve()
+            if !storageVars.isAppFirstLaunch {
+                router.presentSecurityInfoPopup()
+            }
+        }
     }
     
 }
