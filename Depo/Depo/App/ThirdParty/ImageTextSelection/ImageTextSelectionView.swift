@@ -247,16 +247,14 @@ final class ImageTextSelectionView: UIView {
         context.setFillColor(tintColor.withAlphaComponent(0.5).cgColor)
 
         if let selection = self.selection {
-            let ranges = layout.rangesOfLinesBetween(first: selection.lowerBound, last: selection.upperBound)
-            for lineRange in ranges {
-                let firstWord = layout.word(at: lineRange.lowerBound)
-                let lastWord = layout.word(at: lineRange.upperBound)
-
+            var wordIndex: ImageTextSelectionIndex? = selection.lowerBound
+            while let index = wordIndex {
+                let word = layout.word(at: index)
                 let path = CGMutablePath()
-                let topLeft = layout.imageViewPoint(for: firstWord.bounds.topLeft)
-                let topRight = layout.imageViewPoint(for: lastWord.bounds.topRight)
-                let bottomRight = layout.imageViewPoint(for: lastWord.bounds.bottomRight)
-                let bottomLeft = layout.imageViewPoint(for: firstWord.bounds.bottomLeft)
+                let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
+                let topRight = layout.imageViewPoint(for: word.bounds.topRight)
+                let bottomRight = layout.imageViewPoint(for: word.bounds.bottomRight)
+                let bottomLeft = layout.imageViewPoint(for: word.bounds.bottomLeft)
 
                 path.move(to: topLeft)
                 path.addLine(to: topRight)
@@ -264,6 +262,12 @@ final class ImageTextSelectionView: UIView {
                 path.addLine(to: bottomLeft)
                 path.addLine(to: topLeft)
                 context.addPath(path)
+
+                if index == selection.upperBound {
+                    break
+                }
+
+                wordIndex = layout.index(after: index)
             }
         }
 

@@ -81,6 +81,22 @@ final class ImageTextLayout {
         return lines[index.line].words[index.word]
     }
 
+    func index(after index: ImageTextSelectionIndex) -> ImageTextSelectionIndex? {
+        let line = lines[index.line]
+
+        let nextWordIndex = index.word + 1
+        if nextWordIndex < line.words.count {
+            return ImageTextSelectionIndex(line: index.line, word: nextWordIndex)
+        }
+
+        let nextLineIndex = index.line + 1
+        if nextLineIndex < lines.count {
+            return ImageTextSelectionIndex(line: nextLineIndex, word: 0)
+        }
+
+        return nil
+    }
+
     var startIndex: ImageTextSelectionIndex? {
         guard lines.count > 0 else {
             return nil
