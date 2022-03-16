@@ -14,6 +14,8 @@ class PublicSharePresenter: BasePresenter, PublicShareModuleInput {
     var router: PublicShareRouterInput!
     var itemCount: Int?
     var fileName: String?
+    var publicToken: String?
+    private var storageVars: StorageVars = factory.resolve()
     
     override func outputView() -> Waiting? {
         return view
@@ -48,7 +50,13 @@ extension PublicSharePresenter: PublicShareViewOutput {
     
     func onSaveButton(isLoggedIn: Bool) {
         interactor.trackSaveToMyLifeboxClick()
-        isLoggedIn ? interactor.savePublicSharedItems() : router.navigateToOnboarding()
+        
+        if isLoggedIn {
+            interactor.savePublicSharedItems()
+        } else {
+            storageVars.publicSharedItemsToken = publicToken
+            router.navigateToOnboarding()
+        }
     }
     
     func onSaveDownloadButton(with fileName: String) {
