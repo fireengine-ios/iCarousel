@@ -2015,5 +2015,9 @@
 "places_map_title" = "Map";
 "map_location_detail_header" = "Photos at this location";
 "beeline_feature_cancel_TC" = "";
-"security_popup_body" = "Şifenizi unuttuğunuzda yenileyebilmek için aşağıdaki bilgilerden en az birini giriniz";
-"security_popup_header" = "Güvenlik sorusu veya Kurtarma e-postanı belirle";
+"security_popup_body" = "Please enter at least 1 field to recover your account easily when you forgot your password";
+"security_popup_header" = "Set Your Recovery E-mail or Security Question";
+"save_to_my_billo" = "Save to My Billo";
+"save_to_my_billo_download" = "Do you want to download billo - %@ - %@.zip file?";
+"on_boarding_btn_google_login" = "";
+"on_boarding_or" = "";
