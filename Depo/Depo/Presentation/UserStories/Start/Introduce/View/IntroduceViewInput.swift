@@ -8,10 +8,4 @@
 
 protocol IntroduceViewInput: AnyObject {
 
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
-    func setupInitialState(models: [IntroduceModel])
 }

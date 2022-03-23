@@ -9,5 +9,4 @@
 import Foundation
 
 protocol IntroduceInteractorOutput: AnyObject {
-    func models(models: [IntroduceModel])
 }

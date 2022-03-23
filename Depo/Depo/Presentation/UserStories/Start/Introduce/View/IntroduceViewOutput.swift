@@ -12,4 +12,5 @@ protocol IntroduceViewOutput {
     func onStartUsingLifeBox()
     func onLoginButton()
     func pageChanged(page: Int)
+    func onContinueWithGoogle(with user: GoogleUser)
 }

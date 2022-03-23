@@ -11,11 +11,8 @@ class IntroduceInteractor: IntroduceInteractorInput {
     weak var output: IntroduceInteractorOutput!
     let introduceDataStorage = IntroduceDataStorage()
     private let analyticsManager: AnalyticsService = factory.resolve()
-    
-    func PrepareModels() {
-        output.models(models: self.introduceDataStorage.getModels())
-    }
-    
+    private lazy var authenticationService = AuthenticationService()
+
     func trackScreen(pageNum: Int) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
         analyticsManager.logScreen(screen: .welcomePage(pageNum))
@@ -24,5 +21,8 @@ class IntroduceInteractor: IntroduceInteractorInput {
     func trackScreen() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.LiveCollectRememberScreen())
         analyticsManager.logScreen(screen: .liveCollectRemember)
+    }
+    
+    func signInWithGoogle(with user: GoogleUser) {
     }
 }

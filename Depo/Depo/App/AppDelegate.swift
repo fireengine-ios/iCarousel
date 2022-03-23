@@ -18,6 +18,7 @@ import KeychainSwift
 import WidgetKit
 import CoreSpotlight
 import FirebaseDynamicLinks
+import GoogleSignIn
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -200,6 +201,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if spotifyService.handleRedirectUrl(url: url) {
             return true
         }
+        
+        if GIDSignIn.sharedInstance.handle(url) {
+            return true
+        }
+        
         return false
     }
     

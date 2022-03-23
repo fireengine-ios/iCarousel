@@ -14,16 +14,11 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
 
     func viewIsReady() {
         interactor.trackScreen()
-        interactor.PrepareModels()
         PushNotificationService.shared.openActionScreen()
     }
     
     func pageChanged(page: Int) {
         interactor.trackScreen(pageNum: page)
-    }
-    
-    func models(models: [IntroduceModel]) {
-        view.setupInitialState(models: models)
     }
     
     // MARK: router
@@ -34,5 +29,9 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
     
     func onLoginButton() {
         router.onGoToLogin()
+    }
+    
+    func onContinueWithGoogle(with user: GoogleUser) {
+        interactor.signInWithGoogle(with: user)
     }
 }
