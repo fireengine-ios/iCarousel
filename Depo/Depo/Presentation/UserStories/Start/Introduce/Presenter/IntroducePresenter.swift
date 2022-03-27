@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceInteractorOutput {
+class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput {
 
     weak var view: IntroduceViewInput!
     var interactor: IntroduceInteractorInput!
@@ -33,5 +33,19 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
     
     func onContinueWithGoogle(with user: GoogleUser) {
         interactor.signInWithGoogle(with: user)
+    }
+    
+    func goToLogin(with user: GoogleUser) {
+        router.onGoToLoginWith(with: user)
+    }
+}
+
+extension IntroducePresenter: IntroduceInteractorOutput {
+    func signUpRequired(for user: GoogleUser) {
+        router.onGoToRegister(with: user)
+    }
+    
+    func passwordLoginRequired(for user: GoogleUser) {
+        view.showGoogleLoginPopup(with: user)
     }
 }

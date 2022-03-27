@@ -21,6 +21,7 @@ class AuthenticationUser: BaseRequestParametrs {
     let password: String
     let rememberMe: Bool
     let attachedCaptcha: CaptchaParametrAnswer?
+    let googleToken: String?
     
     override var requestParametrs: Any {
         let dict: [String: Any] = [LbRequestkeys.username   : login,
@@ -49,11 +50,12 @@ class AuthenticationUser: BaseRequestParametrs {
         return result
     }
     
-    init(login: String, password: String, rememberMe: Bool, attachedCaptcha: CaptchaParametrAnswer?) {
+    init(login: String, password: String, rememberMe: Bool, attachedCaptcha: CaptchaParametrAnswer?, googleToken: String? = nil) {
         self.login = login
         self.password = password
         self.rememberMe = rememberMe
         self.attachedCaptcha = attachedCaptcha
+        self.googleToken = googleToken
     }
 }
 
@@ -274,10 +276,35 @@ class EmailVerification: BaseRequestParametrs {
     }
 }
 
+class SignInWithGoogleParameters: BaseRequestParametrs {
+    
+    let idToken: String
+    
+    override var requestParametrs: Any {
+        let dict: [String: Any] = ["token": idToken,
+                                   LbRequestkeys.deviceInfo : Device.deviceInfo]
+        return dict
+    }
+    
+    override var patch: URL {
+        let patch = String(format: RouteRequests.googleLogin)
+        return URL(string: patch, relativeTo: super.patch)!
+    }
+    
+    override var header: RequestHeaderParametrs {
+        return RequestHeaders.base()
+    }
+    
+    init(idToken: String) {
+        self.idToken = idToken
+    }
+}
+
 typealias  SuccessLogin = () -> Void
 typealias  SuccessLogout = () -> Void
 typealias  FailLoginType = FailResponse
 typealias  HeadersHandler = ([String: Any]) -> Void
+typealias  SuccessMessageHandler = (String) -> Void
 
 class AuthenticationService: BaseRequestService {
     
@@ -296,9 +323,13 @@ class AuthenticationService: BaseRequestService {
         
         storageVars.currentUserID = user.login
         
-        let params: [String: Any] = ["username": user.login,
+        var params: [String: Any] = ["username": user.login,
                                      "password": user.password,
                                      LbRequestkeys.deviceInfo: Device.deviceInfo]
+        
+        if let googleToken = user.googleToken {
+            params = params + ["googleToken": googleToken]
+        }
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
@@ -376,6 +407,28 @@ class AuthenticationService: BaseRequestService {
                         fail?(ErrorResponse.error(error))
                     }
         }
+    }
+    
+    func googleLogin(user: SignInWithGoogleParameters, handler: SuccessMessageHandler?, fail: FailResponse?) {
+        let params: [String: Any] = ["token": user.idToken,
+                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
+        
+        SessionManager.sessionWithoutAuth.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+            .responseString { [weak self] response in
+                switch response.result {
+                case .success(_):
+                    
+                    if let successMessage = response.result.value {
+                        if successMessage.contains("4101") || successMessage.contains("4102") {
+                            handler?(successMessage)
+                            return
+                        }
+                    }
+        
+                case .failure(let error):
+                    fail?(ErrorResponse.error(error))
+                }
+            }
     }
 
     enum ValidateLoginPasswordResult {

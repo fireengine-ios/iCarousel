@@ -10,14 +10,14 @@ import UIKit
 
 class LoginModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, user: GoogleUser? = nil) {
 
         if let viewController = viewInput as? LoginViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, user: user)
         }
     }
 
-    private func configure(viewController: LoginViewController) {
+    private func configure(viewController: LoginViewController, user: GoogleUser?) {
 
         let router = LoginRouter()
 
@@ -30,6 +30,7 @@ class LoginModuleConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
+        viewController.googleUser = user
     }
 
 }

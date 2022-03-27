@@ -105,6 +105,7 @@ struct RouteRequests {
     static let signUpSendVerification = baseUrl +/ "v2/signup/sendVerification"
     static let signUpValidateOTP = baseUrl +/ "v2/signup/validate"
     static let logout = "auth/logout"
+    static let googleLogin = "auth/google?rememberMe=true"
 
     static let forgotPassword = "account/forgotPassword"
 

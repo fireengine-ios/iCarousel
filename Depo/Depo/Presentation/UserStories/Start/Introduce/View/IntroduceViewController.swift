@@ -11,10 +11,11 @@ import WidgetKit
 import GoogleSignIn
 import FirebaseCore
 
-class IntroduceViewController: ViewController, IntroduceViewInput {
+class IntroduceViewController: ViewController {
 
     // MARK: Properties
     var output: IntroduceViewOutput!
+    var user: GoogleUser?
     
     // MARK: IBOutlets
     @IBOutlet private weak var startUsingLifeBoxButton: RoundedInsetsButton! {
@@ -139,7 +140,7 @@ class IntroduceViewController: ViewController, IntroduceViewInput {
     
     @IBAction func onContinueWithGoogle(_ sender: Any) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        let config = GIDConfiguration(clientID: clientID)
+        let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
         
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
             if let error = error {
@@ -149,6 +150,7 @@ class IntroduceViewController: ViewController, IntroduceViewInput {
             
             if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
                 let user = GoogleUser(idToken: idToken, email: email)
+                self.user = user
                 self.output.onContinueWithGoogle(with: user)
             } else {
                 return
@@ -156,4 +158,21 @@ class IntroduceViewController: ViewController, IntroduceViewInput {
         }
     }
     
+}
+
+extension IntroduceViewController: IntroduceViewInput {
+    func showGoogleLoginPopup(with user: GoogleUser) {
+        let popUp = RouterVC().loginWithGooglePopup
+        popUp.email = user.email
+        popUp.delegate = self
+        present(popUp, animated: true)
+    }
+}
+
+extension IntroduceViewController: LoginWithGooglePopupDelegate {
+    func onNextButton() {
+        dismiss(animated: true)
+        guard let user = user else { return }
+        output.goToLogin(with: user)
+    }
 }

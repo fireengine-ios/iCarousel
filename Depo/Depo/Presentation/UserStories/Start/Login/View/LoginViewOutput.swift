@@ -16,8 +16,8 @@ protocol LoginViewOutput {
     
     func rememberMe(remember: Bool)
 
-    func sendLoginAndPassword(login: String, password: String)
-    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String)
+    func sendLoginAndPassword(login: String, password: String, googleToken: String?)
+    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String, googleToken: String?)
     
     func onForgotPasswordTap()
     

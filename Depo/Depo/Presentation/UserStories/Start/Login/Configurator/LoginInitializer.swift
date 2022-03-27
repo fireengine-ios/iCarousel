@@ -22,5 +22,10 @@ class LoginModuleInitializer: NSObject {
         let configurator = LoginModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: loginViewController)
     }
+    
+    func setupVC(with user: GoogleUser) {
+        let configurator = LoginModuleConfigurator()
+        configurator.configureModuleForViewInput(viewInput: loginViewController, user: user)
+    }
 
 }

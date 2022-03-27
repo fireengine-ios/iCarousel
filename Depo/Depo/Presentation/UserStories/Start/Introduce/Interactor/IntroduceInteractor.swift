@@ -24,5 +24,14 @@ class IntroduceInteractor: IntroduceInteractorInput {
     }
     
     func signInWithGoogle(with user: GoogleUser) {
+        authenticationService.googleLogin(user: SignInWithGoogleParameters(idToken: user.idToken)) { message in
+            if message.contains("4101")  {
+                self.output.signUpRequired(for: user)
+            } else if message.contains("4102") {
+                self.output.passwordLoginRequired(for: user)
+            }
+        } fail: { value in
+            
+        }
     }
 }

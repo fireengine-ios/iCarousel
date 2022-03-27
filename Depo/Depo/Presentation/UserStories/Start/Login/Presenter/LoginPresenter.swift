@@ -145,18 +145,19 @@ extension LoginPresenter: LoginViewOutput {
         interactor.rememberMe(state: remember)
     }
     
-    func sendLoginAndPassword(login: String, password: String) {
+    func sendLoginAndPassword(login: String, password: String, googleToken: String?) {
         onLogin()
-        interactor.authificate(login: removeBrackets(text: login), password: password, atachedCaptcha: nil)
+        interactor.authificate(login: removeBrackets(text: login), password: password, atachedCaptcha: nil, googleToken: googleToken)
     }
     
-    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String) {
+    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String, googleToken: String?) {
         onLogin()
         
         let atachedCaptcha = CaptchaParametrAnswer(uuid: captchaID, answer: captchaAnswer)
         interactor.authificate(login: removeBrackets(text: login),
                                password: password,
-                               atachedCaptcha: atachedCaptcha)
+                               atachedCaptcha: atachedCaptcha,
+                               googleToken: googleToken)
     }
     
     func onForgotPasswordTap() {

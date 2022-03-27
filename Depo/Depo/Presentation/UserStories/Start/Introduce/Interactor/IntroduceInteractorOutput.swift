@@ -9,4 +9,6 @@
 import Foundation
 
 protocol IntroduceInteractorOutput: AnyObject {
+    func signUpRequired(for user: GoogleUser)
+    func passwordLoginRequired(for user: GoogleUser)
 }

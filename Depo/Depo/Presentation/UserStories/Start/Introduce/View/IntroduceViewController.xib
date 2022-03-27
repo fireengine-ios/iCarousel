@@ -157,7 +157,7 @@
                                             </constraints>
                                             <state key="normal" title="Button"/>
                                             <connections>
-                                                <action selector="continueWithGoogleTapped:" destination="-1" eventType="touchUpInside" id="Na0-Ij-tIL"/>
+                                                <action selector="onContinueWithGoogle:" destination="-1" eventType="touchUpInside" id="Zbf-PP-k5A"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rO-qN-0Tf" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">

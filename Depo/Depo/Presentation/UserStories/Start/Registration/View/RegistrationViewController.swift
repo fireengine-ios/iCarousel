@@ -86,6 +86,7 @@ final class RegistrationViewController: ViewController {
     private let updateScrollDelay: DispatchTime = .now() + 0.3
     private let termsViewController = RegistrationTermsViewController()
     private var textObserver: NSObjectProtocol?
+    var googleUser: GoogleUser?
     
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {
@@ -174,6 +175,7 @@ final class RegistrationViewController: ViewController {
         super.viewDidLoad()
         
         setup()
+        setGoogleUserIfNeeded()
         
         output.viewIsReady()
     }
@@ -322,6 +324,20 @@ final class RegistrationViewController: ViewController {
         ///fix animation if appears captcha and error both
         UIView.performWithoutAnimation {
             self.captchaView.isHidden = false
+        }
+    }
+    
+    private func setGoogleUserIfNeeded() {
+        if googleUser != nil {
+            stackView.removeArrangedSubview(emailEnterView)
+            stackView.insertArrangedSubview(emailEnterView, at: 0)
+            
+            emailEnterView.textField.text = googleUser?.email
+            emailEnterView.textField.isUserInteractionEnabled = false
+            passwordEnterView.isHidden = true
+            rePasswordEnterView.isHidden = true
+            phoneEnterView.subtitleLabel.isHidden = false
+            phoneEnterView.subtitleLabel.text = "Telefon numaranızı girmeniz gerekiyor."
         }
     }
     
