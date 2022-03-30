@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import GoogleSignIn
+import FirebaseCore
 
-final class IntroduceViewController: ViewController, IntroduceViewInput {
+final class IntroduceViewController: ViewController {
 
     var output: IntroduceViewOutput!
+    var user: GoogleUser?
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -74,7 +77,42 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
-
+    
+    @IBOutlet private weak var orLabel: UILabel! {
+        willSet {
+            newValue.text = "or"
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 12)
+            newValue.textColor = AppColor.billoGrayAndWhite.color
+        }
+    }
+    
+    @IBOutlet private weak var signInWithGoogleButton: RoundedInsetsButton! {
+        willSet {
+            newValue.setTitle("Sign in with Google", for: .normal)
+            newValue.setTitleColor(AppColor.billoGrayAndWhite.color, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.setImage(UIImage(named: "googleLogo"), for: .normal)
+            newValue.moveImageLeftTextCenter()
+            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.layer.borderColor = AppColor.darkBlueAndBilloBlue.color?.cgColor
+            newValue.layer.borderWidth = 1
+        }
+    }
+    
+    @IBOutlet private weak var signInWithAppleButton: RoundedInsetsButton! {
+        willSet {
+            newValue.setTitle("Sign in with Apple", for: .normal)
+            newValue.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            newValue.setTitleColor(AppColor.primaryBackground.color, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.setImage(UIImage(named: "appleLogo")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            newValue.tintColor = AppColor.primaryBackground.color
+            newValue.moveImageLeftTextCenter()
+            newValue.backgroundColor = AppColor.blackColor.color
+        }
+    }
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -99,17 +137,54 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
             return .default
         }
     }
-
-    // MARK: - IntroduceViewInput
-    func setupInitialState(models: [IntroduceModel]) { }
     
     // MARK: - Actions
-    
     @IBAction func onCreateAccount(_ sender: UIButton) {
         output.onStartUsingLifeBox()
     }
     
+    @IBAction func onSignInWithGoogle(_ sender: Any) {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
+                let user = GoogleUser(idToken: idToken, email: email)
+                self.user = user
+                self.output.onContinueWithGoogle(with: user)
+            } else {
+                return
+            }
+        }
+    }
+    
+    @IBAction func onSignInWithApple(_ sender: Any) {
+        
+    }
+    
     @IBAction func onLogin(_ sender: UIButton) {
         output.onLoginButton()
+    }
+}
+
+extension IntroduceViewController: IntroduceViewInput {
+    func showGoogleLoginPopup(with user: GoogleUser) {
+        let popUp = RouterVC().loginWithGooglePopup
+        popUp.email = user.email
+        popUp.delegate = self
+        present(popUp, animated: true)
+    }
+}
+
+extension IntroduceViewController: LoginWithGooglePopupDelegate {
+    func onNextButton() {
+        dismiss(animated: true)
+        guard let user = user else { return }
+        output.goToLogin(with: user)
     }
 }
