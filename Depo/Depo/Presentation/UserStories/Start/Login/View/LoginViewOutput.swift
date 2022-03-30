@@ -28,4 +28,6 @@ protocol LoginViewOutput {
     func openFaqSupport()
     
     func openSubjectDetails(type: SupportFormSubjectTypeProtocol)
+    
+    func continueWithGoogleLogin()
 }

@@ -48,4 +48,12 @@ extension IntroducePresenter: IntroduceInteractorOutput {
     func passwordLoginRequired(for user: GoogleUser) {
         view.showGoogleLoginPopup(with: user)
     }
+    
+    func goToLoginWithHeaders(with user: GoogleUser, headers: [String : Any]) {
+        router.goToLoginWithHeaders(with: user, headers: headers)
+    }
+    
+    func continueWithGoogleFailed() {
+        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+    }
 }

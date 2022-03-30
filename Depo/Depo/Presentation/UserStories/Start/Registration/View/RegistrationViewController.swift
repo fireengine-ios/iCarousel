@@ -336,8 +336,6 @@ final class RegistrationViewController: ViewController {
             emailEnterView.textField.isUserInteractionEnabled = false
             passwordEnterView.isHidden = true
             rePasswordEnterView.isHidden = true
-            phoneEnterView.subtitleLabel.isHidden = false
-            phoneEnterView.subtitleLabel.text = "Telefon numaranızı girmeniz gerekiyor."
         }
     }
     
@@ -388,7 +386,8 @@ extension RegistrationViewController: RegistrationViewInput {
                                  password: passwordEnterView.textField.text ?? "",
                                  repassword: rePasswordEnterView.textField.text ?? "",
                                  captchaID: captchaView.currentCaptchaUUID,
-                                 captchaAnswer: captchaView.captchaAnswerTextField.text ?? "")
+                                 captchaAnswer: captchaView.captchaAnswerTextField.text ?? "",
+                                 googleToken: googleUser?.idToken)
     }
     
     func showInfoButton(forType type: UserValidationResults) {

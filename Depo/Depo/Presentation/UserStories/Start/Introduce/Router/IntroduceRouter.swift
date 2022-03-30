@@ -36,4 +36,11 @@ class IntroduceRouter: IntroduceRouterInput {
         
         router.pushViewController(viewController: loginScreen)
     }
+    
+    func goToLoginWithHeaders(with user: GoogleUser, headers: [String : Any]) {
+        let router = RouterVC()
+        let loginScreen = router.loginWithHeaders(user: user, headers: headers) as? LoginViewController
+        
+        loginScreen?.output.continueWithGoogleLogin()
+    }
 }

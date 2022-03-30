@@ -24,14 +24,20 @@ class IntroduceInteractor: IntroduceInteractorInput {
     }
     
     func signInWithGoogle(with user: GoogleUser) {
-        authenticationService.googleLogin(user: SignInWithGoogleParameters(idToken: user.idToken)) { message in
-            if message.contains("4101")  {
-                self.output.signUpRequired(for: user)
-            } else if message.contains("4102") {
-                self.output.passwordLoginRequired(for: user)
+        authenticationService.googleLogin(user: SignInWithGoogleParameters(idToken: user.idToken)) { json in
+            if let errorCode = json["errorCode"] as? Int {
+                if errorCode == 4101 {
+                    self.output.signUpRequired(for: user)
+                } else if errorCode == 4102 {
+                    self.output.passwordLoginRequired(for: user)
+                }
             }
-        } fail: { value in
-            
+        } success: { [weak self] headers in
+            guard let self = self else { return }
+            self.output.goToLoginWithHeaders(with: user, headers: headers)
+        } fail: { _ in
+            self.output.continueWithGoogleFailed()
         }
     }
 }
+

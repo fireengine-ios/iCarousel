@@ -63,7 +63,7 @@ class IntroduceViewController: ViewController {
             newValue.backgroundColor = .white
             newValue.setTitleColor(ColorConstants.billoGray, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
-            newValue.setImage(UIImage(named: "googleLogin"), for: .normal)
+            newValue.setImage(UIImage(named: "googleLogo"), for: .normal)
             newValue.moveImageLeftTextCenter()
         }
     }
@@ -71,11 +71,11 @@ class IntroduceViewController: ViewController {
     @IBOutlet weak var signInWithAppleButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle("Sign in with Apple", for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             newValue.backgroundColor = .white
-            newValue.setTitleColor(ColorConstants.billoGray, for: .normal)
+            newValue.setTitleColor(UIColor.black, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
-            newValue.setImage(UIImage(named: "appleLogin"), for: .normal)
+            newValue.setImage(UIImage(named: "appleLogo"), for: .normal)
             newValue.moveImageLeftTextCenter()
         }
     }

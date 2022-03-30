@@ -19,7 +19,7 @@ enum LoginFieldError {
 
 class LoginInteractor: LoginInteractorInput {
     
-    weak var output: LoginInteractorOutput?
+    var output: LoginInteractorOutput?
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
@@ -45,7 +45,8 @@ class LoginInteractor: LoginInteractorInput {
         }
     }
     
-    private var login: String?
+    var headers: [String:Any]?
+    var login: String?
     private var password: String?
     
     private lazy var captchaService = CaptchaService()
@@ -444,6 +445,16 @@ class LoginInteractor: LoginInteractorInput {
     
     func stopUpdatePhone() {
         accountWarningService?.stop()
+    }
+    
+    func continueWithGoogleLogin() {
+        guard let login = login, let headers = headers else { return }
+        
+        proccessLoginHeaders(headers: headers, login: login) { error, errorText in
+            DispatchQueue.main.async { [weak self] in
+                self?.output?.processLoginError(error, errorText: errorText)
+            }
+        }
     }
     
 }

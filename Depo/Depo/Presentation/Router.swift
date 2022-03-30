@@ -1421,4 +1421,15 @@ class RouterVC: NSObject {
  
         return registerController
     }
+    
+    func loginWithHeaders(user: GoogleUser, headers: [String:Any]) -> UIViewController {
+        let initializer = LoginModuleInitializer()
+        let loginController = LoginViewController(nibName: "LoginViewController",
+                                                  bundle: nil)
+        initializer.loginViewController = loginController
+        initializer.setupVC(with: user, headers: headers)
+ 
+        return loginController
+    }
+    
 }

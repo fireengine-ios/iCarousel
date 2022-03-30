@@ -11,4 +11,6 @@ import Foundation
 protocol IntroduceInteractorOutput: AnyObject {
     func signUpRequired(for user: GoogleUser)
     func passwordLoginRequired(for user: GoogleUser)
+    func goToLoginWithHeaders(with user: GoogleUser, headers: [String : Any])
+    func continueWithGoogleFailed()
 }

@@ -22,7 +22,7 @@ protocol RegistrationViewOutput {
     
     func nextButtonPressed()
     
-    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?)
+    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?, googleToken: String?)
     
     func captchaRequired(required: Bool)
     

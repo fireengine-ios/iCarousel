@@ -35,4 +35,6 @@ protocol LoginInteractorInput {
     func tryToRelogin()
     
     func stopUpdatePhone()
+    
+    func continueWithGoogleLogin()
 }

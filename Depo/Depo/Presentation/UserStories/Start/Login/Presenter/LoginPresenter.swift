@@ -7,7 +7,7 @@
 //
 
 class LoginPresenter: BasePresenter {
-    weak var view: LoginViewInput!
+    var view: LoginViewInput!
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     
@@ -183,6 +183,10 @@ extension LoginPresenter: LoginViewOutput {
         interactor.trackSupportSubjectEvent(type: type)
         isPresenting = true
         router.goToSubjectDetailsPage(type: type)
+    }
+    
+    func continueWithGoogleLogin() {
+        interactor.continueWithGoogleLogin()
     }
 }
 
