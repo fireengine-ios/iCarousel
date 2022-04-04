@@ -8,7 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, NavigationBarStyling {
+    var preferredNavigationBarStyle: NavigationBarStyle {
+        return .default
+    }
+
+    var navigationBarHidden: Bool = false {
+        didSet {
+            if isTopViewController {
+                updateNavigationBarVisibilityIfNeeded()
+            }
+        }
+    }
 
     var statusBarHidden = false {
         didSet {
@@ -16,12 +27,12 @@ class ViewController: UIViewController {
         }
     }
     
-    var statusBarStyle: UIStatusBarStyle = .lightContent {
+    var statusBarStyle: UIStatusBarStyle = .default {
         didSet {
             setNeedsStatusBarAppearanceUpdate()
         }
     }
-    
+
     override var prefersStatusBarHidden: Bool {
         return statusBarHidden
     }
@@ -29,14 +40,34 @@ class ViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
     }
-    
-    var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
+
     var needCheckModalPresentationStyle = true
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureNavigationBarStyle()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateNavigationBarVisibilityIfNeeded()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        updateNavigationBarVisibilityIfNeeded(animated: false)
+    }
+
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        viewControllerToPresent.checkModalPresentationStyle()
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+
     // MARK: - Helpers
+
+    private var isTopViewController: Bool {
+        return navigationController?.topViewController == self
+    }
     
     func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
         if !Device.isIpad, UIDevice.current.orientation.isContained(in: [.landscapeLeft, .landscapeRight]) {
@@ -45,19 +76,19 @@ class ViewController: UIViewController {
             statusBarHidden = hidden
         }
     }
-    
-    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
-        viewControllerToPresent.checkModalPresentationStyle()
-        super.present(viewControllerToPresent, animated: flag, completion: completion)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        if preferredNavigationBarStyle == .black {
-            extendedLayoutIncludesOpaqueBars = true
+
+    private func updateNavigationBarVisibilityIfNeeded(animated: Bool = true) {
+        guard let navigationController = navigationController else {
+            return
         }
+
+        guard navigationBarHidden != navigationController.isNavigationBarHidden else {
+            return
+        }
+
+        navigationController.setNavigationBarHidden(navigationBarHidden, animated: animated)
     }
+    
 }
 
 extension UIViewController {
@@ -65,20 +96,13 @@ extension UIViewController {
         guard #available(iOS 13.0, *) else {
             return
         }
-        
+
         if (self as? ViewController)?.needCheckModalPresentationStyle == false {
             return
         }
-        
-        #if swift(>=5.0)
-            if modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
-                modalPresentationStyle = .fullScreen
-            }
-        #else //TODO: as soon as jenkins is updated to xcode 11 - remove this if
-            if modalPresentationStyle.isContained(in: [ .pageSheet]) {
-                modalPresentationStyle = .fullScreen
-            }
-        #endif
-        
+
+        if modalPresentationStyle.isContained(in: [.automatic, .pageSheet]) {
+            modalPresentationStyle = .fullScreen
+        }
     }
 }

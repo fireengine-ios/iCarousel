@@ -116,7 +116,6 @@ final class CreateStoryPhotoSelectionController: BaseViewController, ControlTabB
     
     private func setupNavigation() {
         hideTabBar()
-        navigationBarWithGradientStyle()
         setTitle(withString: navTitle)
         
         let cancelButton = UIBarButtonItem(title: TextConstants.cancel, target: self, selector: #selector(hideController))

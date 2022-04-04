@@ -84,14 +84,10 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
     }
     
     func configurateView() {
-        hidenNavigationBarStyle()
+        navigationBarHidden = true
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
 
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13.0, *) {
             return .darkContent

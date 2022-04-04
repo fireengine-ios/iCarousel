@@ -287,7 +287,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             let isSelectionAllowed = self.shareType.isSelectionAllowed
             
             if editingMode, isSelectionAllowed {
-                self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
                 if !isSelectionAllowed {
@@ -297,7 +296,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                     let isThreeDotsEnabled = self.navBarManager.threeDotsButton.isEnabled
                     self.navBarManager.setDefaultMode(title: self.title ?? "", isThreeDotsEnabled: isThreeDotsEnabled)
                 }
-                self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
             }
         }
     }

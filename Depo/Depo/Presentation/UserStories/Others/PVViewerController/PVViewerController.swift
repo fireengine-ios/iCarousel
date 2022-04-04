@@ -46,11 +46,6 @@ final class PVViewerController: BaseViewController, NibInit {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        blackNavigationBarStyle()
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageScrollView.updateZoom()

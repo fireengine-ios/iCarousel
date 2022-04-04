@@ -100,7 +100,6 @@ final class SpotifyImportViewController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
         analyticsService.logScreen(screen: .spotifyImportProgress)
     }
     

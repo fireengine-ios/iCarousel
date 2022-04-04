@@ -33,6 +33,8 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     @IBOutlet private weak var contentView: UIView!
     
     private var tabBarIsVisible = false
+
+    override var preferredNavigationBarStyle: NavigationBarStyle { .withLogo }
     
     private lazy var noBackupView: ContactSyncNoBackupView = {
         let view = ContactSyncNoBackupView.initFromNib()
@@ -110,12 +112,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     //MARK:- Private
     
     private func setupNavBar() {
-        if tabBarIsVisible {
-            homePageNavigationBarStyle()
-        } else {
-            navigationBarWithGradientStyle()
-            setTitle(withString: TextConstants.backUpMyContacts)
-        }
+        setTitle(withString: TextConstants.backUpMyContacts)
     }
     
     private func updateBackupStatus() {

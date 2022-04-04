@@ -53,9 +53,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hiddenBin))
-        
-        navigationBarWithGradientStyle()
-        
+                
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
     }

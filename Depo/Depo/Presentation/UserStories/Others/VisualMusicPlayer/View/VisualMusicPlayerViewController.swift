@@ -60,7 +60,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         currentDuration = player.duration
         musicName.text = player.currentMusicName
         artistName.text = player.currentArtist
-        
+
+        navigationBarHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,13 +70,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         editingTabBar?.view.layoutIfNeeded()
         
         output.viewIsReady(view: bottomView, alert: alert)
-        hidenNavigationBarStyle()
     }
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
+        
     private func setupCarousel() {
         carouselView.type = .custom
         carouselView.delegate = self

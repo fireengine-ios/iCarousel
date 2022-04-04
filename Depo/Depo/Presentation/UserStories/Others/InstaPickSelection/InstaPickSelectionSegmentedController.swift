@@ -114,7 +114,6 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
     }
     
     private func trackScreen() {

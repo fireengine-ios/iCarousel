@@ -93,7 +93,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
     }
     
     override func viewDidLayoutSubviews() {

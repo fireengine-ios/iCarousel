@@ -40,7 +40,6 @@ final class ContactSyncOperationResultController: BaseViewController, NibInit {
     //MARK: - Private
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
         setTitle(withString: navBarTitle)
     }
     

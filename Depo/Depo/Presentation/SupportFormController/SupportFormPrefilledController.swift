@@ -131,15 +131,10 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
     }()
     
     var config: SupportFormConfiguration?
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationBarWithGradientStyle()
         
         addTapGestureToHideKeyboard()
         setupTextFields()

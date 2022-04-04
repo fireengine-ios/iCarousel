@@ -11,10 +11,6 @@ import UIKit
 final class HomePageViewController: BaseViewController {
 
     //MARK: IBOutlet
-    @IBOutlet weak var contentView: UIView!
-    
-    @IBOutlet weak var contentViewTopConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: Properties
@@ -30,8 +26,6 @@ final class HomePageViewController: BaseViewController {
     private var refreshControl = UIRefreshControl()
     private lazy var shareCardContentManager = ShareCardContentManager(delegate: self)
 
-    private var topView: UIView?
-    
     private var homepageIsActiveAndVisible: Bool {
         var result = false
         if let topController = navigationController?.topViewController, topController == self {
@@ -41,6 +35,10 @@ final class HomePageViewController: BaseViewController {
     }
     
     private var isGiftButtonEnabled = false
+
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .withLogo
+    }
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -69,9 +67,7 @@ final class HomePageViewController: BaseViewController {
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
-        
-        homePageNavigationBarStyle()
-        
+
         output.viewWillAppear()
     }
     
@@ -85,10 +81,7 @@ final class HomePageViewController: BaseViewController {
         CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
 
         if homepageIsActiveAndVisible {
-            homePageNavigationBarStyle()
             configureNavBarActions()
-        } else {
-            navigationBarWithGradientStyle()
         }
         
         if isNeedShowSpotlight {
@@ -127,11 +120,13 @@ final class HomePageViewController: BaseViewController {
             self?.updateNavigationItemsState(state: false)
             self?.output.showSearch(output: self)
         })
+
+        let plus = NavBarWithAction(navItem: NavigationBarList().plus) { _ in }
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.updateNavigationItemsState(state: false)
             self?.output.showSettings()
         })
-        navBarConfigurator.configure(right: [setting, search], left: [])
+        navBarConfigurator.configure(right: [plus, search], left: [setting])
         if isGiftButtonEnabled {
             let gift = NavBarWithAction(navItem: NavigationBarList().gift, action: { [weak self] _ in
                 self?.output.giftButtonPressed()
@@ -139,6 +134,7 @@ final class HomePageViewController: BaseViewController {
             navBarConfigurator.append(rightButton: gift, leftButton: nil)
         }
         
+        navigationItem.leftBarButtonItems = navBarConfigurator.leftItems
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     

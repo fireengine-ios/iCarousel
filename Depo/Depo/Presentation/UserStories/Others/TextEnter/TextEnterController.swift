@@ -80,12 +80,6 @@ final class TextEnterController: ViewController, NibInit, ErrorPresenter {
         setupDelegates()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationBarWithGradientStyle()
-    }
-    
     private func setupDelegates() {
        phoneEnterView.numberTextField.delegate = self
     }

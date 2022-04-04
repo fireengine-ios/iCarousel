@@ -132,9 +132,6 @@ final class LoginViewController: ViewController {
     private let keyboard = Typist.shared
     
     //MARK: - Life cycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -207,7 +204,6 @@ final class LoginViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
         
         setNavigationTitle(title: TextConstants.loginTitle)
         backButtonForNavigationItem(title: TextConstants.backTitle)

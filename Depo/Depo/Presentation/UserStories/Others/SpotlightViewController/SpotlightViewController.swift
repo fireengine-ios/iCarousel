@@ -36,9 +36,7 @@ final class SpotlightViewController: ViewController {
         }
     }
     private var message: String = ""
-    
-    private var oldStatusBarColor: UIColor?
-    
+
     private let backgroundColor = UIColor(white: 0, alpha: 0.8)
     
     private var dismissHandler: VoidHandler?
@@ -67,17 +65,8 @@ final class SpotlightViewController: ViewController {
         super.viewWillAppear(animated)
         
         configureUI()
-        oldStatusBarColor = statusBarColor
-        statusBarColor = .clear
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        if let oldStatusBarColor = oldStatusBarColor {
-            statusBarColor = oldStatusBarColor
-        }
-    }
     
     private func configureUI() {
         backgroundViews.forEach { view in

@@ -75,7 +75,6 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
         
         hideTabBar()
         
-        navigationBarWithGradientStyle()
         
         setTitle(withString: navTitle)
         

@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 final class PrivacyPolicyController: UIViewController {
-    
+
     private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
     
     private let webView: WKWebView = {
@@ -74,7 +74,6 @@ final class PrivacyPolicyController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     

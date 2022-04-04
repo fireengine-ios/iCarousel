@@ -24,7 +24,6 @@ class EmptyContainerNavVC: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
     }
     
     private func configurate(_ subVC: UIViewController) {

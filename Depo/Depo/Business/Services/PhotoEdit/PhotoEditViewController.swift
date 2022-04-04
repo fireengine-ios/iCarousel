@@ -93,6 +93,8 @@ final class PhotoEditViewController: ViewController, NibInit {
         setInitialState()
         presentedCallback?()
         analytics.trackFilterScreen()
+
+        statusBarStyle = .lightContent
     }
     
     func saveImageComplete(saveAsCopy: Bool) {

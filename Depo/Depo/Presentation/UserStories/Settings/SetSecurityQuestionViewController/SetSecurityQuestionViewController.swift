@@ -104,7 +104,6 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         super.viewWillAppear(animated)
         
         checkButtonStatus()
-        navigationBarWithGradientStyle()
         hideTabBar()
     }
     

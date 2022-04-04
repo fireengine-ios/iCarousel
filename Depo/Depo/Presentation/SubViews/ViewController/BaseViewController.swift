@@ -14,7 +14,7 @@ class BaseViewController: ViewController {
     var floatingButtonsArray = [FloatingButtonsType]()
     var parentUUID: String = ""
     var segmentImage: SegmentedImage?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

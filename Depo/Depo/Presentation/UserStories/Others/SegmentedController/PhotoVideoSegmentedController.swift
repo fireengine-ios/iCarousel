@@ -9,6 +9,7 @@
 import Foundation
 
 final class PhotoVideoSegmentedController: SegmentedController {
+    override var preferredNavigationBarStyle: NavigationBarStyle { .withLogo }
     
     private let instaPickCampaignService = InstaPickCampaignService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()

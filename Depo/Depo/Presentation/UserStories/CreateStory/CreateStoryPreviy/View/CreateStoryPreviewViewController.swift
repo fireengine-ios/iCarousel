@@ -60,19 +60,16 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
         return .black
     }
     
-    private func setupNavigation() {
-        blackNavigationBarStyle()
-        
+    private func setupNavigation() {        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didEnterBackground),
                                                name: UIApplication.didEnterBackgroundNotification,
                                                object: nil)
         
-        navBar?.topItem?.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
-                                                             style: .plain,
-                                                             target: nil,
-                                                             action: nil)
-        navBar?.topItem?.backBarButtonItem?.tintColor = .white
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: TextConstants.backTitle,
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.createStorySave,
                                                             target: self,
@@ -112,6 +109,5 @@ extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
     }
     
     func prepareToDismiss() {
-        navigationBarWithGradientStyle()
     }
 }

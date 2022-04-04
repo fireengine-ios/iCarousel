@@ -33,7 +33,6 @@ class PrintViewController: BaseViewController, ErrorPresenter {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
     }
     
     deinit {

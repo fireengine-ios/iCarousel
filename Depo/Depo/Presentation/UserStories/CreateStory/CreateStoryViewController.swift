@@ -154,7 +154,6 @@ final class CreateStoryViewController: BaseViewController {
     }
     
     private func setupNavigation() {
-        navigationBarWithGradientStyle()
         
         setTitle(withString: TextConstants.createStory)
     }

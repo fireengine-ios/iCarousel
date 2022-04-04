@@ -198,10 +198,6 @@ final class RegistrationViewController: ViewController {
 
     }
     
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
     //MARK: Utility Methods (private)
     private func setup() {
         setupStackView()
@@ -211,7 +207,6 @@ final class RegistrationViewController: ViewController {
     }
     
     private func setupNavBar() {
-        navigationBarWithGradientStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
         setNavigationTitle(title: TextConstants.registerTitle)
         setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))

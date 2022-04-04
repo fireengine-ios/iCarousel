@@ -56,7 +56,6 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideTabBar()
-        navigationBarWithGradientStyle()
     }
     
     //MARK: -Helpers
@@ -70,7 +69,6 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
     
     private func configureUI() {
         setTitle(withString: mainTitle ?? "")
-        navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
         if isRootFolder == true {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.cancel,
                                                                target: self,

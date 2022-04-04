@@ -91,6 +91,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             contentView.addSubview(selectedViewController!.view)
             selectedViewController?.didMove(toParent: self)
             popToRootCurrentNavigationController(animated: true)
+            setNeedsStatusBarAppearanceUpdate()
         }
     }
     
@@ -103,11 +104,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     override var childForStatusBarStyle: UIViewController? {
-        return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
+        return activeNavigationController?.childForStatusBarStyle
     }
     
     override var childForStatusBarHidden: UIViewController? {
-        return activeNavigationController?.presentedViewController ?? activeNavigationController?.viewControllers.last
+        return activeNavigationController?.childForStatusBarHidden
     }
     
     //MARK: View lifecycle

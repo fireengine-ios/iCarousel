@@ -9,6 +9,16 @@
 import UIKit
 
 enum AppColor {
+
+    // MARK: NavigationBar
+    case navigationBarBackground
+    case navigationBarTitle
+    case navigationBarIcons
+    case navigationBarBackgroundBlack
+    case navigationBarTitleBlack
+    case navigationBarIconsBlack
+
+
     case primaryBackground
     case secondaryBackground
     case cellShadow
@@ -44,6 +54,16 @@ enum AppColor {
     }
 }
 
+func color(_ color: AppColor) -> UIColor {
+    guard let uiColor = color.color else {
+        assertionFailure()
+        return UIColor()
+    }
+
+    return uiColor
+}
+
+// TODO: remove all legacy colors
 struct ColorConstants {
     static let whiteColor = UIColor(named: "whiteColor")!
     static let blueColor = UIColor(named: "blueColor")!

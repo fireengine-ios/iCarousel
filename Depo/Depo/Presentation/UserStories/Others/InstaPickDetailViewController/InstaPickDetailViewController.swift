@@ -99,7 +99,6 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     
     private func open() {
         if isShown {
-            self.statusBarColor = .clear
             return
         }
         isShown = true

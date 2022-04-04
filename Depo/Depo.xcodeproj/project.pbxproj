@@ -170,6 +170,32 @@
 		07111F2626E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
 		07111F2726E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
 		07111F2826E8B2A20074FB3B /* UserProfileAppearAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */; };
+		0711887027F6EBDE00F512A1 /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711886F27F6EBDE00F512A1 /* AppImage.swift */; };
+		0711887127F6EBDE00F512A1 /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711886F27F6EBDE00F512A1 /* AppImage.swift */; };
+		0711887227F6EBDE00F512A1 /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711886F27F6EBDE00F512A1 /* AppImage.swift */; };
+		0711887327F6EBDE00F512A1 /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711886F27F6EBDE00F512A1 /* AppImage.swift */; };
+		0711887827FA949800F512A1 /* NavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA33A7E1209451B0008F946C /* NavigationBarStyle.swift */; };
+		0711887927FA949A00F512A1 /* NavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA33A7E1209451B0008F946C /* NavigationBarStyle.swift */; };
+		0711887A27FA94A700F512A1 /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711886F27F6EBDE00F512A1 /* AppImage.swift */; };
+		0711887B27FA94A800F512A1 /* AppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711886F27F6EBDE00F512A1 /* AppImage.swift */; };
+		0711887C27FA94BA00F512A1 /* NavigationBarStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07915DCC27F5B31D00807EAB /* NavigationBarStyling.swift */; };
+		0711887D27FA94BB00F512A1 /* NavigationBarStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07915DCC27F5B31D00807EAB /* NavigationBarStyling.swift */; };
+		0711887E27FA94C800F512A1 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878252074E1C100374177 /* NavigationController.swift */; };
+		0711887F27FA94C900F512A1 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878252074E1C100374177 /* NavigationController.swift */; };
+		0711888027FA950F00F512A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
+		0711888127FA951000F512A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
+		0711888327FA9B3300F512A1 /* NavigationBarImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711888227FA9B3200F512A1 /* NavigationBarImages.swift */; };
+		0711888427FA9B3300F512A1 /* NavigationBarImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711888227FA9B3200F512A1 /* NavigationBarImages.swift */; };
+		0711888527FA9B3300F512A1 /* NavigationBarImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711888227FA9B3200F512A1 /* NavigationBarImages.swift */; };
+		0711888627FA9B3300F512A1 /* NavigationBarImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711888227FA9B3200F512A1 /* NavigationBarImages.swift */; };
+		0711888727FA9DB800F512A1 /* NavigationBarImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711888227FA9B3200F512A1 /* NavigationBarImages.swift */; };
+		0711888827FA9DB900F512A1 /* NavigationBarImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0711888227FA9B3200F512A1 /* NavigationBarImages.swift */; };
+		0711888A27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0711888927FA9E7900F512A1 /* NavigationBar.xcassets */; };
+		0711888B27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0711888927FA9E7900F512A1 /* NavigationBar.xcassets */; };
+		0711888C27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0711888927FA9E7900F512A1 /* NavigationBar.xcassets */; };
+		0711888D27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0711888927FA9E7900F512A1 /* NavigationBar.xcassets */; };
+		0711888E27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0711888927FA9E7900F512A1 /* NavigationBar.xcassets */; };
+		0711888F27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0711888927FA9E7900F512A1 /* NavigationBar.xcassets */; };
 		071AD45B27045CD8003A24B0 /* FirebaseRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F8E042587978400799405 /* FirebaseRemoteConfig.swift */; };
 		071AD45F27045CD9003A24B0 /* FirebaseRemoteConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57F8E042587978400799405 /* FirebaseRemoteConfig.swift */; };
 		071AD46027045CDD003A24B0 /* FirebaseRemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = B57F8F312587A73600799405 /* FirebaseRemoteConfigDefaults.plist */; };
@@ -379,6 +405,10 @@
 		0786E1882660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18A2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
 		0786E18B2660E55400BA7136 /* AccessibleCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */; };
+		07915DCD27F5B31D00807EAB /* NavigationBarStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07915DCC27F5B31D00807EAB /* NavigationBarStyling.swift */; };
+		07915DCE27F5B32000807EAB /* NavigationBarStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07915DCC27F5B31D00807EAB /* NavigationBarStyling.swift */; };
+		07915DD027F5B32100807EAB /* NavigationBarStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07915DCC27F5B31D00807EAB /* NavigationBarStyling.swift */; };
+		07915DD127F5B32200807EAB /* NavigationBarStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07915DCC27F5B31D00807EAB /* NavigationBarStyling.swift */; };
 		0791815626F88A820067FB75 /* ResetPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815226F88A820067FB75 /* ResetPasswordResponse.swift */; };
 		0791815726F88A820067FB75 /* ResetPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815226F88A820067FB75 /* ResetPasswordResponse.swift */; };
 		0791815826F88A820067FB75 /* ResetPasswordResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791815226F88A820067FB75 /* ResetPasswordResponse.swift */; };
@@ -1230,7 +1260,6 @@
 		8C0E8CF91FDEBDFF00789C91 /* AutoSyncInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC814541EF7A93E001DFCF0 /* AutoSyncInitializer.swift */; };
 		8C0E8CFC1FDEBDFF00789C91 /* ResizableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56141F7552A900F49DA1 /* ResizableCollectionView.swift */; };
 		8C0E8CFD1FDEBDFF00789C91 /* HomePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA91EFD4F0D00A405B2 /* HomePageRouter.swift */; };
-		8C0E8CFE1FDEBDFF00789C91 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE21EFD517300A405B2 /* CustomNavBarView.swift */; };
 		8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74471F07927200124DF5 /* CollectionViewCellForPhoto.swift */; };
 		8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C721EEE8E7F0086DA84 /* LoginInteractor.swift */; };
 		8C0E8D031FDEBDFF00789C91 /* ProgressCardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C1CB8F51F724E54000768E8 /* ProgressCardProtocol.swift */; };
@@ -1326,7 +1355,6 @@
 		8C0E8D8D1FDEBDFF00789C91 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECAE1F11C294003D1A75 /* SearchService.swift */; };
 		8C0E8D901FDEBDFF00789C91 /* MediaItemsMetaData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F31F714DFE0008F4CF /* MediaItemsMetaData+CoreDataClass.swift */; };
 		8C0E8D921FDEBDFF00789C91 /* AutoSyncInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145A1EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift */; };
-		8C0E8D931FDEBDFF00789C91 /* CustomNavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE11EFD517300A405B2 /* CustomNavBarButton.swift */; };
 		8C0E8D941FDEBDFF00789C91 /* UserProfileViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */; };
 		8C0E8D951FDEBDFF00789C91 /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
 		8C0E8D961FDEBDFF00789C91 /* UsageInfoInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E41F3F18FA00EFDC6D /* UsageInfoInteractorInput.swift */; };
@@ -1986,13 +2014,11 @@
 		8C3BA30622B3CC45006D901E /* ShareController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE109C2A2057A9C9006C9FA0 /* ShareController.swift */; };
 		8C3BA30722B3CC45006D901E /* PasscodeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9661FBC0F5A00487632 /* PasscodeState.swift */; };
 		8C3BA30822B3CC45006D901E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		8C3BA30922B3CC45006D901E /* NavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA33A7E1209451B0008F946C /* NavigationBarStyle.swift */; };
 		8C3BA30A22B3CC45006D901E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
 		8C3BA30B22B3CC45006D901E /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BB2046D6A10036FCEA /* UploadOperation.swift */; };
 		8C3BA30C22B3CC45006D901E /* SharedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FAE20454A4400232025 /* SharedItem.swift */; };
 		8C3BA30D22B3CC45006D901E /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		8C3BA30E22B3CC45006D901E /* URL+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61D1BC2046872A001D01DC /* URL+ContentType.swift */; };
-		8C3BA30F22B3CC45006D901E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		8C3BA31022B3CC45006D901E /* NSFileCoordinator+Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FE967208B2C260065AC7E /* NSFileCoordinator+Coordinate.swift */; };
 		8C3BA31122B3CC45006D901E /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		8C3BA31222B3CC45006D901E /* PasscodeViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9651FBC0F5A00487632 /* PasscodeViewImp.swift */; };
@@ -3786,7 +3812,6 @@
 		CE4D281E207E23F7003AE4FB /* PasscodeEnterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3C2081FB9961900C3D67F /* PasscodeEnterViewController.swift */; };
 		CE4D281F207E2421003AE4FB /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		CE4D2820207E2435003AE4FB /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
-		CE4D2821207E244A003AE4FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C878222074B78A00374177 /* ViewController.swift */; };
 		CE4D2822207E2493003AE4FB /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
 		CE4D2827207E3CF0003AE4FB /* WormholePoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */; };
 		CE4D282B207E3D51003AE4FB /* AppWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2828207E3D05003AE4FB /* AppWormholeListener.swift */; };
@@ -4007,7 +4032,6 @@
 		CE7848B422A685FB00662219 /* ResizableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56141F7552A900F49DA1 /* ResizableCollectionView.swift */; };
 		CE7848B522A685FB00662219 /* HomePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA91EFD4F0D00A405B2 /* HomePageRouter.swift */; };
 		CE7848B622A685FB00662219 /* CollectionViewCellForFaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */; };
-		CE7848B722A685FB00662219 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE21EFD517300A405B2 /* CustomNavBarView.swift */; };
 		CE7848B822A685FB00662219 /* CollectionViewCellForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74471F07927200124DF5 /* CollectionViewCellForPhoto.swift */; };
 		CE7848B922A685FB00662219 /* FaceImageChangeCoverInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3B202837C700660394 /* FaceImageChangeCoverInitializer.swift */; };
 		CE7848BA22A685FB00662219 /* RecentSearchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782E40B21FE7D0B9007F7838 /* RecentSearchesService.swift */; };
@@ -4172,7 +4196,6 @@
 		CE78497322A685FB00662219 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECAE1F11C294003D1A75 /* SearchService.swift */; };
 		CE78497422A685FB00662219 /* MediaItemsMetaData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F31F714DFE0008F4CF /* MediaItemsMetaData+CoreDataClass.swift */; };
 		CE78497522A685FB00662219 /* AutoSyncInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145A1EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift */; };
-		CE78497622A685FB00662219 /* CustomNavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE11EFD517300A405B2 /* CustomNavBarButton.swift */; };
 		CE78497722A685FB00662219 /* LeavePremiumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44821A5B0D00084AA37 /* LeavePremiumConfigurator.swift */; };
 		CE78497822A685FB00662219 /* UserProfileViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */; };
 		CE78497922A685FB00662219 /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
@@ -5705,7 +5728,6 @@
 		CF8B645D23CBC9D70021B021 /* TermsOfUseInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB1E2122C3D9004F4A59 /* TermsOfUseInitializer.swift */; };
 		CF8B645E23CBC9D70021B021 /* ResizableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56141F7552A900F49DA1 /* ResizableCollectionView.swift */; };
 		CF8B645F23CBC9D70021B021 /* HomePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA91EFD4F0D00A405B2 /* HomePageRouter.swift */; };
-		CF8B646123CBC9D70021B021 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE21EFD517300A405B2 /* CustomNavBarView.swift */; };
 		CF8B646223CBC9D70021B021 /* CollectionViewCellForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74471F07927200124DF5 /* CollectionViewCellForPhoto.swift */; };
 		CF8B646323CBC9D70021B021 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C049C721EEE8E7F0086DA84 /* LoginInteractor.swift */; };
 		CF8B646423CBC9D70021B021 /* AnalyzeHistoryEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEFB8D72361C64500200A7F /* AnalyzeHistoryEmptyCell.swift */; };
@@ -5868,7 +5890,6 @@
 		CF8B650C23CBC9D70021B021 /* MediaItemsMetaData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F31F714DFE0008F4CF /* MediaItemsMetaData+CoreDataClass.swift */; };
 		CF8B650D23CBC9D70021B021 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CCAC5321FD8267B001B315F /* MediaItemsObjectSyncStatus+CoreDataProperties.swift */; };
 		CF8B650E23CBC9D70021B021 /* AutoSyncInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145A1EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift */; };
-		CF8B650F23CBC9D70021B021 /* CustomNavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE11EFD517300A405B2 /* CustomNavBarButton.swift */; };
 		CF8B651023CBC9D70021B021 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		CF8B651123CBC9D70021B021 /* UserProfileViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */; };
 		CF8B651223CBC9D70021B021 /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
@@ -7172,7 +7193,6 @@
 		CF8B6C0823CBCA280021B021 /* ResizableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F56141F7552A900F49DA1 /* ResizableCollectionView.swift */; };
 		CF8B6C0923CBCA280021B021 /* HomePageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FA91EFD4F0D00A405B2 /* HomePageRouter.swift */; };
 		CF8B6C0A23CBCA280021B021 /* CollectionViewCellForFaceImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9B38F2201F2D99009FC572 /* CollectionViewCellForFaceImage.swift */; };
-		CF8B6C0B23CBCA280021B021 /* CustomNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE21EFD517300A405B2 /* CustomNavBarView.swift */; };
 		CF8B6C0C23CBCA280021B021 /* CollectionViewCellForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A74471F07927200124DF5 /* CollectionViewCellForPhoto.swift */; };
 		CF8B6C0D23CBCA280021B021 /* FaceImageChangeCoverInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3B202837C700660394 /* FaceImageChangeCoverInitializer.swift */; };
 		CF8B6C0E23CBCA280021B021 /* TwoFactorChallengeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015522DF170600BCECBC /* TwoFactorChallengeInteractor.swift */; };
@@ -7364,7 +7384,6 @@
 		CF8B6CD923CBCA280021B021 /* MediaItemsMetaData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1D1F31F714DFE0008F4CF /* MediaItemsMetaData+CoreDataClass.swift */; };
 		CF8B6CDA23CBCA280021B021 /* PackagePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26E66B21A6E7D70033B797 /* PackagePremiumView.swift */; };
 		CF8B6CDB23CBCA280021B021 /* AutoSyncInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145A1EF7A93E001DFCF0 /* AutoSyncInteractorInput.swift */; };
-		CF8B6CDC23CBCA280021B021 /* CustomNavBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE11EFD517300A405B2 /* CustomNavBarButton.swift */; };
 		CF8B6CDD23CBCA280021B021 /* LeavePremiumConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44821A5B0D00084AA37 /* LeavePremiumConfigurator.swift */; };
 		CF8B6CDE23CBCA280021B021 /* UserProfileViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CDABD041F1E3A6300C8CC16 /* UserProfileViewOutput.swift */; };
 		CF8B6CDF23CBCA280021B021 /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
@@ -8824,7 +8843,6 @@
 		FA016FB723D30750008713ED /* FileInfoModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA016FB223D30750008713ED /* FileInfoModuleOutput.swift */; };
 		FA016FB823D30750008713ED /* FileInfoModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA016FB223D30750008713ED /* FileInfoModuleOutput.swift */; };
 		FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA33A7E1209451B0008F946C /* NavigationBarStyle.swift */; };
-		FA33A7E42094522A008F946C /* NavigationBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA33A7E1209451B0008F946C /* NavigationBarStyle.swift */; };
 		FA475ACD203EAFB9008D79C2 /* PushPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA475ACB203EAFB9008D79C2 /* PushPopAnimator.swift */; };
 		FA793D88201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA793D86201872DB00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift */; };
 		FA793D89201872E200A02B46 /* PlacesServiceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA793D782018725300A02B46 /* PlacesServiceResponse.swift */; };
@@ -9190,6 +9208,9 @@
 		070E96452742993A00CFED55 /* LifeBoxModel 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "LifeBoxModel 6.xcdatamodel"; sourceTree = "<group>"; };
 		0710A4E3268A416E0096B76A /* OverlayStickerSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorViewController.swift; sourceTree = "<group>"; };
 		07111F2426E8B2A20074FB3B /* UserProfileAppearAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileAppearAction.swift; sourceTree = "<group>"; };
+		0711886F27F6EBDE00F512A1 /* AppImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImage.swift; sourceTree = "<group>"; };
+		0711888227FA9B3200F512A1 /* NavigationBarImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarImages.swift; sourceTree = "<group>"; };
+		0711888927FA9E7900F512A1 /* NavigationBar.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NavigationBar.xcassets; sourceTree = "<group>"; };
 		07182042268E3CDE0043730B /* OverlayStickersModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickersModels.swift; sourceTree = "<group>"; };
 		0731E7CE263164BC00883566 /* RegistrationTermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationTermsViewController.swift; sourceTree = "<group>"; };
 		0731E809263165DA00883566 /* RegistrationTermsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationTermsViewController.xib; sourceTree = "<group>"; };
@@ -9236,6 +9257,7 @@
 		077EEFA926E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyRecoveryEmailPopUp.swift; sourceTree = "<group>"; };
 		077FDB99268C730D00F21317 /* OverlayStickerSelectorDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayStickerSelectorDataSource.swift; sourceTree = "<group>"; };
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
+		07915DCC27F5B31D00807EAB /* NavigationBarStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarStyling.swift; sourceTree = "<group>"; };
 		0791815226F88A820067FB75 /* ResetPasswordResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordResponse.swift; sourceTree = "<group>"; };
 		0791815B26F88AB10067FB75 /* IdentityVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentityVerificationViewController.swift; sourceTree = "<group>"; };
 		0791815C26F88AB10067FB75 /* IdentityVerificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityVerificationViewController.xib; sourceTree = "<group>"; };
@@ -11213,8 +11235,6 @@
 		CEAE3FCD1EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseCollectionViewCellWithSwipe.xib; sourceTree = "<group>"; };
 		CEAE3FD41EFD500B00A405B2 /* HomeViewTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewTopView.swift; sourceTree = "<group>"; };
 		CEAE3FD51EFD500B00A405B2 /* HomeViewTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewTopView.xib; sourceTree = "<group>"; };
-		CEAE3FE11EFD517300A405B2 /* CustomNavBarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavBarButton.swift; sourceTree = "<group>"; };
-		CEAE3FE21EFD517300A405B2 /* CustomNavBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavBarView.swift; sourceTree = "<group>"; };
 		CEAE3FE61EFD517300A405B2 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		CEAE3FE81EFD517300A405B2 /* CustomTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarItem.swift; sourceTree = "<group>"; };
 		CEAE3FE91EFD517300A405B2 /* TabBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarView.xib; sourceTree = "<group>"; };
@@ -14315,6 +14335,7 @@
 				9853CD222361BD5600E19BF7 /* BorderDotsPageControl.swift */,
 				7326801324855248007E2CDF /* ExtandedTapAreaButton.swift */,
 				98495F57255975810093B2C2 /* PlaceholderTextView.swift */,
+				CEAE3FE61EFD517300A405B2 /* GradientView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -18817,6 +18838,7 @@
 			children = (
 				CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */,
 				CE58FB0520444BE8007F3F54 /* ColorConstants.swift */,
+				0711886F27F6EBDE00F512A1 /* AppImage.swift */,
 			);
 			path = ApplicationPalette;
 			sourceTree = "<group>";
@@ -19659,11 +19681,11 @@
 			isa = PBXGroup;
 			children = (
 				FA33A7E1209451B0008F946C /* NavigationBarStyle.swift */,
-				CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */,
-				CEAE3FE11EFD517300A405B2 /* CustomNavBarButton.swift */,
-				CEAE3FE21EFD517300A405B2 /* CustomNavBarView.swift */,
-				CEAE3FE61EFD517300A405B2 /* GradientView.swift */,
+				07915DCC27F5B31D00807EAB /* NavigationBarStyling.swift */,
 				98C878252074E1C100374177 /* NavigationController.swift */,
+				CE04525A1F2F1012001F8FA6 /* NavBarConfugurator.swift */,
+				0711888227FA9B3200F512A1 /* NavigationBarImages.swift */,
+				0711888927FA9E7900F512A1 /* NavigationBar.xcassets */,
 			);
 			path = CustomNavigationBar;
 			sourceTree = "<group>";
@@ -21783,6 +21805,7 @@
 				8C0E90651FDEBDFF00789C91 /* ForgotPasswordViewController.xib in Resources */,
 				CE0808A7234720C800F1944F /* TBMatikCard.xib in Resources */,
 				8C0E90661FDEBDFF00789C91 /* SettingsViewController.xib in Resources */,
+				0711888A27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				894E985D235F37A8002F4A27 /* Images.xcassets in Resources */,
 				4A9F8E5620875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */,
 				8C0E90681FDEBDFF00789C91 /* ActionsMenuView.xib in Resources */,
@@ -21828,6 +21851,7 @@
 				8C3BA33122B3CC45006D901E /* PasscodeViewImp.xib in Resources */,
 				8C3BA33222B3CC45006D901E /* TurkcellSaturaDemIta.ttf in Resources */,
 				8C3BA33322B3CC45006D901E /* TurkcellSaturaIta.ttf in Resources */,
+				0711888F27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				8C3BA33422B3CC45006D901E /* OurLocalizable.strings in Resources */,
 				8C3BA33522B3CC45006D901E /* TurkcellSaturaMed.ttf in Resources */,
 				8C3BA33622B3CC45006D901E /* TurkcellSaturaMedIta.ttf in Resources */,
@@ -21920,6 +21944,7 @@
 				CE4D2813207E0997003AE4FB /* PasscodeViewImp.xib in Resources */,
 				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
 				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
+				0711888C27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				CE4D27F2207E00D3003AE4FB /* OurLocalizable.strings in Resources */,
 				CEBDB1E120444E50007EE1AE /* TurkcellSaturaMed.ttf in Resources */,
 				CEBDB1E220444E50007EE1AE /* TurkcellSaturaMedIta.ttf in Resources */,
@@ -21953,6 +21978,7 @@
 				CE784CD222A685FB00662219 /* OptInController.xib in Resources */,
 				CE784CD322A685FB00662219 /* FaceImageChangeCoverViewController.xib in Resources */,
 				98C298542302B15300C9811E /* SpotifyCancelImportPopup.xib in Resources */,
+				0711888D27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				0791816E26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD622A685FB00662219 /* AnimationCard.xib in Resources */,
@@ -22600,6 +22626,7 @@
 				985FFB04255C1EE0001AA845 /* FileNameView.xib in Resources */,
 				3A6D27CA26400ACB00A7BBE2 /* InvitationViewController.xib in Resources */,
 				CF8B6AC723CBC9D70021B021 /* TermsCheckboxTextView.xib in Resources */,
+				0711888B27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				CF71473124B597AA00D83E60 /* ContactSyncScheduleCard.xib in Resources */,
 				982319B824F3A1E700FD16E2 /* HSLView.xib in Resources */,
 				0305A30923D5C2DB004D1EC7 /* StickerCollectionViewCell.xib in Resources */,
@@ -22687,6 +22714,7 @@
 				CF8B708723CBCA280021B021 /* OptInController.xib in Resources */,
 				CF8B708823CBCA280021B021 /* FaceImageChangeCoverViewController.xib in Resources */,
 				CF8B708923CBCA280021B021 /* SpotifyCancelImportPopup.xib in Resources */,
+				0711888E27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				0791816F26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				CF8B708A23CBCA280021B021 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CF8B708C23CBCA280021B021 /* AnimationCard.xib in Resources */,
@@ -24282,7 +24310,6 @@
 				8C0E8CFC1FDEBDFF00789C91 /* ResizableCollectionView.swift in Sources */,
 				8C0E8CFD1FDEBDFF00789C91 /* HomePageRouter.swift in Sources */,
 				17B9B0C623F1F76900CAF5E1 /* FullQuotaWarningPopUp.swift in Sources */,
-				8C0E8CFE1FDEBDFF00789C91 /* CustomNavBarView.swift in Sources */,
 				8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */,
 				8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */,
 				9808B3D225540D61002B0032 /* PrivateShareSuggestionsView.swift in Sources */,
@@ -24353,6 +24380,7 @@
 				98E4BA1023C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				8C0E8D201FDEBDFF00789C91 /* CountiesGSMCodeCompositor.swift in Sources */,
 				4A0AC15D20874B9600032CC7 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
+				0711887027F6EBDE00F512A1 /* AppImage.swift in Sources */,
 				98231A0524F3A1E700FD16E2 /* SliderView.swift in Sources */,
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
 				8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */,
@@ -24510,7 +24538,6 @@
 				B57F8E062587978400799405 /* FirebaseRemoteConfig.swift in Sources */,
 				8C0E8D921FDEBDFF00789C91 /* AutoSyncInteractorInput.swift in Sources */,
 				CF71463424B597A800D83E60 /* ContactSyncNoBackupView.swift in Sources */,
-				8C0E8D931FDEBDFF00789C91 /* CustomNavBarButton.swift in Sources */,
 				986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */,
 				8C0E8D941FDEBDFF00789C91 /* UserProfileViewOutput.swift in Sources */,
 				8C0E8D951FDEBDFF00789C91 /* UploadResponse.swift in Sources */,
@@ -24944,6 +24971,7 @@
 				985FF9E8255BE478001AA845 /* Codable+Extesions.swift in Sources */,
 				CE4851F12018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				0791817F26F89FAF0067FB75 /* ResetPasswordService.swift in Sources */,
+				07915DCD27F5B31D00807EAB /* NavigationBarStyling.swift in Sources */,
 				4AC68931202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
 				98231A5E24F3A23500FD16E2 /* AudreyFilter.swift in Sources */,
 				737685E323704BF300ED6BD6 /* PhotoVideoSegmentedController.swift in Sources */,
@@ -25219,6 +25247,7 @@
 				8C0E8F1E1FDEBDFF00789C91 /* BaseItemPassingProtocol.swift in Sources */,
 				8C0E8F1F1FDEBDFF00789C91 /* SettingsViewOutput.swift in Sources */,
 				8C0E8F201FDEBDFF00789C91 /* SettingsViewController.swift in Sources */,
+				0711888327FA9B3300F512A1 /* NavigationBarImages.swift in Sources */,
 				8C0B91AD20170EC500A5BA81 /* ManageContactsInteractorInput.swift in Sources */,
 				8C0E8F211FDEBDFF00789C91 /* PasscodeInputView.swift in Sources */,
 				8C0E8F221FDEBDFF00789C91 /* SettingsModuleInput.swift in Sources */,
@@ -25653,6 +25682,7 @@
 				8C3BA2E422B3CC45006D901E /* PasscodeView.swift in Sources */,
 				8C3BA2E522B3CC45006D901E /* Keys.swift in Sources */,
 				8C3BA2E622B3CC45006D901E /* ImageFormat.swift in Sources */,
+				0711887E27FA94C800F512A1 /* NavigationController.swift in Sources */,
 				8C3BA2E722B3CC45006D901E /* InsetsLabel.swift in Sources */,
 				B5758645240D1ADE0004362B /* DataChunkProvider.swift in Sources */,
 				8C3BA2E822B3CC45006D901E /* UIImageView+Scale.swift in Sources */,
@@ -25680,6 +25710,7 @@
 				8C3BA2F722B3CC45006D901E /* BiometricsManager.swift in Sources */,
 				8C3BA2F822B3CC45006D901E /* PasscodeManager.swift in Sources */,
 				8C3BA2F922B3CC45006D901E /* Dictionary.swift in Sources */,
+				0711887D27FA94BB00F512A1 /* NavigationBarStyling.swift in Sources */,
 				8C3BA2FB22B3CC45006D901E /* Error+Network.swift in Sources */,
 				8C3BA2FC22B3CC45006D901E /* UIImage+Size.swift in Sources */,
 				8C3BA2FD22B3CC45006D901E /* TokenKeychainStorage.swift in Sources */,
@@ -25695,21 +25726,21 @@
 				8C3BA30622B3CC45006D901E /* ShareController.swift in Sources */,
 				8C3BA30722B3CC45006D901E /* PasscodeState.swift in Sources */,
 				8C3BA30822B3CC45006D901E /* Constants.swift in Sources */,
-				8C3BA30922B3CC45006D901E /* NavigationBarStyle.swift in Sources */,
 				8C3BA30A22B3CC45006D901E /* TitleView.swift in Sources */,
 				8C3BA30B22B3CC45006D901E /* UploadOperation.swift in Sources */,
 				8C3BA30C22B3CC45006D901E /* SharedItem.swift in Sources */,
 				8C3BA30D22B3CC45006D901E /* ResponseResult.swift in Sources */,
 				8C3BA30E22B3CC45006D901E /* URL+ContentType.swift in Sources */,
-				8C3BA30F22B3CC45006D901E /* ViewController.swift in Sources */,
 				8C3BA31022B3CC45006D901E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				8C3BA31122B3CC45006D901E /* NumericConstants.swift in Sources */,
 				07FBA21E26E0BD5500ED4132 /* Localizable.swift in Sources */,
+				0711888827FA9DB900F512A1 /* NavigationBarImages.swift in Sources */,
 				CFACAC8B247C62D800645B40 /* NetmeraEvents.swift in Sources */,
 				CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */,
 				8C3BA31222B3CC45006D901E /* PasscodeViewImp.swift in Sources */,
 				8C2386B622E9AA4B004992C4 /* Double+Extensions.swift in Sources */,
 				8C3BA31322B3CC45006D901E /* AuthorizationRepository.swift in Sources */,
+				0711887927FA949A00F512A1 /* NavigationBarStyle.swift in Sources */,
 				8C3BA31422B3CC45006D901E /* ShareConfigurator.swift in Sources */,
 				8C3BA31522B3CC45006D901E /* UploadHelpers.swift in Sources */,
 				8C3BA31622B3CC45006D901E /* DeviceExtension.swift in Sources */,
@@ -25727,7 +25758,9 @@
 				8C3BA31F22B3CC45006D901E /* SharedItemImageLoader.swift in Sources */,
 				8C3BA32022B3CC45006D901E /* FromNib.swift in Sources */,
 				8C3BA32122B3CC45006D901E /* ImageColCell.swift in Sources */,
+				0711888127FA951000F512A1 /* ViewController.swift in Sources */,
 				8C3BA32222B3CC45006D901E /* Images.swift in Sources */,
+				0711887B27FA94A800F512A1 /* AppImage.swift in Sources */,
 				8C3BA32322B3CC45006D901E /* ShareCustomizator.swift in Sources */,
 				8C3BA32422B3CC45006D901E /* SessionServiceExtension.swift in Sources */,
 				8C3BA32522B3CC45006D901E /* AuthorizationURLs.swift in Sources */,
@@ -25930,6 +25963,7 @@
 				CE4D2812207E0997003AE4FB /* PasscodeView.swift in Sources */,
 				8CCA070B20C455DB00558AB0 /* Keys.swift in Sources */,
 				CE61D1BB20459718001D01DC /* ImageFormat.swift in Sources */,
+				0711887F27FA94C900F512A1 /* NavigationController.swift in Sources */,
 				CE4ECA712088976100AB91C6 /* InsetsLabel.swift in Sources */,
 				B5758643240D1ADA0004362B /* DataChunkProvider.swift in Sources */,
 				CE98F6D9204E6BD800433915 /* UIImageView+Scale.swift in Sources */,
@@ -25957,6 +25991,7 @@
 				CE1B7627204D349C00B5E12A /* Error+Alamofire.swift in Sources */,
 				CE4D280F207E0996003AE4FB /* BiometricsManager.swift in Sources */,
 				CE4D2815207E0997003AE4FB /* PasscodeManager.swift in Sources */,
+				0711887C27FA94BA00F512A1 /* NavigationBarStyling.swift in Sources */,
 				CE1458C9204561CC00812544 /* Dictionary.swift in Sources */,
 				CE61D1B92045947D001D01DC /* SharedConstants.swift in Sources */,
 				CEA524BE2046EB860036FCEA /* Error+Network.swift in Sources */,
@@ -25974,19 +26009,19 @@
 				CE109C2B2057A9C9006C9FA0 /* ShareController.swift in Sources */,
 				CE4D2810207E0996003AE4FB /* PasscodeState.swift in Sources */,
 				CE4D27F6207E0249003AE4FB /* Constants.swift in Sources */,
-				FA33A7E42094522A008F946C /* NavigationBarStyle.swift in Sources */,
 				CEF3719C20873B0F007AD36E /* TitleView.swift in Sources */,
 				CEA524BC2046D6A10036FCEA /* UploadOperation.swift in Sources */,
 				CE654FAF20454A4400232025 /* SharedItem.swift in Sources */,
 				CE1458D220458AFC00812544 /* ResponseResult.swift in Sources */,
 				CE61D1BF2046872A001D01DC /* URL+ContentType.swift in Sources */,
-				CE4D2821207E244A003AE4FB /* ViewController.swift in Sources */,
 				07FBA20F26E0BD5100ED4132 /* Localizable.swift in Sources */,
+				0711888727FA9DB800F512A1 /* NavigationBarImages.swift in Sources */,
 				CE5FE969208B2C2F0065AC7E /* NSFileCoordinator+Coordinate.swift in Sources */,
 				CFACACAB247CF8A800645B40 /* NetmeraExtensionService.swift in Sources */,
 				CE4D2805207E086A003AE4FB /* NumericConstants.swift in Sources */,
 				B577AE2422D4B91100D074BA /* Double+Extensions.swift in Sources */,
 				CE4D2814207E0997003AE4FB /* PasscodeViewImp.swift in Sources */,
+				0711887827FA949800F512A1 /* NavigationBarStyle.swift in Sources */,
 				CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */,
 				CE1458CB2045633D00812544 /* ShareConfigurator.swift in Sources */,
 				CE5FE962208B1C9E0065AC7E /* UploadHelpers.swift in Sources */,
@@ -26004,7 +26039,9 @@
 				CE2DBA192059043200D08C5E /* SharedItemImageLoader.swift in Sources */,
 				CE4D2818207E0A30003AE4FB /* FromNib.swift in Sources */,
 				CEBDB1E520452F6E007EE1AE /* ImageColCell.swift in Sources */,
+				0711888027FA950F00F512A1 /* ViewController.swift in Sources */,
 				CE23A0FC205FF5F80048267D /* Images.swift in Sources */,
+				0711887A27FA94A700F512A1 /* AppImage.swift in Sources */,
 				CEBDB1D920444D97007EE1AE /* ShareCustomizator.swift in Sources */,
 				8CCA071520C46C7400558AB0 /* SessionServiceExtension.swift in Sources */,
 				CE654FB72045613F00232025 /* AuthorizationURLs.swift in Sources */,
@@ -26102,6 +26139,7 @@
 				CE78483522A685FB00662219 /* LeavePremiumViewController.swift in Sources */,
 				171090EC23FC8EC50036A033 /* HideActionService.swift in Sources */,
 				CE78483822A685FB00662219 /* CollectionViewCellDataProtocol.swift in Sources */,
+				0711887227F6EBDE00F512A1 /* AppImage.swift in Sources */,
 				CE78483922A685FB00662219 /* HomePageInitializer.swift in Sources */,
 				CE78483A22A685FB00662219 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				CE78483C22A685FB00662219 /* SeacrhViewRouter.swift in Sources */,
@@ -26156,6 +26194,7 @@
 				CE78485722A685FB00662219 /* GradientPremiumButton.swift in Sources */,
 				CE78485822A685FB00662219 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				73D723EC231D08A6006AE835 /* PackageOffer.swift in Sources */,
+				0711888527FA9B3300F512A1 /* NavigationBarImages.swift in Sources */,
 				CE78485922A685FB00662219 /* ButtonWithGrayCorner.swift in Sources */,
 				CE78485A22A685FB00662219 /* SubscriptionParameters.swift in Sources */,
 				CE78485B22A685FB00662219 /* ContactSyncResponse.swift in Sources */,
@@ -26284,7 +26323,6 @@
 				CE7848B422A685FB00662219 /* ResizableCollectionView.swift in Sources */,
 				CE7848B522A685FB00662219 /* HomePageRouter.swift in Sources */,
 				CE7848B622A685FB00662219 /* CollectionViewCellForFaceImage.swift in Sources */,
-				CE7848B722A685FB00662219 /* CustomNavBarView.swift in Sources */,
 				CE7848B822A685FB00662219 /* CollectionViewCellForPhoto.swift in Sources */,
 				CE7848B922A685FB00662219 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				892B015822DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */,
@@ -26553,7 +26591,6 @@
 				CE78497522A685FB00662219 /* AutoSyncInteractorInput.swift in Sources */,
 				981616FF2578B97D009F1C31 /* FirebaseAnalyticsEvents.swift in Sources */,
 				3A6D27D126400AD000A7BBE2 /* InvitationViewController.swift in Sources */,
-				CE78497622A685FB00662219 /* CustomNavBarButton.swift in Sources */,
 				CE78497722A685FB00662219 /* LeavePremiumConfigurator.swift in Sources */,
 				CE78497822A685FB00662219 /* UserProfileViewOutput.swift in Sources */,
 				CE78497922A685FB00662219 /* UploadResponse.swift in Sources */,
@@ -27206,6 +27243,7 @@
 				CE784B4E22A685FB00662219 /* UserInfoSubViewRouterInput.swift in Sources */,
 				737A2EAB2338AF410014258A /* SecretAnswerView.swift in Sources */,
 				CE784B4F22A685FB00662219 /* UserInfoSubViewRouter.swift in Sources */,
+				07915DD027F5B32100807EAB /* NavigationBarStyling.swift in Sources */,
 				CE784B5022A685FB00662219 /* UserInfoSubViewConfigurator.swift in Sources */,
 				CE784B5122A685FB00662219 /* UserInfoSubViewInitializer.swift in Sources */,
 				07567DA72721DFBC00557BCF /* DeleteAccountPopUp.swift in Sources */,
@@ -27876,6 +27914,7 @@
 				CF8B640523CBC9D70021B021 /* AlbumsDataSourceForCollectionView.swift in Sources */,
 				0766316327CE913F00AB4BC2 /* MapLocationDetailInitializer.swift in Sources */,
 				F028C11A2789F3B4005CE6AF /* PublicShareInteractorInput.swift in Sources */,
+				0711887127F6EBDE00F512A1 /* AppImage.swift in Sources */,
 				CF8B640623CBC9D70021B021 /* QuestionCell.swift in Sources */,
 				CF8B640723CBC9D70021B021 /* PhotoSelectionNoFilesView.swift in Sources */,
 				CF8B640823CBC9D70021B021 /* LoginRouter.swift in Sources */,
@@ -27994,7 +28033,6 @@
 				CF8B645D23CBC9D70021B021 /* TermsOfUseInitializer.swift in Sources */,
 				CF8B645E23CBC9D70021B021 /* ResizableCollectionView.swift in Sources */,
 				CF8B645F23CBC9D70021B021 /* HomePageRouter.swift in Sources */,
-				CF8B646123CBC9D70021B021 /* CustomNavBarView.swift in Sources */,
 				CF8B646223CBC9D70021B021 /* CollectionViewCellForPhoto.swift in Sources */,
 				CF8B646323CBC9D70021B021 /* LoginInteractor.swift in Sources */,
 				CF8B646423CBC9D70021B021 /* AnalyzeHistoryEmptyCell.swift in Sources */,
@@ -28219,7 +28257,6 @@
 				F064FB3A278CF28E00B461D0 /* PublicSharedItemsActionView.swift in Sources */,
 				CF8B650D23CBC9D70021B021 /* MediaItemsObjectSyncStatus+CoreDataProperties.swift in Sources */,
 				CF8B650E23CBC9D70021B021 /* AutoSyncInteractorInput.swift in Sources */,
-				CF8B650F23CBC9D70021B021 /* CustomNavBarButton.swift in Sources */,
 				CF8B651023CBC9D70021B021 /* StreamReaderWriter.swift in Sources */,
 				7326801624855248007E2CDF /* ExtandedTapAreaButton.swift in Sources */,
 				CF8B651123CBC9D70021B021 /* UserProfileViewOutput.swift in Sources */,
@@ -28454,6 +28491,7 @@
 				CF83CF31243F1630009DF60F /* BackgroundSyncOperation.swift in Sources */,
 				07567DA62721DFBC00557BCF /* DeleteAccountPopUp.swift in Sources */,
 				CF7146A724B597A900D83E60 /* ContactBackupHistoryPopupFactory.swift in Sources */,
+				07915DCE27F5B32000807EAB /* NavigationBarStyling.swift in Sources */,
 				CF8B65C623CBC9D70021B021 /* QuickScrollItems.swift in Sources */,
 				0305A32523D5C3B5004D1EC7 /* HiddenPhotosBottomBarManager.swift in Sources */,
 				CF8B65C723CBC9D70021B021 /* URL+Video.swift in Sources */,
@@ -28707,6 +28745,7 @@
 				98C19F512485097900527D76 /* ContactSyncApiService.swift in Sources */,
 				CF8B668923CBC9D70021B021 /* ImportFromDropboxInteractor.swift in Sources */,
 				CF8B668A23CBC9D70021B021 /* SpotifyResponse.swift in Sources */,
+				0711888427FA9B3300F512A1 /* NavigationBarImages.swift in Sources */,
 				CF8B668B23CBC9D70021B021 /* PasswordView.swift in Sources */,
 				CF8B668C23CBC9D70021B021 /* BaseFilesGreedModuleInput.swift in Sources */,
 				CF8B668D23CBC9D70021B021 /* MD5.swift in Sources */,
@@ -29454,6 +29493,7 @@
 				0305A31323D5C356004D1EC7 /* HiddenPhotosDataSource.swift in Sources */,
 				171090ED23FC8EC50036A033 /* HideActionService.swift in Sources */,
 				CF8B6B8223CBCA280021B021 /* CollectionViewCellDataProtocol.swift in Sources */,
+				0711887327F6EBDE00F512A1 /* AppImage.swift in Sources */,
 				CF8B6B8323CBCA280021B021 /* HomePageInitializer.swift in Sources */,
 				CF8B6B8423CBCA280021B021 /* UploadFromLifeBoxInteractorIO.swift in Sources */,
 				CF8B6B8523CBCA280021B021 /* SeacrhViewRouter.swift in Sources */,
@@ -29508,6 +29548,7 @@
 				CF8B6BA623CBCA280021B021 /* ImportPhotosInteractor.swift in Sources */,
 				CF8B6BA723CBCA280021B021 /* MyStorageViewOutput.swift in Sources */,
 				CF8B6BA823CBCA280021B021 /* GradientPremiumButton.swift in Sources */,
+				0711888627FA9B3300F512A1 /* NavigationBarImages.swift in Sources */,
 				CF8B6BA923CBCA280021B021 /* VisualMusicPlayerModuleInput.swift in Sources */,
 				CF8B6BAA23CBCA280021B021 /* PackageOffer.swift in Sources */,
 				98922297240D0C0E004155A5 /* BecomePremiumView.swift in Sources */,
@@ -29633,7 +29674,6 @@
 				CF8B6C0923CBCA280021B021 /* HomePageRouter.swift in Sources */,
 				07D0594726F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
 				CF8B6C0A23CBCA280021B021 /* CollectionViewCellForFaceImage.swift in Sources */,
-				CF8B6C0B23CBCA280021B021 /* CustomNavBarView.swift in Sources */,
 				CF8B6C0C23CBCA280021B021 /* CollectionViewCellForPhoto.swift in Sources */,
 				CF8B6C0D23CBCA280021B021 /* FaceImageChangeCoverInitializer.swift in Sources */,
 				CF8B6C0E23CBCA280021B021 /* TwoFactorChallengeInteractor.swift in Sources */,
@@ -29899,7 +29939,6 @@
 				0305A34323D5C562004D1EC7 /* TrashBinRouter.swift in Sources */,
 				98C19F542485097900527D76 /* ContactSyncApiService.swift in Sources */,
 				CF8B6CDB23CBCA280021B021 /* AutoSyncInteractorInput.swift in Sources */,
-				CF8B6CDC23CBCA280021B021 /* CustomNavBarButton.swift in Sources */,
 				CF8B6CDD23CBCA280021B021 /* LeavePremiumConfigurator.swift in Sources */,
 				CF8B6CDE23CBCA280021B021 /* UserProfileViewOutput.swift in Sources */,
 				CF8B6CDF23CBCA280021B021 /* UploadResponse.swift in Sources */,
@@ -30558,6 +30597,7 @@
 				CF8B6ED923CBCA280021B021 /* VisualMusicPlayerRouterInput.swift in Sources */,
 				CF8B6EDA23CBCA280021B021 /* OfferParameters.swift in Sources */,
 				CF8B6EDB23CBCA280021B021 /* BasePresentor.swift in Sources */,
+				07915DD127F5B32200807EAB /* NavigationBarStyling.swift in Sources */,
 				CF8B6EDC23CBCA280021B021 /* UploadHelpers.swift in Sources */,
 				CF8B6EDD23CBCA280021B021 /* UserProfileRouterInput.swift in Sources */,
 				07567DA82721DFBC00557BCF /* DeleteAccountPopUp.swift in Sources */,

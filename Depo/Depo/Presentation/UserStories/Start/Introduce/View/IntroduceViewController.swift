@@ -36,7 +36,8 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
     }
     
     func configurateView() {
-        hidenNavigationBarStyle()
+        navigationBarHidden = true
+        
         startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
         startUsingLifeBoxButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         startUsingLifeBoxButton.backgroundColor = AppColor.marineTwoAndTealish.color
@@ -59,9 +60,6 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
 
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
 
     // MARK: IntroduceViewInput
     func setupInitialState(models: [IntroduceModel]) {
