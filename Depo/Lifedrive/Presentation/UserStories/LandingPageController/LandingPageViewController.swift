@@ -99,7 +99,7 @@ final class LandingPageViewController: ViewController {
     
     @IBAction private func onStartButton(_ sender: UIButton) {
         let storageVars: StorageVars = factory.resolve()
-        storageVars.isShownLanding = false
+        storageVars.isShownLanding = true
         
         if isTurkcell {
             openAutoSyncIfNeeded()

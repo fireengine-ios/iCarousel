@@ -85,10 +85,14 @@ struct RouteRequests {
     }()
     
     static let dynamicLinkDomain: String = {
-        switch currentServerEnvironment {
-        case .test: return "https://testlifebox.page.link"
-        case .preProduction: return "https://testlifebox.page.link"
-        case .production: return "https://mylifebox.page.link"
+        if isBillo {
+            return "https://billo.page.link"
+        } else {
+            switch currentServerEnvironment {
+            case .test: return "https://testlifebox.page.link"
+            case .preProduction: return "https://testlifebox.page.link"
+            case .production: return "https://mylifebox.page.link"
+            }
         }
     }()
 
