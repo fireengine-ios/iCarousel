@@ -56,4 +56,8 @@ extension IntroducePresenter: IntroduceInteractorOutput {
     func continueWithGoogleFailed() {
         UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
     }
+    
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+        router.goToTwoFactorAuthViewController(response: response)
+    }
 }

@@ -13,4 +13,5 @@ protocol IntroduceInteractorOutput: AnyObject {
     func passwordLoginRequired(for user: GoogleUser)
     func goToLoginWithHeaders(with user: GoogleUser, headers: [String : Any])
     func continueWithGoogleFailed()
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
 }

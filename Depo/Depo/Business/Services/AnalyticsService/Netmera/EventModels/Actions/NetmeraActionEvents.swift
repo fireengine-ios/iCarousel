@@ -78,6 +78,8 @@ extension NetmeraEvents.Actions {
                 socialChannel = .instagram
             case .spotify:
                 socialChannel = .spotify
+            case .appleGoogle:
+                socialChannel = .google
             }
             self.init(status: status.text, channelType: socialChannel.text)
         }

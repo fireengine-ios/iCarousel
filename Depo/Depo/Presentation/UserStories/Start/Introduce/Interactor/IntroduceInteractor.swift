@@ -7,11 +7,11 @@
 //
 
 class IntroduceInteractor: IntroduceInteractorInput {
-
-    weak var output: IntroduceInteractorOutput!
-    let introduceDataStorage = IntroduceDataStorage()
+    
     private let analyticsManager: AnalyticsService = factory.resolve()
     private lazy var authenticationService = AuthenticationService()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    weak var output: IntroduceInteractorOutput!
 
     func trackScreen(pageNum: Int) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
@@ -35,8 +35,11 @@ class IntroduceInteractor: IntroduceInteractorInput {
         } success: { [weak self] headers in
             guard let self = self else { return }
             self.output.goToLoginWithHeaders(with: user, headers: headers)
-        } fail: { _ in
+        } fail: { error in
             self.output.continueWithGoogleFailed()
+        } twoFactorAuth: { response in
+            self.tokenStorage.isRememberMe = true
+            self.output?.showTwoFactorAuthViewController(response: response)
         }
     }
 }

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaDem.ttf">
+            <string>TurkcellSaturaDem</string>
+        </array>
+        <array key="Turkcell_Satura_Regular.ttf">
+            <string>TurkcellSatura</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AppleGoogleAccountConnectionCell" rowHeight="207" id="KGk-i7-Jjw" customClass="AppleGoogleAccountConnectionCell" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="192"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LTp-7L-DRq">
+                        <rect key="frame" x="18" y="18" width="284" height="49"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="mSP-SS-yDd">
+                                <rect key="frame" x="0.0" y="0.0" width="284" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="c9z-VA-kbY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
+                                <color key="textColor" name="darkText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzK-SH-jcD">
+                                <rect key="frame" x="0.0" y="28" width="284" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DJA-5V-E2V">
+                        <rect key="frame" x="18" y="91" width="284" height="31"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nsu-1C-FM6">
+                                <rect key="frame" x="0.0" y="0.0" width="225" height="31"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="googleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="8nC-B9-TSX">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="GfP-J9-SNK"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Lk-6h-hLy">
+                                        <rect key="frame" x="30" y="0.0" width="195" height="31"/>
+                                        <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
+                                        <color key="textColor" name="darkText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C9i-ia-jf2">
+                                <rect key="frame" x="235" y="0.0" width="51" height="31"/>
+                                <connections>
+                                    <action selector="googleSwitchToggled:" destination="KGk-i7-Jjw" eventType="valueChanged" id="m7m-3d-rLa"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                    </stackView>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Qfv-lu-JcV">
+                        <rect key="frame" x="18" y="138" width="284" height="31"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="npr-AE-me6">
+                                <rect key="frame" x="0.0" y="0.0" width="225" height="31"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appleLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YXW-DS-mTk">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="afE-dF-kyM"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-gt-7Bt">
+                                        <rect key="frame" x="30" y="0.0" width="195" height="31"/>
+                                        <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="18"/>
+                                        <color key="textColor" name="darkText"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oL1-Zn-emG">
+                                <rect key="frame" x="235" y="0.0" width="51" height="31"/>
+                                <connections>
+                                    <action selector="appleSwitchToggled:" destination="KGk-i7-Jjw" eventType="valueChanged" id="Cgi-ZV-z4X"/>
+                                </connections>
+                            </switch>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" name="primaryBackground"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="LTp-7L-DRq" secondAttribute="trailing" constant="18" id="6hh-6w-qSm"/>
+                    <constraint firstItem="LTp-7L-DRq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="BSm-pP-Oug"/>
+                    <constraint firstItem="Qfv-lu-JcV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="HUa-ZQ-9KY"/>
+                    <constraint firstItem="DJA-5V-E2V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="Lug-qM-umL"/>
+                    <constraint firstItem="Qfv-lu-JcV" firstAttribute="top" secondItem="DJA-5V-E2V" secondAttribute="bottom" constant="16" id="Tl6-jB-29r"/>
+                    <constraint firstAttribute="trailing" secondItem="DJA-5V-E2V" secondAttribute="trailing" constant="18" id="Wh1-6o-y5x"/>
+                    <constraint firstAttribute="bottom" secondItem="Qfv-lu-JcV" secondAttribute="bottom" constant="23" id="XsY-4C-3RJ"/>
+                    <constraint firstItem="DJA-5V-E2V" firstAttribute="top" secondItem="LTp-7L-DRq" secondAttribute="bottom" constant="24" id="Yc2-O2-WfF"/>
+                    <constraint firstAttribute="trailing" secondItem="Qfv-lu-JcV" secondAttribute="trailing" constant="18" id="v48-PM-qo3"/>
+                    <constraint firstItem="LTp-7L-DRq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="xZZ-JW-v07"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" name="primaryBackground"/>
+            <connections>
+                <outlet property="appleLabel" destination="fhD-gt-7Bt" id="Lig-40-QS5"/>
+                <outlet property="appleLogo" destination="YXW-DS-mTk" id="cCa-OV-JJR"/>
+                <outlet property="appleSwitch" destination="oL1-Zn-emG" id="mhT-KZ-lkd"/>
+                <outlet property="descriptionLabel" destination="rzK-SH-jcD" id="5b7-nY-pPa"/>
+                <outlet property="googleLabel" destination="2Lk-6h-hLy" id="eLe-Sa-Ufg"/>
+                <outlet property="googleSwitch" destination="C9i-ia-jf2" id="OhG-3l-k9v"/>
+                <outlet property="titleLabel" destination="mSP-SS-yDd" id="xzk-1D-ZKy"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="181.47321428571428"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="appleLogo" width="15" height="19"/>
+        <image name="googleLogo" width="23" height="24"/>
+        <namedColor name="darkText">
+            <color red="0.30199998617172241" green="0.30199998617172241" blue="0.30199998617172241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

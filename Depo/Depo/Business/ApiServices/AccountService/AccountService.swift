@@ -566,20 +566,26 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         repeatPassword: String,
                         captchaId: String,
                         captchaAnswer: String,
+                        googleToken: String? = nil,
                         handler: @escaping (ErrorResult<Void, UpdatePasswordErrors>) -> Void) {
         
         debugLog("AccountService updatePassword")
         
-        let params: Parameters = ["oldPassword": oldPassword,
-                                  "password": newPassword,
+        var params: Parameters = ["password": newPassword,
                                   "repeatPassword": repeatPassword,
                                   "passwordRuleSetVersion": NumericConstants.passwordRuleSetVersion]
+        
+        if let googleToken = googleToken {
+            params = params + ["googleToken": googleToken]
+        } else {
+            params = params + ["oldPassword": oldPassword]
+        }
         
         let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
                                     HeaderConstant.CaptchaAnswer: captchaAnswer]
         
         sessionManager
-            .request(RouteRequests.Account.updatePassword,
+            .request(RouteRequests.Account.updatePasswordV2,
                      method: .post,
                      parameters: params,
                      encoding: JSONEncoding.prettyPrinted,

@@ -15,6 +15,7 @@ final class Section {
         case instagram
         case facebook
         case dropbox
+        case appleGoogle
     }
     
     enum ExpandState: Int {
@@ -47,11 +48,13 @@ final class Section {
 final class ConnectedAccountsDataSource: NSObject {
     
     weak var view: SocialConnectionCellDelegate?
+    weak var appleGoogleDelegate: AppleGoogleAccountConnectionCellDelegate?
     
     private let tableSections = [Section(account: .spotify, state: .shrinked),
                                  Section(account: .instagram, state: .shrinked),
                                  Section(account: .facebook, state: .shrinked),
-                                 Section(account: .dropbox, state: .shrinked)]
+                                 Section(account: .dropbox, state: .shrinked),
+                                 Section(account: .appleGoogle, state: .shrinked)]
 }
 
 // MARK: - UITableViewDataSource
@@ -90,6 +93,8 @@ extension ConnectedAccountsDataSource: UITableViewDataSource {
             cellId = CellsIdConstants.dropboxAccountConnectionCell
         case (.spotify, .shrinked):
             cellId = CellsIdConstants.spotifyAccountConnectionCell
+        case (.appleGoogle, .shrinked):
+            cellId = CellsIdConstants.appleGoogleAccountConnectionCell
             
         case (_, .expanded):
             cellId = CellsIdConstants.socialAccountRemoveConnectionCell
@@ -111,6 +116,8 @@ extension ConnectedAccountsDataSource: UITableViewDataSource {
         } else if let cell = cell as? SocialRemoveConnectionCell {
             section.mediator.set(removeConnectionCell: cell)
             cell.setup(with: section)
+        } else if let cell = cell as? AppleGoogleAccountConnectionCell {
+            cell.delegate = appleGoogleDelegate
         }
     }
 }

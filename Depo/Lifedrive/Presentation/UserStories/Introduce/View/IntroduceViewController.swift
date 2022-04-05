@@ -148,8 +148,7 @@ final class IntroduceViewController: ViewController {
         let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
         
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
-            if let error = error {
-                print(error)
+            if error != nil {
                 return
             }
             
@@ -157,14 +156,12 @@ final class IntroduceViewController: ViewController {
                 let user = GoogleUser(idToken: idToken, email: email)
                 self.user = user
                 self.output.onContinueWithGoogle(with: user)
-            } else {
-                return
             }
         }
     }
     
     @IBAction func onSignInWithApple(_ sender: Any) {
-        
+        //TODO -Apple login will be implemented
     }
     
     @IBAction func onLogin(_ sender: UIButton) {

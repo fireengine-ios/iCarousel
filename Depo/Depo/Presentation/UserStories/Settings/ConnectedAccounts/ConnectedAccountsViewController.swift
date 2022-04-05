@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GoogleSignIn
+import FirebaseCore
 
 
 final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPresenter {
@@ -22,10 +24,12 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     private lazy var spotyfyRouter: SpotifyRoutingService = factory.resolve()
     private let analyticsService: AnalyticsService = factory.resolve()
     private let dataSource = ConnectedAccountsDataSource()
+    private lazy var appleGoogleService = AppleGoogleLoginService()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.view = self
+        dataSource.appleGoogleDelegate = self
         setupScreen()
         setupTableView()
     }
@@ -54,7 +58,8 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
                            CellsIdConstants.facebookAccountConnectionCell,
                            CellsIdConstants.dropboxAccountConnectionCell,
                            CellsIdConstants.socialAccountRemoveConnectionCell,
-                           CellsIdConstants.spotifyAccountConnectionCell]
+                           CellsIdConstants.spotifyAccountConnectionCell,
+                           CellsIdConstants.appleGoogleAccountConnectionCell]
         
         for id in reusableIds {
             let nib = UINib(nibName: id, bundle: nil)
@@ -66,6 +71,46 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ConnectedAccountsScreen())
         analyticsService.logScreen(screen: .connectedAccounts)
         analyticsService.trackDimentionsEveryClickGA(screen: .connectedAccounts)
+    }
+    
+    private func showPasswordPopup(with idToken: String) {
+        let popup = RouterVC().passwordEnterPopup(with: idToken)
+        present(popup, animated: true)
+    }
+    
+    private func getGoogleTokenIfNeeded(handler: @escaping (String?) -> Void) {
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if user?.profile?.email == SingletonStorage.shared.accountInfo?.email {
+                handler(user?.authentication.idToken)
+            } else {
+                guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+                let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
+                
+                GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+                    if error != nil {
+                        handler(nil)
+                    }
+                    
+                    if let idToken = user?.authentication.idToken {
+                        handler(idToken)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func connectGoogleLogin(with idToken: String, handler: @escaping (Bool?) -> Void) {
+        appleGoogleService.connectGoogleLogin(with: idToken) { result in
+            switch result {
+            case .success:
+                handler(true)
+            case .preconditionFailed, .badRequest:
+                handler(false)
+                DispatchQueue.toMain {
+                    self.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+                }
+            }
+        }
     }
 }
 
@@ -120,8 +165,43 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
     }
 }
 
+extension ConnectedAccountsViewController: AppleGoogleAccountConnectionCellDelegate {
+    func connectGoogleLogin(callback: @escaping (Bool) -> Void) {
+        getGoogleTokenIfNeeded { idToken in
+            if let idToken = idToken {
+                self.connectGoogleLogin(with: idToken) { isSuccess in
+                    callback(isSuccess ?? false)
+                }
+            } else {
+                callback(false)
+            }
+        }
+    }
+    
+    func showPasswordRequiredPopup() {
+        let popUp = RouterVC().messageAndButtonPopup(with: "Google bağlantınızı kapatabilmek için öncelikle lifebox şifresi belirleminiz gerekiyor.",
+                                                     buttonTitle: TextConstants.nextTitle)
+        popUp.delegate = self
+        present(popUp, animated: true)
+    }
+    
+    func googleDisconnectFailed() {
+        DispatchQueue.toMain {
+            self.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+        }
+    }
+}
 
-
+extension ConnectedAccountsViewController: MessageAndButtonPopupDelegate {
+    func onActionButton() {
+        dismiss(animated: true)
+        
+        getGoogleTokenIfNeeded { token in
+            guard let token = token else { return }
+            self.showPasswordPopup(with: token)
+        }
+    }
+}
 
 
 

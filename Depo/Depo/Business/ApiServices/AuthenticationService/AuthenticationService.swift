@@ -304,6 +304,18 @@ class SignInWithGoogleParameters: BaseRequestParametrs {
     }
 }
 
+class GoogleLoginStatus: BaseRequestParametrs {
+    
+    override var patch: URL {
+        let patch = String(format: RouteRequests.googleLogin)
+        return URL(string: patch)!
+    }
+    
+    override var header: RequestHeaderParametrs {
+        return RequestHeaders.authification()
+    }
+}
+
 typealias  SuccessLogin = () -> Void
 typealias  SuccessLogout = () -> Void
 typealias  FailLoginType = FailResponse
@@ -413,10 +425,10 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    func googleLogin(user: SignInWithGoogleParameters, jsonHandler: HeadersHandler?, success: HeadersHandler?, fail: FailResponse?) {
-       
-        let params: [String: Any] = ["token": user.idToken,
-                                     LbRequestkeys.deviceInfo: Device.deviceInfo]
+    func googleLogin(user: SignInWithGoogleParameters, jsonHandler: HeadersHandler?, success: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
+        debugLog("AuthenticationService googleLogin")
+        
+        let params = user.requestParametrs as? [String: Any]
         
         SessionManager.sessionWithoutAuth.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
             .responseJSON { [weak self] response in
@@ -467,6 +479,18 @@ class AuthenticationService: BaseRequestService {
                         let jsonString = String(data: data, encoding: .utf8) {
                         
                         fail?(ErrorResponse.string(jsonString))
+                        return
+                    }
+                    
+                    if let statusCode = response.response?.statusCode, statusCode == 403 {
+                        
+                        SingletonStorage.shared.isTwoFactorAuthEnabled = true
+                        
+                        guard let data = response.data, let resp = TwoFactorAuthErrorResponse(data: data) else {
+                            assertionFailure()
+                            return
+                        }
+                        twoFactorAuth?(resp)
                         return
                     }
                     
@@ -911,6 +935,29 @@ class AuthenticationService: BaseRequestService {
                 case .failure(let error):
                     handler(.failed(error))
                 }
-        }
+            }
+    }
+    
+    func googleLoginStatus(success: SuccessMessageHandler?, fail: FailResponse?) {
+        debugLog("AuthenticationService googleLoginStatus")
+        
+        sessionManager
+            .request(RouteRequests.googleLoginStatus,
+                     method: .get,
+                     encoding: JSONEncoding.default)
+            .responseString { response in
+                switch response.result {
+                case .success(_):
+                    if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                        success?(statusJSON)
+                        return
+                    } else {
+                        let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                        fail?(ErrorResponse.error(error))
+                    }
+                case .failure(let error):
+                    fail?(ErrorResponse.error(error))
+                }
+            }
     }
 }

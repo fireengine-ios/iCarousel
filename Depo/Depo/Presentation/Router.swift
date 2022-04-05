@@ -1432,4 +1432,24 @@ class RouterVC: NSObject {
         return loginController
     }
     
+    func messageAndButtonPopup(with message: String, buttonTitle: String) -> MessageAndButtonPopup {
+        let controller = MessageAndButtonPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.message = message
+        controller.buttonTitle = buttonTitle
+        
+        return controller
+    }
+    
+    func passwordEnterPopup(with idToken: String) -> PasswordEnterPopup {
+        let controller = PasswordEnterPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.idToken = idToken
+        
+        return controller
+    }
 }
