@@ -17,8 +17,6 @@ final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
 
     override func setup() {
         super.setup()
-        // No need for change email button for recovery email
-        changeEmailButton.isHidden = true
 
         /// Send code once
         if !SingletonStorage.shared.isRecoveryEmailVerificationCodeSent {
@@ -51,6 +49,10 @@ final class VerifyRecoveryEmailPopUp: BaseEmailVerificationPopUp {
 
     override var verificationRemainingDays: Int {
         return SingletonStorage.shared.accountInfo?.recoveryEmailVerificationRemainingDays ?? 0
+    }
+
+    override func createChangeEmailPopUp() -> BaseChangeEmailPopUp {
+        return RouterVC().changeRecoveryEmailPopUp
     }
 
     override func verificationCodeEntered() {

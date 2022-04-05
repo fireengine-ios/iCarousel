@@ -15,6 +15,10 @@ final class FaceImageItemsRouter: BaseFilesGreedRouter {
 // MARK: FaceImageItemsRouterInput
 
 extension FaceImageItemsRouter: FaceImageItemsRouterInput {
+    func openMapSearch() {
+        router.pushViewController(viewController: router.mapSearchController())
+    }
+
     func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?, faceImageType: FaceImageType?) {
         let vc = router.imageFacePhotosController(album: album, item: item, status: .active, moduleOutput: moduleOutput, faceImageType: faceImageType)
         router.pushViewController(viewController: vc)

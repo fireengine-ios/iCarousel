@@ -1985,3 +1985,11 @@
 "save_to_my_lifebox_full_storage_title" = "iPhone Saklama Alanı Dolu";
 "save_to_my_lifebox_full_storage_body" = "Saklama alanınızı Ayarlar'da yöneterek bu iPhone'da yer açabilirsiniz.";
 "places_map_title" = "";
+"map_location_detail_header" = "";
+"beeline_feature_cancel_TC" = "";
+"security_popup_body" = "Şifreni unutman halinde hesabını kolayca kurtarabilmek için lütfen en az 1 alanı gir";
+"security_popup_header" = "Kurtarma E-postanı ya da Güvenlik Sorunu Belirle";
+"save_to_my_billo" = "Billo'ya Kaydet";
+"save_to_my_billo_download" = "Billo - %@ - %@.zip dosyasını indirmek mi istiyorsunuz?";
+"on_boarding_btn_google_login" = "";
+"on_boarding_or" = "";

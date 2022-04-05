@@ -123,10 +123,18 @@ final class PlacesPageParameters: BaseRequestParametrs {
 
 final class PlacesItem: Item {
     let responseObject: PlacesItemResponse
+    private(set) var isMapItemPlaceholder = false
     
     init(response: PlacesItemResponse) {
         responseObject = response
         super.init(placesItemResponse: response)
+    }
+
+    static func mapPlaceholderItem() -> PlacesItem {
+        let item = PlacesItem(response: PlacesItemResponse())
+        item.isMapItemPlaceholder = true
+        item.tmpDownloadUrl = URL(string: "lifebox://")
+        return item
     }
     
     required init?(coder aDecoder: NSCoder) {

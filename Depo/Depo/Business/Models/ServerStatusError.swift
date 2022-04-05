@@ -22,8 +22,10 @@ final class ServerStatusError {
         static let emptyPassword = "PASSWORD_FIELD_IS_EMPTY"
         static let emptyPhone = "PHONE_NUMBER_FIELD_IS_EMPTY"
         static let invalidEmail = "EMAIL_FIELD_IS_INVALID"
+        static let invalidRecoveryEmail = "RECOVERY_EMAIL_IS_INVALID"
         static let existPhone = "PHONE_NUMBER_IS_ALREADY_EXIST"
         static let existEmail = "EMAIL_ALREADY_EXISTS"
+        static let existRecoveryEmail = "RECOVERY_EMAIL_ALREADY_EXISTS"
         static let verifyEmail = "VERIFY_EXISTING_EMAIL"
         static let invalidPhone = "PHONE_NUMBER_IS_INVALID"
         static let invalidPassword = "INVALID_PASSWORD"
@@ -53,10 +55,10 @@ extension ServerStatusError: LocalizedError {
         case ErrorKeys.emptyPhone:
             return TextConstants.errorEmptyPhone
             
-        case ErrorKeys.invalidEmail:
+        case ErrorKeys.invalidEmail, ErrorKeys.invalidRecoveryEmail:
             return TextConstants.errorInvalidEmail
             
-        case ErrorKeys.existEmail:
+        case ErrorKeys.existEmail, ErrorKeys.existRecoveryEmail:
             return TextConstants.errorExistEmail
             
         case ErrorKeys.verifyEmail:

@@ -206,9 +206,17 @@ extension IAPManager {
     
     private func failedTransaction(_ transaction: SKPaymentTransaction) {
         debugLog("IAPManager failedTransaction...")
-        
+
+        let error = transactionError(for: transaction.error as NSError?)
+        let isCanceled = error.code == .paymentCancelled
+
+        if isCanceled {
+            debugLog("IAPManager transaction canceled")
+        } else {
+            debugLog("IAPManager transaction failed \(error)")
+        }
+
         if purchaseInProgress {
-            let error = transactionError(for: transaction.error as NSError?)
             if error.code == .paymentCancelled {
                 purchaseHandler(.canceled)
             } else {

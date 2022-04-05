@@ -60,6 +60,10 @@ final class VerifyEmailPopUp: BaseEmailVerificationPopUp {
         return SingletonStorage.shared.accountInfo?.emailVerificationRemainingDays ?? 0
     }
 
+    override func createChangeEmailPopUp() -> BaseChangeEmailPopUp {
+        return RouterVC().changeEmailPopUp
+    }
+
     override func verificationCodeEntered() {
         startActivityIndicator()
 

@@ -377,6 +377,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func onItemSelectedActiveState(item: BaseDataSourceItem) { }
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
+
+    func onSelectedMapPlaceholderItem() { }
     
     func didSelectAction(type: ActionType, on item: Item?, sender: Any?) {
         guard let item = item else {

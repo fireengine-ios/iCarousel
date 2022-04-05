@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class RouterVC: NSObject {
     
@@ -912,6 +913,16 @@ class RouterVC: NSObject {
         let controller = FaceImageItemsInitializer.initializePlacesController(with: "BaseFilesGreedViewController", moduleOutput: moduleOutput)
         return controller as! BaseFilesGreedChildrenViewController
     }
+
+    // MARK: Map
+
+    func mapSearchController() -> MapSearchViewController {
+        return MapSearchInitializer.initialize()
+    }
+
+    func mapLocationDetail(for group: MapMediaGroup) -> MapLocationDetailViewController {
+        return MapLocationDetailInitializer.initialize(nibName: "BaseFilesGreedViewController", group: group)
+    }
     
     // MARK: Analyses History page
     
@@ -1193,7 +1204,17 @@ class RouterVC: NSObject {
         
         return controller
     }
-    
+
+    var changeRecoveryEmailPopUp: ChangeRecoveryEmailPopUp {
+        let controller = ChangeRecoveryEmailPopUp()
+
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+
+        return controller
+    }
+
+
     // MARK: - Spotify
     
     func spotifyPlaylistsController(delegate: SpotifyPlaylistsViewControllerDelegate?) -> UIViewController {
@@ -1361,5 +1382,14 @@ class RouterVC: NSObject {
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
+    }
+    
+    var securityInfoPopup: SecurityInfoPopup {
+        let controller = SecurityInfoPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
     }
 }
