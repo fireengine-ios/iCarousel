@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginWithGooglePopup" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionLabel" destination="Z6x-Bc-0EQ" id="tFp-4I-u50"/>
-                <outlet property="emailLabel" destination="YPN-d7-R6v" id="VAZ-or-Ii8"/>
                 <outlet property="popupView" destination="NCa-fh-IRO" id="xck-gx-S9d"/>
                 <outlet property="saveButton" destination="wek-gB-swQ" id="Pqf-oW-Kh2"/>
                 <outlet property="view" destination="Ao9-CO-fwg" id="87Z-OU-tQk"/>
@@ -24,19 +23,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NCa-fh-IRO">
-                    <rect key="frame" x="30" y="343.5" width="354" height="219"/>
+                    <rect key="frame" x="30" y="358" width="354" height="190.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="oz0-nQ-hqZ">
-                            <rect key="frame" x="16" y="40" width="322" height="49"/>
+                            <rect key="frame" x="16" y="40" width="322" height="20.5"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPN-d7-R6v">
-                                    <rect key="frame" x="0.0" y="0.0" width="322" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z6x-Bc-0EQ">
-                                    <rect key="frame" x="0.0" y="28.5" width="322" height="20.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="322" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -44,7 +37,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bae-x5-3Wf">
-                            <rect key="frame" x="77" y="129" width="200" height="50"/>
+                            <rect key="frame" x="77" y="100.5" width="200" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wek-gB-swQ" customClass="RoundedButton" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>

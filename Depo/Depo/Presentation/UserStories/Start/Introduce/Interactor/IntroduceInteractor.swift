@@ -12,6 +12,7 @@ class IntroduceInteractor: IntroduceInteractorInput {
     private lazy var authenticationService = AuthenticationService()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     weak var output: IntroduceInteractorOutput!
+    var loginScreen: LoginViewController?
 
     func trackScreen(pageNum: Int) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
@@ -24,6 +25,8 @@ class IntroduceInteractor: IntroduceInteractorInput {
     }
     
     func signInWithGoogle(with user: GoogleUser) {
+        output.asyncOperationStarted()
+        
         authenticationService.googleLogin(user: SignInWithGoogleParameters(idToken: user.idToken)) { json in
             if let errorCode = json["errorCode"] as? Int {
                 if errorCode == 4101 {
@@ -34,7 +37,8 @@ class IntroduceInteractor: IntroduceInteractorInput {
             }
         } success: { [weak self] headers in
             guard let self = self else { return }
-            self.output.goToLoginWithHeaders(with: user, headers: headers)
+            self.loginScreen = RouterVC().loginWithHeaders(user: user, headers: headers) as? LoginViewController
+            self.loginScreen?.output.continueWithGoogleLogin()
         } fail: { error in
             self.output.continueWithGoogleFailed()
         } twoFactorAuth: { response in

@@ -6,11 +6,15 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput {
+class IntroducePresenter: BasePresenter, IntroduceModuleInput, IntroduceViewOutput {
 
     weak var view: IntroduceViewInput!
     var interactor: IntroduceInteractorInput!
     var router: IntroduceRouterInput!
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
 
     func viewIsReady() {
         interactor.trackScreen()
@@ -42,22 +46,27 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput {
 
 extension IntroducePresenter: IntroduceInteractorOutput {
     func signUpRequired(for user: GoogleUser) {
+        asyncOperationSuccess()
         router.onGoToRegister(with: user)
     }
     
     func passwordLoginRequired(for user: GoogleUser) {
+        asyncOperationSuccess()
         view.showGoogleLoginPopup(with: user)
     }
     
-    func goToLoginWithHeaders(with user: GoogleUser, headers: [String : Any]) {
-        router.goToLoginWithHeaders(with: user, headers: headers)
-    }
-    
     func continueWithGoogleFailed() {
+        asyncOperationFail()
         UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
     }
     
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+        asyncOperationSuccess()
         router.goToTwoFactorAuthViewController(response: response)
     }
+    
+    func asyncOperationStarted() {
+        startAsyncOperation()
+    }
+    
 }

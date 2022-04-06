@@ -138,4 +138,14 @@ enum Strings: String, Localizable {
     // MARK: - Security Popup
     case securityPopupHeader = "security_popup_header"
     case securityPopupBody = "security_popup_body"
+    
+    // MARK: - Apple/Google Login
+    case connectWithGoogle = "on_boarding_btn_google_login"
+    case connectWithApple = "on_boarding_btn_apple_login"
+    case onboardingButtonOr = "on_boarding_or"
+    case googleUserExistBody = "google_login_user_exists_body"
+    case googlePasswordRequired = "settings_google_password_required"
+    case settingsAppleGoogleTitle = "settings_google_apple_connect"
+    case settingsGoogleMatch = "settings_google"
+    case settingsAppleMatch = "settings_apple"
 }

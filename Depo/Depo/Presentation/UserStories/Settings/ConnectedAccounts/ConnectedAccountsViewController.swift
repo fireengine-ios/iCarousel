@@ -104,7 +104,12 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
             switch result {
             case .success:
                 handler(true)
-            case .preconditionFailed, .badRequest:
+            case .preconditionFailed:
+                handler(false)
+                DispatchQueue.toMain {
+                    self.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+                }
+            case.badRequest:
                 handler(false)
                 DispatchQueue.toMain {
                     self.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
@@ -179,7 +184,7 @@ extension ConnectedAccountsViewController: AppleGoogleAccountConnectionCellDeleg
     }
     
     func showPasswordRequiredPopup() {
-        let popUp = RouterVC().messageAndButtonPopup(with: "Google bağlantınızı kapatabilmek için öncelikle lifebox şifresi belirleminiz gerekiyor.",
+        let popUp = RouterVC().messageAndButtonPopup(with: localized(.googlePasswordRequired),
                                                      buttonTitle: TextConstants.nextTitle)
         popUp.delegate = self
         present(popUp, animated: true)

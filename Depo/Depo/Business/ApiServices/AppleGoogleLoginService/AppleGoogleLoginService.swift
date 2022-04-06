@@ -8,19 +8,44 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
+
+enum GoogeLoginMessageError: String, CaseIterable {
+    case invalidToken     = "INVALID_TOKEN"
+    case emailFieldEmpty  = "EMAIL_FIELD_IS_EMPTY"
+    case emailIsNotMatch  = "EMAIL_IS_NOT_MATCH"
+    case passwordRequired = "PASSWORD_REQUIRED"
+    case defaultError     = ""
+    
+    var errorMessage: String? {
+        switch self {
+        case .invalidToken:
+            return ""
+        case .emailFieldEmpty:
+            return ""
+        case .emailIsNotMatch:
+            return ""
+        case .passwordRequired:
+            return ""
+        case .defaultError:
+            return TextConstants.temporaryErrorOccurredTryAgainLater
+        }
+    }
+}
 
 enum GoogleLoginOperationResult {
     case success
-    case preconditionFailed
+    case preconditionFailed(status: GoogeLoginMessageError?)
     case badRequest
 }
 
 final class AppleGoogleLoginService: BaseRequestService {
     func disconnectGoogleLogin(completion: @escaping (GoogleLoginOperationResult) -> Void) {
         debugLog("AppleGoogleLoginService disconnectGoogleLogin")
-
+        
         SessionManager.customDefault
-            .request(RouteRequests.googleLoginDisconnect, method: .post,
+            .request(RouteRequests.googleLoginDisconnect,
+                     method: .post,
                      encoding: JSONEncoding.prettyPrinted)
             .responseString { response in
                 switch response.result {
@@ -28,10 +53,12 @@ final class AppleGoogleLoginService: BaseRequestService {
                     if let statusCode = response.response?.statusCode {
                         if statusCode == 200 {
                             completion(.success)
-                        } else if statusCode == 412 {
-                            completion(.preconditionFailed)
+                        } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                            for error in GoogeLoginMessageError.allCases where error.rawValue == statusJSON {
+                                completion(.preconditionFailed(status: error))
+                            }
                         } else {
-                            completion(.badRequest)
+                            completion(.preconditionFailed(status: .defaultError))
                         }
                     }
                 case .failure:
@@ -44,7 +71,8 @@ final class AppleGoogleLoginService: BaseRequestService {
         debugLog("AppleGoogleLoginService connectGoogleLogin")
         
         SessionManager.customDefault
-            .request(RouteRequests.googleLoginConnect, method: .post,
+            .request(RouteRequests.googleLoginConnect,
+                     method: .post,
                      encoding: idToken)
             .responseString { response in
                 switch response.result {
@@ -52,10 +80,12 @@ final class AppleGoogleLoginService: BaseRequestService {
                     if let statusCode = response.response?.statusCode {
                         if statusCode == 200 {
                             completion(.success)
-                        } else if statusCode == 412 {
-                            completion(.preconditionFailed)
+                        } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                            for error in GoogeLoginMessageError.allCases where error.rawValue == statusJSON {
+                                completion(.preconditionFailed(status: error))
+                            }
                         } else {
-                            completion(.badRequest)
+                            completion(.preconditionFailed(status: .defaultError))
                         }
                     }
                 case .failure:

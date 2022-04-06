@@ -7,7 +7,7 @@
 //
 
 class LoginPresenter: BasePresenter {
-    var view: LoginViewInput!
+    weak var view: LoginViewInput!
     var interactor: LoginInteractorInput!
     var router: LoginRouterInput!
     

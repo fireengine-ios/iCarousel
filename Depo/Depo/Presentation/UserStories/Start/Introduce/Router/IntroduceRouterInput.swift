@@ -13,6 +13,5 @@ protocol IntroduceRouterInput {
     func onGoToLogin()
     func onGoToLoginWith(with user: GoogleUser)
     func onGoToRegister(with user: GoogleUser)
-    func goToLoginWithHeaders(with user: GoogleUser, headers: [String : Any])
     func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
 }

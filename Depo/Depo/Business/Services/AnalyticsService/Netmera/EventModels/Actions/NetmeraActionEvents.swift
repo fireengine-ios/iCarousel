@@ -79,7 +79,7 @@ extension NetmeraEvents.Actions {
             case .spotify:
                 socialChannel = .spotify
             case .appleGoogle:
-                socialChannel = .google
+                socialChannel = .appleGoogle
             }
             self.init(status: status.text, channelType: socialChannel.text)
         }

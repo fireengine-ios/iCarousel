@@ -20,7 +20,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
-        view.titleLabel.text = TextConstants.newPassword
+        view.titleLabel.text = TextConstants.registrationCellTitlePassword
         view.passwordTextField.placeholder = TextConstants.enterYourNewPassword
         view.passwordTextField.returnKeyType = .next
         return view
@@ -28,7 +28,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     
     private let repeatPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
-        view.titleLabel.text = TextConstants.repeatPassword
+        view.titleLabel.text = TextConstants.registrationCellTitleReEnterPassword
         view.passwordTextField.placeholder = TextConstants.enterYourRepeatPassword
         view.passwordTextField.returnKeyType = .next
         return view
@@ -73,7 +73,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     
     @IBOutlet private weak var okButton: UIButton! {
         willSet {
-            newValue.setTitle("OK", for: .normal)
+            newValue.setTitle(TextConstants.ok, for: .normal)
             newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
             newValue.setTitleColor(UIColor.lrTealishTwo, for: .highlighted)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)

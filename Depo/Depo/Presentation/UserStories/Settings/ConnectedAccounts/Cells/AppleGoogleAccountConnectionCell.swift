@@ -28,7 +28,7 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.text = "ID Eşleştirme"
+            newValue.text = localized(.settingsAppleGoogleTitle)
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.textColor = ColorConstants.darkText
         }
@@ -46,7 +46,7 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
     @IBOutlet private weak var googleLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.text = "Google ID eşleştirme"
+            newValue.text = localized(.settingsGoogleMatch)
             newValue.font = UIFont.TurkcellSaturaFont(size: 14)
             newValue.textColor = ColorConstants.darkText
         }
@@ -55,7 +55,7 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
     @IBOutlet private weak var appleLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.text = "Apple ID eşleştirme"
+            newValue.text = localized(.settingsAppleMatch)
             newValue.font = UIFont.TurkcellSaturaFont(size: 14)
             newValue.textColor = ColorConstants.darkText
         }
@@ -118,9 +118,11 @@ extension AppleGoogleAccountConnectionCell {
             switch disconnect {
             case .success:
                 self.googleSwitch.setOn(false, animated: true)
-            case .preconditionFailed:
+            case .preconditionFailed(let error):
                 self.googleSwitch.setOn(true, animated: false)
-                self.delegate?.showPasswordRequiredPopup()
+                if error == .passwordRequired {
+                    self.delegate?.showPasswordRequiredPopup()
+                }
             case .badRequest:
                 self.googleSwitch.setOn(true, animated: false)
                 self.delegate?.googleDisconnectFailed()

@@ -10,7 +10,7 @@ import UIKit
 
 class IntroduceRouter: IntroduceRouterInput {
     let router = RouterVC()
-    
+        
     func onGoToRegister() {
         let register = router.registrationScreen
         router.pushViewController(viewController: register!)
@@ -32,12 +32,6 @@ class IntroduceRouter: IntroduceRouterInput {
         let loginScreen = router.loginWithGoogle(user: user)
         
         router.pushViewController(viewController: loginScreen)
-    }
-    
-    func goToLoginWithHeaders(with user: GoogleUser, headers: [String : Any]) {
-        let loginScreen = router.loginWithHeaders(user: user, headers: headers) as? LoginViewController
-        
-        loginScreen?.output.continueWithGoogleLogin()
     }
     
     func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {

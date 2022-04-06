@@ -50,7 +50,7 @@ class IntroduceViewController: ViewController {
     
     @IBOutlet private weak var orLabel: UILabel! {
         willSet {
-            newValue.text = "or"
+            newValue.text = localized(.onboardingButtonOr)
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 15)
             newValue.textColor = .white
         }
@@ -58,7 +58,7 @@ class IntroduceViewController: ViewController {
     
     @IBOutlet private weak var signInWithGoogleButton: RoundedInsetsButton! {
         willSet {
-            newValue.setTitle("Sign in with Google", for: .normal)
+            newValue.setTitle(localized(.connectWithGoogle), for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
             newValue.backgroundColor = .white
             newValue.setTitleColor(ColorConstants.billoGray, for: .normal)
@@ -70,7 +70,7 @@ class IntroduceViewController: ViewController {
     
     @IBOutlet weak var signInWithAppleButton: RoundedInsetsButton! {
         willSet {
-            newValue.setTitle("Sign in with Apple", for: .normal)
+            newValue.setTitle(localized(.connectWithApple), for: .normal)
             newValue.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             newValue.backgroundColor = .white
             newValue.setTitleColor(UIColor.black, for: .normal)
