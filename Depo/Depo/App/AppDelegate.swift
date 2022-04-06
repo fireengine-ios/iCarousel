@@ -182,6 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("I have received a URL through a custom sceme! \(url.absoluteString)")
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+            storageVars.isAppFirstLaunchForPublicSharedItems = true
             self.handleIncomingDynamicLink(dynamicLink)
             return true
         }
@@ -491,6 +492,7 @@ extension AppDelegate {
             let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingUrl) { (dynamicLink, error) in
                 guard error == nil else { return }
                 if let dynamicLink = dynamicLink {
+                    self.storageVars.isAppFirstLaunchForPublicSharedItems = false
                     self.handleIncomingDynamicLink(dynamicLink)
                 }
             }
