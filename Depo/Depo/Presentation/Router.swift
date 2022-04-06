@@ -1392,4 +1392,64 @@ class RouterVC: NSObject {
         
         return controller
     }
+    
+    var loginWithGooglePopup: LoginWithGooglePopup {
+        let controller = LoginWithGooglePopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
+    func loginWithGoogle(user: GoogleUser) -> UIViewController {
+        let initializer = LoginModuleInitializer()
+        let loginController = LoginViewController(nibName: "LoginViewController",
+                                                  bundle: nil)
+        initializer.loginViewController = loginController
+        initializer.setupVC(with: user)
+ 
+        return loginController
+    }
+    
+    func registerWithGoogle(user: GoogleUser) -> UIViewController {
+        let initializer = RegistrationModuleInitializer()
+        let registerController = RegistrationViewController(nibName: "RegistrationScreen",
+                                                            bundle: nil)
+        initializer.registrationViewController = registerController
+        initializer.setupVC(with: user)
+ 
+        return registerController
+    }
+    
+    func loginWithHeaders(user: GoogleUser, headers: [String:Any]) -> UIViewController {
+        let initializer = LoginModuleInitializer()
+        let loginController = LoginViewController(nibName: "LoginViewController",
+                                                  bundle: nil)
+        initializer.loginViewController = loginController
+        initializer.setupVC(with: user, headers: headers)
+ 
+        return loginController
+    }
+    
+    func messageAndButtonPopup(with message: String, buttonTitle: String) -> MessageAndButtonPopup {
+        let controller = MessageAndButtonPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.message = message
+        controller.buttonTitle = buttonTitle
+        
+        return controller
+    }
+    
+    func passwordEnterPopup(with idToken: String) -> PasswordEnterPopup {
+        let controller = PasswordEnterPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.idToken = idToken
+        
+        return controller
+    }
 }

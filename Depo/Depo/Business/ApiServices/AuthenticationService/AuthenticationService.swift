@@ -21,6 +21,7 @@ class AuthenticationUser: BaseRequestParametrs {
     let password: String
     let rememberMe: Bool
     let attachedCaptcha: CaptchaParametrAnswer?
+    let googleToken: String?
     
     override var requestParametrs: Any {
         let dict: [String: Any] = [LbRequestkeys.username   : login,
@@ -49,11 +50,12 @@ class AuthenticationUser: BaseRequestParametrs {
         return result
     }
     
-    init(login: String, password: String, rememberMe: Bool, attachedCaptcha: CaptchaParametrAnswer?) {
+    init(login: String, password: String, rememberMe: Bool, attachedCaptcha: CaptchaParametrAnswer?, googleToken: String? = nil) {
         self.login = login
         self.password = password
         self.rememberMe = rememberMe
         self.attachedCaptcha = attachedCaptcha
+        self.googleToken = googleToken
     }
 }
 
@@ -93,6 +95,7 @@ class SignUpUser: BaseRequestParametrs {
     let sendOtp: Bool
     let captchaID: String?
     let captchaAnswer: String?
+    let googleToken: String?
     var brandType: String {
         #if LIFEDRIVE 
             return "BILLO"
@@ -125,22 +128,25 @@ class SignUpUser: BaseRequestParametrs {
         return RouteRequests.signUp
     }
 
-    init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil) {
+    init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil,
+         googleToken: String? = nil) {
         self.phone = phone
         self.mail = mail
         self.password = password
         self.sendOtp = sendOtp
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
+        self.googleToken = googleToken
     }
     
-    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool) {
+    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool, googleToken: String? = nil) {
         self.phone = registrationUserInfo.phone
         self.mail = registrationUserInfo.mail
         self.password = registrationUserInfo.password
         self.sendOtp = sentOtp
         self.captchaID = registrationUserInfo.captchaID
         self.captchaAnswer = registrationUserInfo.captchaAnswer
+        self.googleToken = googleToken
     }
 }
 
@@ -274,10 +280,47 @@ class EmailVerification: BaseRequestParametrs {
     }
 }
 
+class SignInWithGoogleParameters: BaseRequestParametrs {
+    
+    let idToken: String
+    
+    override var requestParametrs: Any {
+        let dict: [String: Any] = ["token": idToken,
+                                   LbRequestkeys.deviceInfo : Device.deviceInfo]
+        return dict
+    }
+    
+    override var patch: URL {
+        let patch = String(format: RouteRequests.googleLogin)
+        return URL(string: patch, relativeTo: super.patch)!
+    }
+    
+    override var header: RequestHeaderParametrs {
+        return RequestHeaders.base()
+    }
+    
+    init(idToken: String) {
+        self.idToken = idToken
+    }
+}
+
+class GoogleLoginStatus: BaseRequestParametrs {
+    
+    override var patch: URL {
+        let patch = String(format: RouteRequests.googleLogin)
+        return URL(string: patch)!
+    }
+    
+    override var header: RequestHeaderParametrs {
+        return RequestHeaders.authification()
+    }
+}
+
 typealias  SuccessLogin = () -> Void
 typealias  SuccessLogout = () -> Void
 typealias  FailLoginType = FailResponse
 typealias  HeadersHandler = ([String: Any]) -> Void
+typealias  SuccessMessageHandler = (String) -> Void
 
 class AuthenticationService: BaseRequestService {
     
@@ -296,9 +339,13 @@ class AuthenticationService: BaseRequestService {
         
         storageVars.currentUserID = user.login
         
-        let params: [String: Any] = ["username": user.login,
+        var params: [String: Any] = ["username": user.login,
                                      "password": user.password,
                                      LbRequestkeys.deviceInfo: Device.deviceInfo]
+        
+        if let googleToken = user.googleToken {
+            params = params + ["googleToken": googleToken]
+        }
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
                 .responseString { [weak self] response in
@@ -376,6 +423,96 @@ class AuthenticationService: BaseRequestService {
                         fail?(ErrorResponse.error(error))
                     }
         }
+    }
+    
+    func googleLogin(user: SignInWithGoogleParameters, jsonHandler: HeadersHandler?, success: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
+        debugLog("AuthenticationService googleLogin")
+        
+        let params = user.requestParametrs as? [String: Any]
+        
+        SessionManager.sessionWithoutAuth.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted)
+            .responseJSON { [weak self] response in
+                switch response.result {
+                case .success(let json):
+                    
+                    if let json = json as? [String: Any], let errorCode = json["errorCode"] as? Int {
+                        if errorCode == 4101 || errorCode == 4102 {
+                            jsonHandler?(json)
+                            return
+                        }
+                    }
+    
+                    guard let headers = response.response?.allHeaderFields as? [String: Any] else {
+                        let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                        fail?(ErrorResponse.error(error))
+                        return
+                    }
+                    if let accessToken = headers[HeaderConstant.AuthToken] as? String {
+                        self?.tokenStorage.accessToken = accessToken
+                    }
+                    
+                    if let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
+                        self?.tokenStorage.refreshToken = refreshToken
+                    }
+                    
+                    /// must be after accessToken save logic
+                    if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
+                        accountWarning == HeaderConstant.emptyMSISDN ||
+                        accountWarning == HeaderConstant.emptyEmail {
+                        success?(headers)
+                        return
+                    } else if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                        accountStatus.uppercased() == ErrorResponseText.accountDeleted {
+                        success?(headers)
+                        return
+                    }
+                    
+                    if self?.tokenStorage.refreshToken == nil {
+                        let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                        fail?(ErrorResponse.error(error))
+                        return
+                    }
+                    
+                    if let statusCode = response.response?.statusCode,
+                        statusCode >= 300, statusCode != 403,
+                        let data = response.data,
+                        let jsonString = String(data: data, encoding: .utf8) {
+                        
+                        fail?(ErrorResponse.string(jsonString))
+                        return
+                    }
+                    
+                    if let statusCode = response.response?.statusCode, statusCode == 403 {
+                        
+                        SingletonStorage.shared.isTwoFactorAuthEnabled = true
+                        
+                        guard let data = response.data, let resp = TwoFactorAuthErrorResponse(data: data) else {
+                            assertionFailure()
+                            return
+                        }
+                        twoFactorAuth?(resp)
+                        return
+                    }
+                    
+                    SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+                        CacheManager.shared.actualizeCache()
+                        
+                        SingletonStorage.shared.isTwoFactorAuthEnabled = false
+                        
+                        if #available(iOS 14.0, *) {
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
+                        
+                        self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
+                            success?(headers)
+                        })
+                    }, fail: { error in
+                        fail?(error)
+                    })
+                case .failure(let error):
+                    fail?(ErrorResponse.error(error))
+                }
+            }
     }
 
     enum ValidateLoginPasswordResult {
@@ -546,10 +683,14 @@ class AuthenticationService: BaseRequestService {
     func signUp(user: SignUpUser, handler: @escaping (ErrorResult<SignUpSuccessResponse, Error>) -> Void) {
         debugLog("AuthenticationService signUp")
 
-        guard let params = user.requestParametrs as? Parameters else {
+        guard var params = user.requestParametrs as? Parameters else {
             assertionFailure("wrong signUp parameters")
             handler(.failure(SignupResponseError(status: .networkError)))
             return
+        }
+        
+        if let googleToken = user.googleToken {
+            params = params + [LbRequestkeys.googleToken : googleToken]
         }
 
         sessionManagerWithoutToken
@@ -794,6 +935,29 @@ class AuthenticationService: BaseRequestService {
                 case .failure(let error):
                     handler(.failed(error))
                 }
-        }
+            }
+    }
+    
+    func googleLoginStatus(success: SuccessMessageHandler?, fail: FailResponse?) {
+        debugLog("AuthenticationService googleLoginStatus")
+        
+        sessionManager
+            .request(RouteRequests.googleLoginStatus,
+                     method: .get,
+                     encoding: JSONEncoding.default)
+            .responseString { response in
+                switch response.result {
+                case .success(_):
+                    if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                        success?(statusJSON)
+                        return
+                    } else {
+                        let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                        fail?(ErrorResponse.error(error))
+                    }
+                case .failure(let error):
+                    fail?(ErrorResponse.error(error))
+                }
+            }
     }
 }

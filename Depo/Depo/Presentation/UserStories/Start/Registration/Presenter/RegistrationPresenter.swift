@@ -52,11 +52,12 @@ extension RegistrationPresenter: RegistrationViewOutput {
         interactor.validatePassword(password, repassword: repassword)
     }
     
-    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
+    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?, googleToken: String?) {
         interactor.validateUserInfo(email: email.replacingOccurrences(of: " ", with: ""),
                                     code: code, phone: phone,
                                     password: password, repassword: repassword,
-                                    captchaID: captchaID, captchaAnswer: captchaAnswer)
+                                    captchaID: captchaID, captchaAnswer: captchaAnswer,
+                                    googleToken: googleToken)
     }
     
     func openSupport() {

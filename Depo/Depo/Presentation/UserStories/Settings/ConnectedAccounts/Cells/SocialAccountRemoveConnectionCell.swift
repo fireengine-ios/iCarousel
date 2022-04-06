@@ -107,6 +107,8 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         case .spotify:
             return (TextConstants.spotifyRemoveConnectionWarning,
                     TextConstants.spotifyRemoveConnectionWarningMessage)
+        case .appleGoogle:
+            return (" "," ")
         }
     }
 }

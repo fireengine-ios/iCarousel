@@ -130,6 +130,7 @@ final class LoginViewController: ViewController {
     //MARK: Vars
     var output: LoginViewOutput!
     private let keyboard = Typist.shared
+    var googleUser: GoogleUser?
     
     //MARK: - Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -148,6 +149,8 @@ final class LoginViewController: ViewController {
 
         passwordEnterView.textField.text = "Alp071202+"// "zxcvbn"//".FsddQ646"
         #endif
+        
+        setGoogleUserIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -246,6 +249,14 @@ final class LoginViewController: ViewController {
         view.endEditing(true)
     }
     
+    private func setGoogleUserIfNeeded() {
+        if googleUser != nil {
+            loginEnterView.textField.text = googleUser?.email
+            loginEnterView.isUserInteractionEnabled = false
+            forgotPasswordButton.isHidden = true
+        }
+    }
+    
     //MARK: - IBActions
     
     @IBAction func onRememberMeTap(_ sender: UIButton) {
@@ -259,12 +270,14 @@ final class LoginViewController: ViewController {
         
         if captchaView.isHidden {
             output.sendLoginAndPassword(login: loginEnterView.textField.text ?? "",
-                                        password: passwordEnterView.textField.text ?? "")
+                                        password: passwordEnterView.textField.text ?? "",
+                                        googleToken: googleUser?.idToken)
         } else {
             output.sendLoginAndPasswordWithCaptcha(login: loginEnterView.textField.text ?? "",
                                                    password: passwordEnterView.textField.text ?? "",
                                                    captchaID: captchaView.currentCaptchaUUID,
-                                                   captchaAnswer: captchaView.captchaAnswerTextField.text ?? "")
+                                                   captchaAnswer: captchaView.captchaAnswerTextField.text ?? "",
+                                                   googleToken: googleUser?.idToken)
         }
     }
     

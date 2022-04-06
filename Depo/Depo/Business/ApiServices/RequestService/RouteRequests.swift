@@ -356,6 +356,7 @@ struct RouteRequests {
         static let accountApi = baseUrl +/ "account"
         
         static let updatePassword = accountApi +/ "updatePassword"
+        static let updatePasswordV2 = baseUrl +/ "/v2/account/updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
 
@@ -480,4 +481,10 @@ struct RouteRequests {
     // MARK: - Map
     static let map = "map/%f,%f/%f,%f/%d"
     static let mapList = "map/list/%@?page=%d&size=%d"
+    
+    // MARK: - Google Login
+    static let googleLogin = "auth/google?rememberMe=true"
+    static let googleLoginStatus = baseUrl +/ "google/login/status"
+    static let googleLoginDisconnect = baseUrl +/ "google/login/disconnect"
+    static let googleLoginConnect = baseUrl +/ "google/login/connect"
 }

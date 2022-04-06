@@ -22,7 +22,8 @@ protocol RegistrationInteractorInput {
                           password: String,
                           repassword: String,
                           captchaID: String?,
-                          captchaAnswer: String?)
+                          captchaAnswer: String?,
+                          googleToken: String?)
     
     func checkCaptchaRequerement()
 
