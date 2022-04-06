@@ -18,6 +18,12 @@ extension UIViewController {
             customTitleView.setSubTitle(subTitle)
 
             navigationItem.titleView = customTitleView
+
+            #if MAIN_APP
+            if let viewController = self as? ViewController {
+                customTitleView.updateColors(for: viewController.preferredNavigationBarStyle)
+            }
+            #endif
         } else {
             navigationItem.titleView = nil
             navigationItem.title = title
