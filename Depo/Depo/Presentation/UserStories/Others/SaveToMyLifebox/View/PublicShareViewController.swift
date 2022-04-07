@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
+class PublicShareViewController: BaseViewController {
     
     //MARK: -IBOutlets
     @IBOutlet private weak var tableView: UITableView!
@@ -46,16 +46,12 @@ class PublicShareViewController: BaseViewController, ControlTabBarProtocol {
         output.viewIsReady()
         isLoading = true
         actionView.delegate = self
+        needToShowTabBar = false
         
         if isRootFolder {
             output.getPublicSharedItemsCount()
             output.trackScreen()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        hideTabBar()
     }
     
     //MARK: -Helpers

@@ -21,7 +21,7 @@ extension NavigationBarStyling {
         case .withLogo:
             let size = preferredNavigationBarStyle.titleViewSize
             let titleView = UIView(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-            let imageView = UIImageView(image: image(NavigationBarImages.logo))
+            let imageView = UIImageView(image: imageAsset(NavigationBarImages.logo))
             titleView.addSubview(imageView)
             imageView.frame = titleView.bounds
 

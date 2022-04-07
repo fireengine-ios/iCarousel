@@ -130,8 +130,6 @@ final class PhotoVideoCollectionViewManager {
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionView.elementKindSectionHeader)
         collectionView.isPrefetchingEnabled = false
-        //        collectionView.alwaysBounceVertical = true
-        //        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
     }
     
     private func setupPullToRefresh() {
@@ -148,7 +146,6 @@ final class PhotoVideoCollectionViewManager {
         
         scrolliblePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning, .sharedWithMeUpload])
         
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(scrolliblePopUpView)
         
         scrolliblePopUpView.translatesAutoresizingMaskIntoConstraints = false
@@ -178,7 +175,7 @@ final class PhotoVideoCollectionViewManager {
         }
         collectionView.updateConstraints()
         
-        collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 25, right: 0)
+        collectionView.contentInset.top = height
         collectionView.addSubview(subView)
         sliderController.view.frame = subView.bounds
         
@@ -239,7 +236,7 @@ extension PhotoVideoCollectionViewManager: CardsContainerViewDelegate {
             
             // TODO: need layoutIfNeeded?
             self.collectionView.superview?.layoutIfNeeded() 
-            self.collectionView.contentInset = UIEdgeInsets(top: calculatedH, left: 0, bottom: 25, right: 0)
+            self.collectionView.contentInset.top = calculatedH
         }, completion: { [weak self] _ in
             guard let self = self else {
                 return

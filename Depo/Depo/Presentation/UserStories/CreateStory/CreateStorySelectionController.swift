@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class CreateStorySelectionController: BaseViewController, ControlTabBarProtocol {
+final class CreateStorySelectionController: BaseViewController {
     
     internal var selectedItems = [SearchItemResponse]() {
         willSet {
@@ -72,10 +72,6 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     }
     
     private func setupNavigation() {
-        
-        hideTabBar()
-        
-        
         setTitle(withString: navTitle)
         
         let cancelButton = UIBarButtonItem(title: TextConstants.cancel, target: self, selector: #selector(hideController))

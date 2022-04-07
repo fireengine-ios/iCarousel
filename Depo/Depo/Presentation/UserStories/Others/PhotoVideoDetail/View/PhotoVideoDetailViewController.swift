@@ -323,10 +323,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.reloadData()
     }
     
-    override func getBackgroundColor() -> UIColor {
-        return UIColor.black
-    }
-    
     @objc private func applicationDidEnterBackground(_ application: UIApplication) {
         localPlayer?.pause()
     }

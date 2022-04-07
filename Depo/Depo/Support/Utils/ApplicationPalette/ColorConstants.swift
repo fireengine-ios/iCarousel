@@ -18,6 +18,9 @@ enum AppColor {
     case navigationBarTitleBlack
     case navigationBarIconsBlack
 
+    // MARK: TabBar
+    case tabBarTint
+    case tabBarTintSelected
 
     case primaryBackground
     case secondaryBackground

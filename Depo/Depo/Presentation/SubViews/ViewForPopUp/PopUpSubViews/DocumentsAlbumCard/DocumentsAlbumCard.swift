@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
+final class DocumentsAlbumCard: BaseCardView {
     
     @IBOutlet private weak var contentStackView: UIStackView!
     @IBOutlet private weak var imagesStackView: UIStackView!

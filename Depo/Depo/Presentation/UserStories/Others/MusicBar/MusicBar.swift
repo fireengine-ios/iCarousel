@@ -7,6 +7,7 @@
 //
 
 class MusicBar: UIView {
+    static let standardHeight: CGFloat = 70
     
     lazy var player: MediaPlayer = factory.resolve()
 

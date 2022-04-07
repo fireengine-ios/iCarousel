@@ -44,7 +44,7 @@ private enum CampaignUserStatus {
     }
 }
 
-final class CampaignCard: BaseCardView, ControlTabBarProtocol {
+final class CampaignCard: BaseCardView {
     
     @IBOutlet private weak var campaignCardDesigner: CampaignCardDesigner!
     @IBOutlet private weak var titleLabel: UILabel!
@@ -131,7 +131,6 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
             assertionFailure()
             return
         }
-        hideTabBar()
         let vc = WebViewController(urlString: url)
         RouterVC().pushViewController(viewController: vc)
     }

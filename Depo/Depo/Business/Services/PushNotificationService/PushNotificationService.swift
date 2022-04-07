@@ -328,6 +328,8 @@ final class PushNotificationService {
                 
             case .gallery:
                 tabBarVC.showPhotoScreen()
+            case .discover:
+                break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
@@ -355,11 +357,11 @@ private extension PushNotificationService {
     }
 
     func openFloatingMenu() {
-        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
-            return
-        }
-
-        tabBarVC.showRainbowIfNeed()
+//        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
+//            return
+//        }
+//
+//        tabBarVC.showRainbowIfNeed()
     }
 
     func openPackages() {

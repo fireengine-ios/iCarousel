@@ -48,7 +48,6 @@ final class HomePageViewController: BaseViewController {
         debugLog("HomePage viewDidLoad")
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         debugLog("HomePage DataSource setuped")
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         
         CardsManager.default.addViewForNotification(view: homePageDataSource)
         

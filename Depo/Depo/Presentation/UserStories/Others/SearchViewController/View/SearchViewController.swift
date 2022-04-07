@@ -42,9 +42,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     var searchTextField: UITextField?
     var navBarConfigurator = NavigationBarConfigurator()
     var editingTabBar: BottomSelectionTabBarViewController?
-    
-    private var goBack = false
-    
+
     // MARK: - Life Cicle
     
     override func viewDidLoad() {
@@ -66,10 +64,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let topBarVc = UIApplication.topController() as? TabBarViewController {
-            topBarVc.statusBarStyle = .default
-        }
-        
         editingTabBar?.view.layoutIfNeeded()
         
         let allVisibleCells = collectionView.indexPathsForVisibleItems
@@ -88,15 +82,9 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         searchBar.resignFirstResponder()
 
-        if goBack {
-            if let topBarVc = UIApplication.topController() as? TabBarViewController {
-                topBarVc.statusBarStyle = .lightContent
-            }
-        }
-        
         output.viewWillDisappear()
     }
     
@@ -351,7 +339,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func dismissController(animated: Bool) {
-        goBack = true
         navigationController?.delegate = self
         navigationController?.popViewController(animated: animated)
     }

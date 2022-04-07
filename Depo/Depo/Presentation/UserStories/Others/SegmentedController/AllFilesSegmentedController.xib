@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,20 +49,20 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-FJ-x8O">
-                    <rect key="frame" x="0.0" y="104" width="414" height="758"/>
+                    <rect key="frame" x="0.0" y="104" width="414" height="792"/>
                     <color key="backgroundColor" name="primaryBackground"/>
                 </view>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="yQf-Ex-lDW"/>
+            <viewLayoutGuide key="safeArea" id="jch-WX-Mvt"/>
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
-                <constraint firstItem="yQf-Ex-lDW" firstAttribute="trailing" secondItem="ChU-gk-RnU" secondAttribute="trailing" id="3uM-M7-3GI"/>
-                <constraint firstItem="yQf-Ex-lDW" firstAttribute="bottom" secondItem="AfE-FJ-x8O" secondAttribute="bottom" id="6F1-Iy-Rn1"/>
-                <constraint firstItem="ChU-gk-RnU" firstAttribute="top" secondItem="yQf-Ex-lDW" secondAttribute="top" id="Bsb-7h-vmp"/>
+                <constraint firstAttribute="trailing" secondItem="ChU-gk-RnU" secondAttribute="trailing" id="3uM-M7-3GI"/>
+                <constraint firstAttribute="bottom" secondItem="AfE-FJ-x8O" secondAttribute="bottom" id="6F1-Iy-Rn1"/>
+                <constraint firstItem="ChU-gk-RnU" firstAttribute="top" secondItem="jch-WX-Mvt" secondAttribute="top" id="Bsb-7h-vmp"/>
                 <constraint firstItem="AfE-FJ-x8O" firstAttribute="top" secondItem="ChU-gk-RnU" secondAttribute="bottom" id="ItY-UO-LyO"/>
-                <constraint firstItem="AfE-FJ-x8O" firstAttribute="leading" secondItem="yQf-Ex-lDW" secondAttribute="leading" id="PcN-fq-KXg"/>
-                <constraint firstItem="yQf-Ex-lDW" firstAttribute="trailing" secondItem="AfE-FJ-x8O" secondAttribute="trailing" id="feu-iU-fiN"/>
-                <constraint firstItem="ChU-gk-RnU" firstAttribute="leading" secondItem="yQf-Ex-lDW" secondAttribute="leading" id="rrW-WV-J9Q"/>
+                <constraint firstItem="AfE-FJ-x8O" firstAttribute="leading" secondItem="YCK-Ld-STD" secondAttribute="leading" id="PcN-fq-KXg"/>
+                <constraint firstAttribute="trailing" secondItem="AfE-FJ-x8O" secondAttribute="trailing" id="feu-iU-fiN"/>
+                <constraint firstItem="ChU-gk-RnU" firstAttribute="leading" secondItem="YCK-Ld-STD" secondAttribute="leading" id="rrW-WV-J9Q"/>
             </constraints>
             <point key="canvasLocation" x="140" y="154"/>
         </view>

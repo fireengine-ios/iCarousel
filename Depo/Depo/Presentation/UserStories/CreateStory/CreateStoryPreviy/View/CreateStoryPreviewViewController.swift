@@ -44,11 +44,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     
     var player: AVPlayer?
     var playerController: FixedAVPlayerViewController?
-    
-    override func getBackgroundColor() -> UIColor {
-        return viewForPlayer.backgroundColor ?? UIColor.black
-    }
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         

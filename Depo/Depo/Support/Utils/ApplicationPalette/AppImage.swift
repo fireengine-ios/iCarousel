@@ -17,9 +17,9 @@ extension AppImage where Self: RawRepresentable, RawValue == String {
     var name: String { rawValue }
 }
 
-func image(_ appImage: AppImage) -> UIImage {
+func imageAsset(_ appImage: AppImage) -> UIImage {
     guard let image = UIImage(named: appImage.name) else {
-        assertionFailure()
+        assertionFailure("Image not found with name \(appImage.name)")
         return UIImage()
     }
 

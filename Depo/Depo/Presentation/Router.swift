@@ -159,11 +159,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func pushViewController(viewController: UIViewController, animated: Bool = true) {
-        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
+    func pushViewController(viewController: UIViewController, animated: Bool = true) {        
         if let navController = topNavigationController {
             navController.pushViewController(viewController, animated: animated)
         } else {
@@ -171,46 +167,19 @@ class RouterVC: NSObject {
         }
     
         viewController.navigationController?.isNavigationBarHidden = false
-        
-        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
     }
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
-        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
         viewController.navigationController?.isNavigationBarHidden = false
-        
-        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
-        
     }
     
     func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
-        if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
         var viewControllersStack = navigationController?.viewControllers ?? []
         viewControllersStack.append(contentsOf: viewControllers)
 
         navigationController?.setViewControllers(viewControllersStack, animated: animated)
         viewControllers.last?.navigationController?.setNavigationBarHidden(false, animated: false)
-
-        if let tabBarViewController = tabBarController, let baseView = viewControllers.last as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
-    }
-    
-    func setBackgroundColor(color: UIColor) {
-        if let tabBarViewController = tabBarController {
-            tabBarViewController.setBGColor(color: color)
-        }
     }
     
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
@@ -547,8 +516,7 @@ class RouterVC: NSObject {
     // MARK: TabBar
     
     var tabBarScreen: UIViewController? {
-        let controller = TabBarViewController(nibName: "TabBarView", bundle: nil)
-        return controller
+        return TabBarViewController()
     }
     
     
@@ -1378,6 +1346,8 @@ class RouterVC: NSObject {
                 
             case .gallery:
                 tabBarVC.showPhotoScreen()
+            case .discover:
+                break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)

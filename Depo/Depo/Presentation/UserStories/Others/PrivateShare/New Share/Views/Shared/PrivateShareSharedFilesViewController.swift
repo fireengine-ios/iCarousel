@@ -152,8 +152,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         let permittedTypes: [OperationType] = shareType.rootType == .byMe ? [.upload, .download] : [.sharedWithMeUpload, .download]
         cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
-        
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
+
         collectionView.addSubview(cardsContainer)
         
         cardsContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -419,7 +418,7 @@ extension PrivateShareSharedFilesViewController: CardsContainerViewDelegate {
             }
 
             self.collectionView.superview?.layoutIfNeeded()
-            self.collectionView.contentInset = UIEdgeInsets(top: h, left: 0, bottom: 25, right: 0)
+            self.collectionView.contentInset.top = h
         }, completion: { [weak self] _ in
             guard let self = self else {
                 return

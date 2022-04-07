@@ -33,19 +33,19 @@ class NavigationBarList {
     let plus: UIBarButtonItem
 
     init() {
-        settings = UIBarButtonItem(image: image(NavigationBarImages.iconProfile),
+        settings = UIBarButtonItem(image: imageAsset(NavigationBarImages.iconProfile),
                                    style: .plain,
                                    target: nil,
                                    action: nil)
         settings.accessibilityLabel = TextConstants.accessibilitySettings
 
-        search = UIBarButtonItem(image: image(NavigationBarImages.iconSearch),
+        search = UIBarButtonItem(image: imageAsset(NavigationBarImages.iconSearch),
                                  style: .plain,
                                  target: nil,
                                  action: nil)
         search.accessibilityLabel = TextConstants.accessibilitySearch
 
-        plus = UIBarButtonItem(image: image(NavigationBarImages.iconPlus),
+        plus = UIBarButtonItem(image: imageAsset(NavigationBarImages.iconPlus),
                                style: .plain,
                                target: nil,
                                action: nil)

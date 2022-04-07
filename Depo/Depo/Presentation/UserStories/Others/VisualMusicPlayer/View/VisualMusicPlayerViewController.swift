@@ -47,6 +47,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
     }
     
     var status: ItemStatus = .active
+
+    override var preferredNavigationBarStyle: NavigationBarStyle { .black }
     
     // MARK: - Lifecycle
     
@@ -61,7 +63,7 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         musicName.text = player.currentMusicName
         artistName.text = player.currentArtist
 
-        navigationBarHidden = true
+        statusBarStyle = .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {

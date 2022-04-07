@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CreateStoryPhotoSelectionController: BaseViewController, ControlTabBarProtocol {
+final class CreateStoryPhotoSelectionController: BaseViewController {
     /// analog CreateStorySelectionController with fix array of WrapData
     
     private var selectionState = PhotoSelectionState.selecting {
@@ -115,7 +115,6 @@ final class CreateStoryPhotoSelectionController: BaseViewController, ControlTabB
     }
     
     private func setupNavigation() {
-        hideTabBar()
         setTitle(withString: navTitle)
         
         let cancelButton = UIBarButtonItem(title: TextConstants.cancel, target: self, selector: #selector(hideController))

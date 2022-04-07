@@ -52,8 +52,4 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     override func configurateNavigationBar() {
         configureNavBarActions()
     }
-    
-    override func isNeedToShowTabBar() -> Bool {
-        return needToShowTabBar
-    }
 }

@@ -18,7 +18,7 @@ protocol SetSecurityQuestionViewControllerDelegate {
     func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer)
 }
 
-final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit, ControlTabBarProtocol {
+final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler, NibInit {
     
     private let accountService = AccountService()
     private lazy var answer = SecretQuestionWithAnswer()
@@ -104,7 +104,6 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
         super.viewWillAppear(animated)
         
         checkButtonStatus()
-        hideTabBar()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
