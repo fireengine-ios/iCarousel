@@ -24,6 +24,10 @@ enum UpdatePasswordErrors {
     case passwordLengthExceeded(limit: Int)
     case passwordSequentialCaharacters(limit: Int)
     case passwordSameCaharacters(limit: Int)
+    
+    case externalAuthTokenRequired
+    case forgetPasswordRequired
+    case invalidToken
 
 }
 extension UpdatePasswordErrors: LocalizedError {
@@ -70,6 +74,13 @@ extension UpdatePasswordErrors: LocalizedError {
             return String(format: TextConstants.passwordSequentialCaharacters, sequentialCharacterLimit)
         case .passwordSameCaharacters(let sameCharacterLimit):
             return String(format: TextConstants.passwordSameCaharacters, sameCharacterLimit)
+            
+        case .invalidToken:
+            return localized(.settingsGoogleAppleMailInvalidToken)
+        case .externalAuthTokenRequired:
+            return localized(.externalAuthError)
+        case .forgetPasswordRequired:
+            return localized(.forgotPasswordRequiredError)
         }
     }
 }

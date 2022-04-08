@@ -103,7 +103,16 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     }
     
     func tapChangePasswordButton() {
-        router.goToChangePassword()
+        interactor.getUpdatePasswordMethods()
+    }
+    
+    func gotUpdatePasswordMethod(method: UpdatePasswordMethods) {
+        stopNetworkOperation()
+        if method == .password {
+            router.goToChangePassword()
+        } else {
+            view.setNewPassword(with: method)
+        }
     }
     
     func tapChangeSecretQuestionButton() {

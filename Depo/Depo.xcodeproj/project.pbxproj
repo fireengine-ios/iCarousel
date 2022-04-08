@@ -8655,6 +8655,14 @@
 		D910F773C4C0ED4D155C904A /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194FFE25625A80F2C0B29404 /* Pods_LifeboxShared.framework */; };
 		F00DE586272196C3002F9A64 /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F00DE58A272196C6002F9A64 /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
+		F013FA6C27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
+		F013FA6D27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
+		F013FA6E27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
+		F013FA6F27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
+		F013FA7127FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */; };
+		F013FA7227FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */; };
+		F013FA7327FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */; };
+		F013FA7427FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */; };
 		F02833B92779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
 		F02833BA2779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
 		F02833BB2779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
@@ -11578,6 +11586,8 @@
 		EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractorOutput.swift; sourceTree = "<group>"; };
 		EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractor.swift; sourceTree = "<group>"; };
 		EFE9E4488118296DCE476A71 /* Pods-LifeTech_BilloShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloShared.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloShared/Pods-LifeTech_BilloShared.appstore.xcconfig"; sourceTree = "<group>"; };
+		F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleGoogleUpdatePasswordPoup.swift; sourceTree = "<group>"; };
+		F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppleGoogleUpdatePasswordPopup.xib; sourceTree = "<group>"; };
 		F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropFileExtensions.swift; sourceTree = "<group>"; };
 		F028C0DE2789DDBC005CE6AF /* PublicShareInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareInitializer.swift; sourceTree = "<group>"; };
 		F028C0E32789DE43005CE6AF /* PublicShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareConfigurator.swift; sourceTree = "<group>"; };
@@ -18339,6 +18349,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				F013FA6727FF27D0004B9BB8 /* AppleGoogleUpdatePasswordPoup */,
 				F0D2976B27FA330D0082C768 /* PasswordEnterPopup */,
 				F0D2976027F782B30082C768 /* MessageAndButtonPopup */,
 				F04E5C3B27EDAF6000CAAEB5 /* LoginWithGooglePopup */,
@@ -20728,6 +20739,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		F013FA6727FF27D0004B9BB8 /* AppleGoogleUpdatePasswordPoup */ = {
+			isa = PBXGroup;
+			children = (
+				F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */,
+				F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */,
+			);
+			path = AppleGoogleUpdatePasswordPoup;
+			sourceTree = "<group>";
+		};
 		F028C0D82789DD3E005CE6AF /* SaveToMyLifebox */ = {
 			isa = PBXGroup;
 			children = (
@@ -21776,6 +21796,7 @@
 				B5AB5B6721F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
 				8C0E90491FDEBDFF00789C91 /* EditinglBar.xib in Resources */,
+				F013FA7127FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */,
 				8C0E904A1FDEBDFF00789C91 /* AlbumCollectionViewCell.xib in Resources */,
 				8C3930F02100668300C1D82D /* GoogleService-Info-ent.plist in Resources */,
 				8C0E904D1FDEBDFF00789C91 /* IntroduceViewController.xib in Resources */,
@@ -22264,6 +22285,7 @@
 				CE784E1D22A685FB00662219 /* EditinglBar.xib in Resources */,
 				CE784E1E22A685FB00662219 /* MyStorageViewController.xib in Resources */,
 				CF38A821257531620000994F /* PrivateShareWithContactView.xib in Resources */,
+				F013FA7327FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */,
 				98725F0F258B2C0B0061E7F6 /* AllFilesSegmentedController.xib in Resources */,
 				0731E93826318A9900883566 /* RegistrationTermsInfoViewController.xib in Resources */,
 				CE784E1F22A685FB00662219 /* ManageContactTableViewCell.xib in Resources */,
@@ -22697,6 +22719,7 @@
 				CF8B6ABA23CBC9D70021B021 /* TBMatikPhotosViewController.xib in Resources */,
 				0731E87D263181EA00883566 /* RegistrationTermsViewController.xib in Resources */,
 				CF8B6AC023CBC9D70021B021 /* PackagePremiumView.xib in Resources */,
+				F013FA7227FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */,
 				CF8B6AC123CBC9D70021B021 /* WaitingForWiFiPopUp.xib in Resources */,
 				985786F923E01F8800D35DDA /* SettingFooterView.xib in Resources */,
 				985E6957255A6045006F6CD7 /* PrivateShareUserRoleViewController.xib in Resources */,
@@ -23006,6 +23029,7 @@
 				CF8B71EB23CBCA280021B021 /* ContactBackupOld.xib in Resources */,
 				CF8B71EE23CBCA280021B021 /* PremiumViewController.xib in Resources */,
 				CF8B71F123CBCA280021B021 /* GoogleService-Info.plist in Resources */,
+				F013FA7427FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */,
 				CF7D63E325A42FE4005C22F5 /* SharedFilesSliderCell.xib in Resources */,
 				CF8B71FA23CBCA280021B021 /* SpotifyPlaylistCollectionViewCell.xib in Resources */,
 				CF8B71FD23CBCA280021B021 /* SegmentedController.xib in Resources */,
@@ -25481,6 +25505,7 @@
 				989FDC1824190CD100F2F7D2 /* MediaItemsAlbumOperationService.swift in Sources */,
 				73D723EB231D08A6006AE835 /* PackageOffer.swift in Sources */,
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
+				F013FA6C27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */,
 				4A9B3900201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
 				981642FB233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
@@ -27097,6 +27122,7 @@
 				8C1E5BE422CB8C2C008FDA02 /* PhotoVideoDataSource.swift in Sources */,
 				CE784A7722A685FB00662219 /* UsageInfoInteractorOutput.swift in Sources */,
 				CE784A7922A685FB00662219 /* UploadFromLifeBoxViewController.swift in Sources */,
+				F013FA6E27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */,
 				CE784A7A22A685FB00662219 /* AnalyzeHistoryDataSource.swift in Sources */,
 				CE784A7B22A685FB00662219 /* RequestsKey.swift in Sources */,
 				CE784A7C22A685FB00662219 /* RemoteService.swift in Sources */,
@@ -29033,6 +29059,7 @@
 				CF8B66FB23CBC9D70021B021 /* UserInfoSubViewInitializer.swift in Sources */,
 				CF8B66FC23CBC9D70021B021 /* VisualMusicPlayerRouterInput.swift in Sources */,
 				CF8B66FD23CBC9D70021B021 /* PremiumFeaturesView.swift in Sources */,
+				F013FA6D27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */,
 				CF8B66FE23CBC9D70021B021 /* FreeAppSpaceConfigurator.swift in Sources */,
 				CF8B66FF23CBC9D70021B021 /* OfferParameters.swift in Sources */,
 				CF8B670023CBC9D70021B021 /* SegmentedControl.swift in Sources */,
@@ -30461,6 +30488,7 @@
 				CF8B6DF923CBCA280021B021 /* UploadFromLifeBoxViewController.swift in Sources */,
 				730F8AB823CDA43D00798B61 /* UIView + CALayerBorder.swift in Sources */,
 				CF8B6DFA23CBCA280021B021 /* AnalyzeHistoryDataSource.swift in Sources */,
+				F013FA6F27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */,
 				CF8B6DFB23CBCA280021B021 /* RequestsKey.swift in Sources */,
 				CF8B6DFC23CBCA280021B021 /* RemoteService.swift in Sources */,
 				CF8B6DFD23CBCA280021B021 /* UsageInfoConfigurator.swift in Sources */,

@@ -1,4 +1,6 @@
 import UIKit
+import GoogleSignIn
+import FirebaseCore
 
 final class UserProfileViewController: ViewController, KeyboardHandler {
     
@@ -170,6 +172,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var address: String?
     private var isTurkcellUser = false
     private var isShortPhoneNumber = false
+    private var updatePasswordMethod: UpdatePasswordMethods?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -396,6 +399,27 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         return changes.joined(separator: "|")
     }
     
+    private func getGoogleTokenIfNeeded(handler: @escaping (String?) -> Void) {
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if user?.profile?.email == SingletonStorage.shared.accountInfo?.email {
+                handler(user?.authentication.idToken)
+            } else {
+                guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+                let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
+                
+                GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+                    if error != nil {
+                        handler(nil)
+                    }
+                    
+                    if let idToken = user?.authentication.idToken {
+                        handler(idToken)
+                    }
+                }
+            }
+        }
+    }
+    
 }
 
 extension UserProfileViewController: ProfileEmailFieldViewDelegate {
@@ -580,5 +604,65 @@ extension UserProfileViewController: UserProfileViewInput {
         popup.alwaysShowsLaterButton = true
         popup.delegate = self
         present(popup, animated: true)
+    }
+    
+    func setNewPassword(with methods: UpdatePasswordMethods) {
+        self.updatePasswordMethod = methods
+        
+        switch methods {
+        case .password:
+            return
+        case .google:
+            let popup = RouterVC().messageAndButtonPopup(with: localized(.settingsChangePasswordGoogleWarning),
+                                                         buttonTitle: TextConstants.nextTitle)
+            popup.delegate = self
+            present(popup, animated: true)
+        case .apple:
+            let popup = RouterVC().messageAndButtonPopup(with: localized(.settingsChangePasswordAppleWarning),
+                                                         buttonTitle: TextConstants.nextTitle)
+            popup.delegate = self
+            present(popup, animated: true)
+        case .appleGoogle:
+            let popup = RouterVC().appleGoogleUpdatePasswordPopup()
+            popup.delegate = self
+            present(popup, animated: true)
+        }
+    }
+}
+
+extension UserProfileViewController: MessageAndButtonPopupDelegate {
+    func onActionButton() {
+        dismiss(animated: true)
+        
+        switch updatePasswordMethod {
+        case .google:
+            getGoogleTokenIfNeeded { idToken in
+                guard let idToken = idToken else { return }
+                let popup = RouterVC().passwordEnterPopup(with: idToken)
+                self.present(popup, animated: true)
+            }
+        case .apple:
+            //todo: will be implemented
+            break
+        default:
+            return
+        }
+    }
+}
+
+extension UserProfileViewController: AppleGoogleUpdatePasswordPopupDelegate {
+    func onSignInWithGoogle() {
+        dismiss(animated: true)
+        
+        getGoogleTokenIfNeeded { idToken in
+            guard let idToken = idToken else { return }
+            let popup = RouterVC().passwordEnterPopup(with: idToken)
+            self.present(popup, animated: true)
+        }
+    }
+    
+    func onSignInWithApple() {
+        //todo: will be implemented
+        dismiss(animated: true)
     }
 }

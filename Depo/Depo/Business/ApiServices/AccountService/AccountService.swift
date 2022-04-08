@@ -614,6 +614,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         backendError = .invalidOldPassword
                     case "New Password and Repeated Password does not match":
                         backendError = .notMatchNewAndRepeatPassword
+                    case "There is no avaliable validation method":
+                        backendError = .forgetPasswordRequired
                     default:
                         backendError = .unknown
                     }
@@ -637,6 +639,10 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     
                     if errorResponse.status == .invalidCaptcha {
                         handler(.failure(.invalidCaptcha))
+                    } else if errorResponse.status == .externalAuthTokenRequired {
+                        handler(.failure(.externalAuthTokenRequired))
+                    } else if errorResponse.status == .invalidToken {
+                        handler(.failure(.invalidToken))
                     } else if errorResponse.status == .invalidPassword {
                         
                         guard let reason = errorResponse.reason else {
@@ -954,5 +960,16 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .request(RouteRequests.Account.delete, method: .delete)
             .customValidate()
             .responseVoid(handler)
+    }
+    
+    @discardableResult
+    func getUpdatePasswordMethods( handler: @escaping ResponseHandler<[String]>) -> URLSessionTask? {
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.Account.updatePasswordV2, method: .get)
+            .customValidate()
+            .responseArray(handler)
+            .task
     }
 }
