@@ -104,18 +104,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tabBar.delegate = self
         tabBar.setupItems()
-        
-        setupCurtainView()
-        
+
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
-        
+
         changeVisibleStatus(hidden: true)
         setupObserving()
-        
+
         player.delegates.add(self)
 
         for controller in customNavigationControllers {
@@ -135,11 +133,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     private func setupObserving() {
-        NotificationCenter.default.addObserver(self, selector: #selector(hidePlusTabBar), name: .hidePlusTabBar, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showPlusTabBar), name: .showPlusTabBar, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideMusicBar), name: .musicDrop, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showPhotoScreen), name: .photosScreen, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showVideosScreen), name: .videoScreen, object: nil)
     }
     
     func showAndScrollPhotosScreen(scrollTo item: Item? = nil) {
@@ -158,14 +153,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         lastPhotoVideoIndex = TabScreenIndex.gallery.rawValue
         openPhotoPage()
     }
-    
-    
-    @objc func showVideosScreen(_ sender: Any) {
-//        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
-//        selectedIndex = TabScreenIndex.videosScreenIndex.rawValue
-//        lastPhotoVideoIndex = TabScreenIndex.videosScreenIndex.rawValue
-    }
-    
+
     @objc func showMusicBar(_ sender: Any) {
         if let segmentedController = customNavigationControllers[selectedIndex].viewControllers.first as? SegmentedController,
             segmentedController.currentController is TrashBinViewController {
@@ -224,18 +212,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         musicBar.isUserInteractionEnabled = !hidden
     }
     
-    @objc private func showPlusTabBar() {
-//        if (bottomTabBarConstraint.constant >= 0) {
-//            changeTabBarStatus(hidden: false)
-//        }
-    }
-    
-    @objc private func hidePlusTabBar() {
-//        if (bottomTabBarConstraint.constant == 0) {
-//            changeTabBarStatus(hidden: true)
-//        }
-    }
-
     func setBottomBarsHidden(_ isHidden: Bool, animated: Bool = true) {
         guard animated else {
             bottomBarsContainerView.isHidden = isHidden
@@ -266,145 +242,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         view.backgroundColor = color
     }
     
-    private func changeTabBarStatus(hidden: Bool) {
-//        plussButton.isHidden = hidden
-//        plussButton.isEnabled = !hidden
-    }
-    
-    func showRainbowIfNeed() {
-//        if !plussButton.isSelected {
-//            plussBtnAction(plussButton!)
-//        }
-    }
-    
-    @IBAction func plussBtnAction(_ sender: Any) {
-//        if !plussButton.isSelected {
-//            createPlusMenuItems()
-//        }
-//
-//        guard !plusMenuItems.isEmpty else {
-//            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePlusButtonNoAction)
-//            return
-//        }
-//
-//        changeViewState(state: !plussButton.isSelected)
-    }
-    
-    @objc func gearButtonAction(sender: Any) {
-        // output.gearButtonGotPressed()
-    }
-    
-    fileprivate func changeViewState(state: Bool) {
-//        plussButton.isSelected = state
-//
-//        let rotationAngle: CGFloat = .pi / 4
-//
-//        UIView.animate(withDuration: NumericConstants.animationDuration) {
-//            if state {
-//                self.plussButton.transform = CGAffineTransform(rotationAngle: rotationAngle)
-//            } else {
-//                self.plussButton.transform = CGAffineTransform(rotationAngle: 0)
-//            }
-//        }
-//
-//        showCurtainView(show: state)
-//        if state {
-//            showButtonRainbow()
-//        } else {
-//            hideButtonRainbow()
-//        }
-//
-//        plussButton.accessibilityLabel = state ? TextConstants.accessibilityClose : TextConstants.accessibilityPlus
-    }
-    
-    private func setupCurtainView() {
-//        curtainView.layer.masksToBounds = true
-//
-//        curtainView.backgroundColor = ColorConstants.searchShadowColor.withAlphaComponent(0.85)
-//        showCurtainView(show: false)
-//
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(TabBarViewController.closeCurtainView))
-//        curtainView.addGestureRecognizer(tap)
-    }
-    
-    private func showCurtainView(show: Bool) {
-//        guard var currentViewController = currentViewController else {
-//            return
-//        }
-//
-//        if let searchController = currentViewController as? SearchViewController, let navigationViewController = searchController.navigationController {
-//            currentViewController = navigationViewController
-//            searchController.tabBarPlusMenu(isShown: show)
-//        } else {
-//            currentViewController.navigationItem.hidesBackButton = show
-//        }
-//
-//        currentViewController.navigationItem.rightBarButtonItems?.forEach {
-//            $0.isEnabled = !show
-//        }
-//
-//        if !show {
-//            NotificationCenter.default.post(name: .updateThreeDots, object: nil)
-//        }
-//
-//        curtainView.isHidden = !show
-    }
-    
-    @objc func closeCurtainView() {
-//        changeViewState(state: false)
-    }
-    
-    private func createPlusMenuItems() {
-//        let types = router.getFloatingButtonsArray()
-//        plusMenuItems = types.map {
-//            let itemView = PlusMenuItemView.with(type: $0, delegate: self)
-//            itemView.add(to: mainContentView)
-//            return itemView
-//        }
-//        view.layoutIfNeeded()
-    }
-    
-    private func showButtonRainbow() {
-//        let bottomOffset = tabBar.frame.size.height + 7 + (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
-//        let radius: CGFloat = 100
-//
-//        let angles: [Double]
-//        switch plusMenuItems.count {
-//        case 1:
-//            angles = [90]
-//        case 2:
-//            angles = [135, 45]
-//        case 3:
-//            angles = [150, 90, 30]
-//        case 4:
-//            angles = [165, 115, 65, 15]
-//        default:
-//            angles = []
-//        }
-//
-//        plusMenuItems.enumerated().forEach { index, button in
-//            let radians = angles[index] * Double.pi / 180
-//            button.updatePosition(x: radius * CGFloat(cos(radians)),
-//                                  bottom: -(radius * CGFloat(sin(radians)) - button.frame.height * 0.5 + bottomOffset))
-//        }
-//
-//        changeButtonsAppearance(toHidden: false, withAnimation: true)
-    }
-    
-    private func hideButtonRainbow() {
-//        changeButtonsAppearance(toHidden: true, withAnimation: true)
-    }
-    
-    private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool) {
-//        UIView.animate(withDuration: NumericConstants.animationDuration, delay: 0.0, options: .showHideTransitionViews) {
-//            self.plusMenuItems.forEach { $0.changeVisability(toHidden: hidden) }
-//            self.view.layoutIfNeeded()
-//        } completion: { _ in
-//            self.view.accessibilityElements = hidden ? nil : self.plusMenuItems + [self.plussButton!]
-//            UIAccessibility.post(notification: .screenChanged, argument: self.view)
-//        }
-    }
-    
     func frameForTabAtIndex(index: Int) -> CGRect {
         debugLog("TabBarVC frameForTabAtIndex about to layout")
         view.layoutIfNeeded()
@@ -425,10 +262,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     // MARK: - tab bar delegate
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        changeViewState(state: false)
-        
         if var tabbarSelectedIndex = (tabBar.items?.firstIndex(of: item)) {
-            
+
             if tabbarSelectedIndex == TabScreenIndex.gallery.rawValue,
                 lastPhotoVideoIndex == TabScreenIndex.gallery.rawValue
             {
@@ -437,26 +272,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             } else {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
-            
+
             let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.home.rawValue,
                                                                 TabScreenIndex.contactsSync.rawValue,
                                                                 TabScreenIndex.documents.rawValue]
-            
-//            if tabbarSelectedIndex > 2 {
-//                tabbarSelectedIndex -= 1
-//            }
-//
+
             if tabbarSelectedIndex == selectedIndex && arrayOfIndexesOfViewsThatShouldntBeRefreshed.contains(tabbarSelectedIndex) {
                 return
             }
-            
-//            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
-//                log(for: tabScreenIndex)
-//            }
 
             selectedIndex = tabbarSelectedIndex
-            
-            showCurtainView(show: false)
         }
     }
 }
@@ -465,14 +290,12 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
 
 extension TabBarViewController: PlusMenuItemViewDelegate {
     func selectPlusMenuItem(action: Action) {
-        changeViewState(state: false)
-        
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
-        
+
         if let netmeraEvent = NetmeraEvents.Actions.PlusButton(action: action) {
             AnalyticsService.sendNetmeraEvent(event: netmeraEvent)
         }
-        
+
         if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
             externalActionHandler.handleAction(action)
         } else {
@@ -484,7 +307,6 @@ extension TabBarViewController: PlusMenuItemViewDelegate {
 //MARK: - UIImagePickerControllerDelegate
 
 extension TabBarViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func getFolderUUID() -> String? {
         if let controller = currentViewController as? BaseFilesGreedViewController {
             return controller.getFolder()?.uuid

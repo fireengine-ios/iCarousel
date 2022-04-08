@@ -9,7 +9,6 @@
 enum PushNotificationAction: String {
     case main = "main"
     case syncSettings = "sync_settings"
-    case floatingMenu = "floating_menu"
     case packages = "packages"
     case photos = "photos_videos"
     case videos = "videos"

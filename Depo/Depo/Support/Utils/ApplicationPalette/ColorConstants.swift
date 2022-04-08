@@ -66,7 +66,7 @@ func color(_ color: AppColor) -> UIColor {
     return uiColor
 }
 
-// TODO: remove all legacy colors
+// TODO: Facelift: remove all legacy colors
 struct ColorConstants {
     static let whiteColor = UIColor(named: "whiteColor")!
     static let blueColor = UIColor(named: "blueColor")!

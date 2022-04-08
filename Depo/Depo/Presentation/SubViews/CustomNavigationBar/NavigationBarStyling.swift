@@ -42,7 +42,8 @@ extension NavigationBarStyling {
         navigationBar.barTintColor = style.barTintColor
         navigationBar.tintColor = style.tintColor
         navigationBar.titleTextAttributes = [
-            .foregroundColor: style.titleColor
+            .foregroundColor: style.titleColor,
+//            .font TODO: Facelift: font
         ]
         navigationBar.isTranslucent = style.isTranslucent
 
@@ -87,10 +88,12 @@ private func configure(appearance: UINavigationBarAppearance, with style: Naviga
     appearance.backgroundColor = style.barTintColor
     appearance.titleTextAttributes = [
         .foregroundColor: style.titleColor,
+//            .font TODO: Facelift: font
     ]
 
     appearance.buttonAppearance.normal.titleTextAttributes = [
         .foregroundColor: style.tintColor,
+//            .font TODO: Facelift: font
     ]
     appearance.setBackIndicatorImage(style.backIndicatorImage,
                                      transitionMaskImage: style.backIndicatorTransitionMaskImage)

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: Facelift: didn't see a screen with subtitle in the new designs. This can be dropped maybe?
 extension UIViewController {
     func setTitle(withString title: String, andSubTitle subTitle: String? = nil) {
         if let subTitle = subTitle {

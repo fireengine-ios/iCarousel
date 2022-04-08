@@ -19705,15 +19705,15 @@
 			children = (
 				077D1D5627FEDBC6001C6E72 /* Legacy */,
 				8C20862D228D4B2E000BEDAD /* PhotoVideo */,
-				077D1D4E27FED891001C6E72 /* MainTabBar.swift */,
 				CEAE3FE91EFD517300A405B2 /* TabBarViewController.xib */,
 				CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */,
-				78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */,
+				077D1D4E27FED891001C6E72 /* MainTabBar.swift */,
 				98B04D9025931F300011DAEB /* TabBarConfigurator.swift */,
-				8C208661228D4B60000BEDAD /* EmptyDataView.swift */,
-				8C208662228D4B60000BEDAD /* EmptyDataView.xib */,
 				0711889D27FAF49900F512A1 /* TabBarImages.swift */,
 				0711889827FAF43F00F512A1 /* TabBar.xcassets */,
+				78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */,
+				8C208661228D4B60000BEDAD /* EmptyDataView.swift */,
+				8C208662228D4B60000BEDAD /* EmptyDataView.xib */,
 			);
 			path = CustomTabBars;
 			sourceTree = "<group>";

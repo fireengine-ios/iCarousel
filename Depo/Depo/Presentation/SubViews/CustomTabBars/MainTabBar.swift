@@ -11,6 +11,10 @@ import UIKit
 final class MainTabBar: UITabBar {
     static let standardHeight: CGFloat = 70
 
+    private let kItemImageInsets = UIEdgeInsets(top: -2, left: 0, bottom: 2, right: 0)
+    private let kTitlePositionAdjustment = UIOffset(horizontal: 0, vertical: -9)
+    private let kCornerRadius: CGFloat = 16
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupStyle()
@@ -28,7 +32,7 @@ final class MainTabBar: UITabBar {
     func setupItems() {
         let items: [UITabBarItem] = TabBarItem.allCases.map { item in
             let tabBarItem = UITabBarItem(title: item.title, image: item.image, selectedImage: item.selectedImage)
-            tabBarItem.imageInsets = UIEdgeInsets(top: -2, left: 0, bottom: 2, right: 0)
+            tabBarItem.imageInsets = kItemImageInsets
 
             if !item.accessibilityLabel.isEmpty {
                 tabBarItem.accessibilityLabel = item.accessibilityLabel
@@ -41,7 +45,7 @@ final class MainTabBar: UITabBar {
     }
 
     private func setupStyle() {
-        layer.cornerRadius = 16
+        layer.cornerRadius = kCornerRadius
         clipsToBounds = true
 
         isTranslucent = true
@@ -60,11 +64,13 @@ final class MainTabBar: UITabBar {
             appearance.stackedLayoutAppearance.normal.iconColor = color(.tabBarTint)
             appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
                 .foregroundColor: color(.tabBarTint),
+//                .font: TODO: Facelift: font
             ]
-            appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -9)
+            appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = kTitlePositionAdjustment
             appearance.stackedLayoutAppearance.selected.iconColor = color(.tabBarTintSelected)
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
                 .foregroundColor: color(.tabBarTintSelected),
+//                .font: TODO: Facelift: font
             ]
 
             standardAppearance = appearance
