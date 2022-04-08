@@ -15,4 +15,5 @@ protocol UserProfileViewInput: AnyObject {
     func securityQuestionWasSet()
     func presentEmailVerificationPopUp()
     func presentRecoveryEmailVerificationPopUp()
+    func setNewPassword(with methods: UpdatePasswordMethods)
 }

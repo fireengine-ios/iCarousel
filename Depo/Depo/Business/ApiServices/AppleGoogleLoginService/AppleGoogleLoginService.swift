@@ -15,19 +15,19 @@ enum GoogeLoginMessageError: String, CaseIterable {
     case emailFieldEmpty  = "EMAIL_FIELD_IS_EMPTY"
     case emailIsNotMatch  = "EMAIL_IS_NOT_MATCH"
     case passwordRequired = "PASSWORD_REQUIRED"
-    case defaultError     = ""
+    case unknown          = ""
     
     var errorMessage: String? {
         switch self {
         case .invalidToken:
-            return ""
+            return localized(.settingsGoogleAppleInvalidToken)
         case .emailFieldEmpty:
-            return ""
+            return localized(.settingsGoogleAppleEmptyMailError)
         case .emailIsNotMatch:
-            return ""
+            return localized(.settingsGoogleAppleMailMatchError)
         case .passwordRequired:
             return ""
-        case .defaultError:
+        case .unknown:
             return TextConstants.temporaryErrorOccurredTryAgainLater
         }
     }
@@ -36,7 +36,7 @@ enum GoogeLoginMessageError: String, CaseIterable {
 enum GoogleLoginOperationResult {
     case success
     case preconditionFailed(status: GoogeLoginMessageError?)
-    case badRequest
+    case badRequest(status: GoogeLoginMessageError?)
 }
 
 final class AppleGoogleLoginService: BaseRequestService {
@@ -58,11 +58,17 @@ final class AppleGoogleLoginService: BaseRequestService {
                                 completion(.preconditionFailed(status: error))
                             }
                         } else {
-                            completion(.preconditionFailed(status: .defaultError))
+                            completion(.preconditionFailed(status: .unknown))
                         }
                     }
                 case .failure:
-                    completion(.badRequest)
+                    if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                        for error in GoogeLoginMessageError.allCases where error.rawValue == statusJSON {
+                            completion(.badRequest(status: error))
+                        }
+                    } else {
+                        completion(.badRequest(status: .unknown))
+                    }
                 }
             }
     }
@@ -85,11 +91,17 @@ final class AppleGoogleLoginService: BaseRequestService {
                                 completion(.preconditionFailed(status: error))
                             }
                         } else {
-                            completion(.preconditionFailed(status: .defaultError))
+                            completion(.preconditionFailed(status: .unknown))
                         }
                     }
                 case .failure:
-                    completion(.badRequest)
+                    if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                        for error in GoogeLoginMessageError.allCases where error.rawValue == statusJSON {
+                            completion(.badRequest(status: error))
+                        }
+                    } else {
+                        completion(.badRequest(status: .unknown))
+                    }
                 }
             }
     }

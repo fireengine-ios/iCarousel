@@ -1452,4 +1452,13 @@ class RouterVC: NSObject {
         
         return controller
     }
+    
+    func appleGoogleUpdatePasswordPopup() -> AppleGoogleUpdatePasswordPopup {
+        let controller = AppleGoogleUpdatePasswordPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
 }

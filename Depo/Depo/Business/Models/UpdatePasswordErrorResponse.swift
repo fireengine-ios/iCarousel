@@ -12,6 +12,9 @@ import SwiftyJSON
 enum UpdatePasswordErrorStatusType: String {
     case invalidPassword = "INVALID_PASSWORD"
     case invalidCaptcha = "4001"
+    case externalAuthTokenRequired = "EXTERNAL_AUTH_TOKEN_REQUIRED"
+    case forgetPasswordRequired = "FORGET_PASSWORD_REQUIRED"
+    case invalidToken = "INVALID_TOKEN"
 }
 
 enum UpdatePasswordErrorReasonType: String {

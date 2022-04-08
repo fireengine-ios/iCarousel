@@ -52,7 +52,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.text = "Lifebox Şifresi Oluştur"
+            newValue.text = localized(.settingsSetNewPassword)
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
             newValue.numberOfLines = 0
             newValue.textColor = AppColor.blackColor.color?.withAlphaComponent(0.9)
@@ -165,7 +165,10 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
             repeatPasswordView.showTextAnimated(text: errorText)
             repeatPasswordView.passwordTextField.becomeFirstResponder()
             
-        case .special, .unknown:
+        case .special, .unknown,
+             .invalidToken,
+             .externalAuthTokenRequired,
+             .forgetPasswordRequired:
             UIApplication.showErrorAlert(message: errorText)
         }
     }

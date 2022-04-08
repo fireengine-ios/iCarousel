@@ -2022,3 +2022,12 @@
 "settings_google_password_required" = "";
 "settings_google_apple_connect" = "";
 "settings_google" = "";
+"settings_change_password_google_warning" = "";
+"settings_change_password_apple_warning" = "";
+"settings_change_password_apple_google_warning" = "";
+"settings_googe_apple_set_password" = "";
+"settings_google_apple_mail_match_error" = "";
+"googe_apple_login_invalid_token" = "";
+"settings_google_apple_empty_mail_error" = "";
+"password_change_external_auth_required_error" = "";
+"password_change_forgot_password_required_error" = "";
