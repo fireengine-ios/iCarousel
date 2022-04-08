@@ -76,7 +76,7 @@ extension UpdatePasswordErrors: LocalizedError {
             return String(format: TextConstants.passwordSameCaharacters, sameCharacterLimit)
             
         case .invalidToken:
-            return localized(.settingsGoogleAppleMailInvalidToken)
+            return localized(.settingsGoogleAppleInvalidToken)
         case .externalAuthTokenRequired:
             return localized(.externalAuthError)
         case .forgetPasswordRequired:

@@ -152,9 +152,9 @@ enum Strings: String, Localizable {
     case settingsChangePasswordAppleWarning       = "settings_change_password_apple_warning"
     case settingsChangePasswordAppleGoogleWarning = "settings_change_password_apple_google_warning"
     case settingsSetNewPassword                   = "settings_googe_apple_set_password"
-    case settingsGoogleAppleMailError             = "settings_google_apple_mail_match_error"
-    case settingsGoogleAppleMailInvalidToken      = "googe_apple_login_invalid_token"
-    case settingsEmptyMailError                   = "settings_google_apple_empty_mail_error"
+    case settingsGoogleAppleMailMatchError        = "settings_google_apple_mail_match_error"
+    case settingsGoogleAppleInvalidToken          = "googe_apple_login_invalid_token"
+    case settingsGoogleAppleEmptyMailError        = "settings_google_apple_empty_mail_error"
     case externalAuthError                        = "password_change_external_auth_required_error"
     case forgotPasswordRequiredError              = "password_change_forgot_password_required_error"
 }
