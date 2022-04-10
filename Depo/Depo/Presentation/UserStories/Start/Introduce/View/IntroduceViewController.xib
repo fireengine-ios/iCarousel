@@ -37,7 +37,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="LEY-g9-CGx">
-                                    <rect key="frame" x="191" y="36" width="46" height="45"/>
+                                    <rect key="frame" x="191" y="40" width="46" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="B0L-Rl-80B">
                                             <variation key="widthClass=regular" constant="75"/>
@@ -49,25 +49,25 @@
                                     <variation key="widthClass=regular" image="Logo-Ipad"/>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXL-QX-kgV">
-                                    <rect key="frame" x="32" y="105" width="364" height="501"/>
+                                    <rect key="frame" x="32" y="109" width="364" height="496"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IntroduceImage1" translatesAutoresizingMaskIntoConstraints="NO" id="8gu-ye-G0O">
-                                            <rect key="frame" x="0.0" y="20" width="364" height="335.66666666666669"/>
+                                            <rect key="frame" x="0.0" y="20" width="364" height="332.33333333333331"/>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rz3-dg-IMQ">
-                                            <rect key="frame" x="0.0" y="335.66666666666669" width="364" height="165.33333333333331"/>
+                                            <rect key="frame" x="0.0" y="332.33333333333331" width="364" height="163.66666666666669"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="CWT-ta-pGt">
-                                                    <rect key="frame" x="20" y="57.333333333333314" width="324" height="50.666666666666657"/>
+                                                    <rect key="frame" x="20" y="56.333333333333371" width="324" height="50.666666666666657"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osx-Wx-h7m">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osx-Wx-h7m">
                                                             <rect key="frame" x="0.0" y="0.0" width="324" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjZ-H1-nzd">
-                                                            <rect key="frame" x="0.0" y="30.333333333333371" width="324" height="20.333333333333329"/>
+                                                            <rect key="frame" x="0.0" y="30.333333333333314" width="324" height="20.333333333333329"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -93,102 +93,121 @@
                                         <constraint firstAttribute="bottom" secondItem="rz3-dg-IMQ" secondAttribute="bottom" id="VDX-vb-j2o"/>
                                         <constraint firstAttribute="trailing" secondItem="rz3-dg-IMQ" secondAttribute="trailing" id="VH7-nA-H3K"/>
                                         <constraint firstAttribute="bottom" secondItem="rz3-dg-IMQ" secondAttribute="bottom" id="gWe-Zu-sQq"/>
+                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="496" id="orE-P0-h4v"/>
                                         <constraint firstItem="rz3-dg-IMQ" firstAttribute="height" secondItem="hXL-QX-kgV" secondAttribute="height" multiplier="0.33" id="uji-tj-UKY"/>
                                         <constraint firstItem="rz3-dg-IMQ" firstAttribute="top" secondItem="8gu-ye-G0O" secondAttribute="bottom" constant="-20" id="vFH-J5-1HQ"/>
                                         <constraint firstItem="8gu-ye-G0O" firstAttribute="leading" secondItem="hXL-QX-kgV" secondAttribute="leading" id="xiF-XT-wtd"/>
                                     </constraints>
+                                    <variation key="widthClass=regular">
+                                        <mask key="constraints">
+                                            <exclude reference="orE-P0-h4v"/>
+                                        </mask>
+                                    </variation>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="80G-4v-71s">
-                                    <rect key="frame" x="84" y="630" width="260" height="264"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0J6-MW-URd">
+                                    <rect key="frame" x="0.0" y="629" width="428" height="264"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="260" height="46"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="80G-4v-71s">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="264"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                    <rect key="frame" x="84" y="0.0" width="260" height="46"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="kUL-YA-YZn">
+                                                            <variation key="widthClass=regular" constant="275"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="height" constant="46" id="s5i-Oo-O1V"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="onStartUsingLifeBoxButton" destination="-1" eventType="touchUpInside" id="7FX-Mu-hBk"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcF-fe-XaY">
+                                                    <rect key="frame" x="193.33333333333334" y="56" width="41.333333333333343" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" priority="250" constant="100" id="92Z-NV-OTJ"/>
+                                                        <constraint firstAttribute="height" constant="15" id="LRl-h6-QX0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                    <rect key="frame" x="84" y="81" width="260" height="46"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="Eap-cB-Mbb">
+                                                            <variation key="widthClass=regular" constant="275"/>
+                                                        </constraint>
+                                                        <constraint firstAttribute="height" constant="46" id="GPS-RI-Ueo"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="onHaveAccountButton" destination="-1" eventType="touchUpInside" id="zQD-23-R0A"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RjQ-PC-Yiv">
+                                                    <rect key="frame" x="193.33333333333334" y="137" width="41.333333333333343" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" priority="250" constant="100" id="40U-9o-uzb"/>
+                                                        <constraint firstAttribute="height" constant="15" id="Jok-Ns-d66"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ci-6a-gAv" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                    <rect key="frame" x="84" y="162" width="260" height="46"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="46" id="8Xk-9E-LsP"/>
+                                                        <constraint firstAttribute="width" constant="260" id="l7z-AG-72T">
+                                                            <variation key="widthClass=regular" constant="275"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="onContinueWithGoogle:" destination="-1" eventType="touchUpInside" id="Zbf-PP-k5A"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rO-qN-0Tf" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
+                                                    <rect key="frame" x="84" y="218" width="260" height="46"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="46" id="9oJ-Kt-pgk"/>
+                                                        <constraint firstAttribute="width" constant="260" id="EUa-Q8-kYH">
+                                                            <variation key="widthClass=regular" constant="275"/>
+                                                        </constraint>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
+                                            </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="kUL-YA-YZn">
-                                                    <variation key="widthClass=regular" constant="275"/>
-                                                </constraint>
-                                                <constraint firstAttribute="height" constant="46" id="s5i-Oo-O1V"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="8co-Lg-89U"/>
                                             </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <action selector="onStartUsingLifeBoxButton" destination="-1" eventType="touchUpInside" id="7FX-Mu-hBk"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcF-fe-XaY">
-                                            <rect key="frame" x="109.33333333333333" y="56" width="41.333333333333329" height="15"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" priority="250" constant="100" id="92Z-NV-OTJ"/>
-                                                <constraint firstAttribute="height" constant="15" id="LRl-h6-QX0"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="81" width="260" height="46"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="Eap-cB-Mbb">
-                                                    <variation key="widthClass=regular" constant="275"/>
-                                                </constraint>
-                                                <constraint firstAttribute="height" constant="46" id="GPS-RI-Ueo"/>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <action selector="onHaveAccountButton" destination="-1" eventType="touchUpInside" id="zQD-23-R0A"/>
-                                            </connections>
-                                        </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RjQ-PC-Yiv">
-                                            <rect key="frame" x="109.33333333333333" y="137" width="41.333333333333329" height="15"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" priority="250" constant="100" id="40U-9o-uzb"/>
-                                                <constraint firstAttribute="height" constant="15" id="Jok-Ns-d66"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ci-6a-gAv" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="162" width="260" height="46"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="46" id="8Xk-9E-LsP"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="l7z-AG-72T">
-                                                    <variation key="widthClass=regular" constant="275"/>
-                                                </constraint>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                            <connections>
-                                                <action selector="onContinueWithGoogle:" destination="-1" eventType="touchUpInside" id="Zbf-PP-k5A"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4rO-qN-0Tf" customClass="RoundedInsetsButton" customModule="lifebox" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="218" width="260" height="46"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="46" id="9oJ-Kt-pgk"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="EUa-Q8-kYH">
-                                                    <variation key="widthClass=regular" constant="275"/>
-                                                </constraint>
-                                            </constraints>
-                                            <state key="normal" title="Button"/>
-                                        </button>
+                                        </stackView>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="8co-Lg-89U"/>
+                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="264" id="6dT-d0-XVv"/>
+                                        <constraint firstItem="80G-4v-71s" firstAttribute="centerY" secondItem="0J6-MW-URd" secondAttribute="centerY" id="HvU-tp-0i1"/>
+                                        <constraint firstItem="80G-4v-71s" firstAttribute="leading" secondItem="0J6-MW-URd" secondAttribute="leading" id="fE7-Zj-cjt"/>
+                                        <constraint firstAttribute="trailing" secondItem="80G-4v-71s" secondAttribute="trailing" id="hTr-2q-KkX"/>
                                     </constraints>
-                                </stackView>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="LEY-g9-CGx" firstAttribute="top" secondItem="cyp-QM-iGJ" secondAttribute="top" constant="36" id="5kO-nH-fi3"/>
+                                <constraint firstItem="LEY-g9-CGx" firstAttribute="top" secondItem="cyp-QM-iGJ" secondAttribute="top" constant="40" id="5kO-nH-fi3"/>
                                 <constraint firstItem="hXL-QX-kgV" firstAttribute="width" secondItem="cyp-QM-iGJ" secondAttribute="width" multiplier="0.6" id="6bR-nH-Tey"/>
                                 <constraint firstItem="hXL-QX-kgV" firstAttribute="centerX" secondItem="cyp-QM-iGJ" secondAttribute="centerX" id="GHB-hL-LtV"/>
-                                <constraint firstAttribute="bottom" secondItem="80G-4v-71s" secondAttribute="bottom" constant="32" id="Rbu-vZ-UYT"/>
-                                <constraint firstItem="80G-4v-71s" firstAttribute="centerX" secondItem="cyp-QM-iGJ" secondAttribute="centerX" id="aW8-U7-Oaj"/>
-                                <constraint firstItem="80G-4v-71s" firstAttribute="top" secondItem="hXL-QX-kgV" secondAttribute="bottom" constant="24" id="cVp-Tj-vKE">
-                                    <variation key="heightClass=regular-widthClass=regular" constant="60"/>
-                                </constraint>
+                                <constraint firstItem="0J6-MW-URd" firstAttribute="leading" secondItem="cyp-QM-iGJ" secondAttribute="leading" id="JP3-dy-py8"/>
                                 <constraint firstItem="hXL-QX-kgV" firstAttribute="width" secondItem="cyp-QM-iGJ" secondAttribute="width" multiplier="0.85" id="cbP-LI-gp2"/>
+                                <constraint firstAttribute="bottom" secondItem="0J6-MW-URd" secondAttribute="bottom" priority="999" constant="32" id="cdy-61-usg"/>
                                 <constraint firstItem="LEY-g9-CGx" firstAttribute="centerX" secondItem="cyp-QM-iGJ" secondAttribute="centerX" id="eC5-IO-pk6"/>
+                                <constraint firstAttribute="trailing" secondItem="0J6-MW-URd" secondAttribute="trailing" id="gaQ-fW-dKc"/>
                                 <constraint firstItem="hXL-QX-kgV" firstAttribute="top" secondItem="LEY-g9-CGx" secondAttribute="bottom" constant="24" id="qcf-o5-KdD"/>
+                                <constraint firstItem="0J6-MW-URd" firstAttribute="top" secondItem="hXL-QX-kgV" secondAttribute="bottom" constant="24" id="uTi-NI-cyD">
+                                    <variation key="widthClass=regular" constant="80"/>
+                                </constraint>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">

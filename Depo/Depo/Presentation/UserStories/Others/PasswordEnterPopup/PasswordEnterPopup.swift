@@ -258,6 +258,7 @@ extension PasswordEnterPopup {
                                             switch result {
                                             case .success(_):
                                                 self.getAccountInfo()
+                                                self.dismiss(animated: true)
                                             case .failure(let error):
                                                 self.actionOnUpdateOnError(error)
                                                 self.hideSpinnerIncludeNavigationBar()
