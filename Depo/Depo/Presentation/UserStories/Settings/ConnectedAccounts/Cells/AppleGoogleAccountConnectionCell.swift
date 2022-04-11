@@ -85,6 +85,7 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         getStatus()
+        ItemOperationManager.default.startUpdateView(view: self)
     }
     
     //MARK: -IBActions
@@ -128,5 +129,15 @@ extension AppleGoogleAccountConnectionCell {
                 self.delegate?.googleDisconnectFailed()
             }
         }
+    }
+}
+
+extension AppleGoogleAccountConnectionCell: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        return self === object
+    }
+    
+    func googleLoginDisconnected() {
+        self.googleSwitch.setOn(false, animated: true)
     }
 }
