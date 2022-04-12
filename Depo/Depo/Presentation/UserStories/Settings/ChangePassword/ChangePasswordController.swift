@@ -280,7 +280,10 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             repeatPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(repeatPasswordView)
             
-        case .special, .unknown:
+        case .special, .unknown,
+             .invalidToken,
+             .externalAuthTokenRequired,
+             .forgetPasswordRequired:
             UIApplication.showErrorAlert(message: errorText)
         }
     }

@@ -8,7 +8,7 @@
 
 import MapKit
 
-final class ItemAnnotation: NSObject, MKAnnotation {
+class ItemAnnotation: NSObject, MKAnnotation {
     @objc dynamic var coordinate = kCLLocationCoordinate2DInvalid
 
     var item: WrapData?

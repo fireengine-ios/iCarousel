@@ -66,7 +66,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         }
     }
 
-    func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
+    func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?, googleToken: String?) {
         
         let validationResult: [UserValidationResults]
         validationResult = validationService.validateUserInfo(mail: email,
@@ -74,7 +74,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                                               phone: phone,
                                                               password: password,
                                                               repassword: repassword,
-                                                              captchaAnswer: captchaRequired ? captchaAnswer : nil)
+                                                              captchaAnswer: captchaRequired ? captchaAnswer : nil,
+                                                              googleToken: googleToken)
         
         if validationResult.count == 0 {//== .allValid {
             
@@ -83,7 +84,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                                    phone: code + phone,
                                                    password: password,
                                                    captchaID: captchaRequired ? captchaID : nil,
-                                                   captchaAnswer: captchaRequired ? captchaAnswer : nil)
+                                                   captchaAnswer: captchaRequired ? captchaAnswer : nil,
+                                                   googleToken: googleToken)
             
             SingletonStorage.shared.signUpInfo = signUpInfo
             
@@ -138,7 +140,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     func signUpUser(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?) {
 
         ///sentOtp = false as a task requirements (FE-1055)
-        let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false)
+        let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false, googleToken: userInfo.googleToken)
         
         authenticationService.signUp(user: signUpUser) { [weak self] response in
             guard let self = self else {

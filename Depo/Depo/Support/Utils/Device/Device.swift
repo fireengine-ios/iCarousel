@@ -15,7 +15,7 @@ class Device {
     
     static let groupIdentifier = SharedConstants.groupIdentifier
     
-    static let applicationId = "665036334"
+    static let applicationId = isBillo ? "1488914348" : "665036334"
     
     static private let supportedLanguages = ["tr", "en", "uk", "ru", "de", "ar", "ro", "es", "sq", "fr", "ka"]
     static private let defaultLocale = "en"
@@ -237,5 +237,17 @@ class Device {
 
     static var modelName: String {
         return UIDevice.current.modelName
+    }
+    
+    static let isBillo: Bool = {
+        #if LIFEDRIVE
+        return true
+        #else
+        return false
+        #endif
+    }()
+    
+    static var androidPackageName: String {
+        isBillo ? "com.turkcell.lifedrive" : "tr.com.turkcell.akillidepo"
     }
 }

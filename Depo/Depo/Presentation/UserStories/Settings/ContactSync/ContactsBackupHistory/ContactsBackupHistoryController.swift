@@ -81,7 +81,11 @@ extension ContactsBackupHistoryController: ContactsBackupHistoryViewDelegate {
 //MARK: - ContactSyncControllerProtocol
 
 extension ContactsBackupHistoryController: ContactSyncControllerProtocol, ContactSyncHelperDelegate {
-    
+
+    var selectedBackupForRestore: ContactBackupItem? {
+        return dataManager.selectedBackup
+    }
+
     func show(view: UIView, animated: Bool) {
         animator.showTransition(to: view, on: self.view, animated: true)
     }

@@ -139,6 +139,11 @@ class BaseEmailVerificationPopUp: BasePopUpController {
         return 0
     }
 
+    func createChangeEmailPopUp() -> BaseChangeEmailPopUp {
+        assertionFailure("Implement in concrete class")
+        return BaseChangeEmailPopUp()
+    }
+
     func verificationCodeEntered() {
         assertionFailure("Implement in concrete class")
     }
@@ -346,9 +351,8 @@ class BaseEmailVerificationPopUp: BasePopUpController {
     }
 
     @IBAction func onChangeEmailTap(_ sender: Any) {
-        hidePopUp { [weak self] in
-            let router = RouterVC()
-            let controller = router.changeEmailPopUp
+        hidePopUp {
+            let controller = self.createChangeEmailPopUp()
             controller.completion = { [weak self] in
                 self?.showPopUp()
             }

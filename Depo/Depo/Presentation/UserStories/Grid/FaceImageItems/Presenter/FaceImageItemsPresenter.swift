@@ -96,6 +96,10 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             dataSource.didAnimationForPremiumButton(with: indexPath)
         }
     }
+
+    override func onSelectedMapPlaceholderItem() {
+        (router as? FaceImageItemsRouterInput)?.openMapSearch()
+    }
     
     override func getContentWithSuccess(items: [WrapData]) {
         if let interactor = interactor as? FaceImageItemsInteractorInput {

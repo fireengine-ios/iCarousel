@@ -12,6 +12,8 @@ protocol FaceImageItemsDataSourceDelegate: AnyObject {
 
 
 final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
+    private static let firstPage = 1
+
     var price: String?
     var detailMessage: String = ""
     var faceImageType: FaceImageType
@@ -26,6 +28,27 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     init(faceImageType: FaceImageType, delegate: FaceImageItemsDataSourceDelegate) {
         self.faceImageType = faceImageType
         premiumDelegate = delegate
+    }
+
+    override func appendCollectionView(items: [WrapData], pageNum: Int) {
+        var items = items
+
+        // add the map cell for places grid
+        if faceImageType == .places {
+            let isFirstPage = pageNum == Self.firstPage
+            let hasActualPlaceItems = items.contains { ($0 as? PlacesItem)?.responseObject.isDemo == false }
+            if isFirstPage && hasActualPlaceItems {
+                items.insert(PlacesItem.mapPlaceholderItem(), at: 0)
+
+                // remove a demo item (if any) in order for the grid to look even
+                let aDemoItemIndex = items.firstIndex { ($0 as? PlacesItem)?.responseObject.isDemo == true }
+                if let indexToRemove = aDemoItemIndex {
+                    items.remove(at: indexToRemove)
+                }
+            }
+        }
+
+        super.appendCollectionView(items: items, pageNum: pageNum)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -76,6 +99,8 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             delegate?.onSelectedFaceImageDemoCell(with: indexPath)
         } else if let smartItem = unwrapedObject as? PlacesItem, smartItem.responseObject.isDemo == true  {
             delegate?.onSelectedFaceImageDemoCell(with: indexPath)
+        } else if let smartItem = unwrapedObject as? PlacesItem, smartItem.isMapItemPlaceholder == true  {
+            delegate?.onSelectedMapPlaceholderItem()
         } else {
             super.collectionView(collectionView, didSelectItemAt: indexPath)
         }

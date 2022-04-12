@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import MBProgressHUD
 
 
 protocol ContactsBackupActionProviderProtocol: AnyObject {
@@ -16,10 +17,15 @@ protocol ContactsBackupActionProviderProtocol: AnyObject {
 
 protocol ContactSyncControllerProtocol: ViewController {
     var progressView: ContactOperationProgressView? { get set }
+    var selectedBackupForRestore: ContactBackupItem? { get }
     func show(view: UIView, animated: Bool)
     func showRelatedView()
     func showResultView(view: UIView, title: String)
     func didFinishOperation(operationType: ContactsOperationType)
+}
+
+extension ContactSyncControllerProtocol {
+    var selectedBackupForRestore: ContactBackupItem? { nil }
 }
 
 final class ContactSyncViewController: BaseViewController, NibInit {
@@ -240,7 +246,9 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
 final class ContentViewAnimator {
     
     func showTransition(to newView: UIView, on contentView: UIView, animated: Bool) {
-        let currentView = contentView.subviews.first
+        let currentView = contentView.subviews.first { subView in
+            subView is MBProgressHUD == false
+        }
         
         guard newView != currentView else {
             return

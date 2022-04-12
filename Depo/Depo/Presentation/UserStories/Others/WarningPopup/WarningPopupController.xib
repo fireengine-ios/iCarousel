@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WarningPopupController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="buttonsStackView" destination="jBC-O6-wEv" id="D2x-Sa-GCc"/>
+                <outlet property="closeButton" destination="jdF-aV-fbX" id="NXs-Wf-m38"/>
                 <outlet property="containerView" destination="mLL-lV-btu" id="TaI-hh-sir"/>
                 <outlet property="firstButton" destination="BeI-Gh-dBI" id="kWx-5I-H1f"/>
                 <outlet property="messageLabel" destination="MJT-Kl-EFs" id="aFW-e7-6OB"/>
@@ -75,10 +76,22 @@
                                 <constraint firstAttribute="width" constant="200" id="11H-Iy-HDY"/>
                             </constraints>
                         </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdF-aV-fbX">
+                            <rect key="frame" x="320" y="8" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="2KV-sD-wAZ"/>
+                                <constraint firstAttribute="height" constant="30" id="Wgw-nN-CPc"/>
+                            </constraints>
+                            <state key="normal" image="CloseCardIcon"/>
+                            <connections>
+                                <action selector="onCloseButtonTapped:" destination="-1" eventType="touchUpInside" id="YHA-4L-lfx"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" name="secondaryBackground"/>
                     <constraints>
                         <constraint firstItem="mGr-Gt-VEY" firstAttribute="leading" secondItem="mLL-lV-btu" secondAttribute="leading" constant="16" id="1Lx-d6-xqO"/>
+                        <constraint firstAttribute="trailing" secondItem="jdF-aV-fbX" secondAttribute="trailing" constant="8" id="2yP-Sr-H8B"/>
                         <constraint firstItem="jBC-O6-wEv" firstAttribute="top" secondItem="MJT-Kl-EFs" secondAttribute="bottom" constant="16" id="43O-3T-bPO"/>
                         <constraint firstItem="mGr-Gt-VEY" firstAttribute="top" secondItem="3Lx-Qd-Ff2" secondAttribute="bottom" constant="16" id="43f-AX-Rma"/>
                         <constraint firstItem="3Lx-Qd-Ff2" firstAttribute="centerX" secondItem="mLL-lV-btu" secondAttribute="centerX" id="CLd-CD-FKZ"/>
@@ -88,6 +101,7 @@
                         <constraint firstAttribute="bottom" secondItem="jBC-O6-wEv" secondAttribute="bottom" constant="16" id="c4O-lG-w4M"/>
                         <constraint firstAttribute="trailing" secondItem="mGr-Gt-VEY" secondAttribute="trailing" constant="16" id="hqm-hJ-GxE"/>
                         <constraint firstAttribute="trailing" secondItem="MJT-Kl-EFs" secondAttribute="trailing" constant="16" id="mOX-Cn-01g"/>
+                        <constraint firstItem="jdF-aV-fbX" firstAttribute="top" secondItem="mLL-lV-btu" secondAttribute="top" constant="8" id="pFt-j4-1TH"/>
                         <constraint firstItem="MJT-Kl-EFs" firstAttribute="top" secondItem="mGr-Gt-VEY" secondAttribute="bottom" constant="8" id="sJ7-X9-cIt"/>
                         <constraint firstItem="3Lx-Qd-Ff2" firstAttribute="top" secondItem="mLL-lV-btu" secondAttribute="top" constant="16" id="xgM-fq-4RA"/>
                         <constraint firstItem="jBC-O6-wEv" firstAttribute="centerX" secondItem="mLL-lV-btu" secondAttribute="centerX" id="yEP-ef-rye"/>
@@ -105,6 +119,7 @@
         </view>
     </objects>
     <resources>
+        <image name="CloseCardIcon" width="14" height="14"/>
         <image name="warningAlert" width="30" height="30"/>
         <namedColor name="secondaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

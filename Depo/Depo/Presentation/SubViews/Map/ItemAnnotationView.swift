@@ -9,7 +9,7 @@
 import MapKit
 import Photos
 
-final class ItemAnnotationView: MKAnnotationView {
+class ItemAnnotationView: MKAnnotationView {
     private let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +18,7 @@ final class ItemAnnotationView: MKAnnotationView {
         return view
     }()
 
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -128,7 +128,7 @@ final class ItemAnnotationView: MKAnnotationView {
         }
     }
 
-    private func setupView() {
+    func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .clear
         layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor

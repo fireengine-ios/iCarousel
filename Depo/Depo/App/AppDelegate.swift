@@ -18,6 +18,7 @@ import KeychainSwift
 import WidgetKit
 import CoreSpotlight
 import FirebaseDynamicLinks
+import GoogleSignIn
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -181,6 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("I have received a URL through a custom sceme! \(url.absoluteString)")
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+            storageVars.isAppFirstLaunchForPublicSharedItems = true
             self.handleIncomingDynamicLink(dynamicLink)
             return true
         }
@@ -200,6 +202,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if spotifyService.handleRedirectUrl(url: url) {
             return true
         }
+        
+        if GIDSignIn.sharedInstance.handle(url) {
+            return true
+        }
+        
         return false
     }
     
@@ -485,6 +492,7 @@ extension AppDelegate {
             let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingUrl) { (dynamicLink, error) in
                 guard error == nil else { return }
                 if let dynamicLink = dynamicLink {
+                    self.storageVars.isAppFirstLaunchForPublicSharedItems = false
                     self.handleIncomingDynamicLink(dynamicLink)
                 }
             }

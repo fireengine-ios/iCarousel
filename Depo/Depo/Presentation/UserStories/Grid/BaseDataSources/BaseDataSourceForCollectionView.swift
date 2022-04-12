@@ -65,6 +65,8 @@ protocol BaseDataSourceForCollectionViewDelegate: AnyObject {
     func newFolderCreated()
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath)
+
+    func onSelectedMapPlaceholderItem()
     
     func didSelectAction(type: ActionType, on item: Item?, sender: Any?)
 }
@@ -95,7 +97,9 @@ extension BaseDataSourceForCollectionViewDelegate {
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { }
     
-    func onSelectedFaceImageDemoCell(with indexPath: IndexPath) {}
+    func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
+
+    func onSelectedMapPlaceholderItem() { }
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void

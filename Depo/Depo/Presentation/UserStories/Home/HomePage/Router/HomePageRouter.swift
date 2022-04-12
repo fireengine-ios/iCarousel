@@ -136,6 +136,12 @@ final class HomePageRouter: HomePageRouterInput {
         popUpsToPresent.append(popUp)
     }
     
+    func presentSecurityInfoPopup() {
+        let popUp = router.securityInfoPopup
+        
+        popUpsToPresent.append(popUp)
+    }
+    
     func presentPopUps() {
         let popUps = popUpsToPresent
             .compactMap { $0 as? BasePopUpController }

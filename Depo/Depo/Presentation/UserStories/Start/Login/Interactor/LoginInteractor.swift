@@ -45,7 +45,8 @@ class LoginInteractor: LoginInteractorInput {
         }
     }
     
-    private var login: String?
+    var headers: [String:Any]?
+    var login: String?
     private var password: String?
     
     private lazy var captchaService = CaptchaService()
@@ -144,6 +145,7 @@ class LoginInteractor: LoginInteractorInput {
     private func authificate(login: String,
                              password: String,
                              atachedCaptcha: CaptchaParametrAnswer?,
+                             googleToken: String? = nil,
                              errorHandler: @escaping (LoginResponseError, String) -> Void) {
         
         let isCaptchaRequired = atachedCaptcha != nil
@@ -191,7 +193,8 @@ class LoginInteractor: LoginInteractorInput {
         let user = AuthenticationUser(login: login,
                                       password: password,
                                       rememberMe: true,
-                                      attachedCaptcha: atachedCaptcha)
+                                      attachedCaptcha: atachedCaptcha,
+                                      googleToken: googleToken)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
             guard let self = self else {
@@ -328,8 +331,8 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: LoginInteractorInput
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?) {
-        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha) { [weak self] loginError, errorText in
+    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?, googleToken: String?) {
+        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha, googleToken: googleToken) { [weak self] loginError, errorText in
             
             DispatchQueue.main.async { [weak self] in
                 self?.output?.processLoginError(loginError, errorText: errorText)
@@ -442,6 +445,16 @@ class LoginInteractor: LoginInteractorInput {
     
     func stopUpdatePhone() {
         accountWarningService?.stop()
+    }
+    
+    func continueWithGoogleLogin() {
+        guard let login = login, let headers = headers else { return }
+        
+        proccessLoginHeaders(headers: headers, login: login) { error, errorText in
+            DispatchQueue.main.async { [weak self] in
+                self?.output?.processLoginError(error, errorText: errorText)
+            }
+        }
     }
     
 }

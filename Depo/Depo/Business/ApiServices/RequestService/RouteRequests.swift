@@ -85,10 +85,14 @@ struct RouteRequests {
     }()
     
     static let dynamicLinkDomain: String = {
-        switch currentServerEnvironment {
-        case .test: return "https://testlifebox.page.link"
-        case .preProduction: return "https://testlifebox.page.link"
-        case .production: return "https://mylifebox.page.link"
+        if isBillo {
+            return "https://billo.page.link"
+        } else {
+            switch currentServerEnvironment {
+            case .test: return "https://testlifebox.page.link"
+            case .preProduction: return "https://testlifebox.page.link"
+            case .production: return "https://mylifebox.page.link"
+            }
         }
     }()
 
@@ -352,6 +356,7 @@ struct RouteRequests {
         static let accountApi = baseUrl +/ "account"
         
         static let updatePassword = accountApi +/ "updatePassword"
+        static let updatePasswordV2 = baseUrl +/ "/v2/account/updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
 
@@ -472,4 +477,14 @@ struct RouteRequests {
     static let paycellWebUrl = paycellShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=https://google.com"
 
     static let resolveDeepLink = baseUrl +/ "deeplink"
+
+    // MARK: - Map
+    static let map = "map/%f,%f/%f,%f/%d"
+    static let mapList = "map/list/%@?page=%d&size=%d"
+    
+    // MARK: - Google Login
+    static let googleLogin = "auth/google?rememberMe=true"
+    static let googleLoginStatus = baseUrl +/ "google/login/status"
+    static let googleLoginDisconnect = baseUrl +/ "google/login/disconnect"
+    static let googleLoginConnect = baseUrl +/ "google/login/connect"
 }

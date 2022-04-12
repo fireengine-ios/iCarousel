@@ -23,7 +23,8 @@ class UserValidator {
                           phone: String,
                           password: String,
                           repassword: String,
-                          captchaAnswer: String?) -> [UserValidationResults] {
+                          captchaAnswer: String?,
+                          googleToken: String? = nil) -> [UserValidationResults] {
 
         let regularExpressionMailVer: NSRegularExpression? = try? NSRegularExpression(pattern: self.regularExpressionMail,
                                                                                       options: .dotMatchesLineSeparators)
@@ -41,9 +42,11 @@ class UserValidator {
             warningsArray.append(.phoneIsEmpty)//phoneNotValid)
         }
 
-        warningsArray.append(
-            contentsOf: validatePassword(password, repassword: repassword)
-        )
+        if googleToken == nil { // don't have password info for login with google
+            warningsArray.append(
+                contentsOf: validatePassword(password, repassword: repassword)
+            )
+        }
         
         if let captchaAnswer = captchaAnswer, captchaAnswer.isEmpty {
             warningsArray.append(.captchaIsEmpty)

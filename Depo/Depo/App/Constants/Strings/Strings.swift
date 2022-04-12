@@ -14,6 +14,10 @@ func localized(_ key: Strings) -> String {
 
 enum Strings: String, Localizable {
 
+    // MARK: - Map
+    case placesMapTitle = "places_map_title"
+    case mapLocationDetailHeader = "map_location_detail_header"
+
     // MARK: - SignUp
     case signUpEnterVerificationCodeEmail = "signup_enter_verification_code_email"
     case signUpTooManyRequestsEmail = "signup_too_many_requests_email"
@@ -126,4 +130,31 @@ enum Strings: String, Localizable {
     case publicShareDownloadStorageErrorTitle =  "save_to_my_lifebox_full_storage_title"
     case publicShareDownloadStorageErrorDescription = "save_to_my_lifebox_full_storage_body"
     case publicShareDownloadErrorMessage = "An error is occurred!"
+
+    // MARK: - Contact Restore
+    case contactSyncStorageFailDescription = "contact_sync_storage_fail_desc"
+    case contactSyncStorageFailContinueButton = "contact_sync_storage_fail_cont_button"
+    
+    // MARK: - Security Popup
+    case securityPopupHeader = "security_popup_header"
+    case securityPopupBody = "security_popup_body"
+    
+    // MARK: - Apple/Google Login
+    case connectWithGoogle                        = "on_boarding_btn_google_login"
+    case connectWithApple                         = "on_boarding_btn_apple_login"
+    case onboardingButtonOr                       = "on_boarding_or"
+    case googleUserExistBody                      = "google_login_user_exists_body"
+    case googlePasswordRequired                   = "settings_google_password_required"
+    case settingsAppleGoogleTitle                 = "settings_google_apple_connect"
+    case settingsGoogleMatch                      = "settings_google"
+    case settingsAppleMatch                       = "settings_apple"
+    case settingsChangePasswordGoogleWarning      = "settings_change_password_google_warning"
+    case settingsChangePasswordAppleWarning       = "settings_change_password_apple_warning"
+    case settingsChangePasswordAppleGoogleWarning = "settings_change_password_apple_google_warning"
+    case settingsSetNewPassword                   = "settings_googe_apple_set_password"
+    case settingsGoogleAppleMailMatchError        = "settings_google_apple_mail_match_error"
+    case settingsGoogleAppleInvalidToken          = "googe_apple_login_invalid_token"
+    case settingsGoogleAppleEmptyMailError        = "settings_google_apple_empty_mail_error"
+    case externalAuthError                        = "password_change_external_auth_required_error"
+    case forgotPasswordRequiredError              = "password_change_forgot_password_required_error"
 }
