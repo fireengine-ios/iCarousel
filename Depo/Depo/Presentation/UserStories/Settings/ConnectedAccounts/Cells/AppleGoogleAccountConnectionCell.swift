@@ -34,15 +34,6 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
         }
     }
     
-    @IBOutlet private weak var descriptionLabel: UILabel! {
-        willSet {
-            newValue.numberOfLines = 0
-            newValue.text = "Apple ID veya Google ID nizi hesabınızdan silebilmeniz için önce lifebox platfromunda şifre oluşturmalısınız"
-            newValue.font = UIFont.TurkcellSaturaFont(size: 14)
-            newValue.textColor = ColorConstants.lightText
-        }
-    }
-    
     @IBOutlet private weak var googleLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
