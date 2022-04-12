@@ -2013,7 +2013,6 @@
 "save_to_my_lifebox_full_storage_title" = "iPhone Storage Full";
 "save_to_my_lifebox_full_storage_body" = "You can free up space on this iPhone by managing your storage in Settings.";
 "places_map_title" = "Map";
-"map_location_detail_header" = "Photos at this location";
 "map_location_detail_header" = "Photos at this Location";
 "beeline_feature_cancel_TC" = "";
 "security_popup_body" = "Please enter at least 1 field to recover your account easily when you forgot your password";
@@ -2039,3 +2038,9 @@
 "settings_google_apple_empty_mail_error" = "";
 "password_change_external_auth_required_error" = "";
 "password_change_forgot_password_required_error" = "";
+"kvkk_toggle_desc" = "Personal Data Protection Consent";
+"kvkk_toggle_text" = "<p>I hereby give my consent to allow <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"> Lifecell Bulut &Ccedil;&ouml;z&uuml;mleri A.Ş., Lifecell Dijital Servisler ve &Ccedil;&ouml;z&uuml;mler A.Ş ve Grup Şirketleri </a> to process my personal data and share them with the parties listed in the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"> Permission Policy </a> .</p>";
+"security_popup_warning_header" = "";
+"security_popup_warning_body1" = "";
+"security_popup_warning_body2" = "";
+"security_popup_warning_footer" = "";
