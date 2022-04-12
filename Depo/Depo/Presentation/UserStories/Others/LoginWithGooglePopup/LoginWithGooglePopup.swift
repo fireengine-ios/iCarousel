@@ -51,4 +51,11 @@ final class LoginWithGooglePopup: BasePopUpController, NibInit {
         view.backgroundColor = AppColor.popUpBackground.color
         descriptionLabel.text = String(format: localized(.googleUserExistBody), email ?? "")
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if touch?.view == view {
+            dismiss(animated: true)
+        }
+    }
 }

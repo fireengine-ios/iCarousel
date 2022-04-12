@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import Typist
+import IQKeyboardManagerSwift
 
 final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
 
@@ -18,7 +18,6 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     private lazy var appleGoogleService = AppleGoogleLoginService()
     private lazy var router = RouterVC()
     private var showErrorColorInNewPasswordView = false
-    private let keyboard = Typist()
     var idToken: String?
     var disconnectGoogleLogin: Bool?
     
@@ -39,9 +38,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     }()
 
     //MARK: -IBOutlets
-    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var captchaView: CaptchaView!
-    @IBOutlet private weak var scrollViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet private weak var passwordsStackView: UIStackView! {
         willSet {
             newValue.spacing = 18
@@ -92,8 +89,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
         
         view.backgroundColor = AppColor.popUpBackground.color
         initialViewSetup()
-        setupKeyboard()
-    }
+   }
     
     //MARK: -IBActions
     @IBAction func onOkeyButton(_ sender: UIButton) {
@@ -101,20 +97,11 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     }
     
     //MARK: -Helpers
-    private func setupKeyboard() {
-        keyboard
-            .on(event: .willShow) { [weak self] options in
-                self?.scrollViewBottomConstraint.constant = options.endFrame.height
-                self?.view.layoutIfNeeded()
-            }
-            .on(event: .didShow) { [weak self] _ in
-                self?.scrollView.scrollToBottom(animated: true)
-            }
-            .on(event: .willHide) { [weak self] options in
-                self?.scrollViewBottomConstraint.constant = 0
-                self?.view.layoutIfNeeded()
-            }
-            .start()
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if touch?.view == view {
+            dismiss(animated: true)
+        }
     }
     
     private func initialViewSetup() {
@@ -123,6 +110,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
         captchaView.captchaAnswerTextField.delegate = self
         
         addTapGestureToHideKeyboard()
+        IQKeyboardManager.shared.enabledDistanceHandlingClasses.append(PasswordEnterPopup.self)
     }
     
     private func showError(_ errorResponse: Error) {
