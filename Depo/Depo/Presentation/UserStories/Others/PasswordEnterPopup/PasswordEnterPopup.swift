@@ -111,6 +111,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
         
         addTapGestureToHideKeyboard()
         IQKeyboardManager.shared.enabledDistanceHandlingClasses.append(PasswordEnterPopup.self)
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
     
     private func showError(_ errorResponse: Error) {

@@ -18,6 +18,7 @@ class IntroduceViewController: ViewController {
     var user: GoogleUser?
     
     // MARK: IBOutlets
+    @IBOutlet private weak var welcomeViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var startUsingLifeBoxButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
@@ -139,6 +140,12 @@ class IntroduceViewController: ViewController {
         
         if signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden {
             orLabel.isHidden = true
+        }
+        
+        if !signInWithAppleButton.isHidden && !signInWithGoogleButton.isHidden {
+            if Device.isIphoneSmall {
+                welcomeViewHeightConstraint.constant = 174
+            }
         }
     }
 
