@@ -127,7 +127,7 @@ class IntroduceViewController: ViewController {
     }
     
     private func handleRemoteConfig() {
-        if #unavailable(iOS 13) {
+        if #available(iOS 13, *) { } else {
             signInWithAppleButton.isHidden = true
             signInWithGoogleButton.isHidden = true
             return
