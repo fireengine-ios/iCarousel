@@ -14,23 +14,6 @@ protocol NavigationBarStyling: UIViewController {
 
 extension NavigationBarStyling {
     func configureNavigationBarStyle() {
-        switch preferredNavigationBarStyle {
-        case .default:
-            navigationItem.titleView = nil
-
-        case .withLogo:
-            let size = preferredNavigationBarStyle.titleViewSize
-            let titleView = UIView(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-            let imageView = UIImageView(image: imageAsset(NavigationBarImages.logo))
-            titleView.addSubview(imageView)
-            imageView.frame = titleView.bounds
-
-            navigationItem.titleView = titleView
-
-        case .black:
-            navigationItem.titleView = nil
-        }
-
         configureNavigationBar(with: preferredNavigationBarStyle)
     }
 
@@ -43,7 +26,7 @@ extension NavigationBarStyling {
         navigationBar.tintColor = style.tintColor
         navigationBar.titleTextAttributes = [
             .foregroundColor: style.titleColor,
-//            .font TODO: Facelift: font
+            .font: style.titleFont
         ]
         navigationBar.isTranslucent = style.isTranslucent
 
@@ -88,12 +71,11 @@ private func configure(appearance: UINavigationBarAppearance, with style: Naviga
     appearance.backgroundColor = style.barTintColor
     appearance.titleTextAttributes = [
         .foregroundColor: style.titleColor,
-//            .font TODO: Facelift: font
+        .font: style.titleFont
     ]
 
     appearance.buttonAppearance.normal.titleTextAttributes = [
         .foregroundColor: style.tintColor,
-//            .font TODO: Facelift: font
     ]
     appearance.setBackIndicatorImage(style.backIndicatorImage,
                                      transitionMaskImage: style.backIndicatorTransitionMaskImage)

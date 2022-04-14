@@ -14,11 +14,10 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     
     private var lastCardContainerHeight: CGFloat = 0
     private let sortAreaHeight: CGFloat = 36
-
-    override var preferredNavigationBarStyle: NavigationBarStyle { .withLogo }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationBarHidden = true
         collectionView.addInteraction(UIDropInteraction(delegate: self))
     }
     

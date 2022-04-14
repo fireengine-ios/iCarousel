@@ -28,14 +28,12 @@ extension ContactSyncControllerProtocol {
     var selectedBackupForRestore: ContactBackupItem? { nil }
 }
 
-final class ContactSyncViewController: BaseViewController, NibInit {
+final class ContactSyncViewController: BaseViewController, NibInit, HeaderContainingViewControllerChild {
     
     @IBOutlet private weak var contentView: UIView!
     
     private var tabBarIsVisible = false
 
-    override var preferredNavigationBarStyle: NavigationBarStyle { .withLogo }
-    
     private lazy var noBackupView: ContactSyncNoBackupView = {
         let view = ContactSyncNoBackupView.initFromNib()
         view.delegate = self
@@ -73,11 +71,11 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         
         trackScreen()
         floatingButtonsArray = [.takePhoto, .upload, .createAStory, .newFolder]
-        
+
         if tabBarIsVisible {
             needToShowTabBar = true
         }
-        
+
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateBackupStatus()
         }

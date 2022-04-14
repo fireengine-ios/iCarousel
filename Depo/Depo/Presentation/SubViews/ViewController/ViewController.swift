@@ -50,7 +50,7 @@ class ViewController: UIViewController, NavigationBarStyling {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateNavigationBarVisibilityIfNeeded()
+        updateNavigationBarVisibilityIfNeeded(animated: animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {

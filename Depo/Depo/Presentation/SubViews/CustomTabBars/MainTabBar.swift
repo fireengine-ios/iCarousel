@@ -11,6 +11,7 @@ import UIKit
 final class MainTabBar: UITabBar {
     static let standardHeight: CGFloat = 70
 
+    private let kItemTitleFontSize: CGFloat = 12
     private let kItemImageInsets = UIEdgeInsets(top: -2, left: 0, bottom: 2, right: 0)
     private let kTitlePositionAdjustment = UIOffset(horizontal: 0, vertical: -9)
     private let kCornerRadius: CGFloat = 16
@@ -60,17 +61,17 @@ final class MainTabBar: UITabBar {
             let appearance = UITabBarAppearance()
             appearance.configureWithTransparentBackground()
 
-            appearance.backgroundEffect = UIBlurEffect(style: .systemMaterial)
+            appearance.backgroundEffect = UIBlurEffect(style: .prominent)
             appearance.stackedLayoutAppearance.normal.iconColor = color(.tabBarTint)
             appearance.stackedLayoutAppearance.normal.titleTextAttributes = [
                 .foregroundColor: color(.tabBarTint),
-//                .font: TODO: Facelift: font
+                .font: UIFont.appFont(.medium, size: kItemTitleFontSize)
             ]
             appearance.stackedLayoutAppearance.normal.titlePositionAdjustment = kTitlePositionAdjustment
             appearance.stackedLayoutAppearance.selected.iconColor = color(.tabBarTintSelected)
             appearance.stackedLayoutAppearance.selected.titleTextAttributes = [
                 .foregroundColor: color(.tabBarTintSelected),
-//                .font: TODO: Facelift: font
+                .font: UIFont.appFont(.bold, size: kItemTitleFontSize)
             ]
 
             standardAppearance = appearance

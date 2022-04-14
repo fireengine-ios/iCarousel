@@ -11,7 +11,6 @@ import UIKit
 
 enum NavigationBarStyle {
     case `default`
-    case withLogo
     case black
 }
 
@@ -22,7 +21,7 @@ extension NavigationBarStyle {
 
     var barTintColor: UIColor {
         switch self {
-        case .default, .withLogo:
+        case .default:
             return color(.navigationBarBackground)
         case .black:
             return color(.navigationBarBackgroundBlack)
@@ -31,25 +30,20 @@ extension NavigationBarStyle {
 
     var titleColor: UIColor {
         switch self {
-        case .default, .withLogo:
+        case .default:
             return color(.navigationBarTitle)
         case .black:
             return color(.navigationBarTitleBlack)
         }
     }
 
-    var titleViewSize: CGSize {
-        switch self {
-        case .withLogo:
-            return CGSize(width: 40, height: 40)
-        case .default, .black:
-            return .zero
-        }
+    var titleFont: UIFont {
+        return UIFont.appFont(.medium, size: 16, relativeTo: .title1)
     }
 
     var tintColor: UIColor {
         switch self {
-        case .default, .withLogo:
+        case .default:
             return color(.navigationBarIcons)
 
         case .black:
@@ -57,7 +51,7 @@ extension NavigationBarStyle {
         }
     }
 
-    var backIndicatorImage: UIImage? { imageAsset(NavigationBarImages.back) }
+    var backIndicatorImage: UIImage? { imageAsset(NavigationBarImage.back) }
 
     var backIndicatorTransitionMaskImage: UIImage? { backIndicatorImage }
 

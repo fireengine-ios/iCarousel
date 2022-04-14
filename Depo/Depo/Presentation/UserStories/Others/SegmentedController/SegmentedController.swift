@@ -167,6 +167,7 @@ class SegmentedController: BaseViewController, NibInit {
     }
     
     private func setupSelectedController(_ controller: BaseViewController) {
+        controller.navigationBarHidden = self.navigationBarHidden
         add(childController: controller)
         floatingButtonsArray = controller.floatingButtonsArray
     }

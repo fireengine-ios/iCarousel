@@ -6,6 +6,8 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 enum TabScreenIndex: Int {
     case home = 0
     case gallery = 1
@@ -90,12 +92,21 @@ final class TabBarConfigurator {
             return []
         }
         syncContactsVC.setTabBar(isVisible: true)
+        syncContactsVC.navigationBarHidden = true
         
-        let list = [router.homePageScreen,
-                    router.segmentedMedia(),
-                    syncContactsVC,
-                    router.segmentedFiles,
-                    UIViewController()]
-        return list.compactMap { NavigationController(rootViewController: $0!) }
+        let list: [HeaderContainingViewController.ChildViewController] = [
+            router.homePageScreen,
+            router.segmentedMedia(),
+            syncContactsVC,
+            router.segmentedFiles,
+            EmptyViewController()
+        ]
+        return list.map {
+            let headerContaining = HeaderContainingViewController(child: $0)
+            return NavigationController(rootViewController: headerContaining)
+        }
     }
 }
+
+// TODO: Facelift. remove when implementing discover page
+private class EmptyViewController: UIViewController, HeaderContainingViewControllerChild {}

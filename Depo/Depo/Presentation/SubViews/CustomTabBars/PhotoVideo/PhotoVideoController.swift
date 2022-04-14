@@ -76,7 +76,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionViewManager.setup()
         collectionViewManager.collectionViewLayout.delegate = dataSource
         navBarManager.setDefaultMode()
-        
+
+        navigationBarHidden = true
         needToShowTabBar = true
         floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         ItemOperationManager.default.startUpdateView(view: self)

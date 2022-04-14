@@ -521,7 +521,7 @@ class RouterVC: NSObject {
     
     
     // MARK: Home Page
-    var homePageScreen: UIViewController? {
+    var homePageScreen: HeaderContainingViewController.ChildViewController {
         if (!SingletonStorage.shared.isAppraterInited) {
             AppRater.sharedInstance().daysUntilPrompt = 5
             AppRater.sharedInstance().launchesUntilPrompt = 10
@@ -532,8 +532,7 @@ class RouterVC: NSObject {
             SingletonStorage.shared.isAppraterInited = true
         }
         
-        let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
-        return controller
+        return HomePageModuleInitializer.initializeViewController(with: "HomePage")
     }
     
     func segmentedMedia() -> PhotoVideoSegmentedController {
@@ -579,10 +578,10 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var segmentedFiles: UIViewController? {
+    var segmentedFiles: HeaderContainingViewController.ChildViewController {
         guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
-            return SegmentedController()
+            return AllFilesSegmentedController()
         }
         let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)

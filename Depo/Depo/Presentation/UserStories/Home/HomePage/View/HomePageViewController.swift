@@ -36,14 +36,24 @@ final class HomePageViewController: BaseViewController {
     
     private var isGiftButtonEnabled = false
 
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .withLogo
-    }
-    
+    private lazy var leftItems: [UIView] = {
+        let profile = NavigationHeaderButton(image: .headerActionProfile, target: self, action: #selector(showSettings))
+        return [profile]
+    }()
+
+    private lazy var rightItems: [UIView] = {
+        let search = NavigationHeaderButton(image: .headerActionSearch, target: self, action: #selector(showSearch))
+        search.addTarget(self, action: #selector(showSearch), for: .primaryActionTriggered)
+
+        let plus = NavigationHeaderButton(image: .headerActionPlus)
+        return [search, plus]
+    }()
+
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         needToShowTabBar = true
+        navigationBarHidden = true
         
         debugLog("HomePage viewDidLoad")
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
@@ -120,12 +130,11 @@ final class HomePageViewController: BaseViewController {
             self?.output.showSearch(output: self)
         })
 
-        let plus = NavBarWithAction(navItem: NavigationBarList().plus) { _ in }
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.updateNavigationItemsState(state: false)
             self?.output.showSettings()
         })
-        navBarConfigurator.configure(right: [plus, search], left: [setting])
+        navBarConfigurator.configure(right: [search, setting], left: [])
         if isGiftButtonEnabled {
             let gift = NavBarWithAction(navItem: NavigationBarList().gift, action: { [weak self] _ in
                 self?.output.giftButtonPressed()
@@ -156,7 +165,29 @@ final class HomePageViewController: BaseViewController {
             spotlight.dismiss(animated: true, completion: nil)
         }
     }
-    
+
+    @objc private func showSettings() {
+        output.showSettings()
+    }
+
+    @objc private func showSearch() {
+        updateNavigationItemsState(state: false)
+        output.showSearch(output: self)
+    }
+}
+
+extension HomePageViewController: HeaderContainingViewControllerChild {
+    var scrollViewForHeaderTracking: UIScrollView? {
+        return collectionView
+    }
+
+    var navigationHeaderLeftItems: [UIView] {
+        return leftItems
+    }
+
+    var navigationHeaderRightItems: [UIView] {
+        return rightItems
+    }
 }
 
 // MARK: - HomeCollectionViewDataSourceDelegate

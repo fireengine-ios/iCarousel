@@ -1,5 +1,5 @@
 //
-//  NavigationBarImages.swift
+//  NavigationBarImage.swift
 //  Depo
 //
 //  Created by Hady on 4/4/22.
@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 
-enum NavigationBarImages: String, AppImage {
+enum NavigationBarImage: String, AppImage {
     case background = "navigationBarBackground"
-    case logo = "navigationBarLogo"
     case back = "navigationBarBack"
-    case iconPlus = "navigationBarIconPlus"
-    case iconProfile = "navigationBarIconProfile"
-    case iconSearch = "navigationBarIconSearch"
+    
+    case headerLogo = "navigationHeaderLogo"
+    case headerBackground = "navigationHeaderBackground"
+    case headerActionPlus = "navigationHeaderActionPlus"
+    case headerActionSearch = "navigationHeaderActionSearch"
+    case headerActionProfile = "navigationHeaderActionProfile"
 }
