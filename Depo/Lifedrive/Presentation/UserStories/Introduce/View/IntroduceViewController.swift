@@ -128,15 +128,17 @@ final class IntroduceViewController: ViewController {
     }
     
     private func handleRemoteConfig() {
+        if #unavailable(iOS 13) {
+            signInWithAppleButton.isHidden = true
+            signInWithGoogleButton.isHidden = true
+            return
+        }
+        
         signInWithAppleButton.isHidden = !FirebaseRemoteConfig.shared.appleLoginEnabled
         signInWithGoogleButton.isHidden = !FirebaseRemoteConfig.shared.googleLoginEnabled
         
-        if #available(iOS 13, *) {
-            if signInWithAppleButton.isHidden == true { ///disable google button if apple is disabled
-                signInWithGoogleButton.isHidden = true
-            }
-        } else {
-            signInWithAppleButton.isHidden = true
+        if signInWithAppleButton.isHidden {
+            signInWithGoogleButton.isHidden = true
         }
         
         if signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden {
