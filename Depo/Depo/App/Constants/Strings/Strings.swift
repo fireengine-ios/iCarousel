@@ -157,4 +157,9 @@ enum Strings: String, Localizable {
     case settingsGoogleAppleEmptyMailError        = "settings_google_apple_empty_mail_error"
     case externalAuthError                        = "password_change_external_auth_required_error"
     case forgotPasswordRequiredError              = "password_change_forgot_password_required_error"
+    
+    // MARK: - KVKK Permission
+    case kvkkToggleTitle = "kvkk_toggle_desc"
+    case kvkkToggleText  = "kvkk_toggle_text"
+    case kvkkFirmsLink   = "kvkk_firms_link"
 }

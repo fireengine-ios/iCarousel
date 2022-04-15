@@ -50,6 +50,14 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         return permissionView
     }()
     
+    private lazy var kvkkPermissionView: UIView & PermissionsViewProtocol = {
+        let permissionView = PermissionsView.initFromNib()
+        permissionView.type = .kvkk
+        permissionView.delegate = self
+        permissionView.textviewDelegate = self
+        return permissionView
+    }()
+    
     //MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -93,6 +101,7 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
                     self?.setupPermissionViewFromResult(result, type: .etk)
                     self?.setupPermissionViewFromResult(result, type: .globalPermission)
                     self?.setupPermissionViewFromResult(result, type: .mobilePayment)
+                    self?.setupPermissionViewFromResult(result, type: .kvkk)
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
@@ -127,6 +136,8 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
             return globalPermissionView
         case .mobilePayment:
             return mobilePaymentPermissionView
+        case .kvkk:
+            return kvkkPermissionView
         }
     }
     
