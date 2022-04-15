@@ -356,7 +356,7 @@ struct RouteRequests {
         static let accountApi = baseUrl +/ "account"
         
         static let updatePassword = accountApi +/ "updatePassword"
-        static let updatePasswordV2 = baseUrl +/ "/v2/account/updatePassword"
+        static let updatePasswordV2 = baseUrl +/ "v2/account/updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
 

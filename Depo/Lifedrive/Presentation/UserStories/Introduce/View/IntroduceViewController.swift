@@ -119,11 +119,31 @@ final class IntroduceViewController: ViewController {
         super.viewDidLoad()
         configurateView()
         output.viewIsReady()
+        handleRemoteConfig()
     }
     
     func configurateView() {
         hidenNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
+    private func handleRemoteConfig() {
+        if #available(iOS 13, *) { } else {
+            signInWithAppleButton.isHidden = true
+            signInWithGoogleButton.isHidden = true
+            return
+        }
+        
+        signInWithAppleButton.isHidden = !FirebaseRemoteConfig.shared.appleLoginEnabled
+        signInWithGoogleButton.isHidden = !FirebaseRemoteConfig.shared.googleLoginEnabled
+        
+        if signInWithAppleButton.isHidden {
+            signInWithGoogleButton.isHidden = true
+        }
+        
+        if signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden {
+            orLabel.isHidden = true
+        }
     }
 
     override var preferredNavigationBarStyle: NavigationBarStyle {

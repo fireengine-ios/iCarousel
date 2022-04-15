@@ -18,6 +18,7 @@ class IntroduceViewController: ViewController {
     var user: GoogleUser?
     
     // MARK: IBOutlets
+    @IBOutlet private weak var welcomeViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var startUsingLifeBoxButton: RoundedInsetsButton! {
         willSet {
             newValue.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
@@ -117,11 +118,37 @@ class IntroduceViewController: ViewController {
 
         configurateView()
         output.viewIsReady()
+        handleRemoteConfig()
     }
     
     func configurateView() {
         hidenNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
+    private func handleRemoteConfig() {
+        if #available(iOS 13, *) { } else {
+            signInWithAppleButton.isHidden = true
+            signInWithGoogleButton.isHidden = true
+            return
+        }
+        
+        signInWithAppleButton.isHidden = !FirebaseRemoteConfig.shared.appleLoginEnabled
+        signInWithGoogleButton.isHidden = !FirebaseRemoteConfig.shared.googleLoginEnabled
+        
+        if signInWithAppleButton.isHidden {
+            signInWithGoogleButton.isHidden = true
+        }
+        
+        if signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden {
+            orLabel.isHidden = true
+        }
+        
+        if !signInWithAppleButton.isHidden && !signInWithGoogleButton.isHidden {
+            if Device.isIphoneSmall {
+                welcomeViewHeightConstraint.constant = 174
+            }
+        }
     }
 
     override var preferredNavigationBarStyle: NavigationBarStyle {

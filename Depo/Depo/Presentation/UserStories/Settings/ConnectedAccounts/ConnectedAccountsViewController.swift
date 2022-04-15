@@ -74,7 +74,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     }
     
     private func showPasswordPopup(with idToken: String) {
-        let popup = RouterVC().passwordEnterPopup(with: idToken)
+        let popup = RouterVC().passwordEnterPopup(with: idToken, disconnectGoogleLogin: true)
         present(popup, animated: true)
     }
     
