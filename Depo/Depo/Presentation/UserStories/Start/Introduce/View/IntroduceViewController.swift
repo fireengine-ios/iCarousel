@@ -130,6 +130,7 @@ class IntroduceViewController: ViewController {
         if #available(iOS 13, *) { } else {
             signInWithAppleButton.isHidden = true
             signInWithGoogleButton.isHidden = true
+            orLabel.isHidden = true
             return
         }
         
