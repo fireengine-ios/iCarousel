@@ -118,7 +118,7 @@
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EG9-7o-rTM" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="186" width="269" height="48"/>
                             <constraints>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="tDW-id-V3n">
+                                <constraint firstAttribute="width" constant="260" id="tDW-id-V3n">
                                     <variation key="heightClass=regular" constant="269"/>
                                 </constraint>
                                 <constraint firstAttribute="height" constant="48" id="wUh-aS-Gx9"/>
@@ -132,7 +132,7 @@
                             <rect key="frame" x="0.0" y="249" width="269" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="aMr-km-BC7"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="260" id="dVQ-S3-Pnj">
+                                <constraint firstAttribute="width" constant="260" id="dVQ-S3-Pnj">
                                     <variation key="heightClass=regular" constant="269"/>
                                 </constraint>
                             </constraints>
@@ -167,7 +167,7 @@
         </view>
     </objects>
     <resources>
-        <image name="IntroduceImage1" width="215" height="175"/>
+        <image name="IntroduceImage1" width="720" height="600"/>
         <image name="logo_with_icon" width="353.5" height="429.5"/>
         <namedColor name="primaryBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -80,4 +80,11 @@ final class AppleGoogleUpdatePasswordPopup: BasePopUpController, KeyboardHandler
     @IBAction func onSignInWithApple(_ sender: RoundedInsetsButton) {
         delegate?.onSignInWithApple()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if touch?.view == view {
+            dismiss(animated: true)
+        }
+    }
 }
