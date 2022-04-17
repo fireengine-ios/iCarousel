@@ -197,20 +197,20 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
         }
         
         if securityQuestionOperation != nil && recoveryEmailOperation == nil {
-            securityQuestionOperation?.isSuccess == true ? self.questionWasSuccessfullyUpdated()
-            : self.handleServerErrors(securityQuestionOperation?.errorMessage ?? .unknown)
+            securityQuestionOperation?.isSuccess == true ? questionWasSuccessfullyUpdated()
+            : handleServerErrors(securityQuestionOperation?.errorMessage ?? .unknown)
             return
         }
         
         if securityQuestionOperation != nil && recoveryEmailOperation != nil {
             if securityQuestionOperation?.isSuccess == true && recoveryEmailOperation?.isSuccess == true {
-                self.questionWasSuccessfullyUpdated()
+                questionWasSuccessfullyUpdated()
             } else if securityQuestionOperation?.isSuccess == true && recoveryEmailOperation?.isSuccess == false {
-                self.showSecurityWarningPopup(errorMessage: self.recoveryEmailOperation?.errorMessage ?? "",
-                                              warningType: .email)
+                showSecurityWarningPopup(errorMessage: recoveryEmailOperation?.errorMessage ?? "",
+                                         warningType: .email)
             } else if securityQuestionOperation?.isSuccess == false && recoveryEmailOperation?.isSuccess == true {
-                self.showSecurityWarningPopup(errorMessage: self.securityQuestionOperation?.errorMessage?.localizedDescription ?? "",
-                                              warningType: .securityQuestion)
+                showSecurityWarningPopup(errorMessage: securityQuestionOperation?.errorMessage?.localizedDescription ?? "",
+                                         warningType: .securityQuestion)
             }  else if securityQuestionOperation?.isSuccess == false && recoveryEmailOperation?.isSuccess == false {
                 UIApplication.showErrorAlert(message: recoveryEmailOperation?.errorMessage ?? "")
             }
@@ -219,8 +219,9 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
     
     private func showSecurityWarningPopup(errorMessage: String, warningType: SecurityPopupWarningType) {
         dismiss(animated: true) {
-            let popup = RouterVC().securityInfoWarningPopup(errorMessage: errorMessage, warningType: warningType)
-            UIApplication.shared.keyWindow?.rootViewController?.present(popup, animated: true)
+            let router = RouterVC()
+            let popup = router.securityInfoWarningPopup(errorMessage: errorMessage, warningType: warningType)
+            router.presentViewController(controller: popup)
         }
     }
 }

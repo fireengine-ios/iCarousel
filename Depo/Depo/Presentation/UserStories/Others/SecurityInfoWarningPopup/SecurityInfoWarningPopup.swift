@@ -85,8 +85,12 @@ final class SecurityInfoWarningPopup: BasePopUpController, NibInit {
     }
     
     @IBAction func onSettingsButton(_ sender: RoundedButton) {
-        dismiss(animated: true)
-        //todo: go to settings
+        dismiss(animated: true) {
+            let router = RouterVC()
+            if let settings = Device.isIpad ? router.settingsIpad : router.settings {
+                router.pushViewController(viewController: settings)
+            }
+        }
     }
     
     @IBAction func onContinueButton(_ sender: RoundedButton) {
