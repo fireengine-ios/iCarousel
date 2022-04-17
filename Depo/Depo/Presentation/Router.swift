@@ -1462,4 +1462,15 @@ class RouterVC: NSObject {
         
         return controller
     }
+    
+    func securityInfoWarningPopup(errorMessage: String, warningType: SecurityPopupWarningType) -> SecurityInfoWarningPopup {
+        let controller = SecurityInfoWarningPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.errorMessage = errorMessage
+        controller.warningType = warningType
+        
+        return controller
+    }
 }

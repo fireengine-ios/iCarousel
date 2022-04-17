@@ -67,14 +67,9 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
     private let accountService = AccountService()
     private let keyboard = Typist()
     
-    private var recoveryInfoSuccess = false {
-        didSet {
-            if recoveryInfoSuccess == true {
-                UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true, completion: nil)
-            }
-        }
-    }
-    
+    private var recoveryEmailOperation: (isSuccess: Bool?, errorMessage: String?)?
+    private var securityQuestionOperation: (isSuccess: Bool?, errorMessage: SetSecretQuestionErrors?)?
+
     private lazy var recoveryEmailView: ProfileEmailFieldView = {
         let newValue = ProfileEmailFieldView()
         newValue.titleLabel.text = localized(.profileRecoveryMail)
@@ -156,6 +151,8 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
         answer.questionAnswer = secretAnswerView.answerTextField.text
         captchaView.hideErrorAnimated()
         secretAnswerView.hideErrorAnimated()
+        securityQuestionOperation = nil
+        recoveryEmailOperation = nil
         
         guard let secretAnswer = secretAnswerView.answerTextField.text,
               let recoveryEmail = recoveryEmailView.textField.text else {
@@ -169,14 +166,61 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
             return
         }
         
+        let myGroup = DispatchGroup()
+
         if !recoveryEmail.isEmpty {
-            setRecoveryEmail(with: recoveryEmail)
+            myGroup.enter()
+            setRecoveryEmail(with: recoveryEmail) {
+                myGroup.leave()
+            }
         }
         
         if !secretAnswer.isEmpty {
+            myGroup.enter()
             getQuestions { [weak self] questions in
-                self?.updateSecurityQuestion(questions: questions)
+                self?.updateSecurityQuestion(questions: questions) {
+                    myGroup.leave()
+                }
             }
+        }
+        
+        myGroup.notify(queue: .main) {
+            self.handleApiCalls()
+        }
+    }
+    
+    private func handleApiCalls() {
+        if securityQuestionOperation == nil && recoveryEmailOperation != nil {
+            recoveryEmailOperation?.isSuccess == true ? dismiss(animated: true)
+            : UIApplication.showErrorAlert(message: recoveryEmailOperation?.errorMessage ?? "")
+            return
+        }
+        
+        if securityQuestionOperation != nil && recoveryEmailOperation == nil {
+            securityQuestionOperation?.isSuccess == true ? self.questionWasSuccessfullyUpdated()
+            : self.handleServerErrors(securityQuestionOperation?.errorMessage ?? .unknown)
+            return
+        }
+        
+        if securityQuestionOperation != nil && recoveryEmailOperation != nil {
+            if securityQuestionOperation?.isSuccess == true && recoveryEmailOperation?.isSuccess == true {
+                self.questionWasSuccessfullyUpdated()
+            } else if securityQuestionOperation?.isSuccess == true && recoveryEmailOperation?.isSuccess == false {
+                self.showSecurityWarningPopup(errorMessage: self.recoveryEmailOperation?.errorMessage ?? "",
+                                              warningType: .email)
+            } else if securityQuestionOperation?.isSuccess == false && recoveryEmailOperation?.isSuccess == true {
+                self.showSecurityWarningPopup(errorMessage: self.securityQuestionOperation?.errorMessage?.localizedDescription ?? "",
+                                              warningType: .securityQuestion)
+            }  else if securityQuestionOperation?.isSuccess == false && recoveryEmailOperation?.isSuccess == false {
+                UIApplication.showErrorAlert(message: recoveryEmailOperation?.errorMessage ?? "")
+            }
+        }
+    }
+    
+    private func showSecurityWarningPopup(errorMessage: String, warningType: SecurityPopupWarningType) {
+        dismiss(animated: true) {
+            let popup = RouterVC().securityInfoWarningPopup(errorMessage: errorMessage, warningType: warningType)
+            UIApplication.shared.keyWindow?.rootViewController?.present(popup, animated: true)
         }
     }
 }
@@ -185,6 +229,7 @@ final class SecurityInfoPopup: BasePopUpController, NibInit, KeyboardHandler {
 extension SecurityInfoPopup {
     private func questionWasSuccessfullyUpdated() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.userProfileSetSecretQuestionSuccess)
+        dismiss(animated: true)
     }
     
     private func handleServerErrors(_ error: SetSecretQuestionErrors) {
@@ -228,7 +273,7 @@ extension SecurityInfoPopup {
         }
     }
     
-    private func updateSecurityQuestion(questions: ([SecretQuestionsResponse])) {
+    private func updateSecurityQuestion(questions: ([SecretQuestionsResponse]), completion: @escaping () -> ()) {
         guard let captchaAnswer = captchaView.captchaAnswerTextField.text,
               let questionId = answer.questionId,
               let securityQuestionAnswer = answer.questionAnswer else {
@@ -244,26 +289,28 @@ extension SecurityInfoPopup {
             
             guard let self = self else { return }
             self.hideSpinnerIncludeNavigationBar()
+            completion()
             
             switch result {
             case .success:
-                self.recoveryInfoSuccess = true
-                self.questionWasSuccessfullyUpdated()
+                self.securityQuestionOperation = (true, nil)
             case .failure(let error):
-                self.handleServerErrors(error)
+                self.securityQuestionOperation = (false, error)
             }
         }
     }
     
-    private func setRecoveryEmail(with recoveryEmail: String) {
+    private func setRecoveryEmail(with recoveryEmail: String, completion: @escaping () -> ()) {
         let parameters = UserRecoveryEmailParameters(email: recoveryEmail)
         AccountService().updateUserRecoveryEmail(parameters: parameters,
                                                  success: { [weak self] response in
-            self?.recoveryInfoSuccess = true
             self?.hideSpinnerIncludeNavigationBar()
+            self?.recoveryEmailOperation = (true, nil)
+            completion()
         }, fail: { [weak self] error in
             self?.hideSpinnerIncludeNavigationBar()
-            UIApplication.showErrorAlert(message: error.errorDescription ?? "")
+            self?.recoveryEmailOperation = (false, error.errorDescription)
+            completion()
         })
     }
 }

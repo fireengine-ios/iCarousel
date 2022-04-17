@@ -136,8 +136,14 @@ enum Strings: String, Localizable {
     case contactSyncStorageFailContinueButton = "contact_sync_storage_fail_cont_button"
     
     // MARK: - Security Popup
-    case securityPopupHeader = "security_popup_header"
-    case securityPopupBody = "security_popup_body"
+    case securityPopupHeader                   = "security_popup_header"
+    case securityPopupBody                     = "security_popup_body"
+    case securityPopupWarningHeader            = "security_popup_warning_header"
+    case securityPopupEmailWarning             = "security_popup_warning_body1"
+    case securityPopupSecurityQuestionWarning  = "security_popup_warning_body2"
+    case securityPopupWarningFooter            = "security_popup_warning_footer"
+    case securtiyPopupWarningSettingsButton    = "Settings"
+    case securtiyPopupWarningContinueButton    = "warning_popup_print_redirect_proceed_button"
     
     // MARK: - Apple/Google Login
     case connectWithGoogle                        = "on_boarding_btn_google_login"
