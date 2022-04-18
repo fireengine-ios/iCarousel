@@ -274,6 +274,10 @@
 		07567DAA2721DFBC00557BCF /* DeleteAccountPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07567DA42721DFBC00557BCF /* DeleteAccountPopUp.xib */; };
 		07567DAB2721DFBC00557BCF /* DeleteAccountPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07567DA42721DFBC00557BCF /* DeleteAccountPopUp.xib */; };
 		07567DAC2721DFBC00557BCF /* DeleteAccountPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07567DA42721DFBC00557BCF /* DeleteAccountPopUp.xib */; };
+		07585D62280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07585D61280D7E69001B8E8D /* PhotoVideoController+ContentType.swift */; };
+		07585D63280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07585D61280D7E69001B8E8D /* PhotoVideoController+ContentType.swift */; };
+		07585D64280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07585D61280D7E69001B8E8D /* PhotoVideoController+ContentType.swift */; };
+		07585D65280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07585D61280D7E69001B8E8D /* PhotoVideoController+ContentType.swift */; };
 		07595512264131FB00C088B1 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07595510264131FA00C088B1 /* String+Extension.swift */; };
 		07595513264131FB00C088B1 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07595510264131FA00C088B1 /* String+Extension.swift */; };
 		07595515264131FB00C088B1 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07595510264131FA00C088B1 /* String+Extension.swift */; };
@@ -9267,6 +9271,7 @@
 		07567D912721D39900557BCF /* Strings+Attributed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Attributed.swift"; sourceTree = "<group>"; };
 		07567DA32721DFBC00557BCF /* DeleteAccountPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountPopUp.swift; sourceTree = "<group>"; };
 		07567DA42721DFBC00557BCF /* DeleteAccountPopUp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteAccountPopUp.xib; sourceTree = "<group>"; };
+		07585D61280D7E69001B8E8D /* PhotoVideoController+ContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoVideoController+ContentType.swift"; sourceTree = "<group>"; };
 		07595510264131FA00C088B1 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		0765B824269EE6F40030429C /* PhotopickCampaignResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotopickCampaignResponse.swift; sourceTree = "<group>"; };
 		0765B82C269EE7430030429C /* APIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
@@ -15757,6 +15762,7 @@
 				8C20863B228D4B2E000BEDAD /* PhotoVideoCollectionViewManager.swift */,
 				8C20863C228D4B2E000BEDAD /* PhotoVideoCell.swift */,
 				8C20863D228D4B2E000BEDAD /* PhotoVideoController.swift */,
+				07585D61280D7E69001B8E8D /* PhotoVideoController+ContentType.swift */,
 				8C20863E228D4B2E000BEDAD /* PhotoVideoPredicateManager.swift */,
 			);
 			path = PhotoVideo;
@@ -25490,6 +25496,7 @@
 				8CF6A9C6207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
 				7C379F42202C37CF0050C055 /* UIView+Utils.swift in Sources */,
 				07FBA20826E0BBB100ED4132 /* Localizable.swift in Sources */,
+				07585D62280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */,
 				B5BF438B2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				8E1E080F2423B0260054BF86 /* KeychainCleaner.swift in Sources */,
 				8C0E8F6A1FDEBDFF00789C91 /* PasscodeSettingsConfigurator.swift in Sources */,
@@ -27417,6 +27424,7 @@
 				8C1E5BE322CB8C29008FDA02 /* ThresholdBlockService.swift in Sources */,
 				73A183472359B1A10095719F /* CampaignCardDesigner.swift in Sources */,
 				F0B64C76275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
+				07585D64280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */,
 				CE784B9B22A685FB00662219 /* SplashInteractorInput.swift in Sources */,
 				CF71472724B597AA00D83E60 /* ContactSyncOperationResultController.swift in Sources */,
 				8C1E5BE022CB8C20008FDA02 /* SegmentedChildNavBarManager.swift in Sources */,
@@ -28773,6 +28781,7 @@
 				CF8B665C23CBC9D70021B021 /* SessionServiceExtension.swift in Sources */,
 				CF8B665D23CBC9D70021B021 /* PackagesViewOutput.swift in Sources */,
 				CF8B665E23CBC9D70021B021 /* InstaPickBigPhotoView.swift in Sources */,
+				07585D63280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */,
 				CF8B665F23CBC9D70021B021 /* LoadingImageView.swift in Sources */,
 				CF8B666023CBC9D70021B021 /* PasscodeSettingsViewIO.swift in Sources */,
 				CF8B666123CBC9D70021B021 /* FilterPhotoCard.swift in Sources */,
@@ -30785,6 +30794,7 @@
 				CF8B6F2623CBCA280021B021 /* SearchViewInteractorOutput.swift in Sources */,
 				CF8B6F2723CBCA280021B021 /* ThresholdBlockService.swift in Sources */,
 				F0B64C77275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
+				07585D65280D7E69001B8E8D /* PhotoVideoController+ContentType.swift in Sources */,
 				CF8B6F2823CBCA280021B021 /* CampaignCardDesigner.swift in Sources */,
 				CF8B6F2923CBCA280021B021 /* SplashInteractorInput.swift in Sources */,
 				CF71472824B597AA00D83E60 /* ContactSyncOperationResultController.swift in Sources */,

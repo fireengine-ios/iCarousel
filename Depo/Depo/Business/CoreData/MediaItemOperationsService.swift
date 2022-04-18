@@ -444,11 +444,12 @@ final class MediaItemOperationsService {
         }
     }
 
-    func updateRemoteItems(remoteItems: [WrapData], fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo, completion: @escaping VoidHandler) {
+    func updateRemoteItems(remoteItems: [WrapData], fileTypes: [FileType], topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo, completion: @escaping VoidHandler) {
         let remoteIds = remoteItems.compactMap { $0.id }
         let context = coreDataStack.newChildBackgroundContext
-    
-        let inRangePredicate = createInRangePredicate(fileType: fileType, topInfo: topInfo, bottomInfo: bottomInfo)
+        let types: [Int16] = fileTypes.map { $0.valueForCoreDataMapping() }
+
+        let inRangePredicate = createInRangePredicate(fileTypes: fileTypes, topInfo: topInfo, bottomInfo: bottomInfo)
         debugLog("RangeAPI DB updateRemoteItems")
         executeSortedRequest(predicate: inRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
@@ -456,7 +457,7 @@ final class MediaItemOperationsService {
             debugLog("--- count of already saved in date range \(inDateRangeItems.count)")
             
             let inDateRangeItemIds = inDateRangeItems.compactMap { $0.idValue }
-            let inIdRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.idValue) IN %@ AND NOT \(MediaItem.PropertyNameKey.idValue) IN %@", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItemIds)
+            let inIdRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.fileTypeValue) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.idValue) IN %@ AND NOT \(MediaItem.PropertyNameKey.idValue) IN %@", types, remoteIds, inDateRangeItemIds)
             
             self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
                 debugLog("--- count of already saved in id range \(inIdRangeItems.count)")
@@ -525,9 +526,11 @@ final class MediaItemOperationsService {
         }
     }
     
-    private func createInRangePredicate(fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo) -> NSCompoundPredicate {
-        
-        let filetypePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false", fileType.valueForCoreDataMapping())
+    private func createInRangePredicate(fileTypes: [FileType], topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo) -> NSCompoundPredicate {
+
+        let types: [Int16] = fileTypes.map { $0.valueForCoreDataMapping() }
+
+        let filetypePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false", types)
         
         let takenDatePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.sortingDate) != Nil AND \(MediaItem.PropertyNameKey.sortingDate) <= %@ AND \(MediaItem.PropertyNameKey.sortingDate) >= %@", topInfo.date as NSDate, bottomInfo.date as NSDate)
         //TODO: check why Can has problems after prep

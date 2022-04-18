@@ -53,8 +53,8 @@ final class HeaderContainingViewController: BaseViewController {
     private let headerView = NavigationHeaderView.initFromNib()
     private let statusBarBackgroundView = UIView()
     private var statusBarBackgroundViewHeightConstraint: NSLayoutConstraint!
-    private var child: HeaderContainingViewControllerChild!
     private var scrollViewObservationToken: NSKeyValueObservation?
+    private(set) var child: HeaderContainingViewControllerChild!
 
     private var childView: ChildView? { child as? ChildView }
     private var childViewController: ChildViewController? { child as? ChildViewController }

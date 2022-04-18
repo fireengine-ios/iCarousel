@@ -534,14 +534,11 @@ class RouterVC: NSObject {
         
         return HomePageModuleInitializer.initializeViewController(with: "HomePage")
     }
-    
-    func segmentedMedia() -> PhotoVideoSegmentedController {
-        let photos = PhotoVideoController.initPhotoFromNib()
-        let videos = PhotoVideoController.initVideoFromNib()
-        
-        return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
+
+    func gallery() -> PhotoVideoController {
+        return PhotoVideoController.initFromNib()
     }
-    
+
     // MARK: Music
     
     var musics: UIViewController? {

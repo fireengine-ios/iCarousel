@@ -151,7 +151,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         tabBar.selectedItem = tabBar.items?[TabScreenIndex.gallery.rawValue]
         selectedIndex = TabScreenIndex.gallery.rawValue
         lastPhotoVideoIndex = TabScreenIndex.gallery.rawValue
-        openPhotoPage()
     }
 
     @objc func showMusicBar(_ sender: Any) {
@@ -181,30 +180,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     private func scrollPhotoPage(scrollTo item: Item) {
-        if let photosController = openPhotoPage()?.currentController as? PhotoVideoController {
+        if let headerViewController = currentNavController?.topViewController as? HeaderContainingViewController,
+           let photosController = headerViewController.child as? PhotoVideoController {
+
             photosController.scrollToItem(item)
         }
-    }
-    
-    @discardableResult
-    private func openPhotoPage() -> SegmentedController? {
-        
-        guard let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController else {
-            return nil
-        }
-        
-        segmentedController.loadViewIfNeeded()
-        
-        if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
-            // if photo page is not active
-            guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true } ) else {
-                assertionFailure("Photo page not found")
-                return nil
-            }
-            segmentedController.switchSegment(to: index)
-        }
-        return segmentedController
-        
     }
     
     private func changeVisibleStatus(hidden: Bool) {

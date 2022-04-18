@@ -17,8 +17,8 @@ enum TabScreenIndex: Int {
 }
 
 enum TabBarItem: CaseIterable {
-    case home
     case gallery
+    case home
     case contacts
     case allFiles
     case discover
@@ -95,8 +95,8 @@ final class TabBarConfigurator {
         syncContactsVC.navigationBarHidden = true
         
         let list: [HeaderContainingViewController.ChildViewController] = [
+            router.gallery(),
             router.homePageScreen,
-            router.segmentedMedia(),
             syncContactsVC,
             router.segmentedFiles,
             EmptyViewController()
