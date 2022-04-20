@@ -158,8 +158,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 SingletonStorage.shared.isJustRegistered = true
 
                 // Passing etkAuth and globalPermAuth to PhoneVerification
-                result.etkAuth = etkAuth
-                result.kvkkAuth = etkAuth
+                // LB-1008 never send false for etkAuth & kvkkAuth
+                let kvkkEtkAuth = etkAuth == true ? true : nil
+                result.etkAuth = kvkkEtkAuth
+                result.kvkkAuth = kvkkEtkAuth
                 result.globalPermAuth = globalPermAuth
                 result.eulaId = self.eula?.id
                 self.output.signUpSucceeded(userInfo: userInfo) { [weak self] in
