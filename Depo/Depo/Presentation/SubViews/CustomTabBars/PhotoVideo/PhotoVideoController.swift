@@ -85,6 +85,15 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         scrollBarManager.addScrollBar(to: collectionView, delegate: self)
         performFetch()
         collectionView.addInteraction(UIDropInteraction(delegate: self))
+
+        headerContainingViewController?.setHeaderLeftItems([
+            NavigationHeaderButton(navigationBarImage: .headerActionProfile)
+        ])
+
+        headerContainingViewController?.setHeaderRightItems([
+            NavigationHeaderButton(navigationBarImage: .headerActionSearch),
+            NavigationHeaderButton(navigationBarImage: .headerActionPlus)
+        ])
     }
     
     deinit {
