@@ -9,9 +9,6 @@
 import UIKit
 
 // TODO: Facelift
-// - [ ] Circles behind content
-// - [ ] Parameteric offset
-// - [ ] Replace usage of additionalSafeAreaInsets
 // - [ ] Different header modes (fixed, scroll)
 // - [ ] Status bar mode for scroll (blur vs plain)
 // - [ ] Allow touch through header, scroll for ex
@@ -29,6 +26,27 @@ class HeaderContainingViewController: BaseViewController {
     convenience init(child: ChildView) {
         self.init(nibName: nil, bundle: nil)
         self.child = child
+    }
+
+    func setHeaderRightItems(_ items: [UIView]) {
+        headerView.setRightItems(items)
+    }
+
+    func setHeaderLeftItems(_ items: [UIView]) {
+        headerView.setLeftItems(items)
+    }
+
+    var isHeaderBehindContent: Bool = true {
+        didSet {
+            updateHeaderMask()
+        }
+    }
+
+    var headerContentIntersectionMode = HeaderContentIntersectionMode.default {
+        didSet {
+            updateHeaderMask()
+            updateAdditionalSafeAreaInsetsIfNeeded()
+        }
     }
 
     private let headerView = NavigationHeaderView.initFromNib()
@@ -52,7 +70,7 @@ class HeaderContainingViewController: BaseViewController {
         }
 
         setupHeaderView()
-        updateHeaderViewItems()
+        updateHeaderMask()
         setupStatusBarBackgroundView()
 
         if let scrollView = child.scrollViewForHeaderTracking {
@@ -65,16 +83,9 @@ class HeaderContainingViewController: BaseViewController {
         setStatusBarBackgroundViewHeight()
     }
 
-
-
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
-        let statusBarHeight = view.safeAreaInsets.top - additionalSafeAreaInsets.top
-        let headerHeight = headerView.frame.height
-        let headerInset = headerHeight - statusBarHeight
-        if additionalSafeAreaInsets.top != headerInset {
-            additionalSafeAreaInsets.top = headerInset
-        }
+        updateAdditionalSafeAreaInsetsIfNeeded()
     }
 
     private func setupHeaderView() {
@@ -83,14 +94,29 @@ class HeaderContainingViewController: BaseViewController {
         NSLayoutConstraint.activate([
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            headerView.topAnchor.constraint(equalTo: view.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 166)
+            headerView.topAnchor.constraint(equalTo: view.topAnchor)
         ])
     }
 
-    private func updateHeaderViewItems() {
-        headerView.setRightItems(child.navigationHeaderRightItems)
-        headerView.setLeftItems(child.navigationHeaderLeftItems)
+    private func updateHeaderMask() {
+        if isHeaderBehindContent {
+            var maskFrame = headerView.frame
+            maskFrame.size.height -= headerContentIntersectionMode.rawValue
+            let maskView = UIView(frame: maskFrame)
+            maskView.backgroundColor = .black
+            headerView.mask = maskView
+        } else {
+            headerView.mask = nil
+        }
+    }
+
+    private func updateAdditionalSafeAreaInsetsIfNeeded() {
+        let statusBarHeight = view.safeAreaInsets.top - additionalSafeAreaInsets.top
+        let headerHeight = headerView.frame.height - headerContentIntersectionMode.rawValue
+        let headerInset = headerHeight - statusBarHeight
+        if additionalSafeAreaInsets.top != headerInset {
+            additionalSafeAreaInsets.top = headerInset
+        }
     }
 
     private func setupStatusBarBackgroundView() {
@@ -122,13 +148,15 @@ class HeaderContainingViewController: BaseViewController {
 
     private func setupChildViewController(_ childViewController: ChildViewController) {
         addChild(childViewController)
-        view.addSubview(childViewController.view)
-        childViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        childViewController.view.pinToSuperviewEdges()
+        pinChildView(childViewController.view)
         childViewController.didMove(toParent: self)
     }
 
     private func setupChildView(_ childView: ChildView) {
+        pinChildView(childView)
+    }
+
+    private func pinChildView(_ childView: UIView) {
         view.addSubview(childView)
         childView.translatesAutoresizingMaskIntoConstraints = false
         childView.pinToSuperviewEdges()

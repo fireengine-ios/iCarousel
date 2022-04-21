@@ -36,19 +36,6 @@ final class HomePageViewController: BaseViewController {
     
     private var isGiftButtonEnabled = false
 
-    private lazy var leftItems: [UIView] = {
-        let profile = NavigationHeaderButton(image: .headerActionProfile, target: self, action: #selector(showSettings))
-        return [profile]
-    }()
-
-    private lazy var rightItems: [UIView] = {
-        let search = NavigationHeaderButton(image: .headerActionSearch, target: self, action: #selector(showSearch))
-        search.addTarget(self, action: #selector(showSearch), for: .primaryActionTriggered)
-
-        let plus = NavigationHeaderButton(image: .headerActionPlus)
-        return [search, plus]
-    }()
-
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +51,18 @@ final class HomePageViewController: BaseViewController {
         configurateRefreshControl()
         
         showSpinner()
-        
+
+        headerContainingViewController?.setHeaderLeftItems([
+            NavigationHeaderButton(navigationBarImage: .headerActionProfile, target: self, action: #selector(showSettings))
+        ])
+
+        headerContainingViewController?.setHeaderRightItems([
+            NavigationHeaderButton(navigationBarImage: .headerActionSearch, target: self, action: #selector(showSearch)),
+            NavigationHeaderButton(navigationBarImage: .headerActionPlus)
+        ])
+
+        headerContainingViewController?.isHeaderBehindContent = true
+
         output.viewIsReady()
     }
     
@@ -179,14 +177,6 @@ final class HomePageViewController: BaseViewController {
 extension HomePageViewController: HeaderContainingViewControllerChild {
     var scrollViewForHeaderTracking: UIScrollView? {
         return collectionView
-    }
-
-    var navigationHeaderLeftItems: [UIView] {
-        return leftItems
-    }
-
-    var navigationHeaderRightItems: [UIView] {
-        return rightItems
     }
 }
 

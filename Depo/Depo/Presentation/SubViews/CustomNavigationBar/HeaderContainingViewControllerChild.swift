@@ -10,12 +10,22 @@ import UIKit
 
 protocol HeaderContainingViewControllerChild: AnyObject {
     var scrollViewForHeaderTracking: UIScrollView? { get }
-    var navigationHeaderLeftItems: [UIView] { get }
-    var navigationHeaderRightItems: [UIView] { get }
 }
 
 extension HeaderContainingViewControllerChild {
     var scrollViewForHeaderTracking: UIScrollView? { nil }
-    var navigationHeaderLeftItems: [UIView] { [] }
-    var navigationHeaderRightItems: [UIView] { [] }
+}
+
+extension HeaderContainingViewControllerChild where Self: UIViewController {
+    var headerContainingViewController: HeaderContainingViewController? {
+        var parent = self.parent
+        while parent != nil {
+            if let headerContainingViewController = parent as? HeaderContainingViewController {
+                return headerContainingViewController
+            }
+            parent = parent?.parent
+        }
+
+        return nil
+    }
 }

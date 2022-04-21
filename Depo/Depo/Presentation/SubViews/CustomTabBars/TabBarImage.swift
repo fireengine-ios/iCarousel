@@ -1,5 +1,5 @@
 //
-//  TabBarImages.swift
+//  TabBarImage.swift
 //  Depo
 //
 //  Created by Hady on 4/4/22.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TabBarImages: String, AppImage {
+enum TabBarImage: String, AppImage {
     case gallery = "tabBarGallery"
     case gallerySelected = "tabBarGallerySelected"
     case forYou = "tabBarForYou"

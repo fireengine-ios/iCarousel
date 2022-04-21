@@ -13,13 +13,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="166"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigationHeaderBackground" translatesAutoresizingMaskIntoConstraints="NO" id="M3L-gj-qvU">
-                    <rect key="frame" x="58" y="0.0" width="259" height="166"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="259" id="fiv-XO-pB9"/>
-                    </constraints>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M3L-gj-qvU">
+                    <rect key="frame" x="56.5" y="0.0" width="262.5" height="166"/>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigationHeaderLogo" translatesAutoresizingMaskIntoConstraints="NO" id="IOO-nn-giR">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IOO-nn-giR">
                     <rect key="frame" x="162.5" y="58" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="QVu-Eo-Pt0"/>
@@ -39,6 +36,7 @@
                 <constraint firstItem="M3L-gj-qvU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DEy-kB-nnW"/>
                 <constraint firstItem="fmG-zY-vbf" firstAttribute="centerY" secondItem="IOO-nn-giR" secondAttribute="centerY" id="Jih-f5-SZq"/>
                 <constraint firstItem="IOO-nn-giR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Oq8-DU-ZjY"/>
+                <constraint firstItem="M3L-gj-qvU" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.7" id="RiU-1h-LwY"/>
                 <constraint firstItem="IOO-nn-giR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XRE-2E-plY" secondAttribute="trailing" constant="16" id="WTu-au-ZSp"/>
                 <constraint firstItem="fmG-zY-vbf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IOO-nn-giR" secondAttribute="trailing" constant="16" id="Wiw-Np-zsr"/>
                 <constraint firstAttribute="trailing" secondItem="fmG-zY-vbf" secondAttribute="trailing" constant="16" id="aYJ-HG-o8h"/>
@@ -57,8 +55,4 @@
             <point key="canvasLocation" x="-149" y="96"/>
         </view>
     </objects>
-    <resources>
-        <image name="navigationHeaderBackground" width="259" height="166"/>
-        <image name="navigationHeaderLogo" width="48" height="48"/>
-    </resources>
 </document>

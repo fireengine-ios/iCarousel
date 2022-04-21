@@ -51,7 +51,7 @@ extension NavigationBarStyle {
         }
     }
 
-    var backIndicatorImage: UIImage? { imageAsset(NavigationBarImage.back) }
+    var backIndicatorImage: UIImage? { NavigationBarImage.back.image }
 
     var backIndicatorTransitionMaskImage: UIImage? { backIndicatorImage }
 

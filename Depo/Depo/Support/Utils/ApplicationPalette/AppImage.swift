@@ -13,15 +13,17 @@ protocol AppImage {
     var name: String { get }
 }
 
-extension AppImage where Self: RawRepresentable, RawValue == String {
-    var name: String { rawValue }
+extension AppImage {
+    var image: UIImage {
+        guard let image = UIImage(named: name) else {
+            assertionFailure("Image not found with name: \(name)")
+            return UIImage()
+        }
+
+        return image
+    }
 }
 
-func imageAsset(_ appImage: AppImage) -> UIImage {
-    guard let image = UIImage(named: appImage.name) else {
-        assertionFailure("Image not found with name \(appImage.name)")
-        return UIImage()
-    }
-
-    return image
+extension AppImage where Self: RawRepresentable, RawValue == String {
+    var name: String { rawValue }
 }

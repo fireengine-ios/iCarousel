@@ -41,30 +41,30 @@ enum TabBarItem: CaseIterable {
     var image: UIImage? {
         switch self {
         case .home:
-            return imageAsset(TabBarImages.forYou)
+            return TabBarImage.forYou.image
         case .gallery:
-            return imageAsset(TabBarImages.gallery)
+            return TabBarImage.gallery.image
         case .contacts:
-            return imageAsset(TabBarImages.contacts)
+            return TabBarImage.contacts.image
         case .allFiles:
-            return imageAsset(TabBarImages.files)
+            return TabBarImage.files.image
         case .discover:
-            return imageAsset(TabBarImages.discover)
+            return TabBarImage.discover.image
         }
     }
 
     var selectedImage: UIImage? {
         switch self {
         case .home:
-            return imageAsset(TabBarImages.forYouSelected)
+            return TabBarImage.forYouSelected.image
         case .gallery:
-            return imageAsset(TabBarImages.gallerySelected)
+            return TabBarImage.gallerySelected.image
         case .contacts:
-            return imageAsset(TabBarImages.contactsSelected)
+            return TabBarImage.contactsSelected.image
         case .allFiles:
-            return imageAsset(TabBarImages.filesSelected)
+            return TabBarImage.filesSelected.image
         case .discover:
-            return imageAsset(TabBarImages.discoverSelected)
+            return TabBarImage.discoverSelected.image
         }
     }
     
