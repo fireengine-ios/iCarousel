@@ -61,8 +61,6 @@ final class HomePageViewController: BaseViewController {
             NavigationHeaderButton(navigationBarImage: .headerActionPlus)
         ])
 
-        headerContainingViewController?.isHeaderBehindContent = true
-
         output.viewIsReady()
     }
     

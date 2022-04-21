@@ -8,10 +8,7 @@
 
 import UIKit
 
-// TODO: Facelift
-// - [ ] Status bar mode for scroll (blur vs plain)
-
-class HeaderContainingViewController: BaseViewController {
+final class HeaderContainingViewController: BaseViewController {
     typealias Child = HeaderContainingViewControllerChild
     typealias ChildView = HeaderContainingViewControllerChild & UIView
     typealias ChildViewController = HeaderContainingViewControllerChild & UIViewController
@@ -47,8 +44,14 @@ class HeaderContainingViewController: BaseViewController {
         }
     }
 
+    var statusBarBackgroundViewStyle = StatusBarBackgroundViewStyle.blurEffect(style: .prominent) {
+        didSet {
+            updateStatusBarBackgroundViewStyle()
+        }
+    }
+
     private let headerView = NavigationHeaderView.initFromNib()
-    private let statusBarBackgroundView = UIVisualEffectView()
+    private let statusBarBackgroundView = UIView()
     private var statusBarBackgroundViewHeightConstraint: NSLayoutConstraint!
     private var child: HeaderContainingViewControllerChild!
     private var scrollViewObservationToken: NSKeyValueObservation?
@@ -70,6 +73,7 @@ class HeaderContainingViewController: BaseViewController {
         setupHeaderView()
         updateHeaderMask()
         setupStatusBarBackgroundView()
+        updateStatusBarBackgroundViewStyle()
 
         if let scrollView = child.scrollViewForHeaderTracking {
             bindHeaderView(with: scrollView)
@@ -119,18 +123,16 @@ class HeaderContainingViewController: BaseViewController {
 
     private func setupStatusBarBackgroundView() {
         statusBarBackgroundView.alpha = 0
-        if #available(iOS 13.0, *) {
-            statusBarBackgroundView.effect = UIBlurEffect(style: .prominent)
-        }
         statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(statusBarBackgroundView)
+
+        statusBarBackgroundViewHeightConstraint = statusBarBackgroundView.heightAnchor.constraint(equalToConstant: 0)
         NSLayoutConstraint.activate([
             statusBarBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             statusBarBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             statusBarBackgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBarBackgroundViewHeightConstraint
         ])
-        statusBarBackgroundViewHeightConstraint = statusBarBackgroundView.heightAnchor.constraint(equalToConstant: 0)
-        statusBarBackgroundViewHeightConstraint.isActive = true
     }
 
     private func setStatusBarBackgroundViewHeight() {
@@ -142,6 +144,25 @@ class HeaderContainingViewController: BaseViewController {
 
         statusBarBackgroundViewHeightConstraint.constant = statusBarManager.statusBarFrame.height
         statusBarBackgroundView.setNeedsLayout()
+    }
+
+    private func updateStatusBarBackgroundViewStyle() {
+        statusBarBackgroundView.subviews.forEach { subview in
+            subview.removeFromSuperview()
+        }
+
+        let contentView: UIView
+        switch statusBarBackgroundViewStyle {
+        case .blurEffect(let style):
+            contentView = UIVisualEffectView(effect: UIBlurEffect(style: style))
+        case .plain(let color):
+            contentView = UIView()
+            contentView.backgroundColor = color
+        }
+
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        statusBarBackgroundView.addSubview(contentView)
+        contentView.pinToSuperviewEdges()
     }
 
     private func setupChildViewController(_ childViewController: ChildViewController) {

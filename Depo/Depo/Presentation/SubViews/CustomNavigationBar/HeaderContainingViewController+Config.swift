@@ -14,4 +14,9 @@ extension HeaderContainingViewController {
         case `default` = 49
         case none = 0
     }
+
+    enum StatusBarBackgroundViewStyle {
+        case blurEffect(style: UIBlurEffect.Style)
+        case plain(color: UIColor)
+    }
 }
