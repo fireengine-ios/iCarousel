@@ -9,9 +9,7 @@
 import UIKit
 
 // TODO: Facelift
-// - [ ] Different header modes (fixed, scroll)
 // - [ ] Status bar mode for scroll (blur vs plain)
-// - [ ] Allow touch through header, scroll for ex
 
 class HeaderContainingViewController: BaseViewController {
     typealias Child = HeaderContainingViewControllerChild

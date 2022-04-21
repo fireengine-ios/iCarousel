@@ -10,22 +10,6 @@ import Foundation
 import UIKit
 
 final class NavigationHeaderView: UIView, NibInit {
-     static let standardHeight: CGFloat = 166
-
-    @IBOutlet private weak var logoImageView: UIImageView!
-    @IBOutlet private weak var backgroundImageView: UIImageView!
-    @IBOutlet private weak var rightItemsStackView: UIStackView!
-    @IBOutlet private weak var leftItemsStackView: UIStackView!
-
-    override var intrinsicContentSize: CGSize {
-        CGSize(width: super.intrinsicContentSize.width, height: Self.standardHeight)
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        logoImageView.image = NavigationBarImage.headerLogo.image
-        backgroundImageView.image = NavigationBarImage.headerBackground.image
-    }
 
     func setLeftItems(_ items: [UIView]) {
         leftItemsStackView.arrangedSubviews.forEach { subview in
@@ -51,5 +35,33 @@ final class NavigationHeaderView: UIView, NibInit {
         }
 
         rightItemsStackView.isHidden = items.count == 0
+    }
+
+
+    private static let standardHeight: CGFloat = 166
+
+    @IBOutlet private weak var logoImageView: UIImageView!
+    @IBOutlet private weak var backgroundImageView: UIImageView!
+    @IBOutlet private weak var rightItemsStackView: UIStackView!
+    @IBOutlet private weak var leftItemsStackView: UIStackView!
+
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: super.intrinsicContentSize.width, height: Self.standardHeight)
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        logoImageView.image = NavigationBarImage.headerLogo.image
+        backgroundImageView.image = NavigationBarImage.headerBackground.image
+    }
+
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        for subview in subviews {
+            if let _ = subview.hitTest(convert(point, to: subview), with: event) {
+                return true
+            }
+        }
+
+        return false
     }
 }
