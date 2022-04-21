@@ -628,6 +628,10 @@ extension UserProfileViewController: UserProfileViewInput {
             present(popup, animated: true)
         }
     }
+    
+    func presentForgetPasswordPopup() {
+        UIApplication.showErrorAlert(message: localized(.forgotPasswordRequiredError))
+    }
 }
 
 extension UserProfileViewController: MessageAndButtonPopupDelegate {
