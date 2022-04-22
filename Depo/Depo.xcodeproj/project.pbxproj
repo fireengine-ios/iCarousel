@@ -8663,6 +8663,14 @@
 		F013FA7227FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */; };
 		F013FA7327FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */; };
 		F013FA7427FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */; };
+		F013FA8928059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */; };
+		F013FA8A28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */; };
+		F013FA8B28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */; };
+		F013FA8C28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */; };
+		F013FA8E280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA8D280591DF004B9BB8 /* SecurityInfoWarningPopup.swift */; };
+		F013FA8F280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA8D280591DF004B9BB8 /* SecurityInfoWarningPopup.swift */; };
+		F013FA90280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA8D280591DF004B9BB8 /* SecurityInfoWarningPopup.swift */; };
+		F013FA91280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA8D280591DF004B9BB8 /* SecurityInfoWarningPopup.swift */; };
 		F02833B92779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
 		F02833BA2779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
 		F02833BB2779E1D100C4217F /* DragAndDropFileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */; };
@@ -8782,6 +8790,10 @@
 		F064FB3D278CF29500B461D0 /* PublicSharedItemsActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */; };
 		F064FB3E278CF29700B461D0 /* PublicSharedItemsActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */; };
 		F064FB3F278CF29700B461D0 /* PublicSharedItemsActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */; };
+		F077B23D280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
+		F077B23E280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
+		F077B23F280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
+		F077B240280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F081F9C62779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
 		F081F9C72779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
 		F081F9C82779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
@@ -11592,6 +11604,8 @@
 		EFE9E4488118296DCE476A71 /* Pods-LifeTech_BilloShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloShared.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloShared/Pods-LifeTech_BilloShared.appstore.xcconfig"; sourceTree = "<group>"; };
 		F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleGoogleUpdatePasswordPoup.swift; sourceTree = "<group>"; };
 		F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppleGoogleUpdatePasswordPopup.xib; sourceTree = "<group>"; };
+		F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityInfoWarningPopup.xib; sourceTree = "<group>"; };
+		F013FA8D280591DF004B9BB8 /* SecurityInfoWarningPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityInfoWarningPopup.swift; sourceTree = "<group>"; };
 		F02833B82779E1D100C4217F /* DragAndDropFileExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropFileExtensions.swift; sourceTree = "<group>"; };
 		F028C0DE2789DDBC005CE6AF /* PublicShareInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareInitializer.swift; sourceTree = "<group>"; };
 		F028C0E32789DE43005CE6AF /* PublicShareConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicShareConfigurator.swift; sourceTree = "<group>"; };
@@ -11624,6 +11638,7 @@
 		F064FB2D278B209500B461D0 /* PublicSharedItemsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicSharedItemsTableViewCell.xib; sourceTree = "<group>"; };
 		F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicSharedItemsActionView.xib; sourceTree = "<group>"; };
 		F064FB32278C168300B461D0 /* PublicSharedItemsActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSharedItemsActionView.swift; sourceTree = "<group>"; };
+		F077B23C280FDE3A0034F73C /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
 		F081F9C52779138F0064D25C /* DragAndDropItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropItemType.swift; sourceTree = "<group>"; };
 		F092578727DCF78C0001737C /* SecurityInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityInfoPopup.swift; sourceTree = "<group>"; };
 		F092578927DCF7E60001737C /* SecurityInfoPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityInfoPopup.xib; sourceTree = "<group>"; };
@@ -12100,6 +12115,7 @@
 			children = (
 				B549AA5124CF037900D39C44 /* ThirdParty */,
 				8C3930EA2100668300C1D82D /* googleAnalytics */,
+				F077B238280FDE000034F73C /* AGConnect */,
 				CE6FBFBB1FB2DC3F008FC18C /* AppDelegate.swift */,
 				7CDB43341F86678D00789FA6 /* AppConfigurator.swift */,
 				8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */,
@@ -18355,6 +18371,7 @@
 		C206234150DD1B9E1424D61C /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				F013FA8428059047004B9BB8 /* SecurityInfoWarningPopup */,
 				F013FA6727FF27D0004B9BB8 /* AppleGoogleUpdatePasswordPoup */,
 				F0D2976B27FA330D0082C768 /* PasswordEnterPopup */,
 				F0D2976027F782B30082C768 /* MessageAndButtonPopup */,
@@ -20754,6 +20771,15 @@
 			path = AppleGoogleUpdatePasswordPoup;
 			sourceTree = "<group>";
 		};
+		F013FA8428059047004B9BB8 /* SecurityInfoWarningPopup */ = {
+			isa = PBXGroup;
+			children = (
+				F013FA8D280591DF004B9BB8 /* SecurityInfoWarningPopup.swift */,
+				F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */,
+			);
+			path = SecurityInfoWarningPopup;
+			sourceTree = "<group>";
+		};
 		F028C0D82789DD3E005CE6AF /* SaveToMyLifebox */ = {
 			isa = PBXGroup;
 			children = (
@@ -20869,6 +20895,14 @@
 				F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */,
 			);
 			path = SubViews;
+			sourceTree = "<group>";
+		};
+		F077B238280FDE000034F73C /* AGConnect */ = {
+			isa = PBXGroup;
+			children = (
+				F077B23C280FDE3A0034F73C /* agconnect-services.plist */,
+			);
+			path = AGConnect;
 			sourceTree = "<group>";
 		};
 		F081F9C1277913260064D25C /* DragAndDrop */ = {
@@ -21887,6 +21921,7 @@
 				8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */,
 				985786F823E01F8800D35DDA /* SettingFooterView.xib in Resources */,
 				8C0E90601FDEBDFF00789C91 /* SearchView.xib in Resources */,
+				F013FA8928059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
 				F04E5C4227EDAF9D00CAAEB5 /* LoginWithGooglePopup.xib in Resources */,
 				89E51D4622CA110B007A7DBC /* CreateStoryPreviewViewController.xib in Resources */,
 				3A58C4D92636A77C00570811 /* InvitationCard.xib in Resources */,
@@ -21934,6 +21969,7 @@
 				CF71462224B597A800D83E60 /* ContactListDetailViewController.xib in Resources */,
 				8C0E906F1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.xib in Resources */,
 				982319B724F3A1E700FD16E2 /* HSLView.xib in Resources */,
+				F077B23D280FDE3B0034F73C /* agconnect-services.plist in Resources */,
 				8C2924C3205A4B1B005E40C9 /* PopUpController.xib in Resources */,
 				9808B44E25540E88002B0032 /* PrivateShareSuggestionItemView.xib in Resources */,
 				490222B92403AA5E00B120BA /* MobilePaymentPermissionView.xib in Resources */,
@@ -22087,6 +22123,7 @@
 				0791816E26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD622A685FB00662219 /* AnimationCard.xib in Resources */,
+				F013FA8B28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
 				CE784CDB22A685FB00662219 /* PasswordView.xib in Resources */,
 				7378053C23ABC130001D57BD /* OverlayStickerViewController.xib in Resources */,
 				730A997622D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
@@ -22254,6 +22291,7 @@
 				CE784DEC22A685FB00662219 /* PremiumInfoCard.xib in Resources */,
 				9862BC32255E6BF300D7945E /* FileInfoPeopleView.xib in Resources */,
 				CE784DF122A685FB00662219 /* SuggestionTableViewCell.xib in Resources */,
+				F077B23F280FDE3B0034F73C /* agconnect-services.plist in Resources */,
 				CE784DF422A685FB00662219 /* GridListTopBar.xib in Resources */,
 				98A86D6123A2415D00438225 /* AlbumsSliderCell.xib in Resources */,
 				CF71468B24B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
@@ -22571,6 +22609,7 @@
 				F0B64C84275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */,
 				CF8B699723CBC9D70021B021 /* ActivityTimelineTimeCell.xib in Resources */,
 				982319C424F3A1E700FD16E2 /* AdjustmentParameterSliderView.xib in Resources */,
+				F013FA8A28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
 				CF8B699C23CBC9D70021B021 /* FeedbackViewController.xib in Resources */,
 				CF7146DD24B597A900D83E60 /* DeleteDuplicatesMainView.xib in Resources */,
 				CF8B69A123CBC9D70021B021 /* SpotifyImportedTracksViewController.xib in Resources */,
@@ -22615,6 +22654,7 @@
 				F0D2976E27FA33540082C768 /* PasswordEnterPopup.xib in Resources */,
 				CF8B69E023CBC9D70021B021 /* PageForLanding.xib in Resources */,
 				982319A624F3A1E700FD16E2 /* ColorCell.xib in Resources */,
+				F077B23E280FDE3B0034F73C /* agconnect-services.plist in Resources */,
 				CF8B69E523CBC9D70021B021 /* TurkcellSaturaDemIta.ttf in Resources */,
 				CF8B69EA23CBC9D70021B021 /* container in Resources */,
 				CF8B69ED23CBC9D70021B021 /* PrepareToAutoSync.xib in Resources */,
@@ -22831,6 +22871,7 @@
 				0791816F26F88AB20067FB75 /* VerificationMethodTableViewCell.xib in Resources */,
 				CF8B708A23CBCA280021B021 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CF8B708C23CBCA280021B021 /* AnimationCard.xib in Resources */,
+				F013FA8C28059150004B9BB8 /* SecurityInfoWarningPopup.xib in Resources */,
 				CF8B709123CBCA280021B021 /* PasswordView.xib in Resources */,
 				CF8B709223CBCA280021B021 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				CF8B709423CBCA280021B021 /* SettingsTableViewCell.xib in Resources */,
@@ -22998,6 +23039,7 @@
 				CF8B71C223CBCA280021B021 /* TurkcellSaturaDemIta.ttf in Resources */,
 				3A9C2826265285A200EFADE9 /* AcceptedInvitationViewController.xib in Resources */,
 				CF71460E24B597A800D83E60 /* ContactDetailHeader.xib in Resources */,
+				F077B240280FDE3B0034F73C /* agconnect-services.plist in Resources */,
 				CF71467424B597A900D83E60 /* ContactSyncMainView.xib in Resources */,
 				3A134C6A2645535700CFC736 /* InvitedPeopleCollectionViewCell.xib in Resources */,
 				CF8B71C723CBCA280021B021 /* CreateStoryPreviewViewController.xib in Resources */,
@@ -23750,10 +23792,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox_Bundle/Pods-Lifebox_Bundle-resources.sh",
+				"${PODS_ROOT}/AGConnectCredential/AGCResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AGCResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -23906,10 +23950,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
+				"${PODS_ROOT}/AGConnectCredential/AGCResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AGCResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -24024,10 +24070,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Billo/Pods-Billo-resources.sh",
+				"${PODS_ROOT}/AGConnectCredential/AGCResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AGCResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -24086,10 +24134,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Billo_Bundle/Pods-Billo_Bundle-resources.sh",
+				"${PODS_ROOT}/AGConnectCredential/AGCResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AGCResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -24148,10 +24198,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Lifebox/Pods-Lifebox-resources.sh",
+				"${PODS_ROOT}/AGConnectCredential/AGCResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AGCResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TagManagerResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -24980,6 +25032,7 @@
 				8E802E16246C42A200D24561 /* PeopleSliderDataSource.swift in Sources */,
 				8C0E8E081FDEBDFF00789C91 /* PhoneVerificationPresenter.swift in Sources */,
 				0768880D271D948F00833F43 /* TooltipViewController.swift in Sources */,
+				F013FA8E280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
 				98E65A2A2029AB8C00597226 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				8C0E8E0A1FDEBDFF00789C91 /* PhoneVerificationInteractorInput.swift in Sources */,
 				98A86D8823A7C8BC00438225 /* EmptyView.swift in Sources */,
@@ -27522,6 +27575,7 @@
 				CE784B9A22A685FB00662219 /* SearchViewInteractorOutput.swift in Sources */,
 				8C1E5BE322CB8C29008FDA02 /* ThresholdBlockService.swift in Sources */,
 				73A183472359B1A10095719F /* CampaignCardDesigner.swift in Sources */,
+				F013FA90280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
 				F0B64C76275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
 				CE784B9B22A685FB00662219 /* SplashInteractorInput.swift in Sources */,
 				CF71472724B597AA00D83E60 /* ContactSyncOperationResultController.swift in Sources */,
@@ -29082,6 +29136,7 @@
 				CF8B66FE23CBC9D70021B021 /* FreeAppSpaceConfigurator.swift in Sources */,
 				CF8B66FF23CBC9D70021B021 /* OfferParameters.swift in Sources */,
 				CF8B670023CBC9D70021B021 /* SegmentedControl.swift in Sources */,
+				F013FA8F280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
 				0305A30023D5C2A1004D1EC7 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				CF8B670123CBC9D70021B021 /* LeavePremiumInteractor.swift in Sources */,
 				CF8B670223CBC9D70021B021 /* BasePresentor.swift in Sources */,
@@ -30890,6 +30945,7 @@
 				CF8B6F2523CBCA280021B021 /* GeneralFilesFiltration.swift in Sources */,
 				CF8B6F2623CBCA280021B021 /* SearchViewInteractorOutput.swift in Sources */,
 				CF8B6F2723CBCA280021B021 /* ThresholdBlockService.swift in Sources */,
+				F013FA91280591DF004B9BB8 /* SecurityInfoWarningPopup.swift in Sources */,
 				F0B64C77275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
 				CF8B6F2823CBCA280021B021 /* CampaignCardDesigner.swift in Sources */,
 				CF8B6F2923CBCA280021B021 /* SplashInteractorInput.swift in Sources */,

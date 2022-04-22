@@ -21,7 +21,9 @@ def core_pods
   pod 'Firebase/RemoteConfig', '~> 7'
   pod 'Firebase/DynamicLinks', '~> 7'
   pod 'Firebase/Auth', '~> 7'
-  pod 'GoogleSignIn'  
+  pod 'GoogleSignIn'
+  pod 'AGConnectCore'
+  pod 'AGConnectAppLinking'
 
   pod 'Netmera', '~> 3.8.4'
 

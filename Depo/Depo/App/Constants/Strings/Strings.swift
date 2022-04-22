@@ -136,8 +136,14 @@ enum Strings: String, Localizable {
     case contactSyncStorageFailContinueButton = "contact_sync_storage_fail_cont_button"
     
     // MARK: - Security Popup
-    case securityPopupHeader = "security_popup_header"
-    case securityPopupBody = "security_popup_body"
+    case securityPopupHeader                   = "security_popup_header"
+    case securityPopupBody                     = "security_popup_body"
+    case securityPopupWarningHeader            = "security_popup_warning_header"
+    case securityPopupEmailWarning             = "security_popup_warning_body1"
+    case securityPopupSecurityQuestionWarning  = "security_popup_warning_body2"
+    case securityPopupWarningFooter            = "security_popup_warning_footer"
+    case securtiyPopupWarningSettingsButton    = "Settings"
+    case securtiyPopupWarningContinueButton    = "warning_popup_print_redirect_proceed_button"
     
     // MARK: - Apple/Google Login
     case connectWithGoogle                        = "on_boarding_btn_google_login"
@@ -157,4 +163,9 @@ enum Strings: String, Localizable {
     case settingsGoogleAppleEmptyMailError        = "settings_google_apple_empty_mail_error"
     case externalAuthError                        = "password_change_external_auth_required_error"
     case forgotPasswordRequiredError              = "password_change_forgot_password_required_error"
+    
+    // MARK: - KVKK Permission
+    case kvkkToggleTitle = "kvkk_toggle_desc"
+    case kvkkToggleText  = "kvkk_toggle_text"
+    case kvkkFirmsLink   = "kvkk_firms_link"
 }
