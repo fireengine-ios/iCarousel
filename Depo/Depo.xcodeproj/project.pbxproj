@@ -8806,6 +8806,10 @@
 		F092578E27DE7B1F0001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
 		F092578F27DE7B200001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
 		F092579027DE7B200001737C /* SecurityInfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F092578727DCF78C0001737C /* SecurityInfoPopup.swift */; };
+		F0A091372812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
+		F0A091382812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
+		F0A091392812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
+		F0A0913A2812D970009EFF9E /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A091362812D970009EFF9E /* Credentials.swift */; };
 		F0B64C65275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
 		F0B64C66275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
 		F0B64C67275D4F2500002F66 /* DarkModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */; };
@@ -11638,6 +11642,7 @@
 		F081F9C52779138F0064D25C /* DragAndDropItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDropItemType.swift; sourceTree = "<group>"; };
 		F092578727DCF78C0001737C /* SecurityInfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityInfoPopup.swift; sourceTree = "<group>"; };
 		F092578927DCF7E60001737C /* SecurityInfoPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityInfoPopup.xib; sourceTree = "<group>"; };
+		F0A091362812D970009EFF9E /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		F0B64C63275D4F2500002F66 /* DarkModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeViewController.swift; sourceTree = "<group>"; };
 		F0B64C64275D4F2500002F66 /* DarkModeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DarkModeViewController.xib; sourceTree = "<group>"; };
 		F0B64C6E275DDF4800002F66 /* DarkModeConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkModeConfigurator.swift; sourceTree = "<group>"; };
@@ -14318,6 +14323,7 @@
 				8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */,
 				CEDA44D8207CA9E600E653DD /* NumericConstants.swift */,
 				3A134C412645476500CFC736 /* ScreenConstants.swift */,
+				F0A091362812D970009EFF9E /* Credentials.swift */,
 				07FBA20026E0BB9900ED4132 /* Strings */,
 			);
 			path = Constants;
@@ -24475,6 +24481,7 @@
 				8C0E8CDC1FDEBDFF00789C91 /* VisualMusicPlayerViewInput.swift in Sources */,
 				8CF6A9C9207C8DD3007DEF71 /* AssetsCache.swift in Sources */,
 				8C0B91BA2017104500A5BA81 /* AuthorizationRepository.swift in Sources */,
+				F0A091372812D970009EFF9E /* Credentials.swift in Sources */,
 				98B047F3259314750011DAEB /* ContactAddress.m in Sources */,
 				8C0E8CDD1FDEBDFF00789C91 /* AutoSyncModuleInput.swift in Sources */,
 				C62239AC204973270043ED44 /* FaceImageChangeCoverInitializer.swift in Sources */,
@@ -26630,6 +26637,7 @@
 				CE7848F222A685FB00662219 /* AutoSyncInteractor.swift in Sources */,
 				CE7848F322A685FB00662219 /* PageCompounder.swift in Sources */,
 				CE7848F422A685FB00662219 /* FilesDataSource.swift in Sources */,
+				F0A091392812D970009EFF9E /* Credentials.swift in Sources */,
 				F04E5C3F27EDAF7D00CAAEB5 /* LoginWithGooglePopup.swift in Sources */,
 				07620292269B83F600D4FB2C /* GifToMP4Formatter.swift in Sources */,
 				89DCC5DD2403AC3F00488F1F /* SubscriptionFeaturesView.swift in Sources */,
@@ -28910,6 +28918,7 @@
 				CF8B665323CBC9D70021B021 /* ProfileTextViewEnterView.swift in Sources */,
 				CF8B665423CBC9D70021B021 /* MyStorageModuleConfigurator.swift in Sources */,
 				CF8B665523CBC9D70021B021 /* FaceImageItemsConfigurator.swift in Sources */,
+				F0A091382812D970009EFF9E /* Credentials.swift in Sources */,
 				9886113B240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */,
 				CF8B665623CBC9D70021B021 /* FileService.swift in Sources */,
 				982319BE24F3A1E700FD16E2 /* AdjustmentParameterSliderView.swift in Sources */,
@@ -29998,6 +30007,7 @@
 				CF8B6C5023CBCA280021B021 /* (null) in Sources */,
 				CF8B6C5123CBCA280021B021 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CF8B6C5223CBCA280021B021 /* UIApplication+topController.swift in Sources */,
+				F0A0913A2812D970009EFF9E /* Credentials.swift in Sources */,
 				F04E5C4027EDAF7D00CAAEB5 /* LoginWithGooglePopup.swift in Sources */,
 				07620294269B83F700D4FB2C /* GifToMP4Formatter.swift in Sources */,
 				CF8B6C5323CBCA280021B021 /* VisualMusicPlayerViewOutput.swift in Sources */,

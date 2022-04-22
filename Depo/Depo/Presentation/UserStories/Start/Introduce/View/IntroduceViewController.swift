@@ -168,7 +168,7 @@ class IntroduceViewController: ViewController {
     
     @IBAction func onContinueWithGoogle(_ sender: Any) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
+        let config = GIDConfiguration(clientID: clientID, serverClientID: Credentials.googleServerClientID)
         
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
             if error != nil {

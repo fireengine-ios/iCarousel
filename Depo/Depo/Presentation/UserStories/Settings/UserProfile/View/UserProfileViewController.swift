@@ -405,7 +405,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                 handler(user?.authentication.idToken)
             } else {
                 guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-                let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
+                let config = GIDConfiguration(clientID: clientID, serverClientID: Credentials.googleServerClientID)
                 
                 GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
                     if error != nil {
@@ -627,6 +627,10 @@ extension UserProfileViewController: UserProfileViewInput {
             popup.delegate = self
             present(popup, animated: true)
         }
+    }
+    
+    func presentForgetPasswordPopup() {
+        UIApplication.showErrorAlert(message: localized(.forgotPasswordRequiredError))
     }
 }
 
