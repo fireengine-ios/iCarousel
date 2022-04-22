@@ -53,11 +53,6 @@ class ViewController: UIViewController, NavigationBarStyling {
         updateNavigationBarVisibilityIfNeeded(animated: animated)
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        updateNavigationBarVisibilityIfNeeded(animated: false)
-    }
-
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.checkModalPresentationStyle()
         super.present(viewControllerToPresent, animated: flag, completion: completion)

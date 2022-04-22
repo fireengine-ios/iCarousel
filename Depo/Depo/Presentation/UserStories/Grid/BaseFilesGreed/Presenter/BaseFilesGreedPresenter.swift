@@ -324,8 +324,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func stopSelectionWhenDisappear() {
-        dataSource.setSelectionState(selectionState: false)
-        view.stopSelection()
+        if dataSource.isSelectionStateActive {
+            dataSource.setSelectionState(selectionState: false)
+            view.stopSelection()
+        }
     }
     
     @objc func updateThreeDots() {

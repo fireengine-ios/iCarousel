@@ -18,8 +18,9 @@ final class FaceImageItemsViewController: BaseFilesGreedChildrenViewController {
     var isCanChangeVisibility: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         setTitle(withString: mainTitle )
-        
         
         editingTabBar?.view.layoutIfNeeded()
         

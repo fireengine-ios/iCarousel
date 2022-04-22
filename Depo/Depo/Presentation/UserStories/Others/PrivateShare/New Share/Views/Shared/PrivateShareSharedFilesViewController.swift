@@ -112,7 +112,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Private
     
     private func setupBars() {
-        setDefaultTabBarState()
         setupNavBar()
         setupCollectionViewBar()
         bottomBarManager.setup()
@@ -124,10 +123,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupPlusButton() {
         floatingButtonsArray = shareType.floatingButtonTypes
-    }
-    
-    private func setDefaultTabBarState() {
-        needToShowTabBar = true
     }
     
     private func setupCollectionViewBar() {
@@ -261,8 +256,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             if self.shareType.isSelectionAllowed {
                 self.navBarManager.threeDotsButton.isEnabled = !(isSelecting || self.collectionManager.isCollectionEmpty)
             }
-            self.needToShowTabBar = !isSelecting
-            self.showTabBarIfNeeded()
             if isSelecting {
                 let selectedItems = self.collectionManager.selectedItems()
                 self.show(selectedItemsCount: selectedItems.count)
