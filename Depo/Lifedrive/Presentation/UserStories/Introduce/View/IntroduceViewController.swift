@@ -9,6 +9,7 @@
 import UIKit
 import GoogleSignIn
 import FirebaseCore
+import AuthenticationServices
 
 final class IntroduceViewController: ViewController {
 
@@ -181,12 +182,51 @@ final class IntroduceViewController: ViewController {
         }
     }
     
+    @available(iOS 13.0, *)
     @IBAction func onSignInWithApple(_ sender: Any) {
-        //TODO -Apple login will be implemented
+        let provider = ASAuthorizationAppleIDProvider()
+        let request = provider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
     }
     
     @IBAction func onLogin(_ sender: UIButton) {
         output.onLoginButton()
+    }
+}
+
+@available(iOS 13.0, *)
+extension IntroduceViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let credentials as ASAuthorizationAppleIDCredential:
+            guard let appleIDToken = credentials.identityToken else {
+                print("Unable to fetch identity token")
+                return
+            }
+            
+            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                return
+            }
+        default:
+            break
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("failed")
+    }
+}
+
+@available(iOS 13.0, *)
+extension IntroduceViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
     }
 }
 

@@ -179,6 +179,9 @@
                                                         </constraint>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="onContinueWithApple:" destination="-1" eventType="touchUpInside" id="Dho-Co-KKa"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
