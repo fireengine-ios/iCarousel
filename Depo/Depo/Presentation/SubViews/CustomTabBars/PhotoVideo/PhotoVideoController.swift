@@ -9,9 +9,6 @@
 import UIKit
 import MobileCoreServices
 
-// TODO: todos in file
-// TODO: clear code -
-
 typealias IndexPathCallback = (_ path: IndexPath?) -> Void
 
 final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildController {
@@ -75,21 +72,24 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         bottomBarManager.setup()
         collectionViewManager.setup()
         collectionViewManager.collectionViewLayout.delegate = dataSource
+        collectionViewManager.collectionViewLayout.sectionHedersPinToLayoutGuide = headerContainingViewController?.originalSafeAreaLayoutGuide
         navBarManager.setDefaultMode()
 
         navigationBarHidden = true
         needToShowTabBar = true
         floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
         ItemOperationManager.default.startUpdateView(view: self)
-        
+
         scrollBarManager.addScrollBar(to: collectionView, delegate: self)
         performFetch()
         collectionView.addInteraction(UIDropInteraction(delegate: self))
 
+
+        headerContainingViewController?.isHeaderBehindContent = false
+        headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .clear)
         headerContainingViewController?.setHeaderLeftItems([
             NavigationHeaderButton(navigationBarImage: .headerActionProfile)
         ])
-
         headerContainingViewController?.setHeaderRightItems([
             NavigationHeaderButton(navigationBarImage: .headerActionSearch),
             NavigationHeaderButton(navigationBarImage: .headerActionPlus)
@@ -159,7 +159,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.setupOriginalPredicates(fileTypes: contentTypes.mappedToFileTypes()) { [weak self] in
             DispatchQueue.main.async {
                 self?.fetchAndReload()
-                self?.collectionViewManager.reloadAlbumsSlider()
 
                 // The very first viewWillAppear will return zero for collectionView.indexPathsForVisibleItems
                 // We need to call updateDB() after the initial db fetch
@@ -690,12 +689,7 @@ extension PhotoVideoController: SegmentedChildNavBarManagerDelegate {
 
 // MARK: - PhotoVideoCollectionViewManagerDelegate
 /// using: PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
-extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
-    func refreshData(refresher: UIRefreshControl) {
-        collectionViewManager.reloadAlbumsSlider()
-        refresher.endRefreshing()
-    }
-    
+extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {    
     func openAutoSyncSettings() {
         router.pushViewController(viewController: router.autoUpload)
     }

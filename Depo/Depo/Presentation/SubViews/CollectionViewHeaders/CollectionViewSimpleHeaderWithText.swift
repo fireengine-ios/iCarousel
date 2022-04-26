@@ -9,23 +9,14 @@
 import UIKit
 
 final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
-    
-    @IBOutlet public weak var selectionView: UIView!
-    
-    @IBOutlet private weak var selectionImageView: UIImageView!
-    
-    @IBOutlet private weak var labelForTitle: UILabel! {
+    @IBOutlet private weak var backgroundVisualEffectView: UIVisualEffectView!
+    @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            labelForTitle.text = ""
-            labelForTitle.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            titleLabel.text = ""
+            titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        backgroundColor = ColorConstants.bottomViewGrayColor
-    }
-    
+
     func setup(with object: MediaItem) {
         let title: String
         if object.monthValue != nil, let date = object.sortingDate as Date? {
@@ -35,15 +26,24 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         }
         setText(text: title)
     }
-    
+
     func setText(text: String?) {
-        labelForTitle.text = text
+        titleLabel.text = text
     }
-    
+
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        if let photoVideoLayoutAttributes = layoutAttributes as? PhotoVideoCollectionViewLayoutAttributes {
+            backgroundVisualEffectView.isHidden = !photoVideoLayoutAttributes.isPinned
+        }
+    }
+
+    // TODO: Facelift. this seems to be unused, check when doing the files refactor.
+    let selectionView = UIView()
     func setSelectedState(selected: Bool, activateSelectionState: Bool) {
-        selectionImageView.isHidden = !activateSelectionState
-        
-        let imageName = selected ? "selected" : "notSelected"
-        selectionImageView.image = UIImage(named: imageName)
+//        selectionImageView.isHidden = !activateSelectionState
+//
+//        let imageName = selected ? "selected" : "notSelected"
+//        selectionImageView.image = UIImage(named: imageName)
     }
 }

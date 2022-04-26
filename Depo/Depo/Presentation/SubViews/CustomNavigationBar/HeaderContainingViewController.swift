@@ -55,6 +55,8 @@ final class HeaderContainingViewController: BaseViewController {
     private var statusBarBackgroundViewHeightConstraint: NSLayoutConstraint!
     private var scrollViewObservationToken: NSKeyValueObservation?
     private(set) var child: HeaderContainingViewControllerChild!
+    let originalSafeAreaLayoutGuide = UILayoutGuide()
+    private var originalSafeAreaLayoutGuideTopConstraint: NSLayoutConstraint!
 
     private var childView: ChildView? { child as? ChildView }
     private var childViewController: ChildViewController? { child as? ChildViewController }
@@ -74,15 +76,11 @@ final class HeaderContainingViewController: BaseViewController {
         updateHeaderMask()
         setupStatusBarBackgroundView()
         updateStatusBarBackgroundViewStyle()
+        setupOriginalSafeAreaLayoutGuide()
 
         if let scrollView = child.scrollViewForHeaderTracking {
             bindHeaderView(with: scrollView)
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setStatusBarBackgroundViewHeight()
     }
 
     override func viewSafeAreaInsetsDidChange() {
@@ -114,6 +112,9 @@ final class HeaderContainingViewController: BaseViewController {
 
     private func updateAdditionalSafeAreaInsetsIfNeeded() {
         let statusBarHeight = view.safeAreaInsets.top - additionalSafeAreaInsets.top
+        originalSafeAreaLayoutGuideTopConstraint.constant = statusBarHeight
+        statusBarBackgroundViewHeightConstraint.constant = statusBarHeight
+
         let headerHeight = headerView.frame.height - headerContentIntersectionMode.rawValue
         let headerInset = headerHeight - statusBarHeight
         if additionalSafeAreaInsets.top != headerInset {
@@ -135,17 +136,6 @@ final class HeaderContainingViewController: BaseViewController {
         ])
     }
 
-    private func setStatusBarBackgroundViewHeight() {
-        guard #available(iOS 13.0, *) else { return }
-
-        guard let statusBarManager = view.window?.windowScene?.statusBarManager else {
-            return
-        }
-
-        statusBarBackgroundViewHeightConstraint.constant = statusBarManager.statusBarFrame.height
-        statusBarBackgroundView.setNeedsLayout()
-    }
-
     private func updateStatusBarBackgroundViewStyle() {
         statusBarBackgroundView.subviews.forEach { subview in
             subview.removeFromSuperview()
@@ -163,6 +153,18 @@ final class HeaderContainingViewController: BaseViewController {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         statusBarBackgroundView.addSubview(contentView)
         contentView.pinToSuperviewEdges()
+    }
+
+    private func setupOriginalSafeAreaLayoutGuide() {
+        view.addLayoutGuide(originalSafeAreaLayoutGuide)
+
+        originalSafeAreaLayoutGuideTopConstraint = originalSafeAreaLayoutGuide.topAnchor.constraint(equalTo: view.topAnchor)
+        NSLayoutConstraint.activate([
+            originalSafeAreaLayoutGuide.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor),
+            originalSafeAreaLayoutGuide.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor),
+            originalSafeAreaLayoutGuide.bottomAnchor.constraint(equalTo: view.safeBottomAnchor),
+            originalSafeAreaLayoutGuideTopConstraint,
+        ])
     }
 
     private func setupChildViewController(_ childViewController: ChildViewController) {

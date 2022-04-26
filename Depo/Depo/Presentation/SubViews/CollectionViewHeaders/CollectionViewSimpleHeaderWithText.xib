@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,10 +13,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eaJ-sQ-cG9">
-                    <rect key="frame" x="0.0" y="0.0" width="87" height="52"/>
-                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQQ-hn-ZNB">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8C4-aS-HQh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="prominent"/>
+                </visualEffectView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q94-GH-gZn">
                     <rect key="frame" x="15" y="15.5" width="42" height="21"/>
                     <constraints>
@@ -28,47 +31,20 @@
                     <color key="textColor" red="0.373" green="0.373" blue="0.373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vPB-Pu-PYL">
-                    <rect key="frame" x="65" y="15" width="22" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="22" id="GrA-gW-3M8"/>
-                        <constraint firstAttribute="height" constant="22" id="e7r-jt-eQF"/>
-                    </constraints>
-                </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVI-Tb-mci">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="2"/>
-                    <color key="backgroundColor" name="primaryBackground"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="2" id="yia-T0-Jqe"/>
-                    </constraints>
-                </view>
             </subviews>
-            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vPB-Pu-PYL" secondAttribute="trailing" constant="20" id="7V5-wk-oKc"/>
-                <constraint firstItem="vPB-Pu-PYL" firstAttribute="leading" secondItem="q94-GH-gZn" secondAttribute="trailing" constant="8" id="A5U-hL-t4s"/>
-                <constraint firstItem="eaJ-sQ-cG9" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="C6R-dK-Em6"/>
-                <constraint firstAttribute="bottom" secondItem="eaJ-sQ-cG9" secondAttribute="bottom" id="M2E-08-eQG"/>
-                <constraint firstItem="vPB-Pu-PYL" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="MJ6-Qt-92Z"/>
-                <constraint firstItem="tVI-Tb-mci" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="V39-1y-ohw"/>
-                <constraint firstItem="eaJ-sQ-cG9" firstAttribute="trailing" secondItem="vPB-Pu-PYL" secondAttribute="trailing" id="de3-t0-Led"/>
-                <constraint firstItem="tVI-Tb-mci" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="oOU-3F-Fkz"/>
+                <constraint firstItem="CQQ-hn-ZNB" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="JMa-7w-2vS"/>
+                <constraint firstItem="CQQ-hn-ZNB" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="VCV-5u-FfZ"/>
+                <constraint firstAttribute="trailing" secondItem="CQQ-hn-ZNB" secondAttribute="trailing" id="eIh-hR-bu6"/>
                 <constraint firstItem="q94-GH-gZn" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="pRj-74-ZwC"/>
-                <constraint firstItem="eaJ-sQ-cG9" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="rzf-vp-fFT"/>
                 <constraint firstItem="q94-GH-gZn" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="15" id="wuW-et-ROy"/>
-                <constraint firstAttribute="trailing" secondItem="tVI-Tb-mci" secondAttribute="trailing" id="xcY-Ge-TRg"/>
+                <constraint firstAttribute="bottom" secondItem="CQQ-hn-ZNB" secondAttribute="bottom" id="xZy-VN-Nzo"/>
             </constraints>
             <connections>
-                <outlet property="labelForTitle" destination="q94-GH-gZn" id="jcX-yh-EZH"/>
-                <outlet property="selectionImageView" destination="vPB-Pu-PYL" id="Szk-ce-dPw"/>
-                <outlet property="selectionView" destination="eaJ-sQ-cG9" id="OEJ-uQ-f6R"/>
+                <outlet property="backgroundVisualEffectView" destination="CQQ-hn-ZNB" id="G8a-Bz-2t5"/>
+                <outlet property="titleLabel" destination="q94-GH-gZn" id="mzh-YU-Goe"/>
             </connections>
             <point key="canvasLocation" x="33.600000000000001" y="100.74962518740631"/>
         </collectionReusableView>
     </objects>
-    <resources>
-        <namedColor name="primaryBackground">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>
