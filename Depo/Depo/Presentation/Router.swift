@@ -1402,7 +1402,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func loginWithGoogle(user: GoogleUser) -> UIViewController {
+    func loginWithGoogle(user: AppleGoogleUser) -> UIViewController {
         let initializer = LoginModuleInitializer()
         let loginController = LoginViewController(nibName: "LoginViewController",
                                                   bundle: nil)
@@ -1412,7 +1412,7 @@ class RouterVC: NSObject {
         return loginController
     }
     
-    func registerWithGoogle(user: GoogleUser) -> UIViewController {
+    func registerWithGoogle(user: AppleGoogleUser) -> UIViewController {
         let initializer = RegistrationModuleInitializer()
         let registerController = RegistrationViewController(nibName: "RegistrationScreen",
                                                             bundle: nil)
@@ -1422,7 +1422,7 @@ class RouterVC: NSObject {
         return registerController
     }
     
-    func loginWithHeaders(user: GoogleUser, headers: [String:Any]) -> UIViewController {
+    func loginWithHeaders(user: AppleGoogleUser, headers: [String:Any]) -> UIViewController {
         let initializer = LoginModuleInitializer()
         let loginController = LoginViewController(nibName: "LoginViewController",
                                                   bundle: nil)

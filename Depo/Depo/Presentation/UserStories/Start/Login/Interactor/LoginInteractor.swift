@@ -145,7 +145,7 @@ class LoginInteractor: LoginInteractorInput {
     private func authificate(login: String,
                              password: String,
                              atachedCaptcha: CaptchaParametrAnswer?,
-                             googleToken: String? = nil,
+                             appleGoogleUser: AppleGoogleUser? = nil,
                              errorHandler: @escaping (LoginResponseError, String) -> Void) {
         
         let isCaptchaRequired = atachedCaptcha != nil
@@ -194,7 +194,7 @@ class LoginInteractor: LoginInteractorInput {
                                       password: password,
                                       rememberMe: true,
                                       attachedCaptcha: atachedCaptcha,
-                                      googleToken: googleToken)
+                                      appleGoogleUser: appleGoogleUser)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
             guard let self = self else {
@@ -331,8 +331,8 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: LoginInteractorInput
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?, googleToken: String?) {
-        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha, googleToken: googleToken) { [weak self] loginError, errorText in
+    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?, appleGoogleUser: AppleGoogleUser?) {
+        authificate(login: login, password: password, atachedCaptcha: atachedCaptcha, appleGoogleUser: appleGoogleUser) { [weak self] loginError, errorText in
             
             DispatchQueue.main.async { [weak self] in
                 self?.output?.processLoginError(loginError, errorText: errorText)

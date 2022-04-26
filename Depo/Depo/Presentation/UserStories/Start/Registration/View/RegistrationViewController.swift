@@ -86,7 +86,7 @@ final class RegistrationViewController: ViewController {
     private let updateScrollDelay: DispatchTime = .now() + 0.3
     private let termsViewController = RegistrationTermsViewController()
     private var textObserver: NSObjectProtocol?
-    var googleUser: GoogleUser?
+    var googleUser: AppleGoogleUser?
     
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {

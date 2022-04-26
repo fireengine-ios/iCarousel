@@ -175,7 +175,7 @@ final class IntroduceViewController: ViewController {
             }
             
             if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
-                let user = GoogleUser(idToken: idToken, email: email)
+                let user = AppleGoogleUser(idToken: idToken, email: email, type: .google)
                 self.user = user
                 self.output.onContinueWithGoogle(with: user)
             }

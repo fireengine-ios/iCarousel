@@ -24,10 +24,10 @@ class IntroduceInteractor: IntroduceInteractorInput {
         analyticsManager.logScreen(screen: .liveCollectRemember)
     }
     
-    func signInWithGoogle(with user: GoogleUser) {
+    func signInWithAppleGoogle(with user: AppleGoogleUser) {
         output.asyncOperationStarted()
         
-        authenticationService.googleLogin(user: SignInWithGoogleParameters(idToken: user.idToken)) { json in
+        authenticationService.appleGoogleLogin(user: SignInWithAppleGoogleParameters(user: user)) { json in
             if let errorCode = json["errorCode"] as? Int {
                 if errorCode == 4101 {
                     self.output.signUpRequired(for: user)

@@ -16,7 +16,7 @@ class IntroduceViewController: ViewController {
 
     // MARK: Properties
     var output: IntroduceViewOutput!
-    var user: GoogleUser?
+    var user: AppleGoogleUser?
     
     // MARK: IBOutlets
     @IBOutlet private weak var welcomeViewHeightConstraint: NSLayoutConstraint!
@@ -177,9 +177,9 @@ class IntroduceViewController: ViewController {
             }
             
             if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
-                let user = GoogleUser(idToken: idToken, email: email)
+                let user = AppleGoogleUser(idToken: idToken, email: email, type: .google)
                 self.user = user
-                self.output.onContinueWithGoogle(with: user)
+                self.output.onSignInWithAppleGoogle(with: user)
             }
         }
     }
@@ -212,6 +212,10 @@ extension IntroduceViewController: ASAuthorizationControllerDelegate {
                 print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
                 return
             }
+            //todo: get token and email automatically
+            let user = AppleGoogleUser(idToken: "eyJraWQiOiJmaDZCczhDIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLnR1cmtjZWxsLmFraWxsaWRlcG8uc2VydmljZWlkLnRlc3QiLCJleHAiOjE2NTA5NzYzMjAsImlhdCI6MTY1MDg4OTkyMCwic3ViIjoiMDAwMzQ4LmE3NWY4YzJlOGU5MDQ4MDhhOTRlOTcyYjI5MzA5OGFiLjEwMzUiLCJjX2hhc2giOiJDN1hMZU9jTzNmTXhKZ0lGY0tjaGlRIiwiZW1haWwiOiJidXJha2RvbmF0MkBpY2xvdWQuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjUwODg5OTIwLCJub25jZV9zdXBwb3J0ZWQiOnRydWV9.g6jxMpn2IUakjq_Zqb9T0Oy3Kog-dz6Uka0gWA1lSLKdYP274FDC9aOjxMPFKklQw38b07MFZk2BceDi_Sdcc2EzeknJ2X8zRTx_LEgD2IDUM6Mzefj7qqzpxrSbXHV-1zYnBvHRqRt0HUtgCRgBQMUKxEQd9xU3dbzLyhZA4MZL0qp28oYL-GoK8Hqh-2Ic3WoBp7tf3d40yaO4ziQJrIaHtuGaOeMiX0QuyXVWXzGbxmkiK7d7zXzeV5E8-X4nsY5SkKtTByNctTi_RhtBm3Cr41gb9rPYQaO89FCX2eHzmSbIVfhFTewEKxNCPKi2Mn-yL4p8BzUtSGjrBjQrbw", email: "burakdonat2@icloud.com", type: .apple)
+            self.user = user
+            self.output.onSignInWithAppleGoogle(with: user)
         default:
             break
         }
@@ -230,7 +234,7 @@ extension IntroduceViewController: ASAuthorizationControllerPresentationContextP
 }
 
 extension IntroduceViewController: IntroduceViewInput {
-    func showGoogleLoginPopup(with user: GoogleUser) {
+    func showGoogleLoginPopup(with user: AppleGoogleUser) {
         let popUp = RouterVC().loginWithGooglePopup
         popUp.email = user.email
         popUp.delegate = self
