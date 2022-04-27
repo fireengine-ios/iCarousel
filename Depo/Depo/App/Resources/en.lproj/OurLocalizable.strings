@@ -1020,7 +1020,7 @@
 "create_story_pop_up_message" = "We are preparing your story. Once it is finished, you can access it from My Stories Album.";
 "create_story_path_to_story" = "Photos & Videos > My Stories";
 "You can not share empty album" = "You can not share empty album";
-"etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş \n & Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
+"etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Lifecell Bulut Çözümleri A.Ş. unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "global_permission_title_label" = "Global Data Permission";
 "global_permission_description" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox.";
 "terms_and_use_etk_checkbox_header" = "I have read and accept the text of Commercial Electronic Message and Data Consent.";
@@ -1541,7 +1541,7 @@
 "import_from_facebook_started" = "Import from Facebook started";
 "instapick_hashtags_copied" = "Hashtags copied";
 "create_story_selection_limit" = "Please choose maximum %d photos";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p style=\"background: white; margin: 0in 0in 10.5pt; text-align: justify;\"><span lang=\"TR\" style=\"font-size: 11.5pt; font-family: 'Helvetica Neue'; color: #104142;\">I hereby consent to allow Lifecell Bulut &Ccedil;&ouml;z&uuml;mleri A.Ş., Lifecell Dijital Servisler ve &Ccedil;&ouml;z&uuml;mler A.Ş and&nbsp;<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Group Companies</a>&nbsp;to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the &ldquo;Permission Policy&rdquo;&nbsp;available </span><span lang=\"TR\"><a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"><span style=\"font-size: 11.5pt; font-family: 'Helvetica Neue'; color: #40cdd0;\">here</span></a></span><span lang=\"TR\" style=\"font-size: 11.5pt; font-family: 'Helvetica Neue'; color: #104142;\">&nbsp;unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the&nbsp;\"<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Permission Policy</a>\".</span></p>";
+"etk_html" = "COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT\nI hereby consent to allow Lifecell Bulut Çözümleri A.Ş. and Group Companies to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” available here unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the \"Permission Policy\".\nData Processing/Sharing Consent Group Companies\nLifecell Dijital Servisler ve Çözümler A.Ş.\nLifecell Müzik Yayın ve İletim A.Ş.\nLifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi\nLifecell Bulut Çözümleri A.Ş.\nLifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.\nCommercial Electronic Messages Consent Group Companies\nTurktell Bilişim Servisleri A.Ş.\nGlobal Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.\nTurkcell Finansman A.Ş.\nTurkcell Ödeme ve Elektronik Para Hizmetleri A.Ş..\nTurkcell Sigorta Aracılık Hizmetleri A.Ş.\nTurkcell Teknoloji Araştırma ve Geliştirme A.Ş.\nTurkcell Satış ve Dağıtım Hizmetleri A.Ş.\nTurkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.\nLifecell Müzik Yayın ve İletim A.Ş.\nLifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi\nLifecell Bulut Çözümleri A.Ş.\nLifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.\nLifecell Dijital Servisler ve Çözümler A.Ş";
 "free_up_space_alert_title" = "Free Up Space";
 "free_up_space_no_duplicates" = "You have no duplicate photos/videos.";
 "free_up_space_in_progress" = "Your duplicate file list is not ready yet, please try again later.";
@@ -2038,10 +2038,13 @@
 "settings_google_apple_empty_mail_error" = "You have to add an email address to your account.";
 "password_change_external_auth_required_error" = "In order to change your password, you can either login to your lifebox account with your Google ID/Apple ID or follow the Forgot My Password instructions on the login screen.";
 "password_change_forgot_password_required_error" = "In order to change your password, you must logout from your account first and follow the Forgot My Password instructions on the login screen.";
-"kvkk_toggle_desc" = "Personal Data Protection Consent";
-"kvkk_toggle_text" = "<p>I hereby give my consent to allow <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"> Lifecell Bulut &Ccedil;&ouml;z&uuml;mleri A.Ş., Lifecell Dijital Servisler ve &Ccedil;&ouml;z&uuml;mler A.Ş ve Grup Şirketleri </a> to process my personal data and share them with the parties listed in the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"> Permission Policy </a> .</p>";
+"kvkk_toggle_desc" = "Data Processing/Sharing Consent";
+"kvkk_toggle_text" = "I hereby give my consent to allow Lifecell Bulut Çözümleri A.Ş.  to process my personal data and share them with the parties listed in the Permission Policy.";
 "security_popup_warning_header" = "";
 "security_popup_warning_body1" = "";
 "security_popup_warning_body2" = "";
 "security_popup_warning_footer" = "";
 "kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"apple_login_user_exists_body" = "";
+"settings_apple_password_required" = "";

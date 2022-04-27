@@ -992,7 +992,7 @@
 "create_story_pop_up_message" = "Povestea e creată";
 "create_story_path_to_story" = "Poze & Video > Poveștile Mele";
 "You can not share empty album" = "Nu poți partaja albumul gol";
-"etk_permission_description" = "Prin prezenta, îmi dau consimțământul de a primi mesaje comerciale prin poșta electronică pentru a fi informat cu privire la produsele și serviciile avantajoase ale Turkcell și ale companiilor sale de grup, cu excepția cazului și până când am să solicit deconectarea notificărilor, în conformitate cu Legea nr. 6563 și cu alte legi aplicabile.";
+"etk_permission_description" = "";
 "global_permission_title_label" = "Permisiune Globală de Date";
 "global_permission_description" = "Îmi exprim consimțământul ca datele mele personale să fie împărtășite de către Turkcell cu operatorii cu care cooperează, pentru a putea beneficia de avantajele serviciilor oferite de operatorii respectivi, în ce privește lifebox.";
 "terms_and_use_etk_checkbox_header" = "Mesaj Electronic Comercial";
@@ -1493,7 +1493,7 @@
 "import_from_facebook_started" = "Transferul de pe Facebook a început.";
 "instapick_hashtags_copied" = "Hashtag-urile au fost copiate.";
 "create_story_selection_limit" = "Te rugăm să selectați maximum %d fotografii.";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
+"etk_html" = "";
 "free_up_space_alert_title" = "Eliberează spațiu pe telefon";
 "free_up_space_no_duplicates" = "Nu există fotografii / videoclipuri repetate.";
 "free_up_space_in_progress" = "Lista ta de fișiere repetate nu este încă pregătită, încercați mai târziu";
@@ -1988,10 +1988,13 @@
 "settings_google_apple_empty_mail_error" = "Trebuie să adăugați o adresă de e-mail în contul dvs.";
 "password_change_external_auth_required_error" = "Pentru a vă schimba parola, puteți fie să vă conectați la contul lifebox folosind ID-ul Google/ID-ul Apple, fie să urmați instrucțiunile privind parola uitată de pe ecranul de conectare.";
 "password_change_forgot_password_required_error" = "Pentru a vă schimba parola, trebuie mai întâi să vă deconectați din cont și să urmați instrucțiunile „Parola Uitată” de pe ecranul de conectare.";
-"kvkk_toggle_desc" = "Consimțământ Pentru Prelucrarea Datelor Cu Caracter Personal";
-"kvkk_toggle_text" = "<p style=\"background: white; margin: 0in 0in 10.5pt 0in;\"><span lang=\"TR\" style=\"font-size: 11.5pt; font-family: 'Helvetica Neue'; color: #104142;\"> <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"> Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş şi Grup Şirketleri </a> Sunt de acord cu prelucrarea datelor mele personale și transferul către părțile specificate în <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"> Politica de Permisiuni </a> . </span></p>";
+"kvkk_toggle_desc" = "";
+"kvkk_toggle_text" = "";
 "security_popup_warning_header" = "";
 "security_popup_warning_body1" = "";
 "security_popup_warning_body2" = "";
 "security_popup_warning_footer" = "";
 "kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"apple_login_user_exists_body" = "";
+"settings_apple_password_required" = "";

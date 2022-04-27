@@ -214,7 +214,7 @@ extension IntroduceViewController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("failed")
+        debugLog("Apple auth didCompleteWithError: \(error.localizedDescription)")
     }
 }
 
@@ -228,7 +228,7 @@ extension IntroduceViewController: ASAuthorizationControllerPresentationContextP
 extension IntroduceViewController: IntroduceViewInput {
     func showGoogleLoginPopup(with user: AppleGoogleUser) {
         let popUp = RouterVC().loginWithGooglePopup
-        popUp.email = user.email
+        popUp.user = user
         popUp.delegate = self
         present(popUp, animated: true)
     }

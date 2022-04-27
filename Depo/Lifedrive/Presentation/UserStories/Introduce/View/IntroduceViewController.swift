@@ -215,7 +215,7 @@ extension IntroduceViewController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        debugLog("Apple authorizationController failed")
+        debugLog("Apple auth didCompleteWithError: \(error.localizedDescription)")
     }
 }
 
