@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,25 +29,21 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0i-at-wPy" userLabel="ContentView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cui-rs-h2J" userLabel="botttomBarsContainerView">
                             <rect key="frame" x="32" y="805" width="350" height="49"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmD-Gm-tUS" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
-                                    <color key="backgroundColor" name="primaryBackground"/>
                                     <constraints>
                                         <constraint firstAttribute="height" id="5y9-Sm-8zM"/>
                                     </constraints>
                                 </view>
                                 <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="MainTabBar" customModule="Billo" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="350" height="49"/>
-                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90461793664383561" colorSpace="calibratedRGB"/>
                                     <items/>
                                 </tabBar>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="7Tf-er-ViB"/>
                                 <constraint firstAttribute="width" priority="749" constant="350" id="9UO-nK-X2x"/>
@@ -64,7 +59,6 @@
                         </view>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="ero-vK-F2b"/>
-                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="i0i-at-wPy" firstAttribute="top" secondItem="FJl-Cl-AGP" secondAttribute="top" id="GsX-8P-b56"/>
                         <constraint firstItem="i0i-at-wPy" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="KUC-Ts-NXO"/>
@@ -77,7 +71,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9wa-HG-Fvr"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="COT-s0-gxJ"/>
@@ -89,9 +82,4 @@
             <point key="canvasLocation" x="46.376811594202906" y="100.44642857142857"/>
         </view>
     </objects>
-    <resources>
-        <namedColor name="primaryBackground">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-    </resources>
 </document>

@@ -18,7 +18,7 @@ final class ScrollBarView: UIView {
     
     weak var delegate: ScrollBarViewDelegate?
     
-    private static let scrollBarHandleImage = Images.scrollBarHandle
+    private static let scrollBarHandleImage = Image.quickScrollBarHandle.image
     
     /// The width of this control (44 is minimum recommended tapping space)
     private let scrollBarWidth: CGFloat = 44
@@ -44,7 +44,14 @@ final class ScrollBarView: UIView {
     private var scrollView: UIScrollView?
     
     private lazy var handleView: UIImageView = {
-        return UIImageView(image: ScrollBarView.scrollBarHandleImage)
+        let imageView = UIImageView(image: ScrollBarView.scrollBarHandleImage)
+        imageView.clipsToBounds = false
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowRadius = 12
+        imageView.layer.shadowOpacity = 0.5
+        imageView.layer.shadowOffset = .zero
+
+        return imageView
     }()
     
     private lazy var trackView: UIImageView = {
@@ -61,6 +68,7 @@ final class ScrollBarView: UIView {
     
     private let trackWidth: CGFloat = 2
     private let handleWidth: CGFloat = scrollBarHandleImage.size.width
+    private let handleHeight: CGFloat = scrollBarHandleImage.size.height
     private var horizontalOffset: CGFloat = 0
     
     private var originalTopInset: CGFloat = 0
@@ -72,9 +80,9 @@ final class ScrollBarView: UIView {
         let insetsLabel = TextInsetsLabel()
         insetsLabel.text = "Apr 2018" /// template text
         insetsLabel.textAlignment = .center
-        insetsLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
-        insetsLabel.backgroundColor = ColorConstants.activityTimelineDraws
-        insetsLabel.textColor = UIColor.white
+        insetsLabel.font = UIFont.appFont(.medium, size: 14)
+        insetsLabel.backgroundColor = AppColor.tint.color
+        insetsLabel.textColor = .white
         insetsLabel.center.x -= 60
         insetsLabel.textInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         insetsLabel.sizeToFit()
@@ -214,20 +222,20 @@ final class ScrollBarView: UIView {
         
         var frame = CGRect.zero
         frame.size.width = scrollBarWidth
-        frame.size.height = isDragging ? originalHeight : height
+        frame.size.height = scrollViewFrame.height - (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom) //isDragging ? originalHeight : height
         frame.origin.x = scrollViewFrame.width - (edgeInset + halfWidth) - scrollView.safeAreaInsets.right
         
         frame.origin.x = min(frame.origin.x, scrollViewFrame.width - scrollBarWidth)
         
-        if isDragging {
-            frame.origin.y = originalYOffset
-        } else {
-            frame.origin.y = verticalInset.top
-            //            frame.origin.y += contentInset.top
-            frame.origin.y += largeTitleDelta
-        }
+//        if isDragging {
+//            frame.origin.y = originalYOffset
+//        } else {
+//            frame.origin.y = verticalInset.top
+//            //            frame.origin.y += contentInset.top
+//            frame.origin.y += largeTitleDelta
+//        }
         
-        frame.origin.y += scrollView.contentOffset.y
+        frame.origin.y = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
         
         self.frame = frame
     }
@@ -248,7 +256,7 @@ final class ScrollBarView: UIView {
         }
         
         var handleFrame = CGRect(x: ceil((frame.width - handleWidth) * 0.5 + horizontalOffset),
-                                 y: 0, width: handleWidth, height: heightOfHandleForContentSize)
+                                 y: 0, width: handleWidth, height: handleHeight)
         
         // Work out the y offset of the handle
         // TODO: check other scrollView.contentInset for

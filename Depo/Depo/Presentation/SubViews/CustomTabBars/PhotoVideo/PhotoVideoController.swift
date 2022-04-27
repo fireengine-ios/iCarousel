@@ -86,7 +86,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
 
         headerContainingViewController?.isHeaderBehindContent = false
-        headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .clear)
+        headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
         headerContainingViewController?.setHeaderLeftItems([
             NavigationHeaderButton(navigationBarImage: .headerActionProfile)
         ])

@@ -13,6 +13,11 @@ protocol AppImage {
     var name: String { get }
 }
 
+enum ImageTintMode {
+    case none
+    case color(_ value: AppColor)
+}
+
 extension AppImage {
     var image: UIImage {
         guard let image = UIImage(named: name) else {
@@ -21,6 +26,19 @@ extension AppImage {
         }
 
         return image
+    }
+
+    func image(withTintMode tintMode: ImageTintMode) -> UIImage {
+        switch tintMode {
+        case .none:
+            return image
+        case .color(let tintColor):
+            if #available(iOS 13.0, *) {
+                return image.withTintColor(tintColor.color, renderingMode: .alwaysTemplate)
+            } else {
+                return image.withRenderingMode(.alwaysTemplate)
+            }
+        }
     }
 }
 

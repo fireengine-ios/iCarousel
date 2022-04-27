@@ -517,6 +517,14 @@
 		07C759DF2816C58B00B028F0 /* PhotoVideoCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* PhotoVideoCollectionViewLayoutAttributes.swift */; };
 		07C759E02816C58B00B028F0 /* PhotoVideoCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* PhotoVideoCollectionViewLayoutAttributes.swift */; };
 		07C759E12816C58B00B028F0 /* PhotoVideoCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* PhotoVideoCollectionViewLayoutAttributes.swift */; };
+		07C759E62819369200B028F0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759E52819369200B028F0 /* Image.swift */; };
+		07C759E72819369200B028F0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759E52819369200B028F0 /* Image.swift */; };
+		07C759E82819369200B028F0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759E52819369200B028F0 /* Image.swift */; };
+		07C759E92819369200B028F0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759E52819369200B028F0 /* Image.swift */; };
+		07C759EB281936C800B028F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C759EA281936C800B028F0 /* Images.xcassets */; };
+		07C759EC281936C800B028F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C759EA281936C800B028F0 /* Images.xcassets */; };
+		07C759ED281936C800B028F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C759EA281936C800B028F0 /* Images.xcassets */; };
+		07C759EE281936C800B028F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C759EA281936C800B028F0 /* Images.xcassets */; };
 		07CCBF7926FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
 		07CCBF7A26FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
 		07CCBF7B26FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
@@ -9324,6 +9332,8 @@
 		07C50C4B28102E3C009617B9 /* NavigationHeaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHeaderButton.swift; sourceTree = "<group>"; };
 		07C50C612811895F009617B9 /* HeaderContainingViewController+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeaderContainingViewController+Config.swift"; sourceTree = "<group>"; };
 		07C759DD2816C58B00B028F0 /* PhotoVideoCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
+		07C759E52819369200B028F0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		07C759EA281936C800B028F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateSecurityQuestionViewController.swift; sourceTree = "<group>"; };
 		07CCBF7826FC7254002322B0 /* ValidateSecurityQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidateSecurityQuestionViewController.xib; sourceTree = "<group>"; };
 		07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPInteractor.swift; sourceTree = "<group>"; };
@@ -18879,6 +18889,8 @@
 				CE3318E51EFCFE1800E25989 /* ApplicationPalette.swift */,
 				CE58FB0520444BE8007F3F54 /* ColorConstants.swift */,
 				0711886F27F6EBDE00F512A1 /* AppImage.swift */,
+				07C759E52819369200B028F0 /* Image.swift */,
+				07C759EA281936C800B028F0 /* Images.xcassets */,
 				077D1D9B280568CD001C6E72 /* AppFont.swift */,
 			);
 			path = ApplicationPalette;
@@ -21831,6 +21843,7 @@
 				8C0E90601FDEBDFF00789C91 /* SearchView.xib in Resources */,
 				89E51D4622CA110B007A7DBC /* CreateStoryPreviewViewController.xib in Resources */,
 				3A58C4D92636A77C00570811 /* InvitationCard.xib in Resources */,
+				07C759EB281936C800B028F0 /* Images.xcassets in Resources */,
 				98BE78A924517E4300B8864F /* SnackbarView.xib in Resources */,
 				B5601AD823506349002E1D1E /* InitializingViewController.xib in Resources */,
 				8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */,
@@ -22173,6 +22186,7 @@
 				CE7040B322EB193300124073 /* SupportFormPrefilledController.xib in Resources */,
 				0731E89D263181EE00883566 /* RegistrationTermsViewController.xib in Resources */,
 				CE784DCB22A685FB00662219 /* LeavePremiumViewController.xib in Resources */,
+				07C759ED281936C800B028F0 /* Images.xcassets in Resources */,
 				9823199C24F3A1E700FD16E2 /* LightView.xib in Resources */,
 				CE784DCD22A685FB00662219 /* PhotoVideoDetailViewController.xib in Resources */,
 				CE784DD022A685FB00662219 /* ActivityTimelineViewController.xib in Resources */,
@@ -22664,6 +22678,7 @@
 				0731E87D263181EA00883566 /* RegistrationTermsViewController.xib in Resources */,
 				CF8B6AC023CBC9D70021B021 /* PackagePremiumView.xib in Resources */,
 				CF8B6AC123CBC9D70021B021 /* WaitingForWiFiPopUp.xib in Resources */,
+				07C759EC281936C800B028F0 /* Images.xcassets in Resources */,
 				985786F923E01F8800D35DDA /* SettingFooterView.xib in Resources */,
 				985E6957255A6045006F6CD7 /* PrivateShareUserRoleViewController.xib in Resources */,
 				0708C78A2677261100680ED6 /* PhotoPrintCard.xib in Resources */,
@@ -22911,6 +22926,7 @@
 				CF8B719523CBCA280021B021 /* CollectionViewCellForAudio.xib in Resources */,
 				CF8B719623CBCA280021B021 /* EmailVerifiedPopUp.xib in Resources */,
 				CF8B719823CBCA280021B021 /* SupportFormController.xib in Resources */,
+				07C759EE281936C800B028F0 /* Images.xcassets in Resources */,
 				CF8B719923CBCA280021B021 /* PhotoSelectionNoFilesView.xib in Resources */,
 				CF8B719A23CBCA280021B021 /* TBMatikPhotoView.xib in Resources */,
 				9808B42E25540E4A002B0032 /* PrivateShareContactSuggestionView.xib in Resources */,
@@ -24885,6 +24901,7 @@
 				B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */,
 				8C0E8E1A1FDEBDFF00789C91 /* ForgotPasswordViewInput.swift in Sources */,
 				98B047B3259314740011DAEB /* Message.m in Sources */,
+				07C759E62819369200B028F0 /* Image.swift in Sources */,
 				CF71464C24B597A800D83E60 /* ContactSyncBaseCardView.swift in Sources */,
 				486F7B54208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
 				B5BF43F72514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
@@ -26526,6 +26543,7 @@
 				CE78491A22A685FB00662219 /* RemoteDownloder.swift in Sources */,
 				9808B39B2553EE4E002B0032 /* PrivateShareSelectPeopleView.swift in Sources */,
 				CF7145F524B597A800D83E60 /* ContactInfoView.swift in Sources */,
+				07C759E82819369200B028F0 /* Image.swift in Sources */,
 				CE78491B22A685FB00662219 /* LatestUpladsCard.swift in Sources */,
 				CE78491C22A685FB00662219 /* BlueButtonWithWhiteText.swift in Sources */,
 				CE78491D22A685FB00662219 /* CollectionViewSpinnerFooter.swift in Sources */,
@@ -28116,6 +28134,7 @@
 				CF8B646C23CBC9D70021B021 /* AutoSyncRoutingService.swift in Sources */,
 				98DBC05D2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift in Sources */,
 				CF8B646D23CBC9D70021B021 /* SetSecretQuestionErrors.swift in Sources */,
+				07C759E72819369200B028F0 /* Image.swift in Sources */,
 				CF8B646E23CBC9D70021B021 /* LocalAlbumModuleInitializer.swift in Sources */,
 				CF8B646F23CBC9D70021B021 /* ActivityTimelineService.swift in Sources */,
 				CF8B647023CBC9D70021B021 /* SearchViewInput.swift in Sources */,
@@ -29896,6 +29915,7 @@
 				CF8B6C8023CBCA280021B021 /* MyStorageViewInput.swift in Sources */,
 				CF8B6C8123CBCA280021B021 /* String+Int.swift in Sources */,
 				9808B39C2553EE4E002B0032 /* PrivateShareSelectPeopleView.swift in Sources */,
+				07C759E92819369200B028F0 /* Image.swift in Sources */,
 				CF7145F624B597A800D83E60 /* ContactInfoView.swift in Sources */,
 				CF8B6C8223CBCA280021B021 /* MusicViewInput.swift in Sources */,
 				CF8B6C8523CBCA280021B021 /* CustomTabBar.swift in Sources */,

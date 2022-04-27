@@ -15,6 +15,13 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         }
     }
 
+    @IBOutlet private weak var button: UIButton! {
+        willSet {
+            let image = Image.iconThreeDotsHorizontal.image(withTintMode: .color(.label))
+            newValue.setImage(image, for: .normal)
+        }
+    }
+
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
@@ -41,7 +48,8 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
         if let photoVideoLayoutAttributes = layoutAttributes as? PhotoVideoCollectionViewLayoutAttributes {
-            backgroundVisualEffectView.isHidden = !photoVideoLayoutAttributes.isPinned
+            backgroundVisualEffectView.isHidden = true//!photoVideoLayoutAttributes.isPinned
+            backgroundColor = AppColor.background.color
         }
     }
 

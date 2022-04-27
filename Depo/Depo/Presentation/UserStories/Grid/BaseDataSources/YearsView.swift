@@ -90,11 +90,10 @@ final class YearsView: UIView {
         guard let scrollView = scrollView else {
             return
         }
-        
-        frame = CGRect(x: scrollView.frame.width - selfWidth,
-                       y: scrollView.contentOffset.y,
-                       width: selfWidth,
-                       height: scrollView.frame.height)
+
+        frame.origin = CGPoint(x: scrollView.frame.width - selfWidth,
+                               y: scrollView.contentOffset.y + scrollView.adjustedContentInset.top)
+        frame.size = CGSize(width: selfWidth, height: scrollView.frame.height - (scrollView.adjustedContentInset.top + scrollView.adjustedContentInset.bottom))
     }
     
     override func layoutSubviews() {
@@ -280,9 +279,9 @@ final class YearsView: UIView {
         let label = TextInsetsLabel()
         label.text = text
         label.textAlignment = .center
-        label.font = UIFont.TurkcellSaturaDemFont(size: 12)
+        label.font = UIFont.appFont(.regular, size: 12)
         label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-        label.textColor = AppColor.lrTealishAndDarkBlue.color
+        label.textColor = AppColor.label.color
         label.textInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
         label.sizeToFit()
         label.layer.cornerRadius = label.frame.height * 0.5

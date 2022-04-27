@@ -147,7 +147,7 @@ final class HeaderContainingViewController: BaseViewController {
             contentView = UIVisualEffectView(effect: UIBlurEffect(style: style))
         case .plain(let color):
             contentView = UIView()
-            contentView.backgroundColor = color
+            contentView.backgroundColor = color.color
         }
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -191,8 +191,11 @@ final class HeaderContainingViewController: BaseViewController {
 
     private func contentOffsetChanged(for scrollView: UIScrollView) {
         let yOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
-        let headerTranslation = -max(0, min(headerView.frame.height, yOffset))
+        let contentStartsAt = headerView.frame.height - headerContentIntersectionMode.rawValue
+        let headerTranslation = -max(0, min(contentStartsAt, yOffset))
+        let progress = abs(headerTranslation / contentStartsAt)
         headerView.transform = CGAffineTransform(translationX: 0, y: headerTranslation)
-        statusBarBackgroundView.alpha = abs(headerTranslation / headerView.frame.height)
+        statusBarBackgroundView.alpha = progress
+        headerView.alpha = 1 - progress
     }
 }
