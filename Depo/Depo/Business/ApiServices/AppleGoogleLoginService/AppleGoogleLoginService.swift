@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import AuthenticationServices
 
 enum GoogeLoginMessageError: String, CaseIterable {
     case invalidToken     = "INVALID_TOKEN"
@@ -38,6 +39,8 @@ enum GoogleLoginOperationResult {
     case preconditionFailed(status: GoogeLoginMessageError?)
     case badRequest(status: GoogeLoginMessageError?)
 }
+
+typealias AppleGoogleUserCompletion = (_ user: AppleGoogleUser? ) -> Void
 
 final class AppleGoogleLoginService: BaseRequestService {
     func disconnectGoogleLogin(completion: @escaping (GoogleLoginOperationResult) -> Void) {
@@ -104,6 +107,24 @@ final class AppleGoogleLoginService: BaseRequestService {
                     }
                 }
             }
+    }
+}
+
+@available(iOS 13.0, *)
+extension AppleGoogleLoginService {
+    func getAppleCredentials(with credentials: ASAuthorizationAppleIDCredential, success: AppleGoogleUserCompletion, fail: (String) -> Void ) {
+        guard let appleIDToken = credentials.identityToken else {
+            fail("Unable to fetch identity token")
+            return
+        }
+        
+        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+            fail("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+            return
+        }
+        
+        let user = AppleGoogleUser(idToken: idTokenString, email: credentials.email ?? "", type: .apple)
+        success(user)
     }
 }
 

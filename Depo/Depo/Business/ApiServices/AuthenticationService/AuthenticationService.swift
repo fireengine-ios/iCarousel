@@ -95,7 +95,7 @@ class SignUpUser: BaseRequestParametrs {
     let sendOtp: Bool
     let captchaID: String?
     let captchaAnswer: String?
-    let googleToken: String?
+    let appleGoogleUser: AppleGoogleUser?
     var brandType: String {
         #if LIFEDRIVE 
             return "BILLO"
@@ -129,24 +129,24 @@ class SignUpUser: BaseRequestParametrs {
     }
 
     init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil,
-         googleToken: String? = nil) {
+         appleGoogleUser: AppleGoogleUser? = nil) {
         self.phone = phone
         self.mail = mail
         self.password = password
         self.sendOtp = sendOtp
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
-        self.googleToken = googleToken
+        self.appleGoogleUser = appleGoogleUser
     }
     
-    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool, googleToken: String? = nil) {
+    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool, appleGoogleUser: AppleGoogleUser? = nil) {
         self.phone = registrationUserInfo.phone
         self.mail = registrationUserInfo.mail
         self.password = registrationUserInfo.password
         self.sendOtp = sentOtp
         self.captchaID = registrationUserInfo.captchaID
         self.captchaAnswer = registrationUserInfo.captchaAnswer
-        self.googleToken = googleToken
+        self.appleGoogleUser = appleGoogleUser
     }
 }
 
@@ -690,8 +690,9 @@ class AuthenticationService: BaseRequestService {
             return
         }
         
-        if let googleToken = user.googleToken {
-            params = params + [LbRequestkeys.googleToken : googleToken]
+        if let idToken = user.appleGoogleUser?.idToken {
+            let key = user.appleGoogleUser?.type == .google ? LbRequestkeys.googleToken : LbRequestkeys.appleToken
+            params = params + [key: idToken]
         }
 
         sessionManagerWithoutToken

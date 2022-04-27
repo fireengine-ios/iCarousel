@@ -13,6 +13,7 @@ import AuthenticationServices
 
 final class IntroduceViewController: ViewController {
 
+    private lazy var appleGoogleService = AppleGoogleLoginService()
     var output: IntroduceViewOutput!
     var user: GoogleUser?
     
@@ -202,24 +203,19 @@ final class IntroduceViewController: ViewController {
 @available(iOS 13.0, *)
 extension IntroduceViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        case let credentials as ASAuthorizationAppleIDCredential:
-            guard let appleIDToken = credentials.identityToken else {
-                print("Unable to fetch identity token")
-                return
+        if let credentials = authorization.credential as? ASAuthorizationAppleIDCredential {
+            appleGoogleService.getAppleCredentials(with: credentials) { user in
+                guard let user = user else { return }
+                self.user = user
+                self.output.onSignInWithAppleGoogle(with: user)
+            } fail: { error in
+                debugLog(error)
             }
-            
-            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-                print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
-                return
-            }
-        default:
-            break
         }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print("failed")
+        debugLog("Apple authorizationController failed")
     }
 }
 

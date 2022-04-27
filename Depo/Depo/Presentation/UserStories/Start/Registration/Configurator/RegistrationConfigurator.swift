@@ -30,7 +30,7 @@ class RegistrationModuleConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
-        viewController.googleUser = user
+        viewController.appleGoogleUser = user
     }
 
 }
