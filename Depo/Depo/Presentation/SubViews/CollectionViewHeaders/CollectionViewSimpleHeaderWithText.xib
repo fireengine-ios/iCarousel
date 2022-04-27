@@ -22,21 +22,18 @@
                     <blurEffect style="prominent"/>
                 </visualEffectView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q94-GH-gZn">
-                    <rect key="frame" x="15" y="15.5" width="42" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="Ga7-w6-vqg"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="keY-Ln-awr"/>
-                    </constraints>
+                    <rect key="frame" x="15" y="0.0" width="42" height="52"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.373" green="0.373" blue="0.373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
                 <constraint firstItem="CQQ-hn-ZNB" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="JMa-7w-2vS"/>
+                <constraint firstAttribute="bottom" secondItem="q94-GH-gZn" secondAttribute="bottom" id="KWW-gf-GkR"/>
+                <constraint firstItem="q94-GH-gZn" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="Urn-IY-BaU"/>
                 <constraint firstItem="CQQ-hn-ZNB" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="VCV-5u-FfZ"/>
                 <constraint firstAttribute="trailing" secondItem="CQQ-hn-ZNB" secondAttribute="trailing" id="eIh-hR-bu6"/>
-                <constraint firstItem="q94-GH-gZn" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="pRj-74-ZwC"/>
                 <constraint firstItem="q94-GH-gZn" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="15" id="wuW-et-ROy"/>
                 <constraint firstAttribute="bottom" secondItem="CQQ-hn-ZNB" secondAttribute="bottom" id="xZy-VN-Nzo"/>
             </constraints>

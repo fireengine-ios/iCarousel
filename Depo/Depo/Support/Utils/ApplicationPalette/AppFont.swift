@@ -28,7 +28,7 @@ enum AppFontPresets {
 //    static let heading2 = UIFont.appFont(.medium, relativeToStyle: .subheadline, size: 20)
 //    static let heading3 = UIFont.appFont(.medium, relativeToStyle: .subheadline, size: 16)
 //    static let title1 = UIFont.appFont(.medium, relativeToStyle: .title2, size: 16)
-//    static let title2 = UIFont.appFont(.medium, relativeToStyle: .title2, size: 14)
+    static let title2 = UIFont.appFont(.medium, size: 14, relativeTo: .title2)
 }
 
 extension UIFont {

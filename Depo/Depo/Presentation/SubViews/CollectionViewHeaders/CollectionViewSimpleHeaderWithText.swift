@@ -9,11 +9,18 @@
 import UIKit
 
 final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
-    @IBOutlet private weak var backgroundVisualEffectView: UIVisualEffectView!
+    @IBOutlet private weak var backgroundVisualEffectView: UIVisualEffectView! {
+        willSet {
+            newValue.isHidden = true
+        }
+    }
+
     @IBOutlet private weak var titleLabel: UILabel! {
-        didSet {
-            titleLabel.text = ""
-            titleLabel.font = UIFont.TurkcellSaturaMedFont(size: 18)
+        willSet {
+            newValue.text = ""
+            newValue.textColor = AppColor.label.color
+            newValue.font = AppFontPresets.title2
+            newValue.adjustsFontForContentSizeCategory = true
         }
     }
 
