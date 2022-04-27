@@ -68,7 +68,7 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
-            newValue.layer.borderColor = AppColor.darkBlueAndBilloBlue.color?.cgColor
+            newValue.layer.borderColor = AppColor.darkBlueAndBilloBlue.color.cgColor
             newValue.layer.borderWidth = 1
             newValue.setTitleColor(AppColor.darkBlueAndBilloBlue.color, for: .normal)
             newValue.adjustsFontSizeToFitWidth()

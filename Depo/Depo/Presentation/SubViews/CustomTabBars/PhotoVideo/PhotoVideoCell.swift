@@ -51,7 +51,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     @IBOutlet private weak var selectionStateView: UIView! {
         willSet {
             newValue.layer.borderWidth = 3
-            newValue.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+            newValue.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
             newValue.alpha = 0
         }
     }
@@ -111,7 +111,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        selectionStateView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+        selectionStateView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
     }
 
     // MARK: Utility Methods(Public)

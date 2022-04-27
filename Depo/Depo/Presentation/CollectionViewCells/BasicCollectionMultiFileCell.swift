@@ -157,7 +157,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bigContentImageView.contentMode = .center
 
         separatorView.isHidden = isBigSize()
-        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColorSecondary : AppColor.primaryBackground.color ?? .white
+        barView.backgroundColor = isBigSize() ? ColorConstants.fileGreedCellColorSecondary : AppColor.primaryBackground.color
         
         //Big size (Grid)
         if isBigSize() && bottomViewH.constant != BasicCollectionMultiFileCell.smallH {
@@ -213,7 +213,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         smallCellSelectionView.isHidden = true
         moreView.isHidden = isSelectionActive
-        moreView.backgroundColor = isBigSize() ? AppColor.secondaryBackground.color : AppColor.primaryBackground.color ?? .white
+        moreView.backgroundColor = isBigSize() ? AppColor.secondaryBackground.color : AppColor.primaryBackground.color
         smallContentImageView.isHidden = false
         
         if let isFavorite = itemModel?.favorites {
@@ -232,7 +232,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         isCellSelected = isSelected
         isCellSelectionEnabled = isSelectionActive
         selectionImageView.isHidden = !isSelectionActive
-        var bgColor: UIColor = AppColor.secondaryBackground.color ?? ColorConstants.whiteColor
+        var bgColor: UIColor = AppColor.secondaryBackground.color
         if isSelectionActive {
             selectionImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
             
@@ -245,7 +245,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 setSelectionSmallSelectionImageView(false, isHidden: true)
             } else {
                 bigSelectionView.alpha = 0
-                bgColor = AppColor.secondaryBackground.color ?? ColorConstants.whiteColor
+                bgColor = AppColor.secondaryBackground.color
                 if !smallContentImageView.configured {
                     smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForNotSelectedWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
                     smallCellSelectionView.isHidden = !isSelected
@@ -267,7 +267,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
                 if !smallContentImageView.configured {
                     smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
                 }
-                bgColor = AppColor.primaryBackground.color ?? .white
+                bgColor = AppColor.primaryBackground.color
             }
             smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
             setSelectionSmallSelectionImageView(false, isHidden: true)
@@ -293,11 +293,11 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         smallCellSelectionView.contentMode = .center
         
         smallSelectonView.layer.borderWidth = 3
-        smallSelectonView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+        smallSelectonView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
         smallSelectonView.alpha = 0
         
         bigSelectionView.layer.borderWidth = 3
-        bigSelectionView.layer.borderColor = AppColor.darkBlueAndTealish.color?.cgColor
+        bigSelectionView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
         bigSelectionView.alpha = 0
         
         fileNameLabel.font = UIFont.TurkcellSaturaRegFont(size: 10)

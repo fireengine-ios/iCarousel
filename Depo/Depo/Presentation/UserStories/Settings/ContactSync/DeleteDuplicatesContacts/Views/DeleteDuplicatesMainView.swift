@@ -25,7 +25,7 @@ final class DeleteDuplicatesMainView: UIView, NibInit {
     
     @IBOutlet private weak var shadowView: UIView! {
         willSet {
-            let gradientView = TransparentGradientView(style: .vertical, mainColor: AppColor.primaryBackground.color ?? ColorConstants.lighterGray)
+            let gradientView = TransparentGradientView(style: .vertical, mainColor: AppColor.primaryBackground.color)
             gradientView.frame = newValue.bounds
             newValue.addSubview(gradientView)
             newValue.sendSubviewToBack(gradientView)

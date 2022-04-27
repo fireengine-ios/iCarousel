@@ -7,7 +7,7 @@ final class InstaPickSelectionSegmentedView: UIView {
     private let topView = UIView()
     let containerView = UIView()
     private let transparentGradientView = TransparentGradientView(style: .vertical,
-                                                                  mainColor: AppColor.primaryBackground.color ?? .white)
+                                                                  mainColor: AppColor.primaryBackground.color)
     
     let segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
@@ -24,9 +24,8 @@ final class InstaPickSelectionSegmentedView: UIView {
         
         button.setTitleColor(UIColor.white, for: .normal)
         button.setTitleColor(UIColor.white.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(AppColor.darkBlueAndTealish.color ?? ColorConstants.darkBlueColor, for: .normal)
-        button.setBackgroundColor(AppColor.darkBlueAndTealish.color?.darker(by: 30) ??
-                                    ColorConstants.darkBlueColor.darker(by: 30), for: .highlighted)
+        button.setBackgroundColor(AppColor.darkBlueAndTealish.color, for: .normal)
+        button.setBackgroundColor(AppColor.darkBlueAndTealish.color.darker(by: 30), for: .highlighted)
         
         button.titleLabel?.font = ApplicationPalette.bigRoundButtonFont
         button.adjustsFontSizeToFitWidth()

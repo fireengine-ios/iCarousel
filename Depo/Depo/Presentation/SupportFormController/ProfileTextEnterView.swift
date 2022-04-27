@@ -53,13 +53,13 @@ class ProfileTextEnterView: UIView {
     
     var underlineColor = AppColor.itemSeperator.color {
         didSet {
-            underlineLayer.backgroundColor = underlineColor?.cgColor
+            underlineLayer.backgroundColor = underlineColor.cgColor
         }
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        underlineLayer.backgroundColor = underlineColor?.cgColor
+        underlineLayer.backgroundColor = underlineColor.cgColor
     }
     
     private let underlineWidth: CGFloat = 0.5
@@ -130,7 +130,7 @@ class ProfileTextEnterView: UIView {
     
     private func setupUnderline() {
         layer.addSublayer(underlineLayer)
-        underlineLayer.backgroundColor = underlineColor?.cgColor
+        underlineLayer.backgroundColor = underlineColor.cgColor
     }
     
     override func layoutSubviews() {

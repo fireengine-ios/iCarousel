@@ -47,10 +47,10 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var backUpButton: RoundedInsetsButton! {
         willSet {
-            newValue.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
+            newValue.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
             
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
-            newValue.setTitleColor(AppColor.lrTealishAndWhite.color ?? .lrTealishTwo, for: .normal)
+            newValue.setTitleColor(AppColor.lrTealishAndWhite.color, for: .normal)
             
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16.0)
             newValue.adjustsFontSizeToFitWidth()
@@ -109,14 +109,14 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
         super.awakeFromNib()
         
         backgroundColor = AppColor.lrTealishAndWhite.color
-        backUpButton.setTitleColor(AppColor.lrTealishAndWhite.color ?? .lrTealishTwo, for: .normal)
-        backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
+        backUpButton.setTitleColor(AppColor.lrTealishAndWhite.color, for: .normal)
+        backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color ?? .white, for: .normal)
-        backUpButton.setTitleColor(AppColor.lrTealishAndWhite.color ?? .lrTealishTwo, for: .normal)
+        backUpButton.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
+        backUpButton.setTitleColor(AppColor.lrTealishAndWhite.color, for: .normal)
     }
     
     //MARK: - Public

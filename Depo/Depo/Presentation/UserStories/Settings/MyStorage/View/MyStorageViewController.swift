@@ -65,7 +65,7 @@ final class MyStorageViewController: BaseViewController {
             newValue.insets = UIEdgeInsets(topBottom: 8, rightLeft: 12)
             newValue.setTitle(TextConstants.restorePurchasesButton, for: .normal)
             newValue.setTitleColor(.lrBrownishGrey, for: .normal)
-            newValue.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: UIControl.State())
+            newValue.setBackgroundColor(AppColor.secondaryBackground.color, for: UIControl.State())
             newValue.titleLabel?.font = .TurkcellSaturaBolFont(size: 16)
             newValue.layer.borderWidth = 1
             newValue.layer.borderColor = UIColor.lrTealishTwo.cgColor

@@ -174,7 +174,7 @@ final class InstaPickDetailViewController: BaseViewController {
         copyToClipboardButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: isIPad ? 19 : 14)
         copyToClipboardButton.setTitleColor(UIColor.lrTealishTwo, for: .normal)
         
-        shareButton.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .disabled)
+        shareButton.setBackgroundColor(AppColor.secondaryBackground.color, for: .disabled)
         shareButton.setTitleColor(ColorConstants.darkBlueColor.lighter(by: 40.0), for: .disabled)
     }
 

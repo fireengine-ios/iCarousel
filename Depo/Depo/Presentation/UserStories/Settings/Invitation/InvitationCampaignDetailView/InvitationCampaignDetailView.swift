@@ -56,7 +56,7 @@ class InvitationCampaignDetailView: UIView, NibInit {
     }
 
     func fetchCampaignDetail() {
-        let hexColor = AppColor.blackColor.color?.toHexString() ?? "#000000"
+        let hexColor = AppColor.blackColor.color.toHexString()
         self.showSpinner()
         InvitationApiService().getInvitationCampaign { result in
             self.hideSpinner()

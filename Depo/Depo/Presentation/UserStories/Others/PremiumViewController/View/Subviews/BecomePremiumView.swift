@@ -73,7 +73,7 @@ final class BecomePremiumView: UIView, NibInit {
         button.setTitleColor(AppColor.marineTwoAndWhite.color, for: .normal)
         button.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
         button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-        button.setBackgroundColor(AppColor.secondaryBackground.color ?? .white, for: .normal)
+        button.setBackgroundColor(AppColor.secondaryBackground.color, for: .normal)
         
         button.layer.borderColor = ColorConstants.darkTintGray.cgColor
         button.layer.borderWidth = 2

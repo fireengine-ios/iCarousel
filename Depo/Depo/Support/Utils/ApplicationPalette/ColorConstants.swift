@@ -22,8 +22,13 @@ enum AppColor {
     case tabBarTint
     case tabBarTintSelected
 
-    case primaryBackground
+    case background
     case secondaryBackground
+    case label
+    case tint
+
+
+    case primaryBackground
     case cellShadow
     case itemSeperator
     case contactsBorderColor
@@ -52,18 +57,18 @@ enum AppColor {
     case blueGreenAndWhite
     case popUpBackground
 
-    var color: UIColor? {
-        return UIColor(named: String(describing: self))
+    var color: UIColor {
+        guard let uiColor = UIColor(named: String(describing: self)) else {
+            assertionFailure()
+            return UIColor()
+        }
+
+        return uiColor
     }
 }
 
 func color(_ color: AppColor) -> UIColor {
-    guard let uiColor = color.color else {
-        assertionFailure()
-        return UIColor()
-    }
-
-    return uiColor
+    return color.color
 }
 
 // TODO: Facelift: remove all legacy colors

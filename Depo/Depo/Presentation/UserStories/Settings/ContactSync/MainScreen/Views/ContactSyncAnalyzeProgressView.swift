@@ -64,7 +64,7 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit, ContactOperationPro
     private let attributedPercentageValue: NSMutableAttributedString = {
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.TurkcellSaturaMedFont(size: 48.0),
-            .foregroundColor: AppColor.navyAndWhite.color ?? ColorConstants.navy]
+            .foregroundColor: AppColor.navyAndWhite.color]
         
         let attributed = NSMutableAttributedString(string: "0", attributes: attributes)
         
@@ -80,7 +80,7 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit, ContactOperationPro
         
         let attributes: [NSAttributedString.Key: Any] = [
             .font: smallFont,
-            .foregroundColor: AppColor.navyAndWhite.color ?? ColorConstants.navy,
+            .foregroundColor: AppColor.navyAndWhite.color,
             .baselineOffset : offset]
         
         let attributed = NSMutableAttributedString(string: "%", attributes: attributes)

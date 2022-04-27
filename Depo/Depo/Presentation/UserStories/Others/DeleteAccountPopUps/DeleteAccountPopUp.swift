@@ -24,7 +24,7 @@ class DeleteAccountPopUp: UIViewController {
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowRadius = 4
-            newValue.layer.shadowColor = AppColor.cellShadow.color?.cgColor
+            newValue.layer.shadowColor = AppColor.cellShadow.color.cgColor
         }
     }
 
@@ -52,7 +52,7 @@ class DeleteAccountPopUp: UIViewController {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.layer.cornerRadius = 25
             newValue.layer.borderWidth = 1
-            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color?.cgColor
+            newValue.layer.borderColor = AppColor.marineTwoAndTealish.color.cgColor
         }
     }
 

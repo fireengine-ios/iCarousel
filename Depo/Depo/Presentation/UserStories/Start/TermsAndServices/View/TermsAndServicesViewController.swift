@@ -227,7 +227,7 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
                                                                     .characterEncoding: String.Encoding.utf8.rawValue],
                                                           documentAttributes: nil)
 
-            attributedString.addAttribute(.foregroundColor, value: AppColor.blackColor.color ?? .black, range: NSRange(location: 0, length: attributedString.length))
+            attributedString.addAttribute(.foregroundColor, value: AppColor.blackColor.color, range: NSRange(location: 0, length: attributedString.length))
             return attributedString
         } catch {
             assertionFailure()

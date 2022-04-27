@@ -45,7 +45,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var analyzeView: UIView! {
         willSet {
-            let gradientView = TransparentGradientView(style: .vertical, mainColor: AppColor.primaryBackground.color ?? .white)
+            let gradientView = TransparentGradientView(style: .vertical, mainColor: AppColor.primaryBackground.color)
             gradientView.frame = newValue.bounds
             newValue.addSubview(gradientView)
             newValue.sendSubviewToBack(gradientView)
