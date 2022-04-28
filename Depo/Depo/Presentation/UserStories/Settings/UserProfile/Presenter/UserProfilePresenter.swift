@@ -111,7 +111,11 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         if method == .password {
             router.goToChangePassword()
         } else {
-            view.setNewPassword(with: method)
+            if #available(iOS 13, *) {
+                view.setNewPassword(with: method)
+            } else {
+                view.presentForgetPasswordPopup()
+            }
         }
     }
     
