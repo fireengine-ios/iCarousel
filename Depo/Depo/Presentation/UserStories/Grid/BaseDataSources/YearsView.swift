@@ -280,7 +280,7 @@ final class YearsView: UIView {
         label.text = text
         label.textAlignment = .center
         label.font = UIFont.appFont(.regular, size: 12)
-        label.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        label.backgroundColor = AppColor.secondaryBackground.withAlphaComponent(0.7)
         label.textColor = AppColor.label.color
         label.textInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
         label.sizeToFit()

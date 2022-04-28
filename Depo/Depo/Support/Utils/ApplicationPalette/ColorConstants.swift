@@ -65,6 +65,14 @@ enum AppColor {
 
         return uiColor
     }
+
+    var cgColor: CGColor {
+        return color.cgColor
+    }
+
+    func withAlphaComponent(_ alpha: CGFloat) -> UIColor {
+        return color.withAlphaComponent(alpha)
+    }
 }
 
 func color(_ color: AppColor) -> UIColor {
