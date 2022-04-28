@@ -11,10 +11,10 @@ import Foundation
 import UIKit
 
 enum AppFont: String {
-    case light = "TurkcellSatura"
-    case regular = "TurkcellSaturaReg"
-    case medium = "TurkcellSaturaMed"
-    case bold = "TurkcellSaturaBol"
+    case light = "GTAmericaLC-Lt"
+    case regular = "GTAmericaLC-Rg"
+    case medium = "GTAmericaLC-Md"
+    case bold = "GTAmericaLC-Bd"
 }
 
 private extension AppFont {

@@ -525,6 +525,48 @@
 		07C759EC281936C800B028F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C759EA281936C800B028F0 /* Images.xcassets */; };
 		07C759ED281936C800B028F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C759EA281936C800B028F0 /* Images.xcassets */; };
 		07C759EE281936C800B028F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C759EA281936C800B028F0 /* Images.xcassets */; };
+		07C75A11281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
+		07C75A12281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
+		07C75A13281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
+		07C75A14281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
+		07C75A21281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */; };
+		07C75A22281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */; };
+		07C75A23281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */; };
+		07C75A24281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */; };
+		07C75A25281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */; };
+		07C75A26281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */; };
+		07C75A27281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */; };
+		07C75A28281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */; };
+		07C75A29281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */; };
+		07C75A2A281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */; };
+		07C75A2B281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */; };
+		07C75A2C281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */; };
+		07C75A2D281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */; };
+		07C75A2E281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */; };
+		07C75A2F281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */; };
+		07C75A30281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */; };
+		07C75A36281A787C00B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */; };
+		07C75A3C281A787C00B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */; };
+		07C75A3D281A787C00B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */; };
+		07C75A3E281A787C00B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */; };
+		07C75A41281A787C00B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
+		07C75A44281A787E00B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */; };
+		07C75A4A281A787E00B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */; };
+		07C75A4B281A787E00B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */; };
+		07C75A4C281A787E00B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */; };
+		07C75A4F281A787E00B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
+		07C75A52281A788000B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */; };
+		07C75A58281A788000B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */; };
+		07C75A59281A788000B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */; };
+		07C75A5A281A788000B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */; };
+		07C75A5D281A788000B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
+		07C75A60281A788200B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */; };
+		07C75A66281A788200B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */; };
+		07C75A67281A788200B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */; };
+		07C75A68281A788200B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */; };
+		07C75A6B281A788200B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
+		07C75A6D281A78A900B028F0 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077D1D9B280568CD001C6E72 /* AppFont.swift */; };
+		07C75A6E281A78AB00B028F0 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077D1D9B280568CD001C6E72 /* AppFont.swift */; };
 		07CCBF7926FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
 		07CCBF7A26FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
 		07CCBF7B26FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
@@ -9334,6 +9376,11 @@
 		07C759DD2816C58B00B028F0 /* PhotoVideoCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
 		07C759E52819369200B028F0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		07C759EA281936C800B028F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-America-LC-Standard-Black.ttf"; sourceTree = "<group>"; };
+		07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-America-LC-Standard-Bold.ttf"; sourceTree = "<group>"; };
+		07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-America-LC-Standard-Medium.ttf"; sourceTree = "<group>"; };
+		07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-America-LC-Standard-Regular.ttf"; sourceTree = "<group>"; };
+		07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-America-LC-Standard-Light.ttf"; sourceTree = "<group>"; };
 		07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateSecurityQuestionViewController.swift; sourceTree = "<group>"; };
 		07CCBF7826FC7254002322B0 /* ValidateSecurityQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidateSecurityQuestionViewController.xib; sourceTree = "<group>"; };
 		07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPInteractor.swift; sourceTree = "<group>"; };
@@ -19811,6 +19858,11 @@
 		CEBBDDDA1F01E4CF00CDF527 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */,
+				07C759F8281A786100B028F0 /* GT-America-LC-Standard-Bold.ttf */,
+				07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */,
+				07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */,
+				07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */,
 				CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */,
 				CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */,
 				CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */,
@@ -21562,6 +21614,7 @@
 				8C0E90011FDEBDFF00789C91 /* SettingsTableViewCell.xib in Resources */,
 				89E51D6222CA2ECA007A7DBC /* CreateStoryPopUp.xib in Resources */,
 				9845489822FBFF4100D7F29C /* SpotifyStatusView.xib in Resources */,
+				07C75A29281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				4A9B3912201F5EC5009FC572 /* FaceImageItemsViewController.xib in Resources */,
 				890F737922EEFB0000BA0020 /* BaseChangeEmailPopUp.xib in Resources */,
 				4A56D5C2202AF658003A4624 /* FaceImageAddNameViewController.xib in Resources */,
@@ -21650,6 +21703,7 @@
 				F039B5F6279A7F4D000EBAA7 /* GraceBannerView.xib in Resources */,
 				8C0E90201FDEBDFF00789C91 /* CaptchaViewController.xib in Resources */,
 				7C4F60A62019D0440033C58F /* CollageCard.xib in Resources */,
+				07C75A21281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
 				8C0E90211FDEBDFF00789C91 /* AutoSyncViewController.xib in Resources */,
 				CF71469A24B597A900D83E60 /* ContactsBackupHistoryView.xib in Resources */,
 				8C0E90231FDEBDFF00789C91 /* TurkcellSaturaBol.ttf in Resources */,
@@ -21788,6 +21842,7 @@
 				9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */,
 				890F737322EEFA3E00BA0020 /* BaseEmailVerificationPopUp.xib in Resources */,
 				8C2600A42291E2320063E913 /* PhoneVerificationViewController.xib in Resources */,
+				07C75A25281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
 				9842FB8D2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				17589F792276336800A5DB37 /* SupportFormController.xib in Resources */,
@@ -21848,11 +21903,13 @@
 				B5601AD823506349002E1D1E /* InitializingViewController.xib in Resources */,
 				8C49817423165B13007015CF /* TermsCheckboxTextView.xib in Resources */,
 				CF71473024B597AA00D83E60 /* ContactSyncScheduleCard.xib in Resources */,
+				07C75A11281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
 				985E6956255A6045006F6CD7 /* PrivateShareUserRoleViewController.xib in Resources */,
 				985E69AA255A6204006F6CD7 /* PrivateShareRoleCheckmarkView.xib in Resources */,
 				8930DDB122C8C8C8003CE856 /* CreateStoryViewController.xib in Resources */,
 				8C0E90611FDEBDFF00789C91 /* ActionsMenuTableViewCell.xib in Resources */,
 				9808B7C12567EB10001DEF2E /* PrivateShateAccessListViewController.xib in Resources */,
+				07C75A2D281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				9240C04E21B805AF005E710C /* PremiumFooterCollectionReusableView.xib in Resources */,
 				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
 				7C257B3B20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
@@ -21907,17 +21964,22 @@
 			files = (
 				8C3BA32C22B3CC45006D901E /* TurkcellSaturaBol.ttf in Resources */,
 				8C3BA32D22B3CC45006D901E /* TurkcellSaturaBolIta.ttf in Resources */,
+				07C75A41281A787C00B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
 				8C3BA32E22B3CC45006D901E /* images.xcassets in Resources */,
 				8C3BA32F22B3CC45006D901E /* TurkcellSaturaDem.ttf in Resources */,
 				8C3BA33022B3CC45006D901E /* PasscodeEnterViewController.xib in Resources */,
 				8C3BA33122B3CC45006D901E /* PasscodeViewImp.xib in Resources */,
 				8C3BA33222B3CC45006D901E /* TurkcellSaturaDemIta.ttf in Resources */,
+				07C75A36281A787C00B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				8C3BA33322B3CC45006D901E /* TurkcellSaturaIta.ttf in Resources */,
 				0711888F27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				8C3BA33422B3CC45006D901E /* OurLocalizable.strings in Resources */,
+				07C75A3C281A787C00B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				8C3BA33522B3CC45006D901E /* TurkcellSaturaMed.ttf in Resources */,
 				8C3BA33622B3CC45006D901E /* TurkcellSaturaMedIta.ttf in Resources */,
+				07C75A3E281A787C00B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				8C3BA33722B3CC45006D901E /* TurkcellSaturaReg.ttf in Resources */,
+				07C75A3D281A787C00B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
 				8C3BA33822B3CC45006D901E /* MainInterface.storyboard in Resources */,
 				F0C202342726EF810086233E /* Colors.xcassets in Resources */,
 			);
@@ -21941,8 +22003,13 @@
 				8C3BA39322B3CC53006D901E /* TurkcellSaturaBolIta.ttf in Resources */,
 				8C3BA39422B3CC53006D901E /* OurLocalizable.strings in Resources */,
 				8C3BA39522B3CC53006D901E /* TurkcellSaturaDem.ttf in Resources */,
+				07C75A4F281A787E00B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
+				07C75A4A281A787E00B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				8C3BA39622B3CC53006D901E /* TurkcellSaturaDemIta.ttf in Resources */,
+				07C75A4C281A787E00B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				8C3BA39722B3CC53006D901E /* TurkcellSaturaIta.ttf in Resources */,
+				07C75A4B281A787E00B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
+				07C75A44281A787E00B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				8C3BA39822B3CC53006D901E /* TurkcellSaturaMed.ttf in Resources */,
 				8C3BA39922B3CC53006D901E /* TurkcellSaturaMedIta.ttf in Resources */,
 				F0C2023D2726F0280086233E /* Colors.xcassets in Resources */,
@@ -21984,8 +22051,13 @@
 				CE18CC80204E85DC00FA3F44 /* TurkcellSaturaBolIta.ttf in Resources */,
 				CE4D27F3207E00D4003AE4FB /* OurLocalizable.strings in Resources */,
 				CE18CC81204E85DC00FA3F44 /* TurkcellSaturaDem.ttf in Resources */,
+				07C75A5D281A788000B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
+				07C75A58281A788000B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				CE18CC82204E85DC00FA3F44 /* TurkcellSaturaDemIta.ttf in Resources */,
+				07C75A5A281A788000B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				CE18CC83204E85DC00FA3F44 /* TurkcellSaturaIta.ttf in Resources */,
+				07C75A59281A788000B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
+				07C75A52281A788000B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				CE18CC84204E85DC00FA3F44 /* TurkcellSaturaMed.ttf in Resources */,
 				CE18CC85204E85DC00FA3F44 /* TurkcellSaturaMedIta.ttf in Resources */,
 				F0C2023B2726F0260086233E /* Colors.xcassets in Resources */,
@@ -22000,17 +22072,22 @@
 			files = (
 				CEBDB1DC20444E50007EE1AE /* TurkcellSaturaBol.ttf in Resources */,
 				CEBDB1DD20444E50007EE1AE /* TurkcellSaturaBolIta.ttf in Resources */,
+				07C75A6B281A788200B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
 				B5A84523212DA315007EA795 /* images.xcassets in Resources */,
 				CEBDB1DE20444E50007EE1AE /* TurkcellSaturaDem.ttf in Resources */,
 				CE4D281D207E23F7003AE4FB /* PasscodeEnterViewController.xib in Resources */,
 				CE4D2813207E0997003AE4FB /* PasscodeViewImp.xib in Resources */,
 				CEBDB1DF20444E50007EE1AE /* TurkcellSaturaDemIta.ttf in Resources */,
+				07C75A60281A788200B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				CEBDB1E020444E50007EE1AE /* TurkcellSaturaIta.ttf in Resources */,
 				0711888C27FA9E7900F512A1 /* NavigationBar.xcassets in Resources */,
 				CE4D27F2207E00D3003AE4FB /* OurLocalizable.strings in Resources */,
+				07C75A66281A788200B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				CEBDB1E120444E50007EE1AE /* TurkcellSaturaMed.ttf in Resources */,
 				CEBDB1E220444E50007EE1AE /* TurkcellSaturaMedIta.ttf in Resources */,
+				07C75A68281A788200B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				CEBDB1E320444E50007EE1AE /* TurkcellSaturaReg.ttf in Resources */,
+				07C75A67281A788200B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
 				CE58FAF520444493007F3F54 /* MainInterface.storyboard in Resources */,
 				F0C202382726F0230086233E /* Colors.xcassets in Resources */,
 			);
@@ -22045,6 +22122,7 @@
 				CE784CD422A685FB00662219 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CE784CD622A685FB00662219 /* AnimationCard.xib in Resources */,
 				CE784CDB22A685FB00662219 /* PasswordView.xib in Resources */,
+				07C75A2F281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				7378053C23ABC130001D57BD /* OverlayStickerViewController.xib in Resources */,
 				730A997622D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				CE784CDD22A685FB00662219 /* SettingsTableViewCell.xib in Resources */,
@@ -22095,6 +22173,7 @@
 				CE784D2222A685FB00662219 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				CE784D2522A685FB00662219 /* PVViewerController.xib in Resources */,
 				CE784D2622A685FB00662219 /* InstapickPopUpController.xib in Resources */,
+				07C75A27281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				CE784D2922A685FB00662219 /* CollectionViewCellForController.xib in Resources */,
 				CE784D2A22A685FB00662219 /* LoginPhoneMailCell.xib in Resources */,
 				07AA668126FDED36009D4FB1 /* ResetPasswordViewController.xib in Resources */,
@@ -22182,6 +22261,7 @@
 				737A2EC02338E03A0014258A /* SelectQuestionViewController.xib in Resources */,
 				CE784DC222A685FB00662219 /* MusicBar.xib in Resources */,
 				CE784DC322A685FB00662219 /* inputCell.xib in Resources */,
+				07C75A13281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
 				B55C973725593E4000623C5C /* PrivateShareLocalContactCell.xib in Resources */,
 				CE7040B322EB193300124073 /* SupportFormPrefilledController.xib in Resources */,
 				0731E89D263181EE00883566 /* RegistrationTermsViewController.xib in Resources */,
@@ -22301,6 +22381,7 @@
 				CE784E7B22A685FB00662219 /* PrepareQuickScroll.xib in Resources */,
 				CE784E8022A685FB00662219 /* ChangePasswordController.xib in Resources */,
 				98E4B9F423C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
+				07C75A23281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
 				CE784E8222A685FB00662219 /* GridListTopBarSortingTableCell.xib in Resources */,
 				077D1DBC2805B92B001C6E72 /* NavigationHeaderView.xib in Resources */,
 				CE784E8422A685FB00662219 /* TurkcellSaturaIta.ttf in Resources */,
@@ -22332,6 +22413,7 @@
 				CE784EAD22A685FB00662219 /* ForgotPasswordViewController.xib in Resources */,
 				CE784EB022A685FB00662219 /* SettingsViewController.xib in Resources */,
 				9892229D240D0C3C004155A5 /* BecomePremiumView.xib in Resources */,
+				07C75A2B281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				9808B7C42567EB10001DEF2E /* PrivateShateAccessListViewController.xib in Resources */,
 				98164305233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				CE784EB422A685FB00662219 /* PackagePremiumView.xib in Resources */,
@@ -22444,7 +22526,9 @@
 				CF8B690323CBC9D70021B021 /* SettingHeaderView.xib in Resources */,
 				CF8B690523CBC9D70021B021 /* AnimationCard.xib in Resources */,
 				CF8B690723CBC9D70021B021 /* LoginSettingsViewController.xib in Resources */,
+				07C75A22281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
 				CF8B690823CBC9D70021B021 /* SpotifyAuthViewController.xib in Resources */,
+				07C75A26281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				B5315098246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */,
 				CF8B690B23CBC9D70021B021 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				CF8B691123CBC9D70021B021 /* PremiumHeaderView.xib in Resources */,
@@ -22471,6 +22555,7 @@
 				CF8B694923CBC9D70021B021 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				CF71465324B597A800D83E60 /* ContactSyncBigCardView.xib in Resources */,
 				CF8B695523CBC9D70021B021 /* CollectionViewCellForStoryPhoto.xib in Resources */,
+				07C75A12281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
 				985E69AB255A6204006F6CD7 /* PrivateShareRoleCheckmarkView.xib in Resources */,
 				CF8B695623CBC9D70021B021 /* InstaPickHashtagCell.xib in Resources */,
 				CF8B695823CBC9D70021B021 /* MailVerificationViewController.xib in Resources */,
@@ -22644,6 +22729,7 @@
 				CF8B6A7D23CBC9D70021B021 /* InternetDataUsageCollectionViewCell.xib in Resources */,
 				982319D624F3A1E700FD16E2 /* AdjustmentCategoryCell.xib in Resources */,
 				CF8B6A7E23CBC9D70021B021 /* GoogleService-Info.plist in Resources */,
+				07C75A2E281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				CF8B6A7F23CBC9D70021B021 /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				CF8B6A8323CBC9D70021B021 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				CF8B6A8423CBC9D70021B021 /* PrepareQuickScroll.xib in Resources */,
@@ -22704,6 +22790,7 @@
 				CF8B6AD323CBC9D70021B021 /* PremiumFooterCollectionReusableView.xib in Resources */,
 				CF8B6AD623CBC9D70021B021 /* MovieCard.xib in Resources */,
 				CF8B6AD723CBC9D70021B021 /* ContactBackupOld.xib in Resources */,
+				07C75A2A281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				CF8B6ADA23CBC9D70021B021 /* PhotoVideoController.xib in Resources */,
 				0305A34D23D5C59F004D1EC7 /* HSSmartAlbumWarningPopUp.xib in Resources */,
 				CF8B6ADB23CBC9D70021B021 /* IntroduceSubView.xib in Resources */,
@@ -22785,6 +22872,7 @@
 				CF8B708A23CBCA280021B021 /* AutoUploadIsOffPopUp.xib in Resources */,
 				CF8B708C23CBCA280021B021 /* AnimationCard.xib in Resources */,
 				CF8B709123CBCA280021B021 /* PasswordView.xib in Resources */,
+				07C75A30281A786400B028F0 /* GT-America-LC-Standard-Light.ttf in Resources */,
 				CF8B709223CBCA280021B021 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				CF8B709423CBCA280021B021 /* SettingsTableViewCell.xib in Resources */,
 				CF8B709A23CBCA280021B021 /* BottomSelectionTabBarViewController.xib in Resources */,
@@ -22835,6 +22923,7 @@
 				CF8B70E223CBCA280021B021 /* InstapickPopUpController.xib in Resources */,
 				CF8B70E523CBCA280021B021 /* CollectionViewCellForController.xib in Resources */,
 				CF8B70E623CBCA280021B021 /* LoginPhoneMailCell.xib in Resources */,
+				07C75A28281A786400B028F0 /* GT-America-LC-Standard-Medium.ttf in Resources */,
 				CF8B70E723CBCA280021B021 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				CF8B70EA23CBCA280021B021 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				07AA668226FDED36009D4FB1 /* ResetPasswordViewController.xib in Resources */,
@@ -22922,6 +23011,7 @@
 				CF8B718E23CBCA280021B021 /* LeavePremiumViewController.xib in Resources */,
 				CF8B719023CBCA280021B021 /* PhotoVideoDetailViewController.xib in Resources */,
 				CF8B719223CBCA280021B021 /* ActivityTimelineViewController.xib in Resources */,
+				07C75A14281A786400B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */,
 				CF8B719323CBCA280021B021 /* SharedImages.xcassets in Resources */,
 				CF8B719523CBCA280021B021 /* CollectionViewCellForAudio.xib in Resources */,
 				CF8B719623CBCA280021B021 /* EmailVerifiedPopUp.xib in Resources */,
@@ -23041,6 +23131,7 @@
 				CF8B725423CBCA280021B021 /* TurkcellSaturaIta.ttf in Resources */,
 				CF8B725823CBCA280021B021 /* PasscodeViewImp.xib in Resources */,
 				0305A35023D5C5A9004D1EC7 /* HSCompletionPopUp.xib in Resources */,
+				07C75A24281A786400B028F0 /* GT-America-LC-Standard-Bold.ttf in Resources */,
 				CF703F4E24E3CC5C005EFFFD /* (null) in Resources */,
 				077D1DBD2805B92B001C6E72 /* NavigationHeaderView.xib in Resources */,
 				98231A1B24F3A1E700FD16E2 /* SelectionMenuController.xib in Resources */,
@@ -23072,6 +23163,7 @@
 				CF8B728A23CBCA280021B021 /* SpotifyAccountConnectionCell.xib in Resources */,
 				9862BC91255E899800D7945E /* FileInfoShareContactCell.xib in Resources */,
 				985786FC23E01F8800D35DDA /* SettingFooterView.xib in Resources */,
+				07C75A2C281A786400B028F0 /* GT-America-LC-Standard-Regular.ttf in Resources */,
 				CF8B728E23CBCA280021B021 /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */,
 				98BE78AD24517E4300B8864F /* SnackbarView.xib in Resources */,
 				CF8B729023CBCA280021B021 /* ActionsMenuView.xib in Resources */,
@@ -25912,6 +26004,7 @@
 			files = (
 				8C3BA37D22B3CC53006D901E /* L10n.swift in Sources */,
 				8C3BA37E22B3CC53006D901E /* Keys.swift in Sources */,
+				07C75A6E281A78AB00B028F0 /* AppFont.swift in Sources */,
 				8C3BA37F22B3CC53006D901E /* NumericConstants.swift in Sources */,
 				8C3BA38022B3CC53006D901E /* InsetsLabel.swift in Sources */,
 				8C3BA38122B3CC53006D901E /* DocumentActionViewController.swift in Sources */,
@@ -26013,6 +26106,7 @@
 			files = (
 				CE18CC90204E87CE00FA3F44 /* L10n.swift in Sources */,
 				8CCA070D20C455FE00558AB0 /* Keys.swift in Sources */,
+				07C75A6D281A78A900B028F0 /* AppFont.swift in Sources */,
 				CE4D2807207E086D003AE4FB /* NumericConstants.swift in Sources */,
 				CE4ECA732088976300AB91C6 /* InsetsLabel.swift in Sources */,
 				CE1BE933204831CE0074BDDC /* DocumentActionViewController.swift in Sources */,
