@@ -27,6 +27,8 @@ enum AppColor {
     case label
     case tint
 
+    case darkContentOverlay
+    case lightContentOverlay
 
     case primaryBackground
     case cellShadow

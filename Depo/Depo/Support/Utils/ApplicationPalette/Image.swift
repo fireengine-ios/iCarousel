@@ -11,4 +11,9 @@ import Foundation
 enum Image: String, AppImage {
     case quickScrollBarHandle
     case iconThreeDotsHorizontal
+    case iconBackupCheck
+    case iconBackupUnbackup
+    case iconSelectFills
+    case iconSelectEmpty
+    case iconPlay
 }

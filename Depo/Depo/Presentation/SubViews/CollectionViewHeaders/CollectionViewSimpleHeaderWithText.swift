@@ -17,7 +17,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
 
     @IBOutlet private weak var button: UIButton! {
         willSet {
-            let image = Image.iconThreeDotsHorizontal.image(withTintMode: .color(.label))
+            let image = Image.iconThreeDotsHorizontal.image(withTintColor: .tint)
             newValue.setImage(image, for: .normal)
         }
     }
