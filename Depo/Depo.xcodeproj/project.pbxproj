@@ -8655,6 +8655,8 @@
 		D910F773C4C0ED4D155C904A /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194FFE25625A80F2C0B29404 /* Pods_LifeboxShared.framework */; };
 		F00DE586272196C3002F9A64 /* FileDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F028D7992719C0F000FF204D /* FileDescriptionView.swift */; };
 		F00DE58A272196C6002F9A64 /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
+		F01244C9282A988900835B4E /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F01244C8282A988800835B4E /* agconnect-services.plist */; };
+		F01244CA282A988900835B4E /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F01244C8282A988800835B4E /* agconnect-services.plist */; };
 		F013FA6C27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
 		F013FA6D27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
 		F013FA6E27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
@@ -8792,8 +8794,6 @@
 		F064FB3F278CF29700B461D0 /* PublicSharedItemsActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F064FB30278C111100B461D0 /* PublicSharedItemsActionView.xib */; };
 		F077B23D280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F077B23E280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
-		F077B23F280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
-		F077B240280FDE3B0034F73C /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F077B23C280FDE3A0034F73C /* agconnect-services.plist */; };
 		F081F9C62779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
 		F081F9C72779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
 		F081F9C82779138F0064D25C /* DragAndDropItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F081F9C52779138F0064D25C /* DragAndDropItemType.swift */; };
@@ -11602,6 +11602,7 @@
 		EFA74FAC1FBF378F00CF946E /* PrintInteractorOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractorOutput.swift; sourceTree = "<group>"; };
 		EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractor.swift; sourceTree = "<group>"; };
 		EFE9E4488118296DCE476A71 /* Pods-LifeTech_BilloShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloShared.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloShared/Pods-LifeTech_BilloShared.appstore.xcconfig"; sourceTree = "<group>"; };
+		F01244C8282A988800835B4E /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
 		F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleGoogleUpdatePasswordPoup.swift; sourceTree = "<group>"; };
 		F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppleGoogleUpdatePasswordPopup.xib; sourceTree = "<group>"; };
 		F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityInfoWarningPopup.xib; sourceTree = "<group>"; };
@@ -20762,6 +20763,22 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		F01244C3282A965000835B4E /* Lifebox */ = {
+			isa = PBXGroup;
+			children = (
+				F077B23C280FDE3A0034F73C /* agconnect-services.plist */,
+			);
+			path = Lifebox;
+			sourceTree = "<group>";
+		};
+		F01244C7282A965500835B4E /* Lifedrive */ = {
+			isa = PBXGroup;
+			children = (
+				F01244C8282A988800835B4E /* agconnect-services.plist */,
+			);
+			path = Lifedrive;
+			sourceTree = "<group>";
+		};
 		F013FA6727FF27D0004B9BB8 /* AppleGoogleUpdatePasswordPoup */ = {
 			isa = PBXGroup;
 			children = (
@@ -20900,7 +20917,8 @@
 		F077B238280FDE000034F73C /* AGConnect */ = {
 			isa = PBXGroup;
 			children = (
-				F077B23C280FDE3A0034F73C /* agconnect-services.plist */,
+				F01244C3282A965000835B4E /* Lifebox */,
+				F01244C7282A965500835B4E /* Lifedrive */,
 			);
 			path = AGConnect;
 			sourceTree = "<group>";
@@ -22291,7 +22309,6 @@
 				CE784DEC22A685FB00662219 /* PremiumInfoCard.xib in Resources */,
 				9862BC32255E6BF300D7945E /* FileInfoPeopleView.xib in Resources */,
 				CE784DF122A685FB00662219 /* SuggestionTableViewCell.xib in Resources */,
-				F077B23F280FDE3B0034F73C /* agconnect-services.plist in Resources */,
 				CE784DF422A685FB00662219 /* GridListTopBar.xib in Resources */,
 				98A86D6123A2415D00438225 /* AlbumsSliderCell.xib in Resources */,
 				CF71468B24B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
@@ -22456,6 +22473,7 @@
 				CF7146D324B597A900D83E60 /* DeleteDuplicatesHeader.xib in Resources */,
 				8C86111222BCF28900108958 /* TermsAndPolicyViewController.xib in Resources */,
 				CE784F0822A685FB00662219 /* VisualMusicPlayerViewController.xib in Resources */,
+				F01244C9282A988900835B4E /* agconnect-services.plist in Resources */,
 				CE784F0922A685FB00662219 /* InstaPickHashtagCell.xib in Resources */,
 				CE784F0B22A685FB00662219 /* SpotlightViewController.xib in Resources */,
 				A705E3DA23A22F48005E8274 /* CarouselPagerReusableViewController.xib in Resources */,
@@ -23039,7 +23057,6 @@
 				CF8B71C223CBCA280021B021 /* TurkcellSaturaDemIta.ttf in Resources */,
 				3A9C2826265285A200EFADE9 /* AcceptedInvitationViewController.xib in Resources */,
 				CF71460E24B597A800D83E60 /* ContactDetailHeader.xib in Resources */,
-				F077B240280FDE3B0034F73C /* agconnect-services.plist in Resources */,
 				CF71467424B597A900D83E60 /* ContactSyncMainView.xib in Resources */,
 				3A134C6A2645535700CFC736 /* InvitedPeopleCollectionViewCell.xib in Resources */,
 				CF8B71C723CBCA280021B021 /* CreateStoryPreviewViewController.xib in Resources */,
@@ -23204,6 +23221,7 @@
 				CF8B72E223CBCA280021B021 /* TermsAndPolicyViewController.xib in Resources */,
 				CF8B72E423CBCA280021B021 /* VisualMusicPlayerViewController.xib in Resources */,
 				CF8B72E523CBCA280021B021 /* InstaPickHashtagCell.xib in Resources */,
+				F01244CA282A988900835B4E /* agconnect-services.plist in Resources */,
 				985E69AE255A6204006F6CD7 /* PrivateShareRoleCheckmarkView.xib in Resources */,
 				0305A31923D5C36B004D1EC7 /* AlbumsSliderCell.xib in Resources */,
 				CF8B72E723CBCA280021B021 /* SpotlightViewController.xib in Resources */,
