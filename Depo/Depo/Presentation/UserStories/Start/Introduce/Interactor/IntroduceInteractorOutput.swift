@@ -9,8 +9,8 @@
 import Foundation
 
 protocol IntroduceInteractorOutput: AnyObject {
-    func signUpRequired(for user: GoogleUser)
-    func passwordLoginRequired(for user: GoogleUser)
+    func signUpRequired(for user: AppleGoogleUser)
+    func passwordLoginRequired(for user: AppleGoogleUser)
     func continueWithGoogleFailed()
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
     func asyncOperationStarted()

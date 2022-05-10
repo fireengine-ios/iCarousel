@@ -130,7 +130,7 @@ final class LoginViewController: ViewController {
     //MARK: Vars
     var output: LoginViewOutput!
     private let keyboard = Typist.shared
-    var googleUser: GoogleUser?
+    var appleGoogleUser: AppleGoogleUser?
     
     //MARK: - Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -250,8 +250,8 @@ final class LoginViewController: ViewController {
     }
     
     private func setGoogleUserIfNeeded() {
-        if googleUser != nil {
-            loginEnterView.textField.text = googleUser?.email
+        if appleGoogleUser != nil {
+            loginEnterView.textField.text = appleGoogleUser?.email
             loginEnterView.isUserInteractionEnabled = false
             forgotPasswordButton.isHidden = true
         }
@@ -271,13 +271,13 @@ final class LoginViewController: ViewController {
         if captchaView.isHidden {
             output.sendLoginAndPassword(login: loginEnterView.textField.text ?? "",
                                         password: passwordEnterView.textField.text ?? "",
-                                        googleToken: googleUser?.idToken)
+                                        appleGoogleUser: appleGoogleUser)
         } else {
             output.sendLoginAndPasswordWithCaptcha(login: loginEnterView.textField.text ?? "",
                                                    password: passwordEnterView.textField.text ?? "",
                                                    captchaID: captchaView.currentCaptchaUUID,
                                                    captchaAnswer: captchaView.captchaAnswerTextField.text ?? "",
-                                                   googleToken: googleUser?.idToken)
+                                                   appleGoogleUser: appleGoogleUser)
         }
     }
     

@@ -18,8 +18,8 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     private lazy var appleGoogleService = AppleGoogleLoginService()
     private lazy var router = RouterVC()
     private var showErrorColorInNewPasswordView = false
-    var idToken: String?
-    var disconnectGoogleLogin: Bool?
+    var appleGoogleUser: AppleGoogleUser?
+    var disconnectAppleGoogleLogin: Bool?
     
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
@@ -265,7 +265,7 @@ extension PasswordEnterPopup {
                                           repeatPassword: repeatPassword,
                                           captchaId: captchaView.currentCaptchaUUID,
                                           captchaAnswer: captchaAnswer,
-                                          googleToken: idToken) { [weak self] result in
+                                          appleGoogleUser: appleGoogleUser) { [weak self] result in
                                             guard let self = self else {
                                                 return
                                             }
@@ -309,8 +309,10 @@ extension PasswordEnterPopup {
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
             /// on main queue
-            if self?.disconnectGoogleLogin == true {
-                self?.removeGoogleLogin()
+            if self?.disconnectAppleGoogleLogin == true {
+                if let type = self?.appleGoogleUser?.type {
+                    self?.removeAppleGoogleLogin(with: type)
+                }
             } else {
                 self?.showSuccessPopup()
                 self?.hideSpinnerIncludeNavigationBar()
@@ -330,13 +332,13 @@ extension PasswordEnterPopup {
         })
     }
     
-    private func removeGoogleLogin() {
-        appleGoogleService.disconnectGoogleLogin { disconnect in
+    private func removeAppleGoogleLogin(with type: AppleGoogleUserType) {
+        appleGoogleService.disconnectAppleGoogleLogin(type: type) { disconnect in
             switch disconnect {
             case .success:
                 self.showSuccessPopup()
                 self.hideSpinnerIncludeNavigationBar()
-                ItemOperationManager.default.googleLoginDisconnected()
+                ItemOperationManager.default.appleGoogleLoginDisconnected(type: type)
             case .preconditionFailed, .badRequest:
                 UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater) {
                     self.dismiss(animated: true)

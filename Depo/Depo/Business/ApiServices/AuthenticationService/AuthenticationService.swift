@@ -21,7 +21,7 @@ class AuthenticationUser: BaseRequestParametrs {
     let password: String
     let rememberMe: Bool
     let attachedCaptcha: CaptchaParametrAnswer?
-    let googleToken: String?
+    let appleGoogleUser: AppleGoogleUser?
     
     override var requestParametrs: Any {
         let dict: [String: Any] = [LbRequestkeys.username   : login,
@@ -50,12 +50,12 @@ class AuthenticationUser: BaseRequestParametrs {
         return result
     }
     
-    init(login: String, password: String, rememberMe: Bool, attachedCaptcha: CaptchaParametrAnswer?, googleToken: String? = nil) {
+    init(login: String, password: String, rememberMe: Bool, attachedCaptcha: CaptchaParametrAnswer?, appleGoogleUser: AppleGoogleUser? = nil) {
         self.login = login
         self.password = password
         self.rememberMe = rememberMe
         self.attachedCaptcha = attachedCaptcha
-        self.googleToken = googleToken
+        self.appleGoogleUser = appleGoogleUser
     }
 }
 
@@ -95,7 +95,7 @@ class SignUpUser: BaseRequestParametrs {
     let sendOtp: Bool
     let captchaID: String?
     let captchaAnswer: String?
-    let googleToken: String?
+    let appleGoogleUser: AppleGoogleUser?
     var brandType: String {
         #if LIFEDRIVE 
             return "BILLO"
@@ -129,24 +129,24 @@ class SignUpUser: BaseRequestParametrs {
     }
 
     init(phone: String, mail: String, password: String, sendOtp: Bool, captchaID: String? = nil, captchaAnswer: String? = nil,
-         googleToken: String? = nil) {
+         appleGoogleUser: AppleGoogleUser? = nil) {
         self.phone = phone
         self.mail = mail
         self.password = password
         self.sendOtp = sendOtp
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
-        self.googleToken = googleToken
+        self.appleGoogleUser = appleGoogleUser
     }
     
-    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool, googleToken: String? = nil) {
+    init(registrationUserInfo: RegistrationUserInfoModel, sentOtp: Bool, appleGoogleUser: AppleGoogleUser? = nil) {
         self.phone = registrationUserInfo.phone
         self.mail = registrationUserInfo.mail
         self.password = registrationUserInfo.password
         self.sendOtp = sentOtp
         self.captchaID = registrationUserInfo.captchaID
         self.captchaAnswer = registrationUserInfo.captchaAnswer
-        self.googleToken = googleToken
+        self.appleGoogleUser = appleGoogleUser
     }
 }
 
@@ -280,18 +280,18 @@ class EmailVerification: BaseRequestParametrs {
     }
 }
 
-class SignInWithGoogleParameters: BaseRequestParametrs {
+class SignInWithAppleGoogleParameters: BaseRequestParametrs {
     
-    let idToken: String
+    let user: AppleGoogleUser
     
     override var requestParametrs: Any {
-        let dict: [String: Any] = ["token": idToken,
+        let dict: [String: Any] = ["token": user.idToken,
                                    LbRequestkeys.deviceInfo : Device.deviceInfo]
         return dict
     }
     
     override var patch: URL {
-        let patch = String(format: RouteRequests.googleLogin)
+        let patch = String(format: user.type == .google ? RouteRequests.googleLogin : RouteRequests.appleLogin)
         return URL(string: patch, relativeTo: super.patch)!
     }
     
@@ -299,8 +299,8 @@ class SignInWithGoogleParameters: BaseRequestParametrs {
         return RequestHeaders.base()
     }
     
-    init(idToken: String) {
-        self.idToken = idToken
+    init(user: AppleGoogleUser) {
+        self.user = user
     }
 }
 
@@ -343,8 +343,9 @@ class AuthenticationService: BaseRequestService {
                                      "password": user.password,
                                      LbRequestkeys.deviceInfo: Device.deviceInfo]
         
-        if let googleToken = user.googleToken {
-            params = params + ["googleToken": googleToken]
+        if let idToken = user.appleGoogleUser?.idToken {
+            let key = user.appleGoogleUser?.type == .google ? LbRequestkeys.googleToken : LbRequestkeys.appleToken
+            params = params + [key: idToken]
         }
         
         SessionManager.customDefault.request(user.patch, method: .post, parameters: params, encoding: JSONEncoding.prettyPrinted, headers: user.attachedCaptcha?.header)
@@ -425,8 +426,8 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    func googleLogin(user: SignInWithGoogleParameters, jsonHandler: HeadersHandler?, success: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
-        debugLog("AuthenticationService googleLogin")
+    func appleGoogleLogin(user: SignInWithAppleGoogleParameters, jsonHandler: HeadersHandler?, success: HeadersHandler?, fail: FailResponse?, twoFactorAuth: TwoFactorAuthResponse?) {
+        debugLog("AuthenticationService appleGoogleLogin")
         
         let params = user.requestParametrs as? [String: Any]
         
@@ -689,8 +690,9 @@ class AuthenticationService: BaseRequestService {
             return
         }
         
-        if let googleToken = user.googleToken {
-            params = params + [LbRequestkeys.googleToken : googleToken]
+        if let idToken = user.appleGoogleUser?.idToken {
+            let key = user.appleGoogleUser?.type == .google ? LbRequestkeys.googleToken : LbRequestkeys.appleToken
+            params = params + [key: idToken]
         }
 
         sessionManagerWithoutToken
@@ -943,6 +945,29 @@ class AuthenticationService: BaseRequestService {
         
         sessionManager
             .request(RouteRequests.googleLoginStatus,
+                     method: .get,
+                     encoding: JSONEncoding.default)
+            .responseString { response in
+                switch response.result {
+                case .success(_):
+                    if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                        success?(statusJSON)
+                        return
+                    } else {
+                        let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                        fail?(ErrorResponse.error(error))
+                    }
+                case .failure(let error):
+                    fail?(ErrorResponse.error(error))
+                }
+            }
+    }
+    
+    func appleLoginStatus(success: SuccessMessageHandler?, fail: FailResponse?) {
+        debugLog("AuthenticationService appleLoginStatus")
+        
+        sessionManager
+            .request(RouteRequests.appleLoginStatus,
                      method: .get,
                      encoding: JSONEncoding.default)
             .responseString { response in

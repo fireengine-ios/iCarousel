@@ -566,7 +566,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         repeatPassword: String,
                         captchaId: String,
                         captchaAnswer: String,
-                        googleToken: String? = nil,
+                        appleGoogleUser: AppleGoogleUser? = nil,
                         handler: @escaping (ErrorResult<Void, UpdatePasswordErrors>) -> Void) {
         
         debugLog("AccountService updatePassword")
@@ -575,8 +575,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
                                   "repeatPassword": repeatPassword,
                                   "passwordRuleSetVersion": NumericConstants.passwordRuleSetVersion]
         
-        if let googleToken = googleToken {
-            params = params + ["googleToken": googleToken]
+        if let user = appleGoogleUser {
+            params = params + [(user.type == .google ? "googleToken" : "appleToken"): user.idToken]
         } else {
             params = params + ["oldPassword": oldPassword]
         }

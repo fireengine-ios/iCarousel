@@ -38,6 +38,7 @@ struct LbRequestkeys {
     static let globalPermAuth = "globalPermAuth"
     static let kvkkAuth = "kvkkAuth"
     static let googleToken = "googleToken"
+    static let appleToken = "appleToken"
 }
 
 struct LbResponseKey {

@@ -107,7 +107,7 @@ protocol ItemOperationManagerViewProtocol: AnyObject {
     
     func publicSharedItemsAdded()
     
-    func googleLoginDisconnected()
+    func appleGoogleLoginDisconnected(type: AppleGoogleUserType)
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -214,7 +214,7 @@ extension ItemOperationManagerViewProtocol {
     func dragAndDropItemUploaded() {}
     func publicSharedItemsAdded() {}
     
-    func googleLoginDisconnected() {}
+    func appleGoogleLoginDisconnected(type: AppleGoogleUserType) {}
 }
 
 
@@ -626,9 +626,9 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func googleLoginDisconnected() {
+    func appleGoogleLoginDisconnected(type: AppleGoogleUserType) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.googleLoginDisconnected() }
+            self.views.invoke { $0.appleGoogleLoginDisconnected(type: type) }
         }
     }
 }

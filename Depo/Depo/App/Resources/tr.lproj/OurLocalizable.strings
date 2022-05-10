@@ -1000,7 +1000,7 @@
 "create_story_pop_up_message" = "Hikayeni hazırlıyoruz. Hazır olduğunda Hikayeler albümünde bulabilirsin.";
 "create_story_path_to_story" = "Fotoğraflar & Videolar > Hikayeler";
 "You can not share empty album" = "Boş bir albümü paylaşamazsın";
-"etk_permission_description" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş ve Grup Şirketleri'nin avantajlı ürün ve hizmetlerden haberdar olmak için 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti almak istiyorum.";
+"etk_permission_description" = "Lifecell Bulut Çözümleri A.Ş tarafından 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun ve Ticari İletişim ve Ticari Elektronik İletiler Hakkında Yönetmelik kapsamında, reddetme hakkımı kullanıncaya kadar geçerli olacak şekilde, satış, tanıtım, kampanya, anket, bilgilendirme vb. için tarafıma ticari elektronik ileti gönderilmesine ve ticari iletişimde bulunulmasına izin veriyorum.";
 "global_permission_title_label" = "Global Veri Paylaşımı";
 "global_permission_description" = "Kişisel verilerimin ilgili operatörün lifebox’a yönelik avantajlı hizmetlerinden faydalanabilmem için Turkcell tarafından bulunduğum ülkede işbirliği yapılan operatörle paylaşılmasına izin veriyorum.";
 "terms_and_use_etk_checkbox_header" = "Ticari Elektronik İleti ve Veri İzni metnini okudum ve kabul ediyorum.";
@@ -1503,7 +1503,7 @@
 "import_from_facebook_started" = "Facebook'tan transfer başladı.";
 "instapick_hashtags_copied" = "Hashtagler kopyalandı.";
 "create_story_selection_limit" = "Lütfen maximum %d fotoğraf seç.";
-"etk_html" = "<p><b>TİCARİ ELEKTRONİK İLETİ VE VERİ İZNİ</b></p>\n\n<p>Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. ve <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Grup Şirketleri</a> tarafından ihtiyaç ve tercihlerim doğrultusunda tarafıma uygun indirimlerin, fırsatların ve özel tekliflerin belirlenebilmesi ve bu şirketlerin avantajlı ürün ve hizmetlerinden haberdar edilebilmem için “https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni” adresinden okuduğum “İzin Politikası” kapsamında kişisel verilerimin işlenmesini ve İzin Politikası’nda belirtilen taraflarla paylaşılmasını, 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti gönderilmesini kabul ediyorum. Kişisel verilerimin işlenmesini/paylaşılmasını ya da ticari elektronik ileti almak istememem durumunda vermiş olduğum izinleri iptal edebileceğimi, izinlerin kapsamı ve iptali hakkında detaylı bilginin “<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">İzin Politikası</a>”nda yer aldığını biliyorum.</p>\n\n";
+"etk_html" = "TİCARİ ELEKTRONİK İLETİ VE VERİ İZNİ\nLifecell Bulut Çözümleri A.Ş, Lifecell Dijital Servisler ve Çözümler A.Ş ve Grup Şirketleri tarafından ihtiyaç ve tercihlerim doğrultusunda tarafıma uygun indirimlerin, fırsatların ve özel tekliflerin belirlenebilmesi ve bu şirketlerin avantajlı ürün ve hizmetlerinden haberdar edilebilmem için okuduğum “İzin Politikası” kapsamında kişisel verilerimin işlenmesini ve İzin Politikası’nda belirtilen taraflarla paylaşılmasını, 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti gönderilmesini kabul ediyorum. Kişisel verilerimin işlenmesini/paylaşılmasını ya da ticari elektronik ileti almak istememem durumunda vermiş olduğum izinleri iptal edebileceğimi, izinlerin kapsamı ve iptali hakkında detaylı bilginin “İzin Politikası”nda yer aldığını biliyorum.\nVeri İşleme/Paylaşım İzni Verilen Grup Şirketleri\nLifecell Dijital Servisler ve Çözümler A.Ş.\nLifecell Müzik Yayın ve İletim A.Ş.\nLifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi\nLifecell Bulut Çözümleri A.Ş.\nLifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.\nTicari İletişim İzni Verilen Grup Şirketleri\nTurktell Bilişim Servisleri A.Ş.\nGlobal Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.\nTurkcell Finansman A.Ş.\nTurkcell Ödeme ve Elektronik Para Hizmetleri A.Ş..\nTurkcell Sigorta Aracılık Hizmetleri A.Ş.\nTurkcell Teknoloji Araştırma ve Geliştirme A.Ş.\nTurkcell Satış ve Dağıtım Hizmetleri A.Ş.\nTurkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.\nLifecell Müzik Yayın ve İletim A.Ş.\nLifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi\nLifecell Bulut Çözümleri A.Ş.\nLifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.\nLifecell Dijital Servisler ve Çözümler A.Ş";
 "free_up_space_alert_title" = "Telefonunda Yer aç";
 "free_up_space_no_duplicates" = "Tekrarlayan fotoğrafın /videon yok.";
 "free_up_space_in_progress" = "Tekrarlayan dosyalar listen henüz hazır değil, lütfen daha sonra dene.";
@@ -2010,11 +2010,13 @@
 "settings_google_apple_empty_mail_error" = "Hesabına e-posta adresi eklemen gerekmektedir.";
 "password_change_external_auth_required_error" = "Şifreni yenileyebilmen için Google veya Apple hesabın ile lifebox’a giriş yapmalı ya da giriş sayfasındaki Şifremi Unuttum adımlarını takip etmelisin.";
 "password_change_forgot_password_required_error" = "Şifreni yenileyebilmen için öncelikle hesabından çıkış yapmalı ve giriş sayfasındaki Şifremi Unuttum adımlarını takip etmelisin.\n";
-"kvkk_toggle_desc" = "Kişisel Veri İşleme İzni";
-"kvkk_toggle_text" = "%@ tarafından kişisel verilerimin işlenmesini ve %@'nda belirtilen taraflarla paylaşılmasına onay veriyorum.";
+"kvkk_toggle_desc" = "Veri İşleme/Paylaşım İzni";
+"kvkk_toggle_text" = "Lifecell Bulut Çözümleri A.Ş. tarafından kişisel verilerimin işlenmesine ve İzin Politikasında belirtilen taraflarla paylaşılmasına onay veriyorum.";
 "security_popup_warning_header" = "Girmiş olduğun bilgilerden biri hatalı";
 "security_popup_warning_body1" = "Güvenlik sorun başarı ile kaydedildi, kurtarma e-postası için aşağıdaki hata alındı:";
 "security_popup_warning_body2" = "Kurtarma e-postası başarı ile kaydedildi, güvenlik sorun için aşağıdaki hata alındı:";
 "security_popup_warning_footer" = "Dilersen ayarlarsan kurtarma postasını tekrar girebilirsin.";
 "kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş ve Grup Şirketleri";
 "kvkk_commercial_info_link" = "İzin Politikası";
+"apple_login_user_exists_body" = "%@ mail adresi ile kayıtlı bir lifebox hesabı bulunmaktadır. Apple Hesabı ile Giriş yöntemini mevcut lifebox hesabına bağlamak için öncelikle lifebox şifreni girmelisin.";
+"settings_apple_password_required" = "Apple Hesabı ile Giriş tercihini kapatabilmen için öncelikle lifebox şifresi belirlemen gerekiyor.";

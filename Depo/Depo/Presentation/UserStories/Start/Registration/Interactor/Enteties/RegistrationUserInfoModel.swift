@@ -12,7 +12,7 @@ struct RegistrationUserInfoModel {
     let password: String
     let captchaID: String?
     let captchaAnswer: String?
-    let googleToken: String?
+    let appleGoogleUser: AppleGoogleUser?
     
     
     init(mail: String,
@@ -20,13 +20,13 @@ struct RegistrationUserInfoModel {
          password: String,
          captchaID: String?,
          captchaAnswer: String?,
-         googleToken: String? = nil) {
+         appleGoogleUser: AppleGoogleUser? = nil) {
         
         self.mail = mail
         self.phone = phone
         self.password = password
         self.captchaID = captchaID
         self.captchaAnswer = captchaAnswer
-        self.googleToken = googleToken
+        self.appleGoogleUser = appleGoogleUser
     }
 }

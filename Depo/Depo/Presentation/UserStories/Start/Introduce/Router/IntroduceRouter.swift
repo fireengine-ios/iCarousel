@@ -22,13 +22,13 @@ class IntroduceRouter: IntroduceRouterInput {
         router.pushViewController(viewController: loginScreen!)
     }
     
-    func onGoToRegister(with user: GoogleUser) {
+    func onGoToRegister(with user: AppleGoogleUser) {
         let registerScreen = router.registerWithGoogle(user: user)
         
         router.pushViewController(viewController: registerScreen)
     }
     
-    func onGoToLoginWith(with user: GoogleUser) {
+    func onGoToLoginWith(with user: AppleGoogleUser) {
         let loginScreen = router.loginWithGoogle(user: user)
         
         router.pushViewController(viewController: loginScreen)

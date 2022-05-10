@@ -7,5 +7,5 @@
 //
 
 protocol IntroduceViewInput: AnyObject {
-    func showGoogleLoginPopup(with user: GoogleUser)
+    func showGoogleLoginPopup(with user: AppleGoogleUser)
 }

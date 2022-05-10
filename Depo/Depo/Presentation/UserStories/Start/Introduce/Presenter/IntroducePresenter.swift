@@ -35,22 +35,22 @@ class IntroducePresenter: BasePresenter, IntroduceModuleInput, IntroduceViewOutp
         router.onGoToLogin()
     }
     
-    func onContinueWithGoogle(with user: GoogleUser) {
-        interactor.signInWithGoogle(with: user)
+    func onSignInWithAppleGoogle(with user: AppleGoogleUser) {
+        interactor.signInWithAppleGoogle(with: user)
     }
     
-    func goToLogin(with user: GoogleUser) {
+    func goToLogin(with user: AppleGoogleUser) {
         router.onGoToLoginWith(with: user)
     }
 }
 
 extension IntroducePresenter: IntroduceInteractorOutput {
-    func signUpRequired(for user: GoogleUser) {
+    func signUpRequired(for user: AppleGoogleUser) {
         asyncOperationSuccess()
         router.onGoToRegister(with: user)
     }
     
-    func passwordLoginRequired(for user: GoogleUser) {
+    func passwordLoginRequired(for user: AppleGoogleUser) {
         asyncOperationSuccess()
         view.showGoogleLoginPopup(with: user)
     }

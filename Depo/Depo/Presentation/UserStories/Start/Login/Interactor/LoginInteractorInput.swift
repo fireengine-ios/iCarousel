@@ -10,7 +10,7 @@ protocol LoginInteractorInput {
         
     func rememberMe(state: Bool)
     
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?, googleToken: String?)
+    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?, appleGoogleUser: AppleGoogleUser?)
     
     func findCoutryPhoneCode(plus: Bool)
     

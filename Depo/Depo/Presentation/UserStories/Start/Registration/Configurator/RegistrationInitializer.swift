@@ -23,7 +23,7 @@ class RegistrationModuleInitializer: NSObject {
         
     }
     
-    func setupVC(with user: GoogleUser) {
+    func setupVC(with user: AppleGoogleUser) {
         let configurator = RegistrationModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: registrationViewController, user: user)
     }

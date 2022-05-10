@@ -86,7 +86,7 @@ final class RegistrationViewController: ViewController {
     private let updateScrollDelay: DispatchTime = .now() + 0.3
     private let termsViewController = RegistrationTermsViewController()
     private var textObserver: NSObjectProtocol?
-    var googleUser: GoogleUser?
+    var appleGoogleUser: AppleGoogleUser?
     
     ///Fields (in right order)
     private let phoneEnterView: ProfilePhoneEnterView = {
@@ -175,7 +175,7 @@ final class RegistrationViewController: ViewController {
         super.viewDidLoad()
         
         setup()
-        setGoogleUserIfNeeded()
+        setAppleGoogleUserIfNeeded()
         
         output.viewIsReady()
     }
@@ -327,12 +327,12 @@ final class RegistrationViewController: ViewController {
         }
     }
     
-    private func setGoogleUserIfNeeded() {
-        if googleUser != nil {
+    private func setAppleGoogleUserIfNeeded() {
+        if appleGoogleUser != nil {
             stackView.removeArrangedSubview(emailEnterView)
             stackView.insertArrangedSubview(emailEnterView, at: 0)
             
-            emailEnterView.textField.text = googleUser?.email
+            emailEnterView.textField.text = appleGoogleUser?.email
             emailEnterView.textField.isUserInteractionEnabled = false
             passwordEnterView.isHidden = true
             rePasswordEnterView.isHidden = true
@@ -387,7 +387,7 @@ extension RegistrationViewController: RegistrationViewInput {
                                  repassword: rePasswordEnterView.textField.text ?? "",
                                  captchaID: captchaView.currentCaptchaUUID,
                                  captchaAnswer: captchaView.captchaAnswerTextField.text ?? "",
-                                 googleToken: googleUser?.idToken)
+                                 appleGoogleUser: appleGoogleUser)
     }
     
     func showInfoButton(forType type: UserValidationResults) {

@@ -1006,7 +1006,7 @@
 "create_story_pop_up_message" = "История создана";
 "create_story_path_to_story" = "Фото и Видео >  Мои истории";
 "You can not share empty album" = "Вы не можете поделиться пустым альбомом";
-"etk_permission_description" = "Настоящим я даю согласие на получение коммерческих сообщений по электронной почте, чтобы получать информацию о выгодных продуктах и ​​услугах Turkcell и компаний Группы до тех пор, пока я не потребую иного в соответствии с Законом № 6563 и другим применимым законодательством.";
+"etk_permission_description" = "";
 "global_permission_title_label" = "Глобальное разрешение на передачу данных";
 "global_permission_description" = "Я даю согласие на передачу моей личной информации операторам, сотрудничающим с Turkcell, чтобы я мог использовать выгодные услуги соответствующего оператора в отношении lifebox.";
 "terms_and_use_etk_checkbox_header" = "Коммерческое электронное сообщение";
@@ -1507,7 +1507,7 @@
 "import_from_facebook_started" = "Начался импорт из Facebook.";
 "instapick_hashtags_copied" = "Хэштеги скопированы.";
 "create_story_selection_limit" = "Пожалуйста, выберите максимум %d фотографий.";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
+"etk_html" = "";
 "free_up_space_alert_title" = "Освободите Место на вашем телефоне";
 "free_up_space_no_duplicates" = "У вас нет повторяющихся фотографий / видео.";
 "free_up_space_in_progress" = "Ваш список повторяющихся файлов еще не готов, пожалуйста, попробуйте позже.";
@@ -2002,11 +2002,13 @@
 "settings_google_apple_empty_mail_error" = "Вы должны добавить адрес электронной почты в свою учетную запись.";
 "password_change_external_auth_required_error" = "Чтобы изменить свой пароль, вы можете либо войти в свою учетную запись lifebox, используя свой идентификатор Google ID/Apple ID, либо следовать инструкциям по забытому паролю на экране входа в систему.";
 "password_change_forgot_password_required_error" = "Чтобы изменить свой пароль, вы должны сначала выйти из своей учетной записи и следовать инструкциям «Забыл Пароль» на экране входа в систему.";
-"kvkk_toggle_desc" = "Согласие на Обработку Персональных Данных";
-"kvkk_toggle_text" = "<p style=\"background: white; margin: 0in 0in 10.5pt 0in;\"><span lang=\"TR\" style=\"font-size: 11.5pt; font-family: 'Helvetica Neue'; color: #104142;\"> <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"> Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş  ve Grup Şirketleri </a> Я даю согласие на обработку моих персональных данных и передачу их сторонам, указанным в <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\"> Политика Разрешений </a>. </span></p>";
+"kvkk_toggle_desc" = "";
+"kvkk_toggle_text" = "";
 "security_popup_warning_header" = "";
 "security_popup_warning_body1" = "";
 "security_popup_warning_body2" = "";
 "security_popup_warning_footer" = "";
 "kvkk_firms_link" = "";
 "kvkk_commercial_info_link" = "";
+"apple_login_user_exists_body" = "";
+"settings_apple_password_required" = "";
