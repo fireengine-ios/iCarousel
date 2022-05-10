@@ -490,5 +490,8 @@ struct RouteRequests {
     
     // MARK: - Apple Login
     static let appleLogin = "auth/apple?rememberMe=true"
+    static let appleLoginStatus = baseUrl +/ "apple/login/status"
+    static let appleLoginDisconnect = baseUrl +/ "apple/login/disconnect"
+    static let appleLoginConnect = baseUrl +/ "apple/login/connect"
 
 }

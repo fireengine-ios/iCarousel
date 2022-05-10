@@ -187,11 +187,7 @@ class IntroduceViewController: ViewController {
     
     @available(iOS 13.0, *)
     @IBAction func onContinueWithApple(_ sender: Any) {
-        let provider = ASAuthorizationAppleIDProvider()
-        let request = provider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let controller = ASAuthorizationController(authorizationRequests: [request])
+        let controller = appleGoogleService.getAppleAuthorizationController()
         controller.delegate = self
         controller.presentationContextProvider = self
         controller.performRequests()

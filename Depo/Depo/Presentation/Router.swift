@@ -1443,13 +1443,13 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func passwordEnterPopup(with idToken: String, disconnectGoogleLogin: Bool? = nil) -> PasswordEnterPopup {
+    func passwordEnterPopup(with appleGoogleUser: AppleGoogleUser, disconnectAppleGoogleLogin: Bool? = nil) -> PasswordEnterPopup {
         let controller = PasswordEnterPopup()
         
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
-        controller.idToken = idToken
-        controller.disconnectGoogleLogin = disconnectGoogleLogin
+        controller.appleGoogleUser = appleGoogleUser
+        controller.disconnectAppleGoogleLogin = disconnectAppleGoogleLogin
         
         return controller
     }

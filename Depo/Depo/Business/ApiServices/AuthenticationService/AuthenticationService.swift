@@ -962,4 +962,27 @@ class AuthenticationService: BaseRequestService {
                 }
             }
     }
+    
+    func appleLoginStatus(success: SuccessMessageHandler?, fail: FailResponse?) {
+        debugLog("AuthenticationService appleLoginStatus")
+        
+        sessionManager
+            .request(RouteRequests.appleLoginStatus,
+                     method: .get,
+                     encoding: JSONEncoding.default)
+            .responseString { response in
+                switch response.result {
+                case .success(_):
+                    if let data = response.data, let statusJSON = JSON(data)["status"].string {
+                        success?(statusJSON)
+                        return
+                    } else {
+                        let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
+                        fail?(ErrorResponse.error(error))
+                    }
+                case .failure(let error):
+                    fail?(ErrorResponse.error(error))
+                }
+            }
+    }
 }

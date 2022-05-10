@@ -43,11 +43,13 @@ enum GoogleLoginOperationResult {
 typealias AppleGoogleUserCompletion = (_ user: AppleGoogleUser? ) -> Void
 
 final class AppleGoogleLoginService: BaseRequestService {
-    func disconnectGoogleLogin(completion: @escaping (GoogleLoginOperationResult) -> Void) {
-        debugLog("AppleGoogleLoginService disconnectGoogleLogin")
+    func disconnectAppleGoogleLogin(type: AppleGoogleUserType, completion: @escaping (GoogleLoginOperationResult) -> Void) {
+        debugLog("AppleGoogleLoginService disconnectAppleGoogleLogin")
+        
+        let path = type == .google ? RouteRequests.googleLoginDisconnect : RouteRequests.appleLoginDisconnect
         
         SessionManager.customDefault
-            .request(RouteRequests.googleLoginDisconnect,
+            .request(path,
                      method: .post,
                      encoding: JSONEncoding.prettyPrinted)
             .responseString { response in
@@ -76,13 +78,15 @@ final class AppleGoogleLoginService: BaseRequestService {
             }
     }
     
-    func connectGoogleLogin(with idToken: String, completion: @escaping (GoogleLoginOperationResult) -> Void) {
-        debugLog("AppleGoogleLoginService connectGoogleLogin")
+    func connectAppleGoogleLogin(with user: AppleGoogleUser, completion: @escaping (GoogleLoginOperationResult) -> Void) {
+        debugLog("AppleGoogleLoginService connectAppleGoogleLogin")
+        
+        let path = user.type == .google ? RouteRequests.googleLoginConnect : RouteRequests.appleLoginConnect
         
         SessionManager.customDefault
-            .request(RouteRequests.googleLoginConnect,
+            .request(path,
                      method: .post,
-                     encoding: idToken)
+                     encoding: user.idToken)
             .responseString { response in
                 switch response.result {
                 case .success:
@@ -125,6 +129,14 @@ extension AppleGoogleLoginService {
         
         let user = AppleGoogleUser(idToken: idTokenString, email: credentials.email ?? "", type: .apple)
         success(user)
+    }
+    
+    func getAppleAuthorizationController() -> ASAuthorizationController {
+        let provider = ASAuthorizationAppleIDProvider()
+        let request = provider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        return ASAuthorizationController(authorizationRequests: [request])
     }
 }
 

@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import GoogleSignIn
-import FirebaseCore
+import AuthenticationServices
 
 protocol AppleGoogleAccountConnectionCellDelegate: AnyObject {
-    func showPasswordRequiredPopup()
-    func googleDisconnectFailed()
+    func showPasswordRequiredPopup(type: AppleGoogleUserType)
+    func appleGoogleDisconnectFailed(type: AppleGoogleUserType)
     func connectGoogleLogin(callback: @escaping (Bool) -> Void)
 }
 
@@ -67,7 +66,6 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
     
     @IBOutlet private weak var appleSwitch: UISwitch! {
         willSet {
-            newValue.isUserInteractionEnabled = false
             newValue.isOn = false
         }
     }
@@ -75,7 +73,8 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
     //MARK: -Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        getStatus()
+        getGoogleStatus()
+        getAppleStatus()
         ItemOperationManager.default.startUpdateView(view: self)
     }
     
@@ -91,13 +90,45 @@ class AppleGoogleAccountConnectionCell: UITableViewCell {
     }
     
     @IBAction func appleSwitchToggled(_ sender: UISwitch) {
-        //TODO -Apple login will be implemented
+        if !appleSwitch.isOn {
+            disconnectAppleLogin()
+        } else {
+            startConnectingAppleLogin()
+        }
+    }
+    
+    private func startConnectingAppleLogin() {
+        if #available(iOS 13.0, *) {
+            let controller = appleGoogleService.getAppleAuthorizationController()
+            controller.delegate = self
+            controller.presentationContextProvider = self
+            controller.performRequests()
+        }
+    }
+    
+    private func connectAppleLogin(with user: AppleGoogleUser) {
+        appleGoogleService.connectAppleGoogleLogin(with: user) { result in
+            switch result {
+            case .success:
+                self.appleSwitch.setOn(true, animated: true)
+            case .preconditionFailed(let error):
+                self.appleSwitch.setOn(false, animated: true)
+                DispatchQueue.toMain {
+                    UIApplication.showErrorAlert(message: error?.errorMessage ?? TextConstants.temporaryErrorOccurredTryAgainLater)
+                }
+            case .badRequest(let error):
+                self.appleSwitch.setOn(false, animated: true)
+                DispatchQueue.toMain {
+                    UIApplication.showErrorAlert(message: error?.errorMessage ?? TextConstants.temporaryErrorOccurredTryAgainLater)
+                }
+            }
+        }
     }
 }
 
 //MARK: -Interactor
 extension AppleGoogleAccountConnectionCell {
-    private func getStatus() {
+    private func getGoogleStatus() {
         authenticationService.googleLoginStatus { [weak self] bool in
             self?.googleSwitch.setOn(Bool(string: bool) ?? false, animated: true)
         } fail: { value in
@@ -105,19 +136,44 @@ extension AppleGoogleAccountConnectionCell {
         }
     }
     
+    private func getAppleStatus() {
+        authenticationService.appleLoginStatus { [weak self] bool in
+            self?.appleSwitch.setOn(Bool(string: bool) ?? false, animated: true)
+        } fail: { value in
+            UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+        }
+    }
+    
     private func  disconnectGoogleLogin() {
-        appleGoogleService.disconnectGoogleLogin { disconnect in
+        appleGoogleService.disconnectAppleGoogleLogin(type: .google) { disconnect in
             switch disconnect {
             case .success:
                 self.googleSwitch.setOn(false, animated: true)
             case .preconditionFailed(let error):
                 self.googleSwitch.setOn(true, animated: false)
                 if error == .passwordRequired {
-                    self.delegate?.showPasswordRequiredPopup()
+                    self.delegate?.showPasswordRequiredPopup(type: .google)
                 }
             case .badRequest:
                 self.googleSwitch.setOn(true, animated: false)
-                self.delegate?.googleDisconnectFailed()
+                self.delegate?.appleGoogleDisconnectFailed(type: .google)
+            }
+        }
+    }
+    
+    private func  disconnectAppleLogin() {
+        appleGoogleService.disconnectAppleGoogleLogin(type: .apple) { disconnect in
+            switch disconnect {
+            case .success:
+                self.appleSwitch.setOn(false, animated: true)
+            case .preconditionFailed(let error):
+                self.appleSwitch.setOn(true, animated: false)
+                if error == .passwordRequired {
+                    self.delegate?.showPasswordRequiredPopup(type: .apple)
+                }
+            case .badRequest:
+                self.appleSwitch.setOn(true, animated: false)
+                self.delegate?.appleGoogleDisconnectFailed(type: .apple)
             }
         }
     }
@@ -128,7 +184,33 @@ extension AppleGoogleAccountConnectionCell: ItemOperationManagerViewProtocol {
         return self === object
     }
     
-    func googleLoginDisconnected() {
-        self.googleSwitch.setOn(false, animated: true)
+    func appleGoogleLoginDisconnected(type: AppleGoogleUserType) {
+        type == .google ? googleSwitch.setOn(false, animated: true) : appleSwitch.setOn(false, animated: true)
+    }
+}
+
+@available(iOS 13.0, *)
+extension AppleGoogleAccountConnectionCell: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let credentials = authorization.credential as? ASAuthorizationAppleIDCredential {
+            appleGoogleService.getAppleCredentials(with: credentials) { user in
+                guard let user = user else { return }
+                let appleUser = AppleGoogleUser(idToken: user.idToken, email: user.email, type: .apple)
+                connectAppleLogin(with: appleUser)
+            } fail: { error in
+                debugLog(error)
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        debugLog("Apple auth didCompleteWithError: \(error.localizedDescription)")
+    }
+}
+
+@available(iOS 13.0, *)
+extension AppleGoogleAccountConnectionCell: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return contentView.window!
     }
 }
