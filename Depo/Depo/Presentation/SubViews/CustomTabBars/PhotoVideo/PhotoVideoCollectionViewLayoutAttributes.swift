@@ -9,7 +9,7 @@
 import Foundation
 
 final class PhotoVideoCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes {
-    var isPinned: Bool = false
+    var isPinned = false
 
     override func copy(with zone: NSZone? = nil) -> Any {
         let attributes = super.copy(with: zone) as! Self

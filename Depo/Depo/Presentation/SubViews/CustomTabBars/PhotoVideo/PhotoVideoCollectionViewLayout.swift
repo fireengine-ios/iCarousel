@@ -15,18 +15,27 @@ protocol PhotoVideoCollectionViewLayoutDelegate: AnyObject {
 final class PhotoVideoCollectionViewLayout: UICollectionViewFlowLayout {
     
     weak var delegate: PhotoVideoCollectionViewLayoutDelegate?
-    
-    let columns = Device.isIpad ? NumericConstants.numerCellInLineOnIpad : NumericConstants.numerCellInLineOnIphone
-    
+
+    let gridSize: GridSize
+    var pinsSectionHeadersToLayoutGuide: UILayoutGuide?
+
+    var columns: CGFloat { CGFloat(gridSize.rawValue) }
     private let padding: CGFloat = 1
-    var sectionHedersPinToLayoutGuide: UILayoutGuide?
-    
+
     required init?(coder aDecoder: NSCoder) {
+        gridSize = .four
         super.init(coder: aDecoder)
         setup()
     }
     
     override init() {
+        gridSize = .four
+        super.init()
+        setup()
+    }
+
+    init(gridSize: GridSize) {
+        self.gridSize = gridSize
         super.init()
         setup()
     }
@@ -43,22 +52,22 @@ final class PhotoVideoCollectionViewLayout: UICollectionViewFlowLayout {
 
     override func finalizeCollectionViewUpdates() {
         super.finalizeCollectionViewUpdates()
-        
+
         guard collectionView?.isDragging == false, let contentOffset = delegate?.targetContentOffset() else {
             return
         }
-        
+
         collectionView?.setContentOffset(contentOffset, animated: false)
     }
 
     override class var layoutAttributesClass: AnyClass { PhotoVideoCollectionViewLayoutAttributes.self }
 
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return sectionHedersPinToLayoutGuide != nil
+        return pinsSectionHeadersToLayoutGuide != nil
     }
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        guard let sectionHedersPinToLayoutGuide = sectionHedersPinToLayoutGuide else {
+        guard let pinsSectionHeadersToLayoutGuide = pinsSectionHeadersToLayoutGuide else {
             return super.layoutAttributesForElements(in: rect)
         }
 
@@ -72,10 +81,27 @@ final class PhotoVideoCollectionViewLayout: UICollectionViewFlowLayout {
 
         for attributes in layoutAttributes {
             if attributes.representedElementKind == UICollectionView.elementKindSectionHeader {
-                pinHeaderLayoutAttributes(attributes, to: sectionHedersPinToLayoutGuide)
+                pinHeaderLayoutAttributes(attributes, to: pinsSectionHeadersToLayoutGuide)
             }
         }
         return layoutAttributes
+    }
+
+    override func layoutAttributesForSupplementaryView(
+        ofKind elementKind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionViewLayoutAttributes? {
+        guard elementKind == UICollectionView.elementKindSectionHeader else {
+            return super.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
+        }
+
+        let attributes = super.layoutAttributesForSupplementaryView(ofKind: elementKind, at: indexPath)
+        if let pinsSectionHeadersToLayoutGuide = pinsSectionHeadersToLayoutGuide,
+           let attributes = attributes {
+            pinHeaderLayoutAttributes(attributes, to: pinsSectionHeadersToLayoutGuide)
+        }
+
+        return attributes
     }
 
     private func getHeadersNeedingLayout(in layoutAttributes: [UICollectionViewLayoutAttributes]) -> IndexSet {
@@ -101,6 +127,10 @@ final class PhotoVideoCollectionViewLayout: UICollectionViewFlowLayout {
             return
         }
 
+        guard let attributes = attributes as? PhotoVideoCollectionViewLayoutAttributes else {
+            return
+        }
+
         let section = attributes.indexPath.section
         let firstIndexPath = IndexPath(item: 0, section: section)
         let lastIndexPath = IndexPath(item: collectionView.numberOfItems(inSection: section) - 1, section: section)
@@ -112,13 +142,38 @@ final class PhotoVideoCollectionViewLayout: UICollectionViewFlowLayout {
             return
         }
 
-        let frame = attributes.frame
-        let offset = collectionView.contentOffset.y + layoutGuide.layoutFrame.origin.y
-        let minY = firstItemAttributes.frame.minY - frame.height
-        let maxY = lastItemAttributes.frame.maxY - frame.height
-        let y = min(max(offset, minY), maxY)
+        let headerFrame = attributes.frame
+        let pinOffset = collectionView.contentOffset.y + layoutGuide.layoutFrame.origin.y
+        let minY = firstItemAttributes.frame.minY - headerFrame.height
+        let maxY = lastItemAttributes.frame.maxY - headerFrame.height
+        let y = min(max(pinOffset, minY), maxY)
         attributes.frame.origin.y = y
 
-        (attributes as? PhotoVideoCollectionViewLayoutAttributes)?.isPinned = y > minY && y < (maxY + frame.height)
+        attributes.isPinned = y > minY && y < lastItemAttributes.frame.maxY
     }
+}
+
+extension PhotoVideoCollectionViewLayout {
+    enum GridSize: Int {
+        case three = 3
+        case four = 4
+        case six = 6
+
+        var next: GridSize? {
+            switch self {
+            case .three: return .four
+            case .four: return .six
+            case .six: return nil
+            }
+        }
+
+        var previous: GridSize? {
+            switch self {
+            case .three: return nil
+            case .four: return .three
+            case .six: return .four
+            }
+        }
+    }
+
 }

@@ -14,14 +14,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CQQ-hn-ZNB">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="8C4-aS-HQh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <blurEffect style="prominent"/>
-                </visualEffectView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q94-GH-gZn">
                     <rect key="frame" x="15" y="0.0" width="42" height="52"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -29,33 +21,26 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzk-gC-1nq">
-                    <rect key="frame" x="264" y="5.5" width="40" height="41"/>
+                    <rect key="frame" x="274" y="11" width="30" height="30"/>
                     <color key="tintColor" name="label"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" image="iconThreeDotsHorizontal"/>
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="CQQ-hn-ZNB" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="JMa-7w-2vS"/>
                 <constraint firstAttribute="bottom" secondItem="q94-GH-gZn" secondAttribute="bottom" id="KWW-gf-GkR"/>
                 <constraint firstItem="q94-GH-gZn" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="Urn-IY-BaU"/>
-                <constraint firstItem="CQQ-hn-ZNB" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="VCV-5u-FfZ"/>
-                <constraint firstAttribute="trailing" secondItem="CQQ-hn-ZNB" secondAttribute="trailing" id="eIh-hR-bu6"/>
                 <constraint firstItem="Qzk-gC-1nq" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="jb2-hM-TPJ"/>
                 <constraint firstItem="q94-GH-gZn" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="15" id="wuW-et-ROy"/>
-                <constraint firstAttribute="bottom" secondItem="CQQ-hn-ZNB" secondAttribute="bottom" id="xZy-VN-Nzo"/>
                 <constraint firstAttribute="trailing" secondItem="Qzk-gC-1nq" secondAttribute="trailing" constant="16" id="zsB-Oz-cFF"/>
             </constraints>
             <connections>
-                <outlet property="backgroundVisualEffectView" destination="CQQ-hn-ZNB" id="G8a-Bz-2t5"/>
-                <outlet property="button" destination="Qzk-gC-1nq" id="wIg-dV-KwJ"/>
+                <outlet property="menuButton" destination="Qzk-gC-1nq" id="wIg-dV-KwJ"/>
                 <outlet property="titleLabel" destination="q94-GH-gZn" id="mzh-YU-Goe"/>
             </connections>
             <point key="canvasLocation" x="33.600000000000001" y="100.74962518740631"/>
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="iconThreeDotsHorizontal" width="40" height="41"/>
         <namedColor name="label">
             <color red="0.019607843137254902" green="0.17647058823529413" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

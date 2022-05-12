@@ -9,16 +9,12 @@
 import UIKit
 
 final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
-    @IBOutlet private weak var backgroundVisualEffectView: UIVisualEffectView! {
-        willSet {
-            newValue.isHidden = true
-        }
-    }
 
-    @IBOutlet private weak var button: UIButton! {
+    @IBOutlet private weak var menuButton: UIButton! {
         willSet {
             let image = Image.iconThreeDotsHorizontal.image(withTintColor: .tint)
             newValue.setImage(image, for: .normal)
+            newValue.isHidden = true
         }
     }
 
@@ -29,6 +25,11 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
             newValue.font = AppFontPresets.title2
             newValue.adjustsFontForContentSizeCategory = true
         }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = AppColor.background.color
     }
 
     func setup(with object: MediaItem) {
@@ -47,9 +48,11 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
 
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
+
         if let photoVideoLayoutAttributes = layoutAttributes as? PhotoVideoCollectionViewLayoutAttributes {
-            backgroundVisualEffectView.isHidden = true//!photoVideoLayoutAttributes.isPinned
-            backgroundColor = AppColor.background.color
+            let isFirstHeader = photoVideoLayoutAttributes.indexPath.section == 0
+            let showsMenuButton = photoVideoLayoutAttributes.isPinned || isFirstHeader
+            menuButton.isHidden = !showsMenuButton
         }
     }
 

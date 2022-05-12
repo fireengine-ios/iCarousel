@@ -45,6 +45,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private lazy var navBarManager = SegmentedChildNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
+    private lazy var pinchManager = PhotoVideoPinchManager(collectionView: self.collectionView)
     private lazy var threeDotMenuManager = PhotoVideoThreeDotMenuManager(delegate: self)
     private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView, delegate: self)
@@ -72,7 +73,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         bottomBarManager.setup()
         collectionViewManager.setup()
         collectionViewManager.collectionViewLayout.delegate = dataSource
-        collectionViewManager.collectionViewLayout.sectionHedersPinToLayoutGuide = headerContainingViewController?.originalSafeAreaLayoutGuide
+        collectionViewManager.collectionViewLayout.pinsSectionHeadersToLayoutGuide = headerContainingViewController?.originalSafeAreaLayoutGuide
         navBarManager.setDefaultMode()
 
         navigationBarHidden = true
@@ -94,6 +95,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             NavigationHeaderButton(navigationBarImage: .headerActionSearch),
             NavigationHeaderButton(navigationBarImage: .headerActionPlus)
         ])
+
+        // TODO: Facelift, remove this
+        print(pinchManager)
     }
     
     deinit {
@@ -309,7 +313,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         guard !collectionView.isQuickSelecting else {
             return
         }
-        
+
         updateBarsForSelectedObjects()
     }
     
