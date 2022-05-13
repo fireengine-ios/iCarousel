@@ -204,6 +204,7 @@ extension AppleGoogleAccountConnectionCell: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        appleSwitch.setOn(false, animated: false)
         debugLog("Apple auth didCompleteWithError: \(error.localizedDescription)")
     }
 }

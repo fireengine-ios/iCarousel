@@ -249,6 +249,10 @@ extension LoginPresenter: LoginInteractorOutput {
         case .emptyEmail:
             completeAsyncOperationEnableScreen()
             openEmptyEmail()
+            
+        case .emailDomainNotAllowed:
+            UIApplication.showErrorAlert(message: localized(.emailDomainNotAllowed))
+            router.goBack()
         }
         
     }

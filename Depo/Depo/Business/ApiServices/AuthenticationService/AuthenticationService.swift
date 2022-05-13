@@ -437,7 +437,7 @@ class AuthenticationService: BaseRequestService {
                 case .success(let json):
                     
                     if let json = json as? [String: Any], let errorCode = json["errorCode"] as? Int {
-                        if errorCode == 4101 || errorCode == 4102 {
+                        if errorCode == 4101 || errorCode == 4102 || errorCode == 4103 {
                             jsonHandler?(json)
                             return
                         }

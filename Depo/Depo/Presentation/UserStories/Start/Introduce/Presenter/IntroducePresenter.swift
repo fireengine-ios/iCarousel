@@ -55,9 +55,11 @@ extension IntroducePresenter: IntroduceInteractorOutput {
         view.showGoogleLoginPopup(with: user)
     }
     
-    func continueWithGoogleFailed() {
+    func continueWithAppleGoogleFailed(with error: AppleGoogeLoginError) {
         asyncOperationFail()
-        UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+        
+        let message = error == .emailDomainNotAllowed ? localized(.emailDomainNotAllowed) : TextConstants.temporaryErrorOccurredTryAgainLater
+        UIApplication.showErrorAlert(message: message)
     }
     
     func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
