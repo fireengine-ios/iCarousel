@@ -18,6 +18,14 @@ final class LoginWithGooglePopup: BasePopUpController, NibInit {
     weak var delegate: LoginWithGooglePopupDelegate?
     var user: AppleGoogleUser?
     
+    @IBOutlet private weak var emailLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.numberOfLines = 0
+        }
+    }
+    
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
@@ -51,6 +59,7 @@ final class LoginWithGooglePopup: BasePopUpController, NibInit {
         view.backgroundColor = AppColor.popUpBackground.color
         let description = user?.type == .google ? localized(.googleUserExistBody) : localized(.appleUserExistBody)
         descriptionLabel.text = String(format: description, user?.email ?? "")
+        emailLabel.text = user?.email
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

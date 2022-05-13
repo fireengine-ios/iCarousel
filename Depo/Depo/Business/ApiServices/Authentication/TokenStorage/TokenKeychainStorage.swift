@@ -16,6 +16,7 @@ final class TokenKeychainStorage: TokenStorage {
     private let refreshTokenKey = "refreshToken"
     private let isRememberMeKey = "isRememberMeKey"
     private let isClearTokensKey = "isClearTokensKey"
+    private let appleLoginEmailKey = "appleLoginEmailKey"
     
     private let keychain = KeychainSwift()
     
@@ -61,6 +62,19 @@ final class TokenKeychainStorage: TokenStorage {
     var isClearTokens: Bool {
         get { return keychain.getBool(isClearTokensKey) ?? false }
         set { keychain.set(newValue, forKey: isClearTokensKey, withAccess: .accessibleAfterFirstUnlock) }
+    }
+    
+    var appleLoginEmail: String? {
+        get {
+            guard let email = keychain.get(appleLoginEmailKey) else {
+                return nil
+            }
+            debugPrint("- appleLoginEmail", email)
+            return email
+        }
+        set {
+            keychain.set(newValue, forKey: appleLoginEmailKey, withAccess: .accessibleAfterFirstUnlock)
+        }
     }
     
     init() {

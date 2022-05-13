@@ -127,7 +127,14 @@ extension AppleGoogleLoginService {
             return
         }
         
-        let user = AppleGoogleUser(idToken: idTokenString, email: credentials.email ?? "", type: .apple)
+        var user = AppleGoogleUser(idToken: idTokenString, email: credentials.email, type: .apple)
+        
+        if credentials.email != nil { ///save apple login email into Keychain
+            tokenStorage.appleLoginEmail = credentials.email
+        } else {
+            user.email = tokenStorage.appleLoginEmail
+        }
+        
         success(user)
     }
     
