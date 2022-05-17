@@ -128,6 +128,8 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
 
                 let attributes = GalleryCollectionViewLayoutAttributes(forCellWith: indexPath)
                 cache[indexPath] = attributes
+
+                attributes.isSpanned = columnSpan > 1
                 attributes.frame = CGRect(
                     x: xOffset,
                     y: yOffset,
