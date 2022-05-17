@@ -22,18 +22,18 @@ final class PhotoVideoCell: UICollectionViewCell {
         
         var isBleached: Bool { [.notSynced, .syncInQueue, .syncFailed].contains(self) }
 
-        var image: UIImage? {
+        var icon: AppImage? {
             switch self {
             case .notSynced:
-                return Image.iconBackupUnbackup.image
+                return Image.iconSyncStatusNotSynced
             case .syncInQueue:
-                return UIImage(named: "thumbnailInQueueStatus")
+                return Image.iconSyncStatusQueued
             case .syncing, .regular:
                 return nil
             case .synced:
-                return Image.iconBackupCheck.image
+                return Image.iconSyncStatusSynced
             case .syncFailed:
-                return UIImage(named: "thumbnailSyncFailedStatus")
+                return Image.iconSyncStatusFailed
             }
         }
    }
@@ -187,7 +187,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     }
 
     func update(syncStatus: SyncStatus) {
-        syncStatusImageView.image = syncStatus.image
+        syncStatusImageView.image = syncStatus.icon?.image
 
         if syncStatus.isBleached {
             bleachView.backgroundColor = AppColor.darkContentOverlay.color
@@ -236,8 +236,9 @@ extension PhotoVideoCell {
 
 extension PhotoVideoCell {
     func updateSelection(isSelectionMode: Bool, animated: Bool) {
+        videoPlayIcon.isHidden = isSelectionMode || currentFileType != .video
         checkmarkImageView.isHidden = !isSelectionMode
-        let selectionStateImage = isSelected ? Image.iconSelectFills : Image.iconSelectEmpty
+        let selectionStateImage = isSelected ? Image.iconCheckmarkSelected : Image.iconCheckmarkNotSelected
         checkmarkImageView.image = selectionStateImage.image
         
         let selection = isSelectionMode && isSelected
