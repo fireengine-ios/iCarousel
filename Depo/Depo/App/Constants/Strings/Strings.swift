@@ -167,7 +167,8 @@ enum Strings: String, Localizable {
     case forgotPasswordRequiredError              = "password_change_forgot_password_required_error"
     
     // MARK: - KVKK Permission
-    case kvkkToggleTitle = "kvkk_toggle_desc"
-    case kvkkToggleText  = "kvkk_toggle_text"
-    case kvkkFirmsLink   = "kvkk_firms_link"
+    case kvkkToggleTitle   = "kvkk_toggle_desc"
+    case kvkkToggleText    = "kvkk_toggle_text"
+    case kvkkFirmsLink     = "kvkk_firms_link"
+    case kvkkHyperlinkText = "ETK_KVKK_Izin_Politikası"
 }

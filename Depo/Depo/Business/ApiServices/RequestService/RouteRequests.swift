@@ -455,6 +455,8 @@ struct RouteRequests {
     
     static let turkcellAndGroupCompanies = "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz"
     
+    static let turkcellPermissionsPolicy = "https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi"
+    
     static var globalPermissionsDetails: String {
         switch currentServerEnvironment {
         case .production: return isBillo ? "https://mybilloapp.com/global_ops.html?lang=\(Device.locale)" :
