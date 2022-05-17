@@ -972,9 +972,12 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     func fetchPredicateCreated() { }
     
     func contentDidChange(_ fetchedObjects: [MediaItem]) {
-        scrollBarManager.updateYearsView(with: fetchedObjects,
-                                         cellHeight: collectionViewManager.collectionViewLayout.itemSize.height,
-                                         numberOfColumns: Int(collectionViewManager.collectionViewLayout.columns))
+        //TODO: Facelift - yearsView shouldn't be aware of cell size?
+        // instead should consult GalleryCollectionViewLayout for the height of each section?
+
+//        scrollBarManager.updateYearsView(with: fetchedObjects,
+//                                         cellHeight: collectionViewManager.collectionViewLayout.itemSize.height,
+//                                         numberOfColumns: Int(collectionViewManager.collectionViewLayout.columns))
         
         collectionViewManager.showEmptyDataViewIfNeeded(isShow: fetchedObjects.isEmpty)
     }

@@ -631,7 +631,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
 }
 
-extension PhotoVideoDataSource: PhotoVideoCollectionViewLayoutDelegate {
+extension PhotoVideoDataSource: GalleryCollectionViewLayoutDelegate {
     func targetContentOffset() -> CGPoint? {
         return focusedOffset()
     }

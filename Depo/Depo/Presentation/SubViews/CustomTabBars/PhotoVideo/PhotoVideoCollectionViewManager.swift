@@ -60,7 +60,7 @@ final class PhotoVideoCollectionViewManager {
     
     private weak var collectionView: UICollectionView!
     private weak var delegate: PhotoVideoCollectionViewManagerDelegate?
-    let collectionViewLayout = PhotoVideoCollectionViewLayout()
+    let collectionViewLayout = GalleryCollectionViewLayout()
     
     var selectedIndexes: [IndexPath] {
         return collectionView.indexPathsForSelectedItems ?? []

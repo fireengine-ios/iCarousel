@@ -49,7 +49,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
 
-        if let photoVideoLayoutAttributes = layoutAttributes as? PhotoVideoCollectionViewLayoutAttributes {
+        if let photoVideoLayoutAttributes = layoutAttributes as? GalleryCollectionViewLayoutAttributes {
             let isFirstHeader = photoVideoLayoutAttributes.indexPath.section == 0
             let showsMenuButton = photoVideoLayoutAttributes.isPinned || isFirstHeader
             menuButton.isHidden = !showsMenuButton

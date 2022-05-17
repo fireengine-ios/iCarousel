@@ -1,5 +1,5 @@
 //
-//  PhotoVideoCollectionViewLayoutAttributes.swift
+//  GalleryCollectionViewLayoutAttributes.swift
 //  Depo
 //
 //  Created by Hady on 4/25/22.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class PhotoVideoCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes {
+final class GalleryCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes {
     var isPinned = false
 
     override func copy(with zone: NSZone? = nil) -> Any {

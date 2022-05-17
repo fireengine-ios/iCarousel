@@ -25,8 +25,8 @@ final class PhotoVideoPinchManager: NSObject, UIGestureRecognizerDelegate {
     private var pinchGesture: UIPinchGestureRecognizer!
     private var transitionLayout: UICollectionViewTransitionLayout?
     private var isZoomingIn = false
-    private var currentPhotoVideoLayout: PhotoVideoCollectionViewLayout? {
-        collectionView?.collectionViewLayout as? PhotoVideoCollectionViewLayout
+    private var currentPhotoVideoLayout: GalleryCollectionViewLayout? {
+        collectionView?.collectionViewLayout as? GalleryCollectionViewLayout
     }
 
     @objc func pinch(_ gesture: UIPinchGestureRecognizer) {
@@ -39,7 +39,7 @@ final class PhotoVideoPinchManager: NSObject, UIGestureRecognizerDelegate {
             }
             print("pinch", "began", newSize)
             isZoomingIn = gesture.velocity > 0
-            let newLayout = PhotoVideoCollectionViewLayout(gridSize: newSize)
+            let newLayout = GalleryCollectionViewLayout(gridSize: newSize)
             newLayout.delegate = currentPhotoVideoLayout?.delegate
             newLayout.pinsSectionHeadersToLayoutGuide = currentPhotoVideoLayout?.pinsSectionHeadersToLayoutGuide
             transitionLayout = collectionView.startInteractiveTransition(to: newLayout) { [weak collectionView] _, _ in
@@ -79,8 +79,8 @@ final class PhotoVideoPinchManager: NSObject, UIGestureRecognizerDelegate {
         return getNewGridSizeForGestureStart() != nil
     }
 
-    private func getNewGridSizeForGestureStart() -> PhotoVideoCollectionViewLayout.GridSize? {
-        guard let currentLayout = collectionView?.collectionViewLayout as? PhotoVideoCollectionViewLayout else {
+    private func getNewGridSizeForGestureStart() -> GalleryCollectionGridSize? {
+        guard let currentLayout = collectionView?.collectionViewLayout as? GalleryCollectionViewLayout else {
             return nil
         }
 
