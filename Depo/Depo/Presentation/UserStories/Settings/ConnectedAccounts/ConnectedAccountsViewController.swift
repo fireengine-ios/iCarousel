@@ -93,6 +93,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
                 GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
                     if error != nil {
                         handler(nil)
+                        return
                     }
                     
                     if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
