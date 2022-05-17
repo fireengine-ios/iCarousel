@@ -283,7 +283,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         case .special, .unknown,
              .invalidToken,
              .externalAuthTokenRequired,
-             .forgetPasswordRequired:
+             .forgetPasswordRequired,
+             .emailDomainNotAllowed:
             UIApplication.showErrorAlert(message: errorText)
         }
     }

@@ -643,6 +643,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         handler(.failure(.externalAuthTokenRequired))
                     } else if errorResponse.status == .invalidToken {
                         handler(.failure(.invalidToken))
+                    } else if errorResponse.status == .emailDomainNotAllowed {
+                        handler(.failure(.emailDomainNotAllowed))
                     } else if errorResponse.status == .invalidPassword {
                         
                         guard let reason = errorResponse.reason else {
