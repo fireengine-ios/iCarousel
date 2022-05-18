@@ -168,7 +168,8 @@ enum Strings: String, Localizable {
     case emailDomainNotAllowed                    = "apple_login_show_mail_warning"
     
     // MARK: - KVKK Permission
-    case kvkkToggleTitle = "kvkk_toggle_desc"
-    case kvkkToggleText  = "kvkk_toggle_text"
-    case kvkkFirmsLink   = "kvkk_firms_link"
+    case kvkkToggleTitle   = "kvkk_toggle_desc"
+    case kvkkToggleText    = "kvkk_toggle_text"
+    case kvkkFirmsLink     = "kvkk_firms_link"
+    case kvkkHyperlinkText = "ETK_KVKK_Izin_Politikası"
 }

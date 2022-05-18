@@ -205,6 +205,10 @@ extension PermissionViewController: PermissionViewTextViewDelegate {
             DispatchQueue.toMain {
                 self.openMobilePaymentAgreement()
             }
+        case TextConstants.NotLocalized.permissionsPolicyLink:
+            DispatchQueue.toMain {
+                self.openTurkcellPermissionPolicy()
+            }
         default:
             return false
         }
@@ -217,6 +221,11 @@ extension PermissionViewController {
     
     private func openTurkcellAndGroupCompanies() {
         let vc = WebViewController(urlString: RouteRequests.turkcellAndGroupCompanies)
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    private func openTurkcellPermissionPolicy() {
+        let vc = WebViewController(urlString: RouteRequests.turkcellPermissionsPolicy)
         RouterVC().pushViewController(viewController: vc)
     }
     
