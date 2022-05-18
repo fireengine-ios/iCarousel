@@ -130,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         startListeninAppLink()
+        checkNewAppVersion()
         
         return true
     }
@@ -368,6 +369,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AGCAppLinking.instance().handle { (link, error) in
             if let deepLink = link {
                 self.handleIncomingApplink(deepLink)
+            }
+        }
+    }
+    
+    private func checkNewAppVersion() {
+        ///LB-1136
+        if AuthoritySingleton.shared.isNewAppVersion {
+            if let urlString = UIPasteboard.general.string,
+               let url = URL(string: urlString.replacingOccurrences(of: "/#!", with: "")),
+               let publicToken = url["publicToken"] {
+                if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.saveToMyLifebox.rawValue,
+                                                                 options: [DeepLinkParameter.publicToken.rawValue: publicToken]) {
+                    debugLog("Should open Action Screen")
+                    PushNotificationService.shared.openActionScreen()
+                }
+                debugLog("DynamicLink app update url readed: \(urlString)")
             }
         }
     }
