@@ -212,6 +212,11 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
     func failedToLoadTermsOfUse(errorString: String) {
         view.showErrorTitle(withText: errorString)
     }
+    
+    func appleEmailDomainFailed() {
+        UIApplication.showErrorAlert(message: localized(.emailDomainNotAllowed))
+        router.goBack()
+    }
 }
 
 extension RegistrationPresenter: CaptchaViewErrorDelegate {

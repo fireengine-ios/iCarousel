@@ -414,6 +414,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                 GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
                     if error != nil {
                         handler(nil)
+                        return
                     }
                     
                     if let idToken = user?.authentication.idToken, let email = user?.profile?.email {

@@ -101,4 +101,8 @@ class LoginRouter: LoginRouterInput {
         let controller = SubjectDetailsViewController.present(with: type)
         router.presentViewController(controller: controller)
     }
+    
+    func goBack() {
+        router.popViewController()
+    }
 }

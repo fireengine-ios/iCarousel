@@ -14,5 +14,6 @@ protocol TokenStorage: AnyObject {
     var refreshToken: String? { get set }
     var isRememberMe: Bool { get set }
     var isClearTokens: Bool { get set }
+    var appleLoginEmail: String? { get set }
     func clearTokens()
 }

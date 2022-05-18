@@ -28,6 +28,7 @@ enum UpdatePasswordErrors {
     case externalAuthTokenRequired
     case forgetPasswordRequired
     case invalidToken
+    case emailDomainNotAllowed
 
 }
 extension UpdatePasswordErrors: LocalizedError {
@@ -81,6 +82,8 @@ extension UpdatePasswordErrors: LocalizedError {
             return localized(.externalAuthError)
         case .forgetPasswordRequired:
             return localized(.forgotPasswordRequiredError)
+        case .emailDomainNotAllowed:
+            return localized(.emailDomainNotAllowed)
         }
     }
 }

@@ -57,4 +57,8 @@ class RegistrationRouter: RegistrationRouterInput {
         let viewController = PrivacyPolicyController()
         router.pushViewController(viewController: viewController)
     }
+    
+    func goBack() {
+        router.popViewController()
+    }
 }

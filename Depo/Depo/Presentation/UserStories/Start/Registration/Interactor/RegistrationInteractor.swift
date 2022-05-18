@@ -182,6 +182,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
                         self.captchaRequired = true
                         self.output.captchaRequired(required: true)
                     }
+                    
+                    if signUpError.status == .emailDomainNotAllowed {
+                        self.output.appleEmailDomainFailed()
+                    }
                 }
 
                 self.analyticsService.trackCustomGAEvent(eventCategory: .errors,

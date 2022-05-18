@@ -10,7 +10,7 @@ import Foundation
 
 struct AppleGoogleUser {
     let idToken: String
-    let email: String
+    var email: String?
     let type: AppleGoogleUserType
 }
 
