@@ -2032,7 +2032,6 @@
 "settings_change_password_google_warning" = "In order to change your password, you must login to your lifebox account with your Google ID.";
 "settings_change_password_apple_warning" = "In order to change your password, you must login to your lifebox account with your Apple ID.";
 "settings_change_password_apple_google_warning" = "In order to change your password, you must login to your lifebox account with your Google ID or Apple ID.";
-"settings_googe_apple_set_password" = "";
 "settings_googe_apple_set_password" = "Set lifebox Password";
 "settings_google_apple_mail_match_error" = "To connect your account to lifebox, your e-mail must be the same on each platform.";
 "googe_apple_login_invalid_token" = "Invalid login attempt, please check your login credential and try again.";
@@ -2040,18 +2039,6 @@
 "password_change_external_auth_required_error" = "In order to change your password, you can either login to your lifebox account with your Google ID/Apple ID or follow the Forgot My Password instructions on the login screen.";
 "password_change_forgot_password_required_error" = "In order to change your password, you must logout from your account first and follow the Forgot My Password instructions on the login screen.";
 "kvkk_toggle_desc" = "Data Processing/Sharing Consent";
-"kvkk_toggle_text" = "I hereby give my consent to allow Lifecell Bulut Çözümleri A.Ş. to process my personal data and share them with the parties listed in the %@.";
-"security_popup_warning_header" = "An Incorrect Information Is Entered";
-"security_popup_warning_body1" = "The security question is successfully saved, the following error for the recovery e-mail has occurred:";
-"security_popup_warning_body2" = "The recovery e-mail is successfully saved, the following error for the security question has occurred:";
-"security_popup_warning_footer" = "You can re-enter your recovery e-mail via Settings -> Account Details -> My Profile.";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
-"apple_login_user_exists_body" = "An existing registered account is found with %@ e-mail, to connect Apple Login ID with your existing lifebox account you must first enter your lifebox password.";
-"settings_apple_password_required" = "In order to turn off the Apple ID Login, you must set a lifebox password first.";
-"apple_login_show_mail_warning" = "You need to allow your e-mail address to be shared with lifebox in order to login with your Apple ID. Please click the button below to be directed to Settings page, follow the instructions to remove the lifebox account under Apple ID à Password & Security à Apps Using Apple ID and follow the steps again to login with your Apple ID.";
-"apple_login_user_exists_body" = "";
-"settings_apple_password_required" = "";
 "kvkk_toggle_text" = "I hereby give my consent to allow Lifecell Bulut Çözümleri A.Ş. to process my personal data and share them with the parties listed in the %@ .";
 "security_popup_warning_header" = "An Incorrect Information Is Entered";
 "security_popup_warning_body1" = "The security question is successfully saved, the following error for the recovery e-mail has occurred:";
