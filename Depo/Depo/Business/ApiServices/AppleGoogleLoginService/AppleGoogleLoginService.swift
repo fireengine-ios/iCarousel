@@ -48,7 +48,7 @@ typealias AppleGoogleUserCompletion = (_ user: AppleGoogleUser? ) -> Void
 
 final class AppleGoogleLoginService: BaseRequestService {
     
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    private let decoder = JWTTokenDecoder.shared
 
     func disconnectAppleGoogleLogin(type: AppleGoogleUserType, completion: @escaping (GoogleLoginOperationResult) -> Void) {
         debugLog("AppleGoogleLoginService disconnectAppleGoogleLogin")
@@ -134,15 +134,14 @@ extension AppleGoogleLoginService {
             return
         }
         
-        var user = AppleGoogleUser(idToken: idTokenString, email: credentials.email, type: .apple)
-        
-        if credentials.email != nil { ///save apple login email into Keychain
-            tokenStorage.appleLoginEmail = credentials.email
-        } else {
-            user.email = tokenStorage.appleLoginEmail
+        guard let email = decoder.decode(jwtToken: idTokenString)["email"] as? String else {
+            fail("Unable to decode email string from idToken: \(idTokenString)")
+            return
         }
         
+        let user = AppleGoogleUser(idToken: idTokenString, email: email, type: .apple)
         success(user)
+        
     }
     
     func getAppleAuthorizationController() -> ASAuthorizationController {

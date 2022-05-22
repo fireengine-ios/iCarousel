@@ -8657,6 +8657,10 @@
 		F00DE58A272196C6002F9A64 /* FileDescriptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F028D79B2719C0FD00FF204D /* FileDescriptionView.xib */; };
 		F01244C9282A988900835B4E /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F01244C8282A988800835B4E /* agconnect-services.plist */; };
 		F01244CA282A988900835B4E /* agconnect-services.plist in Resources */ = {isa = PBXBuildFile; fileRef = F01244C8282A988800835B4E /* agconnect-services.plist */; };
+		F01244D9283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */; };
+		F01244DA283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */; };
+		F01244DB283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */; };
+		F01244DC283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */; };
 		F013FA6C27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
 		F013FA6D27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
 		F013FA6E27FF2804004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */; };
@@ -11603,6 +11607,7 @@
 		EFA74FAD1FBF378F00CF946E /* PrintInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInteractor.swift; sourceTree = "<group>"; };
 		EFE9E4488118296DCE476A71 /* Pods-LifeTech_BilloShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloShared.appstore.xcconfig"; path = "Target Support Files/Pods-LifeTech_BilloShared/Pods-LifeTech_BilloShared.appstore.xcconfig"; sourceTree = "<group>"; };
 		F01244C8282A988800835B4E /* agconnect-services.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "agconnect-services.plist"; sourceTree = "<group>"; };
+		F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTTokenDecoder.swift; sourceTree = "<group>"; };
 		F013FA6B27FF2803004B9BB8 /* AppleGoogleUpdatePasswordPoup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleGoogleUpdatePasswordPoup.swift; sourceTree = "<group>"; };
 		F013FA7027FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppleGoogleUpdatePasswordPopup.xib; sourceTree = "<group>"; };
 		F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityInfoWarningPopup.xib; sourceTree = "<group>"; };
@@ -14897,6 +14902,7 @@
 				03135F4423F3E0900088E8BB /* ApplicationStateHelper.swift */,
 				8E1E08092423B0130054BF86 /* KeychainCleaner.swift */,
 				98DD03F52542E634006DE0BD /* UIImageEffects.swift */,
+				F01244D8283AEC6000835B4E /* JWTTokenDecoder.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -24478,6 +24484,7 @@
 				8C0E8CCB1FDEBDFF00789C91 /* SearchViewInteractor.swift in Sources */,
 				8C0E8CCC1FDEBDFF00789C91 /* CaptchaService.swift in Sources */,
 				8C208646228D4B2E000BEDAD /* PhotoVideoDataSource.swift in Sources */,
+				F01244D9283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */,
 				076BD1BB27BC0973004609E3 /* MapSearchModuleInput.swift in Sources */,
 				8C0E8CCE1FDEBDFF00789C91 /* ImportPhotosInteractorInput.swift in Sources */,
 				8C0E8CCF1FDEBDFF00789C91 /* AlbumSelectionPresenter.swift in Sources */,
@@ -27603,6 +27610,7 @@
 				CE784B9D22A685FB00662219 /* SplashInteractorOutput.swift in Sources */,
 				CE784B9E22A685FB00662219 /* LoginSettingsRouterInput.swift in Sources */,
 				0762028B269B83EF00D4FB2C /* OverlayStickersModels.swift in Sources */,
+				F01244DB283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */,
 				B52BAC6423AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
 				CF71460724B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				CE784B9F22A685FB00662219 /* URL+ContentType.swift in Sources */,
@@ -28365,6 +28373,7 @@
 				CF8B649C23CBC9D70021B021 /* CardsContainerView.swift in Sources */,
 				CF8B649D23CBC9D70021B021 /* TermsDescriptionController.swift in Sources */,
 				CF38A86D257532620000994F /* PrivateShareDurationCell.swift in Sources */,
+				F01244DA283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */,
 				CF8B649E23CBC9D70021B021 /* InstagramParametrs.swift in Sources */,
 				CF8B649F23CBC9D70021B021 /* CameraService.swift in Sources */,
 				CF8B64A023CBC9D70021B021 /* HelpAndSupportConfigurator.swift in Sources */,
@@ -30973,6 +30982,7 @@
 				CF8B6F2B23CBCA280021B021 /* BottomSelectionTabBarInitializer.swift in Sources */,
 				0305A33523D5C4A5004D1EC7 /* NSManagedObjectModel+Compatible.swift in Sources */,
 				0762028C269B83F000D4FB2C /* OverlayStickersModels.swift in Sources */,
+				F01244DC283AEC6000835B4E /* JWTTokenDecoder.swift in Sources */,
 				CF8B6F2C23CBCA280021B021 /* SplashInteractorOutput.swift in Sources */,
 				CF71460824B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				CF8B6F2D23CBCA280021B021 /* LoginSettingsRouterInput.swift in Sources */,

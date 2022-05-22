@@ -10,7 +10,7 @@ import Foundation
 import KeychainSwift
 
 final class KeychainCleaner {
-    private let unremovableValueKeys = ["deviceUUIDKey", "appleLoginEmailKey"]
+    private let unremovableValueKeys = ["deviceUUIDKey"]
     
     func clear() {
         let keychain = KeychainSwift()
