@@ -2004,7 +2004,6 @@
 "settings_change_password_google_warning" = "Şifreni yenileyebilmen için öncelikle Google Hesabın ile lifebox’a giriş yapmalısın.";
 "settings_change_password_apple_warning" = "Şifreni yenileyebilmen için öncelikle Apple Hesabın ile lifebox’a giriş yapmalısın.";
 "settings_change_password_apple_google_warning" = "Şifreni yenileyebilmen için öncelikle Google veya Apple Hesabın ile lifebox’a giriş yapmalısın.";
-"settings_googe_apple_set_password" = "Lifebox şifresi belirle";
 "settings_googe_apple_set_password" = "lifebox Şifreni Belirle";
 "settings_google_apple_mail_match_error" = "Bağlamak istediğin hesabına ait e-posta adresin ile lifebox profilindeki e-posta adresin aynı olmalıdır.";
 "googe_apple_login_invalid_token" = "Geçersiz giriş, lütfen bilgilerinizi kontrol edip yeniden deneyin.";
@@ -2012,12 +2011,6 @@
 "password_change_external_auth_required_error" = "Şifreni yenileyebilmen için Google veya Apple hesabın ile lifebox’a giriş yapmalı ya da giriş sayfasındaki Şifremi Unuttum adımlarını takip etmelisin.";
 "password_change_forgot_password_required_error" = "Şifreni yenileyebilmen için öncelikle hesabından çıkış yapmalı ve giriş sayfasındaki Şifremi Unuttum adımlarını takip etmelisin.\n";
 "kvkk_toggle_desc" = "Veri İşleme/Paylaşım İzni";
-"kvkk_toggle_text" = "Lifecell Bulut Çözümleri A.Ş. tarafından kişisel verilerimin işlenmesine ve %@sında belirtilen taraflarla paylaşılmasına onay veriyorum.";
-"kvkk_toggle_text" = "Lifecell Bulut Çözümleri A.Ş. tarafından kişisel verilerimin işlenmesine ve İzin Politikasında belirtilen taraflarla paylaşılmasına onay veriyorum.";
-"security_popup_warning_header" = "Girmiş olduğun bilgilerden biri hatalı";
-"security_popup_warning_body1" = "Güvenlik sorun başarı ile kaydedildi, kurtarma e-postası için aşağıdaki hata alındı:";
-"security_popup_warning_body2" = "Kurtarma e-postası başarı ile kaydedildi, güvenlik sorun için aşağıdaki hata alındı:";
-"security_popup_warning_footer" = "Dilersen ayarlarsan kurtarma postasını tekrar girebilirsin.";
 "kvkk_toggle_text" = "Lifecell Bulut Çözümleri A.Ş. tarafından kişisel verilerimin işlenmesine ve %@nda belirtilen taraflarla paylaşılmasına onay veriyorum.";
 "security_popup_warning_header" = "Girmiş Olduğun Bilgilerden Biri Hatalı";
 "security_popup_warning_body1" = "Güvenlik sorusu başarıyla kaydedildi, kurtarma e-postası için aşağıdaki hata alındı:";
@@ -2027,6 +2020,5 @@
 "kvkk_commercial_info_link" = "İzin Politikası";
 "apple_login_user_exists_body" = "%@ mail adresi ile kayıtlı bir lifebox hesabı bulunmaktadır. Apple Hesabı ile Giriş yöntemini mevcut lifebox hesabına bağlamak için öncelikle lifebox şifreni girmelisin.";
 "settings_apple_password_required" = "Apple Hesabı ile Giriş tercihini kapatabilmen için öncelikle lifebox şifresi belirlemen gerekiyor.";
-"apple_login_show_mail_warning" = "";
 "apple_login_show_mail_warning" = "Apple Hesabı ile Giriş yapabilmen için e-posta adresinin lifebox ile paylaşılmasına izin vermen gerekiyor. Bunun için aşağıdaki yönlendirmeye tıklayarak açılacak Ayarlar sayfasından Apple Kimliği > Parola ve Güvenlik > Apple Kimliğini Kullanan Uygulamalar  altından lifebox’ı kaldırarak yeniden Apple Hesabı ile giriş adımlarını izleyebilirsin.";
 "ETK_KVKK_Izin_Politikası" = "İzin Politikası";
