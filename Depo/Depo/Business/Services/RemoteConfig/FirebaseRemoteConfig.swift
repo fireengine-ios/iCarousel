@@ -9,6 +9,9 @@
 import Foundation
 import FirebaseRemoteConfig
 
+extension NSNotification.Name {
+    static let firebaseRemoteConfigInitialFetchComplete = NSNotification.Name(rawValue: "firebaseRemoteConfigInitialFetchComplete")
+}
 
 private struct RemoteConfigKeys {
     static let loginSupportAttempts = "login_support_form_treshold"
@@ -120,6 +123,8 @@ final class FirebaseRemoteConfig {
             @unknown default:
                 debugLog("unknown status \(status)")
             }
+
+            NotificationCenter.default.post(name: .firebaseRemoteConfigInitialFetchComplete, object: nil)
         }
     }
 
