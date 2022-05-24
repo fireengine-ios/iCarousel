@@ -120,8 +120,8 @@ class IntroduceViewController: ViewController {
 
         configurateView()
         output.viewIsReady()
+
         handleRemoteConfig()
-        
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleRemoteConfig),
