@@ -150,9 +150,7 @@ class IntroduceViewController: ViewController {
             signInWithGoogleButton.isHidden = true
         }
         
-        if signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden {
-            orLabel.isHidden = true
-        }
+        orLabel.isHidden = signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden
         
         if !signInWithAppleButton.isHidden && !signInWithGoogleButton.isHidden {
             if Device.isIphoneSmall {

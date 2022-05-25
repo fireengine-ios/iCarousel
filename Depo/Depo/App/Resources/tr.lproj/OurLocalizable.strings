@@ -2016,9 +2016,12 @@
 "security_popup_warning_body1" = "Güvenlik sorusu başarıyla kaydedildi, kurtarma e-postası için aşağıdaki hata alındı:";
 "security_popup_warning_body2" = "Kurtarma e-postası başarıyla kaydedildi, güvenlik sorusu için aşağıdaki hata alındı:";
 "security_popup_warning_footer" = "Ayarlar -> Hesap Detayları -> Profilim menüsünden kurtarma e-posta adresini yeniden girebilirsin.";
-"kvkk_firms_link" = "Lifecell Bulut Çözümleri A.Ş., Lifecell Dijital Servisler ve Çözümler A.Ş ve Grup Şirketleri";
-"kvkk_commercial_info_link" = "İzin Politikası";
 "apple_login_user_exists_body" = "%@ mail adresi ile kayıtlı bir lifebox hesabı bulunmaktadır. Apple Hesabı ile Giriş yöntemini mevcut lifebox hesabına bağlamak için öncelikle lifebox şifreni girmelisin.";
 "settings_apple_password_required" = "Apple Hesabı ile Giriş tercihini kapatabilmen için öncelikle lifebox şifresi belirlemen gerekiyor.";
 "apple_login_show_mail_warning" = "Apple Hesabı ile Giriş yapabilmen için e-posta adresinin lifebox ile paylaşılmasına izin vermen gerekiyor. Bunun için aşağıdaki yönlendirmeye tıklayarak açılacak Ayarlar sayfasından Apple Kimliği > Parola ve Güvenlik > Apple Kimliğini Kullanan Uygulamalar  altından lifebox’ı kaldırarak yeniden Apple Hesabı ile giriş adımlarını izleyebilirsin.";
-"ETK_KVKK_Izin_Politikası" = "İzin Politikası";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "İzin Politikası";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"ETK_KVKK_Izin_Politikası" = "";

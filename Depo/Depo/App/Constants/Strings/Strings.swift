@@ -171,5 +171,5 @@ enum Strings: String, Localizable {
     case kvkkToggleTitle   = "kvkk_toggle_desc"
     case kvkkToggleText    = "kvkk_toggle_text"
     case kvkkFirmsLink     = "kvkk_firms_link"
-    case kvkkHyperlinkText = "ETK_KVKK_Izin_Politikası"
+    case kvkkHyperlinkText = "ETK_KVKK_Izin_Politikasi"
 }
