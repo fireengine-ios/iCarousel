@@ -120,7 +120,14 @@ class IntroduceViewController: ViewController {
 
         configurateView()
         output.viewIsReady()
+
         handleRemoteConfig()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleRemoteConfig),
+            name: .firebaseRemoteConfigInitialFetchComplete,
+            object: nil
+        )
     }
     
     func configurateView() {
@@ -128,7 +135,7 @@ class IntroduceViewController: ViewController {
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
-    private func handleRemoteConfig() {
+    @objc private func handleRemoteConfig() {
         if #available(iOS 13, *) { } else {
             signInWithAppleButton.isHidden = true
             signInWithGoogleButton.isHidden = true
