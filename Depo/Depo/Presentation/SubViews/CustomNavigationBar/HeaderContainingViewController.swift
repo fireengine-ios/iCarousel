@@ -73,7 +73,6 @@ final class HeaderContainingViewController: BaseViewController {
         }
 
         setupHeaderView()
-        updateHeaderMask()
         setupStatusBarBackgroundView()
         updateStatusBarBackgroundViewStyle()
         setupOriginalSafeAreaLayoutGuide()
@@ -86,6 +85,11 @@ final class HeaderContainingViewController: BaseViewController {
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
         updateAdditionalSafeAreaInsetsIfNeeded()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateHeaderMask()
     }
 
     private func setupHeaderView() {
