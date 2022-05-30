@@ -17,6 +17,7 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationBarHidden = true
         collectionView.addInteraction(UIDropInteraction(delegate: self))
     }
     
@@ -65,7 +66,7 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     
     private func refreshSharedSliderPosition() {
         let height: CGFloat = lastCardContainerHeight + sharedFilesManager.sharedFilesSlider.frame.size.height + calculatedUnderNavBarBarHeight
-        
+
         collectionView.contentInset = UIEdgeInsets(top: height, left: 0, bottom: 25, right: 0)
         let topOffset = CGPoint(x: 0, y: -height)
         collectionView.setContentOffset(topOffset , animated: false)

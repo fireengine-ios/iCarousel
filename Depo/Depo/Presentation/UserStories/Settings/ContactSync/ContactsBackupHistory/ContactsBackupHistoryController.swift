@@ -44,7 +44,6 @@ final class ContactsBackupHistoryController: BaseViewController {
         super.viewWillAppear(animated)
         
         contactSyncHelper.delegate = self
-        navigationBarWithGradientStyle()
     }
     
     private func reloadBackups() {

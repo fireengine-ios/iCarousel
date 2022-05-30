@@ -77,8 +77,6 @@ class TermsAndServicesViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        hidenNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
@@ -90,7 +88,7 @@ class TermsAndServicesViewController: ViewController {
         }
 
         contenViewHeightConstraint.constant = Device.winSize.height * 0.5
-        
+
         configureUI()
         setupIntroductionTextView()
         setupPrivacyPolicyTextView()
@@ -100,10 +98,6 @@ class TermsAndServicesViewController: ViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         hideSpinnerIncludeNavigationBar()
-    }
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
     }
     
     //MARK: - Configuration and Input
@@ -233,7 +227,7 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
                                                                     .characterEncoding: String.Encoding.utf8.rawValue],
                                                           documentAttributes: nil)
 
-            attributedString.addAttribute(.foregroundColor, value: AppColor.blackColor.color ?? .black, range: NSRange(location: 0, length: attributedString.length))
+            attributedString.addAttribute(.foregroundColor, value: AppColor.blackColor.color, range: NSRange(location: 0, length: attributedString.length))
             return attributedString
         } catch {
             assertionFailure()

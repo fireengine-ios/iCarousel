@@ -76,7 +76,6 @@ final class PackagesViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
         output.viewWillAppear()
     }
     

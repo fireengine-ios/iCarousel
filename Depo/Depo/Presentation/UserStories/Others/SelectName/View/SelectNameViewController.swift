@@ -32,7 +32,6 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput, NibInit
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
         
         if navigationItem.leftBarButtonItem == nil, navigationController?.viewControllers.count == 1 {
             navigationItem.leftBarButtonItem = UIBarButtonItem(title: TextConstants.selectFolderCancelButton,

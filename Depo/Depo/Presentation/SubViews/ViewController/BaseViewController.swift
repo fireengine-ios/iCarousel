@@ -14,7 +14,19 @@ class BaseViewController: ViewController {
     var floatingButtonsArray = [FloatingButtonsType]()
     var parentUUID: String = ""
     var segmentImage: SegmentedImage?
-    
+
+    var customTabBarController: TabBarViewController? {
+        var parent = self.parent
+        while parent != nil {
+            if let tabBarController = parent as? TabBarViewController {
+                return tabBarController
+            }
+            parent = parent?.parent
+        }
+
+        return nil
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,17 +42,9 @@ class BaseViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        //showTabBarIfNeeded()
+        customTabBarController?.setBottomBarsHidden(!needToShowTabBar)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        showTabBarIfNeeded()
-        RouterVC().setBackgroundColor(color: getBackgroundColor())
-    }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -82,21 +86,13 @@ class BaseViewController: ViewController {
         }
         return nil
     }
-    
+
     func showTabBarIfNeeded() {
-        if isNeedToShowTabBar() {
-            NotificationCenter.default.post(name: .showTabBar, object: nil)
-        } else {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
+        customTabBarController?.setBottomBarsHidden(isNeedToShowTabBar())
     }
-    
+
     func isNeedToShowTabBar() -> Bool {
         return needToShowTabBar
-    }
-    
-    func getBackgroundColor() -> UIColor {
-        return AppColor.primaryBackground.color ?? .white
     }
 }
 

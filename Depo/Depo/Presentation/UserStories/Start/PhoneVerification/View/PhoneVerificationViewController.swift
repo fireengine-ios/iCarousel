@@ -53,9 +53,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     private var timerEnabled: Bool = true
     
     // MARK: Life cycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +66,6 @@ class PhoneVerificationViewController: ViewController, PhoneVerificationViewInpu
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
     }
 
     override func viewWillDisappear(_ animated: Bool) {

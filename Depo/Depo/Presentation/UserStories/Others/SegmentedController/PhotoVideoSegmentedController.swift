@@ -8,8 +8,7 @@
 
 import Foundation
 
-final class PhotoVideoSegmentedController: SegmentedController {
-    
+final class PhotoVideoSegmentedController: SegmentedController, HeaderContainingViewControllerChild {    
     private let instaPickCampaignService = InstaPickCampaignService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
@@ -17,6 +16,11 @@ final class PhotoVideoSegmentedController: SegmentedController {
         let controller = PhotoVideoSegmentedController(nibName: "SegmentedController", bundle: nil)
         controller.setup(with: controllers, alignment: .center)
         return controller
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationBarHidden = true
     }
     
     private func handleAnalyzeResultAfterProgressPopUp(analyzesResult: AnalyzeResult, infoCallback: @escaping (PhotopickCampaign?) -> Void) {

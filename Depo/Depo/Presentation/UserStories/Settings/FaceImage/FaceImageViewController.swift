@@ -39,7 +39,6 @@ final class FaceImageViewController: ViewController, NibInit {
         
         displayManager.applyConfiguration(authorityStorage.accountType.isPremium ? .initialPremium : .initialStandart) 
 
-        navigationBarWithGradientStyle()
         checkFaceImageAndFacebokIsAllowed()
     }
     

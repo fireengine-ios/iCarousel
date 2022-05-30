@@ -69,7 +69,7 @@ final class HSCompletionPopUp: BasePopUpController {
 
     @IBOutlet private weak var gradientView: TransparentGradientView! {
         willSet {
-            newValue.backgroundColor = AppColor.secondaryBackground.color?.withAlphaComponent(0.8)
+            newValue.backgroundColor = AppColor.secondaryBackground.color.withAlphaComponent(0.8)
             newValue.isFlipedColors = true
             newValue.style = .horizontal
         }

@@ -256,27 +256,24 @@ final class PhotoVideoDataSource: NSObject {
         updateLastFetchedObjects(deletedIds: [], updatedIds: [], insertedIds: [])
     }
     
-    func setupOriginalPredicates(isPhotos: Bool, predicateSetupedCallback: @escaping VoidHandler) {
-        predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compoundedPredicate in
-            self?.fetchedResultsController.fetchRequest.predicate = compoundedPredicate
-            predicateSetupedCallback()
-        }
+    func setupOriginalPredicates(fileTypes: [FileType], predicateSetupedCallback: @escaping VoidHandler) {
+        let predicate = predicateManager.getMainCompoundedPredicate(fileTypes: fileTypes)
+        fetchedResultsController.fetchRequest.predicate = predicate
+        predicateSetupedCallback()
     }
     
-    func changeSourceFilter(type: GalleryViewType, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
+    func changeSourceFilter(type: GalleryViewType, fileTypes: [FileType], newPredicateSetupedCallback: @escaping VoidHandler) {
         lastWrapedObjects.removeAll()
         
         switch type {
         case .all:
-            predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compundedPredicate in
-                self?.fetchedResultsController.fetchRequest.predicate = compundedPredicate
-                newPredicateSetupedCallback()
-            }
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getMainCompoundedPredicate(fileTypes: fileTypes)
+            newPredicateSetupedCallback()
         case .synced:
-            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(fileTypes: fileTypes)
             newPredicateSetupedCallback()
         case .unsynced:
-            fetchedResultsController.fetchRequest.predicate = predicateManager.getUnsyncPredicate(isPhotos: isPhotos)
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getUnsyncPredicate(fileTypes: fileTypes)
             newPredicateSetupedCallback()
         }
     }
@@ -634,7 +631,7 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
     
 }
 
-extension PhotoVideoDataSource: PhotoVideoCollectionViewLayoutDelegate {
+extension PhotoVideoDataSource: GalleryCollectionViewLayoutDelegate {
     func targetContentOffset() -> CGPoint? {
         return focusedOffset()
     }

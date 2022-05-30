@@ -42,10 +42,10 @@ class DarkModeViewController: BaseViewController {
         stackView.addArrangedSubview(darkModeSwitchView)
         view.addSubview(stackView)
 
-        stackView.topAnchor.constraint(equalTo: view.topAnchor).activate()
-        stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor).activate()
-        stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor).activate()
-        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).activate()
+        stackView.topAnchor.constraint(equalTo: view.safeTopAnchor).activate()
+        stackView.leadingAnchor.constraint(equalTo: view.safeLeadingAnchor).activate()
+        stackView.trailingAnchor.constraint(equalTo: view.safeTrailingAnchor).activate()
+        stackView.bottomAnchor.constraint(equalTo: view.safeBottomAnchor).activate()
     }
 }
 

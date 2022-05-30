@@ -9,8 +9,28 @@
 import UIKit
 
 enum AppColor {
-    case primaryBackground
+
+    // MARK: NavigationBar
+    case navigationBarBackground
+    case navigationBarTitle
+    case navigationBarIcons
+    case navigationBarBackgroundBlack
+    case navigationBarTitleBlack
+    case navigationBarIconsBlack
+
+    // MARK: TabBar
+    case tabBarTint
+    case tabBarTintSelected
+
+    case background
     case secondaryBackground
+    case label
+    case tint
+
+    case darkContentOverlay
+    case lightContentOverlay
+
+    case primaryBackground
     case cellShadow
     case itemSeperator
     case contactsBorderColor
@@ -39,11 +59,29 @@ enum AppColor {
     case blueGreenAndWhite
     case popUpBackground
 
-    var color: UIColor? {
-        return UIColor(named: String(describing: self))
+    var color: UIColor {
+        guard let uiColor = UIColor(named: String(describing: self)) else {
+            assertionFailure()
+            return UIColor()
+        }
+
+        return uiColor
+    }
+
+    var cgColor: CGColor {
+        return color.cgColor
+    }
+
+    func withAlphaComponent(_ alpha: CGFloat) -> UIColor {
+        return color.withAlphaComponent(alpha)
     }
 }
 
+func color(_ color: AppColor) -> UIColor {
+    return color.color
+}
+
+// TODO: Facelift: remove all legacy colors
 struct ColorConstants {
     static let whiteColor = UIColor(named: "whiteColor")!
     static let blueColor = UIColor(named: "blueColor")!

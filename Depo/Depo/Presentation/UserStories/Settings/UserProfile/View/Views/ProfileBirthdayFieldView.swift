@@ -13,7 +13,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let dayLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        newValue.backgroundColor = AppColor.itemSeperator.color.cgColor
         
         return newValue
     }()
@@ -21,7 +21,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let monthLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        newValue.backgroundColor = AppColor.itemSeperator.color.cgColor
         
         return newValue
     }()
@@ -29,7 +29,7 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     private let yearLayer: CALayer = {
         let newValue = CALayer()
         
-        newValue.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        newValue.backgroundColor = AppColor.itemSeperator.color.cgColor
         
         return newValue
     }()
@@ -70,9 +70,9 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        dayLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
-        monthLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
-        yearLayer.backgroundColor = AppColor.itemSeperator.color?.cgColor
+        dayLayer.backgroundColor = AppColor.itemSeperator.color.cgColor
+        monthLayer.backgroundColor = AppColor.itemSeperator.color.cgColor
+        yearLayer.backgroundColor = AppColor.itemSeperator.color.cgColor
     }
     
     override var editableText: String? {

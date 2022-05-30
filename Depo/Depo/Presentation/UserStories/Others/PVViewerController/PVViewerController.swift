@@ -46,11 +46,6 @@ final class PVViewerController: BaseViewController, NibInit {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        blackNavigationBarStyle()
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageScrollView.updateZoom()
@@ -61,10 +56,6 @@ final class PVViewerController: BaseViewController, NibInit {
         return .black
     }
     
-    override func getBackgroundColor() -> UIColor {
-        return UIColor.black
-    }
-
     private lazy var fullscreenTapGesture: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(actionFullscreenTapGesture))
         gesture.require(toFail: imageScrollView.doubleTapGesture)

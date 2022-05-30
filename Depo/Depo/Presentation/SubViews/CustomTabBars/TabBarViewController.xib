@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="Billo" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomBarsContainerView" destination="cui-rs-h2J" id="D6m-Wh-uIY"/>
+                <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
+                <outlet property="mainContentView" destination="FJl-Cl-AGP" id="bHk-JG-24y"/>
+                <outlet property="musicBar" destination="XmD-Gm-tUS" id="6cF-j5-cdj"/>
+                <outlet property="musicBarHeightConstraint" destination="5y9-Sm-8zM" id="TIp-KL-gZb"/>
+                <outlet property="tabBar" destination="Pdh-iF-uTx" id="z7j-Ek-lcI"/>
+                <outlet property="view" destination="iN0-l3-epB" id="mau-IS-hKw"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJl-Cl-AGP">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0i-at-wPy" userLabel="ContentView">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cui-rs-h2J" userLabel="botttomBarsContainerView">
+                            <rect key="frame" x="32" y="805" width="350" height="49"/>
+                            <subviews>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmD-Gm-tUS" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="5y9-Sm-8zM"/>
+                                    </constraints>
+                                </view>
+                                <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="MainTabBar" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="49"/>
+                                    <items/>
+                                </tabBar>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="7Tf-er-ViB"/>
+                                <constraint firstAttribute="width" priority="749" constant="350" id="9UO-nK-X2x"/>
+                                <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="HLR-wj-uqb"/>
+                                <constraint firstAttribute="bottom" secondItem="Pdh-iF-uTx" secondAttribute="bottom" id="Jbz-On-7xz"/>
+                                <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="ZWg-Sg-NME"/>
+                                <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="hJe-vk-7hU"/>
+                                <constraint firstItem="XmD-Gm-tUS" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="t8v-Pj-oNX"/>
+                                <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="XmD-Gm-tUS" secondAttribute="bottom" id="whx-Hk-bTk"/>
+                                <constraint firstItem="XmD-Gm-tUS" firstAttribute="top" secondItem="cui-rs-h2J" secondAttribute="top" id="xIW-pp-PR8"/>
+                                <constraint firstAttribute="trailing" secondItem="XmD-Gm-tUS" secondAttribute="trailing" id="y3f-kh-9r9"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="ero-vK-F2b"/>
+                    <constraints>
+                        <constraint firstItem="i0i-at-wPy" firstAttribute="top" secondItem="FJl-Cl-AGP" secondAttribute="top" id="GsX-8P-b56"/>
+                        <constraint firstItem="i0i-at-wPy" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="KUC-Ts-NXO"/>
+                        <constraint firstAttribute="trailing" secondItem="i0i-at-wPy" secondAttribute="trailing" id="NOK-Ih-oLn"/>
+                        <constraint firstItem="cui-rs-h2J" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ero-vK-F2b" secondAttribute="leading" constant="12" id="O8D-PA-LQ4"/>
+                        <constraint firstItem="ero-vK-F2b" firstAttribute="bottom" secondItem="cui-rs-h2J" secondAttribute="bottom" constant="8" id="Q8M-dn-dyN"/>
+                        <constraint firstItem="ero-vK-F2b" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cui-rs-h2J" secondAttribute="trailing" constant="12" id="aOe-zS-xmE"/>
+                        <constraint firstAttribute="bottom" secondItem="i0i-at-wPy" secondAttribute="bottom" id="pDa-ye-bFD"/>
+                        <constraint firstItem="cui-rs-h2J" firstAttribute="centerX" secondItem="FJl-Cl-AGP" secondAttribute="centerX" id="udH-Hq-uNX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="FJl-Cl-AGP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9wa-HG-Fvr"/>
+                <constraint firstItem="FJl-Cl-AGP" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="COT-s0-gxJ"/>
+                <constraint firstItem="FJl-Cl-AGP" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="DYb-pY-0Zn"/>
+                <constraint firstItem="FJl-Cl-AGP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yvj-PI-e9N"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <point key="canvasLocation" x="46.376811594202906" y="100.44642857142857"/>
+        </view>
+    </objects>
+</document>

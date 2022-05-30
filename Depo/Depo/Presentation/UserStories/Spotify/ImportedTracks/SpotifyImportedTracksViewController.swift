@@ -62,9 +62,7 @@ final class SpotifyImportedTracksViewController: BaseViewController, NibInit {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationBarWithGradientStyle()
+        super.viewWillAppear(animated)        
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
     }
     

@@ -46,7 +46,6 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         dataSource.isFromSettings = fromSettings
         
         if fromSettings {
-            navigationBarWithGradientStyle()
             startButton.isHidden = true
         } else {
             navigationItem.hidesBackButton = true
@@ -95,10 +94,6 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         view.frame.size = size
     
         tableView.tableHeaderView = view
-    }
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
     }
 
     // MARK: buttons actions

@@ -47,6 +47,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
     }
     
     var status: ItemStatus = .active
+
+    override var preferredNavigationBarStyle: NavigationBarStyle { .black }
     
     // MARK: - Lifecycle
     
@@ -60,7 +62,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         currentDuration = player.duration
         musicName.text = player.currentMusicName
         artistName.text = player.currentArtist
-        
+
+        statusBarStyle = .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,13 +72,8 @@ class VisualMusicPlayerViewController: ViewController, VisualMusicPlayerViewInpu
         editingTabBar?.view.layoutIfNeeded()
         
         output.viewIsReady(view: bottomView, alert: alert)
-        hidenNavigationBarStyle()
     }
-    
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
-    
+        
     private func setupCarousel() {
         carouselView.type = .custom
         carouselView.delegate = self

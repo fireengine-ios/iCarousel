@@ -64,7 +64,6 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
     }
     
     override func viewDidAppear(_ animated: Bool) {

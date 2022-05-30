@@ -11,10 +11,6 @@ import UIKit
 final class HomePageViewController: BaseViewController {
 
     //MARK: IBOutlet
-    @IBOutlet weak var contentView: UIView!
-    
-    @IBOutlet weak var contentViewTopConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: Properties
@@ -30,8 +26,6 @@ final class HomePageViewController: BaseViewController {
     private var refreshControl = UIRefreshControl()
     private lazy var shareCardContentManager = ShareCardContentManager(delegate: self)
 
-    private var topView: UIView?
-    
     private var homepageIsActiveAndVisible: Bool {
         var result = false
         if let topController = navigationController?.topViewController, topController == self {
@@ -41,23 +35,32 @@ final class HomePageViewController: BaseViewController {
     }
     
     private var isGiftButtonEnabled = false
-    
+
     //MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         needToShowTabBar = true
+        navigationBarHidden = true
         
         debugLog("HomePage viewDidLoad")
         homePageDataSource.configurateWith(collectionView: collectionView, viewController: self, delegate: self)
         debugLog("HomePage DataSource setuped")
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         
         CardsManager.default.addViewForNotification(view: homePageDataSource)
         
         configurateRefreshControl()
         
         showSpinner()
-        
+
+        headerContainingViewController?.setHeaderLeftItems([
+            NavigationHeaderButton(navigationBarImage: .headerActionProfile, target: self, action: #selector(showSettings))
+        ])
+
+        headerContainingViewController?.setHeaderRightItems([
+            NavigationHeaderButton(navigationBarImage: .headerActionSearch, target: self, action: #selector(showSearch)),
+            NavigationHeaderButton(navigationBarImage: .headerActionPlus)
+        ])
+
         output.viewIsReady()
     }
     
@@ -69,9 +72,7 @@ final class HomePageViewController: BaseViewController {
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
-        
-        homePageNavigationBarStyle()
-        
+
         output.viewWillAppear()
     }
     
@@ -85,10 +86,7 @@ final class HomePageViewController: BaseViewController {
         CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
 
         if homepageIsActiveAndVisible {
-            homePageNavigationBarStyle()
             configureNavBarActions()
-        } else {
-            navigationBarWithGradientStyle()
         }
         
         if isNeedShowSpotlight {
@@ -127,11 +125,12 @@ final class HomePageViewController: BaseViewController {
             self?.updateNavigationItemsState(state: false)
             self?.output.showSearch(output: self)
         })
+
         let setting = NavBarWithAction(navItem: NavigationBarList().settings, action: { [weak self] _ in
             self?.updateNavigationItemsState(state: false)
             self?.output.showSettings()
         })
-        navBarConfigurator.configure(right: [setting, search], left: [])
+        navBarConfigurator.configure(right: [search, setting], left: [])
         if isGiftButtonEnabled {
             let gift = NavBarWithAction(navItem: NavigationBarList().gift, action: { [weak self] _ in
                 self?.output.giftButtonPressed()
@@ -139,6 +138,7 @@ final class HomePageViewController: BaseViewController {
             navBarConfigurator.append(rightButton: gift, leftButton: nil)
         }
         
+        navigationItem.leftBarButtonItems = navBarConfigurator.leftItems
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
@@ -161,7 +161,21 @@ final class HomePageViewController: BaseViewController {
             spotlight.dismiss(animated: true, completion: nil)
         }
     }
-    
+
+    @objc private func showSettings() {
+        output.showSettings()
+    }
+
+    @objc private func showSearch() {
+        updateNavigationItemsState(state: false)
+        output.showSearch(output: self)
+    }
+}
+
+extension HomePageViewController: HeaderContainingViewControllerChild {
+    var scrollViewForHeaderTracking: UIScrollView? {
+        return collectionView
+    }
 }
 
 // MARK: - HomeCollectionViewDataSourceDelegate

@@ -159,11 +159,7 @@ class RouterVC: NSObject {
         }
     }
     
-    func pushViewController(viewController: UIViewController, animated: Bool = true) {
-        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
+    func pushViewController(viewController: UIViewController, animated: Bool = true) {        
         if let navController = topNavigationController {
             navController.pushViewController(viewController, animated: animated)
         } else {
@@ -171,46 +167,19 @@ class RouterVC: NSObject {
         }
     
         viewController.navigationController?.isNavigationBarHidden = false
-        
-        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
     }
     
     func pushViewControllerAndRemoveCurrentOnCompletion(_ viewController: UIViewController) {
-        if let viewController = viewController as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
         viewController.navigationController?.isNavigationBarHidden = false
-        
-        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
-        
     }
     
     func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
-        if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
-            NotificationCenter.default.post(name: .hideTabBar, object: nil)
-        }
-        
         var viewControllersStack = navigationController?.viewControllers ?? []
         viewControllersStack.append(contentsOf: viewControllers)
 
         navigationController?.setViewControllers(viewControllersStack, animated: animated)
         viewControllers.last?.navigationController?.setNavigationBarHidden(false, animated: false)
-
-        if let tabBarViewController = tabBarController, let baseView = viewControllers.last as? BaseViewController {
-            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
-        }
-    }
-    
-    func setBackgroundColor(color: UIColor) {
-        if let tabBarViewController = tabBarController {
-            tabBarViewController.setBGColor(color: color)
-        }
     }
     
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
@@ -547,13 +516,12 @@ class RouterVC: NSObject {
     // MARK: TabBar
     
     var tabBarScreen: UIViewController? {
-        let controller = TabBarViewController(nibName: "TabBarView", bundle: nil)
-        return controller
+        return TabBarViewController()
     }
     
     
     // MARK: Home Page
-    var homePageScreen: UIViewController? {
+    var homePageScreen: HeaderContainingViewController.ChildViewController {
         if (!SingletonStorage.shared.isAppraterInited) {
             AppRater.sharedInstance().daysUntilPrompt = 5
             AppRater.sharedInstance().launchesUntilPrompt = 10
@@ -564,17 +532,13 @@ class RouterVC: NSObject {
             SingletonStorage.shared.isAppraterInited = true
         }
         
-        let controller = HomePageModuleInitializer.initializeViewController(with: "HomePage")
-        return controller
+        return HomePageModuleInitializer.initializeViewController(with: "HomePage")
     }
-    
-    func segmentedMedia() -> PhotoVideoSegmentedController {
-        let photos = PhotoVideoController.initPhotoFromNib()
-        let videos = PhotoVideoController.initVideoFromNib()
-        
-        return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
+
+    func gallery() -> PhotoVideoController {
+        return PhotoVideoController.initFromNib()
     }
-    
+
     // MARK: Music
     
     var musics: UIViewController? {
@@ -611,10 +575,10 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var segmentedFiles: UIViewController? {
+    var segmentedFiles: HeaderContainingViewController.ChildViewController {
         guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
-            return SegmentedController()
+            return AllFilesSegmentedController()
         }
         let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
@@ -1378,6 +1342,8 @@ class RouterVC: NSObject {
                 
             case .gallery:
                 tabBarVC.showPhotoScreen()
+            case .discover:
+                break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)

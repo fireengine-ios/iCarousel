@@ -51,7 +51,6 @@ final class OverlayStickerViewController: UIViewController {
         view.backgroundColor = .black
         stickersContainerView.backgroundColor = ColorConstants.photoEditBackgroundColor
         safeAreaBottomView.backgroundColor = ColorConstants.photoEditBackgroundColor
-        statusBarColor = .black
         
         funNavBar.state = .initial
         funNavBar.delegate = self

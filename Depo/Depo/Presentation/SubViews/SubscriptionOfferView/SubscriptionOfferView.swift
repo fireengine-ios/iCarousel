@@ -160,13 +160,13 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         let priceAttributes: [NSAttributedString.Key: AnyObject] = [
             .font: UIFont.TurkcellSaturaBolFont(size: 16),
-            .foregroundColor: AppColor.marineTwoAndWhite.color ?? ColorConstants.marineTwo,
+            .foregroundColor: AppColor.marineTwoAndWhite.color,
             .paragraphStyle: paragraphStyle
         ]
         
         let currencyAttributes: [NSAttributedString.Key: AnyObject] = [
             .font: UIFont.TurkcellSaturaFont(size: 16),
-            .foregroundColor: AppColor.marineTwoAndWhite.color ?? ColorConstants.marineTwo,
+            .foregroundColor: AppColor.marineTwoAndWhite.color,
             .paragraphStyle: paragraphStyle
         ]
         
@@ -191,7 +191,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         if plan.addonType == .storageOnly {
             font = UIFont.TurkcellSaturaFont(size: 14)
-            textColor = AppColor.marineTwoAndWhite.color ?? ColorConstants.marineTwo
+            textColor = AppColor.marineTwoAndWhite.color
         } else {
             font = UIFont.TurkcellSaturaBolFont(size: 14)
             textColor = ColorConstants.cardBorderOrange
@@ -253,7 +253,7 @@ final class SubscriptionOfferView: UIView, NibInit {
             let color: UIColor
             switch style {
             case .full:
-                color = AppColor.marineTwoAndTealish.color ?? ColorConstants.marineTwo
+                color = AppColor.marineTwoAndTealish.color
                 purchaseButton.setTitle(TextConstants.purchase, for: UIControl.State())
             case .short:
                 let titleColor = plan.isRecommended ? ColorConstants.whiteColor : AppColor.marineTwoAndWhite.color
@@ -261,7 +261,7 @@ final class SubscriptionOfferView: UIView, NibInit {
                 let borderColor = isRecommended ? ColorConstants.marineTwo : ColorConstants.darkTintGray
                 purchaseButton.layer.borderColor = borderColor.cgColor
                 purchaseButton.layer.borderWidth = 2
-                color = isRecommended ? (AppColor.marineTwoAndTealish.color ?? ColorConstants.marineTwo) : .clear
+                color = isRecommended ? AppColor.marineTwoAndTealish.color : .clear
                 purchaseButton.setTitle(TextConstants.upgrade, for: UIControl.State())
             }
             purchaseButton.setBackgroundColor(color, for: UIControl().state)

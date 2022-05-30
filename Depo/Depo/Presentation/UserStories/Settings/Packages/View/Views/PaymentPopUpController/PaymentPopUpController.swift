@@ -41,7 +41,7 @@ final class PaymentPopUpController: UIViewController {
                 newValue.addArrangedSubview(paymentTypeView)
             }
             
-            newValue.addSubviewWith(backgroundColor: AppColor.secondaryBackground.color ?? ColorConstants.whiteColor,
+            newValue.addSubviewWith(backgroundColor: AppColor.secondaryBackground.color,
                                     cornerRadius: cornerRadius)
             
             /// to see background view with cornerRadius

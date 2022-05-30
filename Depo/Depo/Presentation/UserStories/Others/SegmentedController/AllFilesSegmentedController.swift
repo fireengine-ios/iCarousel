@@ -6,14 +6,19 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
-final class AllFilesSegmentedController: SegmentedController {
+final class AllFilesSegmentedController: SegmentedController, HeaderContainingViewControllerChild {
     
     override static func initWithControllers(_ controllers: [UIViewController], alignment: Alignment) -> AllFilesSegmentedController {
         let controller = AllFilesSegmentedController.initFromNib()
         controller.setup(with: controllers, alignment: alignment)
         return controller
     }
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationBarHidden = true
+    }
+
     override func canSwitchSegment(from oldIndex: Int, to newIndex: Int) -> Bool {
         if viewControllers[newIndex] is PrivateShareSharedFilesViewController {
             openSharedFiles()

@@ -144,18 +144,10 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     }()
     
     private lazy var editButton = UIBarButtonItem(title: TextConstants.userProfileEditButton,
-                                                  font: UIFont.TurkcellSaturaRegFont(size: 19),
-                                                  tintColor: .white,
-                                                  accessibilityLabel: TextConstants.userProfileEditButton,
-                                                  style: .plain,
                                                   target: self,
                                                   selector: #selector(onEditButtonAction))
-    
+
     private lazy var readyButton = UIBarButtonItem(title: TextConstants.userProfileDoneButton,
-                                                   font: UIFont.TurkcellSaturaRegFont(size: 19),
-                                                   tintColor: .white,
-                                                   accessibilityLabel: TextConstants.userProfileDoneButton,
-                                                   style: .plain,
                                                    target: self,
                                                    selector: #selector(onReadyButtonAction))
     
@@ -197,7 +189,6 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        navigationBarWithGradientStyle()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

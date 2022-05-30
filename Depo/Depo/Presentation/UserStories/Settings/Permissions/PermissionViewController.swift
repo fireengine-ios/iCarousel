@@ -11,7 +11,7 @@ protocol MobilePaymentPermissionProtocol: AnyObject {
     func backTapped(url: String)
 }
 
-final class PermissionViewController: ViewController, ControlTabBarProtocol {
+final class PermissionViewController: ViewController {
     private let accountService = AccountService()
     
     private lazy var stackView: UIStackView = {
@@ -58,13 +58,7 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         setupLayout()
         checkPermissionState()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
-        hideTabBar()
-    }
-    
+        
     private func setupScreen() {
         view.clipsToBounds = true
         view.backgroundColor = AppColor.primaryBackground.color

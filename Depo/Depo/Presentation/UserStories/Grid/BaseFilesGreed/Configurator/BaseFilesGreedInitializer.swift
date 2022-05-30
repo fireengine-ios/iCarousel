@@ -143,7 +143,6 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.needToShowTabBar = true
         if status == .active {
             viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
         }

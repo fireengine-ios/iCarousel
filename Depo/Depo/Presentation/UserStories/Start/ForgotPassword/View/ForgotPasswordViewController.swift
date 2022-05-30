@@ -26,9 +26,6 @@ final class ForgotPasswordViewController: ViewController {
     fileprivate let keyboard = Typist.shared
 
     // MARK: Life cycle
-    override var preferredNavigationBarStyle: NavigationBarStyle {
-        return .clear
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +43,6 @@ final class ForgotPasswordViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
     }
 
     override func viewDidAppear(_ animated: Bool) {

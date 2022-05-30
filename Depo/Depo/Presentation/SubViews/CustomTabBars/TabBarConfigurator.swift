@@ -6,19 +6,22 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 enum TabScreenIndex: Int {
     case home = 0
     case gallery = 1
-    case contactsSync = 3
-    case documents = 4
+    case contactsSync = 2
+    case documents = 3
+    case discover = 4
 }
 
 enum TabBarItem: CaseIterable {
-    case home
     case gallery
-    case plus
+    case home
     case contacts
     case allFiles
+    case discover
     
     var title: String {
         switch self {
@@ -26,27 +29,42 @@ enum TabBarItem: CaseIterable {
             return TextConstants.tabBarItemHomeLabel
         case .gallery:
             return TextConstants.tabBarItemGalleryLabel
-        case .plus:
-            return ""
         case .contacts:
             return TextConstants.tabBarItemContactsLabel
         case .allFiles:
             return TextConstants.tabBarItemAllFilesLabel
+        case .discover:
+            return TextConstants.tabBarItemAllFilesLabel
         }
     }
     
-    var icon: UIImage? {
+    var image: UIImage? {
         switch self {
         case .home:
-            return UIImage(named: "outlineHome")
+            return TabBarImage.forYou.image
         case .gallery:
-            return UIImage(named: "outlinePhotosVideos")
-        case .plus:
-            return UIImage(named: "")
+            return TabBarImage.gallery.image
         case .contacts:
-            return UIImage(named: "outlineContacts")
+            return TabBarImage.contacts.image
         case .allFiles:
-            return UIImage(named: "outlineDocs")
+            return TabBarImage.files.image
+        case .discover:
+            return TabBarImage.discover.image
+        }
+    }
+
+    var selectedImage: UIImage? {
+        switch self {
+        case .home:
+            return TabBarImage.forYouSelected.image
+        case .gallery:
+            return TabBarImage.gallerySelected.image
+        case .contacts:
+            return TabBarImage.contactsSelected.image
+        case .allFiles:
+            return TabBarImage.filesSelected.image
+        case .discover:
+            return TabBarImage.discoverSelected.image
         }
     }
     
@@ -56,12 +74,12 @@ enum TabBarItem: CaseIterable {
             return TextConstants.accessibilityHome
         case .gallery:
             return TextConstants.accessibilityPhotosVideos
-        case .plus:
-            return ""
         case .contacts:
             return TextConstants.periodicContactsSync
         case .allFiles:
             return TextConstants.homeButtonAllFiles
+        case .discover:
+            return TextConstants.tabBarItemAllFilesLabel
         }
     }
 }
@@ -74,11 +92,21 @@ final class TabBarConfigurator {
             return []
         }
         syncContactsVC.setTabBar(isVisible: true)
+        syncContactsVC.navigationBarHidden = true
         
-        let list = [router.homePageScreen,
-                    router.segmentedMedia(),
-                    syncContactsVC,
-                    router.segmentedFiles]
-        return list.compactMap { NavigationController(rootViewController: $0!) }
+        let list: [HeaderContainingViewController.ChildViewController] = [
+            router.gallery(),
+            router.homePageScreen,
+            syncContactsVC,
+            router.segmentedFiles,
+            EmptyViewController()
+        ]
+        return list.map {
+            let headerContaining = HeaderContainingViewController(child: $0)
+            return NavigationController(rootViewController: headerContaining)
+        }
     }
 }
+
+// TODO: Facelift. remove when implementing discover page
+private class EmptyViewController: UIViewController, HeaderContainingViewControllerChild {}

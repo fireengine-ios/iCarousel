@@ -11,31 +11,19 @@ import MBProgressHUD
 
 extension UIView {
     var safeTopAnchor: NSLayoutYAxisAnchor {
-      if #available(iOS 13.0, *) {
-        return self.safeAreaLayoutGuide.topAnchor
-      }
-      return self.topAnchor
+        return safeAreaLayoutGuide.topAnchor
     }
 
     var safeLeadingAnchor: NSLayoutXAxisAnchor {
-      if #available(iOS 13.0, *){
-        return self.safeAreaLayoutGuide.leadingAnchor
-      }
-      return self.leadingAnchor
+      return safeAreaLayoutGuide.leadingAnchor
     }
 
     var safeTrailingAnchor: NSLayoutXAxisAnchor {
-      if #available(iOS 13.0, *){
-        return self.safeAreaLayoutGuide.trailingAnchor
-      }
-      return self.trailingAnchor
+        return safeAreaLayoutGuide.trailingAnchor
     }
 
     var safeBottomAnchor: NSLayoutYAxisAnchor {
-      if #available(iOS 13.0, *) {
-        return self.safeAreaLayoutGuide.bottomAnchor
-      }
-      return self.bottomAnchor
+        return safeAreaLayoutGuide.bottomAnchor
     }
 
     var frameOnWindow: CGRect {

@@ -31,7 +31,6 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
     }
     
     override func configurateNavigationBar() {
-        navigationBarWithGradientStyle()
         configurateFreeAppSpaceActions {[weak self] in
             guard let self_ = self else {
                 return

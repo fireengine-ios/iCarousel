@@ -171,7 +171,6 @@ final class PushNotificationService {
         switch action {
         case .main, .home: openMain()
         case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
-        case .floatingMenu: openFloatingMenu()
         case .packages, .widgetQuota: openPackages()
         case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: openPhotos()
         case .videos: openVideos()
@@ -328,6 +327,8 @@ final class PushNotificationService {
                 
             case .gallery:
                 tabBarVC.showPhotoScreen()
+            case .discover:
+                break
             }
         } else {
             tabBarVC.popToRootCurrentNavigationController(animated: true)
@@ -352,14 +353,6 @@ private extension PushNotificationService {
 
     func openSyncSettings() {
         pushTo(router.autoUpload)
-    }
-
-    func openFloatingMenu() {
-        guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
-            return
-        }
-
-        tabBarVC.showRainbowIfNeed()
     }
 
     func openPackages() {

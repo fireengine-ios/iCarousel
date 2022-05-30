@@ -35,7 +35,6 @@ final class FaceImageAddNameViewController: BaseFilesGreedChildrenViewController
     override func stopSelection() { }
     
     override func configurateNavigationBar() {
-        navigationBarWithGradientStyle()
         let done = NavBarWithAction(navItem: NavigationBarList().done, action: { [weak self] _ in
             if let output = self?.output as? FaceImageAddNameViewOutput,
                 let text = self?.searchTextField.text {

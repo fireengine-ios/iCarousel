@@ -42,9 +42,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     var searchTextField: UITextField?
     var navBarConfigurator = NavigationBarConfigurator()
     var editingTabBar: BottomSelectionTabBarViewController?
-    
-    private var goBack = false
-    
+
     // MARK: - Life Cicle
     
     override func viewDidLoad() {
@@ -65,15 +63,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                
-        defaultNavBarStyle()
 
-        statusBarColor = AppColor.primaryBackground.color
-        
-        if let topBarVc = UIApplication.topController() as? TabBarViewController {
-            topBarVc.statusBarStyle = .default
-        }
-        
         editingTabBar?.view.layoutIfNeeded()
         
         let allVisibleCells = collectionView.indexPathsForVisibleItems
@@ -83,38 +73,18 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             })
         }
         navigationItem.hidesBackButton = true
-        
-        let navBar = navigationController?.navigationBar
-        navBar?.barTintColor = UIColor.white
-        navBar?.tintColor = ColorConstants.darkBlueColor
-        navBar?.setBackgroundImage(UIImage(color: AppColor.primaryBackground.color ?? .white), for: .default)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if Device.operationSystemVersionLessThen(13) {
-            defaultNavBarStyle()
-            statusBarColor = .white
-        }
-        
-        setNeedsStatusBarAppearanceUpdate()
         navigationController?.delegate = nil
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         searchBar.resignFirstResponder()
 
-        statusBarColor = .clear
-        
-        if goBack {
-            if let topBarVc = UIApplication.topController() as? TabBarViewController {
-                topBarVc.statusBarStyle = .lightContent
-            }
-        }
-        
         output.viewWillDisappear()
     }
     
@@ -369,7 +339,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     func dismissController(animated: Bool) {
-        goBack = true
         navigationController?.delegate = self
         navigationController?.popViewController(animated: animated)
     }
@@ -385,7 +354,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     func tabBarPlusMenu(isShown: Bool) {
         searchBar.isUserInteractionEnabled = !isShown
         searchBar.alpha = isShown ? 0.5 : 1
-        statusBarColor = isShown ? .clear : .white
     }
     
     func setVisibleTabBar(_ isVisible: Bool) {

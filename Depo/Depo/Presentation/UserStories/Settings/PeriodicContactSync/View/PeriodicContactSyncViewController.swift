@@ -53,7 +53,6 @@ final class PeriodicContactSyncViewController: ViewController {
     
     private func configureNavBar() {
         setTitle(withString: TextConstants.backTitle)
-        navigationBarWithGradientStyle()
     }
 
 }

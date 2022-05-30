@@ -16,7 +16,6 @@ class StoriesInitializer: NSObject {
     
     class func initializeStoriesController(with nibName: String, moduleOutput: LBAlbumLikePreviewSliderModuleInput?) -> BaseFilesGreedChildrenViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.createAStory])
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .moveToTrash],

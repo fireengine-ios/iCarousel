@@ -39,7 +39,6 @@ final class FullscreenTextController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationBarWithGradientStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     

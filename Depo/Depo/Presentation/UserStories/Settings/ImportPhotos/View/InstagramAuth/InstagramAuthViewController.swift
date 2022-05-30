@@ -54,7 +54,6 @@ class InstagramAuthViewController: ViewController {
         
         removeCache()
         
-        navigationBarWithGradientStyle()
         
         setTitle(withString: "Instagram login")
         webView.backgroundColor = UIColor.white

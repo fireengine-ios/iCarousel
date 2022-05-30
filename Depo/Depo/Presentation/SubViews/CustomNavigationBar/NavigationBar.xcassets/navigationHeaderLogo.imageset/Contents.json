@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "navigationHeaderLogo.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

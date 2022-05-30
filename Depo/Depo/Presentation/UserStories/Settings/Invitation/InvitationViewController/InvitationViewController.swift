@@ -37,7 +37,6 @@ class InvitationViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.InvitationScreen())
         self.analyticsService.logScreen(screen: .invitation)
     }

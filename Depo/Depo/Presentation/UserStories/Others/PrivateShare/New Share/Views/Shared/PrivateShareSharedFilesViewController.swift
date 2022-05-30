@@ -112,7 +112,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Private
     
     private func setupBars() {
-        setDefaultTabBarState()
         setupNavBar()
         setupCollectionViewBar()
         bottomBarManager.setup()
@@ -124,10 +123,6 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupPlusButton() {
         floatingButtonsArray = shareType.floatingButtonTypes
-    }
-    
-    private func setDefaultTabBarState() {
-        needToShowTabBar = true
     }
     
     private func setupCollectionViewBar() {
@@ -152,8 +147,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         let permittedTypes: [OperationType] = shareType.rootType == .byMe ? [.upload, .download] : [.sharedWithMeUpload, .download]
         cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
-        
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
+
         collectionView.addSubview(cardsContainer)
         
         cardsContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -262,8 +256,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             if self.shareType.isSelectionAllowed {
                 self.navBarManager.threeDotsButton.isEnabled = !(isSelecting || self.collectionManager.isCollectionEmpty)
             }
-            self.needToShowTabBar = !isSelecting
-            self.showTabBarIfNeeded()
             if isSelecting {
                 let selectedItems = self.collectionManager.selectedItems()
                 self.show(selectedItemsCount: selectedItems.count)
@@ -287,7 +279,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             let isSelectionAllowed = self.shareType.isSelectionAllowed
             
             if editingMode, isSelectionAllowed {
-                self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
                 if !isSelectionAllowed {
@@ -297,7 +288,6 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
                     let isThreeDotsEnabled = self.navBarManager.threeDotsButton.isEnabled
                     self.navBarManager.setDefaultMode(title: self.title ?? "", isThreeDotsEnabled: isThreeDotsEnabled)
                 }
-                self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
             }
         }
     }
@@ -421,7 +411,7 @@ extension PrivateShareSharedFilesViewController: CardsContainerViewDelegate {
             }
 
             self.collectionView.superview?.layoutIfNeeded()
-            self.collectionView.contentInset = UIEdgeInsets(top: h, left: 0, bottom: 25, right: 0)
+            self.collectionView.contentInset.top = h
         }, completion: { [weak self] _ in
             guard let self = self else {
                 return

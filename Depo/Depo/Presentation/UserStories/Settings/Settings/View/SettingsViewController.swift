@@ -69,8 +69,7 @@ final class SettingsViewController: BaseViewController {
             isFromPhotoPicker = false
             return
         }
-        
-        navigationBarWithGradientStyle()
+
         if Device.isIpad {
             splitViewController?.navigationController?.viewControllers.last?.title = TextConstants.settings
         } else {
@@ -79,12 +78,7 @@ final class SettingsViewController: BaseViewController {
         output.viewWillBecomeActive()
         userInfoSubView.reloadUserInfo()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        navigationBarWithGradientStyle()
-    }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

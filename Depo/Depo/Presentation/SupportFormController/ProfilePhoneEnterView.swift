@@ -59,7 +59,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.rightView = imageView
             newValue.rightViewMode = .always
             
-            newValue.underlineColor = AppColor.itemSeperator.color ?? ColorConstants.profileGrayColor
+            newValue.underlineColor = AppColor.itemSeperator.color
             
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
@@ -112,7 +112,7 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false
             newValue.keyboardType = .numberPad
-            newValue.underlineColor = AppColor.itemSeperator.color ?? ColorConstants.profileGrayColor
+            newValue.underlineColor = AppColor.itemSeperator.color
             
             newValue.addToolBarWithButton(title: TextConstants.nextTitle,
                                           target: self,

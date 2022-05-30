@@ -89,7 +89,6 @@ final class SpotifyPlaylistsViewController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationBarWithGradientStyle()
         analyticsService.logScreen(screen: .spotifyImportPlaylistSelection)
     }
     

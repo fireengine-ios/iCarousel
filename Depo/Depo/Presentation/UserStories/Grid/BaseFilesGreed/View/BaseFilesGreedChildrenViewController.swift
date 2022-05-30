@@ -12,24 +12,15 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homePageNavigationBarStyle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if parent is SegmentedController {
-            homePageNavigationBarStyle()
-            
-        } else {
-            navigationBarWithGradientStyle()
-            
-        }
-        
+
         if mainTitle != "" {
             subTitle = output.getSortTypeString()
         }
-        
+
         setTitle(withString: mainTitle, andSubTitle: subTitle)
     }
 
@@ -42,7 +33,6 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         if status.isContained(in: [.hidden, .trashed]) {
             navigationItem.rightBarButtonItem = nil
         }
-        navigationBarWithGradientStyle()
     }
     
     override func stopSelection() {
@@ -55,21 +45,11 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
             subTitle = output.getSortTypeString()
         }
         setTitle(withString: mainTitle, andSubTitle: subTitle)
-        
-        if let _ = parent as? SegmentedController {
-            homePageNavigationBarStyle()
-        } else {
-            navigationBarWithGradientStyle()
-        }
-        
+
         configureNavBarActions(isSelecting: false)
     }
 
     override func configurateNavigationBar() {
         configureNavBarActions()
-    }
-    
-    override func isNeedToShowTabBar() -> Bool {
-        return needToShowTabBar
     }
 }

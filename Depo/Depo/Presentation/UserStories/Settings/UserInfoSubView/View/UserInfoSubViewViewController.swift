@@ -115,13 +115,7 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
         super.viewDidLoad()
         accountDetailsButton.accessibilityLabel = accountDetailsLabel.text
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationBarWithGradientStyle()
-    }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
