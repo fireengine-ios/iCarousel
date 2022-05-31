@@ -982,9 +982,6 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
 
     private func updateYearsView(with sections: [NSFetchedResultsSectionInfo]) {
         let dates = getDates(of: sections)
-        if dates.count != sections.count {
-            assertionFailure()
-        }
 
         let collectionViewVisibleHeight = collectionView.frame.inset(by: collectionView.adjustedContentInset).height
 
