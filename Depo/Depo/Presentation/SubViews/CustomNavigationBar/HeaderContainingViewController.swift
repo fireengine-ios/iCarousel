@@ -73,6 +73,7 @@ final class HeaderContainingViewController: BaseViewController {
         }
 
         setupHeaderView()
+        updateHeaderMask()
         setupStatusBarBackgroundView()
         updateStatusBarBackgroundViewStyle()
         setupOriginalSafeAreaLayoutGuide()
@@ -89,7 +90,7 @@ final class HeaderContainingViewController: BaseViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateHeaderMask()
+        headerView.mask?.frame.size.width = headerView.bounds.width
     }
 
     private func setupHeaderView() {
