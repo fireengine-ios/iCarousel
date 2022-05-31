@@ -300,14 +300,14 @@ extension AnalyticsService: AnalyticsGA {
     func trackProductPurchasedInnerGA(offer: PackageModelResponse, packageIndex: Int) {
         let analyticasItemList = "Turkcell Package"
         var itemID = ""
-        var price = ""
+        var price = NSNumber(value: 0)
         
         ///only turkcell offer may has missing currency
         let currency = offer.currency ?? "TRY"
         
         if let offerIDUnwraped = offer.slcmOfferId, let unwrapedPrice = offer.price {
             itemID = "\(offerIDUnwraped)"
-            price = "\(unwrapedPrice)"
+            price = NSNumber(value: unwrapedPrice)
         }
         
         let product = AnalyticsPackageProductObject(itemName: offer.name ?? "",
@@ -339,7 +339,7 @@ extension AnalyticsService: AnalyticsGA {
     func trackProductInAppPurchaseGA(product: SKProduct, packageIndex: Int) {
         let analyticasItemList = "In App Package"
         let itemID = product.productIdentifier
-        let price = product.localizedPrice
+        let price = product.price
         let currency = product.priceLocale.currencyCode ?? ""
         
         let product =  AnalyticsPackageProductObject(itemName: product.localizedTitle,
@@ -505,7 +505,7 @@ extension AnalyticsService: AnalyticsGA {
         
         let product =  AnalyticsPackageProductObject(itemName: package.name,
                                                      itemID: itemID,
-                                                     price: package.price,
+                                                     price: NSNumber(value: package.amount),
                                                      itemBrand: TextConstants.NotLocalized.appNameGA,
                                                      itemCategory: "Storage",
                                                      itemVariant: "",
