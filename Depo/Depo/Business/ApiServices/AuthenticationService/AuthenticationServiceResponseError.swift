@@ -23,6 +23,7 @@ enum LoginResponseError: Error {
     case emptyPhone
     case emptyCaptcha
     case emptyEmail
+    case emailDomainNotAllowed
     
     init(with errorResponse: ErrorResponse) {
         if errorResponse.description.contains("LDAP account is locked") {
@@ -51,6 +52,9 @@ enum LoginResponseError: Error {
         }
         else if errorResponse.description.contains("Internet") {
             self = .networkError
+        }
+        else if errorResponse.description.contains("Email domain is not allowed") {
+            self = .emailDomainNotAllowed
         }
         else if errorResponse.description.contains(HeaderConstant.emptyMSISDN) {
             self = .emptyPhone
@@ -93,6 +97,8 @@ enum LoginResponseError: Error {
             return GADementionValues.loginError.serverError.text
         case .emptyCaptcha:
             return GADementionValues.loginError.captchaIsEmpty.text
+        case .emailDomainNotAllowed:
+            return ""
         }
     }
 }
@@ -152,6 +158,7 @@ final class SignupResponseError: Map {
         case incorrectCaptcha
         case captchaRequired
         case unauthorized
+        case emailDomainNotAllowed
 
         // local
         case invalidMailOtp
@@ -179,6 +186,8 @@ final class SignupResponseError: Map {
                 self = .captchaRequired
             case "PHONE_NUMBER_IS_INVALID":
                 self = .invalidPhoneNumber
+            case "EMAIL_DOMAIN_IS_NOT_ALLOWED":
+                self = .emailDomainNotAllowed
             default:
                 return nil
             }
@@ -316,6 +325,8 @@ extension SignupResponseError: LocalizedError {
             return TextConstants.invalidCaptcha
         case .captchaRequired:
             return TextConstants.captchaRequired
+        case .emailDomainNotAllowed:
+            return localized(.emailDomainNotAllowed)
         case .unauthorized:
             return TextConstants.signUpErrorUnauthorized
         default:

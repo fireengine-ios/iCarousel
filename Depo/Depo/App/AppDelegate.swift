@@ -18,6 +18,9 @@ import KeychainSwift
 import WidgetKit
 import CoreSpotlight
 import FirebaseDynamicLinks
+import GoogleSignIn
+import AGConnectCore
+import AGConnectAppLinking
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -126,6 +129,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        startListeninAppLink()
+        checkNewAppVersion()
+        
         return true
     }
     
@@ -180,7 +186,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         
         print("I have received a URL through a custom sceme! \(url.absoluteString)")
+
+        if AGCAppLinking.instance().openDeepLinkURL(url) {
+            storageVars.isAppFirstLaunchForPublicSharedItems = true
+            return true
+        }
+
         if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+            storageVars.isAppFirstLaunchForPublicSharedItems = true
             self.handleIncomingDynamicLink(dynamicLink)
             return true
         }
@@ -200,6 +213,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if spotifyService.handleRedirectUrl(url: url) {
             return true
         }
+        
+        if GIDSignIn.sharedInstance.handle(url) {
+            return true
+        }
+        
         return false
     }
     
@@ -345,6 +363,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    private func startListeninAppLink() {
+        AGCInstance.startUp()
+        
+        AGCAppLinking.instance().handle { (link, error) in
+            if let deepLink = link {
+                self.handleIncomingApplink(deepLink)
+            }
+        }
+    }
+    
+    private func checkNewAppVersion() {
+        ///LB-1136
+        if AuthoritySingleton.shared.isNewAppVersion {
+            if let urlString = UIPasteboard.general.string,
+               let url = URL(string: urlString.replacingOccurrences(of: "/#!", with: "")),
+               let publicToken = url["publicToken"] {
+                if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.saveToMyLifebox.rawValue,
+                                                                 options: [DeepLinkParameter.publicToken.rawValue: publicToken]) {
+                    debugLog("Should open Action Screen")
+                    PushNotificationService.shared.openActionScreen()
+                }
+                debugLog("DynamicLink app update url readed: \(urlString)")
+            }
+        }
+    }
+    
+    private func handleIncomingApplink(_ appLink: AGCResolvedLink) {
+        if let url = URL(string: appLink.deepLink) {
+            if let publicToken = url.lastPathComponent.split(separator: "&").first {
+                if PushNotificationService.shared.assignDeepLink(innerLink: PushNotificationAction.saveToMyLifebox.rawValue,
+                                                                 options: [DeepLinkParameter.publicToken.rawValue: publicToken]) {
+                    debugLog("Should open Action Screen")
+                    PushNotificationService.shared.openActionScreen()
+                }
+                debugLog("Your incoming link parameter is \(url.absoluteString)")
+            }
+        } else {
+            debugLog("Applink object has no deeplink")
+        }
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillResignActive")
         
@@ -482,9 +541,15 @@ extension AppDelegate {
         }
         
         if let incomingUrl = userActivity.webpageURL {
+            if AGCAppLinking.instance().continueUserActivity(userActivity) {
+                storageVars.isAppFirstLaunchForPublicSharedItems = false
+                return true
+            }
+
             let linkHandled = DynamicLinks.dynamicLinks().handleUniversalLink(incomingUrl) { (dynamicLink, error) in
                 guard error == nil else { return }
                 if let dynamicLink = dynamicLink {
+                    self.storageVars.isAppFirstLaunchForPublicSharedItems = false
                     self.handleIncomingDynamicLink(dynamicLink)
                 }
             }

@@ -1,4 +1,7 @@
 import UIKit
+import GoogleSignIn
+import FirebaseCore
+import AuthenticationServices
 
 final class UserProfileViewController: ViewController, KeyboardHandler {
     
@@ -160,6 +163,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                                                    selector: #selector(onReadyButtonAction))
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var appleGoogleService = AppleGoogleLoginService()
     private var name: String?
     private var surname: String?
     private var email: String?
@@ -170,6 +174,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var address: String?
     private var isTurkcellUser = false
     private var isShortPhoneNumber = false
+    private var updatePasswordMethod: UpdatePasswordMethods?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -396,6 +401,38 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         return changes.joined(separator: "|")
     }
     
+    private func getGoogleTokenIfNeeded(handler: @escaping (AppleGoogleUser?) -> Void) {
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if user?.profile?.email == SingletonStorage.shared.accountInfo?.email,
+               let email = user?.profile?.email,
+               let idToken = user?.authentication.idToken {
+                handler(AppleGoogleUser(idToken: idToken, email: email, type: .google))
+            } else {
+                guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+                let config = GIDConfiguration(clientID: clientID, serverClientID: Credentials.googleServerClientID)
+                
+                GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+                    if error != nil {
+                        handler(nil)
+                        return
+                    }
+                    
+                    if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
+                        handler(AppleGoogleUser(idToken: idToken, email: email, type: .google))
+                    }
+                }
+            }
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    private func getAppleToken() {
+        let controller = appleGoogleService.getAppleAuthorizationController()
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+    }
+    
 }
 
 extension UserProfileViewController: ProfileEmailFieldViewDelegate {
@@ -580,5 +617,100 @@ extension UserProfileViewController: UserProfileViewInput {
         popup.alwaysShowsLaterButton = true
         popup.delegate = self
         present(popup, animated: true)
+    }
+    
+    func setNewPassword(with methods: UpdatePasswordMethods) {
+        self.updatePasswordMethod = methods
+        
+        switch methods {
+        case .password:
+            return
+        case .google:
+            let popup = RouterVC().messageAndButtonPopup(with: localized(.settingsChangePasswordGoogleWarning),
+                                                         buttonTitle: TextConstants.nextTitle)
+            popup.delegate = self
+            present(popup, animated: true)
+        case .apple:
+            let popup = RouterVC().messageAndButtonPopup(with: localized(.settingsChangePasswordAppleWarning),
+                                                         buttonTitle: TextConstants.nextTitle)
+            popup.delegate = self
+            present(popup, animated: true)
+        case .appleGoogle:
+            let popup = RouterVC().appleGoogleUpdatePasswordPopup()
+            popup.delegate = self
+            present(popup, animated: true)
+        }
+    }
+    
+    func presentForgetPasswordPopup() {
+        UIApplication.showErrorAlert(message: localized(.forgotPasswordRequiredError))
+    }
+}
+
+extension UserProfileViewController: MessageAndButtonPopupDelegate {
+    func onActionButton() {
+        dismiss(animated: true)
+        
+        switch updatePasswordMethod {
+        case .google:
+            getGoogleTokenIfNeeded { user in
+                guard let user = user else { return }
+                let popup = RouterVC().passwordEnterPopup(with: user)
+                self.present(popup, animated: true)
+            }
+        case .apple:
+            if #available(iOS 13.0, *) {
+                getAppleToken()
+            }
+        default:
+            return
+        }
+    }
+}
+
+extension UserProfileViewController: AppleGoogleUpdatePasswordPopupDelegate {
+    func onSignInWithGoogle() {
+        dismiss(animated: true)
+        
+        getGoogleTokenIfNeeded { user in
+            guard let user = user else { return }
+            let popup = RouterVC().passwordEnterPopup(with: user)
+            self.present(popup, animated: true)
+        }
+    }
+    
+    func onSignInWithApple() {
+        dismiss(animated: true)
+        
+        if #available(iOS 13.0, *) {
+            getAppleToken()
+        }
+    }
+}
+
+@available(iOS 13.0, *)
+extension UserProfileViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let credentials = authorization.credential as? ASAuthorizationAppleIDCredential {
+            appleGoogleService.getAppleCredentials(with: credentials) { user in
+                guard let user = user else { return }
+                let appleUser = AppleGoogleUser(idToken: user.idToken, email: user.email, type: .apple)
+                let popup = RouterVC().passwordEnterPopup(with: appleUser)
+                self.present(popup, animated: true)
+            } fail: { error in
+                debugLog(error)
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        debugLog("Apple auth didCompleteWithError: \(error.localizedDescription)")
+    }
+}
+
+@available(iOS 13.0, *)
+extension UserProfileViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
     }
 }

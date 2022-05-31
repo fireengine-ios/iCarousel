@@ -566,20 +566,26 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         repeatPassword: String,
                         captchaId: String,
                         captchaAnswer: String,
+                        appleGoogleUser: AppleGoogleUser? = nil,
                         handler: @escaping (ErrorResult<Void, UpdatePasswordErrors>) -> Void) {
         
         debugLog("AccountService updatePassword")
         
-        let params: Parameters = ["oldPassword": oldPassword,
-                                  "password": newPassword,
+        var params: Parameters = ["password": newPassword,
                                   "repeatPassword": repeatPassword,
                                   "passwordRuleSetVersion": NumericConstants.passwordRuleSetVersion]
+        
+        if let user = appleGoogleUser {
+            params = params + [(user.type == .google ? "googleToken" : "appleToken"): user.idToken]
+        } else {
+            params = params + ["oldPassword": oldPassword]
+        }
         
         let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
                                     HeaderConstant.CaptchaAnswer: captchaAnswer]
         
         sessionManager
-            .request(RouteRequests.Account.updatePassword,
+            .request(RouteRequests.Account.updatePasswordV2,
                      method: .post,
                      parameters: params,
                      encoding: JSONEncoding.prettyPrinted,
@@ -608,6 +614,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         backendError = .invalidOldPassword
                     case "New Password and Repeated Password does not match":
                         backendError = .notMatchNewAndRepeatPassword
+                    case "There is no avaliable validation method":
+                        backendError = .forgetPasswordRequired
                     default:
                         backendError = .unknown
                     }
@@ -631,6 +639,12 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     
                     if errorResponse.status == .invalidCaptcha {
                         handler(.failure(.invalidCaptcha))
+                    } else if errorResponse.status == .externalAuthTokenRequired {
+                        handler(.failure(.externalAuthTokenRequired))
+                    } else if errorResponse.status == .invalidToken {
+                        handler(.failure(.invalidToken))
+                    } else if errorResponse.status == .emailDomainNotAllowed {
+                        handler(.failure(.emailDomainNotAllowed))
                     } else if errorResponse.status == .invalidPassword {
                         
                         guard let reason = errorResponse.reason else {
@@ -948,5 +962,16 @@ class AccountService: BaseRequestService, AccountServicePrl {
             .request(RouteRequests.Account.delete, method: .delete)
             .customValidate()
             .responseVoid(handler)
+    }
+    
+    @discardableResult
+    func getUpdatePasswordMethods( handler: @escaping ResponseHandler<[String]>) -> URLSessionTask? {
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.Account.updatePasswordV2, method: .get)
+            .customValidate()
+            .responseArray(handler)
+            .task
     }
 }

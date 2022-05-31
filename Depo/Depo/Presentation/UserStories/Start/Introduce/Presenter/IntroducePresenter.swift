@@ -6,24 +6,23 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceInteractorOutput {
+class IntroducePresenter: BasePresenter, IntroduceModuleInput, IntroduceViewOutput {
 
     weak var view: IntroduceViewInput!
     var interactor: IntroduceInteractorInput!
     var router: IntroduceRouterInput!
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
 
     func viewIsReady() {
         interactor.trackScreen()
-        interactor.PrepareModels()
         PushNotificationService.shared.openActionScreen()
     }
     
     func pageChanged(page: Int) {
         interactor.trackScreen(pageNum: page)
-    }
-    
-    func models(models: [IntroduceModel]) {
-        view.setupInitialState(models: models)
     }
     
     // MARK: router
@@ -35,4 +34,41 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
     func onLoginButton() {
         router.onGoToLogin()
     }
+    
+    func onSignInWithAppleGoogle(with user: AppleGoogleUser) {
+        interactor.signInWithAppleGoogle(with: user)
+    }
+    
+    func goToLogin(with user: AppleGoogleUser) {
+        router.onGoToLoginWith(with: user)
+    }
+}
+
+extension IntroducePresenter: IntroduceInteractorOutput {
+    func signUpRequired(for user: AppleGoogleUser) {
+        asyncOperationSuccess()
+        router.onGoToRegister(with: user)
+    }
+    
+    func passwordLoginRequired(for user: AppleGoogleUser) {
+        asyncOperationSuccess()
+        view.showGoogleLoginPopup(with: user)
+    }
+    
+    func continueWithAppleGoogleFailed(with error: AppleGoogeLoginError) {
+        asyncOperationFail()
+        
+        let message = error == .emailDomainNotAllowed ? localized(.emailDomainNotAllowed) : TextConstants.temporaryErrorOccurredTryAgainLater
+        UIApplication.showErrorAlert(message: message)
+    }
+    
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+        asyncOperationSuccess()
+        router.goToTwoFactorAuthViewController(response: response)
+    }
+    
+    func asyncOperationStarted() {
+        startAsyncOperation()
+    }
+    
 }

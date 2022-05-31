@@ -22,4 +22,6 @@ protocol RegistrationRouterInput {
     func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol)
 
     func goToPrivacyPolicyDescriptionController()
+    
+    func goBack()
 }

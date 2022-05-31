@@ -9,6 +9,9 @@
 import Foundation
 import FirebaseRemoteConfig
 
+extension NSNotification.Name {
+    static let firebaseRemoteConfigInitialFetchComplete = NSNotification.Name(rawValue: "firebaseRemoteConfigInitialFetchComplete")
+}
 
 private struct RemoteConfigKeys {
     static let loginSupportAttempts = "login_support_form_treshold"
@@ -17,6 +20,8 @@ private struct RemoteConfigKeys {
     static let chatbotMenuEnabled = "chatbot_menu_enabled"
     static let printOptionEnabledLanguages = "print_option_enabled_languages"
     static let forgotPasswordV2Enabled = "forgot_password_v2_enabled"
+    static let googleLoginEnabled = "google_login_enabled"
+    static let appleLoginEnabled = "apple_login_enabled"
 }
 
 final class FirebaseRemoteConfig {
@@ -52,6 +57,16 @@ final class FirebaseRemoteConfig {
 
     var forgotPasswordV2Enabled: Bool {
         let key = RemoteConfigKeys.forgotPasswordV2Enabled
+        return remoteConfig.configValue(forKey: key).boolValue
+    }
+    
+    var googleLoginEnabled: Bool {
+        let key = RemoteConfigKeys.googleLoginEnabled
+        return remoteConfig.configValue(forKey: key).boolValue
+    }
+    
+    var appleLoginEnabled: Bool {
+        let key = RemoteConfigKeys.appleLoginEnabled
         return remoteConfig.configValue(forKey: key).boolValue
     }
     
@@ -108,6 +123,8 @@ final class FirebaseRemoteConfig {
             @unknown default:
                 debugLog("unknown status \(status)")
             }
+
+            NotificationCenter.default.post(name: .firebaseRemoteConfigInitialFetchComplete, object: nil)
         }
     }
 

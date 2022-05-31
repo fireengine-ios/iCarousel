@@ -38,9 +38,18 @@
 				<string>com.turkcell.akillidepo</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.685338462870-f3pq553m2rp2tffdob3ehnfpvlne7ag7</string>
+				<string>com.googleusercontent.apps.590528416223-jat4666l0pqhvvd9k3930vlc964v3r1t</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>33</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

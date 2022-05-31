@@ -85,10 +85,14 @@ struct RouteRequests {
     }()
     
     static let dynamicLinkDomain: String = {
-        switch currentServerEnvironment {
-        case .test: return "https://testlifebox.page.link"
-        case .preProduction: return "https://testlifebox.page.link"
-        case .production: return "https://mylifebox.page.link"
+        if isBillo {
+            return "https://billo.page.link"
+        } else {
+            switch currentServerEnvironment {
+            case .test: return "https://testlifebox.page.link"
+            case .preProduction: return "https://testlifebox.page.link"
+            case .production: return "https://mylifebox.page.link"
+            }
         }
     }()
 
@@ -352,6 +356,7 @@ struct RouteRequests {
         static let accountApi = baseUrl +/ "account"
         
         static let updatePassword = accountApi +/ "updatePassword"
+        static let updatePasswordV2 = baseUrl +/ "v2/account/updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
 
@@ -450,6 +455,8 @@ struct RouteRequests {
     
     static let turkcellAndGroupCompanies = "https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz"
     
+    static let turkcellPermissionsPolicy = "https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi"
+    
     static var globalPermissionsDetails: String {
         switch currentServerEnvironment {
         case .production: return isBillo ? "https://mybilloapp.com/global_ops.html?lang=\(Device.locale)" :
@@ -478,4 +485,18 @@ struct RouteRequests {
     static let mapList = "map/list/%@?page=%d&size=%d"
 
     static let ocrProcess = baseUrl +/ "ocr/process"
+    
+    // MARK: - Google Login
+    static let googleLogin = "auth/google?rememberMe=true"
+    static let googleLoginStatus = baseUrl +/ "google/login/status"
+    static let googleLoginDisconnect = baseUrl +/ "google/login/disconnect"
+    static let googleLoginConnect = baseUrl +/ "google/login/connect"
+    
+    // MARK: - Apple Login
+    static let appleLogin = "auth/apple?rememberMe=true"
+    static let appleLoginStatus = baseUrl +/ "apple/login/status"
+    static let appleLoginDisconnect = baseUrl +/ "apple/login/disconnect"
+    static let appleLoginConnect = baseUrl +/ "apple/login/connect"
+
+>>>>>>> origin/develop
 }

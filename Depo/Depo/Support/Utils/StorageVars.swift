@@ -37,7 +37,8 @@ protocol StorageVars: AnyObject {
     var isDarkModeEnabled: Bool? { get set }
     var indexedAlbumUUIDs: [String]? { get set }
     var publicSharedItemsToken: String? {get set}
-    var isAppFirstLaunchForPublicSharedItems: Bool {get set}
+    var isAppFirstLaunchForPublicSharedItems: Bool? {get set}
+    var isUserFirstLoggedIn: Bool { get set }
 
     func value(forDeepLinkParameter key: DeepLinkParameter) -> Any?
 }
@@ -268,8 +269,15 @@ final class UserDefaultsVars: StorageVars {
     }
     
     private let isAppFirstLaunchForPublicSharedItemsKey = "isAppFirstLaunchForPublicSharedItems"
-    var isAppFirstLaunchForPublicSharedItems: Bool {
-        get { return userDefaults.object(forKey: isAppFirstLaunchForPublicSharedItemsKey) as? Bool ?? true}
+    var isAppFirstLaunchForPublicSharedItems: Bool? {
+        get { return userDefaults.object(forKey: isAppFirstLaunchForPublicSharedItemsKey) as? Bool}
         set { userDefaults.set(newValue, forKey: isAppFirstLaunchForPublicSharedItemsKey) }
     }
+    
+    private let isUserFirstLoggedInKey = "isUserFirstLoggedInKey"
+    var isUserFirstLoggedIn: Bool {
+        get { return userDefaults.object(forKey: isUserFirstLoggedInKey) as? Bool ?? true }
+        set { userDefaults.set(newValue, forKey: isUserFirstLoggedInKey) }
+    }
+    
 }

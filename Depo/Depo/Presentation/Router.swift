@@ -1392,4 +1392,85 @@ class RouterVC: NSObject {
         
         return controller
     }
+    
+    var loginWithGooglePopup: LoginWithGooglePopup {
+        let controller = LoginWithGooglePopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
+    func loginWithGoogle(user: AppleGoogleUser) -> UIViewController {
+        let initializer = LoginModuleInitializer()
+        let loginController = LoginViewController(nibName: "LoginViewController",
+                                                  bundle: nil)
+        initializer.loginViewController = loginController
+        initializer.setupVC(with: user)
+ 
+        return loginController
+    }
+    
+    func registerWithGoogle(user: AppleGoogleUser) -> UIViewController {
+        let initializer = RegistrationModuleInitializer()
+        let registerController = RegistrationViewController(nibName: "RegistrationScreen",
+                                                            bundle: nil)
+        initializer.registrationViewController = registerController
+        initializer.setupVC(with: user)
+ 
+        return registerController
+    }
+    
+    func loginWithHeaders(user: AppleGoogleUser, headers: [String:Any]) -> UIViewController {
+        let initializer = LoginModuleInitializer()
+        let loginController = LoginViewController(nibName: "LoginViewController",
+                                                  bundle: nil)
+        initializer.loginViewController = loginController
+        initializer.setupVC(with: user, headers: headers)
+ 
+        return loginController
+    }
+    
+    func messageAndButtonPopup(with message: String, buttonTitle: String) -> MessageAndButtonPopup {
+        let controller = MessageAndButtonPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.message = message
+        controller.buttonTitle = buttonTitle
+        
+        return controller
+    }
+    
+    func passwordEnterPopup(with appleGoogleUser: AppleGoogleUser, disconnectAppleGoogleLogin: Bool? = nil) -> PasswordEnterPopup {
+        let controller = PasswordEnterPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.appleGoogleUser = appleGoogleUser
+        controller.disconnectAppleGoogleLogin = disconnectAppleGoogleLogin
+        
+        return controller
+    }
+    
+    func appleGoogleUpdatePasswordPopup() -> AppleGoogleUpdatePasswordPopup {
+        let controller = AppleGoogleUpdatePasswordPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
+    func securityInfoWarningPopup(errorMessage: String, warningType: SecurityPopupWarningType) -> SecurityInfoWarningPopup {
+        let controller = SecurityInfoWarningPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.errorMessage = errorMessage
+        controller.warningType = warningType
+        
+        return controller
+    }
 }

@@ -417,7 +417,7 @@ pipeline {
             environment {
                 IOS_PASS = credentials('iosLoginPass2')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight_appSpesific3')
+                TESTFLIGHT_UPLOAD = credentials('testflight-test')
                 FASTLANE_DONT_STORE_PASSWORD = 1
                 FASTLANE_SESSION = credentials('fastlane_session')
            }

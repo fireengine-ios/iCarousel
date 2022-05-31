@@ -24,6 +24,7 @@ struct TextConstants {
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         static let wrongVideoData = "Wrong video data"
         static let wrongImageData = "Wrong image data"
+        static let permissionsPolicyLink = "ETK_KVKK_Izin_Politikasi"
         
         static let appNameLowercased: String = {
             #if LIFEDRIVE

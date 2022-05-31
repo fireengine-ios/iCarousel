@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageAndButtonPopup" customModule="Billo" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="0Pu-DD-YgZ" id="Fiw-HG-cBO"/>
+                <outlet property="messageLabel" destination="0c3-ur-gKC" id="w9I-fC-Zko"/>
+                <outlet property="popupView" destination="8fr-Of-eKK" id="sa8-t9-LBw"/>
+                <outlet property="view" destination="tz9-r9-muz" id="uOm-67-h7W"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="tz9-r9-muz">
+            <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fr-Of-eKK">
+                    <rect key="frame" x="30" y="391" width="368" height="154.33333333333337"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rw4-B6-IlS">
+                            <rect key="frame" x="20" y="30" width="328" height="20.333333333333329"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0c3-ur-gKC">
+                                    <rect key="frame" x="0.0" y="0.0" width="328" height="20.333333333333332"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Sdi-Fj-Dsl">
+                            <rect key="frame" x="84" y="74.333333333333314" width="200" height="50"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pu-DD-YgZ" customClass="RoundedButton" customModule="Billo" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="200" id="UYJ-ff-DXV"/>
+                                        <constraint firstAttribute="height" constant="50" id="qVO-Yr-Pb9"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                    <connections>
+                                        <action selector="onActionButton:" destination="-1" eventType="touchUpInside" id="Cxa-St-r7g"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="secondaryBackground"/>
+                    <constraints>
+                        <constraint firstItem="Sdi-Fj-Dsl" firstAttribute="centerX" secondItem="8fr-Of-eKK" secondAttribute="centerX" id="9zo-7h-ScX"/>
+                        <constraint firstAttribute="trailing" secondItem="Rw4-B6-IlS" secondAttribute="trailing" constant="20" id="AvM-g3-k6O"/>
+                        <constraint firstAttribute="bottom" secondItem="Sdi-Fj-Dsl" secondAttribute="bottom" constant="30" id="Dfk-2X-v2e"/>
+                        <constraint firstItem="Rw4-B6-IlS" firstAttribute="top" secondItem="8fr-Of-eKK" secondAttribute="top" constant="30" id="EFb-B1-sMw"/>
+                        <constraint firstAttribute="width" constant="368" id="NWj-Hy-Q3d"/>
+                        <constraint firstItem="Rw4-B6-IlS" firstAttribute="leading" secondItem="8fr-Of-eKK" secondAttribute="leading" constant="20" id="U6Y-No-MRK"/>
+                        <constraint firstItem="Sdi-Fj-Dsl" firstAttribute="top" secondItem="Rw4-B6-IlS" secondAttribute="bottom" constant="24" id="ciS-Hb-8qk"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="NWj-Hy-Q3d"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=regular">
+                        <mask key="constraints">
+                            <include reference="NWj-Hy-Q3d"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="NhE-Bj-mbx"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="8fr-Of-eKK" firstAttribute="centerX" secondItem="NhE-Bj-mbx" secondAttribute="centerX" id="AhX-mL-q0u"/>
+                <constraint firstItem="NhE-Bj-mbx" firstAttribute="trailing" secondItem="8fr-Of-eKK" secondAttribute="trailing" constant="30" id="Wyw-PO-KpE"/>
+                <constraint firstItem="8fr-Of-eKK" firstAttribute="centerY" secondItem="NhE-Bj-mbx" secondAttribute="centerY" id="ZbW-1K-fHN"/>
+                <constraint firstItem="8fr-Of-eKK" firstAttribute="leading" secondItem="NhE-Bj-mbx" secondAttribute="leading" constant="30" id="trT-b3-0DV"/>
+            </constraints>
+            <variation key="widthClass=regular">
+                <mask key="constraints">
+                    <exclude reference="Wyw-PO-KpE"/>
+                    <exclude reference="trT-b3-0DV"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="-209" y="69"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="secondaryBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

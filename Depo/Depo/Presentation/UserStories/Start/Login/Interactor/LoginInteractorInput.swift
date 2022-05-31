@@ -10,7 +10,7 @@ protocol LoginInteractorInput {
         
     func rememberMe(state: Bool)
     
-    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?)
+    func authificate(login: String, password: String, atachedCaptcha: CaptchaParametrAnswer?, appleGoogleUser: AppleGoogleUser?)
     
     func findCoutryPhoneCode(plus: Bool)
     
@@ -35,4 +35,6 @@ protocol LoginInteractorInput {
     func tryToRelogin()
     
     func stopUpdatePhone()
+    
+    func continueWithGoogleLogin()
 }
