@@ -8,7 +8,6 @@
 
 import UIKit
 
-typealias YearMonthTuple = (year: Int, month: Int)
 typealias YearHeightMap = [Int?: CGFloat]
 typealias YearHeightTuple = (year: Int?, height: CGFloat)
 
