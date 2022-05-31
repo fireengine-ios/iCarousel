@@ -9,6 +9,8 @@
 import UIKit
 
 typealias YearMonthTuple = (year: Int, month: Int)
+typealias YearHeightMap = [Int?: CGFloat]
+typealias YearHeightTuple = (year: Int?, height: CGFloat)
 
 final class PhotoVideoScrollBarManager {
     
@@ -35,39 +37,8 @@ final class PhotoVideoScrollBarManager {
         scrollBar.delegate = delegate
     }
     
-    func updateYearsView(with allItems: [MediaItem], cellHeight: CGFloat, numberOfColumns: Int) {
-        if allItems.isEmpty {
-            return
-        }
-    
-        // TODO: getCellSizeForList must be called in main queue. for a while it is woking without it
-        //        let cellHeight = delegate?.getCellSizeForGreed().height ?? 0
-        scrollBar.updateLayout(by: cellHeight)
-        yearsView.update(cellHeight: cellHeight, headerHeight: 50, numberOfColumns: numberOfColumns)
-    
-        let ids = allItems.compactMap { $0.objectID }
-        MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] mediaItems in
-            guard let self = self else {
-                return
-            }
-            
-            let emptyMetaItems = mediaItems.filter { $0.monthValue == nil }
-            if !emptyMetaItems.isEmpty {
-                self.yearsView.update(additionalSections: [(TextConstants.photosVideosViewMissingDatesHeaderText, emptyMetaItems.count)])
-            }
-            
-            let yearMonthValues: [YearMonthTuple] = mediaItems.compactMap {
-                if let split = $0.monthValue?.split(separator: " "),
-                    split.count == 2,
-                    let year = Int(split[0]),
-                    let month = Int(split[1])
-                {
-                    return (year, month)
-                }
-                return nil
-            }
-            self.yearsView.update(by: yearMonthValues)
-        }
+    func updateYearsView(with years: [YearHeightTuple]) {
+        yearsView.update(by: years)
     }
     
     func scrollViewDidScroll() {

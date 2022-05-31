@@ -231,6 +231,32 @@ final class GalleryCollectionViewLayout: UICollectionViewLayout {
         return attributes
     }
 
+    func getCalculatedHeight(for section: Int) -> CGFloat {
+        guard let collectionView = self.collectionView else {
+            return .zero
+        }
+
+        let numberOfItemsInSection = collectionView.numberOfItems(inSection: section)
+
+        guard numberOfItemsInSection > 0 else {
+            return .zero
+        }
+
+        let headerFrame = layoutAttributesForSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            at: IndexPath(item: 0, section: section)
+        )?.frame ?? .zero
+
+        let firstItemIndex = 0
+        let fisrtItemFrame = layoutAttributesForItem(at: IndexPath(item: firstItemIndex, section: section))?.frame ?? .zero
+
+        let lastItemIndex = numberOfItemsInSection - 1
+        let lastItemFrame = layoutAttributesForItem(at: IndexPath(item: lastItemIndex, section: section))?.frame ?? .zero
+
+        let sectionHeightWithoutHeader = lastItemFrame.maxY - fisrtItemFrame.minY
+        return max(0, sectionHeightWithoutHeader + headerFrame.height)
+    }
+
     private func pinHeaderLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes, to layoutGuide: UILayoutGuide) {
         guard let collectionView = collectionView else {
             return

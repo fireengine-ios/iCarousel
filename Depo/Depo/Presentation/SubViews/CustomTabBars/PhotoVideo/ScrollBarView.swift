@@ -112,11 +112,7 @@ final class ScrollBarView: UIView {
         /// we need to attach label center to line between last two columns
         insetsLabel.center.x = frame.width - cellWidth - insetsLabel.textInsets.left * 0.25
     }
-    
-    func updateLayout(by cellWidth: CGFloat) {
-        self.cellWidth = cellWidth
-    }
-    
+
     private func hideLabelAnimated() {
         UIView.animate(withDuration: animationDuration, delay: hideAnimationDelay, animations: {
             self.insetsLabel.alpha = 0

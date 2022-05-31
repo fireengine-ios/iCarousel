@@ -11,7 +11,7 @@ import UIKit
 protocol PhotoVideoDataSourceDelegate: AnyObject {
     func selectedModeDidChange(_ selectingMode: Bool)
     func fetchPredicateCreated()
-    func contentDidChange(_ fetchedObjects: [MediaItem])
+    func contentDidChange(sections: [NSFetchedResultsSectionInfo], fetchedObjects: [MediaItem])
     func convertFetchedObjectsInProgress()
 }
 
@@ -133,6 +133,7 @@ final class PhotoVideoDataSource: NSObject {
             section.numberOfObjects > indexPath.row else {
                 return nil
         }
+
         return fetchedResultsController.object(at: indexPath)
     }
     
@@ -608,7 +609,10 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 return
             }
             self.lastUpdateFetchedObjects = fetchedObjects
-            self.delegate?.contentDidChange(fetchedObjects)
+            self.delegate?.contentDidChange(
+                sections: self.fetchedResultsController.sections ?? [],
+                fetchedObjects: fetchedObjects
+            )
             if self.lastWrapedObjects.isEmpty, !self.isConverting {
                 self.convertFetchedObjects()
             } else {
