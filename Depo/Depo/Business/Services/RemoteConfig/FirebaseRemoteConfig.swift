@@ -22,6 +22,7 @@ private struct RemoteConfigKeys {
     static let forgotPasswordV2Enabled = "forgot_password_v2_enabled"
     static let googleLoginEnabled = "google_login_enabled"
     static let appleLoginEnabled = "apple_login_enabled"
+    static let ocrEnabled = "ocr_enabled"
 }
 
 final class FirebaseRemoteConfig {
@@ -67,6 +68,11 @@ final class FirebaseRemoteConfig {
     
     var appleLoginEnabled: Bool {
         let key = RemoteConfigKeys.appleLoginEnabled
+        return remoteConfig.configValue(forKey: key).boolValue
+    }
+
+    var ocrEnabled: Bool {
+        let key = RemoteConfigKeys.ocrEnabled
         return remoteConfig.configValue(forKey: key).boolValue
     }
     

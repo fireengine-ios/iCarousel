@@ -49,13 +49,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
 
     private var currentTextSelectionInteraction: ImageTextSelectionInteraction?
 
-    var isRecognizeTextEnabled: Bool {
-//        if #available(iOS 13, *) {
-//            return true
-//        }
-//        return false
-        return true
-    }
+    var isRecognizeTextEnabled = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -74,9 +68,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         addGestureRecognizer(tapGesture)
 
-        if isRecognizeTextEnabled {
-            setupRecognizeTextButton()
-        }
+        setupRecognizeTextButton()
 
         reset()
     }
@@ -275,7 +267,7 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
         } else {
             placeholderImageView.isHidden = true
             imageScrollView.isHidden = !(fileType == .video || fileType == .image)
-            recognizeTextButton.isHidden = fileType != .image || isLocalItem
+            recognizeTextButton.isHidden = fileType != .image || isLocalItem || !isRecognizeTextEnabled
         }
     }
     

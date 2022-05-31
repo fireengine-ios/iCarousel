@@ -680,6 +680,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
             return
         }
         cell.delegate = self
+        cell.isRecognizeTextEnabled = output.ocrEnabled
         let object = objects[indexPath.row]
         cell.setObject(object: object)
         

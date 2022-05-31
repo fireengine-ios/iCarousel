@@ -9,7 +9,9 @@
 import UIKit
 
 protocol PhotoVideoDetailViewOutput {
-    
+
+    var ocrEnabled: Bool { get }
+
     func viewIsReady(view: UIView)
     
     func setSelectedItemIndex(selectedIndex: Int)

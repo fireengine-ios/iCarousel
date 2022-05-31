@@ -484,6 +484,7 @@ struct RouteRequests {
     static let map = "map/%f,%f/%f,%f/%d"
     static let mapList = "map/list/%@?page=%d&size=%d"
 
+    // MARK: - OCR
     static let ocrProcess = baseUrl +/ "ocr/process"
     
     // MARK: - Google Login
@@ -497,6 +498,4 @@ struct RouteRequests {
     static let appleLoginStatus = baseUrl +/ "apple/login/status"
     static let appleLoginDisconnect = baseUrl +/ "apple/login/disconnect"
     static let appleLoginConnect = baseUrl +/ "apple/login/connect"
-
->>>>>>> origin/develop
 }

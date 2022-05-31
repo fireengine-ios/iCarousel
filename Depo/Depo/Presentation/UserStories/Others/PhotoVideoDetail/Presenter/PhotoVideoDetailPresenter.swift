@@ -26,6 +26,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     var canLoadMoreItems = true
     
     private var isFaceImageAllowed = false
+
+    var ocrEnabled: Bool {
+        FirebaseRemoteConfig.shared.ocrEnabled
+    }
     
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
