@@ -88,6 +88,11 @@ final class HeaderContainingViewController: BaseViewController {
         updateAdditionalSafeAreaInsetsIfNeeded()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        headerView.mask?.frame.size.width = headerView.bounds.width
+    }
+
     private func setupHeaderView() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
