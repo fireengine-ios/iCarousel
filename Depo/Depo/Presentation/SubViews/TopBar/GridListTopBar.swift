@@ -53,7 +53,7 @@ class GridListTopBar: ViewController {
     }
     
     private func setupInitialState() {
-        sortByButton.titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 14)
+        sortByButton.titleLabel?.font = UIFont.appFont(.medium, size: 16)
         sortByButton.titleLabel?.textColor = UIColor.darkGray        
         segmentFilter.tintColor = ColorConstants.darkBlueColor
         sortByButton.forceImageToRightSide()

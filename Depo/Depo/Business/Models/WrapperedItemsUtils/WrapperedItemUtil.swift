@@ -11,118 +11,119 @@ import UIKit
 class WrapperedItemUtil: NSObject {
     
     class func getSmallPreviewImageForWrapperedObject(fileType: FileType) -> UIImage? {
-        var imageName = "fileIconUnknown"
+        var image = Image.iconFileEmpty
         
         switch fileType {
         case .image:
-            imageName = "fileIconPhoto"
+            image = Image.iconFilePhoto
             
         case .video:
-            imageName = "fileIconVideo"
+            image = Image.iconFileVideo
             
         case .audio:
-            imageName = "fileIconAudio"
+            image = Image.iconFileAudio
             
         case .folder:
-            imageName = "fileIconFolder"
+            image = Image.iconFileEmpty // TODO: FACELIFT
             
         case .photoAlbum, .faceImageAlbum(_): // TODO: Add icon
-            imageName = "fileIconPhoto"
+            image = Image.iconFilePhoto
             
         case .musicPlayList: // TODO: Add icon
-            imageName = "fileIconUnknown"
+            image = Image.iconFileEmpty
             
         case let .application(applicationType):
             switch applicationType {
             case .rar:
-                imageName = "fileIconRar"
+                image = Image.iconFileEmpty // TODO: FACELIFT
                 break
             case .zip:
-                imageName = "fileIconZip"
+                image = Image.iconFileEmpty // TODO: FACELIFT
                 break
             case .doc:
-                imageName = "fileIconDoc"
+                image = Image.iconFileDoc
                 break
             case .txt:
-                imageName = "fileIconTxt"
+                image = Image.iconFileEmpty // TODO: FACELIFT
                 break
             case .html:
-                imageName = "fileIconUnknown"
+                image = Image.iconFileEmpty
                 break
             case .xls:
-                imageName = "fileIconXls"
+                image = Image.iconFileXls
                 break
             case .pdf:
-                imageName = "fileIconPdf"
+                image = Image.iconFilePdf
                 break
             case .ppt, .pptx:
-                imageName = "fileIconPpt"
+                image = Image.iconFilePpt
                 break
             default:
                 break
             }
         default:
-            imageName = "fileIconUnknown"
+            image = Image.iconFileEmpty
         }
-        return UIImage(named: imageName)
+        return image.image
     }
     
-    class func getPreviewImageForWrapperedObject(fileType: FileType) -> UIImage? {
-        var imageName = "fileBigIconUnknown"
-        switch fileType {
-        case .image:
-            imageName = "fileBigIconPhoto"
-            
-        case .video:
-            imageName = "fileBigIconVideo"
-            
-        case .audio:
-            imageName = "fileBigIconAudio"
-            
-        case .folder:
-            imageName = "fileBigIconFolder"
-            
-        case .photoAlbum: // TODO: Add icon
-            imageName = "fileBigIconUnknown"
-            
-        case .musicPlayList: // TODO: Add icon
-            imageName = "fileBigIconUnknown"
-        case let .application(applicationType):
-            switch applicationType {
-            case .rar:
-                imageName = "fileBigIconAchive"
-                break
-            case .zip:
-                imageName = "fileBigIconAchive"
-                break
-            case .doc:
-                imageName = "fileBigIconDoc"
-                break
-            case .txt:
-                imageName = "fileBigIconTxt"
-                break
-            case .html:
-                imageName = "fileBigIconUnknown"
-                break
-            case .xls:
-                imageName = "fileBigIconXls"
-                break
-            case .pdf:
-                imageName = "fileBigIconPdf"
-                break
-            case .ppt, .pptx:
-                imageName = "fileBigIconPpt"
-                break
-            default:
-                break
-            }
-            
-        default:
-            imageName = "fileBigIconUnknown"
-            break
-        }
-        return UIImage(named: imageName)
-    }
+//    TODO: Facelif: remove below, small images will be used.
+//    class func getPreviewImageForWrapperedObject(fileType: FileType) -> UIImage? {
+//        var imageName = "fileBigIconUnknown"
+//        switch fileType {
+//        case .image:
+//            imageName = "fileBigIconPhoto"
+//
+//        case .video:
+//            imageName = "fileBigIconVideo"
+//
+//        case .audio:
+//            imageName = "fileBigIconAudio"
+//
+//        case .folder:
+//            imageName = "fileBigIconFolder"
+//
+//        case .photoAlbum: // TODO: Add icon
+//            imageName = "fileBigIconUnknown"
+//
+//        case .musicPlayList: // TODO: Add icon
+//            imageName = "fileBigIconUnknown"
+//        case let .application(applicationType):
+//            switch applicationType {
+//            case .rar:
+//                imageName = "fileBigIconAchive"
+//                break
+//            case .zip:
+//                imageName = "fileBigIconAchive"
+//                break
+//            case .doc:
+//                imageName = "fileBigIconDoc"
+//                break
+//            case .txt:
+//                imageName = "fileBigIconTxt"
+//                break
+//            case .html:
+//                imageName = "fileBigIconUnknown"
+//                break
+//            case .xls:
+//                imageName = "fileBigIconXls"
+//                break
+//            case .pdf:
+//                imageName = "fileBigIconPdf"
+//                break
+//            case .ppt, .pptx:
+//                imageName = "fileBigIconPpt"
+//                break
+//            default:
+//                break
+//            }
+//
+//        default:
+//            imageName = "fileBigIconUnknown"
+//            break
+//        }
+//        return UIImage(named: imageName)
+//    }
     
     class func getSmallPreviewImageForNotSelectedWrapperedObject(fileType: FileType) -> UIImage? {
         var imageName = "fileIconSmallUnknownNotSelected"

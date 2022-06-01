@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,13 +23,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-go-R4c">
-                    <rect key="frame" x="10" y="11" width="68" height="43"/>
+                    <rect key="frame" x="10" y="11" width="72" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="68" id="Dzb-Wi-FeT"/>
                         <constraint firstAttribute="height" constant="43" id="xi5-cC-uuT"/>
                     </constraints>
                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
-                    <state key="normal" title="Sort By" image="TriangleCopy3">
+                    <state key="normal" title="Sort By" image="iconArrowDownSmall">
                         <color key="titleColor" name="charcoalGrey"/>
                     </state>
                     <connections>
@@ -53,8 +53,8 @@
                         <constraint firstAttribute="height" constant="36" id="73N-Rs-kra"/>
                         <constraint firstAttribute="width" constant="36" id="TDf-0W-O3l"/>
                     </constraints>
-                    <state key="normal" image="TopBarGrid"/>
-                    <state key="selected" image="TopBarList"/>
+                    <state key="normal" image="iconViewGrid"/>
+                    <state key="selected" image="iconViewList"/>
                     <connections>
                         <action selector="gridListAction:" destination="-1" eventType="touchUpInside" id="bi1-0X-PA5"/>
                     </connections>
@@ -78,9 +78,9 @@
         </view>
     </objects>
     <resources>
-        <image name="TopBarGrid" width="14" height="14"/>
-        <image name="TopBarList" width="14" height="14"/>
-        <image name="TriangleCopy3" width="7" height="5"/>
+        <image name="iconArrowDownSmall" width="24" height="24"/>
+        <image name="iconViewGrid" width="24" height="24"/>
+        <image name="iconViewList" width="24" height="24"/>
         <namedColor name="charcoalGrey">
             <color red="0.2199999988079071" green="0.23100000619888306" blue="0.25499999523162842" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
