@@ -28,7 +28,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var moreView: UIView!
     @IBOutlet weak var moreButton: ExtendedTapAreaButton!
     @IBOutlet weak var activity: UIActivityIndicatorView!
-    @IBOutlet weak var selectionImageView: UIImageView! //grid selection
+    @IBOutlet weak var gridselectionImageView: UIImageView! //grid selection
     @IBOutlet weak var separatorView: UIView!
     @IBOutlet weak var smallCellSelectionView: UIImageView!
     @IBOutlet weak var smallSelectonView: UIView!
@@ -91,7 +91,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     static let bigH: CGFloat = 65
     static let frameSize: CGFloat = 66
     
-    static let smallContentImageViewWConst: CGFloat = 20
+    static let smallContentImageViewWConst: CGFloat = 24
     static let smallContentImageViewHConst: CGFloat = 24
     static let smallContentImageViewBigSize: CGFloat = 42
     static let bigContentImageViewSize: CGFloat = 48
@@ -162,17 +162,12 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
 
         bigContentImageView.image = nil
         bigContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
-        if isBigSize() {
-            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
-            smallContentImageView.contentMode = .scaleAspectFit
+        if isCellSelectionEnabled {
+            smallContentImageView.image = Image.iconSelectEmpty.image
         } else {
-            if isCellSelectionEnabled {
-                smallContentImageView.image = Image.iconSelectEmpty.image
-            } else {
-                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
-            }
-            smallContentImageView.contentMode = .center
+            smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         }
+        smallContentImageView.contentMode = .center
         
         bigContentImageView.contentMode = .center
 
@@ -269,40 +264,20 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         isCellSelected = isSelected
         isCellSelectionEnabled = isSelectionActive
-        selectionImageView.isHidden = !isSelectionActive
+        gridselectionImageView.isHidden = !isSelectionActive
 
         if isSelectionActive {
-            selectionImageView.image = isSelected ? Image.iconSelectCheck.image : Image.iconSelectEmpty.image
-            
-            selectionImageView.accessibilityLabel = isSelected ? TextConstants.accessibilitySelected : TextConstants.accessibilityNotSelected
-            if isBigSize() {
-                UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                    self.bigSelectionView.alpha = isSelected ? 1 : 0
-                })
-                smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
-                setSelectionSmallSelectionImageView(false, isHidden: true)
-            } else {
-                bigSelectionView.alpha = 0
-                if !smallContentImageView.configured {
-                    smallContentImageView.image = Image.iconSelectEmpty.image
-                    smallCellSelectionView.isHidden = !isSelected
-                    smallContentImageView.isHidden = isSelected
-                }
-                //because if we have image for object and object is not selected we should not show empty circle in top right corner of image
-                smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelected)
-                setSelectionSmallSelectionImageView(isSelected, isHidden: !isSelected)
+            if !smallContentImageView.configured {
+                smallContentImageView.image = Image.iconSelectEmpty.image
+                smallCellSelectionView.isHidden = !isSelected
+                smallContentImageView.isHidden = isSelected
             }
+            //because if we have image for object and object is not selected we should not show empty circle in top right corner of image
+            smallContentImageView.setSelection(selection: isSelected, showSelectonBorder: isSelected)
+            setSelectionSmallSelectionImageView(isSelected, isHidden: !isSelected)
         } else {
-            if isBigSize() {
-                if self.bigSelectionView.alpha != 0 {
-                    UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-                        self.bigSelectionView.alpha = 0
-                    })
-                }
-            } else {
-                if !smallContentImageView.configured {
-                    smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
-                }
+            if !smallContentImageView.configured {
+                smallContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: itemModel?.fileType ?? .unknown)
             }
             smallContentImageView.setSelection(selection: false, showSelectonBorder: false)
             setSelectionSmallSelectionImageView(false, isHidden: true)
@@ -326,9 +301,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         smallCellSelectionView.contentMode = .center
         
-        smallSelectonView.layer.borderWidth = 3
-        smallSelectonView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
-        smallSelectonView.alpha = 0
+//        smallSelectonView.layer.borderWidth = 3
+//        smallSelectonView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
+//        smallSelectonView.alpha = 0
         
         bigSelectionView.layer.borderWidth = 3
         bigSelectionView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor

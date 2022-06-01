@@ -80,10 +80,6 @@
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmN-Ss-WiL">
                                         <rect key="frame" x="0.0" y="0.0" width="140" height="39"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccW-PV-wRg">
-                                                <rect key="frame" x="8" y="7.5" width="24" height="24"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YvY-3L-GEe" customClass="SelectionImageView" customModule="Billo" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="7.5" width="24" height="24"/>
                                                 <constraints>
@@ -95,16 +91,16 @@
                                                 <rect key="frame" x="8" y="7.5" width="24" height="24"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3KG-34-RcK">
-                                                <rect key="frame" x="44" y="-1" width="66" height="41"/>
+                                                <rect key="frame" x="48" y="-1" width="92" height="41"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvT-sm-YJt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="92" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8q9-nH-HW1">
-                                                        <rect key="frame" x="0.0" y="20.5" width="66" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="20.5" width="92" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.37254901960784315" green="0.37254901960784315" blue="0.37254901960784315" alpha="0.59856495468277948" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -133,20 +129,16 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="3KG-34-RcK" firstAttribute="centerY" secondItem="mmN-Ss-WiL" secondAttribute="centerY" id="8T6-Qn-Sx2"/>
-                                            <constraint firstItem="ccW-PV-wRg" firstAttribute="width" secondItem="YvY-3L-GEe" secondAttribute="width" id="C9l-Y0-U8v"/>
                                             <constraint firstItem="7ip-a8-Iax" firstAttribute="width" secondItem="YvY-3L-GEe" secondAttribute="width" id="HHm-qc-U9D"/>
                                             <constraint firstItem="7ip-a8-Iax" firstAttribute="centerY" secondItem="YvY-3L-GEe" secondAttribute="centerY" id="I9i-db-BuC"/>
                                             <constraint firstItem="7ip-a8-Iax" firstAttribute="height" secondItem="YvY-3L-GEe" secondAttribute="height" id="W7f-Q5-h9r"/>
-                                            <constraint firstItem="ccW-PV-wRg" firstAttribute="height" secondItem="YvY-3L-GEe" secondAttribute="height" id="Xl8-kv-7oh"/>
-                                            <constraint firstItem="F7p-wf-13W" firstAttribute="centerY" secondItem="ccW-PV-wRg" secondAttribute="centerY" id="ZBE-be-khc"/>
                                             <constraint firstItem="YvY-3L-GEe" firstAttribute="leading" secondItem="mmN-Ss-WiL" secondAttribute="leading" constant="8" id="a2J-mD-6o2"/>
                                             <constraint firstItem="7ip-a8-Iax" firstAttribute="centerX" secondItem="YvY-3L-GEe" secondAttribute="centerX" id="aP5-sl-48y"/>
-                                            <constraint firstItem="F7p-wf-13W" firstAttribute="leading" secondItem="ccW-PV-wRg" secondAttribute="trailing" constant="6" id="f4p-Hc-TYw"/>
-                                            <constraint firstItem="ccW-PV-wRg" firstAttribute="centerX" secondItem="YvY-3L-GEe" secondAttribute="centerX" id="naH-TR-L5S"/>
+                                            <constraint firstItem="F7p-wf-13W" firstAttribute="centerY" secondItem="mmN-Ss-WiL" secondAttribute="centerY" id="blF-41-3Q3"/>
                                             <constraint firstItem="YvY-3L-GEe" firstAttribute="centerY" secondItem="mmN-Ss-WiL" secondAttribute="centerY" id="rUv-kg-EOa"/>
-                                            <constraint firstItem="ccW-PV-wRg" firstAttribute="centerY" secondItem="YvY-3L-GEe" secondAttribute="centerY" id="tRf-tf-yR3"/>
-                                            <constraint firstItem="3KG-34-RcK" firstAttribute="leading" secondItem="ccW-PV-wRg" secondAttribute="trailing" constant="12" id="w2U-Lv-KLf"/>
-                                            <constraint firstAttribute="trailing" secondItem="3KG-34-RcK" secondAttribute="trailing" constant="30" id="wF8-L0-sR6"/>
+                                            <constraint firstAttribute="trailing" secondItem="3KG-34-RcK" secondAttribute="trailing" id="u9d-5v-cWm"/>
+                                            <constraint firstItem="F7p-wf-13W" firstAttribute="leading" secondItem="YvY-3L-GEe" secondAttribute="trailing" constant="6" id="ubC-9m-IEN"/>
+                                            <constraint firstItem="3KG-34-RcK" firstAttribute="leading" secondItem="YvY-3L-GEe" secondAttribute="trailing" constant="16" id="xYq-hw-a2t"/>
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsI-KK-JUi">
@@ -269,11 +261,11 @@
                 <outlet property="gridCellFileNameLabel" destination="WFz-32-YBo" id="ttl-kr-asA"/>
                 <outlet property="gridCellInfoView" destination="0Xb-yu-cNP" id="woR-5Z-FzV"/>
                 <outlet property="gridCellShareIcon" destination="qGJ-kk-efo" id="n2T-4M-VCE"/>
+                <outlet property="gridselectionImageView" destination="U7U-HC-bQs" id="64F-vX-OAi"/>
                 <outlet property="leftSpaceForSmallmage" destination="a2J-mD-6o2" id="G9x-Lo-vbY"/>
                 <outlet property="moreButton" destination="cDg-eD-Ha4" id="aRR-oO-iGZ"/>
                 <outlet property="moreButtonTrailingConst" destination="JLv-Jo-chi" id="Sin-gv-DN5"/>
                 <outlet property="moreView" destination="2Uf-Ik-Pxb" id="xQ7-1s-fDt"/>
-                <outlet property="selectionImageView" destination="U7U-HC-bQs" id="z76-49-VVy"/>
                 <outlet property="separatorView" destination="Ih3-tg-57V" id="82s-th-WEJ"/>
                 <outlet property="shadowView" destination="h60-sn-FJL" id="1q0-44-vTd"/>
                 <outlet property="sharedIcon" destination="2HG-lz-Pps" id="NxQ-JT-Ipr"/>
@@ -281,7 +273,6 @@
                 <outlet property="smallContentImageView" destination="YvY-3L-GEe" id="hOx-cB-Vjf"/>
                 <outlet property="smallContentImageViewH" destination="Bjt-em-dGN" id="k0y-Tp-q6G"/>
                 <outlet property="smallContentImageViewW" destination="wMj-5N-Cny" id="qR0-AT-cAj"/>
-                <outlet property="smallSelectonView" destination="ccW-PV-wRg" id="pJW-xg-7uh"/>
             </connections>
             <point key="canvasLocation" x="29.600000000000001" y="80.50974512743629"/>
         </collectionViewCell>
