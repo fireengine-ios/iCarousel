@@ -970,20 +970,52 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     }
     
     func fetchPredicateCreated() { }
-    
-    func contentDidChange(_ fetchedObjects: [MediaItem]) {
-        //TODO: Facelift - yearsView shouldn't be aware of cell size?
-        // instead should consult GalleryCollectionViewLayout for the height of each section?
 
-//        scrollBarManager.updateYearsView(with: fetchedObjects,
-//                                         cellHeight: collectionViewManager.collectionViewLayout.itemSize.height,
-//                                         numberOfColumns: Int(collectionViewManager.collectionViewLayout.columns))
-        
+    func contentDidChange(sections: [NSFetchedResultsSectionInfo], fetchedObjects: [MediaItem]) {
+        updateYearsView(with: sections)
         collectionViewManager.showEmptyDataViewIfNeeded(isShow: fetchedObjects.isEmpty)
     }
     
     func convertFetchedObjectsInProgress() {
         showSpinner()
+    }
+
+    private func updateYearsView(with sections: [NSFetchedResultsSectionInfo]) {
+        let dates = getDates(of: sections)
+
+        let collectionViewVisibleHeight = collectionView.frame.inset(by: collectionView.adjustedContentInset).height
+
+        var yearHeightMap: YearHeightMap = [:]
+        for (index, date) in dates.enumerated() {
+            let height = collectionViewManager.collectionViewLayout.getCalculatedHeight(for: index)
+            let year = date?.getYear()
+            yearHeightMap[year] = yearHeightMap[year, default: 0] + height
+
+            if index == 0 {
+                yearHeightMap[year] = yearHeightMap[year]! + collectionViewVisibleHeight
+            }
+        }
+
+        let yearsSorted: [YearHeightTuple] = yearHeightMap.keys
+            .sorted { year1, year2 in
+                let year1 = year1 ?? Int.min
+                let year2 = year2 ?? Int.min
+                return year1 > year2
+            }
+            .map { year in
+                (year, yearHeightMap[year, default: 0])
+            }
+
+        scrollBarManager.updateYearsView(with: yearsSorted)
+    }
+
+
+    private func getDates(of sections: [NSFetchedResultsSectionInfo]) -> [Date?] {
+        sections
+            .map { section in
+                let mediaItem = section.objects?.first as? MediaItem
+                return mediaItem?.sortingDate as? Date
+            }
     }
 }
 
