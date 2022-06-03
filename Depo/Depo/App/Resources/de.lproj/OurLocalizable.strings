@@ -1994,9 +1994,12 @@
 "security_popup_warning_body1" = "Die Sicherheitsfrage wurde erfolgreich gespeichert, folgender Fehler bei der Recovery-E-Mail ist aufgetreten:";
 "security_popup_warning_body2" = "Die Wiederherstellungs-E-Mail wurde erfolgreich gespeichert, bei der Sicherheitsfrage ist folgender Fehler aufgetreten:";
 "security_popup_warning_footer" = "Sie können Ihre Wiederherstellungs-E-Mail über Einstellungen -> Kontodetails -> Mein Profil erneut eingeben.";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
 "apple_login_user_exists_body" = "Unter der E-Mail-Adresse %@ ist ein lifebox-Konto registriert. Um die Methode Mit Apple ID Anmelden mit einem bestehenden lifebox-Konto zu verbinden, müssen Sie zunächst Ihr lifebox-Passwort eingeben.";
 "settings_apple_password_required" = "Um die Apple ID-Anmeldung zu deaktivieren, müssen Sie zuerst ein lifebox-Passwort festlegen.";
 "apple_login_show_mail_warning" = "Sie müssen zulassen, dass Ihre E-Mail-Adresse mit lifebox geteilt wird, um sich mit Ihrer Apple ID anzumelden. Bitte klicken Sie auf die Schaltfläche unten, um zur Seite Einstellungen zu gelangen, befolgen Sie die Anweisungen zum Entfernen des Lifebox-Kontos unter Apple-ID > Passwort & Sicherheit > Apps mit Apple-ID und befolgen Sie die Schritte erneut, um sich mit Ihrer Apple-ID anzumelden.";
-"ETK_KVKK_Izin_Politikası" = "Berechtigungsrichtlinie";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "Berechtigungsrichtlinie";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"ETK_KVKK_Izin_Politikası" = "";
