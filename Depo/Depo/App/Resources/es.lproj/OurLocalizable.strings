@@ -2036,9 +2036,12 @@
 "security_popup_warning_body1" = "La pregunta de seguridad se guardó con éxito, se produjo el siguiente error para el correo electrónico de recuperación:";
 "security_popup_warning_body2" = "El correo electrónico de recuperación se guardó con éxito, se produjo el siguiente error para la pregunta de seguridad:";
 "security_popup_warning_footer" = "Puede volver a ingresar su correo electrónico de recuperación a través de Configuración -> Detalles de la cuenta -> Mi Perfil.";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
 "apple_login_user_exists_body" = "Hay una cuenta lifebox registrada con la dirección de correo electrónico %@. Para conectar el método Iniciar sesión con el ID de Apple a una cuenta existente de lifebox, primero debe ingresar su contraseña de lifebox.";
 "settings_apple_password_required" = "Para deshabilitar el inicio de sesión de ID de Apple, debe configurar la contraseña de lifebox.";
 "apple_login_show_mail_warning" = "Debe permitir que su dirección de correo electrónico se comparta con lifebox para iniciar sesión con su ID de Apple. Haga clic en el botón a continuación para ir a la página de Configuración, siga las instrucciones para eliminar la cuenta de Lifebox en ID de Apple > Contraseña y seguridad > Aplicaciones que usan ID de Apple y siga los pasos nuevamente para iniciar sesión con su ID de Apple.";
-"ETK_KVKK_Izin_Politikası" = "Política de Permisos";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "Política de Permisos";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"ETK_KVKK_Izin_Politikası" = "";
