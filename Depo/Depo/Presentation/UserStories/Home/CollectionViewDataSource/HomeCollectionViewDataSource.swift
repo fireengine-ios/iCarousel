@@ -92,8 +92,6 @@ final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSw
     
     private func checkIsNeedShowCardFor(operationType: OperationType) -> Bool {
         switch operationType {
-        case .prepareToAutoSync:
-            return viewsByType[.sync] == nil
         case .premium:
             return !cards.contains(where: { $0 is PremiumInfoCard })
         default:

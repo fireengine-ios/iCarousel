@@ -2317,10 +2317,8 @@
 		8CD2B3B01FE7B3BA00280547 /* UIColor+Adjust.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E501FE10C7700978BE7 /* UIColor+Adjust.swift */; };
 		8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E531FE1150B00978BE7 /* UIButton+Color.swift */; };
 		8CD2B3B21FE7B3BF00280547 /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECD4E551FE1152600978BE7 /* UIImage+Color.swift */; };
-		8CD2B3B31FE7B41E00280547 /* PrepareToAutoSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */; };
 		8CD2B3B41FE7B42500280547 /* AutoUploadIsOffPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEA863B1FDE84D900F17D9D /* AutoUploadIsOffPopUp.swift */; };
 		8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEA863C1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib */; };
-		8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		8CD2B3B71FE7B43D00280547 /* WaitingForWiFiPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC11AAD1FE276DC00AF022D /* WaitingForWiFiPopUp.swift */; };
 		8CD2B3B81FE7B44000280547 /* WaitingForWiFiPopUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CC11AAF1FE276F500AF022D /* WaitingForWiFiPopUp.xib */; };
 		8CD7D8F721119BB20019B4F3 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
@@ -4641,7 +4639,6 @@
 		CE784AD322A685FB00662219 /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* CardsManager.swift */; };
 		CE784AD422A685FB00662219 /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		CE784AD522A685FB00662219 /* PeriodicContactSyncInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC14F2087378F00032CC7 /* PeriodicContactSyncInteractorInput.swift */; };
-		CE784AD622A685FB00662219 /* PrepareToAutoSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */; };
 		CE784AD722A685FB00662219 /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
 		CE784AD822A685FB00662219 /* TermsOfUseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB212122C3E7004F4A59 /* TermsOfUseConfigurator.swift */; };
 		CE784AD922A685FB00662219 /* ServerStatusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4516A81F7D2EF1008B1F9A /* ServerStatusError.swift */; };
@@ -5175,7 +5172,6 @@
 		CE784E0222A685FB00662219 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */; };
 		CE784E0522A685FB00662219 /* BasicCollectionMultiFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */; };
 		CE784E0622A685FB00662219 /* DropboxAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6321F9B01B003AABB4 /* DropboxAccountConnectionCell.xib */; };
-		CE784E0722A685FB00662219 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		CE784E0B22A685FB00662219 /* DarkPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */; };
 		CE784E1222A685FB00662219 /* ActivityTimelineFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44FC1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib */; };
 		CE784E1722A685FB00662219 /* PremiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20CDB9F219D60B800CA9A67 /* PremiumView.xib */; };
@@ -6644,7 +6640,6 @@
 		CF8B67AD23CBC9D70021B021 /* MaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0750F520BD83A800FD1FA2 /* MaskService.swift */; };
 		CF8B67AF23CBC9D70021B021 /* UploadFilesSelectionViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */; };
 		CF8B67B023CBC9D70021B021 /* UploadFilesSelectionViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F431A1D1626AA4CC06EFC9CA /* UploadFilesSelectionViewOutput.swift */; };
-		CF8B67B123CBC9D70021B021 /* PrepareToAutoSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */; };
 		CF8B67B223CBC9D70021B021 /* SubscriptionPlanBaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F562C1F7553C800F49DA1 /* SubscriptionPlanBaseResponse.swift */; };
 		CF8B67B323CBC9D70021B021 /* UploadFilesSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F6EB6455E73609F1B5249AF /* UploadFilesSelectionViewController.swift */; };
 		CF8B67B423CBC9D70021B021 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
@@ -6999,7 +6994,6 @@
 		CF8B69E023CBC9D70021B021 /* PageForLanding.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CEE2721209C560500EF6C79 /* PageForLanding.xib */; };
 		CF8B69E523CBC9D70021B021 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
 		CF8B69EA23CBC9D70021B021 /* container in Resources */ = {isa = PBXBuildFile; fileRef = 8CD7D8F521119BB10019B4F3 /* container */; };
-		CF8B69ED23CBC9D70021B021 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		CF8B69F223CBC9D70021B021 /* PackageInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A11F55E21A5946B00D6AADC /* PackageInfoView.xib */; };
 		CF8B69F423CBC9D70021B021 /* SpotifyDeletePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98C2984D2302B13200C9811E /* SpotifyDeletePopup.xib */; };
 		CF8B69F923CBC9D70021B021 /* FaceImageChangeCoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BA37C2C2028374E00660394 /* FaceImageChangeCoverViewController.xib */; };
@@ -7871,7 +7865,6 @@
 		CF8B6E5623CBCA280021B021 /* CardsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5526121F7B9CCD00A21F3C /* CardsManager.swift */; };
 		CF8B6E5723CBCA280021B021 /* BytesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4CFEC01F78F94900FB4C3D /* BytesType.swift */; };
 		CF8B6E5823CBCA280021B021 /* PeriodicContactSyncInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0AC14F2087378F00032CC7 /* PeriodicContactSyncInteractorInput.swift */; };
-		CF8B6E5923CBCA280021B021 /* PrepareToAutoSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */; };
 		CF8B6E5A23CBCA280021B021 /* FaceImagePhotosViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE0886202DCFF50095346F /* FaceImagePhotosViewOutput.swift */; };
 		CF8B6E5B23CBCA280021B021 /* TermsOfUseConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB212122C3E7004F4A59 /* TermsOfUseConfigurator.swift */; };
 		CF8B6E5C23CBCA280021B021 /* ServerStatusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4516A81F7D2EF1008B1F9A /* ServerStatusError.swift */; };
@@ -8499,7 +8492,6 @@
 		CF8B71CA23CBCA280021B021 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEEB7A9D20A5BC230070FDC2 /* InfoPlist.strings */; };
 		CF8B71CD23CBCA280021B021 /* BasicCollectionMultiFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */; };
 		CF8B71CE23CBCA280021B021 /* DropboxAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6321F9B01B003AABB4 /* DropboxAccountConnectionCell.xib */; };
-		CF8B71CF23CBCA280021B021 /* PrepareToAutoSync.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */; };
 		CF8B71D323CBCA280021B021 /* DarkPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE57DFA71FDE663C0065B688 /* DarkPopUpController.xib */; };
 		CF8B71DA23CBCA280021B021 /* ActivityTimelineFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44FC1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib */; };
 		CF8B71DF23CBCA280021B021 /* PremiumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A20CDB9F219D60B800CA9A67 /* PremiumView.xib */; };
@@ -9924,8 +9916,6 @@
 		7C3A74501F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewSimpleHeaderWithText.swift; sourceTree = "<group>"; };
 		7C3A74511F079BDF00124DF5 /* CollectionViewSimpleHeaderWithText.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewSimpleHeaderWithText.xib; sourceTree = "<group>"; };
 		7C3A74541F07B20600124DF5 /* PhotoVideoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoVideoDetailViewController.xib; sourceTree = "<group>"; };
-		7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareToAutoSync.swift; sourceTree = "<group>"; };
-		7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrepareToAutoSync.xib; sourceTree = "<group>"; };
 		7C4484FD1F0FC607003AF631 /* ButtonWithGrayCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonWithGrayCorner.swift; sourceTree = "<group>"; };
 		7C4485001F0FC86B003AF631 /* SettingHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		7C4485021F0FC87A003AF631 /* SettingHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingHeaderView.xib; sourceTree = "<group>"; };
@@ -14776,15 +14766,6 @@
 			path = CollectionViewHeaders;
 			sourceTree = "<group>";
 		};
-		7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */ = {
-			isa = PBXGroup;
-			children = (
-				7C3B186C1FE0153E00FF3C39 /* PrepareToAutoSync.swift */,
-				7C3B186D1FE0153E00FF3C39 /* PrepareToAutoSync.xib */,
-			);
-			path = PrepareToAutoSync;
-			sourceTree = "<group>";
-		};
 		7C4484FF1F0FC82A003AF631 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -15351,7 +15332,6 @@
 				7C257B3520174C1100CB56F8 /* ContactBackupOld */,
 				7C257B3420174BC400CB56F8 /* ContactBackupEmpty */,
 				7CC11AAC1FE2768B00AF022D /* WaitingForWiFiPopUp */,
-				7C3B186B1FE0148900FF3C39 /* PrepareToAutoSync */,
 				7CEA863A1FDE840800F17D9D /* AutoUploadIsOffPopUp */,
 				7CE825B91F823CDE00356AD2 /* FreeUpSpacePopUp */,
 				7C1F89861F6FFC0D00740177 /* ProgressCard */,
@@ -21858,7 +21838,6 @@
 				7CEE2725209C560500EF6C79 /* PageForLanding.xib in Resources */,
 				8C0E90431FDEBDFF00789C91 /* TurkcellSaturaDemIta.ttf in Resources */,
 				8CD7D8F721119BB20019B4F3 /* container in Resources */,
-				8CD2B3B61FE7B43800280547 /* PrepareToAutoSync.xib in Resources */,
 				CF71468824B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
 				4A6DBE8521A6F8EA0003D1B4 /* PackageInfoView.xib in Resources */,
 				9862BC2F255E6BF300D7945E /* FileInfoPeopleView.xib in Resources */,
@@ -22383,7 +22362,6 @@
 				B55C970F2559353800623C5C /* PrivateShareLocalSuggestionsViewController.xib in Resources */,
 				CE784E0622A685FB00662219 /* DropboxAccountConnectionCell.xib in Resources */,
 				982319A824F3A1E700FD16E2 /* ColorCell.xib in Resources */,
-				CE784E0722A685FB00662219 /* PrepareToAutoSync.xib in Resources */,
 				CE784E0B22A685FB00662219 /* DarkPopUpController.xib in Resources */,
 				9823198A24F3A1E700FD16E2 /* ColorView.xib in Resources */,
 				CE784E1222A685FB00662219 /* ActivityTimelineFileCell.xib in Resources */,
@@ -22730,7 +22708,6 @@
 				982319A624F3A1E700FD16E2 /* ColorCell.xib in Resources */,
 				CF8B69E523CBC9D70021B021 /* TurkcellSaturaDemIta.ttf in Resources */,
 				CF8B69EA23CBC9D70021B021 /* container in Resources */,
-				CF8B69ED23CBC9D70021B021 /* PrepareToAutoSync.xib in Resources */,
 				CF8B69F223CBC9D70021B021 /* PackageInfoView.xib in Resources */,
 				CF8B69F423CBC9D70021B021 /* SpotifyDeletePopup.xib in Resources */,
 				CF71468924B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
@@ -23131,7 +23108,6 @@
 				CF8B71CA23CBCA280021B021 /* InfoPlist.strings in Resources */,
 				CF8B71CD23CBCA280021B021 /* BasicCollectionMultiFileCell.xib in Resources */,
 				CF8B71CE23CBCA280021B021 /* DropboxAccountConnectionCell.xib in Resources */,
-				CF8B71CF23CBCA280021B021 /* PrepareToAutoSync.xib in Resources */,
 				3A9C284326529C3900EFADE9 /* InvitationCampaignDetailView.xib in Resources */,
 				CF8B71D323CBCA280021B021 /* DarkPopUpController.xib in Resources */,
 				CF8B71DA23CBCA280021B021 /* ActivityTimelineFileCell.xib in Resources */,
@@ -25638,7 +25614,6 @@
 				7C0750F720BD83A800FD1FA2 /* MaskService.swift in Sources */,
 				8C0E8F5C1FDEBDFF00789C91 /* UploadFilesSelectionViewInput.swift in Sources */,
 				8C0E8F5D1FDEBDFF00789C91 /* UploadFilesSelectionViewOutput.swift in Sources */,
-				8CD2B3B31FE7B41E00280547 /* PrepareToAutoSync.swift in Sources */,
 				0766314E27CE8F0000AB4BC2 /* MapLocationDetailViewController.swift in Sources */,
 				8C0E8F5E1FDEBDFF00789C91 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				8C0E8F5F1FDEBDFF00789C91 /* UploadFilesSelectionViewController.swift in Sources */,
@@ -27350,7 +27325,6 @@
 				CE784AD422A685FB00662219 /* BytesType.swift in Sources */,
 				CE784AD522A685FB00662219 /* PeriodicContactSyncInteractorInput.swift in Sources */,
 				98B04878259314750011DAEB /* SyncDBUtils.m in Sources */,
-				CE784AD622A685FB00662219 /* PrepareToAutoSync.swift in Sources */,
 				CE784AD722A685FB00662219 /* FaceImagePhotosViewOutput.swift in Sources */,
 				CE784AD822A685FB00662219 /* TermsOfUseConfigurator.swift in Sources */,
 				CE784AD922A685FB00662219 /* ServerStatusError.swift in Sources */,
@@ -29397,7 +29371,6 @@
 				CF8B67AD23CBC9D70021B021 /* MaskService.swift in Sources */,
 				CF8B67AF23CBC9D70021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
 				CF8B67B023CBC9D70021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
-				CF8B67B123CBC9D70021B021 /* PrepareToAutoSync.swift in Sources */,
 				CF8B67B223CBC9D70021B021 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				98732B412460168900E9D5D2 /* ElementTypes.swift in Sources */,
 				CF8B67B323CBC9D70021B021 /* UploadFilesSelectionViewController.swift in Sources */,
@@ -30732,7 +30705,6 @@
 				98B047A9259314740011DAEB /* Filter.m in Sources */,
 				CF8B6E5723CBCA280021B021 /* BytesType.swift in Sources */,
 				CF8B6E5823CBCA280021B021 /* PeriodicContactSyncInteractorInput.swift in Sources */,
-				CF8B6E5923CBCA280021B021 /* PrepareToAutoSync.swift in Sources */,
 				98B04879259314750011DAEB /* SyncDBUtils.m in Sources */,
 				0305A2F523D5C196004D1EC7 /* FaceImagePhotosDataSource.swift in Sources */,
 				CF8B6E5A23CBCA280021B021 /* FaceImagePhotosViewOutput.swift in Sources */,
