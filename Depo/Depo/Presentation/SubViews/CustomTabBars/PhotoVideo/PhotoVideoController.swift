@@ -111,7 +111,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 //        self.trackPhotoVideoScreen(isPhoto: isPhoto)
         
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
-        collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
         
         ///trigger Range API for update new items which are uploaded by other clients
@@ -141,11 +140,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         super.viewWillDisappear(animated)
         
         stopEditingMode()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        collectionViewManager.setScrolliblePopUpView(isActive: false)
     }
 
     override func didMove(toParent parent: UIViewController?) {

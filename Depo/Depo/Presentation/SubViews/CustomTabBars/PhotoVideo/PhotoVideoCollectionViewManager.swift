@@ -52,10 +52,6 @@ enum GalleryViewType: CaseIterable {
 
 final class PhotoVideoCollectionViewManager {
 
-    private weak var contentSliderTopY: NSLayoutConstraint!
-    private weak var contentSliderH: NSLayoutConstraint!
-
-    let scrolliblePopUpView = CardsContainerView()
     private let emptyDataView = EmptyDataView.initFromNib()
     
     private weak var collectionView: UICollectionView!
@@ -72,21 +68,9 @@ final class PhotoVideoCollectionViewManager {
         self.collectionView = collectionView
         self.delegate = delegate
     }
-    
-    deinit {
-        CardsManager.default.removeViewForNotification(view: scrolliblePopUpView)
-    }
 
     func setup() {
         setupCollectionView()
-        setupViewForPopUp()
-    }
-    
-    func setScrolliblePopUpView(isActive: Bool) {
-        scrolliblePopUpView.isActive = isActive
-        if isActive {
-            CardsManager.default.updateAllProgressesInCardsForView(view: scrolliblePopUpView)
-        }
     }
     
     func deselectAll() {
@@ -126,40 +110,6 @@ final class PhotoVideoCollectionViewManager {
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionView.elementKindSectionHeader)
         collectionView.isPrefetchingEnabled = false
-    }
-
-    private func setupViewForPopUp() {
-        CardsManager.default.addViewForNotification(view: scrolliblePopUpView)
-        
-        scrolliblePopUpView.delegate = self
-        scrolliblePopUpView.isEnable = true
-        
-        scrolliblePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning, .sharedWithMeUpload])
-        
-        collectionView.addSubview(scrolliblePopUpView)
-        
-        scrolliblePopUpView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        contentSliderTopY = scrolliblePopUpView.topAnchor.constraint(equalTo: collectionView.topAnchor)
-        contentSliderH = scrolliblePopUpView.heightAnchor.constraint(equalToConstant: 0)
-        NSLayoutConstraint.activate([
-            scrolliblePopUpView.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
-            scrolliblePopUpView.widthAnchor.constraint(equalTo: collectionView.widthAnchor),
-            contentSliderTopY,
-            contentSliderH,
-        ])
-    }
-}
-
-
-// MARK: - ViewForPopUpDelegate scrolliblePopUpView.delegate
-extension PhotoVideoCollectionViewManager: CardsContainerViewDelegate {
-    func onUpdateViewForPopUpH(h: CGFloat) {
-        contentSliderTopY.constant = -h
-        contentSliderH.constant = h
-        collectionView.contentInset.top = h
-        collectionView?.scrollToTop(animated: true)
     }
 }
 
