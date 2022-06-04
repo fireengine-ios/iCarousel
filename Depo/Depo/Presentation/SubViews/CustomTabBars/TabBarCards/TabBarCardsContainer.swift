@@ -13,7 +13,7 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
 
     private let lock = NSLock()
     private let stackView = UIStackView()
-    private let permittedPopUpViewTypes: Set<OperationType> = [
+    private let permittedOperationTypes: Set<OperationType> = [
         .prepareQuickScroll
     ]
 
@@ -39,22 +39,22 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
         stackView.pinToSuperviewEdges()
     }
 
-    func addPopUpSubView(popUp: BaseTabBarCard) {
+    func addCardView(_ cardView: BaseTabBarCard) {
         DispatchQueue.main.async {
 
             self.lock.lock()
-            self.stackView.insertArrangedSubview(popUp, at: 0)
-            self.stackView.sendSubviewToBack(popUp)
+            self.stackView.insertArrangedSubview(cardView, at: 0)
+            self.stackView.sendSubviewToBack(cardView)
             self.lock.unlock()
         }
     }
 
-    func deletePopUpSubView(popUp: BaseTabBarCard) {
+    func removeCardView(_ cardView: BaseTabBarCard) {
         DispatchQueue.main.async {
-            if self.stackView.arrangedSubviews.contains(popUp) {
+            if self.stackView.arrangedSubviews.contains(cardView) {
                 self.lock.lock()
-                self.stackView.removeArrangedSubview(popUp)
-                popUp.removeFromSuperview()
+                self.stackView.removeArrangedSubview(cardView)
+                cardView.removeFromSuperview()
                 self.lock.unlock()
             }
         }
@@ -63,7 +63,7 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
     // MARK: WrapItemOperationViewProtocol
 
     private func checkIsThisIsPermittedType(type: OperationType) -> Bool {
-        return permittedPopUpViewTypes.contains(type)
+        return permittedOperationTypes.contains(type)
     }
 
     func getViewForOperation(operation: OperationType) -> BaseTabBarCard? {
@@ -97,7 +97,7 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
 //                    popUp.setImageForUploadingItem(item: item)
 //                }
 //            }
-            addPopUpSubView(popUp: view)            
+            addCardView(view)
         }
     }
 
@@ -133,7 +133,7 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
     func stopOperationWithType(type: OperationType) {
         if let view = viewsByType[type] {
             viewsByType[type] = nil
-            deletePopUpSubView(popUp: view)
+            removeCardView(view)
         }
     }
 
