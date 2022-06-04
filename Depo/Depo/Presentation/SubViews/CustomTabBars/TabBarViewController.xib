@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="aboveTabBarCardStack" destination="APj-ro-gog" id="M9i-ix-7no"/>
+                <outlet property="bottomBarsContainerBottomConstraint" destination="Q8M-dn-dyN" id="Pe5-TM-VqU"/>
                 <outlet property="bottomBarsContainerView" destination="cui-rs-h2J" id="D6m-Wh-uIY"/>
                 <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
                 <outlet property="mainContentView" destination="FJl-Cl-AGP" id="bHk-JG-24y"/>
@@ -31,30 +33,36 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cui-rs-h2J" userLabel="botttomBarsContainerView">
-                            <rect key="frame" x="32" y="805" width="350" height="49"/>
+                            <rect key="frame" x="32" y="751" width="350" height="103"/>
                             <subviews>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmD-Gm-tUS" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="350" height="0.0"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" id="5y9-Sm-8zM"/>
-                                    </constraints>
-                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="APj-ro-gog">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="70"/>
+                                    <subviews>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XmD-Gm-tUS" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="350" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="5y9-Sm-8zM"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
                                 <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="MainTabBar" customModule="Billo" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="350" height="49"/>
+                                    <rect key="frame" x="0.0" y="54" width="350" height="49"/>
                                     <items/>
                                 </tabBar>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="APj-ro-gog" firstAttribute="top" relation="lessThanOrEqual" secondItem="Pdh-iF-uTx" secondAttribute="top" id="1bp-V6-bQd"/>
                                 <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="7Tf-er-ViB"/>
                                 <constraint firstAttribute="width" priority="749" constant="350" id="9UO-nK-X2x"/>
                                 <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="HLR-wj-uqb"/>
                                 <constraint firstAttribute="bottom" secondItem="Pdh-iF-uTx" secondAttribute="bottom" id="Jbz-On-7xz"/>
+                                <constraint firstItem="APj-ro-gog" firstAttribute="top" secondItem="cui-rs-h2J" secondAttribute="top" id="N3e-bG-xUb"/>
+                                <constraint firstAttribute="trailing" secondItem="APj-ro-gog" secondAttribute="trailing" id="QtF-0z-Okb"/>
                                 <constraint firstAttribute="trailing" secondItem="Pdh-iF-uTx" secondAttribute="trailing" id="ZWg-Sg-NME"/>
                                 <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="hJe-vk-7hU"/>
-                                <constraint firstItem="XmD-Gm-tUS" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="t8v-Pj-oNX"/>
-                                <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="XmD-Gm-tUS" secondAttribute="bottom" id="whx-Hk-bTk"/>
-                                <constraint firstItem="XmD-Gm-tUS" firstAttribute="top" secondItem="cui-rs-h2J" secondAttribute="top" id="xIW-pp-PR8"/>
-                                <constraint firstAttribute="trailing" secondItem="XmD-Gm-tUS" secondAttribute="trailing" id="y3f-kh-9r9"/>
+                                <constraint firstItem="Pdh-iF-uTx" firstAttribute="top" secondItem="APj-ro-gog" secondAttribute="bottom" constant="-16" id="nzm-xp-uuu"/>
+                                <constraint firstItem="APj-ro-gog" firstAttribute="leading" secondItem="cui-rs-h2J" secondAttribute="leading" id="og2-Sm-AJz"/>
                             </constraints>
                         </view>
                     </subviews>

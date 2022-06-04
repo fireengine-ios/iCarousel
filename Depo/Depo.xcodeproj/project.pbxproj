@@ -517,6 +517,26 @@
 		07C50C632811895F009617B9 /* HeaderContainingViewController+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C50C612811895F009617B9 /* HeaderContainingViewController+Config.swift */; };
 		07C50C642811895F009617B9 /* HeaderContainingViewController+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C50C612811895F009617B9 /* HeaderContainingViewController+Config.swift */; };
 		07C50C652811895F009617B9 /* HeaderContainingViewController+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C50C612811895F009617B9 /* HeaderContainingViewController+Config.swift */; };
+		07C6D4CA2848D80500502C28 /* TabBarCardsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4C92848D80500502C28 /* TabBarCardsContainer.swift */; };
+		07C6D4CB2848D80500502C28 /* TabBarCardsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4C92848D80500502C28 /* TabBarCardsContainer.swift */; };
+		07C6D4CC2848D80500502C28 /* TabBarCardsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4C92848D80500502C28 /* TabBarCardsContainer.swift */; };
+		07C6D4CD2848D80500502C28 /* TabBarCardsContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4C92848D80500502C28 /* TabBarCardsContainer.swift */; };
+		07C6D4D2284B43D100502C28 /* BaseTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4D1284B43D100502C28 /* BaseTabBarCard.swift */; };
+		07C6D4D3284B43D100502C28 /* BaseTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4D1284B43D100502C28 /* BaseTabBarCard.swift */; };
+		07C6D4D4284B43D100502C28 /* BaseTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4D1284B43D100502C28 /* BaseTabBarCard.swift */; };
+		07C6D4D5284B43D100502C28 /* BaseTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4D1284B43D100502C28 /* BaseTabBarCard.swift */; };
+		07C6D4DF284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4DE284B4B7300502C28 /* IndeterminateProgressView.swift */; };
+		07C6D4E0284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4DE284B4B7300502C28 /* IndeterminateProgressView.swift */; };
+		07C6D4E1284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4DE284B4B7300502C28 /* IndeterminateProgressView.swift */; };
+		07C6D4E2284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4DE284B4B7300502C28 /* IndeterminateProgressView.swift */; };
+		07C6D4E6284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C6D4E4284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib */; };
+		07C6D4E7284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C6D4E4284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib */; };
+		07C6D4E8284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C6D4E4284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib */; };
+		07C6D4E9284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C6D4E4284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib */; };
+		07C6D4EA284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */; };
+		07C6D4EB284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */; };
+		07C6D4EC284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */; };
+		07C6D4ED284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */; };
 		07C759DE2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift */; };
 		07C759DF2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift */; };
 		07C759E02816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift */; };
@@ -9382,6 +9402,11 @@
 		07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityAPIService.swift; sourceTree = "<group>"; };
 		07C50C4B28102E3C009617B9 /* NavigationHeaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationHeaderButton.swift; sourceTree = "<group>"; };
 		07C50C612811895F009617B9 /* HeaderContainingViewController+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HeaderContainingViewController+Config.swift"; sourceTree = "<group>"; };
+		07C6D4C92848D80500502C28 /* TabBarCardsContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCardsContainer.swift; sourceTree = "<group>"; };
+		07C6D4D1284B43D100502C28 /* BaseTabBarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarCard.swift; sourceTree = "<group>"; };
+		07C6D4DE284B4B7300502C28 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
+		07C6D4E4284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareForQuickScrollTabBarCard.xib; sourceTree = "<group>"; };
+		07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareForQuickScrollTabBarCard.swift; sourceTree = "<group>"; };
 		07C759DD2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
 		07C759E52819369200B028F0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		07C759EA281936C800B028F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -12444,6 +12469,41 @@
 			path = ResetPassword;
 			sourceTree = "<group>";
 		};
+		07C6D4D6284B457800502C28 /* TabBarCards */ = {
+			isa = PBXGroup;
+			children = (
+				07C6D4D7284B458B00502C28 /* Cards */,
+				07C6D4C92848D80500502C28 /* TabBarCardsContainer.swift */,
+				07C6D4D1284B43D100502C28 /* BaseTabBarCard.swift */,
+			);
+			path = TabBarCards;
+			sourceTree = "<group>";
+		};
+		07C6D4D7284B458B00502C28 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				07C6D4E3284B4C3400502C28 /* PrepareForQuickScrollTabBarCard */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		07C6D4DD284B4B5700502C28 /* IndeterminateProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				07C6D4DE284B4B7300502C28 /* IndeterminateProgressView.swift */,
+			);
+			path = IndeterminateProgressView;
+			sourceTree = "<group>";
+		};
+		07C6D4E3284B4C3400502C28 /* PrepareForQuickScrollTabBarCard */ = {
+			isa = PBXGroup;
+			children = (
+				07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */,
+				07C6D4E4284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib */,
+			);
+			path = PrepareForQuickScrollTabBarCard;
+			sourceTree = "<group>";
+		};
 		07CCBF7326FC71D4002322B0 /* ValidateSecurityQuestion */ = {
 			isa = PBXGroup;
 			children = (
@@ -14393,6 +14453,7 @@
 		7C032B851EEFFC1A006532C8 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
+				07C6D4DD284B4B5700502C28 /* IndeterminateProgressView */,
 				074E6F1D27C67651003DDB93 /* Map */,
 				F039B5F2279A7ECE000EBAA7 /* GraceBannerView */,
 				CF048308256C8DA5007DAA79 /* PrivateShareSlider */,
@@ -19819,6 +19880,7 @@
 				0711889D27FAF49900F512A1 /* TabBarImage.swift */,
 				0711889827FAF43F00F512A1 /* TabBar.xcassets */,
 				78750E2F1FEBBAD9000EF505 /* TabBarActionHandler.swift */,
+				07C6D4D6284B457800502C28 /* TabBarCards */,
 				8C208661228D4B60000BEDAD /* EmptyDataView.swift */,
 				8C208662228D4B60000BEDAD /* EmptyDataView.xib */,
 			);
@@ -21800,6 +21862,7 @@
 				CF71468824B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
 				4A6DBE8521A6F8EA0003D1B4 /* PackageInfoView.xib in Resources */,
 				9862BC2F255E6BF300D7945E /* FileInfoPeopleView.xib in Resources */,
+				07C6D4E6284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */,
 				CF71460A24B597A800D83E60 /* ContactDetailHeader.xib in Resources */,
 				076BD1D927BC14FF004609E3 /* MapSearchViewController.xib in Resources */,
 				CF71467024B597A900D83E60 /* ContactSyncMainView.xib in Resources */,
@@ -22244,6 +22307,7 @@
 				982319D824F3A1E700FD16E2 /* AdjustmentCategoryCell.xib in Resources */,
 				737A2EAF2338AF4B0014258A /* SecretAnswerView.xib in Resources */,
 				CE784D9322A685FB00662219 /* TurkcellSaturaMed.ttf in Resources */,
+				07C6D4E8284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */,
 				734CA11D244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				CE784D9722A685FB00662219 /* RegistrationScreen.xib in Resources */,
 				9808B3182553DEBD002B0032 /* PrivateShareViewController.xib in Resources */,
@@ -22677,6 +22741,7 @@
 				CF8B69FC23CBC9D70021B021 /* UserProfileViewController.xib in Resources */,
 				CF8B6A0623CBC9D70021B021 /* BasicCollectionMultiFileCell.xib in Resources */,
 				CF8B6A0723CBC9D70021B021 /* CreateStoryAudioItemCell.xib in Resources */,
+				07C6D4E7284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */,
 				CF8B6A0923CBC9D70021B021 /* DarkPopUpController.xib in Resources */,
 				CF8B6A0E23CBC9D70021B021 /* InstaPickCircularLoader.xib in Resources */,
 				3A9C2823265285A200EFADE9 /* AcceptedInvitationViewController.xib in Resources */,
@@ -22994,6 +23059,7 @@
 				CF8B715823CBCA280021B021 /* RegistrationScreen.xib in Resources */,
 				CF8B715923CBCA280021B021 /* PremiumFooterCollectionReusableView.xib in Resources */,
 				CF8B715A23CBCA280021B021 /* ActivityTimelineTimeCell.xib in Resources */,
+				07C6D4E9284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib in Resources */,
 				CF8B715D23CBCA280021B021 /* TitleView.xib in Resources */,
 				CF8B716123CBCA280021B021 /* FeedbackViewController.xib in Resources */,
 				CF8B716223CBCA280021B021 /* LargeFullOfQuotaPopUp.xib in Resources */,
@@ -25174,6 +25240,7 @@
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */,
 				8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */,
+				07C6D4EA284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */,
 				8C0E8E921FDEBDFF00789C91 /* CircleYellowButton.swift in Sources */,
 				4A56D5B0202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */,
 				07FA029427DD38AD0006E56D /* ChangeEmailPopUp.swift in Sources */,
@@ -25520,6 +25587,7 @@
 				076BD19827BBBD3A004609E3 /* MapSearchConfigurator.swift in Sources */,
 				989FDC1824190CD100F2F7D2 /* MediaItemsAlbumOperationService.swift in Sources */,
 				73D723EB231D08A6006AE835 /* PackageOffer.swift in Sources */,
+				07C6D4D2284B43D100502C28 /* BaseTabBarCard.swift in Sources */,
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
 				4A9B3900201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
@@ -25741,6 +25809,7 @@
 				CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */,
 				03135F4723F3E0900088E8BB /* ApplicationStateHelper.swift in Sources */,
 				98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */,
+				07C6D4CA2848D80500502C28 /* TabBarCardsContainer.swift in Sources */,
 				B56FBB322122C84F004F4A59 /* TermsOfUseInteractorInput.swift in Sources */,
 				CEE3B7CB225791C400B99FE7 /* UITextField+Extensions.swift in Sources */,
 				8C0E8FA31FDEBDFF00789C91 /* HelpAndSupportViewOutput.swift in Sources */,
@@ -25843,6 +25912,7 @@
 				7AFAB3732073AA8F00C54C9B /* FaceImageItemsViewInput.swift in Sources */,
 				A74ADA4023A2AC43007DD192 /* DivorceCard.swift in Sources */,
 				CF7146F424B597A900D83E60 /* ContactListViewController.swift in Sources */,
+				07C6D4DF284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */,
 				989BDE4422F47B1E001DDEB2 /* SpotifyPlaylistCollectionViewCell.swift in Sources */,
 				8C208679228D4FF1000BEDAD /* NSManagedObject+Extensions.swift in Sources */,
 				8C0E8FD51FDEBDFF00789C91 /* OTPViewRouterInput.swift in Sources */,
@@ -26942,6 +27012,7 @@
 				0791816226F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */,
 				CE7849E622A685FB00662219 /* AssetsCache.swift in Sources */,
 				988BA1AA255924800086E4BE /* PrivateShareDurationView.swift in Sources */,
+				07C6D4E1284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */,
 				CE7849E722A685FB00662219 /* TermsAndServicesRouter.swift in Sources */,
 				CE7849E822A685FB00662219 /* TermsAndServicesConfigurator.swift in Sources */,
 				CE7849E922A685FB00662219 /* FaceImageItemsViewInput.swift in Sources */,
@@ -27350,6 +27421,7 @@
 				89E51D4822CA1111007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				9823196624F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57325063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
+				07C6D4EC284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */,
 				CF71461324B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CE784B0822A685FB00662219 /* DropboxAccountConnectionCell.swift in Sources */,
 				CE784B0922A685FB00662219 /* BaseFilesGreedInitializer.swift in Sources */,
@@ -27459,6 +27531,7 @@
 				CE784B5E22A685FB00662219 /* UserProfileViewInput.swift in Sources */,
 				CE784B5F22A685FB00662219 /* URL+Path.swift in Sources */,
 				F028C1162789F342005CE6AF /* PublicShareModuleInput.swift in Sources */,
+				07C6D4CC2848D80500502C28 /* TabBarCardsContainer.swift in Sources */,
 				98231A5524F3A23500FD16E2 /* AweStruckFilter.swift in Sources */,
 				3A58C4962636A73500570811 /* InvitationCard.swift in Sources */,
 				CE784B6022A685FB00662219 /* TitleView.swift in Sources */,
@@ -27850,6 +27923,7 @@
 				CE784C7022A685FB00662219 /* InstapickPopUpController.swift in Sources */,
 				CE784C7122A685FB00662219 /* FaceImageViewController.swift in Sources */,
 				CE784C7222A685FB00662219 /* FeedbackViewInitializer.swift in Sources */,
+				07C6D4D4284B43D100502C28 /* BaseTabBarCard.swift in Sources */,
 				CE784C7322A685FB00662219 /* Text+Size.swift in Sources */,
 				CE784C7422A685FB00662219 /* SuggestionTableViewCell.swift in Sources */,
 				CE784C7522A685FB00662219 /* ActivityTimelineViewInput.swift in Sources */,
@@ -28326,6 +28400,7 @@
 				CF8B64AB23CBC9D70021B021 /* TBMatikPhotosViewController.swift in Sources */,
 				CF8B64AC23CBC9D70021B021 /* SegmentedController.swift in Sources */,
 				98B047B4259314740011DAEB /* Message.m in Sources */,
+				07C6D4E0284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */,
 				CF8B64AD23CBC9D70021B021 /* CaptchaViewController.swift in Sources */,
 				CF8B64AE23CBC9D70021B021 /* CollectionSortingRules.swift in Sources */,
 				734CA129244D753C0076F6A7 /* DocumentsAlbumCardResponce.swift in Sources */,
@@ -29026,6 +29101,7 @@
 				CF8B66C523CBC9D70021B021 /* AlbumCard.swift in Sources */,
 				CF8B66C623CBC9D70021B021 /* ActivityIndicator.swift in Sources */,
 				CF8B66C723CBC9D70021B021 /* UsageInfoViewController.swift in Sources */,
+				07C6D4EB284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */,
 				CF8B66C823CBC9D70021B021 /* FileProviderWormholeListener.swift in Sources */,
 				730F8AC023CDEE6000798B61 /* OptimizingGifService.swift in Sources */,
 				B589FC5123F1388D00DD528D /* DataChunkProvider.swift in Sources */,
@@ -29049,6 +29125,7 @@
 				CF8B66D823CBC9D70021B021 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				CF8B66D923CBC9D70021B021 /* TwoFactorChallengeRouter.swift in Sources */,
 				CF8B66DA23CBC9D70021B021 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
+				07C6D4CB2848D80500502C28 /* TabBarCardsContainer.swift in Sources */,
 				CF8B66DB23CBC9D70021B021 /* PhoneCodeInputView.swift in Sources */,
 				9808B7CE2567EB10001DEF2E /* PrivateShareAccessListCell.swift in Sources */,
 				CF8B66DC23CBC9D70021B021 /* RequestService.swift in Sources */,
@@ -29449,6 +29526,7 @@
 				CF8B680B23CBC9D70021B021 /* LeavePremiumViewOutput.swift in Sources */,
 				CF8B680C23CBC9D70021B021 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				0305A35223D5C5AD004D1EC7 /* HSCompletionPopUp.swift in Sources */,
+				07C6D4D3284B43D100502C28 /* BaseTabBarCard.swift in Sources */,
 				CF8B680D23CBC9D70021B021 /* DropboxStatusValue.swift in Sources */,
 				07E8469B27C104C400B3AFA5 /* ItemGroupAnnotationView.swift in Sources */,
 				F0B64C75275DDFA700002F66 /* DarkModeInitializer.swift in Sources */,
@@ -30318,6 +30396,7 @@
 				0791816326F88AB20067FB75 /* IdentityVerificationViewController.swift in Sources */,
 				CF8B6D5C23CBCA280021B021 /* TermsAndServicesConfigurator.swift in Sources */,
 				988BA1AB255924800086E4BE /* PrivateShareDurationView.swift in Sources */,
+				07C6D4E2284B4B7300502C28 /* IndeterminateProgressView.swift in Sources */,
 				CF8B6D5D23CBCA280021B021 /* FaceImageItemsViewInput.swift in Sources */,
 				CF8B6D5E23CBCA280021B021 /* TermsAndServicesInitializer.swift in Sources */,
 				CF8B6D5F23CBCA280021B021 /* UIButton+Font.swift in Sources */,
@@ -30726,6 +30805,7 @@
 				CF8B6E9223CBCA280021B021 /* SearchViewPresenter.swift in Sources */,
 				9823196724F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
+				07C6D4ED284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */,
 				CF8B6E9323CBCA280021B021 /* TermsOfUseModuleInput.swift in Sources */,
 				CF71461424B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CF8B6E9423CBCA280021B021 /* UIviewControlllerExtensions.swift in Sources */,
@@ -30835,6 +30915,7 @@
 				0309F94123D57F3C001DB5FA /* NetmeraEvents.swift in Sources */,
 				CF8B6EEE23CBCA280021B021 /* ConnectedAccountsViewController.swift in Sources */,
 				F028C1172789F342005CE6AF /* PublicShareModuleInput.swift in Sources */,
+				07C6D4CD2848D80500502C28 /* TabBarCardsContainer.swift in Sources */,
 				0305A32923D5C3BF004D1EC7 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
 				3A58C4CF2636A74900570811 /* InvitationCard.swift in Sources */,
 				98231A5624F3A23500FD16E2 /* AweStruckFilter.swift in Sources */,
@@ -31226,6 +31307,7 @@
 				CF8B701D23CBCA280021B021 /* FeedbackViewInitializer.swift in Sources */,
 				CF8B701E23CBCA280021B021 /* Text+Size.swift in Sources */,
 				CF8B701F23CBCA280021B021 /* SuggestionTableViewCell.swift in Sources */,
+				07C6D4D5284B43D100502C28 /* BaseTabBarCard.swift in Sources */,
 				CF8B702023CBCA280021B021 /* ActivityTimelineViewInput.swift in Sources */,
 				CF8B702123CBCA280021B021 /* ActivityTimelineViewOutput.swift in Sources */,
 				CF8B702223CBCA280021B021 /* PeopleAlbumsManager.swift in Sources */,

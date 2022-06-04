@@ -21,6 +21,12 @@ enum AppColor {
     // MARK: TabBar
     case tabBarTint
     case tabBarTintSelected
+    case tabBarCardBackground
+    case tabBarCardBackgroundAlternative
+    case tabBarCardShadow
+    case tabBarCardLabel
+    case tabBarCardProgressTint
+    case tabBarCardProgressTrack
 
     case background
     case secondaryBackground

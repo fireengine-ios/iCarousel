@@ -27,8 +27,14 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             newValue.clipsToBounds = false
         }
     }
-    @IBOutlet weak var musicBarHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomBarsContainerBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var musicBarHeightConstraint: NSLayoutConstraint! {
+        willSet {
+            newValue.constant = MusicBar.standardHeight
+        }
+    }
     @IBOutlet weak var musicBar: MusicBar!
+    @IBOutlet weak var aboveTabBarCardStack: UIStackView!
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
@@ -36,6 +42,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     private lazy var cameraService = CameraService()
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var router = RouterVC()
+    private let cardsContainerView = TabBarCardsContainer()
 
     lazy var customNavigationControllers = TabBarConfigurator.generateControllers(router: router)
 
@@ -116,13 +123,15 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
 
         player.delegates.add(self)
 
+        setupCardsContainerView()
+
         for controller in customNavigationControllers {
             if let topViewController = controller.topViewController {
                 adjustBottomSafeAreaInset(for: topViewController)
             }
         }
     }
-    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
         player.delegates.remove(self)
@@ -164,12 +173,12 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
 
-        musicBarHeightConstraint.constant = MusicBar.standardHeight
+        musicBar.isHidden = false
     }
     
     @objc func hideMusicBar(_ sender: Any) {
         changeVisibleStatus(hidden: true)
-        musicBarHeightConstraint.constant = 0
+        musicBar.isHidden = true
     }
     
     func popToRootCurrentNavigationController(animated: Bool) {
@@ -214,8 +223,15 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
 
     private func adjustBottomSafeAreaInset(for viewController: UIViewController) {
-        let bottom = bottomBarsContainerView.isHidden ? 0 : bottomBarsContainerView.frame.height + 8 + 8
-        viewController.additionalSafeAreaInsets.bottom = bottom
+        let kContentBottomSpacing: CGFloat = 8
+        let bottomBarsHeight = bottomBarsContainerView.isHidden ? 0 : bottomBarsContainerView.frame.height
+        let inset = bottomBarsHeight + bottomBarsContainerBottomConstraint.constant + kContentBottomSpacing
+        viewController.additionalSafeAreaInsets.bottom = inset
+    }
+
+    private func setupCardsContainerView() {
+        aboveTabBarCardStack.addArrangedSubview(cardsContainerView)
+        CardsManager.default.addViewForNotification(view: cardsContainerView)
     }
     
     func setBGColor(color: UIColor) {
