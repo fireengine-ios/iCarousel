@@ -130,34 +130,34 @@ final class ProgressTabBarCard: BaseTabBarCard {
     func configure(with operationType: OperationType) {
         let isWiFi = ReachabilityService.shared.isReachableViaWiFi
         let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.mobileData
-        // TODO: Facelift, LTE icon
-        let iconImage = isWiFi ? Image.iconWifi.image : UIImage(named: "SyncingPopUpImage")
+        let iconImage = isWiFi ? Image.iconWifi : Image.iconNetworkLTE
 
         currentItemImageView.isHidden = true
+        iconImageView.image = iconImage.image(
+            withTintColor: .tabBarCardLabel,
+            in: iconImageView
+        )
+
         switch operationType {
         case .sync:
             statusLabelExpanded.text = String(format: TextConstants.popUpSyncing, networkType)
             // TODO: Facelift, localization
             statusLabelMinimized.text = "Syncing"
-            iconImageView.image = iconImage
 
         case .upload:
             statusLabelExpanded.text = String(format: TextConstants.popUpUploading, networkType)
             // TODO: Facelift, localization? is this key ok on diff languages?
             statusLabelMinimized.text = TextConstants.uploading
-            iconImageView.image = iconImage
 
         case .download:
             statusLabelExpanded.text = TextConstants.popUpDownload
             // TODO: Facelift, localization
             statusLabelMinimized.text = "Downloading"
-            iconImageView.image = iconImage
 
         case .sharedWithMeUpload:
             statusLabelExpanded.text = String(format: TextConstants.popUpUploading, networkType)
             // TODO: Facelift, localization? is this key ok on diff languages?
             statusLabelMinimized.text = TextConstants.uploading
-            iconImageView.image = iconImage
 
         default:
             statusLabelExpanded.text = nil
