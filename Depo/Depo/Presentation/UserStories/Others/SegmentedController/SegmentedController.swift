@@ -114,8 +114,8 @@ class SegmentedController: BaseViewController, NibInit {
     private func setCollectionView() {
         if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            flowLayout.minimumLineSpacing = 8
-            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+            flowLayout.minimumLineSpacing = 0
+            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         }
     }
     

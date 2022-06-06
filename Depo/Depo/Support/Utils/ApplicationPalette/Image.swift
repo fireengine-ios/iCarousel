@@ -26,9 +26,28 @@ enum Image: String, AppImage {
     case iconFilePdf
     case iconFilePhoto
     case iconFilePpt
+    case iconFileRar
+    case iconFileTxt
     case iconFileVideo
     case iconFileXls
+    case iconFileZip
+    case iconFolder
     case iconMusic
+    
+    case iconFileAudioBig
+    case iconFileDocBig
+    case iconFileEmptyBig
+    case iconFilePdfBig
+    case iconFilePhotoBig
+    case iconFilePptBig
+    case iconFileRarBig
+    case iconFileTxtBig
+    case iconFileVideoBig
+    case iconFileXlsBig
+    case iconFileZipBig
+    case iconFolderBig
+    case iconMusicBig
+    
     case iconTabFiles
     case iconTabMusic
     case iconTabShare

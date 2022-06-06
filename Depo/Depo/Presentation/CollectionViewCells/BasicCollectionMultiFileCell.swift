@@ -109,7 +109,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             bigContentImageView.contentMode = .scaleAspectFill
             bigContentImageView.image = image
         } else {
-            smallContentImageView.contentMode = .scaleAspectFill
+            smallContentImageView.contentMode = .scaleAspectFit
             smallContentImageView.clipsToBounds = true
             smallContentImageView.configured = true
             smallContentImageView.setImage(image: image)
@@ -156,7 +156,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         }
 
         bigContentImageView.image = nil
-        bigContentImageView.image = WrapperedItemUtil.getSmallPreviewImageForWrapperedObject(fileType: wrappered.fileType)
+        bigContentImageView.image = WrapperedItemUtil.getBigPreviewImageForWrapperedObject(fileType: wrappered.fileType)
         if isCellSelectionEnabled {
             smallContentImageView.image = Image.iconSelectEmpty.image
         } else {

@@ -39,6 +39,7 @@ enum AppColor {
     case filesDocumentTab
     case filesFavoriteTab
     case filesSharedTab
+    case filesSeperator
 
     case primaryBackground
     case cellShadow

@@ -68,7 +68,7 @@ class AllFilesTypeCollectionViewCell: UICollectionViewCell {
         willSet {
             newValue.addRoundedShadows(cornerRadius: 12,
                                        shadowColor: AppColor.filesBigCellShadow.cgColor,
-                                       opacity: 0.8, radius: 6.0)
+                                       opacity: 0.6, radius: 6.0)
         }
     }
     
@@ -84,13 +84,15 @@ class AllFilesTypeCollectionViewCell: UICollectionViewCell {
     
     func setSelection(with type: AllFilesType, isSelected: Bool) {
         if isSelected {
-            typeIcon.image = Image.iconCheckmarkSelected.image
+            typeIcon.image = Image.iconSelectCheck.image.withRenderingMode(.alwaysTemplate)
             typeIcon.tintColor = type.tintColor
             typeView.layer.borderColor = type.tintColor?.cgColor
             typeView.layer.borderWidth = 1
+            typeView.layer.shadowRadius = 0
         } else {
             configure(with: type)
             typeView.layer.borderWidth = 0
+            typeView.layer.shadowRadius = 6.0
         }
     }
 }
