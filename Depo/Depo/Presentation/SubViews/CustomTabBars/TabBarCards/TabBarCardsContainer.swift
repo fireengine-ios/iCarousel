@@ -14,7 +14,11 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
     private let lock = NSLock()
     private let stackView = UIStackView()
     private let permittedOperationTypes: Set<OperationType> = [
-        .prepareQuickScroll
+        .prepareQuickScroll,
+        .sync,
+        .upload,
+        .sharedWithMeUpload,
+        .download
     ]
 
     private var viewsByType: [OperationType: BaseTabBarCard] = [:]
@@ -43,8 +47,8 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
         DispatchQueue.main.async {
 
             self.lock.lock()
-            self.stackView.insertArrangedSubview(cardView, at: 0)
-            self.stackView.sendSubviewToBack(cardView)
+            self.stackView.addArrangedSubview(cardView)
+            self.updateBackgroundForCards()
             self.lock.unlock()
         }
     }
@@ -55,7 +59,17 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
                 self.lock.lock()
                 self.stackView.removeArrangedSubview(cardView)
                 cardView.removeFromSuperview()
+                self.updateBackgroundForCards()
                 self.lock.unlock()
+            }
+        }
+    }
+
+    private func updateBackgroundForCards() {
+        for (index, subview) in stackView.arrangedSubviews.enumerated() {
+            if let cardView = subview as? BaseTabBarCard {
+                let backgroundColor: AppColor = index % 2 == 0 ? .tabBarCardBackground : .tabBarCardBackgroundAlternative
+                cardView.backgroundColor = backgroundColor.color
             }
         }
     }
@@ -70,6 +84,13 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
         switch operation {
         case .prepareQuickScroll:
             return PrepareForQuickScrollTabBarCard.initFromNib()
+
+        case .sync,
+             .upload,
+             .sharedWithMeUpload,
+             .download:
+            return ProgressTabBarCard.initFromNib()
+
         default:
             return nil
         }
@@ -90,44 +111,41 @@ final class TabBarCardsContainer: UIView, CardsManagerViewProtocol {
 
         if let view = getViewForOperation(operation: type) {
             viewsByType[type] = view
-            // TODO: Facelift, progress?
-//            if let popUp = view as? ProgressCard {
-//                popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
-//                if let item = object {
-//                    popUp.setImageForUploadingItem(item: item)
-//                }
-//            }
+
+            if let progressCard = view as? ProgressTabBarCard {
+                progressCard.configure(with: type)
+                progressCard.setProgress(allItems: allOperations, readyItems: completedOperations)
+                if let item = object {
+                    progressCard.setImageForUploadingItem(item: item)
+                }
+            }
             addCardView(view)
         }
     }
 
-    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int ) {
-        if let view = viewsByType[type] {
-            // TODO: FAcelift
-//            if let popUp = view as? ProgressCard {
-//                popUp.setProgress(allItems: allOperations, readyItems: completedOperations)
-//                if let item = object {
-//                    popUp.setImageForUploadingItem(item: item)
-//                }
-//            }
-        } else {
+    func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
+        guard let view = viewsByType[type] else {
             startOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
+            return
+        }
+
+        if let progressCard = view as? ProgressTabBarCard {
+            progressCard.setProgress(allItems: allOperations, readyItems: completedOperations)
+            if let item = object {
+                progressCard.setImageForUploadingItem(item: item)
+            }
         }
     }
 
     func setProgress(ratio: Float, for operationType: OperationType, object: WrapData? ) {
-        // TODO: FAcelift
-//        guard isActive else {
-//            return
-//        }
-//        guard let popUp = viewsByType[operationType] as? ProgressCard else {
-//            return
-//        }
-//
-//        popUp.setProgressBar(ratio: ratio)
-//        if let `object` = object {
-//            popUp.setImageForUploadingItem(item: object)
-//        }
+        guard let progressCard = viewsByType[operationType] as? ProgressTabBarCard else {
+            return
+        }
+
+        progressCard.setProgress(ratio: ratio)
+        if let object = object {
+            progressCard.setImageForUploadingItem(item: object)
+        }
     }
 
     func stopOperationWithType(type: OperationType) {

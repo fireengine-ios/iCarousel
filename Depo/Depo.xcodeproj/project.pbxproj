@@ -537,6 +537,8 @@
 		07C6D4EB284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */; };
 		07C6D4EC284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */; };
 		07C6D4ED284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */; };
+		07C6D4F4284CF8C600502C28 /* ProgressTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4F3284CF8C500502C28 /* ProgressTabBarCard.swift */; };
+		07C6D4F6284CFA5900502C28 /* ProgressTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C6D4F5284CFA5900502C28 /* ProgressTabBarCard.xib */; };
 		07C759DE2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift */; };
 		07C759DF2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift */; };
 		07C759E02816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C759DD2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift */; };
@@ -9399,6 +9401,8 @@
 		07C6D4DE284B4B7300502C28 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
 		07C6D4E4284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareForQuickScrollTabBarCard.xib; sourceTree = "<group>"; };
 		07C6D4E5284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrepareForQuickScrollTabBarCard.swift; sourceTree = "<group>"; };
+		07C6D4F3284CF8C500502C28 /* ProgressTabBarCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTabBarCard.swift; sourceTree = "<group>"; };
+		07C6D4F5284CFA5900502C28 /* ProgressTabBarCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressTabBarCard.xib; sourceTree = "<group>"; };
 		07C759DD2816C58B00B028F0 /* GalleryCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
 		07C759E52819369200B028F0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		07C759EA281936C800B028F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -12472,6 +12476,7 @@
 		07C6D4D7284B458B00502C28 /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				07C6D4F2284BA70E00502C28 /* ProgressTabBarCard */,
 				07C6D4E3284B4C3400502C28 /* PrepareForQuickScrollTabBarCard */,
 			);
 			path = Cards;
@@ -12492,6 +12497,15 @@
 				07C6D4E4284B4C3400502C28 /* PrepareForQuickScrollTabBarCard.xib */,
 			);
 			path = PrepareForQuickScrollTabBarCard;
+			sourceTree = "<group>";
+		};
+		07C6D4F2284BA70E00502C28 /* ProgressTabBarCard */ = {
+			isa = PBXGroup;
+			children = (
+				07C6D4F3284CF8C500502C28 /* ProgressTabBarCard.swift */,
+				07C6D4F5284CFA5900502C28 /* ProgressTabBarCard.xib */,
+			);
+			path = ProgressTabBarCard;
 			sourceTree = "<group>";
 		};
 		07CCBF7326FC71D4002322B0 /* ValidateSecurityQuestion */ = {
@@ -21830,6 +21844,7 @@
 				98185BA7248A709E0013929C /* WarningPopupController.xib in Resources */,
 				7373EC26235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
 				927E508721E8AAE600E44CC0 /* InstaPickCard.xib in Resources */,
+				07C6D4F6284CFA5900502C28 /* ProgressTabBarCard.xib in Resources */,
 				F0B64C83275DEBEA00002F66 /* DarkModeOptionsView.xib in Resources */,
 				8C0E90401FDEBDFF00789C91 /* TurkcellSaturaMedIta.ttf in Resources */,
 				8C0E90411FDEBDFF00789C91 /* GridListTopBar.xib in Resources */,
@@ -24497,6 +24512,7 @@
 				4A6DBE8421A6F8DC0003D1B4 /* PackageInfoView.swift in Sources */,
 				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				077EEFAA26E762E6004D0D74 /* VerifyRecoveryEmailPopUp.swift in Sources */,
+				07C6D4F4284CF8C600502C28 /* ProgressTabBarCard.swift in Sources */,
 				98625F292580FAAB008627F0 /* MBProgressHud+Extensions.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
 				98495F59255975810093B2C2 /* PlaceholderTextView.swift in Sources */,

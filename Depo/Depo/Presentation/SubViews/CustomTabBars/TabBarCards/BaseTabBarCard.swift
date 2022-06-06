@@ -12,7 +12,7 @@ import UIKit
 private let kDefaultCornerRadius: CGFloat = 16
 private let kAdditionalBottomMargin: CGFloat = 16
 
-class BaseTabBarCard: UIView {
+class BaseTabBarCard: UIView, NibInit {
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint! {
         willSet {
             newValue.constant += kAdditionalBottomMargin
@@ -30,8 +30,6 @@ class BaseTabBarCard: UIView {
     }
 
     private func configure() {
-        backgroundColor = AppColor.tabBarCardBackground.color
-
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.cornerRadius = kDefaultCornerRadius
 

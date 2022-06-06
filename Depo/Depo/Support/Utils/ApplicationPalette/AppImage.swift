@@ -23,14 +23,16 @@ extension AppImage {
         return image
     }
 
-    @available(iOS, deprecated: 13.0, message: "Remove the view parameter once the minimum is updated to iOS 13")
+    @available(iOS, deprecated: 13.0, message: "Use image(withTintColor:) once the minimum is updated to iOS 13")
     func image(withTintColor tintColor: AppColor, in view: UIView) -> UIImage {
-        if #available(iOS 13.0, *) {
-            return image.withTintColor(tintColor.color, renderingMode: .alwaysTemplate)
-        } else {
-            view.tintColor = tintColor.color
-            return image.withRenderingMode(.alwaysTemplate)
-        }
+        view.tintColor = tintColor.color
+        return image.withRenderingMode(.alwaysTemplate)
+    }
+
+    @available(iOS 13.0, *)
+    @available(iOSApplicationExtension 13.0, *)
+    func image(withTintColor tintColor: AppColor) -> UIImage {
+        return image.withTintColor(tintColor.color)
     }
 }
 

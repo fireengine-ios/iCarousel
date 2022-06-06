@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final class PrepareForQuickScrollTabBarCard: BaseTabBarCard, NibInit {
+final class PrepareForQuickScrollTabBarCard: BaseTabBarCard {
 
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
