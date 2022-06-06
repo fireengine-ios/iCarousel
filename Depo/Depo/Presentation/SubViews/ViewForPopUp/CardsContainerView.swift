@@ -181,15 +181,6 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         return true
     }
     
-    private func checkIsNeedShowPopUpFor(operationType: OperationType) -> Bool {
-        switch operationType {
-        case .prepareToAutoSync:
-            return viewsByType[.sync] == nil
-        default:
-            return true
-        }
-    }
-    
     func getViewForOperation(operation: OperationType) -> BaseCardView {
         return CardsManager.cardViewForOperaion(type: operation)
     }
@@ -212,16 +203,12 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
         if !checkIsThisIsPermittedType(type: type) {
             return
         }
-        
-        if !checkIsNeedShowPopUpFor(operationType: type) {
-            return
-        }
-        
+
         if viewsByType[type] == nil {
             
             let view = getViewForOperation(operation: type)
             
-            if type.isContained(in: [.sync, .upload, .prepareToAutoSync, .sharedWithMeUpload]) {
+            if type.isContained(in: [.sync, .upload, .sharedWithMeUpload]) {
                 view.shouldScrollToTop = true
             }
             

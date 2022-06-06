@@ -18,4 +18,6 @@ enum Image: String, AppImage {
     case iconSyncStatusFailed
     case iconSyncStatusQueued
     case iconPlay
+    case iconArrowDown
+    case iconWifi
 }

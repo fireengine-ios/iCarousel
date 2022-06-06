@@ -12,7 +12,8 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
 
     @IBOutlet private weak var menuButton: UIButton! {
         willSet {
-            let image = Image.iconThreeDotsHorizontal.image(withTintColor: .tint, in: newValue)
+            // TODO: Facelift, icons tint?
+            let image = Image.iconThreeDotsHorizontal.image(withTintColor: .label, in: newValue)
             newValue.setImage(image, for: .normal)
             newValue.isHidden = true
         }

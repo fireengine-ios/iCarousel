@@ -42,8 +42,17 @@ final class NavigationHeaderView: UIView, NibInit {
 
     @IBOutlet private weak var logoImageView: UIImageView!
     @IBOutlet private weak var backgroundImageView: UIImageView!
-    @IBOutlet private weak var rightItemsStackView: UIStackView!
-    @IBOutlet private weak var leftItemsStackView: UIStackView!
+    @IBOutlet private weak var rightItemsStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 12
+        }
+    }
+
+    @IBOutlet private weak var leftItemsStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 12
+        }
+    }
 
     override var intrinsicContentSize: CGSize {
         CGSize(width: super.intrinsicContentSize.width, height: Self.standardHeight)

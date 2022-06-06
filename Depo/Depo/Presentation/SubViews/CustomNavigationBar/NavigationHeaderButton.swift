@@ -18,6 +18,6 @@ final class NavigationHeaderButton: UIButton {
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(width: 40, height: 40)
+        CGSize(width: 28, height: 28)
     }
 }
