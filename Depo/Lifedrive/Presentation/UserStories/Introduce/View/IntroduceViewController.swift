@@ -151,9 +151,7 @@ final class IntroduceViewController: ViewController {
             signInWithGoogleButton.isHidden = true
         }
         
-        if signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden {
-            orLabel.isHidden = true
-        }
+        orLabel.isHidden = signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden
     }
 
     override var preferredNavigationBarStyle: NavigationBarStyle {
