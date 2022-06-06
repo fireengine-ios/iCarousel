@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol SegmentedChildController: AnyObject {
     func setTitle(_ title: String)
@@ -54,8 +55,17 @@ class SegmentedController: BaseViewController, NibInit {
         return controller
     }
     
-    @IBOutlet private weak var containerView: UIView!
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        willSet {
+            newValue.delegate = self
+            newValue.dataSource = self
+            newValue.showsHorizontalScrollIndicator = false
+            newValue.register(UINib(nibName: CollectionViewCellsIdsConstant.cellForAllFilesType, bundle: nil),
+                              forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForAllFilesType)
+        }
+    }
     
+    @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var segmentedControlContainer: UIView!
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
@@ -67,6 +77,11 @@ class SegmentedController: BaseViewController, NibInit {
     
     private(set) var viewControllers = [BaseViewController]()
     private var alignment: Alignment = .center
+    private var selectedCellIndexPath: IndexPath? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     var currentController: UIViewController {
         return viewControllers[safe: segmentedControl.selectedSegmentIndex] ?? UIViewController()
@@ -93,6 +108,15 @@ class SegmentedController: BaseViewController, NibInit {
         needToShowTabBar = true
         setupSegmentedControl()
         setupAlignment()
+        setCollectionView()
+    }
+    
+    private func setCollectionView() {
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            flowLayout.minimumLineSpacing = 8
+            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        }
     }
     
     private func setupSegmentedControl() {
@@ -179,6 +203,19 @@ class SegmentedController: BaseViewController, NibInit {
         containerView.addSubview(childController.view)
         childController.didMove(toParent: self)
     }
+    
+    func switchAllFilesCategory(to index: Int) {
+        if AllFilesType.allCases.count >= index, selectedIndex != index {
+            guard index < viewControllers.count else {
+                assertionFailure()
+                return
+            }
+            
+            selectedIndex = index
+            children.forEach { $0.removeFromParentVC() }
+            setupSelectedController(viewControllers[selectedIndex])
+        }
+    }
 }
 
 
@@ -201,3 +238,33 @@ extension UIViewController {
     }
 }
 
+extension SegmentedController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return AllFilesType.allCases.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForAllFilesType,
+                                                         for: indexPath) as? AllFilesTypeCollectionViewCell {
+            let types = AllFilesType.allCases
+            cell.configure(with: types[indexPath.row])
+            cell.setSelection(with: types[indexPath.row], isSelected: indexPath == selectedCellIndexPath)
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+}
+
+extension SegmentedController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? AllFilesTypeCollectionViewCell
+        if indexPath == selectedCellIndexPath {
+            selectedCellIndexPath = nil
+            switchAllFilesCategory(to: 0)
+        } else {
+            cell?.setSelection(with: AllFilesType.allCases[indexPath.row], isSelected: true)
+            selectedCellIndexPath = indexPath
+            switchAllFilesCategory(to: indexPath.row + 1)
+        }
+    }
+}

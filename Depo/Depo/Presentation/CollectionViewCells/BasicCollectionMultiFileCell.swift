@@ -46,14 +46,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     @IBOutlet private weak var shadowView: UIView! {
         willSet {
-            newValue.layer.cornerRadius = 12
-            newValue.layer.masksToBounds = true;
-            newValue.backgroundColor = UIColor.white
-            newValue.layer.shadowColor = AppColor.filesBigCellShadow.cgColor
-            newValue.layer.shadowOpacity = 0.8
-            newValue.layer.shadowOffset = .zero
-            newValue.layer.shadowRadius = 6.0
-            newValue.layer.masksToBounds = false
+            newValue.addRoundedShadows(cornerRadius: 12,
+                                       shadowColor: AppColor.filesBigCellShadow.cgColor,
+                                       opacity: 0.8, radius: 6.0)
         }
     }
     
