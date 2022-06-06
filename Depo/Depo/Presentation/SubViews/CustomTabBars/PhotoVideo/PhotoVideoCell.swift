@@ -106,7 +106,7 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        selectionStateView.layer.borderColor = AppColor.darkBlueAndTealish.color.cgColor
+        selectionStateView.layer.borderColor = AppColor.tint.cgColor
     }
 
     // MARK: Utility Methods(Public)
