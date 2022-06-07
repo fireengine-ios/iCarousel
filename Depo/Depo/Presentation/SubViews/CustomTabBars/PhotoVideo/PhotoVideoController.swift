@@ -89,10 +89,10 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         headerContainingViewController?.isHeaderBehindContent = false
         headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
         headerContainingViewController?.setHeaderLeftItems([
-            NavigationHeaderButton(navigationBarImage: .headerActionProfile)
+            NavigationHeaderButton(navigationBarImage: .headerActionProfile, target: self, action: #selector(showSettings))
         ])
         headerContainingViewController?.setHeaderRightItems([
-            NavigationHeaderButton(navigationBarImage: .headerActionSearch),
+            NavigationHeaderButton(navigationBarImage: .headerActionSearch, target: self, action: #selector(showSearch)),
             NavigationHeaderButton(navigationBarImage: .headerActionPlus)
         ])
     }
@@ -146,6 +146,26 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         if collectionView.contentOffset.y < -collectionView.contentInset.top {
             collectionView.contentOffset.y = -collectionView.contentInset.top
         }
+    }
+
+    // MARK: - Header Actions
+
+    @objc private func showSettings() {
+        let controller: UIViewController?
+
+        if Device.isIpad {
+            controller = router.settingsIpad
+        } else {
+            controller = router.settings
+        }
+
+        if let controller = controller {
+            router.pushViewController(viewController: controller)
+        }
+    }
+
+    @objc private func showSearch() {
+        showSearchScreen()
     }
     
     // MARK: - setup
