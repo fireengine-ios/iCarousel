@@ -75,6 +75,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionViewManager.collectionViewLayout.delegate = dataSource
         collectionViewManager.collectionViewLayout.pinsSectionHeadersToLayoutGuide = headerContainingViewController?.originalSafeAreaLayoutGuide
         navBarManager.setDefaultMode()
+        pinchManager.setup()
 
         navigationBarHidden = true
         needToShowTabBar = true
@@ -85,7 +86,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         performFetch()
         collectionView.addInteraction(UIDropInteraction(delegate: self))
 
-
         headerContainingViewController?.isHeaderBehindContent = false
         headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
         headerContainingViewController?.setHeaderLeftItems([
@@ -95,9 +95,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             NavigationHeaderButton(navigationBarImage: .headerActionSearch),
             NavigationHeaderButton(navigationBarImage: .headerActionPlus)
         ])
-
-        // TODO: Facelift, remove this
-        print(pinchManager)
     }
     
     deinit {
