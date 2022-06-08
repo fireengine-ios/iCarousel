@@ -2006,9 +2006,12 @@
 "security_popup_warning_body1" = "تم حفظ سؤال الأمان بنجاح ، وتم تلقي الخطأ التالي للبريد الإلكتروني المخصص للطوارئ:";
 "security_popup_warning_body2" = "تم حفظ البريد الإلكتروني الخاص بالاسترداد بنجاح ، وقد حدث الخطأ التالي لسؤال الأمان:";
 "security_popup_warning_footer" = "يمكنك إعادة إدخال البريد الإلكتروني الخاص بالاسترداد عبر الإعدادات -> تفاصيل الحساب -> ملف التعريف الخاص بي.";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
 "apple_login_user_exists_body" = "يوجد حساب lifebox مسجل على عنوان البريد الإلكتروني%@. لتوصيل طريقة تسجيل الدخول باستخدام Apple ID بحساب lifebox موجود ، يجب عليك أولاً إدخال كلمة مرور lifebox الخاصة بك.";
 "settings_apple_password_required" = "لتعطيل تسجيل الدخول إلى Apple ID ، تحتاج إلى تعيين كلمة مرور lifebox.";
 "apple_login_show_mail_warning" = "تحتاج إلى السماح بمشاركة عنوان بريدك الإلكتروني مع lifebox لتسجيل الدخول باستخدام Apple ID الخاص بك. يرجى النقر فوق الزر ليتم توجيهك إلى صفحة الإعدادات ، واتبع الإرشادات لإزالة حساب lifebox ضمن Apple ID> كلمة المرور والأمان> التطبيقات التي تستخدم معرف Apple واتبع الخطوات مرة أخرى لتسجيل الدخول باستخدام Apple ID.";
-"ETK_KVKK_Izin_Politikası" = "نهج الأذونات";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "نهج الأذونات";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"ETK_KVKK_Izin_Politikası" = "";

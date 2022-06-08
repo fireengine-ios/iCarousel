@@ -2299,9 +2299,12 @@ Please check I have understood the intended command here*/
 "security_popup_warning_body1" = "La question de sécurité est enregistrée ave succès, l'erreur suivante pour l'e-mail de récupération s'est produite :";
 "security_popup_warning_body2" = "L'e-mail de récupération est enregistré avec succès, l'erreur suivante pour la question de sécurité s'est produite :";
 "security_popup_warning_footer" = "Vous pouvez ressaisir votre adresse e-mail de récupération via Paramètres -> Détails du Compte -> Mon Profil.";
-"kvkk_firms_link" = "";
-"kvkk_commercial_info_link" = "";
 "apple_login_user_exists_body" = "Il existe un compte lifebox enregistré à l'adresse e-mail %@. Pour connecter la méthode Connexion Avec Apple ID à un compte lifebox existant, vous devez d'abord entrer votre mot de passe lifebox.";
 "settings_apple_password_required" = "Pour désactiver la connexion Apple ID, vous devez définir le mot de passe lifebox.";
 "apple_login_show_mail_warning" = "Vous devez autoriser le partage de votre adresse e-mail avec lifebox afin de vous connecter avec votre identifiant Apple. Veuillez cliquer sur le bouton ci-dessous pour être dirigé vers la page Paramètres, suivez les instructions pour supprimer le compte lifebox sous Identifiant Apple > Mot de passe et sécurité > Applications utilisant l'identifiant Apple et suivez à nouveau les étapes pour vous connecter avec votre identifiant Apple.";
-"ETK_KVKK_Izin_Politikası" = "Politique d'autorisation";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "Politique d'autorisation";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"ETK_KVKK_Izin_Politikası" = "";
