@@ -509,6 +509,12 @@
 		07AC65FA26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
 		07AC65FB26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
 		07AC65FC26EA1A2A00CF8AE3 /* UtilityAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AC65F826EA1A2A00CF8AE3 /* UtilityAPIService.swift */; };
+		07B5EBB8285089C000D3D242 /* ProgressTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4F3284CF8C500502C28 /* ProgressTabBarCard.swift */; };
+		07B5EBBC285089CD00D3D242 /* ProgressTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C6D4F5284CFA5900502C28 /* ProgressTabBarCard.xib */; };
+		07B5EBBD285089CE00D3D242 /* ProgressTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C6D4F5284CFA5900502C28 /* ProgressTabBarCard.xib */; };
+		07B5EBBE285089CE00D3D242 /* ProgressTabBarCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07C6D4F5284CFA5900502C28 /* ProgressTabBarCard.xib */; };
+		07B5EBBF285089DA00D3D242 /* ProgressTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4F3284CF8C500502C28 /* ProgressTabBarCard.swift */; };
+		07B5EBC0285089DB00D3D242 /* ProgressTabBarCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6D4F3284CF8C500502C28 /* ProgressTabBarCard.swift */; };
 		07C50C4C28102E3C009617B9 /* NavigationHeaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C50C4B28102E3C009617B9 /* NavigationHeaderButton.swift */; };
 		07C50C4D28102E3C009617B9 /* NavigationHeaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C50C4B28102E3C009617B9 /* NavigationHeaderButton.swift */; };
 		07C50C4E28102E3C009617B9 /* NavigationHeaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C50C4B28102E3C009617B9 /* NavigationHeaderButton.swift */; };
@@ -22338,6 +22344,7 @@
 				CE784DCB22A685FB00662219 /* LeavePremiumViewController.xib in Resources */,
 				07C759ED281936C800B028F0 /* Images.xcassets in Resources */,
 				9823199C24F3A1E700FD16E2 /* LightView.xib in Resources */,
+				07B5EBBD285089CE00D3D242 /* ProgressTabBarCard.xib in Resources */,
 				CE784DCD22A685FB00662219 /* PhotoVideoDetailViewController.xib in Resources */,
 				CE784DD022A685FB00662219 /* ActivityTimelineViewController.xib in Resources */,
 				983BF7CD2361C33D004FFBDB /* SharedImages.xcassets in Resources */,
@@ -22548,6 +22555,7 @@
 				0305A31823D5C369004D1EC7 /* AlbumsSliderCell.xib in Resources */,
 				CF8B68B523CBC9D70021B021 /* OptInController.xib in Resources */,
 				0305A30C23D5C2FD004D1EC7 /* DivorceCard.xib in Resources */,
+				07B5EBBC285089CD00D3D242 /* ProgressTabBarCard.xib in Resources */,
 				CF7146BF24B597A900D83E60 /* BackUpContactsCard.xib in Resources */,
 				98DBC0632410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */,
 				8E3B6B4E2462E44800BCB052 /* FileInfoView.xib in Resources */,
@@ -23088,6 +23096,7 @@
 				CF8B719823CBCA280021B021 /* SupportFormController.xib in Resources */,
 				07C759EE281936C800B028F0 /* Images.xcassets in Resources */,
 				CF8B719923CBCA280021B021 /* PhotoSelectionNoFilesView.xib in Resources */,
+				07B5EBBE285089CE00D3D242 /* ProgressTabBarCard.xib in Resources */,
 				CF8B719A23CBCA280021B021 /* TBMatikPhotoView.xib in Resources */,
 				9808B42E25540E4A002B0032 /* PrivateShareContactSuggestionView.xib in Resources */,
 				CF8B719B23CBCA280021B021 /* FacebookAccountConnectionCell.xib in Resources */,
@@ -27641,6 +27650,7 @@
 				CE7040B222EB193300124073 /* SupportFormPrefilledController.swift in Sources */,
 				CE784BB622A685FB00662219 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				98A86D9423A8BD4F00438225 /* AlbumCell.swift in Sources */,
+				07B5EBBF285089DA00D3D242 /* ProgressTabBarCard.swift in Sources */,
 				CE784BB722A685FB00662219 /* FileInfoViewController.swift in Sources */,
 				CE784BB822A685FB00662219 /* FileInfoModuleInput.swift in Sources */,
 				CE784BB922A685FB00662219 /* InsetsButton.swift in Sources */,
@@ -29633,6 +29643,7 @@
 				CF8B686323CBC9D70021B021 /* ActivityTimelineViewOutput.swift in Sources */,
 				CF8B686423CBC9D70021B021 /* MappingError.swift in Sources */,
 				CF8B686523CBC9D70021B021 /* ActivityTimelineViewController.swift in Sources */,
+				07B5EBB8285089C000D3D242 /* ProgressTabBarCard.swift in Sources */,
 				CF8B686623CBC9D70021B021 /* ActivityTimelineModuleInput.swift in Sources */,
 				CF8B686723CBC9D70021B021 /* ActivityTimelinePresenter.swift in Sources */,
 				CF8B686823CBC9D70021B021 /* ActivityTimelineInteractorInput.swift in Sources */,
@@ -31023,6 +31034,7 @@
 				CF8B6F4623CBCA280021B021 /* SupportFormPrefilledController.swift in Sources */,
 				CF8B6F4723CBCA280021B021 /* SmallFullOfQuotaPopUp.swift in Sources */,
 				CF8B6F4823CBCA280021B021 /* FileInfoViewController.swift in Sources */,
+				07B5EBC0285089DB00D3D242 /* ProgressTabBarCard.swift in Sources */,
 				CF8B6F4923CBCA280021B021 /* FileInfoModuleInput.swift in Sources */,
 				CF8B6F4A23CBCA280021B021 /* InsetsButton.swift in Sources */,
 				CF8B6F4B23CBCA280021B021 /* BottomSelectionTabBarRouterInput.swift in Sources */,
