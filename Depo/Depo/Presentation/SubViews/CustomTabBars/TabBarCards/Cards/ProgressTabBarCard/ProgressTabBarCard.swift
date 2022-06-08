@@ -141,22 +141,18 @@ final class ProgressTabBarCard: BaseTabBarCard {
         switch operationType {
         case .sync:
             statusLabelExpanded.text = String(format: TextConstants.popUpSyncing, networkType)
-            // TODO: Facelift, localization
-            statusLabelMinimized.text = "Syncing"
+            statusLabelMinimized.text = localized(.syncing)
 
         case .upload:
             statusLabelExpanded.text = String(format: TextConstants.popUpUploading, networkType)
-            // TODO: Facelift, localization? is this key ok on diff languages?
             statusLabelMinimized.text = TextConstants.uploading
 
         case .download:
             statusLabelExpanded.text = TextConstants.popUpDownload
-            // TODO: Facelift, localization
-            statusLabelMinimized.text = "Downloading"
+            statusLabelMinimized.text = localized(.downloading)
 
         case .sharedWithMeUpload:
             statusLabelExpanded.text = String(format: TextConstants.popUpUploading, networkType)
-            // TODO: Facelift, localization? is this key ok on diff languages?
             statusLabelMinimized.text = TextConstants.uploading
 
         default:

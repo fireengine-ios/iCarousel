@@ -891,7 +891,7 @@
 "package_FWI_cancel_text" = "You can cancel or manage your Digicel subscription from the My Digicel App, Customer Care, or In Store.";
 "package_jamaica_cancel_text" = "You can cancel or manage your Digicel subscription from the My Digicel App, Customer Care, or In Store.";
 "feature_digicell_cancel_text" = "You can continue to use Premium features for free since you are a Digicell user";
-"terms_and_use_etk_checkbox" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
+"terms_and_use_etk_checkbox" = "<p>I hereby give my consent to receive <u>commercial e-mail messages</u> in order to be informed about advantageous products and services of <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Lifecell Bulut &Ccedil;&ouml;z&uuml;mleri A.Ş., Lifecell Dijital Servisler ve &Ccedil;&ouml;z&uuml;mler A.Ş and&nbsp;Group Companies</a> unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.</p>";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell and its Group Companies";
 "terms_and_use_etk_link_commercial_email_messages" = "commercial e-mail messages";
 "commercial_email_messages" = "WRITTEN CONSENT FOR COMMERCIAL E-MAIL MESSAGES\n\nI hereby agree that I give my consent to Turkcell and its Group Companies for sending commercial e-mail messages (messages containing data, voice and video which are sent for commercial purposes and transmitted electronically by using means such as telephone, call center, fax transmission, autodialing device, smart sound recorder, electronic mail, short message system) to me through my contact details which I provided when subscribing to lifebox application or which is already held by Turkcell and its Group Companies,  for the purpose of advertising and marketing various new products & services offered as well as announcing general/special opportunities provided by Turkcell and its Group Companies and/or third party entities they cooperate with, pursuant to the Law No.6563 on Regulation of Electronic Commerce (“the Law”) as well as the Regulations on Commercial Communication and Commercial Electronic Mail Messages (“the Regulations”) on perpetual basis until I exercise my right to refuse such messages even if my subscription agreement for aforesaid application expires.  \n\nCommercial e-mail messages sent by the operators, which are subject to the Electronic Communication Law No.5809, to their subscribers and users exclusively for advertising and marketing their own products & services or introducing their business are exempted pursuant to the Regulations. Therefore, I hereby agree that the consent, which I gave above, is independent of and apart from the consent I have given to the operator to which I am a subscriber/user in connection with advertisement of its products & services and that such operator shall be entitled to send commercial e-mail messages for the purposes such as advertising, marketing its own products & services within the scope of consent I have given to the operator to which I am a subscriber even if I revoke the consent given under this document by exercising my right to refuse such messages pursuant to the Law and the Regulations and that I am aware of my entitlement to refuse the commercial e-mail messages of my operator as well.";
@@ -1006,7 +1006,7 @@
 
 /*Permission screen in Settings*/
 "etk_permission_title_label" = "Commercial Electronic Message";
-"etk_permissiom_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
+"etk_permissiom_description" = "<p>I hereby give my consent to receive <u>commercial e-mail messages</u> in order to be informed about advantageous products and services of <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Lifecell Bulut &Ccedil;&ouml;z&uuml;mleri A.Ş., Lifecell Dijital Servisler ve &Ccedil;&ouml;z&uuml;mler A.Ş and&nbsp;Group Companies</a> unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.</p>";
 "NSCameraUsageDescription" = "To take pictures with your camera and to back up them to lifebox, your camera access permission is needed";
 "restore_purchases" = "Restore Purchases";
 "restore_purchases_info" = "If you want to restore your existing purchases, click on the button.";
@@ -1020,7 +1020,7 @@
 "create_story_pop_up_message" = "We are preparing your story. Once it is finished, you can access it from My Stories Album.";
 "create_story_path_to_story" = "Photos & Videos > My Stories";
 "You can not share empty album" = "You can not share empty album";
-"etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
+"etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Lifecell Bulut Çözümleri A.Ş. unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
 "global_permission_title_label" = "Global Data Permission";
 "global_permission_description" = "I consent my personal information to be shared with the cooperation operators by Turkcell in order for me to utilize the advantageous services of relevant operator regarding lifebox.";
 "terms_and_use_etk_checkbox_header" = "I have read and accept the text of Commercial Electronic Message and Data Consent.";
@@ -1541,7 +1541,7 @@
 "import_from_facebook_started" = "Import from Facebook started";
 "instapick_hashtags_copied" = "Hashtags copied";
 "create_story_selection_limit" = "Please choose maximum %d photos";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
+"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş. and Group Companies listed below to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” available <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the \"<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Permission Policy</a>\".</p>\n<table>\n<tbody>\n<tr>\n<td width=\"532\">\n<p><strong><u>Data Processing/Sharing Consent Group Companies</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p><strong><u>Commercial Electronic Messages Consent Group Companies</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Global Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Finansman A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Sigorta Aracılık Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Teknoloji Araştırma ve Geliştirme A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Satış ve Dağıtım Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p>\n</td>\n</tr>\n</tbody>\n</table>";
 "free_up_space_alert_title" = "Free Up Space";
 "free_up_space_no_duplicates" = "You have no duplicate photos/videos.";
 "free_up_space_in_progress" = "Your duplicate file list is not ready yet, please try again later.";
@@ -2013,7 +2013,45 @@
 "save_to_my_lifebox_full_storage_title" = "iPhone Storage Full";
 "save_to_my_lifebox_full_storage_body" = "You can free up space on this iPhone by managing your storage in Settings.";
 "places_map_title" = "Map";
-"map_location_detail_header" = "Photos at this location";
+"map_location_detail_header" = "Photos at this Location";
 "beeline_feature_cancel_TC" = "";
-"security_popup_body" = "Şifenizi unuttuğunuzda yenileyebilmek için aşağıdaki bilgilerden en az birini giriniz";
-"security_popup_header" = "Güvenlik sorusu veya Kurtarma e-postanı belirle";
+"security_popup_body" = "Please enter at least 1 field to recover your account easily when you forgot your password";
+"security_popup_header" = "Set Your Recovery E-mail or Security Question";
+"save_to_my_billo" = "Save to My Billo";
+"save_to_my_billo_download" = "Do you want to download billo - %@ - %@.zip file?";
+"on_boarding_btn_google_login" = "Sign in with Google";
+"on_boarding_or" = "or";
+"on_boarding_btn_apple_login" = "Sign in with Apple";
+"google_login_user_exists_body" = "An existing registered account is found with %@ e-mail, to connect Google Login ID with your existing lifebox account you must first enter your lifebox password.";
+"settings_googe_apple_connect" = "Login Options";
+"settings_googe" = "Login with Google ID";
+"settings_apple" = "Login with Apple ID";
+"settings_google_password_required" = "In order to turn off the Google ID Login, you must set a lifebox password first.";
+"settings_google_apple_connect" = "Login Options";
+"settings_google" = "Login with Google ID";
+"settings_change_password_google_warning" = "In order to change your password, you must login to your lifebox account with your Google ID.";
+"settings_change_password_apple_warning" = "In order to change your password, you must login to your lifebox account with your Apple ID.";
+"settings_change_password_apple_google_warning" = "In order to change your password, you must login to your lifebox account with your Google ID or Apple ID.";
+"settings_googe_apple_set_password" = "Set lifebox Password";
+"settings_google_apple_mail_match_error" = "To connect your account to lifebox, your e-mail must be the same on each platform.";
+"googe_apple_login_invalid_token" = "Invalid login attempt, please check your login credential and try again.";
+"settings_google_apple_empty_mail_error" = "You have to add an email address to your account.";
+"password_change_external_auth_required_error" = "In order to change your password, you can either login to your lifebox account with your Google ID/Apple ID or follow the Forgot My Password instructions on the login screen.";
+"password_change_forgot_password_required_error" = "In order to change your password, you must logout from your account first and follow the Forgot My Password instructions on the login screen.";
+"kvkk_toggle_desc" = "Data Processing/Sharing Consent";
+"kvkk_toggle_text" = "I hereby give my consent to allow Lifecell Bulut Çözümleri A.Ş. to process my personal data and share them with the parties listed in the %@ .";
+"security_popup_warning_header" = "An Incorrect Information Is Entered";
+"security_popup_warning_body1" = "The security question is successfully saved, the following error for the recovery e-mail has occurred:";
+"security_popup_warning_body2" = "The recovery e-mail is successfully saved, the following error for the security question has occurred:";
+"security_popup_warning_footer" = "You can re-enter your recovery e-mail via Settings -> Account Details -> My Profile.";
+"apple_login_user_exists_body" = "An existing registered account is found with %@ e-mail, to connect Apple Login ID with your existing lifebox account you must first enter your lifebox password.";
+"settings_apple_password_required" = "In order to turn off the Apple ID Login, you must set a lifebox password first.";
+"apple_login_show_mail_warning" = "You need to allow your e-mail address to be shared with lifebox in order to login with your Apple ID. Please click the button below to be directed to Settings page, follow the instructions to remove the lifebox account under Apple ID > Password & Security > Apps Using Apple ID and follow the steps again to login with your Apple ID.";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "Permission Policy";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"ETK_KVKK_Izin_Politikası" = "Permission Policy";
+"syncing" = "Syncing";
+"downloading" = "Downloading";
