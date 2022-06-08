@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 final class TextRecognitionService {
-    let remoteService = RemoteTextRecognitionService()
-    @available(iOS 13.0, *)
-    lazy var localService = LocalTextRecognitionService()
+    private let remoteService = RemoteTextRecognitionService()
 
     func process(fileUUID: String, image: UIImage,
                  completion: @escaping (ImageTextSelectionData) -> Void,
@@ -25,16 +23,6 @@ final class TextRecognitionService {
                 }
             }
         }
-
-//        if #available(iOS 13.0, *) {
-//            localService.process(image: image) { unsortedLines in
-//                // localService's background is the current dispatch queue
-//                let result = self.processLocalResult(lines: unsortedLines)
-//                completionDispatchQueue.async {
-//                    completion(result)
-//                }
-//            }
-//        }
     }
 
     private func processRemoteResponse(_ response: RemoteTextRecognitionModel?, image: UIImage) -> ImageTextSelectionData {

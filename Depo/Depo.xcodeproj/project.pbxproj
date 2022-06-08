@@ -431,10 +431,6 @@
 		0780AB5527916834000760D9 /* RemoteTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */; };
 		0780AB5627916834000760D9 /* RemoteTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */; };
 		0780AB5727916834000760D9 /* RemoteTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */; };
-		0780AB5C27916846000760D9 /* LocalTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */; };
-		0780AB5D27916846000760D9 /* LocalTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */; };
-		0780AB5E27916846000760D9 /* LocalTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */; };
-		0780AB5F27916846000760D9 /* LocalTextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */; };
 		0780AB6027916846000760D9 /* TextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5A27916845000760D9 /* TextRecognitionService.swift */; };
 		0780AB6127916846000760D9 /* TextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5A27916845000760D9 /* TextRecognitionService.swift */; };
 		0780AB6227916846000760D9 /* TextRecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB5A27916845000760D9 /* TextRecognitionService.swift */; };
@@ -9385,7 +9381,6 @@
 		0780AB192791681E000760D9 /* ImageTextSelectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextSelectionData.swift; sourceTree = "<group>"; };
 		0780AB4E27916833000760D9 /* RemoteTextRecognitionModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteTextRecognitionModels.swift; sourceTree = "<group>"; };
 		0780AB4F27916833000760D9 /* RemoteTextRecognitionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteTextRecognitionService.swift; sourceTree = "<group>"; };
-		0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalTextRecognitionService.swift; sourceTree = "<group>"; };
 		0780AB5A27916845000760D9 /* TextRecognitionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRecognitionService.swift; sourceTree = "<group>"; };
 		0780AB5B27916845000760D9 /* TextRecognitionProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextRecognitionProcessor.swift; sourceTree = "<group>"; };
 		0786E1852660E55400BA7136 /* AccessibleCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibleCheckBoxView.swift; sourceTree = "<group>"; };
@@ -12471,7 +12466,6 @@
 		0780AB5827916845000760D9 /* TextRecognitionService */ = {
 			isa = PBXGroup;
 			children = (
-				0780AB5927916845000760D9 /* LocalTextRecognitionService.swift */,
 				0780AB5A27916845000760D9 /* TextRecognitionService.swift */,
 				0780AB5B27916845000760D9 /* TextRecognitionProcessor.swift */,
 			);
@@ -26040,7 +26034,6 @@
 				735766E523AE1B34008589E9 /* StickerCollectionViewCell.swift in Sources */,
 				B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */,
 				CF71466424B597A900D83E60 /* ContactSyncAnalyzeProgressView.swift in Sources */,
-				0780AB5C27916846000760D9 /* LocalTextRecognitionService.swift in Sources */,
 				98C878272074E1C100374177 /* NavigationController.swift in Sources */,
 				98570AFF208F7558002CCEBA /* Spotlight.swift in Sources */,
 				8C0E8FC71FDEBDFF00789C91 /* ActivityTimelineRouter.swift in Sources */,
@@ -27849,7 +27842,6 @@
 				CE784BD522A685FB00662219 /* FaceImageItemsRouterInput.swift in Sources */,
 				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
 				CF7146BB24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
-				0780AB5E27916846000760D9 /* LocalTextRecognitionService.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
 				982706F52548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				A74ADA4E23A38362007DD192 /* CarouselPageModel.swift in Sources */,
@@ -29080,7 +29072,6 @@
 				730F8ABB23CDD58900798B61 /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				CF8B663C23CBC9D70021B021 /* TwoFactorChallengeInteractor.swift in Sources */,
 				98231A4724F3A23500FD16E2 /* WhisperFilter.swift in Sources */,
-				0780AB5D27916846000760D9 /* LocalTextRecognitionService.swift in Sources */,
 				CF8B663D23CBC9D70021B021 /* Alamofire+Response.swift in Sources */,
 				CF8B663E23CBC9D70021B021 /* UpdatePasswordErrors.swift in Sources */,
 				CF7145ED24B597A800D83E60 /* ContactListDetailViewController.swift in Sources */,
@@ -31255,7 +31246,6 @@
 				CF8B6F7023CBCA280021B021 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				CF8B6F7123CBCA280021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				CF7146BC24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
-				0780AB5F27916846000760D9 /* LocalTextRecognitionService.swift in Sources */,
 				CF8B6F7223CBCA280021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
 				982706F62548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				CF8B6F7323CBCA280021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
