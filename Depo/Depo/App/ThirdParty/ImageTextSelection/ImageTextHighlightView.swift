@@ -38,30 +38,6 @@ final class ImageTextHighlightView: UIView {
     private func updateLayerMask() {
         let path = UIBezierPath()
 
-        // TODO: Round corners
-//        for block in layout.sortedBlocks {
-//            for (index, line) in block.lines.enumerated() {
-//                let topLeft = layout.imageViewPoint(for: line.bounds.topLeft)
-//                let topRight = layout.imageViewPoint(for: line.bounds.topRight)
-//                let bottomRight = layout.imageViewPoint(for: line.bounds.bottomRight)
-//
-//                let isFirstLine = index == 0
-//                if isFirstLine {
-//                    path.move(to: topLeft)
-//                }
-//
-//                path.addLine(to: topRight)
-//                path.addLine(to: bottomRight)
-//            }
-//
-//            for line in block.lines.reversed() {
-//                let topLeft = layout.imageViewPoint(for: line.bounds.topLeft)
-//                let bottomLeft = layout.imageViewPoint(for: line.bounds.bottomLeft)
-//
-//                path.addLine(to: bottomLeft)
-//                path.addLine(to: topLeft)
-//            }
-//        }
         for word in layout.words {
             let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
             let topRight = layout.imageViewPoint(for: word.bounds.topRight)

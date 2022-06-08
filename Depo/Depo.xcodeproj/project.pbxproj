@@ -395,10 +395,6 @@
 		0780AB2A27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */; };
 		0780AB2B27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */; };
 		0780AB2C27916820000760D9 /* ImageTextSelectionInteraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */; };
-		0780AB2D27916820000760D9 /* RecognizedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB122791681E000760D9 /* RecognizedBlock.swift */; };
-		0780AB2E27916820000760D9 /* RecognizedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB122791681E000760D9 /* RecognizedBlock.swift */; };
-		0780AB2F27916820000760D9 /* RecognizedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB122791681E000760D9 /* RecognizedBlock.swift */; };
-		0780AB3027916820000760D9 /* RecognizedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB122791681E000760D9 /* RecognizedBlock.swift */; };
 		0780AB3127916820000760D9 /* CGPointDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB132791681E000760D9 /* CGPointDistance.swift */; };
 		0780AB3227916820000760D9 /* CGPointDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB132791681E000760D9 /* CGPointDistance.swift */; };
 		0780AB3327916820000760D9 /* CGPointDistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB132791681E000760D9 /* CGPointDistance.swift */; };
@@ -9380,7 +9376,6 @@
 		0780AB0F2791681E000760D9 /* RecognizedLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognizedLine.swift; sourceTree = "<group>"; };
 		0780AB102791681E000760D9 /* RecognizedText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognizedText.swift; sourceTree = "<group>"; };
 		0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextSelectionInteraction.swift; sourceTree = "<group>"; };
-		0780AB122791681E000760D9 /* RecognizedBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecognizedBlock.swift; sourceTree = "<group>"; };
 		0780AB132791681E000760D9 /* CGPointDistance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointDistance.swift; sourceTree = "<group>"; };
 		0780AB142791681E000760D9 /* SelectionGrabberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionGrabberView.swift; sourceTree = "<group>"; };
 		0780AB152791681E000760D9 /* ImageTextHighlightView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextHighlightView.swift; sourceTree = "<group>"; };
@@ -12453,7 +12448,6 @@
 				0780AB0F2791681E000760D9 /* RecognizedLine.swift */,
 				0780AB102791681E000760D9 /* RecognizedText.swift */,
 				0780AB112791681E000760D9 /* ImageTextSelectionInteraction.swift */,
-				0780AB122791681E000760D9 /* RecognizedBlock.swift */,
 				0780AB132791681E000760D9 /* CGPointDistance.swift */,
 				0780AB142791681E000760D9 /* SelectionGrabberView.swift */,
 				0780AB152791681E000760D9 /* ImageTextHighlightView.swift */,
@@ -24863,7 +24857,6 @@
 				7373EC23235EE0F100B150BA /* InstaPickCampaignViewController.swift in Sources */,
 				07FA029927DD39F10006E56D /* ChangeRecoveryEmailPopUp.swift in Sources */,
 				3A6D27C726400ACA00A7BBE2 /* InvitationViewController.swift in Sources */,
-				0780AB2D27916820000760D9 /* RecognizedBlock.swift in Sources */,
 				981EA2ED247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
 				981691A923C860C7005A768E /* TrashBinRouter.swift in Sources */,
 				8C0E8D561FDEBDFF00789C91 /* RouteRequests.swift in Sources */,
@@ -26623,7 +26616,6 @@
 				89CC89F623AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */,
 				CE78486722A685FB00662219 /* LoginModuleInput.swift in Sources */,
 				CE78486822A685FB00662219 /* HomeCollectionViewLayout.swift in Sources */,
-				0780AB2F27916820000760D9 /* RecognizedBlock.swift in Sources */,
 				CE78486922A685FB00662219 /* LoginViewInput.swift in Sources */,
 				989BDE5A22F47B1E001DDEB2 /* SpotifyImportViewController.swift in Sources */,
 				CE78486A22A685FB00662219 /* Device.swift in Sources */,
@@ -29273,7 +29265,6 @@
 				B589FC5123F1388D00DD528D /* DataChunkProvider.swift in Sources */,
 				CF8B66CA23CBC9D70021B021 /* MusicInitializer.swift in Sources */,
 				CF8B66CB23CBC9D70021B021 /* PhotoVideoDetailViewInput.swift in Sources */,
-				0780AB2E27916820000760D9 /* RecognizedBlock.swift in Sources */,
 				CF8B66CC23CBC9D70021B021 /* PhotoVideoDetailViewOutput.swift in Sources */,
 				CF8B66CD23CBC9D70021B021 /* PhotoVideoDetailViewController.swift in Sources */,
 				CF7146F524B597A900D83E60 /* ContactListViewController.swift in Sources */,
@@ -30031,7 +30022,6 @@
 				CF8B6BB923CBCA280021B021 /* LoginModuleInput.swift in Sources */,
 				CF8B6BBA23CBCA280021B021 /* HomeCollectionViewLayout.swift in Sources */,
 				CF8B6BBB23CBCA280021B021 /* LoginViewInput.swift in Sources */,
-				0780AB3027916820000760D9 /* RecognizedBlock.swift in Sources */,
 				CF8B6BBC23CBCA280021B021 /* SpotifyImportViewController.swift in Sources */,
 				0305A33923D5C4D9004D1EC7 /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				CF8B6BBD23CBCA280021B021 /* Device.swift in Sources */,

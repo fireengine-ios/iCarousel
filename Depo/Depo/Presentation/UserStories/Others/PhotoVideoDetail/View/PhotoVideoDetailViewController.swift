@@ -61,7 +61,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             /// without animation
 
-            //TODO: possible regression?
             viewForBottomBar.isHidden = isFullScreen
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.setNavigationBarHidden(isFullScreen, animated: false)

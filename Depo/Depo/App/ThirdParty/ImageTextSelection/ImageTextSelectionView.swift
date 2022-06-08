@@ -275,24 +275,6 @@ final class ImageTextSelectionView: UIView {
 
 
         guard debugModeEnabled else { return }
-//        context.setStrokeColor(UIColor.red.cgColor)
-//        context.setLineWidth(1)
-//        for word in layout.words {
-//            let path = CGMutablePath()
-//            let topLeft = layout.imageViewPoint(for: word.bounds.topLeft)
-//            let topRight = layout.imageViewPoint(for: word.bounds.topRight)
-//            let bottomRight = layout.imageViewPoint(for: word.bounds.bottomRight)
-//            let bottomLeft = layout.imageViewPoint(for: word.bounds.bottomLeft)
-//
-//            path.move(to: topLeft)
-//            path.addLine(to: topRight)
-//            path.addLine(to: bottomRight)
-//            path.addLine(to: bottomLeft)
-//            path.addLine(to: topLeft)
-//            context.addPath(path)
-//        }
-//        context.drawPath(using: .stroke)
-
 
         context.setStrokeColor(UIColor.red.cgColor)
         context.setLineWidth(1)
@@ -410,7 +392,6 @@ final class ImageTextSelectionView: UIView {
             return false
         }
 
-        // TODO: move to a separate func
         let point = layout.imagePoint(for: tapGesture.location(in: self))
         let tappedWord = layout.findFirstIndex(predicate: { word in
             let minX = word.bounds.topLeft.x
