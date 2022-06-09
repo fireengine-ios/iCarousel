@@ -17,5 +17,5 @@ enum NavigationBarImage: String, AppImage {
     case headerBackground = "navigationHeaderBackground"
     case headerActionPlus = "navigationHeaderActionPlus"
     case headerActionSearch = "navigationHeaderActionSearch"
-    case headerActionProfile = "navigationHeaderActionProfile"
+    case headerActionSettings = "navigationHeaderActionSettings"
 }
