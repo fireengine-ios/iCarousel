@@ -11,8 +11,8 @@ import UIKit
 final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
 
     private enum Constants {
-        static let menuButtonAccessibilityId = "CollectionViewSimpleHeaderWithTextMenuButton"
-        static let titleLabelAccessibilityId = "CollectionViewSimpleHeaderWithTextMenuTitleLabel"
+        static let menuButtonAccessibilityId = "CollectionViewSimpleHeaderMenuButton"
+        static let titleLabelAccessibilityId = "CollectionViewSimpleHeaderTitleLabel"
     }
 
     @IBOutlet private weak var menuButton: UIButton! {
