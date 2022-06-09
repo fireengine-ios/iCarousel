@@ -89,11 +89,11 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         headerContainingViewController?.isHeaderBehindContent = false
         headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
         headerContainingViewController?.setHeaderLeftItems([
-            NavigationHeaderButton(navigationBarImage: .headerActionProfile, target: self, action: #selector(showSettings))
+            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
         ])
         headerContainingViewController?.setHeaderRightItems([
-            NavigationHeaderButton(navigationBarImage: .headerActionSearch, target: self, action: #selector(showSearch)),
-            NavigationHeaderButton(navigationBarImage: .headerActionPlus)
+            NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch)),
+            NavigationHeaderButton(type: .plus)
         ])
     }
     
