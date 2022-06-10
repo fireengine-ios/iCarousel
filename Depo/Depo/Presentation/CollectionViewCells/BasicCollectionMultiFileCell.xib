@@ -26,7 +26,7 @@
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6S-8m-g5d">
                                 <rect key="frame" x="0.0" y="0.0" width="259" height="170"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgF-nV-U3k">
                                 <rect key="frame" x="0.0" y="0.0" width="259" height="93.5"/>
@@ -170,7 +170,6 @@
                                                                 <state key="normal" image="iconMoreActions"/>
                                                             </button>
                                                         </subviews>
-                                                        <color key="backgroundColor" name="primaryBackground"/>
                                                         <constraints>
                                                             <constraint firstItem="cDg-eD-Ha4" firstAttribute="centerY" secondItem="2Uf-Ik-Pxb" secondAttribute="centerY" id="6lD-cd-9Cn"/>
                                                             <constraint firstAttribute="height" constant="39" id="ArZ-y8-YNM"/>
@@ -212,7 +211,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pUQ-dm-Wqu" firstAttribute="leading" secondItem="9Vz-cE-Lvw" secondAttribute="leading" id="3RF-Xa-F4t"/>
                             <constraint firstItem="P6S-8m-g5d" firstAttribute="top" secondItem="9Vz-cE-Lvw" secondAttribute="top" id="Dpr-LA-0f1"/>
@@ -232,7 +231,7 @@
                     </view>
                 </subviews>
             </view>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" name="filesBackground"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="9Vz-cE-Lvw" secondAttribute="trailing" constant="8" id="1cp-gV-DCq"/>
                 <constraint firstAttribute="bottom" secondItem="9Vz-cE-Lvw" secondAttribute="bottom" constant="8" id="1xw-MO-FRW"/>
@@ -282,14 +281,14 @@
         <image name="iconMoreActions" width="24" height="24"/>
         <image name="iconSelectCheck" width="24" height="24"/>
         <image name="iconSharePeople" width="28" height="28"/>
+        <namedColor name="filesBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="filesBigCellBackground">
             <color red="0.92156862745098034" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="itemSeperator">
             <color red="0.91699999570846558" green="0.91699999570846558" blue="0.91699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="primaryBackground">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

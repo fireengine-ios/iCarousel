@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="bBl-Dk-4rf" customClass="SharedItemsSegmentView" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1G8-Ge-siI">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="36"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YcV-F6-yfh">
+                            <rect key="frame" x="14" y="0.0" width="131" height="34"/>
+                            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                            <color key="selectedSegmentTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="sharedSegmentChanged:" destination="bBl-Dk-4rf" eventType="valueChanged" id="BtV-ir-mKm"/>
+                            </connections>
+                        </segmentedControl>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RCZ-wc-Vqv">
+                            <rect key="frame" x="0.0" y="33" width="414" height="1"/>
+                            <color key="backgroundColor" name="filesSeperator"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="QLy-Km-80N"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="RCZ-wc-Vqv" firstAttribute="leading" secondItem="1G8-Ge-siI" secondAttribute="leading" id="Cng-H9-fFY"/>
+                        <constraint firstAttribute="bottom" secondItem="YcV-F6-yfh" secondAttribute="bottom" constant="3" id="GWl-xB-UKu"/>
+                        <constraint firstItem="YcV-F6-yfh" firstAttribute="top" secondItem="1G8-Ge-siI" secondAttribute="top" id="Kdl-a8-zbU"/>
+                        <constraint firstItem="YcV-F6-yfh" firstAttribute="leading" secondItem="1G8-Ge-siI" secondAttribute="leading" constant="14" id="Lq4-L8-H2h"/>
+                        <constraint firstItem="RCZ-wc-Vqv" firstAttribute="top" secondItem="YcV-F6-yfh" secondAttribute="bottom" id="XkB-MN-jdk"/>
+                        <constraint firstAttribute="height" constant="36" id="g9w-iX-QIU"/>
+                        <constraint firstAttribute="trailing" secondItem="RCZ-wc-Vqv" secondAttribute="trailing" id="iKW-Q5-DHh"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="D8s-X4-dP6"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="1G8-Ge-siI" firstAttribute="top" secondItem="bBl-Dk-4rf" secondAttribute="top" id="Fo8-w8-Rul"/>
+                <constraint firstItem="1G8-Ge-siI" firstAttribute="leading" secondItem="bBl-Dk-4rf" secondAttribute="leading" id="KFT-8F-gfX"/>
+                <constraint firstAttribute="trailing" secondItem="1G8-Ge-siI" secondAttribute="trailing" id="jWu-qe-Uxn"/>
+                <constraint firstAttribute="bottom" secondItem="1G8-Ge-siI" secondAttribute="bottom" id="r1d-pb-gTL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="sharedSegmentControl" destination="YcV-F6-yfh" id="iNO-m0-zr5"/>
+            </connections>
+            <point key="canvasLocation" x="134.78260869565219" y="29.129464285714285"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="filesSeperator">
+            <color red="0.92156862745098034" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

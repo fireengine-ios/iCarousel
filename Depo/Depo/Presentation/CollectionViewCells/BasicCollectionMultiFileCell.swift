@@ -167,7 +167,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bigContentImageView.contentMode = .center
 
         separatorView.isHidden = isBigSize()
-        barView.backgroundColor = isBigSize() ? UIColor.white : AppColor.primaryBackground.color
+        barView.backgroundColor = AppColor.filesBackground.color
         
         //Big size (Grid)
         if isBigSize() && bottomViewH.constant != BasicCollectionMultiFileCell.smallH {
@@ -241,7 +241,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
         smallCellSelectionView.isHidden = true
         moreView.isHidden = isSelectionActive
-        moreView.backgroundColor = isBigSize() ? AppColor.secondaryBackground.color : AppColor.primaryBackground.color
+        moreView.backgroundColor = AppColor.filesBackground.color
         smallContentImageView.isHidden = false
         
         if let isFavorite = itemModel?.favorites {

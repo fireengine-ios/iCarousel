@@ -55,18 +55,8 @@ class SegmentedController: BaseViewController, NibInit {
         return controller
     }
     
-    @IBOutlet private weak var collectionView: UICollectionView! {
-        willSet {
-            newValue.delegate = self
-            newValue.dataSource = self
-            newValue.showsHorizontalScrollIndicator = false
-            newValue.register(UINib(nibName: CollectionViewCellsIdsConstant.cellForAllFilesType, bundle: nil),
-                              forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForAllFilesType)
-        }
-    }
-    
     @IBOutlet private weak var containerView: UIView!
-    @IBOutlet private weak var segmentedControlContainer: UIView!
+    @IBOutlet weak var segmentedControlContainer: UIView!
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.tintColor = ColorConstants.darkBlueColor
@@ -77,18 +67,13 @@ class SegmentedController: BaseViewController, NibInit {
     
     private(set) var viewControllers = [BaseViewController]()
     private var alignment: Alignment = .center
-    private var selectedCellIndexPath: IndexPath? {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
     
     var currentController: UIViewController {
         return viewControllers[safe: segmentedControl.selectedSegmentIndex] ?? UIViewController()
     }
     
-    private(set) var selectedIndex = 0
-    var startIndex = 0
+    var selectedIndex = AllFilesType.allCases.firstIndex(of: .allFiles)!
+    var startIndex = AllFilesType.allCases.firstIndex(of: .allFiles)!
     
     //    weak var delegate: SegmentedControllerDelegate?
     
@@ -108,15 +93,6 @@ class SegmentedController: BaseViewController, NibInit {
         needToShowTabBar = true
         setupSegmentedControl()
         setupAlignment()
-        setCollectionView()
-    }
-    
-    private func setCollectionView() {
-        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            flowLayout.minimumLineSpacing = 0
-            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-        }
     }
     
     private func setupSegmentedControl() {
@@ -161,13 +137,6 @@ class SegmentedController: BaseViewController, NibInit {
         }
     }
     
-    func switchSegment(to index: Int) {
-        if segmentedControl.numberOfSegments > index, segmentedControl.selectedSegmentIndex != index {
-            segmentedControl.selectedSegmentIndex = index
-            segmentDidChange(segmentedControl)
-        }
-    }
-    
     @IBAction private func segmentDidChange(_ sender: UISegmentedControl) {
         let newIndex = sender.selectedSegmentIndex
         guard newIndex < viewControllers.count else {
@@ -186,11 +155,18 @@ class SegmentedController: BaseViewController, NibInit {
         setupSelectedController(viewControllers[selectedIndex])
     }
     
+    func switchSegment(to index: Int) {
+        if segmentedControl.numberOfSegments > index, segmentedControl.selectedSegmentIndex != index {
+            segmentedControl.selectedSegmentIndex = index
+            segmentDidChange(segmentedControl)
+        }
+    }
+    
     func canSwitchSegment(from oldIndex: Int, to newIndex: Int) -> Bool {
         return true
     }
     
-    private func setupSelectedController(_ controller: BaseViewController) {
+    func setupSelectedController(_ controller: BaseViewController) {
         controller.navigationBarHidden = self.navigationBarHidden
         add(childController: controller)
         floatingButtonsArray = controller.floatingButtonsArray
@@ -202,19 +178,6 @@ class SegmentedController: BaseViewController, NibInit {
         childController.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         containerView.addSubview(childController.view)
         childController.didMove(toParent: self)
-    }
-    
-    func switchAllFilesCategory(to index: Int) {
-        if AllFilesType.allCases.count >= index, selectedIndex != index {
-            guard index < viewControllers.count else {
-                assertionFailure()
-                return
-            }
-            
-            selectedIndex = index
-            children.forEach { $0.removeFromParentVC() }
-            setupSelectedController(viewControllers[selectedIndex])
-        }
     }
 }
 
@@ -235,36 +198,5 @@ extension UIViewController {
         willMove(toParent: nil)
         view.removeFromSuperview()
         removeFromParent()
-    }
-}
-
-extension SegmentedController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return AllFilesType.allCases.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellsIdsConstant.cellForAllFilesType,
-                                                         for: indexPath) as? AllFilesTypeCollectionViewCell {
-            let types = AllFilesType.allCases
-            cell.configure(with: types[indexPath.row])
-            cell.setSelection(with: types[indexPath.row], isSelected: indexPath == selectedCellIndexPath)
-            return cell
-        }
-        return UICollectionViewCell()
-    }
-}
-
-extension SegmentedController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? AllFilesTypeCollectionViewCell
-        if indexPath == selectedCellIndexPath {
-            selectedCellIndexPath = nil
-            switchAllFilesCategory(to: 0)
-        } else {
-            cell?.setSelection(with: AllFilesType.allCases[indexPath.row], isSelected: true)
-            selectedCellIndexPath = indexPath
-            switchAllFilesCategory(to: indexPath.row + 1)
-        }
     }
 }

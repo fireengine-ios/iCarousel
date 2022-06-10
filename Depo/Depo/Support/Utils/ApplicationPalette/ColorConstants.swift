@@ -31,6 +31,7 @@ enum AppColor {
     case lightContentOverlay
     
     // MARK: FilesTab
+    case filesBackground
     case filesBigCellBackground
     case filesLabel
     case filesBigCellShadow
@@ -40,6 +41,7 @@ enum AppColor {
     case filesFavoriteTab
     case filesSharedTab
     case filesSeperator
+    case filesSharedTabSeperator
 
     case primaryBackground
     case cellShadow

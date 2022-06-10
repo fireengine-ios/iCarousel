@@ -12,7 +12,9 @@ enum AllFilesType: CaseIterable {
     case documents
     case music
     case favorites
-    case shared
+    case sharedWithMe
+    case sharedByMe
+    case allFiles
     
     var image: UIImage? {
         switch self {
@@ -22,8 +24,10 @@ enum AllFilesType: CaseIterable {
             return Image.iconTabMusic.image
         case .favorites:
             return Image.iconTabStar.image
-        case .shared:
+        case .sharedByMe, .sharedWithMe:
             return Image.iconTabShare.image
+        case .allFiles:
+            return nil
         }
     }
 
@@ -35,8 +39,10 @@ enum AllFilesType: CaseIterable {
             return TextConstants.containerMusic
         case .favorites:
             return TextConstants.containerFavourite
-        case .shared:
+        case .sharedByMe, .sharedWithMe:
             return TextConstants.containerShared
+        case .allFiles:
+            return nil
         }
     }
     
@@ -48,9 +54,19 @@ enum AllFilesType: CaseIterable {
             return AppColor.filesMusicTab.color
         case .favorites:
             return AppColor.filesFavoriteTab.color
-        case .shared:
+        case .sharedByMe, .sharedWithMe:
             return AppColor.filesSharedTab.color
+        case .allFiles:
+            return nil
         }
+    }
+    
+    static func getSegments() -> [AllFilesType] {
+        return [.documents, .music, .favorites, .sharedWithMe]
+    }
+    
+    static func getSharedItemsSegments() -> [AllFilesType] {
+        return [.sharedWithMe, .sharedByMe]
     }
 }
 
@@ -74,6 +90,7 @@ class AllFilesTypeCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = AppColor.filesBackground.color
     }
     
     func configure(with type: AllFilesType) {
