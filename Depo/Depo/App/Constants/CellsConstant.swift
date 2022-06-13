@@ -29,6 +29,7 @@ struct CellsIdConstants {
     static let socialAccountRemoveConnectionCell = "SocialAccountRemoveConnectionCell"
     static let createStoryAudioItemCell = "CreateStoryAudioItemCell"
     static let twoFactorAuthenticationCell = "TwoFactorAuthenticationCell"
+    static let appleGoogleAccountConnectionCell = "AppleGoogleAccountConnectionCell"
 }
 
 struct CollectionViewCellsIdsConstant {

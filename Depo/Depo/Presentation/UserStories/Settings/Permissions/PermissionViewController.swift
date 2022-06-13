@@ -50,6 +50,14 @@ final class PermissionViewController: ViewController {
         return permissionView
     }()
     
+    private lazy var kvkkPermissionView: UIView & PermissionsViewProtocol = {
+        let permissionView = PermissionsView.initFromNib()
+        permissionView.type = .kvkk
+        permissionView.delegate = self
+        permissionView.textviewDelegate = self
+        return permissionView
+    }()
+    
     //MARK: - View Lifecycle
     
     override func viewDidLoad() {
@@ -87,6 +95,7 @@ final class PermissionViewController: ViewController {
                     self?.setupPermissionViewFromResult(result, type: .etk)
                     self?.setupPermissionViewFromResult(result, type: .globalPermission)
                     self?.setupPermissionViewFromResult(result, type: .mobilePayment)
+                    self?.setupPermissionViewFromResult(result, type: .kvkk)
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
@@ -121,6 +130,8 @@ final class PermissionViewController: ViewController {
             return globalPermissionView
         case .mobilePayment:
             return mobilePaymentPermissionView
+        case .kvkk:
+            return kvkkPermissionView
         }
     }
     
@@ -188,6 +199,10 @@ extension PermissionViewController: PermissionViewTextViewDelegate {
             DispatchQueue.toMain {
                 self.openMobilePaymentAgreement()
             }
+        case TextConstants.NotLocalized.permissionsPolicyLink:
+            DispatchQueue.toMain {
+                self.openTurkcellPermissionPolicy()
+            }
         default:
             return false
         }
@@ -200,6 +215,11 @@ extension PermissionViewController {
     
     private func openTurkcellAndGroupCompanies() {
         let vc = WebViewController(urlString: RouteRequests.turkcellAndGroupCompanies)
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    private func openTurkcellPermissionPolicy() {
+        let vc = WebViewController(urlString: RouteRequests.turkcellPermissionsPolicy)
         RouterVC().pushViewController(viewController: vc)
     }
     

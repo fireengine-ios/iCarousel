@@ -265,8 +265,10 @@ extension HomePagePresenter: HomePageInteractorOutput {
     private func addSecurityInfoIfNeeded(with accountInfo: AccountInfoResponse) {
         if accountInfo.hasRecoveryMail != true && accountInfo.hasSecurityQuestionInfo != true {
             let storageVars: StorageVars = factory.resolve()
-            if !storageVars.isAppFirstLaunch {
+            if !storageVars.isUserFirstLoggedIn {
                 router.presentSecurityInfoPopup()
+            } else {
+                storageVars.isUserFirstLoggedIn = false
             }
         }
     }

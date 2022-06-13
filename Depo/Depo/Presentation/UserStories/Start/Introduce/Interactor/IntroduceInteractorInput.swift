@@ -9,8 +9,7 @@
 import Foundation
 
 protocol IntroduceInteractorInput {
-    
-    func PrepareModels()
     func trackScreen(pageNum: Int)
     func trackScreen()
+    func signInWithAppleGoogle(with user: AppleGoogleUser)
 }

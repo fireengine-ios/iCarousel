@@ -11,6 +11,7 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
+import IQKeyboardManagerSwift
 
 final class AppConfigurator {
     
@@ -36,6 +37,7 @@ final class AppConfigurator {
         setupIAPObserver()
         dropboxManager.start()
         analyticsManager.start()
+        configureIQKeyboardManager()
         
         AppWormholeListener.shared.startListen()
         _ = PushNotificationService.shared.assignNotificationActionBy(launchOptions: launchOptions)
@@ -115,6 +117,11 @@ final class AppConfigurator {
         SDImageCache.shared().config.maxCacheSize = 100 * 1024 * 1024   // 100Mb
         SDImageCache.shared().config.maxCacheAge = 7 * 24 * 60 * 60     // 7 days
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
+    }
+    
+    private static func configureIQKeyboardManager() {
+        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
     }
     
     // MARK: - settings bundle

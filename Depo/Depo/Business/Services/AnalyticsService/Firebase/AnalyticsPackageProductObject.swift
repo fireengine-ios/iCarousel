@@ -12,7 +12,7 @@ import FirebaseAnalytics
 struct AnalyticsPackageProductObject {
     let itemName: String
     let itemID: String
-    let price: String
+    let price: NSNumber
     let itemBrand: String
     let itemCategory: String
     let itemVariant: String
@@ -40,7 +40,7 @@ struct AnalyticsEcommerce {
     let itemList: String
     let transactionID: String
     let tax: String
-    let priceValue: String
+    let priceValue: NSNumber
     let shipping: String
     let currency: String
     

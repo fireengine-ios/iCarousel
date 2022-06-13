@@ -15,4 +15,5 @@ protocol UserProfileInteractorOutput: AnyObject {
     func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse)
     func showError(error: String)
     func dataWasUpdated()
+    func gotUpdatePasswordMethod(method: UpdatePasswordMethods)
 }

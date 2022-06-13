@@ -23,6 +23,11 @@ class RegistrationModuleInitializer: NSObject {
         
     }
     
+    func setupVC(with user: AppleGoogleUser) {
+        let configurator = RegistrationModuleConfigurator()
+        configurator.configureModuleForViewInput(viewInput: registrationViewController, user: user)
+    }
+    
     init(withNavController navController: UINavigationBar) {
         //add nav controller
     }

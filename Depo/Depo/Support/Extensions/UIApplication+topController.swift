@@ -32,7 +32,7 @@ extension UIApplication {
         }
     }
     
-    static func showErrorAlert(message: String) {
+    static func showErrorAlert(message: String, closed: (() -> Void)? = nil) {
         guard message != TextConstants.errorBadConnection else {
             return
         }
@@ -40,7 +40,12 @@ extension UIApplication {
         if controller is PopUpController {
             return
         }
-        let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok)
+        let vc = PopUpController.with(title: TextConstants.errorAlert, message: message, image: .error, buttonTitle: TextConstants.ok) { vc in
+            vc.close {
+                closed?()
+            }
+        }
+        
         DispatchQueue.toMain {
             controller?.present(vc, animated: false, completion: nil)
         }

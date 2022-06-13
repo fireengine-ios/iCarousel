@@ -33,6 +33,7 @@ class PublicShareConfigurator {
         interactor.publicToken = publicToken
 
         presenter.interactor = interactor
+        presenter.publicToken = publicToken
         viewController.output = presenter
         viewController.isRootFolder = true
     }
@@ -54,6 +55,7 @@ class PublicShareConfigurator {
             let queryItems = URLComponents(string: tmpListingUrl)?.queryItems
             let publicToken = queryItems?.filter({$0.name == "publicToken"}).first
             interactor.publicToken = publicToken?.value
+            presenter.publicToken = publicToken?.value
         }
 
         presenter.interactor = interactor

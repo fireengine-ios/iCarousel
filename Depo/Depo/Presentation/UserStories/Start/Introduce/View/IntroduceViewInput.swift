@@ -7,11 +7,5 @@
 //
 
 protocol IntroduceViewInput: AnyObject {
-
-    /**
-        @author Oleg
-        Setup initial state of the view
-    */
-
-    func setupInitialState(models: [IntroduceModel])
+    func showGoogleLoginPopup(with user: AppleGoogleUser)
 }

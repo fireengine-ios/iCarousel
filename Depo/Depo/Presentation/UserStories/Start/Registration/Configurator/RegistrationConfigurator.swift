@@ -10,14 +10,14 @@ import UIKit
 
 class RegistrationModuleConfigurator {
 
-    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController) {
+    func configureModuleForViewInput<UIViewController>(viewInput: UIViewController, user: AppleGoogleUser? = nil) {
 
         if let viewController = viewInput as? RegistrationViewController {
-            configure(viewController: viewController)
+            configure(viewController: viewController, user: user)
         }
     }
 
-    private func configure(viewController: RegistrationViewController) {
+    private func configure(viewController: RegistrationViewController, user: AppleGoogleUser?) {
 
         let router = RegistrationRouter()
 
@@ -30,6 +30,7 @@ class RegistrationModuleConfigurator {
 
         presenter.interactor = interactor
         viewController.output = presenter
+        viewController.appleGoogleUser = user
     }
 
 }
