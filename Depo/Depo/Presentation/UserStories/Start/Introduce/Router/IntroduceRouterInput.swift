@@ -11,5 +11,7 @@ import Foundation
 protocol IntroduceRouterInput {
     func onGoToRegister()
     func onGoToLogin()
-    
+    func onGoToLoginWith(with user: AppleGoogleUser)
+    func onGoToRegister(with user: AppleGoogleUser)
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
 }

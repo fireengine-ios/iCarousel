@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import GoogleSignIn
+import FirebaseCore
+import AuthenticationServices
 
-final class IntroduceViewController: ViewController, IntroduceViewInput {
+final class IntroduceViewController: ViewController {
 
+    private lazy var appleGoogleService = AppleGoogleLoginService()
     var output: IntroduceViewOutput!
+    var user: AppleGoogleUser?
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -74,18 +79,79 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
-
+    
+    @IBOutlet private weak var orLabel: UILabel! {
+        willSet {
+            newValue.text = localized(.onboardingButtonOr)
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 12)
+            newValue.textColor = AppColor.billoGrayAndWhite.color
+        }
+    }
+    
+    @IBOutlet private weak var signInWithGoogleButton: RoundedInsetsButton! {
+        willSet {
+            newValue.setTitle(localized(.connectWithGoogle), for: .normal)
+            newValue.setTitleColor(AppColor.billoGrayAndWhite.color, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.setImage(UIImage(named: "googleLogo"), for: .normal)
+            newValue.moveImageLeftTextCenter()
+            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.layer.borderColor = AppColor.darkBlueAndBilloBlue.color?.cgColor
+            newValue.layer.borderWidth = 1
+        }
+    }
+    
+    @IBOutlet private weak var signInWithAppleButton: RoundedInsetsButton! {
+        willSet {
+            newValue.setTitle(localized(.connectWithApple), for: .normal)
+            newValue.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            newValue.setTitleColor(AppColor.primaryBackground.color, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.setImage(UIImage(named: "appleLogo")?.withRenderingMode(.alwaysTemplate), for: .normal)
+            newValue.tintColor = AppColor.primaryBackground.color
+            newValue.moveImageLeftTextCenter()
+            newValue.backgroundColor = AppColor.blackColor.color
+        }
+    }
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configurateView()
         output.viewIsReady()
+
+        handleRemoteConfig()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleRemoteConfig),
+            name: .firebaseRemoteConfigInitialFetchComplete,
+            object: nil
+        )
     }
     
     func configurateView() {
         navigationBarHidden = true
         backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
+    @objc private func handleRemoteConfig() {
+        if #available(iOS 13, *) { } else {
+            signInWithAppleButton.isHidden = true
+            signInWithGoogleButton.isHidden = true
+            orLabel.isHidden = true
+            return
+        }
+        
+        signInWithAppleButton.isHidden = !FirebaseRemoteConfig.shared.appleLoginEnabled
+        signInWithGoogleButton.isHidden = !FirebaseRemoteConfig.shared.googleLoginEnabled
+        
+        if signInWithAppleButton.isHidden {
+            signInWithGoogleButton.isHidden = true
+        }
+        
+        orLabel.isHidden = signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -95,17 +161,81 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
             return .default
         }
     }
-
-    // MARK: - IntroduceViewInput
-    func setupInitialState(models: [IntroduceModel]) { }
     
     // MARK: - Actions
-    
     @IBAction func onCreateAccount(_ sender: UIButton) {
         output.onStartUsingLifeBox()
     }
     
+    @IBAction func onSignInWithGoogle(_ sender: Any) {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        let config = GIDConfiguration(clientID: clientID, serverClientID: Credentials.googleServerClientID)
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+            if error != nil {
+                return
+            }
+            
+            if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
+                let user = AppleGoogleUser(idToken: idToken, email: email, type: .google)
+                self.user = user
+                self.output.onSignInWithAppleGoogle(with: user)
+            }
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    @IBAction func onSignInWithApple(_ sender: Any) {
+        let controller = appleGoogleService.getAppleAuthorizationController()
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+    }
+    
     @IBAction func onLogin(_ sender: UIButton) {
         output.onLoginButton()
+    }
+}
+
+@available(iOS 13.0, *)
+extension IntroduceViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let credentials = authorization.credential as? ASAuthorizationAppleIDCredential {
+            appleGoogleService.getAppleCredentials(with: credentials) { user in
+                guard let user = user else { return }
+                self.user = user
+                self.output.onSignInWithAppleGoogle(with: user)
+            } fail: { error in
+                debugLog(error)
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        debugLog("Apple auth didCompleteWithError: \(error.localizedDescription)")
+    }
+}
+
+@available(iOS 13.0, *)
+extension IntroduceViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+}
+
+extension IntroduceViewController: IntroduceViewInput {
+    func showGoogleLoginPopup(with user: AppleGoogleUser) {
+        let popUp = RouterVC().loginWithGooglePopup
+        popUp.user = user
+        popUp.delegate = self
+        present(popUp, animated: true)
+    }
+}
+
+extension IntroduceViewController: LoginWithGooglePopupDelegate {
+    func onNextButton() {
+        dismiss(animated: true)
+        guard let user = user else { return }
+        output.goToLogin(with: user)
     }
 }

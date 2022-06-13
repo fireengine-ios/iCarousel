@@ -50,11 +50,6 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
             let isTurkcell = interactor.isTurkcellUserFlag
             router.setPasscode(isTurkCellUser: isTurkcell, finishCallBack: {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PasscodeScreen())
-                if isTurkcell {//end enebled???
-                    let routerVC = RouterVC()
-                    let popUP = PopUpController.with(title: TextConstants.warning, message: TextConstants.passcodeEneblingwWithActivatedTurkcellSecurity, image: .error, buttonTitle: TextConstants.ok)
-                    routerVC.rootViewController?.present(popUP, animated: true, completion: nil)
-                }
             })
         }
     }

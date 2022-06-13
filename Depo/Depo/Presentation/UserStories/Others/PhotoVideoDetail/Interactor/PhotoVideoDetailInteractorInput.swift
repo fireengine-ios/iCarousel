@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol PhotoVideoDetailInteractorInput: AnyObject {
     
@@ -54,4 +55,6 @@ protocol PhotoVideoDetailInteractorInput: AnyObject {
     func createNewUrl()
 
     func resignUserActivity()
+
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping (ImageTextSelectionData) -> Void)
 }

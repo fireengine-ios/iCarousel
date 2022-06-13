@@ -61,12 +61,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
             
             /// without animation
 
+            viewForBottomBar.isHidden = isFullScreen
             editingTabBar.view.isHidden = isFullScreen
             navigationController?.setNavigationBarHidden(isFullScreen, animated: false)
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen && !isBottomViewOpen)
             
             bottomBlackView.isHidden = self.isFullScreen
             viewForBottomBar.isUserInteractionEnabled = !self.isFullScreen
+
+            adjustBottomSpacingForRecognizeTextButton()
         }
     }
 
@@ -165,7 +168,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         statusBarStyle = .lightContent
         
         NotificationCenter.default.post(name: .reusePlayer, object: self)
-        
+
+        output.viewIsReady(view: viewForBottomBar)
+
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
         bottomDetailViewManager?.updatePassThroughViewDelegate(passThroughView: passThroughView)
@@ -174,7 +179,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
-        output.viewIsReady(view: viewForBottomBar)
         passThroughView?.enableGestures()
         updateFirstVisibleCell()
     }
@@ -188,8 +192,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         passThroughView?.disableGestures()
         backButtonForNavigationItem(title: TextConstants.backTitle)
         passThroughView?.removeFromSuperview()
+
+        removeTextSelectionInteractionFromCurrentCell()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         hideDetailViewIfChangedRotation()
@@ -202,6 +208,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
                 self.scrollToSelectedIndex()
             }
         })
+
+        adjustBottomSpacingForRecognizeTextButton()
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -368,6 +376,21 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
+    }
+
+    private func adjustBottomSpacingForRecognizeTextButton() {
+        for cell in collectionView.visibleCells {
+            guard let detailCell = cell as? PhotoVideoDetailCell else { continue }
+            let spacing: CGFloat
+            if isFullScreen {
+                spacing = view.safeAreaInsets.bottom + 16
+            } else {
+                let minY = viewForBottomBar.convert(editingTabBar.view.frame, to: view).minY
+                spacing = (view.frame.maxY - minY) + 16
+            }
+
+            detailCell.setRecognizeTextButtonBottomSpacing(spacing)
+        }
     }
 }
 
@@ -625,6 +648,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
             output.updateBars()
             setupNavigationBar()
             updateFileInfo()
+            collectionView.reloadItems(at: [IndexPath(item: indexToChange, section: 0)])
         }
     }
 }
@@ -647,6 +671,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
             return
         }
         cell.delegate = self
+        cell.isRecognizeTextEnabled = output.ocrEnabled
         let object = objects[indexPath.row]
         cell.setObject(object: object)
         
@@ -758,11 +783,30 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     func didExpireUrl() {
         output.createNewUrl()
     }
+
+    func recognizeTextButtonTapped(image: UIImage, isActive: Bool) {
+        guard let selectedIndex = self.selectedIndex,
+              let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0)) as? PhotoVideoDetailCell
+        else {
+            return
+        }
+
+        if isActive {
+            cell.removeCurrentTextSelectionInteraction()
+        } else {
+            showSpinnerIncludeNavigationBar()
+            output.recognizeTextForCurrentItem(image: image) { [weak cell, weak self] data in
+                self?.hideSpinnerIncludeNavigationBar()
+                cell?.addTextSelectionInteraction(data)
+            }
+        }
+    }
 }
 
 extension PhotoVideoDetailViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         updateSelectedIndex()
+        removeTextSelectionInteractionFromInvisibleCells()
     }
     
     // MARK: - Helper
@@ -776,6 +820,31 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
             currentPage = objects.count - 1
         }
         selectedIndex = currentPage
+    }
+
+    func removeTextSelectionInteractionFromCurrentCell() {
+        guard let selectedIndex = self.selectedIndex else { return }
+        removeTextSelectionInteractionFromCell(at: selectedIndex)
+    }
+
+    private func removeTextSelectionInteractionFromInvisibleCells() {
+        guard let selectedIndex = self.selectedIndex else { return }
+        let rangeToTraverse = (selectedIndex - 2)...(selectedIndex + 2)
+        for i in rangeToTraverse {
+            guard i != selectedIndex, i >= 0, i < objects.count else {
+                continue
+            }
+
+            removeTextSelectionInteractionFromCell(at: i)
+        }
+    }
+
+    private func removeTextSelectionInteractionFromCell(at index: Int) {
+        let indexPath = IndexPath(item: index, section: 0)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell else {
+            return
+        }
+        cell.removeCurrentTextSelectionInteraction()
     }
 }
 
