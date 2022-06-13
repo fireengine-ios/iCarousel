@@ -10,11 +10,19 @@ import UIKit
 
 final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
 
+    private enum Constants {
+        static let menuButtonAccessibilityId = "CollectionViewSimpleHeaderMenuButton"
+        static let titleLabelAccessibilityId = "CollectionViewSimpleHeaderTitleLabel"
+    }
+
     @IBOutlet private weak var menuButton: UIButton! {
         willSet {
-            let image = Image.iconThreeDotsHorizontal.image(withTintColor: .tint, in: newValue)
+            // TODO: Facelift, icons tint?
+            let image = Image.iconThreeDotsHorizontal.image(withTintColor: .label, in: newValue)
             newValue.setImage(image, for: .normal)
             newValue.isHidden = true
+            newValue.accessibilityLabel = TextConstants.accessibilityMore
+            newValue.accessibilityIdentifier = Constants.menuButtonAccessibilityId
         }
     }
 
@@ -24,6 +32,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
             newValue.textColor = AppColor.label.color
             newValue.font = AppFontPresets.title2
             newValue.adjustsFontForContentSizeCategory = true
+            newValue.accessibilityIdentifier = Constants.titleLabelAccessibilityId
         }
     }
 

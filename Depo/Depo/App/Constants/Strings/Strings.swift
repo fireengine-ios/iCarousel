@@ -138,4 +138,8 @@ enum Strings: String, Localizable {
     // MARK: - Security Popup
     case securityPopupHeader = "security_popup_header"
     case securityPopupBody = "security_popup_body"
+
+    // MARK: - TabBarCards
+    case syncing = "syncing"
+    case downloading = "downloading"
 }

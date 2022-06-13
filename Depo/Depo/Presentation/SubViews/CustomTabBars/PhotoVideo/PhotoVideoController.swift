@@ -75,6 +75,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionViewManager.collectionViewLayout.delegate = dataSource
         collectionViewManager.collectionViewLayout.pinsSectionHeadersToLayoutGuide = headerContainingViewController?.originalSafeAreaLayoutGuide
         navBarManager.setDefaultMode()
+        pinchManager.setup()
 
         navigationBarHidden = true
         needToShowTabBar = true
@@ -85,19 +86,15 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         performFetch()
         collectionView.addInteraction(UIDropInteraction(delegate: self))
 
-
         headerContainingViewController?.isHeaderBehindContent = false
         headerContainingViewController?.statusBarBackgroundViewStyle = .plain(color: .background)
         headerContainingViewController?.setHeaderLeftItems([
-            NavigationHeaderButton(navigationBarImage: .headerActionProfile)
+            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
         ])
         headerContainingViewController?.setHeaderRightItems([
-            NavigationHeaderButton(navigationBarImage: .headerActionSearch),
-            NavigationHeaderButton(navigationBarImage: .headerActionPlus)
+            NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch)),
+            NavigationHeaderButton(type: .plus)
         ])
-
-        // TODO: Facelift, remove this
-        print(pinchManager)
     }
     
     deinit {
@@ -111,7 +108,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 //        self.trackPhotoVideoScreen(isPhoto: isPhoto)
         
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
-        collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
         
         ///trigger Range API for update new items which are uploaded by other clients
@@ -142,11 +138,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         
         stopEditingMode()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        collectionViewManager.setScrolliblePopUpView(isActive: false)
-    }
 
     override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
@@ -155,6 +146,26 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         if collectionView.contentOffset.y < -collectionView.contentInset.top {
             collectionView.contentOffset.y = -collectionView.contentInset.top
         }
+    }
+
+    // MARK: - Header Actions
+
+    @objc private func showSettings() {
+        let controller: UIViewController?
+
+        if Device.isIpad {
+            controller = router.settingsIpad
+        } else {
+            controller = router.settings
+        }
+
+        if let controller = controller {
+            router.pushViewController(viewController: controller)
+        }
+    }
+
+    @objc private func showSearch() {
+        showSearchScreen()
     }
     
     // MARK: - setup

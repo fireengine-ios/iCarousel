@@ -14,12 +14,13 @@ final class PhotoVideoPinchManager: NSObject, UIGestureRecognizerDelegate {
 
     init(collectionView: UICollectionView) {
         super.init()
+        self.collectionView = collectionView
+    }
 
+    func setup() {
         pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(pinch(_:)))
         pinchGesture.delegate = self
-        collectionView.addGestureRecognizer(pinchGesture)
-
-        self.collectionView = collectionView
+        collectionView?.addGestureRecognizer(pinchGesture)
     }
 
     private var pinchGesture: UIPinchGestureRecognizer!
