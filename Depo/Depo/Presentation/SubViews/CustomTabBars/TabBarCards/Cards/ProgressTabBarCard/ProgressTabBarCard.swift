@@ -81,7 +81,8 @@ final class ProgressTabBarCard: BaseTabBarCard {
     }
 
     private(set) var isExpanded = false
-    private lazy var rechabilityService = ReachabilityService.shared
+    private var currentOperationType: OperationType?
+    private lazy var reachabilityService = ReachabilityService.shared
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -117,6 +118,10 @@ final class ProgressTabBarCard: BaseTabBarCard {
 
     func setProgress(ratio: Float) {
         progressView.progress = ratio
+
+        if let operationType = currentOperationType, reachabilityService.isReachable {
+            configure(with: operationType)
+        }
     }
 
     func setImageForUploadingItem(item: WrapData) {
@@ -128,7 +133,9 @@ final class ProgressTabBarCard: BaseTabBarCard {
     }
 
     func configure(with operationType: OperationType) {
-        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
+        self.currentOperationType = operationType
+
+        let isWiFi = reachabilityService.isReachableViaWiFi
         let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.mobileData
         let iconImage = isWiFi ? Image.iconWifi : Image.iconNetworkLTE
 
