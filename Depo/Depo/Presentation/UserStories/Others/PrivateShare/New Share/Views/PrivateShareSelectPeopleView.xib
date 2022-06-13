@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PrivateShareSelectPeopleView" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="117"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYw-yg-kxF">
-                    <rect key="frame" x="16" y="19" width="382" height="15"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="15" id="kaW-eO-wu2"/>
-                    </constraints>
+                    <rect key="frame" x="16" y="19" width="382" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fXb-f8-n9k">
-                    <rect key="frame" x="16" y="42" width="348" height="32"/>
+                    <rect key="frame" x="16" y="47.5" width="348" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="rs5-gE-PrV"/>
                     </constraints>
@@ -32,7 +29,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZIB-f0-CdR">
-                    <rect key="frame" x="364" y="36" width="44" height="44"/>
+                    <rect key="frame" x="364" y="41.5" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ZIB-f0-CdR" secondAttribute="height" multiplier="1:1" id="STI-9D-Qok"/>
                         <constraint firstAttribute="width" constant="44" id="pQw-Sp-eUX"/>
@@ -42,33 +39,21 @@
                         <action selector="onAddTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="UYY-M9-1PZ"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isl-T6-jQX">
-                    <rect key="frame" x="16" y="74" width="46" height="32"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="32" id="LSt-ME-HhH"/>
-                    </constraints>
-                    <state key="normal" title="Editor" image="arrow_right"/>
-                    <connections>
-                        <action selector="onUserRoleTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="5vR-Ey-wjU"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXP-cJ-nFo">
-                    <rect key="frame" x="0.0" y="116" width="414" height="1"/>
+                    <rect key="frame" x="0.0" y="99" width="414" height="1"/>
                     <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="0.2953345070422535" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Pdn-Il-RJO"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" name="filesBackground"/>
             <constraints>
                 <constraint firstItem="ZIB-f0-CdR" firstAttribute="leading" secondItem="fXb-f8-n9k" secondAttribute="trailing" id="08v-aF-zEy"/>
-                <constraint firstAttribute="bottom" secondItem="isl-T6-jQX" secondAttribute="bottom" constant="11" id="5Mq-lV-BPp"/>
                 <constraint firstItem="fXb-f8-n9k" firstAttribute="leading" secondItem="BYw-yg-kxF" secondAttribute="leading" id="5XQ-co-N47"/>
                 <constraint firstAttribute="trailing" secondItem="BYw-yg-kxF" secondAttribute="trailing" constant="16" id="CWs-Az-LXQ"/>
-                <constraint firstItem="isl-T6-jQX" firstAttribute="top" secondItem="fXb-f8-n9k" secondAttribute="bottom" id="JJb-sv-SlZ"/>
+                <constraint firstItem="LXP-cJ-nFo" firstAttribute="top" secondItem="fXb-f8-n9k" secondAttribute="bottom" constant="19.5" id="GdG-0w-T4x"/>
                 <constraint firstAttribute="trailing" secondItem="ZIB-f0-CdR" secondAttribute="trailing" constant="6" id="KHd-SG-3i3"/>
-                <constraint firstItem="isl-T6-jQX" firstAttribute="leading" secondItem="BYw-yg-kxF" secondAttribute="leading" id="Rul-FJ-Cdj"/>
                 <constraint firstItem="fXb-f8-n9k" firstAttribute="top" secondItem="BYw-yg-kxF" secondAttribute="bottom" constant="8" id="Y2P-SP-cZz"/>
                 <constraint firstItem="ZIB-f0-CdR" firstAttribute="centerY" secondItem="fXb-f8-n9k" secondAttribute="centerY" id="om9-qH-L93"/>
                 <constraint firstItem="LXP-cJ-nFo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oq1-Nd-HS9"/>
@@ -82,16 +67,14 @@
                 <outlet property="addButton" destination="ZIB-f0-CdR" id="v5x-kE-VK2"/>
                 <outlet property="textField" destination="fXb-f8-n9k" id="AUL-NW-sfv"/>
                 <outlet property="titleLabel" destination="BYw-yg-kxF" id="J9E-5d-KWi"/>
-                <outlet property="userRoleButton" destination="isl-T6-jQX" id="HOC-po-RyY"/>
             </connections>
-            <point key="canvasLocation" x="-246.37681159420291" y="-152.67857142857142"/>
+            <point key="canvasLocation" x="-246.37681159420291" y="-158.70535714285714"/>
         </view>
     </objects>
     <resources>
-        <image name="arrow_right" width="5" height="8"/>
-        <image name="plus" width="25" height="25"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="plus" width="28" height="28"/>
+        <namedColor name="filesBackground">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

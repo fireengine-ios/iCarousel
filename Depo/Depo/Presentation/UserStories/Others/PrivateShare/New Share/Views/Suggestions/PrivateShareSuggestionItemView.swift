@@ -37,7 +37,7 @@ final class PrivateShareSuggestionItemView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = UIFont.appFont(.light, size: 14)
         }
     }
     
