@@ -15,6 +15,7 @@ protocol PhotoVideoDetailCellDelegate: AnyObject {
     func imageLoadingFinished()
     func didExpireUrl()
     func itemPlaceholderFinished()
+    func recognizeTextButtonTapped(image: UIImage, isActive: Bool)
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -23,6 +24,9 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     @IBOutlet private weak var activity: UIActivityIndicatorView!
     @IBOutlet private weak var playVideoButton: UIButton!
     @IBOutlet private weak var placeholderImageView: UIImageView!
+
+    lazy var recognizeTextButton = RecognizeTextButton()
+    private var recognizeTextButtonBottomConstraint: NSLayoutConstraint?
     
     private lazy var webView = WKWebView(frame: .zero)
     
@@ -39,9 +43,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     private var oldFrame = CGRect.zero
     private var currentItemId = ""
     private var fileType: FileType = .unknown
+    private var isLocalItem = false
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
-    
+
+    private var currentTextSelectionInteraction: ImageTextSelectionInteraction?
+
+    var isRecognizeTextEnabled = false
+
     override func awakeFromNib() {
         super.awakeFromNib()
         imageScrollView.imageViewDelegate = self
@@ -58,7 +67,9 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         }
         
         addGestureRecognizer(tapGesture)
-        
+
+        setupRecognizeTextButton()
+
         reset()
     }
     
@@ -77,7 +88,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             imageScrollView.updateZoom()
             imageScrollView.adjustFrameToCenter()
         }
-        
     }
     
     override func prepareForReuse() {
@@ -112,9 +122,24 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         playVideoButton.isHidden = true
         imageScrollView.isHidden = true
         placeholderImageView.isHidden = true
+        recognizeTextButton.isHidden = true
+    }
+
+    private func setupRecognizeTextButton() {
+        addSubview(recognizeTextButton)
+        recognizeTextButton.translatesAutoresizingMaskIntoConstraints = false
+        recognizeTextButtonBottomConstraint = recognizeTextButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+        NSLayoutConstraint.activate([
+            recognizeTextButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            recognizeTextButtonBottomConstraint!
+        ])
+
+        recognizeTextButton.addTarget(self, action: #selector(recognizeTextButtonTapped), for: .touchUpInside)
     }
     
     func setObject(object: Item) {
+        removeCurrentTextSelectionInteraction()
+
         if isNeedToUpdateWebView, object.uuid == currentItemId {
             return
         }
@@ -123,7 +148,9 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         currentItemId = object.uuid
         fileType = object.fileType
+        isLocalItem = object.isLocalItem
         placeholderImageView.isHidden = true
+        recognizeTextButton.isHidden = true
         
         if fileType == .video || fileType == .image {
             imageScrollView.isHidden = false
@@ -155,6 +182,33 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             setPlaceholder()
         }
     }
+
+    func setRecognizeTextButtonBottomSpacing(_ spacing: CGFloat) {
+        recognizeTextButtonBottomConstraint?.constant = -spacing
+        recognizeTextButton.setNeedsLayout()
+        UIView.animate(withDuration: NumericConstants.fastAnimationDuration) {
+            self.layoutIfNeeded()
+        }
+    }
+
+    func addTextSelectionInteraction(_ data: ImageTextSelectionData) {
+        removeCurrentTextSelectionInteraction()
+
+        let interaction = ImageTextSelectionInteraction(data: data)
+        interaction.gesturesToIgnore = [tapGesture, imageScrollView.doubleTapGesture]
+        imageScrollView.imageView.addInteraction(interaction)
+
+        recognizeTextButton.isSelected = true
+
+        currentTextSelectionInteraction = interaction
+    }
+
+    func removeCurrentTextSelectionInteraction() {
+        if let currentTextSelectionInteraction = currentTextSelectionInteraction {
+            imageScrollView.imageView.removeInteraction(currentTextSelectionInteraction)
+            recognizeTextButton.isSelected = false
+        }
+    }
     
     @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
         delegate?.tapOnCellForFullScreen()
@@ -164,6 +218,14 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         delegate?.tapOnSelectedItem()
     }
 
+    @objc private func recognizeTextButtonTapped() {
+        guard let image = imageScrollView.imageView.image else {
+            assertionFailure("image should be loaded")
+            return
+        }
+
+        delegate?.recognizeTextButtonTapped(image: image, isActive: recognizeTextButton.isSelected)
+    }
 }
 
 extension PhotoVideoDetailCell: UIScrollViewDelegate {
@@ -200,10 +262,12 @@ extension PhotoVideoDetailCell: ImageScrollViewDelegate {
     
     func onImageLoaded(image: UIImage?) {
         if image == nil, fileType != .video {
+            recognizeTextButton.isHidden = true
             setPlaceholder()
         } else {
             placeholderImageView.isHidden = true
             imageScrollView.isHidden = !(fileType == .video || fileType == .image)
+            recognizeTextButton.isHidden = fileType != .image || isLocalItem || !isRecognizeTextEnabled
         }
     }
     

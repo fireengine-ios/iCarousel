@@ -18,5 +18,7 @@
 	<false/>
 	<key>apple_login_enabled</key>
 	<false/>
+	<key>ocr_enabled</key>
+	<false/>
 </dict>
 </plist>

@@ -60,4 +60,6 @@ protocol PhotoVideoDetailViewInput: AnyObject, ActivityIndicator, ErrorPresenter
 
     @available(iOS 13.0, *)
     var activityItemsConfiguration: UIActivityItemsConfigurationReading? { get set }
+
+    func removeTextSelectionInteractionFromCurrentCell()
 }
