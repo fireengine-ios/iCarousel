@@ -36,6 +36,10 @@ enum AppColor {
     case darkContentOverlay
     case lightContentOverlay
 
+    // MARK: Drawer
+    case drawerShadow
+    case drawerIndicator
+
     case primaryBackground
     case cellShadow
     case itemSeperator

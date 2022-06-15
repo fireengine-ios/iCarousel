@@ -39,8 +39,7 @@ final class DrawerViewController: UIViewController {
         view.layer.cornerRadius = 16
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = AppColor.drawerShadow.cgColor
         view.layer.shadowRadius = 24
         view.layer.shadowOffset = CGSize(width: 0, height: 6)
 
@@ -53,7 +52,7 @@ final class DrawerViewController: UIViewController {
         let indicatorWidth: CGFloat = 30
         let indicatorHeight: CGFloat = 5
 
-        drawerIndicatorView.backgroundColor = .lightGray
+        drawerIndicatorView.backgroundColor = AppColor.drawerIndicator.color
         view.addSubview(drawerIndicatorView)
         drawerIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         drawerIndicatorView.layer.cornerRadius = indicatorHeight / 2

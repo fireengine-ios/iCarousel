@@ -34,17 +34,19 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         
     }
     
-    func setupBar(tintColor: UIColor?, style: UIBarStyle?, items: [ImageNameToTitleTupple]) {
-        if let tintColor = tintColor {
-            editingBar.tintColor = tintColor
-        } else {
-            editingBar.tintColor = ColorConstants.blueColor
+    func setupBar(with config: EditingBarConfig) {
+        editingBar.tintColor = config.tintColor
+        editingBar.unselectedItemTintColor = config.unselectedItemTintColor
+        editingBar.barStyle = config.style
+
+        let bottomItems = config.elementsConfig.map { item in
+            (item.icon, item.editingBarTitle, item.editingBarAccessibilityId)
         }
-        if let style = style, style != .default {
-            editingBar.backgroundImage = UIImage()
-        }
-        
-        editingBar.setupItems(withImageToTitleNames: items)
+
+        editingBar.setupItems(
+            withImageToTitleNames: bottomItems,
+            syncInProgress: config.elementsConfig.contains(.syncInProgress)
+        )
     }
     
     func showBar(animated: Bool, onView sourceView: UIView) {

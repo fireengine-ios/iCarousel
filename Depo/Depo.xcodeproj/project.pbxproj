@@ -1414,7 +1414,6 @@
 		8C0E8C8B1FDEBDFF00789C91 /* BottomSelectionMusicTabBarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1B60471FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift */; };
 		8C0E8C8C1FDEBDFF00789C91 /* ActivityTimelineTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44F51F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift */; };
 		8C0E8C8D1FDEBDFF00789C91 /* MusicBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786861F3F38D9005CB432 /* MusicBar.swift */; };
-		8C0E8C8E1FDEBDFF00789C91 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE81EFD517300A405B2 /* CustomTabBarItem.swift */; };
 		8C0E8C8F1FDEBDFF00789C91 /* EditinglBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF88A1F348B77002AC795 /* EditinglBar.swift */; };
 		8C0E8C911FDEBDFF00789C91 /* VisualMusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786991F3F38EF005CB432 /* VisualMusicPlayerViewController.swift */; };
 		8C0E8C921FDEBDFF00789C91 /* AutoSyncSwitcherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8146B1EF7A93E001DFCF0 /* AutoSyncSwitcherTableViewCell.swift */; };
@@ -1541,7 +1540,6 @@
 		8C0E8D441FDEBDFF00789C91 /* RemoteDownloder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECA95941F1610590054BDC0 /* RemoteDownloder.swift */; };
 		8C0E8D451FDEBDFF00789C91 /* BlueButtonWithWhiteText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C634F9E1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift */; };
 		8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5FA1F23308800ED8610 /* String+Int.swift */; };
-		8C0E8D491FDEBDFF00789C91 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */; };
 		8C0E8D4B1FDEBDFF00789C91 /* BottomSelectionTabBarInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8661F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift */; };
 		8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		8C0E8D4F1FDEBDFF00789C91 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
@@ -2098,7 +2096,6 @@
 		8C0E90431FDEBDFF00789C91 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
 		8C0E90441FDEBDFF00789C91 /* BasicCollectionMultiFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CED0B0F1F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib */; };
 		8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44FC1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib */; };
-		8C0E90491FDEBDFF00789C91 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
 		8C0E904A1FDEBDFF00789C91 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */; };
 		8C0E904D1FDEBDFF00789C91 /* IntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B711EEE9509006532C8 /* IntroduceViewController.xib */; };
 		8C0E904E1FDEBDFF00789C91 /* FileInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CDABD121F1E434100C8CC16 /* FileInfoViewController.xib */; };
@@ -4128,7 +4125,6 @@
 		CE78482522A685FB00662219 /* ActivityTimelineTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44F51F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift */; };
 		CE78482622A685FB00662219 /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */; };
 		CE78482822A685FB00662219 /* MusicBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786861F3F38D9005CB432 /* MusicBar.swift */; };
-		CE78482922A685FB00662219 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE81EFD517300A405B2 /* CustomTabBarItem.swift */; };
 		CE78482A22A685FB00662219 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921CE225623D3005882CE /* ChangePasswordController.swift */; };
 		CE78482B22A685FB00662219 /* EditinglBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF88A1F348B77002AC795 /* EditinglBar.swift */; };
 		CE78482C22A685FB00662219 /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */; };
@@ -4346,7 +4342,6 @@
 		CE78491E22A685FB00662219 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E020174D7500F49E41 /* ResponseParser.swift */; };
 		CE78491F22A685FB00662219 /* MyStorageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5921AD136400582C45 /* MyStorageViewInput.swift */; };
 		CE78492022A685FB00662219 /* String+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5FA1F23308800ED8610 /* String+Int.swift */; };
-		CE78492322A685FB00662219 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */; };
 		CE78492422A685FB00662219 /* BottomSelectionTabBarInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8661F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift */; };
 		CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		CE78492622A685FB00662219 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
@@ -5278,7 +5273,6 @@
 		CE784E1922A685FB00662219 /* LoginSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC0620066640003D8E05 /* LoginSettingsViewController.xib */; };
 		CE784E1A22A685FB00662219 /* InstaPickCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921EC07B21E5ED55000A0860 /* InstaPickCard.xib */; };
 		CE784E1C22A685FB00662219 /* PeriodicContactSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9F8E4D2087546500622A6C /* PeriodicContactSyncViewController.xib */; };
-		CE784E1D22A685FB00662219 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
 		CE784E1E22A685FB00662219 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
 		CE784E1F22A685FB00662219 /* ManageContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78052961200DCDA70051FA78 /* ManageContactTableViewCell.xib */; };
 		CE784E2022A685FB00662219 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */; };
@@ -5822,7 +5816,6 @@
 		CF8B63D923CBC9D70021B021 /* FaceImageAddNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A56D5B4202AF536003A4624 /* FaceImageAddNamePresenter.swift */; };
 		CF8B63DA23CBC9D70021B021 /* ItemOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6B30001FFCC6510066C818 /* ItemOperationManager.swift */; };
 		CF8B63DB23CBC9D70021B021 /* MusicBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786861F3F38D9005CB432 /* MusicBar.swift */; };
-		CF8B63DC23CBC9D70021B021 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE81EFD517300A405B2 /* CustomTabBarItem.swift */; };
 		CF8B63DD23CBC9D70021B021 /* EditinglBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF88A1F348B77002AC795 /* EditinglBar.swift */; };
 		CF8B63DE23CBC9D70021B021 /* HomeCardsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE61DA552015D66A00BB1E59 /* HomeCardsService.swift */; };
 		CF8B63DF23CBC9D70021B021 /* ConnectWithInstaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */; };
@@ -6047,7 +6040,6 @@
 		CF8B64CA23CBC9D70021B021 /* BlueButtonWithWhiteText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C634F9E1F0E6E7E00B5B93D /* BlueButtonWithWhiteText.swift */; };
 		CF8B64CC23CBC9D70021B021 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
 		CF8B64CD23CBC9D70021B021 /* String+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5FA1F23308800ED8610 /* String+Int.swift */; };
-		CF8B64CE23CBC9D70021B021 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */; };
 		CF8B64CF23CBC9D70021B021 /* BottomSelectionTabBarInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8661F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift */; };
 		CF8B64D023CBC9D70021B021 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		CF8B64D123CBC9D70021B021 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
@@ -7106,7 +7098,6 @@
 		CF8B6A0F23CBC9D70021B021 /* SpotlightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98570AF8208F7556002CCEBA /* SpotlightViewController.xib */; };
 		CF8B6A1523CBC9D70021B021 /* DropboxAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5AB5B6321F9B01B003AABB4 /* DropboxAccountConnectionCell.xib */; };
 		CF8B6A1623CBC9D70021B021 /* ActivityTimelineFileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8F44FC1F6BB21C0062C2E0 /* ActivityTimelineFileCell.xib */; };
-		CF8B6A1723CBC9D70021B021 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
 		CF8B6A1A23CBC9D70021B021 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */; };
 		CF8B6A1D23CBC9D70021B021 /* GoogleService-Info-ent.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3930EC2100668300C1D82D /* GoogleService-Info-ent.plist */; };
 		CF8B6A1E23CBC9D70021B021 /* IntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C032B711EEE9509006532C8 /* IntroduceViewController.xib */; };
@@ -7255,7 +7246,6 @@
 		CF8B6B6D23CBCA280021B021 /* ActivityTimelineTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8F44F51F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift */; };
 		CF8B6B6E23CBCA280021B021 /* NSLayoutConstraint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00B252220332F000A5A696 /* NSLayoutConstraint+Extensions.swift */; };
 		CF8B6B7023CBCA280021B021 /* MusicBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7786861F3F38D9005CB432 /* MusicBar.swift */; };
-		CF8B6B7123CBCA280021B021 /* CustomTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAE3FE81EFD517300A405B2 /* CustomTabBarItem.swift */; };
 		CF8B6B7223CBCA280021B021 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5921CE225623D3005882CE /* ChangePasswordController.swift */; };
 		CF8B6B7323CBCA280021B021 /* EditinglBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF88A1F348B77002AC795 /* EditinglBar.swift */; };
 		CF8B6B7423CBCA280021B021 /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */; };
@@ -7514,7 +7504,6 @@
 		CF8B6C8023CBCA280021B021 /* MyStorageViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B5921AD136400582C45 /* MyStorageViewInput.swift */; };
 		CF8B6C8123CBCA280021B021 /* String+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9A5FA1F23308800ED8610 /* String+Int.swift */; };
 		CF8B6C8223CBCA280021B021 /* MusicViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */; };
-		CF8B6C8523CBCA280021B021 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */; };
 		CF8B6C8623CBCA280021B021 /* BottomSelectionTabBarInteractorInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8661F348B5C002AC795 /* BottomSelectionTabBarInteractorInput.swift */; };
 		CF8B6C8723CBCA280021B021 /* FolderSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C83B6EE1F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift */; };
 		CF8B6C8823CBCA280021B021 /* FreeAppSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2E30D1FB9CB4C009CF813 /* FreeAppSpace.swift */; };
@@ -8600,7 +8589,6 @@
 		CF8B71E323CBCA280021B021 /* SpotifyStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9845489522FBFF4000D7F29C /* SpotifyStatusView.xib */; };
 		CF8B71E523CBCA280021B021 /* LifedriveImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542D22A7A7B8000E2FA9 /* LifedriveImages.xcassets */; };
 		CF8B71E623CBCA280021B021 /* PeriodicContactSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A9F8E4D2087546500622A6C /* PeriodicContactSyncViewController.xib */; };
-		CF8B71E723CBCA280021B021 /* EditinglBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C6EF88B1F348B77002AC795 /* EditinglBar.xib */; };
 		CF8B71E823CBCA280021B021 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
 		CF8B71E923CBCA280021B021 /* ManageContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78052961200DCDA70051FA78 /* ManageContactTableViewCell.xib */; };
 		CF8B71EA23CBCA280021B021 /* AlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C0435061F4DBAAF00193C75 /* AlbumCollectionViewCell.xib */; };
@@ -10436,9 +10424,7 @@
 		8C6EF8751F348B5C002AC795 /* BottomSelectionTabBarViewOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSelectionTabBarViewOutput.swift; sourceTree = "<group>"; };
 		8C6EF8891F348B77002AC795 /* EditingBarConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditingBarConfig.swift; sourceTree = "<group>"; };
 		8C6EF88A1F348B77002AC795 /* EditinglBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditinglBar.swift; sourceTree = "<group>"; };
-		8C6EF88B1F348B77002AC795 /* EditinglBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditinglBar.xib; sourceTree = "<group>"; };
 		8C6FB67C1F0B9F7600B552A3 /* MoreActionsConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreActionsConfig.swift; sourceTree = "<group>"; };
-		8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		8C75D2491FDD1BF700CBE1A7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8C7786861F3F38D9005CB432 /* MusicBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicBar.swift; sourceTree = "<group>"; };
 		8C7786871F3F38D9005CB432 /* MusicBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicBar.xib; sourceTree = "<group>"; };
@@ -11558,7 +11544,6 @@
 		CEAE3FD41EFD500B00A405B2 /* HomeViewTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewTopView.swift; sourceTree = "<group>"; };
 		CEAE3FD51EFD500B00A405B2 /* HomeViewTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewTopView.xib; sourceTree = "<group>"; };
 		CEAE3FE61EFD517300A405B2 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		CEAE3FE81EFD517300A405B2 /* CustomTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarItem.swift; sourceTree = "<group>"; };
 		CEAE3FE91EFD517300A405B2 /* TabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarViewController.xib; sourceTree = "<group>"; };
 		CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		CEAFCF651F2AD7DE00ECA8D1 /* BaseFilesGreedChildrenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedChildrenViewController.swift; sourceTree = "<group>"; };
@@ -12640,15 +12625,6 @@
 				077A4E57271FF707008B78E7 /* DeleteAccountValidationPopUp.xib */,
 			);
 			path = DeleteAccountPopUps;
-			sourceTree = "<group>";
-		};
-		077D1D5627FEDBC6001C6E72 /* Legacy */ = {
-			isa = PBXGroup;
-			children = (
-				8C6FB6971F0B9F8400B552A3 /* CustomTabBar.swift */,
-				CEAE3FE81EFD517300A405B2 /* CustomTabBarItem.swift */,
-			);
-			path = Legacy;
 			sourceTree = "<group>";
 		};
 		0780AB0D2791681E000760D9 /* ImageTextSelection */ = {
@@ -16298,7 +16274,6 @@
 		8C6EF8861F348B77002AC795 /* CustomToolBar */ = {
 			isa = PBXGroup;
 			children = (
-				8C6EF88B1F348B77002AC795 /* EditinglBar.xib */,
 				8C6EF8891F348B77002AC795 /* EditingBarConfig.swift */,
 				8C6EF88A1F348B77002AC795 /* EditinglBar.swift */,
 				8C11C42D1F39E10600B96E1B /* ActionSheetPredetermendConfigs.swift */,
@@ -20145,7 +20120,6 @@
 		CEAE3FE71EFD517300A405B2 /* CustomTabBars */ = {
 			isa = PBXGroup;
 			children = (
-				077D1D5627FEDBC6001C6E72 /* Legacy */,
 				8C20862D228D4B2E000BEDAD /* PhotoVideo */,
 				CEAE3FE91EFD517300A405B2 /* TabBarViewController.xib */,
 				CEAE3FEA1EFD517300A405B2 /* TabBarViewController.swift */,
@@ -22249,7 +22223,6 @@
 				CF71471224B597AA00D83E60 /* ContactListMainView.xib in Resources */,
 				B5AB5B6721F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
-				8C0E90491FDEBDFF00789C91 /* EditinglBar.xib in Resources */,
 				F013FA7127FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */,
 				8C0E904A1FDEBDFF00789C91 /* AlbumCollectionViewCell.xib in Resources */,
 				8C3930F02100668300C1D82D /* GoogleService-Info-ent.plist in Resources */,
@@ -22774,7 +22747,6 @@
 				B5B6542E22A7A7B8000E2FA9 /* LifedriveImages.xcassets in Resources */,
 				982319C624F3A1E700FD16E2 /* AdjustmentParameterSliderView.xib in Resources */,
 				CE784E1C22A685FB00662219 /* PeriodicContactSyncViewController.xib in Resources */,
-				CE784E1D22A685FB00662219 /* EditinglBar.xib in Resources */,
 				CE784E1E22A685FB00662219 /* MyStorageViewController.xib in Resources */,
 				CF38A821257531620000994F /* PrivateShareWithContactView.xib in Resources */,
 				F013FA7327FF2851004B9BB8 /* AppleGoogleUpdatePasswordPopup.xib in Resources */,
@@ -23134,7 +23106,6 @@
 				B55C973525593E4000623C5C /* PrivateShareLocalContactCell.xib in Resources */,
 				CF71471324B597AA00D83E60 /* ContactListMainView.xib in Resources */,
 				CF8B6A1623CBC9D70021B021 /* ActivityTimelineFileCell.xib in Resources */,
-				CF8B6A1723CBC9D70021B021 /* EditinglBar.xib in Resources */,
 				CF8B6A1A23CBC9D70021B021 /* AlbumCollectionViewCell.xib in Resources */,
 				CF8B6A1D23CBC9D70021B021 /* GoogleService-Info-ent.plist in Resources */,
 				CF8B6A1E23CBC9D70021B021 /* IntroduceViewController.xib in Resources */,
@@ -23538,7 +23509,6 @@
 				CF8B71E323CBCA280021B021 /* SpotifyStatusView.xib in Resources */,
 				CF8B71E523CBCA280021B021 /* LifedriveImages.xcassets in Resources */,
 				CF8B71E623CBCA280021B021 /* PeriodicContactSyncViewController.xib in Resources */,
-				CF8B71E723CBCA280021B021 /* EditinglBar.xib in Resources */,
 				CF8B71E823CBCA280021B021 /* MyStorageViewController.xib in Resources */,
 				CF8B71E923CBCA280021B021 /* ManageContactTableViewCell.xib in Resources */,
 				CF8B71EA23CBCA280021B021 /* AlbumCollectionViewCell.xib in Resources */,
@@ -24850,7 +24820,6 @@
 				8C0E8C8D1FDEBDFF00789C91 /* MusicBar.swift in Sources */,
 				B569563324D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				0780AB5427916834000760D9 /* RemoteTextRecognitionService.swift in Sources */,
-				8C0E8C8E1FDEBDFF00789C91 /* CustomTabBarItem.swift in Sources */,
 				B560CC3D255BB6DA00199EA2 /* PrivateShareSharedFilesCollectionManager.swift in Sources */,
 				8C0E8C8F1FDEBDFF00789C91 /* EditinglBar.swift in Sources */,
 				CED4B0242017505300D06CA9 /* HomeCardsService.swift in Sources */,
@@ -25171,7 +25140,6 @@
 				8C0B91BE201710EB00A5BA81 /* TitleView.swift in Sources */,
 				982319E724F3A1E700FD16E2 /* PhotoEditNavbar.swift in Sources */,
 				8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */,
-				8C0E8D491FDEBDFF00789C91 /* CustomTabBar.swift in Sources */,
 				8C0E8D4B1FDEBDFF00789C91 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				03404571240794FD0024135B /* SynchronizedDictionary.swift in Sources */,
@@ -26872,7 +26840,6 @@
 				CE78482622A685FB00662219 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				CE78482822A685FB00662219 /* MusicBar.swift in Sources */,
 				98B04B1A259316E40011DAEB /* Notifications.swift in Sources */,
-				CE78482922A685FB00662219 /* CustomTabBarItem.swift in Sources */,
 				CE78482A22A685FB00662219 /* ChangePasswordController.swift in Sources */,
 				982319DE24F3A1E700FD16E2 /* AdjustmentCategoriesView.swift in Sources */,
 				CE78482B22A685FB00662219 /* EditinglBar.swift in Sources */,
@@ -27233,7 +27200,6 @@
 				CE78492022A685FB00662219 /* String+Int.swift in Sources */,
 				8E26D9802306999800D08123 /* MusicViewInput.swift in Sources */,
 				98BB909E24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
-				CE78492322A685FB00662219 /* CustomTabBar.swift in Sources */,
 				CE78492422A685FB00662219 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				730F8AB723CDA43D00798B61 /* UIView + CALayerBorder.swift in Sources */,
@@ -28661,7 +28627,6 @@
 				CF8B63D923CBC9D70021B021 /* FaceImageAddNamePresenter.swift in Sources */,
 				CF8B63DA23CBC9D70021B021 /* ItemOperationManager.swift in Sources */,
 				CF8B63DB23CBC9D70021B021 /* MusicBar.swift in Sources */,
-				CF8B63DC23CBC9D70021B021 /* CustomTabBarItem.swift in Sources */,
 				CF8B63DD23CBC9D70021B021 /* EditinglBar.swift in Sources */,
 				CF8B63DE23CBC9D70021B021 /* HomeCardsService.swift in Sources */,
 				CF8B63DF23CBC9D70021B021 /* ConnectWithInstaView.swift in Sources */,
@@ -28978,7 +28943,6 @@
 				CF8B64CA23CBC9D70021B021 /* BlueButtonWithWhiteText.swift in Sources */,
 				CF8B64CC23CBC9D70021B021 /* TitleView.swift in Sources */,
 				CF8B64CD23CBC9D70021B021 /* String+Int.swift in Sources */,
-				CF8B64CE23CBC9D70021B021 /* CustomTabBar.swift in Sources */,
 				CF8B64CF23CBC9D70021B021 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				CF8B64D023CBC9D70021B021 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				CF8B64D123CBC9D70021B021 /* FreeAppSpace.swift in Sources */,
@@ -30317,7 +30281,6 @@
 				076BD1E727BC332A004609E3 /* MapMediaGroup.swift in Sources */,
 				CF8B6B6E23CBCA280021B021 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				CF8B6B7023CBCA280021B021 /* MusicBar.swift in Sources */,
-				CF8B6B7123CBCA280021B021 /* CustomTabBarItem.swift in Sources */,
 				98B04B1B259316E40011DAEB /* Notifications.swift in Sources */,
 				0305A36423D5C665004D1EC7 /* CarouselPageModel.swift in Sources */,
 				CF8B6B7223CBCA280021B021 /* ChangePasswordController.swift in Sources */,
@@ -30674,7 +30637,6 @@
 				07C759E92819369200B028F0 /* Image.swift in Sources */,
 				CF7145F624B597A800D83E60 /* ContactInfoView.swift in Sources */,
 				CF8B6C8223CBCA280021B021 /* MusicViewInput.swift in Sources */,
-				CF8B6C8523CBCA280021B021 /* CustomTabBar.swift in Sources */,
 				CF8B6C8623CBCA280021B021 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				CF8B6C8723CBCA280021B021 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				98B04831259314750011DAEB /* Utils.m in Sources */,

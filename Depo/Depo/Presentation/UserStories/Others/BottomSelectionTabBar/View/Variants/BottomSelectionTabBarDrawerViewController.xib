@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,11 +20,9 @@
             <subviews>
                 <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xra-PL-qVc" customClass="EditinglBar" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="8" width="375" height="41"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <items/>
                 </tabBar>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="xra-PL-qVc" secondAttribute="bottom" constant="8" id="17c-Mu-08c"/>
                 <constraint firstItem="xra-PL-qVc" firstAttribute="leading" secondItem="gdG-g2-9Ty" secondAttribute="leading" id="C9W-yq-Ke1"/>
@@ -36,9 +33,4 @@
             <point key="canvasLocation" x="599" y="27"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

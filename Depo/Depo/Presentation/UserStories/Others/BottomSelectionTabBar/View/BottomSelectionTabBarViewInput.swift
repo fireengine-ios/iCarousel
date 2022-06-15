@@ -15,7 +15,7 @@ protocol BottomSelectionTabBarViewInput: AnyObject, Waiting {
 
     func setupInitialState()
     
-    func setupBar(tintColor: UIColor?, style: UIBarStyle?, items: [ImageNameToTitleTupple])
+    func setupBar(with config: EditingBarConfig)
     func showBar(animated: Bool, onView sourceView: UIView)
     func hideBar(animated: Bool)
     

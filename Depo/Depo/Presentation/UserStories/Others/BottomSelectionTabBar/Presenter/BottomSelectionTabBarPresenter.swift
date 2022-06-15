@@ -22,57 +22,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupConfig(withConfig config: EditingBarConfig) {
-        var itemTupple = [PreDetermendType]()
-        for type in config.elementsConfig {
-            switch type {
-            case .hide:
-                itemTupple.append(EditinglBar.PreDetermendTypes.hide)
-            case .unhide:
-                itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
-            case .smash:
-                itemTupple.append(EditinglBar.PreDetermendTypes.smash)
-            case .delete:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .download:
-                itemTupple.append(EditinglBar.PreDetermendTypes.download)
-            case .downloadDocument:
-                itemTupple.append(EditinglBar.PreDetermendTypes.downloadDocument)
-            case .edit:
-                itemTupple.append(EditinglBar.PreDetermendTypes.edit)
-            case .info:
-                itemTupple.append(EditinglBar.PreDetermendTypes.info)
-            case .move:
-                itemTupple.append(EditinglBar.PreDetermendTypes.move)
-            case .share:
-                itemTupple.append(EditinglBar.PreDetermendTypes.share)
-            case .sync:
-                itemTupple.append(EditinglBar.PreDetermendTypes.sync)
-            case .syncInProgress:
-                itemTupple.append(EditinglBar.PreDetermendTypes.syncInProgress)
-            case .removeFromAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeFromAlbum)
-            case .removeFromFaceImageAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeFromFaceImageAlbum)
-            case .addToAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.addToAlbum)
-            case .makeAlbumCover:
-                itemTupple.append(EditinglBar.PreDetermendTypes.makeCover)
-            case .print:
-                itemTupple.append(EditinglBar.PreDetermendTypes.print)
-            case .removeAlbum:
-                itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
-            case .moveToTrash:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .restore:
-                itemTupple.append(EditinglBar.PreDetermendTypes.restore)
-            case .moveToTrashShared:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            default:
-                break
-            }
-        }
-
-        view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple)
+        view.setupBar(with: config)
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
