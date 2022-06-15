@@ -26,29 +26,29 @@ final class PrivateShareWithContactView: UIView, NibInit {
         willSet {
             newValue.clipsToBounds = true
             newValue.layer.cornerRadius = newValue.frame.height * 0.5
-            newValue.backgroundColor = ColorConstants.marineTwo
+            newValue.backgroundColor = AppColor.filesSharedInfoBackground.color
         }
     }
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.font = .appFont(.light, size: 14)
             newValue.lineBreakMode = .byTruncatingMiddle
-            newValue.textColor = .white
+            if #available(iOS 13.0, *) {
+                newValue.textColor = AppColor.filesLabel.color.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
+            } else {
+                newValue.textColor = AppColor.filesLabel.color
+            }
         }
     }
     
-    @IBOutlet private weak var deleteButton: UIButton! {
-        willSet {
-            newValue.imageEdgeInsets = UIEdgeInsets(topBottom: 8, rightLeft: 8)
-        }
-    }
+    @IBOutlet private weak var deleteButton: UIButton!
     
     @IBOutlet private weak var userRoleButton: UIButton! {
         willSet {
-            newValue.setTitleColor(.lrTealishFour, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.setTitleColor(AppColor.filesLabel.color, for: .normal)
+            newValue.titleLabel?.font = UIFont.appFont(.medium, size: 14)
             newValue.tintColor = .lrTealishFour
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -10

@@ -20,8 +20,8 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.privateShareStartPageSuggestionsTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = AppColor.marineTwoAndWhite.color
+            newValue.font = UIFont.appFont(.medium, size: 16)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     

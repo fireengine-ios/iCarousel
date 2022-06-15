@@ -12,28 +12,29 @@ final class PrivateShareDurationCell: UICollectionViewCell {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.font = .appFont(.medium, size: 14)
             newValue.textAlignment = .center
-            newValue.textColor = .lightGray
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var borderView: UIView! {
         willSet {
             newValue.clipsToBounds = true
-            newValue.layer.cornerRadius = newValue.frame.height * 0.5
-        }
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            borderView.backgroundColor = isSelected ? ColorConstants.aquaMarineTwo : .clear
-            titleLabel.textColor = isSelected ? .white : .lightGray
+            newValue.addRoundedShadows(cornerRadius: 12,
+                                       shadowColor: AppColor.filesBigCellShadow.cgColor,
+                                       opacity: 0.8, radius: 6.0)
         }
     }
 
     func setup(with duration: PrivateShareDuration) {
         titleLabel.text = duration.title
+    }
+    
+    func setSelection(isSelected: Bool) {
+        borderView.backgroundColor = isSelected ? AppColor.filesSharedTabSeperator.color : .clear
+        titleLabel.textColor = isSelected ? .white : AppColor.filesLabel.color
+        borderView.layer.shadowOpacity = isSelected ? 0.0 : 0.8
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {

@@ -33,15 +33,15 @@ final class FileLocationView: UIView, NibInit, FileLocationViewProtocol {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = localized(.fileInfoLocation)
-            newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = AppColor.marineTwoAndTealish.color
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
 
     @IBOutlet private weak var addressLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 14)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
             newValue.numberOfLines = 0
         }
     }
