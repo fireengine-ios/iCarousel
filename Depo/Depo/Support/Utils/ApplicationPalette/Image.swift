@@ -19,6 +19,6 @@ enum Image: String, AppImage {
     case iconSyncStatusQueued
     case iconPlay
     case iconArrowDown
-    case iconWifi
+    case iconNetworkWifi
     case iconNetworkLTE
 }

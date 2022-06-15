@@ -137,7 +137,7 @@ final class ProgressTabBarCard: BaseTabBarCard {
 
         let isWiFi = reachabilityService.isReachableViaWiFi
         let networkType = isWiFi ? TextConstants.networkTypeWiFi : TextConstants.mobileData
-        let iconImage = isWiFi ? Image.iconWifi : Image.iconNetworkLTE
+        let iconImage = isWiFi ? Image.iconNetworkWifi : Image.iconNetworkLTE
 
         currentItemImageView.isHidden = true
         iconImageView.image = iconImage.image(
