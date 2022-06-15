@@ -6,32 +6,12 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-typealias AnimationBlock = () -> Void
-typealias PreDetermendType = (String, String, String)
+import UIKit
 
-class EditinglBar: CustomTabBar {
-    
-    struct PreDetermendTypes { //use super setup method with these
-        static let share = ("ShareButtonIcon", TextConstants.tabBarShareLabel, "")
-        static let info = ("InfoButtonIcon", TextConstants.tabBarInfoLabel, "")
-        static let edit = ("EditButtonIcon", TextConstants.tabBarEditeLabel, "")
-        static let print = ("PrintButtonIcon", TextConstants.tabBarPrintLabel, "")
-        static let delete = ("DeleteShareButton", TextConstants.tabBarDeleteLabel, "")
-        static let removeAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveAlbumLabel, "")
-        static let move = ("MoveButtonIcon", TextConstants.tabBarMoveLabel, "")
-        static let addToAlbum = ("MoveButtonIcon", TextConstants.tabBarAddToAlbumLabel, "")
-        static let makeCover = ("MoveButtonIcon", TextConstants.tabAlbumCoverAlbumLabel, "")
-        static let removeFromAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
-        static let removeFromFaceImageAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
-        static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
-        static let syncInProgress = ("", TextConstants.tabBarSyncLabel, "")
-        static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
-        static let downloadDocument = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
-        static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
-        static let unhide = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
-        static let smash = ("SmashButtonIcon", TextConstants.tabBarSmashLabel, "")
-        static let restore = ("RestoreButtonIcon", TextConstants.actionSheetRestore, "")
-    }
+typealias AnimationBlock = () -> Void
+typealias ImageNameToTitleTupple = (icon: UIImage?, title: String, accessibilityId: String)
+
+class EditinglBar: UITabBar {
     
     private let tabBarHeight: CGFloat = 49
     
@@ -59,7 +39,7 @@ class EditinglBar: CustomTabBar {
     }()
 
     // MARK: - Override
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -80,39 +60,42 @@ class EditinglBar: CustomTabBar {
         animationWithBlock(needShow: false, withAnimation: animated)
     }
     
-    func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {
-          var syncInProgress = false
-          
-          let items = names.map { item -> CustomTabBarItem in
-              var image = UIImage(named: item.imageName)
-              
-              ///red 'delete', 'hide', 'unhide', 'restore' icons
-              switch item.imageName {
-                  case PreDetermendTypes.delete.0,
-                       PreDetermendTypes.hide.0,
-                       PreDetermendTypes.unhide.0,
-                       PreDetermendTypes.restore.0:
-                      image = image?.withRenderingMode(.alwaysTemplate)
-                  case PreDetermendTypes.syncInProgress.0:
-                      image = nil
-                      syncInProgress = true
-                  default: break
-              }
-              
-              return CustomTabBarItem(title: item.title,
-                               image: image,
-                               tag: 0)
-          }
-          
-          items.forEach { item in
-              item.isAccessibilityElement = true
-              item.accessibilityLabel = item.title
-          }
-          
-          syncInProgress ? showAnimation() : hideAnimation()
-    
-          setItems(items, animated: false)
-      }
+    func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple], syncInProgress: Bool) {
+        let items: [UITabBarItem] = names.map { itemConfig in
+
+            // TODO: Facelift,
+            //             ///red 'delete', 'hide', 'unhide', 'restore' icons
+            //              switch item.imageName {
+            //                  case PreDetermendTypes.delete.0,
+            //                       PreDetermendTypes.hide.0,
+            //                       PreDetermendTypes.unhide.0,
+            //                       PreDetermendTypes.restore.0:
+            //                      image = image?.withRenderingMode(.alwaysTemplate)
+            //                  case PreDetermendTypes.syncInProgress.0:
+            //                      image = nil
+            //                      syncInProgress = true
+            //                  default: break
+            //              }
+
+            let item = UITabBarItem()
+            item.title = itemConfig.title
+            item.image = itemConfig.icon
+            item.accessibilityIdentifier = itemConfig.accessibilityId
+            item.accessibilityLabel = item.title
+            item.setTitleTextAttributes([
+                .font: UIFont.appFont(.medium, size: 12)
+            ], for: .normal)
+            return item
+        }
+
+        if syncInProgress {
+            showAnimation()
+        } else {
+            hideAnimation()
+        }
+
+        setItems(items, animated: false)
+    }
     
     // MARK: - Private
     

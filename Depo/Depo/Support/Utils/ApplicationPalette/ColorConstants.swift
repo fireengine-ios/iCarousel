@@ -28,10 +28,12 @@ enum AppColor {
     case tabBarCardProgressTint
     case tabBarCardProgressTrack
 
+    // MARK: General
     case background
     case secondaryBackground
     case label
     case tint
+    case separator
 
     case darkContentOverlay
     case lightContentOverlay
@@ -49,6 +51,10 @@ enum AppColor {
     case filesSeperator
     case filesSharedTabSeperator
     case filesSharedInfoBackground
+
+    // MARK: Drawer
+    case drawerShadow
+    case drawerIndicator
 
     case primaryBackground
     case cellShadow

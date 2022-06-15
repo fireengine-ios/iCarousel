@@ -314,18 +314,20 @@ class RouterVC: NSObject {
         controller.checkModalPresentationStyle()
         
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
-        if let lastViewController = getViewControllerForPresent() {
-            if controller.popoverPresentationController?.sourceView == nil,
-                controller.popoverPresentationController?.barButtonItem == nil {
-                controller.popoverPresentationController?.sourceView = lastViewController.view
-            }
-            lastViewController.present(controller, animated: animated, completion: {
-                completion?()
-            })
-        } else {
+
+        guard let topViewController = UIApplication.topController() else {
             assertionFailure("top vc: \(String(describing: UIApplication.topController()))")
-            UIApplication.topController()?.present(controller, animated: animated, completion: completion)
+            return
         }
+
+        // TODO: Facelift, double check this is needed
+        if controller.modalPresentationStyle == .popover,
+           controller.popoverPresentationController?.sourceView == nil,
+           controller.popoverPresentationController?.barButtonItem == nil {
+            controller.popoverPresentationController?.sourceView = topViewController.view
+        }
+
+        topViewController.present(controller, animated: animated, completion: completion)
     }
         
     func showSpiner() {

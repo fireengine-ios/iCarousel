@@ -19,9 +19,13 @@ enum Image: String, AppImage {
     case iconSyncStatusQueued
     case iconPlay
     case iconArrowDown
-    case iconWifi
+    case iconNetworkWifi
     case iconNetworkLTE
-    
+    case iconShare
+    case iconDownload
+    case iconBackupBordered
+    case iconDelete
+
     ///  Files Tab
     case iconFileAudio
     case iconFileDoc
