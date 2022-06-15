@@ -14,7 +14,7 @@ final class PhotoVideoBottomBarManager {
         elementsConfig:  [.share, .download, .sync, .hide, .moveToTrash],
         style: .blackOpaque, tintColor: nil)
     
-    var editingTabBar: BottomSelectionTabBarViewController?
+    var editingTabBar: BottomSelectionTabBarDrawerViewController?
     private let bottomBarPresenter = BottomSelectionTabBarPresenter()
     
     private weak var delegate: BaseItemInputPassingProtocol!
@@ -26,7 +26,7 @@ final class PhotoVideoBottomBarManager {
     func setup() {
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         bottomBarPresenter.basePassingPresenter = delegate
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: photoVideoBottomBarConfig, settablePresenter: bottomBarPresenter)
+        let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: photoVideoBottomBarConfig, settablePresenter: bottomBarPresenter)
         self.editingTabBar = botvarBarVC
     }
     
