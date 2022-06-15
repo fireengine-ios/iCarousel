@@ -31,7 +31,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
     
     @IBOutlet private weak var button: UIButton! {
         willSet {
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = .appFont(.medium, size: 14)
             newValue.titleLabel?.textAlignment = .center
         }
     }
@@ -39,11 +39,11 @@ final class FileInfoShareContactCell: UICollectionViewCell {
     @IBOutlet private weak var roleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = .lrGreyishBrownThree
-            newValue.font = .TurkcellSaturaRegFont(size: 14)
+            newValue.textColor = AppColor.filesLabel.color
+            newValue.font = .appFont(.medium, size: 14)
             newValue.textAlignment = .center
             newValue.adjustsFontSizeToFitWidth = true
-            newValue.minimumScaleFactor = 0.7
+            newValue.minimumScaleFactor = 0.5
         }
     }
     
@@ -74,14 +74,14 @@ final class FileInfoShareContactCell: UICollectionViewCell {
             func setupInitials() {
                 if let initials = contact?.initials, !initials.isEmpty {
                     button.setTitle(initials, for: .normal)
-                    button.backgroundColor = contact?.color(for: index) ?? .clear
+                    button.backgroundColor = AppColor.filesSeperator.color
                 } else {
-                    button.setImage(UIImage(named: "contact_placeholder"), for: .normal)
+                    button.setImage(Image.iconProfileCircle.image, for: .normal)
                 }
             }
             
             if let url = contact?.subject?.picture?.byTrimmingQuery {
-                button.setImage(UIImage(named: "contact_placeholder"), for: .normal)
+                button.setImage(Image.iconProfileCircle.image, for: .normal)
                 imageDownloder.getImageByTrimming(url: url) { [weak self] image in
                     if image == nil {
                         setupInitials()
@@ -93,7 +93,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
                 setupInitials()
             }
             
-            button.setTitleColor(.white, for: .normal)
+            button.setTitleColor(AppColor.filesLabel.color, for: .normal)
             roleLabel.text = contact?.role.infoMenuTitle ?? ""
             
         case .additionalCount:
@@ -106,7 +106,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
             circleView.layer.borderColor = ColorConstants.marineFour.cgColor
             
         case .plusButton:
-            button.setImage(UIImage(named: "plus_large"), for: .normal)
+            button.setImage(Image.iconAddUnselect.image, for: .normal)
         }
     }
     

@@ -11,7 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GridListTopBar" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="centerYConstraint" destination="ZD4-gp-yMM" id="ae1-Xx-5QO"/>
-                <outlet property="gridListButton" destination="2hB-ca-1KW" id="HEf-Ig-rtV"/>
+                <outlet property="gridListButton" destination="pnm-iL-2WL" id="X7K-lb-zIZ"/>
                 <outlet property="segmentFilter" destination="wal-TA-Zbe" id="hOT-Cp-UMb"/>
                 <outlet property="sortByButton" destination="R7m-go-R4c" id="FSg-j0-lRy"/>
                 <outlet property="view" destination="iN0-l3-epB" id="SLP-fb-T29"/>
@@ -47,18 +47,6 @@
                         <segment title="Second"/>
                     </segments>
                 </segmentedControl>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hB-ca-1KW">
-                    <rect key="frame" x="321" y="9.5" width="36" height="36"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="36" id="73N-Rs-kra"/>
-                        <constraint firstAttribute="width" constant="36" id="TDf-0W-O3l"/>
-                    </constraints>
-                    <state key="normal" image="iconViewGrid"/>
-                    <state key="selected" image="iconViewList"/>
-                    <connections>
-                        <action selector="gridListAction:" destination="-1" eventType="touchUpInside" id="bi1-0X-PA5"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCH-zD-zC4">
                     <rect key="frame" x="0.0" y="54" width="367" height="1"/>
                     <color key="backgroundColor" name="filesSeperator"/>
@@ -66,19 +54,45 @@
                         <constraint firstAttribute="height" constant="1" id="lOx-N3-hA3"/>
                     </constraints>
                 </view>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="uV1-Ni-QO4">
+                    <rect key="frame" x="281" y="9.5" width="76" height="36"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnm-iL-2WL">
+                            <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="ZE5-Tf-hXb"/>
+                                <constraint firstAttribute="width" constant="36" id="ZJN-F5-n8K"/>
+                            </constraints>
+                            <state key="normal" image="iconViewGrid"/>
+                            <state key="selected" image="iconViewList"/>
+                            <connections>
+                                <action selector="gridListAction:" destination="-1" eventType="touchUpInside" id="CJv-Ks-f8g"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hB-ca-1KW">
+                            <rect key="frame" x="40" y="0.0" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="73N-Rs-kra"/>
+                                <constraint firstAttribute="width" constant="36" id="TDf-0W-O3l"/>
+                            </constraints>
+                            <state key="normal" image="iconKebabBorder"/>
+                            <state key="selected" image="iconViewList"/>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
                 <constraint firstItem="cCH-zD-zC4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8B6-Q6-iEr"/>
-                <constraint firstItem="2hB-ca-1KW" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="CG9-nI-DEH"/>
+                <constraint firstAttribute="trailing" secondItem="uV1-Ni-QO4" secondAttribute="trailing" constant="10" id="DPX-NF-xYp"/>
                 <constraint firstAttribute="bottom" secondItem="cCH-zD-zC4" secondAttribute="bottom" id="Dee-CA-aI2"/>
+                <constraint firstItem="uV1-Ni-QO4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="TsD-Bx-9MK"/>
                 <constraint firstItem="R7m-go-R4c" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZD4-gp-yMM"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R7m-go-R4c" secondAttribute="trailing" constant="8" id="ZWt-3B-set"/>
                 <constraint firstItem="R7m-go-R4c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="hsT-5L-dXY"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lWj-2g-ibL"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="p6X-9N-zV0"/>
                 <constraint firstAttribute="trailing" secondItem="cCH-zD-zC4" secondAttribute="trailing" id="r06-zc-XFF"/>
-                <constraint firstAttribute="trailing" secondItem="2hB-ca-1KW" secondAttribute="trailing" constant="10" id="z7H-O7-FVO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -89,6 +103,7 @@
     </objects>
     <resources>
         <image name="iconArrowDownSmall" width="24" height="24"/>
+        <image name="iconKebabBorder" width="24" height="24"/>
         <image name="iconViewGrid" width="24" height="24"/>
         <image name="iconViewList" width="24" height="24"/>
         <namedColor name="charcoalGrey">

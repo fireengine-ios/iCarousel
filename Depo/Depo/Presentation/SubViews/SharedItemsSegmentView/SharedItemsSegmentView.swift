@@ -24,6 +24,7 @@ class SharedItemsSegmentView: UIView, NibInit {
     
     @IBOutlet weak var sharedSegmentControl: UISegmentedControl! {
         willSet {
+            newValue.clipsToBounds = false
             newValue.setTitle(TextConstants.privateShareSharedWithMeTab, forSegmentAt: 0)
             newValue.setTitle(TextConstants.privateShareSharedByMeTab, forSegmentAt: 1)
             newValue.backgroundColor = .clear

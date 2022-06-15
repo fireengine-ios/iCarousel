@@ -153,6 +153,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         } else {
             detailsLabel.isHidden = true
             gridCellDetailLabel.text = detailsLabelText
+            gridCellDetailLabel.isHidden = detailsLabelText.isEmpty
         }
 
         bigContentImageView.image = nil
@@ -188,8 +189,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             smallContentImageViewH.constant = BasicCollectionMultiFileCell.smallContentImageViewBigSize
             leftSpaceForSmallmage.constant = BasicCollectionMultiFileCell.leftSpaceSmallCell
             
-            fileNameLabel.font = UIFont.appFont(.regular, size: 14)
-            detailsLabel.font = UIFont.appFont(.regular, size: 12)
+            fileNameLabel.font = .appFont(.regular, size: 14)
+            detailsLabel.font = .appFont(.regular, size: 12)
             layoutIfNeeded()
         }
         
@@ -218,6 +219,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
     private func configureDetailLabel(with wrappedObj: BaseDataSourceItem) {
+        detailsLabelText = ""
+        
         guard let wrappered = wrappedObj as? Item, !isAlreadyConfigured else {
             return
         }

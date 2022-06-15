@@ -60,4 +60,8 @@ enum Image: String, AppImage {
     case iconSelectCheck
     case iconSelectEmpty
     case iconSharePeople
+    
+    case iconProfileCircle
+    case iconAddUnselect
+    case iconArrowDownSmall
 }
