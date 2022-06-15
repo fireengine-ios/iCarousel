@@ -360,9 +360,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
 
         let actionsViewController = AlertFilesActionsViewController()
         actionsViewController.configure(with: actions)
-
-        let drawer = DrawerViewController(content: actionsViewController)
-        RouterVC().presentViewController(controller: drawer)
+        actionsViewController.presentAsDrawer()
     }
     
     private func getSourceRect(sender: Any?, controller: ViewController?) -> CGRect {

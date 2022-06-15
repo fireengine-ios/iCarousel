@@ -465,8 +465,6 @@
 		0780AB202791681F000760D9 /* TextBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0E2791681E000760D9 /* TextBounds.swift */; };
 		0780AB212791681F000760D9 /* RecognizedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0F2791681E000760D9 /* RecognizedLine.swift */; };
 		0780AB222791681F000760D9 /* RecognizedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0F2791681E000760D9 /* RecognizedLine.swift */; };
-		0780AB232791681F000760D9 /* RecognizedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0F2791681E000760D9 /* RecognizedLine.swift */; };
-		0780AB242791681F000760D9 /* RecognizedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB0F2791681E000760D9 /* RecognizedLine.swift */; };
 		0780AB252791681F000760D9 /* RecognizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB102791681E000760D9 /* RecognizedText.swift */; };
 		0780AB262791681F000760D9 /* RecognizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB102791681E000760D9 /* RecognizedText.swift */; };
 		0780AB272791681F000760D9 /* RecognizedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0780AB102791681E000760D9 /* RecognizedText.swift */; };
@@ -747,6 +745,10 @@
 		07E7A6962859FC0C005BBD4C /* AlertFilesActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07E7A68C2859FC0B005BBD4C /* AlertFilesActionView.xib */; };
 		07E7A6972859FC0C005BBD4C /* AlertFilesActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07E7A68C2859FC0B005BBD4C /* AlertFilesActionView.xib */; };
 		07E7A6982859FC0C005BBD4C /* AlertFilesActionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07E7A68C2859FC0B005BBD4C /* AlertFilesActionView.xib */; };
+		07E7A69B285A0A56005BBD4C /* UIViewController+PresentDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E7A69A285A0A56005BBD4C /* UIViewController+PresentDrawer.swift */; };
+		07E7A69C285A0A56005BBD4C /* UIViewController+PresentDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E7A69A285A0A56005BBD4C /* UIViewController+PresentDrawer.swift */; };
+		07E7A69D285A0A56005BBD4C /* UIViewController+PresentDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E7A69A285A0A56005BBD4C /* UIViewController+PresentDrawer.swift */; };
+		07E7A69E285A0A56005BBD4C /* UIViewController+PresentDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E7A69A285A0A56005BBD4C /* UIViewController+PresentDrawer.swift */; };
 		07E8469A27C104C400B3AFA5 /* ItemGroupAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E8469927C104C400B3AFA5 /* ItemGroupAnnotationView.swift */; };
 		07E8469B27C104C400B3AFA5 /* ItemGroupAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E8469927C104C400B3AFA5 /* ItemGroupAnnotationView.swift */; };
 		07E8469C27C104C400B3AFA5 /* ItemGroupAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E8469927C104C400B3AFA5 /* ItemGroupAnnotationView.swift */; };
@@ -9643,6 +9645,7 @@
 		07E7A68A2859FC0B005BBD4C /* AlertFilesActionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFilesActionsViewController.swift; sourceTree = "<group>"; };
 		07E7A68B2859FC0B005BBD4C /* AlertFilesActionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertFilesActionView.swift; sourceTree = "<group>"; };
 		07E7A68C2859FC0B005BBD4C /* AlertFilesActionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertFilesActionView.xib; sourceTree = "<group>"; };
+		07E7A69A285A0A56005BBD4C /* UIViewController+PresentDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PresentDrawer.swift"; sourceTree = "<group>"; };
 		07E8469927C104C400B3AFA5 /* ItemGroupAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemGroupAnnotationView.swift; sourceTree = "<group>"; };
 		07E8469E27C10AC100B3AFA5 /* ItemGroupAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemGroupAnnotation.swift; sourceTree = "<group>"; };
 		07EF963F281BE2F20025053B /* PhotoVideoPinchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoPinchManager.swift; sourceTree = "<group>"; };
@@ -12483,6 +12486,7 @@
 				07E7A65C28585D9C005BBD4C /* DrawerAnimationController.swift */,
 				0724681F2855CC9E0079B07E /* DrawerTransitioningDelegate.swift */,
 				0724681E2855CC9E0079B07E /* DrawerPassthroughView.swift */,
+				07E7A69A285A0A56005BBD4C /* UIViewController+PresentDrawer.swift */,
 			);
 			path = drawer;
 			sourceTree = "<group>";
@@ -21196,6 +21200,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		F00D7DDD2851C6A30004E619 /* SharedItemsSegmentView */ = {
+			isa = PBXGroup;
+			children = (
+				F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */,
+				F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */,
+			);
+			path = SharedItemsSegmentView;
+			sourceTree = "<group>";
+		};
 		F01244C3282A965000835B4E /* Lifebox */ = {
 			isa = PBXGroup;
 			children = (
@@ -21228,15 +21241,6 @@
 				F013FA8828059150004B9BB8 /* SecurityInfoWarningPopup.xib */,
 			);
 			path = SecurityInfoWarningPopup;
-            sourceTree = "<group>";
-        };
-		F00D7DDD2851C6A30004E619 /* SharedItemsSegmentView */ = {
-			isa = PBXGroup;
-			children = (
-				F00D7DDE2851C6D90004E619 /* SharedItemsSegmentView.swift */,
-				F00D7DE32851C7000004E619 /* SharedItemsSegmentView.xib */,
-			);
-			path = SharedItemsSegmentView;
 			sourceTree = "<group>";
 		};
 		F028C0D82789DD3E005CE6AF /* SaveToMyLifebox */ = {
@@ -25324,6 +25328,7 @@
 				8C0E8D961FDEBDFF00789C91 /* UsageInfoInteractorInput.swift in Sources */,
 				98725E9E258B29FD0061E7F6 /* AllFilesSegmentedController.swift in Sources */,
 				9845489B22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */,
+				07E7A69B285A0A56005BBD4C /* UIViewController+PresentDrawer.swift in Sources */,
 				98DBC05C2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift in Sources */,
 				C62239BB2049770C0043ED44 /* FaceImagePhotosRouterInput.swift in Sources */,
 				8C0E8D971FDEBDFF00789C91 /* ResponseResult.swift in Sources */,
@@ -27135,6 +27140,7 @@
 				8C1E5BDF22CB8C1D008FDA02 /* PhotoVideoBottomBarManager.swift in Sources */,
 				98625F2C2580FAAB008627F0 /* MBProgressHud+Extensions.swift in Sources */,
 				CE7848B122A685FB00662219 /* AutoSyncInitializer.swift in Sources */,
+				07E7A69D285A0A56005BBD4C /* UIViewController+PresentDrawer.swift in Sources */,
 				07D0594626F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
 				CE7848B222A685FB00662219 /* ManageContactsPresenter.swift in Sources */,
 				CE7848B422A685FB00662219 /* ResizableCollectionView.swift in Sources */,
@@ -30203,6 +30209,7 @@
 				CF8B683123CBC9D70021B021 /* AlbumDetailViewController.swift in Sources */,
 				F00D7DE02851C6D90004E619 /* SharedItemsSegmentView.swift in Sources */,
 				CF8B683323CBC9D70021B021 /* SingletonStorage.swift in Sources */,
+				07E7A69C285A0A56005BBD4C /* UIViewController+PresentDrawer.swift in Sources */,
 				CF8B683423CBC9D70021B021 /* ImageFormat.swift in Sources */,
 				076BD19427BBBD30004609E3 /* MapSearchInitializer.swift in Sources */,
 				CF8B683523CBC9D70021B021 /* ContactService.swift in Sources */,
@@ -30592,6 +30599,7 @@
 				98625F2D2580FAAB008627F0 /* MBProgressHud+Extensions.swift in Sources */,
 				CF8B6C0823CBCA280021B021 /* ResizableCollectionView.swift in Sources */,
 				CF8B6C0923CBCA280021B021 /* HomePageRouter.swift in Sources */,
+				07E7A69E285A0A56005BBD4C /* UIViewController+PresentDrawer.swift in Sources */,
 				07D0594726F9BEF4005315E2 /* ResetPasswordOTPPresenter.swift in Sources */,
 				CF8B6C0A23CBCA280021B021 /* CollectionViewCellForFaceImage.swift in Sources */,
 				CF8B6C0C23CBCA280021B021 /* CollectionViewCellForPhoto.swift in Sources */,

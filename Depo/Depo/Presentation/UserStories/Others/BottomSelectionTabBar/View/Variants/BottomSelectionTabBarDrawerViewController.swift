@@ -55,13 +55,13 @@ class BottomSelectionTabBarDrawerViewController: UIViewController, BottomSelecti
             return
         }
 
-        let drawer = DrawerViewController(content: self)
-        drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
-        drawer.drawerPresentationController?.allowsDismissalWithTapGesture = false
-        drawer.drawerPresentationController?.passesTouchesToPresentingView = true
-        drawer.drawerPresentationController?.dimmedViewStyle = .none
-        RouterVC().presentViewController(controller: drawer)
-        self.currentDrawer = drawer
+        presentAsDrawer { drawer in
+            drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
+            drawer.drawerPresentationController?.allowsDismissalWithTapGesture = false
+            drawer.drawerPresentationController?.passesTouchesToPresentingView = true
+            drawer.drawerPresentationController?.dimmedViewStyle = .none
+            self.currentDrawer = drawer
+        }
     }
 
     func hideBar(animated: Bool) {
