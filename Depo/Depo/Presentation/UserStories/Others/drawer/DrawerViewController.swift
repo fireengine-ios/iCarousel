@@ -26,6 +26,7 @@ final class DrawerViewController: UIViewController {
     private let contentViewController: UIViewController
     var showsDrawerIndicator = true
     let drawerIndicatorView = UIView()
+    // TODO: Facelift, make content scrollable
     let contentContainerView = UIView()
 
     var drawerPresentationController: DrawerPresentationController? {
