@@ -14,5 +14,11 @@
 	<string>tr</string>
 	<key>forgot_password_v2_enabled</key>
 	<false/>
+	<key>google_login_enabled</key>
+	<false/>
+	<key>apple_login_enabled</key>
+	<false/>
+	<key>ocr_enabled</key>
+	<false/>
 </dict>
 </plist>

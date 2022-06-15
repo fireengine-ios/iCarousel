@@ -7,9 +7,10 @@
 //
 
 protocol IntroduceViewOutput {
-
     func viewIsReady()
     func onStartUsingLifeBox()
     func onLoginButton()
     func pageChanged(page: Int)
+    func onSignInWithAppleGoogle(with user: AppleGoogleUser)
+    func goToLogin(with user: AppleGoogleUser)
 }

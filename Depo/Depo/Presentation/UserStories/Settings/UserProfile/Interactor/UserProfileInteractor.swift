@@ -6,6 +6,13 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+enum UpdatePasswordMethods {
+    case password
+    case google
+    case apple
+    case appleGoogle
+}
+
 class UserProfileInteractor: UserProfileInteractorInput {
     
     private lazy var accountService = AccountService()
@@ -336,6 +343,35 @@ class UserProfileInteractor: UserProfileInteractorInput {
                     }
                 }
 
+            case .failed(let error):
+                self.output.stopNetworkOperation()
+                self.output.showError(error: error.localizedDescription)
+            }
+        }
+    }
+    
+
+    
+    func getUpdatePasswordMethods() {
+        output.startNetworkOperation()
+        
+        accountService.getUpdatePasswordMethods { response in
+            switch response {
+            case .success(let methods):
+                var method: UpdatePasswordMethods = .password
+                switch methods.sorted() {
+                case ["PASSWORD"]:
+                    method = .password
+                case ["GOOGLE"]:
+                    method = .google
+                case ["APPLE"]:
+                    method = .apple
+                case ["APPLE", "GOOGLE"]:
+                    method = .appleGoogle
+                default:
+                    method = .password
+                }
+                self.output.gotUpdatePasswordMethod(method: method)
             case .failed(let error):
                 self.output.stopNetworkOperation()
                 self.output.showError(error: error.localizedDescription)

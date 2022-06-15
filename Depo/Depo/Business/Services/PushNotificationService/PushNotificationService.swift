@@ -123,7 +123,6 @@ final class PushNotificationService {
         if storageVars.isAppFirstLaunchForPublicSharedItems != true {
             loginRequiresActions.append(.saveToMyLifebox)
         }
-        storageVars.isAppFirstLaunchForPublicSharedItems = false
         
         let actionRequiresLogin = !action.isContained(in: loginRequiresActions)
         
@@ -652,11 +651,12 @@ private extension PushNotificationService {
         if isExistingViewController(controller: vc as! ViewController) {
             router.popViewController()
         }
-        pushTo(vc)
         
-        //to handle public shared items save operation after login
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.router.pushViewController(viewController: vc)
+        }
+        
         if tokenStorage.accessToken == nil {
-            storageVars.publicSharedItemsToken = publicToken
             clear()
         }
     }

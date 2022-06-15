@@ -144,6 +144,7 @@ enum NetmeraEventValues {
         case instagram
         case facebook
         case dropbox
+        case appleGoogle
         
         var text: String {
             switch self {
@@ -155,6 +156,8 @@ enum NetmeraEventValues {
                 return "Facebook"
             case .dropbox:
                 return "Dropbox"
+            case .appleGoogle:
+                return "AppleGoogle"
             }
         }
     }

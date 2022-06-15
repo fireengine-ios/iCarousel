@@ -22,4 +22,5 @@ protocol UserProfileInteractorInput {
     func forceRefreshUserInfo()
     func trackDeleteMyAccount()
     func deleteMyAccount()
+    func getUpdatePasswordMethods()
 }

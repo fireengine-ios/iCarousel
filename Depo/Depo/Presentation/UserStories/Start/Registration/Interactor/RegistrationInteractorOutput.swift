@@ -26,4 +26,6 @@ protocol RegistrationInteractorOutput: AnyObject {
 
     func showFAQView()
     func showSupportView()
+    
+    func appleEmailDomainFailed()
 }

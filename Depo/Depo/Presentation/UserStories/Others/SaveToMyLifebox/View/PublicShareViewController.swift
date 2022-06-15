@@ -102,7 +102,8 @@ class PublicShareViewController: BaseViewController {
     
     private func createDownloadFileName() -> String {
         let date = Date().createCurrentDate() + "-" + Date().createCurrentHour()
-        return "lifebox-\(date).zip"
+        let appName = RouteRequests.isBillo ? "billo" : "lifebox"
+        return "\(appName)-\(date).zip"
     }
     
     private func showDownloadAlert() {
