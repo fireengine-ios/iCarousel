@@ -39,7 +39,7 @@
                             </connections>
                         </segmentedControl>
                     </subviews>
-                    <color key="backgroundColor" name="primaryBackground"/>
+                    <color key="backgroundColor" name="filesBackground"/>
                     <constraints>
                         <constraint firstItem="kla-02-C1E" firstAttribute="centerX" secondItem="qmm-Jd-Jcw" secondAttribute="centerX" id="Awt-ur-9Kn"/>
                         <constraint firstItem="kla-02-C1E" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qmm-Jd-Jcw" secondAttribute="leading" constant="10" id="B2w-bo-G4M"/>
@@ -50,11 +50,11 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCl-BS-mK7">
                     <rect key="frame" x="0.0" y="60" width="375" height="607"/>
-                    <color key="backgroundColor" name="primaryBackground"/>
+                    <color key="backgroundColor" name="filesBackground"/>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" name="primaryBackground"/>
+            <color key="backgroundColor" name="filesBackground"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qmm-Jd-Jcw" secondAttribute="trailing" id="9Wz-zQ-xir"/>
                 <constraint firstAttribute="bottom" secondItem="aCl-BS-mK7" secondAttribute="bottom" id="Qo5-JE-MBA"/>
@@ -68,7 +68,7 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="primaryBackground">
+        <namedColor name="filesBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>

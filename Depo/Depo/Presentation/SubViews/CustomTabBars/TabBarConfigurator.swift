@@ -34,7 +34,7 @@ enum TabBarItem: CaseIterable {
         case .allFiles:
             return TextConstants.tabBarItemAllFilesLabel
         case .discover:
-            return TextConstants.tabBarItemAllFilesLabel
+            return "Keşfet"
         }
     }
     

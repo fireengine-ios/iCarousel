@@ -38,9 +38,11 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     @IBOutlet private weak var shareButton: RoundedButton! {
         willSet {
             newValue.setTitle(TextConstants.privateShareStartPageShareButton, for: .normal)
-            newValue.setTitleColor(.white, for: .normal)
-            newValue.backgroundColor = .lightGray
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.setTitleColor(AppColor.filesLabel.color, for: .normal)
+            newValue.backgroundColor = .clear
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.filesLabel.cgColor
+            newValue.titleLabel?.font = .appFont(.medium, size: 16)
             newValue.isEnabled = false
         }
     }
@@ -194,7 +196,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private func updateShareButtonIfNeeded() {
         let needEnable = !shareWithView.contacts.isEmpty
         shareButton.isEnabled = needEnable
-        shareButton.backgroundColor = needEnable ? ColorConstants.navy : .lightGray
     }
     
     private func showShareViews() {

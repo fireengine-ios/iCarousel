@@ -576,11 +576,11 @@ class RouterVC: NSObject {
     }
     
     var segmentedFiles: HeaderContainingViewController.ChildViewController {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles else {
             assertionFailure()
             return AllFilesSegmentedController()
         }
-        let controllers = [allFiles, shareByMeSegment, documents, musics, favorites, trashBin]
+        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     

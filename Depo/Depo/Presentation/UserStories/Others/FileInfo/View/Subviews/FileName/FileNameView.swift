@@ -34,15 +34,15 @@ final class FileNameView: UIView, NibInit, FileNameViewProtocol {
     @IBOutlet private weak var fileNameTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.fileInfoFileNameTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = AppColor.marineTwoAndTealish.color
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
     @IBOutlet private weak var fileNameTextField: UITextField! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
             newValue.delegate = self
             newValue.isUserInteractionEnabled = false
         }

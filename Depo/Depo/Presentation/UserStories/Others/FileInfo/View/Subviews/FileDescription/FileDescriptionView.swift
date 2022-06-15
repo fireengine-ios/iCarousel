@@ -56,16 +56,16 @@ final class FileDescriptionView: UIView, NibInit {
     @IBOutlet weak var fileDescriptionTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.photosVideosFileDescriptionTitle
-            newValue.font = .TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = AppColor.marineTwoAndTealish.color
+            newValue.font = .appFont(.regular, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
 
     @IBOutlet weak var fileDescriptionTextView: UITextView! {
         willSet {
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .appFont(.light, size: 14)
+            newValue.textColor = AppColor.filesLabel.color
             newValue.delegate = self
-            newValue.textColor = .lrBrownishGrey
             newValue.isUserInteractionEnabled = false
         }
     }
