@@ -11,7 +11,7 @@ import UIKit
 
 extension UIViewController {
     func presentAsDrawer(config: (DrawerViewController) -> Void = { _ in },
-                         completion: @escaping () -> Void = {},
+                         completion: (() -> Void)? = nil,
                          topViewController: UIViewController? = UIApplication.topController()) {
         let drawer = DrawerViewController(content: self)
         config(drawer)
