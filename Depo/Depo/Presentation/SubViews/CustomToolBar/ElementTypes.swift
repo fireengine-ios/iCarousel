@@ -686,9 +686,9 @@ enum ElementTypes {
         case .delete:
             return UIImage(named: "DeleteShareButton")
         case .emptyTrashBin:
-            return nil
+            return Image.iconDelete.image
         case .deleteDeviceOriginal:
-            return nil
+            return Image.iconDelete.image
         case .move:
             return UIImage(named: "MoveButtonIcon")
         case .sync:
@@ -710,17 +710,17 @@ enum ElementTypes {
         case .restore:
             return UIImage(named: "RestoreButtonIcon")
         case .createStory:
-            return nil
+            return Image.iconStory.image
         case .createAlbum:
             return nil
         case .copy:
             return nil
         case .addToFavorites:
-            return nil
+            return Image.iconFavorite.image
         case .removeFromFavorites:
             return nil
         case .addToAlbum:
-            return UIImage(named: "MoveButtonIcon")
+            return Image.iconAddToAlbum.image
         case .backUp:
             return nil
         case .addToCmeraRoll:
@@ -730,7 +730,7 @@ enum ElementTypes {
         case .removeFromFaceImageAlbum:
             return UIImage(named: "DeleteShareButton")
         case .print:
-            return UIImage(named: "PrintButtonIcon")
+            return Image.iconPrint.image
         case .changeCoverPhoto:
             return nil
         case .changePeopleThumbnail:
@@ -770,7 +770,7 @@ enum ElementTypes {
         case .albumDetails:
             return nil
         case .instaPick:
-            return nil
+            return Image.iconPrint.image
         case .endSharing:
             return nil
         case .leaveSharing:

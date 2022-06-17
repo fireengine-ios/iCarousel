@@ -13,6 +13,7 @@ protocol PhotoVideoDataSourceDelegate: AnyObject {
     func fetchPredicateCreated()
     func contentDidChange(sections: [NSFetchedResultsSectionInfo], fetchedObjects: [MediaItem])
     func convertFetchedObjectsInProgress()
+    func threeDotsButtonTapped(_ button: UIButton?)
 }
 
 final class PhotoVideoDataSource: NSObject {
@@ -454,6 +455,10 @@ final class PhotoVideoDataSource: NSObject {
         updatedItemsIds.removeAll()
         objectUpdates.removeAll()
     }
+
+    @objc private func threeDotsButtonTapped(_ button: UIButton?) {
+        delegate?.threeDotsButtonTapped(button)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -470,7 +475,9 @@ extension PhotoVideoDataSource: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        return collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
+        let headerView = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
+        headerView.menuButton.addTarget(self, action: #selector(threeDotsButtonTapped(_:)), for: .primaryActionTriggered)
+        return headerView
     }
 }
 

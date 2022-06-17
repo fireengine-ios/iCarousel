@@ -25,6 +25,10 @@ enum Image: String, AppImage {
     case iconDownload
     case iconBackupBordered
     case iconDelete
+    case iconFavorite
+    case iconStory
+    case iconPrint
+    case iconAddToAlbum
 
     ///  Files Tab
     case iconFileAudio

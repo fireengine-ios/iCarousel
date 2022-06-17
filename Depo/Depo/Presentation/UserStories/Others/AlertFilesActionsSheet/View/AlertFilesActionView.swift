@@ -9,8 +9,16 @@
 import Foundation
 import UIKit
 
+protocol AlertFilesActionViewDelegate: AnyObject {
+    func alertFilesActionView(_ actionView: AlertFilesActionView, handleTapForAction action: AlertFilesAction)
+}
+
 class AlertFilesActionView: UIView, NibInit {
-    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var imageView: UIImageView! {
+        willSet {
+            newValue.tintColor = AppColor.label.color
+        }
+    }
 
     @IBOutlet private var label: UILabel! {
         willSet {
@@ -25,9 +33,61 @@ class AlertFilesActionView: UIView, NibInit {
         }
     }
 
+    private var currentAction: AlertFilesAction?
+
+    weak var delegate: AlertFilesActionViewDelegate?
+
+    var isHighlighted: Bool = false {
+        didSet {
+            backgroundColor = isHighlighted ? AppColor.separator.color : nil
+        }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        addGestureRecognizer(TapGestureRecognizerWithClosure { [weak self] in
+            guard let self = self, let action = self.currentAction else {
+                return
+            }
+            self.delegate?.alertFilesActionView(self, handleTapForAction: action)
+        })
+    }
+
     func configure(with action: AlertFilesAction, showsBottomSeparator: Bool) {
-        imageView.image = action.icon?.image
+        currentAction = action
+
+        imageView.image = action.icon?.withRenderingMode(.alwaysTemplate)
         label.text = action.title
         separatorView.isHidden = !showsBottomSeparator
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        updateHighlightState(with: touches)
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        updateHighlightState(with: touches)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        isHighlighted = false
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        isHighlighted = false
+    }
+
+    private func updateHighlightState(with touches: Set<UITouch>) {
+        guard let touch = touches.first else {
+            return
+        }
+
+        let point = touch.location(in: self)
+        isHighlighted = bounds.contains(point)
     }
 }

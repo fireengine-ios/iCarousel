@@ -15,7 +15,7 @@ final class CollectionViewSimpleHeaderWithText: UICollectionReusableView {
         static let titleLabelAccessibilityId = "CollectionViewSimpleHeaderTitleLabel"
     }
 
-    @IBOutlet private weak var menuButton: UIButton! {
+    @IBOutlet weak var menuButton: UIButton! {
         willSet {
             // TODO: Facelift, icons tint?
             let image = Image.iconThreeDotsHorizontal.image(withTintColor: .label, in: newValue)

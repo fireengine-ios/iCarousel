@@ -253,7 +253,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 return
             }
             actionsCallback(filteredTypes.map { type in
-                let action: AlertFilesAction
+                var action: AlertFilesAction
                 switch type {
                 case .info,
                      .edit,
@@ -337,6 +337,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .sync, .syncInProgress, .undetermend:
                     action = AlertFilesAction()
                 }
+
+                action.icon = type.icon
                 return action
             })
         }
