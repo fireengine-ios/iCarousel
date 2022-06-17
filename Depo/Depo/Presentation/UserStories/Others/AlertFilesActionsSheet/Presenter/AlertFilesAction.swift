@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 struct AlertFilesAction {
-    let title: String
-    let icon: AppImage?
+    var title: String
+    var icon: UIImage?
     let handler: () -> Void
 
-    init(title: String = "", icon: AppImage? = nil, handler: @escaping () -> Void = {}) {
+    init(title: String = "", icon: UIImage? = nil, handler: @escaping () -> Void = {}) {
         self.title = title
         self.icon = icon
         self.handler = handler

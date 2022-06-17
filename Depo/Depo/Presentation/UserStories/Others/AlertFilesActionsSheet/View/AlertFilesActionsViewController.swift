@@ -26,6 +26,7 @@ class AlertFilesActionsViewController: UIViewController {
         for (index, action) in actions.enumerated() {
             let actionView = AlertFilesActionView.initFromNib()
             actionView.configure(with: action, showsBottomSeparator: index != lastIndex)
+            actionView.delegate = self
             stackView.addArrangedSubview(actionView)
         }
     }
@@ -35,5 +36,11 @@ class AlertFilesActionsViewController: UIViewController {
             stackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
+    }
+}
+
+extension AlertFilesActionsViewController: AlertFilesActionViewDelegate {
+    func alertFilesActionView(_ actionView: AlertFilesActionView, handleTapForAction action: AlertFilesAction) {
+        dismiss(animated: true, completion: action.handler)
     }
 }

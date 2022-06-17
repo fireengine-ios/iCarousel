@@ -43,7 +43,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private var resentlyUploadedObjectUUIDs = SynchronizedSet<String>()
     
-    private lazy var navBarManager = SegmentedChildNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
     private lazy var pinchManager = PhotoVideoPinchManager(collectionView: self.collectionView)
     private lazy var threeDotMenuManager = PhotoVideoThreeDotMenuManager(delegate: self)
@@ -74,7 +73,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionViewManager.setup()
         collectionViewManager.collectionViewLayout.delegate = dataSource
         collectionViewManager.collectionViewLayout.pinsSectionHeadersToLayoutGuide = headerContainingViewController?.originalSafeAreaLayoutGuide
-        navBarManager.setDefaultMode()
         pinchManager.setup()
 
         navigationBarHidden = true
@@ -117,7 +115,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.setupNavigationBar(editingMode: false)
 
         dataSource.getSelectedObjects(at: collectionViewManager.selectedIndexes) { [weak self] selectedItems in
             guard let self = self else {
@@ -125,7 +122,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             }
             
             if !selectedItems.isEmpty {
-                self.setupNavigationBar(editingMode: true)
                 self.updateSelectedItemsCount()
                 self.updateBarsForSelectedObjects()
             }
@@ -204,7 +200,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.isSelectingMode = true
         deselectAllCells()
 
-        setupNavigationBar(editingMode: true)
         updateSelectedItemsCount()
         updateBarsForSelectedObjects()
     }
@@ -213,7 +208,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         dataSource.isSelectingMode = false
         deselectAllCells()
         bottomBarManager.hide()
-        setupNavigationBar(editingMode: false)
     }
     
 
@@ -224,21 +218,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
     }
 
-    
-    private func setupNavigationBar(editingMode: Bool) {
-        /// don't let vc to change navBar if vc is not visible at this moment
-        guard viewIfLoaded?.window != nil else {
-            return
-        }
-        
-        /// be sure to configure navbar items after setup navigation bar
-        if editingMode {
-            navBarManager.setSelectionMode()
-        } else {
-            navBarManager.setDefaultMode()
-        }
-    }
-    
     // MARK: - helpers
     
     private func updateSelectedItemsCount() {
@@ -255,7 +234,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
             self.bottomBarManager.update(for: selectedObjects)
             
             if selectedIndexes.count == 0 {
-                self.navBarManager.threeDotsButton.isEnabled = false
+//                self.navBarManager.threeDotsButton.isEnabled = false
                 self.bottomBarManager.hide()
             } else {
 
@@ -663,7 +642,8 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
                 let warningPopup = WarningPopupController.popup(type: .photoPrintRedirection(photos: itemsToPrint)) {
                     self.stopEditingMode()
                 }
-                self.present(warningPopup, animated: false)
+
+                UIApplication.topController()?.present(warningPopup, animated: false)
             }
         }
         
@@ -672,39 +652,13 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func changePeopleThumbnail() {}
 }
 
-// MARK: - SegmentedChildNavBarManagerDelegate
-extension PhotoVideoController: SegmentedChildNavBarManagerDelegate {
-    
-    func onCancelSelectionButton() {
-        stopEditingMode()
-    }
-    
-    func onThreeDotsButton() {
-        dataSource.getSelectedObjects (at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
-            // TODO: Facelift - selection
-//            guard let self = self else {
-//                return
-//            }
-//            self.threeDotMenuManager.showActions(
-//                for: selectedObjects, isSelectingMode: self.dataSource.isSelectingMode,
-//                isPhoto: self.isPhoto, sender: self.navBarManager.threeDotsButton
-//            )
-        }
-        
-    }
-    
-    func onSearchButton() {
-        showSearchScreen()
-    }
-    
+// MARK: - PhotoVideoCollectionViewManagerDelegate
+/// using: PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
+extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
     func openUploadPhotos() {
         showUploadScreen()
     }
-}
 
-// MARK: - PhotoVideoCollectionViewManagerDelegate
-/// using: PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
-extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {    
     func openAutoSyncSettings() {
         router.pushViewController(viewController: router.autoUpload)
     }
@@ -1027,6 +981,19 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
                 let mediaItem = section.objects?.first as? MediaItem
                 return mediaItem?.sortingDate as? Date
             }
+    }
+
+    func threeDotsButtonTapped(_ button: UIButton?) {
+        dataSource.getSelectedObjects(at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
+            guard let self = self else {
+                return
+            }
+            self.threeDotMenuManager.showActions(
+                for: selectedObjects,
+                isSelectingMode: self.dataSource.isSelectingMode,
+                sender: button
+            )
+        }
     }
 }
 
