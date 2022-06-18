@@ -53,6 +53,8 @@ final class HiddenPhotosSortingManager {
 }
 
 extension HiddenPhotosSortingManager: GridListTopBarDelegate {
+    func onMoreButton() { }
+    
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) { }
     
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {

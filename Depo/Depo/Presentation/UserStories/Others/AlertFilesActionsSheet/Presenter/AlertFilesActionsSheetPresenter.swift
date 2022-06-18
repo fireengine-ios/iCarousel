@@ -359,10 +359,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     }
 
     private func presentAlertSheet(with actions: [AlertFilesAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
-
-        let actionsViewController = AlertFilesActionsViewController()
-        actionsViewController.configure(with: actions)
-        actionsViewController.presentAsDrawer()
+        if !actions.isEmpty {
+            let actionsViewController = AlertFilesActionsViewController()
+            actionsViewController.configure(with: actions)
+            actionsViewController.presentAsDrawer()
+        }
     }
     
     private func getSourceRect(sender: Any?, controller: ViewController?) -> CGRect {

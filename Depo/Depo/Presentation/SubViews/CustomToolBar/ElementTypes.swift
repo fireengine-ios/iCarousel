@@ -750,7 +750,7 @@ enum ElementTypes {
         case .more:
             return nil
         case .select:
-            return nil
+            return Image.iconSelect.image
         case .selectAll:
             return nil
         case .deSelectAll:
@@ -772,7 +772,7 @@ enum ElementTypes {
         case .instaPick:
             return Image.iconPrint.image
         case .endSharing:
-            return nil
+            return Image.iconUnShare.image
         case .leaveSharing:
             return nil
         case .moveToTrashShared:

@@ -11,6 +11,7 @@ protocol GridListTopBarDelegate: AnyObject {
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType)
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType)
     func representationChanged(viewType: MoreActionsConfig.ViewType)
+    func onMoreButton()
     
 }
 
@@ -24,6 +25,7 @@ class GridListTopBar: ViewController {
     }
     
     @IBOutlet fileprivate weak var gridListButton: UIButton!
+    @IBOutlet private weak var moreButton: UIButton!
     
     @IBOutlet fileprivate weak var segmentFilter: UISegmentedControl!
     
@@ -70,6 +72,7 @@ class GridListTopBar: ViewController {
         }
         
         gridListButton.isHidden = !config.showGridListButton
+        moreButton.isHidden = !config.showMoreButton
         
         if centeredContent {
             centerYConstraint.constant = 0
@@ -159,6 +162,10 @@ class GridListTopBar: ViewController {
         gridListButton.isSelected = !gridListButton.isSelected
         let type: MoreActionsConfig.ViewType = gridListButton.isSelected ? .Grid : .List
         delegate?.representationChanged(viewType: type)
+    }
+    
+    @IBAction func onMoreButton(_ sender: Any) {
+        delegate?.onMoreButton()
     }
     
 }

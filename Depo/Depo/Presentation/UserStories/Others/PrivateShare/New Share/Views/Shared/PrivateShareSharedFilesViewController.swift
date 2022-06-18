@@ -135,7 +135,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
                                           availableSortTypes: sortingTypes,
                                           defaultSortType: .TimeNewOld,
                                           availableFilter: false,
-                                          showGridListButton: true)
+                                          showGridListButton: true,
+                                          showMoreButton: shareType == .byMe)
         gridListBar.setupWithConfig(config: config)
     }
     
@@ -180,11 +181,23 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             break
         }
     }
+    
+    private func moreButtonTapped() {
+        if collectionManager.isSelecting {
+            threeDotsManager.showActions(for: shareType, selectedItems: collectionManager.selectedItems(), sender: self)
+        } else {
+            threeDotsManager.showActions(for: shareType, sender: self)
+        }
+    }
 }
 
 
 //MARK: - GridListTopBarDelegate
 extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
+    func onMoreButton() {
+        moreButtonTapped()
+    }
+    
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
         //disabled by availableFilter: false
     }
@@ -301,11 +314,7 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onThreeDotsButton() {
-        if collectionManager.isSelecting {
-            threeDotsManager.showActions(for: shareType, selectedItems: collectionManager.selectedItems(), sender: self)
-        } else {
-            threeDotsManager.showActions(for: shareType, sender: self)
-        }
+        moreButtonTapped()
     }
     
     func onSearchButton() {

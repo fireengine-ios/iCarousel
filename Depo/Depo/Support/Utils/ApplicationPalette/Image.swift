@@ -21,6 +21,8 @@ enum Image: String, AppImage {
     case iconArrowDown
     case iconNetworkWifi
     case iconNetworkLTE
+    
+    /// Actions
     case iconShare
     case iconDownload
     case iconBackupBordered
@@ -29,6 +31,8 @@ enum Image: String, AppImage {
     case iconStory
     case iconPrint
     case iconAddToAlbum
+    case iconSelect
+    case iconUnShare
 
     ///  Files Tab
     case iconFileAudio

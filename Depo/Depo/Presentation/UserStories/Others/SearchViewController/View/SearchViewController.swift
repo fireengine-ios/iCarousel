@@ -531,6 +531,8 @@ extension SearchViewController: MediaPlayerDelegate {
 
 
 extension SearchViewController: GridListTopBarDelegate {
+    func onMoreButton() { }
+    
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
         output.filtersTopBar(cahngedTo: [filter])
     }
