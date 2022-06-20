@@ -23,6 +23,8 @@ enum AnalyticsEvent {
     case purchaseTurkcell250_SixMonth
     case purchaseTurkcell2500
     case purchaseTurkcellPremium
+    case purchaseTurkcell250Freemium
+    case purchaseTurkcell500Advertising
 
     case purchaseNonTurkcell50
     case purchaseNonTurkcell100
@@ -31,6 +33,8 @@ enum AnalyticsEvent {
     case purchaseNonTurkcell250_SixMonth
     case purchaseNonTurkcell2500
     case purchaseNonTurkcellPremium
+    case purchaseNonTurkcell250Freemium
+    case purchaseNonTurkcell500Advertising
 
     case importDropbox
     case importFacebook
@@ -103,6 +107,8 @@ enum AnalyticsEvent {
             case .purchaseTurkcell500: return "wdqlvk"
             case .purchaseTurkcell2500: return "7bf7gu"
             case .purchaseTurkcellPremium: return "qexub9"
+            case .purchaseTurkcell250Freemium: return "a3sgsao"
+            case .purchaseTurkcell500Advertising: return "74kbth"
                 
             case .purchaseNonTurkcell50: return "q3ivog"
             case .purchaseNonTurkcell100: return "lbrusf"
@@ -111,6 +117,8 @@ enum AnalyticsEvent {
             case .purchaseNonTurkcell500: return "x6zaly"
             case .purchaseNonTurkcell2500: return "zab8u6"
             case .purchaseNonTurkcellPremium: return "9pyt2d"
+            case .purchaseNonTurkcell250Freemium: return "a3sgsao"
+            case .purchaseNonTurkcell500Advertising: return "74kbth"
                 
             case .importDropbox: return "tdvlrq"
             case .importFacebook: return "y5dz5j"
@@ -145,6 +153,8 @@ enum AnalyticsEvent {
         case .purchaseTurkcell500: return "PURCHASE_500_GB_TURKCELL"
         case .purchaseTurkcell2500: return "PRUCHASE_25_TB_TURKCELL"
         case .purchaseTurkcellPremium: return "PURCHASE_PREMIUM_TURKCELL"
+        case .purchaseTurkcell250Freemium: return "PURCHASE_250_GB_FREEMIUM_TURKCELL"
+        case .purchaseTurkcell500Advertising: return "PURCHASE_500_GB_ADVERTISING_TURKCELL"
 
         case .purchaseNonTurkcell50: return "PURCHASE_50_GB_NONTURKCELL"
         case .purchaseNonTurkcell100: return "PURCHASE_100_GB_NONTURKCELL"
@@ -153,6 +163,8 @@ enum AnalyticsEvent {
         case .purchaseNonTurkcell500: return "PURCHASE_500_GB_NONTURKCELL"
         case .purchaseNonTurkcell2500: return "PRUCHASE_25_TB_NONTURKCELL"
         case .purchaseNonTurkcellPremium: return "PURCHASE_PREMIUM_NONTURKCELL"
+        case .purchaseNonTurkcell250Freemium: return "PURCHASE_250_GB_FREEMIUM_NONTURKCELL"
+        case .purchaseNonTurkcell500Advertising: return "PURCHASE_500_GB_ADVERTISING_NONTURKCELL"
 
         case .importDropbox: return "DROPBOX_IMPORT"
         case .importFacebook: return "FACEBOOK_IMPORT"
