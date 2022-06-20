@@ -65,7 +65,7 @@ class BottomSelectionTabBarDrawerViewController: UIViewController, BottomSelecti
     }
 
     func hideBar(animated: Bool) {
-        currentDrawer?.dismiss(animated: true)
+        currentDrawer?.dismiss(animated: animated)
     }
 
     func unselectAll() {

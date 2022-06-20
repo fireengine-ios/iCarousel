@@ -32703,8 +32703,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Gözde Kaymaz (KRL42D6255)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Gözde Kaymaz (KRL42D6255)";
+				CODE_SIGN_IDENTITY = "Apple Development: Banu Ozkan (L9PN86U2PA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Banu Ozkan (L9PN86U2PA)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
@@ -33456,8 +33456,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "NotificationService/Lifebox/NotificationService-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Gözde Kaymaz (KRL42D6255)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Gözde Kaymaz (KRL42D6255)";
+				CODE_SIGN_IDENTITY = "Apple Development: Banu Ozkan (L9PN86U2PA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Banu Ozkan (L9PN86U2PA)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
@@ -33723,8 +33723,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Gözde Kaymaz (KRL42D6255)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Gözde Kaymaz (KRL42D6255)";
+				CODE_SIGN_IDENTITY = "Apple Development: Banu Ozkan (L9PN86U2PA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Banu Ozkan (L9PN86U2PA)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
@@ -33896,8 +33896,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Gözde Kaymaz (KRL42D6255)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Gözde Kaymaz (KRL42D6255)";
+				CODE_SIGN_IDENTITY = "Apple Development: Banu Ozkan (L9PN86U2PA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Banu Ozkan (L9PN86U2PA)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
@@ -34069,8 +34069,8 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Gözde Kaymaz (KRL42D6255)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Gözde Kaymaz (KRL42D6255)";
+				CODE_SIGN_IDENTITY = "Apple Development: Banu Ozkan (L9PN86U2PA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Banu Ozkan (L9PN86U2PA)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
@@ -34596,8 +34596,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Gözde Kaymaz (KRL42D6255)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Gözde Kaymaz (KRL42D6255)";
+				CODE_SIGN_IDENTITY = "Apple Development: Banu Ozkan (L9PN86U2PA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Banu Ozkan (L9PN86U2PA)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
@@ -35071,8 +35071,8 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/LifeboxTC/autosync-widget-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Gözde Kaymaz (KRL42D6255)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Gözde Kaymaz (KRL42D6255)";
+				CODE_SIGN_IDENTITY = "Apple Development: Banu Ozkan (L9PN86U2PA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Banu Ozkan (L9PN86U2PA)";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = d2.1.8;
