@@ -150,6 +150,41 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
+    func handleShareAction(type: ElementTypes, sourceRect: CGRect?, items: [BaseDataSourceItem]) {
+        guard !items.isEmpty else {
+            return
+        }
+        
+        sharingItems.removeAll()
+        sharingItems.append(contentsOf: items)
+        
+        self.sharingItems = items
+        switch type {
+        case .shareLink:
+            let needSync = items.contains(where: { $0.isLocalItem })
+            if needSync {
+                sync(items: sharingItems, action: { [weak self] in
+                    self?.shareViaLink(sourceRect: sourceRect)
+                }, fail: { errorResponse in
+                    debugLog("sync(items: \(errorResponse.description)")
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            } else {
+                shareViaLink(sourceRect: sourceRect)
+            }
+        case .shareOriginal:
+            sync(items: sharingItems, action: { [weak self] in
+                self?.shareOrignalSize(sourceRect: sourceRect)
+                }, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+            })
+        case .sharePrivate:
+            privateShare()
+        default:
+            return
+        }
+    }
+    
     func privateShare() {
         guard let items = sharingItems as? [WrapData] else {
             return

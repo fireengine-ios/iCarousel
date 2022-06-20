@@ -58,7 +58,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
         
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
+                                               style: .default,
+                                               tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.background.color)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
             availableSortTypes: baseSortTypes,
@@ -84,8 +87,14 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.cardsContainerView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.cardsContainerView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
+        let bottomBarConfig = EditingBarConfig(
+            elementsConfig:  [.share, .move, .moveToTrash],
+            style: .default,
+            tintColor: AppColor.tint.color,
+            unselectedItemTintColor: AppColor.label.color,
+            barTintColor: AppColor.background.color
+        )
+        
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
             availableSortTypes: allFilesSortTypes,
@@ -118,7 +127,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
         
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
+                                               style: .default,
+                                               tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.background.color)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
             availableSortTypes: allFilesSortTypes,
@@ -153,7 +165,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let configurator = BaseFilesGreedModuleConfigurator()
         let elementsConfig = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .bottomBar)
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
-                                               style: .default, tintColor: nil)
+                                               style: .default,
+                                               tintColor: AppColor.tint.color,
+                                               unselectedItemTintColor: AppColor.label.color,
+                                               barTintColor: AppColor.background.color)
 
         let sortedRule: SortedRules = status == .active ? .lastModifiedTimeDown : .timeDown
         let presenter = DocumentsGreedPresenter(sortedRule: sortedRule)

@@ -20,7 +20,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var backAsCancelBarButton: UIBarButtonItem?
     
-    var editingTabBar: BottomSelectionTabBarViewController?
+    var editingTabBar: BottomSelectionTabBarDrawerViewController?
     
     var isFavorites: Bool = false
     

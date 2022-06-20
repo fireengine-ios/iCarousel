@@ -60,8 +60,8 @@ final class FaceImagePhotosConfigurator {
         let elementsConfig = ElementTypes.faceImagePhotosElementsConfig(for: item, status: status, viewType: .bottomBar)
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig, style: .default, tintColor: nil)
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
-        let bottomBarVC = bottomBarVCmodule.setupModule(config: bottomBarConfig,
-                                                        settablePresenter: BottomSelectionTabBarPresenter())
+        let bottomBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: bottomBarConfig, settablePresenter: BottomSelectionTabBarPresenter())
+
         
         viewController.editingTabBar = bottomBarVC
         interactor.bottomBarOriginalConfig = bottomBarConfig

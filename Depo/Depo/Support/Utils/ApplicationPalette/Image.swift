@@ -33,6 +33,8 @@ enum Image: String, AppImage {
     case iconAddToAlbum
     case iconSelect
     case iconUnShare
+    case iconSend
+    case iconCopy
 
     ///  Files Tab
     case iconFileAudio

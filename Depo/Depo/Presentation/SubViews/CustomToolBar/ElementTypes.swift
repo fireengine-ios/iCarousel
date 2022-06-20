@@ -69,6 +69,10 @@ enum ElementTypes {
     case leaveSharing
     case moveToTrashShared
     
+    case shareOriginal
+    case shareLink
+    case sharePrivate
+    
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]
     static var activeState: [ElementTypes] = [.hide, .moveToTrash]
@@ -320,8 +324,14 @@ enum ElementTypes {
         } else if item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
             types = [.shareAlbum, .albumDetails, .download]
         } else {
-            types = [.info, .share, .move]
+            types = [.info]
             
+            let shareInfo = ElementTypes.allowedTypes(for: [item])
+            if !shareInfo.isEmpty {
+                types.append(contentsOf: shareInfo)
+            }
+            
+            types.append(.move)
             types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
             if !item.isReadOnlyFolder {
                 types.append(.moveToTrash)
@@ -339,6 +349,28 @@ enum ElementTypes {
         }
         
         return types
+    }
+    
+    static func allowedTypes(for items: [BaseDataSourceItem]) -> [ElementTypes] {
+        var allowedTypes = [ElementTypes]()
+        
+        if items.contains(where: { $0.fileType == .folder}) {
+            allowedTypes = [.shareLink, .sharePrivate]
+        } else if items.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
+            allowedTypes = [.shareLink]
+        } else {
+            allowedTypes = [.shareOriginal, .shareLink, .sharePrivate]
+        }
+        
+        if items.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
+            allowedTypes.remove(.shareOriginal)
+        }
+        
+        if items.contains(where: { $0.isLocalItem }) {
+            allowedTypes.remove(.sharePrivate)
+        }
+        
+        return allowedTypes
     }
     
     func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = [], divorseItems: DivorseItems? = nil) -> String? {
@@ -560,6 +592,12 @@ enum ElementTypes {
             return TextConstants.privateSharedEndSharingActionTitle
         case .leaveSharing:
             return TextConstants.privateSharedLeaveSharingActionTitle
+        case .shareOriginal:
+            return TextConstants.actionSheetShareOriginalSize
+        case .shareLink:
+            return TextConstants.actionSheetShareShareViaLink
+        case .sharePrivate:
+            return TextConstants.actionSheetSharePrivate
         default:
             return ""
         }
@@ -666,6 +704,12 @@ enum ElementTypes {
         case .leaveSharing:
             return ""
         case .moveToTrashShared:
+            return ""
+        case .shareOriginal:
+            return ""
+        case .shareLink:
+            return ""
+        case .sharePrivate:
             return ""
         }
     }
@@ -777,6 +821,12 @@ enum ElementTypes {
             return nil
         case .moveToTrashShared:
             return nil
+        case .shareOriginal:
+            return Image.iconSend.image
+        case .shareLink:
+            return Image.iconCopy.image
+        case .sharePrivate:
+            return Image.iconShare.image
         }
     }
 }
