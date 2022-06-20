@@ -984,6 +984,10 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     }
 
     func threeDotsButtonTapped(_ button: UIButton?) {
+        if collectionViewManager.selectedIndexes.isEmpty {
+            stopEditingMode()
+        }
+
         dataSource.getSelectedObjects(at: collectionViewManager.selectedIndexes) { [weak self] selectedObjects in
             guard let self = self else {
                 return
