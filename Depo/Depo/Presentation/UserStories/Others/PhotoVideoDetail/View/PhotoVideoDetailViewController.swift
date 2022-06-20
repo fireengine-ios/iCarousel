@@ -76,9 +76,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private var isBottomViewOpen = false {
         didSet {
             setStatusBarHiddenForLandscapeIfNeed(isFullScreen && !isBottomViewOpen)
+            updateAlphaForVisibleRecognizeTextButton()
         }
     }
-    
+
     private var selectedIndex: Int? {
         didSet {
             setupNavigationBar()
@@ -400,6 +401,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
             detailCell.setRecognizeTextButtonBottomSpacing(spacing)
         }
     }
+
+    private func updateAlphaForVisibleRecognizeTextButton() {
+        guard let selectedIndex = selectedIndex else {
+            return
+        }
+        let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0)) as? PhotoVideoDetailCell
+        cell?.recognizeTextButton.alpha = isBottomViewOpen ? 0 : 1
+    }
 }
 
 
@@ -680,6 +689,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         }
         cell.delegate = self
         cell.isRecognizeTextEnabled = output.ocrEnabled
+        cell.recognizeTextButton.alpha = isBottomViewOpen ? 0 : 1
         let object = objects[indexPath.row]
         cell.setObject(object: object)
         
