@@ -71,7 +71,7 @@ class BaseViewController: ViewController {
     @objc func hideKeyboard() {
         keyboardHeight = 0
     }
-    
+
     func searchActiveTextField(view: UIView) -> UITextField? {
         if let textField = view as? UITextField {
             if textField.isFirstResponder {
@@ -93,6 +93,51 @@ class BaseViewController: ViewController {
 
     func isNeedToShowTabBar() -> Bool {
         return needToShowTabBar
+    }
+
+    // MARK: - Header Actions
+
+    func setDefaultNavigationHeaderActions() {
+        headerContainingViewController?.setHeaderLeftItems([
+            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
+        ])
+        headerContainingViewController?.setHeaderRightItems([
+            NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch)),
+            NavigationHeaderButton(type: .plus, target: self, action: #selector(showPlusButtonMenu))
+        ])
+    }
+
+    @objc private func showSettings() {
+        let router = RouterVC()
+        let controller: UIViewController?
+
+        if Device.isIpad {
+            controller = router.settingsIpad
+        } else {
+            controller = router.settings
+        }
+
+        if let controller = controller {
+            router.pushViewController(viewController: controller)
+        }
+    }
+
+    @objc private func showSearch() {
+        let router = RouterVC()
+        let controller = router.searchView(navigationController: navigationController)
+        router.pushViewController(viewController: controller)
+    }
+
+    @objc private func showPlusButtonMenu() {
+        let menuItems = floatingButtonsArray.map { buttonType in
+            AlertFilesAction(title: buttonType.title, icon: buttonType.image) { [weak self] in
+                self?.customTabBarController?.handleAction(buttonType.action)
+            }
+        }
+
+        let menu = AlertFilesActionsViewController()
+        menu.configure(with: menuItems)
+        menu.presentAsDrawer()
     }
 }
 

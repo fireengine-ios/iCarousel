@@ -26,24 +26,7 @@ class RouterVC: NSObject {
     var tabBarController: TabBarViewController? {
         return rootViewController as? TabBarViewController
     }
-    
-    func getFloatingButtonsArray() -> [FloatingButtonsType] {
-        let nController = navigationController
-        let viewController = nController?.viewControllers.last
         
-        if let segmentedVC = viewController as? SegmentedController,
-            let vc = segmentedVC.currentController as? BaseViewController
-        {
-            return vc.floatingButtonsArray
-        }
-        
-        if let baseViewController = viewController as? BaseViewController {
-            return baseViewController.floatingButtonsArray
-        }
-        
-        return [FloatingButtonsType]()
-    }
-    
     func getParentUUID() -> String {
         //TODO: get rid of getParentUUID
         if topNavigationController?.viewControllers.first is PhotoVideoDetailViewController,

@@ -29,6 +29,10 @@ enum Image: String, AppImage {
     case iconStory
     case iconPrint
     case iconAddToAlbum
+    case iconCamera
+    case iconFileUpload
+    case iconUploadPhoto
+    case iconFolderCreate
 
     ///  Files Tab
     case iconFileAudio
