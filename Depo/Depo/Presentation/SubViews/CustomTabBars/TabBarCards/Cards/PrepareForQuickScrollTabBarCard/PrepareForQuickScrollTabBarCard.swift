@@ -16,9 +16,11 @@ final class PrepareForQuickScrollTabBarCard: BaseTabBarCard {
             newValue.font = UIFont.appFont(.medium, size: 12, relativeTo: .body)
             newValue.numberOfLines = 1
             newValue.minimumScaleFactor = 0.5
-            newValue.maximumContentSizeCategory = .extraExtraExtraLarge
             newValue.textColor = AppColor.tabBarCardLabel.color
             newValue.text = TextConstants.prepareQuickScroll
+            if #available(iOS 15.0, *) {
+                newValue.maximumContentSizeCategory = .extraExtraExtraLarge
+            }
         }
     }
 
