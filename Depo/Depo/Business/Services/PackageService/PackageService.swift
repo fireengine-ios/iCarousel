@@ -13,8 +13,14 @@ final class PackageService {
     
     private let iapManager = IAPManager.shared
 
+    @available(iOS 12.0, *)
+    private lazy var iapIntroEligibilityChecker = IAPIntroPriceEligibilityChecker()
+
+    private lazy var introOfferEligibilityStatusByProductId: [String: IAPIntroEligibilityStatus] = [:]
+
     @available(iOS 11.2, *)
     private lazy var iapSubscriptionPeriodFormatter = ProductSubscriptionPeriodFormatter()
+
     
     //MARK: Utility Methods(public)
     func getAccountType(for accountType: String, offers: [Any] = []) -> AccountType? {
@@ -41,10 +47,25 @@ final class PackageService {
     
     func getInfoForAppleProducts(offers: [Any], isActivePurchases: Bool = false, success: @escaping () -> (), fail: @escaping (Error) -> ()) {
         let appleOffers = getAppleIds(for: offers)
-        iapManager.loadProducts(productIds: appleOffers, isActivePurchases: isActivePurchases) { response in
+        iapManager.loadProducts(productIds: appleOffers, isActivePurchases: isActivePurchases) { [weak self] response in
             switch response {
             case .success(_):
-                success()
+                self?.introOfferEligibilityStatusByProductId = [:]
+                self?.iapManager.refreshReceipt { [weak self] receiptData in
+                    guard #available(iOS 12.0, *) else {
+                        success()
+                        return
+                    }
+
+                    self?.iapIntroEligibilityChecker.checkEligibility(
+                        with: receiptData,
+                        productIdentifiers: Set(appleOffers)
+                    ) { [weak self] eligibilityStatusDict, _ in
+                        self?.introOfferEligibilityStatusByProductId = eligibilityStatusDict
+                        success()
+                    }
+                }
+
             case .failed(let error):
                 fail(error)
             }
@@ -87,11 +108,42 @@ final class PackageService {
         }
         return fullPrice
     }
+
+    func getIntroductoryPrice(for offer: Any) -> String? {
+        guard #available(iOS 11.2, *) else {
+            return nil
+        }
+
+        // get SKProduct
+        guard let iapProductId = getAppleIds(for: [offer]).first,
+              let product = iapManager.product(for: iapProductId) else {
+            return nil
+        }
+
+        // Make sure it has an intro offer
+        guard let introductoryPrice = product.introductoryPrice else {
+            return nil
+        }
+
+        // Make sure the user is eligible for buying an intro offer for this product
+        guard introOfferEligibilityStatusByProductId[product.productIdentifier] == .eligible else {
+            return nil
+        }
+
+        let price = introductoryPrice.price
+        let period = iapSubscriptionPeriodFormatter.string(
+            from: introductoryPrice.subscriptionPeriod,
+            numberOfPeriods: introductoryPrice.numberOfPeriods
+        ) ?? ""
+
+        return "First \(period) \(price)"
+    }
     
     func convertToSubscriptionPlan(offers: [Any], accountType: AccountType) -> [SubscriptionPlan] {
         return offers.map { offer in
             return subscriptionPlanWith(name: getOfferName(offer: offer),
                                         price: getOfferPrice(for: offer, accountType: accountType),
+                                        introductoryPrice: getIntroductoryPrice(for: offer),
                                         type: getOfferType(for: offer),
                                         model: offer,
                                         quota: getOfferQuota(offer: offer),
@@ -173,6 +225,7 @@ final class PackageService {
     //MARK: Utility Methods(private)
     private func subscriptionPlanWith(name: String,
                                       price: String,
+                                      introductoryPrice: String?,
                                       type: SubscriptionPlanType,
                                       model: Any,
                                       quota: Int64,
@@ -186,6 +239,7 @@ final class PackageService {
                                       gracePeriodEndDate: String = "") -> SubscriptionPlan {
         return SubscriptionPlan(name: name,
                                 price: price,
+                                introductoryPrice: introductoryPrice,
                                 type: type,
                                 model: model,
                                 quota: quota,

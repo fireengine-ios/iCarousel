@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,14 +12,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="kTm-CO-pIo" customClass="SubscriptionOfferView" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="175"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="221"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wmi-Ef-5Mf">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="175"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="221"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="gzP-NW-rT6">
-                            <rect key="frame" x="2" y="2" width="410" height="171"/>
+                            <rect key="frame" x="2" y="2" width="410" height="217"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2uc-rE-ZjF">
                                     <rect key="frame" x="0.0" y="0.0" width="410" height="50"/>
@@ -31,7 +31,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="410" placeholderIntrinsicHeight="76" translatesAutoresizingMaskIntoConstraints="NO" id="RpX-Jm-dkh">
-                                    <rect key="frame" x="0.0" y="50" width="410" height="121"/>
+                                    <rect key="frame" x="0.0" y="50" width="410" height="167"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FXV-KS-Mr9" userLabel="Name and Type Stackview">
                                             <rect key="frame" x="12" y="16" width="127.5" height="40"/>
@@ -72,10 +72,30 @@
                                             </connections>
                                         </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="tWE-b8-Zfc">
-                                            <rect key="frame" x="0.0" y="72" width="410" height="49"/>
+                                            <rect key="frame" x="0.0" y="72" width="410" height="95"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LNy-EQ-Vwl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="410" height="40"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="awt-jW-cdh" customClass="RoundedInsetsButton" customModule="Billo" customModuleProvider="target">
+                                                            <rect key="frame" x="72" y="0.0" width="266.5" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="9qU-sz-LDw"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="onPurchaseTap:" destination="kTm-CO-pIo" eventType="touchUpInside" id="smI-xb-NhC"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="awt-jW-cdh" firstAttribute="top" secondItem="LNy-EQ-Vwl" secondAttribute="top" id="1pQ-eX-ncx"/>
+                                                        <constraint firstItem="awt-jW-cdh" firstAttribute="centerX" secondItem="LNy-EQ-Vwl" secondAttribute="centerX" id="CcU-G5-gVC"/>
+                                                        <constraint firstAttribute="bottom" secondItem="awt-jW-cdh" secondAttribute="bottom" id="NwI-Re-rXa"/>
+                                                        <constraint firstItem="awt-jW-cdh" firstAttribute="width" secondItem="LNy-EQ-Vwl" secondAttribute="width" multiplier="0.65" id="c1u-tr-BHS"/>
+                                                    </constraints>
+                                                </view>
                                                 <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T82-qu-lwC" userLabel="Grace Stack View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="410" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="48" width="410" height="0.0"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4U5-mi-r1p">
                                                             <rect key="frame" x="0.0" y="0.0" width="410" height="0.0"/>
@@ -92,7 +112,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b3O-9j-jjm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="410" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="56" width="410" height="0.0"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7q7-Zd-s9S">
                                                             <rect key="frame" x="0.0" y="0.0" width="4" height="0.0"/>
@@ -130,7 +150,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <view contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="P35-g9-IlS" customClass="SubscriptionFeaturesView" customModule="Billo" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="16" width="410" height="33"/>
+                                                    <rect key="frame" x="0.0" y="72" width="410" height="23"/>
                                                     <color key="backgroundColor" name="primaryBackground"/>
                                                 </view>
                                             </subviews>
@@ -187,6 +207,8 @@
                 <outlet property="graceDateLabel" destination="4U5-mi-r1p" id="uLV-nU-rSh"/>
                 <outlet property="graceDescriptionLabel" destination="Kh3-3A-ynE" id="Xsi-5O-Nl7"/>
                 <outlet property="gracePeriodStackView" destination="T82-qu-lwC" id="1gp-Xz-GGz"/>
+                <outlet property="introductoryPurchaseButton" destination="awt-jW-cdh" id="fZQ-M1-nSl"/>
+                <outlet property="introductoryPurchaseButtonContainer" destination="LNy-EQ-Vwl" id="jyf-nE-3kJ"/>
                 <outlet property="nameLabel" destination="gRs-hQ-5BY" id="NeT-xs-HnA"/>
                 <outlet property="offerStoreLabel" destination="vxI-Vl-4wX" id="4z4-a3-QkV"/>
                 <outlet property="paydayLabel" destination="FsP-M9-ugs" id="UeH-Pp-mXu"/>
