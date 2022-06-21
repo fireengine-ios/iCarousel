@@ -60,36 +60,39 @@ enum FieldValue: CustomStringConvertible {
     case cropy
     case story
     case all
+    case documentsAndMusic
     
     var description: String {
         switch self {
-        case .audio         : return "audio"
-        case .playLists     : return "playList"
-        case .image         : return "image"
-        case .video         : return "video"
-        case .albums        : return "album/photo"
-        case .imageAndVideo : return "image%20OR%20video"
-        case .document      : return "application%20OR%20text%20NOT%20directory"
-        case .favorite      : return "true"
-        case .cropy         : return "true"
-        case .story         : return "true"
-        case .all           : return ""
+        case .audio             : return "audio"
+        case .playLists         : return "playList"
+        case .image             : return "image"
+        case .video             : return "video"
+        case .albums            : return "album/photo"
+        case .imageAndVideo     : return "image%20OR%20video"
+        case .document          : return "application%20OR%20text%20NOT%20directory"
+        case .favorite          : return "true"
+        case .cropy             : return "true"
+        case .story             : return "true"
+        case .all               : return ""
+        case .documentsAndMusic : return "audio%20OR%20application%20OR%20text%20NOT%20directory"
         }
     }
     
     var rawValue: String {
         switch self {
-        case .audio         : return "musics"
-        case .playLists     : return "playList"
-        case .image         : return "images"
-        case .albums        : return "album"
-        case .video         : return "videos"
-        case .imageAndVideo : return "photos_and_videos"
-        case .document      : return "documents"
-        case .favorite      : return "true"
-        case .cropy         : return "true"
-        case .story         : return "true"
-        case .all           : return ""
+        case .audio             : return "musics"
+        case .playLists         : return "playList"
+        case .image             : return "images"
+        case .albums            : return "album"
+        case .video             : return "videos"
+        case .imageAndVideo     : return "photos_and_videos"
+        case .document          : return "documents"
+        case .favorite          : return "true"
+        case .cropy             : return "true"
+        case .story             : return "true"
+        case .all               : return ""
+        case .documentsAndMusic : return ""
         }
     }
 }

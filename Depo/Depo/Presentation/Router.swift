@@ -577,12 +577,17 @@ class RouterVC: NSObject {
         return controller
     }
     
+    var documentsAndMusic: UIViewController? {
+        let controller = BaseFilesGreedModuleInitializer.initializeDocumentsAndMusicViewController(with: "BaseFilesGreedViewController")
+        return controller
+    }
+    
     var segmentedFiles: HeaderContainingViewController.ChildViewController {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles else {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let documentsAndMusic = documentsAndMusic else {
             assertionFailure()
             return AllFilesSegmentedController()
         }
-        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles]
+        let controllers = [documents, musics, favorites, sharedWithMe, shareByMeSegment, allFiles, documentsAndMusic]
         return AllFilesSegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
     }
     

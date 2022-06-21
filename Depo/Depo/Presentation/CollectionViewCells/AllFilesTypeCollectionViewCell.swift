@@ -15,6 +15,7 @@ enum AllFilesType: CaseIterable {
     case sharedWithMe
     case sharedByMe
     case allFiles
+    case documentsAndMusic
     
     var image: UIImage? {
         switch self {
@@ -26,7 +27,7 @@ enum AllFilesType: CaseIterable {
             return Image.iconTabStar.image
         case .sharedByMe, .sharedWithMe:
             return Image.iconTabShare.image
-        case .allFiles:
+        case .allFiles, .documentsAndMusic:
             return nil
         }
     }
@@ -41,7 +42,7 @@ enum AllFilesType: CaseIterable {
             return TextConstants.containerFavourite
         case .sharedByMe, .sharedWithMe:
             return TextConstants.containerShared
-        case .allFiles:
+        case .allFiles, .documentsAndMusic:
             return nil
         }
     }
@@ -56,7 +57,7 @@ enum AllFilesType: CaseIterable {
             return AppColor.filesFavoriteTab.color
         case .sharedByMe, .sharedWithMe:
             return AppColor.filesSharedTab.color
-        case .allFiles:
+        case .allFiles, .documentsAndMusic:
             return nil
         }
     }
