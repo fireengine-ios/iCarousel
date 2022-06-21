@@ -19,7 +19,11 @@ extension UIApplication {
                 return topController(controller: selected)
             }
         }
-        if let presented = controller?.presentedViewController {
+        // checking !presented.isBeingDismissed
+        // for cases where we're presenting while the top view controller is being dimissed
+        // example for this is in
+        // Gallery screen --> select photos --> three dots button --> share --> copy public link
+        if let presented = controller?.presentedViewController, !presented.isBeingDismissed {
             return topController(controller: presented)
         }
         return controller
