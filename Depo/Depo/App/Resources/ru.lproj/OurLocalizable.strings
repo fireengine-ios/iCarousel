@@ -1507,7 +1507,7 @@
 "import_from_facebook_started" = "Начался импорт из Facebook.";
 "instapick_hashtags_copied" = "Хэштеги скопированы.";
 "create_story_selection_limit" = "Пожалуйста, выберите максимум %d фотографий.";
-"etk_html" = "";
+"etk_html" = "<p><strong>СОГЛАСИЕ НА КОММЕРЧЕСКИЕ ЭЛЕКТРОННЫЕ СООБЩЕНИЯ И ПЕРЕДАЧУ ДАННЫХ</strong></p>\n<p>Настоящим я даю согласие разрешить Lifecell Bulut Çözümleri A.Ş, Lifecell Dijital Servisler ve Çözümler A.Ş и Компаниям Группы, перечисленным ниже, обрабатывать мои персональные данные и передавать их сторонам, указанным в Политике Разрешений, и отправлять мне коммерческие электронные сообщения в соответствии с “Политика разрешений”, доступно <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">здесь</a> , если я не потребую иного в соответствии с Законом №. 6563, и другие применимые правила, в целях информирования меня о скидках, предложениях и специальных предложениях, которые соответствуют моим потребностям и предпочтениям в отношении продуктов и услуг этих компаний. Я признаю, что могу отозвать свое согласие на обработку /передачу моих персональных данных или получение коммерческих электронных писем, и подробная информация об объеме и отзыве такого согласия доступна в рамках \"<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Политика Разрешений</a>\".</p>\n<table>\n<tbody>\n<tr>\n<td width=\"532\">\n<p><strong><u>Группа Компаний с Предоставленным Разрешением на Обработку/Обмен Данными</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\"> \n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p><strong><u>Группа Компаний с Разрешением на Коммерческую Связь</u></strong></p>\n</td> \n</tr> \n<tr> \n<td width=\"532\"> \n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Global Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Finansman A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Sigorta Aracılık Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Teknoloji Araştırma ve Geliştirme A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Satış ve Dağıtım Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş</p>\n</td>\n</tr>\n</tbody>\n</table>";
 "free_up_space_alert_title" = "Освободите Место на вашем телефоне";
 "free_up_space_no_duplicates" = "У вас нет повторяющихся фотографий / видео.";
 "free_up_space_in_progress" = "Ваш список повторяющихся файлов еще не готов, пожалуйста, попробуйте позже.";
@@ -2016,4 +2016,18 @@
 "ETK_KVKK_Izin_Politikasi" = "Политика Разрешений";
 "kvkk_firms_link" = "";
 "kvkk_commercial_info_link" = "";
+"syncing" = "";
+"downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
+
+/*Free for {3 months}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_free_trial" = "";
+
+/*First {6 months} {6,99 TRY/Month}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_as_you_go" = "";
+
+/*First {6 months} {6,99 TRY}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_up_front" = "";

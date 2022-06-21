@@ -149,16 +149,31 @@ final class PackageService {
             numberOfPeriods: introductoryPrice.numberOfPeriods
         ) ?? ""
 
+        func combined(_ price: String, _ period: String) -> String {
+            [price, period].joined(separator: "/")
+        }
+
         switch introductoryPrice.paymentMode {
         case .freeTrial:
-            return String(format: "Free for %@\nthen %@/%@", discountTotalPeriod, price, period)
+            return String(
+                format: localized(.iapIntroOfferFreeTrial),
+                discountTotalPeriod,
+                combined(price, period)
+            )
         case .payAsYouGo:
             return String(
-                format: "First %@ %@/%@\nthen %@/%@",
-                discountTotalPeriod, discountPrice, discountPeriod, price, period
+                format: localized(.iapIntroOfferPayAsYouGo),
+                discountTotalPeriod,
+                combined(discountPrice, discountPeriod),
+                combined(price, period)
             )
         case .payUpFront:
-            return String(format: "First %@ for %@\nthen %@/%@", discountTotalPeriod, discountPrice, price, period)
+            return String(
+                format: localized(.iapIntroOfferPayUpFront),
+                discountTotalPeriod,
+                discountPrice,
+                combined(price, period)
+            )
         @unknown default:
             return ""
         }
@@ -286,7 +301,7 @@ final class PackageService {
                                 gracePeriodEndDate: gracePeriodEndDate)
     }
     
-    private func localized(offerPeriod: String) -> String {
+    private func localizedOfferPeriod(_ offerPeriod: String) -> String {
         if offerPeriod.contains("year") {
             return TextConstants.packagePeriodYear
         } else if offerPeriod.contains("sixmonth") {
@@ -339,9 +354,9 @@ final class PackageService {
     private func getOfferPeriod(for offer: Any) -> String? {
         var period: String?
         if let offer = offer as? PackageModelResponse, let periodString = offer.period {
-            period = localized(offerPeriod: periodString.lowercased())
+            period = localizedOfferPeriod(periodString.lowercased())
         } else if let offer = offer as? SubscriptionPlanBaseResponse, let periodString = offer.subscriptionPlanPeriod {
-            period = localized(offerPeriod: periodString.lowercased())
+            period = localizedOfferPeriod(periodString.lowercased())
         }
         return period
     }

@@ -1505,7 +1505,7 @@
 "import_from_facebook_started" = "بدأ التحويل من الفيس بوك.";
 "instapick_hashtags_copied" = "تم نسخ علمات التصنيف.";
 "create_story_selection_limit" = "يرجى تحديد %d صور كحد أقصى.";
-"etk_html" = "";
+"etk_html" = "<p><strong>الموافقة على الاتصالات الإلكترونية التجارية ونقل البيانات</strong></p>\n<p>أوافق بموجب هذا على السماح لـ Lifecell Bulut Çözümleri A.Ş و Lifecell Dijital Servisler ve Çözümler A.Ş وشركات المجموعة المدرجة أدناه لمعالجة بياناتي الشخصية ونقلها إلى الأطراف المحددة في سياسة الأذونات و أرسل لي رسائل بريد إلكتروني تجارية وفقًا \"لسياسة الأذونات\" ، يتوفر <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">هنا</a> ، في وفقا للقانون رقم. 6563 وغيرها من القواعد المعمول بها ، لإخباري بالخصومات والعروض والعروض الخاصة التي تناسب احتياجاتي وتفضيلاتي فيما يتعلق بمنتجات وخدمات هذه الشركات.\nأقر بأنه يجوز لي سحب موافقتي على معالجة / نقل بياناتي الشخصية أو استلام رسائل البريد الإلكتروني التجارية ، والمعلومات التفصيلية حول نطاق هذه الموافقة وسحبها متاحة ضمن \"<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">سياسة الأذونات</a>\" .</p>\n<table>\n<tbody>\n<tr>\n<td width=\"532\">\n<p><strong><u>مجموعة شركات لديها إذن معالجة/مشاركة البيانات</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\"> \n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p><strong><u>مجموعة شركات لديها إذن اتصالات تجارية </u></strong></p>\n</td> \n</tr> \n<tr> \n<td width=\"532\"> \n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Global Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Finansman A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Sigorta Aracılık Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Teknoloji Araştırma ve Geliştirme A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Satış ve Dağıtım Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş</p>\n</td>\n</tr>\n</tbody>\n</table>";
 "free_up_space_alert_title" = "افتح مكان بهاتفك.";
 "free_up_space_no_duplicates" = "ليس لديك صور / مقاطع فيديو مكررة.";
 "free_up_space_in_progress" = "قائمة الملفات المتكررة الخاصة بك ليست جاهزة بعد , يرجى المحاولة لاحقًا.";
@@ -1994,7 +1994,7 @@
 "settings_change_password_google_warning" = "لتغيير كلمة المرور الخاصة بك ، يجب عليك تسجيل الدخول إلى حساب lifebox الخاص بك باستخدام معرف Google الخاص بك.";
 "settings_change_password_apple_warning" = "لتغيير كلمة المرور الخاصة بك ، يجب عليك تسجيل الدخول إلى lifebox باستخدام معرف Apple الخاص بك.";
 "settings_change_password_apple_google_warning" = "لتغيير كلمة المرور الخاصة بك ، تحتاج إلى تسجيل الدخول إلى lifebox باستخدام معرف Google أو معرف Apple الخاص بك.";
-"settings_googe_apple_set_password" = "تعيين كلمة مرور Lifebox";
+"settings_googe_apple_set_password" = "تعيين كلمة مرور lifebox";
 "settings_google_apple_mail_match_error" = "لربط حسابك بـ lifebox ، يجب أن يكون عنوان بريدك الإلكتروني هو نفسه على كل نظام أساسي.";
 "googe_apple_login_invalid_token" = "محاولة تسجيل الدخول غير صحيحة ، يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.";
 "settings_google_apple_empty_mail_error" = "يجب عليك إضافة عنوان بريد إلكتروني إلى حسابك.";
@@ -2014,4 +2014,18 @@
 "ETK_KVKK_Izin_Politikasi" = "نهج الأذونات";
 "kvkk_firms_link" = "";
 "kvkk_commercial_info_link" = "";
+"syncing" = "";
+"downloading" = "";
 "ETK_KVKK_Izin_Politikası" = "";
+
+/*Free for {3 months}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_free_trial" = "";
+
+/*First {6 months} {6,99 TRY/Month}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_as_you_go" = "";
+
+/*First {6 months} {6,99 TRY}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_up_front" = "";
