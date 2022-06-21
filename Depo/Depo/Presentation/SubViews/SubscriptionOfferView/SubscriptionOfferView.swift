@@ -55,6 +55,8 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var priceLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
+            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.textColor = AppColor.marineTwoAndWhite.color!
         }
     }
     
@@ -128,7 +130,15 @@ final class SubscriptionOfferView: UIView, NibInit {
     }
     
     @IBOutlet private weak var featureView: SubscriptionFeaturesView!
-    
+
+    @IBOutlet private weak var purchaseButtonWidthConstraint: NSLayoutConstraint! {
+        willSet {
+            purchaseButtonWidth = newValue.constant
+        }
+    }
+
+    private var purchaseButtonWidth: CGFloat!
+
     private weak var delegate: SubscriptionOfferViewDelegate?
     private var index: Int?
 
@@ -141,9 +151,15 @@ final class SubscriptionOfferView: UIView, NibInit {
         let hasIntroPrice = plan.introductoryPrice != nil
 
         nameLabel.text = plan.name
-        priceLabel.attributedText = makePrice(plan.price)
+        if hasIntroPrice {
+            priceLabel.text = plan.introductoryPrice
+            priceLabel.textAlignment = .center
+        } else {
+            priceLabel.attributedText = makePrice(plan.price)
+        }
         purchaseButton.isHidden = hasIntroPrice
         introductoryPurchaseButtonContainer.isHidden = !hasIntroPrice
+        purchaseButtonWidthConstraint.constant = hasIntroPrice ? 0 : purchaseButtonWidth
         detailsStackView.isHidden = needHidePurchaseInfo
         if let attributedText = makePackageFeature(plan: plan) {
             typeLabel.attributedText = attributedText

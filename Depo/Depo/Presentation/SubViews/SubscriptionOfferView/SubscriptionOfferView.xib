@@ -34,16 +34,16 @@
                                     <rect key="frame" x="0.0" y="50" width="410" height="167"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FXV-KS-Mr9" userLabel="Name and Type Stackview">
-                                            <rect key="frame" x="12" y="16" width="127.5" height="40"/>
+                                            <rect key="frame" x="12" y="16" width="50" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="30" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRs-hQ-5BY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="127.5" height="10"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="10"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="30" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilR-RJ-Nc4">
-                                                    <rect key="frame" x="0.0" y="10" width="127.5" height="30"/>
+                                                    <rect key="frame" x="0.0" y="10" width="50" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -51,10 +51,10 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="42y-b6-zh4">
-                                            <rect key="frame" x="147.5" y="16" width="115" height="40"/>
+                                            <rect key="frame" x="180" y="16" width="50" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="30" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3Q-S9-RXr">
-                                                    <rect key="frame" x="0.0" y="0.0" width="115" height="40"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="40"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -165,13 +165,12 @@
                                         <constraint firstItem="nEK-hd-5j1" firstAttribute="centerY" secondItem="42y-b6-zh4" secondAttribute="centerY" id="Ih3-zO-MXA"/>
                                         <constraint firstItem="tWE-b8-Zfc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="42y-b6-zh4" secondAttribute="bottom" priority="750" constant="16" id="IrJ-Yj-beG"/>
                                         <constraint firstItem="nEK-hd-5j1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RpX-Jm-dkh" secondAttribute="top" constant="16" id="KFC-tH-gyD"/>
-                                        <constraint firstItem="42y-b6-zh4" firstAttribute="leading" secondItem="FXV-KS-Mr9" secondAttribute="trailing" constant="8" id="Nqy-cA-IEi"/>
+                                        <constraint firstItem="42y-b6-zh4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="FXV-KS-Mr9" secondAttribute="trailing" constant="8" id="Nqy-cA-IEi"/>
                                         <constraint firstAttribute="trailing" secondItem="tWE-b8-Zfc" secondAttribute="trailing" id="XCT-ej-MCV"/>
                                         <constraint firstItem="42y-b6-zh4" firstAttribute="top" secondItem="RpX-Jm-dkh" secondAttribute="top" constant="16" id="XWM-QU-yue"/>
                                         <constraint firstItem="42y-b6-zh4" firstAttribute="centerX" secondItem="RpX-Jm-dkh" secondAttribute="centerX" id="Yp4-48-9Gl"/>
                                         <constraint firstItem="FXV-KS-Mr9" firstAttribute="top" relation="greaterThanOrEqual" secondItem="RpX-Jm-dkh" secondAttribute="top" constant="16" id="bdM-b7-532"/>
                                         <constraint firstAttribute="trailing" secondItem="nEK-hd-5j1" secondAttribute="trailing" constant="8" id="ekf-TP-Aiw"/>
-                                        <constraint firstItem="42y-b6-zh4" firstAttribute="width" relation="lessThanOrEqual" secondItem="RpX-Jm-dkh" secondAttribute="width" multiplier="0.28" id="muE-VT-pnP"/>
                                         <constraint firstItem="nEK-hd-5j1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="42y-b6-zh4" secondAttribute="trailing" constant="8" id="ooa-O3-dCt"/>
                                     </constraints>
                                 </view>
@@ -215,6 +214,7 @@
                 <outlet property="plateView" destination="RpX-Jm-dkh" id="dSC-nJ-Lgr"/>
                 <outlet property="priceLabel" destination="Q3Q-S9-RXr" id="rSh-z9-F5m"/>
                 <outlet property="purchaseButton" destination="nEK-hd-5j1" id="3c1-Yj-5MP"/>
+                <outlet property="purchaseButtonWidthConstraint" destination="QlM-Nq-xos" id="wZJ-54-mTo"/>
                 <outlet property="recommendationLabel" destination="2uc-rE-ZjF" id="cdD-el-fqH"/>
                 <outlet property="typeLabel" destination="ilR-RJ-Nc4" id="EgH-NM-MUV"/>
             </connections>

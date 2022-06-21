@@ -130,15 +130,48 @@ final class PackageService {
             return nil
         }
 
-        let price = introductoryPrice.price
-        let period = iapSubscriptionPeriodFormatter.string(
+        return formattedIntroductoryOfferText(from: introductoryPrice, product: product)
+    }
+
+    @available(iOS 11.2, *)
+    private func formattedIntroductoryOfferText(from introductoryPrice: SKProductDiscount, product: SKProduct) -> String {
+        guard let subscriptionPeriod = product.subscriptionPeriod else {
+            return ""
+        }
+
+        let price = formattedPrice(product.price, priceLocale: product.priceLocale)
+        let period = iapSubscriptionPeriodFormatter.string(from: subscriptionPeriod) ?? ""
+
+        let discountPrice = formattedPrice(introductoryPrice.price, priceLocale: introductoryPrice.priceLocale)
+        let discountPeriod = iapSubscriptionPeriodFormatter.string(from: introductoryPrice.subscriptionPeriod) ?? ""
+        let discountTotalPeriod = iapSubscriptionPeriodFormatter.string(
             from: introductoryPrice.subscriptionPeriod,
             numberOfPeriods: introductoryPrice.numberOfPeriods
         ) ?? ""
 
-        return "First \(period) \(price)"
+        switch introductoryPrice.paymentMode {
+        case .freeTrial:
+            return String(format: "Free for %@\nthen %@/%@", discountTotalPeriod, price, period)
+        case .payAsYouGo:
+            return String(
+                format: "First %@ %@/%@\nthen %@/%@",
+                discountTotalPeriod, discountPrice, discountPeriod, price, period
+            )
+        case .payUpFront:
+            return String(format: "First %@ for %@\nthen %@/%@", discountTotalPeriod, discountPrice, price, period)
+        @unknown default:
+            return ""
+        }
     }
-    
+
+    private func formattedPrice(_ price: NSNumber, priceLocale: Locale) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.formatterBehavior = .behavior10_4
+        numberFormatter.positiveFormat = "#.## ¤¤"
+        numberFormatter.locale = priceLocale
+        return numberFormatter.string(from: price) ?? ""
+    }
+
     func convertToSubscriptionPlan(offers: [Any], accountType: AccountType) -> [SubscriptionPlan] {
         return offers.map { offer in
             return subscriptionPlanWith(name: getOfferName(offer: offer),
