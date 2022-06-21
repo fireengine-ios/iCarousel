@@ -9,7 +9,11 @@ final class PaymentTypeView: UIView, NibInit {
                 return
             }
             titleLabel.text = paymentMethod.type.title
-            subtitleLabel.text = paymentMethod.priceLabel.replacingOccurrences(of: "\n", with: " ")
+            if let introPriceText = paymentMethod.introPriceLabel {
+                subtitleLabel.text = introPriceText
+            } else {
+                subtitleLabel.text = paymentMethod.priceLabel.replacingOccurrences(of: "\n", with: " ")
+            }
             iconImageView.image = paymentMethod.type.image
         }
     }
@@ -34,6 +38,7 @@ final class PaymentTypeView: UIView, NibInit {
         willSet {
             newValue.textColor = ColorConstants.lightText
             newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.numberOfLines = 0
         }
     }
     @IBOutlet private weak var actionButton: BlueButtonWithMediumWhiteText! {

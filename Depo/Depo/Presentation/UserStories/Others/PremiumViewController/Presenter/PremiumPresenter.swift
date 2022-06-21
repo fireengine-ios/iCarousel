@@ -86,7 +86,12 @@ final class PremiumPresenter {
     private func makePaymentModel(plan: PackageOffer) -> PaymentModel? {
         let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
             if let model = offer.model as? PackageModelResponse {
-                return createPaymentMethod(model: model, priceString: offer.price, offer: plan)
+                return createPaymentMethod(
+                    model: model,
+                    priceString: offer.price,
+                    introPriceString: offer.introductoryPrice,
+                    offer: plan
+                )
             } else {
                 return nil
             }
@@ -111,27 +116,38 @@ final class PremiumPresenter {
         return showableMethods.sorted { $0.price < $1.price }
     }
     
-    private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer) -> PaymentMethod? {
+    private func createPaymentMethod(
+        model: PackageModelResponse,
+        priceString: String,
+        introPriceString: String?,
+        offer: PackageOffer
+    ) -> PaymentMethod? {
         guard let name = model.name, let type = model.type, let price = model.price else {
             return nil
         }
         
         let paymentType = type.paymentType
-        return PaymentMethod(name: name, price: price, priceLabel: priceString, type: paymentType, action: { [weak self] in
+        return PaymentMethod(
+            name: name,
+            price: price,
+            priceLabel: priceString,
+            introPriceLabel: introPriceString,
+            type: paymentType
+        ) { [weak self] in
             guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, type: type) else {
                 assertionFailure()
                 return
             }
-            
+
             let analyticsService: AnalyticsService = factory.resolve()
-            
+
             let eventLabel: GAEventLabel = .paymentType(paymentType.quotaPaymentType(quota: "Premium"))
             analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                 eventActions: .clickFeaturePurchase,
                                                 eventLabel: eventLabel)
-            
+
             self?.didPressOn(plan: subscriptionPlan)
-        })
+        }
     }
     
     private func didPressOn(plan: SubscriptionPlan) {

@@ -55,6 +55,8 @@ final class SubscriptionOfferView: UIView, NibInit {
     @IBOutlet private weak var priceLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
+            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.textColor = AppColor.marineTwoAndWhite.color!
         }
     }
     
@@ -72,7 +74,17 @@ final class SubscriptionOfferView: UIView, NibInit {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
-    
+
+    @IBOutlet private weak var introductoryPurchaseButtonContainer: UIView!
+    @IBOutlet private weak var introductoryPurchaseButton: RoundedInsetsButton! {
+        willSet {
+            newValue.setTitleColor(.white, for: UIControl.State())
+            newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.adjustsFontSizeToFitWidth()
+        }
+    }
+
     @IBOutlet private weak var detailsStackView: UIStackView!
     
     @IBOutlet private weak var paydayLabel: UILabel! {
@@ -118,7 +130,15 @@ final class SubscriptionOfferView: UIView, NibInit {
     }
     
     @IBOutlet private weak var featureView: SubscriptionFeaturesView!
-    
+
+    @IBOutlet private weak var purchaseButtonWidthConstraint: NSLayoutConstraint! {
+        willSet {
+            purchaseButtonWidth = newValue.constant
+        }
+    }
+
+    private var purchaseButtonWidth: CGFloat!
+
     private weak var delegate: SubscriptionOfferViewDelegate?
     private var index: Int?
 
@@ -127,8 +147,19 @@ final class SubscriptionOfferView: UIView, NibInit {
                    index: Int,
                    style: Style,
                    needHidePurchaseInfo: Bool = true) {
+
+        let hasIntroPrice = plan.introductoryPrice != nil
+
         nameLabel.text = plan.name
-        priceLabel.attributedText = makePrice(plan.price)
+        if hasIntroPrice {
+            priceLabel.text = plan.introductoryPrice
+            priceLabel.textAlignment = .center
+        } else {
+            priceLabel.attributedText = makePrice(plan.price)
+        }
+        purchaseButton.isHidden = hasIntroPrice
+        introductoryPurchaseButtonContainer.isHidden = !hasIntroPrice
+        purchaseButtonWidthConstraint.constant = hasIntroPrice ? 0 : purchaseButtonWidth
         detailsStackView.isHidden = needHidePurchaseInfo
         if let attributedText = makePackageFeature(plan: plan) {
             typeLabel.attributedText = attributedText
@@ -232,21 +263,23 @@ final class SubscriptionOfferView: UIView, NibInit {
     }
     
     private func updateDesign(with plan: SubscriptionPlan, style: Style) {
-        updateButton(plan: plan, style: style)
+        [purchaseButton, introductoryPurchaseButton].forEach { button in
+            updateButton(button: button, plan: plan, style: style)
+        }
         updateDetails(plan: plan)
         updateFeaturesView(features: makeFeatures(plan: plan), style: style)
         updateBorderView(isRecommended: plan.isRecommended)
         updateGracePeriodView(plan: plan)
     }
     
-    private func updateButton(plan: SubscriptionPlan, style: Style) {
+    private func updateButton(button: RoundedInsetsButton, plan: SubscriptionPlan, style: Style) {
         switch plan.type {
         case .current:
-            purchaseButton.setBackgroundColor(.white, for: UIControl.State())
-            purchaseButton.setTitle(TextConstants.cancel, for: UIControl.State())
-            purchaseButton.setTitleColor(ColorConstants.marineTwo, for: UIControl.State())
-            purchaseButton.layer.borderColor = ColorConstants.marineTwo.cgColor
-            purchaseButton.layer.borderWidth = 1
+            button.setBackgroundColor(.white, for: UIControl.State())
+            button.setTitle(TextConstants.cancel, for: UIControl.State())
+            button.setTitleColor(ColorConstants.marineTwo, for: UIControl.State())
+            button.layer.borderColor = ColorConstants.marineTwo.cgColor
+            button.layer.borderWidth = 1
             
         case .default:
             let isRecommended = plan.isRecommended
@@ -254,22 +287,22 @@ final class SubscriptionOfferView: UIView, NibInit {
             switch style {
             case .full:
                 color = AppColor.marineTwoAndTealish.color ?? ColorConstants.marineTwo
-                purchaseButton.setTitle(TextConstants.purchase, for: UIControl.State())
+                button.setTitle(TextConstants.purchase, for: UIControl.State())
             case .short:
                 let titleColor = plan.isRecommended ? ColorConstants.whiteColor : AppColor.marineTwoAndWhite.color
-                purchaseButton.setTitleColor(titleColor, for: UIControl.State())
+                button.setTitleColor(titleColor, for: UIControl.State())
                 let borderColor = isRecommended ? ColorConstants.marineTwo : ColorConstants.darkTintGray
-                purchaseButton.layer.borderColor = borderColor.cgColor
-                purchaseButton.layer.borderWidth = 2
+                button.layer.borderColor = borderColor.cgColor
+                button.layer.borderWidth = 2
                 color = isRecommended ? (AppColor.marineTwoAndTealish.color ?? ColorConstants.marineTwo) : .clear
-                purchaseButton.setTitle(TextConstants.upgrade, for: UIControl.State())
+                button.setTitle(TextConstants.upgrade, for: UIControl.State())
             }
-            purchaseButton.setBackgroundColor(color, for: UIControl().state)
+            button.setBackgroundColor(color, for: UIControl().state)
     
         case .free:
-            purchaseButton.isEnabled = false
-            purchaseButton.setTitle(nil, for: UIControl.State())
-            purchaseButton.setBackgroundColor(.clear, for: UIControl.State())
+            button.isEnabled = false
+            button.setTitle(nil, for: UIControl.State())
+            button.setBackgroundColor(.clear, for: UIControl.State())
         }
     }
     

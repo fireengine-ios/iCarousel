@@ -172,4 +172,9 @@ enum Strings: String, Localizable {
     case kvkkToggleText    = "kvkk_toggle_text"
     case kvkkFirmsLink     = "kvkk_firms_link"
     case kvkkHyperlinkText = "ETK_KVKK_Izin_Politikasi"
+
+    // MARK: - IAP Intro Offers
+    case iapIntroOfferFreeTrial  = "iap_intro_offer_free_trial"
+    case iapIntroOfferPayAsYouGo = "iap_intro_offer_pay_as_you_go"
+    case iapIntroOfferPayUpFront = "iap_intro_offer_pay_up_front"
 }
