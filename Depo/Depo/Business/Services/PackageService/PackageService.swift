@@ -51,12 +51,12 @@ final class PackageService {
             switch response {
             case .success(_):
                 self?.introOfferEligibilityStatusByProductId = [:]
-                self?.iapManager.refreshReceipt { [weak self] receiptData in
-                    guard #available(iOS 12.0, *) else {
-                        success()
-                        return
-                    }
+                guard #available(iOS 12.0, *) else {
+                    success()
+                    return
+                }
 
+                self?.iapManager.refreshReceipt { [weak self] receiptData in
                     self?.iapIntroEligibilityChecker.checkEligibility(
                         with: receiptData,
                         productIdentifiers: Set(appleOffers)
