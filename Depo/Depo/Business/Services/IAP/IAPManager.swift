@@ -110,12 +110,11 @@ final class IAPManager: NSObject {
     }
 
     var receiptData: Data? {
-        guard let receiptURL = Bundle.main.appStoreReceiptURL,
-              let data = try? Data(contentsOf: receiptURL) else {
+        guard let receiptURL = Bundle.main.appStoreReceiptURL else {
             return nil
         }
 
-        return data
+        return try? Data(contentsOf: receiptURL)
     }
 
     var receipt: String? {
