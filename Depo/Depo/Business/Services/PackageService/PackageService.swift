@@ -245,11 +245,7 @@ final class PackageService {
                 event = isTurkcellOffer ? .purchaseTurkcellPremium : .purchaseNonTurkcellPremium
                 
             } else if name.contains("500") {
-                if hasIntroductoryPrice(offer) {
-                    event = isTurkcellOffer ? .purchaseTurkcell500Advertising : .purchaseNonTurkcell500Advertising
-                } else {
-                    event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
-                }
+                event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
             } else if name.contains("100") {
                 event = isTurkcellOffer ? .purchaseTurkcell100 : .purchaseNonTurkcell100
                 
@@ -268,6 +264,8 @@ final class PackageService {
             } else if name.contains("2.5") || name.contains("2,5") {
                 event = isTurkcellOffer ? .purchaseTurkcell2500 : .purchaseNonTurkcell2500
                 
+            } else if name.contains("digital advertising package") {
+                event = isTurkcellOffer ? .purchaseTurkcell500Advertising : .purchaseNonTurkcell500Advertising
             }
         }
         return event

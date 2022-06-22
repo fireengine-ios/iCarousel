@@ -68,12 +68,6 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             descriptionText = NSMutableAttributedString(string: TextConstants.etkPermissionDescription,
                                                         attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
                                                                      .foregroundColor: ColorConstants.lightText])
-            
-            let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
-            descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
-
-            let rangeLink2 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
-            descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
         case .globalPermission:
             title = TextConstants.globalPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.globalPermissionDescriptionLabel,
