@@ -47,6 +47,8 @@ final class SpotifySortingManager {
 }
 
 extension SpotifySortingManager: GridListTopBarDelegate {
+    func onMoreButton() {}
+    
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) { }
     
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {

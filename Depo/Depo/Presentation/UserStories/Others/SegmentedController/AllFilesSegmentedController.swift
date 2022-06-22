@@ -23,7 +23,7 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
     //MARK: -Properties
     private var segmentConfigured = false
     private var selectedSharedItemsSegment = 0
-    private var selectedCellIndexPath: IndexPath? {
+    private var selectedCellIndexPath: [IndexPath] = [] {
         didSet {
             collectionView.reloadData()
         }
@@ -77,6 +77,11 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
                 segmentConfigured = true
             }
             
+            if !(index == AllFilesType.allCases.firstIndex(of: .sharedWithMe)) && !(index == AllFilesType.allCases.firstIndex(of: .sharedByMe)) {
+                selectedSharedItemsSegment = 0
+                sharedSegmentsView.reset()
+            }
+            
             selectedIndex = index
             sharedSegmentsView.isHidden = (index != AllFilesType.allCases.firstIndex(of: .sharedWithMe)) && (index != AllFilesType.allCases.firstIndex(of: .sharedByMe))
             children.forEach { $0.removeFromParentVC() }
@@ -96,7 +101,7 @@ extension AllFilesSegmentedController: UICollectionViewDataSource {
                                                          for: indexPath) as? AllFilesTypeCollectionViewCell {
             let types = AllFilesType.getSegments()
             cell.configure(with: types[indexPath.row])
-            cell.setSelection(with: types[indexPath.row], isSelected: indexPath == selectedCellIndexPath)
+            cell.setSelection(with: types[indexPath.row], isSelected: selectedCellIndexPath.contains(indexPath))
             return cell
         }
         return UICollectionViewCell()
@@ -106,18 +111,38 @@ extension AllFilesSegmentedController: UICollectionViewDataSource {
 //MARK: -UICollectionViewDelegate
 extension AllFilesSegmentedController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        ///LB-1430
         let cell = collectionView.cellForItem(at: indexPath) as? AllFilesTypeCollectionViewCell
-        if indexPath == selectedCellIndexPath {
-            selectedCellIndexPath = nil
-            if let index = AllFilesType.allCases.firstIndex(of: .allFiles) {
-                switchAllFilesCategory(to: index)
-                selectedSharedItemsSegment = 0
-                sharedSegmentsView.reset()
-            }
-        } else {
+        if selectedCellIndexPath.isEmpty {
             cell?.setSelection(with: AllFilesType.allCases[indexPath.row], isSelected: true)
-            selectedCellIndexPath = indexPath
+            selectedCellIndexPath = [indexPath]
             switchAllFilesCategory(to: indexPath.row)
+        } else if selectedCellIndexPath.contains(indexPath) {
+            if selectedCellIndexPath.count == 1 {
+                selectedCellIndexPath = []
+                if let index = AllFilesType.allCases.firstIndex(of: .allFiles) {
+                    switchAllFilesCategory(to: index)
+                    sharedSegmentsView.reset()
+                }
+            } else {
+                selectedCellIndexPath.remove(indexPath)
+                if let indexPath = selectedCellIndexPath.first {
+                    switchAllFilesCategory(to: indexPath.row)
+                }
+            }
+        } else if !selectedCellIndexPath.contains(indexPath) {
+            if indexPath.row == AllFilesType.allCases.firstIndex(of: .favorites) ||
+                indexPath.row == AllFilesType.allCases.firstIndex(of: .sharedWithMe) ||
+                selectedCellIndexPath.contains(where: {$0.row == AllFilesType.allCases.firstIndex(of: .favorites)}) ||
+                selectedCellIndexPath.contains(where: {$0.row == AllFilesType.allCases.firstIndex(of: .sharedWithMe)}) {
+                selectedCellIndexPath = [indexPath]
+                switchAllFilesCategory(to: indexPath.row)
+            } else {
+                selectedCellIndexPath.append(indexPath)
+                if let index = AllFilesType.allCases.firstIndex(of: .documentsAndMusic) {
+                    switchAllFilesCategory(to: index)
+                }
+            }
         }
     }
 }

@@ -54,6 +54,8 @@ final class TrashBinSortingManager {
 }
 
 extension TrashBinSortingManager: GridListTopBarDelegate {
+    func onMoreButton() { }
+    
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) { }
     
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {

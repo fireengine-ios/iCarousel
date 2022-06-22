@@ -97,4 +97,6 @@ protocol MoreFilesActionsInteractorInput {
     func moveToTrashShared(items: [BaseDataSourceItem])
     
     func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
+    
+    func handleShareAction(type: ElementTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
 }

@@ -297,7 +297,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                      .endSharing,
                      .leaveSharing,
                      .moveToTrashShared,
-                     .makePersonThumbnail:
+                     .makePersonThumbnail,
+                     .shareOriginal,
+                     .shareLink,
+                     .sharePrivate:
 
                     //
                     action = AlertFilesAction(title: type.actionTitle()) { [weak self] in
@@ -359,10 +362,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
     }
 
     private func presentAlertSheet(with actions: [AlertFilesAction], presentedBy sender: Any?, onSourceView sourceView: UIView? = nil, viewController: UIViewController? = nil) {
-
-        let actionsViewController = AlertFilesActionsViewController()
-        actionsViewController.configure(with: actions)
-        actionsViewController.presentAsDrawer()
+        if !actions.isEmpty {
+            let actionsViewController = AlertFilesActionsViewController()
+            actionsViewController.configure(with: actions)
+            actionsViewController.presentAsDrawer()
+        }
     }
     
     private func getSourceRect(sender: Any?, controller: ViewController?) -> CGRect {
@@ -598,6 +602,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                 UIApplication.showErrorAlert(message: text)
             }
+        case .shareOriginal:
+            interactor.handleShareAction(type: .shareOriginal, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
+        case .shareLink:
+            interactor.handleShareAction(type: .shareLink, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
+        case .sharePrivate:
+            interactor.handleShareAction(type: .sharePrivate, sourceRect: self.getSourceRect(sender: sender, controller: nil), items: items)
             
         default:
             break

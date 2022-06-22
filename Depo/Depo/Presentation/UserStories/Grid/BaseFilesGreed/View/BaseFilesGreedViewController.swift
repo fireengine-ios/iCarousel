@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput, GridListTopBarDelegate, CardsContainerViewDelegate {
+class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput, CardsContainerViewDelegate {
 
     var output: BaseFilesGreedViewOutput!
     
@@ -20,7 +20,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var backAsCancelBarButton: UIBarButtonItem?
     
-    var editingTabBar: BottomSelectionTabBarViewController?
+    var editingTabBar: BottomSelectionTabBarDrawerViewController?
     
     var isFavorites: Bool = false
     
@@ -493,22 +493,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         floatingHeaderContainerHeightConstraint.constant = underNavBarBarHeight
         calculatedUnderNavBarBarHeight = underNavBarBarHeight
     }
-    
-    
-    // MARK: - TopBar/UnderNavBarBar
-    
-    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
-         output.filtersTopBar(cahngedTo: [filter])
-    }
-    
-    func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
-        output.sortedPushedTopBar(with: rule)
-    }
-    
-    func representationChanged(viewType: MoreActionsConfig.ViewType) {
-        let asGrid = viewType == .Grid ? true : false
-        output.viewAppearanceChangedTopBar(asGrid: asGrid)
-    }
 }
 
 // MARK: - ScrollViewIndicator
@@ -538,6 +522,7 @@ extension BaseFilesGreedViewController {
     }
 }
 
+// MARK: - PrivateShareSliderFilesCollectionManagerDelegate
 extension BaseFilesGreedViewController: PrivateShareSliderFilesCollectionManagerDelegate {
     func showAll() {
         output.openPrivateShareFiles()
@@ -553,5 +538,25 @@ extension BaseFilesGreedViewController: PrivateShareSliderFilesCollectionManager
     
     func completeAsyncOperation() {
         hideSpinner()
+    }
+}
+
+// MARK: - GridListTopBarDelegate
+extension BaseFilesGreedViewController: GridListTopBarDelegate {
+    func onMoreButton() {
+        output.moreActionsPressed(sender: self)
+    }
+    
+    func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
+         output.filtersTopBar(cahngedTo: [filter])
+    }
+    
+    func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
+        output.sortedPushedTopBar(with: rule)
+    }
+    
+    func representationChanged(viewType: MoreActionsConfig.ViewType) {
+        let asGrid = viewType == .Grid ? true : false
+        output.viewAppearanceChangedTopBar(asGrid: asGrid)
     }
 }

@@ -254,6 +254,12 @@ class MusicService: RemoteItemsService {
     }
 }
 
+class DocumentsAndMusicService: RemoteItemsService {
+    init(requestSize: Int) {
+        super.init(requestSize: requestSize, fieldValue: .documentsAndMusic)
+    }
+}
+
 
 class PhotoAndVideoService: RemoteItemsService {
     

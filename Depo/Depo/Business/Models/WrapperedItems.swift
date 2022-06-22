@@ -121,6 +121,7 @@ enum FileType: Hashable, Equatable {
     case faceImage(FaceImageType)
     case faceImageAlbum(FaceImageType)
     case imageAndVideo
+    case documentsAndMusic
 
     
     var convertedToSearchFieldValue: FieldValue {
@@ -146,6 +147,8 @@ enum FileType: Hashable, Equatable {
             return .document //FIXME: temporary documents
         case .imageAndVideo:
             return .imageAndVideo
+        case .documentsAndMusic:
+            return .documentsAndMusic
         default:
             return .all
         }

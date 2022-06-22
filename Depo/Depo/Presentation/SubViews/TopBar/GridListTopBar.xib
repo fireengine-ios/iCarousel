@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="centerYConstraint" destination="ZD4-gp-yMM" id="ae1-Xx-5QO"/>
                 <outlet property="gridListButton" destination="pnm-iL-2WL" id="X7K-lb-zIZ"/>
+                <outlet property="moreButton" destination="2hB-ca-1KW" id="K7E-al-5mO"/>
                 <outlet property="segmentFilter" destination="wal-TA-Zbe" id="hOT-Cp-UMb"/>
                 <outlet property="sortByButton" destination="R7m-go-R4c" id="FSg-j0-lRy"/>
                 <outlet property="view" destination="iN0-l3-epB" id="SLP-fb-T29"/>
@@ -77,6 +78,9 @@
                             </constraints>
                             <state key="normal" image="iconKebabBorder"/>
                             <state key="selected" image="iconViewList"/>
+                            <connections>
+                                <action selector="onMoreButton:" destination="-1" eventType="touchUpInside" id="5yD-zf-Fyh"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

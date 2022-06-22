@@ -12,9 +12,12 @@ final class PrivateShareSharedFilesBottomBarManager {
     
     private let barConfig = EditingBarConfig(
         elementsConfig:  [.share, .move, .moveToTrash],
-        style: .blackOpaque, tintColor: nil)
+        style: .default,
+        tintColor: AppColor.tint.color,
+        unselectedItemTintColor: AppColor.label.color,
+        barTintColor: AppColor.background.color)
     
-    private var editingTabBar: BottomSelectionTabBarViewController?
+    private var editingTabBar: BottomSelectionTabBarDrawerViewController?
     private let bottomBarPresenter = BottomSelectionTabBarPresenter()
     
     private weak var delegate: BaseItemInputPassingProtocol!
@@ -26,7 +29,7 @@ final class PrivateShareSharedFilesBottomBarManager {
     func setup() {
         let bottomBarVCmodule = BottomSelectionTabBarModuleInitializer()
         bottomBarPresenter.basePassingPresenter = delegate
-        let botvarBarVC = bottomBarVCmodule.setupModule(config: barConfig, settablePresenter: bottomBarPresenter)
+        let botvarBarVC = bottomBarVCmodule.setupDrawerVariantModule(config: barConfig, settablePresenter: bottomBarPresenter)
         self.editingTabBar = botvarBarVC
     }
     
