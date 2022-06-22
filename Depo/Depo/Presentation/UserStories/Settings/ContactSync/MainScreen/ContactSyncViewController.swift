@@ -28,8 +28,9 @@ extension ContactSyncControllerProtocol {
     var selectedBackupForRestore: ContactBackupItem? { nil }
 }
 
-final class ContactSyncViewController: BaseViewController, NibInit, HeaderContainingViewControllerChild {
+final class ContactSyncViewController: BaseViewController, NibInit {
     
+    @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var contentView: UIView!
     
     private var tabBarIsVisible = false
@@ -75,6 +76,9 @@ final class ContactSyncViewController: BaseViewController, NibInit, HeaderContai
         if tabBarIsVisible {
             needToShowTabBar = true
         }
+
+        setDefaultNavigationHeaderActions()
+        headerContainingViewController?.isHeaderBehindContent = false
 
         NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
             self?.updateBackupStatus()
@@ -135,6 +139,13 @@ final class ContactSyncViewController: BaseViewController, NibInit, HeaderContai
 }
 
 //MARK:- protocols extensions
+
+extension ContactSyncViewController: HeaderContainingViewControllerChild {
+    var scrollViewForHeaderTracking: UIScrollView? {
+        return scrollView
+    }
+}
+
 
 extension ContactSyncViewController: ContactSyncAnalyzeProgressViewDelegate {
     func cancelAnalyze() {

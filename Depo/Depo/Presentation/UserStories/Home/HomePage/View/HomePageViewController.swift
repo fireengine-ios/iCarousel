@@ -52,14 +52,7 @@ final class HomePageViewController: BaseViewController {
         
         showSpinner()
 
-        headerContainingViewController?.setHeaderLeftItems([
-            NavigationHeaderButton(type: .settings, target: self, action: #selector(showSettings))
-        ])
-
-        headerContainingViewController?.setHeaderRightItems([
-            NavigationHeaderButton(type: .search, target: self, action: #selector(showSearch)),
-            NavigationHeaderButton(type: .plus)
-        ])
+        setDefaultNavigationHeaderActions()
 
         output.viewIsReady()
     }
@@ -160,15 +153,6 @@ final class HomePageViewController: BaseViewController {
         if let spotlight = presentedViewController as? SpotlightViewController {
             spotlight.dismiss(animated: true, completion: nil)
         }
-    }
-
-    @objc private func showSettings() {
-        output.showSettings()
-    }
-
-    @objc private func showSearch() {
-        updateNavigationItemsState(state: false)
-        output.showSearch(output: self)
     }
 }
 

@@ -47,18 +47,18 @@ enum FloatingButtonsType {
     var image: UIImage? {
         switch self {
         case .takePhoto:
-            return UIImage(named: "TakeFhoto")
+            return Image.iconCamera.image
         case .upload,
              .uploadFiles,
              .uploadDocuments,
              .uploadMusic,
              .uploadFromLifebox,
              .uploadFromLifeboxFavorites:
-            return UIImage(named: "Upload")
+            return Image.iconFileUpload.image
         case .createAStory:
-            return UIImage(named: "CreateAStory")
+            return Image.iconStory.image
         case .newFolder, .createAlbum:
-            return UIImage(named: "NewFolder")
+            return Image.iconFolderCreate.image
         case .importFromSpotify:
             return UIImage(named: "ImportFromSpotify")
         }

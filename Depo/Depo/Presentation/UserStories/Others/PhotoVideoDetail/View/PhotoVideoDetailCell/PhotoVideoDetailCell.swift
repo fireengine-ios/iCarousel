@@ -25,7 +25,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     @IBOutlet private weak var playVideoButton: UIButton!
     @IBOutlet private weak var placeholderImageView: UIImageView!
 
-    lazy var recognizeTextButton = RecognizeTextButton()
+    let recognizeTextButton = RecognizeTextButton()
     private var recognizeTextButtonBottomConstraint: NSLayoutConstraint?
     
     private lazy var webView = WKWebView(frame: .zero)
@@ -126,7 +126,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     }
 
     private func setupRecognizeTextButton() {
-        addSubview(recognizeTextButton)
+        contentView.addSubview(recognizeTextButton)
         recognizeTextButton.translatesAutoresizingMaskIntoConstraints = false
         recognizeTextButtonBottomConstraint = recognizeTextButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         NSLayoutConstraint.activate([
