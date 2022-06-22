@@ -21,13 +21,11 @@ final class IAPManager: NSObject {
     
     typealias OfferAppleHandler = ResponseBool
     typealias PurchaseHandler = (_ isSuccess: PurchaseResult) -> Void
-    typealias RefreshReceiptHandler = (Data) -> Void
-    
+
     private var restorePurchasesCallback: RestoreHandler?
     private var offerAppleHandler: OfferAppleHandler = {_ in }
     private var purchaseHandler: PurchaseHandler = {_ in }
-    private var refreshReceiptHandler: RefreshReceiptHandler?
-    
+
     private var pendingRequests = [SKRequest]()
     
     private var restoreInProgress = false
@@ -96,19 +94,6 @@ final class IAPManager: NSObject {
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
 
-    func refreshReceipt(completion: @escaping RefreshReceiptHandler) {
-        debugLog("IAPManager refreshReceipt")
-
-        self.refreshReceiptHandler = completion
-
-        let request = SKReceiptRefreshRequest()
-        request.delegate = self
-
-        pendingRequests.append(request)
-
-        request.start()
-    }
-
     var receiptData: Data? {
         guard let receiptURL = Bundle.main.appStoreReceiptURL else {
             return nil
@@ -162,12 +147,6 @@ extension IAPManager: SKProductsRequestDelegate {
 
         request.delegate = nil
         pendingRequests.remove(request)
-
-        if request is SKReceiptRefreshRequest {
-            debugLog("IAPManager receipt refresh finished (receipt exists: \(receiptData != nil))")
-            refreshReceiptHandler?(receiptData ?? Data())
-            refreshReceiptHandler = nil
-        }
     }
 }
 

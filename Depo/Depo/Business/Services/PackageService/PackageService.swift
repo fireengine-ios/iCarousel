@@ -56,14 +56,17 @@ final class PackageService {
                     return
                 }
 
-                self?.iapManager.refreshReceipt { [weak self] receiptData in
-                    self?.iapIntroEligibilityChecker.checkEligibility(
-                        with: receiptData,
-                        productIdentifiers: Set(appleOffers)
-                    ) { [weak self] eligibilityStatusDict, _ in
-                        self?.introOfferEligibilityStatusByProductId = eligibilityStatusDict
-                        success()
-                    }
+                guard let receiptData = self?.iapManager.receiptData else {
+                    success()
+                    return
+                }
+
+                self?.iapIntroEligibilityChecker.checkEligibility(
+                    with: receiptData,
+                    productIdentifiers: Set(appleOffers)
+                ) { [weak self] eligibilityStatusDict, _ in
+                    self?.introOfferEligibilityStatusByProductId = eligibilityStatusDict
+                    success()
                 }
 
             case .failed(let error):
