@@ -107,7 +107,7 @@ enum AnalyticsEvent {
             case .purchaseTurkcell500: return "wdqlvk"
             case .purchaseTurkcell2500: return "7bf7gu"
             case .purchaseTurkcellPremium: return "qexub9"
-            case .purchaseTurkcell250Freemium: return "a3sgsao"
+            case .purchaseTurkcell250Freemium: return "4jqolr"
             case .purchaseTurkcell500Advertising: return "74kbth"
                 
             case .purchaseNonTurkcell50: return "q3ivog"
@@ -117,7 +117,7 @@ enum AnalyticsEvent {
             case .purchaseNonTurkcell500: return "x6zaly"
             case .purchaseNonTurkcell2500: return "zab8u6"
             case .purchaseNonTurkcellPremium: return "9pyt2d"
-            case .purchaseNonTurkcell250Freemium: return "a3sgsao"
+            case .purchaseNonTurkcell250Freemium: return "4jqolr"
             case .purchaseNonTurkcell500Advertising: return "74kbth"
                 
             case .importDropbox: return "tdvlrq"
