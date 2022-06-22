@@ -82,4 +82,9 @@ enum Image: String, AppImage {
     case iconProfileCircle
     case iconAddUnselect
     case iconArrowDownSmall
+
+    ///  Popup
+    case popupIconError
+    case popupIconDelete
+    case popupIconQuestion
 }

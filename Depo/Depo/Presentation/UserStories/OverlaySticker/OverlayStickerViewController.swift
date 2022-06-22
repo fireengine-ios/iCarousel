@@ -233,7 +233,7 @@ final class OverlayStickerViewController: UIViewController {
                                                 confirmation()
                                             }
                                          })
-        router.presentViewController(controller: popup)
+        popup.presentAsDrawer()
     }
 }
 

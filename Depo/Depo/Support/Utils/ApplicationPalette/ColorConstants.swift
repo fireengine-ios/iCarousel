@@ -56,6 +56,11 @@ enum AppColor {
     case drawerShadow
     case drawerIndicator
 
+    // MARK: PopUp
+    case popUpTitle
+    case popUpMessage
+    case popUpTitleError
+
     case primaryBackground
     case cellShadow
     case itemSeperator

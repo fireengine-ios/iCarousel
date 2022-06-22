@@ -12,22 +12,43 @@ import UIKit
 ///Base controller for pop ups. Need for animation
 ///
 class BasePopUpController: UIViewController {
-    
-    //MARK: Properties
+
+    var dismissCompletion: VoidHandler?
+
+    func open() {
+        presentAsDrawer { drawer in
+            drawer.showsDrawerIndicator = false
+            drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
+        }
+    }
+
+    ///isFinalStep is used for dismissCompletion performing
+    ///set isFinalStep as false to skip dismissCompletion performing
+    func close(isFinalStep: Bool = true, completion: VoidHandler? = nil) {
+        dismiss(animated: true) { [weak self] in
+            completion?()
+
+            guard isFinalStep else {
+                return
+            }
+
+            self?.dismissCompletion?()
+        }
+    }
+
+
+    // TODO: Facelift, Remove all below code once all popups are re-designed for facelift.
+
     weak var contentView: UIView?
     private var isNeedToShow = true
-    
-    var dismissCompletion: VoidHandler?
-    
-    //MARK: Life cycle
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        open()
+        openLegacy()
     }
     
-    //MARK: Utility Methods(private)
-    private func open() {
+    private func openLegacy() {
         guard isNeedToShow else {
             return
         }
@@ -41,28 +62,5 @@ class BasePopUpController: UIViewController {
             self.view.alpha = 1
             self.contentView?.transform = .identity
         }
-    }
-    
-    //MARK: Utility Methods(public)
-
-    ///isFinalStep is used for dismissCompletion performing
-    ///set isFinalStep as false to skip dismissCompletion performing
-    func close(isFinalStep: Bool = true, completion: VoidHandler? = nil) {
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.view.alpha = 0
-            self.contentView?.transform = NumericConstants.scaleTransform
-            
-        }, completion: { _ in
-            self.dismiss(animated: false) { [weak self] in
-                completion?()
-                
-                guard isFinalStep else {
-                    return
-                }
-                
-                self?.dismissCompletion?()
-            }
-            
-        })
     }
 }

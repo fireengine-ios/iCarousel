@@ -20,46 +20,26 @@ typealias PopUpButtonHandler = (_: PopUpController) -> Void
 final class PopUpController: BasePopUpController {
     
     //MARK: IBOutlet
-    @IBOutlet private weak var containerView: UIView! {
-        didSet {
-            containerView.layer.cornerRadius = 5
-            
-            containerView.layer.shadowColor = UIColor.black.cgColor
-            containerView.layer.shadowRadius = 10
-            containerView.layer.shadowOpacity = 0.5
-            containerView.layer.shadowOffset = .zero
-        }
-    }
-    
-    @IBOutlet private weak var buttonsView: UIView! {
-        didSet {
-            buttonsView.layer.cornerRadius = 5
-            buttonsView.layer.masksToBounds = true
-        }
-    }
-    
+
+    @IBOutlet weak var firstImageView: UIImageView!
+    @IBOutlet weak var secondIconImageView: UIImageView!
+
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
-            titleLabel.textColor = AppColor.marineTwoAndWhite.color
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 20)
+            titleLabel.font = UIFont.appFont(.medium, size: 20)
         }
     }
     
     @IBOutlet private weak var messageLabel: UILabel! {
         didSet {
-            messageLabel.textColor = AppColor.popupGray.color
-            messageLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+            messageLabel.textColor = AppColor.popUpMessage.color
+            messageLabel.font = UIFont.appFont(.regular, size: 16)
         }
     }
     
     @IBOutlet private weak var firstButton: InsetsButton!
     @IBOutlet private weak var secondButton: InsetsButton!
-    @IBOutlet private weak var singleButton: InsetsButton!
-    
-    @IBOutlet private weak var darkView: UIView!
-    @IBOutlet weak var firstImageView: UIImageView!
-    @IBOutlet weak var secondIconImageView: UIImageView!
-    
+
     @IBOutlet weak var noneImageConstraint: NSLayoutConstraint!
     
     //MARK: Properties
@@ -72,20 +52,16 @@ final class PopUpController: BasePopUpController {
     
     private var firstButtonTitle = ""
     private var secondButtonTitle = ""
-    private var singleButtonTitle = ""
-    
+
     private var firstUrl: URL?
     private var secondUrl: URL?
     
     lazy var firstAction: PopUpButtonHandler = { vc in
         vc.hideSpinnerIncludeNavigationBar()
-        vc.close()
+        vc.dismiss(animated: true)
     }
     lazy var secondAction: PopUpButtonHandler = { vc in
-        vc.close()
-    }
-    lazy var singleAction: PopUpButtonHandler = { vc in
-        vc.close()
+        vc.dismiss(animated: true)
     }
     
     //MARK: Life cycle
@@ -99,13 +75,11 @@ final class PopUpController: BasePopUpController {
     private func setupView() {
         setupButtonState()
         setupPopUpImage()
-        
-        contentView = containerView
-        
+        setupTitleColor()
+
         titleLabel.text = alertTitle
         if let attributedMessage = attributedAlertMessage {
             messageLabel.attributedText = attributedMessage
-            
         } else {
             messageLabel.text = alertMessage
         }
@@ -114,13 +88,12 @@ final class PopUpController: BasePopUpController {
     private func setupButtonState() {
         switch buttonState {
         case .single:
-            setup(singleButton)
-            singleButton.setTitle(singleButtonTitle, for: .normal)
+            setup(firstButton)
+            firstButton.setTitle(firstButtonTitle, for: .normal)
             
-            firstButton.isHidden = true
+            firstButton.isHidden = false
             secondButton.isHidden = true
-            singleButton.isHidden = false
-            
+
         case .twin:
             setup(firstButton)
             setup(secondButton)
@@ -129,7 +102,6 @@ final class PopUpController: BasePopUpController {
             
             firstButton.isHidden = false
             secondButton.isHidden = false
-            singleButton.isHidden = true
         }
     }
     
@@ -149,6 +121,15 @@ final class PopUpController: BasePopUpController {
         if let url = secondUrl {
             secondIconImageView.sd_setImage(with: url, placeholderImage: UIImage())
             secondIconImageView.isHidden = false
+        }
+    }
+
+    private func setupTitleColor() {
+        switch popUpImage {
+        case .error:
+            titleLabel.textColor = AppColor.popUpTitleError.color
+        default:
+            titleLabel.textColor = AppColor.popUpTitle.color
         }
     }
     
@@ -174,10 +155,6 @@ final class PopUpController: BasePopUpController {
     @IBAction func actionSecondButton(_ sender: UIButton) {
         secondAction(self)
     }
-    
-    @IBAction func actionSingleButton(_ sender: UIButton) {
-        singleAction(self)
-    }
 }
 
 // MARK: - Init
@@ -192,9 +169,9 @@ extension PopUpController {
         vc.buttonState = .single
         
         if let action = action {
-            vc.singleAction = action
+            vc.firstAction = action
         }
-        vc.singleButtonTitle = buttonTitle
+        vc.firstButtonTitle = buttonTitle
         
         return vc
     }
@@ -205,10 +182,10 @@ extension PopUpController {
         vc.buttonState = .single
         
         if let action = action {
-            vc.singleAction = action
+            vc.firstAction = action
         }
-        vc.singleButtonTitle = buttonTitle
-        
+        vc.firstButtonTitle = buttonTitle
+
         return vc
     }
     
