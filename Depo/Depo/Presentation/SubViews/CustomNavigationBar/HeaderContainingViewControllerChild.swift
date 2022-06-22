@@ -16,7 +16,7 @@ extension HeaderContainingViewControllerChild {
     var scrollViewForHeaderTracking: UIScrollView? { nil }
 }
 
-extension HeaderContainingViewControllerChild where Self: UIViewController {
+extension UIViewController {
     var headerContainingViewController: HeaderContainingViewController? {
         var parent = self.parent
         while parent != nil {

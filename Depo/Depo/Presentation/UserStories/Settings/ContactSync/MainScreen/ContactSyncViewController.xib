@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactSyncViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="bUm-qI-rby" id="l97-WT-Uk5"/>
+                <outlet property="scrollView" destination="LCy-LB-VO5" id="uk7-de-pXj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

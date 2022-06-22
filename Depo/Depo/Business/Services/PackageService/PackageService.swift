@@ -127,6 +127,13 @@ final class PackageService {
             return false
         }
         
+        func hasIntroductoryPrice(_ offer: Any) -> Bool {
+            if let offer = offer as? SKProduct, #available(iOS 11.2, *) {
+                return offer.introductoryPrice != nil
+            }
+            return false
+        }
+        
         var event: AnalyticsEvent?
         
         let isTurkcellOffer = offer is PackageModelResponse
@@ -135,14 +142,19 @@ final class PackageService {
                 event = isTurkcellOffer ? .purchaseTurkcellPremium : .purchaseNonTurkcellPremium
                 
             } else if name.contains("500") {
-                event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
-                
+                if hasIntroductoryPrice(offer) {
+                    event = isTurkcellOffer ? .purchaseTurkcell500Advertising : .purchaseNonTurkcell500Advertising
+                } else {
+                    event = isTurkcellOffer ? .purchaseTurkcell500 : .purchaseNonTurkcell500
+                }
             } else if name.contains("100") {
                 event = isTurkcellOffer ? .purchaseTurkcell100 : .purchaseNonTurkcell100
                 
             } else if name.contains("250") {
                 if isSixMonthOffer(offer) {
                     event = isTurkcellOffer ? .purchaseTurkcell250_SixMonth : .purchaseNonTurkcell250_SixMonth
+                } else if hasIntroductoryPrice(offer) {
+                    event = isTurkcellOffer ? .purchaseTurkcell250Freemium : .purchaseNonTurkcell250Freemium
                 } else {
                     event = isTurkcellOffer ? .purchaseTurkcell250 : .purchaseNonTurkcell250
                 }

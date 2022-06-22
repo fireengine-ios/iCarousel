@@ -41,6 +41,8 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
         navigationBarHidden = true
         setCollectionView()
         setSegmentedControl()
+
+        setDefaultNavigationHeaderActions()
     }
     
     override static func initWithControllers(_ controllers: [UIViewController], alignment: Alignment) -> AllFilesSegmentedController {
