@@ -140,7 +140,7 @@ final class PackageService {
             // Make sure the user is eligible for buying an intro offer for this product
             shouldDisplayIntroPrice = introOfferEligibilityStatusByProductId[product.productIdentifier] == .eligible
         } else {
-            // Make sure the user has a purchase that
+            // Make sure the user has a product that was purchased with an intro price
             shouldDisplayIntroPrice = (try? receiptHasActiveSubscriptionPurchasedWithIntroPrice(productId: productId)) ?? false
         }
 
