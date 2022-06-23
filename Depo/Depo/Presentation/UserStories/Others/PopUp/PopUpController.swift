@@ -37,8 +37,8 @@ final class PopUpController: BasePopUpController {
         }
     }
     
-    @IBOutlet private weak var firstButton: InsetsButton!
-    @IBOutlet private weak var secondButton: InsetsButton!
+    @IBOutlet private weak var firstButton: RoundedInsetsButton!
+    @IBOutlet private weak var secondButton: RoundedInsetsButton!
 
     @IBOutlet weak var noneImageConstraint: NSLayoutConstraint!
     
@@ -135,16 +135,22 @@ final class PopUpController: BasePopUpController {
     
     private func setup(_ button: InsetsButton) {
         button.isExclusiveTouch = true
-        button.setTitleColor(ColorConstants.blueColor, for: .normal)
-        button.setTitleColor(ColorConstants.blueColor.darker(by: 30), for: .highlighted)
-        button.setBackgroundColor(ColorConstants.blueColor, for: .highlighted)
-        button.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        button.layer.borderColor = AppColor.blueAndGray.color.cgColor
+        button.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
+        button.setBackgroundColor(AppColor.tint.color, for: .highlighted)
+        button.setTitleColor(AppColor.tint.color, for: .normal)
+        button.setTitleColor(AppColor.tint.color.darker(by: 30.0), for: .highlighted)
+        button.titleLabel?.font = UIFont.appFont(.medium, size: 18)
+        button.layer.borderColor = AppColor.tint.color.cgColor
         button.layer.borderWidth = 1
+
         button.adjustsFontSizeToFitWidth()
+        button.clipsToBounds = true
         
         let inset: CGFloat = 2
         button.insets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+        
+        button.layer.cornerRadius = button.frame.height / 2
+        
     }
     
     //MARK: IBAction
