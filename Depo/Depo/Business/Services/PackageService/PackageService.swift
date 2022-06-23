@@ -56,6 +56,12 @@ final class PackageService {
                     return
                 }
 
+                // No need to check eligibility for already purchased products
+                guard !isActivePurchases else {
+                    success()
+                    return
+                }
+
                 guard let receiptData = self?.iapManager.receiptData else {
                     success()
                     return
@@ -112,14 +118,14 @@ final class PackageService {
         return fullPrice
     }
 
-    func getIntroductoryPrice(for offer: Any) -> String? {
+    func getIntroductoryPrice(for offer: Any, isPurchasedOffer: Bool) -> String? {
         guard #available(iOS 11.2, *) else {
             return nil
         }
 
         // get SKProduct
-        guard let iapProductId = getAppleIds(for: [offer]).first,
-              let product = iapManager.product(for: iapProductId) else {
+        guard let productId = getAppleIds(for: [offer]).first,
+              let product = iapManager.product(for: productId) else {
             return nil
         }
 
@@ -128,12 +134,30 @@ final class PackageService {
             return nil
         }
 
-        // Make sure the user is eligible for buying an intro offer for this product
-        guard introOfferEligibilityStatusByProductId[product.productIdentifier] == .eligible else {
+        let shouldDisplayIntroPrice: Bool
+
+        if !isPurchasedOffer {
+            // Make sure the user is eligible for buying an intro offer for this product
+            shouldDisplayIntroPrice = introOfferEligibilityStatusByProductId[product.productIdentifier] == .eligible
+        } else {
+            // Make sure the user has a purchase that
+            shouldDisplayIntroPrice = (try? receiptHasActiveSubscriptionPurchasedWithIntroPrice(productId: productId)) ?? false
+        }
+
+        guard shouldDisplayIntroPrice else {
             return nil
         }
 
         return formattedIntroductoryOfferText(from: introductoryPrice, product: product)
+    }
+
+    private func receiptHasActiveSubscriptionPurchasedWithIntroPrice(productId: String) throws -> Bool {
+        let receipt = try ReceiptParser().parse(from: iapManager.receiptData ?? Data())
+        let inAppPurchases = receipt.inAppPurchases
+        return inAppPurchases.contains { purchase in
+            return purchase.productId == productId &&
+                   (purchase.isInIntroOfferPeriod == true || purchase.isInTrialPeriod == true)
+        }
     }
 
     @available(iOS 11.2, *)
@@ -190,22 +214,28 @@ final class PackageService {
         return numberFormatter.string(from: price) ?? ""
     }
 
-    func convertToSubscriptionPlan(offers: [Any], accountType: AccountType) -> [SubscriptionPlan] {
+    func convertToSubscriptionPlan(
+        offers: [Any],
+        accountType: AccountType,
+        isPurchasedOffers: Bool = false
+    ) -> [SubscriptionPlan] {
         return offers.map { offer in
-            return subscriptionPlanWith(name: getOfferName(offer: offer),
-                                        price: getOfferPrice(for: offer, accountType: accountType),
-                                        introductoryPrice: getIntroductoryPrice(for: offer),
-                                        type: getOfferType(for: offer),
-                                        model: offer,
-                                        quota: getOfferQuota(offer: offer),
-                                        amount: getOfferAmount(offer: offer),
-                                        isRecommended: getOfferRecommendationStatus(offer: offer),
-                                        features: getOfferAvailableFeatures(offer: offer),
-                                        addonType: .make(model: offer),
-                                        date: getOfferDate(for: offer),
-                                        store: getOfferStore(for: offer),
-                                        packageStatus: getPackageStatus(for: offer),
-                                        gracePeriodEndDate: getGracePeriodEndDate(for: offer))
+            subscriptionPlanWith(
+                name: getOfferName(offer: offer),
+                price: getOfferPrice(for: offer, accountType: accountType),
+                introductoryPrice: getIntroductoryPrice(for: offer, isPurchasedOffer: isPurchasedOffers),
+                type: getOfferType(for: offer),
+                model: offer,
+                quota: getOfferQuota(offer: offer),
+                amount: getOfferAmount(offer: offer),
+                isRecommended: getOfferRecommendationStatus(offer: offer),
+                features: getOfferAvailableFeatures(offer: offer),
+                addonType: .make(model: offer),
+                date: getOfferDate(for: offer),
+                store: getOfferStore(for: offer),
+                packageStatus: getPackageStatus(for: offer),
+                gracePeriodEndDate: getGracePeriodEndDate(for: offer)
+            )
         }
     }
     

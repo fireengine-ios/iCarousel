@@ -176,6 +176,10 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     
     //MARK: Converter
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan] {
-        return packageService.convertToSubscriptionPlan(offers:activeSubscriptionList, accountType:accountType)
+        return packageService.convertToSubscriptionPlan(
+            offers: activeSubscriptionList,
+            accountType: accountType,
+            isPurchasedOffers: true
+        )
     }
 }
