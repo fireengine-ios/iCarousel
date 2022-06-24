@@ -85,7 +85,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
 
-    @IBOutlet private weak var detailsStackView: UIStackView!
+    @IBOutlet private weak var detailsView: UIView!
     
     @IBOutlet private weak var paydayLabel: UILabel! {
         willSet {
@@ -161,7 +161,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         purchaseButton.isHidden = hasIntroPrice
         introductoryPurchaseButtonContainer.isHidden = !hasIntroPrice
         purchaseButtonWidthConstraint.constant = hasIntroPrice ? 0 : purchaseButtonWidth
-        detailsStackView.isHidden = needHidePurchaseInfo
+        detailsView.isHidden = needHidePurchaseInfo
         if let attributedText = makePackageFeature(plan: plan) {
             typeLabel.attributedText = attributedText
         } else {
@@ -309,7 +309,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     
     private func updateDetails(plan: SubscriptionPlan) {
         if plan.date.isEmpty, plan.store.isEmpty {
-            detailsStackView.isHidden = true
+            detailsView.isHidden = true
         } else {
             paydayLabel.text = plan.date
             offerStoreLabel.text = plan.store
@@ -337,7 +337,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
 
         gracePeriodStackView.isHidden = false
-        detailsStackView.isHidden = true
+        detailsView.isHidden = true
         featureView.isHidden = true
         recommendationLabel.isHidden = false
         purchaseButton.isHidden = true
