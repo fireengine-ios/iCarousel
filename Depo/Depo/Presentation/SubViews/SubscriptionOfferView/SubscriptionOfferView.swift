@@ -51,11 +51,11 @@ final class SubscriptionOfferView: UIView, NibInit {
             newValue.lineBreakMode = .byWordWrapping
         }
     }
-    
+
+    private let priceIntroFont = UIFont.TurkcellSaturaFont(size: 17)
     @IBOutlet private weak var priceLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
             newValue.textColor = AppColor.marineTwoAndWhite.color!
         }
     }
@@ -85,7 +85,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
 
-    @IBOutlet private weak var detailsStackView: UIStackView!
+    @IBOutlet private weak var detailsView: UIView!
     
     @IBOutlet private weak var paydayLabel: UILabel! {
         willSet {
@@ -153,6 +153,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         nameLabel.text = plan.name
         if hasIntroPrice {
             priceLabel.text = plan.introductoryPrice
+            priceLabel.font = priceIntroFont
             priceLabel.textAlignment = .center
         } else {
             priceLabel.attributedText = makePrice(plan.price)
@@ -160,7 +161,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         purchaseButton.isHidden = hasIntroPrice
         introductoryPurchaseButtonContainer.isHidden = !hasIntroPrice
         purchaseButtonWidthConstraint.constant = hasIntroPrice ? 0 : purchaseButtonWidth
-        detailsStackView.isHidden = needHidePurchaseInfo
+        detailsView.isHidden = needHidePurchaseInfo
         if let attributedText = makePackageFeature(plan: plan) {
             typeLabel.attributedText = attributedText
         } else {
@@ -308,7 +309,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     
     private func updateDetails(plan: SubscriptionPlan) {
         if plan.date.isEmpty, plan.store.isEmpty {
-            detailsStackView.isHidden = true
+            detailsView.isHidden = true
         } else {
             paydayLabel.text = plan.date
             offerStoreLabel.text = plan.store
@@ -336,7 +337,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
 
         gracePeriodStackView.isHidden = false
-        detailsStackView.isHidden = true
+        detailsView.isHidden = true
         featureView.isHidden = true
         recommendationLabel.isHidden = false
         purchaseButton.isHidden = true
