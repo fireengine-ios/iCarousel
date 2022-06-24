@@ -51,11 +51,11 @@ final class SubscriptionOfferView: UIView, NibInit {
             newValue.lineBreakMode = .byWordWrapping
         }
     }
-    
+
+    private let priceIntroFont = UIFont.TurkcellSaturaFont(size: 17)
     @IBOutlet private weak var priceLabel: UILabel! {
         willSet {
             newValue.numberOfLines = 0
-            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
             newValue.textColor = AppColor.marineTwoAndWhite.color!
         }
     }
@@ -153,6 +153,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         nameLabel.text = plan.name
         if hasIntroPrice {
             priceLabel.text = plan.introductoryPrice
+            priceLabel.font = priceIntroFont
             priceLabel.textAlignment = .center
         } else {
             priceLabel.attributedText = makePrice(plan.price)
