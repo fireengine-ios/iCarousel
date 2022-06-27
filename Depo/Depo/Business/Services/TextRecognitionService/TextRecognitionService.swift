@@ -13,10 +13,17 @@ final class TextRecognitionService {
     private let remoteService = RemoteTextRecognitionService()
 
     func process(fileUUID: String, image: UIImage,
-                 completion: @escaping (ImageTextSelectionData) -> Void,
+                 completion: @escaping (ImageTextSelectionData?) -> Void,
                  completionDispatchQueue: DispatchQueue = .main) {
         remoteService.process(fileUUID: fileUUID) { response in
             DispatchQueue.global(qos: .userInitiated).async {
+                guard let response = response else {
+                    completionDispatchQueue.async {
+                        completion(nil)
+                    }
+                    return
+                }
+
                 let result = self.processRemoteResponse(response, image: image)
                 completionDispatchQueue.async {
                     completion(result)
