@@ -42,16 +42,16 @@ final class DrawerAnimationController: NSObject, UIViewControllerAnimatedTransit
     }
 
     private func animatePresentation(transitionContext: UIViewControllerContextTransitioning) {
-        guard let toVC = transitionContext.viewController(forKey: .to) else {
+        guard let toVC = transitionContext.viewController(forKey: .to) as? DrawerViewController else {
             return
         }
 
         let drawerView: UIView = toVC.view
-
         drawerView.frame = transitionContext.finalFrame(for: toVC)
         drawerView.transform = .init(translationX: 0, y: drawerView.frame.height)
-
         transitionContext.containerView.addSubview(drawerView)
+
+        toVC.layoutDrawerContentViewBeforePresenting()
 
         UIView.animate(
             withDuration: Constants.duration,

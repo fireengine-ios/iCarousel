@@ -26,8 +26,7 @@ final class DrawerViewController: UIViewController {
     private let contentViewController: UIViewController
     var showsDrawerIndicator = true
     let drawerIndicatorView = UIView()
-    // TODO: Facelift, make content scrollable
-    let contentContainerView = UIView()
+    let contentContainerView = ResizableScrollView()
 
     var drawerPresentationController: DrawerPresentationController? {
         presentationController as? DrawerPresentationController
@@ -47,6 +46,16 @@ final class DrawerViewController: UIViewController {
         setupDrawerIndicator()
         setupContainerView()
         setupContentView()
+    }
+
+    func layoutDrawerContentViewBeforePresenting() {
+        guard let drawerPresentationController = drawerPresentationController else {
+            return
+        }
+
+        view.frame = drawerPresentationController.frameOfPresentedViewInContainerView
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
 
     private func setupDrawerIndicator() {
@@ -94,7 +103,8 @@ final class DrawerViewController: UIViewController {
             contentView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: contentContainerView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor)
+            contentView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: contentContainerView.widthAnchor)
         ])
 
         contentViewController.willMove(toParent: self)
