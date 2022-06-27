@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "iconLetterAZ.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
