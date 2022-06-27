@@ -161,6 +161,25 @@ class MoreActionsConfig {
             }
         }
         
+        var sortImage: Image {
+            switch self {
+            case .AlphaBetricAZ, .LettersAZ:
+                return Image.iconLetterAZ
+            case .AlphaBetricZA, .LettersZA:
+                return Image.iconLetterZA
+            case .TimeNewOld, .metaDataTimeNewOld, .lastModifiedTimeNewOld:
+                return Image.iconArrowNewest
+            case .TimeOldNew, .metaDataTimeOldNew, .lastModifiedTimeOldNew:
+                return Image.iconArrowOldest
+            case .Largest:
+                return Image.iconSizeLargest
+            case .Smallest:
+                return Image.iconSizeSmallest
+            default:
+                return Image.iconLetterAZ
+            }
+        }
+        
         var sortedRulesConveted: SortedRules {
             switch self {
             case .AlphaBetricAZ, .LettersAZ:

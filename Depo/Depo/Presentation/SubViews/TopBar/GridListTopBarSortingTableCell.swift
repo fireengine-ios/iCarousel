@@ -8,19 +8,21 @@
 
 class GridListTopBarSortingTableCell: UITableViewCell {
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var sortImage: UIImageView!
+    @IBOutlet private weak var approveImage: UIImageView! {
+        willSet {
+            newValue.image = Image.iconSelectCheck.image(withTintColor: .filesLabel, in: newValue)
+        }
+    }
     
-    @IBOutlet weak var approveImage: UIImageView!
-    
-    func setup(withText text: String, selected: Bool) {
-        
+    func setup(withText text: String, selected: Bool, icon: Image) {
         titleLabel.text = text
-        
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        titleLabel.textColor = ColorConstants.textGrayColor
-        
+        titleLabel.accessibilityLabel = text
+        titleLabel.font = .appFont(.medium, size: 16)
+        titleLabel.textColor = AppColor.filesLabel.color
+        sortImage.image = icon.image
         approveImage.isHidden = selected ? false : true
-        
     }
     
     func changeState(selected: Bool) {
