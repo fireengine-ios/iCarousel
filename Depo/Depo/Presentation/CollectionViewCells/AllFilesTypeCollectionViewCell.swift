@@ -86,12 +86,8 @@ class AllFilesTypeCollectionViewCell: UICollectionViewCell {
             newValue.addRoundedShadows(cornerRadius: 12,
                                        shadowColor: AppColor.filesBigCellShadow.cgColor,
                                        opacity: 0.6, radius: 6.0)
+            newValue.backgroundColor = AppColor.filesTypesBackground.color
         }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        backgroundColor = AppColor.filesBackground.color
     }
     
     func configure(with type: AllFilesType) {

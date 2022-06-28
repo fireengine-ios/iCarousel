@@ -17,6 +17,7 @@ final class AllFilesSegmentedController: SegmentedController, HeaderContainingVi
             newValue.showsHorizontalScrollIndicator = false
             newValue.register(UINib(nibName: CollectionViewCellsIdsConstant.cellForAllFilesType, bundle: nil),
                               forCellWithReuseIdentifier: CollectionViewCellsIdsConstant.cellForAllFilesType)
+            newValue.backgroundColor = AppColor.filesBackground.color
         }
     }
     

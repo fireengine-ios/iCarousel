@@ -3,6 +3,16 @@
     {
       "filename" : "iconViewList.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconViewList-1.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

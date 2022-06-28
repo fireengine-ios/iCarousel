@@ -3,6 +3,16 @@
     {
       "filename" : "iconArrowNewest.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconArrowNewest-2.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

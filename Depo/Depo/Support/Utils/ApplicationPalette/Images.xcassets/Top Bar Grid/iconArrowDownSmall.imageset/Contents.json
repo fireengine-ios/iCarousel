@@ -3,6 +3,16 @@
     {
       "filename" : "iconArrowDownSmall.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconArrowDownSmall-1.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

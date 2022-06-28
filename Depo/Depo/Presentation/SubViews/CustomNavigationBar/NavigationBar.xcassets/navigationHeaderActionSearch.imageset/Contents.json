@@ -3,6 +3,16 @@
     {
       "filename" : "navigationHeaderActionSearch.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconSearch.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
