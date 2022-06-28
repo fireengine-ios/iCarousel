@@ -29,6 +29,7 @@ apps = [
         xcodeSchema: isFriendlyBuild ? 'Lifebox_Bundle' : 'Lifebox',
         xcodeTarget: isFriendlyBuild ? 'Lifebox_Bundle' : 'Lifebox',
         itcTeamId: '121548574',
+        appleId: '1488914348'
     ]
 //  ,
 //      [
@@ -225,7 +226,7 @@ def deployToTestflight = { app ->
 
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-        source ~/.bash_profile; fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
+        source ~/.bash_profile; fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
     """
 }
 
@@ -415,11 +416,10 @@ pipeline {
                 skipDefaultCheckout true
             }
             environment {
-                IOS_PASS = credentials('iosLoginPass2')
+                IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight-test')
+                TESTFLIGHT_UPLOAD = credentials('testflight-generic')
                 FASTLANE_DONT_STORE_PASSWORD = 1
-                FASTLANE_SESSION = credentials('fastlane_session')
            }
             steps {
                 script {
