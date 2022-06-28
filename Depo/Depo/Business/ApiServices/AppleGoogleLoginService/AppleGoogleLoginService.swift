@@ -9,17 +9,20 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import AuthenticationServices
 
-enum GoogeLoginMessageError: String, CaseIterable {
-    case invalidToken     = "INVALID_TOKEN"
-    case emailFieldEmpty  = "EMAIL_FIELD_IS_EMPTY"
-    case emailIsNotMatch  = "EMAIL_IS_NOT_MATCH"
-    case passwordRequired = "PASSWORD_REQUIRED"
-    case unknown          = ""
+enum AppleGoogeLoginError: String, CaseIterable {
+    case invalidToken          = "INVALID_TOKEN"
+    case emailFieldEmpty       = "EMAIL_FIELD_IS_EMPTY"
+    case emailIsNotMatch       = "EMAIL_IS_NOT_MATCH"
+    case passwordRequired      = "PASSWORD_REQUIRED"
+    case emailDomainNotAllowed = "EMAIL_DOMAIN_IS_NOT_ALLOWED"
+    case appleInvalidToken     = "APPLE_TOKEN_IS_INVALID"
+    case unknown               = ""
     
     var errorMessage: String? {
         switch self {
-        case .invalidToken:
+        case .invalidToken, .appleInvalidToken:
             return localized(.settingsGoogleAppleInvalidToken)
         case .emailFieldEmpty:
             return localized(.settingsGoogleAppleEmptyMailError)
@@ -27,6 +30,8 @@ enum GoogeLoginMessageError: String, CaseIterable {
             return localized(.settingsGoogleAppleMailMatchError)
         case .passwordRequired:
             return ""
+        case .emailDomainNotAllowed:
+            return localized(.emailDomainNotAllowed)
         case .unknown:
             return TextConstants.temporaryErrorOccurredTryAgainLater
         }
@@ -35,16 +40,23 @@ enum GoogeLoginMessageError: String, CaseIterable {
 
 enum GoogleLoginOperationResult {
     case success
-    case preconditionFailed(status: GoogeLoginMessageError?)
-    case badRequest(status: GoogeLoginMessageError?)
+    case preconditionFailed(status: AppleGoogeLoginError?)
+    case badRequest(status: AppleGoogeLoginError?)
 }
 
+typealias AppleGoogleUserCompletion = (_ user: AppleGoogleUser? ) -> Void
+
 final class AppleGoogleLoginService: BaseRequestService {
-    func disconnectGoogleLogin(completion: @escaping (GoogleLoginOperationResult) -> Void) {
-        debugLog("AppleGoogleLoginService disconnectGoogleLogin")
+    
+    private let decoder = JWTTokenDecoder.shared
+
+    func disconnectAppleGoogleLogin(type: AppleGoogleUserType, completion: @escaping (GoogleLoginOperationResult) -> Void) {
+        debugLog("AppleGoogleLoginService disconnectAppleGoogleLogin")
+        
+        let path = type == .google ? RouteRequests.googleLoginDisconnect : RouteRequests.appleLoginDisconnect
         
         SessionManager.customDefault
-            .request(RouteRequests.googleLoginDisconnect,
+            .request(path,
                      method: .post,
                      encoding: JSONEncoding.prettyPrinted)
             .responseString { response in
@@ -54,7 +66,7 @@ final class AppleGoogleLoginService: BaseRequestService {
                         if statusCode == 200 {
                             completion(.success)
                         } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
-                            for error in GoogeLoginMessageError.allCases where error.rawValue == statusJSON {
+                            for error in AppleGoogeLoginError.allCases where error.rawValue == statusJSON {
                                 completion(.preconditionFailed(status: error))
                             }
                         } else {
@@ -63,7 +75,7 @@ final class AppleGoogleLoginService: BaseRequestService {
                     }
                 case .failure:
                     if let data = response.data, let statusJSON = JSON(data)["status"].string {
-                        for error in GoogeLoginMessageError.allCases where error.rawValue == statusJSON {
+                        for error in AppleGoogeLoginError.allCases where error.rawValue == statusJSON {
                             completion(.badRequest(status: error))
                         }
                     } else {
@@ -73,13 +85,15 @@ final class AppleGoogleLoginService: BaseRequestService {
             }
     }
     
-    func connectGoogleLogin(with idToken: String, completion: @escaping (GoogleLoginOperationResult) -> Void) {
-        debugLog("AppleGoogleLoginService connectGoogleLogin")
+    func connectAppleGoogleLogin(with user: AppleGoogleUser, completion: @escaping (GoogleLoginOperationResult) -> Void) {
+        debugLog("AppleGoogleLoginService connectAppleGoogleLogin")
+        
+        let path = user.type == .google ? RouteRequests.googleLoginConnect : RouteRequests.appleLoginConnect
         
         SessionManager.customDefault
-            .request(RouteRequests.googleLoginConnect,
+            .request(path,
                      method: .post,
-                     encoding: idToken)
+                     encoding: user.idToken)
             .responseString { response in
                 switch response.result {
                 case .success:
@@ -87,7 +101,7 @@ final class AppleGoogleLoginService: BaseRequestService {
                         if statusCode == 200 {
                             completion(.success)
                         } else if let data = response.data, let statusJSON = JSON(data)["status"].string {
-                            for error in GoogeLoginMessageError.allCases where error.rawValue == statusJSON {
+                            for error in AppleGoogeLoginError.allCases where error.rawValue == statusJSON {
                                 completion(.preconditionFailed(status: error))
                             }
                         } else {
@@ -96,7 +110,7 @@ final class AppleGoogleLoginService: BaseRequestService {
                     }
                 case .failure:
                     if let data = response.data, let statusJSON = JSON(data)["status"].string {
-                        for error in GoogeLoginMessageError.allCases where error.rawValue == statusJSON {
+                        for error in AppleGoogeLoginError.allCases where error.rawValue == statusJSON {
                             completion(.badRequest(status: error))
                         }
                     } else {
@@ -104,6 +118,38 @@ final class AppleGoogleLoginService: BaseRequestService {
                     }
                 }
             }
+    }
+}
+
+@available(iOS 13.0, *)
+extension AppleGoogleLoginService {
+    func getAppleCredentials(with credentials: ASAuthorizationAppleIDCredential, success: AppleGoogleUserCompletion, fail: (String) -> Void ) {
+        guard let appleIDToken = credentials.identityToken else {
+            fail("Unable to fetch identity token")
+            return
+        }
+        
+        guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+            fail("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+            return
+        }
+        
+        guard let email = decoder.decode(jwtToken: idTokenString)["email"] as? String else {
+            fail("Unable to decode email string from idToken: \(idTokenString)")
+            return
+        }
+        
+        let user = AppleGoogleUser(idToken: idTokenString, email: email, type: .apple)
+        success(user)
+        
+    }
+    
+    func getAppleAuthorizationController() -> ASAuthorizationController {
+        let provider = ASAuthorizationAppleIDProvider()
+        let request = provider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        return ASAuthorizationController(authorizationRequests: [request])
     }
 }
 

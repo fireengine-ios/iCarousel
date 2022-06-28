@@ -29,18 +29,19 @@ apps = [
         xcodeSchema: isFriendlyBuild ? 'Lifebox_Bundle' : 'Lifebox',
         xcodeTarget: isFriendlyBuild ? 'Lifebox_Bundle' : 'Lifebox',
         itcTeamId: '121548574',
+        appleId: '1488914348'
     ]
- ,
-     [
-         name: 'billo',// name will be the base filename of the app
-         versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
-         ictsContainerId: '966', // ICT Store
-         appleId: '1488914348',
-         prodTeamID: 'S3UWW9HSX5',
-         itcTeamId: '122764420',
-         xcodeSchema: isFriendlyBuild ? 'Billo_Bundle' : 'Billo', 
-         xcodeTarget: isFriendlyBuild ? 'Billo_Bundle' : 'Billo'  
-     ]
+//  ,
+//      [
+//          name: 'billo',// name will be the base filename of the app
+//          versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
+//          ictsContainerId: '966', // ICT Store
+//          appleId: '1488914348',
+//          prodTeamID: 'S3UWW9HSX5',
+//          itcTeamId: '122764420',
+//          xcodeSchema: isFriendlyBuild ? 'Billo_Bundle' : 'Billo', 
+//          xcodeTarget: isFriendlyBuild ? 'Billo_Bundle' : 'Billo'  
+//      ]
 ]
 derivedDir = 'lifebox'
 
@@ -225,7 +226,7 @@ def deployToTestflight = { app ->
 
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-        source ~/.bash_profile; fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
+        source ~/.bash_profile; fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
     """
 }
 
@@ -415,11 +416,10 @@ pipeline {
                 skipDefaultCheckout true
             }
             environment {
-                IOS_PASS = credentials('iosLoginPass2')
+                IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight_appSpesific3')
+                TESTFLIGHT_UPLOAD = credentials('testflight-generic')
                 FASTLANE_DONT_STORE_PASSWORD = 1
-                FASTLANE_SESSION = credentials('fastlane_session')
            }
             steps {
                 script {

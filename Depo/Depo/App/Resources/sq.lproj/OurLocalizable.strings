@@ -1035,7 +1035,7 @@
 "create_story_pop_up_message" = "Jemi duke përgatitur historinë tuaj. Në mbarim të saj, ju mund ta aksesoni atë nga Albumi i Videove.";
 "create_story_path_to_story" = "Foto & Video> Historitë e mia";
 "You can not share empty album" = "Nuk mund të ndani albumin bosh.";
-"etk_permission_description" = "Unë jap pëlqimin tim për marrjen e mesazheve komerciale në mënyrë që të informohem për produktet dhe shërbimet e favorshme të Turkcell dhe kompanive të saj të grupit përveç dhe derisa të kërkoj ndryshe, në pajtim me Ligjin Nr. 6563 dhe legjislacionin në fuqi.";
+"etk_permission_description" = "";
 "global_permission_title_label" = "Leja e të dhënave globale";
 "global_permission_description" = "Unë pranoj që informacioni im personal të ndahet me operatorët e bashkëpunimit me Turkcell në mënyrë që unë të shfrytëzoj shërbimet e dobishme të operatorit përkatës në lidhje me Lifebox. ";
 "terms_and_use_etk_checkbox_header" = "Mesazh Elektronik Komercial";
@@ -1536,7 +1536,7 @@
 "import_from_facebook_started" = "Transferimi filloi nga Facebook.";
 "instapick_hashtags_copied" = "Hashtaget janë kopjuar.";
 "create_story_selection_limit" = "Të lutem, zgjidhe %d fotografi maksimale.";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
+"etk_html" = "<p><strong>PËLQİMİ PËR KOMUNIKIMET ELEKTRONIKE TREGTARE DHE TRANSFERIMI I TË DHËNAVE</strong></p>\n<p>Unë pranoj që të lejoj Lifecell Bulut Çözümleri A.Ş, Lifecell Dijital Servisler ve Çözümler A.Ş dhe Kompanitë e Grupit të listuara më poshtë që të përpunojnë të dhënat e mia personale dhe t'i transferojnë ato te palët e specifikuara në Politikën e Lejeve dhe të më dërgojnë emaile komerciale në përputhje me \"Politikën e Lejeve\", <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">këtu</a> është i disponueshëm përveçse kur kërkoj ndryshe në përputhje me Ligjin nr. 6563, dhe politika të tjera të zbatueshme, me qëllim që të më informojnë për zbritjet, ofertat dhe ofertat speciale që përputhen me nevojat dhe preferencat e mia në lidhje me produktet dhe shërbimet e këtyre kompanive. Unë pranoj se mund të tërheq pëlqimin tim për përpunimin/transferimin e të dhënave të mia personale ose marrjen e emaileve komerciale dhe informacioni i detajuar mbi qëllimin dhe tërheqjen e një pëlqimi të tillë është i disponueshëm në <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Politika e Lejeve</a>\".</p>\n<table>\n<tbody>\n<tr>\n<td width=\"532\">\n<p><strong><u>Gruponi Kompanitë Me Leje Për Përpunimin/Ndarjen E Të Dhënave</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\"> \n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p><strong><u> Gruponi Kompanitë Me Leje Për Komunikim Komercial</u></strong></p>\n</td> \n</tr> \n<tr> \n<td width=\"532\"> \n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Global Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Finansman A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Sigorta Aracılık Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Teknoloji Araştırma ve Geliştirme A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Satış ve Dağıtım Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş</p>\n</td>\n</tr>\n</tbody>\n</table>";
 "free_up_space_alert_title" = "Liro hapësirë në telefonin tënd.";
 "free_up_space_no_duplicates" = "Nuk ke foto / video të përsëritur.";
 "free_up_space_in_progress" = "Lista jote e skedarëve të përsëritura  nuk është ende gati, Të  lutem,  provoje  më vonë.";
@@ -2008,6 +2008,7 @@
 "places_map_title" = "Harta";
 "map_location_detail_header" = "Fotografitë Në Këtë Vendndodhje";
 "beeline_feature_cancel_TC" = "";
+"beeline_feature_cancel_TC" = "Beeline";
 "security_popup_body" = "Ju lutemi vendosni të paktën 1 fushë në mënyrë që të mund të rikuperoni lehtësisht llogarinë tuaj në rast se harroni fjalëkalimin tuaj";
 "security_popup_header" = "Vendosni E-mailin tuaj të Rimëkëmbjes ose Pyetjen e Sigurisë";
 "save_to_my_billo" = "Ruaj Në Billo";
@@ -2037,3 +2038,41 @@
 "security_popup_warning_body1" = "";
 "security_popup_warning_body2" = "";
 "security_popup_warning_footer" = "";
+"settings_change_password_google_warning" = "Për të ndryshuar fjalëkalimin tuaj, duhet të identifikoheni në llogarinë tuaj të lifebox me ID-në tuaj të Google.";
+"settings_change_password_apple_warning" = "Për të ndryshuar fjalëkalimin tuaj, duhet të identifikoheni në lifebox duke përdorur Apple ID tuaj.";
+"settings_change_password_apple_google_warning" = "Për të ndryshuar fjalëkalimin tuaj, duhet të identifikoheni në lifebox me Google ID ose Apple ID.";
+"settings_googe_apple_set_password" = "Vendosni fjalëkalimin për lifebox";
+"settings_google_apple_mail_match_error" = "Për të lidhur llogarinë tuaj me lifebox, adresa juaj e emailit duhet të jetë e njëjtë në çdo platformë.";
+"googe_apple_login_invalid_token" = "Përpjekje e pavlefshme për hyrje, ju lutemi kontrolloni kredencialet tuaja dhe provoni përsëri.";
+"settings_google_apple_empty_mail_error" = "Duhet të shtoni një adresë emaili në llogarinë tuaj.";
+"password_change_external_auth_required_error" = "Për të ndryshuar fjalëkalimin tuaj, ose mund të identifikoheni në llogarinë tuaj lifebox duke përdorur ID-në tuaj të Google/Apple ID ose të ndiqni udhëzimet e fjalëkalimit të harruar në ekranin e identifikimit.";
+"password_change_forgot_password_required_error" = "Për të ndryshuar fjalëkalimin, fillimisht duhet të dilni nga llogaria juaj dhe të ndiqni udhëzimet \"Harrova Fjalëkalimin\" në ekranin e hyrjes.";
+"kvkk_toggle_desc" = "Pëlqimi për Përpunimin/Ndarjen e të Dhënave";
+"kvkk_toggle_text" = "Nëpërmjet kësaj, unë jap pëlqimin tim për të lejuar Lifecell Bulut Çözümleri A.Ş. të përpunojë të dhënat e mia personale dhe t'i ndajë ato me palët e listuara në %@.";
+"security_popup_warning_header" = "Është Futur Një İnformacion İ Pasaktë";
+"security_popup_warning_body1" = "Pyetja e sigurisë është ruajtur me sukses, ka ndodhur gabimi i mëposhtëm për emailin e rikuperimit:";
+"security_popup_warning_body2" = "E-mail-i i rikuperimit u ruajt me sukses, ka ndodhur gabimi i mëposhtëm për pyetjen e sigurisë:";
+"security_popup_warning_footer" = "Mund të rifusni emailin tuaj të rikuperimit përmes Cilësimeve -> Detajet e Llogarisë -> Profili İm.";
+"apple_login_user_exists_body" = "Gjendet një llogari ekzistuese e regjistruar me %@ e-mail, për të lidhur Apple Login ID me llogarinë tuaj ekzistuese të lifebox, fillimisht duhet të vendosni fjalëkalimin tuaj të lifebox.";
+"settings_apple_password_required" = "Për të çaktivizuar hyrjen në Apple ID, së pari duhet të vendosni një fjalëkalim të lifebox.";
+"apple_login_show_mail_warning" = "Ju duhet të lejoni që adresa juaj e postës elektronike të ndahet me lifebox në mënyrë që të identifikoheni me Apple ID tuaj. Ju lutemi, klikoni butonin për t'u drejtuar te faqja e cilësimeve, ndiqni udhëzimet për të hequr llogarinë e lifebox nën Apple ID > Fjalëkalimi dhe siguria > Aplikacionet duke përdorur Apple ID dhe ndiqni përsëri hapat për t'u identifikuar me Apple ID.";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "Politika e Lejes";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"syncing" = "";
+"downloading" = "";
+"ETK_KVKK_Izin_Politikası" = "";
+
+/*Free for {3 months}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_free_trial" = "";
+
+/*First {6 months} {6,99 TRY/Month}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_as_you_go" = "";
+
+/*First {6 months} {6,99 TRY}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_up_front" = "";

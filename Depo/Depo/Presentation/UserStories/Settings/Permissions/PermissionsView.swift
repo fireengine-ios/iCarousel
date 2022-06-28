@@ -68,12 +68,6 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             descriptionText = NSMutableAttributedString(string: TextConstants.etkPermissionDescription,
                                                         attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
                                                                      .foregroundColor: ColorConstants.lightText])
-            
-            let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
-            descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
-
-            let rangeLink2 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
-            descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
         case .globalPermission:
             title = TextConstants.globalPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.globalPermissionDescriptionLabel,
@@ -87,6 +81,16 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             
             let rangeLink = descriptionText.mutableString.range(of: TextConstants.mobilePaymentPermissionLink)
             descriptionText.addAttributes([.link: TextConstants.NotLocalized.mobilePaymentPermissionLink], range: rangeLink)
+        case .kvkk:
+            title = localized(.kvkkToggleTitle)
+            let description = String(format: localized(.kvkkToggleText), localized(.kvkkHyperlinkText))
+            descriptionText = NSMutableAttributedString(string: description,
+                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
+                                                                     .foregroundColor: ColorConstants.lightText])
+            
+            
+            let rangeLink = descriptionText.mutableString.range(of: localized(.kvkkHyperlinkText))
+            descriptionText.addAttributes([.link: TextConstants.NotLocalized.permissionsPolicyLink], range: rangeLink)
         }
         titleLabel.text = title ?? ""
         setup(attributedDescription: descriptionText, delegate: textviewDelegate)

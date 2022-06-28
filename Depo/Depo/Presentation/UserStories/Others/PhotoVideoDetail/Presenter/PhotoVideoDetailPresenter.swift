@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, PhotoVideoDetailViewOutput, PhotoVideoDetailInteractorOutput {
     
     weak var view: PhotoVideoDetailViewInput!
@@ -24,6 +26,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     var canLoadMoreItems = true
     
     private var isFaceImageAllowed = false
+
+    var ocrEnabled: Bool {
+        FirebaseRemoteConfig.shared.ocrEnabled
+    }
     
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
@@ -202,6 +208,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
         let currentItem = interactor.allItems[index]
         selectedItemsCallback([currentItem])
+
+        // The code here is called when bottom bar buttons or 3 dot barButtonItem tapped.
+        // On any of these actions the text selection interaction should be removed from UI
+        DispatchQueue.main.async {
+            self.view.removeTextSelectionInteractionFromCurrentCell()
+        }
     }
     
 
@@ -490,6 +502,10 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     
     func createNewUrl() {
         interactor.createNewUrl()
+    }
+
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping (ImageTextSelectionData?) -> Void) {
+        interactor.recognizeTextForCurrentItem(image: image, completion: completion)
     }
 }
 

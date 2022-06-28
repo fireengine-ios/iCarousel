@@ -28,10 +28,10 @@ extension UIButton {
         guard let titleLabelWidth = self.titleLabel?.intrinsicContentSize.width else{return}
         self.contentHorizontalAlignment = .left
         imageEdgeInsets = UIEdgeInsets(top: 0.0, left: imagePadding - imageViewWidth / 2, bottom: 0.0, right: 0.0)
-        titleEdgeInsets = UIEdgeInsets(top: 0.0, left: (bounds.width - titleLabelWidth) / 2 - imageViewWidth, bottom: 0.0, right: 0.0)
+        titleEdgeInsets = UIEdgeInsets(top: 0.0, left: (bounds.width - titleLabelWidth) / 2 - imageViewWidth, bottom: 0.0, right: 4.0)
 
-        if imagePadding + titleLabelWidth + (2 * imageViewWidth) >= bounds.width {
-            titleEdgeInsets = UIEdgeInsets(top: 0.0, left: imagePadding, bottom: 0.0, right: 0.0)
+        if (2 * imagePadding) + titleLabelWidth + (2 * imageViewWidth) >= bounds.width {
+            titleEdgeInsets = UIEdgeInsets(top: 0.0, left: imagePadding, bottom: 0.0, right: 4.0)
         }
     }
 }

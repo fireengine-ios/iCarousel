@@ -992,7 +992,7 @@
 "create_story_pop_up_message" = "Povestea e creată";
 "create_story_path_to_story" = "Poze & Video > Poveștile Mele";
 "You can not share empty album" = "Nu poți partaja albumul gol";
-"etk_permission_description" = "Prin prezenta, îmi dau consimțământul de a primi mesaje comerciale prin poșta electronică pentru a fi informat cu privire la produsele și serviciile avantajoase ale Turkcell și ale companiilor sale de grup, cu excepția cazului și până când am să solicit deconectarea notificărilor, în conformitate cu Legea nr. 6563 și cu alte legi aplicabile.";
+"etk_permission_description" = "";
 "global_permission_title_label" = "Permisiune Globală de Date";
 "global_permission_description" = "Îmi exprim consimțământul ca datele mele personale să fie împărtășite de către Turkcell cu operatorii cu care cooperează, pentru a putea beneficia de avantajele serviciilor oferite de operatorii respectivi, în ce privește lifebox.";
 "terms_and_use_etk_checkbox_header" = "Mesaj Electronic Comercial";
@@ -1493,7 +1493,7 @@
 "import_from_facebook_started" = "Transferul de pe Facebook a început.";
 "instapick_hashtags_copied" = "Hashtag-urile au fost copiate.";
 "create_story_selection_limit" = "Te rugăm să selectați maximum %d fotografii.";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
+"etk_html" = "<p><strong>MESAJ ELECTRONIC COMERCIAL ȘI CONSIMȚĂMÂNT DE DATE</strong></p>\n<p>Prin prezenta sunt de acord pentru a permite Lifecell Bulut Çözümleri A.Ş, Lifecell Dijital Servisler ve Çözümler A.Ş. și Companiile de Grup enumerate mai jos pentru a procesa datele mele personale și a le împărtăși părților enumerate în Politica de Permisiune și pentru a-mi trimite mesaje electronice comerciale în conformitate cu \"Politica de Permisiune\" disponibilă la <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">aici</a> dacă nu mi se solicită altfel conform Legii nr. 6563 și alte reglementări aplicabile în scopul de a mă informa cu privire la reduceri, oferte și oferte speciale, care sunt în conformitate cu nevoile și preferințele mele cu privire la produsele și serviciile acestor companii. Recunosc că îmi pot revoca consimțământul pentru prelucrarea/partajarea datelor mele personale sau pentru primirea de e-mailuri electronice comerciale și informații detaliate privind domeniul de aplicare și revocarea unui astfel de consimțământ sunt disponibile în domeniul de aplicare al \"<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Politica de Permisiune</a>\".</p>\n<table>\n<tbody>\n<tr>\n<td width=\"532\">\n<p><strong><u>Grup de companii care i s-a acordat permisiunea de a procesa/partaja date</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\"> \n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p><strong><u>Grup de companii care au acordat comunicări comerciale</u></strong></p>\n</td> \n</tr> \n<tr> \n<td width=\"532\"> \n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Global Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Finansman A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Sigorta Aracılık Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Teknoloji Araştırma ve Geliştirme A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Satış ve Dağıtım Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş</p>\n</td>\n</tr>\n</tbody>\n</table>";
 "free_up_space_alert_title" = "Eliberează spațiu pe telefon";
 "free_up_space_no_duplicates" = "Nu există fotografii / videoclipuri repetate.";
 "free_up_space_in_progress" = "Lista ta de fișiere repetate nu este încă pregătită, încercați mai târziu";
@@ -1965,6 +1965,7 @@
 "places_map_title" = "Hartă";
 "map_location_detail_header" = "Fotografii în Acest Loc";
 "beeline_feature_cancel_TC" = "";
+"beeline_feature_cancel_TC" = "Beeline";
 "security_popup_body" = "Introduceți cel puțin 1 câmp pentru a vă recupera contul cu ușurință atunci când ați uitat parola";
 "security_popup_header" = "Setați E-Mailul de Recuperare sau Întrebarea de Securitate";
 "save_to_my_billo" = "Salvați în Billo";
@@ -1994,3 +1995,41 @@
 "security_popup_warning_body1" = "";
 "security_popup_warning_body2" = "";
 "security_popup_warning_footer" = "";
+"settings_change_password_google_warning" = "Pentru a vă schimba parola, trebuie să vă conectați la contul lifebox cu ID-ul dvs. Google.";
+"settings_change_password_apple_warning" = "Pentru a vă schimba parola, trebuie să vă conectați la lifebox folosind ID-ul Apple.";
+"settings_change_password_apple_google_warning" = "Pentru a vă schimba parola, trebuie să vă conectați la lifebox cu ID-ul dvs. Google sau ID-ul Apple.";
+"settings_googe_apple_set_password" = "Setați parola pentru lifebox";
+"settings_google_apple_mail_match_error" = "Pentru a vă conecta contul la lifebox, adresa dvs. de e-mail trebuie să fie aceeași pe fiecare platformă.";
+"googe_apple_login_invalid_token" = "Încercare de conectare nevalidă, vă rugăm să vă verificați acreditările și să încercați din nou.";
+"settings_google_apple_empty_mail_error" = "Trebuie să adăugați o adresă de e-mail în contul dvs.";
+"password_change_external_auth_required_error" = "Pentru a vă schimba parola, puteți fie să vă conectați la contul lifebox folosind ID-ul Google/ID-ul Apple, fie să urmați instrucțiunile privind parola uitată de pe ecranul de conectare.";
+"password_change_forgot_password_required_error" = "Pentru a vă schimba parola, trebuie mai întâi să vă deconectați din cont și să urmați instrucțiunile „Parola Uitată” de pe ecranul de conectare.";
+"kvkk_toggle_desc" = "Prelucrarea Datelor/Consimțământul de Partajare";
+"kvkk_toggle_text" = "Prin prezenta îmi dau consimțământul pentru a permite Lifecell Bulut Çözümleri A.Ș. să prelucreze datele mele personale și să le partajeze părților enumerate în %@.";
+"security_popup_warning_header" = "Este İntrodusă O İnformație İncorectă";
+"security_popup_warning_body1" = "Întrebarea de securitate a fost salvată cu succes, a apărut următoarea eroare pentru e-mailul de recuperare:";
+"security_popup_warning_body2" = "E-mailul de recuperare a fost salvat cu succes, a apărut următoarea eroare pentru întrebarea de securitate:";
+"security_popup_warning_footer" = "Puteți reintroduce adresa de e-mail de recuperare prin Setări -> Detalii Cont -> Profilul Meu.";
+"apple_login_user_exists_body" = "Există un cont lifebox înregistrat la adresa de e-mail %@. Pentru a conecta metoda Conectați-vă cu Apple ID la un cont lifebox existent, trebuie mai întâi să introduceți parola lifebox.";
+"settings_apple_password_required" = "Pentru a dezactiva autentificarea Apple ID, trebuie să setați parola lifebox.";
+"apple_login_show_mail_warning" = "Trebuie să permiteți ca adresa dvs. de e-mail să fie partajată cu lifebox pentru a vă conecta cu ID-ul Apple. Vă rugăm să faceți clic pe butonul pentru a fi direcționat către pagina Setări, urmați instrucțiunile pentru a elimina contul Lifebox din ID Apple > Parolă și securitate > Aplicații care folosesc ID-ul Apple și urmați din nou pașii pentru a vă autentifica cu ID-ul Apple.";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "Politica de Permisiuni";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"syncing" = "";
+"downloading" = "";
+"ETK_KVKK_Izin_Politikası" = "";
+
+/*Free for {3 months}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_free_trial" = "";
+
+/*First {6 months} {6,99 TRY/Month}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_as_you_go" = "";
+
+/*First {6 months} {6,99 TRY}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_up_front" = "";

@@ -9,11 +9,13 @@
 import UIKit
 import GoogleSignIn
 import FirebaseCore
+import AuthenticationServices
 
 final class IntroduceViewController: ViewController {
 
+    private lazy var appleGoogleService = AppleGoogleLoginService()
     var output: IntroduceViewOutput!
-    var user: GoogleUser?
+    var user: AppleGoogleUser?
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -119,11 +121,37 @@ final class IntroduceViewController: ViewController {
         super.viewDidLoad()
         configurateView()
         output.viewIsReady()
+
+        handleRemoteConfig()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleRemoteConfig),
+            name: .firebaseRemoteConfigInitialFetchComplete,
+            object: nil
+        )
     }
     
     func configurateView() {
         hidenNavigationBarStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
+    @objc private func handleRemoteConfig() {
+        if #available(iOS 13, *) { } else {
+            signInWithAppleButton.isHidden = true
+            signInWithGoogleButton.isHidden = true
+            orLabel.isHidden = true
+            return
+        }
+        
+        signInWithAppleButton.isHidden = !FirebaseRemoteConfig.shared.appleLoginEnabled
+        signInWithGoogleButton.isHidden = !FirebaseRemoteConfig.shared.googleLoginEnabled
+        
+        if signInWithAppleButton.isHidden {
+            signInWithGoogleButton.isHidden = true
+        }
+        
+        orLabel.isHidden = signInWithAppleButton.isHidden && signInWithGoogleButton.isHidden
     }
 
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -145,7 +173,7 @@ final class IntroduceViewController: ViewController {
     
     @IBAction func onSignInWithGoogle(_ sender: Any) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
+        let config = GIDConfiguration(clientID: clientID, serverClientID: Credentials.googleServerClientID)
         
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
             if error != nil {
@@ -153,15 +181,19 @@ final class IntroduceViewController: ViewController {
             }
             
             if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
-                let user = GoogleUser(idToken: idToken, email: email)
+                let user = AppleGoogleUser(idToken: idToken, email: email, type: .google)
                 self.user = user
-                self.output.onContinueWithGoogle(with: user)
+                self.output.onSignInWithAppleGoogle(with: user)
             }
         }
     }
     
+    @available(iOS 13.0, *)
     @IBAction func onSignInWithApple(_ sender: Any) {
-        //TODO -Apple login will be implemented
+        let controller = appleGoogleService.getAppleAuthorizationController()
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
     }
     
     @IBAction func onLogin(_ sender: UIButton) {
@@ -169,10 +201,36 @@ final class IntroduceViewController: ViewController {
     }
 }
 
+@available(iOS 13.0, *)
+extension IntroduceViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let credentials = authorization.credential as? ASAuthorizationAppleIDCredential {
+            appleGoogleService.getAppleCredentials(with: credentials) { user in
+                guard let user = user else { return }
+                self.user = user
+                self.output.onSignInWithAppleGoogle(with: user)
+            } fail: { error in
+                debugLog(error)
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        debugLog("Apple auth didCompleteWithError: \(error.localizedDescription)")
+    }
+}
+
+@available(iOS 13.0, *)
+extension IntroduceViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+}
+
 extension IntroduceViewController: IntroduceViewInput {
-    func showGoogleLoginPopup(with user: GoogleUser) {
+    func showGoogleLoginPopup(with user: AppleGoogleUser) {
         let popUp = RouterVC().loginWithGooglePopup
-        popUp.email = user.email
+        popUp.user = user
         popUp.delegate = self
         present(popUp, animated: true)
     }

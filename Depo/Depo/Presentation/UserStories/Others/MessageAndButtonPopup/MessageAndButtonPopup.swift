@@ -55,4 +55,11 @@ final class MessageAndButtonPopup: BasePopUpController, NibInit {
         messageLabel.text = message
         actionButton.setTitle(buttonTitle, for: .normal)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if touch?.view == view {
+            dismiss(animated: true)
+        }
+    }
 }

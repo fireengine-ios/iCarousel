@@ -1295,7 +1295,7 @@ Please check I have understood the intended command here*/
 "create_story_pop_up_message" = "Nous préparons votre story. Une fois terminée, vous pourrez la trouver dans Mes stories.";
 "create_story_path_to_story" = "Photos et Vidéos> Mes Stories";
 "You can not share empty album" = "Vous ne pouvez pas partager un album vide";
-"etk_permission_description" = "Je consens par la présente à recevoir des emails commerciaux afin d’être informé des produits et services avantageux de Turkcell et d'autres sociétés du groupe, à moins que et jusqu’à ce que je n’exige d’autre chose, conformément à la loi n ° 6563 et aux autres lois applicables.";
+"etk_permission_description" = "";
 "global_permission_title_label" = "Permission de données globale";
 "global_permission_description" = "J'accepte que mes informations personnelles soient partagées avec les opérateurs partenaires de Turkcell afin que je puisse utiliser les services avantageux de l'opérateur correspondant en ce qui concerne lifebox.";
 "terms_and_use_etk_checkbox_header" = "Newsletter";
@@ -1798,7 +1798,7 @@ Please check I have understood the intended command here*/
 "import_from_facebook_started" = "Le transfert depuis Facebook a commencé.";
 "instapick_hashtags_copied" = "Les mots-clic ont été copiés.";
 "create_story_selection_limit" = "Veuillez sélectionner au maximum %d photos.";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
+"etk_html" = "<p><strong>CONSENTEMENT AUX COMMUNICATIONS ÉLECTRONIQUES COMMERCIALES ET AUX TRANSFERTS DE DONNÉES</strong></p>\n<p>Je consens par la présente à autoriser Lifecell Bulut Çözümleri A. Ş., Lifecell Dijital Servisler ve Çözümler A. Ş. et les Sociétés du Groupe énumérées ci-dessous pour traiter mes données personnelles et les partager avec les parties énumérées dans la Politique d'autorisation et m'envoyer des messages électroniques commerciaux conformément à la \"Politique d'autorisation\" disponible à l'adresse <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">ici</a> sauf demande contraire de ma part conformément à la loi No. 6563 et autres réglementations applicables dans le but de m'informer des remises, offres et offres spéciales, qui sont conformes à mes besoins et préférences concernant les produits et services de ces sociétés. Je reconnais que je peux révoquer mon consentement au traitement/partage de mes données personnelles ou à la réception de courriers électroniques commerciaux et des informations détaillées sur la portée et la révocation de ce consentement sont disponibles dans le cadre de la \"<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Politique d'autorisation</a>\".</p>\n<table>\n<tbody>\n<tr>\n<td width=\"532\">\n<p><strong><u>Groupe d'entreprises autorisé à traiter/partager des données</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\"> \n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p><strong><u>Groupe d'entreprises autorisé à communications commerciales</u></strong></p>\n</td> \n</tr> \n<tr> \n<td width=\"532\"> \n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Global Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Finansman A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Sigorta Aracılık Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Teknoloji Araştırma ve Geliştirme A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Satış ve Dağıtım Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş</p>\n</td>\n</tr>\n</tbody>\n</table>";
 "free_up_space_alert_title" = "Libérez de l'espace sur votre téléphone";
 "free_up_space_no_duplicates" = "Vous n'avez pas de photos / vidéos récurrents";
 "free_up_space_in_progress" = "Votre liste de dossiers récurrents n'est pas encore prête, veuillez réessayer plus tard.";
@@ -2270,6 +2270,7 @@ Please check I have understood the intended command here*/
 "places_map_title" = "Carte";
 "map_location_detail_header" = "Photos à Cet Endroit";
 "beeline_feature_cancel_TC" = "";
+"beeline_feature_cancel_TC" = "Beeline";
 "security_popup_body" = "Veuillez saisir au moins 1 champ pour récupérer facilement votre compte lorsque vous avez oublié votre mot de passe";
 "security_popup_header" = "Définissez votre E-mail de Récupération ou Votre Question de Sécurité";
 "save_to_my_billo" = "Enregistrer dans Billo";
@@ -2299,3 +2300,41 @@ Please check I have understood the intended command here*/
 "security_popup_warning_body1" = "";
 "security_popup_warning_body2" = "";
 "security_popup_warning_footer" = "";
+"settings_change_password_google_warning" = "Pour changer votre mot de passe, vous devez vous connecter à votre compte lifebox avec votre identifiant Google.";
+"settings_change_password_apple_warning" = "Pour changer votre mot de passe, vous devez vous connecter à lifebox en utilisant votre identifiant Apple.";
+"settings_change_password_apple_google_warning" = "Pour changer votre mot de passe, vous devez vous connecter à lifebox avec votre identifiant Google ou votre identifiant Apple.";
+"settings_googe_apple_set_password" = "Définir le mot de passe pour lifebox";
+"settings_google_apple_mail_match_error" = "Pour connecter votre compte à lifebox, votre adresse e-mail doit être la même sur toutes les plateformes.";
+"googe_apple_login_invalid_token" = "Tentative de connexion invalide, veuillez vérifier vos informations d'identification et réessayer.";
+"settings_google_apple_empty_mail_error" = "Vous devez ajouter une adresse e-mail à votre compte.";
+"password_change_external_auth_required_error" = "Pour modifier votre mot de passe, vous pouvez soit vous connecter à votre compte lifebox à l'aide de votre identifiant Google/identifiant Apple, soit suivre les instructions relatives au mot de passe oublié sur l'écran de connexion.";
+"password_change_forgot_password_required_error" = "Pour changer votre mot de passe, vous devez d'abord vous déconnecter de votre compte et suivre les instructions \"Mot de passe oublié\" sur l'écran de connexion.";
+"kvkk_toggle_desc" = "Consentement au Traitement/Partage des Données";
+"kvkk_toggle_text" = "Par la présente, je donne mon consentement pour permettre à Lifecell Bulut Çözümleri A.Ş. de traiter mes données personnelles et de les partager avec les parties énumérées dans le %@.";
+"security_popup_warning_header" = "Une İnformation İncorrecte Est Entrée";
+"security_popup_warning_body1" = "La question de sécurité est enregistrée ave succès, l'erreur suivante pour l'e-mail de récupération s'est produite :";
+"security_popup_warning_body2" = "L'e-mail de récupération est enregistré avec succès, l'erreur suivante pour la question de sécurité s'est produite :";
+"security_popup_warning_footer" = "Vous pouvez ressaisir votre adresse e-mail de récupération via Paramètres -> Détails du Compte -> Mon Profil.";
+"apple_login_user_exists_body" = "Il existe un compte lifebox enregistré à l'adresse e-mail %@. Pour connecter la méthode Connexion Avec Apple ID à un compte lifebox existant, vous devez d'abord entrer votre mot de passe lifebox.";
+"settings_apple_password_required" = "Pour désactiver la connexion Apple ID, vous devez définir le mot de passe lifebox.";
+"apple_login_show_mail_warning" = "Vous devez autoriser le partage de votre adresse e-mail avec lifebox afin de vous connecter avec votre identifiant Apple. Veuillez cliquer sur le bouton ci-dessous pour être dirigé vers la page Paramètres, suivez les instructions pour supprimer le compte lifebox sous Identifiant Apple > Mot de passe et sécurité > Applications utilisant l'identifiant Apple et suivez à nouveau les étapes pour vous connecter avec votre identifiant Apple.";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "Politique d'autorisation";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"syncing" = "";
+"downloading" = "";
+"ETK_KVKK_Izin_Politikası" = "";
+
+/*Free for {3 months}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_free_trial" = "";
+
+/*First {6 months} {6,99 TRY/Month}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_as_you_go" = "";
+
+/*First {6 months} {6,99 TRY}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_up_front" = "";

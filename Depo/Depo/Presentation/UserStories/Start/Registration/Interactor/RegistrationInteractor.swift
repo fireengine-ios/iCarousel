@@ -66,7 +66,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
         }
     }
 
-    func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?, googleToken: String?) {
+    func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?, appleGoogleUser: AppleGoogleUser?) {
         
         let validationResult: [UserValidationResults]
         validationResult = validationService.validateUserInfo(mail: email,
@@ -75,7 +75,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                                               password: password,
                                                               repassword: repassword,
                                                               captchaAnswer: captchaRequired ? captchaAnswer : nil,
-                                                              googleToken: googleToken)
+                                                              appleGoogleUser: appleGoogleUser)
         
         if validationResult.count == 0 {//== .allValid {
             
@@ -85,7 +85,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                                    password: password,
                                                    captchaID: captchaRequired ? captchaID : nil,
                                                    captchaAnswer: captchaRequired ? captchaAnswer : nil,
-                                                   googleToken: googleToken)
+                                                   appleGoogleUser: appleGoogleUser)
             
             SingletonStorage.shared.signUpInfo = signUpInfo
             
@@ -140,7 +140,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     func signUpUser(_ userInfo: RegistrationUserInfoModel, etkAuth: Bool?, globalPermAuth: Bool?) {
 
         ///sentOtp = false as a task requirements (FE-1055)
-        let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false, googleToken: userInfo.googleToken)
+        let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false, appleGoogleUser: userInfo.appleGoogleUser)
         
         authenticationService.signUp(user: signUpUser) { [weak self] response in
             guard let self = self else {
@@ -158,8 +158,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 SingletonStorage.shared.isJustRegistered = true
 
                 // Passing etkAuth and globalPermAuth to PhoneVerification
-                result.etkAuth = etkAuth
-                result.kvkkAuth = etkAuth
+                // LB-1008 never send false for etkAuth & kvkkAuth
+                let kvkkEtkAuth = etkAuth == true ? true : nil
+                result.etkAuth = kvkkEtkAuth
+                result.kvkkAuth = kvkkEtkAuth
                 result.globalPermAuth = globalPermAuth
                 result.eulaId = self.eula?.id
                 self.output.signUpSucceeded(userInfo: userInfo) { [weak self] in
@@ -179,6 +181,10 @@ class RegistrationInteractor: RegistrationInteractorInput {
                     if signUpError.isCaptchaError {
                         self.captchaRequired = true
                         self.output.captchaRequired(required: true)
+                    }
+                    
+                    if signUpError.status == .emailDomainNotAllowed {
+                        self.output.appleEmailDomainFailed()
                     }
                 }
 

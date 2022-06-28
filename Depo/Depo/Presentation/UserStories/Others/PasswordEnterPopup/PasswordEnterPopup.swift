@@ -8,15 +8,18 @@
 
 import Foundation
 import UIKit
+import IQKeyboardManagerSwift
 
 final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
 
     //MARK: -Properties
     private lazy var accountService = AccountService()
     private lazy var authenticationService = AuthenticationService()
+    private lazy var appleGoogleService = AppleGoogleLoginService()
     private lazy var router = RouterVC()
     private var showErrorColorInNewPasswordView = false
-    var idToken: String?
+    var appleGoogleUser: AppleGoogleUser?
+    var disconnectAppleGoogleLogin: Bool?
     
     private let newPasswordView: PasswordView = {
         let view = PasswordView.initFromNib()
@@ -86,7 +89,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
         
         view.backgroundColor = AppColor.popUpBackground.color
         initialViewSetup()
-    }
+   }
     
     //MARK: -IBActions
     @IBAction func onOkeyButton(_ sender: UIButton) {
@@ -94,23 +97,34 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
     }
     
     //MARK: -Helpers
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if touch?.view == view {
+            dismiss(animated: true)
+        }
+    }
+    
     private func initialViewSetup() {
         newPasswordView.passwordTextField.delegate = self
         repeatPasswordView.passwordTextField.delegate = self
         captchaView.captchaAnswerTextField.delegate = self
         
         addTapGestureToHideKeyboard()
+        IQKeyboardManager.shared.enabledDistanceHandlingClasses.append(PasswordEnterPopup.self)
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
     
     private func showError(_ errorResponse: Error) {
         captchaView.updateCaptcha()
-        UIApplication.showErrorAlert(message: errorResponse.description)
         hideSpinnerIncludeNavigationBar()
+        UIApplication.showErrorAlert(message: errorResponse.description) {
+            self.dismiss(animated: true)
+        }
     }
     
     private func showSuccessPopup() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passwordChangedSuccessfully)
-        router.popViewController()
+        dismiss(animated: true)
     }
 
     private func showLogoutPopup() {
@@ -168,7 +182,8 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
         case .special, .unknown,
              .invalidToken,
              .externalAuthTokenRequired,
-             .forgetPasswordRequired:
+             .forgetPasswordRequired,
+             .emailDomainNotAllowed:
             UIApplication.showErrorAlert(message: errorText)
         }
     }
@@ -251,7 +266,7 @@ extension PasswordEnterPopup {
                                           repeatPassword: repeatPassword,
                                           captchaId: captchaView.currentCaptchaUUID,
                                           captchaAnswer: captchaAnswer,
-                                          googleToken: idToken) { [weak self] result in
+                                          appleGoogleUser: appleGoogleUser) { [weak self] result in
                                             guard let self = self else {
                                                 return
                                             }
@@ -295,8 +310,15 @@ extension PasswordEnterPopup {
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
             /// on main queue
-            self?.showSuccessPopup()
-            self?.hideSpinnerIncludeNavigationBar()
+            if self?.disconnectAppleGoogleLogin == true {
+                if let type = self?.appleGoogleUser?.type {
+                    self?.removeAppleGoogleLogin(with: type)
+                }
+            } else {
+                self?.showSuccessPopup()
+                self?.hideSpinnerIncludeNavigationBar()
+            }
+            
             }, fail: { [weak self] errorResponse  in
                 if errorResponse.description.contains("Captcha required") {
                     self?.showLogoutPopup()
@@ -309,5 +331,20 @@ extension PasswordEnterPopup {
             /// As a result of the meeting, the logic of showing the screen of two factorial authorization is added only with a direct login and is not used with other authorization methods.
                 assertionFailure()
         })
+    }
+    
+    private func removeAppleGoogleLogin(with type: AppleGoogleUserType) {
+        appleGoogleService.disconnectAppleGoogleLogin(type: type) { disconnect in
+            switch disconnect {
+            case .success:
+                self.showSuccessPopup()
+                self.hideSpinnerIncludeNavigationBar()
+                ItemOperationManager.default.appleGoogleLoginDisconnected(type: type)
+            case .preconditionFailed, .badRequest:
+                UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater) {
+                    self.dismiss(animated: true)
+                }
+            }
+        }
     }
 }

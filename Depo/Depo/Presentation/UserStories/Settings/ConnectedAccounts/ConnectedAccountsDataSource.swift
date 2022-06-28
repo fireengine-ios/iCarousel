@@ -50,11 +50,16 @@ final class ConnectedAccountsDataSource: NSObject {
     weak var view: SocialConnectionCellDelegate?
     weak var appleGoogleDelegate: AppleGoogleAccountConnectionCellDelegate?
     
-    private let tableSections = [Section(account: .spotify, state: .shrinked),
+    private var tableSections = [Section(account: .spotify, state: .shrinked),
                                  Section(account: .instagram, state: .shrinked),
                                  Section(account: .facebook, state: .shrinked),
-                                 Section(account: .dropbox, state: .shrinked),
-                                 Section(account: .appleGoogle, state: .shrinked)]
+                                 Section(account: .dropbox, state: .shrinked)]
+    
+    override init() {
+        if #available(iOS 13.0, *) {
+            tableSections.append(Section(account: .appleGoogle, state: .shrinked))
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource

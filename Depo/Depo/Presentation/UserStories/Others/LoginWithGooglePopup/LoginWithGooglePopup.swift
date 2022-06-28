@@ -16,7 +16,15 @@ protocol LoginWithGooglePopupDelegate: AnyObject {
 final class LoginWithGooglePopup: BasePopUpController, NibInit {
     
     weak var delegate: LoginWithGooglePopupDelegate?
-    var email: String?
+    var user: AppleGoogleUser?
+    
+    @IBOutlet private weak var emailLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.numberOfLines = 0
+        }
+    }
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
@@ -49,6 +57,15 @@ final class LoginWithGooglePopup: BasePopUpController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = AppColor.popUpBackground.color
-        descriptionLabel.text = String(format: localized(.googleUserExistBody), email ?? "")
+        let description = user?.type == .google ? localized(.googleUserExistBody) : localized(.appleUserExistBody)
+        descriptionLabel.text = String(format: description, user?.email ?? "")
+        emailLabel.text = user?.email
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        if touch?.view == view {
+            dismiss(animated: true)
+        }
     }
 }

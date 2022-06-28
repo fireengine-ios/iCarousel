@@ -34,6 +34,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var privateShareAnalytics = PrivateShareAnalytics()
     private lazy var fileService = WrapItemFileService()
+    private lazy var textRecognitionService = TextRecognitionService()
     private var userActivity: NSUserActivity?
     private var publicShareURLForCurrentItem: URL?
     
@@ -347,6 +348,19 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func resignUserActivity() {
         userActivity?.resignCurrent()
     }
+
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping (ImageTextSelectionData?) -> Void) {
+        guard let currentItemIndex = currentItemIndex,
+              let item = array[currentItemIndex]
+        else {
+            return
+        }
+
+        textRecognitionService.process(fileUUID: item.uuid, image: image) { [weak self] data in
+            guard currentItemIndex == self?.currentItemIndex else { return }
+            completion(data)
+        }
+    }
     
     private func updateItem(_ item: Item) {
         if let index = allItems.firstIndex(where: { $0 == item }) {
@@ -391,7 +405,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             })
         }
 
-        output.setCurrentActivityItemsConfiguration(UIActivityItemsConfiguration(itemProviders: [imageProvider]))
+        let activityItemsConfig = UIActivityItemsConfiguration(itemProviders: [imageProvider])
+        // remove the share button from UIMenuController used in text selection 
+        activityItemsConfig.supportedInteractions = []
+        output.setCurrentActivityItemsConfiguration(activityItemsConfig)
     }
 
     @available(iOS 15.0, *)

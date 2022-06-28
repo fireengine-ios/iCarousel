@@ -12,5 +12,4 @@ enum Keys {
     static let fakeUUID = "tsdk_unique_id"
     static let lastRemotesPageSaved = "lastRemotesPageSaved"
     static let deviceUUID = "deviceUUIDKey"
-    static let googleServerClientID = "685338462870-flqbnde1f2gdolak5hv9769aui2vh6nk.apps.googleusercontent.com"
 }

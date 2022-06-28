@@ -23,7 +23,7 @@ protocol RegistrationInteractorInput {
                           repassword: String,
                           captchaID: String?,
                           captchaAnswer: String?,
-                          googleToken: String?)
+                          appleGoogleUser: AppleGoogleUser?)
     
     func checkCaptchaRequerement()
 

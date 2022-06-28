@@ -9,6 +9,7 @@
 import UIKit
 import GoogleSignIn
 import FirebaseCore
+import AuthenticationServices
 
 
 final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPresenter {
@@ -25,6 +26,7 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
     private let analyticsService: AnalyticsService = factory.resolve()
     private let dataSource = ConnectedAccountsDataSource()
     private lazy var appleGoogleService = AppleGoogleLoginService()
+    private var appleGoogleUserType: AppleGoogleUserType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,49 +75,60 @@ final class ConnectedAccountsViewController: ViewController, NibInit, ErrorPrese
         analyticsService.trackDimentionsEveryClickGA(screen: .connectedAccounts)
     }
     
-    private func showPasswordPopup(with idToken: String) {
-        let popup = RouterVC().passwordEnterPopup(with: idToken)
+    private func showPasswordPopup(with user: AppleGoogleUser) {
+        let popup = RouterVC().passwordEnterPopup(with: user, disconnectAppleGoogleLogin: true)
         present(popup, animated: true)
     }
     
-    private func getGoogleTokenIfNeeded(handler: @escaping (String?) -> Void) {
+    private func getGoogleTokenIfNeeded(handler: @escaping (AppleGoogleUser?) -> Void) {
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-            if user?.profile?.email == SingletonStorage.shared.accountInfo?.email {
-                handler(user?.authentication.idToken)
+            if user?.profile?.email == SingletonStorage.shared.accountInfo?.email,
+               let email = user?.profile?.email,
+               let idToken = user?.authentication.idToken {
+                handler(AppleGoogleUser(idToken: idToken, email: email, type: .google))
             } else {
                 guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-                let config = GIDConfiguration(clientID: clientID, serverClientID: Keys.googleServerClientID)
+                let config = GIDConfiguration(clientID: clientID, serverClientID: Credentials.googleServerClientID)
                 
                 GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
                     if error != nil {
                         handler(nil)
+                        return
                     }
                     
-                    if let idToken = user?.authentication.idToken {
-                        handler(idToken)
+                    if let idToken = user?.authentication.idToken, let email = user?.profile?.email {
+                        handler(AppleGoogleUser(idToken: idToken, email: email, type: .google))
                     }
                 }
             }
         }
     }
     
-    private func connectGoogleLogin(with idToken: String, handler: @escaping (Bool?) -> Void) {
-        appleGoogleService.connectGoogleLogin(with: idToken) { result in
+    private func connectAppleGoogleLogin(with user: AppleGoogleUser, handler: @escaping (Bool?) -> Void) {
+        appleGoogleService.connectAppleGoogleLogin(with: user) { result in
             switch result {
             case .success:
                 handler(true)
-            case .preconditionFailed:
+            case .preconditionFailed(let error):
                 handler(false)
                 DispatchQueue.toMain {
-                    self.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+                    self.showErrorAlert(message: error?.errorMessage ?? TextConstants.temporaryErrorOccurredTryAgainLater)
                 }
-            case.badRequest:
+            case.badRequest(let error):
                 handler(false)
                 DispatchQueue.toMain {
-                    self.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+                    self.showErrorAlert(message: error?.errorMessage ?? TextConstants.temporaryErrorOccurredTryAgainLater)
                 }
             }
         }
+    }
+    
+    @available(iOS 13.0, *)
+    private func getAppleToken() {
+        let controller = appleGoogleService.getAppleAuthorizationController()
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
     }
 }
 
@@ -171,10 +184,16 @@ extension ConnectedAccountsViewController: SocialConnectionCellDelegate {
 }
 
 extension ConnectedAccountsViewController: AppleGoogleAccountConnectionCellDelegate {
+    func appleGoogleDisconnectFailed(type: AppleGoogleUserType) {
+        DispatchQueue.toMain {
+            self.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+        }
+    }
+    
     func connectGoogleLogin(callback: @escaping (Bool) -> Void) {
-        getGoogleTokenIfNeeded { idToken in
-            if let idToken = idToken {
-                self.connectGoogleLogin(with: idToken) { isSuccess in
+        getGoogleTokenIfNeeded { user in
+            if let user = user {
+                self.connectAppleGoogleLogin(with: user) { isSuccess in
                     callback(isSuccess ?? false)
                 }
             } else {
@@ -183,28 +202,58 @@ extension ConnectedAccountsViewController: AppleGoogleAccountConnectionCellDeleg
         }
     }
     
-    func showPasswordRequiredPopup() {
-        let popUp = RouterVC().messageAndButtonPopup(with: localized(.googlePasswordRequired),
+    func showPasswordRequiredPopup(type: AppleGoogleUserType) {
+        self.appleGoogleUserType = type
+        let message = type == .google ? localized(.googlePasswordRequired) : localized(.applePasswordRequired)
+        let popUp = RouterVC().messageAndButtonPopup(with: message,
                                                      buttonTitle: TextConstants.nextTitle)
+        
         popUp.delegate = self
         present(popUp, animated: true)
     }
-    
-    func googleDisconnectFailed() {
-        DispatchQueue.toMain {
-            self.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
-        }
-    }
+
 }
 
 extension ConnectedAccountsViewController: MessageAndButtonPopupDelegate {
     func onActionButton() {
         dismiss(animated: true)
         
-        getGoogleTokenIfNeeded { token in
-            guard let token = token else { return }
-            self.showPasswordPopup(with: token)
+        if appleGoogleUserType == .google {
+            getGoogleTokenIfNeeded { user in
+                guard let user = user else { return }
+                self.showPasswordPopup(with: user)
+            }
+        } else if appleGoogleUserType == .apple {
+            if #available(iOS 13.0, *) {
+                getAppleToken()
+            }
         }
+    }
+}
+
+@available(iOS 13.0, *)
+extension ConnectedAccountsViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let credentials = authorization.credential as? ASAuthorizationAppleIDCredential {
+            appleGoogleService.getAppleCredentials(with: credentials) { user in
+                guard let user = user else { return }
+                let appleUser = AppleGoogleUser(idToken: user.idToken, email: user.email, type: .apple)
+                showPasswordPopup(with: appleUser)
+            } fail: { error in
+                debugLog(error)
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        debugLog("Apple auth didCompleteWithError: \(error.localizedDescription)")
+    }
+}
+
+@available(iOS 13.0, *)
+extension ConnectedAccountsViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
     }
 }
 

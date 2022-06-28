@@ -11,5 +11,5 @@ import Foundation
 protocol IntroduceInteractorInput {
     func trackScreen(pageNum: Int)
     func trackScreen()
-    func signInWithGoogle(with user: GoogleUser)
+    func signInWithAppleGoogle(with user: AppleGoogleUser)
 }

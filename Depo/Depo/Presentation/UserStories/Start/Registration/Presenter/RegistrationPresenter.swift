@@ -52,12 +52,12 @@ extension RegistrationPresenter: RegistrationViewOutput {
         interactor.validatePassword(password, repassword: repassword)
     }
     
-    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?, googleToken: String?) {
+    func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?, appleGoogleUser: AppleGoogleUser?) {
         interactor.validateUserInfo(email: email.replacingOccurrences(of: " ", with: ""),
                                     code: code, phone: phone,
                                     password: password, repassword: repassword,
                                     captchaID: captchaID, captchaAnswer: captchaAnswer,
-                                    googleToken: googleToken)
+                                    appleGoogleUser: appleGoogleUser)
     }
     
     func openSupport() {
@@ -211,6 +211,11 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
 
     func failedToLoadTermsOfUse(errorString: String) {
         view.showErrorTitle(withText: errorString)
+    }
+    
+    func appleEmailDomainFailed() {
+        UIApplication.showErrorAlert(message: localized(.emailDomainNotAllowed))
+        router.goBack()
     }
 }
 

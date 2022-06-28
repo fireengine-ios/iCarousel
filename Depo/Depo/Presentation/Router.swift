@@ -1402,7 +1402,7 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func loginWithGoogle(user: GoogleUser) -> UIViewController {
+    func loginWithGoogle(user: AppleGoogleUser) -> UIViewController {
         let initializer = LoginModuleInitializer()
         let loginController = LoginViewController(nibName: "LoginViewController",
                                                   bundle: nil)
@@ -1412,7 +1412,7 @@ class RouterVC: NSObject {
         return loginController
     }
     
-    func registerWithGoogle(user: GoogleUser) -> UIViewController {
+    func registerWithGoogle(user: AppleGoogleUser) -> UIViewController {
         let initializer = RegistrationModuleInitializer()
         let registerController = RegistrationViewController(nibName: "RegistrationScreen",
                                                             bundle: nil)
@@ -1422,7 +1422,7 @@ class RouterVC: NSObject {
         return registerController
     }
     
-    func loginWithHeaders(user: GoogleUser, headers: [String:Any]) -> UIViewController {
+    func loginWithHeaders(user: AppleGoogleUser, headers: [String:Any]) -> UIViewController {
         let initializer = LoginModuleInitializer()
         let loginController = LoginViewController(nibName: "LoginViewController",
                                                   bundle: nil)
@@ -1443,12 +1443,13 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func passwordEnterPopup(with idToken: String) -> PasswordEnterPopup {
+    func passwordEnterPopup(with appleGoogleUser: AppleGoogleUser, disconnectAppleGoogleLogin: Bool? = nil) -> PasswordEnterPopup {
         let controller = PasswordEnterPopup()
         
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
-        controller.idToken = idToken
+        controller.appleGoogleUser = appleGoogleUser
+        controller.disconnectAppleGoogleLogin = disconnectAppleGoogleLogin
         
         return controller
     }
@@ -1458,6 +1459,17 @@ class RouterVC: NSObject {
         
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
+    func securityInfoWarningPopup(errorMessage: String, warningType: SecurityPopupWarningType) -> SecurityInfoWarningPopup {
+        let controller = SecurityInfoWarningPopup()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.errorMessage = errorMessage
+        controller.warningType = warningType
         
         return controller
     }

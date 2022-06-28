@@ -6,8 +6,12 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import UIKit
+
 protocol PhotoVideoDetailViewOutput {
-    
+
+    var ocrEnabled: Bool { get }
+
     func viewIsReady(view: UIView)
     
     func setSelectedItemIndex(selectedIndex: Int)
@@ -41,4 +45,6 @@ protocol PhotoVideoDetailViewOutput {
     func tabIndex(type: ElementTypes) -> Int?
     
     func createNewUrl()
+
+    func recognizeTextForCurrentItem(image: UIImage, completion: @escaping (ImageTextSelectionData?) -> Void)
 }

@@ -1006,7 +1006,7 @@
 "create_story_pop_up_message" = "История создана";
 "create_story_path_to_story" = "Фото и Видео >  Мои истории";
 "You can not share empty album" = "Вы не можете поделиться пустым альбомом";
-"etk_permission_description" = "Настоящим я даю согласие на получение коммерческих сообщений по электронной почте, чтобы получать информацию о выгодных продуктах и ​​услугах Turkcell и компаний Группы до тех пор, пока я не потребую иного в соответствии с Законом № 6563 и другим применимым законодательством.";
+"etk_permission_description" = "";
 "global_permission_title_label" = "Глобальное разрешение на передачу данных";
 "global_permission_description" = "Я даю согласие на передачу моей личной информации операторам, сотрудничающим с Turkcell, чтобы я мог использовать выгодные услуги соответствующего оператора в отношении lifebox.";
 "terms_and_use_etk_checkbox_header" = "Коммерческое электронное сообщение";
@@ -1507,7 +1507,7 @@
 "import_from_facebook_started" = "Начался импорт из Facebook.";
 "instapick_hashtags_copied" = "Хэштеги скопированы.";
 "create_story_selection_limit" = "Пожалуйста, выберите максимум %d фотографий.";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
+"etk_html" = "<p><strong>СОГЛАСИЕ НА КОММЕРЧЕСКИЕ ЭЛЕКТРОННЫЕ СООБЩЕНИЯ И ПЕРЕДАЧУ ДАННЫХ</strong></p>\n<p>Настоящим я даю согласие разрешить Lifecell Bulut Çözümleri A.Ş, Lifecell Dijital Servisler ve Çözümler A.Ş и Компаниям Группы, перечисленным ниже, обрабатывать мои персональные данные и передавать их сторонам, указанным в Политике Разрешений, и отправлять мне коммерческие электронные сообщения в соответствии с “Политика разрешений”, доступно <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">здесь</a> , если я не потребую иного в соответствии с Законом №. 6563, и другие применимые правила, в целях информирования меня о скидках, предложениях и специальных предложениях, которые соответствуют моим потребностям и предпочтениям в отношении продуктов и услуг этих компаний. Я признаю, что могу отозвать свое согласие на обработку /передачу моих персональных данных или получение коммерческих электронных писем, и подробная информация об объеме и отзыве такого согласия доступна в рамках \"<a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/izin-politikasi\">Политика Разрешений</a>\".</p>\n<table>\n<tbody>\n<tr>\n<td width=\"532\">\n<p><strong><u>Группа Компаний с Предоставленным Разрешением на Обработку/Обмен Данными</u></strong></p>\n</td>\n</tr>\n<tr>\n<td width=\"532\"> \n<p>Lifecell Dijital Servisler ve Çözümler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p> \n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p><strong><u>Группа Компаний с Разрешением на Коммерческую Связь</u></strong></p>\n</td> \n</tr> \n<tr> \n<td width=\"532\"> \n<p>Turktell Bilişim Servisleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Global Bilgi Pazarlama Danışma ve Çağrı Servisi Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Finansman A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Ödeme ve Elektronik Para Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Sigorta Aracılık Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Teknoloji Araştırma ve Geliştirme A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Satış ve Dağıtım Hizmetleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Turkcell Enerji Çözümleri ve Elektrik Satış Ticaret A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Müzik Yayın ve İletim A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell TV Yayın ve İçerik Hizmetleri Anonim Şirketi</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Bulut Çözümleri A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell İletişim Teknolojileri ve Dijital Servisler A.Ş.</p>\n</td>\n</tr>\n<tr>\n<td width=\"532\">\n<p>Lifecell Dijital Servisler ve Çözümler A.Ş</p>\n</td>\n</tr>\n</tbody>\n</table>";
 "free_up_space_alert_title" = "Освободите Место на вашем телефоне";
 "free_up_space_no_duplicates" = "У вас нет повторяющихся фотографий / видео.";
 "free_up_space_in_progress" = "Ваш список повторяющихся файлов еще не готов, пожалуйста, попробуйте позже.";
@@ -1979,6 +1979,7 @@
 "places_map_title" = "Карта";
 "map_location_detail_header" = "Фотографии в Этом Месте";
 "beeline_feature_cancel_TC" = "";
+"beeline_feature_cancel_TC" = "Beeline";
 "security_popup_body" = "Пожалуйста, заполните хотя бы 1 поле, для восстановления учетной записи, если вы забудете свой пароль";
 "security_popup_header" = "Укажите адрес Электронной Почты Восстановления или Секретный Вопрос";
 "save_to_my_billo" = "Сохранить в Billo";
@@ -2008,3 +2009,41 @@
 "security_popup_warning_body1" = "";
 "security_popup_warning_body2" = "";
 "security_popup_warning_footer" = "";
+"settings_change_password_google_warning" = "Чтобы изменить пароль, вы должны войти в свою учетную запись lifebox с помощью своего Google ID.";
+"settings_change_password_apple_warning" = "Чтобы изменить пароль, вы должны войти в lifebox, используя свой Apple ID.";
+"settings_change_password_apple_google_warning" = "Чтобы изменить пароль, вам необходимо войти в lifebox с помощью своего Google ID или Apple ID.";
+"settings_googe_apple_set_password" = "Установить пароль для lifebox";
+"settings_google_apple_mail_match_error" = "Для подключения вашей учетной записи к lifebox ваш адрес электронной почты должен быть одинаковым на каждой платформе.";
+"googe_apple_login_invalid_token" = "Неверная попытка входа в систему, проверьте свои учетные данные и повторите попытку.";
+"settings_google_apple_empty_mail_error" = "Вы должны добавить адрес электронной почты в свою учетную запись.";
+"password_change_external_auth_required_error" = "Чтобы изменить свой пароль, вы можете либо войти в свою учетную запись lifebox, используя свой идентификатор Google ID/Apple ID, либо следовать инструкциям по забытому паролю на экране входа в систему.";
+"password_change_forgot_password_required_error" = "Чтобы изменить свой пароль, вы должны сначала выйти из своей учетной записи и следовать инструкциям «Забыл Пароль» на экране входа в систему.";
+"kvkk_toggle_desc" = "Согласие на Обработку/Обмен Данных";
+"kvkk_toggle_text" = "Настоящим я даю свое согласие на обработку моих личных данных Lifecell Bulut Çözümleri A.Ş. и передачу их сторонам, указанным в %@.";
+"security_popup_warning_header" = "Введена Неверная Информация";
+"security_popup_warning_body1" = "Контрольный вопрос успешно сохранен, произошла следующая ошибка электронного адреса восстановления:";
+"security_popup_warning_body2" = "Электронный адрес для восстановления успешно сохранен, произошла следующая ошибка контрольного вопроса:";
+"security_popup_warning_footer" = "Вы можете повторно ввести свой резервный адрес электронной почты через Настройки -> Данные Учетной Записи -> Мой Профиль.";
+"apple_login_user_exists_body" = "Имеется учетная запись lifebox, зарегистрированная на адрес электронной почты %@. Для подключения метода «Вход с Apple ID» к существующей учетной записи lifebox, вы должны сначала ввести свой пароль lifebox.";
+"settings_apple_password_required" = "Для отключения входа через Apple ID необходимо установить пароль lifebox.";
+"apple_login_show_mail_warning" = "Для входа в систему с помощью Apple ID вам необходимо разрешить доступ к вашему адресу электронной почты в lifebox. Нажмите кнопку ниже для перехода на страницу настроек и следуйте инструкциям по удалению учетной записи lifebox в разделе Apple ID > Пароль и Безопасность > Приложения Использующие Apple ID и повторите шаги для повторного входа в систему с помощью вашего Apple ID.";
+
+/*Fuzzy*/
+"ETK_KVKK_Izin_Politikasi" = "Политика Разрешений";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"syncing" = "";
+"downloading" = "";
+"ETK_KVKK_Izin_Politikası" = "";
+
+/*Free for {3 months}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_free_trial" = "";
+
+/*First {6 months} {6,99 TRY/Month}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_as_you_go" = "";
+
+/*First {6 months} {6,99 TRY}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_up_front" = "";

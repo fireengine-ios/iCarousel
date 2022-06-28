@@ -145,19 +145,19 @@ extension LoginPresenter: LoginViewOutput {
         interactor.rememberMe(state: remember)
     }
     
-    func sendLoginAndPassword(login: String, password: String, googleToken: String?) {
+    func sendLoginAndPassword(login: String, password: String, appleGoogleUser: AppleGoogleUser?) {
         onLogin()
-        interactor.authificate(login: removeBrackets(text: login), password: password, atachedCaptcha: nil, googleToken: googleToken)
+        interactor.authificate(login: removeBrackets(text: login), password: password, atachedCaptcha: nil, appleGoogleUser: appleGoogleUser)
     }
     
-    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String, googleToken: String?) {
+    func sendLoginAndPasswordWithCaptcha(login: String, password: String, captchaID: String, captchaAnswer: String, appleGoogleUser: AppleGoogleUser?) {
         onLogin()
         
         let atachedCaptcha = CaptchaParametrAnswer(uuid: captchaID, answer: captchaAnswer)
         interactor.authificate(login: removeBrackets(text: login),
                                password: password,
                                atachedCaptcha: atachedCaptcha,
-                               googleToken: googleToken)
+                               appleGoogleUser: appleGoogleUser)
     }
     
     func onForgotPasswordTap() {
@@ -249,6 +249,10 @@ extension LoginPresenter: LoginInteractorOutput {
         case .emptyEmail:
             completeAsyncOperationEnableScreen()
             openEmptyEmail()
+            
+        case .emailDomainNotAllowed:
+            UIApplication.showErrorAlert(message: localized(.emailDomainNotAllowed))
+            router.goBack()
         }
         
     }

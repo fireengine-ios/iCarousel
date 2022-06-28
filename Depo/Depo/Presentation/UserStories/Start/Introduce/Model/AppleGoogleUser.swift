@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct GoogleUser {
+struct AppleGoogleUser {
     let idToken: String
-    let email: String
+    var email: String
+    let type: AppleGoogleUserType
+}
+
+enum AppleGoogleUserType {
+    case apple
+    case google
 }

@@ -24,15 +24,17 @@ class IntroduceInteractor: IntroduceInteractorInput {
         analyticsManager.logScreen(screen: .liveCollectRemember)
     }
     
-    func signInWithGoogle(with user: GoogleUser) {
+    func signInWithAppleGoogle(with user: AppleGoogleUser) {
         output.asyncOperationStarted()
         
-        authenticationService.googleLogin(user: SignInWithGoogleParameters(idToken: user.idToken)) { json in
+        authenticationService.appleGoogleLogin(user: SignInWithAppleGoogleParameters(user: user)) { json in
             if let errorCode = json["errorCode"] as? Int {
                 if errorCode == 4101 {
                     self.output.signUpRequired(for: user)
                 } else if errorCode == 4102 {
                     self.output.passwordLoginRequired(for: user)
+                } else if errorCode == 4103 {
+                    self.output.continueWithAppleGoogleFailed(with: .emailDomainNotAllowed)
                 }
             }
         } success: { [weak self] headers in
@@ -40,7 +42,7 @@ class IntroduceInteractor: IntroduceInteractorInput {
             self.loginScreen = RouterVC().loginWithHeaders(user: user, headers: headers) as? LoginViewController
             self.loginScreen?.output.continueWithGoogleLogin()
         } fail: { error in
-            self.output.continueWithGoogleFailed()
+            self.output.continueWithAppleGoogleFailed(with: .unknown)
         } twoFactorAuth: { response in
             self.tokenStorage.isRememberMe = true
             self.output?.showTwoFactorAuthViewController(response: response)
