@@ -3,6 +3,16 @@
     {
       "filename" : "iconLetterZA.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconLetter-2.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -3,6 +3,16 @@
     {
       "filename" : "iconSizeSmallest.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconSizeSmallest-2.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

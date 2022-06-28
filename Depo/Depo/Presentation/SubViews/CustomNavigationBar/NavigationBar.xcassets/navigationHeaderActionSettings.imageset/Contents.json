@@ -3,6 +3,16 @@
     {
       "filename" : "navigationHeaderActionSettings.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "profile.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

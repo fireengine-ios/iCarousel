@@ -35,7 +35,7 @@ final class DrawerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = AppColor.background.color
+        view.backgroundColor = AppColor.drawerBackground.color
         view.layer.cornerRadius = 16
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
 

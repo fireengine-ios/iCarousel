@@ -211,7 +211,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="filesBackground"/>
                         <constraints>
                             <constraint firstItem="pUQ-dm-Wqu" firstAttribute="leading" secondItem="9Vz-cE-Lvw" secondAttribute="leading" id="3RF-Xa-F4t"/>
                             <constraint firstItem="P6S-8m-g5d" firstAttribute="top" secondItem="9Vz-cE-Lvw" secondAttribute="top" id="Dpr-LA-0f1"/>
