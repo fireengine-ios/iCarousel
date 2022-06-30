@@ -134,28 +134,18 @@ class GridListTopBar: ViewController {
         guard let unwrapedConfig = currentConfig else {
             return
         }
-        let sortingTable = GridListTopBarSortingTableView(style: .plain)
+        let sortingTable = GridListTopBarSortingTableView()
         sortingTable.actionDelegate = self
         let titles = unwrapedConfig.availableSortTypes.map({ $0.description })
+        let images = unwrapedConfig.availableSortTypes.map({ $0.sortImage })
         var selectedSort: Int
         if (selectedIndex != -1) {
             selectedSort = selectedIndex
         } else {
             selectedSort = currentConfig?.availableSortTypes.firstIndex(of: unwrapedConfig.defaultSortType) ?? 0
         }
-        sortingTable.setup(withTitles: titles, selectedIndex: selectedSort)
-       
-        let router = RouterVC()
-        let rootVC = router.tabBarVC
-
-        let popUpHeight = sortingTable.defaultCellHeight * CGFloat(titles.count)
-        
-        let floatingVC = FloatingContainerVC.createContainerVC(withContentView: sortingTable,
-                                                               sourceView: sortByButton.imageView!,
-                                                               popOverSize: CGSize(width: floatingContainerWidth,
-                                                                                   height: popUpHeight))
-        
-        rootVC?.present(floatingVC, animated: true, completion: nil)
+        sortingTable.setup(withTitles: titles, images: images, selectedIndex: selectedSort)
+        sortingTable.presentAsDrawer()
     }
     
     @IBAction func gridListAction(_ sender: Any) {

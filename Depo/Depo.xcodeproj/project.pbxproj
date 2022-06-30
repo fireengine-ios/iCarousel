@@ -677,6 +677,10 @@
 		07C75A6B281A788200B028F0 /* GT-America-LC-Standard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 07C759F4281A785E00B028F0 /* GT-America-LC-Standard-Black.ttf */; };
 		07C75A6D281A78A900B028F0 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077D1D9B280568CD001C6E72 /* AppFont.swift */; };
 		07C75A6E281A78AB00B028F0 /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077D1D9B280568CD001C6E72 /* AppFont.swift */; };
+		07C7AA642865B68000C64120 /* ResizableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7AA632865B68000C64120 /* ResizableScrollView.swift */; };
+		07C7AA652865B68000C64120 /* ResizableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7AA632865B68000C64120 /* ResizableScrollView.swift */; };
+		07C7AA662865B68000C64120 /* ResizableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7AA632865B68000C64120 /* ResizableScrollView.swift */; };
+		07C7AA672865B68000C64120 /* ResizableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C7AA632865B68000C64120 /* ResizableScrollView.swift */; };
 		07CCBF7926FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
 		07CCBF7A26FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
 		07CCBF7B26FC7254002322B0 /* ValidateSecurityQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */; };
@@ -9631,6 +9635,7 @@
 		07C759F9281A786100B028F0 /* GT-America-LC-Standard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-America-LC-Standard-Medium.ttf"; sourceTree = "<group>"; };
 		07C759FA281A786200B028F0 /* GT-America-LC-Standard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-America-LC-Standard-Regular.ttf"; sourceTree = "<group>"; };
 		07C759FB281A786200B028F0 /* GT-America-LC-Standard-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-America-LC-Standard-Light.ttf"; sourceTree = "<group>"; };
+		07C7AA632865B68000C64120 /* ResizableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableScrollView.swift; sourceTree = "<group>"; };
 		07CCBF7726FC7254002322B0 /* ValidateSecurityQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateSecurityQuestionViewController.swift; sourceTree = "<group>"; };
 		07CCBF7826FC7254002322B0 /* ValidateSecurityQuestionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidateSecurityQuestionViewController.xib; sourceTree = "<group>"; };
 		07D0592D26F9B24D005315E2 /* ResetPasswordOTPInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordOTPInteractor.swift; sourceTree = "<group>"; };
@@ -12492,6 +12497,7 @@
 				0724681F2855CC9E0079B07E /* DrawerTransitioningDelegate.swift */,
 				0724681E2855CC9E0079B07E /* DrawerPassthroughView.swift */,
 				07E7A69A285A0A56005BBD4C /* UIViewController+PresentDrawer.swift */,
+				07C7AA632865B68000C64120 /* ResizableScrollView.swift */,
 			);
 			path = drawer;
 			sourceTree = "<group>";
@@ -25309,6 +25315,7 @@
 				89E51D4922CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				8C0E8D7F1FDEBDFF00789C91 /* FloatingContainerVC.swift in Sources */,
 				8C0E8D801FDEBDFF00789C91 /* Array+Safe.swift in Sources */,
+				07C7AA642865B68000C64120 /* ResizableScrollView.swift in Sources */,
 				8C0E8D811FDEBDFF00789C91 /* AutoSyncRouter.swift in Sources */,
 				8C0E8D831FDEBDFF00789C91 /* HomePageConfigurator.swift in Sources */,
 				8C0E8D861FDEBDFF00789C91 /* AutoSyncConfigurator.swift in Sources */,
@@ -27972,6 +27979,7 @@
 				98E4BA0D23C722FD003A4631 /* TrashBinNavbarManager.swift in Sources */,
 				98B04850259314750011DAEB /* CNContactUnified.m in Sources */,
 				CE784AEF22A685FB00662219 /* InstaPickSmartAlbumCell.swift in Sources */,
+				07C7AA662865B68000C64120 /* ResizableScrollView.swift in Sources */,
 				CE784AF022A685FB00662219 /* KeyboardHideManager.swift in Sources */,
 				CE784AF122A685FB00662219 /* BaseFilesGreedPresenter.swift in Sources */,
 				98231A6D24F3A23500FD16E2 /* FilterManager.swift in Sources */,
@@ -29445,6 +29453,7 @@
 				076BD1A327BBBDEC004609E3 /* MapSearchInteractorInput.swift in Sources */,
 				CF8B65EC23CBC9D70021B021 /* PhoneVerificationRouter.swift in Sources */,
 				07595513264131FB00C088B1 /* String+Extension.swift in Sources */,
+				07C7AA652865B68000C64120 /* ResizableScrollView.swift in Sources */,
 				B57BC178252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				CF8B65ED23CBC9D70021B021 /* PhoneVerificationConfigurator.swift in Sources */,
 				CF8B65EE23CBC9D70021B021 /* PhoneVerificationInitializer.swift in Sources */,
@@ -31433,6 +31442,7 @@
 				CF8B6E7523CBCA280021B021 /* KeyboardHideManager.swift in Sources */,
 				98B04851259314750011DAEB /* CNContactUnified.m in Sources */,
 				CF8B6E7623CBCA280021B021 /* BaseFilesGreedPresenter.swift in Sources */,
+				07C7AA672865B68000C64120 /* ResizableScrollView.swift in Sources */,
 				CF8B6E7723CBCA280021B021 /* AdjustsFontSizeInsetsButton.swift in Sources */,
 				CF8B6E7823CBCA280021B021 /* UIImage+Color.swift in Sources */,
 				98231A6E24F3A23500FD16E2 /* FilterManager.swift in Sources */,

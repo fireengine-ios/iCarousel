@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "iconKebabEmpty.pdf",
+      "filename" : "iconArrowOldest.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "iconKebabEmpty-1.pdf",
+      "filename" : "iconArrowOldest-2.pdf",
       "idiom" : "universal"
     }
   ],

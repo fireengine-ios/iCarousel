@@ -3,6 +3,16 @@
     {
       "filename" : "navigationHeaderActionPlus.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconAddUnselect.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

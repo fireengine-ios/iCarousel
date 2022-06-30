@@ -34,6 +34,7 @@ enum AppColor {
     case label
     case tint
     case separator
+    case drawerBackground
     case lightText
 
     case darkContentOverlay
@@ -45,7 +46,7 @@ enum AppColor {
     case filesLabel
     case filesBigCellShadow
     
-    
+    case filesTypesBackground
     case filesMusicTab
     case filesDocumentTab
     case filesFavoriteTab
