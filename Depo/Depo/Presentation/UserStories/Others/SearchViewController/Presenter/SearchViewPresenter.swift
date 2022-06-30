@@ -232,6 +232,17 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
+    func getCellSizeForPeople() -> CGSize {
+        var cellWidth: CGFloat = 180
+        
+        if (Device.isIpad) {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPadGreedInset * 2 - NumericConstants.iPadGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIpad - 1)) / NumericConstants.numerCellInLineOnIpad
+        } else {
+            cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIphone - 1)) / NumericConstants.numerCellInLineOnIphone
+        }
+        return CGSize(width: cellWidth, height: cellWidth + 40)
+    }
+    
     func onLongPressInCell() {
         startEditing()
     }

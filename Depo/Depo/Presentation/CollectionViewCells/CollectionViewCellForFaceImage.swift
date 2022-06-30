@@ -13,14 +13,19 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var activity: UIActivityIndicatorView!
-    @IBOutlet private weak var selectionView: UIView!
     @IBOutlet private weak var visibleImageView: UIImageView!
-    @IBOutlet private weak var transperentView: UIView!
-        
+    @IBOutlet private weak var hiddenItemsView: UIView! {
+        willSet {
+            newValue.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        nameLabel.font = UIFont.TurkcellSaturaBolFont(size: 14)
+        backgroundColor = AppColor.background.color
+        nameLabel.font = .appFont(.medium, size: 14)
+        nameLabel.textColor = AppColor.label.color
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
@@ -28,13 +33,17 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         
         if isSelectionActive {
             visibleImageView.isHidden = !isCellSelected
-            transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+            hiddenItemsView.isHidden = !isCellSelected
             isCellSelected = !isCellSelected
+            
         }
         
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
+        imageView.layer.cornerRadius = imageView.frame.height * 0.5
+        hiddenItemsView.layer.cornerRadius = hiddenItemsView.frame.height * 0.5
+
         guard let item = wrappedObj as? Item else {
             return
         }
@@ -44,7 +53,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         }
         
         visibleImageView.isHidden = !isCellSelected
-        transperentView.alpha = isCellSelected ? NumericConstants.faceImageCellTransperentAlpha : 0
+        hiddenItemsView.isHidden = !isCellSelected
         
         imageView.image = nil
         
@@ -57,14 +66,12 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
             
             if !isVisible {
                 visibleImageView.isHidden = isVisible
-                transperentView.alpha = NumericConstants.faceImageCellTransperentAlpha
+                hiddenItemsView.isHidden = isVisible
             }
             
             visibleImageView.isHidden = isCellSelected || isDemo
-            transperentView.alpha = !isCellSelected && !isDemo ? NumericConstants.faceImageCellTransperentAlpha : 0
+            hiddenItemsView.isHidden = isCellSelected || isDemo
         }
-
-        nameLabel.textColor = ColorConstants.whiteColor
 
         isAccessibilityElement = true
         accessibilityTraits = .button
@@ -102,7 +109,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         }
         
         isAlreadyConfigured = true
-        backgroundColor = ColorConstants.fileGreedCellColor
+        imageView.backgroundColor = ColorConstants.fileGreedCellColor
     }
     
     override func setImage(with url: URL) {
@@ -117,7 +124,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         }
         
         isAlreadyConfigured = true
-        backgroundColor = ColorConstants.fileGreedCellColor
+        imageView.backgroundColor = ColorConstants.fileGreedCellColor
     }
     
     class func getCellSise() -> CGSize {

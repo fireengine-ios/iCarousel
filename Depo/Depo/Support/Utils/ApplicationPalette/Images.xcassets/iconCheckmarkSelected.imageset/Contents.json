@@ -3,6 +3,16 @@
     {
       "filename" : "iconCheckmarkSelected.pdf",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "iconSelectFills.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

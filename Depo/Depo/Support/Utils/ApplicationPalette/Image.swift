@@ -39,6 +39,8 @@ enum Image: String, AppImage {
     case iconUnShare
     case iconSend
     case iconCopy
+    case iconChangePhoto
+    case iconChangePerson
 
     ///  Files Tab
     case iconFileAudio
@@ -90,5 +92,10 @@ enum Image: String, AppImage {
     case iconArrowNewest
     case iconLetterZA
     case iconLetterAZ
+    
+    /// People Flow
+    case iconPremium
+    case iconHideSelect
+    case iconBackupContact
 
 }
