@@ -44,16 +44,16 @@ final class SettingsTableViewSwitchCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = AppColor.blackColor.color
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 20)
             newValue.numberOfLines = 0
         }
     }
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.textDisabled
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
             newValue.numberOfLines = 0
         }
     }

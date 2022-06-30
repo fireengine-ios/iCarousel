@@ -18,7 +18,7 @@ final class ContactListHeader: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.contactListTitle
-            newValue.font = .TurkcellSaturaDemFont(size: 24)
+            newValue.font = .appFont(.regular, size: 24.0)
             newValue.textColor = AppColor.navyAndWhite.color
         }
     }
@@ -43,13 +43,13 @@ final class ContactListHeader: UIView, NibInit {
                 textField.backgroundColor = ColorConstants.toolbarTintColor
                 textField.placeholder = TextConstants.search
                 textField.placeholderLabel?.textColor = ColorConstants.lightText
-                textField.font = .TurkcellSaturaDemFont(size: 16)
+                textField.font = .appFont(.regular, size: 16.0)
                 textField.textColor = AppColor.navyAndWhite.color
                 textField.keyboardAppearance = .dark
             }
             
             if let cancelButton = newValue.cancelButton {
-                cancelButton.titleLabel?.font = .TurkcellSaturaRegFont(size: 17)
+                cancelButton.titleLabel?.font = .appFont(.regular, size: 117.0)
                 cancelButton.backgroundColor = .clear
             }
         }
@@ -90,10 +90,10 @@ final class ContactListHeader: UIView, NibInit {
                                                                       .foregroundColor: ColorConstants.duplicatesGray])
         
         let countRange = (string as NSString).range(of: "\(backUpInfo.total)")
-        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaBolFont(size: 16), range: countRange)
+        attributedString.addAttribute(.font, value: UIFont.appFont(.bold, size: 16.0), range: countRange)
         
         let dateRange = (string as NSString).range(of: dateString)
-        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaBolFont(size: 16), range: dateRange)
+        attributedString.addAttribute(.font, value: UIFont.appFont(.bold, size: 16.0), range: dateRange)
         
         backupInfoLabel.attributedText = attributedString
     }

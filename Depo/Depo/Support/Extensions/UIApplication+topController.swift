@@ -32,7 +32,7 @@ extension UIApplication {
     static func showOnTabBar(errorMessage: String) {
         let errorPopUpVC = PopUpController.with(errorMessage: errorMessage)
         DispatchQueue.toMain {
-            RouterVC().tabBarVC?.present(errorPopUpVC, animated: false, completion: nil)
+            errorPopUpVC.open()
         }
     }
     
@@ -51,7 +51,7 @@ extension UIApplication {
         }
         
         DispatchQueue.toMain {
-            controller?.present(vc, animated: false, completion: nil)
+            vc.open()
         }
     }
     
@@ -62,7 +62,7 @@ extension UIApplication {
             }
         }
         DispatchQueue.toMain {
-            topController()?.present(vc, animated: false, completion: nil)
+            vc.open()
         }
     }
 }

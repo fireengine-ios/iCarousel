@@ -18,18 +18,18 @@ class SettingsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+        titleLabel.textColor = AppColor.label.color
+        titleLabel.font = .appFont(.regular, size: 18)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         //let bgView = UIView()
         if (selected) {
-            titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            titleLabel.font = .appFont(.bold, size: 18)
             backgroundColor = ColorConstants.selectedCellBlueColor
         } else {
-            titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            titleLabel.font = .appFont(.regular, size: 18)
             backgroundColor = AppColor.primaryBackground.color
         }
         //backgroundView = bgView

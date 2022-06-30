@@ -372,7 +372,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported,
                                           image: .error, buttonTitle: TextConstants.ok)
-            UIApplication.topController()?.present(vc, animated: false, completion: nil)
+            vc.open()
+
         }
     }
     

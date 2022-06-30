@@ -39,7 +39,7 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
                                       firstAction: cancelHandler,
                                       secondAction: okHandler)
         DispatchQueue.toMain {
-            UIApplication.topController()?.present(vc, animated: false, completion: nil)
+            vc.open()
         }
     }
     

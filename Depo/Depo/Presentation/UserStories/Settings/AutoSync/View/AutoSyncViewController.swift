@@ -80,10 +80,10 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 0
         if Device.isIpad {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
+            titleLabel.font = .appFont(.regular, size: 24)
             titleLabel.textAlignment = .center
         } else {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            titleLabel.font = .appFont(.regular, size: 16)
             titleLabel.textAlignment = .left
         }
         
@@ -145,7 +145,7 @@ extension AutoSyncViewController: AutoSyncViewInput {
                                                     }
             }
             DispatchQueue.toMain {
-                self.present(controller, animated: true, completion: nil)
+                controller.open()
             }
             return
         }
@@ -166,7 +166,7 @@ extension AutoSyncViewController: AutoSyncViewInput {
                                                 }
         })
         DispatchQueue.toMain {
-           self.present(controller, animated: true, completion: nil)
+            controller.open()
         }
     }
 }

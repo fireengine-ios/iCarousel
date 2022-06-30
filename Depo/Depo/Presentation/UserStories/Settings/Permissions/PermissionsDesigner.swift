@@ -12,20 +12,20 @@ final class PermissionsDesigner: NSObject {
     
     @IBOutlet weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = UIColor.lrBrownishGrey
-            newValue.font = .TurkcellSaturaFont(size: 18)
-            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 16)
+            newValue.backgroundColor = AppColor.secondaryBackground.color
             newValue.isOpaque = true
         }
     }
     
     @IBOutlet weak var descriptionView: UITextView! {
         willSet {
-            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.backgroundColor = AppColor.secondaryBackground.color
             newValue.isOpaque = true
             
             newValue.linkTextAttributes = [
-                .foregroundColor: UIColor.lrTealishTwo,
+                .foregroundColor: AppColor.label.color,
                 .underlineColor: UIColor.lrTealishTwo,
                 .underlineStyle: NSUnderlineStyle.single.rawValue
             ]
@@ -42,9 +42,9 @@ final class PermissionsDesigner: NSObject {
     @IBOutlet private weak var informativeLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.informativeDescription
-            newValue.textColor = UIColor.lrLightBrownishGrey
-            newValue.font = .TurkcellSaturaFont(size: 14)
-            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 8)
+            newValue.backgroundColor = AppColor.secondaryBackground.color
             newValue.isOpaque = true
         }
     }

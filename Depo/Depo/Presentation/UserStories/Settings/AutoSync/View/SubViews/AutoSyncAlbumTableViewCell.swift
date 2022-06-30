@@ -15,8 +15,8 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = ColorConstants.textGrayColor
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     @IBOutlet private weak var leftOffset: NSLayoutConstraint! //24 55

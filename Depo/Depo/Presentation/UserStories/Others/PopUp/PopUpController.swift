@@ -134,11 +134,21 @@ final class PopUpController: BasePopUpController {
     }
     
     private func setup(_ button: InsetsButton) {
+        
+        if button == firstButton {
+            button.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
+            button.setBackgroundColor(AppColor.tint.color, for: .highlighted)
+            button.setTitleColor(AppColor.tint.color, for: .normal)
+            button.setTitleColor(AppColor.whiteAndLrTealish.color.darker(by: 30.0), for: .highlighted)
+        } else {
+            button.setBackgroundColor(AppColor.tint.color, for: .normal)
+            button.setBackgroundColor(AppColor.tint.color.darker(by: 30), for: .highlighted)
+            button.setTitleColor(AppColor.whiteAndLrTealish.color, for: .normal)
+            button.setTitleColor(AppColor.whiteAndLrTealish.color.darker(by: 30.0), for: .highlighted)
+        }
+        
         button.isExclusiveTouch = true
-        button.setBackgroundColor(AppColor.whiteAndLrTealish.color, for: .normal)
-        button.setBackgroundColor(AppColor.tint.color, for: .highlighted)
-        button.setTitleColor(AppColor.tint.color, for: .normal)
-        button.setTitleColor(AppColor.tint.color.darker(by: 30.0), for: .highlighted)
+
         button.titleLabel?.font = UIFont.appFont(.medium, size: 18)
         button.layer.borderColor = AppColor.tint.color.cgColor
         button.layer.borderWidth = 1

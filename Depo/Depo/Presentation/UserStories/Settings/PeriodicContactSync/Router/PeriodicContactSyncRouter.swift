@@ -26,7 +26,8 @@ extension PeriodicContactSyncRouter: PeriodicContactSyncRouterInput {
                                                 }
         })
         
-        RouterVC().presentViewController(controller: controller)
+        controller.open()
+
     }
     
 }

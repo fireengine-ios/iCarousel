@@ -38,7 +38,7 @@ final class HomePagePopUpOperation: Operation {
             let isHomePage = (self.router.defaultTopController as? TabBarViewController)?.currentViewController is HomePageViewController
             let isSpotlightPresentedOnHomePage = self.router.defaultTopController is SpotlightViewController
             if isHomePage || isSpotlightPresentedOnHomePage {
-                self.router.defaultTopController?.present(popUp, animated: true) { [weak self] in
+                popUp.open { [weak self] in
                     self?.wasPresented = true
                 }
             }

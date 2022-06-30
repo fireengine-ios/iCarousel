@@ -15,8 +15,8 @@ final class MyStorageRouter {
 //MARK: - MyStorageRouterInput
 extension MyStorageRouter: MyStorageRouterInput {
     func showCancelOfferAlert(with text: String) {
-        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
-        router.presentViewController(controller: vc)
+        let vc = PopUpController.with(title: TextConstants.offersInfo, message: text, image: .none, buttonTitle: TextConstants.offersOk)
+        vc.open()
     }
     
     func showCancelOfferApple() {
@@ -34,8 +34,8 @@ extension MyStorageRouter: MyStorageRouterInput {
     }
     
     func showSubTurkcellOpenAlert(with text: String) {
-        let vc = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk)
-        router.presentViewController(controller: vc)
+        let vc = PopUpController.with(title: TextConstants.offersInfo, message: text, image: .none, buttonTitle: TextConstants.offersOk)
+        vc.open()
     }
     
     func openLeavePremium(type: LeavePremiumType) {

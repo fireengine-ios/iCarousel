@@ -15,11 +15,13 @@ class BasePopUpController: UIViewController {
 
     var dismissCompletion: VoidHandler?
 
-    func open() {
-        presentAsDrawer { drawer in
+    func open(_ completion : VoidHandler? = nil)  {
+        
+        presentAsDrawer(config: { drawer in
             drawer.showsDrawerIndicator = false
             drawer.drawerPresentationController?.allowsDismissalWithPanGesture = false
-        }
+            
+        }, completion: completion)
     }
 
     ///isFinalStep is used for dismissCompletion performing

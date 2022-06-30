@@ -31,7 +31,7 @@ final class DeleteDuplicatesHeader: UIView, NibInit {
                                                                                       .font: UIFont.TurkcellSaturaMedFont(size: 20)])
         
         let range = (string as NSString).range(of: "\(count)")
-        attributedString.addAttributes([.font: UIFont.TurkcellSaturaBolFont(size: 20)], range: range)
+        attributedString.addAttributes([.font: UIFont.appFont(.bold, size: 20.0)], range: range)
         
         titleLabel.attributedText = attributedString
     }

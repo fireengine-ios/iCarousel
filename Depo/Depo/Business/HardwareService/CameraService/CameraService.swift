@@ -178,7 +178,7 @@ class CameraService {
                                                 }
         })
         DispatchQueue.toMain {
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            controller.open()
         }
     }
 }

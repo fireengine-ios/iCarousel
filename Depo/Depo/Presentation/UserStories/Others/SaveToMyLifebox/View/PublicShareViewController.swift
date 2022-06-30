@@ -149,7 +149,7 @@ extension PublicShareViewController: PublicShareViewInput {
         dismissDownloadAlert {
             let vc = PopUpController.with(title: TextConstants.success, message: TextConstants.popUpDownloadComplete, image: .success, buttonTitle: TextConstants.ok)
             DispatchQueue.main.async {
-                self.present(vc, animated: false, completion: nil)
+                vc.open()
             }
         }
     }
@@ -158,7 +158,7 @@ extension PublicShareViewController: PublicShareViewInput {
         dismissDownloadAlert {
             let vc = PopUpController.with(title: TextConstants.errorAlert, message: localized(.publicShareDownloadErrorMessage), image: .error, buttonTitle: TextConstants.ok)
             DispatchQueue.main.async {
-                self.present(vc, animated: false, completion: nil)
+                vc.open()
             }
         }
     }

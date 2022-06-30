@@ -201,7 +201,8 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
             moduleOutput?.previewSearchResultsHide()
         } else {
             let vc = PopUpController.with(title: TextConstants.warning, message: TextConstants.theFileIsNotSupported, image: .error, buttonTitle: TextConstants.ok)
-            UIApplication.topController()?.present(vc, animated: false, completion: nil)
+            
+            vc.open()
         }
     }
     

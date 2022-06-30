@@ -72,7 +72,7 @@ final class CircleLoaderView: UIView {
     
     private let attributedPercentageValue: NSMutableAttributedString = {
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.TurkcellSaturaMedFont(size: 60.0),
+            .font: UIFont.appFont(.medium, size: 60.0),
             .foregroundColor: AppColor.navyAndWhite.color]
         
         let attributed = NSMutableAttributedString(string: "0", attributes: attributes)
@@ -81,8 +81,8 @@ final class CircleLoaderView: UIView {
     }()
     
     private let attributedPercentageSign: NSAttributedString = {
-        let bigFont = UIFont.TurkcellSaturaMedFont(size: 60.0)
-        let smallFont = UIFont.TurkcellSaturaMedFont(size: 20.0)
+        let bigFont = UIFont.appFont(.medium, size: 60.0)
+        let smallFont = UIFont.appFont(.medium, size: 20.0)
         
         /// percent sign is aligned to top
         let offset = bigFont.capHeight - smallFont.capHeight

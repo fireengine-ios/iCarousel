@@ -136,7 +136,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
                                          secondAction: { vc in
                                             close(controller: vc, result: true)
                                          })
-        router.presentViewController(controller: popup)
+        popup.open()
     }
 }
 

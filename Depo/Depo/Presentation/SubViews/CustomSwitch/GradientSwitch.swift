@@ -1,13 +1,13 @@
 //
-//  CustomSwitch.swift
-//  Depo_LifeTech
+//  GradientSwitch.swift
+//  Depo
 //
-//  Created by Alexander Gurin on 6/24/17.
-//  Copyright © 2017 com.igones. All rights reserved.
+//  Created by Hooman Seven on 30/6/2022.
+//  Copyright © 2022 LifeTech. All rights reserved.
 //
 
-import UIKit
-class CustomSwitch: UISwitch {
+import Foundation
+class GradientSwitch: UISwitch {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

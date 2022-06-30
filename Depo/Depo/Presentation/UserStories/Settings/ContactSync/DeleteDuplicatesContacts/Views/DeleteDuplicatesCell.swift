@@ -21,7 +21,7 @@ final class DeleteDuplicatesCell: UITableViewCell {
     @IBOutlet private weak var letterLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaDemFont(size: 20)
+            newValue.font = .appFont(.regular, size: 20.0)
             newValue.textColor = ColorConstants.duplicatesGray
         }
     }
@@ -29,7 +29,7 @@ final class DeleteDuplicatesCell: UITableViewCell {
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
+            newValue.font = .appFont(.medium, size: 16.0)
             newValue.textColor = .lrBrownishGrey
         }
     }
@@ -37,7 +37,7 @@ final class DeleteDuplicatesCell: UITableViewCell {
     @IBOutlet private weak var duplicatesLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaFont(size: 12)
+            newValue.font = .appFont(.regular, size: 12.0)
             newValue.textColor = ColorConstants.duplicatesGray
         }
     }

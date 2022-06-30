@@ -14,7 +14,7 @@ final class FaceImageDesigner: NSObject {
         willSet {
             newValue.text = TextConstants.faceImageGrouping
             newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = .appFont(.regular, size: 18)
         }
     }
     
@@ -22,7 +22,7 @@ final class FaceImageDesigner: NSObject {
         willSet {
             newValue.text = TextConstants.facebookPhotoTags
             newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = .appFont(.regular, size: 18)
         }
     }
     
@@ -30,7 +30,7 @@ final class FaceImageDesigner: NSObject {
         willSet {
             newValue.text = " "
             newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.font = .appFont(.regular, size: 15)
         }
     }
     
@@ -38,14 +38,14 @@ final class FaceImageDesigner: NSObject {
         willSet {
             newValue.text = " "
             newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.font = .appFont(.regular, size: 15)
         }
     }
     
     @IBOutlet private weak var firstFaceImageLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.font = .appFont(.regular, size: 15)
             newValue.text = TextConstants.faceImageGroupingDescription
         }
     }
@@ -53,7 +53,7 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var secondFaceImageLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.font = .appFont(.regular, size: 15)
             newValue.text = TextConstants.faceImageUpgrade
         }
     }
@@ -61,7 +61,7 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var threeFaceImageLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.darkText
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
+            newValue.font = .appFont(.regular, size: 15)
             newValue.text = TextConstants.faceTagsDescriptionStandart
         }
     }
@@ -69,8 +69,8 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var facebookImportButton: UIButton! {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.backgroundColor = ColorConstants.darkBlueColor
+            newValue.titleLabel?.font = .appFont(.bold, size: 18)
             newValue.layer.cornerRadius = 25
             newValue.setTitle(TextConstants.importFromFB, for: .normal)
         }
@@ -79,9 +79,32 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var faceImagePremiumButton: UIButton! {
         willSet {
             newValue.setTitleColor(UIColor.white, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.titleLabel?.font = .appFont(.bold, size: 18)
             newValue.setTitle(TextConstants.becomePremiumMember, for: .normal)
             newValue.titleEdgeInsets = UIEdgeInsets(top: 6, left: 17, bottom: 6, right: 17)
         }
     }
+    
+    
+    @IBOutlet weak var faceImageBackView: UIView! {
+        willSet {
+            newValue.addRoundedShadows(cornerRadius: 16,
+                                       shadowColor: AppColor.viewShadowLight.cgColor,
+                                       opacity: 0.8, radius: 6.0)
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+
+        }
+    }
+    
+    
+    @IBOutlet weak var facebookImageBackView: UIView! {
+        willSet {
+            newValue.addRoundedShadows(cornerRadius: 16,
+                                       shadowColor: AppColor.viewShadowLight.cgColor,
+                                       opacity: 0.8, radius: 6.0)
+            newValue.backgroundColor = AppColor.secondaryBackground.color
+        }
+    }
+    
+    
 }

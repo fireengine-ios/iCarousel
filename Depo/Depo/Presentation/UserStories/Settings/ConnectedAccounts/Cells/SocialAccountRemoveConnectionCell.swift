@@ -86,7 +86,8 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
             section.mediator.disconnect()
         })
         
-        UIApplication.topController()?.present(warningPopup, animated: true, completion: nil)
+        warningPopup.open()
+
     }
     
     private func warningTexts() -> (title: String, message: String) {
