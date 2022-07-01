@@ -26,6 +26,12 @@ class GridListTopBar: ViewController {
     
     @IBOutlet fileprivate weak var gridListButton: UIButton!
     @IBOutlet private weak var moreButton: UIButton!
+    @IBOutlet private weak var middleLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.medium, size: 14)
+        }
+    }
     
     @IBOutlet fileprivate weak var segmentFilter: UISegmentedControl!
     
@@ -76,6 +82,11 @@ class GridListTopBar: ViewController {
         
         if centeredContent {
             centerYConstraint.constant = 0
+        }
+        
+        if let middleText = config.middleText {
+            middleLabel.isHidden = false
+            middleLabel.text = middleText
         }
     }
     

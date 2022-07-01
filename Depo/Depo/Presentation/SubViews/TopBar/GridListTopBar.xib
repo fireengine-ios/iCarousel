@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="centerYConstraint" destination="ZD4-gp-yMM" id="ae1-Xx-5QO"/>
                 <outlet property="gridListButton" destination="pnm-iL-2WL" id="X7K-lb-zIZ"/>
+                <outlet property="middleLabel" destination="F7x-BT-auO" id="DaU-3H-OnQ"/>
                 <outlet property="moreButton" destination="2hB-ca-1KW" id="K7E-al-5mO"/>
                 <outlet property="segmentFilter" destination="wal-TA-Zbe" id="hOT-Cp-UMb"/>
                 <outlet property="sortByButton" destination="R7m-go-R4c" id="FSg-j0-lRy"/>
@@ -84,9 +85,16 @@
                         </button>
                     </subviews>
                 </stackView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7x-BT-auO">
+                    <rect key="frame" x="183.5" y="27.5" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" name="primaryBackground"/>
             <constraints>
+                <constraint firstItem="F7x-BT-auO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6Hp-L8-cJu"/>
                 <constraint firstItem="cCH-zD-zC4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8B6-Q6-iEr"/>
                 <constraint firstAttribute="trailing" secondItem="uV1-Ni-QO4" secondAttribute="trailing" constant="10" id="DPX-NF-xYp"/>
                 <constraint firstAttribute="bottom" secondItem="cCH-zD-zC4" secondAttribute="bottom" id="Dee-CA-aI2"/>
@@ -96,6 +104,7 @@
                 <constraint firstItem="R7m-go-R4c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="hsT-5L-dXY"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lWj-2g-ibL"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="p6X-9N-zV0"/>
+                <constraint firstItem="F7x-BT-auO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="p8O-wQ-FyJ"/>
                 <constraint firstAttribute="trailing" secondItem="cCH-zD-zC4" secondAttribute="trailing" id="r06-zc-XFF"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

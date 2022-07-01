@@ -12,6 +12,7 @@ import SDWebImage
 enum BaseDataSourceDisplayingType{
     case greed
     case list
+    case people
 }
 
 protocol BaseDataSourceForCollectionViewDelegate: AnyObject {
@@ -69,6 +70,8 @@ protocol BaseDataSourceForCollectionViewDelegate: AnyObject {
     func onSelectedMapPlaceholderItem()
     
     func didSelectAction(type: ActionType, on item: Item?, sender: Any?)
+    
+    func getCellSizeForPeople() -> CGSize
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -784,6 +787,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader)
         
+        let textHeader =  UINib(nibName: CollectionViewSuplementaryConstants.collectionViewHeaderWithText,
+                                bundle: nil)
+        collectionView?.register(textHeader,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewHeaderWithText)
+        
     }
     
     func registerFooters() {
@@ -1391,6 +1400,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if let wraperedDelegate = delegate {
             if (displayingType == .list){
                 return wraperedDelegate.getCellSizeForList()
+            } else if (displayingType == .people) {
+                return wraperedDelegate.getCellSizeForPeople()
             }
             return wraperedDelegate.getCellSizeForGreed()
         }
