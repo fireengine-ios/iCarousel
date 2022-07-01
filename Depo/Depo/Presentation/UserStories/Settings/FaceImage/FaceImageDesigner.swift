@@ -13,24 +13,24 @@ final class FaceImageDesigner: NSObject {
     @IBOutlet private weak var faceImageAllowedLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.faceImageGrouping
-            newValue.textColor = ColorConstants.darkText
-            newValue.font = .appFont(.regular, size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     
     @IBOutlet private weak var facebookTagsAllowedLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.facebookPhotoTags
-            newValue.textColor = ColorConstants.darkText
-            newValue.font = .appFont(.regular, size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     
     @IBOutlet private weak var firstFacebookLabel: UILabel! {
         willSet {
             newValue.text = " "
-            newValue.textColor = ColorConstants.darkText
-            newValue.font = .appFont(.regular, size: 15)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
         }
     }
     
@@ -44,8 +44,8 @@ final class FaceImageDesigner: NSObject {
     
     @IBOutlet private weak var firstFaceImageLabel: UILabel! {
         willSet {
-            newValue.textColor = ColorConstants.darkText
-            newValue.font = .appFont(.regular, size: 15)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12)
             newValue.text = TextConstants.faceImageGroupingDescription
         }
     }

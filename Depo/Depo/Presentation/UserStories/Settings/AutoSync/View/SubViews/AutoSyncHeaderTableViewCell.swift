@@ -14,7 +14,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
         willSet {
             newValue.text = ""
             newValue.textColor = AppColor.label.color
-            newValue.font = .appFont(.regular, size: 16)
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     
@@ -22,7 +22,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
         willSet {
             newValue.text = ""
             newValue.textColor = AppColor.lightText.color
-            newValue.font = .appFont(.regular, size: 16)
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     
@@ -30,7 +30,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
         willSet {
             newValue.text = ""
             newValue.textColor = AppColor.label.color
-            newValue.font = .appFont(.regular, size: 16)
+            newValue.font = .appFont(.regular, size: 14)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }

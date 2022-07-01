@@ -28,7 +28,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     
     var fromSettings: Bool = false
     private var onStartUsingButtonTapped = false
-
+    
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         dataSource.isFromSettings = fromSettings
         
         if fromSettings {
@@ -75,27 +75,33 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = TextConstants.autoSyncFromSettingsTitle
-        titleLabel.textColor = ColorConstants.textGrayColor
+        let text = TextConstants.autoSyncFromSettingsTitle as NSString
+        
+        let attributedString = NSMutableAttributedString(string: text as String,
+                                                         attributes: [.font: UIFont.appFont(.regular, size: 14.0),
+                                                                      .foregroundColor: AppColor.label.color])
+        
+        let range = text.range(of: " \n\n")
+        let startRange = (text as NSString).range(of: " \n\n")
+        let endRange = NSRange(location: range.location + range.length, length: text.length - range.location - range.length)
+        
+        attributedString.addAttribute(.font, value: UIFont.appFont(.medium, size: 14.0), range: startRange )
+        attributedString.addAttribute(.font, value: UIFont.appFont(.regular, size: 12.0), range: endRange )
+        titleLabel.attributedText = attributedString
+        
+        titleLabel.textColor = AppColor.label.color
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 0
-        if Device.isIpad {
-            titleLabel.font = .appFont(.regular, size: 24)
-            titleLabel.textAlignment = .center
-        } else {
-            titleLabel.font = .appFont(.regular, size: 16)
-            titleLabel.textAlignment = .left
-        }
         
         view.addSubview(titleLabel)
         titleLabel.pinToSuperviewEdges(offset: 20)
-
+        
         let size = view.sizeToFit(width: tableView.bounds.width)
         view.frame.size = size
-    
+        
         tableView.tableHeaderView = view
     }
-
+    
     // MARK: buttons actions
     
     @IBAction func onStartUsingButton() {
@@ -104,13 +110,13 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         storageVars.isAutoSyncSet = true
         output.change(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
     }
-
+    
 }
 
 // MARK: - AutoSyncViewInput
 
 extension AutoSyncViewController: AutoSyncViewInput {
-
+    
     
     func setupInitialState() {
     }
@@ -118,14 +124,14 @@ extension AutoSyncViewController: AutoSyncViewInput {
     func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         dataSource.setupModels(with: syncSettings, albums: albums)
     }
-        
+    
     func disableAutoSync() {
         dataSource.forceDisableAutoSync()
         if !fromSettings {
             output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
         }
     }
-
+    
     func checkPermissionsSuccessed() {
         dataSource.checkPermissionsSuccessed()
     }
@@ -140,9 +146,9 @@ extension AutoSyncViewController: AutoSyncViewInput {
                                                   message: TextConstants.locationServiceDisable,
                                                   image: .error,
                                                   buttonTitle: TextConstants.ok) { (vc) in
-                                                    vc.close {
-                                                        completion()
-                                                    }
+                vc.close {
+                    completion()
+                }
             }
             DispatchQueue.toMain {
                 controller.open()
@@ -154,16 +160,16 @@ extension AutoSyncViewController: AutoSyncViewInput {
     
     private func showAccessAlert(message: String) {
         debugLog("AutoSyncViewController showAccessAlert")
-    
+        
         let controller = PopUpController.with(title: TextConstants.cameraAccessAlertTitle,
                                               message: message,
                                               image: .none,
                                               firstButtonTitle: TextConstants.cameraAccessAlertNo,
                                               secondButtonTitle: TextConstants.cameraAccessAlertGoToSettings,
                                               secondAction: { vc in
-                                                vc.close {
-                                                    UIApplication.shared.openSettings()
-                                                }
+            vc.close {
+                UIApplication.shared.openSettings()
+            }
         })
         DispatchQueue.toMain {
             controller.open()
@@ -177,9 +183,9 @@ extension AutoSyncViewController: AutoSyncDataSourceDelegate {
     func checkForEnableAutoSync() {
         output.checkPermissions()
     }
-
+    
     func didChangeSettingsOption(settings: AutoSyncSetting) {
         output.didChangeSettingsOption(settings: settings)
     }
 }
- 
+

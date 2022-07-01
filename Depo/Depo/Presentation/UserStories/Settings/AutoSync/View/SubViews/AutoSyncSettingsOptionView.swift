@@ -18,7 +18,7 @@ final class AutoSyncSettingsOptionView: UIView {
     
     @IBOutlet private weak var button: UIButton! {
         didSet {
-            button.titleLabel?.font = .appFont(.medium, size: 16)
+            button.titleLabel?.font = .appFont(.medium, size: 14)
         }
     }
     

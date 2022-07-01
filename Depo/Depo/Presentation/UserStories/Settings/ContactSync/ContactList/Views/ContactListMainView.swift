@@ -41,7 +41,7 @@ final class ContactListMainView: UIView, NibInit {
             newValue.setTitle(TextConstants.contactListRestore, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
             newValue.backgroundColor = AppColor.darkBlueAndTealish.color
-            newValue.titleLabel?.font = .appFont(.regular, size: 16.0)
+            newValue.titleLabel?.font = .appFont(.medium, size: 16.0)
         }
     }
     
