@@ -52,7 +52,9 @@ extension PackagesRouter: PackagesRouterInput {
                                                         delegate.refreshPackages()
                                                     })
         })
-        router.presentViewController(controller: successPopUp)
+        
+        successPopUp.open()
+
     }
     
     func closePaymentPopUpController(closeAction: @escaping VoidHandler) {

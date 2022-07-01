@@ -23,10 +23,10 @@ extension LeavePremiumRouter: LeavePremiumRouterInput {
     func showAlert(with text: String) {
         let router = RouterVC()
         
-        let popUpController = DarkPopUpController.with(title: TextConstants.offersInfo, message: text, buttonTitle: TextConstants.offersOk) { vc in
+        let popUpController = PopUpController.with(title: TextConstants.offersInfo, message: text, image: .none, buttonTitle: TextConstants.offersOk) { vc in
             vc.close()
         }
-        router.presentViewController(controller: popUpController)
+        popUpController.open()
     }
     
     func showError(with text: String) {

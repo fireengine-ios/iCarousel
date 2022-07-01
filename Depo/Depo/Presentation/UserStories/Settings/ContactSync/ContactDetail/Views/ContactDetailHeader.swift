@@ -22,7 +22,7 @@ final class ContactDetailHeader: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.textColor = ColorConstants.duplicatesGray
-            newValue.font = .TurkcellSaturaDemFont(size: 40)
+            newValue.font = .appFont(.regular, size: 40)
             newValue.textAlignment = .center
         }
     }
@@ -37,7 +37,7 @@ final class ContactDetailHeader: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.textColor = .lrBrownishGrey
-            newValue.font = .TurkcellSaturaDemFont(size: 24)
+            newValue.font = .appFont(.regular, size: 24)
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
@@ -48,7 +48,7 @@ final class ContactDetailHeader: UIView, NibInit {
         willSet {
             newValue.text = ""
             newValue.textColor = ColorConstants.lightText
-            newValue.font = .TurkcellSaturaFont(size: 16)
+            newValue.font = .appFont(.regular, size: 16)
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping

@@ -137,7 +137,7 @@ final class PasswordEnterPopup: BasePopUpController, KeyboardHandler, NibInit {
                                                 AppConfigurator.logout()
                                             }
         })
-        router.presentViewController(controller: popupVC)
+        popupVC.open()
     }
     
     private func actionOnUpdateOnError(_ error: UpdatePasswordErrors) {

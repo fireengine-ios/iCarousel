@@ -305,8 +305,8 @@ extension CreateStoryViewController: ActivityIndicator {
     }
     
     private func showError(text: String?) {
-        let errorAlert = DarkPopUpController.with(title: TextConstants.errorAlert, message: text, buttonTitle: TextConstants.ok)
-        present(errorAlert, animated: true, completion: nil)
+        let errorAlert = PopUpController.with(title: TextConstants.errorAlert, message: text, image: .none, buttonTitle: TextConstants.ok)
+        errorAlert.open()
     }
 }
 

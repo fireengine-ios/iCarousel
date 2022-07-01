@@ -250,7 +250,8 @@ final class TwoFactorAuthenticationViewController: ViewController, NibInit {
                                             }
         }
         
-        router.presentViewController(controller: popUp)
+        popUp.open()
+        
     }
     
     //MARK: Action

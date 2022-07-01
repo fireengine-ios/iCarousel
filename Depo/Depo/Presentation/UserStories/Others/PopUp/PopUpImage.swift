@@ -20,16 +20,17 @@ enum PopUpImage {
     case question
     case none
     case custom(UIImage?)
-    
+
+    // TODO: Facelift, ask for other popup icons
     var image: UIImage? {
         let image: UIImage?
         switch self {
         case .error:
-            image = UIImage(named: "customPopUpInfo")
+            image = Image.popupIconError.image
         case .success:
             image = UIImage(named: "successImage")
         case .delete:
-            image = UIImage(named: "deleteAlert")
+            image = Image.popupIconDelete.image
         case .music:
             image = UIImage(named: "musicAlert")
         case .clock:
@@ -41,7 +42,7 @@ enum PopUpImage {
         case .restore:
             image = UIImage(named: "restoreAlert")
         case .question:
-            image = UIImage(named: "questionAlert")
+            image = Image.popupIconQuestion.image
         case .none:
             image = nil
         case .custom(let customImage):

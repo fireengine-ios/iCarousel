@@ -181,7 +181,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                     UIApplication.shared.openSettings()
                                                 }
         })
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        controller.open()
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {

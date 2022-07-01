@@ -34,6 +34,8 @@ final class FaceImageViewController: ViewController, NibInit {
         trackScreen()
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -41,6 +43,24 @@ final class FaceImageViewController: ViewController, NibInit {
 
         checkFaceImageAndFacebokIsAllowed()
     }
+    
+    //will fix shadows when changing interfacestyle in viewController
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        designer.faceImageBackView.addRoundedShadows(cornerRadius: 16,
+                                                     shadowColor: AppColor.viewShadowLight.cgColor,
+                                                     opacity: 0.8, radius: 6.0)
+        designer.faceImageBackView.backgroundColor = AppColor.secondaryBackground.color
+        
+        designer.facebookImageBackView.addRoundedShadows(cornerRadius: 16,
+                                                         shadowColor: AppColor.viewShadowLight.cgColor,
+                                                         opacity: 0.8, radius: 6.0)
+        designer.facebookImageBackView.backgroundColor = AppColor.secondaryBackground.color
+
+        
+      }
+    
     
     @IBAction private func faceImageSwitchValueChanged(_ sender: UISwitch) {
         isShowFaceImageWaitAlert = true

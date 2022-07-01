@@ -45,8 +45,7 @@ class BottomSelectionMusicTabBarRouter: BottomSelectionTabBarRouter {
                                                 vc.close(completion: completion)
         })
         
-        let topVC = UIApplication.topController()
-        topVC?.navigationController?.present(controller, animated: true)
+        controller.open()
     }
     
 }

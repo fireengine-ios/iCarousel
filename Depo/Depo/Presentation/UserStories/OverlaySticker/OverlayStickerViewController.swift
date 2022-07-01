@@ -167,7 +167,7 @@ final class OverlayStickerViewController: UIViewController {
                                                         UIApplication.shared.openSettings()
                                                     }
             })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            controller.open()
         }
     }
 
@@ -233,7 +233,7 @@ final class OverlayStickerViewController: UIViewController {
                                                 confirmation()
                                             }
                                          })
-        router.presentViewController(controller: popup)
+        popup.open()
     }
 }
 

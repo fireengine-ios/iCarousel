@@ -14,7 +14,7 @@ final class BackUpContactsCard: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.text = TextConstants.deleteDuplicatesBackUpTitle
             newValue.textColor = AppColor.navyAndWhite.color
-            newValue.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.font = .appFont(.regular, size: 18.0)
             newValue.adjustsFontSizeToFitWidth()
         }
     }
@@ -23,7 +23,7 @@ final class BackUpContactsCard: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.text = TextConstants.deleteDuplicatesBackUpMessage
             newValue.textColor = .lrBrownishGrey
-            newValue.font = .TurkcellSaturaDemFont(size: 14)
+            newValue.font = .appFont(.regular, size: 14.0)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
         }
@@ -33,7 +33,7 @@ final class BackUpContactsCard: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.setTitle(TextConstants.deleteDuplicatesBackUpButton, for: .normal)
             newValue.setTitleColor(.lrTealishTwo, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 14)
+            newValue.titleLabel?.font = .appFont(.regular, size: 14.0)
             newValue.adjustsFontSizeToFitWidth()
         }
     }

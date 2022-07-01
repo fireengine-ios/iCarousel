@@ -357,7 +357,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                     }
                 })
             
-            self.present(controller, animated: true, completion: nil)
+            controller.open()
             
         } else {
             output.tapReadyButton(name: name,

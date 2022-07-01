@@ -25,7 +25,7 @@ class RegistrationRouter: RegistrationRouterInput {
                 }
             })
 
-        router.presentViewController(controller: controller)
+        controller.open()
     }
 
     func phoneVerification(signUpResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {

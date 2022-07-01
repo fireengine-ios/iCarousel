@@ -173,7 +173,7 @@ final class InstaPickProgressPopup: ViewController, NibInit {
         }
         
         DispatchQueue.toMain {
-            self.present(popUp, animated: false, completion: nil)
+            popUp.open()
         }
     }
     

@@ -14,7 +14,7 @@ final class ContactDetailNoInfoCell: UITableViewCell {
         willSet {
             newValue.text = TextConstants.contactDetailNoInfo
             newValue.textColor = ColorConstants.grayTabBarButtonsColor
-            newValue.font = .TurkcellSaturaMedFont(size: 20)
+            newValue.font = .appFont(.medium, size: 18)
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
             newValue.textAlignment = .center

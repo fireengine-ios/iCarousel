@@ -70,7 +70,7 @@ final class ContactService {
         })
         
         DispatchQueue.toMain {
-            RouterVC().presentViewController(controller: controller, animated: false)
+            controller.open()
         }
     }
     
