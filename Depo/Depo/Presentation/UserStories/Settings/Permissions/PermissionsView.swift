@@ -30,6 +30,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     @IBOutlet private weak var inProgressLabel: UILabel!
     @IBOutlet private weak var descriptionView: UITextView!
     @IBOutlet private weak var permissionSwitch: UISwitch!
+    @IBOutlet private weak var backView: UIView!
     
     weak var delegate: PermissionViewDelegate?
     weak var textviewDelegate: PermissionViewTextViewDelegate?
@@ -38,8 +39,21 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     var type: PermissionType? {
         didSet {
             setupTitleAndDescription(type: type)
+            setupBackView()
         }
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        backView.addRoundedShadows(cornerRadius: 16,
+                                   shadowColor: AppColor.viewShadowLight.cgColor,
+                                   opacity: 0.8, radius: 6.0)
+        backView.backgroundColor = AppColor.secondaryBackground.color
+        
+      }
+    
+    
     var urlString: String?
     
     // MARK: - IBActions
@@ -66,8 +80,8 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
         case .etk:
             title = TextConstants.etkPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.etkPermissionDescription,
-                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
-                                                                     .foregroundColor: ColorConstants.lightText])
+                                                        attributes: [.font: UIFont.appFont(.regular, size: 14),
+                                                                     .foregroundColor: AppColor.label.color])
             
             let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
             descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
@@ -77,13 +91,13 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
         case .globalPermission:
             title = TextConstants.globalPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.globalPermissionDescriptionLabel,
-                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
-                                                                     .foregroundColor: ColorConstants.lightText])
+                                                        attributes: [.font: UIFont.appFont(.regular, size: 14),
+                                                                     .foregroundColor: AppColor.label.color])
         case .mobilePayment:
             title = TextConstants.mobilePaymentPermissionTitleLabel
             descriptionText = NSMutableAttributedString(string: TextConstants.mobilePaymentPermissionDescriptionLabel,
-                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
-                                                                     .foregroundColor: ColorConstants.lightText])
+                                                        attributes: [.font: UIFont.appFont(.regular, size: 14),
+                                                                     .foregroundColor: AppColor.label.color])
             
             let rangeLink = descriptionText.mutableString.range(of: TextConstants.mobilePaymentPermissionLink)
             descriptionText.addAttributes([.link: TextConstants.NotLocalized.mobilePaymentPermissionLink], range: rangeLink)
@@ -91,21 +105,32 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             title = localized(.kvkkToggleTitle)
             let description = String(format: localized(.kvkkToggleText), localized(.kvkkHyperlinkText))
             descriptionText = NSMutableAttributedString(string: description,
-                                                        attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
-                                                                     .foregroundColor: ColorConstants.lightText])
+                                                        attributes: [.font: UIFont.appFont(.regular, size: 14),
+                                                                     .foregroundColor: AppColor.label.color])
             
             
             let rangeLink = descriptionText.mutableString.range(of: localized(.kvkkHyperlinkText))
             descriptionText.addAttributes([.link: TextConstants.NotLocalized.permissionsPolicyLink], range: rangeLink)
         }
         titleLabel.text = title ?? ""
+        
         setup(attributedDescription: descriptionText, delegate: textviewDelegate)
+    }
+    
+    
+    private func setupBackView(){
+        backView.addRoundedShadows(cornerRadius: 16,
+                                   shadowColor: AppColor.viewShadowLight.cgColor,
+                                   opacity: 0.8, radius: 6.0)
+        backView.backgroundColor = AppColor.secondaryBackground.color
+
     }
     
     func setup(attributedDescription: NSMutableAttributedString?, delegate: PermissionViewTextViewDelegate?) {
         if let attributedDescription = attributedDescription {
             descriptionView.attributedText = attributedDescription
         }
+        descriptionView.backgroundColor = .clear
         descriptionView.delegate = self
     }
     

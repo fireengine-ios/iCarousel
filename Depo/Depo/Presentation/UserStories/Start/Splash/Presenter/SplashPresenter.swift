@@ -38,7 +38,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 exit(EXIT_SUCCESS)
             })
         }
-        UIApplication.topController()?.present(popup, animated: false, completion: nil)
+        
+        popup.open()
         return
     }
     

@@ -217,7 +217,7 @@ final class PhotoEditSaveService {
                                                         UIApplication.shared.openSettings()
                                                     }
             })
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
+            controller.open()
         }
     }
     

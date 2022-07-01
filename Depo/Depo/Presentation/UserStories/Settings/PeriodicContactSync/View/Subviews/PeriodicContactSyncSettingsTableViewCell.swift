@@ -44,7 +44,7 @@ class PeriodicContactSyncSettingsTableViewCell: UITableViewCell {
         backgroundColor = .clear
         
         titleLabel.textColor = ColorConstants.textGrayColor
-        titleLabel.font = .TurkcellSaturaDemFont(size: 18)
+        titleLabel.font = .appFont(.medium, size: 18)
         
         ///iPad, iOS < 10, prevent white color
         ///https://stackoverflow.com/questions/27551291/uitableview-backgroundcolor-always-white-on-ipad

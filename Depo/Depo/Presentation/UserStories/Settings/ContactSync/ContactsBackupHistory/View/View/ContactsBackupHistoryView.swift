@@ -32,7 +32,7 @@ final class ContactsBackupHistoryView: UIView, NibInit {
             newValue.setTitle(TextConstants.contactBackupHistoryRestoreButton, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
             newValue.backgroundColor = AppColor.marineTwoAndTealish.color
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.titleLabel?.font = .appFont(.regular, size: 16.0)
         }
     }
     
@@ -43,7 +43,7 @@ final class ContactsBackupHistoryView: UIView, NibInit {
             newValue.setTitle(TextConstants.contactBackupHistoryDeleteButton, for: .normal)
             newValue.setTitleColor(ColorConstants.navy, for: .normal)
             newValue.backgroundColor = .white
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.titleLabel?.font = .appFont(.regular, size: 16.0)
         }
     }
     

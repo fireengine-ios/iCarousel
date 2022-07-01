@@ -18,8 +18,8 @@ final class ContactListHeader: UIView, NibInit {
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.contactListTitle
-            newValue.font = .TurkcellSaturaDemFont(size: 24)
-            newValue.textColor = AppColor.navyAndWhite.color
+            newValue.font = .appFont(.medium, size: 20.0)
+            newValue.textColor = AppColor.label.color
         }
     }
     
@@ -28,6 +28,7 @@ final class ContactListHeader: UIView, NibInit {
             newValue.text = ""
             newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
+            newValue.font = .appFont(.regular, size: 14)
         }
     }
     
@@ -43,13 +44,13 @@ final class ContactListHeader: UIView, NibInit {
                 textField.backgroundColor = ColorConstants.toolbarTintColor
                 textField.placeholder = TextConstants.search
                 textField.placeholderLabel?.textColor = ColorConstants.lightText
-                textField.font = .TurkcellSaturaDemFont(size: 16)
+                textField.font = .appFont(.medium, size: 14.0)
                 textField.textColor = AppColor.navyAndWhite.color
                 textField.keyboardAppearance = .dark
             }
             
             if let cancelButton = newValue.cancelButton {
-                cancelButton.titleLabel?.font = .TurkcellSaturaRegFont(size: 17)
+                cancelButton.titleLabel?.font = .appFont(.regular, size: 117.0)
                 cancelButton.backgroundColor = .clear
             }
         }
@@ -85,17 +86,19 @@ final class ContactListHeader: UIView, NibInit {
         let dateString = dateFormatter.string(from: date)
         
         let string = String(format: TextConstants.contactListInfo, backUpInfo.total, dateString)
-        let attributedString = NSMutableAttributedString(string: string,
-                                                         attributes: [.font: UIFont.TurkcellSaturaMedFont(size: 16),
-                                                                      .foregroundColor: ColorConstants.duplicatesGray])
-        
-        let countRange = (string as NSString).range(of: "\(backUpInfo.total)")
-        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaBolFont(size: 16), range: countRange)
-        
-        let dateRange = (string as NSString).range(of: dateString)
-        attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaBolFont(size: 16), range: dateRange)
-        
-        backupInfoLabel.attributedText = attributedString
+        backupInfoLabel.text = string
+//
+//        let attributedString = NSMutableAttributedString(string: string,
+//                                                         attributes: [.font: UIFont.TurkcellSaturaMedFont(size: 16),
+//                                                                      .foregroundColor: ColorConstants.duplicatesGray])
+//
+//        let countRange = (string as NSString).range(of: "\(backUpInfo.total)")
+//        attributedString.addAttribute(.font, value: UIFont.appFont(.bold, size: 16.0), range: countRange)
+//
+//        let dateRange = (string as NSString).range(of: dateString)
+//        attributedString.addAttribute(.font, value: UIFont.appFont(.bold, size: 16.0), range: dateRange)
+//
+//        backupInfoLabel.attributedText = attributedString
     }
 }
 

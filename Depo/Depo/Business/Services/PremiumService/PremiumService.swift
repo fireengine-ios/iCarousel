@@ -40,7 +40,7 @@ final class PremiumService {
                                                         })
                 })
                 
-                UIApplication.topController()?.present(controller, animated: true, completion: nil)
+                controller.open()
             }
         }
     }

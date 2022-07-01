@@ -92,7 +92,7 @@ final class EmailEnterController: ViewController, NibInit, ErrorPresenter {
                     self?.closeAnimated()
                 }
         })
-        present(controller, animated: true, completion: nil)
+        controller.open()
     }
     
     private func closeAnimated() {

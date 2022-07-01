@@ -71,7 +71,7 @@ class LoginRouter: LoginRouterInput {
                                          buttonTitle: TextConstants.ok) { controller in
                                             controller.close(completion: onClose)
         }
-        router.presentViewController(controller: popUp)
+        popUp.open()
     }
     
     func openSupport() {
@@ -89,7 +89,7 @@ class LoginRouter: LoginRouterInput {
                                             }
         }
         
-        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
+        popupVC.open()
     }
     
     func goToFaqSupportPage() {

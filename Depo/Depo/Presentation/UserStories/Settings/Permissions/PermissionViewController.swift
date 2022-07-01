@@ -14,6 +14,7 @@ protocol MobilePaymentPermissionProtocol: AnyObject {
 final class PermissionViewController: ViewController {
     private let accountService = AccountService()
     
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -72,7 +73,7 @@ final class PermissionViewController: ViewController {
         view.backgroundColor = AppColor.primaryBackground.color
         
         setTitle(withString: TextConstants.settingsViewCellPermissions)
-        navigationController?.navigationItem.title = TextConstants.backTitle
+//        navigationController?.navigationItem.title = TextConstants.backTitle
     }
     
     private func setupLayout() {
@@ -179,7 +180,7 @@ extension PermissionViewController: PermissionViewDelegate {
         let attribute = [NSAttributedString.Key.font : UIFont.TurkcellSaturaDemFont(size: 16), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo]
         attributeMessage.addAttributes(attribute, range: range)
         let popup = PopUpController.with(title: TextConstants.mobilePaymentClosePopupTitleLabel, attributedMessage: attributeMessage, image: .none, buttonTitle: TextConstants.ok)
-        UIApplication.topController()?.present(popup, animated: false, completion: nil)
+        popup.open()
     }
 }
 

@@ -100,7 +100,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
                                                 self?.endShare()
                                             }
                                          })
-        router.presentViewController(controller: popup)
+        popup.open()
     }
     
     private func endShare() {

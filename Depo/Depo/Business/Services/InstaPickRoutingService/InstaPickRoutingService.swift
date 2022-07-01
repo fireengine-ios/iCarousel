@@ -174,7 +174,7 @@ final class InstaPickRoutingService {
         
         let router = RouterVC()
         successHandler(popup)
-        router.presentViewController(controller: popup)
+        popup.open()
     }
     
     private func onPurchase() {

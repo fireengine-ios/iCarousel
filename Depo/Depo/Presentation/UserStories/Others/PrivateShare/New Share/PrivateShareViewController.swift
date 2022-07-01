@@ -246,7 +246,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                                                     self?.dismiss(animated: true)
                                                 }
                                              })
-            router.presentViewController(controller: popup)
+            popup.open()
         }
     }
 

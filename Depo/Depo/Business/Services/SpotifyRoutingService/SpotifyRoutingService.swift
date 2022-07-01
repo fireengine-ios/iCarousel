@@ -241,8 +241,7 @@ final class SpotifyRoutingService: NSObject {
                                                             completion(true)
                                                         }
                     }
-                    
-                    UIApplication.topController()?.present(popUpController, animated: true, completion: nil)
+                    popUpController.open()
                 default:
                     DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.spotifyStatusUpdateTimeInterval, execute: { [weak self] in
                         self?.checkImportStatus(completion: completion)
@@ -271,7 +270,7 @@ final class SpotifyRoutingService: NSObject {
                                                 controller.dismiss(animated: true)
                                             }
                                         })
-        controller.present(popup, animated: true)
+        popup.open()
     }
     
     private func importAnalytics(playlists: [SpotifyPlaylist], result: ResponseResult<SpotifyStatus>) {

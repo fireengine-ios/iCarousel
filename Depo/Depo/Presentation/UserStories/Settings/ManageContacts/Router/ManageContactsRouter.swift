@@ -22,6 +22,7 @@ class ManageContactsRouter: ManageContactsRouterInput {
                                                 vc.close(completion: okHandler)
         })
         
-        RouterVC().presentViewController(controller: controller)
+        controller.open()
+
     }
 }

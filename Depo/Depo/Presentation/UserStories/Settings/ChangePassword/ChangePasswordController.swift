@@ -222,7 +222,8 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                                 AppConfigurator.logout()
                                             }
         })
-        router.presentViewController(controller: popupVC)
+        popupVC.open()
+
     }
     
     private func showSuccessPopup() {

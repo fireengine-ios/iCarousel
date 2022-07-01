@@ -108,7 +108,7 @@ final class FreeUpSpacePopUp: BaseCardView {
                                       image: .custom(UIImage(named: "popup_info")),
                                       buttonTitle: TextConstants.ok)
         DispatchQueue.main.async {
-            self.router.defaultTopController?.present(vc, animated: false)
+            vc.open()
         }
     }
 }

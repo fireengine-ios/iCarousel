@@ -35,6 +35,7 @@ enum AppColor {
     case tint
     case separator
     case drawerBackground
+    case lightText
 
     case darkContentOverlay
     case lightContentOverlay
@@ -57,6 +58,14 @@ enum AppColor {
     // MARK: Drawer
     case drawerShadow
     case drawerIndicator
+
+    // MARK: PopUp
+    case popUpTitle
+    case popUpMessage
+    case popUpTitleError
+    
+    // MARK: Switch
+    case SwitchBackgroundColor
 
     case primaryBackground
     case cellShadow
@@ -87,6 +96,7 @@ enum AppColor {
     case blueGreenAndWhite
     case popUpBackground
     case blackAndWhite
+    case viewShadowLight
 
     var color: UIColor {
         guard let uiColor = UIColor(named: String(describing: self)) else {
