@@ -420,7 +420,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
-    func getCellSizeForPeople() -> CGSize {
+    func getCellSizeForFaceImage(type: FaceImageType?) -> CGSize {
         var cellWidth: CGFloat = 180
         
         if (Device.isIpad) {
@@ -428,7 +428,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             cellWidth = (view.getCollectionViewWidth() - NumericConstants.iPhoneGreedInset * 2 - NumericConstants.iPhoneGreedHorizontalSpace * (NumericConstants.numerCellInLineOnIphone - 1)) / NumericConstants.numerCellInLineOnIphone
         }
-        return CGSize(width: cellWidth, height: cellWidth + 40)
+        
+        if type == .people {
+            cellWidth = cellWidth - (Device.isIpad ? (NumericConstants.numerCellInLineOnIpad - 1)*2 : (NumericConstants.numerCellInLineOnIphone - 1)*2)
+        }
+        
+        return CGSize(width: cellWidth, height: cellWidth + 48)
     }
     
     func onLongPressInCell() {

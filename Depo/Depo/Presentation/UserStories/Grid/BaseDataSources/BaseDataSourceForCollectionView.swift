@@ -12,7 +12,7 @@ import SDWebImage
 enum BaseDataSourceDisplayingType{
     case greed
     case list
-    case people
+    case faceImage
 }
 
 protocol BaseDataSourceForCollectionViewDelegate: AnyObject {
@@ -71,7 +71,7 @@ protocol BaseDataSourceForCollectionViewDelegate: AnyObject {
     
     func didSelectAction(type: ActionType, on item: Item?, sender: Any?)
     
-    func getCellSizeForPeople() -> CGSize
+    func getCellSizeForFaceImage(type: FaceImageType?) -> CGSize
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -115,6 +115,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     internal weak var collectionView: UICollectionView?
     
     var displayingType: BaseDataSourceDisplayingType = .greed
+    
+    var faceImage: FaceImageType?
     
     weak var delegate: BaseDataSourceForCollectionViewDelegate?
     
@@ -1400,8 +1402,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if let wraperedDelegate = delegate {
             if (displayingType == .list){
                 return wraperedDelegate.getCellSizeForList()
-            } else if (displayingType == .people) {
-                return wraperedDelegate.getCellSizeForPeople()
+            } else if (displayingType == .faceImage) {
+                return wraperedDelegate.getCellSizeForFaceImage(type: faceImage)
             }
             return wraperedDelegate.getCellSizeForGreed()
         }

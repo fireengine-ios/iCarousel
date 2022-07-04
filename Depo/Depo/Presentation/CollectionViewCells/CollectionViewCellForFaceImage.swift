@@ -41,7 +41,7 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
-        imageView.layer.cornerRadius = imageView.frame.height * 0.5
+        imageView.layer.cornerRadius = ((wrappedObj as? PeopleItem) != nil) ? imageView.frame.height * 0.5 : 0
         hiddenItemsView.layer.cornerRadius = hiddenItemsView.frame.height * 0.5
 
         guard let item = wrappedObj as? Item else {
@@ -79,7 +79,6 @@ class CollectionViewCellForFaceImage: BaseCollectionViewCell {
         if let placeItem = item as? PlacesItem, placeItem.isMapItemPlaceholder {
             setImage(image: UIImage(named: "map-grid-icon"), animated: true)
             nameLabel.text = localized(.placesMapTitle)
-            nameLabel.textColor = ColorConstants.linkBlack
             accessibilityLabel = localized(.placesMapTitle)
         } else {
             accessibilityLabel = item.name

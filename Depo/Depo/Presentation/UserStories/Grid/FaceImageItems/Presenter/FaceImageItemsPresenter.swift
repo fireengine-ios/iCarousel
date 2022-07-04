@@ -61,7 +61,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
         dataSource.isHeaderless = true
-        dataSource.displayingType = .people
+        dataSource.displayingType = .faceImage
+        dataSource.faceImage = faceImageType
         
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.configurateUgglaView(hidden: !dataSource.isPaginationDidEnd)

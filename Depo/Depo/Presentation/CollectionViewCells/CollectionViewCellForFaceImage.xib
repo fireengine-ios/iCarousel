@@ -17,13 +17,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a0G-3e-lCx">
-                        <rect key="frame" x="4" y="8" width="85" height="85"/>
+                        <rect key="frame" x="0.0" y="0.0" width="93" height="93"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="a0G-3e-lCx" secondAttribute="height" multiplier="1:1" id="zIi-Hr-TDr"/>
                         </constraints>
                     </imageView>
                     <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wZJ-w6-3qX">
-                        <rect key="frame" x="4" y="8" width="85" height="85"/>
+                        <rect key="frame" x="0.0" y="0.0" width="93" height="93"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="wZJ-w6-3qX" secondAttribute="height" multiplier="1:1" id="kMK-X2-0zc"/>
@@ -32,14 +32,19 @@
                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CMB-ab-XdT">
                         <rect key="frame" x="36.5" y="52.5" width="20" height="20"/>
                     </activityIndicatorView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnn-b2-iGR">
-                        <rect key="frame" x="4" y="97" width="85" height="24"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="HyZ-jV-JBf">
+                        <rect key="frame" x="4" y="99" width="85" height="22"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fnn-b2-iGR">
+                                <rect key="frame" x="0.0" y="0.0" width="85" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconBackupContact" translatesAutoresizingMaskIntoConstraints="NO" id="bmC-Ty-yZk">
-                        <rect key="frame" x="51" y="63" width="28" height="20"/>
+                        <rect key="frame" x="55" y="63" width="28" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="28" id="MrM-Oj-p6a"/>
                             <constraint firstAttribute="height" constant="20" id="jX5-lK-8La"/>
@@ -49,21 +54,20 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Fnn-b2-iGR" secondAttribute="trailing" constant="4" id="IMY-hf-uOl"/>
-                <constraint firstItem="Fnn-b2-iGR" firstAttribute="top" secondItem="wZJ-w6-3qX" secondAttribute="bottom" constant="4" id="KTy-WZ-u6s"/>
+                <constraint firstAttribute="trailing" secondItem="HyZ-jV-JBf" secondAttribute="trailing" constant="4" id="Ndd-th-uZs"/>
                 <constraint firstItem="bmC-Ty-yZk" firstAttribute="bottom" secondItem="a0G-3e-lCx" secondAttribute="bottom" constant="-10" id="Os2-To-3Mn"/>
-                <constraint firstItem="Fnn-b2-iGR" firstAttribute="leading" secondItem="FQg-YA-evF" secondAttribute="leading" constant="4" id="R4T-0K-dht"/>
-                <constraint firstItem="Fnn-b2-iGR" firstAttribute="top" secondItem="a0G-3e-lCx" secondAttribute="bottom" constant="4" id="Xrm-3Y-b26"/>
-                <constraint firstItem="wZJ-w6-3qX" firstAttribute="leading" secondItem="FQg-YA-evF" secondAttribute="leading" constant="4" id="Yfw-l3-Qa0"/>
-                <constraint firstAttribute="bottom" secondItem="Fnn-b2-iGR" secondAttribute="bottom" constant="4" id="ZsF-jI-dBE"/>
-                <constraint firstItem="wZJ-w6-3qX" firstAttribute="top" secondItem="FQg-YA-evF" secondAttribute="top" constant="8" id="clK-2m-rzM"/>
+                <constraint firstAttribute="bottom" secondItem="HyZ-jV-JBf" secondAttribute="bottom" constant="4" id="SHZ-9W-1Gi"/>
+                <constraint firstItem="HyZ-jV-JBf" firstAttribute="top" secondItem="a0G-3e-lCx" secondAttribute="bottom" constant="6" id="Wcm-Mm-heV"/>
+                <constraint firstItem="wZJ-w6-3qX" firstAttribute="leading" secondItem="FQg-YA-evF" secondAttribute="leading" id="Yfw-l3-Qa0"/>
+                <constraint firstItem="wZJ-w6-3qX" firstAttribute="top" secondItem="FQg-YA-evF" secondAttribute="top" id="clK-2m-rzM"/>
                 <constraint firstItem="a0G-3e-lCx" firstAttribute="trailing" secondItem="bmC-Ty-yZk" secondAttribute="trailing" constant="10" id="gLN-aK-3vZ"/>
                 <constraint firstItem="CMB-ab-XdT" firstAttribute="centerX" secondItem="FQg-YA-evF" secondAttribute="centerX" id="jn0-9r-mzu"/>
                 <constraint firstItem="CMB-ab-XdT" firstAttribute="centerY" secondItem="FQg-YA-evF" secondAttribute="centerY" id="m9Q-wX-DbY"/>
-                <constraint firstAttribute="trailing" secondItem="wZJ-w6-3qX" secondAttribute="trailing" constant="4" id="mSk-lW-Lma"/>
-                <constraint firstItem="a0G-3e-lCx" firstAttribute="leading" secondItem="FQg-YA-evF" secondAttribute="leading" constant="4" id="oN3-Yd-bLt"/>
-                <constraint firstItem="a0G-3e-lCx" firstAttribute="top" secondItem="FQg-YA-evF" secondAttribute="top" constant="8" id="xRz-5R-B1V"/>
-                <constraint firstAttribute="trailing" secondItem="a0G-3e-lCx" secondAttribute="trailing" constant="4" id="zKM-0h-t1W"/>
+                <constraint firstAttribute="trailing" secondItem="wZJ-w6-3qX" secondAttribute="trailing" id="mSk-lW-Lma"/>
+                <constraint firstItem="a0G-3e-lCx" firstAttribute="leading" secondItem="FQg-YA-evF" secondAttribute="leading" id="oN3-Yd-bLt"/>
+                <constraint firstItem="HyZ-jV-JBf" firstAttribute="leading" secondItem="FQg-YA-evF" secondAttribute="leading" constant="4" id="qwv-bh-ZAN"/>
+                <constraint firstItem="a0G-3e-lCx" firstAttribute="top" secondItem="FQg-YA-evF" secondAttribute="top" id="xRz-5R-B1V"/>
+                <constraint firstAttribute="trailing" secondItem="a0G-3e-lCx" secondAttribute="trailing" id="zKM-0h-t1W"/>
             </constraints>
             <size key="customSize" width="93" height="136"/>
             <connections>
