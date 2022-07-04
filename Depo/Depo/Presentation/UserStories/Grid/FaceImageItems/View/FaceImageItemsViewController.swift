@@ -83,6 +83,7 @@ extension FaceImageItemsViewController: FaceImageItemsViewInput {
         ugglaViewBottomConstraint.isActive = true
         
         collectionView.contentInset.bottom = hidden ? 0 : ugglaViewHeight
+        collectionView.contentInset.top = 16
     }
     
     func updateUgglaViewPosition() {

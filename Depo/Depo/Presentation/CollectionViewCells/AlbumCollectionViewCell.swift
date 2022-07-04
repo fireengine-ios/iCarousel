@@ -41,7 +41,7 @@ final class AlbumCellView: UIView {
         case .list:
             titleLabel.textColor = ColorConstants.textGrayColor
             titleLabel.font = UIFont.TurkcellSaturaRegFont(size: 18)
-        case .people:
+        case .faceImage:
             break
         }
     }

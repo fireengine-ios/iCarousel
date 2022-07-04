@@ -20,14 +20,14 @@ final class ItemGroupAnnotationView: ItemAnnotationView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.clipsToBounds = true
-        view.backgroundColor = .lrTiffanyBlue
+        view.backgroundColor = AppColor.mapCountBackground.color
         return view
     }()
 
     private let countLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .TurkcellSaturaBolFont(size: 14)
+        label.font = .appFont(.regular, size: 8)
         label.textColor = .white
         return label
     }()
