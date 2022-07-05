@@ -1035,7 +1035,7 @@
 "create_story_pop_up_message" = "Jemi duke përgatitur historinë tuaj. Në mbarim të saj, ju mund ta aksesoni atë nga Albumi i Videove.";
 "create_story_path_to_story" = "Foto & Video> Historitë e mia";
 "You can not share empty album" = "Nuk mund të ndani albumin bosh.";
-"etk_permission_description" = "";
+"etk_permission_description" = "Unë me këtë jap pëlqimin tim për të marrë mesazhe komerciale e-mail në mënyrë që të jenë të informuar në lidhje me produktet e dobishme dhe shërbimet e Lifecell Bulut Çözümleri A.Ş. përveç nëse dhe derisa të kërkoj ndryshe në pajtim me Ligjin № 6563 dhe legjislacionin tjetër në fuqi.";
 "global_permission_title_label" = "Leja e të dhënave globale";
 "global_permission_description" = "Unë pranoj që informacioni im personal të ndahet me operatorët e bashkëpunimit me Turkcell në mënyrë që unë të shfrytëzoj shërbimet e dobishme të operatorit përkatës në lidhje me Lifebox. ";
 "terms_and_use_etk_checkbox_header" = "Mesazh Elektronik Komercial";
@@ -2067,12 +2067,12 @@
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_free_trial" = "";
+"iap_intro_offer_free_trial" = "Së pari %@ falas\nMuajt pasues %@";
 
 /*First {6 months} {6,99 TRY/Month}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_as_you_go" = "";
+"iap_intro_offer_pay_as_you_go" = "Së pari %@ %@\nMuajt pasues %@";
 
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_up_front" = "";
+"iap_intro_offer_pay_up_front" = "Së pari %@ %@\nMuajt pasues %@";

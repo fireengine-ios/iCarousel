@@ -994,7 +994,7 @@
 "create_story_pop_up_message" = "Історію створено";
 "create_story_path_to_story" = "Фото та Відео > Мої історії";
 "You can not share empty album" = "Не можна ділитися пустим альбомом";
-"etk_permission_description" = "";
+"etk_permission_description" = "Цим я даю свою згоду на отримання комерційних повідомлень електронної пошти з метою отримання інформації про вигідні продукти та послуги Lifecell Bulut Çözümleri A. Ş., якщо і до тих пір, поки я не вимагатиму іншого відповідно до Закону № 6563 та іншого застосовного законодавства.";
 "global_permission_title_label" = "Глобальний доступ до даних";
 "global_permission_description" = "Я даю згоду на передачу моєї приватної інформації операторам, які співпрацюють з Turkcell, щоб я мав змогу використовувати вигідні послуги оператора у відношенні до lifebox.";
 "terms_and_use_etk_checkbox_header" = "Комерційне електронне повідомлення";
@@ -2026,12 +2026,12 @@
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_free_trial" = "";
+"iap_intro_offer_free_trial" = "Перший %@ безкоштовно\nНаступні Місяці %@";
 
 /*First {6 months} {6,99 TRY/Month}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_as_you_go" = "";
+"iap_intro_offer_pay_as_you_go" = "Перший %@ %@\nНаступні Місяці %@";
 
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_up_front" = "";
+"iap_intro_offer_pay_up_front" = "Перший %@ %@\nНаступні Місяці %@";

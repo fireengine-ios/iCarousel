@@ -1004,7 +1004,7 @@
 "create_story_pop_up_message" = "تم إنشاء عرض شرائح الصور";
 "create_story_path_to_story" = "الصور & الفيديوهات>حكاياتي";
 "You can not share empty album" = ". لا يمكنك مشاركة ألبوم فارغ";
-"etk_permission_description" = "";
+"etk_permission_description" = "أوافق بموجب هذا على تلقي رسائل البريد الإلكتروني التجارية من أجل الحصول على معلومات حول المنتجات والخدمات المتقدمة من Lifecell Bulut Çözümleri A.Ş. ما لم وإلى أن أطلب خلاف ذلك بعد القانون رقم 6563 والتشريعات الأخرى المعمول بها.";
 "global_permission_title_label" = "إذن البيانات العالمية";
 "global_permission_description" = "  أوافق على مشاركة معلوماتي الشخصية مع المشغل الذي يقوم بعمل مشترك من قبل توركسل من أجل الإستفادة من الخدمات المميزة للمشغلين المتعلقة بمستخدم لايف بوكس";
 "terms_and_use_etk_checkbox_header" = "رسالة إلكترونية تجارية";
@@ -2036,12 +2036,12 @@
 
 /*Free for {3 months}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_free_trial" = "";
+"iap_intro_offer_free_trial" = "أولا %@ مجانا\nالأشهر التالية %@";
 
 /*First {6 months} {6,99 TRY/Month}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_as_you_go" = "";
+"iap_intro_offer_pay_as_you_go" = "الأول %@ %@\nالتالي %@";
 
 /*First {6 months} {6,99 TRY}
 then {11,99 TRY/Month}*/
-"iap_intro_offer_pay_up_front" = "";
+"iap_intro_offer_pay_up_front" = "الأول %@ %@\nالتالي %@";
