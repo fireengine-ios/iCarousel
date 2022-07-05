@@ -1950,35 +1950,35 @@
 "grace_banner_desc" = "შენი სადებეტო/საკრედიტო ბარათის ბალანსი შესაძლოა არასაკმარისი იყოს ან შენი ბარათის ინფორმაცია შეიცვალოს.";
 "grace_expire_date" = "ანგარიშის შეჩერების თარიღი: %@";
 "save_to_my_lifebox_not_found_placeholder" = "ფაილი არ მოიძებნა.";
-"signup_too_many_requests_email" = "";
-"signup_too_many_requests_msisdn" = "";
-"signup_email_verification_title" = "";
-"signup_email_verification_subtitle" = "";
-"signup_phone_verification_title" = "";
-"signup_phone_verification_subtitle" = "";
-"save_to_my_lifebox" = "";
+"signup_too_many_requests_email" = "ვერიფიკაციის კოდი ძალიან ბევრჯერ არის მოთხოვნილი ამ მეილზე, გთხოვ სცადო მოგვიანებით.";
+"signup_too_many_requests_msisdn" = "ვერიფიკაციის კოდი ძალიან ბევრჯერ არის მოთხოვნილი ამ მობილურის ნომერზე, გთხოვ სცადო მოგვიანებით.";
+"signup_email_verification_title" = "ელ-ფოსტის ვერიფიკაცია";
+"signup_email_verification_subtitle" = "ჩაწერეთ ელ-ფოსტის უსაფრთხოების კოდი";
+"signup_phone_verification_title" = "ტელეფონის ვერიფიკაცია";
+"signup_phone_verification_subtitle" = "ჩაწერეთ ტელეფონის უსაფრთხოების კოდი";
+"save_to_my_lifebox" = "შეინახე ჩემს ლაიფბოქსში";
 "save_to_my_lifebox_download" = "";
 "contact_sync_storage_fail_desc" = "";
 "contact_sync_storage_fail_cont_button" = "გაგრძელება";
-"save_to_my_lifebox_full_storage_title" = "";
-"save_to_my_lifebox_full_storage_body" = "";
-"places_map_title" = "";
-"map_location_detail_header" = "";
+"save_to_my_lifebox_full_storage_title" = "აიფონის მეხსიერება სავსეა";
+"save_to_my_lifebox_full_storage_body" = "შენ შეგიძლია ადგილის გათავისუფლება, მეხსიერების ";
+"places_map_title" = "რუკა";
+"map_location_detail_header" = "ფოტოები ამ ლოკაციაზე ";
 "beeline_feature_cancel_TC" = "";
-"security_popup_body" = "";
-"security_popup_header" = "";
+"security_popup_body" = "გთხოვ შეიყვანო სულ მცირე 1 აღდგენითი ანგარიში, რათა მარტივად შეხვიდე სისტემაში თუ პაროლი დაგავიწყდა";
+"security_popup_header" = "დააყენე აღდგენის მეილი ან უსაფრთხოების კითხვა";
 "save_to_my_billo" = "";
 "save_to_my_billo_download" = "";
-"on_boarding_btn_google_login" = "";
-"on_boarding_or" = "";
-"on_boarding_btn_apple_login" = "";
+"on_boarding_btn_google_login" = "Google-ით სისტემაში შესვლა";
+"on_boarding_or" = "ან ";
+"on_boarding_btn_apple_login" = "Apple-ით სისტემაში შესვლა";
 "google_login_user_exists_body" = "";
 "settings_googe_apple_connect" = "";
-"settings_googe" = "";
-"settings_apple" = "";
+"settings_googe" = "Google ID-ით სისტემაში შესვლა";
+"settings_apple" = "Apple ID-ით სისტემაში შესვლა";
 "settings_google_password_required" = "";
-"settings_google_apple_connect" = "";
-"settings_google" = "";
+"settings_google_apple_connect" = "შესვლის ვარიანტები";
+"settings_google" = "Google ID-ით შესვლა სისტემაში";
 "settings_change_password_google_warning" = "";
 "settings_change_password_apple_warning" = "";
 "settings_change_password_apple_google_warning" = "";
@@ -1993,4 +1993,25 @@
 "security_popup_warning_header" = "";
 "security_popup_warning_body1" = "";
 "security_popup_warning_body2" = "";
-"security_popup_warning_footer" = "";
+"security_popup_warning_footer" = "აღსადგენი მეილის თავიდან შეყვანა შეგიძლია პარამეტრები -> ანგარიშის დეტალები -> ჩემი პროფილი.";
+"apple_login_user_exists_body" = "";
+"settings_apple_password_required" = "Apple ID გამოსართავად, ჯერ უნდა დააყენო ლაიფბოქსის პაროლი.";
+"apple_login_show_mail_warning" = "";
+"ETK_KVKK_Izin_Politikasi" = "";
+"kvkk_firms_link" = "";
+"kvkk_commercial_info_link" = "";
+"syncing" = "";
+"downloading" = "";
+"ETK_KVKK_Izin_Politikası" = "";
+
+/*Free for {3 months}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_free_trial" = "";
+
+/*First {6 months} {6,99 TRY/Month}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_as_you_go" = "";
+
+/*First {6 months} {6,99 TRY}
+then {11,99 TRY/Month}*/
+"iap_intro_offer_pay_up_front" = "";
