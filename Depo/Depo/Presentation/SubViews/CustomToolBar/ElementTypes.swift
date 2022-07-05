@@ -776,9 +776,9 @@ enum ElementTypes {
         case .print:
             return Image.iconPrint.image
         case .changeCoverPhoto:
-            return nil
+            return Image.iconChangePhoto.image
         case .changePeopleThumbnail:
-            return nil
+            return Image.iconChangePerson.image
         case .hide:
             return UIImage(named: "HideButtonIcon")
         case .unhide:

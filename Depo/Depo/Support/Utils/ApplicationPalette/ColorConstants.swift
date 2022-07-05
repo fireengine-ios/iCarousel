@@ -34,7 +34,7 @@ enum AppColor {
     case label
     case tint
     case separator
-    case drawerBackground
+    case lightText
 
     case darkContentOverlay
     case lightContentOverlay
@@ -57,7 +57,21 @@ enum AppColor {
     // MARK: Drawer
     case drawerShadow
     case drawerIndicator
+    case drawerBackground
 
+    // MARK: PopUp
+    case popUpTitle
+    case popUpMessage
+    case popUpTitleError
+    
+    // MARK: Switch
+    case SwitchBackgroundColor
+    
+    // MARK: Face Image
+    case mapCountBackground
+
+    
+    // MARK: Legacy
     case primaryBackground
     case cellShadow
     case itemSeperator
@@ -87,6 +101,7 @@ enum AppColor {
     case blueGreenAndWhite
     case popUpBackground
     case blackAndWhite
+    case viewShadowLight
 
     var color: UIColor {
         guard let uiColor = UIColor(named: String(describing: self)) else {
@@ -135,7 +150,6 @@ struct ColorConstants {
     static let placeholderGrayColor = UIColor(named: "placeholderGrayColor")!
     static let activityTimelineDraws = UIColor(named: "activityTimelineDraws")!
     static let lightPeach = UIColor(named: "lightPeach")!
-    static let yellowButtonColor = UIColor(named: "yellowButtonColor")!
     static let grayTabBarButtonsColor = UIColor(named: "grayTabBarButtonsColor")!
     static let textOrange = UIColor(named: "textOrange")!
     static let darkBorder = UIColor(named: "darkBorder")!

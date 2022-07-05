@@ -20,7 +20,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     var heightDescriptionLabel: CGFloat = 0
     var heightTitleLabel: CGFloat = 0
     var accountType: AccountType = .all
-    var carouselViewHeight : CGFloat = 0
+    var headerViewHeight : CGFloat = 0
     var sumHeightMarginsForHeader : CGFloat = 0
     
     weak var premiumDelegate: FaceImageItemsDataSourceDelegate?
@@ -54,10 +54,9 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if AuthoritySingleton.shared.faceRecognition {
             if faceImageType == .people && kind == UICollectionView.elementKindSectionHeader {
-                let carouselView = collectionView.dequeue(supplementaryView: CarouselPagerReusableViewController.self, kind: kind, for: indexPath)
-                carouselView.maxHeight = carouselViewHeight
-                carouselView.setup()
-                return carouselView
+                let view = collectionView.dequeue(supplementaryView: CollectionViewHeaderWithText.self, kind: kind, for: indexPath)
+                view.configure(with: TextConstants.carouselViewFirstPageTitle)
+                return view
             }
             return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         } else {
@@ -83,7 +82,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if AuthoritySingleton.shared.faceRecognition && faceImageType == .people {
-            return CGSize(width: UIScreen.main.bounds.width, height: carouselViewHeight + sumHeightMarginsForHeader)
+            return CGSize(width: UIScreen.main.bounds.width, height: headerViewHeight)
         }
         return CGSize.zero
     }

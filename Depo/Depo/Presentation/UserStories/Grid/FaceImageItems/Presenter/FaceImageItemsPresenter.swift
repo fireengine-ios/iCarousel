@@ -51,7 +51,7 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             if let dataSource = dataSource as? FaceImageItemsDataSource {
                 dataSource.heightTitleLabel = getHeightForTitleLabel()
                 if faceImageType == .people {
-                    dataSource.carouselViewHeight = getCarouselPagerMaxHeight()
+                    dataSource.headerViewHeight = 44
                     dataSource.sumHeightMarginsForHeader = sumHeightMarginsForHeader
                 }
             }
@@ -61,6 +61,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.cellForFaceImage)
         dataSource.isHeaderless = true
+        dataSource.displayingType = .faceImage
+        dataSource.faceImage = faceImageType
         
         if hasUgglaLabel(), let view = view as? FaceImageItemsViewInput {
             view.configurateUgglaView(hidden: !dataSource.isPaginationDidEnd)
@@ -274,20 +276,6 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             return 0
         }
         
-    }
-    
-    private func getCarouselPagerMaxHeight() -> CGFloat {
-        var maxHeight: CGFloat = 0
-        var other: CGFloat = 0
-        let maxCellWidth: CGFloat = UIScreen.main.bounds.width - sumWidthMarginsForHeader
-        
-        for model in CarouselPagerDataSource.getCarouselPageModels() {
-           other = model.text.height(for:maxCellWidth, font: UIFont.TurkcellSaturaDemFont(size: 14))
-                   + model.title.height(for: maxCellWidth , font: UIFont.TurkcellSaturaFont(size: 13))
-           maxHeight = max(maxHeight,other)
-        }
-        
-        return maxHeight
     }
 }
 

@@ -32,7 +32,7 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit, ContactOperationPro
     @IBOutlet private weak var message: UILabel! {
         willSet {
             newValue.text = TextConstants.contactSyncAnalyzeProgressMessage
-            newValue.font = .TurkcellSaturaFont(size: 16.0)
+            newValue.font = .appFont(.regular, size: 16.0)
             newValue.textColor = AppColor.navyAndWhite.color
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
@@ -56,14 +56,14 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit, ContactOperationPro
             newValue.setTitleColor(ColorConstants.navy, for: .normal)
             newValue.layer.borderColor = ColorConstants.navy.cgColor
             newValue.layer.borderWidth = 1.0
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            newValue.titleLabel?.font = .appFont(.regular, size: 16.0)
             newValue.setTitle(TextConstants.contactSyncCancelAnalyzeButton, for: .normal)
         }
     }
     
     private let attributedPercentageValue: NSMutableAttributedString = {
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.TurkcellSaturaMedFont(size: 48.0),
+            .font: UIFont.appFont(.medium, size: 48.0),
             .foregroundColor: AppColor.navyAndWhite.color]
         
         let attributed = NSMutableAttributedString(string: "0", attributes: attributes)
@@ -72,8 +72,8 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit, ContactOperationPro
     }()
     
     private let attributedPercentageSign: NSAttributedString = {
-        let bigFont = UIFont.TurkcellSaturaMedFont(size: 48.0)
-        let smallFont = UIFont.TurkcellSaturaMedFont(size: 20.0)
+        let bigFont = UIFont.appFont(.medium, size: 48.0)
+        let smallFont = UIFont.appFont(.medium, size: 20.0)
         
         /// percent sign is aligned to top
         let offset = bigFont.capHeight - smallFont.capHeight

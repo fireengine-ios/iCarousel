@@ -25359,6 +25359,7 @@
 				8C0E8D9D1FDEBDFF00789C91 /* EULAService.swift in Sources */,
 				98B0485B259314750011DAEB /* RestoreHelper.m in Sources */,
 				73EA170222EB2C7700BAD2D3 /* SpotifyRoutingService.swift in Sources */,
+				E7426F6C286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				8C208652228D4B2E000BEDAD /* RangeAPIInfo.swift in Sources */,
 				9886113A240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */,
 				0780AB252791681F000760D9 /* RecognizedText.swift in Sources */,
@@ -28487,6 +28488,7 @@
 				CE784C4A22A685FB00662219 /* UIButton+Color.swift in Sources */,
 				CF71473924B597AA00D83E60 /* ContactSyncScheduleCard.swift in Sources */,
 				CE784C4B22A685FB00662219 /* GradientOrangeView.swift in Sources */,
+				E7426F6E286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CE784C4C22A685FB00662219 /* AlbumDetailInteractor.swift in Sources */,
 				B528DF882552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				CE784C4D22A685FB00662219 /* PasscodeSettingsInteractor.swift in Sources */,
@@ -28756,6 +28758,7 @@
 				CF8B63E023CBC9D70021B021 /* MyStorageViewController.swift in Sources */,
 				CF8B63E223CBC9D70021B021 /* VisualMusicPlayerViewController.swift in Sources */,
 				CF8B63E323CBC9D70021B021 /* InstaPickSmallPhotoView.swift in Sources */,
+				E7426F6D286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CF8B63E423CBC9D70021B021 /* LeavePremiumHeaderView.swift in Sources */,
 				CF8B63E523CBC9D70021B021 /* LoginViewController.swift in Sources */,
 				CF8B63E623CBC9D70021B021 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
@@ -31950,6 +31953,7 @@
 				CF8B6FF323CBCA280021B021 /* AlbumDetailInteractor.swift in Sources */,
 				CF8B6FF423CBCA280021B021 /* PasscodeSettingsInteractor.swift in Sources */,
 				B528DF892552CED8002D9718 /* LocalContactsService.swift in Sources */,
+				E7426F6F286DDDDF00666A79 /* GradientSwitch.swift in Sources */,
 				CF8B6FF623CBCA280021B021 /* PeriodicContactSyncViewController.swift in Sources */,
 				CF8B6FF723CBCA280021B021 /* PackagesRouter.swift in Sources */,
 				CF8B6FF823CBCA280021B021 /* AlbumDetailRouter.swift in Sources */,
@@ -32723,7 +32727,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: Banu Ozkan (L9PN86U2PA)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Banu Ozkan (L9PN86U2PA)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
@@ -32785,12 +32789,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Depo/App/Depo_LifeTech.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -32826,7 +32830,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "6f81a9f3-c2cd-4de6-9dd4-7455315f659a";
-				PROVISIONING_PROFILE_SPECIFIER = "6f81a9f3-c2cd-4de6-9dd4-7455315f659a";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "RELEASE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -32845,7 +32849,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 18;
@@ -32885,7 +32889,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "747cf355-57c7-4d05-ae4a-3c51cc5d7147";
-				PROVISIONING_PROFILE_SPECIFIER = "Akilli Depo Extension";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS App";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "APPSTORE MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";

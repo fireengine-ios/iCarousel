@@ -189,7 +189,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                             }
                                          })
             
-            present(popup, animated: true)
+            popup.open()
+            
         }
     }
     
@@ -374,7 +375,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                                               secondAction: { vc in
                                                 vc.close(completion: okHandler)
         })
-        router.presentViewController(controller: controller)
+        controller.open()
+
     }
     
     private func deleteSelectedAnalyzes() {

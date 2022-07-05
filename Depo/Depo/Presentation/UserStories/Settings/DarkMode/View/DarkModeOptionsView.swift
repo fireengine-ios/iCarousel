@@ -33,7 +33,7 @@ class DarkModeOptionsView: UIView, NibInit {
     @IBOutlet weak private var titleLabel: UILabel! {
         willSet {
             newValue.text = localized(.darkModeTitleText)
-            newValue.font = .TurkcellSaturaBolFont(size: 24)
+            newValue.font = .appFont(.bold, size: 24)
             newValue.textColor = AppColor.darkTextAndLightGray.color
         }
     }
@@ -41,7 +41,7 @@ class DarkModeOptionsView: UIView, NibInit {
     @IBOutlet weak private var darkModeLabel: UILabel! {
         willSet {
             newValue.text = localized(.darkModeDarkText)
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .appFont(.regular, size: 18.0)
             newValue.textColor = ColorConstants.textGrayColor
         }
     }
@@ -49,7 +49,7 @@ class DarkModeOptionsView: UIView, NibInit {
     @IBOutlet weak private var lightModeLabel: UILabel! {
         willSet {
             newValue.text = localized(.darkModeLightText)
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .appFont(.regular, size: 18.0)
             newValue.textColor = ColorConstants.textGrayColor
         }
     }
@@ -57,7 +57,7 @@ class DarkModeOptionsView: UIView, NibInit {
     @IBOutlet weak private var defaultModeLabel: UILabel! {
         willSet {
             newValue.text = localized(.darkModeDefaultText)
-            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.font = .appFont(.regular, size: 18.0)
             newValue.textColor = ColorConstants.textGrayColor
         }
     }

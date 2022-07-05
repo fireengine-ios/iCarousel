@@ -24,7 +24,7 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     }
     @IBOutlet private weak var message: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 14.0)
+            newValue.font = .appFont(.medium, size: 14.0)
             newValue.textColor = ColorConstants.charcoalGrey
             newValue.textAlignment = .left
             newValue.numberOfLines = 0
@@ -41,7 +41,7 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var actionButton: UIButton! {
         willSet {
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 14.0)
+            newValue.titleLabel?.font = .appFont(.regular, size: 14.0)
             newValue.setTitleColor(.lrTealishTwo, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
         }
@@ -56,7 +56,7 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     
     private let attributedLastBackupMessage: NSAttributedString = {
         let attributesStatic: [NSAttributedString.Key : Any] = [
-            .font: UIFont.TurkcellSaturaMedFont(size: 16.0),
+            .font: UIFont.appFont(.regular, size: 16.0),
             .foregroundColor: ColorConstants.charcoalGrey
         ]
         let attributedStatic = NSAttributedString(string: TextConstants.contactSyncSmallCardShowBackupMessage, attributes: attributesStatic)

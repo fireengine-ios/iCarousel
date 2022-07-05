@@ -53,7 +53,7 @@ final class LBAlbumLikePreviewSliderViewController: ViewController {
 extension LBAlbumLikePreviewSliderViewController: LBAlbumLikePreviewSliderViewInput {
     
     func setupInitialState() {
-        view.backgroundColor = UIColor.lrSkinTone
+        view.backgroundColor = AppColor.background.color
     }
     
 }

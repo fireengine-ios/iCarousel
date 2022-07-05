@@ -31,6 +31,7 @@ final class FaceImageDisplayManager: NSObject {
     @IBOutlet private weak var threeFaceImageLabel: UILabel!
     @IBOutlet private weak var faceImagePremiumButton: GradientPremiumButton!
     @IBOutlet private weak var faceImageView: UIView!
+    @IBOutlet private weak var facebookBackView: UIView!
     
     var configuration = FaceImageDisplayConfigurations.initialStandart
     
@@ -49,6 +50,7 @@ final class FaceImageDisplayManager: NSObject {
             threeFaceImageLabel.text = TextConstants.faceTagsDescriptionStandart
             faceImagePremiumButton.isHidden = true
             faceImageView.isHidden = true
+            facebookBackView.isHidden = true
             /// face image switch is off
             /// hide all
         
@@ -63,6 +65,8 @@ final class FaceImageDisplayManager: NSObject {
             threeFaceImageLabel.text = TextConstants.faceTagsDescriptionPremium
             faceImagePremiumButton.isHidden = true
             faceImageView.isHidden = true
+            facebookBackView.isHidden = true
+
             /// face image switch is off
             /// hide all
             
@@ -72,6 +76,8 @@ final class FaceImageDisplayManager: NSObject {
             secondFaceImageLabel.isHidden = false
             faceImagePremiumButton.isHidden = false
             faceImageView.isHidden = false
+            facebookBackView.isHidden = false
+
             /// face image switch is on
             /// StandartUser
             
@@ -83,6 +89,8 @@ final class FaceImageDisplayManager: NSObject {
             threeFaceImageLabel.text = TextConstants.faceTagsDescriptionPremium
             faceImagePremiumButton.isHidden = true
             faceImageView.isHidden = true
+            facebookBackView.isHidden = false
+
             /// face image switch is on
             /// PremiumUser
             
@@ -92,6 +100,8 @@ final class FaceImageDisplayManager: NSObject {
             firstFacebookLabel.text = TextConstants.facebookTagsOff
             secondFacebookLabel.isHidden = true
             facebookImportButton.isHidden = true
+            facebookBackView.isHidden = false
+
             /// facebook switch is off
             /// show one text
             
@@ -102,6 +112,8 @@ final class FaceImageDisplayManager: NSObject {
             firstFacebookLabel.text = TextConstants.facebookTagsOn
             secondFacebookLabel.isHidden = false
             secondFacebookLabel.text = TextConstants.facebookTagsImport
+            facebookBackView.isHidden = false
+
             /// face image switch is on
             /// facebook switch is off
             /// show button and two texts
@@ -112,6 +124,8 @@ final class FaceImageDisplayManager: NSObject {
             firstFacebookLabel.text = TextConstants.facebookTagsOn
             facebookImportButton.isHidden = true
             secondFacebookLabel.isHidden = true
+            facebookBackView.isHidden = false
+
             /// face image switch is on
             /// facebook switch is on
             /// hide button and second text

@@ -334,7 +334,7 @@ extension TabBarViewController: UIImagePickerControllerDelegate, UINavigationCon
                                               message: error.description,
                                               image: .error,
                                               buttonTitle: TextConstants.ok)
-                self?.present(vc, animated: true)
+                vc.open()
             }
         }
     }

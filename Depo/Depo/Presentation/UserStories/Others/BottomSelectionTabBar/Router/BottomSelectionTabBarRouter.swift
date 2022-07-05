@@ -45,6 +45,6 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
                                          message: TextConstants.shareEmptyAlbumError,
                                          image: .error,
                                          buttonTitle: TextConstants.ok)
-        router.presentViewController(controller: popUp)
+        popUp.open()
     }
 }

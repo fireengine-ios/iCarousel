@@ -10,4 +10,5 @@ protocol FaceImagePhotosViewOutput {
     func openAddName()
     func faceImageType() -> FaceImageType?
     func hideAlbum()
+    func setCountLabel(with text: String)
 }

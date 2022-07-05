@@ -21,7 +21,7 @@ final class ContactListCell: UITableViewCell {
     @IBOutlet private weak var letterLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaDemFont(size: 20)
+            newValue.font = .appFont(.regular, size: 20.0)
             newValue.textColor = ColorConstants.duplicatesGray
         }
     }
@@ -29,16 +29,16 @@ final class ContactListCell: UITableViewCell {
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaMedFont(size: 16)
-            newValue.textColor = .lrBrownishGrey
+            newValue.font = .appFont(.medium, size: 14.0)
+            newValue.textColor = AppColor.label.color
         }
     }
     
     @IBOutlet private weak var phoneLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.font = .TurkcellSaturaFont(size: 12)
-            newValue.textColor = ColorConstants.duplicatesGray
+            newValue.font = .appFont(.regular, size: 14.0)
+            newValue.textColor = AppColor.label.color
         }
     }
     

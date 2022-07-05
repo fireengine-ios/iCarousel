@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "popupIconQuestion.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -17,6 +17,6 @@ extension ErrorPresenter where Self: UIViewController {
             return
         } 
         let vc = PopUpController.with(errorMessage: message)
-        present(vc, animated: false, completion: nil)
+        vc.open()
     }
 }
