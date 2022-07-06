@@ -27,8 +27,8 @@ class GradientSwitch: UISwitch {
         layer.cornerRadius = 16
         backgroundColor = ColorConstants.switcherGrayColor
         
-        let onImage = UIImage(named: "1")
-        self.onTintColor = UIColor(patternImage: onImage ?? UIImage())
+        let onImage = Image.gradientSwitch.image
+        self.onTintColor = UIColor(patternImage: onImage)
         
         self.clipsToBounds = true
     }

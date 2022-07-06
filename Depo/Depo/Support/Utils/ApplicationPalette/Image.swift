@@ -103,4 +103,7 @@ enum Image: String, AppImage {
     case popupIconError
     case popupIconDelete
     case popupIconQuestion
+    
+    ///  UiSwitch
+    case gradientSwitch
 }
