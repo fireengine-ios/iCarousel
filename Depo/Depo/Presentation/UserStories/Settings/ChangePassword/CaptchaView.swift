@@ -47,8 +47,8 @@ final class CaptchaView: UIView, FromNib {
     
     @IBOutlet weak var captchaAnswerTextField: QuickDismissPlaceholderTextField! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
-            newValue.textColor = AppColor.blackColor.color
+            newValue.font = .appFont(.regular, size: 16.0)
+            newValue.textColor = AppColor.label.color
             newValue.borderStyle = .none
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
@@ -67,6 +67,18 @@ final class CaptchaView: UIView, FromNib {
             newValue.smartDashesType = .no
         }
     }
+    
+    @IBOutlet weak var textFieldBackView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 8
+            newValue.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.maskedCorners = [.layerMinXMaxYCorner,
+                                            .layerMaxXMaxYCorner]
+            
+        }
+    }
+    
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
@@ -104,6 +116,11 @@ final class CaptchaView: UIView, FromNib {
     
     private func setup() {
         setupFromNib()
+        
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
+        self.layer.cornerRadius = 8
+        
     }
     
     override func awakeFromNib() {
