@@ -16,12 +16,7 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        if mainTitle != "" {
-            subTitle = output.getSortTypeString()
-        }
-
-        setTitle(withString: mainTitle, andSubTitle: subTitle)
+        setTitle(withString: mainTitle)
     }
 
     override func startSelection(with numberOfItems: Int) {
@@ -40,12 +35,8 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = nil
-        
-        if mainTitle != "" {
-            subTitle = output.getSortTypeString()
-        }
-        setTitle(withString: mainTitle, andSubTitle: subTitle)
-
+    
+        setTitle(withString: mainTitle)
         configureNavBarActions(isSelecting: false)
     }
 

@@ -35,11 +35,7 @@ final class PrivateShareWithContactView: UIView, NibInit {
             newValue.text = ""
             newValue.font = .appFont(.light, size: 14)
             newValue.lineBreakMode = .byTruncatingMiddle
-            if #available(iOS 13.0, *) {
-                newValue.textColor = AppColor.filesLabel.color.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
-            } else {
-                newValue.textColor = AppColor.filesLabel.color
-            }
+            newValue.textColor = AppColor.filesLabel.color
         }
     }
     
@@ -49,7 +45,6 @@ final class PrivateShareWithContactView: UIView, NibInit {
         willSet {
             newValue.setTitleColor(AppColor.filesLabel.color, for: .normal)
             newValue.titleLabel?.font = UIFont.appFont(.medium, size: 14)
-            newValue.tintColor = .lrTealishFour
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -10
         }

@@ -21,10 +21,14 @@ class WrapperedItemUtil: NSObject {
             image = Image.iconFileVideo
             
         case .audio:
-            image = Image.iconFileAudio
+            image = Image.iconMusic
             
         case .folder:
-            image = Image.iconFolder
+            if #available(iOS 13.0, *) {
+                return Image.iconFolder.image.withTintColor(AppColor.filesLabel.color, renderingMode: .automatic)
+            } else {
+                return Image.iconFolder.image
+            }
             
         case .photoAlbum, .faceImageAlbum(_):
             image = Image.iconFilePhoto
@@ -78,11 +82,15 @@ class WrapperedItemUtil: NSObject {
             image = Image.iconFileVideoBig
             
         case .audio:
-            image = Image.iconFileAudioBig
+            image = Image.iconMusicBig
             
         case .folder:
-            image = Image.iconFolderBig
-            
+            if #available(iOS 13.0, *) {
+                return Image.iconFolderBig.image.withTintColor(AppColor.filesLabel.color, renderingMode: .automatic)
+            } else {
+                return Image.iconFolderBig.image
+            }
+
         case .photoAlbum, .faceImageAlbum(_):
             image = Image.iconFilePhotoBig
             

@@ -32,6 +32,7 @@ enum AppColor {
     case background
     case secondaryBackground
     case label
+    case darkLabel
     case tint
     case separator
     case lightText
@@ -44,6 +45,7 @@ enum AppColor {
     case filesBigCellBackground
     case filesLabel
     case filesBigCellShadow
+    case filesBigImageBackground
     
     case filesTypesBackground
     case filesMusicTab
@@ -53,11 +55,13 @@ enum AppColor {
     case filesSeperator
     case filesSharedTabSeperator
     case filesSharedInfoBackground
+    case filesShareDurationBackground
 
     // MARK: Drawer
     case drawerShadow
     case drawerIndicator
     case drawerBackground
+    case drawerButtonBorder
 
     // MARK: PopUp
     case popUpTitle
