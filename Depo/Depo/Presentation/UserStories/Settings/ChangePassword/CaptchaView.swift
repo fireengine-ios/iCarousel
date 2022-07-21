@@ -68,6 +68,14 @@ final class CaptchaView: UIView, FromNib {
         }
     }
     
+    @IBOutlet private weak var captchaBackView: UIView!{
+        willSet {
+            newValue.layer.cornerRadius = 8
+            newValue.layer.maskedCorners = [.layerMinXMinYCorner]
+        }
+    }
+    
+    
     @IBOutlet weak var textFieldBackView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 8
