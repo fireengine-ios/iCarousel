@@ -12972,6 +12972,8 @@
 				F09279A82886CA8A00874ADD /* AlertFilesCancelView.xib */,
 			);
 			path = View;
+            sourceTree = "<group>";
+        };
 		07DB937B2860AF4700D5CACF /* IAP */ = {
 			isa = PBXGroup;
 			children = (
