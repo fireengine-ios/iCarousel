@@ -85,9 +85,17 @@ class AllFilesTypeCollectionViewCell: UICollectionViewCell {
         willSet {
             newValue.addRoundedShadows(cornerRadius: 12,
                                        shadowColor: AppColor.filesBigCellShadow.cgColor,
-                                       opacity: 0.6, radius: 6.0)
+                                       opacity: 0.4, radius: 4.0, offset: CGSize(width: .zero, height: 4.0))
             newValue.backgroundColor = AppColor.filesTypesBackground.color
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        typeView.addRoundedShadows(cornerRadius: 12,
+                                   shadowColor: AppColor.filesBigCellShadow.cgColor,
+                                   opacity: 0.4, radius: 4.0, offset: CGSize(width: .zero, height: 4.0))
+        typeView.backgroundColor = AppColor.filesTypesBackground.color
     }
     
     func configure(with type: AllFilesType) {
@@ -106,7 +114,7 @@ class AllFilesTypeCollectionViewCell: UICollectionViewCell {
         } else {
             configure(with: type)
             typeView.layer.borderWidth = 0
-            typeView.layer.shadowRadius = 6.0
+            typeView.layer.shadowRadius = 4.0
         }
     }
 }

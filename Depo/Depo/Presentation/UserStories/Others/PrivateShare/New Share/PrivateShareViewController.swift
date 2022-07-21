@@ -29,7 +29,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var bottomView: UIView! {
         willSet {
-            newValue.layer.shadowColor = UIColor.black.cgColor
+            newValue.layer.shadowColor = AppColor.background.cgColor
             newValue.layer.shadowOpacity = 0.1
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowRadius = 5

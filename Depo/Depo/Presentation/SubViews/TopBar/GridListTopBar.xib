@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7m-go-R4c">
-                    <rect key="frame" x="10" y="6" width="72" height="43"/>
+                    <rect key="frame" x="16" y="6" width="72" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="68" id="Dzb-Wi-FeT"/>
                         <constraint firstAttribute="height" constant="43" id="xi5-cC-uuT"/>
@@ -57,7 +57,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="uV1-Ni-QO4">
-                    <rect key="frame" x="281" y="9.5" width="76" height="36"/>
+                    <rect key="frame" x="275" y="9.5" width="76" height="36"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnm-iL-2WL">
                             <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
@@ -96,12 +96,12 @@
             <constraints>
                 <constraint firstItem="F7x-BT-auO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6Hp-L8-cJu"/>
                 <constraint firstItem="cCH-zD-zC4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8B6-Q6-iEr"/>
-                <constraint firstAttribute="trailing" secondItem="uV1-Ni-QO4" secondAttribute="trailing" constant="10" id="DPX-NF-xYp"/>
+                <constraint firstAttribute="trailing" secondItem="uV1-Ni-QO4" secondAttribute="trailing" constant="16" id="DPX-NF-xYp"/>
                 <constraint firstAttribute="bottom" secondItem="cCH-zD-zC4" secondAttribute="bottom" id="Dee-CA-aI2"/>
                 <constraint firstItem="uV1-Ni-QO4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="TsD-Bx-9MK"/>
                 <constraint firstItem="R7m-go-R4c" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZD4-gp-yMM"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R7m-go-R4c" secondAttribute="trailing" constant="8" id="ZWt-3B-set"/>
-                <constraint firstItem="R7m-go-R4c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="hsT-5L-dXY"/>
+                <constraint firstItem="R7m-go-R4c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="hsT-5L-dXY"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lWj-2g-ibL"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="p6X-9N-zV0"/>
                 <constraint firstItem="F7x-BT-auO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="p8O-wQ-FyJ"/>

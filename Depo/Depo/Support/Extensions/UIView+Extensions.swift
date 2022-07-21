@@ -13,13 +13,14 @@ extension UIView {
     func addRoundedShadows(cornerRadius: CGFloat,
                            shadowColor: CGColor,
                            opacity: Float,
-                           radius: CGFloat) {
+                           radius: CGFloat,
+                           offset: CGSize? = .zero) {
         layer.cornerRadius = cornerRadius
         layer.masksToBounds = true;
         backgroundColor = UIColor.white
         layer.shadowColor = shadowColor
         layer.shadowOpacity = opacity
-        layer.shadowOffset = .zero
+        layer.shadowOffset = offset ?? .zero
         layer.shadowRadius = radius
         layer.masksToBounds = false
     }
