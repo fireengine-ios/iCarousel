@@ -36,7 +36,9 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
             newValue.backgroundColor = UIColor.clear
         }
     }
-    @IBOutlet weak var headerLabel: UILabel! {
+    
+    
+    @IBOutlet private weak var headerLabel: UILabel! {
         willSet {
             newValue.textColor = AppColor.label.color
             newValue.font = .appFont(.light, size: 14.0)
@@ -116,12 +118,8 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
         self.view.alpha = 1
         self.contentView.isHidden = false
         cellsHeightConstraint.constant = CGFloat(questions.count) * 61.0
-
         view.alpha = 0
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-
-            
-        }
+        
     }
     
     func close(completion: VoidHandler? = nil) {
