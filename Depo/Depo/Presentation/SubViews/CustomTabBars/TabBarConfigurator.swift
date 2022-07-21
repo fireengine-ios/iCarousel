@@ -96,10 +96,10 @@ final class TabBarConfigurator {
         
         let list: [HeaderContainingViewController.ChildViewController] = [
             router.gallery(),
-            router.homePageScreen,
+            EmptyViewController(),
             syncContactsVC,
             router.segmentedFiles,
-            EmptyViewController()
+            EmptyViewController2()
         ]
         return list.map {
             let headerContaining = HeaderContainingViewController(child: $0)
@@ -109,4 +109,18 @@ final class TabBarConfigurator {
 }
 
 // TODO: Facelift. remove when implementing discover page
-private class EmptyViewController: UIViewController, HeaderContainingViewControllerChild {}
+private class EmptyViewController: UIViewController, HeaderContainingViewControllerChild {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let router = RouterVC()
+        router.pushViewController(viewController: router.peopleListController())
+    }
+}
+
+private class EmptyViewController2: UIViewController, HeaderContainingViewControllerChild {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let router = RouterVC()
+        router.pushViewController(viewController: router.placesListController())
+    }
+}
