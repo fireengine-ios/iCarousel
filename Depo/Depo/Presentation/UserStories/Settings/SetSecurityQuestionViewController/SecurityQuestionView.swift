@@ -39,9 +39,9 @@ final class SecurityQuestionView: UIView, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.text = TextConstants.userProfileSecretQuestion
+            newValue.textColor = AppColor.label.color
+            newValue.font = UIFont.appFont(.light, size: 14.0)
+            newValue.text = "  " + TextConstants.userProfileSecretQuestion + "  "
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
         }
@@ -49,8 +49,8 @@ final class SecurityQuestionView: UIView, NibInit {
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaFont(size: 18)
-            newValue.textColor = ColorConstants.placeholderGrayColor
+            newValue.font = UIFont.appFont(.regular, size: 14.0)
+            newValue.textColor = AppColor.label.color
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
             newValue.numberOfLines = 0
@@ -59,7 +59,9 @@ final class SecurityQuestionView: UIView, NibInit {
     
     @IBOutlet private weak var lineView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.placeholderGrayColor
+            newValue.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
+            newValue.layer.borderWidth = 1.0
+            newValue.layer.cornerRadius = 8.0
             newValue.isOpaque = true
         }
     }

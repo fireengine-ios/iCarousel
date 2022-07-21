@@ -33,14 +33,23 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     @IBOutlet private var backgroundView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.backgroundViewColor
+            newValue.backgroundColor = UIColor.clear
+        }
+    }
+    @IBOutlet weak var headerLabel: UILabel! {
+        willSet {
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.light, size: 14.0)
+            newValue.text = "  " + TextConstants.userProfileSecretQuestion + "  "
+            newValue.backgroundColor = AppColor.primaryBackground.color
+            newValue.isOpaque = true
         }
     }
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet{
-            newValue.textColor = UIColor.lrTealish
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
+            newValue.textColor = AppColor.label.color
+            newValue.font = .appFont(.regular, size: 12.0)
             newValue.text = TextConstants.userProfileSelectQuestion
             newValue.backgroundColor = AppColor.primaryBackground.color
             newValue.isOpaque = true
@@ -69,9 +78,11 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
         willSet {
             newValue.layer.cornerRadius = cornerRadius
             newValue.layer.masksToBounds = true
-            newValue.layer.shadowColor = UIColor.black.cgColor
-            newValue.layer.shadowRadius = 10
-            newValue.layer.shadowOpacity = 0.5
+            newValue.layer.shadowColor = UIColor.clear.cgColor
+            newValue.layer.shadowRadius = 8
+            newValue.layer.shadowOpacity = 0
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = AppColor.darkTextAndLightGray.cgColor
             newValue.layer.shadowOffset = .zero
         }
     }
@@ -82,7 +93,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
         super.viewDidLoad()
         
         tableView.reloadData()
-        
+
         analyticsService.logScreen(screen: .securityQuestionSelect)
         analyticsService.trackDimentionsEveryClickGA(screen: .securityQuestionSelect)
     }
@@ -91,6 +102,7 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
         super.viewWillAppear(animated)
         open()
     }
+    @IBOutlet weak var cellsHeightConstraint: NSLayoutConstraint!
     
     @IBAction private func closeButtonTapped(_ sender: UIButton) {
         close()
@@ -98,17 +110,25 @@ final class SelectQuestionViewController: UIViewController, NibInit  {
     
     private func open() {
         contentView.transform = NumericConstants.scaleTransform
+        contentView.isHidden = true
+        self.contentView.transform = .identity
+        self.contentView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0)
+        self.view.alpha = 1
+        self.contentView.isHidden = false
+        cellsHeightConstraint.constant = CGFloat(questions.count) * 61.0
+
         view.alpha = 0
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.view.alpha = 1
-            self.contentView.transform = .identity
+
+            
         }
     }
     
     func close(completion: VoidHandler? = nil) {
+        self.view.alpha = 0
+        self.contentView.transform = NumericConstants.scaleTransform
+
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.view.alpha = 0
-            self.contentView.transform = NumericConstants.scaleTransform
         }) { _ in
             self.dismiss(animated: false, completion: completion)
         }
