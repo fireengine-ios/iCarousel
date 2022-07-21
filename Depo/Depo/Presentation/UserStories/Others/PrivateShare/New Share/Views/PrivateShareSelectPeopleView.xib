@@ -34,7 +34,7 @@
                         <constraint firstAttribute="width" secondItem="ZIB-f0-CdR" secondAttribute="height" multiplier="1:1" id="STI-9D-Qok"/>
                         <constraint firstAttribute="width" constant="44" id="pQw-Sp-eUX"/>
                     </constraints>
-                    <state key="normal" image="plus"/>
+                    <state key="normal" image="lightPlus"/>
                     <connections>
                         <action selector="onAddTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="UYY-M9-1PZ"/>
                     </connections>
@@ -72,7 +72,7 @@
         </view>
     </objects>
     <resources>
-        <image name="plus" width="28" height="28"/>
+        <image name="lightPlus" width="28" height="28"/>
         <namedColor name="filesBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

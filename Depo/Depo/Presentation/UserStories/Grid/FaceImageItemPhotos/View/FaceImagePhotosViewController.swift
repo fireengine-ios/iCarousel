@@ -55,12 +55,18 @@ final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController 
         configureFaceImageItemsPhotoActions()
         
         configureNavBarWithTouch()
+        navigationItem.rightBarButtonItem = nil
     }
     
     override func changeSortingRepresentation(sortType type: SortedRules) {
         super.changeSortingRepresentation(sortType: type)
 
         configureNavBarWithTouch()
+    }
+    
+    override func startSelection(with numberOfItems: Int) {
+        super.startSelection(with: numberOfItems)
+        navigationItem.rightBarButtonItem = nil
     }
     
     @objc func addNameAction() {

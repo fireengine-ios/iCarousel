@@ -43,8 +43,8 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYR-xZ-VzF">
-                    <rect key="frame" x="347" y="0.0" width="51" height="40"/>
-                    <state key="normal" title="Button" image="arrow_right"/>
+                    <rect key="frame" x="328" y="0.0" width="70" height="40"/>
+                    <state key="normal" title="Button" image="iconArrowDownSmall"/>
                     <connections>
                         <action selector="onUserRoleTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="izN-W1-cKH"/>
                     </connections>
@@ -71,7 +71,7 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow_right" width="5" height="8"/>
+        <image name="iconArrowDownSmall" width="24" height="24"/>
         <image name="iconCancelUnborder" width="24" height="24"/>
     </resources>
 </document>

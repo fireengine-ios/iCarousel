@@ -35,14 +35,9 @@ final class DrawerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = AppColor.drawerBackground.color
-        view.layer.cornerRadius = 16
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-
-        view.layer.shadowColor = AppColor.drawerShadow.cgColor
-        view.layer.shadowRadius = 24
-        view.layer.shadowOffset = CGSize(width: 0, height: 6)
-
+        view.addRoundedShadows(cornerRadius: 16, shadowColor: AppColor.drawerShadow.cgColor, opacity: 0.5, radius: 24, offset: CGSize(width: 0, height: 6))
+        view.backgroundColor = AppColor.drawerBackground.color
         setupDrawerIndicator()
         setupContainerView()
         setupContentView()

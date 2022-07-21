@@ -48,6 +48,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet private weak var headerStackView: UIStackView!
     var contentSlider: LBAlbumLikePreviewSliderViewController?
     weak var contentSliderTopY: NSLayoutConstraint?
     weak var contentSliderH: NSLayoutConstraint?
@@ -67,6 +68,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     var isRefreshAllowed = true
     
     var status: ItemStatus = .active
+    
+    private lazy var countView: GridListCountView  = {
+        let view = GridListCountView.initFromNib()
+        view.delegate = self
+        return view
+    }()
     
     // MARK: Life cycle
     
@@ -147,6 +154,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         output.viewWillDisappear()
+        countView.removeFromSuperview()
     }
     
     deinit {
@@ -160,10 +168,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         let search = NavBarWithAction(navItem: NavigationBarList().search, action: { [weak self] _ in
             self?.output.searchPressed(output: self)
         })
-        let more = NavBarWithAction(navItem: NavigationBarList().more, action: { [weak self] _ in
-            self?.output.moreActionsPressed(sender: NavigationBarList().more)
-        })
-        let rightActions: [NavBarWithAction] = isSelecting ? [more] : [more, search]
+        let rightActions: [NavBarWithAction] = [search]
         navBarConfigurator.configure(right: rightActions, left: [])
     
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
@@ -204,7 +209,18 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         navBarConfigurator.configure(right: rightActions, left: [])
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
-
+    
+    func configureCountView(isShown: Bool) {
+        countView.removeFromSuperview()
+        
+        if isShown {
+            headerStackView.addArrangedSubview(countView)
+        }
+    }
+    
+    func setCountView(selectedItemsCount: Int) {
+        countView.setCountLabel(with: selectedItemsCount)
+    }
     
     @IBAction func onStartCreatingFilesButton() {
         output.onStartCreatingPhotoAndVideos()
@@ -266,6 +282,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         selectedItemsCountChange(with: numberOfItems)
         configureNavBarActions(isSelecting: true)
         underNavBarBar?.setSorting(enabled: false)
+        configureCountView(isShown: true)
     }
     
     func stopSelection() {
@@ -274,6 +291,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         
         configureNavBarActions(isSelecting: false)
         underNavBarBar?.setSorting(enabled: true)
+        configureCountView(isShown: false)
     }
     
     func setThreeDotsMenu(active isActive: Bool) {
@@ -358,6 +376,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         setTitle(withString: title)
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.title = title
+        
+        setCountView(selectedItemsCount: count)
     }
     
     static let sliderH: CGFloat = 139
@@ -558,5 +578,13 @@ extension BaseFilesGreedViewController: GridListTopBarDelegate {
     func representationChanged(viewType: MoreActionsConfig.ViewType) {
         let asGrid = viewType == .Grid ? true : false
         output.viewAppearanceChangedTopBar(asGrid: asGrid)
+    }
+}
+
+// MARK: - GridListTopBarDelegate
+extension BaseFilesGreedViewController: GridListCountViewDelegate {
+    func cancelSelection() {
+        output.onCancelSelection()
+        configureCountView(isShown: false)
     }
 }
